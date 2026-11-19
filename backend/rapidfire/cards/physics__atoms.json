@@ -1,1389 +1,3349 @@
 [
-  {
-    "id": "55ff2116-bc0f-4d18-99d3-440c75417116",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Bohr radius of nth orbit of hydrogen",
-    "formula": "rₙ = n²a₀",
-    "options": [
-      "rₙ ∝ n²",
-      "rₙ ∝ n",
-      "rₙ ∝ n³",
-      "rₙ ∝ 1/n²"
-    ],
-    "answer": 0,
-    "explain": "Bohr radius rₙ = n²×0.529 Å; scales as n².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8c949a0c-357c-4be3-9682-eb71f8defc8f",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Speed of electron in nth Bohr orbit",
-    "formula": "vₙ = v₁/n",
-    "options": [
-      "vₙ ∝ 1/n²",
-      "vₙ ∝ n²",
-      "vₙ ∝ n",
-      "vₙ ∝ 1/n"
-    ],
-    "answer": 3,
-    "explain": "Orbital speed decreases as 1/n; v₁ ≈ 2.18×10⁶ m/s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8dbe3893-e77d-4e8c-b5ec-916f0133ecf9",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Total energy of electron in nth orbit of H-atom",
-    "formula": "Eₙ = −13.6/n² eV",
-    "options": [
-      "−13.6/n² eV",
-      "−13.6 n² eV",
-      "−13.6/n eV",
-      "+13.6/n² eV"
-    ],
-    "answer": 0,
-    "explain": "Total energy is negative (bound state) and equals −13.6/n² eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0bbd01e4-e777-41f7-b0d7-f7b8d5229264",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Kinetic energy vs potential energy in Bohr orbit",
-    "formula": "KE = −Eₙ, PE = 2Eₙ",
-    "options": [
-      "KE = E, PE = −2E",
-      "KE = 2E, PE = −E",
-      "KE = −2E, PE = E",
-      "KE = −E, PE = 2E"
-    ],
-    "answer": 3,
-    "explain": "KE = +13.6/n² eV (positive); PE = −27.2/n² eV = 2Eₙ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ee19b30-d71b-47bc-8e6a-b67eb3f0ed55",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Frequency of photon emitted when electron jumps n₂→n₁",
-    "formula": "hν = Eₙ₂ − Eₙ₁",
-    "options": [
-      "hν = E_lower − E_higher",
-      "hν = E_higher + E_lower",
-      "hν = E_higher / E_lower",
-      "hν = E_higher − E_lower"
-    ],
-    "answer": 3,
-    "explain": "Energy of emitted photon equals difference of energies of the two levels.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6a2fb333-cfb1-46c0-b688-6d46eb91b4a8",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Rydberg formula for H-spectrum",
-    "formula": "1/λ = R(1/n₁²−1/n₂²)",
-    "options": [
-      "R(1/n₁−1/n₂)",
-      "R(1/n₁²−1/n₂²)",
-      "R(1/n₂²−1/n₁²)",
-      "R(n₁²−n₂²)"
-    ],
-    "answer": 1,
-    "explain": "1/λ = R_H(1/n₁²−1/n₂²) with n₂>n₁; R_H = 1.097×10⁷ m⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8169468e-f4bc-42d4-bc8b-5938a129012b",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Lyman series lies in which region of spectrum?",
-    "formula": "",
-    "options": [
-      "X-ray",
-      "Infrared",
-      "Visible",
-      "Ultraviolet"
-    ],
-    "answer": 3,
-    "explain": "Lyman series: transitions to n=1; photon energies in UV range.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "18b50984-4098-48a4-8ef6-d6fb5fc24371",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Balmer series lower level and spectral region",
-    "formula": "n₁ = 2",
-    "options": [
-      "n₁=1, UV",
-      "n₁=2, visible",
-      "n₁=3, IR",
-      "n₁=2, IR"
-    ],
-    "answer": 1,
-    "explain": "Balmer series ends at n=2; first few lines are in visible region.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6e280a98-9fcf-4d2d-be39-9e84cffc570f",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Paschen series lies in which region?",
-    "formula": "n₁ = 3",
-    "options": [
-      "Microwave",
-      "Infrared",
-      "Visible",
-      "Ultraviolet"
-    ],
-    "answer": 1,
-    "explain": "Paschen series transitions end at n=3; photons are in IR region.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "840006ad-b4ed-46c7-80f4-3c9cb634ce4f",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Maximum number of spectral lines from nth excited state",
-    "formula": "N = n(n+1)/2",
-    "options": [
-      "n(n+2)/2",
-      "n(n-1)/2",
-      "n(n+1)/2",
-      "n²/2"
-    ],
-    "answer": 2,
-    "explain": "From nth excited state (level n+1), max lines = n(n+1)/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a6ccc1af-150d-4819-a7fe-598e3b30aa66",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Ionisation energy of hydrogen atom",
-    "formula": "IE = 13.6 eV",
-    "options": [
-      "3.4 eV",
-      "1.51 eV",
-      "13.6 eV",
-      "27.2 eV"
-    ],
-    "answer": 2,
-    "explain": "IE = |E₁| = 13.6 eV; energy to remove electron from n=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "20bb2f2b-3498-4212-8702-db62920e2f2e",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Angular momentum of electron in nth orbit (Bohr postulate)",
-    "formula": "L = nℏ",
-    "options": [
-      "n²ℏ",
-      "nℏ/2",
-      "ℏ/n",
-      "nℏ"
-    ],
-    "answer": 3,
-    "explain": "Bohr quantisation: mvr = nh/2π = nℏ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "07ddada3-e04d-4035-a7d7-55f48c4194d9",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Time period of revolution of electron in nth orbit",
-    "formula": "Tₙ ∝ n³",
-    "options": [
-      "Tₙ ∝ n²",
-      "Tₙ ∝ n",
-      "Tₙ ∝ n³",
-      "Tₙ ∝ 1/n"
-    ],
-    "answer": 2,
-    "explain": "T = 2πr/v; r∝n², v∝1/n → T∝n³.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ceca86b1-6ae2-4ded-969b-9b37c34d5931",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen-like Atoms",
-    "prompt": "For hydrogen-like ion, energy of nth level",
-    "formula": "Eₙ = −13.6 Z²/n² eV",
-    "options": [
-      "−13.6Z/n² eV",
-      "−13.6Z²/n eV",
-      "+13.6Z²/n² eV",
-      "−13.6Z²/n² eV"
-    ],
-    "answer": 3,
-    "explain": "Energy scales as Z² for hydrogen-like ions (He⁺, Li²⁺ etc.).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d81bee50-64a7-4c8d-820c-6369ae1ea7df",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen-like Atoms",
-    "prompt": "Bohr radius for hydrogen-like ion",
-    "formula": "rₙ = n²a₀/Z",
-    "options": [
-      "n²a₀·Z",
-      "n²a₀/Z",
-      "n²a₀/Z²",
-      "na₀/Z"
-    ],
-    "answer": 1,
-    "explain": "Radius shrinks with higher Z; rₙ = (n²/Z)×0.529 Å.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ac25ce36-1d1d-4900-8d69-b3aa2c6388a0",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "de Broglie condition used in Bohr model gives",
-    "formula": "2πr = nλ",
-    "options": [
-      "2πrₙ = λ/n",
-      "2πrₙ = nλ",
-      "2rₙ = nλ",
-      "πrₙ = nλ"
-    ],
-    "answer": 1,
-    "explain": "Orbit circumference equals integral multiple of de Broglie wavelength.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d77095a7-72f1-4ff6-b902-6854c646b302",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen-like Atoms",
-    "prompt": "Ground state energy of He⁺ ion (Z=2)",
-    "formula": "E₁ = −54.4 eV",
-    "options": [
-      "−54.4 eV",
-      "−108.8 eV",
-      "−13.6 eV",
-      "−27.2 eV"
-    ],
-    "answer": 0,
-    "explain": "E₁(He⁺) = −13.6×Z²/1² = −13.6×4 = −54.4 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ea3ab5c0-607f-4d9e-ab15-62eaba7d5419",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Shortest wavelength in Lyman series of H",
-    "formula": "1/λ_min = R(1−0)",
-    "options": [
-      "6563 Å",
-      "1216 Å",
-      "3646 Å",
-      "912 Å"
-    ],
-    "answer": 3,
-    "explain": "Series limit (n₂→∞): 1/λ = R×1 → λ = 1/R ≈ 912 Å.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dfd7a80b-092c-43e0-b45d-96c03f29fcbd",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "First line of Balmer series (Hα) wavelength",
-    "formula": "n: 3→2",
-    "options": [
-      "1216 Å",
-      "4861 Å",
-      "6563 Å",
-      "912 Å"
-    ],
-    "answer": 2,
-    "explain": "Hα: 3→2 transition; λ ≈ 6563 Å (red visible light).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a5613d65-95b4-46b0-ae15-d46e500c09f5",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Rutherford Model",
-    "prompt": "What does Rutherford's α-scattering experiment establish?",
-    "formula": "",
-    "options": [
-      "Electrons are in shells",
-      "Atom is uniform sphere",
-      "Proton exists in nucleus",
-      "Nucleus is small and dense"
-    ],
-    "answer": 3,
-    "explain": "Large angle scattering proved the nucleus is tiny (~10⁻¹⁵ m) and massive.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "89317a4e-e6e9-4689-bc84-c8085e15057a",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Excitation energy of H-atom to first excited state",
-    "formula": "ΔE = 10.2 eV",
-    "options": [
-      "3.4 eV",
-      "12.1 eV",
-      "10.2 eV",
-      "13.6 eV"
-    ],
-    "answer": 2,
-    "explain": "ΔE = E₂−E₁ = −3.4−(−13.6) = 10.2 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fd277a96-0a71-4c14-87eb-14a3693b61c3",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Bohr Model",
-    "prompt": "Excitation energy from n=1 to n=3 in hydrogen",
-    "formula": "ΔE = 12.1 eV",
-    "options": [
-      "1.9 eV",
-      "13.6 eV",
-      "12.1 eV",
-      "10.2 eV"
-    ],
-    "answer": 2,
-    "explain": "E₃−E₁ = −1.51−(−13.6) = 12.09 ≈ 12.1 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4e15e713-641b-4f99-baf4-80cf57c7e853",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Wavelength of Hα line is 6563 Å; what series and transition?",
-    "formula": "",
-    "options": [
-      "Lyman, 2→1",
-      "Paschen, 4→3",
-      "Balmer, 3→2",
-      "Balmer, 4→2"
-    ],
-    "answer": 2,
-    "explain": "Hα is the first Balmer line; electron falls from n=3 to n=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "798c7422-88ff-414e-922c-fe01cb86d719",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Brackett series of H-spectrum lies in which region?",
-    "formula": "n₁=4, n₂>4",
-    "options": [
-      "Ultraviolet",
-      "Infrared",
-      "Microwave",
-      "Visible"
-    ],
-    "answer": 1,
-    "explain": "Brackett series (n₁=4) transitions emit photons in the infrared region.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c5416dd7-6371-4581-b8cc-08a6af2f9911",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Ratio of radii of 1st and 2nd Bohr orbits of hydrogen:",
-    "formula": "r ∝ n²",
-    "options": [
-      "4:1",
-      "1:2",
-      "2:1",
-      "1:4"
-    ],
-    "answer": 3,
-    "explain": "r ∝ n², so r₁:r₂ = 1²:2² = 1:4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e531318b-4e65-4d81-a616-4d84a3519fbd",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Ratio of speeds of electron in n=1 to n=2 orbit in H:",
-    "formula": "v ∝ 1/n",
-    "options": [
-      "4:1",
-      "1:4",
-      "1:2",
-      "2:1"
-    ],
-    "answer": 3,
-    "explain": "v ∝ 1/n, so v₁:v₂ = 2:1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9b48b685-e34d-40be-aac2-e4ee3b670df1",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Energy of electron in H-atom in n=2 state:",
-    "formula": "Eₙ = -13.6/n² eV",
-    "options": [
-      "-3.4 eV",
-      "-6.8 eV",
-      "-13.6 eV",
-      "-1.51 eV"
-    ],
-    "answer": 0,
-    "explain": "E₂ = -13.6/4 = -3.4 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "52a6f2cf-875f-4238-a13f-5ab3ab24c8a0",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Energy of electron in H-atom in n=3 state:",
-    "formula": "Eₙ = -13.6/n² eV",
-    "options": [
-      "-0.85 eV",
-      "-1.51 eV",
-      "-3.4 eV",
-      "-13.6 eV"
-    ],
-    "answer": 1,
-    "explain": "E₃ = -13.6/9 ≈ -1.51 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8efa7a09-c5e5-4492-9a77-a4b9cebdd153",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Longest wavelength in Balmer series corresponds to transition:",
-    "formula": "3→2",
-    "options": [
-      "n=5 to n=2",
-      "n=∞ to n=2",
-      "n=3 to n=2",
-      "n=4 to n=2"
-    ],
-    "answer": 2,
-    "explain": "Longest λ in a series ↔ minimum energy gap, i.e., adjacent levels 3→2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3917a10e-2a3c-4cbd-8c6c-854e9c70f4a2",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Shortest wavelength in Balmer series corresponds to transition:",
-    "formula": "∞→2",
-    "options": [
-      "n=∞ to n=2",
-      "n=4 to n=2",
-      "n=3 to n=2",
-      "n=∞ to n=1"
-    ],
-    "answer": 0,
-    "explain": "Shortest λ ↔ maximum energy photon; series limit is n=∞→n=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec566036-eecc-46d2-b5d0-6032955882c7",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Longest wavelength in Lyman series: transition is",
-    "formula": "2→1",
-    "options": [
-      "n=∞ to n=1",
-      "n=4 to n=1",
-      "n=2 to n=1",
-      "n=3 to n=1"
-    ],
-    "answer": 2,
-    "explain": "Minimum energy (longest λ) in Lyman series is the 2→1 transition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "966fac69-76d8-4fc5-95d8-19208902237a",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Frequency of revolution of electron in nth Bohr orbit varies as:",
-    "formula": "f ∝ 1/n³",
-    "options": [
-      "1/n³",
-      "n²",
-      "1/n",
-      "1/n²"
-    ],
-    "answer": 0,
-    "explain": "f = v/(2πr); v∝1/n, r∝n², so f∝1/n³.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c4bbdbac-dfa4-496c-b08a-cac68fdee8d0",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Bohr model is applicable to which of these species?",
-    "formula": "",
-    "options": [
-      "H₂",
-      "He⁺",
-      "He",
-      "Li"
-    ],
-    "answer": 1,
-    "explain": "Bohr model applies only to single-electron (hydrogen-like) species like He⁺.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ca654cd5-d8cd-44b9-822a-ad5b1b939cbf",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Potential energy of electron in nth H-orbit is:",
-    "formula": "PE = 2Eₙ = -27.2/n² eV",
-    "options": [
-      "-27.2/n² eV",
-      "+27.2/n² eV",
-      "+13.6/n² eV",
-      "-13.6/n² eV"
-    ],
-    "answer": 0,
-    "explain": "PE = 2×Total energy = 2×(–13.6/n²) = –27.2/n² eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "488c372a-7bb1-458d-a89d-89f22473ffb9",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Kinetic energy of electron in nth orbit of H-atom:",
-    "formula": "KE = 13.6/n² eV",
-    "options": [
-      "-27.2/n² eV",
-      "13.6/n² eV",
-      "-13.6/n² eV",
-      "27.2/n² eV"
-    ],
-    "answer": 1,
-    "explain": "KE = –Eₙ = +13.6/n² eV (positive).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9882e232-c662-438f-9653-22d2e1357990",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In Rutherford model, electrons were expected to spiral in because:",
-    "formula": "",
-    "options": [
-      "Centripetal force is zero",
-      "Electrons have no charge",
-      "Nuclear attraction is too strong",
-      "Accelerating charge radiates energy"
-    ],
-    "answer": 3,
-    "explain": "Classical EM: accelerating (orbiting) electron radiates, loses energy, spirals inward.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "11e12b6b-7e78-4a90-b942-337b2b8571c4",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Angular momentum in n=3 orbit of H-atom (Bohr)?",
-    "formula": "L = nℏ",
-    "options": [
-      "9h/2π",
-      "3h/2π",
-      "3h/π",
-      "h/2π"
-    ],
-    "answer": 1,
-    "explain": "L = nℏ = nh/2π; for n=3, L = 3h/2π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "45c1b7de-1563-4b77-b896-79aed1ba115e",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The total energy of e⁻ in Bohr orbit equals:",
-    "formula": "E = –KE",
-    "options": [
-      "Equal to PE",
-      "Negative of PE",
-      "Zero",
-      "Negative of KE"
-    ],
-    "answer": 3,
-    "explain": "E = KE + PE = –KE (since PE = –2KE, so E = –KE).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a1565a22-e137-486e-8a6d-a5ae6bb67b39",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Momentum of photon emitted in H-atom transition is:",
-    "formula": "p = h/λ = hν/c",
-    "options": [
-      "hν",
-      "h/λ",
-      "hλ",
-      "h/c"
-    ],
-    "answer": 1,
-    "explain": "Photon momentum p = h/λ = E/c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cd66ea54-9d30-4e8e-b342-afcecd32aa25",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Number of revolution of e⁻ per second in nth orbit varies as:",
-    "formula": "f ∝ 1/n³",
-    "options": [
-      "n²",
-      "n⁻²",
-      "n³",
-      "n⁻³"
-    ],
-    "answer": 3,
-    "explain": "Frequency f = v/2πr ∝ (1/n)/(n²) = 1/n³.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "826cd7b3-063a-4690-b44f-5e0d51c6df5c",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "De Broglie wavelength of e⁻ in nth Bohr orbit of H is proportional to:",
-    "formula": "λ = h/mv",
-    "options": [
-      "1/n",
-      "n",
-      "n²",
-      "1/n²"
-    ],
-    "answer": 1,
-    "explain": "λ = h/mv ∝ n since v ∝ 1/n; also 2πr = nλ confirms λ ∝ n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "176553a0-85d8-484a-a16a-79cef1fd38b8",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Radius of nucleus is of order:",
-    "formula": "R = R₀A^(1/3)",
-    "options": [
-      "10⁻⁸ m",
-      "10⁻¹² m",
-      "10⁻¹⁰ m",
-      "10⁻¹⁵ m"
-    ],
-    "answer": 3,
-    "explain": "Nuclear radius ~1 fm = 10⁻¹⁵ m (fermi); atom ~10⁻¹⁰ m.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7e376f83-9a25-4479-8892-c7c9678440e1",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The limiting line (series limit) of Balmer series has wavelength:",
-    "formula": "1/λ = R/4",
-    "options": [
-      "1216 Å",
-      "6563 Å",
-      "8204 Å",
-      "3646 Å"
-    ],
-    "answer": 3,
-    "explain": "λ_min(Balmer) = 4/R = 3646 Å (n→∞ to n=2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2d03620-0376-4847-af02-119236bdbb18",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The wavelength of series limit of Lyman series in H is:",
-    "formula": "λ = 1/R",
-    "options": [
-      "912 Å",
-      "6563 Å",
-      "3646 Å",
-      "1216 Å"
-    ],
-    "answer": 0,
-    "explain": "λ_min(Lyman) = 1/R ≈ 912 Å (n→∞ to n=1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ae766e77-522f-4acf-96ea-23f5c4754c74",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Bohr model FAILS to explain spectra of which species?",
-    "formula": "",
-    "options": [
-      "H-atom",
-      "Li²⁺ ion",
-      "He⁺ ion",
-      "Multi-electron atoms (He, Li…)"
-    ],
-    "answer": 3,
-    "explain": "Bohr model works only for single-electron (hydrogen-like) species.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3edffb01-16b7-4caf-aaa6-60763eb312e7",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The ionisation potential of H-atom in ground state is:",
-    "formula": "IE = 13.6 eV",
-    "options": [
-      "13.6 V",
-      "27.2 V",
-      "1.5 V",
-      "3.4 V"
-    ],
-    "answer": 0,
-    "explain": "IE = 13.6 eV; ionisation potential = 13.6 V (energy per unit charge).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d194717-a7a7-479a-9453-78d3f9285099",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Angular momentum of e⁻ in n=2 orbit of H-atom?",
-    "formula": "L = nħ",
-    "options": [
-      "2πħ",
-      "ħ",
-      "2ħ",
-      "4ħ"
-    ],
-    "answer": 2,
-    "explain": "L = nħ = 2ħ for n=2; ħ = h/2π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f52a064b-48c7-4270-921e-c3b15c06076b",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In Bohr model, radius of nth orbit varies with n as:",
-    "formula": "r ∝ n²",
-    "options": [
-      "n",
-      "1/n",
-      "n²",
-      "n³"
-    ],
-    "answer": 2,
-    "explain": "Bohr radius rₙ = n²a₀, so r ∝ n².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b25f0dda-e5c3-446f-82ac-a495a6477ba2",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Ratio of total energy to kinetic energy of e⁻ in Bohr orbit:",
-    "formula": "E = −K",
-    "options": [
-      "−1",
-      "−2",
-      "1",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "Total energy E = −K (negative of KE); so E/K = −1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96e0d03e-221b-49db-bca1-82ecc10d1920",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The Lyman series limit (n=∞→1) wave number for H is:",
-    "formula": "ν̄ = R_H",
-    "options": [
-      "R_H",
-      "4R_H",
-      "R_H/4",
-      "R_H/9"
-    ],
-    "answer": 0,
-    "explain": "Series limit: 1/λ = R_H(1/1²−1/∞²) = R_H.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36d2170b-de5b-4c84-9f14-a42a96e5367e",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Potential energy of electron in 1st Bohr orbit of H is:",
-    "formula": "U = 2E = −27.2 eV",
-    "options": [
-      "+13.6 eV",
-      "−27.2 eV",
-      "+27.2 eV",
-      "−13.6 eV"
-    ],
-    "answer": 1,
-    "explain": "U = 2E = 2×(−13.6) = −27.2 eV in ground state.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86fc454f-c3e4-4ff9-be95-342eb95b7dd2",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The second line of Lyman series corresponds to transition:",
-    "formula": "",
-    "options": [
-      "n=4→n=1",
-      "n=2→n=1",
-      "n=3→n=2",
-      "n=3→n=1"
-    ],
-    "answer": 3,
-    "explain": "Lyman series: lower level n=1. 1st line: 2→1, 2nd line: 3→1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a4df4dff-37be-4f20-8828-ed930e7782cf",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Kinetic energy of electron in 1st Bohr orbit of H is:",
-    "formula": "K = 13.6 eV",
-    "options": [
-      "+27.2 eV",
-      "+13.6 eV",
-      "−27.2 eV",
-      "−13.6 eV"
-    ],
-    "answer": 1,
-    "explain": "KE is always positive; K = 13.6 eV in ground state (K = −E).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d090016-42b8-4b89-95c2-3ead55c77170",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In Rutherford's model, most α-particles passed straight through gold foil because:",
-    "formula": "",
-    "options": [
-      "Gold is thin",
-      "Nucleus has no charge",
-      "α-particles are heavy",
-      "Atom is mostly empty space"
-    ],
-    "answer": 3,
-    "explain": "Atom is mostly empty space; only near nucleus is there significant deflection.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "739a4ac0-f86f-400f-ac81-53cb11258e95",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The wavelength of series limit of Paschen series of H is:",
-    "formula": "1/λ = R_H(1/9)",
-    "options": [
-      "9/R_H",
-      "4/R_H",
-      "16/R_H",
-      "R_H/9"
-    ],
-    "answer": 0,
-    "explain": "Limit: 1/λ = R_H(1/3²−0) = R_H/9, so λ = 9/R_H.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "67bba9d6-13fd-47cf-9bfb-5f8f086829ce",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The radius of nucleus is proportional to A (mass number) as:",
-    "formula": "R = R₀ A^(1/3)",
-    "options": [
-      "A^(1/2)",
-      "A",
-      "A^(2/3)",
-      "A^(1/3)"
-    ],
-    "answer": 3,
-    "explain": "Nuclear radius R = R₀ A^(1/3), where R₀ ≈ 1.2 fm.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d651d6ce-a7ba-49fb-8e62-6f1f43d14064",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Ratio of time periods of electron in n=1 and n=2 orbits of H:",
-    "formula": "T ∝ n³",
-    "options": [
-      "4:1",
-      "1:4",
-      "1:2",
-      "1:8"
-    ],
-    "answer": 3,
-    "explain": "T ∝ n³; T₁:T₂ = 1³:2³ = 1:8.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d73d5b21-9a4b-4f73-8092-95684b948a4d",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In H-atom spectrum, which series has the longest wavelength photons?",
-    "formula": "",
-    "options": [
-      "Paschen",
-      "Humphreys",
-      "Balmer",
-      "Lyman"
-    ],
-    "answer": 1,
-    "explain": "Humphreys series (n→6) has the lowest energy/longest wavelength photons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f6712e12-61a2-42bd-a50c-338a06d5a230",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The total energy of e⁻ in nth orbit of H varies with n as:",
-    "formula": "E ∝ −1/n²",
-    "options": [
-      "−n²",
-      "1/n²",
-      "−1/n²",
-      "1/n"
-    ],
-    "answer": 2,
-    "explain": "Eₙ = −13.6/n² eV, so total energy ∝ −1/n².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3afdf94e-96ce-47e3-9309-49c8b4eef733",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In H-like ion with Z=2, radius of 1st orbit compared to H is:",
-    "formula": "r = a₀/Z",
-    "options": [
-      "Double of H",
-      "Same as H",
-      "Quarter of H",
-      "Half of H"
-    ],
-    "answer": 3,
-    "explain": "r₁ = a₀/Z; for Z=2 (He⁺), r₁ = a₀/2, which is half of H.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "13be5a06-f870-4b05-a765-98dc13eb7536",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The second Bohr postulate gives condition for allowed orbits as:",
-    "formula": "mvr = nħ",
-    "options": [
-      "Velocity = c/n",
-      "Force balance only",
-      "Angular momentum = nħ",
-      "Energy = nhν"
-    ],
-    "answer": 2,
-    "explain": "2nd postulate: angular momentum L = mvr = nħ (integral multiples of ħ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d5223b62-9bb2-4047-927d-bd2a8b3af92e",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Which transition in H-atom gives the second line of Balmer series (Hβ)?",
-    "formula": "",
-    "options": [
-      "n=3→n=2",
-      "n=4→n=2",
-      "n=4→n=3",
-      "n=5→n=2"
-    ],
-    "answer": 1,
-    "explain": "Balmer series: n→2; 2nd line (Hβ) is n=4→2, giving 486 nm (blue-green).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "115018bf-efa3-4b27-985a-399f5a00920b",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In Bohr model, the electric force provides centripetal force. This gives v∝?",
-    "formula": "v ∝ Z/n",
-    "options": [
-      "Z²/n²",
-      "Z/n",
-      "n/Z",
-      "1/n²"
-    ],
-    "answer": 1,
-    "explain": "Balancing Coulomb force with mv²/r gives v = Ze²/(2ε₀nh), so v∝Z/n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "baa4d04a-c04b-4ced-a1ee-e5645db1988c",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In H-atom, which orbit has total energy −3.4 eV?",
-    "formula": "Eₙ = −13.6/n² eV",
-    "options": [
-      "n=2",
-      "n=4",
-      "n=3",
-      "n=1"
-    ],
-    "answer": 0,
-    "explain": "E₂ = −13.6/4 = −3.4 eV, so n=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a6af981-57d5-4272-bb12-91821adc4f5f",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In Bohr model, the radius of nth orbit of H varies with n as:",
-    "formula": "rₙ = n²a₀",
-    "options": [
-      "1/n",
-      "n",
-      "n³",
-      "n²"
-    ],
-    "answer": 3,
-    "explain": "rₙ = 0.529×n² Å; radius is proportional to n².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9aa719f9-637a-4849-96ae-17adcfc712a6",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Rutherford's gold foil experiment used which particle as projectile?",
-    "formula": "",
-    "options": [
-      "Beta particles",
-      "Protons",
-      "Neutrons",
-      "Alpha particles"
-    ],
-    "answer": 3,
-    "explain": "Rutherford bombarded gold foil with α-particles (He nuclei) from a radioactive source.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2166508f-f404-47ff-93ae-80322556eb48",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "If electron in H-atom jumps from n=5 to n=2, this line belongs to:",
-    "formula": "",
-    "options": [
-      "Lyman series",
-      "Brackett series",
-      "Balmer series",
-      "Paschen series"
-    ],
-    "answer": 2,
-    "explain": "Transitions ending at n=2 form the Balmer series.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "51a04e76-622c-4ba4-82ec-f58b35e443a5",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In Bohr model, the potential energy of electron in orbit n of H is:",
-    "formula": "PE = 2Eₙ = −27.2/n² eV",
-    "options": [
-      "+13.6/n² eV",
-      "+27.2/n² eV",
-      "−13.6/n² eV",
-      "−27.2/n² eV"
-    ],
-    "answer": 3,
-    "explain": "PE = 2×total energy = 2×(−13.6/n²) = −27.2/n² eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1148e3e3-d729-43a4-941a-20ab6566d6fe",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "For H-atom, which transition gives photon in ultraviolet region?",
-    "formula": "",
-    "options": [
-      "n=3→n=1",
-      "n=3→n=2",
-      "n=5→n=4",
-      "n=4→n=3"
-    ],
-    "answer": 0,
-    "explain": "Lyman series (n→1) lies in UV; n=3→1 emits UV photon.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "493f93cc-f1cd-4aed-988e-8df24297c5ed",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "Orbital velocity of e⁻ in nth Bohr orbit of H varies with n as:",
-    "formula": "vₙ ∝ 1/n",
-    "options": [
-      "vₙ ∝ 1/n²",
-      "vₙ ∝ n",
-      "vₙ ∝ n²",
-      "vₙ ∝ 1/n"
-    ],
-    "answer": 3,
-    "explain": "From Bohr quantization: mvr = nℏ and force balance gives v = e²/2ε₀hn ∝ 1/n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "66983f1f-74a0-4141-8a8c-ca84e938bbee",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The binding energy of e⁻ in nth orbit of H-like ion with atomic number Z is:",
-    "formula": "Eₙ = 13.6Z²/n² eV",
-    "options": [
-      "13.6/Z²n² eV",
-      "13.6Z²/n eV",
-      "13.6Z/n² eV",
-      "13.6Z²/n² eV"
-    ],
-    "answer": 3,
-    "explain": "Binding energy scales as Z² due to increased nuclear charge and as 1/n² from orbit energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f0d361d7-6ff9-4ec0-a29f-0b562f7aef46",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "The angular momentum of e⁻ in the 1st Bohr orbit of H-atom is:",
-    "formula": "L = ℏ = h/2π",
-    "options": [
-      "h/4π",
-      "h/2π",
-      "2h/π",
-      "h"
-    ],
-    "answer": 1,
-    "explain": "Bohr postulate: L = nℏ; for n=1, L = ℏ = h/2π ≈ 1.055×10⁻³⁴ J·s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7af6c2c0-4206-4a55-b9c9-3309da2c20bc",
-    "subject": "Physics",
-    "chapter": "Atoms",
-    "topic": "Atoms",
-    "prompt": "In Bohr model, the ratio of kinetic energy to total energy of electron is:",
-    "formula": "KE/E_total = −1",
-    "options": [
-      "−1",
-      "2",
-      "1",
-      "−2"
-    ],
-    "answer": 0,
-    "explain": "Total E = −KE (virial theorem for circular orbit), so KE/E_total = −1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "55ff2116-bc0f-4d18-99d3-440c75417116",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Bohr radius of nth orbit of hydrogen",
+  "formula": "rₙ = n²a₀",
+  "options": [
+   "rₙ ∝ n²",
+   "rₙ ∝ n",
+   "rₙ ∝ n³",
+   "rₙ ∝ 1/n²"
+  ],
+  "answer": 0,
+  "explain": "Bohr radius rₙ = n²×0.529 Å; scales as n².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8c949a0c-357c-4be3-9682-eb71f8defc8f",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Speed of electron in nth Bohr orbit",
+  "formula": "vₙ = v₁/n",
+  "options": [
+   "vₙ ∝ 1/n²",
+   "vₙ ∝ n²",
+   "vₙ ∝ n",
+   "vₙ ∝ 1/n"
+  ],
+  "answer": 3,
+  "explain": "Orbital speed decreases as 1/n; v₁ ≈ 2.18×10⁶ m/s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8dbe3893-e77d-4e8c-b5ec-916f0133ecf9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Total energy of electron in nth orbit of H-atom",
+  "formula": "Eₙ = −13.6/n² eV",
+  "options": [
+   "−13.6/n² eV",
+   "−13.6 n² eV",
+   "−13.6/n eV",
+   "+13.6/n² eV"
+  ],
+  "answer": 0,
+  "explain": "Total energy is negative (bound state) and equals −13.6/n² eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0bbd01e4-e777-41f7-b0d7-f7b8d5229264",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Kinetic energy vs potential energy in Bohr orbit",
+  "formula": "KE = −Eₙ, PE = 2Eₙ",
+  "options": [
+   "KE = E, PE = −2E",
+   "KE = 2E, PE = −E",
+   "KE = −2E, PE = E",
+   "KE = −E, PE = 2E"
+  ],
+  "answer": 3,
+  "explain": "KE = +13.6/n² eV (positive); PE = −27.2/n² eV = 2Eₙ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ee19b30-d71b-47bc-8e6a-b67eb3f0ed55",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Frequency of photon emitted when electron jumps n₂→n₁",
+  "formula": "hν = Eₙ₂ − Eₙ₁",
+  "options": [
+   "hν = E_lower − E_higher",
+   "hν = E_higher + E_lower",
+   "hν = E_higher / E_lower",
+   "hν = E_higher − E_lower"
+  ],
+  "answer": 3,
+  "explain": "Energy of emitted photon equals difference of energies of the two levels.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6a2fb333-cfb1-46c0-b688-6d46eb91b4a8",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Rydberg formula for H-spectrum",
+  "formula": "1/λ = R(1/n₁²−1/n₂²)",
+  "options": [
+   "R(1/n₁−1/n₂)",
+   "R(1/n₁²−1/n₂²)",
+   "R(1/n₂²−1/n₁²)",
+   "R(n₁²−n₂²)"
+  ],
+  "answer": 1,
+  "explain": "1/λ = R_H(1/n₁²−1/n₂²) with n₂>n₁; R_H = 1.097×10⁷ m⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8169468e-f4bc-42d4-bc8b-5938a129012b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Lyman series lies in which region of spectrum?",
+  "formula": "",
+  "options": [
+   "X-ray",
+   "Infrared",
+   "Visible",
+   "Ultraviolet"
+  ],
+  "answer": 3,
+  "explain": "Lyman series: transitions to n=1; photon energies in UV range.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "18b50984-4098-48a4-8ef6-d6fb5fc24371",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Balmer series lower level and spectral region",
+  "formula": "n₁ = 2",
+  "options": [
+   "n₁=1, UV",
+   "n₁=2, visible",
+   "n₁=3, IR",
+   "n₁=2, IR"
+  ],
+  "answer": 1,
+  "explain": "Balmer series ends at n=2; first few lines are in visible region.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6e280a98-9fcf-4d2d-be39-9e84cffc570f",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Paschen series lies in which region?",
+  "formula": "n₁ = 3",
+  "options": [
+   "Microwave",
+   "Infrared",
+   "Visible",
+   "Ultraviolet"
+  ],
+  "answer": 1,
+  "explain": "Paschen series transitions end at n=3; photons are in IR region.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "840006ad-b4ed-46c7-80f4-3c9cb634ce4f",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Maximum number of spectral lines from nth excited state",
+  "formula": "N = n(n+1)/2",
+  "options": [
+   "n(n+2)/2",
+   "n(n-1)/2",
+   "n(n+1)/2",
+   "n²/2"
+  ],
+  "answer": 2,
+  "explain": "From nth excited state (level n+1), max lines = n(n+1)/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a6ccc1af-150d-4819-a7fe-598e3b30aa66",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Ionisation energy of hydrogen atom",
+  "formula": "IE = 13.6 eV",
+  "options": [
+   "3.4 eV",
+   "1.51 eV",
+   "13.6 eV",
+   "27.2 eV"
+  ],
+  "answer": 2,
+  "explain": "IE = |E₁| = 13.6 eV; energy to remove electron from n=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "20bb2f2b-3498-4212-8702-db62920e2f2e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Angular momentum of electron in nth orbit (Bohr postulate)",
+  "formula": "L = nℏ",
+  "options": [
+   "n²ℏ",
+   "nℏ/2",
+   "ℏ/n",
+   "nℏ"
+  ],
+  "answer": 3,
+  "explain": "Bohr quantisation: mvr = nh/2π = nℏ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "07ddada3-e04d-4035-a7d7-55f48c4194d9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Time period of revolution of electron in nth orbit",
+  "formula": "Tₙ ∝ n³",
+  "options": [
+   "Tₙ ∝ n²",
+   "Tₙ ∝ n",
+   "Tₙ ∝ n³",
+   "Tₙ ∝ 1/n"
+  ],
+  "answer": 2,
+  "explain": "T = 2πr/v; r∝n², v∝1/n → T∝n³.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ceca86b1-6ae2-4ded-969b-9b37c34d5931",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like Atoms",
+  "prompt": "For hydrogen-like ion, energy of nth level",
+  "formula": "Eₙ = −13.6 Z²/n² eV",
+  "options": [
+   "−13.6Z/n² eV",
+   "−13.6Z²/n eV",
+   "+13.6Z²/n² eV",
+   "−13.6Z²/n² eV"
+  ],
+  "answer": 3,
+  "explain": "Energy scales as Z² for hydrogen-like ions (He⁺, Li²⁺ etc.).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d81bee50-64a7-4c8d-820c-6369ae1ea7df",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like Atoms",
+  "prompt": "Bohr radius for hydrogen-like ion",
+  "formula": "rₙ = n²a₀/Z",
+  "options": [
+   "n²a₀·Z",
+   "n²a₀/Z",
+   "n²a₀/Z²",
+   "na₀/Z"
+  ],
+  "answer": 1,
+  "explain": "Radius shrinks with higher Z; rₙ = (n²/Z)×0.529 Å.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ac25ce36-1d1d-4900-8d69-b3aa2c6388a0",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "de Broglie condition used in Bohr model gives",
+  "formula": "2πr = nλ",
+  "options": [
+   "2πrₙ = λ/n",
+   "2πrₙ = nλ",
+   "2rₙ = nλ",
+   "πrₙ = nλ"
+  ],
+  "answer": 1,
+  "explain": "Orbit circumference equals integral multiple of de Broglie wavelength.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d77095a7-72f1-4ff6-b902-6854c646b302",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like Atoms",
+  "prompt": "Ground state energy of He⁺ ion (Z=2)",
+  "formula": "E₁ = −54.4 eV",
+  "options": [
+   "−54.4 eV",
+   "−108.8 eV",
+   "−13.6 eV",
+   "−27.2 eV"
+  ],
+  "answer": 0,
+  "explain": "E₁(He⁺) = −13.6×Z²/1² = −13.6×4 = −54.4 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ea3ab5c0-607f-4d9e-ab15-62eaba7d5419",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Shortest wavelength in Lyman series of H",
+  "formula": "1/λ_min = R(1−0)",
+  "options": [
+   "6563 Å",
+   "1216 Å",
+   "3646 Å",
+   "912 Å"
+  ],
+  "answer": 3,
+  "explain": "Series limit (n₂→∞): 1/λ = R×1 → λ = 1/R ≈ 912 Å.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dfd7a80b-092c-43e0-b45d-96c03f29fcbd",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "First line of Balmer series (Hα) wavelength",
+  "formula": "n: 3→2",
+  "options": [
+   "1216 Å",
+   "4861 Å",
+   "6563 Å",
+   "912 Å"
+  ],
+  "answer": 2,
+  "explain": "Hα: 3→2 transition; λ ≈ 6563 Å (red visible light).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a5613d65-95b4-46b0-ae15-d46e500c09f5",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rutherford Model",
+  "prompt": "What does Rutherford's α-scattering experiment establish?",
+  "formula": "",
+  "options": [
+   "Electrons are in shells",
+   "Atom is uniform sphere",
+   "Proton exists in nucleus",
+   "Nucleus is small and dense"
+  ],
+  "answer": 3,
+  "explain": "Large angle scattering proved the nucleus is tiny (~10⁻¹⁵ m) and massive.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "89317a4e-e6e9-4689-bc84-c8085e15057a",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Excitation energy of H-atom to first excited state",
+  "formula": "ΔE = 10.2 eV",
+  "options": [
+   "3.4 eV",
+   "12.1 eV",
+   "10.2 eV",
+   "13.6 eV"
+  ],
+  "answer": 2,
+  "explain": "ΔE = E₂−E₁ = −3.4−(−13.6) = 10.2 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fd277a96-0a71-4c14-87eb-14a3693b61c3",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr Model",
+  "prompt": "Excitation energy from n=1 to n=3 in hydrogen",
+  "formula": "ΔE = 12.1 eV",
+  "options": [
+   "1.9 eV",
+   "13.6 eV",
+   "12.1 eV",
+   "10.2 eV"
+  ],
+  "answer": 2,
+  "explain": "E₃−E₁ = −1.51−(−13.6) = 12.09 ≈ 12.1 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4e15e713-641b-4f99-baf4-80cf57c7e853",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Wavelength of Hα line is 6563 Å; what series and transition?",
+  "formula": "",
+  "options": [
+   "Lyman, 2→1",
+   "Paschen, 4→3",
+   "Balmer, 3→2",
+   "Balmer, 4→2"
+  ],
+  "answer": 2,
+  "explain": "Hα is the first Balmer line; electron falls from n=3 to n=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "798c7422-88ff-414e-922c-fe01cb86d719",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "Brackett series of H-spectrum lies in which region?",
+  "formula": "n₁=4, n₂>4",
+  "options": [
+   "Ultraviolet",
+   "Infrared",
+   "Microwave",
+   "Visible"
+  ],
+  "answer": 1,
+  "explain": "Brackett series (n₁=4) transitions emit photons in the infrared region.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c5416dd7-6371-4581-b8cc-08a6af2f9911",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "Ratio of radii of 1st and 2nd Bohr orbits of hydrogen:",
+  "formula": "r ∝ n²",
+  "options": [
+   "4:1",
+   "1:2",
+   "2:1",
+   "1:4"
+  ],
+  "answer": 3,
+  "explain": "r ∝ n², so r₁:r₂ = 1²:2² = 1:4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e531318b-4e65-4d81-a616-4d84a3519fbd",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "Ratio of speeds of electron in n=1 to n=2 orbit in H:",
+  "formula": "v ∝ 1/n",
+  "options": [
+   "4:1",
+   "1:4",
+   "1:2",
+   "2:1"
+  ],
+  "answer": 3,
+  "explain": "v ∝ 1/n, so v₁:v₂ = 2:1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9b48b685-e34d-40be-aac2-e4ee3b670df1",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Energy of electron in H-atom in n=2 state:",
+  "formula": "Eₙ = -13.6/n² eV",
+  "options": [
+   "-3.4 eV",
+   "-6.8 eV",
+   "-13.6 eV",
+   "-1.51 eV"
+  ],
+  "answer": 0,
+  "explain": "E₂ = -13.6/4 = -3.4 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "52a6f2cf-875f-4238-a13f-5ab3ab24c8a0",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Energy of electron in H-atom in n=3 state:",
+  "formula": "Eₙ = -13.6/n² eV",
+  "options": [
+   "-0.85 eV",
+   "-1.51 eV",
+   "-3.4 eV",
+   "-13.6 eV"
+  ],
+  "answer": 1,
+  "explain": "E₃ = -13.6/9 ≈ -1.51 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8efa7a09-c5e5-4492-9a77-a4b9cebdd153",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "Longest wavelength in Balmer series corresponds to transition:",
+  "formula": "3→2",
+  "options": [
+   "n=5 to n=2",
+   "n=∞ to n=2",
+   "n=3 to n=2",
+   "n=4 to n=2"
+  ],
+  "answer": 2,
+  "explain": "Longest λ in a series ↔ minimum energy gap, i.e., adjacent levels 3→2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3917a10e-2a3c-4cbd-8c6c-854e9c70f4a2",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "Shortest wavelength in Balmer series corresponds to transition:",
+  "formula": "∞→2",
+  "options": [
+   "n=∞ to n=2",
+   "n=4 to n=2",
+   "n=3 to n=2",
+   "n=∞ to n=1"
+  ],
+  "answer": 0,
+  "explain": "Shortest λ ↔ maximum energy photon; series limit is n=∞→n=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec566036-eecc-46d2-b5d0-6032955882c7",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "Longest wavelength in Lyman series: transition is",
+  "formula": "2→1",
+  "options": [
+   "n=∞ to n=1",
+   "n=4 to n=1",
+   "n=2 to n=1",
+   "n=3 to n=1"
+  ],
+  "answer": 2,
+  "explain": "Minimum energy (longest λ) in Lyman series is the 2→1 transition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "966fac69-76d8-4fc5-95d8-19208902237a",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "Frequency of revolution of electron in nth Bohr orbit varies as:",
+  "formula": "f ∝ 1/n³",
+  "options": [
+   "1/n³",
+   "n²",
+   "1/n",
+   "1/n²"
+  ],
+  "answer": 0,
+  "explain": "f = v/(2πr); v∝1/n, r∝n², so f∝1/n³.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c4bbdbac-dfa4-496c-b08a-cac68fdee8d0",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "Bohr model is applicable to which of these species?",
+  "formula": "",
+  "options": [
+   "H₂",
+   "He⁺",
+   "He",
+   "Li"
+  ],
+  "answer": 1,
+  "explain": "Bohr model applies only to single-electron (hydrogen-like) species like He⁺.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ca654cd5-d8cd-44b9-822a-ad5b1b939cbf",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Potential energy of electron in nth H-orbit is:",
+  "formula": "PE = 2Eₙ = -27.2/n² eV",
+  "options": [
+   "-27.2/n² eV",
+   "+27.2/n² eV",
+   "+13.6/n² eV",
+   "-13.6/n² eV"
+  ],
+  "answer": 0,
+  "explain": "PE = 2×Total energy = 2×(–13.6/n²) = –27.2/n² eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "488c372a-7bb1-458d-a89d-89f22473ffb9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Kinetic energy of electron in nth orbit of H-atom:",
+  "formula": "KE = 13.6/n² eV",
+  "options": [
+   "-27.2/n² eV",
+   "13.6/n² eV",
+   "-13.6/n² eV",
+   "27.2/n² eV"
+  ],
+  "answer": 1,
+  "explain": "KE = –Eₙ = +13.6/n² eV (positive).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9882e232-c662-438f-9653-22d2e1357990",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rutherford nuclear model & its limitations",
+  "prompt": "In Rutherford model, electrons were expected to spiral in because:",
+  "formula": "",
+  "options": [
+   "Centripetal force is zero",
+   "Electrons have no charge",
+   "Nuclear attraction is too strong",
+   "Accelerating charge radiates energy"
+  ],
+  "answer": 3,
+  "explain": "Classical EM: accelerating (orbiting) electron radiates, loses energy, spirals inward.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "11e12b6b-7e78-4a90-b942-337b2b8571c4",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Angular momentum quantization & de Broglie view",
+  "prompt": "Angular momentum in n=3 orbit of H-atom (Bohr)?",
+  "formula": "L = nℏ",
+  "options": [
+   "9h/2π",
+   "3h/2π",
+   "3h/π",
+   "h/2π"
+  ],
+  "answer": 1,
+  "explain": "L = nℏ = nh/2π; for n=3, L = 3h/2π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "45c1b7de-1563-4b77-b896-79aed1ba115e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "The total energy of e⁻ in Bohr orbit equals:",
+  "formula": "E = –KE",
+  "options": [
+   "Equal to PE",
+   "Negative of PE",
+   "Zero",
+   "Negative of KE"
+  ],
+  "answer": 3,
+  "explain": "E = KE + PE = –KE (since PE = –2KE, so E = –KE).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a1565a22-e137-486e-8a6d-a5ae6bb67b39",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Photon emission with atomic recoil",
+  "prompt": "Momentum of photon emitted in H-atom transition is:",
+  "formula": "p = h/λ = hν/c",
+  "options": [
+   "hν",
+   "h/λ",
+   "hλ",
+   "h/c"
+  ],
+  "answer": 1,
+  "explain": "Photon momentum p = h/λ = E/c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cd66ea54-9d30-4e8e-b342-afcecd32aa25",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "Number of revolution of e⁻ per second in nth orbit varies as:",
+  "formula": "f ∝ 1/n³",
+  "options": [
+   "n²",
+   "n⁻²",
+   "n³",
+   "n⁻³"
+  ],
+  "answer": 3,
+  "explain": "Frequency f = v/2πr ∝ (1/n)/(n²) = 1/n³.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "826cd7b3-063a-4690-b44f-5e0d51c6df5c",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Angular momentum quantization & de Broglie view",
+  "prompt": "De Broglie wavelength of e⁻ in nth Bohr orbit of H is proportional to:",
+  "formula": "λ = h/mv",
+  "options": [
+   "1/n",
+   "n",
+   "n²",
+   "1/n²"
+  ],
+  "answer": 1,
+  "explain": "λ = h/mv ∝ n since v ∝ 1/n; also 2πr = nλ confirms λ ∝ n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "176553a0-85d8-484a-a16a-79cef1fd38b8",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rutherford nuclear model & its limitations",
+  "prompt": "Radius of nucleus is of order:",
+  "formula": "R = R₀A^(1/3)",
+  "options": [
+   "10⁻⁸ m",
+   "10⁻¹² m",
+   "10⁻¹⁰ m",
+   "10⁻¹⁵ m"
+  ],
+  "answer": 3,
+  "explain": "Nuclear radius ~1 fm = 10⁻¹⁵ m (fermi); atom ~10⁻¹⁰ m.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7e376f83-9a25-4479-8892-c7c9678440e1",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "The limiting line (series limit) of Balmer series has wavelength:",
+  "formula": "1/λ = R/4",
+  "options": [
+   "1216 Å",
+   "6563 Å",
+   "8204 Å",
+   "3646 Å"
+  ],
+  "answer": 3,
+  "explain": "λ_min(Balmer) = 4/R = 3646 Å (n→∞ to n=2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2d03620-0376-4847-af02-119236bdbb18",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "The wavelength of series limit of Lyman series in H is:",
+  "formula": "λ = 1/R",
+  "options": [
+   "912 Å",
+   "6563 Å",
+   "3646 Å",
+   "1216 Å"
+  ],
+  "answer": 0,
+  "explain": "λ_min(Lyman) = 1/R ≈ 912 Å (n→∞ to n=1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ae766e77-522f-4acf-96ea-23f5c4754c74",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr model FAILS to explain spectra of which species?",
+  "formula": "",
+  "options": [
+   "H-atom",
+   "Li²⁺ ion",
+   "He⁺ ion",
+   "Multi-electron atoms (He, Li…)"
+  ],
+  "answer": 3,
+  "explain": "Bohr model works only for single-electron (hydrogen-like) species.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3edffb01-16b7-4caf-aaa6-60763eb312e7",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "The ionisation potential of H-atom in ground state is:",
+  "formula": "IE = 13.6 eV",
+  "options": [
+   "13.6 V",
+   "27.2 V",
+   "1.5 V",
+   "3.4 V"
+  ],
+  "answer": 0,
+  "explain": "IE = 13.6 eV; ionisation potential = 13.6 V (energy per unit charge).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d194717-a7a7-479a-9453-78d3f9285099",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Angular momentum quantization & de Broglie view",
+  "prompt": "Angular momentum of e⁻ in n=2 orbit of H-atom?",
+  "formula": "L = nħ",
+  "options": [
+   "2πħ",
+   "ħ",
+   "2ħ",
+   "4ħ"
+  ],
+  "answer": 2,
+  "explain": "L = nħ = 2ħ for n=2; ħ = h/2π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f52a064b-48c7-4270-921e-c3b15c06076b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "In Bohr model, radius of nth orbit varies with n as:",
+  "formula": "r ∝ n²",
+  "options": [
+   "n",
+   "1/n",
+   "n²",
+   "n³"
+  ],
+  "answer": 2,
+  "explain": "Bohr radius rₙ = n²a₀, so r ∝ n².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b25f0dda-e5c3-446f-82ac-a495a6477ba2",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Ratio of total energy to kinetic energy of e⁻ in Bohr orbit:",
+  "formula": "E = −K",
+  "options": [
+   "−1",
+   "−2",
+   "1",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Total energy E = −K (negative of KE); so E/K = −1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96e0d03e-221b-49db-bca1-82ecc10d1920",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "The Lyman series limit (n=∞→1) wave number for H is:",
+  "formula": "ν̄ = R_H",
+  "options": [
+   "R_H",
+   "4R_H",
+   "R_H/4",
+   "R_H/9"
+  ],
+  "answer": 0,
+  "explain": "Series limit: 1/λ = R_H(1/1²−1/∞²) = R_H.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36d2170b-de5b-4c84-9f14-a42a96e5367e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Potential energy of electron in 1st Bohr orbit of H is:",
+  "formula": "U = 2E = −27.2 eV",
+  "options": [
+   "+13.6 eV",
+   "−27.2 eV",
+   "+27.2 eV",
+   "−13.6 eV"
+  ],
+  "answer": 1,
+  "explain": "U = 2E = 2×(−13.6) = −27.2 eV in ground state.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86fc454f-c3e4-4ff9-be95-342eb95b7dd2",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "The second line of Lyman series corresponds to transition:",
+  "formula": "",
+  "options": [
+   "n=4→n=1",
+   "n=2→n=1",
+   "n=3→n=2",
+   "n=3→n=1"
+  ],
+  "answer": 3,
+  "explain": "Lyman series: lower level n=1. 1st line: 2→1, 2nd line: 3→1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a4df4dff-37be-4f20-8828-ed930e7782cf",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Kinetic energy of electron in 1st Bohr orbit of H is:",
+  "formula": "K = 13.6 eV",
+  "options": [
+   "+27.2 eV",
+   "+13.6 eV",
+   "−27.2 eV",
+   "−13.6 eV"
+  ],
+  "answer": 1,
+  "explain": "KE is always positive; K = 13.6 eV in ground state (K = −E).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d090016-42b8-4b89-95c2-3ead55c77170",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Alpha-particle scattering experiment",
+  "prompt": "In Rutherford's model, most α-particles passed straight through gold foil because:",
+  "formula": "",
+  "options": [
+   "Gold is thin",
+   "Nucleus has no charge",
+   "α-particles are heavy",
+   "Atom is mostly empty space"
+  ],
+  "answer": 3,
+  "explain": "Atom is mostly empty space; only near nucleus is there significant deflection.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "739a4ac0-f86f-400f-ac81-53cb11258e95",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "The wavelength of series limit of Paschen series of H is:",
+  "formula": "1/λ = R_H(1/9)",
+  "options": [
+   "9/R_H",
+   "4/R_H",
+   "16/R_H",
+   "R_H/9"
+  ],
+  "answer": 0,
+  "explain": "Limit: 1/λ = R_H(1/3²−0) = R_H/9, so λ = 9/R_H.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "67bba9d6-13fd-47cf-9bfb-5f8f086829ce",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Atoms",
+  "prompt": "The radius of nucleus is proportional to A (mass number) as:",
+  "formula": "R = R₀ A^(1/3)",
+  "options": [
+   "A^(1/2)",
+   "A",
+   "A^(2/3)",
+   "A^(1/3)"
+  ],
+  "answer": 3,
+  "explain": "Nuclear radius R = R₀ A^(1/3), where R₀ ≈ 1.2 fm.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d651d6ce-a7ba-49fb-8e62-6f1f43d14064",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "Ratio of time periods of electron in n=1 and n=2 orbits of H:",
+  "formula": "T ∝ n³",
+  "options": [
+   "4:1",
+   "1:4",
+   "1:2",
+   "1:8"
+  ],
+  "answer": 3,
+  "explain": "T ∝ n³; T₁:T₂ = 1³:2³ = 1:8.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d73d5b21-9a4b-4f73-8092-95684b948a4d",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "In H-atom spectrum, which series has the longest wavelength photons?",
+  "formula": "",
+  "options": [
+   "Paschen",
+   "Humphreys",
+   "Balmer",
+   "Lyman"
+  ],
+  "answer": 1,
+  "explain": "Humphreys series (n→6) has the lowest energy/longest wavelength photons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f6712e12-61a2-42bd-a50c-338a06d5a230",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "The total energy of e⁻ in nth orbit of H varies with n as:",
+  "formula": "E ∝ −1/n²",
+  "options": [
+   "−n²",
+   "1/n²",
+   "−1/n²",
+   "1/n"
+  ],
+  "answer": 2,
+  "explain": "Eₙ = −13.6/n² eV, so total energy ∝ −1/n².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3afdf94e-96ce-47e3-9309-49c8b4eef733",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "In H-like ion with Z=2, radius of 1st orbit compared to H is:",
+  "formula": "r = a₀/Z",
+  "options": [
+   "Double of H",
+   "Same as H",
+   "Quarter of H",
+   "Half of H"
+  ],
+  "answer": 3,
+  "explain": "r₁ = a₀/Z; for Z=2 (He⁺), r₁ = a₀/2, which is half of H.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "13be5a06-f870-4b05-a765-98dc13eb7536",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "The second Bohr postulate gives condition for allowed orbits as:",
+  "formula": "mvr = nħ",
+  "options": [
+   "Velocity = c/n",
+   "Force balance only",
+   "Angular momentum = nħ",
+   "Energy = nhν"
+  ],
+  "answer": 2,
+  "explain": "2nd postulate: angular momentum L = mvr = nħ (integral multiples of ħ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d5223b62-9bb2-4047-927d-bd2a8b3af92e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "Which transition in H-atom gives the second line of Balmer series (Hβ)?",
+  "formula": "",
+  "options": [
+   "n=3→n=2",
+   "n=4→n=2",
+   "n=4→n=3",
+   "n=5→n=2"
+  ],
+  "answer": 1,
+  "explain": "Balmer series: n→2; 2nd line (Hβ) is n=4→2, giving 486 nm (blue-green).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "115018bf-efa3-4b27-985a-399f5a00920b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "In Bohr model, the electric force provides centripetal force. This gives v∝?",
+  "formula": "v ∝ Z/n",
+  "options": [
+   "Z²/n²",
+   "Z/n",
+   "n/Z",
+   "1/n²"
+  ],
+  "answer": 1,
+  "explain": "Balancing Coulomb force with mv²/r gives v = Ze²/(2ε₀nh), so v∝Z/n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "baa4d04a-c04b-4ced-a1ee-e5645db1988c",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "In H-atom, which orbit has total energy −3.4 eV?",
+  "formula": "Eₙ = −13.6/n² eV",
+  "options": [
+   "n=2",
+   "n=4",
+   "n=3",
+   "n=1"
+  ],
+  "answer": 0,
+  "explain": "E₂ = −13.6/4 = −3.4 eV, so n=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a6af981-57d5-4272-bb12-91821adc4f5f",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "In Bohr model, the radius of nth orbit of H varies with n as:",
+  "formula": "rₙ = n²a₀",
+  "options": [
+   "1/n",
+   "n",
+   "n³",
+   "n²"
+  ],
+  "answer": 3,
+  "explain": "rₙ = 0.529×n² Å; radius is proportional to n².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9aa719f9-637a-4849-96ae-17adcfc712a6",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Alpha-particle scattering experiment",
+  "prompt": "Rutherford's gold foil experiment used which particle as projectile?",
+  "formula": "",
+  "options": [
+   "Beta particles",
+   "Protons",
+   "Neutrons",
+   "Alpha particles"
+  ],
+  "answer": 3,
+  "explain": "Rutherford bombarded gold foil with α-particles (He nuclei) from a radioactive source.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2166508f-f404-47ff-93ae-80322556eb48",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "If electron in H-atom jumps from n=5 to n=2, this line belongs to:",
+  "formula": "",
+  "options": [
+   "Lyman series",
+   "Brackett series",
+   "Balmer series",
+   "Paschen series"
+  ],
+  "answer": 2,
+  "explain": "Transitions ending at n=2 form the Balmer series.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "51a04e76-622c-4ba4-82ec-f58b35e443a5",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "In Bohr model, the potential energy of electron in orbit n of H is:",
+  "formula": "PE = 2Eₙ = −27.2/n² eV",
+  "options": [
+   "+13.6/n² eV",
+   "+27.2/n² eV",
+   "−13.6/n² eV",
+   "−27.2/n² eV"
+  ],
+  "answer": 3,
+  "explain": "PE = 2×total energy = 2×(−13.6/n²) = −27.2/n² eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1148e3e3-d729-43a4-941a-20ab6566d6fe",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen spectral series (Lyman to Pfund)",
+  "prompt": "For H-atom, which transition gives photon in ultraviolet region?",
+  "formula": "",
+  "options": [
+   "n=3→n=1",
+   "n=3→n=2",
+   "n=5→n=4",
+   "n=4→n=3"
+  ],
+  "answer": 0,
+  "explain": "Lyman series (n→1) lies in UV; n=3→1 emits UV photon.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "493f93cc-f1cd-4aed-988e-8df24297c5ed",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "Orbital velocity of e⁻ in nth Bohr orbit of H varies with n as:",
+  "formula": "vₙ ∝ 1/n",
+  "options": [
+   "vₙ ∝ 1/n²",
+   "vₙ ∝ n",
+   "vₙ ∝ n²",
+   "vₙ ∝ 1/n"
+  ],
+  "answer": 3,
+  "explain": "From Bohr quantization: mvr = nℏ and force balance gives v = e²/2ε₀hn ∝ 1/n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "66983f1f-74a0-4141-8a8c-ca84e938bbee",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "The binding energy of e⁻ in nth orbit of H-like ion with atomic number Z is:",
+  "formula": "Eₙ = 13.6Z²/n² eV",
+  "options": [
+   "13.6/Z²n² eV",
+   "13.6Z²/n eV",
+   "13.6Z/n² eV",
+   "13.6Z²/n² eV"
+  ],
+  "answer": 3,
+  "explain": "Binding energy scales as Z² due to increased nuclear charge and as 1/n² from orbit energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f0d361d7-6ff9-4ec0-a29f-0b562f7aef46",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Angular momentum quantization & de Broglie view",
+  "prompt": "The angular momentum of e⁻ in the 1st Bohr orbit of H-atom is:",
+  "formula": "L = ℏ = h/2π",
+  "options": [
+   "h/4π",
+   "h/2π",
+   "2h/π",
+   "h"
+  ],
+  "answer": 1,
+  "explain": "Bohr postulate: L = nℏ; for n=1, L = ℏ = h/2π ≈ 1.055×10⁻³⁴ J·s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7af6c2c0-4206-4a55-b9c9-3309da2c20bc",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "In Bohr model, the ratio of kinetic energy to total energy of electron is:",
+  "formula": "KE/E_total = −1",
+  "options": [
+   "−1",
+   "2",
+   "1",
+   "−2"
+  ],
+  "answer": 0,
+  "explain": "Total E = −KE (virial theorem for circular orbit), so KE/E_total = −1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "68338d14-65d6-4f2f-b2f8-1d88805951a9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Alpha-particle scattering experiment",
+  "prompt": "In Rutherford scattering, number of α-particles scattered at angle θ is proportional to:",
+  "formula": "N ∝ 1/sin⁴(θ/2)",
+  "options": [
+   "1/sin⁴(θ/2)",
+   "1/sin²(θ/2)",
+   "1/cos⁴(θ/2)",
+   "sin⁴(θ/2)"
+  ],
+  "answer": 0,
+  "explain": "Rutherford's scattering formula gives N(θ) ∝ 1/sin⁴(θ/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2e23e7d-fcfd-4730-82a8-584d245d6c6e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Alpha-particle scattering experiment",
+  "prompt": "In Rutherford's experiment, a larger impact parameter b leads to a scattering angle that is:",
+  "formula": "",
+  "options": [
+   "Larger",
+   "Smaller",
+   "Unchanged",
+   "Always 180°"
+  ],
+  "answer": 1,
+  "explain": "b = (k Ze²/K)·cot(θ/2); large b means small θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e6830d12-0864-4842-bbfd-210e92513b02",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Alpha-particle scattering experiment",
+  "prompt": "At the distance of closest approach r₀ for a head-on α-particle, its kinetic energy is:",
+  "formula": "K = 2Ze²/(4πε₀r₀)",
+  "options": [
+   "Entirely kinetic at r₀",
+   "Unchanged",
+   "Entirely converted to potential energy",
+   "Half converted to potential energy"
+  ],
+  "answer": 2,
+  "explain": "At r₀ the α momentarily stops; all KE becomes electrostatic PE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0d12360e-c755-48f9-bac0-6f4b71e6943f",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Alpha-particle scattering experiment",
+  "prompt": "Fraction of α-particles deflected by more than 90° in Rutherford's gold foil experiment was about:",
+  "formula": "",
+  "options": [
+   "About 1 in 10",
+   "About half",
+   "1 in 8000",
+   "1 in 100"
+  ],
+  "answer": 2,
+  "explain": "Only about 1 in 8000 α-particles were deflected by more than 90°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4dc08b1e-a71e-4d70-adf6-8dd98a05b65f",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rutherford nuclear model & its limitations",
+  "prompt": "In Rutherford scattering, the impact parameter b is zero for which α-particle path?",
+  "formula": "",
+  "options": [
+   "Deflected by 45°",
+   "Undeviated (θ = 0°)",
+   "Head-on, retraces path (θ = 180°)",
+   "Deflected by 90°"
+  ],
+  "answer": 2,
+  "explain": "Zero impact parameter means a head-on approach, giving maximum scattering angle of 180°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2cb10d1e-0a1c-4306-8c2b-ec1da51b4acc",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rutherford nuclear model & its limitations",
+  "prompt": "Besides instability, Rutherford's model fails to explain the:",
+  "formula": "",
+  "options": [
+   "Discrete line spectrum of atoms",
+   "Positive charge of nucleus",
+   "Existence of nucleus",
+   "Large-angle scattering"
+  ],
+  "answer": 0,
+  "explain": "Spiralling electrons would emit a continuous spectrum, but atoms show discrete line spectra.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2aadca57-e1c7-442b-ae7b-3e4aaea6a692",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "Head-on α-particle (KE K) approaches nucleus of charge Ze. Distance of closest approach r₀ = ?",
+  "formula": "r₀ = 2Ze²/(4πε₀K)",
+  "options": [
+   "4πε₀K/(2Ze²)",
+   "2Ze²/(4πε₀K²)",
+   "Ze²/(4πε₀K)",
+   "2Ze²/(4πε₀K)"
+  ],
+  "answer": 3,
+  "explain": "At r₀ all KE becomes PE: K = (1/4πε₀)(2e)(Ze)/r₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a457addc-9a6f-45a6-a4b8-9980b887a42c",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "If the α-particle's KE is doubled, the distance of closest approach becomes:",
+  "formula": "r₀ ∝ 1/K",
+  "options": [
+   "One-fourth",
+   "1/√2 times",
+   "Half",
+   "Double"
+  ],
+  "answer": 2,
+  "explain": "r₀ is inversely proportional to K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fda1cfb4-c100-404b-bbc0-9ef8cb030d75",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "For α-particles of fixed KE, r₀ varies with the atomic number Z of the target as:",
+  "formula": "",
+  "options": [
+   "r₀ ∝ Z",
+   "r₀ independent of Z",
+   "r₀ ∝ Z²",
+   "r₀ ∝ 1/Z"
+  ],
+  "answer": 0,
+  "explain": "r₀ = 2Ze²/(4πε₀K), so r₀ ∝ Z.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b90c4822-938a-4d4d-aa4e-4a7ca2e216e3",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "A proton and an α-particle of equal KE approach the same nucleus head-on. r₀(α)/r₀(p) = ?",
+  "formula": "r₀ ∝ q",
+  "options": [
+   "1",
+   "1/2",
+   "4",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "At equal K, r₀ ∝ projectile charge; α has charge 2e.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b31f178f-15b6-4cde-b751-8bc81b571331",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "A proton and an α-particle of equal speed approach the same nucleus head-on. r₀(α)/r₀(p) = ?",
+  "formula": "r₀ ∝ q/(mv²)",
+  "options": [
+   "1/2",
+   "2",
+   "4",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "q ratio 2, mass ratio 4 (K ∝ m), so r₀ ratio = 2/4 = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad5f8755-fe69-4609-a242-dc886525c559",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "The distance of closest approach gives an estimate of the nuclear size as:",
+  "formula": "",
+  "options": [
+   "Exact nuclear radius",
+   "An upper limit on nuclear radius",
+   "A lower limit on nuclear radius",
+   "Atomic radius"
+  ],
+  "answer": 1,
+  "explain": "The α turns back at r₀ without touching the nucleus, so R ≤ r₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a150a4af-4962-401c-a87e-03f1d5c2a929",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "For the same KE, the minimum separation in a non-head-on (b ≠ 0) α-scattering compared to r₀ is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to r₀",
+   "Greater than r₀",
+   "Less than r₀"
+  ],
+  "answer": 2,
+  "explain": "The α still retains some KE at closest approach, so it stays farther than r₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50005b50-5c53-46a7-87cb-da4c647f38b1",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "Deriving r₀ by energy conservation, which assumption about the target nucleus is made?",
+  "formula": "",
+  "options": [
+   "Neutral overall",
+   "Moves with the α",
+   "Rotating rapidly",
+   "Heavy and stationary"
+  ],
+  "answer": 3,
+  "explain": "Nucleus is much heavier than α and remains at rest, so only the α's KE converts to PE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "200e0fc1-377f-4694-a6a5-17b82f3d84f9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "For an α-particle approaching a nucleus head-on, its speed is doubled. The distance of closest approach becomes:",
+  "formula": "r₀ ∝ 1/K ∝ 1/v²",
+  "options": [
+   "Four times",
+   "Half",
+   "Double",
+   "One-fourth"
+  ],
+  "answer": 3,
+  "explain": "K = ½mv², so doubling v makes K four times larger. Since r₀ ∝ 1/K, r₀ becomes one-fourth.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7607343a-b6d0-40fb-a206-69f21129b46f",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Distance of closest approach",
+  "prompt": "A proton and an α-particle are accelerated through the same potential difference and fired head-on at one nucleus. r₀(α)/r₀(p) = ?",
+  "formula": "r₀ = Ze·q/(4πε₀·qV) = Ze/(4πε₀V)",
+  "options": [
+   "2",
+   "1/2",
+   "4",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "K = qV, so the projectile charge q cancels in r₀ = Zeq/(4πε₀K). r₀ is the same for both.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "93da5c93-55da-4e5e-9638-e88e99129f41",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Impact parameter & scattering angle",
+  "prompt": "Impact parameter b and scattering angle θ are related through which function of θ?",
+  "formula": "b = (Ze²/4πε₀K) cot(θ/2)",
+  "options": [
+   "b ∝ sin(θ/2)",
+   "b ∝ tan(θ/2)",
+   "b ∝ cot(θ/2)",
+   "b ∝ cos θ"
+  ],
+  "answer": 2,
+  "explain": "b = (Ze²/4πε₀K)·cot(θ/2): a small b gives a large θ, and a large b gives a small θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d4b3ea1b-b92e-4a6e-953b-3eb2fc6811ef",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Impact parameter & scattering angle",
+  "prompt": "Which force produces the scattering of α-particles in Rutherford's model?",
+  "formula": "",
+  "options": [
+   "Magnetic force from the electrons",
+   "Strong nuclear force",
+   "Gravitational attraction by the nucleus",
+   "Coulomb repulsion by the nucleus"
+  ],
+  "answer": 3,
+  "explain": "The positively charged α-particle is repelled by the positive nucleus through the Coulomb force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6461ff4f-05c8-4353-85a6-8faea536c9ca",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "The time period of revolution of the electron in the nth Bohr orbit varies as",
+  "formula": "",
+  "options": [
+   "n²/Z",
+   "n/Z",
+   "n³/Z²",
+   "n²/Z²"
+  ],
+  "answer": 2,
+  "explain": "T = 2πr/v ∝ (n²/Z)/(Z/n) = n³/Z².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8270eb04-c3a3-4669-85c9-14964a7a092b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "According to Bohr's first postulate, an electron in a stationary orbit",
+  "formula": "",
+  "options": [
+   "Absorbs energy continuously",
+   "Does not radiate energy",
+   "Emits radiation continuously",
+   "Spirals into the nucleus"
+  ],
+  "answer": 1,
+  "explain": "Stationary orbits are non-radiating states despite the electron's acceleration.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa990da5-6204-4e11-92d4-e4757fe8bdac",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "The speed of the electron in the first Bohr orbit of hydrogen is about",
+  "formula": "v₁ = αc",
+  "options": [
+   "c/13.6",
+   "c/137",
+   "c/100",
+   "c/1837"
+  ],
+  "answer": 1,
+  "explain": "v₁ = e²/(2ε₀h) = c/137 ≈ 2.2×10⁶ m/s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f483735d-adcf-4379-abf8-63787788da46",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "In Bohr's model, the centripetal force on the electron is provided by",
+  "formula": "mv²/r = Ze²/(4πε₀r²)",
+  "options": [
+   "Gravitational attraction",
+   "Nuclear strong force",
+   "Coulomb attraction by the nucleus",
+   "Magnetic force"
+  ],
+  "answer": 2,
+  "explain": "Electrostatic attraction between the electron and the nucleus supplies it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "950eb40f-17c3-47ec-918e-b967aa481fba",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "The equivalent current due to the electron revolving in the nth Bohr orbit varies as",
+  "formula": "",
+  "options": [
+   "Z/n²",
+   "Z/n³",
+   "Z²/n³",
+   "Z²/n²"
+  ],
+  "answer": 2,
+  "explain": "I = e/T and T ∝ n³/Z², so I ∝ Z²/n³.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d7e1d2e-c9c8-4a13-b240-877f542cda06",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Angular momentum quantization & de Broglie view",
+  "prompt": "Orbit radii of H-atom are in ratio 1 : 4. Ratio of the electron's angular momenta is:",
+  "formula": "rₙ ∝ n²",
+  "options": [
+   "1 : 4",
+   "1 : 16",
+   "1 : 2",
+   "1 : 8"
+  ],
+  "answer": 2,
+  "explain": "r ∝ n² gives n ratio 1 : 2, and L ∝ n, so L ratio is 1 : 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07ca3f4c-a5d4-4f54-89f5-2811b03c7954",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "Value of the Bohr radius a₀ (radius of H ground-state orbit) is nearest to:",
+  "formula": "a₀ = ε₀h²/(πme²)",
+  "options": [
+   "5.29 Å",
+   "1.06 Å",
+   "0.0529 Å",
+   "0.529 Å"
+  ],
+  "answer": 3,
+  "explain": "a₀ ≈ 0.529 Å = 0.529×10⁻¹⁰ m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "463ef3d3-0084-4e5f-a356-c74bfe23e8aa",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "The orbit radius rₙ depends on Planck's constant h as:",
+  "formula": "r = ε₀n²h²/(πmZe²)",
+  "options": [
+   "r ∝ 1/h",
+   "r ∝ h",
+   "r ∝ 1/h²",
+   "r ∝ h²"
+  ],
+  "answer": 3,
+  "explain": "h appears squared in the numerator of the radius.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4eb2c803-124d-4185-8030-88dd66e88d4b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "Electron speed in the nth Bohr orbit and radius are related at fixed Z by:",
+  "formula": "v ∝ Z/n, r ∝ n²/Z",
+  "options": [
+   "r ∝ v",
+   "r ∝ v²",
+   "r ∝ 1/v²",
+   "r ∝ 1/v"
+  ],
+  "answer": 2,
+  "explain": "v ∝ 1/n and r ∝ n² give r ∝ 1/v².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e6c9d8b7-3dfe-4b2b-b909-e9a0ec7f5ae0",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "Ratio of revolution frequency of electron in ground state of He⁺ to that in ground state of H is:",
+  "formula": "f ∝ Z²/n³",
+  "options": [
+   "16:1",
+   "2:1",
+   "4:1",
+   "8:1"
+  ],
+  "answer": 2,
+  "explain": "At fixed n, f ∝ Z², so the ratio is 4:1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "76b506a3-3198-4358-85f8-c7291c9f8dd7",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "For very large n, frequency of photon emitted in n → (n−1) transition in H approaches what?",
+  "formula": "ν_photon → f_orbital (n ≫ 1)",
+  "options": [
+   "Orbital frequency of electron in nth orbit",
+   "Twice the orbital frequency",
+   "Half the orbital frequency",
+   "Zero, independent of orbit"
+  ],
+  "answer": 0,
+  "explain": "Bohr's correspondence principle: for large n, ν of n→n−1 photon equals classical revolution frequency (∝ 1/n³).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43d71bb0-9917-4394-8bed-a3b705459ecf",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "As n increases in H-atom, the gap between consecutive energy levels:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Increases then decreases",
+   "Stays constant"
+  ],
+  "answer": 1,
+  "explain": "Eₙ ∝ −1/n², so levels crowd together and converge to 0 as n → ∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "48a00869-0b3f-4d21-9a35-632bedfa20d2",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "Total energy of electron in the n = 3 orbit of Li²⁺ (Z = 3)?",
+  "formula": "E = −13.6 Z²/n² eV",
+  "options": [
+   "−1.51 eV",
+   "−40.8 eV",
+   "−4.5 eV",
+   "−13.6 eV"
+  ],
+  "answer": 3,
+  "explain": "Z²/n² = 9/9 = 1, so E = −13.6 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "401ac0cc-998a-4955-9eb1-f688d9b310bb",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "Ionisation energy of He⁺ ion in its ground state is",
+  "formula": "E = 13.6 Z² eV",
+  "options": [
+   "54.4 eV",
+   "40.8 eV",
+   "13.6 eV",
+   "27.2 eV"
+  ],
+  "answer": 0,
+  "explain": "IE ∝ Z²; for Z = 2, 13.6 × 4 = 54.4 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5fc65e16-c011-42c7-adf2-3f7481019ced",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "Ionisation energy of Li²⁺ in the ground state is",
+  "formula": "E = 13.6 Z² eV",
+  "options": [
+   "122.4 eV",
+   "30.6 eV",
+   "91.8 eV",
+   "40.8 eV"
+  ],
+  "answer": 0,
+  "explain": "Z = 3, so 13.6 × 9 = 122.4 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "57e461f5-52d4-43f3-9842-bb717f0993f6",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "Energy needed to ionise a hydrogen atom from its first excited state (n = 2) is",
+  "formula": "E = 13.6/n² eV",
+  "options": [
+   "6.8 eV",
+   "3.4 eV",
+   "10.2 eV",
+   "1.51 eV"
+  ],
+  "answer": 1,
+  "explain": "Binding energy at n = 2 is 13.6/4 = 3.4 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4d2f5a93-fe95-43f1-802b-205344bf67e8",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "Energy needed to ionise a hydrogen atom from n = 3 is about",
+  "formula": "E = 13.6/n² eV",
+  "options": [
+   "4.53 eV",
+   "1.51 eV",
+   "0.85 eV",
+   "3.4 eV"
+  ],
+  "answer": 1,
+  "explain": "13.6/9 ≈ 1.51 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "583332b7-2bde-4d10-a479-1e021741dbe1",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "A 15 eV photon ionises a ground-state H atom. KE of the ejected electron is",
+  "formula": "KE = hν − 13.6 eV",
+  "options": [
+   "28.6 eV",
+   "1.4 eV",
+   "15 eV",
+   "10.2 eV"
+  ],
+  "answer": 1,
+  "explain": "KE = photon energy − ionisation energy = 15 − 13.6 = 1.4 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "797b3981-a102-443c-92d9-da2731682a21",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "Ground-state ionisation energy of hydrogen equals which quantity for the electron in the orbit?",
+  "formula": "",
+  "options": [
+   "Its kinetic energy",
+   "Its potential energy",
+   "Twice its kinetic energy",
+   "Its total energy"
+  ],
+  "answer": 0,
+  "explain": "E = −K, so IE = −E = K = 13.6 eV (U = −2K).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "48e96dab-9286-4cab-99c2-1f68e4fb1025",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "First excitation potential of He⁺ (ground state) is",
+  "formula": "ΔE = 54.4(1 − 1/4) eV",
+  "options": [
+   "27.2 V",
+   "40.8 V",
+   "10.2 V",
+   "54.4 V"
+  ],
+  "answer": 1,
+  "explain": "ΔE = 13.6 × 4 × (3/4) = 40.8 eV, so potential = 40.8 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6d8676e7-5892-49ac-898b-fbd2f582a317",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Ionisation & excitation energy/potential",
+  "prompt": "Energy to excite Li²⁺ from n = 1 to n = 2 is",
+  "formula": "ΔE = 13.6 Z²(1 − 1/4)",
+  "options": [
+   "40.8 eV",
+   "122.4 eV",
+   "91.8 eV",
+   "10.2 eV"
+  ],
+  "answer": 2,
+  "explain": "122.4 × 3/4 = 91.8 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3367372d-eca0-4360-be2b-44f45efaa1bd",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Ratio of shortest λ in Lyman to shortest λ in Balmer series of H is",
+  "formula": "",
+  "options": [
+   "4 : 1",
+   "1 : 2",
+   "27 : 5",
+   "1 : 4"
+  ],
+  "answer": 3,
+  "explain": "Limits are 1/R and 4/R, so the ratio is 1 : 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f5247983-eb9e-4904-922d-a0bc65239ceb",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "In the Brackett series of hydrogen, the electron ends at n =",
+  "formula": "",
+  "options": [
+   "4",
+   "6",
+   "3",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "Lyman 1, Balmer 2, Paschen 3, Brackett 4, Pfund 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da06c69c-8e95-49cc-97bc-f98dd41374a3",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "For a hydrogen-like ion of atomic number Z, the wave number 1/λ of a given transition is",
+  "formula": "1/λ = RZ²(1/n₁² − 1/n₂²)",
+  "options": [
+   "proportional to Z",
+   "independent of Z",
+   "proportional to 1/Z",
+   "proportional to Z²"
+  ],
+  "answer": 3,
+  "explain": "Energy levels scale as Z², so 1/λ ∝ Z².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0320ccdb-4890-417c-b5cd-bedfe58f8dea",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Which He⁺ transition has the same wavelength as the n=2→1 transition of hydrogen?",
+  "formula": "",
+  "options": [
+   "n=3→2",
+   "n=4→2",
+   "n=3→1",
+   "n=2→1"
+  ],
+  "answer": 1,
+  "explain": "Z=2 gives 4R(1/4−1/16) = 3R/4, equal to H's 2→1 value R(1−1/4).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd576bc7-10b1-4893-9967-cc5827deedf7",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Rydberg constant in terms of fundamental constants is",
+  "formula": "",
+  "options": [
+   "mₑe²/(8ε₀²h³c)",
+   "mₑe⁴/(8ε₀²h³c)",
+   "mₑe⁴/(8ε₀h²c)",
+   "mₑe⁴/(8ε₀²h²c²)"
+  ],
+  "answer": 1,
+  "explain": "From Bohr's theory, R = mₑe⁴/(8ε₀²h³c).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36b365f5-b3ef-4da2-b040-a50a75d80427",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Within a given hydrogen series, the spectral lines get ___ as n increases toward the limit.",
+  "formula": "",
+  "options": [
+   "closer together",
+   "farther apart",
+   "brighter in colour",
+   "equally spaced"
+  ],
+  "answer": 0,
+  "explain": "Energy levels converge, so the lines crowd toward the series limit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d848206d-9875-4e63-a096-13fbe8992a08",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Longest wavelength in the Paschen series of hydrogen is",
+  "formula": "1/λ = R(1/9 − 1/16)",
+  "options": [
+   "144/(7R)",
+   "7/(144R)",
+   "9/R",
+   "16/(7R)"
+  ],
+  "answer": 0,
+  "explain": "n=4→3: 1/λ = 7R/144, so λ = 144/(7R).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "21413ff3-bd72-477b-a10d-afeea20d0a65",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Wavelength of the photon emitted in the n=3→1 transition of hydrogen is",
+  "formula": "1/λ = R(1 − 1/9)",
+  "options": [
+   "4/(3R)",
+   "36/(5R)",
+   "9/(8R)",
+   "8/(9R)"
+  ],
+  "answer": 2,
+  "explain": "1/λ = 8R/9, so λ = 9/(8R) ≈ 1026 Å.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff46c94d-5575-4533-b2a3-87391124bdb9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Numerical value of the Rydberg constant R for hydrogen (in SI units) is nearest to",
+  "formula": "R ≈ 1.097×10⁷ m⁻¹",
+  "options": [
+   "1.097×10⁷ m⁻¹",
+   "1.097×10⁵ m⁻¹",
+   "1.602×10⁷ m⁻¹",
+   "1.097×10⁹ m⁻¹"
+  ],
+  "answer": 0,
+  "explain": "R_H ≈ 1.097×10⁷ m⁻¹, so 1/R ≈ 912 Å, the Lyman limit wavelength.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2120f9f5-c9ca-41ab-85a0-5b8c6db5473e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "H atoms excited to n = 5 return to the ground state. Maximum number of different spectral lines possible is",
+  "formula": "N = n(n−1)/2",
+  "options": [
+   "15",
+   "10",
+   "4",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "Lines = n(n−1)/2 = 5×4/2 = 10, counting all possible transitions between levels.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "10d9f263-6c2b-4557-9e4c-19b0ff24ad4c",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "Lines in the Lyman series when H atoms are excited to level n = 6?",
+  "formula": "Lyman lines = n − 1",
+  "options": [
+   "15",
+   "4",
+   "5",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Lyman lines end at n = 1, so the number is n − 1 = 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92e91f3f-9b93-4011-934f-f6eae58d19cb",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "One single H atom in n = 4 returns to ground state. Max photons it can emit?",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "4",
+   "10"
+  ],
+  "answer": 0,
+  "explain": "One atom emits one photon per jump; the longest cascade 4→3→2→1 gives 3. The 6 lines need many atoms.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4322065d-defb-4566-bd04-0697896deb88",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "He⁺ ions are excited to n = 3. Compared with H atoms at n = 3, the number of lines is:",
+  "formula": "",
+  "options": [
+   "Double, 6",
+   "Four times, 12",
+   "Same, 3",
+   "Half, 1.5"
+  ],
+  "answer": 2,
+  "explain": "The count n(n−1)/2 depends only on n, not on Z. Both give 3 lines.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d94e5a9a-80fb-4e2e-a2a8-bec9dc6f1a2a",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "H excited to n = 5. Number of emission lines that do NOT belong to the Lyman series?",
+  "formula": "",
+  "options": [
+   "6",
+   "3",
+   "4",
+   "10"
+  ],
+  "answer": 0,
+  "explain": "Total 10, Lyman has n−1 = 4, so 10 − 4 = 6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f677d0e5-45cf-48e9-9d15-67576cccf8ec",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "For H excited to n = 3, how are the 3 possible lines split between series?",
+  "formula": "",
+  "options": [
+   "Lyman 3",
+   "Lyman 2, Balmer 1",
+   "Lyman 2, Paschen 1",
+   "Lyman 1, Balmer 2"
+  ],
+  "answer": 1,
+  "explain": "3→1 and 2→1 are Lyman; 3→2 is Balmer, so Lyman 2 and Balmer 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81325ec1-3b99-4c11-badf-fa65b0000279",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "Paschen lines (final level n = 3) emitted from H excited to n = 6?",
+  "formula": "Series lines = n − n_f",
+  "options": [
+   "4",
+   "6",
+   "3",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "The jumps 6→3, 5→3 and 4→3 give 3 lines, which is n − n_f = 6 − 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "761d14b0-7642-4d8e-809b-39e36e423de5",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "Balmer lines (final level n = 2) from H excited to n = 5?",
+  "formula": "Balmer lines = n − 2",
+  "options": [
+   "3",
+   "6",
+   "10",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "The jumps 5→2, 4→2 and 3→2 give 3 lines, which is n − 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "658333f1-0428-4f51-8b8f-9342771570ce",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "Ground-state H absorbs light so that levels up to n = 5 can be reached. Absorption lines from n = 1?",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "10",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "Atoms start in n = 1, so absorption lines are 1→2, 1→3, 1→4, 1→5: n − 1 = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b2427b0c-6dec-4ebf-a928-4f8c12b84891",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "Speed of electron in 1st Bohr orbit of He⁺ compared to that in H atom is:",
+  "formula": "vₙ ∝ Z/n",
+  "options": [
+   "Twice",
+   "Half",
+   "Four times",
+   "Same"
+  ],
+  "answer": 0,
+  "explain": "vₙ = (Z/n)·2.18×10⁶ m/s, so for Z=2 and n=1 the speed is doubled.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7e7a1053-abd8-465d-bebc-04c13c0341d9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "Time period of revolution in ground state of Li²⁺ compared to H atom is:",
+  "formula": "Tₙ ∝ n³/Z²",
+  "options": [
+   "1/9",
+   "1/27",
+   "1/3",
+   "1/6"
+  ],
+  "answer": 0,
+  "explain": "Tₙ ∝ n³/Z², so for n=1 and Z=3 the period is 1/9 of that for H.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "80e1de90-b123-4693-9b8c-bff6549ab3b4",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "Which level of Li²⁺ has the same energy as the ground state of hydrogen?",
+  "formula": "Eₙ ∝ Z²/n²",
+  "options": [
+   "n = 3",
+   "n = 9",
+   "n = 2",
+   "n = 6"
+  ],
+  "answer": 0,
+  "explain": "Z²/n² = 1 requires n = Z = 3, so the energy is −13.6 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66eb7b65-d1de-49e1-afe2-1c207dd799ba",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "Wavelength of the first Lyman line of He⁺ compared to that of H is:",
+  "formula": "1/λ = RZ²(1/n₁² − 1/n₂²)",
+  "options": [
+   "Half",
+   "Four times",
+   "Twice",
+   "One-fourth"
+  ],
+  "answer": 3,
+  "explain": "1/λ ∝ Z², so λ(He⁺) = λ(H)/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3ac99784-1ff4-431b-b18f-9e72806cd45b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "For the same n, ratio of orbit radii r(He⁺) : r(Li²⁺) is:",
+  "formula": "rₙ ∝ n²/Z",
+  "options": [
+   "3 : 2",
+   "9 : 4",
+   "2 : 3",
+   "4 : 9"
+  ],
+  "answer": 0,
+  "explain": "r ∝ 1/Z, so r(He⁺)/r(Li²⁺) = 3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81860caf-4020-4ce6-a014-477a34b644f1",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Hydrogen-like ions (He+, Li2+) Z-scaling",
+  "prompt": "Ratio of ground-state ionisation energies of Li²⁺ and He⁺ is:",
+  "formula": "IE ∝ Z²",
+  "options": [
+   "27 : 8",
+   "4 : 9",
+   "3 : 2",
+   "9 : 4"
+  ],
+  "answer": 3,
+  "explain": "IE ∝ Z², so 3² : 2² = 9 : 4 (122.4 eV : 54.4 eV).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a1a831b9-ae65-4f7f-8147-03c67b756a29",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr model gives ground-state angular momentum h/2π. What is its actual quantum-mechanical value?",
+  "formula": "L = √(l(l+1)) ħ, l = 0",
+  "options": [
+   "Zero",
+   "2h/2π",
+   "h/2π",
+   "h/4π"
+  ],
+  "answer": 0,
+  "explain": "Ground state is 1s (l = 0), so L = 0. Bohr's h/2π is wrong.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6eda3f22-8be0-4dae-8b64-cf886b3b8cb5",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr's picture of definite circular orbits violates which principle?",
+  "formula": "",
+  "options": [
+   "Hund's rule",
+   "Heisenberg uncertainty principle",
+   "Aufbau principle",
+   "Pauli exclusion principle"
+  ],
+  "answer": 1,
+  "explain": "Exact radius and momentum together contradict Δx·Δp ≥ ħ/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ee1e891f-646d-4938-963a-6fa99315fd4e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Which spectral feature can the Bohr model NOT predict?",
+  "formula": "",
+  "options": [
+   "Series limit of Balmer series",
+   "Energy levels of hydrogen",
+   "Relative intensities of spectral lines",
+   "Wavelengths of hydrogen lines"
+  ],
+  "answer": 2,
+  "explain": "Bohr gives line positions but not intensities; that needs transition probabilities.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a92efd1a-ca07-4538-8c6a-b04af41c3b02",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Splitting of spectral lines in an external magnetic field, unexplained by Bohr's model, is called:",
+  "formula": "",
+  "options": [
+   "Zeeman effect",
+   "Photoelectric effect",
+   "Compton effect",
+   "Raman effect"
+  ],
+  "answer": 0,
+  "explain": "Bohr's model cannot account for Zeeman (and Stark) splitting or fine structure.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4f7e0ac8-ced5-4634-a504-0a276c132ff9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr's non-radiating stationary orbits contradict which classical theory?",
+  "formula": "",
+  "options": [
+   "Maxwell's electromagnetic theory",
+   "Kepler's laws",
+   "Coulomb's law",
+   "Newton's laws of motion"
+  ],
+  "answer": 0,
+  "explain": "Accelerated charges radiate classically; Bohr simply postulated no radiation in stationary orbits.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "20237f0c-607c-4e54-bb17-10599bcd4900",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Quantum mechanics replaces Bohr's definite orbit by:",
+  "formula": "",
+  "options": [
+   "Elliptical orbit",
+   "Fixed shell of radius n²a₀",
+   "Probability density |ψ|² (orbital)",
+   "Circular standing ring"
+  ],
+  "answer": 2,
+  "explain": "Electron position is described only by probability, not a path.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "004a338d-e20d-41a9-998f-d57ebc4261f9",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "Bohr radius a₀ in SI constants (ε₀, h, m, e) is given by:",
+  "formula": "a₀ = ε₀h²/(πme²)",
+  "options": [
+   "ε₀h/(2πme²)",
+   "ε₀h²/(πm²e)",
+   "ε₀h²/(πme²)",
+   "h²/(4π²ε₀me²)"
+  ],
+  "answer": 2,
+  "explain": "From mv²/r = e²/(4πε₀r²) with mvr = nh/2π, n=1 gives a₀ = ε₀h²/(πme²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "93bf5dab-2b3f-4cff-8f93-66008d05d0b6",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "For a given H-like ion, the Bohr orbit radius varies with angular momentum L of the electron as:",
+  "formula": "r ∝ L²",
+  "options": [
+   "r ∝ L",
+   "r ∝ L²",
+   "r ∝ 1/L²",
+   "r ∝ 1/L"
+  ],
+  "answer": 1,
+  "explain": "L = nh/2π and r ∝ n², so r ∝ L².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "13b4a682-a4f1-49e9-8cbf-1ca72e7e3a7c",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "At fixed Z, the Coulomb force on the electron in the nth Bohr orbit varies with n as:",
+  "formula": "F ∝ 1/r² ∝ 1/n⁴",
+  "options": [
+   "n²",
+   "1/n²",
+   "1/n³",
+   "1/n⁴"
+  ],
+  "answer": 3,
+  "explain": "F = kZe²/r² and r ∝ n², so F ∝ 1/n⁴.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d132003b-359a-4013-a34a-95c47b5db859",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "In Bohr's theory, the allowed orbit radii of the electron in hydrogen are:",
+  "formula": "",
+  "options": [
+   "Continuous, any value",
+   "Independent of n",
+   "Equally spaced",
+   "Discrete, from quantised angular momentum"
+  ],
+  "answer": 3,
+  "explain": "mvr = nh/2π restricts the orbits to discrete radii rₙ ∝ n².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d98a4700-af5d-4207-a3ab-05d1d5051ded",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "H atoms are excited to n = 5. How many different spectral series appear in emission?",
+  "formula": "",
+  "options": [
+   "10",
+   "5",
+   "3",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "Final levels 1, 2, 3, 4 give Lyman, Balmer, Paschen and Brackett, so n−1 = 4 series.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "031ca993-197f-4843-84b9-c75152bff526",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "Atomic H gas at room temperature absorbs light. Absorption lines belong to which series?",
+  "formula": "",
+  "options": [
+   "Lyman only",
+   "Lyman and Balmer",
+   "Paschen only",
+   "Balmer only"
+  ],
+  "answer": 0,
+  "explain": "Nearly all atoms are in n = 1, so absorption starts from n = 1 and gives only Lyman lines.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9bda59c9-bbac-4375-b39c-9255980ae7fd",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Number of spectral lines n(n-1)/2",
+  "prompt": "H atoms are excited to n = 6. How many emitted lines fall in the visible region (Balmer lines)?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "6",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "Visible lines are 6→2, 5→2, 4→2 and 3→2, which makes 4 lines.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f85b5cb-6560-4cbc-b92c-90758b7aa07a",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Angular momentum quantization & de Broglie view",
+  "prompt": "Ground-state de Broglie wavelength of the electron in He⁺ compared with that in H is:",
+  "formula": "λ = 2πrₙ/n, rₙ ∝ n²/Z",
+  "options": [
+   "Half",
+   "Double",
+   "Same",
+   "One-fourth"
+  ],
+  "answer": 0,
+  "explain": "For n = 1, λ = 2πr₁ and r₁ ∝ 1/Z. So for Z = 2, λ is half that of H.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2e1f46ea-8a79-454c-9d7d-6ccc9ae94061",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "The Bohr radius of hydrogen varies with the electron/proton charge magnitude e as:",
+  "formula": "a₀ = ε₀h²/(πme²)",
+  "options": [
+   "a₀ ∝ 1/e²",
+   "a₀ ∝ e²",
+   "a₀ ∝ e",
+   "a₀ ∝ 1/e"
+  ],
+  "answer": 0,
+  "explain": "e appears as e² in the denominator of a₀, so a₀ ∝ 1/e².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5456f1ec-aae4-4663-92f8-147b71491193",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "Hydrogen electron has potential energy −6.8 eV. Its Bohr orbit radius is:",
+  "formula": "U = 2E, E = −13.6/n² eV",
+  "options": [
+   "9a₀",
+   "2a₀",
+   "a₀",
+   "4a₀"
+  ],
+  "answer": 3,
+  "explain": "U = 2E gives E = −3.4 eV, so n = 2 and r = 4a₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9b4a7eb6-1efd-43f3-b0a3-84cab82f775c",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rutherford nuclear model & its limitations",
+  "prompt": "By classical physics, an electron spiralling into the nucleus would emit radiation with what spectrum?",
+  "formula": "",
+  "options": [
+   "Continuous spectrum",
+   "No radiation, only absorption",
+   "Single line at Lyman limit",
+   "Discrete line spectrum"
+  ],
+  "answer": 0,
+  "explain": "Orbit shrinks continuously, so orbital and radiated frequency change continuously, giving a continuous spectrum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac780dc5-5cfd-45f2-a851-479cfb0b203b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rutherford nuclear model & its limitations",
+  "prompt": "Thomson's plum-pudding model failed because it could not account for which α-scattering result?",
+  "formula": "",
+  "options": [
+   "Large-angle scattering of α-particles",
+   "Scattering only at small angles",
+   "Slight energy loss in the foil",
+   "Absorption of α-particles by foil"
+  ],
+  "answer": 0,
+  "explain": "Diffuse positive charge gives only small deflections; Rutherford saw large-angle scattering, needing a compact nucleus.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a263c7ad-9731-45cd-b052-e18dd4c8b643",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Impact parameter & scattering angle",
+  "prompt": "The trajectory of an α-particle scattered by a gold nucleus in Rutherford's analysis is a:",
+  "formula": "",
+  "options": [
+   "Ellipse",
+   "Hyperbola",
+   "Parabola",
+   "Circle"
+  ],
+  "answer": 1,
+  "explain": "Repulsive inverse-square force with E > 0 gives a hyperbolic path with the nucleus at the outer focus.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ee00000-62d0-4dcf-b29a-420223c4ba0b",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Impact parameter & scattering angle",
+  "prompt": "For an α-particle of KE K and distance of closest approach r₀, scattering by 90° occurs at b equal to:",
+  "formula": "b = (r₀/2)·cot(θ/2)",
+  "options": [
+   "r₀/4",
+   "r₀",
+   "2r₀",
+   "r₀/2"
+  ],
+  "answer": 3,
+  "explain": "At θ = 90°, cot45° = 1, so b = r₀/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cf030a6a-0e63-4092-b951-ded473abaa4c",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Impact parameter & scattering angle",
+  "prompt": "At a fixed scattering angle, the number of α-particles scattered in Rutherford's experiment varies with KE as:",
+  "formula": "N ∝ Z²/K²",
+  "options": [
+   "1/K",
+   "K",
+   "K²",
+   "1/K²"
+  ],
+  "answer": 3,
+  "explain": "Rutherford's formula: N(θ) ∝ 1/(K² sin⁴(θ/2)).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f0db59f9-7f76-4ab2-b89b-0ce5203b7462",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Impact parameter & scattering angle",
+  "prompt": "During α-scattering, which quantity about the nucleus equals m·v·b and stays conserved?",
+  "formula": "L = m v b",
+  "options": [
+   "Angular momentum of α",
+   "Linear momentum of α",
+   "Kinetic energy of α",
+   "Potential energy of α"
+  ],
+  "answer": 0,
+  "explain": "Coulomb force is central, so angular momentum about the nucleus is conserved; initially L = m v b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cf663013-1ff1-40db-bc7c-1f80db7853a6",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "For the revolving electron in any Bohr orbit, the ratio of magnetic moment to orbital angular momentum is",
+  "formula": "μ/L = e/2m",
+  "options": [
+   "e/2m",
+   "2e/m",
+   "e/4πm",
+   "e/m"
+  ],
+  "answer": 0,
+  "explain": "μ = IA = (ev/2πr)(πr²) = evr/2 = (e/2m)(mvr), so μ/L = e/2m for every orbit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c74cd8f6-4bdc-4e33-aca3-69cbd38d5b6e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Bohr's postulates",
+  "prompt": "The magnetic moment of the electron in the first Bohr orbit of hydrogen (Bohr magneton) is nearest to",
+  "formula": "μ_B = eh/4πm",
+  "options": [
+   "5.05×10⁻²⁷ A m²",
+   "9.27×10⁻²⁷ A m²",
+   "1.05×10⁻³⁴ A m²",
+   "9.27×10⁻²⁴ A m²"
+  ],
+  "answer": 3,
+  "explain": "μ_B = eh/4πm ≈ 9.27×10⁻²⁴ A m²; 5.05×10⁻²⁷ is the nuclear magneton.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47796f51-afad-4339-8f38-734608c31f43",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Angular momentum quantization & de Broglie view",
+  "prompt": "In a hydrogen-like atom, total energy Eₙ varies with the electron's angular momentum L as:",
+  "formula": "",
+  "options": [
+   "Eₙ ∝ −1/L",
+   "Eₙ ∝ −L",
+   "Eₙ ∝ −L²",
+   "Eₙ ∝ −1/L²"
+  ],
+  "answer": 3,
+  "explain": "Eₙ ∝ −1/n² and L = nħ, so Eₙ ∝ −1/L².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3bb58d29-7129-48a3-9592-67e76691893e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Radius of Bohr orbits (r ∝ n²/Z)",
+  "prompt": "Electron speed in a hydrogen orbit is 1/3 of its ground-state speed. The orbit radius is:",
+  "formula": "v ∝ 1/n, r ∝ n²",
+  "options": [
+   "3a₀",
+   "a₀/9",
+   "9a₀",
+   "27a₀"
+  ],
+  "answer": 2,
+  "explain": "v ∝ 1/n gives n = 3, so r = 9a₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "202c0fd7-b3d5-4163-a91b-c185123cf730",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "At fixed Z, the time period of the electron in a Bohr orbit varies with orbit radius r as:",
+  "formula": "T = 2πr/v, v ∝ r^(−1/2)",
+  "options": [
+   "T ∝ r",
+   "T ∝ r^(1/2)",
+   "T ∝ r²",
+   "T ∝ r^(3/2)"
+  ],
+  "answer": 3,
+  "explain": "v ∝ 1/√r, so T = 2πr/v ∝ r^(3/2), like Kepler's law T² ∝ r³.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e147a77c-477c-4f1e-a2f2-2611d1171c03",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "At fixed Z, centripetal acceleration v²/r of the electron in the nth Bohr orbit varies as:",
+  "formula": "a = v²/r",
+  "options": [
+   "n⁻⁴",
+   "n⁻³",
+   "n⁻²",
+   "n⁻⁶"
+  ],
+  "answer": 0,
+  "explain": "v² ∝ 1/n² and r ∝ n², so a = v²/r ∝ n⁻⁴.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8442beb6-10c0-41e1-9ccb-301d311e4718",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Electron speed, time period, frequency in orbit",
+  "prompt": "Ratio of orbital frequency of electron in He⁺ (n = 2) to that in H (n = 1) is:",
+  "formula": "f ∝ Z²/n³",
+  "options": [
+   "1 : 4",
+   "2 : 1",
+   "4 : 1",
+   "1 : 2"
+  ],
+  "answer": 3,
+  "explain": "f ∝ Z²/n³ gives 4/8 : 1 = 1 : 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ee9ba442-b27e-4cf1-8c16-9626d0c15c9e",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Energy levels: KE, PE, total energy",
+  "prompt": "An H-atom electron jumps from n=2 to n=4. How do its KE, PE and total energy change?",
+  "formula": "KE = 13.6/n², PE = −27.2/n²",
+  "options": [
+   "KE increases, PE increases, total increases",
+   "KE decreases, PE increases, total increases",
+   "KE decreases, PE decreases, total decreases",
+   "KE increases, PE decreases, total increases"
+  ],
+  "answer": 1,
+  "explain": "KE ∝ 1/n² falls, PE = −2KE rises (less negative), total E = −KE rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8eb7e138-4b82-41b0-9ad6-84eecd0a8ecf",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Longest wavelength in the Brackett series of hydrogen is (R = Rydberg constant)",
+  "formula": "1/λ = R(1/4² − 1/5²)",
+  "options": [
+   "400/(9R)",
+   "144/(7R)",
+   "16/R",
+   "900/(11R)"
+  ],
+  "answer": 0,
+  "explain": "n=5→4: 1/16−1/25 = 9/400, so λ = 400/(9R).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "49f69696-d19b-4fac-8d6b-c8dedaece5cd",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Longest wavelength in the Pfund series of hydrogen is (R = Rydberg constant)",
+  "formula": "1/λ = R(1/5² − 1/6²)",
+  "options": [
+   "400/(9R)",
+   "900/(11R)",
+   "36/(5R)",
+   "25/R"
+  ],
+  "answer": 1,
+  "explain": "n=6→5: 1/25−1/36 = 11/900, so λ = 900/(11R).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c854494-f166-4658-ad34-98bb5b142130",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "The wavelength of the Hβ line (n=4→2) of hydrogen in terms of R is",
+  "formula": "1/λ = R(1/2² − 1/4²)",
+  "options": [
+   "36/(5R)",
+   "16/(3R)",
+   "3/(16R)",
+   "4/(3R)"
+  ],
+  "answer": 1,
+  "explain": "1/4−1/16 = 3/16, so λ = 16/(3R) ≈ 4861 Å.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "03427076-7b67-45cc-806c-e56ef972a610",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "The wavelength of the series limit of the Brackett series of hydrogen is",
+  "formula": "",
+  "options": [
+   "9/R",
+   "16/R",
+   "25/R",
+   "4/R"
+  ],
+  "answer": 1,
+  "explain": "Limit is n=∞→4: 1/λ = R/16, so λ = 16/R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd9c313d-198a-452c-bf80-fd763bed1461",
+  "subject": "Physics",
+  "chapter": "Atoms",
+  "topic": "Rydberg formula & emitted photon wavelength",
+  "prompt": "Ratio of longest wavelength in Lyman series to longest wavelength in Balmer series of H is",
+  "formula": "",
+  "options": [
+   "1 : 4",
+   "5 : 27",
+   "3 : 4",
+   "27 : 5"
+  ],
+  "answer": 1,
+  "explain": "(4/3R) ÷ (36/5R) = 20/108 = 5/27.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

@@ -1,1446 +1,3086 @@
 [
-  {
-    "id": "1f0583ae-a181-44fc-afb5-4fbc876f3f29",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations",
-    "prompt": "Number of ways to arrange n distinct objects in a row",
-    "formula": "n!",
-    "options": [
-      "n(n-1)",
-      "n!",
-      "2ⁿ",
-      "n²"
-    ],
-    "answer": 1,
-    "explain": "Linear arrangement of n distinct objects = n! (fundamental counting principle).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "208a76bd-28b2-47a2-9d3c-59d526e43493",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Combinations",
-    "prompt": "ⁿCᵣ equals",
-    "formula": "ⁿCᵣ = n!/(r!(n−r)!)",
-    "options": [
-      "n!·r!",
-      "r!/n!",
-      "n!/(n−r)!",
-      "n!/(r!(n−r)!)"
-    ],
-    "answer": 3,
-    "explain": "ⁿCᵣ counts unordered selections; divides ⁿPᵣ by r! to remove order.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "38ae5b12-2377-4245-b0e0-4bd42443b7ab",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Relation between ⁿPᵣ and ⁿCᵣ",
-    "formula": "ⁿPᵣ = r! · ⁿCᵣ",
-    "options": [
-      "ⁿPᵣ = n! · ⁿCᵣ",
-      "ⁿPᵣ = r! · ⁿCᵣ",
-      "ⁿPᵣ = ⁿCᵣ / r!",
-      "ⁿPᵣ = (n−r)! · ⁿCᵣ"
-    ],
-    "answer": 1,
-    "explain": "Arranging a combination of r objects gives r! permutations, so ⁿPᵣ = r!·ⁿCᵣ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd8a386a-dd47-4cd2-95ae-f7a475b5d9ac",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Combinations",
-    "prompt": "Value of ⁿC₀ + ⁿC₁ + ... + ⁿCₙ",
-    "formula": "Σⁿ Cᵣ = 2ⁿ",
-    "options": [
-      "n²",
-      "2ⁿ",
-      "2n",
-      "n!"
-    ],
-    "answer": 1,
-    "explain": "Sum of all binomial coefficients = 2ⁿ (set (1+1)ⁿ in binomial theorem).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1715462e-3d55-4216-969d-37d819e432a4",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Combinations",
-    "prompt": "ⁿCᵣ = ⁿCₛ implies (r ≠ s)",
-    "formula": "r + s = n",
-    "options": [
-      "r + s = n",
-      "r = s only",
-      "r − s = n",
-      "r · s = n"
-    ],
-    "answer": 0,
-    "explain": "ⁿCᵣ = ⁿC_{n−r}, so if r ≠ s and ⁿCᵣ = ⁿCₛ then r + s = n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c507be89-b508-4255-9351-2e3563054e93",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Circular Permutations",
-    "prompt": "Number of circular arrangements of n distinct objects",
-    "formula": "(n−1)!",
-    "options": [
-      "n!",
-      "n!/2",
-      "2(n−1)!",
-      "(n−1)!"
-    ],
-    "answer": 3,
-    "explain": "One object fixed to remove rotational equivalence; remaining (n−1) arranged in (n−1)!.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7c180c2a-5b0a-4dc8-9f64-30d97ce53764",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Circular Permutations",
-    "prompt": "Circular arrangements of n objects (necklace, flipping allowed)",
-    "formula": "(n−1)!/2",
-    "options": [
-      "(n−1)!/2",
-      "n!/2",
-      "n!",
-      "(n−1)!"
-    ],
-    "answer": 0,
-    "explain": "Necklace: clockwise and anticlockwise identical, so divide circular perms by 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ad4f8fea-a5cc-46cc-8feb-956f026b9522",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations with Repetition",
-    "prompt": "Arrangements of n objects with p alike, q alike, rest distinct",
-    "formula": "n!/(p!·q!)",
-    "options": [
-      "n!/p!",
-      "n!/(p!·q!)",
-      "ⁿPₚ·ⁿPq",
-      "n!/(p+q)!"
-    ],
-    "answer": 1,
-    "explain": "Repeated objects reduce arrangements: divide n! by factorials of each repetition count.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cdab69da-900a-476a-8bda-ae3bc85ce81d",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Combinations",
-    "prompt": "Number of ways to select at least one object from n distinct objects",
-    "formula": "2ⁿ − 1",
-    "options": [
-      "n·2ⁿ⁻¹",
-      "2ⁿ",
-      "n!",
-      "2ⁿ − 1"
-    ],
-    "answer": 3,
-    "explain": "Each object included or not → 2ⁿ subsets; exclude empty set → 2ⁿ − 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f67695b5-2c02-49a1-b4a4-566d1202f55c",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Combinations",
-    "prompt": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₋₁ =",
-    "formula": "ⁿ⁺¹Cᵣ",
-    "options": [
-      "ⁿ⁺¹Cᵣ₊₁",
-      "2·ⁿCᵣ",
-      "ⁿ⁺¹Cᵣ",
-      "ⁿCᵣ₊₁"
-    ],
-    "answer": 2,
-    "explain": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₋₁ = ⁿ⁺¹Cᵣ, fundamental in combinatorics.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ada3cd16-2f6b-4e37-9398-370b6daad526",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Applications of Combinations",
-    "prompt": "Number of diagonals in a convex polygon of n sides",
-    "formula": "n(n−3)/2",
-    "options": [
-      "n(n−2)/2",
-      "n(n−1)/2",
-      "ⁿC₂",
-      "n(n−3)/2"
-    ],
-    "answer": 3,
-    "explain": "Total lines from n vertices = ⁿC₂; subtract n sides → ⁿC₂ − n = n(n−3)/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e9174276-0571-4dab-a33b-1a149a68e6d1",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Applications of Combinations",
-    "prompt": "Number of triangles from n points, no 3 collinear",
-    "formula": "ⁿC₃",
-    "options": [
-      "n(n−1)(n−2)",
-      "ⁿP₃",
-      "ⁿC₃",
-      "ⁿC₂"
-    ],
-    "answer": 2,
-    "explain": "Any 3 non-collinear points form a unique triangle, so answer = ⁿC₃.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2b744b8-9ca7-479f-b9cf-77ca4a2396a8",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Distribution",
-    "prompt": "Distributing n distinct objects into r distinct groups (empty allowed)",
-    "formula": "rⁿ",
-    "options": [
-      "ⁿCᵣ",
-      "r!·ⁿCᵣ",
-      "rⁿ",
-      "nʳ"
-    ],
-    "answer": 2,
-    "explain": "Each of the n objects can go into any of the r groups independently → rⁿ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d9c7eb5b-296b-42b3-8272-d7439fed7969",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations with Repetition",
-    "prompt": "Number of ways to arrange r objects from n with repetition allowed",
-    "formula": "nʳ",
-    "options": [
-      "ⁿPᵣ",
-      "n!/(n−r)!",
-      "nʳ",
-      "ⁿCᵣ·r!"
-    ],
-    "answer": 2,
-    "explain": "Each position has n choices independently when repetition allowed → nʳ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "03b77cb5-1bf3-4540-b056-63701acff2f2",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Derangements",
-    "prompt": "Dearrangement (derangement) of n objects: Dₙ =",
-    "formula": "n!·Σ(−1)ᵏ/k!, k=0 to n",
-    "options": [
-      "n!−1",
-      "(n−1)!",
-      "n!/(n−1)",
-      "n!Σ(−1)ᵏ/k! (k=0 to n)"
-    ],
-    "answer": 3,
-    "explain": "Dₙ = n!(1−1/1!+1/2!−...+(−1)ⁿ/n!): no object in its original place.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "90340f3c-4063-469c-a71a-6f7ae9bab112",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Stars and Bars",
-    "prompt": "Number of non-negative integer solutions to x₁+x₂+...+xᵣ = n",
-    "formula": "ⁿ⁺ʳ⁻¹Cᵣ₋₁",
-    "options": [
-      "ⁿCᵣ",
-      "ⁿ⁺ʳ⁻¹Cᵣ₋₁",
-      "ⁿ⁻¹Cᵣ₋₁",
-      "ⁿ⁺ʳCᵣ"
-    ],
-    "answer": 1,
-    "explain": "Stars and bars: distributing n identical into r distinct bins = ⁿ⁺ʳ⁻¹Cᵣ₋₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f4d9a76d-2261-4bfe-8bf7-ec4c3b296da7",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Stars and Bars",
-    "prompt": "Number of positive integer solutions to x₁+x₂+...+xᵣ = n",
-    "formula": "ⁿ⁻¹Cᵣ₋₁",
-    "options": [
-      "ⁿCᵣ",
-      "ⁿ⁻¹Cᵣ",
-      "ⁿ⁻¹Cᵣ₋₁",
-      "ⁿ⁺ʳ⁻¹Cᵣ₋₁"
-    ],
-    "answer": 2,
-    "explain": "Substitute yᵢ = xᵢ−1 (yᵢ≥0), reduces to non-negative with sum n−r → ⁿ⁻¹Cᵣ₋₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "22afb679-056a-4c48-81f0-6a6106db6204",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Combinations",
-    "prompt": "The value of ⁿCᵣ is maximum when (n even)",
-    "formula": "r = n/2",
-    "options": [
-      "r = n/2",
-      "r = n−1",
-      "r = n",
-      "r = 1"
-    ],
-    "answer": 0,
-    "explain": "Binomial coefficients are symmetric and peak at middle: r = n/2 for even n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "441f44cb-1a6a-4797-8210-2f039f15bb98",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Division into Groups",
-    "prompt": "Number of ways to divide 2n distinct objects into two equal groups",
-    "formula": "(2n)!/(2·(n!)²)",
-    "options": [
-      "(2n)!/(n!)²",
-      "²ⁿCₙ",
-      "(2n)!/n!",
-      "(2n)!/(2·(n!)²)"
-    ],
-    "answer": 3,
-    "explain": "²ⁿCₙ divided by 2! since the two groups are indistinguishable = (2n)!/(2·(n!)²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "712fef9b-c597-45e8-9190-f8fffe2d963e",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Applications of Combinations",
-    "prompt": "Number of straight lines from n points, m collinear (rest non-collinear)",
-    "formula": "ⁿC₂ − ᵐC₂ + 1",
-    "options": [
-      "ⁿC₂ − ᵐC₂ + 1",
-      "ⁿC₂ − m + 1",
-      "ⁿC₂ − ᵐC₂",
-      "ⁿC₂"
-    ],
-    "answer": 0,
-    "explain": "Replace ᵐC₂ collinear pairs (give 1 line, not ᵐC₂ lines) → ⁿC₂ − ᵐC₂ + 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eca07788-f6d2-42ab-8d02-f4ea8961cb55",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Rank of a Word",
-    "prompt": "Rank of a word in dictionary: position depends on",
-    "formula": "",
-    "options": [
-      "Number of vowels",
-      "Lexicographic order of letters",
-      "Alphabetical sum of letters",
-      "Length of the word"
-    ],
-    "answer": 1,
-    "explain": "Dictionary rank uses lexicographic (alphabetical) ordering of all permutations.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e7484bf3-6651-4504-8d75-f2aca54f7f88",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Factorials and Primes",
-    "prompt": "Exponent of prime p in n! is given by (Legendre's formula)",
-    "formula": "Σ⌊n/pᵏ⌋, k=1,2,...",
-    "options": [
-      "⌊n/p⌋",
-      "n! / p",
-      "Σ⌊n/pᵏ⌋ for k=1,2,…",
-      "n/p"
-    ],
-    "answer": 2,
-    "explain": "Legendre: power of prime p in n! = ⌊n/p⌋+⌊n/p²⌋+⌊n/p³⌋+… (finite sum).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7446ca5e-ee05-46eb-b9de-77908b5c69b3",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to distribute n identical objects into r distinct bins (empty allowed)?",
-    "formula": "C(n+r-1, r-1)",
-    "options": [
-      "C(n+r, r)",
-      "C(n-1, r-1)",
-      "C(n+r-1, r-1)",
-      "rⁿ"
-    ],
-    "answer": 2,
-    "explain": "Stars and bars: identical objects into distinct bins with zero allowed uses C(n+r-1,r-1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36461da7-95ec-4945-a521-f338aebb2389",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to distribute n identical objects into r bins with each bin having ≥1?",
-    "formula": "C(n-1, r-1)",
-    "options": [
-      "C(n-1, r-1)",
-      "C(n, r)",
-      "C(n-1, r)",
-      "C(n+r-1, r-1)"
-    ],
-    "answer": 0,
-    "explain": "Stars and bars with each bin ≥1: place dividers among n-1 gaps, giving C(n-1,r-1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3666e8c3-930b-44bf-ac3d-9e804f92f395",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to select r objects from n distinct objects with repetition allowed?",
-    "formula": "C(n+r-1, r)",
-    "options": [
-      "C(n+r, r)",
-      "C(n, r)",
-      "C(n+r-1, r)",
-      "nʳ"
-    ],
-    "answer": 2,
-    "explain": "Selection with repetition (combination with repetition) equals C(n+r-1, r).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "94cbe0a7-bc68-4eff-a1c5-dd8644062312",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Sum of all r-digit numbers formed by n distinct non-zero digits (no repetition)?",
-    "formula": "(n-1)P(r-1) · (sum of digits) · 111…1 (r ones)",
-    "options": [
-      "nCr·(Σdigits)·R_r",
-      "(n-1)P(r-1)·(Σdigits)·R_r",
-      "(n-1)Cr·(Σdigits)·R_r",
-      "nPr·(Σdigits)·R_r"
-    ],
-    "answer": 1,
-    "explain": "Each digit appears (n-1)P(r-1) times in each position; multiply by repunit R_r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "74212630-fbeb-451c-b99f-9918c09c1919",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of subsets of an n-element set (including empty set)?",
-    "formula": "2ⁿ",
-    "options": [
-      "n!",
-      "2ⁿ - 1",
-      "2ⁿ - 2",
-      "2ⁿ"
-    ],
-    "answer": 3,
-    "explain": "Each element is either included or not, giving 2ⁿ total subsets including the empty set.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c1034206-6349-47c1-b26f-7c4a10bc04b3",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to divide 3n distinct objects into 3 equal groups (groups unlabelled)?",
-    "formula": "(3n)! / (n!)³·3!",
-    "options": [
-      "(3n)!/((n!)³·3!)",
-      "(3n)!/(n!)³",
-      "C(3n,n)·C(2n,n)",
-      "(3n)!/(3·n!)"
-    ],
-    "answer": 0,
-    "explain": "Divide by 3! since the three groups are identical (unlabelled); labelled groups omit the 3!.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0e61729c-00a2-492d-b2b0-1e48c50c5ebf",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to form a committee of r from n where two specific persons are ALWAYS included?",
-    "formula": "C(n-2, r-2)",
-    "options": [
-      "C(n-1, r-1)",
-      "C(n-2, r-2)",
-      "C(n-2, r)",
-      "C(n, r-2)"
-    ],
-    "answer": 1,
-    "explain": "Fix the 2 specific persons; choose remaining r-2 from the other n-2 persons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "878e1c9f-7b4f-460c-8e2c-2e462af62340",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to form a committee of r from n where two specific persons are NEVER together?",
-    "formula": "C(n,r) - C(n-2,r-2)",
-    "options": [
-      "C(n,r) - C(n-2,r)",
-      "C(n-1,r-1)",
-      "C(n,r) - C(n-2,r-2)",
-      "C(n-2,r)"
-    ],
-    "answer": 2,
-    "explain": "Total committees minus those containing both specific persons: C(n,r) - C(n-2,r-2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "07067307-11ac-42f1-af91-f5dd97a10ad9",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to arrange n persons in a row so that two specific persons are always adjacent?",
-    "formula": "2·(n-1)!",
-    "options": [
-      "(n-1)!",
-      "2·(n-1)!",
-      "2·(n-2)!",
-      "n!/2"
-    ],
-    "answer": 1,
-    "explain": "Treat the pair as one unit: (n-1)! arrangements × 2 internal arrangements.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6b50c335-5e8b-4695-ab48-689aa5b95c40",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of rectangles in an m×n grid of lines (m horizontal, n vertical)?",
-    "formula": "C(m,2)·C(n,2)",
-    "options": [
-      "C(m+1,2)·C(n+1,2)",
-      "C(m,2)·C(n,2)",
-      "C(m,2)+C(n,2)",
-      "m·n·(m-1)·(n-1)/4"
-    ],
-    "answer": 1,
-    "explain": "Choose 2 horizontal lines and 2 vertical lines from m and n lines respectively.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96fa476e-0b52-4cfd-aeb4-0528b0945358",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of squares in an n×n grid (with unit squares)?",
-    "formula": "Σk²  (k=1 to n) = n(n+1)(2n+1)/6",
-    "options": [
-      "n³/3",
-      "n(n+1)/2",
-      "n(n+1)(2n+1)/6",
-      "n²(n+1)²/4"
-    ],
-    "answer": 2,
-    "explain": "Squares of size k×k: (n-k+1)² each; summing gives n(n+1)(2n+1)/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3eab0bd7-58c7-4b2c-ad8d-ef1523627daf",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to seat n boys and n girls alternately in a CIRCLE?",
-    "formula": "(n-1)!·n!",
-    "options": [
-      "(n-1)!·n!",
-      "n!·n!",
-      "(2n-1)!",
-      "2·(n-1)!·n!"
-    ],
-    "answer": 0,
-    "explain": "Fix boys in circle: (n-1)! ways; arrange n girls in the n gaps: n! ways.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0e6ee529-1e90-424a-8b4e-3727990739b5",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Value of ⁿC₀ - ⁿC₁ + ⁿC₂ - ... + (-1)ⁿ·ⁿCₙ equals?",
-    "formula": "0",
-    "options": [
-      "2ⁿ",
-      "0",
-      "1",
-      "2ⁿ⁻¹"
-    ],
-    "answer": 1,
-    "explain": "Setting x = -1 in (1+x)ⁿ gives alternating sum of binomial coefficients = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "51ceb738-2894-4719-a72f-5ce5c05b5b9c",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "ⁿC₀² + ⁿC₁² + ⁿC₂² + ... + ⁿCₙ² equals?",
-    "formula": "²ⁿCₙ",
-    "options": [
-      "4ⁿ",
-      "2ⁿ",
-      "2·²ⁿCₙ",
-      "²ⁿCₙ"
-    ],
-    "answer": 3,
-    "explain": "Coefficient of xⁿ in (1+x)ⁿ·(1+x)ⁿ = (1+x)²ⁿ gives sum of squares = ²ⁿCₙ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96117007-a102-4d7a-a586-3a21969771f4",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "r·ⁿCᵣ equals which simpler expression?",
-    "formula": "n·ⁿ⁻¹Cᵣ₋₁",
-    "options": [
-      "n·ⁿ⁻¹Cᵣ₋₁",
-      "(n-r)·ⁿCᵣ₋₁",
-      "r·ⁿ⁻¹Cᵣ",
-      "n·ⁿ⁻¹Cᵣ"
-    ],
-    "answer": 0,
-    "explain": "r·C(n,r) = r·n!/(r!(n-r)!) = n·(n-1)!/((r-1)!(n-r)!) = n·C(n-1,r-1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "04d5251d-8a3d-401d-be58-7eb05794f77b",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to choose a team of 11 from 15 players where captain is always chosen?",
-    "formula": "C(14,10)",
-    "options": [
-      "C(15,11)",
-      "C(13,10)",
-      "C(14,10)",
-      "C(14,11)"
-    ],
-    "answer": 2,
-    "explain": "Captain is fixed; choose remaining 10 from the other 14 players: C(14,10).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6c487052-bc9f-4efe-aabe-9700ee2e74bf",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to select at least 1 from p identical items of type A and q identical of type B?",
-    "formula": "(p+1)(q+1) - 1",
-    "options": [
-      "(p+1)(q+1) - 1",
-      "pq",
-      "2^(p+q) - 1",
-      "(p+1)(q+1)"
-    ],
-    "answer": 0,
-    "explain": "Each type has (type+1) choices (0 to max); subtract the all-zero (none selected) case.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "22953af2-3dba-4545-9fea-63e11498c6bf",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to arrange letters of MISSISSIPPI?",
-    "formula": "11!/(4!·4!·2!)",
-    "options": [
-      "11!/(4!·4!)",
-      "11!/(4!·4!·2!)",
-      "11!/4!·2!",
-      "11!/(2!·4!)"
-    ],
-    "answer": 1,
-    "explain": "MISSISSIPPI: 1M, 4I, 4S, 2P → 11!/(4!·4!·2!) arrangements.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "42205230-9793-469a-bde6-fd1928a691dd",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "The number of permutations of n distinct things taken all at a time is denoted nPn and equals?",
-    "formula": "n!",
-    "options": [
-      "(n-1)!",
-      "2ⁿ",
-      "n·(n-1)",
-      "n!"
-    ],
-    "answer": 3,
-    "explain": "ⁿPₙ = n!/(n-n)! = n!/0! = n! since 0! = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a4713977-ccb8-4d71-922e-edaced9472eb",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to make a garland with n distinct flowers (flipping considered same)?",
-    "formula": "(n-1)!/2",
-    "options": [
-      "(n-1)!",
-      "(n-1)!/2",
-      "n!",
-      "n!/2"
-    ],
-    "answer": 1,
-    "explain": "Circular: (n-1)!; garland can be flipped (mirror = same), so divide by 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1f8156b9-7f39-4e18-a64f-4d5189259db3",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of triangles formed from n points on a circle (no 3 collinear)?",
-    "formula": "C(n,3)",
-    "options": [
-      "C(n,3)",
-      "n(n-1)(n-2)",
-      "C(n,3) - n",
-      "C(n,2)"
-    ],
-    "answer": 0,
-    "explain": "Any 3 points on a circle form a unique triangle; total = C(n,3).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1eb2a22f-d8dc-4d11-8beb-d2165a3227bd",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to select r from n where one SPECIFIC person is EXCLUDED?",
-    "formula": "ⁿ⁻¹Cᵣ",
-    "options": [
-      "ⁿCᵣ - ⁿ⁻¹Cᵣ₋₁",
-      "ⁿ⁻¹Cᵣ",
-      "ⁿCᵣ - 1",
-      "ⁿ⁻¹Cᵣ₋₁"
-    ],
-    "answer": 1,
-    "explain": "Exclude that person; choose r from remaining n−1 persons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "73f01986-57b5-40ed-91d6-29593a76b1e3",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to arrange n distinct books on a shelf so 3 specific books are TOGETHER?",
-    "formula": "(n-2)! · 3!",
-    "options": [
-      "(n−1)!·3!",
-      "(n−3)!·3!",
-      "(n−2)!·3!",
-      "(n−2)!·(n−3)!"
-    ],
-    "answer": 2,
-    "explain": "Treat 3 books as one block → (n−2)! arrangements × 3! internal arrangements.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d4843347-2255-489b-a148-1a53f52d59c5",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "ⁿCᵣ + ⁿCᵣ₊₁ = ?",
-    "formula": "ⁿ⁺¹Cᵣ₊₁",
-    "options": [
-      "ⁿ⁺¹Cᵣ₊₁",
-      "ⁿCᵣ₊₁ + 1",
-      "ⁿ⁺¹Cᵣ",
-      "²ⁿCᵣ"
-    ],
-    "answer": 0,
-    "explain": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₊₁ = ⁿ⁺¹Cᵣ₊₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b10e840a-c03e-43c0-8dab-784490c8802e",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to split n distinct objects into groups of p, q, r (p+q+r=n, all labelled)?",
-    "formula": "n!/(p!q!r!)",
-    "options": [
-      "ⁿCₚ·ⁿCq",
-      "n!/(p!+q!+r!)",
-      "n!/(p!q!r!)",
-      "n!/(p·q·r)"
-    ],
-    "answer": 2,
-    "explain": "Multinomial coefficient n!/(p!q!r!) counts divisions into labelled groups of sizes p,q,r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3d221d38-206f-4d31-9fc4-7ea90c68da90",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to choose at least 1 from n distinct objects?",
-    "formula": "2ⁿ − 1",
-    "options": [
-      "2ⁿ − 1",
-      "ⁿC₁ + ⁿC₂",
-      "n! − 1",
-      "2ⁿ"
-    ],
-    "answer": 0,
-    "explain": "Total subsets minus empty set = 2ⁿ − 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2355285b-e277-4779-a96d-73e89964c6e8",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of permutations of n things taken r at a time when each can repeat any number of times?",
-    "formula": "nʳ",
-    "options": [
-      "n·r",
-      "nʳ",
-      "ⁿCᵣ·r!",
-      "ⁿPᵣ"
-    ],
-    "answer": 1,
-    "explain": "With unlimited repetition, each of r positions has n choices → nʳ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "deff686e-70ea-49f4-af6c-c52b42908bcf",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Total number of factors of N = pᵃ·qᵇ·rᶜ (including 1 and N)?",
-    "formula": "(a+1)(b+1)(c+1)",
-    "options": [
-      "(a+1)(b+1)(c+1)",
-      "(a+b+c)!",
-      "abc+1",
-      "a·b·c"
-    ],
-    "answer": 0,
-    "explain": "Each prime contributes exponent choices 0 to its max; multiply counts.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "52123f6b-e437-4e87-83ae-587e374f1f24",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to arrange n objects in a circle with one object FIXED?",
-    "formula": "(n−1)!",
-    "options": [
-      "(n−1)!",
-      "(n−2)!",
-      "n!/2",
-      "n!"
-    ],
-    "answer": 0,
-    "explain": "Fixing one object removes rotational symmetry; remaining n−1 arranged in (n−1)! ways.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c2b1ed24-41e2-42ad-9ed5-a1a355ca9c74",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Sum ⁿC₁ + 2·ⁿC₂ + 3·ⁿC₃ + ... + n·ⁿCₙ equals?",
-    "formula": "n·2ⁿ⁻¹",
-    "options": [
-      "(n+1)·2ⁿ⁻¹",
-      "n·2ⁿ",
-      "n·2ⁿ⁻¹",
-      "2ⁿ − 1"
-    ],
-    "answer": 2,
-    "explain": "Using r·ⁿCᵣ = n·ⁿ⁻¹Cᵣ₋₁ and summing gives n·2ⁿ⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d3508ba0-2a31-49a9-a7a1-0b3a4b004f1b",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "ⁿCᵣ is symmetric: ⁿCᵣ = ?",
-    "formula": "ⁿCₙ₋ᵣ",
-    "options": [
-      "ⁿ⁺¹Cᵣ",
-      "ⁿ⁻¹Cᵣ",
-      "ⁿCᵣ₋₁",
-      "ⁿCₙ₋ᵣ"
-    ],
-    "answer": 3,
-    "explain": "Symmetry property: choosing r is same as leaving out n−r; ⁿCᵣ = ⁿCₙ₋ᵣ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d7dc20be-7ca5-416c-affa-503b995e8c50",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways 2 persons can be selected from n to SHAKE HANDS (unordered pair)?",
-    "formula": "ⁿC₂ = n(n−1)/2",
-    "options": [
-      "ⁿP₂",
-      "n(n−1)",
-      "n²",
-      "n(n−1)/2"
-    ],
-    "answer": 3,
-    "explain": "Order doesn't matter in a handshake; answer is ⁿC₂ = n(n−1)/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75b54c40-654f-43dd-8cb2-799922a50862",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to arrange the word 'ARRANGE' (7 letters, A×2, R×2)?",
-    "formula": "7!/(2!·2!)",
-    "options": [
-      "7!/(2!·2!·2!)",
-      "7!/(2!·2!)",
-      "7!/2!",
-      "7!/4!"
-    ],
-    "answer": 1,
-    "explain": "7 letters with A repeated twice and R repeated twice: 7!/(2!·2!) = 1260.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "05861407-3d6d-45d1-958b-9213907db7ef",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of onto functions from n-element set to 2-element set?",
-    "formula": "2ⁿ − 2",
-    "options": [
-      "2ⁿ − 2",
-      "2ⁿ",
-      "n² − 2",
-      "2ⁿ − 1"
-    ],
-    "answer": 0,
-    "explain": "Total 2ⁿ functions minus 2 constant (non-onto) functions gives 2ⁿ−2 surjections.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f1184468-d55f-44ea-a52d-41d1287fc72e",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "ⁿCᵣ · r! equals which expression?",
-    "formula": "ⁿPᵣ",
-    "options": [
-      "ⁿPᵣ",
-      "ⁿCᵣ · (n−r)!",
-      "n! / r!",
-      "ⁿCᵣ / r!"
-    ],
-    "answer": 0,
-    "explain": "ⁿPᵣ = n!/(n−r)! = ⁿCᵣ · r!, relating combinations and permutations.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ed1e3046-30f7-4c39-96ea-443085843afa",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "How many ways to arrange n distinct objects so that NONE is in its natural position?",
-    "formula": "Dₙ = n!·Σ(-1)ᵏ/k!",
-    "options": [
-      "n! − 1",
-      "(n−1)!",
-      "n! / 2",
-      "Derangement Dₙ"
-    ],
-    "answer": 3,
-    "explain": "Arrangements where no element appears in its original position are counted by derangements Dₙ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "efa96ebf-a205-4357-b2cd-ef8dca903e25",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "The number ⁿCᵣ is greatest when r = ? (n odd)",
-    "formula": "",
-    "options": [
-      "r = n−1",
-      "r = n/2",
-      "r = 1",
-      "r = (n−1)/2 or (n+1)/2"
-    ],
-    "answer": 3,
-    "explain": "For odd n, ⁿCᵣ is maximum at two middle values r=(n−1)/2 and r=(n+1)/2 (both equal).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f527591f-d885-4087-b0b2-60284a69266a",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to choose 2 items from n where ORDER matters but repetition NOT allowed?",
-    "formula": "n(n−1)",
-    "options": [
-      "n(n−1)",
-      "n²",
-      "ⁿC₂",
-      "n(n+1)"
-    ],
-    "answer": 0,
-    "explain": "ⁿP₂ = n!/(n−2)! = n(n−1); ordered selection of 2 distinct items.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c8eec607-1d0a-4534-b952-4f439e5dba53",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "ⁿCᵣ / ⁿCᵣ₋₁ simplifies to?",
-    "formula": "(n−r+1)/r",
-    "options": [
-      "(n+1)/r",
-      "(n−r+1)/(r−1)",
-      "(n−r+1)/r",
-      "(n−r)/r"
-    ],
-    "answer": 2,
-    "explain": "ⁿCᵣ/ⁿCᵣ₋₁ = [n!/(r!(n−r)!)] / [n!/((r−1)!(n−r+1)!)] = (n−r+1)/r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b32e2151-a63b-4bb4-a08a-cac415826aeb",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to seat n people at a ROUND table with 2 specific people ALWAYS adjacent?",
-    "formula": "2·(n−2)!",
-    "options": [
-      "2·(n−1)!",
-      "(n−2)!",
-      "2·(n−2)!",
-      "(n−1)!"
-    ],
-    "answer": 2,
-    "explain": "Treat the pair as one unit: (n−1) units in circle = (n−2)! ways; pair arranges in 2! ways.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2724aba0-983a-4e0d-9bb8-5c6b277fa74d",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to pick r items from n where item A and item B are NEVER BOTH selected?",
-    "formula": "ⁿCᵣ − ⁿ⁻²Cᵣ₋₂",
-    "options": [
-      "ⁿ⁻²Cᵣ",
-      "ⁿ⁻¹Cᵣ + ⁿ⁻¹Cᵣ₋₁",
-      "ⁿCᵣ − ⁿ⁻¹Cᵣ₋₁",
-      "ⁿCᵣ − ⁿ⁻²Cᵣ₋₂"
-    ],
-    "answer": 3,
-    "explain": "Subtract cases where both A and B are included (ⁿ⁻²Cᵣ₋₂) from total ⁿCᵣ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a5281ef-38dd-4fd3-846d-98d14ccd7572",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to form a group of at least 1 from n persons (selections)?",
-    "formula": "2ⁿ − 1",
-    "options": [
-      "2ⁿ − 2",
-      "n!",
-      "2ⁿ",
-      "2ⁿ − 1"
-    ],
-    "answer": 3,
-    "explain": "Total subsets = 2ⁿ; subtract empty set: 2ⁿ−1 non-empty subsets (selections of at least 1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a914d3c0-dcdc-41bf-8ee6-28780a7ea02a",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to select r objects from n where a SPECIFIC object MUST be excluded?",
-    "formula": "ⁿ⁻¹Cᵣ",
-    "options": [
-      "ⁿ⁻¹Cᵣ₋₁",
-      "ⁿ⁻¹Cᵣ",
-      "ⁿCᵣ − ⁿ⁻¹Cᵣ₋₁",
-      "ⁿCᵣ − 1"
-    ],
-    "answer": 1,
-    "explain": "Remove the specific object; choose r from remaining n−1: ⁽ⁿ⁻¹⁾Cᵣ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d46ee5ba-36fc-4403-861e-c43df0f71953",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to arrange letters of 'BANANA'?",
-    "formula": "6!/(3!·2!)",
-    "options": [
-      "6!/(3!·2!)",
-      "6!/(2!·2!)",
-      "6!/4!",
-      "6!/3!"
-    ],
-    "answer": 0,
-    "explain": "BANANA has B×1, A×3, N×2; arrangements = 6!/(3!×2!) = 60.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "65b6ae70-09e2-4f26-bfc1-328da0c6c52d",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of points of intersection of n straight lines (no two parallel, no three concurrent)?",
-    "formula": "ⁿC₂",
-    "options": [
-      "n(n−1)",
-      "n²",
-      "ⁿP₂",
-      "ⁿC₂"
-    ],
-    "answer": 3,
-    "explain": "Each pair of lines meets at exactly one point; ⁿC₂ pairs → ⁿC₂ intersections.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c304949b-3754-4598-8780-7eea7eac568f",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to select r from n so that NEITHER of two specific persons A, B is selected?",
-    "formula": "ⁿ⁻²Cᵣ",
-    "options": [
-      "ⁿ⁻²Cᵣ",
-      "ⁿ⁻²Cᵣ₋₂",
-      "ⁿCᵣ − ⁿ⁻²Cᵣ",
-      "ⁿCᵣ − 2·ⁿ⁻¹Cᵣ₋₁"
-    ],
-    "answer": 0,
-    "explain": "Exclude both A and B; choose r from remaining n−2 persons: ⁽ⁿ⁻²⁾Cᵣ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a56e659f-27ff-401b-b53b-6c85776345c5",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to choose a subset with exactly k elements from n-element set?",
-    "formula": "ⁿCₖ",
-    "options": [
-      "ⁿPₖ",
-      "ⁿCₖ",
-      "ⁿCₖ · k!",
-      "n! / k!"
-    ],
-    "answer": 1,
-    "explain": "A k-element subset is an unordered selection: ⁿCₖ ways.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4cbe465e-fac2-4a72-8a72-cd8193b70d0e",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "ⁿC₀ + ⁿC₁ + ⁿC₂ + ... + ⁿCₙ equals?",
-    "formula": "2ⁿ",
-    "options": [
-      "2ⁿ⁺¹",
-      "2ⁿ",
-      "2ⁿ⁻¹",
-      "n·2ⁿ⁻¹"
-    ],
-    "answer": 1,
-    "explain": "Sum of all binomial coefficients equals 2ⁿ (set x=1 in (1+x)ⁿ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d68578a-e41a-487b-95cd-df5383700fbd",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways n distinct objects can be arranged in a row (linear permutation)?",
-    "formula": "n!",
-    "options": [
-      "n!",
-      "2·n!",
-      "n·n!",
-      "(n-1)!"
-    ],
-    "answer": 0,
-    "explain": "All n! orderings of n distinct objects are valid linear permutations.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e5c4903d-d124-4218-949a-ccf53e4ddf3e",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Middle term of (1+x)²ⁿ binomial expansion is the (r+1)th term where r = ?",
-    "formula": "",
-    "options": [
-      "r = 2n",
-      "r = n+1",
-      "r = n",
-      "r = n−1"
-    ],
-    "answer": 2,
-    "explain": "(1+x)²ⁿ has 2n+1 terms; middle term is (n+1)th, so r = n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0f77e6c8-853e-421e-a39e-4bcee96cb3a8",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to select r from n if one specific object MUST be included?",
-    "formula": "ⁿ⁻¹Cᵣ₋₁",
-    "options": [
-      "ⁿCᵣ − ⁿ⁻¹Cᵣ₋₁",
-      "ⁿ⁻¹Cᵣ₋₁",
-      "ⁿ⁻¹Cᵣ",
-      "ⁿCᵣ₋₁"
-    ],
-    "answer": 1,
-    "explain": "Fix the specific object; choose remaining r−1 from n−1: ⁿ⁻¹Cᵣ₋₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f965e11d-775a-4c66-ad10-9505a8729e37",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to arrange the word 'COMMITTEE' (9 letters: M×2,T×2,E×2)?",
-    "formula": "9!/(2!·2!·2!)",
-    "options": [
-      "9!/(3!·2!)",
-      "9!/(2!·2!·2!)",
-      "9!/(2!·2!)",
-      "9!/2!"
-    ],
-    "answer": 1,
-    "explain": "COMMITTEE has M,T,E each repeated twice; arrangements = 9!/(2!·2!·2!) = 45360.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5882fd76-2ec4-42a2-bb44-2f8e3c8166a5",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "Number of ways to choose r items from n where A is included but B is excluded?",
-    "formula": "ⁿ⁻²Cᵣ₋₁",
-    "options": [
-      "ⁿ⁻²Cᵣ",
-      "ⁿCᵣ − 2·ⁿ⁻¹Cᵣ₋₁",
-      "ⁿ⁻²Cᵣ₋₁",
-      "ⁿ⁻¹Cᵣ₋₁"
-    ],
-    "answer": 2,
-    "explain": "Include A (fix), exclude B (remove), choose r−1 from remaining n−2: ⁿ⁻²Cᵣ₋₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "610cd7df-1f2b-4e24-aeb6-cb0491d213d9",
-    "subject": "Mathematics",
-    "chapter": "Permutations and Combinations",
-    "topic": "Permutations and Combinations",
-    "prompt": "How many ways can 5 people be seated in 3 chairs (distinct chairs, one person per chair)?",
-    "formula": "⁵P₃",
-    "options": [
-      "3⁵ = 243",
-      "5³ = 125",
-      "⁵C₃ = 10",
-      "⁵P₃ = 60"
-    ],
-    "answer": 3,
-    "explain": "Ordered selection of 3 from 5 distinct people: ⁵P₃ = 5·4·3 = 60.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "1f0583ae-a181-44fc-afb5-4fbc876f3f29",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations",
+  "prompt": "Number of ways to arrange n distinct objects in a row",
+  "formula": "n!",
+  "options": [
+   "n(n-1)",
+   "n!",
+   "2ⁿ",
+   "n²"
+  ],
+  "answer": 1,
+  "explain": "Linear arrangement of n distinct objects = n! (fundamental counting principle).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "208a76bd-28b2-47a2-9d3c-59d526e43493",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Combinations",
+  "prompt": "ⁿCᵣ equals",
+  "formula": "ⁿCᵣ = n!/(r!(n−r)!)",
+  "options": [
+   "n!·r!",
+   "r!/n!",
+   "n!/(n−r)!",
+   "n!/(r!(n−r)!)"
+  ],
+  "answer": 3,
+  "explain": "ⁿCᵣ counts unordered selections; divides ⁿPᵣ by r! to remove order.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "38ae5b12-2377-4245-b0e0-4bd42443b7ab",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "Relation between ⁿPᵣ and ⁿCᵣ",
+  "formula": "ⁿPᵣ = r! · ⁿCᵣ",
+  "options": [
+   "ⁿPᵣ = n! · ⁿCᵣ",
+   "ⁿPᵣ = r! · ⁿCᵣ",
+   "ⁿPᵣ = ⁿCᵣ / r!",
+   "ⁿPᵣ = (n−r)! · ⁿCᵣ"
+  ],
+  "answer": 1,
+  "explain": "Arranging a combination of r objects gives r! permutations, so ⁿPᵣ = r!·ⁿCᵣ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd8a386a-dd47-4cd2-95ae-f7a475b5d9ac",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Combinations",
+  "prompt": "Value of ⁿC₀ + ⁿC₁ + ... + ⁿCₙ",
+  "formula": "Σⁿ Cᵣ = 2ⁿ",
+  "options": [
+   "n²",
+   "2ⁿ",
+   "2n",
+   "n!"
+  ],
+  "answer": 1,
+  "explain": "Sum of all binomial coefficients = 2ⁿ (set (1+1)ⁿ in binomial theorem).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1715462e-3d55-4216-969d-37d819e432a4",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Combinations",
+  "prompt": "ⁿCᵣ = ⁿCₛ implies (r ≠ s)",
+  "formula": "r + s = n",
+  "options": [
+   "r + s = n",
+   "r = s only",
+   "r − s = n",
+   "r · s = n"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ = ⁿC_{n−r}, so if r ≠ s and ⁿCᵣ = ⁿCₛ then r + s = n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c507be89-b508-4255-9351-2e3563054e93",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular Permutations",
+  "prompt": "Number of circular arrangements of n distinct objects",
+  "formula": "(n−1)!",
+  "options": [
+   "n!",
+   "n!/2",
+   "2(n−1)!",
+   "(n−1)!"
+  ],
+  "answer": 3,
+  "explain": "One object fixed to remove rotational equivalence; remaining (n−1) arranged in (n−1)!.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7c180c2a-5b0a-4dc8-9f64-30d97ce53764",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular Permutations",
+  "prompt": "Circular arrangements of n objects (necklace, flipping allowed)",
+  "formula": "(n−1)!/2",
+  "options": [
+   "(n−1)!/2",
+   "n!/2",
+   "n!",
+   "(n−1)!"
+  ],
+  "answer": 0,
+  "explain": "Necklace: clockwise and anticlockwise identical, so divide circular perms by 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ad4f8fea-a5cc-46cc-8feb-956f026b9522",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with Repetition",
+  "prompt": "Arrangements of n objects with p alike, q alike, rest distinct",
+  "formula": "n!/(p!·q!)",
+  "options": [
+   "n!/p!",
+   "n!/(p!·q!)",
+   "ⁿPₚ·ⁿPq",
+   "n!/(p+q)!"
+  ],
+  "answer": 1,
+  "explain": "Repeated objects reduce arrangements: divide n! by factorials of each repetition count.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cdab69da-900a-476a-8bda-ae3bc85ce81d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Combinations",
+  "prompt": "Number of ways to select at least one object from n distinct objects",
+  "formula": "2ⁿ − 1",
+  "options": [
+   "n·2ⁿ⁻¹",
+   "2ⁿ",
+   "n!",
+   "2ⁿ − 1"
+  ],
+  "answer": 3,
+  "explain": "Each object included or not → 2ⁿ subsets; exclude empty set → 2ⁿ − 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f67695b5-2c02-49a1-b4a4-566d1202f55c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Combinations",
+  "prompt": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₋₁ =",
+  "formula": "ⁿ⁺¹Cᵣ",
+  "options": [
+   "ⁿ⁺¹Cᵣ₊₁",
+   "2·ⁿCᵣ",
+   "ⁿ⁺¹Cᵣ",
+   "ⁿCᵣ₊₁"
+  ],
+  "answer": 2,
+  "explain": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₋₁ = ⁿ⁺¹Cᵣ, fundamental in combinatorics.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ada3cd16-2f6b-4e37-9398-370b6daad526",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Applications of Combinations",
+  "prompt": "Number of diagonals in a convex polygon of n sides",
+  "formula": "n(n−3)/2",
+  "options": [
+   "n(n−2)/2",
+   "n(n−1)/2",
+   "ⁿC₂",
+   "n(n−3)/2"
+  ],
+  "answer": 3,
+  "explain": "Total lines from n vertices = ⁿC₂; subtract n sides → ⁿC₂ − n = n(n−3)/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e9174276-0571-4dab-a33b-1a149a68e6d1",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Applications of Combinations",
+  "prompt": "Number of triangles from n points, no 3 collinear",
+  "formula": "ⁿC₃",
+  "options": [
+   "n(n−1)(n−2)",
+   "ⁿP₃",
+   "ⁿC₃",
+   "ⁿC₂"
+  ],
+  "answer": 2,
+  "explain": "Any 3 non-collinear points form a unique triangle, so answer = ⁿC₃.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2b744b8-9ca7-479f-b9cf-77ca4a2396a8",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Distribution",
+  "prompt": "Distributing n distinct objects into r distinct groups (empty allowed)",
+  "formula": "rⁿ",
+  "options": [
+   "ⁿCᵣ",
+   "r!·ⁿCᵣ",
+   "rⁿ",
+   "nʳ"
+  ],
+  "answer": 2,
+  "explain": "Each of the n objects can go into any of the r groups independently → rⁿ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d9c7eb5b-296b-42b3-8272-d7439fed7969",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with Repetition",
+  "prompt": "Number of ways to arrange r objects from n with repetition allowed",
+  "formula": "nʳ",
+  "options": [
+   "ⁿPᵣ",
+   "n!/(n−r)!",
+   "nʳ",
+   "ⁿCᵣ·r!"
+  ],
+  "answer": 2,
+  "explain": "Each position has n choices independently when repetition allowed → nʳ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "03b77cb5-1bf3-4540-b056-63701acff2f2",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements",
+  "prompt": "Dearrangement (derangement) of n objects: Dₙ =",
+  "formula": "n!·Σ(−1)ᵏ/k!, k=0 to n",
+  "options": [
+   "n!−1",
+   "(n−1)!",
+   "n!/(n−1)",
+   "n!Σ(−1)ᵏ/k! (k=0 to n)"
+  ],
+  "answer": 3,
+  "explain": "Dₙ = n!(1−1/1!+1/2!−...+(−1)ⁿ/n!): no object in its original place.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "90340f3c-4063-469c-a71a-6f7ae9bab112",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Stars and Bars",
+  "prompt": "Number of non-negative integer solutions to x₁+x₂+...+xᵣ = n",
+  "formula": "ⁿ⁺ʳ⁻¹Cᵣ₋₁",
+  "options": [
+   "ⁿCᵣ",
+   "ⁿ⁺ʳ⁻¹Cᵣ₋₁",
+   "ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁺ʳCᵣ"
+  ],
+  "answer": 1,
+  "explain": "Stars and bars: distributing n identical into r distinct bins = ⁿ⁺ʳ⁻¹Cᵣ₋₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f4d9a76d-2261-4bfe-8bf7-ec4c3b296da7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Stars and Bars",
+  "prompt": "Number of positive integer solutions to x₁+x₂+...+xᵣ = n",
+  "formula": "ⁿ⁻¹Cᵣ₋₁",
+  "options": [
+   "ⁿCᵣ",
+   "ⁿ⁻¹Cᵣ",
+   "ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁺ʳ⁻¹Cᵣ₋₁"
+  ],
+  "answer": 2,
+  "explain": "Substitute yᵢ = xᵢ−1 (yᵢ≥0), reduces to non-negative with sum n−r → ⁿ⁻¹Cᵣ₋₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "22afb679-056a-4c48-81f0-6a6106db6204",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Combinations",
+  "prompt": "The value of ⁿCᵣ is maximum when (n even)",
+  "formula": "r = n/2",
+  "options": [
+   "r = n/2",
+   "r = n−1",
+   "r = n",
+   "r = 1"
+  ],
+  "answer": 0,
+  "explain": "Binomial coefficients are symmetric and peak at middle: r = n/2 for even n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "441f44cb-1a6a-4797-8210-2f039f15bb98",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division into Groups",
+  "prompt": "Number of ways to divide 2n distinct objects into two equal groups",
+  "formula": "(2n)!/(2·(n!)²)",
+  "options": [
+   "(2n)!/(n!)²",
+   "²ⁿCₙ",
+   "(2n)!/n!",
+   "(2n)!/(2·(n!)²)"
+  ],
+  "answer": 3,
+  "explain": "²ⁿCₙ divided by 2! since the two groups are indistinguishable = (2n)!/(2·(n!)²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "712fef9b-c597-45e8-9190-f8fffe2d963e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Applications of Combinations",
+  "prompt": "Number of straight lines from n points, m collinear (rest non-collinear)",
+  "formula": "ⁿC₂ − ᵐC₂ + 1",
+  "options": [
+   "ⁿC₂ − ᵐC₂ + 1",
+   "ⁿC₂ − m + 1",
+   "ⁿC₂ − ᵐC₂",
+   "ⁿC₂"
+  ],
+  "answer": 0,
+  "explain": "Replace ᵐC₂ collinear pairs (give 1 line, not ᵐC₂ lines) → ⁿC₂ − ᵐC₂ + 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eca07788-f6d2-42ab-8d02-f4ea8961cb55",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Rank of a Word",
+  "prompt": "Rank of a word in dictionary: position depends on",
+  "formula": "",
+  "options": [
+   "Number of vowels",
+   "Lexicographic order of letters",
+   "Alphabetical sum of letters",
+   "Length of the word"
+  ],
+  "answer": 1,
+  "explain": "Dictionary rank uses lexicographic (alphabetical) ordering of all permutations.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e7484bf3-6651-4504-8d75-f2aca54f7f88",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorials and Primes",
+  "prompt": "Exponent of prime p in n! is given by (Legendre's formula)",
+  "formula": "Σ⌊n/pᵏ⌋, k=1,2,...",
+  "options": [
+   "⌊n/p⌋",
+   "n! / p",
+   "Σ⌊n/pᵏ⌋ for k=1,2,…",
+   "n/p"
+  ],
+  "answer": 2,
+  "explain": "Legendre: power of prime p in n! = ⌊n/p⌋+⌊n/p²⌋+⌊n/p³⌋+… (finite sum).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7446ca5e-ee05-46eb-b9de-77908b5c69b3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Number of ways to distribute n identical objects into r distinct bins (empty allowed)?",
+  "formula": "C(n+r-1, r-1)",
+  "options": [
+   "C(n+r, r)",
+   "C(n-1, r-1)",
+   "C(n+r-1, r-1)",
+   "rⁿ"
+  ],
+  "answer": 2,
+  "explain": "Stars and bars: identical objects into distinct bins with zero allowed uses C(n+r-1,r-1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36461da7-95ec-4945-a521-f338aebb2389",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Number of ways to distribute n identical objects into r bins with each bin having ≥1?",
+  "formula": "C(n-1, r-1)",
+  "options": [
+   "C(n-1, r-1)",
+   "C(n, r)",
+   "C(n-1, r)",
+   "C(n+r-1, r-1)"
+  ],
+  "answer": 0,
+  "explain": "Stars and bars with each bin ≥1: place dividers among n-1 gaps, giving C(n-1,r-1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3666e8c3-930b-44bf-ac3d-9e804f92f395",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Number of ways to select r objects from n distinct objects with repetition allowed?",
+  "formula": "C(n+r-1, r)",
+  "options": [
+   "C(n+r, r)",
+   "C(n, r)",
+   "C(n+r-1, r)",
+   "nʳ"
+  ],
+  "answer": 2,
+  "explain": "Selection with repetition (combination with repetition) equals C(n+r-1, r).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "94cbe0a7-bc68-4eff-a1c5-dd8644062312",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Number formation with digit conditions",
+  "prompt": "Sum of all r-digit numbers formed by n distinct non-zero digits (no repetition)?",
+  "formula": "(n-1)P(r-1) · (sum of digits) · 111…1 (r ones)",
+  "options": [
+   "nCr·(Σdigits)·R_r",
+   "(n-1)P(r-1)·(Σdigits)·R_r",
+   "(n-1)Cr·(Σdigits)·R_r",
+   "nPr·(Σdigits)·R_r"
+  ],
+  "answer": 1,
+  "explain": "Each digit appears (n-1)P(r-1) times in each position; multiply by repunit R_r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "74212630-fbeb-451c-b99f-9918c09c1919",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of subsets of an n-element set (including empty set)?",
+  "formula": "2ⁿ",
+  "options": [
+   "n!",
+   "2ⁿ - 1",
+   "2ⁿ - 2",
+   "2ⁿ"
+  ],
+  "answer": 3,
+  "explain": "Each element is either included or not, giving 2ⁿ total subsets including the empty set.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c1034206-6349-47c1-b26f-7c4a10bc04b3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Number of ways to divide 3n distinct objects into 3 equal groups (groups unlabelled)?",
+  "formula": "(3n)! / (n!)³·3!",
+  "options": [
+   "(3n)!/((n!)³·3!)",
+   "(3n)!/(n!)³",
+   "C(3n,n)·C(2n,n)",
+   "(3n)!/(3·n!)"
+  ],
+  "answer": 0,
+  "explain": "Divide by 3! since the three groups are identical (unlabelled); labelled groups omit the 3!.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0e61729c-00a2-492d-b2b0-1e48c50c5ebf",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to form a committee of r from n where two specific persons are ALWAYS included?",
+  "formula": "C(n-2, r-2)",
+  "options": [
+   "C(n-1, r-1)",
+   "C(n-2, r-2)",
+   "C(n-2, r)",
+   "C(n, r-2)"
+  ],
+  "answer": 1,
+  "explain": "Fix the 2 specific persons; choose remaining r-2 from the other n-2 persons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "878e1c9f-7b4f-460c-8e2c-2e462af62340",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to form a committee of r from n where two specific persons are NEVER together?",
+  "formula": "C(n,r) - C(n-2,r-2)",
+  "options": [
+   "C(n,r) - C(n-2,r)",
+   "C(n-1,r-1)",
+   "C(n,r) - C(n-2,r-2)",
+   "C(n-2,r)"
+  ],
+  "answer": 2,
+  "explain": "Total committees minus those containing both specific persons: C(n,r) - C(n-2,r-2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "07067307-11ac-42f1-af91-f5dd97a10ad9",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Arrangements: together / not together",
+  "prompt": "Number of ways to arrange n persons in a row so that two specific persons are always adjacent?",
+  "formula": "2·(n-1)!",
+  "options": [
+   "(n-1)!",
+   "2·(n-1)!",
+   "2·(n-2)!",
+   "n!/2"
+  ],
+  "answer": 1,
+  "explain": "Treat the pair as one unit: (n-1)! arrangements × 2 internal arrangements.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6b50c335-5e8b-4695-ab48-689aa5b95c40",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "Number of rectangles in an m×n grid of lines (m horizontal, n vertical)?",
+  "formula": "C(m,2)·C(n,2)",
+  "options": [
+   "C(m+1,2)·C(n+1,2)",
+   "C(m,2)·C(n,2)",
+   "C(m,2)+C(n,2)",
+   "m·n·(m-1)·(n-1)/4"
+  ],
+  "answer": 1,
+  "explain": "Choose 2 horizontal lines and 2 vertical lines from m and n lines respectively.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96fa476e-0b52-4cfd-aeb4-0528b0945358",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "Number of squares in an n×n grid (with unit squares)?",
+  "formula": "Σk²  (k=1 to n) = n(n+1)(2n+1)/6",
+  "options": [
+   "n³/3",
+   "n(n+1)/2",
+   "n(n+1)(2n+1)/6",
+   "n²(n+1)²/4"
+  ],
+  "answer": 2,
+  "explain": "Squares of size k×k: (n-k+1)² each; summing gives n(n+1)(2n+1)/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3eab0bd7-58c7-4b2c-ad8d-ef1523627daf",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "Number of ways to seat n boys and n girls alternately in a CIRCLE?",
+  "formula": "(n-1)!·n!",
+  "options": [
+   "(n-1)!·n!",
+   "n!·n!",
+   "(2n-1)!",
+   "2·(n-1)!·n!"
+  ],
+  "answer": 0,
+  "explain": "Fix boys in circle: (n-1)! ways; arrange n girls in the n gaps: n! ways.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0e6ee529-1e90-424a-8b4e-3727990739b5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "Value of ⁿC₀ - ⁿC₁ + ⁿC₂ - ... + (-1)ⁿ·ⁿCₙ equals?",
+  "formula": "0",
+  "options": [
+   "2ⁿ",
+   "0",
+   "1",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Setting x = -1 in (1+x)ⁿ gives alternating sum of binomial coefficients = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "51ceb738-2894-4719-a72f-5ce5c05b5b9c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "ⁿC₀² + ⁿC₁² + ⁿC₂² + ... + ⁿCₙ² equals?",
+  "formula": "²ⁿCₙ",
+  "options": [
+   "4ⁿ",
+   "2ⁿ",
+   "2·²ⁿCₙ",
+   "²ⁿCₙ"
+  ],
+  "answer": 3,
+  "explain": "Coefficient of xⁿ in (1+x)ⁿ·(1+x)ⁿ = (1+x)²ⁿ gives sum of squares = ²ⁿCₙ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96117007-a102-4d7a-a586-3a21969771f4",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "r·ⁿCᵣ equals which simpler expression?",
+  "formula": "n·ⁿ⁻¹Cᵣ₋₁",
+  "options": [
+   "n·ⁿ⁻¹Cᵣ₋₁",
+   "(n-r)·ⁿCᵣ₋₁",
+   "r·ⁿ⁻¹Cᵣ",
+   "n·ⁿ⁻¹Cᵣ"
+  ],
+  "answer": 0,
+  "explain": "r·C(n,r) = r·n!/(r!(n-r)!) = n·(n-1)!/((r-1)!(n-r)!) = n·C(n-1,r-1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "04d5251d-8a3d-401d-be58-7eb05794f77b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to choose a team of 11 from 15 players where captain is always chosen?",
+  "formula": "C(14,10)",
+  "options": [
+   "C(15,11)",
+   "C(13,10)",
+   "C(14,10)",
+   "C(14,11)"
+  ],
+  "answer": 2,
+  "explain": "Captain is fixed; choose remaining 10 from the other 14 players: C(14,10).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6c487052-bc9f-4efe-aabe-9700ee2e74bf",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Number of ways to select at least 1 from p identical items of type A and q identical of type B?",
+  "formula": "(p+1)(q+1) - 1",
+  "options": [
+   "(p+1)(q+1) - 1",
+   "pq",
+   "2^(p+q) - 1",
+   "(p+1)(q+1)"
+  ],
+  "answer": 0,
+  "explain": "Each type has (type+1) choices (0 to max); subtract the all-zero (none selected) case.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "22953af2-3dba-4545-9fea-63e11498c6bf",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Number of ways to arrange letters of MISSISSIPPI?",
+  "formula": "11!/(4!·4!·2!)",
+  "options": [
+   "11!/(4!·4!)",
+   "11!/(4!·4!·2!)",
+   "11!/4!·2!",
+   "11!/(2!·4!)"
+  ],
+  "answer": 1,
+  "explain": "MISSISSIPPI: 1M, 4I, 4S, 2P → 11!/(4!·4!·2!) arrangements.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "42205230-9793-469a-bde6-fd1928a691dd",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "The number of permutations of n distinct things taken all at a time is denoted nPn and equals?",
+  "formula": "n!",
+  "options": [
+   "(n-1)!",
+   "2ⁿ",
+   "n·(n-1)",
+   "n!"
+  ],
+  "answer": 3,
+  "explain": "ⁿPₙ = n!/(n-n)! = n!/0! = n! since 0! = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a4713977-ccb8-4d71-922e-edaced9472eb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "Number of ways to make a garland with n distinct flowers (flipping considered same)?",
+  "formula": "(n-1)!/2",
+  "options": [
+   "(n-1)!",
+   "(n-1)!/2",
+   "n!",
+   "n!/2"
+  ],
+  "answer": 1,
+  "explain": "Circular: (n-1)!; garland can be flipped (mirror = same), so divide by 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1f8156b9-7f39-4e18-a64f-4d5189259db3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "Number of triangles formed from n points on a circle (no 3 collinear)?",
+  "formula": "C(n,3)",
+  "options": [
+   "C(n,3)",
+   "n(n-1)(n-2)",
+   "C(n,3) - n",
+   "C(n,2)"
+  ],
+  "answer": 0,
+  "explain": "Any 3 points on a circle form a unique triangle; total = C(n,3).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1eb2a22f-d8dc-4d11-8beb-d2165a3227bd",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to select r from n where one SPECIFIC person is EXCLUDED?",
+  "formula": "ⁿ⁻¹Cᵣ",
+  "options": [
+   "ⁿCᵣ - ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁻¹Cᵣ",
+   "ⁿCᵣ - 1",
+   "ⁿ⁻¹Cᵣ₋₁"
+  ],
+  "answer": 1,
+  "explain": "Exclude that person; choose r from remaining n−1 persons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "73f01986-57b5-40ed-91d6-29593a76b1e3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Arrangements: together / not together",
+  "prompt": "Number of ways to arrange n distinct books on a shelf so 3 specific books are TOGETHER?",
+  "formula": "(n-2)! · 3!",
+  "options": [
+   "(n−1)!·3!",
+   "(n−3)!·3!",
+   "(n−2)!·3!",
+   "(n−2)!·(n−3)!"
+  ],
+  "answer": 2,
+  "explain": "Treat 3 books as one block → (n−2)! arrangements × 3! internal arrangements.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d4843347-2255-489b-a148-1a53f52d59c5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "ⁿCᵣ + ⁿCᵣ₊₁ = ?",
+  "formula": "ⁿ⁺¹Cᵣ₊₁",
+  "options": [
+   "ⁿ⁺¹Cᵣ₊₁",
+   "ⁿCᵣ₊₁ + 1",
+   "ⁿ⁺¹Cᵣ",
+   "²ⁿCᵣ"
+  ],
+  "answer": 0,
+  "explain": "Pascal's identity: ⁿCᵣ + ⁿCᵣ₊₁ = ⁿ⁺¹Cᵣ₊₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b10e840a-c03e-43c0-8dab-784490c8802e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Number of ways to split n distinct objects into groups of p, q, r (p+q+r=n, all labelled)?",
+  "formula": "n!/(p!q!r!)",
+  "options": [
+   "ⁿCₚ·ⁿCq",
+   "n!/(p!+q!+r!)",
+   "n!/(p!q!r!)",
+   "n!/(p·q·r)"
+  ],
+  "answer": 2,
+  "explain": "Multinomial coefficient n!/(p!q!r!) counts divisions into labelled groups of sizes p,q,r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3d221d38-206f-4d31-9fc4-7ea90c68da90",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to choose at least 1 from n distinct objects?",
+  "formula": "2ⁿ − 1",
+  "options": [
+   "2ⁿ − 1",
+   "ⁿC₁ + ⁿC₂",
+   "n! − 1",
+   "2ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Total subsets minus empty set = 2ⁿ − 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2355285b-e277-4779-a96d-73e89964c6e8",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of permutations of n things taken r at a time when each can repeat any number of times?",
+  "formula": "nʳ",
+  "options": [
+   "n·r",
+   "nʳ",
+   "ⁿCᵣ·r!",
+   "ⁿPᵣ"
+  ],
+  "answer": 1,
+  "explain": "With unlimited repetition, each of r positions has n choices → nʳ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "deff686e-70ea-49f4-af6c-c52b42908bcf",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting",
+  "prompt": "Total number of factors of N = pᵃ·qᵇ·rᶜ (including 1 and N)?",
+  "formula": "(a+1)(b+1)(c+1)",
+  "options": [
+   "(a+1)(b+1)(c+1)",
+   "(a+b+c)!",
+   "abc+1",
+   "a·b·c"
+  ],
+  "answer": 0,
+  "explain": "Each prime contributes exponent choices 0 to its max; multiply counts.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "52123f6b-e437-4e87-83ae-587e374f1f24",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "Number of ways to arrange n objects in a circle with one object FIXED?",
+  "formula": "(n−1)!",
+  "options": [
+   "(n−1)!",
+   "(n−2)!",
+   "n!/2",
+   "n!"
+  ],
+  "answer": 0,
+  "explain": "Fixing one object removes rotational symmetry; remaining n−1 arranged in (n−1)! ways.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c2b1ed24-41e2-42ad-9ed5-a1a355ca9c74",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "Sum ⁿC₁ + 2·ⁿC₂ + 3·ⁿC₃ + ... + n·ⁿCₙ equals?",
+  "formula": "n·2ⁿ⁻¹",
+  "options": [
+   "(n+1)·2ⁿ⁻¹",
+   "n·2ⁿ",
+   "n·2ⁿ⁻¹",
+   "2ⁿ − 1"
+  ],
+  "answer": 2,
+  "explain": "Using r·ⁿCᵣ = n·ⁿ⁻¹Cᵣ₋₁ and summing gives n·2ⁿ⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d3508ba0-2a31-49a9-a7a1-0b3a4b004f1b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "ⁿCᵣ is symmetric: ⁿCᵣ = ?",
+  "formula": "ⁿCₙ₋ᵣ",
+  "options": [
+   "ⁿ⁺¹Cᵣ",
+   "ⁿ⁻¹Cᵣ",
+   "ⁿCᵣ₋₁",
+   "ⁿCₙ₋ᵣ"
+  ],
+  "answer": 3,
+  "explain": "Symmetry property: choosing r is same as leaving out n−r; ⁿCᵣ = ⁿCₙ₋ᵣ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d7dc20be-7ca5-416c-affa-503b995e8c50",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "Number of ways 2 persons can be selected from n to SHAKE HANDS (unordered pair)?",
+  "formula": "ⁿC₂ = n(n−1)/2",
+  "options": [
+   "ⁿP₂",
+   "n(n−1)",
+   "n²",
+   "n(n−1)/2"
+  ],
+  "answer": 3,
+  "explain": "Order doesn't matter in a handshake; answer is ⁿC₂ = n(n−1)/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75b54c40-654f-43dd-8cb2-799922a50862",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Number of ways to arrange the word 'ARRANGE' (7 letters, A×2, R×2)?",
+  "formula": "7!/(2!·2!)",
+  "options": [
+   "7!/(2!·2!·2!)",
+   "7!/(2!·2!)",
+   "7!/2!",
+   "7!/4!"
+  ],
+  "answer": 1,
+  "explain": "7 letters with A repeated twice and R repeated twice: 7!/(2!·2!) = 1260.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "05861407-3d6d-45d1-958b-9213907db7ef",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of onto functions from n-element set to 2-element set?",
+  "formula": "2ⁿ − 2",
+  "options": [
+   "2ⁿ − 2",
+   "2ⁿ",
+   "n² − 2",
+   "2ⁿ − 1"
+  ],
+  "answer": 0,
+  "explain": "Total 2ⁿ functions minus 2 constant (non-onto) functions gives 2ⁿ−2 surjections.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f1184468-d55f-44ea-a52d-41d1287fc72e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "ⁿCᵣ · r! equals which expression?",
+  "formula": "ⁿPᵣ",
+  "options": [
+   "ⁿPᵣ",
+   "ⁿCᵣ · (n−r)!",
+   "n! / r!",
+   "ⁿCᵣ / r!"
+  ],
+  "answer": 0,
+  "explain": "ⁿPᵣ = n!/(n−r)! = ⁿCᵣ · r!, relating combinations and permutations.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ed1e3046-30f7-4c39-96ea-443085843afa",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting",
+  "prompt": "How many ways to arrange n distinct objects so that NONE is in its natural position?",
+  "formula": "Dₙ = n!·Σ(-1)ᵏ/k!",
+  "options": [
+   "n! − 1",
+   "(n−1)!",
+   "n! / 2",
+   "Derangement Dₙ"
+  ],
+  "answer": 3,
+  "explain": "Arrangements where no element appears in its original position are counted by derangements Dₙ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "efa96ebf-a205-4357-b2cd-ef8dca903e25",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "The number ⁿCᵣ is greatest when r = ? (n odd)",
+  "formula": "",
+  "options": [
+   "r = n−1",
+   "r = n/2",
+   "r = 1",
+   "r = (n−1)/2 or (n+1)/2"
+  ],
+  "answer": 3,
+  "explain": "For odd n, ⁿCᵣ is maximum at two middle values r=(n−1)/2 and r=(n+1)/2 (both equal).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f527591f-d885-4087-b0b2-60284a69266a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "Number of ways to choose 2 items from n where ORDER matters but repetition NOT allowed?",
+  "formula": "n(n−1)",
+  "options": [
+   "n(n−1)",
+   "n²",
+   "ⁿC₂",
+   "n(n+1)"
+  ],
+  "answer": 0,
+  "explain": "ⁿP₂ = n!/(n−2)! = n(n−1); ordered selection of 2 distinct items.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c8eec607-1d0a-4534-b952-4f439e5dba53",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "ⁿCᵣ / ⁿCᵣ₋₁ simplifies to?",
+  "formula": "(n−r+1)/r",
+  "options": [
+   "(n+1)/r",
+   "(n−r+1)/(r−1)",
+   "(n−r+1)/r",
+   "(n−r)/r"
+  ],
+  "answer": 2,
+  "explain": "ⁿCᵣ/ⁿCᵣ₋₁ = [n!/(r!(n−r)!)] / [n!/((r−1)!(n−r+1)!)] = (n−r+1)/r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b32e2151-a63b-4bb4-a08a-cac415826aeb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "Number of ways to seat n people at a ROUND table with 2 specific people ALWAYS adjacent?",
+  "formula": "2·(n−2)!",
+  "options": [
+   "2·(n−1)!",
+   "(n−2)!",
+   "2·(n−2)!",
+   "(n−1)!"
+  ],
+  "answer": 2,
+  "explain": "Treat the pair as one unit: (n−1) units in circle = (n−2)! ways; pair arranges in 2! ways.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2724aba0-983a-4e0d-9bb8-5c6b277fa74d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to pick r items from n where item A and item B are NEVER BOTH selected?",
+  "formula": "ⁿCᵣ − ⁿ⁻²Cᵣ₋₂",
+  "options": [
+   "ⁿ⁻²Cᵣ",
+   "ⁿ⁻¹Cᵣ + ⁿ⁻¹Cᵣ₋₁",
+   "ⁿCᵣ − ⁿ⁻¹Cᵣ₋₁",
+   "ⁿCᵣ − ⁿ⁻²Cᵣ₋₂"
+  ],
+  "answer": 3,
+  "explain": "Subtract cases where both A and B are included (ⁿ⁻²Cᵣ₋₂) from total ⁿCᵣ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a5281ef-38dd-4fd3-846d-98d14ccd7572",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of ways to form a group of at least 1 from n persons (selections)?",
+  "formula": "2ⁿ − 1",
+  "options": [
+   "2ⁿ − 2",
+   "n!",
+   "2ⁿ",
+   "2ⁿ − 1"
+  ],
+  "answer": 3,
+  "explain": "Total subsets = 2ⁿ; subtract empty set: 2ⁿ−1 non-empty subsets (selections of at least 1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a914d3c0-dcdc-41bf-8ee6-28780a7ea02a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to select r objects from n where a SPECIFIC object MUST be excluded?",
+  "formula": "ⁿ⁻¹Cᵣ",
+  "options": [
+   "ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁻¹Cᵣ",
+   "ⁿCᵣ − ⁿ⁻¹Cᵣ₋₁",
+   "ⁿCᵣ − 1"
+  ],
+  "answer": 1,
+  "explain": "Remove the specific object; choose r from remaining n−1: ⁽ⁿ⁻¹⁾Cᵣ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d46ee5ba-36fc-4403-861e-c43df0f71953",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Number of ways to arrange letters of 'BANANA'?",
+  "formula": "6!/(3!·2!)",
+  "options": [
+   "6!/(3!·2!)",
+   "6!/(2!·2!)",
+   "6!/4!",
+   "6!/3!"
+  ],
+  "answer": 0,
+  "explain": "BANANA has B×1, A×3, N×2; arrangements = 6!/(3!×2!) = 60.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "65b6ae70-09e2-4f26-bfc1-328da0c6c52d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "Number of points of intersection of n straight lines (no two parallel, no three concurrent)?",
+  "formula": "ⁿC₂",
+  "options": [
+   "n(n−1)",
+   "n²",
+   "ⁿP₂",
+   "ⁿC₂"
+  ],
+  "answer": 3,
+  "explain": "Each pair of lines meets at exactly one point; ⁿC₂ pairs → ⁿC₂ intersections.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c304949b-3754-4598-8780-7eea7eac568f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to select r from n so that NEITHER of two specific persons A, B is selected?",
+  "formula": "ⁿ⁻²Cᵣ",
+  "options": [
+   "ⁿ⁻²Cᵣ",
+   "ⁿ⁻²Cᵣ₋₂",
+   "ⁿCᵣ − ⁿ⁻²Cᵣ",
+   "ⁿCᵣ − 2·ⁿ⁻¹Cᵣ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Exclude both A and B; choose r from remaining n−2 persons: ⁽ⁿ⁻²⁾Cᵣ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a56e659f-27ff-401b-b53b-6c85776345c5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "Number of ways to choose a subset with exactly k elements from n-element set?",
+  "formula": "ⁿCₖ",
+  "options": [
+   "ⁿPₖ",
+   "ⁿCₖ",
+   "ⁿCₖ · k!",
+   "n! / k!"
+  ],
+  "answer": 1,
+  "explain": "A k-element subset is an unordered selection: ⁿCₖ ways.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4cbe465e-fac2-4a72-8a72-cd8193b70d0e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "ⁿC₀ + ⁿC₁ + ⁿC₂ + ... + ⁿCₙ equals?",
+  "formula": "2ⁿ",
+  "options": [
+   "2ⁿ⁺¹",
+   "2ⁿ",
+   "2ⁿ⁻¹",
+   "n·2ⁿ⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Sum of all binomial coefficients equals 2ⁿ (set x=1 in (1+x)ⁿ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d68578a-e41a-487b-95cd-df5383700fbd",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties",
+  "prompt": "Number of ways n distinct objects can be arranged in a row (linear permutation)?",
+  "formula": "n!",
+  "options": [
+   "n!",
+   "2·n!",
+   "n·n!",
+   "(n-1)!"
+  ],
+  "answer": 0,
+  "explain": "All n! orderings of n distinct objects are valid linear permutations.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e5c4903d-d124-4218-949a-ccf53e4ddf3e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations and Combinations",
+  "prompt": "Middle term of (1+x)²ⁿ binomial expansion is the (r+1)th term where r = ?",
+  "formula": "",
+  "options": [
+   "r = 2n",
+   "r = n+1",
+   "r = n",
+   "r = n−1"
+  ],
+  "answer": 2,
+  "explain": "(1+x)²ⁿ has 2n+1 terms; middle term is (n+1)th, so r = n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0f77e6c8-853e-421e-a39e-4bcee96cb3a8",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to select r from n if one specific object MUST be included?",
+  "formula": "ⁿ⁻¹Cᵣ₋₁",
+  "options": [
+   "ⁿCᵣ − ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁻¹Cᵣ",
+   "ⁿCᵣ₋₁"
+  ],
+  "answer": 1,
+  "explain": "Fix the specific object; choose remaining r−1 from n−1: ⁿ⁻¹Cᵣ₋₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f965e11d-775a-4c66-ad10-9505a8729e37",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Number of ways to arrange the word 'COMMITTEE' (9 letters: M×2,T×2,E×2)?",
+  "formula": "9!/(2!·2!·2!)",
+  "options": [
+   "9!/(3!·2!)",
+   "9!/(2!·2!·2!)",
+   "9!/(2!·2!)",
+   "9!/2!"
+  ],
+  "answer": 1,
+  "explain": "COMMITTEE has M,T,E each repeated twice; arrangements = 9!/(2!·2!·2!) = 45360.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5882fd76-2ec4-42a2-bb44-2f8e3c8166a5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selections with restrictions",
+  "prompt": "Number of ways to choose r items from n where A is included but B is excluded?",
+  "formula": "ⁿ⁻²Cᵣ₋₁",
+  "options": [
+   "ⁿ⁻²Cᵣ",
+   "ⁿCᵣ − 2·ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁻²Cᵣ₋₁",
+   "ⁿ⁻¹Cᵣ₋₁"
+  ],
+  "answer": 2,
+  "explain": "Include A (fix), exclude B (remove), choose r−1 from remaining n−2: ⁿ⁻²Cᵣ₋₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "610cd7df-1f2b-4e24-aeb6-cb0491d213d9",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "How many ways can 5 people be seated in 3 chairs (distinct chairs, one person per chair)?",
+  "formula": "⁵P₃",
+  "options": [
+   "3⁵ = 243",
+   "5³ = 125",
+   "⁵C₃ = 10",
+   "⁵P₃ = 60"
+  ],
+  "answer": 3,
+  "explain": "Ordered selection of 3 from 5 distinct people: ⁵P₃ = 5·4·3 = 60.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7447f277-ed0f-44b4-85ba-5c1b2d323655",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "The addition principle (rule of sum) applies when the events are:",
+  "formula": "",
+  "options": [
+   "Independent",
+   "Mutually exclusive",
+   "Performed in succession",
+   "Equally likely"
+  ],
+  "answer": 1,
+  "explain": "If tasks cannot occur together, ways add: m + n; successive tasks multiply.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "38611bef-89aa-45e3-981c-9dd8c26d2d9f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of n-digit natural numbers (repetition allowed)?",
+  "formula": "9 × 10ⁿ⁻¹",
+  "options": [
+   "9ⁿ",
+   "10ⁿ",
+   "9 × 9ⁿ⁻¹",
+   "9 × 10ⁿ⁻¹"
+  ],
+  "answer": 3,
+  "explain": "First digit has 9 choices (not 0); each other digit has 10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e63d9967-11b2-46e3-a9ae-8468f96746fb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of 3-digit even numbers (repetition allowed)?",
+  "formula": "9 × 10 × 5",
+  "options": [
+   "450",
+   "405",
+   "500",
+   "360"
+  ],
+  "answer": 0,
+  "explain": "Hundreds 9, tens 10, units 5 even digits → 450.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92e14baf-1f34-47b7-8388-4a38e18d1316",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of ways to select at least one item from p identical, q identical and r distinct objects?",
+  "formula": "(p+1)(q+1)2ʳ − 1",
+  "options": [
+   "(p+q+r)! − 1",
+   "(p+1)(q+1)2ʳ",
+   "pq·2ʳ − 1",
+   "(p+1)(q+1)2ʳ − 1"
+  ],
+  "answer": 3,
+  "explain": "Identical kinds give p+1, q+1 choices; distinct ones 2ʳ; subtract the empty selection.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8d829b0c-bb38-41e9-baec-0bf262c3f4f7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of 5-digit palindromes?",
+  "formula": "9 × 10 × 10",
+  "options": [
+   "9000",
+   "450",
+   "810",
+   "900"
+  ],
+  "answer": 3,
+  "explain": "First 3 digits fix the number: 9 × 10 × 10 = 900.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c1e26aa-c44d-40b1-9f1d-d6029f3c3d26",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of 3-digit numbers (digits may repeat)?",
+  "formula": "9 × 10 × 10",
+  "options": [
+   "1000",
+   "810",
+   "900",
+   "729"
+  ],
+  "answer": 2,
+  "explain": "The hundreds digit cannot be 0, giving 9·10·10 = 900.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eacdac18-20ca-449f-9d68-8421d40da93d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of distinct arrangements of the letters of LEVEL?",
+  "formula": "5!/(2!·2!)",
+  "options": [
+   "30",
+   "120",
+   "60",
+   "15"
+  ],
+  "answer": 0,
+  "explain": "L and E each occur twice, so 5!/(2!2!) = 30.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e62ef60c-34ba-4710-97ae-f77d77c555c5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of distinct arrangements of the letters of SUCCESS?",
+  "formula": "7!/(3!·2!)",
+  "options": [
+   "420",
+   "210",
+   "840",
+   "1260"
+  ],
+  "answer": 0,
+  "explain": "S×3 and C×2 are repeated, so 5040/12 = 420.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "466900d9-a01d-4a05-8644-2f9e5581fcbb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of distinct arrangements of the letters of SCHOOL?",
+  "formula": "6!/2!",
+  "options": [
+   "360",
+   "180",
+   "120",
+   "720"
+  ],
+  "answer": 0,
+  "explain": "Only O repeats (twice), so 720/2 = 360.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c221c271-b762-40b7-af19-87e9be2540d7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of arrangements of AAABBB in a row?",
+  "formula": "6!/(3!·3!) = ⁶C₃",
+  "options": [
+   "36",
+   "40",
+   "120",
+   "20"
+  ],
+  "answer": 3,
+  "explain": "6!/(3!3!) = 20, equal to choosing 3 places for the A's.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "278b1147-2eb7-491e-8855-03637ca7ef97",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Binary strings of length 5 with exactly two 1s?",
+  "formula": "5!/(2!·3!)",
+  "options": [
+   "32",
+   "20",
+   "5",
+   "10"
+  ],
+  "answer": 3,
+  "explain": "Arrange 1,1,0,0,0: 5!/(2!3!) = 10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5794b3f5-6750-49d4-98c3-d2af14d4e34e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Shortest lattice paths from (0,0) to (4,3) using unit moves right/up?",
+  "formula": "(m+n)!/(m!·n!)",
+  "options": [
+   "35",
+   "28",
+   "70",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "Arrange 4 R's and 3 U's: 7!/(4!3!) = 35.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5c894a73-8bef-4593-9903-42f24e6d8054",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of 5-digit numbers divisible by 5 (digits may repeat)?",
+  "formula": "9·10·10·10·2",
+  "options": [
+   "20000",
+   "16200",
+   "18000",
+   "9000"
+  ],
+  "answer": 2,
+  "explain": "Last digit is 0 or 5 (2 ways); first digit has 9 choices: 18000.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7941f6ec-c0af-4352-b178-e5ae0121568d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "Number of 4-digit even numbers if digits may repeat?",
+  "formula": "9 × 10 × 10 × 5",
+  "options": [
+   "2520",
+   "4536",
+   "4500",
+   "5000"
+  ],
+  "answer": 2,
+  "explain": "First digit 9 choices (not 0), middle two 10 each, last digit 5 even choices: 9·10·10·5 = 4500.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd159813-fc22-4fb4-aec8-68cd611bd64b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Arrangements of 'MISSISSIPPI' in which all four S's are together?",
+  "formula": "",
+  "options": [
+   "8!/(4!·4!·2!)",
+   "8!/(4!·4!)",
+   "11!/(4!·2!)",
+   "8!/(4!·2!)"
+  ],
+  "answer": 3,
+  "explain": "Treat SSSS as one block: 8 objects with I×4 and P×2 repeated.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7aa78a4d-ba13-4d09-9705-ed97209cac61",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Arrangements of 'ALGEBRA' with the two A's together?",
+  "formula": "",
+  "options": [
+   "7!",
+   "6!",
+   "7!/2!",
+   "6!/2!"
+  ],
+  "answer": 1,
+  "explain": "Treat AA as one block; the 6 objects AA, L, G, E, B, R are distinct.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "20a85633-5639-492f-bc18-ae8e0607e3cc",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "How many 4-digit numbers can be formed using all of the digits 0, 1, 1, 2 (leading digit non-zero)?",
+  "formula": "",
+  "options": [
+   "9",
+   "6",
+   "12",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Total 4!/2! = 12; with 0 first: 3!/2! = 3; so 12 − 3 = 9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c4ac0d31-63d9-4eb9-ab61-2fdda6f17c11",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "n people at a round table; 2 specified persons never sit adjacent. Number of ways?",
+  "formula": "(n−1)! − 2(n−2)!",
+  "options": [
+   "(n−1)! − (n−2)!",
+   "2(n−2)!",
+   "(n−3)(n−2)!",
+   "(n−3)(n−1)!"
+  ],
+  "answer": 2,
+  "explain": "Total (n−1)! minus adjacent 2(n−2)! gives (n−2)!(n−3).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ec8d514-daa3-45d7-937b-87e67853880b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "Circular arrangements of r objects chosen from n distinct objects (direction matters)?",
+  "formula": "ⁿPᵣ / r",
+  "options": [
+   "ⁿPᵣ / n",
+   "(r−1)!·ⁿPᵣ",
+   "ⁿPᵣ / r",
+   "ⁿCᵣ / r"
+  ],
+  "answer": 2,
+  "explain": "Each circular arrangement of r objects corresponds to r linear ones, so divide ⁿPᵣ by r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8824140b-4342-460d-93c2-8747d1e5aa86",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "n people at a round table; A must sit with B and C as his two neighbours. Ways?",
+  "formula": "2·(n−3)!",
+  "options": [
+   "6·(n−3)!",
+   "2·(n−3)!",
+   "(n−3)!",
+   "2·(n−2)!"
+  ],
+  "answer": 1,
+  "explain": "Block B-A-C (2 internal orders) plus n−3 others make n−2 units: (n−3)! circular ways.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "00d1049e-cbcf-4532-901b-b1f0092aae72",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "Necklace of n distinct beads (n ≥ 3); 2 specified beads must be adjacent. Ways?",
+  "formula": "(n−2)!",
+  "options": [
+   "(n−1)!/2",
+   "2·(n−2)!",
+   "(n−2)!/2",
+   "(n−2)!"
+  ],
+  "answer": 3,
+  "explain": "Block gives 2·(n−2)!, and flipping halves it, so (n−2)!.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9a26b42-5357-4bf1-9be1-5f25c23865bd",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "n couples sit at a round table with every couple seated together. Number of ways?",
+  "formula": "2ⁿ·(n−1)!",
+  "options": [
+   "2ⁿ·(n−1)!",
+   "2ⁿ·n!",
+   "2·(n−1)!",
+   "n!·(n−1)!"
+  ],
+  "answer": 0,
+  "explain": "n couple-blocks in a circle give (n−1)!, and each couple can swap in 2 ways, giving 2ⁿ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a89df52-3598-4ada-8bc1-4bea5dc0d3f2",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces",
+  "prompt": "Necklaces of r beads chosen from n distinct beads (r ≥ 3, flipping same)?",
+  "formula": "ⁿPᵣ / (2r)",
+  "options": [
+   "ⁿPᵣ / (2r)",
+   "ⁿPᵣ / 2",
+   "ⁿPᵣ / (2n)",
+   "ⁿCᵣ / (2r)"
+  ],
+  "answer": 0,
+  "explain": "Divide ⁿPᵣ by r for rotations and by 2 for flipping.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07cbc8c3-b023-4f70-867b-8ac620bfc790",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Selections (empty allowed) from p alike, q alike and r distinct objects?",
+  "formula": "(p+1)(q+1)·2ʳ",
+  "options": [
+   "(p+q+r+1)!",
+   "pq·2ʳ",
+   "(p+1)(q+1)·2ʳ",
+   "(p+1)(q+1)·r"
+  ],
+  "answer": 2,
+  "explain": "Each alike group gives (count+1) choices; each distinct object gives 2 (take or leave).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "265380c6-5509-49cd-92c6-fbe3f9c8cca6",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Non-empty selections from n objects, p of them alike and the rest distinct?",
+  "formula": "",
+  "options": [
+   "p·2ⁿ⁻ᵖ − 1",
+   "(p+1)·2ⁿ⁻ᵖ",
+   "2ⁿ⁻ᵖ·p",
+   "(p+1)·2ⁿ⁻ᵖ − 1"
+  ],
+  "answer": 3,
+  "explain": "Alike group: p+1 choices; n−p distinct: 2ⁿ⁻ᵖ; subtract the empty selection.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9cb481d5-3dad-4da4-b064-80b74f879bc3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Ways to divide 2n distinct objects into n unlabelled pairs?",
+  "formula": "",
+  "options": [
+   "(2n)!/(2·(n!)²)",
+   "(2n)!/(2ⁿ)",
+   "(2n)!/(n!·2n)",
+   "(2n)!/(2ⁿ·n!)"
+  ],
+  "answer": 3,
+  "explain": "Each pair has 2! internal orders and the n pairs have n! orders, so divide by 2ⁿ·n!.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "192a977f-1cb0-4712-9e34-694922ebd1b3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Divide n distinct objects (n = 2p+q) into unlabelled groups of sizes p, p, q (q ≠ p). Number of ways?",
+  "formula": "n!/((p!)²·q!·2!)",
+  "options": [
+   "n!/(p!·q!·2!)",
+   "n!/((p!)²·(q!)²)",
+   "n!/((p!)²·q!·2!)",
+   "n!/((p!)²·q!)"
+  ],
+  "answer": 2,
+  "explain": "The two equal groups can be swapped, so divide by 2!. The group of size q is distinguishable by its size.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b270ce09-cbfa-411e-8ca4-82971178bc8c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "n distinct objects are divided into 2 unlabelled non-empty groups. Number of ways?",
+  "formula": "2ⁿ⁻¹ − 1",
+  "options": [
+   "2ⁿ − 2",
+   "2ⁿ⁻¹",
+   "2ⁿ − 1",
+   "2ⁿ⁻¹ − 1"
+  ],
+  "answer": 3,
+  "explain": "Divide the labelled count 2ⁿ − 2 by 2 because the groups are identical.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "275f2711-3208-4257-a6b6-65d880fa6775",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Ways to put n distinct objects into 2 identical boxes, empty boxes allowed?",
+  "formula": "2ⁿ⁻¹",
+  "options": [
+   "2ⁿ",
+   "2ⁿ − 2",
+   "2ⁿ⁻¹",
+   "2ⁿ⁻¹ − 1"
+  ],
+  "answer": 2,
+  "explain": "Non-empty splits give 2ⁿ⁻¹ − 1. Adding the one all-in-one-box case gives 2ⁿ⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f2c1280e-5fcc-4eb2-ab2b-422d6dff01d7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Ways to put 4 distinct objects into 3 identical boxes, none empty?",
+  "formula": "C(4,2) = 6",
+  "options": [
+   "24",
+   "36",
+   "6",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "The sizes must be 2,1,1. Choose the pair in C(4,2) = 6 ways; the identical boxes need no further division.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "33aed796-6cfa-49cc-bc0e-9c0fb2ac8c5b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Ways to give n identical objects to r persons so that each person gets at least k objects?",
+  "formula": "C(n−rk+r−1, r−1)",
+  "options": [
+   "C(n−rk+r, r)",
+   "C(n−rk−1, r−1)",
+   "C(n−rk+r−1, r−1)",
+   "C(n−k+r−1, r−1)"
+  ],
+  "answer": 2,
+  "explain": "Give k to each first. The remaining n−rk objects are distributed freely among r persons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cc65d09d-f4c3-4362-94d0-dabe23c21321",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Number of non-negative integer solutions of x + y + z ≤ n?",
+  "formula": "",
+  "options": [
+   "C(n+3, 3)",
+   "C(n+3, 2)",
+   "C(n+1, 3)",
+   "C(n+2, 2)"
+  ],
+  "answer": 0,
+  "explain": "Add a slack variable w ≥ 0 so that x+y+z+w = n, giving C(n+3, 3).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4d2bb7bb-5822-48f2-b1eb-48684b928d2e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups",
+  "prompt": "Ways to distribute 4 distinct objects into 3 distinct boxes, none empty?",
+  "formula": "C(4,2)·3!",
+  "options": [
+   "81",
+   "24",
+   "36",
+   "18"
+  ],
+  "answer": 2,
+  "explain": "Onto count: 3⁴ − 3·2⁴ + 3 = 36. Equivalently, the 6 splits into 2,1,1 times 3! for labelling.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "766c63ff-22c9-4085-b2ef-c59d4b22afde",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Positive integer solutions of x₁+x₂+…+xᵣ ≤ n: count?",
+  "formula": "",
+  "options": [
+   "ⁿ⁻¹C_r",
+   "ⁿC_r",
+   "ⁿ⁺ʳC_r",
+   "ⁿ⁻¹Cᵣ₋₁"
+  ],
+  "answer": 1,
+  "explain": "Add slack w ≥ 1... equivalently Σ_{m≤n} C(m−1, r−1) = ⁿC_r (hockey-stick).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "98c66656-9d80-4e97-8fb6-035598a3af72",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Non-negative solutions of x+y+z = 10 with x ≥ 2: count?",
+  "formula": "put x = 2 + x′, x′ ≥ 0",
+  "options": [
+   "55",
+   "66",
+   "45",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "x′+y+z = 8 gives C(10,2) = 45.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66398442-b77c-42e5-b188-b2fb710129c7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Number of ordered ways to write n as a sum of positive integers (any number of parts)?",
+  "formula": "",
+  "options": [
+   "2ⁿ⁻¹",
+   "2ⁿ",
+   "n!",
+   "n²"
+  ],
+  "answer": 0,
+  "explain": "Each of the n−1 gaps between n stars has a bar or not: 2ⁿ⁻¹ compositions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f0ea24a6-3685-4c4f-9b65-1b27b5c1b570",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Solutions of x+y+z = 10 in non-negative even integers?",
+  "formula": "put x = 2a, y = 2b, z = 2c",
+  "options": [
+   "28",
+   "66",
+   "15",
+   "21"
+  ],
+  "answer": 3,
+  "explain": "a+b+c = 5 gives C(7,2) = 21.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "51b22878-7216-4adb-80d4-c2d589154fae",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Solutions of x+y+z = 11 in positive odd integers?",
+  "formula": "put x = 2a+1, etc. with a ≥ 0",
+  "options": [
+   "21",
+   "15",
+   "28",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "2(a+b+c)+3 = 11 gives a+b+c = 4, so C(6,2) = 15.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ebfd5bb1-3436-4ef3-a86b-a72880b7d9c7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Non-negative integer solutions of x+y+z < 10: count?",
+  "formula": "strict: x+y+z ≤ 9",
+  "options": [
+   "C(12,3)",
+   "C(13,3)",
+   "C(12,2)",
+   "C(11,3)"
+  ],
+  "answer": 0,
+  "explain": "≤ 9 with a slack variable: C(9+3, 3) = C(12,3) = 220.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "42c46dac-384c-411a-a846-f617004f45be",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Integer solutions of x+y+z = 0 with each of x, y, z ≥ −2?",
+  "formula": "shift: a = x+2 etc.",
+  "options": [
+   "21",
+   "45",
+   "28",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "a+b+c = 6 with a,b,c ≥ 0 gives C(8,2) = 28.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "040e1d8c-bcd4-40fb-b162-d3204d51f0d5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)",
+  "prompt": "Positive solutions of x+y+z = 12 with x ≥ 3: count?",
+  "formula": "put x = x′+2, x′ ≥ 1",
+  "options": [
+   "36",
+   "55",
+   "28",
+   "45"
+  ],
+  "answer": 0,
+  "explain": "x′+y+z = 10 in positives: C(9,2) = 36.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "26a1691a-5179-4a9a-b172-d353d8800562",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "n points, of which m are collinear (others general). Number of triangles?",
+  "formula": "ⁿC₃ − ᵐC₃",
+  "options": [
+   "ⁿC₃ − ᵐC₃ + 1",
+   "ⁿC₃ − ᵐC₃",
+   "ⁿC₃ − 3·ᵐC₃",
+   "ⁿC₃ − ᵐC₂"
+  ],
+  "answer": 1,
+  "explain": "Any 3 of the m collinear points give no triangle, so subtract ᵐC₃.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a591760c-cc98-4fd4-927f-f3f602d9514b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "Triangles from vertices of a convex n-gon having NO side common with the polygon?",
+  "formula": "n(n−4)(n−5)/6",
+  "options": [
+   "n(n−3)(n−4)/6",
+   "n(n−4)(n−5)/6",
+   "n(n−1)(n−5)/6",
+   "n(n−4)"
+  ],
+  "answer": 1,
+  "explain": "Total ⁿC₃ minus those with one or two polygon sides gives n(n−4)(n−5)/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "12581fef-1bde-4704-8d75-c00c2e3a1188",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "Triangles from vertices of a convex n-gon with exactly one side common with the polygon?",
+  "formula": "n(n−4)",
+  "options": [
+   "n(n−4)/2",
+   "n(n−5)",
+   "n(n−3)",
+   "n(n−4)"
+  ],
+  "answer": 3,
+  "explain": "Choose the side (n ways), third vertex not adjacent to its ends: n−4 ways.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f7dfc222-f50c-497f-b548-7b2d07151851",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "Interior intersection points of diagonals of a convex n-gon (no three diagonals concurrent)?",
+  "formula": "ⁿC₄",
+  "options": [
+   "ⁿC₂",
+   "ⁿC₃",
+   "ⁿC₄",
+   "n(n−3)/2"
+  ],
+  "answer": 2,
+  "explain": "Every 4 vertices give one pair of crossing diagonals, so ⁿC₄ points.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "33ef8a21-b51d-49eb-b9d0-5dde1e1367ef",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "n points; m on one line, k on another line (no other 3 collinear). Number of distinct lines?",
+  "formula": "ⁿC₂ − ᵐC₂ − ᵏC₂ + 2",
+  "options": [
+   "ⁿC₂ − ᵐC₂ − ᵏC₂ + 3",
+   "ⁿC₂ − ᵐC₂ − ᵏC₂",
+   "ⁿC₂ − ᵐC₂ − ᵏC₂ + 1",
+   "ⁿC₂ − ᵐC₂ − ᵏC₂ + 2"
+  ],
+  "answer": 3,
+  "explain": "Each collinear set's ᶜC₂ lines collapse to a single line, so add back 1 for each: +2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8367d115-41f8-422b-a0b8-bb3709e4973b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles",
+  "prompt": "n lines, no two parallel, no three concurrent. Number of triangles they form?",
+  "formula": "ⁿC₃",
+  "options": [
+   "n(n−1)(n−2)",
+   "ⁿC₂",
+   "ⁿC₃ − n",
+   "ⁿC₃"
+  ],
+  "answer": 3,
+  "explain": "Each choice of 3 lines gives exactly one triangle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "14b21c1a-f1aa-4f91-b55e-75c7e4c6f493",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting",
+  "prompt": "Ways to arrange n distinct objects with exactly r in their natural places?",
+  "formula": "ⁿCᵣ · Dₙ₋ᵣ",
+  "options": [
+   "ⁿCᵣ · (n−r)!",
+   "ⁿCᵣ · Dᵣ",
+   "ⁿCᵣ · Dₙ₋ᵣ",
+   "ⁿPᵣ · Dₙ₋ᵣ"
+  ],
+  "answer": 2,
+  "explain": "Choose the r fixed objects in ⁿCᵣ ways, then derange the remaining n−r objects.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aace9ed1-7bdd-4d4f-bd84-291e9a4f481b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties",
+  "prompt": "The product of r consecutive positive integers is always divisible by?",
+  "formula": "",
+  "options": [
+   "(r+1)!",
+   "r!",
+   "r²",
+   "2^r"
+  ],
+  "answer": 1,
+  "explain": "Product of r consecutive integers = r!·C(m, r)-type quantity, so r! divides it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "82688864-6552-4527-be4b-a9f80e5e8ccd",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties",
+  "prompt": "(2n)! / (2ⁿ · n!) equals?",
+  "formula": "(2n)!/(2ⁿ n!) = 1·3·5·…·(2n−1)",
+  "options": [
+   "(2n−1)!",
+   "Product of first n odd numbers",
+   "Product of first n even numbers",
+   "n!"
+  ],
+  "answer": 1,
+  "explain": "(2n)! = [2·4…2n][1·3…(2n−1)] and 2·4…2n = 2ⁿ·n!.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3aa27098-3a82-40f1-9cec-4a40f618dbc4",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "Permutations of n distinct things taken r at a time, with one specified thing never used, number?",
+  "formula": "",
+  "options": [
+   "r · ⁿ⁻¹Pᵣ₋₁",
+   "ⁿPᵣ₋₁",
+   "ⁿ⁻¹Pᵣ₋₁",
+   "ⁿ⁻¹Pᵣ"
+  ],
+  "answer": 3,
+  "explain": "Remove the excluded object and arrange r of the remaining n−1: ⁿ⁻¹Pᵣ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "86554630-c978-4801-8bfd-bb6a91e7e099",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "Permutations of n distinct things r at a time that always include one given thing number?",
+  "formula": "",
+  "options": [
+   "r · ⁿ⁻¹Pᵣ₋₁",
+   "n · ⁿ⁻¹Pᵣ₋₁",
+   "ⁿ⁻¹Pᵣ",
+   "ⁿ⁻¹Pᵣ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Choose its place in r ways, then arrange r−1 others from n−1: r·ⁿ⁻¹Pᵣ₋₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6eb8ba24-e5cb-429b-a42a-296b16b622c5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Number of shortest lattice paths from (0,0) to (3,3) using unit steps right/up?",
+  "formula": "6!/(3!·3!)",
+  "options": [
+   "15",
+   "40",
+   "36",
+   "20"
+  ],
+  "answer": 3,
+  "explain": "Each path is an arrangement of 3 R's and 3 U's: 6!/(3!3!) = 20.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8b5a1060-f3e5-46cb-b7e0-40e6f8680d85",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Arrangements of the letters of 'MISSISSIPPI' that begin with M?",
+  "formula": "",
+  "options": [
+   "10!/(3!·4!·2!)",
+   "10!/(4!·4!·2!·2!)",
+   "10!/(4!·4!·2!)",
+   "11!/(4!·4!·2!)"
+  ],
+  "answer": 2,
+  "explain": "Fix M first; arrange I×4, S×4, P×2 in the remaining 10 places.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0eff5392-c3bf-43ee-b173-99f0f2630fda",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Arrangements of the letters of 'AABBC' in which the two A's are together?",
+  "formula": "",
+  "options": [
+   "12",
+   "24",
+   "48",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "Treat AA as one block: 4 units AA, B, B, C give 4!/2! = 12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c343bf1-51bd-4e90-a362-6048e6517a61",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Number of palindromic arrangements of all letters of 'AABBCC'?",
+  "formula": "",
+  "options": [
+   "90",
+   "6",
+   "12",
+   "8"
+  ],
+  "answer": 1,
+  "explain": "First half uses A, B, C once each: 3! = 6 and the second half is fixed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7a6f26b5-0581-4806-91ba-23acd2cec389",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Arrangements of 'AAABBB' in which no two A's are adjacent?",
+  "formula": "",
+  "options": [
+   "6",
+   "20",
+   "4",
+   "10"
+  ],
+  "answer": 2,
+  "explain": "Place the 3 A's in the 4 gaps around the B's: C(4,3) = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "741ee144-f639-49e7-a656-209d8dec2839",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "How many even 5-digit numbers use all of the digits 1, 1, 2, 2, 3?",
+  "formula": "",
+  "options": [
+   "18",
+   "30",
+   "24",
+   "12"
+  ],
+  "answer": 3,
+  "explain": "The last digit is 2; arrange 1,1,2,3 in the rest: 4!/2! = 12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a8ebda9-ef1b-417b-b7cd-4feccaa0517f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Number of 3-digit numbers that can be formed from the digits 1, 1, 2, 2 (each used at most as available)?",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "8",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Multiset {1,1,2} gives 3 and {1,2,2} gives 3, so 6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "032f2877-8c6e-4994-ae18-8d3f61f65988",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "n!/(p!·q!·r!) with p+q+r = n equals which coefficient in the expansion of (x+y+z)ⁿ?",
+  "formula": "",
+  "options": [
+   "Coefficient of xⁿ",
+   "Sum of all coefficients",
+   "Coefficient of xᵖyᑫzʳ",
+   "Coefficient of xᵖ only"
+  ],
+  "answer": 2,
+  "explain": "It is the multinomial coefficient of xᵖyᑫzʳ in (x+y+z)ⁿ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "042a3591-7700-44fb-a42f-05b57097620e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Arrangements of 'ARRANGE' with both A's at the two ends?",
+  "formula": "",
+  "options": [
+   "30",
+   "120",
+   "360",
+   "60"
+  ],
+  "answer": 3,
+  "explain": "A's fill both ends; arrange R,R,N,G,E in between: 5!/2! = 60.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a7adbdf-13dc-439d-b486-62f120826a62",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of positive divisors of 10ⁿ?",
+  "formula": "10ⁿ = 2ⁿ·5ⁿ",
+  "options": [
+   "(n + 1)²",
+   "n²",
+   "n + 1",
+   "2(n + 1)"
+  ],
+  "answer": 0,
+  "explain": "10ⁿ = 2ⁿ·5ⁿ, so the divisor count is (n+1)(n+1) = (n+1)².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a7eaf417-8a50-468b-8d7d-35f8dcf53232",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties",
+  "prompt": "Σ r/(r+1)! for r = 1 to n equals?",
+  "formula": "r/(r+1)! = 1/r! − 1/(r+1)!",
+  "options": [
+   "1 − 1/n!",
+   "1/n! − 1/(n+1)!",
+   "1 − 1/(n+1)!",
+   "2 − 1/(n+1)!"
+  ],
+  "answer": 2,
+  "explain": "The terms telescope: 1/1! − 1/(n+1)! = 1 − 1/(n+1)!.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6c7b85d4-0d03-4283-90c7-3cb31f0b139f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "r-arrangements of n distinct things in which one given thing sits at a specified place: count?",
+  "formula": "",
+  "options": [
+   "ⁿPᵣ₋₁",
+   "r · ⁿ⁻¹Pᵣ₋₁",
+   "ⁿ⁻¹Pᵣ₋₁",
+   "ⁿ⁻¹Pᵣ"
+  ],
+  "answer": 2,
+  "explain": "Fix that thing at that place; the remaining r−1 places are filled from n−1 things: ⁿ⁻¹Pᵣ₋₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e65c0bd3-a719-4d14-971f-267d4fe85c8b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "If ⁿP₂ = 72, then n equals?",
+  "formula": "ⁿP₂ = n(n−1)",
+  "options": [
+   "12",
+   "9",
+   "8",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "n(n−1) = 72 = 9 × 8, so n = 9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a1551ff6-ccd9-48b0-88a1-dcd37da6aa3d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "For 1 ≤ r ≤ n, the ratio ⁿPᵣ / ⁿPᵣ₋₁ simplifies to which expression?",
+  "formula": "ⁿPᵣ / ⁿPᵣ₋₁",
+  "options": [
+   "n − r + 1",
+   "r(n − r + 1)",
+   "n − r",
+   "n − r + 2"
+  ],
+  "answer": 0,
+  "explain": "ⁿPᵣ = n!/(n−r)! and ⁿPᵣ₋₁ = n!/(n−r+1)!, so the ratio is (n−r+1)!/(n−r)! = n−r+1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "af0e94b2-c13f-40dd-aaf8-5643cce6d67d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects",
+  "prompt": "Arrangements of the letters of 'BANANA' in which all three A's are together?",
+  "formula": "",
+  "options": [
+   "60",
+   "12",
+   "24",
+   "20"
+  ],
+  "answer": 1,
+  "explain": "Treat AAA as one block: 4 objects B, N, N, AAA give 4!/2! = 12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b03179b4-9ae6-4246-88b7-989db28f74a8",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties",
+  "prompt": "Smallest positive integer n such that n! is divisible by 1000 is?",
+  "formula": "1000 = 2³·5³",
+  "options": [
+   "10",
+   "20",
+   "25",
+   "15"
+  ],
+  "answer": 3,
+  "explain": "Need 5³: ⌊15/5⌋ = 3 so 15! works, while 14! has only two 5s. Factors of 2 are plentiful.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4afb5190-d5a1-4212-a997-0bf37451f345",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "ⁿPᵣ = n · (?)  (1 ≤ r ≤ n)",
+  "formula": "ⁿPᵣ = n·(n−1)!/(n−r)!",
+  "options": [
+   "ⁿPᵣ₋₁",
+   "r·ⁿ⁻¹Pᵣ₋₁",
+   "ⁿ⁻¹Pᵣ",
+   "ⁿ⁻¹Pᵣ₋₁"
+  ],
+  "answer": 3,
+  "explain": "Fix the first place in n ways, then arrange r−1 of the remaining n−1: ⁿPᵣ = n·ⁿ⁻¹Pᵣ₋₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "db00ac25-055f-4500-af46-b705354e2d0a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed",
+  "prompt": "4-digit numbers formed from digits 0, 1, 2, 3 with repetition allowed: count?",
+  "formula": "3 · 4 · 4 · 4",
+  "options": [
+   "144",
+   "192",
+   "256",
+   "64"
+  ],
+  "answer": 1,
+  "explain": "Thousands place can't be 0: 3 choices; other three places have 4 each: 3·4³ = 192.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac4322ab-0176-409c-8224-444025b19113",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "²ⁿ⁺¹C₀ + ²ⁿ⁺¹C₁ + ... + ²ⁿ⁺¹Cₙ equals?",
+  "formula": "",
+  "options": [
+   "2²ⁿ⁺¹",
+   "4ⁿ",
+   "4ⁿ − 1",
+   "2ⁿ"
+  ],
+  "answer": 1,
+  "explain": "By symmetry the first half is half of 2²ⁿ⁺¹, which is 2²ⁿ = 4ⁿ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "963c279b-6609-408e-9b54-b6bd88eaa030",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Select at least one of EACH type from p identical A's and q identical B's: number of ways?",
+  "formula": "",
+  "options": [
+   "(p+1)(q+1)",
+   "pq",
+   "p + q − 1",
+   "(p+1)(q+1) − 1"
+  ],
+  "answer": 1,
+  "explain": "A can be taken in p ways (1..p) and B in q ways (1..q), so total pq.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "13393341-70d2-4b53-9b5d-c30f23a9c61b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Number of ways to write 360 = 2³·3²·5 as a product of two factors, order ignored?",
+  "formula": "",
+  "options": [
+   "12",
+   "11",
+   "23",
+   "24"
+  ],
+  "answer": 0,
+  "explain": "360 has 4·3·2 = 24 divisors and is not a perfect square, so pairs = 24/2 = 12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3a0aa2b-9fa1-4f34-b8ae-a4f814149ee6",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Number of divisors of 2⁶·3³ that are perfect squares?",
+  "formula": "",
+  "options": [
+   "8",
+   "12",
+   "6",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "Even exponents only: 2 gets 0,2,4,6 (4 choices), 3 gets 0,2 (2 choices); 4·2 = 8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d236873d-0f87-4974-a7d4-57c6c165db1d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects",
+  "prompt": "Number of divisors of 2³·3³·5 that are multiples of 6?",
+  "formula": "",
+  "options": [
+   "12",
+   "24",
+   "18",
+   "16"
+  ],
+  "answer": 2,
+  "explain": "Exponent of 2 in 1..3 (3), of 3 in 1..3 (3), of 5 in 0..1 (2): 3·3·2 = 18.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c43dd25b-80c6-4901-9265-945365477bbb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting",
+  "prompt": "Number of 3-digit numbers whose digits are strictly decreasing from left to right?",
+  "formula": "",
+  "options": [
+   "120",
+   "84",
+   "100",
+   "90"
+  ],
+  "answer": 0,
+  "explain": "Any 3 of the 10 digits give exactly one decreasing order, so ¹⁰C₃ = 120. The leading digit is automatically non-zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f73ab3cb-ea56-4156-903f-d8428599fcbb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning",
+  "prompt": "For r ≤ n, the ratio ⁿ⁺¹Pᵣ / ⁿPᵣ simplifies to which expression?",
+  "formula": "ⁿ⁺¹Pᵣ = (n+1)!/(n+1−r)!",
+  "options": [
+   "(n+1)/(n+1−r)",
+   "(n+1−r)/(n+1)",
+   "n/(n−r+1)",
+   "(n+1)/(n−r)"
+  ],
+  "answer": 0,
+  "explain": "(n+1)!/(n+1−r)! × (n−r)!/n! = (n+1)/(n+1−r).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0e6385c-3231-4904-8f92-1131d08ad54c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "ⁿCᵣ + 2·ⁿCᵣ₋₁ + ⁿCᵣ₋₂ equals?",
+  "formula": "",
+  "options": [
+   "2·ⁿ⁺¹Cᵣ₋₁",
+   "ⁿ⁺²Cᵣ₋₁",
+   "ⁿ⁺¹Cᵣ",
+   "ⁿ⁺²Cᵣ"
+  ],
+  "answer": 3,
+  "explain": "Apply Pascal twice: (ⁿCᵣ+ⁿCᵣ₋₁)+(ⁿCᵣ₋₁+ⁿCᵣ₋₂) = ⁿ⁺¹Cᵣ+ⁿ⁺¹Cᵣ₋₁ = ⁿ⁺²Cᵣ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fedd3a6d-75a7-4504-9b96-62703004c26b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties",
+  "prompt": "For r < n: ⁿC₀ − ⁿC₁ + ⁿC₂ − … + (−1)ʳ·ⁿCᵣ equals?",
+  "formula": "",
+  "options": [
+   "(−1)ʳ · ⁿ⁻¹Cᵣ₋₁",
+   "(−1)ʳ · ⁿ⁻¹Cᵣ",
+   "(−1)ʳ · ⁿCᵣ",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Partial alternating sum telescopes via Pascal: result is (−1)ʳ·ⁿ⁻¹Cᵣ. Check n=2, r=1: 1−2 = −1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4c855b15-c8ee-456b-8974-398d419c2760",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting",
+  "prompt": "Derangements satisfy Dₙ = n·Dₙ₋₁ + ? (D₀ = 1, D₁ = 0)",
+  "formula": "Dₙ = nDₙ₋₁ + (−1)ⁿ",
+  "options": [
+   "(−1)ⁿ",
+   "(−1)ⁿ⁻¹",
+   "1",
+   "(−1)ⁿ/n!"
+  ],
+  "answer": 0,
+  "explain": "Check: D₂ = 2·0 + 1 = 1, D₃ = 3·1 − 1 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "237b5aca-2bef-4e85-81b2-650fcf6542a9",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting",
+  "prompt": "Σₖ₌₀ⁿ ⁿCₖ·Dₖ (with D₀ = 1) equals?",
+  "formula": "Σ ⁿCₖ Dₖ = n!",
+  "options": [
+   "(n+1)!",
+   "n!",
+   "2ⁿ",
+   "n!/e"
+  ],
+  "answer": 1,
+  "explain": "Classify all n! permutations by their n−k fixed points; the other k places form a derangement.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "122d703f-ee9d-4347-84b2-731e69f0e629",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting",
+  "prompt": "For derangements, Dₙ = (n − 1)·(Dₙ₋₁ + X). What is X?",
+  "formula": "Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂)",
+  "options": [
+   "(n−2)·Dₙ₋₂",
+   "Dₙ₋₁",
+   "Dₙ₋₃",
+   "Dₙ₋₂"
+  ],
+  "answer": 3,
+  "explain": "Standard recurrence: Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂), e.g. D₄ = 3(2+1) = 9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

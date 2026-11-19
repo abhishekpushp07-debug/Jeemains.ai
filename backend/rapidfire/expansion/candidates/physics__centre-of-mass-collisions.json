@@ -1,0 +1,2654 @@
+[
+ {
+  "prompt": "For any system, Σ mᵢ(rᵢ − r_cm) taken about its centre of mass equals:",
+  "formula": "Σ mᵢ(rᵢ − r_cm) = 0",
+  "options": [
+   "Zero",
+   "M·r_cm",
+   "Σ mᵢrᵢ",
+   "Total kinetic energy"
+  ],
+  "answer": 0,
+  "explain": "The weighted position vector about the CM vanishes by the definition of CM.",
+  "kind": "concept",
+  "id": "442ea49c-9113-479d-871c-2a938c97d500",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Masses m and 3m are a distance d apart. Distance of the CM from the 3m mass is:",
+  "formula": "",
+  "options": [
+   "3d/4",
+   "d/2",
+   "d/4",
+   "d/3"
+  ],
+  "answer": 2,
+  "explain": "The CM is nearer the heavier mass: distance from 3m = m·d/(4m) = d/4.",
+  "kind": "result",
+  "id": "603f07e0-c5b9-4d1f-b928-29866a3a51c6",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Internal forces in a system of particles can NOT change the:",
+  "formula": "",
+  "options": [
+   "Momentum of an individual particle",
+   "Kinetic energy of the system",
+   "Velocity of the CM",
+   "Angular momentum of one particle"
+  ],
+  "answer": 2,
+  "explain": "Internal forces cancel in pairs, so only external forces accelerate the CM.",
+  "kind": "concept",
+  "id": "3b975be0-4b84-452e-9cff-b86c4d0d2f3d",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "A projectile explodes in mid-air. Until a fragment lands, the CM of the fragments follows:",
+  "formula": "",
+  "options": [
+   "A straight vertical line",
+   "The original parabolic path",
+   "A circular path",
+   "A path of larger range only"
+  ],
+  "answer": 1,
+  "explain": "Explosion forces are internal; gravity alone acts externally, so a_cm is unchanged.",
+  "kind": "concept",
+  "id": "65d1b37f-cd23-42fa-ae3c-52e7935182ad",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Two particles at rest interact only through mutual attraction. They meet at:",
+  "formula": "",
+  "options": [
+   "Midpoint of the line joining them",
+   "Initial position of the heavier one",
+   "Initial position of the lighter one",
+   "Their initial CM"
+  ],
+  "answer": 3,
+  "explain": "F_ext = 0 and v_cm = 0, so the CM stays fixed and the particles meet there.",
+  "kind": "concept",
+  "id": "82e76a49-7899-4443-8dbf-b2394530b765",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Total linear momentum of a system of particles equals:",
+  "formula": "P = M v_cm",
+  "options": [
+   "Σ mᵢ only",
+   "M v_cm",
+   "½ M v_cm²",
+   "M a_cm"
+  ],
+  "answer": 1,
+  "explain": "Differentiating M r_cm = Σ mᵢrᵢ gives P = M v_cm.",
+  "kind": "formula",
+  "id": "62a5fdb8-3159-4004-9a68-1572da5a6d96",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Net momentum of a system as seen from its CM frame is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "M v_cm",
+   "Equal to external force",
+   "Equal to total KE"
+  ],
+  "answer": 0,
+  "explain": "In the CM frame v_cm = 0, so the total momentum is zero.",
+  "kind": "concept",
+  "id": "d10b730f-132d-4089-af20-97cb0d113ed0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Total KE of a system of particles equals:",
+  "formula": "K = ½Mv_cm² + K_about CM",
+  "options": [
+   "½Mv_cm² only",
+   "K of CM minus K about CM",
+   "½Mv_cm² + KE relative to CM",
+   "Σ mᵢvᵢ"
+  ],
+  "answer": 2,
+  "explain": "König's theorem: translational KE of the CM plus KE relative to the CM.",
+  "kind": "formula",
+  "id": "59f809da-6556-4fa2-aa73-9221b33a0f5c",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Acceleration of the CM of a system of mass M is given by:",
+  "formula": "a_cm = F_ext / M",
+  "options": [
+   "F_internal / M",
+   "ΣF_ext / M",
+   "Σmᵢaᵢ / n",
+   "ΣF_int·M"
+  ],
+  "answer": 1,
+  "explain": "Newton's second law for a system: ΣF_ext = M a_cm.",
+  "kind": "formula",
+  "id": "75d326fc-e8e0-4a9c-8e75-e1ba028c92d9",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "The CM of a system of particles:",
+  "formula": "",
+  "options": [
+   "Always coincides with one particle",
+   "Always lies on the heaviest particle",
+   "Is always at the geometric centre",
+   "May lie where no particle exists"
+  ],
+  "answer": 3,
+  "explain": "The CM is a weighted average position, which need not coincide with any particle.",
+  "kind": "fact",
+  "id": "e850d46b-9855-4617-93ad-1a4824f262e1",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Three equal masses at the vertices of any triangle have their CM at its:",
+  "formula": "",
+  "options": [
+   "Centroid",
+   "Circumcentre",
+   "Orthocentre",
+   "Incentre"
+  ],
+  "answer": 0,
+  "explain": "For equal masses, r_cm = (r₁+r₂+r₃)/3, which is the centroid.",
+  "kind": "fact",
+  "id": "b1d4dd9f-4d9e-45c7-b3c4-40c8c8737b1d",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "In a uniform gravitational field, the centre of gravity of a system:",
+  "formula": "",
+  "options": [
+   "Lies above the CM",
+   "Lies below the CM",
+   "Coincides with the CM",
+   "Is at the geometric centre only"
+  ],
+  "answer": 2,
+  "explain": "With uniform g, the weights are proportional to the masses, so both points coincide.",
+  "kind": "concept",
+  "id": "216e3a9b-5778-43ea-8d54-274f7fd5f4bb",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Mass m is at rest and mass 2m moves with speed v. The CM speed is:",
+  "formula": "v_cm = Σmv/Σm",
+  "options": [
+   "v/3",
+   "v/2",
+   "3v/2",
+   "2v/3"
+  ],
+  "answer": 3,
+  "explain": "v_cm = (2m·v + 0)/(3m) = 2v/3.",
+  "kind": "result",
+  "id": "b0d30a1c-5180-4de5-91e1-205fd9918144",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Two particles move with equal and opposite momenta. Their CM:",
+  "formula": "",
+  "options": [
+   "Moves with the speed of the lighter one",
+   "Moves with the speed of the heavier one",
+   "Is at rest",
+   "Moves with the average speed"
+  ],
+  "answer": 2,
+  "explain": "Total momentum is zero, so v_cm = P/M = 0.",
+  "kind": "concept",
+  "id": "87108f1f-fd96-4463-a310-92339e6495b0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "For two particles m₁, m₂ at separation r, their distances from the CM satisfy r₁/r₂ =",
+  "formula": "m₁r₁ = m₂r₂",
+  "options": [
+   "m₁/m₂",
+   "m₂/m₁",
+   "m₁²/m₂²",
+   "m₂²/m₁"
+  ],
+  "answer": 1,
+  "explain": "Moments about the CM balance: m₁r₁ = m₂r₂, so r₁/r₂ = m₂/m₁.",
+  "kind": "formula",
+  "id": "6749de3e-864c-4584-8262-128d35e89dd2",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "A man walks on a boat in still water, with no horizontal external force. What stays fixed?",
+  "formula": "",
+  "options": [
+   "Centre of the boat",
+   "Position of the man",
+   "Horizontal position of the man+boat CM",
+   "Position of the boat's stern"
+  ],
+  "answer": 2,
+  "explain": "Net horizontal F_ext = 0 and the system starts at rest, so the CM does not move horizontally.",
+  "kind": "concept",
+  "id": "58a16fe0-2c93-424f-80b3-a10dd2607da9",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Changing the origin of the coordinate system changes which property of the CM?",
+  "formula": "",
+  "options": [
+   "Its coordinates only",
+   "Its physical position in the system",
+   "Its velocity relative to the particles",
+   "Its mass"
+  ],
+  "answer": 0,
+  "explain": "The CM is fixed relative to the particles; only the numerical coordinates depend on the origin.",
+  "kind": "concept",
+  "id": "e687d7de-81d1-4bc1-910d-63379c997399",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "If ΣF_ext = 0 on a system of particles, its CM:",
+  "formula": "",
+  "options": [
+   "Must remain at rest",
+   "Moves with constant velocity",
+   "Moves with constant acceleration",
+   "Moves in a circle"
+  ],
+  "answer": 1,
+  "explain": "a_cm = 0, so v_cm is constant (zero only if it started at rest).",
+  "kind": "concept",
+  "id": "da60f605-237b-45eb-b5a7-78652efd37dd",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Four equal masses sit at the corners of a square. Their CM lies at the:",
+  "formula": "",
+  "options": [
+   "Midpoint of one side",
+   "Corner mass nearest the origin",
+   "Centre of the square, where the diagonals meet",
+   "Foot of the perpendicular from one corner"
+  ],
+  "answer": 2,
+  "explain": "By symmetry, equal masses give a CM at the intersection of the diagonals.",
+  "kind": "fact",
+  "id": "7d8a8217-40a6-44e1-bffd-7700755a0ce5",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Two particles move freely under gravity alone, with different velocities. Acceleration of their CM is:",
+  "formula": "a_cm = ΣF_ext/M = g",
+  "options": [
+   "g downward, whatever their velocities",
+   "Zero, as internal forces cancel",
+   "Less than g, depending on mass ratio",
+   "Depends on their relative velocity"
+  ],
+  "answer": 0,
+  "explain": "Net external force is Mg, so a_cm = g downward, independent of velocities.",
+  "kind": "concept",
+  "id": "b814135b-ecb6-4b54-aca8-fdaa6d9475a3",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "For a system of particles with positive masses, the CM always lies:",
+  "formula": "",
+  "options": [
+   "Within the region spanned by the particles",
+   "At the position of the heaviest particle",
+   "At the geometric centre of the particles",
+   "Outside the extreme particles"
+  ],
+  "answer": 0,
+  "explain": "A positive-weighted average of positions lies within their convex region; for two particles, on the joining segment.",
+  "kind": "concept",
+  "id": "43a7f01f-45c3-4854-aaac-be821adb8c66",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "For two particles m₁, m₂ with relative speed v_rel, their KE in the CM frame is:",
+  "formula": "μ = m₁m₂/(m₁+m₂)",
+  "options": [
+   "½ μ v_rel²",
+   "½ (m₁+m₂) v_rel²",
+   "½ m₁ v_rel²",
+   "μ v_rel²"
+  ],
+  "answer": 0,
+  "explain": "In the CM frame, K_cm = ½ μ v_rel², with μ the reduced mass m₁m₂/(m₁+m₂).",
+  "kind": "formula",
+  "id": "16874286-a7d3-4dd0-8d55-4fd7f151e1b7",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "An extra particle is placed exactly at the CM of an existing system. The CM of the new system:",
+  "formula": "",
+  "options": [
+   "Shifts toward the added particle",
+   "Remains unchanged",
+   "Shifts away from the added particle",
+   "Moves to the midpoint of the old and new masses"
+  ],
+  "answer": 1,
+  "explain": "The added particle has zero displacement from the CM, so Σm(r−r_cm) stays zero and the CM is unchanged.",
+  "kind": "concept",
+  "id": "e239046a-b9be-4940-b50e-e165c963dab3",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "CM of a uniform triangular lamina of height h lies at what distance from the base?",
+  "formula": "y = h/3",
+  "options": [
+   "h/3",
+   "h/2",
+   "2h/3",
+   "h/4"
+  ],
+  "answer": 0,
+  "explain": "The CM is the centroid, where the medians meet, at h/3 from the base.",
+  "kind": "result",
+  "id": "06f074aa-913d-489a-85d4-67103fdae5ad",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of continuous bodies (standard results)"
+ },
+ {
+  "prompt": "CM of a uniform hollow conical shell (curved surface only) of height H lies at what distance from the base?",
+  "formula": "",
+  "options": [
+   "H/4",
+   "H/3",
+   "H/2",
+   "2H/3"
+  ],
+  "answer": 1,
+  "explain": "For a hollow cone the CM is at H/3 from the base, i.e. 2H/3 from the apex. A solid cone gives H/4.",
+  "kind": "result",
+  "id": "04be7cc5-6205-45eb-a28f-4ad2b5fc5060",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of continuous bodies (standard results)"
+ },
+ {
+  "prompt": "A rod of length L has linear density λ = kx (x from one end). Its CM is at x =",
+  "formula": "x_cm = ∫xλdx / ∫λdx",
+  "options": [
+   "L/2",
+   "2L/3",
+   "3L/4",
+   "L/3"
+  ],
+  "answer": 1,
+  "explain": "x_cm = (kL³/3)/(kL²/2) = 2L/3, shifted toward the denser end.",
+  "kind": "result",
+  "id": "8bccfa5a-8a6b-4a78-8391-85ad78db31eb",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of continuous bodies (standard results)"
+ },
+ {
+  "prompt": "Uniform circular arc of radius R subtends angle 2α at its centre. CM from centre is",
+  "formula": "",
+  "options": [
+   "R sinα / α",
+   "2R sinα / 3α",
+   "R α / sinα",
+   "R cosα / α"
+  ],
+  "answer": 0,
+  "explain": "Arc result is R sinα/α. For α = π/2 it gives the semicircular ring value 2R/π.",
+  "kind": "formula",
+  "id": "7b9c70eb-8147-4d3e-8b99-d15f8acbcfcc",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of continuous bodies (standard results)"
+ },
+ {
+  "prompt": "Uniform circular sector of radius R and angle 2α: CM from the centre is",
+  "formula": "",
+  "options": [
+   "R sinα / α",
+   "2R sinα / 3α",
+   "4R sinα / 3α",
+   "R sinα / 2α"
+  ],
+  "answer": 1,
+  "explain": "Sector result is 2R sinα/(3α). For α = π/2 it gives 4R/3π.",
+  "kind": "formula",
+  "id": "c214e84f-9c42-4856-bde0-6538cf4d1be0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of continuous bodies (standard results)"
+ },
+ {
+  "prompt": "CM of a uniform quarter-circular disc of radius R from each straight edge is",
+  "formula": "",
+  "options": [
+   "2R/π",
+   "4R/3π",
+   "3R/8",
+   "R/2"
+  ],
+  "answer": 1,
+  "explain": "By symmetry the CM is 4R/3π from each bounding radius. A quarter ring gives 2R/π.",
+  "kind": "result",
+  "id": "655edac0-d4e3-4e42-87b8-32b36864746d",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of continuous bodies (standard results)"
+ },
+ {
+  "prompt": "A disc of radius R has a hole of radius R/2 touching its rim. The CM shifts from the centre by",
+  "formula": "",
+  "options": [
+   "R/6 away from the hole",
+   "R/6 toward the hole",
+   "R/4 away from the hole",
+   "R/3 away from the hole"
+  ],
+  "answer": 0,
+  "explain": "The hole has mass m/4 at R/2, so x = −(m/4)(R/2)/(3m/4) = −R/6, i.e. away from the hole.",
+  "kind": "result",
+  "id": "8f10b32b-5730-492c-904c-5829e98aeeab",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of continuous bodies (standard results)"
+ },
+ {
+  "prompt": "Internal forces between particles of a system have what effect on the acceleration of its CM?",
+  "formula": "",
+  "options": [
+   "No effect",
+   "Increase it",
+   "Decrease it",
+   "Reverse its direction"
+  ],
+  "answer": 0,
+  "explain": "Internal forces occur in equal-opposite pairs (Newton's III law) and cancel in the sum.",
+  "kind": "concept",
+  "id": "03bf6a79-e1b2-4d54-a88c-47098a43bf8c",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "A bomb at rest explodes in flight under gravity only. The CM of fragments before landing follows:",
+  "formula": "",
+  "options": [
+   "The original parabolic path",
+   "A straight line horizontally",
+   "A path depending on fragment masses",
+   "A circular path"
+  ],
+  "answer": 0,
+  "explain": "Only external force (gravity) acts; explosion forces are internal, so CM path is unchanged.",
+  "kind": "concept",
+  "id": "2d3483a8-5721-4f35-86d4-054217067e32",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Two particles of masses m and 2m move toward each other with equal speed v. Speed of CM is:",
+  "formula": "v_cm = Σmv/Σm",
+  "options": [
+   "v/3",
+   "v",
+   "0",
+   "2v/3"
+  ],
+  "answer": 0,
+  "explain": "v_cm = (2m·(−v) + m·v)/3m = −v/3, magnitude v/3.",
+  "kind": "result",
+  "id": "4f0fec46-312a-401f-9a63-948bf80220f1",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "A projectile explodes midair; one fragment falls vertically. The CM of fragments lands at the same point as:",
+  "formula": "",
+  "options": [
+   "The unexploded projectile would have",
+   "The heavier fragment",
+   "The lighter fragment",
+   "The explosion point's foot"
+  ],
+  "answer": 0,
+  "explain": "CM continues along the original parabola as only gravity is external.",
+  "kind": "concept",
+  "id": "4c71c1ca-0891-4ab5-95db-b0a5c5baee68",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "A man walks on a boat at rest on frictionless water. The velocity of the (man + boat) CM is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Along man's motion",
+   "Opposite to man's motion",
+   "Equal to man's velocity"
+  ],
+  "answer": 0,
+  "explain": "No external horizontal force, system started at rest, so v_cm stays zero.",
+  "kind": "concept",
+  "id": "ef6b7888-29ab-49f5-b055-9d17b16343ce",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Velocity of CM relative to the CM frame itself is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to total momentum/M",
+   "Equal to the largest velocity",
+   "Infinite"
+  ],
+  "answer": 0,
+  "explain": "In the CM frame, total momentum is zero by definition.",
+  "kind": "concept",
+  "id": "135d2d49-757a-441e-8c07-e534694bf756",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Two particles under mutual attraction only, initially at rest, will meet at:",
+  "formula": "",
+  "options": [
+   "Their centre of mass",
+   "Midpoint of the line joining them",
+   "Position of the heavier one",
+   "Position of the lighter one"
+  ],
+  "answer": 0,
+  "explain": "CM stays fixed (no external force), so they approach and meet at CM.",
+  "kind": "concept",
+  "id": "60b1c21a-4d61-41ac-a49f-77ad0cf9ee74",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "For a system under gravity alone near Earth's surface, the acceleration of CM equals:",
+  "formula": "",
+  "options": [
+   "g downward",
+   "Zero",
+   "Σmᵢg/n",
+   "g only if masses are equal"
+  ],
+  "answer": 0,
+  "explain": "a_cm = F_ext/M = Mg/M = g, regardless of internal motion.",
+  "kind": "result",
+  "id": "0fd7149d-c0ee-4af4-a018-ce1b1c23aca0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Which expression gives the velocity of CM in terms of position vectors rᵢ of particles?",
+  "formula": "v_cm = (1/M) Σ mᵢ drᵢ/dt",
+  "options": [
+   "(1/M) Σ mᵢ drᵢ/dt",
+   "Σ drᵢ/dt",
+   "(1/M) Σ mᵢ d²rᵢ/dt²",
+   "(1/n) Σ mᵢ vᵢ"
+  ],
+  "answer": 0,
+  "explain": "Differentiate r_cm = Σmᵢrᵢ/M once with respect to time.",
+  "kind": "formula",
+  "id": "b186c322-acbf-4d2a-8486-6e9f341d5dd6",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "In the CM frame, the vector sum Σ mᵢvᵢ′ of particle momenta (relative to CM) equals:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "M·v_cm",
+   "Σ mᵢvᵢ of the lab frame",
+   "Σ ½mᵢvᵢ′²"
+  ],
+  "answer": 0,
+  "explain": "Velocity of CM relative to itself is zero, so total momentum in the CM frame is zero.",
+  "kind": "result",
+  "id": "c18c69c8-3ed9-4d59-ad56-d0edaf070855",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Two blocks joined by a spring on a smooth surface oscillate. Acceleration of their CM equals:",
+  "formula": "a_cm = (m₁a₁ + m₂a₂)/(m₁+m₂)",
+  "options": [
+   "Zero, since spring force is internal",
+   "k·x/(m₁+m₂)",
+   "g·sinθ",
+   "(a₁ + a₂)/2"
+  ],
+  "answer": 0,
+  "explain": "Spring force is internal and net external force is zero, so a_cm = 0 and v_cm stays constant.",
+  "kind": "concept",
+  "id": "bc9adf59-1297-4ec1-bf67-4b5fa78deaa4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Bomb at rest explodes in free space. Compared with before, the system's total kinetic energy:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Stays the same",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "Momentum is conserved, but stored chemical/potential energy converts to KE, so KE rises from zero.",
+  "kind": "concept",
+  "id": "49cd664b-3ab0-41d0-9c68-f33f5a5b40cc",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM motion under internal forces/explosion"
+ },
+ {
+  "prompt": "A shell explodes in mid-air. Until any fragment lands, the acceleration of the CM of the fragments is:",
+  "formula": "a_cm = F_ext / M",
+  "options": [
+   "g downward",
+   "Zero",
+   "Greater than g",
+   "Depends on fragment masses"
+  ],
+  "answer": 0,
+  "explain": "Only gravity is external, so a_cm = g downward whatever the fragment masses.",
+  "kind": "concept",
+  "id": "9ca11e2b-9fd6-4109-a278-9c13a5dfb846",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM motion under internal forces/explosion"
+ },
+ {
+  "prompt": "After one fragment of an exploded shell hits the ground, the CM path of the system:",
+  "formula": "",
+  "options": [
+   "Deviates from the original parabola",
+   "Still follows the original parabola",
+   "Becomes a straight line",
+   "Becomes a circle"
+  ],
+  "answer": 0,
+  "explain": "Ground reaction on the landed fragment is an external force, so the CM motion changes.",
+  "kind": "exception",
+  "id": "7288f635-5837-41c4-8b47-eabf7a057f2f",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM motion under internal forces/explosion"
+ },
+ {
+  "prompt": "Man on a boat of equal mass walks L relative to the boat in still water. Boat's displacement relative to ground:",
+  "formula": "",
+  "options": [
+   "L/2 opposite to man",
+   "L/2 along the man",
+   "L opposite to man",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "CM stays fixed. With equal masses, man and boat move equal distances, each L/2, in opposite directions.",
+  "kind": "result",
+  "id": "d886dc53-9186-47f2-9f01-f1bbdab72fb8",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM motion under internal forces/explosion"
+ },
+ {
+  "prompt": "Masses m and 2m, distance d apart, are released from rest with only mutual forces. They meet at distance from m:",
+  "formula": "",
+  "options": [
+   "2d/3",
+   "d/3",
+   "d/2",
+   "3d/2"
+  ],
+  "answer": 0,
+  "explain": "They meet at the fixed CM, which is 2d/3 from m and d/3 from 2m.",
+  "kind": "result",
+  "id": "ee6d6bac-9534-4056-ae3b-ba0c9b12203a",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM motion under internal forces/explosion"
+ },
+ {
+  "prompt": "A bomb at rest explodes into fragments. The KE gained by the system comes from which source?",
+  "formula": "",
+  "options": [
+   "Internal chemical/stored energy",
+   "Work done by external force",
+   "Increase in momentum of CM",
+   "Gravitational potential energy only"
+  ],
+  "answer": 0,
+  "explain": "Internal forces change KE using stored internal energy; the CM momentum is unchanged.",
+  "kind": "concept",
+  "id": "7eae3d94-362c-4b78-9d76-31d73f52a59e",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM motion under internal forces/explosion"
+ },
+ {
+  "prompt": "Total linear momentum of a system stays constant when:",
+  "formula": "",
+  "options": [
+   "Net external force is zero",
+   "Net internal force is zero",
+   "Net external torque is zero",
+   "Total KE is constant"
+  ],
+  "answer": 0,
+  "explain": "Fₑₓₜ = dP/dt, so P is conserved only if the net external force is zero.",
+  "kind": "concept",
+  "id": "fade64cb-65a8-4d1a-ae05-49480134c2e9",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Effect of internal forces on total momentum of a system:",
+  "formula": "",
+  "options": [
+   "Increase it",
+   "Decrease it",
+   "None, they cancel in pairs",
+   "Change it only in collisions"
+  ],
+  "answer": 2,
+  "explain": "Internal forces come in equal and opposite pairs (Newton's third law), so they cannot change total P.",
+  "kind": "concept",
+  "id": "fd88ad76-7a23-41ce-bdb0-ec892fd4303c",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A body at rest explodes into two parts. Their momenta are:",
+  "formula": "",
+  "options": [
+   "Equal in magnitude and opposite in direction",
+   "Equal in magnitude and same direction",
+   "Inversely proportional to masses",
+   "Proportional to their masses"
+  ],
+  "answer": 0,
+  "explain": "Total momentum stays zero: p₁ + p₂ = 0.",
+  "kind": "concept",
+  "id": "45986c93-cd22-4b4f-b774-f8b5400ecc29",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A body at rest breaks into masses m₁, m₂. The ratio K₁/K₂ of kinetic energies is:",
+  "formula": "K = p²/2m",
+  "options": [
+   "m₁/m₂",
+   "(m₁/m₂)²",
+   "m₂/m₁",
+   "(m₂/m₁)²"
+  ],
+  "answer": 2,
+  "explain": "Momenta are equal in magnitude, so K ∝ 1/m; K₁/K₂ = m₂/m₁.",
+  "kind": "result",
+  "id": "32b628d0-8d63-4014-becc-8a9c4ed7c8e4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A projectile explodes in mid-air due to internal forces only. Its CM afterwards:",
+  "formula": "",
+  "options": [
+   "Moves vertically down",
+   "Stops at once",
+   "Moves along a straight line",
+   "Continues on the original parabola"
+  ],
+  "answer": 3,
+  "explain": "Only gravity acts externally, so the CM path is unchanged by the explosion.",
+  "kind": "concept",
+  "id": "53677c90-b029-48a4-8ca1-7824f9ae6fa2",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A man walks from one end of a boat to the other in still water (no friction). The system's CM:",
+  "formula": "",
+  "options": [
+   "Stays at the same position",
+   "Moves in the direction of the man",
+   "Moves opposite to the man",
+   "Moves with the boat only"
+  ],
+  "answer": 0,
+  "explain": "No external horizontal force, so the CM is stationary (starting from rest).",
+  "kind": "concept",
+  "id": "2a93cd82-bcd0-423c-b430-e380b6b8126f",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Thrust on a rocket ejecting gas at relative speed u at rate |dm/dt|:",
+  "formula": "F = u|dm/dt|",
+  "options": [
+   "u²|dm/dt|",
+   "u|dm/dt|",
+   "m|du/dt|",
+   "|dm/dt|/u"
+  ],
+  "answer": 1,
+  "explain": "Thrust = rate of change of momentum of the ejected gas = (relative speed) × (mass ejected per second).",
+  "kind": "formula",
+  "id": "199bbe13-0a26-4538-9f9d-61e097b1dd97",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Rocket in free space, exhaust speed u relative to rocket. Speed v when mass falls from m₀ to m (v₀ = 0):",
+  "formula": "v = u ln(m₀/m)",
+  "options": [
+   "u ln(m₀/m)",
+   "u (m₀ − m)/m",
+   "u log₁₀(m/m₀)",
+   "u (m₀/m)"
+  ],
+  "answer": 0,
+  "explain": "Integrating m dv = −u dm with no external force gives v = u ln(m₀/m).",
+  "kind": "formula",
+  "id": "518ef7f4-5463-4e17-b1c7-412613845c99",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Impulse of a force equals:",
+  "formula": "J = ∫F dt = Δp",
+  "options": [
+   "Change in kinetic energy",
+   "Change in momentum",
+   "Force × displacement",
+   "Rate of change of momentum"
+  ],
+  "answer": 1,
+  "explain": "Impulse = area under the F–t graph = change in linear momentum (unit N·s).",
+  "kind": "fact",
+  "id": "97718739-6318-4ca6-8727-350fcfe4ddc0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Two bodies have equal momentum. The heavier one has:",
+  "formula": "K = p²/2m",
+  "options": [
+   "Larger kinetic energy",
+   "Smaller kinetic energy",
+   "Equal kinetic energy",
+   "Larger speed"
+  ],
+  "answer": 1,
+  "explain": "At equal p, K ∝ 1/m, so the heavier body has less KE (and less speed).",
+  "kind": "trend",
+  "id": "998554b7-3e6d-45c6-9899-4f66ae92888e",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Newton's second law in terms of momentum:",
+  "formula": "F = dp/dt",
+  "options": [
+   "F = p·t",
+   "F = dp/dt",
+   "F = d(KE)/dt",
+   "F = p/m"
+  ],
+  "answer": 1,
+  "explain": "Net external force equals the rate of change of total linear momentum; F = 0 gives p = constant.",
+  "kind": "formula",
+  "id": "683cd13d-a64a-4a12-ab72-3fe5c90ec68a",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Sand falls at rate dm/dt onto a belt moving at constant speed v. Extra force needed on the belt:",
+  "formula": "F = v dm/dt",
+  "options": [
+   "½ v dm/dt",
+   "v dm/dt",
+   "v² dm/dt",
+   "m dv/dt"
+  ],
+  "answer": 1,
+  "explain": "F = d(mv)/dt with constant v gives F = v(dm/dt).",
+  "kind": "formula",
+  "id": "d5d0e7f6-7135-4b59-b492-727b6a3671b0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A person jumps horizontally from a boat at rest on still water. The boat:",
+  "formula": "",
+  "options": [
+   "Stays at rest",
+   "Moves forward",
+   "Moves backward",
+   "Rotates only"
+  ],
+  "answer": 2,
+  "explain": "Total momentum remains zero, so the boat recoils opposite to the jumper.",
+  "kind": "concept",
+  "id": "12b7834f-5094-40c0-9940-615ab149ba68",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A ball strikes a fixed wall normally and rebounds elastically with speed v. Its change in momentum has magnitude:",
+  "formula": "",
+  "options": [
+   "2mv",
+   "mv",
+   "Zero",
+   "mv/2"
+  ],
+  "answer": 0,
+  "explain": "Δp = mv − (−mv) = 2mv. The wall (with Earth) takes up the opposite momentum.",
+  "kind": "result",
+  "id": "7d7370cf-dc6e-412a-98a3-f10a00680da4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Sand falls vertically into a moving trolley on a smooth horizontal track. What is conserved?",
+  "formula": "",
+  "options": [
+   "Horizontal momentum of trolley + sand",
+   "Speed of the trolley",
+   "Kinetic energy of the trolley",
+   "Momentum of trolley alone"
+  ],
+  "answer": 0,
+  "explain": "No horizontal external force acts, so horizontal momentum is conserved. The mass increases, so the speed falls.",
+  "kind": "concept",
+  "id": "f4134ab0-3be6-4461-b2b1-977467a6d235",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "If net external force on a system is zero, its centre of mass moves with:",
+  "formula": "",
+  "options": [
+   "Constant velocity",
+   "Constant acceleration",
+   "Zero velocity always",
+   "Velocity that varies with internal forces"
+  ],
+  "answer": 0,
+  "explain": "Mass × a_cm = F_ext = 0, so v_cm is constant, though not necessarily zero.",
+  "kind": "concept",
+  "id": "16c0d402-c818-414c-a51b-e969d4c168e8",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "In a collision with no net external force, linear momentum is conserved in:",
+  "formula": "",
+  "options": [
+   "Elastic collisions only",
+   "Inelastic collisions only",
+   "Perfectly inelastic collisions only",
+   "Every type of collision"
+  ],
+  "answer": 3,
+  "explain": "Momentum conservation depends only on zero external force, not on whether KE is conserved.",
+  "kind": "concept",
+  "id": "e8188cc8-196b-49ae-a176-198de3f8fa74",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Net external force is zero along x but nonzero along y. Momentum is conserved:",
+  "formula": "",
+  "options": [
+   "Along x only",
+   "Along y only",
+   "In all directions",
+   "In no direction"
+  ],
+  "answer": 0,
+  "explain": "Momentum is conserved component-wise: along any direction where the net external force component is zero.",
+  "kind": "concept",
+  "id": "3cb9e6d2-1dc3-48bb-b3c3-267a826556ca",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Mass m₁ with speed u hits m₂ at rest and sticks. Common speed:",
+  "formula": "v = m₁u/(m₁+m₂)",
+  "options": [
+   "m₁u/(m₁+m₂)",
+   "(m₁+m₂)u/m₁",
+   "m₂u/(m₁+m₂)",
+   "m₁u/m₂"
+  ],
+  "answer": 0,
+  "explain": "m₁u = (m₁+m₂)v from momentum conservation.",
+  "kind": "formula",
+  "id": "0d1f7470-7d62-4fdf-9205-b13f287a238e",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Why can gravity be ignored when applying momentum conservation during a very short collision?",
+  "formula": "",
+  "options": [
+   "Gravity vanishes during collisions",
+   "Impulsive forces far exceed gravity",
+   "Gravity is an internal force",
+   "Momentum ignores all external forces"
+  ],
+  "answer": 1,
+  "explain": "Impulsive contact forces are huge, so the impulse from finite external forces is negligible over a tiny time.",
+  "kind": "concept",
+  "id": "3c240ba7-2ac3-4ce7-a0d8-9396157d84b3",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Conservation of linear momentum for an isolated system is a direct consequence of:",
+  "formula": "",
+  "options": [
+   "Newton's third law",
+   "Newton's first law only",
+   "Conservation of energy",
+   "Law of gravitation"
+  ],
+  "answer": 0,
+  "explain": "Internal forces are equal and opposite (third law), so the net internal force is zero and total p stays constant.",
+  "kind": "concept",
+  "id": "6a1b929d-0f80-4fbf-9853-22565c22217f",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A body at rest explodes into 3 pieces. Two have equal momenta p at 90°. The third has momentum:",
+  "formula": "",
+  "options": [
+   "p√2 opposite to their resultant",
+   "p along their resultant",
+   "2p opposite to their resultant",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "The resultant of the two is p√2, and the third must cancel it so that the total momentum stays zero.",
+  "kind": "result",
+  "id": "dfad1efb-e383-4d91-8b08-66753be8e576",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Sand leaks vertically through a hole in a trolley moving on a smooth track. The trolley's speed:",
+  "formula": "",
+  "options": [
+   "Stays constant",
+   "Increases",
+   "Decreases",
+   "Becomes zero at the end"
+  ],
+  "answer": 0,
+  "explain": "Leaking sand keeps the trolley's horizontal velocity, so there is no horizontal impulse on the trolley and v is unchanged.",
+  "kind": "exception",
+  "id": "d946333b-4143-41ed-9b7b-eb7490c5cac1",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "The area under a force–time graph for a body gives its:",
+  "formula": "∫F dt",
+  "options": [
+   "Work done",
+   "Impulse",
+   "Power delivered",
+   "Change in kinetic energy"
+  ],
+  "answer": 1,
+  "explain": "Area under the F–t curve = ∫F dt = impulse.",
+  "kind": "graph",
+  "id": "801096d6-e38d-45fb-91b4-52af291e34e6",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Dimensional formula of impulse is:",
+  "formula": "",
+  "options": [
+   "[MLT⁻²]",
+   "[ML²T⁻²]",
+   "[MLT⁻¹]",
+   "[ML²T⁻¹]"
+  ],
+  "answer": 2,
+  "explain": "Impulse = force × time = momentum, so [MLT⁻¹] (unit N·s).",
+  "kind": "unit",
+  "id": "20745f4e-1a14-4fa9-8d55-7968c61e5b64",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Ball (m, speed v) rebounds elastically along the normal from a wall. Impulse magnitude on ball:",
+  "formula": "J = m(v) − m(−v)",
+  "options": [
+   "mv",
+   "2mv",
+   "Zero",
+   "mv/2"
+  ],
+  "answer": 1,
+  "explain": "Momentum changes from +mv to −mv, so |Δp| = 2mv.",
+  "kind": "result",
+  "id": "86c65085-6b98-4e09-93db-4f1b3c869800",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Ball (m, speed v) hits a wall normally and stops dead (no rebound). Impulse magnitude on ball:",
+  "formula": "",
+  "options": [
+   "2mv",
+   "mv/2",
+   "mv",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Δp = 0 − mv, so magnitude mv.",
+  "kind": "result",
+  "id": "5e1bcc5f-584f-40c6-8add-09e427e18cd7",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "The slope of the momentum–time graph of a body gives:",
+  "formula": "F = dp/dt",
+  "options": [
+   "Impulse",
+   "Net force",
+   "Kinetic energy",
+   "Power"
+  ],
+  "answer": 1,
+  "explain": "Newton's second law: F = dp/dt is the slope of the p–t graph.",
+  "kind": "graph",
+  "id": "972e9729-b724-41f8-b3f4-e564139d0f23",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "A fielder pulls his hands back while catching a fast ball. This reduces the force because:",
+  "formula": "F_avg = Δp/Δt",
+  "options": [
+   "Δp becomes smaller",
+   "Contact time Δt increases",
+   "Ball's mass decreases",
+   "Impulse becomes zero"
+  ],
+  "answer": 1,
+  "explain": "Δp is fixed, so a longer Δt gives a smaller average force.",
+  "kind": "concept",
+  "id": "cb23ee76-1b78-42e2-b23f-80891d9b1d21",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "During a very short collision, which force is treated as non-impulsive and neglected?",
+  "formula": "",
+  "options": [
+   "Gravity on the colliding bodies",
+   "Mutual contact force between bodies",
+   "Normal impulsive force from a wall",
+   "Force causing the rebound"
+  ],
+  "answer": 0,
+  "explain": "Finite forces like gravity give negligible impulse over a very short Δt.",
+  "kind": "concept",
+  "id": "c752dac3-1f69-49bf-94a4-e40d379e02b3",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "In a collision of two bodies, the impulses they exert on each other are:",
+  "formula": "",
+  "options": [
+   "Equal and in the same direction",
+   "Equal and opposite, so net impulse is zero",
+   "Unequal but opposite",
+   "Zero for each body"
+  ],
+  "answer": 1,
+  "explain": "By Newton's third law the internal impulses are equal and opposite.",
+  "kind": "concept",
+  "id": "1a146290-f359-4746-9278-d19930142dbc",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Ball (m, v) hits a smooth wall elastically at angle θ to the normal. Impulse magnitude:",
+  "formula": "",
+  "options": [
+   "2mv sinθ",
+   "2mv cosθ",
+   "2mv",
+   "mv cosθ"
+  ],
+  "answer": 1,
+  "explain": "Only the normal component reverses, so J = 2mv cosθ, along the normal.",
+  "kind": "result",
+  "id": "c1bed89d-99e8-4fa8-bb58-56b6fb40fd38",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "A ball hits a wall at speed v and returns with speed v/2 along the same line. Impulse magnitude:",
+  "formula": "",
+  "options": [
+   "mv/2",
+   "mv",
+   "3mv/2",
+   "2mv"
+  ],
+  "answer": 2,
+  "explain": "|Δp| = mv + mv/2 = 3mv/2, since the direction reverses.",
+  "kind": "result",
+  "id": "c649fc00-4957-44ba-a040-aea32980acaf",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "A triangular force pulse has peak F₀ and total duration T. The impulse delivered is:",
+  "formula": "",
+  "options": [
+   "F₀T",
+   "F₀T/2",
+   "F₀T/3",
+   "2F₀T"
+  ],
+  "answer": 1,
+  "explain": "Impulse = area of triangle = ½ × base × height = F₀T/2.",
+  "kind": "graph",
+  "id": "d0a12fcb-a845-4a71-9113-4bd3d621906e",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "For a fixed change in momentum, doubling the contact time makes the average force:",
+  "formula": "F_avg = J/Δt",
+  "options": [
+   "Double",
+   "Unchanged",
+   "Four times",
+   "Half"
+  ],
+  "answer": 3,
+  "explain": "F_avg = J/Δt, so doubling Δt halves the average force.",
+  "kind": "formula",
+  "id": "3ced9b20-1c3b-4b1a-81dc-1c2134eae207",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "The direction of the net impulse on a body is always along:",
+  "formula": "",
+  "options": [
+   "Its final velocity",
+   "Its initial velocity",
+   "The change in its momentum",
+   "Its displacement"
+  ],
+  "answer": 2,
+  "explain": "J = Δp (a vector), so it is along Δp, not necessarily along the velocity.",
+  "kind": "concept",
+  "id": "ea0c8a89-a371-4f5f-948a-6db4b3a283f9",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Average force F_avg over a collision of duration Δt is defined as impulse divided by:",
+  "formula": "F_avg = J/Δt",
+  "options": [
+   "Δt",
+   "Δt²",
+   "Δt/2",
+   "Change in velocity"
+  ],
+  "answer": 0,
+  "explain": "F_avg = ∫F dt / Δt = J/Δt, so impulse J = F_avg·Δt.",
+  "kind": "formula",
+  "id": "913fe024-64d3-4c17-aa7d-8147c850d5b5",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Impulse on a body equals the change in its:",
+  "formula": "",
+  "options": [
+   "Kinetic energy",
+   "Linear momentum",
+   "Angular velocity",
+   "Potential energy"
+  ],
+  "answer": 1,
+  "explain": "J = Δp is the impulse–momentum theorem; it is not an energy change.",
+  "kind": "concept",
+  "id": "09b434b7-42c3-4125-9c32-1515f491aa20",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Elastic 1D collision: in v₁ = [(m₁−m₂)u₁ + (?)u₂]/(m₁+m₂), the coefficient of u₂ is:",
+  "formula": "v₁ = [(m₁−m₂)u₁ + 2m₂u₂]/(m₁+m₂)",
+  "options": [
+   "2m₂",
+   "m₂−m₁",
+   "2m₁",
+   "m₁+m₂"
+  ],
+  "answer": 0,
+  "explain": "Standard result: v₁ = [(m₁−m₂)u₁ + 2m₂u₂]/(m₁+m₂).",
+  "kind": "formula",
+  "id": "6aa35a10-a189-4473-8b6f-260ddadd22c8",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "In the centre-of-mass frame, a 1D elastic collision changes each particle's velocity by:",
+  "formula": "",
+  "options": [
+   "Reversing its direction, magnitude unchanged",
+   "Making it zero",
+   "Doubling its magnitude",
+   "Leaving it unchanged"
+  ],
+  "answer": 0,
+  "explain": "In the CM frame, speeds stay the same and directions reverse.",
+  "kind": "concept",
+  "id": "719380cc-a198-4089-8ecc-c0727db2ceda",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "Velocity of the centre of mass of two colliding bodies in an isolated 1D elastic collision:",
+  "formula": "",
+  "options": [
+   "Same before and after",
+   "Zero after collision",
+   "Increases after collision",
+   "Decreases after collision"
+  ],
+  "answer": 0,
+  "explain": "No external force, so v_cm is constant. This holds for every collision.",
+  "kind": "concept",
+  "id": "fc7a799b-0aff-4420-8a09-1f5206ae1c38",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "Elastic head-on collision, target at rest: v₂/u₁ always lies between:",
+  "formula": "v₂ = 2m₁u₁/(m₁+m₂)",
+  "options": [
+   "0 and 2",
+   "0 and 1",
+   "1 and 2",
+   "−1 and 1"
+  ],
+  "answer": 0,
+  "explain": "v₂/u₁ = 2/(1+m₂/m₁), which lies between 0 and 2 and is never negative.",
+  "kind": "trend",
+  "id": "b19435fd-efc9-43fa-a789-b958abead1d5",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "Light ball (m, speed u) bounces elastically off a much heavier body at rest. Impulse on the heavy body:",
+  "formula": "",
+  "options": [
+   "≈ 2mu",
+   "≈ mu",
+   "≈ mu/2",
+   "≈ 0"
+  ],
+  "answer": 0,
+  "explain": "The ball's momentum changes from +mu to −mu, so the heavy body receives 2mu.",
+  "kind": "result",
+  "id": "2c08fc01-b3b5-40d3-abe3-5f1053f5e9a4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "Newton's cradle: two identical balls strike a row of identical balls. How many fly off the far end?",
+  "formula": "",
+  "options": [
+   "Two",
+   "One, with double speed",
+   "One, with the same speed",
+   "Three"
+  ],
+  "answer": 0,
+  "explain": "Only two balls leaving at u conserves both momentum and KE. One at 2u would not conserve KE.",
+  "kind": "concept",
+  "id": "c0e572d2-06c1-47b5-ba72-d854371ebf5d",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "A heavy ball (m₁ ≫ m₂) hits a stationary light ball m₂ elastically. Speed of m₁ after collision is about:",
+  "formula": "v₁ = (m₁−m₂)u₁/(m₁+m₂) ≈ u₁",
+  "options": [
+   "u₁/2",
+   "Zero",
+   "2u₁",
+   "u₁"
+  ],
+  "answer": 3,
+  "explain": "With m₁ ≫ m₂, (m₁−m₂)/(m₁+m₂) ≈ 1, so the heavy ball barely slows down.",
+  "kind": "result",
+  "id": "24be2f46-e59f-48fe-bf3d-36ac25268546",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "m₁ hits stationary m₂ elastically head-on. After impact the speeds are equal and opposite if m₂/m₁ =",
+  "formula": "v₁ = −v₂ ⇒ m₂ = 3m₁",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "1/3"
+  ],
+  "answer": 2,
+  "explain": "v₁ = (m₁−m₂)u/(m₁+m₂) = −u/2 and v₂ = 2m₁u/(m₁+m₂) = u/2 when m₂ = 3m₁.",
+  "kind": "result",
+  "id": "78e26f99-cb43-4bd4-ae2b-787dcba128e7",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "Fraction of KE transferred to m₂ (initially at rest) when m₁ hits it head-on elastically:",
+  "formula": "ΔK/K = 4m₁m₂/(m₁+m₂)²",
+  "options": [
+   "4m₁m₂/(m₁+m₂)²",
+   "2m₁m₂/(m₁+m₂)²",
+   "4m₁/(m₁+m₂)",
+   "(m₁+m₂)²/4m₁m₂"
+  ],
+  "answer": 0,
+  "explain": "Fraction = 1 − (m₁−m₂)²/(m₁+m₂)² = 4m₁m₂/(m₁+m₂)².",
+  "kind": "formula",
+  "id": "4ccce0bf-5661-4b5b-8674-03ec117fc1f1",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "Bullet embeds in a hanging block (ballistic pendulum). During the embedding, what is conserved?",
+  "formula": "",
+  "options": [
+   "Linear momentum only",
+   "Kinetic energy only",
+   "Momentum and kinetic energy",
+   "Mechanical energy only"
+  ],
+  "answer": 0,
+  "explain": "Embedding is perfectly inelastic: momentum is conserved, KE is lost as heat and deformation.",
+  "kind": "concept",
+  "id": "4a434445-3d08-42d9-bdd8-2d0d6fbe4179",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "For given initial conditions, KE loss in a collision is maximum when the coefficient of restitution e is:",
+  "formula": "",
+  "options": [
+   "0",
+   "0.5",
+   "1",
+   "Greater than 1"
+  ],
+  "answer": 0,
+  "explain": "Maximum KE loss consistent with momentum conservation occurs for e = 0 (perfectly inelastic).",
+  "kind": "concept",
+  "id": "eac15a4f-a575-42e0-9e3e-b01dc296c618",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "After a perfectly inelastic collision, the final KE of the system equals:",
+  "formula": "",
+  "options": [
+   "½(m₁+m₂)v_cm²",
+   "Initial KE",
+   "m₁m₂u²/2(m₁+m₂)",
+   "Zero in every frame"
+  ],
+  "answer": 0,
+  "explain": "Only the CM motion survives: both bodies move together at v_cm.",
+  "kind": "concept",
+  "id": "2672b137-3fa6-4ee6-9be6-2d7bb73c37ea",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "The KE lost in a perfectly inelastic collision, as measured by different inertial observers, is:",
+  "formula": "",
+  "options": [
+   "The same for all inertial observers",
+   "Zero for the CM observer",
+   "Largest for the lab observer",
+   "Dependent on observer's speed"
+  ],
+  "answer": 0,
+  "explain": "The loss ½μv_rel² depends only on relative velocity, so it is frame-independent.",
+  "kind": "concept",
+  "id": "5e67a471-3006-4507-988d-5cfa9e9a717b",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "A heavy truck (M ≫ m) hits a stationary scooter and they stick. Fraction of KE lost is nearly:",
+  "formula": "",
+  "options": [
+   "0",
+   "1/2",
+   "1",
+   "M/m"
+  ],
+  "answer": 0,
+  "explain": "Fraction lost = m/(M+m) ≈ 0; the combined mass moves almost with the truck's speed.",
+  "kind": "trend",
+  "id": "ea85511a-0639-408f-88b6-c65cb06f80da",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "Wet clay drops vertically onto a moving frictionless cart. The cart's speed:",
+  "formula": "",
+  "options": [
+   "Decreases; horizontal momentum is conserved",
+   "Stays same; clay has no horizontal velocity",
+   "Increases; mass increases",
+   "Becomes zero instantly"
+  ],
+  "answer": 0,
+  "explain": "Horizontal momentum is conserved while total mass increases, so v decreases.",
+  "kind": "concept",
+  "id": "1fc73cbd-c817-4c10-bfe6-17e33a903ff4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "In a perfectly inelastic collision of an isolated system, the velocity of the centre of mass:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Becomes zero",
+   "Decreases by the KE lost fraction",
+   "Becomes the mean of initial speeds"
+  ],
+  "answer": 0,
+  "explain": "No external force acts, so v_cm is constant; the stuck bodies move at v_cm.",
+  "kind": "concept",
+  "id": "80ce098a-4a8b-4708-acfb-8c59a44ea869",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "After a perfectly inelastic collision, total momentum p and total mass M. Final KE is:",
+  "formula": "",
+  "options": [
+   "p²/2M",
+   "p²/M",
+   "p/2M",
+   "pM/2"
+  ],
+  "answer": 0,
+  "explain": "KE = ½Mv² with v = p/M gives p²/2M.",
+  "kind": "formula",
+  "id": "dcd89cd1-300d-44ce-8db8-1350f1b08a32",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "A perfectly inelastic collision causes zero KE loss only if the bodies' relative velocity before impact is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to final velocity",
+   "Equal to v_cm",
+   "Along the line of centres"
+  ],
+  "answer": 0,
+  "explain": "Loss = ½μv_rel²; it vanishes only when v_rel = 0.",
+  "kind": "concept",
+  "id": "e23ea41f-fdce-476c-a973-3bd31f851ad0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "In a perfectly inelastic collision, impulse magnitude on each body when m₁ (speed u) hits stationary m₂ is:",
+  "formula": "J = m₁m₂u/(m₁+m₂)",
+  "options": [
+   "m₁m₂u/(m₁+m₂)",
+   "m₁u",
+   "(m₁+m₂)u",
+   "m₁m₂u/2"
+  ],
+  "answer": 0,
+  "explain": "J = m₂v′ with v′ = m₁u/(m₁+m₂); equal and opposite on the two bodies.",
+  "kind": "formula",
+  "id": "c2bd968d-d7a3-4311-b2cf-4d610a3adfa4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "Momentum is conserved in a bullet-block impact despite gravity and friction because:",
+  "formula": "",
+  "options": [
+   "Internal impulsive forces ≫ external forces",
+   "External forces are exactly zero",
+   "Collision is elastic",
+   "KE is conserved"
+  ],
+  "answer": 0,
+  "explain": "The collision time is tiny, so external impulse is negligible compared to the internal impulse.",
+  "kind": "concept",
+  "id": "8b771ebd-7fc7-4939-ab90-28efd0b1f282",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "In a perfectly inelastic collision, the KE lost equals which quantity?",
+  "formula": "",
+  "options": [
+   "KE of the system in the CM frame before impact",
+   "KE of the lighter body before impact",
+   "KE of the CM in the lab frame",
+   "Change in momentum of the system"
+  ],
+  "answer": 0,
+  "explain": "The final KE in the CM frame is zero, so all the initial CM-frame KE is lost (½μv_rel²).",
+  "kind": "concept",
+  "id": "59a9319f-d2ff-477e-a572-786b6003f715",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "Ball dropped from h hits floor with coefficient e. Height of rebound after first bounce is:",
+  "formula": "h₁ = e²h",
+  "options": [
+   "e h",
+   "e² h",
+   "h/e²",
+   "e h/2"
+  ],
+  "answer": 1,
+  "explain": "Rebound speed = e·u, height ∝ speed², so h₁ = e²h.",
+  "kind": "formula",
+  "id": "d0e48623-0642-471b-80ac-23910d324a48",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "Ball hits a fixed wall normally with speed u. Speed after collision with restitution e is:",
+  "formula": "v = e u",
+  "options": [
+   "u/e",
+   "e u",
+   "e² u",
+   "(1+e)u"
+  ],
+  "answer": 1,
+  "explain": "Wall is at rest and fixed: separation speed = e × approach speed, so v = eu.",
+  "kind": "formula",
+  "id": "27ae6a71-839d-4313-adff-a81384c10ba0",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "A ball dropped from h bounces repeatedly with restitution e. Height after nth bounce is:",
+  "formula": "hₙ = e²ⁿ h",
+  "options": [
+   "eⁿ h",
+   "e²ⁿ h",
+   "e²ⁿ⁻¹ h",
+   "n e² h"
+  ],
+  "answer": 1,
+  "explain": "Each bounce multiplies height by e², so after n bounces hₙ = e²ⁿh.",
+  "kind": "formula",
+  "id": "101f9b1d-b8f8-4d34-960a-4ea305ef2f9f",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "In an oblique collision of a ball with a smooth fixed surface, e applies to the component:",
+  "formula": "",
+  "options": [
+   "Along the surface (tangential)",
+   "Along the normal to the surface",
+   "Along the resultant velocity",
+   "Perpendicular to the plane of motion"
+  ],
+  "answer": 1,
+  "explain": "Impulse acts along the normal; e relates normal components, tangential component stays unchanged.",
+  "kind": "concept",
+  "id": "6d69d833-8668-4188-828a-b02ba441c6c4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "For a collision between a body and a smooth fixed surface, the coefficient of restitution e is:",
+  "formula": "",
+  "options": [
+   "Dependent on the angle of incidence only",
+   "Dependent only on the colliding materials",
+   "Dependent only on the mass of the ball",
+   "Always equal to 1"
+  ],
+  "answer": 1,
+  "explain": "e is a property of the pair of materials in contact (for ordinary speeds), not of mass.",
+  "kind": "concept",
+  "id": "6facbacc-5190-4ea3-b3be-ce03948d9a84",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "In terms of impulses during a collision, the coefficient of restitution e equals:",
+  "formula": "e = J_restitution / J_deformation",
+  "options": [
+   "J_restitution / J_deformation",
+   "J_deformation / J_restitution",
+   "J_total / J_deformation",
+   "J_restitution / J_total"
+  ],
+  "answer": 0,
+  "explain": "Poisson's hypothesis: e is the ratio of impulse during restitution (recovery) to impulse during deformation (compression).",
+  "kind": "concept",
+  "id": "39bb1c78-9b7e-48cd-9594-46be6f4d9efd",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "A body in free space explodes by internal forces only. Immediately after, v_cm and total KE:",
+  "formula": "",
+  "options": [
+   "v_cm unchanged, KE increases",
+   "v_cm increases, KE increases",
+   "v_cm unchanged, KE unchanged",
+   "v_cm changes, KE unchanged"
+  ],
+  "answer": 0,
+  "explain": "Internal forces cannot change v_cm, but they do work, so the KE of the system rises.",
+  "kind": "concept",
+  "id": "250af5be-2939-4d06-a4fb-e33653f40e72",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Total KE of a system of particles equals KE of CM motion plus:",
+  "formula": "K = ½Mv_cm² + K_rel",
+  "options": [
+   "Potential energy of the system",
+   "KE of the particles relative to the CM",
+   "Momentum about the CM",
+   "Work done by internal forces"
+  ],
+  "answer": 1,
+  "explain": "König's theorem: K = ½Mv_cm² + Σ½mᵢvᵢ′², with vᵢ′ measured relative to the CM.",
+  "kind": "result",
+  "id": "6bcfe2f8-ec94-432b-942d-3a8ba3cd2625",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "A block slides down a smooth wedge that rests on a smooth floor. Horizontal acceleration of the CM of block + wedge:",
+  "formula": "",
+  "options": [
+   "Along the incline direction",
+   "Directed down the slope",
+   "Zero",
+   "Equal to g sinθ cosθ"
+  ],
+  "answer": 2,
+  "explain": "The horizontal external force is zero (normal force from the floor is vertical), so a_cm,x = 0.",
+  "kind": "concept",
+  "id": "35923184-afc0-4886-990f-a8c26f1ede84",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Masses m₁, m₂ have velocities v₁, v₂. Velocity of m₁ relative to the CM is:",
+  "formula": "v₁′ = v₁ − v_cm",
+  "options": [
+   "m₁(v₁ − v₂)/(m₁ + m₂)",
+   "(v₁ − v₂)/2",
+   "(m₁v₁ + m₂v₂)/(m₁ + m₂)",
+   "m₂(v₁ − v₂)/(m₁ + m₂)"
+  ],
+  "answer": 3,
+  "explain": "v₁ − (m₁v₁ + m₂v₂)/(m₁+m₂) = m₂(v₁ − v₂)/(m₁ + m₂).",
+  "kind": "formula",
+  "id": "2f541bbb-3179-4622-afde-0cb3db29284e",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Two bodies collide inelastically with no external force. Compared with before, the velocity of their CM is:",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "Reduced by the loss factor e",
+   "Zero after collision",
+   "Equal to the relative velocity"
+  ],
+  "answer": 0,
+  "explain": "Collision forces are internal, so v_cm stays the same whether the collision is elastic or inelastic.",
+  "kind": "concept",
+  "id": "889bb04c-d154-48d2-8770-e1f17fc523ec",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Two projectiles are fired together from one point at different angles. Their relative velocity during flight is:",
+  "formula": "",
+  "options": [
+   "Constant in magnitude and direction",
+   "Constant in magnitude, rotating",
+   "Increasing with time as gt",
+   "Zero at the highest point"
+  ],
+  "answer": 0,
+  "explain": "Both have acceleration g, so relative acceleration is zero and relative velocity stays constant.",
+  "kind": "concept",
+  "id": "ab4b7ef8-e5e0-4dfc-9a0d-f2dcedb33001",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Masses m and 2m hang over a light frictionless pulley. Acceleration of their CM is:",
+  "formula": "a_cm = (m₁ − m₂)²g/(m₁ + m₂)²",
+  "options": [
+   "g/9 downward",
+   "g/3 downward",
+   "g/6 downward",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "a = g/3, so a_cm = (2m·g/3 − m·g/3)/3m = g/9 downward.",
+  "kind": "result",
+  "id": "6864c9e1-4d24-414a-b004-4badaeed3361",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "The frame attached to the CM of a system is inertial only if:",
+  "formula": "",
+  "options": [
+   "Net external force on system is zero",
+   "Net internal force is zero",
+   "Total KE of system is constant",
+   "Particles are all at rest in it"
+  ],
+  "answer": 0,
+  "explain": "If F_ext ≠ 0 the CM accelerates, so the CM frame is non-inertial. Internal forces do not matter.",
+  "kind": "concept",
+  "id": "bf292b27-d24b-408e-86dc-83ef6e90aaff",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Impulse of the net external force on a system over a time interval equals:",
+  "formula": "J_ext = M Δv_cm",
+  "options": [
+   "M Δv_cm",
+   "Change in KE of system",
+   "Σ mᵢ vᵢ after only",
+   "Change in KE about the CM"
+  ],
+  "answer": 0,
+  "explain": "J_ext = Δp_total = M Δv_cm. Internal impulses cancel in pairs.",
+  "kind": "formula",
+  "id": "f7481389-5b60-44b4-9bb9-57dd5bd764c4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Mass m moves at speed v and hits nothing; a mass 3m is at rest. Speed of their CM is:",
+  "formula": "v_cm = m₁v₁/(m₁+m₂)",
+  "options": [
+   "v/4",
+   "v/3",
+   "v/2",
+   "3v/4"
+  ],
+  "answer": 0,
+  "explain": "v_cm = (m·v + 0)/(4m) = v/4.",
+  "kind": "formula",
+  "id": "965d1b88-7fda-442e-8329-6186a58b04b6",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "In the CM frame, masses m and 4m have speeds in the ratio v(m) : v(4m) equal to:",
+  "formula": "m₁v₁′ = m₂v₂′",
+  "options": [
+   "4 : 1",
+   "1 : 4",
+   "2 : 1",
+   "1 : 1"
+  ],
+  "answer": 0,
+  "explain": "Σ mv′ = 0 means the speeds are inversely proportional to the masses, so the lighter one moves 4 times faster.",
+  "kind": "result",
+  "id": "92b953fa-6440-4167-8020-be8a643df680",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Relative velocity of two particles, measured in the CM frame compared with the lab frame, is:",
+  "formula": "v₁′ − v₂′ = v₁ − v₂",
+  "options": [
+   "Same",
+   "Smaller by v_cm",
+   "Larger by v_cm",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Both velocities shift by the same v_cm, which cancels in the difference.",
+  "kind": "concept",
+  "id": "4175e541-7b39-435f-b3a2-971ad76b097a",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Three equal masses sit at (0,0), (a,0) and (0,a). Their CM is at:",
+  "formula": "x_cm = Σmx/Σm",
+  "options": [
+   "(a/2, a/2)",
+   "(a/3, a/3)",
+   "(2a/3, 2a/3)",
+   "(a/3, 2a/3)"
+  ],
+  "answer": 1,
+  "explain": "x_cm = (0+a+0)/3 = a/3 and y_cm = (0+0+a)/3 = a/3.",
+  "kind": "result",
+  "id": "be34a831-2299-4bc1-915c-bf674a25b508",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "The Earth–Moon system's CM lies:",
+  "formula": "",
+  "options": [
+   "At the Moon's centre",
+   "Midway between Earth and Moon",
+   "Inside the Earth, off its centre",
+   "At the Earth's centre"
+  ],
+  "answer": 2,
+  "explain": "Earth is about 81 times heavier, so the CM is about 4600 km from Earth's centre, inside Earth.",
+  "kind": "fact",
+  "id": "a9d7ceae-3aaf-4d5d-9e65-5e51313eb1f4",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Two particles move in circles about their common CM under mutual attraction. They have the same:",
+  "formula": "",
+  "options": [
+   "Orbital radius",
+   "Linear speed",
+   "Angular velocity",
+   "Kinetic energy"
+  ],
+  "answer": 2,
+  "explain": "They stay collinear with the CM, so ω is equal; radii and speeds are in inverse ratio of masses.",
+  "kind": "concept",
+  "id": "eb233889-9942-469a-bfdd-abe70c6ba020",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "The reduced mass μ of two equal masses m is:",
+  "formula": "μ = m₁m₂/(m₁+m₂)",
+  "options": [
+   "m/2",
+   "2m",
+   "m",
+   "m/4"
+  ],
+  "answer": 0,
+  "explain": "μ = m·m/(2m) = m/2.",
+  "kind": "formula",
+  "id": "f4c1aec9-46a9-436b-90e6-c6184a9e2b00",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Two particles move freely under gravity only. Their relative velocity (one w.r.t. the other):",
+  "formula": "",
+  "options": [
+   "Increases uniformly",
+   "Remains constant",
+   "Decreases uniformly",
+   "Becomes zero at the top"
+  ],
+  "answer": 1,
+  "explain": "Both have acceleration g, so the relative acceleration is zero and the relative velocity stays constant.",
+  "kind": "concept",
+  "id": "522e0b18-5288-4551-89d2-22ac7e39227d",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "Force F acts on m₁ only; m₁ and m₂ are free particles. Acceleration of their CM is:",
+  "formula": "a_cm = F_ext/(m₁+m₂)",
+  "options": [
+   "F/m₁",
+   "F/(m₁+m₂)",
+   "F/m₂",
+   "F(m₁+m₂)/m₁m₂"
+  ],
+  "answer": 1,
+  "explain": "The only external force is F, and a_cm = ΣF_ext/M with M = m₁+m₂.",
+  "kind": "result",
+  "id": "3900e524-4675-40bc-be82-d4e6d543b659",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "COM of discrete particle system"
+ },
+ {
+  "prompt": "A uniform rod released from vertical on a smooth floor topples. Its CM moves along:",
+  "formula": "",
+  "options": [
+   "A vertical straight line",
+   "A parabola",
+   "A quarter circle of radius L/2",
+   "A horizontal straight line"
+  ],
+  "answer": 0,
+  "explain": "No horizontal external force and CM starts at rest horizontally, so CM falls straight down.",
+  "kind": "concept",
+  "id": "6d39b33a-b4da-4537-846f-e6586b3c5493",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Equal and opposite external forces F act on two different particles of a system. a_cm is:",
+  "formula": "a_cm = F_net,ext / M",
+  "options": [
+   "Zero",
+   "F/M",
+   "2F/M",
+   "F(m₁−m₂)/M²"
+  ],
+  "answer": 0,
+  "explain": "Net external force is zero, so a_cm = 0 although each particle accelerates.",
+  "kind": "concept",
+  "id": "9f705095-9149-4d93-980b-abc10dd50641",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "For an isolated system, the graph of x_cm versus time is:",
+  "formula": "",
+  "options": [
+   "A straight line",
+   "A parabola",
+   "An exponential curve",
+   "A sinusoidal curve"
+  ],
+  "answer": 0,
+  "explain": "v_cm is constant when F_ext = 0, so x_cm changes linearly with time.",
+  "kind": "graph",
+  "id": "01ee284b-50c1-4a8c-a8fe-3989f0167439",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "Two particles move along a line at +2 m/s and +6 m/s. Their v_cm cannot be:",
+  "formula": "",
+  "options": [
+   "1 m/s",
+   "3 m/s",
+   "4 m/s",
+   "5.5 m/s"
+  ],
+  "answer": 0,
+  "explain": "v_cm is a positive-weighted average, so it lies between 2 and 6 m/s.",
+  "kind": "result",
+  "id": "ac554287-e5ba-4142-a052-27fa89550e92",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "A shell flying horizontally at v explodes into two equal halves; one retraces its path. Other's speed:",
+  "formula": "2v = v₁ + v₂",
+  "options": [
+   "3v",
+   "2v",
+   "v",
+   "v/2"
+  ],
+  "answer": 0,
+  "explain": "v_cm stays v: (−v + v₂)/2 = v gives v₂ = 3v.",
+  "kind": "result",
+  "id": "c56d0d72-c19b-4eba-a125-2d31c8436278",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Velocity & acceleration of COM"
+ },
+ {
+  "prompt": "A bullet embeds in a hanging wooden block. During the embedding, what is conserved?",
+  "formula": "",
+  "options": [
+   "Linear momentum only",
+   "Kinetic energy only",
+   "Momentum and mechanical energy",
+   "Total mechanical energy only"
+  ],
+  "answer": 0,
+  "explain": "The collision is perfectly inelastic: momentum is conserved (the impulse is horizontal) but KE is lost.",
+  "kind": "concept",
+  "id": "ac50373b-cb7e-41e8-9c08-f25ed3870689",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A water jet (density ρ, area A, speed v) hits a wall normally and stops. Force on the wall:",
+  "formula": "F = (dm/dt)v = ρAv·v",
+  "options": [
+   "ρAv",
+   "ρAv²",
+   "2ρAv²",
+   "½ρAv²"
+  ],
+  "answer": 1,
+  "explain": "Mass hitting per second is ρAv; each unit loses momentum v, so F = ρAv².",
+  "kind": "formula",
+  "id": "5752f076-bfa3-4efc-9032-8b6ba229dbc5",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A machine gun fires n bullets per second, each of mass m and speed v. Average recoil force:",
+  "formula": "F = n·mv",
+  "options": [
+   "nmv²",
+   "½nmv²",
+   "nmv",
+   "mv/n"
+  ],
+  "answer": 2,
+  "explain": "Force equals the momentum given to bullets per second: n·mv.",
+  "kind": "formula",
+  "id": "9c030769-814c-4fd5-8ab4-5d35ae713ddc",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "A rocket in free space has fixed exhaust speed u and fixed m₀/m. Its final speed depends on burn rate:",
+  "formula": "v = u ln(m₀/m)",
+  "options": [
+   "Yes, directly proportional",
+   "Yes, inversely proportional",
+   "No, only on u and m₀/m",
+   "Only if the burn is non-uniform"
+  ],
+  "answer": 2,
+  "explain": "In v = u ln(m₀/m) the burn rate does not appear, so the final speed is independent of it (without gravity).",
+  "kind": "concept",
+  "id": "d3df4ea2-e913-46ff-86b9-a8be99cb09ff",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Conservation of linear momentum"
+ },
+ {
+  "prompt": "Projectile (m, speed u, angle θ) goes from launch to highest point. Impulse of gravity has magnitude:",
+  "formula": "J = Δp_y",
+  "options": [
+   "mu sinθ",
+   "mu cosθ",
+   "2mu sinθ",
+   "mu"
+  ],
+  "answer": 0,
+  "explain": "Only the vertical momentum changes, from mu sinθ to 0, so J = mu sinθ, directed downward.",
+  "kind": "result",
+  "id": "b211b2ca-f1e3-4000-9852-ef4d11445434",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "A body of mass m at rest receives an impulse J. Its kinetic energy afterwards is:",
+  "formula": "K = p²/2m",
+  "options": [
+   "J²/2m",
+   "J²m/2",
+   "J/2m",
+   "2J²/m"
+  ],
+  "answer": 0,
+  "explain": "Starting from rest, p = J, so K = p²/2m = J²/2m.",
+  "kind": "formula",
+  "id": "845a3b9e-bb54-405c-9c44-d94a6f29e974",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Ball hits a smooth fixed wall obliquely. The impulse on the ball is directed:",
+  "formula": "",
+  "options": [
+   "Perpendicular to the wall",
+   "Along the incident velocity",
+   "Along the final velocity",
+   "Parallel to the wall"
+  ],
+  "answer": 0,
+  "explain": "A smooth wall gives only a normal force, so the tangential momentum is unchanged and J acts along the normal.",
+  "kind": "concept",
+  "id": "49574277-dc6f-48c5-9f2e-48db876d5946",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "A ball (m) dropped from height h rebounds elastically from the floor. Impulse magnitude from the floor:",
+  "formula": "v = √(2gh)",
+  "options": [
+   "2m√(2gh)",
+   "m√(2gh)",
+   "m√(gh/2)",
+   "2mgh"
+  ],
+  "answer": 0,
+  "explain": "The speed is √(2gh) before and after impact, so J = 2mv = 2m√(2gh).",
+  "kind": "result",
+  "id": "b584e884-d053-47e9-949b-257e6f91c5e7",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Water jet (density ρ, area A, speed v) strikes a wall normally and stops. Force on the wall:",
+  "formula": "F = (dm/dt)v",
+  "options": [
+   "ρAv²",
+   "ρAv",
+   "½ρAv²",
+   "ρAv³"
+  ],
+  "answer": 0,
+  "explain": "dm/dt = ρAv and each unit of mass loses momentum v, so F = ρAv².",
+  "kind": "formula",
+  "id": "c4c16080-26e1-4e7f-8105-5df9c3c08e04",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "Ball (m, v) hits a smooth wall elastically at angle θ to the wall surface. Impulse magnitude:",
+  "formula": "J = 2mv sinθ",
+  "options": [
+   "2mv sinθ",
+   "2mv cosθ",
+   "mv sinθ",
+   "2mv"
+  ],
+  "answer": 0,
+  "explain": "The normal component is v sinθ, since θ is measured from the wall. It reverses, so J = 2mv sinθ.",
+  "kind": "result",
+  "id": "ef0c7eef-4838-43e0-bce0-a7a0c49a7276",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "A particle (m) moves in a circle at constant speed v. Impulse magnitude of net force in half a revolution?",
+  "formula": "J = |Δp| = |−mv − mv|",
+  "options": [
+   "Zero",
+   "mv",
+   "2mv",
+   "πmv"
+  ],
+  "answer": 2,
+  "explain": "Velocity reverses over half a turn, so |Δp| = 2mv. Over a full turn, the impulse is zero.",
+  "kind": "result",
+  "id": "7e65fe4b-016a-448e-85b0-7ca9a89ab0ed",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Impulse & impulse-momentum theorem"
+ },
+ {
+  "prompt": "A light ball (speed u) hits elastically a very heavy wall moving toward it at speed V. Rebound speed is:",
+  "formula": "v = u + 2V",
+  "options": [
+   "u",
+   "u + V",
+   "u + 2V",
+   "2u + V"
+  ],
+  "answer": 2,
+  "explain": "In the wall's frame the ball's speed is u+V and it reverses; back in the lab frame it is u+2V.",
+  "kind": "result",
+  "id": "d89d3e93-0a07-49d2-a982-3bd921570c66",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Elastic collision in 1D (velocity results)"
+ },
+ {
+  "prompt": "At the instant of maximum deformation in any collision, the two bodies have:",
+  "formula": "",
+  "options": [
+   "Zero velocity each",
+   "Equal and opposite velocities",
+   "The same velocity, equal to v_cm",
+   "Equal kinetic energies"
+  ],
+  "answer": 2,
+  "explain": "At maximum compression the relative velocity is zero, so both move with the CM velocity.",
+  "kind": "concept",
+  "id": "42d959eb-f4d9-41d2-b7c2-37676f11a530",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "A ball sticks to a much heavier stationary block (M ≫ m). Fraction of its KE lost is nearly:",
+  "formula": "M/(m+M) → 1",
+  "options": [
+   "0",
+   "1/2",
+   "m/M",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Fraction lost = M/(m+M) → 1. The combined body hardly moves, so nearly all the KE is lost.",
+  "kind": "result",
+  "id": "4be44673-a10c-4b3e-ad7f-df351772caae",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "In a perfectly inelastic collision, which phase of the impact is absent?",
+  "formula": "",
+  "options": [
+   "Phase of deformation",
+   "Phase of restitution",
+   "Momentum transfer",
+   "Common-velocity stage"
+  ],
+  "answer": 1,
+  "explain": "With e = 0 the restitution impulse is e times the deformation impulse, so it is zero. The bodies stay together.",
+  "kind": "concept",
+  "id": "efac4d13-32cf-4298-b898-7ba442b4040b",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "A ball hits a smooth floor obliquely with e = 0. Just after impact its velocity is:",
+  "formula": "",
+  "options": [
+   "Along the floor, tangential part unchanged",
+   "Zero",
+   "Along the floor, tangential part halved",
+   "Normal part unchanged, tangential zero"
+  ],
+  "answer": 0,
+  "explain": "For a smooth surface the tangential component is unchanged and the normal component becomes e·u⊥ = 0.",
+  "kind": "concept",
+  "id": "bc75d455-674f-4f4f-b423-a8118f7817b1",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "Two bodies of different masses with equal and opposite momenta stick together. Fraction of KE lost is:",
+  "formula": "p_total = 0 ⇒ K_final = 0",
+  "options": [
+   "1/2",
+   "Depends on the mass ratio",
+   "1",
+   "m₂/(m₁+m₂)"
+  ],
+  "answer": 2,
+  "explain": "Total momentum is zero, so the combined body is at rest and all the initial KE is lost.",
+  "kind": "concept",
+  "id": "d1c76f99-5fbf-463c-b73d-01f08862ac1f",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Perfectly inelastic collision & KE loss"
+ },
+ {
+  "prompt": "Ball hits a smooth floor with angle θ to the normal; restitution e. Rebound angle θ′ with the normal obeys:",
+  "formula": "tanθ′ = tanθ / e",
+  "options": [
+   "tanθ′ = e tanθ",
+   "tanθ′ = tanθ / e",
+   "tanθ′ = tanθ / e²",
+   "tanθ′ = e² tanθ"
+  ],
+  "answer": 1,
+  "explain": "The tangential component is unchanged and the normal component becomes e times, so tanθ′ = tanθ/e.",
+  "kind": "result",
+  "id": "121dac7c-5de2-4720-b536-59143a2675cd",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "For a given collision of two bodies, changing the value of e does not change the:",
+  "formula": "",
+  "options": [
+   "Final KE of the system",
+   "Velocity of the centre of mass",
+   "Final velocity of each body",
+   "Relative speed of separation"
+  ],
+  "answer": 1,
+  "explain": "Only internal forces act, so v_cm is fixed by momentum conservation whatever e is.",
+  "kind": "concept",
+  "id": "0dd61708-909d-4936-957b-888154dc046d",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "Ball dropped from h bounces forever (restitution e). Total distance travelled before coming to rest?",
+  "formula": "D = h(1+e²)/(1−e²)",
+  "options": [
+   "h(1+e²)/(1−e²)",
+   "h/(1−e²)",
+   "h(1+e)/(1−e)",
+   "h(1+e²)/(1−e)"
+  ],
+  "answer": 0,
+  "explain": "Heights form a GP in e²: D = h + 2h·e²/(1−e²) = h(1+e²)/(1−e²).",
+  "kind": "result",
+  "id": "b354612a-58b5-4cc0-a6da-da57c1bb348f",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ },
+ {
+  "prompt": "Two bodies collide head-on, relative speed of approach u, reduced mass μ. KE lost for restitution e is:",
+  "formula": "ΔK = ½ μ u² (1 − e²)",
+  "options": [
+   "½ μ u² (1 − e²)",
+   "½ μ u² (1 − e)",
+   "½ μ u² e²",
+   "½ (m₁+m₂) u² (1 − e²)"
+  ],
+  "answer": 0,
+  "explain": "KE lost = ½μ(u_rel)²(1−e²), where μ = m₁m₂/(m₁+m₂); it is zero for e = 1.",
+  "kind": "formula",
+  "id": "bb3c3e06-87eb-491e-a83b-767d1c2b33c9",
+  "subject": "Physics",
+  "chapter": "Centre of Mass & Collisions",
+  "topic": "Coefficient of restitution"
+ }
+]

@@ -1,704 +1,1644 @@
 [
-  {
-    "id": "73bcdf2d-bfce-4ebf-9cdf-feef0ab2616d",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between y=f(x) and x-axis from a to b",
-    "formula": "∫ₐᵇ |f(x)| dx",
-    "options": [
-      "∫ₐᵇ |f(x)| dx",
-      "|∫ₐᵇ f(x) dx|",
-      "∫ₐᵇ f²(x) dx",
-      "∫ₐᵇ f(x) dx"
-    ],
-    "answer": 0,
-    "explain": "Area is always positive; use |f(x)| to handle regions below x-axis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "60986776-7d60-4cff-b831-661048549b98",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between two curves y=f(x) and y=g(x), f≥g on [a,b]",
-    "formula": "∫ₐᵇ [f(x)−g(x)] dx",
-    "options": [
-      "∫ₐᵇ [f(x)−g(x)]² dx",
-      "∫ₐᵇ [f(x)−g(x)] dx",
-      "∫ₐᵇ [f(x)+g(x)] dx",
-      "∫ₐᵇ |f(x)| dx"
-    ],
-    "answer": 1,
-    "explain": "Area between curves = integral of (upper curve − lower curve) over interval.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ed49d43f-f277-4f46-a660-2d026ba981bc",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area of ellipse x²/a² + y²/b² = 1",
-    "formula": "πab",
-    "options": [
-      "πab",
-      "πa²b",
-      "4ab",
-      "2πab"
-    ],
-    "answer": 0,
-    "explain": "Area of full ellipse = πab; reduces to πr² for circle when a=b=r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d1315730-9e8d-498d-9074-55bcbe49f33b",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area enclosed by y² = 4ax and its latus rectum",
-    "formula": "8a²/3",
-    "options": [
-      "4a²/3",
-      "8a²/3",
-      "16a²/3",
-      "2a²/3"
-    ],
-    "answer": 1,
-    "explain": "Area = 2∫₀ᵃ 2√(ax) dx = 8a²/3 for parabola y²=4ax.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6dc7b826-7243-46b9-b5af-101d17ad6588",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between parabola y=x² and line y=x",
-    "formula": "1/6",
-    "options": [
-      "1/4",
-      "1/3",
-      "1/2",
-      "1/6"
-    ],
-    "answer": 3,
-    "explain": "Intersect at 0,1; ∫₀¹(x−x²)dx = 1/2−1/3 = 1/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7d72b805-2080-4b17-8985-11205ebaff1a",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area of region bounded by y=|x| and y=1",
-    "formula": "",
-    "options": [
-      "1",
-      "3",
-      "1/2",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "Triangle with base 2 and height 1; Area = (1/2)×2×1 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ce1cae78-3ea6-439c-8fad-733eac3fe992",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area using horizontal strips when curve is x=g(y)",
-    "formula": "∫_c^d |g(y)| dy",
-    "options": [
-      "∫_c^d g(y) dy",
-      "∫_c^d g(x) dx",
-      "∫_c^d g²(y) dy",
-      "∫_c^d |g(y)| dy"
-    ],
-    "answer": 3,
-    "explain": "For x=g(y), integrate with respect to y between y-limits c and d.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "023f3b94-d81f-4022-b677-d97bdb53a445",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between y²=x and x²=y (unit square region)",
-    "formula": "1/3",
-    "options": [
-      "2/3",
-      "1/4",
-      "1/2",
-      "1/3"
-    ],
-    "answer": 3,
-    "explain": "∫₀¹(√x − x²)dx = 2/3 − 1/3 = 1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7b84bf57-2972-4e2f-b16c-4b2b42118d3a",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area of circle x²+y²=r² using integration",
-    "formula": "πr²",
-    "options": [
-      "4πr²",
-      "πr²/2",
-      "πr²",
-      "2πr"
-    ],
-    "answer": 2,
-    "explain": "4∫₀ʳ √(r²−x²)dx = 4·(πr²/4) = πr².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "81b07421-fc8a-4e55-96f6-4d46dd7e5d30",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area under one arch of y = sin x (0 to π)",
-    "formula": "2",
-    "options": [
-      "1",
-      "2",
-      "π",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "∫₀^π sin x dx = [−cos x]₀^π = 1+1 = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4de36500-a1e1-4082-bc2e-845d426d2027",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "∫₀^{2π} sin x dx equals (for area purpose)",
-    "formula": "",
-    "options": [
-      "−2",
-      "2",
-      "0",
-      "4"
-    ],
-    "answer": 2,
-    "explain": "Net signed area = 0; but total area = 4 (using |sin x|).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f2a9368c-7cd2-4b3d-ac63-79332eeeb814",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=eˣ, x-axis, x=0 and x=1",
-    "formula": "e−1",
-    "options": [
-      "e",
-      "e−1",
-      "1",
-      "e+1"
-    ],
-    "answer": 1,
-    "explain": "∫₀¹ eˣ dx = [eˣ]₀¹ = e − 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a5f0e576-8ab9-47c8-b432-57cc393f50a2",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "If area from 0 to t of f(x)=t², then f(x) is",
-    "formula": "",
-    "options": [
-      "2x",
-      "√x",
-      "x",
-      "x²"
-    ],
-    "answer": 0,
-    "explain": "Differentiate both sides: f(t)=2t, so f(x)=2x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a4ad7ec8-0b6c-4ce9-9329-4605d4ff2f02",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=ln x, x-axis, x=1, x=e",
-    "formula": "1",
-    "options": [
-      "e",
-      "2",
-      "1",
-      "e−1"
-    ],
-    "answer": 2,
-    "explain": "∫₁ᵉ ln x dx = [x ln x − x]₁ᵉ = (e−e)−(0−1) = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7cb897c9-88bd-4123-b463-37d86bb07913",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area of region |x|+|y|≤1",
-    "formula": "2",
-    "options": [
-      "4",
-      "2",
-      "π",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "Region is a square with diagonal 2; area = (1/2)d₁d₂ = (1/2)(2)(2) = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "56683e58-b4fd-48cc-83ed-41c2087ac45d",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area enclosed by |x|+|y|=a is",
-    "formula": "2a²",
-    "options": [
-      "a²",
-      "4a²",
-      "2a²",
-      "πa²"
-    ],
-    "answer": 2,
-    "explain": "Square with diagonal 2a each; area = 2a².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ac0bc01a-948d-474d-860f-0115e4d75616",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=x², y=0, x=2 is",
-    "formula": "",
-    "options": [
-      "2",
-      "4/3",
-      "4",
-      "8/3"
-    ],
-    "answer": 3,
-    "explain": "∫₀² x² dx = [x³/3]₀² = 8/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "b6cf74a3-5c90-4b85-a653-dc276cbf246e",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between y=√x and y=x² is",
-    "formula": "1/3",
-    "options": [
-      "1/6",
-      "2/3",
-      "1/3",
-      "1/2"
-    ],
-    "answer": 2,
-    "explain": "∫₀¹(√x−x²)dx = 2/3−1/3 = 1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4d0b98eb-e08a-4c75-9d22-dfaba7695f2c",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=3x², x-axis, x=0, x=1",
-    "formula": "1",
-    "options": [
-      "3/2",
-      "1/3",
-      "1",
-      "3"
-    ],
-    "answer": 2,
-    "explain": "∫₀¹ 3x² dx = [x³]₀¹ = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "342c1b10-1d4c-47e0-be79-b120f353ebc9",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area enclosed by y=x² and y=√x equals?",
-    "formula": "∫₀¹(√x − x²)dx",
-    "options": [
-      "1/3",
-      "1/6",
-      "2/3",
-      "1/2"
-    ],
-    "answer": 0,
-    "explain": "∫₀¹(√x−x²)dx = 2/3−1/3 = 1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a0c3ffcb-0a8e-48e0-9130-c9cedd3dd959",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=1/x, x-axis, x=1 to x=e?",
-    "formula": "∫₁ᵉ (1/x)dx",
-    "options": [
-      "ln 2",
-      "1",
-      "e",
-      "e−1"
-    ],
-    "answer": 1,
-    "explain": "∫₁ᵉ (1/x)dx = [ln x]₁ᵉ = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6e598741-907c-45a4-8295-946b8a2fdb19",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area enclosed by y=|sin x| from 0 to 2π?",
-    "formula": "4∫₀^{π/2} sin x dx",
-    "options": [
-      "0",
-      "4",
-      "8",
-      "2"
-    ],
-    "answer": 1,
-    "explain": "Each half-arch has area 2; two arches × 2 = 4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "91560aef-6e47-4d85-82fd-46815123eddf",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=cos²x, x-axis, x=0 to x=π?",
-    "formula": "∫₀^π cos²x dx",
-    "options": [
-      "π",
-      "2π",
-      "1/2",
-      "π/2"
-    ],
-    "answer": 3,
-    "explain": "∫₀^π (1+cos 2x)/2 dx = π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d58df43b-932d-42e8-8bc4-1f35be76d0d9",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area of region bounded by y=√(4−x²) (upper semicircle r=2)?",
-    "formula": "(1/2)πr²",
-    "options": [
-      "π/2",
-      "π",
-      "4π",
-      "2π"
-    ],
-    "answer": 3,
-    "explain": "Upper semicircle of radius 2 has area = (1/2)π(4) = 2π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "b0eef0f2-fb44-4df9-8d8a-bdc1194da177",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=xe⁻ˣ, x-axis, x=0 to ∞?",
-    "formula": "∫₀^∞ xe⁻ˣ dx = Γ(2)",
-    "options": [
-      "2",
-      "e",
-      "1",
-      "1/e"
-    ],
-    "answer": 2,
-    "explain": "∫₀^∞ xe⁻ˣ dx = 1! = 1 by Gamma function / IBP.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e4a68d9a-0b1b-46fc-b10b-7dcc4257d95f",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=1/x², x-axis, x=1, x=∞ is",
-    "formula": "∫₁^∞ x⁻² dx",
-    "options": [
-      "2",
-      "1/2",
-      "1",
-      "∞"
-    ],
-    "answer": 2,
-    "explain": "∫₁^∞ x⁻²dx = [−1/x]₁^∞ = 0−(−1) = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f6b94c90-17af-42e2-83fe-c8b646d654cb",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area under y=sec²x from x=0 to x=π/4 is",
-    "formula": "∫₀^{π/4} sec²x dx",
-    "options": [
-      "1",
-      "√3−1",
-      "π/4",
-      "√2"
-    ],
-    "answer": 0,
-    "explain": "[tan x]₀^{π/4} = tan(π/4)−0 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "efc94cb5-40a0-4ec3-9682-8236bec5f892",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between y=sin x and x-axis from 0 to 2π (net area)",
-    "formula": "",
-    "options": [
-      "2",
-      "π",
-      "0",
-      "4"
-    ],
-    "answer": 2,
-    "explain": "Net (signed) area = ∫₀^{2π}sin x dx = 0; positive and negative parts cancel.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f1f36e13-6b4e-4df0-a5be-3af800a70641",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area of region x²/9 + y²/4 = 1 (ellipse) is",
-    "formula": "π·a·b",
-    "options": [
-      "12π",
-      "3π",
-      "6π",
-      "9π"
-    ],
-    "answer": 2,
-    "explain": "Area of ellipse = πab = π·3·2 = 6π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6f89d3fe-8eca-4070-8d7e-e11bc156957e",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between y=x and y=x² in first quadrant is",
-    "formula": "∫₀¹(x−x²)dx",
-    "options": [
-      "1/3",
-      "1/6",
-      "1/4",
-      "1/2"
-    ],
-    "answer": 1,
-    "explain": "[x²/2−x³/3]₀¹=1/2−1/3=1/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "da441090-829c-47c7-afcb-3a40779180ee",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=√(1−x²) and the x-axis (upper semicircle r=1) is",
-    "formula": "π·1²/2",
-    "options": [
-      "2π",
-      "π/4",
-      "π",
-      "π/2"
-    ],
-    "answer": 3,
-    "explain": "Upper half of unit circle; area = πr²/2 = π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0d28fea1-e06f-41dd-ae47-784688f09456",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=1/x, y=0, x=2, x=4 is",
-    "formula": "∫₂⁴ (1/x)dx",
-    "options": [
-      "1/2",
-      "ln 8",
-      "ln 2",
-      "ln 4"
-    ],
-    "answer": 2,
-    "explain": "[ln x]₂⁴ = ln 4 − ln 2 = ln 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7d5cbcd7-4359-4d46-95ef-37be8b22acbc",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area bounded by y=1/(1+x²), x-axis, x=0 to x=1 is",
-    "formula": "∫₀¹ 1/(1+x²)dx",
-    "options": [
-      "π/4",
-      "π",
-      "1",
-      "π/2"
-    ],
-    "answer": 0,
-    "explain": "[arctan x]₀¹ = π/4 − 0 = π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "aa23ad4d-f716-474a-8bd2-10f7004cd035",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between y=√(a²−x²) and y=0 from x=0 to x=a",
-    "formula": "πa²/4",
-    "options": [
-      "a²/2",
-      "πa²",
-      "πa²/2",
-      "πa²/4"
-    ],
-    "answer": 3,
-    "explain": "Upper semicircle quarter from 0 to a has area πa²/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4598d521-5f05-4ff8-b5c6-b3fd7d0bd53d",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area enclosed by y=x and y=x² from x=0 to x=1",
-    "formula": "1/6",
-    "options": [
-      "1/2",
-      "1/3",
-      "1/4",
-      "1/6"
-    ],
-    "answer": 3,
-    "explain": "∫₀¹(x−x²)dx = 1/2−1/3 = 1/6; classic standard result.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bcc8b8cf-b242-46e7-ad80-cc98b507333c",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area under y=x^n (n>0) from x=0 to x=1",
-    "formula": "1/(n+1)",
-    "options": [
-      "1/(n−1)",
-      "1/n",
-      "1/(n+1)",
-      "n/(n+1)"
-    ],
-    "answer": 2,
-    "explain": "∫₀¹ xⁿ dx = [x^{n+1}/(n+1)]₀¹ = 1/(n+1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8c2eb86b-c05f-4dfe-b852-9cfbc6aab576",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area enclosed by y=x and y=x² from x=0 to x=1?",
-    "formula": "∫₀¹(x−x²)dx",
-    "options": [
-      "1/6",
-      "1/4",
-      "1/2",
-      "1/3"
-    ],
-    "answer": 0,
-    "explain": "[x²/2−x³/3]₀¹ = 1/2−1/3 = 1/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7379635f-4348-4a16-bacd-b431401819ea",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area under y=xⁿ (n>0) from x=0 to x=1?",
-    "formula": "1/(n+1)",
-    "options": [
-      "1/(n+1)",
-      "1/(n−1)",
-      "n/(n+1)",
-      "1/n"
-    ],
-    "answer": 0,
-    "explain": "∫₀¹ xⁿ dx = [xⁿ⁺¹/(n+1)]₀¹ = 1/(n+1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "35c63352-c9cc-4094-a119-69ac01ce7f07",
-    "subject": "Mathematics",
-    "chapter": "Area under Curves",
-    "topic": "Area under Curves",
-    "prompt": "Area between y=√(a²−x²) and y=0 from x=0 to x=a?",
-    "formula": "πa²/4",
-    "options": [
-      "πa²/4",
-      "a²/2",
-      "πa²/2",
-      "πa²"
-    ],
-    "answer": 0,
-    "explain": "This is a quarter circle of radius a; area = πa²/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "73bcdf2d-bfce-4ebf-9cdf-feef0ab2616d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|",
+  "prompt": "Area between y=f(x) and x-axis from a to b",
+  "formula": "∫ₐᵇ |f(x)| dx",
+  "options": [
+   "∫ₐᵇ |f(x)| dx",
+   "|∫ₐᵇ f(x) dx|",
+   "∫ₐᵇ f²(x) dx",
+   "∫ₐᵇ f(x) dx"
+  ],
+  "answer": 0,
+  "explain": "Area is always positive; use |f(x)| to handle regions below x-axis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "60986776-7d60-4cff-b831-661048549b98",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two curves (upper minus lower)",
+  "prompt": "Area between two curves y=f(x) and y=g(x), f≥g on [a,b]",
+  "formula": "∫ₐᵇ [f(x)−g(x)] dx",
+  "options": [
+   "∫ₐᵇ [f(x)−g(x)]² dx",
+   "∫ₐᵇ [f(x)−g(x)] dx",
+   "∫ₐᵇ [f(x)+g(x)] dx",
+   "∫ₐᵇ |f(x)| dx"
+  ],
+  "answer": 1,
+  "explain": "Area between curves = integral of (upper curve − lower curve) over interval.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ed49d43f-f277-4f46-a660-2d026ba981bc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area of ellipse x²/a² + y²/b² = 1",
+  "formula": "πab",
+  "options": [
+   "πab",
+   "πa²b",
+   "4ab",
+   "2πab"
+  ],
+  "answer": 0,
+  "explain": "Area of full ellipse = πab; reduces to πr² for circle when a=b=r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d1315730-9e8d-498d-9074-55bcbe49f33b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area enclosed by y² = 4ax and its latus rectum",
+  "formula": "8a²/3",
+  "options": [
+   "4a²/3",
+   "8a²/3",
+   "16a²/3",
+   "2a²/3"
+  ],
+  "answer": 1,
+  "explain": "Area = 2∫₀ᵃ 2√(ax) dx = 8a²/3 for parabola y²=4ax.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6dc7b826-7243-46b9-b5af-101d17ad6588",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area between parabola y=x² and line y=x",
+  "formula": "1/6",
+  "options": [
+   "1/4",
+   "1/3",
+   "1/2",
+   "1/6"
+  ],
+  "answer": 3,
+  "explain": "Intersect at 0,1; ∫₀¹(x−x²)dx = 1/2−1/3 = 1/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7d72b805-2080-4b17-8985-11205ebaff1a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Curves with modulus and piecewise functions",
+  "prompt": "Area of region bounded by y=|x| and y=1",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "1/2",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Triangle with base 2 and height 1; Area = (1/2)×2×1 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ce1cae78-3ea6-439c-8fad-733eac3fe992",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)",
+  "prompt": "Area using horizontal strips when curve is x=g(y)",
+  "formula": "∫_c^d |g(y)| dy",
+  "options": [
+   "∫_c^d g(y) dy",
+   "∫_c^d g(x) dx",
+   "∫_c^d g²(y) dy",
+   "∫_c^d |g(y)| dy"
+  ],
+  "answer": 3,
+  "explain": "For x=g(y), integrate with respect to y between y-limits c and d.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "023f3b94-d81f-4022-b677-d97bdb53a445",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)",
+  "prompt": "Area between y²=x and x²=y (unit square region)",
+  "formula": "1/3",
+  "options": [
+   "2/3",
+   "1/4",
+   "1/2",
+   "1/3"
+  ],
+  "answer": 3,
+  "explain": "∫₀¹(√x − x²)dx = 2/3 − 1/3 = 1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7b84bf57-2972-4e2f-b16c-4b2b42118d3a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area of circle x²+y²=r² using integration",
+  "formula": "πr²",
+  "options": [
+   "4πr²",
+   "πr²/2",
+   "πr²",
+   "2πr"
+  ],
+  "answer": 2,
+  "explain": "4∫₀ʳ √(r²−x²)dx = 4·(πr²/4) = πr².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "81b07421-fc8a-4e55-96f6-4d46dd7e5d30",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "Area under one arch of y = sin x (0 to π)",
+  "formula": "2",
+  "options": [
+   "1",
+   "2",
+   "π",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "∫₀^π sin x dx = [−cos x]₀^π = 1+1 = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4de36500-a1e1-4082-bc2e-845d426d2027",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|",
+  "prompt": "∫₀^{2π} sin x dx equals (for area purpose)",
+  "formula": "",
+  "options": [
+   "−2",
+   "2",
+   "0",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Net signed area = 0; but total area = 4 (using |sin x|).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f2a9368c-7cd2-4b3d-ac63-79332eeeb814",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "Area bounded by y=eˣ, x-axis, x=0 and x=1",
+  "formula": "e−1",
+  "options": [
+   "e",
+   "e−1",
+   "1",
+   "e+1"
+  ],
+  "answer": 1,
+  "explain": "∫₀¹ eˣ dx = [eˣ]₀¹ = e − 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a5f0e576-8ab9-47c8-b432-57cc393f50a2",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "If area from 0 to t of f(x)=t², then f(x) is",
+  "formula": "",
+  "options": [
+   "2x",
+   "√x",
+   "x",
+   "x²"
+  ],
+  "answer": 0,
+  "explain": "Differentiate both sides: f(t)=2t, so f(x)=2x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a4ad7ec8-0b6c-4ce9-9329-4605d4ff2f02",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Region defined by inequalities",
+  "prompt": "Area bounded by y=ln x, x-axis, x=1, x=e",
+  "formula": "1",
+  "options": [
+   "e",
+   "2",
+   "1",
+   "e−1"
+  ],
+  "answer": 2,
+  "explain": "∫₁ᵉ ln x dx = [x ln x − x]₁ᵉ = (e−e)−(0−1) = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7cb897c9-88bd-4123-b463-37d86bb07913",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Curves with modulus and piecewise functions",
+  "prompt": "Area of region |x|+|y|≤1",
+  "formula": "2",
+  "options": [
+   "4",
+   "2",
+   "π",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Region is a square with diagonal 2; area = (1/2)d₁d₂ = (1/2)(2)(2) = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "56683e58-b4fd-48cc-83ed-41c2087ac45d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area enclosed by |x|+|y|=a is",
+  "formula": "2a²",
+  "options": [
+   "a²",
+   "4a²",
+   "2a²",
+   "πa²"
+  ],
+  "answer": 2,
+  "explain": "Square with diagonal 2a each; area = 2a².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ac0bc01a-948d-474d-860f-0115e4d75616",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse",
+  "prompt": "Area bounded by y=x², y=0, x=2 is",
+  "formula": "",
+  "options": [
+   "2",
+   "4/3",
+   "4",
+   "8/3"
+  ],
+  "answer": 3,
+  "explain": "∫₀² x² dx = [x³/3]₀² = 8/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b6cf74a3-5c90-4b85-a653-dc276cbf246e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area between y=√x and y=x² is",
+  "formula": "1/3",
+  "options": [
+   "1/6",
+   "2/3",
+   "1/3",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "∫₀¹(√x−x²)dx = 2/3−1/3 = 1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4d0b98eb-e08a-4c75-9d22-dfaba7695f2c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse",
+  "prompt": "Area bounded by y=3x², x-axis, x=0, x=1",
+  "formula": "1",
+  "options": [
+   "3/2",
+   "1/3",
+   "1",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "∫₀¹ 3x² dx = [x³]₀¹ = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "342c1b10-1d4c-47e0-be79-b120f353ebc9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse",
+  "prompt": "Area enclosed by y=x² and y=√x equals?",
+  "formula": "∫₀¹(√x − x²)dx",
+  "options": [
+   "1/3",
+   "1/6",
+   "2/3",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "∫₀¹(√x−x²)dx = 2/3−1/3 = 1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a0c3ffcb-0a8e-48e0-9130-c9cedd3dd959",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "Area bounded by y=1/x, x-axis, x=1 to x=e?",
+  "formula": "∫₁ᵉ (1/x)dx",
+  "options": [
+   "ln 2",
+   "1",
+   "e",
+   "e−1"
+  ],
+  "answer": 1,
+  "explain": "∫₁ᵉ (1/x)dx = [ln x]₁ᵉ = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6e598741-907c-45a4-8295-946b8a2fdb19",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Curves with modulus and piecewise functions",
+  "prompt": "Area enclosed by y=|sin x| from 0 to 2π?",
+  "formula": "4∫₀^{π/2} sin x dx",
+  "options": [
+   "0",
+   "4",
+   "8",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "Each half-arch has area 2; two arches × 2 = 4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "91560aef-6e47-4d85-82fd-46815123eddf",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "Area bounded by y=cos²x, x-axis, x=0 to x=π?",
+  "formula": "∫₀^π cos²x dx",
+  "options": [
+   "π",
+   "2π",
+   "1/2",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "∫₀^π (1+cos 2x)/2 dx = π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d58df43b-932d-42e8-8bc4-1f35be76d0d9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area of region bounded by y=√(4−x²) (upper semicircle r=2)?",
+  "formula": "(1/2)πr²",
+  "options": [
+   "π/2",
+   "π",
+   "4π",
+   "2π"
+  ],
+  "answer": 3,
+  "explain": "Upper semicircle of radius 2 has area = (1/2)π(4) = 2π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b0eef0f2-fb44-4df9-8d8a-bdc1194da177",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "Area bounded by y=xe⁻ˣ, x-axis, x=0 to ∞?",
+  "formula": "∫₀^∞ xe⁻ˣ dx = Γ(2)",
+  "options": [
+   "2",
+   "e",
+   "1",
+   "1/e"
+  ],
+  "answer": 2,
+  "explain": "∫₀^∞ xe⁻ˣ dx = 1! = 1 by Gamma function / IBP.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e4a68d9a-0b1b-46fc-b10b-7dcc4257d95f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area bounded by y=1/x², x-axis, x=1, x=∞ is",
+  "formula": "∫₁^∞ x⁻² dx",
+  "options": [
+   "2",
+   "1/2",
+   "1",
+   "∞"
+  ],
+  "answer": 2,
+  "explain": "∫₁^∞ x⁻²dx = [−1/x]₁^∞ = 0−(−1) = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f6b94c90-17af-42e2-83fe-c8b646d654cb",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "Area under y=sec²x from x=0 to x=π/4 is",
+  "formula": "∫₀^{π/4} sec²x dx",
+  "options": [
+   "1",
+   "√3−1",
+   "π/4",
+   "√2"
+  ],
+  "answer": 0,
+  "explain": "[tan x]₀^{π/4} = tan(π/4)−0 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "efc94cb5-40a0-4ec3-9682-8236bec5f892",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|",
+  "prompt": "Area between y=sin x and x-axis from 0 to 2π (net area)",
+  "formula": "",
+  "options": [
+   "2",
+   "π",
+   "0",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Net (signed) area = ∫₀^{2π}sin x dx = 0; positive and negative parts cancel.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f1f36e13-6b4e-4df0-a5be-3af800a70641",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area of region x²/9 + y²/4 = 1 (ellipse) is",
+  "formula": "π·a·b",
+  "options": [
+   "12π",
+   "3π",
+   "6π",
+   "9π"
+  ],
+  "answer": 2,
+  "explain": "Area of ellipse = πab = π·3·2 = 6π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6f89d3fe-8eca-4070-8d7e-e11bc156957e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area between y=x and y=x² in first quadrant is",
+  "formula": "∫₀¹(x−x²)dx",
+  "options": [
+   "1/3",
+   "1/6",
+   "1/4",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "[x²/2−x³/3]₀¹=1/2−1/3=1/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "da441090-829c-47c7-afcb-3a40779180ee",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area bounded by y=√(1−x²) and the x-axis (upper semicircle r=1) is",
+  "formula": "π·1²/2",
+  "options": [
+   "2π",
+   "π/4",
+   "π",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "Upper half of unit circle; area = πr²/2 = π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0d28fea1-e06f-41dd-ae47-784688f09456",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area with trig, exponential and log curves",
+  "prompt": "Area bounded by y=1/x, y=0, x=2, x=4 is",
+  "formula": "∫₂⁴ (1/x)dx",
+  "options": [
+   "1/2",
+   "ln 8",
+   "ln 2",
+   "ln 4"
+  ],
+  "answer": 2,
+  "explain": "[ln x]₂⁴ = ln 4 − ln 2 = ln 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7d5cbcd7-4359-4d46-95ef-37be8b22acbc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area bounded by y=1/(1+x²), x-axis, x=0 to x=1 is",
+  "formula": "∫₀¹ 1/(1+x²)dx",
+  "options": [
+   "π/4",
+   "π",
+   "1",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "[arctan x]₀¹ = π/4 − 0 = π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "aa23ad4d-f716-474a-8bd2-10f7004cd035",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area between y=√(a²−x²) and y=0 from x=0 to x=a",
+  "formula": "πa²/4",
+  "options": [
+   "a²/2",
+   "πa²",
+   "πa²/2",
+   "πa²/4"
+  ],
+  "answer": 3,
+  "explain": "Upper semicircle quarter from 0 to a has area πa²/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4598d521-5f05-4ff8-b5c6-b3fd7d0bd53d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area enclosed by y=x and y=x² from x=0 to x=1",
+  "formula": "1/6",
+  "options": [
+   "1/2",
+   "1/3",
+   "1/4",
+   "1/6"
+  ],
+  "answer": 3,
+  "explain": "∫₀¹(x−x²)dx = 1/2−1/3 = 1/6; classic standard result.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bcc8b8cf-b242-46e7-ad80-cc98b507333c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area under y=x^n (n>0) from x=0 to x=1",
+  "formula": "1/(n+1)",
+  "options": [
+   "1/(n−1)",
+   "1/n",
+   "1/(n+1)",
+   "n/(n+1)"
+  ],
+  "answer": 2,
+  "explain": "∫₀¹ xⁿ dx = [x^{n+1}/(n+1)]₀¹ = 1/(n+1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8c2eb86b-c05f-4dfe-b852-9cfbc6aab576",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area enclosed by y=x and y=x² from x=0 to x=1?",
+  "formula": "∫₀¹(x−x²)dx",
+  "options": [
+   "1/6",
+   "1/4",
+   "1/2",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "[x²/2−x³/3]₀¹ = 1/2−1/3 = 1/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7379635f-4348-4a16-bacd-b431401819ea",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area under y=xⁿ (n>0) from x=0 to x=1?",
+  "formula": "1/(n+1)",
+  "options": [
+   "1/(n+1)",
+   "1/(n−1)",
+   "n/(n+1)",
+   "1/n"
+  ],
+  "answer": 0,
+  "explain": "∫₀¹ xⁿ dx = [xⁿ⁺¹/(n+1)]₀¹ = 1/(n+1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "35c63352-c9cc-4094-a119-69ac01ce7f07",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area between y=√(a²−x²) and y=0 from x=0 to x=a?",
+  "formula": "πa²/4",
+  "options": [
+   "πa²/4",
+   "a²/2",
+   "πa²/2",
+   "πa²"
+  ],
+  "answer": 0,
+  "explain": "This is a quarter circle of radius a; area = πa²/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "56c77345-2c88-4e40-a06d-f2aae2631658",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area bounded by y = x³, the x-axis, x = −1 and x = 1 is",
+  "formula": "",
+  "options": [
+   "1/4",
+   "1",
+   "0",
+   "1/2"
+  ],
+  "answer": 3,
+  "explain": "The curve is odd, so take the modulus: 2·∫₀¹x³dx = 2·(1/4) = 1/2, not 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ba1e9ff-25f7-47ab-819f-fdc4b39fbd73",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area enclosed between y = x² − 1 and the x-axis is",
+  "formula": "",
+  "options": [
+   "2/3",
+   "4/3",
+   "8/3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "2∫₀¹(1−x²)dx = 2(1 − 1/3) = 4/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05e00440-fe2e-4dd7-89b8-f8422a3feb0c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area under y = eˣ from x = −∞ to x = 0 is",
+  "formula": "∫ eˣ dx = eˣ",
+  "options": [
+   "∞",
+   "1/e",
+   "e",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "[eˣ] from −∞ to 0 = 1 − 0 = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "677aa94f-4989-4a2b-b5e6-aa2dfa9cb8c5",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area under y = tan x from x = 0 to x = π/4 is",
+  "formula": "∫ tan x dx = ln|sec x|",
+  "options": [
+   "ln 2",
+   "½ ln 2",
+   "1",
+   "π/4"
+  ],
+  "answer": 1,
+  "explain": "ln sec(π/4) = ln √2 = ½ ln 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bcbbaf17-3efd-4ff8-8f96-787776f5a235",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area between y = √(a² − x²) and the x-axis is",
+  "formula": "",
+  "options": [
+   "πa²",
+   "πa²/2",
+   "πa²/4",
+   "2πa"
+  ],
+  "answer": 1,
+  "explain": "y = √(a²−x²) is the upper semicircle of radius a, with area πa²/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2872d38e-dfb1-47f4-8cb4-68d7b7ad4fb8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area of the ellipse x²/a² + y²/b² = 1 lying in the first quadrant is",
+  "formula": "",
+  "options": [
+   "πa²b²/4",
+   "πab",
+   "πab/2",
+   "πab/4"
+  ],
+  "answer": 3,
+  "explain": "The full ellipse has area πab, so one quadrant has πab/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64b89f3c-3558-49e3-8aee-a41e93dab970",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|",
+  "prompt": "Area between y = sin x and the x-axis from x = 0 to x = 3π/2 is",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "2",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "0 to π gives 2; π to 3π/2 gives |−1| = 1; the total is 3 (whereas ∫ sin x dx = 1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cbb9d9e4-2cc6-44e5-9b7f-77d47a8d0dc9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|",
+  "prompt": "f continuous, f ≢ 0, and ∫ₐᵇ f dx = 0. Then the curve y = f(x) on [a,b]",
+  "formula": "",
+  "options": [
+   "lies wholly below the x-axis",
+   "crosses the x-axis, so area = ∫|f| dx > 0",
+   "encloses zero area",
+   "lies on the x-axis"
+  ],
+  "answer": 1,
+  "explain": "Zero net integral with f ≢ 0 forces a sign change; area ∫|f| is positive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7e228578-66a1-4121-8b05-e85e35e20996",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area of a parabolic segment cut off by a chord equals what fraction of the inscribed triangle on that chord?",
+  "formula": "Archimedes: segment = (4/3)·triangle",
+  "options": [
+   "3/2 of the triangle",
+   "4/3 of the triangle",
+   "3/4 of the triangle",
+   "2/3 of the triangle"
+  ],
+  "answer": 1,
+  "explain": "Triangle has the same base and apex where the tangent is parallel to the chord; segment = 4/3 of it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "71d42203-d3c0-4285-b90a-f77bf0f61586",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area between y = ax²+bx+c and a line meeting it at x = α, β (α<β) is",
+  "formula": "A = |a|(β−α)³/6",
+  "options": [
+   "|a|(β−α)²/6",
+   "|a|(β−α)³/3",
+   "|a|(β−α)²/2",
+   "|a|(β−α)³/6"
+  ],
+  "answer": 3,
+  "explain": "Integrating |a|(x−α)(β−x) from α to β gives |a|(β−α)³/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ed6a06cf-0bd4-4067-bddf-5e54e31a4e64",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area of the smaller region cut from x²+y²=a² by the line x+y=a is",
+  "formula": "",
+  "options": [
+   "a²(π−2)/2",
+   "a²(π−2)/4",
+   "πa²/4",
+   "a²(π−1)/2"
+  ],
+  "answer": 1,
+  "explain": "Quarter circle πa²/4 minus right triangle a²/2 gives a²(π−2)/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ced73f2d-69df-4eb2-a5fa-d4048c8b79bc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area in the first quadrant bounded by y=x, y=0 and x²+y²=a² is",
+  "formula": "",
+  "options": [
+   "πa²/16",
+   "a²/2",
+   "πa²/8",
+   "πa²/4"
+  ],
+  "answer": 2,
+  "explain": "y=x cuts a 45° sector, which is 1/8 of the circle: πa²/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3c4f352-679e-442a-9650-1181099f1217",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area between the circles x²+y²=4 and x²+y²=1 is",
+  "formula": "",
+  "options": [
+   "4π",
+   "5π",
+   "π",
+   "3π"
+  ],
+  "answer": 3,
+  "explain": "Annulus area = π(4−1) = 3π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2544f26-531f-4c36-987e-72b9a95962bd",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area inside x²+y²=a² but outside |x|+|y|=a is",
+  "formula": "",
+  "options": [
+   "(π−1)a²",
+   "(π−4)a²",
+   "πa²−a²/2",
+   "(π−2)a²"
+  ],
+  "answer": 3,
+  "explain": "The square |x|+|y|≤a has area 2a², so the area is πa²−2a² = (π−2)a².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a88ccac-d784-4927-a95d-beddedaffc7e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions",
+  "prompt": "Area of the region inside x²+y²=a² with y ≥ |x| is",
+  "formula": "",
+  "options": [
+   "πa²/8",
+   "πa²/4",
+   "a²/2",
+   "πa²/2"
+  ],
+  "answer": 1,
+  "explain": "y ≥ |x| is the 90° sector between y=x and y=−x, a quarter of the circle: πa²/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1dec6b1-249d-4f37-9aa0-8298e8eec940",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area between ellipse x²/a²+y²/b²=1 and its auxiliary circle x²+y²=a² (a>b) is:",
+  "formula": "π a (a − b)",
+  "options": [
+   "πb(a − b)",
+   "πa(a − b)",
+   "π(a² − b²)",
+   "πab"
+  ],
+  "answer": 1,
+  "explain": "πa² − πab = πa(a − b).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "db74d536-97b8-433d-a2df-1c064804aede",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Smaller area cut off from x²/a²+y²/b²=1 by the line x/a + y/b = 1 is:",
+  "formula": "πab/4 − ab/2",
+  "options": [
+   "ab(π − 1)/4",
+   "ab(π − 2)/4",
+   "ab(π − 2)/2",
+   "πab/4 + ab/2"
+  ],
+  "answer": 1,
+  "explain": "Quarter ellipse minus the triangle with legs a and b: πab/4 − ab/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f8e4f1b-0b6e-4a87-a80d-c488a5e375bf",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area between the ellipse x²/a²+y²/b²=1 (a>b) and its inner circle x²+y²=b² is:",
+  "formula": "πab − πb²",
+  "options": [
+   "πb(a − b)",
+   "πab",
+   "π(a − b)²",
+   "πa(a − b)"
+  ],
+  "answer": 0,
+  "explain": "Ellipse area πab minus circle area πb² = πb(a − b).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5a0dc6d2-d892-4f5f-82e9-bc03fed61ebd",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area inside x²/a²+y²/b²=1 but outside the rhombus joining its four vertices is:",
+  "formula": "πab − 2ab",
+  "options": [
+   "πab/2",
+   "ab(π − 4)",
+   "ab(π − 1)",
+   "ab(π − 2)"
+  ],
+  "answer": 3,
+  "explain": "The rhombus has area ½·2a·2b = 2ab, so the difference is ab(π − 2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "479a38cc-267a-47d9-b661-b0db19c439fe",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area between ellipse x²/a²+y²/b²=1 and its circumscribed rectangle (sides parallel to axes) is:",
+  "formula": "4ab − πab",
+  "options": [
+   "πab/4",
+   "ab(π − 2)",
+   "ab(4 − π)/4",
+   "ab(4 − π)"
+  ],
+  "answer": 3,
+  "explain": "The rectangle has area 2a·2b = 4ab and the ellipse has area πab, so the difference is ab(4 − π).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46154e21-f007-4077-a03d-973db7eea7a1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)",
+  "prompt": "Area bounded by x = y², the y-axis and the lines y=1, y=2 is?",
+  "formula": "∫₁² y² dy",
+  "options": [
+   "8/3",
+   "7/3",
+   "3",
+   "5/3"
+  ],
+  "answer": 1,
+  "explain": "∫₁² y² dy = (8 − 1)/3 = 7/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "273891f4-1e75-4b1b-81b6-0568d3d962bf",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)",
+  "prompt": "Area in first quadrant bounded by y = x², the y-axis and y = 4 is?",
+  "formula": "∫₀⁴ √y dy",
+  "options": [
+   "32/3",
+   "8/3",
+   "64/3",
+   "16/3"
+  ],
+  "answer": 3,
+  "explain": "x = √y; ∫₀⁴ √y dy = (2/3)·8 = 16/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bd167fa7-d83d-4f59-b667-329c4e061a2c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "A parabolic segment's area is what fraction of the triangle formed by its chord and the end tangents?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "4/3",
+   "1/2",
+   "3/4"
+  ],
+  "answer": 0,
+  "explain": "For y = x², chord y = 1: segment 4/3, tangent triangle 2, so the ratio is 2/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d36dc403-cc10-4589-b01b-9b3a89132a90",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area of y² = 4ax cut off by the double ordinate x = h, as a fraction of its circumscribing rectangle",
+  "formula": "",
+  "options": [
+   "1/2",
+   "2/3",
+   "3/4",
+   "1/3"
+  ],
+  "answer": 1,
+  "explain": "The segment is 2/3 of the rectangle of sides h and 2y₁ (y₁² = 4ah).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81c79523-2297-4988-b7df-c3c08331a7de",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area cut from y² = 4ax by a focal chord inclined at angle θ to the axis is",
+  "formula": "A = 8a²/(3 sin³θ)",
+  "options": [
+   "8a²/(3 sin³θ)",
+   "8a² sin³θ/3",
+   "8a²/(3 sinθ)",
+   "4a²/(3 sin²θ)"
+  ],
+  "answer": 0,
+  "explain": "Using (y₂−y₁)³/(24a) with y₂−y₁ = 4a/sinθ gives 8a²/(3sin³θ); θ=90° gives 8a²/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cf8415e6-811e-4c3c-beb4-a4aa3eca77bc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)",
+  "prompt": "For y² = 4ax and x² = 4by, a is doubled and b is halved. The enclosed area becomes",
+  "formula": "Area = 16ab/3",
+  "options": [
+   "Unchanged",
+   "Doubled",
+   "4 times",
+   "Halved"
+  ],
+  "answer": 0,
+  "explain": "Area ∝ ab, and the product ab stays the same.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36256326-71e6-40f8-bdfb-12d934b79136",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse",
+  "prompt": "For increasing f, ∫ₐᵇ f(x)dx + ∫_{f(a)}^{f(b)} f⁻¹(y)dy equals?",
+  "formula": "",
+  "options": [
+   "b·f(a) − a·f(b)",
+   "f(b) − f(a)",
+   "b·f(b) − a·f(a)",
+   "(b² − a²)/2"
+  ],
+  "answer": 2,
+  "explain": "The two areas together fill the difference of the rectangles: b f(b) − a f(a).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7aaa29fa-cd85-4fd1-a4c2-5be18f8d6353",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "Area cut off from y² = 4ax by the chord joining parameters t₁ and t₂ is",
+  "formula": "",
+  "options": [
+   "2a²|t₁−t₂|³/3",
+   "a²|t₁−t₂|³/6",
+   "a²|t₁−t₂|³/3",
+   "a²|t₁−t₂|²/3"
+  ],
+  "answer": 2,
+  "explain": "Using y-strips: (1/4a)(Δy)³/6 with Δy = 2aΔt. Check: t = ±1 gives 8a²/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "29bf14a1-90cd-4abd-8dbf-ada66cdb25a2",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line",
+  "prompt": "The largest triangle inscribed in a parabolic segment has its apex where the tangent is",
+  "formula": "",
+  "options": [
+   "drawn through the chord's midpoint",
+   "parallel to the chord",
+   "at the vertex of the parabola",
+   "perpendicular to the chord"
+  ],
+  "answer": 1,
+  "explain": "Apex is the farthest point from the chord, where the tangent is parallel to the chord (Archimedes).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b124eb0-63c1-4f31-bf36-ca55944e3fb6",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)",
+  "prompt": "Area enclosed between the parabola y = x² and the line y = 2x is:",
+  "formula": "∫₀² (2x − x²) dx",
+  "options": [
+   "2/3",
+   "4",
+   "4/3",
+   "8/3"
+  ],
+  "answer": 2,
+  "explain": "Intersections at x = 0, 2: area = 4 − 8/3 = 4/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "999d63e2-994f-49b9-a5c8-ff2d43bbd3f5",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)",
+  "prompt": "Area enclosed between the parabola y = x² and the line y = 4 is:",
+  "formula": "2∫₀² (4 − x²) dx",
+  "options": [
+   "16/3",
+   "8/3",
+   "64/3",
+   "32/3"
+  ],
+  "answer": 3,
+  "explain": "2(8 − 8/3) = 32/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f3ea4dfd-4107-4b4d-84ac-0aacfc5a17db",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)",
+  "prompt": "For 0 < x < 4a, in the region between y²=4ax and x²=4ay, the upper boundary is:",
+  "formula": "",
+  "options": [
+   "y = 4a",
+   "y = x",
+   "x² = 4ay",
+   "y = 2√(ax) (from y² = 4ax)"
+  ],
+  "answer": 3,
+  "explain": "At e.g. x=a, 2a > a/4, so the parabola y²=4ax lies above x²=4ay between the points.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7bd50ddf-7a33-420b-8a64-dd63e5b44e79",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)",
+  "prompt": "Area between y² = 4ax and x² = 4ay, in terms of the parameter 'a', varies as:",
+  "formula": "A = 16a²/3",
+  "options": [
+   "1/a",
+   "a",
+   "a²",
+   "a³"
+  ],
+  "answer": 2,
+  "explain": "Area scales as length²; A = 16a²/3 ∝ a².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "25d3f9e7-d233-4307-ba0c-897a6090d06b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)",
+  "prompt": "Area between y²=4ax and x²=4ay is what fraction of the area of triangle with vertices O, (4a,0), (4a,4a)?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1/3",
+   "2/3",
+   "3/4"
+  ],
+  "answer": 2,
+  "explain": "The triangle has area ½·4a·4a = 8a², and (16a²/3)/(8a²) = 2/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1705c3fe-eec3-436e-be09-fae2cc9e6980",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area in the first quadrant bounded by the x-axis, y = (b/a)x and x²/a²+y²/b²=1 is:",
+  "formula": "",
+  "options": [
+   "πab/4",
+   "πab/6",
+   "πab/16",
+   "πab/8"
+  ],
+  "answer": 3,
+  "explain": "Scaling y by b/a maps this to a 45° circular sector, area πa²/8. Scaling back gives πab/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "464af541-bfa4-45ef-8936-0779cd1d50fe",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments",
+  "prompt": "Area of the elliptic sector from the centre between the x-axis and the point (a cosθ, b sinθ), 0<θ<π/2, is:",
+  "formula": "",
+  "options": [
+   "abθ",
+   "abθ/2",
+   "πabθ/4",
+   "abθ/4"
+  ],
+  "answer": 1,
+  "explain": "The ellipse is the circle sector scaled by b/a, so the area is (a²θ/2)(b/a) = abθ/2. At θ = π/2 this gives πab/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "48b6845c-6f2c-4381-a101-99d9a6704899",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse",
+  "prompt": "Increasing f meets y=x at two points. How do area(f, y=x) and area(f⁻¹, y=x) between them compare?",
+  "formula": "reflection in y = x",
+  "options": [
+   "Always equal",
+   "Their product is 1",
+   "Area with f⁻¹ is larger",
+   "Area with f is larger"
+  ],
+  "answer": 0,
+  "explain": "f and f⁻¹ are mirror images in y = x, and reflection preserves area, so the two regions are congruent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "788b5ffb-8003-488a-91fc-79a670873143",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area under y = 1/√x from x = 0 to x = 1 is:",
+  "formula": "∫₀¹ x^(−1/2) dx = 2√x |₀¹",
+  "options": [
+   "1",
+   "2",
+   "1/2",
+   "Infinite (diverges)"
+  ],
+  "answer": 1,
+  "explain": "The integral converges since the power is −1/2 > −1, and 2√x from 0 to 1 gives 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7e4458d8-6dbc-4d9d-bff2-93179d8c292a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Total area between y = 1/(1+x²) and the x-axis over the whole real line is:",
+  "formula": "[tan⁻¹x] from −∞ to ∞",
+  "options": [
+   "2π",
+   "1",
+   "π",
+   "π/2"
+  ],
+  "answer": 2,
+  "explain": "tan⁻¹(∞) − tan⁻¹(−∞) = π/2 + π/2 = π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1eb610eb-bd70-4074-91d5-2bccb080bcc1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area under y = 1/√(1−x²) from x = 0 to x = 1 is:",
+  "formula": "[sin⁻¹x]₀¹",
+  "options": [
+   "π/4",
+   "π/2",
+   "1",
+   "π"
+  ],
+  "answer": 1,
+  "explain": "The integral is sin⁻¹1 − sin⁻¹0 = π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69339672-ac3c-41ca-a547-a9f1b1ad8e4f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits",
+  "prompt": "Area under y = 2ˣ from x = 0 to x = 1 is:",
+  "formula": "∫aˣ dx = aˣ/ln a",
+  "options": [
+   "1/ln 2",
+   "1",
+   "ln 2",
+   "2/ln 2"
+  ],
+  "answer": 0,
+  "explain": "(2¹ − 2⁰)/ln 2 = 1/ln 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b70b2a53-6c83-4bb8-bd2c-952691767a31",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)",
+  "prompt": "Area bounded by x = cos y, the y-axis and −π/2 ≤ y ≤ π/2 is?",
+  "formula": "∫ cos y dy",
+  "options": [
+   "π",
+   "π/2",
+   "2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "cos y ≥ 0 on this interval; ∫ from −π/2 to π/2 of cos y dy = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "156aeb18-b807-47d6-a879-faeb67abe4c9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)",
+  "prompt": "Area enclosed between x = |y| and the line x = 2 is?",
+  "formula": "",
+  "options": [
+   "16",
+   "4",
+   "8",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "Triangle with vertices (0,0), (2,2), (2,−2): ½·4·2 = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5717369d-9d92-4edb-a05d-c8091d2c4513",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)",
+  "prompt": "Area bounded by x = 1/√(1−y²), the y-axis and 0 ≤ y ≤ ½ is?",
+  "formula": "∫ dy/√(1−y²) = sin⁻¹y",
+  "options": [
+   "π/12",
+   "π/6",
+   "π/3",
+   "π/4"
+  ],
+  "answer": 1,
+  "explain": "∫₀^{1/2} dy/√(1−y²) = sin⁻¹(1/2) = π/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a87b70b8-433a-4afd-9764-9c292ab8ec09",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|",
+  "prompt": "Area between y = sin x and the x-axis from x = 0 to x = 10π is",
+  "formula": "",
+  "options": [
+   "10",
+   "20",
+   "0",
+   "40"
+  ],
+  "answer": 1,
+  "explain": "Each half-arch has area 2, and there are 10 of them over 10π, so the area is 20 (while ∫ sin x dx = 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "200bf9eb-055c-4f6a-8528-90f861701ba4",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|",
+  "prompt": "f odd, f ≥ 0 on [0,a]. Area between y=f(x), x-axis, x=−a, x=a is",
+  "formula": "",
+  "options": [
+   "∫₀ᵃ f dx",
+   "2∫₀ᵃ f dx",
+   "∫₋ₐᵃ f dx",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Odd f is negative on [−a,0]; |f| is even, so area = 2∫₀ᵃ f dx, while ∫₋ₐᵃ f dx = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2323dfe6-5ffa-4d53-838d-4778bb84a30a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area",
+  "prompt": "Area enclosed by |x|/a + |y|/b = 1 is:",
+  "formula": "",
+  "options": [
+   "ab",
+   "2ab",
+   "ab/2",
+   "4ab"
+  ],
+  "answer": 1,
+  "explain": "Rhombus with diagonals 2a and 2b: ½·2a·2b = 2ab.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

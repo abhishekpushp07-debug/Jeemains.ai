@@ -16,7 +16,7 @@ import { BrandMark } from "@/src/components/BrandMark";
 import { getPyqCatalogue } from "@/src/api/pyq";
 import { colors, space } from "@/src/theme";
 import { EXAMS, istDate, usesNativeTabs } from "@/src/navigation";
-import { seriesDays, useSeriesData } from "@/src/series";
+import { seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
 import { examIcon, useExams } from "@/src/api/examCatalog";
 import { useListFocus } from "@/src/useListFocus";
 import { HomeDream } from "@/src/dream/HomeDream";
@@ -38,6 +38,7 @@ export default function Home() {
   const { user, expired } = useAuth();
   const uid = user?.id;
   const { series, streak, days, reload } = useSeriesData(uid, false);
+  useSeriesWatch(series.revalidate, days);
   const progress = useCached<any>(user ? `u.${user.id}.progress` : null, (signal) => api("/my/tests?tab=progress&page=1", { signal }));
   const catalog = useExams();
   useListFocus(catalog.revalidate);
@@ -57,7 +58,7 @@ export default function Home() {
   const s = series.data;
   const today = days.find(d => d.isToday);
   const total = seriesDays(s); // the website's schedule decides the day count
-  const liveSub = !s ? "daily full mocks" : s.today < s.first_date ? `opens ${istDate(s.first_date).toLowerCase()}` : s.today > s.last_date ? "practice archive" : today ? `day ${today.day} · ${today.label.toLowerCase()}` : `${total}-day series`;
+  const liveSub = !s ? "daily full mocks" : s.today < s.first_date ? `opens ${istDate(s.first_date).toLowerCase()}` : s.today > s.last_date ? "practice archive" : todayPaper(today) === "ready" ? `day ${today!.day} · paper ready` : today ? `day ${today.day} · ${today.label.toLowerCase()}` : `${total}-day series`;
   const first = user?.name?.trim().split(/\s+/)[0];
   const openTests = (tab: string) => router.push({ pathname: "/(tabs)/tests", params: { tab, at: String(Date.now()) } });
   // Shortcuts to an exam disappear with it when the owner hides that exam on the website.

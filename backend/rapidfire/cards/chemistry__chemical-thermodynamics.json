@@ -1,1541 +1,3441 @@
 [
-  {
-    "id": "37cb4d5a-fc94-4e62-9bb0-f0a3d0f7ba3c",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Gibbs Energy & Spontaneity",
-    "prompt": "For a spontaneous process at constant T and P, ΔG must be:",
-    "formula": "ΔG = ΔH - TΔS",
-    "options": [
-      "Positive",
-      "Zero",
-      "Equal to ΔH",
-      "Negative"
-    ],
-    "answer": 3,
-    "explain": "Spontaneity at constant T,P requires ΔG < 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70704952-38d7-4d68-ae3d-6f65d74f5cc2",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Gibbs Energy & Equilibrium",
-    "prompt": "At equilibrium, the value of ΔG is:",
-    "formula": "ΔG = ΔG° + RT ln Q",
-    "options": [
-      "Zero",
-      "Equal to ΔG°",
-      "Positive",
-      "Negative"
-    ],
-    "answer": 0,
-    "explain": "At equilibrium Q = K, so ΔG = 0; system has minimum Gibbs energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "66b074ee-4278-4296-adcb-f7d0971d5c84",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Gibbs Energy & Equilibrium",
-    "prompt": "Relationship between ΔG° and equilibrium constant K is:",
-    "formula": "ΔG° = −RT ln K",
-    "options": [
-      "ΔG° = −RT ln K",
-      "ΔG° = −nF ln K",
-      "ΔG° = RT ln K",
-      "ΔG° = ΔH° − TΔS°"
-    ],
-    "answer": 0,
-    "explain": "Standard Gibbs energy change relates to K via ΔG° = −RT ln K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9687f512-dc6e-412c-bee1-e00dc11b338e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Laws of Thermodynamics",
-    "prompt": "Which law states internal energy of an isolated system is constant?",
-    "formula": "",
-    "options": [
-      "Third Law",
-      "Hess's Law",
-      "First Law",
-      "Second Law"
-    ],
-    "answer": 2,
-    "explain": "First Law: ΔU = q + w; for isolated system q = w = 0, so ΔU = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a6638e9-1850-45a7-9ed9-3dbd724c8bef",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Work & Internal Energy",
-    "prompt": "For an ideal gas expanding into vacuum (free expansion), work done is:",
-    "formula": "w = −P_ext ΔV",
-    "options": [
-      "Positive",
-      "Zero",
-      "Equal to ΔH",
-      "−PΔV"
-    ],
-    "answer": 1,
-    "explain": "P_ext = 0 in free expansion, so w = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fbcb9349-a6cc-4a6b-a4cc-3cb54c12e2d4",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Enthalpy",
-    "prompt": "At constant pressure, heat exchanged equals:",
-    "formula": "q_p = ΔH",
-    "options": [
-      "ΔS",
-      "ΔU",
-      "ΔH",
-      "ΔG"
-    ],
-    "answer": 2,
-    "explain": "Enthalpy H is defined so that q_p = ΔH at constant pressure.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f6255dc2-e9fd-472d-a3b6-54405de21a00",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Enthalpy",
-    "prompt": "Relation between ΔH and ΔU for reactions involving gases:",
-    "formula": "ΔH = ΔU + Δn_g RT",
-    "options": [
-      "ΔH = ΔU + nRT",
-      "ΔH = ΔU − ΔngRT",
-      "ΔH = ΔU + PV",
-      "ΔH = ΔU + ΔngRT"
-    ],
-    "answer": 3,
-    "explain": "Δng = moles of gaseous products − gaseous reactants; ΔH = ΔU + ΔngRT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3ffee3a8-1a05-4b41-af7a-66374f2b5ee1",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Hess's Law",
-    "prompt": "Hess's Law is a consequence of which property of enthalpy?",
-    "formula": "",
-    "options": [
-      "Path function",
-      "State function",
-      "Intensive property",
-      "Extensive property"
-    ],
-    "answer": 1,
-    "explain": "Since H is a state function, ΔH is path-independent, validating Hess's Law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "de8e788c-c173-465a-967d-7eb4910f7dc3",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Enthalpy of Formation",
-    "prompt": "Standard enthalpy of formation of a pure element in its standard state is:",
-    "formula": "",
-    "options": [
-      "Negative",
-      "Zero",
-      "Undefined",
-      "Positive"
-    ],
-    "answer": 1,
-    "explain": "By convention, ΔfH° of elements in their standard states = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef19b951-05ed-4b2d-b911-23265b341b33",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Entropy",
-    "prompt": "Entropy is a measure of:",
-    "formula": "S = k_B ln W",
-    "options": [
-      "Bond energy",
-      "Heat content",
-      "Free energy",
-      "Disorder/randomness"
-    ],
-    "answer": 3,
-    "explain": "Boltzmann's equation S = k_B ln W relates entropy to number of microstates W.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f586a58c-a2d1-46e5-9186-31c0079e8027",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Second Law & Entropy",
-    "prompt": "For a reversible process, total entropy change of universe is:",
-    "formula": "ΔS_univ = 0",
-    "options": [
-      "Negative",
-      "Infinite",
-      "Zero",
-      "Positive"
-    ],
-    "answer": 2,
-    "explain": "Second Law: reversible process has ΔS_universe = 0; irreversible has ΔS > 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6122e48b-70e6-42b2-bc2f-e92b1e290362",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Third Law",
-    "prompt": "Third Law of Thermodynamics states entropy of a perfect crystal at 0 K is:",
-    "formula": "S = 0 at T = 0 K",
-    "options": [
-      "Zero",
-      "Maximum",
-      "Undefined",
-      "Minimum but nonzero"
-    ],
-    "answer": 0,
-    "explain": "Third Law: perfect crystalline substance at absolute zero has S = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "56492db5-0c4e-44ec-80da-1615edd9ba6a",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Bond Enthalpy",
-    "prompt": "Bond dissociation enthalpy is always:",
-    "formula": "",
-    "options": [
-      "Positive (endothermic)",
-      "Zero",
-      "Variable sign",
-      "Negative (exothermic)"
-    ],
-    "answer": 0,
-    "explain": "Breaking bonds always requires energy, so bond dissociation enthalpy > 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a65f6d9-4602-4cef-990f-93d342882418",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Bond Enthalpy",
-    "prompt": "ΔH_rxn using bond enthalpies: correct expression is:",
-    "formula": "ΔH = ΣBE(reactants) − ΣBE(products)",
-    "options": [
-      "−ΣBE(reactants) − ΣBE(products)",
-      "ΣBE(products) − ΣBE(reactants)",
-      "ΣBE(reactants) − ΣBE(products)",
-      "ΣBE(products) + ΣBE(reactants)"
-    ],
-    "answer": 2,
-    "explain": "Energy in (bonds broken) minus energy out (bonds formed) gives ΔH.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3b251895-2466-4eef-a609-683872a7ff0f",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Lattice Enthalpy",
-    "prompt": "Lattice enthalpy is determined indirectly using:",
-    "formula": "",
-    "options": [
-      "Hess's Law directly",
-      "Kirchhoff's equation",
-      "Calorimetry",
-      "Born-Haber cycle"
-    ],
-    "answer": 3,
-    "explain": "Born-Haber cycle applies Hess's Law to calculate lattice enthalpy indirectly.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0fbb0754-5d03-4c0b-b857-f5b57d231012",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Enthalpy of Neutralisation",
-    "prompt": "Enthalpy of neutralisation of strong acid and strong base is always:",
-    "formula": "≈ −57.1 kJ/mol",
-    "options": [
-      "Varies with acid/base",
-      "+57.1 kJ/mol",
-      "−13.7 kJ/mol",
-      "−57.1 kJ/mol"
-    ],
-    "answer": 3,
-    "explain": "Strong acid + strong base: H⁺ + OH⁻ → H₂O, ΔH ≈ −57.1 kJ/mol always.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5f5abc9b-a152-450d-b20b-cfa86bea77de",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Enthalpy of Neutralisation",
-    "prompt": "For weak acid neutralisation, |ΔH_neut| compared to 57.1 kJ/mol is:",
-    "formula": "",
-    "options": [
-      "Less than 57.1 kJ/mol",
-      "Equal to 57.1 kJ/mol",
-      "Zero",
-      "Greater than 57.1 kJ/mol"
-    ],
-    "answer": 0,
-    "explain": "Energy is used for ionisation of weak acid/base, reducing net heat released.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "69d642e4-652d-4523-bb39-6ccd68c024cf",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Thermodynamic Processes",
-    "prompt": "For an adiabatic process, which quantity is zero?",
-    "formula": "q = 0",
-    "options": [
-      "ΔH",
-      "Work (w)",
-      "Heat (q)",
-      "ΔU"
-    ],
-    "answer": 2,
-    "explain": "Adiabatic process: no heat exchange with surroundings, so q = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "360f26dc-77c7-4e83-9d6e-10bfd34bf35e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Heat Capacities",
-    "prompt": "Cp − Cv for an ideal gas equals:",
-    "formula": "Cp − Cv = R",
-    "options": [
-      "R/2",
-      "2R",
-      "γR",
-      "R"
-    ],
-    "answer": 3,
-    "explain": "For ideal gas, Cp − Cv = R (per mole), derived from H = U + PV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cf14add9-c493-4033-b51e-47899dd6b983",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "State vs Path Functions",
-    "prompt": "Which thermodynamic quantity is NOT a state function?",
-    "formula": "",
-    "options": [
-      "Heat (q)",
-      "Enthalpy (H)",
-      "Entropy (S)",
-      "Gibbs energy (G)"
-    ],
-    "answer": 0,
-    "explain": "Heat (q) and work (w) are path functions; H, S, G, U are state functions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77acfb82-b439-49a6-9592-8fb698865a2f",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "ΔG = ΔH − TΔS; spontaneous at ALL temperatures when:",
-    "formula": "ΔH < 0, ΔS > 0",
-    "options": [
-      "ΔH > 0 and ΔS < 0",
-      "ΔH < 0 and ΔS > 0",
-      "ΔH < 0 and ΔS < 0",
-      "ΔH > 0 and ΔS > 0"
-    ],
-    "answer": 1,
-    "explain": "When ΔH < 0 and ΔS > 0, ΔG is negative at every temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "50fb3b5b-f93f-425b-b355-4ad1eb2450bc",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "ΔG° = −nFE°cell relates to which energy?",
-    "formula": "ΔG° = −nFE°",
-    "options": [
-      "Electrical (cell) energy",
-      "Ionisation energy",
-      "Lattice energy",
-      "Activation energy"
-    ],
-    "answer": 0,
-    "explain": "ΔG° = −nFE° connects standard Gibbs energy to standard EMF of a cell.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a39dce42-4908-4e80-940d-5d18eae3f961",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a process spontaneous only at HIGH temperature, the signs are:",
-    "formula": "",
-    "options": [
-      "ΔH > 0, ΔS > 0",
-      "ΔH < 0, ΔS < 0",
-      "ΔH < 0, ΔS > 0",
-      "ΔH > 0, ΔS < 0"
-    ],
-    "answer": 0,
-    "explain": "ΔH > 0, ΔS > 0: TΔS term dominates at high T making ΔG negative.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cf831ac2-49e8-4888-a902-4ef4d82d6aad",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Entropy change for reversible isothermal expansion of ideal gas:",
-    "formula": "ΔS = nR ln(V₂/V₁)",
-    "options": [
-      "Zero",
-      "nCv ln(V₂/V₁)",
-      "nR ln(P₂/P₁)",
-      "nR ln(V₂/V₁)"
-    ],
-    "answer": 3,
-    "explain": "For isothermal reversible process, ΔS = q_rev/T = nR ln(V₂/V₁).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "620df1de-8ca6-4e77-aff4-96ab9ee15f44",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a spontaneous process at constant T, ΔS_universe relation:",
-    "formula": "ΔS_univ > 0",
-    "options": [
-      "ΔS_univ > 0",
-      "ΔS_univ < 0",
-      "ΔS_univ = 0",
-      "ΔS_sys > 0 always"
-    ],
-    "answer": 0,
-    "explain": "Second Law: entropy of universe increases for every spontaneous process.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "542382d3-5e69-49b5-bda3-eee351d03f42",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Internal energy change ΔU for isothermal expansion of ideal gas:",
-    "formula": "ΔU = 0",
-    "options": [
-      "Zero",
-      "−P_ext ΔV",
-      "nRT",
-      "nCvΔT"
-    ],
-    "answer": 0,
-    "explain": "For ideal gas, U depends only on T; isothermal means ΔT = 0, so ΔU = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cbf17dad-91b8-47f6-83a2-cbb3ad919d5e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "First Law of Thermodynamics expressed as:",
-    "formula": "ΔU = q + w",
-    "options": [
-      "ΔH = q + w",
-      "ΔU = q − w",
-      "ΔG = q + w",
-      "ΔU = q + w"
-    ],
-    "answer": 3,
-    "explain": "IUPAC convention: ΔU = q + w, where w = work done ON the system.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "525a9c63-cda7-4267-9475-3c94f3790876",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Enthalpy of sublimation equals sum of:",
-    "formula": "ΔH_sub = ΔH_fus + ΔH_vap",
-    "options": [
-      "ΔH_fusion + ΔH_vaporisation",
-      "ΔH_fus only",
-      "ΔH_comb + ΔH_fus",
-      "ΔH_vap only"
-    ],
-    "answer": 0,
-    "explain": "Sublimation = fusion + vaporisation; enthalpies add by Hess's Law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f08adece-f94b-49a7-92f5-73af7fef6fd6",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Which relation connects ΔG° and K correctly?",
-    "formula": "ΔG° = −RT ln K",
-    "options": [
-      "ΔG° = RT ln K",
-      "ΔG° = RT/ln K",
-      "ΔG° = −nRT ln K",
-      "ΔG° = −RT ln K"
-    ],
-    "answer": 3,
-    "explain": "Standard Gibbs energy change: ΔG° = −RT ln K (van't Hoff isotherm basis).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9ab4b9b6-cf8e-4c53-b13e-83cdfe8f7fcd",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Heat capacity at constant volume Cv is defined as:",
-    "formula": "Cv = (∂U/∂T)_V",
-    "options": [
-      "(∂U/∂T)_V",
-      "(∂H/∂T)_V",
-      "(∂U/∂T)_P",
-      "(∂H/∂T)_P"
-    ],
-    "answer": 0,
-    "explain": "Cv = (∂U/∂T)_V; Cp = (∂H/∂T)_P — these are standard thermodynamic definitions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f6be4e63-e628-4b11-b125-6ddab2f48d24",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For monoatomic ideal gas, Cv equals:",
-    "formula": "Cv = (3/2)R",
-    "options": [
-      "(7/2)R",
-      "(3/2)R",
-      "(5/2)R",
-      "R"
-    ],
-    "answer": 1,
-    "explain": "Monoatomic gas has 3 translational DOF; Cv = (3/2)R, Cp = (5/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4c7803c1-c03a-4960-b9ea-f7b2427413af",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For diatomic ideal gas (room T), Cv equals:",
-    "formula": "Cv = (5/2)R",
-    "options": [
-      "(5/2)R",
-      "(3/2)R",
-      "2R",
-      "(7/2)R"
-    ],
-    "answer": 0,
-    "explain": "Diatomic gas: 3 translational + 2 rotational DOF; Cv = (5/2)R at room T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6309d40a-2676-4fc6-aeed-229f8832e298",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "γ (Cp/Cv) for a monoatomic ideal gas is:",
-    "formula": "γ = 5/3",
-    "options": [
-      "7/5",
-      "4/3",
-      "3/2",
-      "5/3"
-    ],
-    "answer": 3,
-    "explain": "Monoatomic: Cp = 5R/2, Cv = 3R/2; γ = Cp/Cv = 5/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d0dca5be-fad6-4044-90bc-a92ac3bad0d0",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Standard state of a substance is defined at pressure:",
-    "formula": "P° = 1 bar",
-    "options": [
-      "1 Pa",
-      "1 bar",
-      "101.3 Pa",
-      "1 atm"
-    ],
-    "answer": 1,
-    "explain": "IUPAC standard state is 1 bar (not 1 atm) at the specified temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "431ddd4d-50ee-43ca-b2d0-202a8c4dff65",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "In a cyclic process, ΔU of the system is:",
-    "formula": "ΔU = 0",
-    "options": [
-      "Zero",
-      "Negative",
-      "Equal to heat absorbed",
-      "Positive"
-    ],
-    "answer": 0,
-    "explain": "U is a state function; returning to same state means ΔU = 0 for any cycle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f1d964d1-e4fc-4f92-a98b-afa3a98b747b",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Entropy change when 1 mol ice melts at 273 K (ΔH_fus = 6 kJ/mol):",
-    "formula": "ΔS = ΔH_fus/T",
-    "options": [
-      "Zero",
-      "273/6000 J/K",
-      "6000×273 J/K",
-      "6000/273 J/K"
-    ],
-    "answer": 3,
-    "explain": "ΔS = q_rev/T = ΔH_fus/T = 6000/273 ≈ 22 J K⁻¹ mol⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "194379c8-f284-46ef-9405-f585cf625065",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Work done in irreversible expansion against constant external pressure:",
-    "formula": "w = −P_ext·ΔV",
-    "options": [
-      "−P_ext ΔV",
-      "−nRT ln(V₂/V₁)",
-      "Zero",
-      "−P_int ΔV"
-    ],
-    "answer": 0,
-    "explain": "For irreversible process against constant P_ext, w = −P_ext(V₂ − V₁).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8bd47504-8d8f-40f3-8c2f-9670e3620a85",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Which process has ΔH = ΔU?",
-    "formula": "Δn_g = 0",
-    "options": [
-      "All reactions at 298 K",
-      "Adiabatic reactions",
-      "Reactions with Δn_g = 0",
-      "Reactions at constant V"
-    ],
-    "answer": 2,
-    "explain": "ΔH = ΔU + Δn_g RT; when Δn_g = 0, ΔH = ΔU.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "661678da-15ef-4d2c-ace4-2bef7f54643e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Sign of ΔH and ΔS for melting of ice at 25°C?",
-    "formula": "",
-    "options": [
-      "ΔH>0, ΔS>0",
-      "ΔH<0, ΔS<0",
-      "ΔH>0, ΔS<0",
-      "ΔH<0, ΔS>0"
-    ],
-    "answer": 0,
-    "explain": "Melting is endothermic (ΔH>0) and increases disorder (ΔS>0); spontaneous above 0°C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e27df8b9-7fbe-488d-8fb6-c6c88299c8a8",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a reaction: ΔH<0 and ΔS<0. It is spontaneous when:",
-    "formula": "ΔG = ΔH − TΔS",
-    "options": [
-      "High temperature",
-      "Low temperature",
-      "No temperature",
-      "All temperatures"
-    ],
-    "answer": 1,
-    "explain": "ΔG = ΔH−TΔS <0 only when T is small enough that |ΔH|>T|ΔS|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8f1e2a4d-4c51-49a2-9d14-8a0784f7db79",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Which statement about enthalpy of formation of O₃(g) is correct?",
-    "formula": "",
-    "options": [
-      "ΔHf° < 0",
-      "ΔHf° > 0",
-      "ΔHf° is undefined",
-      "ΔHf° = 0"
-    ],
-    "answer": 1,
-    "explain": "Standard element is O₂; forming O₃ from O₂ is endothermic, so ΔHf°(O₃) > 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1cfca16b-60f3-4c20-92ae-bed72f4addb5",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a reaction with Kp = 1 at 298 K, the value of ΔG° is:",
-    "formula": "ΔG° = −RT ln K",
-    "options": [
-      "Negative",
-      "0",
-      "Positive",
-      "−RT"
-    ],
-    "answer": 1,
-    "explain": "ΔG° = −RT ln 1 = 0; equilibrium constant of 1 means ΔG° = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a3882a57-c22b-4d63-85c4-ce48ce0102bf",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Which quantity equals (∂G/∂T)_P?",
-    "formula": "(∂G/∂T)_P = −S",
-    "options": [
-      "+V",
-      "−S",
-      "−H",
-      "+S"
-    ],
-    "answer": 1,
-    "explain": "From dG = VdP − SdT, at constant P: (∂G/∂T)_P = −S.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77a24c8a-2033-4482-b7a2-9d080916cb44",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Which quantity equals (∂G/∂P)_T?",
-    "formula": "(∂G/∂P)_T = V",
-    "options": [
-      "S",
-      "−S",
-      "V",
-      "−V"
-    ],
-    "answer": 2,
-    "explain": "From dG = VdP − SdT, at constant T: (∂G/∂P)_T = V.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dc5ca37f-9968-4596-b36b-443d613b53c3",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For an ideal gas, ΔH for isothermal process is:",
-    "formula": "",
-    "options": [
-      "nCvΔT",
-      "Positive",
-      "Zero",
-      "nRTln(V₂/V₁)"
-    ],
-    "answer": 2,
-    "explain": "H of ideal gas depends only on T; isothermal means ΔT=0, so ΔH=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "68b6c63d-a10e-43a1-8086-edec9f9afe04",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "In Born–Haber cycle, electron gain enthalpy of Cl is:",
-    "formula": "",
-    "options": [
-      "Zero",
-      "Equal to ionisation energy",
-      "Negative (~−349 kJ/mol)",
-      "Positive"
-    ],
-    "answer": 2,
-    "explain": "Cl gains electron exothermically; electron gain enthalpy of Cl ≈ −349 kJ/mol.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c782e47b-e364-4286-801b-01162c05003a",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For reaction: N₂+3H₂→2NH₃, Δn_g equals:",
-    "formula": "Δn_g = moles gaseous product − reactant",
-    "options": [
-      "+4",
-      "−2",
-      "+2",
-      "−1"
-    ],
-    "answer": 1,
-    "explain": "Δn_g = 2−(1+3) = −2; used in ΔH = ΔU + Δn_g RT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a8207e5-a390-4c02-9433-0b3043129c70",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Standard enthalpy of combustion of graphite is equal to ΔHf° of:",
-    "formula": "",
-    "options": [
-      "CO₂(g)",
-      "CO(g)",
-      "C(diamond)",
-      "C(g)"
-    ],
-    "answer": 0,
-    "explain": "C(graphite)+O₂→CO₂; this IS the formation reaction of CO₂, so ΔH_comb = ΔHf°(CO₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d1459f44-f109-4df8-8db9-ec05c9e05aff",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Which expression gives maximum work obtained from a system at constant T, P?",
-    "formula": "w_max = −ΔG",
-    "options": [
-      "−ΔU",
-      "−ΔG",
-      "−ΔH",
-      "TΔS"
-    ],
-    "answer": 1,
-    "explain": "At constant T and P, maximum non-expansion work = −ΔG (Gibbs free energy criterion).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7995bb7d-4330-47a6-87c5-35128562def1",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "The unit of entropy in SI system is:",
-    "formula": "",
-    "options": [
-      "J K mol",
-      "kJ K mol⁻¹",
-      "J mol⁻¹",
-      "J K⁻¹ mol⁻¹"
-    ],
-    "answer": 3,
-    "explain": "Entropy S has SI unit J K⁻¹ mol⁻¹ (joule per kelvin per mole).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8b60280d-0885-43a9-ad70-2b54016e3c15",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a spontaneous irreversible process, ΔS_universe is:",
-    "formula": "",
-    "options": [
-      "> 0",
-      "= 0",
-      "= ΔS_system",
-      "< 0"
-    ],
-    "answer": 0,
-    "explain": "Second law: ΔS_universe > 0 for all spontaneous (irreversible) processes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96a8e144-18df-4789-906e-34d5d70deb36",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "ΔG for a reaction under non-standard conditions relates to ΔG° by:",
-    "formula": "ΔG = ΔG° + RT ln Q",
-    "options": [
-      "ΔG = ΔG° + RT ln Q",
-      "ΔG = RT ln Q",
-      "ΔG = ΔG° − RT ln Q",
-      "ΔG = ΔG° + RT ln K"
-    ],
-    "answer": 0,
-    "explain": "Reaction quotient Q replaces K for non-standard conditions: ΔG = ΔG° + RT ln Q.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3e75f741-3fb4-4e14-9be5-7b11448a87c7",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Work done on the system is taken as positive in the IUPAC sign convention?",
-    "formula": "ΔU = q + w",
-    "options": [
-      "Yes, w = +P_ext·ΔV (compression)",
-      "Only for isothermal",
-      "No, always negative",
-      "Only for adiabatic"
-    ],
-    "answer": 0,
-    "explain": "IUPAC: ΔU = q + w; work done ON system (compression) is positive.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e4b64f11-a49f-47cc-93ec-e96e2409f35f",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For which system is ΔH = q (heat at constant pressure)?",
-    "formula": "ΔH = qp",
-    "options": [
-      "Isolated system only",
-      "Adiabatic system",
-      "Only ideal gases",
-      "Open or closed at constant P"
-    ],
-    "answer": 3,
-    "explain": "qp = ΔH holds for any open or closed system at constant pressure with only PV work.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2541b29c-b032-4be8-a900-e9d2b7a796e5",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Gibbs energy change (ΔG) for a reaction at equilibrium equals:",
-    "formula": "",
-    "options": [
-      "ΔG°",
-      "−RT ln K",
-      "TΔS",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "At equilibrium Q = K, so ΔG = ΔG° + RT ln K = 0 by definition of equilibrium.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "17a438e8-9d68-40f3-b535-5edced9be789",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a van't Hoff equation, d(lnK)/dT equals:",
-    "formula": "d(lnK)/dT = ΔH°/RT²",
-    "options": [
-      "ΔH°/RT²",
-      "−ΔH°/RT²",
-      "ΔS°/R",
-      "ΔG°/RT²"
-    ],
-    "answer": 0,
-    "explain": "Van't Hoff equation: d(lnK)/dT = ΔH°/RT², showing K increases with T if ΔH°>0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6812c6ef-626d-408a-a14c-a2e5596663f1",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For an exothermic reaction, increasing T shifts equilibrium; K will:",
-    "formula": "",
-    "options": [
-      "Decrease",
-      "First increase then decrease",
-      "Increase",
-      "Remain same"
-    ],
-    "answer": 0,
-    "explain": "Van't Hoff: for exothermic (ΔH°<0), K decreases as T increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "11665775-cc4d-453b-a51b-d79bd82b6b56",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Helmholtz free energy A is defined as:",
-    "formula": "A = U − TS",
-    "options": [
-      "H + TS",
-      "U − TS",
-      "U + PV",
-      "H − TS"
-    ],
-    "answer": 1,
-    "explain": "Helmholtz energy A = U − TS; criterion for spontaneity at constant T, V is ΔA ≤ 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6272d760-eeed-48a4-8bc6-431faee55f77",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a process spontaneous at ALL temperatures, which sign combination holds?",
-    "formula": "",
-    "options": [
-      "ΔH<0 and ΔS<0",
-      "ΔH>0 and ΔS>0",
-      "ΔH>0 and ΔS<0",
-      "ΔH<0 and ΔS>0"
-    ],
-    "answer": 3,
-    "explain": "ΔG = ΔH − TΔS < 0 at all T only when ΔH<0 and ΔS>0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ea27d417-6f49-4676-873c-a249da26d2b6",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "The Carnot efficiency η of a heat engine operating between T_h and T_c is:",
-    "formula": "η = 1 − T_c/T_h",
-    "options": [
-      "1 − T_c/T_h",
-      "1 − T_h/T_c",
-      "(T_h−T_c)/T_c",
-      "T_c/T_h"
-    ],
-    "answer": 0,
-    "explain": "Carnot efficiency η = 1 − T_c/T_h; depends only on temperatures of reservoirs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b8acc40e-0862-4b72-94d4-cbbb9902a7af",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Relation between Kp and Kc for reaction with Δn_g moles of gas:",
-    "formula": "Kp = Kc(RT)^Δnᵍ",
-    "options": [
-      "Kp = Kc + Δnᵍ RT",
-      "Kp = Kc/(RT)^Δnᵍ",
-      "Kc = Kp(RT)^Δnᵍ",
-      "Kp = Kc(RT)^Δnᵍ"
-    ],
-    "answer": 3,
-    "explain": "Kp = Kc(RT)^Δn_g where Δn_g = moles gaseous products − reactants.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "93207c44-1a87-4b2d-ac7d-be282071acf8",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Enthalpy of a reaction is independent of path. This is called:",
-    "formula": "",
-    "options": [
-      "Lavoisier–Laplace Law",
-      "Trouton's Rule",
-      "Kirchhoff's Law",
-      "Hess's Law"
-    ],
-    "answer": 3,
-    "explain": "Hess's Law: ΔH of reaction is independent of path, consequence of H being a state function.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "49cc6fc1-2f35-4290-b340-35f3b7baa019",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "The standard enthalpy of formation of liquid water from H₂(g) and O₂(g) is approximately:",
-    "formula": "",
-    "options": [
-      "−393 kJ/mol",
-      "−241 kJ/mol",
-      "+286 kJ/mol",
-      "−286 kJ/mol"
-    ],
-    "answer": 3,
-    "explain": "ΔHf°[H₂O(l)] ≈ −286 kJ/mol; for H₂O(g) it is −241 kJ/mol (difference = ΔH_vap).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8bdb1c28-9abe-4f5c-aa07-0ff14126de94",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Standard enthalpy of combustion of CH₄(g) is approximately:",
-    "formula": "",
-    "options": [
-      "−393 kJ/mol",
-      "−890 kJ/mol",
-      "−286 kJ/mol",
-      "−1560 kJ/mol"
-    ],
-    "answer": 1,
-    "explain": "CH₄ + 2O₂ → CO₂ + 2H₂O; ΔH°_comb ≈ −890 kJ/mol, a standard JEE value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a63030f-3743-4bb9-a663-9d57c16c9528",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For H₂O(l)→H₂O(g) at 100°C, which statement is correct regarding ΔG?",
-    "formula": "",
-    "options": [
-      "ΔG = ΔH",
-      "ΔG < 0",
-      "ΔG > 0",
-      "ΔG = 0"
-    ],
-    "answer": 3,
-    "explain": "At boiling point (equilibrium between phases), ΔG = 0 for the phase transition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3774b5fd-3cc5-438b-93c8-19deba519ed0",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "The thermodynamic criterion for a reversible process compared to irreversible is:",
-    "formula": "",
-    "options": [
-      "ΔS_univ < 0",
-      "ΔG_univ = 0",
-      "ΔS_univ = 0",
-      "ΔS_univ > 0"
-    ],
-    "answer": 2,
-    "explain": "Reversible process: ΔS_universe = 0; irreversible: ΔS_universe > 0 (2nd law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7c8900e2-a06c-4683-9455-c3e6b43c1e74",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Joule–Thomson effect: ideal gas on throttling shows temperature change of:",
-    "formula": "μ_JT = 0 (ideal gas)",
-    "options": [
-      "Negative (heating)",
-      "Depends on pressure",
-      "Positive (cooling)",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "For ideal gas, Joule–Thomson coefficient μ_JT = 0; no temperature change on throttling.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2711e93-9095-4935-bc3f-45996916260e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Enthalpy of neutralisation of HCN (weak acid) with NaOH will be:",
-    "formula": "",
-    "options": [
-      "More than 57.1 kJ/mol",
-      "Less than 57.1 kJ/mol",
-      "Zero",
-      "Equal to 57.1 kJ/mol"
-    ],
-    "answer": 1,
-    "explain": "Weak acid ionisation is endothermic, so total heat released is less than 57.1 kJ/mol.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8fd7104c-1fab-46c2-a6ec-a1c9c542b116",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a reaction: ΔH>0, ΔS<0. The reaction is spontaneous:",
-    "formula": "ΔG = ΔH − TΔS",
-    "options": [
-      "At low temperature only",
-      "At all temperatures",
-      "At high temperature only",
-      "At no temperature"
-    ],
-    "answer": 3,
-    "explain": "ΔG = ΔH−TΔS; if ΔH>0 and ΔS<0, ΔG>0 at all T, so never spontaneous.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3ea6d18e-2106-4d9e-a6d4-b7e6f9327cec",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Which has ΔS < 0 for the system?",
-    "formula": "",
-    "options": [
-      "H₂O(l)→H₂O(g)",
-      "CaCO₃(s)→CaO(s)+CO₂(g)",
-      "2KClO₃(s)→2KCl(s)+3O₂(g)",
-      "N₂(g)+3H₂(g)→2NH₃(g)"
-    ],
-    "answer": 3,
-    "explain": "4 mol gas → 2 mol gas; Δnₘ < 0, so disorder decreases, ΔS < 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2768cb32-f9c5-4fc9-a4d0-a924230ba912",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Enthalpy of formation of CO(g) cannot be measured directly because:",
-    "formula": "",
-    "options": [
-      "CO is a liquid",
-      "CO is too stable",
-      "Reaction is endothermic",
-      "CO₂ also forms on burning C"
-    ],
-    "answer": 3,
-    "explain": "Burning carbon always gives a mix of CO and CO₂, so direct measurement is impossible.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0d1dbfa6-2445-4e5a-bd2e-72d9be6258ea",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a reaction: Δn_g = 0, then Kp and Kc are related by:",
-    "formula": "Kp = Kc(RT)^Δnɡ",
-    "options": [
-      "Kp = Kc(RT)²",
-      "Kp = Kc/RT",
-      "Kp = Kc",
-      "Kp = KcRT"
-    ],
-    "answer": 2,
-    "explain": "When Δnᵍ = 0, (RT)⁰ = 1, so Kp equals Kc exactly.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dc598bb8-b64a-4b15-82ca-6effe60cbfba",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For the reaction C(graphite)+O₂(g)→CO₂(g), ΔH equals ΔHf° of:",
-    "formula": "",
-    "options": [
-      "CO(g)",
-      "C(diamond)",
-      "O₃(g)",
-      "CO₂(g)"
-    ],
-    "answer": 3,
-    "explain": "Elements in standard states form one mole CO₂(g); this defines ΔHf°[CO₂(g)].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b6574ba1-2ebd-4eb9-b18f-3f6c9470ea4e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Standard Gibbs energy of formation of a stable element in standard state is:",
-    "formula": "",
-    "options": [
-      "Zero",
-      "Negative",
-      "Positive",
-      "Depends on element"
-    ],
-    "answer": 0,
-    "explain": "By convention, ΔGf° = 0 for elements in their standard states, analogous to ΔHf°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a881710d-2a6d-4537-8344-c15e5907c031",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "Carnot cycle efficiency depends on:",
-    "formula": "η = 1 − Tc/Th",
-    "options": [
-      "Only temperatures of source and sink",
-      "Amount of gas used",
-      "Nature of working substance",
-      "Pressure of gas"
-    ],
-    "answer": 0,
-    "explain": "Carnot efficiency η = 1−Tc/Th depends only on absolute temperatures.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b475f9d6-a58e-4400-b1d3-2c72118dbb29",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "ΔS for surroundings when system absorbs heat q at constant T is:",
-    "formula": "ΔS_surr = −q/T",
-    "options": [
-      "+q/T",
-      "−q/T",
-      "q/T²",
-      "Zero"
-    ],
-    "answer": 1,
-    "explain": "Surroundings lose heat q, so ΔS_surr = −q/T (at constant T).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0dc30f40-44bd-4953-8a09-abd78a035f3a",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For an ideal gas, which is correct at constant temperature?",
-    "formula": "",
-    "options": [
-      "ΔU = 0 but ΔH ≠ 0",
-      "ΔH > 0 and ΔU = 0",
-      "ΔH = 0 and ΔU = 0",
-      "ΔU > 0 and ΔH > 0"
-    ],
-    "answer": 2,
-    "explain": "Ideal gas internal energy and enthalpy depend only on T; isothermal ⟹ ΔU=ΔH=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "57b1db71-f6be-494b-8f25-0f7fef49e87c",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Chemical Thermodynamics",
-    "prompt": "For a reaction with large positive ΔG°, the equilibrium constant K is:",
-    "formula": "ΔG° = −RT lnK",
-    "options": [
-      "K << 1 (very small)",
-      "K = 0",
-      "K >> 1 (very large)",
-      "K = 1"
-    ],
-    "answer": 0,
-    "explain": "Large positive ΔG° means lnK is large negative, so K << 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "810eeaf6-4c97-4df5-b4ac-9af93254adbf",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Gibbs Energy / Spontaneity",
-    "prompt": "For a reaction: ΔH<0, ΔS>0. Spontaneous at:",
-    "formula": "ΔG = ΔH − TΔS",
-    "options": [
-      "Low T only",
-      "Never spontaneous",
-      "All temperatures",
-      "High T only"
-    ],
-    "answer": 2,
-    "explain": "Both terms make ΔG negative at all T when ΔH<0 and ΔS>0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a8f00e5d-c3dc-4b10-806d-cd927bb017e1",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "Second Law / Entropy",
-    "prompt": "Which relation is ALWAYS true for a spontaneous irreversible process?",
-    "formula": "ΔS_univ > 0",
-    "options": [
-      "ΔS_universe = 0",
-      "ΔS_universe < 0",
-      "ΔS_universe > 0",
-      "ΔS_system > 0"
-    ],
-    "answer": 2,
-    "explain": "Second law: entropy of universe increases for all spontaneous (irreversible) processes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ad9ab5c5-3eb5-4cb6-8184-966c0307bb20",
-    "subject": "Chemistry",
-    "chapter": "Chemical Thermodynamics",
-    "topic": "ΔH and ΔU Relation",
-    "prompt": "ΔH = ΔU + Δ(PV). For ideal gas, Δ(PV) equals:",
-    "formula": "Δ(PV) = Δnᵍ RT",
-    "options": [
-      "nRT",
-      "Zero always",
-      "PΔV only",
-      "Δnᵍ RT"
-    ],
-    "answer": 3,
-    "explain": "For ideal gas PV=nRT; Δ(PV)=Δnᵍ·RT where Δnᵍ = change in moles of gaseous species.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "37cb4d5a-fc94-4e62-9bb0-f0a3d0f7ba3c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs Energy & Spontaneity",
+  "prompt": "For a spontaneous process at constant T and P, ΔG must be:",
+  "formula": "ΔG = ΔH - TΔS",
+  "options": [
+   "Positive",
+   "Zero",
+   "Equal to ΔH",
+   "Negative"
+  ],
+  "answer": 3,
+  "explain": "Spontaneity at constant T,P requires ΔG < 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70704952-38d7-4d68-ae3d-6f65d74f5cc2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs Energy & Equilibrium",
+  "prompt": "At equilibrium, the value of ΔG is:",
+  "formula": "ΔG = ΔG° + RT ln Q",
+  "options": [
+   "Zero",
+   "Equal to ΔG°",
+   "Positive",
+   "Negative"
+  ],
+  "answer": 0,
+  "explain": "At equilibrium Q = K, so ΔG = 0; system has minimum Gibbs energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "66b074ee-4278-4296-adcb-f7d0971d5c84",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs Energy & Equilibrium",
+  "prompt": "Relationship between ΔG° and equilibrium constant K is:",
+  "formula": "ΔG° = −RT ln K",
+  "options": [
+   "ΔG° = −RT ln K",
+   "ΔG° = −nF ln K",
+   "ΔG° = RT ln K",
+   "ΔG° = ΔH° − TΔS°"
+  ],
+  "answer": 0,
+  "explain": "Standard Gibbs energy change relates to K via ΔG° = −RT ln K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9687f512-dc6e-412c-bee1-e00dc11b338e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Laws of Thermodynamics",
+  "prompt": "Which law states internal energy of an isolated system is constant?",
+  "formula": "",
+  "options": [
+   "Third Law",
+   "Hess's Law",
+   "First Law",
+   "Second Law"
+  ],
+  "answer": 2,
+  "explain": "First Law: ΔU = q + w; for isolated system q = w = 0, so ΔU = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a6638e9-1850-45a7-9ed9-3dbd724c8bef",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Work & Internal Energy",
+  "prompt": "For an ideal gas expanding into vacuum (free expansion), work done is:",
+  "formula": "w = −P_ext ΔV",
+  "options": [
+   "Positive",
+   "Zero",
+   "Equal to ΔH",
+   "−PΔV"
+  ],
+  "answer": 1,
+  "explain": "P_ext = 0 in free expansion, so w = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fbcb9349-a6cc-4a6b-a4cc-3cb54c12e2d4",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy",
+  "prompt": "At constant pressure, heat exchanged equals:",
+  "formula": "q_p = ΔH",
+  "options": [
+   "ΔS",
+   "ΔU",
+   "ΔH",
+   "ΔG"
+  ],
+  "answer": 2,
+  "explain": "Enthalpy H is defined so that q_p = ΔH at constant pressure.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f6255dc2-e9fd-472d-a3b6-54405de21a00",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy",
+  "prompt": "Relation between ΔH and ΔU for reactions involving gases:",
+  "formula": "ΔH = ΔU + Δn_g RT",
+  "options": [
+   "ΔH = ΔU + nRT",
+   "ΔH = ΔU − ΔngRT",
+   "ΔH = ΔU + PV",
+   "ΔH = ΔU + ΔngRT"
+  ],
+  "answer": 3,
+  "explain": "Δng = moles of gaseous products − gaseous reactants; ΔH = ΔU + ΔngRT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3ffee3a8-1a05-4b41-af7a-66374f2b5ee1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Hess's Law",
+  "prompt": "Hess's Law is a consequence of which property of enthalpy?",
+  "formula": "",
+  "options": [
+   "Path function",
+   "State function",
+   "Intensive property",
+   "Extensive property"
+  ],
+  "answer": 1,
+  "explain": "Since H is a state function, ΔH is path-independent, validating Hess's Law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "de8e788c-c173-465a-967d-7eb4910f7dc3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of Formation",
+  "prompt": "Standard enthalpy of formation of a pure element in its standard state is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Zero",
+   "Undefined",
+   "Positive"
+  ],
+  "answer": 1,
+  "explain": "By convention, ΔfH° of elements in their standard states = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef19b951-05ed-4b2d-b911-23265b341b33",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy",
+  "prompt": "Entropy is a measure of:",
+  "formula": "S = k_B ln W",
+  "options": [
+   "Bond energy",
+   "Heat content",
+   "Free energy",
+   "Disorder/randomness"
+  ],
+  "answer": 3,
+  "explain": "Boltzmann's equation S = k_B ln W relates entropy to number of microstates W.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f586a58c-a2d1-46e5-9186-31c0079e8027",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Second Law & Entropy",
+  "prompt": "For a reversible process, total entropy change of universe is:",
+  "formula": "ΔS_univ = 0",
+  "options": [
+   "Negative",
+   "Infinite",
+   "Zero",
+   "Positive"
+  ],
+  "answer": 2,
+  "explain": "Second Law: reversible process has ΔS_universe = 0; irreversible has ΔS > 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6122e48b-70e6-42b2-bc2f-e92b1e290362",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Third Law",
+  "prompt": "Third Law of Thermodynamics states entropy of a perfect crystal at 0 K is:",
+  "formula": "S = 0 at T = 0 K",
+  "options": [
+   "Zero",
+   "Maximum",
+   "Undefined",
+   "Minimum but nonzero"
+  ],
+  "answer": 0,
+  "explain": "Third Law: perfect crystalline substance at absolute zero has S = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "56492db5-0c4e-44ec-80da-1615edd9ba6a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Bond Enthalpy",
+  "prompt": "Bond dissociation enthalpy is always:",
+  "formula": "",
+  "options": [
+   "Positive (endothermic)",
+   "Zero",
+   "Variable sign",
+   "Negative (exothermic)"
+  ],
+  "answer": 0,
+  "explain": "Breaking bonds always requires energy, so bond dissociation enthalpy > 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a65f6d9-4602-4cef-990f-93d342882418",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Bond Enthalpy",
+  "prompt": "ΔH_rxn using bond enthalpies: correct expression is:",
+  "formula": "ΔH = ΣBE(reactants) − ΣBE(products)",
+  "options": [
+   "−ΣBE(reactants) − ΣBE(products)",
+   "ΣBE(products) − ΣBE(reactants)",
+   "ΣBE(reactants) − ΣBE(products)",
+   "ΣBE(products) + ΣBE(reactants)"
+  ],
+  "answer": 2,
+  "explain": "Energy in (bonds broken) minus energy out (bonds formed) gives ΔH.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3b251895-2466-4eef-a609-683872a7ff0f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Lattice Enthalpy",
+  "prompt": "Lattice enthalpy is determined indirectly using:",
+  "formula": "",
+  "options": [
+   "Hess's Law directly",
+   "Kirchhoff's equation",
+   "Calorimetry",
+   "Born-Haber cycle"
+  ],
+  "answer": 3,
+  "explain": "Born-Haber cycle applies Hess's Law to calculate lattice enthalpy indirectly.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0fbb0754-5d03-4c0b-b857-f5b57d231012",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of Neutralisation",
+  "prompt": "Enthalpy of neutralisation of strong acid and strong base is always:",
+  "formula": "≈ −57.1 kJ/mol",
+  "options": [
+   "Varies with acid/base",
+   "+57.1 kJ/mol",
+   "−13.7 kJ/mol",
+   "−57.1 kJ/mol"
+  ],
+  "answer": 3,
+  "explain": "Strong acid + strong base: H⁺ + OH⁻ → H₂O, ΔH ≈ −57.1 kJ/mol always.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5f5abc9b-a152-450d-b20b-cfa86bea77de",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of Neutralisation",
+  "prompt": "For weak acid neutralisation, |ΔH_neut| compared to 57.1 kJ/mol is:",
+  "formula": "",
+  "options": [
+   "Less than 57.1 kJ/mol",
+   "Equal to 57.1 kJ/mol",
+   "Zero",
+   "Greater than 57.1 kJ/mol"
+  ],
+  "answer": 0,
+  "explain": "Energy is used for ionisation of weak acid/base, reducing net heat released.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "69d642e4-652d-4523-bb39-6ccd68c024cf",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Thermodynamic Processes",
+  "prompt": "For an adiabatic process, which quantity is zero?",
+  "formula": "q = 0",
+  "options": [
+   "ΔH",
+   "Work (w)",
+   "Heat (q)",
+   "ΔU"
+  ],
+  "answer": 2,
+  "explain": "Adiabatic process: no heat exchange with surroundings, so q = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "360f26dc-77c7-4e83-9d6e-10bfd34bf35e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat Capacities",
+  "prompt": "Cp − Cv for an ideal gas equals:",
+  "formula": "Cp − Cv = R",
+  "options": [
+   "R/2",
+   "2R",
+   "γR",
+   "R"
+  ],
+  "answer": 3,
+  "explain": "For ideal gas, Cp − Cv = R (per mole), derived from H = U + PV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cf14add9-c493-4033-b51e-47899dd6b983",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "State vs Path Functions",
+  "prompt": "Which thermodynamic quantity is NOT a state function?",
+  "formula": "",
+  "options": [
+   "Heat (q)",
+   "Enthalpy (H)",
+   "Entropy (S)",
+   "Gibbs energy (G)"
+  ],
+  "answer": 0,
+  "explain": "Heat (q) and work (w) are path functions; H, S, G, U are state functions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77acfb82-b439-49a6-9592-8fb698865a2f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "ΔG = ΔH − TΔS; spontaneous at ALL temperatures when:",
+  "formula": "ΔH < 0, ΔS > 0",
+  "options": [
+   "ΔH > 0 and ΔS < 0",
+   "ΔH < 0 and ΔS > 0",
+   "ΔH < 0 and ΔS < 0",
+   "ΔH > 0 and ΔS > 0"
+  ],
+  "answer": 1,
+  "explain": "When ΔH < 0 and ΔS > 0, ΔG is negative at every temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "50fb3b5b-f93f-425b-b355-4ad1eb2450bc",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Chemical Thermodynamics",
+  "prompt": "ΔG° = −nFE°cell relates to which energy?",
+  "formula": "ΔG° = −nFE°",
+  "options": [
+   "Electrical (cell) energy",
+   "Ionisation energy",
+   "Lattice energy",
+   "Activation energy"
+  ],
+  "answer": 0,
+  "explain": "ΔG° = −nFE° connects standard Gibbs energy to standard EMF of a cell.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a39dce42-4908-4e80-940d-5d18eae3f961",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "For a process spontaneous only at HIGH temperature, the signs are:",
+  "formula": "",
+  "options": [
+   "ΔH > 0, ΔS > 0",
+   "ΔH < 0, ΔS < 0",
+   "ΔH < 0, ΔS > 0",
+   "ΔH > 0, ΔS < 0"
+  ],
+  "answer": 0,
+  "explain": "ΔH > 0, ΔS > 0: TΔS term dominates at high T making ΔG negative.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cf831ac2-49e8-4888-a902-4ef4d82d6aad",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Entropy change for reversible isothermal expansion of ideal gas:",
+  "formula": "ΔS = nR ln(V₂/V₁)",
+  "options": [
+   "Zero",
+   "nCv ln(V₂/V₁)",
+   "nR ln(P₂/P₁)",
+   "nR ln(V₂/V₁)"
+  ],
+  "answer": 3,
+  "explain": "For isothermal reversible process, ΔS = q_rev/T = nR ln(V₂/V₁).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "620df1de-8ca6-4e77-aff4-96ab9ee15f44",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "For a spontaneous process at constant T, ΔS_universe relation:",
+  "formula": "ΔS_univ > 0",
+  "options": [
+   "ΔS_univ > 0",
+   "ΔS_univ < 0",
+   "ΔS_univ = 0",
+   "ΔS_sys > 0 always"
+  ],
+  "answer": 0,
+  "explain": "Second Law: entropy of universe increases for every spontaneous process.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "542382d3-5e69-49b5-bda3-eee351d03f42",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "Internal energy change ΔU for isothermal expansion of ideal gas:",
+  "formula": "ΔU = 0",
+  "options": [
+   "Zero",
+   "−P_ext ΔV",
+   "nRT",
+   "nCvΔT"
+  ],
+  "answer": 0,
+  "explain": "For ideal gas, U depends only on T; isothermal means ΔT = 0, so ΔU = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cbf17dad-91b8-47f6-83a2-cbb3ad919d5e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "First Law of Thermodynamics expressed as:",
+  "formula": "ΔU = q + w",
+  "options": [
+   "ΔH = q + w",
+   "ΔU = q − w",
+   "ΔG = q + w",
+   "ΔU = q + w"
+  ],
+  "answer": 3,
+  "explain": "IUPAC convention: ΔU = q + w, where w = work done ON the system.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "525a9c63-cda7-4267-9475-3c94f3790876",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Phase transition/sublimation enthalpies",
+  "prompt": "Enthalpy of sublimation equals sum of:",
+  "formula": "ΔH_sub = ΔH_fus + ΔH_vap",
+  "options": [
+   "ΔH_fusion + ΔH_vaporisation",
+   "ΔH_fus only",
+   "ΔH_comb + ΔH_fus",
+   "ΔH_vap only"
+  ],
+  "answer": 0,
+  "explain": "Sublimation = fusion + vaporisation; enthalpies add by Hess's Law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f08adece-f94b-49a7-92f5-73af7fef6fd6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "Which relation connects ΔG° and K correctly?",
+  "formula": "ΔG° = −RT ln K",
+  "options": [
+   "ΔG° = RT ln K",
+   "ΔG° = RT/ln K",
+   "ΔG° = −nRT ln K",
+   "ΔG° = −RT ln K"
+  ],
+  "answer": 3,
+  "explain": "Standard Gibbs energy change: ΔG° = −RT ln K (van't Hoff isotherm basis).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9ab4b9b6-cf8e-4c53-b13e-83cdfe8f7fcd",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "Heat capacity at constant volume Cv is defined as:",
+  "formula": "Cv = (∂U/∂T)_V",
+  "options": [
+   "(∂U/∂T)_V",
+   "(∂H/∂T)_V",
+   "(∂U/∂T)_P",
+   "(∂H/∂T)_P"
+  ],
+  "answer": 0,
+  "explain": "Cv = (∂U/∂T)_V; Cp = (∂H/∂T)_P — these are standard thermodynamic definitions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f6be4e63-e628-4b11-b125-6ddab2f48d24",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "For monoatomic ideal gas, Cv equals:",
+  "formula": "Cv = (3/2)R",
+  "options": [
+   "(7/2)R",
+   "(3/2)R",
+   "(5/2)R",
+   "R"
+  ],
+  "answer": 1,
+  "explain": "Monoatomic gas has 3 translational DOF; Cv = (3/2)R, Cp = (5/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4c7803c1-c03a-4960-b9ea-f7b2427413af",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "For diatomic ideal gas (room T), Cv equals:",
+  "formula": "Cv = (5/2)R",
+  "options": [
+   "(5/2)R",
+   "(3/2)R",
+   "2R",
+   "(7/2)R"
+  ],
+  "answer": 0,
+  "explain": "Diatomic gas: 3 translational + 2 rotational DOF; Cv = (5/2)R at room T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6309d40a-2676-4fc6-aeed-229f8832e298",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "γ (Cp/Cv) for a monoatomic ideal gas is:",
+  "formula": "γ = 5/3",
+  "options": [
+   "7/5",
+   "4/3",
+   "3/2",
+   "5/3"
+  ],
+  "answer": 3,
+  "explain": "Monoatomic: Cp = 5R/2, Cv = 3R/2; γ = Cp/Cv = 5/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d0dca5be-fad6-4044-90bc-a92ac3bad0d0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Chemical Thermodynamics",
+  "prompt": "Standard state of a substance is defined at pressure:",
+  "formula": "P° = 1 bar",
+  "options": [
+   "1 Pa",
+   "1 bar",
+   "101.3 Pa",
+   "1 atm"
+  ],
+  "answer": 1,
+  "explain": "IUPAC standard state is 1 bar (not 1 atm) at the specified temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "431ddd4d-50ee-43ca-b2d0-202a8c4dff65",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "In a cyclic process, ΔU of the system is:",
+  "formula": "ΔU = 0",
+  "options": [
+   "Zero",
+   "Negative",
+   "Equal to heat absorbed",
+   "Positive"
+  ],
+  "answer": 0,
+  "explain": "U is a state function; returning to same state means ΔU = 0 for any cycle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f1d964d1-e4fc-4f92-a98b-afa3a98b747b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Entropy change when 1 mol ice melts at 273 K (ΔH_fus = 6 kJ/mol):",
+  "formula": "ΔS = ΔH_fus/T",
+  "options": [
+   "Zero",
+   "273/6000 J/K",
+   "6000×273 J/K",
+   "6000/273 J/K"
+  ],
+  "answer": 3,
+  "explain": "ΔS = q_rev/T = ΔH_fus/T = 6000/273 ≈ 22 J K⁻¹ mol⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "194379c8-f284-46ef-9405-f585cf625065",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Work in reversible/irreversible expansion",
+  "prompt": "Work done in irreversible expansion against constant external pressure:",
+  "formula": "w = −P_ext·ΔV",
+  "options": [
+   "−P_ext ΔV",
+   "−nRT ln(V₂/V₁)",
+   "Zero",
+   "−P_int ΔV"
+  ],
+  "answer": 0,
+  "explain": "For irreversible process against constant P_ext, w = −P_ext(V₂ − V₁).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8bd47504-8d8f-40f3-8c2f-9670e3620a85",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "Which process has ΔH = ΔU?",
+  "formula": "Δn_g = 0",
+  "options": [
+   "All reactions at 298 K",
+   "Adiabatic reactions",
+   "Reactions with Δn_g = 0",
+   "Reactions at constant V"
+  ],
+  "answer": 2,
+  "explain": "ΔH = ΔU + Δn_g RT; when Δn_g = 0, ΔH = ΔU.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "661678da-15ef-4d2c-ace4-2bef7f54643e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Phase transition/sublimation enthalpies",
+  "prompt": "Sign of ΔH and ΔS for melting of ice at 25°C?",
+  "formula": "",
+  "options": [
+   "ΔH>0, ΔS>0",
+   "ΔH<0, ΔS<0",
+   "ΔH>0, ΔS<0",
+   "ΔH<0, ΔS>0"
+  ],
+  "answer": 0,
+  "explain": "Melting is endothermic (ΔH>0) and increases disorder (ΔS>0); spontaneous above 0°C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e27df8b9-7fbe-488d-8fb6-c6c88299c8a8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "For a reaction: ΔH<0 and ΔS<0. It is spontaneous when:",
+  "formula": "ΔG = ΔH − TΔS",
+  "options": [
+   "High temperature",
+   "Low temperature",
+   "No temperature",
+   "All temperatures"
+  ],
+  "answer": 1,
+  "explain": "ΔG = ΔH−TΔS <0 only when T is small enough that |ΔH|>T|ΔS|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8f1e2a4d-4c51-49a2-9d14-8a0784f7db79",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Which statement about enthalpy of formation of O₃(g) is correct?",
+  "formula": "",
+  "options": [
+   "ΔHf° < 0",
+   "ΔHf° > 0",
+   "ΔHf° is undefined",
+   "ΔHf° = 0"
+  ],
+  "answer": 1,
+  "explain": "Standard element is O₂; forming O₃ from O₂ is endothermic, so ΔHf°(O₃) > 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1cfca16b-60f3-4c20-92ae-bed72f4addb5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "For a reaction with Kp = 1 at 298 K, the value of ΔG° is:",
+  "formula": "ΔG° = −RT ln K",
+  "options": [
+   "Negative",
+   "0",
+   "Positive",
+   "−RT"
+  ],
+  "answer": 1,
+  "explain": "ΔG° = −RT ln 1 = 0; equilibrium constant of 1 means ΔG° = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a3882a57-c22b-4d63-85c4-ce48ce0102bf",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "Which quantity equals (∂G/∂T)_P?",
+  "formula": "(∂G/∂T)_P = −S",
+  "options": [
+   "+V",
+   "−S",
+   "−H",
+   "+S"
+  ],
+  "answer": 1,
+  "explain": "From dG = VdP − SdT, at constant P: (∂G/∂T)_P = −S.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77a24c8a-2033-4482-b7a2-9d080916cb44",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "Which quantity equals (∂G/∂P)_T?",
+  "formula": "(∂G/∂P)_T = V",
+  "options": [
+   "S",
+   "−S",
+   "V",
+   "−V"
+  ],
+  "answer": 2,
+  "explain": "From dG = VdP − SdT, at constant T: (∂G/∂P)_T = V.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dc5ca37f-9968-4596-b36b-443d613b53c3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "For an ideal gas, ΔH for isothermal process is:",
+  "formula": "",
+  "options": [
+   "nCvΔT",
+   "Positive",
+   "Zero",
+   "nRTln(V₂/V₁)"
+  ],
+  "answer": 2,
+  "explain": "H of ideal gas depends only on T; isothermal means ΔT=0, so ΔH=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "68b6c63d-a10e-43a1-8086-edec9f9afe04",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Chemical Thermodynamics",
+  "prompt": "In Born–Haber cycle, electron gain enthalpy of Cl is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to ionisation energy",
+   "Negative (~−349 kJ/mol)",
+   "Positive"
+  ],
+  "answer": 2,
+  "explain": "Cl gains electron exothermically; electron gain enthalpy of Cl ≈ −349 kJ/mol.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c782e47b-e364-4286-801b-01162c05003a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "For reaction: N₂+3H₂→2NH₃, Δn_g equals:",
+  "formula": "Δn_g = moles gaseous product − reactant",
+  "options": [
+   "+4",
+   "−2",
+   "+2",
+   "−1"
+  ],
+  "answer": 1,
+  "explain": "Δn_g = 2−(1+3) = −2; used in ΔH = ΔU + Δn_g RT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a8207e5-a390-4c02-9433-0b3043129c70",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Standard enthalpy of combustion of graphite is equal to ΔHf° of:",
+  "formula": "",
+  "options": [
+   "CO₂(g)",
+   "CO(g)",
+   "C(diamond)",
+   "C(g)"
+  ],
+  "answer": 0,
+  "explain": "C(graphite)+O₂→CO₂; this IS the formation reaction of CO₂, so ΔH_comb = ΔHf°(CO₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d1459f44-f109-4df8-8db9-ec05c9e05aff",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "Which expression gives maximum work obtained from a system at constant T, P?",
+  "formula": "w_max = −ΔG",
+  "options": [
+   "−ΔU",
+   "−ΔG",
+   "−ΔH",
+   "TΔS"
+  ],
+  "answer": 1,
+  "explain": "At constant T and P, maximum non-expansion work = −ΔG (Gibbs free energy criterion).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7995bb7d-4330-47a6-87c5-35128562def1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "The unit of entropy in SI system is:",
+  "formula": "",
+  "options": [
+   "J K mol",
+   "kJ K mol⁻¹",
+   "J mol⁻¹",
+   "J K⁻¹ mol⁻¹"
+  ],
+  "answer": 3,
+  "explain": "Entropy S has SI unit J K⁻¹ mol⁻¹ (joule per kelvin per mole).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8b60280d-0885-43a9-ad70-2b54016e3c15",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "For a spontaneous irreversible process, ΔS_universe is:",
+  "formula": "",
+  "options": [
+   "> 0",
+   "= 0",
+   "= ΔS_system",
+   "< 0"
+  ],
+  "answer": 0,
+  "explain": "Second law: ΔS_universe > 0 for all spontaneous (irreversible) processes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96a8e144-18df-4789-906e-34d5d70deb36",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "ΔG for a reaction under non-standard conditions relates to ΔG° by:",
+  "formula": "ΔG = ΔG° + RT ln Q",
+  "options": [
+   "ΔG = ΔG° + RT ln Q",
+   "ΔG = RT ln Q",
+   "ΔG = ΔG° − RT ln Q",
+   "ΔG = ΔG° + RT ln K"
+  ],
+  "answer": 0,
+  "explain": "Reaction quotient Q replaces K for non-standard conditions: ΔG = ΔG° + RT ln Q.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3e75f741-3fb4-4e14-9be5-7b11448a87c7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "Work done on the system is taken as positive in the IUPAC sign convention?",
+  "formula": "ΔU = q + w",
+  "options": [
+   "Yes, w = +P_ext·ΔV (compression)",
+   "Only for isothermal",
+   "No, always negative",
+   "Only for adiabatic"
+  ],
+  "answer": 0,
+  "explain": "IUPAC: ΔU = q + w; work done ON system (compression) is positive.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e4b64f11-a49f-47cc-93ec-e96e2409f35f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "For which system is ΔH = q (heat at constant pressure)?",
+  "formula": "ΔH = qp",
+  "options": [
+   "Isolated system only",
+   "Adiabatic system",
+   "Only ideal gases",
+   "Open or closed at constant P"
+  ],
+  "answer": 3,
+  "explain": "qp = ΔH holds for any open or closed system at constant pressure with only PV work.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2541b29c-b032-4be8-a900-e9d2b7a796e5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "Gibbs energy change (ΔG) for a reaction at equilibrium equals:",
+  "formula": "",
+  "options": [
+   "ΔG°",
+   "−RT ln K",
+   "TΔS",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "At equilibrium Q = K, so ΔG = ΔG° + RT ln K = 0 by definition of equilibrium.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "17a438e8-9d68-40f3-b535-5edced9be789",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "For a van't Hoff equation, d(lnK)/dT equals:",
+  "formula": "d(lnK)/dT = ΔH°/RT²",
+  "options": [
+   "ΔH°/RT²",
+   "−ΔH°/RT²",
+   "ΔS°/R",
+   "ΔG°/RT²"
+  ],
+  "answer": 0,
+  "explain": "Van't Hoff equation: d(lnK)/dT = ΔH°/RT², showing K increases with T if ΔH°>0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6812c6ef-626d-408a-a14c-a2e5596663f1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "For an exothermic reaction, increasing T shifts equilibrium; K will:",
+  "formula": "",
+  "options": [
+   "Decrease",
+   "First increase then decrease",
+   "Increase",
+   "Remain same"
+  ],
+  "answer": 0,
+  "explain": "Van't Hoff: for exothermic (ΔH°<0), K decreases as T increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "11665775-cc4d-453b-a51b-d79bd82b6b56",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Chemical Thermodynamics",
+  "prompt": "Helmholtz free energy A is defined as:",
+  "formula": "A = U − TS",
+  "options": [
+   "H + TS",
+   "U − TS",
+   "U + PV",
+   "H − TS"
+  ],
+  "answer": 1,
+  "explain": "Helmholtz energy A = U − TS; criterion for spontaneity at constant T, V is ΔA ≤ 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6272d760-eeed-48a4-8bc6-431faee55f77",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "For a process spontaneous at ALL temperatures, which sign combination holds?",
+  "formula": "",
+  "options": [
+   "ΔH<0 and ΔS<0",
+   "ΔH>0 and ΔS>0",
+   "ΔH>0 and ΔS<0",
+   "ΔH<0 and ΔS>0"
+  ],
+  "answer": 3,
+  "explain": "ΔG = ΔH − TΔS < 0 at all T only when ΔH<0 and ΔS>0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ea27d417-6f49-4676-873c-a249da26d2b6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Chemical Thermodynamics",
+  "prompt": "The Carnot efficiency η of a heat engine operating between T_h and T_c is:",
+  "formula": "η = 1 − T_c/T_h",
+  "options": [
+   "1 − T_c/T_h",
+   "1 − T_h/T_c",
+   "(T_h−T_c)/T_c",
+   "T_c/T_h"
+  ],
+  "answer": 0,
+  "explain": "Carnot efficiency η = 1 − T_c/T_h; depends only on temperatures of reservoirs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b8acc40e-0862-4b72-94d4-cbbb9902a7af",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "Relation between Kp and Kc for reaction with Δn_g moles of gas:",
+  "formula": "Kp = Kc(RT)^Δnᵍ",
+  "options": [
+   "Kp = Kc + Δnᵍ RT",
+   "Kp = Kc/(RT)^Δnᵍ",
+   "Kc = Kp(RT)^Δnᵍ",
+   "Kp = Kc(RT)^Δnᵍ"
+  ],
+  "answer": 3,
+  "explain": "Kp = Kc(RT)^Δn_g where Δn_g = moles gaseous products − reactants.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "93207c44-1a87-4b2d-ac7d-be282071acf8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Hess's law of constant heat summation",
+  "prompt": "Enthalpy of a reaction is independent of path. This is called:",
+  "formula": "",
+  "options": [
+   "Lavoisier–Laplace Law",
+   "Trouton's Rule",
+   "Kirchhoff's Law",
+   "Hess's Law"
+  ],
+  "answer": 3,
+  "explain": "Hess's Law: ΔH of reaction is independent of path, consequence of H being a state function.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "49cc6fc1-2f35-4290-b340-35f3b7baa019",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "The standard enthalpy of formation of liquid water from H₂(g) and O₂(g) is approximately:",
+  "formula": "",
+  "options": [
+   "−393 kJ/mol",
+   "−241 kJ/mol",
+   "+286 kJ/mol",
+   "−286 kJ/mol"
+  ],
+  "answer": 3,
+  "explain": "ΔHf°[H₂O(l)] ≈ −286 kJ/mol; for H₂O(g) it is −241 kJ/mol (difference = ΔH_vap).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8bdb1c28-9abe-4f5c-aa07-0ff14126de94",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Standard enthalpy of combustion of CH₄(g) is approximately:",
+  "formula": "",
+  "options": [
+   "−393 kJ/mol",
+   "−890 kJ/mol",
+   "−286 kJ/mol",
+   "−1560 kJ/mol"
+  ],
+  "answer": 1,
+  "explain": "CH₄ + 2O₂ → CO₂ + 2H₂O; ΔH°_comb ≈ −890 kJ/mol, a standard JEE value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a63030f-3743-4bb9-a663-9d57c16c9528",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "For H₂O(l)→H₂O(g) at 100°C, which statement is correct regarding ΔG?",
+  "formula": "",
+  "options": [
+   "ΔG = ΔH",
+   "ΔG < 0",
+   "ΔG > 0",
+   "ΔG = 0"
+  ],
+  "answer": 3,
+  "explain": "At boiling point (equilibrium between phases), ΔG = 0 for the phase transition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3774b5fd-3cc5-438b-93c8-19deba519ed0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "The thermodynamic criterion for a reversible process compared to irreversible is:",
+  "formula": "",
+  "options": [
+   "ΔS_univ < 0",
+   "ΔG_univ = 0",
+   "ΔS_univ = 0",
+   "ΔS_univ > 0"
+  ],
+  "answer": 2,
+  "explain": "Reversible process: ΔS_universe = 0; irreversible: ΔS_universe > 0 (2nd law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7c8900e2-a06c-4683-9455-c3e6b43c1e74",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Chemical Thermodynamics",
+  "prompt": "Joule–Thomson effect: ideal gas on throttling shows temperature change of:",
+  "formula": "μ_JT = 0 (ideal gas)",
+  "options": [
+   "Negative (heating)",
+   "Depends on pressure",
+   "Positive (cooling)",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "For ideal gas, Joule–Thomson coefficient μ_JT = 0; no temperature change on throttling.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2711e93-9095-4935-bc3f-45996916260e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Enthalpy of neutralisation of HCN (weak acid) with NaOH will be:",
+  "formula": "",
+  "options": [
+   "More than 57.1 kJ/mol",
+   "Less than 57.1 kJ/mol",
+   "Zero",
+   "Equal to 57.1 kJ/mol"
+  ],
+  "answer": 1,
+  "explain": "Weak acid ionisation is endothermic, so total heat released is less than 57.1 kJ/mol.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8fd7104c-1fab-46c2-a6ec-a1c9c542b116",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "For a reaction: ΔH>0, ΔS<0. The reaction is spontaneous:",
+  "formula": "ΔG = ΔH − TΔS",
+  "options": [
+   "At low temperature only",
+   "At all temperatures",
+   "At high temperature only",
+   "At no temperature"
+  ],
+  "answer": 3,
+  "explain": "ΔG = ΔH−TΔS; if ΔH>0 and ΔS<0, ΔG>0 at all T, so never spontaneous.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3ea6d18e-2106-4d9e-a6d4-b7e6f9327cec",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Which has ΔS < 0 for the system?",
+  "formula": "",
+  "options": [
+   "H₂O(l)→H₂O(g)",
+   "CaCO₃(s)→CaO(s)+CO₂(g)",
+   "2KClO₃(s)→2KCl(s)+3O₂(g)",
+   "N₂(g)+3H₂(g)→2NH₃(g)"
+  ],
+  "answer": 3,
+  "explain": "4 mol gas → 2 mol gas; Δnₘ < 0, so disorder decreases, ΔS < 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2768cb32-f9c5-4fc9-a4d0-a924230ba912",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Enthalpy of formation of CO(g) cannot be measured directly because:",
+  "formula": "",
+  "options": [
+   "CO is a liquid",
+   "CO is too stable",
+   "Reaction is endothermic",
+   "CO₂ also forms on burning C"
+  ],
+  "answer": 3,
+  "explain": "Burning carbon always gives a mix of CO and CO₂, so direct measurement is impossible.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0d1dbfa6-2445-4e5a-bd2e-72d9be6258ea",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "For a reaction: Δn_g = 0, then Kp and Kc are related by:",
+  "formula": "Kp = Kc(RT)^Δnɡ",
+  "options": [
+   "Kp = Kc(RT)²",
+   "Kp = Kc/RT",
+   "Kp = Kc",
+   "Kp = KcRT"
+  ],
+  "answer": 2,
+  "explain": "When Δnᵍ = 0, (RT)⁰ = 1, so Kp equals Kc exactly.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dc598bb8-b64a-4b15-82ca-6effe60cbfba",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "For the reaction C(graphite)+O₂(g)→CO₂(g), ΔH equals ΔHf° of:",
+  "formula": "",
+  "options": [
+   "CO(g)",
+   "C(diamond)",
+   "O₃(g)",
+   "CO₂(g)"
+  ],
+  "answer": 3,
+  "explain": "Elements in standard states form one mole CO₂(g); this defines ΔHf°[CO₂(g)].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b6574ba1-2ebd-4eb9-b18f-3f6c9470ea4e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "Standard Gibbs energy of formation of a stable element in standard state is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Negative",
+   "Positive",
+   "Depends on element"
+  ],
+  "answer": 0,
+  "explain": "By convention, ΔGf° = 0 for elements in their standard states, analogous to ΔHf°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a881710d-2a6d-4537-8344-c15e5907c031",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Chemical Thermodynamics",
+  "prompt": "Carnot cycle efficiency depends on:",
+  "formula": "η = 1 − Tc/Th",
+  "options": [
+   "Only temperatures of source and sink",
+   "Amount of gas used",
+   "Nature of working substance",
+   "Pressure of gas"
+  ],
+  "answer": 0,
+  "explain": "Carnot efficiency η = 1−Tc/Th depends only on absolute temperatures.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b475f9d6-a58e-4400-b1d3-2c72118dbb29",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "ΔS for surroundings when system absorbs heat q at constant T is:",
+  "formula": "ΔS_surr = −q/T",
+  "options": [
+   "+q/T",
+   "−q/T",
+   "q/T²",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Surroundings lose heat q, so ΔS_surr = −q/T (at constant T).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0dc30f40-44bd-4953-8a09-abd78a035f3a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "For an ideal gas, which is correct at constant temperature?",
+  "formula": "",
+  "options": [
+   "ΔU = 0 but ΔH ≠ 0",
+   "ΔH > 0 and ΔU = 0",
+   "ΔH = 0 and ΔU = 0",
+   "ΔU > 0 and ΔH > 0"
+  ],
+  "answer": 2,
+  "explain": "Ideal gas internal energy and enthalpy depend only on T; isothermal ⟹ ΔU=ΔH=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "57b1db71-f6be-494b-8f25-0f7fef49e87c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "For a reaction with large positive ΔG°, the equilibrium constant K is:",
+  "formula": "ΔG° = −RT lnK",
+  "options": [
+   "K << 1 (very small)",
+   "K = 0",
+   "K >> 1 (very large)",
+   "K = 1"
+  ],
+  "answer": 0,
+  "explain": "Large positive ΔG° means lnK is large negative, so K << 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "810eeaf6-4c97-4df5-b4ac-9af93254adbf",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs Energy / Spontaneity",
+  "prompt": "For a reaction: ΔH<0, ΔS>0. Spontaneous at:",
+  "formula": "ΔG = ΔH − TΔS",
+  "options": [
+   "Low T only",
+   "Never spontaneous",
+   "All temperatures",
+   "High T only"
+  ],
+  "answer": 2,
+  "explain": "Both terms make ΔG negative at all T when ΔH<0 and ΔS>0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a8f00e5d-c3dc-4b10-806d-cd927bb017e1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Second Law / Entropy",
+  "prompt": "Which relation is ALWAYS true for a spontaneous irreversible process?",
+  "formula": "ΔS_univ > 0",
+  "options": [
+   "ΔS_universe = 0",
+   "ΔS_universe < 0",
+   "ΔS_universe > 0",
+   "ΔS_system > 0"
+  ],
+  "answer": 2,
+  "explain": "Second law: entropy of universe increases for all spontaneous (irreversible) processes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ad9ab5c5-3eb5-4cb6-8184-966c0307bb20",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔH and ΔU Relation",
+  "prompt": "ΔH = ΔU + Δ(PV). For ideal gas, Δ(PV) equals:",
+  "formula": "Δ(PV) = Δnᵍ RT",
+  "options": [
+   "nRT",
+   "Zero always",
+   "PΔV only",
+   "Δnᵍ RT"
+  ],
+  "answer": 3,
+  "explain": "For ideal gas PV=nRT; Δ(PV)=Δnᵍ·RT where Δnᵍ = change in moles of gaseous species.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "98a2b6ab-6397-40d6-b9d3-f05da8aac29a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "A thermos flask containing hot coffee, closed with a stopper, is best approximated as which type of system?",
+  "formula": "",
+  "options": [
+   "Homogeneous open system",
+   "Isolated system",
+   "Closed system",
+   "Open system"
+  ],
+  "answer": 1,
+  "explain": "An ideal thermos exchanges neither matter nor energy with surroundings, so it is isolated.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "056c43fa-9589-4417-a500-931de2d01777",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "Which type of system can exchange energy but not matter with its surroundings?",
+  "formula": "",
+  "options": [
+   "Adiabatic open system",
+   "Isolated system",
+   "Open system",
+   "Closed system"
+  ],
+  "answer": 3,
+  "explain": "Closed: energy exchange only. Open: both. Isolated: neither.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5589f4bb-2087-4fa1-95f0-3f592b3ca9a3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "A living cell is an example of which type of thermodynamic system?",
+  "formula": "",
+  "options": [
+   "Closed system",
+   "Isolated system",
+   "Adiabatic system",
+   "Open system"
+  ],
+  "answer": 3,
+  "explain": "A cell exchanges both matter and energy with its surroundings.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "856725f8-f445-4699-b1d4-b395a01a9885",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "Which of the following is an extensive property?",
+  "formula": "",
+  "options": [
+   "Density",
+   "Molar volume",
+   "Heat capacity",
+   "Specific heat capacity"
+  ],
+  "answer": 2,
+  "explain": "Heat capacity depends on the amount of substance; the others are intensive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1afe5fb5-17ff-4f0f-ad60-b5c4e28377a6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "Which of the following is NOT a state function?",
+  "formula": "",
+  "options": [
+   "Work done",
+   "Enthalpy",
+   "Entropy",
+   "Internal energy"
+  ],
+  "answer": 0,
+  "explain": "Work and heat are path functions; H, U, S are state functions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e13e073-0302-4ccd-9ab0-40ee9ed6658c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "Ratio of two extensive properties, such as mass/volume, gives which type of property?",
+  "formula": "",
+  "options": [
+   "Colligative property",
+   "Path function",
+   "Extensive property",
+   "Intensive property"
+  ],
+  "answer": 3,
+  "explain": "Ratio of two extensive properties is intensive, e.g. density = mass/volume.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81df52df-105f-4dc9-8854-af3a47a1a6e7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "Which of the following is an intensive property?",
+  "formula": "",
+  "options": [
+   "Refractive index",
+   "Gibbs energy",
+   "Entropy",
+   "Enthalpy"
+  ],
+  "answer": 0,
+  "explain": "Refractive index is independent of amount; H, S, G are extensive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02ecfd8e-63c2-42bb-be72-f5f8f373044f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "System, surroundings & types of systems",
+  "prompt": "A process in which the system temperature stays constant, with heat exchange allowed, is called:",
+  "formula": "",
+  "options": [
+   "Isothermal",
+   "Isochoric",
+   "Isobaric",
+   "Adiabatic"
+  ],
+  "answer": 0,
+  "explain": "Isothermal: dT = 0, achieved through heat exchange with the surroundings (thermostat).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "65ac2d57-14e2-487e-a821-652c7a607259",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "A system is divided into two equal halves. Which property stays unchanged in each half?",
+  "formula": "",
+  "options": [
+   "Internal energy",
+   "Density",
+   "Entropy",
+   "Volume"
+  ],
+  "answer": 1,
+  "explain": "Intensive properties are unchanged on division; U, S and V are extensive and halve.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6281f7df-530d-481d-b97c-d205aaff2791",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "An ideal gas goes between the same two states by reversible and irreversible isothermal paths. What differs?",
+  "formula": "",
+  "options": [
+   "ΔU",
+   "Work done",
+   "ΔH",
+   "ΔS of the system"
+  ],
+  "answer": 1,
+  "explain": "ΔU, ΔH and ΔS are state functions and fixed; w and q depend on the path.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "04031671-fe83-4d40-bce6-7486aaaebd2b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "In an adiabatic process, the work done is:",
+  "formula": "w_ad = ΔU",
+  "options": [
+   "Path dependent",
+   "Path independent",
+   "Always zero",
+   "Equal to ΔH"
+  ],
+  "answer": 1,
+  "explain": "With q = 0, w = ΔU, so w depends only on the initial and final states.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7910193d-23dd-4d08-9ce4-9b7edd84955b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "If a reaction's coefficients are doubled, its ΔH doubles. This shows that ΔH is:",
+  "formula": "",
+  "options": [
+   "Extensive",
+   "Independent of amount",
+   "Intensive",
+   "A path function"
+  ],
+  "answer": 0,
+  "explain": "ΔH scales with the amount of reactants converted, so it is extensive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fbef84be-9ff5-47e9-bf42-4bc2b9b9f778",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "Heat exchanged at constant volume (isochoric, only P–V work) equals:",
+  "formula": "q_V = ΔU",
+  "options": [
+   "nRTln(V₂/V₁)",
+   "ΔH",
+   "ΔU",
+   "–PΔV"
+  ],
+  "answer": 2,
+  "explain": "At constant V, w = 0, so ΔU = q_V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b373b52d-186f-45b9-91eb-2e0ed31d65f9",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "Which relation holds for a reversible adiabatic process of an ideal gas?",
+  "formula": "TV^(γ–1) = constant",
+  "options": [
+   "PV^(γ–1) = constant",
+   "T/P^γ = constant",
+   "TV^(γ–1) = constant",
+   "TV^γ = constant"
+  ],
+  "answer": 2,
+  "explain": "From PV^γ = const and PV = nRT, TV^(γ–1) = const.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb8ae47a-695a-4686-9928-86363aeae845",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "An ideal gas expands adiabatically and reversibly. Its temperature:",
+  "formula": "w = ΔU = nC_VΔT",
+  "options": [
+   "Cannot be predicted",
+   "Remains constant",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 2,
+  "explain": "q = 0, and the gas does work at the cost of its internal energy, so T falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6afaea84-e039-4017-9e17-66c321e6dea3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "Maximum work is obtained from a system when the process is carried out:",
+  "formula": "",
+  "options": [
+   "Reversibly",
+   "Irreversibly in one step",
+   "Rapidly at constant volume",
+   "Against zero external pressure"
+  ],
+  "answer": 0,
+  "explain": "P_ext differs from P_gas by only an infinitesimal amount, so |w| is maximum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9e069d7d-dff3-44f6-8f51-a4f2baaaa474",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "On a P–V diagram through the same point, the adiabat compared with the isotherm is:",
+  "formula": "",
+  "options": [
+   "Identical",
+   "Perpendicular",
+   "Less steep",
+   "Steeper"
+  ],
+  "answer": 3,
+  "explain": "Adiabat slope = –γP/V and isotherm slope = –P/V, with γ > 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eac03994-a792-4c96-aeb6-76e3d3ac4cba",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "A reversible process is best described as one that:",
+  "formula": "",
+  "options": [
+   "Occurs in a finite time",
+   "Passes through a series of equilibrium states",
+   "Occurs at constant pressure",
+   "Has no heat exchange"
+  ],
+  "answer": 1,
+  "explain": "It proceeds through infinitesimal changes, with the system in equilibrium at every stage, and takes infinite time.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e38e2025-10f9-4c19-906e-f3f7e42daed6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "For reversible isothermal compression of an ideal gas, the heat q is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Equal to ΔH",
+   "Zero",
+   "Positive"
+  ],
+  "answer": 0,
+  "explain": "ΔU = 0 and w > 0 for compression, so q = –w < 0, meaning heat is released to the surroundings.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64e1807a-f4f3-488a-a7f9-8659aa6da9e7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "For a reversible adiabatic process, the entropy change of the system is:",
+  "formula": "ΔS = q_rev/T",
+  "options": [
+   "Equal to ΔU/T",
+   "Positive",
+   "Zero",
+   "Negative"
+  ],
+  "answer": 2,
+  "explain": "q_rev = 0, so ΔS = 0 and the process is isentropic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9ea6e22f-2e00-48d9-bf4a-ebf96e566b2a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "Work in a reversible adiabatic process of an ideal gas equals:",
+  "formula": "w = ΔU = nC_vΔT",
+  "options": [
+   "nC_p ΔT",
+   "nC_v ΔT",
+   "–nRT ln(V₂/V₁)",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "q = 0, so w = ΔU = nC_vΔT (valid for any adiabatic process).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0635a07a-f010-4063-89f1-d6f315261832",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "Ideal gas expands freely into vacuum inside an insulated vessel. Which quantity is non-zero?",
+  "formula": "",
+  "options": [
+   "ΔU",
+   "Work w",
+   "ΔS of the system",
+   "Heat q"
+  ],
+  "answer": 2,
+  "explain": "P_ext = 0 gives w = 0, q = 0, ΔU = 0, but the process is irreversible, so ΔS_sys > 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "88f3ac8a-020c-4aa7-b74e-330400a4ffe1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "Work done on reversible isothermal expansion of n mol ideal gas from V₁ to V₂ (IUPAC sign):",
+  "formula": "w = –nRT ln(V₂/V₁)",
+  "options": [
+   "–nRT ln(P₂/P₁)",
+   "–P(V₂ – V₁)",
+   "–nC_vΔT",
+   "–nRT ln(V₂/V₁)"
+  ],
+  "answer": 3,
+  "explain": "Integrating –P dV with P = nRT/V gives –nRT ln(V₂/V₁), which equals nRT ln(P₂/P₁).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "60895a65-082f-46c8-ba06-363e9f188b65",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "For an adiabatic process, the first law reduces to which relation?",
+  "formula": "q = 0",
+  "options": [
+   "ΔU = w",
+   "w = 0",
+   "ΔU = q",
+   "ΔU = 0"
+  ],
+  "answer": 0,
+  "explain": "No heat exchange (q = 0), so ΔU = w.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "99c328dd-fedb-45f4-9514-610370ef6f59",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "For any cyclic process, which statement is correct?",
+  "formula": "",
+  "options": [
+   "q = w = 0 always",
+   "ΔU = w and q = 0",
+   "ΔU = q and w = 0",
+   "ΔU = 0 and q = –w"
+  ],
+  "answer": 3,
+  "explain": "U is a state function, so ΔU = 0 over a cycle; hence q = –w.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "85a92de8-d5ea-471e-8248-7c3f477481cf",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "For an ideal gas, internal energy depends only on:",
+  "formula": "",
+  "options": [
+   "Pressure and volume",
+   "Volume",
+   "Pressure",
+   "Temperature"
+  ],
+  "answer": 3,
+  "explain": "No intermolecular forces (Joule's law), so U = f(T) only.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c779151f-6923-4a53-8263-f0038620b937",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "1 L·atm of work equals approximately:",
+  "formula": "",
+  "options": [
+   "101.3 J",
+   "8.314 J",
+   "4.18 J",
+   "1.987 J"
+  ],
+  "answer": 0,
+  "explain": "1 L·atm = 101.3 J (from 101325 Pa × 10⁻³ m³).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7070425-3ce2-4ba5-ac3c-c5257efe6aa2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "A bomb calorimeter (constant volume) directly measures which quantity?",
+  "formula": "",
+  "options": [
+   "ΔH",
+   "ΔU",
+   "ΔG",
+   "w"
+  ],
+  "answer": 1,
+  "explain": "At constant V, q_V = ΔU.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2a2c6db-84dd-4902-a4c5-9c3953ff1d5b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "For an ideal gas, ΔU = nC_VΔT holds for:",
+  "formula": "ΔU = nC_VΔT",
+  "options": [
+   "Any process",
+   "Only adiabatic processes",
+   "Only reversible processes",
+   "Only isochoric processes"
+  ],
+  "answer": 0,
+  "explain": "U is a function of T alone, so the relation holds for every process of an ideal gas.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d387db92-508f-4d4f-b5f8-810870deb0fd",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "Internal energy U of a system is classified as:",
+  "formula": "",
+  "options": [
+   "Extensive path function",
+   "Intensive path function",
+   "Intensive state function",
+   "Extensive state function"
+  ],
+  "answer": 3,
+  "explain": "U depends only on the state and is proportional to the amount of matter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "326bc8b8-3333-472b-a42e-e984c190c88b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "Enthalpy is classified as which type of property?",
+  "formula": "",
+  "options": [
+   "Path function, extensive",
+   "Path function, intensive",
+   "State function, intensive",
+   "State function, extensive"
+  ],
+  "answer": 3,
+  "explain": "H depends only on the state and scales with the amount of matter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1788f28-445d-4178-b0a9-c4f335119035",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "On reversing a chemical equation, the ΔH value",
+  "formula": "",
+  "options": [
+   "is halved",
+   "becomes zero",
+   "changes sign, same magnitude",
+   "is unchanged"
+  ],
+  "answer": 2,
+  "explain": "H is a state function, so ΔH(reverse) = −ΔH(forward).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd6ca12f-3d18-4ed5-b625-023bf280438b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Types of processes (iso-, adiabatic, rev.)",
+  "prompt": "For a complete cyclic process of an ideal gas, which pair of quantities is necessarily zero?",
+  "formula": "∮dU = 0, ∮dH = 0",
+  "options": [
+   "ΔU and w",
+   "ΔU and ΔH",
+   "ΔH and q",
+   "q and w"
+  ],
+  "answer": 1,
+  "explain": "U and H are state functions, so both vanish over a cycle; q = –w is generally non-zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "57182911-6714-4808-9de3-50142fd50e50",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "A reaction in an open vessel at constant T and P produces gas (Δn_g > 0). The sign of w is:",
+  "formula": "w = −P_ext ΔV = −Δn_g RT",
+  "options": [
+   "Negative",
+   "Positive",
+   "Zero",
+   "Equal to ΔU"
+  ],
+  "answer": 0,
+  "explain": "The system expands against the atmosphere, so it does work and w = −Δn_g RT < 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87dca372-92ab-43e8-aaa5-74101cc894a3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "Heat capacity at constant pressure C_p is defined as",
+  "formula": "C_p = (∂H/∂T)_P",
+  "options": [
+   "(∂U/∂T)_V",
+   "(∂H/∂T)_V",
+   "(∂U/∂T)_P",
+   "(∂H/∂T)_P"
+  ],
+  "answer": 3,
+  "explain": "C_p is the rate of change of enthalpy with temperature at constant P.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c8343727-c714-4a99-aac4-0314644d6abc",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "Sign of ΔH for an endothermic reaction at constant pressure is:",
+  "formula": "",
+  "options": [
+   "Depends on Δn_g only",
+   "Positive",
+   "Negative",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Endothermic: system absorbs heat at constant P, so ΔH > 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7de3614-ca6b-4cc1-b196-10a36ec7534b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "For an exothermic reaction at constant P, the enthalpy of products compared to reactants is:",
+  "formula": "ΔH = H_products − H_reactants",
+  "options": [
+   "Higher",
+   "Cannot be compared",
+   "Equal",
+   "Lower"
+  ],
+  "answer": 3,
+  "explain": "ΔH < 0 means H_products < H_reactants.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "520442b8-281c-4e08-a71b-bedfba743116",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "In ΔH = ΔU + Δn_gRT with ΔU in kJ mol⁻¹, R must be taken as:",
+  "formula": "R = 8.314×10⁻³ kJ K⁻¹ mol⁻¹",
+  "options": [
+   "8.314 kJ K⁻¹ mol⁻¹",
+   "1.987 kJ K⁻¹ mol⁻¹",
+   "0.0821 kJ K⁻¹ mol⁻¹",
+   "8.314×10⁻³ kJ K⁻¹ mol⁻¹"
+  ],
+  "answer": 3,
+  "explain": "R = 8.314 J K⁻¹ mol⁻¹ = 8.314×10⁻³ kJ K⁻¹ mol⁻¹. Units must match ΔU to avoid a 1000-fold error.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "273640fd-bc79-4c27-a917-0c56c35055a0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "For an ideal gas, why is Cp greater than Cv?",
+  "formula": "",
+  "options": [
+   "Volume stays fixed in Cp",
+   "Work of expansion at constant P",
+   "Greater number of molecules",
+   "Intermolecular attraction"
+  ],
+  "answer": 1,
+  "explain": "At constant P, part of heat does expansion work PΔV, so more heat is needed per degree.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b6abf62-3d15-4184-b7e3-d0a30bab3372",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "Cp for a monoatomic ideal gas (only translational) equals:",
+  "formula": "",
+  "options": [
+   "(5/2)R",
+   "(3/2)R",
+   "3R",
+   "(7/2)R"
+  ],
+  "answer": 0,
+  "explain": "Cp = Cv + R = (3/2)R + R = (5/2)R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "422c4f5e-4731-4ec4-8cb4-8c34e7896caa",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "γ = Cp/Cv for a diatomic ideal gas (no vibration) is:",
+  "formula": "",
+  "options": [
+   "9/7",
+   "5/3",
+   "7/5",
+   "4/3"
+  ],
+  "answer": 2,
+  "explain": "Cv = 5R/2, Cp = 7R/2, so γ = 7/5 = 1.4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d45bc8d9-ae17-4245-b4a0-f627537db8e0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "Molar heat capacity of an ideal gas in an isothermal process is:",
+  "formula": "",
+  "options": [
+   "Infinite",
+   "Equal to R",
+   "Zero",
+   "Equal to Cv"
+  ],
+  "answer": 0,
+  "explain": "C = q/(n ΔT) with ΔT = 0 but q ≠ 0, so C → ∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66a5fb0a-5f6e-4a34-93fa-e0c3f6a41284",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "Molar heat capacity of an ideal gas in a reversible adiabatic process is:",
+  "formula": "",
+  "options": [
+   "Cp",
+   "Infinite",
+   "Zero",
+   "Cv"
+  ],
+  "answer": 2,
+  "explain": "q = 0 while ΔT ≠ 0, so C = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7355cdb4-2f40-48ff-a59e-f7f9ec4beafc",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Heat capacity, Cp, Cv, Cp − Cv = R",
+  "prompt": "Heat capacity (C) is an __ property; specific heat is an __ property.",
+  "formula": "",
+  "options": [
+   "extensive; intensive",
+   "intensive; extensive",
+   "extensive; extensive",
+   "intensive; intensive"
+  ],
+  "answer": 0,
+  "explain": "C depends on amount of substance; specific heat is per unit mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6c220ec5-cfc4-4979-9406-fdfae19bb908",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "ΔHf° of diamond (graphite is the reference state) is:",
+  "formula": "",
+  "options": [
+   "Equal to ΔHc° of graphite",
+   "Positive, about +1.9 kJ/mol",
+   "Zero",
+   "Negative"
+  ],
+  "answer": 1,
+  "explain": "Graphite is the standard state of carbon; diamond is slightly less stable, so ΔHf° ≈ +1.9 kJ/mol.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b4a40b3-8310-4911-8af5-bf6a0eccd070",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "ΔHf° of H₂O(g) compared with H₂O(l) is:",
+  "formula": "",
+  "options": [
+   "Less negative (≈ −242 kJ/mol)",
+   "Positive",
+   "More negative (≈ −300 kJ/mol)",
+   "Equal"
+  ],
+  "answer": 0,
+  "explain": "Vaporisation absorbs about 44 kJ/mol, so H₂O(g) has −242 against −286 for H₂O(l).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f2a307d6-2fdb-4c11-adf9-0f070cdd357a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Among these fuels, which has the highest calorific value per gram?",
+  "formula": "",
+  "options": [
+   "Ethanol",
+   "Methane",
+   "Hydrogen",
+   "Graphite"
+  ],
+  "answer": 2,
+  "explain": "H₂ releases about 142 kJ/g, the highest of any common fuel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d05b5392-4c58-49bb-b71f-4c8724c3e55e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "On complete combustion, sulfur in a compound is taken to form which product?",
+  "formula": "",
+  "options": [
+   "SO₃(g)",
+   "SO₂(g)",
+   "H₂S(g)",
+   "S(s)"
+  ],
+  "answer": 1,
+  "explain": "Standard combustion products: SO₂(g) from S, with CO₂(g), H₂O(l) and N₂(g) from C, H and N.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ed06eb16-c5d8-4752-9f77-528a4e44b18d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Which compound has a positive standard enthalpy of formation?",
+  "formula": "",
+  "options": [
+   "NH₃(g)",
+   "CO₂(g)",
+   "NO(g)",
+   "H₂O(l)"
+  ],
+  "answer": 2,
+  "explain": "NO(g) is endothermic (ΔHf° ≈ +90 kJ/mol); the other three are negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e55a34c2-442f-4428-979e-23b6c934f905",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Standard enthalpy of formation of C₂H₅OH(l) refers to heat change for which reactants?",
+  "formula": "",
+  "options": [
+   "C(g), H(g), O(g)",
+   "CO₂(g) and H₂O(l)",
+   "C₂H₄(g) and H₂O(l)",
+   "C(graphite), H₂(g), O₂(g)"
+  ],
+  "answer": 3,
+  "explain": "Formation is from elements in their standard states: graphite, H₂(g), O₂(g).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a92ee39-1abf-42b3-aba9-5aedf5ca195a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Standard enthalpy of combustion of CO(g) to CO₂(g) is approximately:",
+  "formula": "ΔcH°(CO) = ΔHf°(CO₂) − ΔHf°(CO)",
+  "options": [
+   "−283 kJ/mol",
+   "−566 kJ/mol",
+   "−393.5 kJ/mol",
+   "−110.5 kJ/mol"
+  ],
+  "answer": 0,
+  "explain": "−393.5 − (−110.5) = −283 kJ per mol of CO; −566 kJ is for 2 mol.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f767e40d-dbe3-47e5-ab51-c002bb6fd892",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Phase transition/sublimation enthalpies",
+  "prompt": "Relation between ΔH_fusion and ΔH_freezing (same substance, same T):",
+  "formula": "",
+  "options": [
+   "Their product is 1",
+   "Equal in magnitude, opposite in sign",
+   "Freezing is always larger",
+   "Equal in magnitude and sign"
+  ],
+  "answer": 1,
+  "explain": "Reverse process: ΔH_freezing = −ΔH_fusion.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "301d12ee-54e2-4306-a99b-f0d3c3fcaeda",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Phase transition/sublimation enthalpies",
+  "prompt": "Trouton's rule: ΔS_vap for most non-associated liquids at the normal boiling point is about:",
+  "formula": "ΔS_vap = ΔH_vap / T_b ≈ 85 J K⁻¹ mol⁻¹",
+  "options": [
+   "≈ 850 J K⁻¹ mol⁻¹",
+   "≈ 22 J K⁻¹ mol⁻¹",
+   "≈ 8.3 J K⁻¹ mol⁻¹",
+   "≈ 85 J K⁻¹ mol⁻¹"
+  ],
+  "answer": 3,
+  "explain": "Trouton's rule: ΔH_vap/T_b ≈ 85 J K⁻¹ mol⁻¹ for non-associated liquids.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5ca9407e-c8bc-4625-83c5-e55461dc9964",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "An ionic salt dissolves exothermically in water when:",
+  "formula": "",
+  "options": [
+   "Lattice enthalpy = 0",
+   "Hydration enthalpy is positive",
+   "Lattice enthalpy > |hydration enthalpy|",
+   "|Hydration enthalpy| > lattice enthalpy"
+  ],
+  "answer": 3,
+  "explain": "ΔH_sol = ΔH_lattice + ΔH_hyd is negative only when |ΔH_hyd| exceeds ΔH_lattice.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7208ba2e-a644-4535-9af2-d0a47b8588f8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Which gaseous ion has the most negative enthalpy of hydration?",
+  "formula": "",
+  "options": [
+   "K⁺",
+   "Na⁺",
+   "Mg²⁺",
+   "Al³⁺"
+  ],
+  "answer": 3,
+  "explain": "Hydration enthalpy rises with charge density (high charge, small size); Al³⁺ is highest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0cb90d5d-80a1-4ff8-9022-3292e28cc1c2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Neutralisation of HF with NaOH releases more than 57.1 kJ/mol mainly because:",
+  "formula": "",
+  "options": [
+   "HF forms no hydrogen bonds",
+   "NaF is insoluble",
+   "HF is a strong acid",
+   "Ionisation of HF is exothermic (F⁻ hydration)"
+  ],
+  "answer": 3,
+  "explain": "Very high hydration enthalpy of small F⁻ makes HF ionisation exothermic, so |ΔH_neut| ≈ 68 kJ/mol.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b194629-1af8-4baa-a790-217f94d2551a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Enthalpy of hydration of gaseous ions is always:",
+  "formula": "",
+  "options": [
+   "Positive for anions",
+   "Negative",
+   "Positive",
+   "Zero for large ions"
+  ],
+  "answer": 1,
+  "explain": "Ion–dipole attraction with water always releases energy, so ΔH_hyd < 0 for all ions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ba8908a-e061-4a73-bb72-fca60d7457e0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Enthalpy of solution at infinite dilution refers to dissolving 1 mol solute in:",
+  "formula": "",
+  "options": [
+   "1 kg of solvent",
+   "Just enough solvent to saturate",
+   "1 L of solvent",
+   "Excess solvent so further dilution has ΔH = 0"
+  ],
+  "answer": 3,
+  "explain": "At infinite dilution, adding more solvent causes no further heat change.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bf2bfed9-7770-427d-acbe-1c80f493d5c6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Solubility of a salt with endothermic ΔH_solution (e.g. NH₄NO₃):",
+  "formula": "",
+  "options": [
+   "Becomes zero at high temperature",
+   "Decreases with rise in temperature",
+   "Is independent of temperature",
+   "Increases with rise in temperature"
+  ],
+  "answer": 3,
+  "explain": "By Le Chatelier, heat favours the endothermic dissolution, so solubility increases with temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f566713b-e155-406b-a849-d6fc618d19e5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Down the group, the magnitude of hydration enthalpy of alkali metal ions Li⁺ to Cs⁺:",
+  "formula": "",
+  "options": [
+   "First increases then decreases",
+   "Remains constant",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 2,
+  "explain": "Ionic size increases down the group, lowering charge density, so |ΔH_hyd| decreases (Li⁺ highest).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "06d4229c-1fe4-4c9d-9051-0fc3f8469cba",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Anhydrous CuSO₄ dissolving in water is generally:",
+  "formula": "",
+  "options": [
+   "Zero enthalpy change",
+   "Exothermic, due to hydrate formation",
+   "Endothermic, as lattice breaks",
+   "Endothermic, due to hydration"
+  ],
+  "answer": 1,
+  "explain": "Anhydrous CuSO₄ has ΔH_sol ≈ −66 kJ/mol; hydration energy far exceeds lattice enthalpy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f49c417-2414-4114-b971-3efb0cc99463",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of solution, hydration, ionization",
+  "prompt": "Enthalpy of ionisation of a weak acid HA in water is the heat change for which process?",
+  "formula": "",
+  "options": [
+   "HA + NaOH → NaA + H₂O",
+   "HA(aq) → H⁺(aq) + A⁻(aq)",
+   "H⁺ + OH⁻ → H₂O",
+   "HA(g) → H⁺(g) + A⁻(g)"
+  ],
+  "answer": 1,
+  "explain": "Ionisation enthalpy of a weak electrolyte = ΔH for its dissociation into aqueous ions; ΔH_neut = −57.1 + ΔH_ion.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de215c97-2027-48d0-b6a7-95190baedb6e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Free expansion of an ideal gas into vacuum (isolated): ΔS_surroundings is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Zero",
+   "Positive",
+   "−nR ln(V₂/V₁)"
+  ],
+  "answer": 1,
+  "explain": "No heat is exchanged with the surroundings, so ΔS_surr = 0. ΔS_system = nR ln(V₂/V₁) > 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f3c01721-256c-47d9-bec3-82915cc5497e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Entropy change on heating n mol of ideal gas reversibly at constant pressure from T₁ to T₂:",
+  "formula": "",
+  "options": [
+   "nR ln(T₂/T₁)",
+   "nC_p ln(T₂/T₁)",
+   "nC_v ln(T₂/T₁)",
+   "nC_p (T₂ − T₁)"
+  ],
+  "answer": 1,
+  "explain": "ΔS = ∫nC_p dT/T = nC_p ln(T₂/T₁) at constant P.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abb3010d-8b7f-4f3b-b542-a93566ce21ed",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Entropy S of a system is:",
+  "formula": "",
+  "options": [
+   "Intensive path function",
+   "Intensive state function",
+   "Extensive state function",
+   "Extensive path function"
+  ],
+  "answer": 2,
+  "explain": "S depends only on the state and is proportional to the amount of substance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f415928b-6576-4efe-977e-87d4c5a2ebe4",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "For ice → water at −10°C and 1 atm, the sign of ΔG is:",
+  "formula": "",
+  "options": [
+   "Cannot be predicted",
+   "Zero",
+   "Negative",
+   "Positive"
+  ],
+  "answer": 3,
+  "explain": "Below 273 K, TΔS < ΔH for melting, so ΔG > 0 and melting is non-spontaneous.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4e78fcb2-fb78-4668-ac26-bd870112672f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "For isothermal free expansion of an ideal gas into vacuum, the sign of ΔG is:",
+  "formula": "ΔH = 0, ΔS > 0 ⇒ ΔG = −TΔS",
+  "options": [
+   "Positive",
+   "Cannot be predicted",
+   "Negative",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "For an ideal gas ΔH = 0 at constant T, and ΔS > 0, so ΔG = −TΔS < 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "40167f95-320f-4b12-894e-fcdbbcf3bea7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "If Q > K for a reaction at constant T and P, the reaction:",
+  "formula": "ΔG = RT ln(Q/K)",
+  "options": [
+   "Has ΔG° = 0",
+   "Proceeds forward, ΔG < 0",
+   "Proceeds backward, ΔG > 0",
+   "Is at equilibrium"
+  ],
+  "answer": 2,
+  "explain": "Q > K gives ln(Q/K) > 0, so ΔG > 0 and the reaction shifts backward.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "867076ec-29c8-4ad8-8e63-b1085fcb8a0c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "In writing Q or K for a heterogeneous reaction, pure solids and pure liquids:",
+  "formula": "",
+  "options": [
+   "Are replaced by their molar masses",
+   "Appear with power zero only",
+   "Appear with power equal to coefficient",
+   "Are omitted (activity = 1)"
+  ],
+  "answer": 3,
+  "explain": "The activity of a pure solid or liquid is 1, so it does not appear in Q or K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d95a389a-6da2-4893-9e4d-3f36b6a8df9b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "In the plot of G of the reaction mixture vs extent of reaction, equilibrium lies at:",
+  "formula": "(∂G/∂ξ)_T,P = ΔG",
+  "options": [
+   "The maximum of G",
+   "The point where ΔG° = 0",
+   "The minimum of G",
+   "The starting point"
+  ],
+  "answer": 2,
+  "explain": "The slope of the G–ξ curve is ΔG. At equilibrium the slope is zero, which is the minimum of G.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3909f7a7-74bc-4f7b-a118-dd062eacd982",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "For which reaction is ΔH < ΔU at the same temperature?",
+  "formula": "ΔH − ΔU = Δn_gRT",
+  "options": [
+   "2SO₂(g) + O₂(g) → 2SO₃(g)",
+   "CaCO₃(s) → CaO(s) + CO₂(g)",
+   "PCl₅(g) → PCl₃(g) + Cl₂(g)",
+   "H₂(g) + I₂(g) → 2HI(g)"
+  ],
+  "answer": 0,
+  "explain": "ΔH < ΔU needs Δn_g < 0; for 2SO₂ + O₂ → 2SO₃, Δn_g = −1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02c767eb-d964-4b48-8f8c-bf8108c24aab",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Standard reaction enthalpy from enthalpies of formation is given by:",
+  "formula": "ΔrH° = Σν ΔfH°(products) − Σν ΔfH°(reactants)",
+  "options": [
+   "Σ ΔfH°(products) − Σ ΔfH°(reactants), ignoring ν",
+   "Σ ΔfH°(reactants) − Σ ΔfH°(products)",
+   "Σν ΔfH°(products) − Σν ΔfH°(reactants)",
+   "Σ ΔfH°(products) + Σ ΔfH°(reactants)"
+  ],
+  "answer": 2,
+  "explain": "Products minus reactants, with each ΔfH° multiplied by its stoichiometric coefficient ν.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b4216f3-029b-4887-936c-1f42ef5930f7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "For ΔcH° of a hydrocarbon, which products are specified for complete combustion?",
+  "formula": "",
+  "options": [
+   "CO₂(g) and H₂(g)",
+   "CO(g) and H₂O(l)",
+   "CO₂(g) and H₂O(l)",
+   "CO₂(g) and H₂O(g)"
+  ],
+  "answer": 2,
+  "explain": "Standard combustion gives CO₂(g) and H₂O(l) as products, with the other substances in their standard states.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c919dfa3-f1e9-4cae-90a5-3d7332f8a74f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "Which of the following is an intensive property of an electrochemical cell?",
+  "formula": "",
+  "options": [
+   "ΔG of the cell reaction",
+   "Charge passed (nF)",
+   "Work obtained",
+   "E_cell"
+  ],
+  "answer": 3,
+  "explain": "E_cell does not depend on the amount of reactants. ΔG = −nFE is extensive because n scales with the amount.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "39a03169-9482-4653-866f-187b118ed3db",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "How many independent variables fix the state of a fixed amount of a pure ideal gas?",
+  "formula": "PV = nRT",
+  "options": [
+   "Three",
+   "Two",
+   "Four",
+   "One"
+  ],
+  "answer": 1,
+  "explain": "For fixed n, the equation of state links P, V, T, so any two of them fix the state.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4a96b5c-ded1-42ec-ae81-3715bc331bee",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Intensive/extensive props & state functions",
+  "prompt": "Which one of the following is an intensive property of a mixture?",
+  "formula": "",
+  "options": [
+   "Enthalpy",
+   "Mole fraction",
+   "Volume",
+   "Entropy"
+  ],
+  "answer": 1,
+  "explain": "Mole fraction is a ratio of two extensive quantities (moles), so it is intensive and independent of system size.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dfd7e3b7-7b3a-45c8-aed5-4b57aac1df70",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "An ideal gas expands into vacuum in a Joule-type experiment. Its temperature change is:",
+  "formula": "",
+  "options": [
+   "Increase",
+   "Decrease",
+   "Depends on the volume ratio",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "q = 0 and w = 0, so ΔU = 0. U depends only on T for an ideal gas, so ΔT = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d578e7cf-e6a6-41e2-a6c1-05231a5f5817",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "Ideal gas is heated at constant P. For a monoatomic gas, the fraction of heat q converted into work is:",
+  "formula": "|w|/q = R/C_p",
+  "options": [
+   "3/5",
+   "1/3",
+   "2/3",
+   "2/5"
+  ],
+  "answer": 3,
+  "explain": "q = nC_pΔT = (5/2)nRΔT and |w| = nRΔT, so |w|/q = 2/5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7393cb92-0366-42cb-873d-de94ca60dbe5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "First law: q, w, ΔU sign conventions",
+  "prompt": "1 mol ideal gas is heated by 1 K at constant pressure. Magnitude of work done by the gas is:",
+  "formula": "w = –PΔV = –nRΔT",
+  "options": [
+   "R",
+   "C_v",
+   "C_p",
+   "RT"
+  ],
+  "answer": 0,
+  "explain": "At constant P, PΔV = nRΔT, so for n = 1 and ΔT = 1 K the work done by the gas is R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e5d6781-43fa-4ff5-8b46-af2b6ce14ce1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "Kirchhoff's equation: (∂ΔH/∂T) at constant P for a reaction equals:",
+  "formula": "ΔC_p = ΣC_p(products) − ΣC_p(reactants)",
+  "options": [
+   "ΔS",
+   "ΔH/T",
+   "ΔC_p",
+   "ΔC_v"
+  ],
+  "answer": 2,
+  "explain": "Differentiating ΔH = H(products) − H(reactants) with respect to T at constant P gives ΔC_p.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3d83ae65-ea9c-4649-a588-09accf73ad4d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy, ΔH = ΔU + ΔnRT",
+  "prompt": "Monoatomic ideal gas heated at constant P: fraction of heat going into ΔU is",
+  "formula": "ΔU/q_p = C_v/C_p = 1/γ",
+  "options": [
+   "1/2",
+   "5/3",
+   "3/5",
+   "2/5"
+  ],
+  "answer": 2,
+  "explain": "ΔU/ΔH = C_v/C_p = (3R/2)/(5R/2) = 3/5; the remaining 2/5 is expansion work.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1aad5cfd-c4b4-4983-bc10-82bdeb15cc17",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "Compared with graphite, the standard enthalpy of combustion of diamond is:",
+  "formula": "",
+  "options": [
+   "Less negative",
+   "More negative",
+   "Positive",
+   "Exactly equal"
+  ],
+  "answer": 1,
+  "explain": "Diamond lies ~1.9 kJ/mol higher in enthalpy, so it releases slightly more heat (−395.4 vs −393.5 kJ/mol).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b735605b-9ae3-46eb-bad6-02f7c0dab08b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Enthalpy of formation & combustion",
+  "prompt": "A large negative ΔfH° of a compound indicates it is generally:",
+  "formula": "",
+  "options": [
+   "Always explosive",
+   "Unstable relative to its elements",
+   "Formed endothermically",
+   "Stable relative to its elements"
+  ],
+  "answer": 3,
+  "explain": "Strongly exothermic formation means energetically stable relative to the constituent elements.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "04117b24-c51d-4ed9-bba0-a6296a80b58e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Phase transition/sublimation enthalpies",
+  "prompt": "As the temperature of a liquid rises towards its critical temperature, its ΔH_vap:",
+  "formula": "",
+  "options": [
+   "Becomes negative above T_b",
+   "Decreases, reaching zero at T_c",
+   "Stays constant",
+   "Increases steadily"
+  ],
+  "answer": 1,
+  "explain": "Liquid and vapour become indistinguishable at the critical point, so ΔH_vap falls to zero there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eb344243-bd3c-43e8-b4a3-ad4b835aeb26",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Phase transition/sublimation enthalpies",
+  "prompt": "Which liquid has ΔS_vap at its normal boiling point well above Trouton's value (~85 J K⁻¹ mol⁻¹)?",
+  "formula": "",
+  "options": [
+   "Benzene",
+   "n-Hexane",
+   "Carbon tetrachloride",
+   "Water"
+  ],
+  "answer": 3,
+  "explain": "H-bonding in liquid water gives more order, so ΔS_vap ≈ 109 J K⁻¹ mol⁻¹ (40.7 kJ/373 K); Trouton's rule fails.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a21ce959-5106-4c40-a140-5a466aa74538",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Phase transition/sublimation enthalpies",
+  "prompt": "Approximate molar ΔH_vap of water at 373 K and 1 atm is:",
+  "formula": "H₂O(l) → H₂O(g)",
+  "options": [
+   "22.6 kJ mol⁻¹",
+   "81.4 kJ mol⁻¹",
+   "6.0 kJ mol⁻¹",
+   "40.7 kJ mol⁻¹"
+  ],
+  "answer": 3,
+  "explain": "Standard value is 40.7 kJ/mol at 373 K; 6.0 kJ/mol is ΔH_fusion of ice.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a8448b4d-338d-44e8-b2e5-c94478dec83b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Heating n mol ideal gas reversibly at constant V from T₁ to T₂: ΔS is:",
+  "formula": "ΔS = nC_v ln(T₂/T₁)",
+  "options": [
+   "nR ln(T₂/T₁)",
+   "nC_v (T₂ − T₁)/T₁",
+   "nC_p ln(T₂/T₁)",
+   "nC_v ln(T₂/T₁)"
+  ],
+  "answer": 3,
+  "explain": "dS = nC_v dT/T at constant volume, integrated gives nC_v ln(T₂/T₁).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "409d2a82-3776-4321-922a-bea3ccb968bb",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "ΔH = +40 kJ/mol, ΔS = +100 J K⁻¹ mol⁻¹. Reaction becomes spontaneous above:",
+  "formula": "T = ΔH/ΔS",
+  "options": [
+   "4000 K",
+   "0.4 K",
+   "40 K",
+   "400 K"
+  ],
+  "answer": 3,
+  "explain": "Convert kJ to J: T > 40000/100 = 400 K, where ΔG = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4aad86e2-7b60-463b-92ea-37ddd898cbc3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Thermodynamic definition: the entropy change dS of a system is given by",
+  "formula": "dS = δq_rev / T",
+  "options": [
+   "δq_rev / T",
+   "δq_irr / T",
+   "δw_rev / T",
+   "dU / T"
+  ],
+  "answer": 0,
+  "explain": "Entropy is defined through the heat absorbed reversibly divided by T; q_irr/T only gives dS ≥ q/T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5597ef58-b8ad-453a-8fb7-5bc0ced485bd",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Kelvin–Planck statement of the second law: a cyclic engine cannot:",
+  "formula": "",
+  "options": [
+   "Have efficiency below 100%",
+   "Transfer heat from hot to cold body",
+   "Convert heat from one reservoir wholly into work",
+   "Work between two temperatures"
+  ],
+  "answer": 2,
+  "explain": "No cyclic device can take heat from a single reservoir and convert it completely into work.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81bbb883-e651-49fd-9241-584299506846",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Ideal gas expands irreversibly and adiabatically (q = 0). ΔS of the system is:",
+  "formula": "dS ≥ δq/T",
+  "options": [
+   "Zero, since q = 0",
+   "Less than zero",
+   "Equal to −w/T",
+   "Greater than zero"
+  ],
+  "answer": 3,
+  "explain": "S is a state function; irreversibility generates entropy, so ΔS_sys > 0 even though q = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7844d7a2-4725-4dd9-b613-cc2145516289",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Entropy, second law & spontaneity",
+  "prompt": "Clausius statement of the second law: heat cannot spontaneously flow from a colder body to a hotter body",
+  "formula": "",
+  "options": [
+   "Without any temperature difference",
+   "Unless the entropy of the surroundings falls",
+   "Unless the process is isothermal",
+   "Without external work being done"
+  ],
+  "answer": 3,
+  "explain": "Clausius: cold-to-hot flow needs external work (as in a refrigerator); it is equivalent to Kelvin–Planck.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e2c043c-cc07-49d5-950e-043daf174e68",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "ΔG for reversible isothermal change of n mol ideal gas from P₁ to P₂ is:",
+  "formula": "dG = V dP at constant T",
+  "options": [
+   "nRT ln(P₂/P₁)",
+   "nR ln(P₂/P₁)",
+   "nRT ln(P₁/P₂)",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "ΔG = ∫V dP = nRT ln(P₂/P₁) at constant T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4a9ba81-ac93-4405-b7fb-144c9207c355",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "Gibbs energy ΔG = ΔH − TΔS criteria",
+  "prompt": "Dissolution of NH₄NO₃ in water is endothermic yet spontaneous because:",
+  "formula": "",
+  "options": [
+   "ΔG° equals zero",
+   "ΔS is negative",
+   "TΔS exceeds ΔH, so ΔG < 0",
+   "ΔH is negative"
+  ],
+  "answer": 2,
+  "explain": "The process is entropy-driven: ΔS is positive and large enough that TΔS > ΔH.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6dcc1220-ded2-47f5-bb88-b3007ba6be88",
+  "subject": "Chemistry",
+  "chapter": "Chemical Thermodynamics",
+  "topic": "ΔG° = −RT lnK & ΔG = ΔG° + RT lnQ",
+  "prompt": "Total pressure of a gaseous equilibrium is raised at constant T. The value of K:",
+  "formula": "",
+  "options": [
+   "Decreases if Δn_g > 0",
+   "Remains unchanged",
+   "Changes by a factor (ΔP)^Δn",
+   "Increases if Δn_g < 0"
+  ],
+  "answer": 1,
+  "explain": "K depends only on T through ΔG°. Pressure can shift the equilibrium position but not K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

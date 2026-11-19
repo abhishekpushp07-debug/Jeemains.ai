@@ -1,0 +1,3147 @@
+[
+ {
+  "prompt": "The addition principle (rule of sum) applies when the events are:",
+  "formula": "",
+  "options": [
+   "Independent",
+   "Mutually exclusive",
+   "Performed in succession",
+   "Equally likely"
+  ],
+  "answer": 1,
+  "explain": "If tasks cannot occur together, ways add: m + n; successive tasks multiply.",
+  "kind": "concept",
+  "id": "7447f277-ed0f-44b4-85ba-5c1b2d323655",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of functions from a set of m elements to a set of n elements?",
+  "formula": "nᵐ",
+  "options": [
+   "mⁿ",
+   "m·n",
+   "nᵐ",
+   "ⁿCₘ"
+  ],
+  "answer": 2,
+  "explain": "Each of the m elements has n choices of image, so nᵐ.",
+  "kind": "formula",
+  "id": "bc5f45d7-4c38-4621-af35-ed1a65955997",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of one-one functions from an m-element set to an n-element set (m ≤ n)?",
+  "formula": "n!/(n−m)!",
+  "options": [
+   "ⁿCₘ",
+   "nᵐ",
+   "m!",
+   "n!/(n−m)!"
+  ],
+  "answer": 3,
+  "explain": "Images chosen successively: n(n−1)…(n−m+1) = ⁿPₘ.",
+  "kind": "formula",
+  "id": "12677e5b-e9c2-4550-a1f3-c84ac867d14e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of n-digit natural numbers (repetition allowed)?",
+  "formula": "9 × 10ⁿ⁻¹",
+  "options": [
+   "10ⁿ",
+   "9ⁿ",
+   "9 × 10ⁿ⁻¹",
+   "9 × 9ⁿ⁻¹"
+  ],
+  "answer": 2,
+  "explain": "First digit has 9 choices (not 0); each other digit has 10.",
+  "kind": "formula",
+  "id": "38611bef-89aa-45e3-981c-9dd8c26d2d9f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of 3-digit numbers with all digits distinct?",
+  "formula": "9 × 9 × 8",
+  "options": [
+   "720",
+   "648",
+   "504",
+   "729"
+  ],
+  "answer": 1,
+  "explain": "Hundreds: 9 (non-zero); tens: 9 (0 allowed, not repeat); units: 8 → 648.",
+  "kind": "result",
+  "id": "9d6d1c4e-9d21-4c70-a183-857503212b36",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of positive divisors of N = p^a · q^b · r^c (p, q, r distinct primes)?",
+  "formula": "(a+1)(b+1)(c+1)",
+  "options": [
+   "abc",
+   "(a+1)(b+1)(c+1)",
+   "a+b+c+3",
+   "(a+1)(b+1)(c+1) − 1"
+  ],
+  "answer": 1,
+  "explain": "Each prime's exponent can be 0 to its power, giving (a+1) choices, etc.",
+  "kind": "formula",
+  "id": "64d7c9a6-e4f9-46c0-b943-e1c85d35e576",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of odd positive divisors of 360?",
+  "formula": "360 = 2³·3²·5",
+  "options": [
+   "12",
+   "8",
+   "6",
+   "9"
+  ],
+  "answer": 2,
+  "explain": "Exclude the prime 2: (2+1)(1+1) = 6.",
+  "kind": "result",
+  "id": "d53be3a7-24ad-4486-87de-c2f45fea47e7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of 3-digit even numbers (repetition allowed)?",
+  "formula": "9 × 10 × 5",
+  "options": [
+   "450",
+   "500",
+   "405",
+   "360"
+  ],
+  "answer": 0,
+  "explain": "Hundreds 9, tens 10, units 5 even digits → 450.",
+  "kind": "result",
+  "id": "e63d9967-11b2-46e3-a9ae-8468f96746fb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "A natural number has an odd number of divisors if and only if it is:",
+  "formula": "",
+  "options": [
+   "A prime",
+   "A perfect square",
+   "A power of 2",
+   "An odd number"
+  ],
+  "answer": 1,
+  "explain": "All exponents are even exactly for perfect squares, so each (a+1) is odd.",
+  "kind": "concept",
+  "id": "b7124a8a-36bc-4211-97eb-d4dcf9b28201",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of ways to select at least one item from p identical, q identical and r distinct objects?",
+  "formula": "(p+1)(q+1)2ʳ − 1",
+  "options": [
+   "(p+1)(q+1)2ʳ",
+   "pq·2ʳ − 1",
+   "(p+1)(q+1)2ʳ − 1",
+   "(p+q+r)! − 1"
+  ],
+  "answer": 2,
+  "explain": "Identical kinds give p+1, q+1 choices; distinct ones 2ʳ; subtract the empty selection.",
+  "kind": "formula",
+  "id": "92e14baf-1f34-47b7-8388-4a38e18d1316",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of relations from a set A with n elements to itself?",
+  "formula": "2^(n²)",
+  "options": [
+   "n²",
+   "2ⁿ",
+   "2^(n²)",
+   "nⁿ"
+  ],
+  "answer": 2,
+  "explain": "A relation is any subset of A×A, which has n² elements, so 2^(n²).",
+  "kind": "formula",
+  "id": "bd07fecf-e96b-4cf7-9ad3-08852a8959c1",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of 5-digit palindromes?",
+  "formula": "9 × 10 × 10",
+  "options": [
+   "900",
+   "450",
+   "810",
+   "9000"
+  ],
+  "answer": 0,
+  "explain": "First 3 digits fix the number: 9 × 10 × 10 = 900.",
+  "kind": "result",
+  "id": "8d829b0c-bb38-41e9-baec-0bf262c3f4f7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Unit digit of 1! + 2! + 3! + … + 50! is?",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "7",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "From 5! onward every term ends in 0; 1+2+6+24 = 33, so the unit digit is 3.",
+  "kind": "result",
+  "id": "d52b1552-5120-47b8-a5b1-d49e38da4067",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "Number of non-negative integers n satisfying n! = 1 is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "0",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "0! = 1 and 1! = 1, so n = 0 and n = 1 both work.",
+  "kind": "exception",
+  "id": "f91bb2d3-5cc0-4c05-81d8-cfcdc4f11f18",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "Which identity is FALSE in general (n a positive integer)?",
+  "formula": "",
+  "options": [
+   "(n+1)! = (n+1)·n!",
+   "(2n)! = 2·n!",
+   "n! = n·(n−1)!",
+   "(n+2)! = (n+2)(n+1)·n!"
+  ],
+  "answer": 1,
+  "explain": "Factorial is not multiplicative over 2n; e.g. n=2: 4! = 24 ≠ 2·2! = 4.",
+  "kind": "exception",
+  "id": "209d0f8a-dd39-4dab-884e-516507ff292a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "Number of trailing zeros in 100! is?",
+  "formula": "Zeros = exponent of 5 = ⌊100/5⌋ + ⌊100/25⌋",
+  "options": [
+   "20",
+   "24",
+   "25",
+   "19"
+  ],
+  "answer": 1,
+  "explain": "Exponent of 5: 20 + 4 = 24, and 2s are more plentiful, so 24 zeros.",
+  "kind": "result",
+  "id": "985e4f7b-346c-48d4-adad-0a2fa7337eca",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "The value of 0! is defined as 1. Which relation justifies this?",
+  "formula": "n! = n·(n−1)!",
+  "options": [
+   "1! = 1·0! gives 0! = 1",
+   "Also (−1)! = 1",
+   "0! = 0 since no objects",
+   "1!=0!+1"
+  ],
+  "answer": 0,
+  "explain": "Setting n = 1 in n! = n·(n−1)! gives 1 = 1·0!, so 0! = 1, and ⁿCₙ = 1 also requires it.",
+  "kind": "concept",
+  "id": "b2fc2a72-a74f-48e8-b621-1882cfce7058",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "Simplify: n! − (n−1)! for n ≥ 1, in terms of (n−1)!.",
+  "formula": "n! = n·(n−1)!",
+  "options": [
+   "(n−1)·(n−1)!",
+   "(n−1)!",
+   "n·(n−1)!",
+   "(n−2)·(n−1)!"
+  ],
+  "answer": 0,
+  "explain": "n! − (n−1)! = (n−1)![n − 1] = (n−1)·(n−1)!.",
+  "kind": "result",
+  "id": "10cef48c-4599-483c-a39a-efdb3f7faacc",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "ⁿPᵣ in factorial form (0 ≤ r ≤ n)?",
+  "formula": "ⁿPᵣ = n!/(n−r)!",
+  "options": [
+   "n!/(n−r)!",
+   "n!/r!",
+   "n!/[r!(n−r)!]",
+   "(n−r)!/n!"
+  ],
+  "answer": 0,
+  "explain": "ⁿPᵣ = n(n−1)…(n−r+1) = n!/(n−r)!; dividing also by r! would give ⁿCᵣ.",
+  "kind": "formula",
+  "id": "257daf5b-997f-4608-80d6-c33ea72433a9",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "ⁿPᵣ = ⁿ⁻¹Pᵣ + ?",
+  "formula": "",
+  "options": [
+   "ⁿ⁻¹Pᵣ₋₁",
+   "n·ⁿ⁻¹Pᵣ₋₁",
+   "r·ⁿ⁻¹Pᵣ",
+   "r·ⁿ⁻¹Pᵣ₋₁"
+  ],
+  "answer": 3,
+  "explain": "A fixed object is either excluded (ⁿ⁻¹Pᵣ) or placed in one of r positions (r·ⁿ⁻¹Pᵣ₋₁).",
+  "kind": "formula",
+  "id": "213414ec-3505-4b94-9649-349e5d760317",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Arrangements of r items from n distinct items when repetition is allowed?",
+  "formula": "",
+  "options": [
+   "ⁿPᵣ",
+   "rⁿ",
+   "nʳ",
+   "ⁿCᵣ"
+  ],
+  "answer": 2,
+  "explain": "Each of the r places can be filled in n ways, giving nʳ.",
+  "kind": "result",
+  "id": "fba758d3-e1d3-494f-aaf2-601bc8816a4c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Number of one-one functions from a set of m elements into a set of n elements (m ≤ n)?",
+  "formula": "",
+  "options": [
+   "ⁿPₘ",
+   "ⁿCₘ",
+   "nᵐ",
+   "mⁿ"
+  ],
+  "answer": 0,
+  "explain": "Images are distinct and ordered, so choose n, n−1, … for the m elements: ⁿPₘ.",
+  "kind": "result",
+  "id": "79fa12de-f617-484e-a1f4-d98c0313c393",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "ⁿPᵣ counts selections of r from n distinct objects with which condition?",
+  "formula": "",
+  "options": [
+   "Order ignored, no repetition",
+   "Order matters, no repetition",
+   "Order matters, repetition allowed",
+   "Order ignored, repetition allowed"
+  ],
+  "answer": 1,
+  "explain": "ⁿPᵣ counts ordered arrangements of r distinct objects chosen from n without repetition.",
+  "kind": "concept",
+  "id": "4551b277-4390-4f7d-b333-8e3b6660c70b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "ⁿPₙ₋₁ equals which of the following?",
+  "formula": "",
+  "options": [
+   "n!",
+   "(n−1)!",
+   "n!/2",
+   "n·(n−1)!/2"
+  ],
+  "answer": 0,
+  "explain": "ⁿPₙ₋₁ = n!/1! = n! = ⁿPₙ.",
+  "kind": "result",
+  "id": "c6943962-8362-4e74-a60e-b92010b1259f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "ⁿPᵣ = n·(n−1)·…· up to how many factors?",
+  "formula": "ⁿPᵣ = n(n−1)(n−2)…",
+  "options": [
+   "r factors",
+   "r−1 factors",
+   "n−r factors",
+   "n−r+1 factors"
+  ],
+  "answer": 0,
+  "explain": "Last factor is (n−r+1); total r factors.",
+  "kind": "formula",
+  "id": "6645c791-1e6c-4c65-b1a6-177b9a175e03",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "For natural numbers with r > n, the value of ⁿPᵣ is taken as?",
+  "formula": "",
+  "options": [
+   "1",
+   "n!",
+   "0",
+   "Not defined"
+  ],
+  "answer": 2,
+  "explain": "You cannot arrange more objects than are available, so there are 0 arrangements.",
+  "kind": "concept",
+  "id": "9fd5b880-6de4-44c1-bab1-a9f08d17be8c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Number of distinct arrangements of the letters of MISSISSIPPI?",
+  "formula": "n!/(p!q!r!)",
+  "options": [
+   "11!/(4!·4!·2!)",
+   "11!/(4!·2!)",
+   "11!/(4!·4!)",
+   "11!/(4!·4!·2!·2!)"
+  ],
+  "answer": 0,
+  "explain": "I×4, S×4, P×2 are repeated, so divide 11! by 4!·4!·2!.",
+  "kind": "formula",
+  "id": "c6cfca57-88a3-4967-bbf1-facc8f726d19",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of functions from a set of m elements to a set of n elements?",
+  "formula": "nᵐ",
+  "options": [
+   "nᵐ",
+   "mⁿ",
+   "n!/(n−m)!",
+   "ⁿCₘ"
+  ],
+  "answer": 0,
+  "explain": "Each of the m elements has n independent choices of image: nᵐ.",
+  "kind": "formula",
+  "id": "f549e216-cfde-4503-a621-b63ddf8a2f01",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "In how many ways can 3 different letters be posted in 4 letter boxes?",
+  "formula": "",
+  "options": [
+   "64",
+   "81",
+   "12",
+   "24"
+  ],
+  "answer": 0,
+  "explain": "Each letter has 4 choices of box: 4³ = 64 (not 3⁴).",
+  "kind": "concept",
+  "id": "a801ea42-59f6-4cc5-b97c-e7cb58a3c254",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of 3-digit numbers (digits may repeat)?",
+  "formula": "9 × 10 × 10",
+  "options": [
+   "900",
+   "1000",
+   "729",
+   "810"
+  ],
+  "answer": 0,
+  "explain": "The hundreds digit cannot be 0, giving 9·10·10 = 900.",
+  "kind": "result",
+  "id": "0c1e26aa-c44d-40b1-9f1d-d6029f3c3d26",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of distinct arrangements of the letters of LEVEL?",
+  "formula": "5!/(2!·2!)",
+  "options": [
+   "30",
+   "60",
+   "120",
+   "15"
+  ],
+  "answer": 0,
+  "explain": "L and E each occur twice, so 5!/(2!2!) = 30.",
+  "kind": "result",
+  "id": "eacdac18-20ca-449f-9d68-8421d40da93d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of distinct arrangements of the letters of BANANA?",
+  "formula": "6!/(3!·2!)",
+  "options": [
+   "60",
+   "120",
+   "30",
+   "20"
+  ],
+  "answer": 0,
+  "explain": "A×3 and N×2 are repeated, so 720/12 = 60.",
+  "kind": "result",
+  "id": "54194415-7103-4f8e-9410-f3020a815400",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of distinct arrangements of the letters of SUCCESS?",
+  "formula": "7!/(3!·2!)",
+  "options": [
+   "420",
+   "840",
+   "210",
+   "1260"
+  ],
+  "answer": 0,
+  "explain": "S×3 and C×2 are repeated, so 5040/12 = 420.",
+  "kind": "result",
+  "id": "e62ef60c-34ba-4710-97ae-f77d77c555c5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of distinct arrangements of the letters of SCHOOL?",
+  "formula": "6!/2!",
+  "options": [
+   "360",
+   "720",
+   "180",
+   "120"
+  ],
+  "answer": 0,
+  "explain": "Only O repeats (twice), so 720/2 = 360.",
+  "kind": "result",
+  "id": "466900d9-a01d-4a05-8644-2f9e5581fcbb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of arrangements of AAABBB in a row?",
+  "formula": "6!/(3!·3!) = ⁶C₃",
+  "options": [
+   "20",
+   "36",
+   "40",
+   "120"
+  ],
+  "answer": 0,
+  "explain": "6!/(3!3!) = 20, equal to choosing 3 places for the A's.",
+  "kind": "result",
+  "id": "c221c271-b762-40b7-af19-87e9be2540d7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Binary strings of length 5 with exactly two 1s?",
+  "formula": "5!/(2!·3!)",
+  "options": [
+   "10",
+   "20",
+   "32",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "Arrange 1,1,0,0,0: 5!/(2!3!) = 10.",
+  "kind": "result",
+  "id": "278b1147-2eb7-491e-8855-03637ca7ef97",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Shortest lattice paths from (0,0) to (4,3) using unit moves right/up?",
+  "formula": "(m+n)!/(m!·n!)",
+  "options": [
+   "35",
+   "12",
+   "28",
+   "70"
+  ],
+  "answer": 0,
+  "explain": "Arrange 4 R's and 3 U's: 7!/(4!3!) = 35.",
+  "kind": "formula",
+  "id": "5794b3f5-6750-49d4-98c3-d2af14d4e34e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of 5-digit numbers divisible by 5 (digits may repeat)?",
+  "formula": "9·10·10·10·2",
+  "options": [
+   "18000",
+   "9000",
+   "20000",
+   "16200"
+  ],
+  "answer": 0,
+  "explain": "Last digit is 0 or 5 (2 ways); first digit has 9 choices: 18000.",
+  "kind": "result",
+  "id": "5c894a73-8bef-4593-9903-42f24e6d8054",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of 3-digit numbers having at least one repeated digit?",
+  "formula": "900 − 9·9·8",
+  "options": [
+   "252",
+   "648",
+   "261",
+   "900"
+  ],
+  "answer": 0,
+  "explain": "Distinct-digit numbers are 9·9·8 = 648, so 900 − 648 = 252.",
+  "kind": "result",
+  "id": "77547a14-7f07-451b-8da2-d8a0d3593f60",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Number of 4-digit even numbers if digits may repeat?",
+  "formula": "9 × 10 × 10 × 5",
+  "options": [
+   "4500",
+   "5000",
+   "4536",
+   "2520"
+  ],
+  "answer": 0,
+  "explain": "First digit 9 choices (not 0), middle two 10 each, last digit 5 even choices: 9·10·10·5 = 4500.",
+  "kind": "result",
+  "id": "7941f6ec-c0af-4352-b178-e5ae0121568d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "Distinct arrangements of 4 identical A's and 3 identical B's in a row?",
+  "formula": "7!/(4!·3!) = ⁷C₃",
+  "options": [
+   "35",
+   "210",
+   "5040",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "Choose the 3 positions for B: ⁷C₃ = 35.",
+  "kind": "result",
+  "id": "bd81ebf6-924c-447e-9b5d-71873da4239b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'MATHEMATICS'?",
+  "formula": "",
+  "options": [
+   "11!/(2!·2!·2!)",
+   "11!/2!",
+   "11!/(2!·3!)",
+   "11!"
+  ],
+  "answer": 0,
+  "explain": "M, A, T each occur twice; the other 5 letters are distinct.",
+  "kind": "fact",
+  "id": "9ca417ae-27bc-4054-b8eb-565ade3974be",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'INDEPENDENCE'?",
+  "formula": "",
+  "options": [
+   "12!/(3!·2!·4!)",
+   "12!/(3!·4!)",
+   "12!/(2!·2!·4!)",
+   "12!/(3!·2!·2!)"
+  ],
+  "answer": 0,
+  "explain": "N×3, D×2, E×4; I, P, C are single.",
+  "kind": "fact",
+  "id": "e8a8a2c1-b211-4445-b5a8-59e9a1e322ef",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'ALLAHABAD'?",
+  "formula": "",
+  "options": [
+   "9!/(4!·2!)",
+   "9!/(4!·3!)",
+   "9!/4!",
+   "9!/(3!·2!)"
+  ],
+  "answer": 0,
+  "explain": "A×4, L×2; H, B, D are single.",
+  "kind": "fact",
+  "id": "81306b4a-8ae0-4b03-91b0-393decf91948",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of distinct 6-digit numbers using all the digits 1,1,2,2,3,3?",
+  "formula": "6!/(2!·2!·2!)",
+  "options": [
+   "90",
+   "120",
+   "720",
+   "45"
+  ],
+  "answer": 0,
+  "explain": "720/8 = 90; no zero, so no leading-digit restriction.",
+  "kind": "result",
+  "id": "cd5c0917-233b-4dd3-91d8-ac4b8ab0fd43",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'SUCCESS'?",
+  "formula": "",
+  "options": [
+   "420",
+   "840",
+   "1260",
+   "5040"
+  ],
+  "answer": 0,
+  "explain": "S×3, C×2, so 7!/(3!·2!) = 420.",
+  "kind": "fact",
+  "id": "531a89e5-8437-4878-b252-e65b8e9b343b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of distinct arrangements of the letters of 'BOOK'?",
+  "formula": "4!/2!",
+  "options": [
+   "12",
+   "24",
+   "6",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "Only O repeats: 4!/2! = 12.",
+  "kind": "fact",
+  "id": "8377f018-c07d-4404-9779-fec07b940d97",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of all letters of 'EQUATION'?",
+  "formula": "",
+  "options": [
+   "8!",
+   "8!/2!",
+   "8!/3!",
+   "7!"
+  ],
+  "answer": 0,
+  "explain": "All 8 letters are distinct, so no division is needed.",
+  "kind": "exception",
+  "id": "092b5691-2f98-4a37-97ec-040ee34f5700",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of binary strings of length 6 with exactly two 1's?",
+  "formula": "6!/(2!·4!)",
+  "options": [
+   "15",
+   "12",
+   "30",
+   "36"
+  ],
+  "answer": 0,
+  "explain": "Choose positions of the two 1's: ⁶C₂ = 15.",
+  "kind": "result",
+  "id": "9b875032-e145-43b8-92d6-fe5cb43713ed",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of 'MISSISSIPPI' in which all four S's are together?",
+  "formula": "",
+  "options": [
+   "8!/(4!·2!)",
+   "8!/(4!·4!·2!)",
+   "11!/(4!·2!)",
+   "8!/(4!·4!)"
+  ],
+  "answer": 0,
+  "explain": "Treat SSSS as one block: 8 objects with I×4 and P×2 repeated.",
+  "kind": "result",
+  "id": "fd159813-fc22-4fb4-aec8-68cd611bd64b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'PERMUTATION'?",
+  "formula": "",
+  "options": [
+   "11!/2!",
+   "11!",
+   "10!/2!",
+   "11!/(2!·2!)"
+  ],
+  "answer": 0,
+  "explain": "11 letters with only T repeated twice.",
+  "kind": "fact",
+  "id": "0e2f8944-afd4-4a6f-8bc8-7dee32869f26",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of 'AAABBBCCC'?",
+  "formula": "",
+  "options": [
+   "9!/(3!)³",
+   "9!/3!",
+   "9!/27",
+   "(3!)³"
+  ],
+  "answer": 0,
+  "explain": "Three groups of 3 identical letters: 9!/(3!·3!·3!) = 1680.",
+  "kind": "result",
+  "id": "0fd32cea-2e5d-49d7-b489-b67780079002",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of 'ALGEBRA' with the two A's together?",
+  "formula": "",
+  "options": [
+   "6!",
+   "7!/2!",
+   "6!/2!",
+   "7!"
+  ],
+  "answer": 0,
+  "explain": "Treat AA as one block; the 6 objects AA, L, G, E, B, R are distinct.",
+  "kind": "result",
+  "id": "7aa78a4d-ba13-4d09-9705-ed97209cac61",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'LEVEL'?",
+  "formula": "5!/(2!·2!)",
+  "options": [
+   "30",
+   "60",
+   "120",
+   "15"
+  ],
+  "answer": 0,
+  "explain": "L×2 and E×2 repeat: 120/4 = 30.",
+  "kind": "fact",
+  "id": "41b817e6-5b3f-4d23-97e6-ec6790cb48a1",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Ways to arrange 3 identical red, 2 identical green and 1 blue flag in a row?",
+  "formula": "6!/(3!·2!)",
+  "options": [
+   "60",
+   "120",
+   "30",
+   "720"
+  ],
+  "answer": 0,
+  "explain": "720/(6·2) = 60.",
+  "kind": "result",
+  "id": "de682e9e-3999-4b01-a7cb-2998d2e007df",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'AABB' that begin with A?",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "4",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Fix A first; arrange A, B, B: 3!/2! = 3.",
+  "kind": "result",
+  "id": "1761cc89-2f68-46e5-8ae2-c23f3d537472",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "How many 4-digit numbers can be formed using all of the digits 0, 1, 1, 2 (leading digit non-zero)?",
+  "formula": "",
+  "options": [
+   "9",
+   "12",
+   "6",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Total 4!/2! = 12; with 0 first: 3!/2! = 3; so 12 − 3 = 9.",
+  "kind": "result",
+  "id": "20a85633-5639-492f-bc18-ae8e0607e3cc",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of the letters of 'AABB' in which the two A's are NOT adjacent?",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "4",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "Total 4!/(2!2!) = 6; A's together = 3!/2! = 3; so 6 − 3 = 3.",
+  "kind": "result",
+  "id": "d83cce5e-05bb-449e-91db-9c8cbd01865d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "n people at a round table; 2 specified persons never sit adjacent. Number of ways?",
+  "formula": "(n−1)! − 2(n−2)!",
+  "options": [
+   "(n−3)(n−2)!",
+   "(n−1)! − (n−2)!",
+   "2(n−2)!",
+   "(n−3)(n−1)!"
+  ],
+  "answer": 0,
+  "explain": "Total (n−1)! minus adjacent 2(n−2)! gives (n−2)!(n−3).",
+  "kind": "result",
+  "id": "c4ac0d31-63d9-4eb9-ab61-2fdda6f17c11",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "Circular arrangements of r objects chosen from n distinct objects (direction matters)?",
+  "formula": "ⁿPᵣ / r",
+  "options": [
+   "ⁿPᵣ / r",
+   "ⁿCᵣ / r",
+   "ⁿPᵣ / n",
+   "(r−1)!·ⁿPᵣ"
+  ],
+  "answer": 0,
+  "explain": "Each circular arrangement of r objects corresponds to r linear ones, so divide ⁿPᵣ by r.",
+  "kind": "formula",
+  "id": "2ec8d514-daa3-45d7-937b-87e67853880b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "n people at a round table; A must sit with B and C as his two neighbours. Ways?",
+  "formula": "2·(n−3)!",
+  "options": [
+   "2·(n−3)!",
+   "(n−3)!",
+   "2·(n−2)!",
+   "6·(n−3)!"
+  ],
+  "answer": 0,
+  "explain": "Block B-A-C (2 internal orders) plus n−3 others make n−2 units: (n−3)! circular ways.",
+  "kind": "result",
+  "id": "8824140b-4342-460d-93c2-8747d1e5aa86",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "Necklace of n distinct beads (n ≥ 3); 2 specified beads must be adjacent. Ways?",
+  "formula": "(n−2)!",
+  "options": [
+   "(n−2)!",
+   "(n−2)!/2",
+   "2·(n−2)!",
+   "(n−1)!/2"
+  ],
+  "answer": 0,
+  "explain": "Block gives 2·(n−2)!, and flipping halves it, so (n−2)!.",
+  "kind": "result",
+  "id": "00d1049e-cbcf-4532-901b-b1f0092aae72",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "n couples sit at a round table with every couple seated together. Number of ways?",
+  "formula": "2ⁿ·(n−1)!",
+  "options": [
+   "2ⁿ·(n−1)!",
+   "2ⁿ·n!",
+   "2·(n−1)!",
+   "n!·(n−1)!"
+  ],
+  "answer": 0,
+  "explain": "n couple-blocks in a circle give (n−1)!, and each couple can swap in 2 ways, giving 2ⁿ.",
+  "kind": "result",
+  "id": "f9a26b42-5357-4bf1-9be1-5f25c23865bd",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "Necklaces of r beads chosen from n distinct beads (r ≥ 3, flipping same)?",
+  "formula": "ⁿPᵣ / (2r)",
+  "options": [
+   "ⁿPᵣ / (2r)",
+   "ⁿPᵣ / 2",
+   "ⁿCᵣ / (2r)",
+   "ⁿPᵣ / (2n)"
+  ],
+  "answer": 0,
+  "explain": "Divide ⁿPᵣ by r for rotations and by 2 for flipping.",
+  "kind": "formula",
+  "id": "2a89df52-3598-4ada-8bc1-4bea5dc0d3f2",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "2n people seated n each at two different round tables (tables distinguishable). Ways?",
+  "formula": "²ⁿCₙ·((n−1)!)²",
+  "options": [
+   "(2n)!/n²",
+   "(2n)!/(2n²)",
+   "((n−1)!)²",
+   "(2n−1)!/n"
+  ],
+  "answer": 0,
+  "explain": "²ⁿCₙ·((n−1)!)² = (2n)!/(n!n!)·((n−1)!)² = (2n)!/n².",
+  "kind": "result",
+  "id": "51991901-bfca-4fa5-8410-6ffa3e385a60",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "Number of distinct necklaces using exactly 2 distinct beads?",
+  "formula": "",
+  "options": [
+   "1",
+   "1/2",
+   "2",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "(n−1)!/2 holds only for n ≥ 3; with 2 beads there is just 1 necklace.",
+  "kind": "exception",
+  "id": "f0423458-b167-4602-bae8-164204eb7c82",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Circular permutations and necklaces"
+ },
+ {
+  "prompt": "For a positive integer n, nC₀ + nC₂ + nC₄ + ... (even-indexed sum) equals?",
+  "formula": "",
+  "options": [
+   "2ⁿ⁻¹",
+   "2ⁿ⁻²",
+   "2ⁿ − 1",
+   "n·2ⁿ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Adding and subtracting (1+1)ⁿ and (1−1)ⁿ gives even sum = odd sum = 2ⁿ⁻¹.",
+  "kind": "result",
+  "id": "a7f86a36-8a25-4d9f-a15c-2acf2359dc6a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "ⁿPᵣ in terms of ⁿCᵣ is?",
+  "formula": "ⁿPᵣ = n!/(n−r)!",
+  "options": [
+   "ⁿCᵣ / r!",
+   "r! · ⁿCᵣ",
+   "(n−r)! · ⁿCᵣ",
+   "n! · ⁿCᵣ"
+  ],
+  "answer": 1,
+  "explain": "ⁿCᵣ = ⁿPᵣ/r!, so ⁿPᵣ = r!·ⁿCᵣ (select, then arrange).",
+  "kind": "formula",
+  "id": "c2ec45f8-173f-4d10-82b6-ee6b9f648b71",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "ʳCᵣ + ʳ⁺¹Cᵣ + ʳ⁺²Cᵣ + ... + ⁿCᵣ equals? (hockey-stick)",
+  "formula": "",
+  "options": [
+   "ⁿ⁺¹Cᵣ",
+   "ⁿ⁺¹Cᵣ₊₁",
+   "ⁿCᵣ₊₁",
+   "ⁿ⁺²Cᵣ₊₁"
+  ],
+  "answer": 1,
+  "explain": "Repeated Pascal's identity telescopes to ⁿ⁺¹Cᵣ₊₁.",
+  "kind": "result",
+  "id": "b5fec754-39ec-46ab-a1af-28a6635af961",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Ways to choose r of n distinct objects with one particular object always included?",
+  "formula": "",
+  "options": [
+   "ⁿ⁻¹Cᵣ₋₁",
+   "ⁿ⁻¹Cᵣ",
+   "ⁿCᵣ₋₁",
+   "ⁿ⁻²Cᵣ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Fix that object; choose the remaining r−1 from the other n−1.",
+  "kind": "concept",
+  "id": "4713deda-ae63-4b08-adc9-ef7c621fac93",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Ways to choose r of n distinct objects when one particular object is always excluded?",
+  "formula": "",
+  "options": [
+   "ⁿ⁻¹Cᵣ",
+   "ⁿ⁻¹Cᵣ₋₁",
+   "ⁿCᵣ₋₁",
+   "ⁿ⁻²Cᵣ"
+  ],
+  "answer": 0,
+  "explain": "Remove the object; choose all r from the remaining n−1 objects: ⁿ⁻¹Cᵣ.",
+  "kind": "result",
+  "id": "68ca37e6-f696-4b74-aa9b-6d694133bd07",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Selections (empty allowed) from p alike, q alike and r distinct objects?",
+  "formula": "(p+1)(q+1)·2ʳ",
+  "options": [
+   "(p+1)(q+1)·2ʳ",
+   "(p+1)(q+1)·r",
+   "pq·2ʳ",
+   "(p+q+r+1)!"
+  ],
+  "answer": 0,
+  "explain": "Each alike group gives (count+1) choices; each distinct object gives 2 (take or leave).",
+  "kind": "formula",
+  "id": "07cbc8c3-b023-4f70-867b-8ac620bfc790",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Non-empty selections from n objects, p of them alike and the rest distinct?",
+  "formula": "",
+  "options": [
+   "(p+1)·2ⁿ⁻ᵖ − 1",
+   "p·2ⁿ⁻ᵖ − 1",
+   "2ⁿ⁻ᵖ·p",
+   "(p+1)·2ⁿ⁻ᵖ"
+  ],
+  "answer": 0,
+  "explain": "Alike group: p+1 choices; n−p distinct: 2ⁿ⁻ᵖ; subtract the empty selection.",
+  "kind": "formula",
+  "id": "265380c6-5509-49cd-92c6-fbe3f9c8cca6",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of divisors of 2³·3²·5 (including 1 and itself)?",
+  "formula": "(a+1)(b+1)(c+1)",
+  "options": [
+   "24",
+   "22",
+   "18",
+   "30"
+  ],
+  "answer": 0,
+  "explain": "Choose exponent 0..3, 0..2, 0..1 independently: 4·3·2 = 24.",
+  "kind": "result",
+  "id": "dfb6cf77-8b88-4c4c-ac41-a4a2e9894674",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of ways to select at least one object from 7 identical objects?",
+  "formula": "",
+  "options": [
+   "7",
+   "8",
+   "127",
+   "128"
+  ],
+  "answer": 0,
+  "explain": "Choose 1, 2, …, 7 identical objects: one way each, so 7 ways (8 if the empty selection is allowed).",
+  "kind": "fact",
+  "id": "452d0e6f-ffa5-4f75-99a9-1f1cb990b583",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of ways to distribute n identical objects among r distinct persons (any may get none)?",
+  "formula": "",
+  "options": [
+   "C(n+r−1, r−1)",
+   "C(n−1, r−1)",
+   "C(n+r−1, r)",
+   "rⁿ"
+  ],
+  "answer": 0,
+  "explain": "Non-negative solutions of x₁+…+x_r = n number C(n+r−1, r−1).",
+  "kind": "formula",
+  "id": "2be93105-cd69-4266-8678-73df8c21ad36",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of positive integral solutions of x₁+x₂+…+x_r = n (n ≥ r)?",
+  "formula": "",
+  "options": [
+   "C(n−1, r−1)",
+   "C(n+r−1, r−1)",
+   "C(n, r−1)",
+   "C(n−1, r)"
+  ],
+  "answer": 0,
+  "explain": "Each xᵢ ≥ 1 (each person gets at least one), so the count is C(n−1, r−1).",
+  "kind": "formula",
+  "id": "4b09aed3-778f-42c4-a8eb-bb8be42e3979",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Ways to distribute n identical objects into r distinct groups (empty groups allowed)?",
+  "formula": "",
+  "options": [
+   "C(n+r−1, r−1)",
+   "C(n−1, r−1)",
+   "rⁿ",
+   "C(n+r−1, r)"
+  ],
+  "answer": 0,
+  "explain": "Stars and bars: n objects and r−1 dividers give C(n+r−1, r−1) arrangements.",
+  "kind": "formula",
+  "id": "ed3745c0-0cd5-4716-9dfd-d1a8c258f4f3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Ways to distribute n identical objects into r distinct groups, each group non-empty?",
+  "formula": "",
+  "options": [
+   "C(n+r−1, r−1)",
+   "C(n−1, r−1)",
+   "C(n−1, r)",
+   "C(n, r−1)"
+  ],
+  "answer": 1,
+  "explain": "Give one object to each group first, which leaves C(n−1, r−1) ways.",
+  "kind": "formula",
+  "id": "a50a8f4d-01ff-4947-962f-77cd15721b7d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Ways to divide 2n distinct objects into n unlabelled pairs?",
+  "formula": "",
+  "options": [
+   "(2n)!/(2·(n!)²)",
+   "(2n)!/(2ⁿ)",
+   "(2n)!/(2ⁿ·n!)",
+   "(2n)!/(n!·2n)"
+  ],
+  "answer": 2,
+  "explain": "Each pair has 2! internal orders and the n pairs have n! orders, so divide by 2ⁿ·n!.",
+  "kind": "formula",
+  "id": "9cb481d5-3dad-4da4-b064-80b74f879bc3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Divide n distinct objects (n = 2p+q) into unlabelled groups of sizes p, p, q (q ≠ p). Number of ways?",
+  "formula": "n!/((p!)²·q!·2!)",
+  "options": [
+   "n!/((p!)²·q!)",
+   "n!/(p!·q!·2!)",
+   "n!/((p!)²·q!·2!)",
+   "n!/((p!)²·(q!)²)"
+  ],
+  "answer": 2,
+  "explain": "The two equal groups can be swapped, so divide by 2!. The group of size q is distinguishable by its size.",
+  "kind": "formula",
+  "id": "192a977f-1cb0-4712-9e34-694922ebd1b3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "n distinct objects go into 2 distinct boxes, neither empty. Number of ways?",
+  "formula": "2ⁿ − 2",
+  "options": [
+   "2ⁿ − 1",
+   "2ⁿ − 2",
+   "2ⁿ⁻¹ − 1",
+   "2ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Total is 2ⁿ. Remove the 2 cases where all objects are in one box.",
+  "kind": "result",
+  "id": "8430e27a-4d79-4ba5-b9fa-a05685c1a831",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "n distinct objects are divided into 2 unlabelled non-empty groups. Number of ways?",
+  "formula": "2ⁿ⁻¹ − 1",
+  "options": [
+   "2ⁿ − 2",
+   "2ⁿ⁻¹",
+   "2ⁿ⁻¹ − 1",
+   "2ⁿ − 1"
+  ],
+  "answer": 2,
+  "explain": "Divide the labelled count 2ⁿ − 2 by 2 because the groups are identical.",
+  "kind": "result",
+  "id": "b270ce09-cbfa-411e-8ca4-82971178bc8c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Ways to put n distinct objects into 2 identical boxes, empty boxes allowed?",
+  "formula": "2ⁿ⁻¹",
+  "options": [
+   "2ⁿ",
+   "2ⁿ⁻¹ − 1",
+   "2ⁿ − 2",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 3,
+  "explain": "Non-empty splits give 2ⁿ⁻¹ − 1. Adding the one all-in-one-box case gives 2ⁿ⁻¹.",
+  "kind": "result",
+  "id": "275f2711-3208-4257-a6b6-65d880fa6775",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Ways to put 4 distinct objects into 3 identical boxes, none empty?",
+  "formula": "C(4,2) = 6",
+  "options": [
+   "12",
+   "24",
+   "6",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "The sizes must be 2,1,1. Choose the pair in C(4,2) = 6 ways; the identical boxes need no further division.",
+  "kind": "result",
+  "id": "f2c1280e-5fcc-4eb2-ab2b-422d6dff01d7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Ways to give n identical objects to r persons so that each person gets at least k objects?",
+  "formula": "C(n−rk+r−1, r−1)",
+  "options": [
+   "C(n−k+r−1, r−1)",
+   "C(n−rk−1, r−1)",
+   "C(n−rk+r−1, r−1)",
+   "C(n−rk+r, r)"
+  ],
+  "answer": 2,
+  "explain": "Give k to each first. The remaining n−rk objects are distributed freely among r persons.",
+  "kind": "formula",
+  "id": "33aed796-6cfa-49cc-bc0e-9c0fb2ac8c5b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Number of non-negative integer solutions of x + y + z ≤ n?",
+  "formula": "",
+  "options": [
+   "C(n+2, 2)",
+   "C(n+3, 3)",
+   "C(n+3, 2)",
+   "C(n+1, 3)"
+  ],
+  "answer": 1,
+  "explain": "Add a slack variable w ≥ 0 so that x+y+z+w = n, giving C(n+3, 3).",
+  "kind": "result",
+  "id": "cc65d09d-f4c3-4362-94d0-dabe23c21321",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Ways to divide 6 identical objects into 3 identical groups, each non-empty?",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "5",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "The partitions of 6 into 3 parts are 4+1+1, 3+2+1 and 2+2+2, so there are 3.",
+  "kind": "result",
+  "id": "393ecfa8-4b97-4f45-bcdc-de4dd591f160",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Ways to distribute 4 distinct objects into 3 distinct boxes, none empty?",
+  "formula": "C(4,2)·3!",
+  "options": [
+   "36",
+   "24",
+   "81",
+   "18"
+  ],
+  "answer": 0,
+  "explain": "Onto count: 3⁴ − 3·2⁴ + 3 = 36. Equivalently, the 6 splits into 2,1,1 times 3! for labelling.",
+  "kind": "result",
+  "id": "4d2bb7bb-5822-48f2-b1eb-48684b928d2e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Division and distribution into groups"
+ },
+ {
+  "prompt": "Non-negative integer solutions of x+y+z ≤ n: count?",
+  "formula": "add slack variable w ≥ 0: x+y+z+w = n",
+  "options": [
+   "ⁿ⁺²C₂",
+   "ⁿ⁺³C₃",
+   "ⁿ⁺³C₂",
+   "ⁿ⁺²C₃"
+  ],
+  "answer": 1,
+  "explain": "A slack variable makes 4 variables in an equation: C(n+4−1, 3) = C(n+3, 3).",
+  "kind": "formula",
+  "id": "45030bfd-9b67-46d4-9bc4-a9be2cdb8e2c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Positive integer solutions of x₁+x₂+…+xᵣ ≤ n: count?",
+  "formula": "",
+  "options": [
+   "ⁿC_r",
+   "ⁿ⁻¹C_r",
+   "ⁿ⁺ʳC_r",
+   "ⁿ⁻¹Cᵣ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Add slack w ≥ 1... equivalently Σ_{m≤n} C(m−1, r−1) = ⁿC_r (hockey-stick).",
+  "kind": "formula",
+  "id": "766c63ff-22c9-4085-b2ef-c59d4b22afde",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Non-negative solutions of x+y+z = 10 with x ≥ 2: count?",
+  "formula": "put x = 2 + x′, x′ ≥ 0",
+  "options": [
+   "66",
+   "55",
+   "45",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "x′+y+z = 8 gives C(10,2) = 45.",
+  "kind": "result",
+  "id": "98c66656-9d80-4e97-8fb6-035598a3af72",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Number of distinct terms in the expansion of (a+b+c)ⁿ?",
+  "formula": "",
+  "options": [
+   "ⁿ⁺²C₂",
+   "ⁿ⁺¹C₂",
+   "ⁿ⁺³C₃",
+   "ⁿC₂"
+  ],
+  "answer": 0,
+  "explain": "Terms a^p b^q c^r with p+q+r = n, all ≥ 0: C(n+2, 2).",
+  "kind": "result",
+  "id": "c9bb91de-e2d0-46dc-859a-e449806fb9c1",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Number of ordered ways to write n as a sum of positive integers (any number of parts)?",
+  "formula": "",
+  "options": [
+   "n²",
+   "2ⁿ",
+   "2ⁿ⁻¹",
+   "n!"
+  ],
+  "answer": 2,
+  "explain": "Each of the n−1 gaps between n stars has a bar or not: 2ⁿ⁻¹ compositions.",
+  "kind": "fact",
+  "id": "66398442-b77c-42e5-b188-b2fb710129c7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Solutions of x+y+z = 10 in non-negative even integers?",
+  "formula": "put x = 2a, y = 2b, z = 2c",
+  "options": [
+   "66",
+   "28",
+   "21",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "a+b+c = 5 gives C(7,2) = 21.",
+  "kind": "result",
+  "id": "f0ea24a6-3685-4c4f-9b65-1b27b5c1b570",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Solutions of x+y+z = 11 in positive odd integers?",
+  "formula": "put x = 2a+1, etc. with a ≥ 0",
+  "options": [
+   "21",
+   "10",
+   "28",
+   "15"
+  ],
+  "answer": 3,
+  "explain": "2(a+b+c)+3 = 11 gives a+b+c = 4, so C(6,2) = 15.",
+  "kind": "result",
+  "id": "51b22878-7216-4adb-80d4-c2d589154fae",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Non-negative integer solutions of x+y+z < 10: count?",
+  "formula": "strict: x+y+z ≤ 9",
+  "options": [
+   "C(12,3)",
+   "C(12,2)",
+   "C(13,3)",
+   "C(11,3)"
+  ],
+  "answer": 0,
+  "explain": "≤ 9 with a slack variable: C(9+3, 3) = C(12,3) = 220.",
+  "kind": "result",
+  "id": "ebfd5bb1-3436-4ef3-a86b-a72880b7d9c7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Integer solutions of x+y+z = 0 with each of x, y, z ≥ −2?",
+  "formula": "shift: a = x+2 etc.",
+  "options": [
+   "28",
+   "36",
+   "21",
+   "45"
+  ],
+  "answer": 0,
+  "explain": "a+b+c = 6 with a,b,c ≥ 0 gives C(8,2) = 28.",
+  "kind": "result",
+  "id": "42c46dac-384c-411a-a846-f617004f45be",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Positive solutions of x+y+z = 12 with x ≥ 3: count?",
+  "formula": "put x = x′+2, x′ ≥ 1",
+  "options": [
+   "55",
+   "45",
+   "28",
+   "36"
+  ],
+  "answer": 3,
+  "explain": "x′+y+z = 10 in positives: C(9,2) = 36.",
+  "kind": "result",
+  "id": "040e1d8c-bcd4-40fb-b162-d3204d51f0d5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "Coefficient of xⁿ in (1+x+x²+…)⁴ equals?",
+  "formula": "(1−x)⁻⁴",
+  "options": [
+   "ⁿ⁺³C₃",
+   "ⁿ⁺⁴C₄",
+   "ⁿ⁻¹C₃",
+   "ⁿ⁺³C₄"
+  ],
+  "answer": 0,
+  "explain": "It counts non-negative solutions of x₁+x₂+x₃+x₄ = n: C(n+3, 3).",
+  "kind": "result",
+  "id": "03cbdcef-b712-4ce8-93e2-25810143f255",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Integer solutions (stars and bars)"
+ },
+ {
+  "prompt": "n points, of which m are collinear (others general). Number of triangles?",
+  "formula": "ⁿC₃ − ᵐC₃",
+  "options": [
+   "ⁿC₃ − ᵐC₃",
+   "ⁿC₃ − ᵐC₂",
+   "ⁿC₃ − ᵐC₃ + 1",
+   "ⁿC₃ − 3·ᵐC₃"
+  ],
+  "answer": 0,
+  "explain": "Any 3 of the m collinear points give no triangle, so subtract ᵐC₃.",
+  "kind": "formula",
+  "id": "26a1691a-5179-4a9a-b172-d353d8800562",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles"
+ },
+ {
+  "prompt": "Triangles from vertices of a convex n-gon having NO side common with the polygon?",
+  "formula": "n(n−4)(n−5)/6",
+  "options": [
+   "n(n−4)(n−5)/6",
+   "n(n−3)(n−4)/6",
+   "n(n−4)",
+   "n(n−1)(n−5)/6"
+  ],
+  "answer": 0,
+  "explain": "Total ⁿC₃ minus those with one or two polygon sides gives n(n−4)(n−5)/6.",
+  "kind": "result",
+  "id": "a591760c-cc98-4fd4-927f-f3f602d9514b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles"
+ },
+ {
+  "prompt": "Triangles from vertices of a convex n-gon with exactly one side common with the polygon?",
+  "formula": "n(n−4)",
+  "options": [
+   "n(n−3)",
+   "n(n−4)",
+   "n(n−5)",
+   "n(n−4)/2"
+  ],
+  "answer": 1,
+  "explain": "Choose the side (n ways), third vertex not adjacent to its ends: n−4 ways.",
+  "kind": "result",
+  "id": "12581fef-1bde-4704-8d75-c00c2e3a1188",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles"
+ },
+ {
+  "prompt": "Interior intersection points of diagonals of a convex n-gon (no three diagonals concurrent)?",
+  "formula": "ⁿC₄",
+  "options": [
+   "ⁿC₂",
+   "ⁿC₃",
+   "ⁿC₄",
+   "n(n−3)/2"
+  ],
+  "answer": 2,
+  "explain": "Every 4 vertices give one pair of crossing diagonals, so ⁿC₄ points.",
+  "kind": "result",
+  "id": "f7dfc222-f50c-497f-b548-7b2d07151851",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles"
+ },
+ {
+  "prompt": "n points; m on one line, k on another line (no other 3 collinear). Number of distinct lines?",
+  "formula": "ⁿC₂ − ᵐC₂ − ᵏC₂ + 2",
+  "options": [
+   "ⁿC₂ − ᵐC₂ − ᵏC₂ + 1",
+   "ⁿC₂ − ᵐC₂ − ᵏC₂ + 2",
+   "ⁿC₂ − ᵐC₂ − ᵏC₂",
+   "ⁿC₂ − ᵐC₂ − ᵏC₂ + 3"
+  ],
+  "answer": 1,
+  "explain": "Each collinear set's ᶜC₂ lines collapse to a single line, so add back 1 for each: +2.",
+  "kind": "formula",
+  "id": "33ef8a21-b51d-49eb-b9d0-5dde1e1367ef",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles"
+ },
+ {
+  "prompt": "n lines, no two parallel, no three concurrent. Number of triangles they form?",
+  "formula": "ⁿC₃",
+  "options": [
+   "ⁿC₂",
+   "ⁿC₃",
+   "ⁿC₃ − n",
+   "n(n−1)(n−2)"
+  ],
+  "answer": 1,
+  "explain": "Each choice of 3 lines gives exactly one triangle.",
+  "kind": "result",
+  "id": "8367d115-41f8-422b-a0b8-bb3709e4973b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles"
+ },
+ {
+  "prompt": "Triangles from vertices of a convex n-gon (n>4) having exactly two sides common with the polygon?",
+  "formula": "",
+  "options": [
+   "n",
+   "n − 2",
+   "n(n − 4)",
+   "n(n − 4)/2"
+  ],
+  "answer": 0,
+  "explain": "Two common sides must be adjacent, so the triangle uses 3 consecutive vertices: n choices.",
+  "kind": "result",
+  "id": "4531eb9d-a199-45d6-9eac-cf976609c806",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Geometric counting: lines, triangles"
+ },
+ {
+  "prompt": "Ways to arrange n distinct objects with exactly r in their natural places?",
+  "formula": "ⁿCᵣ · Dₙ₋ᵣ",
+  "options": [
+   "ⁿCᵣ · Dₙ₋ᵣ",
+   "ⁿPᵣ · Dₙ₋ᵣ",
+   "ⁿCᵣ · Dᵣ",
+   "ⁿCᵣ · (n−r)!"
+  ],
+  "answer": 0,
+  "explain": "Choose the r fixed objects in ⁿCᵣ ways, then derange the remaining n−r objects.",
+  "kind": "formula",
+  "id": "14b21c1a-f1aa-4f91-b55e-75c7e4c6f493",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Number of odd divisors of N = 2ᵃ·pᵇ·qᶜ (p, q odd primes)?",
+  "formula": "",
+  "options": [
+   "(b+1)(c+1)",
+   "(a+1)(b+1)(c+1)",
+   "a(b+1)(c+1)",
+   "(a+1)(b+1)(c+1) − 1"
+  ],
+  "answer": 0,
+  "explain": "Odd divisors cannot contain 2, so only the powers of p and q count: (b+1)(c+1).",
+  "kind": "formula",
+  "id": "462c3523-d7a8-47c7-a774-c862ce81494a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "A natural number N has an odd number of divisors exactly when N is?",
+  "formula": "",
+  "options": [
+   "a perfect square",
+   "a prime",
+   "a power of 2",
+   "an odd number"
+  ],
+  "answer": 0,
+  "explain": "Divisors pair as (d, N/d); the pairing leaves one unpaired divisor only when N is a perfect square.",
+  "kind": "result",
+  "id": "56af3fef-2d96-4c1a-8a9f-d01d1c751b01",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Sum of all divisors of N = pᵃ·qᵇ (p, q distinct primes)?",
+  "formula": "σ(N) = [(pᵃ⁺¹−1)/(p−1)]·[(qᵇ⁺¹−1)/(q−1)]",
+  "options": [
+   "[(pᵃ⁺¹−1)/(p−1)]·[(qᵇ⁺¹−1)/(q−1)]",
+   "[(pᵃ−1)/(p−1)]·[(qᵇ−1)/(q−1)]",
+   "(pᵃ⁺¹−1)(qᵇ⁺¹−1)",
+   "(a+1)(b+1)"
+  ],
+  "answer": 0,
+  "explain": "σ(N) = (1+p+…+pᵃ)(1+q+…+qᵇ), a product of two G.P. sums.",
+  "kind": "formula",
+  "id": "b365731b-97f0-42b3-ab31-dcb11d64315c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "How many 3-digit natural numbers are divisible by 5?",
+  "formula": "",
+  "options": [
+   "180",
+   "200",
+   "179",
+   "160"
+  ],
+  "answer": 0,
+  "explain": "Of the 900 three-digit numbers, every 5th is divisible by 5: 900/5 = 180 (9 × 10 × 2).",
+  "kind": "result",
+  "id": "fcb72e4c-5c7e-4ef2-8fcb-6b85083c0baa",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of ways to put n distinct letters into n distinct addressed envelopes, one letter per envelope?",
+  "formula": "",
+  "options": [
+   "n!",
+   "nⁿ",
+   "2ⁿ",
+   "n!/2"
+  ],
+  "answer": 0,
+  "explain": "Each letter goes to a different envelope, so it is a permutation of n objects: n!.",
+  "kind": "fact",
+  "id": "347b37c6-bc53-4f5c-936e-c21fdaa8b3e3",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "The product of r consecutive positive integers is always divisible by?",
+  "formula": "",
+  "options": [
+   "r!",
+   "(r+1)!",
+   "r²",
+   "2^r"
+  ],
+  "answer": 0,
+  "explain": "Product of r consecutive integers = r!·C(m, r)-type quantity, so r! divides it.",
+  "kind": "fact",
+  "id": "aace9ed1-7bdd-4d4f-bd84-291e9a4f481b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "(2n)! / (2ⁿ · n!) equals?",
+  "formula": "(2n)!/(2ⁿ n!) = 1·3·5·…·(2n−1)",
+  "options": [
+   "Product of first n even numbers",
+   "Product of first n odd numbers",
+   "n!",
+   "(2n−1)!"
+  ],
+  "answer": 1,
+  "explain": "(2n)! = [2·4…2n][1·3…(2n−1)] and 2·4…2n = 2ⁿ·n!.",
+  "kind": "result",
+  "id": "82688864-6552-4527-be4b-a9f80e5e8ccd",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "Smallest natural number n for which n! > 2ⁿ?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "3! = 6 < 8, but 4! = 24 > 16, and it holds thereafter.",
+  "kind": "fact",
+  "id": "c26660fe-170a-4721-9cc0-1813b3c8e542",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "1/9! + 1/10! equals?",
+  "formula": "",
+  "options": [
+   "2/10!",
+   "11/10!",
+   "10/10!",
+   "11/9!"
+  ],
+  "answer": 1,
+  "explain": "1/9! = 10/10!, so the sum is (10+1)/10! = 11/10!.",
+  "kind": "result",
+  "id": "1a31ed12-521d-4d37-aab5-aad3a911d573",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "n! is defined for which values of n?",
+  "formula": "",
+  "options": [
+   "All integers",
+   "Positive integers only",
+   "Non-negative integers",
+   "All real numbers"
+  ],
+  "answer": 2,
+  "explain": "In this chapter n! is defined only for n = 0, 1, 2, … (0! = 1).",
+  "kind": "concept",
+  "id": "ca8b4e86-7397-47cb-a874-b46f50d87876",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "Permutations of n distinct things taken r at a time, with one specified thing never used, number?",
+  "formula": "",
+  "options": [
+   "ⁿ⁻¹Pᵣ",
+   "ⁿ⁻¹Pᵣ₋₁",
+   "r · ⁿ⁻¹Pᵣ₋₁",
+   "ⁿPᵣ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Remove the excluded object and arrange r of the remaining n−1: ⁿ⁻¹Pᵣ.",
+  "kind": "concept",
+  "id": "3aa27098-3a82-40f1-9cec-4a40f618dbc4",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Permutations of n distinct things r at a time that always include one given thing number?",
+  "formula": "",
+  "options": [
+   "ⁿ⁻¹Pᵣ",
+   "r · ⁿ⁻¹Pᵣ₋₁",
+   "n · ⁿ⁻¹Pᵣ₋₁",
+   "ⁿ⁻¹Pᵣ₋₁"
+  ],
+  "answer": 1,
+  "explain": "Choose its place in r ways, then arrange r−1 others from n−1: r·ⁿ⁻¹Pᵣ₋₁.",
+  "kind": "concept",
+  "id": "86554630-c978-4801-8bfd-bb6a91e7e099",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "ⁿPₙ₋ᵣ equals which expression (0 ≤ r ≤ n)?",
+  "formula": "ⁿPₙ₋ᵣ = n!/r!",
+  "options": [
+   "n!/(n−r)!",
+   "n!/r!",
+   "n!/(r!(n−r)!)",
+   "r!"
+  ],
+  "answer": 1,
+  "explain": "Substitute r → n−r in n!/(n−r)!: denominator becomes (n−(n−r))! = r!.",
+  "kind": "result",
+  "id": "4022b90d-4222-4e18-b207-d641f44141f5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "By the standard convention, the value of ⁿP₀ is?",
+  "formula": "ⁿP₀ = n!/n! = 1",
+  "options": [
+   "0",
+   "n",
+   "1",
+   "Undefined"
+  ],
+  "answer": 2,
+  "explain": "There is exactly one way to arrange nothing (the empty arrangement), so ⁿP₀ = 1.",
+  "kind": "fact",
+  "id": "1742b240-5b48-41cd-bac7-8ce344c34095",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Number of shortest lattice paths from (0,0) to (3,3) using unit steps right/up?",
+  "formula": "6!/(3!·3!)",
+  "options": [
+   "20",
+   "36",
+   "15",
+   "40"
+  ],
+  "answer": 0,
+  "explain": "Each path is an arrangement of 3 R's and 3 U's: 6!/(3!3!) = 20.",
+  "kind": "result",
+  "id": "6eb8ba24-e5cb-429b-a42a-296b16b622c5",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'ABRACADABRA'?",
+  "formula": "",
+  "options": [
+   "11!/(5!·2!·2!)",
+   "11!/(5!·2!)",
+   "11!/(5!·2!·2!·2!)",
+   "11!/(5!)"
+  ],
+  "answer": 0,
+  "explain": "A×5, B×2, R×2, C and D single: 11!/(5!2!2!).",
+  "kind": "formula",
+  "id": "6aef1b38-7c7a-4598-8806-5f835a44ce5d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of the letters of 'MISSISSIPPI' that begin with M?",
+  "formula": "",
+  "options": [
+   "10!/(4!·4!·2!)",
+   "11!/(4!·4!·2!)",
+   "10!/(4!·4!·2!·2!)",
+   "10!/(3!·4!·2!)"
+  ],
+  "answer": 0,
+  "explain": "Fix M first; arrange I×4, S×4, P×2 in the remaining 10 places.",
+  "kind": "formula",
+  "id": "8b5a1060-f3e5-46cb-b7e0-40e6f8680d85",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of the letters of 'AABBC' in which the two A's are together?",
+  "formula": "",
+  "options": [
+   "12",
+   "24",
+   "6",
+   "48"
+  ],
+  "answer": 0,
+  "explain": "Treat AA as one block: 4 units AA, B, B, C give 4!/2! = 12.",
+  "kind": "result",
+  "id": "0eff5392-c3bf-43ee-b173-99f0f2630fda",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of palindromic arrangements of all letters of 'AABBCC'?",
+  "formula": "",
+  "options": [
+   "6",
+   "90",
+   "8",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "First half uses A, B, C once each: 3! = 6 and the second half is fixed.",
+  "kind": "result",
+  "id": "2c343bf1-51bd-4e90-a362-6048e6517a61",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of 'AAABBB' in which no two A's are adjacent?",
+  "formula": "",
+  "options": [
+   "4",
+   "10",
+   "6",
+   "20"
+  ],
+  "answer": 0,
+  "explain": "Place the 3 A's in the 4 gaps around the B's: C(4,3) = 4.",
+  "kind": "result",
+  "id": "7a6f26b5-0581-4806-91ba-23acd2cec389",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "How many even 5-digit numbers use all of the digits 1, 1, 2, 2, 3?",
+  "formula": "",
+  "options": [
+   "12",
+   "24",
+   "30",
+   "18"
+  ],
+  "answer": 0,
+  "explain": "The last digit is 2; arrange 1,1,2,3 in the rest: 4!/2! = 12.",
+  "kind": "result",
+  "id": "741ee144-f639-49e7-a656-209d8dec2839",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "In how many arrangements of the letters A, B, C, D does A come before B?",
+  "formula": "",
+  "options": [
+   "12",
+   "24",
+   "6",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Treat A and B as identical X's, then 4!/2! = 12 (X→A first, then B).",
+  "kind": "result",
+  "id": "06b34764-f477-4144-a380-21baa99e8289",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of 3-digit numbers that can be formed from the digits 1, 1, 2, 2 (each used at most as available)?",
+  "formula": "",
+  "options": [
+   "6",
+   "4",
+   "8",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "Multiset {1,1,2} gives 3 and {1,2,2} gives 3, so 6.",
+  "kind": "result",
+  "id": "4a8ebda9-ef1b-417b-b7cd-4feccaa0517f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Rank of 'BABA' when all arrangements of 'AABB' are listed in dictionary order?",
+  "formula": "",
+  "options": [
+   "5",
+   "4",
+   "3",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "Order: AABB, ABAB, ABBA, BAAB, BABA, BBAA, so BABA is 5th.",
+  "kind": "result",
+  "id": "ebce5909-cd8c-4b34-9a78-75914d0c1887",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "n!/(p!·q!·r!) with p+q+r = n equals which coefficient in the expansion of (x+y+z)ⁿ?",
+  "formula": "",
+  "options": [
+   "Coefficient of xᵖyᑫzʳ",
+   "Coefficient of xⁿ",
+   "Coefficient of xᵖ only",
+   "Sum of all coefficients"
+  ],
+  "answer": 0,
+  "explain": "It is the multinomial coefficient of xᵖyᑫzʳ in (x+y+z)ⁿ.",
+  "kind": "fact",
+  "id": "032f2877-8c6e-4994-ae18-8d3f61f65988",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'DADDY'?",
+  "formula": "",
+  "options": [
+   "20",
+   "60",
+   "10",
+   "40"
+  ],
+  "answer": 0,
+  "explain": "D×3 with A and Y distinct: 5!/3! = 20.",
+  "kind": "result",
+  "id": "48259d09-5010-491c-b5a3-2bde81567b91",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of 'ARRANGE' with both A's at the two ends?",
+  "formula": "",
+  "options": [
+   "60",
+   "120",
+   "30",
+   "360"
+  ],
+  "answer": 0,
+  "explain": "A's fill both ends; arrange R,R,N,G,E in between: 5!/2! = 60.",
+  "kind": "result",
+  "id": "042a3591-7700-44fb-a42f-05b57097620e",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'PARALLEL'?",
+  "formula": "",
+  "options": [
+   "8!/(3!·2!)",
+   "8!/(3!)",
+   "8!/(2!·2!)",
+   "8!/(4!·2!)"
+  ],
+  "answer": 0,
+  "explain": "A×2 and L×3, others single: 8!/(3!2!).",
+  "kind": "formula",
+  "id": "4815fc6c-3688-4ca6-91e3-2446e00f36be",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of arrangements of the letters of 'LOLLIPOP'?",
+  "formula": "",
+  "options": [
+   "8!/(3!·2!·2!)",
+   "8!/(3!·2!)",
+   "8!/(3!·3!)",
+   "8!/(2!·2!·2!)"
+  ],
+  "answer": 0,
+  "explain": "L×3, O×2, P×2, I×1: 8!/(3!2!2!).",
+  "kind": "formula",
+  "id": "02009e1b-733d-4fc0-839d-cfb31e560bde",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of odd divisors of 2⁴·3²·5?",
+  "formula": "",
+  "options": [
+   "6",
+   "8",
+   "15",
+   "30"
+  ],
+  "answer": 0,
+  "explain": "Odd divisors ignore the power of 2, so (2+1)(1+1) = 6.",
+  "kind": "result",
+  "id": "1a06f337-c6a7-4bd4-bbb0-40322837d54b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of non-negative integer solutions of x+y+z ≤ n?",
+  "formula": "C(n+3, 3)",
+  "options": [
+   "C(n+2, 2)",
+   "C(n+3, 3)",
+   "C(n+3, 2)",
+   "C(n+1, 3)"
+  ],
+  "answer": 1,
+  "explain": "Add a slack variable w ≥ 0 so x+y+z+w = n, giving C(n+3, 3).",
+  "kind": "formula",
+  "id": "82343e45-e732-4e63-befa-53763bd7f28c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of derangements of 5 distinct objects, D₅ = ?",
+  "formula": "D₅ = 5!(1/2! − 1/3! + 1/4! − 1/5!)",
+  "options": [
+   "36",
+   "44",
+   "53",
+   "60"
+  ],
+  "answer": 1,
+  "explain": "D₃=2, D₄=9, so D₅ = 4(9+2) = 44.",
+  "kind": "fact",
+  "id": "cd622754-8e1d-4f33-850c-ae3a3ac3f532",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "N is not a perfect square and has d divisors. Ways to write N = x·y (unordered pair)?",
+  "formula": "",
+  "options": [
+   "d",
+   "d − 1",
+   "(d + 1)/2",
+   "d/2"
+  ],
+  "answer": 3,
+  "explain": "Divisors pair up as (x, N/x), with no self-pair since N is not a square, so d/2.",
+  "kind": "result",
+  "id": "5b81ab43-7ae7-4016-935b-ad36b21ea78a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Number of ways to write 30 as a product of two natural numbers, order ignored?",
+  "formula": "30 = 2·3·5, d(30) = 8",
+  "options": [
+   "8",
+   "4",
+   "6",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "30 has 8 divisors; each pair (d, 30/d) is counted once, so 8/2 = 4.",
+  "kind": "result",
+  "id": "0827d814-74f9-4d8c-980d-9da3218461ed",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of positive divisors of 10ⁿ?",
+  "formula": "10ⁿ = 2ⁿ·5ⁿ",
+  "options": [
+   "n + 1",
+   "2(n + 1)",
+   "(n + 1)²",
+   "n²"
+  ],
+  "answer": 2,
+  "explain": "10ⁿ = 2ⁿ·5ⁿ, so the divisor count is (n+1)(n+1) = (n+1)².",
+  "kind": "formula",
+  "id": "2a7adbdf-13dc-439d-b486-62f120826a62",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Σ r/(r+1)! for r = 1 to n equals?",
+  "formula": "r/(r+1)! = 1/r! − 1/(r+1)!",
+  "options": [
+   "1 − 1/(n+1)!",
+   "1 − 1/n!",
+   "1/n! − 1/(n+1)!",
+   "2 − 1/(n+1)!"
+  ],
+  "answer": 0,
+  "explain": "The terms telescope: 1/1! − 1/(n+1)! = 1 − 1/(n+1)!.",
+  "kind": "result",
+  "id": "a7eaf417-8a50-468b-8d7d-35f8dcf53232",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "1! + 2! + 3! + … + n! is a perfect square for which n?",
+  "formula": "",
+  "options": [
+   "n = 1 only",
+   "n = 3 only",
+   "n = 1 and n = 3 only",
+   "n = 1, 2 and 3"
+  ],
+  "answer": 2,
+  "explain": "Sums are 1 and 9 for n=1, 3. For n≥4 the sum ends in 3, which is not a square digit.",
+  "kind": "fact",
+  "id": "4f890756-1a88-4e57-8f8c-2f52ae5645cb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "r-arrangements of n distinct things in which one given thing sits at a specified place: count?",
+  "formula": "",
+  "options": [
+   "ⁿ⁻¹Pᵣ",
+   "ⁿ⁻¹Pᵣ₋₁",
+   "r · ⁿ⁻¹Pᵣ₋₁",
+   "ⁿPᵣ₋₁"
+  ],
+  "answer": 1,
+  "explain": "Fix that thing at that place; the remaining r−1 places are filled from n−1 things: ⁿ⁻¹Pᵣ₋₁.",
+  "kind": "concept",
+  "id": "6c7b85d4-0d03-4283-90c7-3cb31f0b139f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "If ⁿP₂ = 72, then n equals?",
+  "formula": "ⁿP₂ = n(n−1)",
+  "options": [
+   "8",
+   "9",
+   "10",
+   "12"
+  ],
+  "answer": 1,
+  "explain": "n(n−1) = 72 = 9 × 8, so n = 9.",
+  "kind": "result",
+  "id": "e65c0bd3-a719-4d14-971f-267d4fe85c8b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "For 1 ≤ r ≤ n, the ratio ⁿPᵣ / ⁿPᵣ₋₁ simplifies to which expression?",
+  "formula": "ⁿPᵣ / ⁿPᵣ₋₁",
+  "options": [
+   "n − r",
+   "n − r + 1",
+   "r(n − r + 1)",
+   "n − r + 2"
+  ],
+  "answer": 1,
+  "explain": "ⁿPᵣ = n!/(n−r)! and ⁿPᵣ₋₁ = n!/(n−r+1)!, so the ratio is (n−r+1)!/(n−r)! = n−r+1.",
+  "kind": "result",
+  "id": "a1551ff6-ccd9-48b0-88a1-dcd37da6aa3d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Arrangements of the letters of 'BANANA' in which all three A's are together?",
+  "formula": "",
+  "options": [
+   "12",
+   "24",
+   "20",
+   "60"
+  ],
+  "answer": 0,
+  "explain": "Treat AAA as one block: 4 objects B, N, N, AAA give 4!/2! = 12.",
+  "kind": "result",
+  "id": "af0e94b2-c13f-40dd-aaf8-5643cce6d67d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Arrangements of 'AABBCC' in which the two A's, the two B's and the two C's each stay together?",
+  "formula": "",
+  "options": [
+   "6",
+   "24",
+   "8",
+   "90"
+  ],
+  "answer": 0,
+  "explain": "Each pair is one block; the 3 distinct blocks can be arranged in 3! = 6 ways.",
+  "kind": "result",
+  "id": "6ef5bf07-03a3-43b7-bf55-a176034e9946",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations of alike (identical) objects"
+ },
+ {
+  "prompt": "Number of ways to write N = pᵃqᵇ as product of two co-prime factors (unordered, both >1 or not 1·N excluded?) — including 1·N?",
+  "formula": "",
+  "options": [
+   "2ⁿ⁻¹ with n=2, i.e. 2",
+   "4",
+   "(a+1)(b+1)/2",
+   "ab"
+  ],
+  "answer": 0,
+  "explain": "For n distinct primes, unordered coprime pairs (incl. 1·N) = 2ⁿ⁻¹; n = 2 gives 2.",
+  "kind": "result",
+  "id": "59221373-663d-4924-ac74-00817a277c77",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Product of all divisors of N, if N has d divisors?",
+  "formula": "Product = N^(d/2)",
+  "options": [
+   "N^d",
+   "N^(d/2)",
+   "N^((d+1)/2)",
+   "N^(d−1)"
+  ],
+  "answer": 1,
+  "explain": "Divisors pair up as (x, N/x), each pair has product N, giving d/2 pairs, so the product is N^(d/2).",
+  "kind": "formula",
+  "id": "0e2baacc-c8f6-4314-8dd2-8dc5320c9c8f",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Smallest positive integer n such that n! is divisible by 1000 is?",
+  "formula": "1000 = 2³·5³",
+  "options": [
+   "10",
+   "15",
+   "20",
+   "25"
+  ],
+  "answer": 1,
+  "explain": "Need 5³: ⌊15/5⌋ = 3 so 15! works, while 14! has only two 5s. Factors of 2 are plentiful.",
+  "kind": "fact",
+  "id": "b03179b4-9ae6-4246-88b7-989db28f74a8",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Factorial notation and properties"
+ },
+ {
+  "prompt": "Dₙ, the number of derangements of n objects, equals which value for n ≥ 1?",
+  "formula": "Dₙ = round(n!/e)",
+  "options": [
+   "⌊n!·e⌋",
+   "The integer nearest to n!/e",
+   "⌈n!/e²⌉",
+   "n! − (n−1)!"
+  ],
+  "answer": 1,
+  "explain": "Dₙ = n!Σ(−1)ᵏ/k! is the nearest integer to n!/e, since the series approximates 1/e.",
+  "kind": "result",
+  "id": "8e256c3e-55dd-473f-90ce-d09e15b98f95",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "For an n-element set S, the number of ordered pairs (A, B) with A ⊆ B ⊆ S is:",
+  "formula": "",
+  "options": [
+   "3ⁿ",
+   "4ⁿ",
+   "2ⁿ⁺¹",
+   "n·2ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Each element lies in A, in B∖A, or outside B: 3 choices each, so 3ⁿ.",
+  "kind": "result",
+  "id": "3f4cc38f-1aee-4273-a5e5-c81877028804",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of reflexive relations on a set A with n elements?",
+  "formula": "",
+  "options": [
+   "2^(n²−n)",
+   "2^(n²)",
+   "2^(n(n+1)/2)",
+   "2^(n²−1)"
+  ],
+  "answer": 0,
+  "explain": "The n diagonal pairs are forced; the other n²−n pairs are free, so 2^(n²−n).",
+  "kind": "result",
+  "id": "dd459b2d-5d2f-4874-b3a5-49319fefb7ce",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Number of positive divisors of 360 that are perfect squares?",
+  "formula": "360 = 2³·3²·5",
+  "options": [
+   "4",
+   "3",
+   "6",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Even exponents only: 2 (0,2) × 2 (0,2) × 1 (0) = 4, namely 1, 4, 9, 36.",
+  "kind": "result",
+  "id": "43df2b8b-3877-429e-8fb9-d68f51cf4d66",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "ⁿPᵣ = n · (?)  (1 ≤ r ≤ n)",
+  "formula": "ⁿPᵣ = n·(n−1)!/(n−r)!",
+  "options": [
+   "ⁿ⁻¹Pᵣ₋₁",
+   "ⁿ⁻¹Pᵣ",
+   "ⁿPᵣ₋₁",
+   "r·ⁿ⁻¹Pᵣ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Fix the first place in n ways, then arrange r−1 of the remaining n−1: ⁿPᵣ = n·ⁿ⁻¹Pᵣ₋₁.",
+  "kind": "formula",
+  "id": "4afb5190-d5a1-4212-a997-0bf37451f345",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "How many 3-digit numbers have all three digits different?",
+  "formula": "9 × 9 × 8",
+  "options": [
+   "720",
+   "648",
+   "729",
+   "504"
+  ],
+  "answer": 1,
+  "explain": "Hundreds place 9 ways (non-zero), tens 9 ways (0 allowed, repeat excluded), units 8: 648.",
+  "kind": "result",
+  "id": "b36e3de8-b3bf-4bab-9fe7-d9323501245d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Number of 4-digit PINs (0–9) in which all four digits are different?",
+  "formula": "¹⁰P₄ = 10·9·8·7",
+  "options": [
+   "5040",
+   "4536",
+   "10000",
+   "3024"
+  ],
+  "answer": 0,
+  "explain": "Leading zero is allowed in a PIN, so it is simply ¹⁰P₄ = 5040. (4536 is for 4-digit numbers.)",
+  "kind": "result",
+  "id": "9544aa08-7538-4be1-abca-3aa8e0b90b8a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "How many 4-digit numbers have all digits odd (digits may repeat)?",
+  "formula": "",
+  "options": [
+   "625",
+   "500",
+   "120",
+   "3125"
+  ],
+  "answer": 0,
+  "explain": "Each of 4 places has 5 odd digits (1,3,5,7,9): 5⁴ = 625.",
+  "kind": "result",
+  "id": "0df001b2-461f-41b5-b05b-a4619f80ac2b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "4-digit numbers formed from digits 0, 1, 2, 3 with repetition allowed: count?",
+  "formula": "3 · 4 · 4 · 4",
+  "options": [
+   "256",
+   "192",
+   "144",
+   "64"
+  ],
+  "answer": 1,
+  "explain": "Thousands place can't be 0: 3 choices; other three places have 4 each: 3·4³ = 192.",
+  "kind": "result",
+  "id": "db00ac25-055f-4500-af46-b705354e2d0a",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Permutations with repetition allowed"
+ },
+ {
+  "prompt": "For integers 0 ≤ n < r, the value of ⁿCᵣ is taken as",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "n!",
+   "undefined (not allowed)"
+  ],
+  "answer": 0,
+  "explain": "Cannot choose more objects than are available, so ⁿCᵣ = 0 for r > n.",
+  "kind": "fact",
+  "id": "99bc2de6-6f64-4ce7-81b7-da87e31ec451",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "²ⁿ⁺¹C₀ + ²ⁿ⁺¹C₁ + ... + ²ⁿ⁺¹Cₙ equals?",
+  "formula": "",
+  "options": [
+   "2²ⁿ⁺¹",
+   "4ⁿ − 1",
+   "2ⁿ",
+   "4ⁿ"
+  ],
+  "answer": 3,
+  "explain": "By symmetry the first half is half of 2²ⁿ⁺¹, which is 2²ⁿ = 4ⁿ.",
+  "kind": "result",
+  "id": "ac4322ab-0176-409c-8224-444025b19113",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Σ ⁿCᵣ/(r+1) for r = 0 to n equals?",
+  "formula": "",
+  "options": [
+   "2ⁿ/(n+1)",
+   "(2ⁿ⁺¹ − 1)/(n+1)",
+   "(2ⁿ − 1)/(n+1)",
+   "(2ⁿ⁺¹ − 1)/n"
+  ],
+  "answer": 1,
+  "explain": "ⁿCᵣ/(r+1) = ⁿ⁺¹Cᵣ₊₁/(n+1); the sum is (2ⁿ⁺¹−1)/(n+1).",
+  "kind": "result",
+  "id": "93549f9b-be40-44c8-b0a6-9a336e85ba40",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "ⁿC₀·ⁿC₁ + ⁿC₁·ⁿC₂ + ... + ⁿCₙ₋₁·ⁿCₙ equals?",
+  "formula": "",
+  "options": [
+   "²ⁿCₙ",
+   "²ⁿCₙ₊₁",
+   "²ⁿ⁻¹Cₙ",
+   "²ⁿCₙ₊₂"
+  ],
+  "answer": 1,
+  "explain": "Vandermonde with ⁿCₙ₋ᵣ₋₁ gives ²ⁿCₙ₋₁, which equals ²ⁿCₙ₊₁.",
+  "kind": "result",
+  "id": "5e88bd55-7ec1-452f-ac56-f768e48b4cbe",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Σ (−1)ʳ·ⁿCᵣ/(r+1), r = 0 to n, equals?",
+  "formula": "ⁿCᵣ/(r+1) = ⁿ⁺¹Cᵣ₊₁/(n+1)",
+  "options": [
+   "1/(n+1)",
+   "0",
+   "1/n",
+   "2ⁿ/(n+1)"
+  ],
+  "answer": 0,
+  "explain": "The sum becomes [Σ(−1)ʳ ⁿ⁺¹Cᵣ₊₁]/(n+1) = (1 − 0)/(n+1), since the alternating sum of ⁿ⁺¹C₀…ⁿ⁺¹Cₙ₊₁ is 0.",
+  "kind": "result",
+  "id": "517b3946-f953-475a-8c7e-69b5761d0942",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Select at least one of EACH type from p identical A's and q identical B's: number of ways?",
+  "formula": "",
+  "options": [
+   "pq",
+   "(p+1)(q+1)",
+   "(p+1)(q+1) − 1",
+   "p + q − 1"
+  ],
+  "answer": 0,
+  "explain": "A can be taken in p ways (1..p) and B in q ways (1..q), so total pq.",
+  "kind": "formula",
+  "id": "963c279b-6609-408e-9b54-b6bd88eaa030",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of ways to write 360 = 2³·3²·5 as a product of two factors, order ignored?",
+  "formula": "",
+  "options": [
+   "24",
+   "12",
+   "11",
+   "23"
+  ],
+  "answer": 1,
+  "explain": "360 has 4·3·2 = 24 divisors and is not a perfect square, so pairs = 24/2 = 12.",
+  "kind": "result",
+  "id": "13393341-70d2-4b53-9b5d-c30f23a9c61b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of divisors of 2⁶·3³ that are perfect squares?",
+  "formula": "",
+  "options": [
+   "12",
+   "6",
+   "8",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Even exponents only: 2 gets 0,2,4,6 (4 choices), 3 gets 0,2 (2 choices); 4·2 = 8.",
+  "kind": "result",
+  "id": "d3a0aa2b-9fa1-4f34-b8ae-a4f814149ee6",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of divisors of 2³·3³·5 that are multiples of 6?",
+  "formula": "",
+  "options": [
+   "18",
+   "24",
+   "12",
+   "16"
+  ],
+  "answer": 0,
+  "explain": "Exponent of 2 in 1..3 (3), of 3 in 1..3 (3), of 5 in 0..1 (2): 3·3·2 = 18.",
+  "kind": "result",
+  "id": "d236873d-0f87-4974-a7d4-57c6c165db1d",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Selection from identical objects"
+ },
+ {
+  "prompt": "Number of divisors of N = pᵃqᵇ that are perfect squares (p, q distinct primes)?",
+  "formula": "(⌊a/2⌋+1)(⌊b/2⌋+1)",
+  "options": [
+   "(⌊a/2⌋+1)(⌊b/2⌋+1)",
+   "(a/2+1)(b/2+1) always",
+   "(⌊a/2⌋)(⌊b/2⌋)",
+   "⌊(a+1)(b+1)/2⌋"
+  ],
+  "answer": 0,
+  "explain": "Square divisor needs even exponents: 0,2,…≤a gives ⌊a/2⌋+1 choices for p, similarly for q.",
+  "kind": "formula",
+  "id": "92bda4b7-cc62-4568-8131-a92e31049194",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Sum of the reciprocals of all divisors of N, where σ(N) is the sum of divisors, equals?",
+  "formula": "σ(N)/N",
+  "options": [
+   "σ(N)/N",
+   "σ(N)/N²",
+   "N/σ(N)",
+   "d/N"
+  ],
+  "answer": 0,
+  "explain": "Divisors pair as dᵢ and N/dᵢ, so Σ1/dᵢ = (ΣN/dᵢ)/N = σ(N)/N.",
+  "kind": "result",
+  "id": "040053e9-f50f-4697-949d-a8fbe0ff9ee7",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Number of 3-digit numbers whose digits are strictly decreasing from left to right?",
+  "formula": "",
+  "options": [
+   "120",
+   "90",
+   "84",
+   "100"
+  ],
+  "answer": 0,
+  "explain": "Any 3 of the 10 digits give exactly one decreasing order, so ¹⁰C₃ = 120. The leading digit is automatically non-zero.",
+  "kind": "result",
+  "id": "c43dd25b-80c6-4901-9265-945365477bbb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Ways to write 2310 as a product of two coprime natural numbers, order ignored?",
+  "formula": "2310 = 2·3·5·7·11",
+  "options": [
+   "16",
+   "32",
+   "10",
+   "15"
+  ],
+  "answer": 0,
+  "explain": "Each of the k = 5 primes goes wholly to one factor: 2⁵ ordered, so 2⁴ = 16 unordered.",
+  "kind": "result",
+  "id": "d5174bc4-ca09-4901-a467-f62543738211",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "Sum of all positive divisors of N = 2ᵃ·3ᵇ equals?",
+  "formula": "σ(N) = Π (p^(e+1) − 1)/(p − 1)",
+  "options": [
+   "(2ᵃ⁺¹−1)(3ᵇ⁺¹−1)/2",
+   "(2ᵃ⁺¹−1)(3ᵇ⁺¹−1)",
+   "(2ᵃ−1)(3ᵇ−1)/2",
+   "(a+1)(b+1)"
+  ],
+  "answer": 0,
+  "explain": "Sum = (1+2+…+2ᵃ)(1+3+…+3ᵇ) = (2ᵃ⁺¹−1)·(3ᵇ⁺¹−1)/2.",
+  "kind": "formula",
+  "id": "c8e4825d-8a61-4e18-ad27-3c464936eb25",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Fundamental principle of counting"
+ },
+ {
+  "prompt": "For r ≤ n, the ratio ⁿ⁺¹Pᵣ / ⁿPᵣ simplifies to which expression?",
+  "formula": "ⁿ⁺¹Pᵣ = (n+1)!/(n+1−r)!",
+  "options": [
+   "(n+1)/(n+1−r)",
+   "(n+1)/(n−r)",
+   "(n+1−r)/(n+1)",
+   "n/(n−r+1)"
+  ],
+  "answer": 0,
+  "explain": "(n+1)!/(n+1−r)! × (n−r)!/n! = (n+1)/(n+1−r).",
+  "kind": "formula",
+  "id": "f73ab3cb-ea56-4156-903f-d8428599fcbb",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "Number of ways to put 3 distinct balls into 7 distinct boxes, at most one ball in each box?",
+  "formula": "",
+  "options": [
+   "⁷C₃",
+   "⁷P₃",
+   "7³",
+   "3⁷"
+  ],
+  "answer": 1,
+  "explain": "Each ball picks a different box in order: 7·6·5 = ⁷P₃ (one-one map).",
+  "kind": "concept",
+  "id": "b21a89e5-7093-42bc-90af-6f3739d992b2",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nPr formula and meaning"
+ },
+ {
+  "prompt": "ⁿCᵣ + 2·ⁿCᵣ₋₁ + ⁿCᵣ₋₂ equals?",
+  "formula": "",
+  "options": [
+   "ⁿ⁺²Cᵣ",
+   "ⁿ⁺¹Cᵣ",
+   "ⁿ⁺²Cᵣ₋₁",
+   "2·ⁿ⁺¹Cᵣ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Apply Pascal twice: (ⁿCᵣ+ⁿCᵣ₋₁)+(ⁿCᵣ₋₁+ⁿCᵣ₋₂) = ⁿ⁺¹Cᵣ+ⁿ⁺¹Cᵣ₋₁ = ⁿ⁺²Cᵣ.",
+  "kind": "result",
+  "id": "b0e6385c-3231-4904-8f92-1131d08ad54c",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Σ ⁿCᵣ·2ʳ for r = 0 to n equals?",
+  "formula": "(1+x)ⁿ at x = 2",
+  "options": [
+   "3ⁿ",
+   "2ⁿ⁺¹",
+   "3ⁿ − 1",
+   "2ⁿ·n"
+  ],
+  "answer": 0,
+  "explain": "Put x = 2 in (1+x)ⁿ = Σ ⁿCᵣxʳ, giving 3ⁿ.",
+  "kind": "result",
+  "id": "a6c37cf6-7314-4b33-979f-61f346b61b74",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "ⁿCᵣ · ʳCₛ (s ≤ r ≤ n) equals?",
+  "formula": "",
+  "options": [
+   "ⁿCₛ · ⁿ⁻ˢCᵣ₋ₛ",
+   "ⁿCₛ · ⁿ⁻ˢCᵣ",
+   "ⁿCᵣ₋ₛ · ⁿ⁻ʳCₛ",
+   "ⁿ⁻ˢCᵣ · ʳ⁻ˢCₛ"
+  ],
+  "answer": 0,
+  "explain": "Choose r then s of them = choose s first, then r−s more from the remaining n−s.",
+  "kind": "formula",
+  "id": "87805220-9314-4e90-8c6b-f3a6a3fe025b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "For r < n: ⁿC₀ − ⁿC₁ + ⁿC₂ − … + (−1)ʳ·ⁿCᵣ equals?",
+  "formula": "",
+  "options": [
+   "(−1)ʳ · ⁿ⁻¹Cᵣ",
+   "(−1)ʳ · ⁿCᵣ",
+   "(−1)ʳ · ⁿ⁻¹Cᵣ₋₁",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Partial alternating sum telescopes via Pascal: result is (−1)ʳ·ⁿ⁻¹Cᵣ. Check n=2, r=1: 1−2 = −1.",
+  "kind": "result",
+  "id": "fedd3a6d-75a7-4504-9b96-62703004c26b",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "nCr formula and properties"
+ },
+ {
+  "prompt": "Derangements satisfy Dₙ = n·Dₙ₋₁ + ? (D₀ = 1, D₁ = 0)",
+  "formula": "Dₙ = nDₙ₋₁ + (−1)ⁿ",
+  "options": [
+   "(−1)ⁿ",
+   "(−1)ⁿ⁻¹",
+   "1",
+   "(−1)ⁿ/n!"
+  ],
+  "answer": 0,
+  "explain": "Check: D₂ = 2·0 + 1 = 1, D₃ = 3·1 − 1 = 2.",
+  "kind": "formula",
+  "id": "4c855b15-c8ee-456b-8974-398d419c2760",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "Σₖ₌₀ⁿ ⁿCₖ·Dₖ (with D₀ = 1) equals?",
+  "formula": "Σ ⁿCₖ Dₖ = n!",
+  "options": [
+   "n!",
+   "2ⁿ",
+   "n!/e",
+   "(n+1)!"
+  ],
+  "answer": 0,
+  "explain": "Classify all n! permutations by their n−k fixed points; the other k places form a derangement.",
+  "kind": "result",
+  "id": "237b5aca-2bef-4e85-81b2-650fcf6542a9",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ },
+ {
+  "prompt": "For derangements, Dₙ = (n − 1)·(Dₙ₋₁ + X). What is X?",
+  "formula": "Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂)",
+  "options": [
+   "Dₙ₋₂",
+   "Dₙ₋₃",
+   "(n−2)·Dₙ₋₂",
+   "Dₙ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Standard recurrence: Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂), e.g. D₄ = 3(2+1) = 9.",
+  "kind": "formula",
+  "id": "122d703f-ee9d-4347-84b2-731e69f0e629",
+  "subject": "Mathematics",
+  "chapter": "Permutations and Combinations",
+  "topic": "Derangements and divisor counting"
+ }
+]

@@ -21,11 +21,11 @@ from load_guard import arena_gate, load
 from rapid_deck import fresh_deck
 from gamify import level_of, phoenix
 from social import make_pid, public_name, team_line, team_scores
-from scope import Pick, label_for, normalise, scope_fields, scope_of
+from scope import CARD_COUNTS, CARD_SECONDS, Pick, label_for, normalise, scope_fields, scope_of
 from leagues import record_battle
 
 DUEL_CARDS = 30
-CARD_SECONDS = 15
+MAX_CARDS = max(CARD_COUNTS)
 WAIT_SECONDS = 120
 MAX_PLAYERS = 5
 MAX_WATCHERS = 100  # people watching one live match at the same time
@@ -49,13 +49,14 @@ def entry_seconds(players: int) -> float:
 
 class DuelCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"] = "Physics"
+    subject: Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning", "Biology"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
     picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters; wins over subject and chapter
     mode: Literal["random", "invite"]
     name: str = Field(min_length=1, max_length=24)
     request_id: str = Field(min_length=8, max_length=64)
     exam: Optional[Exam] = None
+    count: Literal[30, 50, 100] = DUEL_CARDS  # quick match pairs only players who chose the same count
 
 
 class DuelJoin(BaseModel):
@@ -67,7 +68,7 @@ class DuelJoin(BaseModel):
 
 class DuelAnswer(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    index: int = Field(ge=0, lt=DUEL_CARDS)
+    index: int = Field(ge=0, lt=MAX_CARDS)
     choice: Optional[int] = Field(default=None, ge=0, le=3)
     outcome: Literal["answer", "skipped", "timed_out"]
     ms: int = Field(default=0, ge=0, le=CARD_SECONDS * 1000 + 1000)
@@ -354,8 +355,14 @@ def make_router(db, rf_user, public_card, award):
         start = time.time() + delay + show + 1.0
         return {"status": "ready", "start_at": start, "entry_seconds": show, "ends_at": start + cards * (CARD_SECONDS + 2) + 30}
 
-    async def pick_cards(exam, picks, count=DUEL_CARDS):
-        return [d["id"] for d in await fresh_deck(db, exam, picks[0]["subject"], count=count, picks=picks)]
+    async def pick_cards(exam, picks, count=DUEL_CARDS, uid=None):
+        """The deck for a match. When the chosen subjects or chapters are too small for 50 or 100 cards, the largest count that fits is dealt."""
+        for n in [count] + sorted((c for c in CARD_COUNTS if c < count), reverse=True):
+            try:
+                return [d["id"] for d in await fresh_deck(db, exam, picks[0]["subject"], count=n, picks=picks, uid=uid)]
+            except HTTPException as e:
+                if e.status_code != 400 or n <= DUEL_CARDS:
+                    raise
 
     def make_bot(rival=None, cards=DUEL_CARDS):
         """A practice rival's seat. A knockout cup passes its own rival so the same one plays every round."""
@@ -372,6 +379,8 @@ def make_router(db, rf_user, public_card, award):
             return existing["id"]
         if not teams:
             uids = uids[:MAX_PLAYERS]
+        card_ids = await pick_cards(exam, picks, cards)
+        cards = len(card_ids)
         players = [await player(u) for u in uids] + [make_bot(b, cards) for b in bots]
         more = {"vs_bot": True} if bots else {}
         if teams:  # Gang vs Gang: each side enters as one team, so the show is as long as a 1 v 1
@@ -379,7 +388,7 @@ def make_router(db, rf_user, public_card, award):
             for p in players:
                 p["team"] = side[p["uid"]]
             more = {"team_mode": True, "teams": {t: {k: teams[t][k] for k in ("id", "name", "emblem")} for t in ("a", "b")}}
-        d = {"id": str(uuid.uuid4()), "code": None, "exam": exam, "mode": "friend", **scope_fields(picks), "card_ids": await pick_cards(exam, picks, cards),
+        d = {"id": str(uuid.uuid4()), "code": None, "exam": exam, "mode": "friend", **scope_fields(picks), "card_ids": card_ids, "cards_n": cards,
              "players": players, "created_ts": time.time(), "request_id": "challenge:" + challenge_id,
              "request_ids": ["challenge:" + challenge_id], "challenge_id": challenge_id, "gang_id": gang_id, **more, **(extra or {}), **start_fields(2 if teams else len(players), cards, delay)}
         await db.rf_duels.insert_one(d)
@@ -596,13 +605,14 @@ def make_router(db, rf_user, public_card, award):
         if data.mode == "random":
             now = time.time()
             match = await db.rf_duels.find_one_and_update(
-                {"exam": exam, "status": "waiting", "mode": "random", "scope_key": scope["scope_key"], "created_ts": {"$gt": now - WAIT_SECONDS}, "players.0.seen_ts": {"$gt": now - 6}, "players.uid": {"$ne": uid}},
-                {"$push": {"players": await player(uid, data.name)}, "$set": start_fields(), "$addToSet": {"request_ids": data.request_id}}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
+                {"exam": exam, "status": "waiting", "mode": "random", "scope_key": scope["scope_key"], "cards_n": data.count, "created_ts": {"$gt": now - WAIT_SECONDS}, "players.0.seen_ts": {"$gt": now - 6}, "players.uid": {"$ne": uid}},
+                {"$push": {"players": await player(uid, data.name)}, "$set": start_fields(cards=data.count), "$addToSet": {"request_ids": data.request_id}}, sort=[("created_ts", 1)], return_document=ReturnDocument.AFTER)
             if match:
                 notify(match["id"], match)
                 return await view(match, uid)
+        card_ids = await pick_cards(exam, picks, data.count, uid)
         d = {"id": str(uuid.uuid4()), "code": "".join(random.choices(string.ascii_uppercase.replace("O", "").replace("I", "") + "23456789", k=6)),
-             "exam": exam, "mode": data.mode, **scope, "status": "waiting", "card_ids": await pick_cards(exam, picks),
+             "exam": exam, "mode": data.mode, **scope, "status": "waiting", "card_ids": card_ids, "cards_n": len(card_ids),
              "players": [await player(uid, data.name)], "created_ts": time.time(), "request_id": data.request_id, "request_ids": [data.request_id]}
         await db.rf_duels.insert_one(d)
         return await view(d, uid)
@@ -618,7 +628,7 @@ def make_router(db, rf_user, public_card, award):
             if data.exam and existing["exam"] != data.exam:
                 raise HTTPException(409, f"This is a {existing['exam']} duel. Switch your arena exam to join.")
             return await view(existing, uid)
-        invitation = await db.rf_duels.find_one({"code": code}, {"_id": 0, "exam": 1, "subject": 1, "status": 1, "created_ts": 1, "players.uid": 1})
+        invitation = await db.rf_duels.find_one({"code": code}, {"_id": 0, "exam": 1, "subject": 1, "status": 1, "created_ts": 1, "players.uid": 1, "cards_n": 1})
         if invitation:
             resolve_exam(invitation.get("exam"), invitation["subject"])
         if not invitation or invitation["status"] != "waiting" or invitation["created_ts"] <= time.time() - 1800:
@@ -629,7 +639,7 @@ def make_router(db, rf_user, public_card, award):
         if not await db.rf_friends.find_one({"uid": uid, "fid": invitation["players"][0]["uid"]}, {"_id": 1}):
             raise HTTPException(403, "Duel codes are only for friends. Add this player with their Friend Code first.")
         d = await db.rf_duels.find_one_and_update({"code": code, "status": "waiting", "created_ts": {"$gt": time.time() - 1800}, "players.uid": {"$ne": uid}, "exam": exam},
-                                                  {"$push": {"players": await player(uid, data.name)}, "$set": start_fields()}, return_document=ReturnDocument.AFTER)
+                                                  {"$push": {"players": await player(uid, data.name)}, "$set": start_fields(cards=invitation.get("cards_n") or DUEL_CARDS)}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(404, "This code is invalid, already used, or expired.")
         notify(d["id"], d)
@@ -691,10 +701,11 @@ def make_router(db, rf_user, public_card, award):
     @r.post("/{did}/bot")
     async def vs_bot(did: str, x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        await active_owned_duel(did, uid)
-        bot = make_bot()
+        own = await active_owned_duel(did, uid)
+        n = len(own["card_ids"])
+        bot = make_bot(cards=n)
         d = await db.rf_duels.find_one_and_update({"id": did, "status": {"$in": ["waiting", "expired"]}, "players.0.uid": uid, "players": {"$size": 1}},
-                                                  {"$push": {"players": bot}, "$set": {**start_fields(), "vs_bot": True}}, return_document=ReturnDocument.AFTER)
+                                                  {"$push": {"players": bot}, "$set": {**start_fields(cards=n), "vs_bot": True}}, return_document=ReturnDocument.AFTER)
         if not d:
             raise HTTPException(409, "This duel already has an opponent.")
         notify(did, d)

@@ -1,0 +1,3266 @@
+[
+ {
+  "prompt": "If A is skew-symmetric, then A² is?",
+  "formula": "",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Null matrix",
+   "Identity matrix"
+  ],
+  "answer": 0,
+  "explain": "(A²)ᵀ = (Aᵀ)² = (−A)² = A², so A² is symmetric.",
+  "kind": "result",
+  "id": "51688cf5-8323-4548-8fae-ce4ad647b3f6",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "A matrix that is both symmetric and skew-symmetric must be?",
+  "formula": "",
+  "options": [
+   "Null matrix",
+   "Identity matrix",
+   "Diagonal matrix",
+   "Scalar matrix"
+  ],
+  "answer": 0,
+  "explain": "Aᵀ = A and Aᵀ = −A give A = −A, so A = O.",
+  "kind": "concept",
+  "id": "ea6e7ebd-8a48-4f82-b9d0-dff403600b8d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "A real matrix A satisfies A² = I. Then A is called?",
+  "formula": "",
+  "options": [
+   "Involutory",
+   "Idempotent",
+   "Nilpotent",
+   "Orthogonal"
+  ],
+  "answer": 0,
+  "explain": "Involutory: A² = I. Idempotent: A² = A. Nilpotent: Aᵏ = O.",
+  "kind": "fact",
+  "id": "7ec10f54-f8b1-4023-bc7a-7889e22ba19a",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "If A is orthogonal matrix, then det(A) equals?",
+  "formula": "AAᵀ = I",
+  "options": [
+   "±1",
+   "Only +1",
+   "0",
+   "Any nonzero real"
+  ],
+  "answer": 0,
+  "explain": "det(A)² = det(AAᵀ) = 1, so det(A) = ±1.",
+  "kind": "result",
+  "id": "480df51c-8619-451a-b2da-9db379b0950d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "A nilpotent matrix of index 2 satisfies which condition?",
+  "formula": "A² = O, A ≠ O",
+  "options": [
+   "A² = A",
+   "A² = I",
+   "A² = O",
+   "A² = Aᵀ"
+  ],
+  "answer": 2,
+  "explain": "Nilpotent: Aᵏ = O for some k; index 2 means A² = O with A ≠ O. A² = A is idempotent.",
+  "kind": "concept",
+  "id": "faedc3b6-e030-408f-8edb-9934a17cc816",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "For a square matrix A, the matrix A − Aᵀ is always which type?",
+  "formula": "(A − Aᵀ)ᵀ = Aᵀ − A",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Orthogonal",
+   "Identity"
+  ],
+  "answer": 1,
+  "explain": "(A − Aᵀ)ᵀ = Aᵀ − A = −(A − Aᵀ), so A − Aᵀ is skew-symmetric.",
+  "kind": "result",
+  "id": "6540810c-00db-4c00-ae28-4f784558e45e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "Matrices A and B can be added only if they have the same:",
+  "formula": "",
+  "options": [
+   "Order (rows and columns)",
+   "Number of columns only",
+   "Number of rows only",
+   "Trace"
+  ],
+  "answer": 0,
+  "explain": "Addition is entrywise, so A and B must be of the same order m×n; the sum is also m×n.",
+  "kind": "fact",
+  "id": "77377cce-923e-4c7c-85b3-3e14a6541956",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "For any square matrix A, the matrix A + Aᵀ is always:",
+  "formula": "(A + Aᵀ)ᵀ = Aᵀ + A",
+  "options": [
+   "Skew-symmetric",
+   "Symmetric",
+   "Null matrix",
+   "Diagonal"
+  ],
+  "answer": 1,
+  "explain": "Its transpose is Aᵀ + A, which equals itself, so A + Aᵀ is symmetric.",
+  "kind": "result",
+  "id": "7146d1da-a080-4eac-a6a3-cca662018b76",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "The transpose of kA + B (k scalar) is:",
+  "formula": "",
+  "options": [
+   "kAᵀ + Bᵀ",
+   "k(A + B)ᵀ",
+   "Aᵀ + kBᵀ",
+   "kBᵀ + Aᵀ"
+  ],
+  "answer": 0,
+  "explain": "Transpose is linear: (kA + B)ᵀ = kAᵀ + Bᵀ.",
+  "kind": "formula",
+  "id": "6e5e5f4f-b161-41ea-8e5b-38edd98d4988",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "The only matrix that is both symmetric and skew-symmetric is:",
+  "formula": "A = Aᵀ and Aᵀ = −A",
+  "options": [
+   "Identity matrix",
+   "Any diagonal matrix",
+   "Any scalar matrix",
+   "Null (zero) matrix"
+  ],
+  "answer": 3,
+  "explain": "A = Aᵀ = −A gives 2A = O, so A = O.",
+  "kind": "fact",
+  "id": "11d13ba3-d2d1-49d8-8a32-372025cd7ece",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "If A is a 3×3 matrix, then |2A| equals:",
+  "formula": "|kA| = kⁿ|A|",
+  "options": [
+   "2|A|",
+   "6|A|",
+   "8|A|",
+   "4|A|"
+  ],
+  "answer": 2,
+  "explain": "Each of the 3 rows gets multiplied by 2, so |2A| = 2³|A| = 8|A|.",
+  "kind": "formula",
+  "id": "c0c52015-5c42-4ad8-8444-441e3b3c1978",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "If kA = O for a scalar k and a non-zero matrix A, then:",
+  "formula": "",
+  "options": [
+   "k = 1",
+   "k = 0",
+   "A is singular",
+   "A is skew-symmetric"
+  ],
+  "answer": 1,
+  "explain": "A has some non-zero entry aᵢⱼ, so k·aᵢⱼ = 0 forces k = 0.",
+  "kind": "concept",
+  "id": "edd5f6ab-573a-447a-b295-9b8d0837db6a",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "For a square matrix A, the matrix A − Aᵀ is always:",
+  "formula": "(A − Aᵀ)ᵀ = Aᵀ − A = −(A − Aᵀ)",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Identity matrix",
+   "Diagonal matrix"
+  ],
+  "answer": 1,
+  "explain": "Its transpose equals its negative, so A − Aᵀ is skew-symmetric.",
+  "kind": "result",
+  "id": "4e3c5815-88c4-4f24-9433-7134735e7a85",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "The diagonal elements of a skew-symmetric matrix are always:",
+  "formula": "aᵢᵢ = −aᵢᵢ",
+  "options": [
+   "Equal to 1",
+   "Zero",
+   "Negative",
+   "Equal to each other"
+  ],
+  "answer": 1,
+  "explain": "aᵢᵢ = −aᵢᵢ gives 2aᵢᵢ = 0, so every diagonal entry is 0.",
+  "kind": "fact",
+  "id": "13c0ca4b-cd9c-40b5-ab73-80e13ac730b4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "If A and B are non-singular n×n matrices, then A + B is:",
+  "formula": "",
+  "options": [
+   "Always non-singular",
+   "Always singular",
+   "Not necessarily non-singular",
+   "Non-singular only if |A| + |B| ≠ 0"
+  ],
+  "answer": 2,
+  "explain": "Taking B = −A gives A + B = O, which is singular. Also |A+B| ≠ |A| + |B| in general.",
+  "kind": "exception",
+  "id": "320d0338-2495-4e6c-9b30-b2d6d43cae71",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "For conformable matrices A and B, (AB)ᵀ equals:",
+  "formula": "",
+  "options": [
+   "AᵀBᵀ",
+   "BᵀAᵀ",
+   "BAᵀ",
+   "ABᵀ"
+  ],
+  "answer": 1,
+  "explain": "Reversal law for transpose: (AB)ᵀ = BᵀAᵀ.",
+  "kind": "formula",
+  "id": "cde253b4-1b81-4059-a1d3-421a00432f5d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For invertible A and B of the same order, (AB)⁻¹ equals:",
+  "formula": "",
+  "options": [
+   "A⁻¹B⁻¹",
+   "B⁻¹A⁻¹",
+   "(BA)⁻¹",
+   "A⁻¹B"
+  ],
+  "answer": 1,
+  "explain": "Reversal law: (AB)⁻¹ = B⁻¹A⁻¹.",
+  "kind": "formula",
+  "id": "62f7e9fa-5e62-4cb1-93ba-4ff054f79a04",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "AB = AC implies B = C when:",
+  "formula": "",
+  "options": [
+   "A is a nonzero matrix",
+   "A is a square matrix",
+   "A is symmetric",
+   "A is nonsingular"
+  ],
+  "answer": 3,
+  "explain": "Multiply by A⁻¹, which exists only if |A| ≠ 0. The cancellation law fails otherwise.",
+  "kind": "concept",
+  "id": "2ff8f9c8-441d-4f7f-845e-3ef730a73e43",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "(A+B)² = A² + 2AB + B² holds if and only if:",
+  "formula": "",
+  "options": [
+   "AB = BA",
+   "AB = O",
+   "A = B",
+   "AB = I"
+  ],
+  "answer": 0,
+  "explain": "(A+B)² = A² + AB + BA + B², so we need AB = BA.",
+  "kind": "result",
+  "id": "b9f089a6-ae04-4d67-b8bd-5dc1ec9355b3",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "If A² = A (idempotent), then (I + A)³ equals:",
+  "formula": "",
+  "options": [
+   "I + 3A",
+   "I + 8A",
+   "I + 7A",
+   "I + 6A"
+  ],
+  "answer": 2,
+  "explain": "I + 3A + 3A² + A³ = I + 7A, since every power of A equals A.",
+  "kind": "result",
+  "id": "3d445b90-28d7-4736-9caa-6064ac23902c",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "If A² = O, then (I + A)¹⁰ equals:",
+  "formula": "",
+  "options": [
+   "I + 10A",
+   "I + A",
+   "I",
+   "I + 45A"
+  ],
+  "answer": 0,
+  "explain": "All powers A^k with k ≥ 2 vanish, so the expansion gives I + 10A.",
+  "kind": "result",
+  "id": "76f8e5d4-a5a9-425b-b0f6-43f1b4fc4afd",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "A scalar matrix kI of order n commutes with:",
+  "formula": "",
+  "options": [
+   "Only diagonal matrices",
+   "Only symmetric matrices",
+   "Only invertible matrices",
+   "Every n×n matrix"
+  ],
+  "answer": 3,
+  "explain": "(kI)A = kA = A(kI) for every n×n matrix A.",
+  "kind": "fact",
+  "id": "91efdfb0-5c12-453d-b049-4156104791aa",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For any square matrix A, the matrix AAᵀ is always:",
+  "formula": "",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Orthogonal",
+   "Diagonal"
+  ],
+  "answer": 0,
+  "explain": "(AAᵀ)ᵀ = (Aᵀ)ᵀAᵀ = AAᵀ.",
+  "kind": "result",
+  "id": "3c7842f9-764c-4b9a-954d-410816a0c2ac",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For symmetric A and B, AB is symmetric if and only if:",
+  "formula": "",
+  "options": [
+   "A = B",
+   "AB = O",
+   "AB = BA",
+   "A is invertible"
+  ],
+  "answer": 2,
+  "explain": "(AB)ᵀ = BᵀAᵀ = BA, which equals AB only when they commute.",
+  "kind": "result",
+  "id": "0988fd00-4936-469d-9e6e-20a34ad5218e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For D = diag(a, b), Dⁿ equals:",
+  "formula": "",
+  "options": [
+   "diag(naₙ, nb)",
+   "diag(aⁿ, bⁿ)",
+   "n·diag(a, b)",
+   "diag(a+n, b+n)"
+  ],
+  "answer": 1,
+  "explain": "Diagonal matrices multiply entrywise along the diagonal, so Dⁿ = diag(aⁿ, bⁿ).",
+  "kind": "formula",
+  "id": "3a850d8e-5512-479a-b482-5630d459e74d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "If A = [[0,1],[0,0]], then A² equals:",
+  "formula": "",
+  "options": [
+   "A",
+   "I",
+   "[[0,0],[0,1]]",
+   "O"
+  ],
+  "answer": 3,
+  "explain": "A is nilpotent: row (0,1) times column (1,0) gives 0, and every other entry is 0.",
+  "kind": "fact",
+  "id": "ac2de6b5-406f-4aff-a183-90dbef0c6d4c",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For a square matrix A of order n, A·(adj A) equals:",
+  "formula": "",
+  "options": [
+   "|A| Iₙ",
+   "|A|ⁿ Iₙ",
+   "adj A · |A|⁻¹",
+   "Iₙ"
+  ],
+  "answer": 0,
+  "explain": "A(adj A) = (adj A)A = |A| I.",
+  "kind": "formula",
+  "id": "a945d96c-ee23-43b1-9237-3769f6e3a986",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "If A² = I (involutory), then A²⁰²⁵ equals:",
+  "formula": "",
+  "options": [
+   "I",
+   "A²",
+   "O",
+   "A"
+  ],
+  "answer": 3,
+  "explain": "A²⁰²⁵ = (A²)¹⁰¹² · A = I · A = A.",
+  "kind": "result",
+  "id": "3095acc7-5e9f-461b-9d12-d936e4d63ff7",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For n×n matrices A and B, |AB| equals:",
+  "formula": "",
+  "options": [
+   "|A| + |B|",
+   "|A||B|, and |BA| is the same",
+   "|A||B| only if AB = BA",
+   "|A|ⁿ|B|"
+  ],
+  "answer": 1,
+  "explain": "The determinant is multiplicative: |AB| = |A||B| = |BA|, with no commuting condition needed.",
+  "kind": "formula",
+  "id": "b1fb0b5a-df45-477a-b4a0-cae17633d5f2",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For A = [[1,1],[0,1]], Aⁿ (n ∈ ℕ) equals:",
+  "formula": "",
+  "options": [
+   "[[1,n],[0,1]]",
+   "[[1,1],[0,n]]",
+   "[[n,n],[0,n]]",
+   "[[1,nⁿ],[0,1]]"
+  ],
+  "answer": 0,
+  "explain": "Upper entry adds 1 each multiplication, so A² = [[1,2],[0,1]] and Aⁿ = [[1,n],[0,1]].",
+  "kind": "result",
+  "id": "ed13aa3e-63a0-4c7e-b648-405121164454",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For square matrices A, B of the same order, (A − B)(A + B) equals:",
+  "formula": "",
+  "options": [
+   "A² − B²",
+   "A² − B² + AB − BA",
+   "A² − B² + BA − AB",
+   "A² + B² − AB"
+  ],
+  "answer": 2,
+  "explain": "(A−B)(A+B) = A² + AB − BA − B²; check: A·B − B·A = AB − BA, so A² − B² + AB − BA.",
+  "kind": "formula",
+  "id": "34fa8e09-95dd-4ba5-85f9-057307a56a4a",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "Every diagonal element of a real skew-symmetric matrix is?",
+  "formula": "aᵢᵢ = −aᵢᵢ",
+  "options": [
+   "1",
+   "Zero",
+   "Negative",
+   "Equal to each other"
+  ],
+  "answer": 1,
+  "explain": "Aᵀ = −A gives aᵢᵢ = −aᵢᵢ, so aᵢᵢ = 0.",
+  "kind": "fact",
+  "id": "296075ab-9cb2-435d-a400-2119252b95e0",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "If A is skew-symmetric, then A² is?",
+  "formula": "(A²)ᵀ = (Aᵀ)² = (−A)²",
+  "options": [
+   "Skew-symmetric",
+   "Symmetric",
+   "Null matrix",
+   "Identity matrix"
+  ],
+  "answer": 1,
+  "explain": "(A²)ᵀ = (−A)² = A², so A² is symmetric.",
+  "kind": "result",
+  "id": "1bdaf9c2-fde4-440b-84dd-ff040b5659a8",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "For any square matrix A, the matrix AAᵀ is?",
+  "formula": "(AAᵀ)ᵀ = (Aᵀ)ᵀAᵀ = AAᵀ",
+  "options": [
+   "Skew-symmetric",
+   "Identity",
+   "Symmetric",
+   "Diagonal"
+  ],
+  "answer": 2,
+  "explain": "(AAᵀ)ᵀ = AAᵀ, so it is always symmetric.",
+  "kind": "result",
+  "id": "b8d06d04-89bd-44a7-8219-cba244d2a064",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "A real matrix that is both symmetric and skew-symmetric must be?",
+  "formula": "Aᵀ = A and Aᵀ = −A",
+  "options": [
+   "Identity matrix",
+   "Zero matrix",
+   "Any diagonal matrix",
+   "Scalar matrix"
+  ],
+  "answer": 1,
+  "explain": "A = −A gives 2A = O, so A is the null matrix.",
+  "kind": "fact",
+  "id": "c722ed6f-0b89-442a-8b0b-92426503cf9e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "A symmetric, B skew-symmetric, same order. AB − BA is?",
+  "formula": "(AB−BA)ᵀ = BᵀAᵀ − AᵀBᵀ",
+  "options": [
+   "Skew-symmetric",
+   "Symmetric",
+   "Null matrix",
+   "Orthogonal"
+  ],
+  "answer": 1,
+  "explain": "(AB−BA)ᵀ = −BA + AB = AB − BA, so it is symmetric.",
+  "kind": "result",
+  "id": "bac52c55-c358-4616-b6e2-6d8687bdd1d0",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "If A is skew-symmetric and n is odd, then Aⁿ is?",
+  "formula": "(Aⁿ)ᵀ = (Aᵀ)ⁿ = (−A)ⁿ",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Null matrix",
+   "Identity matrix"
+  ],
+  "answer": 1,
+  "explain": "(Aⁿ)ᵀ = (−1)ⁿAⁿ = −Aⁿ for odd n, so it is skew-symmetric.",
+  "kind": "result",
+  "id": "0537aeac-b28f-4ea4-8802-ce8b87228565",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "For an n×n matrix A and scalar k, det(k·Aᵀ) equals?",
+  "formula": "det(kAᵀ) = kⁿ det A",
+  "options": [
+   "kⁿ det A",
+   "k det A",
+   "kⁿ det Aᵀ with sign (−1)ⁿ",
+   "k·n det A"
+  ],
+  "answer": 0,
+  "explain": "det Aᵀ = det A, and pulling k out of each of n rows gives kⁿ.",
+  "kind": "formula",
+  "id": "8fa76395-1426-4849-964f-11d81479544e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "A, B symmetric of same order. AB is symmetric if and only if?",
+  "formula": "(AB)ᵀ = BᵀAᵀ = BA",
+  "options": [
+   "AB = BA",
+   "A = B",
+   "AB = I",
+   "A⁻¹ = B"
+  ],
+  "answer": 0,
+  "explain": "(AB)ᵀ = BA, so AB is symmetric exactly when BA = AB.",
+  "kind": "result",
+  "id": "c024fa48-81f9-45a0-94cd-0be85e8b0b04",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "A is skew-symmetric of order n, B is any n×n matrix. BᵀAB is?",
+  "formula": "(BᵀAB)ᵀ = BᵀAᵀB",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Orthogonal",
+   "Identity matrix"
+  ],
+  "answer": 1,
+  "explain": "(BᵀAB)ᵀ = BᵀAᵀB = −BᵀAB, so it is skew-symmetric.",
+  "kind": "result",
+  "id": "b694fe15-8267-4951-995d-7db3f4eaf375",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "Any square matrix A can be uniquely written as the sum of which two types of matrices?",
+  "formula": "A = ½(A + Aᵀ) + ½(A − Aᵀ)",
+  "options": [
+   "Symmetric and skew-symmetric",
+   "Two symmetric matrices",
+   "Diagonal and scalar matrices",
+   "Orthogonal and symmetric matrices"
+  ],
+  "answer": 0,
+  "explain": "½(A+Aᵀ) is symmetric and ½(A−Aᵀ) is skew-symmetric; the decomposition is unique.",
+  "kind": "result",
+  "id": "146b5fe9-032f-4eea-9a55-f2821720fbb1",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "For a real skew-symmetric matrix of odd order, the determinant equals?",
+  "formula": "det A = det Aᵀ = (−1)ⁿ det A",
+  "options": [
+   "Zero",
+   "One",
+   "Minus one",
+   "Nonzero, depends on entries"
+  ],
+  "answer": 0,
+  "explain": "Aᵀ = −A gives det A = (−1)ⁿ det A = −det A for odd n, so det A = 0.",
+  "kind": "result",
+  "id": "a8ea7e0b-3fdf-4ebd-a169-46bba6354fe7",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "If A² = A, then (I − A)² equals?",
+  "formula": "(I−A)² = I − 2A + A²",
+  "options": [
+   "I − A",
+   "I − 2A",
+   "I",
+   "O"
+  ],
+  "answer": 0,
+  "explain": "I − 2A + A = I − A, so I − A is also idempotent.",
+  "kind": "result",
+  "id": "9be2359d-aa74-4c6f-aa29-d5c309aff800",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "If A is idempotent, (I + A)ⁿ equals?",
+  "formula": "(I+A)ⁿ = I + (2ⁿ−1)A",
+  "options": [
+   "I + nA",
+   "I + (2ⁿ − 1)A",
+   "I + 2ⁿA",
+   "2ⁿI + A"
+  ],
+  "answer": 1,
+  "explain": "Aᵏ = A, so the binomial sum of A terms gives (2ⁿ − 1)A.",
+  "kind": "formula",
+  "id": "56152c2e-48ab-43dd-a8d2-de061048bb86",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "Every eigenvalue of a nilpotent matrix is?",
+  "formula": "",
+  "options": [
+   "1 only",
+   "0 or 1",
+   "0 only",
+   "±1"
+  ],
+  "answer": 2,
+  "explain": "Aᵏ = O gives λᵏ = 0, so λ = 0.",
+  "kind": "fact",
+  "id": "739f0474-bba9-4321-acaa-21c7acb00581",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "If A² = O, then (I + A)ⁿ equals?",
+  "formula": "",
+  "options": [
+   "I + A",
+   "I + (2ⁿ−1)A",
+   "I + nA",
+   "I"
+  ],
+  "answer": 2,
+  "explain": "Binomial terms with A² and higher vanish, leaving I + nA.",
+  "kind": "formula",
+  "id": "c59b0b33-eb77-450d-a46e-c83c5848c1cf",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "The trace of any nilpotent matrix is?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "Equal to its order",
+   "Any nonzero value"
+  ],
+  "answer": 1,
+  "explain": "All eigenvalues are 0, so their sum (the trace) is 0.",
+  "kind": "fact",
+  "id": "bdc0bbd9-e315-4621-9670-63c54f42b5b4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "If AB = A and BA = B, then A² equals?",
+  "formula": "",
+  "options": [
+   "B",
+   "I",
+   "A",
+   "O"
+  ],
+  "answer": 2,
+  "explain": "A² = (AB)A = A(BA) = AB = A, so A is idempotent.",
+  "kind": "result",
+  "id": "2bc15243-f0fc-4504-9ec5-d70f799824ec",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "If A² = I, which of these matrices is idempotent?",
+  "formula": "",
+  "options": [
+   "I + A",
+   "(I + A)/4",
+   "A/2",
+   "(I + A)/2"
+  ],
+  "answer": 3,
+  "explain": "((I+A)/2)² = (2I + 2A)/4 = (I+A)/2.",
+  "kind": "result",
+  "id": "b4ed6a5c-a704-4f86-a858-9b6929617a24",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "For idempotent A and B, A + B is idempotent iff?",
+  "formula": "",
+  "options": [
+   "AB = BA",
+   "AB = BA = O",
+   "AB = BA = I",
+   "A = B"
+  ],
+  "answer": 1,
+  "explain": "(A+B)² = A + B + AB + BA, so AB + BA = O. For idempotents this forces AB = BA = O.",
+  "kind": "result",
+  "id": "3e6eb62a-632c-496e-990a-9a8b9a6ff73f",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "For A = [[1,1],[0,1]], the top-right entry of Aⁿ is?",
+  "formula": "",
+  "options": [
+   "n",
+   "2ⁿ − 1",
+   "n²",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Aⁿ = [[1,n],[0,1]].",
+  "kind": "formula",
+  "id": "bfec9654-88bf-4640-b198-f6757fe958e5",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "For the rotation matrix A(θ) = [[cosθ, −sinθ],[sinθ, cosθ]], Aⁿ equals?",
+  "formula": "",
+  "options": [
+   "A(θ) with entries raised to the n",
+   "nA(θ)",
+   "A(θⁿ)",
+   "A(nθ)"
+  ],
+  "answer": 3,
+  "explain": "Rotation by θ repeated n times is a rotation by nθ.",
+  "kind": "formula",
+  "id": "905849df-9acd-481d-a2ab-0b9db71de03d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "For A = [[0,1],[1,0]], A²⁰²⁵ equals?",
+  "formula": "",
+  "options": [
+   "I",
+   "A",
+   "2025A",
+   "O"
+  ],
+  "answer": 1,
+  "explain": "A² = I, so odd powers equal A.",
+  "kind": "result",
+  "id": "3fee533d-b923-4641-a551-47dd96061e24",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "If A is skew-symmetric, then A³ is?",
+  "formula": "",
+  "options": [
+   "Symmetric",
+   "Identity",
+   "Skew-symmetric",
+   "Null matrix"
+  ],
+  "answer": 2,
+  "explain": "(A³)ᵀ = (Aᵀ)³ = (−A)³ = −A³, so odd powers stay skew-symmetric.",
+  "kind": "result",
+  "id": "3da2a639-90a6-49cf-95fe-9e63679722d8",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "A is a nilpotent 3×3 matrix. Which statement must hold?",
+  "formula": "",
+  "options": [
+   "A² = O",
+   "A³ = O",
+   "A³ = I",
+   "A² = A"
+  ],
+  "answer": 1,
+  "explain": "By Cayley–Hamilton, an n×n nilpotent matrix has Aⁿ = O, so A³ = O. A² = O need not hold.",
+  "kind": "fact",
+  "id": "94cf17b7-a43e-4df8-8807-f95a75ae87da",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "If A is idempotent (A² = A), then det(A) can be?",
+  "formula": "|A| = |A|²",
+  "options": [
+   "0 only",
+   "1 only",
+   "0 or 1",
+   "1 or −1"
+  ],
+  "answer": 2,
+  "explain": "|A|² = |A| gives |A|(|A| − 1) = 0, so |A| = 0 or 1.",
+  "kind": "result",
+  "id": "4d8e38e4-2ebb-479b-8c34-065873b7eaae",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "For A = [[1,1],[1,1]], Aⁿ (n ≥ 1) equals?",
+  "formula": "A² = 2A",
+  "options": [
+   "2ⁿ A",
+   "2ⁿ⁻¹ A",
+   "nA",
+   "A"
+  ],
+  "answer": 1,
+  "explain": "A² = 2A, A³ = 4A, and so on, so Aⁿ = 2ⁿ⁻¹A.",
+  "kind": "result",
+  "id": "3ca766f4-306a-449b-a642-934f0b811af9",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "For an idempotent matrix A (A² = A), trace(A) equals which quantity?",
+  "formula": "A² = A ⇒ tr(A) = rank(A)",
+  "options": [
+   "rank(A)",
+   "det(A)",
+   "Order of A",
+   "Always 0"
+  ],
+  "answer": 0,
+  "explain": "Eigenvalues are 0 or 1 and A is diagonalizable, so trace counts the 1s, which equals the rank.",
+  "kind": "result",
+  "id": "876080a8-70ac-4c71-86b6-68d70e412749",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Powers of matrices, idempotent, nilpotent"
+ },
+ {
+  "prompt": "Product of two orthogonal matrices of the same order is always a/an:",
+  "formula": "(AB)(AB)ᵀ = A(BBᵀ)Aᵀ = I",
+  "options": [
+   "Orthogonal matrix",
+   "Symmetric matrix",
+   "Skew-symmetric matrix",
+   "Singular matrix"
+  ],
+  "answer": 0,
+  "explain": "(AB)(AB)ᵀ = ABBᵀAᵀ = AAᵀ = I, so AB is orthogonal.",
+  "kind": "result",
+  "id": "f0997a97-697c-4630-81ab-af155e326ed6",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Orthogonal and involutory matrices"
+ },
+ {
+  "prompt": "The rows of a real orthogonal matrix form which kind of set of vectors?",
+  "formula": "",
+  "options": [
+   "Orthonormal set",
+   "Orthogonal but not unit vectors",
+   "Linearly dependent set",
+   "Unit vectors, not necessarily perpendicular"
+  ],
+  "answer": 0,
+  "explain": "AAᵀ = I gives each row of unit length and every pair of rows perpendicular.",
+  "kind": "concept",
+  "id": "5eff97ff-242e-4647-98e4-3dc4611baae4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Orthogonal and involutory matrices"
+ },
+ {
+  "prompt": "For a 3×3 real orthogonal matrix, the sum of squares of all nine entries is:",
+  "formula": "tr(AAᵀ) = tr(I) = n",
+  "options": [
+   "3",
+   "1",
+   "9",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Each row has squares summing to 1, so the three rows give a total of 3.",
+  "kind": "result",
+  "id": "720a43ae-7b73-43b0-a05f-290f89db07c7",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Orthogonal and involutory matrices"
+ },
+ {
+  "prompt": "If A is an involutory matrix of order n, then (I + A)(I − A) equals:",
+  "formula": "A² = I",
+  "options": [
+   "Null matrix",
+   "I",
+   "2I",
+   "A"
+  ],
+  "answer": 0,
+  "explain": "(I + A)(I − A) = I − A² = I − I = O.",
+  "kind": "result",
+  "id": "b3a8ccd0-bcd3-4b7f-ac4f-e48385dc1732",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Orthogonal and involutory matrices"
+ },
+ {
+  "prompt": "If A is involutory, then A²⁰²⁵ equals:",
+  "formula": "A² = I",
+  "options": [
+   "A",
+   "I",
+   "A²⁰²⁵ cannot be simplified",
+   "O"
+  ],
+  "answer": 0,
+  "explain": "A²⁰²⁵ = (A²)¹⁰¹²·A = I·A = A, since odd powers reduce to A.",
+  "kind": "result",
+  "id": "f1f10e87-66de-45ec-8f74-44cd995eef49",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Orthogonal and involutory matrices"
+ },
+ {
+  "prompt": "If A is orthogonal, then which matrix is A⁻¹ equal to?",
+  "formula": "AAᵀ = I",
+  "options": [
+   "Aᵀ",
+   "−A",
+   "adj(A)·|A|",
+   "A²"
+  ],
+  "answer": 0,
+  "explain": "Orthogonal means AAᵀ = AᵀA = I, so A⁻¹ = Aᵀ.",
+  "kind": "definition",
+  "id": "9391569a-cdd2-4d70-b676-ee8e75e47aaa",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Orthogonal and involutory matrices"
+ },
+ {
+  "prompt": "For an involutory matrix A, which of these equals ½(I + A) squared?",
+  "formula": "A² = I",
+  "options": [
+   "½(I + A)",
+   "I + A",
+   "A",
+   "¼(I − A)"
+  ],
+  "answer": 0,
+  "explain": "(I+A)² = I + 2A + A² = 2(I+A), so [½(I+A)]² = ¼·2(I+A) = ½(I+A) (idempotent).",
+  "kind": "result",
+  "id": "0164e3b4-c03d-416d-b3f5-628a62473291",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Orthogonal and involutory matrices"
+ },
+ {
+  "prompt": "For an n×n matrix A and scalar k, tr(kA) equals?",
+  "formula": "tr(kA) = k·tr(A)",
+  "options": [
+   "k·tr(A)",
+   "kⁿ·tr(A)",
+   "tr(A)+k",
+   "k²·tr(A)"
+  ],
+  "answer": 0,
+  "explain": "Trace is linear: each diagonal entry is multiplied by k, so the sum is multiplied by k.",
+  "kind": "formula",
+  "id": "85c1712f-d5bc-4b49-931a-b6505711b379",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Trace of a matrix"
+ },
+ {
+  "prompt": "For a real skew-symmetric matrix A, tr(A) equals?",
+  "formula": "",
+  "options": [
+   "1",
+   "Sum of the off-diagonal entries",
+   "0",
+   "det(A)"
+  ],
+  "answer": 2,
+  "explain": "Skew-symmetric means aᵢᵢ = −aᵢᵢ, so every diagonal entry is 0 and the trace is 0.",
+  "kind": "result",
+  "id": "fb3b0f60-0bde-4071-98c0-58544690381a",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Trace of a matrix"
+ },
+ {
+  "prompt": "For n×n matrices A and B, which statement about trace is always true?",
+  "formula": "tr(AB) = tr(BA)",
+  "options": [
+   "tr(AB) = tr(A)·tr(B)",
+   "tr(ABC) = tr(BAC) always",
+   "tr(AB − BA) = 0",
+   "tr(AB) = tr(Aᵀ)·tr(B)"
+  ],
+  "answer": 2,
+  "explain": "tr(AB)=tr(BA), so tr(AB−BA)=0; no commutator equals identity. Product rule and tr(ABC)=tr(BAC) fail in general.",
+  "kind": "result",
+  "id": "1777d222-d4b0-4a5c-9785-96dd10b839be",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Trace of a matrix"
+ },
+ {
+  "prompt": "For a square matrix A, Σⱼ aᵢⱼCᵢⱼ (same row i, own cofactors) equals?",
+  "formula": "Σⱼ aᵢⱼCᵢⱼ = |A|",
+  "options": [
+   "0",
+   "|A|",
+   "|A|²",
+   "Trace of A"
+  ],
+  "answer": 1,
+  "explain": "Expanding along row i with its own cofactors gives the determinant; other rows' cofactors give 0.",
+  "kind": "result",
+  "id": "3f6c6059-eb49-405b-815b-caa0b3120027",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "How many minors does a 4×4 determinant have, and of what order is each?",
+  "formula": "",
+  "options": [
+   "16 minors, each of order 3",
+   "16 minors, each of order 4",
+   "12 minors, each of order 3",
+   "4 minors, each of order 3"
+  ],
+  "answer": 0,
+  "explain": "One minor per element gives n² = 16, each a 3×3 determinant.",
+  "kind": "fact",
+  "id": "52a7a283-ee0d-41f3-b8d1-82fe62d878b0",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "In a 3×3 determinant, for which element is the cofactor equal to −(minor)?",
+  "formula": "",
+  "options": [
+   "a₁₁",
+   "a₂₂",
+   "a₂₃",
+   "a₃₃"
+  ],
+  "answer": 2,
+  "explain": "Sign is (−1)^(i+j); 2+3 = 5 is odd, so C₂₃ = −M₂₃. The others have even i+j.",
+  "kind": "concept",
+  "id": "d10e615f-9d5b-4145-add5-b2bad7da0b04",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "The cofactor Cᵢⱼ is independent of which elements of the determinant?",
+  "formula": "",
+  "options": [
+   "Elements outside row i and column j",
+   "Elements on the main diagonal",
+   "Elements in row i and column j",
+   "No element; it depends on all"
+  ],
+  "answer": 2,
+  "explain": "Row i and column j are deleted to form Mᵢⱼ, so Cᵢⱼ does not depend on them.",
+  "kind": "concept",
+  "id": "1e0911b4-2157-477c-91db-1d38b4dbf53d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "If A² = A (idempotent), the possible values of det(A) are?",
+  "formula": "[det A]² = det A",
+  "options": [
+   "0 only",
+   "1 only",
+   "0 or 1",
+   "±1"
+  ],
+  "answer": 2,
+  "explain": "d² = d gives d = 0 or 1.",
+  "kind": "result",
+  "id": "e1fc6997-d7ee-4659-95db-f0782b7109e4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "If A is singular, then det(AB) for any square B of same order is?",
+  "formula": "",
+  "options": [
+   "det(B)",
+   "Non-zero",
+   "0",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "det(AB) = det A · det B = 0 · det B = 0.",
+  "kind": "concept",
+  "id": "2bdcef95-4d92-4012-9f9e-ee3969334485",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "For a real n×n matrix A with A² = −I, which must hold?",
+  "formula": "[det A]² = (−1)ⁿ",
+  "options": [
+   "n is odd",
+   "n is even",
+   "det A = −1",
+   "det A = 0"
+  ],
+  "answer": 1,
+  "explain": "[det A]² = (−1)ⁿ must be positive for real A, so n is even.",
+  "kind": "concept",
+  "id": "13516a0d-c763-4283-9211-16aea02166a8",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "For a 3×3 matrix A, det(adj(adj A)) equals?",
+  "formula": "",
+  "options": [
+   "[det A]²",
+   "[det A]³",
+   "[det A]⁴",
+   "[det A]⁹"
+  ],
+  "answer": 2,
+  "explain": "det(adj(adj A)) = [det A]^((n−1)²) = [det A]⁴ for n = 3.",
+  "kind": "formula",
+  "id": "1981e8dc-e3de-436d-8257-f9d6952dc677",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "The determinant of a triangular matrix equals?",
+  "formula": "",
+  "options": [
+   "Sum of diagonal entries",
+   "Product of diagonal entries",
+   "Product of all entries",
+   "Sum of all eigenvalues"
+  ],
+  "answer": 1,
+  "explain": "For upper or lower triangular matrices, det = product of the diagonal entries.",
+  "kind": "fact",
+  "id": "ced6a429-a7d7-4324-9b13-077083934fb7",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "For invertible P, det(P⁻¹AP) equals?",
+  "formula": "",
+  "options": [
+   "det(A)",
+   "det(P)·det(A)",
+   "det(A)/det(P)",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "det(P⁻¹)·det(A)·det(P) = det(A), since det(P⁻¹)det(P) = 1.",
+  "kind": "result",
+  "id": "505f86f1-d0e3-4a2f-bfc9-cdd089d7260f",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "If A is an orthogonal matrix (AAᵀ = I), then det(A) can be?",
+  "formula": "",
+  "options": [
+   "Only 1",
+   "Only 0",
+   "Only +1 or −1",
+   "Any real number"
+  ],
+  "answer": 2,
+  "explain": "[det(A)]² = det(AAᵀ) = 1, so det(A) = ±1.",
+  "kind": "result",
+  "id": "a146f875-9c35-4929-994d-7d9c6032fe4e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "A is 3×2 and B is 2×3. Then det(AB) equals?",
+  "formula": "",
+  "options": [
+   "det(A)·det(B)",
+   "1",
+   "0",
+   "det(BA)"
+  ],
+  "answer": 2,
+  "explain": "rank(AB) ≤ 2 < 3, so the 3×3 matrix AB is singular. det(A) and det(B) are not defined.",
+  "kind": "exception",
+  "id": "96f3a5e9-6f06-4fec-9b9f-c05c717c45c4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "For a real square matrix A with A² = I, the possible values of det(A) are?",
+  "formula": "[det A]² = 1",
+  "options": [
+   "Only 1",
+   "Only 0 or 1",
+   "+1 or −1",
+   "0 or −1"
+  ],
+  "answer": 2,
+  "explain": "det(A²) = [det A]² = det I = 1, so det A = ±1.",
+  "kind": "result",
+  "id": "c7224282-2298-4909-9e4f-54340dcd6a03",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "For a 3×3 matrix A with det(A) = d, det(A·adj A) equals?",
+  "formula": "A·adj A = (det A)·I",
+  "options": [
+   "d²",
+   "d³",
+   "3d",
+   "d⁴"
+  ],
+  "answer": 1,
+  "explain": "A·adj A = dI₃, so its determinant is d³·det(I) = d³.",
+  "kind": "formula",
+  "id": "5e21585e-9c46-447c-8961-5f978921ee1a",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "A, B are n×n with n odd and AB = −BA. Then which must hold?",
+  "formula": "",
+  "options": [
+   "det(A) = det(B)",
+   "det(A)·det(B) = 0",
+   "det(A)·det(B) = 1",
+   "A = B = O"
+  ],
+  "answer": 1,
+  "explain": "det(AB) = (−1)ⁿ det(BA) = −det(AB) for odd n, so det(A)det(B) = 0.",
+  "kind": "exception",
+  "id": "f037bf6f-5e0c-48dd-8b4a-d281a0304a66",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "Area of triangle with vertices (x₁,y₁),(x₂,y₂),(x₃,y₃) in determinant form is:",
+  "formula": "Δ = ½ |det[xᵢ yᵢ 1]|",
+  "options": [
+   "½ |3×3 determinant with rows xᵢ, yᵢ, 1|",
+   "|3×3 determinant with rows xᵢ, yᵢ, 1|",
+   "⅓ |3×3 determinant with rows xᵢ, yᵢ, 1|",
+   "½ (3×3 determinant without modulus)"
+  ],
+  "answer": 0,
+  "explain": "Area is half the modulus of the 3×3 determinant with rows (xᵢ, yᵢ, 1).",
+  "kind": "formula",
+  "id": "25074849-fe48-4052-99d2-2ccf712dbb23",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "If a triangle has area 4 sq. units, the 3×3 coordinate determinant equals:",
+  "formula": "",
+  "options": [
+   "±4",
+   "±8",
+   "±2",
+   "±16"
+  ],
+  "answer": 1,
+  "explain": "Area = ½|D| = 4, so D = ±8. Use both signs when solving for an unknown.",
+  "kind": "concept",
+  "id": "955edb15-3280-4c2c-9b78-60900f3c15fd",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "The determinant (rows xᵢ, yᵢ, 1) is positive when the vertices A, B, C are taken in which order?",
+  "formula": "",
+  "options": [
+   "Clockwise",
+   "Along a straight line",
+   "Anticlockwise",
+   "Any order"
+  ],
+  "answer": 2,
+  "explain": "The signed area is positive for the anticlockwise orientation and negative for clockwise.",
+  "kind": "fact",
+  "id": "3b2f273e-7fe1-455d-a4a8-cff85e2c32f0",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "If every coordinate of a triangle is multiplied by k, its area is multiplied by:",
+  "formula": "",
+  "options": [
+   "k",
+   "k²",
+   "k³",
+   "2k"
+  ],
+  "answer": 1,
+  "explain": "Area is a second-degree (length²) quantity, so it scales by k².",
+  "kind": "result",
+  "id": "f6644c6e-d31f-443c-8c0f-57add5cd0b12",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "The equation of the line through (x₁,y₁) and (x₂,y₂) in determinant form is:",
+  "formula": "",
+  "options": [
+   "det[x y 1; x₁ y₁ 1; x₂ y₂ 1] = 0",
+   "det[x y 1; x₁ y₁ 1; x₂ y₂ 1] = 1",
+   "det[x y 0; x₁ y₁ 1; x₂ y₂ 1] = 0",
+   "det[x₁ y₁ 1; x₂ y₂ 1; 0 0 1] = 0"
+  ],
+  "answer": 0,
+  "explain": "A point (x,y) lies on the line iff it is collinear with the two given points, so the determinant is 0.",
+  "kind": "formula",
+  "id": "da08fb52-ad73-4892-a98d-0c965ba8a7cd",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "For distinct a, b, c, the points (a,a²), (b,b²), (c,c²) are collinear:",
+  "formula": "",
+  "options": [
+   "Always",
+   "Never",
+   "Only if a+b+c = 0",
+   "Only if abc = 1"
+  ],
+  "answer": 1,
+  "explain": "The determinant equals ±(a−b)(b−c)(c−a), which is nonzero for distinct a, b, c. Three points on a parabola are never collinear.",
+  "kind": "result",
+  "id": "6ba2ae24-f736-4124-a44e-189bdc1c27bd",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "Every vertex is shifted by (h,k). The value of the coordinate determinant:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Is multiplied by hk",
+   "Increases by h + k",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "Translation is a shift of origin. Row operations R₂−hR₃ and R₃−kR₃-type column operations restore the original determinant, so the area is unchanged.",
+  "kind": "concept",
+  "id": "64468de1-3c8b-4851-b43f-87ddb8d6b797",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "Points (a, b+c), (b, c+a), (c, a+b) are:",
+  "formula": "",
+  "options": [
+   "Always collinear",
+   "Never collinear",
+   "Collinear only if a+b+c = 0",
+   "Collinear only if a = b = c"
+  ],
+  "answer": 0,
+  "explain": "All satisfy x + y = a+b+c; equivalently C₂ + C₁ becomes proportional to C₃, so Δ = 0.",
+  "kind": "result",
+  "id": "17a9c54d-b4be-4112-b004-371995e061c2",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "For a non-singular n×n matrix A, adj(adj A) equals?",
+  "formula": "adj(adj A) = |A|ⁿ⁻²·A",
+  "options": [
+   "|A|ⁿ⁻¹·A",
+   "|A|ⁿ⁻²·A",
+   "|A|ⁿ·A",
+   "|A|²·A"
+  ],
+  "answer": 1,
+  "explain": "Standard result: adj(adj A) = |A|^(n−2)·A.",
+  "kind": "formula",
+  "id": "977405b7-01ec-4e08-9797-8040282e7053",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "If A is a singular square matrix, then A·(adj A) is?",
+  "formula": "",
+  "options": [
+   "Identity matrix",
+   "Null matrix",
+   "Matrix A",
+   "Scalar matrix with entry 1"
+  ],
+  "answer": 1,
+  "explain": "A·adj A = |A|·I = 0·I = O when |A| = 0.",
+  "kind": "result",
+  "id": "dd17e6e1-cb95-4095-8237-85cd3e101e00",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For a 3×3 matrix A with |A| = d ≠ 0, |adj(adj A)| equals?",
+  "formula": "",
+  "options": [
+   "d²",
+   "d³",
+   "d⁴",
+   "d⁹"
+  ],
+  "answer": 2,
+  "explain": "|adj(adj A)| = |A|^((n−1)²) = d⁴ for n = 3.",
+  "kind": "result",
+  "id": "f32e639c-0975-4225-b5ce-fa2e97d731dc",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "The adjoint of a square matrix A is defined as?",
+  "formula": "",
+  "options": [
+   "Cofactor matrix of A",
+   "Transpose of the cofactor matrix of A",
+   "Transpose of the minor matrix of A",
+   "Inverse of the cofactor matrix"
+  ],
+  "answer": 1,
+  "explain": "adj A = (cofactor matrix)ᵀ, i.e. (Cᵢⱼ)ᵀ.",
+  "kind": "concept",
+  "id": "3894614a-5971-4aea-b497-1db7ce15b351",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "A is 3×3 with rank 2. What is the rank of adj A?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "If rank A = n−1, then adj A ≠ O and has rank 1.",
+  "kind": "result",
+  "id": "df8b2f8b-8763-4264-a9e1-8b5ee4c4c6ef",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For a non-singular matrix A of order n, adj(A⁻¹) equals?",
+  "formula": "",
+  "options": [
+   "(adj A)⁻¹",
+   "|A|·(adj A)",
+   "A⁻¹·|A|ⁿ",
+   "(adj A)ᵀ"
+  ],
+  "answer": 0,
+  "explain": "adj(A⁻¹) = (adj A)⁻¹ = A/|A|.",
+  "kind": "formula",
+  "id": "2ebce7ed-9cd4-4a52-8c42-ca761601e261",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For a square matrix A and positive integer m, adj(Aᵐ) equals?",
+  "formula": "",
+  "options": [
+   "m·adj A",
+   "(adj A)ᵐ",
+   "adj(A)·|A|ᵐ",
+   "(adj A)^(1/m)"
+  ],
+  "answer": 1,
+  "explain": "Repeated use of adj(AB) = adj(B)adj(A) gives adj(Aᵐ) = (adj A)ᵐ.",
+  "kind": "formula",
+  "id": "51e093e0-0a75-4bd4-923f-eb6bbf60eacc",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For A = diag(a, b, c), adj A equals?",
+  "formula": "",
+  "options": [
+   "diag(a, b, c)",
+   "diag(bc, ac, ab)",
+   "diag(1/a, 1/b, 1/c)",
+   "diag(abc, abc, abc)"
+  ],
+  "answer": 1,
+  "explain": "Each diagonal cofactor is the product of the other two entries.",
+  "kind": "result",
+  "id": "96ec0d74-07a5-4385-8650-7dfb127893f2",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "If A is a 3×3 skew-symmetric matrix, then adj A is?",
+  "formula": "",
+  "options": [
+   "Skew-symmetric",
+   "Symmetric",
+   "Null matrix",
+   "Identity matrix"
+  ],
+  "answer": 1,
+  "explain": "adj(−A) = (−1)²·adj A = adj A, so (adj A)ᵀ = adj A: symmetric.",
+  "kind": "result",
+  "id": "71eb665d-d930-4f46-8b4c-ce10c85c3783",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For the identity matrix Iₙ, adj(Iₙ) equals?",
+  "formula": "",
+  "options": [
+   "Null matrix",
+   "Iₙ",
+   "n·Iₙ",
+   "Iₙ⁻¹·n"
+  ],
+  "answer": 1,
+  "explain": "Every cofactor of Iₙ on the diagonal is 1 and off-diagonal is 0, so adj I = I.",
+  "kind": "fact",
+  "id": "44176378-0c25-49d0-8ca4-60716726041d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For square matrices A and B of the same order, adj(AB) equals?",
+  "formula": "adj(AB) = (adj B)(adj A)",
+  "options": [
+   "(adj A)(adj B)",
+   "(adj B)(adj A)",
+   "(adj A)ᵀ(adj B)ᵀ",
+   "|AB|·(adj A)(adj B)"
+  ],
+  "answer": 1,
+  "explain": "Adjoint reverses the order of a product, like the inverse and transpose: adj(AB) = adj(B)·adj(A).",
+  "kind": "formula",
+  "id": "f516fabb-33f0-4c03-86bc-8c9f7f4a578d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For an n×n matrix A, det(adj A) = ?",
+  "formula": "|adj A| = |A|ⁿ⁻¹",
+  "options": [
+   "|A|ⁿ",
+   "|A|ⁿ⁻¹",
+   "|A|ⁿ⁻²",
+   "n|A|"
+  ],
+  "answer": 1,
+  "explain": "From A·adj A = |A|I, take determinants: |A||adj A| = |A|ⁿ.",
+  "kind": "formula",
+  "id": "5a62e15d-4d66-4ca1-9d73-7109eaeacad6",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For an n×n invertible matrix A, adj(adj A) = ?",
+  "formula": "adj(adj A) = |A|ⁿ⁻² A",
+  "options": [
+   "|A|ⁿ⁻¹ A",
+   "|A|ⁿ⁻² A",
+   "|A|ⁿ A",
+   "A"
+  ],
+  "answer": 1,
+  "explain": "Standard result: adj(adj A) = |A|^(n−2) A.",
+  "kind": "result",
+  "id": "ab3e2d18-e6b4-4e4f-bbb9-a7c4d7d3cd03",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For n×n matrices A and B, adj(AB) = ?",
+  "formula": "adj(AB) = adj(B)·adj(A)",
+  "options": [
+   "adj(A)·adj(B)",
+   "adj(B)·adj(A)",
+   "adj(Bᵀ)·adj(Aᵀ)",
+   "|AB|·adj(A)"
+  ],
+  "answer": 1,
+  "explain": "The adjoint reverses the order, like the inverse and the transpose.",
+  "kind": "formula",
+  "id": "f3882131-be8e-4f96-9039-6da49e26490c",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If A³ = 2I, then A⁻¹ = ?",
+  "formula": "",
+  "options": [
+   "A²",
+   "2A²",
+   "A²/2",
+   "A/2"
+  ],
+  "answer": 2,
+  "explain": "A·A² = 2I gives A·(A²/2) = I.",
+  "kind": "result",
+  "id": "23903e5a-acb9-452a-9b8a-37d91d1adcb2",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "In the row-operation method, [A | I] is reduced by row operations to which form?",
+  "formula": "[A | I] → [I | A⁻¹]",
+  "options": [
+   "[Aᵀ | I]",
+   "[I | A⁻¹]",
+   "[A⁻¹ | I]",
+   "[I | adj A]"
+  ],
+  "answer": 1,
+  "explain": "The same row operations that turn A into I turn I into A⁻¹.",
+  "kind": "concept",
+  "id": "11f47511-872e-4e1f-a12e-1b6e9acb414a",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If A is symmetric and invertible, A⁻¹ is?",
+  "formula": "",
+  "options": [
+   "Skew-symmetric",
+   "Symmetric",
+   "Orthogonal",
+   "Not necessarily symmetric"
+  ],
+  "answer": 1,
+  "explain": "(A⁻¹)ᵀ = (Aᵀ)⁻¹ = A⁻¹.",
+  "kind": "concept",
+  "id": "e50fd6ec-0703-48ba-9332-615e59dbd026",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If A is skew-symmetric and invertible, A⁻¹ is?",
+  "formula": "(A⁻¹)ᵀ = −A⁻¹",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Identity",
+   "Orthogonal"
+  ],
+  "answer": 1,
+  "explain": "(A⁻¹)ᵀ = (Aᵀ)⁻¹ = (−A)⁻¹ = −A⁻¹.",
+  "kind": "concept",
+  "id": "415b2624-65ae-462d-99b9-dff918e48517",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For a 3×3 matrix A and scalar k, adj(kA) = ?",
+  "formula": "adj(kA) = kⁿ⁻¹ adj A",
+  "options": [
+   "k adj A",
+   "k² adj A",
+   "k³ adj A",
+   "k⁻¹ adj A"
+  ],
+  "answer": 1,
+  "explain": "Cofactors are 2×2 minors, so each scales by k². Here n−1 = 2.",
+  "kind": "formula",
+  "id": "c2a97b03-2ae9-411e-8a8c-05923a9b92d6",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "Inverse of diag(a, b, c) with abc ≠ 0 is?",
+  "formula": "",
+  "options": [
+   "diag(−a, −b, −c)",
+   "diag(1/a, 1/b, 1/c)",
+   "diag(c, b, a)",
+   "diag(a, b, c)/abc"
+  ],
+  "answer": 1,
+  "explain": "The inverse of a diagonal matrix has the reciprocals on the diagonal.",
+  "kind": "result",
+  "id": "c8a340fb-b123-4063-8ff6-a0f7d7ee507f",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "Inverse of the rotation matrix [[cosθ, −sinθ],[sinθ, cosθ]] is?",
+  "formula": "",
+  "options": [
+   "Same matrix with θ → −θ",
+   "Same matrix with θ → π−θ",
+   "The same matrix",
+   "Negative of the matrix"
+  ],
+  "answer": 0,
+  "explain": "Its determinant is 1 and it is orthogonal, so the inverse is the transpose (θ → −θ).",
+  "kind": "result",
+  "id": "53d04598-6761-4b45-bff0-be802054cf19",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If A is invertible and AB = AC, then?",
+  "formula": "",
+  "options": [
+   "B = C",
+   "B = Cᵀ",
+   "B = O",
+   "Nothing can be said"
+  ],
+  "answer": 0,
+  "explain": "Premultiply by A⁻¹ to get B = C.",
+  "kind": "concept",
+  "id": "c5380d94-bde8-4827-b5fc-6656eb69ef4e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If A is a singular n×n matrix, A·adj(A) = ?",
+  "formula": "A·adj A = |A|I",
+  "options": [
+   "I",
+   "A",
+   "Null matrix",
+   "adj A"
+  ],
+  "answer": 2,
+  "explain": "A·adj A = |A|I = O when |A| = 0.",
+  "kind": "result",
+  "id": "92d7781e-cdce-4073-b890-3f244deace9b",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For invertible A and scalar k ≠ 0, (kA)⁻¹ = ?",
+  "formula": "(kA)⁻¹ = (1/k)A⁻¹",
+  "options": [
+   "k A⁻¹",
+   "(1/k) A⁻¹",
+   "(1/k²) A⁻¹",
+   "A⁻¹ / kⁿ"
+  ],
+  "answer": 1,
+  "explain": "(kA)·(1/k)A⁻¹ = I, so the inverse is (1/k)A⁻¹.",
+  "kind": "formula",
+  "id": "7a8ce764-383b-476d-8076-550b8874b03b",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If A is invertible and A² = A, then A = ?",
+  "formula": "A⁻¹A² = A⁻¹A",
+  "options": [
+   "O",
+   "I",
+   "2I",
+   "A⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Multiply A² = A by A⁻¹ to get A = I.",
+  "kind": "result",
+  "id": "98de6ad4-dc65-4ff4-bf04-26e007049a67",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If A is invertible and AB = O, then B is?",
+  "formula": "B = A⁻¹(AB) = A⁻¹O",
+  "options": [
+   "Singular, nonzero",
+   "Identity matrix",
+   "Null matrix",
+   "Equal to A"
+  ],
+  "answer": 2,
+  "explain": "Premultiply by A⁻¹: B = A⁻¹O = O.",
+  "kind": "result",
+  "id": "a0b70fd0-8365-4e11-9937-dfcce30e33ac",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "The inverse of an invertible upper triangular matrix is?",
+  "formula": "",
+  "options": [
+   "Lower triangular",
+   "Upper triangular",
+   "Diagonal always",
+   "Symmetric always"
+  ],
+  "answer": 1,
+  "explain": "Inverse of an invertible upper triangular matrix is again upper triangular.",
+  "kind": "fact",
+  "id": "b1042d8b-5696-4b23-bd71-00f22a2d3522",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For invertible A, (Aᵀ)⁻¹ equals?",
+  "formula": "",
+  "options": [
+   "(A⁻¹)ᵀ",
+   "A⁻¹",
+   "Aᵀ",
+   "A"
+  ],
+  "answer": 0,
+  "explain": "Transpose and inverse commute: (Aᵀ)⁻¹ = (A⁻¹)ᵀ.",
+  "kind": "formula",
+  "id": "7872ad2c-f84b-4b5c-8ef7-2bb5024446b9",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If a 2×2 matrix satisfies A² − 5A + 7I = O, then A⁻¹ = ?",
+  "formula": "Multiply by A⁻¹: A − 5I + 7A⁻¹ = O",
+  "options": [
+   "(5I − A)/7",
+   "(A − 5I)/7",
+   "(7I − A)/5",
+   "(A − 7I)/5"
+  ],
+  "answer": 0,
+  "explain": "Multiplying by A⁻¹ gives 7A⁻¹ = 5I − A.",
+  "kind": "formula",
+  "id": "90243540-fe58-4ac5-82af-39087d8f68a2",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For 3×3 AX=B with det A = 0 and (adj A)B = O (A ≠ O), the system has:",
+  "formula": "",
+  "options": [
+   "Unique solution",
+   "No solution",
+   "Infinitely many solutions",
+   "Only trivial solution"
+  ],
+  "answer": 2,
+  "explain": "Δ=0 with (adj A)B = O means consistent with dependent equations, so infinitely many solutions.",
+  "kind": "result",
+  "id": "e5b11296-fb2f-428f-8806-f2b7ef15cc0f",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "For AX=B with det A = 0 and (adj A)B ≠ O, the system has:",
+  "formula": "",
+  "options": [
+   "Infinitely many solutions",
+   "No solution",
+   "Exactly one solution",
+   "Exactly two solutions"
+  ],
+  "answer": 1,
+  "explain": "Δ=0 and (adj A)B ≠ O means inconsistent.",
+  "kind": "result",
+  "id": "c0895362-29a8-4f11-a57f-7fccab0962d3",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "If Δ = 0 and at least one of Δ₁, Δ₂, Δ₃ ≠ 0 in Cramer's rule, the system is:",
+  "formula": "",
+  "options": [
+   "Inconsistent",
+   "Infinitely many solutions",
+   "Unique solution",
+   "Homogeneous"
+  ],
+  "answer": 0,
+  "explain": "x·Δ = Δ₁ gives 0 = nonzero for the corresponding variable, so there is no solution.",
+  "kind": "result",
+  "id": "05acb07d-eb31-43f8-b355-9f4d84df1e70",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "For a 3-variable system, Δ = Δ₁ = Δ₂ = Δ₃ = 0 implies the system is:",
+  "formula": "",
+  "options": [
+   "Always infinitely many solutions",
+   "Always inconsistent",
+   "Always unique",
+   "Either consistent or inconsistent"
+  ],
+  "answer": 3,
+  "explain": "Cramer's test fails here. E.g. x+y+z=1, 2x+2y+2z=3, 3x+3y+3z=4 has all four determinants 0 but no solution.",
+  "kind": "exception",
+  "id": "453eaa74-c03b-465b-a045-653b8537567a",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "If ρ(A) = ρ(A|B) = number of unknowns n, the system AX=B has:",
+  "formula": "",
+  "options": [
+   "No solution",
+   "Infinitely many solutions",
+   "A unique solution",
+   "Only trivial solution"
+  ],
+  "answer": 2,
+  "explain": "Equal ranks with rank = n leave no free variable, so the solution is unique.",
+  "kind": "concept",
+  "id": "c3034ca8-3a73-41a3-94c0-0d0cd1b811d9",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "If ρ(A) < ρ(A|B), the system AX=B is:",
+  "formula": "",
+  "options": [
+   "Consistent with unique solution",
+   "Consistent with infinite solutions",
+   "Inconsistent",
+   "Homogeneous"
+  ],
+  "answer": 2,
+  "explain": "Unequal ranks mean a row reads 0 = nonzero, so the system is inconsistent.",
+  "kind": "concept",
+  "id": "3e927cbe-b66f-4dcc-a8f4-c74bb170900b",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "A linear system can never have exactly how many solutions?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "Infinitely many"
+  ],
+  "answer": 2,
+  "explain": "A linear system has 0, 1 or infinitely many solutions. Exactly two is impossible.",
+  "kind": "fact",
+  "id": "ed93185c-5015-4b90-b670-19dad9fedbd8",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "A homogeneous system with fewer equations than unknowns (m < n) always has:",
+  "formula": "",
+  "options": [
+   "Only the trivial solution",
+   "A non-trivial solution",
+   "No solution",
+   "A unique solution"
+  ],
+  "answer": 1,
+  "explain": "ρ(A) ≤ m < n, so n − ρ(A) > 0 free variables give non-trivial solutions.",
+  "kind": "result",
+  "id": "2b369fd0-b4b5-4536-a5f0-4c5ecb254c88",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "AX=O with n unknowns and ρ(A)=r has how many linearly independent solutions?",
+  "formula": "",
+  "options": [
+   "r",
+   "n",
+   "n − r",
+   "n − r + 1"
+  ],
+  "answer": 2,
+  "explain": "The solution space (null space) has dimension n − r.",
+  "kind": "formula",
+  "id": "198c4b08-df23-47bb-9185-7296158e4ce8",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Three planes with Δ ≠ 0 in a 3×3 system geometrically:",
+  "formula": "",
+  "options": [
+   "Meet at exactly one point",
+   "Share a common line",
+   "Form a triangular prism",
+   "Are all parallel"
+  ],
+  "answer": 0,
+  "explain": "Δ ≠ 0 gives a unique solution, which is a single common point.",
+  "kind": "concept",
+  "id": "82f390ef-afe7-4dfc-a3d5-b4cd3068ca08",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "If LHS and RHS of eq3 equal the sum of those of eq1 and eq2, the 3×3 system has:",
+  "formula": "",
+  "options": [
+   "Unique solution",
+   "No solution",
+   "Only trivial solution",
+   "Infinitely many solutions"
+  ],
+  "answer": 3,
+  "explain": "Eq3 is redundant, so Δ = 0 and the system is consistent with infinitely many solutions.",
+  "kind": "concept",
+  "id": "93735e66-9d5d-44e4-a206-d7ba56991389",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "If A is m×n with ρ(A) = m < n, then AX=B (any B) is:",
+  "formula": "",
+  "options": [
+   "Inconsistent",
+   "Consistent with infinitely many solutions",
+   "Consistent with unique solution",
+   "Consistent only if B = O"
+  ],
+  "answer": 1,
+  "explain": "ρ(A|B) ≤ m = ρ(A), so the system is consistent. With m < n there are free variables.",
+  "kind": "result",
+  "id": "fc9861c1-a88f-4dac-a3f4-faf27603cd81",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "For AX=B with A square and non-singular, the solution is given by:",
+  "formula": "X = A⁻¹B",
+  "options": [
+   "X = BA⁻¹",
+   "X = A⁻¹B",
+   "X = (adj A)B",
+   "X = Aᵀ B"
+  ],
+  "answer": 1,
+  "explain": "Pre-multiply by A⁻¹, since matrix multiplication is not commutative. Note A⁻¹B = (adj A)B/Δ.",
+  "kind": "formula",
+  "id": "45b13bde-f5c0-406c-bbc7-062ef854186f",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "a₁x+b₁y=c₁, a₂x+b₂y=c₂ with a₁/a₂ = b₁/b₂ ≠ c₁/c₂ has:",
+  "formula": "",
+  "options": [
+   "No solution",
+   "Unique solution",
+   "Infinitely many solutions",
+   "Exactly two solutions"
+  ],
+  "answer": 0,
+  "explain": "Equal slopes but different intercepts give parallel distinct lines, which never meet.",
+  "kind": "concept",
+  "id": "8c1d1340-0c6b-4eaf-9722-d97a78ef5370",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Δ = 0 and three planes meet pairwise in three parallel lines (prism). The system has:",
+  "formula": "",
+  "options": [
+   "No solution",
+   "A unique solution",
+   "Infinitely many solutions",
+   "Only the trivial solution"
+  ],
+  "answer": 0,
+  "explain": "The planes have no common point, so the system is inconsistent.",
+  "kind": "concept",
+  "id": "13f8b720-476d-43f1-9f62-19608ab8dc9d",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Three distinct planes through a common line: ρ(A) and ρ(A|B) are respectively:",
+  "formula": "",
+  "options": [
+   "2 and 2",
+   "3 and 3",
+   "2 and 3",
+   "1 and 1"
+  ],
+  "answer": 0,
+  "explain": "The system is consistent with ρ(A)=ρ(A|B)=2<3, so there are infinitely many solutions along a line.",
+  "kind": "concept",
+  "id": "3f43ed85-88d0-4ee5-b0c5-d1f53ccd18c1",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "A homogeneous system AX = O (m×n) with ρ(A) = n has:",
+  "formula": "",
+  "options": [
+   "Only the trivial solution",
+   "Infinitely many solutions",
+   "No solution",
+   "Exactly two solutions"
+  ],
+  "answer": 0,
+  "explain": "The number of independent solutions is n − ρ(A) = 0, so only X = O.",
+  "kind": "concept",
+  "id": "91278cf0-ac07-4a00-98ac-de0b9fb1d270",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "In Cramer's rule for 3 variables, Δ₃ is Δ with:",
+  "formula": "z = Δ₃/Δ",
+  "options": [
+   "3rd column replaced by constants",
+   "3rd row replaced by constants",
+   "1st column replaced by constants",
+   "3rd column replaced by zeros"
+  ],
+  "answer": 0,
+  "explain": "Δ₃ is formed by replacing the coefficient column of z (the third) by the constant column B.",
+  "kind": "formula",
+  "id": "3d82aa85-fafd-414d-adc8-0feb62eaa0f6",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Solution set of x+2y+3z=0, 2x+4y+6z=0, 3x+6y+9z=0 is geometrically:",
+  "formula": "",
+  "options": [
+   "Only the origin",
+   "A line through the origin",
+   "A plane through the origin",
+   "Empty set"
+  ],
+  "answer": 2,
+  "explain": "ρ(A)=1, so n−r=2 free parameters, which gives a plane through the origin.",
+  "kind": "concept",
+  "id": "bb4daafc-fa5d-43f3-9301-b335a5ef252b",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "For aᵢx+bᵢy+cᵢ=0 (i=1,2,3) to be consistent, the 3×3 determinant of coefficients must be:",
+  "formula": "|a₁ b₁ c₁; a₂ b₂ c₂; a₃ b₃ c₃| = 0",
+  "options": [
+   "Equal to 1",
+   "Non-zero",
+   "Zero",
+   "Positive"
+  ],
+  "answer": 2,
+  "explain": "Three lines are concurrent (a common solution exists) only if this determinant is zero.",
+  "kind": "result",
+  "id": "a484ea7b-f127-49dd-ba43-4a2b818311cd",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "All elements of a 3×3 determinant are multiplied by k. Each minor gets multiplied by?",
+  "formula": "Mᵢⱼ is a 2×2 determinant",
+  "options": [
+   "k",
+   "k²",
+   "k³",
+   "1 (unchanged)"
+  ],
+  "answer": 1,
+  "explain": "Each minor is a 2×2 determinant, and every term in it has two factors of k, so it scales by k².",
+  "kind": "result",
+  "id": "2756d5b1-3eb4-45f4-8763-5dfac550775e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "The adjoint of a square matrix A equals which matrix?",
+  "formula": "adj A = (Cᵢⱼ)ᵀ",
+  "options": [
+   "Cofactor matrix of A",
+   "Transpose of the cofactor matrix",
+   "Matrix of minors of A",
+   "Transpose of the matrix of minors"
+  ],
+  "answer": 1,
+  "explain": "adj A is the transpose of the matrix of cofactors. The cofactor matrix itself is not the adjoint.",
+  "kind": "concept",
+  "id": "721dfc26-4a69-491a-b512-dfaa4eb15ba6",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "For a 3×3 matrix A, the determinant of its cofactor matrix equals?",
+  "formula": "",
+  "options": [
+   "|A|",
+   "|A|²",
+   "|A|³",
+   "1/|A|"
+  ],
+  "answer": 1,
+  "explain": "The cofactor matrix is (adj A)ᵀ, so its determinant is |adj A| = |A|^(n−1) = |A|².",
+  "kind": "result",
+  "id": "4b3400bf-ba51-4369-96cd-6b19d45c0746",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "Area of the triangle with vertices (0,0), (x₁,y₁), (x₂,y₂) is:",
+  "formula": "Δ = ½ |x₁y₂ − x₂y₁|",
+  "options": [
+   "½ |x₁y₂ − x₂y₁|",
+   "½ |x₁x₂ + y₁y₂|",
+   "|x₁y₂ − x₂y₁|",
+   "½ |x₁y₁ − x₂y₂|"
+  ],
+  "answer": 0,
+  "explain": "Expanding the 3×3 determinant with one row (0,0,1) leaves a 2×2 determinant, so Δ = ½|x₁y₂ − x₂y₁|.",
+  "kind": "formula",
+  "id": "bfe7db52-ad10-4f4d-a39f-b1071605e8e8",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "For three points, the 3×3 coordinate determinant (rows xᵢ, yᵢ, 1) equals 0. The points are:",
+  "formula": "",
+  "options": [
+   "Collinear",
+   "Vertices of a right triangle",
+   "Vertices of an isosceles triangle",
+   "Collinear only if one point is the origin"
+  ],
+  "answer": 0,
+  "explain": "Zero determinant means zero area, so the three points lie on one line (collinear).",
+  "kind": "concept",
+  "id": "3512ed40-bf30-4889-8f32-dc7f17f6e9c4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "For a square matrix A, the (i, j) entry of adj A is the cofactor of which entry of A?",
+  "formula": "(adj A)ᵢⱼ = Cⱼᵢ",
+  "options": [
+   "aᵢⱼ",
+   "aⱼᵢ",
+   "aᵢᵢ",
+   "Minor Mᵢⱼ with no sign"
+  ],
+  "answer": 1,
+  "explain": "adj A is the transpose of the cofactor matrix, so its (i,j) entry is the cofactor of aⱼᵢ.",
+  "kind": "concept",
+  "id": "243272f9-255e-486b-897e-5e4d83d58eec",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "A is a 3×3 singular matrix. Then adj(adj A) equals?",
+  "formula": "adj(adj A) = |A|ⁿ⁻²·A",
+  "options": [
+   "A",
+   "Iₙ",
+   "Null matrix",
+   "adj A"
+  ],
+  "answer": 2,
+  "explain": "|A| = 0, so adj(adj A) = |A|·A = O for n = 3.",
+  "kind": "result",
+  "id": "1aff78af-fca5-40e6-ac74-021771c76b98",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "If A is an upper triangular matrix, adj A is?",
+  "formula": "",
+  "options": [
+   "Lower triangular",
+   "Upper triangular",
+   "Diagonal always",
+   "Skew-symmetric"
+  ],
+  "answer": 1,
+  "explain": "Cofactors of the lower-triangle positions of A vanish, so adj A is again upper triangular.",
+  "kind": "fact",
+  "id": "a3b1e6c9-e7a4-4990-9ffc-ab37c5871860",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "A is a 4×4 matrix of rank 2. Then adj A is?",
+  "formula": "",
+  "options": [
+   "Null matrix",
+   "A matrix of rank 1",
+   "A matrix of rank 2",
+   "Identity matrix"
+  ],
+  "answer": 0,
+  "explain": "If rank A ≤ n−2, every 3×3 minor is zero, so every cofactor is 0 and adj A = O.",
+  "kind": "result",
+  "id": "c8e77130-f50f-43d6-ae20-f5b075871e47",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For an invertible n×n matrix A, adj(A⁻¹) equals?",
+  "formula": "",
+  "options": [
+   "(adj A)⁻¹",
+   "adj A",
+   "|A|·adj A",
+   "(adj A)ᵀ"
+  ],
+  "answer": 0,
+  "explain": "adj(A⁻¹) = A/|A| = (adj A)⁻¹, since (adj A)⁻¹ = A/|A|.",
+  "kind": "result",
+  "id": "449edf41-1a5a-4204-8352-3926ffaba0ed",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "If AX=B has two distinct solutions, the number of solutions is:",
+  "formula": "λX₁ + (1−λ)X₂ is also a solution",
+  "options": [
+   "Exactly two",
+   "Exactly three",
+   "Infinitely many",
+   "Depends on det A"
+  ],
+  "answer": 2,
+  "explain": "Every λX₁+(1−λ)X₂ satisfies AX=B, so there are infinitely many solutions.",
+  "kind": "result",
+  "id": "c4c61325-fa09-4b8a-8d93-d912e3570574",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "If X₁ and X₂ both satisfy AX=B, then X₁ − X₂ satisfies:",
+  "formula": "A(X₁−X₂) = B − B = O",
+  "options": [
+   "AX = B",
+   "AX = O",
+   "AX = 2B",
+   "A²X = B"
+  ],
+  "answer": 1,
+  "explain": "A(X₁−X₂) = B−B = O, so the difference solves the homogeneous system.",
+  "kind": "result",
+  "id": "27a177ac-b158-422b-b7a6-1a17015c0220",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "AX=B is consistent exactly when B is, relative to the columns of A:",
+  "formula": "",
+  "options": [
+   "Orthogonal to them",
+   "A linear combination of them",
+   "Equal to their sum only",
+   "Equal to one column only"
+  ],
+  "answer": 1,
+  "explain": "AX is a linear combination of the columns of A, so B must lie in their span.",
+  "kind": "concept",
+  "id": "502c84b4-6e1a-47a6-bcff-f972ed99c042",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "For an m×n system AX=B, ρ(A|B) − ρ(A) can be at most:",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "m − n",
+   "n"
+  ],
+  "answer": 1,
+  "explain": "Adding one column B raises the rank by 0 or 1 only.",
+  "kind": "fact",
+  "id": "01b96eff-12b3-474c-aad7-7ba298c2561f",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Of three planes, two are parallel and distinct and the third cuts both. The system has:",
+  "formula": "",
+  "options": [
+   "No solution",
+   "Unique solution",
+   "A line of solutions",
+   "A plane of solutions"
+  ],
+  "answer": 0,
+  "explain": "Two parallel distinct planes have no common point, so the system is inconsistent.",
+  "kind": "concept",
+  "id": "59829dde-bee8-4ca2-bf01-bbc22a49cb02",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Two of three planes coincide and the third cuts them in a line. The system has:",
+  "formula": "",
+  "options": [
+   "No solution",
+   "Unique solution",
+   "Infinitely many solutions",
+   "Only the trivial solution"
+  ],
+  "answer": 2,
+  "explain": "The common set is a line, so ρ(A)=ρ(A|B)=2<3 and there are infinitely many solutions.",
+  "kind": "concept",
+  "id": "32c75d20-1b96-49fb-a9ab-8e9b29548661",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "A 3×3 homogeneous system with ρ(A)=2 has a solution set that is geometrically:",
+  "formula": "",
+  "options": [
+   "Only the origin",
+   "A line through the origin",
+   "A plane through the origin",
+   "A line not through the origin"
+  ],
+  "answer": 1,
+  "explain": "n−r = 1 free parameter, so the solutions form a line through the origin.",
+  "kind": "concept",
+  "id": "95a0fd6a-95dd-4023-91df-fd871cd8c6e4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Three coincident planes in a 3-variable system give ρ(A) and ρ(A|B) equal to:",
+  "formula": "",
+  "options": [
+   "1 and 1",
+   "1 and 2",
+   "2 and 2",
+   "3 and 3"
+  ],
+  "answer": 0,
+  "explain": "All three equations are multiples of one equation, so both ranks are 1.",
+  "kind": "result",
+  "id": "8e470bb1-8671-4d1e-8df6-1ae8b499d1db",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "Elementary row operations on the augmented matrix [A|B] do what to the solution set?",
+  "formula": "",
+  "options": [
+   "Change it",
+   "Leave it unchanged",
+   "Make it empty",
+   "Make it unique"
+  ],
+  "answer": 1,
+  "explain": "Row operations give equivalent systems, so the solution set and the ranks are preserved.",
+  "kind": "fact",
+  "id": "da744998-f8a4-4522-bf4e-053774fe54d2",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "A consistent system of 4 unknowns has ρ(A) = ρ(A|B) = 2. How many free parameters does the solution have?",
+  "formula": "free parameters = n − ρ(A)",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Free variables = n − ρ(A) = 4 − 2 = 2, so the solution set has 2 parameters (infinitely many solutions).",
+  "kind": "result",
+  "id": "9ca957ba-4ee2-4c51-8c17-8c1e8ada8943",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Consistency of linear equations"
+ },
+ {
+  "prompt": "A is any m×n real matrix. Then AAᵀ is always:",
+  "formula": "(AAᵀ)ᵀ = (Aᵀ)ᵀAᵀ = AAᵀ",
+  "options": [
+   "Symmetric of order m×m",
+   "Symmetric of order n×n",
+   "Skew-symmetric of order m×m",
+   "Symmetric only if A is square"
+  ],
+  "answer": 0,
+  "explain": "(AAᵀ)ᵀ = AAᵀ, and the product has order m×m, so it is symmetric for every A.",
+  "kind": "result",
+  "id": "c9f8d1b8-705b-4fa9-95a0-fb13c6bf6ef7",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "A and B are skew-symmetric of the same order with AB = BA. Then AB is:",
+  "formula": "(AB)ᵀ = BᵀAᵀ = (−B)(−A) = BA",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Null matrix",
+   "Orthogonal"
+  ],
+  "answer": 0,
+  "explain": "(AB)ᵀ = BᵀAᵀ = BA = AB, so AB is symmetric.",
+  "kind": "result",
+  "id": "71a086fc-6c9d-4557-82d5-3cdfab5d665b",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Types of matrices (symmetric, skew, etc.)"
+ },
+ {
+  "prompt": "A, B are skew-symmetric of the same order; k, l are real. Then kA + lB is:",
+  "formula": "(kA + lB)ᵀ = −(kA + lB)",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Orthogonal",
+   "Null matrix only"
+  ],
+  "answer": 1,
+  "explain": "(kA+lB)ᵀ = kAᵀ + lBᵀ = −kA − lB = −(kA+lB), so it is skew-symmetric.",
+  "kind": "result",
+  "id": "2e81174f-1fe0-4e85-9452-4983da555745",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "How many 2×2 matrices can be formed with every entry from {0, 1, 2}?",
+  "formula": "3⁴",
+  "options": [
+   "12",
+   "16",
+   "64",
+   "81"
+  ],
+  "answer": 3,
+  "explain": "Each of the 4 entries has 3 choices, so 3⁴ = 81.",
+  "kind": "fact",
+  "id": "3bdbde7e-7035-4e1f-8a3d-95be94b5bed8",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "A and B are orthogonal matrices of the same order. Then A + B is:",
+  "formula": "",
+  "options": [
+   "Always orthogonal",
+   "Not necessarily orthogonal",
+   "Always symmetric",
+   "Always singular"
+  ],
+  "answer": 1,
+  "explain": "Orthogonality isn't closed under addition: I is orthogonal but I + I = 2I is not, since (2I)(2I)ᵀ = 4I.",
+  "kind": "exception",
+  "id": "2e54c88b-3d33-4474-8283-8b6a88dd85fa",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix addition, scalar multiplication"
+ },
+ {
+  "prompt": "Which law always holds for conformable matrices A, B, C?",
+  "formula": "",
+  "options": [
+   "AB = BA",
+   "(AB)ᵀ = AᵀBᵀ",
+   "A(BC) = (AB)C",
+   "(AB)² = A²B²"
+  ],
+  "answer": 2,
+  "explain": "Matrix multiplication is associative; the other three need extra conditions or are false.",
+  "kind": "concept",
+  "id": "c8db8549-0417-43c5-bdd9-2ae6b5157061",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "The product of two upper triangular matrices of the same order is:",
+  "formula": "",
+  "options": [
+   "Lower triangular",
+   "Upper triangular",
+   "Diagonal always",
+   "Symmetric always"
+  ],
+  "answer": 1,
+  "explain": "Upper triangular matrices are closed under multiplication; the diagonal entries multiply entrywise.",
+  "kind": "fact",
+  "id": "a5fc3582-cd41-43c7-a6a2-ceee96f49b72",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For a real matrix A, if AᵀA = O, then:",
+  "formula": "tr(AᵀA) = Σ aᵢⱼ²",
+  "options": [
+   "A = O",
+   "A is symmetric",
+   "A is orthogonal",
+   "|A| = 1"
+  ],
+  "answer": 0,
+  "explain": "tr(AᵀA) is the sum of squares of all entries of A; it is 0 only if every entry is 0.",
+  "kind": "result",
+  "id": "c8b98441-5010-4c44-86a4-b4514ae32a45",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "If AB = A and BA = B for square matrices A and B, then A² equals:",
+  "formula": "A² = (AB)A = A(BA) = AB",
+  "options": [
+   "A",
+   "B",
+   "I",
+   "O"
+  ],
+  "answer": 0,
+  "explain": "A² = A·A = (AB)A = A(BA) = AB = A, so A is idempotent (and similarly B).",
+  "kind": "result",
+  "id": "bae40f65-5dd2-4189-84a5-13558cd47330",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "A 2×2 real matrix commutes with diag(1, 2). It must be:",
+  "formula": "",
+  "options": [
+   "A scalar matrix",
+   "A diagonal matrix",
+   "A symmetric matrix",
+   "An upper triangular matrix"
+  ],
+  "answer": 1,
+  "explain": "Comparing AD and DA gives b = c = 0 because the diagonal entries are distinct, so A is diagonal.",
+  "kind": "result",
+  "id": "02734944-99e3-4fde-bcc1-0146c67f4b00",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For conformable matrices A, B, C, (ABC)ᵀ equals:",
+  "formula": "(ABC)ᵀ = CᵀBᵀAᵀ",
+  "options": [
+   "AᵀBᵀCᵀ",
+   "CᵀBᵀAᵀ",
+   "BᵀCᵀAᵀ",
+   "CᵀAᵀBᵀ"
+  ],
+  "answer": 1,
+  "explain": "The reversal law extends to any number of factors: the transpose reverses the order of the product.",
+  "kind": "formula",
+  "id": "b8c735ff-7a42-40e8-89de-0723e0ffdd41",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Matrix multiplication and its properties"
+ },
+ {
+  "prompt": "For a real square matrix A, if AᵀA = O, then which is true?",
+  "formula": "tr(AᵀA) = Σ aᵢⱼ²",
+  "options": [
+   "A is the zero matrix",
+   "A is skew-symmetric only",
+   "A is singular but need not be zero",
+   "A is nilpotent but need not be zero"
+  ],
+  "answer": 0,
+  "explain": "tr(AᵀA) is the sum of squares of all entries; it is 0 only if every entry is 0.",
+  "kind": "result",
+  "id": "8624f3b9-5a2c-426f-a6af-df4246eb1c44",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "For an m×n matrix A, the rank of Aᵀ is:",
+  "formula": "ρ(Aᵀ) = ρ(A)",
+  "options": [
+   "Equal to rank of A",
+   "n − rank of A",
+   "Always min(m, n)",
+   "Can exceed rank of A"
+  ],
+  "answer": 0,
+  "explain": "Row rank equals column rank, and transposing swaps rows and columns.",
+  "kind": "fact",
+  "id": "d0baf8de-bd88-4fea-b345-0da7e534b87c",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "Number of independent (free) entries in a 4×4 real skew-symmetric matrix:",
+  "formula": "n(n−1)/2",
+  "options": [
+   "4",
+   "6",
+   "10",
+   "12"
+  ],
+  "answer": 1,
+  "explain": "Diagonal is zero and the entries below the diagonal fix those above: 4·3/2 = 6.",
+  "kind": "fact",
+  "id": "9cb9d096-e8b3-40e3-8b3d-8eff125fdc4e",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "If A is a symmetric matrix, then Aⁿ (n ∈ ℕ) is:",
+  "formula": "(Aⁿ)ᵀ = (Aᵀ)ⁿ = Aⁿ",
+  "options": [
+   "Symmetric for every n",
+   "Skew-symmetric for odd n",
+   "Symmetric only for even n",
+   "Symmetric only if A is invertible"
+  ],
+  "answer": 0,
+  "explain": "(Aⁿ)ᵀ = (Aᵀ)ⁿ = Aⁿ, so Aⁿ is symmetric for every n.",
+  "kind": "result",
+  "id": "656add10-1667-4589-a460-54477ea92903",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Transpose and its properties"
+ },
+ {
+  "prompt": "In a 3×3 determinant Δ, C₂₁ + C₂₂ + C₂₃ (sum of cofactors of row 2) equals?",
+  "formula": "",
+  "options": [
+   "Δ with row 2 replaced by 1, 1, 1",
+   "Δ with all entries replaced by 1",
+   "Δ",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Σ aᵢⱼCᵢⱼ expands Δ along row i. Putting aᵢⱼ = 1 gives the sum of cofactors, i.e. Δ with row i replaced by 1s.",
+  "kind": "result",
+  "id": "395c046b-e005-4082-973c-e89d2867bc74",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "For A = diag(a, b, c), the cofactor C₂₂ equals?",
+  "formula": "C₂₂ = (+1)·|[[a,0],[0,c]]|",
+  "options": [
+   "b",
+   "abc",
+   "ac",
+   "bc"
+  ],
+  "answer": 2,
+  "explain": "Delete row 2 and column 2 to leave diag(a, c), so M₂₂ = ac. The sign (−1)⁴ is +, so C₂₂ = ac.",
+  "kind": "result",
+  "id": "5f697592-560b-4b14-bb00-dea9e8bcda41",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "If A is a symmetric matrix, its cofactor matrix [Cᵢⱼ] is always:",
+  "formula": "",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Diagonal",
+   "Orthogonal"
+  ],
+  "answer": 0,
+  "explain": "A = Aᵀ gives Mᵢⱼ = Mⱼᵢ, so Cᵢⱼ = Cⱼᵢ and the cofactor matrix is symmetric.",
+  "kind": "result",
+  "id": "b40b9be8-b7e8-42b8-88b0-0ce097b90467",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Minors and cofactors"
+ },
+ {
+  "prompt": "A, B are n×n matrices with AB = O. Which statement must be true?",
+  "formula": "det(A)·det(B) = det(O) = 0",
+  "options": [
+   "A = O or B = O",
+   "At least one of A, B has zero determinant",
+   "det A + det B = 0",
+   "det A · det B = 1"
+  ],
+  "answer": 1,
+  "explain": "det A·det B = det O = 0, so one factor is 0; A or B need not be the zero matrix.",
+  "kind": "result",
+  "id": "bc356220-eba8-4eea-97a4-069a1bf5a382",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "For a 3×3 matrix A with A² = 2A, the possible values of det(A) are?",
+  "formula": "(det A)² = 8·det A",
+  "options": [
+   "0 or 2",
+   "0 or 8",
+   "0 or 6",
+   "2 or 8"
+  ],
+  "answer": 1,
+  "explain": "det(A²) = det(2A) gives d² = 8d, so d = 0 or 8.",
+  "kind": "result",
+  "id": "642ce558-0a28-4918-a55b-5f51d10dbc59",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "For a real skew-symmetric matrix of even order, det(A) is always:",
+  "formula": "det(A) = det(−Aᵀ) = (−1)ⁿ det(A)",
+  "options": [
+   "Zero",
+   "Non-negative",
+   "Non-positive",
+   "Negative"
+  ],
+  "answer": 1,
+  "explain": "For even n the determinant is the square of the Pfaffian, so it is ≥ 0. Example: [[0,a],[−a,0]] has det a².",
+  "kind": "result",
+  "id": "29f4591a-f7e6-4099-9bde-bbe57c56bb44",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Determinant of product, transpose, kA"
+ },
+ {
+  "prompt": "Triangle formed by joining the midpoints of the sides of △ABC has area equal to what fraction of [ABC]?",
+  "formula": "",
+  "options": [
+   "1/4",
+   "1/2",
+   "1/3",
+   "1/8"
+  ],
+  "answer": 0,
+  "explain": "The medial triangle is similar to ABC with ratio 1/2, so its area is 1/4 of [ABC].",
+  "kind": "result",
+  "id": "5088bf35-8bde-45a4-aef0-32d8e09eaad4",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Area of triangle and collinearity"
+ },
+ {
+  "prompt": "If A is a real symmetric matrix of order n, then adj A is always:",
+  "formula": "adj(Aᵀ) = (adj A)ᵀ",
+  "options": [
+   "Symmetric",
+   "Skew-symmetric",
+   "Orthogonal",
+   "Diagonal"
+  ],
+  "answer": 0,
+  "explain": "A = Aᵀ gives adj A = adj(Aᵀ) = (adj A)ᵀ, so adj A is symmetric.",
+  "kind": "result",
+  "id": "a0d45803-147e-452d-87f5-63707630fbe1",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "If A is a real orthogonal matrix of order n, then adj A equals?",
+  "formula": "adj A = |A|·A⁻¹ and A⁻¹ = Aᵀ",
+  "options": [
+   "Aᵀ always",
+   "|A|·Aᵀ",
+   "|A|·A",
+   "−Aᵀ"
+  ],
+  "answer": 1,
+  "explain": "adj A = |A|A⁻¹ = |A|Aᵀ, with |A| = ±1. So adj A = ±Aᵀ.",
+  "kind": "result",
+  "id": "cd1e1501-13e3-4bff-a79d-f180d2debf8b",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Adjoint and its properties"
+ },
+ {
+  "prompt": "For an invertible matrix A and positive integer n, (Aⁿ)⁻¹ = ?",
+  "formula": "(Aⁿ)⁻¹ = (A⁻¹)ⁿ",
+  "options": [
+   "(A⁻¹)ⁿ",
+   "n·A⁻¹",
+   "Aⁿ⁻¹",
+   "(Aᵀ)ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Reversing the order of n equal factors changes nothing, so (Aⁿ)⁻¹ = (A⁻¹)ⁿ.",
+  "kind": "formula",
+  "id": "25f25988-681c-442a-859c-107605543363",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For invertible A, B, C of the same order, (ABC)⁻¹ = ?",
+  "formula": "(ABC)⁻¹ = C⁻¹B⁻¹A⁻¹",
+  "options": [
+   "C⁻¹B⁻¹A⁻¹",
+   "A⁻¹B⁻¹C⁻¹",
+   "B⁻¹C⁻¹A⁻¹",
+   "C⁻¹A⁻¹B⁻¹"
+  ],
+  "answer": 0,
+  "explain": "The reversal law extends to any number of factors: the inverses appear in reverse order.",
+  "kind": "formula",
+  "id": "e533dd25-a12f-42d4-aad7-ee107f9c0cbe",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "When finding an inverse by elementary operations, row and column operations:",
+  "formula": "",
+  "options": [
+   "Must not be mixed in one process",
+   "May be mixed freely",
+   "May be mixed only for 2×2 matrices",
+   "May be mixed when |A| > 0"
+  ],
+  "answer": 0,
+  "explain": "Use only row operations (on [A|I]) or only column operations (on A over I), never both together.",
+  "kind": "fact",
+  "id": "ae83ee5a-e7ab-438a-ae67-e0651ec4fb19",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "For n×n matrices A and B, AB = I implies:",
+  "formula": "",
+  "options": [
+   "BA = I as well",
+   "BA = O",
+   "BA = Aᵀ",
+   "BA = I only if A is symmetric"
+  ],
+  "answer": 0,
+  "explain": "|A||B| = 1, so A is invertible with B = A⁻¹, hence BA = I.",
+  "kind": "concept",
+  "id": "d1979b55-4dcf-4d9c-aec0-e95479d0f062",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "Inverse of the elementary operation Rᵢ → Rᵢ + kRⱼ is the operation:",
+  "formula": "",
+  "options": [
+   "Rᵢ → Rᵢ − kRⱼ",
+   "Rᵢ → kRᵢ + Rⱼ",
+   "Rⱼ → Rⱼ − kRᵢ",
+   "Rᵢ → Rᵢ/k"
+  ],
+  "answer": 0,
+  "explain": "Subtracting kRⱼ from the new Rᵢ restores the original row, so the inverse is Rᵢ → Rᵢ − kRⱼ.",
+  "kind": "fact",
+  "id": "1c92b060-b0a2-4b40-a42a-973094174892",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "In [A | I] row reduction, a zero row appears in the A-part. Then:",
+  "formula": "",
+  "options": [
+   "A⁻¹ does not exist",
+   "A⁻¹ = I",
+   "A⁻¹ is a zero matrix",
+   "A⁻¹ is the zero row's complement"
+  ],
+  "answer": 0,
+  "explain": "A zero row means rank < n, so det(A) = 0 and A is singular, with no inverse.",
+  "kind": "concept",
+  "id": "0355908d-3c32-4803-b981-8a79d2864a10",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "A is a real skew-symmetric matrix of odd order. Then A⁻¹:",
+  "formula": "",
+  "options": [
+   "Is skew-symmetric",
+   "Is symmetric",
+   "Equals −A",
+   "Does not exist"
+  ],
+  "answer": 3,
+  "explain": "Odd-order skew-symmetric matrices have det = 0, so they are singular and A⁻¹ does not exist.",
+  "kind": "exception",
+  "id": "07445fcb-1515-47bd-85e8-5ef0bc7663c6",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ },
+ {
+  "prompt": "A square matrix with integer entries has an inverse with all integer entries iff det(A) is:",
+  "formula": "A⁻¹ = adj(A)/det(A)",
+  "options": [
+   "±1",
+   "1 only",
+   "any non-zero integer",
+   "a prime number"
+  ],
+  "answer": 0,
+  "explain": "adj A has integer entries, so A⁻¹ is integral exactly when det A = ±1.",
+  "kind": "fact",
+  "id": "6a2087e2-9882-4ec6-b530-3bb8b119d4da",
+  "subject": "Mathematics",
+  "chapter": "Matrices and Determinants",
+  "topic": "Inverse of a square matrix"
+ }
+]

@@ -77,6 +77,25 @@ export class PrivateAssetQueue {
     }
     this.pump();
   }
+  /** A picture that arrived another way (the paper pack): kept exactly like a finished download. */
+  adopt(path: string, value: AssetValue) {
+    const job = this.jobs.get(path);
+    if (!this.enabled || !this.permitted(path) || this.cache.has(path) || job?.running || !this.keep(path, value)) { value.dispose?.(); return false; }
+    this.admitted.add(path); this.failures.delete(path);
+    if (job) { this.jobs.delete(path); job.resolve(value.uri); }
+    this.notify(path); return true;
+  }
+  // Account for URI memory, and release browser object URLs upon eviction.
+  private keep(path: string, value: AssetValue) {
+    while (this.bytes + value.bytes > this.maxBytes && this.cache.size) {
+      const entries = [...this.cache.entries()];
+      const oldest = entries.find(([p]) => !this.pinned.has(p) && !this.preferred.has(p)) || entries.find(([p]) => !this.pinned.has(p));
+      if (!oldest) break;
+      this.cache.delete(oldest[0]); this.bytes -= oldest[1].bytes; oldest[1].dispose?.(); this.notify(oldest[0]);
+    }
+    if (this.bytes + value.bytes > this.maxBytes) return false;
+    this.cache.set(path, value); this.bytes += value.bytes; return true;
+  }
   retry(paths: string[]) {
     for (const path of paths) { const fail = this.failures.get(path); if (fail && Date.now() >= fail.after) { this.failures.delete(path); this.admitted.delete(path); } }
     this.preload(paths); this.notify();
@@ -104,15 +123,7 @@ export class PrivateAssetQueue {
       job.running = true; this.active++;
       this.load(job.path, job.ctl.signal).then(value => {
         if (job.generation !== this.generation || job.ctl.signal.aborted) { value.dispose?.(); throw cancelled(); }
-        // Account for URI memory, and release browser object URLs upon eviction.
-        while (this.bytes + value.bytes > this.maxBytes && this.cache.size) {
-          const entries = [...this.cache.entries()];
-          const oldest = entries.find(([path]) => !this.pinned.has(path) && !this.preferred.has(path)) || entries.find(([path]) => !this.pinned.has(path));
-          if (!oldest) break;
-          this.cache.delete(oldest[0]); this.bytes -= oldest[1].bytes; oldest[1].dispose?.(); this.notify(oldest[0]);
-        }
-        if (this.bytes + value.bytes > this.maxBytes) { value.dispose?.(); throw new Error("This source image exceeds safe image memory. Close other papers and retry."); }
-        this.cache.set(job.path, value); this.bytes += value.bytes;
+        if (!this.keep(job.path, value)) { value.dispose?.(); throw new Error("This source image exceeds safe image memory. Close other papers and retry."); }
         job.resolve(value.uri);
       }).catch(e => {
         if (!job.ctl.signal.aborted && job.generation === this.generation) this.failures.set(job.path, { error: e, after: Date.now() + Math.max(e?.retryAfterMs || 0, e?.status === 429 ? 30000 : 0) });

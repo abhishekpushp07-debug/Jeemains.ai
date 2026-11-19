@@ -1,9 +1,9 @@
 """Wrong-PIN limit on our side. A 4-digit PIN has only 10,000 values and every sign-in reaches the website through this
 server, so failed sign-ins are counted here per phone number (hashed) and per caller address:
-8 wrong PINs for one number in 15 minutes, or 100 from one address, pause sign-in for that number / address until the
-window passes. The address limit is high on purpose: Indian mobile networks put thousands of phones behind one address
-(carrier NAT) and a school Wi-Fi is one address too. A correct PIN clears that number's count. Rows remove themselves
-(TTL), so nothing is kept long."""
+10 wrong PINs for one number in 15 minutes (the website's own limit, so its "N tries left" message stays true), or 100
+from one address, pause sign-in for that number / address until the window passes. The address limit is high on
+purpose: Indian mobile networks put thousands of phones behind one address (carrier NAT) and a school Wi-Fi is one
+address too. A correct PIN clears that number's count. Rows remove themselves (TTL), so nothing is kept long."""
 import hashlib
 import json
 import re
@@ -16,7 +16,7 @@ from client_ip import client_ip as caller_ip
 
 SIGN_IN = "auth/phone"
 WINDOW = timedelta(minutes=15)
-PHONE_LIMIT, IP_LIMIT = 8, 100
+PHONE_LIMIT, IP_LIMIT = 10, 100
 WRONG = (401, 403)  # what the website answers for a wrong PIN / unknown number
 
 
@@ -33,7 +33,8 @@ def _phone(body: bytes) -> str:
 
 
 def _paused(seconds: int) -> Response:
-    message = "Too many wrong PINs. Please wait a few minutes, or use Forgot PIN."
+    wait = f"{-(-seconds // 60)} min" if seconds > 90 else f"{seconds} seconds"
+    message = f"Too many wrong PINs. Please wait {wait}, or use Forgot PIN to set a new one."
     return Response(json.dumps({"data": None, "error": {"code": "rate_limited", "message": message}, "meta": {"api_version": "1"}}),
                     status_code=429, media_type="application/json", headers={"Retry-After": str(seconds), "Cache-Control": "no-store"})
 

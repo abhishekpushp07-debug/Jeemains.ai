@@ -1,1463 +1,3203 @@
 [
-  {
-    "id": "b67bf9b6-d7ca-40ab-90f8-a8be1c722683",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Simple Pendulum",
-    "prompt": "Time period of simple pendulum",
-    "formula": "T = 2π√(L/g)",
-    "options": [
-      "2π√(g/L)",
-      "π√(L/g)",
-      "2√(L/g)",
-      "2π√(L/g)"
-    ],
-    "answer": 3,
-    "explain": "T depends on length L and g; independent of mass and amplitude (small angles).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "35822daf-0fe3-47d7-810f-5ab18990536e",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Spring-Mass System",
-    "prompt": "Time period of spring-mass system",
-    "formula": "T = 2π√(m/k)",
-    "options": [
-      "2π√(m/k)",
-      "2π√(mk)",
-      "2π√(k/m)",
-      "π√(m/k)"
-    ],
-    "answer": 0,
-    "explain": "T depends on mass m and spring constant k; independent of amplitude and g.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f4b1730e-3e87-429f-968b-b0046e288ea0",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "SHM Definition",
-    "prompt": "In SHM, acceleration is related to displacement by",
-    "formula": "a = -ω²x",
-    "options": [
-      "a = -ωx",
-      "a = -ω²x",
-      "a = ω²x",
-      "a = -ω²x²"
-    ],
-    "answer": 1,
-    "explain": "Acceleration is always directed opposite to displacement; defines SHM.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cac20003-8064-4f79-a4e3-976fa40fc653",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Energy in SHM",
-    "prompt": "Total mechanical energy in SHM",
-    "formula": "E = ½kA²",
-    "options": [
-      "½mω²x²",
-      "½kx²",
-      "½kA²",
-      "kA²"
-    ],
-    "answer": 2,
-    "explain": "Total energy is constant and proportional to square of amplitude; E = ½mω²A².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2da79bb8-c2ac-4947-a6ce-3944828843b0",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "SHM Basics",
-    "prompt": "Angular frequency ω of SHM is related to T by",
-    "formula": "ω = 2π/T",
-    "options": [
-      "π/T",
-      "2π/T",
-      "2T/π",
-      "T/2π"
-    ],
-    "answer": 1,
-    "explain": "ω = 2πf = 2π/T is the angular frequency in rad/s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3ea00a1a-d570-4f92-a353-c7967f29fc44",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "SHM Equation",
-    "prompt": "Displacement in SHM starting from mean position",
-    "formula": "x = A sin(ωt)",
-    "options": [
-      "A sin(ωt + π/2)",
-      "A tan(ωt)",
-      "A cos(ωt)",
-      "A sin(ωt)"
-    ],
-    "answer": 3,
-    "explain": "If particle starts at mean position (x=0 at t=0), x = A sinωt is used.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "830e3a24-1d1d-4e43-ad2a-e0f5b5193d4f",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Springs in Parallel",
-    "prompt": "Two springs k₁, k₂ in parallel: effective spring constant",
-    "formula": "k = k₁ + k₂",
-    "options": [
-      "k₁k₂/(k₁+k₂)",
-      "(k₁+k₂)/k₁k₂",
-      "1/k₁ + 1/k₂",
-      "k₁ + k₂"
-    ],
-    "answer": 3,
-    "explain": "Springs in parallel share the same extension; forces add, so k_eff = k₁ + k₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "231efc19-2e69-419e-8283-c928e5f10739",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Springs in Series",
-    "prompt": "Two springs k₁, k₂ in series: effective spring constant",
-    "formula": "1/k = 1/k₁ + 1/k₂",
-    "options": [
-      "k₁k₂/(k₁+k₂)",
-      "k₁ + k₂",
-      "(k₁+k₂)/2",
-      "k₁k₂"
-    ],
-    "answer": 0,
-    "explain": "Springs in series share same force; extensions add, so 1/k_eff = 1/k₁ + 1/k₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4d0f6d6c-8d70-4c73-a2e4-3dbd5b7d54db",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "SHM Properties",
-    "prompt": "In SHM, time period is independent of",
-    "formula": "",
-    "options": [
-      "Angular frequency",
-      "Amplitude",
-      "Mass",
-      "Spring constant"
-    ],
-    "answer": 1,
-    "explain": "For SHM, T = 2π√(m/k); T is independent of amplitude (isochronous property).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0eb69259-bb12-4bae-a7eb-ee20c133c9d9",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Simple Pendulum",
-    "prompt": "Simple pendulum: effective g in an accelerating lift (upward a)",
-    "formula": "g_eff = g + a",
-    "options": [
-      "g × a",
-      "g + a",
-      "g/a",
-      "g − a"
-    ],
-    "answer": 1,
-    "explain": "Upward acceleration increases effective g, decreasing T; g_eff = g + a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "62058b50-3616-41ec-b668-059dbfb51ecc",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Resonance",
-    "prompt": "Resonance in forced oscillations occurs when",
-    "formula": "",
-    "options": [
-      "Driving freq < natural freq",
-      "Damping is maximum",
-      "Driving freq = natural freq",
-      "Driving freq > natural freq"
-    ],
-    "answer": 2,
-    "explain": "At resonance, driving frequency equals natural frequency; amplitude is maximum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e881d82c-eb6f-481a-9521-551df4c9813d",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Phase in SHM",
-    "prompt": "Phase difference between displacement and velocity in SHM",
-    "formula": "",
-    "options": [
-      "2π",
-      "π/2",
-      "0",
-      "π"
-    ],
-    "answer": 1,
-    "explain": "v = dx/dt = Aω cos(ωt) leads x = A sin(ωt) by π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d63736a7-cf4e-499b-98ce-19c2d3618ee8",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Phase in SHM",
-    "prompt": "Phase difference between displacement and acceleration in SHM",
-    "formula": "",
-    "options": [
-      "0",
-      "π/2",
-      "2π",
-      "π"
-    ],
-    "answer": 3,
-    "explain": "a = −ω²x, so acceleration is always π out of phase with displacement.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "26356b8a-a9d8-4f98-a2c3-4cd9ff6c7236",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Energy in SHM",
-    "prompt": "KE and PE in SHM each oscillate with frequency",
-    "formula": "",
-    "options": [
-      "2f",
-      "4f",
-      "f/2",
-      "f"
-    ],
-    "answer": 0,
-    "explain": "KE = ½mω²A²cos²(ωt); frequency of energy oscillation is twice that of displacement.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77cdc63e-1669-4ae1-a919-99d5e7cba28a",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Spring Properties",
-    "prompt": "Spring of constant k cut into n equal parts: k of each part",
-    "formula": "k' = nk",
-    "options": [
-      "k",
-      "nk",
-      "k/n²",
-      "k/n"
-    ],
-    "answer": 1,
-    "explain": "Spring constant is inversely proportional to natural length; shorter piece has larger k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b623d759-b0d6-4836-84f8-7e5265b96181",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "SHM Definition",
-    "prompt": "Restoring force in SHM must be",
-    "formula": "F = −kx",
-    "options": [
-      "Proportional to −x",
-      "Proportional to v",
-      "Constant",
-      "Proportional to x²"
-    ],
-    "answer": 0,
-    "explain": "F = −kx (linear restoring force directed toward equilibrium) defines SHM.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1ff95213-64c5-41d6-b7f0-9b4d69117e71",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Displacement in SHM starting from extreme position:",
-    "formula": "x = A cos(ωt)",
-    "options": [
-      "A sin(ωt)",
-      "A sin(ωt+π)",
-      "A cos(ωt+π/2)",
-      "A cos(ωt)"
-    ],
-    "answer": 3,
-    "explain": "Starting from extreme (x=A at t=0), displacement follows cosine function.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "950bdb28-c891-4c8d-85e6-815afa90f486",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, KE as a function of displacement x is:",
-    "formula": "KE = ½mω²(A²−x²)",
-    "options": [
-      "½mω²(A²−x²)",
-      "mω²(A−x)",
-      "½mω²x²",
-      "½mω²A²"
-    ],
-    "answer": 0,
-    "explain": "KE = Total E − PE = ½mω²A² − ½mω²x² = ½mω²(A²−x²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b45ffc71-0d1d-4031-beda-cdc999e903e3",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, PE as a function of displacement x is:",
-    "formula": "PE = ½mω²x²",
-    "options": [
-      "½mω²A²",
-      "½mω²x²",
-      "mω²x",
-      "½mω²(A²−x²)"
-    ],
-    "answer": 1,
-    "explain": "PE = ½kx² = ½mω²x²; maximum at extreme, zero at mean position.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fd463d39-bf3b-43db-b55c-0991ef3b094c",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "At what displacement is KE = PE in SHM?",
-    "formula": "x = A/√2",
-    "options": [
-      "A√2",
-      "A/2",
-      "A/√2",
-      "A/4"
-    ],
-    "answer": 2,
-    "explain": "KE=PE ⟹ ½mω²(A²−x²)=½mω²x² ⟹ x=A/√2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eaec8ff5-17d5-4072-b361-17101ffbb337",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Time period of a physical (compound) pendulum is:",
-    "formula": "T = 2π√(I/mgd)",
-    "options": [
-      "2π√(mgd/I)",
-      "2π√(I/mg)",
-      "2π√(I/mgd)",
-      "2π√(d/g)"
-    ],
-    "answer": 2,
-    "explain": "I = moment of inertia about pivot, d = distance of CM from pivot.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4fe82cc0-184e-416e-bd92-b3be1f0f29e7",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For a spring-mass on a frictionless incline, time period is:",
-    "formula": "T = 2π√(m/k)",
-    "options": [
-      "2π√(m/g)",
-      "2π√(m/k)",
-      "2π√(m sinθ/k)",
-      "2π√(m/kg sinθ)"
-    ],
-    "answer": 1,
-    "explain": "T is independent of incline angle; gravity only shifts equilibrium position.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "92b08287-a62f-4e57-af33-33c565e72c43",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Maximum acceleration in SHM equals:",
-    "formula": "aₘₐₓ = ω²A",
-    "options": [
-      "ωA",
-      "2ωA",
-      "ω²A",
-      "ω²A²"
-    ],
-    "answer": 2,
-    "explain": "a = −ω²x; maximum when x = A (at extreme position), so aₘₐₓ = ω²A.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "adaa480c-c6b0-4697-9654-bd5645d08bcf",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Maximum velocity in SHM equals:",
-    "formula": "vₘₐₓ = ωA",
-    "options": [
-      "ωA",
-      "2ωA",
-      "A/ω",
-      "ω²A"
-    ],
-    "answer": 0,
-    "explain": "v = ω√(A²−x²); maximum at x=0 (mean position), vₘₐₓ = ωA.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "094b7f45-b7c3-4688-9acd-e3ff4a1f5a89",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Simple pendulum: effective g when lift accelerates downward with a:",
-    "formula": "g_eff = g − a",
-    "options": [
-      "g × a",
-      "g/a",
-      "g − a",
-      "g + a"
-    ],
-    "answer": 2,
-    "explain": "Downward acceleration reduces effective gravity, increasing time period.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d7d45fd-d9e7-4b60-8239-ba24344175a2",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In forced oscillations, amplitude is maximum when driving frequency equals:",
-    "formula": "ω_d = ω_natural",
-    "options": [
-      "Natural frequency",
-      "Twice natural frequency",
-      "Zero",
-      "Half natural frequency"
-    ],
-    "answer": 0,
-    "explain": "Maximum amplitude at resonance: driving frequency = natural frequency of system.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "00a79362-8acc-481d-8c83-ce2b0739eea9",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, velocity v and displacement x satisfy:",
-    "formula": "v² = ω²(A²−x²)",
-    "options": [
-      "v=ω(A−x)",
-      "v²=ω²A²+x²",
-      "v²=ω²(A²−x²)",
-      "v²=ω²x²"
-    ],
-    "answer": 2,
-    "explain": "Standard SHM velocity-displacement relation derived from energy conservation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cfd162f3-5761-405c-8e00-fc7d56b87381",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For a mass m between two springs k₁ and k₂ (both attached to walls), ω² =",
-    "formula": "ω² = (k₁+k₂)/m",
-    "options": [
-      "(k₁+k₂)/m",
-      "(k₁−k₂)/m",
-      "√(k₁k₂)/m",
-      "k₁k₂/m(k₁+k₂)"
-    ],
-    "answer": 0,
-    "explain": "Both springs act in parallel when mass is between two fixed walls.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "28f40e22-6041-45b9-adbf-9635fe1e2735",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, which graph of aₓ vs x is correct?",
-    "formula": "a = −ω²x",
-    "options": [
-      "Parabola opening up",
-      "Straight line with negative slope",
-      "Ellipse",
-      "Straight line with positive slope"
-    ],
-    "answer": 1,
-    "explain": "a = −ω²x is linear in x with negative slope (−ω²) through origin.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e285cc4d-2033-4001-b01c-c9f77384198c",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "The phase of velocity w.r.t. displacement in SHM:",
-    "formula": "v leads x by π/2",
-    "options": [
-      "v leads x by π",
-      "v and x are in phase",
-      "v lags x by π/2",
-      "v leads x by π/2"
-    ],
-    "answer": 3,
-    "explain": "v = Aω cos(ωt) when x = A sin(ωt); cosine leads sine by π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4f427ff4-ac88-4d41-8c0c-c79fcba3d9d6",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Energy of SHM is proportional to which power of amplitude?",
-    "formula": "E ∝ A²",
-    "options": [
-      "1/A",
-      "A",
-      "A²",
-      "A³"
-    ],
-    "answer": 2,
-    "explain": "E = ½mω²A²; energy is proportional to the square of amplitude.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4715fc92-2a2b-4e8f-a623-823aa0b68ae5",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A simple pendulum of length L on moon (g_m = g/6): T compared to Earth?",
-    "formula": "T ∝ 1/√g",
-    "options": [
-      "√6 times larger",
-      "6 times larger",
-      "Same",
-      "√6 times smaller"
-    ],
-    "answer": 0,
-    "explain": "T=2π√(L/g); smaller g gives larger T; T_moon = √6 · T_earth.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4bbbbfdc-4f76-40eb-b8f9-6dae011ab83c",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Time taken to travel from mean to A/2 in SHM (T = time period):",
-    "formula": "t = T/12",
-    "options": [
-      "T/8",
-      "T/4",
-      "T/12",
-      "T/6"
-    ],
-    "answer": 2,
-    "explain": "x=A sin(ωt)=A/2 ⟹ ωt=π/6 ⟹ t=T/12.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c43be48c-899d-4711-96e5-f532ff5fb5fa",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, time to travel from mean to A√3/2 is:",
-    "formula": "",
-    "options": [
-      "T/3",
-      "T/6",
-      "T/8",
-      "T/4"
-    ],
-    "answer": 1,
-    "explain": "x=A√3/2 → sinωt=√3/2 → ωt=π/3 → t=T/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4da429d9-b7e8-47b9-a91f-b1858c618a24",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Ratio of KE to PE when displacement = A/√2 in SHM:",
-    "formula": "",
-    "options": [
-      "2:1",
-      "1:3",
-      "1:1",
-      "1:2"
-    ],
-    "answer": 2,
-    "explain": "KE=½mω²(A²−x²); PE=½mω²x². At x=A/√2, both equal ½mω²(A²/2), so KE:PE=1:1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d657c449-772d-4263-bbb4-5de907f23dc7",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A particle in SHM has amplitude A. Its speed at x = A is:",
-    "formula": "v = ω√(A²−x²)",
-    "options": [
-      "ωA",
-      "ωA/2",
-      "ωA√2",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "At extreme position x=A, speed v=ω√(A²−A²)=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "98d8d56b-38f4-4b66-83c2-3ee7348495a5",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Simple pendulum: bob of mass m, what happens to T if mass doubles?",
-    "formula": "T=2π√(L/g)",
-    "options": [
-      "Increases by √2",
-      "Unchanged",
-      "Doubles",
-      "Halves"
-    ],
-    "answer": 1,
-    "explain": "T of simple pendulum is independent of mass of the bob.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bca43c34-315c-41ac-a826-d2357a16ac54",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A spring-mass system: if amplitude is doubled, time period:",
-    "formula": "",
-    "options": [
-      "Halves",
-      "Remains same",
-      "Increases by √2",
-      "Doubles"
-    ],
-    "answer": 1,
-    "explain": "T=2π√(m/k) is independent of amplitude in SHM.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f3c0264a-4289-48ad-b9ce-a49bc1b9ddde",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Which expression gives frequency f of a spring-mass system?",
-    "formula": "",
-    "options": [
-      "(1/2π)√(k/m)",
-      "(1/2π)√(m/k)",
-      "2π√(m/k)",
-      "2π√(k/m)"
-    ],
-    "answer": 0,
-    "explain": "f=1/T=1/(2π)·√(k/m).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "531ade72-bbdc-4535-bc30-adc58c15d726",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, the acceleration is maximum when displacement is:",
-    "formula": "a = −ω²x",
-    "options": [
-      "x = A/2",
-      "x = A/√2",
-      "Zero (x = 0)",
-      "Maximum (x = ±A)"
-    ],
-    "answer": 3,
-    "explain": "|a|=ω²|x|; maximum acceleration at maximum displacement x=±A.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "00292455-b46a-4015-8088-f0bc6d8ded39",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Energy stored in a spring stretched by x is:",
-    "formula": "U = ½kx²",
-    "options": [
-      "½kx",
-      "kx",
-      "½kx²",
-      "kx²"
-    ],
-    "answer": 2,
-    "explain": "Elastic PE of spring = ½kx², fundamental result used in SHM energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61b2710c-f431-44c3-ae0a-1cdd23d3a024",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "If spring constant k and mass m both double, new time period T' vs T:",
-    "formula": "T=2π√(m/k)",
-    "options": [
-      "T' = T√2",
-      "T' = T/2",
-      "T' = T",
-      "T' = 2T"
-    ],
-    "answer": 2,
-    "explain": "T'=2π√(2m/2k)=2π√(m/k)=T; unchanged.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f94ddf7d-a335-4b8c-8eed-e3c2ae389d19",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A pendulum clock runs slow on a hot day because:",
-    "formula": "T=2π√(L/g)",
-    "options": [
-      "Mass increases",
-      "L increases due to thermal expansion",
-      "g increases",
-      "Amplitude increases"
-    ],
-    "answer": 1,
-    "explain": "Thermal expansion increases L, increasing T, so clock runs slow.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8caf1088-89cb-45e3-aed5-bbbb2198abcd",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Phase difference between KE and PE oscillations in SHM is:",
-    "formula": "",
-    "options": [
-      "π/2 (90°)",
-      "π (180°)",
-      "0",
-      "π/4"
-    ],
-    "answer": 1,
-    "explain": "KE=½mω²A²cos²ωt; PE=½mω²A²sin²ωt; they are π out of phase.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fc1bb159-0e7d-47b0-89a9-edd75480568b",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A particle executes SHM. Its displacement is x=3sin(πt) cm. Amplitude is:",
-    "formula": "",
-    "options": [
-      "3 cm",
-      "3π cm",
-      "1 cm",
-      "π cm"
-    ],
-    "answer": 0,
-    "explain": "In x=A sin(ωt), amplitude A=3 cm by direct comparison.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5f84adee-b488-44bd-b0e1-157318663b48",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A particle executes SHM with x=3sin(πt) cm. Its time period is:",
-    "formula": "T=2π/ω",
-    "options": [
-      "2 s",
-      "0.5 s",
-      "1 s",
-      "π s"
-    ],
-    "answer": 0,
-    "explain": "ω=π rad/s → T=2π/π=2 s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b2d8e6f-d1f6-41d3-9313-1032afa38024",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For a second's pendulum, time period is:",
-    "formula": "",
-    "options": [
-      "0.5 s",
-      "1 s",
-      "2 s",
-      "4 s"
-    ],
-    "answer": 2,
-    "explain": "A second's pendulum has T=2 s (beats every second).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8da4bc3e-ce6b-44fb-85b5-12a8daf949f3",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Length of a second's pendulum on Earth (g≈9.8 m/s²) is approximately:",
-    "formula": "L=g(T/2π)²",
-    "options": [
-      "≈2 m",
-      "≈1 m",
-      "≈4 m",
-      "≈0.5 m"
-    ],
-    "answer": 1,
-    "explain": "L=9.8×(1/π)²≈9.8/9.87≈0.993 m ≈1 m.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "604c327f-333f-49a3-9162-53d83ee94d44",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For SHM, the graph of velocity v vs displacement x is:",
-    "formula": "v²/v_max² + x²/A² = 1",
-    "options": [
-      "Circle",
-      "Ellipse",
-      "Straight line",
-      "Parabola"
-    ],
-    "answer": 1,
-    "explain": "v²=ω²(A²−x²) rearranges to an ellipse equation in v-x plane.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5c88fbdc-5d30-408b-b237-0807958fe910",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A block on spring: if g changes, time period T =?",
-    "formula": "T = 2π√(m/k)",
-    "options": [
-      "Increases with g",
-      "Independent of g",
-      "Changes with g",
-      "Decreases with g"
-    ],
-    "answer": 1,
-    "explain": "Spring-mass T depends only on m and k, not on gravitational acceleration g.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7ad5b200-18a4-4390-994e-49a7bdadc2a8",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, the time-average of displacement over full cycle is:",
-    "formula": "",
-    "options": [
-      "A/√2",
-      "A",
-      "Zero",
-      "A/2"
-    ],
-    "answer": 2,
-    "explain": "Displacement x = A sinωt averages to zero over one complete period.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5c716324-1d00-4f7e-9227-ce081009e377",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, time-average of velocity over one complete cycle is:",
-    "formula": "",
-    "options": [
-      "Aω/2",
-      "Aω",
-      "Aω/√2",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "Velocity v = Aω cosωt; its average over full cycle is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "768b5631-c405-42b9-9fad-20510c660802",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, time-average of PE over one complete cycle equals:",
-    "formula": "",
-    "options": [
-      "E_total/4",
-      "E_total",
-      "Zero",
-      "E_total/2"
-    ],
-    "answer": 3,
-    "explain": "Average PE = Average KE = E/2; both average to half of total energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e136f2b3-3222-4215-a0f0-a8c6544c32d3",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM x = A sinωt, speed is maximum at t =",
-    "formula": "",
-    "options": [
-      "0",
-      "T/2",
-      "T/4",
-      "3T/4"
-    ],
-    "answer": 0,
-    "explain": "At t=0, x=0 (mean position) and speed v=Aω is maximum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c153fe94-a028-497e-806b-410fd28830c3",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Two springs k each in parallel support mass m. Angular frequency ω =",
-    "formula": "ω = √(2k/m)",
-    "options": [
-      "√(k/m)",
-      "√(2k/m)",
-      "2√(k/m)",
-      "√(k/2m)"
-    ],
-    "answer": 1,
-    "explain": "Parallel effective k = 2k, so ω = √(2k/m).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dd481ef3-b06c-42b1-86a1-6e75121fe559",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, the graph of PE vs time (x = A sinωt) is:",
-    "formula": "PE = ½kA²sin²ωt",
-    "options": [
-      "Sinusoidal with period T",
-      "Sinusoidal with period T/2",
-      "Constant",
-      "Linear"
-    ],
-    "answer": 1,
-    "explain": "PE = ½kA²sin²ωt oscillates with angular frequency 2ω, i.e., period T/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "874bede9-6cab-44d5-abe8-9a5353d96263",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Effective spring constant of spring k cut into 3 equal parts, all in parallel:",
-    "formula": "",
-    "options": [
-      "k/3",
-      "k",
-      "9k",
-      "3k"
-    ],
-    "answer": 2,
-    "explain": "Each part has k'=3k; three such parts in parallel give k_eff = 9k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aefa8627-c5b4-4f94-901b-9a8ff9658526",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, which is constant throughout motion?",
-    "formula": "",
-    "options": [
-      "Velocity",
-      "KE",
-      "Total mechanical energy",
-      "PE"
-    ],
-    "answer": 2,
-    "explain": "In ideal (undamped) SHM, total mechanical energy E = ½kA² remains constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bfb9dba4-37fe-4fab-b52d-14e74d659820",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Time period of a simple pendulum of length L in a satellite (orbital free fall):",
-    "formula": "",
-    "options": [
-      "Zero",
-      "2π√(L/6g)",
-      "2π√(L/g)",
-      "Infinity"
-    ],
-    "answer": 3,
-    "explain": "In free fall, g_eff = 0, so T = 2π√(L/0) → ∞; pendulum doesn't oscillate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e9d48c4a-89d7-4c91-aa26-0cdbdb06ec69",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A particle does SHM. Which graph of x vs t is correct if it starts from extreme?",
-    "formula": "x = A cosωt",
-    "options": [
-      "x = A tanωt",
-      "x = A sinωt",
-      "x = A cosωt",
-      "x = A sin(ωt+π)"
-    ],
-    "answer": 2,
-    "explain": "Starting from extreme position (x = A at t = 0) gives x = A cosωt.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7847b736-b767-4ad1-b6c7-4aa2d158535d",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In forced oscillations, at resonance the phase lag of displacement behind driving force is:",
-    "formula": "",
-    "options": [
-      "π/2",
-      "0",
-      "π",
-      "π/4"
-    ],
-    "answer": 0,
-    "explain": "At resonance, displacement lags driving force by π/2 (90°).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e54c3f49-7dfb-4ebc-8f60-efdf9132f538",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A simple pendulum has period T on Earth. On a planet with g' = 4g, T' =",
-    "formula": "T = 2π√(L/g)",
-    "options": [
-      "T/4",
-      "2T",
-      "4T",
-      "T/2"
-    ],
-    "answer": 3,
-    "explain": "T' = 2π√(L/4g) = T/2; period halves when g quadruples.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "24585736-9e86-44b5-be3c-f88db015833c",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, number of times PE is maximum in one complete oscillation is:",
-    "formula": "",
-    "options": [
-      "1",
-      "2",
-      "4",
-      "3"
-    ],
-    "answer": 1,
-    "explain": "PE is maximum at both extreme positions (+A and −A), so twice per cycle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7358e1f2-80e7-4096-9f4d-719d9ec7c6a5",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A pendulum clock is taken from poles to equator. It will:",
-    "formula": "T = 2π√(L/g)",
-    "options": [
-      "Run slow",
-      "Stop oscillating",
-      "Run fast",
-      "Run at same rate"
-    ],
-    "answer": 0,
-    "explain": "g is smaller at equator; T increases so clock runs slow (loses time).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "efa1c44f-c526-442a-9e9e-4d903c4342b5",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, the time to travel from x = 0 to x = A is:",
-    "formula": "",
-    "options": [
-      "T",
-      "T/8",
-      "T/4",
-      "T/2"
-    ],
-    "answer": 2,
-    "explain": "From mean (x=0) to extreme (x=A) takes one-quarter of the time period.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "67c09625-3ce7-4729-8ec4-3406f6eadb1b",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For SHM, the time-average of KE over one full cycle equals:",
-    "formula": "⟨KE⟩ = E/2",
-    "options": [
-      "Zero",
-      "E/2",
-      "E/4",
-      "E (total energy)"
-    ],
-    "answer": 1,
-    "explain": "Average KE = average PE = E/2 over a complete cycle in SHM.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8055074a-f69f-4c12-bd48-bac50c991afa",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For SHM, the slope of F–x graph gives:",
-    "formula": "slope = −k",
-    "options": [
-      "Mass m",
-      "Spring constant k (magnitude)",
-      "Time period T",
-      "Angular frequency ω"
-    ],
-    "answer": 1,
-    "explain": "F = −kx; the magnitude of the slope of F vs x graph is the spring constant k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9142bd4b-2152-4199-b263-2638640f304e",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, the phase difference between acceleration and velocity is:",
-    "formula": "",
-    "options": [
-      "π/4",
-      "π",
-      "π/2",
-      "0"
-    ],
-    "answer": 2,
-    "explain": "a = −ω²x is 90° (π/2) ahead of v in phase (a leads v by π/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ff2b1884-c593-4a0f-b3de-4cdacd5e65ab",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "A spring-mass system oscillates. If mass is quadrupled, T becomes:",
-    "formula": "T ∝ √m",
-    "options": [
-      "2T",
-      "T/2",
-      "4T",
-      "T/4"
-    ],
-    "answer": 0,
-    "explain": "T = 2π√(m/k); quadrupling m doubles √m, so T becomes 2T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2d52c1c-b70e-4abd-bd8a-16197fddd48a",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, the velocity v vs time t graph (x=A sinωt) is:",
-    "formula": "v = Aω cosωt",
-    "options": [
-      "Sine curve",
-      "Straight line",
-      "Parabola",
-      "Cosine curve"
-    ],
-    "answer": 3,
-    "explain": "v = dx/dt = Aω cosωt, which is a cosine function of time.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b81fe04d-8b9e-4562-ab86-ade685863994",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, the acceleration a vs time t (x = A sinωt) is:",
-    "formula": "a = −Aω² sinωt",
-    "options": [
-      "Straight line",
-      "Parabola",
-      "Cosine curve",
-      "Negative sine curve"
-    ],
-    "answer": 3,
-    "explain": "a = d²x/dt² = −Aω² sinωt; it is a negative sine curve, inverted relative to x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "314b981a-6bf5-4462-8c7d-225d29fb17c6",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For a spring-mass on horizontal surface (no friction), if g doubles, T =?",
-    "formula": "T = 2π√(m/k)",
-    "options": [
-      "Halves",
-      "Increases by √2",
-      "Remains unchanged",
-      "Doubles"
-    ],
-    "answer": 2,
-    "explain": "Horizontal spring-mass T = 2π√(m/k) is independent of g.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a55e62cb-5c04-4e59-bd1d-cca47752ba3f",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, which physical quantity has unit of rad/s?",
-    "formula": "",
-    "options": [
-      "Angular frequency ω",
-      "Frequency f",
-      "Spring constant k",
-      "Time period T"
-    ],
-    "answer": 0,
-    "explain": "Angular frequency ω = 2πf has SI unit rad/s (or s⁻¹).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e2d15aba-27aa-45f4-bbf6-e453a473133a",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Frequency of oscillation in SHM with a = −ω²x is related to ω by:",
-    "formula": "f = ω/(2π)",
-    "options": [
-      "f = 2πω",
-      "f = ω",
-      "f = ω²/(2π)",
-      "f = ω/(2π)"
-    ],
-    "answer": 3,
-    "explain": "Angular frequency ω = 2πf, so f = ω/(2π).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "33cf32a6-0336-4cf0-87f2-6b15c8525519",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "Effective spring constant when two springs k₁, k₂ connected in series is:",
-    "formula": "1/k = 1/k₁ + 1/k₂",
-    "options": [
-      "k₁k₂/(k₁+k₂)",
-      "(k₁+k₂)/2",
-      "√(k₁k₂)",
-      "k₁ + k₂"
-    ],
-    "answer": 0,
-    "explain": "Series combination: 1/k_eff = 1/k₁ + 1/k₂ ⟹ k_eff = k₁k₂/(k₁+k₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5574100e-6c4e-4e2b-a65d-131f53404982",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "For SHM, the time period T is related to frequency f by:",
-    "formula": "T = 1/f",
-    "options": [
-      "T = f",
-      "T = 2π/f",
-      "T = 1/f",
-      "T = 2πf"
-    ],
-    "answer": 2,
-    "explain": "Time period T is the reciprocal of frequency: T = 1/f.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "40292fa3-dde1-48e6-85a7-a130dbfc32f9",
-    "subject": "Physics",
-    "chapter": "Oscillations",
-    "topic": "Oscillations",
-    "prompt": "In SHM, which pair of quantities is always in opposite directions?",
-    "formula": "",
-    "options": [
-      "Velocity and acceleration",
-      "Force and velocity",
-      "Displacement and acceleration",
-      "Displacement and velocity"
-    ],
-    "answer": 2,
-    "explain": "a = −ω²x; acceleration always opposes displacement — they are always antiparallel.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "b67bf9b6-d7ca-40ab-90f8-a8be1c722683",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple Pendulum",
+  "prompt": "Time period of simple pendulum",
+  "formula": "T = 2π√(L/g)",
+  "options": [
+   "2π√(g/L)",
+   "π√(L/g)",
+   "2√(L/g)",
+   "2π√(L/g)"
+  ],
+  "answer": 3,
+  "explain": "T depends on length L and g; independent of mass and amplitude (small angles).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "35822daf-0fe3-47d7-810f-5ab18990536e",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-Mass System",
+  "prompt": "Time period of spring-mass system",
+  "formula": "T = 2π√(m/k)",
+  "options": [
+   "2π√(m/k)",
+   "2π√(mk)",
+   "2π√(k/m)",
+   "π√(m/k)"
+  ],
+  "answer": 0,
+  "explain": "T depends on mass m and spring constant k; independent of amplitude and g.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f4b1730e-3e87-429f-968b-b0046e288ea0",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM Definition",
+  "prompt": "In SHM, acceleration is related to displacement by",
+  "formula": "a = -ω²x",
+  "options": [
+   "a = -ωx",
+   "a = -ω²x",
+   "a = ω²x",
+   "a = -ω²x²"
+  ],
+  "answer": 1,
+  "explain": "Acceleration is always directed opposite to displacement; defines SHM.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cac20003-8064-4f79-a4e3-976fa40fc653",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Energy in SHM",
+  "prompt": "Total mechanical energy in SHM",
+  "formula": "E = ½kA²",
+  "options": [
+   "½mω²x²",
+   "½kx²",
+   "½kA²",
+   "kA²"
+  ],
+  "answer": 2,
+  "explain": "Total energy is constant and proportional to square of amplitude; E = ½mω²A².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2da79bb8-c2ac-4947-a6ce-3944828843b0",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM Basics",
+  "prompt": "Angular frequency ω of SHM is related to T by",
+  "formula": "ω = 2π/T",
+  "options": [
+   "π/T",
+   "2π/T",
+   "2T/π",
+   "T/2π"
+  ],
+  "answer": 1,
+  "explain": "ω = 2πf = 2π/T is the angular frequency in rad/s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3ea00a1a-d570-4f92-a353-c7967f29fc44",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM Equation",
+  "prompt": "Displacement in SHM starting from mean position",
+  "formula": "x = A sin(ωt)",
+  "options": [
+   "A sin(ωt + π/2)",
+   "A tan(ωt)",
+   "A cos(ωt)",
+   "A sin(ωt)"
+  ],
+  "answer": 3,
+  "explain": "If particle starts at mean position (x=0 at t=0), x = A sinωt is used.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "830e3a24-1d1d-4e43-ad2a-e0f5b5193d4f",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in Parallel",
+  "prompt": "Two springs k₁, k₂ in parallel: effective spring constant",
+  "formula": "k = k₁ + k₂",
+  "options": [
+   "k₁k₂/(k₁+k₂)",
+   "(k₁+k₂)/k₁k₂",
+   "1/k₁ + 1/k₂",
+   "k₁ + k₂"
+  ],
+  "answer": 3,
+  "explain": "Springs in parallel share the same extension; forces add, so k_eff = k₁ + k₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "231efc19-2e69-419e-8283-c928e5f10739",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in Series",
+  "prompt": "Two springs k₁, k₂ in series: effective spring constant",
+  "formula": "1/k = 1/k₁ + 1/k₂",
+  "options": [
+   "k₁k₂/(k₁+k₂)",
+   "k₁ + k₂",
+   "(k₁+k₂)/2",
+   "k₁k₂"
+  ],
+  "answer": 0,
+  "explain": "Springs in series share same force; extensions add, so 1/k_eff = 1/k₁ + 1/k₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4d0f6d6c-8d70-4c73-a2e4-3dbd5b7d54db",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM Properties",
+  "prompt": "In SHM, time period is independent of",
+  "formula": "",
+  "options": [
+   "Angular frequency",
+   "Amplitude",
+   "Mass",
+   "Spring constant"
+  ],
+  "answer": 1,
+  "explain": "For SHM, T = 2π√(m/k); T is independent of amplitude (isochronous property).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0eb69259-bb12-4bae-a7eb-ee20c133c9d9",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple Pendulum",
+  "prompt": "Simple pendulum: effective g in an accelerating lift (upward a)",
+  "formula": "g_eff = g + a",
+  "options": [
+   "g × a",
+   "g + a",
+   "g/a",
+   "g − a"
+  ],
+  "answer": 1,
+  "explain": "Upward acceleration increases effective g, decreasing T; g_eff = g + a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "62058b50-3616-41ec-b668-059dbfb51ecc",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Resonance",
+  "prompt": "Resonance in forced oscillations occurs when",
+  "formula": "",
+  "options": [
+   "Driving freq < natural freq",
+   "Damping is maximum",
+   "Driving freq = natural freq",
+   "Driving freq > natural freq"
+  ],
+  "answer": 2,
+  "explain": "At resonance, driving frequency equals natural frequency; amplitude is maximum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e881d82c-eb6f-481a-9521-551df4c9813d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase in SHM",
+  "prompt": "Phase difference between displacement and velocity in SHM",
+  "formula": "",
+  "options": [
+   "2π",
+   "π/2",
+   "0",
+   "π"
+  ],
+  "answer": 1,
+  "explain": "v = dx/dt = Aω cos(ωt) leads x = A sin(ωt) by π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d63736a7-cf4e-499b-98ce-19c2d3618ee8",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase in SHM",
+  "prompt": "Phase difference between displacement and acceleration in SHM",
+  "formula": "",
+  "options": [
+   "0",
+   "π/2",
+   "2π",
+   "π"
+  ],
+  "answer": 3,
+  "explain": "a = −ω²x, so acceleration is always π out of phase with displacement.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "26356b8a-a9d8-4f98-a2c3-4cd9ff6c7236",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Energy in SHM",
+  "prompt": "KE and PE in SHM each oscillate with frequency",
+  "formula": "",
+  "options": [
+   "2f",
+   "4f",
+   "f/2",
+   "f"
+  ],
+  "answer": 0,
+  "explain": "KE = ½mω²A²cos²(ωt); frequency of energy oscillation is twice that of displacement.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77cdc63e-1669-4ae1-a919-99d5e7cba28a",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring Properties",
+  "prompt": "Spring of constant k cut into n equal parts: k of each part",
+  "formula": "k' = nk",
+  "options": [
+   "k",
+   "nk",
+   "k/n²",
+   "k/n"
+  ],
+  "answer": 1,
+  "explain": "Spring constant is inversely proportional to natural length; shorter piece has larger k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b623d759-b0d6-4836-84f8-7e5265b96181",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM Definition",
+  "prompt": "Restoring force in SHM must be",
+  "formula": "F = −kx",
+  "options": [
+   "Proportional to −x",
+   "Proportional to v",
+   "Constant",
+   "Proportional to x²"
+  ],
+  "answer": 0,
+  "explain": "F = −kx (linear restoring force directed toward equilibrium) defines SHM.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1ff95213-64c5-41d6-b7f0-9b4d69117e71",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "Displacement in SHM starting from extreme position:",
+  "formula": "x = A cos(ωt)",
+  "options": [
+   "A sin(ωt)",
+   "A sin(ωt+π)",
+   "A cos(ωt+π/2)",
+   "A cos(ωt)"
+  ],
+  "answer": 3,
+  "explain": "Starting from extreme (x=A at t=0), displacement follows cosine function.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "950bdb28-c891-4c8d-85e6-815afa90f486",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "In SHM, KE as a function of displacement x is:",
+  "formula": "KE = ½mω²(A²−x²)",
+  "options": [
+   "½mω²(A²−x²)",
+   "mω²(A−x)",
+   "½mω²x²",
+   "½mω²A²"
+  ],
+  "answer": 0,
+  "explain": "KE = Total E − PE = ½mω²A² − ½mω²x² = ½mω²(A²−x²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b45ffc71-0d1d-4031-beda-cdc999e903e3",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "In SHM, PE as a function of displacement x is:",
+  "formula": "PE = ½mω²x²",
+  "options": [
+   "½mω²A²",
+   "½mω²x²",
+   "mω²x",
+   "½mω²(A²−x²)"
+  ],
+  "answer": 1,
+  "explain": "PE = ½kx² = ½mω²x²; maximum at extreme, zero at mean position.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fd463d39-bf3b-43db-b55c-0991ef3b094c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "At what displacement is KE = PE in SHM?",
+  "formula": "x = A/√2",
+  "options": [
+   "A√2",
+   "A/2",
+   "A/√2",
+   "A/4"
+  ],
+  "answer": 2,
+  "explain": "KE=PE ⟹ ½mω²(A²−x²)=½mω²x² ⟹ x=A/√2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eaec8ff5-17d5-4072-b361-17101ffbb337",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "Time period of a physical (compound) pendulum is:",
+  "formula": "T = 2π√(I/mgd)",
+  "options": [
+   "2π√(mgd/I)",
+   "2π√(I/mg)",
+   "2π√(I/mgd)",
+   "2π√(d/g)"
+  ],
+  "answer": 2,
+  "explain": "I = moment of inertia about pivot, d = distance of CM from pivot.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4fe82cc0-184e-416e-bd92-b3be1f0f29e7",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "For a spring-mass on a frictionless incline, time period is:",
+  "formula": "T = 2π√(m/k)",
+  "options": [
+   "2π√(m/g)",
+   "2π√(m/k)",
+   "2π√(m sinθ/k)",
+   "2π√(m/kg sinθ)"
+  ],
+  "answer": 1,
+  "explain": "T is independent of incline angle; gravity only shifts equilibrium position.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "92b08287-a62f-4e57-af33-33c565e72c43",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "Maximum acceleration in SHM equals:",
+  "formula": "aₘₐₓ = ω²A",
+  "options": [
+   "ωA",
+   "2ωA",
+   "ω²A",
+   "ω²A²"
+  ],
+  "answer": 2,
+  "explain": "a = −ω²x; maximum when x = A (at extreme position), so aₘₐₓ = ω²A.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "adaa480c-c6b0-4697-9654-bd5645d08bcf",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "Maximum velocity in SHM equals:",
+  "formula": "vₘₐₓ = ωA",
+  "options": [
+   "ωA",
+   "2ωA",
+   "A/ω",
+   "ω²A"
+  ],
+  "answer": 0,
+  "explain": "v = ω√(A²−x²); maximum at x=0 (mean position), vₘₐₓ = ωA.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "094b7f45-b7c3-4688-9acd-e3ff4a1f5a89",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Pendulum with effective g (lift, fluid)",
+  "prompt": "Simple pendulum: effective g when lift accelerates downward with a:",
+  "formula": "g_eff = g − a",
+  "options": [
+   "g × a",
+   "g/a",
+   "g − a",
+   "g + a"
+  ],
+  "answer": 2,
+  "explain": "Downward acceleration reduces effective gravity, increasing time period.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d7d45fd-d9e7-4b60-8239-ba24344175a2",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Oscillations",
+  "prompt": "In forced oscillations, amplitude is maximum when driving frequency equals:",
+  "formula": "ω_d = ω_natural",
+  "options": [
+   "Natural frequency",
+   "Twice natural frequency",
+   "Zero",
+   "Half natural frequency"
+  ],
+  "answer": 0,
+  "explain": "Maximum amplitude at resonance: driving frequency = natural frequency of system.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "00a79362-8acc-481d-8c83-ce2b0739eea9",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "In SHM, velocity v and displacement x satisfy:",
+  "formula": "v² = ω²(A²−x²)",
+  "options": [
+   "v=ω(A−x)",
+   "v²=ω²A²+x²",
+   "v²=ω²(A²−x²)",
+   "v²=ω²x²"
+  ],
+  "answer": 2,
+  "explain": "Standard SHM velocity-displacement relation derived from energy conservation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cfd162f3-5761-405c-8e00-fc7d56b87381",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "For a mass m between two springs k₁ and k₂ (both attached to walls), ω² =",
+  "formula": "ω² = (k₁+k₂)/m",
+  "options": [
+   "(k₁+k₂)/m",
+   "(k₁−k₂)/m",
+   "√(k₁k₂)/m",
+   "k₁k₂/m(k₁+k₂)"
+  ],
+  "answer": 0,
+  "explain": "Both springs act in parallel when mass is between two fixed walls.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "28f40e22-6041-45b9-adbf-9635fe1e2735",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "In SHM, which graph of aₓ vs x is correct?",
+  "formula": "a = −ω²x",
+  "options": [
+   "Parabola opening up",
+   "Straight line with negative slope",
+   "Ellipse",
+   "Straight line with positive slope"
+  ],
+  "answer": 1,
+  "explain": "a = −ω²x is linear in x with negative slope (−ω²) through origin.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e285cc4d-2033-4001-b01c-c9f77384198c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "The phase of velocity w.r.t. displacement in SHM:",
+  "formula": "v leads x by π/2",
+  "options": [
+   "v leads x by π",
+   "v and x are in phase",
+   "v lags x by π/2",
+   "v leads x by π/2"
+  ],
+  "answer": 3,
+  "explain": "v = Aω cos(ωt) when x = A sin(ωt); cosine leads sine by π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4f427ff4-ac88-4d41-8c0c-c79fcba3d9d6",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "Energy of SHM is proportional to which power of amplitude?",
+  "formula": "E ∝ A²",
+  "options": [
+   "1/A",
+   "A",
+   "A²",
+   "A³"
+  ],
+  "answer": 2,
+  "explain": "E = ½mω²A²; energy is proportional to the square of amplitude.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4715fc92-2a2b-4e8f-a623-823aa0b68ae5",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "A simple pendulum of length L on moon (g_m = g/6): T compared to Earth?",
+  "formula": "T ∝ 1/√g",
+  "options": [
+   "√6 times larger",
+   "6 times larger",
+   "Same",
+   "√6 times smaller"
+  ],
+  "answer": 0,
+  "explain": "T=2π√(L/g); smaller g gives larger T; T_moon = √6 · T_earth.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4bbbbfdc-4f76-40eb-b8f9-6dae011ab83c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "Time taken to travel from mean to A/2 in SHM (T = time period):",
+  "formula": "t = T/12",
+  "options": [
+   "T/8",
+   "T/4",
+   "T/12",
+   "T/6"
+  ],
+  "answer": 2,
+  "explain": "x=A sin(ωt)=A/2 ⟹ ωt=π/6 ⟹ t=T/12.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c43be48c-899d-4711-96e5-f532ff5fb5fa",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In SHM, time to travel from mean to A√3/2 is:",
+  "formula": "",
+  "options": [
+   "T/3",
+   "T/6",
+   "T/8",
+   "T/4"
+  ],
+  "answer": 1,
+  "explain": "x=A√3/2 → sinωt=√3/2 → ωt=π/3 → t=T/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4da429d9-b7e8-47b9-a91f-b1858c618a24",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "Ratio of KE to PE when displacement = A/√2 in SHM:",
+  "formula": "",
+  "options": [
+   "2:1",
+   "1:3",
+   "1:1",
+   "1:2"
+  ],
+  "answer": 2,
+  "explain": "KE=½mω²(A²−x²); PE=½mω²x². At x=A/√2, both equal ½mω²(A²/2), so KE:PE=1:1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d657c449-772d-4263-bbb4-5de907f23dc7",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "A particle in SHM has amplitude A. Its speed at x = A is:",
+  "formula": "v = ω√(A²−x²)",
+  "options": [
+   "ωA",
+   "ωA/2",
+   "ωA√2",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "At extreme position x=A, speed v=ω√(A²−A²)=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "98d8d56b-38f4-4b66-83c2-3ee7348495a5",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "Simple pendulum: bob of mass m, what happens to T if mass doubles?",
+  "formula": "T=2π√(L/g)",
+  "options": [
+   "Increases by √2",
+   "Unchanged",
+   "Doubles",
+   "Halves"
+  ],
+  "answer": 1,
+  "explain": "T of simple pendulum is independent of mass of the bob.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bca43c34-315c-41ac-a826-d2357a16ac54",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A spring-mass system: if amplitude is doubled, time period:",
+  "formula": "",
+  "options": [
+   "Halves",
+   "Remains same",
+   "Increases by √2",
+   "Doubles"
+  ],
+  "answer": 1,
+  "explain": "T=2π√(m/k) is independent of amplitude in SHM.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f3c0264a-4289-48ad-b9ce-a49bc1b9ddde",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "Which expression gives frequency f of a spring-mass system?",
+  "formula": "",
+  "options": [
+   "(1/2π)√(k/m)",
+   "(1/2π)√(m/k)",
+   "2π√(m/k)",
+   "2π√(k/m)"
+  ],
+  "answer": 0,
+  "explain": "f=1/T=1/(2π)·√(k/m).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "531ade72-bbdc-4535-bc30-adc58c15d726",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "In SHM, the acceleration is maximum when displacement is:",
+  "formula": "a = −ω²x",
+  "options": [
+   "x = A/2",
+   "x = A/√2",
+   "Zero (x = 0)",
+   "Maximum (x = ±A)"
+  ],
+  "answer": 3,
+  "explain": "|a|=ω²|x|; maximum acceleration at maximum displacement x=±A.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "00292455-b46a-4015-8088-f0bc6d8ded39",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring force constant and restoring force",
+  "prompt": "Energy stored in a spring stretched by x is:",
+  "formula": "U = ½kx²",
+  "options": [
+   "½kx",
+   "kx",
+   "½kx²",
+   "kx²"
+  ],
+  "answer": 2,
+  "explain": "Elastic PE of spring = ½kx², fundamental result used in SHM energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61b2710c-f431-44c3-ae0a-1cdd23d3a024",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "If spring constant k and mass m both double, new time period T' vs T:",
+  "formula": "T=2π√(m/k)",
+  "options": [
+   "T' = T√2",
+   "T' = T/2",
+   "T' = T",
+   "T' = 2T"
+  ],
+  "answer": 2,
+  "explain": "T'=2π√(2m/2k)=2π√(m/k)=T; unchanged.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f94ddf7d-a335-4b8c-8eed-e3c2ae389d19",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "A pendulum clock runs slow on a hot day because:",
+  "formula": "T=2π√(L/g)",
+  "options": [
+   "Mass increases",
+   "L increases due to thermal expansion",
+   "g increases",
+   "Amplitude increases"
+  ],
+  "answer": 1,
+  "explain": "Thermal expansion increases L, increasing T, so clock runs slow.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8caf1088-89cb-45e3-aed5-bbbb2198abcd",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "Phase difference between KE and PE oscillations in SHM is:",
+  "formula": "",
+  "options": [
+   "π/2 (90°)",
+   "π (180°)",
+   "0",
+   "π/4"
+  ],
+  "answer": 1,
+  "explain": "KE=½mω²A²cos²ωt; PE=½mω²A²sin²ωt; they are π out of phase.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fc1bb159-0e7d-47b0-89a9-edd75480568b",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "A particle executes SHM. Its displacement is x=3sin(πt) cm. Amplitude is:",
+  "formula": "",
+  "options": [
+   "3 cm",
+   "3π cm",
+   "1 cm",
+   "π cm"
+  ],
+  "answer": 0,
+  "explain": "In x=A sin(ωt), amplitude A=3 cm by direct comparison.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5f84adee-b488-44bd-b0e1-157318663b48",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "A particle executes SHM with x=3sin(πt) cm. Its time period is:",
+  "formula": "T=2π/ω",
+  "options": [
+   "2 s",
+   "0.5 s",
+   "1 s",
+   "π s"
+  ],
+  "answer": 0,
+  "explain": "ω=π rad/s → T=2π/π=2 s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b2d8e6f-d1f6-41d3-9313-1032afa38024",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "For a second's pendulum, time period is:",
+  "formula": "",
+  "options": [
+   "0.5 s",
+   "1 s",
+   "2 s",
+   "4 s"
+  ],
+  "answer": 2,
+  "explain": "A second's pendulum has T=2 s (beats every second).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8da4bc3e-ce6b-44fb-85b5-12a8daf949f3",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "Length of a second's pendulum on Earth (g≈9.8 m/s²) is approximately:",
+  "formula": "L=g(T/2π)²",
+  "options": [
+   "≈2 m",
+   "≈1 m",
+   "≈4 m",
+   "≈0.5 m"
+  ],
+  "answer": 1,
+  "explain": "L=9.8×(1/π)²≈9.8/9.87≈0.993 m ≈1 m.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "604c327f-333f-49a3-9162-53d83ee94d44",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "For SHM, the graph of velocity v vs displacement x is:",
+  "formula": "v²/v_max² + x²/A² = 1",
+  "options": [
+   "Circle",
+   "Ellipse",
+   "Straight line",
+   "Parabola"
+  ],
+  "answer": 1,
+  "explain": "v²=ω²(A²−x²) rearranges to an ellipse equation in v-x plane.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5c88fbdc-5d30-408b-b237-0807958fe910",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A block on spring: if g changes, time period T =?",
+  "formula": "T = 2π√(m/k)",
+  "options": [
+   "Increases with g",
+   "Independent of g",
+   "Changes with g",
+   "Decreases with g"
+  ],
+  "answer": 1,
+  "explain": "Spring-mass T depends only on m and k, not on gravitational acceleration g.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7ad5b200-18a4-4390-994e-49a7bdadc2a8",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In SHM, the time-average of displacement over full cycle is:",
+  "formula": "",
+  "options": [
+   "A/√2",
+   "A",
+   "Zero",
+   "A/2"
+  ],
+  "answer": 2,
+  "explain": "Displacement x = A sinωt averages to zero over one complete period.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5c716324-1d00-4f7e-9227-ce081009e377",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "In SHM, time-average of velocity over one complete cycle is:",
+  "formula": "",
+  "options": [
+   "Aω/2",
+   "Aω",
+   "Aω/√2",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Velocity v = Aω cosωt; its average over full cycle is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "768b5631-c405-42b9-9fad-20510c660802",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "In SHM, time-average of PE over one complete cycle equals:",
+  "formula": "",
+  "options": [
+   "E_total/4",
+   "E_total",
+   "Zero",
+   "E_total/2"
+  ],
+  "answer": 3,
+  "explain": "Average PE = Average KE = E/2; both average to half of total energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e136f2b3-3222-4215-a0f0-a8c6544c32d3",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "In SHM x = A sinωt, speed is maximum at t =",
+  "formula": "",
+  "options": [
+   "0",
+   "T/2",
+   "T/4",
+   "3T/4"
+  ],
+  "answer": 0,
+  "explain": "At t=0, x=0 (mean position) and speed v=Aω is maximum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c153fe94-a028-497e-806b-410fd28830c3",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "Two springs k each in parallel support mass m. Angular frequency ω =",
+  "formula": "ω = √(2k/m)",
+  "options": [
+   "√(k/m)",
+   "√(2k/m)",
+   "2√(k/m)",
+   "√(k/2m)"
+  ],
+  "answer": 1,
+  "explain": "Parallel effective k = 2k, so ω = √(2k/m).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dd481ef3-b06c-42b1-86a1-6e75121fe559",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "In SHM, the graph of PE vs time (x = A sinωt) is:",
+  "formula": "PE = ½kA²sin²ωt",
+  "options": [
+   "Sinusoidal with period T",
+   "Sinusoidal with period T/2",
+   "Constant",
+   "Linear"
+  ],
+  "answer": 1,
+  "explain": "PE = ½kA²sin²ωt oscillates with angular frequency 2ω, i.e., period T/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "874bede9-6cab-44d5-abe8-9a5353d96263",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "Effective spring constant of spring k cut into 3 equal parts, all in parallel:",
+  "formula": "",
+  "options": [
+   "k/3",
+   "k",
+   "9k",
+   "3k"
+  ],
+  "answer": 2,
+  "explain": "Each part has k'=3k; three such parts in parallel give k_eff = 9k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aefa8627-c5b4-4f94-901b-9a8ff9658526",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "In SHM, which is constant throughout motion?",
+  "formula": "",
+  "options": [
+   "Velocity",
+   "KE",
+   "Total mechanical energy",
+   "PE"
+  ],
+  "answer": 2,
+  "explain": "In ideal (undamped) SHM, total mechanical energy E = ½kA² remains constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bfb9dba4-37fe-4fab-b52d-14e74d659820",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Pendulum with effective g (lift, fluid)",
+  "prompt": "Time period of a simple pendulum of length L in a satellite (orbital free fall):",
+  "formula": "",
+  "options": [
+   "Zero",
+   "2π√(L/6g)",
+   "2π√(L/g)",
+   "Infinity"
+  ],
+  "answer": 3,
+  "explain": "In free fall, g_eff = 0, so T = 2π√(L/0) → ∞; pendulum doesn't oscillate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e9d48c4a-89d7-4c91-aa26-0cdbdb06ec69",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "A particle does SHM. Which graph of x vs t is correct if it starts from extreme?",
+  "formula": "x = A cosωt",
+  "options": [
+   "x = A tanωt",
+   "x = A sinωt",
+   "x = A cosωt",
+   "x = A sin(ωt+π)"
+  ],
+  "answer": 2,
+  "explain": "Starting from extreme position (x = A at t = 0) gives x = A cosωt.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7847b736-b767-4ad1-b6c7-4aa2d158535d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Oscillations",
+  "prompt": "In forced oscillations, at resonance the phase lag of displacement behind driving force is:",
+  "formula": "",
+  "options": [
+   "π/2",
+   "0",
+   "π",
+   "π/4"
+  ],
+  "answer": 0,
+  "explain": "At resonance, displacement lags driving force by π/2 (90°).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e54c3f49-7dfb-4ebc-8f60-efdf9132f538",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Pendulum with effective g (lift, fluid)",
+  "prompt": "A simple pendulum has period T on Earth. On a planet with g' = 4g, T' =",
+  "formula": "T = 2π√(L/g)",
+  "options": [
+   "T/4",
+   "2T",
+   "4T",
+   "T/2"
+  ],
+  "answer": 3,
+  "explain": "T' = 2π√(L/4g) = T/2; period halves when g quadruples.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "24585736-9e86-44b5-be3c-f88db015833c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "In SHM, number of times PE is maximum in one complete oscillation is:",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "4",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "PE is maximum at both extreme positions (+A and −A), so twice per cycle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7358e1f2-80e7-4096-9f4d-719d9ec7c6a5",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Pendulum with effective g (lift, fluid)",
+  "prompt": "A pendulum clock is taken from poles to equator. It will:",
+  "formula": "T = 2π√(L/g)",
+  "options": [
+   "Run slow",
+   "Stop oscillating",
+   "Run fast",
+   "Run at same rate"
+  ],
+  "answer": 0,
+  "explain": "g is smaller at equator; T increases so clock runs slow (loses time).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "efa1c44f-c526-442a-9e9e-4d903c4342b5",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In SHM, the time to travel from x = 0 to x = A is:",
+  "formula": "",
+  "options": [
+   "T",
+   "T/8",
+   "T/4",
+   "T/2"
+  ],
+  "answer": 2,
+  "explain": "From mean (x=0) to extreme (x=A) takes one-quarter of the time period.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "67c09625-3ce7-4729-8ec4-3406f6eadb1b",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "For SHM, the time-average of KE over one full cycle equals:",
+  "formula": "⟨KE⟩ = E/2",
+  "options": [
+   "Zero",
+   "E/2",
+   "E/4",
+   "E (total energy)"
+  ],
+  "answer": 1,
+  "explain": "Average KE = average PE = E/2 over a complete cycle in SHM.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8055074a-f69f-4c12-bd48-bac50c991afa",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring force constant and restoring force",
+  "prompt": "For SHM, the slope of F–x graph gives:",
+  "formula": "slope = −k",
+  "options": [
+   "Mass m",
+   "Spring constant k (magnitude)",
+   "Time period T",
+   "Angular frequency ω"
+  ],
+  "answer": 1,
+  "explain": "F = −kx; the magnitude of the slope of F vs x graph is the spring constant k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9142bd4b-2152-4199-b263-2638640f304e",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "In SHM, the phase difference between acceleration and velocity is:",
+  "formula": "",
+  "options": [
+   "π/4",
+   "π",
+   "π/2",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "a = −ω²x is 90° (π/2) ahead of v in phase (a leads v by π/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ff2b1884-c593-4a0f-b3de-4cdacd5e65ab",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A spring-mass system oscillates. If mass is quadrupled, T becomes:",
+  "formula": "T ∝ √m",
+  "options": [
+   "2T",
+   "T/2",
+   "4T",
+   "T/4"
+  ],
+  "answer": 0,
+  "explain": "T = 2π√(m/k); quadrupling m doubles √m, so T becomes 2T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2d52c1c-b70e-4abd-bd8a-16197fddd48a",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "In SHM, the velocity v vs time t graph (x=A sinωt) is:",
+  "formula": "v = Aω cosωt",
+  "options": [
+   "Sine curve",
+   "Straight line",
+   "Parabola",
+   "Cosine curve"
+  ],
+  "answer": 3,
+  "explain": "v = dx/dt = Aω cosωt, which is a cosine function of time.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b81fe04d-8b9e-4562-ab86-ade685863994",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "In SHM, the acceleration a vs time t (x = A sinωt) is:",
+  "formula": "a = −Aω² sinωt",
+  "options": [
+   "Straight line",
+   "Parabola",
+   "Cosine curve",
+   "Negative sine curve"
+  ],
+  "answer": 3,
+  "explain": "a = d²x/dt² = −Aω² sinωt; it is a negative sine curve, inverted relative to x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "314b981a-6bf5-4462-8c7d-225d29fb17c6",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "For a spring-mass on horizontal surface (no friction), if g doubles, T =?",
+  "formula": "T = 2π√(m/k)",
+  "options": [
+   "Halves",
+   "Increases by √2",
+   "Remains unchanged",
+   "Doubles"
+  ],
+  "answer": 2,
+  "explain": "Horizontal spring-mass T = 2π√(m/k) is independent of g.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a55e62cb-5c04-4e59-bd1d-cca47752ba3f",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic motion: time period, frequency",
+  "prompt": "In SHM, which physical quantity has unit of rad/s?",
+  "formula": "",
+  "options": [
+   "Angular frequency ω",
+   "Frequency f",
+   "Spring constant k",
+   "Time period T"
+  ],
+  "answer": 0,
+  "explain": "Angular frequency ω = 2πf has SI unit rad/s (or s⁻¹).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e2d15aba-27aa-45f4-bbf6-e453a473133a",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic motion: time period, frequency",
+  "prompt": "Frequency of oscillation in SHM with a = −ω²x is related to ω by:",
+  "formula": "f = ω/(2π)",
+  "options": [
+   "f = 2πω",
+   "f = ω",
+   "f = ω²/(2π)",
+   "f = ω/(2π)"
+  ],
+  "answer": 3,
+  "explain": "Angular frequency ω = 2πf, so f = ω/(2π).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "33cf32a6-0336-4cf0-87f2-6b15c8525519",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "Effective spring constant when two springs k₁, k₂ connected in series is:",
+  "formula": "1/k = 1/k₁ + 1/k₂",
+  "options": [
+   "k₁k₂/(k₁+k₂)",
+   "(k₁+k₂)/2",
+   "√(k₁k₂)",
+   "k₁ + k₂"
+  ],
+  "answer": 0,
+  "explain": "Series combination: 1/k_eff = 1/k₁ + 1/k₂ ⟹ k_eff = k₁k₂/(k₁+k₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5574100e-6c4e-4e2b-a65d-131f53404982",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic motion: time period, frequency",
+  "prompt": "For SHM, the time period T is related to frequency f by:",
+  "formula": "T = 1/f",
+  "options": [
+   "T = f",
+   "T = 2π/f",
+   "T = 1/f",
+   "T = 2πf"
+  ],
+  "answer": 2,
+  "explain": "Time period T is the reciprocal of frequency: T = 1/f.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "40292fa3-dde1-48e6-85a7-a130dbfc32f9",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "In SHM, which pair of quantities is always in opposite directions?",
+  "formula": "",
+  "options": [
+   "Velocity and acceleration",
+   "Force and velocity",
+   "Displacement and acceleration",
+   "Displacement and velocity"
+  ],
+  "answer": 2,
+  "explain": "a = −ω²x; acceleration always opposes displacement — they are always antiparallel.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "76bbe720-ad87-4626-8054-ba4fecac37b6",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic motion: time period, frequency",
+  "prompt": "A function sin ωt + sin 2ωt is periodic. What is its time period?",
+  "formula": "",
+  "options": [
+   "π/ω",
+   "4π/ω",
+   "2π/ω",
+   "π/(2ω)"
+  ],
+  "answer": 2,
+  "explain": "Periods are 2π/ω and π/ω; the LCM is 2π/ω. The motion is periodic but not SHM.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f119c287-bb93-4d88-9989-79473130e71d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic functions and their periods",
+  "prompt": "Period of x = sin²(ωt)?",
+  "formula": "sin²θ = (1 − cos2θ)/2",
+  "options": [
+   "π/ω",
+   "π/(2ω)",
+   "2π/ω",
+   "4π/ω"
+  ],
+  "answer": 0,
+  "explain": "sin²ωt = (1 − cos2ωt)/2, which has angular frequency 2ω, so T = π/ω.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6842a9dc-918d-4c54-8f67-3e03e7c17a57",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic functions and their periods",
+  "prompt": "Period of x = sin(ωt) + cos(2ωt)?",
+  "formula": "",
+  "options": [
+   "π/ω",
+   "π/(2ω)",
+   "4π/ω",
+   "2π/ω"
+  ],
+  "answer": 3,
+  "explain": "Periods are 2π/ω and π/ω. The larger is a multiple of the smaller, so the LCM is 2π/ω.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d7d45fea-5e35-445b-9abf-2cd593ca4e9c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic functions and their periods",
+  "prompt": "x = sin(ωt) + sin(√2 ωt) is:",
+  "formula": "",
+  "options": [
+   "Periodic with T = 2π/ω",
+   "Not periodic",
+   "Periodic with T = 2√2π/ω",
+   "Periodic with T = π/ω"
+  ],
+  "answer": 1,
+  "explain": "The ratio of the two frequencies is irrational, so there is no common period.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "10a16181-7ec1-4348-8d49-3d3619b1cc14",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic functions and their periods",
+  "prompt": "Period of x = sin(ωt/2) + sin(ωt/3)?",
+  "formula": "T = LCM(T₁, T₂)",
+  "options": [
+   "6π/ω",
+   "24π/ω",
+   "10π/ω",
+   "12π/ω"
+  ],
+  "answer": 3,
+  "explain": "T₁ = 4π/ω and T₂ = 6π/ω, so their LCM is 12π/ω.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "17fec72f-5799-4f76-9f25-cb9d87f1fec2",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Periodic functions and their periods",
+  "prompt": "Period of x = sin³(ωt)?",
+  "formula": "sin³θ = (3sinθ − sin3θ)/4",
+  "options": [
+   "2π/(3ω)",
+   "6π/ω",
+   "π/ω",
+   "2π/ω"
+  ],
+  "answer": 3,
+  "explain": "It is a mix of ω and 3ω terms. The fundamental ω fixes the period 2π/ω, since an odd power keeps the period.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f81bdb21-630e-4f9b-8356-eb9c3f2989b5",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "Which motion is periodic but NOT simple harmonic?",
+  "formula": "",
+  "options": [
+   "Mass on an ideal spring",
+   "Projection of circular motion on a diameter",
+   "Ball bouncing elastically on a floor",
+   "Simple pendulum, small angle"
+  ],
+  "answer": 2,
+  "explain": "Bouncing gives constant gravity force, not −kx; its x–t graph is parabolic arcs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a528ff6b-6045-4901-9abb-e5ad1284f61b",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "Which displacement function represents SHM?",
+  "formula": "",
+  "options": [
+   "sin ωt + sin 2ωt",
+   "sin ωt + cos ωt",
+   "ωt cos ωt",
+   "sin²ωt"
+  ],
+  "answer": 1,
+  "explain": "sin ωt + cos ωt = √2 sin(ωt + π/4), a single-frequency sinusoid, so it is SHM.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "73e533ca-f646-403e-8d3f-f78b84fd0122",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "Pendulum motion is SHM only for small angles because",
+  "formula": "",
+  "options": [
+   "cos θ ≈ θ",
+   "sin θ ≈ θ gives F ∝ −x",
+   "tension is constant",
+   "mass is concentrated at a point"
+  ],
+  "answer": 1,
+  "explain": "Restoring torque ∝ sin θ ≈ θ for small θ, giving a linear restoring force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cd32e68c-13a4-46b5-87b6-88b710577304",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "The potential energy–displacement graph of SHM is a",
+  "formula": "U = ½kx²",
+  "options": [
+   "Parabola with minimum at x = 0",
+   "Straight line through origin",
+   "Sine curve",
+   "Parabola with maximum at x = 0"
+  ],
+  "answer": 0,
+  "explain": "U = ½kx² is an upward parabola with minimum at the mean position.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dca61012-df28-4034-afdb-c97767f71071",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "Projection of uniform circular motion on a diameter is",
+  "formula": "",
+  "options": [
+   "Uniform motion",
+   "Uniformly accelerated motion",
+   "Simple harmonic motion",
+   "Non-periodic motion"
+  ],
+  "answer": 2,
+  "explain": "x = R cos(ωt + φ) satisfies a = −ω²x, so it is SHM with amplitude R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d28adaa4-7bd8-4e4d-9d3c-f5420de36c6b",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "Amplitude of the motion x = 3 sin ωt + 4 cos ωt is:",
+  "formula": "√(a² + b²)",
+  "options": [
+   "3.5",
+   "5",
+   "1",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "Combining gives a single SHM of amplitude √(3²+4²) = 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9369a6f2-59fa-4e04-8921-5313cbc177bc",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In x = A sin(ωt+φ), the time period depends on:",
+  "formula": "T = 2π/ω",
+  "options": [
+   "ω only, not A or φ",
+   "A only",
+   "A and ω",
+   "ω and φ"
+  ],
+  "answer": 0,
+  "explain": "T = 2π/ω; amplitude and phase constant do not affect the period.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "044464b0-b97c-43a0-a822-583e500f22ab",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "x = A sin(ωt+φ). Particle starts at t=0 from the positive extreme. Phase constant φ = ?",
+  "formula": "x = A sin(ωt+φ)",
+  "options": [
+   "π",
+   "3π/2",
+   "π/2",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "At t=0, x = A sin φ = A, so sin φ = 1 and φ = π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "caa0abb2-fa87-4e85-a8ad-38ff288f2106",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "x = A sin(ωt+φ). Particle starts at t=0 from the negative extreme. Phase constant φ = ?",
+  "formula": "x = A sin(ωt+φ)",
+  "options": [
+   "π/2",
+   "π",
+   "3π/2",
+   "2π"
+  ],
+  "answer": 2,
+  "explain": "x = −A needs sin φ = −1, so φ = 3π/2 (equivalently −π/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a40e2bd-f603-402a-b40f-37811e16e714",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "x = A sin(ωt+φ). Particle starts from mean position moving in −x direction. φ = ?",
+  "formula": "",
+  "options": [
+   "π/2",
+   "π",
+   "3π/2",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "x(0) = 0 and v(0) ∝ cos φ < 0, so φ = π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d5c8bab-e26d-44a8-8784-406fd0f20123",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "x = A sin(ωt+φ). At t=0, x = A/2 and the particle moves toward +x. φ = ?",
+  "formula": "",
+  "options": [
+   "π/6",
+   "π/3",
+   "2π/3",
+   "5π/6"
+  ],
+  "answer": 0,
+  "explain": "sin φ = ½ and cos φ > 0 (v positive), so φ = π/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4e8bf890-6c47-417b-80ec-bc136162f074",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "x = A sin(ωt+φ). At t=0, x = A/2 and the particle moves toward the mean position. φ = ?",
+  "formula": "",
+  "options": [
+   "π/3",
+   "2π/3",
+   "π/6",
+   "5π/6"
+  ],
+  "answer": 3,
+  "explain": "sin φ = ½ with cos φ < 0 (v negative), so φ = 5π/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fdb49bbe-925a-451a-92c7-037a6e78377d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "Phase of an SHM particle changes by what angle in a time interval of 3T/8?",
+  "formula": "Δφ = ωΔt = 2πΔt/T",
+  "options": [
+   "3π/4",
+   "3π/8",
+   "3π/16",
+   "3π/2"
+  ],
+  "answer": 0,
+  "explain": "Δφ = 2π·(3/8) = 3π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7347423d-7c56-4f85-8ab7-b43552a7d664",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "Two identical SHMs cross the mean position together, moving in opposite directions. Phase difference?",
+  "formula": "",
+  "options": [
+   "0",
+   "π",
+   "π/2",
+   "2π"
+  ],
+  "answer": 1,
+  "explain": "Equal and opposite velocities at x = 0 means antiphase, Δφ = π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2dfa1e02-6c39-4ab9-8815-65185f1211a9",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "For x₁ = A sin ωt and x₂ = A cos ωt, x₂ leads x₁ by:",
+  "formula": "cos ωt = sin(ωt + π/2)",
+  "options": [
+   "π",
+   "π/2",
+   "3π/2",
+   "π/4"
+  ],
+  "answer": 1,
+  "explain": "x₂ = A sin(ωt+π/2), so it leads by π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0d52e8ea-c456-4964-b9ac-1eab2c973f8a",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Phase, phase constant, phase difference",
+  "prompt": "In SHM, the phase (ωt+φ) at an instant specifies which pair of facts about the particle?",
+  "formula": "",
+  "options": [
+   "Position and direction of motion",
+   "Frequency and force constant",
+   "Amplitude and period",
+   "Energy and mass"
+  ],
+  "answer": 0,
+  "explain": "Phase fixes both displacement and the sense of motion at that instant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e896c2e4-3ab9-483e-95b4-90649d3e4621",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "In SHM the ratio v_max / a_max equals:",
+  "formula": "",
+  "options": [
+   "1/ω",
+   "ω²",
+   "ω",
+   "1/ω²"
+  ],
+  "answer": 0,
+  "explain": "ωA / ω²A = 1/ω = T/2π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69af45e8-9e3f-4077-8e0f-209c95b8b081",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "Starting from the mean position, the time for the speed to first become zero in SHM is:",
+  "formula": "",
+  "options": [
+   "T/4",
+   "T/2",
+   "T/8",
+   "T"
+  ],
+  "answer": 0,
+  "explain": "Mean to extreme is a quarter oscillation, so the time is T/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b9c6451-a1d2-48d2-9ca4-5d08d3cc3cba",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "The graph of kinetic energy versus displacement x in SHM is:",
+  "formula": "K = ½mω²(A² − x²)",
+  "options": [
+   "Ellipse",
+   "Straight line",
+   "Upward parabola, min at x = 0",
+   "Downward parabola, max at x = 0"
+  ],
+  "answer": 3,
+  "explain": "K is maximum at x = 0 and zero at x = ±A, giving an inverted parabola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9905bf30-c714-4b53-914c-6bbb00efb271",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "In SHM, the graph of acceleration a versus velocity v is:",
+  "formula": "a²/(ω²A)² + v²/(ωA)² = 1",
+  "options": [
+   "Parabola",
+   "Straight line",
+   "Circle",
+   "Ellipse"
+  ],
+  "answer": 3,
+  "explain": "a = −ω²x and v are 90° out of phase, with different semi-axes ω²A and ωA, so it is an ellipse.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b2c07577-f561-4ab6-8e4c-afcc619bbf7d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "On the v–t graph of SHM, the slope at the peak of the curve is:",
+  "formula": "slope of v–t = a",
+  "options": [
+   "Maximum negative",
+   "Maximum positive",
+   "Equal to ω²A",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "The peak of v is at the mean position, where a = 0, so the slope of v–t is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a313d70-9a00-4060-9d70-0f1524d696aa",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "Spring–mass SHM, same k and amplitude, mass doubled. Total energy becomes:",
+  "formula": "E = ½kA²",
+  "options": [
+   "Four times",
+   "Halved",
+   "Unchanged",
+   "Doubled"
+  ],
+  "answer": 2,
+  "explain": "E = ½kA² depends only on k and A, not on the mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83d75ae7-3dd3-4221-88ec-7ae93e36b87b",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "In SHM, at x = A/2 the ratio KE : PE is:",
+  "formula": "KE/PE = (A²−x²)/x²",
+  "options": [
+   "3 : 1",
+   "1 : 1",
+   "1 : 3",
+   "2 : 1"
+  ],
+  "answer": 0,
+  "explain": "KE ∝ A²−A²/4 = 3A²/4 and PE ∝ A²/4, so the ratio is 3:1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67f02791-0777-43ae-99f6-4ce28276b4cf",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "For x = A sin ωt, the kinetic energy at time t is:",
+  "formula": "",
+  "options": [
+   "½mω²A² sin²ωt",
+   "½mω²A² cos ωt",
+   "½mω²A² sin 2ωt",
+   "½mω²A² cos²ωt"
+  ],
+  "answer": 3,
+  "explain": "v = Aω cos ωt, so KE = ½mω²A² cos²ωt.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5dab55a8-be48-48a1-b1a7-2304f052ef62",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "A simple pendulum of length L, mass m, is released from angle θ₀. Its maximum KE is:",
+  "formula": "",
+  "options": [
+   "½mgL θ₀",
+   "mgL(1 − cos θ₀)",
+   "mgL cos θ₀",
+   "mgL sin θ₀"
+  ],
+  "answer": 1,
+  "explain": "At the lowest point all the gravitational PE lost, mgL(1−cosθ₀), has become KE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f799cbb2-a50c-4481-aaaa-687da96962ef",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "In SHM, the time interval between two successive instants when KE = PE is:",
+  "formula": "",
+  "options": [
+   "T",
+   "T/2",
+   "T/4",
+   "T/8"
+  ],
+  "answer": 2,
+  "explain": "KE = PE when |x| = A/√2, i.e. ωt = π/4, 3π/4, 5π/4… so successive instants are π/2 apart, which is T/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f1820ba1-456c-43f3-922a-45053a64ee56",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "Total energy of SHM at the mean position is:",
+  "formula": "",
+  "options": [
+   "Half KE, half PE",
+   "Zero",
+   "Entirely potential",
+   "Entirely kinetic"
+  ],
+  "answer": 3,
+  "explain": "At x = 0, PE = 0, so E = KE_max = ½mω²A².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c97b12c-4e03-4073-8250-73a1d464da58",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring force constant and restoring force",
+  "prompt": "A spring of constant k is cut in length ratio 1:2. The force constant of the shorter piece is:",
+  "formula": "k ∝ 1/l",
+  "options": [
+   "k/3",
+   "2k",
+   "3k/2",
+   "3k"
+  ],
+  "answer": 3,
+  "explain": "The shorter piece is l/3 of the whole, so its constant is 3k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "19df70e7-98ad-49f3-87fa-5e07ccd9be85",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring force constant and restoring force",
+  "prompt": "A spring of constant k is cut into two equal halves, which are then joined in parallel. The equivalent constant is:",
+  "formula": "2k + 2k",
+  "options": [
+   "2k",
+   "k",
+   "k/4",
+   "4k"
+  ],
+  "answer": 3,
+  "explain": "Each half has 2k, and in parallel they add to 4k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "31720dbb-88b3-46ff-b34b-cf48b1d099f0",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring force constant and restoring force",
+  "prompt": "For a spring within the elastic limit, the spring constant k depends on:",
+  "formula": "",
+  "options": [
+   "The extension x",
+   "The amplitude of oscillation",
+   "The mass attached",
+   "The spring's material and dimensions"
+  ],
+  "answer": 3,
+  "explain": "k is a property of the spring itself (material, length, wire thickness), not of x, m or amplitude.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9d12834-74ce-49a4-a06c-2652f4793036",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring force constant and restoring force",
+  "prompt": "A mass hangs from a vertical spring, stretching it by d at equilibrium. The time period is:",
+  "formula": "T = 2π√(d/g)",
+  "options": [
+   "2π√(d/g)",
+   "2π√(2d/g)",
+   "π√(d/g)",
+   "2π√(g/d)"
+  ],
+  "answer": 0,
+  "explain": "At equilibrium mg = kd, so m/k = d/g.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9ae4007-a881-4cf4-8ee2-4fceb9115808",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "Mass m hangs on two identical springs (each k) joined in series. Time period is:",
+  "formula": "k_eff = k/2",
+  "options": [
+   "2π√(m/2k)",
+   "2π√(2m/k)",
+   "2π√(m/4k)",
+   "2π√(m/k)"
+  ],
+  "answer": 1,
+  "explain": "Series: 1/k_eff = 1/k + 1/k, so k_eff = k/2 and T = 2π√(2m/k).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5e320b1-6c77-41f5-9326-4954c3fabfb5",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A spring of length l is cut in ratio 1:3. Spring constant of the shorter piece is (original k):",
+  "formula": "k ∝ 1/length",
+  "options": [
+   "4k/3",
+   "4k",
+   "k/4",
+   "3k"
+  ],
+  "answer": 1,
+  "explain": "Shorter piece has length l/4, so its k is 4 times larger.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2bf26db2-ecdd-4c1b-b212-91041b19bc1f",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "For a spring of mass mₛ carrying a block m, the effective oscillating mass is approximately:",
+  "formula": "m_eff = m + mₛ/3",
+  "options": [
+   "m + mₛ/3",
+   "m + mₛ",
+   "m + mₛ/4",
+   "m + mₛ/2"
+  ],
+  "answer": 0,
+  "explain": "Integrating the spring's kinetic energy gives a contribution of mₛ/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca824de6-4e0c-4cbb-994c-c6e4bccf4896",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "Two blocks m₁ and m₂ joined by a spring k on a smooth floor oscillate. Their time period is:",
+  "formula": "μ = m₁m₂/(m₁+m₂)",
+  "options": [
+   "2π√(μ/k)",
+   "2π√(μ/2k)",
+   "2π√(m₁/k)",
+   "2π√((m₁+m₂)/k)"
+  ],
+  "answer": 0,
+  "explain": "For a two-body spring system the reduced mass replaces m: T = 2π√(μ/k).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "737c5794-4475-414c-b940-ea7f847e0218",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "For a spring of non-negligible mass, a T² versus m graph (m = hanging mass) is a straight line that:",
+  "formula": "T² = (4π²/k)(m + mₛ/3)",
+  "options": [
+   "Has a negative T² intercept",
+   "Has a positive T² intercept",
+   "Passes through the origin",
+   "Is a parabola"
+  ],
+  "answer": 1,
+  "explain": "T² = 4π²m/k + 4π²mₛ/3k, so there is a positive intercept on the T² axis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eb4ab7a7-5d3b-4589-a0b4-5659ed81dac0",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "Two springs joined in series and stretched by a load. Which quantity is the same in both springs?",
+  "formula": "",
+  "options": [
+   "Extension",
+   "Force (tension)",
+   "Energy stored",
+   "Spring constant"
+  ],
+  "answer": 1,
+  "explain": "In series, the same force acts through each spring; the extensions add up.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e57ebaaa-4dfa-4a79-abdd-b08289c3547a",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "Two springs k₁, k₂ in series are stretched. Ratio of energies U₁ : U₂ stored in them is:",
+  "formula": "U = F²/2k",
+  "options": [
+   "1 : 1",
+   "k₂ : k₁",
+   "k₁ : k₂",
+   "k₁² : k₂²"
+  ],
+  "answer": 1,
+  "explain": "The force is the same, so U ∝ 1/k, giving U₁/U₂ = k₂/k₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77088092-7aa1-43d2-9ac5-7ce5ba462a5d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "Two springs k₁, k₂ in parallel share a common displacement. Ratio of forces F₁ : F₂ is:",
+  "formula": "F = kx",
+  "options": [
+   "k₁ : k₂",
+   "k₁² : k₂²",
+   "1 : 1",
+   "k₂ : k₁"
+  ],
+  "answer": 0,
+  "explain": "The extension is the same in parallel, so F ∝ k and F₁/F₂ = k₁/k₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b744b9f2-338e-45da-a96d-2ac9830b4c05",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "A hollow bob filled with water slowly leaks from a hole at the bottom. The time period:",
+  "formula": "",
+  "options": [
+   "Increases, then decreases to the original value",
+   "Continuously increases",
+   "Decreases, then increases to the original value",
+   "Remains constant"
+  ],
+  "answer": 0,
+  "explain": "The centre of mass first moves down (L increases), then returns to the centre of the empty bob.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "09908160-7fcf-4117-8efa-a0c36347ddee",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "A simple pendulum's bob carries charge in a uniform downward electric field. Its time period:",
+  "formula": "g_eff = g + qE/m",
+  "options": [
+   "Is unchanged",
+   "Becomes infinite",
+   "Decreases if the charge is positive",
+   "Increases if the charge is positive"
+  ],
+  "answer": 2,
+  "explain": "Positive charge gets an extra downward force qE, so g_eff = g + qE/m is larger and T decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "73bb61c8-8269-4af3-ac5a-cf78d23034ec",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "Average speed of a particle in SHM over one full cycle (amplitude A, angular frequency ω) is:",
+  "formula": "⟨speed⟩ = 4A/T",
+  "options": [
+   "ωA/π",
+   "ωA/2",
+   "4ωA/π",
+   "2ωA/π"
+  ],
+  "answer": 3,
+  "explain": "Distance per cycle is 4A and T = 2π/ω, so average speed = 2ωA/π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa44361c-501e-476b-9ffe-c5d55c4a5f92",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "In SHM, the speed of the particle increases while it moves:",
+  "formula": "",
+  "options": [
+   "Away from the mean position",
+   "Only when acceleration is zero",
+   "Toward the mean position",
+   "Only near the extreme position"
+  ],
+  "answer": 2,
+  "explain": "Moving toward the mean, v and a point the same way, so the speed rises to a maximum at the mean position.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "163ffa2c-eed9-4e9e-8fda-b7c9f056705f",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "A particle's acceleration is a = −4x (SI units). Its time period is:",
+  "formula": "a = −ω²x",
+  "options": [
+   "π/2 s",
+   "π s",
+   "4π s",
+   "2π s"
+  ],
+  "answer": 1,
+  "explain": "ω² = 4 gives ω = 2, so T = 2π/ω = π s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "26d9bb9c-5152-4ea7-a211-dbd77e31af44",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A charged block on a smooth horizontal spring is placed in a uniform horizontal electric field E. Its period:",
+  "formula": "",
+  "options": [
+   "Decreases, since force qE is added",
+   "Becomes 2π√(m/(k+qE))",
+   "Increases, since force qE is added",
+   "Remains 2π√(m/k); only mean position shifts"
+  ],
+  "answer": 3,
+  "explain": "Constant force qE only shifts equilibrium by qE/k; the restoring constant k is unchanged, so T is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd6d3377-d1d0-459b-8591-a401bfd6b77c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "In deriving T for a simple pendulum, the restoring force on the bob is:",
+  "formula": "F = −mg sinθ",
+  "options": [
+   "mg cosθ along the string",
+   "T − mg cosθ",
+   "mg sinθ, the tangential component of weight",
+   "Tension in the string"
+  ],
+  "answer": 2,
+  "explain": "The tangential component mg sinθ of the weight acts along the arc toward the mean position. Tension has no tangential part.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "756dab37-c077-4e6a-8011-91f15449f85e",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "A pendulum bob of density σ oscillates in a liquid of density ρ < σ (no viscosity). Its period:",
+  "formula": "g_eff = g(1 − ρ/σ)",
+  "options": [
+   "Remains unchanged",
+   "Becomes infinite",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 3,
+  "explain": "Buoyancy lowers the effective gravity to g(1−ρ/σ), so T increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07bcf827-6e75-477f-8bd1-7fe23a4c6f8c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "In SHM, velocity and acceleration point in the same direction when the particle is moving:",
+  "formula": "",
+  "options": [
+   "Away from the mean position",
+   "Toward the mean position",
+   "Toward the extreme position",
+   "Only at the mean position"
+  ],
+  "answer": 1,
+  "explain": "Acceleration always points to the mean; velocity matches it only while moving toward the mean (speeding up).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8fe27e7f-9d84-4d3a-ad7d-ae4d92933202",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "In SHM, when speed is half of the maximum speed, PE is what fraction of total energy?",
+  "formula": "KE = ½mv² ∝ v²",
+  "options": [
+   "1/4",
+   "√3/2",
+   "3/4",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "KE ∝ v², so KE = (1/2)²E = E/4. Hence PE = E − E/4 = 3E/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7743d585-c019-4822-9ad2-b5f645faaea1",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "A pendulum hangs in a trolley sliding freely down a smooth incline of angle α. Its time period is:",
+  "formula": "g_eff = g cosα",
+  "options": [
+   "2π√(L/g)",
+   "Infinite",
+   "2π√(L/(g sinα))",
+   "2π√(L/(g cosα))"
+  ],
+  "answer": 3,
+  "explain": "The pseudo-force cancels g sinα along the incline, leaving g_eff = g cosα, so T = 2π√(L/(g cosα)).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c6f1cfb2-83d8-449d-bdb1-de123ac716db",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "A particle dropped in a smooth tunnel through the centre of a uniform Earth performs:",
+  "formula": "F = −(mg/R)x",
+  "options": [
+   "Non-SHM periodic motion",
+   "Uniformly accelerated motion",
+   "SHM with T = 2π√(g/R)",
+   "SHM with T = 2π√(R/g)"
+  ],
+  "answer": 3,
+  "explain": "Inside a uniform Earth, g ∝ distance from centre, so F = −(mg/R)x. T ≈ 84 min.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1edfdd1b-cc7d-4655-9d88-cf9d14b11985",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "A particle moves under a restoring force F = −kx³ along a line. Its motion is:",
+  "formula": "",
+  "options": [
+   "SHM with T = 2π√(m/k)",
+   "Non-periodic",
+   "Periodic, not SHM",
+   "Uniform circular"
+  ],
+  "answer": 2,
+  "explain": "F is not linear in x, so not SHM; the motion is periodic but T depends on amplitude.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "58b0da50-6fa5-4fae-a56a-8ac0102a315d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM definition and condition F = -kx",
+  "prompt": "Liquid of total column length L in a U-tube is slightly displaced. Its time period is:",
+  "formula": "",
+  "options": [
+   "2π√(g/2L)",
+   "2π√(L/g)",
+   "2π√(2L/g)",
+   "2π√(L/2g)"
+  ],
+  "answer": 3,
+  "explain": "Restoring force = 2Aρg·x on mass ALρ, so ω² = 2g/L and T = 2π√(L/2g).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "707f8b7f-535f-4d63-9a12-0112ef5bd7dd",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In SHM starting from the mean position, time to reach x = A/√2 is:",
+  "formula": "",
+  "options": [
+   "T/12",
+   "T/6",
+   "T/4",
+   "T/8"
+  ],
+  "answer": 3,
+  "explain": "sin(ωt) = 1/√2 gives ωt = π/4, so t = T/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "79d8c33f-101e-4495-bb83-84cd668f922e",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In SHM, the time between two successive passes through the mean position is:",
+  "formula": "",
+  "options": [
+   "T/8",
+   "T",
+   "T/2",
+   "T/4"
+  ],
+  "answer": 2,
+  "explain": "The particle crosses the mean position twice per cycle, so consecutive passes are T/2 apart.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "556d30d4-7628-4940-8b6f-beed6fa0bb9f",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "x = sin ωt + cos ωt equals √2 sin(ωt + φ). The phase constant φ is:",
+  "formula": "",
+  "options": [
+   "π/6",
+   "π/4",
+   "π/2",
+   "π/3"
+  ],
+  "answer": 1,
+  "explain": "sin ωt + cos ωt = √2 sin(ωt + π/4).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7a15bf4c-7b55-4ce5-8085-dca74fbd4a45",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In x = A sin(ωt + φ), the constants A and φ are fixed by:",
+  "formula": "",
+  "options": [
+   "Initial position and velocity",
+   "Only the spring constant",
+   "The frequency ω alone",
+   "Only the mass"
+  ],
+  "answer": 0,
+  "explain": "ω is set by the system; A and φ come from the initial conditions x₀ and v₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c131f109-593c-43e0-bd5a-89e3c101e504",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "Compared with x = A sin ωt, the graph of x = A sin(ωt + φ) with 0 < φ < π is:",
+  "formula": "",
+  "options": [
+   "Of time period T + φ/ω",
+   "Of amplitude A + φ",
+   "Shifted left on the time axis by φ/ω",
+   "Shifted right on the time axis by φ/ω"
+  ],
+  "answer": 2,
+  "explain": "x(t) = A sin ω(t + φ/ω), so the curve is shifted earlier (left) by φ/ω.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a8de0c7-b338-4621-9bdd-5a406a65b5cd",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "SHM equation x = A sin(wt + phi)",
+  "prompt": "In SHM of amplitude A, the distance covered in any interval of T/2 is:",
+  "formula": "",
+  "options": [
+   "A",
+   "A/2",
+   "Depends on the starting point",
+   "2A"
+  ],
+  "answer": 3,
+  "explain": "Over half a cycle the particle goes from one point to its mirror point, covering 2A from any start.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "10b4d29c-5ec6-4548-a902-9368edf35f4f",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Velocity and acceleration in SHM",
+  "prompt": "For a particle in SHM of nonzero amplitude, velocity and acceleration are both zero at the same instant:",
+  "formula": "",
+  "options": [
+   "At the mean position",
+   "Never",
+   "At the extreme position",
+   "At x = A/2"
+  ],
+  "answer": 1,
+  "explain": "v = 0 only at the extremes, where |a| = ω²A is maximum. At the mean a = 0 but v is maximum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ce765131-6fa4-4509-afe6-631dfac3c648",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "In SHM, the area under the v–t graph from the mean position to the next extreme position is:",
+  "formula": "area under v–t = displacement",
+  "options": [
+   "ωA",
+   "2A",
+   "A/2",
+   "A"
+  ],
+  "answer": 3,
+  "explain": "Area under v–t equals displacement, which is A over a quarter period.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bd2a3157-7887-4b02-9983-3424959595d3",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "For SHM of period T, the graph of speed |v| versus time repeats with period:",
+  "formula": "",
+  "options": [
+   "2T",
+   "T",
+   "T/4",
+   "T/2"
+  ],
+  "answer": 3,
+  "explain": "|v| = ωA|cos ωt|, which repeats every half period, T/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0eded37e-ddea-42e8-9725-75a6842ed0c9",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "The x–t graph of SHM is concave upward (curving up) in the region where:",
+  "formula": "d²x/dt² = −ω²x",
+  "options": [
+   "x is increasing",
+   "x is positive",
+   "x is negative",
+   "x is zero only"
+  ],
+  "answer": 2,
+  "explain": "Curvature = a = −ω²x, which is positive (concave up) when x < 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a89b53d7-8222-4daf-ba06-eb18f6ed8b76",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Graphs of x, v, a versus t and x",
+  "prompt": "In SHM, the area under the a–t graph over one complete period is:",
+  "formula": "Area = Δv",
+  "options": [
+   "2Aω",
+   "Aω",
+   "Zero",
+   "Aω²T"
+  ],
+  "answer": 2,
+  "explain": "Area under a–t equals the change in velocity. After a full cycle v returns to its initial value, so the area is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3fc0f15-6c1e-4326-aca0-6671c1161a2c",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "Vertical spring–mass SHM: the total (spring + gravity) PE equals ½kx² with x measured from:",
+  "formula": "",
+  "options": [
+   "Highest point of motion",
+   "Lowest point of motion",
+   "Equilibrium position",
+   "Natural length of spring"
+  ],
+  "answer": 2,
+  "explain": "The gravity term cancels against the spring's extra stretch only when x is measured from the equilibrium position.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "33c65ac3-a652-4463-9d53-be3ec1670951",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Kinetic and potential energy in SHM",
+  "prompt": "Simple pendulum, small angle θ from the vertical, PE zero at the lowest point: PE ≈",
+  "formula": "U = mgL(1 − cos θ)",
+  "options": [
+   "½mgLθ",
+   "mgLθ²",
+   "½mgLθ²",
+   "mgLθ"
+  ],
+  "answer": 2,
+  "explain": "1 − cos θ ≈ θ²/2 for small θ, so U ≈ ½mgLθ², like ½kx² with k = mg/L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "edbbba7a-9e9a-42e5-b715-78a477435c87",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "Mass and amplitude fixed. If the frequency of SHM is doubled, total energy becomes:",
+  "formula": "E = ½mω²A² ∝ f²",
+  "options": [
+   "Four times",
+   "Unchanged",
+   "Half",
+   "Double"
+  ],
+  "answer": 0,
+  "explain": "E = 2π²mf²A², so E ∝ f² at fixed m and A; doubling f gives 4E.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "506b7ec6-d3ce-4bdd-8135-f289efe56ada",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "In SHM, the slope of the potential energy–displacement graph at position x equals:",
+  "formula": "F = −dU/dx",
+  "options": [
+   "The negative of the restoring force",
+   "The magnitude of velocity",
+   "The total energy",
+   "The restoring force F"
+  ],
+  "answer": 0,
+  "explain": "F = −dU/dx, so the slope dU/dx = −F; for U = ½kx² it equals kx.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8524213f-add5-49f5-a6ea-34d6a820b56b",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "In one full SHM period, the total time for which KE > PE is:",
+  "formula": "",
+  "options": [
+   "T/3",
+   "T/2",
+   "T/4",
+   "3T/4"
+  ],
+  "answer": 1,
+  "explain": "KE > PE for |x| < A/√2; each of the 4 quarter-paths takes T/8 → T/2 in total.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c2766490-afc7-4dc5-be8c-41014c083733",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Total energy and energy graphs in SHM",
+  "prompt": "For a lightly damped oscillator (F = −bv), the total mechanical energy decreases:",
+  "formula": "",
+  "options": [
+   "Linearly with time",
+   "Exponentially with time",
+   "Sinusoidally with time",
+   "Not at all"
+  ],
+  "answer": 1,
+  "explain": "Amplitude decays as e^(−bt/2m), so E ∝ A² decays as e^(−bt/m).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ee2dc674-13be-4f59-ac9f-8f21d7d5dd2d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring force constant and restoring force",
+  "prompt": "In a vertical spring–mass system, the restoring force −kx has x measured from:",
+  "formula": "",
+  "options": [
+   "Equilibrium position",
+   "Natural length position",
+   "Point of suspension",
+   "Lowest position"
+  ],
+  "answer": 0,
+  "explain": "Gravity only shifts the mean position; net force about equilibrium is −kx.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67c98e88-29ca-401a-811e-d126c145b350",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A spring-block oscillates horizontally. Putty is dropped on the block at its extreme position. Amplitude:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Becomes zero",
+   "Increases",
+   "Remains unchanged"
+  ],
+  "answer": 3,
+  "explain": "At the extreme the block is at rest, so no momentum is lost and the energy ½kA² stays the same; only T increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2516b1d0-34f4-4797-b6a3-66dff1cdcfdf",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A light viscous drag acts on a spring-mass oscillator. Compared with the undamped case, its time period:",
+  "formula": "ω' = √(k/m − b²/4m²)",
+  "options": [
+   "Slightly increases",
+   "Becomes zero",
+   "Slightly decreases",
+   "Remains exactly the same"
+  ],
+  "answer": 0,
+  "explain": "Damping lowers the angular frequency to ω' < √(k/m), so the period is slightly larger.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c85af5d-e068-4d67-a9d3-e1105c6968a1",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "Mass m₁ on a spring has period T₁; mass m₂ on the same spring has T₂. Period with m₁+m₂ is:",
+  "formula": "T² ∝ m",
+  "options": [
+   "T₁T₂/(T₁ + T₂)",
+   "T₁ + T₂",
+   "(T₁ + T₂)/2",
+   "√(T₁² + T₂²)"
+  ],
+  "answer": 3,
+  "explain": "T² = 4π²m/k, so T² is additive in mass: T² = T₁² + T₂².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8557ef43-ec99-4e83-90d0-0d11dcd4da34",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Spring-mass system time period",
+  "prompt": "A block hangs from a vertical spring (constant k). Max amplitude so the spring is never compressed is:",
+  "formula": "A_max = g/ω² = mg/k",
+  "options": [
+   "mg/k",
+   "k/mg",
+   "mg/2k",
+   "2mg/k"
+  ],
+  "answer": 0,
+  "explain": "Spring stays taut if A ≤ static extension x₀ = mg/k (= g/ω²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4f3104a2-254d-41f3-8ba3-0fafdb48c990",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Springs in series and parallel",
+  "prompt": "Springs k₁ and k₂ in series carry a load. Ratio of their extensions x₁ : x₂ is:",
+  "formula": "k₁x₁ = k₂x₂ (same tension)",
+  "options": [
+   "k₁² : k₂²",
+   "k₂ : k₁",
+   "1 : 1",
+   "k₁ : k₂"
+  ],
+  "answer": 1,
+  "explain": "Tension is the same, so k₁x₁ = k₂x₂, giving x₁ : x₂ = k₂ : k₁. The softer spring stretches more.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4eb467a-2661-49b7-9be1-10a923fe0e17",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "For small θ, the angular equation of motion of a simple pendulum of length L is:",
+  "formula": "Iα = −mgLθ, I = mL²",
+  "options": [
+   "α = −(g/L²)θ",
+   "α = −(g/L)θ",
+   "α = −(L/g)θ",
+   "α = −(mg/L)θ"
+  ],
+  "answer": 1,
+  "explain": "Dividing −mgLθ by I = mL² gives α = −(g/L)θ, so ω² = g/L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2816a104-63d7-44e3-adb7-900b5e796d62",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "In T = 2π√(L/g) for a real pendulum, L is measured from the pivot to:",
+  "formula": "",
+  "options": [
+   "Bottom of the bob",
+   "Top of the bob",
+   "Centre of mass of the bob",
+   "Midpoint of the string"
+  ],
+  "answer": 2,
+  "explain": "Effective length = string length + bob radius, up to the bob's centre.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7298df25-768f-4c34-bb75-a426fbbda32d",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "In deriving T, the moment of inertia of the point bob about the pivot is:",
+  "formula": "τ = Iα, I = ?",
+  "options": [
+   "mL²",
+   "mL²/3",
+   "mL",
+   "mL²/2"
+  ],
+  "answer": 0,
+  "explain": "For a point mass at distance L from the pivot, I = mL². So −mgLθ = mL²α gives α = −(g/L)θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7fcee742-34cb-4a50-8986-109e337b76b3",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "A pendulum (mass m) is at its extreme angle θ₀, momentarily at rest. The string tension is:",
+  "formula": "T = mg cosθ₀ (v = 0)",
+  "options": [
+   "mg(3 − 2cosθ₀)",
+   "mg",
+   "mg sinθ₀",
+   "mg cosθ₀"
+  ],
+  "answer": 3,
+  "explain": "At the extreme v = 0, so there is no centripetal need: T = mg cosθ₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "137454a8-ee04-47f6-8b90-3affc2481695",
+  "subject": "Physics",
+  "chapter": "Oscillations",
+  "topic": "Simple pendulum time period derivation",
+  "prompt": "At the mean position of a swinging simple pendulum, the bob's acceleration is:",
+  "formula": "a = v²/L",
+  "options": [
+   "Vertically upward, v²/L",
+   "Horizontal, along the motion",
+   "Zero",
+   "Vertically downward, g"
+  ],
+  "answer": 0,
+  "explain": "The tangential component is zero at the mean; only the centripetal v²/L toward the pivot remains.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

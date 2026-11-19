@@ -112,8 +112,8 @@ function Matches({ uid }: { uid: string }) {
   const [kind, setKind] = useState<"duels" | "solo">("duels");
   const duels = useCached<any>(uid ? `u.${uid}.rfduels.JEE` : null, () => rf("/duels?exam=JEE", uid), false);
   const solo = useCached<any>(uid ? `u.${uid}.rfhist.JEE` : null, () => rf("/history?exam=JEE", uid), false);
-  const reloads = [duels.reload, solo.reload];
-  useFocusEffect(useCallback(() => { reloads.forEach((f) => f()); }, reloads)); // eslint-disable-line react-hooks/exhaustive-deps
+  const { reload: reloadDuels } = duels, { reload: reloadSolo } = solo;
+  useFocusEffect(useCallback(() => { reloadDuels(); reloadSolo(); }, [reloadDuels, reloadSolo]));
   const q = kind === "duels" ? duels : solo;
   const gems = (won?: Record<string, number>) => GEM_ORDER.filter((c) => won?.[c]).map((c) => <View key={c} style={styles.gemChip}><Gem color={c} size={20} /><T w="heavy" size={11} color={arena.text}>{won![c]}</T></View>);
   return <View testID="rf-history" style={styles.list}>

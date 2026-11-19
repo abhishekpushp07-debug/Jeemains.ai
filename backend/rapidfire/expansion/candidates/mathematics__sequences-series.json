@@ -1,0 +1,4269 @@
+[
+ {
+  "prompt": "In an AP with common difference d, a₁₀ − a₄ equals:",
+  "formula": "aₘ − aₙ = (m−n)d",
+  "options": [
+   "4d",
+   "6d",
+   "10d",
+   "14d"
+  ],
+  "answer": 1,
+  "explain": "aₘ − aₙ = (m−n)d, so a₁₀ − a₄ = 6d.",
+  "kind": "formula",
+  "id": "4b7079ca-3254-4dd7-b7d9-08682cd1d6f6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "If the sum of n terms of an AP is Sₙ = pn² + qn, its common difference is:",
+  "formula": "aₙ = Sₙ − Sₙ₋₁",
+  "options": [
+   "p",
+   "2p",
+   "2p + q",
+   "p + q"
+  ],
+  "answer": 1,
+  "explain": "aₙ = 2pn − p + q, which is linear in n with slope 2p.",
+  "kind": "result",
+  "id": "f3b00b31-fa85-48f3-bf50-03e2856d3c5d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "In an AP with common difference d, the terms a₁, a₃, a₅, … form an AP with common difference:",
+  "formula": "",
+  "options": [
+   "d",
+   "d/2",
+   "2d",
+   "d²"
+  ],
+  "answer": 2,
+  "explain": "Taking every kth term gives common difference kd; here k = 2.",
+  "kind": "fact",
+  "id": "e649e9e4-0797-413c-94f4-9f7afc29fd55",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "Each term of an AP (common difference d) is multiplied by k and then c is added. The new common difference is:",
+  "formula": "",
+  "options": [
+   "d + c",
+   "kd + c",
+   "kd",
+   "d/k"
+  ],
+  "answer": 2,
+  "explain": "Adding a constant does not change d; multiplying by k scales d to kd.",
+  "kind": "concept",
+  "id": "632169fd-42b6-492a-b591-a3e6b183bac1",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "Four terms in AP are taken as a−3d, a−d, a+d, a+3d. Their common difference is:",
+  "formula": "",
+  "options": [
+   "d",
+   "2d",
+   "3d",
+   "4d"
+  ],
+  "answer": 1,
+  "explain": "Consecutive terms differ by 2d, so the common difference is 2d, not d.",
+  "kind": "concept",
+  "id": "43130790-bddd-4408-b8b9-f68d6edb51c6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "In an n-term AP, a₃ + a_{n−2} equals:",
+  "formula": "a_k + a_{n−k+1} = a₁ + aₙ",
+  "options": [
+   "a₁ + aₙ",
+   "2a₃",
+   "a₁ + aₙ₋₁",
+   "aₙ − a₁"
+  ],
+  "answer": 0,
+  "explain": "Terms equidistant from the two ends have the same sum, a₁ + aₙ.",
+  "kind": "result",
+  "id": "888a9c05-86a1-42a7-9265-2d4bde9bbb21",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "In an AP, a_{m+n} + a_{m−n} equals:",
+  "formula": "",
+  "options": [
+   "a_m",
+   "2a_m",
+   "2a_n",
+   "a_{2m}"
+  ],
+  "answer": 1,
+  "explain": "The terms are equidistant from a_m, so their mean is a_m: (a_{m+n} + a_{m−n})/2 = a_m.",
+  "kind": "result",
+  "id": "3b9b268a-bb89-45b5-ad85-a8e70f33f6ea",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "In an AP, the pth term is 1/q and the qth term is 1/p. The (pq)th term is:",
+  "formula": "",
+  "options": [
+   "0",
+   "pq",
+   "1",
+   "1/(pq)"
+  ],
+  "answer": 2,
+  "explain": "Subtracting gives d = 1/(pq) and a = 1/(pq), so a_{pq} = a + (pq − 1)d = 1.",
+  "kind": "result",
+  "id": "217fcad7-fb3b-4956-a350-846765232998",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "If a, b, c are in AP (non-zero), which triple is also in AP?",
+  "formula": "",
+  "options": [
+   "a², b², c²",
+   "bc, ca, ab",
+   "1/a, 1/b, 1/c",
+   "1/(bc), 1/(ca), 1/(ab)"
+  ],
+  "answer": 3,
+  "explain": "Dividing a, b, c by abc keeps them in AP, giving 1/(bc), 1/(ca), 1/(ab).",
+  "kind": "result",
+  "id": "efbfdc79-a49e-4ad7-acc3-29fc050e5350",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "In an AP, m·aₘ = n·aₙ with m ≠ n. Then a_{m+n} equals:",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "m + n",
+   "a₁"
+  ],
+  "answer": 0,
+  "explain": "Expanding m·aₘ = n·aₙ gives a + (m+n−1)d = 0, so a_{m+n} = 0.",
+  "kind": "result",
+  "id": "a0d4d134-2f80-4ea4-b3d1-51216eaf35e9",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "In an AP, if Sₘ = Sₙ with m ≠ n, then S_{m+n} equals:",
+  "formula": "",
+  "options": [
+   "Sₘ + Sₙ",
+   "2Sₘ",
+   "m + n",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "Sₘ = Sₙ gives 2a + (m+n−1)d = 0, so S_{m+n} = 0.",
+  "kind": "result",
+  "id": "a7ab10f2-7d49-4cc6-9aba-2f1df6a399fd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "For an AP with an odd number n of terms, Sₙ equals n times:",
+  "formula": "",
+  "options": [
+   "The first term",
+   "The average of first and second terms",
+   "The middle term",
+   "The last term"
+  ],
+  "answer": 2,
+  "explain": "The middle term equals (a+l)/2, so Sₙ = n × middle term.",
+  "kind": "concept",
+  "id": "5136b949-a40a-459d-af05-9c033265ee4e",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "If Sₙ/S′ₙ = f(n) for two APs, the ratio of their mth terms is:",
+  "formula": "",
+  "options": [
+   "f(m)",
+   "f(2m)",
+   "f(2m − 1)",
+   "f(m − 1)"
+  ],
+  "answer": 2,
+  "explain": "Put n = 2m − 1, since the mth term is the middle term of the first 2m−1 terms.",
+  "kind": "result",
+  "id": "7ea8ca2f-2ec6-4a23-be24-63c0d7f5ecea",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "If Sₙ = An² + Bn + C with C ≠ 0, then the sequence:",
+  "formula": "",
+  "options": [
+   "Is an AP from the 2nd term onward",
+   "Is a GP",
+   "Is an AP",
+   "Is an AP only if A = 0"
+  ],
+  "answer": 0,
+  "explain": "S₁ = A+B+C breaks the pattern, so aₙ is an AP only from n = 2; the whole sequence is not an AP.",
+  "kind": "exception",
+  "id": "01604970-5f7d-4ef5-a7a2-654471c8a102",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "Sum of n arithmetic means inserted between a and b is:",
+  "formula": "",
+  "options": [
+   "n(a+b)/2",
+   "(n+2)(a+b)/2",
+   "n(a+b)",
+   "(n+1)(a+b)/2"
+  ],
+  "answer": 0,
+  "explain": "The AP a, A₁,…,Aₙ, b has n+2 terms with sum (n+2)(a+b)/2; subtracting a+b leaves n(a+b)/2.",
+  "kind": "result",
+  "id": "ee3c62ee-46b1-4b9e-b9da-64e993d92f15",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "If Sₙ is the sum of n terms of an AP with difference d, then Sₙ/n forms an AP with common difference:",
+  "formula": "Sₙ/n = a + (n−1)d/2",
+  "options": [
+   "d",
+   "d/2",
+   "2d",
+   "d/n"
+  ],
+  "answer": 1,
+  "explain": "Sₙ/n = a + (n−1)d/2, which is linear in n with slope d/2.",
+  "kind": "result",
+  "id": "59eccc6e-6747-4577-9aba-75bcb1db1202",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "For an AP with Sₙ = 0 for some n ≥ 2, the relation between a, d, n is:",
+  "formula": "2a + (n−1)d = 0",
+  "options": [
+   "2a = (n−1)d",
+   "a = (n+1)d/2",
+   "2a + (n−1)d = 0",
+   "a + nd = 0"
+  ],
+  "answer": 2,
+  "explain": "Sₙ = (n/2)[2a+(n−1)d] = 0 with n ≠ 0 forces 2a+(n−1)d = 0, i.e. a₁ + aₙ = 0.",
+  "kind": "concept",
+  "id": "28a289e0-0e5e-49f4-8cab-7dc0f7a10423",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "In an AP of 20 terms, a₇ + a₁₄ equals:",
+  "formula": "aₖ + aₙ₋ₖ₊₁ = a₁ + aₙ",
+  "options": [
+   "a₁ + a₂₀",
+   "a₁ + a₂₁",
+   "2a₁₀",
+   "a₁₀ + a₁₂"
+  ],
+  "answer": 0,
+  "explain": "Index sum 7+14 = 21 = 1+20, so the pair sum equals a₁ + a₂₀.",
+  "kind": "concept",
+  "id": "d6979173-8f2c-433b-9aa2-ba2ab048e038",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "For an AP with a > 0 and d < 0, Sₙ is maximum when n is the index of:",
+  "formula": "",
+  "options": [
+   "The last positive (non-negative) term",
+   "The first negative term",
+   "The term where Sₙ = 0",
+   "The middle term of the AP"
+  ],
+  "answer": 0,
+  "explain": "Sₙ increases while terms are ≥ 0; adding negative terms reduces it.",
+  "kind": "concept",
+  "id": "5d0f3ac2-a8f8-4142-978c-e6164e44f0fe",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "For an AP with common difference d, Sₙ, S₂ₙ−Sₙ, S₃ₙ−S₂ₙ form an AP with common difference:",
+  "formula": "",
+  "options": [
+   "nd",
+   "n²d",
+   "2nd",
+   "n²d/2"
+  ],
+  "answer": 1,
+  "explain": "Each block of n terms is n·d per term shift, so n·(n d) = n²d more than the previous block.",
+  "kind": "result",
+  "id": "e7c2646b-069a-43bf-8d5e-6864c1c82b4c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "Alternate terms a₁, a₃, a₅, … of an AP with common difference d form an AP with common difference:",
+  "formula": "",
+  "options": [
+   "d",
+   "d/2",
+   "2d",
+   "d²"
+  ],
+  "answer": 2,
+  "explain": "a₃ − a₁ = 2d.",
+  "kind": "result",
+  "id": "b0001886-e348-42d7-ba1e-a66c3eb01567",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "In an AP, if S_p = S_q with p ≠ q, then S_{p+q} equals:",
+  "formula": "S_{p+q} = 0",
+  "options": [
+   "0",
+   "S_p + S_q",
+   "2S_p",
+   "p + q"
+  ],
+  "answer": 0,
+  "explain": "S_p = S_q forces 2a + (p+q−1)d = 0, so S_{p+q} = 0.",
+  "kind": "result",
+  "id": "4e5826f1-72fe-4551-8fc6-3e73392322a0",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a, b, c are in AP, which three quantities are also in AP?",
+  "formula": "",
+  "options": [
+   "a², b², c²",
+   "b+c, c+a, a+b",
+   "abc, bca, cab",
+   "a/b, b/c, c/a"
+  ],
+  "answer": 1,
+  "explain": "Each of b+c, c+a, a+b equals (a+b+c) minus a, b, c, so they are in AP.",
+  "kind": "result",
+  "id": "71995e60-4eb4-4ca0-9e40-6f1cf902afed",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If Sₙ = An² + Bn for an AP, its common difference is:",
+  "formula": "d = 2A",
+  "options": [
+   "A",
+   "2A",
+   "A + B",
+   "2B"
+  ],
+  "answer": 1,
+  "explain": "aₙ = Sₙ − Sₙ₋₁ = 2An − A + B, so d = 2A.",
+  "kind": "formula",
+  "id": "2a0c55b9-3317-44ec-8373-fbe0cfb414c2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "In an AP of n terms, the sum of the kth term from the start and the kth term from the end equals:",
+  "formula": "a_k + a_{n−k+1} = a₁ + aₙ",
+  "options": [
+   "a₁ + aₙ",
+   "2a_k",
+   "(a₁ + aₙ)/2",
+   "aₙ − a₁"
+  ],
+  "answer": 0,
+  "explain": "Terms equidistant from the ends have a constant sum, equal to the sum of the first and last terms.",
+  "kind": "result",
+  "id": "511eff84-9a38-4a5b-aa7d-ffbd23cdeb3e",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a, b, c are in AP (all nonzero), which triple is also in AP?",
+  "formula": "",
+  "options": [
+   "1/(bc), 1/(ca), 1/(ab)",
+   "1/a, 1/b, 1/c",
+   "a², b², c²",
+   "bc, ca, ab"
+  ],
+  "answer": 0,
+  "explain": "Dividing a, b, c by abc keeps them in AP: a/abc = 1/(bc), etc.",
+  "kind": "result",
+  "id": "3f0f03df-6501-4e3a-8fd3-0a54a41108e1",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If the terms of an AP are each multiplied by a constant k (k ≠ 0), the new sequence is:",
+  "formula": "",
+  "options": [
+   "AP with common difference kd",
+   "AP with common difference d + k",
+   "GP with common ratio k",
+   "Not necessarily an AP"
+  ],
+  "answer": 0,
+  "explain": "Each term becomes k·aₙ, so the difference becomes k·d; the sequence is still an AP.",
+  "kind": "result",
+  "id": "69290866-7cee-4d4e-8ea7-06b9e76b5a5e",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a₁, a₂, a₃, … are in AP, then aₘ₊ₙ + aₘ₋ₙ equals:",
+  "formula": "",
+  "options": [
+   "2aₘ",
+   "aₘ",
+   "2aₙ",
+   "aₘ₊ₙ·aₘ₋ₙ"
+  ],
+  "answer": 0,
+  "explain": "Terms equidistant from aₘ add up to twice aₘ: (m+n) and (m−n) are symmetric about m.",
+  "kind": "formula",
+  "id": "cf257be5-ca5c-4be6-9c52-a09978a26a86",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a, b, c are in AP, which triple is also in AP?",
+  "formula": "",
+  "options": [
+   "a², b², c²",
+   "b+c, c+a, a+b",
+   "a/b, b/c, c/a",
+   "√a, √b, √c"
+  ],
+  "answer": 1,
+  "explain": "The differences are (c+a)−(b+c) = a−b and (a+b)−(c+a) = b−c, which are equal since 2b = a+c.",
+  "kind": "result",
+  "id": "a3ade449-fed9-4f09-be2d-e61be5a2448e",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "For an AP with terms aₚ, a_q, aᵣ, the value of (q−r)aₚ + (r−p)a_q + (p−q)aᵣ is:",
+  "formula": "",
+  "options": [
+   "0",
+   "(p+q+r)d",
+   "a",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Coefficients sum to 0 and also weight (p−1), (q−1), (r−1) to 0, so a and d both cancel.",
+  "kind": "result",
+  "id": "51349475-d85e-4af2-8d58-5d8798451b03",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "For an AP, the nth term aₙ in terms of Sₙ is:",
+  "formula": "aₙ = Sₙ − Sₙ₋₁",
+  "options": [
+   "Sₙ − Sₙ₋₁ for n ≥ 2",
+   "Sₙ + Sₙ₋₁",
+   "Sₙ₊₁ − Sₙ₋₁",
+   "Sₙ/n"
+  ],
+  "answer": 0,
+  "explain": "The nth term is the sum to n terms minus the sum to (n−1) terms (n ≥ 2); a₁ = S₁.",
+  "kind": "formula",
+  "id": "748253a1-2f44-4d24-8205-f68ebf031683",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "Four terms are taken as a−3d, a−d, a+d, a+3d. What is their common difference?",
+  "formula": "",
+  "options": [
+   "d",
+   "3d",
+   "2d",
+   "4d"
+  ],
+  "answer": 2,
+  "explain": "Consecutive terms differ by 2d, so the common difference is 2d, not d.",
+  "kind": "concept",
+  "id": "9a0fd504-b9a7-4f89-95fc-b27ceedf5322",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of four AP terms a−3d, a−d, a+d, a+3d is?",
+  "formula": "",
+  "options": [
+   "4a",
+   "4a + 4d",
+   "4a + 6d",
+   "2a"
+  ],
+  "answer": 0,
+  "explain": "The d terms cancel in pairs, leaving 4a.",
+  "kind": "formula",
+  "id": "c2db3916-0df0-4afa-b41a-cec5df40a8b1",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Five terms in AP are best taken as a−2d, a−d, a, a+d, a+2d. Their sum is?",
+  "formula": "",
+  "options": [
+   "5a + 10d",
+   "5a + 5d",
+   "5a",
+   "5a + 2d"
+  ],
+  "answer": 2,
+  "explain": "Symmetric terms cancel their d parts, so the sum is 5a.",
+  "kind": "formula",
+  "id": "cd27fa9e-082b-4689-9f5d-77cd385e3e87",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of squares of a−d, a, a+d equals?",
+  "formula": "",
+  "options": [
+   "3a² + d²",
+   "3a² + 2d²",
+   "3a²",
+   "3a² + 4d²"
+  ],
+  "answer": 1,
+  "explain": "(a−d)²+a²+(a+d)² = 3a²+2d²; the cross terms cancel.",
+  "kind": "formula",
+  "id": "be11a1b9-8df4-4797-a0ba-47ac9f6bc7bd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Six terms in AP are symmetrically chosen as a−5d, a−3d, a−d, a+d, a+3d, a+5d. Their sum is?",
+  "formula": "",
+  "options": [
+   "6a",
+   "6a + 9d",
+   "6a + 3d",
+   "3a"
+  ],
+  "answer": 0,
+  "explain": "The d terms cancel in pairs, so the sum is 6a.",
+  "kind": "formula",
+  "id": "fb0df8e4-7f3d-46bd-a026-eb07f7a09bb2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Which rule picks symmetric AP terms for an even number of terms (4, 6, …)?",
+  "formula": "",
+  "options": [
+   "a−d, a, a+d, … with a as the middle term",
+   "a/r, a, ar, …",
+   "a−d, a+d, a+3d, … only",
+   "a ± d, a ± 3d, a ± 5d, …"
+  ],
+  "answer": 3,
+  "explain": "An even count has no middle term, so use a±d, a±3d, …; the common difference is 2d.",
+  "kind": "concept",
+  "id": "fd33dd25-8473-4fc9-8763-fcb5688a6cab",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Three numbers in AP have sum 15. Taking them as a−d, a, a+d, the middle number is?",
+  "formula": "",
+  "options": [
+   "3",
+   "5",
+   "7.5",
+   "15"
+  ],
+  "answer": 1,
+  "explain": "3a = 15, so a = 5.",
+  "kind": "result",
+  "id": "440aae32-50ef-494c-9fa0-1ec4d1cc98d3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum sa of squares of a−3d, a−d, a+d, a+3d equals?",
+  "formula": "",
+  "options": [
+   "4a² + 10d²",
+   "4a² + 20d²",
+   "4a² + 9d²",
+   "4a²"
+  ],
+  "answer": 1,
+  "explain": "(2a²+18d²)+(2a²+2d²) = 4a²+20d².",
+  "kind": "formula",
+  "id": "98e0d17d-3be3-4e4d-b378-fc9d1bb61454",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "In the AP a−3d, a−d, a+d, a+3d, the sum of the 1st and 4th terms equals?",
+  "formula": "",
+  "options": [
+   "a",
+   "2a",
+   "4a",
+   "2a + 6d"
+  ],
+  "answer": 1,
+  "explain": "Terms equidistant from the ends add to 2a: (a−3d)+(a+3d) = 2a.",
+  "kind": "result",
+  "id": "2a4b209d-d5b4-47e9-a2f5-3de7a5cb0e76",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of squares of the five terms a−2d, a−d, a, a+d, a+2d is?",
+  "formula": "",
+  "options": [
+   "5a² + 10d²",
+   "5a² + 5d²",
+   "5a² + 6d²",
+   "5a² + 20d²"
+  ],
+  "answer": 0,
+  "explain": "Cross terms cancel; d² part is 4+1+0+1+4 = 10, so 5a² + 10d².",
+  "kind": "formula",
+  "id": "1e795a86-14f5-4497-b334-5ae417ddfce5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of cubes of a−d, a, a+d equals?",
+  "formula": "",
+  "options": [
+   "3a³ + 6ad²",
+   "3a³ + 2d³",
+   "3a³ + 3ad²",
+   "3a³ + 6a²d"
+  ],
+  "answer": 0,
+  "explain": "(a−d)³+(a+d)³ = 2a³+6ad²; adding a³ gives 3a³ + 6ad².",
+  "kind": "formula",
+  "id": "11af18bf-0dbc-4273-8231-61cc9c5a409b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Product of the four AP terms a−3d, a−d, a+d, a+3d equals?",
+  "formula": "",
+  "options": [
+   "(a²−d²)(a²−9d²)",
+   "(a²−d²)(a²−3d²)",
+   "(a²−9d²)(a²−9d²)",
+   "a⁴ − 9d⁴"
+  ],
+  "answer": 0,
+  "explain": "Pair extremes and means: (a²−9d²)(a²−d²).",
+  "kind": "formula",
+  "id": "76f2c4b6-11a9-4987-8e12-d9a52857ee07",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Three positive numbers in GP have product 27. What is the middle number?",
+  "formula": "(a/r)·a·(ar) = a³",
+  "options": [
+   "9",
+   "6",
+   "3",
+   "27/r"
+  ],
+  "answer": 2,
+  "explain": "Taking a/r, a, ar gives a³ = 27, so a = 3 whatever r is.",
+  "kind": "result",
+  "id": "60c468b0-0130-483b-a206-fbb1dde11cf4",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "Four terms a/r³, a/r, ar, ar³ are in GP. What is their common ratio?",
+  "formula": "",
+  "options": [
+   "r",
+   "r²",
+   "r³",
+   "2r"
+  ],
+  "answer": 1,
+  "explain": "Dividing consecutive terms gives ar ÷ (a/r) = r².",
+  "kind": "concept",
+  "id": "dc77a037-c8df-4031-8ddb-73e021da49e6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "Non-zero a, b, c are in both AP and GP. Which must be true?",
+  "formula": "",
+  "options": [
+   "a = b = c",
+   "b = 0",
+   "a = −c",
+   "b = a + c"
+  ],
+  "answer": 0,
+  "explain": "2b = a + c and b² = ac give (a − c)² = 0, so a = b = c.",
+  "kind": "exception",
+  "id": "ffc1689a-7e37-4479-8dc5-f37966913883",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "For a GP of positive terms with ratio r, the sequence log Tₙ is?",
+  "formula": "",
+  "options": [
+   "GP with ratio log r",
+   "AP with difference log r",
+   "AP with difference r",
+   "GP with ratio r"
+  ],
+  "answer": 1,
+  "explain": "log Tₙ₊₁ − log Tₙ = log r, which is constant.",
+  "kind": "concept",
+  "id": "da0ebb30-bea5-462c-beb6-4a4d2692ceeb",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "A GP has negative common ratio r. How do its terms behave?",
+  "formula": "",
+  "options": [
+   "All have the same sign",
+   "Alternate in sign",
+   "All are negative",
+   "Alternate in magnitude only"
+  ],
+  "answer": 1,
+  "explain": "Multiplying by a negative r flips the sign at every step.",
+  "kind": "concept",
+  "id": "f6a8657c-f152-4801-96e0-d42216b2d8ed",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "a, b, c are in GP and a^(1/x) = b^(1/y) = c^(1/z). Then x, y, z are in?",
+  "formula": "",
+  "options": [
+   "GP",
+   "AP",
+   "HP",
+   "None of AP, GP, HP"
+  ],
+  "answer": 1,
+  "explain": "Put a = kˣ, b = kʸ, c = kᶻ. Then b² = ac gives 2y = x + z.",
+  "kind": "result",
+  "id": "b3a5e9a2-0e09-420b-80fc-6d73bcef52f5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "Non-zero numbers a, b, c are in GP. Which relation holds?",
+  "formula": "",
+  "options": [
+   "2b = a + c",
+   "b² = ac",
+   "b = a + c",
+   "1/b = 1/a + 1/c"
+  ],
+  "answer": 1,
+  "explain": "In a GP b/a = c/b, so b² = ac. Option 1 is the AP condition and option 4 is the HP condition.",
+  "kind": "formula",
+  "id": "63cd9b3f-b45e-47fa-bf5b-0c6ff3000eeb",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "In a GP, T₂·T₇ equals which product?",
+  "formula": "",
+  "options": [
+   "T₃·T₆",
+   "T₄·T₄",
+   "T₁·T₉",
+   "T₂·T₈"
+  ],
+  "answer": 0,
+  "explain": "Tₚ·T_q = a²r^(p+q−2), which depends only on p+q. Here 2+7 = 3+6.",
+  "kind": "result",
+  "id": "0d68e454-4a4e-4d2a-af6e-31737deb53fa",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "In a GP with ratio r, (T₂ + T₃)/(T₁ + T₂) equals?",
+  "formula": "",
+  "options": [
+   "r²",
+   "1/r",
+   "r",
+   "r + 1"
+  ],
+  "answer": 2,
+  "explain": "T₂+T₃ = r(T₁+T₂), so the ratio of the two sums is r.",
+  "kind": "result",
+  "id": "520995b9-a7f3-44a8-8424-ffe902c7bd32",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "Adding two GPs term by term gives a sequence that is?",
+  "formula": "",
+  "options": [
+   "Always a GP",
+   "Always an AP",
+   "Always a GP with ratio r₁ + r₂",
+   "A GP only if r₁ = r₂"
+  ],
+  "answer": 3,
+  "explain": "(a r₁ⁿ + b r₂ⁿ) has a constant ratio only when r₁ = r₂, or when one of the GPs is zero.",
+  "kind": "exception",
+  "id": "84731571-77b1-467c-8386-b6821a64e2dd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "In a GP, the product of terms equidistant from the two ends is always?",
+  "formula": "",
+  "options": [
+   "Constant",
+   "Increasing",
+   "Equal to the middle term",
+   "Equal to the sum of the ends"
+  ],
+  "answer": 0,
+  "explain": "Tₖ·Tₙ₋ₖ₊₁ = a·arⁿ⁻¹ = T₁·Tₙ for every k, so the product is constant.",
+  "kind": "result",
+  "id": "e11c4210-2bcc-46de-bf66-0440b99d8729",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "If a GP has T₅ = 48 and T₂ = 6, what is its common ratio?",
+  "formula": "T₅/T₂ = r³",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "T₅/T₂ = r³ = 8, so r = 2.",
+  "kind": "formula",
+  "id": "40623a72-b6a3-4832-b89f-c1f920445663",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "If a, b, c are in GP, then which of these is also in GP (a, b, c nonzero)?",
+  "formula": "",
+  "options": [
+   "1/a, 1/b, 1/c",
+   "a+1, b+1, c+1",
+   "a², b, c²",
+   "a−b, b−c, c−a"
+  ],
+  "answer": 0,
+  "explain": "Reciprocals of GP terms form a GP with ratio 1/r.",
+  "kind": "result",
+  "id": "3ae17f44-651f-431c-9e47-3c3ee4fa0c45",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "For a GP with first term a and ratio r, which term equals a·r¹⁰? (indexing from T₁ = a)",
+  "formula": "Tₙ = a·rⁿ⁻¹",
+  "options": [
+   "10th term",
+   "11th term",
+   "9th term",
+   "12th term"
+  ],
+  "answer": 1,
+  "explain": "Tₙ = a·rⁿ⁻¹, so exponent 10 means n − 1 = 10, n = 11.",
+  "kind": "formula",
+  "id": "5ebb053b-a750-4236-99ec-f78d2c893795",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "The squares of the terms of a GP (a, r) form a GP with first term and ratio:",
+  "formula": "",
+  "options": [
+   "a² and r²",
+   "a² and r",
+   "a and r²",
+   "2a and 2r"
+  ],
+  "answer": 0,
+  "explain": "(arᵏ)² = a²(r²)ᵏ, so the first term is a² and the ratio r².",
+  "kind": "concept",
+  "id": "df5cd307-9d4a-438f-91f8-7ac468ac8579",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "The recurring decimal 0.777… equals:",
+  "formula": "",
+  "options": [
+   "7/9",
+   "7/10",
+   "7/99",
+   "8/9"
+  ],
+  "answer": 0,
+  "explain": "7/10 + 7/100 + … is an infinite GP: (7/10)/(1 − 1/10) = 7/9.",
+  "kind": "result",
+  "id": "d93f9bec-b075-49e3-a47b-fc98905027a5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Sum to infinity of 1 − 1/2 + 1/4 − 1/8 + …:",
+  "formula": "",
+  "options": [
+   "2/3",
+   "1/2",
+   "2",
+   "4/3"
+  ],
+  "answer": 0,
+  "explain": "a = 1, r = −1/2, so S = 1/(1 + 1/2) = 2/3.",
+  "kind": "result",
+  "id": "d4d60528-8fcb-4617-b78a-fa92441a5b9d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Sum of 1 + 3 + 9 + … to n terms:",
+  "formula": "",
+  "options": [
+   "(3ⁿ − 1)/2",
+   "3ⁿ − 1",
+   "(3ⁿ⁺¹ − 1)/2",
+   "(3ⁿ − 1)/3"
+  ],
+  "answer": 0,
+  "explain": "a = 1, r = 3 gives (3ⁿ − 1)/(3 − 1).",
+  "kind": "result",
+  "id": "399bdcef-b943-4c5d-82de-3cb52f915d4b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "An infinite GP has sum S and first term a. Its common ratio r equals:",
+  "formula": "",
+  "options": [
+   "1 − a/S",
+   "a/S − 1",
+   "S/a − 1",
+   "1 − S/a"
+  ],
+  "answer": 0,
+  "explain": "S = a/(1−r) gives 1 − r = a/S, so r = 1 − a/S.",
+  "kind": "formula",
+  "id": "1a30bea6-249f-4e43-8d96-c486690f300b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "If the sum of n terms of a sequence is Sₙ = 3ⁿ − 1, the sequence is a GP with ratio:",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "3/2",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "Tₙ = Sₙ − Sₙ₋₁ = 2·3ⁿ⁻¹, so the first term is 2 and the ratio 3.",
+  "kind": "concept",
+  "id": "42c0d223-81fd-4dc3-9184-d6e92979e863",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Sum of 9 + 99 + 999 + … to n terms:",
+  "formula": "",
+  "options": [
+   "(10ⁿ⁺¹ − 9n − 10)/9",
+   "(10ⁿ − 1)/9",
+   "(10ⁿ⁺¹ − 10)/9",
+   "(10ⁿ⁺¹ − 9n)/9"
+  ],
+  "answer": 0,
+  "explain": "Σ(10ᵏ − 1) = 10(10ⁿ−1)/9 − n = (10ⁿ⁺¹ − 9n − 10)/9.",
+  "kind": "result",
+  "id": "70c12f6a-73ff-4924-9a78-5cb9c11d38be",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Value of 2 + 2² + 2³ + … + 2ⁿ:",
+  "formula": "",
+  "options": [
+   "2ⁿ⁺¹ − 2",
+   "2ⁿ⁺¹ − 1",
+   "2ⁿ − 2",
+   "2ⁿ − 1"
+  ],
+  "answer": 0,
+  "explain": "a = 2, r = 2 gives 2(2ⁿ − 1) = 2ⁿ⁺¹ − 2.",
+  "kind": "result",
+  "id": "1f33936f-6afe-4380-93e8-d1c4692bb9aa",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Sum of first n terms of a GP with first term a and common ratio r = 1:",
+  "formula": "",
+  "options": [
+   "na",
+   "a/n",
+   "a(n−1)",
+   "a·n(n+1)/2"
+  ],
+  "answer": 0,
+  "explain": "For r = 1 every term equals a, so Sₙ = na. The formula a(rⁿ−1)/(r−1) is not valid here.",
+  "kind": "exception",
+  "id": "27a8586b-0f94-494f-89d5-29f21a53b57d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "A GP has 2n terms with ratio r. Sum of even-placed terms ÷ sum of odd-placed terms =",
+  "formula": "",
+  "options": [
+   "r²",
+   "1/r",
+   "r",
+   "rⁿ"
+  ],
+  "answer": 2,
+  "explain": "Each even-placed term is r times the preceding odd-placed term, so the ratio of the sums is r.",
+  "kind": "result",
+  "id": "29d7eebd-5724-4acd-834d-15d3122f6d20",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Sum of squares of the first n terms of a GP (first term a, ratio r, r² ≠ 1):",
+  "formula": "",
+  "options": [
+   "a²(r²ⁿ − 1)/(r² − 1)",
+   "a²(rⁿ − 1)²/(r − 1)²",
+   "a²(r²ⁿ − 1)/(r − 1)",
+   "a(r²ⁿ − 1)/(r² − 1)"
+  ],
+  "answer": 0,
+  "explain": "Squares form a GP with first term a² and ratio r², so apply the GP sum formula.",
+  "kind": "formula",
+  "id": "d801f176-82de-49fb-9c6d-b95e6ec60b36",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "For a GP with ratio r, the sum of reciprocals of its first n terms is (1/Sₙ) times what?",
+  "formula": "",
+  "options": [
+   "a²r^(n−1)·(1/a)·...",
+   "The product a²r^(n−1)",
+   "Sₙ/(a²rⁿ⁻¹)",
+   "a·rⁿ⁻¹/Sₙ"
+  ],
+  "answer": 1,
+  "explain": "Reciprocal sum = Sₙ/(a²rⁿ⁻¹), so Sₙ·(1/sum of reciprocals) = a²rⁿ⁻¹.",
+  "kind": "result",
+  "id": "3460c8db-064b-4fba-9729-d377bf6d0079",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Sum of the series 1 + 1/3 + 1/9 + … to infinity is:",
+  "formula": "S∞ = a/(1 − r), |r| < 1",
+  "options": [
+   "2/3",
+   "3/2",
+   "3",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "a = 1, r = 1/3 gives 1/(1 − 1/3) = 3/2.",
+  "kind": "formula",
+  "id": "1452eb6e-6062-450d-9170-ffcee4ad3cb5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "The recurring decimal 0.777… (7 repeating) equals which fraction?",
+  "formula": "0.7 + 0.07 + … = 0.7/(1−0.1)",
+  "options": [
+   "7/10",
+   "7/9",
+   "7/8",
+   "70/99"
+  ],
+  "answer": 1,
+  "explain": "GP with a = 0.7, r = 0.1, so S = 0.7/0.9 = 7/9.",
+  "kind": "result",
+  "id": "02e9d515-dd46-497b-8b6d-16a72a2652a2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "Value of 0.363636… (36 repeating) as a fraction?",
+  "formula": "0.36/(1−0.01) = 36/99",
+  "options": [
+   "4/11",
+   "9/25",
+   "12/33",
+   "18/55"
+  ],
+  "answer": 0,
+  "explain": "a = 0.36, r = 0.01, so S = 36/99 = 4/11.",
+  "kind": "result",
+  "id": "68b9696c-ae76-4a10-991b-f48ffa7dbd6d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "Sum of 1 − 1/3 + 1/9 − 1/27 + … to ∞ is?",
+  "formula": "S = a/(1−r), r = −1/3",
+  "options": [
+   "3/2",
+   "2/3",
+   "3/4",
+   "4/3"
+  ],
+  "answer": 2,
+  "explain": "S = 1/(1+1/3) = 3/4.",
+  "kind": "result",
+  "id": "8cced9fb-0aa9-4a0f-bd4f-97f519ebda36",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "An infinite GP has first term a and sum S. Its common ratio r equals?",
+  "formula": "S = a/(1−r)",
+  "options": [
+   "1 − S/a",
+   "a/S − 1",
+   "1 − a/S",
+   "S/a − 1"
+  ],
+  "answer": 2,
+  "explain": "1 − r = a/S, so r = 1 − a/S.",
+  "kind": "formula",
+  "id": "b8047c2b-2ee9-42ae-8641-46b6b89bc7f3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "For an infinite GP (|r|<1), the sum of all terms from the nth term onward is?",
+  "formula": "",
+  "options": [
+   "a rⁿ/(1−r)",
+   "a rⁿ⁻¹/(1−r)",
+   "a rⁿ⁻¹/(1−rⁿ)",
+   "a(1−rⁿ⁻¹)/(1−r)"
+  ],
+  "answer": 1,
+  "explain": "The tail is a GP with first term a rⁿ⁻¹ and ratio r.",
+  "kind": "formula",
+  "id": "836adaad-a6bc-4301-8306-47eb8719f361",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "Sum of the series 1/2 + 2/4 + 3/8 + 4/16 + … to ∞ is?",
+  "formula": "Σ n xⁿ = x/(1−x)², x = 1/2",
+  "options": [
+   "1",
+   "3/2",
+   "2",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "(1/2)/(1/2)² = 2.",
+  "kind": "result",
+  "id": "27ce4bb8-464b-4fed-801e-b6aae8d7e7c4",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "The recurring decimal 0.999… (9 repeating) equals?",
+  "formula": "0.9/(1−0.1)",
+  "options": [
+   "0.99",
+   "1",
+   "Less than 1",
+   "9/10"
+  ],
+  "answer": 1,
+  "explain": "The GP has a = 0.9 and r = 0.1, so S = 0.9/0.9 = 1.",
+  "kind": "fact",
+  "id": "0842eabe-d899-4356-99e7-14b263181916",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "1 + 1/x + 1/x² + … to ∞ converges for which x, and to what sum?",
+  "formula": "",
+  "options": [
+   "|x|<1; x/(1−x)",
+   "|x|>1; x/(x−1)",
+   "|x|>1; 1/(x−1)",
+   "|x|<1; 1/(1−x)"
+  ],
+  "answer": 1,
+  "explain": "The ratio is 1/x, so |1/x|<1 means |x|>1. The sum is 1/(1−1/x) = x/(x−1).",
+  "kind": "result",
+  "id": "d5cff81b-2b21-4558-9d51-6a11d0371ff3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "1 + sin²θ + sin⁴θ + … to ∞ (θ ≠ odd multiple of π/2) equals?",
+  "formula": "1/(1−sin²θ)",
+  "options": [
+   "cosec²θ",
+   "sec²θ",
+   "cos²θ",
+   "1/(1+sin²θ)"
+  ],
+  "answer": 1,
+  "explain": "The ratio is sin²θ, so the sum is 1/(1−sin²θ) = 1/cos²θ = sec²θ.",
+  "kind": "result",
+  "id": "4d8903da-a419-458f-8e22-f913dc79c596",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "For an infinite GP with a>0 and −1<r<0, the sum S satisfies?",
+  "formula": "S = a/(1−r)",
+  "options": [
+   "S > a",
+   "a/2 < S < a",
+   "0 < S < a/2",
+   "S = a/2"
+  ],
+  "answer": 1,
+  "explain": "For −1<r<0, 1−r lies in (1,2), so S = a/(1−r) lies between a/2 and a.",
+  "kind": "concept",
+  "id": "c089a334-b027-4571-844b-9aa1d48736ff",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "In an infinite GP (|r|<1), every term equals the sum of all terms after it. Then r equals?",
+  "formula": "",
+  "options": [
+   "1/3",
+   "2/3",
+   "1/2",
+   "1/4"
+  ],
+  "answer": 2,
+  "explain": "Sum after the first term is ar/(1−r). Setting ar/(1−r)=a gives r=1/2.",
+  "kind": "result",
+  "id": "ebbd6cd6-ee1c-4d8f-806f-a57b06f89fdf",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "a, b, c are in GP and aˣ = bʸ = cᶻ (a, b, c > 1). Then x, y, z are in?",
+  "formula": "log a, log b, log c in AP ⇒ 1/x, 1/y, 1/z in AP",
+  "options": [
+   "AP",
+   "GP",
+   "HP",
+   "None of AP, GP, HP in general"
+  ],
+  "answer": 2,
+  "explain": "Taking logs: x·log a = y·log b = z·log c = k, so log a = k/x, etc. Since log a, log b, log c are in AP, 1/x, 1/y, 1/z are in AP, so x, y, z are in HP.",
+  "kind": "result",
+  "id": "a9615cb0-2abb-4f7a-a284-cb1506b81d3d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of GP (products, logs form AP)"
+ },
+ {
+  "prompt": "Three nonzero real numbers are in both AP and GP. Then they must be:",
+  "formula": "2b = a + c and b² = ac ⇒ (a − c)² = 0",
+  "options": [
+   "Equal to each other",
+   "In ratio 1 : 2 : 4",
+   "Alternating in sign, a = −c",
+   "Any numbers with b = 0"
+  ],
+  "answer": 0,
+  "explain": "Substituting b = (a+c)/2 into b² = ac gives (a−c)² = 0, so a = b = c.",
+  "kind": "result",
+  "id": "808a72c6-aa45-4975-9461-4a265bb68383",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of GP (products, logs form AP)"
+ },
+ {
+  "prompt": "Three numbers in GP have product 27. Which choice of terms gives the middle term directly?",
+  "formula": "a/r, a, ar",
+  "options": [
+   "a/r, a, ar; middle term is 3",
+   "a, ar, ar²; middle term is 3",
+   "a/r, a, ar; middle term is 9",
+   "a, ar, ar²; middle term is 27"
+  ],
+  "answer": 0,
+  "explain": "Product = a³ = 27, so a = 3, the middle term.",
+  "kind": "result",
+  "id": "7e260832-b96a-4961-85e2-ae3951445a07",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Four terms in GP are taken as a/r³, a/r, ar, ar³. What is their common ratio?",
+  "formula": "",
+  "options": [
+   "r",
+   "r²",
+   "2r",
+   "r³"
+  ],
+  "answer": 1,
+  "explain": "Consecutive terms differ by a factor of r², e.g. (a/r)/(a/r³) = r².",
+  "kind": "concept",
+  "id": "6903ec9c-ca8e-4eac-a6e9-a7a47aaeabb4",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "For four terms a/r³, a/r, ar, ar³ in GP, what is the product of all four?",
+  "formula": "",
+  "options": [
+   "a⁴",
+   "a⁴r⁴",
+   "a²",
+   "a⁴/r²"
+  ],
+  "answer": 0,
+  "explain": "The powers of r cancel in pairs: (a/r³)(ar³) = a² and (a/r)(ar) = a², so the product is a⁴.",
+  "kind": "result",
+  "id": "eb5df68e-d828-44f6-92c2-e68497f62ca9",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Five positive numbers in GP, written a/r², a/r, a, ar, ar², have product 32. What is the middle term?",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "8",
+   "16"
+  ],
+  "answer": 0,
+  "explain": "The product is a⁵ = 32, so a = 2.",
+  "kind": "result",
+  "id": "d174bdda-8143-4eda-9a3e-1b2b860832b5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Three real numbers in GP have a negative product. Taken as a/r, a, ar, what is the sign of the middle term?",
+  "formula": "",
+  "options": [
+   "Positive",
+   "Negative",
+   "Same as r",
+   "Cannot be decided"
+  ],
+  "answer": 1,
+  "explain": "The product is a³, which has the same sign as a, so a < 0.",
+  "kind": "concept",
+  "id": "d5750051-505a-4ef7-aeaf-841afca6bd4e",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "In the symmetric choice a/r, a, ar, the product of the first and third terms equals what?",
+  "formula": "",
+  "options": [
+   "a",
+   "a²",
+   "a³",
+   "a²r²"
+  ],
+  "answer": 1,
+  "explain": "(a/r)(ar) = a². Terms equidistant from the ends have a constant product.",
+  "kind": "formula",
+  "id": "433946a8-4dd9-439b-b9e7-14930dd7bbae",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Six numbers in GP are taken symmetrically as a/r⁵, a/r³, a/r, ar, ar³, ar⁵. What is their common ratio?",
+  "formula": "",
+  "options": [
+   "r",
+   "r²",
+   "r³",
+   "r⁵"
+  ],
+  "answer": 1,
+  "explain": "For an even number of terms the symmetric choice has common ratio r².",
+  "kind": "concept",
+  "id": "2e589b26-f6e6-47a0-a178-b8dce76864d3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "For positive a and r in the terms a/r, a, ar, the sum of the extreme terms is at least what?",
+  "formula": "",
+  "options": [
+   "a",
+   "2a",
+   "a²",
+   "3a"
+  ],
+  "answer": 1,
+  "explain": "By AM–GM, a/r + ar ≥ 2√(a²) = 2a, with equality at r = 1.",
+  "kind": "result",
+  "id": "f398cec9-47b5-4661-9f34-664b3d4c2cc2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Replacing r by 1/r in the terms a/r, a, ar has what effect?",
+  "formula": "",
+  "options": [
+   "Terms are reversed in order",
+   "Middle term changes",
+   "Product changes",
+   "Terms become negative"
+  ],
+  "answer": 0,
+  "explain": "The terms become ar, a, a/r, which is the same set in reverse order.",
+  "kind": "concept",
+  "id": "ff3a2087-229c-4f59-a445-08773350be53",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Seven numbers in GP have middle term m. What is their product?",
+  "formula": "",
+  "options": [
+   "m⁷",
+   "7m",
+   "m⁴",
+   "m⁶"
+  ],
+  "answer": 0,
+  "explain": "Symmetric pairs each multiply to m², and the middle term is m, so the product is m⁶·m = m⁷.",
+  "kind": "result",
+  "id": "17fef8c5-adfb-4404-af14-98786e219c38",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Three positive numbers in GP have product 1. What is the minimum possible value of their sum?",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "2",
+   "3/2"
+  ],
+  "answer": 1,
+  "explain": "The terms are 1/r, 1, r, so the sum is 1 + (r + 1/r) ≥ 3 by AM–GM.",
+  "kind": "result",
+  "id": "865ddacd-10fd-4862-90db-2bc2237b1358",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Three real numbers a/r, a, ar are in GP with r < 0. What are the signs of the terms?",
+  "formula": "",
+  "options": [
+   "All have the same sign",
+   "1st and 3rd are the same, 2nd is opposite",
+   "1st and 2nd are the same, 3rd is opposite",
+   "Cannot be decided"
+  ],
+  "answer": 1,
+  "explain": "a/r and ar both have the sign opposite to a when r < 0, so the signs alternate.",
+  "kind": "concept",
+  "id": "1870de0d-af6c-43ad-9ebe-199beac40a4b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Write 0.363636… (36 repeating) as a fraction in lowest terms.",
+  "formula": "0.\\overline{ab} = ab/99",
+  "options": [
+   "4/11",
+   "9/25",
+   "4/9",
+   "2/5"
+  ],
+  "answer": 0,
+  "explain": "Two-digit period gives r = 1/100, so sum = 36/99 = 4/11.",
+  "kind": "result",
+  "id": "0ba4bce3-6987-44c4-b3fe-0f37a595ad78",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "0.2333… (only 3 repeating) equals which fraction?",
+  "formula": "0.a\\overline{b} = (ab − a)/90",
+  "options": [
+   "23/90",
+   "7/30",
+   "23/99",
+   "1/4"
+  ],
+  "answer": 1,
+  "explain": "(23 − 2)/90 = 21/90 = 7/30; the non-repeating digit gives 90 in the denominator.",
+  "kind": "formula",
+  "id": "8fb372ee-bdcc-4293-b6e6-c3c607b063a5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "Writing 0.\\overline{abc} as an infinite GP, the common ratio is:",
+  "formula": "",
+  "options": [
+   "10⁻¹",
+   "10⁻²",
+   "10⁻³",
+   "1/999"
+  ],
+  "answer": 2,
+  "explain": "Each block of 3 digits shifts by 3 places, so r = 10⁻³ (<1, so the sum converges).",
+  "kind": "concept",
+  "id": "4c718b6e-a53d-4527-8a8a-22dccebe4978",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "The sum 0.9 + 0.09 + 0.009 + … to infinity equals:",
+  "formula": "S = a/(1 − r) = 0.9/0.9",
+  "options": [
+   "0.999 (just below 1)",
+   "9/10",
+   "1",
+   "It diverges"
+  ],
+  "answer": 2,
+  "explain": "a = 0.9, r = 0.1, so S = 0.9/0.9 = 1; thus 0.\\overline{9} = 1 exactly.",
+  "kind": "result",
+  "id": "f245c1c6-2380-47cd-9780-ef8f33102e32",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "0.037037037… (037 repeating) equals:",
+  "formula": "37/999 = 1/27",
+  "options": [
+   "1/37",
+   "37/990",
+   "3/37",
+   "1/27"
+  ],
+  "answer": 3,
+  "explain": "999 = 27 × 37, so 37/999 reduces to 1/27.",
+  "kind": "result",
+  "id": "17de86f8-44ec-42b5-8be9-d4dcd5d03777",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "2.333… (3 repeating) equals which fraction?",
+  "formula": "2 + 3/9",
+  "options": [
+   "23/9",
+   "7/3",
+   "23/10",
+   "5/3"
+  ],
+  "answer": 1,
+  "explain": "Integer part 2 plus 0.\\overline{3} = 1/3 gives 7/3.",
+  "kind": "result",
+  "id": "555cc655-cb49-480e-8c8e-d3edbf753e98",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "Sum of n arithmetic means inserted between a and b is?",
+  "formula": "S = n(a+b)/2",
+  "options": [
+   "n(a+b)/2",
+   "(n+2)(a+b)/2",
+   "n(a+b)",
+   "(n+1)(a+b)/2"
+  ],
+  "answer": 0,
+  "explain": "The n means are symmetric about (a+b)/2, so their sum is n times the single AM (a+b)/2.",
+  "kind": "formula",
+  "id": "086ca00b-a316-4c5c-a6ca-a96f00ef3127",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "With n AMs inserted between a and b, the kth mean Aₖ equals?",
+  "formula": "Aₖ = a + k(b−a)/(n+1)",
+  "options": [
+   "a + k(b−a)/n",
+   "a + k(b−a)/(n+1)",
+   "a + (k+1)(b−a)/(n+1)",
+   "a + k(b−a)/(n+2)"
+  ],
+  "answer": 1,
+  "explain": "Aₖ is the (k+1)th term of the AP, so Aₖ = a + k·d with d = (b−a)/(n+1).",
+  "kind": "formula",
+  "id": "23f55eb9-6a83-415a-be98-fdc42a1dab2c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "For n AMs between a and b, Aₖ + A₍ₙ₊₁₋ₖ₎ equals?",
+  "formula": "Aₖ + Aₙ₊₁₋ₖ = a + b",
+  "options": [
+   "2(a+b)",
+   "a + b",
+   "(a+b)/2",
+   "b − a"
+  ],
+  "answer": 1,
+  "explain": "Means equidistant from the two ends of an AP sum to the sum of the end terms a + b.",
+  "kind": "result",
+  "id": "63fab5c5-b710-48c2-820b-602a85b2b993",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "If n is odd, the middle one of the n AMs between a and b equals?",
+  "formula": "",
+  "options": [
+   "√(ab)",
+   "(a+b)/(n+1)",
+   "(a+b)/2",
+   "(b−a)/2"
+  ],
+  "answer": 2,
+  "explain": "The middle mean is the AM of a and b because it is equidistant from both ends.",
+  "kind": "concept",
+  "id": "c4abc1a1-0571-4469-85f0-8db56a862357",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "For n AMs between a and b, the last mean Aₙ equals?",
+  "formula": "Aₙ = b − d = (a + nb)/(n+1)",
+  "options": [
+   "(na + b)/(n+1)",
+   "(a + nb)/(n+1)",
+   "(a + nb)/n",
+   "(a + b)/(n+1)"
+  ],
+  "answer": 1,
+  "explain": "Aₙ = b − d = b − (b−a)/(n+1) = (a + nb)/(n+1).",
+  "kind": "formula",
+  "id": "797f454b-4c62-4211-8a8b-4f911a5962f7",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "For n AMs between a and b, the first mean A₁ equals?",
+  "formula": "A₁ = a + d = (na + b)/(n+1)",
+  "options": [
+   "(a + nb)/(n+1)",
+   "(na + b)/n",
+   "(na + b)/(n+1)",
+   "(a + b)/(n+1)"
+  ],
+  "answer": 2,
+  "explain": "A₁ = a + (b−a)/(n+1) = (na + b)/(n+1).",
+  "kind": "formula",
+  "id": "94abbc62-20d3-478b-8acd-f469fd211742",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "Sum of all terms of the AP formed by inserting n AMs between a and b is?",
+  "formula": "S = (n+2)(a+b)/2",
+  "options": [
+   "(n+1)(a+b)/2",
+   "n(a+b)/2",
+   "(n+2)(a+b)/2",
+   "(n+2)(b−a)/2"
+  ],
+  "answer": 2,
+  "explain": "There are n+2 terms with first a and last b, so S = (n+2)/2 · (a+b).",
+  "kind": "formula",
+  "id": "a79713ef-c266-40b4-9db2-ee74bd68e014",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "Sum of 5 AMs inserted between 7 and 23 is?",
+  "formula": "",
+  "options": [
+   "75",
+   "90",
+   "60",
+   "150"
+  ],
+  "answer": 0,
+  "explain": "The sum is n(a+b)/2 = 5 × 15 = 75, since the single AM of 7 and 23 is 15.",
+  "kind": "result",
+  "id": "ad5ed316-241b-4c20-8461-2541bc511654",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "If n AMs are inserted between b and a instead of between a and b, the common difference?",
+  "formula": "",
+  "options": [
+   "is unchanged",
+   "changes sign",
+   "is doubled",
+   "becomes (a+b)/(n+1)"
+  ],
+  "answer": 1,
+  "explain": "d = (a−b)/(n+1) = −(b−a)/(n+1), so only the sign flips. The sum of the means stays the same.",
+  "kind": "concept",
+  "id": "cafe3b33-2c95-42bc-b992-2cca61082a77",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "If a = b, the n arithmetic means inserted between a and b are all?",
+  "formula": "",
+  "options": [
+   "zero",
+   "equal to a",
+   "equal to 2a",
+   "undefined"
+  ],
+  "answer": 1,
+  "explain": "d = (b−a)/(n+1) = 0, so the AP is constant and every mean equals a.",
+  "kind": "exception",
+  "id": "96e382af-9ad7-4eda-91dc-4a44256f5dfd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "After inserting n AMs between a and b, b becomes which term of the resulting AP?",
+  "formula": "",
+  "options": [
+   "(n+2)th term",
+   "(n+1)th term",
+   "nth term",
+   "(n+3)th term"
+  ],
+  "answer": 0,
+  "explain": "The AP is a, A₁,…, Aₙ, b with n+2 terms, so b is the (n+2)th term.",
+  "kind": "concept",
+  "id": "dc6a2124-6e51-4b6e-ad34-0bb392dedfa2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "After inserting n GMs between a and b, b is which term of the resulting GP?",
+  "formula": "",
+  "options": [
+   "nth",
+   "(n+1)th",
+   "(n+2)th",
+   "(n+3)th"
+  ],
+  "answer": 2,
+  "explain": "The GP has n+2 terms: a, G₁,…,Gₙ, b, so b = a·r^{n+1} is the (n+2)th term.",
+  "kind": "fact",
+  "id": "7deae2ce-500a-45f6-baa2-4f1d0dfea9e7",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "For n GMs between a and b (a, b > 0), the kth GM Gₖ equals",
+  "formula": "",
+  "options": [
+   "a^{k/(n+1)} b^{(n+1−k)/(n+1)}",
+   "a^{(n+1−k)/(n+1)} b^{k/(n+1)}",
+   "a^{(n−k)/n} b^{k/n}",
+   "a^{(n+1−k)/n} b^{k/n}"
+  ],
+  "answer": 1,
+  "explain": "Gₖ = a·rᵏ with r = (b/a)^{1/(n+1)}, giving a^{(n+1−k)/(n+1)}·b^{k/(n+1)}.",
+  "kind": "formula",
+  "id": "b210ae76-aef9-4566-8bca-773100d506e4",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "Two GMs between a and b (a, b > 0) are",
+  "formula": "",
+  "options": [
+   "a^{1/2}b^{1/2} and a^{1/3}b^{2/3}",
+   "a^{2/3}b^{1/3} and a^{1/3}b^{2/3}",
+   "a^{1/3}b^{2/3} and a^{1/3}b^{1/3}",
+   "(a+b)/3 and 2(a+b)/3"
+  ],
+  "answer": 1,
+  "explain": "With n = 2, r = (b/a)^{1/3}, so G₁ = a^{2/3}b^{1/3} and G₂ = a^{1/3}b^{2/3}.",
+  "kind": "result",
+  "id": "97c1a478-3ac9-44e4-9fa7-642a8cf02825",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "Real GMs between a and b with ab < 0 exist only when n is",
+  "formula": "r^{n+1} = b/a < 0",
+  "options": [
+   "odd",
+   "even",
+   "a multiple of 3",
+   "never"
+  ],
+  "answer": 1,
+  "explain": "r^{n+1} < 0 needs n+1 odd, so n is even and r is negative.",
+  "kind": "concept",
+  "id": "be74af04-6038-42bc-a973-871321de30b3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "If n is odd and a, b > 0, the middle GM among the n inserted GMs is",
+  "formula": "",
+  "options": [
+   "(a+b)/2",
+   "√(ab)",
+   "ab/(a+b)",
+   "(ab)^{n/2}"
+  ],
+  "answer": 1,
+  "explain": "The middle term M has M² = ab (equidistant pair), so M = √(ab).",
+  "kind": "result",
+  "id": "679dabdf-3bd5-454e-b7de-4e1811cf5bbc",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "The product of n GMs inserted between a and 1/a is",
+  "formula": "",
+  "options": [
+   "aⁿ",
+   "1",
+   "a^{n/2}",
+   "n"
+  ],
+  "answer": 1,
+  "explain": "Product = (a·(1/a))^{n/2} = 1ⁿᐟ² = 1.",
+  "kind": "result",
+  "id": "cedfc2fe-d5d1-417a-a0f6-70074cb1afe5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "Three positive GMs between 1 and 81 are",
+  "formula": "",
+  "options": [
+   "3, 9, 27",
+   "9, 27, 54",
+   "20, 40, 60",
+   "3, 6, 12"
+  ],
+  "answer": 0,
+  "explain": "r⁴ = 81 gives r = 3, so the GMs are 3, 9, 27.",
+  "kind": "result",
+  "id": "2f4ad590-1e5d-4a5f-89b6-2be3b8b4a856",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "Product of 4 GMs inserted between 2 and 8 is",
+  "formula": "(ab)^{n/2}",
+  "options": [
+   "16",
+   "64",
+   "128",
+   "256"
+  ],
+  "answer": 3,
+  "explain": "(2·8)^{4/2} = 16² = 256.",
+  "kind": "result",
+  "id": "b499b343-70bf-4978-9de6-7b4b1278e21b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "For a, b > 0 and n odd, how many real GPs have n GMs inserted between a and b?",
+  "formula": "r = ±(b/a)^{1/(n+1)}",
+  "options": [
+   "Exactly one",
+   "Exactly two",
+   "None",
+   "Infinitely many"
+  ],
+  "answer": 1,
+  "explain": "n+1 is even, so r = ±(b/a)^{1/(n+1)}, giving two real GPs, e.g. 2,4,8 and −2,4,−8 between 1 and 16.",
+  "kind": "exception",
+  "id": "b681b308-b0d3-4580-b9b7-49a14d649f72",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "If G₁,…,Gₙ are n GMs between a and b, then 1/G₁,…,1/Gₙ are n GMs between",
+  "formula": "",
+  "options": [
+   "1/a and 1/b",
+   "a² and b²",
+   "−a and −b",
+   "1/b and 1/a²"
+  ],
+  "answer": 0,
+  "explain": "Reciprocals of a GP form a GP, so 1/a, 1/G₁,…,1/Gₙ, 1/b is a GP.",
+  "kind": "concept",
+  "id": "dd954b32-cf47-4b45-afc7-b964bb8c1b93",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "AM = GM for n positive numbers holds if and only if the numbers are",
+  "formula": "",
+  "options": [
+   "all equal",
+   "in A.P.",
+   "in G.P.",
+   "in H.P."
+  ],
+  "answer": 0,
+  "explain": "Equality in AM ≥ GM occurs exactly when all the numbers are equal.",
+  "kind": "concept",
+  "id": "052674cf-369c-45b4-8e93-8a3b831c1cae",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "Minimum value of x + 1/x for x > 0 is",
+  "formula": "x + 1/x ≥ 2",
+  "options": [
+   "1",
+   "2",
+   "1/2",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "AM ≥ GM gives (x + 1/x)/2 ≥ 1, with equality at x = 1.",
+  "kind": "result",
+  "id": "71060012-1f9d-4850-8768-8a0226255a5a",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "Positive x, y with x + y = s fixed. Maximum value of xy is",
+  "formula": "xy ≤ (x+y)²/4",
+  "options": [
+   "s²/2",
+   "s²/4",
+   "s/4",
+   "s²"
+  ],
+  "answer": 1,
+  "explain": "GM ≤ AM gives √(xy) ≤ s/2, so xy ≤ s²/4, attained at x = y.",
+  "kind": "result",
+  "id": "a5fe8e15-8cf1-4712-af0d-61694934f487",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For a, b, c > 0, the minimum value of (a+b+c)(1/a+1/b+1/c) is",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "9",
+   "27"
+  ],
+  "answer": 2,
+  "explain": "AM ≥ HM for 3 positive numbers gives the minimum 3² = 9, at a = b = c.",
+  "kind": "result",
+  "id": "69d01eb7-e4c2-45c9-88c5-756b81976e20",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "Positive x, y, z with x + y + z = s fixed. Maximum value of xyz is",
+  "formula": "",
+  "options": [
+   "(s/3)³",
+   "s³/27·3",
+   "s³/9",
+   "s³/3"
+  ],
+  "answer": 0,
+  "explain": "GM ≤ AM gives (xyz)^(1/3) ≤ s/3, so xyz ≤ (s/3)³, at x = y = z.",
+  "kind": "result",
+  "id": "58ba961b-8b74-4526-84ca-99bc6716335f",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For positive a, b, c, a³ + b³ + c³ is always at least",
+  "formula": "",
+  "options": [
+   "abc",
+   "3abc",
+   "(a+b+c)³/3",
+   "a²b + b²c + c²a"
+  ],
+  "answer": 1,
+  "explain": "AM ≥ GM on a³, b³, c³ gives a³ + b³ + c³ ≥ 3abc.",
+  "kind": "formula",
+  "id": "30bc513d-a5e9-43b1-a9b4-f6db3e76c847",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "Minimum value of 2ˣ + 2⁻ˣ over real x is",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "1/2",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "2ˣ and 2⁻ˣ are positive with product 1, so the sum is ≥ 2, equality at x = 0.",
+  "kind": "result",
+  "id": "ff089d08-b7ea-453b-95c0-4c07c3039da6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "Positive numbers have product 1. For n of them, their sum is at least",
+  "formula": "",
+  "options": [
+   "n",
+   "n²",
+   "1",
+   "n/2"
+  ],
+  "answer": 0,
+  "explain": "AM ≥ GM gives sum/n ≥ 1^(1/n) = 1, so the sum is ≥ n.",
+  "kind": "result",
+  "id": "4ef20319-b1a8-4e44-a146-9a6a75a5532a",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For x > 0, the minimum value of 4x + 9/x is",
+  "formula": "",
+  "options": [
+   "6",
+   "12",
+   "13",
+   "36"
+  ],
+  "answer": 1,
+  "explain": "AM ≥ GM gives 4x + 9/x ≥ 2√36 = 12, attained at x = 3/2.",
+  "kind": "result",
+  "id": "c979c2dc-3b0c-4ece-9590-659f309ec6b7",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For x, y > 0 with x + y = s, the minimum value of 1/x + 1/y is",
+  "formula": "AM ≥ HM",
+  "options": [
+   "4/s",
+   "2/s",
+   "s/4",
+   "s²/4"
+  ],
+  "answer": 0,
+  "explain": "AM ≥ HM gives s/2 ≥ 2/(1/x+1/y), so 1/x + 1/y ≥ 4/s.",
+  "kind": "result",
+  "id": "3fd0bc35-2b2a-47a2-a088-04c2980ec8b2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For a, b, c > 0, the minimum value of (a+b)(b+c)(c+a)/(abc) is",
+  "formula": "",
+  "options": [
+   "8",
+   "6",
+   "9",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "(a+b)(b+c)(c+a) ≥ 2√(ab)·2√(bc)·2√(ca) = 8abc.",
+  "kind": "result",
+  "id": "56432746-f417-4882-a56f-fb955bd38747",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For a, b, c > 0, the minimum value of a/b + b/c + c/a is",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "6",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "The product of the three terms is 1, so by AM ≥ GM the sum is ≥ 3·1 = 3.",
+  "kind": "result",
+  "id": "3abb6328-8135-4c36-bb45-77829d469c58",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For x > 0, the minimum value of x² + 16/x occurs at x equal to",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "8",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Split as x² + 8/x + 8/x; AM-GM equality needs x² = 8/x, so x = 2 (min value 12).",
+  "kind": "result",
+  "id": "0befe8b3-7757-4a85-a479-7c2994e2b39c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "Positive a, b with a + b = 1. The minimum value of (1 + 1/a)(1 + 1/b) is",
+  "formula": "",
+  "options": [
+   "9",
+   "4",
+   "6",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Expression = 1 + 1/(ab) + 2 = 3 + 1/(ab) ≥ 3 + 4 = 7 hmm; check: (1+1/a)(1+1/b) = 1 + (a+b)/(ab) + 1/(ab) = 1 + 2/(ab) ≥ 9.",
+  "kind": "result",
+  "id": "b8d90227-a5fb-4fa8-85ac-cda4532d65f4",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For positive roots of ax²+bx+c=0, their harmonic mean equals?",
+  "formula": "H = 2αβ/(α+β)",
+  "options": [
+   "−b/(2a)",
+   "−2c/b",
+   "−2b/c",
+   "c/(−2b)"
+  ],
+  "answer": 1,
+  "explain": "αβ=c/a, α+β=−b/a, so H = 2(c/a)/(−b/a) = −2c/b.",
+  "kind": "formula",
+  "id": "2f3243ac-7e5a-4f46-9bf0-56b963fd8e24",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "If A < G in x² − 2Ax + G² = 0, its roots are?",
+  "formula": "",
+  "options": [
+   "Real and equal",
+   "Real, distinct, positive",
+   "Real, distinct, negative",
+   "Non-real complex"
+  ],
+  "answer": 3,
+  "explain": "Discriminant 4(A²−G²) < 0, so no real numbers have such A, G.",
+  "kind": "concept",
+  "id": "757ab3ac-bc1c-45b4-b1f4-1d7a5a78b56c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Numbers a, b have AM A and GM G. The AM of 1/a and 1/b is?",
+  "formula": "",
+  "options": [
+   "G²/A",
+   "A/G²",
+   "A/G",
+   "1/(AG)"
+  ],
+  "answer": 1,
+  "explain": "(1/a+1/b)/2 = (a+b)/(2ab) = 2A/(2G²) = A/G².",
+  "kind": "result",
+  "id": "d635de23-187c-4266-932b-aff9561e067d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Two positive numbers have A : G = 5 : 4. Their ratio is?",
+  "formula": "",
+  "options": [
+   "2 : 1",
+   "9 : 1",
+   "4 : 1",
+   "5 : 2"
+  ],
+  "answer": 2,
+  "explain": "A=5k, G=4k: numbers 5k ± 3k = 8k, 2k, ratio 4:1.",
+  "kind": "result",
+  "id": "347655d1-f1a4-47c5-8530-9c4e9e9e67a4",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Two positive numbers have AM = 5 and GM = 3. The numbers are?",
+  "formula": "",
+  "options": [
+   "2 and 8",
+   "1 and 9",
+   "3 and 7",
+   "4 and 6"
+  ],
+  "answer": 1,
+  "explain": "Sum 10, product 9, so x²−10x+9=0 gives 1 and 9.",
+  "kind": "result",
+  "id": "7641e213-8bf7-4768-8bb1-13f8d9855c1f",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "For roots of x² − px + q = 0, the value of A² − G² is?",
+  "formula": "",
+  "options": [
+   "(p² − 4q)/4",
+   "(p² − 4q)/2",
+   "(p² − 2q)/4",
+   "(4q − p²)/4"
+  ],
+  "answer": 0,
+  "explain": "A²−G² = p²/4 − q = (p²−4q)/4 = ((α−β)/2)².",
+  "kind": "formula",
+  "id": "82e2681c-65af-4d82-bde9-c209656af559",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "For two positive numbers with AM A, GM G, HM H, G is the GM of which pair?",
+  "formula": "A·H = G²",
+  "options": [
+   "A and H",
+   "A and G²",
+   "H and G²",
+   "A − H and A + H"
+  ],
+  "answer": 0,
+  "explain": "For two positive numbers A·H = G², so A, G, H are in GP.",
+  "kind": "fact",
+  "id": "e3730489-01c2-461b-9ff8-082b25554978",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Numbers a, b have AM A and GM G. Quadratic with roots 1/a and 1/b is?",
+  "formula": "",
+  "options": [
+   "x² − 2Ax + G² = 0",
+   "G²x² − 2Ax + 1 = 0",
+   "Ax² − 2Gx + 1 = 0",
+   "x² − 2x/A + 1/G² = 0"
+  ],
+  "answer": 1,
+  "explain": "Sum 1/a+1/b = 2A/G², product 1/G²; multiply through by G².",
+  "kind": "result",
+  "id": "c0dc1284-1a16-400e-839b-a89e9d5c9587",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Roots of x² − 2Ax + G² = 0 (A > G > 0) differ by (positive difference)?",
+  "formula": "",
+  "options": [
+   "√(A² − G²)",
+   "2√(A² − G²)",
+   "2(A − G)",
+   "4√(A² − G²)"
+  ],
+  "answer": 1,
+  "explain": "|α − β| = √(D)/1 = √(4A² − 4G²) = 2√(A² − G²).",
+  "kind": "result",
+  "id": "d29b64bc-0d5d-4b58-a3a3-6c265882bc70",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Positive GP a, ar, ar², … has its logarithms taken. They form an AP with common difference:",
+  "formula": "",
+  "options": [
+   "log r",
+   "r",
+   "log a",
+   "a·log r"
+  ],
+  "answer": 0,
+  "explain": "log(arⁿ) = log a + n·log r, which is linear in n.",
+  "kind": "result",
+  "id": "e00ebffa-a7d0-4d0d-be7f-901d2cc3f8af",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "Three numbers in AP have sum 24. The middle number is:",
+  "formula": "",
+  "options": [
+   "8",
+   "6",
+   "12",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "(a−d)+a+(a+d) = 3a = 24, so a = 8.",
+  "kind": "result",
+  "id": "4ec3896a-876a-441c-8c9d-6411e23015a3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "Two APs have common differences 4 and 6. Their common terms form an AP with common difference:",
+  "formula": "lcm(d₁, d₂)",
+  "options": [
+   "2",
+   "10",
+   "24",
+   "12"
+  ],
+  "answer": 3,
+  "explain": "Common terms of two APs form an AP with common difference lcm(d₁, d₂) = lcm(4, 6) = 12.",
+  "kind": "result",
+  "id": "4f7c8e90-d3bd-4362-a00e-fc3f9a8d0a87",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "If a², b², c² are in AP, then which triple is also in AP?",
+  "formula": "",
+  "options": [
+   "1/(b+c), 1/(c+a), 1/(a+b)",
+   "b+c, c+a, a+b",
+   "1/a, 1/b, 1/c",
+   "a³, b³, c³"
+  ],
+  "answer": 0,
+  "explain": "a² − b² = b² − c² gives equal differences of 1/(b+c), 1/(c+a), 1/(a+b).",
+  "kind": "result",
+  "id": "c2dce1ec-10fc-4354-9e8d-dd402b74392d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "For an AP with sum of n terms Sₙ, the nth term aₙ (n ≥ 2) equals:",
+  "formula": "",
+  "options": [
+   "Sₙ − Sₙ₋₁",
+   "Sₙ₊₁ − Sₙ",
+   "Sₙ − Sₙ₋₂",
+   "Sₙ/n"
+  ],
+  "answer": 0,
+  "explain": "Sₙ minus the sum of the first n−1 terms leaves aₙ.",
+  "kind": "formula",
+  "id": "b5357890-c34e-4a32-b843-88b6a173d0e0",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "For an AP, Sₙ, S₂ₙ − Sₙ, S₃ₙ − S₂ₙ form an AP with common difference:",
+  "formula": "",
+  "options": [
+   "n²d",
+   "nd",
+   "2nd",
+   "n(n−1)d"
+  ],
+  "answer": 0,
+  "explain": "Each block of n terms is shifted by n steps, so its sum rises by n·nd = n²d.",
+  "kind": "result",
+  "id": "8f61f64d-7878-45d5-9de6-8b6b163dddc6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "In an AP, if aₘ = 1/n and aₙ = 1/m (m ≠ n), then a_{mn} equals:",
+  "formula": "d = 1/(mn)",
+  "options": [
+   "1",
+   "0",
+   "1/(mn)",
+   "m + n"
+  ],
+  "answer": 0,
+  "explain": "d = 1/(mn), so a_{mn} = 1/n + (mn − m)/(mn) = 1.",
+  "kind": "result",
+  "id": "2afe37b5-fa72-4438-9dbe-6e1937e8b93d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a₁, a₂, …, aₙ are in AP with common difference d, the sequence a₁², a₂², … is generally:",
+  "formula": "",
+  "options": [
+   "An AP with difference d²",
+   "A GP with ratio d",
+   "Not an AP in general",
+   "An AP with difference 2d"
+  ],
+  "answer": 2,
+  "explain": "aₖ² is quadratic in k, so second differences are constant (2d²) but first differences vary; it is not an AP unless d = 0.",
+  "kind": "concept",
+  "id": "95f3ac63-232a-42f4-8aca-b25cb784c28d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "Seven terms in AP are taken as a−3d, …, a, …, a+3d. Their sum is?",
+  "formula": "",
+  "options": [
+   "7a",
+   "7a + 21d",
+   "7a + 3d",
+   "21a"
+  ],
+  "answer": 0,
+  "explain": "Terms pair up as a±kd, so the d-terms cancel and the sum is 7a.",
+  "kind": "result",
+  "id": "275cb9e3-aa38-4198-ada6-4db276ca5dfb",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "In a−3d, a−d, a+d, a+3d, the 4th term minus the 1st term equals?",
+  "formula": "",
+  "options": [
+   "6d",
+   "3d",
+   "4d",
+   "2d"
+  ],
+  "answer": 0,
+  "explain": "(a+3d) − (a−3d) = 6d, which is three common differences of 2d each.",
+  "kind": "result",
+  "id": "b4086a58-dcca-45c7-a560-184ff7dffd78",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "If four AP terms are a−3d, a−d, a+d, a+3d and the actual common difference is D, then d equals?",
+  "formula": "",
+  "options": [
+   "D/2",
+   "D",
+   "2D",
+   "D/3"
+  ],
+  "answer": 0,
+  "explain": "The common difference is 2d, so D = 2d and d = D/2.",
+  "kind": "concept",
+  "id": "6c413fd1-a5aa-48bf-9150-b4d2ada684d0",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "For the four terms a−3d, a−d, a+d, a+3d, what is 'a' with respect to the terms?",
+  "formula": "",
+  "options": [
+   "Mean of the middle two terms",
+   "The second term",
+   "The third term",
+   "The first term"
+  ],
+  "answer": 0,
+  "explain": "a is not itself a term; it is the AM of (a−d) and (a+d), and also of all four terms.",
+  "kind": "concept",
+  "id": "5b1320df-2dc2-4261-9696-9252401ece60",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of squares of the seven terms a−3d, …, a+3d equals?",
+  "formula": "",
+  "options": [
+   "7a² + 28d²",
+   "7a² + 14d²",
+   "7a² + 36d²",
+   "7a² + 9d²"
+  ],
+  "answer": 0,
+  "explain": "The d² terms give 2(1+4+9)d² = 28d², and the a² terms give 7a².",
+  "kind": "result",
+  "id": "288f4fb5-2e7f-4920-b080-f3e39041b504",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Why is a−d, a, a+d valid even if d is negative?",
+  "formula": "",
+  "options": [
+   "Order reverses; still an AP",
+   "It stops being an AP",
+   "It requires d > 0",
+   "Terms become a GP"
+  ],
+  "answer": 0,
+  "explain": "The common difference is d, and it may be positive or negative; d<0 just reverses the order.",
+  "kind": "concept",
+  "id": "0769905e-2d96-4fd6-889c-69d6bbd41e3c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "In a−2d, a−d, a, a+d, a+2d, the last term minus the first term is?",
+  "formula": "",
+  "options": [
+   "2d",
+   "3d",
+   "4d",
+   "5d"
+  ],
+  "answer": 2,
+  "explain": "(a+2d) − (a−2d) = 4d, which is four common differences.",
+  "kind": "result",
+  "id": "4a9a03ae-8b72-48c5-9883-f2e66f879856",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of squares of the six terms a±d, a±3d, a±5d equals?",
+  "formula": "",
+  "options": [
+   "6a² + 70d²",
+   "6a² + 35d²",
+   "6a² + 54d²",
+   "6a² + 9d²"
+  ],
+  "answer": 0,
+  "explain": "Each ± pair gives 2a² + 2(d², 9d², 25d²); the total is 6a² + 70d².",
+  "kind": "result",
+  "id": "3b571423-f8d6-41d4-b615-44f856e72fa0",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "In a GP with common ratio r, the ratio T₁₀/T₄ equals?",
+  "formula": "Tₘ/Tₙ = r^(m−n)",
+  "options": [
+   "r⁶",
+   "r⁵",
+   "r⁷",
+   "r¹⁴"
+  ],
+  "answer": 0,
+  "explain": "T₁₀/T₄ = ar⁹/ar³ = r⁶.",
+  "kind": "formula",
+  "id": "fdb8e73e-82d7-4961-8434-064fd11cb41d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "In a GP with ratio r, the terms Tₚ, Tₚ₊ₖ, Tₚ₊₂ₖ form a GP with common ratio?",
+  "formula": "",
+  "options": [
+   "kr",
+   "rᵏ",
+   "r^(k−1)",
+   "r^(2k)"
+  ],
+  "answer": 1,
+  "explain": "Tₚ₊ₖ/Tₚ = rᵏ, so every kth term forms a GP with ratio rᵏ.",
+  "kind": "concept",
+  "id": "d8501fd7-ab89-4d12-b08f-64677a6ffef1",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "If a, b, c are in GP (all nonzero), which of these is also in GP?",
+  "formula": "",
+  "options": [
+   "a², b², c²",
+   "a+1, b+1, c+1",
+   "a−b, b−c, c−a",
+   "a, a+b, a+b+c"
+  ],
+  "answer": 0,
+  "explain": "b² = ac gives b⁴ = a²c², so a², b², c² are in GP with ratio r².",
+  "kind": "result",
+  "id": "fb687c94-6a01-4bd2-8606-4c3ed520629a",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "If a, b, c are in GP and x is the common ratio, which of these expresses c in terms of a?",
+  "formula": "",
+  "options": [
+   "c = a·x²",
+   "c = a·x",
+   "c = a·x³",
+   "c = 2a·x"
+  ],
+  "answer": 0,
+  "explain": "The third term is the first term times r², so c = a·x².",
+  "kind": "formula",
+  "id": "6bd2e474-aa7b-4fd1-90ea-ada48361a9ff",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "GP with first term a, ratio r ≠ 1, last term l. Sum of its terms is:",
+  "formula": "Sₙ = (rl − a)/(r − 1)",
+  "options": [
+   "(rl − a)/(r − 1)",
+   "(l − ra)/(r − 1)",
+   "(rl − a)/(1 − r²)",
+   "(l − a)/(r − 1)"
+  ],
+  "answer": 0,
+  "explain": "Since rⁿ·a = r·l, Sₙ = a(rⁿ−1)/(r−1) = (rl − a)/(r−1).",
+  "kind": "formula",
+  "id": "a6fafdab-dcd0-4165-9e2d-ac598e6f7937",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "For an infinite GP (a, r), |r| < 1, the sum of the odd-placed terms a, ar², ar⁴, … is:",
+  "formula": "",
+  "options": [
+   "a/(1 − r²)",
+   "a/(1 − r)",
+   "ar/(1 − r²)",
+   "a²/(1 − r²)"
+  ],
+  "answer": 0,
+  "explain": "Odd-placed terms form a GP with first term a and ratio r², so the sum is a/(1−r²).",
+  "kind": "result",
+  "id": "d05f4d22-c035-433b-935c-dc16fd750f00",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "For a GP with first term a and ratio r, the sum of terms from the (m+1)th to the (m+n)th is:",
+  "formula": "",
+  "options": [
+   "a·rᵐ(rⁿ − 1)/(r − 1)",
+   "a·rᵐ⁻¹(rⁿ − 1)/(r − 1)",
+   "a(rᵐ⁺ⁿ − 1)/(r − 1)",
+   "a·rⁿ(rᵐ − 1)/(r − 1)"
+  ],
+  "answer": 0,
+  "explain": "First term of the block is arᵐ with ratio r, so sum = arᵐ(rⁿ−1)/(r−1).",
+  "kind": "formula",
+  "id": "b8398a26-ae83-42ae-af18-e3e8870c3725",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "The reciprocals of the terms of a convergent infinite GP (|r|<1) form a series that:",
+  "formula": "",
+  "options": [
+   "converges to 1/S",
+   "converges to (1−r)/a",
+   "diverges",
+   "converges to r/a"
+  ],
+  "answer": 2,
+  "explain": "The reciprocals form a GP with ratio 1/r, and |1/r|>1, so the series diverges.",
+  "kind": "concept",
+  "id": "2f5ad34c-92c9-4f0b-87bd-b6d608b2cb8d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "The recurring decimal 0.142857142857… (block 142857 repeating) equals?",
+  "formula": "",
+  "options": [
+   "1/7",
+   "1/8",
+   "142857/10⁶",
+   "1/6"
+  ],
+  "answer": 0,
+  "explain": "The sum is 142857/(10⁶−1) = 142857/999999 = 1/7.",
+  "kind": "fact",
+  "id": "bc995289-a817-47ca-a84b-6c1cbe0eba59",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "Sum of 1/2 − 1/4 + 1/8 − 1/16 + … to ∞ is?",
+  "formula": "S = a/(1−r), r = −1/2",
+  "options": [
+   "1/3",
+   "2/3",
+   "1/4",
+   "3/4"
+  ],
+  "answer": 0,
+  "explain": "a = 1/2, r = −1/2, so S = (1/2)/(3/2) = 1/3.",
+  "kind": "result",
+  "id": "426b187f-9771-414c-b6f1-698d9c6f761d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "For an infinite GP a, ar, ar², … (|r|<1), the sum of the even-placed terms (2nd, 4th, …) is?",
+  "formula": "ar + ar³ + ar⁵ + …",
+  "options": [
+   "a/(1−r²)",
+   "ar²/(1−r²)",
+   "ar/(1−r²)",
+   "ar/(1−r)"
+  ],
+  "answer": 2,
+  "explain": "First term ar, ratio r², so the sum is ar/(1−r²).",
+  "kind": "result",
+  "id": "98171404-5ee1-402b-bd34-a4a5cf5a2c32",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "1 + (x−1) + (x−1)² + … to ∞ converges for which x, and to what sum?",
+  "formula": "r = x − 1",
+  "options": [
+   "0<x<2; 1/(2−x)",
+   "0<x<2; 1/x",
+   "|x|<1; 1/(1−x)",
+   "x>2; 1/(2−x)"
+  ],
+  "answer": 0,
+  "explain": "|x−1|<1 gives 0<x<2, and the sum is 1/(1−(x−1)) = 1/(2−x).",
+  "kind": "result",
+  "id": "19f5532f-ae10-41fb-af29-eed7bafa71ab",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of infinite GP (|r| < 1)"
+ },
+ {
+  "prompt": "The squares of the terms a/r, a, ar form a GP. What is its common ratio?",
+  "formula": "",
+  "options": [
+   "r²",
+   "r",
+   "2r",
+   "1/r²"
+  ],
+  "answer": 0,
+  "explain": "The terms a²/r², a², a²r² have ratio r².",
+  "kind": "result",
+  "id": "8224f1d4-dc63-4ea9-ab57-e3795fd42a77",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Can a/r³, a/r, ar, ar³ represent a real GP with a negative common ratio?",
+  "formula": "",
+  "options": [
+   "No, the ratio r² is positive",
+   "Yes, if r < 0",
+   "Yes, if a < 0",
+   "Only when r = –1"
+  ],
+  "answer": 0,
+  "explain": "The common ratio of this choice is r², which is positive for real r.",
+  "kind": "exception",
+  "id": "a549d71a-8418-4bfe-abe4-5c48029fed6f",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "For three terms a, ar, ar² in GP, what is their product?",
+  "formula": "",
+  "options": [
+   "a³r³",
+   "a³r²",
+   "a³r⁶",
+   "a³"
+  ],
+  "answer": 0,
+  "explain": "The exponents of r add as 0 + 1 + 2 = 3, so the product is (ar)³.",
+  "kind": "formula",
+  "id": "335e3848-b5ce-4f57-b89c-1f72acd9c6f3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Seven terms in GP are centred at a with common ratio r. What is the first term?",
+  "formula": "",
+  "options": [
+   "a/r³",
+   "a/r⁶",
+   "a/r⁷",
+   "a/r⁴"
+  ],
+  "answer": 0,
+  "explain": "The middle term is the 4th, so the first term is 3 steps back: a/r³.",
+  "kind": "formula",
+  "id": "bfec88fc-9502-4af7-acbb-77d2dfa8560f",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "For positive terms a/r, a, ar in GP, their logarithms form an AP with common difference?",
+  "formula": "log(ar) − log a = log r",
+  "options": [
+   "log a",
+   "log r",
+   "r",
+   "log(1/a)"
+  ],
+  "answer": 1,
+  "explain": "log(a/r), log a, log(ar) differ by log r, so they form an AP.",
+  "kind": "result",
+  "id": "65c1b659-b9b5-4891-805c-3c7ab2dd55e8",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Three numbers a/r, a, ar in GP have sum S. If each term is replaced by its reciprocal, what is the new middle term?",
+  "formula": "",
+  "options": [
+   "1/a",
+   "a",
+   "1/(ar)",
+   "r/a"
+  ],
+  "answer": 0,
+  "explain": "Reciprocals are r/a, 1/a, 1/(ar): still a GP with middle term 1/a.",
+  "kind": "result",
+  "id": "834f643e-c8cf-455d-a8d5-915213f6c336",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "0.142857142857… (142857 repeating) equals which fraction?",
+  "formula": "142857/999999",
+  "options": [
+   "1/7",
+   "1/6",
+   "1/8",
+   "1/11"
+  ],
+  "answer": 0,
+  "explain": "142857/999999 = 1/7, so the six-digit block is the period of 1/7.",
+  "kind": "fact",
+  "id": "7679124f-7fa2-49ca-a543-664c67ff7306",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "0.1999… (9 repeating) equals which fraction?",
+  "formula": "",
+  "options": [
+   "19/90",
+   "1/5",
+   "1/6",
+   "2/9"
+  ],
+  "answer": 1,
+  "explain": "0.1 + 0.0999… = 0.1 + 0.1 = 0.2 = 1/5, since 0.0999… = 0.1.",
+  "kind": "result",
+  "id": "2f43e04f-deca-41dd-bde1-5ce83ac93412",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "For 0.ab c̄ (only c repeating), the fraction is (abc = 3-digit number):",
+  "formula": "",
+  "options": [
+   "(abc − c)/900",
+   "(abc − ab)/990",
+   "(abc − ab)/900",
+   "abc/999"
+  ],
+  "answer": 2,
+  "explain": "One repeating digit gives 9, two non-repeating digits give 00, so the denominator is 900 and the numerator is abc − ab.",
+  "kind": "formula",
+  "id": "7f910f71-f484-48a6-b184-41185d99d247",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "0.272727… + 0.727272… (27 and 72 repeating) equals:",
+  "formula": "",
+  "options": [
+   "99/100",
+   "1",
+   "9/11",
+   "10/11"
+  ],
+  "answer": 1,
+  "explain": "27/99 + 72/99 = 99/99 = 1.",
+  "kind": "result",
+  "id": "0690cc54-c0af-4872-9acc-3247ae685cb3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "For the same a, b, m AMs give common difference d₁ and n AMs give d₂. Then d₁ : d₂ equals?",
+  "formula": "d = (b−a)/(number of means + 1)",
+  "options": [
+   "(n+1) : (m+1)",
+   "(m+1) : (n+1)",
+   "m : n",
+   "n : m"
+  ],
+  "answer": 0,
+  "explain": "d₁ = (b−a)/(m+1) and d₂ = (b−a)/(n+1), so d₁/d₂ = (n+1)/(m+1).",
+  "kind": "result",
+  "id": "ee7f0d01-6be9-40a9-9f6b-e3afc3a1ed55",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "n AMs are inserted between a and b. The ratio of the sum of the means to the (n+2)-term AP sum is?",
+  "formula": "",
+  "options": [
+   "n : (n+2)",
+   "(n+2) : n",
+   "n : (n+1)",
+   "2n : (n+2)"
+  ],
+  "answer": 0,
+  "explain": "Sum of means = n(a+b)/2 and total sum = (n+2)(a+b)/2, so the ratio is n : (n+2).",
+  "kind": "result",
+  "id": "2deee5ee-beb9-4802-842d-2354b5497ad8",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "For a, b > 0 and n even, how many real GPs have n GMs inserted between a and b?",
+  "formula": "rⁿ⁺¹ = b/a",
+  "options": [
+   "Exactly one",
+   "Exactly two",
+   "None",
+   "Infinitely many"
+  ],
+  "answer": 0,
+  "explain": "n+1 is odd, so rⁿ⁺¹ = b/a > 0 has exactly one real root, which is positive.",
+  "kind": "exception",
+  "id": "39b765e3-7486-45b6-b8fe-8ef1398d5127",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "For a, b > 0 with n GMs G₁,…,Gₙ between them, log G₁,…, log Gₙ are n ___ between log a and log b.",
+  "formula": "",
+  "options": [
+   "Arithmetic means",
+   "Geometric means",
+   "Harmonic means",
+   "Quadratic means"
+  ],
+  "answer": 0,
+  "explain": "Taking logs turns a GP into an AP, so the logs of the GMs are n AMs between log a and log b.",
+  "kind": "concept",
+  "id": "a3ce05b9-1a15-4db5-8c8b-29b2b130eae0",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "For a, b > 0, the product of the n GMs inserted between a and b equals",
+  "formula": "G₁G₂…Gₙ = (ab)^{n/2}",
+  "options": [
+   "(ab)^{n/2}",
+   "(ab)^{(n+1)/2}",
+   "(ab)^{n}",
+   "(ab)^{n/(n+1)}"
+  ],
+  "answer": 0,
+  "explain": "Terms equidistant from the ends multiply to ab, so the n GMs form n/2 pairs, each with product ab.",
+  "kind": "result",
+  "id": "81da50b6-6244-4c81-a608-4e23b024b498",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "Roots of x² − 10x + k = 0 are positive reals. The greatest possible value of k is?",
+  "formula": "AM ≥ GM",
+  "options": [
+   "10",
+   "25",
+   "5",
+   "100"
+  ],
+  "answer": 1,
+  "explain": "AM of roots = 5 and GM = √k. AM ≥ GM gives k ≤ 25, with equality for equal roots.",
+  "kind": "result",
+  "id": "2dc68bd8-3132-48fc-a40f-a9f5112f3d69",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Two numbers a, b have AM A and GM G. Then a² + b² equals?",
+  "formula": "a + b = 2A, ab = G²",
+  "options": [
+   "4A² − G²",
+   "2A² − G²",
+   "4A² − 2G²",
+   "A² − 2G²"
+  ],
+  "answer": 2,
+  "explain": "a² + b² = (a+b)² − 2ab = 4A² − 2G².",
+  "kind": "formula",
+  "id": "29ee6386-f29b-43b3-a072-e977744c83dd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Relation of A, G with quadratic roots"
+ },
+ {
+  "prompt": "Which relation (for n ≥ 2) characterises a sequence aₙ as an AP?",
+  "formula": "",
+  "options": [
+   "aₙ² = aₙ₋₁·aₙ₊₁",
+   "2aₙ = aₙ₋₁ + aₙ₊₁",
+   "2/aₙ = 1/aₙ₋₁ + 1/aₙ₊₁",
+   "aₙ = aₙ₋₁·aₙ₊₁"
+  ],
+  "answer": 1,
+  "explain": "aₙ₊₁ − aₙ = aₙ − aₙ₋₁ means each term is the mean of its neighbours. The other options describe a GP or HP.",
+  "kind": "concept",
+  "id": "7692f269-6597-407f-8fc7-6e31829f5832",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "For the sequence aₙ = An² + Bn + C, the differences aₙ₊₁ − aₙ form an AP with common difference:",
+  "formula": "",
+  "options": [
+   "2A",
+   "A",
+   "2B",
+   "A + B"
+  ],
+  "answer": 0,
+  "explain": "aₙ₊₁ − aₙ = A(2n+1) + B, which is linear in n with slope 2A.",
+  "kind": "result",
+  "id": "66614813-3a20-4bc2-8565-5c3727faf394",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "An AP has 2n terms with common difference d. (Sum of even-placed terms) − (sum of odd-placed terms) = ?",
+  "formula": "",
+  "options": [
+   "nd",
+   "2nd",
+   "n²d",
+   "d/2"
+  ],
+  "answer": 0,
+  "explain": "Each even-placed term exceeds its preceding odd-placed term by d, and there are n such pairs, so the difference is nd.",
+  "kind": "result",
+  "id": "68c19cd5-92fa-4ad6-bbb1-16ee34b3c46c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "Which symmetric choice is used for 2n+1 terms in AP?",
+  "formula": "",
+  "options": [
+   "a−nd, …, a, …, a+nd",
+   "a−(2n+1)d, …, a+(2n+1)d",
+   "a−2nd, …, a+2nd",
+   "a−d, a, a+d, …, a+nd"
+  ],
+  "answer": 0,
+  "explain": "Odd count: middle term a, then a ± d, a ± 2d, … up to a ± nd.",
+  "kind": "concept",
+  "id": "b083fff3-e0ee-431e-a44b-28164727bfc7",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Eight AP terms are taken as a±d, a±3d, a±5d, a±7d. Their common difference is?",
+  "formula": "",
+  "options": [
+   "2d",
+   "d",
+   "4d",
+   "7d"
+  ],
+  "answer": 0,
+  "explain": "Consecutive terms differ by 2d, as in all even-count symmetric choices.",
+  "kind": "fact",
+  "id": "db7f95c1-f71d-4ce1-a2aa-35e5e7990835",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of the eight terms a±d, a±3d, a±5d, a±7d equals?",
+  "formula": "",
+  "options": [
+   "8a",
+   "8a + 16d",
+   "8a + 8d",
+   "4a"
+  ],
+  "answer": 0,
+  "explain": "The ±d terms cancel in pairs, leaving 8a.",
+  "kind": "result",
+  "id": "1048a80f-1d36-4a5e-90ca-824271d7ef0d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Four terms a−d, a, a+d, a+2d in AP have sum?",
+  "formula": "",
+  "options": [
+   "4a + 2d",
+   "4a",
+   "4a + d",
+   "4a + 6d"
+  ],
+  "answer": 0,
+  "explain": "Not symmetric, so d does not cancel: 4a + 2d. Hence a±d, a±3d is preferred.",
+  "kind": "exception",
+  "id": "e5986c67-8edc-485c-a36f-2e081a667fba",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Product of the five terms a−2d, a−d, a, a+d, a+2d equals?",
+  "formula": "",
+  "options": [
+   "a(a²−d²)(a²−4d²)",
+   "a(a²−d²)(a²−2d²)",
+   "a⁵ − 5ad⁴",
+   "(a²−d²)(a²−4d²)"
+  ],
+  "answer": 0,
+  "explain": "Pair the extreme terms: (a²−4d²)(a²−d²)·a.",
+  "kind": "result",
+  "id": "7ed7b730-5b81-4b57-b887-29a47fa84e5f",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of squares of the eight terms a±d, a±3d, a±5d, a±7d equals?",
+  "formula": "",
+  "options": [
+   "8a² + 168d²",
+   "8a² + 84d²",
+   "8a² + 112d²",
+   "8a² + 196d²"
+  ],
+  "answer": 0,
+  "explain": "Each pair gives 2a² + 2x²; 2d²(1+9+25+49) = 168d².",
+  "kind": "result",
+  "id": "5c45ddce-5df4-434a-88a8-73c3c4d79861",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Sum of squares of the nine terms a−4d, …, a, …, a+4d equals?",
+  "formula": "",
+  "options": [
+   "9a² + 60d²",
+   "9a² + 30d²",
+   "9a² + 120d²",
+   "9a² + 45d²"
+  ],
+  "answer": 0,
+  "explain": "Cross terms cancel; 2d²(1+4+9+16) = 60d².",
+  "kind": "result",
+  "id": "06aea38a-db61-4757-b906-536ab623e931",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in AP (a-d, a, a+d)"
+ },
+ {
+  "prompt": "Terms of a GP taken at positions 1, 3, 5, … (alternate terms) form a GP with common ratio?",
+  "formula": "",
+  "options": [
+   "r",
+   "r²",
+   "2r",
+   "r/2"
+  ],
+  "answer": 1,
+  "explain": "Tₙ₊₂/Tₙ = r², so the alternate terms form a GP with ratio r².",
+  "kind": "result",
+  "id": "e8d661e3-2634-490b-b789-f10ef2c8f54d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "If a, b, c are in GP, then a+b, 2b, b+c are in which progression? (a, b, c are such that a+b ≠ 0)",
+  "formula": "",
+  "options": [
+   "AP",
+   "GP",
+   "HP",
+   "None of AP, GP, HP in general"
+  ],
+  "answer": 3,
+  "explain": "Test a=1,b=2,c=4: 3,4,6 is not AP, GP or HP, so none holds in general.",
+  "kind": "exception",
+  "id": "da7b76fc-1118-4f94-867a-731243b63432",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "Sum of cubes of the first n terms of a GP (first term a, ratio r, r³ ≠ 1) is:",
+  "formula": "",
+  "options": [
+   "a³(r³ⁿ − 1)/(r³ − 1)",
+   "a³(rⁿ − 1)³/(r − 1)³",
+   "a³(r³ⁿ − 1)/(r − 1)",
+   "a³(rⁿ − 1)/(r³ − 1)"
+  ],
+  "answer": 0,
+  "explain": "Cubes a³, a³r³, a³r⁶,… form a GP with first term a³ and ratio r³.",
+  "kind": "result",
+  "id": "ee0e3adc-0112-45fa-9e99-dabd8ab89cf5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "Sum of the first 2025 terms of the GP 3 − 3 + 3 − 3 + … is:",
+  "formula": "r = −1: Sₙ = a (n odd), 0 (n even)",
+  "options": [
+   "0",
+   "3",
+   "2025",
+   "6075"
+  ],
+  "answer": 1,
+  "explain": "With r = −1, terms cancel in pairs. For odd n, one term a is left, so S = 3.",
+  "kind": "result",
+  "id": "9a013d48-73ea-447b-89be-eb3f8d889358",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "For a/r, a, ar with sum S, what is the sum of products of the terms taken two at a time?",
+  "formula": "a²(1/r + 1 + r) = aS",
+  "options": [
+   "aS",
+   "a²S",
+   "S/a",
+   "a³"
+  ],
+  "answer": 0,
+  "explain": "a²/r + a² + a²r = a(a/r + a + ar) = aS.",
+  "kind": "result",
+  "id": "14991938-7e2e-4ec6-88f9-ed231d1ca865",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "In the four terms a/r³, a/r, ar, ar³, what is the product of the first and fourth terms?",
+  "formula": "",
+  "options": [
+   "a²",
+   "a⁴",
+   "a²r⁶",
+   "a/r⁶"
+  ],
+  "answer": 0,
+  "explain": "(a/r³)(ar³) = a², and likewise (a/r)(ar) = a².",
+  "kind": "result",
+  "id": "4f305f3a-0758-45c8-a087-177b256e9a61",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Six numbers a/r⁵, a/r³, a/r, ar, ar³, ar⁵ are in GP. What is their product?",
+  "formula": "",
+  "options": [
+   "a⁶",
+   "a³",
+   "a⁶r⁶",
+   "a¹²"
+  ],
+  "answer": 0,
+  "explain": "Pairing equidistant terms gives three pairs, each with product a², so the total is a⁶.",
+  "kind": "result",
+  "id": "f5c440fb-0bca-44f6-b722-d31c5cf18cb0",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Replacing r by −r in the terms a/r, a, ar changes which terms?",
+  "formula": "",
+  "options": [
+   "Only the middle term's sign",
+   "The signs of the extreme terms only",
+   "All three signs",
+   "No term changes"
+  ],
+  "answer": 1,
+  "explain": "The extremes a/r and ar change sign, while the middle term a is unchanged.",
+  "kind": "concept",
+  "id": "f1784b6b-7021-4d65-ba56-f721913ebdfd",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "The cubes of the terms a/r, a, ar form a GP. What is its common ratio?",
+  "formula": "(ar)³ / a³ = r³",
+  "options": [
+   "r³",
+   "r",
+   "3r",
+   "r⁶"
+  ],
+  "answer": 0,
+  "explain": "The ratio of the original GP is r, so the cubes have ratio r³.",
+  "kind": "result",
+  "id": "9a6767d9-1d0a-4c78-af5b-4b3f7b41f2b3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Terms a/r, a, ar have sum S. What is the sum of their reciprocals?",
+  "formula": "S = a(1/r + 1 + r)",
+  "options": [
+   "S/a²",
+   "S/a",
+   "a²/S",
+   "1/S"
+  ],
+  "answer": 0,
+  "explain": "1/a·(r + 1 + 1/r) = (1/a)(S/a) = S/a².",
+  "kind": "result",
+  "id": "9320c5ca-6f65-4800-9e13-270fd3a5ba78",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "0.0555… (only 5 repeating, after one zero) equals which fraction?",
+  "formula": "0.0̅5 = 5/90",
+  "options": [
+   "1/18",
+   "1/20",
+   "5/99",
+   "1/9"
+  ],
+  "answer": 0,
+  "explain": "First term 0.05, ratio 1/10: sum = 0.05/(0.9) = 5/90 = 1/18.",
+  "kind": "result",
+  "id": "b4e97b5b-c670-47d2-95c9-9bd765a538e6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "0.090909… (09 repeating) equals which fraction?",
+  "formula": "0.̅0̅9 = 9/99",
+  "options": [
+   "1/9",
+   "1/11",
+   "9/100",
+   "1/90"
+  ],
+  "answer": 1,
+  "explain": "First term 0.09, ratio 1/100: sum = 9/99 = 1/11.",
+  "kind": "result",
+  "id": "8774b506-0370-4792-959f-9628bec0aa5d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "n AMs are inserted between a and b, giving common difference (b−a)/7. How many means were inserted?",
+  "formula": "d = (b−a)/(n+1)",
+  "options": [
+   "5",
+   "6",
+   "7",
+   "8"
+  ],
+  "answer": 1,
+  "explain": "n+1 = 7, so n = 6. The number of gaps is one more than the number of means.",
+  "kind": "concept",
+  "id": "1aefb26c-38b1-44ff-b8bd-d41ad55615da",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "n AMs are inserted between every two consecutive terms of an AP with common difference d. New common difference?",
+  "formula": "d′ = d/(n+1)",
+  "options": [
+   "d/(n+1)",
+   "d/n",
+   "d/(n+2)",
+   "(n+1)d"
+  ],
+  "answer": 0,
+  "explain": "Each gap d is split into (n+1) equal parts, so the new common difference is d/(n+1).",
+  "kind": "result",
+  "id": "e53c8458-502d-462c-b775-a290f558c030",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "For an AP with S_m/S_n = m²/n², the ratio a_m/a_n equals:",
+  "formula": "a = d/2 ⇒ aₙ ∝ (2n−1)",
+  "options": [
+   "(2m−1)/(2n−1)",
+   "m/n",
+   "(m+1)/(n+1)",
+   "m²/n²"
+  ],
+  "answer": 0,
+  "explain": "S_m/S_n = m²/n² forces a = d/2, so aₙ = d(2n−1)/2, giving a_m/a_n = (2m−1)/(2n−1).",
+  "kind": "result",
+  "id": "b48256c5-58cc-4190-b832-8b2b5cd3509e",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a, b, c are in AP, then a² (b+c), b² (c+a), c² (a+b) are in AP only when which condition holds?",
+  "formula": "",
+  "options": [
+   "Never in general",
+   "a, b, c in GP",
+   "a + b + c = 0",
+   "ab + bc + ca = 0"
+  ],
+  "answer": 0,
+  "explain": "Wrong card",
+  "kind": "fact",
+  "id": "c0d3922d-3bbc-4cda-9574-b990fca3b466",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "For the terms a/r, a, ar in GP, what is the sum of their squares?",
+  "formula": "",
+  "options": [
+   "a²(r² + 1 + 1/r²)",
+   "a²(r + 1 + 1/r)²",
+   "a²(r² + 1/r²)",
+   "a²(r + 1/r)"
+  ],
+  "answer": 0,
+  "explain": "Squares are a²/r², a², a²r², so their sum is a²(1/r² + 1 + r²).",
+  "kind": "formula",
+  "id": "1311c3c1-3f21-46b3-be34-7c27c4446fd2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Real numbers a/r, a, ar (a ≠ 0) have sum S. S/a can never lie in which interval?",
+  "formula": "S/a = 1 + r + 1/r",
+  "options": [
+   "(−1, 3)",
+   "(−3, 1)",
+   "(0, 3)",
+   "(−1, 1)"
+  ],
+  "answer": 0,
+  "explain": "For real r, r + 1/r ≥ 2 or ≤ −2, so S/a ≥ 3 or S/a ≤ −1.",
+  "kind": "result",
+  "id": "baa0a17b-7454-42a1-b575-53aedc5dc139",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "Four numbers in GP are taken as a, ar, ar², ar³. What is their product?",
+  "formula": "a·ar·ar²·ar³",
+  "options": [
+   "a⁴r⁶",
+   "a⁴r⁴",
+   "a⁴r⁵",
+   "a⁴r⁸"
+  ],
+  "answer": 0,
+  "explain": "The exponents of r are 0+1+2+3 = 6, so the product is a⁴r⁶.",
+  "kind": "formula",
+  "id": "f88dadeb-4f20-4dd2-bdda-7fa75ad62366",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Choosing terms in GP (a/r, a, ar)"
+ },
+ {
+  "prompt": "0.\\overline{ab} (two-digit block ab repeating) as a fraction equals:",
+  "formula": "",
+  "options": [
+   "ab/99",
+   "ab/90",
+   "ab/100",
+   "ab/999"
+  ],
+  "answer": 0,
+  "explain": "GP with first term ab/100 and ratio 1/100 gives ab/100 ÷ (99/100) = ab/99.",
+  "kind": "formula",
+  "id": "9a9dc963-db73-44d8-90b2-dae91f611278",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "0.1\\overline{6} (0.1666…, only 6 repeating) equals which fraction?",
+  "formula": "",
+  "options": [
+   "1/6",
+   "1/5",
+   "2/15",
+   "1/7"
+  ],
+  "answer": 0,
+  "explain": "(16 − 1)/90 = 15/90 = 1/6.",
+  "kind": "result",
+  "id": "a6b834d2-8cd0-4795-886f-b3b02d31f7bc",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Recurring decimals as infinite GP"
+ },
+ {
+  "prompt": "For n AMs A₁,…,Aₙ between a and b, the ratio (Aₖ − a) : (b − Aₖ) equals?",
+  "formula": "",
+  "options": [
+   "k : (n+1−k)",
+   "k : (n−k)",
+   "(k+1) : (n−k)",
+   "k : (n+2−k)"
+  ],
+  "answer": 0,
+  "explain": "Aₖ − a = kd and b − Aₖ = (n+1−k)d, since b = a + (n+1)d.",
+  "kind": "result",
+  "id": "036e8054-d2bb-4088-8b52-14c9d92cdd41",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "n AMs between a and b: A₁ + A₂ + … + Aₙ, divided by the number of means n, equals?",
+  "formula": "",
+  "options": [
+   "(a+b)/2",
+   "(a+b)/(n+1)",
+   "n(a+b)/(n+1)",
+   "(a+b)/(n+2)"
+  ],
+  "answer": 0,
+  "explain": "Sum = n(a+b)/2, so the average of the means is (a+b)/2, the same as the mean of a and b.",
+  "kind": "result",
+  "id": "762a6880-8d9c-4e5c-bd7f-16050ddaafb6",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "In an AP, the expression (aₘ − aₙ)/(m − n) for m ≠ n equals:",
+  "formula": "",
+  "options": [
+   "d",
+   "a",
+   "(m−n)d",
+   "d/(m−n)"
+  ],
+  "answer": 0,
+  "explain": "aₘ − aₙ = (m−n)d, so the ratio is the common difference.",
+  "kind": "formula",
+  "id": "f9925359-b1c7-4e4f-b815-2ceac71aa7ae",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "In an AP, a_p = a_q for some p ≠ q. Then:",
+  "formula": "",
+  "options": [
+   "d = 0",
+   "a = 0",
+   "a = d",
+   "p + q = 1"
+  ],
+  "answer": 0,
+  "explain": "a_p − a_q = (p−q)d = 0 with p ≠ q gives d = 0 (constant AP).",
+  "kind": "concept",
+  "id": "4c425e58-119e-4019-b29d-cd8fc30756e5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "Which of these sequences is an AP?",
+  "formula": "",
+  "options": [
+   "aₙ = (n+1)² − n²",
+   "aₙ = n²",
+   "aₙ = n(n+1)",
+   "aₙ = 2ⁿ"
+  ],
+  "answer": 0,
+  "explain": "(n+1)² − n² = 2n+1 is linear in n, so d = 2; the others are not linear.",
+  "kind": "concept",
+  "id": "fe8430f5-3727-4fc0-b645-2bb336f5af5a",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "APs aₙ, bₙ have common differences d₁, d₂. The sequence aₙ − 2bₙ is an AP with common difference:",
+  "formula": "",
+  "options": [
+   "d₁ − 2d₂",
+   "d₁ − d₂",
+   "2d₁ − d₂",
+   "d₁d₂ − 2"
+  ],
+  "answer": 0,
+  "explain": "(aₙ₊₁ − 2bₙ₊₁) − (aₙ − 2bₙ) = d₁ − 2d₂.",
+  "kind": "result",
+  "id": "da0b39d7-cdde-4408-b3ce-0741849acd45",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "The points (n, aₙ) of an AP with common difference d lie on:",
+  "formula": "",
+  "options": [
+   "a straight line of slope d",
+   "a parabola with leading coefficient d",
+   "a straight line of slope a",
+   "an exponential curve"
+  ],
+  "answer": 0,
+  "explain": "aₙ = dn + (a − d) is linear in n, so the points lie on a line with slope d.",
+  "kind": "graph",
+  "id": "17c23390-7ed0-4805-856a-91b08934abba",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AP: nth term and common difference"
+ },
+ {
+  "prompt": "For an AP with common difference d, Sₙ − 2Sₙ₋₁ + Sₙ₋₂ (n ≥ 3) equals:",
+  "formula": "",
+  "options": [
+   "d",
+   "0",
+   "aₙ",
+   "2d"
+  ],
+  "answer": 0,
+  "explain": "(Sₙ−Sₙ₋₁) − (Sₙ₋₁−Sₙ₋₂) = aₙ − aₙ₋₁ = d.",
+  "kind": "result",
+  "id": "a95bbf51-1692-480e-86e8-2c9d9779c8a5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "For an AP with a < 0 and d > 0, Sₙ is least when n is:",
+  "formula": "",
+  "options": [
+   "Index of last negative (or zero) term",
+   "Index of first positive term",
+   "Index of first positive term + 1",
+   "Always n = 1"
+  ],
+  "answer": 0,
+  "explain": "Adding positive terms increases Sₙ, so the minimum comes after the last non-positive term.",
+  "kind": "concept",
+  "id": "9eb5df51-6d6f-4c91-85be-55b06e9cdfc5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of an AP"
+ },
+ {
+  "prompt": "If a², b², c² are in AP, which three quantities are in AP?",
+  "formula": "",
+  "options": [
+   "1/(b+c), 1/(c+a), 1/(a+b)",
+   "b+c, c+a, a+b",
+   "1/a, 1/b, 1/c",
+   "a³, b³, c³"
+  ],
+  "answer": 0,
+  "explain": "a²+c² = 2b² gives (a+2b+c)(a+c) = 2(a+b)(b+c), so the reciprocals are in AP.",
+  "kind": "result",
+  "id": "f5f6d08b-35f7-40c9-92e1-09bf669afc47",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a, b, c are in AP, then (a − c)² equals:",
+  "formula": "(a − c)² = (a + c)² − 4ac",
+  "options": [
+   "4(b² − ac)",
+   "4(ac − b²)",
+   "b² − 4ac",
+   "2(b² − ac)"
+  ],
+  "answer": 0,
+  "explain": "a + c = 2b, so (a − c)² = 4b² − 4ac = 4(b² − ac).",
+  "kind": "formula",
+  "id": "480857f2-350a-49d5-bedf-096db9af90ee",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "If a, b, c are in AP, then 2ᵃ, 2ᵇ, 2ᶜ are in:",
+  "formula": "",
+  "options": [
+   "AP",
+   "HP",
+   "Not in any progression",
+   "GP"
+  ],
+  "answer": 3,
+  "explain": "b − a = c − b gives 2ᵇ/2ᵃ = 2ᶜ/2ᵇ, a constant ratio.",
+  "kind": "result",
+  "id": "9e13e2f9-764d-458e-aaf0-beed1687c28d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "In an AP, if m·aₘ = n·aₙ with m ≠ n, then the (m+n)th term equals:",
+  "formula": "m·aₘ = n·aₙ ⇒ a_{m+n} = 0",
+  "options": [
+   "0",
+   "1",
+   "aₘ + aₙ",
+   "m + n"
+  ],
+  "answer": 0,
+  "explain": "(m−n)[a + (m+n−1)d] = 0, and the bracket is a_{m+n}, so it is 0.",
+  "kind": "result",
+  "id": "0cb560e7-e76e-4b4a-930f-e4fa9c5aa9da",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "a₁, a₂, … are in AP and p, q, r are in AP. Then aₚ, a_q, a_r are in:",
+  "formula": "aₙ is linear in n",
+  "options": [
+   "AP",
+   "GP",
+   "HP",
+   "None of AP, GP or HP in general"
+  ],
+  "answer": 0,
+  "explain": "aₙ = a + (n−1)d is linear in n, so equally spaced indices give equally spaced terms: an AP.",
+  "kind": "result",
+  "id": "45612109-3f18-4526-a404-5166e14b1624",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "Two integer APs with common differences d₁ and d₂ have common terms. These common terms form an AP with difference:",
+  "formula": "D = LCM(d₁, d₂)",
+  "options": [
+   "d₁ + d₂",
+   "HCF(d₁, d₂)",
+   "d₁d₂ always",
+   "LCM(d₁, d₂)"
+  ],
+  "answer": 3,
+  "explain": "Common terms recur at gaps that are multiples of both d₁ and d₂, so the first gap is LCM(d₁, d₂).",
+  "kind": "result",
+  "id": "d399fb9b-d89a-4686-8475-caf30f534e03",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Properties of AP (equidistant terms, ops)"
+ },
+ {
+  "prompt": "A GP has first term a < 0 and common ratio 0 < r < 1. The sequence is?",
+  "formula": "",
+  "options": [
+   "Increasing",
+   "Decreasing",
+   "Constant",
+   "Alternating in sign"
+  ],
+  "answer": 0,
+  "explain": "Terms are negative and shrink in magnitude toward 0, so each term is larger than the previous one.",
+  "kind": "exception",
+  "id": "2c6aca6a-a96c-4670-8869-9343b6b38c3a",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "If a, b, c are in GP, then (a − b)/(b − c) equals?",
+  "formula": "",
+  "options": [
+   "a/c",
+   "b/c",
+   "a/b",
+   "c/a"
+  ],
+  "answer": 2,
+  "explain": "Put b = ar and c = ar²: the ratio is 1/r, which equals a/b.",
+  "kind": "result",
+  "id": "062357cd-5a3d-43c4-b65c-a01d52546ed4",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "a, b, c are in AP with common difference d. Then 3ᵃ, 3ᵇ, 3ᶜ are in GP with ratio?",
+  "formula": "",
+  "options": [
+   "d³",
+   "3d",
+   "3ᵈ",
+   "d/3"
+  ],
+  "answer": 2,
+  "explain": "3ᵇ/3ᵃ = 3^(b−a) = 3ᵈ, the converse of 'log of a GP is an AP'.",
+  "kind": "concept",
+  "id": "9a5778f8-1dc6-462b-b09c-a3a6115b953c",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "For a GP with ratio r ≠ 1, the differences Tₙ₊₁ − Tₙ form a GP with common ratio?",
+  "formula": "",
+  "options": [
+   "r − 1",
+   "r",
+   "r²",
+   "1 − r"
+  ],
+  "answer": 1,
+  "explain": "Tₙ₊₁ − Tₙ = arⁿ⁻¹(r − 1), and the factor (r − 1) is constant, so the ratio stays r.",
+  "kind": "result",
+  "id": "6f02a6e6-7d25-43c4-a559-0690497cb0a5",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "GP: nth term and common ratio"
+ },
+ {
+  "prompt": "Sum of 1 + 11 + 111 + … to n terms is:",
+  "formula": "",
+  "options": [
+   "(10ⁿ⁺¹ − 9n − 10)/81",
+   "(10ⁿ⁺¹ − 9n − 10)/9",
+   "(10ⁿ − 9n − 1)/81",
+   "(10ⁿ⁺¹ − 10)/81"
+  ],
+  "answer": 0,
+  "explain": "Each term = (10ᵏ−1)/9; summing gives (10ⁿ⁺¹ − 9n − 10)/81. Check n=2: 12.",
+  "kind": "result",
+  "id": "a7695955-db92-4450-b170-4399a712320d",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "For a GP with ratio r (rⁿ ≠ 1), S₃ₙ ÷ Sₙ equals:",
+  "formula": "S₃ₙ = a(r³ⁿ−1)/(r−1)",
+  "options": [
+   "1 + rⁿ + r²ⁿ",
+   "1 + r + r²",
+   "3rⁿ",
+   "1 + rⁿ + r³ⁿ"
+  ],
+  "answer": 0,
+  "explain": "r³ⁿ−1 = (rⁿ−1)(r²ⁿ+rⁿ+1), so S₃ₙ/Sₙ = 1 + rⁿ + r²ⁿ.",
+  "kind": "result",
+  "id": "db5516d2-14a6-4a85-bccb-87e16e8e8d0b",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Sum of first n terms of a GP"
+ },
+ {
+  "prompt": "In a, A₁,…,Aₙ, b (n ≥ 8), the mean A₅ is the AM of which pair?",
+  "formula": "Aₖ = (Aₖ₋ⱼ + Aₖ₊ⱼ)/2",
+  "options": [
+   "A₃ and A₈",
+   "A₁ and A₆",
+   "A₂ and A₈",
+   "A₄ and A₇"
+  ],
+  "answer": 2,
+  "explain": "In an AP, a term is the AM of terms equidistant from it; indices 2 and 8 sum to 10 = 2·5.",
+  "kind": "concept",
+  "id": "2a662ec7-5ffc-4634-9082-a1e8ae49c458",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "For even n, where does (a+b)/2 lie among the n AMs between a and b?",
+  "formula": "",
+  "options": [
+   "It equals A_{n/2}",
+   "It equals A_{n/2+1}",
+   "Midpoint of A_{n/2} and A_{n/2+1}",
+   "It equals A_{(n+1)/2}"
+  ],
+  "answer": 2,
+  "explain": "For even n, no mean sits at the centre; (a+b)/2 lies exactly midway between the two middle means.",
+  "kind": "exception",
+  "id": "c43bb340-46da-490d-8e65-1334be4e4f48",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "In a, A₁, A₂, …, Aₙ, b (an AP), Aₖ is which term of the AP?",
+  "formula": "",
+  "options": [
+   "kth term",
+   "(k+1)th term",
+   "(k+2)th term",
+   "(n+1−k)th term"
+  ],
+  "answer": 1,
+  "explain": "a is the 1st term, so Aₖ is the (k+1)th term; this matches Aₖ = a + k·d.",
+  "kind": "fact",
+  "id": "b4f58e3d-b78e-47b7-a06f-6a90db9498e2",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "For integers a, b, all n AMs between them are integers iff which condition holds?",
+  "formula": "d = (b−a)/(n+1)",
+  "options": [
+   "(n+1) divides (b−a)",
+   "n divides (b−a)",
+   "(n+1) divides (a+b)",
+   "n divides (a+b)"
+  ],
+  "answer": 0,
+  "explain": "The means are a + kd, so they are all integers exactly when d = (b−a)/(n+1) is an integer.",
+  "kind": "concept",
+  "id": "9f60f7f3-8a53-44d7-bf23-839b10f3bdee",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "The sum of n arithmetic means inserted between −p and p equals?",
+  "formula": "n(a+b)/2 with a = −p, b = p",
+  "options": [
+   "0",
+   "np",
+   "p",
+   "2np"
+  ],
+  "answer": 0,
+  "explain": "The sum is n(a+b)/2 and a+b = 0. The means pair off symmetrically as ±.",
+  "kind": "result",
+  "id": "ecf0aeb0-9266-4acf-94d4-8772dd26b89f",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n arithmetic means"
+ },
+ {
+  "prompt": "If G₁,…,Gₙ are n GMs between a and b (a, b > 0), then G₁²,…,Gₙ² are n GMs between",
+  "formula": "",
+  "options": [
+   "a² and b²",
+   "√a and √b",
+   "2a and 2b",
+   "a² and b"
+  ],
+  "answer": 0,
+  "explain": "Squaring every term of a GP gives a GP with ratio r², and its end terms become a² and b².",
+  "kind": "concept",
+  "id": "46b84c9a-fccb-4eff-9081-0c41f2c717a1",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "Inserting n geometric means"
+ },
+ {
+  "prompt": "For all real a, b, c, the expression a² + b² + c² is always at least:",
+  "formula": "a² + b² + c² ≥ ab + bc + ca",
+  "options": [
+   "ab + bc + ca",
+   "2(ab + bc + ca)",
+   "3(ab + bc + ca)",
+   "(a + b + c)²"
+  ],
+  "answer": 0,
+  "explain": "Since ½[(a−b)² + (b−c)² + (c−a)²] ≥ 0; equality holds when a = b = c.",
+  "kind": "result",
+  "id": "80ebaaad-1d0a-46e6-a134-87c52705922f",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "The minimum value of sec²θ + cosec²θ is:",
+  "formula": "sec²θ + cosec²θ = 1/(sin²θ cos²θ)",
+  "options": [
+   "2",
+   "4",
+   "1",
+   "8"
+  ],
+  "answer": 1,
+  "explain": "sin²θ cos²θ = ¼ sin²2θ ≤ ¼, so the sum is ≥ 4 (equality at θ = π/4).",
+  "kind": "result",
+  "id": "d82329d8-9760-4f7b-9ad8-a5b359532b49",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ },
+ {
+  "prompt": "For x > 0, the maximum value of x/(1 + x²) is:",
+  "formula": "x/(1+x²) = 1/(x + 1/x)",
+  "options": [
+   "1/2",
+   "1/4",
+   "1",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "x + 1/x ≥ 2 for x > 0, so the reciprocal is ≤ 1/2, attained at x = 1.",
+  "kind": "result",
+  "id": "89f9fd7a-2b68-44c6-a9ed-02c1896d75b3",
+  "subject": "Mathematics",
+  "chapter": "Sequences & Series",
+  "topic": "AM-GM inequality and min/max problems"
+ }
+]

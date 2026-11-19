@@ -37,6 +37,7 @@ const FILTERS: [string, string][] = [["all", "All"], ["incorrect", "Incorrect"],
 const TAG_FILTERS: [string, string][] = [["careless", "Careless"], ["overtime", "Overtime"], ["confused", "Confused"]];
 const TAGGED: Record<string, string[]> = { careless: ["wasted"], overtime: ["slow_correct", "costly_overtime"], confused: ["confused"] };
 const OUT: Record<string, [string, IconName]> = { correct: [colors.success, "check"], incorrect: [colors.error, "close"], skipped: [colors.muted, "minus"], dropped: [colors.muted, "cancel"], bonus: [colors.custom_amber, "star"] };
+const LEGEND: [string, IconName, string][] = [["Correct", "check", colors.success], ["Incorrect", "close", colors.error], ["Skipped / other", "minus", colors.muted], ["Marked", "flag", colors.custom_neonAmber]];
 const CATS = [["concept_gap", "Concept gap"], ["calculation", "Calculation"], ["silly_mistake", "Silly mistake"], ["time_pressure", "Time pressure"], ["misread", "Misread"], ["guess", "Guess"], ["other", "Other"]];
 const matches = (q: any, f: string) => f === "all" || (f === "marked" ? q.marked : TAGGED[f] ? TAGGED[f].includes(q.tag) : q.outcome === f);
 // What the student was looking at in this result; a different result starts on its Analysis.
@@ -170,46 +171,70 @@ function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; ver
       {onAnalysis ? <Press testID="solution-back-to-analysis" onPress={onAnalysis} accessibilityLabel="Analysis par wapas" style={learningStyles.backLink}>
         <Icon name="arrow-left" size={16} color={colors.brandText} /><T size={13} w="heavy" color={colors.brandText}>Analysis par wapas</T>
       </Press> : null}
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }}>
-        {filters.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => matches(x, v)).length} onPress={() => setFilter(v)} color={colors.onSurface} />)}
-      </ScrollView>
-      <SubjectTabs prefix="solution-subject" questions={rows} subject={subject} onSelect={chooseSubject} />
-      <View style={learningStyles.solutionTools}>
-        <T testID="solution-subject-position" size={12} color={colors.muted} style={learningStyles.solutionPosition}>{subject} · {q ? list.findIndex(item => item.id === q.id) + 1 : 0} of {list.length}</T>
-        <Press testID="solution-grid-open" onPress={() => setGrid(true)} style={learningStyles.gridButton}><Icon name="view-grid-outline" size={18} color={colors.brandText} /><T size={12} w="bold">Question grid</T></Press>
+      {/* As on jeelive.ai: pick the subject and the number first, then read the one question below. */}
+      <View testID="solution-subject-question-panel" style={learningStyles.panelCard}>
+        <View style={learningStyles.panelHead}>
+          <T w="heavy" size={10.5} color={colors.brandText} style={learningStyles.kicker}>CHOOSE A SUBJECT</T>
+          <T size={12} color={colors.muted}><T w="mono" size={12} color={colors.onSurface}>{rows.filter((x) => subjectOf(x) === subject).length}</T> questions</T>
+        </View>
+        <SubjectTabs prefix="solution-subject" questions={rows} subject={subject} onSelect={chooseSubject} wrap />
+        <View style={learningStyles.solutionTools}>
+          <View style={learningStyles.solutionPosition}>
+            <T w="heavy" size={14}>{subject}</T>
+            <T size={11.5} color={colors.muted}>Number chuno · aur ke liye side mein scroll karo</T>
+          </View>
+          <Press testID="solution-grid-open" onPress={() => setGrid(true)} style={learningStyles.gridButton}><Icon name="view-grid-outline" size={18} color={colors.brandText} /><T size={12} w="bold">Question grid</T></Press>
+        </View>
+        {list.length ? (
+          <FlatList ref={rail} testID="solution-question-rail" horizontal showsHorizontalScrollIndicator={false} data={list} keyExtractor={(x) => x.id} contentContainerStyle={{ gap: 8, paddingRight: space.xl }}
+            getItemLayout={(_, i) => ({ length: 52, offset: 52 * i, index: i })} onScrollToIndexFailed={() => {}}
+            renderItem={({ item }) => {
+              const [c, ic] = OUT[item.outcome] || OUT.skipped;
+              const sel = item.id === q?.id;
+              return (
+                <Press testID={"solution-question-" + item.number} onPress={() => setQid(item.id)} accessibilityLabel={`Question ${item.number}, ${item.outcome}${item.marked ? ", marked" : ""}${sel ? ", selected" : ""}`}
+                  style={{ width: 44, height: 48, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: sel ? colors.onSurface : colors.custom_card, borderWidth: 2, borderColor: sel ? colors.onSurface : c }}>
+                  <T w="mono" size={14} color={sel ? colors.custom_bar : colors.onSurface}>{item.number}</T>
+                  <Icon name={item.marked ? "flag" : ic} size={11} color={sel ? colors.custom_bar : c} />
+                </Press>
+              );
+            }} />
+        ) : (
+          <Card testID="solution-empty-filter"><Empty icon="filter-off-outline" title={`No ${filter} questions in ${subject}.`} action={<Button testID="solution-show-all" kind="secondary" label="Show all questions" onPress={() => setFilter("all")} />} /></Card>
+        )}
+        <View testID="solution-legend" style={learningStyles.legend}>
+          {LEGEND.map(([label, icon, tint]) => <View key={label} style={learningStyles.legendItem}><Icon name={icon} size={13} color={tint} /><T size={11.5} color={colors.custom_softText}>{label}</T></View>)}
+        </View>
       </View>
-      {list.length ? (
-        <FlatList ref={rail} testID="solution-question-rail" horizontal showsHorizontalScrollIndicator={false} data={list} keyExtractor={(x) => x.id} contentContainerStyle={{ gap: 8, paddingRight: space.xl }}
-          getItemLayout={(_, i) => ({ length: 52, offset: 52 * i, index: i })} onScrollToIndexFailed={() => {}}
-          renderItem={({ item }) => {
-            const [c, ic] = OUT[item.outcome] || OUT.skipped;
-            const sel = item.id === q?.id;
-            return (
-              <Press testID={"solution-question-" + item.number} onPress={() => setQid(item.id)} accessibilityLabel={`Question ${item.number}, ${item.outcome}${item.marked ? ", marked" : ""}${sel ? ", selected" : ""}`}
-                style={{ width: 44, height: 48, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: sel ? colors.onSurface : colors.custom_card, borderWidth: 2, borderColor: sel ? colors.onSurface : c }}>
-                <T w="heavy" size={14} color={sel ? colors.custom_bar : colors.onSurface}>{item.number}</T>
-                <Icon name={item.marked ? "flag" : ic} size={11} color={sel ? colors.custom_bar : c} />
-              </Press>
-            );
-          }} />
-      ) : (
-        <Card testID="solution-empty-filter"><Empty icon="filter-off-outline" title={`No ${filter} questions in ${subject}.`} action={<Button testID="solution-show-all" kind="secondary" label="Show all questions" onPress={() => setFilter("all")} />} /></Card>
-      )}
+      <View style={{ gap: 4 }}>
+        <T w="heavy" size={10.5} color={colors.brandText} style={learningStyles.kicker}>UNDERSTAND THE WHY</T>
+        <T testID="solution-title" w="heavy" size={20} style={{ letterSpacing: -0.4 }}>One question. A clearer understanding.</T>
+        <T testID="solution-subject-position" size={12} color={colors.muted}>{subject} · Question {q?.number ?? "—"} · {q ? list.findIndex(item => item.id === q.id) + 1 : 0} of {list.length}</T>
+      </View>
+      <View style={learningStyles.filters}>
+        {/* Counts follow the subject in view, the same list the number rail shows. */}
+        {filters.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => subjectOf(x) === subject && matches(x, v)).length} onPress={() => setFilter(v)} color={colors.onSurface} />)}
+      </View>
       {q ? (
         <View testID="solution-card" style={{ backgroundColor: colors.custom_card, borderRadius: 22, padding: space.lg, gap: space.md, borderWidth: 1, borderColor: colors.custom_cardLine }}>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-            <T w="heavy" size={16}>Q{q.number}</T>
-            <View style={{ paddingHorizontal: 8, paddingVertical: 2, borderRadius: radius.pill, backgroundColor: (OUT[q.outcome] || OUT.skipped)[0] }}>
-              <T w="heavy" size={11} color={q.outcome === "correct" ? colors.onSuccess : q.outcome === "incorrect" ? colors.onError : colors.surface}>{q.outcome.toUpperCase()} · {q.marks > 0 ? "+" : ""}{q.marks}</T>
+          <View style={learningStyles.cardHead}>
+            <View style={{ flex: 1, minWidth: 0, gap: 1 }}>
+              <T w="heavy" size={16}>Question <T w="mono" size={16}>{q.number}</T>{q.marked ? "  " : ""}{q.marked ? <Icon name="flag" size={15} color={colors.custom_neonAmber} /> : null}</T>
+              <T size={12} color={colors.muted} numberOfLines={1}>{subjectOf(q)} · {q.type === "integer" ? "Numerical" : "Single correct"}</T>
             </View>
-            {q.marked ? <Icon name="flag" size={16} color={colors.custom_neonAmber} /> : null}
+            <View style={{ alignItems: "flex-end", gap: 3 }}>
+              <View style={{ paddingHorizontal: 9, paddingVertical: 3, borderRadius: radius.pill, backgroundColor: (OUT[q.outcome] || OUT.skipped)[0] }}>
+                <T w="heavy" size={11} color={q.outcome === "correct" ? colors.onSuccess : q.outcome === "incorrect" ? colors.onError : colors.surface}>{q.outcome.toUpperCase()}</T>
+              </View>
+              <T w="mono" size={12} color={q.marks > 0 ? colors.success : q.marks < 0 ? colors.error : colors.muted}>{q.marks > 0 ? "+" : ""}{q.marks} marks</T>
+            </View>
           </View>
           {an ? <SolutionInsight q={insight[q.id]} copy={an.copy} /> : null}
           {q.render_mode !== "source" && q.text ? <MathText testID="solution-question-text" text={q.text} /> : null}
           {imagePaths(id, q, "question", version).map((path, i) => <AssetImage key={path} testID={`solution-qimage-${q.number}-${i}`} path={path} label={`Question ${q.number}`} />)}
           <View style={{ flexDirection: "row", gap: space.sm }}>
-            <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_bar, borderWidth: 1, borderColor: colors.custom_barLine }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response || "—"}</T></View>
-            <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).join(" / ")}</T></View>
+            <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_bar, borderWidth: 1, borderColor: colors.custom_barLine }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response ? q.source_option_labels?.[q.response] || q.response : "—"}</T></View>
+            <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).map((v: string) => q.source_option_labels?.[v] || v).join(" / ")}</T></View>
           </View>
           <T w="bold" size={11} color={colors.muted} style={{ letterSpacing: 1 }}>{q.solution_kind === "answer_key_only" ? "SUPPLIED ANSWER KEY" : "SUPPLIED SOLUTION"}</T>
           {q.solution_kind === "answer_key_only" ? (
@@ -483,7 +508,14 @@ const learningStyles = StyleSheet.create({
   backLink: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6, alignSelf: "flex-start" },
   section: { gap: space.sm, borderTopWidth: 3, borderRadius: 20, paddingVertical: 20 },
   solutionTools: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: space.sm, justifyContent: "space-between" },
-  solutionPosition: { flexShrink: 1 }, gridButton: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.sm },
+  solutionPosition: { flex: 1, minWidth: 150, gap: 1 }, gridButton: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.sm },
+  panelCard: { gap: space.md, padding: space.lg, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card },
+  panelHead: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: space.sm },
+  kicker: { letterSpacing: 1.7 },
+  legend: { flexDirection: "row", flexWrap: "wrap", columnGap: 14, rowGap: 6, paddingTop: space.sm, borderTopWidth: 1, borderTopColor: colors.custom_barLine },
+  legendItem: { flexDirection: "row", alignItems: "center", gap: 4 },
+  filters: { flexDirection: "row", flexWrap: "wrap", gap: space.sm },
+  cardHead: { flexDirection: "row", alignItems: "flex-start", gap: space.sm },
   progress: { paddingHorizontal: space.lg, paddingTop: space.sm },
   modal: { flex: 1 },
 });

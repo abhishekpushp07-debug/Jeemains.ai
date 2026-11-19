@@ -7,11 +7,12 @@ import { Icon, IconName, T, tap } from "@/src/components/ui";
 import { arena, fonts, rapidSubjectColor as subjectColor } from "@/src/theme";
 import { GoldTitle, RaisedButton } from "./arena";
 import { Check } from "./parts";
-import { CatalogSubject, MAX_PICKS, PCM, Pick, SUBJECTS, cardCount, isPCM, isWhole, normalise, pickKey, scopeLabel } from "./scope";
+import { CardCountPicker } from "./CardCount";
+import { CatalogSubject, MAX_PICKS, PCM, Pick, SHORT, SUBJECTS, cardCount, isBitsat, isPCM, isWhole, normalise, pickKey, scopeLabel } from "./scope";
 
-const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant" };
-const SHORT: Record<string, string> = { Physics: "Physics", Chemistry: "Chemistry", Mathematics: "Maths" };
+const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", English: "alphabetical-variant", "Logical Reasoning": "puzzle-outline" };
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const PCM_SUBJECTS = SUBJECTS.slice(0, 3), BITSAT_ROW = SUBJECTS.slice(3);
 
 /** Toggle one pick in a list, keeping the 5-pick limit. Returns null when the limit stops it. */
 export function togglePick(picks: Pick[], pick: Pick): Pick[] | null {
@@ -22,26 +23,33 @@ export function togglePick(picks: Pick[], pick: Pick): Pick[] | null {
   return rest.length >= MAX_PICKS ? null : normalise([...rest, pick]);
 }
 
-/** The three subjects (and PCM) right on the stage: one tap adds or removes a whole subject. */
+/** The subjects (and PCM) right on the stage: one tap adds or removes a whole subject. BITSAT English and Reasoning sit on a second row. */
 export function SubjectChips({ picks, onChange, onLimit, testID = "rf-subject-chips" }: { picks: Pick[]; onChange: (p: Pick[]) => void; onLimit?: () => void; testID?: string }) {
   const pcm = isPCM(picks), roomy = useWindowDimensions().width >= 380;
-  return <View testID={testID} style={styles.chips}>
-    {SUBJECTS.map((s) => {
-      const whole = isWhole(picks, s), chapters = picks.filter((p) => p.subject === s && p.chapter).length;
-      const on = whole || chapters > 0, tint = subjectColor(s);
-      return <Pressable key={s} testID={`${testID}-${s.toLowerCase()}`} accessibilityRole="checkbox" accessibilityState={{ checked: on }} accessibilityLabel={`${SHORT[s]}${chapters ? `, ${chapters} chapters` : ""}`}
-        onPress={() => { tap(); const next = whole ? picks.filter((p) => p.subject !== s) : togglePick(picks, { subject: s, chapter: null }); if (!next) onLimit?.(); else if (next.length) onChange(next); }}
-        style={[styles.chip, styles.chipFlex, on && { borderColor: tint, backgroundColor: arena.panelHi }]}>
-        {roomy ? <Icon name={ICON[s]} size={14} color={on ? tint : arena.faint} /> : null}
-        <T w="heavy" size={roomy ? 12 : 11.5} color={on ? arena.text : arena.muted} numberOfLines={1} style={styles.shrink}>{SHORT[s]}</T>
-        {chapters && !whole ? <View style={[styles.count, { backgroundColor: tint }]}><T w="heavy" size={10} color={arena.badgeInk}>{chapters}</T></View> : null}
-        {on ? <View style={[styles.lit, { backgroundColor: tint }]} /> : null}
-      </Pressable>;
-    })}
-    <Pressable testID={`${testID}-pcm`} accessibilityRole="checkbox" accessibilityState={{ checked: pcm }} accessibilityLabel="PCM Mixed, all three subjects" onPress={() => { tap(); onChange(PCM); }} style={[styles.chip, styles.pcm, !roomy && styles.pcmNarrow, pcm && styles.pcmOn]}>
-      {roomy ? <Icon name="shuffle-variant" size={14} color={pcm ? arena.badgeInk : arena.gold} /> : null}
-      <T w="heavy" size={12} color={pcm ? arena.badgeInk : arena.gold}>PCM</T>
-    </Pressable>
+  const chip = (s: string) => {
+    const whole = isWhole(picks, s), chapters = picks.filter((p) => p.subject === s && p.chapter).length;
+    const on = whole || chapters > 0, tint = subjectColor(s);
+    return <Pressable key={s} testID={`${testID}-${slug(s)}`} accessibilityRole="checkbox" accessibilityState={{ checked: on }} accessibilityLabel={`${isBitsat(s) ? "BITSAT " : ""}${SHORT[s]}${chapters ? `, ${chapters} chapters` : ""}`}
+      onPress={() => { tap(); const next = whole ? picks.filter((p) => p.subject !== s) : togglePick(picks, { subject: s, chapter: null }); if (!next) onLimit?.(); else if (next.length) onChange(next); }}
+      style={[styles.chip, styles.chipFlex, on && { borderColor: tint, backgroundColor: arena.panelHi }]}>
+      {roomy || isBitsat(s) ? <Icon name={ICON[s]} size={14} color={on ? tint : arena.faint} /> : null}
+      <T w="heavy" size={roomy ? 12 : 11.5} color={on ? arena.text : arena.muted} numberOfLines={1} style={styles.shrink}>{SHORT[s]}</T>
+      {chapters && !whole ? <View style={[styles.count, { backgroundColor: tint }]}><T w="heavy" size={10} color={arena.badgeInk}>{chapters}</T></View> : null}
+      {on ? <View style={[styles.lit, { backgroundColor: tint }]} /> : null}
+    </Pressable>;
+  };
+  return <View testID={testID} style={styles.chipRows}>
+    <View style={styles.chips}>
+      {PCM_SUBJECTS.map(chip)}
+      <Pressable testID={`${testID}-pcm`} accessibilityRole="checkbox" accessibilityState={{ checked: pcm }} accessibilityLabel="PCM Mixed, all three subjects" onPress={() => { tap(); onChange(PCM); }} style={[styles.chip, styles.pcm, !roomy && styles.pcmNarrow, pcm && styles.pcmOn]}>
+        {roomy ? <Icon name="shuffle-variant" size={14} color={pcm ? arena.badgeInk : arena.gold} /> : null}
+        <T w="heavy" size={12} color={pcm ? arena.badgeInk : arena.gold}>PCM</T>
+      </Pressable>
+    </View>
+    <View style={styles.chips}>
+      <View style={styles.bitsat} accessibilityElementsHidden importantForAccessibility="no"><T w="heavy" size={10} color={arena.gold} style={styles.bitsatText}>BITSAT</T></View>
+      {BITSAT_ROW.map(chip)}
+    </View>
   </View>;
 }
 
@@ -89,7 +97,7 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, min = 30
       <View style={[styles.bar, { backgroundColor: tint }]} />
       <View style={styles.flex}>
         <T w="bold" size={15} color={arena.text} numberOfLines={2}>{c.name}</T>
-        <T size={11} color={arena.muted}>{whole ? `In Mixed ${SHORT[s]}` : query ? `${SHORT[s]} · ${c.count} cards` : `${c.count} cards`}</T>
+        <T size={11} color={arena.muted}>{whole ? `In Mixed ${SHORT[s]}` : !c.count ? "Cards coming soon" : query ? `${SHORT[s]} · ${c.count} cards` : `${c.count} cards`}</T>
       </View>
       <Check on={on} />
     </Pressable>;
@@ -118,20 +126,21 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, min = 30
             <T w="heavy" size={11} color={arena.muted} style={styles.label}>QUICK MIX</T>
             <View style={styles.mixes}>
               {mix("PCM Mixed", "All 3 subjects", isPCM(draft), () => { setWarn(""); setDraft(PCM); }, "rf-scope-pcm", [arena.goldDeep, "#7A1F12"], "shuffle-variant")}
-              {SUBJECTS.map((s) => mix(SHORT[s], `Mixed · ${subjects.find((x) => x.name === s)?.total ?? 0} cards`, isWhole(draft, s),
-                () => toggle({ subject: s, chapter: null }), `rf-scope-mixed-${s.toLowerCase()}`, [subjectColor(s) + "CC", arena.panelEdge], ICON[s]))}
+              {SUBJECTS.map((s) => mix(SHORT[s], `${isBitsat(s) ? "BITSAT · " : "Mixed · "}${subjects.find((x) => x.name === s)?.total ?? 0} cards`, isWhole(draft, s),
+                () => toggle({ subject: s, chapter: null }), `rf-scope-mixed-${slug(s)}`, [subjectColor(s) + "CC", arena.panelEdge], ICON[s]))}
             </View>
-            <View style={styles.tabs}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs} testID="rf-scope-tabs">
               {SUBJECTS.map((s) => {
                 const on = tab === s, n = draft.filter((p) => p.subject === s).length;
-                return <Pressable key={s} testID={`rf-scope-tab-${s.toLowerCase()}`} accessibilityRole="tab" accessibilityState={{ selected: on }} onPress={() => { tap(); setTab(s); }} style={[styles.tab, on && { backgroundColor: subjectColor(s) }]}>
+                return <Pressable key={s} testID={`rf-scope-tab-${slug(s)}`} accessibilityRole="tab" accessibilityState={{ selected: on }} onPress={() => { tap(); setTab(s); }} style={[styles.tab, on && { backgroundColor: subjectColor(s) }]}>
                   <Icon name={ICON[s]} size={15} color={on ? arena.badgeInk : arena.muted} />
                   <T w="heavy" size={12} color={on ? arena.badgeInk : arena.muted}>{SHORT[s]}</T>
                   {n ? <View style={[styles.count, { backgroundColor: on ? arena.badgeInk : subjectColor(s) }]}><T w="heavy" size={10} color={on ? arena.text : arena.badgeInk}>{n}</T></View> : null}
                 </Pressable>;
               })}
-            </View>
-            <T w="heavy" size={11} color={arena.muted} style={styles.label}>{(cur?.chapters.length ?? 0) + " CHAPTERS"}</T>
+            </ScrollView>
+            <CardCountPicker available={draft.length ? cards : undefined} testID="rf-scope-count" />
+            <T w="heavy" size={11} color={arena.muted} style={styles.label}>{(cur?.chapters.length ?? 0) + " CHAPTERS" + (isBitsat(tab) ? " · BITSAT 2026" : "")}</T>
             {(cur?.chapters || []).map((c) => row(tab, c))}
           </>}
         </ScrollView>
@@ -171,8 +180,8 @@ const styles = StyleSheet.create({
   mix: { width: "48.6%", borderRadius: 16, borderWidth: 2, borderColor: "transparent" }, mixOn: { borderColor: arena.gold },
   mixFace: { flexDirection: "row", alignItems: "center", gap: 8, minHeight: 60, paddingHorizontal: 10, borderRadius: 14, overflow: "hidden" },
   mixGloss: { position: "absolute", top: 0, left: 0, right: 0, height: "45%", backgroundColor: arena.panelGloss },
-  tabs: { flexDirection: "row", gap: 6, marginTop: 6 },
-  tab: { flex: 1, height: 44, borderRadius: 22, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: arena.panelHi },
+  tabs: { flexDirection: "row", gap: 6, marginTop: 6, paddingRight: 4 },
+  tab: { height: 44, paddingHorizontal: 14, borderRadius: 22, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, backgroundColor: arena.panelHi },
   count: { minWidth: 18, height: 18, borderRadius: 9, paddingHorizontal: 4, alignItems: "center", justifyContent: "center" },
   row: { flexDirection: "row", alignItems: "center", gap: 10, minHeight: 58, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 16, backgroundColor: arena.panelEdge, borderWidth: 1.5, borderColor: arena.rim },
   off: { opacity: 0.45 }, bar: { width: 5, height: 30, borderRadius: 3 },
@@ -181,6 +190,9 @@ const styles = StyleSheet.create({
   picked: { flexDirection: "row", alignItems: "center", gap: 4, height: 34, paddingHorizontal: 10, borderRadius: 17, borderWidth: 1.5, backgroundColor: arena.panelHi, maxWidth: 220 },
   pickedText: { flexShrink: 1 },
   chips: { flexDirection: "row", gap: 6, alignSelf: "stretch", justifyContent: "center" },
+  chipRows: { alignSelf: "stretch", gap: 6 },
+  bitsat: { minHeight: 44, paddingHorizontal: 8, borderRadius: 12, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: arena.goldDeep, borderStyle: "dashed" },
+  bitsatText: { letterSpacing: 1 },
   chip: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 4, minHeight: 44, paddingHorizontal: 9, borderRadius: 22, borderWidth: 1.5, borderColor: arena.rim, backgroundColor: arena.panelEdge, overflow: "hidden" },
   chipFlex: { flex: 1, minWidth: 0, paddingHorizontal: 5 }, shrink: { flexShrink: 1 }, pcmNarrow: { paddingHorizontal: 8 },
   lit: { position: "absolute", bottom: 0, left: "25%", right: "25%", height: 3, borderTopLeftRadius: 3, borderTopRightRadius: 3 },

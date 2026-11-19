@@ -1,0 +1,3436 @@
+[
+ {
+  "prompt": "Total area between y = sin x and the x-axis for 0 ≤ x ≤ 2π is",
+  "formula": "A = ∫|y| dx",
+  "options": [
+   "0",
+   "2",
+   "4",
+   "2π"
+  ],
+  "answer": 2,
+  "explain": "Each arch has area 2; two arches (one below the axis) give 4, while ∫ sin x dx = 0.",
+  "kind": "result",
+  "id": "ddf89428-cc6e-483e-87a0-a7848d71358b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area bounded by y = x³, the x-axis, x = −1 and x = 1 is",
+  "formula": "",
+  "options": [
+   "0",
+   "1/2",
+   "1/4",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "The curve is odd, so take the modulus: 2·∫₀¹x³dx = 2·(1/4) = 1/2, not 0.",
+  "kind": "exception",
+  "id": "56c77345-2c88-4e40-a06d-f2aae2631658",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area enclosed between y = x² − 1 and the x-axis is",
+  "formula": "",
+  "options": [
+   "2/3",
+   "4/3",
+   "8/3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "2∫₀¹(1−x²)dx = 2(1 − 1/3) = 4/3.",
+  "kind": "result",
+  "id": "6ba1e9ff-25f7-47ab-819f-fdc4b39fbd73",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = eˣ from x = −∞ to x = 0 is",
+  "formula": "∫ eˣ dx = eˣ",
+  "options": [
+   "e",
+   "1/e",
+   "∞",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "[eˣ] from −∞ to 0 = 1 − 0 = 1.",
+  "kind": "result",
+  "id": "05e00440-fe2e-4dd7-89b8-f8422a3feb0c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = tan x from x = 0 to x = π/4 is",
+  "formula": "∫ tan x dx = ln|sec x|",
+  "options": [
+   "ln 2",
+   "1",
+   "½ ln 2",
+   "π/4"
+  ],
+  "answer": 2,
+  "explain": "ln sec(π/4) = ln √2 = ½ ln 2.",
+  "kind": "result",
+  "id": "677aa94f-4989-4a2b-b5e6-aa2dfa9cb8c5",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = sin²x from x = 0 to x = π is",
+  "formula": "sin²x = (1 − cos 2x)/2",
+  "options": [
+   "π",
+   "π/4",
+   "1",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "Average value of sin²x is 1/2 over the interval of length π, so area = π/2.",
+  "kind": "result",
+  "id": "aee4de4d-f54c-444a-94ac-031a77eef989",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area between y = √(a² − x²) and the x-axis is",
+  "formula": "",
+  "options": [
+   "πa²",
+   "πa²/2",
+   "πa²/4",
+   "2πa"
+  ],
+  "answer": 1,
+  "explain": "y = √(a²−x²) is the upper semicircle of radius a, with area πa²/2.",
+  "kind": "result",
+  "id": "bcbbaf17-3efd-4ff8-8f96-787776f5a235",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area of the ellipse x²/a² + y²/b² = 1 lying in the first quadrant is",
+  "formula": "",
+  "options": [
+   "πab",
+   "πab/2",
+   "πab/4",
+   "πa²b²/4"
+  ],
+  "answer": 2,
+  "explain": "The full ellipse has area πab, so one quadrant has πab/4.",
+  "kind": "result",
+  "id": "2872d38e-dfb1-47f4-8cb4-68d7b7ad4fb8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = √x from x = 0 to x = 4 is",
+  "formula": "∫√x dx = (2/3)x^{3/2}",
+  "options": [
+   "16/3",
+   "8/3",
+   "4",
+   "32/3"
+  ],
+  "answer": 0,
+  "explain": "(2/3)·4^{3/2} = (2/3)·8 = 16/3.",
+  "kind": "result",
+  "id": "fb0b6e77-1db1-48c2-905d-181aeb38829b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = sec²x from x = 0 to x = π/4 is",
+  "formula": "∫ sec²x dx = tan x",
+  "options": [
+   "1/2",
+   "π/4",
+   "√2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "[tan x]₀^{π/4} = 1 − 0 = 1.",
+  "kind": "result",
+  "id": "79e3d417-4a20-4e6c-a1fd-dac388de2d4b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area bounded by y = cos x, the x-axis, x = 0 and x = π is",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "Two equal halves of area 1 each (one below the axis); ∫cos x dx = 0 but area = 2.",
+  "kind": "exception",
+  "id": "7a664be8-9366-46e7-a836-ead2c79ce76a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = 1/x from x = 1 to x = 2 is",
+  "formula": "∫ dx/x = ln x",
+  "options": [
+   "ln 2",
+   "1/2",
+   "2 ln 2",
+   "e²"
+  ],
+  "answer": 0,
+  "explain": "[ln x]₁² = ln 2 − ln 1 = ln 2.",
+  "kind": "result",
+  "id": "34443956-804a-4656-bcca-75c65d897d65",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area of the region bounded by y²=4ax and its latus rectum x=a is?",
+  "formula": "A = 8a²/3",
+  "options": [
+   "4a²/3",
+   "8a²/3",
+   "16a²/3",
+   "2a²/3"
+  ],
+  "answer": 1,
+  "explain": "Standard result: 2∫₀^{2a}(a − y²/4a)dy = 8a²/3.",
+  "kind": "result",
+  "id": "a9dc3ffd-6f25-447d-8ef2-21d1e4dd3ac8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas y²=4ax and x²=4by (a,b>0) is?",
+  "formula": "A = 16ab/3",
+  "options": [
+   "8ab/3",
+   "16ab/3",
+   "4ab/3",
+   "32ab/3"
+  ],
+  "answer": 1,
+  "explain": "Standard result for the two parabolas meeting at O and (4a²/b^{1/3}…); area = 16ab/3.",
+  "kind": "result",
+  "id": "729b2995-98ad-46bd-894b-d3680e57bb91",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area between y²=x and y=x is?",
+  "formula": "∫₀¹ (y − y²) dy",
+  "options": [
+   "1/3",
+   "1/2",
+   "1/6",
+   "1/12"
+  ],
+  "answer": 2,
+  "explain": "Right curve x=y, left curve x=y² on 0≤y≤1: 1/2 − 1/3 = 1/6.",
+  "kind": "result",
+  "id": "6accbfae-16c8-4d97-8163-9b48e657dc76",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "If g changes sign inside [c,d], the area between x=g(y) and the y-axis is found by?",
+  "formula": "",
+  "options": [
+   "Evaluating ∫g dy directly",
+   "Splitting at zeros of g and adding |∫| parts",
+   "Taking |∫_c^d g dy|",
+   "Doubling the integral of the positive part"
+  ],
+  "answer": 1,
+  "explain": "Signed parts cancel, so split at roots of g(y)=0 and add absolute areas.",
+  "kind": "concept",
+  "id": "97e39e54-e776-4e49-ac8a-7f59bc8a7193",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Horizontal strips are preferred over vertical ones when?",
+  "formula": "",
+  "options": [
+   "Upper boundary changes form with x",
+   "Left/right boundaries are single curves of y",
+   "The curve is symmetric about y-axis",
+   "Region lies only in first quadrant"
+  ],
+  "answer": 1,
+  "explain": "If the region's left and right boundaries are single curves x=g(y), strips along x-axis avoid splitting.",
+  "kind": "concept",
+  "id": "c5336297-1c3e-4f03-8515-94a15f481ca6",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area in the first quadrant of x²+y²=a² using x=√(a²−y²), 0≤y≤a is?",
+  "formula": "",
+  "options": [
+   "πa²",
+   "πa²/2",
+   "πa²/4",
+   "a²/2"
+  ],
+  "answer": 2,
+  "explain": "It is a quarter of the circle: πa²/4.",
+  "kind": "result",
+  "id": "eb9b50d7-d583-45a0-ad80-f4b88542285b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "For x=g(y) with g even, area between it and y-axis for −d≤y≤d equals?",
+  "formula": "",
+  "options": [
+   "∫₀^d |g| dy",
+   "2∫₀^d |g| dy",
+   "0",
+   "4∫₀^d |g| dy"
+  ],
+  "answer": 1,
+  "explain": "Symmetry about the x-axis doubles the area for 0≤y≤d.",
+  "kind": "concept",
+  "id": "68d29b42-117c-4c5b-9ffd-f5aeba70f374",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by y=ln x, the x-axis and x=e equals 1. Using strips: which integral gives it?",
+  "formula": "",
+  "options": [
+   "∫₀¹ (e − eʸ) dy",
+   "∫₀¹ (eʸ − e) dy",
+   "∫₀¹ eʸ dy",
+   "∫₁^e eʸ dy"
+  ],
+  "answer": 0,
+  "explain": "x=eʸ is left, x=e is right, for 0≤y≤1; gives e − (e−1) = 1.",
+  "kind": "concept",
+  "id": "00a24e2b-07c7-4145-88bd-4494fb769398",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area enclosed by the ellipse x²/a² + y²/b² = 1 (via horizontal strips, x = ±a√(1−y²/b²)) is?",
+  "formula": "A = 4∫₀^b a√(1−y²/b²) dy",
+  "options": [
+   "πab",
+   "π(a²+b²)/2",
+   "πa²b",
+   "2πab"
+  ],
+  "answer": 0,
+  "explain": "Strip integration gives 4·a·(πb/4) = πab.",
+  "kind": "result",
+  "id": "24386b9a-8f78-4081-bed0-816993a9783c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area between the parabola x² = y and the line y = 4 is?",
+  "formula": "∫₀⁴ 2√y dy",
+  "options": [
+   "16/3",
+   "32/3",
+   "8",
+   "64/3"
+  ],
+  "answer": 1,
+  "explain": "∫₀⁴ 2√y dy = (4/3)·8 = 32/3, which is (2/3)·base 4·height 4.",
+  "kind": "result",
+  "id": "4d021258-8123-47e7-bf28-f03c2ee34018",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by y² = x, y² = −x and the lines y = −1, y = 1 is?",
+  "formula": "∫₋₁¹ [y² − (−y²)] dy",
+  "options": [
+   "2/3",
+   "4/3",
+   "8/3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Width is 2y², so area = 2·∫₀¹ 2y² dy = 4/3.",
+  "kind": "result",
+  "id": "833848b7-7150-45e6-8931-ba7de41b1fd3",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area between x = 2y − y² and the y-axis is?",
+  "formula": "∫₀² (2y − y²) dy",
+  "options": [
+   "2/3",
+   "4/3",
+   "8/3",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "x ≥ 0 for 0≤y≤2, so area = [y² − y³/3]₀² = 4 − 8/3 = 4/3.",
+  "kind": "result",
+  "id": "207ffed6-552d-4b79-bc4d-8067a89aec78",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by y = x³, the x-axis, x = −1 and x = 1 is",
+  "formula": "2∫₀¹ x³ dx",
+  "options": [
+   "0",
+   "1/4",
+   "1/2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "∫₋₁¹ x³dx = 0, but the area is 2·(1/4) = 1/2 since both lobes count positively.",
+  "kind": "result",
+  "id": "ae5560f7-5c85-4844-8c8b-b6c9ba086037",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area between y = cos x and the x-axis from x = 0 to x = π is",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "Each half contributes 1 (above and below the axis), so the total area is 2, while ∫cos x dx = 0.",
+  "kind": "result",
+  "id": "8e2ced8c-3b8d-4ca1-99b9-9f0b6638ed22",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area of region bounded by y = x² − 1 and the x-axis is",
+  "formula": "",
+  "options": [
+   "2/3",
+   "4/3",
+   "8/3",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "The curve lies below the axis between −1 and 1: ∫₋₁¹(1−x²)dx = 2(1 − 1/3) = 4/3.",
+  "kind": "result",
+  "id": "45a49091-948f-4a6e-b4ad-dbb5a2980ab4",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area between y = sin x and the x-axis from x = 0 to x = 3π/2 is",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "0 to π gives 2; π to 3π/2 gives |−1| = 1; the total is 3 (whereas ∫ sin x dx = 1).",
+  "kind": "result",
+  "id": "64b89f3c-3558-49e3-8aee-a41e93dab970",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area bounded by y = x, the x-axis, x = −1 and x = 1 is",
+  "formula": "",
+  "options": [
+   "0",
+   "1/2",
+   "1",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "Two triangles of area 1/2 each, both counted positively; the net integral is 0.",
+  "kind": "result",
+  "id": "9bfc8ebd-fa5b-4810-8d0a-5447f6f1df76",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "f continuous, f ≢ 0, and ∫ₐᵇ f dx = 0. Then the curve y = f(x) on [a,b]",
+  "formula": "",
+  "options": [
+   "lies on the x-axis",
+   "encloses zero area",
+   "crosses the x-axis, so area = ∫|f| dx > 0",
+   "lies wholly below the x-axis"
+  ],
+  "answer": 2,
+  "explain": "Zero net integral with f ≢ 0 forces a sign change; area ∫|f| is positive.",
+  "kind": "concept",
+  "id": "cbb9d9e4-2cc6-44e5-9b7f-77d47a8d0dc9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area between y = cos x and the x-axis from x = 0 to x = 2π is",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "4",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "Four arcs of area 1 each: 4∫₀^{π/2} cos x dx = 4.",
+  "kind": "result",
+  "id": "cd07a7e7-0a1a-4d09-9272-6e5ed34af397",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area bounded by x = f(y), the y-axis, y = c and y = d (c<d) is",
+  "formula": "A = ∫_c^d |f(y)| dy",
+  "options": [
+   "∫_c^d |f(x)| dx",
+   "∫_c^d f(y) dy always",
+   "∫_c^d |f(y)| dy",
+   "∫_c^d y|f(y)| dy"
+  ],
+  "answer": 2,
+  "explain": "Strips are horizontal; the part left of the y-axis (f<0) is counted with |f|.",
+  "kind": "formula",
+  "id": "288f62a6-13fd-4dee-bdd6-b815a711033d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area bounded by y = tan x, the x-axis, x = −π/4 and x = π/4 is",
+  "formula": "",
+  "options": [
+   "0",
+   "ln 2",
+   "½ ln 2",
+   "2 ln 2"
+  ],
+  "answer": 1,
+  "explain": "tan x is odd, so net ∫ = 0, but area = 2∫₀^{π/4} tan x dx = 2·½ ln 2 = ln 2.",
+  "kind": "result",
+  "id": "0a6c5912-11d8-49a2-8e7b-8b8f2f60867c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area bounded by y = ln x, the x-axis and x = 1/e, x = e is",
+  "formula": "",
+  "options": [
+   "2 − 2/e",
+   "2",
+   "1 − 1/e",
+   "2/e"
+  ],
+  "answer": 0,
+  "explain": "∫|ln x| = ∫_{1/e}^1(−ln x)dx + ∫_1^e ln x dx = 1 + (1 − 1/e)... equals 2 − 2/e.",
+  "kind": "result",
+  "id": "5e6605da-e371-4a0c-983d-094a63f8557d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area of a parabolic segment cut off by a chord equals what fraction of the inscribed triangle on that chord?",
+  "formula": "Archimedes: segment = (4/3)·triangle",
+  "options": [
+   "4/3 of the triangle",
+   "3/2 of the triangle",
+   "2/3 of the triangle",
+   "3/4 of the triangle"
+  ],
+  "answer": 0,
+  "explain": "Triangle has the same base and apex where the tangent is parallel to the chord; segment = 4/3 of it.",
+  "kind": "result",
+  "id": "7e228578-66a1-4121-8b05-e85e35e20996",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area between y = ax²+bx+c and a line meeting it at x = α, β (α<β) is",
+  "formula": "A = |a|(β−α)³/6",
+  "options": [
+   "|a|(β−α)³/3",
+   "|a|(β−α)²/6",
+   "|a|(β−α)³/6",
+   "|a|(β−α)²/2"
+  ],
+  "answer": 2,
+  "explain": "Integrating |a|(x−α)(β−x) from α to β gives |a|(β−α)³/6.",
+  "kind": "formula",
+  "id": "71d42203-d3c0-4285-b90a-f77bf0f61586",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area between y² = 4ax and the line y = mx (m>0) is",
+  "formula": "A = 8a²/(3m³)",
+  "options": [
+   "8a²/(3m²)",
+   "8a²/(3m³)",
+   "4a²/(3m³)",
+   "8a²/(3m)"
+  ],
+  "answer": 1,
+  "explain": "They meet at x = 0 and 4a/m²; integrating gives 8a²/(3m³).",
+  "kind": "formula",
+  "id": "ec5d01e0-3f75-404f-95af-05fdb909d98d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed by y² = 4x and the line y = 2x is",
+  "formula": "8a²/(3m³), a=1, m=2",
+  "options": [
+   "1/3",
+   "2/3",
+   "4/3",
+   "8/3"
+  ],
+  "answer": 0,
+  "explain": "Using 8a²/(3m³) = 8/24 = 1/3; the curves meet at x = 0 and x = 1.",
+  "kind": "result",
+  "id": "ceb26a42-d2ab-409f-bc3e-766ba0bcfac3",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed by y = x² and the line y = x + 2 is",
+  "formula": "|a|(β−α)³/6 with α=−1, β=2",
+  "options": [
+   "9/2",
+   "7/2",
+   "27/2",
+   "9/4"
+  ],
+  "answer": 0,
+  "explain": "x² = x+2 gives x = −1, 2, so area = 3³/6 = 9/2.",
+  "kind": "result",
+  "id": "4abff786-f545-4ba0-9b80-fa673067a46d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by y = 4x − x² and the x-axis is",
+  "formula": "|a|(β−α)³/6 with α=0, β=4",
+  "options": [
+   "16/3",
+   "64/3",
+   "32/3",
+   "8/3"
+  ],
+  "answer": 2,
+  "explain": "Roots are 0 and 4, so area = 4³/6 = 32/3.",
+  "kind": "result",
+  "id": "4d581347-f0ed-4865-a666-3f8f0f9944ff",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Total area enclosed by y = x² and y = |x| is",
+  "formula": "",
+  "options": [
+   "1/6",
+   "1/3",
+   "2/3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "The region is symmetric about the y-axis, so area = 2 × 1/6 = 1/3.",
+  "kind": "result",
+  "id": "b2e36241-88d2-48be-a207-dbf324213fa0",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area in the first quadrant under y² = 4ax from x = 0 to x = a is",
+  "formula": "∫₀ᵃ 2√a·√x dx",
+  "options": [
+   "2a²/3",
+   "4a²/3",
+   "8a²/3",
+   "a²"
+  ],
+  "answer": 1,
+  "explain": "2√a·(2/3)a^(3/2) = 4a²/3, which is half the latus rectum area.",
+  "kind": "result",
+  "id": "0d7a1c63-c038-4a1c-9405-d04f3ff75bc3",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Among all focal chords of y² = 4ax, the parabola-segment area is least for which chord?",
+  "formula": "",
+  "options": [
+   "Chord at 45° to the axis",
+   "Latus rectum",
+   "Chord through the vertex",
+   "Chord with t = 1"
+  ],
+  "answer": 1,
+  "explain": "Segment area = (8a²/3)(1+t²)^(3/2), minimum at t = 0, the latus rectum.",
+  "kind": "fact",
+  "id": "da8b3845-c2d0-41cb-add0-70c335210100",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by y² = 4x and the line x = 4 is",
+  "formula": "(2/3)·base·height",
+  "options": [
+   "32/3",
+   "16/3",
+   "64/3",
+   "128/3"
+  ],
+  "answer": 2,
+  "explain": "Base 8 (y from −4 to 4), height 4: (2/3)(8)(4) = 64/3.",
+  "kind": "result",
+  "id": "a7e17c92-5beb-4618-9a46-8b8b0e86616c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed by y = x² and the line y = 1 is",
+  "formula": "|a|(β−α)³/6 with α=−1, β=1",
+  "options": [
+   "2/3",
+   "4/3",
+   "8/3",
+   "1/3"
+  ],
+  "answer": 1,
+  "explain": "Intersections at x = ±1, so area = 2³/6 = 4/3.",
+  "kind": "result",
+  "id": "d7f78e70-e7b8-40f8-801e-8e3c28b2eeb1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area between y = x² and the line y = mx (m>0) is",
+  "formula": "m³/6",
+  "options": [
+   "m²/6",
+   "m³/3",
+   "m³/6",
+   "m³/2"
+  ],
+  "answer": 2,
+  "explain": "They meet at x = 0 and m, so area = m³/6; e.g. m = 6 gives 36.",
+  "kind": "formula",
+  "id": "da66c91d-e48c-4638-baf3-6614cb5e1588",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by y = x², the x-axis and the line x = 2 is",
+  "formula": "∫₀² x² dx",
+  "options": [
+   "4/3",
+   "8/3",
+   "4",
+   "16/3"
+  ],
+  "answer": 1,
+  "explain": "∫₀² x² dx = 2³/3 = 8/3.",
+  "kind": "result",
+  "id": "ec83ed59-69d4-4e00-9684-69a85766c357",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed between y² = 4ax and x² = 4ay (a > 0) is",
+  "formula": "16a²/3",
+  "options": [
+   "16a²/3",
+   "8a²/3",
+   "32a²/3",
+   "4a²/3"
+  ],
+  "answer": 0,
+  "explain": "Standard result: ∫₀^{4a}(2√(ax) − x²/4a)dx = 16a²/3.",
+  "kind": "result",
+  "id": "4ac35d0e-ec48-4e87-93ff-7f49d934421a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between y² = x and x² = 8y is",
+  "formula": "16ab/3 with 4a = 1, 4b = 8",
+  "options": [
+   "8/3",
+   "16/3",
+   "4/3",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "a = 1/4, b = 2, so area = 16·(1/4)·2/3 = 8/3.",
+  "kind": "result",
+  "id": "b63702d8-ca73-4478-b060-a752160bd706",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = x² and y = 2 − x² is",
+  "formula": "",
+  "options": [
+   "8/3",
+   "4/3",
+   "16/3",
+   "2/3"
+  ],
+  "answer": 0,
+  "explain": "They meet at x = ±1, so area = ∫₋₁¹(2 − 2x²)dx = 8/3.",
+  "kind": "result",
+  "id": "797ba3fe-e7ff-422f-8491-338fe870905c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "If both a and b are doubled, the area 16ab/3 between y²=4ax and x²=4by becomes",
+  "formula": "",
+  "options": [
+   "4 times",
+   "2 times",
+   "8 times",
+   "unchanged"
+  ],
+  "answer": 0,
+  "explain": "Area ∝ ab, so doubling both multiplies it by 4.",
+  "kind": "concept",
+  "id": "a24f3b85-10d1-4a36-b772-be39788014d0",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area under y² = 4ax (first quadrant) from x = 0 to x = 4a is",
+  "formula": "∫₀^{4a} 2√(ax) dx",
+  "options": [
+   "32a²/3",
+   "16a²/3",
+   "8a²/3",
+   "64a²/3"
+  ],
+  "answer": 0,
+  "explain": "2√a·(2/3)(4a)^{3/2} = 32a²/3.",
+  "kind": "result",
+  "id": "32b63e55-1816-465f-887b-b7f49af661a1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area under x² = 4ay from x = 0 to x = 4a (above x-axis) is",
+  "formula": "∫₀^{4a} x²/(4a) dx",
+  "options": [
+   "16a²/3",
+   "32a²/3",
+   "8a²/3",
+   "64a²/3"
+  ],
+  "answer": 0,
+  "explain": "(4a)³/(12a) = 16a²/3; so 32a²/3 − 16a²/3 gives the area between parabolas.",
+  "kind": "result",
+  "id": "304652a6-7952-4893-bd45-6ce8706209e8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area bounded by y² = 4ax and its latus rectum x = a is",
+  "formula": "",
+  "options": [
+   "8a²/3",
+   "4a²/3",
+   "16a²/3",
+   "2a²/3"
+  ],
+  "answer": 0,
+  "explain": "2∫₀^a 2√(ax)dx = 4√a·(2/3)a^{3/2} = 8a²/3.",
+  "kind": "result",
+  "id": "906b5365-08bd-4c28-a903-2f0bb73a7590",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "For y² = 4ax and x² = 4by, the nonzero intersection has x equal to",
+  "formula": "",
+  "options": [
+   "4(ab²)^{1/3}",
+   "4(a²b)^{1/3}",
+   "(ab)^{1/3}",
+   "4(ab)^{1/2}"
+  ],
+  "answer": 0,
+  "explain": "Substituting y = x²/4b: x³ = 64ab², so x = 4(ab²)^{1/3}.",
+  "kind": "formula",
+  "id": "91dc7c69-d283-4bcf-b4a9-2d024d8cb79c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between parabola y² = 4ax and line y = mx (m > 0) is",
+  "formula": "",
+  "options": [
+   "8a²/(3m³)",
+   "8a²/(3m²)",
+   "16a²/(3m³)",
+   "8a²m/3"
+  ],
+  "answer": 0,
+  "explain": "Meets at x = 4a/m²; area = 32a²/(3m³) − 8a²/m³ = 8a²/(3m³).",
+  "kind": "formula",
+  "id": "598c7569-9b93-4d58-ba96-be75b730e704",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = x² and y = |x| is",
+  "formula": "",
+  "options": [
+   "1/3",
+   "1/6",
+   "2/3",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "2∫₀¹(x − x²)dx = 2(1/2 − 1/3) = 1/3.",
+  "kind": "result",
+  "id": "1be2a1c8-cc09-441e-a03d-ca9f888a46b4",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y² = 6x and x² = 6y is",
+  "formula": "y² = kx, x² = ky ⇒ area = k²/3",
+  "options": [
+   "6",
+   "12",
+   "18",
+   "36"
+  ],
+  "answer": 1,
+  "explain": "For y²=kx and x²=ky the area is k²/3 = 36/3 = 12.",
+  "kind": "result",
+  "id": "b1b9a89e-5eac-4659-90c8-dbd0b6b74ca7",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "For y² = 4ax and x² = 4ay, the line y = x cuts the enclosed region into parts with area ratio",
+  "formula": "",
+  "options": [
+   "1 : 2",
+   "1 : 1",
+   "2 : 3",
+   "1 : 3"
+  ],
+  "answer": 1,
+  "explain": "The curves are mirror images in y = x, so the line halves the area (each half 8a²/3).",
+  "kind": "concept",
+  "id": "df3c1b84-89e7-4d47-9a41-74ac85064e9e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between x² = 4ay and the chord y = x (from O to (4a, 4a)) is",
+  "formula": "∫₀^{4a}(x − x²/4a)dx",
+  "options": [
+   "16a²/3",
+   "4a²/3",
+   "8a²/3",
+   "32a²/3"
+  ],
+  "answer": 2,
+  "explain": "It is half of 16a²/3, since y = x splits the common region symmetrically.",
+  "kind": "result",
+  "id": "3cbeccd2-7bb4-4bf2-bcd3-f5c5901ce173",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area of the smaller region cut from x²+y²=a² by the line x+y=a is",
+  "formula": "",
+  "options": [
+   "a²(π−2)/4",
+   "a²(π−1)/2",
+   "πa²/4",
+   "a²(π−2)/2"
+  ],
+  "answer": 0,
+  "explain": "Quarter circle πa²/4 minus right triangle a²/2 gives a²(π−2)/4.",
+  "kind": "result",
+  "id": "ed6a06cf-0bd4-4067-bddf-5e54e31a4e64",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions"
+ },
+ {
+  "prompt": "Area enclosed by the circle x²+y²=2ax (a>0) is",
+  "formula": "",
+  "options": [
+   "πa²",
+   "2πa²",
+   "πa²/2",
+   "4πa²"
+  ],
+  "answer": 0,
+  "explain": "(x−a)²+y²=a², so radius a and area πa².",
+  "kind": "fact",
+  "id": "53037926-41ad-4f59-a836-9eed14afb63c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions"
+ },
+ {
+  "prompt": "Area enclosed by the circle x²+y²−6x=0 is",
+  "formula": "",
+  "options": [
+   "9π",
+   "3π",
+   "6π",
+   "36π"
+  ],
+  "answer": 0,
+  "explain": "(x−3)²+y²=9 has r=3, so the area is 9π.",
+  "kind": "result",
+  "id": "e98ce50e-5fef-401f-bbee-7d018594f551",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions"
+ },
+ {
+  "prompt": "Area in the first quadrant bounded by y=x, y=0 and x²+y²=a² is",
+  "formula": "",
+  "options": [
+   "πa²/8",
+   "πa²/4",
+   "πa²/16",
+   "a²/2"
+  ],
+  "answer": 0,
+  "explain": "y=x cuts a 45° sector, which is 1/8 of the circle: πa²/8.",
+  "kind": "result",
+  "id": "ced73f2d-69df-4eb2-a5fa-d4048c8b79bc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions"
+ },
+ {
+  "prompt": "Area between the circles x²+y²=4 and x²+y²=1 is",
+  "formula": "",
+  "options": [
+   "3π",
+   "π",
+   "5π",
+   "4π"
+  ],
+  "answer": 0,
+  "explain": "Annulus area = π(4−1) = 3π.",
+  "kind": "result",
+  "id": "d3c4f352-679e-442a-9650-1181099f1217",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions"
+ },
+ {
+  "prompt": "Area inside x²+y²=a² but outside |x|+|y|=a is",
+  "formula": "",
+  "options": [
+   "(π−2)a²",
+   "(π−1)a²",
+   "πa²−a²/2",
+   "(π−4)a²"
+  ],
+  "answer": 0,
+  "explain": "The square |x|+|y|≤a has area 2a², so the area is πa²−2a² = (π−2)a².",
+  "kind": "result",
+  "id": "e2544f26-531f-4c36-987e-72b9a95962bd",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions"
+ },
+ {
+  "prompt": "Area of the region inside x²+y²=a² with y ≥ |x| is",
+  "formula": "",
+  "options": [
+   "πa²/4",
+   "πa²/2",
+   "πa²/8",
+   "a²/2"
+  ],
+  "answer": 0,
+  "explain": "y ≥ |x| is the 90° sector between y=x and y=−x, a quarter of the circle: πa²/4.",
+  "kind": "result",
+  "id": "9a88ccac-d784-4927-a95d-beddedaffc7e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of circle and circle-line regions"
+ },
+ {
+  "prompt": "Area of the part of x²/a² + y²/b² = 1 lying in the first quadrant is:",
+  "formula": "",
+  "options": [
+   "πab/4",
+   "πab/2",
+   "πab/3",
+   "πab/8"
+  ],
+  "answer": 0,
+  "explain": "The ellipse is symmetric about both axes, so one quadrant is ¼ of πab.",
+  "kind": "formula",
+  "id": "d91685ef-0e92-457a-9c38-df7d26cd1ce6",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area of the ellipse x²/a² + y²/b² = 1 lying above the x-axis is:",
+  "formula": "",
+  "options": [
+   "πab/2",
+   "πab/4",
+   "πab",
+   "πa²/2"
+  ],
+  "answer": 0,
+  "explain": "The upper half is y = b√(1−x²/a²) over [−a, a], giving half of πab.",
+  "kind": "formula",
+  "id": "86857720-b317-413c-a2bb-15751ff24845",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area between ellipse x²/a²+y²/b²=1 and its auxiliary circle x²+y²=a² (a>b) is:",
+  "formula": "π a (a − b)",
+  "options": [
+   "πa(a − b)",
+   "πb(a − b)",
+   "π(a² − b²)",
+   "πab"
+  ],
+  "answer": 0,
+  "explain": "πa² − πab = πa(a − b).",
+  "kind": "result",
+  "id": "e1dec6b1-249d-4f37-9aa0-8298e8eec940",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "For ellipse x²/a²+y²/b²=1 (a>b), area of ellipse : area of auxiliary circle equals:",
+  "formula": "πab : πa² = b : a",
+  "options": [
+   "b : a",
+   "a : b",
+   "b² : a²",
+   "a² : b²"
+  ],
+  "answer": 0,
+  "explain": "Each ordinate of the circle is scaled by b/a, so the area is scaled by b/a.",
+  "kind": "result",
+  "id": "45b61eff-b1bb-4ff5-ba1a-7d952b648c3c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Smaller area cut off from x²/a²+y²/b²=1 by the line x/a + y/b = 1 is:",
+  "formula": "πab/4 − ab/2",
+  "options": [
+   "ab(π − 2)/4",
+   "ab(π − 1)/4",
+   "ab(π − 2)/2",
+   "πab/4 + ab/2"
+  ],
+  "answer": 0,
+  "explain": "Quarter ellipse minus the triangle with legs a and b: πab/4 − ab/2.",
+  "kind": "result",
+  "id": "db74d536-97b8-433d-a2df-1c064804aede",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area between the ellipse x²/a²+y²/b²=1 (a>b) and its inner circle x²+y²=b² is:",
+  "formula": "πab − πb²",
+  "options": [
+   "πb(a − b)",
+   "πa(a − b)",
+   "π(a − b)²",
+   "πab"
+  ],
+  "answer": 0,
+  "explain": "Ellipse area πab minus circle area πb² = πb(a − b).",
+  "kind": "result",
+  "id": "7f8e4f1b-0b6e-4a87-a80d-c488a5e375bf",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area inside x²/a²+y²/b²=1 but outside the rhombus joining its four vertices is:",
+  "formula": "πab − 2ab",
+  "options": [
+   "ab(π − 2)",
+   "ab(π − 1)",
+   "ab(π − 4)",
+   "πab/2"
+  ],
+  "answer": 0,
+  "explain": "The rhombus has area ½·2a·2b = 2ab, so the difference is ab(π − 2).",
+  "kind": "result",
+  "id": "5a0dc6d2-d892-4f5f-82e9-bc03fed61ebd",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "If a → 2a and b → 3b in the ellipse x²/a²+y²/b²=1, its area becomes how many times?",
+  "formula": "",
+  "options": [
+   "6",
+   "5",
+   "12",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "Area πab becomes π(2a)(3b) = 6πab.",
+  "kind": "concept",
+  "id": "2e5bb3fd-d144-478f-a1f9-5fa0200a5bba",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "The largest rectangle with sides parallel to the axes inscribed in x²/a²+y²/b²=1 has area:",
+  "formula": "vertex (a cosθ, b sinθ): 2ab sin2θ",
+  "options": [
+   "2ab",
+   "ab",
+   "4ab",
+   "πab/2"
+  ],
+  "answer": 0,
+  "explain": "Area = 4ab sinθ cosθ = 2ab sin2θ, with maximum 2ab.",
+  "kind": "result",
+  "id": "e2bfd6f5-f040-4f86-b504-995b68cd7341",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area between ellipse x²/a²+y²/b²=1 and its circumscribed rectangle (sides parallel to axes) is:",
+  "formula": "4ab − πab",
+  "options": [
+   "ab(4 − π)",
+   "ab(π − 2)",
+   "πab/4",
+   "ab(4 − π)/4"
+  ],
+  "answer": 0,
+  "explain": "The rectangle has area 2a·2b = 4ab and the ellipse has area πab, so the difference is ab(4 − π).",
+  "kind": "result",
+  "id": "479a38cc-267a-47d9-b661-b0db19c439fe",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area enclosed by the ellipse x²/a² + y²/b² = 1 (4 × first-quadrant area) is:",
+  "formula": "A = 4∫₀ᵃ y dx",
+  "options": [
+   "πab",
+   "2πab",
+   "πab/2",
+   "π(a²+b²)/2"
+  ],
+  "answer": 0,
+  "explain": "The ellipse is symmetric about both axes, so A = 4 × (πab/4) = πab.",
+  "kind": "result",
+  "id": "141dba2b-75c3-48b3-aa42-d9e9d4143151",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area enclosed by |x| + |y| = a is:",
+  "formula": "4 × ½·a·a",
+  "options": [
+   "a²",
+   "2a²",
+   "4a²",
+   "a²/2"
+  ],
+  "answer": 1,
+  "explain": "A square with diagonals 2a, so area = ½(2a)(2a) = 2a² (4 congruent triangles of area a²/2).",
+  "kind": "result",
+  "id": "d52eb850-713d-4c7b-8c0d-054166708d40",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area bounded by y² = 4ax and its latus rectum x = a is:",
+  "formula": "2∫₀ᵃ 2√(ax) dx",
+  "options": [
+   "4a²/3",
+   "8a²/3",
+   "16a²/3",
+   "2a²/3"
+  ],
+  "answer": 1,
+  "explain": "Symmetric about the x-axis: A = 2∫₀ᵃ 2√a·√x dx = 8a²/3.",
+  "kind": "result",
+  "id": "3f0e0433-67ae-43d5-a884-1a4546e6d4be",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area between y² = 4ax and x² = 4ay is:",
+  "formula": "",
+  "options": [
+   "8a²/3",
+   "4a²/3",
+   "16a²/3",
+   "a²/3"
+  ],
+  "answer": 2,
+  "explain": "The standard result is 16a²/3. The curves are symmetric about y = x and meet at (0,0) and (4a,4a).",
+  "kind": "result",
+  "id": "56b7dd03-d872-474b-930f-bafd97b4c1d8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Total area bounded by y = sin x and the x-axis from x = 0 to x = 2π is:",
+  "formula": "2∫₀^π sin x dx",
+  "options": [
+   "0",
+   "2",
+   "4",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "By symmetry the two arches are equal (each is 2), so the area is 4. The integral ∫₀^{2π} sin x dx = 0 gives net area, not area.",
+  "kind": "concept",
+  "id": "7be420fc-dc90-47eb-a0d1-5e26fd13a978",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area enclosed by the circle x² + y² = 2ax is:",
+  "formula": "(x − a)² + y² = a²",
+  "options": [
+   "2πa²",
+   "πa²",
+   "πa²/2",
+   "4πa²"
+  ],
+  "answer": 1,
+  "explain": "Completing the square gives a circle of radius a, so its area is πa².",
+  "kind": "fact",
+  "id": "f4865b94-be73-422e-a128-519c18aa0060",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "For an even function f, the area bounded by y = f(x), the x-axis, x = −a and x = a (f ≥ 0) equals:",
+  "formula": "",
+  "options": [
+   "2∫₀ᵃ f(x) dx",
+   "0",
+   "∫₀ᵃ f(x) dx",
+   "½∫₀ᵃ f(x) dx"
+  ],
+  "answer": 0,
+  "explain": "Even f is symmetric about the y-axis, so the area is twice the area over [0, a].",
+  "kind": "concept",
+  "id": "2e0df7be-f801-427a-8f20-30819a44d0b2",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "For increasing f meeting f⁻¹ only on y = x, area between y=f(x) and y=f⁻¹(x) equals?",
+  "formula": "",
+  "options": [
+   "2 × area between f(x) and y = x",
+   "Area between f(x) and the x-axis",
+   "Half the area between f(x) and y = x",
+   "Area between f(x) and f⁻¹ on the y-axis"
+  ],
+  "answer": 0,
+  "explain": "The graphs are mirror images in y = x, so the region splits into two equal halves about that line.",
+  "kind": "concept",
+  "id": "fdffe80d-f890-4ad9-b527-3a4112a94f65",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "Area in the first quadrant between y = x³ and its inverse y = x^(1/3) is?",
+  "formula": "∫₀¹ (x^(1/3) − x³) dx",
+  "options": [
+   "1/4",
+   "1/2",
+   "3/4",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Curves meet at x=0,1; area = 3/4 − 1/4 = 1/2.",
+  "kind": "result",
+  "id": "02ec6a20-64df-4d9d-86d8-7c2715d9eff1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "Area in the first quadrant between y = x⁴ and its inverse curve y = x^(1/4) is?",
+  "formula": "A = ∫₀¹ (x^(1/n) − xⁿ) dx = (n−1)/(n+1)",
+  "options": [
+   "3/5",
+   "1/5",
+   "3/4",
+   "2/5"
+  ],
+  "answer": 0,
+  "explain": "Curves meet at x=0,1: A = 4/5 − 1/5 = 3/5, which matches (n−1)/(n+1) with n=4.",
+  "kind": "result",
+  "id": "3ce0f204-5978-4e76-b003-490a90bc6449",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "In a horizontal-strip integral ∫ (x_right − x_left) dy, the limits are which values?",
+  "formula": "",
+  "options": [
+   "x-coordinates of the intersection points",
+   "y-coordinates of the lowest and highest points",
+   "Slopes at the intersection points",
+   "Always 0 and the maximum x-value"
+  ],
+  "answer": 1,
+  "explain": "The strip moves along the y-axis, so limits are y-values of the region.",
+  "kind": "concept",
+  "id": "9c278b1f-ba23-475a-8b6c-c7c651b6f2e8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by x = y², the y-axis and the lines y=1, y=2 is?",
+  "formula": "∫₁² y² dy",
+  "options": [
+   "7/3",
+   "8/3",
+   "3",
+   "5/3"
+  ],
+  "answer": 0,
+  "explain": "∫₁² y² dy = (8 − 1)/3 = 7/3.",
+  "kind": "result",
+  "id": "46154e21-f007-4077-a03d-973db7eea7a1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by x = sin y, the y-axis and 0 ≤ y ≤ π is?",
+  "formula": "∫₀^π sin y dy",
+  "options": [
+   "1",
+   "π",
+   "2",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "sin y ≥ 0 on [0,π], so area = [−cos y]₀^π = 2.",
+  "kind": "result",
+  "id": "5c182b61-bb1b-471f-a6a4-01b1a5c9c518",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area between y² = 4x and y = 2x − 4 is?",
+  "formula": "",
+  "options": [
+   "9",
+   "18",
+   "27/2",
+   "9/2"
+  ],
+  "answer": 0,
+  "explain": "Intersect at y = −2, 4; ∫₋₂⁴ [(y+4)/2 − y²/4] dy = 9.",
+  "kind": "result",
+  "id": "6026da26-b42c-48b7-a84d-676645a3831c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area between x = ay²+by+c and a chord line meeting it at y=y₁, y₂ is?",
+  "formula": "|a|(y₂ − y₁)³ / 6",
+  "options": [
+   "|a|(y₂ − y₁)³ / 3",
+   "|a|(y₂ − y₁)² / 6",
+   "|a|(y₂ − y₁)³ / 6",
+   "2|a|(y₂ − y₁)³ / 3"
+  ],
+  "answer": 2,
+  "explain": "Standard parabola–chord result with horizontal axis roles swapped to y.",
+  "kind": "formula",
+  "id": "19e36ac5-4534-4dbc-b4a5-13409ae81480",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by y = √x, the y-axis and the line y = 2 is?",
+  "formula": "x = y²",
+  "options": [
+   "4/3",
+   "8/3",
+   "2√2",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Rewrite x = y²; area = ∫₀² y² dy = 8/3.",
+  "kind": "result",
+  "id": "f0466e35-f9b1-474b-995d-47755c6b861f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by xy = 1, the y-axis and the lines y=1, y=e is?",
+  "formula": "∫₁ᵉ dy/y",
+  "options": [
+   "e − 1",
+   "1/e",
+   "ln 2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "x = 1/y, so area = [ln y]₁ᵉ = 1.",
+  "kind": "result",
+  "id": "8daafa40-3059-45f4-9877-54247715e819",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area in first quadrant bounded by y = x², the y-axis and y = 4 is?",
+  "formula": "∫₀⁴ √y dy",
+  "options": [
+   "8/3",
+   "16/3",
+   "32/3",
+   "64/3"
+  ],
+  "answer": 1,
+  "explain": "x = √y; ∫₀⁴ √y dy = (2/3)·8 = 16/3.",
+  "kind": "result",
+  "id": "273891f4-1e75-4b1b-81b6-0568d3d962bf",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas y² = 4ax and x² = 4ay is",
+  "formula": "",
+  "options": [
+   "16a²/3",
+   "8a²/3",
+   "4a²/3",
+   "a²/3"
+  ],
+  "answer": 0,
+  "explain": "Standard result: the common area of y² = 4ax and x² = 4ay is 16a²/3.",
+  "kind": "result",
+  "id": "9789d0d8-3bbf-40a4-a667-bd56c9c9b202",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "The line y = x divides the area between y² = 4ax and x² = 4ay in the ratio",
+  "formula": "",
+  "options": [
+   "1 : 1",
+   "1 : 2",
+   "2 : 3",
+   "1 : 3"
+  ],
+  "answer": 0,
+  "explain": "Both curves are mirror images in y = x, so the line splits the region equally.",
+  "kind": "concept",
+  "id": "5346aada-cdc6-4f94-a393-c152a505b9ba",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by y = x², its tangent at (1,1) and the x-axis is",
+  "formula": "",
+  "options": [
+   "1/12",
+   "1/6",
+   "1/4",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "Under the parabola 1/3 minus the triangle 1/4 (tangent meets the axis at x = ½) gives 1/12.",
+  "kind": "result",
+  "id": "1512574e-53c5-45da-8df4-71201b445b52",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by y = x², its tangent at (1,1) and the y-axis is",
+  "formula": "",
+  "options": [
+   "1/3",
+   "1/12",
+   "1/6",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "The tangent is y = 2x − 1, so the area is ∫₀¹(x − 1)²dx = 1/3.",
+  "kind": "result",
+  "id": "26463327-6e46-4c08-bd87-80c0ae02bb37",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "A parabolic segment's area is what fraction of the triangle formed by its chord and the end tangents?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "1/2",
+   "3/4",
+   "4/3"
+  ],
+  "answer": 0,
+  "explain": "For y = x², chord y = 1: segment 4/3, tangent triangle 2, so the ratio is 2/3.",
+  "kind": "concept",
+  "id": "bd167fa7-d83d-4f59-b667-329c4e061a2c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area of y² = 4ax cut off by the double ordinate x = h, as a fraction of its circumscribing rectangle",
+  "formula": "",
+  "options": [
+   "2/3",
+   "1/2",
+   "3/4",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "The segment is 2/3 of the rectangle of sides h and 2y₁ (y₁² = 4ah).",
+  "kind": "fact",
+  "id": "d36dc403-cc10-4589-b01b-9b3a89132a90",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by y² = 4ax, the y-axis and the line y = 2a is",
+  "formula": "",
+  "options": [
+   "2a²/3",
+   "4a²/3",
+   "a²/3",
+   "8a²/3"
+  ],
+  "answer": 0,
+  "explain": "Integrate x = y²/(4a) over y from 0 to 2a: (8a³)/(12a) = 2a²/3.",
+  "kind": "result",
+  "id": "34ad8017-c586-47f0-95c6-f20517bb9e0b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area between y = |x| and y = 2 − x² is",
+  "formula": "",
+  "options": [
+   "7/3",
+   "5/3",
+   "7/6",
+   "4/3"
+  ],
+  "answer": 0,
+  "explain": "For x ≥ 0: ∫₀¹(2 − x² − x)dx = 7/6; doubling by symmetry gives 7/3.",
+  "kind": "result",
+  "id": "8e1f8efa-8a83-4a03-bcb6-a15784e227aa",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area in the first quadrant bounded by y = x², the line y = 1 and the y-axis is",
+  "formula": "",
+  "options": [
+   "2/3",
+   "1/3",
+   "1/2",
+   "3/4"
+  ],
+  "answer": 0,
+  "explain": "∫₀¹(1 − x²)dx = 1 − 1/3 = 2/3.",
+  "kind": "result",
+  "id": "554222a4-c79e-4d49-8a20-2250a553e08e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area cut from y² = 4ax by a focal chord inclined at angle θ to the axis is",
+  "formula": "A = 8a²/(3 sin³θ)",
+  "options": [
+   "8a²/(3 sin³θ)",
+   "8a²/(3 sinθ)",
+   "4a²/(3 sin²θ)",
+   "8a² sin³θ/3"
+  ],
+  "answer": 0,
+  "explain": "Using (y₂−y₁)³/(24a) with y₂−y₁ = 4a/sinθ gives 8a²/(3sin³θ); θ=90° gives 8a²/3.",
+  "kind": "result",
+  "id": "81c79523-2297-4988-b7df-c3c08331a7de",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed between y² = x and x² = 2y is",
+  "formula": "x³ = 4 at the common point",
+  "options": [
+   "2/3",
+   "1/3",
+   "4/3",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Meet where x³=4; ∫(√x − x²/2)dx = (2/3)(2) − 4/6 = 2/3.",
+  "kind": "result",
+  "id": "32a3f75c-5273-4180-9e79-4de93059aed3",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "For y² = 4ax and x² = 4by, a is doubled and b is halved. The enclosed area becomes",
+  "formula": "Area = 16ab/3",
+  "options": [
+   "Unchanged",
+   "Doubled",
+   "Halved",
+   "4 times"
+  ],
+  "answer": 0,
+  "explain": "Area ∝ ab, and the product ab stays the same.",
+  "kind": "concept",
+  "id": "cf8415e6-811e-4c3c-beb4-a4aa3eca77bc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = x² and y = 4 − x² is",
+  "formula": "",
+  "options": [
+   "16√2/3",
+   "8√2/3",
+   "32/3",
+   "16/3"
+  ],
+  "answer": 0,
+  "explain": "x = ±√2; area = ∫(4 − 2x²)dx from −√2 to √2 = 16√2/3.",
+  "kind": "result",
+  "id": "4221e2fb-674a-429f-a09c-d9f378e13030",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between y²=4ax, x²=4ay is what fraction of the square with vertices O and (4a, 4a)?",
+  "formula": "",
+  "options": [
+   "1/3",
+   "1/2",
+   "2/3",
+   "1/4"
+  ],
+  "answer": 0,
+  "explain": "(16a²/3) ÷ (4a)² = 1/3.",
+  "kind": "result",
+  "id": "d4253492-9409-4d5d-b9d5-9e75452d693e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "For y² = 4ax and x² = 4by, the nonzero intersection has y equal to",
+  "formula": "",
+  "options": [
+   "4(ab²)^{1/3}",
+   "4(a²b)^{1/3}",
+   "4(ab)^{1/2}",
+   "4(a³b)^{1/3}"
+  ],
+  "answer": 1,
+  "explain": "Substituting x² = 4by into y² = 4ax gives y³ = 64a²b, so y = 4(a²b)^{1/3}.",
+  "kind": "formula",
+  "id": "e58793a9-b2ed-408e-971b-83db048499f8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y² = 8x and x² = 12y is",
+  "formula": "16ab/3 with 4a = 8, 4b = 12",
+  "options": [
+   "16",
+   "32",
+   "48",
+   "64/3"
+  ],
+  "answer": 1,
+  "explain": "a = 2, b = 3, so the area is 16(2)(3)/3 = 32.",
+  "kind": "result",
+  "id": "d3e95578-ec7a-42be-a208-efb445778207",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = 2x² and y = x² + 4 is",
+  "formula": "",
+  "options": [
+   "16/3",
+   "32/3",
+   "64/3",
+   "8/3"
+  ],
+  "answer": 1,
+  "explain": "Meet at x = ±2; ∫(4 − x²)dx from −2 to 2 = 32/3.",
+  "kind": "result",
+  "id": "f71bf45b-b1f0-474c-841b-52d877c68ac9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between y²=4ax and x²=4ay, as a fraction of the area under y²=4ax from x=0 to 4a, is",
+  "formula": "",
+  "options": [
+   "1/3",
+   "1/2",
+   "2/3",
+   "3/4"
+  ],
+  "answer": 1,
+  "explain": "(16a²/3) ÷ (32a²/3) = 1/2.",
+  "kind": "result",
+  "id": "f94c6f21-37d7-4a7f-a78b-a4ddda5f36c7",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y² = 9x and x² = 9y is",
+  "formula": "y²=kx, x²=ky ⇒ area = k²/3",
+  "options": [
+   "9",
+   "27",
+   "18",
+   "81"
+  ],
+  "answer": 1,
+  "explain": "With 4a = 9, area = 16a²/3 = k²/3 = 81/3 = 27.",
+  "kind": "result",
+  "id": "b74b28f6-1198-497c-a820-859a63149340",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = x² and y = 8 − x² is",
+  "formula": "",
+  "options": [
+   "32/3",
+   "64/3",
+   "128/3",
+   "16√2/3"
+  ],
+  "answer": 1,
+  "explain": "Meet at x = ±2; ∫(8 − 2x²)dx from −2 to 2 = 32 − 32/3·... = 64/3.",
+  "kind": "result",
+  "id": "5c90d0ec-4f69-4345-b9c1-b291e1c23752",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "The parabolas y² = 4x and x² = 4y intersect at",
+  "formula": "",
+  "options": [
+   "(0,0) and (4,4)",
+   "(0,0) and (2,2)",
+   "(0,0) and (1,1)",
+   "(0,0) and (8,8)"
+  ],
+  "answer": 0,
+  "explain": "x⁴/16 = 4x gives x³ = 64, so x = 4 and y = 4.",
+  "kind": "fact",
+  "id": "24d30056-0663-409b-b63c-394c9989c3b8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas y² = 4x and x² = 8y is",
+  "formula": "Area = 16ab/3 for y² = 4ax, x² = 4by",
+  "options": [
+   "16/3",
+   "32/3",
+   "64/3",
+   "8/3"
+  ],
+  "answer": 1,
+  "explain": "Here a = 1 and b = 2, so the area is 16·1·2/3 = 32/3.",
+  "kind": "result",
+  "id": "d44a4a96-ce89-43d1-85bb-7ada4c2291a4",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas y² = 12x and x² = 12y is",
+  "formula": "Area = 16a²/3 with 4a = 12",
+  "options": [
+   "16",
+   "144",
+   "48",
+   "24"
+  ],
+  "answer": 2,
+  "explain": "4a = 12 gives a = 3, so the area is 16·9/3 = 48.",
+  "kind": "result",
+  "id": "b76d2ad1-6dc5-45c2-ba59-d42792980290",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Maximum area of a triangle inscribed in x²/a²+y²/b²=1 is:",
+  "formula": "Circle of radius r: (3√3/4)r²; scale by b/a",
+  "options": [
+   "ab/2",
+   "(3√3/4)ab",
+   "(√3/4)ab",
+   "(3√3/2)ab"
+  ],
+  "answer": 1,
+  "explain": "The largest triangle in a circle is equilateral with area (3√3/4)a². The affine map scales areas by b/a.",
+  "kind": "result",
+  "id": "00e7decd-0d15-4676-8f92-8578727e9cef",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area enclosed by (x−3)²/16 + (y+2)²/9 = 1 is:",
+  "formula": "Area = πab (centre does not matter)",
+  "options": [
+   "12π",
+   "48π",
+   "7π",
+   "12π − 6"
+  ],
+  "answer": 0,
+  "explain": "Shifting the centre does not change the area, so it is πab = π·4·3 = 12π.",
+  "kind": "concept",
+  "id": "bc61393a-4257-43c4-a133-8e084ca3198f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Ellipse with foci (±3, 0) and minor axis of length 8 has area:",
+  "formula": "a² = b² + c²",
+  "options": [
+   "12π",
+   "15π",
+   "20π",
+   "40π"
+  ],
+  "answer": 2,
+  "explain": "b = 4 and c = 3 give a = 5, so the area is π·5·4 = 20π.",
+  "kind": "result",
+  "id": "74ef9f63-1bf2-42da-8a57-cd2f6ed29a95",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area enclosed by the ellipse 2x² + 8y² = 1 is:",
+  "formula": "Ax² + By² = 1 → π/√(AB)",
+  "options": [
+   "π/2",
+   "π/4",
+   "π/8",
+   "4π"
+  ],
+  "answer": 1,
+  "explain": "Here a² = 1/2 and b² = 1/8, so ab = 1/√16 = 1/4 and the area is π/4.",
+  "kind": "result",
+  "id": "23dad7e8-df34-4a18-8a0b-c962256f82c5",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area bounded by y = x³, the x-axis, x = −1 and x = 1 is:",
+  "formula": "Odd f: ∫₋ₐᵃ f = 0, but area = 2∫₀ᵃ |f|",
+  "options": [
+   "0",
+   "1/2",
+   "1",
+   "1/4"
+  ],
+  "answer": 1,
+  "explain": "The curve is odd, so the two lobes have equal area: 2∫₀¹x³dx = 1/2. The signed integral is 0, but the area is not.",
+  "kind": "exception",
+  "id": "7333c3af-15d4-4342-875a-0772289a192f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area enclosed by the astroid x^(2/3) + y^(2/3) = a^(2/3) is:",
+  "formula": "4∫₀ᵃ (a^(2/3) − x^(2/3))^(3/2) dx",
+  "options": [
+   "3πa²/4",
+   "πa²/4",
+   "3πa²/8",
+   "3πa²/16"
+  ],
+  "answer": 2,
+  "explain": "The astroid is symmetric about both axes. Four times the first-quadrant area gives the standard result 3πa²/8.",
+  "kind": "result",
+  "id": "2ecbe34c-3449-4d49-a60d-7265eb32f488",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area between y = x² and y² = x (curves symmetric about y = x) is:",
+  "formula": "∫₀¹ (√x − x²) dx",
+  "options": [
+   "2/3",
+   "1/2",
+   "1/3",
+   "1/6"
+  ],
+  "answer": 2,
+  "explain": "They meet at (0,0) and (1,1). The area is 2/3 − 1/3 = 1/3.",
+  "kind": "result",
+  "id": "c94359d3-272b-4e1b-b9cf-7907ac526910",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area of the part of x² + y² = 16 lying above y = |x| is:",
+  "formula": "",
+  "options": [
+   "2π",
+   "4π",
+   "8π",
+   "16π/3"
+  ],
+  "answer": 1,
+  "explain": "y ≥ |x| gives a 90° sector, one quarter of the circle by symmetry: 16π/4 = 4π.",
+  "kind": "result",
+  "id": "4bd7ddd1-6a4b-4cf7-a9a5-45bbf874bf7a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area enclosed between y = 1/x (x > 0) and its inverse curve is?",
+  "formula": "f = f⁻¹ ⇒ same graph",
+  "options": [
+   "0",
+   "1",
+   "ln 2",
+   "Infinite"
+  ],
+  "answer": 0,
+  "explain": "y = 1/x is its own inverse, so the two curves coincide and enclose no area.",
+  "kind": "exception",
+  "id": "62f02950-bfbb-479e-8793-961b7261e386",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "For increasing f, ∫ₐᵇ f(x)dx + ∫_{f(a)}^{f(b)} f⁻¹(y)dy equals?",
+  "formula": "",
+  "options": [
+   "b·f(b) − a·f(a)",
+   "b·f(a) − a·f(b)",
+   "f(b) − f(a)",
+   "(b² − a²)/2"
+  ],
+  "answer": 0,
+  "explain": "The two areas together fill the difference of the rectangles: b f(b) − a f(a).",
+  "kind": "result",
+  "id": "36256326-71e6-40f8-bdfb-12d934b79136",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "Curves y = eˣ and its inverse y = ln x intersect at?",
+  "formula": "",
+  "options": [
+   "No point",
+   "(1, 0)",
+   "(0, 1)",
+   "A point on y = x"
+  ],
+  "answer": 0,
+  "explain": "eˣ > x + 1 > x > ln x for all x, so eˣ never meets y = x, and the curves never meet.",
+  "kind": "exception",
+  "id": "324e25e8-0800-43aa-8d46-ec863254598f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "Area bounded by y² = 4ax, its tangent at (a, 2a) and the y-axis is",
+  "formula": "tangent: y = x + a",
+  "options": [
+   "a²/6",
+   "a²/3",
+   "a²/2",
+   "2a²/3"
+  ],
+  "answer": 0,
+  "explain": "∫₀ᵃ(x + a − 2√(ax))dx = 3a²/2 − 4a²/3 = a²/6.",
+  "kind": "result",
+  "id": "8e4adb81-04cb-408c-9204-f50ce65ee07d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area cut off from y² = 4ax by the chord joining parameters t₁ and t₂ is",
+  "formula": "",
+  "options": [
+   "a²|t₁−t₂|³/3",
+   "a²|t₁−t₂|³/6",
+   "2a²|t₁−t₂|³/3",
+   "a²|t₁−t₂|²/3"
+  ],
+  "answer": 0,
+  "explain": "Using y-strips: (1/4a)(Δy)³/6 with Δy = 2aΔt. Check: t = ±1 gives 8a²/3.",
+  "kind": "formula",
+  "id": "7aaa29fa-cd85-4fd1-a4c2-5be18f8d6353",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "The largest triangle inscribed in a parabolic segment has its apex where the tangent is",
+  "formula": "",
+  "options": [
+   "parallel to the chord",
+   "perpendicular to the chord",
+   "drawn through the chord's midpoint",
+   "at the vertex of the parabola"
+  ],
+  "answer": 0,
+  "explain": "Apex is the farthest point from the chord, where the tangent is parallel to the chord (Archimedes).",
+  "kind": "concept",
+  "id": "29bf14a1-90cd-4abd-8dbf-ada66cdb25a2",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "The curve y = x² divides the square 0≤x≤1, 0≤y≤1 into two parts with areas in the ratio",
+  "formula": "",
+  "options": [
+   "1 : 2",
+   "1 : 3",
+   "1 : 1",
+   "2 : 3"
+  ],
+  "answer": 0,
+  "explain": "Area under the curve is ∫₀¹x²dx = 1/3, so the rest is 2/3.",
+  "kind": "result",
+  "id": "33a61d55-88c7-482e-b556-996023908105",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas y = x² and y = 2 − x² is",
+  "formula": "",
+  "options": [
+   "8/3",
+   "4/3",
+   "4",
+   "16/3"
+  ],
+  "answer": 0,
+  "explain": "They meet at x = ±1; ∫₋₁¹(2 − 2x²)dx = 4 − 4/3 = 8/3.",
+  "kind": "result",
+  "id": "1bb27039-b1bf-4b0c-b541-e57e74735477",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Parabolic segment area = k × (chord × greatest perpendicular distance from chord). k is",
+  "formula": "",
+  "options": [
+   "2/3",
+   "1/2",
+   "3/4",
+   "4/3"
+  ],
+  "answer": 0,
+  "explain": "Segment = (4/3) × inscribed triangle = (4/3)(½·b·h) = (2/3)bh.",
+  "kind": "formula",
+  "id": "f1ff92aa-ea6b-4c22-acb7-ef4ef85aa10f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas y = x² and y = 6x − x² is",
+  "formula": "",
+  "options": [
+   "9",
+   "18",
+   "27",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "They meet at x=0 and 3; |p₁−p₂|=2, so A = 2·27/6 = 9.",
+  "kind": "result",
+  "id": "a919bda0-a90c-417c-8e50-acde98decd3d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas x = y² and x = 3 − 2y² is",
+  "formula": "",
+  "options": [
+   "4",
+   "2",
+   "8/3",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "They meet at y=±1; A = ∫₋₁¹(3−3y²)dy = 3(2 − 2/3) = 4.",
+  "kind": "result",
+  "id": "2d9e802b-c0f8-484c-8964-29e2a9182674",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = x² and y = 18 − x² is",
+  "formula": "A = (8/3)(k/2)^{3/2} for y=x², y=k−x²",
+  "options": [
+   "72",
+   "36",
+   "48",
+   "144"
+  ],
+  "answer": 0,
+  "explain": "They meet at x=±3; A = ∫₋₃³(18−2x²)dx = 2(54−18) = 72.",
+  "kind": "result",
+  "id": "2c69fd2e-bd02-4436-848d-7d3087722ad3",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y² = kx and x² = ky (k > 0) is",
+  "formula": "A = k²/3",
+  "options": [
+   "k²/3",
+   "k²/6",
+   "16k²/3",
+   "k²/12"
+  ],
+  "answer": 0,
+  "explain": "Here 4a = k, so 16a²/3 = 16(k/4)²/3 = k²/3.",
+  "kind": "formula",
+  "id": "a054b98e-35df-46db-923d-d501f3aab483",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = 2x² and y = 4 − 2x² is",
+  "formula": "",
+  "options": [
+   "16/3",
+   "8/3",
+   "32/3",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "They meet at x=±1; ∫₋₁¹(4−4x²)dx = 8 − 8/3 = 16/3.",
+  "kind": "result",
+  "id": "2cff590b-f7ed-448b-8406-0f7ef41790bd",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area in the first quadrant bounded by x² = 4ay, the y-axis and the line y = 4a is",
+  "formula": "",
+  "options": [
+   "32a²/3",
+   "16a²/3",
+   "8a²/3",
+   "64a²/3"
+  ],
+  "answer": 0,
+  "explain": "∫₀^{4a} 2√(ay) dy = 2√a·(2/3)(4a)^{3/2} = 32a²/3.",
+  "kind": "result",
+  "id": "95ef0257-81ff-4fdc-97fb-bc255061ebe8",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area of the region {(x,y): x² ≤ 8y, y² ≤ 8x} is",
+  "formula": "",
+  "options": [
+   "64/3",
+   "32/3",
+   "16/3",
+   "128/3"
+  ],
+  "answer": 0,
+  "explain": "Here 4a=8, a=2, so the enclosed area is 16a²/3 = 64/3.",
+  "kind": "result",
+  "id": "16a1e9d6-0ebb-43ea-9967-78b12a1f29e7",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between the parabola y = x² and the line y = x is:",
+  "formula": "∫₀¹ (x − x²) dx",
+  "options": [
+   "1/6",
+   "1/3",
+   "1/2",
+   "1/12"
+  ],
+  "answer": 0,
+  "explain": "Intersections at x = 0, 1: area = 1/2 − 1/3 = 1/6.",
+  "kind": "result",
+  "id": "e61f2c05-d5b0-4244-a1dc-db6c475377f7",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between the parabola y = x² and the line y = 2x is:",
+  "formula": "∫₀² (2x − x²) dx",
+  "options": [
+   "4/3",
+   "8/3",
+   "2/3",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "Intersections at x = 0, 2: area = 4 − 8/3 = 4/3.",
+  "kind": "result",
+  "id": "4b124eb0-63c1-4f31-bf36-ca55944e3fb6",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between the parabola y = x² and the line y = 4 is:",
+  "formula": "2∫₀² (4 − x²) dx",
+  "options": [
+   "32/3",
+   "16/3",
+   "64/3",
+   "8/3"
+  ],
+  "answer": 0,
+  "explain": "2(8 − 8/3) = 32/3.",
+  "kind": "result",
+  "id": "999d63e2-994f-49b9-a5c8-ff2d43bbd3f5",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between y = ax² + bx + c and a chord meeting it at x = α, β (α<β) equals:",
+  "formula": "|a|(β − α)³/6",
+  "options": [
+   "|a|(β − α)³/6",
+   "|a|(β − α)³/3",
+   "|a|(β − α)²/6",
+   "2|a|(β − α)³/3"
+  ],
+  "answer": 0,
+  "explain": "Area = |a|∫(x−α)(β−x)dx = |a|(β−α)³/6.",
+  "kind": "formula",
+  "id": "d79ba26c-c11d-469e-a716-e7e9f70ba88f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Ratio of area of ellipse x²/a²+y²/b²=1 to its circumscribed rectangle (sides ∥ axes) is:",
+  "formula": "πab : 4ab",
+  "options": [
+   "π : 4",
+   "π : 2",
+   "π : 8",
+   "2π : 3"
+  ],
+  "answer": 0,
+  "explain": "Rectangle is 2a × 2b = 4ab, so the ratio is πab/4ab = π/4.",
+  "kind": "result",
+  "id": "ffda8a00-0c22-485c-9c58-1b2d5f0c2bdb",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area enclosed by the ellipse 25x² + 4y² = 100 is:",
+  "formula": "x²/4 + y²/25 = 1",
+  "options": [
+   "10π",
+   "20π",
+   "5π",
+   "25π"
+  ],
+  "answer": 0,
+  "explain": "Semi-axes are 2 and 5, so area = π·2·5 = 10π.",
+  "kind": "result",
+  "id": "36d7ced1-7193-46d3-bdd7-d5c678d4fdc1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "For a > b, the area common to x²/a²+y²/b²=1 and the circle x²+y²=a² is:",
+  "formula": "",
+  "options": [
+   "πab",
+   "πa²",
+   "πb²",
+   "πa(a − b)"
+  ],
+  "answer": 0,
+  "explain": "The ellipse lies entirely inside its auxiliary circle, so the common region is the ellipse: πab.",
+  "kind": "concept",
+  "id": "fe4d8e9b-0910-4891-82cd-45533ddcbac0",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "A line x = k cuts x²/a²+y²/b²=1 (a>b) and circle x²+y²=a². Segment areas (ellipse : circle) are in ratio:",
+  "formula": "y_ellipse = (b/a)·y_circle",
+  "options": [
+   "a : b",
+   "b : a",
+   "a² : b²",
+   "b² : a²"
+  ],
+  "answer": 1,
+  "explain": "Each ordinate of the ellipse is b/a times that of the auxiliary circle, so every area scales by b/a.",
+  "kind": "result",
+  "id": "e0e925b9-c97d-427d-a7f5-ea66c3ba5059",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Total area enclosed by y = x³ and y = ∛x, counting both quadrants, is?",
+  "formula": "",
+  "options": [
+   "1",
+   "1/2",
+   "2",
+   "3/2"
+  ],
+  "answer": 0,
+  "explain": "Curves meet at x = −1, 0, 1. Both are odd, so each quadrant region gives 1/2, and the total is 1.",
+  "kind": "result",
+  "id": "7f915f05-e7b2-4bbf-a71e-03fba3641033",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "Area enclosed by y² = 4x and the line y = 2x − 4 is",
+  "formula": "x = y²/4 and x = (y+4)/2 meet at y = −2, 4; A = |a|(Δy)³/6",
+  "options": [
+   "9",
+   "18",
+   "9/2",
+   "27/4"
+  ],
+  "answer": 0,
+  "explain": "Integrate in y: a = 1/4 and Δy = 6, so A = (1/4)(216)/6 = 9.",
+  "kind": "result",
+  "id": "e487fc70-92a0-4359-b500-ba3377787f40",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by the parabola x = 4 − y² and the y-axis is",
+  "formula": "A = |a|(Δy)³/6",
+  "options": [
+   "16/3",
+   "32/3",
+   "8/3",
+   "64/3"
+  ],
+  "answer": 1,
+  "explain": "Meets the y-axis at y = ±2, so A = 1·4³/6 = 32/3.",
+  "kind": "result",
+  "id": "d3ee7701-427e-40a7-b91d-4175622529ac",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area between y = x² − 1 and y = 1 − x² is:",
+  "formula": "",
+  "options": [
+   "4/3",
+   "8/3",
+   "16/3",
+   "2/3"
+  ],
+  "answer": 1,
+  "explain": "Meet at x=±1; difference 2−2x² gives |−2|·2³/6 = 8/3 (twice the 4/3 under y=1−x²).",
+  "kind": "result",
+  "id": "dfea3b14-9be5-488d-9583-d41737fb6b15",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area of a parabolic segment (chord ⟂ axis) is what fraction of its circumscribing rectangle?",
+  "formula": "",
+  "options": [
+   "1/3",
+   "1/2",
+   "2/3",
+   "3/4"
+  ],
+  "answer": 2,
+  "explain": "Archimedes: segment = 2/3 of the rectangle on the same base and height.",
+  "kind": "fact",
+  "id": "f452caee-4033-485e-87a6-b02a5cfe9c28",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "For 0 < x < 4a, in the region between y²=4ax and x²=4ay, the upper boundary is:",
+  "formula": "",
+  "options": [
+   "x² = 4ay",
+   "y = 2√(ax) (from y² = 4ax)",
+   "y = x",
+   "y = 4a"
+  ],
+  "answer": 1,
+  "explain": "At e.g. x=a, 2a > a/4, so the parabola y²=4ax lies above x²=4ay between the points.",
+  "kind": "concept",
+  "id": "f3ea4dfd-4107-4b4d-84ac-0aacfc5a17db",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between y² = 4ax and x² = 4ay, in terms of the parameter 'a', varies as:",
+  "formula": "A = 16a²/3",
+  "options": [
+   "a",
+   "a²",
+   "a³",
+   "1/a"
+  ],
+  "answer": 1,
+  "explain": "Area scales as length²; A = 16a²/3 ∝ a².",
+  "kind": "concept",
+  "id": "7bd50ddf-7a33-420b-8a64-dd63e5b44e79",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between y²=4ax and x²=4ay ÷ area cut off from y²=4ax by its latus rectum equals:",
+  "formula": "16a²/3 ÷ 8a²/3",
+  "options": [
+   "1 : 1",
+   "2 : 1",
+   "3 : 2",
+   "4 : 3"
+  ],
+  "answer": 1,
+  "explain": "The lens is 16a²/3 and the latus rectum segment is 8a²/3, so the ratio is 2 : 1.",
+  "kind": "result",
+  "id": "3e62d328-4a97-403f-bee0-df1c6e357fa5",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area between y²=4ax and x²=4ay is what fraction of the area of triangle with vertices O, (4a,0), (4a,4a)?",
+  "formula": "",
+  "options": [
+   "1/3",
+   "1/2",
+   "2/3",
+   "3/4"
+  ],
+  "answer": 2,
+  "explain": "The triangle has area ½·4a·4a = 8a², and (16a²/3)/(8a²) = 2/3.",
+  "kind": "result",
+  "id": "25d3f9e7-d233-4307-ba0c-897a6090d06b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed by the curve x²/a² + y²/b² = 4 is:",
+  "formula": "",
+  "options": [
+   "2πab",
+   "πab",
+   "8πab",
+   "4πab"
+  ],
+  "answer": 3,
+  "explain": "Rewrite as x²/(2a)²+y²/(2b)²=1, so the area is π(2a)(2b) = 4πab.",
+  "kind": "result",
+  "id": "e25cb591-d5ab-4cbb-a881-41e7a33b43e9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area in the first quadrant bounded by the x-axis, y = (b/a)x and x²/a²+y²/b²=1 is:",
+  "formula": "",
+  "options": [
+   "πab/4",
+   "πab/16",
+   "πab/8",
+   "πab/6"
+  ],
+  "answer": 2,
+  "explain": "Scaling y by b/a maps this to a 45° circular sector, area πa²/8. Scaling back gives πab/8.",
+  "kind": "result",
+  "id": "1705c3fe-eec3-436e-be09-fae2cc9e6980",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "The value of ∫₀ᵃ √(a² − x²) dx, used in the ellipse area, is:",
+  "formula": "",
+  "options": [
+   "πa²/2",
+   "πa²/4",
+   "πa²",
+   "a²/2"
+  ],
+  "answer": 1,
+  "explain": "It is the quarter-circle area of radius a, which is πa²/4.",
+  "kind": "result",
+  "id": "100e764f-7cf3-4510-af15-3c80c66b9507",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area of the elliptic sector from the centre between the x-axis and the point (a cosθ, b sinθ), 0<θ<π/2, is:",
+  "formula": "",
+  "options": [
+   "abθ",
+   "abθ/2",
+   "πabθ/4",
+   "abθ/4"
+  ],
+  "answer": 1,
+  "explain": "The ellipse is the circle sector scaled by b/a, so the area is (a²θ/2)(b/a) = abθ/2. At θ = π/2 this gives πab/4.",
+  "kind": "result",
+  "id": "464af541-bfa4-45ef-8936-0779cd1d50fe",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Increasing f meets y=x at two points. How do area(f, y=x) and area(f⁻¹, y=x) between them compare?",
+  "formula": "reflection in y = x",
+  "options": [
+   "Always equal",
+   "Area with f⁻¹ is larger",
+   "Area with f is larger",
+   "Their product is 1"
+  ],
+  "answer": 0,
+  "explain": "f and f⁻¹ are mirror images in y = x, and reflection preserves area, so the two regions are congruent.",
+  "kind": "concept",
+  "id": "48b6845c-6f2c-4381-a101-99d9a6704899",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "Area in the first quadrant between y = x⁵ and its inverse curve y = x^(1/5) is?",
+  "formula": "A = ∫₀¹ (x^(1/n) − xⁿ)dx = (n−1)/(n+1)",
+  "options": [
+   "2/3",
+   "4/5",
+   "1/2",
+   "5/6"
+  ],
+  "answer": 0,
+  "explain": "n/(n+1) − 1/(n+1) = (n−1)/(n+1); for n=5 this is 4/6 = 2/3.",
+  "kind": "result",
+  "id": "ca93b48e-568c-4121-88e9-2d605c8273c6",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between a curve and its inverse"
+ },
+ {
+  "prompt": "Area under y = 1/√x from x = 0 to x = 1 is:",
+  "formula": "∫₀¹ x^(−1/2) dx = 2√x |₀¹",
+  "options": [
+   "1",
+   "2",
+   "1/2",
+   "Infinite (diverges)"
+  ],
+  "answer": 1,
+  "explain": "The integral converges since the power is −1/2 > −1, and 2√x from 0 to 1 gives 2.",
+  "kind": "result",
+  "id": "788b5ffb-8003-488a-91fc-79a670873143",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Total area between y = 1/(1+x²) and the x-axis over the whole real line is:",
+  "formula": "[tan⁻¹x] from −∞ to ∞",
+  "options": [
+   "π/2",
+   "2π",
+   "π",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "tan⁻¹(∞) − tan⁻¹(−∞) = π/2 + π/2 = π.",
+  "kind": "result",
+  "id": "7e4458d8-6dbc-4d9d-bff2-93179d8c292a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = 1/√(1−x²) from x = 0 to x = 1 is:",
+  "formula": "[sin⁻¹x]₀¹",
+  "options": [
+   "π/4",
+   "1",
+   "π",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "The integral is sin⁻¹1 − sin⁻¹0 = π/2.",
+  "kind": "result",
+  "id": "1eb610eb-bd70-4074-91d5-2bccb080bcc1",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area under y = 2ˣ from x = 0 to x = 1 is:",
+  "formula": "∫aˣ dx = aˣ/ln a",
+  "options": [
+   "ln 2",
+   "1/ln 2",
+   "1",
+   "2/ln 2"
+  ],
+  "answer": 1,
+  "explain": "(2¹ − 2⁰)/ln 2 = 1/ln 2.",
+  "kind": "formula",
+  "id": "69339672-ac3c-41ca-a547-a9f1b1ad8e4f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area under y=f(x) with x-axis between limits"
+ },
+ {
+  "prompt": "Area bounded by x = y³, the y-axis and the lines y = −1, y = 1 is?",
+  "formula": "2∫₀¹ y³ dy",
+  "options": [
+   "0",
+   "1/4",
+   "1/2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "x = y³ is odd, so net integral is 0, but area = 2∫₀¹ y³ dy = 1/2.",
+  "kind": "result",
+  "id": "97c2f78c-35d2-4e54-aeb1-08efef3c27bc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by y = x³, the y-axis and the line y = 8 is?",
+  "formula": "∫₀⁸ y^{1/3} dy",
+  "options": [
+   "4",
+   "12",
+   "16",
+   "24"
+  ],
+  "answer": 1,
+  "explain": "x = y^{1/3}; ∫₀⁸ y^{1/3} dy = (3/4)·8^{4/3} = (3/4)·16 = 12.",
+  "kind": "result",
+  "id": "3c94bdf4-a972-4ced-8882-159049052892",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by x = cos y, the y-axis and −π/2 ≤ y ≤ π/2 is?",
+  "formula": "∫ cos y dy",
+  "options": [
+   "1",
+   "2",
+   "π/2",
+   "π"
+  ],
+  "answer": 1,
+  "explain": "cos y ≥ 0 on this interval; ∫ from −π/2 to π/2 of cos y dy = 2.",
+  "kind": "result",
+  "id": "b70b2a53-6c83-4bb8-bd2c-952691767a31",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by x = tan y, the y-axis and 0 ≤ y ≤ π/4 is?",
+  "formula": "∫ tan y dy = ln sec y",
+  "options": [
+   "ln 2",
+   "½ ln 2",
+   "1",
+   "π/4"
+  ],
+  "answer": 1,
+  "explain": "∫₀^{π/4} tan y dy = ln sec(π/4) = ln√2 = ½ ln 2.",
+  "kind": "result",
+  "id": "c207a187-4c70-406f-af92-1e9167f7bc74",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area enclosed between the parabola x = 4 − y² and the y-axis is?",
+  "formula": "|a|(Δy)³/6, y = ±2",
+  "options": [
+   "16/3",
+   "32/3",
+   "8/3",
+   "64/3"
+  ],
+  "answer": 1,
+  "explain": "Meets y-axis at y = ±2: area = 1·4³/6 = 32/3.",
+  "kind": "result",
+  "id": "36ca314a-cb37-4cf3-89b5-7f6fa790f5db",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area between x = √(a² − y²) and the y-axis is?",
+  "formula": "",
+  "options": [
+   "πa²/4",
+   "πa²/2",
+   "πa²",
+   "2πa²"
+  ],
+  "answer": 1,
+  "explain": "It is the right half of the circle x²+y²=a², so area = πa²/2.",
+  "kind": "result",
+  "id": "bf2123f1-2a08-40b5-b928-a7aae3d58f8d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area enclosed between x = y² and x = y³ is?",
+  "formula": "∫₀¹ (y² − y³) dy",
+  "options": [
+   "1/12",
+   "1/6",
+   "1/4",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "They meet at y=0,1 and y² ≥ y³ there: 1/3 − 1/4 = 1/12.",
+  "kind": "result",
+  "id": "088ccaf0-89fc-4749-b544-6c4dd2a9839e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area enclosed between x = |y| and the line x = 2 is?",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "8",
+   "16"
+  ],
+  "answer": 1,
+  "explain": "Triangle with vertices (0,0), (2,2), (2,−2): ½·4·2 = 4.",
+  "kind": "result",
+  "id": "156aeb18-b807-47d6-a879-faeb67abe4c9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by x = 1/√(1−y²), the y-axis and 0 ≤ y ≤ ½ is?",
+  "formula": "∫ dy/√(1−y²) = sin⁻¹y",
+  "options": [
+   "π/3",
+   "π/4",
+   "π/6",
+   "π/12"
+  ],
+  "answer": 2,
+  "explain": "∫₀^{1/2} dy/√(1−y²) = sin⁻¹(1/2) = π/6.",
+  "kind": "result",
+  "id": "5717369d-9d92-4edb-a05d-c8091d2c4513",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by x = y² − 4 and the y-axis is?",
+  "formula": "",
+  "options": [
+   "32/3",
+   "16/3",
+   "64/3",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Roots y = ±2; |a|(4)³/6 = 64/6 = 32/3.",
+  "kind": "result",
+  "id": "25f95e5d-35fb-4b9e-9207-124fc5543c87",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area w.r.t. y-axis using x=g(y)"
+ },
+ {
+  "prompt": "Area bounded by y = x² − 4 and the x-axis is",
+  "formula": "|a|(β−α)³/6",
+  "options": [
+   "16/3",
+   "32/3",
+   "64/3",
+   "8/3"
+  ],
+  "answer": 1,
+  "explain": "Roots ±2, so area = 1·4³/6 = 32/3. The region lies below the axis, so take the modulus.",
+  "kind": "result",
+  "id": "2cfb2115-edd7-4153-8aaa-65191edf70eb",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area between y = sin x and the x-axis from x = 0 to x = 10π is",
+  "formula": "",
+  "options": [
+   "0",
+   "10",
+   "20",
+   "40"
+  ],
+  "answer": 2,
+  "explain": "Each half-arch has area 2, and there are 10 of them over 10π, so the area is 20 (while ∫ sin x dx = 0).",
+  "kind": "result",
+  "id": "a87b70b8-433a-4afd-9764-9c292ab8ec09",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "f odd, f ≥ 0 on [0,a]. Area between y=f(x), x-axis, x=−a, x=a is",
+  "formula": "",
+  "options": [
+   "0",
+   "∫₀ᵃ f dx",
+   "2∫₀ᵃ f dx",
+   "∫₋ₐᵃ f dx"
+  ],
+  "answer": 2,
+  "explain": "Odd f is negative on [−a,0]; |f| is even, so area = 2∫₀ᵃ f dx, while ∫₋ₐᵃ f dx = 0.",
+  "kind": "concept",
+  "id": "200bf9eb-055c-4f6a-8528-90f861701ba4",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area bounded by y = x² − x and the x-axis is",
+  "formula": "",
+  "options": [
+   "1/6",
+   "1/3",
+   "1/2",
+   "1/12"
+  ],
+  "answer": 0,
+  "explain": "Region lies below the axis on [0,1]: −∫₀¹(x²−x)dx = 1/2 − 1/3 = 1/6.",
+  "kind": "result",
+  "id": "17d9a7e3-8b0f-45b2-9219-b50928b2dd16",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area between y = sin x and y = |sin x| for 0 ≤ x ≤ 2π is",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "0",
+   "8"
+  ],
+  "answer": 1,
+  "explain": "They differ only on [π,2π], where the gap is 2|sin x|; area = 2·2 = 4.",
+  "kind": "result",
+  "id": "9aef8619-6871-4723-a989-6ba57af406e6",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "Area enclosed by y = x³ − x and the x-axis is",
+  "formula": "",
+  "options": [
+   "1/4",
+   "1/2",
+   "0",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Roots −1,0,1; each lobe = ∫₀¹(x−x³)dx = 1/4, so the total is 1/2 (net integral would be 0).",
+  "kind": "result",
+  "id": "6d78b0c4-cc5e-4ae4-b5bf-ae8d7e7f6c5c",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Sign convention: area below x-axis, |f(x)|"
+ },
+ {
+  "prompt": "The line x = a divides the region bounded by y² = 4ax and x = 4a in the ratio (smaller : larger)",
+  "formula": "Area up to x = h ∝ h^{3/2}",
+  "options": [
+   "1 : 3",
+   "1 : 7",
+   "1 : 4",
+   "1 : 8"
+  ],
+  "answer": 1,
+  "explain": "Area from vertex to x = h ∝ h^{3/2}; so a : 4a gives 1 : 8 of the total, i.e. parts 1 : 7.",
+  "kind": "result",
+  "id": "de393ed4-77f8-442d-b875-77beccddc52b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed by x² = 4y and the line x = 4y − 2 is",
+  "formula": "|a|(β−α)³/6",
+  "options": [
+   "9/8",
+   "9/4",
+   "27/8",
+   "9/2"
+  ],
+  "answer": 0,
+  "explain": "x² = x + 2 gives x = −1, 2; area = (1/4)(3)³/6 = 9/8.",
+  "kind": "result",
+  "id": "7d9b480b-bb94-437f-89e0-2355b7efcddc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area between y² = 4x and its normal at (1, 2) is",
+  "formula": "normal: x + y = 3",
+  "options": [
+   "32/3",
+   "64/3",
+   "16/3",
+   "128/3"
+  ],
+  "answer": 1,
+  "explain": "Normal x+y=3 meets the parabola at y = 2, −6; area = (1/4)(8)³/6 = 64/3.",
+  "kind": "result",
+  "id": "7723450c-b16a-453e-96ba-847d7178656e",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area bounded by upper half of y² = 4ax, its tangent at (a, 2a) and the x-axis is",
+  "formula": "tangent: y = x + a",
+  "options": [
+   "a²/6",
+   "2a²/3",
+   "a²/2",
+   "4a²/3"
+  ],
+  "answer": 1,
+  "explain": "Triangle under tangent (−a to a) = 2a², minus area under parabola 4a²/3 gives 2a²/3.",
+  "kind": "result",
+  "id": "560ec5c0-b35c-43c5-ab09-d2259938cdfc",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area bounded by parabola and a line"
+ },
+ {
+  "prompt": "Area enclosed between the parabolas y² = 4x and x² = y is:",
+  "formula": "16ab/3 with a = 1, b = 1/4",
+  "options": [
+   "4/3",
+   "16/3",
+   "8/3",
+   "2/3"
+  ],
+  "answer": 0,
+  "explain": "x² = 4by with b = 1/4 gives 16ab/3 = 16·1·(1/4)/3 = 4/3.",
+  "kind": "result",
+  "id": "ae9ab4e4-03f3-4a89-8a9f-c799f4aa257b",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between y = x² and the line y = mx (m > 0) is:",
+  "formula": "m³/6",
+  "options": [
+   "m³/6",
+   "m³/3",
+   "m²/2",
+   "m³/2"
+  ],
+  "answer": 0,
+  "explain": "The curves meet at x = 0 and x = m, so the area is 1·m³/6.",
+  "kind": "formula",
+  "id": "ccf498c4-8c83-4ff0-8644-44883f15ab1f",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between x² = 4ay and the line y = mx (m > 0) is:",
+  "formula": "8a²m³/3",
+  "options": [
+   "8a²m³/3",
+   "8a²/(3m³)",
+   "16a²m³/3",
+   "8a²m²/3"
+  ],
+  "answer": 0,
+  "explain": "The chord meets at x = 4am, so the area is (1/4a)(4am)³/6 = 8a²m³/3.",
+  "kind": "formula",
+  "id": "9d583392-587b-4a11-a636-9aaa145ddf40",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "Area enclosed between the parabola x = y² and the line x = y + 6 is:",
+  "formula": "|a|(Δy)³/6",
+  "options": [
+   "125/6",
+   "125/3",
+   "27/2",
+   "64/3"
+  ],
+  "answer": 0,
+  "explain": "y² = y + 6 gives y = −2, 3, so Δy = 5 and the area is 5³/6 = 125/6.",
+  "kind": "result",
+  "id": "9eafc8a3-fb79-49cc-9882-ba64b919ba79",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area between two parabolas (16a²/3 result)"
+ },
+ {
+  "prompt": "With x = a cosθ, y = b sinθ, the ellipse area ∫y dx equals which integral?",
+  "formula": "A = 4∫₀^{π/2} y |dx/dθ| dθ",
+  "options": [
+   "4ab∫₀^{π/2} sin²θ dθ",
+   "4ab∫₀^{π/2} sinθ dθ",
+   "2ab∫₀^{π/2} sin²θ dθ",
+   "4ab∫₀^{π/2} sinθ cosθ dθ"
+  ],
+  "answer": 0,
+  "explain": "y = b sinθ and |dx| = a sinθ dθ give ab sin²θ; four quadrants give 4ab∫sin²θ dθ = πab.",
+  "kind": "formula",
+  "id": "4c60748b-3c68-42d5-be60-8101b5009d99",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Area of ellipse (πab) and its segments"
+ },
+ {
+  "prompt": "Area enclosed by the curve |y| = 1 − x² is:",
+  "formula": "",
+  "options": [
+   "4/3",
+   "8/3",
+   "2/3",
+   "16/3"
+  ],
+  "answer": 1,
+  "explain": "Symmetric about both axes: 2 × ∫₋₁¹(1−x²)dx = 2 × 4/3 = 8/3.",
+  "kind": "result",
+  "id": "45b82b98-eee7-47ca-ba96-ca94e57319a5",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area bounded by y = x² and y = |x| is:",
+  "formula": "",
+  "options": [
+   "1/6",
+   "1/2",
+   "1/3",
+   "2/3"
+  ],
+  "answer": 2,
+  "explain": "Symmetric about the y-axis: 2 × (1/6) = 1/3.",
+  "kind": "result",
+  "id": "8bd32c21-b70c-4dc2-a335-9b6b6971e97a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area enclosed by |x − 1| + |y − 2| = 3 is:",
+  "formula": "",
+  "options": [
+   "9",
+   "12",
+   "36",
+   "18"
+  ],
+  "answer": 3,
+  "explain": "A shift does not change area; |x|+|y|=3 gives 2·3² = 18.",
+  "kind": "result",
+  "id": "866064ff-6d3c-4675-920d-e07bff757318",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area enclosed by |x|/a + |y|/b = 1 is:",
+  "formula": "",
+  "options": [
+   "ab",
+   "2ab",
+   "4ab",
+   "ab/2"
+  ],
+  "answer": 1,
+  "explain": "Rhombus with diagonals 2a and 2b: ½·2a·2b = 2ab.",
+  "kind": "formula",
+  "id": "2323dfe6-5ffa-4d53-838d-4778bb84a30a",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area enclosed by y² = x and x = 4 is:",
+  "formula": "",
+  "options": [
+   "16/3",
+   "8/3",
+   "32/3",
+   "64/3"
+  ],
+  "answer": 2,
+  "explain": "Symmetric about the x-axis: 2∫₀⁴√x dx = 2·(2/3)·8 = 32/3.",
+  "kind": "result",
+  "id": "88fdd2ed-1916-43e6-9e2b-30fcbc0b805d",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "A closed curve is unchanged by x → −x and by y → −y. Its enclosed area equals:",
+  "formula": "",
+  "options": [
+   "2 × first-quadrant area",
+   "4 × first-quadrant area",
+   "8 × first-quadrant area",
+   "first-quadrant area"
+  ],
+  "answer": 1,
+  "explain": "Symmetry about both axes gives four congruent quadrant pieces.",
+  "kind": "concept",
+  "id": "642fb61e-9c5b-4b66-b0db-64b47f654ce9",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area between y = x² and y = −x² for −1 ≤ x ≤ 1 is:",
+  "formula": "",
+  "options": [
+   "2/3",
+   "1/3",
+   "4/3",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Even and symmetric: 2∫₋₁¹x² dx = 2·(2/3)... wait, one curve is the mirror, so 2 × 2·(1/3) = 4/3.",
+  "kind": "result",
+  "id": "7d24fc9b-20ef-4c43-9e1e-41b0699caddf",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ },
+ {
+  "prompt": "Area bounded by y = cos x and the x-axis from x = −π/2 to π/2 is:",
+  "formula": "",
+  "options": [
+   "1",
+   "4",
+   "2",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Even function: 2∫₀^{π/2} cos x dx = 2·1 = 2.",
+  "kind": "result",
+  "id": "34aad5f9-42bf-4694-935d-3d081807e208",
+  "subject": "Mathematics",
+  "chapter": "Area under Curves",
+  "topic": "Using symmetry to compute area"
+ }
+]

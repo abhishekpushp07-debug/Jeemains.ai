@@ -1,1674 +1,3494 @@
 [
-  {
-    "id": "280e05fb-8602-48cf-95a9-59e6fd487f31",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Impedance of series RLC circuit",
-    "formula": "Z = √(R² + (X_L − X_C)²)",
-    "options": [
-      "X_L − X_C",
-      "√(R²+(X_L−X_C)²)",
-      "R + X_L + X_C",
-      "√(R²+X_L²+X_C²)"
-    ],
-    "answer": 1,
-    "explain": "Net reactance is (X_L−X_C); impedance combines this with R by Pythagoras.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "282effe9-1461-4f58-865f-ddc6214f5ec2",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Resonance condition in series RLC",
-    "formula": "X_L = X_C  →  ω₀ = 1/√(LC)",
-    "options": [
-      "ω₀ = √(LC)",
-      "ω₀ = 1/√(LC)",
-      "ω₀ = R/L",
-      "ω₀ = 1/RC"
-    ],
-    "answer": 1,
-    "explain": "At resonance inductive and capacitive reactances cancel; Z = R (minimum).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2d47529-1a90-43b8-9879-8993b503e0ca",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "RMS value of sinusoidal current I₀sinωt",
-    "formula": "I_rms = I₀/√2",
-    "options": [
-      "I₀/√2",
-      "I₀√2",
-      "I₀/2",
-      "2I₀/π"
-    ],
-    "answer": 0,
-    "explain": "For a sine wave, RMS = peak/√2 ≈ 0.707 × peak value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9089813a-c3c3-4e8c-a7bb-c2c9fa711f19",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Average power in AC circuit",
-    "formula": "P = V_rms·I_rms·cosφ",
-    "options": [
-      "V_rms·I_rms",
-      "V_rms·I_rms·cosφ",
-      "V₀·I₀·cosφ",
-      "V_rms·I_rms·sinφ"
-    ],
-    "answer": 1,
-    "explain": "cosφ is the power factor; only the resistive component dissipates power.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b1f357c6-6cda-41a9-8226-27dee7835df8",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Power factor of a pure inductor",
-    "formula": "cosφ = 0",
-    "options": [
-      "0.5",
-      "1",
-      "1/√2",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "Pure inductor has φ = 90°; cos90° = 0, so no real power is consumed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "854fcf25-36ed-49de-8071-8274b4db0e23",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Phase of current relative to voltage in pure capacitor",
-    "formula": "I leads V by 90°",
-    "options": [
-      "In phase",
-      "Current lags voltage by 90°",
-      "Current leads voltage by 90°",
-      "Current leads voltage by 45°"
-    ],
-    "answer": 2,
-    "explain": "In a capacitor, charge (and hence current) leads voltage by π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6bf4c40b-6389-4a8c-bf3a-9325affb7e69",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Inductive reactance X_L depends on frequency as",
-    "formula": "X_L = ωL = 2πfL",
-    "options": [
-      "Independent of f",
-      "Inversely proportional to f",
-      "Directly proportional to f",
-      "Proportional to f²"
-    ],
-    "answer": 2,
-    "explain": "X_L = 2πfL increases linearly with frequency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b2e1475c-7f20-4c60-808a-eff2627b9b38",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Capacitive reactance X_C depends on frequency as",
-    "formula": "X_C = 1/ωC",
-    "options": [
-      "Directly proportional to f",
-      "Inversely proportional to f",
-      "Independent of f",
-      "Proportional to f²"
-    ],
-    "answer": 1,
-    "explain": "X_C = 1/(2πfC) decreases as frequency increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9b7fe9c8-1850-4ebe-89cb-78c2305c21e5",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Quality factor Q of series RLC at resonance",
-    "formula": "Q = ω₀L/R = 1/(ω₀CR)",
-    "options": [
-      "ω₀/R",
-      "ω₀CR",
-      "R/ω₀L",
-      "ω₀L/R"
-    ],
-    "answer": 3,
-    "explain": "Q measures sharpness of resonance; higher Q → narrower bandwidth.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb47ae74-ba0d-410f-b4cb-28f209ef8c92",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Transformer turns ratio and voltage relation",
-    "formula": "V_s/V_p = N_s/N_p",
-    "options": [
-      "V_s/V_p = N_s/N_p",
-      "V_s·V_p = N_s·N_p",
-      "V_s/V_p = N_p/N_s",
-      "V_s = V_p·N_p"
-    ],
-    "answer": 0,
-    "explain": "Secondary voltage scales with turns ratio; step-up if N_s > N_p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96c481f1-864c-492a-b2a3-1a0c95d21383",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In ideal transformer, power relation is",
-    "formula": "V_p·I_p = V_s·I_s",
-    "options": [
-      "I_s/I_p = N_s/N_p",
-      "P_in < P_out",
-      "V_p·I_p = V_s·I_s",
-      "V_p·I_s = V_s·I_p"
-    ],
-    "answer": 2,
-    "explain": "Ideal transformer conserves power; input power equals output power.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0d935333-316d-47bf-a34b-4ba9dc1dcce1",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "At resonance, voltage across L (or C) vs applied voltage",
-    "formula": "V_L = Q·V",
-    "options": [
-      "Q times the applied voltage",
-      "Half the applied voltage",
-      "Zero",
-      "Equal to applied voltage"
-    ],
-    "answer": 0,
-    "explain": "V_L = I·X_L = (V/R)·ω₀L = QV; voltage magnification equals Q factor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "33c5b38f-2841-4e30-9f90-4ada0d742380",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Phase angle φ in series RLC is given by",
-    "formula": "tanφ = (X_L−X_C)/R",
-    "options": [
-      "sin⁻¹[R/Z]",
-      "tan⁻¹[R/(X_L−X_C)]",
-      "tan⁻¹[(X_L+X_C)/R]",
-      "tan⁻¹[(X_L−X_C)/R]"
-    ],
-    "answer": 3,
-    "explain": "φ = tan⁻¹[(X_L−X_C)/R]; positive φ means inductive (current lags).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d2f00661-4024-4155-8fff-1e3bc88c07d7",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a pure resistor, phase difference between V and I is",
-    "formula": "φ = 0",
-    "options": [
-      "0°",
-      "90°",
-      "180°",
-      "45°"
-    ],
-    "answer": 0,
-    "explain": "Resistor obeys Ohm's law instantaneously; V and I are always in phase.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b8bbefc6-4b38-4ee3-8869-e00769c98eed",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Power factor cosφ for series RLC equals",
-    "formula": "cosφ = R/Z",
-    "options": [
-      "R/X_C",
-      "X_L/Z",
-      "Z/R",
-      "R/Z"
-    ],
-    "answer": 3,
-    "explain": "cosφ = R/Z; ranges from 0 (pure reactive) to 1 (pure resistive).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "13d5e56b-2769-4ac5-b89e-830602201bd0",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Domestic AC supply in India: frequency and rms voltage",
-    "formula": "",
-    "options": [
-      "60 Hz, 110 V",
-      "50 Hz, 220 V",
-      "50 Hz, 110 V",
-      "60 Hz, 220 V"
-    ],
-    "answer": 1,
-    "explain": "Indian standard AC supply is 50 Hz frequency with 220 V rms.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "17b42980-bf8a-4932-83a7-468a98825d61",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Peak voltage V₀ relates to rms voltage V_rms by:",
-    "formula": "V₀ = √2·V_rms",
-    "options": [
-      "V₀ = π·V_rms/2",
-      "V₀ = 2·V_rms",
-      "V₀ = V_rms/√2",
-      "V₀ = √2·V_rms"
-    ],
-    "answer": 3,
-    "explain": "For sinusoidal wave, peak value = √2 × rms value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5b9db199-bad0-44e8-894a-1050fc69a36a",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a pure inductor, current lags voltage by:",
-    "formula": "",
-    "options": [
-      "π/4",
-      "0",
-      "π/2",
-      "π"
-    ],
-    "answer": 2,
-    "explain": "In a pure inductor, current lags applied voltage by exactly 90° (π/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "99b60351-0b74-4daf-8394-54195437be01",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Impedance of a pure capacitor of capacitance C at frequency ω:",
-    "formula": "Z = 1/ωC",
-    "options": [
-      "1/ωL",
-      "ωC",
-      "ωL",
-      "1/ωC"
-    ],
-    "answer": 3,
-    "explain": "Pure capacitor has only capacitive reactance X_C = 1/ωC as its impedance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0b812cf0-59de-46b0-89d5-2f9399bf72eb",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Impedance of a pure inductor L at angular frequency ω:",
-    "formula": "Z = ωL",
-    "options": [
-      "L/ω",
-      "ωC",
-      "1/ωL",
-      "ωL"
-    ],
-    "answer": 3,
-    "explain": "Pure inductor has only inductive reactance X_L = ωL as its impedance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c5c90b20-836e-4ca1-abcc-cbc197c34f5f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In series RLC, current leads voltage when:",
-    "formula": "",
-    "options": [
-      "X_C > X_L",
-      "R > X_L",
-      "X_L = X_C",
-      "X_L > X_C"
-    ],
-    "answer": 0,
-    "explain": "When capacitive reactance exceeds inductive reactance, circuit is capacitive; current leads.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eb363ac7-762f-45be-a214-f799c208d3a2",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Resonant frequency of series LC circuit:",
-    "formula": "ω₀ = 1/√(LC)",
-    "options": [
-      "1/(LC)",
-      "√(L/C)",
-      "1/√(LC)",
-      "√(LC)"
-    ],
-    "answer": 2,
-    "explain": "At resonance X_L = X_C gives ω₀ = 1/√(LC).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c5dc942f-9106-4182-bac1-abf771843f16",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a transformer, if N₂ > N₁, it is a:",
-    "formula": "",
-    "options": [
-      "Isolation transformer",
-      "Step-up transformer",
-      "Step-down transformer",
-      "Auto-transformer"
-    ],
-    "answer": 1,
-    "explain": "Secondary turns > primary turns means secondary voltage > primary voltage: step-up.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9d18a4ff-7e4e-4a3a-b8a9-f9393bcd76b9",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Secondary current I₂ vs primary current I₁ in ideal transformer:",
-    "formula": "I₁/I₂ = N₂/N₁",
-    "options": [
-      "I₁N₁ = I₂N₂",
-      "I₁ = I₂",
-      "I₁/I₂ = N₂²/N₁²",
-      "I₁N₂ = I₂N₁"
-    ],
-    "answer": 0,
-    "explain": "Power conservation: V₁I₁ = V₂I₂, so I₁N₁ = I₂N₂ (currents inversely as turns).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "986db485-4d16-46ab-b6b6-9314ddf9bfd1",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Impedance of series RL circuit (no C):",
-    "formula": "Z = √(R²+X_L²)",
-    "options": [
-      "√(R²+ω²L²)",
-      "ωL − R",
-      "√(R²−ω²L²)",
-      "R + ωL"
-    ],
-    "answer": 0,
-    "explain": "For RL series: Z = √(R² + X_L²) = √(R² + ω²L²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c6e3c0cd-91e3-499e-9a3b-368844c15e18",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Impedance of series RC circuit (no L):",
-    "formula": "Z = √(R²+X_C²)",
-    "options": [
-      "R + 1/ωC",
-      "1/ωC − R",
-      "√(R²+1/ω²C²)",
-      "√(R²−1/ω²C²)"
-    ],
-    "answer": 2,
-    "explain": "For RC series: Z = √(R² + X_C²) = √(R² + 1/ω²C²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2d06b0c-6fd0-44de-b494-bb8fb7a4b53e",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The unit of reactance (X_L or X_C) is:",
-    "formula": "",
-    "options": [
-      "Siemens (S)",
-      "Farad (F)",
-      "Henry (H)",
-      "Ohm (Ω)"
-    ],
-    "answer": 3,
-    "explain": "Reactance has SI unit ohm (Ω), same as resistance and impedance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3eb9ffd5-cd80-4e67-b255-54f2f9c3cf67",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "EMF induced in a rotating coil (N turns, area A, field B, ω):",
-    "formula": "ε = NBAω·sinωt",
-    "options": [
-      "NBA cosωt",
-      "NBA/ω sinωt",
-      "NBAω sinωt",
-      "NBAω² sinωt"
-    ],
-    "answer": 2,
-    "explain": "ε = −dΦ/dt = NBAω sinωt; peak emf ε₀ = NBAω.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aeb2de6d-52c1-4ef0-bc3b-2aaa24866160",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Power factor of a series RLC circuit at resonance:",
-    "formula": "cosφ = 1",
-    "options": [
-      "0.5",
-      "0",
-      "1",
-      "1/√2"
-    ],
-    "answer": 2,
-    "explain": "At resonance X_L = X_C, φ = 0, so power factor cosφ = 1 (purely resistive).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a9fe771f-ced3-41ae-b124-2085655b72fe",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Choke coil (inductor) is preferred over resistor to control AC because:",
-    "formula": "",
-    "options": [
-      "It stores charge",
-      "It wastes no power",
-      "It increases frequency",
-      "It has zero inductance"
-    ],
-    "answer": 1,
-    "explain": "Choke (pure inductor) has power factor ≈ 0, so average power dissipation ≈ zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3506b1c4-0522-40cf-b1f9-0e270f38d29f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "If V = V₀ sinωt across a capacitor, current i through it is:",
-    "formula": "i = CV₀ω cos ωt",
-    "options": [
-      "CV₀ω sinωt",
-      "−CV₀ω sinωt",
-      "V₀/(ωC) cosωt",
-      "CV₀ω cosωt"
-    ],
-    "answer": 3,
-    "explain": "i = C·dV/dt = CωV₀ cosωt; current leads voltage by 90° in capacitor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cae12937-4c9f-40b7-8a4e-780b27c113b4",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "At resonance in series RLC, which quantity is maximum?",
-    "formula": "",
-    "options": [
-      "Capacitive reactance",
-      "Current amplitude",
-      "Impedance",
-      "Inductive reactance"
-    ],
-    "answer": 1,
-    "explain": "At resonance Z is minimum (= R), so current amplitude I₀ = V₀/R is maximum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "08023771-0635-4c36-882a-eab2cb45c06f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Sharpness of resonance in series RLC increases when:",
-    "formula": "",
-    "options": [
-      "R decreases",
-      "C decreases",
-      "R increases",
-      "L decreases"
-    ],
-    "answer": 0,
-    "explain": "Q = ω₀L/R; lower resistance gives higher Q factor and sharper resonance peak.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d329c2cc-b27c-4e03-a4eb-4dadf5aaf860",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Which loss in a real transformer is reduced by using laminated core?",
-    "formula": "",
-    "options": [
-      "Eddy current loss",
-      "Flux leakage loss",
-      "Hysteresis loss",
-      "Copper loss"
-    ],
-    "answer": 0,
-    "explain": "Laminated core breaks eddy current paths, drastically reducing eddy current (iron) losses.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3abb5db6-bf8a-49cb-8954-d881bb205f5e",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Phase difference between voltage across R and voltage across L in series RL circuit:",
-    "formula": "",
-    "options": [
-      "45°",
-      "0°",
-      "180°",
-      "90°"
-    ],
-    "answer": 3,
-    "explain": "V_R is in phase with current; V_L leads current by 90°; so V_R and V_L differ by 90°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "200f9b25-d5ac-46c0-9a5d-d3e6fea2a0a0",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In series RLC, V_L and V_C are always:",
-    "formula": "",
-    "options": [
-      "45° out of phase",
-      "In phase",
-      "90° out of phase",
-      "180° out of phase"
-    ],
-    "answer": 3,
-    "explain": "V_L leads current by 90° and V_C lags by 90°, so they are mutually 180° apart.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8524c8c1-aa4d-4e10-802f-14c47ed02bbe",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Frequency of AC at which a capacitor acts as a short circuit:",
-    "formula": "X_C→0 as f→∞",
-    "options": [
-      "Resonant frequency only",
-      "Very high frequency",
-      "Zero frequency",
-      "Very low frequency"
-    ],
-    "answer": 1,
-    "explain": "X_C = 1/ωC → 0 as ω → ∞; capacitor blocks DC (f = 0) and passes high-frequency AC.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d69797ae-1ad7-4eca-b2cd-9fd2d40eff4f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Peak current I₀ relates to rms current I_rms by:",
-    "formula": "I₀ = √2 · I_rms",
-    "options": [
-      "I₀ = √2 · I_rms",
-      "I₀ = π · I_rms/2",
-      "I₀ = I_rms/√2",
-      "I₀ = 2 · I_rms"
-    ],
-    "answer": 0,
-    "explain": "For sinusoidal AC, peak value = √2 × rms value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "09a0317b-ea03-4725-bd9b-87a77f77ac5f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a step-down transformer, the secondary current I₂ compared to I₁ is:",
-    "formula": "I₂/I₁ = N₁/N₂",
-    "options": [
-      "Equal to I₁",
-      "Zero",
-      "Less than I₁",
-      "Greater than I₁"
-    ],
-    "answer": 3,
-    "explain": "Step-down: N₂ < N₁, so I₂ > I₁ (power conserved in ideal transformer).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a8057cb5-9189-4aea-b453-b74b49f4d55b",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Voltage across capacitor C in series RLC at resonance is:",
-    "formula": "V_C = Q · V",
-    "options": [
-      "Q times applied voltage",
-      "Equal to applied voltage",
-      "Zero",
-      "V/Q"
-    ],
-    "answer": 0,
-    "explain": "At resonance V_C = V_L = QV, where Q is the quality factor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8fd91b67-ef90-4637-9708-c80275230fe7",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Which element causes current to LEAD voltage by 90° in AC?",
-    "formula": "",
-    "options": [
-      "Series RL circuit",
-      "Pure resistor",
-      "Pure inductor",
-      "Pure capacitor"
-    ],
-    "answer": 3,
-    "explain": "In a pure capacitor, current leads applied voltage by π/2 (90°).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e793822b-3df5-4143-a555-13a5be5b8d3f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The reactance of an inductor L at DC (ω = 0) is:",
-    "formula": "X_L = ωL",
-    "options": [
-      "1/L",
-      "Zero",
-      "Infinity",
-      "L"
-    ],
-    "answer": 1,
-    "explain": "X_L = ωL = 0 at DC; inductor acts as a short circuit for DC.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "862101af-6ad1-467f-a9ac-197cf5936a27",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The reactance of a capacitor C at DC (ω = 0) is:",
-    "formula": "X_C = 1/(ωC)",
-    "options": [
-      "1/C",
-      "Zero",
-      "Infinity",
-      "C"
-    ],
-    "answer": 2,
-    "explain": "X_C = 1/ωC → ∞ as ω → 0; capacitor blocks DC completely.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "637148f2-b976-4f87-9844-24c3a4f09448",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In AC, true (active) power is given by:",
-    "formula": "P = V_rms · I_rms · cosφ",
-    "options": [
-      "V_rms·I_rms·sinφ",
-      "V₀·I₀·cosφ",
-      "V_rms·I_rms·cosφ",
-      "V_rms·I_rms"
-    ],
-    "answer": 2,
-    "explain": "Active power uses rms values and power factor cosφ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b9f2936b-40f3-4490-b3b3-3524a8eca024",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Reactive (wattless) power in AC circuit is:",
-    "formula": "Q = V_rms · I_rms · sinφ",
-    "options": [
-      "V_rms·I_rms·cosφ",
-      "V_rms·I_rms·tanφ",
-      "V_rms·I_rms·sinφ",
-      "V₀·I₀·sinφ"
-    ],
-    "answer": 2,
-    "explain": "Reactive power Q = V_rms·I_rms·sinφ; unit is VAR.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c6fde0d2-2fef-4a0d-a5ba-631be5b04651",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Apparent power in an AC circuit equals:",
-    "formula": "S = V_rms · I_rms",
-    "options": [
-      "V₀ · I₀",
-      "V_rms · I_rms · cosφ",
-      "V_rms · I_rms",
-      "V_rms · I_rms · sinφ"
-    ],
-    "answer": 2,
-    "explain": "Apparent power S = V_rms·I_rms; unit is volt-ampere (VA).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d7f90e11-640e-4d3f-9496-8c167a68908c",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a series RLC circuit, net voltage V equals:",
-    "formula": "V = √(V_R² + (V_L−V_C)²)",
-    "options": [
-      "√(V_R²+(V_L−V_C)²)",
-      "V_R + |V_L−V_C|",
-      "V_R + V_L + V_C",
-      "√(V_R²+V_L²+V_C²)"
-    ],
-    "answer": 0,
-    "explain": "V_L and V_C are antiphase; net reactive voltage = |V_L−V_C|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b2782596-1a7c-41c1-95f0-5b0556510520",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "An AC ammeter reads:",
-    "formula": "",
-    "options": [
-      "Peak/π value",
-      "Peak value of current",
-      "Average value of current",
-      "RMS value of current"
-    ],
-    "answer": 3,
-    "explain": "AC meters (ammeter/voltmeter) are calibrated to read rms values.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "393603a8-8818-40bb-a629-539caedce76b",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Iron core losses (hysteresis + eddy current) in transformer are called:",
-    "formula": "",
-    "options": [
-      "Dielectric losses",
-      "Core (iron) losses",
-      "Flux leakage losses",
-      "Copper losses"
-    ],
-    "answer": 1,
-    "explain": "Iron losses = hysteresis loss + eddy current loss; copper loss = I²R in windings.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "06612474-5892-4bec-9ed3-9bee374f87fa",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Copper loss in a transformer depends on:",
-    "formula": "P_Cu = I²R",
-    "options": [
-      "Square of current (I²R)",
-      "Frequency",
-      "Core material",
-      "Square of voltage"
-    ],
-    "answer": 0,
-    "explain": "Copper loss = I²R in primary and secondary windings.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d447fa4e-6873-4ad9-a7dd-71d0a5583b01",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Efficiency of an ideal transformer is:",
-    "formula": "η = P_out/P_in × 100%",
-    "options": [
-      "Depends on turns ratio",
-      "90%",
-      "100%",
-      "50%"
-    ],
-    "answer": 2,
-    "explain": "Ideal transformer has no losses, so efficiency = 100%.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e4c23aa9-7397-4d1a-a496-5e84f5458174",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In LC oscillations, total energy of system is:",
-    "formula": "E = ½LI₀² = ½CV₀²",
-    "options": [
-      "Maximum at resonance only",
-      "Constant throughout",
-      "Zero at all times",
-      "Increases with time"
-    ],
-    "answer": 1,
-    "explain": "Energy oscillates between L and C but total remains constant (no resistance).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "11562e31-ccc6-456c-92fe-3456716ed018",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The phase difference between current and voltage in a series RLC circuit (V_L > V_C) is:",
-    "formula": "φ = tan⁻¹[(X_L−X_C)/R]",
-    "options": [
-      "Current lags voltage",
-      "Current leads voltage",
-      "In phase",
-      "90° lag always"
-    ],
-    "answer": 0,
-    "explain": "When X_L > X_C, net reactance is inductive; current lags voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4974871a-1e5b-4cc0-b1c8-a022cb4b1df9",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "A choke coil has high inductance and low resistance. Its power factor is close to:",
-    "formula": "cosφ = R/Z",
-    "options": [
-      "√2/2",
-      "Zero",
-      "One",
-      "0.5"
-    ],
-    "answer": 1,
-    "explain": "Choke: R << X_L, so cosφ = R/Z ≈ 0; nearly wattless.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61b14c93-ec91-4491-aa59-ea0f4d725694",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "If frequency of AC is doubled, X_C becomes:",
-    "formula": "X_C = 1/(2πfC)",
-    "options": [
-      "Unchanged",
-      "Four times",
-      "Half",
-      "Double"
-    ],
-    "answer": 2,
-    "explain": "X_C ∝ 1/f; doubling f halves X_C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2b1e74ae-074e-4cff-be9b-52db046776ef",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "If frequency of AC is doubled, X_L becomes:",
-    "formula": "X_L = 2πfL",
-    "options": [
-      "Double",
-      "Unchanged",
-      "Half",
-      "Four times"
-    ],
-    "answer": 0,
-    "explain": "X_L ∝ f; doubling f doubles X_L.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4d5da498-92c4-41ca-9c44-b7e1dcc12fae",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Time constant of an RL circuit is:",
-    "formula": "τ = L/R",
-    "options": [
-      "√(LC)",
-      "R/L",
-      "L/R",
-      "RC"
-    ],
-    "answer": 2,
-    "explain": "RL time constant τ = L/R; current rises/falls with this time scale.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c2da0f82-0d75-4c36-882b-6e2d4260074f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In AC, the term 'wattful current' refers to component:",
-    "formula": "",
-    "options": [
-      "I_rms cosφ (in phase with V)",
-      "I_rms/√2",
-      "I_rms sinφ (90° out of phase)",
-      "Peak current I₀"
-    ],
-    "answer": 0,
-    "explain": "Wattful current = I_rms cosφ; it does real work.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f7467eae-633b-44b2-9a5e-d77baf49460b",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Displacement current in a capacitor is proportional to:",
-    "formula": "I_d = ε₀ dΦ_E/dt",
-    "options": [
-      "Electric field magnitude",
-      "Charge stored",
-      "Rate of change of electric flux",
-      "Capacitance only"
-    ],
-    "answer": 2,
-    "explain": "I_d = ε₀(dΦ_E/dt); it accounts for AC flowing 'through' capacitor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8a5f34bf-43cb-430e-bb60-db32038ebe68",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "For a series RLC circuit, Q factor can also be written as:",
-    "formula": "Q = (1/R)√(L/C)",
-    "options": [
-      "√(LC)/R",
-      "R/√(LC)",
-      "R√(L/C)",
-      "(1/R)√(L/C)"
-    ],
-    "answer": 3,
-    "explain": "Q = ω₀L/R = 1/(ω₀CR) = (1/R)√(L/C) at resonance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b5de9059-a753-4264-8a43-f97c19fd0b97",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Mutual inductance M relates induced EMF e₂ to primary current i₁ by:",
-    "formula": "e₂ = -M·(di₁/dt)",
-    "options": [
-      "e₂ = M·i₁",
-      "e₂ = -L·(di₁/dt)",
-      "e₂ = -M·(di₁/dt)",
-      "e₂ = M·(d²i₁/dt²)"
-    ],
-    "answer": 2,
-    "explain": "Mutual inductance M: EMF induced in secondary equals -M times rate of change of primary current.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b70c216f-b659-484d-bb52-7ac08535138b",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In LC oscillations, frequency of oscillation f is:",
-    "formula": "f = 1/(2π√LC)",
-    "options": [
-      "1/(√LC)",
-      "1/(2π√LC)",
-      "1/(2πLC)",
-      "2π√LC"
-    ],
-    "answer": 1,
-    "explain": "LC circuit oscillates at natural frequency f = 1/(2π√LC), analogous to SHM.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "191984ad-e90e-4c4a-acaf-d1be98c30081",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Voltage across inductor V_L in series RLC leads current I by:",
-    "formula": "",
-    "options": [
-      "0°",
-      "180°",
-      "45°",
-      "90°"
-    ],
-    "answer": 3,
-    "explain": "In a pure inductor, voltage always leads current by exactly 90°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "133c472b-37d7-4bb8-a563-253f948298f3",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Voltage across resistor V_R in series RLC is __ with current I:",
-    "formula": "",
-    "options": [
-      "In phase (0°)",
-      "Leads by 45°",
-      "Lags by 90°",
-      "Leads by 90°"
-    ],
-    "answer": 0,
-    "explain": "Resistor voltage and current are always in phase; no phase shift across R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "17e368ef-8b41-415b-9f61-fae44dfdb1d7",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In series RLC phasor diagram, V_R, V_L, V_C satisfy:",
-    "formula": "V = √(V_R²+(V_L−V_C)²)",
-    "options": [
-      "V=V_R+V_L+V_C",
-      "V=√(V_R²+(V_L−V_C)²)",
-      "V=V_R+(V_L−V_C)",
-      "V=√(V_R²+V_L²+V_C²)"
-    ],
-    "answer": 1,
-    "explain": "V_L and V_C are anti-phase; net reactive voltage is |V_L−V_C|, combined with V_R by Pythagoras.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f090777c-0a32-430f-b413-d52a9ada7fa5",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Self-inductance L of a solenoid of n turns/m, area A, length ℓ is:",
-    "formula": "L = μ₀n²Aℓ",
-    "options": [
-      "μ₀n²Aℓ",
-      "n²A/(μ₀ℓ)",
-      "μ₀n²A/ℓ",
-      "μ₀nAℓ"
-    ],
-    "answer": 0,
-    "explain": "For a solenoid: L = μ₀n²Aℓ where n = N/ℓ (turns per unit length).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6cabceac-7c1e-4655-a328-60f85ba231b5",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In LC oscillation, when capacitor is fully charged, energy in inductor is:",
-    "formula": "",
-    "options": [
-      "Maximum",
-      "Zero",
-      "Half of total",
-      "Equal to capacitor energy"
-    ],
-    "answer": 1,
-    "explain": "When C is fully charged, current (and hence inductor energy ½LI²) is zero; all energy is in C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c4dd34be-810b-471f-8035-fd6083e8cdaa",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In LC oscillation, when current is maximum, energy in capacitor is:",
-    "formula": "",
-    "options": [
-      "Maximum",
-      "Zero",
-      "Equal to inductor energy",
-      "Half of total"
-    ],
-    "answer": 1,
-    "explain": "Maximum current → all energy in inductor; capacitor is fully discharged so its energy = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e9cda273-4d51-443f-868a-4347bb4e7765",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "SI unit of self-inductance L is:",
-    "formula": "",
-    "options": [
-      "Henry (H)",
-      "Tesla·m²",
-      "Weber (Wb)",
-      "Farad (F)"
-    ],
-    "answer": 0,
-    "explain": "Inductance is measured in Henry; 1 H = 1 V·s/A = 1 Ω·s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "89cac997-abec-4c47-b95c-dd62b2c016be",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The Q factor of a series RLC equals ω₀L/R. It can also be written as:",
-    "formula": "Q = 1/(ω₀CR)",
-    "options": [
-      "ω₀CR",
-      "1/(ω₀CR)",
-      "ω₀C/R",
-      "R/(ω₀L)"
-    ],
-    "answer": 1,
-    "explain": "At resonance ω₀²=1/LC, so ω₀L/R = 1/(ω₀CR); both expressions are equivalent.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "44683b83-ebfb-43a3-b2b7-caedcb4d569d",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "A purely resistive AC circuit has power factor:",
-    "formula": "",
-    "options": [
-      "0",
-      "1/√2",
-      "1",
-      "0.5"
-    ],
-    "answer": 2,
-    "explain": "In pure R circuit, φ = 0°, so cosφ = 1; all power is dissipated (no reactive component).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "38c7e3c0-0180-4a2b-9c90-4c670a1a5f73",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Energy stored in an inductor carrying current I is:",
-    "formula": "U = ½LI²",
-    "options": [
-      "LI²",
-      "½LI²",
-      "L²I",
-      "½L/I²"
-    ],
-    "answer": 1,
-    "explain": "Magnetic energy stored in inductor: U = ½LI², analogous to ½mv² for kinetic energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "83dbe1ce-c2a5-4b13-8a11-1132d45139d2",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Energy stored in a capacitor of capacitance C at voltage V is:",
-    "formula": "U = ½CV²",
-    "options": [
-      "½C/V²",
-      "C²V",
-      "CV²",
-      "½CV²"
-    ],
-    "answer": 3,
-    "explain": "Electric energy in capacitor: U = ½CV² = Q²/(2C); analogous to ½kx² for spring PE.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77a9d081-5943-4b72-a21c-1423ab221f09",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "At resonance in series RLC, impedance Z is:",
-    "formula": "Z = R",
-    "options": [
-      "Zero",
-      "Equal to X_L",
-      "Equal to R",
-      "Maximum"
-    ],
-    "answer": 2,
-    "explain": "At resonance X_L = X_C cancel; Z = √(R²+0²) = R, which is the minimum impedance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "23040dc1-6993-46f8-b44c-98031008614a",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a series RL circuit, tan of phase angle φ is:",
-    "formula": "tanφ = X_L/R = ωL/R",
-    "options": [
-      "R/ωL",
-      "1/(ωLR)",
-      "ωL/R",
-      "ωL·R"
-    ],
-    "answer": 2,
-    "explain": "Phase angle: tanφ = (V_L/V_R) = X_L/R = ωL/R; current lags voltage by φ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d623f536-5481-4a1e-a31c-93c591cd5d9f",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a series RC circuit, tan of phase angle φ is:",
-    "formula": "tanφ = X_C/R = 1/(ωCR)",
-    "options": [
-      "ωC/R",
-      "R/(ωC)",
-      "ωCR",
-      "1/(ωCR)"
-    ],
-    "answer": 3,
-    "explain": "Phase angle: tanφ = X_C/R = 1/(ωCR); current leads voltage by φ in series RC.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c23f2cdd-d9c3-480c-9531-9bca8fe33edb",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a purely inductive circuit, average power over a complete cycle is:",
-    "formula": "P = V_rms I_rms cosφ",
-    "options": [
-      "V_rms·I_rms",
-      "V_rms·I_rms/2",
-      "V₀I₀",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "For pure inductor φ = 90°, cos90° = 0, so average power is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "48e17db4-a281-4339-8ff0-3ab293c71983",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In series RLC phasor, if V_L > V_C, the net phasor V leads I by angle φ where tanφ =",
-    "formula": "tanφ = (X_L−X_C)/R",
-    "options": [
-      "(X_L+X_C)/R",
-      "R/(X_L−X_C)",
-      "X_L/R",
-      "(X_L−X_C)/R"
-    ],
-    "answer": 3,
-    "explain": "Phase angle tanφ = (X_L − X_C)/R; positive means voltage leads current (inductive).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7985128a-3d50-4648-bd98-9969b7879669",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In LC oscillations, energy oscillates between inductor and capacitor with angular frequency:",
-    "formula": "ω = 1/√LC",
-    "options": [
-      "1/LC",
-      "√(L/C)",
-      "√LC",
-      "1/√LC"
-    ],
-    "answer": 3,
-    "explain": "LC oscillation angular frequency ω = 1/√LC (analogous to SHM).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d0cd78ae-609a-4bd4-b0d8-4b54a1d0d908",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "At resonance, the impedance of a series RLC circuit is MINIMUM and equals:",
-    "formula": "Z_min = R",
-    "options": [
-      "√(R²+X_L²)",
-      "X_L − X_C",
-      "Zero",
-      "R"
-    ],
-    "answer": 3,
-    "explain": "At resonance X_L = X_C cancel; Z = R (minimum), giving maximum current.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6a0ebed5-d04c-4777-a57e-526359c6d623",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a series RC circuit driven by V=V₀sinωt, current I leads V by angle φ where:",
-    "formula": "tanφ = 1/(ωCR)",
-    "options": [
-      "tanφ = R·ωC",
-      "tanφ = ωC/R",
-      "tanφ = ωCR",
-      "tanφ = 1/(ωCR)"
-    ],
-    "answer": 3,
-    "explain": "In RC circuit, X_C = 1/ωC; tanφ = X_C/R = 1/(ωCR); current leads.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d6b6c9b2-6c8d-474c-832c-40e47e3fa739",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In a step-up transformer, secondary voltage V₂ > V₁. Secondary current I₂ vs I₁:",
-    "formula": "I₂ = I₁(N₁/N₂)",
-    "options": [
-      "I₂ > I₁",
-      "I₂ = 0",
-      "I₂ = I₁",
-      "I₂ < I₁"
-    ],
-    "answer": 3,
-    "explain": "Power conservation: V₁I₁ = V₂I₂; higher V₂ means lower I₂ (I₂ < I₁).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "595c199b-d8a6-43f4-bff4-3ea8ee82b952",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "If resistance R in a series RLC is doubled (L, C, ω same), resonant frequency ω₀:",
-    "formula": "ω₀ = 1/√LC",
-    "options": [
-      "Halves",
-      "Doubles",
-      "Remains unchanged",
-      "Increases by √2"
-    ],
-    "answer": 2,
-    "explain": "ω₀ = 1/√LC depends only on L and C, not on R; changing R doesn't shift ω₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3d91f2ca-eaf1-4a43-8923-6fb79397822b",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The condition for maximum power transfer in a series RLC AC circuit is:",
-    "formula": "X_L = X_C",
-    "options": [
-      "X_C = 0",
-      "X_L = R",
-      "R = 0",
-      "X_L = X_C (resonance)"
-    ],
-    "answer": 3,
-    "explain": "Maximum power delivered when cosφ = 1, i.e., X_L = X_C (resonance condition).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ee680fad-72d8-4416-ba6f-8b62017357f6",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The power factor of a purely inductive circuit is:",
-    "formula": "cos φ = 0",
-    "options": [
-      "Zero",
-      "Unity",
-      "0.5",
-      "Infinity"
-    ],
-    "answer": 0,
-    "explain": "Phase difference φ=90° in pure inductor, so cosφ=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77c8724d-ea65-4c40-9788-b3a3bfa2bdc3",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "The frequency at which X_L = X_C in a series RLC circuit is called:",
-    "formula": "ωₒ = 1/√LC",
-    "options": [
-      "Resonant frequency",
-      "Half-power frequency",
-      "Natural frequency of R",
-      "Cut-off frequency"
-    ],
-    "answer": 0,
-    "explain": "At resonance X_L=X_C, so ωₒL=1/(ωₒC) giving ωₒ=1/√LC.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b5645d3-b9b9-4710-a848-7667c3d0a505",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "Phasor for voltage across capacitor V_C in series RLC __ current I phasor:",
-    "formula": "",
-    "options": [
-      "Is in phase with",
-      "Leads by 45°",
-      "Lags by 90°",
-      "Leads by 90°"
-    ],
-    "answer": 2,
-    "explain": "V_C lags I by 90° (or equivalently, I leads V_C by 90°) for a capacitor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "adc7540f-f18f-407f-acf3-095453c07415",
-    "subject": "Physics",
-    "chapter": "Alternating Current",
-    "topic": "Alternating Current",
-    "prompt": "In series RLC, if ω > ω₀ (above resonance), the circuit is predominantly:",
-    "formula": "X_L > X_C",
-    "options": [
-      "Capacitive (current leads voltage)",
-      "Resistive",
-      "Inductive (current lags voltage)",
-      "Resonant"
-    ],
-    "answer": 2,
-    "explain": "Above resonance X_L > X_C, net reactance is inductive, so current lags voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "280e05fb-8602-48cf-95a9-59e6fd487f31",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "Impedance of series RLC circuit",
+  "formula": "Z = √(R² + (X_L − X_C)²)",
+  "options": [
+   "X_L − X_C",
+   "√(R²+(X_L−X_C)²)",
+   "R + X_L + X_C",
+   "√(R²+X_L²+X_C²)"
+  ],
+  "answer": 1,
+  "explain": "Net reactance is (X_L−X_C); impedance combines this with R by Pythagoras.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "282effe9-1461-4f58-865f-ddc6214f5ec2",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "Resonance condition in series RLC",
+  "formula": "X_L = X_C  →  ω₀ = 1/√(LC)",
+  "options": [
+   "ω₀ = √(LC)",
+   "ω₀ = 1/√(LC)",
+   "ω₀ = R/L",
+   "ω₀ = 1/RC"
+  ],
+  "answer": 1,
+  "explain": "At resonance inductive and capacitive reactances cancel; Z = R (minimum).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2d47529-1a90-43b8-9879-8993b503e0ca",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "RMS value of sinusoidal current I₀sinωt",
+  "formula": "I_rms = I₀/√2",
+  "options": [
+   "I₀/√2",
+   "I₀√2",
+   "I₀/2",
+   "2I₀/π"
+  ],
+  "answer": 0,
+  "explain": "For a sine wave, RMS = peak/√2 ≈ 0.707 × peak value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9089813a-c3c3-4e8c-a7bb-c2c9fa711f19",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "Average power in AC circuit",
+  "formula": "P = V_rms·I_rms·cosφ",
+  "options": [
+   "V_rms·I_rms",
+   "V_rms·I_rms·cosφ",
+   "V₀·I₀·cosφ",
+   "V_rms·I_rms·sinφ"
+  ],
+  "answer": 1,
+  "explain": "cosφ is the power factor; only the resistive component dissipates power.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b1f357c6-6cda-41a9-8226-27dee7835df8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "Power factor of a pure inductor",
+  "formula": "cosφ = 0",
+  "options": [
+   "0.5",
+   "1",
+   "1/√2",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "Pure inductor has φ = 90°; cos90° = 0, so no real power is consumed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "854fcf25-36ed-49de-8071-8274b4db0e23",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Phase of current relative to voltage in pure capacitor",
+  "formula": "I leads V by 90°",
+  "options": [
+   "In phase",
+   "Current lags voltage by 90°",
+   "Current leads voltage by 90°",
+   "Current leads voltage by 45°"
+  ],
+  "answer": 2,
+  "explain": "In a capacitor, charge (and hence current) leads voltage by π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6bf4c40b-6389-4a8c-bf3a-9325affb7e69",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "Inductive reactance X_L depends on frequency as",
+  "formula": "X_L = ωL = 2πfL",
+  "options": [
+   "Independent of f",
+   "Inversely proportional to f",
+   "Directly proportional to f",
+   "Proportional to f²"
+  ],
+  "answer": 2,
+  "explain": "X_L = 2πfL increases linearly with frequency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b2e1475c-7f20-4c60-808a-eff2627b9b38",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Capacitive reactance X_C depends on frequency as",
+  "formula": "X_C = 1/ωC",
+  "options": [
+   "Directly proportional to f",
+   "Inversely proportional to f",
+   "Independent of f",
+   "Proportional to f²"
+  ],
+  "answer": 1,
+  "explain": "X_C = 1/(2πfC) decreases as frequency increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9b7fe9c8-1850-4ebe-89cb-78c2305c21e5",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "Quality factor Q of series RLC at resonance",
+  "formula": "Q = ω₀L/R = 1/(ω₀CR)",
+  "options": [
+   "ω₀/R",
+   "ω₀CR",
+   "R/ω₀L",
+   "ω₀L/R"
+  ],
+  "answer": 3,
+  "explain": "Q measures sharpness of resonance; higher Q → narrower bandwidth.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb47ae74-ba0d-410f-b4cb-28f209ef8c92",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "Transformer turns ratio and voltage relation",
+  "formula": "V_s/V_p = N_s/N_p",
+  "options": [
+   "V_s/V_p = N_s/N_p",
+   "V_s·V_p = N_s·N_p",
+   "V_s/V_p = N_p/N_s",
+   "V_s = V_p·N_p"
+  ],
+  "answer": 0,
+  "explain": "Secondary voltage scales with turns ratio; step-up if N_s > N_p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96c481f1-864c-492a-b2a3-1a0c95d21383",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "In ideal transformer, power relation is",
+  "formula": "V_p·I_p = V_s·I_s",
+  "options": [
+   "I_s/I_p = N_s/N_p",
+   "P_in < P_out",
+   "V_p·I_p = V_s·I_s",
+   "V_p·I_s = V_s·I_p"
+  ],
+  "answer": 2,
+  "explain": "Ideal transformer conserves power; input power equals output power.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0d935333-316d-47bf-a34b-4ba9dc1dcce1",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At resonance, voltage across L (or C) vs applied voltage",
+  "formula": "V_L = Q·V",
+  "options": [
+   "Q times the applied voltage",
+   "Half the applied voltage",
+   "Zero",
+   "Equal to applied voltage"
+  ],
+  "answer": 0,
+  "explain": "V_L = I·X_L = (V/R)·ω₀L = QV; voltage magnification equals Q factor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "33c5b38f-2841-4e30-9f90-4ada0d742380",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "Phase angle φ in series RLC is given by",
+  "formula": "tanφ = (X_L−X_C)/R",
+  "options": [
+   "sin⁻¹[R/Z]",
+   "tan⁻¹[R/(X_L−X_C)]",
+   "tan⁻¹[(X_L+X_C)/R]",
+   "tan⁻¹[(X_L−X_C)/R]"
+  ],
+  "answer": 3,
+  "explain": "φ = tan⁻¹[(X_L−X_C)/R]; positive φ means inductive (current lags).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d2f00661-4024-4155-8fff-1e3bc88c07d7",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure resistor in AC: phase relation",
+  "prompt": "In a pure resistor, phase difference between V and I is",
+  "formula": "φ = 0",
+  "options": [
+   "0°",
+   "90°",
+   "180°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "Resistor obeys Ohm's law instantaneously; V and I are always in phase.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b8bbefc6-4b38-4ee3-8869-e00769c98eed",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "Power factor cosφ for series RLC equals",
+  "formula": "cosφ = R/Z",
+  "options": [
+   "R/X_C",
+   "X_L/Z",
+   "Z/R",
+   "R/Z"
+  ],
+  "answer": 3,
+  "explain": "cosφ = R/Z; ranges from 0 (pure reactive) to 1 (pure resistive).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "13d5e56b-2769-4ac5-b89e-830602201bd0",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Domestic AC supply in India: frequency and rms voltage",
+  "formula": "",
+  "options": [
+   "60 Hz, 110 V",
+   "50 Hz, 220 V",
+   "50 Hz, 110 V",
+   "60 Hz, 220 V"
+  ],
+  "answer": 1,
+  "explain": "Indian standard AC supply is 50 Hz frequency with 220 V rms.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "17b42980-bf8a-4932-83a7-468a98825d61",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Peak voltage V₀ relates to rms voltage V_rms by:",
+  "formula": "V₀ = √2·V_rms",
+  "options": [
+   "V₀ = π·V_rms/2",
+   "V₀ = 2·V_rms",
+   "V₀ = V_rms/√2",
+   "V₀ = √2·V_rms"
+  ],
+  "answer": 3,
+  "explain": "For sinusoidal wave, peak value = √2 × rms value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5b9db199-bad0-44e8-894a-1050fc69a36a",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "In a pure inductor, current lags voltage by:",
+  "formula": "",
+  "options": [
+   "π/4",
+   "0",
+   "π/2",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "In a pure inductor, current lags applied voltage by exactly 90° (π/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "99b60351-0b74-4daf-8394-54195437be01",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Impedance of a pure capacitor of capacitance C at frequency ω:",
+  "formula": "Z = 1/ωC",
+  "options": [
+   "1/ωL",
+   "ωC",
+   "ωL",
+   "1/ωC"
+  ],
+  "answer": 3,
+  "explain": "Pure capacitor has only capacitive reactance X_C = 1/ωC as its impedance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0b812cf0-59de-46b0-89d5-2f9399bf72eb",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "Impedance of a pure inductor L at angular frequency ω:",
+  "formula": "Z = ωL",
+  "options": [
+   "L/ω",
+   "ωC",
+   "1/ωL",
+   "ωL"
+  ],
+  "answer": 3,
+  "explain": "Pure inductor has only inductive reactance X_L = ωL as its impedance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c5c90b20-836e-4ca1-abcc-cbc197c34f5f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In series RLC, current leads voltage when:",
+  "formula": "",
+  "options": [
+   "X_C > X_L",
+   "R > X_L",
+   "X_L = X_C",
+   "X_L > X_C"
+  ],
+  "answer": 0,
+  "explain": "When capacitive reactance exceeds inductive reactance, circuit is capacitive; current leads.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eb363ac7-762f-45be-a214-f799c208d3a2",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "Resonant frequency of series LC circuit:",
+  "formula": "ω₀ = 1/√(LC)",
+  "options": [
+   "1/(LC)",
+   "√(L/C)",
+   "1/√(LC)",
+   "√(LC)"
+  ],
+  "answer": 2,
+  "explain": "At resonance X_L = X_C gives ω₀ = 1/√(LC).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c5dc942f-9106-4182-bac1-abf771843f16",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "In a transformer, if N₂ > N₁, it is a:",
+  "formula": "",
+  "options": [
+   "Isolation transformer",
+   "Step-up transformer",
+   "Step-down transformer",
+   "Auto-transformer"
+  ],
+  "answer": 1,
+  "explain": "Secondary turns > primary turns means secondary voltage > primary voltage: step-up.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9d18a4ff-7e4e-4a3a-b8a9-f9393bcd76b9",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "Secondary current I₂ vs primary current I₁ in ideal transformer:",
+  "formula": "I₁/I₂ = N₂/N₁",
+  "options": [
+   "I₁N₁ = I₂N₂",
+   "I₁ = I₂",
+   "I₁/I₂ = N₂²/N₁²",
+   "I₁N₂ = I₂N₁"
+  ],
+  "answer": 0,
+  "explain": "Power conservation: V₁I₁ = V₂I₂, so I₁N₁ = I₂N₂ (currents inversely as turns).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "986db485-4d16-46ab-b6b6-9314ddf9bfd1",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LR and RC circuits: impedance",
+  "prompt": "Impedance of series RL circuit (no C):",
+  "formula": "Z = √(R²+X_L²)",
+  "options": [
+   "√(R²+ω²L²)",
+   "ωL − R",
+   "√(R²−ω²L²)",
+   "R + ωL"
+  ],
+  "answer": 0,
+  "explain": "For RL series: Z = √(R² + X_L²) = √(R² + ω²L²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c6e3c0cd-91e3-499e-9a3b-368844c15e18",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LR and RC circuits: impedance",
+  "prompt": "Impedance of series RC circuit (no L):",
+  "formula": "Z = √(R²+X_C²)",
+  "options": [
+   "R + 1/ωC",
+   "1/ωC − R",
+   "√(R²+1/ω²C²)",
+   "√(R²−1/ω²C²)"
+  ],
+  "answer": 2,
+  "explain": "For RC series: Z = √(R² + X_C²) = √(R² + 1/ω²C²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2d06b0c-6fd0-44de-b494-bb8fb7a4b53e",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "The unit of reactance (X_L or X_C) is:",
+  "formula": "",
+  "options": [
+   "Siemens (S)",
+   "Farad (F)",
+   "Henry (H)",
+   "Ohm (Ω)"
+  ],
+  "answer": 3,
+  "explain": "Reactance has SI unit ohm (Ω), same as resistance and impedance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3eb9ffd5-cd80-4e67-b255-54f2f9c3cf67",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC generator: principle and emf",
+  "prompt": "EMF induced in a rotating coil (N turns, area A, field B, ω):",
+  "formula": "ε = NBAω·sinωt",
+  "options": [
+   "NBA cosωt",
+   "NBA/ω sinωt",
+   "NBAω sinωt",
+   "NBAω² sinωt"
+  ],
+  "answer": 2,
+  "explain": "ε = −dΦ/dt = NBAω sinωt; peak emf ε₀ = NBAω.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aeb2de6d-52c1-4ef0-bc3b-2aaa24866160",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "Power factor of a series RLC circuit at resonance:",
+  "formula": "cosφ = 1",
+  "options": [
+   "0.5",
+   "0",
+   "1",
+   "1/√2"
+  ],
+  "answer": 2,
+  "explain": "At resonance X_L = X_C, φ = 0, so power factor cosφ = 1 (purely resistive).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a9fe771f-ced3-41ae-b124-2085655b72fe",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Choke coil",
+  "prompt": "Choke coil (inductor) is preferred over resistor to control AC because:",
+  "formula": "",
+  "options": [
+   "It stores charge",
+   "It wastes no power",
+   "It increases frequency",
+   "It has zero inductance"
+  ],
+  "answer": 1,
+  "explain": "Choke (pure inductor) has power factor ≈ 0, so average power dissipation ≈ zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3506b1c4-0522-40cf-b1f9-0e270f38d29f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "If V = V₀ sinωt across a capacitor, current i through it is:",
+  "formula": "i = CV₀ω cos ωt",
+  "options": [
+   "CV₀ω sinωt",
+   "−CV₀ω sinωt",
+   "V₀/(ωC) cosωt",
+   "CV₀ω cosωt"
+  ],
+  "answer": 3,
+  "explain": "i = C·dV/dt = CωV₀ cosωt; current leads voltage by 90° in capacitor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cae12937-4c9f-40b7-8a4e-780b27c113b4",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At resonance in series RLC, which quantity is maximum?",
+  "formula": "",
+  "options": [
+   "Capacitive reactance",
+   "Current amplitude",
+   "Impedance",
+   "Inductive reactance"
+  ],
+  "answer": 1,
+  "explain": "At resonance Z is minimum (= R), so current amplitude I₀ = V₀/R is maximum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "08023771-0635-4c36-882a-eab2cb45c06f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "Sharpness of resonance in series RLC increases when:",
+  "formula": "",
+  "options": [
+   "R decreases",
+   "C decreases",
+   "R increases",
+   "L decreases"
+  ],
+  "answer": 0,
+  "explain": "Q = ω₀L/R; lower resistance gives higher Q factor and sharper resonance peak.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d329c2cc-b27c-4e03-a4eb-4dadf5aaf860",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer energy losses",
+  "prompt": "Which loss in a real transformer is reduced by using laminated core?",
+  "formula": "",
+  "options": [
+   "Eddy current loss",
+   "Flux leakage loss",
+   "Hysteresis loss",
+   "Copper loss"
+  ],
+  "answer": 0,
+  "explain": "Laminated core breaks eddy current paths, drastically reducing eddy current (iron) losses.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3abb5db6-bf8a-49cb-8954-d881bb205f5e",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Phasor diagrams for AC circuits",
+  "prompt": "Phase difference between voltage across R and voltage across L in series RL circuit:",
+  "formula": "",
+  "options": [
+   "45°",
+   "0°",
+   "180°",
+   "90°"
+  ],
+  "answer": 3,
+  "explain": "V_R is in phase with current; V_L leads current by 90°; so V_R and V_L differ by 90°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "200f9b25-d5ac-46c0-9a5d-d3e6fea2a0a0",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Phasor diagrams for AC circuits",
+  "prompt": "In series RLC, V_L and V_C are always:",
+  "formula": "",
+  "options": [
+   "45° out of phase",
+   "In phase",
+   "90° out of phase",
+   "180° out of phase"
+  ],
+  "answer": 3,
+  "explain": "V_L leads current by 90° and V_C lags by 90°, so they are mutually 180° apart.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8524c8c1-aa4d-4e10-802f-14c47ed02bbe",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Frequency of AC at which a capacitor acts as a short circuit:",
+  "formula": "X_C→0 as f→∞",
+  "options": [
+   "Resonant frequency only",
+   "Very high frequency",
+   "Zero frequency",
+   "Very low frequency"
+  ],
+  "answer": 1,
+  "explain": "X_C = 1/ωC → 0 as ω → ∞; capacitor blocks DC (f = 0) and passes high-frequency AC.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d69797ae-1ad7-4eca-b2cd-9fd2d40eff4f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Peak current I₀ relates to rms current I_rms by:",
+  "formula": "I₀ = √2 · I_rms",
+  "options": [
+   "I₀ = √2 · I_rms",
+   "I₀ = π · I_rms/2",
+   "I₀ = I_rms/√2",
+   "I₀ = 2 · I_rms"
+  ],
+  "answer": 0,
+  "explain": "For sinusoidal AC, peak value = √2 × rms value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "09a0317b-ea03-4725-bd9b-87a77f77ac5f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "In a step-down transformer, the secondary current I₂ compared to I₁ is:",
+  "formula": "I₂/I₁ = N₁/N₂",
+  "options": [
+   "Equal to I₁",
+   "Zero",
+   "Less than I₁",
+   "Greater than I₁"
+  ],
+  "answer": 3,
+  "explain": "Step-down: N₂ < N₁, so I₂ > I₁ (power conserved in ideal transformer).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a8057cb5-9189-4aea-b453-b74b49f4d55b",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "Voltage across capacitor C in series RLC at resonance is:",
+  "formula": "V_C = Q · V",
+  "options": [
+   "Q times applied voltage",
+   "Equal to applied voltage",
+   "Zero",
+   "V/Q"
+  ],
+  "answer": 0,
+  "explain": "At resonance V_C = V_L = QV, where Q is the quality factor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8fd91b67-ef90-4637-9708-c80275230fe7",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Which element causes current to LEAD voltage by 90° in AC?",
+  "formula": "",
+  "options": [
+   "Series RL circuit",
+   "Pure resistor",
+   "Pure inductor",
+   "Pure capacitor"
+  ],
+  "answer": 3,
+  "explain": "In a pure capacitor, current leads applied voltage by π/2 (90°).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e793822b-3df5-4143-a555-13a5be5b8d3f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "The reactance of an inductor L at DC (ω = 0) is:",
+  "formula": "X_L = ωL",
+  "options": [
+   "1/L",
+   "Zero",
+   "Infinity",
+   "L"
+  ],
+  "answer": 1,
+  "explain": "X_L = ωL = 0 at DC; inductor acts as a short circuit for DC.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "862101af-6ad1-467f-a9ac-197cf5936a27",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "The reactance of a capacitor C at DC (ω = 0) is:",
+  "formula": "X_C = 1/(ωC)",
+  "options": [
+   "1/C",
+   "Zero",
+   "Infinity",
+   "C"
+  ],
+  "answer": 2,
+  "explain": "X_C = 1/ωC → ∞ as ω → 0; capacitor blocks DC completely.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "637148f2-b976-4f87-9844-24c3a4f09448",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "In AC, true (active) power is given by:",
+  "formula": "P = V_rms · I_rms · cosφ",
+  "options": [
+   "V_rms·I_rms·sinφ",
+   "V₀·I₀·cosφ",
+   "V_rms·I_rms·cosφ",
+   "V_rms·I_rms"
+  ],
+  "answer": 2,
+  "explain": "Active power uses rms values and power factor cosφ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b9f2936b-40f3-4490-b3b3-3524a8eca024",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "Reactive (wattless) power in AC circuit is:",
+  "formula": "Q = V_rms · I_rms · sinφ",
+  "options": [
+   "V_rms·I_rms·cosφ",
+   "V_rms·I_rms·tanφ",
+   "V_rms·I_rms·sinφ",
+   "V₀·I₀·sinφ"
+  ],
+  "answer": 2,
+  "explain": "Reactive power Q = V_rms·I_rms·sinφ; unit is VAR.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c6fde0d2-2fef-4a0d-a5ba-631be5b04651",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "Apparent power in an AC circuit equals:",
+  "formula": "S = V_rms · I_rms",
+  "options": [
+   "V₀ · I₀",
+   "V_rms · I_rms · cosφ",
+   "V_rms · I_rms",
+   "V_rms · I_rms · sinφ"
+  ],
+  "answer": 2,
+  "explain": "Apparent power S = V_rms·I_rms; unit is volt-ampere (VA).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d7f90e11-640e-4d3f-9496-8c167a68908c",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In a series RLC circuit, net voltage V equals:",
+  "formula": "V = √(V_R² + (V_L−V_C)²)",
+  "options": [
+   "√(V_R²+(V_L−V_C)²)",
+   "V_R + |V_L−V_C|",
+   "V_R + V_L + V_C",
+   "√(V_R²+V_L²+V_C²)"
+  ],
+  "answer": 0,
+  "explain": "V_L and V_C are antiphase; net reactive voltage = |V_L−V_C|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b2782596-1a7c-41c1-95f0-5b0556510520",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "An AC ammeter reads:",
+  "formula": "",
+  "options": [
+   "Peak/π value",
+   "Peak value of current",
+   "Average value of current",
+   "RMS value of current"
+  ],
+  "answer": 3,
+  "explain": "AC meters (ammeter/voltmeter) are calibrated to read rms values.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "393603a8-8818-40bb-a629-539caedce76b",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer energy losses",
+  "prompt": "Iron core losses (hysteresis + eddy current) in transformer are called:",
+  "formula": "",
+  "options": [
+   "Dielectric losses",
+   "Core (iron) losses",
+   "Flux leakage losses",
+   "Copper losses"
+  ],
+  "answer": 1,
+  "explain": "Iron losses = hysteresis loss + eddy current loss; copper loss = I²R in windings.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "06612474-5892-4bec-9ed3-9bee374f87fa",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer energy losses",
+  "prompt": "Copper loss in a transformer depends on:",
+  "formula": "P_Cu = I²R",
+  "options": [
+   "Square of current (I²R)",
+   "Frequency",
+   "Core material",
+   "Square of voltage"
+  ],
+  "answer": 0,
+  "explain": "Copper loss = I²R in primary and secondary windings.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d447fa4e-6873-4ad9-a7dd-71d0a5583b01",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "Efficiency of an ideal transformer is:",
+  "formula": "η = P_out/P_in × 100%",
+  "options": [
+   "Depends on turns ratio",
+   "90%",
+   "100%",
+   "50%"
+  ],
+  "answer": 2,
+  "explain": "Ideal transformer has no losses, so efficiency = 100%.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e4c23aa9-7397-4d1a-a496-5e84f5458174",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "In LC oscillations, total energy of system is:",
+  "formula": "E = ½LI₀² = ½CV₀²",
+  "options": [
+   "Maximum at resonance only",
+   "Constant throughout",
+   "Zero at all times",
+   "Increases with time"
+  ],
+  "answer": 1,
+  "explain": "Energy oscillates between L and C but total remains constant (no resistance).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "11562e31-ccc6-456c-92fe-3456716ed018",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "The phase difference between current and voltage in a series RLC circuit (V_L > V_C) is:",
+  "formula": "φ = tan⁻¹[(X_L−X_C)/R]",
+  "options": [
+   "Current lags voltage",
+   "Current leads voltage",
+   "In phase",
+   "90° lag always"
+  ],
+  "answer": 0,
+  "explain": "When X_L > X_C, net reactance is inductive; current lags voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4974871a-1e5b-4cc0-b1c8-a022cb4b1df9",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Choke coil",
+  "prompt": "A choke coil has high inductance and low resistance. Its power factor is close to:",
+  "formula": "cosφ = R/Z",
+  "options": [
+   "√2/2",
+   "Zero",
+   "One",
+   "0.5"
+  ],
+  "answer": 1,
+  "explain": "Choke: R << X_L, so cosφ = R/Z ≈ 0; nearly wattless.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61b14c93-ec91-4491-aa59-ea0f4d725694",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "If frequency of AC is doubled, X_C becomes:",
+  "formula": "X_C = 1/(2πfC)",
+  "options": [
+   "Unchanged",
+   "Four times",
+   "Half",
+   "Double"
+  ],
+  "answer": 2,
+  "explain": "X_C ∝ 1/f; doubling f halves X_C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2b1e74ae-074e-4cff-be9b-52db046776ef",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "If frequency of AC is doubled, X_L becomes:",
+  "formula": "X_L = 2πfL",
+  "options": [
+   "Double",
+   "Unchanged",
+   "Half",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "X_L ∝ f; doubling f doubles X_L.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4d5da498-92c4-41ca-9c44-b7e1dcc12fae",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LR and RC circuits: impedance",
+  "prompt": "Time constant of an RL circuit is:",
+  "formula": "τ = L/R",
+  "options": [
+   "√(LC)",
+   "R/L",
+   "L/R",
+   "RC"
+  ],
+  "answer": 2,
+  "explain": "RL time constant τ = L/R; current rises/falls with this time scale.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c2da0f82-0d75-4c36-882b-6e2d4260074f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "In AC, the term 'wattful current' refers to component:",
+  "formula": "",
+  "options": [
+   "I_rms cosφ (in phase with V)",
+   "I_rms/√2",
+   "I_rms sinφ (90° out of phase)",
+   "Peak current I₀"
+  ],
+  "answer": 0,
+  "explain": "Wattful current = I_rms cosφ; it does real work.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7467eae-633b-44b2-9a5e-d77baf49460b",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "Displacement current in a capacitor is proportional to:",
+  "formula": "I_d = ε₀ dΦ_E/dt",
+  "options": [
+   "Electric field magnitude",
+   "Charge stored",
+   "Rate of change of electric flux",
+   "Capacitance only"
+  ],
+  "answer": 2,
+  "explain": "I_d = ε₀(dΦ_E/dt); it accounts for AC flowing 'through' capacitor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8a5f34bf-43cb-430e-bb60-db32038ebe68",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "For a series RLC circuit, Q factor can also be written as:",
+  "formula": "Q = (1/R)√(L/C)",
+  "options": [
+   "√(LC)/R",
+   "R/√(LC)",
+   "R√(L/C)",
+   "(1/R)√(L/C)"
+  ],
+  "answer": 3,
+  "explain": "Q = ω₀L/R = 1/(ω₀CR) = (1/R)√(L/C) at resonance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b5de9059-a753-4264-8a43-f97c19fd0b97",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "Mutual inductance M relates induced EMF e₂ to primary current i₁ by:",
+  "formula": "e₂ = -M·(di₁/dt)",
+  "options": [
+   "e₂ = M·i₁",
+   "e₂ = -L·(di₁/dt)",
+   "e₂ = -M·(di₁/dt)",
+   "e₂ = M·(d²i₁/dt²)"
+  ],
+  "answer": 2,
+  "explain": "Mutual inductance M: EMF induced in secondary equals -M times rate of change of primary current.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b70c216f-b659-484d-bb52-7ac08535138b",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "In LC oscillations, frequency of oscillation f is:",
+  "formula": "f = 1/(2π√LC)",
+  "options": [
+   "1/(√LC)",
+   "1/(2π√LC)",
+   "1/(2πLC)",
+   "2π√LC"
+  ],
+  "answer": 1,
+  "explain": "LC circuit oscillates at natural frequency f = 1/(2π√LC), analogous to SHM.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "191984ad-e90e-4c4a-acaf-d1be98c30081",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Phasor diagrams for AC circuits",
+  "prompt": "Voltage across inductor V_L in series RLC leads current I by:",
+  "formula": "",
+  "options": [
+   "0°",
+   "180°",
+   "45°",
+   "90°"
+  ],
+  "answer": 3,
+  "explain": "In a pure inductor, voltage always leads current by exactly 90°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "133c472b-37d7-4bb8-a563-253f948298f3",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure resistor in AC: phase relation",
+  "prompt": "Voltage across resistor V_R in series RLC is __ with current I:",
+  "formula": "",
+  "options": [
+   "In phase (0°)",
+   "Leads by 45°",
+   "Lags by 90°",
+   "Leads by 90°"
+  ],
+  "answer": 0,
+  "explain": "Resistor voltage and current are always in phase; no phase shift across R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "17e368ef-8b41-415b-9f61-fae44dfdb1d7",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Phasor diagrams for AC circuits",
+  "prompt": "In series RLC phasor diagram, V_R, V_L, V_C satisfy:",
+  "formula": "V = √(V_R²+(V_L−V_C)²)",
+  "options": [
+   "V=V_R+V_L+V_C",
+   "V=√(V_R²+(V_L−V_C)²)",
+   "V=V_R+(V_L−V_C)",
+   "V=√(V_R²+V_L²+V_C²)"
+  ],
+  "answer": 1,
+  "explain": "V_L and V_C are anti-phase; net reactive voltage is |V_L−V_C|, combined with V_R by Pythagoras.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f090777c-0a32-430f-b413-d52a9ada7fa5",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "Self-inductance L of a solenoid of n turns/m, area A, length ℓ is:",
+  "formula": "L = μ₀n²Aℓ",
+  "options": [
+   "μ₀n²Aℓ",
+   "n²A/(μ₀ℓ)",
+   "μ₀n²A/ℓ",
+   "μ₀nAℓ"
+  ],
+  "answer": 0,
+  "explain": "For a solenoid: L = μ₀n²Aℓ where n = N/ℓ (turns per unit length).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6cabceac-7c1e-4655-a328-60f85ba231b5",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "In LC oscillation, when capacitor is fully charged, energy in inductor is:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Zero",
+   "Half of total",
+   "Equal to capacitor energy"
+  ],
+  "answer": 1,
+  "explain": "When C is fully charged, current (and hence inductor energy ½LI²) is zero; all energy is in C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c4dd34be-810b-471f-8035-fd6083e8cdaa",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "In LC oscillation, when current is maximum, energy in capacitor is:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Zero",
+   "Equal to inductor energy",
+   "Half of total"
+  ],
+  "answer": 1,
+  "explain": "Maximum current → all energy in inductor; capacitor is fully discharged so its energy = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e9cda273-4d51-443f-868a-4347bb4e7765",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "SI unit of self-inductance L is:",
+  "formula": "",
+  "options": [
+   "Henry (H)",
+   "Tesla·m²",
+   "Weber (Wb)",
+   "Farad (F)"
+  ],
+  "answer": 0,
+  "explain": "Inductance is measured in Henry; 1 H = 1 V·s/A = 1 Ω·s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "89cac997-abec-4c47-b95c-dd62b2c016be",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "The Q factor of a series RLC equals ω₀L/R. It can also be written as:",
+  "formula": "Q = 1/(ω₀CR)",
+  "options": [
+   "ω₀CR",
+   "1/(ω₀CR)",
+   "ω₀C/R",
+   "R/(ω₀L)"
+  ],
+  "answer": 1,
+  "explain": "At resonance ω₀²=1/LC, so ω₀L/R = 1/(ω₀CR); both expressions are equivalent.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "44683b83-ebfb-43a3-b2b7-caedcb4d569d",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "A purely resistive AC circuit has power factor:",
+  "formula": "",
+  "options": [
+   "0",
+   "1/√2",
+   "1",
+   "0.5"
+  ],
+  "answer": 2,
+  "explain": "In pure R circuit, φ = 0°, so cosφ = 1; all power is dissipated (no reactive component).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "38c7e3c0-0180-4a2b-9c90-4c670a1a5f73",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "Energy stored in an inductor carrying current I is:",
+  "formula": "U = ½LI²",
+  "options": [
+   "LI²",
+   "½LI²",
+   "L²I",
+   "½L/I²"
+  ],
+  "answer": 1,
+  "explain": "Magnetic energy stored in inductor: U = ½LI², analogous to ½mv² for kinetic energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "83dbe1ce-c2a5-4b13-8a11-1132d45139d2",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "Energy stored in a capacitor of capacitance C at voltage V is:",
+  "formula": "U = ½CV²",
+  "options": [
+   "½C/V²",
+   "C²V",
+   "CV²",
+   "½CV²"
+  ],
+  "answer": 3,
+  "explain": "Electric energy in capacitor: U = ½CV² = Q²/(2C); analogous to ½kx² for spring PE.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77a9d081-5943-4b72-a21c-1423ab221f09",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At resonance in series RLC, impedance Z is:",
+  "formula": "Z = R",
+  "options": [
+   "Zero",
+   "Equal to X_L",
+   "Equal to R",
+   "Maximum"
+  ],
+  "answer": 2,
+  "explain": "At resonance X_L = X_C cancel; Z = √(R²+0²) = R, which is the minimum impedance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "23040dc1-6993-46f8-b44c-98031008614a",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LR and RC circuits: impedance",
+  "prompt": "In a series RL circuit, tan of phase angle φ is:",
+  "formula": "tanφ = X_L/R = ωL/R",
+  "options": [
+   "R/ωL",
+   "1/(ωLR)",
+   "ωL/R",
+   "ωL·R"
+  ],
+  "answer": 2,
+  "explain": "Phase angle: tanφ = (V_L/V_R) = X_L/R = ωL/R; current lags voltage by φ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d623f536-5481-4a1e-a31c-93c591cd5d9f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LR and RC circuits: impedance",
+  "prompt": "In a series RC circuit, tan of phase angle φ is:",
+  "formula": "tanφ = X_C/R = 1/(ωCR)",
+  "options": [
+   "ωC/R",
+   "R/(ωC)",
+   "ωCR",
+   "1/(ωCR)"
+  ],
+  "answer": 3,
+  "explain": "Phase angle: tanφ = X_C/R = 1/(ωCR); current leads voltage by φ in series RC.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c23f2cdd-d9c3-480c-9531-9bca8fe33edb",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "In a purely inductive circuit, average power over a complete cycle is:",
+  "formula": "P = V_rms I_rms cosφ",
+  "options": [
+   "V_rms·I_rms",
+   "V_rms·I_rms/2",
+   "V₀I₀",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "For pure inductor φ = 90°, cos90° = 0, so average power is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "48e17db4-a281-4339-8ff0-3ab293c71983",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In series RLC phasor, if V_L > V_C, the net phasor V leads I by angle φ where tanφ =",
+  "formula": "tanφ = (X_L−X_C)/R",
+  "options": [
+   "(X_L+X_C)/R",
+   "R/(X_L−X_C)",
+   "X_L/R",
+   "(X_L−X_C)/R"
+  ],
+  "answer": 3,
+  "explain": "Phase angle tanφ = (X_L − X_C)/R; positive means voltage leads current (inductive).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7985128a-3d50-4648-bd98-9969b7879669",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Alternating Current",
+  "prompt": "In LC oscillations, energy oscillates between inductor and capacitor with angular frequency:",
+  "formula": "ω = 1/√LC",
+  "options": [
+   "1/LC",
+   "√(L/C)",
+   "√LC",
+   "1/√LC"
+  ],
+  "answer": 3,
+  "explain": "LC oscillation angular frequency ω = 1/√LC (analogous to SHM).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d0cd78ae-609a-4bd4-b0d8-4b54a1d0d908",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At resonance, the impedance of a series RLC circuit is MINIMUM and equals:",
+  "formula": "Z_min = R",
+  "options": [
+   "√(R²+X_L²)",
+   "X_L − X_C",
+   "Zero",
+   "R"
+  ],
+  "answer": 3,
+  "explain": "At resonance X_L = X_C cancel; Z = R (minimum), giving maximum current.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6a0ebed5-d04c-4777-a57e-526359c6d623",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LR and RC circuits: impedance",
+  "prompt": "In a series RC circuit driven by V=V₀sinωt, current I leads V by angle φ where:",
+  "formula": "tanφ = 1/(ωCR)",
+  "options": [
+   "tanφ = R·ωC",
+   "tanφ = ωC/R",
+   "tanφ = ωCR",
+   "tanφ = 1/(ωCR)"
+  ],
+  "answer": 3,
+  "explain": "In RC circuit, X_C = 1/ωC; tanφ = X_C/R = 1/(ωCR); current leads.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d6b6c9b2-6c8d-474c-832c-40e47e3fa739",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "In a step-up transformer, secondary voltage V₂ > V₁. Secondary current I₂ vs I₁:",
+  "formula": "I₂ = I₁(N₁/N₂)",
+  "options": [
+   "I₂ > I₁",
+   "I₂ = 0",
+   "I₂ = I₁",
+   "I₂ < I₁"
+  ],
+  "answer": 3,
+  "explain": "Power conservation: V₁I₁ = V₂I₂; higher V₂ means lower I₂ (I₂ < I₁).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "595c199b-d8a6-43f4-bff4-3ea8ee82b952",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "If resistance R in a series RLC is doubled (L, C, ω same), resonant frequency ω₀:",
+  "formula": "ω₀ = 1/√LC",
+  "options": [
+   "Halves",
+   "Doubles",
+   "Remains unchanged",
+   "Increases by √2"
+  ],
+  "answer": 2,
+  "explain": "ω₀ = 1/√LC depends only on L and C, not on R; changing R doesn't shift ω₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3d91f2ca-eaf1-4a43-8923-6fb79397822b",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "The condition for maximum power transfer in a series RLC AC circuit is:",
+  "formula": "X_L = X_C",
+  "options": [
+   "X_C = 0",
+   "X_L = R",
+   "R = 0",
+   "X_L = X_C (resonance)"
+  ],
+  "answer": 3,
+  "explain": "Maximum power delivered when cosφ = 1, i.e., X_L = X_C (resonance condition).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ee680fad-72d8-4416-ba6f-8b62017357f6",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "The power factor of a purely inductive circuit is:",
+  "formula": "cos φ = 0",
+  "options": [
+   "Zero",
+   "Unity",
+   "0.5",
+   "Infinity"
+  ],
+  "answer": 0,
+  "explain": "Phase difference φ=90° in pure inductor, so cosφ=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77c8724d-ea65-4c40-9788-b3a3bfa2bdc3",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "The frequency at which X_L = X_C in a series RLC circuit is called:",
+  "formula": "ωₒ = 1/√LC",
+  "options": [
+   "Resonant frequency",
+   "Half-power frequency",
+   "Natural frequency of R",
+   "Cut-off frequency"
+  ],
+  "answer": 0,
+  "explain": "At resonance X_L=X_C, so ωₒL=1/(ωₒC) giving ωₒ=1/√LC.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b5645d3-b9b9-4710-a848-7667c3d0a505",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Phasor diagrams for AC circuits",
+  "prompt": "Phasor for voltage across capacitor V_C in series RLC __ current I phasor:",
+  "formula": "",
+  "options": [
+   "Is in phase with",
+   "Leads by 45°",
+   "Lags by 90°",
+   "Leads by 90°"
+  ],
+  "answer": 2,
+  "explain": "V_C lags I by 90° (or equivalently, I leads V_C by 90°) for a capacitor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "adc7540f-f18f-407f-acf3-095453c07415",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In series RLC, if ω > ω₀ (above resonance), the circuit is predominantly:",
+  "formula": "X_L > X_C",
+  "options": [
+   "Capacitive (current leads voltage)",
+   "Resistive",
+   "Inductive (current lags voltage)",
+   "Resonant"
+  ],
+  "answer": 2,
+  "explain": "Above resonance X_L > X_C, net reactance is inductive, so current lags voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "955a4137-3adf-4bf9-a428-093d223e9510",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Form factor (I_rms / I_avg over half cycle) of a sinusoidal AC is about",
+  "formula": "π/(2√2)",
+  "options": [
+   "0.637",
+   "1.41",
+   "1.11",
+   "0.707"
+  ],
+  "answer": 2,
+  "explain": "0.707 I₀ / 0.637 I₀ = π/(2√2) ≈ 1.11.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "89cda863-2d57-4fc3-8d5f-769eeae83e25",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "For i = 5 sin(100πt) A, the frequency of the current is",
+  "formula": "ω = 2πf",
+  "options": [
+   "50 Hz",
+   "100π Hz",
+   "100 Hz",
+   "25 Hz"
+  ],
+  "answer": 0,
+  "explain": "ω = 100π = 2πf, so f = 50 Hz.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6cbe624d-8799-4312-8ebe-366991844e15",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Mean value over a full cycle of a half-wave rectified current of peak I₀ is",
+  "formula": "",
+  "options": [
+   "zero",
+   "I₀/2",
+   "I₀/π",
+   "2I₀/π"
+  ],
+  "answer": 2,
+  "explain": "Only one half cycle contributes, giving ½ × 2I₀/π = I₀/π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "23693a17-212b-4ae6-b7d3-6fbc262fd678",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "For 50 Hz AC, how many times per second does the current become zero?",
+  "formula": "",
+  "options": [
+   "25",
+   "200",
+   "100",
+   "50"
+  ],
+  "answer": 2,
+  "explain": "The current is zero twice per cycle, so 2 × 50 = 100 times per second.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1da6398-75df-4dbf-8c70-123b4a1f82d1",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Mean value of a sinusoidal alternating current over one full cycle is",
+  "formula": "",
+  "options": [
+   "I₀/π",
+   "Zero",
+   "2I₀/π",
+   "I₀/√2"
+  ],
+  "answer": 1,
+  "explain": "Positive and negative half cycles cancel, so the full-cycle mean is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cdece43a-e507-4bbf-8ced-05564dd82248",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Starting from zero at t = 0, i = I₀ sin ωt first reaches its rms value at t =",
+  "formula": "sin ωt = 1/√2",
+  "options": [
+   "T/12",
+   "T/4",
+   "T/8",
+   "T/6"
+  ],
+  "answer": 2,
+  "explain": "sin ωt = 1/√2 gives ωt = π/4, so t = T/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "04d02e3a-cfc9-440b-94b1-f31eaf20e614",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "The rms value of an AC is defined as the DC that produces, in the same resistor and time, the same",
+  "formula": "",
+  "options": [
+   "Heating effect",
+   "Magnetic effect",
+   "Chemical effect",
+   "Peak voltage drop"
+  ],
+  "answer": 0,
+  "explain": "I_rms is defined by equal Joule heating: H = I_rms² R t.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "462ef65c-edc4-4867-b5dd-1ba69d349eba",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Instantaneous power in a resistor carrying i = I₀ sin ωt varies with frequency",
+  "formula": "p = i²R = I₀²R sin²ωt",
+  "options": [
+   "4f",
+   "f/2",
+   "2f",
+   "f"
+  ],
+  "answer": 2,
+  "explain": "sin²ωt = (1 − cos 2ωt)/2, so power oscillates at twice the supply frequency.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e9baa6b-a867-4347-97db-5bffef183add",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "For i = 3 sin ωt + 4 cos ωt (A), the peak current is",
+  "formula": "",
+  "options": [
+   "1 A",
+   "5 A",
+   "7 A",
+   "5/√2 A"
+  ],
+  "answer": 1,
+  "explain": "Amplitudes combine as √(3² + 4²) = 5 A, since the terms are 90° apart.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e879f39-ce48-4a9d-95ad-c7343f4244b9",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Average value of i = I₀ sin ωt over a half cycle (0 to T/2) is",
+  "formula": "I_avg = 2I₀/π",
+  "options": [
+   "I₀/π",
+   "0.5 I₀",
+   "0.637 I₀",
+   "0.707 I₀"
+  ],
+  "answer": 2,
+  "explain": "Mean over half cycle = 2I₀/π ≈ 0.637 I₀; the full-cycle mean is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "76b0e424-d70b-457c-9e75-7af5ad2a16c1",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Starting from zero at t = 0, i = I₀ sin ωt first equals I₀/2 at t =",
+  "formula": "ωt = π/6",
+  "options": [
+   "T/4",
+   "T/6",
+   "T/12",
+   "T/8"
+  ],
+  "answer": 2,
+  "explain": "sin ωt = ½ gives ωt = π/6, so t = T/12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "068bf5ed-377e-435e-bfff-2478888453b8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC instantaneous and peak values",
+  "prompt": "Which AC meter reading is unaffected by whether the AC is sinusoidal or not: moving-coil or hot-wire?",
+  "formula": "",
+  "options": [
+   "Moving-coil reads peak for any waveform",
+   "Moving-coil reads rms for any waveform",
+   "Hot-wire reads average for any waveform",
+   "Hot-wire reads rms for any waveform"
+  ],
+  "answer": 3,
+  "explain": "Hot-wire heating depends on i², so it gives the true rms value for any waveform.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea771181-691f-4db2-8808-d434a80ad996",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Mean power in a pure resistor in an AC circuit in terms of rms values is:",
+  "formula": "P = V_rms·I_rms",
+  "options": [
+   "V_rms·I_rms",
+   "V₀·I_rms",
+   "V₀I₀",
+   "V_rms·I_rms/2"
+  ],
+  "answer": 0,
+  "explain": "For a resistor, V and I are in phase, so P = V_rms·I_rms = ½V₀I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4a22848-410f-43dc-9449-37f649f337a4",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "RMS value of the current I = 3 sinωt + 4 cosωt (in A) is:",
+  "formula": "",
+  "options": [
+   "7 A",
+   "5/√2 A",
+   "5 A",
+   "7/√2 A"
+  ],
+  "answer": 1,
+  "explain": "The two terms combine to amplitude √(3²+4²) = 5 A, so I_rms = 5/√2 A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5153cd3f-7f34-4035-bb2b-3a576caa25d9",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure resistor in AC: phase relation",
+  "prompt": "For a pure resistor, V₀/I₀ as the AC frequency is increased:",
+  "formula": "V₀/I₀ = R",
+  "options": [
+   "Increases",
+   "First rises, then falls",
+   "Decreases",
+   "Remains constant"
+  ],
+  "answer": 3,
+  "explain": "Resistance is frequency independent (ideal resistor), so the ratio V₀/I₀ = R stays fixed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94c5a579-e499-462f-9a3e-474cbea33d4a",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure resistor in AC: phase relation",
+  "prompt": "Average power over a cycle in a pure resistor with peak current I₀ is:",
+  "formula": "P_avg = ½I₀²R",
+  "options": [
+   "I₀²R/4",
+   "I₀²R",
+   "½I₀²R",
+   "I₀²R/√2"
+  ],
+  "answer": 2,
+  "explain": "P_avg = I_rms²R, with I_rms = I₀/√2, which gives ½I₀²R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9591abee-421f-46db-b39d-79ee88a2a76a",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "Supply frequency is f. Instantaneous power in a pure inductor oscillates with frequency:",
+  "formula": "p = −(V₀I₀/2) sin 2ωt",
+  "options": [
+   "4f",
+   "2f",
+   "f/2",
+   "f"
+  ],
+  "answer": 1,
+  "explain": "p = vi ∝ sin ωt·cos ωt = ½ sin 2ωt, so its frequency is 2f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea8bb1e1-031c-44b8-9a9f-55890ae86ab1",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "A bulb is in series with a coil on AC. An iron rod is inserted into the coil; the bulb:",
+  "formula": "X_L = ωL",
+  "options": [
+   "Glows only for DC",
+   "Glows dimmer",
+   "Glows brighter",
+   "Is unchanged"
+  ],
+  "answer": 1,
+  "explain": "The iron core raises L, so X_L increases and the current decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a29baded-31fb-483c-839f-083d752cdca3",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Average power dissipated in a pure capacitor over one full AC cycle is:",
+  "formula": "P_avg = V_rms I_rms cos90°",
+  "options": [
+   "V_rms·I_rms",
+   "Zero",
+   "½ V₀I₀ sinωt",
+   "CV²ω"
+  ],
+  "answer": 1,
+  "explain": "Phase difference is 90°, so cosφ = 0 and the average power is zero (wattless current).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b6ac48a-6cc4-42c4-8c16-2ff4b0e98027",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "The capacitor stores maximum energy at the instant when current through it is:",
+  "formula": "U = ½CV²",
+  "options": [
+   "Equal to I_rms",
+   "Zero",
+   "Equal to V/X_C",
+   "Maximum"
+  ],
+  "answer": 1,
+  "explain": "The energy is maximum when |V| is maximum, and then i = 0 (90° phase difference).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "41956c38-42ea-4809-9d09-ccf36feb5f0c",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "For a series LCR circuit, √(L/C) has the dimensions of:",
+  "formula": "",
+  "options": [
+   "Frequency",
+   "Capacitance",
+   "Resistance",
+   "Time"
+  ],
+  "answer": 2,
+  "explain": "L/C has dimensions of (time)² × (ohm)², since √(LC) is a time and L/R is a time, so √(L/C) is an ohm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e42d50e9-05ce-4134-ac35-37d8bc20e8b6",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "As ω → 0 in a series LCR circuit (R, L, C finite), the impedance:",
+  "formula": "X_C = 1/(ωC)",
+  "options": [
+   "Tends to R",
+   "Tends to ωL",
+   "Tends to zero",
+   "Tends to infinity"
+  ],
+  "answer": 3,
+  "explain": "X_C → ∞ as ω → 0, so the capacitor blocks DC and Z → ∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fe4ae9db-36fc-4c0f-83da-b1a0c2067685",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In the impedance triangle of a series LCR circuit, sinφ equals:",
+  "formula": "",
+  "options": [
+   "R/Z",
+   "(X_L − X_C)/Z",
+   "(X_L − X_C)/R",
+   "Z/(X_L − X_C)"
+  ],
+  "answer": 1,
+  "explain": "The perpendicular side is X = X_L − X_C and the hypotenuse is Z, so sinφ = X/Z.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "efef2e8a-9d99-4c95-8c23-6da1e422a1c3",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "At resonance in a series LCR circuit, the phase angle between source voltage and current is:",
+  "formula": "",
+  "options": [
+   "0°",
+   "90°",
+   "180°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "At resonance X_L = X_C, so tanφ = 0 and V and I are in phase (φ = 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "89f01821-67c4-480c-9d85-0398c7f348ed",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "Sharpness of resonance (Q factor) of a series LCR circuit equals ω₀ divided by:",
+  "formula": "Q = ω₀/Δω",
+  "options": [
+   "Phase angle φ",
+   "Impedance Z",
+   "Bandwidth Δω",
+   "Resonant current"
+  ],
+  "answer": 2,
+  "explain": "Q = ω₀/(ω₂ − ω₁) = ω₀/Δω; narrower band means sharper resonance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bf22693e-1f66-4d8d-b959-1d15b4f63fa8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "At the half-power frequencies of a series RLC circuit, the phase angle between V and I has magnitude:",
+  "formula": "|X_L − X_C| = R",
+  "options": [
+   "45°",
+   "60°",
+   "90°",
+   "30°"
+  ],
+  "answer": 0,
+  "explain": "At these points |X_L − X_C| = R, so tanφ = ±1 and φ = 45°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7b766e7d-ff96-4ba1-b508-fd909a3b12df",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "Q of a resonant circuit equals 2π times the ratio:",
+  "formula": "Q = 2π·(U stored)/(U lost per cycle)",
+  "options": [
+   "Energy stored / energy lost per second",
+   "Energy stored / energy lost per cycle",
+   "Energy lost per cycle / energy stored",
+   "Power / frequency"
+  ],
+  "answer": 1,
+  "explain": "Q = 2π × (maximum energy stored)/(energy dissipated per cycle).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0eefbedc-a2e4-4067-a3c8-80339db80745",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "In series RLC with R and C fixed, increasing L makes Q and bandwidth:",
+  "formula": "Q = (1/R)√(L/C), Δω = R/L",
+  "options": [
+   "Q up, bandwidth down",
+   "Q up, bandwidth up",
+   "Q down, bandwidth down",
+   "Q down, bandwidth up"
+  ],
+  "answer": 0,
+  "explain": "Q ∝ √L increases while Δω = R/L decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eaea55df-eb82-41d5-b4c5-7f107f1e80ec",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "Power in a series LCR circuit at resonance, with rms source voltage V, is:",
+  "formula": "P = V²/R",
+  "options": [
+   "V²/R",
+   "V²/(R + X_L)",
+   "V²/Z with Z > R",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "At resonance Z = R and cosφ = 1, so the power is maximum, V²/R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97906de2-ee8b-4486-8223-1d21d9351408",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "For a series LR circuit, as the source frequency increases, the power factor:",
+  "formula": "cosφ = R/√(R² + ω²L²)",
+  "options": [
+   "Decreases",
+   "Stays constant",
+   "Increases",
+   "First increases, then decreases"
+  ],
+  "answer": 0,
+  "explain": "X_L = ωL grows with ω, so Z grows and cosφ = R/Z falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a783230-8f53-48b4-9cf3-cf7c462699c2",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "For a series RC circuit, as the source frequency increases, the power factor:",
+  "formula": "cosφ = R/√(R² + 1/ω²C²)",
+  "options": [
+   "Increases",
+   "Becomes zero",
+   "Stays constant",
+   "Decreases"
+  ],
+  "answer": 0,
+  "explain": "X_C = 1/ωC falls with ω, so Z falls toward R and cosφ rises toward 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "440efece-ef23-4f8d-81ca-bcf8951a0a2d",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "Industrial inductive loads improve their power factor by connecting a:",
+  "formula": "",
+  "options": [
+   "Diode in series",
+   "Larger inductor in series",
+   "Resistor in series",
+   "Capacitor in parallel"
+  ],
+  "answer": 3,
+  "explain": "A capacitor supplies the reactive current of the inductive load, which reduces φ and the line current.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bfe5f719-688c-49e8-8d0c-95e9175b2c38",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "For a series LCR circuit with ω below resonance, the current:",
+  "formula": "",
+  "options": [
+   "Lags V, power factor lagging",
+   "Leads V, power factor leading",
+   "Is in phase with V",
+   "Is zero on average"
+  ],
+  "answer": 1,
+  "explain": "Below resonance X_C > X_L, so the circuit is capacitive and the current leads the voltage.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5c5e26f7-ab23-4b93-9f31-b3876d66209c",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "In a series LCR circuit, the average power over a cycle is zero when the phase difference between V and I is:",
+  "formula": "P = V_rms·I_rms·cosφ",
+  "options": [
+   "π/4",
+   "π/3",
+   "π",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "cosφ = 0 only at φ = π/2, as in an ideal L or C. Power is zero but the current is not.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d68b6cbb-d2db-4925-b3a1-ceb3afb4da20",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "The wattless component of current differs in phase from the applied voltage by:",
+  "formula": "",
+  "options": [
+   "45°",
+   "0°",
+   "90°",
+   "180°"
+  ],
+  "answer": 2,
+  "explain": "Wattless current is the component in quadrature with V, so its average power V·I sinφ·cos90° = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "00e7a46e-1fda-41f0-b12a-fb02dec95659",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "In a series LCR circuit at resonance, the wattless current is:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Equal to V/X_L",
+   "Equal to V/X_C",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "At resonance φ = 0, so sinφ = 0 and the whole current is in phase with V (wattful).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05cc8a8f-2b6a-41b0-8f0e-a0f440c5e0f8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "If the power factor of a circuit is 0.6, the wattless component is what fraction of the rms current?",
+  "formula": "sinφ = √(1 − cos²φ)",
+  "options": [
+   "0.6",
+   "0.36",
+   "0.4",
+   "0.8"
+  ],
+  "answer": 3,
+  "explain": "cosφ = 0.6 gives sinφ = 0.8, so the wattless current is 0.8 I.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "005bc5a8-e5a0-44c8-8ad3-f114cd3aa2ed",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "Current in an AC circuit lags voltage by 60°. Ratio of wattless to wattful current is:",
+  "formula": "tanφ = I_wattless / I_wattful",
+  "options": [
+   "2",
+   "√3",
+   "1/√3",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "I_wattful = I cos60°, I_wattless = I sin60°, so ratio = tan60° = √3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0c535ea-c9a8-4f09-8019-205d1db9fcd8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Choke coil",
+  "prompt": "A choke coil is made with an iron core and thick copper wire. Thick wire is used mainly to:",
+  "formula": "",
+  "options": [
+   "Reduce inductance",
+   "Increase reactance",
+   "Increase eddy currents",
+   "Reduce resistance and heat loss"
+  ],
+  "answer": 3,
+  "explain": "Thick copper gives low R, so I²R heating is minimal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8cc62896-15a8-4440-89ee-f78e054155db",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC generator: principle and emf",
+  "prompt": "In an AC generator, the induced emf is maximum when the coil plane makes what angle with B?",
+  "formula": "ε = −dΦ/dt",
+  "options": [
+   "0° (plane parallel to B)",
+   "45°",
+   "90° (plane perpendicular to B)",
+   "60°"
+  ],
+  "answer": 0,
+  "explain": "Plane parallel to B means flux is zero but changing fastest, so |dΦ/dt| and the emf are maximum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97962733-5d2e-4d61-a907-38a95519152f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC generator: principle and emf",
+  "prompt": "For a rotating coil in an AC generator, the induced emf and the flux are out of phase by:",
+  "formula": "Φ = NBA cosωt, ε = NBAω sinωt",
+  "options": [
+   "π/2",
+   "π/4",
+   "π",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Φ ∝ cosωt and ε ∝ sinωt, so emf lags flux by 90°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "789dc2ce-84d5-46a0-a414-fddfeb9c2ef4",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC generator: principle and emf",
+  "prompt": "A generator coil rotates at 50 Hz. How many times per second does the emf change direction?",
+  "formula": "",
+  "options": [
+   "25",
+   "100",
+   "50",
+   "200"
+  ],
+  "answer": 1,
+  "explain": "The emf reverses twice per cycle, so 2 × 50 = 100 reversals per second.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d304109b-86e9-4c7e-a8f6-ce1b8fd3d312",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC generator: principle and emf",
+  "prompt": "In an AC generator, what is the role of slip rings and brushes?",
+  "formula": "",
+  "options": [
+   "Deliver current to the external circuit",
+   "Increase the number of turns",
+   "Produce the magnetic field",
+   "Reverse the emf every half cycle"
+  ],
+  "answer": 0,
+  "explain": "Slip rings and brushes connect the rotating coil to the external circuit, so the output stays alternating.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1ce07517-aa02-4784-a0c0-9b3e045a2dd6",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "Efficiency of a real transformer is defined as:",
+  "formula": "η = P_out / P_in",
+  "options": [
+   "Output power / input power",
+   "Output current / input current",
+   "Secondary turns / primary turns",
+   "Input voltage / output voltage"
+  ],
+  "answer": 0,
+  "explain": "Efficiency is the ratio of output power to input power, always less than 1 for real transformers.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2f6e6aec-847b-43ea-8b80-8ecd36132da9",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "A transformer cannot work with a DC input because DC:",
+  "formula": "",
+  "options": [
+   "Has too high voltage",
+   "Heats the core only",
+   "Has zero power",
+   "Gives no changing flux, so no induced emf"
+  ],
+  "answer": 3,
+  "explain": "Induction needs changing flux; steady DC gives constant flux and no emf in secondary.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e467b6dd-614e-4c88-9fbb-7b95a761c67d",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "Frequency of the output emf of a transformer compared with input frequency is:",
+  "formula": "",
+  "options": [
+   "Smaller for step-down",
+   "Double",
+   "Greater for step-up",
+   "Same"
+  ],
+  "answer": 3,
+  "explain": "The flux varies at the supply frequency, so the output frequency equals the input frequency.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ba530de6-eeb5-4568-aa4b-c92eb70f1680",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "Which loss in a transformer arises from flux not linking the secondary completely?",
+  "formula": "",
+  "options": [
+   "Hysteresis loss",
+   "Eddy current loss",
+   "Flux leakage",
+   "Copper loss"
+  ],
+  "answer": 2,
+  "explain": "Part of the primary flux does not link the secondary; this is flux leakage.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d1344d8-a022-421b-9496-f6b8368e43fd",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer energy losses",
+  "prompt": "Flux leakage in a transformer is minimised by:",
+  "formula": "",
+  "options": [
+   "Laminating the core",
+   "Winding coils over one another on a closed core",
+   "Using a high-frequency supply",
+   "Using thick copper wire"
+  ],
+  "answer": 1,
+  "explain": "Winding the coils one over the other on a closed core links almost all the flux to both coils.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5912181-5b79-486c-9ca1-eafd14c6910d",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer energy losses",
+  "prompt": "The humming sound of a transformer is due to:",
+  "formula": "",
+  "options": [
+   "Leakage of flux",
+   "Eddy currents in the primary",
+   "Magnetostriction of the core",
+   "Resistance of the windings"
+  ],
+  "answer": 2,
+  "explain": "The alternating flux makes the core vibrate through magnetostriction, producing the hum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a9d1f2b-2aec-461f-9c3c-0e37acefc33e",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer energy losses",
+  "prompt": "Which transformer loss is practically independent of the load current?",
+  "formula": "",
+  "options": [
+   "Secondary I²R loss",
+   "Copper loss",
+   "Primary I²R loss only",
+   "Iron (core) loss"
+  ],
+  "answer": 3,
+  "explain": "Core loss depends on the supply voltage and frequency (flux), not on the load. Copper loss varies as I².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fc3351a6-3dc5-45dd-9531-83dd1996a453",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Average value over a cycle of a full-wave rectified current of peak I₀ is:",
+  "formula": "",
+  "options": [
+   "2I₀/π",
+   "Zero",
+   "I₀/√2",
+   "I₀/π"
+  ],
+  "answer": 0,
+  "explain": "Both half cycles are positive, so the mean is 2I₀/π ≈ 0.637I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ecc0262d-a078-4883-8f6a-84adcba0f0eb",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Average of a sinusoidal current I₀sinωt over the first quarter cycle (0 to T/4) is:",
+  "formula": "",
+  "options": [
+   "I₀/π",
+   "2I₀/π",
+   "Zero",
+   "I₀/√2"
+  ],
+  "answer": 1,
+  "explain": "A quarter-cycle average equals the half-cycle average, 2I₀/π ≈ 0.637 I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "719588fe-2f44-4bb0-9615-827088da1491",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure resistor in AC: phase relation",
+  "prompt": "In a series LCR circuit, the voltage across R is ahead of the voltage across C by:",
+  "formula": "",
+  "options": [
+   "0°",
+   "45°",
+   "90°",
+   "180°"
+  ],
+  "answer": 2,
+  "explain": "V_R is in phase with I, and V_C lags I by 90°, so V_R leads V_C by 90°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72ab1517-e4e0-4f5e-b7c1-fd4189c32ba6",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Capacitor on AC source of frequency f: energy stored in it oscillates with frequency",
+  "formula": "U = ½Cv² ∝ sin²ωt",
+  "options": [
+   "f",
+   "2f",
+   "f/2",
+   "4f"
+  ],
+  "answer": 1,
+  "explain": "U ∝ v² ∝ sin²ωt = (1 − cos2ωt)/2, so the energy oscillates at 2f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1f49b5cc-b717-4857-b228-4682a3e7cfc5",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Power factor of a purely capacitive AC circuit is",
+  "formula": "cosφ = cos 90°",
+  "options": [
+   "0.5",
+   "Zero",
+   "1",
+   "Infinity"
+  ],
+  "answer": 1,
+  "explain": "φ = 90° between v and i, so cosφ = 0 and the circuit is wattless.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "085e400b-bde7-4bb1-ba2f-687457bd8223",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "A dielectric slab is inserted in a capacitor connected to an AC source. The rms current",
+  "formula": "I = V·ωC",
+  "options": [
+   "Stays the same",
+   "Decreases",
+   "Increases",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "The dielectric raises C, so X_C = 1/ωC falls and the current rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d36c508d-e992-46de-a53e-382375850768",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure capacitor: capacitive reactance",
+  "prompt": "Two identical capacitors, each of reactance X_C, are joined in series in an AC circuit. Net reactance is",
+  "formula": "",
+  "options": [
+   "X_C",
+   "X_C/4",
+   "2X_C",
+   "X_C/2"
+  ],
+  "answer": 2,
+  "explain": "Series capacitors: 1/C_eq = 2/C, so C_eq = C/2 and X = 1/(ωC_eq) = 2X_C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "db5c66cd-0d07-4a7b-88cf-754a52f9b5ea",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Heat in a resistor from a half-wave rectified current compared with the full-wave rectified one (same peak) is:",
+  "formula": "H ∝ I_rms²",
+  "options": [
+   "One-fourth",
+   "Double",
+   "Half",
+   "Same"
+  ],
+  "answer": 2,
+  "explain": "I_rms² is I₀²/4 for half-wave and I₀²/2 for full-wave, so the ratio is 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fa858ba9-e7a3-430d-bbd8-c11fd26af994",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "In one cycle of I₀sinωt, how many times does |i| equal its rms value?",
+  "formula": "|i| = I₀/√2 at ωt = 45°, 135°, 225°, 315°",
+  "options": [
+   "4",
+   "2",
+   "6",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "|sinωt| = 1/√2 occurs at four angles per cycle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "443aa634-364f-428b-a05f-c8b5ee5c84b8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Half-cycle average voltage of a 220 V (rms) sinusoidal supply is about:",
+  "formula": "V_avg = 0.9 V_rms",
+  "options": [
+   "156 V",
+   "311 V",
+   "220 V",
+   "198 V"
+  ],
+  "answer": 3,
+  "explain": "V_avg = 2V₀/π = 0.9 V_rms ≈ 198 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd3305bb-741b-459e-88ad-d05976f81a70",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "RMS and average values of current/voltage",
+  "prompt": "Average of i = I₀sinωt from t = T/4 to t = 3T/4 is:",
+  "formula": "",
+  "options": [
+   "I₀/π",
+   "I₀/√2",
+   "Zero",
+   "2I₀/π"
+  ],
+  "answer": 2,
+  "explain": "This half cycle is symmetric about the zero crossing at T/2, so the positive and negative areas cancel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "308d2e7e-1164-4d12-a78a-7aecd22fa24f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "For a pure inductor at fixed source voltage, the graph of current amplitude I₀ versus f is:",
+  "formula": "I₀ = V₀/(2πfL)",
+  "options": [
+   "Straight line through origin",
+   "Rectangular hyperbola",
+   "Parabola",
+   "Horizontal line"
+  ],
+  "answer": 1,
+  "explain": "I₀ ∝ 1/f, so the graph is a rectangular hyperbola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0cf51e4c-2bf9-4e7a-a465-c9f6ec55347d",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "At the instant the voltage across a pure inductor is at its peak, the energy stored in it is:",
+  "formula": "",
+  "options": [
+   "One-fourth of maximum",
+   "Half of maximum",
+   "Maximum",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Voltage is maximum when current is zero (π/2 phase), so U = ½Li² = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87288db5-477a-4e2a-9d99-c8d9ef5bede8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "The instantaneous voltage across an ideal inductor is proportional to the:",
+  "formula": "V = L di/dt",
+  "options": [
+   "Integral of current",
+   "Instantaneous current",
+   "Rate of change of current",
+   "Charge passed"
+  ],
+  "answer": 2,
+  "explain": "V = L di/dt, so V is maximum where the current changes fastest, which is where i = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "18de085e-6002-4ae5-9fdf-8dd5de19c11c",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Pure inductor: inductive reactance",
+  "prompt": "Over one full cycle, a pure inductor is returning energy to the source for what fraction of the time?",
+  "formula": "",
+  "options": [
+   "None",
+   "Half",
+   "Three-fourths",
+   "One-fourth"
+  ],
+  "answer": 1,
+  "explain": "It absorbs energy for two quarter-cycles and returns it for two, so net average power is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b7586589-e13b-45be-bebe-01cae3a3b395",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In a series LCR circuit, the ratio X_L/X_C at angular frequency ω (resonant frequency ω₀) equals:",
+  "formula": "X_L/X_C = ω²LC",
+  "options": [
+   "(ω₀/ω)²",
+   "ω/ω₀",
+   "ω₀/ω",
+   "(ω/ω₀)²"
+  ],
+  "answer": 3,
+  "explain": "X_L/X_C = ωL·ωC = ω²LC = ω²/ω₀², since ω₀² = 1/LC.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "74a67365-e832-45ec-a37d-c53408157106",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In a series LCR circuit at resonance, the rms voltage across R compared with the source rms voltage is:",
+  "formula": "",
+  "options": [
+   "Less, by the factor R/Z",
+   "Q times larger",
+   "Equal",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "At resonance Z = R and V_L = V_C cancel, so V_R = IR = V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1ab57b5a-3d83-4eb7-9ba5-8dc3c1aeeac6",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "If R = 0 in a series LC circuit driven by AC with X_L ≠ X_C, the magnitude of φ is:",
+  "formula": "",
+  "options": [
+   "90°",
+   "0°",
+   "60°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "tanφ = (X_L − X_C)/0 → ∞, so |φ| = 90° and the average power is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e863c785-43d3-4dd3-8e6d-429aaf47edf7",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "In a series LCR circuit with ω < ω₀, a small increase in L makes the impedance:",
+  "formula": "",
+  "options": [
+   "Become infinite",
+   "Decrease",
+   "Remain unchanged",
+   "Increase"
+  ],
+  "answer": 1,
+  "explain": "The net reactance is negative, so a larger X_L reduces |X_L − X_C| and moves the circuit towards resonance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f723592f-831e-4a9a-b52e-d737ad67d31d",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Series LCR: impedance and phase angle",
+  "prompt": "As ω → ∞ in a series LCR circuit (R, L, C finite), the phase angle φ of voltage relative to current tends to:",
+  "formula": "tanφ = (ωL − 1/ωC)/R",
+  "options": [
+   "+90° (voltage leads current)",
+   "−90° (voltage lags current)",
+   "+45°",
+   "0°"
+  ],
+  "answer": 0,
+  "explain": "X_L → ∞ and X_C → 0, so tanφ → +∞. The circuit is inductive and V leads I by nearly 90°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8e809dad-9ce3-4ba4-97b1-bce41c0d983f",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At resonance in a series LCR circuit, the net voltage across the L and C combination together is:",
+  "formula": "",
+  "options": [
+   "Equal to source voltage",
+   "2Q times source voltage",
+   "Q times source voltage",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "V_L and V_C are equal in magnitude and opposite in phase, so they cancel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "09f9ce7b-6e84-44d5-9b29-4f598c092656",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At the half-power frequencies, the average power in a series LCR circuit compared to its resonance value is:",
+  "formula": "",
+  "options": [
+   "1/√2 times",
+   "One-fourth",
+   "Half",
+   "Same"
+  ],
+  "answer": 2,
+  "explain": "Current is I_max/√2 there, so P = I²R is half of the maximum power.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c9f8200d-be7a-44b7-b3db-3ac5651151d1",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At the half-power frequencies of a series LCR circuit, the magnitude of |X_L − X_C| equals:",
+  "formula": "",
+  "options": [
+   "R/2",
+   "R",
+   "Zero",
+   "2R"
+  ],
+  "answer": 1,
+  "explain": "Z = √2·R requires |X_L − X_C| = R, which gives φ = 45°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "927da03b-71be-4386-ac19-c50306f6a77d",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At resonance in a series LCR circuit, the total energy stored in L and C together is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Constant, equal to ½CV₀² of the source",
+   "Oscillating between 0 and ½LI₀²",
+   "Constant, equal to ½LI₀²"
+  ],
+  "answer": 3,
+  "explain": "Energy just shuttles between L and C; the source only supplies the loss in R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "10614005-9849-4f2b-9fb9-79abaabfc733",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "In a series LCR circuit with L and R fixed, increasing C makes the quality factor Q:",
+  "formula": "Q = (1/R)√(L/C)",
+  "options": [
+   "Decrease",
+   "Increase, as ω₀ decreases",
+   "Increase",
+   "Remain unchanged"
+  ],
+  "answer": 0,
+  "explain": "Q ∝ 1/√C, so a larger C gives a smaller Q.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a07bca7d-2739-4fe8-ab5a-4d4333d44231",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "At resonance in a series LCR circuit, the reactance X_L equals:",
+  "formula": "",
+  "options": [
+   "R",
+   "1/√(LC)",
+   "√(L/C)",
+   "√(C/L)"
+  ],
+  "answer": 2,
+  "explain": "X_L = ω₀L = L/√(LC) = √(L/C), and X_C is the same.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ceab1940-92c5-40a9-aa38-41f7dd3af947",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Resonance in series LCR circuit",
+  "prompt": "In a series LCR circuit L is doubled and C is halved. Then ω₀ and Q become:",
+  "formula": "",
+  "options": [
+   "ω₀ same, Q doubles",
+   "ω₀ same, Q same",
+   "ω₀ halves, Q doubles",
+   "ω₀ doubles, Q same"
+  ],
+  "answer": 0,
+  "explain": "LC is unchanged so ω₀ is the same; L/C becomes 4 times, so Q = (1/R)√(L/C) doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f0e2b409-2068-46c9-ab5c-cef95c4c5dc4",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "In series RLC with R and L fixed, changing C changes the bandwidth Δω by:",
+  "formula": "Δω = R/L",
+  "options": [
+   "Increasing it",
+   "Making it zero",
+   "Decreasing it",
+   "Not changing it"
+  ],
+  "answer": 3,
+  "explain": "Δω = R/L has no C, so only ω₀ and Q change when C is varied.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff788ba1-6e22-4443-a2a3-b20b9dbea0eb",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "A radio tuner needs good selectivity between nearby stations. The tuning circuit should have:",
+  "formula": "",
+  "options": [
+   "Low L, low Q",
+   "High R, high bandwidth",
+   "High Q, narrow bandwidth",
+   "Low Q, wide bandwidth"
+  ],
+  "answer": 2,
+  "explain": "High Q means a sharp resonance and narrow bandwidth, which separates nearby frequencies.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7ca0b088-3945-430c-ba22-92e5a0e6311e",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Quality factor, bandwidth, sharpness",
+  "prompt": "Bandwidth of a series RLC circuit expressed in ordinary frequency, Δf, is:",
+  "formula": "",
+  "options": [
+   "2πR/L",
+   "R/(2πL)",
+   "R/L",
+   "L/(2πR)"
+  ],
+  "answer": 1,
+  "explain": "Δω = R/L and ω = 2πf, so Δf = R/(2πL).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b27400ea-9cff-417a-b415-48061d3c7243",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "For the same power P delivered at the same voltage, line loss in the supply wires varies with power factor as:",
+  "formula": "I = P/(V cosφ), loss = I²r",
+  "options": [
+   "1/cosφ",
+   "1/cos²φ",
+   "cosφ",
+   "Independent of cosφ"
+  ],
+  "answer": 1,
+  "explain": "Line current ∝ 1/cosφ, so the I²r loss ∝ 1/cos²φ. A low power factor wastes power in transmission.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11f68129-ae7c-4d04-91c3-a1bdf90c9bdb",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "A load has power factor 0.8 lagging. The load is predominantly:",
+  "formula": "",
+  "options": [
+   "Capacitive",
+   "At resonance",
+   "Inductive",
+   "Purely resistive"
+  ],
+  "answer": 2,
+  "explain": "Current lagging the voltage means X_L > X_C, so the load is inductive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b6f5927e-6a11-4a5e-83b6-5b4e3c152e2e",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Power in AC circuits and power factor",
+  "prompt": "Apparent power S, true power P and reactive power Q in an AC circuit are related by:",
+  "formula": "S² = P² + Q²",
+  "options": [
+   "P² = S² + Q²",
+   "S² = P² + Q²",
+   "S = P + Q",
+   "S = P² + Q²"
+  ],
+  "answer": 1,
+  "explain": "P = VI cosφ and Q = VI sinφ, so P² + Q² = (VI)² = S².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "799f62e6-4612-494e-937e-cedae0b8207b",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "A wattless current in supply lines still causes power loss because of:",
+  "formula": "",
+  "options": [
+   "Hysteresis in the source",
+   "I²R heating in the line wires",
+   "Reactive power cancelling in wires",
+   "Zero loss, since P = 0"
+  ],
+  "answer": 1,
+  "explain": "The line carries the total rms current, so I²R heating occurs even though the load takes no true power from the wattless part.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "afe9ceef-51f8-4081-acf0-68e8910bccc7",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "An unloaded (open secondary) transformer draws a primary current that is mainly:",
+  "formula": "",
+  "options": [
+   "Wattful, in phase with V",
+   "Zero",
+   "Wattless, lagging V by nearly 90°",
+   "Wattless, leading V by 90°"
+  ],
+  "answer": 2,
+  "explain": "The primary acts as a nearly pure inductor, so the magnetising current is almost wattless and lags V by about 90°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9497621f-f853-4fb7-94d4-8d4973939aba",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "A capacitor is connected in parallel with an inductive load to improve the power factor. The source's wattful current:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Becomes zero",
+   "Remains unchanged"
+  ],
+  "answer": 3,
+  "explain": "The capacitor cancels part of the wattless current. True power, and so the wattful current, is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3bd9e9a-9cd2-48f8-a5cc-1d2d456ea2b1",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Wattless current",
+  "prompt": "In a pure inductor on AC, the instantaneous power at the instant the current is maximum is:",
+  "formula": "p = vi, v and i are 90° apart",
+  "options": [
+   "Zero",
+   "Maximum positive",
+   "V₀I₀/2",
+   "Maximum negative"
+  ],
+  "answer": 0,
+  "explain": "When i is maximum, v = 0 (90° phase difference), so p = vi = 0; the power is zero twice per half-cycle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d4e9da58-f0e4-4ce5-9fbf-e012466a30a6",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Choke coil",
+  "prompt": "A choke coil limits AC current mainly through which effect?",
+  "formula": "",
+  "options": [
+   "Eddy currents in its core",
+   "Heating in its thick wire",
+   "Back emf due to self-induction",
+   "Capacitive leakage between turns"
+  ],
+  "answer": 2,
+  "explain": "Changing current induces a back emf (self-induction) that opposes it, giving reactance ωL.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3762d1f1-6f72-4f2b-9096-be0aae683b38",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "AC generator: principle and emf",
+  "prompt": "In an AC generator, the induced emf has the same frequency as which quantity?",
+  "formula": "f = ω/2π",
+  "options": [
+   "Rotation frequency of the coil",
+   "Half the rotation frequency",
+   "Number of turns N",
+   "Twice the rotation frequency"
+  ],
+  "answer": 0,
+  "explain": "One rotation gives one complete emf cycle, so emf frequency equals the coil's rotation frequency.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cfd53950-b72d-4fec-84f2-fa11d908d33b",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "In a step-up transformer, the secondary winding is made of wire that is:",
+  "formula": "",
+  "options": [
+   "Thinner than the primary wire",
+   "Of larger resistivity but same thickness",
+   "Thicker than the primary wire",
+   "Same thickness as the primary wire"
+  ],
+  "answer": 0,
+  "explain": "Step-up gives I₂ < I₁, so the secondary carries less current and can use thinner wire.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad8948c6-372c-476e-93c3-e7ace8c4edd8",
+  "subject": "Physics",
+  "chapter": "Alternating Current",
+  "topic": "Transformer: turns ratio and efficiency",
+  "prompt": "Power is transmitted at very high voltage after a step-up transformer mainly because:",
+  "formula": "P_loss = I²R",
+  "options": [
+   "Frequency of AC rises",
+   "Line resistance R falls",
+   "Power supplied rises",
+   "Line current falls, so I²R loss falls"
+  ],
+  "answer": 3,
+  "explain": "For fixed P = VI, larger V means smaller I, so line loss I²R decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

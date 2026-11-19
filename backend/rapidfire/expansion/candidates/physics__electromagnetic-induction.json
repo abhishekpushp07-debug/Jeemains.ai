@@ -1,0 +1,3946 @@
+[
+ {
+  "prompt": "In Φ = BA cosθ, θ is the angle between B and which direction?",
+  "formula": "Φ = B·A = BA cosθ",
+  "options": [
+   "The area vector (normal to the surface)",
+   "The plane of the loop",
+   "The perimeter of the loop",
+   "The velocity of the loop"
+  ],
+  "answer": 0,
+  "explain": "Φ = B·A, with A the area vector along the normal, so θ is measured from the normal.",
+  "kind": "concept",
+  "id": "34cf831c-7cdf-47cf-8851-2c268ff6ef0e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Dimensional formula of magnetic flux is:",
+  "formula": "",
+  "options": [
+   "[ML²T⁻²A⁻¹]",
+   "[MLT⁻²A⁻¹]",
+   "[ML²T⁻¹A⁻¹]",
+   "[ML²T⁻²A⁻²]"
+  ],
+  "answer": 0,
+  "explain": "B = [MT⁻²A⁻¹] and area = [L²], so Φ = [ML²T⁻²A⁻¹].",
+  "kind": "unit",
+  "id": "2442c7c1-a919-4cd3-9715-4765729f8e7f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Magnetic flux is a:",
+  "formula": "",
+  "options": [
+   "Scalar quantity",
+   "Vector along B",
+   "Vector along the area",
+   "Tensor quantity"
+  ],
+  "answer": 0,
+  "explain": "Φ is the dot product B·A, which is a scalar. It can be positive or negative.",
+  "kind": "fact",
+  "id": "0d2bd856-acf7-4bc2-a540-d427ceef8c6b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Net magnetic flux through any closed surface is:",
+  "formula": "∮B·dA = 0",
+  "options": [
+   "μ₀ times the enclosed current",
+   "Zero",
+   "Proportional to the enclosed pole strength",
+   "Equal to the surface area times B"
+  ],
+  "answer": 1,
+  "explain": "Gauss's law for magnetism: no isolated magnetic monopoles exist.",
+  "kind": "law",
+  "id": "f0d56408-9505-4eca-aa7e-c8d658e3e142",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "A loop of area A is flipped by 180° in a uniform field B perpendicular to it. The change in flux is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "BA",
+   "2BA",
+   "BA/2"
+  ],
+  "answer": 2,
+  "explain": "Flux goes from +BA to −BA, so the change has magnitude 2BA.",
+  "kind": "result",
+  "id": "9f4d3686-9086-4a33-8994-038e0137d85b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Flux linkage of an N-turn coil of area A with B at angle θ to its normal is:",
+  "formula": "",
+  "options": [
+   "BA cosθ",
+   "NBA cosθ",
+   "NBA sinθ",
+   "BA/N"
+  ],
+  "answer": 1,
+  "explain": "Each turn links BA cosθ, so the total linkage is NBA cosθ.",
+  "kind": "formula",
+  "id": "c0bd63e6-e599-49e7-bde9-8b941eec8a3d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "A hemispherical bowl of radius R lies in uniform B along its axis. Flux through the curved surface has magnitude:",
+  "formula": "",
+  "options": [
+   "2πR²B",
+   "πR²B",
+   "(2/3)πR³B",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Net flux through the closed surface is zero, so the curved surface carries the same flux as the flat base, πR²B.",
+  "kind": "result",
+  "id": "b31145fc-2d0b-4419-ad24-cd588bea3f2f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Magnetic flux through a surface is proportional to:",
+  "formula": "",
+  "options": [
+   "Field lines crossing it normally",
+   "Field lines along its surface",
+   "Length of its boundary only",
+   "Its mass"
+  ],
+  "answer": 0,
+  "explain": "Φ is a measure of the number of field lines passing through the surface along its normal.",
+  "kind": "concept",
+  "id": "8c2aaf13-5350-4b01-852f-e938997660e0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "A loop of area A has its normal at 60° to a uniform field B. The flux is:",
+  "formula": "",
+  "options": [
+   "BA√3/2",
+   "BA/2",
+   "BA",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Φ = BA cos60° = BA/2.",
+  "kind": "result",
+  "id": "5d0597a9-6d64-42d9-a388-5b51d2f7240a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Which of these is the CGS unit of magnetic flux?",
+  "formula": "1 Wb = 10⁸ Mx",
+  "options": [
+   "Gauss",
+   "Oersted",
+   "Maxwell",
+   "Gilbert"
+  ],
+  "answer": 2,
+  "explain": "The maxwell is the CGS flux unit (1 Mx = 1 G·cm²); 1 Wb = 10⁸ Mx.",
+  "kind": "unit",
+  "id": "07968bbc-3324-4f16-9864-ff13f0815b19",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "A plane loop lies parallel to a uniform field B. The flux through it is:",
+  "formula": "Φ = BA cosθ, θ = 90°",
+  "options": [
+   "BA",
+   "BA/2",
+   "Zero",
+   "Infinite"
+  ],
+  "answer": 2,
+  "explain": "The area vector is perpendicular to B, so θ = 90° and cosθ = 0.",
+  "kind": "concept",
+  "id": "69022ac7-72cc-4e4e-b48d-3f4d57627c0b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Flux through a loop is negative when the angle θ between B and the area vector is:",
+  "formula": "Φ = BA cosθ",
+  "options": [
+   "0° ≤ θ < 90°",
+   "θ = 90° only",
+   "90° < θ ≤ 180°",
+   "θ = 0° only"
+  ],
+  "answer": 2,
+  "explain": "cosθ < 0 for an obtuse angle, so the field passes through against the chosen normal.",
+  "kind": "concept",
+  "id": "7da56507-83c8-4720-b097-c2df334d8f68",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Magnetic flux density B is also called flux per unit ___; its SI unit is Wb/m².",
+  "formula": "B = Φ/A (normal)",
+  "options": [
+   "Normal area",
+   "Volume",
+   "Length of loop",
+   "Turn of coil"
+  ],
+  "answer": 0,
+  "explain": "B = Φ/A⊥, so B is flux per unit normal area, 1 T = 1 Wb/m².",
+  "kind": "concept",
+  "id": "393bb113-3b21-42ec-ba5d-3684a357b9f7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "1 weber equals how many maxwell (CGS units)?",
+  "formula": "1 Wb = 10⁸ Mx",
+  "options": [
+   "10⁴ Mx",
+   "10⁶ Mx",
+   "10⁸ Mx",
+   "10² Mx"
+  ],
+  "answer": 2,
+  "explain": "1 T = 10⁴ G and 1 m² = 10⁴ cm², so 1 Wb = 10⁸ Mx.",
+  "kind": "fact",
+  "id": "e93f711a-0f3b-4785-9cb2-58a83ff39475",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Charge flowing through a closed loop due to flux change ΔΦ is independent of:",
+  "formula": "q = ΔΦ/R",
+  "options": [
+   "Resistance R of the loop",
+   "Time taken for the change",
+   "Net change in flux ΔΦ",
+   "Number of turns N"
+  ],
+  "answer": 1,
+  "explain": "q = ∫I dt = ΔΦ/R (per turn); the rate of change cancels out, so time does not matter.",
+  "kind": "",
+  "id": "42838eed-8bab-40d9-a52d-e9f1dd4e7b13",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Rod of length ℓ rotates with angular speed ω about one end, ⟂ to uniform B. EMF between its ends:",
+  "formula": "ε = ½Bωℓ²",
+  "options": [
+   "Bωℓ²",
+   "½Bωℓ²",
+   "Bωℓ",
+   "½Bωℓ"
+  ],
+  "answer": 1,
+  "explain": "Average speed is ωℓ/2, so ε = B·ℓ·(ωℓ/2) = ½Bωℓ².",
+  "kind": "",
+  "id": "fd100b96-a44c-47c7-8760-900de7b7566a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "For a coil rotating in uniform B, induced EMF is maximum when the coil's plane is:",
+  "formula": "",
+  "options": [
+   "Perpendicular to B",
+   "Parallel to B",
+   "At 45° to B",
+   "At 30° to B"
+  ],
+  "answer": 1,
+  "explain": "ε ∝ sin ωt: plane parallel to B means flux is zero but dΦ/dt is maximum.",
+  "kind": "",
+  "id": "73d71856-5c2f-42de-be0f-6e0595e3d90d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Dimensional formula of magnetic flux is:",
+  "formula": "",
+  "options": [
+   "ML²T⁻²A⁻¹",
+   "MLT⁻²A⁻¹",
+   "ML²T⁻³A⁻¹",
+   "MT⁻²A⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Φ = V·s = (ML²T⁻³A⁻¹)(T) = ML²T⁻²A⁻¹.",
+  "kind": "",
+  "id": "1b6c11eb-e76d-4730-8312-acfbc556b064",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "The negative sign in Faraday's law ε = −dΦ/dt is a consequence of conservation of:",
+  "formula": "",
+  "options": [
+   "Charge",
+   "Momentum",
+   "Energy",
+   "Angular momentum"
+  ],
+  "answer": 2,
+  "explain": "Lenz's law (the minus sign) expresses energy conservation: induced effect opposes the change.",
+  "kind": "",
+  "id": "dc5039c8-19dd-4030-808a-78023c189aa1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "The electric field induced by a time-varying magnetic field is:",
+  "formula": "∮E·dl = −dΦ/dt",
+  "options": [
+   "Conservative with zero curl",
+   "Non-conservative with closed field lines",
+   "Radial from a point charge",
+   "Always zero inside a conductor"
+  ],
+  "answer": 1,
+  "explain": "Its line integral around a closed loop is nonzero, so it is non-conservative with closed loops.",
+  "kind": "",
+  "id": "aa8c5490-2fa9-4183-a9e6-5c50c636c84c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Conducting rod moves with velocity parallel to a uniform magnetic field. Motional EMF is:",
+  "formula": "",
+  "options": [
+   "Bℓv",
+   "Zero",
+   "½Bℓv",
+   "Bℓv sin 45°"
+  ],
+  "answer": 1,
+  "explain": "Force on charges is q(v × B) = 0 when v ∥ B, so no EMF is induced.",
+  "kind": "",
+  "id": "d2e13f94-c6e7-4ae5-bd63-bbe4a91b533b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "A rigid loop moves with constant velocity entirely inside a uniform magnetic field. Net induced EMF is:",
+  "formula": "",
+  "options": [
+   "Bℓv",
+   "Zero",
+   "2Bℓv",
+   "Bℓv/2"
+  ],
+  "answer": 1,
+  "explain": "Flux through the loop is constant, so net EMF is zero (opposite sides' EMFs cancel).",
+  "kind": "",
+  "id": "d00e39e4-7558-42d7-8ec2-b59200b5116e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Rod of length ℓ slides at speed v on rails joined by resistance R, field B. Power dissipated in R:",
+  "formula": "P = B²ℓ²v²/R",
+  "options": [
+   "B²ℓ²v/R",
+   "Bℓv²/R",
+   "B²ℓ²v²/R",
+   "B²ℓv/R²"
+  ],
+  "answer": 2,
+  "explain": "P = ε²/R with ε = Bℓv gives B²ℓ²v²/R.",
+  "kind": "",
+  "id": "e2b8339d-2762-45f5-87c1-5087cc3df9b4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Rod on rails moves uniformly at v; the external force needed to balance the magnetic drag is:",
+  "formula": "F = B²ℓ²v/R",
+  "options": [
+   "B²ℓ²v/R",
+   "Bℓv/R",
+   "B²ℓv²/R",
+   "Bℓ²v/R²"
+  ],
+  "answer": 0,
+  "explain": "I = Bℓv/R and F = BIℓ = B²ℓ²v/R; check: F·v equals the power.",
+  "kind": "",
+  "id": "2e3a5ac7-7d35-4284-b4b5-d8018bd1d07b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "On a flux–time (Φ–t) graph, the magnitude of induced EMF at an instant is given by:",
+  "formula": "",
+  "options": [
+   "Area under the curve",
+   "Slope of the tangent",
+   "Intercept on the Φ-axis",
+   "Value of Φ at that instant"
+  ],
+  "answer": 1,
+  "explain": "ε = −dΦ/dt, which is the negative of the slope of the Φ–t graph.",
+  "kind": "",
+  "id": "5644da5e-4002-4bf1-aead-8c2d8749a4ed",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Area under the EMF–time graph for an N-turn coil of resistance R equals:",
+  "formula": "∫ε dt = NΔΦ",
+  "options": [
+   "NΔΦ/R",
+   "NΔΦ",
+   "ΔΦ/(NR)",
+   "ΔΦ·R"
+  ],
+  "answer": 1,
+  "explain": "∫ε dt = −N∫dΦ = NΔΦ in magnitude; dividing by R gives the charge.",
+  "kind": "",
+  "id": "e558a1e8-0759-4b77-a82d-c7d097b71e13",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "A conducting ring with a small cut is placed in a changing B (⟂ plane). What happens?",
+  "formula": "",
+  "options": [
+   "EMF across the gap, no current",
+   "No EMF and no current",
+   "Current flows, no EMF",
+   "EMF zero, current in the gap"
+  ],
+  "answer": 0,
+  "explain": "EMF depends on dΦ/dt, not on a closed path being complete; an open ring has no current.",
+  "kind": "concept",
+  "id": "bc7bf4bb-a445-4b13-a7cf-a66c827ef4ae",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Uniform B = kt (k constant) is ⟂ to a fixed loop. The induced EMF is:",
+  "formula": "",
+  "options": [
+   "Constant in time",
+   "Increasing linearly with t",
+   "Decreasing with t",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Φ = kAt is linear in t, so ε = −dΦ/dt = −kA is constant.",
+  "kind": "concept",
+  "id": "4d6f5c60-1867-4a57-8fd5-91dfaececfbf",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Semicircular wire (radius r) moves at v ⟂ to B and to its diameter. EMF between ends:",
+  "formula": "",
+  "options": [
+   "2Bvr",
+   "πBvr",
+   "Bvr",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Motional EMF depends on the effective length, the straight chord joining the ends: 2r.",
+  "kind": "result",
+  "id": "930ac3c5-05f9-47c4-b8f0-f5a72e92bdc9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Induced E-field outside a long region of changing uniform B (axis along it) varies with r as:",
+  "formula": "",
+  "options": [
+   "1/r",
+   "r",
+   "1/r²",
+   "Independent of r"
+  ],
+  "answer": 0,
+  "explain": "Outside: E·2πr = (dB/dt)πR², so E ∝ 1/r. Inside, E ∝ r.",
+  "kind": "trend",
+  "id": "34cd884f-1ab8-46ec-a84d-b01eaeff4be8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Lenz's law is a direct consequence of conservation of which quantity?",
+  "formula": "",
+  "options": [
+   "Charge",
+   "Energy",
+   "Linear momentum",
+   "Angular momentum"
+  ],
+  "answer": 1,
+  "explain": "If induced current aided the change, energy would be created from nothing, so it must oppose.",
+  "kind": "concept",
+  "id": "885b3eee-843d-4742-8852-c8b3377c6026",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "The negative sign in ε = −dΦ/dt signifies:",
+  "formula": "ε = −dΦ/dt",
+  "options": [
+   "Emf is always negative",
+   "Flux is always decreasing",
+   "Opposition to the change in flux",
+   "Current is alternating"
+  ],
+  "answer": 2,
+  "explain": "The minus sign is the mathematical statement of Lenz's law.",
+  "kind": "concept",
+  "id": "2c8b752e-c66a-4cc8-9d2f-01548edb57f3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A north pole approaches a coil. The coil face nearest the magnet behaves as a:",
+  "formula": "",
+  "options": [
+   "South pole",
+   "North pole",
+   "Neutral face",
+   "Pole that alternates"
+  ],
+  "answer": 1,
+  "explain": "Induced current opposes the approach by repulsion, so the near face is a N pole.",
+  "kind": "concept",
+  "id": "29cdfeec-3e51-4d77-a118-58f71eb9504d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A N-pole approaches a loop. Seen from the magnet's side, the induced current is:",
+  "formula": "",
+  "options": [
+   "Clockwise",
+   "Zero",
+   "Alternating",
+   "Anticlockwise"
+  ],
+  "answer": 3,
+  "explain": "The near face must act as N, which is anticlockwise when viewed from that face.",
+  "kind": "fact",
+  "id": "ac0dc1b3-b540-4e22-8399-563060419765",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Induced current in a loop always opposes:",
+  "formula": "",
+  "options": [
+   "The flux itself",
+   "The change in flux",
+   "The magnetic field",
+   "The loop's resistance"
+  ],
+  "answer": 1,
+  "explain": "It opposes the change of flux, not the flux; a steady flux induces nothing.",
+  "kind": "concept",
+  "id": "0f984687-05cd-41ea-9c81-8e0cd6b29eac",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Field into the page through a loop is increasing. Induced current direction is:",
+  "formula": "",
+  "options": [
+   "Clockwise",
+   "Anticlockwise",
+   "Zero",
+   "Along the field"
+  ],
+  "answer": 1,
+  "explain": "The induced field must point out of the page, which needs an anticlockwise current.",
+  "kind": "result",
+  "id": "e4d5d8e7-63fd-4723-8355-10a7c8df789f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Field into the page through a loop is decreasing. Induced current is:",
+  "formula": "",
+  "options": [
+   "Anticlockwise",
+   "Zero",
+   "Clockwise",
+   "Alternating"
+  ],
+  "answer": 2,
+  "explain": "The induced field must support the original, into the page, so the current is clockwise.",
+  "kind": "result",
+  "id": "18c116e7-c430-4a2f-830f-2e8bdbfd3137",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A long wire carries upward current that is increasing. A loop beside it on the right has induced current:",
+  "formula": "",
+  "options": [
+   "Clockwise",
+   "Anticlockwise",
+   "Zero",
+   "Upward in all sides"
+  ],
+  "answer": 1,
+  "explain": "The wire's field on the right is into the page and increasing, so the loop opposes with anticlockwise current.",
+  "kind": "result",
+  "id": "24fb4fb7-e159-4260-9f47-cc1264892a10",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Current in a primary coil increases. The current induced in a coaxial secondary is:",
+  "formula": "",
+  "options": [
+   "In the same sense as the primary",
+   "Opposite in sense to the primary",
+   "Zero",
+   "Always alternating"
+  ],
+  "answer": 1,
+  "explain": "The secondary opposes the growing flux, so its current runs opposite to the primary's.",
+  "kind": "result",
+  "id": "acb99e92-850c-4508-ae04-534699d4636f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Current in a primary coil decreases. The induced current in a coaxial secondary is:",
+  "formula": "",
+  "options": [
+   "Opposite to the primary current",
+   "Zero",
+   "Perpendicular to the primary",
+   "In the same sense as the primary"
+  ],
+  "answer": 3,
+  "explain": "The secondary opposes the loss of flux by supporting it, so the sense is the same.",
+  "kind": "result",
+  "id": "9aa0f7b3-e730-465c-8e87-e302d3a24355",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A rod moves right on rails in a field into the page. Induced current in the rod flows:",
+  "formula": "",
+  "options": [
+   "Downward",
+   "Upward",
+   "Rightward",
+   "Leftward"
+  ],
+  "answer": 1,
+  "explain": "v × B = (+x) × (−z) = +y, so the current in the rod is upward. The force on it then opposes the motion.",
+  "kind": "result",
+  "id": "1b26fc8b-e1b0-41c4-9555-20e3d3e7843e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A closed loop moves with constant velocity entirely inside a uniform magnetic field. Induced current:",
+  "formula": "",
+  "options": [
+   "Is zero",
+   "Opposes the motion",
+   "Is clockwise",
+   "Is anticlockwise"
+  ],
+  "answer": 0,
+  "explain": "Flux does not change, so no emf and no current is induced.",
+  "kind": "exception",
+  "id": "f65c2c03-3692-4009-a108-d65287b23de4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A loop in a uniform field is being squeezed to a smaller area. The induced current tends to:",
+  "formula": "",
+  "options": [
+   "Shrink it further",
+   "Rotate it",
+   "Expand it",
+   "Leave its area unchanged"
+  ],
+  "answer": 2,
+  "explain": "It opposes the flux decrease, so the force tends to restore the area.",
+  "kind": "concept",
+  "id": "004f9e94-8241-46dd-9207-cd4a7858bc6c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A magnet falling in a long vertical copper tube eventually moves with:",
+  "formula": "",
+  "options": [
+   "Terminal constant speed",
+   "Acceleration g",
+   "Increasing acceleration",
+   "Zero speed"
+  ],
+  "answer": 0,
+  "explain": "Eddy-current drag grows with speed until it balances the magnet's weight.",
+  "kind": "concept",
+  "id": "f6d9379a-7fd2-40b7-8da3-56ea02530a3f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "On closing a switch in an LR circuit, the self-induced emf:",
+  "formula": "",
+  "options": [
+   "Aids current growth",
+   "Opposes current growth",
+   "Is zero",
+   "Reverses the battery"
+  ],
+  "answer": 1,
+  "explain": "Self-induced emf opposes the increase of current (Lenz's law), so current rises gradually.",
+  "kind": "concept",
+  "id": "2374583b-6b05-43c6-8696-2212a313b6a8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "When an inductor's circuit is broken, the induced emf drives current:",
+  "formula": "",
+  "options": [
+   "Opposite to the original current",
+   "In the original direction",
+   "Zero",
+   "Perpendicular to the wire"
+  ],
+  "answer": 1,
+  "explain": "It opposes the decay of flux by trying to maintain the original current.",
+  "kind": "concept",
+  "id": "0c1245c4-eece-46f0-adf0-43a3bb6f98e8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A metal plate swinging into a magnetic field is quickly damped due to:",
+  "formula": "",
+  "options": [
+   "Eddy currents",
+   "Air resistance only",
+   "Residual magnetism",
+   "Hysteresis loss"
+  ],
+  "answer": 0,
+  "explain": "Eddy currents oppose the flux change, giving a retarding force on the plate.",
+  "kind": "concept",
+  "id": "983ca8ad-aa7f-4d0c-9a5f-b2fe939cf688",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "An aluminium ring on the core of an AC-fed solenoid is:",
+  "formula": "",
+  "options": [
+   "Attracted to the core",
+   "Unaffected",
+   "Heated but static",
+   "Thrown upward (repelled)"
+  ],
+  "answer": 3,
+  "explain": "Induced current opposes the growing flux, giving repulsion (Elihu Thomson effect).",
+  "kind": "fact",
+  "id": "06e6473b-0d47-447d-a6e6-dfe4646c1358",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Work done against Lenz's opposing force while moving a magnet toward a coil appears as:",
+  "formula": "",
+  "options": [
+   "Electrical energy, then heat",
+   "Magnetic monopole energy",
+   "Gravitational energy",
+   "Lost energy"
+  ],
+  "answer": 0,
+  "explain": "Mechanical work converts into electrical energy in the coil, then Joule heat.",
+  "kind": "concept",
+  "id": "4fb4a182-a51c-4867-bcf2-60ada1f0abc5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "For an open (broken) loop with changing flux, Lenz's law gives the:",
+  "formula": "",
+  "options": [
+   "Current direction",
+   "Polarity of the induced emf",
+   "Flux value",
+   "Resistance"
+  ],
+  "answer": 1,
+  "explain": "No current flows in an open loop, but an emf still appears, and its polarity follows Lenz's law.",
+  "kind": "exception",
+  "id": "3a481066-8c12-4951-bf42-576b4da8bd59",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A bar magnet's N-pole is pulled away from a coil. The coil face nearest the magnet becomes a:",
+  "formula": "",
+  "options": [
+   "South pole",
+   "North pole",
+   "No pole",
+   "Alternating pole"
+  ],
+  "answer": 0,
+  "explain": "Induced current opposes the withdrawal, so the near face attracts the magnet: it acts as a south pole.",
+  "kind": "concept",
+  "id": "6441c2db-7eb8-4dba-9075-bc40d461b641",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A magnet falls through a copper ring with a small cut in it. Its acceleration is:",
+  "formula": "",
+  "options": [
+   "Exactly g",
+   "Less than g",
+   "Greater than g",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "The cut ring has emf but no induced current, so there is no opposing force and the magnet falls freely.",
+  "kind": "concept",
+  "id": "13edc63b-5a17-41c9-979b-c6e87685ac50",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A magnet falls through a long copper tube. Its final speed is constant because of:",
+  "formula": "",
+  "options": [
+   "Eddy-current braking by Lenz's law",
+   "Air resistance only",
+   "Magnet losing its magnetism",
+   "Gravity becoming zero inside tube"
+  ],
+  "answer": 0,
+  "explain": "Induced eddy currents oppose the motion; at terminal speed, retarding force equals mg.",
+  "kind": "concept",
+  "id": "1ad57534-d4ac-412b-b465-020be2f93dfd",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "North pole of a magnet is moved toward a coil. The face of the coil facing the magnet becomes:",
+  "formula": "",
+  "options": [
+   "North pole",
+   "South pole",
+   "Neutral",
+   "Alternately north and south"
+  ],
+  "answer": 0,
+  "explain": "Induced current opposes approach by repelling: near face behaves as a north pole.",
+  "kind": "fact",
+  "id": "806212e3-2b03-4590-80d5-bd052eef9b82",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "In a rod sliding on rails in a field, the mechanical work done against the magnetic force is converted to:",
+  "formula": "",
+  "options": [
+   "Joule heat in the circuit",
+   "Magnetic potential energy",
+   "Kinetic energy of the field",
+   "Nuclear energy"
+  ],
+  "answer": 0,
+  "explain": "Work against the Lenz opposing force appears as heat I²R in the circuit.",
+  "kind": "concept",
+  "id": "64a971b5-7d20-4dcf-82d9-cb9624b1c48e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "If Lenz's law were reversed (induced emf aiding the change), which would be violated?",
+  "formula": "",
+  "options": [
+   "Conservation of energy",
+   "Conservation of charge",
+   "Conservation of momentum only",
+   "Gauss's law"
+  ],
+  "answer": 0,
+  "explain": "Aiding change would give runaway growth of current and free energy.",
+  "kind": "concept",
+  "id": "fb865680-1c4b-44d7-bea1-deeceff8bcb6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "Sign in Faraday's law ε = −dΦ/dt represents:",
+  "formula": "ε = −dΦ/dt",
+  "options": [
+   "Lenz's law (opposition to flux change)",
+   "Direction of the magnetic field",
+   "Conservation of charge",
+   "Ohm's law"
+  ],
+  "answer": 0,
+  "explain": "The negative sign expresses Lenz's law: induced emf opposes the change in flux.",
+  "kind": "concept",
+  "id": "6375ddc4-71b8-425b-9ae7-dec7ebe9de16",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "A ring is pulled out of a uniform field region. The induced current opposes the change by trying to:",
+  "formula": "",
+  "options": [
+   "Maintain the original flux through the ring",
+   "Reduce the flux to zero",
+   "Double the flux",
+   "Stop the field"
+  ],
+  "answer": 0,
+  "explain": "Lenz's law: induced current opposes the flux decrease, i.e. tries to maintain the flux.",
+  "kind": "concept",
+  "id": "33e174b1-4496-48e3-a829-f0dfe902b652",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "A conducting loop moves at constant speed within a uniform magnetic field, fully inside it. Induced current in it is:",
+  "formula": "",
+  "options": [
+   "Zero, as flux is constant",
+   "Non-zero, opposing the motion",
+   "Non-zero, along the field",
+   "Zero only if the loop is rotating"
+  ],
+  "answer": 0,
+  "explain": "Flux through the loop does not change, so emf and current are zero and no opposing force acts.",
+  "kind": "concept",
+  "id": "42d14515-e0df-457b-a02c-10a826d3e37b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "Rod of length l rotates with angular speed ω about one end, in B ⊥ its plane. EMF between ends?",
+  "formula": "ε = ½Bωl²",
+  "options": [
+   "Bωl²",
+   "½Bωl²",
+   "½Bωl",
+   "2Bωl²"
+  ],
+  "answer": 1,
+  "explain": "Average speed is ωl/2, so ε = B·l·(ωl/2) = ½Bωl².",
+  "kind": "formula",
+  "id": "06a1f097-2673-4f56-b4fa-2b76c1abdf94",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod moves along its own length with speed v, in uniform B ⊥ to the rod. Motional emf is:",
+  "formula": "",
+  "options": [
+   "Blv",
+   "½Blv",
+   "Zero",
+   "Blv/2π"
+  ],
+  "answer": 2,
+  "explain": "v ∥ l, so v×B is perpendicular to the rod and has no component along it. Hence ε = 0.",
+  "kind": "concept",
+  "id": "7d4a285d-9019-4c58-b3d2-5a7270f10232",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod (resistance R) slides at constant v on frictionless rails in B. Power dissipated as heat?",
+  "formula": "P = B²l²v²/R",
+  "options": [
+   "B²l²v/R",
+   "Blv²/R",
+   "B²l²v²/R",
+   "B²lv²/R"
+  ],
+  "answer": 2,
+  "explain": "P = ε²/R = (Blv)²/R. It equals the power supplied by the external agent.",
+  "kind": "formula",
+  "id": "edfb73eb-6ac2-4ba7-bff4-fda4dd4d9941",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Horizontal rod (mass m, length l) slides down vertical conducting rails in horizontal B, total R. Terminal speed?",
+  "formula": "v_T = mgR/(B²l²)",
+  "options": [
+   "mgR/(Bl)",
+   "mgR/(B²l²)",
+   "mg/(B²l²R)",
+   "B²l²/(mgR)"
+  ],
+  "answer": 1,
+  "explain": "At terminal speed mg = B²l²v/R.",
+  "kind": "result",
+  "id": "6bbe0784-5c04-456d-a419-f3d9072011da",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod of mass m given speed v₀ on smooth rails (resistance R), no external force. Speed v(t) is:",
+  "formula": "v = v₀e^(−B²l²t/mR)",
+  "options": [
+   "Linear decrease in t",
+   "Exponential decay in t",
+   "Constant",
+   "Decreases as 1/t"
+  ],
+  "answer": 1,
+  "explain": "m dv/dt = −B²l²v/R gives an exponential decay.",
+  "kind": "result",
+  "id": "646836de-5272-435b-a06c-af596ee135ef",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod (mass m) with initial speed v₀ stops on smooth rails (resistance R). Distance covered?",
+  "formula": "x = mv₀R/(B²l²)",
+  "options": [
+   "mv₀R/(B²l²)",
+   "mv₀²R/(B²l²)",
+   "mv₀R/(Bl)",
+   "B²l²/(mv₀R)"
+  ],
+  "answer": 0,
+  "explain": "Impulse: m v₀ = ∫(B²l²v/R)dt = B²l²x/R.",
+  "kind": "result",
+  "id": "9a7c7f49-13f2-47ac-8a64-67845d907f99",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "A curved wire moves with velocity v in uniform B ⊥ its plane. Its motional emf uses which length?",
+  "formula": "",
+  "options": [
+   "Full arc length",
+   "Chord length ⊥ v between ends",
+   "Chord length ∥ v",
+   "Radius of curvature"
+  ],
+  "answer": 1,
+  "explain": "Only the straight-line distance between the ends, taken perpendicular to v, counts: ε = Bv·l_eff.",
+  "kind": "concept",
+  "id": "39073570-4c11-468f-8bc4-54eb9a3118a9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod of length l rotates about its midpoint in B ⊥ its plane. Net emf between the two ends?",
+  "formula": "",
+  "options": [
+   "½Bωl²",
+   "Bωl²",
+   "Bωl²/4",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Both halves give equal emf ⅛Bωl² with the same sense from the centre. The ends are at equal potential.",
+  "kind": "exception",
+  "id": "11348cdc-32b5-4f93-865b-fe2bac8eb23f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Metal disc of radius r rotates at ω in B ⊥ disc. EMF between centre and rim?",
+  "formula": "ε = ½Bωr²",
+  "options": [
+   "Bωr²",
+   "½Bωr",
+   "½Bωr²",
+   "Bωr²/4"
+  ],
+  "answer": 2,
+  "explain": "The disc is a set of radial rods rotating about one end, so ε = ½Bωr².",
+  "kind": "formula",
+  "id": "334b676d-b17f-45f2-a8be-25a1c4f15ec3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "At steady state in a rod moving at v ⊥ B (open circuit), the induced electric field inside the rod is:",
+  "formula": "",
+  "options": [
+   "E = B/v",
+   "E = vB",
+   "E = 0",
+   "E = Blv"
+  ],
+  "answer": 1,
+  "explain": "Electric force balances magnetic force: qE = qvB, so E = vB and ε = El = Blv.",
+  "kind": "result",
+  "id": "8ba0ceda-0ac3-4b17-b8a7-949e62da637d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Magnetic force on a current-carrying sliding rod due to induced current is directed:",
+  "formula": "",
+  "options": [
+   "Along v",
+   "Perpendicular to rod and v",
+   "Opposite to v",
+   "Along B"
+  ],
+  "answer": 2,
+  "explain": "Lenz's law: the induced current opposes the motion causing it.",
+  "kind": "concept",
+  "id": "69951d61-8b52-4a06-9457-5227efcac58f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Length of a rotating rod (fixed ω, B) is doubled. The motional emf becomes:",
+  "formula": "",
+  "options": [
+   "Two times",
+   "Four times",
+   "Half",
+   "Eight times"
+  ],
+  "answer": 1,
+  "explain": "ε = ½Bωl² ∝ l².",
+  "kind": "trend",
+  "id": "c6f9f573-7df8-451c-8572-257a30e9b0c2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod of length l rotates f times per second about one end in B ⊥ plane. EMF is:",
+  "formula": "ε = πBfl²",
+  "options": [
+   "2πBfl²",
+   "πBfl²",
+   "πBfl²/2",
+   "πBfl"
+  ],
+  "answer": 1,
+  "explain": "ω = 2πf, so ½Bωl² = πBfl².",
+  "kind": "formula",
+  "id": "96b86dd8-e852-4cc0-ba69-5f85e55c737c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "One tesla is equivalent to:",
+  "formula": "ε = Blv ⇒ T = V·s/m²",
+  "options": [
+   "V·m/s",
+   "V·s/m",
+   "V·s/m²",
+   "V·m²/s"
+  ],
+  "answer": 2,
+  "explain": "From ε = Blv, B = ε/(lv) has units V/(m·m/s) = V·s/m².",
+  "kind": "unit",
+  "id": "8b84c9cc-4d5b-49fb-8c98-119d70f695cb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod (R total) pulled on smooth rails by constant force F in B. Terminal speed is:",
+  "formula": "",
+  "options": [
+   "FR/(B²l²)",
+   "FR/(Bl)",
+   "F B²l²/R",
+   "FR²/(B²l²)"
+  ],
+  "answer": 0,
+  "explain": "At terminal speed F = B²l²v/R, so v = FR/(B²l²).",
+  "kind": "result",
+  "id": "a4815ac2-b20f-4909-b454-648718a061a1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Horizontal aeroplane wing moves through Earth's field. Wing-tip emf depends on which component of B?",
+  "formula": "",
+  "options": [
+   "Vertical component",
+   "Horizontal component",
+   "Total field magnitude only",
+   "Component along the wing"
+  ],
+  "answer": 0,
+  "explain": "v and wing span are horizontal, so only B_vertical is perpendicular to both: ε = B_V·l·v.",
+  "kind": "concept",
+  "id": "2d30dcd3-1d7d-402e-a82b-4e5a5711a9ae",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod ⊥ to long wire (current I) moves parallel to wire at v. Emf across it varies with distance as:",
+  "formula": "B = μ₀I/2πr",
+  "options": [
+   "Logarithmically, ε = (μ₀Iv/2π)ln(r₂/r₁)",
+   "Linearly, ε = μ₀Ivl/(2πr)",
+   "Zero, since v ∥ wire",
+   "Inverse square of r"
+  ],
+  "answer": 0,
+  "explain": "B varies as 1/r along the rod, so integrating Bv dr gives a logarithm between the end distances.",
+  "kind": "result",
+  "id": "639898c3-946d-4e7b-95b2-b726083817e4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "A rod moves at v ⊥ B, open circuit (no rails closed). Net magnetic force on the rod is:",
+  "formula": "",
+  "options": [
+   "B²l²v/R",
+   "Blv",
+   "Zero, since no current flows",
+   "Bl·v/2"
+  ],
+  "answer": 2,
+  "explain": "Open circuit means I = 0, so the force BIl = 0; charges only redistribute until the emf is balanced.",
+  "kind": "concept",
+  "id": "c6fff75b-ee4c-4dec-b306-63b7d8e71cf2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod moves at v ⊥ B on rails; current flows in loop. Mechanical power supplied equals which quantity?",
+  "formula": "P = Fv = B²l²v²/R",
+  "options": [
+   "Heat produced per second in the circuit",
+   "Zero, since net force on rod is zero",
+   "Rate of change of magnetic flux squared",
+   "Magnetic field energy stored in rod"
+  ],
+  "answer": 0,
+  "explain": "At constant v, work done by external force per second equals Joule heating: Fv = I²R.",
+  "kind": "concept",
+  "id": "e87bb7a7-8170-4134-adc0-b3134ed1680a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod of length l rotates about its midpoint in a plane ⊥ B. EMF between its two ends is:",
+  "formula": "",
+  "options": [
+   "Bωl²/8",
+   "Bωl²/2",
+   "Zero",
+   "Bωl²/4"
+  ],
+  "answer": 2,
+  "explain": "Each half develops equal emf from the centre, so both ends are at the same potential and the net emf is zero.",
+  "kind": "concept",
+  "id": "32bdff69-4058-499f-9f53-e1384ede580e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about its midpoint (⊥ B): emf between the midpoint and one end is:",
+  "formula": "",
+  "options": [
+   "Bωl²/2",
+   "Bωl²/8",
+   "Bωl²/4",
+   "Bωl²/16"
+  ],
+  "answer": 1,
+  "explain": "Half-length l/2: ½Bω(l/2)² = Bωl²/8.",
+  "kind": "result",
+  "id": "62aafb5c-8566-4c88-9a95-a5b04583a858",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Metal disc of radius R, frequency f, axial uniform B. Emf between centre and rim is:",
+  "formula": "",
+  "options": [
+   "2πBfR²",
+   "πBfR²",
+   "½πBfR²",
+   "BfR²"
+  ],
+  "answer": 1,
+  "explain": "½BωR² with ω = 2πf gives πBfR².",
+  "kind": "formula",
+  "id": "0571b284-4426-4472-a8aa-2382599450a7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod of length l pivoted at l/3 from one end, rotating ⊥ B. Emf between its ends is:",
+  "formula": "",
+  "options": [
+   "Bωl²/2",
+   "Bωl²/18",
+   "Bωl²/3",
+   "Bωl²/6"
+  ],
+  "answer": 3,
+  "explain": "½Bω[(2l/3)² − (l/3)²] = Bωl²/6, since both ends are above the pivot potential.",
+  "kind": "result",
+  "id": "62d2ee6c-1b5a-442a-92a3-9bd0ffaaf50b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod length is doubled and ω halved (B fixed, rotation about one end). The emf becomes:",
+  "formula": "",
+  "options": [
+   "Doubles",
+   "Halves",
+   "Becomes 4 times",
+   "Unchanged"
+  ],
+  "answer": 0,
+  "explain": "emf ∝ ωl²: (½)(4) = 2 times.",
+  "kind": "concept",
+  "id": "a6669fec-c5d7-4e36-89f6-52bb9f2d0f2f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod of length l, inclined at θ to a vertical axis, rotates about it with ω in vertical B. Emf between ends:",
+  "formula": "",
+  "options": [
+   "½Bωl² sin²θ",
+   "½Bωl² sinθ",
+   "½Bωl² cos²θ",
+   "½Bωl²"
+  ],
+  "answer": 0,
+  "explain": "Only the effective radius l sinθ matters: ½Bω(l sinθ)².",
+  "kind": "result",
+  "id": "dacbf016-9d52-4590-89e2-94450e4fb066",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about one end: power dissipated in a circuit of total resistance R is:",
+  "formula": "P = e²/R",
+  "options": [
+   "B²ω²l⁴/(4R)",
+   "B²ω²l⁴/(2R)",
+   "B²ω²l²/(4R)",
+   "B²ωl²/(2R)"
+  ],
+  "answer": 0,
+  "explain": "e = ½Bωl², so P = e²/R = B²ω²l⁴/(4R).",
+  "kind": "formula",
+  "id": "cd246686-c32b-43f8-9865-0fcb69df9c66",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about one end carries current I in field B. Magnetic force torque about the pivot is:",
+  "formula": "",
+  "options": [
+   "BIl²",
+   "½BIl²",
+   "BIl",
+   "⅓BIl²"
+  ],
+  "answer": 1,
+  "explain": "Force BIl acts at the midpoint, so torque = BIl·(l/2) = ½BIl².",
+  "kind": "formula",
+  "id": "54099a67-89fc-4a47-8ad0-8afcd491f990",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A metal disc rotates about its axis in a uniform B lying in the plane of the disc. Centre–rim emf is:",
+  "formula": "",
+  "options": [
+   "½BωR²",
+   "BωR²",
+   "πBfR²",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "v×B is along the axis, with no radial component, so no emf appears between centre and rim.",
+  "kind": "exception",
+  "id": "d89295f6-de06-4062-94f4-2ace128c3452",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A wheel with N metal spokes, each of length l, rotates ⊥ B. Hub–rim emf is:",
+  "formula": "",
+  "options": [
+   "N·½Bωl²",
+   "½Bωl²",
+   "½Bωl²/N",
+   "Bωl²"
+  ],
+  "answer": 1,
+  "explain": "The spokes are in parallel between hub and rim, so the emf is that of one spoke, independent of N.",
+  "kind": "concept",
+  "id": "840eed01-45e2-4f78-87ba-b583f9fa3f2f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotates in a horizontal plane in Earth's field. Which component of Earth's B gives the emf?",
+  "formula": "",
+  "options": [
+   "Vertical component",
+   "Horizontal component",
+   "Total field",
+   "North component only"
+  ],
+  "answer": 0,
+  "explain": "Rotation is in the horizontal plane, so the field must be ⊥ to that plane, i.e. the vertical component.",
+  "kind": "concept",
+  "id": "aa1a11a3-e102-44a1-ac5e-816e80e947ef",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about one end: emf equals B times the ___ swept by the rod per unit time.",
+  "formula": "e = B·dA/dt",
+  "options": [
+   "Area",
+   "Arc length",
+   "Perimeter",
+   "Angle"
+  ],
+  "answer": 0,
+  "explain": "dA/dt = ½l²ω for the sector swept, so e = ½Bωl².",
+  "kind": "concept",
+  "id": "8e0de774-e0e6-4f8f-b3b2-3f6985ae0369",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "In a Faraday disc, the emf arises mainly because of:",
+  "formula": "",
+  "options": [
+   "Magnetic Lorentz force on moving charges",
+   "Change of flux in a loop",
+   "Changing B with time",
+   "Self-induction of the disc"
+  ],
+  "answer": 0,
+  "explain": "It is motional emf from q(v×B) on charges moving with the disc, not from time-varying B.",
+  "kind": "concept",
+  "id": "3a16dfeb-ac47-4a83-9a06-a72b1eb60b9c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about one end ⊥ B: potential difference between pivot and a point at distance r varies as:",
+  "formula": "ε(r) = ½Bωr²",
+  "options": [
+   "r²",
+   "r",
+   "1/r",
+   "r³"
+  ],
+  "answer": 0,
+  "explain": "Each element dr contributes Bωr dr, so integrating gives ½Bωr², a parabolic graph in r.",
+  "kind": "graph",
+  "id": "0a14702b-3d94-4999-8832-73d713c60226",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Flat coil (N turns, area A, resistance R) is flipped 180° in field B ⟂ plane. Charge flowing is:",
+  "formula": "q = NΔΦ/R",
+  "options": [
+   "NBA/R",
+   "2NBA/R",
+   "Zero",
+   "NBA/2R"
+  ],
+  "answer": 1,
+  "explain": "Flux goes from +NBA to −NBA, so ΔΦ = 2NBA and q = 2NBA/R.",
+  "kind": "result",
+  "id": "d1cd616b-1825-491b-9a59-f23c2aacf04e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Coil with plane ⟂ B is rotated by 90° (to plane ∥ B). Induced charge is:",
+  "formula": "q = NBA/R",
+  "options": [
+   "2NBA/R",
+   "Zero",
+   "NBA/R",
+   "NBA/(2R)"
+  ],
+  "answer": 2,
+  "explain": "Flux changes from NBA to 0, so ΔΦ = NBA and q = NBA/R.",
+  "kind": "result",
+  "id": "37fc77e6-5ef5-4a93-a24a-9b511b322409",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "A coil in a uniform field completes one full 360° rotation. Net charge through the circuit is:",
+  "formula": "",
+  "options": [
+   "2NBA/R",
+   "NBA/R",
+   "4NBA/R",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Final flux equals initial flux, so ΔΦ = 0 and net charge is zero.",
+  "kind": "concept",
+  "id": "4f27742a-aeea-4faf-adf9-128d2d7cd38d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Which unit is equivalent to weber per ohm?",
+  "formula": "q = ΔΦ/R",
+  "options": [
+   "Ampere",
+   "Coulomb",
+   "Volt",
+   "Joule"
+  ],
+  "answer": 1,
+  "explain": "Wb = V·s, V/Ω = A, so Wb/Ω = A·s = coulomb.",
+  "kind": "unit",
+  "id": "f03c7f84-2874-46aa-95b4-9efe1c9fe53f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Area under the induced emf–time graph of a single-turn loop gives:",
+  "formula": "∫ε dt = |ΔΦ|",
+  "options": [
+   "Charge flown",
+   "Total heat produced",
+   "Magnitude of flux change",
+   "Loop resistance"
+  ],
+  "answer": 2,
+  "explain": "ε = −dΦ/dt, so ∫ε dt gives the flux change in magnitude.",
+  "kind": "graph",
+  "id": "21edea5a-6f4a-4f6b-aa87-2a4f548960ea",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "For the same flux change, the loop resistance is doubled. The induced charge becomes:",
+  "formula": "q = ΔΦ/R",
+  "options": [
+   "Double",
+   "Half",
+   "Unchanged",
+   "One-fourth"
+  ],
+  "answer": 1,
+  "explain": "q ∝ 1/R for a given ΔΦ, so doubling R halves q.",
+  "kind": "concept",
+  "id": "fae08915-ef1f-4bf8-b1d0-ba45b889ec6a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "A magnet is pushed fully into a coil and then pulled fully out. Net charge through the coil is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Twice that of insertion",
+   "Same as insertion",
+   "Depends on speed"
+  ],
+  "answer": 0,
+  "explain": "Net ΔΦ is zero, so the two charges are equal and opposite and cancel.",
+  "kind": "concept",
+  "id": "301d6145-f7aa-4f4e-9499-efe10d55610a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Square loop (side a, resistance R) is pulled completely out of a field B ⟂ its plane. Charge flown:",
+  "formula": "",
+  "options": [
+   "Ba²/R",
+   "Ba/R",
+   "2Ba²/R",
+   "Ba²/(2R)"
+  ],
+  "answer": 0,
+  "explain": "ΔΦ = Ba² (flux goes to zero), so q = Ba²/R, whatever the speed.",
+  "kind": "result",
+  "id": "c83d153b-31e7-426e-be87-30e8d1604f93",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "A ballistic galvanometer connected to a search coil has a throw proportional to:",
+  "formula": "",
+  "options": [
+   "Rate of change of flux",
+   "Flux change ΔΦ",
+   "Peak induced emf",
+   "Time of change"
+  ],
+  "answer": 1,
+  "explain": "The throw ∝ charge q = ΔΦ/R, which is how a flux meter measures B.",
+  "kind": "fact",
+  "id": "ebcf4bea-d76c-4772-83af-592bedd0a1ec",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "On a graph of induced charge q (y-axis) against flux change ΔΦ (x-axis), the slope is:",
+  "formula": "",
+  "options": [
+   "R",
+   "1/R",
+   "R²",
+   "ε"
+  ],
+  "answer": 1,
+  "explain": "q = ΔΦ/R is a straight line through the origin with slope 1/R.",
+  "kind": "graph",
+  "id": "552001e8-3a28-48b6-a104-866a7ed5a0c4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "The R in q = ΔΦ/R refers to the resistance of:",
+  "formula": "",
+  "options": [
+   "The coil alone",
+   "The galvanometer alone",
+   "Whole closed circuit",
+   "External resistor only"
+  ],
+  "answer": 2,
+  "explain": "The charge flows through the entire closed loop, so R is the total circuit resistance.",
+  "kind": "concept",
+  "id": "feabed26-7b5c-40dc-9485-f16084fbeba3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Flux through a coil changes from Φ to 3Φ in R ohms circuit. Charge flowing equals:",
+  "formula": "",
+  "options": [
+   "2Φ/R",
+   "Φ/R",
+   "3Φ/R",
+   "4Φ/R"
+  ],
+  "answer": 0,
+  "explain": "q = |Φ₂ − Φ₁|/R = (3Φ − Φ)/R = 2Φ/R.",
+  "kind": "result",
+  "id": "6620ed18-14fe-44cc-9706-3921c42b449e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Coil (N, A, R) with plane ⟂ B is turned through 60° about a diameter. Induced charge is:",
+  "formula": "q = NBA(1 − cosθ)/R",
+  "options": [
+   "NBA/R",
+   "NBA/(2R)",
+   "√3 NBA/(2R)",
+   "2NBA/R"
+  ],
+  "answer": 1,
+  "explain": "ΔΦ = NBA(1 − cos60°) = NBA/2, so q = NBA/(2R).",
+  "kind": "result",
+  "id": "4d9fb0f7-e105-4031-a29f-f4e73da3729a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Field lines of an induced electric field (due to changing B) are:",
+  "formula": "",
+  "options": [
+   "Closed loops",
+   "Radial, starting on positive charges",
+   "Straight lines ending on negative charges",
+   "Parallel to B"
+  ],
+  "answer": 0,
+  "explain": "Induced E has non-zero curl and zero divergence, so its field lines are closed loops with no start or end.",
+  "kind": "concept",
+  "id": "d08b89f3-2a08-47a0-a748-cc32e1ca710b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "Solenoid of radius R, B changing uniformly inside. Outside (r > R), induced E varies as:",
+  "formula": "E = (R²/2r)(dB/dt)",
+  "options": [
+   "1/r",
+   "r",
+   "1/r²",
+   "Constant"
+  ],
+  "answer": 0,
+  "explain": "All the flux is πR²·B, so E·2πr = πR²(dB/dt), which gives E ∝ 1/r.",
+  "kind": "result",
+  "id": "22399b4b-8df0-400e-b8d5-a0b3279f41ae",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "Uniform B pointing out of the page is increasing. Induced E circulation is:",
+  "formula": "",
+  "options": [
+   "Clockwise",
+   "Anticlockwise",
+   "Radially outward",
+   "Radially inward"
+  ],
+  "answer": 0,
+  "explain": "By Lenz's law the induced current's field points into the page, which needs clockwise circulation.",
+  "kind": "concept",
+  "id": "ccef7ae7-de83-422c-9f5f-abcbc183dd8b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "For an induced (non-conservative) electric field, electric potential:",
+  "formula": "",
+  "options": [
+   "Cannot be uniquely defined",
+   "Is defined as in electrostatics",
+   "Is always zero",
+   "Is defined only at the centre"
+  ],
+  "answer": 0,
+  "explain": "∮E·dl ≠ 0, so the work between two points depends on the path and no scalar potential exists.",
+  "kind": "concept",
+  "id": "c9c8741b-f4c2-4dfb-8294-ac44bff138de",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "Work done by an induced E on charge q taken once around a closed loop is:",
+  "formula": "W = q·ε = q|dΦ/dt|",
+  "options": [
+   "q|dΦ/dt|",
+   "Zero",
+   "qE·(area)",
+   "q·dΦ/dt ÷ 2π"
+  ],
+  "answer": 0,
+  "explain": "The work per unit charge around a closed loop equals the induced emf, which is non-zero.",
+  "kind": "formula",
+  "id": "24c79dc8-3680-4c4a-9c70-2b1e58cf47d2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "A changing magnetic flux produces an induced electric field:",
+  "formula": "",
+  "options": [
+   "Even in empty space with no conductor",
+   "Only inside a conducting loop",
+   "Only in a closed circuit with a resistor",
+   "Only along the direction of B"
+  ],
+  "answer": 0,
+  "explain": "The induced E exists at every point in space; a conductor merely lets it drive a current.",
+  "kind": "concept",
+  "id": "50086217-c6f7-4f16-bac5-88059ae09af1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "Solenoid radius R, dB/dt uniform. Induced E at distance r < R from the axis varies as:",
+  "formula": "∮E·dl = −dΦ/dt",
+  "options": [
+   "E ∝ r",
+   "E ∝ 1/r",
+   "E ∝ r²",
+   "E is independent of r"
+  ],
+  "answer": 0,
+  "explain": "E(2πr) = πr²(dB/dt), so E = (r/2)(dB/dt) ∝ r inside the solenoid.",
+  "kind": "result",
+  "id": "6a253f96-0cd4-4821-9d8a-0564d3ff958d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "Another name for eddy currents is:",
+  "formula": "",
+  "options": [
+   "Foucault currents",
+   "Displacement currents",
+   "Ampèrian currents",
+   "Convection currents"
+  ],
+  "answer": 0,
+  "explain": "Eddy currents were discovered by Foucault and are also called Foucault currents.",
+  "kind": "fact",
+  "id": "b080f031-01bb-4aef-a7c5-5f60f9f1ee35",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Eddy currents in a conductor always act to:",
+  "formula": "",
+  "options": [
+   "Oppose the change of flux causing them",
+   "Aid the change of flux causing them",
+   "Keep the flux always constant",
+   "Increase the applied magnetic field"
+  ],
+  "answer": 0,
+  "explain": "By Lenz's law, eddy currents oppose the cause (change in flux or relative motion) that produces them.",
+  "kind": "concept",
+  "id": "a072a9ab-8df5-4eb1-a555-e892979e2b7d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "A solid metal plate swings between magnet poles and stops quickly; a slotted plate:",
+  "formula": "",
+  "options": [
+   "Is damped much less",
+   "Is damped even more",
+   "Is damped equally",
+   "Does not swing at all"
+  ],
+  "answer": 0,
+  "explain": "Slots cut the eddy current paths, so the retarding force is smaller and the plate swings longer.",
+  "kind": "concept",
+  "id": "fe92e2f0-6d64-4990-bb76-530ad64eb2ac",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Eddy current power loss in a transformer core varies with supply frequency f as:",
+  "formula": "",
+  "options": [
+   "f²",
+   "f",
+   "f^½",
+   "f⁰ (independent)"
+  ],
+  "answer": 0,
+  "explain": "Induced emf ∝ f, so the loss, which goes as emf²/R, ∝ f².",
+  "kind": "formula",
+  "id": "a2d02184-eecc-42ef-850a-5af17e05e176",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Eddy current loss in a lamination of thickness t varies as:",
+  "formula": "",
+  "options": [
+   "t²",
+   "t",
+   "1/t",
+   "1/t²"
+  ],
+  "answer": 0,
+  "explain": "Loss ∝ B²f²t²/ρ, so thinner sheets lose less.",
+  "kind": "formula",
+  "id": "0739f2f8-76f8-413b-ad56-d7803483f440",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Transformer cores use silicon steel mainly because it has:",
+  "formula": "",
+  "options": [
+   "High resistivity, reducing eddy currents",
+   "Low resistivity, increasing eddy currents",
+   "Zero permeability",
+   "Very high retentivity"
+  ],
+  "answer": 0,
+  "explain": "The higher resistivity of silicon steel reduces eddy current magnitude and loss.",
+  "kind": "fact",
+  "id": "3ef88acf-15dd-46c0-8c5e-74f13697d0c0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "In a dead-beat galvanometer, the coil is wound on a metallic frame to:",
+  "formula": "",
+  "options": [
+   "Damp oscillations by eddy currents",
+   "Increase the coil's resistance",
+   "Reduce the magnetic field",
+   "Increase the coil's oscillation time"
+  ],
+  "answer": 0,
+  "explain": "Eddy currents in the frame oppose the motion, so the pointer settles quickly without oscillating.",
+  "kind": "fact",
+  "id": "76d447d9-c441-4aa3-87aa-68616f117290",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Electromagnetic braking in trains makes use of:",
+  "formula": "",
+  "options": [
+   "Eddy currents induced in the rails or wheels",
+   "Static charge on the wheels",
+   "Friction heating in the brake pads",
+   "Displacement current in the rails"
+  ],
+  "answer": 0,
+  "explain": "Electromagnets induce eddy currents, which oppose the motion without mechanical contact.",
+  "kind": "fact",
+  "id": "3f5eaa8c-bff1-45fb-86eb-ee16d82f545d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Which of these works on the principle of eddy currents?",
+  "formula": "",
+  "options": [
+   "Metal detector",
+   "Moving coil ammeter shunt",
+   "Photocell",
+   "Electric fuse"
+  ],
+  "answer": 0,
+  "explain": "A metal detector senses eddy currents induced in a metal object by its alternating field.",
+  "kind": "fact",
+  "id": "e896f7cb-1cd5-4313-800c-cf67047e833c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "A stationary metal block in a uniform, constant magnetic field has eddy currents:",
+  "formula": "",
+  "options": [
+   "None, as there is no flux change",
+   "Maximum, as the field is strong",
+   "Circulating along the field lines",
+   "Only at the surface of the block"
+  ],
+  "answer": 0,
+  "explain": "Eddy currents need a changing flux, either from a varying B or relative motion.",
+  "kind": "concept",
+  "id": "0c6b7feb-db39-45c6-a97c-657d18c6a63b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "In an induction cooker, the pan is heated by:",
+  "formula": "",
+  "options": [
+   "Eddy currents induced in the pan",
+   "Conduction from a red-hot coil",
+   "Infrared radiation from the plate",
+   "Dielectric loss in the pan"
+  ],
+  "answer": 0,
+  "explain": "A high-frequency alternating field induces eddy currents in the pan, producing I²R heating.",
+  "kind": "fact",
+  "id": "ab52f60b-2a57-45a1-8585-127cf3c44f2e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "At low speeds, the eddy current braking force on a moving conductor is roughly proportional to its:",
+  "formula": "",
+  "options": [
+   "Speed",
+   "Square of speed",
+   "Mass",
+   "Inverse of speed"
+  ],
+  "answer": 0,
+  "explain": "The motional emf ∝ v, so the current and the braking force ∝ v.",
+  "kind": "trend",
+  "id": "947946a4-b17f-44de-947b-67e9fb99e6e2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "The electrical energy of eddy currents in a transformer core is converted mainly into:",
+  "formula": "",
+  "options": [
+   "Heat",
+   "Sound",
+   "Magnetic energy",
+   "Chemical energy"
+  ],
+  "answer": 0,
+  "explain": "Eddy currents cause I²R Joule heating in the core, which is a loss in transformers.",
+  "kind": "concept",
+  "id": "af29236b-d157-407b-9bf2-17afea8af86d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Laminations in a transformer core are kept insulated from each other and arranged with their planes:",
+  "formula": "",
+  "options": [
+   "Parallel to the magnetic field",
+   "Perpendicular to the magnetic field",
+   "Perpendicular to the flux direction",
+   "At 45° to the magnetic field"
+  ],
+  "answer": 0,
+  "explain": "Laminations lie parallel to the flux, so eddy current loops are cut into small, high-resistance paths.",
+  "kind": "concept",
+  "id": "5c0e7901-9451-4cfd-8d41-3d0161bdb4fb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Eddy currents: uses and reduction"
+ },
+ {
+  "prompt": "Energy stored in a solenoid of inductance L carrying current I is:",
+  "formula": "U = ½LI²",
+  "options": [
+   "½LI²",
+   "LI²",
+   "½L²I",
+   "½LI"
+  ],
+  "answer": 0,
+  "explain": "Work against back-EMF: U = ∫LI dI = ½LI².",
+  "kind": "formula",
+  "id": "72929ed5-6209-4be5-86f7-286514ba178c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "Total turns N and area fixed; solenoid length is doubled (stretched). Its self-inductance becomes:",
+  "formula": "L = μ₀N²A/l",
+  "options": [
+   "L/2",
+   "2L",
+   "L/4",
+   "L"
+  ],
+  "answer": 0,
+  "explain": "For fixed N, L = μ₀N²A/l ∝ 1/l, so doubling l halves L.",
+  "kind": "concept",
+  "id": "7f0a5319-0ac2-45a4-94f2-30ca30b4cd70",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "Radius of a long solenoid is doubled (same n, same length). Its self-inductance becomes:",
+  "formula": "L = μ₀n²πr²l",
+  "options": [
+   "4L",
+   "2L",
+   "L/2",
+   "L/4"
+  ],
+  "answer": 0,
+  "explain": "L ∝ A ∝ r², so doubling r gives 4L.",
+  "kind": "concept",
+  "id": "c9ab3eff-940a-4424-9178-ddbbd01ed435",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "Magnetic energy stored per unit volume inside a solenoid with field B (air core) is:",
+  "formula": "u = B²/2μ₀",
+  "options": [
+   "B²/2μ₀",
+   "B²/μ₀",
+   "μ₀B²/2",
+   "B/2μ₀"
+  ],
+  "answer": 0,
+  "explain": "Energy density of a magnetic field is B²/(2μ₀); with U = ½LI² it gives the same result.",
+  "kind": "formula",
+  "id": "4e0b46cc-fca9-4209-8acd-985f3394984a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "A fixed length of wire is wound into a solenoid of fixed length l. If its radius is doubled, L becomes:",
+  "formula": "N ∝ 1/r, A ∝ r²  ⇒  L = μ₀N²A/l",
+  "options": [
+   "Unchanged",
+   "Doubled",
+   "Halved",
+   "Quadrupled"
+  ],
+  "answer": 0,
+  "explain": "N ∝ 1/r and A ∝ r², so N²A is constant. L = μ₀ℓ_w²/(4πl) is independent of r.",
+  "kind": "result",
+  "id": "7dc7768f-fadc-4174-b070-83dd9ea8a6dd",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "A wire is doubled back on itself (bifilar) and then wound as a coil. Its self-inductance is nearly:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Double that of a single winding",
+   "Four times that of a single winding",
+   "Half that of a single winding"
+  ],
+  "answer": 0,
+  "explain": "The two adjacent halves carry opposite currents, so the net flux linkage is zero. This is a non-inductive winding.",
+  "kind": "concept",
+  "id": "f97300e1-df41-4f52-964b-204301808fdc",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "Long solenoid (radius r₁) lies inside a coaxial long solenoid (radius r₂>r₁), same length. M ∝ ?",
+  "formula": "M = μ₀N₁N₂πr₁²/l",
+  "options": [
+   "r₂²",
+   "r₁²",
+   "r₁r₂",
+   "r₂² − r₁²"
+  ],
+  "answer": 1,
+  "explain": "Flux through the outer coil is confined to the inner solenoid's area πr₁², so M ∝ r₁².",
+  "kind": "concept",
+  "id": "8815e01b-7867-4bce-8c24-341938f4a61b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Mutual inductance of coaxial solenoids"
+ },
+ {
+  "prompt": "For two coaxial solenoids, M₁₂ (flux in 2 due to I₁) and M₂₁ (flux in 1 due to I₂) are related as:",
+  "formula": "",
+  "options": [
+   "M₁₂ = M₂₁",
+   "M₁₂ = 1/M₂₁",
+   "M₁₂/M₂₁ = N₂/N₁",
+   "M₁₂/M₂₁ = N₁/N₂"
+  ],
+  "answer": 0,
+  "explain": "Reciprocity theorem: M₁₂ = M₂₁ = M, whatever the turns or sizes of the coils.",
+  "kind": "fact",
+  "id": "9068db86-8e29-481c-acb5-0a938192c1ac",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Mutual inductance of coaxial solenoids"
+ },
+ {
+  "prompt": "The dimensional formula of mutual inductance is:",
+  "formula": "[M] = [ML²T⁻²A⁻²]",
+  "options": [
+   "ML²T⁻²A⁻¹",
+   "ML²T⁻²A⁻²",
+   "ML²T⁻³A⁻¹",
+   "MLT⁻²A⁻²"
+  ],
+  "answer": 1,
+  "explain": "M = emf·t/I = (ML²T⁻³A⁻¹)(T)/A = ML²T⁻²A⁻², the same as for L (henry).",
+  "kind": "unit",
+  "id": "e2b7bae7-1cfd-4289-af3c-0b7d4a63aca7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Mutual inductance of coaxial solenoids"
+ },
+ {
+  "prompt": "A soft iron core of relative permeability μᵣ completely fills a coaxial solenoid pair. M becomes:",
+  "formula": "M = μ₀μᵣN₁N₂A/l",
+  "options": [
+   "M/μᵣ",
+   "μᵣM",
+   "μᵣ²M",
+   "M unchanged"
+  ],
+  "answer": 1,
+  "explain": "M ∝ permeability of the medium, so filling with the core multiplies M by μᵣ.",
+  "kind": "concept",
+  "id": "844287c7-8d15-4e82-8cb0-14aba0eda309",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Mutual inductance of coaxial solenoids"
+ },
+ {
+  "prompt": "Energy stored in an inductor in terms of flux Φ linked (Φ = LI) is:",
+  "formula": "U = Φ²/(2L)",
+  "options": [
+   "Φ²/(2L)",
+   "LΦ²/2",
+   "Φ²/L",
+   "2Φ²/L"
+  ],
+  "answer": 0,
+  "explain": "Put I = Φ/L in ½LI² to get Φ²/(2L).",
+  "kind": "formula",
+  "id": "b357975d-d3e0-4e93-bf34-ab51c4eb32be",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "Instantaneous power delivered to an ideal inductor L carrying current I is:",
+  "formula": "P = LI·dI/dt",
+  "options": [
+   "L·dI/dt",
+   "½LI²",
+   "LI·dI/dt",
+   "L I²/t"
+  ],
+  "answer": 2,
+  "explain": "P = emf × I = (L dI/dt)·I, and ∫P dt = ½LI².",
+  "kind": "formula",
+  "id": "e0fd13dc-e1cf-4d9e-b110-fc84bd69fd57",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "A current I in inductor L is switched off through a resistor R. Total heat produced in R is:",
+  "formula": "",
+  "options": [
+   "I²R",
+   "½LI²",
+   "LI²",
+   "½LI²R"
+  ],
+  "answer": 1,
+  "explain": "All the magnetic energy ½LI² is dissipated as heat in R.",
+  "kind": "concept",
+  "id": "9c38101e-24ab-4536-a68f-df70d6ecdced",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "In an LR circuit with battery E, steady-state energy stored in the inductor is:",
+  "formula": "",
+  "options": [
+   "½LE²/R²",
+   "½LE²/R",
+   "½L E R²",
+   "LE²/(2R)²"
+  ],
+  "answer": 0,
+  "explain": "Steady current is E/R, so U = ½L(E/R)².",
+  "kind": "formula",
+  "id": "bd59fd3c-0c73-4a50-ba9a-919a55bb912d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "In an LR circuit just after the switch is closed (t = 0), the rate of energy storage in L is:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Zero",
+   "E²/R",
+   "E²/(2R)"
+  ],
+  "answer": 1,
+  "explain": "P = LI dI/dt and I = 0 at t = 0, so P = 0 even though dI/dt is maximum.",
+  "kind": "concept",
+  "id": "28431c6a-dcf0-41ad-845d-5e1d84c37d7e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "The graph of energy stored in an inductor versus current I (L fixed) is:",
+  "formula": "",
+  "options": [
+   "Straight line through origin",
+   "Parabola through origin",
+   "Rectangular hyperbola",
+   "Exponential rise"
+  ],
+  "answer": 1,
+  "explain": "U = ½LI² ∝ I², a parabola through the origin.",
+  "kind": "graph",
+  "id": "4d6c29ca-1cb0-4edf-aae1-45de24a9b128",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "Magnetic flux through an inductor is held constant while L is doubled. Stored energy becomes:",
+  "formula": "U = Φ²/2L",
+  "options": [
+   "Doubles",
+   "Unchanged",
+   "Halves",
+   "Becomes four times"
+  ],
+  "answer": 2,
+  "explain": "At constant Φ, U ∝ 1/L, so it halves.",
+  "kind": "concept",
+  "id": "9ac0ae30-4f70-4fc6-a9e0-b1f223ad1c02",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "In an LC oscillation, when the capacitor is fully discharged, the energy of the circuit is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "All in the capacitor",
+   "Half in each",
+   "All in the inductor"
+  ],
+  "answer": 3,
+  "explain": "Current is maximum, so the total energy is ½LI₀² in the inductor.",
+  "kind": "concept",
+  "id": "13851413-d4a3-438b-9ab0-73f777830c31",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "In a growing LR circuit, at t = τ = L/R the stored energy is about what fraction of its final value?",
+  "formula": "I = I₀(1 − e⁻¹)",
+  "options": [
+   "63%",
+   "86%",
+   "40%",
+   "37%"
+  ],
+  "answer": 2,
+  "explain": "I = 0.63 I₀ and U ∝ I², so U ≈ (0.63)² ≈ 0.40 of the maximum.",
+  "kind": "result",
+  "id": "c4a6d857-168a-4a36-942a-d84669874d6e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "Two coupled coils carry I₁, I₂ with fluxes aiding. Total magnetic energy is:",
+  "formula": "U = ½L₁I₁² + ½L₂I₂² + MI₁I₂",
+  "options": [
+   "½L₁I₁² + ½L₂I₂²",
+   "½L₁I₁² + ½L₂I₂² + MI₁I₂",
+   "½L₁I₁² + ½L₂I₂² + ½MI₁I₂",
+   "½(L₁ + L₂ + M)(I₁ + I₂)²"
+  ],
+  "answer": 1,
+  "explain": "Mutual energy term is MI₁I₂ (+ for aiding fluxes, − for opposing).",
+  "kind": "formula",
+  "id": "dbbe4ef1-272a-4d9f-8f2e-a976314206e3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "Dimensional formula of self-inductance L, obtained from U = ½LI², is:",
+  "formula": "[L] = [U]/[I²]",
+  "options": [
+   "[ML²T⁻²A⁻²]",
+   "[ML²T⁻²A⁻¹]",
+   "[MLT⁻²A⁻²]",
+   "[ML²T⁻¹A⁻²]"
+  ],
+  "answer": 0,
+  "explain": "L = U/I² gives [ML²T⁻²]/[A²] = [ML²T⁻²A⁻²] (unit: J A⁻² = henry).",
+  "kind": "unit",
+  "id": "f8ad604c-3a59-4713-9b3a-e759923385e8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "Turns of a solenoid are doubled keeping length, area and current fixed. Stored energy becomes:",
+  "formula": "L = μ₀N²A/ℓ",
+  "options": [
+   "Double",
+   "Four times",
+   "Half",
+   "Unchanged"
+  ],
+  "answer": 1,
+  "explain": "L ∝ N², so at the same I, U = ½LI² becomes 4 times.",
+  "kind": "concept",
+  "id": "2e6aa2bd-4262-4ba4-a488-f34ea26d9a3d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "In a rotating-coil AC generator, the induced emf is maximum when the angle between coil normal and B is:",
+  "formula": "ε = NBAω sinθ",
+  "options": [
+   "0°",
+   "45°",
+   "90°",
+   "180°"
+  ],
+  "answer": 2,
+  "explain": "At θ = 90° the coil plane is parallel to B; flux changes fastest, so ε = NBAω.",
+  "kind": "concept",
+  "id": "8e74f7d1-8d57-4504-a4ee-c7ae3d432925",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "In an AC generator, the induced emf and the magnetic flux through the coil differ in phase by:",
+  "formula": "φ = BA cosωt, ε = NBAω sinωt",
+  "options": [
+   "0",
+   "π/4",
+   "π/2",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "ε = −dφ/dt turns cos into sin, so the emf is 90° out of phase with flux.",
+  "kind": "fact",
+  "id": "ae9babc9-aca4-4c3e-a81b-ebf144992456",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "In one complete rotation of the coil, the induced emf reverses its direction:",
+  "formula": "",
+  "options": [
+   "Once",
+   "Twice",
+   "Four times",
+   "Never"
+  ],
+  "answer": 1,
+  "explain": "The sinusoidal emf crosses zero twice per cycle, changing sign each time.",
+  "kind": "fact",
+  "id": "bbc1b979-1744-4184-a46d-18900c3836ab",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "The average value of the generator emf ε₀ sinωt over one complete cycle is:",
+  "formula": "",
+  "options": [
+   "ε₀/√2",
+   "2ε₀/π",
+   "ε₀",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Positive and negative half-cycles cancel, so the full-cycle average is zero.",
+  "kind": "result",
+  "id": "bcde2b26-3208-4540-aad8-c9d64a0ffaba",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "The AC generator is connected to the external circuit through:",
+  "formula": "",
+  "options": [
+   "Split-ring commutator",
+   "Slip rings and carbon brushes",
+   "Soft-iron core",
+   "Step-up transformer"
+  ],
+  "answer": 1,
+  "explain": "Slip rings keep the output alternating; a split-ring commutator is used in a DC generator.",
+  "kind": "fact",
+  "id": "adb59c3f-1a98-471e-a62c-b8cbaf0f4326",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "For a given area, turns and ω, the peak emf of a rotating coil depends on the coil's shape:",
+  "formula": "ε₀ = NBAω",
+  "options": [
+   "Yes, circular gives the most",
+   "Yes, square gives the most",
+   "No, only on area A",
+   "No, only on perimeter"
+  ],
+  "answer": 2,
+  "explain": "ε₀ = NBAω involves only the area A, not the shape of the coil.",
+  "kind": "concept",
+  "id": "ee1d165d-3ff4-46fb-8931-ff7491a76ef1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "A coil rotating about an axis parallel to a uniform B produces an induced emf of:",
+  "formula": "",
+  "options": [
+   "Maximum value NBAω",
+   "Zero",
+   "Half of NBAω",
+   "NBAω/√2"
+  ],
+  "answer": 1,
+  "explain": "The flux through the coil stays constant, so dφ/dt = 0 and no emf is induced.",
+  "kind": "exception",
+  "id": "e4be1f03-ccd0-46e9-b868-5b71296f0e97",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "A 50 Hz generator emf becomes zero how many times in one second?",
+  "formula": "",
+  "options": [
+   "50",
+   "100",
+   "25",
+   "200"
+  ],
+  "answer": 1,
+  "explain": "There are 2 zero crossings per cycle, so 2 × 50 = 100 per second.",
+  "kind": "result",
+  "id": "3fa5fdb7-62fd-4ee0-8ced-16f8d82193d2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "In an AC generator, the emf takes how long to rise from zero to its peak value, starting from the zero position?",
+  "formula": "T = 2π/ω",
+  "options": [
+   "T/8",
+   "T/4",
+   "T/2",
+   "T"
+  ],
+  "answer": 1,
+  "explain": "sinωt goes from 0 to 1 when ωt = π/2, which is T/4.",
+  "kind": "result",
+  "id": "a1700e30-b1dc-4ed0-a18c-dc1cb52b5c1d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "If the rotation speed of an AC generator's coil is doubled, its peak emf and frequency change by factors of:",
+  "formula": "ε₀ = NBAω, f = ω/2π",
+  "options": [
+   "2 and 2",
+   "2 and 1",
+   "4 and 2",
+   "1 and 2"
+  ],
+  "answer": 0,
+  "explain": "ε₀ ∝ ω and f ∝ ω, so both are doubled.",
+  "kind": "concept",
+  "id": "6a35895d-af25-49b1-b0fc-7cde8993709f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "A generator coil is rotated with its normal initially along B. The emf at time t is given by:",
+  "formula": "ε = −dΦ/dt, Φ = NBA cosωt",
+  "options": [
+   "NBAω sinωt",
+   "NBAω cosωt",
+   "NBA sinωt",
+   "NBAω² sinωt"
+  ],
+  "answer": 0,
+  "explain": "Φ = NBA cosωt, so ε = −dΦ/dt = NBAω sinωt.",
+  "kind": "formula",
+  "id": "5436573b-7e95-40ac-9687-880af9fcfecc",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "Which expression gives flux in terms of the field B and area vector A?",
+  "formula": "Φ = B · A",
+  "options": [
+   "Scalar (dot) product B · A",
+   "Vector (cross) product B × A",
+   "Ratio B/A",
+   "Product B·A with no angle dependence"
+  ],
+  "answer": 0,
+  "explain": "Flux is the dot product of B and A, hence a scalar; Φ = ∮B·dA for a non-uniform field.",
+  "kind": "formula",
+  "id": "69e9d8ff-53ad-4561-b105-4b3e60439de3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "1 weber is equal to which combination of SI units?",
+  "formula": "Φ = BA",
+  "options": [
+   "1 T·m²",
+   "1 T·m",
+   "1 N·m/A²",
+   "1 V/s"
+  ],
+  "answer": 0,
+  "explain": "Φ = B·A, so 1 Wb = 1 tesla × 1 m². Also 1 Wb = 1 V·s, not V/s.",
+  "kind": "unit",
+  "id": "520cfad8-fbcd-4c9f-9b7d-75d2282e6fc1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "Inside a circular region of uniform, changing B (axis along field), induced E at distance r from axis varies as:",
+  "formula": "E·2πr = πr²·dB/dt",
+  "options": [
+   "E ∝ r",
+   "E ∝ 1/r",
+   "E ∝ r²",
+   "E is constant"
+  ],
+  "answer": 0,
+  "explain": "Inside the region E = (r/2)(dB/dt), so E ∝ r. Outside it falls as 1/r.",
+  "kind": "result",
+  "id": "e4831726-7477-412b-80b2-6691ddc94847",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "A coil of area A has its normal along uniform B. It is turned through 180°. Magnitude of flux change ΔΦ is:",
+  "formula": "Φ = BA cosθ",
+  "options": [
+   "Zero",
+   "BA",
+   "2BA",
+   "BA/2"
+  ],
+  "answer": 2,
+  "explain": "Flux changes from +BA to −BA, so |ΔΦ| = 2BA (the flux reverses sign).",
+  "kind": "result",
+  "id": "1871ce3b-7f21-42b1-bc8b-e9a006c00f8a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Horizontal rod (length l) falls freely from rest, ⊥ to horizontal B. Emf at time t is:",
+  "formula": "ε = Blv, v = gt",
+  "options": [
+   "Blgt",
+   "½Blgt²",
+   "Blg",
+   "B l √(2gt)"
+  ],
+  "answer": 0,
+  "explain": "v = gt, so ε = Blgt. It grows linearly with time.",
+  "kind": "result",
+  "id": "5ff54d30-0d96-4c2d-84c5-1fe04b13d5d9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod rotating about one end in B ⊥ plane: p.d. between pivot and a point at distance x varies as:",
+  "formula": "ε(x) = ½Bωx²",
+  "options": [
+   "x²",
+   "x",
+   "x³",
+   "1/x"
+  ],
+  "answer": 0,
+  "explain": "The element emf is Bωx dx, which integrates to ½Bωx². The profile is parabolic.",
+  "kind": "graph",
+  "id": "34c07967-bfb5-4748-9a3f-3b5a6fa94707",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod (mass m) on smooth rails with capacitor C, pulled by constant force F from rest. Its motion is:",
+  "formula": "a = F/(m + B²l²C)",
+  "options": [
+   "Uniform acceleration",
+   "Terminal speed reached",
+   "Exponentially decaying speed",
+   "Uniform velocity from start"
+  ],
+  "answer": 0,
+  "explain": "The capacitor current is C·Bl·a, so the magnetic force B²l²C·a is constant. Hence a is constant.",
+  "kind": "result",
+  "id": "a02f4865-4320-4053-a161-ed77e187fb5f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod rotates about one end in a plane that contains B (B lies in the plane). Emf between ends is:",
+  "formula": "",
+  "options": [
+   "½Bωl²",
+   "Bωl²",
+   "Zero",
+   "Bωl² sinθ"
+  ],
+  "answer": 2,
+  "explain": "v × B is normal to the plane, so it is ⊥ to the rod. No force acts along the rod and the emf is zero.",
+  "kind": "exception",
+  "id": "0416e442-bb55-44de-baba-c05a88b7ac21",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod of length l rotates about one end ⊥ B. Emf between points at l/2 and l from the pivot is:",
+  "formula": "½Bω(r₂² − r₁²)",
+  "options": [
+   "3Bωl²/8",
+   "Bωl²/8",
+   "Bωl²/4",
+   "Bωl²/2"
+  ],
+  "answer": 0,
+  "explain": "½Bω(l² − l²/4) = 3Bωl²/8.",
+  "kind": "result",
+  "id": "769caa86-5029-45fd-9a32-23d72ea20687",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about one end in a uniform B: the induced emf does NOT depend on its:",
+  "formula": "",
+  "options": [
+   "Material or resistivity",
+   "Length",
+   "Angular speed",
+   "Magnetic field B"
+  ],
+  "answer": 0,
+  "explain": "ε = ½Bωl² depends only on B, ω and l, not on the material.",
+  "kind": "concept",
+  "id": "5b12adde-96a0-4491-a747-ff532a02d034",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about one end ⊥ B at constant ω in a circuit of resistance R: external torque needed is:",
+  "formula": "τ = P/ω",
+  "options": [
+   "B²ωl⁴/(4R)",
+   "B²ωl⁴/(2R)",
+   "B²ω²l⁴/(4R)",
+   "B²ωl²/(4R)"
+  ],
+  "answer": 0,
+  "explain": "P = B²ω²l⁴/(4R), so τ = P/ω = B²ωl⁴/(4R).",
+  "kind": "formula",
+  "id": "788af06a-822d-4e0b-9dd3-97545a322de3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A Faraday disc rotates at constant ω in a uniform axial B. The emf between centre and rim is:",
+  "formula": "",
+  "options": [
+   "Steady (constant) DC",
+   "Sinusoidal AC",
+   "Linearly increasing with time",
+   "Pulsating, zero on average"
+  ],
+  "answer": 0,
+  "explain": "The swept area per unit time is constant, so ε = ½BωR² is constant in magnitude and polarity (a DC generator).",
+  "kind": "fact",
+  "id": "1cce3c39-4532-41a0-a6c1-3be5b89719dc",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Two identical uncoupled inductors L in parallel carry total current I. Total magnetic energy stored is:",
+  "formula": "2 × ½L(I/2)²",
+  "options": [
+   "½LI²",
+   "¼LI²",
+   "LI²",
+   "⅛LI²"
+  ],
+  "answer": 1,
+  "explain": "Current splits equally, I/2 in each: 2 × ½L(I/2)² = ¼LI².",
+  "kind": "result",
+  "id": "99e8f3e5-c871-47fb-b2bb-0285189a6a86",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "A solenoid carries a fixed current. A core of relative permeability μᵣ fills it. Stored energy becomes:",
+  "formula": "U = ½LI², L ∝ μ",
+  "options": [
+   "μᵣ times",
+   "μᵣ² times",
+   "1/μᵣ times",
+   "Unchanged"
+  ],
+  "answer": 0,
+  "explain": "L ∝ μ, so L becomes μᵣL. At fixed I, U = ½LI² rises by the factor μᵣ.",
+  "kind": "result",
+  "id": "7cce0e7b-8991-4d9b-9889-7dee73b65914",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Energy stored in inductor (½LI²)"
+ },
+ {
+  "prompt": "In an AC generator, mechanical energy of rotation is converted into electrical energy. This follows from:",
+  "formula": "",
+  "options": [
+   "Lenz's law (energy conservation)",
+   "Gauss's law",
+   "Ampere's circuital law",
+   "Coulomb's law"
+  ],
+  "answer": 0,
+  "explain": "Lenz's law opposes the change, so work done against the opposing torque becomes electrical energy.",
+  "kind": "concept",
+  "id": "72078334-d2d7-4a2a-b328-a8c9d1331d03",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "At the instant the generator emf is maximum, the torque on the coil (carrying current) is:",
+  "formula": "τ = NIAB sinθ",
+  "options": [
+   "Maximum",
+   "Zero",
+   "Half of maximum",
+   "Minimum but non-zero"
+  ],
+  "answer": 0,
+  "explain": "The emf is maximum when the plane is parallel to B (θ = 90° between normal and B), so the torque is maximum.",
+  "kind": "concept",
+  "id": "d835c1f1-36c4-4346-b494-091668e87d39",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "Coil normal along B at t = 0. Emf as a function of time is a sine curve; the flux is a:",
+  "formula": "φ = NBA cosωt",
+  "options": [
+   "Cosine curve of same frequency",
+   "Sine curve of double frequency",
+   "Cosine curve of double frequency",
+   "Straight line"
+  ],
+  "answer": 0,
+  "explain": "φ = NBA cosωt, and ε = −dφ/dt = NBAω sinωt, with the same frequency.",
+  "kind": "graph",
+  "id": "24c33e44-13ac-4375-b32e-2e54c32a6eb8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "A closed rectangular loop moves wholly inside a uniform B, ⊥ to its plane. Net induced current is:",
+  "formula": "",
+  "options": [
+   "Blv/R",
+   "Zero",
+   "2Blv/R",
+   "B l² v/R"
+  ],
+  "answer": 1,
+  "explain": "Emfs in opposite sides cancel (flux constant), so net emf and current are zero.",
+  "kind": "concept",
+  "id": "869c9bbf-3b4e-4baf-94cc-554f27cd5b5d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod (mass m, length l) with speed v₀ on smooth rails in B stops. Total charge through the circuit?",
+  "formula": "q = mv₀/(Bl)",
+  "options": [
+   "mv₀/(Bl)",
+   "mv₀R/(Bl)",
+   "mv₀/(B²l²)",
+   "Blv₀/R"
+  ],
+  "answer": 0,
+  "explain": "Impulse: m v₀ = ∫Bil dt = Blq, so q = mv₀/(Bl), independent of R.",
+  "kind": "result",
+  "id": "2c1143dd-d589-49c8-a79a-9f0b16c789fe",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod rotating about one end ⊥ B: the induced electric field inside the rod at distance r from the pivot is:",
+  "formula": "E = vB, v = ωr",
+  "options": [
+   "Bωr",
+   "½Bωr",
+   "Bωr²",
+   "Bωl"
+  ],
+  "answer": 0,
+  "explain": "The field balances the Lorentz force: E = vB = Bωr, radial and increasing linearly with r.",
+  "kind": "formula",
+  "id": "ccbed2fb-cc1b-4cda-9be1-ebaa121a0bf1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating about one end ⊥ B: emf = Blv, where v is the speed of which point of the rod?",
+  "formula": "ε = Bl(ωl/2)",
+  "options": [
+   "Midpoint",
+   "Free end",
+   "Point at 2l/3",
+   "Point at l/4"
+  ],
+  "answer": 0,
+  "explain": "The speed varies linearly with r, so the average speed is that of the midpoint, ωl/2.",
+  "kind": "concept",
+  "id": "61381fa2-b665-4ff1-b61c-93c97509a826",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Rod rotating in a closed circuit in B: the magnetic force on the induced current acts on the rotation to:",
+  "formula": "",
+  "options": [
+   "Oppose it (Lenz's law)",
+   "Assist it",
+   "Act parallel to the rod",
+   "Have no effect on it"
+  ],
+  "answer": 0,
+  "explain": "By Lenz's law the force gives a retarding torque, so an external torque is needed to keep ω constant.",
+  "kind": "concept",
+  "id": "c4a5a4fc-3f1e-4625-8f6f-fe340996238a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A coil's plane is parallel to B at t = 0 and it rotates with ω. The induced emf at time t is:",
+  "formula": "ε = NBAω cosωt",
+  "options": [
+   "NBAω sinωt",
+   "NBAω cosωt",
+   "NBAω (1 − cosωt)",
+   "NBA sinωt/ω"
+  ],
+  "answer": 1,
+  "explain": "Plane ∥ B means the normal is ⊥ B, so flux is zero and dΦ/dt is maximum. Hence the emf is ε₀ cosωt.",
+  "kind": "formula",
+  "id": "ac72333c-50e5-48a3-83c6-7ab1151fc981",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "In a rotating-coil AC generator, the emf changes its direction when the coil plane is:",
+  "formula": "",
+  "options": [
+   "Parallel to B",
+   "Perpendicular to B",
+   "At 45° to B",
+   "At 60° to B"
+  ],
+  "answer": 1,
+  "explain": "Perpendicular to B is the neutral position: the emf is zero and changes sign there, as flux is maximum and its rate of change reverses.",
+  "kind": "concept",
+  "id": "ab588a98-e921-406f-95e6-436f4986f06d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "A coil spins in uniform B about an axis ⊥ B in its plane. Shifting the axis parallel (edge instead of centre) changes ε₀ to:",
+  "formula": "ε₀ = NBAω",
+  "options": [
+   "Unchanged",
+   "Doubled",
+   "Halved",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "ε₀ = NBAω has no dependence on where the axis lies in the coil's plane, as long as the axis stays ⊥ B.",
+  "kind": "concept",
+  "id": "f61b6568-ed2f-49b2-b251-e5ea98c61d1b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "Peak emf of a generator coil is ε₀. If the number of turns is doubled and area halved (same B, ω), peak emf becomes:",
+  "formula": "ε₀ = NBAω",
+  "options": [
+   "ε₀",
+   "2ε₀",
+   "ε₀/2",
+   "4ε₀"
+  ],
+  "answer": 0,
+  "explain": "NA stays constant (2N × A/2), so ε₀ = NBAω is unchanged.",
+  "kind": "concept",
+  "id": "72f760de-90d4-4136-8aef-fb97c08d0dc5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "Using Φ = LI, 1 weber is also equal to:",
+  "formula": "Φ = LI",
+  "options": [
+   "1 henry per ampere",
+   "1 henry·ampere",
+   "1 ohm·ampere",
+   "1 henry·second"
+  ],
+  "answer": 1,
+  "explain": "Flux linkage is L × I, so 1 Wb = 1 H·A, which is also 1 J/A.",
+  "kind": "unit",
+  "id": "1223862d-5755-4d42-9d5d-e2875231b142",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "The plane of a loop (area A) makes angle α with a uniform field B. The flux through it is:",
+  "formula": "Φ = BA sinα",
+  "options": [
+   "BA cosα",
+   "BA sinα",
+   "BA tanα",
+   "BA"
+  ],
+  "answer": 1,
+  "explain": "α is measured from the plane, so the angle with the normal is 90° − α, giving BA cos(90° − α) = BA sinα.",
+  "kind": "formula",
+  "id": "a342e601-7139-463c-a826-71ff759e2cac",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Magnetic flux and its units"
+ },
+ {
+  "prompt": "For a given dΦ/dt, the EMF induced in a closed loop does NOT depend on the loop's:",
+  "formula": "ε = −dΦ/dt",
+  "options": [
+   "Number of turns",
+   "Resistance",
+   "Area linked with B",
+   "Rate of change of B"
+  ],
+  "answer": 1,
+  "explain": "EMF depends only on dΦ/dt (and N). Resistance only fixes the current, I = ε/R.",
+  "kind": "concept",
+  "id": "6751d26e-1194-4cf8-9d03-e7dd48008b1b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "For the same changing flux, the resistance of a closed loop is doubled. The induced current becomes:",
+  "formula": "I = ε/R",
+  "options": [
+   "Double",
+   "Unchanged",
+   "One-fourth",
+   "Half"
+  ],
+  "answer": 3,
+  "explain": "EMF is unchanged by R, so I = ε/R halves.",
+  "kind": "concept",
+  "id": "af400564-9598-44b9-b4f0-fd379f4067a1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Motional EMF in a moving conductor equals the:",
+  "formula": "",
+  "options": [
+   "Total flux linked with the circuit",
+   "Rate at which the conductor cuts magnetic flux",
+   "Flux cut per unit length",
+   "Magnetic force per unit charge × time"
+  ],
+  "answer": 1,
+  "explain": "Faraday's law in motional form: ε equals the rate of flux cutting, ε = d(flux cut)/dt.",
+  "kind": "concept",
+  "id": "2d94ab14-05bf-4d5c-b599-31000b0270a9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Flux through a fixed coil varies as Φ = at² (a constant). The induced EMF magnitude varies with time as:",
+  "formula": "",
+  "options": [
+   "Constant",
+   "Linearly increasing with t",
+   "Parabolic in t",
+   "Exponentially decaying"
+  ],
+  "answer": 1,
+  "explain": "|ε| = dΦ/dt = 2at, which is linear in t.",
+  "kind": "graph",
+  "id": "5db932b5-b754-4996-99b3-873d0b393ab2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "A rectangular loop moves parallel to a long straight current-carrying wire at fixed distance from it. EMF induced is:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Proportional to the current in the wire",
+   "Zero",
+   "Proportional to the loop's speed"
+  ],
+  "answer": 2,
+  "explain": "The field at the loop is unchanged as it moves, so the flux is constant and ε = 0.",
+  "kind": "concept",
+  "id": "9b54b3b5-f3d7-40d6-982b-e34f92b1797f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Circular loops of radii r and 2r lie ⟂ the same uniform B that changes at the same rate. Ratio of their EMFs is:",
+  "formula": "ε = A·dB/dt",
+  "options": [
+   "1 : 2",
+   "1 : 4",
+   "1 : 1",
+   "1 : 8"
+  ],
+  "answer": 1,
+  "explain": "ε ∝ A ∝ r², so the ratio is 1 : 4.",
+  "kind": "result",
+  "id": "1fdbe688-963e-497c-8d01-3495c61da97a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Faraday's law in integral form: the line integral ∮E·dl around a closed loop equals:",
+  "formula": "∮E·dl = −dΦ_B/dt",
+  "options": [
+   "−dΦ_B/dt",
+   "Zero, as E is conservative",
+   "μ₀ε₀ dΦ_E/dt",
+   "−dΦ_E/dt"
+  ],
+  "answer": 0,
+  "explain": "Induced emf is the circulation of E around the loop; it equals −dΦ_B/dt (magnetic flux), so E is non-conservative.",
+  "kind": "formula",
+  "id": "b015b2d1-25bd-4769-9152-fc0fca3b2b43",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Faraday's laws of EM induction"
+ },
+ {
+  "prompt": "Fleming's right-hand rule gives the direction of:",
+  "formula": "",
+  "options": [
+   "Induced current in a moving conductor",
+   "Force on a current-carrying wire",
+   "Field due to a straight current",
+   "Torque on a coil in a field"
+  ],
+  "answer": 0,
+  "explain": "Right-hand rule: thumb = motion, forefinger = B, middle finger = induced current (Lenz's law in motional cases).",
+  "kind": "fact",
+  "id": "d7fc51e4-8441-4985-aac6-96999616d4da",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Loop right of a long wire with steady upward current moves away from it. Induced current is:",
+  "formula": "",
+  "options": [
+   "Clockwise",
+   "Anticlockwise",
+   "Zero",
+   "Alternating"
+  ],
+  "answer": 0,
+  "explain": "B is into the page there and its flux decreases, so the loop opposes this by making inward field: clockwise.",
+  "kind": "result",
+  "id": "da1cb0af-708c-488b-b3b9-971efd7e7c9a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A magnet approaches a superconducting ring. The induced current keeps the flux through the ring:",
+  "formula": "",
+  "options": [
+   "Constant (unchanged)",
+   "Increasing steadily",
+   "Reversed in sign",
+   "Zero at all times"
+  ],
+  "answer": 0,
+  "explain": "With zero resistance, the induced current exactly cancels any flux change, so the net flux stays constant.",
+  "kind": "concept",
+  "id": "152560aa-705d-4664-b8e2-f29f76e9fd7c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "Current in a loop is increased. A nearby coaxial parallel loop experiences:",
+  "formula": "",
+  "options": [
+   "Repulsion",
+   "Attraction",
+   "No force",
+   "Torque only"
+  ],
+  "answer": 0,
+  "explain": "Increasing flux induces an opposite current in the second loop; antiparallel currents repel, opposing the change.",
+  "kind": "concept",
+  "id": "c57fbbf9-87b2-4e98-837b-597fe0562ee6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and direction of induced current"
+ },
+ {
+  "prompt": "A bar magnet falls along the axis of a closed copper ring. During its approach its acceleration is:",
+  "formula": "",
+  "options": [
+   "Less than g",
+   "Equal to g",
+   "Greater than g",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Induced current in the ring repels the approaching magnet (Lenz), so a net upward force reduces its acceleration below g.",
+  "kind": "concept",
+  "id": "6bffb1e8-20c8-48da-a89c-ee95fe3c6052",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "A flexible circular loop lies ⟂ to a magnetic field that is increasing. The loop tends to:",
+  "formula": "",
+  "options": [
+   "Shrink to reduce its area",
+   "Expand to increase its area",
+   "Rotate about a diameter by 90°",
+   "Stay unchanged in shape"
+  ],
+  "answer": 0,
+  "explain": "The induced current opposes the flux increase, so the forces on the loop try to reduce its area (flux = BA).",
+  "kind": "concept",
+  "id": "c42738d8-84ce-4dec-a246-bd7160ab8ff5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "A magnet falls at terminal speed v in a long copper tube. The rate of loss of PE (mgv) equals:",
+  "formula": "",
+  "options": [
+   "Rate of Joule heating by eddy currents",
+   "Rate of gain of kinetic energy",
+   "Rate of gain of magnetic energy of the tube",
+   "Zero, as the net force is zero"
+  ],
+  "answer": 0,
+  "explain": "KE is constant at terminal speed, so mgv is entirely dissipated as eddy-current heat (energy conservation).",
+  "kind": "concept",
+  "id": "66439f53-11a9-4f69-be74-f1a54f9a6e48",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "A bar magnet is pulled away from a closed coil. The induced current makes the coil exert on the magnet a:",
+  "formula": "",
+  "options": [
+   "Attractive force, opposing withdrawal",
+   "Repulsive force, aiding withdrawal",
+   "Zero force, as the magnet is leaving",
+   "Torque only, with no net force"
+  ],
+  "answer": 0,
+  "explain": "Lenz's law: the near face of the coil becomes the opposite pole, attracting the magnet and opposing the motion.",
+  "kind": "concept",
+  "id": "7821fb47-a9f0-4444-96d0-d3216bcc0bae",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Lenz's law and energy conservation"
+ },
+ {
+  "prompt": "Rod (mass m, length l) on smooth rails joined by an ideal inductor L is given a push in B. Its motion is:",
+  "formula": "ω = Bl/√(mL)",
+  "options": [
+   "SHM with ω = Bl/√(mL)",
+   "Exponential decay",
+   "Uniform acceleration",
+   "Uniform velocity"
+  ],
+  "answer": 0,
+  "explain": "Blv = L dI/dt and m dv/dt = −BlI give SHM with ω² = B²l²/(mL).",
+  "kind": "result",
+  "id": "c1a63c03-00da-443f-b24f-9a496dec0a92",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod of length l rotates in B ⟂ plane about a point l/3 from one end. Emf between its ends is:",
+  "formula": "",
+  "options": [
+   "Bωl²/6",
+   "5Bωl²/18",
+   "Bωl²/2",
+   "Bωl²/18"
+  ],
+  "answer": 0,
+  "explain": "Both ends lie on the same side in potential: ½Bω[(2l/3)² − (l/3)²] = Bωl²/6.",
+  "kind": "result",
+  "id": "f7f7edb1-3f36-4413-930d-2f535414d306",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod (mass m, resistance R) with initial speed v₀ slides on smooth rails in B. Time constant of its decay is:",
+  "formula": "τ = mR/(B²l²)",
+  "options": [
+   "mR/(B²l²)",
+   "B²l²/(mR)",
+   "mR/(Bl)",
+   "m/(B²l²R)"
+  ],
+  "answer": 0,
+  "explain": "m dv/dt = −B²l²v/R gives v = v₀e^(−t/τ), where τ = mR/(B²l²).",
+  "kind": "formula",
+  "id": "f47fa9a1-70b4-43d9-9ddf-47f42d34f266",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod pulled by constant force F on smooth rails reaches terminal speed. Power supplied by F then is:",
+  "formula": "P = Fv",
+  "options": [
+   "F²R/(B²l²)",
+   "FR/(B²l²)",
+   "F²R/(Bl)",
+   "B²l²/(F R)"
+  ],
+  "answer": 0,
+  "explain": "With v = FR/(B²l²), P = Fv = F²R/(B²l²), all dissipated as heat.",
+  "kind": "result",
+  "id": "3e9dbc95-4333-4af1-8c3a-54595e8906c6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod (mass m) with speed v₀ stops on smooth rails due to induced current. Total heat produced is:",
+  "formula": "",
+  "options": [
+   "½mv₀²",
+   "mv₀²",
+   "¼mv₀²",
+   "½mv₀²/R"
+  ],
+  "answer": 0,
+  "explain": "All the initial kinetic energy is converted to heat in the circuit.",
+  "kind": "concept",
+  "id": "476683d9-2ed9-40d5-a722-4062b04d279b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod slides down smooth rails inclined at θ, in a vertical uniform B. Terminal speed is:",
+  "formula": "",
+  "options": [
+   "mgR sinθ/(B²l² cos²θ)",
+   "mgR sinθ/(B²l²)",
+   "mgR sinθ cosθ/(B²l²)",
+   "mgR/(B²l² cosθ)"
+  ],
+  "answer": 0,
+  "explain": "Emf = Blv cosθ; the force component along the incline is B²l²v cos²θ/R, which balances mg sinθ.",
+  "kind": "result",
+  "id": "dc31c7c0-6a93-4ca5-bbf5-652a3392852c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "A rod slides at constant v on rails in B. If the circuit resistance is doubled, the induced emf:",
+  "formula": "ε = Blv",
+  "options": [
+   "Stays the same",
+   "Becomes half",
+   "Becomes double",
+   "Becomes four times"
+  ],
+  "answer": 0,
+  "explain": "ε = Blv does not depend on R; only the current I = ε/R halves.",
+  "kind": "concept",
+  "id": "c21b2779-1fc2-4893-bafd-cd9e59241cf1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod on smooth rails joined to a battery E (rails resistive), B ⊥ plane. Rod released from rest; final speed is:",
+  "formula": "",
+  "options": [
+   "E/(Bl)",
+   "EBl/R",
+   "E/(B²l²)",
+   "Infinite (keeps accelerating)"
+  ],
+  "answer": 0,
+  "explain": "Rod speeds up until back emf Blv equals E, so the current stops and v = E/(Bl).",
+  "kind": "result",
+  "id": "8ebf2d61-269d-4c79-8eaf-c186444bbb57",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Rod moves right in a uniform B directed into the page (open circuit). Which end becomes positive?",
+  "formula": "F = q(v × B)",
+  "options": [
+   "Upper end (towards top of page)",
+   "Lower end (towards bottom of page)",
+   "Front end, in the direction of motion",
+   "Rear end, opposite to motion"
+  ],
+  "answer": 0,
+  "explain": "x̂ × (−ẑ) = +ŷ, so positive charges are pushed to the top end, which becomes the higher-potential terminal.",
+  "kind": "concept",
+  "id": "a9f461f9-a3b8-456a-b189-4af03d9dee99",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Motional emf in rod moving in field (Blv)"
+ },
+ {
+  "prompt": "Metal disc spins clockwise (seen from front); uniform B points into the page. The rim is, relative to the centre:",
+  "formula": "F = q(v × B)",
+  "options": [
+   "At higher potential",
+   "At lower potential",
+   "At the same potential",
+   "Alternately higher and lower"
+  ],
+  "answer": 0,
+  "explain": "Here ω ∥ B, so v×B on positive charges points radially outward. Electrons collect at the centre and the rim is positive.",
+  "kind": "concept",
+  "id": "a5447c1c-c212-414b-9534-e5131c577254",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "In a Faraday disc, the sense of rotation is reversed with B unchanged. The centre–rim emf:",
+  "formula": "",
+  "options": [
+   "Reverses polarity, same magnitude",
+   "Keeps polarity, same magnitude",
+   "Becomes zero",
+   "Doubles in magnitude"
+  ],
+  "answer": 0,
+  "explain": "The emf is ∝ ω as a vector product (v × B). Reversing ω reverses the force direction and so the polarity.",
+  "kind": "concept",
+  "id": "5a04b365-b525-4d91-adc3-77447111b41d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "In a Faraday disc, both B and the sense of rotation are reversed. The polarity of the centre–rim emf:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Reverses",
+   "Becomes zero",
+   "Becomes alternating"
+  ],
+  "answer": 0,
+  "explain": "v×B flips sign twice, so the radial force and the polarity stay the same.",
+  "kind": "concept",
+  "id": "e7b07121-85ca-4a82-9480-c51c5c8e27c0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "Two points at the same distance from the centre of a disc rotating in axial uniform B. The emf between them is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "½Bωr²",
+   "Bωr²",
+   "2πBωr²"
+  ],
+  "answer": 0,
+  "explain": "The induced field E = Bωr is radial, so points at equal r are at equal potential.",
+  "kind": "concept",
+  "id": "0c09347c-aaa9-49ca-94c2-cf6eb28c1ed2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A rod of length l rotates about one end with period T in axial uniform B. The emf between its ends is:",
+  "formula": "ε = ½Bωl², ω = 2π/T",
+  "options": [
+   "πBl²/T",
+   "2πBl²/T",
+   "πBl²/(2T)",
+   "Bl²/(πT)"
+  ],
+  "answer": 0,
+  "explain": "Substituting ω = 2π/T gives ½B(2π/T)l² = πBl²/T.",
+  "kind": "formula",
+  "id": "a9708bc0-2938-44a8-876e-c2d5f67a961a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A rod rotates about one end. Emf depends only on the component of B along:",
+  "formula": "",
+  "options": [
+   "The rotation axis",
+   "The rod's length",
+   "Any direction, through |B|",
+   "The velocity of the tip"
+  ],
+  "answer": 0,
+  "explain": "Only the B component parallel to the axis (⊥ the plane of rotation) cuts the rod's motion: ε = ½B∥ωl².",
+  "kind": "concept",
+  "id": "e15f34f4-fb00-439d-9afe-d164150133a2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A disc of radius R rotates about its axis; B makes angle θ with the axis. Centre–rim emf is:",
+  "formula": "",
+  "options": [
+   "½BωR² cosθ",
+   "½BωR² sinθ",
+   "½BωR²",
+   "πBωR² cosθ"
+  ],
+  "answer": 0,
+  "explain": "Only the axial component B cosθ contributes: ε = ½(B cosθ)ωR².",
+  "kind": "formula",
+  "id": "fec6635a-3c4e-42fc-be76-9e1c5bfe43f1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A rod rotating about one end in a field B ⊥ its plane carries current I. The magnetic force BIl acts at:",
+  "formula": "",
+  "options": [
+   "Midpoint, l/2 from pivot",
+   "Free end",
+   "Pivot",
+   "2l/3 from pivot"
+  ],
+  "answer": 0,
+  "explain": "Force per unit length BI is uniform along the rod, so the resultant BIl acts at the midpoint.",
+  "kind": "fact",
+  "id": "dda8d8e7-b71a-4852-b5e2-f38285736fdf",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A wheel has N identical spokes, each of resistance r, rotating in axial B. Hub–rim internal resistance is:",
+  "formula": "",
+  "options": [
+   "r/N",
+   "Nr",
+   "r",
+   "r/N²"
+  ],
+  "answer": 0,
+  "explain": "The N spokes act as parallel sources of equal emf, so the internal resistance is r/N.",
+  "kind": "result",
+  "id": "19560e34-2518-4ea8-bfa3-7a60f8eb71cc",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A Faraday disc used as a DC generator is also called a:",
+  "formula": "",
+  "options": [
+   "Homopolar (unipolar) generator",
+   "Alternator",
+   "Synchronous generator",
+   "Betatron"
+  ],
+  "answer": 0,
+  "explain": "The Faraday disc gives a steady DC emf between axle and rim, so it is called a homopolar generator.",
+  "kind": "fact",
+  "id": "006abac2-f81c-45dc-88bd-a6923f9d5c3f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A Faraday disc run in reverse (current passed radially in axial B so the disc spins) is called:",
+  "formula": "",
+  "options": [
+   "Barlow's wheel",
+   "Tesla coil",
+   "Cyclotron",
+   "Betatron"
+  ],
+  "answer": 0,
+  "explain": "The force on a radial current in B gives a torque, so the disc rotates. This is Barlow's wheel, a simple motor.",
+  "kind": "fact",
+  "id": "ef4215e4-f519-4007-822c-89b0f8bc9fc0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Rotating rod/disc emf (½Bωl²)"
+ },
+ {
+  "prompt": "A rod of length l slides a distance x on rails in field B ⟂ plane; circuit resistance R. Charge flowing?",
+  "formula": "q = B l x / R",
+  "options": [
+   "B l x / R",
+   "B l v / R",
+   "B² l² x / R",
+   "B l x² / R"
+  ],
+  "answer": 0,
+  "explain": "ΔΦ = B·l·x (swept area), so q = ΔΦ/R = Blx/R. Speed does not matter.",
+  "kind": "formula",
+  "id": "d2cd4d15-1d46-45aa-97f5-6a7f34ccc535",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "Area under the induced current–time graph of a closed loop (resistance R) represents:",
+  "formula": "q = ∫I dt = ΔΦ/R",
+  "options": [
+   "Charge flown, equal to ΔΦ/R",
+   "Flux change ΔΦ itself",
+   "Average induced emf",
+   "Heat dissipated in loop"
+  ],
+  "answer": 0,
+  "explain": "∫I dt is the charge q, and I = −(1/R)dΦ/dt gives q = |ΔΦ|/R, not ΔΦ.",
+  "kind": "graph",
+  "id": "e46e48ee-f5ca-46e5-9cff-444f74079f90",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced charge and flux change (q=ΔΦ/R)"
+ },
+ {
+  "prompt": "For the induced E-field due to changing B, the line integral ∮E·dl around a closed path equals:",
+  "formula": "∮E·dl = −dΦ_B/dt",
+  "options": [
+   "−dΦ_B/dt",
+   "0",
+   "μ₀ε₀ dΦ_E/dt",
+   "q/ε₀"
+  ],
+  "answer": 0,
+  "explain": "Faraday's law in integral form: the circulation of the induced E equals minus the rate of change of magnetic flux.",
+  "kind": "formula",
+  "id": "9a47342f-63e3-4317-9080-1ffd94896e00",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "In a region of uniform changing B (circular, axis ⊥ page), a straight rod lies along a radius. Induced emf along it:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "(R/2)(dB/dt)·l",
+   "Maximum possible",
+   "(dB/dt)·l"
+  ],
+  "answer": 0,
+  "explain": "Induced E is tangential (circles about the axis), so it is ⊥ to a radial rod and E·dl = 0.",
+  "kind": "concept",
+  "id": "b8451317-b9b6-4faf-8898-6697629d48bf",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "Long solenoid of radius R with uniform dB/dt. The magnitude of induced E is greatest at:",
+  "formula": "",
+  "options": [
+   "The axis (r = 0)",
+   "The surface (r = R)",
+   "r = R/2",
+   "Very far away (r → ∞)"
+  ],
+  "answer": 1,
+  "explain": "E ∝ r inside and ∝ 1/r outside, so it peaks at r = R, with E = (R/2)(dB/dt).",
+  "kind": "graph",
+  "id": "6b98f75d-37f2-4814-8a10-6b9d5b88b8a7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "A charge at rest in a region where B is changing with time experiences a force due to:",
+  "formula": "",
+  "options": [
+   "Magnetic force qv×B",
+   "Induced electric force qE",
+   "No force, since v = 0",
+   "Gravitational force only"
+  ],
+  "answer": 1,
+  "explain": "The magnetic force is zero at v = 0, but the changing B creates an induced E, which exerts the force qE.",
+  "kind": "concept",
+  "id": "43804352-d913-42de-8f9a-b85efcaadaa0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Induced electric field (non-conservative)"
+ },
+ {
+  "prompt": "Turns N and length l of a solenoid are both doubled (same area, same core). Its self-inductance becomes:",
+  "formula": "L = μ₀N²A/l",
+  "options": [
+   "L",
+   "2L",
+   "4L",
+   "8L"
+  ],
+  "answer": 1,
+  "explain": "L ∝ N²/l, so the factor is 2²/2 = 2 and L becomes 2L.",
+  "kind": "result",
+  "id": "ac2b0916-11aa-4256-97ff-4a52cc1ceebb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "Current in a solenoid rises linearly with time (I = kt). The self-induced emf across it is:",
+  "formula": "ε = −L(dI/dt)",
+  "options": [
+   "Constant in time, magnitude Lk",
+   "Increasing linearly with time",
+   "Decreasing exponentially with time",
+   "Zero, since the current is not constant"
+  ],
+  "answer": 0,
+  "explain": "dI/dt = k is constant, so |ε| = Lk is constant and opposes the rise.",
+  "kind": "concept",
+  "id": "075f9bb2-5b03-45af-9eb1-1f7e0e47d447",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "Self inductance of solenoid"
+ },
+ {
+  "prompt": "An ac generator coil rotates at 1800 rpm. The frequency of the induced emf is:",
+  "formula": "f = rpm/60",
+  "options": [
+   "60 Hz",
+   "30 Hz",
+   "1800 Hz",
+   "15 Hz"
+  ],
+  "answer": 1,
+  "explain": "Emf frequency equals rotation frequency: 1800/60 = 30 rotations per second, so f = 30 Hz.",
+  "kind": "fact",
+  "id": "d6730f56-0c93-4cb8-8f76-0fd472d63d48",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ },
+ {
+  "prompt": "A coil rotates at ω about an axis making angle α with uniform B (α ≠ 90°). Its peak emf is:",
+  "formula": "ε₀ = NAω·B sinα",
+  "options": [
+   "NBAω cosα",
+   "NBAω sinα",
+   "NBAω tanα",
+   "NBAω"
+  ],
+  "answer": 1,
+  "explain": "Only the component of B perpendicular to the axis, B sinα, produces the changing flux.",
+  "kind": "concept",
+  "id": "57fa448e-5ac8-4550-be94-7e66925dcd8a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Induction",
+  "topic": "AC generator: emf = NBAω sinωt"
+ }
+]

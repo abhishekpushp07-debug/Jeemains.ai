@@ -4,7 +4,7 @@ import { Icon, Press, T } from "@/src/components/ui";
 import { DSheet } from "@/src/components/design";
 import { colors, space } from "@/src/theme";
 import { shortSubject } from "@/src/components/player/PlayerParts";
-import { An, mmss, pc, r1 } from "./format";
+import { An, TONE, mmss, pc, r1 } from "./format";
 import { B, Block, ChipButton, EmptyLine, Grid, Locked, Pills, StatRow, Tile, Tiles } from "./parts";
 import { Bars, Lines } from "./charts";
 import { useBoard } from "./Leaderboard";
@@ -46,8 +46,17 @@ const HAS: Record<string, string[]> = { head: ["overview", "potential", "journey
 
 const Duo = ({ label, you, them }: { label: string; you: React.ReactNode; them: React.ReactNode }) => (
   <View style={styles.duo}>
-    <T size={10.5} w="bold" color={colors.custom_eyebrow}>{label}</T>
-    <T size={13} w="heavy" numberOfLines={1}>{you} <T size={11.5} color={colors.muted}>vs {them}</T></T>
+    <T size={10} w="heavy" color={colors.custom_eyebrow} style={styles.caps}>{label.toUpperCase()}</T>
+    <T w="mono" size={14} color={TONE.brand.ink}>{you}</T>
+    <T size={11.5} color={colors.muted}>vs <T w="mono" size={12.5} color={TONE.warn.ink}>{them}</T></T>
+  </View>
+);
+
+/** Who is which colour, the same in every chart and table of the comparison. */
+const Key = ({ label }: { label: string }) => (
+  <View testID="a2-compare-key" style={styles.key}>
+    <View style={styles.keyItem}><View style={[styles.keyDot, { backgroundColor: TONE.brand.fill }]} /><T size={12} w="heavy">Aap</T></View>
+    <View style={styles.keyItem}><View style={[styles.keyDot, { backgroundColor: TONE.warn.fill }]} /><T size={12} w="heavy">{label}</T></View>
   </View>
 );
 
@@ -67,8 +76,8 @@ function Gap({ c, an }: { c: any; an: An }) {
     {c.split?.length > 0 ? <View testID="a2-compare-split" style={{ gap: 8 }}>
       {c.split.map((s: any) => <StatRow key={s.name} title={s.name} sub={s.volume > s.quality ? "Zyada sawaal attempt karo" : s.quality > 0 ? "Accuracy badhao" : "Aap aage ho"}>
         <View style={styles.duos}>
-          <View style={styles.duo}><T size={10.5} w="bold" color={colors.custom_eyebrow}>Volume se</T><T size={14} w="heavy">{s.volume}</T></View>
-          <View style={styles.duo}><T size={10.5} w="bold" color={colors.custom_eyebrow}>Quality se</T><T size={14} w="heavy">{s.quality}</T></View>
+          <View style={styles.duo}><T size={10} w="heavy" color={colors.custom_eyebrow} style={styles.caps}>VOLUME SE</T><T w="mono" size={14}>{s.volume}</T></View>
+          <View style={styles.duo}><T size={10} w="heavy" color={colors.custom_eyebrow} style={styles.caps}>QUALITY SE</T><T w="mono" size={14}>{s.quality}</T></View>
         </View>
       </StatRow>)}
     </View> : null}
@@ -85,6 +94,7 @@ export function CompareBody({ an, part }: { an: An; part: string }) {
   const duo = [{ name: "Aap", tone: "brand" as const }, { name: c.label as string, tone: "warn" as const }];
   return <View testID="a2-compare" style={{ gap: space.md }}>
     {show("head") ? <Block id="compare-head" kicker="COMPARATIVE" title={`Aap vs ${c.label}`} note="Sirf totals aur averages. Kisi doosre student ke jawab kabhi nahi dikhte.">
+      <Key label={c.label} />
       <Tiles>
         <Tile id="compare-you" label="Aapka Score" value={you.score} sub={mine.rank ? `Rank #${mine.rank} · Percentile ${mine.percentile}` : `Accuracy ${pc(you.accuracy)}`} tone="brand" />
         <Tile id="compare-them" label={c.label} value={them.score} sub={c.rank ? `Rank #${c.rank} · Percentile ${c.percentile}` : `Accuracy ${pc(them.accuracy)}`} tone="warn" />
@@ -93,7 +103,7 @@ export function CompareBody({ an, part }: { an: An; part: string }) {
       </Tiles>
     </Block> : null}
     {show("gap") ? <Gap c={c} an={an} /> : null}
-    {show("subjects") ? <Block id="compare-subjects" kicker="SUBJECT-WISE" title="Subject-wise: aap vs woh">
+    {show("subjects") ? <Block id="compare-subjects" kicker="SUBJECT-WISE" title="Subject-wise: aap vs woh" action={<Key label={c.label} />}>
       <Bars testID="a2-compare-subject-chart" height={210} data={c.by_subject.map((s: any) => ({ label: shortSubject(s.name), values: [s.you, s.them] }))} series={duo} />
       <View testID="a2-compare-subject-table" style={{ gap: 8 }}>
         {you.subjects.filter((s: any) => theirs[s.name]).map((s: any) => {
@@ -127,8 +137,12 @@ const styles = StyleSheet.create({
   picker: { gap: 10, padding: space.md, borderRadius: 18, borderWidth: 1, borderStyle: "dashed", borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },
   person: { minHeight: 52, flexDirection: "row", alignItems: "center", gap: space.md, borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
   rank: { minWidth: 40 },
-  duos: { flexDirection: "row", flexWrap: "wrap", rowGap: 8 },
-  duo: { width: "50%", gap: 1, paddingRight: 8 },
+  duos: { flexDirection: "row", flexWrap: "wrap", rowGap: 10 },
+  duo: { width: "50%", gap: 2, paddingRight: 8 },
+  caps: { letterSpacing: 1 },
+  key: { flexDirection: "row", flexWrap: "wrap", gap: 12, alignItems: "center" },
+  keyItem: { flexDirection: "row", alignItems: "center", gap: 6 },
+  keyDot: { width: 10, height: 10, borderRadius: 3 },
   bullet: { flexDirection: "row", alignItems: "flex-start", gap: 8 },
   dot: { width: 6, height: 6, borderRadius: 3, marginTop: 7, backgroundColor: colors.brandPrimary },
 });

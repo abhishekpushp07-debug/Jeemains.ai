@@ -10,7 +10,7 @@ import { colors, space } from "@/src/theme";
 import { shareAppAnywhere, shareAppWhatsApp } from "@/src/shareApp";
 
 const PERKS: { icon: IconName; title: string; line: string }[] = [
-  { icon: "lightning-bolt", title: "Rapid Fire", line: "revise in 15-second cards" },
+  { icon: "lightning-bolt", title: "Rapid Fire", line: "revise in 20-second cards" },
   { icon: "bullseye-arrow", title: "Rank", line: "know your rank & colleges" },
   { icon: "school-outline", title: "Dream college", line: "aim with the marks you need" },
   { icon: "calendar-check-outline", title: "Mocks + AITS", line: "raise your chances daily" },

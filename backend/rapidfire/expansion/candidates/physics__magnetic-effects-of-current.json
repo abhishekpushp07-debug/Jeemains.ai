@@ -1,0 +1,3963 @@
+[
+ {
+  "prompt": "Field at the centre of a circular loop of radius R carrying current I is:",
+  "formula": "B = μ₀I/2R",
+  "options": [
+   "μ₀I/4πR",
+   "μ₀I/2R",
+   "μ₀I/4R",
+   "μ₀I/R"
+  ],
+  "answer": 1,
+  "explain": "Integrating dB = μ₀Idl/4πR² over 2πR gives μ₀I/2R.",
+  "kind": "formula",
+  "id": "56f0c31a-4984-40e5-80dd-059e6e914e7a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Current I flows in a semicircular wire of radius R. Field at its centre is:",
+  "formula": "B = μ₀I/4R",
+  "options": [
+   "μ₀I/2R",
+   "μ₀I/4πR",
+   "μ₀I/4R",
+   "μ₀I/8R"
+  ],
+  "answer": 2,
+  "explain": "A semicircle gives half the full-loop field μ₀I/2R, so μ₀I/4R.",
+  "kind": "formula",
+  "id": "74139465-eb6d-47da-9443-d468aa0a2bf5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Field at a point lying on the line of a straight current element (θ = 0°) due to that element is:",
+  "formula": "dB ∝ sinθ",
+  "options": [
+   "Maximum",
+   "Zero",
+   "μ₀Idl/4πr²",
+   "μ₀Idl/2πr²"
+  ],
+  "answer": 1,
+  "explain": "dB ∝ sinθ, and sin 0° = 0.",
+  "kind": "concept",
+  "id": "15b413a0-7fe9-41a9-976c-ceffba14301f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Semi-infinite straight wire; field at perpendicular distance d from its end point is:",
+  "formula": "B = μ₀I/4πd",
+  "options": [
+   "μ₀I/2πd",
+   "μ₀I/4πd",
+   "μ₀I/8πd",
+   "μ₀I/πd"
+  ],
+  "answer": 1,
+  "explain": "Angles are 0° and 90°, giving half the infinite-wire field.",
+  "kind": "result",
+  "id": "0c06e9b9-5242-4490-b9cc-13660044c599",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "A circular arc of radius R subtends angle θ at its centre. Field at the centre due to current I is:",
+  "formula": "B = μ₀Iθ/4πR",
+  "options": [
+   "μ₀Iθ/2πR",
+   "μ₀Iθ/4πR",
+   "μ₀Iθ/4πR²",
+   "μ₀I/4πRθ"
+  ],
+  "answer": 1,
+  "explain": "B = (μ₀I/2R)(θ/2π) = μ₀Iθ/4πR, with θ in radians.",
+  "kind": "formula",
+  "id": "78a459dd-98e4-4c31-91ff-3598991839da",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Field on the axis of a circular loop (radius R) at distance x from its centre:",
+  "formula": "",
+  "options": [
+   "μ₀IR²/2(R²+x²)^(3/2)",
+   "μ₀IR²/2(R²+x²)^(1/2)",
+   "μ₀IR/2(R²+x²)^(3/2)",
+   "μ₀IR²/4π(R²+x²)^(3/2)"
+  ],
+  "answer": 0,
+  "explain": "Only axial components of dB survive: B = μ₀IR²/2(R²+x²)^(3/2).",
+  "kind": "formula",
+  "id": "1fa3b6f9-0bb2-47e1-a92f-57d0e7487a64",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "For a current loop, field on the axis at x ≫ R varies as:",
+  "formula": "B ≈ μ₀IR²/2x³",
+  "options": [
+   "1/x",
+   "1/x²",
+   "1/x³",
+   "Independent of x"
+  ],
+  "answer": 2,
+  "explain": "(R²+x²)^(3/2) ≈ x³, so B ∝ 1/x³ (dipole-like).",
+  "kind": "trend",
+  "id": "d34250c2-3063-44ef-a8f6-3930b34ded0d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "A point charge moves with velocity v. Magnetic field at a point directly ahead on its line of motion is:",
+  "formula": "B = μ₀qv sinθ/4πr²",
+  "options": [
+   "μ₀qv/4πr²",
+   "μ₀qv/2πr²",
+   "Infinite",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "θ = 0° between v and r, so sinθ = 0 and B = 0.",
+  "kind": "concept",
+  "id": "60738728-2985-4f8e-878c-1d2c05f08080",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Square loop of side a, current I. Field at its centre is:",
+  "formula": "",
+  "options": [
+   "√2 μ₀I/πa",
+   "2√2 μ₀I/πa",
+   "4√2 μ₀I/πa",
+   "μ₀I/2πa"
+  ],
+  "answer": 1,
+  "explain": "Each side gives √2μ₀I/2πa; four sides add to 2√2μ₀I/πa.",
+  "kind": "result",
+  "id": "04e293cb-7ae6-4e06-b5c6-af2c09bd6e63",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Biot–Savart law applied to an infinitely long straight wire gives field at distance d as:",
+  "formula": "",
+  "options": [
+   "μ₀I/4πd",
+   "μ₀I/2d",
+   "μ₀I/2πd",
+   "μ₀I/πd"
+  ],
+  "answer": 2,
+  "explain": "With both limiting angles 90°, B = (μ₀I/4πd)(1+1) = μ₀I/2πd.",
+  "kind": "formula",
+  "id": "dde4575f-160c-46a4-8011-16254d0767cc",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Clockwise current in a loop in the plane of the paper. Field at its centre points:",
+  "formula": "",
+  "options": [
+   "Into the plane",
+   "Out of the plane",
+   "Along the current",
+   "Radially outward"
+  ],
+  "answer": 0,
+  "explain": "Right-hand rule: clockwise current gives a field into the page.",
+  "kind": "concept",
+  "id": "cae53185-3049-4c87-9393-5a1dd63f0696",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Direction of dB due to element Idl at position vector r from the element is along:",
+  "formula": "dB ∝ Idl × r",
+  "options": [
+   "Idl",
+   "r",
+   "Idl × r",
+   "r × Idl"
+  ],
+  "answer": 2,
+  "explain": "dB = (μ₀/4π) I (dl × r̂)/r², perpendicular to both dl and r.",
+  "kind": "fact",
+  "id": "34731f9f-8aed-4bb6-bb3d-f0f4b1a8fa4b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Point charge q, speed v. Field at distance r on a line perpendicular to its velocity is:",
+  "formula": "B = (μ₀/4π)·qv sinθ/r²",
+  "options": [
+   "μ₀qv/4πr²",
+   "μ₀qv/2πr",
+   "μ₀qv/4πr",
+   "μ₀qv²/4πr²"
+  ],
+  "answer": 0,
+  "explain": "For θ = 90°, sinθ = 1, so B = μ₀qv/4πr², the inverse-square form of Biot–Savart.",
+  "kind": "formula",
+  "id": "305b10b3-7319-47d3-93d1-6e809b355348",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Arc of radius R joined to straight radial wires pointing at centre O. What do the radial wires contribute to B at O?",
+  "formula": "dB ∝ Idl × r̂ ⇒ sinθ = 0 on radial line",
+  "options": [
+   "Zero",
+   "μ₀I/4πR each",
+   "μ₀I/2πR each",
+   "μ₀I/4R each"
+  ],
+  "answer": 0,
+  "explain": "The wires lie along the line through O, so θ = 0° or 180° and sinθ = 0. Only the arc contributes.",
+  "kind": "concept",
+  "id": "b457f710-f1bc-4eca-8e96-e59d516d8fcb",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Arc of radius R subtends angle θ at its centre, current I. Field at centre is:",
+  "formula": "B = μ₀Iθ/(4πR)",
+  "options": [
+   "μ₀Iθ/(4πR)",
+   "μ₀Iθ/(2R)",
+   "μ₀Iθ/(4πR²)",
+   "μ₀Iθ/(8πR)"
+  ],
+  "answer": 0,
+  "explain": "The full circle (θ = 2π) must give μ₀I/2R, so B = μ₀Iθ/4πR.",
+  "kind": "formula",
+  "id": "9d2f83b2-7811-4397-95fb-3d1a06f77269",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Current I flows in a semicircular wire of radius R. Field at its centre is:",
+  "formula": "B = μ₀I/4R",
+  "options": [
+   "μ₀I/2R",
+   "μ₀I/4R",
+   "μ₀I/8R",
+   "μ₀I/4πR"
+  ],
+  "answer": 1,
+  "explain": "A semicircle gives half the full-loop field: ½ × μ₀I/2R = μ₀I/4R.",
+  "kind": "result",
+  "id": "80a0f420-1fef-401f-b54a-01312a9a3db1",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Straight wires along radial lines meeting an arc's centre contribute what field there?",
+  "formula": "dB ∝ dl × r̂ = 0",
+  "options": [
+   "μ₀I/4πR",
+   "μ₀I/2πR",
+   "Zero",
+   "Same as the arc"
+  ],
+  "answer": 2,
+  "explain": "For a radial segment dl ∥ r, so dl × r = 0 and Biot–Savart gives no field.",
+  "kind": "concept",
+  "id": "ea7ad2a4-931e-4fdb-a1d1-08e350966595",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Two identical loops with a common centre and perpendicular planes each carry I. Net B at centre:",
+  "formula": "B = √2·μ₀I/2R",
+  "options": [
+   "μ₀I/R",
+   "Zero",
+   "μ₀I/2R",
+   "√2 μ₀I/2R"
+  ],
+  "answer": 3,
+  "explain": "Two equal perpendicular fields of μ₀I/2R add as vectors to √2 times one field.",
+  "kind": "result",
+  "id": "3c70a9ea-879c-44ee-ac0e-749e54a8089f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "A fixed length of wire is bent into a coil of N turns, same current. B at centre varies as:",
+  "formula": "L = N·2πR ⇒ B = μ₀πN²I/L",
+  "options": [
+   "N",
+   "N²",
+   "1/N",
+   "N⁰ (independent)"
+  ],
+  "answer": 1,
+  "explain": "B = μ₀NI/2R and R = L/2πN, so B ∝ N². Both N and 1/R grow with N.",
+  "kind": "result",
+  "id": "617916f8-6ea0-4b5d-84ea-c7fc5f89b720",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "For a loop of magnetic moment M, far axial field (x ≫ R) is:",
+  "formula": "B = μ₀M/(2πx³)",
+  "options": [
+   "μ₀M/(4πx³)",
+   "μ₀M/(2πx³)",
+   "μ₀M/(2πx²)",
+   "μ₀M/(4πx²)"
+  ],
+  "answer": 1,
+  "explain": "From B = μ₀IR²/2x³ with M = IπR²: B = μ₀·2M/(4πx³) = μ₀M/2πx³.",
+  "kind": "formula",
+  "id": "3a5ac76b-1c2d-47be-86bd-aff3bca28a1f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Two concentric coplanar loops, radii R and 2R, equal current I but opposite sense. Net B at centre:",
+  "formula": "B = μ₀I/2R − μ₀I/4R",
+  "options": [
+   "μ₀I/4R",
+   "3μ₀I/4R",
+   "μ₀I/2R",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "The fields are μ₀I/2R and μ₀I/4R in opposite directions, so the difference is μ₀I/4R.",
+  "kind": "result",
+  "id": "e082a610-be03-487a-af44-414237465a21",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Seen from one side, a loop's current is anticlockwise. That face behaves as a:",
+  "formula": "",
+  "options": [
+   "South pole; B into the face",
+   "North pole; B into the face",
+   "South pole; B out of the face",
+   "North pole; B out of the face"
+  ],
+  "answer": 3,
+  "explain": "Anticlockwise current gives a field toward the viewer (right-hand rule), so that face is a north pole.",
+  "kind": "concept",
+  "id": "6374315e-ae5f-4143-b92e-fa2934eed91e",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "A charge q revolves on a circle of radius R with frequency f. Field at the centre is:",
+  "formula": "I = qf ⇒ B = μ₀qf/2R",
+  "options": [
+   "μ₀qf/2R",
+   "μ₀qf/4πR",
+   "μ₀qf R/2",
+   "μ₀q/(2fR)"
+  ],
+  "answer": 0,
+  "explain": "The equivalent current is I = qf, so B = μ₀I/2R = μ₀qf/2R.",
+  "kind": "formula",
+  "id": "36e0a16d-f829-46d5-8c53-bf546d6e2f84",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "On the axis of a ring, the net field is along the axis because the perpendicular components:",
+  "formula": "",
+  "options": [
+   "Add up to the axial value",
+   "Vanish for each element",
+   "Are zero only at the centre",
+   "Cancel in diametrically opposite pairs"
+  ],
+  "answer": 3,
+  "explain": "Opposite elements give equal and opposite components perpendicular to the axis, which cancel. The axial parts add.",
+  "kind": "concept",
+  "id": "e8273d4f-cf5e-41ab-8792-3a4c06d66de7",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "A wire of length L is bent into one circular loop carrying current I. Field at its centre is:",
+  "formula": "R = L/2π",
+  "options": [
+   "μ₀I/L",
+   "πμ₀I/L",
+   "2πμ₀I/L",
+   "μ₀I/2πL"
+  ],
+  "answer": 1,
+  "explain": "B = μ₀I/2R with R = L/2π gives B = πμ₀I/L.",
+  "kind": "formula",
+  "id": "d90c16fc-5cdb-44ca-8ad4-6e9cfb3393b0",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "On the axis of a ring of radius R, at x = √3 R, the field is what fraction of the centre field?",
+  "formula": "B(x)/B(0) = R³/(R²+x²)^(3/2)",
+  "options": [
+   "1/8",
+   "1/4",
+   "1/(3√3)",
+   "1/(2√2)"
+  ],
+  "answer": 0,
+  "explain": "(R²+3R²)^(3/2) = 8R³, so B = B₀/8.",
+  "kind": "result",
+  "id": "32056acf-1e73-4dcd-9707-f34083d1790f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Electron in the nth Bohr orbit: field at the nucleus due to its orbital motion varies as:",
+  "formula": "B = μ₀ e f/2r, f ∝ 1/n³, r ∝ n²",
+  "options": [
+   "1/n⁵",
+   "1/n³",
+   "1/n²",
+   "1/n⁴"
+  ],
+  "answer": 0,
+  "explain": "B ∝ f/r ∝ n⁻³/n² = 1/n⁵.",
+  "kind": "result",
+  "id": "1de6bd71-4c34-42df-b521-0723d82dda36",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Graph of B versus distance x along the axis of a circular current loop (centre at x = 0) is:",
+  "formula": "B = μ₀IR² / 2(R²+x²)^(3/2)",
+  "options": [
+   "Bell-shaped, symmetric, maximum at x = 0",
+   "Linear fall from the centre",
+   "Minimum at x = 0, rising outward",
+   "Maximum at x = ±R, dip at centre"
+  ],
+  "answer": 0,
+  "explain": "B is largest at x = 0, even in x, and falls monotonically on both sides, with no zero at any finite x.",
+  "kind": "graph",
+  "id": "c02ca6a9-73a6-4043-9741-1d2e72eae043",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Biot–Savart law: magnitude of dB due to a current element I dl at distance r, angle θ between dl and r?",
+  "formula": "dB = (μ₀/4π)·I dl sinθ / r²",
+  "options": [
+   "(μ₀/4π)·I dl cosθ / r²",
+   "(μ₀/4π)·I dl sinθ / r²",
+   "(μ₀/4π)·I dl sinθ / r",
+   "(μ₀/2π)·I dl sinθ / r²"
+  ],
+  "answer": 1,
+  "explain": "dB = μ₀ I dl sinθ/(4π r²); it falls as 1/r² and uses sinθ.",
+  "kind": "formula",
+  "id": "9c453627-a5bd-40d8-9fa0-849ed996494b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Field at a point lying on the line of a straight current-carrying wire (its extension) is:",
+  "formula": "",
+  "options": [
+   "μ₀I/2πr",
+   "μ₀I/4πr",
+   "Infinite",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "θ = 0° or 180° for every element, so dl × r = 0 and B = 0.",
+  "kind": "concept",
+  "id": "72887126-e5b8-4c6f-930e-0431f6696d2e",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Semi-infinite wire: B at perpendicular distance r from its end point (on the normal through the end)?",
+  "formula": "",
+  "options": [
+   "μ₀I/4πr",
+   "μ₀I/2πr",
+   "μ₀I/8πr",
+   "μ₀I/πr"
+  ],
+  "answer": 0,
+  "explain": "Angles are 0 and 90°, so B = μ₀I(0+1)/4πr = μ₀I/4πr, half of infinite wire.",
+  "kind": "result",
+  "id": "f5cdf72e-df88-43ac-b074-f31102568bd7",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Magnetic field lines around a long straight current-carrying wire are:",
+  "formula": "",
+  "options": [
+   "Straight lines parallel to the wire",
+   "Radial lines away from the wire",
+   "Concentric circles in planes ⟂ wire",
+   "Helices around the wire"
+  ],
+  "answer": 2,
+  "explain": "B is tangential, forming closed concentric circles centred on the wire.",
+  "kind": "fact",
+  "id": "18ae71d5-b008-4c9b-b2c7-4ec46888a93d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "For a long straight wire, the graph of B versus distance r (outside the wire) is a:",
+  "formula": "B ∝ 1/r",
+  "options": [
+   "Straight line through origin",
+   "Rectangular hyperbola",
+   "Parabola",
+   "Straight line with negative slope"
+  ],
+  "answer": 1,
+  "explain": "B ∝ 1/r gives a rectangular hyperbola (Br = constant).",
+  "kind": "graph",
+  "id": "ec7569d6-5e10-4dd0-8762-6704126304fc",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Field at a point inside the hollow of a long thin hollow cylindrical conductor carrying current is:",
+  "formula": "",
+  "options": [
+   "μ₀I/2πR",
+   "μ₀I/4πR",
+   "Zero",
+   "Proportional to r"
+  ],
+  "answer": 2,
+  "explain": "Ampere's law: enclosed current is zero inside the hollow, so B = 0.",
+  "kind": "result",
+  "id": "23d14687-7454-4390-8caf-b61968a01739",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Two long parallel wires carry equal currents in the same direction. Net B at the midpoint between them?",
+  "formula": "",
+  "options": [
+   "Twice the field of one wire",
+   "Equal to the field of one wire",
+   "Half the field of one wire",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Equal magnitudes and opposite directions at the midpoint cancel.",
+  "kind": "result",
+  "id": "c5bb90ac-9f78-45e1-9e43-d0b62f109c0f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Two long parallel wires carry equal currents in opposite directions. B at the midpoint compared with one wire's field?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Twice",
+   "Same",
+   "Half"
+  ],
+  "answer": 1,
+  "explain": "Fields are in the same direction at the midpoint, so they add to 2B.",
+  "kind": "result",
+  "id": "c1f320a9-67d7-4948-8546-8bb1e2a6fca1",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "L-shaped wire (two semi-infinite arms, current I). B at distance d from the corner on the extension of one arm?",
+  "formula": "",
+  "options": [
+   "μ₀I/2πd",
+   "Zero",
+   "μ₀I/4πd",
+   "μ₀I/πd"
+  ],
+  "answer": 2,
+  "explain": "The arm containing the point gives 0; the other gives μ₀I/4πd.",
+  "kind": "result",
+  "id": "da425bcd-1611-4d63-93a2-57c4e1775cde",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Square loop of side a carries current I. Magnetic field at its centre?",
+  "formula": "",
+  "options": [
+   "2√2 μ₀I/(πa)",
+   "√2 μ₀I/(πa)",
+   "4μ₀I/(πa)",
+   "μ₀I/(2πa)"
+  ],
+  "answer": 0,
+  "explain": "Each side gives √2μ₀I/(2πa) (angles 45°, r = a/2); four sides give 2√2μ₀I/(πa).",
+  "kind": "result",
+  "id": "a5986386-60e5-4067-a8c8-f9a692e6cf55",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Equilateral triangle of side a carries current I. Magnetic field at its centroid?",
+  "formula": "",
+  "options": [
+   "3μ₀I/(2πa)",
+   "9μ₀I/(2πa)",
+   "9μ₀I/(4πa)",
+   "√3μ₀I/(πa)"
+  ],
+  "answer": 1,
+  "explain": "Each side gives 3μ₀I/(2πa) (r = a/2√3, angles 60°); three sides give 9μ₀I/(2πa).",
+  "kind": "result",
+  "id": "e6673d57-bdb8-4db2-8895-b64646c0fd6d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Ampere's law applied to a long straight wire with a circular loop of radius r gives:",
+  "formula": "∮B·dl = μ₀I",
+  "options": [
+   "B·πr² = μ₀I",
+   "B·2πr = μ₀I",
+   "B·2πr = I/μ₀",
+   "B·4πr² = μ₀I"
+  ],
+  "answer": 1,
+  "explain": "B is constant on the circle, so B(2πr) = μ₀I and B = μ₀I/2πr.",
+  "kind": "formula",
+  "id": "98279609-5b37-4672-bf83-6ea895cfad8a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Outside a long cylindrical conductor, the field equals that of a thin wire of the same current placed:",
+  "formula": "",
+  "options": [
+   "On the surface of the cylinder",
+   "At the axis",
+   "At a distance R/2 from the axis",
+   "Nowhere; it depends on the radius R"
+  ],
+  "answer": 1,
+  "explain": "By Ampere's law, B outside depends only on I and r from the axis.",
+  "kind": "concept",
+  "id": "2023eb20-a3df-47af-8019-302c90e61369",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Finite wire of length L; B at perpendicular distance r from one end (normal through that end)?",
+  "formula": "B = μ₀I sinβ/4πr",
+  "options": [
+   "μ₀I L/(4πr√(L²+r²))",
+   "μ₀I L/(2πr√(L²+r²))",
+   "μ₀I r/(4πL√(L²+r²))",
+   "μ₀I/(4πr)"
+  ],
+  "answer": 0,
+  "explain": "One angle is 0 and sinβ = L/√(L²+r²), so B = μ₀I L/(4πr√(L²+r²)).",
+  "kind": "formula",
+  "id": "e3b35830-91be-4c4e-83ba-5ff5185d205a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "A finite wire subtends 45° on each side of the normal at point P, distance r away. B at P?",
+  "formula": "B = μ₀I(sinα + sinβ)/4πr",
+  "options": [
+   "√2 μ₀I/4πr",
+   "μ₀I/4πr",
+   "μ₀I/2√2πr",
+   "μ₀I/2πr"
+  ],
+  "answer": 0,
+  "explain": "sin45° + sin45° = √2, so B = √2 μ₀I/(4πr).",
+  "kind": "result",
+  "id": "215fdeb7-872f-4bd0-ae62-8e72181964c1",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Parallel wires carry I and 2I in the same direction, 9 cm apart. Where is B = 0?",
+  "formula": "I/r₁ = 2I/r₂",
+  "options": [
+   "3 cm from the I wire",
+   "3 cm from the 2I wire",
+   "4.5 cm from the I wire",
+   "6 cm from the I wire"
+  ],
+  "answer": 0,
+  "explain": "Between the wires, B ∝ I/r cancels, so r₁:r₂ = 1:2, giving r₁ = 3 cm.",
+  "kind": "result",
+  "id": "75089547-59fe-4b25-a708-48df7c7a2171",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Parallel wires carry I and 3I in opposite directions, separation d. Where is the null point?",
+  "formula": "I/x = 3I/(x + d)",
+  "options": [
+   "d/2 outside, beside the I wire",
+   "d/2 outside, beside the 3I wire",
+   "d/4 between the wires",
+   "d/3 between the wires"
+  ],
+  "answer": 0,
+  "explain": "Opposite currents give a null point outside, nearer the smaller current: x + d = 3x, so x = d/2.",
+  "kind": "concept",
+  "id": "17856c22-6484-485b-b8f8-afcb5322d646",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Inside a long solid cylindrical wire (uniform current density), B at distance r from the axis varies as:",
+  "formula": "B = μ₀Ir/(2πR²)",
+  "options": [
+   "∝ 1/r",
+   "∝ r",
+   "∝ r²",
+   "Zero everywhere inside"
+  ],
+  "answer": 1,
+  "explain": "I_enc ∝ r², and the loop length is 2πr, so B ∝ r.",
+  "kind": "result",
+  "id": "547f1071-620d-45d1-ab51-9c1be0b32dc3",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Field deep inside a long ideal solenoid with n turns per unit length and current I is:",
+  "formula": "B = μ₀nI",
+  "options": [
+   "μ₀nI/2",
+   "μ₀I/n",
+   "μ₀nI",
+   "μ₀n²I"
+  ],
+  "answer": 2,
+  "explain": "A rectangular Amperian loop gives B·l = μ₀(nl)I, so B = μ₀nI.",
+  "kind": "formula",
+  "id": "de07c666-403a-4f3e-89c8-58514be85c27",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Magnetic field at the mean radius r of a toroid with N turns carrying current I is:",
+  "formula": "B = μ₀NI/(2πr)",
+  "options": [
+   "μ₀NI/(2πr)",
+   "μ₀NI/(2r)",
+   "μ₀NI/(4πr)",
+   "μ₀NI·r/(2π)"
+  ],
+  "answer": 0,
+  "explain": "The circular Amperian loop of length 2πr encloses N·I.",
+  "kind": "formula",
+  "id": "46879627-9070-4cbb-af81-6dce4dca5f11",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "For a long coaxial cable carrying equal and opposite currents, B outside the outer conductor is:",
+  "formula": "",
+  "options": [
+   "μ₀I/2πr",
+   "μ₀I/4πr",
+   "Twice that of one wire",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Net enclosed current is zero, so by symmetry B = 0 outside.",
+  "kind": "result",
+  "id": "b39f5bdb-4891-4ff3-b3f2-37447a889cdf",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Field at a point inside the hollow region of a long hollow cylindrical conductor carrying axial current:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "μ₀I/2πr",
+   "μ₀I/2R",
+   "Maximum at the axis"
+  ],
+  "answer": 0,
+  "explain": "An Amperian loop inside the hollow encloses no current, and symmetry gives B = 0.",
+  "kind": "result",
+  "id": "85ca6396-c22f-46ac-b65c-4c544577adf8",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Field at the centre of the open end of a very long solenoid, compared with its value deep inside, is:",
+  "formula": "B_end = μ₀nI/2",
+  "options": [
+   "Double",
+   "Equal",
+   "One-half",
+   "One-fourth"
+  ],
+  "answer": 2,
+  "explain": "At the end, flux lines spread out and the field falls to half of μ₀nI.",
+  "kind": "fact",
+  "id": "b54142fe-aead-40a2-9a84-1096986ae04b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "In ∮B·dl = μ₀I_enc, the field B on the loop is due to:",
+  "formula": "",
+  "options": [
+   "Only the enclosed currents",
+   "Only the currents outside the loop",
+   "All currents, inside and outside",
+   "Only the current in the longest wire"
+  ],
+  "answer": 2,
+  "explain": "B is the total field. Outside currents contribute zero to the integral, but they still contribute to B.",
+  "kind": "concept",
+  "id": "71f0b4bd-2fb8-4411-bdc5-82e8c5bcefbd",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "For an ideal toroid, the field in the empty space outside its windings (and in the central hole) is:",
+  "formula": "",
+  "options": [
+   "μ₀NI/2πr",
+   "Uniform and non-zero",
+   "μ₀nI",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "A circular loop there encloses zero net current (in or out of the windings), so B = 0.",
+  "kind": "fact",
+  "id": "95c4b2e2-c2eb-4515-8c33-0e276a8cd5cd",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Since ∮B·dl ≠ 0 for a loop enclosing current, the magnetic field is:",
+  "formula": "",
+  "options": [
+   "Non-conservative",
+   "Conservative",
+   "Irrotational",
+   "Always uniform"
+  ],
+  "answer": 0,
+  "explain": "A non-zero circulation means no scalar potential; B is non-conservative.",
+  "kind": "concept",
+  "id": "74f4c526-2b97-4c97-8163-0b8be25de0d2",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "For a long solid cylindrical wire of radius R carrying a steady current, B is maximum at:",
+  "formula": "",
+  "options": [
+   "The axis",
+   "r = R/2",
+   "r = R (surface)",
+   "r → ∞"
+  ],
+  "answer": 2,
+  "explain": "B ∝ r inside and ∝ 1/r outside, so the peak is at the surface.",
+  "kind": "graph",
+  "id": "0ccb1f7c-edce-4d31-aebe-6dc7f0d40882",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Magnetic field just outside the middle of a long ideal solenoid is taken as:",
+  "formula": "",
+  "options": [
+   "μ₀nI",
+   "μ₀nI/2",
+   "μ₀I/2πr",
+   "≈ 0"
+  ],
+  "answer": 3,
+  "explain": "For an ideal long solenoid, a loop outside encloses no net current, so B ≈ 0.",
+  "kind": "fact",
+  "id": "0fea6692-c5a6-469a-859f-bfb02979091b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Outside a long straight current-carrying wire, B at perpendicular distance r varies as:",
+  "formula": "B = μ₀I/(2πr)",
+  "options": [
+   "1/r²",
+   "r",
+   "Independent of r",
+   "1/r"
+  ],
+  "answer": 3,
+  "explain": "The circular Amperian loop of length 2πr gives B ∝ 1/r.",
+  "kind": "trend",
+  "id": "f9681a0e-e6fd-476b-91c6-084841fd1b23",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "The field deep inside a long ideal solenoid does NOT depend on its:",
+  "formula": "B = μ₀nI",
+  "options": [
+   "Coil radius (cross-section)",
+   "Current I",
+   "Turns per unit length n",
+   "Permeability of core"
+  ],
+  "answer": 0,
+  "explain": "B = μ₀nI has no radius term, so the field is independent of the coil's cross-sectional area.",
+  "kind": "concept",
+  "id": "8b2fb451-198e-47e9-92ed-c0e274428d18",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field inside solenoid and toroid"
+ },
+ {
+  "prompt": "A soft iron core of relative permeability μᵣ fills a long solenoid. The field inside becomes:",
+  "formula": "B = μ₀μᵣnI",
+  "options": [
+   "μ₀nI/μᵣ",
+   "μ₀μᵣnI",
+   "μ₀(μᵣ − 1)nI",
+   "μ₀nI, unchanged"
+  ],
+  "answer": 1,
+  "explain": "The medium replaces μ₀ by μ = μ₀μᵣ, so B is multiplied by μᵣ.",
+  "kind": "result",
+  "id": "499686f7-68a0-40ea-9cfa-0da11ca09c7b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field inside solenoid and toroid"
+ },
+ {
+  "prompt": "B in the hollow central region (r < inner radius) of an ideal toroid is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "μ₀NI/2πR",
+   "μ₀NI/L",
+   "Maximum at the centre"
+  ],
+  "answer": 0,
+  "explain": "An Amperian circle in the hollow region encloses no current, so B = 0 there.",
+  "kind": "fact",
+  "id": "d8ac0812-1a3e-44e9-b3c3-ca3018538454",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field inside solenoid and toroid"
+ },
+ {
+  "prompt": "A solenoid of N turns, current I is stretched uniformly to double its length. Its inner field becomes:",
+  "formula": "B = μ₀NI/L",
+  "options": [
+   "Doubles",
+   "Unchanged",
+   "Halves",
+   "Becomes one-fourth"
+  ],
+  "answer": 2,
+  "explain": "n = N/L halves when L doubles with N and I fixed, so B halves.",
+  "kind": "result",
+  "id": "44cbf5d2-4ea5-4914-a01f-51821ecd4a19",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field inside solenoid and toroid"
+ },
+ {
+  "prompt": "The magnetic field pattern of a finite current-carrying solenoid resembles that of a:",
+  "formula": "",
+  "options": [
+   "Straight long wire",
+   "Single circular loop only",
+   "Bar magnet",
+   "Electric monopole"
+  ],
+  "answer": 2,
+  "explain": "One end acts as a north pole and the other as a south pole, like a bar magnet.",
+  "kind": "fact",
+  "id": "4bd07d9b-29e4-46f2-91bb-6f78d010a3b0",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field inside solenoid and toroid"
+ },
+ {
+  "prompt": "Charge circles in uniform B (v ⊥ B). Its time period T is independent of:",
+  "formula": "T = 2πm/(qB)",
+  "options": [
+   "Speed of the particle",
+   "Mass of the particle",
+   "Charge of the particle",
+   "Magnetic field B"
+  ],
+  "answer": 0,
+  "explain": "T = 2πm/(qB) has no v, so it does not depend on speed or radius.",
+  "kind": "concept",
+  "id": "57f4ac84-d14f-4425-bdef-00263d0bd913",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "Charge q, mass m, velocity v at angle θ to B. Pitch of its helical path is:",
+  "formula": "p = v∥·T",
+  "options": [
+   "2πm v cosθ/(qB)",
+   "2πm v sinθ/(qB)",
+   "m v sinθ/(qB)",
+   "2πm v/(qB sinθ)"
+  ],
+  "answer": 0,
+  "explain": "Pitch = v cosθ (along B) × T = 2πm/(qB), so p = 2πm v cosθ/(qB).",
+  "kind": "formula",
+  "id": "6d3fe987-8382-45b2-8dab-2993155bf2e7",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "Radius of circular path of a charge q, mass m, speed v, perpendicular to B is:",
+  "formula": "r = mv/(qB)",
+  "options": [
+   "mv/(qB)",
+   "qB/(mv)",
+   "mv²/(qB)",
+   "m/(qvB)"
+  ],
+  "answer": 0,
+  "explain": "Magnetic force qvB provides centripetal force mv²/r, so r = mv/(qB).",
+  "kind": "formula",
+  "id": "8b0b30c1-a9c2-4f70-a5b2-a8ff196ee355",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "Two particles of same momentum and charge enter a uniform B perpendicular to it. Their radii are:",
+  "formula": "r = p/(qB)",
+  "options": [
+   "Equal",
+   "In ratio of their masses",
+   "In ratio of their speeds",
+   "Inversely as their masses"
+  ],
+  "answer": 0,
+  "explain": "r = p/(qB) depends only on momentum, charge and B, not on mass separately.",
+  "kind": "concept",
+  "id": "3550d437-9064-4eb7-bc70-28ede3cb23f8",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "Cyclotron frequency of a charge q, mass m in magnetic field B is:",
+  "formula": "f = qB/(2πm)",
+  "options": [
+   "qB/(2πm)",
+   "2πm/(qB)",
+   "qB/m",
+   "mv/(qB)"
+  ],
+  "answer": 0,
+  "explain": "T = 2πm/(qB), so f = 1/T = qB/(2πm), independent of v and r.",
+  "kind": "formula",
+  "id": "dfb92f8f-b0b2-4993-93af-395dc6d9891e",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "Kinetic energy K of a charge q, mass m, circling in B with radius r is:",
+  "formula": "K = q²B²r²/(2m)",
+  "options": [
+   "q²B²r²/(2m)",
+   "qB²r²/(2m)",
+   "q²Br/(2m)",
+   "q²B²r²/m"
+  ],
+  "answer": 0,
+  "explain": "r = mv/(qB) gives v = qBr/m, so K = ½mv² = q²B²r²/(2m).",
+  "kind": "formula",
+  "id": "0d9e71aa-3dc9-45ff-849c-9102b488281b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "Semicircular wire of radius R, current I, in uniform B ⟂ its plane. Magnitude of net force?",
+  "formula": "F = I·(chord)·B",
+  "options": [
+   "πBIR",
+   "2BIR",
+   "BIR",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Equivalent to the straight diameter 2R: F = BI(2R), perpendicular to the diameter.",
+  "kind": "result",
+  "id": "fcd50e5f-a2e1-441b-bf74-8577fe038652",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "Two long parallel wires carry currents in the same direction. The force between them is:",
+  "formula": "",
+  "options": [
+   "Attractive",
+   "Repulsive",
+   "Zero",
+   "A torque only, no net force"
+  ],
+  "answer": 0,
+  "explain": "Parallel currents attract; antiparallel currents repel.",
+  "kind": "fact",
+  "id": "5184f17c-7b7a-486a-8561-012bea987867",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "Force per unit length between two long parallel current-carrying wires separated by d is:",
+  "formula": "f = μ₀I₁I₂ / 2πd",
+  "options": [
+   "μ₀I₁I₂ / 4πd",
+   "μ₀I₁I₂ / 2πd",
+   "μ₀I₁I₂ / 2πd²",
+   "μ₀I₁I₂d / 2π"
+  ],
+  "answer": 1,
+  "explain": "The field of one wire is μ₀I₁/2πd; it acts on I₂ per unit length: f = I₂B.",
+  "kind": "formula",
+  "id": "0656a7c6-5ba8-4411-afbc-57389d2672a0",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "One ampere is defined by the force per unit length between two long parallel wires 1 m apart, equal to:",
+  "formula": "",
+  "options": [
+   "2×10⁻⁷ N/m",
+   "4π×10⁻⁷ N/m",
+   "10⁻⁷ N/m",
+   "2π×10⁻⁷ N/m"
+  ],
+  "answer": 0,
+  "explain": "With 1 A each at 1 m apart in vacuum, f = μ₀/2π = 2×10⁻⁷ N/m.",
+  "kind": "fact",
+  "id": "b1d80eb5-a763-4e99-b6a5-bd57602972b6",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "A curved wire joins A and B in a uniform field B. The net force on it equals that on:",
+  "formula": "F = I (L_AB × B)",
+  "options": [
+   "A straight wire of the wire's arc length",
+   "A straight wire along chord AB",
+   "Zero force always",
+   "A wire of half the arc length"
+  ],
+  "answer": 1,
+  "explain": "Net force depends only on the vector displacement from A to B: F = I(AB × B).",
+  "kind": "concept",
+  "id": "7f8b7269-2e4c-466f-8030-5326f9adcef8",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "Force between two parallel current-carrying wires varies with their separation d as:",
+  "formula": "",
+  "options": [
+   "1/d²",
+   "d",
+   "1/d",
+   "d²"
+  ],
+  "answer": 2,
+  "explain": "f = μ₀I₁I₂/2πd, so f ∝ 1/d.",
+  "kind": "trend",
+  "id": "7887ae7b-10c8-4dfd-aa54-20a362fd2f6a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "Two long parallel wires carry currents I₁ ≠ I₂. The forces on them are:",
+  "formula": "",
+  "options": [
+   "Equal in magnitude, opposite in direction",
+   "Larger on the wire with larger current",
+   "Larger on the wire with smaller current",
+   "Equal and in the same direction"
+  ],
+  "answer": 0,
+  "explain": "Newton's third law: F = μ₀I₁I₂L/2πd is the same on both, opposite in direction.",
+  "kind": "concept",
+  "id": "39530e23-fe4a-4f6b-a1a5-808ec133be6d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "A rectangular loop lies in the plane of a long straight current-carrying wire. The net force on the loop is:",
+  "formula": "",
+  "options": [
+   "Zero, since the loop is closed",
+   "Nonzero, because the field is nonuniform",
+   "Zero only if the loop current is clockwise",
+   "Only a torque, never a force"
+  ],
+  "answer": 1,
+  "explain": "The field falls off with distance, so forces on the near and far sides are unequal. The net is nonzero.",
+  "kind": "concept",
+  "id": "6e3cc592-cc12-4866-a786-b2a7eee0b452",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "The SI unit tesla is equivalent to:",
+  "formula": "",
+  "options": [
+   "N A m",
+   "N A⁻¹ m⁻¹",
+   "N A⁻¹ m",
+   "N A m⁻¹"
+  ],
+  "answer": 1,
+  "explain": "From F = BIL: B = F/(IL), so 1 T = 1 N A⁻¹ m⁻¹.",
+  "kind": "unit",
+  "id": "7ecd392a-67f7-495f-853b-162199f08ff4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "Two long parallel wires carry currents in opposite directions. The force between them is:",
+  "formula": "",
+  "options": [
+   "Repulsive",
+   "Attractive",
+   "Zero",
+   "A torque only, with no net force"
+  ],
+  "answer": 0,
+  "explain": "Antiparallel currents repel; parallel currents attract.",
+  "kind": "fact",
+  "id": "dbbcea19-d42b-4c2d-b0d3-12e20bfb6191",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "A straight wire carries current I in a uniform field B. If the wire's length is doubled, the force at fixed angle becomes:",
+  "formula": "F = BIL sinθ",
+  "options": [
+   "Unchanged",
+   "Doubled",
+   "Halved",
+   "Four times"
+  ],
+  "answer": 1,
+  "explain": "F ∝ L at fixed B, I and θ, so doubling L doubles F.",
+  "kind": "concept",
+  "id": "88bda394-bd55-49a7-a61d-0bc88b3a8844",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "One ampere is the current that produces what force per metre between two long parallel wires 1 m apart in vacuum?",
+  "formula": "",
+  "options": [
+   "2×10⁻⁷ N/m",
+   "4π×10⁻⁷ N/m",
+   "10⁻⁷ N/m",
+   "2π×10⁻⁷ N/m"
+  ],
+  "answer": 0,
+  "explain": "F/l = μ₀(1)(1)/(2π·1) = 2×10⁻⁷ N/m, which is the definition of the ampere.",
+  "kind": "fact",
+  "id": "470e332c-57c5-4a0b-bd28-52d5df358ea4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Two long parallel wires carry currents in opposite directions. The force between them is:",
+  "formula": "",
+  "options": [
+   "Repulsive",
+   "Attractive",
+   "Zero",
+   "A torque only, no net force"
+  ],
+  "answer": 0,
+  "explain": "Antiparallel currents repel; parallel currents attract.",
+  "kind": "concept",
+  "id": "2c9a173e-5a2f-47db-b154-e9e27f027a94",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Wires carry currents I and 2I. Compared with the force on the I-wire, the force on the 2I-wire is:",
+  "formula": "",
+  "options": [
+   "Equal in magnitude, opposite in direction",
+   "Twice as large",
+   "Half as large",
+   "Equal and in the same direction"
+  ],
+  "answer": 0,
+  "explain": "The forces form a Newton's third law pair: equal magnitude, opposite direction.",
+  "kind": "concept",
+  "id": "c0384f55-466a-417f-b786-6a346214d47a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Force per unit length between two parallel wires varies with their separation d as:",
+  "formula": "F/l ∝ 1/d",
+  "options": [
+   "1/d",
+   "1/d²",
+   "d",
+   "d²"
+  ],
+  "answer": 0,
+  "explain": "B = μ₀I/2πd falls as 1/d, so F/l ∝ 1/d. The graph is a rectangular hyperbola.",
+  "kind": "graph",
+  "id": "063d9705-8658-41d1-99e6-7f97db29e300",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "If both currents and the separation are all tripled, the force per unit length between the wires becomes:",
+  "formula": "",
+  "options": [
+   "3 times",
+   "Unchanged",
+   "9 times",
+   "1/3 times"
+  ],
+  "answer": 0,
+  "explain": "F/l ∝ I₁I₂/d gives 3·3/3 = 3, so the force becomes 3 times.",
+  "kind": "result",
+  "id": "4cf6e4e1-27e8-4db3-a790-5ccef3d793ab",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "The force on wire 2 due to wire 1 arises because wire 2 carries current in the:",
+  "formula": "F = I₂ l B₁, B₁ = μ₀I₁/2πd",
+  "options": [
+   "Field of wire 1",
+   "Electric field of wire 1",
+   "Field of its own current",
+   "Induced emf of wire 1"
+  ],
+  "answer": 0,
+  "explain": "Wire 1 produces B = μ₀I₁/2πd at wire 2, and that field exerts F = I₂lB on it.",
+  "kind": "concept",
+  "id": "0691e480-cb76-41da-9d88-0bdc95e7a961",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Two long wires carry equal currents in opposite directions. At the midpoint between them, the net B is:",
+  "formula": "",
+  "options": [
+   "Double the field of one wire",
+   "Zero",
+   "Equal to the field of one wire",
+   "Half the field of one wire"
+  ],
+  "answer": 0,
+  "explain": "Between antiparallel wires the two fields point the same way and add, giving 2× one wire's field.",
+  "kind": "result",
+  "id": "dc64156b-7fa1-4906-ba5e-ded2cbfdf3da",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "The SI unit ampere is defined by fixing the numerical value of which quantity?",
+  "formula": "",
+  "options": [
+   "Elementary charge e",
+   "Permeability μ₀",
+   "Speed of light c",
+   "Planck constant h"
+  ],
+  "answer": 0,
+  "explain": "Since 2019, the ampere is defined by fixing e = 1.602176634×10⁻¹⁹ C; the older definition used the force between wires.",
+  "kind": "fact",
+  "id": "28a9756d-cd6b-44bc-b93d-20fb7c3bf150",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Two long parallel wires carry equal currents I, separated by d. Force on a length L of one wire is:",
+  "formula": "F = (μ₀I²/2πd)·L",
+  "options": [
+   "μ₀I²L/2πd",
+   "μ₀I²L/4πd",
+   "μ₀IL/2πd",
+   "μ₀I²L/2πd²"
+  ],
+  "answer": 0,
+  "explain": "F = B·I·L with B = μ₀I/2πd gives F = μ₀I²L/2πd.",
+  "kind": "formula",
+  "id": "667a6c36-af64-4e4c-8c05-34350ef41a0d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Torque on a current loop in uniform B is zero when the angle between loop plane and B is:",
+  "formula": "τ = m × B = mB sinθ",
+  "options": [
+   "90°",
+   "0°",
+   "45°",
+   "Depends on current"
+  ],
+  "answer": 0,
+  "explain": "Plane ⟂ B means m ∥ B, so sinθ = 0 and the torque is zero.",
+  "kind": "concept",
+  "id": "42a1da3d-13d1-41b4-ab0b-40daef3ea9c5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "In a uniform field, the torque on a current loop tends to rotate its moment m so that it:",
+  "formula": "τ = m × B",
+  "options": [
+   "Aligns parallel to B",
+   "Aligns antiparallel to B",
+   "Becomes perpendicular to B",
+   "Keeps rotating about B"
+  ],
+  "answer": 0,
+  "explain": "Torque turns m towards B; the stable position is m ∥ B.",
+  "kind": "concept",
+  "id": "4900af19-18f7-4bf6-9237-28c76ca9ed6b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "Net force on a planar current loop placed in a uniform magnetic field is:",
+  "formula": "",
+  "options": [
+   "Zero, but torque may be nonzero",
+   "mB sinθ",
+   "IBA",
+   "Zero, and torque is also always zero"
+  ],
+  "answer": 0,
+  "explain": "Forces on opposite sides cancel in a uniform field, but they can form a couple.",
+  "kind": "fact",
+  "id": "7d727e8a-7b98-4dd8-b2a3-de4eaa8aa84f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "Work needed to rotate a dipole m in field B from stable to unstable equilibrium:",
+  "formula": "W = U(180°) − U(0°)",
+  "options": [
+   "2mB",
+   "mB",
+   "Zero",
+   "mB/2"
+  ],
+  "answer": 0,
+  "explain": "W = (+mB) − (−mB) = 2mB.",
+  "kind": "result",
+  "id": "3f7bdd5f-c0e4-4015-b254-00371fb5497d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A clockwise current seen from above gives a magnetic moment directed:",
+  "formula": "",
+  "options": [
+   "Vertically downward",
+   "Vertically upward",
+   "Along the plane, tangential",
+   "Radially outward"
+  ],
+  "answer": 0,
+  "explain": "By the right-hand rule, clockwise current seen from above gives m into the plane (downward).",
+  "kind": "concept",
+  "id": "1ac6abbd-c7e0-467e-ae23-62a68831f29b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "For an orbiting electron, the ratio of magnetic moment to orbital angular momentum μ/L is:",
+  "formula": "μ/L = e/2m",
+  "options": [
+   "e/2m",
+   "e/m",
+   "2e/m",
+   "m/2e"
+  ],
+  "answer": 0,
+  "explain": "μ = evr/2 and L = mvr, so μ/L = e/(2m) (gyromagnetic ratio).",
+  "kind": "formula",
+  "id": "4e293da7-15db-415f-98af-1082345380c0",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "For an electron in orbit, the direction of magnetic moment relative to orbital angular momentum is:",
+  "formula": "",
+  "options": [
+   "Opposite",
+   "Same",
+   "Perpendicular",
+   "Depends on the orbit radius"
+  ],
+  "answer": 0,
+  "explain": "The electron is negative, so its μ is antiparallel to L.",
+  "kind": "concept",
+  "id": "26aac5b3-a526-4870-a649-442a16d61a88",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "The Bohr magneton (magnetic moment of H atom in ground state, orbital model) equals:",
+  "formula": "μ_B = eh/4πm",
+  "options": [
+   "9.27×10⁻²⁴ A m²",
+   "9.1×10⁻³¹ A m²",
+   "1.6×10⁻¹⁹ A m²",
+   "5.0×10⁻²⁷ A m²"
+  ],
+  "answer": 0,
+  "explain": "μ_B = eh/(4πmₑ) ≈ 9.27×10⁻²⁴ A m².",
+  "kind": "fact",
+  "id": "0258ae16-3067-4472-8e7c-24713b60ce11",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "Magnetic field of a small loop (moment m) at large axial distance x:",
+  "formula": "B = μ₀m / 2πx³",
+  "options": [
+   "μ₀m/2πx³",
+   "μ₀m/4πx³",
+   "μ₀m/4πx²",
+   "μ₀m/2πx²"
+  ],
+  "answer": 0,
+  "explain": "Axial field of a dipole is (μ₀/4π)(2m/x³) = μ₀m/(2πx³).",
+  "kind": "formula",
+  "id": "e1f9169d-933e-457f-89ec-bbfaa614a5c3",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A ring of charge q and radius R rotates at angular speed ω about its axis. Its magnetic moment is:",
+  "formula": "m = (q/T)·πR²",
+  "options": [
+   "qωR²/2",
+   "qωR²",
+   "qωR/2",
+   "2qωR²"
+  ],
+  "answer": 0,
+  "explain": "I = qω/2π, so m = IπR² = qωR²/2.",
+  "kind": "formula",
+  "id": "86314f2e-1ba7-4a7b-adae-cc24e64fcb14",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A planar loop of N turns, area A, current I in field B (angle θ between m and B). Torque magnitude is:",
+  "formula": "τ = m × B",
+  "options": [
+   "NIAB sinθ",
+   "NIAB cosθ",
+   "IAB sinθ",
+   "NIAB"
+  ],
+  "answer": 0,
+  "explain": "m = NIA, so τ = mB sinθ = NIAB sinθ, where θ is the angle between m and B.",
+  "kind": "formula",
+  "id": "76dee22e-3f98-492a-9f24-beefddd0bf88",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "Work needed to rotate a loop from stable equilibrium (θ = 0°) to θ = 180° in field B:",
+  "formula": "W = U(180°) − U(0°)",
+  "options": [
+   "mB",
+   "2mB",
+   "Zero",
+   "mB/2"
+  ],
+  "answer": 1,
+  "explain": "W = (+mB) − (−mB) = 2mB.",
+  "kind": "result",
+  "id": "fe607e14-aebf-4c8e-862d-7c892f4f1f46",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "For a planar loop in uniform B, the torque depends on the loop's shape only through its:",
+  "formula": "",
+  "options": [
+   "Perimeter",
+   "Longest side",
+   "Area",
+   "Radius of curvature"
+  ],
+  "answer": 2,
+  "explain": "τ = NIAB sinθ, so only the area matters, not the shape.",
+  "kind": "concept",
+  "id": "a4f9e533-cd98-4e94-a22e-62e7230bab32",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "In uniform B, the net torque on a current loop is the same about:",
+  "formula": "",
+  "options": [
+   "Only the loop's centre",
+   "Any point, since net force is zero",
+   "Only an axis along a diagonal",
+   "Only an axis along an edge"
+  ],
+  "answer": 1,
+  "explain": "The forces form a couple (net force zero), so the torque is independent of the axis.",
+  "kind": "concept",
+  "id": "a82af6d6-f911-457d-bd9c-c42ab5c4df1b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "A radial field in a moving-coil galvanometer makes the torque on the coil:",
+  "formula": "",
+  "options": [
+   "Zero at all deflections",
+   "Proportional to the deflection angle",
+   "Maximum only at zero current",
+   "Independent of the coil's angle"
+  ],
+  "answer": 3,
+  "explain": "The plane stays parallel to B, so τ = NIAB at every angle and deflection ∝ I.",
+  "kind": "concept",
+  "id": "199e5d88-1c98-4a68-bfc1-259b5a689bfe",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "Period of small oscillations of a loop (moment of inertia I₀, moment m) about equilibrium in B:",
+  "formula": "T = 2π√(I₀/mB)",
+  "options": [
+   "2π√(mB/I₀)",
+   "2π√(I₀/mB)",
+   "2π√(I₀B/m)",
+   "(1/2π)√(mB/I₀)"
+  ],
+  "answer": 1,
+  "explain": "For small θ, τ ≈ −mBθ, giving SHM with ω² = mB/I₀.",
+  "kind": "formula",
+  "id": "7e3e3ee2-35f7-48de-b82b-1dda329696b0",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "A wire of fixed length, same current and B, is bent into loops. Torque is maximum for a:",
+  "formula": "",
+  "options": [
+   "Circle",
+   "Square",
+   "Equilateral triangle",
+   "Rectangle with sides 2:1"
+  ],
+  "answer": 0,
+  "explain": "For a fixed perimeter the circle encloses the maximum area, so m and τ are maximum.",
+  "kind": "exception",
+  "id": "616c00f5-3b58-4e13-a518-4ec5b03a3df1",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "A loop in uniform B is at unstable equilibrium. Its magnetic moment m and B make an angle of:",
+  "formula": "",
+  "options": [
+   "180°",
+   "90°",
+   "0°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "At θ = 180° the torque is zero but U = +mB is maximum, so any small disturbance grows (unstable).",
+  "kind": "concept",
+  "id": "b1b6764f-3a6b-4e7d-a731-b7039a2e2c15",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "Voltage sensitivity of a moving coil galvanometer of resistance R is given by",
+  "formula": "φ/V = NBA/(kR)",
+  "options": [
+   "NBA/(kR)",
+   "NBAR/k",
+   "NBA/k",
+   "kR/(NBA)"
+  ],
+  "answer": 0,
+  "explain": "φ = NBAI/k and I = V/R, so φ/V = NBA/(kR).",
+  "kind": "formula",
+  "id": "aa714662-8758-475d-8fd8-db38971cfd19",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Turns doubled (same wire, same area): voltage sensitivity of a galvanometer becomes",
+  "formula": "",
+  "options": [
+   "Doubled",
+   "Halved",
+   "Unchanged",
+   "Four times"
+  ],
+  "answer": 2,
+  "explain": "Current sensitivity ∝ N, but R ∝ N too, so NBA/(kR) stays unchanged.",
+  "kind": "result",
+  "id": "b465502c-4875-438f-9a55-0fd7f61b1dc5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "A galvanometer is converted into an ammeter by connecting a",
+  "formula": "",
+  "options": [
+   "Low resistance in parallel",
+   "High resistance in series",
+   "High resistance in parallel",
+   "Low resistance in series"
+  ],
+  "answer": 0,
+  "explain": "A small shunt in parallel bypasses most of the current.",
+  "kind": "fact",
+  "id": "82cca67b-0e16-47ca-9925-4bec93d02fed",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "A galvanometer is converted into a voltmeter by connecting a",
+  "formula": "",
+  "options": [
+   "Low resistance in parallel",
+   "High resistance in series",
+   "High resistance in parallel",
+   "Low resistance in series"
+  ],
+  "answer": 1,
+  "explain": "A large series resistance limits the current to Ig at full-scale voltage.",
+  "kind": "fact",
+  "id": "0284f0d6-5acf-4c3d-9c67-59fdcb0fa84f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Galvanometer (resistance G, full-scale Ig) is to read up to 10Ig. Required shunt is",
+  "formula": "S = IgG/(I − Ig)",
+  "options": [
+   "G/10",
+   "G/9",
+   "9G",
+   "10G"
+  ],
+  "answer": 1,
+  "explain": "S = Ig·G/(9Ig) = G/9.",
+  "kind": "result",
+  "id": "f3a21fb7-498b-4934-991a-5acf94c8274d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "To read V = 10·Ig·G full scale, the series resistance for a galvanometer (resistance G) is",
+  "formula": "R = V/Ig − G",
+  "options": [
+   "10G",
+   "G/10",
+   "9G",
+   "11G"
+  ],
+  "answer": 2,
+  "explain": "R = 10G − G = 9G.",
+  "kind": "result",
+  "id": "cefc604d-400e-4db6-8039-22b0f714bb33",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Compared with the shunt resistance S and G, the resistance of the ammeter so made is",
+  "formula": "R_A = GS/(G+S)",
+  "options": [
+   "Greater than G",
+   "Equal to G+S",
+   "Greater than S",
+   "Less than S"
+  ],
+  "answer": 3,
+  "explain": "G and S are in parallel, so the net value is smaller than the smaller one, S.",
+  "kind": "concept",
+  "id": "d72c8265-12a3-4a78-88ca-92b2518bfbef",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Eddy currents in the metallic (aluminium) frame of the coil of a galvanometer provide",
+  "formula": "",
+  "options": [
+   "Restoring torque",
+   "Electromagnetic damping",
+   "Increased sensitivity",
+   "Radial magnetic field"
+  ],
+  "answer": 1,
+  "explain": "Eddy currents oppose motion, so the pointer settles quickly (dead-beat).",
+  "kind": "concept",
+  "id": "cafeefde-373a-4de6-87ca-afc38bdb79c5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "SI unit of the torsional constant k of the suspension/spring in a galvanometer is",
+  "formula": "τ = kφ",
+  "options": [
+   "N m rad",
+   "N m⁻¹ rad",
+   "N m rad⁻¹",
+   "N rad⁻¹"
+  ],
+  "answer": 2,
+  "explain": "k = τ/φ, which is torque per unit angle: N m rad⁻¹.",
+  "kind": "unit",
+  "id": "dd885a61-d48d-49cf-8a5a-f4e47cb45931",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "A galvanometer is not used directly to measure large currents because",
+  "formula": "",
+  "options": [
+   "Its torque is non-uniform",
+   "Its field is not radial",
+   "Its spring has no restoring torque",
+   "Large current damages its coil and spring"
+  ],
+  "answer": 3,
+  "explain": "Its full-scale current is tiny (μA–mA), so large currents overheat the coil and go off scale.",
+  "kind": "concept",
+  "id": "22db48ed-cae3-4688-8af5-c0fccceb7ce8",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Fraction of the total current I that passes through the galvanometer (shunt S, resistance G) is",
+  "formula": "I_g/I = S/(G+S)",
+  "options": [
+   "G/(G+S)",
+   "S/(G+S)",
+   "S/G",
+   "G/S"
+  ],
+  "answer": 1,
+  "explain": "Current divides inversely to resistance, so I_g/I = S/(G+S).",
+  "kind": "formula",
+  "id": "95e4d5b9-a222-4fec-957d-ad7b2c05ca82",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "A shunt of G/9 is connected across a galvanometer. The range of current is multiplied by",
+  "formula": "",
+  "options": [
+   "9",
+   "8",
+   "10",
+   "11"
+  ],
+  "answer": 2,
+  "explain": "S = G/(n−1) = G/9 gives n = 10.",
+  "kind": "result",
+  "id": "35571e7e-963a-43e8-a420-2e57dc22fc96",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "The resistance of an ideal ammeter is",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Infinite",
+   "Equal to G",
+   "Equal to the load resistance"
+  ],
+  "answer": 0,
+  "explain": "An ideal ammeter must not change the circuit current, so its resistance is zero.",
+  "kind": "concept",
+  "id": "2cfba349-6167-4e69-aede-c8005e78fd83",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "Connecting an ammeter in a circuit makes its reading, compared with the true current,",
+  "formula": "",
+  "options": [
+   "Slightly less",
+   "Slightly more",
+   "Exactly equal",
+   "Double"
+  ],
+  "answer": 0,
+  "explain": "The ammeter's resistance adds to the circuit and lowers the current.",
+  "kind": "concept",
+  "id": "0f84c65e-f8d9-4253-a099-b2cb42af8e6b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "If an ammeter is wrongly connected in parallel across a resistor, then",
+  "formula": "",
+  "options": [
+   "Reading is halved",
+   "Reading is zero",
+   "A large current may damage it",
+   "Resistor current doubles"
+  ],
+  "answer": 2,
+  "explain": "Its very low resistance draws a huge current, which can burn the ammeter.",
+  "kind": "exception",
+  "id": "8cdf1b29-fc32-47fb-a761-0421986a615a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "Decreasing the shunt resistance of an ammeter will",
+  "formula": "",
+  "options": [
+   "Increase its range",
+   "Decrease its range",
+   "Leave the range unchanged",
+   "Increase the galvanometer current"
+  ],
+  "answer": 0,
+  "explain": "I = I_g(1 + G/S): a smaller S gives a larger range.",
+  "kind": "trend",
+  "id": "f3f286da-2aa0-4e10-b0b7-8b95eba680cd",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "Converting a galvanometer into an ammeter makes its current sensitivity",
+  "formula": "",
+  "options": [
+   "Increase",
+   "Decrease",
+   "Unchanged",
+   "Infinite"
+  ],
+  "answer": 1,
+  "explain": "For the same current I, only a fraction passes through the coil, so deflection per unit current falls.",
+  "kind": "trend",
+  "id": "ab5cc059-bd8d-4f50-a351-07bda8914eca",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "In an ammeter the potential difference across the galvanometer coil and the shunt is",
+  "formula": "I_gG = (I − I_g)S",
+  "options": [
+   "Different, with the coil greater",
+   "Different, with the shunt greater",
+   "Always zero",
+   "Equal"
+  ],
+  "answer": 3,
+  "explain": "They are in parallel, so they have the same potential difference.",
+  "kind": "concept",
+  "id": "7f54b5be-a1b9-4765-933c-f0dcb7f0c217",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "A galvanometer shunt is usually made of a low-resistance alloy such as",
+  "formula": "",
+  "options": [
+   "Nichrome",
+   "Tungsten",
+   "Manganin",
+   "Silicon"
+  ],
+  "answer": 2,
+  "explain": "Manganin has a very small temperature coefficient of resistance, so S stays steady.",
+  "kind": "fact",
+  "id": "38b1a0dd-a7f3-448c-960c-ddf1de38a8a5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "An ammeter reads the true current accurately in a circuit when its resistance is",
+  "formula": "I = V/(R + R_A)",
+  "options": [
+   "much less than the circuit resistance",
+   "equal to the circuit resistance",
+   "much more than the circuit resistance",
+   "equal to the galvanometer resistance"
+  ],
+  "answer": 0,
+  "explain": "Reading error is small only when R_A ≪ R of the circuit, since it is in series.",
+  "kind": "concept",
+  "id": "8bea4553-ec24-45fc-ab43-38eb16c325fb",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "The effective resistance of a converted ammeter is always less than",
+  "formula": "",
+  "options": [
+   "the galvanometer resistance only",
+   "the shunt resistance only",
+   "the smaller of G and S",
+   "the larger of G and S"
+  ],
+  "answer": 2,
+  "explain": "The parallel combination is smaller than either G or S, so it is less than the smaller one (S, since S ≪ G).",
+  "kind": "concept",
+  "id": "26bc4708-bf73-459d-9c6b-6a050fa8ffe4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "A shunt S = G/(n−1) is used. The ammeter's range becomes n times; its resistance becomes",
+  "formula": "",
+  "options": [
+   "G/n",
+   "G/(n−1)",
+   "nG",
+   "G(n−1)/n"
+  ],
+  "answer": 0,
+  "explain": "R = G·S/(G+S) = G·[G/(n−1)]/[nG/(n−1)] = G/n.",
+  "kind": "result",
+  "id": "4e24802a-331b-4f31-81a0-98502c30574d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "A voltmeter must be connected to the circuit element in which way?",
+  "formula": "",
+  "options": [
+   "In parallel across the element",
+   "In series with the element",
+   "In series with the battery only",
+   "Across the ammeter only"
+  ],
+  "answer": 0,
+  "explain": "A voltmeter measures potential difference, so it is joined in parallel across the element.",
+  "kind": "fact",
+  "id": "942a014e-7807-4f84-93a4-ea0444a7f23f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "The resistance of an ideal voltmeter is?",
+  "formula": "",
+  "options": [
+   "Infinite",
+   "Zero",
+   "Equal to G",
+   "Equal to Ig·G"
+  ],
+  "answer": 0,
+  "explain": "An ideal voltmeter draws no current from the circuit, so its resistance is infinite.",
+  "kind": "concept",
+  "id": "823a43bb-7afc-4b95-ba31-4a11325b709d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "A real voltmeter across a resistor reads what compared with the true potential difference?",
+  "formula": "",
+  "options": [
+   "Less than the true value",
+   "More than the true value",
+   "Exactly equal",
+   "Always double"
+  ],
+  "answer": 0,
+  "explain": "Its finite resistance in parallel lowers the effective resistance, so the p.d. drops slightly.",
+  "kind": "concept",
+  "id": "9b9298bb-27b7-4713-a535-c28ad3fa596b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "A galvanometer of resistance G is converted to a voltmeter whose range is n times Ig·G. Series R = ?",
+  "formula": "R = (n − 1)G",
+  "options": [
+   "(n − 1)G",
+   "nG",
+   "G/(n − 1)",
+   "G/n"
+  ],
+  "answer": 0,
+  "explain": "V = nIgG = Ig(G+R) gives R = (n−1)G.",
+  "kind": "formula",
+  "id": "7448dc17-255f-4304-bb9f-a6bf4c854feb",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "A galvanometer's voltage range (Ig·G) is to be doubled. The series resistance needed is?",
+  "formula": "",
+  "options": [
+   "G",
+   "2G",
+   "G/2",
+   "G/3"
+  ],
+  "answer": 0,
+  "explain": "R = (n−1)G with n = 2 gives R = G.",
+  "kind": "result",
+  "id": "6d2fc279-8db7-456c-9585-a5e12e73dc65",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "Voltmeter made with series R: the fraction of the measured V that appears across the galvanometer is?",
+  "formula": "",
+  "options": [
+   "G/(G+R)",
+   "R/(G+R)",
+   "G/R",
+   "(G+R)/G"
+  ],
+  "answer": 0,
+  "explain": "Series voltage division: the share across G is G/(G+R).",
+  "kind": "formula",
+  "id": "970ea56a-f558-4e75-8d05-7a5287931fdc",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "On converting a galvanometer to a voltmeter, the full-scale deflection current Ig?",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Increases by factor n",
+   "Decreases by factor n",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "The coil still deflects fully at the same Ig. Only the corresponding voltage range changes.",
+  "kind": "concept",
+  "id": "665d1675-3b9d-4b7b-bac2-d7a242b2de24",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "Number of turns N of a galvanometer is doubled (R ∝ N). Voltage sensitivity becomes?",
+  "formula": "θ/V = NBA/(kR)",
+  "options": [
+   "Unchanged",
+   "Doubled",
+   "Halved",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "Current sensitivity doubles, but R doubles too, so θ/V stays the same.",
+  "kind": "exception",
+  "id": "9a2f4d0b-57b7-4fdc-833e-286ee1889fba",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "A voltmeter of larger range, made from the same galvanometer, needs a total resistance that is?",
+  "formula": "",
+  "options": [
+   "Larger",
+   "Smaller",
+   "Same",
+   "Equal to G"
+  ],
+  "answer": 0,
+  "explain": "Since R_V = V/Ig and Ig is fixed, a larger V means a larger R_V.",
+  "kind": "trend",
+  "id": "6577dfd6-533c-4fce-bfd3-d6d38ef60978",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "Pointer deflection of a galvanometer-based voltmeter is related to the measured voltage as?",
+  "formula": "",
+  "options": [
+   "θ ∝ V (linear scale)",
+   "θ ∝ V²",
+   "θ ∝ 1/V",
+   "θ ∝ √V"
+  ],
+  "answer": 0,
+  "explain": "Ig ∝ V through fixed R_V, and θ ∝ Ig, so the scale is linear.",
+  "kind": "concept",
+  "id": "41072b2c-7da5-47f1-80b5-8e142c06ca6b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "The resistance of a voltmeter made from a galvanometer G is compared with G as?",
+  "formula": "",
+  "options": [
+   "Much greater than G",
+   "Slightly less than G",
+   "Equal to G",
+   "Much less than G"
+  ],
+  "answer": 0,
+  "explain": "The large series resistance is added to G, so R_V = G + R ≫ G.",
+  "kind": "fact",
+  "id": "8b906539-d77d-47d0-ac6f-38fcbe432e75",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "Compared with the galvanometer alone, deflection per unit volt of the converted voltmeter is?",
+  "formula": "",
+  "options": [
+   "Smaller",
+   "Larger",
+   "Unchanged",
+   "Infinite"
+  ],
+  "answer": 0,
+  "explain": "The total resistance rises, so less current flows per volt and the deflection per volt falls.",
+  "kind": "trend",
+  "id": "cbcb8380-527d-49c3-b2f3-b0f717b590a4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "Two identical coaxial loops carry equal currents in opposite senses. Net B at the midpoint of their axis is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Same as one loop's centre value",
+   "Twice one loop's field there",
+   "Along the axis, but non-zero"
+  ],
+  "answer": 0,
+  "explain": "By symmetry the two axial fields are equal and opposite at the midpoint, so they cancel.",
+  "kind": "concept",
+  "id": "0d6fbb6e-7f59-45fa-ace4-8a4e07ac6552",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Concentric coplanar loops of radii R and 2R carry currents I₁, I₂ in opposite senses. B = 0 at centre if I₂/I₁ =",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1",
+   "2",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Fields cancel when I₁/R = I₂/2R, which gives I₂ = 2I₁.",
+  "kind": "result",
+  "id": "4ae2df26-1fc0-4762-8a71-6fe56ab52c5e",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "In the Biot–Savart law for a circular loop's centre, why does dB from all elements add directly as scalars?",
+  "formula": "dB = μ₀I dl/(4πR²)",
+  "options": [
+   "All dB point the same way and dl ⟂ r",
+   "dl is parallel to r",
+   "The dB components cancel along the axis",
+   "dB varies as 1/R³"
+  ],
+  "answer": 0,
+  "explain": "Each dl ⟂ r so sinθ = 1, and every dB is along the axis in the same direction.",
+  "kind": "concept",
+  "id": "22bb7743-0cf1-4f87-a173-008699d937bd",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Direction of dB due to a current element I dl at position vector r̂ from the element?",
+  "formula": "dB ∥ I dl × r̂",
+  "options": [
+   "Along I dl × r̂",
+   "Along r̂",
+   "Along dl",
+   "Along r̂ × I dl"
+  ],
+  "answer": 0,
+  "explain": "dB is perpendicular to both dl and r̂ and follows I dl × r̂, not r̂ × dl.",
+  "kind": "concept",
+  "id": "7317ae49-1222-40ea-856f-978e85d0b563",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "A closed loop does NOT enclose a long current-carrying wire. The value of ∮B·dl over it is:",
+  "formula": "∮B·dl = μ₀I_enclosed",
+  "options": [
+   "Zero",
+   "μ₀I",
+   "μ₀I/2",
+   "Depends on loop shape"
+  ],
+  "answer": 0,
+  "explain": "I_enclosed = 0, so the line integral is zero even though B is nonzero at points on the loop.",
+  "kind": "concept",
+  "id": "7a44d85e-f613-4fba-9756-3fd8107b49ce",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "A finite wire subtends 30° on each side of the normal at P. Its B at P compared with an infinite wire at the same r?",
+  "formula": "",
+  "options": [
+   "Half",
+   "Equal",
+   "Double",
+   "One-fourth"
+  ],
+  "answer": 0,
+  "explain": "B = (μ₀I/4πr)(sin30°+sin30°) = μ₀I/4πr, which is half of μ₀I/2πr.",
+  "kind": "result",
+  "id": "0f8f1027-2b41-4668-bd84-13e7d21e87d5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Two long crossing insulated wires lie along +x and +y axes, each with current I outward. Net B at (a, a)?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "μ₀I/2πa",
+   "√2 μ₀I/2πa",
+   "μ₀I/πa"
+  ],
+  "answer": 0,
+  "explain": "Each gives μ₀I/2πa, along +z and −z respectively, so they cancel at (a, a).",
+  "kind": "result",
+  "id": "0e03a014-a6e9-4bc7-9f4d-c4afd2ded3f9",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "For a finite straight wire of length L, B at the midpoint of its perpendicular bisector at r ≪ L tends to:",
+  "formula": "",
+  "options": [
+   "μ₀I/2πr",
+   "μ₀I/4πr",
+   "μ₀I/πr",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Both angles approach 90°, so sinα + sinβ → 2 and B → μ₀I/2πr, the infinite-wire value.",
+  "kind": "result",
+  "id": "3ad29bef-5ff3-4931-aaa1-f6e05d5724e8",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Long solid cylinder (radius R, uniform current). B at r = R/2 versus B at r = 2R?",
+  "formula": "inside: μ₀Ir/2πR²; outside: μ₀I/2πr",
+  "options": [
+   "Equal",
+   "B(R/2) is twice B(2R)",
+   "B(2R) is twice B(R/2)",
+   "B(R/2) is four times B(2R)"
+  ],
+  "answer": 0,
+  "explain": "Inside, B = μ₀I/4πR at R/2. Outside, B = μ₀I/(2π·2R) = μ₀I/4πR. Both are equal.",
+  "kind": "result",
+  "id": "6e467ba5-320c-4023-ac57-e6ace4690e70",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Viewed from one end of a solenoid, the current circulates anticlockwise. That end behaves as a:",
+  "formula": "",
+  "options": [
+   "North pole",
+   "South pole",
+   "Neutral end with no polarity",
+   "North pole only if a core is present"
+  ],
+  "answer": 0,
+  "explain": "Anticlockwise current gives a north face and clockwise gives a south face, by the right-hand rule. B inside points toward the north end.",
+  "kind": "concept",
+  "id": "667424a2-a69d-4011-ae2b-8db2da12b557",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field inside solenoid and toroid"
+ },
+ {
+  "prompt": "Ampère's law gives B = μ₀nI for a solenoid using a loop whose inside side lies:",
+  "formula": "∮B·dl = μ₀I_enclosed",
+  "options": [
+   "Parallel to the axis, inside the solenoid",
+   "Perpendicular to the axis, inside",
+   "Along a circle coaxial with the solenoid",
+   "Entirely outside the solenoid"
+  ],
+  "answer": 0,
+  "explain": "A rectangular loop has one side inside parallel to the axis. The outside side contributes zero, and the sides perpendicular to the axis give B·dl = 0.",
+  "kind": "concept",
+  "id": "6ac569eb-dec4-4fba-8f83-535c176ddf18",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field inside solenoid and toroid"
+ },
+ {
+  "prompt": "A current loop is placed in a uniform magnetic field. The net force and torque on it are respectively:",
+  "formula": "τ = M × B",
+  "options": [
+   "Zero force, possibly nonzero torque",
+   "Nonzero force, zero torque",
+   "Zero force, always zero torque",
+   "Nonzero force, nonzero torque"
+  ],
+  "answer": 0,
+  "explain": "Uniform B gives ΣF = 0, but τ = M × B is nonzero unless M ∥ B.",
+  "kind": "concept",
+  "id": "5b3dbfcb-a473-423d-a05a-127ffa4fd72d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "A wire of length L carries current I perpendicular to B. If the current is reversed, the force magnitude and direction:",
+  "formula": "F = I L × B",
+  "options": [
+   "Same magnitude, reversed direction",
+   "Same magnitude, same direction",
+   "Magnitude doubles, same direction",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "F = I L × B is linear in I, so reversing I reverses F with the same magnitude.",
+  "kind": "concept",
+  "id": "c5563084-deb1-4b1a-8232-55b1b820ebbd",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "Two parallel proton beams move in the same direction. The magnetic force between the beams is:",
+  "formula": "",
+  "options": [
+   "Attractive",
+   "Repulsive",
+   "Zero",
+   "Perpendicular to the line joining them"
+  ],
+  "answer": 0,
+  "explain": "Parallel moving charges are parallel currents, so the magnetic force attracts (it opposes the electric repulsion).",
+  "kind": "concept",
+  "id": "22ced3a2-ac1d-4468-9f9d-9d973d705140",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Two long parallel wires carry unequal currents in opposite directions. Net B is zero at a point:",
+  "formula": "",
+  "options": [
+   "Between them, nearer the smaller current",
+   "Between them, nearer the larger current",
+   "Outside them, nearer the smaller current",
+   "Outside them, nearer the larger current"
+  ],
+  "answer": 2,
+  "explain": "Between the wires the fields add. Outside, they cancel where B₁ = B₂, which is nearer the smaller current.",
+  "kind": "concept",
+  "id": "4d7cf215-0fee-4c01-90c1-85815665c0fb",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "A current loop lies in the plane of a long straight wire; its nearer side carries current parallel to the wire. Net force:",
+  "formula": "",
+  "options": [
+   "Attraction towards the wire",
+   "Repulsion from the wire",
+   "Zero",
+   "Only a torque, no net force"
+  ],
+  "answer": 0,
+  "explain": "The near side is attracted more strongly (F ∝ 1/d) than the far side is repelled, so the net force is attractive.",
+  "kind": "concept",
+  "id": "1bd29361-1293-4125-9327-e4a8e7f8601f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Direction of the magnetic moment of a current loop is given by:",
+  "formula": "",
+  "options": [
+   "Right-hand thumb rule along the current sense",
+   "Along the plane of the loop",
+   "Opposite to the area vector",
+   "Along the direction of the current at the top"
+  ],
+  "answer": 0,
+  "explain": "Curl fingers along the current; the thumb gives the direction of the area vector A and m = NIA.",
+  "kind": "concept",
+  "id": "f8859912-75e4-4360-bfe5-1da6b5b9bff7",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "A circular loop of radius R carries current I. Its magnetic moment is:",
+  "formula": "m = I·πR²",
+  "options": [
+   "πR²I",
+   "2πRI",
+   "πRI/2",
+   "πR²I/2"
+  ],
+  "answer": 0,
+  "explain": "m = IA with A = πR² for a single turn.",
+  "kind": "formula",
+  "id": "fc1e50f1-6a37-4c20-8185-64ccfab16320",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "Galvanometer (resistance G) with shunt S: ratio of current in galvanometer to current in shunt is",
+  "formula": "I_g·G = I_s·S",
+  "options": [
+   "G/S",
+   "S/G",
+   "S/(G+S)",
+   "G/(G+S)"
+  ],
+  "answer": 1,
+  "explain": "The p.d. is equal across both, so I_g/I_s = S/G.",
+  "kind": "formula",
+  "id": "e2b65847-5e7b-4be3-a463-f1928fde2d2d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "At full-scale deflection, the p.d. across a converted ammeter (galvanometer G, full-scale current I_g) is",
+  "formula": "V = I_g·G",
+  "options": [
+   "I·G",
+   "I_g·G",
+   "I·S/(G+S)",
+   "I_g·(G+S)"
+  ],
+  "answer": 1,
+  "explain": "The galvanometer carries I_g at full scale, so V = I_gG (same as across S).",
+  "kind": "result",
+  "id": "7d8cd2d9-8dcd-4b66-9bbb-facdb8055122",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "The shunt wire of an ammeter is made thick mainly because",
+  "formula": "",
+  "options": [
+   "it carries most of the current",
+   "it must have a high resistance",
+   "it has to be strongly magnetic",
+   "it must be a good insulator"
+  ],
+  "answer": 0,
+  "explain": "Most of the current passes through the shunt, so a thick, low-resistance wire is needed to avoid heating.",
+  "kind": "concept",
+  "id": "dbc192b6-a2f1-426f-bab0-95df6417d1dd",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "The ammeter scale is uniform (linear) because the moving-coil galvanometer uses",
+  "formula": "",
+  "options": [
+   "a uniform field with a soft iron core",
+   "a radial magnetic field",
+   "a very weak magnet",
+   "a phosphor bronze suspension only"
+  ],
+  "answer": 1,
+  "explain": "A radial field keeps torque NIAB constant, so deflection θ ∝ I.",
+  "kind": "concept",
+  "id": "4010963a-2506-4ba1-9c85-a5d74b946ba2",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "If the shunt of an ammeter gets disconnected (open) while measuring a large current, then",
+  "formula": "",
+  "options": [
+   "the reading doubles",
+   "the full current flows through the galvanometer",
+   "the reading becomes zero",
+   "the ammeter resistance becomes zero"
+  ],
+  "answer": 1,
+  "explain": "With no parallel path, the entire current passes through the coil and may burn it.",
+  "kind": "exception",
+  "id": "0bb35c24-209b-41fa-a34c-ae7bb7f53d99",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "To get the same range multiplication n, a galvanometer of larger resistance G needs a shunt that is",
+  "formula": "S = G/(n−1)",
+  "options": [
+   "smaller, S ∝ 1/G",
+   "larger, S ∝ G",
+   "the same for all G",
+   "independent of n"
+  ],
+  "answer": 1,
+  "explain": "For fixed n, S = G/(n−1) is directly proportional to G.",
+  "kind": "trend",
+  "id": "8a6c25e6-039c-4ed4-bf1d-9de95642849a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "An ammeter has range n·I_g using a shunt. The current through the shunt at full scale is",
+  "formula": "",
+  "options": [
+   "I_g/n",
+   "(n−1)I_g",
+   "n·I_g",
+   "I_g/(n−1)"
+  ],
+  "answer": 1,
+  "explain": "Total current nI_g minus I_g through the galvanometer gives (n−1)I_g.",
+  "kind": "result",
+  "id": "c56c7e32-608a-4513-9fa9-e623b3bc10c5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "By adding a shunt, the maximum current that the instrument can measure is always",
+  "formula": "",
+  "options": [
+   "less than I_g",
+   "equal to I_g",
+   "greater than I_g",
+   "unchanged"
+  ],
+  "answer": 2,
+  "explain": "A shunt only extends the range; the new range I = I_g(G+S)/S exceeds I_g.",
+  "kind": "concept",
+  "id": "27533e5c-139b-4d19-bdf9-4b6e5d5c7544",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "A multirange ammeter obtains its different ranges by",
+  "formula": "",
+  "options": [
+   "changing the magnet strength",
+   "switching in different shunt resistances",
+   "changing the number of turns online",
+   "using series resistors of different values"
+  ],
+  "answer": 1,
+  "explain": "Different parallel shunts, selected by a switch, give different current ranges.",
+  "kind": "fact",
+  "id": "19d4eb14-3a9a-44f3-a7a8-9c57dbd0adf4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "Two voltmeters of ranges V₁ and V₂ are made from the same galvanometer. Ratio of their resistances?",
+  "formula": "R_v = V/I_g",
+  "options": [
+   "V₁ : V₂",
+   "V₂ : V₁",
+   "V₁² : V₂²",
+   "1 : 1"
+  ],
+  "answer": 0,
+  "explain": "R_v = V/I_g with the same I_g, so resistance is proportional to the range.",
+  "kind": "result",
+  "id": "47065bcd-cd92-454d-8420-727c614eafcf",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "For an accurate reading, the resistance of a voltmeter should be compared with the resistance across which it is connected:",
+  "formula": "",
+  "options": [
+   "Much greater",
+   "Much smaller",
+   "Exactly equal",
+   "Half of it"
+  ],
+  "answer": 0,
+  "explain": "A high R_V draws negligible current, so the circuit is hardly disturbed and the reading is close to the true value.",
+  "kind": "concept",
+  "id": "e93070ae-0a49-477d-b752-9a1f1bffd851",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "A voltmeter is connected across a resistor R in a circuit. The effective resistance between those points becomes:",
+  "formula": "R·R_V/(R+R_V)",
+  "options": [
+   "Less than R",
+   "Greater than R",
+   "Equal to R",
+   "Equal to R + R_V"
+  ],
+  "answer": 0,
+  "explain": "The voltmeter is in parallel with R, so the combined resistance is less than R. This is why it reads low.",
+  "kind": "concept",
+  "id": "751850cd-2355-4e95-b319-54823710de38",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to voltmeter conversion"
+ },
+ {
+  "prompt": "Coaxial cable carries equal and opposite currents in inner and outer conductors. B outside the cable is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "μ₀I/2πr",
+   "μ₀I/πr",
+   "Same as that of the inner conductor alone"
+  ],
+  "answer": 0,
+  "explain": "Net enclosed current is zero, so Ampere's law gives B = 0 outside.",
+  "kind": "result",
+  "id": "bef34909-719b-4c08-88d1-6b22e9e658f7",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "The magnetic force between two long parallel current-carrying wires acts along:",
+  "formula": "",
+  "options": [
+   "The length of the wires",
+   "The line joining them, perpendicular to wires",
+   "Perpendicular to the plane of the wires",
+   "The direction of the net current"
+  ],
+  "answer": 1,
+  "explain": "B of one wire is perpendicular to the plane of the wires, so F = I L×B lies in that plane, along the line joining them.",
+  "kind": "concept",
+  "id": "ef907c10-571b-4b21-86f9-162a6e97d76d",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "The older (pre-2019) definition of the ampere effectively fixed μ₀ at:",
+  "formula": "2×10⁻⁷ = μ₀/2π (for 1 A, 1 A, 1 m)",
+  "options": [
+   "2×10⁻⁷ N/A²",
+   "4π×10⁻⁷ N/A²",
+   "π×10⁻⁷ N/A²",
+   "4π×10⁻⁶ N/A²"
+  ],
+  "answer": 1,
+  "explain": "Force 2×10⁻⁷ N/m for 1 A each at 1 m gives μ₀ = 4π×10⁻⁷ N/A² (T·m/A).",
+  "kind": "fact",
+  "id": "aba2a532-23af-4a19-bc53-cd7b61ac2c05",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Galvanometer G with shunt S in parallel: ratio of power dissipated in galvanometer to that in shunt is:",
+  "formula": "P = V²/R",
+  "options": [
+   "S/G",
+   "G/S",
+   "(G/S)²",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Same p.d. across both, so P ∝ 1/R, giving P_g/P_s = S/G.",
+  "kind": "result",
+  "id": "d36c55ed-a581-463e-8137-246a217b18d0",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "In a converted ammeter (G with shunt S), the galvanometer deflection θ is directly proportional to which quantity?",
+  "formula": "I_g = I·S/(G+S)",
+  "options": [
+   "Total current I in the circuit",
+   "Square of the total current I",
+   "Shunt resistance S only",
+   "Voltage across the shunt only"
+  ],
+  "answer": 0,
+  "explain": "The galvanometer carries a fixed fraction S/(G+S) of I, so θ ∝ I_g ∝ I.",
+  "kind": "concept",
+  "id": "996b84b5-3e36-43e7-8e98-bdfd12ea0bcf",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "The constants μ₀ and ε₀ are related to the speed of light c by:",
+  "formula": "",
+  "options": [
+   "μ₀ε₀ = c²",
+   "μ₀ε₀ = 1/c",
+   "μ₀ε₀ = 1/c²",
+   "μ₀ε₀ = c"
+  ],
+  "answer": 2,
+  "explain": "c = 1/√(μ₀ε₀), so μ₀ε₀ = 1/c².",
+  "kind": "fact",
+  "id": "ad49406c-531d-4953-aa7a-7142c61de7b7",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Along the axis of a circular current loop, the field magnitude is maximum at:",
+  "formula": "B = μ₀IR²/2(R²+x²)^(3/2)",
+  "options": [
+   "The centre of the loop (x = 0)",
+   "x = R",
+   "x = R/√2",
+   "x → ∞"
+  ],
+  "answer": 0,
+  "explain": "The denominator (R²+x²)^(3/2) is smallest at x = 0, so B is maximum there and falls off on both sides.",
+  "kind": "trend",
+  "id": "28d112c5-75df-468f-9961-018d07648e7b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "Three-quarter circular wire of radius R carries current I. Field at its centre is:",
+  "formula": "B = (3/4)·μ₀I/2R",
+  "options": [
+   "3μ₀I/8R",
+   "3μ₀I/4R",
+   "μ₀I/4R",
+   "3μ₀I/2R"
+  ],
+  "answer": 0,
+  "explain": "B = (θ/2π)(μ₀I/2R) with θ = 3π/2 gives 3μ₀I/8R.",
+  "kind": "result",
+  "id": "1ba5dbf5-00ac-484a-bc5b-34d74931dd4c",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "An electron moves with velocity v. At a point with position vector r from it, the field B is along:",
+  "formula": "B ∝ q (v × r)",
+  "options": [
+   "r × v",
+   "v × r",
+   "Along v",
+   "Along r"
+  ],
+  "answer": 0,
+  "explain": "B ∝ q(v × r), and q is negative for an electron, so B is along −(v × r) = r × v.",
+  "kind": "concept",
+  "id": "3663ffa8-5d06-44e7-b851-bcbe06bda2d5",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Biot-Savart law"
+ },
+ {
+  "prompt": "A ring of radius R, charge Q rotates at angular speed ω. Field at its centre is:",
+  "formula": "I = Qω/2π",
+  "options": [
+   "μ₀Qω/(4πR)",
+   "μ₀Qω/(2R)",
+   "μ₀Qω/(2πR)",
+   "μ₀Qω R/(4π)"
+  ],
+  "answer": 0,
+  "explain": "Equivalent current I = Qω/2π, so B = μ₀I/2R = μ₀Qω/(4πR).",
+  "kind": "formula",
+  "id": "faf22acc-29c9-4b92-baa8-6aea2bff6dd2",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Concentric coplanar loops of radii R and 2R carry equal current I in the same sense. Net B at centre:",
+  "formula": "",
+  "options": [
+   "3μ₀I/4R",
+   "μ₀I/4R",
+   "μ₀I/R",
+   "3μ₀I/2R"
+  ],
+  "answer": 0,
+  "explain": "B = μ₀I/2R + μ₀I/4R = 3μ₀I/4R; same sense, so the fields add.",
+  "kind": "result",
+  "id": "b5521399-cf8a-479b-9ad3-bdcaf5ebe051",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "Current I enters a uniform circular ring at A, leaves at B (any two points). Net B at the ring's centre is:",
+  "formula": "B ∝ I·l for an arc, and I₁l₁ = I₂l₂",
+  "options": [
+   "μ₀I/2R",
+   "μ₀I/4R",
+   "Zero",
+   "μ₀I/4πR"
+  ],
+  "answer": 2,
+  "explain": "Parallel arcs have I₁l₁ = I₂l₂, so their fields at the centre are equal and opposite and cancel.",
+  "kind": "result",
+  "id": "f35dda2a-b4e1-4ca9-9f06-b1ef8d4c109c",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field on axis/centre of circular loop"
+ },
+ {
+  "prompt": "For a long solid current-carrying cylinder, B is maximum at:",
+  "formula": "",
+  "options": [
+   "The surface, r = R",
+   "The axis, r = 0",
+   "r = R/2",
+   "Far away from it"
+  ],
+  "answer": 0,
+  "explain": "B rises linearly as r up to R, then falls as 1/r, so the peak is at the surface.",
+  "kind": "graph",
+  "id": "492a2d3c-d419-426f-9784-fbf61dfdb068",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "A long wire carries I. For any closed loop of any shape enclosing it once, ∮B·dl equals:",
+  "formula": "",
+  "options": [
+   "μ₀I, independent of shape",
+   "μ₀I/2π, for a circular loop only",
+   "Larger for a longer loop",
+   "Zero unless the loop is symmetric"
+  ],
+  "answer": 0,
+  "explain": "Ampere's law depends only on the enclosed current, not on the loop's shape.",
+  "kind": "concept",
+  "id": "133e0018-6772-4d2a-9fc2-e8d9f8d46eef",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "∮B·dl along a circular arc centred on a long wire (current I), subtending angle θ at the wire:",
+  "formula": "",
+  "options": [
+   "μ₀Iθ/2π",
+   "μ₀Iθ",
+   "μ₀I/2π",
+   "μ₀Iθ/4π"
+  ],
+  "answer": 0,
+  "explain": "B is constant on the arc, so B·rθ = (μ₀I/2πr)·rθ = μ₀Iθ/2π.",
+  "kind": "result",
+  "id": "89970478-9e47-4624-9484-f91fcd78d169",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Four long parallel wires at square corners carry equal currents, alternately in and out. B at the centre:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Along a diagonal",
+   "Along a side",
+   "4 × field of one wire"
+  ],
+  "answer": 0,
+  "explain": "Each diagonal pair has the same current direction, so their fields at the centre cancel.",
+  "kind": "concept",
+  "id": "8d6ec1f6-e45c-4025-9336-d1c22f5b3598",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Coaxial cable: inner conductor current I, outer −I. B between them at distance r from the axis:",
+  "formula": "",
+  "options": [
+   "μ₀I/2πr",
+   "Zero",
+   "μ₀I/πr",
+   "μ₀Ir/2πa²"
+  ],
+  "answer": 0,
+  "explain": "Amperian loop between the conductors encloses only the inner current I.",
+  "kind": "result",
+  "id": "a6024dc6-6f91-4721-93f9-8f156ca1b1fd",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Long cylinder with current density J ∝ r (from the axis). Inside, B varies as:",
+  "formula": "",
+  "options": [
+   "r²",
+   "r",
+   "r³",
+   "1/r"
+  ],
+  "answer": 0,
+  "explain": "I_enc ∝ ∫r·r dr ∝ r³; B = μ₀I_enc/2πr ∝ r².",
+  "kind": "trend",
+  "id": "6b608abf-4844-4e10-9bde-5e61c1edaac6",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "An electron moves parallel to the current direction near a long straight wire. The force on it is:",
+  "formula": "",
+  "options": [
+   "Away from the wire",
+   "Towards the wire",
+   "Parallel to the wire",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Electron motion is equivalent to a current opposite to I, and antiparallel currents repel.",
+  "kind": "concept",
+  "id": "e27f686f-2354-4bc7-8c25-964edffa6701",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Wire of length L; B at a point on its perpendicular bisector at distance r:",
+  "formula": "",
+  "options": [
+   "μ₀I L/(2πr√(L²+4r²))",
+   "μ₀I L/(4πr√(L²+r²))",
+   "μ₀I L/(πr√(L²+4r²))",
+   "μ₀I/(2πr)"
+  ],
+  "answer": 0,
+  "explain": "Each half contributes μ₀I sinα/4πr, with sinα = (L/2)/√(r²+L²/4); the two halves add.",
+  "kind": "formula",
+  "id": "693b754b-3179-4df3-a956-88b61c3c6ef6",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "B at 2 cm from a long straight wire carrying 10 A is:",
+  "formula": "μ₀/4π = 10⁻⁷ T·m/A",
+  "options": [
+   "10⁻⁴ T",
+   "10⁻⁵ T",
+   "10⁻³ T",
+   "2×10⁻⁴ T"
+  ],
+  "answer": 0,
+  "explain": "B = 2×10⁻⁷×10/0.02 = 10⁻⁴ T.",
+  "kind": "result",
+  "id": "d8f30867-21c3-4371-b93f-c4006172c287",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Field of finite and infinite straight wire"
+ },
+ {
+  "prompt": "Infinite plane sheet, uniform surface current density K. B at distance d from it is:",
+  "formula": "",
+  "options": [
+   "μ₀K",
+   "μ₀K/2",
+   "μ₀K/(2πd)",
+   "μ₀K/d"
+  ],
+  "answer": 1,
+  "explain": "A rectangular Amperian loop gives 2Bl = μ₀Kl, so B = μ₀K/2, uniform and independent of d.",
+  "kind": "result",
+  "id": "e37bef2e-0ffb-41ef-9ddf-20b716980f15",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Long coaxial cable carries current I in the inner conductor. B between the conductors at distance r is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "μ₀I/(πr)",
+   "μ₀I/(2πr)",
+   "μ₀Ir/(2πa²)"
+  ],
+  "answer": 2,
+  "explain": "A circular loop between the conductors encloses only the inner current I, so B = μ₀I/(2πr).",
+  "kind": "result",
+  "id": "007d8bf7-3a24-4461-b401-b6087d6a8431",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Long solid wire of radius R carries uniform current. B at r = R/2 compared with B at r = 2R is:",
+  "formula": "",
+  "options": [
+   "Half",
+   "Double",
+   "Four times",
+   "Equal"
+  ],
+  "answer": 3,
+  "explain": "Inside: μ₀I/(4πR). Outside at 2R: μ₀I/(4πR). The two values are equal.",
+  "kind": "result",
+  "id": "d88f9395-c84e-4613-a682-99267c6aa433",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Reshaping an Amperian loop without crossing any current changes ∮B·dl by:",
+  "formula": "∮B·dl = μ₀I_enc",
+  "options": [
+   "A factor equal to the area change",
+   "Nothing; it stays μ₀I_enc",
+   "A factor equal to the perimeter change",
+   "It becomes zero"
+  ],
+  "answer": 1,
+  "explain": "The circulation depends only on the enclosed current, not on the shape or size of the loop.",
+  "kind": "concept",
+  "id": "1513b70a-ff9d-4210-a20c-b5f6b35b0b09",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "A loop encloses 5 A up and 3 A down; a 8 A wire lies outside. |∮B·dl| is:",
+  "formula": "",
+  "options": [
+   "16μ₀",
+   "8μ₀",
+   "2μ₀",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Only enclosed currents count, algebraically: 5 − 3 = 2 A, so the circulation is 2μ₀. The outside wire does not enter.",
+  "kind": "result",
+  "id": "6d02fe55-034a-4b0b-8b4b-c44779cd175c",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Long ideal solenoid: n and I fixed, its radius is doubled. The inner field becomes:",
+  "formula": "B = μ₀nI",
+  "options": [
+   "Doubled",
+   "Halved",
+   "Unchanged",
+   "Four times"
+  ],
+  "answer": 2,
+  "explain": "B = μ₀nI contains no radius, so the field stays uniform and unchanged.",
+  "kind": "concept",
+  "id": "f3d89ddd-c864-4a74-b05b-f8926e028852",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "Two parallel infinite sheets carry equal, opposite surface currents K. B between them is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "μ₀K/2",
+   "μ₀K",
+   "2μ₀K"
+  ],
+  "answer": 2,
+  "explain": "Each sheet gives μ₀K/2. They add between the sheets, so B = μ₀K there, and cancel outside.",
+  "kind": "result",
+  "id": "67c07480-4436-426c-83bf-daab520a91c1",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Ampere's circuital law"
+ },
+ {
+  "prompt": "A proton and an electron move with the same velocity in the same uniform B. Their magnetic forces are:",
+  "formula": "F = q(v × B)",
+  "options": [
+   "Equal in magnitude, opposite in direction",
+   "Equal in magnitude, same direction",
+   "Unequal, opposite in direction",
+   "Unequal, same direction"
+  ],
+  "answer": 0,
+  "explain": "|q| is the same, so the magnitudes are equal; the opposite sign of q reverses the direction of F.",
+  "kind": "concept",
+  "id": "6d6e6e10-da88-46a6-993a-647835552188",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "The ratio E/B has the dimensions of:",
+  "formula": "qE = qvB ⇒ v = E/B",
+  "options": [
+   "Velocity",
+   "Acceleration",
+   "Momentum",
+   "Frequency"
+  ],
+  "answer": 0,
+  "explain": "In crossed fields qE = qvB, so E/B = v, which has the dimensions of velocity.",
+  "kind": "unit",
+  "id": "82e880f0-b58f-419f-8688-00ca96054b34",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "A charge is released from rest in uniform E and B fields that are parallel. It moves:",
+  "formula": "",
+  "options": [
+   "Along a straight line along E",
+   "In a circle",
+   "In a helix",
+   "In a parabola"
+  ],
+  "answer": 0,
+  "explain": "At rest, F_B = 0, so only qE acts. The velocity stays parallel to B, so F_B stays zero.",
+  "kind": "concept",
+  "id": "daaa45c9-b786-4e0b-85fa-1d7f1e1260f4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "A positive charge moves in a plane perpendicular to a uniform B directed into the page. It circulates:",
+  "formula": "",
+  "options": [
+   "Anticlockwise",
+   "Clockwise",
+   "In a straight line",
+   "Along a spiral with growing radius"
+  ],
+  "answer": 0,
+  "explain": "For v = +x and B = −z, F = q v×B points along +y, i.e. to the left of v, so the sense is anticlockwise.",
+  "kind": "fact",
+  "id": "cfe53409-0b0f-49fe-815b-762ba3c6fd04",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "A charge enters a uniform E field with velocity perpendicular to E (B = 0). Its path is a:",
+  "formula": "",
+  "options": [
+   "Circle",
+   "Parabola",
+   "Helix",
+   "Straight line"
+  ],
+  "answer": 1,
+  "explain": "Constant force qE ⟂ v₀ gives uniform acceleration sideways, so the path is a parabola (like projectile motion).",
+  "kind": "concept",
+  "id": "71405a77-5aa9-4314-be35-d8856696ee13",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "A charge enters a wide uniform B region perpendicular to its straight edge and to B. Time spent inside is:",
+  "formula": "t = T/2",
+  "options": [
+   "2πm/(qB)",
+   "πm/(qB)",
+   "πm/(2qB)",
+   "mv/(qB)"
+  ],
+  "answer": 1,
+  "explain": "It completes a semicircle before leaving the field, so t = T/2 = πm/(qB), independent of speed.",
+  "kind": "result",
+  "id": "1572b18e-8053-44f5-b90a-081ba8fa4609",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Lorentz force on moving charge"
+ },
+ {
+  "prompt": "A circular loop of radius R, current I, lies in a uniform B ⟂ its plane. Tension in the loop is:",
+  "formula": "2T = B I (2R)",
+  "options": [
+   "BIR",
+   "2BIR",
+   "πBIR",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "For half the ring, the net force is 2BIR, balanced by 2T. So T = BIR.",
+  "kind": "result",
+  "id": "39d91160-3e28-4084-9e74-923d08d5b7f4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "A loosely hanging spring (slinky) carries a current through its coils. The coils:",
+  "formula": "",
+  "options": [
+   "Move closer (spring contracts)",
+   "Move apart (spring expands)",
+   "Stay unchanged",
+   "Twist about the axis"
+  ],
+  "answer": 0,
+  "explain": "Adjacent turns carry parallel currents, which attract, so the spring contracts.",
+  "kind": "concept",
+  "id": "5a72f2f1-fd0b-43cd-95f3-6cd26ab4ddf1",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "The magnetic force on a current-carrying wire in B is basically the force on:",
+  "formula": "",
+  "options": [
+   "Moving charge carriers, passed on to the lattice",
+   "Stationary positive ions only",
+   "The battery's electric field",
+   "Induced emf in the wire"
+  ],
+  "answer": 0,
+  "explain": "Lorentz force acts on drifting carriers and is transmitted to the wire via collisions.",
+  "kind": "concept",
+  "id": "eb875847-2013-42d4-821e-abe4dd2a2039",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "A circular ring (radius R, current I) lies in a radial magnetic field of magnitude B at every point. Net force is:",
+  "formula": "",
+  "options": [
+   "2πRIB along the axis",
+   "Zero",
+   "πR²IB along the axis",
+   "2πRIB in the plane of the ring"
+  ],
+  "answer": 0,
+  "explain": "B ⟂ current everywhere, so each element's force points along the axis. They add up to I·(2πR)·B.",
+  "kind": "result",
+  "id": "8030b45a-1770-4104-8576-db9fb3db81f2",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force on current-carrying conductor"
+ },
+ {
+  "prompt": "A loose helical spring carries a current along its turns. The spring:",
+  "formula": "",
+  "options": [
+   "Contracts",
+   "Expands",
+   "Stays unchanged",
+   "Twists about its axis"
+  ],
+  "answer": 0,
+  "explain": "Currents in adjacent turns are parallel, so the turns attract and the spring shortens.",
+  "kind": "concept",
+  "id": "5c30c5e1-34ac-4811-bb6e-2f0a6456b017",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Two neutral wires carrying currents attract or repel mainly because of:",
+  "formula": "",
+  "options": [
+   "Net electrostatic charge on the wires",
+   "Magnetic field of moving charges",
+   "Induced EMF in the wires",
+   "Thermal expansion of the wires"
+  ],
+  "answer": 1,
+  "explain": "Wires are electrically neutral, so the force is magnetic: one current moves in the other's field.",
+  "kind": "concept",
+  "id": "80555133-ab14-422f-a783-c9090ad69246",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "A positive charge moves parallel to a long wire, in the same direction as its current. The force on it is:",
+  "formula": "",
+  "options": [
+   "Away from the wire",
+   "Towards the wire",
+   "Parallel to the wire",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "The moving charge acts like a parallel current element, which is attracted to the wire.",
+  "kind": "concept",
+  "id": "33ad7511-9b78-4476-a5b4-e4355041cd99",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Two parallel electron beams, each of speed v ≪ c, in vacuum. Magnetic force : electric force between them =",
+  "formula": "μ₀ε₀ = 1/c²",
+  "options": [
+   "v²/c²",
+   "v/c",
+   "c²/v²",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "F_mag/F_elec = μ₀ε₀v² = v²/c², so repulsive electric force dominates; net force is repulsive.",
+  "kind": "result",
+  "id": "6c994b27-33c4-4a7e-8980-bd2bb13484fc",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "Two coaxial circular loops placed close together carry currents in the same sense. They:",
+  "formula": "",
+  "options": [
+   "Attract each other",
+   "Repel each other",
+   "Experience no net force",
+   "Experience only a torque"
+  ],
+  "answer": 0,
+  "explain": "Adjacent segments carry parallel currents, which attract; so the loops attract.",
+  "kind": "concept",
+  "id": "5cc16b72-88e7-4cce-aaef-21b9e19d789e",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Force between parallel currents; ampere"
+ },
+ {
+  "prompt": "A uniformly charged disc (charge Q, radius R) spins at ω about its axis. Its magnetic moment is:",
+  "formula": "m = QωR²/4",
+  "options": [
+   "QωR²/2",
+   "QωR²/3",
+   "QωR²/4",
+   "QωR²"
+  ],
+  "answer": 2,
+  "explain": "Integrating ring contributions dm = ½ω r² dq over the disc gives QωR²/4, half that of a ring.",
+  "kind": "result",
+  "id": "3608a2f8-4dda-41ed-b414-5bc2a6a85e57",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "Small loop of moment m: field magnitude at equatorial distance r (r ≫ size) is:",
+  "formula": "B_eq = μ₀m/4πr³",
+  "options": [
+   "μ₀m/4πr³",
+   "μ₀m/2πr³",
+   "μ₀m/πr³",
+   "μ₀m/4πr²"
+  ],
+  "answer": 0,
+  "explain": "The equatorial field is half the axial value and points opposite to m.",
+  "kind": "formula",
+  "id": "96b0b7cd-bb2a-4375-8a16-955309ad08cc",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A loop's current is doubled and its radius is doubled. Its magnetic moment becomes:",
+  "formula": "m = I·πr²",
+  "options": [
+   "2 times",
+   "4 times",
+   "8 times",
+   "16 times"
+  ],
+  "answer": 2,
+  "explain": "m ∝ I r², so the factor is 2 × 2² = 8.",
+  "kind": "result",
+  "id": "2bb7fa4a-da6f-4eed-b850-5f8c669cf808",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A small current loop with m parallel to B sits in a non-uniform field. The net force pulls it toward:",
+  "formula": "F = ∇(m·B)",
+  "options": [
+   "The weaker field region",
+   "The stronger field region",
+   "Perpendicular to the field lines",
+   "No force acts, only torque"
+  ],
+  "answer": 1,
+  "explain": "With m ∥ B, U = −mB falls where B is larger, so the dipole moves toward stronger field.",
+  "kind": "concept",
+  "id": "a86926b8-e5b0-4917-af0d-17d7ebbdf6bf",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A magnetic dipole m (moment of inertia J) makes small oscillations in field B. Its time period is:",
+  "formula": "T = 2π√(J/mB)",
+  "options": [
+   "2π√(J/mB)",
+   "2π√(mB/J)",
+   "2π√(JB/m)",
+   "(1/2π)√(mB/J)"
+  ],
+  "answer": 0,
+  "explain": "Restoring torque ≈ −mBθ, so ω² = mB/J, giving T = 2π√(J/mB).",
+  "kind": "formula",
+  "id": "537eea3f-47f8-4580-b9cd-4e5f85f033bc",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A wire of length L carrying current I is bent into one circular loop. Its magnetic moment is:",
+  "formula": "m = IA, with L = 2πR",
+  "options": [
+   "IL²/4π",
+   "IL²/2π",
+   "IL²/π",
+   "IL²/8π"
+  ],
+  "answer": 0,
+  "explain": "R = L/2π, so A = πR² = L²/4π, giving m = IL²/4π.",
+  "kind": "result",
+  "id": "631ce5b1-5339-40f9-9a96-fbee70dcd5d4",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Current loop as magnetic dipole moment"
+ },
+ {
+  "prompt": "A wire of fixed length L, current I, is wound into N circular turns in field B. Max torque varies as:",
+  "formula": "τ = N·I·B·π(L/2πN)²",
+  "options": [
+   "∝ 1/N",
+   "∝ N",
+   "∝ N²",
+   "Independent of N"
+  ],
+  "answer": 0,
+  "explain": "r = L/2πN, so area ∝ 1/N². Then τ = NIBA ∝ N·(1/N²) = 1/N.",
+  "kind": "result",
+  "id": "4cbee12f-4cc2-43da-9e0e-ddeabe9799fc",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "Rectangular loop with its plane parallel to B. Which sides feel a magnetic force?",
+  "formula": "",
+  "options": [
+   "Only sides perpendicular to B",
+   "Only sides parallel to B",
+   "All four sides equally",
+   "No side feels any force"
+  ],
+  "answer": 0,
+  "explain": "F = IL×B vanishes for sides parallel to B. The two sides perpendicular to B form the couple.",
+  "kind": "concept",
+  "id": "89732ad9-71cc-463b-8957-289ed2357b3a",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "In uniform B, a current loop turns to the position where the flux through it is:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Zero",
+   "Half of the maximum",
+   "Equal to μ₀I"
+  ],
+  "answer": 0,
+  "explain": "At stable equilibrium m ∥ B, so Φ = BA is maximum.",
+  "kind": "concept",
+  "id": "a20d030c-8a8d-4bc7-aac0-ddbd5f92db99",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "The graph of torque on a loop versus angle θ between m and B (0 to 2π) is:",
+  "formula": "τ = mB sinθ",
+  "options": [
+   "Sine curve, zero at 0 and π",
+   "Cosine curve, maximum at 0",
+   "Straight line through the origin",
+   "Constant"
+  ],
+  "answer": 0,
+  "explain": "τ ∝ sinθ: zero at θ = 0 and π, maximum at π/2.",
+  "kind": "graph",
+  "id": "4a50f3d8-1c29-404a-8020-ab13a34ef422",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "The product m·B (magnetic moment × field) has the same dimensions as:",
+  "formula": "U = −m·B",
+  "options": [
+   "Energy",
+   "Force",
+   "Power",
+   "Momentum"
+  ],
+  "answer": 0,
+  "explain": "A·m²·T = N·m = J, which is the dimension of energy (and of torque).",
+  "kind": "unit",
+  "id": "d34654d8-9bcb-4cdf-ae38-bc8dcced2942",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Torque on current loop in uniform B"
+ },
+ {
+  "prompt": "SI unit of current sensitivity (φ/I) of a moving coil galvanometer is:",
+  "formula": "φ/I = NBA/k",
+  "options": [
+   "rad A⁻¹",
+   "A rad⁻¹",
+   "N m A⁻¹",
+   "rad V⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Current sensitivity is deflection per unit current, so its unit is rad A⁻¹ (or div A⁻¹).",
+  "kind": "unit",
+  "id": "bfb06f89-dda1-414a-9a56-5a60774afc82",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "A moving coil galvanometer is connected to a 50 Hz ac source. Its pointer shows:",
+  "formula": "",
+  "options": [
+   "Nearly zero (mean) deflection",
+   "Deflection for the rms current",
+   "Deflection for the peak current",
+   "Deflection oscillating at 100 Hz"
+  ],
+  "answer": 0,
+  "explain": "Torque ∝ I reverses each half cycle, so the average torque is zero. The coil cannot follow 50 Hz.",
+  "kind": "fact",
+  "id": "cdc948e8-5179-4cbe-80aa-ef53ed887fee",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Besides making the field radial, the soft iron core inside the galvanometer coil also:",
+  "formula": "",
+  "options": [
+   "Increases the magnetic field strength",
+   "Reduces the coil resistance",
+   "Lowers the torsional constant",
+   "Provides eddy-current damping"
+  ],
+  "answer": 0,
+  "explain": "High-permeability soft iron concentrates the flux, increasing B in the gap and hence sensitivity.",
+  "kind": "concept",
+  "id": "bb4ffa86-b0fc-450a-b0ef-df0942559b66",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Compared with the bare galvanometer, deflection per unit total current in the ammeter made with a shunt is:",
+  "formula": "",
+  "options": [
+   "Decreased",
+   "Increased",
+   "Unchanged",
+   "Equal to NBA/k"
+  ],
+  "answer": 0,
+  "explain": "Only a small fraction G... S/(S+G) of the total current passes through the coil, so sensitivity falls.",
+  "kind": "concept",
+  "id": "60cf276c-9d66-4f16-b409-e3a08602ffa6",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Moving coil galvanometer and sensitivity"
+ },
+ {
+  "prompt": "Coil resistance G rises on heating while the shunt S stays fixed. The ammeter reading becomes",
+  "formula": "I_g = I·S/(G+S)",
+  "options": [
+   "More than the true current",
+   "Less than the true current",
+   "Unchanged",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Larger G sends a smaller fraction S/(G+S) of the current through the coil, so the deflection falls.",
+  "kind": "concept",
+  "id": "f8876e4b-c639-492f-9b90-a9c2498fe07b",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "If the shunt is wrongly connected in series with the galvanometer, the maximum current measurable is",
+  "formula": "",
+  "options": [
+   "Still I_g, as before",
+   "Increased to n·I_g",
+   "Doubled",
+   "Infinite"
+  ],
+  "answer": 0,
+  "explain": "In series the same current flows through both, so the range stays I_g and the resistance only increases.",
+  "kind": "concept",
+  "id": "bebde389-df6a-4ea8-9780-e17239094a9f",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "A shunt makes the ammeter range n times the galvanometer's. Its figure of merit (current per division) becomes",
+  "formula": "",
+  "options": [
+   "n times",
+   "1/n times",
+   "Unchanged",
+   "n² times"
+  ],
+  "answer": 0,
+  "explain": "The same deflection now represents n times the current, so current per division increases n times.",
+  "kind": "result",
+  "id": "d98261a7-74bf-4660-ba40-8d58406cde1e",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "After conversion into an ammeter, the current through the galvanometer coil at full-scale deflection",
+  "formula": "",
+  "options": [
+   "Becomes equal to the new range I",
+   "Becomes I/n",
+   "Is unchanged, equal to I_g",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Full-scale deflection needs the same coil current I_g; the shunt only diverts the extra current.",
+  "kind": "concept",
+  "id": "b749573f-5dcc-4306-826a-fc77f1e70043",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ },
+ {
+  "prompt": "A moving-coil galvanometer ammeter connected in an AC circuit shows a reading",
+  "formula": "",
+  "options": [
+   "Equal to the rms current",
+   "Equal to the peak current",
+   "Equal to the half-cycle average",
+   "Zero (the mean torque vanishes)"
+  ],
+  "answer": 3,
+  "explain": "The torque ∝ i reverses each half cycle, so the average deflection is zero; it is a DC instrument.",
+  "kind": "fact",
+  "id": "e0f02bb8-7c62-421e-b15d-e6bcb320d86e",
+  "subject": "Physics",
+  "chapter": "Magnetic Effects of Current",
+  "topic": "Galvanometer to ammeter conversion"
+ }
+]

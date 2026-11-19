@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AppState, ScrollView, StyleSheet, View } from "react-native";
+import { AppState, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -15,12 +15,12 @@ import { RapidText } from "@/src/rapid/RapidText";
 import { playSfx } from "@/src/sfx";
 import { GemColor } from "@/src/rapid/Art";
 import { ArenaBg } from "@/src/rapid/arena";
-import { decodePicks } from "@/src/rapid/scope";
+import { CARD_COUNTS, CARD_SECONDS, decodePicks, isBitsat } from "@/src/rapid/scope";
 import { ArenaWait, useArenaWait } from "@/src/rapid/ArenaWait";
 import { DiamondsWon, GemFlare, StreakGem, gemAt } from "@/src/rapid/StreakGem";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
-const LIMIT = 15000;
+const LIMIT = CARD_SECONDS * 1000;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
 type RCard = { id: string; exam?: string; subject: string; chapter: string; topic: string; prompt: string; formula: string; options: string[]; answer: number; explain: string; diagram?: Diagram };
 type Res = { card_id: string; outcome: "correct" | "incorrect" | "skipped" | "timed_out"; choice: number | null; ms: number };
@@ -34,7 +34,7 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
     <ScrollView contentContainerStyle={{ padding: space.lg, gap: space.md }} testID="rf-summary">
       <RewardPanel reward={s.reward} historical={historical} title={!sum.answered ? "No cards answered" : sum.accuracy >= 80 && sum.answered >= 10 ? "What a run!" : "Sprint complete"} />
       {s.mode === "fresh" ? <DiamondsWon reward={s.reward} /> : null}
-      <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonCyan}>{s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : "Solo Sprint"}</T>
+      <T testID="rf-summary-exam" w="bold" size={12} color={colors.custom_neonCyan}>{cards.length && cards.every((c) => isBitsat(c.subject)) ? "BITSAT" : s.exam} · {s.mode === "weak_revision" ? "Weak chapter revision" : "Solo Sprint"}</T>
       <Card style={{ alignItems: "center", gap: 4, backgroundColor: colors.surfaceInverse, borderColor: colors.surfaceInverse }}>
         <T w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>SESSION SCORE</T>
         <T w="heavy" size={44} color={colors.onSurfaceInverse} testID="rf-summary-score">{sum.score}<T w="semibold" size={22} color={colors.custom_whiteA70}> / {sum.total}</T></T>
@@ -80,13 +80,15 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
 
 function RapidSession() {
   const p = useLocalSearchParams();
-  return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.revision])} />;
+  return <RapidSessionRound key={JSON.stringify([p.r, p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.revision, p.n])} />;
 }
 
 function RapidSessionRound() {
-  const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; picks?: string; ids?: string; review?: string; diagrams?: string; revision?: string }>();
+  const p = useLocalSearchParams<{ exam?: "JEE" | "NEET"; subject?: string; chapter?: string; picks?: string; ids?: string; review?: string; diagrams?: string; revision?: string; n?: string }>();
   const picks = decodePicks(p.picks);
+  const size = (CARD_COUNTS as readonly number[]).includes(Number(p.n)) ? Number(p.n) : 30;
   const insets = useSafeAreaInsets();
+  const narrow = useWindowDimensions().width < 360;
   const router = useRouter();
   const { user } = useAuth();
   const reduced = useReducedMotion();
@@ -123,7 +125,7 @@ function RapidSessionRound() {
     }
     const run = p.review
       ? rf(`/sessions/${p.review}`, uid).then((s) => { if (!alive) return; setCards(s.cards); if (s.status === "completed") setDone(s); else setSession(s); })
-      : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: 30, revision: p.revision === "1", request_id: reqId.current,
+      : rf("/sessions", uid, { method: "POST", body: { exam: "JEE", subject: picks?.[0].subject || p.subject || "Physics", chapter: picks ? null : p.chapter || null, count: p.revision === "1" || p.ids ? 30 : size, revision: p.revision === "1", request_id: reqId.current,
           ...(picks && !p.ids && p.revision !== "1" ? { picks } : {}), ...(p.ids ? { card_ids: p.ids.split(",") } : {}) } })
           .then((s) => { if (!alive) return; setSession(s); setCards(s.cards); });
     run.catch((e) => { if (!alive) return; if (e.status === 404) setEmpty(true); else if (!seat.hold(e)) setError(e.message); });
@@ -195,9 +197,17 @@ function RapidSessionRound() {
   useEffect(() => {
     if (timedOut) { playSfx("wrong", 0.6); buzz("warning"); }
     if (!timedOut) return;
-    const t = setTimeout(advance, 1400);
+    // Same reading time as a wrong answer: the right option and the short note stay on screen.
+    const t = setTimeout(advance, 2400);
     return () => clearTimeout(t);
   }, [timedOut, advance]);
+
+  // Once a card locks, bring the explanation into view on short screens (it sits under the options).
+  useEffect(() => {
+    if (!locked) return;
+    const t = setTimeout(() => scrollRef.current?.scrollToEnd({ animated: !reduced }), 60);
+    return () => clearTimeout(t);
+  }, [locked, reduced]);
 
   function answer(k: number) {
     if (locked || !card) return;
@@ -232,7 +242,8 @@ function RapidSessionRound() {
   const cardStyle = useAnimatedStyle(() => ({ transform: [{ translateX: x.value }, { rotate: `${x.value / 25}deg` }] }));
 
   const tint = subjectColor(card?.subject || p.subject);
-  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", picks: p.picks || "", diagrams: p.diagrams || "", r: uuid() } });
+  const onAgain = () => router.replace({ pathname: "/rapid/session", params: { exam: done?.exam || session?.exam || p.exam, subject: p.subject || cards[0]?.subject || "Physics", chapter: p.chapter || "", picks: p.picks || "", diagrams: p.diagrams || "", n: String(size), r: uuid() } });
+  const examLabel = isBitsat(card?.subject) ? "BITSAT" : session?.exam || done?.exam || p.exam || "";
 
   return (
     <ArenaBg dim testID="rf-session-screen" style={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
@@ -241,18 +252,20 @@ function RapidSessionRound() {
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
-          <T testID="rf-session-exam" w="heavy" size={12} color={colors.onSurfaceSecondary} numberOfLines={1}>{card ? `${session?.exam || done?.exam || p.exam || ""} · ${card.subject} · ${done ? (done.chapter || "Mixed chapters") : card.chapter}` : "Rapid Fire"}</T>
+          <T testID="rf-session-exam" w="heavy" size={12} color={colors.onSurfaceSecondary} numberOfLines={1}>{card ? `${examLabel} · ${card.subject} · ${done ? (done.chapter || "Mixed chapters") : card.chapter}` : "Rapid Fire"}</T>
           {card && !done ? (
             <View style={{ flexDirection: "row", alignItems: "center", gap: space.sm }}>
-              <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter">Card {i + 1} of {cards.length}</T>
+              <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-card-counter" numberOfLines={1}>{narrow ? `${i + 1} / ${cards.length}` : `Card ${i + 1} of ${cards.length}`}</T>
               {fresh ? <StreakGem streak={combo} /> : null}
             </View>
           ) : <T w="heavy" size={16} color={colors.onSurfaceInverse}>{done ? "Session complete" : "Loading cards…"}</T>}
         </View>
-        {card && !done ? <Ring light left={locked ? (timedOut ? 0 : left) : left} color={tint} /> : null}
+        {card && !done ? <Ring light left={locked ? (timedOut ? 0 : left) : left} color={tint} limit={LIMIT} /> : null}
       </View>
-      {card && !done ? (
-        <View style={{ flexDirection: "row", gap: 2, paddingHorizontal: space.lg, marginBottom: space.md }}>
+      {card && !done ? (cards.length > 30
+        // 50 or 100 cards: one smooth bar (thin segments would blur into each other).
+        ? <View testID="rf-progress" style={styles.track}><View style={[styles.fill, { width: `${(100 * i) / cards.length}%`, backgroundColor: tint }]} /></View>
+        : <View testID="rf-progress" style={{ flexDirection: "row", gap: 2, paddingHorizontal: space.lg, marginBottom: space.md }}>
           {cards.map((c, k) => <View key={c.id} style={{ flex: 1, height: 4, borderRadius: 1, backgroundColor: k < i ? tint : k === i ? colors.onSurfaceInverse : colors.custom_gameLine }} />)}
         </View>
       ) : null}
@@ -321,6 +334,8 @@ const styles = StyleSheet.create({
   questionCard: { backgroundColor: colors.custom_reading, borderRadius: 26, padding: 20, gap: 18, borderWidth: 1, shadowColor: colors.custom_gameBg, shadowOpacity: 0.3, shadowRadius: 16, elevation: 4 },
   formula: { padding: 14, backgroundColor: colors.surface, borderRadius: 14 }, optionText: { flex: 1, paddingVertical: 12 },
   scroll: { flex: 1 },
+  track: { height: 6, borderRadius: 3, marginHorizontal: space.lg, marginBottom: space.md, backgroundColor: colors.custom_gameLine, overflow: "hidden" },
+  fill: { height: 6, borderRadius: 3 },
   cardArea: { flexGrow: 1, justifyContent: "center", paddingVertical: space.sm },
 });
 

@@ -4,7 +4,7 @@ import { useSegments } from "expo-router";
 import { RF_BASE, rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
-import type { Pick } from "./scope";
+import { getCardCount, type Pick } from "./scope";
 
 // Rapid Fire social data shared by the arena screens: the inbox (presence, challenge banner, notices), friends and gangs.
 export type Crown = { won: number; real: number };
@@ -26,9 +26,9 @@ export const roomLink = (cid: string) => `${RF_BASE}/c/${cid}`;
 /** A Match Room screen path (where a signed-out player returns after signing in from a match link). */
 export const isRoomPath = (path?: string) => !!path && /^\/rapid\/room\/[0-9a-f-]{36}$/.test(path);
 /** WhatsApp message for a Match Room: a match link (anyone can take a seat and becomes your friend), a Badla, or a reminder for invited friends. */
-export const shareRoom = (room: { id: string; link?: boolean; revenge?: boolean }, label: string) => sendWhatsApp(room.link
-  ? `⚔️ Rapid Fire match on JEELIVE.AI! ${label} · 30 cards · 15 s each.\nTap to take a seat (app or browser). Join and we become friends:\n${roomLink(room.id)}`
-  : `${room.revenge ? "🔥 Badla time! Rematch me" : "⚔️ Join my Rapid Fire match"} on JEELIVE.AI! ${label} · 30 cards · 15 s each.\nTake your seat before the timer runs out: ${roomLink(room.id)}`);
+export const shareRoom = (room: { id: string; link?: boolean; revenge?: boolean; cards?: number }, label: string) => sendWhatsApp(room.link
+  ? `⚔️ Rapid Fire match on JEELIVE.AI! ${label} · ${room.cards || 30} cards · 20 s each.\nTap to take a seat (app or browser). Join and we become friends:\n${roomLink(room.id)}`
+  : `${room.revenge ? "🔥 Badla time! Rematch me" : "⚔️ Join my Rapid Fire match"} on JEELIVE.AI! ${label} · ${room.cards || 30} cards · 20 s each.\nTake your seat before the timer runs out: ${roomLink(room.id)}`);
 
 // Friend Code: the only way to become friends. Shown in two groups of four so it is easy to read out.
 export const cleanCode = (text: string) => text.replace(/[^A-Za-z0-9]/g, "").toUpperCase();
@@ -112,9 +112,9 @@ export const go = {
   watch: (did: string) => ({ pathname: "/rapid/watch/[did]", params: { did } }) as any,
 };
 /** Send a challenge to one friend, several friends, a whole gang, a rival gang (Gang War), or everyone from a finished match (rematch, Badla).
- *  `link` also opens the room to anyone with its WhatsApp link. */
-export const sendChallenge = (uid: string, body: { pids?: string[]; gang_id?: string; rival_gang_id?: string; rematch_of?: string; picks?: Pick[]; link?: boolean }) =>
-  rf<any>("/challenges", uid, { method: "POST", body });
+ *  `link` also opens the room to anyone with its WhatsApp link. The round size is the arena's card choice (the server deals fewer if the picks are small). */
+export const sendChallenge = (uid: string, body: { pids?: string[]; gang_id?: string; rival_gang_id?: string; rematch_of?: string; picks?: Pick[]; link?: boolean; count?: number }) =>
+  rf<any>("/challenges", uid, { method: "POST", body: { count: getCardCount(), ...body } });
 
 // Matches your friends and gang mates are playing right now, to watch live.
 export type LiveMatch = { id: string; label: string; cup: boolean; started: boolean; total: number; teams: string[] | null; players: { name: string; avatar?: string | null; frame?: string | null; score: number; answered: number }[] };

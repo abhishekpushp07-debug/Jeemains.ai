@@ -1,0 +1,40 @@
+{
+  "summary": "Frontend-only Rapid Fire check at 390x844 plus one pass at 320 wide, signed in as QA learner 7004186276 (no academic paper touched). All 5 requested flows PASS. Lobby: English and Reasoning chips sit on a BITSAT row. The ribbon shows English 1416 and Reasoning 912 cards. The 30/50/100 pills are not dimmed for whole-subject English or LR picks. English Solo Sprint at 100 cards loads with no rf-empty; the header reads 'BITSAT · English · <chapter>' and shows 'Card 1 of 100'. Blanks ('___') show as plain underscores. Options wrap: a 47-char option takes 3 lines at 320 wide and is not cut. Feedback and explanation render. When a card runs out, 'Timed out' appears at 20 s and the next card comes about 1.4 s later. Finish leads to the summary. LR Practice Rival at 50 cards loads with 'Card 1 / 50' and a 20 s ring; 3 cards were answered, then forfeit returned to /rapid. Battleground sheet: English (19 chapters) and Reasoning (12 chapters) tabs show real counts and no 'coming soon'. Picking Time & Tense (63 cards) shows 100 as 'need more' with the note '63 cards in this pick · this round will be 50'; the lobby updates to match. Regression: a Physics + Chemistry 30-card sprint runs fine. Problems found: (1) 141 JEE cards use combining Unicode marks that render as tofu boxes in the Figtree font on web. (2) 10 English cards show raw markdown (*word*, _word_). (3) Some small label inconsistencies. A read-only audit of the card bank found no answer-position bias: each subject is about 25% per option.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "RapidText / card bank formula rendering", "issue": "Combining Unicode marks are drawn as tofu boxes or misplaced in the Figtree font. Seen live on the web preview: Physics card 06b95102 'Minimum number of NAND gates needed to build an XOR gate' has the formula 'Y = AB̅ + A̅B' (U+0305), which shows as 'AB▯ + A▯B'. A probe showed the same for U+20D7 vector arrows (a⃗, r⃗), U+0302 on b̂ and ν̄. 141 live JEE cards are affected: Maths 99, Physics 37, Chemistry 5 (U+0304 x91, U+20D7 x32, U+0302 x17, U+0305 x3). Examples: Maths 47e8ed3b 'Vector equation of a line… r⃗ = a⃗ + λb⃗'; Maths 91cae63a '(a·b̂)b̂'; Chemistry 86174a30 'ν̄ = R_H(...)'. Native font fallback may hide this, but it is not verified.", "testID": "rf-card-formula / rf-card-prompt / rf-option-text-*", "priority": "HIGH"},
+      {"component": "English card bank: raw markdown", "issue": "10 English prompts use markdown emphasis that RapidText shows as raw characters, so the word the student is asked about is not underlined or italic. Cards: decd50fe 'Choose the antonym of the italicised word: …*exemplary*…', b18e8094 '*scathing*', 16aa9be9 '*prolix*', c9ee48df '*quelled*', 424e68c2 '*ambiguous*', 010c94b6 '*vigilant*', 9e3fae93 '*lenient*', 460475d3 '*gregarious*', 4dc2922f '*impetuous*', b73b3b01 \"Replace the underlined word: '_Neither_ of the three boys passed.'\"", "testID": "rf-card-prompt", "priority": "MEDIUM"},
+      {"component": "English card 6de7d6fb (Time & Tense)", "issue": "The prompt '\"Look at those black clouds! It ___ rain soon.\"' has options 'will rain / would rain / is going to rain / shall rain', so filling the blank repeats 'rain' ('It is going to rain rain soon'). Remove 'rain' from the prompt or from the options.", "testID": "rf-card-prompt", "priority": "LOW"},
+      {"component": "Solo summary label", "issue": "After a BITSAT English sprint the summary header says 'BITSAT · English · Mixed chapters', but rf-summary-exam says 'JEE · Solo Sprint'. It uses s.exam and should use the same isBitsat rule as the header. Reference: /app/frontend/app/rapid/session.tsx:37", "testID": "rf-summary-exam", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Solo session header at 320 wide", "issues": ["'Card 1 of 30' wraps onto 2 lines ('Card 1 of' / '30') and the chapter label is cut ('BITSAT · English · Time & Te…')."]},
+      {"screen": "Solo session, timed-out card", "issues": ["The timed-out state stays on screen only about 1.4 s before moving on. At 320 wide the explanation is partly hidden behind the Skip/Next bar, so a student can't read why the answer was right."]},
+      {"screen": "Card-count picker (lobby and sheet)", "issues": ["When the chosen pill is too big for the pick (100 chosen, 63 available), the 100 pill stays gold and selected with the 'need more' tag, while the round will really be 50. Only unselected short pills are dimmed (CardCount.tsx: short && !on). The aqua note does explain the fallback, but consider highlighting the count that will actually be dealt."]},
+      {"screen": "Practice Rival header", "issues": ["The duel header reads 'MIXED REASONING' with no BITSAT tag, while Solo shows 'BITSAT · …'. Minor inconsistency."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/rf_bank_render_audit.py"],
+  "action_items": [
+    "Convert the 141 cards that use combining marks (U+0304, U+20D7, U+0302, U+0305) to TeX, e.g. $\\vec{a}$, $\\hat{b}$, $\\bar{\\nu}$, $\\overline{AB}$, so RapidText sends them to MathText/KaTeX. Alternatively use precomposed or prime notation (B′). Run /app/backend/tests/rf_bank_render_audit.py (read-only) to list them.",
+    "Fix the 10 English prompts that use *word* or _word_ markdown. Either add a light emphasis parser to RapidText or rewrite the prompts with quotes, e.g. 'exemplary'.",
+    "Fix card 6de7d6fb, where 'rain' is repeated.",
+    "Make rf-summary-exam show BITSAT for English/LR sessions (session.tsx:37).",
+    "Optional polish: the 320-wide session header wrap, a longer pause on timed-out cards (or a tap to continue), and the picker highlight when the chosen count does not fit."
+  ],
+  "critical_code_review_comments": [
+    "RapidText.notation() turns any '_' followed by a lowercase letter or digit into a Unicode subscript. A blank written as '___of' (no space) would become '__ₒf'. The live English/LR bank has no such case today, but generators should always put a space after '___'.",
+    "Card bank answer-key positions are balanced (about 23-28% per option in every subject), so there is no position bias.",
+    "No deprecated Expo packages (expo-av, expo-barcode-scanner, expo-background-fetch) in package.json."
+  ],
+  "updated_files": ["/app/backend/tests/rf_bank_render_audit.py (new, read-only audit script)"],
+  "success_rate": {"backend": "not tested (frontend-only request)", "frontend": "100% of requested flows pass; 4 content/label bugs and 4 design notes"},
+  "seed_data_creation": "None. RF practice only: 1 English 100-card sprint (abandoned), 1 English 30-card sprint (finished, gave +10 XP and +2 coins plus the 'First Sprint' badge), 1 LR Practice Rival (forfeited), 1 Physics + Chemistry sprint (discarded). No academic attempts.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: the entry screen has 2 inputs (phone, PIN) plus entry-continue-button, then tab-rapid. The subject pick resets to Mixed Physics in a fresh browser context. Chip testIDs: rf-subject-chips-{physics,chemistry,mathematics,english,logical-reasoning}. Sheet chapters: rf-scope-chapter-<slug>; picked tray: rf-scope-picked-*. Solo option tap: rf-option-k; text: rf-option-text-k; next: rf-next-button; exit: rf-exit-button then rf-exit-finish or rf-exit-discard. Duel: duel-option-text-k, then duel-exit-button and duel-exit-confirm.",
+  "rca_of_issue": "Tofu boxes: the cards store decomposed combining characters (e.g. B + U+0305). Figtree has no glyphs for these marks, and RapidText only sends text to KaTeX when it contains $…$ or \\( \\), so the raw marks are drawn in Figtree. To reproduce: Physics sprint, card 06b95102, answer it, and rf-card-formula shows 'AB▯ + A▯B'. Fix: rewrite these cards in TeX or precomposed form."
+}

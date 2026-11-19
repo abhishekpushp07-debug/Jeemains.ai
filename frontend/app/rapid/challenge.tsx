@@ -12,7 +12,7 @@ import { Jelly } from "@/src/rapid/juice";
 import { Check, InnerScreen, Note, PersonRow } from "@/src/rapid/parts";
 import { ErrorBox, withRapid } from "@/src/rapid/ui";
 import { ScopeSheet } from "@/src/rapid/ScopeSheet";
-import { scopeLabel, scopeSubjects, setScope, useScope } from "@/src/rapid/scope";
+import { scopeLabel, scopeSubjects, setScope, useCardCount, useScope } from "@/src/rapid/scope";
 import { go, seenText, sendChallenge, setArenaTab, shareRoom, useFriends, useGangs } from "@/src/rapid/social";
 
 const MAX_FRIENDS = 4;
@@ -38,14 +38,14 @@ function Challenge() {
       if (link) shareRoom(room, label);
     } catch (e: any) { setError(e.message); setBusy(""); }
   };
-  const label = scopeLabel(picks);
+  const label = scopeLabel(picks), count = useCardCount();
   const invites = gang ? "your gang" : picked.length ? `${picked.length} friend${picked.length > 1 ? "s" : ""}` : "";
 
   return <InnerScreen testID="challenge-screen" title="Play Friends" sub="A WhatsApp link, one gang, or up to 4 friends"
     footer={<><ErrorBox testID="challenge-error" error={error} />
       <RaisedButton testID="challenge-send" icon="swords" height={62} streak busy={busy === "send"} disabled={(!gang && !picked.length) || !!busy}
         label={gang ? "CHALLENGE GANG" : picked.length > 1 ? `CHALLENGE ${picked.length} FRIENDS` : "SEND CHALLENGE"} sub={label} onPress={() => send(false)} /></>}>
-    <Ribbon testID="challenge-chapter" label={label} sub={`${scopeSubjects(picks)} · tap to change`} onPress={() => setSheet(true)} />
+    <Ribbon testID="challenge-chapter" label={label} sub={`${scopeSubjects(picks)} · ${count} cards · tap to change`} onPress={() => setSheet(true)} />
 
     <Panel gold testID="challenge-link" style={styles.link}>
       <View style={styles.linkTop}>

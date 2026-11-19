@@ -346,11 +346,13 @@ export const rapidColors = {
   custom_examJeeDeep: "#2A0509", custom_examComedkGold: arena.gold,
   custom_reading: "#23070D", custom_onReading: "#FFFFFF", custom_infoSoft: "#0E3A36",
   custom_subjectPhysics: "#7DE8DA", custom_subjectChemistry: arena.gold, custom_subjectMaths: "#FFB37A",
+  custom_subjectEnglish: "#C9B6FF", custom_subjectReasoning: "#8FC8FF",
   custom_rarityRare: "#7DB4FF", custom_rarityEpic: arena.tealHi, custom_rarityLegendary: arena.gold,
   custom_overlay: arena.scrim,
 };
 export const rapidSubjectColor = (s?: string) => s === "Physics" ? rapidColors.custom_subjectPhysics
-  : s === "Chemistry" ? rapidColors.custom_subjectChemistry : rapidColors.custom_subjectMaths;
+  : s === "Chemistry" ? rapidColors.custom_subjectChemistry : s === "English" ? rapidColors.custom_subjectEnglish
+  : s === "Logical Reasoning" ? rapidColors.custom_subjectReasoning : rapidColors.custom_subjectMaths;
 
 export const fonts = {
   regular: "Figtree-400",

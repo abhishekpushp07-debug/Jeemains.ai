@@ -1,0 +1,2518 @@
+[
+ {
+  "prompt": "Order of the DE (d³y/dx³)² + (d²y/dx²)⁵ + y = 0 is?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "5",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "Order is the highest derivative's order (3). The power 2 is the degree, not the order.",
+  "kind": "concept",
+  "id": "5d028c1a-7c55-4624-aa9f-c92333525082",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of a differential equation"
+ },
+ {
+  "prompt": "DE of all straight lines y = mx + c in the plane (m, c arbitrary) has order?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Two independent arbitrary constants m and c, so the order is 2 (y'' = 0).",
+  "kind": "result",
+  "id": "f7fd1ced-c304-48ba-a486-f65631492e9b",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of a differential equation"
+ },
+ {
+  "prompt": "Order of the DE of all circles (x−h)² + (y−k)² = r² in the plane (h, k, r arbitrary)?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Three independent arbitrary constants h, k, r, so the order is 3.",
+  "kind": "result",
+  "id": "e2bace6b-c064-4bad-942e-6088ad0d08ca",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of a differential equation"
+ },
+ {
+  "prompt": "Order of the DE of the family y = A·e^(x+B), with A and B arbitrary, is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "A·e^B merges into a single constant, so only one essential constant remains and the order is 1.",
+  "kind": "exception",
+  "id": "d1c74fa9-0b60-44b9-873a-e94376c584e7",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of a differential equation"
+ },
+ {
+  "prompt": "Order of the DE of parabolas y² = 4a(x − h), with a and h arbitrary, is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Two independent arbitrary constants a and h, so the order is 2.",
+  "kind": "result",
+  "id": "51308ad6-0ace-41e9-a806-daca57e22a0f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of a differential equation"
+ },
+ {
+  "prompt": "Order of the DE [1 + (dy/dx)²]^(3/2) = k·(d²y/dx²) is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "3/2"
+  ],
+  "answer": 1,
+  "explain": "The highest derivative is d²y/dx², so the order is 2. The power 3/2 does not affect the order.",
+  "kind": "concept",
+  "id": "a57545f5-5575-4ce3-b370-899821dc494d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Order of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE sin(d²y/dx²) + dy/dx = 0 is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "Not defined",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "The highest derivative sits inside sin, so the equation is not polynomial in derivatives and the degree is undefined.",
+  "kind": "exception",
+  "id": "9f93b6bf-3f96-4827-8253-c844a695b1c6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of a DE is defined only when the DE is…",
+  "formula": "",
+  "options": [
+   "Linear in y",
+   "Polynomial in its derivatives",
+   "Of first order",
+   "Free of x"
+  ],
+  "answer": 1,
+  "explain": "Degree needs a polynomial in the derivatives, after clearing radicals and fractions.",
+  "kind": "concept",
+  "id": "e69297d4-3916-4b8d-b496-8a674681c6f6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of d²y/dx² + sin y = 0 is?",
+  "formula": "",
+  "options": [
+   "Not defined",
+   "2",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "sin acts on y, not on a derivative. The power of y'' is 1, so the degree is 1.",
+  "kind": "exception",
+  "id": "3fc06346-317a-4248-b6b1-fd648094e910",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE log(d²y/dx²) = x is?",
+  "formula": "",
+  "options": [
+   "1",
+   "Not defined",
+   "2",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "It rewrites as y'' = eˣ, which is polynomial in y'' with power 1, so the degree is 1.",
+  "kind": "exception",
+  "id": "13c66666-a8a9-4616-8dd5-279e8ccb3e6a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE d²y/dx² = √(1 + dy/dx) is?",
+  "formula": "",
+  "options": [
+   "1",
+   "½",
+   "2",
+   "Not defined"
+  ],
+  "answer": 2,
+  "explain": "Squaring gives (y'')² = 1 + y', so the degree is 2.",
+  "kind": "result",
+  "id": "848cfc95-b34c-4532-aeac-9801e717a4fb",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE (d²y/dx²)^(2/3) = dy/dx is?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "2/3",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Cubing gives (y'')² = (y')³. The power of the highest derivative y'' is 2.",
+  "kind": "result",
+  "id": "3d3df14d-b9e7-47f1-ad01-d1b62270150d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE y = x(dy/dx) + a/(dy/dx) is?",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "Not defined",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "Clearing the fraction gives y·y' = x·y'² + a, so the degree is 2.",
+  "kind": "result",
+  "id": "61edb067-bc17-4fcb-947f-188bda0bafde",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of y'' = x + (y')^(1/3) is?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "1/3",
+   "Not defined"
+  ],
+  "answer": 0,
+  "explain": "Isolating the radical and cubing gives (y'' − x)³ = y'. The power of y'' is 3.",
+  "kind": "result",
+  "id": "e0197464-f8e4-42c9-bef1-8e749290ec16",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of y'' + (y')³ + y⁴ = 0 is?",
+  "formula": "",
+  "options": [
+   "4",
+   "3",
+   "1",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "Degree is the power of the highest-order derivative only. Here y'' has power 1.",
+  "kind": "concept",
+  "id": "9e1e07c0-4477-4528-8581-fa89c801e838",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "For the family y² = 4ax, the DE by eliminating a has (order, degree)?",
+  "formula": "",
+  "options": [
+   "(1, 1)",
+   "(1, 2)",
+   "(2, 1)",
+   "(2, 2)"
+  ],
+  "answer": 0,
+  "explain": "2yy' = 4a gives y = 2xy'. One constant means order 1, and y' has power 1.",
+  "kind": "result",
+  "id": "1f82e731-efb0-4834-9435-297853474e67",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "For the family y² = 4a(x + b), the DE has (order, degree)?",
+  "formula": "",
+  "options": [
+   "(1, 2)",
+   "(2, 2)",
+   "(1, 1)",
+   "(2, 1)"
+  ],
+  "answer": 3,
+  "explain": "Two constants give order 2. The DE is yy'' + (y')² = 0, where y'' has power 1.",
+  "kind": "result",
+  "id": "c05a17ed-a39f-4623-8658-8e0a5dfd187d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Eliminating c from y = cx + c² gives a DE of (order, degree)?",
+  "formula": "",
+  "options": [
+   "(1, 2)",
+   "(1, 1)",
+   "(2, 1)",
+   "(2, 2)"
+  ],
+  "answer": 0,
+  "explain": "With c = y', the DE is y = xy' + (y')². This is order 1, degree 2.",
+  "kind": "result",
+  "id": "3102cab0-dd54-4558-9a83-53616a263fd9",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Order and degree of a DE (when degree is defined) are always…",
+  "formula": "",
+  "options": [
+   "Non-negative integers",
+   "Positive integers",
+   "Real numbers",
+   "Natural numbers or fractions"
+  ],
+  "answer": 1,
+  "explain": "Order and degree are positive integers. Degree can be undefined but is never zero or fractional.",
+  "kind": "fact",
+  "id": "1c67941a-58e9-4ad0-8bbe-aa9492739287",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE y' + e^(y') = x is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "Not defined",
+   "e"
+  ],
+  "answer": 2,
+  "explain": "e^(y') is not a polynomial in y', so the degree is not defined.",
+  "kind": "exception",
+  "id": "faca706d-5800-4bd3-baa5-d90827675675",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE √(d²y/dx²) + ∛(dy/dx) = 0 is?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "5",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "Isolate and raise to the 6th power: (y'')³ = (y')². The power of the highest derivative y'' is 3.",
+  "kind": "concept",
+  "id": "6b1e4208-0efe-40d1-9206-7cb911a875a9",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "The DE obtained by eliminating constants A, B from y = A e^(x+B) has order:",
+  "formula": "A·e^B = C",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "A e^B combines into a single constant C, so only one essential constant and the DE has order 1.",
+  "kind": "",
+  "id": "ada93211-fcad-4a0d-ac73-82f125d08b49",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Order of the DE representing the family of all circles in the xy-plane is:",
+  "formula": "x² + y² + 2gx + 2fy + c = 0",
+  "options": [
+   "2",
+   "3",
+   "1",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Three independent constants g, f, c appear, so eliminating them gives a DE of order 3.",
+  "kind": "",
+  "id": "1a941a2f-c624-4552-8018-db52e1a60576",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Order of the DE for ellipses x²/a² + y²/b² = 1 (centre at origin, axes along coordinate axes):",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "2",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Two arbitrary constants a and b, so the DE has order 2.",
+  "kind": "",
+  "id": "67832096-ec36-42d2-8058-b56adfa83c4f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Order of the DE of the family of circles of fixed radius 5 with arbitrary centre:",
+  "formula": "(x−h)² + (y−k)² = 25",
+  "options": [
+   "1",
+   "3",
+   "4",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "The radius is fixed, so only h and k are arbitrary, giving a DE of order 2.",
+  "kind": "",
+  "id": "6fafec71-9a26-4e9c-a101-c1561415434c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Order of the DE of parabolas with vertex at origin and axis along the x-axis:",
+  "formula": "y² = 4ax",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Only one arbitrary constant a is present, so the DE has order 1.",
+  "kind": "",
+  "id": "c671514c-e674-4bc4-84f8-472d4de64f3f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Order of the DE of all parabolas y² = 4a(x − h) with axis along the x-axis (a and h arbitrary)?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Two independent arbitrary constants (a, h) are eliminated, so the order is 2.",
+  "kind": "result",
+  "id": "89224616-f0ff-429f-a2a5-308abc21f0db",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "General solution of dy/dx = xy is?",
+  "formula": "dy/y = x dx",
+  "options": [
+   "y = Cx²",
+   "y = Ce^(x²/2)",
+   "y = Ce^x",
+   "y = x²/2 + C"
+  ],
+  "answer": 1,
+  "explain": "ln|y| = x²/2 + c, so y = Ce^(x²/2).",
+  "kind": "result",
+  "id": "7b4c29d9-865b-471f-8860-efc0e376ada1",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "General solution of dy/dx = 1 + y² is?",
+  "formula": "dy/(1+y²) = dx",
+  "options": [
+   "y = tan⁻¹x + C",
+   "y = tan(x + C)",
+   "y = cot(x + C)",
+   "y = sin(x + C)"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹y = x + c gives y = tan(x + c).",
+  "kind": "result",
+  "id": "f7b1c864-0d60-4843-8867-5fafaae6bf0f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = (1+x)(1+y) is?",
+  "formula": "dy/(1+y) = (1+x)dx",
+  "options": [
+   "ln|1+y| = x + x²/2 + c",
+   "1+y = x + x²/2 + c",
+   "ln|1+y| = x²/2 + c",
+   "(1+y)² = (1+x)² + c"
+  ],
+  "answer": 0,
+  "explain": "Integrating both sides: ln|1+y| = x + x²/2 + c.",
+  "kind": "result",
+  "id": "05281413-e447-4350-b180-5491fdb7fdfd",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = y tan x is?",
+  "formula": "dy/y = tan x dx",
+  "options": [
+   "y = C cos x",
+   "y = C tan x",
+   "y = C sec x",
+   "y = C sin x"
+  ],
+  "answer": 2,
+  "explain": "ln|y| = ln|sec x| + c, so y = C sec x.",
+  "kind": "result",
+  "id": "d9afdc2b-f868-4621-9bd9-047dd0377b8e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = y cot x is?",
+  "formula": "dy/y = cot x dx",
+  "options": [
+   "y = C sin x",
+   "y = C cosec x",
+   "y = C cos x",
+   "y = C sec x"
+  ],
+  "answer": 0,
+  "explain": "ln|y| = ln|sin x| + c, so y = C sin x.",
+  "kind": "result",
+  "id": "b60d2bba-384a-4e49-b134-bd4e62becc8d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = 2y with y(0) = 1 is?",
+  "formula": "",
+  "options": [
+   "y = 2eˣ",
+   "y = e^(x/2)",
+   "y = e^(x²)",
+   "y = e^(2x)"
+  ],
+  "answer": 3,
+  "explain": "y = Ce^(2x); y(0) = 1 gives C = 1.",
+  "kind": "result",
+  "id": "4671df8e-eb23-461b-a940-d47f99a68c10",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = √(1 − y²) is?",
+  "formula": "dy/√(1−y²) = dx",
+  "options": [
+   "tan⁻¹y = x + c",
+   "sinh⁻¹y = x + c",
+   "sin⁻¹y = x + c",
+   "sin y = x + c"
+  ],
+  "answer": 2,
+  "explain": "∫dy/√(1−y²) = sin⁻¹y, so sin⁻¹y = x + c.",
+  "kind": "result",
+  "id": "a76ecb1c-a790-402c-92e7-2b3088489c37",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = x²/y² is?",
+  "formula": "y² dy = x² dx",
+  "options": [
+   "y² = x² + C",
+   "y³ = x³ + C",
+   "y = x + C",
+   "y³ = x² + C"
+  ],
+  "answer": 1,
+  "explain": "y³/3 = x³/3 + c, so y³ = x³ + C.",
+  "kind": "result",
+  "id": "9fd10a2b-1334-4fb2-90c1-653a8b676961",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "dy/dx = f(ax + by + c) becomes variable separable by putting?",
+  "formula": "",
+  "options": [
+   "y = vx",
+   "z = ax + by + c",
+   "y = vx²",
+   "z = y/x"
+  ],
+  "answer": 1,
+  "explain": "With z = ax+by+c, dz/dx = a + b f(z), which is separable.",
+  "kind": "concept",
+  "id": "f9637f7a-656c-465b-b916-f596bc5f00d6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = (x + y)² is?",
+  "formula": "z = x + y ⇒ dz/dx = 1 + z²",
+  "options": [
+   "tan⁻¹(x+y) = x + c",
+   "tan(x+y) = x + c",
+   "(x+y)³ = 3x + c",
+   "x + y = tan x + c"
+  ],
+  "answer": 0,
+  "explain": "dz/(1+z²) = dx gives tan⁻¹(x+y) = x + c.",
+  "kind": "result",
+  "id": "e3bde76f-952d-4148-9540-6652545d098a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of x dy/dx = y ln y is?",
+  "formula": "dy/(y ln y) = dx/x",
+  "options": [
+   "y = Cx",
+   "y ln y = Cx",
+   "ln y = Cx",
+   "y = ln(Cx)"
+  ],
+  "answer": 2,
+  "explain": "ln|ln y| = ln x + c, so ln y = Cx, i.e. y = e^(Cx).",
+  "kind": "result",
+  "id": "e8c4a39e-a511-4408-9f4f-04db660b3942",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "For dy/dx = y(y − 1), dividing by y(y−1) loses which solutions?",
+  "formula": "",
+  "options": [
+   "x = 0 and x = 1",
+   "y = 0 and y = 1",
+   "y = x",
+   "None; none are lost"
+  ],
+  "answer": 1,
+  "explain": "Separating assumes g(y) ≠ 0; constants with g(y)=0 (y=0, y=1) are lost.",
+  "kind": "exception",
+  "id": "e4994c9e-c38b-40ac-aec2-644241750214",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "General solution of dy/dx = x²y is?",
+  "formula": "",
+  "options": [
+   "y = Ce^(x³/3)",
+   "y = Ce^(x²/2)",
+   "y = x³/3 + C",
+   "y = Ce^(x³)"
+  ],
+  "answer": 0,
+  "explain": "dy/y = x²dx gives ln y = x³/3 + c.",
+  "kind": "result",
+  "id": "a19b03fc-f0dd-4b4b-a8da-7dfff6835c6c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "General solution of dy/dx = y/(1 + x²) is?",
+  "formula": "",
+  "options": [
+   "y = C tan⁻¹x",
+   "y = C(1 + x²)",
+   "y = Ce^(tan⁻¹x)",
+   "y = Ce^(x + x³/3)"
+  ],
+  "answer": 2,
+  "explain": "dy/y = dx/(1 + x²) gives ln y = tan⁻¹x + c.",
+  "kind": "result",
+  "id": "263c2c43-42c4-4619-8d31-c519a4bc092c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "General solution of dy/dx = x(1 + y²) is?",
+  "formula": "",
+  "options": [
+   "tan⁻¹y = x²/2 + c",
+   "tan⁻¹y = x + c",
+   "sin⁻¹y = x²/2 + c",
+   "ln(1 + y²) = x² + c"
+  ],
+  "answer": 0,
+  "explain": "dy/(1 + y²) = x dx gives tan⁻¹y = x²/2 + c.",
+  "kind": "result",
+  "id": "78ef2fa3-a375-409d-8ab5-97db7ee090f1",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "General solution of dy/dx = x e^(−y) is?",
+  "formula": "eʸdy = x dx",
+  "options": [
+   "e^(−y) = x²/2 + C",
+   "eʸ = x²/2 + C",
+   "eʸ = ln x + C",
+   "y = x²/2 + C"
+  ],
+  "answer": 1,
+  "explain": "∫eʸdy = ∫x dx gives eʸ = x²/2 + C.",
+  "kind": "result",
+  "id": "cffdba8d-438a-451e-aad7-4ec94140b22f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "General solution of dy/dx = √y is?",
+  "formula": "",
+  "options": [
+   "√y = x + C",
+   "y = (x + C)²",
+   "2√y = x + C",
+   "y = x²/4 + C"
+  ],
+  "answer": 2,
+  "explain": "∫y^(−1/2)dy = 2√y = x + c.",
+  "kind": "result",
+  "id": "321f1656-c88d-42c8-bd56-8a0fa9dabe99",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Solution of dy/dx = −x/y passing through (0, 2) is?",
+  "formula": "",
+  "options": [
+   "x² + y² = 4",
+   "y² − x² = 4",
+   "x² + y² = 2",
+   "y = 2 − x"
+  ],
+  "answer": 0,
+  "explain": "y dy = −x dx gives x² + y² = c; (0,2) gives c = 4, a circle.",
+  "kind": "result",
+  "id": "2a837e89-931d-4189-a195-4e1b8f7f6867",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "If dN/dt = kN (k > 0), the time for N to double is?",
+  "formula": "N = N₀e^(kt)",
+  "options": [
+   "ln 2 / k",
+   "k ln 2",
+   "2/k",
+   "1/(k ln 2)"
+  ],
+  "answer": 0,
+  "explain": "N = N₀e^(kt); 2N₀ = N₀e^(kt) gives t = ln2/k.",
+  "kind": "formula",
+  "id": "f5b17964-b019-4ab4-b619-ebadfd2d40a9",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "General solution of dy/dx = −y/x is?",
+  "formula": "",
+  "options": [
+   "y = Cx",
+   "xy = C",
+   "y = C e^(−x)",
+   "x² + y² = C"
+  ],
+  "answer": 1,
+  "explain": "dy/y = −dx/x gives ln|y| + ln|x| = const, so xy = C.",
+  "kind": "result",
+  "id": "df97e7bb-d39e-468a-a908-5db5859d7e7f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Is dy/dx = x + y a homogeneous DE?",
+  "formula": "f(tx,ty) = t·f(x,y)",
+  "options": [
+   "Yes, degree 0",
+   "Yes, degree 1",
+   "No, f has degree 1, not 0",
+   "No, it is not a polynomial"
+  ],
+  "answer": 2,
+  "explain": "A homogeneous DE needs dy/dx = f(x,y) with f of degree 0; here f has degree 1.",
+  "kind": "exception",
+  "id": "e03980e9-e32f-4a35-83ae-92ecb89612bd",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "dy/dx = (x+y+1)/(x−y) is a DE of which type?",
+  "formula": "",
+  "options": [
+   "Homogeneous",
+   "Not homogeneous (constant term present)",
+   "Variable separable",
+   "Exact only"
+  ],
+  "answer": 1,
+  "explain": "The constant 1 spoils f(tx,ty)=f(x,y), so it is not homogeneous.",
+  "kind": "exception",
+  "id": "9409d58c-2cd1-4a16-ba65-8d4364b6a4bc",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Which DE is homogeneous?",
+  "formula": "",
+  "options": [
+   "dy/dx = ln x − ln y",
+   "dy/dx = ln x + y",
+   "dy/dx = sin(x+y)",
+   "dy/dx = eˣ/y"
+  ],
+  "answer": 0,
+  "explain": "ln x − ln y = ln(x/y) is a function of x/y, so it has degree 0.",
+  "kind": "concept",
+  "id": "60f9a9c2-68ec-4c59-b7a9-fb8416251a00",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "After y = vx, a homogeneous DE reduces to which type?",
+  "formula": "",
+  "options": [
+   "Linear in x",
+   "Variable separable in v and x",
+   "Exact in y only",
+   "Bernoulli"
+  ],
+  "answer": 1,
+  "explain": "It becomes x·dv/dx = F(v) − v, which separates in v and x.",
+  "kind": "concept",
+  "id": "35c41fbf-8250-4f82-9766-ea5307ccd18c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Which equation is NOT homogeneous?",
+  "formula": "",
+  "options": [
+   "(x²+y²)dx − 2xy dy = 0",
+   "(x+y)dx − (x−y)dy = 0",
+   "(x²+y)dx − xy dy = 0",
+   "y dx + x dy = 0"
+  ],
+  "answer": 2,
+  "explain": "x²+y is not homogeneous (degrees 2 and 1), so the DE fails.",
+  "kind": "exception",
+  "id": "0ce18341-7fe6-4a7e-b8a1-bdabf2673834",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Degree of homogeneity of f(x,y) = x² ln(y/x)?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "Not homogeneous"
+  ],
+  "answer": 2,
+  "explain": "f(tx,ty) = t²x² ln(y/x) = t²f, since ln(y/x) has degree 0.",
+  "kind": "result",
+  "id": "33bc1e9a-1f28-4942-beb1-a9088b035c74",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "dy/dx = (a₁x+b₁y+c₁)/(a₂x+b₂y+c₂) with a₁b₂ ≠ a₂b₁ reduces by?",
+  "formula": "",
+  "options": [
+   "Shifting origin: x=X+h, y=Y+k",
+   "Putting z = a₁x+b₁y",
+   "Multiplying by eˣ",
+   "Putting y = 1/z"
+  ],
+  "answer": 0,
+  "explain": "Lines meet at (h,k); shifting the origin there removes constants and gives a homogeneous DE.",
+  "kind": "concept",
+  "id": "62357179-ee66-4c78-8646-b66fdc4d138a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "If a₁/a₂ = b₁/b₂ in (a₁x+b₁y+c₁)/(a₂x+b₂y+c₂), use?",
+  "formula": "",
+  "options": [
+   "x = X + h",
+   "z = a₁x + b₁y",
+   "y = vx",
+   "x = vy only"
+  ],
+  "answer": 1,
+  "explain": "Parallel lines: put z = a₁x+b₁y to get a variable-separable DE.",
+  "kind": "concept",
+  "id": "3d5ea08d-8977-44b5-b18b-c3204584f730",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "For f(x,y) = (x−y)/(x+y), f(tx,ty) equals?",
+  "formula": "",
+  "options": [
+   "t·f(x,y)",
+   "f(x,y)",
+   "t²·f(x,y)",
+   "f(x,y)/t"
+  ],
+  "answer": 1,
+  "explain": "Powers of t cancel, so f has degree 0 and the DE dy/dx = f is homogeneous.",
+  "kind": "result",
+  "id": "a2266e60-2b74-4ee4-91ee-47cf5bb3817f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Is dy/dx = (x² + y²)/(x³ + y) homogeneous?",
+  "formula": "",
+  "options": [
+   "Yes, degree 2 over 3",
+   "Yes, degree −1",
+   "No, numerator and denominator differ in degree",
+   "Yes, degree 0"
+  ],
+  "answer": 2,
+  "explain": "Numerator degree 2, denominator terms of degree 3 and 1 are mixed; ratio is not degree 0.",
+  "kind": "concept",
+  "id": "743179f3-678f-4640-9ebd-51097b7d134e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "For a homogeneous DE M dx + N dy = 0, M and N must be?",
+  "formula": "",
+  "options": [
+   "Homogeneous of same degree",
+   "Homogeneous of any degrees",
+   "Linear in x and y",
+   "Constants only"
+  ],
+  "answer": 0,
+  "explain": "M and N must be homogeneous functions of the same degree n.",
+  "kind": "concept",
+  "id": "19a965f7-f565-4112-8079-18222873f2e6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Is dy/dx = sin(y/x) + y/x homogeneous?",
+  "formula": "",
+  "options": [
+   "No, sine is not algebraic",
+   "Yes, degree 0",
+   "Yes, degree 1",
+   "No, it has two terms"
+  ],
+  "answer": 1,
+  "explain": "It is a function of y/x alone, so f(tx,ty) = f(x,y): degree 0.",
+  "kind": "concept",
+  "id": "f4396270-7f10-4a2d-a65e-ccd4b46c66b6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Which is a homogeneous DE?",
+  "formula": "",
+  "options": [
+   "(x² + y²)dx + 2xy dy = 0",
+   "(x + y²)dx + xy dy = 0",
+   "(x + 1)dx + y dy = 0",
+   "(x³ + y)dx + x dy = 0"
+  ],
+  "answer": 0,
+  "explain": "M and N are both homogeneous of degree 2; others mix degrees.",
+  "kind": "concept",
+  "id": "41692cc5-c0c2-4a8e-98f1-95c032697e76",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Is dy/dx = (y/x) + eˣ homogeneous?",
+  "formula": "",
+  "options": [
+   "Yes, degree 0",
+   "Yes, degree 1",
+   "No, eˣ is not a function of y/x",
+   "Yes, since y/x is present"
+  ],
+  "answer": 2,
+  "explain": "eˣ changes with scaling t, so f(tx,ty) ≠ f(x,y); not homogeneous.",
+  "kind": "exception",
+  "id": "88651f84-9f4f-4fba-a61c-ea7e3af0d3d1",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "Is dy/dx = (x² + y²)/(xy) + 1 homogeneous?",
+  "formula": "",
+  "options": [
+   "Yes, degree 0",
+   "No, because of the constant 1",
+   "Yes, degree 2",
+   "No, degrees of numerator and denominator differ"
+  ],
+  "answer": 0,
+  "explain": "(x²+y²)/(xy) is degree 0 and 1 is degree 0, so f(tx,ty)=f(x,y).",
+  "kind": "concept",
+  "id": "7af147b2-025f-435b-8fcb-9846c0bc2a5c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "General solution of dy/dx = y ln y is?",
+  "formula": "∫dy/(y ln y) = ∫dx",
+  "options": [
+   "ln y = x + C",
+   "y = Ce^x",
+   "ln y = Cx",
+   "ln y = Ce^x"
+  ],
+  "answer": 3,
+  "explain": "∫dy/(y ln y) = ln|ln y| = x + c, so ln y = Ceˣ.",
+  "kind": "formula",
+  "id": "a1b9dacb-54ac-46da-88a5-a5a87a6ef053",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Variable separable method"
+ },
+ {
+  "prompt": "Is dy/dx = (x³ + y³)/(x y²) homogeneous?",
+  "formula": "",
+  "options": [
+   "No, since the powers differ",
+   "Yes, of degree 0",
+   "Yes, of degree 1",
+   "Yes, of degree 3"
+  ],
+  "answer": 1,
+  "explain": "Numerator and denominator both have degree 3, so the ratio has degree 0.",
+  "kind": "concept",
+  "id": "4c9a3d06-ba85-4ebc-8322-af565dfb34cc",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Identifying homogeneous DE (f(tx,ty)=f(x,y))"
+ },
+ {
+  "prompt": "For dx/dy + P(y)·x = Q(y), the integrating factor is?",
+  "formula": "",
+  "options": [
+   "e^∫P dx",
+   "e^∫P(y) dy",
+   "e^∫Q dy",
+   "e^∫(1/P) dy"
+  ],
+  "answer": 1,
+  "explain": "When the equation is linear in x, the independent variable is y, so IF = e^∫P(y) dy.",
+  "kind": "formula",
+  "id": "3587c2a8-4f2a-4696-89f8-8ebad05e080f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for y dx + (x − y³) dy = 0 (linear in x) is?",
+  "formula": "dx/dy + x/y = y²",
+  "options": [
+   "1/y",
+   "y",
+   "y²",
+   "e^y"
+  ],
+  "answer": 1,
+  "explain": "P = 1/y, so IF = e^(ln y) = y.",
+  "kind": "formula",
+  "id": "43da4e85-c0cf-4bf6-b9cc-b1765b5e9be3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + (tan x)y = sec x is?",
+  "formula": "e^∫tan x dx",
+  "options": [
+   "cos x",
+   "sec x",
+   "sin x",
+   "ln sec x"
+  ],
+  "answer": 1,
+  "explain": "∫tan x dx = ln|sec x|, so IF = sec x.",
+  "kind": "formula",
+  "id": "7f804e31-c435-44dd-b380-ef2af498c023",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx − (tan x)y = x is?",
+  "formula": "e^(−∫tan x dx)",
+  "options": [
+   "sec x",
+   "−ln cos x",
+   "cos x",
+   "tan x"
+  ],
+  "answer": 2,
+  "explain": "−∫tan x dx = ln|cos x|, so IF = cos x.",
+  "kind": "formula",
+  "id": "e0dc578f-d83d-4b33-9417-68dac65ee1b4",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + y/√(1−x²) = 0 is?",
+  "formula": "",
+  "options": [
+   "e^(cos⁻¹x)",
+   "√(1−x²)",
+   "e^(sin⁻¹x)",
+   "sin⁻¹x"
+  ],
+  "answer": 2,
+  "explain": "∫dx/√(1−x²) = sin⁻¹x, so IF = e^(sin⁻¹x).",
+  "kind": "formula",
+  "id": "ac64a15a-3752-4c65-b794-117279c7a4f0",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for (1+x²) dy/dx + y = tan⁻¹x is?",
+  "formula": "Divide by (1+x²) first",
+  "options": [
+   "1 + x²",
+   "e^(tan⁻¹x)",
+   "tan⁻¹x",
+   "e^(x²)"
+  ],
+  "answer": 1,
+  "explain": "P = 1/(1+x²), ∫P dx = tan⁻¹x, so IF = e^(tan⁻¹x).",
+  "kind": "concept",
+  "id": "27d3f7a8-a37e-491a-9142-8006e84e9d29",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + y/(x ln x) = 1/x is?",
+  "formula": "",
+  "options": [
+   "ln x",
+   "x ln x",
+   "e^x",
+   "1/ln x"
+  ],
+  "answer": 0,
+  "explain": "∫dx/(x ln x) = ln|ln x|, so IF = ln x.",
+  "kind": "formula",
+  "id": "41fa4535-f808-42e8-b37f-20752191afa0",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + (2 tan x)y = sin x is?",
+  "formula": "",
+  "options": [
+   "cos²x",
+   "sec x",
+   "tan²x",
+   "sec²x"
+  ],
+  "answer": 3,
+  "explain": "∫2 tan x dx = 2 ln sec x, so IF = sec²x.",
+  "kind": "formula",
+  "id": "9c0530e8-5335-4358-8353-696150b8472e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + (eˣ)y = x is?",
+  "formula": "",
+  "options": [
+   "e^(eˣ)",
+   "eˣ",
+   "e^(e^(−x))",
+   "x·eˣ"
+  ],
+  "answer": 0,
+  "explain": "∫eˣ dx = eˣ, so IF = e^(eˣ).",
+  "kind": "formula",
+  "id": "8e19bb30-4e72-4375-a504-8fe95bcaa351",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "The constant of integration in ∫P dx while finding the IF is?",
+  "formula": "",
+  "options": [
+   "Kept as C",
+   "Not needed (taken as 0)",
+   "Taken as 1",
+   "Equal to Q"
+  ],
+  "answer": 1,
+  "explain": "Any constant only multiplies the IF by a constant, which cancels, so it is omitted.",
+  "kind": "concept",
+  "id": "a856d48e-324b-49ec-b29d-585c16a4d87c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "A linear DE dy/dx + Py = Q has order and degree?",
+  "formula": "",
+  "options": [
+   "1 and 1",
+   "1 and 2",
+   "2 and 1",
+   "Degree not defined"
+  ],
+  "answer": 0,
+  "explain": "It is first order and first degree in y and dy/dx.",
+  "kind": "fact",
+  "id": "5da5531c-4108-4a3e-aaa1-a3a528404d4f",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "dy/dx + Py = Qy² becomes linear in z by which substitution?",
+  "formula": "",
+  "options": [
+   "z = y²",
+   "z = 1/y",
+   "z = ln y",
+   "z = y/x"
+  ],
+  "answer": 1,
+  "explain": "For a Bernoulli equation, z = y^(1−n) = y⁻¹ when n = 2.",
+  "kind": "concept",
+  "id": "d0519e9a-dc3c-4bbe-b967-90fb6632893a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "If y₁ and y₂ solve dy/dx + Py = Q, then y₁ − y₂ satisfies?",
+  "formula": "",
+  "options": [
+   "dy/dx + Py = Q",
+   "dy/dx + Py = 2Q",
+   "dy/dx + Py = 0",
+   "dy/dx = Q"
+  ],
+  "answer": 2,
+  "explain": "Subtracting the two equations cancels Q and leaves the homogeneous equation.",
+  "kind": "concept",
+  "id": "4168f01b-6bb1-4897-a294-28a8a6820190",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "General solution of dy/dx + y = 1 is?",
+  "formula": "",
+  "options": [
+   "y = 1 + Ce^(−x)",
+   "y = 1 + Ceˣ",
+   "y = x + Ce^(−x)",
+   "y = Ce^(−x)"
+  ],
+  "answer": 0,
+  "explain": "IF = eˣ, so y·eˣ = eˣ + C, giving y = 1 + Ce^(−x).",
+  "kind": "result",
+  "id": "d7f490f8-2f56-4959-9ac3-26e2fd9bdba6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + (cosec x)·y = 1 is?",
+  "formula": "∫cosec x dx = ln|tan(x/2)|",
+  "options": [
+   "tan(x/2)",
+   "cot(x/2)",
+   "cosec x − cot x + 1",
+   "sin x"
+  ],
+  "answer": 0,
+  "explain": "∫cosec x dx = ln|tan(x/2)|, so IF = e^(ln tan(x/2)) = tan(x/2).",
+  "kind": "result",
+  "id": "d3799ebd-614b-4625-a452-041b8b402b94",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "General solution of dy/dx + y = e^(−x) is?",
+  "formula": "d(y eˣ) = dx",
+  "options": [
+   "y = (x + C)e^(−x)",
+   "y = (x + C)eˣ",
+   "y = e^(−x) + C",
+   "y = (C − x)eˣ"
+  ],
+  "answer": 0,
+  "explain": "IF = eˣ, so y·eˣ = ∫1 dx = x + C, giving y = (x + C)e^(−x).",
+  "kind": "result",
+  "id": "c2cec27c-5cf2-4fa1-a066-7412815044aa",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + (sec²x)·y = sec²x·tan x is?",
+  "formula": "∫sec²x dx = tan x",
+  "options": [
+   "e^(tan x)",
+   "tan x",
+   "sec x + tan x",
+   "e^(sec x)"
+  ],
+  "answer": 0,
+  "explain": "P = sec²x, so ∫P dx = tan x and IF = e^(tan x).",
+  "kind": "formula",
+  "id": "4809c07a-e991-4f3d-8a67-1527b23a3660",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "IF for dy/dx + (cos x/(1 + sin x))·y = 1 is?",
+  "formula": "∫cos x/(1+sin x) dx = ln(1+sin x)",
+  "options": [
+   "1 + sin x",
+   "1 + cos x",
+   "ln(1 + sin x)",
+   "cos x/(1 + sin x)"
+  ],
+  "answer": 0,
+  "explain": "P = (1+sin x)′/(1+sin x), so ∫P dx = ln(1+sin x) and IF = 1 + sin x.",
+  "kind": "formula",
+  "id": "9d224f81-5841-4d86-a5ee-5fd20e9e5831",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "A linear DE dy/dx + Py = Q has integrating factor x³. Then P(x) equals?",
+  "formula": "P = (IF)′/IF",
+  "options": [
+   "3/x",
+   "3x²",
+   "x³/3",
+   "1/x³"
+  ],
+  "answer": 0,
+  "explain": "IF = e^∫P dx, so P = (d/dx)ln(IF) = (ln x³)′ = 3/x.",
+  "kind": "concept",
+  "id": "be439c88-5af8-4f00-b4ce-26d9cd993eee",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE dy/dx + Py = Q: form & IF"
+ },
+ {
+  "prompt": "Which equation is linear in x?",
+  "formula": "",
+  "options": [
+   "dx/dy + y·x = eʸ",
+   "dx/dy + x² = sin y",
+   "(dx/dy)² + x = y",
+   "x·dx/dy + y = 1"
+  ],
+  "answer": 0,
+  "explain": "x and dx/dy must appear only to the first power, with no product x·dx/dy.",
+  "kind": "concept",
+  "id": "48b82a39-6d63-4bc0-a866-371da09a61d5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "dx/dy + Px = Q·xⁿ (n ≠ 0, 1) becomes linear in v by taking v =",
+  "formula": "",
+  "options": [
+   "x^{1−n}",
+   "xⁿ",
+   "x^{n−1}·y",
+   "ln x"
+  ],
+  "answer": 0,
+  "explain": "This is Bernoulli's equation; dividing by xⁿ and putting v = x^{1−n} makes it linear.",
+  "kind": "concept",
+  "id": "1bf97e15-8a06-474b-a30f-b978ecf28242",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + x·tan y = Q(y) is",
+  "formula": "",
+  "options": [
+   "sec y",
+   "cos y",
+   "sin y",
+   "cosec y"
+  ],
+  "answer": 0,
+  "explain": "∫tan y dy = ln|sec y|, so IF = sec y.",
+  "kind": "result",
+  "id": "9d50b8d8-6e4f-49b5-a65b-18d4117b9174",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + x·cot y = Q(y) is",
+  "formula": "",
+  "options": [
+   "sin y",
+   "cos y",
+   "cosec y",
+   "sec y"
+  ],
+  "answer": 0,
+  "explain": "∫cot y dy = ln|sin y|, so IF = sin y.",
+  "kind": "result",
+  "id": "5ee59922-decf-4053-a272-766f1e1429aa",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy − x/y = y is",
+  "formula": "",
+  "options": [
+   "1/y",
+   "y",
+   "e^{y}",
+   "ln y"
+  ],
+  "answer": 0,
+  "explain": "P = −1/y, so ∫P dy = −ln y and IF = 1/y.",
+  "kind": "result",
+  "id": "d4706cd7-a166-4ed0-83dd-ed24891ef13e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "What are the order and degree of dx/dy + Px = Q?",
+  "formula": "",
+  "options": [
+   "Order 1, degree 1",
+   "Order 1, degree 2",
+   "Order 2, degree 1",
+   "Order 0, degree 1"
+  ],
+  "answer": 0,
+  "explain": "Only the first derivative appears, and it is raised to the first power.",
+  "kind": "fact",
+  "id": "ae5bf9d4-a9ab-4251-ba11-572eb7ed7b86",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "While finding the IF, the constant of integration in ∫P dy is",
+  "formula": "",
+  "options": [
+   "Omitted, since any one IF works",
+   "Always kept as C",
+   "Always taken as 1",
+   "Equal to the final constant"
+  ],
+  "answer": 0,
+  "explain": "A constant in ∫P dy only multiplies the IF by a constant, which cancels from both sides.",
+  "kind": "concept",
+  "id": "4f3f9196-b56f-46f2-8a8b-e032a0ed2ced",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + 3x/y = Q(y) is",
+  "formula": "",
+  "options": [
+   "y³",
+   "3y",
+   "e^{3y}",
+   "y^{−3}"
+  ],
+  "answer": 0,
+  "explain": "∫3/y dy = 3 ln y, so IF = e^{3 ln y} = y³.",
+  "kind": "result",
+  "id": "6441563e-4bf2-4a3d-8258-f439ae05477e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "General solution of dx/dy + Px = Q, with integrating factor I.F., is",
+  "formula": "",
+  "options": [
+   "x·I.F. = ∫Q·I.F. dy + C",
+   "x·I.F. = ∫P·I.F. dy + C",
+   "x·I.F. = ∫Q dy + C",
+   "x = ∫Q·I.F. dy + C"
+  ],
+  "answer": 0,
+  "explain": "Multiplying by I.F. gives d(x·I.F.)/dy = Q·I.F., so integrate in y.",
+  "kind": "formula",
+  "id": "aa861027-78e3-497a-a979-e9a5308be2ad",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + [2y/(1+y²)]·x = Q(y) is",
+  "formula": "",
+  "options": [
+   "1 + y²",
+   "e^{y²}",
+   "ln(1+y²)",
+   "1/(1+y²)"
+  ],
+  "answer": 0,
+  "explain": "∫2y/(1+y²) dy = ln(1+y²), so I.F. = 1+y².",
+  "kind": "formula",
+  "id": "724414ab-830c-4903-b53b-fd48729a2ec1",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of y dx + (x − y³) dy = 0 is",
+  "formula": "",
+  "options": [
+   "y",
+   "1/y",
+   "y³",
+   "e^{y}"
+  ],
+  "answer": 0,
+  "explain": "dx/dy + x/y = y², so I.F. = e^{ln y} = y.",
+  "kind": "formula",
+  "id": "88dd9ea4-e5ec-4453-9d92-589f348eb5b0",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Which equation is NOT linear in x (x dependent, y independent)?",
+  "formula": "",
+  "options": [
+   "x·dx/dy + y = 1",
+   "dx/dy + x sin y = y",
+   "dx/dy + x/y = y²",
+   "dx/dy = x + y"
+  ],
+  "answer": 0,
+  "explain": "The term x·dx/dy is a product of x and its derivative, so it is not linear in x.",
+  "kind": "exception",
+  "id": "684c6af7-6c39-4499-8c38-d0ccd893ec73",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + x/(y ln y) = Q(y) is",
+  "formula": "",
+  "options": [
+   "ln y",
+   "y ln y",
+   "1/ln y",
+   "e^{y}"
+  ],
+  "answer": 0,
+  "explain": "∫dy/(y ln y) = ln(ln y), so I.F. = ln y.",
+  "kind": "formula",
+  "id": "0f0e0089-b204-4510-ad06-078232231ec5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + (sec y)·x = Q(y) is",
+  "formula": "",
+  "options": [
+   "sec y + tan y",
+   "sec y",
+   "ln(sec y)",
+   "tan y"
+  ],
+  "answer": 0,
+  "explain": "∫sec y dy = ln|sec y + tan y|, so I.F. = sec y + tan y.",
+  "kind": "formula",
+  "id": "d652be9d-d261-4abb-81c8-31729fffdd7e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "dy/dx = 1/(x + y) becomes dx/dy − x = y. Its integrating factor is?",
+  "formula": "",
+  "options": [
+   "e^(−y)",
+   "eʸ",
+   "e^(−x)",
+   "y"
+  ],
+  "answer": 0,
+  "explain": "P = −1, so I.F. = e^∫(−1)dy = e^(−y).",
+  "kind": "formula",
+  "id": "08d7cb28-190b-4497-a26f-1aef3dc55d26",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Which equation becomes linear in x when y is taken as the independent variable?",
+  "formula": "",
+  "options": [
+   "dy/dx = y/(x + y²)",
+   "dy/dx = y/(x² + y)",
+   "dy/dx = 1/(x² + y)",
+   "dy/dx = x/(y + x²)"
+  ],
+  "answer": 0,
+  "explain": "dx/dy = (x + y²)/y = x/y + y is linear in x; the others keep x².",
+  "kind": "concept",
+  "id": "855a99e9-dc7b-4728-b983-307b70c3e7f9",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + (cosec y)·x = Q(y) is?",
+  "formula": "",
+  "options": [
+   "tan(y/2)",
+   "cot(y/2)",
+   "sin y",
+   "cosec y"
+  ],
+  "answer": 0,
+  "explain": "∫cosec y dy = ln tan(y/2), so I.F. = tan(y/2).",
+  "kind": "formula",
+  "id": "16b4b84c-7d31-4860-85a7-1520d91b8517",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "IF of (1 + y²)dx = (tan⁻¹y − x)dy, treated as linear in x, is?",
+  "formula": "dx/dy + x/(1+y²) = tan⁻¹y/(1+y²)",
+  "options": [
+   "e^(tan⁻¹y)",
+   "tan⁻¹y",
+   "1 + y²",
+   "e^(1/(1+y²))"
+  ],
+  "answer": 0,
+  "explain": "P = 1/(1+y²), so ∫P dy = tan⁻¹y and IF = e^(tan⁻¹y).",
+  "kind": "result",
+  "id": "059f93ff-0ec8-4093-98d3-60cf8dd7d7e8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + [eʸ/(1 + eʸ)]·x = Q(y) is?",
+  "formula": "I.F. = e^∫P dy",
+  "options": [
+   "1 + eʸ",
+   "eʸ",
+   "ln(1 + eʸ)",
+   "1/(1 + eʸ)"
+  ],
+  "answer": 0,
+  "explain": "∫eʸ/(1+eʸ) dy = ln(1+eʸ), so I.F. = e^{ln(1+eʸ)} = 1 + eʸ.",
+  "kind": "formula",
+  "id": "a739b2c4-e22f-47f3-b5df-64d33961a60e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "(x dx + y dy)/(x²+y²) is the exact differential of?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(y/x)",
+   "ln(x²+y²)",
+   "½ ln(x²+y²)",
+   "√(x²+y²)"
+  ],
+  "answer": 2,
+  "explain": "d[½ ln(x²+y²)] = (x dx + y dy)/(x²+y²).",
+  "kind": "formula",
+  "id": "cff92736-5528-47a9-b470-4f8972e92e16",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "IF of Mdx+Ndy=0 is a function of y only if which expression depends on y alone?",
+  "formula": "",
+  "options": [
+   "(Mᵧ − Nₓ)/N",
+   "(Nₓ − Mᵧ)/M",
+   "(Mᵧ + Nₓ)/M",
+   "(Nₓ − Mᵧ)/N"
+  ],
+  "answer": 1,
+  "explain": "If (Nₓ − Mᵧ)/M = g(y), then IF = e^{∫g(y)dy}.",
+  "kind": "formula",
+  "id": "08b85852-c0ea-4825-adb9-f0ba917380dc",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "d(xᵐyⁿ) equals?",
+  "formula": "",
+  "options": [
+   "xᵐ⁻¹yⁿ⁻¹(m y dx + n x dy)",
+   "xᵐ⁻¹yⁿ⁻¹(m x dx + n y dy)",
+   "xᵐyⁿ(m dx + n dy)",
+   "xᵐ⁺¹yⁿ⁺¹(dx/m + dy/n)"
+  ],
+  "answer": 0,
+  "explain": "Product rule: n xᵐyⁿ⁻¹ dy + m xᵐ⁻¹yⁿ dx.",
+  "kind": "formula",
+  "id": "f4783eea-8fc9-48f4-9c45-15aa1dd35c38",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "Solution of x dy − y dx = x² dx is?",
+  "formula": "",
+  "options": [
+   "y = x² + C",
+   "y = x³ + Cx",
+   "y = x² + Cx",
+   "y = x²/2 + C"
+  ],
+  "answer": 2,
+  "explain": "Divide by x²: d(y/x) = dx, so y/x = x + C.",
+  "kind": "result",
+  "id": "b471903d-eda1-4829-bdb7-df433839b63e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "e^{xy}(x dy + y dx) is the exact differential of?",
+  "formula": "",
+  "options": [
+   "xy e^{xy}",
+   "e^{xy}",
+   "e^{xy}/xy",
+   "e^{x}·e^{y}"
+  ],
+  "answer": 1,
+  "explain": "d(e^{xy}) = e^{xy}·d(xy) = e^{xy}(x dy + y dx).",
+  "kind": "formula",
+  "id": "9c0a53ad-e5c7-4a42-985e-3c1c05de5479",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "d(tan⁻¹(x/y)) equals?",
+  "formula": "",
+  "options": [
+   "(x dy − y dx)/(x²+y²)",
+   "(y dx − x dy)/(x²+y²)",
+   "(y dx − x dy)/y²",
+   "(x dx + y dy)/(x²+y²)"
+  ],
+  "answer": 1,
+  "explain": "d(tan⁻¹(x/y)) = (y dx − x dy)/(x²+y²), the negative of d(tan⁻¹(y/x)).",
+  "kind": "formula",
+  "id": "0d6e0bf3-5ca6-43fe-b821-a508c5164394",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "e^{y/x}(x dy − y dx)/x² is the exact differential of?",
+  "formula": "",
+  "options": [
+   "e^{y/x}",
+   "e^{x/y}",
+   "y e^{y/x}/x",
+   "e^{y/x}/x"
+  ],
+  "answer": 0,
+  "explain": "d(y/x) = (x dy − y dx)/x², so the whole term is d(e^{y/x}).",
+  "kind": "formula",
+  "id": "76972b2c-6c97-4c2e-bd82-87175d5a9a16",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "Solution of x dy − y dx = (x²+y²) dx is?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(y/x) = x + C",
+   "tan⁻¹(x/y) = x + C",
+   "ln(y/x) = x + C",
+   "y/x = x + C"
+  ],
+  "answer": 0,
+  "explain": "Dividing by x²+y² gives d(tan⁻¹(y/x)) = dx, so tan⁻¹(y/x) = x + C.",
+  "kind": "result",
+  "id": "e0940722-40b2-464a-98ba-c52fbfe45a07",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "Degree of the DE (d²y/dx²)² = ∛(1 + dy/dx) is?",
+  "formula": "(y″)⁶ = 1 + y′",
+  "options": [
+   "2",
+   "3",
+   "6",
+   "Not defined"
+  ],
+  "answer": 2,
+  "explain": "Cubing both sides removes the cube root: (y″)⁶ = 1 + y′, so the power of the highest derivative is 6.",
+  "kind": "concept",
+  "id": "0db1440b-a006-4b1e-994a-25deb37b1453",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "Degree of the DE (d³y/dx³)² = √(d²y/dx²) is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "4",
+   "Not defined"
+  ],
+  "answer": 2,
+  "explain": "Squaring removes the radical: (y''')⁴ = y'', so the highest-order derivative y''' has power 4.",
+  "kind": "concept",
+  "id": "bc73215e-4e90-45a3-a9f9-e6b69d82cb2c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Degree of a differential equation"
+ },
+ {
+  "prompt": "(x dy + y dx)/(1 + x²y²) is the exact differential of?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(y/x)",
+   "tan⁻¹(xy)",
+   "ln(1 + x²y²)",
+   "½ ln(1 + x²y²)"
+  ],
+  "answer": 1,
+  "explain": "With u = xy, du/(1+u²) = d(tan⁻¹ u).",
+  "kind": "formula",
+  "id": "ca788f3b-b629-46aa-90d8-a59dab5cd865",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "d(x²/y) equals?",
+  "formula": "",
+  "options": [
+   "(2xy dx − x² dy)/y²",
+   "(x² dy − 2xy dx)/y²",
+   "(2x dx − dy)/y",
+   "(y dx − x dy)/y²"
+  ],
+  "answer": 0,
+  "explain": "Quotient rule: (y·2x dx − x² dy)/y².",
+  "kind": "formula",
+  "id": "494ff0e9-4d89-4894-ac36-2e5d43c198d6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "General solution of x dy + y dx = xy dx is?",
+  "formula": "",
+  "options": [
+   "xy = x + C",
+   "xy = Ce^x",
+   "y = Cxeˣ",
+   "xy = Ce^(x²/2)"
+  ],
+  "answer": 1,
+  "explain": "Divide by xy: d(ln xy) = dx, so ln(xy) = x + c, giving xy = Ceˣ.",
+  "kind": "result",
+  "id": "afa0ebd3-ce4c-4c73-976a-2e62c5a3459a",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "Solution of the exact DE (x² + y)dx + (x + y²)dy = 0 is?",
+  "formula": "",
+  "options": [
+   "x³ + y³ + xy = C",
+   "x³/3 + y³/3 + xy = C",
+   "x³/3 + y³/3 + x²y² = C",
+   "x² + y² + xy = C"
+  ],
+  "answer": 1,
+  "explain": "M_y = N_x = 1; integrating gives x³/3 + xy + y³/3 = C.",
+  "kind": "result",
+  "id": "c9292820-912e-454b-b529-18cdf022b1f5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "(x dy + y dx)/(xy) is the exact differential of?",
+  "formula": "",
+  "options": [
+   "ln(xy)",
+   "1/(xy)",
+   "ln(y/x)",
+   "xy"
+  ],
+  "answer": 0,
+  "explain": "d(ln xy) = d(ln x + ln y) = dx/x + dy/y = (y dx + x dy)/(xy).",
+  "kind": "result",
+  "id": "9fd742e8-3cad-49e3-9ec1-deb80415ee18",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "General solution of x dy + y dx = 2x dx is?",
+  "formula": "",
+  "options": [
+   "y = x² + C",
+   "xy = 2x² + C",
+   "xy = x² + C",
+   "xy = x + C"
+  ],
+  "answer": 2,
+  "explain": "x dy + y dx = d(xy) and 2x dx = d(x²), so xy = x² + C.",
+  "kind": "result",
+  "id": "277c8e9f-2b95-4952-b413-722ae4ab0b8d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "d(y²/x) equals?",
+  "formula": "",
+  "options": [
+   "(2xy dy − y² dx)/x²",
+   "(x y dy − y² dx)/x²",
+   "(y² dx − 2xy dy)/x²",
+   "(2y dy − y² dx)/x²"
+  ],
+  "answer": 0,
+  "explain": "Quotient rule: (x·2y dy − y² dx)/x².",
+  "kind": "formula",
+  "id": "3c22fb28-cb70-4875-9812-d4459a96b68d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "General solution of x dy + y dx = dx/x is?",
+  "formula": "",
+  "options": [
+   "xy = ln|x| + C",
+   "xy = x ln|x| + C",
+   "y = ln|x| + C",
+   "xy = 1/x + C"
+  ],
+  "answer": 0,
+  "explain": "x dy + y dx = d(xy) = dx/x, so integrating gives xy = ln|x| + C.",
+  "kind": "result",
+  "id": "73d48a63-719b-4207-be85-d29527979db5",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "d(ln(x² + y²)) equals?",
+  "formula": "",
+  "options": [
+   "2(x dx + y dy)/(x²+y²)",
+   "(x dx + y dy)/(x²+y²)",
+   "2(x dy − y dx)/(x²+y²)",
+   "(x dy + y dx)/(x²+y²)"
+  ],
+  "answer": 0,
+  "explain": "d(x²+y²) = 2(x dx + y dy), divided by x²+y².",
+  "kind": "result",
+  "id": "1201cab9-c517-49f7-8391-0f24ba134ad8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "d(y/x²) equals?",
+  "formula": "",
+  "options": [
+   "(x dy − 2y dx)/x³",
+   "(x dy − y dx)/x³",
+   "(x dy − 2y dx)/x²",
+   "(2y dx − x dy)/x³"
+  ],
+  "answer": 0,
+  "explain": "d(y/x²) = dy/x² − 2y dx/x³ = (x dy − 2y dx)/x³.",
+  "kind": "formula",
+  "id": "60084a63-e723-43cc-9339-6597c02c6fad",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "Solution of x dx + y dy = (x² + y²) dx is?",
+  "formula": "",
+  "options": [
+   "x² + y² = Ce^{2x}",
+   "x² + y² = Ce^{x}",
+   "x² + y² = 2x + C",
+   "x² + y² = Cx"
+  ],
+  "answer": 0,
+  "explain": "Divide by (x²+y²): d[½ ln(x²+y²)] = dx, so ln(x²+y²) = 2x + C.",
+  "kind": "result",
+  "id": "77de7d1b-2169-4b05-b677-39521e45ac2e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "An integrating factor that makes y dx − x dy = 0 exact is?",
+  "formula": "",
+  "options": [
+   "1/y²",
+   "y²",
+   "xy",
+   "x²y²"
+  ],
+  "answer": 0,
+  "explain": "(y dx − x dy)/y² = −d(x/y); 1/x² and 1/(xy) also work.",
+  "kind": "concept",
+  "id": "7d122318-6365-4f5f-9910-f6796bd88bbd",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "(x dx + y dy)/√(x²+y²) is the exact differential of which function?",
+  "formula": "d√(x²+y²) = (x dx + y dy)/√(x²+y²)",
+  "options": [
+   "√(x²+y²)",
+   "½√(x²+y²)",
+   "ln√(x²+y²)",
+   "(x²+y²)^{3/2}"
+  ],
+  "answer": 0,
+  "explain": "Put r = √(x²+y²). Then r dr = x dx + y dy, so dr = (x dx + y dy)/r.",
+  "kind": "result",
+  "id": "8e543fc7-d5d7-4e88-ae87-cd1fd34376c7",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "A solution that cannot be got from the general solution by giving any value to the constants is called:",
+  "formula": "",
+  "options": [
+   "Singular solution",
+   "Particular solution",
+   "Trivial solution",
+   "Complementary solution"
+  ],
+  "answer": 0,
+  "explain": "A singular solution is not a member of the general-solution family for any choice of the arbitrary constants.",
+  "kind": "concept",
+  "id": "010d93a3-6110-419a-b2a3-09295ef6517c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "The number of essential arbitrary constants in y = (a + b)x² + c is:",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "1",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "a and b merge into one constant (a+b), so only 2 independent constants remain; the DE has order 2.",
+  "kind": "concept",
+  "id": "f5a32bbf-d76c-4ff2-965d-59cd090a109d",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Order of the DE of the family of all conics ax² + 2hxy + by² + 2gx + 2fy + c = 0 is:",
+  "formula": "",
+  "options": [
+   "5",
+   "6",
+   "4",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "Six constants but only 5 independent (divide by one), so the order is 5.",
+  "kind": "fact",
+  "id": "b46fa608-0f9a-452b-ac40-525af441363c",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Number of essential arbitrary constants in y = a·e^(bx + c) is:",
+  "formula": "a·e^c = A ⇒ y = A·e^(bx)",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "a and c merge into A = a·e^c, so only A and b remain: 2 essential constants.",
+  "kind": "concept",
+  "id": "6ca02762-d2e4-464c-89a8-ad851461dae8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "To get a unique particular solution of a 3rd-order DE, how many independent conditions are needed?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "The general solution has 3 constants, so 3 independent conditions fix them.",
+  "kind": "concept",
+  "id": "2fba0e13-2986-4795-b041-53b4170b28ff",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + x/√(1 − y²) = Q(y) is?",
+  "formula": "",
+  "options": [
+   "e^(sin⁻¹y)",
+   "e^(cos⁻¹y)",
+   "e^(tan⁻¹y)",
+   "√(1 − y²)"
+  ],
+  "answer": 0,
+  "explain": "∫dy/√(1−y²) = sin⁻¹y, so IF = e^(sin⁻¹y).",
+  "kind": "formula",
+  "id": "18427af6-5dc2-4dc0-8486-6da9515ab4f1",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy − (tan y)·x = Q(y) is?",
+  "formula": "",
+  "options": [
+   "cos y",
+   "sec y",
+   "sin y",
+   "cosec y"
+  ],
+  "answer": 0,
+  "explain": "∫(−tan y)dy = ln cos y, so IF = cos y.",
+  "kind": "formula",
+  "id": "c279072c-5d55-4a6e-a1da-d4bfec6cfcb8",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + x/(sin y cos y) = Q(y) is?",
+  "formula": "",
+  "options": [
+   "tan y",
+   "sin y cos y",
+   "cot y",
+   "sec y"
+  ],
+  "answer": 0,
+  "explain": "∫sec²y/tan y dy = ln tan y, so IF = tan y.",
+  "kind": "formula",
+  "id": "768f1444-8520-45ad-9732-1e88a6f764e0",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy − (cot y)·x = Q(y) is?",
+  "formula": "",
+  "options": [
+   "cosec y",
+   "sin y",
+   "sec y",
+   "tan y"
+  ],
+  "answer": 0,
+  "explain": "∫(−cot y)dy = −ln sin y, so IF = 1/sin y = cosec y.",
+  "kind": "formula",
+  "id": "2481486b-5be1-412a-9e3b-a276feb13ec2",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "General solution of dx/dy + x/y = 1 is?",
+  "formula": "",
+  "options": [
+   "xy = y²/2 + C",
+   "xy = y² + C",
+   "x = y/2 + C",
+   "x/y = y + C"
+  ],
+  "answer": 0,
+  "explain": "IF = y, so xy = ∫y dy = y²/2 + C.",
+  "kind": "result",
+  "id": "76e05629-7890-4024-bdb9-66fa85169f08",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "General solution of dx/dy + x = e^(−y) is?",
+  "formula": "I.F. = eʸ",
+  "options": [
+   "x·eʸ = y + C",
+   "x·eʸ = −e^(−y) + C",
+   "x·e^(−y) = y + C",
+   "x = y·eʸ + C"
+  ],
+  "answer": 0,
+  "explain": "x·eʸ = ∫e^(−y)·eʸ dy = y + C.",
+  "kind": "result",
+  "id": "64985ef4-c375-44ed-ad0a-24ec67d8d565",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + (2 cot y)·x = Q(y) is?",
+  "formula": "",
+  "options": [
+   "sin y",
+   "cosec²y",
+   "sin²y",
+   "2 sin y"
+  ],
+  "answer": 2,
+  "explain": "∫2 cot y dy = 2 ln sin y, so I.F. = sin²y.",
+  "kind": "formula",
+  "id": "e5c566d5-65fa-457a-b7bf-feecf5cd6008",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + (sec²y)·x = Q(y) is?",
+  "formula": "I.F. = e^∫P dy",
+  "options": [
+   "e^(tan y)",
+   "tan y",
+   "e^(sec y)",
+   "sec²y"
+  ],
+  "answer": 0,
+  "explain": "∫sec²y dy = tan y, so I.F. = e^(tan y).",
+  "kind": "formula",
+  "id": "4e5d10e1-3855-4cd0-8bec-9ef64c9733d3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Geometrically, the general solution of a first-order DE represents:",
+  "formula": "",
+  "options": [
+   "A single curve",
+   "A one-parameter family of curves",
+   "A two-parameter family of curves",
+   "A family of straight lines only"
+  ],
+  "answer": 1,
+  "explain": "One arbitrary constant gives a one-parameter family; fixing it gives one member curve (particular solution).",
+  "kind": "concept",
+  "id": "5e5b33b5-07b6-4801-8006-f013da4674c3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "The particular solution of dy/dx = 2x passing through the point (1, 3) is:",
+  "formula": "y = x² + c",
+  "options": [
+   "y = x² + 2",
+   "y = x² + 3",
+   "y = 2x + 1",
+   "y = x² + 1"
+  ],
+  "answer": 0,
+  "explain": "General solution y = x² + c; the point (1, 3) gives 3 = 1 + c, so c = 2.",
+  "kind": "concept",
+  "id": "dc164527-1d7c-4a9b-b8b6-d1dc3ff38cf3",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "General vs particular solution, arbitrary consts"
+ },
+ {
+  "prompt": "Integrating factor of dy/dx = y³/(1 − 2xy²) treated as linear in x is?",
+  "formula": "dx/dy + (2/y)·x = 1/y³",
+  "options": [
+   "y²",
+   "1/y²",
+   "y³",
+   "e^(2y)"
+  ],
+  "answer": 0,
+  "explain": "dx/dy = 1/y³ − 2x/y, so P = 2/y and I.F. = e^(2 ln y) = y².",
+  "kind": "formula",
+  "id": "1b43a84f-5f16-4e95-8482-817cfabb87a7",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "General solution of dx/dy − x/y = 2y², for y > 0, is?",
+  "formula": "I.F. = 1/y",
+  "options": [
+   "x = y³ + Cy",
+   "x = y³/3 + Cy",
+   "x = 2y³ + C",
+   "x = y² + Cy"
+  ],
+  "answer": 0,
+  "explain": "d(x/y)/dy = 2y gives x/y = y² + C, so x = y³ + Cy.",
+  "kind": "result",
+  "id": "83bb4de8-0661-429d-a798-024c4e877386",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy − (2/y)·x = Q(y), for y > 0, is?",
+  "formula": "I.F. = e^∫P dy",
+  "options": [
+   "y²",
+   "1/y²",
+   "e^(−2y)",
+   "1/y"
+  ],
+  "answer": 1,
+  "explain": "P = −2/y, so ∫P dy = −2 ln y and I.F. = y⁻² = 1/y².",
+  "kind": "formula",
+  "id": "a43aeef6-0a2c-4cba-9990-d15d10bd23dd",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + [cos y/(1 + sin y)]·x = Q(y) is?",
+  "formula": "I.F. = e^∫P dy",
+  "options": [
+   "1 + sin y",
+   "1 + cos y",
+   "1/(1 + sin y)",
+   "sin y"
+  ],
+  "answer": 0,
+  "explain": "P is the derivative of ln(1 + sin y) (log-derivative form), so I.F. = 1 + sin y.",
+  "kind": "formula",
+  "id": "496a8cc4-1d16-473d-95b4-42a6a11abcf4",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + (1 + 1/y)·x = Q(y), for y > 0, is?",
+  "formula": "I.F. = e^∫P dy",
+  "options": [
+   "e^y/y",
+   "y·eʸ",
+   "eʸ + y",
+   "y + ln y"
+  ],
+  "answer": 1,
+  "explain": "∫(1 + 1/y) dy = y + ln y, so I.F. = e^(y + ln y) = y·eʸ.",
+  "kind": "formula",
+  "id": "ac0780d3-0706-46f7-9e3b-7ef08aa0b5fc",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Integrating factor of dx/dy + (2 tan y)·x = Q(y) is?",
+  "formula": "I.F. = e^∫P dy",
+  "options": [
+   "sec y",
+   "sec² y",
+   "cos² y",
+   "tan² y"
+  ],
+  "answer": 1,
+  "explain": "∫2 tan y dy = 2 ln sec y, so I.F. = sec²y.",
+  "kind": "formula",
+  "id": "553b72ba-5143-4ef1-90c9-42e337d377c6",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Linear DE in x: dx/dy + Px = Q"
+ },
+ {
+  "prompt": "Which of these DEs is exact?",
+  "formula": "",
+  "options": [
+   "y dx − x dy = 0",
+   "y dx + 2x dy = 0",
+   "(y + 3x²)dx + x dy = 0",
+   "x dx + x dy = 0"
+  ],
+  "answer": 2,
+  "explain": "Only here ∂M/∂y = 1 = ∂N/∂x; the others fail the test.",
+  "kind": "concept",
+  "id": "0abae766-c61f-4904-8c24-bf49cc0f671e",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ },
+ {
+  "prompt": "eˣ(y dx + dy) is the exact differential of?",
+  "formula": "",
+  "options": [
+   "y eˣ",
+   "x eʸ",
+   "eˣ + y",
+   "eˣʸ"
+  ],
+  "answer": 0,
+  "explain": "d(y eˣ) = eˣ dy + y eˣ dx = eˣ(y dx + dy).",
+  "kind": "result",
+  "id": "ee0d5bcd-6b97-4466-b5ed-3c984c0c1a38",
+  "subject": "Mathematics",
+  "chapter": "Differential Equations",
+  "topic": "Exact differentials (d(xy), d(y/x) etc.)"
+ }
+]

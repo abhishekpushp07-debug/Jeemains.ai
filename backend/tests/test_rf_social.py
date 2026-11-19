@@ -109,7 +109,7 @@ async def _rooms():
             assert acc["status"] == "started" and acc["duel_id"]
             assert (await post(f"/challenges/{room['id']}/accept", b)).json()["duel_id"] == acc["duel_id"]
             duel = (await get(f"/duels/{acc['duel_id']}", a)).json()
-            assert duel["status"] == "ready" and duel["mode"] == "friend" and len(duel["players"]) == 2 and duel["entry_seconds"] == 9.5 and duel["seconds_per_card"] == 15
+            assert duel["status"] == "ready" and duel["mode"] == "friend" and len(duel["players"]) == 2 and duel["entry_seconds"] == 9.5 and duel["seconds_per_card"] == 20
             assert 9.5 <= duel["start_at"] - duel["server_now"] <= 10.6
             opp = next(p for p in duel["players"] if not p["you"])
             assert opp["pid"] == b["pid"] and opp["name"] == "••••••0002" and {"level", "wins", "rank"} <= set(opp)

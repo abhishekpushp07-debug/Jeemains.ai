@@ -1,1522 +1,3462 @@
 [
-  {
-    "id": "abde9875-bb43-4914-9b90-da00d0387c43",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Ohm's law: relation between V, I, R",
-    "formula": "V = IR",
-    "options": [
-      "V = IR",
-      "V = R/I",
-      "V = I²R",
-      "V = I/R"
-    ],
-    "answer": 0,
-    "explain": "Ohm's law states voltage equals current times resistance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2be97caf-0ea2-4bcb-9ffa-36c069c36b63",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "SI unit of resistivity (ρ)",
-    "formula": "ρ = RA/L",
-    "options": [
-      "Ω·m²",
-      "Ω·m",
-      "Ω/m²",
-      "Ω/m"
-    ],
-    "answer": 1,
-    "explain": "Resistivity has units of ohm-metre (Ω·m).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7adae46a-a087-4ecd-b931-2b3d169d01be",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistors in series: equivalent resistance",
-    "formula": "R_eq = R₁+R₂+R₃",
-    "options": [
-      "Smallest resistance",
-      "Product/sum",
-      "Sum of all resistances",
-      "Reciprocal of sum"
-    ],
-    "answer": 2,
-    "explain": "Series resistors add directly: R_eq = R₁+R₂+…",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b6af53bf-872d-4af3-b073-792680f76135",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistors in parallel: equivalent resistance formula",
-    "formula": "1/R_eq = 1/R₁+1/R₂",
-    "options": [
-      "R_eq = √(R₁R₂)",
-      "R_eq = ΣRᵢ",
-      "1/R_eq = Σ(1/Rᵢ)",
-      "R_eq = R₁R₂/(R₁+R₂) only always"
-    ],
-    "answer": 2,
-    "explain": "Reciprocals add for parallel combination.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d339a1b8-ce00-4230-b17c-6cca61dc8087",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Power dissipated in a resistor",
-    "formula": "P = I²R = V²/R = VI",
-    "options": [
-      "P = I/R²",
-      "P = IR²",
-      "P = I²R",
-      "P = V²R"
-    ],
-    "answer": 2,
-    "explain": "Power P = I²R = V²/R = VI for a resistor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bff5935c-0aab-42ac-b1d9-1ad3c198449e",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Drift velocity relation to current",
-    "formula": "I = nAev_d",
-    "options": [
-      "I = nAev_d",
-      "I = nAe/v_d",
-      "I = nA/ev_d",
-      "I = nev_d/A"
-    ],
-    "answer": 0,
-    "explain": "Current I = nAev_d where n is carrier density, A area, e charge.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4acdcdbf-477f-4d9c-9c62-709af515fbc3",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Mobility (μ) of charge carriers definition",
-    "formula": "μ = v_d/E",
-    "options": [
-      "v_d × E",
-      "E / v_d",
-      "v_d / E",
-      "v_d / I"
-    ],
-    "answer": 2,
-    "explain": "Mobility is drift velocity per unit electric field: μ = v_d/E.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6c140c45-2188-40a0-8457-6f1ae9c316fa",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Temperature coefficient of resistance: R varies as",
-    "formula": "R = R₀(1+αΔT)",
-    "options": [
-      "R₀(1−αΔT)",
-      "R₀(1+αΔT)",
-      "R₀αΔT",
-      "R₀/(1+αΔT)"
-    ],
-    "answer": 1,
-    "explain": "For metals, resistance increases linearly with temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0ae46c64-d2bb-4c8b-957c-21ab2791ae19",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "For which material is α (temp. coeff.) negative?",
-    "formula": "",
-    "options": [
-      "Semiconductors",
-      "Tungsten",
-      "Copper",
-      "Nichrome"
-    ],
-    "answer": 0,
-    "explain": "Semiconductors have negative α; resistance decreases with temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b459bda7-5794-4e6b-b024-2f0ba48a852b",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "EMF of a cell: terminal voltage when current I flows",
-    "formula": "V = ε − Ir",
-    "options": [
-      "ε − I/r",
-      "ε − Ir",
-      "ε + Ir",
-      "ε/Ir"
-    ],
-    "answer": 1,
-    "explain": "Terminal voltage V = ε − Ir; r is internal resistance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c876ed5e-339d-470a-bf04-1ab37a6a816d",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Kirchhoff's Current Law (KCL) states",
-    "formula": "ΣI_in = ΣI_out",
-    "options": [
-      "Sum of currents at node = 0",
-      "V = IR at junction",
-      "Sum of EMFs in loop = 0",
-      "Power in = Power out"
-    ],
-    "answer": 0,
-    "explain": "KCL: algebraic sum of currents at any junction is zero (charge conservation).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d17e6fff-59b7-4984-90eb-3e01f63f60a9",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Kirchhoff's Voltage Law (KVL) states",
-    "formula": "ΣV = 0 (closed loop)",
-    "options": [
-      "Sum of potential drops in loop = 0",
-      "EMF = sum of resistances",
-      "IR = ε always",
-      "Sum of currents in loop = 0"
-    ],
-    "answer": 0,
-    "explain": "KVL: algebraic sum of potential differences in a closed loop is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e2658d35-3370-4b9b-ab5c-7e7bfdae3f03",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a potentiometer, balancing length ∝",
-    "formula": "ε ∝ l",
-    "options": [
-      "Current through cell",
-      "Internal resistance",
-      "External resistance",
-      "EMF of cell"
-    ],
-    "answer": 3,
-    "explain": "Potentiometer: balancing length is directly proportional to EMF.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "65c2dae2-3a3d-4779-ab4a-152300ea3a6b",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Cells in series: total EMF and internal resistance",
-    "formula": "ε_eq=Σεᵢ, r_eq=Σrᵢ",
-    "options": [
-      "EMFs add, r adds",
-      "EMF is average, r adds",
-      "EMFs add, 1/r adds",
-      "EMFs add, r is same"
-    ],
-    "answer": 0,
-    "explain": "Series cells: ε_total = ε₁+ε₂+…, r_total = r₁+r₂+…",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a5a518cc-a7e8-4d0d-bda2-0ed20ece0133",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Cells in parallel (identical): terminal EMF and r_eq",
-    "formula": "ε_eq=ε, r_eq=r/n",
-    "options": [
-      "ε/n, r/n",
-      "nε, r/n",
-      "ε same, r/n",
-      "ε same, nr"
-    ],
-    "answer": 2,
-    "explain": "n identical cells in parallel: EMF unchanged, r_eq = r/n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5aad9d80-f79e-474c-a865-0d1331715df0",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Condition for maximum power transfer to external R",
-    "formula": "R = r",
-    "options": [
-      "R = r",
-      "R = 2r",
-      "R → ∞",
-      "R → 0"
-    ],
-    "answer": 0,
-    "explain": "Maximum power delivered when external resistance R equals internal resistance r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5c8c49de-9dd5-4ca7-a9b6-209673285f9c",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistivity of a conductor depends on",
-    "formula": "ρ = m/(ne²τ)",
-    "options": [
-      "Cross-section area",
-      "Length only",
-      "Applied voltage",
-      "Material & temperature"
-    ],
-    "answer": 3,
-    "explain": "Resistivity is intrinsic property depending on material and temperature, not dimensions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bdd28ff1-2fce-45b0-b79e-f2d44813b5e7",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "If wire is stretched to double length, resistance becomes",
-    "formula": "R ∝ L²/Vol",
-    "options": [
-      "R/2",
-      "4R",
-      "2R",
-      "R/4"
-    ],
-    "answer": 1,
-    "explain": "Volume constant → A halves, L doubles → R = ρL/A becomes 4R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b1495d96-3472-459d-8a21-5b6d3f241b06",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Current density J and electric field E relation",
-    "formula": "J = σE",
-    "options": [
-      "J = E/σ",
-      "J = σ/E",
-      "J = σE",
-      "J = E·ρ"
-    ],
-    "answer": 2,
-    "explain": "J = σE where σ = 1/ρ is conductivity; microscopic Ohm's law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8dfe6c24-bb14-4f36-b3bf-2b980d41e5bd",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "SI unit of conductivity σ",
-    "formula": "σ = 1/ρ",
-    "options": [
-      "S·m",
-      "Ω·m",
-      "S/m (siemens per metre)",
-      "Ω/m"
-    ],
-    "answer": 2,
-    "explain": "Conductivity σ = 1/ρ has units of S/m or (Ω·m)⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70637b1e-fda5-4576-a13b-fbfef5be47d5",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Ammeter is connected in ______ with the circuit",
-    "formula": "",
-    "options": [
-      "Bridge configuration",
-      "Parallel",
-      "Either series or parallel",
-      "Series"
-    ],
-    "answer": 3,
-    "explain": "Ammeter has very low resistance and must be in series to measure current.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "43080ab4-f388-4af2-9ba1-166fe6b0eeb2",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Voltmeter is connected in ______ with the component",
-    "formula": "",
-    "options": [
-      "Parallel",
-      "Bridge",
-      "Delta",
-      "Series"
-    ],
-    "answer": 0,
-    "explain": "Voltmeter has very high resistance and is connected in parallel to measure voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e816cc8e-3689-44ab-9233-21e742539b3d",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Relaxation time τ relates to drift velocity as",
-    "formula": "vd = eEτ/m",
-    "options": [
-      "vd = mτ/eE",
-      "vd = eτ/mE",
-      "vd = eEτ/m",
-      "vd = mE/eτ"
-    ],
-    "answer": 2,
-    "explain": "Drift velocity = (eEτ/m); τ is mean relaxation time between collisions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "445b1a4b-3166-43bc-bdfb-e5100db9c8dd",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistivity ρ is related to relaxation time τ as",
-    "formula": "ρ = m/ne²τ",
-    "options": [
-      "ρ = neτ/m",
-      "ρ = m/neτ",
-      "ρ = m/ne²τ",
-      "ρ = ne²τ/m"
-    ],
-    "answer": 2,
-    "explain": "From Drude model, ρ = m/(ne²τ); higher τ means lower resistivity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "01d4039c-bdea-4e32-b84c-85a497312d93",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "A galvanometer is converted to ammeter by connecting",
-    "formula": "",
-    "options": [
-      "High resistance in series",
-      "Low resistance shunt in parallel",
-      "Low resistance in series",
-      "High resistance in parallel"
-    ],
-    "answer": 1,
-    "explain": "A shunt (low R) in parallel bypasses most current, extending ammeter range.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d55a8e7a-f578-4f8c-a5a7-f45e5d8856ab",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "A galvanometer is converted to voltmeter by connecting",
-    "formula": "",
-    "options": [
-      "Low resistance in parallel",
-      "High resistance in parallel",
-      "Low resistance in series",
-      "High resistance in series"
-    ],
-    "answer": 3,
-    "explain": "High series resistance limits current so full-scale deflection matches desired voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e33cda35-6307-4927-84a3-ec880393b1ad",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Shunt resistance S for galvanometer (Ig, G, I) is",
-    "formula": "S = IgG/(I−Ig)",
-    "options": [
-      "S = IG/(I−Ig)",
-      "S = IgG/(I−Ig)",
-      "S = (I−Ig)G/Ig",
-      "S = IgG/I"
-    ],
-    "answer": 1,
-    "explain": "Current through shunt = (I−Ig); voltage across shunt = IgG gives S = IgG/(I−Ig).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c93ef26a-d7f8-42fa-ba03-236d75c145f0",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Series resistance R for voltmeter of range V (galvanometer G, Ig)",
-    "formula": "R = V/Ig − G",
-    "options": [
-      "R = Ig/V − G",
-      "R = VIg − G",
-      "R = V/Ig + G",
-      "R = V/Ig − G"
-    ],
-    "answer": 3,
-    "explain": "Full-scale: V = Ig(R+G), so R = V/Ig − G.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6dc3b7b7-083a-47c2-8ebf-e59b6f39fdf6",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "EMF of a cell is measured accurately using",
-    "formula": "",
-    "options": [
-      "Potentiometer (no current drawn)",
-      "Voltmeter across terminals",
-      "Wheatstone bridge",
-      "Ammeter in circuit"
-    ],
-    "answer": 0,
-    "explain": "At balance, potentiometer draws zero current, so terminal voltage = EMF.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "76e5008c-f1db-4755-8bdb-c427f9918ace",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Kirchhoff's junction rule is based on conservation of",
-    "formula": "",
-    "options": [
-      "Power",
-      "Momentum",
-      "Charge",
-      "Energy"
-    ],
-    "answer": 2,
-    "explain": "KCL: ΣI_in = ΣI_out at a junction — conservation of electric charge.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c9717edf-7983-4c35-8b74-daf23ef9fd31",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Kirchhoff's loop rule is based on conservation of",
-    "formula": "",
-    "options": [
-      "Momentum",
-      "Energy",
-      "Charge",
-      "Mass"
-    ],
-    "answer": 1,
-    "explain": "KVL: ΣV = 0 around a closed loop — energy conservation for charges.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "402c4b20-18db-4664-8a25-c78353272ac5",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistivity of semiconductors with rising temperature",
-    "formula": "",
-    "options": [
-      "Stays constant",
-      "Increases",
-      "Decreases",
-      "First increases then decreases"
-    ],
-    "answer": 2,
-    "explain": "More charge carriers are thermally generated in semiconductors, so ρ decreases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0b9857dd-c4d4-4185-8a9d-403182747fcc",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Power delivered to external R by cell (EMF ε, internal r) is max when",
-    "formula": "R = r",
-    "options": [
-      "R = 2r",
-      "R → ∞",
-      "R = r",
-      "R = 0"
-    ],
-    "answer": 2,
-    "explain": "Maximum power transfer theorem: P_ext is maximum when external R equals internal r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1359a711-15b7-4950-b86d-f171834571c9",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Colour code: Red band on resistor represents digit",
-    "formula": "",
-    "options": [
-      "4",
-      "3",
-      "2",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "Standard resistor colour code: Black=0, Brown=1, Red=2, Orange=3, Yellow=4…",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "58f59d74-4a2c-4acf-85cb-5d3575c73675",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Gold tolerance band on a resistor means",
-    "formula": "",
-    "options": [
-      "±10%",
-      "±1%",
-      "±5%",
-      "±20%"
-    ],
-    "answer": 2,
-    "explain": "Gold = ±5% tolerance; Silver = ±10%; no band = ±20%.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "94c310e8-d649-4325-a93a-4106e9fe1c00",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "If wire length is halved and area doubled, resistance becomes",
-    "formula": "R = ρl/A",
-    "options": [
-      "2R",
-      "R/2",
-      "R/4",
-      "4R"
-    ],
-    "answer": 2,
-    "explain": "R' = ρ(l/2)/(2A) = R/4. Both changes reduce resistance by factor 4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "60772696-f394-45ee-a79b-3703fc7f58fc",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Current through a resistor R in parallel combination with R₂ (total I)",
-    "formula": "I₁ = I·R₂/(R₁+R₂)",
-    "options": [
-      "I·R₂/(R₁+R₂)",
-      "I·R₁/(R₁+R₂)",
-      "I/(R₁+R₂)",
-      "I·R₁R₂/(R₁+R₂)"
-    ],
-    "answer": 0,
-    "explain": "Current divider: current in R₁ = I × R₂/(R₁+R₂) — inverse proportion to own R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75a65c97-1727-4761-8bd2-f65ad034582a",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Terminal voltage of a cell during discharge (current I out)",
-    "formula": "V = ε − Ir",
-    "options": [
-      "V = ε − Ir",
-      "V = ε + Ir",
-      "V = Ir − ε",
-      "V = ε/Ir"
-    ],
-    "answer": 0,
-    "explain": "Internal resistance causes voltage drop Ir during discharge; V = ε − Ir.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2a6f37b2-c1b7-4e7e-b137-40a677ed9bd8",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Terminal voltage of a cell during charging (current I in)",
-    "formula": "V = ε + Ir",
-    "options": [
-      "V = ε − Ir",
-      "V = ε + Ir",
-      "V = ε·Ir",
-      "V = ε/r"
-    ],
-    "answer": 1,
-    "explain": "During charging, external source pushes current in; terminal voltage V = ε + Ir.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "093f8ae8-a351-40f9-9310-9f74d488a38c",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "The potential gradient k in potentiometer is defined as",
-    "formula": "k = V/L",
-    "options": [
-      "Current in potentiometer wire",
-      "Resistance per unit length",
-      "Total EMF of driver cell",
-      "Potential drop per unit length"
-    ],
-    "answer": 3,
-    "explain": "k = V/L (V/m); balancing length l gives EMF or p.d. = k·l.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a35ee165-a9f5-4376-b2ac-12c34fed0fdb",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Conductance G of a resistor is defined as",
-    "formula": "G = 1/R",
-    "options": [
-      "Reciprocal of resistance",
-      "Ratio R/V",
-      "Ratio I/V²",
-      "Product of ρ and L"
-    ],
-    "answer": 0,
-    "explain": "Conductance G = 1/R; SI unit is Siemens (S).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e3837737-83ac-44a9-a3ac-8aaf7a6172c1",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "SI unit of conductance is",
-    "formula": "",
-    "options": [
-      "Farad",
-      "Siemens",
-      "Ohm",
-      "Coulomb"
-    ],
-    "answer": 1,
-    "explain": "Conductance is measured in Siemens (S) = Ω⁻¹ = mho.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "911344d3-31bb-4fed-a686-920bbd1a3496",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Number density n of free electrons in a conductor relates to J as",
-    "formula": "J = nev_d",
-    "options": [
-      "J = ne/v_d",
-      "J = nev_d",
-      "J = v_d/ne",
-      "J = n²ev_d"
-    ],
-    "answer": 1,
-    "explain": "Current density J = nev_d where n is free electron density, e charge, v_d drift speed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a969f820-9e70-4731-91bb-d862b4972772",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistance of a wire of length L, area A, resistivity ρ is",
-    "formula": "R = ρL/A",
-    "options": [
-      "ρL/A",
-      "ρ/(LA)",
-      "ρLA",
-      "ρA/L"
-    ],
-    "answer": 0,
-    "explain": "R = ρL/A; resistance is directly proportional to length and inversely to cross-section area.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d767f84f-b4eb-478e-b704-94b0ff55c4e9",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Two resistors R₁ and R₂ in parallel; equivalent resistance R_eq satisfies",
-    "formula": "R_eq = R₁R₂/(R₁+R₂)",
-    "options": [
-      "R_eq = R₁+R₂",
-      "R_eq < min(R₁,R₂)",
-      "R_eq > max(R₁,R₂)",
-      "R_eq = |R₁−R₂|"
-    ],
-    "answer": 1,
-    "explain": "Parallel equivalent resistance is always less than the smallest individual resistance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b27361b6-188b-4600-a777-2633c9e392d9",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "A cell of EMF ε and internal r; short-circuit current I_sc equals",
-    "formula": "I_sc = ε/r",
-    "options": [
-      "ε·r",
-      "ε/(r+∞)",
-      "ε/r",
-      "r/ε"
-    ],
-    "answer": 2,
-    "explain": "Short circuit means external R = 0, so I_sc = ε/r (limited only by internal resistance).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f3792bb2-6afd-4bac-ac23-54877dd52efb",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Power consumed by a resistor R connected to voltage V is",
-    "formula": "P = V²/R",
-    "options": [
-      "V²R",
-      "R/V²",
-      "V²/R",
-      "V/R²"
-    ],
-    "answer": 2,
-    "explain": "P = V²/R; higher resistance means less power for the same applied voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ee52aa3-8663-4221-ac36-71e8a6cd88ae",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "The ratio of EMFs ε₁/ε₂ in potentiometer comparison equals",
-    "formula": "ε₁/ε₂ = l₁/l₂",
-    "options": [
-      "l₁²/l₂²",
-      "l₁/l₂",
-      "√(l₁/l₂)",
-      "l₂/l₁"
-    ],
-    "answer": 1,
-    "explain": "In potentiometer, EMF ∝ balancing length, so ε₁/ε₂ = l₁/l₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d47d8e2a-c971-4f34-9c1b-d88b03e906a4",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "If resistivity of wire is ρ and it is drawn to 3× length, new resistivity is",
-    "formula": "",
-    "options": [
-      "ρ/3",
-      "9ρ",
-      "ρ",
-      "3ρ"
-    ],
-    "answer": 2,
-    "explain": "Resistivity is a material property independent of dimensions; only R changes, not ρ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "951000e7-e2c5-4099-844e-baa1ff56cc83",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Heat produced in resistor R carrying current I for time t is",
-    "formula": "H = I²Rt",
-    "options": [
-      "I²R/t",
-      "I²Rt",
-      "IRt",
-      "IR²t"
-    ],
-    "answer": 1,
-    "explain": "Joule's heating law: H = I²Rt; heat is directly proportional to I², R and t.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "72d7ecff-495b-448b-8667-636805e04cc4",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Ideal voltmeter has resistance",
-    "formula": "",
-    "options": [
-      "Very large (→∞)",
-      "Equal to load",
-      "Very small",
-      "Zero"
-    ],
-    "answer": 0,
-    "explain": "Ideal voltmeter draws no current; its resistance must be infinite so it doesn't alter circuit.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "42183139-bb3b-4a17-95c9-ee524a02775f",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Ideal ammeter has resistance",
-    "formula": "",
-    "options": [
-      "Infinite",
-      "Equal to shunt",
-      "Very large",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "Ideal ammeter causes no voltage drop; its resistance must be zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5a4a866c-23e5-4b1d-a86d-9e7ded637cd2",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistivity of metals with rising temperature:",
-    "formula": "ρ = ρ₀(1+αT)",
-    "options": [
-      "Remains constant",
-      "Decreases",
-      "First decreases then increases",
-      "Increases"
-    ],
-    "answer": 3,
-    "explain": "More lattice vibrations reduce relaxation time τ, increasing ρ for metals.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "38ead51e-5fe3-416d-b202-8085e941d1e8",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a potentiometer, if wire length is increased, potential gradient k:",
-    "formula": "k = V/L",
-    "options": [
-      "Increases",
-      "Becomes zero",
-      "Remains same",
-      "Decreases"
-    ],
-    "answer": 3,
-    "explain": "k = V/L; longer wire means smaller potential drop per unit length.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "95ef83d8-6da0-4a12-b27c-3e258c8e5858",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "A wire has resistance R. If its radius is doubled, new resistance is:",
-    "formula": "R ∝ 1/A = 1/r²",
-    "options": [
-      "R/2",
-      "2R",
-      "4R",
-      "R/4"
-    ],
-    "answer": 3,
-    "explain": "Area ∝ r²; doubling radius quadruples area, so R becomes R/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e68cedcb-0bba-4b40-a13c-3d4a2d35b38a",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Which law governs the heating effect of current?",
-    "formula": "H = I²Rt",
-    "options": [
-      "Coulomb's law",
-      "Faraday's law",
-      "Joule's law",
-      "Lenz's law"
-    ],
-    "answer": 2,
-    "explain": "Joule's law: heat produced H = I²Rt in a resistor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "778306db-6277-4c34-bed9-6ffa4c12a03b",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "EMF of a cell is the work done per unit charge when:",
-    "formula": "ε = W/q",
-    "options": [
-      "No current flows",
-      "Charging occurs",
-      "Short circuited",
-      "Maximum current flows"
-    ],
-    "answer": 0,
-    "explain": "EMF = W/q is defined under open-circuit (no current) condition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e86536a0-c2e8-42eb-898e-551c08a90a79",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "The SI unit of electric current density J is:",
-    "formula": "J = I/A",
-    "options": [
-      "A/m²",
-      "A·m",
-      "A·m²",
-      "A/m"
-    ],
-    "answer": 0,
-    "explain": "Current density J = I/A; unit is ampere per square metre.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1028a20d-c3c6-4152-bc4f-deee5a4c18d3",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a circuit, if all resistances are doubled, power dissipated at same V:",
-    "formula": "P = V²/R",
-    "options": [
-      "Quadrupled",
-      "Halved",
-      "Doubled",
-      "Unchanged"
-    ],
-    "answer": 1,
-    "explain": "P = V²/R; doubling R at constant V halves the power.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d1c4c56-eeba-4dfd-a038-6609b48f598c",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Potential difference across internal resistance r of a cell (current I):",
-    "formula": "V_r = Ir",
-    "options": [
-      "I/r",
-      "Ir",
-      "ε - Ir",
-      "ε + Ir"
-    ],
-    "answer": 1,
-    "explain": "Voltage drop across internal resistance equals I×r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1dc45b0e-f0f9-4189-b69a-b1a98cf2d3ca",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "For a balanced Wheatstone bridge, current through galvanometer is:",
-    "formula": "P/Q = R/S → Ig = 0",
-    "options": [
-      "Maximum",
-      "ε/G",
-      "Zero",
-      "ε/(P+Q)"
-    ],
-    "answer": 2,
-    "explain": "At balance P/Q = R/S, no potential difference across galvanometer, Ig = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "34fe8086-06da-4178-aaae-3570cfc947ce",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Three equal resistors R in parallel give equivalent resistance:",
-    "formula": "R_eq = R/n",
-    "options": [
-      "R√3",
-      "3R",
-      "R/9",
-      "R/3"
-    ],
-    "answer": 3,
-    "explain": "n identical resistors in parallel: R_eq = R/n; here n=3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "13fc566f-d0a2-4ee6-b059-68b1bfdccf5f",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a potentiometer, the driver cell must have EMF:",
-    "formula": "",
-    "options": [
-      "Greater than cell under test",
-      "Any value works",
-      "Equal to cell under test",
-      "Less than cell under test"
-    ],
-    "answer": 0,
-    "explain": "Driver cell EMF must exceed test cell EMF for a balance point to exist.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "20d16751-6bd5-451d-9b7a-9ebda917d14b",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Carbon resistor colour sequence: Brown Black Red Gold — its value is:",
-    "formula": "",
-    "options": [
-      "1000 Ω ±5%",
-      "1000 Ω ±10%",
-      "100 Ω ±5%",
-      "1200 Ω ±5%"
-    ],
-    "answer": 0,
-    "explain": "Brown=1, Black=0, Red=×100, Gold=±5%; so 10×100 = 1000 Ω ±5%.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a43cb82c-b29a-4856-b6cc-1180c98c464c",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Electric field E inside a uniform resistor of length L, potential difference V:",
-    "formula": "E = V/L",
-    "options": [
-      "ρL",
-      "V·L",
-      "I/L",
-      "V/L"
-    ],
-    "answer": 3,
-    "explain": "Uniform field inside resistor: E = V/L (volts per metre).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2400d55c-6065-4ee8-bbd7-b0be71c04a58",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Which physical quantity is conserved at a junction (KCL)?",
-    "formula": "ΣI = 0",
-    "options": [
-      "Charge (or current)",
-      "Voltage",
-      "Energy",
-      "Power"
-    ],
-    "answer": 0,
-    "explain": "KCL is based on conservation of charge: total current in = total current out.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0f52d97c-9691-4fa6-b55c-c595a9eaa6ca",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistivity ρ of a conductor is independent of:",
-    "formula": "ρ = m/(ne²τ)",
-    "options": [
-      "Temperature",
-      "Relaxation time",
-      "Nature of material",
-      "Dimensions of conductor"
-    ],
-    "answer": 3,
-    "explain": "ρ depends on material and temperature, NOT on shape/size/dimensions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0b4c6cc5-1821-426f-84fb-f0450626dec5",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Resistivity ρ of a material has dimensional formula:",
-    "formula": "ρ = RA/L",
-    "options": [
-      "ML³T⁻²A⁻¹",
-      "ML²T⁻³A⁻²",
-      "ML³T⁻³A⁻²",
-      "MLT⁻³A⁻²"
-    ],
-    "answer": 2,
-    "explain": "ρ = RA/L → [ML²T⁻³A⁻²·L²/L] = [ML³T⁻³A⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cdf49c6e-a4b1-4ef3-99b9-dcbccd752b01",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "For a cell, the open-circuit terminal voltage equals:",
-    "formula": "V = ε (I=0)",
-    "options": [
-      "ε + Ir",
-      "ε − Ir",
-      "EMF ε",
-      "ε/r"
-    ],
-    "answer": 2,
-    "explain": "When no current flows, there is no drop across internal resistance, so V = ε.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "786fa66c-4b2e-4df6-bb8e-9ce9c82287a0",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a parallel combination, voltage across each resistor is:",
-    "formula": "",
-    "options": [
-      "Inversely ∝ R",
-      "Same for all",
-      "Proportional to R",
-      "Zero"
-    ],
-    "answer": 1,
-    "explain": "All resistors share the same two nodes, so voltage across each is identical.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e2e0569a-9dcb-49bb-9c31-d0568ff9f387",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a series combination, current through each resistor is:",
-    "formula": "",
-    "options": [
-      "Depends on EMF",
-      "Proportional to R",
-      "Same for all",
-      "Inversely ∝ R"
-    ],
-    "answer": 2,
-    "explain": "In series, there is only one path; same current flows through all elements.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "78dc4e12-7164-49b1-8d01-49181bc0550e",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "The reciprocal of resistivity ρ is called:",
-    "formula": "σ = 1/ρ",
-    "options": [
-      "Mobility",
-      "Conductance",
-      "Susceptibility",
-      "Conductivity"
-    ],
-    "answer": 3,
-    "explain": "Conductivity σ = 1/ρ; it is an intrinsic material property.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f548a385-09f4-435e-8d9e-e963fe6b70da",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Relation between current density J, conductivity σ and field E:",
-    "formula": "J = σE",
-    "options": [
-      "J = E/σ",
-      "J = σ²E",
-      "J = σ/E",
-      "J = σE"
-    ],
-    "answer": 3,
-    "explain": "J = σE is the microscopic form of Ohm's law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f971e3fd-aa4e-44ac-86c7-9bd89b16e502",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Electric power P in terms of resistance R and current I is:",
-    "formula": "P = I²R",
-    "options": [
-      "R/I²",
-      "I²R",
-      "IR²",
-      "I/R"
-    ],
-    "answer": 1,
-    "explain": "P = VI = (IR)·I = I²R by Ohm's law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cbc8f999-4938-46ac-9584-46313479d357",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In meter bridge, if P and Q are swapped, balance length changes from ℓ to:",
-    "formula": "ℓ' = 100 − ℓ",
-    "options": [
-      "2ℓ",
-      "50 cm always",
-      "ℓ",
-      "100 − ℓ"
-    ],
-    "answer": 3,
-    "explain": "Swapping P and Q interchanges ratio; new balance point is complementary: 100 − ℓ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21c7f2ee-caed-4d2e-8db0-08003f0b90e4",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a circuit, resistors R₁ and R₂ in series — voltage drop across R₁ is:",
-    "formula": "V₁ = V·R₁/(R₁+R₂)",
-    "options": [
-      "V·(R₁+R₂)/R₁",
-      "V·R₂/(R₁+R₂)",
-      "V/R₁",
-      "V·R₁/(R₁+R₂)"
-    ],
-    "answer": 3,
-    "explain": "Voltage divider rule: V₁ = I·R₁ = [V/(R₁+R₂)]·R₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1e60b1dd-db37-47fb-97f2-4b09f27b745e",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "The relation between resistivity ρ, electron density n, mass m, charge e, τ is:",
-    "formula": "ρ = m/(ne²τ)",
-    "options": [
-      "ne²/(mτ)",
-      "m/(ne²τ)",
-      "ne²τ/m",
-      "m/(neτ)"
-    ],
-    "answer": 1,
-    "explain": "From drift velocity derivation: σ = ne²τ/m, so ρ = m/(ne²τ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "43bb27e6-5d08-49d8-883b-0a29ef3fac6f",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "Equivalent resistance of n identical resistors R in parallel is:",
-    "formula": "R_eq = R/n",
-    "options": [
-      "R²/n",
-      "R/n",
-      "n/R",
-      "nR"
-    ],
-    "answer": 1,
-    "explain": "For n equal resistors in parallel, R_eq = R/n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5613ec18-7f00-4cfc-90c0-569ee16a9ead",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "In a Wheatstone bridge, if P/Q = R/S, galvanometer shows:",
-    "formula": "P/Q = R/S",
-    "options": [
-      "Reverse deflection",
-      "Zero deflection",
-      "Half deflection",
-      "Maximum deflection"
-    ],
-    "answer": 1,
-    "explain": "Balanced bridge condition means no potential difference across galvanometer → zero current.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f87f7f97-7b2b-44f4-9606-42b1d001f434",
-    "subject": "Physics",
-    "chapter": "Current Electricity",
-    "topic": "Current Electricity",
-    "prompt": "When a cell is being charged, its terminal voltage V_t is:",
-    "formula": "V_t = ε + Ir",
-    "options": [
-      "Greater than ε",
-      "Less than ε",
-      "Equal to ε",
-      "Zero"
-    ],
-    "answer": 0,
-    "explain": "During charging, current flows in, so V_t = ε + Ir > ε.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "abde9875-bb43-4914-9b90-da00d0387c43",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Ohm's law: relation between V, I, R",
+  "formula": "V = IR",
+  "options": [
+   "V = IR",
+   "V = R/I",
+   "V = I²R",
+   "V = I/R"
+  ],
+  "answer": 0,
+  "explain": "Ohm's law states voltage equals current times resistance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2be97caf-0ea2-4bcb-9ffa-36c069c36b63",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "SI unit of resistivity (ρ)",
+  "formula": "ρ = RA/L",
+  "options": [
+   "Ω·m²",
+   "Ω·m",
+   "Ω/m²",
+   "Ω/m"
+  ],
+  "answer": 1,
+  "explain": "Resistivity has units of ohm-metre (Ω·m).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7adae46a-a087-4ecd-b931-2b3d169d01be",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "Resistors in series: equivalent resistance",
+  "formula": "R_eq = R₁+R₂+R₃",
+  "options": [
+   "Smallest resistance",
+   "Product/sum",
+   "Sum of all resistances",
+   "Reciprocal of sum"
+  ],
+  "answer": 2,
+  "explain": "Series resistors add directly: R_eq = R₁+R₂+…",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b6af53bf-872d-4af3-b073-792680f76135",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "Resistors in parallel: equivalent resistance formula",
+  "formula": "1/R_eq = 1/R₁+1/R₂",
+  "options": [
+   "R_eq = √(R₁R₂)",
+   "R_eq = ΣRᵢ",
+   "1/R_eq = Σ(1/Rᵢ)",
+   "R_eq = R₁R₂/(R₁+R₂) only always"
+  ],
+  "answer": 2,
+  "explain": "Reciprocals add for parallel combination.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d339a1b8-ce00-4230-b17c-6cca61dc8087",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Power dissipated in a resistor",
+  "formula": "P = I²R = V²/R = VI",
+  "options": [
+   "P = I/R²",
+   "P = IR²",
+   "P = I²R",
+   "P = V²R"
+  ],
+  "answer": 2,
+  "explain": "Power P = I²R = V²/R = VI for a resistor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bff5935c-0aab-42ac-b1d9-1ad3c198449e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Drift velocity relation to current",
+  "formula": "I = nAev_d",
+  "options": [
+   "I = nAev_d",
+   "I = nAe/v_d",
+   "I = nA/ev_d",
+   "I = nev_d/A"
+  ],
+  "answer": 0,
+  "explain": "Current I = nAev_d where n is carrier density, A area, e charge.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4acdcdbf-477f-4d9c-9c62-709af515fbc3",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Mobility (μ) of charge carriers definition",
+  "formula": "μ = v_d/E",
+  "options": [
+   "v_d × E",
+   "E / v_d",
+   "v_d / E",
+   "v_d / I"
+  ],
+  "answer": 2,
+  "explain": "Mobility is drift velocity per unit electric field: μ = v_d/E.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6c140c45-2188-40a0-8457-6f1ae9c316fa",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Temperature coefficient of resistance: R varies as",
+  "formula": "R = R₀(1+αΔT)",
+  "options": [
+   "R₀(1−αΔT)",
+   "R₀(1+αΔT)",
+   "R₀αΔT",
+   "R₀/(1+αΔT)"
+  ],
+  "answer": 1,
+  "explain": "For metals, resistance increases linearly with temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0ae46c64-d2bb-4c8b-957c-21ab2791ae19",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "For which material is α (temp. coeff.) negative?",
+  "formula": "",
+  "options": [
+   "Semiconductors",
+   "Tungsten",
+   "Copper",
+   "Nichrome"
+  ],
+  "answer": 0,
+  "explain": "Semiconductors have negative α; resistance decreases with temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b459bda7-5794-4e6b-b024-2f0ba48a852b",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "EMF of a cell: terminal voltage when current I flows",
+  "formula": "V = ε − Ir",
+  "options": [
+   "ε − I/r",
+   "ε − Ir",
+   "ε + Ir",
+   "ε/Ir"
+  ],
+  "answer": 1,
+  "explain": "Terminal voltage V = ε − Ir; r is internal resistance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c876ed5e-339d-470a-bf04-1ab37a6a816d",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Kirchhoff's laws and their applications",
+  "prompt": "Kirchhoff's Current Law (KCL) states",
+  "formula": "ΣI_in = ΣI_out",
+  "options": [
+   "Sum of currents at node = 0",
+   "V = IR at junction",
+   "Sum of EMFs in loop = 0",
+   "Power in = Power out"
+  ],
+  "answer": 0,
+  "explain": "KCL: algebraic sum of currents at any junction is zero (charge conservation).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d17e6fff-59b7-4984-90eb-3e01f63f60a9",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Kirchhoff's laws and their applications",
+  "prompt": "Kirchhoff's Voltage Law (KVL) states",
+  "formula": "ΣV = 0 (closed loop)",
+  "options": [
+   "Sum of potential drops in loop = 0",
+   "EMF = sum of resistances",
+   "IR = ε always",
+   "Sum of currents in loop = 0"
+  ],
+  "answer": 0,
+  "explain": "KVL: algebraic sum of potential differences in a closed loop is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e2658d35-3370-4b9b-ab5c-7e7bfdae3f03",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "In a potentiometer, balancing length ∝",
+  "formula": "ε ∝ l",
+  "options": [
+   "Current through cell",
+   "Internal resistance",
+   "External resistance",
+   "EMF of cell"
+  ],
+  "answer": 3,
+  "explain": "Potentiometer: balancing length is directly proportional to EMF.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "65c2dae2-3a3d-4779-ab4a-152300ea3a6b",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "Cells in series: total EMF and internal resistance",
+  "formula": "ε_eq=Σεᵢ, r_eq=Σrᵢ",
+  "options": [
+   "EMFs add, r adds",
+   "EMF is average, r adds",
+   "EMFs add, 1/r adds",
+   "EMFs add, r is same"
+  ],
+  "answer": 0,
+  "explain": "Series cells: ε_total = ε₁+ε₂+…, r_total = r₁+r₂+…",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a5a518cc-a7e8-4d0d-bda2-0ed20ece0133",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "Cells in parallel (identical): terminal EMF and r_eq",
+  "formula": "ε_eq=ε, r_eq=r/n",
+  "options": [
+   "ε/n, r/n",
+   "nε, r/n",
+   "ε same, r/n",
+   "ε same, nr"
+  ],
+  "answer": 2,
+  "explain": "n identical cells in parallel: EMF unchanged, r_eq = r/n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5aad9d80-f79e-474c-a865-0d1331715df0",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Maximum power transfer condition",
+  "prompt": "Condition for maximum power transfer to external R",
+  "formula": "R = r",
+  "options": [
+   "R = r",
+   "R = 2r",
+   "R → ∞",
+   "R → 0"
+  ],
+  "answer": 0,
+  "explain": "Maximum power delivered when external resistance R equals internal resistance r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5c8c49de-9dd5-4ca7-a9b6-209673285f9c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Resistivity of a conductor depends on",
+  "formula": "ρ = m/(ne²τ)",
+  "options": [
+   "Cross-section area",
+   "Length only",
+   "Applied voltage",
+   "Material & temperature"
+  ],
+  "answer": 3,
+  "explain": "Resistivity is intrinsic property depending on material and temperature, not dimensions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bdd28ff1-2fce-45b0-b79e-f2d44813b5e7",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "If wire is stretched to double length, resistance becomes",
+  "formula": "R ∝ L²/Vol",
+  "options": [
+   "R/2",
+   "4R",
+   "2R",
+   "R/4"
+  ],
+  "answer": 1,
+  "explain": "Volume constant → A halves, L doubles → R = ρL/A becomes 4R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b1495d96-3472-459d-8a21-5b6d3f241b06",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Current density J and electric field E relation",
+  "formula": "J = σE",
+  "options": [
+   "J = E/σ",
+   "J = σ/E",
+   "J = σE",
+   "J = E·ρ"
+  ],
+  "answer": 2,
+  "explain": "J = σE where σ = 1/ρ is conductivity; microscopic Ohm's law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8dfe6c24-bb14-4f36-b3bf-2b980d41e5bd",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "SI unit of conductivity σ",
+  "formula": "σ = 1/ρ",
+  "options": [
+   "S·m",
+   "Ω·m",
+   "S/m (siemens per metre)",
+   "Ω/m"
+  ],
+  "answer": 2,
+  "explain": "Conductivity σ = 1/ρ has units of S/m or (Ω·m)⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70637b1e-fda5-4576-a13b-fbfef5be47d5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "Ammeter is connected in ______ with the circuit",
+  "formula": "",
+  "options": [
+   "Bridge configuration",
+   "Parallel",
+   "Either series or parallel",
+   "Series"
+  ],
+  "answer": 3,
+  "explain": "Ammeter has very low resistance and must be in series to measure current.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "43080ab4-f388-4af2-9ba1-166fe6b0eeb2",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "Voltmeter is connected in ______ with the component",
+  "formula": "",
+  "options": [
+   "Parallel",
+   "Bridge",
+   "Delta",
+   "Series"
+  ],
+  "answer": 0,
+  "explain": "Voltmeter has very high resistance and is connected in parallel to measure voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e816cc8e-3689-44ab-9233-21e742539b3d",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Relaxation time τ relates to drift velocity as",
+  "formula": "vd = eEτ/m",
+  "options": [
+   "vd = mτ/eE",
+   "vd = eτ/mE",
+   "vd = eEτ/m",
+   "vd = mE/eτ"
+  ],
+  "answer": 2,
+  "explain": "Drift velocity = (eEτ/m); τ is mean relaxation time between collisions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "445b1a4b-3166-43bc-bdfb-e5100db9c8dd",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Resistivity ρ is related to relaxation time τ as",
+  "formula": "ρ = m/ne²τ",
+  "options": [
+   "ρ = neτ/m",
+   "ρ = m/neτ",
+   "ρ = m/ne²τ",
+   "ρ = ne²τ/m"
+  ],
+  "answer": 2,
+  "explain": "From Drude model, ρ = m/(ne²τ); higher τ means lower resistivity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "01d4039c-bdea-4e32-b84c-85a497312d93",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "A galvanometer is converted to ammeter by connecting",
+  "formula": "",
+  "options": [
+   "High resistance in series",
+   "Low resistance shunt in parallel",
+   "Low resistance in series",
+   "High resistance in parallel"
+  ],
+  "answer": 1,
+  "explain": "A shunt (low R) in parallel bypasses most current, extending ammeter range.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d55a8e7a-f578-4f8c-a5a7-f45e5d8856ab",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "A galvanometer is converted to voltmeter by connecting",
+  "formula": "",
+  "options": [
+   "Low resistance in parallel",
+   "High resistance in parallel",
+   "Low resistance in series",
+   "High resistance in series"
+  ],
+  "answer": 3,
+  "explain": "High series resistance limits current so full-scale deflection matches desired voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e33cda35-6307-4927-84a3-ec880393b1ad",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "Shunt resistance S for galvanometer (Ig, G, I) is",
+  "formula": "S = IgG/(I−Ig)",
+  "options": [
+   "S = IG/(I−Ig)",
+   "S = IgG/(I−Ig)",
+   "S = (I−Ig)G/Ig",
+   "S = IgG/I"
+  ],
+  "answer": 1,
+  "explain": "Current through shunt = (I−Ig); voltage across shunt = IgG gives S = IgG/(I−Ig).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c93ef26a-d7f8-42fa-ba03-236d75c145f0",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "Series resistance R for voltmeter of range V (galvanometer G, Ig)",
+  "formula": "R = V/Ig − G",
+  "options": [
+   "R = Ig/V − G",
+   "R = VIg − G",
+   "R = V/Ig + G",
+   "R = V/Ig − G"
+  ],
+  "answer": 3,
+  "explain": "Full-scale: V = Ig(R+G), so R = V/Ig − G.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6dc3b7b7-083a-47c2-8ebf-e59b6f39fdf6",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "EMF of a cell is measured accurately using",
+  "formula": "",
+  "options": [
+   "Potentiometer (no current drawn)",
+   "Voltmeter across terminals",
+   "Wheatstone bridge",
+   "Ammeter in circuit"
+  ],
+  "answer": 0,
+  "explain": "At balance, potentiometer draws zero current, so terminal voltage = EMF.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "76e5008c-f1db-4755-8bdb-c427f9918ace",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Kirchhoff's laws and their applications",
+  "prompt": "Kirchhoff's junction rule is based on conservation of",
+  "formula": "",
+  "options": [
+   "Power",
+   "Momentum",
+   "Charge",
+   "Energy"
+  ],
+  "answer": 2,
+  "explain": "KCL: ΣI_in = ΣI_out at a junction — conservation of electric charge.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c9717edf-7983-4c35-8b74-daf23ef9fd31",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Kirchhoff's laws and their applications",
+  "prompt": "Kirchhoff's loop rule is based on conservation of",
+  "formula": "",
+  "options": [
+   "Momentum",
+   "Energy",
+   "Charge",
+   "Mass"
+  ],
+  "answer": 1,
+  "explain": "KVL: ΣV = 0 around a closed loop — energy conservation for charges.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "402c4b20-18db-4664-8a25-c78353272ac5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Resistivity of semiconductors with rising temperature",
+  "formula": "",
+  "options": [
+   "Stays constant",
+   "Increases",
+   "Decreases",
+   "First increases then decreases"
+  ],
+  "answer": 2,
+  "explain": "More charge carriers are thermally generated in semiconductors, so ρ decreases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0b9857dd-c4d4-4185-8a9d-403182747fcc",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Maximum power transfer condition",
+  "prompt": "Power delivered to external R by cell (EMF ε, internal r) is max when",
+  "formula": "R = r",
+  "options": [
+   "R = 2r",
+   "R → ∞",
+   "R = r",
+   "R = 0"
+  ],
+  "answer": 2,
+  "explain": "Maximum power transfer theorem: P_ext is maximum when external R equals internal r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1359a711-15b7-4950-b86d-f171834571c9",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Colour code: Red band on resistor represents digit",
+  "formula": "",
+  "options": [
+   "4",
+   "3",
+   "2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Standard resistor colour code: Black=0, Brown=1, Red=2, Orange=3, Yellow=4…",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "58f59d74-4a2c-4acf-85cb-5d3575c73675",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Gold tolerance band on a resistor means",
+  "formula": "",
+  "options": [
+   "±10%",
+   "±1%",
+   "±5%",
+   "±20%"
+  ],
+  "answer": 2,
+  "explain": "Gold = ±5% tolerance; Silver = ±10%; no band = ±20%.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "94c310e8-d649-4325-a93a-4106e9fe1c00",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "If wire length is halved and area doubled, resistance becomes",
+  "formula": "R = ρl/A",
+  "options": [
+   "2R",
+   "R/2",
+   "R/4",
+   "4R"
+  ],
+  "answer": 2,
+  "explain": "R' = ρ(l/2)/(2A) = R/4. Both changes reduce resistance by factor 4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "60772696-f394-45ee-a79b-3703fc7f58fc",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "Current through a resistor R in parallel combination with R₂ (total I)",
+  "formula": "I₁ = I·R₂/(R₁+R₂)",
+  "options": [
+   "I·R₂/(R₁+R₂)",
+   "I·R₁/(R₁+R₂)",
+   "I/(R₁+R₂)",
+   "I·R₁R₂/(R₁+R₂)"
+  ],
+  "answer": 0,
+  "explain": "Current divider: current in R₁ = I × R₂/(R₁+R₂) — inverse proportion to own R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75a65c97-1727-4761-8bd2-f65ad034582a",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "Terminal voltage of a cell during discharge (current I out)",
+  "formula": "V = ε − Ir",
+  "options": [
+   "V = ε − Ir",
+   "V = ε + Ir",
+   "V = Ir − ε",
+   "V = ε/Ir"
+  ],
+  "answer": 0,
+  "explain": "Internal resistance causes voltage drop Ir during discharge; V = ε − Ir.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2a6f37b2-c1b7-4e7e-b137-40a677ed9bd8",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "Terminal voltage of a cell during charging (current I in)",
+  "formula": "V = ε + Ir",
+  "options": [
+   "V = ε − Ir",
+   "V = ε + Ir",
+   "V = ε·Ir",
+   "V = ε/r"
+  ],
+  "answer": 1,
+  "explain": "During charging, external source pushes current in; terminal voltage V = ε + Ir.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "093f8ae8-a351-40f9-9310-9f74d488a38c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "The potential gradient k in potentiometer is defined as",
+  "formula": "k = V/L",
+  "options": [
+   "Current in potentiometer wire",
+   "Resistance per unit length",
+   "Total EMF of driver cell",
+   "Potential drop per unit length"
+  ],
+  "answer": 3,
+  "explain": "k = V/L (V/m); balancing length l gives EMF or p.d. = k·l.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a35ee165-a9f5-4376-b2ac-12c34fed0fdb",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Conductance G of a resistor is defined as",
+  "formula": "G = 1/R",
+  "options": [
+   "Reciprocal of resistance",
+   "Ratio R/V",
+   "Ratio I/V²",
+   "Product of ρ and L"
+  ],
+  "answer": 0,
+  "explain": "Conductance G = 1/R; SI unit is Siemens (S).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e3837737-83ac-44a9-a3ac-8aaf7a6172c1",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "SI unit of conductance is",
+  "formula": "",
+  "options": [
+   "Farad",
+   "Siemens",
+   "Ohm",
+   "Coulomb"
+  ],
+  "answer": 1,
+  "explain": "Conductance is measured in Siemens (S) = Ω⁻¹ = mho.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "911344d3-31bb-4fed-a686-920bbd1a3496",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Number density n of free electrons in a conductor relates to J as",
+  "formula": "J = nev_d",
+  "options": [
+   "J = ne/v_d",
+   "J = nev_d",
+   "J = v_d/ne",
+   "J = n²ev_d"
+  ],
+  "answer": 1,
+  "explain": "Current density J = nev_d where n is free electron density, e charge, v_d drift speed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a969f820-9e70-4731-91bb-d862b4972772",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Resistance of a wire of length L, area A, resistivity ρ is",
+  "formula": "R = ρL/A",
+  "options": [
+   "ρL/A",
+   "ρ/(LA)",
+   "ρLA",
+   "ρA/L"
+  ],
+  "answer": 0,
+  "explain": "R = ρL/A; resistance is directly proportional to length and inversely to cross-section area.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d767f84f-b4eb-478e-b704-94b0ff55c4e9",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "Two resistors R₁ and R₂ in parallel; equivalent resistance R_eq satisfies",
+  "formula": "R_eq = R₁R₂/(R₁+R₂)",
+  "options": [
+   "R_eq = R₁+R₂",
+   "R_eq < min(R₁,R₂)",
+   "R_eq > max(R₁,R₂)",
+   "R_eq = |R₁−R₂|"
+  ],
+  "answer": 1,
+  "explain": "Parallel equivalent resistance is always less than the smallest individual resistance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b27361b6-188b-4600-a777-2633c9e392d9",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "A cell of EMF ε and internal r; short-circuit current I_sc equals",
+  "formula": "I_sc = ε/r",
+  "options": [
+   "ε·r",
+   "ε/(r+∞)",
+   "ε/r",
+   "r/ε"
+  ],
+  "answer": 2,
+  "explain": "Short circuit means external R = 0, so I_sc = ε/r (limited only by internal resistance).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f3792bb2-6afd-4bac-ac23-54877dd52efb",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Power consumed by a resistor R connected to voltage V is",
+  "formula": "P = V²/R",
+  "options": [
+   "V²R",
+   "R/V²",
+   "V²/R",
+   "V/R²"
+  ],
+  "answer": 2,
+  "explain": "P = V²/R; higher resistance means less power for the same applied voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ee52aa3-8663-4221-ac36-71e8a6cd88ae",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "The ratio of EMFs ε₁/ε₂ in potentiometer comparison equals",
+  "formula": "ε₁/ε₂ = l₁/l₂",
+  "options": [
+   "l₁²/l₂²",
+   "l₁/l₂",
+   "√(l₁/l₂)",
+   "l₂/l₁"
+  ],
+  "answer": 1,
+  "explain": "In potentiometer, EMF ∝ balancing length, so ε₁/ε₂ = l₁/l₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d47d8e2a-c971-4f34-9c1b-d88b03e906a4",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "If resistivity of wire is ρ and it is drawn to 3× length, new resistivity is",
+  "formula": "",
+  "options": [
+   "ρ/3",
+   "9ρ",
+   "ρ",
+   "3ρ"
+  ],
+  "answer": 2,
+  "explain": "Resistivity is a material property independent of dimensions; only R changes, not ρ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "951000e7-e2c5-4099-844e-baa1ff56cc83",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Heat produced in resistor R carrying current I for time t is",
+  "formula": "H = I²Rt",
+  "options": [
+   "I²R/t",
+   "I²Rt",
+   "IRt",
+   "IR²t"
+  ],
+  "answer": 1,
+  "explain": "Joule's heating law: H = I²Rt; heat is directly proportional to I², R and t.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "72d7ecff-495b-448b-8667-636805e04cc4",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "Ideal voltmeter has resistance",
+  "formula": "",
+  "options": [
+   "Very large (→∞)",
+   "Equal to load",
+   "Very small",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Ideal voltmeter draws no current; its resistance must be infinite so it doesn't alter circuit.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "42183139-bb3b-4a17-95c9-ee524a02775f",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "Ideal ammeter has resistance",
+  "formula": "",
+  "options": [
+   "Infinite",
+   "Equal to shunt",
+   "Very large",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Ideal ammeter causes no voltage drop; its resistance must be zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5a4a866c-23e5-4b1d-a86d-9e7ded637cd2",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Resistivity of metals with rising temperature:",
+  "formula": "ρ = ρ₀(1+αT)",
+  "options": [
+   "Remains constant",
+   "Decreases",
+   "First decreases then increases",
+   "Increases"
+  ],
+  "answer": 3,
+  "explain": "More lattice vibrations reduce relaxation time τ, increasing ρ for metals.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "38ead51e-5fe3-416d-b202-8085e941d1e8",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "In a potentiometer, if wire length is increased, potential gradient k:",
+  "formula": "k = V/L",
+  "options": [
+   "Increases",
+   "Becomes zero",
+   "Remains same",
+   "Decreases"
+  ],
+  "answer": 3,
+  "explain": "k = V/L; longer wire means smaller potential drop per unit length.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "95ef83d8-6da0-4a12-b27c-3e258c8e5858",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "A wire has resistance R. If its radius is doubled, new resistance is:",
+  "formula": "R ∝ 1/A = 1/r²",
+  "options": [
+   "R/2",
+   "2R",
+   "4R",
+   "R/4"
+  ],
+  "answer": 3,
+  "explain": "Area ∝ r²; doubling radius quadruples area, so R becomes R/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e68cedcb-0bba-4b40-a13c-3d4a2d35b38a",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Which law governs the heating effect of current?",
+  "formula": "H = I²Rt",
+  "options": [
+   "Coulomb's law",
+   "Faraday's law",
+   "Joule's law",
+   "Lenz's law"
+  ],
+  "answer": 2,
+  "explain": "Joule's law: heat produced H = I²Rt in a resistor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "778306db-6277-4c34-bed9-6ffa4c12a03b",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "EMF of a cell is the work done per unit charge when:",
+  "formula": "ε = W/q",
+  "options": [
+   "No current flows",
+   "Charging occurs",
+   "Short circuited",
+   "Maximum current flows"
+  ],
+  "answer": 0,
+  "explain": "EMF = W/q is defined under open-circuit (no current) condition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e86536a0-c2e8-42eb-898e-551c08a90a79",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "The SI unit of electric current density J is:",
+  "formula": "J = I/A",
+  "options": [
+   "A/m²",
+   "A·m",
+   "A·m²",
+   "A/m"
+  ],
+  "answer": 0,
+  "explain": "Current density J = I/A; unit is ampere per square metre.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1028a20d-c3c6-4152-bc4f-deee5a4c18d3",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "In a circuit, if all resistances are doubled, power dissipated at same V:",
+  "formula": "P = V²/R",
+  "options": [
+   "Quadrupled",
+   "Halved",
+   "Doubled",
+   "Unchanged"
+  ],
+  "answer": 1,
+  "explain": "P = V²/R; doubling R at constant V halves the power.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d1c4c56-eeba-4dfd-a038-6609b48f598c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "Potential difference across internal resistance r of a cell (current I):",
+  "formula": "V_r = Ir",
+  "options": [
+   "I/r",
+   "Ir",
+   "ε - Ir",
+   "ε + Ir"
+  ],
+  "answer": 1,
+  "explain": "Voltage drop across internal resistance equals I×r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1dc45b0e-f0f9-4189-b69a-b1a98cf2d3ca",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "For a balanced Wheatstone bridge, current through galvanometer is:",
+  "formula": "P/Q = R/S → Ig = 0",
+  "options": [
+   "Maximum",
+   "ε/G",
+   "Zero",
+   "ε/(P+Q)"
+  ],
+  "answer": 2,
+  "explain": "At balance P/Q = R/S, no potential difference across galvanometer, Ig = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "34fe8086-06da-4178-aaae-3570cfc947ce",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "Three equal resistors R in parallel give equivalent resistance:",
+  "formula": "R_eq = R/n",
+  "options": [
+   "R√3",
+   "3R",
+   "R/9",
+   "R/3"
+  ],
+  "answer": 3,
+  "explain": "n identical resistors in parallel: R_eq = R/n; here n=3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "13fc566f-d0a2-4ee6-b059-68b1bfdccf5f",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "In a potentiometer, the driver cell must have EMF:",
+  "formula": "",
+  "options": [
+   "Greater than cell under test",
+   "Any value works",
+   "Equal to cell under test",
+   "Less than cell under test"
+  ],
+  "answer": 0,
+  "explain": "Driver cell EMF must exceed test cell EMF for a balance point to exist.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "20d16751-6bd5-451d-9b7a-9ebda917d14b",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Carbon resistor colour sequence: Brown Black Red Gold — its value is:",
+  "formula": "",
+  "options": [
+   "1000 Ω ±5%",
+   "1000 Ω ±10%",
+   "100 Ω ±5%",
+   "1200 Ω ±5%"
+  ],
+  "answer": 0,
+  "explain": "Brown=1, Black=0, Red=×100, Gold=±5%; so 10×100 = 1000 Ω ±5%.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a43cb82c-b29a-4856-b6cc-1180c98c464c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Current Electricity",
+  "prompt": "Electric field E inside a uniform resistor of length L, potential difference V:",
+  "formula": "E = V/L",
+  "options": [
+   "ρL",
+   "V·L",
+   "I/L",
+   "V/L"
+  ],
+  "answer": 3,
+  "explain": "Uniform field inside resistor: E = V/L (volts per metre).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2400d55c-6065-4ee8-bbd7-b0be71c04a58",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Kirchhoff's laws and their applications",
+  "prompt": "Which physical quantity is conserved at a junction (KCL)?",
+  "formula": "ΣI = 0",
+  "options": [
+   "Charge (or current)",
+   "Voltage",
+   "Energy",
+   "Power"
+  ],
+  "answer": 0,
+  "explain": "KCL is based on conservation of charge: total current in = total current out.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0f52d97c-9691-4fa6-b55c-c595a9eaa6ca",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Resistivity ρ of a conductor is independent of:",
+  "formula": "ρ = m/(ne²τ)",
+  "options": [
+   "Temperature",
+   "Relaxation time",
+   "Nature of material",
+   "Dimensions of conductor"
+  ],
+  "answer": 3,
+  "explain": "ρ depends on material and temperature, NOT on shape/size/dimensions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0b4c6cc5-1821-426f-84fb-f0450626dec5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Resistivity ρ of a material has dimensional formula:",
+  "formula": "ρ = RA/L",
+  "options": [
+   "ML³T⁻²A⁻¹",
+   "ML²T⁻³A⁻²",
+   "ML³T⁻³A⁻²",
+   "MLT⁻³A⁻²"
+  ],
+  "answer": 2,
+  "explain": "ρ = RA/L → [ML²T⁻³A⁻²·L²/L] = [ML³T⁻³A⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cdf49c6e-a4b1-4ef3-99b9-dcbccd752b01",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "For a cell, the open-circuit terminal voltage equals:",
+  "formula": "V = ε (I=0)",
+  "options": [
+   "ε + Ir",
+   "ε − Ir",
+   "EMF ε",
+   "ε/r"
+  ],
+  "answer": 2,
+  "explain": "When no current flows, there is no drop across internal resistance, so V = ε.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "786fa66c-4b2e-4df6-bb8e-9ce9c82287a0",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "In a parallel combination, voltage across each resistor is:",
+  "formula": "",
+  "options": [
+   "Inversely ∝ R",
+   "Same for all",
+   "Proportional to R",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "All resistors share the same two nodes, so voltage across each is identical.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e2e0569a-9dcb-49bb-9c31-d0568ff9f387",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "In a series combination, current through each resistor is:",
+  "formula": "",
+  "options": [
+   "Depends on EMF",
+   "Proportional to R",
+   "Same for all",
+   "Inversely ∝ R"
+  ],
+  "answer": 2,
+  "explain": "In series, there is only one path; same current flows through all elements.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "78dc4e12-7164-49b1-8d01-49181bc0550e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "The reciprocal of resistivity ρ is called:",
+  "formula": "σ = 1/ρ",
+  "options": [
+   "Mobility",
+   "Conductance",
+   "Susceptibility",
+   "Conductivity"
+  ],
+  "answer": 3,
+  "explain": "Conductivity σ = 1/ρ; it is an intrinsic material property.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f548a385-09f4-435e-8d9e-e963fe6b70da",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Relation between current density J, conductivity σ and field E:",
+  "formula": "J = σE",
+  "options": [
+   "J = E/σ",
+   "J = σ²E",
+   "J = σ/E",
+   "J = σE"
+  ],
+  "answer": 3,
+  "explain": "J = σE is the microscopic form of Ohm's law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f971e3fd-aa4e-44ac-86c7-9bd89b16e502",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Electric power P in terms of resistance R and current I is:",
+  "formula": "P = I²R",
+  "options": [
+   "R/I²",
+   "I²R",
+   "IR²",
+   "I/R"
+  ],
+  "answer": 1,
+  "explain": "P = VI = (IR)·I = I²R by Ohm's law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cbc8f999-4938-46ac-9584-46313479d357",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "In meter bridge, if P and Q are swapped, balance length changes from ℓ to:",
+  "formula": "ℓ' = 100 − ℓ",
+  "options": [
+   "2ℓ",
+   "50 cm always",
+   "ℓ",
+   "100 − ℓ"
+  ],
+  "answer": 3,
+  "explain": "Swapping P and Q interchanges ratio; new balance point is complementary: 100 − ℓ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21c7f2ee-caed-4d2e-8db0-08003f0b90e4",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "In a circuit, resistors R₁ and R₂ in series — voltage drop across R₁ is:",
+  "formula": "V₁ = V·R₁/(R₁+R₂)",
+  "options": [
+   "V·(R₁+R₂)/R₁",
+   "V·R₂/(R₁+R₂)",
+   "V/R₁",
+   "V·R₁/(R₁+R₂)"
+  ],
+  "answer": 3,
+  "explain": "Voltage divider rule: V₁ = I·R₁ = [V/(R₁+R₂)]·R₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1e60b1dd-db37-47fb-97f2-4b09f27b745e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "The relation between resistivity ρ, electron density n, mass m, charge e, τ is:",
+  "formula": "ρ = m/(ne²τ)",
+  "options": [
+   "ne²/(mτ)",
+   "m/(ne²τ)",
+   "ne²τ/m",
+   "m/(neτ)"
+  ],
+  "answer": 1,
+  "explain": "From drift velocity derivation: σ = ne²τ/m, so ρ = m/(ne²τ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "43bb27e6-5d08-49d8-883b-0a29ef3fac6f",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Series and parallel combination of resistors",
+  "prompt": "Equivalent resistance of n identical resistors R in parallel is:",
+  "formula": "R_eq = R/n",
+  "options": [
+   "R²/n",
+   "R/n",
+   "n/R",
+   "nR"
+  ],
+  "answer": 1,
+  "explain": "For n equal resistors in parallel, R_eq = R/n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5613ec18-7f00-4cfc-90c0-569ee16a9ead",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "In a Wheatstone bridge, if P/Q = R/S, galvanometer shows:",
+  "formula": "P/Q = R/S",
+  "options": [
+   "Reverse deflection",
+   "Zero deflection",
+   "Half deflection",
+   "Maximum deflection"
+  ],
+  "answer": 1,
+  "explain": "Balanced bridge condition means no potential difference across galvanometer → zero current.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f87f7f97-7b2b-44f4-9606-42b1d001f434",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "When a cell is being charged, its terminal voltage V_t is:",
+  "formula": "V_t = ε + Ir",
+  "options": [
+   "Greater than ε",
+   "Less than ε",
+   "Equal to ε",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "During charging, current flows in, so V_t = ε + Ir > ε.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b5b808d8-289e-40ec-8e18-16f5fbd4d466",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "Order of magnitude of drift speed of electrons in a copper wire carrying a few amperes:",
+  "formula": "",
+  "options": [
+   "10⁻⁴ m/s",
+   "10⁸ m/s",
+   "10⁻¹ m/s",
+   "10² m/s"
+  ],
+  "answer": 0,
+  "explain": "v_d = I/(nAe) comes out around 10⁻⁴ m/s (a fraction of a mm/s).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "318518a5-5f4f-4a97-9bb0-b41a55f36920",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "Same current flows through a wire whose radius is doubled. The drift speed becomes:",
+  "formula": "v_d = I/(nAe)",
+  "options": [
+   "Half",
+   "Four times",
+   "Double",
+   "One-fourth"
+  ],
+  "answer": 3,
+  "explain": "v_d ∝ 1/A ∝ 1/r², so doubling r makes v_d one-fourth.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3bbc248-78ee-44fa-92a5-6d20b04f8a36",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "A ring of charge q rotates at angular speed ω. The equivalent current is:",
+  "formula": "I = qω/2π",
+  "options": [
+   "qω",
+   "qω/2π",
+   "qω²/2π",
+   "2πq/ω"
+  ],
+  "answer": 1,
+  "explain": "I = q/T = q f = qω/2π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "798483dc-38c6-4e9e-9caf-785dc125e463",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "In a steady-current wire of non-uniform cross-section, which quantity is the same at every section?",
+  "formula": "",
+  "options": [
+   "Drift velocity",
+   "Current density",
+   "Current",
+   "Electric field"
+  ],
+  "answer": 2,
+  "explain": "Charge conservation keeps I constant; J and v_d vary as 1/A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d8cf4bd2-c9b0-4345-bed1-a73f21d4bd88",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "The charge passing a section in a time interval equals what on an I–t graph?",
+  "formula": "q = ∫ I dt",
+  "options": [
+   "Intercept on the I-axis",
+   "Square of the area",
+   "Area under the graph",
+   "Slope of the graph"
+  ],
+  "answer": 2,
+  "explain": "Since I = dq/dt, the charge is the area under the I–t curve.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "13fe98b6-0248-46ff-8203-a3f6f569915d",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "At fixed applied field, heating a metallic conductor makes the electron drift speed:",
+  "formula": "",
+  "options": [
+   "Become zero",
+   "Remain the same",
+   "Decrease, since τ decreases",
+   "Increase, since τ increases"
+  ],
+  "answer": 2,
+  "explain": "Higher temperature means more frequent collisions, so τ and v_d = eEτ/m fall.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0582d248-c797-4d41-ad40-bba88c21b350",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "In a metal wire, the conventional current direction is:",
+  "formula": "",
+  "options": [
+   "Opposite to the electron drift",
+   "Random",
+   "Along the electron drift",
+   "Perpendicular to the drift"
+  ],
+  "answer": 0,
+  "explain": "Conventional current is the flow of positive charge, opposite to electron drift.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5984966f-997f-410d-a43b-af1267226f3f",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "Approximately how many electrons per second cross a section in a 1 A current?",
+  "formula": "1/e",
+  "options": [
+   "3 × 10⁸",
+   "1.6 × 10¹⁹",
+   "9.1 × 10³¹",
+   "6.25 × 10¹⁸"
+  ],
+  "answer": 3,
+  "explain": "N = I/e = 1/(1.6×10⁻¹⁹) ≈ 6.25×10¹⁸ per second.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb168237-f7bf-4e0a-9025-6e8cf97d7280",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "Current is a scalar even though it has direction. Why?",
+  "formula": "",
+  "options": [
+   "It has no magnitude",
+   "It is always constant",
+   "It has no unit",
+   "It does not obey the vector addition law"
+  ],
+  "answer": 3,
+  "explain": "Currents add algebraically at a junction, not by the vector (parallelogram) law.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4f5fd21b-fa8b-4607-9828-5c44d5aebc2c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "Same current I flows in two copper wires of equal length with area ratio 1:2. The ratio of their current densities is:",
+  "formula": "J = I/A",
+  "options": [
+   "2:1",
+   "1:4",
+   "1:2",
+   "4:1"
+  ],
+  "answer": 0,
+  "explain": "J = I/A is inversely proportional to A, so the ratio is 2:1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cf8fd547-5105-4f2e-a4ee-eb2e216cc688",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electric current and current density",
+  "prompt": "Current density J, current I and area vector A are related by I = ∫J·dA. This shows that I is:",
+  "formula": "I = ∫ J·dA",
+  "options": [
+   "Flux of J through the area",
+   "Divergence of J",
+   "Gradient of J",
+   "Curl of J over the area"
+  ],
+  "answer": 0,
+  "explain": "Current through a surface is the flux of the current density J across it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "797e28f4-7542-4d95-bfae-4f3ca4e2b1ee",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "SI unit of electron mobility μ is:",
+  "formula": "μ = v_d / E",
+  "options": [
+   "m² V s⁻¹",
+   "m V⁻¹ s⁻²",
+   "m² V⁻¹ s⁻¹",
+   "m V⁻¹ s⁻¹"
+  ],
+  "answer": 2,
+  "explain": "μ = (m/s)/(V/m) = m² V⁻¹ s⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f90b95a5-17e2-4342-9af9-88aab9a84e7f",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Direction of drift velocity of free electrons relative to the applied electric field E:",
+  "formula": "",
+  "options": [
+   "Opposite to E",
+   "Along E",
+   "At 45° to E",
+   "Perpendicular to E"
+  ],
+  "answer": 0,
+  "explain": "Electrons are negative, so force −eE makes them drift opposite to E (conventional current is along E).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "442a544c-f8ba-4584-bab3-f541252d0531",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "With rise in temperature, mobility of electrons in a metal:",
+  "formula": "μ = eτ/m",
+  "options": [
+   "Increases",
+   "First increases then decreases",
+   "Remains constant",
+   "Decreases"
+  ],
+  "answer": 3,
+  "explain": "τ falls as temperature rises, so μ falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "265673af-ed23-431d-b703-7ee3343adcd2",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Dimensional formula of mobility μ is:",
+  "formula": "",
+  "options": [
+   "M⁻¹T³A",
+   "MT⁻²A⁻¹",
+   "M⁻¹T²A",
+   "M⁻¹LT²A"
+  ],
+  "answer": 2,
+  "explain": "[v]/[E] = LT⁻¹ / (MLT⁻³A⁻¹) = M⁻¹T²A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3cba14b-75f7-46eb-9ce4-c4f2026f60c7",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "With no applied field, the average velocity of free electrons in a metal is zero because:",
+  "formula": "",
+  "options": [
+   "Electrons are bound to the lattice",
+   "Electrons are at rest",
+   "Thermal motion is random in all directions",
+   "Collisions stop electrons completely"
+  ],
+  "answer": 2,
+  "explain": "Random thermal velocities point in all directions, so their vector average is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "95972fcf-5e7c-44e5-aaec-0e87657593d0",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Mobility of electrons in terms of relaxation time τ and mass m is:",
+  "formula": "μ = eτ/m",
+  "options": [
+   "μ = eτ²/m",
+   "μ = m/(eτ)",
+   "μ = e/(mτ)",
+   "μ = eτ/m"
+  ],
+  "answer": 3,
+  "explain": "v_d = eEτ/m and μ = v_d/E give μ = eτ/m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "42b64794-729e-40e9-8fa2-faa0d4926d44",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Which material has nearly zero temperature coefficient of resistance?",
+  "formula": "",
+  "options": [
+   "Manganin",
+   "Silver",
+   "Copper",
+   "Germanium"
+  ],
+  "answer": 0,
+  "explain": "Alloys like manganin and constantan have very small α, so they are used in standard resistors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f5603ec8-ea5c-4d3d-a7a6-412c003d5215",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "The V–I graph (I vs V) of a tungsten filament bulb is:",
+  "formula": "",
+  "options": [
+   "A curve with I rising slower than V",
+   "A straight line through the origin",
+   "A line parallel to the V-axis",
+   "A curve with I rising faster than V"
+  ],
+  "answer": 0,
+  "explain": "Heating raises the filament's resistance, so the slope I/V falls with V and the filament is non-ohmic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2e9c821e-50a1-4318-91af-6a56ad277a61",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Resistivity of a metal rises with temperature mainly because:",
+  "formula": "ρ = m/(ne²τ)",
+  "options": [
+   "Electron mass m increases",
+   "Electron charge e decreases",
+   "Relaxation time τ decreases",
+   "Free electron density n falls"
+  ],
+  "answer": 2,
+  "explain": "More frequent collisions at higher T reduce τ; n is almost unchanged, so ρ rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e4f9dd99-aa45-4945-9601-9c7d572c35c0",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "A wire of resistance R is cut into n equal parts, which are joined in parallel. Net resistance is:",
+  "formula": "",
+  "options": [
+   "nR",
+   "R/n",
+   "n²R",
+   "R/n²"
+  ],
+  "answer": 3,
+  "explain": "Each part has R/n; n of them in parallel give (R/n)/n = R/n².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0bfe55e9-c22e-45f7-bda4-b63c025fffc5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "V-I characteristics: ohmic vs non-ohmic",
+  "prompt": "Ohm's law V = IR is valid only if which quantity is held constant?",
+  "formula": "",
+  "options": [
+   "Voltage",
+   "Current",
+   "Power",
+   "Temperature"
+  ],
+  "answer": 3,
+  "explain": "Resistance of an ohmic conductor stays constant only at constant temperature (and physical conditions).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1e3f76e-45fc-4064-a7e0-12192a6392dc",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "V-I characteristics: ohmic vs non-ohmic",
+  "prompt": "A p-n junction diode in forward bias has a V-I curve that is",
+  "formula": "",
+  "options": [
+   "Constant current",
+   "Linear through origin",
+   "Exponential after a threshold voltage",
+   "Parabolic decreasing"
+  ],
+  "answer": 2,
+  "explain": "Current is negligible below the knee voltage, then rises exponentially: non-ohmic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22dc3bf1-d8f6-434c-b9f8-ceca42060bc9",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "V-I characteristics: ohmic vs non-ohmic",
+  "prompt": "For a thermistor (NTC), the V-I curve at higher currents shows",
+  "formula": "",
+  "options": [
+   "Constant slope",
+   "Zero current at high V",
+   "Increasing resistance as current rises",
+   "Decreasing resistance as current rises"
+  ],
+  "answer": 3,
+  "explain": "Self-heating lowers an NTC thermistor's resistance, so the curve bends toward the I-axis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f7de9384-546f-45eb-bbfd-bc4b97d1b49e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "V-I characteristics: ohmic vs non-ohmic",
+  "prompt": "On a non-ohmic V-I graph, dynamic (differential) resistance at a point equals which quantity?",
+  "formula": "r = dV/dI",
+  "options": [
+   "Slope of the tangent, dV/dI",
+   "Slope of the tangent, dI/dV",
+   "V/I at that point",
+   "Area under the curve up to that point"
+  ],
+  "answer": 0,
+  "explain": "Dynamic resistance is dV/dI, the slope of the tangent to the V-I curve; static resistance is V/I.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c1abf6ca-3dad-4a8d-a680-c708a85591f3",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Resistivity of nichrome, manganin and constantan with temperature: α is",
+  "formula": "",
+  "options": [
+   "Very small, nearly constant ρ",
+   "Large and positive",
+   "Large and negative",
+   "Exactly zero at all T"
+  ],
+  "answer": 0,
+  "explain": "These alloys have very small α, so resistance is almost temperature independent (used in standard resistors).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4d161097-dc58-40c8-8a97-9f549293d781",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Why does resistivity of a semiconductor decrease with temperature?",
+  "formula": "",
+  "options": [
+   "Lattice vibrations stop",
+   "Relaxation time τ increases",
+   "Carrier density n rises faster than τ falls",
+   "Electron mass decreases"
+  ],
+  "answer": 2,
+  "explain": "Heating generates more charge carriers; the rise in n outweighs the fall in τ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "805e8d2e-c30c-4b07-b0df-5f5bc1073691",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "SI unit of temperature coefficient of resistance α",
+  "formula": "α = (R−R₀)/(R₀ΔT)",
+  "options": [
+   "Dimensionless",
+   "K⁻¹ (per °C)",
+   "Ω m K⁻¹",
+   "Ω K⁻¹"
+  ],
+  "answer": 1,
+  "explain": "α is the fractional change in resistance per unit temperature rise, unit K⁻¹ or °C⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b1d9dc8f-e23d-4c10-b5be-bf0b3260a9d4",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Resistance of a metal wire heated: which quantity change is negligible for R = ρl/A?",
+  "formula": "R = ρl/A",
+  "options": [
+   "Change in τ",
+   "Change in ρ",
+   "Change in l and A (compared with ρ)",
+   "Change in α"
+  ],
+  "answer": 2,
+  "explain": "Thermal expansion of l and A is tiny compared to the change in ρ, so it is usually ignored.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "60af821e-1c30-48d6-a7a4-8d6a75283206",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Resistance–temperature graph of a thermistor (NTC) is",
+  "formula": "",
+  "options": [
+   "Linearly increasing with T",
+   "Constant",
+   "Parabolic increasing",
+   "Exponentially decreasing with T"
+  ],
+  "answer": 3,
+  "explain": "NTC thermistors are semiconductor-based; R falls rapidly (exponentially) as T rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0eab517a-67a1-472f-8ce1-83db6320db60",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "Platinum resistance thermometers use platinum because it has",
+  "formula": "",
+  "options": [
+   "Zero resistivity",
+   "Very high α only",
+   "High melting point and stable linear R–T",
+   "Negative α"
+  ],
+  "answer": 2,
+  "explain": "Platinum has high melting point and a reproducible, nearly linear R–T relation over a wide range.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d0dd19ba-9769-4718-956b-ad79ffde127c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Maximum power delivered by a source of emf E and internal resistance r to a load is:",
+  "formula": "P_max = E²/4r",
+  "options": [
+   "E²/8r",
+   "E²/2r",
+   "E²/4r",
+   "E²/r"
+  ],
+  "answer": 2,
+  "explain": "At R = r, I = E/2r, so P = I²r = E²/4r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "089db481-e51c-42b0-96ac-e6e7c4c65844",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Efficiency of a source when it delivers maximum power to the load is:",
+  "formula": "η = R/(R + r)",
+  "options": [
+   "100%",
+   "50%",
+   "25%",
+   "75%"
+  ],
+  "answer": 1,
+  "explain": "At R = r, η = R/(R + r) = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9e12c62d-38ff-4eb4-a3a3-6c4428fe68ad",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "A fuse wire should be made of a material with:",
+  "formula": "",
+  "options": [
+   "Low melting point, high resistance",
+   "High melting point, low resistance",
+   "High melting point, high resistance",
+   "Low melting point, low resistance"
+  ],
+  "answer": 0,
+  "explain": "Tin–lead alloy: it must melt easily when excess current heats it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ba45c587-7d1f-4e7c-9ace-6baeabedc3f1",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "A heating element (e.g. nichrome) must have:",
+  "formula": "",
+  "options": [
+   "High resistivity, high melting point",
+   "High resistivity, low melting point",
+   "Low resistivity, low melting point",
+   "Low resistivity, high melting point"
+  ],
+  "answer": 0,
+  "explain": "High ρ gives large heat; high melting point lets it glow without melting.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "412cebef-2e77-4543-b250-2c8b09331bfe",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "For resistors connected in parallel, the heat produced in each is:",
+  "formula": "H = V²t/R",
+  "options": [
+   "Independent of R",
+   "Directly proportional to R",
+   "Proportional to R²",
+   "Inversely proportional to R"
+  ],
+  "answer": 3,
+  "explain": "Same V across all branches, so H ∝ 1/R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c88680c-5d78-47a9-a754-9e50abd3d0fb",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "The power rating on an electric bulb indicates the power it consumes:",
+  "formula": "",
+  "options": [
+   "At half the rated voltage",
+   "At any applied voltage",
+   "At its rated voltage",
+   "Only when connected in series"
+  ],
+  "answer": 2,
+  "explain": "Rated power is consumed only when operated at the rated voltage.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11d3eed8-15b6-4e2a-8793-4a0c2d2eab58",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "A cell of emf E and internal resistance r delivers current I. Total power generated by the cell is:",
+  "formula": "",
+  "options": [
+   "E²/(4r)",
+   "EI",
+   "I²r",
+   "EI − I²r"
+  ],
+  "answer": 1,
+  "explain": "The chemical power converted is EI. Of this, I²r is lost inside and EI − I²r goes to the external circuit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "adc1e53f-3a0e-42d7-888c-4435c021d556",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "A voltmeter of finite resistance connected across a cell in open circuit reads:",
+  "formula": "",
+  "options": [
+   "Exactly ε",
+   "Zero",
+   "Less than ε",
+   "More than ε"
+  ],
+  "answer": 2,
+  "explain": "Voltmeter draws a small current, so reading is ε − Ir < ε.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1c4a3731-d9fd-432e-aa88-cc5ec9c098b6",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "Internal resistance of a cell increases when:",
+  "formula": "",
+  "options": [
+   "Electrode area is increased",
+   "Electrode separation is increased",
+   "Electrolyte is made more concentrated",
+   "Temperature of electrolyte is raised"
+  ],
+  "answer": 1,
+  "explain": "r ∝ separation, ∝ 1/area; heating lowers r of electrolyte.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b3f946a7-c4e7-452a-ac0c-50f7e6007f3c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "Two cells (ε₁, r₁) and (ε₂, r₂) in parallel with like poles joined: equivalent EMF is",
+  "formula": "ε_eq = (ε₁r₂ + ε₂r₁)/(r₁ + r₂)",
+  "options": [
+   "(ε₁ − ε₂)/(r₁ + r₂)",
+   "(ε₁r₂ + ε₂r₁)/(r₁ + r₂)",
+   "(ε₁ + ε₂)/2",
+   "(ε₁r₁ + ε₂r₂)/(r₁ + r₂)"
+  ],
+  "answer": 1,
+  "explain": "Each EMF is weighted by the other cell's internal resistance (conductance-weighted average).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2534b827-5bbe-4f67-bf10-5a95b54b6da2",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "m rows, each of n identical cells (ε, r), in parallel. What is the equivalent internal resistance?",
+  "formula": "r_eq = nr/m",
+  "options": [
+   "nmr",
+   "nr/m",
+   "mr/n",
+   "r/(nm)"
+  ],
+  "answer": 1,
+  "explain": "Each row has resistance nr; m identical rows in parallel give nr/m. EMF of the group is nε.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ace656b-d5ce-4757-a922-4177485ec606",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "m rows of n identical cells (ε, r) feed a matched load R = nr/m. The maximum power delivered is:",
+  "formula": "P_max = ε_eq²/(4r_eq)",
+  "options": [
+   "mnε²/(4r)",
+   "mnε²/r",
+   "nε²/(4mr)",
+   "m²nε²/(4r)"
+  ],
+  "answer": 0,
+  "explain": "ε_eq = nε and r_eq = nr/m, so P = (nε)²/(4nr/m) = mnε²/(4r).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b4a8155-1743-4c06-867f-141c7495d993",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "Two identical cells (ε, r) are in parallel with opposite polarity. Equivalent EMF and internal resistance?",
+  "formula": "",
+  "options": [
+   "0 and 2r",
+   "0 and r/2",
+   "ε and r/2",
+   "2ε and r/2"
+  ],
+  "answer": 1,
+  "explain": "EMFs oppose and cancel to 0, and the resistances combine in parallel to r/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "290a6d62-2b75-485b-9e3a-31484798ede8",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "Does the balance condition of a Wheatstone bridge depend on the battery emf?",
+  "formula": "",
+  "options": [
+   "No, it is independent",
+   "Yes, directly proportional",
+   "Yes, inversely proportional",
+   "Only if emf exceeds 2 V"
+  ],
+  "answer": 0,
+  "explain": "The balance depends only on the resistance ratios, not on the emf or the battery's internal resistance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a8a54285-97de-4eb0-9c38-3c15f30b84cf",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "Wheatstone bridge is most sensitive when all four arm resistances are:",
+  "formula": "",
+  "options": [
+   "Of comparable magnitude",
+   "Very low in all arms",
+   "Very high in P only",
+   "Very different, P, Q ≫ R, S"
+  ],
+  "answer": 0,
+  "explain": "Maximum sensitivity occurs when P, Q, R, S are of the same order of magnitude.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "adc08b5b-5996-42e6-b55e-049b0d6d02d0",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "In a balanced Wheatstone bridge, the potentials at the two galvanometer terminals are:",
+  "formula": "V_B = V_D",
+  "options": [
+   "Equal",
+   "Equal to the battery emf",
+   "Zero at each terminal",
+   "Opposite in sign"
+  ],
+  "answer": 0,
+  "explain": "No current flows through the galvanometer, so its two end points are at the same potential.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "550d86b3-bb8e-41c2-8abe-62d5db951fcf",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "Metre bridge: R in left gap, S in right gap, null point at ℓ cm from left end. R/S = ?",
+  "formula": "R/S = ℓ/(100 − ℓ)",
+  "options": [
+   "(100 − ℓ)/ℓ",
+   "ℓ/100",
+   "100/ℓ",
+   "ℓ/(100 − ℓ)"
+  ],
+  "answer": 3,
+  "explain": "Wire resistances are proportional to length, so the Wheatstone balance gives R/S = ℓ/(100−ℓ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "345c7bc5-1054-4961-9b82-7499d994c6fe",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "Which property is needed in the metre bridge wire material?",
+  "formula": "",
+  "options": [
+   "Low resistivity, high temperature coefficient",
+   "High resistivity, high temperature coefficient",
+   "High resistivity, low temperature coefficient",
+   "Low resistivity, low temperature coefficient"
+  ],
+  "answer": 2,
+  "explain": "Manganin/constantan-type wires are used for large resistance per length and stable resistance on heating.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b5c031f-9795-450d-b20d-12719eca0cca",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "End errors in a metre bridge arise mainly from:",
+  "formula": "",
+  "options": [
+   "Resistance of end strips and contacts",
+   "Galvanometer resistance",
+   "Length of the jockey",
+   "Emf of the cell"
+  ],
+  "answer": 0,
+  "explain": "The copper strips and contacts at the wire ends add small extra resistance, which shifts the apparent null length.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4cb6ce6b-f5ae-4b7d-ad72-186a2614d7d8",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "Interchanging the cell and the galvanometer positions in a balanced metre bridge:",
+  "formula": "",
+  "options": [
+   "Keeps the balance point unchanged",
+   "Reverses the balance length to 100 − ℓ",
+   "Shifts null point to 50 cm",
+   "Makes the bridge unbalanced"
+  ],
+  "answer": 0,
+  "explain": "Battery and galvanometer arms are conjugate in a Wheatstone bridge, so the balance condition is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "96d25daa-13ba-48d3-9b09-0b30f5fa1764",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "In a balanced metre bridge, R in the left gap is increased. The null point moves:",
+  "formula": "",
+  "options": [
+   "It stays unchanged",
+   "Toward the right end",
+   "Toward the left end",
+   "To the exact middle"
+  ],
+  "answer": 1,
+  "explain": "R/S = ℓ/(100−ℓ): a larger R needs a longer left wire segment, so ℓ increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94659276-a447-4ea9-9ca0-02e8cef1c994",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "X in left gap, R in right gap, null at 75 cm. X/R equals:",
+  "formula": "X/R = ℓ/(100 − ℓ)",
+  "options": [
+   "1/3",
+   "3/4",
+   "3",
+   "4/3"
+  ],
+  "answer": 2,
+  "explain": "X/R = 75/25 = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a973ccf7-d83b-4ab7-a8a2-ae00ea6b64e7",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire of resistance R is cut into 3 equal parts which are joined in parallel. Net resistance:",
+  "formula": "R/n²",
+  "options": [
+   "R/6",
+   "R/9",
+   "R/3",
+   "3R"
+  ],
+  "answer": 1,
+  "explain": "Each piece is R/3; three in parallel give (R/3)/3 = R/9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a80b37b3-0652-4dfa-ab19-a887fb167082",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire carrying fixed current I is stretched to double length. Drift speed of electrons becomes:",
+  "formula": "v_d = I/(nAe)",
+  "options": [
+   "Half",
+   "Unchanged",
+   "Four times",
+   "Double"
+  ],
+  "answer": 3,
+  "explain": "A halves and n is unchanged, so v_d = I/(nAe) doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7bf5e5a5-f583-4fe2-b5bf-e0b563c4a90c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire is stretched to double length with the same potential difference applied. Drift speed becomes:",
+  "formula": "v_d = eVτ/(mL)",
+  "options": [
+   "Unchanged",
+   "Double",
+   "Half",
+   "One-fourth"
+  ],
+  "answer": 2,
+  "explain": "E = V/L halves, and v_d ∝ E, so v_d halves.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e090713-4d77-413f-851c-811767ce77eb",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire carrying fixed current is stretched to double length. The electric field inside becomes:",
+  "formula": "E = ρJ = ρI/A",
+  "options": [
+   "Double",
+   "Unchanged",
+   "Half",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "ρ is fixed and J = I/A doubles, so E = ρJ doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "031f98bf-6165-40fb-bd77-a4a4f2f5e253",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire on a fixed battery is stretched to double length. Power dissipated P becomes:",
+  "formula": "P = V²/R",
+  "options": [
+   "P/4",
+   "P/2",
+   "2P",
+   "4P"
+  ],
+  "answer": 0,
+  "explain": "R becomes 4R at fixed V, so P = V²/R falls to P/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68efd946-bd78-4143-b356-38f1b31cd14c",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "Two wires of the same material and equal mass have radii in ratio 1:2. Ratio of resistances R₁:R₂ is:",
+  "formula": "R ∝ 1/r⁴ (same mass)",
+  "options": [
+   "8:1",
+   "16:1",
+   "2:1",
+   "4:1"
+  ],
+  "answer": 1,
+  "explain": "Same volume gives R ∝ 1/r⁴, so R₁/R₂ = 2⁴ = 16.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "670e0c35-1801-4f07-9c68-4988961404a1",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire is stretched to double length at constant volume. Its resistance per unit length becomes:",
+  "formula": "R/L ∝ L",
+  "options": [
+   "Four times",
+   "Unchanged",
+   "Half",
+   "Double"
+  ],
+  "answer": 3,
+  "explain": "R′/L′ = 4R/2L = 2(R/L).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb60564e-0a63-4a40-bd48-dc58a6c55b2a",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire of resistance R is stretched to double length, then cut into two equal parts. Each part has resistance:",
+  "formula": "",
+  "options": [
+   "4R",
+   "2R",
+   "R",
+   "R/2"
+  ],
+  "answer": 1,
+  "explain": "Stretched resistance is 4R; half of it is 2R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f02991ef-efc1-4739-a27b-017e95f3f91b",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Stretching wire: change in resistance",
+  "prompt": "A wire is stretched to three times its length at constant volume. Its conductance becomes:",
+  "formula": "G = 1/R, R ∝ L²",
+  "options": [
+   "G/9",
+   "3G",
+   "G/6",
+   "G/3"
+  ],
+  "answer": 0,
+  "explain": "R becomes 9R, so G = 1/R becomes G/9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f08c43cb-4b5d-49b1-8553-4020417cbb57",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Maximum power transfer condition",
+  "prompt": "Terminal voltage across the load when maximum power is transferred from a cell of EMF ε is:",
+  "formula": "V = ε − Ir",
+  "options": [
+   "ε/4",
+   "ε/3",
+   "ε/2",
+   "ε"
+  ],
+  "answer": 2,
+  "explain": "At R = r, the EMF divides equally, so V = ε/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd75e52f-05c2-4b04-8a4b-d989e079a555",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Maximum power transfer condition",
+  "prompt": "For a fixed load R and a variable internal resistance r, power in R is maximum when:",
+  "formula": "P = ε²R/(R+r)²",
+  "options": [
+   "r = R/2",
+   "r = 0",
+   "r = R",
+   "r = 2R"
+  ],
+  "answer": 1,
+  "explain": "With R fixed, P is largest when the denominator is smallest, i.e. r = 0. R = r applies only when R varies.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b8261b29-5da7-4194-b225-70a7c681cec5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Maximum power transfer condition",
+  "prompt": "At maximum power transfer, the current is what fraction of the short-circuit current ε/r?",
+  "formula": "I = ε/(R+r)",
+  "options": [
+   "2/3",
+   "1/4",
+   "1/3",
+   "1/2"
+  ],
+  "answer": 3,
+  "explain": "At R = r, I = ε/2r, which is half of ε/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8af9ef5e-47b7-4c13-8e88-33d81cffac1e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Same p.d. across a wire of fixed length; its radius is doubled. Drift velocity becomes:",
+  "formula": "v_d = eVτ/(ml)",
+  "options": [
+   "Halves",
+   "Becomes four times",
+   "Doubles",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "v_d = eEτ/m with E = V/l, which is independent of the area.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a74054de-7118-449f-9377-6c237d164097",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "In v_d = eEτ/m, the relaxation time τ physically means:",
+  "formula": "",
+  "options": [
+   "Time for one thermal oscillation of ions",
+   "Average time between successive collisions",
+   "Time to cross the whole wire",
+   "Time for the field to be set up"
+  ],
+  "answer": 1,
+  "explain": "τ is the average time between successive collisions of an electron with ions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5c81f38f-dc13-4064-9a75-7fc86287f085",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Two wires of same material and same length, radii in ratio 1:2, are joined to the same battery in parallel. Power ratio is:",
+  "formula": "P = V²/R, R ∝ 1/r²",
+  "options": [
+   "1 : 2",
+   "2 : 1",
+   "1 : 4",
+   "4 : 1"
+  ],
+  "answer": 2,
+  "explain": "Same V, P ∝ 1/R ∝ r², so ratio is 1 : 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64c21b7c-8231-44f9-91d2-e0575b8da8d5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "Order of magnitude of relaxation time τ for free electrons in a metal at room temperature:",
+  "formula": "",
+  "options": [
+   "10⁻²⁰ s",
+   "10⁻³ s",
+   "10⁻¹⁴ s",
+   "10⁻⁸ s"
+  ],
+  "answer": 2,
+  "explain": "In metals τ ≈ 10⁻¹⁴ s (about 10⁻¹⁴ to 10⁻¹⁵ s).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cdb61bae-eac3-4955-8ef0-8500a3661e22",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "In the Drude model, just after a collision, the average velocity of an electron is taken as:",
+  "formula": "",
+  "options": [
+   "Zero, as it is randomly directed",
+   "Equal to eEτ/m",
+   "Equal to the previous drift velocity",
+   "Equal to the thermal speed along E"
+  ],
+  "answer": 0,
+  "explain": "Post-collision velocities are random, so the average is zero; the field then gives v_d = (eE/m)τ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "177bb53e-1bd1-4ace-adde-5fdd51a7972d",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "Bulbs of different wattage, same rated voltage, are in parallel across that voltage. Brightest is the one with:",
+  "formula": "P = V²/R",
+  "options": [
+   "Highest wattage rating",
+   "Highest resistance",
+   "Lowest current",
+   "Lowest wattage rating"
+  ],
+  "answer": 0,
+  "explain": "Parallel: same V, P = V²/R; higher wattage means lower R and more power.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22ada482-302d-4ae2-b0c9-7b630d270b8e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "In a p-type semiconductor, the drift velocity of holes relative to the applied field E is:",
+  "formula": "",
+  "options": [
+   "Opposite to E",
+   "Along E",
+   "Perpendicular to E",
+   "Zero on average"
+  ],
+  "answer": 1,
+  "explain": "Holes act as positive carriers, so they drift along E, opposite to electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7d69789-8d6f-40da-aae9-f0a52323c78a",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Drift velocity, mobility and relation with I",
+  "prompt": "The kinetic energy the drifting electrons gain from the field between collisions is mostly given to the lattice as:",
+  "formula": "",
+  "options": [
+   "Magnetic energy",
+   "Heat (Joule heating)",
+   "Increased drift speed",
+   "Light"
+  ],
+  "answer": 1,
+  "explain": "Collisions pass the energy gained from E to the lattice ions, raising their vibration, which appears as Joule heat.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5fcc7077-4cd8-4a4b-9849-4a297dbfe670",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "A uniform ring of wire has resistance R. Resistance between two diametrically opposite points is:",
+  "formula": "(R/2) ∥ (R/2)",
+  "options": [
+   "R/2",
+   "R/4",
+   "R",
+   "2R"
+  ],
+  "answer": 1,
+  "explain": "Two semicircular halves of R/2 each are in parallel, giving R/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d0816ee6-3edf-4780-8a42-7c7ed1ee8e1e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Compared with its pure constituent metals, an alloy generally has resistivity that is:",
+  "formula": "",
+  "options": [
+   "Exactly zero",
+   "Higher",
+   "Lower",
+   "The same"
+  ],
+  "answer": 1,
+  "explain": "Impurity atoms increase electron scattering, so alloys have higher resistivity (e.g. nichrome).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "32298430-445c-4218-ac71-1dcdb1a32e43",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Ohm's law and electrical resistance",
+  "prompt": "Below its critical temperature, the resistivity of a superconductor is:",
+  "formula": "ρ = 0 (T < T_c)",
+  "options": [
+   "Infinite",
+   "Very small but non-zero",
+   "Equal to that of a semiconductor",
+   "Exactly zero"
+  ],
+  "answer": 3,
+  "explain": "A superconductor shows zero resistance (ρ = 0) below its critical temperature T_c.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "712bb7f9-1a5c-457b-903c-c95654e40286",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Dimensional formula of electrical conductivity σ is:",
+  "formula": "σ = 1/ρ",
+  "options": [
+   "M⁻¹L⁻³T³A²",
+   "ML³T⁻³A⁻²",
+   "M⁻¹L⁻³T²A",
+   "M⁻¹L⁻²T³A²"
+  ],
+  "answer": 0,
+  "explain": "σ is the reciprocal of ρ (ML³T⁻³A⁻²), so σ = M⁻¹L⁻³T³A².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "28b33691-f1c3-46c9-85d9-dc93fff7409a",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Resistivity and conductivity",
+  "prompt": "Resistivity of nichrome vs copper at room temperature: nichrome's resistivity is about",
+  "formula": "",
+  "options": [
+   "About 10⁻¹⁰ times copper's",
+   "About 60 times copper's",
+   "About 10⁻³ times copper's",
+   "Same as copper"
+  ],
+  "answer": 1,
+  "explain": "Nichrome ρ ≈ 10⁻⁶ Ω·m while Cu ≈ 1.7×10⁻⁸ Ω·m, so about 60 times larger.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4632b615-65cd-4ae5-b9c4-7f982b7eabd3",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "At the instant a tungsten filament bulb is switched on, its current compared with the steady value is:",
+  "formula": "",
+  "options": [
+   "Much greater",
+   "Much smaller",
+   "Zero, then rising to the steady value",
+   "Equal to the steady value"
+  ],
+  "answer": 0,
+  "explain": "The cold filament has low resistance, so the initial current is several times the steady value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9847bf3c-7ab9-4368-bd03-81d11f44d9ec",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Temperature dependence of resistance",
+  "prompt": "A metallic heating coil on a constant voltage heats up. The power it dissipates:",
+  "formula": "P = V²/R",
+  "options": [
+   "Increases, since ρ falls",
+   "Decreases, since R rises",
+   "Remains constant",
+   "Increases, since R falls"
+  ],
+  "answer": 1,
+  "explain": "R rises with T for a metal (α > 0), so P = V²/R falls as the coil heats.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abfc4910-809b-47e4-9f6f-ef0f8a669f97",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Electrical energy and power",
+  "prompt": "A heater coil is cut to half its length and the half is used on the same supply voltage. Its power becomes:",
+  "formula": "P = V²/R",
+  "options": [
+   "Four times",
+   "One-fourth",
+   "Half",
+   "Double"
+  ],
+  "answer": 3,
+  "explain": "R becomes R/2, so P = V²/(R/2) = 2P.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "93282c81-8a6a-428b-95b8-b0927c8b53d2",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "n identical cells (ε, r) in series, one connected with reversed polarity. Net EMF and resistance:",
+  "formula": "",
+  "options": [
+   "(n − 2)ε and nr",
+   "(n − 1)ε and (n − 1)r",
+   "(n − 2)ε and (n − 2)r",
+   "(n − 1)ε and nr"
+  ],
+  "answer": 0,
+  "explain": "The reversed cell cancels one and subtracts one more: (n−2)ε. All r still add: nr.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "71b4610a-477b-4d19-ae2b-bac30f42e45a",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "Terminal voltage of a cell plotted against external resistance R:",
+  "formula": "V = εR/(R + r)",
+  "options": [
+   "Falls linearly from ε",
+   "Stays constant at ε",
+   "Rises and approaches ε asymptotically",
+   "Rises linearly without limit"
+  ],
+  "answer": 2,
+  "explain": "V = 0 at R = 0 and V → ε as R → ∞, with a saturating curve.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cee34d4f-a3d4-43a2-a11b-914e7616e575",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "On heating the electrolyte of a cell, its internal resistance generally:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "First increases, then drops to zero",
+   "Stays constant",
+   "Increases"
+  ],
+  "answer": 0,
+  "explain": "Electrolyte conductivity rises with temperature, so r falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "858204a5-b391-4e45-9d22-194ffb22ff4b",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "EMF, terminal voltage and internal resistance",
+  "prompt": "A cell (ε, r) has terminal voltage V while delivering current I. Its efficiency in terms of V and ε is:",
+  "formula": "η = output power / total power",
+  "options": [
+   "V/(ε − V)",
+   "ε/V",
+   "(ε − V)/ε",
+   "V/ε"
+  ],
+  "answer": 3,
+  "explain": "Output = VI, total power = εI, so η = V/ε (= R/(R + r)).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7c8393c8-5c0b-4324-9b5b-56498e4f54a7",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "Two cells of equal EMF ε but different internal resistances r₁, r₂ are in parallel. Equivalent EMF is:",
+  "formula": "",
+  "options": [
+   "ε",
+   "ε(r₁ + r₂)/2",
+   "2ε",
+   "ε(r₁ + r₂)/r₁r₂"
+  ],
+  "answer": 0,
+  "explain": "Putting ε₁ = ε₂ = ε in the parallel formula gives ε_eq = ε, whatever r₁ and r₂ are.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9be5ab2b-2056-4339-a5e0-b8d0a46e866b",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "Two cells with ε₁ > ε₂ are joined in a closed series loop, opposing. Terminal p.d. of the cell ε₂ is:",
+  "formula": "",
+  "options": [
+   "Greater than ε₂",
+   "Equal to ε₂",
+   "Less than ε₂",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "The stronger cell drives current into cell 2, so it is charging and V = ε₂ + Ir₂ > ε₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "684119ab-c933-4516-a460-6d99b5e39202",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "Two identical cells (ε, r) in parallel are joined in series with a third identical cell. Equivalent EMF and r?",
+  "formula": "",
+  "options": [
+   "2ε and 2r/3",
+   "3ε and 3r/2",
+   "3ε/2 and 3r/2",
+   "2ε and 3r/2"
+  ],
+  "answer": 3,
+  "explain": "The parallel pair gives ε and r/2. Adding the third cell in series gives 2ε and 3r/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c9cf907d-6c43-4abf-984f-dccb8f8a49f5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Cells in series and parallel",
+  "prompt": "Cells ε₁>ε₂ are joined in parallel, like poles together, with no external resistor. The ε₂ cell is:",
+  "formula": "",
+  "options": [
+   "Delivering the larger current",
+   "Being charged",
+   "Carrying zero current",
+   "Discharging normally"
+  ],
+  "answer": 1,
+  "explain": "The stronger cell drives current into the positive terminal of the weaker one, charging it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b41653c-1c10-411e-b0da-6fe4dc1e5443",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "The general analysis of any Wheatstone bridge network is based on which laws?",
+  "formula": "",
+  "options": [
+   "Coulomb's law",
+   "Kirchhoff's laws",
+   "Faraday's laws",
+   "Joule's law only"
+  ],
+  "answer": 1,
+  "explain": "Bridge currents and the balance condition follow from Kirchhoff's junction and loop rules.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05594a5d-bfb9-4f82-b8e5-c2b4b2640bd0",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "Bridge slightly unbalanced. Raising the battery emf makes the galvanometer deflection:",
+  "formula": "",
+  "options": [
+   "Decrease",
+   "Remain the same",
+   "Increase",
+   "Become zero"
+  ],
+  "answer": 2,
+  "explain": "Galvanometer current in an unbalanced bridge is proportional to emf. Larger emf gives greater sensitivity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3f91a99c-cb56-4d56-bcbf-27f8c69a288a",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "A Wheatstone bridge is unsuitable for measuring very low resistances because:",
+  "formula": "",
+  "options": [
+   "Lead and contact resistances become comparable",
+   "The battery emf is too small",
+   "The galvanometer is damaged",
+   "The bridge cannot be balanced"
+  ],
+  "answer": 0,
+  "explain": "Contact and lead resistances are comparable to the small unknown resistance and cause large errors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56759fe9-9afa-4f03-93a4-76ea8ca06dc7",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Wheatstone bridge balance condition",
+  "prompt": "The Wheatstone bridge is a null method. Its result is independent of the galvanometer's:",
+  "formula": "",
+  "options": [
+   "Calibration and resistance",
+   "Presence in the circuit",
+   "Connection to the bridge",
+   "Zero setting only"
+  ],
+  "answer": 0,
+  "explain": "The galvanometer only detects zero current, so its scale calibration and resistance do not affect the result.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f30935a7-07ad-458c-abd9-a2505a3c2ff5",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "In a metre bridge, if R and S are both doubled, the null point:",
+  "formula": "",
+  "options": [
+   "Shifts toward the right end",
+   "Shifts to exactly 50 cm",
+   "Stays at the same position",
+   "Shifts toward the left end"
+  ],
+  "answer": 2,
+  "explain": "Balance depends only on the ratio R/S = ℓ/(100−ℓ), and doubling both leaves it unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4361366-764c-466d-908d-e1cb4158b819",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "At the null point of a metre bridge, the potential drop across R equals the drop across:",
+  "formula": "",
+  "options": [
+   "The whole 100 cm wire",
+   "The wire length ℓ up to the jockey",
+   "The wire length (100 − ℓ)",
+   "The galvanometer"
+  ],
+  "answer": 1,
+  "explain": "The jockey and the R–S junction are at the same potential, so V across R equals V across wire length ℓ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "790d47f3-f606-4de0-b4ec-ca848d04601e",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Metre bridge",
+  "prompt": "Fractional error in X for a balance-length error δℓ in a metre bridge is:",
+  "formula": "δX/X = 100 δℓ / [ℓ(100 − ℓ)]",
+  "options": [
+   "δℓ/ℓ",
+   "δℓ / [ℓ(100 − ℓ)]",
+   "100 δℓ / [ℓ(100 − ℓ)]",
+   "δℓ/(100 − ℓ)"
+  ],
+  "answer": 2,
+  "explain": "From X ∝ ℓ/(100−ℓ): δX/X = δℓ/ℓ + δℓ/(100−ℓ) = 100δℓ/[ℓ(100−ℓ)].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8fc48c21-e278-4b30-8d49-3cb9b7aaa673",
+  "subject": "Physics",
+  "chapter": "Current Electricity",
+  "topic": "Maximum power transfer condition",
+  "prompt": "Cell (ε, r) feeds fixed R₀ in series with a variable R. Power in R is maximum when R equals:",
+  "formula": "R = r + R₀",
+  "options": [
+   "r",
+   "r R₀/(r + R₀)",
+   "R₀",
+   "r + R₀"
+  ],
+  "answer": 3,
+  "explain": "Treat R₀ as part of the source: effective internal resistance is r + R₀, so R = r + R₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

@@ -1,1238 +1,2698 @@
 [
-  {
-    "id": "19ce5c49-2c3a-4c7e-8595-120fb6e76584",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "Value of ∫₀^π sin x dx",
-    "formula": "∫₀^π sin x dx",
-    "options": [
-      "0",
-      "-2",
-      "1",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "[-cos x]₀^π = -cos π + cos 0 = 1 + 1 = 2",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb137735-3229-4b0d-88e0-9ebd69649c21",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "If f is even, ∫₋ₐ^a f(x)dx equals",
-    "formula": "∫₋ₐ^a f(x)dx",
-    "options": [
-      "∫₀^a f(x)dx",
-      "2∫₀^a f(x)dx",
-      "0",
-      "∫₋ₐ^0 f(x)dx"
-    ],
-    "answer": 1,
-    "explain": "For even functions, integral over symmetric interval equals twice integral from 0 to a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9dc6cf16-bf1d-409b-9541-00f6c98cbf68",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "If f is odd, ∫₋ₐ^a f(x)dx equals",
-    "formula": "∫₋ₐ^a f(x)dx",
-    "options": [
-      "0",
-      "∫₀^a f(x)dx",
-      "2∫₀^a f(x)dx",
-      "-∫₀^a f(x)dx"
-    ],
-    "answer": 0,
-    "explain": "For odd functions, contributions from -a to 0 and 0 to a cancel, giving 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4235fb49-57af-43a3-89dd-265b5516cc4f",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "∫ₐ^b f(x)dx = ? (reversal property)",
-    "formula": "",
-    "options": [
-      "∫ₐ^b f(-x)dx",
-      "-∫ᵦ^a f(x)dx",
-      "∫ᵦ^a f(x)dx",
-      "∫ₐ^b f(x)dx"
-    ],
-    "answer": 1,
-    "explain": "Reversing limits changes the sign: ∫ₐ^b f(x)dx = -∫ᵦ^a f(x)dx.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d880c198-c154-4df2-8e84-5abc97060dcf",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "King's property: ∫₀^a f(x)dx =",
-    "formula": "∫₀^a f(x)dx = ∫₀^a f(a-x)dx",
-    "options": [
-      "∫₀^a f(x-a)dx",
-      "∫₀^a f(a-x)dx",
-      "∫₀^a f(a+x)dx",
-      "∫₀^a f(-x)dx"
-    ],
-    "answer": 1,
-    "explain": "Substitution x → a-x leaves the integral unchanged; very frequently used property.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "06ad6834-374f-42a1-9a53-78e3aa71643d",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "∫₀^π x f(sin x)dx =",
-    "formula": "",
-    "options": [
-      "2∫₀^π f(sin x)dx",
-      "(π/2)∫₀^π f(sin x)dx",
-      "0",
-      "π∫₀^π f(sin x)dx"
-    ],
-    "answer": 1,
-    "explain": "Using King's property with a=π: ∫₀^π x f(sin x)dx = (π/2)∫₀^π f(sin x)dx.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f53fae63-4fdd-4fcc-9817-c0f34bb6c99e",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Standard Results",
-    "prompt": "∫₀^(π/2) log(sin x)dx equals",
-    "formula": "",
-    "options": [
-      "(π/2)log 2",
-      "π log 2",
-      "0",
-      "-(π/2)log 2"
-    ],
-    "answer": 3,
-    "explain": "Standard result: ∫₀^(π/2) log(sin x)dx = -(π/2)log 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4600d402-58d5-4e57-ae7b-1bdce9d49b48",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Standard Results",
-    "prompt": "∫₀^(π/2) log(tan x)dx equals",
-    "formula": "",
-    "options": [
-      "-(π/2)log 2",
-      "π/2",
-      "π log 2",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "log(tan x) is odd about π/4 on [0,π/2]; by King's property the integral = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2bf9b5d7-deca-47f9-a137-4ac5d2d45c1b",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Leibniz Rule",
-    "prompt": "Leibniz rule: d/dx[∫ₐ^(g(x)) f(t)dt] =",
-    "formula": "d/dx[∫ₐ^(g(x)) f(t)dt]",
-    "options": [
-      "f'(g(x))·g'(x)",
-      "f(g(x))",
-      "f(g(x))·g'(x)",
-      "g'(x)"
-    ],
-    "answer": 2,
-    "explain": "Differentiate integral with variable upper limit using chain rule: f(g(x))·g'(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "adee8d2a-4a63-4c6c-ae6c-40062a28875d",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "∫₀^(2a) f(x)dx when f(2a-x)=f(x)",
-    "formula": "",
-    "options": [
-      "4∫₀^a f(x)dx",
-      "∫₀^a f(x)dx",
-      "0",
-      "2∫₀^a f(x)dx"
-    ],
-    "answer": 3,
-    "explain": "If f(2a-x)=f(x), then ∫₀^(2a)f(x)dx = 2∫₀^a f(x)dx by splitting and substitution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "63616fcc-9328-4350-9f88-a612f0cb3ee5",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Periodic Functions",
-    "prompt": "For periodic f with period T: ∫₀^(nT) f(x)dx =",
-    "formula": "",
-    "options": [
-      "T·∫₀^n f(x)dx",
-      "∫₀^T f(x)dx",
-      "n²∫₀^T f(x)dx",
-      "n∫₀^T f(x)dx"
-    ],
-    "answer": 3,
-    "explain": "Integral over n complete periods = n times integral over one period.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8ad1a831-79cc-4c34-b638-133905b87c30",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Walli's Formula",
-    "prompt": "Walli's formula ∫₀^(π/2) sin²x dx =",
-    "formula": "",
-    "options": [
-      "1",
-      "π/4",
-      "π/2",
-      "π/3"
-    ],
-    "answer": 1,
-    "explain": "Using reduction: ∫₀^(π/2) sin²x dx = (1/2)(π/2) = π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "538529fb-38ca-42b1-b43f-dd04250e5187",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Modulus in Definite Integrals",
-    "prompt": "∫₋₁^1 |x| dx =",
-    "formula": "",
-    "options": [
-      "-1",
-      "0",
-      "2",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "|x| is even, so 2∫₀^1 x dx = 2·[x²/2]₀^1 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75798355-5021-43f9-94fe-2b6a14aecfb3",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Modulus in Definite Integrals",
-    "prompt": "∫₀^2 |x-1| dx =",
-    "formula": "",
-    "options": [
-      "1",
-      "0",
-      "1/2",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "Split at x=1: ∫₀^1(1-x)dx + ∫₁^2(x-1)dx = 1/2 + 1/2 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fc696f64-52cd-4f29-bf81-29653c94f347",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Fundamental Theorem of Calculus",
-    "prompt": "First Fundamental Theorem: d/dx[∫ₐ^x f(t)dt] =",
-    "formula": "",
-    "options": [
-      "f(a)",
-      "f(x)",
-      "f'(x)",
-      "F(x)-F(a)"
-    ],
-    "answer": 1,
-    "explain": "The derivative of the integral with upper limit x equals the integrand at x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8b2b9caa-8a17-40cf-832a-59d4e56a36ff",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Beta Function / Standard Results",
-    "prompt": "∫₀^1 x(1-x)ⁿ dx =",
-    "formula": "",
-    "options": [
-      "n/(n+1)",
-      "1/(n+1)(n+2)",
-      "1/(n+1)",
-      "1/(n+2)"
-    ],
-    "answer": 1,
-    "explain": "Using Beta function or repeated integration by parts: B(2,n+1)=1/[(n+1)(n+2)].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fa63f36d-f8cb-4021-9110-00b01a8864a2",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Beta Function",
-    "prompt": "∫₀^1 xᵐ(1-x)ⁿ dx = B(m+1,n+1) =",
-    "formula": "m!n!/(m+n+1)!",
-    "options": [
-      "(m+n)!/m!n!",
-      "m!n!/(m+n+1)!",
-      "m!/(m+n)!",
-      "n!/(m+n)!"
-    ],
-    "answer": 1,
-    "explain": "Beta function B(m+1,n+1)=m!n!/(m+n+1)! for non-negative integers m,n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5a28fecc-f7da-4b91-a66c-5b2af3ace9cb",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "∫ₐ^b f(x)dx = ∫ₐ^b f(a+b-x)dx is called",
-    "formula": "",
-    "options": [
-      "Leibniz rule",
-      "Walli's theorem",
-      "King's property",
-      "Newton's property"
-    ],
-    "answer": 2,
-    "explain": "Substitution x→a+b-x leaves limits unchanged; known as King's property.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "16ea1d61-ff8d-49fb-8b32-bc5b1ecf56c5",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "∫₀^π f(sin x)dx =",
-    "formula": "",
-    "options": [
-      "∫₀^(π/2) f(sin x)dx",
-      "2∫₀^(π/2) f(sin x)dx",
-      "0",
-      "π∫₀^(π/2) f(sin x)dx"
-    ],
-    "answer": 1,
-    "explain": "Since sin(π-x)=sin x, splitting and using substitution gives 2∫₀^(π/2)f(sin x)dx.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fc3fd3e9-017b-4ed8-8ea0-6de2a91331a0",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Properties of Definite Integrals",
-    "prompt": "∫₀^(π/2) dx/(1+tan x) =",
-    "formula": "",
-    "options": [
-      "π/4",
-      "1",
-      "0",
-      "π/2"
-    ],
-    "answer": 0,
-    "explain": "By King's property, I = ∫₀^(π/2) dx/(1+cot x); adding 2I = π/2, so I = π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5b328c7d-51bc-4bf8-858c-1ba0bc11b3e3",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^1 1/(1+x²) dx = ?",
-    "formula": "",
-    "options": [
-      "ln 2",
-      "π/2",
-      "1",
-      "π/4"
-    ],
-    "answer": 3,
-    "explain": "[arctan x]₀^1 = π/4 − 0 = π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0e93f536-c960-47bb-a38c-9b5d6fadce4a",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₁^e (ln x)/x dx = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "1",
-      "1/2",
-      "e−1"
-    ],
-    "answer": 2,
-    "explain": "Let u=ln x; ∫₀^1 u du = 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "346a27af-9ef1-4a68-9e05-179f38e01477",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^π sin²x dx = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "π",
-      "0",
-      "π/2"
-    ],
-    "answer": 3,
-    "explain": "∫₀^π (1−cos2x)/2 dx = π/2 − 0 = π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "552ecaea-a5a3-4728-b545-fa0ce9640917",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "For periodic f with period T: ∫ₐ^(a+T) f(x)dx = ?",
-    "formula": "",
-    "options": [
-      "2∫₀^(T/2) f(x)dx",
-      "∫₀^T f(x)dx",
-      "0",
-      "T·f(a)"
-    ],
-    "answer": 1,
-    "explain": "Integral over any full period equals integral over [0,T]; translation invariance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9d2d3d6f-8fd3-4841-9aeb-624f197bde26",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^1 x² dx = ?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "1/4",
-      "1/3",
-      "2/3"
-    ],
-    "answer": 2,
-    "explain": "[x³/3]₀^1 = 1/3; basic power rule for definite integral.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ba8f7d70-1cf9-4337-9074-243391301910",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "Limit as n→∞ of (1/n)Σₖ₌₁ⁿ f(k/n) equals?",
-    "formula": "",
-    "options": [
-      "nf(1/n)",
-      "∫₀^1 f(x)dx",
-      "f(1)",
-      "∫₀^n f(x)dx"
-    ],
-    "answer": 1,
-    "explain": "Riemann sum definition: (1/n)Σf(k/n) → ∫₀^1 f(x)dx as n→∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a1784f6-dfba-4cdd-8cf3-8e0f7a43998d",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₋π^π sin x dx = ?",
-    "formula": "",
-    "options": [
-      "−2",
-      "π",
-      "2",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "sin x is odd; integral of odd function over symmetric interval [−a,a] is 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cf5cb49a-fe8d-4392-b13d-abb4df5f30b7",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₋π^π cos x dx = ?",
-    "formula": "",
-    "options": [
-      "2π",
-      "0",
-      "π",
-      "2"
-    ],
-    "answer": 1,
-    "explain": "[sin x]₋π^π = sin π − sin(−π) = 0; cos x integrates to sin x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e873f627-6fa7-47b9-8309-bdb3b3370d03",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) (sin x)/(sin x + cos x) dx = ?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "π/4",
-      "π/2",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "By King's rule I = ∫₀^(π/2) cosx/(sinx+cosx)dx; adding gives 2I=π/2, so I=π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "adf2cfc3-8e71-414b-9bee-85ad0b74dc2b",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(2π) sin²x dx = ?",
-    "formula": "",
-    "options": [
-      "π",
-      "0",
-      "π/2",
-      "2π"
-    ],
-    "answer": 0,
-    "explain": "∫₀^(2π)(1−cos2x)/2 dx = π − 0 = π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "5e9dbd3c-1daf-4c58-b26f-fe26dab0d5e9",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) (dx)/(1+cot x) = ?",
-    "formula": "",
-    "options": [
-      "π/2",
-      "π/4",
-      "1",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "1/(1+cot x) = sin x/(sin x+cos x); by King's property, integral = π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "32c2b861-3552-4a5f-98c0-29919c8a0bd4",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) sin x dx = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "π/2",
-      "0",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "[−cos x]₀^(π/2) = −cos(π/2)+cos 0 = 0+1 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0c8da5a4-ca67-4ab3-a6d2-4fc3aa69663c",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^π x sinⁿx dx = ? (reduction via King's property)",
-    "formula": "(π/2)∫₀^π sinⁿx dx",
-    "options": [
-      "(π/2)∫₀^π sinⁿx dx",
-      "π∫₀^π sinⁿx dx",
-      "0",
-      "(1/2)∫₀^π sinⁿx dx"
-    ],
-    "answer": 0,
-    "explain": "King's property gives ∫₀^π x f(sinx)dx = (π/2)∫₀^π f(sinx)dx.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "dd603627-10fe-4ac3-9a38-e8927e866744",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "Leibniz rule: d/dx[∫_(u(x))^(v(x)) f(t)dt] = ?",
-    "formula": "f(v)v' − f(u)u'",
-    "options": [
-      "f(v(x))·u'(x) − f(u(x))·v'(x)",
-      "f(v(x))·v'(x) − f(u(x))·u'(x)",
-      "f(v(x))·v'(x) + f(u(x))·u'(x)",
-      "f(v(x)) + f(u(x))"
-    ],
-    "answer": 1,
-    "explain": "Chain rule on both limits: subtract lower-limit contribution from upper-limit contribution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "59f385ce-09c9-402f-9403-9938dbbe9aa8",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(nT) f(x)dx for periodic f, period T equals?",
-    "formula": "n · ∫₀^T f(x)dx",
-    "options": [
-      "(1/n)∫₀^T f(x)dx",
-      "∫₀^T f(x)dx",
-      "n · ∫₀^T f(x)dx",
-      "n² · ∫₀^T f(x)dx"
-    ],
-    "answer": 2,
-    "explain": "Over each complete period the integral is the same; total is n times one period's integral.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "3bad73e7-dffd-416e-a3fe-f765ffb79434",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) (sinⁿx)/(sinⁿx + cosⁿx) dx = ?",
-    "formula": "π/4",
-    "options": [
-      "1",
-      "π/4",
-      "0",
-      "π/2"
-    ],
-    "answer": 1,
-    "explain": "Using complementary property (replace x→π/2−x), the integral equals half of π/2 = π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "712dc463-80fb-4d46-bdc1-f8967231b28e",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/4) ln(1+tan x) dx = ?",
-    "formula": "(π/8) ln 2",
-    "options": [
-      "(π/4) ln 2",
-      "π ln 2",
-      "0",
-      "(π/8) ln 2"
-    ],
-    "answer": 3,
-    "explain": "Using King's property f(x)+f(π/4−x)=ln 2; integral = (π/4)(ln2/2)=πln2/8.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8e5224fc-3e88-4612-9852-c6800807c186",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^1 (1−x)ⁿ dx = ?",
-    "formula": "1/(n+1)",
-    "options": [
-      "n+1",
-      "n/(n+1)",
-      "1/(n+1)",
-      "1/n"
-    ],
-    "answer": 2,
-    "explain": "Substitute t=1−x; integral becomes ∫₀^1 tⁿdt = 1/(n+1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "193e8b9d-2539-4917-a9cc-cfd6158db0f3",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "Riemann sum: lim(n→∞) (1/n)Σₖ₌₀^(n-1) f(k/n) = ?",
-    "formula": "∫₀^1 f(x)dx",
-    "options": [
-      "∫₀^n f(x)dx",
-      "n·∫₀^1 f(x)dx",
-      "f(1)−f(0)",
-      "∫₀^1 f(x)dx"
-    ],
-    "answer": 3,
-    "explain": "Left-endpoint Riemann sum with width 1/n converges to ∫₀^1 f(x)dx.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "83015609-733f-4093-98df-36500ad606b6",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) cos²x dx = ?",
-    "formula": "π/4",
-    "options": [
-      "π/8",
-      "1/2",
-      "π/2",
-      "π/4"
-    ],
-    "answer": 3,
-    "explain": "Walli's n=2 (even): [(2−1)!!/(2)!!]·(π/2) = (1/2)·(π/2) = π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f708c259-c66e-4272-9eaf-4ae7f244ffed",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(2π) |sin x| dx = ?",
-    "formula": "4",
-    "options": [
-      "2",
-      "π",
-      "0",
-      "4"
-    ],
-    "answer": 3,
-    "explain": "|sinx| has period π; ∫₀^π sinx dx=2, so over 2π it equals 2×2=4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9c6f020f-c577-467b-94b7-05e7700dd441",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₋(π/2)^(π/2) sin³x cos²x dx = ?",
-    "formula": "0",
-    "options": [
-      "0",
-      "π/4",
-      "2/15",
-      "4/15"
-    ],
-    "answer": 0,
-    "explain": "Integrand sin³x cos²x is odd (sin³x odd, cos²x even); integral over symmetric interval = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d84a8769-07bd-445c-8337-07c7727e47c1",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) sin x cos²x dx = ?",
-    "formula": "",
-    "options": [
-      "1/4",
-      "1/2",
-      "1/3",
-      "2/3"
-    ],
-    "answer": 2,
-    "explain": "Let u=cos x; integral becomes ∫₀^1 u² du = 1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ebf08af5-e1db-4cc0-9bc9-7686cd9432d9",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₁^2 (1/x) dx = ?",
-    "formula": "ln 2",
-    "options": [
-      "1/2",
-      "ln 2",
-      "1",
-      "2 ln 2"
-    ],
-    "answer": 1,
-    "explain": "[ln x]₁^2 = ln 2 − ln 1 = ln 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "587f2245-7184-4147-a87b-f2ceb6363fc1",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) cos³x dx = ?",
-    "formula": "2/3",
-    "options": [
-      "3π/16",
-      "1/3",
-      "2/3",
-      "1/2"
-    ],
-    "answer": 2,
-    "explain": "Walli's for odd n=3: (2/3)·1 = 2/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "47cac935-7630-4c8b-824a-f3a56e955645",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) (cos x − sin x)/(1 + sin x cos x) dx = ?",
-    "formula": "0",
-    "options": [
-      "0",
-      "1",
-      "π/4",
-      "π/2"
-    ],
-    "answer": 0,
-    "explain": "King's property f(π/2−x) gives the negative; sum = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "879ac678-48d3-4d45-a244-b001761b6011",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) (sinⁿx − cosⁿx)/(sinⁿx + cosⁿx) dx = ?",
-    "formula": "0",
-    "options": [
-      "π/2",
-      "1",
-      "π/4",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "King's property maps x→π/2−x; integrand changes sign, so integral = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a4483fa0-fce7-4f46-9bb5-ceeaf0031614",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₁^e ln x dx = ?",
-    "formula": "1",
-    "options": [
-      "0",
-      "e",
-      "1",
-      "e−1"
-    ],
-    "answer": 2,
-    "explain": "IBP: [x ln x − x]₁^e = (e−e)−(0−1) = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d9d138a6-e415-46a1-8d2c-643a7d8f9ae3",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₋2^2 (x³ + sin x) dx = ?",
-    "formula": "0",
-    "options": [
-      "8",
-      "−4",
-      "0",
-      "4"
-    ],
-    "answer": 2,
-    "explain": "x³ and sin x are both odd functions; integral of odd over symmetric interval = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "26989186-3b27-4403-9c74-6771dc9edb47",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "lim(n→∞) Σₖ₌₁ⁿ 1/(n+k) equals which integral?",
-    "formula": "∫₀^1 1/(1+x)dx",
-    "options": [
-      "∫₀^1 dx/(1+x)",
-      "∫₁^2 dx/x",
-      "∫₀^1 dx/x",
-      "∫₀^1 dx/(2+x)"
-    ],
-    "answer": 0,
-    "explain": "Riemann sum (1/n)Σ1/(1+k/n) → ∫₀^1 dx/(1+x) = ln 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "59e1ed9e-4903-4427-91f8-88250a70683d",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "If F(x)=∫₀^(x²) sin t dt, then F′(x) = ?",
-    "formula": "2x sin(x²)",
-    "options": [
-      "2x sin(x²)",
-      "cos(x²)·2x",
-      "sin x²/2x",
-      "sin(x²)"
-    ],
-    "answer": 0,
-    "explain": "Leibniz rule: F′(x) = sin(x²)·d(x²)/dx = 2x sin(x²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "406dd7c7-99d4-457a-9f7f-b623f123d9d1",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^a f(x)dx = ∫₀^a f(a-x)dx. This is called?",
-    "formula": "",
-    "options": [
-      "Leibniz rule",
-      "King's property",
-      "Cauchy property",
-      "Walli's rule"
-    ],
-    "answer": 1,
-    "explain": "Substituting x→a−x leaves limits unchanged; this is King's (reflection) property.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7c57c832-45de-4286-8740-f80266bd456d",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(2π) cos²x dx = ?",
-    "formula": "",
-    "options": [
-      "π",
-      "0",
-      "2π",
-      "π/2"
-    ],
-    "answer": 0,
-    "explain": "cos²x = (1+cos2x)/2; integral over full period gives π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f85aeed4-aaa1-4db0-bbd1-dcc778a03244",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "If F(x) = ∫₀^(sin x) t² dt, then F′(x) = ?",
-    "formula": "Leibniz rule",
-    "options": [
-      "2 sin x cos x",
-      "cos x",
-      "sin²x",
-      "sin²x · cos x"
-    ],
-    "answer": 3,
-    "explain": "By Leibniz rule: F′(x) = (sin x)² · cos x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "3141ac93-96cb-444c-b7db-7fb0c167a911",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₋(π/2)^(π/2) cos x dx = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "π",
-      "0",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "cos x is even; 2∫₀^(π/2) cos x dx = 2[sin x]₀^(π/2) = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "05bfb303-322a-490a-bcdd-8f33321c7565",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^∞ e^(−ax) dx (a > 0) = ?",
-    "formula": "",
-    "options": [
-      "1/a",
-      "a",
-      "e^a",
-      "1/a²"
-    ],
-    "answer": 0,
-    "explain": "[−e^(−ax)/a]₀^∞ = 0 − (−1/a) = 1/a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "75e24e97-f083-4672-82b2-398e3ee1cb19",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "lim(n→∞) (1ᵖ+2ᵖ+…+nᵖ)/n^(p+1) equals which integral?",
-    "formula": "",
-    "options": [
-      "∫₀^p x dx",
-      "∫₀^1 xᵖ dx = 1/(p+1)",
-      "∫₁^p x dx",
-      "∫₀^1 xᵖ⁺¹dx"
-    ],
-    "answer": 1,
-    "explain": "Riemann sum (1/n)Σ(k/n)ᵖ → ∫₀^1 xᵖdx = 1/(p+1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4832b7e9-614f-482b-82bb-013485478925",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫ₐ^b [f(x)+g(x)]dx equals?",
-    "formula": "",
-    "options": [
-      "∫ₐ^b (fg) dx",
-      "Cannot split",
-      "∫ₐ^b f dx + ∫ₐ^b g dx",
-      "∫ₐ^b f dx · ∫ₐ^b g dx"
-    ],
-    "answer": 2,
-    "explain": "Linearity of the integral: the integral of a sum equals the sum of integrals.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0c2239ef-4ff6-4fec-8234-bc7ec322fdd1",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫ₐ^a f(x)dx = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "f(a)",
-      "2f(a)",
-      "Undefined"
-    ],
-    "answer": 0,
-    "explain": "Integral over a degenerate interval [a,a] is always zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "20176c67-0bb5-4af1-8890-975e6baa654b",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫ₐ^b f(x)dx = ? in terms of ∫_b^a",
-    "formula": "",
-    "options": [
-      "2∫_b^a f(x)dx",
-      "0",
-      "−∫_b^a f(x)dx",
-      "∫_b^a f(x)dx"
-    ],
-    "answer": 2,
-    "explain": "Reversing limits changes the sign of the definite integral.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "05cd2a89-ad37-4f62-8a34-0f00cf20b00a",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "If f is even on [−a,a], ∫₋ₐ^a f(x)dx = ?",
-    "formula": "",
-    "options": [
-      "∫₋ₐ^0 f(x)dx",
-      "0",
-      "2∫₀^a f(x)dx",
-      "∫₀^a f(x)dx"
-    ],
-    "answer": 2,
-    "explain": "Even function symmetry: integral over symmetric interval doubles the half-interval integral.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "496b5bed-19d9-479f-afce-1c7ecb90d328",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "If f is odd on [−a,a], ∫₋ₐ^a f(x)dx = ?",
-    "formula": "",
-    "options": [
-      "∫₋ₐ^0 f(x)dx",
-      "−2∫₀^a f(x)dx",
-      "0",
-      "2∫₀^a f(x)dx"
-    ],
-    "answer": 2,
-    "explain": "Odd function symmetry: contributions from [−a,0] and [0,a] cancel exactly.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "527a7107-81b9-4bc3-9339-c7218cdda2ef",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^1 xⁿ dx (n≠−1) = ?",
-    "formula": "1/(n+1)",
-    "options": [
-      "1/n",
-      "n/(n+1)",
-      "1/(n+1)",
-      "n+1"
-    ],
-    "answer": 2,
-    "explain": "Power rule: [x^(n+1)/(n+1)]₀^1 = 1/(n+1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "eddd3c4d-c9f6-4e5d-b24c-9411aaab27ef",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π/2) (sin x − cos x)/(sin x + cos x) dx = ?",
-    "formula": "",
-    "options": [
-      "π/4",
-      "ln 2",
-      "0",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "By King's property, replacing x→(π/2−x) maps integrand to its negative, so integral=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c5bdd1a3-750e-417d-9c3d-16791c8e5247",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "If ∫₀^1 f(x)dx = A, then ∫₀^1 f(1−x)dx = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "−A",
-      "2A",
-      "A"
-    ],
-    "answer": 3,
-    "explain": "Substitution t=1−x converts ∫₀^1 f(1−x)dx = ∫₀^1 f(t)dt = A.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "99909c05-1161-4a6c-85c0-c69d81c1a53b",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(2π) sin(nx)dx for any positive integer n = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "π",
-      "0",
-      "2/n"
-    ],
-    "answer": 2,
-    "explain": "sin(nx) integrated over a full period 2π always gives 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "10d3f5a4-3fb2-4c81-bd73-e37f37d625ed",
-    "subject": "Mathematics",
-    "chapter": "Definite Integration",
-    "topic": "Definite Integration",
-    "prompt": "∫₀^(π) x f(cos x) dx = ?",
-    "formula": "(π/2)∫₀^π f(cos x)dx",
-    "options": [
-      "π∫₀^π f(cos x)dx",
-      "∫₀^π f(cos x)dx",
-      "(π/2)∫₀^π f(cos x)dx",
-      "0"
-    ],
-    "answer": 2,
-    "explain": "By King's property x→π−x: ∫₀^π x f(cosx)dx = (π/2)∫₀^π f(cosx)dx.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "19ce5c49-2c3a-4c7e-8595-120fb6e76584",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "Value of ∫₀^π sin x dx",
+  "formula": "∫₀^π sin x dx",
+  "options": [
+   "0",
+   "-2",
+   "1",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "[-cos x]₀^π = -cos π + cos 0 = 1 + 1 = 2",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb137735-3229-4b0d-88e0-9ebd69649c21",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "If f is even, ∫₋ₐ^a f(x)dx equals",
+  "formula": "∫₋ₐ^a f(x)dx",
+  "options": [
+   "∫₀^a f(x)dx",
+   "2∫₀^a f(x)dx",
+   "0",
+   "∫₋ₐ^0 f(x)dx"
+  ],
+  "answer": 1,
+  "explain": "For even functions, integral over symmetric interval equals twice integral from 0 to a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9dc6cf16-bf1d-409b-9541-00f6c98cbf68",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "If f is odd, ∫₋ₐ^a f(x)dx equals",
+  "formula": "∫₋ₐ^a f(x)dx",
+  "options": [
+   "0",
+   "∫₀^a f(x)dx",
+   "2∫₀^a f(x)dx",
+   "-∫₀^a f(x)dx"
+  ],
+  "answer": 0,
+  "explain": "For odd functions, contributions from -a to 0 and 0 to a cancel, giving 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4235fb49-57af-43a3-89dd-265b5516cc4f",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "∫ₐ^b f(x)dx = ? (reversal property)",
+  "formula": "",
+  "options": [
+   "∫ₐ^b f(-x)dx",
+   "-∫ᵦ^a f(x)dx",
+   "∫ᵦ^a f(x)dx",
+   "∫ₐ^b f(x)dx"
+  ],
+  "answer": 1,
+  "explain": "Reversing limits changes the sign: ∫ₐ^b f(x)dx = -∫ᵦ^a f(x)dx.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d880c198-c154-4df2-8e84-5abc97060dcf",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "King's property: ∫₀^a f(x)dx =",
+  "formula": "∫₀^a f(x)dx = ∫₀^a f(a-x)dx",
+  "options": [
+   "∫₀^a f(x-a)dx",
+   "∫₀^a f(a-x)dx",
+   "∫₀^a f(a+x)dx",
+   "∫₀^a f(-x)dx"
+  ],
+  "answer": 1,
+  "explain": "Substitution x → a-x leaves the integral unchanged; very frequently used property.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "06ad6834-374f-42a1-9a53-78e3aa71643d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "∫₀^π x f(sin x)dx =",
+  "formula": "",
+  "options": [
+   "2∫₀^π f(sin x)dx",
+   "(π/2)∫₀^π f(sin x)dx",
+   "0",
+   "π∫₀^π f(sin x)dx"
+  ],
+  "answer": 1,
+  "explain": "Using King's property with a=π: ∫₀^π x f(sin x)dx = (π/2)∫₀^π f(sin x)dx.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f53fae63-4fdd-4fcc-9817-c0f34bb6c99e",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard Results",
+  "prompt": "∫₀^(π/2) log(sin x)dx equals",
+  "formula": "",
+  "options": [
+   "(π/2)log 2",
+   "π log 2",
+   "0",
+   "-(π/2)log 2"
+  ],
+  "answer": 3,
+  "explain": "Standard result: ∫₀^(π/2) log(sin x)dx = -(π/2)log 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4600d402-58d5-4e57-ae7b-1bdce9d49b48",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard Results",
+  "prompt": "∫₀^(π/2) log(tan x)dx equals",
+  "formula": "",
+  "options": [
+   "-(π/2)log 2",
+   "π/2",
+   "π log 2",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "log(tan x) is odd about π/4 on [0,π/2]; by King's property the integral = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2bf9b5d7-deca-47f9-a137-4ac5d2d45c1b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz Rule",
+  "prompt": "Leibniz rule: d/dx[∫ₐ^(g(x)) f(t)dt] =",
+  "formula": "d/dx[∫ₐ^(g(x)) f(t)dt]",
+  "options": [
+   "f'(g(x))·g'(x)",
+   "f(g(x))",
+   "f(g(x))·g'(x)",
+   "g'(x)"
+  ],
+  "answer": 2,
+  "explain": "Differentiate integral with variable upper limit using chain rule: f(g(x))·g'(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "adee8d2a-4a63-4c6c-ae6c-40062a28875d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "∫₀^(2a) f(x)dx when f(2a-x)=f(x)",
+  "formula": "",
+  "options": [
+   "4∫₀^a f(x)dx",
+   "∫₀^a f(x)dx",
+   "0",
+   "2∫₀^a f(x)dx"
+  ],
+  "answer": 3,
+  "explain": "If f(2a-x)=f(x), then ∫₀^(2a)f(x)dx = 2∫₀^a f(x)dx by splitting and substitution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "63616fcc-9328-4350-9f88-a612f0cb3ee5",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic Functions",
+  "prompt": "For periodic f with period T: ∫₀^(nT) f(x)dx =",
+  "formula": "",
+  "options": [
+   "T·∫₀^n f(x)dx",
+   "∫₀^T f(x)dx",
+   "n²∫₀^T f(x)dx",
+   "n∫₀^T f(x)dx"
+  ],
+  "answer": 3,
+  "explain": "Integral over n complete periods = n times integral over one period.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8ad1a831-79cc-4c34-b638-133905b87c30",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Walli's Formula",
+  "prompt": "Walli's formula ∫₀^(π/2) sin²x dx =",
+  "formula": "",
+  "options": [
+   "1",
+   "π/4",
+   "π/2",
+   "π/3"
+  ],
+  "answer": 1,
+  "explain": "Using reduction: ∫₀^(π/2) sin²x dx = (1/2)(π/2) = π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "538529fb-38ca-42b1-b43f-dd04250e5187",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Modulus in Definite Integrals",
+  "prompt": "∫₋₁^1 |x| dx =",
+  "formula": "",
+  "options": [
+   "-1",
+   "0",
+   "2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "|x| is even, so 2∫₀^1 x dx = 2·[x²/2]₀^1 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75798355-5021-43f9-94fe-2b6a14aecfb3",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Modulus in Definite Integrals",
+  "prompt": "∫₀^2 |x-1| dx =",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "1/2",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Split at x=1: ∫₀^1(1-x)dx + ∫₁^2(x-1)dx = 1/2 + 1/2 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fc696f64-52cd-4f29-bf81-29653c94f347",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental Theorem of Calculus",
+  "prompt": "First Fundamental Theorem: d/dx[∫ₐ^x f(t)dt] =",
+  "formula": "",
+  "options": [
+   "f(a)",
+   "f(x)",
+   "f'(x)",
+   "F(x)-F(a)"
+  ],
+  "answer": 1,
+  "explain": "The derivative of the integral with upper limit x equals the integrand at x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8b2b9caa-8a17-40cf-832a-59d4e56a36ff",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Beta Function / Standard Results",
+  "prompt": "∫₀^1 x(1-x)ⁿ dx =",
+  "formula": "",
+  "options": [
+   "n/(n+1)",
+   "1/(n+1)(n+2)",
+   "1/(n+1)",
+   "1/(n+2)"
+  ],
+  "answer": 1,
+  "explain": "Using Beta function or repeated integration by parts: B(2,n+1)=1/[(n+1)(n+2)].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fa63f36d-f8cb-4021-9110-00b01a8864a2",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Beta Function",
+  "prompt": "∫₀^1 xᵐ(1-x)ⁿ dx = B(m+1,n+1) =",
+  "formula": "m!n!/(m+n+1)!",
+  "options": [
+   "(m+n)!/m!n!",
+   "m!n!/(m+n+1)!",
+   "m!/(m+n)!",
+   "n!/(m+n)!"
+  ],
+  "answer": 1,
+  "explain": "Beta function B(m+1,n+1)=m!n!/(m+n+1)! for non-negative integers m,n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5a28fecc-f7da-4b91-a66c-5b2af3ace9cb",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "∫ₐ^b f(x)dx = ∫ₐ^b f(a+b-x)dx is called",
+  "formula": "",
+  "options": [
+   "Leibniz rule",
+   "Walli's theorem",
+   "King's property",
+   "Newton's property"
+  ],
+  "answer": 2,
+  "explain": "Substitution x→a+b-x leaves limits unchanged; known as King's property.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "16ea1d61-ff8d-49fb-8b32-bc5b1ecf56c5",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "∫₀^π f(sin x)dx =",
+  "formula": "",
+  "options": [
+   "∫₀^(π/2) f(sin x)dx",
+   "2∫₀^(π/2) f(sin x)dx",
+   "0",
+   "π∫₀^(π/2) f(sin x)dx"
+  ],
+  "answer": 1,
+  "explain": "Since sin(π-x)=sin x, splitting and using substitution gives 2∫₀^(π/2)f(sin x)dx.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fc3fd3e9-017b-4ed8-8ea0-6de2a91331a0",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Properties of Definite Integrals",
+  "prompt": "∫₀^(π/2) dx/(1+tan x) =",
+  "formula": "",
+  "options": [
+   "π/4",
+   "1",
+   "0",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "By King's property, I = ∫₀^(π/2) dx/(1+cot x); adding 2I = π/2, so I = π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5b328c7d-51bc-4bf8-858c-1ba0bc11b3e3",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "∫₀^1 1/(1+x²) dx = ?",
+  "formula": "",
+  "options": [
+   "ln 2",
+   "π/2",
+   "1",
+   "π/4"
+  ],
+  "answer": 3,
+  "explain": "[arctan x]₀^1 = π/4 − 0 = π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0e93f536-c960-47bb-a38c-9b5d6fadce4a",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Evaluation by substitution",
+  "prompt": "∫₁^e (ln x)/x dx = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "1/2",
+   "e−1"
+  ],
+  "answer": 2,
+  "explain": "Let u=ln x; ∫₀^1 u du = 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "346a27af-9ef1-4a68-9e05-179f38e01477",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "∫₀^π sin²x dx = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "π",
+   "0",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "∫₀^π (1−cos2x)/2 dx = π/2 − 0 = π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "552ecaea-a5a3-4728-b545-fa0ce9640917",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "For periodic f with period T: ∫ₐ^(a+T) f(x)dx = ?",
+  "formula": "",
+  "options": [
+   "2∫₀^(T/2) f(x)dx",
+   "∫₀^T f(x)dx",
+   "0",
+   "T·f(a)"
+  ],
+  "answer": 1,
+  "explain": "Integral over any full period equals integral over [0,T]; translation invariance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9d2d3d6f-8fd3-4841-9aeb-624f197bde26",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "∫₀^1 x² dx = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1/4",
+   "1/3",
+   "2/3"
+  ],
+  "answer": 2,
+  "explain": "[x³/3]₀^1 = 1/3; basic power rule for definite integral.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ba8f7d70-1cf9-4337-9074-243391301910",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "Limit as n→∞ of (1/n)Σₖ₌₁ⁿ f(k/n) equals?",
+  "formula": "",
+  "options": [
+   "nf(1/n)",
+   "∫₀^1 f(x)dx",
+   "f(1)",
+   "∫₀^n f(x)dx"
+  ],
+  "answer": 1,
+  "explain": "Riemann sum definition: (1/n)Σf(k/n) → ∫₀^1 f(x)dx as n→∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a1784f6-dfba-4cdd-8cf3-8e0f7a43998d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋π^π sin x dx = ?",
+  "formula": "",
+  "options": [
+   "−2",
+   "π",
+   "2",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "sin x is odd; integral of odd function over symmetric interval [−a,a] is 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cf5cb49a-fe8d-4392-b13d-abb4df5f30b7",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋π^π cos x dx = ?",
+  "formula": "",
+  "options": [
+   "2π",
+   "0",
+   "π",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "[sin x]₋π^π = sin π − sin(−π) = 0; cos x integrates to sin x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e873f627-6fa7-47b9-8309-bdb3b3370d03",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/2) (sin x)/(sin x + cos x) dx = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "π/4",
+   "π/2",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "By King's rule I = ∫₀^(π/2) cosx/(sinx+cosx)dx; adding gives 2I=π/2, so I=π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "adf2cfc3-8e71-414b-9bee-85ad0b74dc2b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "∫₀^(2π) sin²x dx = ?",
+  "formula": "",
+  "options": [
+   "π",
+   "0",
+   "π/2",
+   "2π"
+  ],
+  "answer": 0,
+  "explain": "∫₀^(2π)(1−cos2x)/2 dx = π − 0 = π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5e9dbd3c-1daf-4c58-b26f-fe26dab0d5e9",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/2) (dx)/(1+cot x) = ?",
+  "formula": "",
+  "options": [
+   "π/2",
+   "π/4",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "1/(1+cot x) = sin x/(sin x+cos x); by King's property, integral = π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "32c2b861-3552-4a5f-98c0-29919c8a0bd4",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "∫₀^(π/2) sin x dx = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "π/2",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "[−cos x]₀^(π/2) = −cos(π/2)+cos 0 = 0+1 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0c8da5a4-ca67-4ab3-a6d2-4fc3aa69663c",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^π x sinⁿx dx = ? (reduction via King's property)",
+  "formula": "(π/2)∫₀^π sinⁿx dx",
+  "options": [
+   "(π/2)∫₀^π sinⁿx dx",
+   "π∫₀^π sinⁿx dx",
+   "0",
+   "(1/2)∫₀^π sinⁿx dx"
+  ],
+  "answer": 0,
+  "explain": "King's property gives ∫₀^π x f(sinx)dx = (π/2)∫₀^π f(sinx)dx.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dd603627-10fe-4ac3-9a38-e8927e866744",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "Leibniz rule: d/dx[∫_(u(x))^(v(x)) f(t)dt] = ?",
+  "formula": "f(v)v' − f(u)u'",
+  "options": [
+   "f(v(x))·u'(x) − f(u(x))·v'(x)",
+   "f(v(x))·v'(x) − f(u(x))·u'(x)",
+   "f(v(x))·v'(x) + f(u(x))·u'(x)",
+   "f(v(x)) + f(u(x))"
+  ],
+  "answer": 1,
+  "explain": "Chain rule on both limits: subtract lower-limit contribution from upper-limit contribution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "59f385ce-09c9-402f-9403-9938dbbe9aa8",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "∫₀^(nT) f(x)dx for periodic f, period T equals?",
+  "formula": "n · ∫₀^T f(x)dx",
+  "options": [
+   "(1/n)∫₀^T f(x)dx",
+   "∫₀^T f(x)dx",
+   "n · ∫₀^T f(x)dx",
+   "n² · ∫₀^T f(x)dx"
+  ],
+  "answer": 2,
+  "explain": "Over each complete period the integral is the same; total is n times one period's integral.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3bad73e7-dffd-416e-a3fe-f765ffb79434",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/2) (sinⁿx)/(sinⁿx + cosⁿx) dx = ?",
+  "formula": "π/4",
+  "options": [
+   "1",
+   "π/4",
+   "0",
+   "π/2"
+  ],
+  "answer": 1,
+  "explain": "Using complementary property (replace x→π/2−x), the integral equals half of π/2 = π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "712dc463-80fb-4d46-bdc1-f8967231b28e",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/4) ln(1+tan x) dx = ?",
+  "formula": "(π/8) ln 2",
+  "options": [
+   "(π/4) ln 2",
+   "π ln 2",
+   "0",
+   "(π/8) ln 2"
+  ],
+  "answer": 3,
+  "explain": "Using King's property f(x)+f(π/4−x)=ln 2; integral = (π/4)(ln2/2)=πln2/8.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8e5224fc-3e88-4612-9852-c6800807c186",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Evaluation by substitution",
+  "prompt": "∫₀^1 (1−x)ⁿ dx = ?",
+  "formula": "1/(n+1)",
+  "options": [
+   "n+1",
+   "n/(n+1)",
+   "1/(n+1)",
+   "1/n"
+  ],
+  "answer": 2,
+  "explain": "Substitute t=1−x; integral becomes ∫₀^1 tⁿdt = 1/(n+1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "193e8b9d-2539-4917-a9cc-cfd6158db0f3",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "Riemann sum: lim(n→∞) (1/n)Σₖ₌₀^(n-1) f(k/n) = ?",
+  "formula": "∫₀^1 f(x)dx",
+  "options": [
+   "∫₀^n f(x)dx",
+   "n·∫₀^1 f(x)dx",
+   "f(1)−f(0)",
+   "∫₀^1 f(x)dx"
+  ],
+  "answer": 3,
+  "explain": "Left-endpoint Riemann sum with width 1/n converges to ∫₀^1 f(x)dx.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "83015609-733f-4093-98df-36500ad606b6",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) cos²x dx = ?",
+  "formula": "π/4",
+  "options": [
+   "π/8",
+   "1/2",
+   "π/2",
+   "π/4"
+  ],
+  "answer": 3,
+  "explain": "Walli's n=2 (even): [(2−1)!!/(2)!!]·(π/2) = (1/2)·(π/2) = π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f708c259-c66e-4272-9eaf-4ae7f244ffed",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Splitting limits; modulus integrands",
+  "prompt": "∫₀^(2π) |sin x| dx = ?",
+  "formula": "4",
+  "options": [
+   "2",
+   "π",
+   "0",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "|sinx| has period π; ∫₀^π sinx dx=2, so over 2π it equals 2×2=4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9c6f020f-c577-467b-94b7-05e7700dd441",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋(π/2)^(π/2) sin³x cos²x dx = ?",
+  "formula": "0",
+  "options": [
+   "0",
+   "π/4",
+   "2/15",
+   "4/15"
+  ],
+  "answer": 0,
+  "explain": "Integrand sin³x cos²x is odd (sin³x odd, cos²x even); integral over symmetric interval = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d84a8769-07bd-445c-8337-07c7727e47c1",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Evaluation by substitution",
+  "prompt": "∫₀^(π/2) sin x cos²x dx = ?",
+  "formula": "",
+  "options": [
+   "1/4",
+   "1/2",
+   "1/3",
+   "2/3"
+  ],
+  "answer": 2,
+  "explain": "Let u=cos x; integral becomes ∫₀^1 u² du = 1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ebf08af5-e1db-4cc0-9bc9-7686cd9432d9",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "∫₁^2 (1/x) dx = ?",
+  "formula": "ln 2",
+  "options": [
+   "1/2",
+   "ln 2",
+   "1",
+   "2 ln 2"
+  ],
+  "answer": 1,
+  "explain": "[ln x]₁^2 = ln 2 − ln 1 = ln 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "587f2245-7184-4147-a87b-f2ceb6363fc1",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Recurrence (reduction) relations for In",
+  "prompt": "∫₀^(π/2) cos³x dx = ?",
+  "formula": "2/3",
+  "options": [
+   "3π/16",
+   "1/3",
+   "2/3",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "Walli's for odd n=3: (2/3)·1 = 2/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "47cac935-7630-4c8b-824a-f3a56e955645",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/2) (cos x − sin x)/(1 + sin x cos x) dx = ?",
+  "formula": "0",
+  "options": [
+   "0",
+   "1",
+   "π/4",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "King's property f(π/2−x) gives the negative; sum = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "879ac678-48d3-4d45-a244-b001761b6011",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/2) (sinⁿx − cosⁿx)/(sinⁿx + cosⁿx) dx = ?",
+  "formula": "0",
+  "options": [
+   "π/2",
+   "1",
+   "π/4",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "King's property maps x→π/2−x; integrand changes sign, so integral = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a4483fa0-fce7-4f46-9bb5-ceeaf0031614",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Evaluation by integration by parts",
+  "prompt": "∫₁^e ln x dx = ?",
+  "formula": "1",
+  "options": [
+   "0",
+   "e",
+   "1",
+   "e−1"
+  ],
+  "answer": 2,
+  "explain": "IBP: [x ln x − x]₁^e = (e−e)−(0−1) = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d9d138a6-e415-46a1-8d2c-643a7d8f9ae3",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋2^2 (x³ + sin x) dx = ?",
+  "formula": "0",
+  "options": [
+   "8",
+   "−4",
+   "0",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "x³ and sin x are both odd functions; integral of odd over symmetric interval = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "26989186-3b27-4403-9c74-6771dc9edb47",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ 1/(n+k) equals which integral?",
+  "formula": "∫₀^1 1/(1+x)dx",
+  "options": [
+   "∫₀^1 dx/(1+x)",
+   "∫₁^2 dx/x",
+   "∫₀^1 dx/x",
+   "∫₀^1 dx/(2+x)"
+  ],
+  "answer": 0,
+  "explain": "Riemann sum (1/n)Σ1/(1+k/n) → ∫₀^1 dx/(1+x) = ln 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "59e1ed9e-4903-4427-91f8-88250a70683d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "If F(x)=∫₀^(x²) sin t dt, then F′(x) = ?",
+  "formula": "2x sin(x²)",
+  "options": [
+   "2x sin(x²)",
+   "cos(x²)·2x",
+   "sin x²/2x",
+   "sin(x²)"
+  ],
+  "answer": 0,
+  "explain": "Leibniz rule: F′(x) = sin(x²)·d(x²)/dx = 2x sin(x²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "406dd7c7-99d4-457a-9f7f-b623f123d9d1",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^a f(x)dx = ∫₀^a f(a-x)dx. This is called?",
+  "formula": "",
+  "options": [
+   "Leibniz rule",
+   "King's property",
+   "Cauchy property",
+   "Walli's rule"
+  ],
+  "answer": 1,
+  "explain": "Substituting x→a−x leaves limits unchanged; this is King's (reflection) property.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7c57c832-45de-4286-8740-f80266bd456d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite Integration",
+  "prompt": "∫₀^(2π) cos²x dx = ?",
+  "formula": "",
+  "options": [
+   "π",
+   "0",
+   "2π",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "cos²x = (1+cos2x)/2; integral over full period gives π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f85aeed4-aaa1-4db0-bbd1-dcc778a03244",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "If F(x) = ∫₀^(sin x) t² dt, then F′(x) = ?",
+  "formula": "Leibniz rule",
+  "options": [
+   "2 sin x cos x",
+   "cos x",
+   "sin²x",
+   "sin²x · cos x"
+  ],
+  "answer": 3,
+  "explain": "By Leibniz rule: F′(x) = (sin x)² · cos x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3141ac93-96cb-444c-b7db-7fb0c167a911",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋(π/2)^(π/2) cos x dx = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "π",
+   "0",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "cos x is even; 2∫₀^(π/2) cos x dx = 2[sin x]₀^(π/2) = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "05bfb303-322a-490a-bcdd-8f33321c7565",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite Integration",
+  "prompt": "∫₀^∞ e^(−ax) dx (a > 0) = ?",
+  "formula": "",
+  "options": [
+   "1/a",
+   "a",
+   "e^a",
+   "1/a²"
+  ],
+  "answer": 0,
+  "explain": "[−e^(−ax)/a]₀^∞ = 0 − (−1/a) = 1/a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "75e24e97-f083-4672-82b2-398e3ee1cb19",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) (1ᵖ+2ᵖ+…+nᵖ)/n^(p+1) equals which integral?",
+  "formula": "",
+  "options": [
+   "∫₀^p x dx",
+   "∫₀^1 xᵖ dx = 1/(p+1)",
+   "∫₁^p x dx",
+   "∫₀^1 xᵖ⁺¹dx"
+  ],
+  "answer": 1,
+  "explain": "Riemann sum (1/n)Σ(k/n)ᵖ → ∫₀^1 xᵖdx = 1/(p+1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4832b7e9-614f-482b-82bb-013485478925",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Splitting limits; modulus integrands",
+  "prompt": "∫ₐ^b [f(x)+g(x)]dx equals?",
+  "formula": "",
+  "options": [
+   "∫ₐ^b (fg) dx",
+   "Cannot split",
+   "∫ₐ^b f dx + ∫ₐ^b g dx",
+   "∫ₐ^b f dx · ∫ₐ^b g dx"
+  ],
+  "answer": 2,
+  "explain": "Linearity of the integral: the integral of a sum equals the sum of integrals.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0c2239ef-4ff6-4fec-8234-bc7ec322fdd1",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Splitting limits; modulus integrands",
+  "prompt": "∫ₐ^a f(x)dx = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "f(a)",
+   "2f(a)",
+   "Undefined"
+  ],
+  "answer": 0,
+  "explain": "Integral over a degenerate interval [a,a] is always zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "20176c67-0bb5-4af1-8890-975e6baa654b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Splitting limits; modulus integrands",
+  "prompt": "∫ₐ^b f(x)dx = ? in terms of ∫_b^a",
+  "formula": "",
+  "options": [
+   "2∫_b^a f(x)dx",
+   "0",
+   "−∫_b^a f(x)dx",
+   "∫_b^a f(x)dx"
+  ],
+  "answer": 2,
+  "explain": "Reversing limits changes the sign of the definite integral.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "05cd2a89-ad37-4f62-8a34-0f00cf20b00a",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "If f is even on [−a,a], ∫₋ₐ^a f(x)dx = ?",
+  "formula": "",
+  "options": [
+   "∫₋ₐ^0 f(x)dx",
+   "0",
+   "2∫₀^a f(x)dx",
+   "∫₀^a f(x)dx"
+  ],
+  "answer": 2,
+  "explain": "Even function symmetry: integral over symmetric interval doubles the half-interval integral.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "496b5bed-19d9-479f-afce-1c7ecb90d328",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "If f is odd on [−a,a], ∫₋ₐ^a f(x)dx = ?",
+  "formula": "",
+  "options": [
+   "∫₋ₐ^0 f(x)dx",
+   "−2∫₀^a f(x)dx",
+   "0",
+   "2∫₀^a f(x)dx"
+  ],
+  "answer": 2,
+  "explain": "Odd function symmetry: contributions from [−a,0] and [0,a] cancel exactly.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "527a7107-81b9-4bc3-9339-c7218cdda2ef",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "∫₀^1 xⁿ dx (n≠−1) = ?",
+  "formula": "1/(n+1)",
+  "options": [
+   "1/n",
+   "n/(n+1)",
+   "1/(n+1)",
+   "n+1"
+  ],
+  "answer": 2,
+  "explain": "Power rule: [x^(n+1)/(n+1)]₀^1 = 1/(n+1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "eddd3c4d-c9f6-4e5d-b24c-9411aaab27ef",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/2) (sin x − cos x)/(sin x + cos x) dx = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "ln 2",
+   "0",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "By King's property, replacing x→(π/2−x) maps integrand to its negative, so integral=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c5bdd1a3-750e-417d-9c3d-16791c8e5247",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "If ∫₀^1 f(x)dx = A, then ∫₀^1 f(1−x)dx = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "−A",
+   "2A",
+   "A"
+  ],
+  "answer": 3,
+  "explain": "Substitution t=1−x converts ∫₀^1 f(1−x)dx = ∫₀^1 f(t)dt = A.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "99909c05-1161-4a6c-85c0-c69d81c1a53b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "∫₀^(2π) sin(nx)dx for any positive integer n = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "π",
+   "0",
+   "2/n"
+  ],
+  "answer": 2,
+  "explain": "sin(nx) integrated over a full period 2π always gives 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "10d3f5a4-3fb2-4c81-bd73-e37f37d625ed",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π) x f(cos x) dx = ?",
+  "formula": "(π/2)∫₀^π f(cos x)dx",
+  "options": [
+   "π∫₀^π f(cos x)dx",
+   "∫₀^π f(cos x)dx",
+   "(π/2)∫₀^π f(cos x)dx",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "By King's property x→π−x: ∫₀^π x f(cosx)dx = (π/2)∫₀^π f(cosx)dx.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "49e082ca-ebf5-4bbf-bf3c-bfb1c6b71a6c",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ k/(n²+k²) = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "ln 2",
+   "½ ln 2",
+   "2 ln 2"
+  ],
+  "answer": 2,
+  "explain": "Equals ∫₀^1 x/(1+x²)dx = ½ ln(1+x²) from 0 to 1 = ½ ln 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "21e82783-fea9-4c84-9eb3-104dfbb914f9",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁^{2n} 1/(n+k) = ?",
+  "formula": "",
+  "options": [
+   "ln 3 − ln 2",
+   "2 ln 2",
+   "ln 3",
+   "ln 2"
+  ],
+  "answer": 2,
+  "explain": "(1/n)Σ 1/(1+k/n) with k/n up to 2: ∫₀² dx/(1+x) = ln 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f43cc823-e8fa-4a65-8196-23332793e9c3",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) (1/n)Σₖ₌₁ⁿ sin(kπ/n) = ?",
+  "formula": "",
+  "options": [
+   "π/2",
+   "2/π",
+   "1/π",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "Equals ∫₀^1 sin(πx)dx = 2/π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fd4648a-021e-4678-9920-c454bdb893fb",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) (1/n)Σₖ₌₁^{3n} f(k/n) equals which integral?",
+  "formula": "",
+  "options": [
+   "∫₀^3 f(x)dx",
+   "∫₀^{1/3} f(x)dx",
+   "∫₀^1 f(x)dx",
+   "3∫₀^1 f(x)dx"
+  ],
+  "answer": 0,
+  "explain": "k/n runs from 0 to 3 with step 1/n, so the limits are 0 to 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d230d77-5c63-4376-887a-3e0e25b98da0",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) (1/n)Σₖ₌ₙ₊₁^{2n} f(k/n) equals which integral?",
+  "formula": "",
+  "options": [
+   "∫₀^2 f(x)dx",
+   "∫₁^{1/2} f(x)dx",
+   "∫₀^1 f(x)dx",
+   "∫₁^2 f(x)dx"
+  ],
+  "answer": 3,
+  "explain": "k/n runs from 1 to 2, so the integral is ∫₁² f(x)dx.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d7078581-fffc-4fab-b02b-c8a70ed175a3",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ n/(n+k)² = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1",
+   "ln 2",
+   "1/4"
+  ],
+  "answer": 0,
+  "explain": "(1/n)Σ 1/(1+k/n)² → ∫₀^1 (1+x)⁻² dx = 1 − 1/2 = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff17a20d-bc6b-4a38-a015-ff2e9b13096c",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ k²/(n³+k³) = ?",
+  "formula": "",
+  "options": [
+   "½ ln 2",
+   "⅓ ln 2",
+   "⅓",
+   "ln 2"
+  ],
+  "answer": 1,
+  "explain": "(1/n)Σ x²/(1+x³) → ∫₀^1 x²/(1+x³)dx = ⅓ ln 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4aca4159-85af-4623-b975-7bf76d4d127d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ 1/√(nk) = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "1/2",
+   "1",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "(1/n)Σ (k/n)^{-1/2} → ∫₀^1 x^{-1/2}dx = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd428f70-a66b-4104-9e1f-87347ea25c3d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ 1/(√n·√(n+k)) = ?",
+  "formula": "",
+  "options": [
+   "2(√2 − 1)",
+   "2√2",
+   "√2 − 1",
+   "ln 2"
+  ],
+  "answer": 0,
+  "explain": "(1/n)Σ (1+k/n)^{-1/2} → ∫₀^1 (1+x)^{-1/2}dx = 2(√2−1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f210645d-cc18-4f86-94af-9d322186955e",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) (1/n)Σₖ₌₁ⁿ 2^{k/n} = ?",
+  "formula": "",
+  "options": [
+   "ln 2",
+   "1",
+   "2",
+   "1/ln 2"
+  ],
+  "answer": 3,
+  "explain": "Equals ∫₀^1 2ˣ dx = (2−1)/ln 2 = 1/ln 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a755531-dad2-456d-916d-901ed207df68",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ 1/√(4n² − k²) = ?",
+  "formula": "∫₀¹ dx/√(4 − x²)",
+  "options": [
+   "π/6",
+   "π/3",
+   "π/4",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "Sum = (1/n)Σ1/√(4−(k/n)²) → [sin⁻¹(x/2)]₀¹ = π/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3bbb8f6f-8b1a-4fd1-909d-0504ad90f908",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "If f has a jump discontinuity at c, then F(x) = ∫ₐˣ f(t)dt at x = c is:",
+  "formula": "",
+  "options": [
+   "discontinuous",
+   "differentiable with F′(c) = 0",
+   "differentiable with F′(c) = f(c)",
+   "continuous but not differentiable"
+  ],
+  "answer": 3,
+  "explain": "F is always continuous for bounded integrable f; F′(c) fails to exist at a jump because the one-sided slopes differ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "52010768-4a80-444d-8e47-0bd4137286db",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "F(x)=∫₁ˣ ln t dt (x>0) has at x = 1 a:",
+  "formula": "F′(x) = ln x",
+  "options": [
+   "no extremum",
+   "point of inflection only",
+   "local maximum",
+   "local minimum"
+  ],
+  "answer": 3,
+  "explain": "F′(x) = ln x changes sign from − to + at x = 1, so F has a local minimum there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbddd038-c0e6-46ca-99ad-edc4f560748f",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫ₐᵇ f(x)/(f(x)+f(a+b−x)) dx = ?",
+  "formula": "I + I = ∫ₐᵇ 1 dx",
+  "options": [
+   "b−a",
+   "(b−a)/2",
+   "0",
+   "(a+b)/2"
+  ],
+  "answer": 1,
+  "explain": "Adding the King's-rule form to the original gives 2I = b−a, so I = (b−a)/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fec3effb-bbf4-4ede-9b8f-35d89f751293",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫₀^(π/2) f(sin 2x) sin x dx equals which integral?",
+  "formula": "",
+  "options": [
+   "∫₀^(π/2) f(sin 2x) cos x dx",
+   "∫₀^(π/2) f(cos 2x) cos x dx",
+   "∫₀^(π/2) f(sin 2x) tan x dx",
+   "∫₀^(π/2) f(sin 2x) sin 2x dx"
+  ],
+  "answer": 0,
+  "explain": "Replace x by π/2−x: sin 2x stays unchanged (sin(π−2x) = sin 2x) and sin x becomes cos x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a1d67113-7256-45b1-8ef4-09337a77f2bf",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋ₐ^a [f(x) + f(−x)] dx equals (for any integrable f)",
+  "formula": "",
+  "options": [
+   "2∫₋ₐ^a f(x)dx",
+   "2∫₀^a f(x)dx",
+   "0",
+   "∫₋ₐ^a f(x)dx"
+  ],
+  "answer": 0,
+  "explain": "∫₋ₐ^a f(−x)dx = ∫₋ₐ^a f(x)dx, so the two parts add to twice the integral.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fbca0ab-8946-41c3-8400-fa274107373a",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "For even f, ∫₋ₐ^a f(x)/(1 + eˣ) dx equals",
+  "formula": "",
+  "options": [
+   "∫₀^a f(x) dx",
+   "0",
+   "∫₋ₐ^a f(x) dx",
+   "2∫₀^a f(x) dx"
+  ],
+  "answer": 0,
+  "explain": "1/(1+eˣ) + 1/(1+e⁻ˣ) = 1, so the integral is half of ∫₋ₐ^a f = ∫₀^a f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4447f3c8-255c-471e-ba00-0325d43a8ab4",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋(π/2)^(π/2) sin²x/(1 + eˣ) dx = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "π",
+   "π/2",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "sin²x is even, so the value is ∫₀^(π/2) sin²x dx = π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d1a20ce8-de71-4163-a993-221527264445",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(a+b-x) (King's rule)",
+  "prompt": "∫ from π/6 to π/3 of dx/(1+√tan x) = ?",
+  "formula": "a+b−x = π/2 ⇒ I = (b−a)/2",
+  "options": [
+   "π/4",
+   "π/3",
+   "π/12",
+   "π/6"
+  ],
+  "answer": 2,
+  "explain": "x→π/2−x turns √tan x into √cot x, so 2I = π/3−π/6 = π/6 and I = π/12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "76cf9dbe-0b85-49ba-84b9-3dffb517bcf4",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋₁^1 ln(x + √(1+x²)) dx = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "2 ln(1+√2)",
+   "0",
+   "ln(1+√2)"
+  ],
+  "answer": 2,
+  "explain": "f(−x) = ln(√(1+x²) − x) = −f(x), so f is odd and the integral is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fc8c7efa-9987-4036-83e5-9ada195c7af9",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "If g is odd and continuous, F(x)=∫₀ˣ g(t)dt is:",
+  "formula": "",
+  "options": [
+   "an even function",
+   "a periodic function",
+   "an odd function",
+   "a constant function"
+  ],
+  "answer": 0,
+  "explain": "Substituting t→−t gives F(−x)=F(x), so F is even. (F′=g is odd.)",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "733abc34-0402-4d26-b977-e8005367b8e1",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "If f(x)+f(−x)=4 for all x, then ∫₋₂² f(x)dx = ?",
+  "formula": "∫₋ₐᵃ f = ½∫₋ₐᵃ [f(x)+f(−x)]dx",
+  "options": [
+   "4",
+   "2",
+   "16",
+   "8"
+  ],
+  "answer": 3,
+  "explain": "The integral is ½·4·(length 4) = 8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac8b7a7f-b18e-47f7-ac0e-c70e66783dff",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(2a-x), splitting at a",
+  "prompt": "∫₀^(2π) sin³x dx = ?",
+  "formula": "",
+  "options": [
+   "4/3",
+   "8/3",
+   "0",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "sin³(2π−x) = −sin³x, so the integral over [0, 2π] vanishes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47416f0e-5f88-49be-81b1-bddb55a5a57c",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(2a-x), splitting at a",
+  "prompt": "If f(x)+f(2a−x) = c (constant), then ∫₀^(2a) f(x)dx = ?",
+  "formula": "∫₀^a [f(x)+f(2a−x)]dx",
+  "options": [
+   "ac",
+   "2ac",
+   "c/2",
+   "c/a"
+  ],
+  "answer": 0,
+  "explain": "The integrand over [0, a] is the constant c, so the value is c·a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "00f79dd0-e9ba-49e3-a745-2c3d3e6a2c7d",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(2a-x), splitting at a",
+  "prompt": "∫ₐ^(2a) f(x)dx is equal to which integral?",
+  "formula": "",
+  "options": [
+   "∫₀^a f(a−x)dx",
+   "∫₀^a f(2a−x)dx",
+   "∫₀^(2a) f(2a−x)dx",
+   "∫₀^a f(x−a)dx"
+  ],
+  "answer": 1,
+  "explain": "Put x = 2a−t; the limits a→2a become a→0, and flipping them removes the minus sign.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "755cb516-a66e-4375-b120-344779cf2a03",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(2a-x), splitting at a",
+  "prompt": "∫₀^2 ln[x/(2−x)] dx = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "2 ln 2",
+   "0",
+   "ln 2"
+  ],
+  "answer": 2,
+  "explain": "f(2−x) = ln[(2−x)/x] = −f(x), so the integral over [0, 2] is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7ef69667-1016-4942-9422-2ef82876c6cb",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(2a-x), splitting at a",
+  "prompt": "For ∫₀^(2a) f(x)dx, which splitting-and-substitution step is correct?",
+  "formula": "",
+  "options": [
+   "Split at 0; put x=−t",
+   "Put x=2a+t throughout",
+   "Split at a; put x=a−t in ∫ₐ^(2a)",
+   "Split at a; put x=2a−t in ∫ₐ^(2a)"
+  ],
+  "answer": 3,
+  "explain": "The substitution x = 2a−t maps [a, 2a] onto [0, a] with f(x) → f(2a−t).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f649abc5-edce-479b-a9da-8afa54ce63cc",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(2a-x), splitting at a",
+  "prompt": "For even n, ∫₀^(2π) sin^n x dx equals k·∫₀^(π/2) sin^n x dx. What is k?",
+  "formula": "",
+  "options": [
+   "1",
+   "8",
+   "4",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "sin^n(2π−x) = sin^n x, so it is 2∫₀^π; sin^n(π−x) = sin^n x, so it is 4∫₀^(π/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dc0091e6-15dc-42f3-b3b3-65d7e517b58b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Property: integral of f(2a-x), splitting at a",
+  "prompt": "∫₀^(2π) dx/(1+e^(sin x)) = ?",
+  "formula": "f(x)+f(2π−x) = 1",
+  "options": [
+   "0",
+   "π",
+   "π/2",
+   "2π"
+  ],
+  "answer": 1,
+  "explain": "sin(2π−x) = −sin x, so f(x)+f(2π−x) = 1/(1+eˢ)+1/(1+e⁻ˢ) = 1; hence the integral = aπ with a=π, c=1, i.e. π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1b59031-5a6f-4c46-92fe-73b87ddc4cc7",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "For positive integer n, ∫₀^(nπ) |sin x| dx = ?",
+  "formula": "",
+  "options": [
+   "4n",
+   "n",
+   "0",
+   "2n"
+  ],
+  "answer": 3,
+  "explain": "|sin x| has period π and ∫₀^π sin x dx = 2, so the integral is 2n.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "30d89c16-d34b-4548-8294-7cc31b9e11ff",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "For positive integer n, ∫₀^(nπ) sin²x dx = ?",
+  "formula": "",
+  "options": [
+   "π/2",
+   "nπ/2",
+   "nπ/4",
+   "nπ"
+  ],
+  "answer": 1,
+  "explain": "sin²x has period π and ∫₀^π sin²x dx = π/2, so the integral is nπ/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "38b92a76-3e48-4d28-a5fa-94a7f9c181bb",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "For T-periodic f, F(x)=∫₀^x f(t)dt is also T-periodic iff?",
+  "formula": "",
+  "options": [
+   "∫₀^T f(x)dx = T",
+   "f(0) = 0",
+   "∫₀^T f(x)dx = 0",
+   "f is even"
+  ],
+  "answer": 2,
+  "explain": "F(x+T) − F(x) = ∫₀^T f, which must vanish for F to be periodic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8fedb41d-f867-4370-9a0a-54d563033de8",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "For T-periodic f and integer n, ∫₀^(nT+x) f(t)dt = ?",
+  "formula": "",
+  "options": [
+   "(n+1)∫₀^T f",
+   "n∫₀^x f(t)dt",
+   "n∫₀^T f + ∫₀^x f",
+   "∫₀^T f + ∫₀^x f"
+  ],
+  "answer": 2,
+  "explain": "Split the interval into n full periods and the remaining [nT, nT+x], which equals ∫₀^x f by periodicity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0fcf1dd-200a-4b9f-b0ee-407bc7075765",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "For T-periodic f, ∫₀^T f(2x)dx equals?",
+  "formula": "",
+  "options": [
+   "∫₀^(T/2) f(x)dx",
+   "½∫₀^T f(x)dx",
+   "2∫₀^T f(x)dx",
+   "∫₀^T f(x)dx"
+  ],
+  "answer": 3,
+  "explain": "Put t=2x: ½∫₀^(2T) f(t)dt = ½·2∫₀^T f = ∫₀^T f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1b8264df-e8b9-4295-9eab-0d34961524b9",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "Period of the function |sin x| + |cos x| is?",
+  "formula": "",
+  "options": [
+   "π",
+   "2π",
+   "π/4",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "Replacing x by x+π/2 swaps |sin x| and |cos x|, so the sum repeats with period π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c9be727c-a9a2-4a58-8dc6-c2056909b475",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "d/dx[∫₀ˣ (x − t)f(t)dt] = ?",
+  "formula": "",
+  "options": [
+   "∫₀ˣ f(t)dt",
+   "x f(x)",
+   "f(x)",
+   "∫₀ˣ t f(t)dt"
+  ],
+  "answer": 0,
+  "explain": "Leibniz rule: boundary term (x−x)f(x)=0, plus ∫₀ˣ f(t)dt from ∂/∂x(x−t)=1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4804b7f3-70f4-4e9a-8e05-142531b21216",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "d/dx[∫₀ˣ x f(t)dt] = ?",
+  "formula": "",
+  "options": [
+   "∫₀ˣ f(t)dt + x f(x)",
+   "∫₀ˣ f(t)dt",
+   "x f(x)",
+   "f(x)"
+  ],
+  "answer": 0,
+  "explain": "Pull x out: x∫₀ˣ f; the product rule gives ∫₀ˣ f + x f(x).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a7844b5-666e-4d8b-b029-644e9a049806",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "Evaluate lim(x→0) [∫₀ˣ t cos t dt] / x².",
+  "formula": "",
+  "options": [
+   "1/2",
+   "∞",
+   "0",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "L'Hôpital: x cos x/(2x) → 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da313a1a-7ed7-4d81-ad56-2bcd7a27ea40",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "If f is even and continuous, d/dx[∫₋ₓˣ f(t)dt] = ?",
+  "formula": "",
+  "options": [
+   "f(x) − f(−x)",
+   "f(x)",
+   "2f(x)",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Leibniz gives f(x) + f(−x) = 2f(x) for even f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e84f4270-e8ee-4a1a-a226-d0a6fd49aedd",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "F(x) = ∫₀ˣ (t − 1)(t − 2)dt has a local maximum at x = ?",
+  "formula": "F′(x) = (x − 1)(x − 2)",
+  "options": [
+   "1",
+   "3/2",
+   "0",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "F′ changes from + to − at x = 1 (and − to + at x = 2), so the maximum is at 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8602bec3-0478-4938-b8e5-2fd83bedbb68",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "For f(x,t), d/dx[∫_{a(x)}^{b(x)} f(x,t)dt] equals:",
+  "formula": "",
+  "options": [
+   "f(x,b)b′ − f(x,a)a′ + ∫ ∂f/∂x dt",
+   "f(x,b)b′ − f(x,a)a′",
+   "∫ ∂f/∂x dt only",
+   "f(x,b) − f(x,a) + ∫ ∂f/∂x dt"
+  ],
+  "answer": 0,
+  "explain": "Leibniz rule: limit terms from the variable limits plus the integral of the partial derivative ∂f/∂x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7c76f452-e5a6-4814-a422-aef30c90e823",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "Evaluate lim(x→2) [1/(x−2)]·∫₂ˣ t³ dt.",
+  "formula": "",
+  "options": [
+   "4",
+   "8",
+   "0",
+   "16"
+  ],
+  "answer": 1,
+  "explain": "The limit is 0/0, so by L'Hôpital it equals f(2) = 2³ = 8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43f3d038-f4e8-4122-97f9-0b272cf7849f",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) log(sin x cos x) dx equals?",
+  "formula": "",
+  "options": [
+   "-2π log 2",
+   "-π log 2",
+   "-(π/2) log 2",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Each of log sin x and log cos x gives -(π/2) log 2 over 0 to π/2, so the sum is -π log 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "86cf3d6b-5e28-4983-a8bc-b92eeb9dce78",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) sin⁴x dx equals?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "3π/16",
+   "3π/8",
+   "3/8"
+  ],
+  "answer": 1,
+  "explain": "Wallis, even power: (3/4)(1/2)(π/2) = 3π/16.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "af09ae0b-a822-4066-9544-ad5b82b82fe6",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) sin⁵x dx equals?",
+  "formula": "",
+  "options": [
+   "2/5",
+   "8/15",
+   "5π/32",
+   "4/5"
+  ],
+  "answer": 1,
+  "explain": "Wallis, odd power: (4/5)(2/3) = 8/15.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3d3a759-8426-4cac-a1a5-840bc0030b9b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^π sin³x dx equals?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "4/3",
+   "3π/8",
+   "8/3"
+  ],
+  "answer": 1,
+  "explain": "sin³x is symmetric about π/2, so the integral is 2·(2/3) = 4/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c1217e23-c1c0-4d4c-981b-9c891c3f0c11",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) sin²x cos²x dx equals?",
+  "formula": "",
+  "options": [
+   "1/8",
+   "π/32",
+   "π/16",
+   "π/8"
+  ],
+  "answer": 2,
+  "explain": "sin²x cos²x = sin²2x/4, which gives (1/4)(π/4) = π/16.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fef39994-e692-4699-9c8e-9b228f048c04",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) cos⁶x dx equals?",
+  "formula": "",
+  "options": [
+   "3π/16",
+   "5π/16",
+   "5π/32",
+   "5π/64"
+  ],
+  "answer": 2,
+  "explain": "Wallis: (5/6)(3/4)(1/2)(π/2) = 5π/32.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb0a94b6-b180-4027-886c-e48da00fadd9",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "In Wallis' formula for ∫₀^(π/2) sinⁿx dx, the factor π/2 appears when n is?",
+  "formula": "",
+  "options": [
+   "every n",
+   "even",
+   "a multiple of 3",
+   "odd"
+  ],
+  "answer": 1,
+  "explain": "Even n ends the product at 1/2·π/2; odd n ends at 2/3·1 with no π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3c52841-b1f2-4b52-93be-4cb9afebf810",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) sin⁷x dx equals?",
+  "formula": "(6·4·2)/(7·5·3)",
+  "options": [
+   "8/15",
+   "16/35",
+   "35/16",
+   "5π/32"
+  ],
+  "answer": 1,
+  "explain": "Odd power, so no π/2 factor: (6·4·2)/(7·5·3) = 48/105 = 16/35.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "160af216-a7a9-4e66-8c38-085083dd8425",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "For a<b and f integrable, |∫ₐᵇ f(x)dx| is always ≤ which quantity?",
+  "formula": "|∫f| ≤ ∫|f|",
+  "options": [
+   "(b − a)·|f(a)|",
+   "∫ₐᵇ f(x)² dx",
+   "∫ₐᵇ |f(x)| dx",
+   "|f(b) − f(a)|"
+  ],
+  "answer": 2,
+  "explain": "Triangle inequality for integrals: |∫f| ≤ ∫|f| when a < b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8b526d17-5db8-4f92-a661-2ad68f83e2a7",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "∫₀¹ e^{x²} dx necessarily lies in which interval?",
+  "formula": "1 ≤ e^{x²} ≤ e on [0, 1]",
+  "options": [
+   "[1, e]",
+   "[0, 1]",
+   "[1, 2e]",
+   "[e, e²]"
+  ],
+  "answer": 0,
+  "explain": "On [0,1], 1 ≤ e^{x²} ≤ e, and the interval length is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6df68eff-d7c5-48a6-819c-463cebb254c9",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "f is continuous, f(x) ≥ 0 on [a, b] and ∫ₐᵇ f dx = 0. What follows?",
+  "formula": "",
+  "options": [
+   "f is constant but not necessarily 0",
+   "f changes sign in [a, b]",
+   "f(x) = 0 for all x in [a, b]",
+   "f(x) = 0 at only one point"
+  ],
+  "answer": 2,
+  "explain": "A continuous non-negative f with a positive value somewhere would give a positive integral.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1f9a3bd9-7e4b-498b-9e5e-51349923c4e6",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "If f is continuous on [a, b], the Mean Value Theorem for integrals gives c in [a, b] with f(c) = ?",
+  "formula": "f(c) = (1/(b−a)) ∫ₐᵇ f dx",
+  "options": [
+   "∫ₐᵇ f dx",
+   "(f(b) − f(a))/(b − a)",
+   "(f(a) + f(b))/2",
+   "(1/(b−a)) ∫ₐᵇ f dx"
+  ],
+  "answer": 3,
+  "explain": "f(c) equals the average value of f on [a, b].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb567215-1ff3-4900-91eb-260a29da3ec1",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "f is decreasing on [a, b]. Then ∫ₐᵇ f(x)dx lies between which two values?",
+  "formula": "f(b)(b−a) ≤ ∫ₐᵇ f dx ≤ f(a)(b−a)",
+  "options": [
+   "f(b)(b−a) and f(a)(b−a), with f(b) as lower",
+   "0 and f(a)(b−a) only",
+   "f(a)(b−a) and f(b)(b−a), with f(a) as lower",
+   "f(a) and f(b) without the factor (b−a)"
+  ],
+  "answer": 0,
+  "explain": "Decreasing f has minimum f(b) and maximum f(a), so m(b−a) ≤ ∫ ≤ M(b−a).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b0f4aea-feaa-4736-9824-661e903cc154",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "Using min and max of the integrand, I = ∫₀¹ dx/√(4−x²) satisfies which bounds?",
+  "formula": "",
+  "options": [
+   "1/2 ≤ I ≤ 1/√3",
+   "1/√3 ≤ I ≤ 1",
+   "1/4 ≤ I ≤ 1/2",
+   "1/3 ≤ I ≤ 1/2"
+  ],
+  "answer": 0,
+  "explain": "On [0,1], 1/2 ≤ 1/√(4−x²) ≤ 1/√3, and the interval length is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fcf2aa75-8330-4f44-9086-1123be1bab18",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "Cauchy–Schwarz for integrals: (∫ₐᵇ f(x)g(x) dx)² is always ≤ which expression?",
+  "formula": "(∫fg)² ≤ (∫f²)(∫g²)",
+  "options": [
+   "∫ₐᵇ (f² + g²) dx",
+   "(∫ₐᵇ f² dx)(∫ₐᵇ g² dx)",
+   "(∫ₐᵇ |f| dx)²·(∫ₐᵇ |g| dx)²",
+   "(∫ₐᵇ f dx)(∫ₐᵇ g dx)"
+  ],
+  "answer": 1,
+  "explain": "Cauchy–Schwarz inequality: (∫fg)² ≤ ∫f² · ∫g², with equality iff f, g are proportional.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ddc784b9-d2cc-404f-9b28-67b12c1a634b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Bounds and inequalities of integrals",
+  "prompt": "For integers n > m ≥ 1, compare ∫₀^{π/2} sinⁿx dx with ∫₀^{π/2} sin^m x dx.",
+  "formula": "0 ≤ sin x ≤ 1 ⇒ sinⁿx ≤ sin^m x",
+  "options": [
+   "First is smaller",
+   "They are equal",
+   "First is greater",
+   "Depends on parity of n and m"
+  ],
+  "answer": 0,
+  "explain": "On (0, π/2), 0 < sin x < 1, so higher powers are smaller; integral is strictly smaller.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da3aea11-6ca3-4efa-9701-b47a343d423e",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) (1/n)Σₖ₌₁ⁿ sin²(kπ/n) = ?",
+  "formula": "∫₀¹ sin²(πx)dx",
+  "options": [
+   "1",
+   "1/2",
+   "2/π",
+   "1/π"
+  ],
+  "answer": 1,
+  "explain": "The average of sin² over a full period is 1/2, so ∫₀¹ sin²(πx)dx = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e88763f-079c-43fb-bfd7-3281eb783edc",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "f is even and differentiable. Then ∫₋ₐ^a f′(x) dx = ?",
+  "formula": "f′ is odd",
+  "options": [
+   "2f(a)",
+   "0",
+   "2f(0)",
+   "f(a) − f(0)"
+  ],
+  "answer": 1,
+  "explain": "The derivative of an even function is odd, so the integral is 0 (also f(a) − f(−a) = 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3bf0865-7bb4-49cd-9606-5b556d652016",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "f is odd and differentiable. Then ∫₋ₐ^a f′(x) dx = ?",
+  "formula": "f′ is even",
+  "options": [
+   "2f(0)",
+   "f(a)",
+   "0",
+   "2f(a)"
+  ],
+  "answer": 3,
+  "explain": "The integral is f(a) − f(−a) = f(a) + f(a) = 2f(a), since f′ is even.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f75eecb8-1917-47e6-a5ec-c267f423888b",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "Evaluate lim(x→0) [∫₀^(x²) sec² t dt] / (x sin x).",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "½",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Numerator is tan x² ≈ x², denominator ≈ x², so the limit is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "490edf0e-a9ef-4e6b-a8aa-64015a346fe7",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "F(x) = ∫₀^(x²) e^(−t) dt has at x = 0:",
+  "formula": "",
+  "options": [
+   "No critical point",
+   "A point of inflection",
+   "A local minimum",
+   "A local maximum"
+  ],
+  "answer": 2,
+  "explain": "F′(x) = 2x e^(−x²) changes sign from − to + at 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1470a5fd-3298-4a34-9475-78c213d70713",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "d/dx[(∫₀ˣ f(t)dt)²] = ?",
+  "formula": "",
+  "options": [
+   "2f(x)∫₀ˣ f(t)dt",
+   "f(x)²",
+   "2f(x)f′(x)",
+   "2(∫₀ˣ f(t)dt)"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: 2·F(x)·F′(x) with F′(x) = f(x).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "df28df77-8579-4f2d-a22c-1a569da28641",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "For I(x) = ∫₀¹ e^(xt) dt, I′(0) = ?",
+  "formula": "I′(x) = ∫₀¹ t e^(xt) dt",
+  "options": [
+   "1/2",
+   "0",
+   "e − 1",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "The limits are constant, so differentiate inside: I′(0) = ∫₀¹ t dt = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b142e42f-530c-4c4c-b168-b10f457c0512",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Leibniz rule: differentiating under integral",
+  "prompt": "Evaluate lim(x→2) [1/(x² − 4)]·∫₂ˣ t³ dt.",
+  "formula": "",
+  "options": [
+   "1",
+   "8",
+   "4",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "0/0 form: L'Hôpital gives x³/(2x) = 8/4 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6beb0db0-92ff-481a-928b-3a4a9f422076",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Definite integral as limit of a sum",
+  "prompt": "lim(n→∞) Σₖ₌₁ⁿ k/(n(n+k)) = ?",
+  "formula": "∫₀^1 x/(1+x) dx",
+  "options": [
+   "ln 2 − 1/2",
+   "1/2",
+   "1 − ln 2",
+   "ln 2"
+  ],
+  "answer": 2,
+  "explain": "Term = (1/n)·(k/n)/(1+k/n) → ∫₀^1 x/(1+x)dx = 1 − ln 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68d0a072-0b0b-4805-8645-cc254c70a6db",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Fundamental theorem of calculus",
+  "prompt": "Why is ∫₋₁^1 dx/x² = [−1/x]₋₁^1 = −2 invalid?",
+  "formula": "",
+  "options": [
+   "Antiderivative of 1/x² is wrong",
+   "Limits must be swapped",
+   "Integrand is not continuous on [−1,1]",
+   "Integrand is odd, so the value is 0"
+  ],
+  "answer": 2,
+  "explain": "FTC needs f continuous on [a,b]; 1/x² blows up at 0 and the integral diverges.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "89d16a56-e9db-43fd-b65a-6c1fa67bb65f",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "∫₋π/2^(π/2) |sin x| dx = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "π",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "|sin x| is even, so the integral is 2∫₀^(π/2) sin x dx = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e732132-ecda-4af5-a02b-7ea7a4f1304f",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Even/odd functions over symmetric limits",
+  "prompt": "If g is even and continuous, F(x) = ∫₀ˣ g(t)dt is:",
+  "formula": "",
+  "options": [
+   "not necessarily symmetric",
+   "a constant function",
+   "an odd function",
+   "an even function"
+  ],
+  "answer": 2,
+  "explain": "F(−x) = −∫₀ˣ g(−u)du = −F(x), so F is odd.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6dd43805-ac3e-4d5c-891c-4c13e5275819",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "For a continuous T-periodic f, lim(x→∞) (1/x)∫₀ˣ f(t)dt equals?",
+  "formula": "mean value over one period",
+  "options": [
+   "0 for every periodic f",
+   "(1/T)∫₀^T f(t)dt",
+   "T∫₀^T f(t)dt",
+   "∫₀^T f(t)dt"
+  ],
+  "answer": 1,
+  "explain": "Write x = nT + r. Then ∫₀ˣ f ≈ n∫₀^T f, so the limit is (1/T)∫₀^T f, the mean value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d528ea5-d305-4930-b476-17cd9dd98501",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Periodic functions: integral over nT",
+  "prompt": "∫₀^(2π) |sin 2x| dx = ?",
+  "formula": "",
+  "options": [
+   "8",
+   "2",
+   "4",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "|sin 2x| has period π/2 and ∫ over one period is 1. There are 4 periods in [0, 2π], so the value is 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b2dd788e-d7df-433b-a39d-af1c7645eeaf",
+  "subject": "Mathematics",
+  "chapter": "Definite Integration",
+  "topic": "Standard results: log sin x, Wallis formula",
+  "prompt": "∫₀^(π/2) sin⁴x cos²x dx equals?",
+  "formula": "Wallis: (m−1)(m−3)…(n−1)(n−3)… / (m+n)(m+n−2)… × π/2",
+  "options": [
+   "π/32",
+   "π/16",
+   "3π/32",
+   "π/48"
+  ],
+  "answer": 0,
+  "explain": "Both powers even: (3·1·1)/(6·4·2) × π/2 = π/32. Also 3π/16 − 5π/32 = π/32.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

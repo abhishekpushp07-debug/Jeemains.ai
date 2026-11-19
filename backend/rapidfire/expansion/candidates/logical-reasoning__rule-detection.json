@@ -1,0 +1,5646 @@
+[
+ {
+  "prompt": "Rule: vowels shift +1 letter, consonants shift −1 letter. What does 'BE' become?",
+  "formula": "",
+  "options": [
+   "CF",
+   "AD",
+   "AF",
+   "CD"
+  ],
+  "answer": 2,
+  "explain": "B is a consonant, so B→A. E is a vowel, so E→F. The result is AF.",
+  "kind": "pattern",
+  "id": "e5a47e39-1c85-4660-9297-8158d00a1072",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: even numbers are halved, odd numbers are doubled. Input (8, 5) gives:",
+  "formula": "",
+  "options": [
+   "(16, 10)",
+   "(4, 10)",
+   "(4, 2.5)",
+   "(16, 2.5)"
+  ],
+  "answer": 1,
+  "explain": "8 is even, so it is halved to 4. 5 is odd, so it is doubled to 10.",
+  "kind": "pattern",
+  "id": "2eb0999a-5d34-45ce-9b69-769f8dabf58e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'If a card has a star, it is blue.' A card is blue. What follows?",
+  "formula": "",
+  "options": [
+   "It has a star",
+   "It has no star",
+   "It is not blue",
+   "Cannot be determined"
+  ],
+  "answer": 3,
+  "explain": "The rule is P→Q. Q being true does not fix P, because the converse is invalid.",
+  "kind": "concept",
+  "id": "4b54a402-5262-4cae-ad33-22c59ec22db2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'If a figure is a square, it is shaded.' A figure is not shaded. Then it is:",
+  "formula": "",
+  "options": [
+   "Not a square",
+   "A square",
+   "Possibly a square",
+   "A shaded non-square"
+  ],
+  "answer": 0,
+  "explain": "The contrapositive of P→Q is ¬Q→¬P, so the figure is not a square.",
+  "kind": "concept",
+  "id": "006cdba4-1be6-4e58-8573-d75da482a0d3",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: swap the first and last letters of a word. 'PLAN' becomes:",
+  "formula": "",
+  "options": [
+   "NALP",
+   "NLAP",
+   "PNAL",
+   "NPLA"
+  ],
+  "answer": 1,
+  "explain": "Swapping P and N gives NLAP. The middle letters LA stay in place.",
+  "kind": "pattern",
+  "id": "7c339100-87ef-44d1-8ca3-7e03f9b7db33",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: numbers ending in 5 are doubled, others stay unchanged. Input (15, 12) gives:",
+  "formula": "",
+  "options": [
+   "(30, 24)",
+   "(15, 24)",
+   "(30, 12)",
+   "(15, 12)"
+  ],
+  "answer": 2,
+  "explain": "15 ends in 5, so it becomes 30. 12 does not end in 5, so it stays 12.",
+  "kind": "pattern",
+  "id": "5e822f50-b10c-4a06-bf45-bdae4e93f931",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: a number is rejected if divisible by both 2 and 3. Which is rejected?",
+  "formula": "",
+  "options": [
+   "9",
+   "8",
+   "15",
+   "12"
+  ],
+  "answer": 3,
+  "explain": "'Both' means divisible by 6. Only 12 qualifies, since 9, 8 and 15 each fail one condition.",
+  "kind": "concept",
+  "id": "b3067d81-df30-4264-9478-bcc453a2d310",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'A ticket is valid only if it is stamped.' A ticket is stamped. Then it is:",
+  "formula": "",
+  "options": [
+   "Valid",
+   "Not valid",
+   "Valid or not valid, undetermined",
+   "Unstamped"
+  ],
+  "answer": 2,
+  "explain": "'Valid only if stamped' means valid→stamped. A stamp is necessary, not sufficient.",
+  "kind": "concept",
+  "id": "da36fcfb-c353-43f3-a176-4326c4720313",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: each digit is replaced by the last digit of its square. Input 47 gives:",
+  "formula": "",
+  "options": [
+   "69",
+   "16",
+   "49",
+   "67"
+  ],
+  "answer": 0,
+  "explain": "4²=16 ends in 6, and 7²=49 ends in 9. The result is 69.",
+  "kind": "pattern",
+  "id": "7f1209e0-3028-400c-aa3d-772ec290db9c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: letters at odd positions shift +1, even positions stay. 'CAT' becomes:",
+  "formula": "",
+  "options": [
+   "DBU",
+   "DAT",
+   "CAU",
+   "DAU"
+  ],
+  "answer": 3,
+  "explain": "C is in position 1, so C→D. A is in position 2, so it stays. T is in position 3, so T→U.",
+  "kind": "pattern",
+  "id": "b03e871d-c03b-4ceb-94ad-ef9db0974e5e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: if n > 10 subtract 10, otherwise add 10. Input 10 gives:",
+  "formula": "",
+  "options": [
+   "0",
+   "20",
+   "10",
+   "100"
+  ],
+  "answer": 1,
+  "explain": "10 is not greater than 10, so the 'otherwise' branch applies: 10+10=20.",
+  "kind": "exception",
+  "id": "777f8d70-884b-4ea3-a0df-3ea88d66229d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: output the number of vowels in the word. Input 'EDUCATION' gives:",
+  "formula": "",
+  "options": [
+   "4",
+   "6",
+   "3",
+   "5"
+  ],
+  "answer": 3,
+  "explain": "The vowels are E, U, A, I, O, which makes 5.",
+  "kind": "pattern",
+  "id": "64fa0f91-3e8e-4600-a616-d87936f3c071",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: a shape is tagged Z if it has at most 4 sides. Which shape is tagged Z?",
+  "formula": "",
+  "options": [
+   "Pentagon",
+   "Hexagon",
+   "Square",
+   "Heptagon"
+  ],
+  "answer": 2,
+  "explain": "'At most 4' includes 4, so the square qualifies. The others have more than 4 sides.",
+  "kind": "concept",
+  "id": "913576f4-7e7d-4c83-8cbd-edfd78b6a16b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: first double the number, then subtract 3. Input 5 gives:",
+  "formula": "",
+  "options": [
+   "4",
+   "2",
+   "10",
+   "7"
+  ],
+  "answer": 3,
+  "explain": "The order matters: 5×2=10, then 10−3=7.",
+  "kind": "pattern",
+  "id": "cd9cee68-74ec-42ee-b691-65cf82d2e941",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: words with an even number of letters are reversed, others stay. 'TREE' becomes:",
+  "formula": "",
+  "options": [
+   "TREE",
+   "EERT",
+   "ETER",
+   "RTEE"
+  ],
+  "answer": 1,
+  "explain": "TREE has 4 letters, which is even, so it is reversed to EERT.",
+  "kind": "pattern",
+  "id": "30316574-95eb-475e-89e0-2cb2c50c0e53",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: tag A if divisible by 2 or 3 but not both. Which number gets tag A?",
+  "formula": "",
+  "options": [
+   "6",
+   "12",
+   "8",
+   "18"
+  ],
+  "answer": 2,
+  "explain": "'But not both' excludes multiples of 6. 6, 12 and 18 are excluded, and 8 is divisible by 2 only.",
+  "kind": "concept",
+  "id": "de417414-0112-41f6-802e-90e949e93a78",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: digits above 5 become 0, other digits are doubled. Input 38 gives:",
+  "formula": "",
+  "options": [
+   "60",
+   "66",
+   "06",
+   "16"
+  ],
+  "answer": 0,
+  "explain": "3 is not above 5, so it doubles to 6. 8 is above 5, so it becomes 0. The result is 60.",
+  "kind": "pattern",
+  "id": "2dd983f4-0d7f-42b2-810a-aefac758d443",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "An arrow points up. It is rotated 90° clockwise. Where does it point?",
+  "formula": "90° clockwise: up → right → down → left",
+  "options": [
+   "Left",
+   "Right",
+   "Down",
+   "Up-right"
+  ],
+  "answer": 1,
+  "explain": "Clockwise 90° takes up to right.",
+  "kind": "concept",
+  "id": "ac919104-33a0-4ddb-bd1f-5cc86a26a636",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points left. It is rotated 90° anticlockwise. Where does it point?",
+  "formula": "90° anticlockwise: up → left → down → right",
+  "options": [
+   "Up",
+   "Right",
+   "Down",
+   "Down-left"
+  ],
+  "answer": 2,
+  "explain": "Anticlockwise 90° takes left to down.",
+  "kind": "concept",
+  "id": "42fa6f4d-2bdd-4f3f-a596-98b727191a77",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Rotating a figure 270° clockwise is the same as rotating it by:",
+  "formula": "270° CW = 90° ACW",
+  "options": [
+   "90° clockwise",
+   "90° anticlockwise",
+   "180° anticlockwise",
+   "270° anticlockwise"
+  ],
+  "answer": 1,
+  "explain": "360° − 270° = 90° in the opposite sense.",
+  "kind": "result",
+  "id": "d3446e23-981b-48aa-990b-8fd200154545",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A figure turns 90° clockwise, then 180° anticlockwise. Net rotation?",
+  "formula": "Net = 90° − 180° (clockwise positive)",
+  "options": [
+   "90° clockwise",
+   "90° anticlockwise",
+   "270° anticlockwise",
+   "180° clockwise"
+  ],
+  "answer": 1,
+  "explain": "+90 − 180 = −90, i.e. 90° anticlockwise.",
+  "kind": "result",
+  "id": "b10e14fb-432b-4e4f-acf7-71a6f3112e6d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points East. It is rotated 135° anticlockwise. It now points:",
+  "formula": "45° steps: E → NE → N → NW",
+  "options": [
+   "North-East",
+   "North",
+   "North-West",
+   "South-West"
+  ],
+  "answer": 2,
+  "explain": "Three 45° anticlockwise steps from East reach North-West.",
+  "kind": "concept",
+  "id": "8ceebc5a-a1b7-4d70-9437-695c803aafec",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points West. It is rotated 135° clockwise. It now points:",
+  "formula": "45° steps: W → NW → N → NE",
+  "options": [
+   "North-West",
+   "North-East",
+   "South-West",
+   "South-East"
+  ],
+  "answer": 1,
+  "explain": "Three 45° clockwise steps from West reach North-East.",
+  "kind": "concept",
+  "id": "4854544b-bc63-4862-aa01-4cc9f7585bb1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Arrow series: N, NE, E, ?. Each step is the same rotation. Next position?",
+  "formula": "Rule: 45° clockwise per step",
+  "options": [
+   "South",
+   "South-East",
+   "North-East",
+   "South-West"
+  ],
+  "answer": 1,
+  "explain": "Each step is 45° clockwise, so E gives SE.",
+  "kind": "pattern",
+  "id": "b7164e16-b7e1-4e86-9976-8b6d3fe2f6c9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Arrow series: N, SE, W, ?. Each step is a constant rotation. Next position?",
+  "formula": "Rule: 135° clockwise per step",
+  "options": [
+   "North-West",
+   "North-East",
+   "South-West",
+   "East"
+  ],
+  "answer": 1,
+  "explain": "N→SE is 135° CW and SE→W is 135° CW. W + 135° CW = NE.",
+  "kind": "pattern",
+  "id": "1da4942a-8b23-4137-a25e-9c42568a0965",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points up and turns clockwise by 45°, 90°, 135° in successive steps. Position after step 3?",
+  "formula": "Cumulative: 45° + 90° + 135° = 270°",
+  "options": [
+   "Left",
+   "Down",
+   "Right",
+   "Down-left"
+  ],
+  "answer": 0,
+  "explain": "The total is 270° clockwise, which takes up to left.",
+  "kind": "pattern",
+  "id": "5f261c92-1a04-405c-8cf3-833eb8d95990",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A dot is at the top-left corner of a square. After a 180° rotation, it is at:",
+  "formula": "180°: opposite corner",
+  "options": [
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right",
+   "Top-left"
+  ],
+  "answer": 2,
+  "explain": "A 180° rotation sends each corner to the diagonally opposite one.",
+  "kind": "concept",
+  "id": "784c641f-04c3-4b15-9894-cbff88f2eb0a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A dot at the top-right corner of a square turns 90° clockwise. New corner?",
+  "formula": "CW corners: TR → BR → BL → TL",
+  "options": [
+   "Top-left",
+   "Bottom-right",
+   "Bottom-left",
+   "Top-right"
+  ],
+  "answer": 1,
+  "explain": "Clockwise moves top-right to bottom-right.",
+  "kind": "concept",
+  "id": "483a185a-1beb-4c55-8152-14ee7628b0b6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A dot at the bottom-left corner turns 90° anticlockwise. New corner?",
+  "formula": "ACW corners: BL → BR → TR → TL",
+  "options": [
+   "Top-left",
+   "Top-right",
+   "Bottom-right",
+   "Bottom-left"
+  ],
+  "answer": 2,
+  "explain": "Anticlockwise moves bottom-left to bottom-right.",
+  "kind": "concept",
+  "id": "0e0dddf2-f4dc-4546-9f1d-3d74f77b3d8c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The letter 'd' is rotated 180° in its plane. It looks like:",
+  "formula": "Rotation ≠ reflection: d → p, b → q",
+  "options": [
+   "b",
+   "q",
+   "p",
+   "d"
+  ],
+  "answer": 2,
+  "explain": "A 180° rotation turns d into p, while a mirror image would give b.",
+  "kind": "fact",
+  "id": "cb4bf5e6-95b6-4e99-a318-6802cd256f09",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The letter 'Z' is rotated 90° in its plane. It looks like:",
+  "formula": "Z ↻ 90° = N",
+  "options": [
+   "S",
+   "N",
+   "M",
+   "W"
+  ],
+  "answer": 1,
+  "explain": "Turning Z by 90° gives the letter N.",
+  "kind": "fact",
+  "id": "cb8144d4-742a-45d7-a781-d1850b76d946",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The smallest rotation (>0°) that maps an equilateral triangle onto itself is:",
+  "formula": "Order 3 → 360°/3 = 120°",
+  "options": [
+   "60°",
+   "90°",
+   "120°",
+   "180°"
+  ],
+  "answer": 2,
+  "explain": "An equilateral triangle has 3-fold rotational symmetry, so the angle is 120°.",
+  "kind": "fact",
+  "id": "71454ecb-7a30-4528-936b-0d240e852374",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A clock hand points to 2. It is rotated 180°. It now points to:",
+  "formula": "180° = 6 hour-marks",
+  "options": [
+   "5",
+   "6",
+   "8",
+   "9"
+  ],
+  "answer": 2,
+  "explain": "Each hour mark is 30°, so 180° is 6 marks. 2 + 6 = 8.",
+  "kind": "concept",
+  "id": "640a1e81-03bd-478d-8d80-89f2e70aebdd",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Dots in successive figures: 1, 3, 7, 15, ? How many dots in the next figure?",
+  "formula": "",
+  "options": [
+   "29",
+   "30",
+   "31",
+   "33"
+  ],
+  "answer": 2,
+  "explain": "Each figure has double the previous count plus 1: 15×2+1 = 31.",
+  "kind": "pattern",
+  "id": "719572ae-12e3-4073-b4f3-6350612c434c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Stars in successive boxes: 1, 2, 4, 7, 11, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "15",
+   "16",
+   "17",
+   "14"
+  ],
+  "answer": 1,
+  "explain": "The increments grow by 1 each time (+1, +2, +3, +4, +5), so 11+5 = 16.",
+  "kind": "pattern",
+  "id": "bb58b0cd-5423-4095-9382-13fe6457843d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of squares in the figures: 20, 17, 13, 8, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "2",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "The decrements grow by 1 each time (−3, −4, −5, −6), so 8−6 = 2.",
+  "kind": "pattern",
+  "id": "90de86d6-2db5-469e-aa38-2d8ae876fd47",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of dots: 2, 4, 7, 12, 19, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "28",
+   "29",
+   "30",
+   "31"
+  ],
+  "answer": 2,
+  "explain": "The increments are consecutive primes 2, 3, 5, 7, 11, so 19+11 = 30.",
+  "kind": "pattern",
+  "id": "f34a5968-3333-4aa6-99ed-6f077c98b0e5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of leaves in each figure: 1, 1, 2, 3, 5, 8, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "11",
+   "12",
+   "13",
+   "14"
+  ],
+  "answer": 2,
+  "explain": "Each count is the sum of the previous two (Fibonacci): 5+8 = 13.",
+  "kind": "pattern",
+  "id": "7b77686a-392e-46ed-8c84-c338c3f012d0",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of arrows in the figures: 1, 2, 6, 24, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "48",
+   "96",
+   "120",
+   "72"
+  ],
+  "answer": 2,
+  "explain": "Multipliers rise by 1 each step (×2, ×3, ×4), so the next is ×5: 24×5 = 120.",
+  "kind": "pattern",
+  "id": "3e4516c0-18e8-47b0-afbb-b84347cdc523",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of circles in the figures: 2, 5, 10, 17, ? Find the next count.",
+  "formula": "n² + 1",
+  "options": [
+   "24",
+   "25",
+   "26",
+   "28"
+  ],
+  "answer": 2,
+  "explain": "The counts are n²+1 for n = 1, 2, 3, 4, so the fifth is 25+1 = 26.",
+  "kind": "pattern",
+  "id": "4b46c332-95ee-461a-87a8-870049a0f345",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of dots in the figures: 3, 6, 4, 8, 6, 12, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "10",
+   "14",
+   "24",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "The rule alternates ×2 and −2: 3→6→4→8→6→12→10.",
+  "kind": "pattern",
+  "id": "96448583-653b-44fd-a559-94be65c4cc6b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of lines in the figures: 2, 6, 3, 5, 4, 4, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Two interleaved series: 2, 3, 4, 5 (rising) and 6, 5, 4 (falling). The 7th term is 5.",
+  "kind": "pattern",
+  "id": "3ee80b34-0b75-41a1-aba9-19ff6c22a825",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Elements in the figures: 50, 48, 44, 36, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "28",
+   "24",
+   "20",
+   "16"
+  ],
+  "answer": 2,
+  "explain": "The decrements double each time (2, 4, 8, 16), so 36−16 = 20.",
+  "kind": "pattern",
+  "id": "d717d456-4132-4ff1-ae00-d3e1de8a682d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of triangles in the figures: 81, 27, 9, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "6",
+   "3",
+   "1",
+   "4.5"
+  ],
+  "answer": 1,
+  "explain": "Each figure has one-third of the previous count: 9÷3 = 3.",
+  "kind": "pattern",
+  "id": "4567523f-04b3-40f9-8a80-f47ab52f278d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Figures: A, BB, CCC, DDDD, ? Which comes next?",
+  "formula": "",
+  "options": [
+   "EEE",
+   "EEEE",
+   "EEEEE",
+   "FFFFF"
+  ],
+  "answer": 2,
+  "explain": "The nth letter is repeated n times, so the fifth figure is EEEEE.",
+  "kind": "pattern",
+  "id": "b1cde210-fbd6-48cf-bcaa-224b56c80da6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Odd one out by number of elements: 4, 9, 16, 24, 25",
+  "formula": "",
+  "options": [
+   "4",
+   "16",
+   "24",
+   "25"
+  ],
+  "answer": 2,
+  "explain": "All the others are perfect squares; 24 is not.",
+  "kind": "pattern",
+  "id": "7a9b49d1-8423-4a36-9795-893c32c81793",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Step n of a figure has (2n + 1) triangles. How many triangles are in step 6?",
+  "formula": "2n + 1",
+  "options": [
+   "11",
+   "12",
+   "13",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "2×6+1 = 13; the count rises by 2 each step.",
+  "kind": "pattern",
+  "id": "9f2022dc-f736-40c6-ad52-22afac021d74",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of dots: 1, 3, 6, 10, 15, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "20",
+   "21",
+   "22",
+   "25"
+  ],
+  "answer": 1,
+  "explain": "These are triangular numbers. The increments are 2, 3, 4, 5, 6, so 15+6 = 21.",
+  "kind": "pattern",
+  "id": "78761fa9-9376-4451-b131-e3836f8229e9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of elements: 65, 33, 17, 9, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "6",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "Each term is (previous+1)/2: (9+1)/2 = 5.",
+  "kind": "pattern",
+  "id": "d63cbb97-17b8-4762-839c-4ea03365682a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Sides of the polygons in successive figures: 3, 4, 6, 9, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "12",
+   "13",
+   "14",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "The increments rise by 1 each step (+1, +2, +3), so the next is +4: 9+4 = 13.",
+  "kind": "pattern",
+  "id": "32b9f0f1-b7b8-4f76-951e-87b7253c9718",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of lines in figures: 3, 5, 4, 6, 5, ? (add 2, delete 1, alternately). Next figure has:",
+  "formula": "",
+  "options": [
+   "4",
+   "6",
+   "7",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "Pattern +2, −1, +2, −1, +2: after 5 comes 5 + 2 = 7.",
+  "kind": "pattern",
+  "id": "63c854e3-24f7-4b80-a738-7929cc3d5af6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Dots in successive figures: 1, 2, 4, 7, 11, ? The next figure has how many dots?",
+  "formula": "",
+  "options": [
+   "15",
+   "16",
+   "17",
+   "18"
+  ],
+  "answer": 1,
+  "explain": "Added dots grow by 1 each time (+1, +2, +3, +4), so the next add is +5: 11 + 5 = 16.",
+  "kind": "pattern",
+  "id": "c0079169-7385-4a15-848c-5583f02153be",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Number of elements: 2, 3, 5, 8, ? Each figure adds the two previous counts. Next is:",
+  "formula": "",
+  "options": [
+   "11",
+   "12",
+   "13",
+   "14"
+  ],
+  "answer": 2,
+  "explain": "Each count is the sum of the previous two: 5 + 8 = 13.",
+  "kind": "pattern",
+  "id": "069aade4-2273-4a9c-a44a-e5c9297b4c3c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Rule: Fig 3 = Fig 1 − Fig 2 in elements. Sets: (9, 4, 5), (12, 7, ?). Find ?",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "19",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "Elements of Fig 2 are deleted from Fig 1: 12 − 7 = 5.",
+  "kind": "pattern",
+  "id": "dd341031-1c8e-4d85-b75c-673967b98bfc",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Rule: all elements of both figures are combined, with repeats shown once. A = {●, ▲}, B = {▲, ■}. Elements in result?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Union keeps ▲ once: ●, ▲, ■ gives 3 elements.",
+  "kind": "concept",
+  "id": "894f9b16-72c8-4ae2-a1a3-eae8d526f1cf",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "A square has 4 sides. Each step deletes the next side clockwise, starting with the top. After 3 steps, which side remains?",
+  "formula": "",
+  "options": [
+   "Top",
+   "Right",
+   "Bottom",
+   "Left"
+  ],
+  "answer": 3,
+  "explain": "Deleted in order top, right, bottom, so the left side remains.",
+  "kind": "pattern",
+  "id": "ccca51b6-7153-4ca9-9dd8-bb489b3d77d5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Number of elements: 20, 15, 11, 8, ? Elements are deleted in decreasing amounts. Next is:",
+  "formula": "",
+  "options": [
+   "5",
+   "6",
+   "7",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Deletions are 5, 4, 3, so the next is 2: 8 − 2 = 6.",
+  "kind": "pattern",
+  "id": "47842e27-e32b-48ea-859a-ce2606c50dad",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Element counts: 2, 10, 4, 8, 6, 6, 8, ? Alternate figures add and delete. Next is:",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "5",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "Odd positions go 2, 4, 6, 8 (+2); even positions go 10, 8, 6, 4 (−2). Next is 4.",
+  "kind": "pattern",
+  "id": "988bb7ba-3377-4138-9151-34e576ed41ee",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Lines in successive figures: 3, 6, 11, 18, ? The additions follow a pattern. Next is:",
+  "formula": "",
+  "options": [
+   "25",
+   "26",
+   "27",
+   "29"
+  ],
+  "answer": 2,
+  "explain": "Additions are 3, 5, 7, so the next is 9: 18 + 9 = 27.",
+  "kind": "pattern",
+  "id": "5671d981-f32a-4143-a5cc-53eec0d335fa",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Number of dots in successive figures: 2, 3, 5, 7, ? The counts follow a special sequence. Next is:",
+  "formula": "",
+  "options": [
+   "9",
+   "10",
+   "11",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "The counts are consecutive primes, and the prime after 7 is 11.",
+  "kind": "pattern",
+  "id": "e20e7a5e-7206-429a-be94-ce77ae2f3081",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Rule: elements common to both figures are deleted, the rest kept. A = {●,▲,■,◆}, B = {▲,■,★}. Elements in result?",
+  "formula": "Result = (A ∪ B) − (A ∩ B)",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "Common ▲ and ■ are deleted; ●, ◆ and ★ remain, so 3.",
+  "kind": "pattern",
+  "id": "cd4980b1-efc5-4905-8d1f-98b9b93008e6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Black quadrant moves clockwise: top-left, top-right, bottom-right, … Next position?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Top-right",
+   "Bottom-right"
+  ],
+  "answer": 1,
+  "explain": "Clockwise order is TL → TR → BR → BL.",
+  "kind": "pattern",
+  "id": "38a5fa95-a7e7-4adc-9a38-6ec684e46820",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded quadrant moves anticlockwise: top-left, bottom-left, bottom-right, … Next position?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Top-right",
+   "Bottom-right"
+  ],
+  "answer": 2,
+  "explain": "Anticlockwise order is TL → BL → BR → TR.",
+  "kind": "pattern",
+  "id": "bc06407a-cba4-43f3-81de-e4f96f7ce522",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Circle with 8 equal parts has 1, 3, 5 parts shaded in successive figures. Next figure?",
+  "formula": "",
+  "options": [
+   "6 parts",
+   "7 parts",
+   "8 parts",
+   "4 parts"
+  ],
+  "answer": 1,
+  "explain": "Shaded parts rise by 2 each step: 1, 3, 5, 7.",
+  "kind": "pattern",
+  "id": "e1e245f8-e692-4742-80c9-93752f1425a9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Hexagon: shaded segment is no. 1, 3, 5 in successive figures (numbered 1–6). Next segment?",
+  "formula": "",
+  "options": [
+   "6",
+   "2",
+   "7",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "It moves 2 places each step; after 5 it wraps round to 1.",
+  "kind": "pattern",
+  "id": "6c7b0c14-b2e9-4d07-a39a-636dbbdfcf03",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Inner shape and outer shape swap shades each step. Figure 1 has a black outer shape. Figure 5's outer shape is?",
+  "formula": "",
+  "options": [
+   "Black",
+   "White",
+   "Half shaded",
+   "Grey"
+  ],
+  "answer": 0,
+  "explain": "Swap occurs each step, so odd-numbered figures match Figure 1: black.",
+  "kind": "pattern",
+  "id": "2e79d7c3-85c6-40bc-b14e-d1ed6ee0e25f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded half of a circle: left, top, right, … (rotating 90° clockwise). Next shaded half?",
+  "formula": "",
+  "options": [
+   "Left",
+   "Top",
+   "Right",
+   "Bottom"
+  ],
+  "answer": 3,
+  "explain": "Clockwise: left → top → right → bottom.",
+  "kind": "pattern",
+  "id": "e990c1cb-c1c5-420b-b463-b9dae58a68fa",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "XOR overlay rule: a region shaded in both figures becomes?",
+  "formula": "",
+  "options": [
+   "Black",
+   "White",
+   "Grey",
+   "Striped"
+  ],
+  "answer": 1,
+  "explain": "XOR keeps shading only where exactly one figure is shaded.",
+  "kind": "concept",
+  "id": "dc1ebf96-9f89-46d1-8777-953c9044cd47",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Colours repeat in a cycle: black, white, grey, black, white, … Next?",
+  "formula": "",
+  "options": [
+   "Black",
+   "White",
+   "Grey",
+   "Striped"
+  ],
+  "answer": 2,
+  "explain": "The cycle has period 3: black, white, grey.",
+  "kind": "pattern",
+  "id": "dffb850e-97af-42fd-b614-71b59d5b2390",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Dots shaded in successive figures: 6, 4, 2, … (falls by 2 each step). Next figure?",
+  "formula": "",
+  "options": [
+   "0 shaded",
+   "1 shaded",
+   "2 shaded",
+   "8 shaded"
+  ],
+  "answer": 0,
+  "explain": "6 → 4 → 2 → 0: no dot shaded.",
+  "kind": "pattern",
+  "id": "22625f56-b122-4667-9307-b28f3b1755a5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Odd one out by shaded fraction: 1/4, 2/8, 3/12, 3/8?",
+  "formula": "",
+  "options": [
+   "1/4",
+   "2/8",
+   "3/12",
+   "3/8"
+  ],
+  "answer": 3,
+  "explain": "The first three each equal 1/4; 3/8 differs.",
+  "kind": "pattern",
+  "id": "387dfe02-396f-44bd-9078-cee84bee902e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Clockwise square corners TL, TR, BR, BL. Shaded corner moves 1, then 2, then 1… Start TL, TR, BL. Next?",
+  "formula": "",
+  "options": [
+   "TL",
+   "TR",
+   "BR",
+   "BL"
+  ],
+  "answer": 0,
+  "explain": "Steps alternate 1, 2, 1: BL moves 1 step clockwise to TL.",
+  "kind": "pattern",
+  "id": "413ad796-71a3-4978-8301-5d3f34af1719",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A dot at the top-left corner of a square moves 2 corners clockwise each step. Where is it after 5 steps?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Top-right",
+   "Bottom-right",
+   "Bottom-left"
+  ],
+  "answer": 2,
+  "explain": "2-corner jumps alternate between opposite corners; an odd number of steps gives the diagonally opposite corner.",
+  "kind": "pattern",
+  "id": "4ad5a0ea-1714-4006-8d97-ac6161b36348",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "An arrow points up and turns 45° clockwise each step. Which way does it point after 3 steps?",
+  "formula": "",
+  "options": [
+   "Right",
+   "South-east",
+   "South",
+   "North-east"
+  ],
+  "answer": 1,
+  "explain": "Up → NE → E → SE: three 45° turns make 135° clockwise.",
+  "kind": "pattern",
+  "id": "c1894637-64fe-4e4f-b248-2f22a5e8aef8",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A line starts on the right side of a square and moves 90° anticlockwise each step. Where is it after 3 steps?",
+  "formula": "",
+  "options": [
+   "Left side",
+   "Top side",
+   "Right side",
+   "Bottom side"
+  ],
+  "answer": 3,
+  "explain": "Right → top → left → bottom, three anticlockwise quarter-turns.",
+  "kind": "pattern",
+  "id": "476173e2-0d8e-4825-aea4-337068ea7ffb",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "Two symbols swap places in every step. After which step does the original arrangement first return?",
+  "formula": "",
+  "options": [
+   "Step 1",
+   "Step 2",
+   "Step 3",
+   "Step 4"
+  ],
+  "answer": 1,
+  "explain": "A swap undone by a second swap has period 2, so the original returns after step 2.",
+  "kind": "concept",
+  "id": "380a9a3c-d5f5-4912-8fa7-3422c494bcbf",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot in a row of 4 cells starts in cell 1 and moves 1 cell right per step, wrapping around. Cell after 6 steps?",
+  "formula": "",
+  "options": [
+   "Cell 1",
+   "Cell 2",
+   "Cell 3",
+   "Cell 4"
+  ],
+  "answer": 2,
+  "explain": "Cycle length is 4. Six steps equal 2 net steps, so the dot is in cell 3.",
+  "kind": "pattern",
+  "id": "099f9231-1dcc-47ca-b954-96447a9b5088",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot starts at top-left and moves clockwise by 1, 2, 3 corners in successive steps. Where does it end?",
+  "formula": "",
+  "options": [
+   "Top-right",
+   "Bottom-right",
+   "Bottom-left",
+   "Top-left"
+  ],
+  "answer": 1,
+  "explain": "TL → TR (1) → BL (2) → BR (3), going clockwise round the square.",
+  "kind": "pattern",
+  "id": "993f84d6-3e26-4c47-a998-2f52e8a079b7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "In a vertical-axis mirror reflection, an element at the top-left of a 2×2 grid moves to:",
+  "formula": "",
+  "options": [
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right",
+   "Stays top-left"
+  ],
+  "answer": 0,
+  "explain": "A vertical mirror swaps left and right, and rows stay the same.",
+  "kind": "concept",
+  "id": "abbfdcc2-afcf-4489-84d3-fb4e27c811be",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is flipped about its horizontal axis. An element at the top-right moves to:",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Bottom-right",
+   "Stays top-right"
+  ],
+  "answer": 2,
+  "explain": "A horizontal flip swaps top and bottom, and columns stay the same.",
+  "kind": "concept",
+  "id": "9c918536-44a9-49ff-8bd4-3d89b3979afe",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is rotated 180°. An element at the top-right corner moves to:",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-right",
+   "Bottom-left",
+   "Top-right"
+  ],
+  "answer": 2,
+  "explain": "A half-turn sends each corner to the diagonally opposite corner.",
+  "kind": "concept",
+  "id": "d2f40197-f207-4725-bfaf-25ba9a87143d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A whole figure is rotated 90° clockwise. An element at the bottom edge moves to the:",
+  "formula": "",
+  "options": [
+   "Right edge",
+   "Left edge",
+   "Top edge",
+   "Bottom edge"
+  ],
+  "answer": 1,
+  "explain": "Clockwise quarter-turn: top → right → bottom → left.",
+  "kind": "concept",
+  "id": "8834d4a1-9b4b-4dab-b321-e755586de4e5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A circle inside a square and the square swap roles (inner ↔ outer) each step. After 3 steps the circle is:",
+  "formula": "",
+  "options": [
+   "Inside",
+   "Outside",
+   "Half inside",
+   "Absent"
+  ],
+  "answer": 1,
+  "explain": "Inner/outer swap has period 2, so an odd step number gives the reverse of the start.",
+  "kind": "pattern",
+  "id": "62d4638d-060e-4ef1-88bf-d48509a68410",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot moves 1 corner anticlockwise each step from the top-right corner of a square. Where is it after 2 steps?",
+  "formula": "",
+  "options": [
+   "Bottom-right",
+   "Bottom-left",
+   "Top-left",
+   "Top-right"
+  ],
+  "answer": 1,
+  "explain": "Anticlockwise order: TR → TL → BL.",
+  "kind": "pattern",
+  "id": "6435fc3e-e9bb-4357-b5ad-7820074cc20b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "2, 5, 4, 7, 6, 9, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "10",
+   "8",
+   "11",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "Alternate terms: 2,4,6,(8) and 5,7,9; each rises by 2. The 7th term is 8.",
+  "kind": "pattern",
+  "id": "ac81f506-4b0b-4f3b-91f1-03dca58bbf59",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "A, Z, B, Y, C, X, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "W",
+   "E",
+   "D",
+   "V"
+  ],
+  "answer": 2,
+  "explain": "Odd places run forward A,B,C,(D); even places run backward Z,Y,X. The 7th term is D.",
+  "kind": "pattern",
+  "id": "402caa90-f574-463f-a559-e622d5f9ac2a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "ABCABCABC… repeats forever. Which letter is the 20th term?",
+  "formula": "",
+  "options": [
+   "A",
+   "C",
+   "B",
+   "Cannot be found"
+  ],
+  "answer": 2,
+  "explain": "The cycle length is 3 and 20 = 18 + 2, so the 20th term equals the 2nd term, B.",
+  "kind": "pattern",
+  "id": "1bfc7056-2e2c-4e3e-82b1-f9e338c24a2b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "4, 8, 6, 12, 10, 20, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "22",
+   "16",
+   "40",
+   "18"
+  ],
+  "answer": 3,
+  "explain": "The operations alternate ×2, −2, ×2, −2, ×2, −2. So 20 − 2 = 18.",
+  "kind": "pattern",
+  "id": "c59028d4-1bfc-45a1-a5e6-fb2dbf1554eb",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "1, 8, 9, 64, 25, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "216",
+   "125",
+   "100",
+   "36"
+  ],
+  "answer": 0,
+  "explain": "Odd places are squares (1², 3², 5²); even places are cubes (2³, 4³, 6³). 6³ = 216.",
+  "kind": "pattern",
+  "id": "a7f46994-9a8e-4380-89f2-5dc2b4466b41",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "In a series whose alternate terms follow different rules, what is the best first step?",
+  "formula": "",
+  "options": [
+   "Add all the terms",
+   "Split into odd- and even-place subseries",
+   "Find the average of the terms",
+   "Check only the last two terms"
+  ],
+  "answer": 1,
+  "explain": "Separate the odd-place and even-place terms and find each rule on its own.",
+  "kind": "concept",
+  "id": "b001a449-1901-4379-80e2-8d41b3a20e21",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "B, D, C, E, D, F, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "G",
+   "D",
+   "E",
+   "C"
+  ],
+  "answer": 2,
+  "explain": "Odd places go B,C,D,(E); even places go D,E,F. Each subseries steps +1.",
+  "kind": "pattern",
+  "id": "6d5ca004-ebc5-4b21-9970-ec9183c42285",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "1, 100, 2, 90, 3, 80, 4, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "60",
+   "75",
+   "85",
+   "70"
+  ],
+  "answer": 3,
+  "explain": "One subseries rises by 1 (1,2,3,4); the other falls by 10 (100,90,80,70).",
+  "kind": "pattern",
+  "id": "a7fa972b-4404-4783-b6d0-58dcd5fa7344",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "A block of 5 terms repeats endlessly. The 23rd term equals which term of the block?",
+  "formula": "",
+  "options": [
+   "2nd",
+   "3rd",
+   "4th",
+   "5th"
+  ],
+  "answer": 1,
+  "explain": "Terms 5 places apart are equal, and 23 = 20 + 3. So the 23rd equals the 3rd.",
+  "kind": "concept",
+  "id": "9f57d746-8300-4fb6-ad69-abe5fcb0e681",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "3, 9, 4, 16, 5, 25, 6, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "30",
+   "49",
+   "36",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "The pattern alternates n and n²: 3,3²; 4,4²; 5,5²; 6,6². So the next term is 36.",
+  "kind": "pattern",
+  "id": "aa70b5c6-255e-418b-8c16-2b9ff9f925e2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "3, 6, 7, 14, 15, 30, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "60",
+   "31",
+   "32",
+   "45"
+  ],
+  "answer": 1,
+  "explain": "The operations alternate ×2, +1, ×2, +1, ×2, +1. So 30 + 1 = 31.",
+  "kind": "pattern",
+  "id": "5322e3f1-24b4-4231-965f-665c2de5c090",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "Each step a square's side doubles. By what factor does its area change per step?",
+  "formula": "Area ∝ (side)²",
+  "options": [
+   "×2",
+   "×4",
+   "×8",
+   "×6"
+  ],
+  "answer": 1,
+  "explain": "Area varies as the square of the side, so doubling the side gives ×4.",
+  "kind": "concept",
+  "id": "e9e9fade-8d85-46b7-b33a-c67e79d8907d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A figure is enlarged so every length becomes 3 times. What happens to its angles?",
+  "formula": "",
+  "options": [
+   "Become 3 times",
+   "Become one-third",
+   "Stay unchanged",
+   "Increase by 3°"
+  ],
+  "answer": 2,
+  "explain": "Enlargement keeps the shape similar, so angles stay the same.",
+  "kind": "concept",
+  "id": "4e056dce-99cb-4f68-9bb8-ae135129410b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes of a shape in order: 1, 2, 1, 3, 1, 4, 1, ? Next size is:",
+  "formula": "",
+  "options": [
+   "1",
+   "4",
+   "5",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Alternate terms are 1; the other terms rise 2, 3, 4, so the next is 5.",
+  "kind": "pattern",
+  "id": "c9d875c0-c1cb-4502-a5f1-ed21bb2bff20",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Side lengths of successive squares: 1, 2, 4, 7, 11, ? Next side is:",
+  "formula": "",
+  "options": [
+   "15",
+   "16",
+   "17",
+   "18"
+  ],
+  "answer": 1,
+  "explain": "Differences are 1, 2, 3, 4, so the next difference is 5 and 11 + 5 = 16.",
+  "kind": "pattern",
+  "id": "f5bc428a-b3c6-4a1c-afbe-7a9f46d32cf1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A shape shrinks to half its side each step. After 3 steps its side is what fraction of the original?",
+  "formula": "(½)³",
+  "options": [
+   "1/6",
+   "1/8",
+   "1/4",
+   "3/2"
+  ],
+  "answer": 1,
+  "explain": "Halving 3 times gives ½ × ½ × ½ = 1/8, not 3 × ½.",
+  "kind": "result",
+  "id": "3317950b-4082-46b8-8ba8-d00a392109a4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A circle's radius is tripled in each step. By what factor does its circumference change per step?",
+  "formula": "C = 2πr",
+  "options": [
+   "×3",
+   "×6",
+   "×9",
+   "×27"
+  ],
+  "answer": 0,
+  "explain": "Circumference is directly proportional to radius, so tripling r triples C.",
+  "kind": "concept",
+  "id": "47e47e23-500c-4c0a-b29f-f54d0f8865ee",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sides of successive polygons: 3, 4, 6, 9, ? How many sides does the next polygon have?",
+  "formula": "",
+  "options": [
+   "12",
+   "13",
+   "14",
+   "15"
+  ],
+  "answer": 1,
+  "explain": "Differences rise 1, 2, 3, 4, so the next term is 9 + 4 = 13.",
+  "kind": "pattern",
+  "id": "c26b191f-e92a-43c8-8b94-4088ab961228",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "All corners of a regular pentagon are cut off by straight cuts. How many sides does the new figure have?",
+  "formula": "New sides = n + n = 2n",
+  "options": [
+   "5",
+   "8",
+   "10",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "Each cut corner adds one new side, so 5 + 5 = 10.",
+  "kind": "concept",
+  "id": "24473946-c570-45dd-a50b-c31ee8fae7da",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "An equilateral triangle is placed on a square, sharing one full side. How many sides does the combined outline have?",
+  "formula": "3 + 4 − 2 = 5",
+  "options": [
+   "7",
+   "6",
+   "5",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "The shared side disappears from both shapes, giving a 'house' pentagon.",
+  "kind": "result",
+  "id": "5c67e6a5-0c65-484d-a8a8-5157ffb27eac",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Sides in successive figures: 3, 6, 12, ? How many sides does the next figure have?",
+  "formula": "",
+  "options": [
+   "15",
+   "18",
+   "20",
+   "24"
+  ],
+  "answer": 3,
+  "explain": "The side count doubles at each step, so 12 × 2 = 24.",
+  "kind": "pattern",
+  "id": "4679bc65-3af5-47f9-95b9-75a0b007b595",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Pick the odd one out: pentagon, heptagon, nonagon, hexagon.",
+  "formula": "",
+  "options": [
+   "Pentagon",
+   "Heptagon",
+   "Hexagon",
+   "Nonagon"
+  ],
+  "answer": 2,
+  "explain": "Hexagon has an even number of sides (6); the others have odd numbers (5, 7, 9).",
+  "kind": "exception",
+  "id": "d50800cf-0334-495b-a3aa-81c4ea70f0fb",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "An arrow points up and turns 90° clockwise each step. Where does it point after 3 steps?",
+  "formula": "",
+  "options": [
+   "Right",
+   "Down",
+   "Up",
+   "Left"
+  ],
+  "answer": 3,
+  "explain": "Up → right → down → left, so after 3 steps it points left.",
+  "kind": "pattern",
+  "id": "8e740b02-1e9a-4a24-ab85-63d4d41d958a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "An arrow points up and turns 45° anticlockwise each step. Where does it point after 3 steps?",
+  "formula": "",
+  "options": [
+   "Down-left",
+   "Down-right",
+   "Up-right",
+   "Left"
+  ],
+  "answer": 0,
+  "explain": "Up → up-left → left → down-left (3 × 45° = 135°).",
+  "kind": "pattern",
+  "id": "fa92da51-7be3-46de-99ca-75345467467e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Sides of successive polygons: 3, 4, 7, 11, ? How many sides does the next polygon have?",
+  "formula": "",
+  "options": [
+   "15",
+   "16",
+   "18",
+   "19"
+  ],
+  "answer": 2,
+  "explain": "Each term is the sum of the previous two, so 7 + 11 = 18.",
+  "kind": "pattern",
+  "id": "e5f17582-b024-4081-b7af-cdef25b00399",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Sides of successive polygons: 3, 5, 4, 6, 5, ? How many sides does the next polygon have?",
+  "formula": "",
+  "options": [
+   "4",
+   "6",
+   "7",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "The steps alternate +2, −1, so after 5 comes 5 + 2 = 7.",
+  "kind": "pattern",
+  "id": "63cd26df-7044-47fe-9c56-25822394e9ed",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Each step doubles the side count: square → octagon → ? How many sides does the next figure have?",
+  "formula": "",
+  "options": [
+   "12",
+   "16",
+   "24",
+   "32"
+  ],
+  "answer": 1,
+  "explain": "4 → 8 → 16, so the next figure has 16 sides.",
+  "kind": "pattern",
+  "id": "e19fa705-2dac-45c4-a34d-26ba9a8b0c9f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "The midpoints of consecutive sides of a non-square rectangle are joined. The inner figure is a:",
+  "formula": "",
+  "options": [
+   "Rectangle",
+   "Square",
+   "Rhombus",
+   "Equilateral triangle"
+  ],
+  "answer": 2,
+  "explain": "Each side of the inner figure is half a diagonal, and the diagonals are equal, so all four sides are equal. It is a rhombus.",
+  "kind": "result",
+  "id": "3cc458e7-1e23-4d07-88c9-8413a5690a88",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Two identical equilateral triangles are joined along a full common side. The figure formed is a:",
+  "formula": "",
+  "options": [
+   "Square",
+   "Rhombus",
+   "Trapezium",
+   "Hexagon"
+  ],
+  "answer": 1,
+  "explain": "All four outer sides are equal, but the angles are 60° and 120°, so it is a rhombus.",
+  "kind": "result",
+  "id": "7a2c7e4d-dd4e-4460-8c1a-16ef9304fda1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Rule: 'Only members may enter.' Ram entered. Then Ram is:",
+  "formula": "",
+  "options": [
+   "A member",
+   "Not a member",
+   "Possibly a member",
+   "A guest"
+  ],
+  "answer": 0,
+  "explain": "'Only members may enter' means entry implies membership.",
+  "kind": "concept",
+  "id": "f0270805-eafa-47d9-91e1-8d1b43eca39c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'No red item is round.' An item is round. Then it is:",
+  "formula": "",
+  "options": [
+   "Red",
+   "Not red",
+   "Square",
+   "Cannot be determined"
+  ],
+  "answer": 1,
+  "explain": "Red and round are mutually exclusive, so a round item cannot be red.",
+  "kind": "concept",
+  "id": "840c392f-56fc-4ebb-8b73-806ad141f978",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'Unless a form is signed, it is void.' A form is not signed. It is:",
+  "formula": "",
+  "options": [
+   "Valid",
+   "Possibly valid",
+   "Void",
+   "Signed later"
+  ],
+  "answer": 2,
+  "explain": "'Unless signed → void' means not signed gives void.",
+  "kind": "concept",
+  "id": "26b11483-c33a-4efa-a442-a281295d3e3f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: output only if the number is odd and greater than 10. Which is output?",
+  "formula": "",
+  "options": [
+   "9",
+   "12",
+   "8",
+   "13"
+  ],
+  "answer": 3,
+  "explain": "Both conditions must hold. Only 13 is odd and above 10.",
+  "kind": "concept",
+  "id": "f3afc937-2037-4ec1-8b30-a044806d1166",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: each letter is replaced by its mirror letter (A↔Z, B↔Y…). 'BAD' becomes:",
+  "formula": "",
+  "options": [
+   "YZW",
+   "YAW",
+   "ZYC",
+   "YZC"
+  ],
+  "answer": 0,
+  "explain": "B↔Y, A↔Z, D↔W, since the letter positions sum to 27.",
+  "kind": "pattern",
+  "id": "645cb6d6-5d90-48f8-abd8-097dad230845",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: replace the number with the product of its digits. Input 63 gives:",
+  "formula": "",
+  "options": [
+   "9",
+   "36",
+   "18",
+   "24"
+  ],
+  "answer": 2,
+  "explain": "6 × 3 = 18.",
+  "kind": "pattern",
+  "id": "d9d43c91-1933-4900-a937-9b57e60eafc4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: reverse the word, then change its first letter to the next letter. 'BAT' becomes:",
+  "formula": "",
+  "options": [
+   "TAB",
+   "UAB",
+   "UBA",
+   "CAT"
+  ],
+  "answer": 1,
+  "explain": "BAT reversed is TAB. Then T becomes U, giving UAB.",
+  "kind": "pattern",
+  "id": "083c2d2c-88cb-4a9c-b712-c1d6ce665c37",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: reject an item that is both small and red. Which is rejected?",
+  "formula": "",
+  "options": [
+   "Small blue",
+   "Large red",
+   "Small red",
+   "Large blue"
+  ],
+  "answer": 2,
+  "explain": "Rejection needs both properties together: small and red.",
+  "kind": "concept",
+  "id": "16d5dbce-3dad-4eff-99f2-e20fa624cdb7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: a number passes if it is a perfect square or a multiple of 5. Which fails?",
+  "formula": "",
+  "options": [
+   "16",
+   "25",
+   "30",
+   "18"
+  ],
+  "answer": 3,
+  "explain": "18 is neither a perfect square nor a multiple of 5.",
+  "kind": "concept",
+  "id": "e4805ab5-6b89-4c01-8ac2-7be4c0c21f35",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: exactly one of switches A and B is on. A is off. Then B is:",
+  "formula": "",
+  "options": [
+   "On",
+   "Off",
+   "Faulty",
+   "Cannot be determined"
+  ],
+  "answer": 0,
+  "explain": "'Exactly one' means one is on and the other off, so B is on.",
+  "kind": "concept",
+  "id": "a42cfb7b-fbaa-408b-8a71-32e9369b286e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: pair (a, b) becomes (b, a + b). Input (2, 3) gives:",
+  "formula": "",
+  "options": [
+   "(3, 5)",
+   "(5, 3)",
+   "(3, 6)",
+   "(2, 5)"
+  ],
+  "answer": 0,
+  "explain": "New first = b = 3. New second = 2 + 3 = 5.",
+  "kind": "pattern",
+  "id": "c5f0fab1-d33c-417a-864e-929c8262b480",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: drop alternate letters, starting with the first letter. 'PLANET' becomes:",
+  "formula": "",
+  "options": [
+   "PAE",
+   "PLA",
+   "LNT",
+   "ANT"
+  ],
+  "answer": 2,
+  "explain": "Drop P, A, E. The letters L, N, T remain.",
+  "kind": "pattern",
+  "id": "4e90772e-f41b-442b-b172-539c82e3e97c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: replace the number by its count of factors. Input 12 gives:",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "6",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "The factors of 12 are 1, 2, 3, 4, 6, 12, which is 6.",
+  "kind": "pattern",
+  "id": "a7e74aad-89e0-4ebd-a071-c03e17c20592",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "The smallest rotation (>0°) that maps a square onto itself is:",
+  "formula": "360°/n for a regular n-gon",
+  "options": [
+   "45°",
+   "90°",
+   "180°",
+   "120°"
+  ],
+  "answer": 1,
+  "explain": "A square has 4-fold symmetry, so 360°/4 = 90°.",
+  "kind": "fact",
+  "id": "8d677564-b42f-4fea-b23e-b7ba7183802a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The smallest rotation (>0°) that maps a regular hexagon onto itself is:",
+  "formula": "360°/n",
+  "options": [
+   "30°",
+   "90°",
+   "60°",
+   "120°"
+  ],
+  "answer": 2,
+  "explain": "Six-fold symmetry gives 360°/6 = 60°.",
+  "kind": "fact",
+  "id": "35b96989-46c7-418f-ac26-71d19120c4a9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The smallest rotation (>0°) mapping a non-square rectangle onto itself is:",
+  "formula": "",
+  "options": [
+   "90°",
+   "360°",
+   "45°",
+   "180°"
+  ],
+  "answer": 3,
+  "explain": "A rectangle has only 2-fold rotational symmetry, so 180°.",
+  "kind": "fact",
+  "id": "940cd8cc-af96-4695-b963-4ebadfe1a884",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The letter 'b' is rotated 180° in its plane. It looks like:",
+  "formula": "",
+  "options": [
+   "d",
+   "q",
+   "p",
+   "b"
+  ],
+  "answer": 1,
+  "explain": "Rotating 180° swaps top and bottom and left and right, so b becomes q.",
+  "kind": "result",
+  "id": "f165d1cf-5010-4ab4-a10a-45316206d3ef",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The letter 'u' is rotated 180° in its plane. It looks like:",
+  "formula": "",
+  "options": [
+   "n",
+   "c",
+   "u",
+   "∩ with a tail"
+  ],
+  "answer": 0,
+  "explain": "A 180° turn inverts the bowl of 'u' into 'n'.",
+  "kind": "result",
+  "id": "3bcc3a56-dbd4-401e-b6b3-abb70ee6a1a5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The letter 'M' is rotated 180° in its plane. It looks like:",
+  "formula": "",
+  "options": [
+   "M",
+   "N",
+   "E",
+   "W"
+  ],
+  "answer": 3,
+  "explain": "A 180° turn inverts M's peaks into W's valleys.",
+  "kind": "result",
+  "id": "831f0bdc-935b-4d07-a7bb-5158e04fbcfe",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The letter 'T' is rotated 180° in its plane. It looks like:",
+  "formula": "",
+  "options": [
+   "⊢ (stem to the right)",
+   "⊥ (inverted T)",
+   "T (unchanged)",
+   "⊣ (stem to the left)"
+  ],
+  "answer": 1,
+  "explain": "The bar moves to the bottom and the stem points up, giving ⊥.",
+  "kind": "result",
+  "id": "d975436d-8db6-4573-9d81-4a0764bd0b86",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Rotating a figure 450° clockwise is the same as rotating it:",
+  "formula": "450° − 360° = 90°",
+  "options": [
+   "90° clockwise",
+   "90° anticlockwise",
+   "180° clockwise",
+   "45° clockwise"
+  ],
+  "answer": 0,
+  "explain": "A full 360° turn changes nothing, so 450° leaves 90° clockwise.",
+  "kind": "concept",
+  "id": "716d8bfa-20e5-42e9-9059-241bc82c8d83",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A figure turns 90° clockwise, then 270° clockwise. The net effect is:",
+  "formula": "90° + 270° = 360°",
+  "options": [
+   "90° anticlockwise",
+   "180° turn",
+   "Back to original position",
+   "270° clockwise"
+  ],
+  "answer": 2,
+  "explain": "The total is 360°, a full turn, so the figure is unchanged.",
+  "kind": "concept",
+  "id": "da96fbfe-6e1a-444e-bb27-5b250b94968d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points South-East. It is rotated 90° anticlockwise. It now points:",
+  "formula": "",
+  "options": [
+   "South-West",
+   "North-East",
+   "North-West",
+   "East"
+  ],
+  "answer": 1,
+  "explain": "Anticlockwise from SE goes to E (45°) and then NE (90°).",
+  "kind": "result",
+  "id": "dcaa9a6d-eaac-4466-a411-2dbad0c77f4a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points South-West. It is rotated 135° clockwise. It now points:",
+  "formula": "",
+  "options": [
+   "North",
+   "North-West",
+   "East",
+   "West"
+  ],
+  "answer": 0,
+  "explain": "From SW clockwise: W (45°), NW (90°), N (135°).",
+  "kind": "result",
+  "id": "86923871-d839-4e8f-9aa5-773f8fe12a28",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Arrow series: N, SW, E, ? Each step turns 135° anticlockwise. Next?",
+  "formula": "",
+  "options": [
+   "North-East",
+   "South",
+   "North-West",
+   "West"
+  ],
+  "answer": 2,
+  "explain": "From E, 135° anticlockwise passes NE and N and reaches NW.",
+  "kind": "pattern",
+  "id": "94507839-636d-442f-afc5-96c482dacf9f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Arrow series: N, NW, W, ? Each step turns 45° anticlockwise. Next?",
+  "formula": "",
+  "options": [
+   "South-West",
+   "South",
+   "North-East",
+   "South-East"
+  ],
+  "answer": 0,
+  "explain": "Another 45° anticlockwise from W gives SW.",
+  "kind": "pattern",
+  "id": "2ac6fe50-33e6-4581-ae10-905fe3dc4e97",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow turns clockwise from North to South-West. The angle turned is:",
+  "formula": "",
+  "options": [
+   "135°",
+   "180°",
+   "225°",
+   "315°"
+  ],
+  "answer": 2,
+  "explain": "N to S is 180°, plus 45° more to SW, so 225°.",
+  "kind": "result",
+  "id": "369bd887-bcb9-4118-a28e-47ff5ae63c59",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow turns anticlockwise from East to North-West. The angle turned is:",
+  "formula": "",
+  "options": [
+   "135°",
+   "225°",
+   "90°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "E to N is 90°, plus 45° more to NW, so 135°.",
+  "kind": "result",
+  "id": "c2ea3129-5414-4a83-bf22-4322d84362dd",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A clock hand points to 3. It is rotated 90° anticlockwise. It now points to:",
+  "formula": "1 hour mark = 30°",
+  "options": [
+   "6",
+   "9",
+   "12",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "90° is 3 hour marks, so going back from 3 reaches 12.",
+  "kind": "result",
+  "id": "92458723-dea0-4f12-88bc-31d59ea9b3a0",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A clock hand points to 12. It is rotated 120° clockwise. It now points to:",
+  "formula": "1 hour mark = 30°",
+  "options": [
+   "3",
+   "5",
+   "6",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "120° ÷ 30° = 4 hour marks, so 12 → 4.",
+  "kind": "result",
+  "id": "fe7c287a-197b-4591-8c6f-168ef3480b9b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A clock hand points to 5. It is rotated 90° anticlockwise. It now points to:",
+  "formula": "1 hour mark = 30°",
+  "options": [
+   "2",
+   "8",
+   "3",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "90° is 3 hour marks, so going back from 5 reaches 2.",
+  "kind": "result",
+  "id": "a3a3b477-36dd-444d-8947-25c98ece8679",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A dot at the midpoint of a square's top side turns 90° anticlockwise. It is now at the midpoint of the:",
+  "formula": "",
+  "options": [
+   "Right side",
+   "Bottom side",
+   "Top side",
+   "Left side"
+  ],
+  "answer": 3,
+  "explain": "Anticlockwise 90° takes top to left (top → left → bottom → right).",
+  "kind": "result",
+  "id": "009230f1-0374-48d1-913d-6da516e6ba3c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A dot at the top-left corner of a square turns 270° clockwise. New corner?",
+  "formula": "270° cw = 90° acw",
+  "options": [
+   "Bottom-left",
+   "Bottom-right",
+   "Top-right",
+   "Top-left"
+  ],
+  "answer": 0,
+  "explain": "TL → TR → BR → BL in three clockwise quarter turns.",
+  "kind": "result",
+  "id": "512dbaca-b7bb-4b05-9514-5184582e553f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Number of dots in successive figures: 2, 3, 5, 7, 11, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "12",
+   "13",
+   "14",
+   "15"
+  ],
+  "answer": 1,
+  "explain": "The counts are consecutive primes, and the prime after 11 is 13.",
+  "kind": "pattern",
+  "id": "a1735dcd-a679-4893-a121-b649eeed21f6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of squares in successive figures: 2, 9, 28, 65, ? Find the next count.",
+  "formula": "n³ + 1",
+  "options": [
+   "124",
+   "126",
+   "130",
+   "126.5"
+  ],
+  "answer": 1,
+  "explain": "The terms are 1³+1, 2³+1, 3³+1, 4³+1, so the next is 5³+1 = 126.",
+  "kind": "pattern",
+  "id": "61a023ea-7cee-4262-bfd4-a348f06b5de6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Dots in successive figures: 1, 4, 9, 16, ? How many dots in the next figure?",
+  "formula": "n²",
+  "options": [
+   "20",
+   "24",
+   "25",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "Counts are perfect squares 1², 2², 3², 4²; next is 5² = 25.",
+  "kind": "pattern",
+  "id": "fa8a42d5-2a61-4b73-b0ec-9749349e113f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Rule: Fig 3 = elements of A not present in B. A = {●,▲,■,◆}, B = {▲,◆,★}. Elements in Fig 3?",
+  "formula": "A − B",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "Only ● and ■ are in A but not in B; ★ is not in A.",
+  "kind": "pattern",
+  "id": "65e2832b-2708-4716-8f69-888a04adfee4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Lines in figures: 1, 3, 7, 15, ? Each figure doubles the previous count and adds 1. Next is:",
+  "formula": "aₙ₊₁ = 2aₙ + 1",
+  "options": [
+   "23",
+   "29",
+   "30",
+   "31"
+  ],
+  "answer": 3,
+  "explain": "2×15 + 1 = 31; differences are 2, 4, 8, 16.",
+  "kind": "pattern",
+  "id": "0c9a3330-83bd-441d-8c96-e18866a71728",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Elements in figures: 2, 6, 12, 20, ? Added elements are 4, 6, 8, … Next is:",
+  "formula": "n(n+1)",
+  "options": [
+   "28",
+   "30",
+   "32",
+   "36"
+  ],
+  "answer": 1,
+  "explain": "Additions rise by 2: 4, 6, 8, 10, so 20 + 10 = 30.",
+  "kind": "pattern",
+  "id": "31fc2d29-e136-4f26-be6a-6fc988bfa2d4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Rule: Fig 3 elements = Fig 1 × Fig 2 (counts). Sets: (2, 3, 6), (3, 4, ?). Find ?",
+  "formula": "F₃ = F₁ × F₂",
+  "options": [
+   "7",
+   "12",
+   "14",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "The first set gives 2×3 = 6, so the second is 3×4 = 12.",
+  "kind": "pattern",
+  "id": "569e845e-abdc-4501-976a-4d46245cc1f7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Number of lines: 1, 2, 6, 24, ? Each figure multiplies by 2, 3, 4, … Next is:",
+  "formula": "n!",
+  "options": [
+   "48",
+   "96",
+   "120",
+   "144"
+  ],
+  "answer": 2,
+  "explain": "Multipliers are ×2, ×3, ×4, so the next is ×5: 24×5 = 120.",
+  "kind": "pattern",
+  "id": "a1ada68e-ab4d-461d-a652-ac432f6fa587",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Elements in figures: 48, 24, 12, 6, ? Each step deletes half of the elements. Next is:",
+  "formula": "aₙ₊₁ = aₙ/2",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Half of 6 is deleted, leaving 3.",
+  "kind": "pattern",
+  "id": "3edbf54d-6c78-4236-ba20-2c0b658014ec",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Elements in figures: 2, 3, 5, 6, 8, ? Additions alternate between two amounts. Next is:",
+  "formula": "+1, +2 alternately",
+  "options": [
+   "9",
+   "10",
+   "11",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Additions go +1, +2, +1, +2, so 8 + 1 = 9.",
+  "kind": "pattern",
+  "id": "f8347202-294d-4351-9e40-7d9d04135e27",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Overlay (OR) rule: a region shaded in only one of the two figures appears in the result as?",
+  "formula": "OR: shaded if shaded in either",
+  "options": [
+   "Shaded",
+   "White",
+   "Half-shaded",
+   "Outline only"
+  ],
+  "answer": 0,
+  "explain": "OR keeps shading from either figure; only regions white in both stay white.",
+  "kind": "concept",
+  "id": "2fc64fd2-6396-4a3d-b9f2-955713196a6e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Overlay (AND) rule: a region shaded in only one of the two figures becomes?",
+  "formula": "AND: shaded only if shaded in both",
+  "options": [
+   "Shaded",
+   "White",
+   "Grey",
+   "Dotted"
+  ],
+  "answer": 1,
+  "explain": "AND keeps only regions shaded in both figures; all others are white.",
+  "kind": "concept",
+  "id": "ae042fd0-c7b9-4213-b258-70624758c9e6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Figure A minus Figure B: a region shaded only in B becomes?",
+  "formula": "A − B: shaded only if in A and not in B",
+  "options": [
+   "Shaded",
+   "Grey",
+   "Outline only",
+   "White"
+  ],
+  "answer": 3,
+  "explain": "Subtraction removes B's shading from A. A B-only region was never in A, so it is white.",
+  "kind": "concept",
+  "id": "312860a5-a780-4b78-a844-5100b9b8a922",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A figure is reflected in a vertical mirror. Its top-left quadrant is shaded. Which quadrant is shaded in the image?",
+  "formula": "",
+  "options": [
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right",
+   "Top-left"
+  ],
+  "answer": 0,
+  "explain": "A vertical mirror swaps left and right and keeps top and bottom.",
+  "kind": "concept",
+  "id": "b0f7e57f-29fb-46b8-b36e-47148c2a3c90",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A figure is reflected in a horizontal mirror. Its top-right quadrant is shaded. Which quadrant is shaded in the image?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Bottom-right",
+   "Top-right"
+  ],
+  "answer": 2,
+  "explain": "A horizontal mirror swaps top and bottom and keeps left and right.",
+  "kind": "concept",
+  "id": "c2bee00a-337f-4ba3-9467-d55f193c8712",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Figure is rotated 180°. The top-right quadrant was shaded. Which quadrant is shaded now?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-right",
+   "Bottom-left",
+   "Top-right"
+  ],
+  "answer": 2,
+  "explain": "A 180° turn sends each quadrant to the diagonally opposite one: TR goes to BL.",
+  "kind": "concept",
+  "id": "0ca237f7-a739-41f9-b1d5-21fb84cd757f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A circle of 8 equal parts has 3 shaded. Its colour-inverted (negative) figure has how many parts shaded?",
+  "formula": "Negative: shaded ↔ white",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "Inversion turns shaded parts white and white parts shaded: 8 − 3 = 5.",
+  "kind": "concept",
+  "id": "f7fe68ac-2219-46da-84b9-b6792f96387f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 1, 2, 4, … (doubling each time). How many are shaded in the next figure?",
+  "formula": "",
+  "options": [
+   "6",
+   "7",
+   "8",
+   "16"
+  ],
+  "answer": 2,
+  "explain": "The count doubles each step: 1, 2, 4, 8.",
+  "kind": "pattern",
+  "id": "62321bc7-4bdd-49ef-a750-c43b62f288bf",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 2, 3, 5, 8, … Next figure's shaded parts?",
+  "formula": "Each = sum of previous two",
+  "options": [
+   "11",
+   "12",
+   "13",
+   "10"
+  ],
+  "answer": 2,
+  "explain": "Fibonacci-type rule: 5 + 8 = 13.",
+  "kind": "pattern",
+  "id": "f5e350ce-9c7d-4eea-ad9a-676cc0c0b0f2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shade cycle: white → light grey → dark grey → black → repeat. What is the shade of the 6th figure?",
+  "formula": "",
+  "options": [
+   "White",
+   "Light grey",
+   "Dark grey",
+   "Black"
+  ],
+  "answer": 1,
+  "explain": "The cycle has length 4. The 5th figure is white, so the 6th is light grey.",
+  "kind": "pattern",
+  "id": "108e9cda-2bbd-4d62-a07a-db293f6a5e78",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 1, 3, 2, 4, 3, … Next figure?",
+  "formula": "+2, −1, +2, −1 …",
+  "options": [
+   "2",
+   "4",
+   "5",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "The steps alternate +2 and −1, so after 3 comes +2 = 5.",
+  "kind": "pattern",
+  "id": "268613b3-22e1-43d1-9c4a-53ad3fa9f2fc",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Quadrants get shaded cumulatively in clockwise order from top-left: TL, then TR, then BR. Newly shaded in figure 4?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Top-right",
+   "Bottom-right"
+  ],
+  "answer": 1,
+  "explain": "The clockwise order is TL, TR, BR, BL, so the fourth quadrant added is bottom-left.",
+  "kind": "pattern",
+  "id": "b1216dcb-8272-4659-a9a6-8923c0c7a623",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "The top half of a circle is shaded. After a 90° anticlockwise rotation, which half is shaded?",
+  "formula": "",
+  "options": [
+   "Right",
+   "Bottom",
+   "Top",
+   "Left"
+  ],
+  "answer": 3,
+  "explain": "Rotating anticlockwise by 90° takes top to left.",
+  "kind": "concept",
+  "id": "12e747f5-3096-41e8-a288-2a4773dbe592",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A dot at top-left moves 1 corner clockwise per step around a square. Where is it after 7 steps?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Top-right",
+   "Bottom-right",
+   "Bottom-left"
+  ],
+  "answer": 3,
+  "explain": "7 mod 4 = 3 corners clockwise: TL→TR→BR→BL.",
+  "kind": "pattern",
+  "id": "9953e1f2-158a-48c0-bf9d-e8d4c1beb20e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is rotated 90° anticlockwise. An element on its top edge moves to the:",
+  "formula": "",
+  "options": [
+   "Right edge",
+   "Left edge",
+   "Bottom edge",
+   "Top edge"
+  ],
+  "answer": 1,
+  "explain": "Anticlockwise 90°: top→left, left→bottom, bottom→right, right→top.",
+  "kind": "concept",
+  "id": "8b2f5e04-6d14-43e4-9ddd-288e86e03cf5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is reflected in the diagonal joining top-left and bottom-right. Top-right element goes to:",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-right",
+   "Bottom-left",
+   "Stays at top-right"
+  ],
+  "answer": 2,
+  "explain": "A reflection in the TL–BR diagonal swaps the TR and BL corners.",
+  "kind": "concept",
+  "id": "79791c72-0f29-4205-a13e-ea424ed801a1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is rotated 90° anticlockwise. An element at the bottom-left corner moves to:",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-right",
+   "Top-right",
+   "Bottom-left"
+  ],
+  "answer": 1,
+  "explain": "Anticlockwise 90° corners: TL→BL, BL→BR, BR→TR, TR→TL.",
+  "kind": "concept",
+  "id": "bc0c5fa9-5ead-46c4-aed0-0124c6e33a2f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot is in cell 2 of a column of 5 cells (top = 1). It moves 1 down per step, wrapping. Cell after 4 steps?",
+  "formula": "",
+  "options": [
+   "Cell 1",
+   "Cell 5",
+   "Cell 3",
+   "Cell 2"
+  ],
+  "answer": 0,
+  "explain": "2 + 4 = 6, which wraps around to cell 1.",
+  "kind": "pattern",
+  "id": "01109dd7-4f8a-442e-85e9-5a5e971ce8c7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "Row A B C: each step every symbol moves one place right and the last wraps to the first. After 2 steps?",
+  "formula": "",
+  "options": [
+   "C A B",
+   "A C B",
+   "B C A",
+   "C B A"
+  ],
+  "answer": 2,
+  "explain": "ABC → CAB → BCA.",
+  "kind": "pattern",
+  "id": "ded44b3e-8e45-4168-bb5d-73e914bf5170",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "Row A B C D: each step the first symbol goes to the end. Arrangement after 3 steps?",
+  "formula": "",
+  "options": [
+   "C D A B",
+   "D A B C",
+   "B C D A",
+   "A B C D"
+  ],
+  "answer": 1,
+  "explain": "ABCD → BCDA → CDAB → DABC.",
+  "kind": "pattern",
+  "id": "f13b1280-8262-4505-b88f-bbf90a032af9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot at top-left moves 1 corner clockwise, then 1 anticlockwise, alternately. Position after 4 steps?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right"
+  ],
+  "answer": 0,
+  "explain": "Each clockwise/anticlockwise pair cancels, so after 4 steps it is back at the start.",
+  "kind": "pattern",
+  "id": "b9ea455b-195b-4619-94d3-5154526d20d7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot starts at vertex 1 of a regular pentagon (numbered clockwise) and moves 1 vertex clockwise per step. Vertex after 7 steps?",
+  "formula": "",
+  "options": [
+   "Vertex 2",
+   "Vertex 3",
+   "Vertex 4",
+   "Vertex 5"
+  ],
+  "answer": 1,
+  "explain": "Net shift is 7 mod 5 = 2, so 1 + 2 = vertex 3.",
+  "kind": "pattern",
+  "id": "45226576-906f-4dc8-80d8-3df07c184b22",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "An arrow points North and turns 135° clockwise each step. Its direction after 2 steps?",
+  "formula": "",
+  "options": [
+   "East",
+   "South-west",
+   "South-east",
+   "West"
+  ],
+  "answer": 3,
+  "explain": "2 × 135° = 270° clockwise from North, which is West.",
+  "kind": "pattern",
+  "id": "aed642ef-f8a9-4766-be82-75446e150831",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot starts at top-left of a 3×3 grid and moves one cell diagonally per step, reversing at corners. After 3 steps?",
+  "formula": "",
+  "options": [
+   "Center",
+   "Top-left",
+   "Bottom-right",
+   "Top-right"
+  ],
+  "answer": 0,
+  "explain": "TL → center → BR → back to center.",
+  "kind": "pattern",
+  "id": "469c9175-f10d-4a06-b534-41b8d36999a6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is flipped about the vertical axis, then about the horizontal axis. Bottom-left element ends at:",
+  "formula": "",
+  "options": [
+   "Bottom-left",
+   "Bottom-right",
+   "Top-left",
+   "Top-right"
+  ],
+  "answer": 3,
+  "explain": "BL→BR→TR. Two perpendicular flips equal a 180° rotation.",
+  "kind": "concept",
+  "id": "4aeb4ff0-681e-4f4d-8d58-53341c1b1a27",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot is in cell 2 of a row of 4 cells. It moves 1 cell left per step, wrapping around. Cell after 3 steps?",
+  "formula": "",
+  "options": [
+   "Cell 1",
+   "Cell 2",
+   "Cell 3",
+   "Cell 4"
+  ],
+  "answer": 2,
+  "explain": "2→1→4→3, so it ends in cell 3.",
+  "kind": "pattern",
+  "id": "047b5509-6837-45fa-8264-f88090de8c9e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "2, 6, 4, 12, 8, 24, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "48",
+   "32",
+   "16",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "Odd places 2, 4, 8 double → 16; even places 6, 12, 24 also double.",
+  "kind": "pattern",
+  "id": "0b9218a7-939b-4418-a2c9-910c315d7366",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "2, 4, 8, 10, 20, 22, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "24",
+   "44",
+   "42",
+   "46"
+  ],
+  "answer": 1,
+  "explain": "Operations alternate +2, ×2, +2, ×2, … so 22 × 2 = 44.",
+  "kind": "pattern",
+  "id": "1a757650-97dd-4ea3-9054-3cdcc7605fe5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "A, 2, C, 4, E, 6, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "F",
+   "8",
+   "G",
+   "H"
+  ],
+  "answer": 2,
+  "explain": "Letters at odd places skip one (A, C, E, G); numbers at even places go 2, 4, 6.",
+  "kind": "pattern",
+  "id": "5836a546-cbbf-4742-be8b-e1bbc38c7384",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "A block of 6 terms repeats endlessly. The 42nd term equals which term of the block?",
+  "formula": "",
+  "options": [
+   "1st",
+   "6th",
+   "5th",
+   "2nd"
+  ],
+  "answer": 1,
+  "explain": "42 is a multiple of 6 (remainder 0), so it is the last term of the block.",
+  "kind": "concept",
+  "id": "2a9c8ca4-ab51-4951-9768-96acea4a329d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "10, 15, 12, 17, 14, 19, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "21",
+   "18",
+   "24",
+   "16"
+  ],
+  "answer": 3,
+  "explain": "Odd places fall by 2 only: 10, 12, 14 → 16; even places 15, 17, 19 rise by 2.",
+  "kind": "pattern",
+  "id": "114d2c56-4a6e-4076-ace4-a8519830205f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules"
+ },
+ {
+  "prompt": "Rule: 'If a bag is red, it is large.' A bag is not red. Then the bag is:",
+  "formula": "",
+  "options": [
+   "Not large",
+   "Large",
+   "Small",
+   "Size cannot be determined"
+  ],
+  "answer": 3,
+  "explain": "Denying the antecedent proves nothing; a non-red bag may or may not be large.",
+  "kind": "concept",
+  "id": "93d44d5b-9886-4767-bf1c-bd91f9322905",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'A student gets a prize only if punctual.' Ravi is not punctual. Then Ravi:",
+  "formula": "",
+  "options": [
+   "Gets a prize",
+   "Gets no prize",
+   "May or may not get one",
+   "Is absent"
+  ],
+  "answer": 1,
+  "explain": "Prize → punctual, so not punctual → no prize (contrapositive).",
+  "kind": "concept",
+  "id": "b929034e-3f9d-4ffc-bfad-3917d1de3337",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: each letter is replaced by its position number in the alphabet. 'CAB' becomes:",
+  "formula": "",
+  "options": [
+   "213",
+   "321",
+   "312",
+   "123"
+  ],
+  "answer": 2,
+  "explain": "C=3, A=1, B=2 gives 312.",
+  "kind": "pattern",
+  "id": "230785ae-a2f7-4070-b5ea-6101edfc73d2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: arrange the digits in descending order. Input 2961 gives:",
+  "formula": "",
+  "options": [
+   "9621",
+   "1269",
+   "9612",
+   "9261"
+  ],
+  "answer": 0,
+  "explain": "Descending digits: 9, 6, 2, 1.",
+  "kind": "pattern",
+  "id": "56fbb9b9-58e8-4e54-8ab3-b122ee7d0b06",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: pair (a, b) becomes (a + b, a − b). Input (5, 3) gives:",
+  "formula": "",
+  "options": [
+   "(2, 8)",
+   "(8, 2)",
+   "(8, 15)",
+   "(15, 8)"
+  ],
+  "answer": 1,
+  "explain": "a + b = 8 and a − b = 2.",
+  "kind": "pattern",
+  "id": "7ea67f18-2515-4613-ad6c-05cd6b18f749",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: first remove all vowels, then reverse what remains. 'PLANET' becomes:",
+  "formula": "",
+  "options": [
+   "PLNT",
+   "TENALP",
+   "TNLP",
+   "TNPL"
+  ],
+  "answer": 2,
+  "explain": "Removing vowels gives PLNT; reversed it is TNLP.",
+  "kind": "pattern",
+  "id": "dc5f822d-5e04-47f0-b327-0993a03bb7c0",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: the 1st, 2nd, 3rd letters shift forward by 1, 2, 3 places. 'CAT' becomes:",
+  "formula": "",
+  "options": [
+   "DBU",
+   "DCV",
+   "DAU",
+   "DCW"
+  ],
+  "answer": 3,
+  "explain": "C+1 = D, A+2 = C, T+3 = W.",
+  "kind": "pattern",
+  "id": "3b0e2fb7-2537-4eee-ad3c-e94de29ff86e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: a number is accepted if its digit sum is even. Which is accepted?",
+  "formula": "",
+  "options": [
+   "21",
+   "34",
+   "52",
+   "35"
+  ],
+  "answer": 3,
+  "explain": "3 + 5 = 8 is even. The others give 3, 7 and 7, which are odd.",
+  "kind": "pattern",
+  "id": "289e0bf9-8f0a-468d-a2e8-e4142e22c3e1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: output (largest digit − smallest digit). Input 4721 gives:",
+  "formula": "",
+  "options": [
+   "5",
+   "6",
+   "7",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "Largest digit is 7, smallest is 1, so 7 − 1 = 6.",
+  "kind": "pattern",
+  "id": "4ae61858-2888-4841-b333-f4d1a9ba6d50",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: if a word starts with a vowel, add X at its end; otherwise add X at its front. 'ANT' becomes:",
+  "formula": "",
+  "options": [
+   "XANT",
+   "XANTX",
+   "ANTX",
+   "TNA"
+  ],
+  "answer": 2,
+  "explain": "ANT starts with the vowel A, so X goes at the end: ANTX.",
+  "kind": "pattern",
+  "id": "58402dda-43aa-4afe-854d-6cb03b1c9986",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: an item is selected only if it is neither red nor round. Which is selected?",
+  "formula": "",
+  "options": [
+   "Red square",
+   "Blue circle",
+   "Red circle",
+   "Blue square"
+  ],
+  "answer": 3,
+  "explain": "'Neither red nor round' means not red and not round, so a blue square.",
+  "kind": "concept",
+  "id": "025ddf17-5500-45bb-b1ed-79cb966a8a42",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: each letter shifts forward by 2 places, with Z wrapping back to A. 'XYZ' becomes:",
+  "formula": "",
+  "options": [
+   "ZAA",
+   "YZA",
+   "ZAB",
+   "ABC"
+  ],
+  "answer": 2,
+  "explain": "X→Z, Y→A, Z→B, wrapping around the alphabet.",
+  "kind": "pattern",
+  "id": "7d4a91fb-0d57-4499-9050-c457e24599fa",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'A gate opens if and only if the code is correct.' The gate did not open. The code is:",
+  "formula": "",
+  "options": [
+   "Correct",
+   "Incorrect",
+   "Possibly correct",
+   "Unknown"
+  ],
+  "answer": 1,
+  "explain": "'If and only if' is two-way, so no opening means the code is not correct.",
+  "kind": "concept",
+  "id": "7802dd52-8549-422b-ae39-2f92f5c89706",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rotating a figure 180° clockwise gives the same result as rotating it:",
+  "formula": "",
+  "options": [
+   "180° anticlockwise",
+   "90° anticlockwise",
+   "270° clockwise",
+   "360° anticlockwise"
+  ],
+  "answer": 0,
+  "explain": "A half turn lands in the same place in either direction: +180° ≡ −180°.",
+  "kind": "concept",
+  "id": "e29b880e-7da7-462c-8241-2b5cd4a73593",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The letter 'S' is rotated 180° in its plane. It looks like:",
+  "formula": "",
+  "options": [
+   "S",
+   "Z",
+   "5",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "S has point (half-turn) symmetry, so a 180° rotation leaves it unchanged.",
+  "kind": "exception",
+  "id": "51765673-e7da-4e3c-801a-0babcdeb9130",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points up and is turned 90° clockwise six times in a row. It now points:",
+  "formula": "6 × 90° = 540° ≡ 180°",
+  "options": [
+   "Down",
+   "Up",
+   "Left",
+   "Right"
+  ],
+  "answer": 0,
+  "explain": "540° clockwise is one full turn plus 180°, so Up becomes Down.",
+  "kind": "result",
+  "id": "206c4c90-65aa-4f84-84bb-42d389a88b72",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A dot at the midpoint of a square's bottom side turns 90° clockwise. It is now at the midpoint of the:",
+  "formula": "",
+  "options": [
+   "Left side",
+   "Right side",
+   "Top side",
+   "Bottom side"
+  ],
+  "answer": 0,
+  "explain": "Clockwise order of sides: top → right → bottom → left, so bottom goes to left.",
+  "kind": "result",
+  "id": "388713d6-e7ed-4c70-8dba-6feecc79d80a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points North-West and is rotated 225° clockwise. It now points:",
+  "formula": "",
+  "options": [
+   "South",
+   "North",
+   "East",
+   "South-East"
+  ],
+  "answer": 0,
+  "explain": "NW is 315°. Adding 225° gives 540° ≡ 180°, which is South.",
+  "kind": "result",
+  "id": "779d3530-e717-4d8a-a1c2-3d7f17a3af37",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Dots in successive figures: 1, 3, 6, 10, ? Each figure adds one more dot than the last addition. Next figure has:",
+  "formula": "Tₙ = n(n+1)/2",
+  "options": [
+   "14",
+   "15",
+   "16",
+   "13"
+  ],
+  "answer": 1,
+  "explain": "Additions are 2, 3, 4, 5, so the next addition is 5 and the count is 15 (triangular numbers).",
+  "kind": "pattern",
+  "id": "41e3f3ef-0776-463b-bc5e-b0ab96066c62",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Lines in successive figures: 5, 7, 11, 19, ? The added lines double each time. Next figure has:",
+  "formula": "",
+  "options": [
+   "27",
+   "31",
+   "35",
+   "43"
+  ],
+  "answer": 2,
+  "explain": "Additions are 2, 4, 8, so the next addition is 16 and 19 + 16 = 35.",
+  "kind": "pattern",
+  "id": "90cced83-f885-4044-9914-790b723cdbba",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Elements in figures: 2, 4, 6, 12, 14, 28, ? Steps alternate between adding and multiplying. Next is:",
+  "formula": "",
+  "options": [
+   "30",
+   "56",
+   "42",
+   "32"
+  ],
+  "answer": 0,
+  "explain": "The steps alternate +2 and ×2, so after 28 comes +2, giving 30.",
+  "kind": "pattern",
+  "id": "fbe5a8e9-4d37-4fdf-b399-cf038d78db48",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 1, 4, 9, … (perfect squares). How many are shaded in the next figure?",
+  "formula": "n²",
+  "options": [
+   "12",
+   "14",
+   "16",
+   "18"
+  ],
+  "answer": 2,
+  "explain": "1², 2², 3², so the next is 4² = 16.",
+  "kind": "pattern",
+  "id": "23e4b3fd-5e69-40f2-aaca-d7594fc22ba9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Overlay NOR rule: a region left white in both figures appears in the result as?",
+  "formula": "",
+  "options": [
+   "White",
+   "Shaded",
+   "Half shaded",
+   "Outline only"
+  ],
+  "answer": 1,
+  "explain": "NOR shades a region only when it is white in both figures.",
+  "kind": "concept",
+  "id": "2db830b3-9f86-48b1-9316-567b33dd132f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A figure's colours are inverted (black↔white) twice in succession. The final figure compared with the original is?",
+  "formula": "",
+  "options": [
+   "Identical",
+   "Fully inverted",
+   "Mirror image",
+   "Rotated 180°"
+  ],
+  "answer": 0,
+  "explain": "Two inversions cancel out and restore the original shading.",
+  "kind": "concept",
+  "id": "a444e6d7-53ae-46aa-8a59-fe7a3fbf946b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 3, 6, 5, 10, 9, … Next figure?",
+  "formula": "×2, −1, ×2, −1 …",
+  "options": [
+   "8",
+   "18",
+   "12",
+   "14"
+  ],
+  "answer": 1,
+  "explain": "Alternating ×2 and −1: 3→6→5→10→9→18.",
+  "kind": "pattern",
+  "id": "bf28eeff-cc20-4b7b-a540-a72a92af4919",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Hexagon segments numbered 1–6 clockwise. Shaded segment moves 1, then 2, then 3 places: 1, 2, 4, … Next?",
+  "formula": "",
+  "options": [
+   "6",
+   "7",
+   "5",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "4 + 3 = 7, which wraps around to segment 1.",
+  "kind": "pattern",
+  "id": "22272eeb-f73e-4c71-a6d9-3dd8a0adab1c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shade sequence: black, white, white, black, white, white, black, … What is the 10th figure's shade?",
+  "formula": "",
+  "options": [
+   "Black",
+   "White",
+   "Grey",
+   "Cannot be decided"
+  ],
+  "answer": 0,
+  "explain": "The cycle has length 3, with black at positions 1, 4, 7, 10.",
+  "kind": "pattern",
+  "id": "2fdb179d-502a-43cc-9b45-0b5d892a285e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 1, 2, 6, 24, … Next figure?",
+  "formula": "×2, ×3, ×4, ×5",
+  "options": [
+   "48",
+   "96",
+   "120",
+   "30"
+  ],
+  "answer": 2,
+  "explain": "The multipliers are 2, 3, 4, 5, so 24 × 5 = 120.",
+  "kind": "pattern",
+  "id": "1f70f263-1ddf-4385-abf7-a807a7a39887",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A bottom-left quadrant is shaded. The figure is rotated 90° clockwise. Which quadrant is shaded now?",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Top-right",
+   "Bottom-right",
+   "Bottom-left"
+  ],
+  "answer": 0,
+  "explain": "A 90° clockwise turn sends BL→TL (TL→TR→BR→BL).",
+  "kind": "concept",
+  "id": "4b60264c-892e-4a7c-bf73-35a60e00582f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 5, 4, 6, 3, 7, … Next figure?",
+  "formula": "differences −1, +2, −3, +4, −5",
+  "options": [
+   "2",
+   "8",
+   "1",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "The differences are −1, +2, −3, +4, so the next is −5: 7 − 5 = 2.",
+  "kind": "pattern",
+  "id": "6d23fad2-ac40-4104-8639-905b6c38ad1e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 1, 3, 9, … (each ×3). How many are shaded in the next figure?",
+  "formula": "",
+  "options": [
+   "12",
+   "18",
+   "27",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "Each figure has three times the previous shading: 9 × 3 = 27.",
+  "kind": "pattern",
+  "id": "e05c74f5-2585-45a0-acfb-08ceac147008",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Row of 4 shapes; the black shade moves one place right each step, wrapping around. Black is on shape 3 in figure 1. Figure 3?",
+  "formula": "",
+  "options": [
+   "Shape 1",
+   "Shape 2",
+   "Shape 4",
+   "Shape 3"
+  ],
+  "answer": 0,
+  "explain": "3 → 4 → 1 (wraps from 4 to 1).",
+  "kind": "pattern",
+  "id": "fe51bb83-f719-4e76-9a44-62bd57b165b3",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "3×1 column of cells; the shaded cell moves down one place per step, wrapping to the top. Figure 1 shaded: top. Figure 5?",
+  "formula": "",
+  "options": [
+   "Top",
+   "Middle",
+   "Bottom",
+   "None shaded"
+  ],
+  "answer": 1,
+  "explain": "The cycle is top, middle, bottom, top, middle, so figure 5 is the middle cell.",
+  "kind": "pattern",
+  "id": "135ca355-b77e-44dd-87ab-db03a679aac2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "A figure is rotated 270° clockwise. An element at its top-left corner moves to the:",
+  "formula": "270° clockwise = 90° anticlockwise",
+  "options": [
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right",
+   "Top-left"
+  ],
+  "answer": 1,
+  "explain": "270° clockwise equals 90° anticlockwise, which takes top-left to bottom-left.",
+  "kind": "",
+  "id": "9d0bca16-1b09-4039-8d96-55b364563d81",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is reflected in the diagonal joining top-right and bottom-left. Top-left element goes to:",
+  "formula": "",
+  "options": [
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right",
+   "Stays top-left"
+  ],
+  "answer": 2,
+  "explain": "Reflection in the anti-diagonal swaps top-left and bottom-right; the other two corners lie on the axis.",
+  "kind": "",
+  "id": "feda5e92-8898-483c-ad4e-41c43b41d1b1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot moves 3 corners clockwise per step around a square. After how many steps does it first return to its start?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "3 corners clockwise is 1 corner anticlockwise per step, so it needs 4 steps to complete the cycle.",
+  "kind": "",
+  "id": "ffc59dbc-9a66-455c-b517-9750b9c60aea",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot jumps 2 vertices per step around a regular pentagon. After how many steps does it first return to its start?",
+  "formula": "2n is a multiple of 5",
+  "options": [
+   "2",
+   "4",
+   "5",
+   "10"
+  ],
+  "answer": 2,
+  "explain": "2n must be a multiple of 5 and gcd(2,5)=1, so n = 5.",
+  "kind": "",
+  "id": "ceaec12d-fe31-4eba-85ef-4aa8e4c6febe",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "Dots at top-left and top-right of a square move 1 corner each per step: left one clockwise, right one anticlockwise. After 1 step they:",
+  "formula": "",
+  "options": [
+   "Meet at top-right",
+   "Swap places",
+   "Meet at top-left",
+   "Return to start"
+  ],
+  "answer": 1,
+  "explain": "Top-left clockwise goes to top-right; top-right anticlockwise goes to top-left, so they swap.",
+  "kind": "",
+  "id": "06ce7d33-dfa1-4bc3-958a-7bf9f2351516",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot moves clockwise through 8 points (4 corners and 4 side-midpoints alternately), one point per step, from top-left. After 3 steps?",
+  "formula": "",
+  "options": [
+   "Top-right corner",
+   "Middle of right side",
+   "Bottom-right corner",
+   "Middle of top side"
+  ],
+  "answer": 1,
+  "explain": "Order: TL → top-mid → TR → right-mid, so step 3 gives the middle of the right side.",
+  "kind": "",
+  "id": "58df14be-5379-4a22-bf39-00920b7f151c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "An arrow points up and turns clockwise by 90°, 180°, 270° in successive steps. Final direction?",
+  "formula": "Total = 540° ≡ 180°",
+  "options": [
+   "Left",
+   "Right",
+   "Up",
+   "Down"
+  ],
+  "answer": 3,
+  "explain": "Total rotation is 540°, which is 180° more than a full turn, so the arrow points down.",
+  "kind": "",
+  "id": "5ca66704-bd5d-4e6e-8967-2795a25f6625",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "2×2 grid: A B on top, C D below. Each step all four move one cell clockwise. Top row after 1 step?",
+  "formula": "",
+  "options": [
+   "B A",
+   "C A",
+   "D C",
+   "B D"
+  ],
+  "answer": 1,
+  "explain": "Clockwise: A→top-right, B→bottom-right, D→bottom-left, C→top-left. Top row = C A.",
+  "kind": "",
+  "id": "bebdc8f1-07e0-4deb-84bf-5c7cdd262725",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is rotated 90° clockwise, then reflected about the vertical axis. A top-left element ends at:",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right"
+  ],
+  "answer": 0,
+  "explain": "Rotation takes top-left to top-right; the vertical-axis flip takes it back to top-left.",
+  "kind": "",
+  "id": "5c4f26df-60fa-480f-86a2-9f42602ad28a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A dot in a row of 3 cells starts in cell 1, moves 1 right per step and reverses at the ends (no wrap). Cell after 5 steps?",
+  "formula": "",
+  "options": [
+   "Cell 1",
+   "Cell 2",
+   "Cell 3",
+   "Cell 4"
+  ],
+  "answer": 1,
+  "explain": "Path: 1→2→3→2→1→2, so it is in cell 2 after 5 steps.",
+  "kind": "",
+  "id": "83fd07c7-0810-4f6c-9135-470d29fd2c4c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "Row A B C D: in each step the 1st and 2nd swap, and the 3rd and 4th swap. Row after 1 step?",
+  "formula": "",
+  "options": [
+   "B A D C",
+   "D C B A",
+   "B C D A",
+   "C D A B"
+  ],
+  "answer": 0,
+  "explain": "Adjacent pairs (A,B) and (C,D) swap places, giving B A D C.",
+  "kind": "",
+  "id": "2cd01e5c-0482-4523-8a7f-706629b82f96",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A row of 5 cells is reflected left-to-right (mirror about the middle). An element in cell 2 moves to:",
+  "formula": "cell k → cell 6 − k",
+  "options": [
+   "Cell 3",
+   "Cell 4",
+   "Cell 5",
+   "Cell 1"
+  ],
+  "answer": 1,
+  "explain": "Mirror maps cell k to 6 − k, so cell 2 goes to cell 4.",
+  "kind": "",
+  "id": "f8bb165e-a5f4-4421-9f61-9fd4d28652dc",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "Two dots start at opposite corners of a square, both moving 1 corner clockwise per step. After any step they are at:",
+  "formula": "",
+  "options": [
+   "Adjacent corners",
+   "The same corner",
+   "Opposite corners",
+   "The same side"
+  ],
+  "answer": 2,
+  "explain": "Equal steps in the same direction keep the dots separated by 2 corners, so they stay opposite.",
+  "kind": "",
+  "id": "988e25d0-24de-45f3-82da-bbfd5fb51add",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A square's side grows ×1.5 each step. By what factor does its perimeter change per step?",
+  "formula": "Perimeter ∝ side",
+  "options": [
+   "×1.5",
+   "×2.25",
+   "×3",
+   "×0.5"
+  ],
+  "answer": 0,
+  "explain": "Perimeter is a length, so it scales by the same factor 1.5.",
+  "kind": "concept",
+  "id": "e24c7068-3c26-4c40-a6dc-15043193ed72",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A circle's radius is halved each step. By what factor does its area change per step?",
+  "formula": "Area ∝ r²",
+  "options": [
+   "×1/2",
+   "×1/4",
+   "×1/8",
+   "×1/16"
+  ],
+  "answer": 1,
+  "explain": "Area scales as the square of the linear factor: (1/2)² = 1/4.",
+  "kind": "result",
+  "id": "b9753831-3390-4ce1-bd68-00b19479c7ad",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A figure is enlarged so its area becomes 9 times. By what factor does each side scale?",
+  "formula": "Linear factor = √(area factor)",
+  "options": [
+   "3",
+   "9",
+   "18",
+   "81"
+  ],
+  "answer": 0,
+  "explain": "Area factor = (linear factor)², so linear factor = √9 = 3.",
+  "kind": "result",
+  "id": "27e8710c-be7f-4740-9787-0cb6890b61be",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A cube's edge doubles each step. By what factor does its volume change per step?",
+  "formula": "Volume ∝ edge³",
+  "options": [
+   "×4",
+   "×6",
+   "×8",
+   "×16"
+  ],
+  "answer": 2,
+  "explain": "Volume scales as the cube of the linear factor: 2³ = 8.",
+  "kind": "result",
+  "id": "1e61254c-860f-425a-a9dd-0979f9a2a97b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes of a shape in successive steps: 1, 2, 4, 8, 16, ... The size rule is:",
+  "formula": "",
+  "options": [
+   "Add 2 each time",
+   "Double each time",
+   "Square each time",
+   "Add successive odd numbers"
+  ],
+  "answer": 1,
+  "explain": "Each term is twice the previous one: a geometric growth ×2.",
+  "kind": "pattern",
+  "id": "157cb46e-3b18-49df-a959-7f7bc0fb542b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes in steps: 1, 4, 9, 16, ? Which size comes next?",
+  "formula": "",
+  "options": [
+   "20",
+   "24",
+   "25",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "Sizes are perfect squares 1², 2², 3², 4², so next is 5² = 25.",
+  "kind": "pattern",
+  "id": "ed9f43a6-c4c7-4934-81da-433023c251bd",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes: 64, 32, 16, 8, ? Which rule and next size fit?",
+  "formula": "",
+  "options": [
+   "Subtract 32; 0",
+   "Halve; 4",
+   "Subtract 8; 0",
+   "Halve; 6"
+  ],
+  "answer": 1,
+  "explain": "Each size is half the previous, so after 8 comes 4.",
+  "kind": "pattern",
+  "id": "f24e1758-a539-4678-9da0-6fb37a2542ad",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "One corner of a square is cut off by a single straight cut. How many sides does the new figure have?",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "6",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "The cut removes a vertex and adds one new side: 4 − 1 + 2 = 5 sides.",
+  "kind": "result",
+  "id": "6450048d-30d6-4c1d-9c40-de383c411ff4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Two identical squares are joined along one full common side. How many sides does the outline have?",
+  "formula": "",
+  "options": [
+   "8",
+   "6",
+   "4",
+   "7"
+  ],
+  "answer": 2,
+  "explain": "Collinear sides merge, so the outline is a rectangle with 4 sides.",
+  "kind": "result",
+  "id": "0e4c9875-30b6-473f-a998-96d688a2b041",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Two equilateral triangles overlap to form a six-pointed star (hexagram). How many sides does its outline have?",
+  "formula": "",
+  "options": [
+   "6",
+   "9",
+   "10",
+   "12"
+  ],
+  "answer": 3,
+  "explain": "Each of the 6 points has 2 sides, so the outline has 12 sides.",
+  "kind": "fact",
+  "id": "0d9469ed-78f8-4c8c-ac5c-ce299e84f8d0",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "The midpoints of consecutive sides of a non-square rhombus are joined. The inner figure is a:",
+  "formula": "",
+  "options": [
+   "Rhombus",
+   "Rectangle",
+   "Square",
+   "Kite"
+  ],
+  "answer": 1,
+  "explain": "Diagonals of a rhombus are perpendicular, so the midpoint figure is a rectangle.",
+  "kind": "result",
+  "id": "084865ae-11c9-43cd-afe9-4268e4faf453",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Sides in successive figures: 3, 6, 5, 10, 9, ? How many sides does the next figure have?",
+  "formula": "",
+  "options": [
+   "16",
+   "17",
+   "18",
+   "19"
+  ],
+  "answer": 2,
+  "explain": "The pattern alternates ×2, −1: 3→6→5→10→9→18.",
+  "kind": "pattern",
+  "id": "33ee754e-c3cc-43fd-9a98-a27058e39b69",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "All vertices of a regular hexagon are joined to its centre. The six triangles formed are:",
+  "formula": "",
+  "options": [
+   "Equilateral",
+   "Right-angled isosceles",
+   "Scalene",
+   "Isosceles with a 90° apex"
+  ],
+  "answer": 0,
+  "explain": "The central angle is 60° and the radii are equal, so each triangle is equilateral.",
+  "kind": "fact",
+  "id": "6c62fd37-2888-4c7e-8c44-479eee44079c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "All diagonals of a regular pentagon are drawn. How many diagonals are there?",
+  "formula": "n(n − 3)/2",
+  "options": [
+   "10",
+   "6",
+   "5",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "For n = 5, n(n − 3)/2 = 5. They form a pentagram.",
+  "kind": "formula",
+  "id": "1ad1627e-fad2-41ee-9ccb-3e2a643eab24",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "A square is cut along one of its diagonals. The two pieces are:",
+  "formula": "",
+  "options": [
+   "Equilateral triangles",
+   "Right isosceles triangles",
+   "Scalene triangles",
+   "Trapeziums"
+  ],
+  "answer": 1,
+  "explain": "The diagonal splits the square into two congruent right isosceles triangles.",
+  "kind": "fact",
+  "id": "5a171973-4a42-4591-bf63-ba220b00b8d9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "What is the smallest rotation about its centre that maps a regular hexagon onto itself?",
+  "formula": "360°/n",
+  "options": [
+   "30°",
+   "45°",
+   "60°",
+   "120°"
+  ],
+  "answer": 2,
+  "explain": "The smallest rotation for a regular n-gon is 360°/n, so 360°/6 = 60°.",
+  "kind": "formula",
+  "id": "260955c4-1468-4b11-ba4d-a88f50babca0",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Pick the odd one out: square, rectangle, rhombus, trapezium.",
+  "formula": "",
+  "options": [
+   "Square",
+   "Rectangle",
+   "Rhombus",
+   "Trapezium"
+  ],
+  "answer": 3,
+  "explain": "The other three have two pairs of parallel sides. A trapezium has only one pair.",
+  "kind": "exception",
+  "id": "dfde463e-7678-4305-b8ed-e9687a270ac2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Rule: each digit is replaced by (9 − digit). Input 2074 gives:",
+  "formula": "",
+  "options": [
+   "7925",
+   "7926",
+   "8925",
+   "7915"
+  ],
+  "answer": 0,
+  "explain": "9−2=7, 9−0=9, 9−7=2, 9−4=5, so 7925.",
+  "kind": "pattern",
+  "id": "749d8bfb-35d5-4f76-a4af-d5fca7b861ea",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: move the first letter of the word to the end. 'STONE' becomes:",
+  "formula": "",
+  "options": [
+   "ESTON",
+   "TONES",
+   "ENOTS",
+   "NOTES"
+  ],
+  "answer": 1,
+  "explain": "Remove S and place it at the end: TONES.",
+  "kind": "pattern",
+  "id": "101d7d19-6a93-45bc-8273-8df7ccd494be",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: output the sum of the first and last digits. Input 5283 gives:",
+  "formula": "",
+  "options": [
+   "13",
+   "10",
+   "8",
+   "7"
+  ],
+  "answer": 2,
+  "explain": "First digit 5 + last digit 3 = 8.",
+  "kind": "pattern",
+  "id": "50ed275e-179b-4e99-91af-2c9f5d5a5f4c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: arrange the letters of the word in alphabetical order. 'BOAT' becomes:",
+  "formula": "",
+  "options": [
+   "ABTO",
+   "BATO",
+   "TOBA",
+   "ABOT"
+  ],
+  "answer": 3,
+  "explain": "Alphabetical order of B, O, A, T is A, B, O, T.",
+  "kind": "pattern",
+  "id": "45232803-d47f-4497-aaf8-f363cde9b03d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: add the digit sum of the number to the number. Input 21 gives:",
+  "formula": "",
+  "options": [
+   "23",
+   "24",
+   "22",
+   "27"
+  ],
+  "answer": 1,
+  "explain": "Digit sum of 21 is 3, and 21 + 3 = 24.",
+  "kind": "pattern",
+  "id": "bb253c03-d0e9-4ffc-a7b5-b40f81b50fdc",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: 'Exit is allowed only if both keys are turned.' One key is turned. Exit is:",
+  "formula": "",
+  "options": [
+   "Allowed",
+   "Allowed if it is the first key",
+   "Not allowed",
+   "Cannot be determined"
+  ],
+  "answer": 2,
+  "explain": "'Only if both' needs both keys, so one key is not enough.",
+  "kind": "concept",
+  "id": "73c54d76-1a80-467e-b1bd-19f22e9c0def",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: swap each adjacent pair of letters (1st↔2nd, 3rd↔4th). 'LEAD' becomes:",
+  "formula": "",
+  "options": [
+   "ELDA",
+   "DAEL",
+   "AELD",
+   "EDLA"
+  ],
+  "answer": 0,
+  "explain": "LE→EL and AD→DA, giving ELDA.",
+  "kind": "pattern",
+  "id": "b78630bc-1e4a-4664-b4bf-1e0e0493c524",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: a prime number increases by 1, any other number decreases by 1. Input (7, 9) gives:",
+  "formula": "",
+  "options": [
+   "(6, 8)",
+   "(8, 10)",
+   "(6, 10)",
+   "(8, 8)"
+  ],
+  "answer": 3,
+  "explain": "7 is prime, so it becomes 8. 9 is not prime, so it becomes 8.",
+  "kind": "pattern",
+  "id": "9125ae97-ab6b-45a3-a730-dec3b4854953",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: Fig 3 keeps only elements common to both figures. A = {●,▲,■,◆}, B = {▲,◆,★,✚}. Elements in Fig 3?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "4",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "Common elements are ▲ and ◆, so 2 remain.",
+  "kind": "concept",
+  "id": "dbf8d1d8-7a13-40c1-a101-d0b3711c9374",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Dots in successive figures: 1, 8, 27, 64, ? The next figure has how many dots?",
+  "formula": "n³",
+  "options": [
+   "100",
+   "121",
+   "125",
+   "216"
+  ],
+  "answer": 2,
+  "explain": "The counts are cubes 1³, 2³, 3³, 4³, so the next is 5³ = 125.",
+  "kind": "pattern",
+  "id": "d9165a44-01eb-4cac-91e5-f685468e1d27",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Lines in successive figures: 2, 5, 10, 17, ? Each figure adds the next odd number. Next is:",
+  "formula": "n² + 1",
+  "options": [
+   "24",
+   "25",
+   "26",
+   "28"
+  ],
+  "answer": 2,
+  "explain": "Additions are 3, 5, 7, 9, so 17 + 9 = 26, which is 5² + 1.",
+  "kind": "pattern",
+  "id": "0ad70362-8b5b-4b7e-8c8a-ac7f300fc475",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Elements in figures: 1, 4, 10, 20, ? The added elements are 3, 6, 10, … Next is:",
+  "formula": "",
+  "options": [
+   "30",
+   "32",
+   "35",
+   "36"
+  ],
+  "answer": 2,
+  "explain": "Additions are triangular numbers 3, 6, 10, 15, so 20 + 15 = 35.",
+  "kind": "pattern",
+  "id": "68875fb0-d980-4a65-9c08-4fd3ec9991f7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Overlay XNOR rule: a region shaded in only one of the two figures appears in the result as?",
+  "formula": "XNOR: same → shaded, different → white",
+  "options": [
+   "Shaded",
+   "White",
+   "Half shaded",
+   "Outline only"
+  ],
+  "answer": 1,
+  "explain": "XNOR gives shaded only when both figures match; one-only shading differs, so white.",
+  "kind": "concept",
+  "id": "d3895912-e576-44e5-a055-481b6b6d1637",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Overlay XOR rule: a region left white in both figures appears in the result as?",
+  "formula": "XOR: different → shaded, same → white",
+  "options": [
+   "Shaded",
+   "Half shaded",
+   "White",
+   "Black outline"
+  ],
+  "answer": 2,
+  "explain": "XOR shades a region only when exactly one figure has it shaded.",
+  "kind": "concept",
+  "id": "dfd75902-0412-4753-b36b-3d93eab9b6b8",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Overlay NAND rule: a region shaded in both figures appears in the result as?",
+  "formula": "NAND: shaded unless both are shaded",
+  "options": [
+   "Shaded",
+   "Half shaded",
+   "Outline only",
+   "White"
+  ],
+  "answer": 3,
+  "explain": "NAND is the opposite of AND, so both shaded gives white.",
+  "kind": "concept",
+  "id": "e932089e-7a61-42c2-81ac-6f9c27e2ecac",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 2, 6, 12, 20, … Next figure?",
+  "formula": "n(n+1): differences 4, 6, 8, 10",
+  "options": [
+   "28",
+   "30",
+   "32",
+   "26"
+  ],
+  "answer": 1,
+  "explain": "Differences rise by 2 (4, 6, 8), so the next is +10 → 30.",
+  "kind": "pattern",
+  "id": "cf37ee3b-c510-4351-b6eb-99c214e97e24",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 2, 5, 10, 17, … Next figure?",
+  "formula": "n² + 1",
+  "options": [
+   "24",
+   "25",
+   "26",
+   "27"
+  ],
+  "answer": 2,
+  "explain": "Terms are 1²+1, 2²+1, 3²+1, 4²+1, so the next is 5²+1 = 26.",
+  "kind": "pattern",
+  "id": "cdb78d90-cc0b-4ea6-89ac-4e25151fe4e6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 2, 3, 5, 7, … Next figure?",
+  "formula": "Prime numbers",
+  "options": [
+   "9",
+   "10",
+   "13",
+   "11"
+  ],
+  "answer": 3,
+  "explain": "The counts are consecutive primes, so the next is 11.",
+  "kind": "pattern",
+  "id": "66fc6dbb-898a-4dd3-ab9b-f11b6fa47eba",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 1, 3, 6, 10, … Next figure?",
+  "formula": "Triangular numbers",
+  "options": [
+   "15",
+   "14",
+   "16",
+   "13"
+  ],
+  "answer": 0,
+  "explain": "The differences are 2, 3, 4, so the next is +5 → 15.",
+  "kind": "pattern",
+  "id": "47097630-7f2d-41d2-885b-fe8ac5d5e4ba",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 1, 8, 27, … Next figure?",
+  "formula": "n³",
+  "options": [
+   "36",
+   "54",
+   "64",
+   "81"
+  ],
+  "answer": 2,
+  "explain": "The counts are perfect cubes: 1³, 2³, 3³, so the next is 4³ = 64.",
+  "kind": "pattern",
+  "id": "e3046228-441f-4bc3-a7a2-8d59cbd08620",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Shaded parts in successive figures: 20, 10, 12, 6, 8, … Next figure?",
+  "formula": "Alternately ÷2 and +2",
+  "options": [
+   "10",
+   "6",
+   "2",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "The steps alternate ÷2 and +2. After 8 comes ÷2 → 4.",
+  "kind": "pattern",
+  "id": "51fbac64-7d7b-4077-9479-f8aeba99bbd6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Octagon parts numbered 1–8 clockwise. Shaded part moves 3 places per step: 1, 4, 7, … Next part?",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "10",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "7 + 3 = 10, and 10 − 8 = 2 after wrapping around.",
+  "kind": "pattern",
+  "id": "22716ac7-6392-4724-a7f3-1eeb3828519e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "The top-right quadrant is shaded. The figure is rotated 90° anticlockwise. Which quadrant is shaded now?",
+  "formula": "Anticlockwise: TR → TL → BL → BR",
+  "options": [
+   "Bottom-left",
+   "Top-left",
+   "Bottom-right",
+   "Top-right"
+  ],
+  "answer": 1,
+  "explain": "A 90° anticlockwise turn takes the top-right corner to the top-left.",
+  "kind": "concept",
+  "id": "653226ed-e05c-407f-8988-d4034f3a8d09",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Square: shaded corners alternate TL+BR, then TR+BL, repeating. Which pair is shaded in figure 5?",
+  "formula": "",
+  "options": [
+   "TR and BL",
+   "TL and TR",
+   "TL and BR",
+   "BL and BR"
+  ],
+  "answer": 2,
+  "explain": "Odd-numbered figures show TL+BR, so figure 5 matches figure 1.",
+  "kind": "pattern",
+  "id": "6c775f38-4b2a-47bc-bd3d-2326eb8587aa",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "XOR overlay: A has 3 shaded parts, B has 2, and B's parts lie within A's. How many are shaded in the result?",
+  "formula": "XOR cancels the common shaded parts",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "The 2 common parts become white, leaving 3 − 2 = 1 shaded part.",
+  "kind": "concept",
+  "id": "e7da8c9a-405b-40e6-b77f-e8e57bbf5338",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules"
+ },
+ {
+  "prompt": "Similar figures: ratio of corresponding sides is 2:5. What is the ratio of their areas?",
+  "formula": "Area ratio = (side ratio)²",
+  "options": [
+   "4:25",
+   "2:5",
+   "4:10",
+   "8:125"
+  ],
+  "answer": 0,
+  "explain": "Areas of similar figures are in the square of the side ratio: 4:25.",
+  "kind": "result",
+  "id": "849920e9-16f9-4459-b4a4-9bc6361734fd",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes of a shape: 2, 3, 5, 8, 13, ? Which size comes next?",
+  "formula": "",
+  "options": [
+   "21",
+   "18",
+   "20",
+   "26"
+  ],
+  "answer": 0,
+  "explain": "Each size is the sum of the previous two (Fibonacci-type): 8 + 13 = 21.",
+  "kind": "pattern",
+  "id": "d61235a0-b3e8-4cce-b099-f58a6da0db41",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes: 100, 90, 79, 67, ? The decrease grows by 1 each step. Next size is:",
+  "formula": "",
+  "options": [
+   "54",
+   "55",
+   "56",
+   "57"
+  ],
+  "answer": 0,
+  "explain": "Decreases are 10, 11, 12, then 13: 67 − 13 = 54.",
+  "kind": "pattern",
+  "id": "a2dcf6e3-7031-4d70-9dbb-b91c8bc7911c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A solid's edges are all scaled by k. By what factor does its surface area change?",
+  "formula": "Surface area ∝ k²",
+  "options": [
+   "k²",
+   "k",
+   "k³",
+   "2k"
+  ],
+  "answer": 0,
+  "explain": "Surface area is a two-dimensional measure, so it scales as k².",
+  "kind": "result",
+  "id": "761d2327-85b6-4e10-b189-f88c6607f165",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes grow 3, 6, 12, 24 in successive steps. Which statement describes the pattern?",
+  "formula": "",
+  "options": [
+   "Constant ratio 2 (geometric)",
+   "Constant difference 3",
+   "Differences are constant",
+   "Squares of natural numbers"
+  ],
+  "answer": 0,
+  "explain": "Each size is twice the previous one, a constant ratio of 2.",
+  "kind": "concept",
+  "id": "6ab6a31a-ff62-495b-840c-758481508a0f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A square's side shrinks to 1/3 each step. By what factor does its area change per step?",
+  "formula": "Area ∝ (side)²",
+  "options": [
+   "×1/9",
+   "×1/3",
+   "×1/6",
+   "×1/27"
+  ],
+  "answer": 0,
+  "explain": "Area scales as the square of the side factor: (1/3)² = 1/9.",
+  "kind": "result",
+  "id": "a5d4a7ef-fbd7-4fb5-b5bf-1fc5b56a0d8e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "The midpoints of the three sides of a triangle are joined. How many congruent small triangles are formed?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "The medial triangle splits the triangle into 4 congruent triangles, each similar to the original.",
+  "kind": "result",
+  "id": "532ba49f-cabd-4292-b735-b05c77da6545",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Two identical right isosceles triangles are joined along their hypotenuses (full side). The figure formed is a:",
+  "formula": "",
+  "options": [
+   "Rhombus",
+   "Rectangle",
+   "Square",
+   "Parallelogram"
+  ],
+  "answer": 2,
+  "explain": "Two right isosceles triangles on a common hypotenuse make a square, with the hypotenuse as its diagonal.",
+  "kind": "result",
+  "id": "61e2bcf9-7a53-420d-b0ac-cebd14641bc9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "A regular hexagon is cut along a line joining two opposite vertices. The two pieces are:",
+  "formula": "",
+  "options": [
+   "Congruent trapeziums",
+   "Two equilateral triangles",
+   "Two parallelograms",
+   "Triangle and pentagon"
+  ],
+  "answer": 0,
+  "explain": "The long diagonal splits it into two congruent isosceles trapeziums, each with 4 sides.",
+  "kind": "result",
+  "id": "ddfc156f-cfd3-4fe7-b4e4-ca195b118436",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Sides of successive polygons: 3, 5, 8, 12, ? How many sides does the next polygon have?",
+  "formula": "",
+  "options": [
+   "16",
+   "17",
+   "18",
+   "15"
+  ],
+  "answer": 1,
+  "explain": "Differences are 2, 3, 4, so the next is +5: 12 + 5 = 17.",
+  "kind": "pattern",
+  "id": "6c853804-cddd-4e5f-9531-5abafecbf86a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "All diagonals of a regular pentagon are drawn. The central region enclosed by them is a:",
+  "formula": "",
+  "options": [
+   "Regular pentagon",
+   "Regular hexagon",
+   "Square",
+   "Pentagram"
+  ],
+  "answer": 0,
+  "explain": "The diagonals form a pentagram whose inner central region is a smaller regular pentagon.",
+  "kind": "result",
+  "id": "f12b7b4e-a7a4-417e-b82d-d7d4e77d4dd7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Rule: 'Everyone must wear a cap except seniors.' Amit is a senior. Then:",
+  "formula": "",
+  "options": [
+   "He must wear a cap",
+   "He must not wear a cap",
+   "He is not required to wear a cap",
+   "Cannot be determined"
+  ],
+  "answer": 2,
+  "explain": "An exception removes the obligation; it does not forbid caps.",
+  "kind": "concept",
+  "id": "850c43bc-705c-45a4-abe2-2d152dd9ce61",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: entry is free for ages under 12 or over 60. Which age must pay?",
+  "formula": "",
+  "options": [
+   "11",
+   "12",
+   "61",
+   "75"
+  ],
+  "answer": 1,
+  "explain": "12 is not under 12, and not over 60, so it pays.",
+  "kind": "exception",
+  "id": "b859cfe5-7c2c-4b01-b0c8-ed045a5d191c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: replace the number by its largest prime factor. Input 45 gives:",
+  "formula": "45 = 3² × 5",
+  "options": [
+   "3",
+   "5",
+   "9",
+   "15"
+  ],
+  "answer": 1,
+  "explain": "45 = 3 × 3 × 5; the largest prime factor is 5.",
+  "kind": "result",
+  "id": "2652055c-cf1d-4fe7-b033-838fc2fad373",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: tag P if the sum of proper divisors equals the number. Which gets tag P?",
+  "formula": "",
+  "options": [
+   "8",
+   "6",
+   "9",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "6 = 1 + 2 + 3, a perfect number.",
+  "kind": "fact",
+  "id": "8ee2cce2-8af0-4ba4-b393-71b76eeccace",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: each letter shifts back by 3 places in the alphabet. 'DOG' becomes:",
+  "formula": "",
+  "options": [
+   "ALD",
+   "ARD",
+   "GRJ",
+   "ALE"
+  ],
+  "answer": 0,
+  "explain": "D−3=A, O−3=L, G−3=D.",
+  "kind": "pattern",
+  "id": "45c0ded3-73f3-4f78-b632-089bf9bd0cb4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: reverse the digits of the number, then subtract 1. Input 52 gives:",
+  "formula": "",
+  "options": [
+   "24",
+   "25",
+   "26",
+   "51"
+  ],
+  "answer": 0,
+  "explain": "Reverse 52 to 25, then 25 − 1 = 24.",
+  "kind": "pattern",
+  "id": "7a2d936b-54e1-45ad-a0dd-456ef4fc7f0d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: write the number of letters, then the first letter. 'APPLE' becomes:",
+  "formula": "",
+  "options": [
+   "A5",
+   "5E",
+   "5A",
+   "E5"
+  ],
+  "answer": 2,
+  "explain": "APPLE has 5 letters and starts with A, giving 5A.",
+  "kind": "pattern",
+  "id": "1b828537-5b27-4fb4-a875-dafe73410063",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: every consonant is written twice, vowels once. 'CAT' becomes:",
+  "formula": "",
+  "options": [
+   "CCAT",
+   "CATT",
+   "CCAATT",
+   "CCATT"
+  ],
+  "answer": 3,
+  "explain": "C and T are doubled, A stays single: CCATT.",
+  "kind": "pattern",
+  "id": "72f64bb4-43a7-47e9-a6d5-c178dd5e3cbb",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Number of elements in figures: 1, 2, 3, 6, 11, ? Each figure equals the sum of the previous three. Next is:",
+  "formula": "Tₙ = Tₙ₋₁ + Tₙ₋₂ + Tₙ₋₃",
+  "options": [
+   "18",
+   "19",
+   "20",
+   "22"
+  ],
+  "answer": 2,
+  "explain": "6 + 11 + 3 = 20; each term is the sum of the three before it (1+2+3=6, 2+3+6=11).",
+  "kind": "pattern",
+  "id": "df4c1577-2ec5-428d-8aeb-870f50e11bf2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Lines in figures: 50, 49, 45, 36, ? Deleted lines are successive perfect squares. Next figure has:",
+  "formula": "deleted: 1², 2², 3², 4², …",
+  "options": [
+   "25",
+   "20",
+   "16",
+   "21"
+  ],
+  "answer": 1,
+  "explain": "Deletions are 1, 4, 9, so the next is 16 and 36 − 16 = 20.",
+  "kind": "pattern",
+  "id": "f8dd4bb8-ab47-491c-a42e-0b85a66bc195",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Two similar solids have corresponding edges in ratio 2:3. What is the ratio of their volumes?",
+  "formula": "V ∝ k³",
+  "options": [
+   "4:9",
+   "8:27",
+   "2:3",
+   "6:9"
+  ],
+  "answer": 1,
+  "explain": "Volume scales as the cube of the linear ratio: 2³:3³ = 8:27.",
+  "kind": "result",
+  "id": "589d4a24-7be2-4f92-865d-f49e76a86a60",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes of a figure in steps: 2, 6, 12, 20, 30, ? Which size comes next?",
+  "formula": "",
+  "options": [
+   "40",
+   "42",
+   "44",
+   "36"
+  ],
+  "answer": 1,
+  "explain": "Differences 4, 6, 8, 10 rise by 2, so the next difference is 12: 30 + 12 = 42.",
+  "kind": "pattern",
+  "id": "46e99f8f-42d0-48ab-990f-aa036183ec4c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "Sizes alternate rules: 3, 6, 4, 8, 6, 12, ? Which size comes next?",
+  "formula": "",
+  "options": [
+   "10",
+   "24",
+   "9",
+   "14"
+  ],
+  "answer": 0,
+  "explain": "The steps alternate ×2 and −2: 12 − 2 = 10.",
+  "kind": "pattern",
+  "id": "1bc958a5-121e-4d86-adcf-0c2f89518c61",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "All diagonals are drawn from one vertex of a heptagon. How many triangles are formed?",
+  "formula": "n-gon → (n − 2) triangles",
+  "options": [
+   "4",
+   "5",
+   "6",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "From one vertex an n-gon splits into n − 2 triangles; 7 − 2 = 5.",
+  "kind": "result",
+  "id": "55b86775-24ed-4bca-bf24-cba93e7f79f8",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "A regular pentagram (five-pointed star) is drawn as one outline. How many sides does its outer boundary have?",
+  "formula": "",
+  "options": [
+   "5",
+   "8",
+   "10",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "Each of the 5 points contributes 2 edges, so the outline has 10 sides.",
+  "kind": "fact",
+  "id": "be026b18-7242-4765-bb66-330342e951ca",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Sides of successive polygons: 3, 6, 10, 15, ? How many sides does the next polygon have?",
+  "formula": "Differences: +3, +4, +5, +6",
+  "options": [
+   "19",
+   "20",
+   "21",
+   "22"
+  ],
+  "answer": 2,
+  "explain": "The differences rise by 1 (3, 4, 5, 6), so the next term is 15 + 6 = 21.",
+  "kind": "pattern",
+  "id": "61e8ff14-0014-4682-b86d-d96274ecf5f6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "An equilateral triangle is attached to one full side of a regular hexagon. How many sides does the outline have?",
+  "formula": "6 − 1 + 2 = 7",
+  "options": [
+   "6",
+   "7",
+   "8",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "The shared side disappears and the triangle adds 2 sides: 6 − 1 + 2 = 7.",
+  "kind": "result",
+  "id": "c1e7d566-51aa-4b1f-a170-fc522efd56ce",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "Rule: 'All red balls are heavy.' Which single observation would break this rule?",
+  "formula": "",
+  "options": [
+   "A red ball that is light",
+   "A blue ball that is light",
+   "A blue ball that is heavy",
+   "A red ball that is heavy"
+  ],
+  "answer": 0,
+  "explain": "A counterexample needs the condition (red) true and the result (heavy) false.",
+  "kind": "concept",
+  "id": "130118e0-b423-4add-aea5-98fbc69d8d02",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: n → 2n + 1, applied twice in a row. Input 3 gives:",
+  "formula": "3 → 7 → 15",
+  "options": [
+   "7",
+   "13",
+   "15",
+   "14"
+  ],
+  "answer": 2,
+  "explain": "First pass 3 → 7, second pass 7 → 15.",
+  "kind": "pattern",
+  "id": "f30dc7c6-bb97-425e-be89-2ada159536d2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: letters A–M shift +1, letters N–Z shift −1. 'BAT' becomes:",
+  "formula": "",
+  "options": [
+   "CBS",
+   "CBU",
+   "ABS",
+   "CAS"
+  ],
+  "answer": 0,
+  "explain": "B→C, A→B (both before N), T→S (after M).",
+  "kind": "pattern",
+  "id": "4bf41eae-b649-4547-9a41-34b66eb5bb17",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: write the even numbers first, then the odd ones, each in original order. Input 5, 2, 3, 4 gives:",
+  "formula": "",
+  "options": [
+   "2, 4, 5, 3",
+   "2, 3, 4, 5",
+   "4, 2, 3, 5",
+   "2, 4, 3, 5"
+  ],
+  "answer": 0,
+  "explain": "Evens in order are 2, 4; odds in order are 5, 3.",
+  "kind": "pattern",
+  "id": "55e2b982-7f63-4054-b783-ff891b2f987e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: at least one of switches P and Q is on. P is on. Then Q is:",
+  "formula": "",
+  "options": [
+   "Off",
+   "On",
+   "Cannot be determined",
+   "Faulty"
+  ],
+  "answer": 2,
+  "explain": "'At least one' allows both on, so P on leaves Q undetermined.",
+  "kind": "concept",
+  "id": "8885f7e0-f682-44ff-b794-0d0443778109",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: reverse each block of three letters. 'ABCDEF' becomes:",
+  "formula": "",
+  "options": [
+   "CBAFED",
+   "FEDCBA",
+   "BACEDF",
+   "CBADEF"
+  ],
+  "answer": 0,
+  "explain": "ABC → CBA and DEF → FED.",
+  "kind": "pattern",
+  "id": "8e04d2d9-eb76-433b-9c35-33a76d20b5a1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: replace the number by the sum of the squares of its digits. Input 34 gives:",
+  "formula": "3² + 4² = 25",
+  "options": [
+   "25",
+   "49",
+   "7",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "9 + 16 = 25.",
+  "kind": "pattern",
+  "id": "e4e4a849-2fe3-4fa7-afdf-f505f7414623",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: output (larger − smaller) of the number and its reverse. Input 52 gives:",
+  "formula": "52 − 25",
+  "options": [
+   "27",
+   "7",
+   "77",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "The reverse of 52 is 25, and 52 − 25 = 27.",
+  "kind": "pattern",
+  "id": "52e53f5a-92af-4e3c-8a29-09fc0116cd99",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: multiples of 3 are divided by 3, all others increase by 1. Input (12, 7) gives:",
+  "formula": "",
+  "options": [
+   "(4, 8)",
+   "(4, 6)",
+   "(13, 8)",
+   "(4, 7)"
+  ],
+  "answer": 0,
+  "explain": "12 is a multiple of 3, so 12 → 4. 7 is not, so 7 → 8.",
+  "kind": "pattern",
+  "id": "99250a60-3973-46e4-9ffc-d347957f7dac",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: if the sum of the pair is even, output the larger number; otherwise the smaller. Input (8, 5) gives:",
+  "formula": "",
+  "options": [
+   "5",
+   "8",
+   "13",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "The sum 13 is odd, so the smaller number, 5, is output.",
+  "kind": "pattern",
+  "id": "33858981-b359-484e-aa83-27640a3c7303",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: output the square of the number minus the number. Input 6 gives:",
+  "formula": "n² − n",
+  "options": [
+   "30",
+   "36",
+   "42",
+   "24"
+  ],
+  "answer": 0,
+  "explain": "36 − 6 = 30.",
+  "kind": "pattern",
+  "id": "f8d7d7d8-ca85-4966-a4c0-d5231848a054",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "Rule: for a 3-digit number write (1st × 3rd digit), then the middle digit. Input 345 gives:",
+  "formula": "",
+  "options": [
+   "154",
+   "415",
+   "124",
+   "1534"
+  ],
+  "answer": 0,
+  "explain": "3 × 5 = 15, then the middle digit 4, giving 154.",
+  "kind": "pattern",
+  "id": "b012eeb9-60c9-4dff-a3da-110244a3bfae",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement"
+ },
+ {
+  "prompt": "The smallest rotation (>0°) that maps a regular pentagon onto itself is:",
+  "formula": "360° ÷ n",
+  "options": [
+   "60°",
+   "72°",
+   "90°",
+   "108°"
+  ],
+  "answer": 1,
+  "explain": "Rotational symmetry of a regular n-gon is 360°/n; 360°/5 = 72°.",
+  "kind": "fact",
+  "id": "f9f1b433-adf4-4db4-b9ff-3b862bee6fa3",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The smallest rotation (>0°) that maps a regular octagon onto itself is:",
+  "formula": "360° ÷ n",
+  "options": [
+   "30°",
+   "40°",
+   "45°",
+   "60°"
+  ],
+  "answer": 2,
+  "explain": "360°/8 = 45°.",
+  "kind": "fact",
+  "id": "1b484a77-237c-4c51-bb74-2f5f8cb26781",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The smallest rotation (>0°) that maps a non-square rhombus onto itself is:",
+  "formula": "",
+  "options": [
+   "90°",
+   "180°",
+   "60°",
+   "120°"
+  ],
+  "answer": 1,
+  "explain": "A non-square rhombus has only 2-fold rotational symmetry, so 180°.",
+  "kind": "fact",
+  "id": "6ba5c36a-142a-42a4-a049-0d8fdbf1843f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow turns 45° anticlockwise each step. After how many steps does it first return to its start?",
+  "formula": "360° ÷ 45° = 8",
+  "options": [
+   "4",
+   "6",
+   "8",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "A full turn of 360° needs 360/45 = 8 steps.",
+  "kind": "result",
+  "id": "97985d1d-25e2-41e2-9d05-96d1a4cbe542",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "An arrow points North and is turned 90° clockwise seven times in a row. It now points:",
+  "formula": "7 × 90° = 630° ≡ 270°",
+  "options": [
+   "East",
+   "South",
+   "West",
+   "North"
+  ],
+  "answer": 2,
+  "explain": "630° − 360° = 270° clockwise from North, which is West.",
+  "kind": "result",
+  "id": "92daef91-72bf-4663-810d-282e38fee42b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "The digit '6' is rotated 180° in its plane. It looks like:",
+  "formula": "",
+  "options": [
+   "9",
+   "6",
+   "2",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "A half-turn turns the loop and tail of 6 upside down, giving 9.",
+  "kind": "fact",
+  "id": "2a25b85a-105b-4ed7-a07b-e7c2c669df32",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "A dot is at the top-right corner and moves 90° anticlockwise per figure. Its corner in figure 7 is:",
+  "formula": "6 turns = 540° ≡ 180°",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Bottom-right",
+   "Top-right"
+  ],
+  "answer": 1,
+  "explain": "Six turns = 540° ≡ 180°, so top-right goes to bottom-left.",
+  "kind": "pattern",
+  "id": "d030f105-a175-43a6-b341-3aa97ff94d76",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)"
+ },
+ {
+  "prompt": "Number of dots in successive figures: 1, 4, 27, 256, ? Find the next count.",
+  "formula": "nⁿ: 1¹, 2², 3³, 4⁴, 5⁵",
+  "options": [
+   "1024",
+   "3125",
+   "625",
+   "1296"
+  ],
+  "answer": 1,
+  "explain": "Terms are 1¹, 2²(=4), 3³(=27), 4⁴(=256), so the next is 5⁵ = 3125.",
+  "kind": "pattern",
+  "id": "70147c38-da20-422d-86d8-2e0637e26521",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Number of lines in the figures: 720, 120, 24, 6, ? Find the next count.",
+  "formula": "÷6, ÷5, ÷4, ÷3, ÷2",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "The divisors fall 6, 5, 4, 3, so the next divisor is 2: 6 ÷ 3 = 2 (reverse factorials 6!, 5!, 4!, 3!, 2!).",
+  "kind": "pattern",
+  "id": "bc506dfb-a9ea-4cd8-bdfc-ae962f7e4bd7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements"
+ },
+ {
+  "prompt": "Lines in figures: 60, 59, 57, 54, 49, ? Deleted lines follow Fibonacci numbers 1, 2, 3, 5, … Next is:",
+  "formula": "",
+  "options": [
+   "42",
+   "41",
+   "39",
+   "40"
+  ],
+  "answer": 1,
+  "explain": "Deletions are 1, 2, 3, 5, so the next is 8, and 49 − 8 = 41.",
+  "kind": "pattern",
+  "id": "e6392378-449e-4b87-b6f8-76f85bb82a89",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "Elements in figures: 1, 2, 5, 14, 41, ? Each figure triples the previous count and deletes 1. Next is:",
+  "formula": "aₙ₊₁ = 3aₙ − 1",
+  "options": [
+   "121",
+   "122",
+   "123",
+   "124"
+  ],
+  "answer": 1,
+  "explain": "Triple 41 to get 123, then delete 1 element to get 122.",
+  "kind": "pattern",
+  "id": "292ac289-bae3-4b8e-8d1d-ff9008156e10",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements"
+ },
+ {
+  "prompt": "A dot at the top vertex of a triangle moves 1 vertex clockwise per step. Where is it after 100 steps?",
+  "formula": "",
+  "options": [
+   "Top vertex",
+   "Bottom-right vertex",
+   "Bottom-left vertex",
+   "Centre of the base"
+  ],
+  "answer": 1,
+  "explain": "The position repeats every 3 steps. 100 = 33×3 + 1, so it is 1 vertex clockwise from the top: bottom-right.",
+  "kind": "pattern",
+  "id": "814d8b28-1b9e-4f02-9f36-3d8a14dbc4fa",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "Row A B C D E: each step every symbol moves 2 places left, wrapping around. Row after 2 steps?",
+  "formula": "",
+  "options": [
+   "C D E A B",
+   "E A B C D",
+   "D E A B C",
+   "B C D E A"
+  ],
+  "answer": 1,
+  "explain": "Two steps shift 4 places left, which equals 1 place right for 5 symbols: E A B C D.",
+  "kind": "pattern",
+  "id": "3c37d3be-a72c-4c37-b797-a67615d8bcd4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure"
+ },
+ {
+  "prompt": "A figure is enlarged to 2 times its size, and the result is enlarged to 3 times. By what factor does the area change overall?",
+  "formula": "Area factor = (k₁k₂)²",
+  "options": [
+   "×6",
+   "×36",
+   "×13",
+   "×18"
+  ],
+  "answer": 1,
+  "explain": "Net linear scale is 2×3 = 6, so the area changes by 6² = 36.",
+  "kind": "result",
+  "id": "bb00d473-bd78-4ded-8d25-0c7d9dfcf032",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A figure is enlarged to a similar figure. Which quantity does NOT stay the same?",
+  "formula": "",
+  "options": [
+   "Ratio of two sides",
+   "Perimeter",
+   "Every angle",
+   "Overall shape"
+  ],
+  "answer": 1,
+  "explain": "Enlargement keeps angles, shape and side ratios, but lengths such as the perimeter scale by k.",
+  "kind": "concept",
+  "id": "1801d74e-5f20-4815-afff-95e8928fc3b1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)"
+ },
+ {
+  "prompt": "A small square is removed from one corner of a larger square. How many sides does the remaining L-shaped figure have?",
+  "formula": "",
+  "options": [
+   "5",
+   "6",
+   "7",
+   "8"
+  ],
+  "answer": 1,
+  "explain": "The corner notch replaces 2 sides with 4 sides, so the figure gains 2 sides: 4 + 2 = 6.",
+  "kind": "result",
+  "id": "04ef902e-6225-4683-9306-6e7b0e955d1e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ },
+ {
+  "prompt": "An equilateral triangle is attached outward on every side of a square. How many sides does the outer outline have?",
+  "formula": "",
+  "options": [
+   "8",
+   "12",
+   "4",
+   "16"
+  ],
+  "answer": 0,
+  "explain": "Each square side is replaced by 2 triangle sides: 4 × 2 = 8 sides.",
+  "kind": "result",
+  "id": "e1388f8e-f80d-4ca8-a08b-87a45d4523b9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules"
+ }
+]

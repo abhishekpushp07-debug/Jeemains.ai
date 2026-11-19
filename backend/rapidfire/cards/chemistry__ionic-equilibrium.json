@@ -1,1407 +1,3187 @@
 [
-  {
-    "id": "ba0d2118-25fd-4894-b573-a857ee24d26d",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pH of pure water at 25°C",
-    "formula": "pH = 7",
-    "options": [
-      "8",
-      "6",
-      "14",
-      "7"
-    ],
-    "answer": 3,
-    "explain": "Kw = 10⁻¹⁴ at 25°C, so [H⁺] = 10⁻⁷ M, giving pH = 7.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70a9ab0c-fcf6-4c17-bf15-0cd1793ad76c",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Relationship between Kw, Ka, Kb for conjugate acid-base pair",
-    "formula": "Kₐ · K_b = Kw",
-    "options": [
-      "Kₐ + K_b = Kw",
-      "Kₐ / K_b = Kw",
-      "Kₐ · K_b = Kw",
-      "Kₐ · K_b = 1"
-    ],
-    "answer": 2,
-    "explain": "For a conjugate acid-base pair, product of Ka and Kb equals Kw at given temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e32b3523-2529-417d-b7f1-146754c69a7b",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pH of a buffer: Henderson-Hasselbalch equation",
-    "formula": "pH = pKₐ + log([A⁻]/[HA])",
-    "options": [
-      "pH = pKw - pKₐ",
-      "pH = pKₐ + log([A⁻]/[HA])",
-      "pH = pKₐ - log([A⁻]/[HA])",
-      "pH = pKₐ + log([HA]/[A⁻])"
-    ],
-    "answer": 1,
-    "explain": "Henderson-Hasselbalch: pH = pKa + log(salt/acid) for acidic buffer.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7046d98d-f8c6-441f-9993-54cbda7c76b2",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Degree of hydrolysis of salt of weak acid, strong base",
-    "formula": "h = √(Kw / Kₐ·C)",
-    "options": [
-      "h = Kw/Kₐ",
-      "h = √(Kw/Kₐ·C)",
-      "h = √(Kw·Kₐ/C)",
-      "h = √(Kₐ/Kw·C)"
-    ],
-    "answer": 1,
-    "explain": "For salt of weak acid-strong base, h = √(Kh/C) where Kh = Kw/Ka.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef0d5491-5473-44c8-83ea-cb158a43ffe6",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pH of salt of weak acid and strong base (basic salt)",
-    "formula": "pH = 7 + ½(pKₐ + log C)",
-    "options": [
-      "½(pKw + pKₐ)",
-      "7 + ½(pKₐ + log C)",
-      "7 - ½(pKₐ + log C)",
-      "7 + pKₐ"
-    ],
-    "answer": 1,
-    "explain": "Hydrolysis of anion of weak acid gives pH = 7 + ½(pKa + log C).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5686f4be-40df-41f5-9a47-2a0160180cd2",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which solution has pH > 7 at 25°C?",
-    "formula": "",
-    "options": [
-      "CH₃COONa solution",
-      "NH₄Cl solution",
-      "NaCl solution",
-      "HCl solution"
-    ],
-    "answer": 0,
-    "explain": "CH₃COONa is salt of weak acid + strong base; anion hydrolyses to give basic solution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "945373f3-430f-4f71-b66b-d5f132cef6f8",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Common ion effect: adding NaCl to AgCl(s) equilibrium",
-    "formula": "",
-    "options": [
-      "Increases solubility of AgCl",
-      "No effect on solubility",
-      "Decreases solubility of AgCl",
-      "Increases Ksp of AgCl"
-    ],
-    "answer": 2,
-    "explain": "Common Cl⁻ ion shifts equilibrium left, decreasing AgCl solubility.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "345164ab-4b45-4a56-bc7b-7c56ba0101d5",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Solubility (s) of Ag₂CrO₄ in terms of Ksp",
-    "formula": "Ksp = 4s³",
-    "options": [
-      "s = (Ksp/2)^(1/3)",
-      "s = (Ksp)^(1/3)",
-      "s = (Ksp/4)^(1/3)",
-      "s = (Ksp)^(1/2)"
-    ],
-    "answer": 2,
-    "explain": "Ag₂CrO₄ → 2Ag⁺ + CrO₄²⁻; Ksp = (2s)²(s) = 4s³, so s = (Ksp/4)^1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8cf70aed-c34a-411a-bbdf-627d4a3ef72e",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Condition for precipitation to occur",
-    "formula": "IP > Ksp",
-    "options": [
-      "Ionic product < Ksp",
-      "Ionic product > Ksp",
-      "Ksp > 1",
-      "Ionic product = Ksp"
-    ],
-    "answer": 1,
-    "explain": "Precipitation occurs when ionic product (IP) exceeds the solubility product (Ksp).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cf9ba9a2-9620-408d-8ba3-37e178fc216a",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pH formula for weak acid solution",
-    "formula": "pH = ½(pKₐ - log C)",
-    "options": [
-      "½(pKₐ - log C)",
-      "½(pKₐ + log C)",
-      "pKₐ - log C",
-      "pKₐ + log C"
-    ],
-    "answer": 0,
-    "explain": "[H⁺] = √(Ka·C), so pH = ½pKa - ½log C = ½(pKa - log C).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6c144906-63a5-46d9-a18f-9f95f18850b8",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "At the half-equivalence point of acid-base titration",
-    "formula": "pH = pKₐ",
-    "options": [
-      "pH = pKb",
-      "pH = 7",
-      "pH = pKw - pKₐ",
-      "pH = pKₐ"
-    ],
-    "answer": 3,
-    "explain": "At half-equivalence, [HA] = [A⁻], so log([A⁻]/[HA]) = 0, hence pH = pKa.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d905d511-f8f9-48af-bf9a-d64361e1f701",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Buffer capacity is maximum when",
-    "formula": "[A⁻]/[HA] = 1",
-    "options": [
-      "[Salt] = [Acid]",
-      "[Acid] >> [Salt]",
-      "pH = 7",
-      "[Salt] >> [Acid]"
-    ],
-    "answer": 0,
-    "explain": "Buffer capacity is maximum when [salt] = [acid], i.e., pH = pKa.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c3ce2354-541b-4db5-997d-56870dd34b82",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Effective buffer range is approximately",
-    "formula": "pH = pKₐ ± 1",
-    "options": [
-      "pKₐ ± 2",
-      "pKₐ ± 1",
-      "pKₐ ± 0.5",
-      "pKₐ ± 3"
-    ],
-    "answer": 1,
-    "explain": "A buffer works effectively within pH = pKa ± 1 (ratio 10:1 to 1:10).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dcf6cfad-d2f0-402a-b7d4-ac829cbe8bb4",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Degree of dissociation α of weak acid in terms of Ka and C",
-    "formula": "α = √(Kₐ/C)",
-    "options": [
-      "Kₐ/C",
-      "√(Kₐ·C)",
-      "√(Kₐ/C)",
-      "C/Kₐ"
-    ],
-    "answer": 2,
-    "explain": "For weak acid with α << 1: Ka = Cα², so α = √(Ka/C).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fd91a2df-3b5d-4cf0-adc5-5b9e52a61cf1",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Kw at 25°C equals",
-    "formula": "Kw = 10⁻¹⁴",
-    "options": [
-      "10⁻¹⁴",
-      "10⁻¹²",
-      "10⁻⁷",
-      "10⁻¹⁰"
-    ],
-    "answer": 0,
-    "explain": "Kw = [H⁺][OH⁻] = 10⁻¹⁴ mol²/L² at 25°C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4607afcd-5a57-4fe8-9ab4-993129ffe94f",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "With rise in temperature, Kw",
-    "formula": "",
-    "options": [
-      "First increases then decreases",
-      "Decreases",
-      "Increases",
-      "Remains constant"
-    ],
-    "answer": 2,
-    "explain": "Ionisation of water is endothermic; higher T shifts equilibrium right, increasing Kw.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d7a773c4-ff52-48b5-889b-2a0e8b86f958",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Salt of strong acid and strong base: solution is",
-    "formula": "",
-    "options": [
-      "Basic",
-      "Acidic",
-      "Amphoteric",
-      "Neutral (pH = 7)"
-    ],
-    "answer": 3,
-    "explain": "NaCl type salts: neither cation nor anion hydrolyses, solution remains neutral.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7a65e558-daf9-474d-bf7a-0782cb20be67",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "NH₄Cl solution has pH",
-    "formula": "pH = 7 - ½(pKb + log C)",
-    "options": [
-      "Equal to pKb",
-      "Equal to 7",
-      "Less than 7",
-      "Greater than 7"
-    ],
-    "answer": 2,
-    "explain": "NH₄⁺ hydrolyses giving H⁺; salt of weak base-strong acid is acidic.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b111b1c5-83f9-459e-a53c-c4cf275671b7",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which is a Lewis acid?",
-    "formula": "",
-    "options": [
-      "OH⁻",
-      "H₂O",
-      "BF₃",
-      "NH₃"
-    ],
-    "answer": 2,
-    "explain": "BF₃ has empty orbital; accepts electron pair → Lewis acid. NH₃ is Lewis base.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "674f58d6-bc9e-4c4b-b2f7-0926116b2ce3",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Ostwald dilution law relates Ka and degree of dissociation α",
-    "formula": "Kₐ = Cα²/(1-α)",
-    "options": [
-      "Kₐ = C²α/(1-α)",
-      "Kₐ = Cα²/(1-α)",
-      "Kₐ = Cα/(1-α)",
-      "Kₐ = α²/C"
-    ],
-    "answer": 1,
-    "explain": "Ostwald's dilution law: Ka = Cα²/(1-α); for weak acids α<<1, Ka ≈ Cα².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cc64e7e1-f876-48a6-8b4e-f810bfe2cacc",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Conjugate base of H₂PO₄⁻ is",
-    "formula": "",
-    "options": [
-      "HPO₄²⁻",
-      "H₃PO₄",
-      "H₂PO₄⁻",
-      "PO₄³⁻"
-    ],
-    "answer": 0,
-    "explain": "Conjugate base formed by removing one H⁺ from H₂PO₄⁻ gives HPO₄²⁻.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6e4ef9bc-3b57-4f52-90bb-4d8c619feb4b",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For sparingly soluble salt MX₂: Ksp in terms of s",
-    "formula": "Ksp = 4s³",
-    "options": [
-      "s²",
-      "4s³",
-      "2s³",
-      "s³"
-    ],
-    "answer": 1,
-    "explain": "MX₂ → M²⁺ + 2X⁻; [M²⁺]=s, [X⁻]=2s; Ksp = s·(2s)² = 4s³.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2e0069a3-03ac-4a2f-bb3e-531a6626b635",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pH of 0.1 M strong acid HCl is?",
-    "formula": "pH = -log[H⁺]",
-    "options": [
-      "2",
-      "1",
-      "0",
-      "3"
-    ],
-    "answer": 1,
-    "explain": "[H⁺]=0.1 M; pH = -log(0.1) = 1",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f8bf4252-345f-4262-8233-776c6b9a948f",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Conjugate acid of NH₃ is?",
-    "formula": "",
-    "options": [
-      "NH₂⁻",
-      "N₂H₄",
-      "NH₄⁺",
-      "OH⁻"
-    ],
-    "answer": 2,
-    "explain": "Conjugate acid = base + H⁺; NH₃ + H⁺ → NH₄⁺",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c147a28a-34a7-4ad2-9415-21390a9b83b9",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which is the strongest acid among these?",
-    "formula": "",
-    "options": [
-      "HClO₂",
-      "HClO₃",
-      "HClO",
-      "HClO₄"
-    ],
-    "answer": 3,
-    "explain": "Acid strength increases with oxidation state; HClO₄ is strongest oxoacid of Cl",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61399c1c-30fb-48b1-9fe9-466d1d3e6ad1",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For a weak base, pOH formula is?",
-    "formula": "pOH = ½(pKb - log C)",
-    "options": [
-      "½(pKb + log C)",
-      "½(pKb - log C)",
-      "pKb + log C",
-      "½(pKw - pKb - log C)"
-    ],
-    "answer": 1,
-    "explain": "Analogous to weak acid: pOH = ½(pKb - log C)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5cd6a842-44bd-4cac-83c5-5bbc56cd2a6d",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Salt of weak acid + weak base: pH depends on?",
-    "formula": "pH = 7 + ½(pKa - pKb)",
-    "options": [
-      "Relative Ka and Kb values",
-      "Only Kb",
-      "Only Ka",
-      "Concentration only"
-    ],
-    "answer": 0,
-    "explain": "pH = 7 + ½(pKa - pKb); neutral only if Ka = Kb",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "60e1817a-40c9-43d1-9f47-9b0277210f68",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which indicator is suitable for strong acid–weak base titration?",
-    "formula": "",
-    "options": [
-      "Litmus (pH 6–8)",
-      "Phenolphthalein (pH 8.3–10)",
-      "Methyl orange (pH 3.1–4.4)",
-      "Phenol red (pH 6.8–8.4)"
-    ],
-    "answer": 2,
-    "explain": "Equivalence point ~pH 5; methyl orange endpoint falls in acidic range",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "95ae02a2-4643-48b4-9a64-3caf1310cead",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Degree of hydrolysis h of salt of weak base, strong acid?",
-    "formula": "h = √(Kw / Kb·C)",
-    "options": [
-      "√(Kw/Kb·C)",
-      "√(Ka/C)",
-      "√(Kw/Ka·C)",
-      "√(Kb/C)"
-    ],
-    "answer": 0,
-    "explain": "For NH₄⁺ type: h = √(Kh/C) where Kh = Kw/Kb",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fba10803-9cc3-4a22-b4ac-4f16f758d332",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Solubility product Ksp of Ca₃(PO₄)₂ in terms of s?",
-    "formula": "Ksp = 108 s⁵",
-    "options": [
-      "108 s⁵",
-      "36 s⁵",
-      "4 s³",
-      "27 s⁴"
-    ],
-    "answer": 0,
-    "explain": "Ca₃(PO₄)₂ → 3Ca²⁺ + 2PO₄³⁻; Ksp=(3s)³(2s)²=108s⁵",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd3896fa-e252-47b8-9450-8df76f6d1e96",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Reaction quotient Q > Ksp implies?",
-    "formula": "",
-    "options": [
-      "Solution is unsaturated",
-      "No change",
-      "Salt dissolves further",
-      "Precipitation occurs"
-    ],
-    "answer": 3,
-    "explain": "Q > Ksp means ion product exceeds solubility product → precipitate forms",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "071481b7-62be-4007-8020-54fcbdd79add",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pKa + pKb for a conjugate acid-base pair at 25°C?",
-    "formula": "pKa + pKb = pKw = 14",
-    "options": [
-      "Depends on acid",
-      "14",
-      "0",
-      "7"
-    ],
-    "answer": 1,
-    "explain": "Ka × Kb = Kw; taking -log both sides: pKa + pKb = 14 at 25°C",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e71ee735-d8c8-4092-b507-110a9d64371f",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of the following is a Lewis base?",
-    "formula": "",
-    "options": [
-      "H⁺",
-      "AlCl₃",
-      "BF₃",
-      "NH₃"
-    ],
-    "answer": 3,
-    "explain": "Lewis base donates electron pair; NH₃ has lone pair to donate",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "04fecef3-02e8-4632-8178-5748c1ddca8e",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Hydrolysis constant Kh of a salt is related to Kw and Ka by?",
-    "formula": "Kh = Kw / Ka",
-    "options": [
-      "Ka/Kw",
-      "Ka × Kw",
-      "Kw/Ka",
-      "1/Ka"
-    ],
-    "answer": 2,
-    "explain": "For anion hydrolysis (weak acid salt): Kh = Kw/Ka",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "649cb515-9f6a-4a88-a7e8-22b959faf8fa",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "At equivalence point of strong acid–strong base titration, pH is?",
-    "formula": "",
-    "options": [
-      "Depends on acid conc.",
-      "7",
-      "> 7",
-      "< 7"
-    ],
-    "answer": 1,
-    "explain": "Salt formed (NaCl) does not hydrolyse; solution is neutral, pH = 7",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4a893488-704b-4f50-936f-c467e16b4248",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For an indicator HIn, colour change occurs when?",
-    "formula": "[In⁻]/[HIn] = 1",
-    "options": [
-      "pH = pKIn",
-      "pH = 7",
-      "pH = 14",
-      "pH = pKa of acid"
-    ],
-    "answer": 0,
-    "explain": "At pH = pKIn, [HIn]=[In⁻]; midpoint of colour change",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7750a9a3-0773-4699-b216-a5e57a6d7b05",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Bronsted-Lowry acid is a species that?",
-    "formula": "",
-    "options": [
-      "Donates a proton",
-      "Accepts electron pair",
-      "Accepts a proton",
-      "Donates electron pair"
-    ],
-    "answer": 0,
-    "explain": "Bronsted acid = proton (H⁺) donor; base = proton acceptor",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1ddfad15-6519-4a29-bb5f-9e2f41c0e930",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pKa of a weak acid is the pH when?",
-    "formula": "pH = pKa when [A⁻]=[HA]",
-    "options": [
-      "Salt concentration is zero",
-      "Acid is fully dissociated",
-      "Half the acid is neutralised",
-      "pH equals 7"
-    ],
-    "answer": 2,
-    "explain": "At half-equivalence point [A⁻]=[HA], so pH = pKa by Henderson-Hasselbalch.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bdbb1835-ab38-4216-bd51-fb019d6c61e6",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For salt of strong acid + weak base, hydrolysis gives solution with pH?",
-    "formula": "pH = 7 − ½(pKb + log C)",
-    "options": [
-      "Equal to 7",
-      "Greater than 7",
-      "Less than 7",
-      "Depends only on concentration"
-    ],
-    "answer": 2,
-    "explain": "Cation of weak base hydrolyses to release H⁺, making solution acidic (pH < 7).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c3b0f6a2-3d41-44b2-99ba-4fcadddcf66a",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Solubility of PbCl₂ (Ksp = 4s³) in terms of Ksp is?",
-    "formula": "s = (Ksp/4)^(1/3)",
-    "options": [
-      "s = (Ksp)^(1/2)",
-      "s = (Ksp/4)^(1/3)",
-      "s = (Ksp/2)^(1/3)",
-      "s = (Ksp)^(1/3)"
-    ],
-    "answer": 1,
-    "explain": "PbCl₂ → Pb²⁺ + 2Cl⁻; Ksp = s·(2s)² = 4s³, so s = (Ksp/4)^(1/3).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ce4638fd-cd32-443c-9e26-d89b76f61163",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "In common ion effect, adding CH₃COONa to CH₃COOH solution?",
-    "formula": "",
-    "options": [
-      "Increases Ka of the acid",
-      "Increases [H⁺] in solution",
-      "Decreases degree of dissociation of acid",
-      "Decreases pH of solution"
-    ],
-    "answer": 2,
-    "explain": "Extra acetate ions shift equilibrium left, suppressing acid dissociation (common ion effect).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4a4731e1-4b2f-4c84-a624-bfe1c46c885e",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "The pH at equivalence point of weak acid–strong base titration is?",
-    "formula": "",
-    "options": [
-      "Less than 7",
-      "Greater than 7",
-      "Equal to pKa of acid",
-      "Equal to 7"
-    ],
-    "answer": 1,
-    "explain": "At equivalence point, salt of weak acid and strong base hydrolyses to give basic solution (pH > 7).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2192cb26-f158-4c91-9049-9eca4988a507",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which ion is amphiprotic (amphoteric in Brønsted sense)?",
-    "formula": "",
-    "options": [
-      "SO₄²⁻",
-      "Cl⁻",
-      "HCO₃⁻",
-      "NO₃⁻"
-    ],
-    "answer": 2,
-    "explain": "HCO₃⁻ can donate a proton (to form CO₃²⁻) or accept one (to form H₂CO₃); it is amphiprotic.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4d3a5f31-c418-42ca-80a4-efc4c05edac3",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Phenolphthalein indicator changes colour in pH range?",
-    "formula": "",
-    "options": [
-      "3.1 – 4.4",
-      "4.4 – 6.2",
-      "8.3 – 10.0",
-      "6.0 – 7.6"
-    ],
-    "answer": 2,
-    "explain": "Phenolphthalein is colourless in acid and pink/red in base, changing colour between pH 8.3 and 10.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cabf2b67-3264-4207-a179-0323c290c667",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For a salt MA of weak acid and weak base, solution is neutral when?",
-    "formula": "pH = 7 + ½(pKa − pKb)",
-    "options": [
-      "Concentration is very high",
-      "Ka = Kb",
-      "Ka < Kb",
-      "Ka > Kb"
-    ],
-    "answer": 1,
-    "explain": "pH = 7 + ½(pKa − pKb); solution is neutral (pH=7) only when Ka = Kb (pKa = pKb).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3d2585d4-4ee4-4984-9b12-777d3fb06ead",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "The Henderson-Hasselbalch equation for a base buffer is?",
-    "formula": "pOH = pKb + log([BH⁺]/[B])",
-    "options": [
-      "pOH = pKb + log([salt]/[base])",
-      "pH = pKa + log([base]/[salt])",
-      "pOH = pKb − log([salt]/[base])",
-      "pH = pKb + log([salt]/[base])"
-    ],
-    "answer": 0,
-    "explain": "For base buffer: pOH = pKb + log([BH⁺]/[B]) = pKb + log([salt]/[base]).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3c2a917d-b18c-4cd6-bacb-88ef8b6c4186",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "If pKa of CH₃COOH = 4.74, pH of 0.1 M CH₃COONa solution is?",
-    "formula": "pH = 7 + ½(pKa + log C)",
-    "options": [
-      "pH = pKa",
-      "pH < 7",
-      "pH > 7",
-      "pH = 7"
-    ],
-    "answer": 2,
-    "explain": "CH₃COONa is salt of weak acid + strong base; it hydrolyses to give basic solution (pH > 7).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d8a539e3-df96-4962-85fa-0308c0ec1185",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Hydrolysis of cation: which cation does NOT hydrolyse?",
-    "formula": "",
-    "options": [
-      "Fe³⁺",
-      "Na⁺",
-      "NH₄⁺",
-      "Al³⁺"
-    ],
-    "answer": 1,
-    "explain": "Na⁺ is cation of strong base NaOH; it does not hydrolyse. Fe³⁺, NH₄⁺, Al³⁺ all hydrolyse.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e5117609-7aec-4e6a-8754-c9f2a188b213",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Relationship between solubility s and Ksp for Ag₂S (Ag₂S → 2Ag⁺ + S²⁻) is?",
-    "formula": "Ksp = 4s³",
-    "options": [
-      "Ksp = 27s⁴",
-      "Ksp = 4s³",
-      "Ksp = s²",
-      "Ksp = 2s²"
-    ],
-    "answer": 1,
-    "explain": "Ag₂S → 2Ag⁺ + S²⁻; [Ag⁺]=2s, [S²⁻]=s; Ksp = (2s)²·s = 4s³.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2d86a7e7-137a-4595-b040-e983b8c50374",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "As dilution of a weak acid increases, degree of dissociation α?",
-    "formula": "α = √(Ka/C)",
-    "options": [
-      "Remains constant",
-      "First increases then decreases",
-      "Decreases",
-      "Increases"
-    ],
-    "answer": 3,
-    "explain": "α = √(Ka/C); as C decreases on dilution, α increases (Ostwald's dilution law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c9968c40-e4c7-47a9-8b3a-17263c0e5618",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of these salts does NOT undergo hydrolysis?",
-    "formula": "",
-    "options": [
-      "Na₂CO₃",
-      "NH₄Cl",
-      "CH₃COONH₄",
-      "NaCl"
-    ],
-    "answer": 3,
-    "explain": "NaCl is salt of strong acid and strong base; neither Na⁺ nor Cl⁻ hydrolyses.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a9a1e1c9-81cf-4a20-abe6-c69ee3cbdd4e",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Conjugate acid of H₂O is?",
-    "formula": "",
-    "options": [
-      "OH⁻",
-      "H₂O₂",
-      "O²⁻",
-      "H₃O⁺"
-    ],
-    "answer": 3,
-    "explain": "Conjugate acid is formed by adding H⁺; H₂O + H⁺ → H₃O⁺, so H₃O⁺ is conjugate acid of H₂O.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86608936-bca9-498e-9ebb-400d14985ae3",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pH of a solution is 5. On 10× dilution with water, new pH is?",
-    "formula": "",
-    "options": [
-      "Equal to 7",
-      "Less than 5",
-      "Between 5 and 7",
-      "Greater than 7"
-    ],
-    "answer": 2,
-    "explain": "Diluting an acidic solution moves pH towards 7 but never exceeds 7; pH lies between 5 and 7.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ffa11dfd-4391-4d23-8fce-97d32aadfca3",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which species acts as a Brønsted acid in the reaction: NH₃ + H₂O ⇌ NH₄⁺ + OH⁻?",
-    "formula": "",
-    "options": [
-      "OH⁻",
-      "H₂O",
-      "NH₄⁺",
-      "NH₃"
-    ],
-    "answer": 1,
-    "explain": "H₂O donates a proton to NH₃ to form NH₄⁺ and OH⁻; H₂O acts as Brønsted acid here.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c6b098e6-d4b2-4fee-93df-718a31d60e23",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Hydrolysis of CH₃COO⁻ produces which solution?",
-    "formula": "",
-    "options": [
-      "Basic",
-      "Acidic",
-      "Neutral",
-      "Amphoteric"
-    ],
-    "answer": 0,
-    "explain": "CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻; produces OH⁻, so solution is basic.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6bcf017d-a429-45e2-8220-f4f2e31635a2",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of the following has the highest pH at equal concentration?",
-    "formula": "",
-    "options": [
-      "NH₄Cl",
-      "NaHCO₃",
-      "Na₂CO₃",
-      "NaCl"
-    ],
-    "answer": 2,
-    "explain": "Na₂CO₃ is salt of weak acid (H₂CO₃) and strong base; CO₃²⁻ hydrolyses more than HCO₃⁻.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a6a33f2f-728a-476c-a036-3c74b7d16971",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "pH of 10⁻⁸ M HCl solution at 25°C is approximately?",
-    "formula": "",
-    "options": [
-      "8",
-      "6",
-      "Exactly 7",
-      "Close to 7 (slightly below)"
-    ],
-    "answer": 3,
-    "explain": "Water's own H⁺ contributes; [H⁺] ≈ 10⁻⁷ + 10⁻⁸, giving pH just below 7.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "131517e4-0fad-4dc8-9268-529480432620",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Degree of hydrolysis h for salt of weak acid, weak base is?",
-    "formula": "h = √(Kw / Ka·Kb)",
-    "options": [
-      "Kw/(Ka+Kb)",
-      "√(Kw/Ka·Kb)",
-      "√(Kw/Ka)",
-      "√(Kw/Kb)"
-    ],
-    "answer": 1,
-    "explain": "For salt of weak acid + weak base, h = √(Kw/Ka·Kb), independent of concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7b6b9af3-5061-4d42-a2d6-1eec57ce6672",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "In the reaction H₂O + H₂O ⇌ H₃O⁺ + OH⁻, Kw expression is?",
-    "formula": "Kw = [H₃O⁺][OH⁻]",
-    "options": [
-      "[H₃O⁺][OH⁻]/[H₂O]",
-      "[H₃O⁺]/[OH⁻]",
-      "[H₃O⁺][OH⁻]",
-      "[H₂O]²/[H₃O⁺][OH⁻]"
-    ],
-    "answer": 2,
-    "explain": "Water activity = 1 (pure liquid), so Kw = [H₃O⁺][OH⁻] only.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "32db34d2-30da-4930-bb6c-8eb152936b9d",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of the following is NOT a Brønsted-Lowry base?",
-    "formula": "",
-    "options": [
-      "BF₃",
-      "NH₃",
-      "OH⁻",
-      "H₂O"
-    ],
-    "answer": 0,
-    "explain": "BF₃ is a Lewis acid (electron pair acceptor); it cannot accept a proton so not a Brønsted base.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2a70f9a2-e694-4aad-8952-ae7655b2bd9c",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "In an acidic buffer, if [salt]/[acid] = 10, the pH equals?",
-    "formula": "pH = pKa + log([A⁻]/[HA])",
-    "options": [
-      "pKa",
-      "pKa + 1",
-      "pKa + 10",
-      "pKa − 1"
-    ],
-    "answer": 1,
-    "explain": "pH = pKa + log(10/1) = pKa + 1 by Henderson-Hasselbalch equation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c5e0a0c6-91cc-4e43-93ed-1a218f3c5541",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of the following salts gives an acidic aqueous solution?",
-    "formula": "",
-    "options": [
-      "CH₃COONa",
-      "Na₂SO₄",
-      "FeCl₃",
-      "Na₂CO₃"
-    ],
-    "answer": 2,
-    "explain": "Fe³⁺ undergoes cationic hydrolysis producing H⁺; FeCl₃ solution is acidic.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "39c73661-bcbf-483a-b8b9-0eba7625f60b",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Common ion effect on a buffer: adding conjugate base shifts?",
-    "formula": "",
-    "options": [
-      "pH unchanged",
-      "Buffer destroyed",
-      "pH increases",
-      "pH decreases"
-    ],
-    "answer": 2,
-    "explain": "Adding more A⁻ increases [A⁻]/[HA] ratio; Henderson-Hasselbalch shows pH rises.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "48537090-5d73-47b5-b30c-85b882cc0333",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of these acts as both Brønsted acid and base (amphiprotic)?",
-    "formula": "",
-    "options": [
-      "Cl⁻",
-      "H₂SO₄",
-      "CO₃²⁻",
-      "HCO₃⁻"
-    ],
-    "answer": 3,
-    "explain": "HCO₃⁻ can donate proton (acid) or accept proton (base); it is amphiprotic.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "101cb46f-fc2d-4f51-b91f-0960c24e8f95",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of the following increases the solubility of CaF₂?",
-    "formula": "",
-    "options": [
-      "Adding CaCl₂",
-      "Adding NaF",
-      "Adding HCl",
-      "Decreasing temperature"
-    ],
-    "answer": 2,
-    "explain": "HCl converts F⁻ to HF (weak acid), removing common ion and shifting dissolution equilibrium right.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7d790fca-85fa-4740-a0a2-8876e82cbb1c",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "The degree of hydrolysis h of CH₃COONa is related to Ka by?",
-    "formula": "h = √(Kw / Ka·C)",
-    "options": [
-      "Kw/Ka",
-      "√(Ka·C/Kw)",
-      "√(Ka/Kw·C)",
-      "√(Kw/Ka·C)"
-    ],
-    "answer": 3,
-    "explain": "For salt of weak acid, strong base: h = √(Kw/Ka·C); increases with dilution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "3750cdc6-13e2-496b-aa68-af37f8837776",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For a diprotic acid H₂A, the second dissociation constant Ka2 is always:",
-    "formula": "Ka2 < Ka1",
-    "options": [
-      "Greater than Ka1",
-      "Equal to Ka1",
-      "Less than Ka1",
-      "Independent of Ka1"
-    ],
-    "answer": 2,
-    "explain": "Removing second proton from already negative ion is harder; Ka2 < Ka1 always.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cb340179-ccb2-4b58-8bba-67fae9f010b1",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of these is NOT a buffer solution?",
-    "formula": "",
-    "options": [
-      "H₂CO₃ + NaHCO₃",
-      "NH₃ + NH₄Cl",
-      "NaCl + HCl",
-      "CH₃COOH + CH₃COONa"
-    ],
-    "answer": 2,
-    "explain": "NaCl + HCl has no weak acid-conjugate base pair; NaCl is neutral salt—not a buffer.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8953aaa2-5ea5-4da6-8cd0-fca9a6d297de",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For an acidic buffer, pH < pKa when:",
-    "formula": "pH = pKa + log([A⁻]/[HA])",
-    "options": [
-      "[A⁻] < [HA]",
-      "Temperature increases",
-      "[A⁻] > [HA]",
-      "[A⁻] = [HA]"
-    ],
-    "answer": 0,
-    "explain": "log([A⁻]/[HA]) < 0 when [A⁻] < [HA], making pH < pKa.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "db3afd75-4af9-47ac-b824-ef1521c20c1f",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "The ionic product of water Kw increases with temperature because:",
-    "formula": "",
-    "options": [
-      "Kw is constant",
-      "Ionisation is endothermic",
-      "Density of water increases",
-      "Ionisation is exothermic"
-    ],
-    "answer": 1,
-    "explain": "Self-ionisation of water is endothermic; rising T shifts equilibrium right, increasing Kw.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "af98ee00-f79d-49a7-8fa6-b24404717df1",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For H₃PO₄, which dissociation is essentially zero (negligible)?",
-    "formula": "",
-    "options": [
-      "First (Ka1)",
-      "All equal",
-      "Third (Ka3)",
-      "Second (Ka2)"
-    ],
-    "answer": 2,
-    "explain": "Ka3 ≈ 10⁻¹³ for H₃PO₄ is negligibly small; third proton barely dissociates.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b5b74944-22a0-44eb-9f05-96b673f9d17c",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which of these is a Lewis acid–base reaction?",
-    "formula": "",
-    "options": [
-      "BF₃ + NH₃ → BF₃·NH₃",
-      "CH₃COOH ⇌ CH₃COO⁻ + H⁺",
-      "HCl + NaOH → NaCl + H₂O",
-      "H₂O ⇌ H⁺ + OH⁻"
-    ],
-    "answer": 0,
-    "explain": "BF₃ (electron pair acceptor) + NH₃ (electron pair donor) = classic Lewis acid-base reaction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2db34559-fc31-49cc-87a6-8955e9d165a9",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "Which pair represents a conjugate acid-base pair?",
-    "formula": "",
-    "options": [
-      "H₂O and H₂SO₄",
-      "H₂SO₄ and SO₄²⁻",
-      "HCl and NaOH",
-      "NH₃ and NH₄⁺"
-    ],
-    "answer": 3,
-    "explain": "NH₄⁺ differs from NH₃ by one proton; they are a conjugate acid-base pair.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e4df503e-d1f8-4336-a628-41730e4a01fb",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "For a buffer, ratio [A⁻]/[HA] = 1 means pH equals?",
-    "formula": "pH = pKa + log([A⁻]/[HA])",
-    "options": [
-      "pKa",
-      "pKa - 1",
-      "7",
-      "pKa + 1"
-    ],
-    "answer": 0,
-    "explain": "Henderson-Hasselbalch: when [A⁻]=[HA], log(1)=0, so pH = pKa.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "73e2d284-9226-446f-832e-087a06c2fd4d",
-    "subject": "Chemistry",
-    "chapter": "Ionic Equilibrium",
-    "topic": "Ionic Equilibrium",
-    "prompt": "What is [H⁺] in a solution of weak acid HA with Ka and concentration C?",
-    "formula": "[H⁺] = √(Ka·C)",
-    "options": [
-      "√(Ka·C)",
-      "√(Kw/Ka)",
-      "Ka·C",
-      "Ka/C"
-    ],
-    "answer": 0,
-    "explain": "For weak acid when α<<1: [H⁺] = √(Ka·C) from Ka = [H⁺]²/C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "ba0d2118-25fd-4894-b573-a857ee24d26d",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "pH of pure water at 25°C",
+  "formula": "pH = 7",
+  "options": [
+   "8",
+   "6",
+   "14",
+   "7"
+  ],
+  "answer": 3,
+  "explain": "Kw = 10⁻¹⁴ at 25°C, so [H⁺] = 10⁻⁷ M, giving pH = 7.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70a9ab0c-fcf6-4c17-bf15-0cd1793ad76c",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "Relationship between Kw, Ka, Kb for conjugate acid-base pair",
+  "formula": "Kₐ · K_b = Kw",
+  "options": [
+   "Kₐ + K_b = Kw",
+   "Kₐ / K_b = Kw",
+   "Kₐ · K_b = Kw",
+   "Kₐ · K_b = 1"
+  ],
+  "answer": 2,
+  "explain": "For a conjugate acid-base pair, product of Ka and Kb equals Kw at given temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e32b3523-2529-417d-b7f1-146754c69a7b",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "pH of a buffer: Henderson-Hasselbalch equation",
+  "formula": "pH = pKₐ + log([A⁻]/[HA])",
+  "options": [
+   "pH = pKw - pKₐ",
+   "pH = pKₐ + log([A⁻]/[HA])",
+   "pH = pKₐ - log([A⁻]/[HA])",
+   "pH = pKₐ + log([HA]/[A⁻])"
+  ],
+  "answer": 1,
+  "explain": "Henderson-Hasselbalch: pH = pKa + log(salt/acid) for acidic buffer.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7046d98d-f8c6-441f-9993-54cbda7c76b2",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Degree of hydrolysis of salt of weak acid, strong base",
+  "formula": "h = √(Kw / Kₐ·C)",
+  "options": [
+   "h = Kw/Kₐ",
+   "h = √(Kw/Kₐ·C)",
+   "h = √(Kw·Kₐ/C)",
+   "h = √(Kₐ/Kw·C)"
+  ],
+  "answer": 1,
+  "explain": "For salt of weak acid-strong base, h = √(Kh/C) where Kh = Kw/Ka.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef0d5491-5473-44c8-83ea-cb158a43ffe6",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "pH of salt of weak acid and strong base (basic salt)",
+  "formula": "pH = 7 + ½(pKₐ + log C)",
+  "options": [
+   "½(pKw + pKₐ)",
+   "7 + ½(pKₐ + log C)",
+   "7 - ½(pKₐ + log C)",
+   "7 + pKₐ"
+  ],
+  "answer": 1,
+  "explain": "Hydrolysis of anion of weak acid gives pH = 7 + ½(pKa + log C).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5686f4be-40df-41f5-9a47-2a0160180cd2",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Which solution has pH > 7 at 25°C?",
+  "formula": "",
+  "options": [
+   "CH₃COONa solution",
+   "NH₄Cl solution",
+   "NaCl solution",
+   "HCl solution"
+  ],
+  "answer": 0,
+  "explain": "CH₃COONa is salt of weak acid + strong base; anion hydrolyses to give basic solution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "945373f3-430f-4f71-b66b-d5f132cef6f8",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on solubility",
+  "prompt": "Common ion effect: adding NaCl to AgCl(s) equilibrium",
+  "formula": "",
+  "options": [
+   "Increases solubility of AgCl",
+   "No effect on solubility",
+   "Decreases solubility of AgCl",
+   "Increases Ksp of AgCl"
+  ],
+  "answer": 2,
+  "explain": "Common Cl⁻ ion shifts equilibrium left, decreasing AgCl solubility.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "345164ab-4b45-4a56-bc7b-7c56ba0101d5",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Solubility (s) of Ag₂CrO₄ in terms of Ksp",
+  "formula": "Ksp = 4s³",
+  "options": [
+   "s = (Ksp/2)^(1/3)",
+   "s = (Ksp)^(1/3)",
+   "s = (Ksp/4)^(1/3)",
+   "s = (Ksp)^(1/2)"
+  ],
+  "answer": 2,
+  "explain": "Ag₂CrO₄ → 2Ag⁺ + CrO₄²⁻; Ksp = (2s)²(s) = 4s³, so s = (Ksp/4)^1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8cf70aed-c34a-411a-bbdf-627d4a3ef72e",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "Condition for precipitation to occur",
+  "formula": "IP > Ksp",
+  "options": [
+   "Ionic product < Ksp",
+   "Ionic product > Ksp",
+   "Ksp > 1",
+   "Ionic product = Ksp"
+  ],
+  "answer": 1,
+  "explain": "Precipitation occurs when ionic product (IP) exceeds the solubility product (Ksp).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cf9ba9a2-9620-408d-8ba3-37e178fc216a",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "pH formula for weak acid solution",
+  "formula": "pH = ½(pKₐ - log C)",
+  "options": [
+   "½(pKₐ - log C)",
+   "½(pKₐ + log C)",
+   "pKₐ - log C",
+   "pKₐ + log C"
+  ],
+  "answer": 0,
+  "explain": "[H⁺] = √(Ka·C), so pH = ½pKa - ½log C = ½(pKa - log C).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6c144906-63a5-46d9-a18f-9f95f18850b8",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Acid-base indicators and titration curves",
+  "prompt": "At the half-equivalence point of acid-base titration",
+  "formula": "pH = pKₐ",
+  "options": [
+   "pH = pKb",
+   "pH = 7",
+   "pH = pKw - pKₐ",
+   "pH = pKₐ"
+  ],
+  "answer": 3,
+  "explain": "At half-equivalence, [HA] = [A⁻], so log([A⁻]/[HA]) = 0, hence pH = pKa.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d905d511-f8f9-48af-bf9a-d64361e1f701",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer capacity and acid-base mixing pH",
+  "prompt": "Buffer capacity is maximum when",
+  "formula": "[A⁻]/[HA] = 1",
+  "options": [
+   "[Salt] = [Acid]",
+   "[Acid] >> [Salt]",
+   "pH = 7",
+   "[Salt] >> [Acid]"
+  ],
+  "answer": 0,
+  "explain": "Buffer capacity is maximum when [salt] = [acid], i.e., pH = pKa.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c3ce2354-541b-4db5-997d-56870dd34b82",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Effective buffer range is approximately",
+  "formula": "pH = pKₐ ± 1",
+  "options": [
+   "pKₐ ± 2",
+   "pKₐ ± 1",
+   "pKₐ ± 0.5",
+   "pKₐ ± 3"
+  ],
+  "answer": 1,
+  "explain": "A buffer works effectively within pH = pKa ± 1 (ratio 10:1 to 1:10).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dcf6cfad-d2f0-402a-b7d4-ac829cbe8bb4",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "Degree of dissociation α of weak acid in terms of Ka and C",
+  "formula": "α = √(Kₐ/C)",
+  "options": [
+   "Kₐ/C",
+   "√(Kₐ·C)",
+   "√(Kₐ/C)",
+   "C/Kₐ"
+  ],
+  "answer": 2,
+  "explain": "For weak acid with α << 1: Ka = Cα², so α = √(Ka/C).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fd91a2df-3b5d-4cf0-adc5-5b9e52a61cf1",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "Kw at 25°C equals",
+  "formula": "Kw = 10⁻¹⁴",
+  "options": [
+   "10⁻¹⁴",
+   "10⁻¹²",
+   "10⁻⁷",
+   "10⁻¹⁰"
+  ],
+  "answer": 0,
+  "explain": "Kw = [H⁺][OH⁻] = 10⁻¹⁴ mol²/L² at 25°C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4607afcd-5a57-4fe8-9ab4-993129ffe94f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "With rise in temperature, Kw",
+  "formula": "",
+  "options": [
+   "First increases then decreases",
+   "Decreases",
+   "Increases",
+   "Remains constant"
+  ],
+  "answer": 2,
+  "explain": "Ionisation of water is endothermic; higher T shifts equilibrium right, increasing Kw.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d7a773c4-ff52-48b5-889b-2a0e8b86f958",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Salt of strong acid and strong base: solution is",
+  "formula": "",
+  "options": [
+   "Basic",
+   "Acidic",
+   "Amphoteric",
+   "Neutral (pH = 7)"
+  ],
+  "answer": 3,
+  "explain": "NaCl type salts: neither cation nor anion hydrolyses, solution remains neutral.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7a65e558-daf9-474d-bf7a-0782cb20be67",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "NH₄Cl solution has pH",
+  "formula": "pH = 7 - ½(pKb + log C)",
+  "options": [
+   "Equal to pKb",
+   "Equal to 7",
+   "Less than 7",
+   "Greater than 7"
+  ],
+  "answer": 2,
+  "explain": "NH₄⁺ hydrolyses giving H⁺; salt of weak base-strong acid is acidic.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b111b1c5-83f9-459e-a53c-c4cf275671b7",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which is a Lewis acid?",
+  "formula": "",
+  "options": [
+   "OH⁻",
+   "H₂O",
+   "BF₃",
+   "NH₃"
+  ],
+  "answer": 2,
+  "explain": "BF₃ has empty orbital; accepts electron pair → Lewis acid. NH₃ is Lewis base.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "674f58d6-bc9e-4c4b-b2f7-0926116b2ce3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "Ostwald dilution law relates Ka and degree of dissociation α",
+  "formula": "Kₐ = Cα²/(1-α)",
+  "options": [
+   "Kₐ = C²α/(1-α)",
+   "Kₐ = Cα²/(1-α)",
+   "Kₐ = Cα/(1-α)",
+   "Kₐ = α²/C"
+  ],
+  "answer": 1,
+  "explain": "Ostwald's dilution law: Ka = Cα²/(1-α); for weak acids α<<1, Ka ≈ Cα².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cc64e7e1-f876-48a6-8b4e-f810bfe2cacc",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Conjugate base of H₂PO₄⁻ is",
+  "formula": "",
+  "options": [
+   "HPO₄²⁻",
+   "H₃PO₄",
+   "H₂PO₄⁻",
+   "PO₄³⁻"
+  ],
+  "answer": 0,
+  "explain": "Conjugate base formed by removing one H⁺ from H₂PO₄⁻ gives HPO₄²⁻.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6e4ef9bc-3b57-4f52-90bb-4d8c619feb4b",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "For sparingly soluble salt MX₂: Ksp in terms of s",
+  "formula": "Ksp = 4s³",
+  "options": [
+   "s²",
+   "4s³",
+   "2s³",
+   "s³"
+  ],
+  "answer": 1,
+  "explain": "MX₂ → M²⁺ + 2X⁻; [M²⁺]=s, [X⁻]=2s; Ksp = s·(2s)² = 4s³.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2e0069a3-03ac-4a2f-bb3e-531a6626b635",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "pH of 0.1 M strong acid HCl is?",
+  "formula": "pH = -log[H⁺]",
+  "options": [
+   "2",
+   "1",
+   "0",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "[H⁺]=0.1 M; pH = -log(0.1) = 1",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f8bf4252-345f-4262-8233-776c6b9a948f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Conjugate acid of NH₃ is?",
+  "formula": "",
+  "options": [
+   "NH₂⁻",
+   "N₂H₄",
+   "NH₄⁺",
+   "OH⁻"
+  ],
+  "answer": 2,
+  "explain": "Conjugate acid = base + H⁺; NH₃ + H⁺ → NH₄⁺",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c147a28a-34a7-4ad2-9415-21390a9b83b9",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Which is the strongest acid among these?",
+  "formula": "",
+  "options": [
+   "HClO₂",
+   "HClO₃",
+   "HClO",
+   "HClO₄"
+  ],
+  "answer": 3,
+  "explain": "Acid strength increases with oxidation state; HClO₄ is strongest oxoacid of Cl",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61399c1c-30fb-48b1-9fe9-466d1d3e6ad1",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "For a weak base, pOH formula is?",
+  "formula": "pOH = ½(pKb - log C)",
+  "options": [
+   "½(pKb + log C)",
+   "½(pKb - log C)",
+   "pKb + log C",
+   "½(pKw - pKb - log C)"
+  ],
+  "answer": 1,
+  "explain": "Analogous to weak acid: pOH = ½(pKb - log C)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5cd6a842-44bd-4cac-83c5-5bbc56cd2a6d",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Salt of weak acid + weak base: pH depends on?",
+  "formula": "pH = 7 + ½(pKa - pKb)",
+  "options": [
+   "Relative Ka and Kb values",
+   "Only Kb",
+   "Only Ka",
+   "Concentration only"
+  ],
+  "answer": 0,
+  "explain": "pH = 7 + ½(pKa - pKb); neutral only if Ka = Kb",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "60e1817a-40c9-43d1-9f47-9b0277210f68",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Acid-base indicators and titration curves",
+  "prompt": "Which indicator is suitable for strong acid–weak base titration?",
+  "formula": "",
+  "options": [
+   "Litmus (pH 6–8)",
+   "Phenolphthalein (pH 8.3–10)",
+   "Methyl orange (pH 3.1–4.4)",
+   "Phenol red (pH 6.8–8.4)"
+  ],
+  "answer": 2,
+  "explain": "Equivalence point ~pH 5; methyl orange endpoint falls in acidic range",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "95ae02a2-4643-48b4-9a64-3caf1310cead",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Degree of hydrolysis h of salt of weak base, strong acid?",
+  "formula": "h = √(Kw / Kb·C)",
+  "options": [
+   "√(Kw/Kb·C)",
+   "√(Ka/C)",
+   "√(Kw/Ka·C)",
+   "√(Kb/C)"
+  ],
+  "answer": 0,
+  "explain": "For NH₄⁺ type: h = √(Kh/C) where Kh = Kw/Kb",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fba10803-9cc3-4a22-b4ac-4f16f758d332",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Solubility product Ksp of Ca₃(PO₄)₂ in terms of s?",
+  "formula": "Ksp = 108 s⁵",
+  "options": [
+   "108 s⁵",
+   "36 s⁵",
+   "4 s³",
+   "27 s⁴"
+  ],
+  "answer": 0,
+  "explain": "Ca₃(PO₄)₂ → 3Ca²⁺ + 2PO₄³⁻; Ksp=(3s)³(2s)²=108s⁵",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd3896fa-e252-47b8-9450-8df76f6d1e96",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "Reaction quotient Q > Ksp implies?",
+  "formula": "",
+  "options": [
+   "Solution is unsaturated",
+   "No change",
+   "Salt dissolves further",
+   "Precipitation occurs"
+  ],
+  "answer": 3,
+  "explain": "Q > Ksp means ion product exceeds solubility product → precipitate forms",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "071481b7-62be-4007-8020-54fcbdd79add",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "pKa + pKb for a conjugate acid-base pair at 25°C?",
+  "formula": "pKa + pKb = pKw = 14",
+  "options": [
+   "Depends on acid",
+   "14",
+   "0",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "Ka × Kb = Kw; taking -log both sides: pKa + pKb = 14 at 25°C",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e71ee735-d8c8-4092-b507-110a9d64371f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which of the following is a Lewis base?",
+  "formula": "",
+  "options": [
+   "H⁺",
+   "AlCl₃",
+   "BF₃",
+   "NH₃"
+  ],
+  "answer": 3,
+  "explain": "Lewis base donates electron pair; NH₃ has lone pair to donate",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "04fecef3-02e8-4632-8178-5748c1ddca8e",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Hydrolysis constant Kh of a salt is related to Kw and Ka by?",
+  "formula": "Kh = Kw / Ka",
+  "options": [
+   "Ka/Kw",
+   "Ka × Kw",
+   "Kw/Ka",
+   "1/Ka"
+  ],
+  "answer": 2,
+  "explain": "For anion hydrolysis (weak acid salt): Kh = Kw/Ka",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "649cb515-9f6a-4a88-a7e8-22b959faf8fa",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Acid-base indicators and titration curves",
+  "prompt": "At equivalence point of strong acid–strong base titration, pH is?",
+  "formula": "",
+  "options": [
+   "Depends on acid conc.",
+   "7",
+   "> 7",
+   "< 7"
+  ],
+  "answer": 1,
+  "explain": "Salt formed (NaCl) does not hydrolyse; solution is neutral, pH = 7",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a893488-704b-4f50-936f-c467e16b4248",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Acid-base indicators and titration curves",
+  "prompt": "For an indicator HIn, colour change occurs when?",
+  "formula": "[In⁻]/[HIn] = 1",
+  "options": [
+   "pH = pKIn",
+   "pH = 7",
+   "pH = 14",
+   "pH = pKa of acid"
+  ],
+  "answer": 0,
+  "explain": "At pH = pKIn, [HIn]=[In⁻]; midpoint of colour change",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7750a9a3-0773-4699-b216-a5e57a6d7b05",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Bronsted-Lowry acid is a species that?",
+  "formula": "",
+  "options": [
+   "Donates a proton",
+   "Accepts electron pair",
+   "Accepts a proton",
+   "Donates electron pair"
+  ],
+  "answer": 0,
+  "explain": "Bronsted acid = proton (H⁺) donor; base = proton acceptor",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1ddfad15-6519-4a29-bb5f-9e2f41c0e930",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "pKa of a weak acid is the pH when?",
+  "formula": "pH = pKa when [A⁻]=[HA]",
+  "options": [
+   "Salt concentration is zero",
+   "Acid is fully dissociated",
+   "Half the acid is neutralised",
+   "pH equals 7"
+  ],
+  "answer": 2,
+  "explain": "At half-equivalence point [A⁻]=[HA], so pH = pKa by Henderson-Hasselbalch.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bdbb1835-ab38-4216-bd51-fb019d6c61e6",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "For salt of strong acid + weak base, hydrolysis gives solution with pH?",
+  "formula": "pH = 7 − ½(pKb + log C)",
+  "options": [
+   "Equal to 7",
+   "Greater than 7",
+   "Less than 7",
+   "Depends only on concentration"
+  ],
+  "answer": 2,
+  "explain": "Cation of weak base hydrolyses to release H⁺, making solution acidic (pH < 7).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c3b0f6a2-3d41-44b2-99ba-4fcadddcf66a",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Solubility of PbCl₂ (Ksp = 4s³) in terms of Ksp is?",
+  "formula": "s = (Ksp/4)^(1/3)",
+  "options": [
+   "s = (Ksp)^(1/2)",
+   "s = (Ksp/4)^(1/3)",
+   "s = (Ksp/2)^(1/3)",
+   "s = (Ksp)^(1/3)"
+  ],
+  "answer": 1,
+  "explain": "PbCl₂ → Pb²⁺ + 2Cl⁻; Ksp = s·(2s)² = 4s³, so s = (Ksp/4)^(1/3).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ce4638fd-cd32-443c-9e26-d89b76f61163",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "In common ion effect, adding CH₃COONa to CH₃COOH solution?",
+  "formula": "",
+  "options": [
+   "Increases Ka of the acid",
+   "Increases [H⁺] in solution",
+   "Decreases degree of dissociation of acid",
+   "Decreases pH of solution"
+  ],
+  "answer": 2,
+  "explain": "Extra acetate ions shift equilibrium left, suppressing acid dissociation (common ion effect).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4a4731e1-4b2f-4c84-a624-bfe1c46c885e",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Acid-base indicators and titration curves",
+  "prompt": "The pH at equivalence point of weak acid–strong base titration is?",
+  "formula": "",
+  "options": [
+   "Less than 7",
+   "Greater than 7",
+   "Equal to pKa of acid",
+   "Equal to 7"
+  ],
+  "answer": 1,
+  "explain": "At equivalence point, salt of weak acid and strong base hydrolyses to give basic solution (pH > 7).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2192cb26-f158-4c91-9049-9eca4988a507",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which ion is amphiprotic (amphoteric in Brønsted sense)?",
+  "formula": "",
+  "options": [
+   "SO₄²⁻",
+   "Cl⁻",
+   "HCO₃⁻",
+   "NO₃⁻"
+  ],
+  "answer": 2,
+  "explain": "HCO₃⁻ can donate a proton (to form CO₃²⁻) or accept one (to form H₂CO₃); it is amphiprotic.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4d3a5f31-c418-42ca-80a4-efc4c05edac3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Acid-base indicators and titration curves",
+  "prompt": "Phenolphthalein indicator changes colour in pH range?",
+  "formula": "",
+  "options": [
+   "3.1 – 4.4",
+   "4.4 – 6.2",
+   "8.3 – 10.0",
+   "6.0 – 7.6"
+  ],
+  "answer": 2,
+  "explain": "Phenolphthalein is colourless in acid and pink/red in base, changing colour between pH 8.3 and 10.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cabf2b67-3264-4207-a179-0323c290c667",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "For a salt MA of weak acid and weak base, solution is neutral when?",
+  "formula": "pH = 7 + ½(pKa − pKb)",
+  "options": [
+   "Concentration is very high",
+   "Ka = Kb",
+   "Ka < Kb",
+   "Ka > Kb"
+  ],
+  "answer": 1,
+  "explain": "pH = 7 + ½(pKa − pKb); solution is neutral (pH=7) only when Ka = Kb (pKa = pKb).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3d2585d4-4ee4-4984-9b12-777d3fb06ead",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "The Henderson-Hasselbalch equation for a base buffer is?",
+  "formula": "pOH = pKb + log([BH⁺]/[B])",
+  "options": [
+   "pOH = pKb + log([salt]/[base])",
+   "pH = pKa + log([base]/[salt])",
+   "pOH = pKb − log([salt]/[base])",
+   "pH = pKb + log([salt]/[base])"
+  ],
+  "answer": 0,
+  "explain": "For base buffer: pOH = pKb + log([BH⁺]/[B]) = pKb + log([salt]/[base]).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3c2a917d-b18c-4cd6-bacb-88ef8b6c4186",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "If pKa of CH₃COOH = 4.74, pH of 0.1 M CH₃COONa solution is?",
+  "formula": "pH = 7 + ½(pKa + log C)",
+  "options": [
+   "pH = pKa",
+   "pH < 7",
+   "pH > 7",
+   "pH = 7"
+  ],
+  "answer": 2,
+  "explain": "CH₃COONa is salt of weak acid + strong base; it hydrolyses to give basic solution (pH > 7).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d8a539e3-df96-4962-85fa-0308c0ec1185",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Hydrolysis of cation: which cation does NOT hydrolyse?",
+  "formula": "",
+  "options": [
+   "Fe³⁺",
+   "Na⁺",
+   "NH₄⁺",
+   "Al³⁺"
+  ],
+  "answer": 1,
+  "explain": "Na⁺ is cation of strong base NaOH; it does not hydrolyse. Fe³⁺, NH₄⁺, Al³⁺ all hydrolyse.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e5117609-7aec-4e6a-8754-c9f2a188b213",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Relationship between solubility s and Ksp for Ag₂S (Ag₂S → 2Ag⁺ + S²⁻) is?",
+  "formula": "Ksp = 4s³",
+  "options": [
+   "Ksp = 27s⁴",
+   "Ksp = 4s³",
+   "Ksp = s²",
+   "Ksp = 2s²"
+  ],
+  "answer": 1,
+  "explain": "Ag₂S → 2Ag⁺ + S²⁻; [Ag⁺]=2s, [S²⁻]=s; Ksp = (2s)²·s = 4s³.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2d86a7e7-137a-4595-b040-e983b8c50374",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "As dilution of a weak acid increases, degree of dissociation α?",
+  "formula": "α = √(Ka/C)",
+  "options": [
+   "Remains constant",
+   "First increases then decreases",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 3,
+  "explain": "α = √(Ka/C); as C decreases on dilution, α increases (Ostwald's dilution law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c9968c40-e4c7-47a9-8b3a-17263c0e5618",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Which of these salts does NOT undergo hydrolysis?",
+  "formula": "",
+  "options": [
+   "Na₂CO₃",
+   "NH₄Cl",
+   "CH₃COONH₄",
+   "NaCl"
+  ],
+  "answer": 3,
+  "explain": "NaCl is salt of strong acid and strong base; neither Na⁺ nor Cl⁻ hydrolyses.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a9a1e1c9-81cf-4a20-abe6-c69ee3cbdd4e",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Conjugate acid of H₂O is?",
+  "formula": "",
+  "options": [
+   "OH⁻",
+   "H₂O₂",
+   "O²⁻",
+   "H₃O⁺"
+  ],
+  "answer": 3,
+  "explain": "Conjugate acid is formed by adding H⁺; H₂O + H⁺ → H₃O⁺, so H₃O⁺ is conjugate acid of H₂O.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86608936-bca9-498e-9ebb-400d14985ae3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "pH of a solution is 5. On 10× dilution with water, new pH is?",
+  "formula": "",
+  "options": [
+   "Equal to 7",
+   "Less than 5",
+   "Between 5 and 7",
+   "Greater than 7"
+  ],
+  "answer": 2,
+  "explain": "Diluting an acidic solution moves pH towards 7 but never exceeds 7; pH lies between 5 and 7.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ffa11dfd-4391-4d23-8fce-97d32aadfca3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which species acts as a Brønsted acid in the reaction: NH₃ + H₂O ⇌ NH₄⁺ + OH⁻?",
+  "formula": "",
+  "options": [
+   "OH⁻",
+   "H₂O",
+   "NH₄⁺",
+   "NH₃"
+  ],
+  "answer": 1,
+  "explain": "H₂O donates a proton to NH₃ to form NH₄⁺ and OH⁻; H₂O acts as Brønsted acid here.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c6b098e6-d4b2-4fee-93df-718a31d60e23",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Hydrolysis of CH₃COO⁻ produces which solution?",
+  "formula": "",
+  "options": [
+   "Basic",
+   "Acidic",
+   "Neutral",
+   "Amphoteric"
+  ],
+  "answer": 0,
+  "explain": "CH₃COO⁻ + H₂O ⇌ CH₃COOH + OH⁻; produces OH⁻, so solution is basic.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6bcf017d-a429-45e2-8220-f4f2e31635a2",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Which of the following has the highest pH at equal concentration?",
+  "formula": "",
+  "options": [
+   "NH₄Cl",
+   "NaHCO₃",
+   "Na₂CO₃",
+   "NaCl"
+  ],
+  "answer": 2,
+  "explain": "Na₂CO₃ is salt of weak acid (H₂CO₃) and strong base; CO₃²⁻ hydrolyses more than HCO₃⁻.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a6a33f2f-728a-476c-a036-3c74b7d16971",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "pH of 10⁻⁸ M HCl solution at 25°C is approximately?",
+  "formula": "",
+  "options": [
+   "8",
+   "6",
+   "Exactly 7",
+   "Close to 7 (slightly below)"
+  ],
+  "answer": 3,
+  "explain": "Water's own H⁺ contributes; [H⁺] ≈ 10⁻⁷ + 10⁻⁸, giving pH just below 7.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "131517e4-0fad-4dc8-9268-529480432620",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Degree of hydrolysis h for salt of weak acid, weak base is?",
+  "formula": "h = √(Kw / Ka·Kb)",
+  "options": [
+   "Kw/(Ka+Kb)",
+   "√(Kw/Ka·Kb)",
+   "√(Kw/Ka)",
+   "√(Kw/Kb)"
+  ],
+  "answer": 1,
+  "explain": "For salt of weak acid + weak base, h = √(Kw/Ka·Kb), independent of concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7b6b9af3-5061-4d42-a2d6-1eec57ce6672",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "In the reaction H₂O + H₂O ⇌ H₃O⁺ + OH⁻, Kw expression is?",
+  "formula": "Kw = [H₃O⁺][OH⁻]",
+  "options": [
+   "[H₃O⁺][OH⁻]/[H₂O]",
+   "[H₃O⁺]/[OH⁻]",
+   "[H₃O⁺][OH⁻]",
+   "[H₂O]²/[H₃O⁺][OH⁻]"
+  ],
+  "answer": 2,
+  "explain": "Water activity = 1 (pure liquid), so Kw = [H₃O⁺][OH⁻] only.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "32db34d2-30da-4930-bb6c-8eb152936b9d",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which of the following is NOT a Brønsted-Lowry base?",
+  "formula": "",
+  "options": [
+   "BF₃",
+   "NH₃",
+   "OH⁻",
+   "H₂O"
+  ],
+  "answer": 0,
+  "explain": "BF₃ is a Lewis acid (electron pair acceptor); it cannot accept a proton so not a Brønsted base.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2a70f9a2-e694-4aad-8952-ae7655b2bd9c",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "In an acidic buffer, if [salt]/[acid] = 10, the pH equals?",
+  "formula": "pH = pKa + log([A⁻]/[HA])",
+  "options": [
+   "pKa",
+   "pKa + 1",
+   "pKa + 10",
+   "pKa − 1"
+  ],
+  "answer": 1,
+  "explain": "pH = pKa + log(10/1) = pKa + 1 by Henderson-Hasselbalch equation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c5e0a0c6-91cc-4e43-93ed-1a218f3c5541",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "Which of the following salts gives an acidic aqueous solution?",
+  "formula": "",
+  "options": [
+   "CH₃COONa",
+   "Na₂SO₄",
+   "FeCl₃",
+   "Na₂CO₃"
+  ],
+  "answer": 2,
+  "explain": "Fe³⁺ undergoes cationic hydrolysis producing H⁺; FeCl₃ solution is acidic.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "39c73661-bcbf-483a-b8b9-0eba7625f60b",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Common ion effect on a buffer: adding conjugate base shifts?",
+  "formula": "",
+  "options": [
+   "pH unchanged",
+   "Buffer destroyed",
+   "pH increases",
+   "pH decreases"
+  ],
+  "answer": 2,
+  "explain": "Adding more A⁻ increases [A⁻]/[HA] ratio; Henderson-Hasselbalch shows pH rises.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "48537090-5d73-47b5-b30c-85b882cc0333",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which of these acts as both Brønsted acid and base (amphiprotic)?",
+  "formula": "",
+  "options": [
+   "Cl⁻",
+   "H₂SO₄",
+   "CO₃²⁻",
+   "HCO₃⁻"
+  ],
+  "answer": 3,
+  "explain": "HCO₃⁻ can donate proton (acid) or accept proton (base); it is amphiprotic.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "101cb46f-fc2d-4f51-b91f-0960c24e8f95",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Which of the following increases the solubility of CaF₂?",
+  "formula": "",
+  "options": [
+   "Adding CaCl₂",
+   "Adding NaF",
+   "Adding HCl",
+   "Decreasing temperature"
+  ],
+  "answer": 2,
+  "explain": "HCl converts F⁻ to HF (weak acid), removing common ion and shifting dissolution equilibrium right.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7d790fca-85fa-4740-a0a2-8876e82cbb1c",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Salt hydrolysis: types and pH formulas",
+  "prompt": "The degree of hydrolysis h of CH₃COONa is related to Ka by?",
+  "formula": "h = √(Kw / Ka·C)",
+  "options": [
+   "Kw/Ka",
+   "√(Ka·C/Kw)",
+   "√(Ka/Kw·C)",
+   "√(Kw/Ka·C)"
+  ],
+  "answer": 3,
+  "explain": "For salt of weak acid, strong base: h = √(Kw/Ka·C); increases with dilution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3750cdc6-13e2-496b-aa68-af37f8837776",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Polyprotic acids, multistage ionization",
+  "prompt": "For a diprotic acid H₂A, the second dissociation constant Ka2 is always:",
+  "formula": "Ka2 < Ka1",
+  "options": [
+   "Greater than Ka1",
+   "Equal to Ka1",
+   "Less than Ka1",
+   "Independent of Ka1"
+  ],
+  "answer": 2,
+  "explain": "Removing second proton from already negative ion is harder; Ka2 < Ka1 always.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cb340179-ccb2-4b58-8bba-67fae9f010b1",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Which of these is NOT a buffer solution?",
+  "formula": "",
+  "options": [
+   "H₂CO₃ + NaHCO₃",
+   "NH₃ + NH₄Cl",
+   "NaCl + HCl",
+   "CH₃COOH + CH₃COONa"
+  ],
+  "answer": 2,
+  "explain": "NaCl + HCl has no weak acid-conjugate base pair; NaCl is neutral salt—not a buffer.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8953aaa2-5ea5-4da6-8cd0-fca9a6d297de",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "For an acidic buffer, pH < pKa when:",
+  "formula": "pH = pKa + log([A⁻]/[HA])",
+  "options": [
+   "[A⁻] < [HA]",
+   "Temperature increases",
+   "[A⁻] > [HA]",
+   "[A⁻] = [HA]"
+  ],
+  "answer": 0,
+  "explain": "log([A⁻]/[HA]) < 0 when [A⁻] < [HA], making pH < pKa.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "db3afd75-4af9-47ac-b824-ef1521c20c1f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "The ionic product of water Kw increases with temperature because:",
+  "formula": "",
+  "options": [
+   "Kw is constant",
+   "Ionisation is endothermic",
+   "Density of water increases",
+   "Ionisation is exothermic"
+  ],
+  "answer": 1,
+  "explain": "Self-ionisation of water is endothermic; rising T shifts equilibrium right, increasing Kw.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "af98ee00-f79d-49a7-8fa6-b24404717df1",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Polyprotic acids, multistage ionization",
+  "prompt": "For H₃PO₄, which dissociation is essentially zero (negligible)?",
+  "formula": "",
+  "options": [
+   "First (Ka1)",
+   "All equal",
+   "Third (Ka3)",
+   "Second (Ka2)"
+  ],
+  "answer": 2,
+  "explain": "Ka3 ≈ 10⁻¹³ for H₃PO₄ is negligibly small; third proton barely dissociates.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b5b74944-22a0-44eb-9f05-96b673f9d17c",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which of these is a Lewis acid–base reaction?",
+  "formula": "",
+  "options": [
+   "BF₃ + NH₃ → BF₃·NH₃",
+   "CH₃COOH ⇌ CH₃COO⁻ + H⁺",
+   "HCl + NaOH → NaCl + H₂O",
+   "H₂O ⇌ H⁺ + OH⁻"
+  ],
+  "answer": 0,
+  "explain": "BF₃ (electron pair acceptor) + NH₃ (electron pair donor) = classic Lewis acid-base reaction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2db34559-fc31-49cc-87a6-8955e9d165a9",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Which pair represents a conjugate acid-base pair?",
+  "formula": "",
+  "options": [
+   "H₂O and H₂SO₄",
+   "H₂SO₄ and SO₄²⁻",
+   "HCl and NaOH",
+   "NH₃ and NH₄⁺"
+  ],
+  "answer": 3,
+  "explain": "NH₄⁺ differs from NH₃ by one proton; they are a conjugate acid-base pair.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e4df503e-d1f8-4336-a628-41730e4a01fb",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "For a buffer, ratio [A⁻]/[HA] = 1 means pH equals?",
+  "formula": "pH = pKa + log([A⁻]/[HA])",
+  "options": [
+   "pKa",
+   "pKa - 1",
+   "7",
+   "pKa + 1"
+  ],
+  "answer": 0,
+  "explain": "Henderson-Hasselbalch: when [A⁻]=[HA], log(1)=0, so pH = pKa.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "73e2d284-9226-446f-832e-087a06c2fd4d",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "What is [H⁺] in a solution of weak acid HA with Ka and concentration C?",
+  "formula": "[H⁺] = √(Ka·C)",
+  "options": [
+   "√(Ka·C)",
+   "√(Kw/Ka)",
+   "Ka·C",
+   "Ka/C"
+  ],
+  "answer": 0,
+  "explain": "For weak acid when α<<1: [H⁺] = √(Ka·C) from Ka = [H⁺]²/C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f0911c44-b0ba-4f3f-ae01-2f88e286d9df",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Strong and weak electrolytes, ionization",
+  "prompt": "A weak electrolyte solution is diluted 4 times (α << 1). Its degree of ionization becomes:",
+  "formula": "α ∝ 1/√C",
+  "options": [
+   "Double",
+   "Half",
+   "Four times",
+   "Sixteen times"
+  ],
+  "answer": 0,
+  "explain": "α ∝ 1/√C, so C falls 4× and α rises √4 = 2×.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c12a64ff-fff4-40fc-acee-21d5e19fcedf",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Strong and weak electrolytes, ionization",
+  "prompt": "The weak acid HA in 0.01 M solution is diluted 100 times (α << 1). [H⁺] changes by a factor of:",
+  "formula": "[H⁺] = Cα = √(Kₐ·C)",
+  "options": [
+   "1/100",
+   "Unchanged",
+   "1/10",
+   "10"
+  ],
+  "answer": 2,
+  "explain": "[H⁺] = √(KₐC); C falls 100×, so [H⁺] falls 10×, even though α rises 10×.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "177cd40f-3d6b-4f20-a623-bc4c864dccee",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Strong and weak electrolytes, ionization",
+  "prompt": "Ostwald's dilution law is NOT applicable to which of the following?",
+  "formula": "",
+  "options": [
+   "NH₄OH",
+   "CH₃COOH",
+   "HCN",
+   "HCl"
+  ],
+  "answer": 3,
+  "explain": "Strong electrolytes are almost completely ionized, so there is no ionization equilibrium or constant Kₐ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "16238819-0cdb-4616-b10a-dc3a804728f4",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Strong and weak electrolytes, ionization",
+  "prompt": "Sparingly soluble BaSO₄ is classified as a:",
+  "formula": "",
+  "options": [
+   "Weak electrolyte",
+   "Colloidal electrolyte",
+   "Strong electrolyte",
+   "Non-electrolyte"
+  ],
+  "answer": 2,
+  "explain": "The small amount that dissolves is completely ionized, so BaSO₄ is a strong electrolyte.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a2bc55f-453f-47c2-909b-d1be27cb2376",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Strong and weak electrolytes, ionization",
+  "prompt": "Which of the following is a weak electrolyte in aqueous solution?",
+  "formula": "",
+  "options": [
+   "NH₄Cl",
+   "CH₃COONa",
+   "BaCl₂",
+   "HgCl₂"
+  ],
+  "answer": 3,
+  "explain": "HgCl₂ is largely covalent and ionizes very little in water, so it is a weak electrolyte; the others are salts that ionize fully.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "752af7d2-00d4-48e6-ae12-43cae1579738",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Conjugate base of H₂SO₄ in water is:",
+  "formula": "",
+  "options": [
+   "H₃SO₄⁺",
+   "SO₄²⁻",
+   "HSO₃⁻",
+   "HSO₄⁻"
+  ],
+  "answer": 3,
+  "explain": "Conjugate base = acid minus one H⁺: H₂SO₄ − H⁺ = HSO₄⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3450fd41-6c3c-4878-9158-db0723c7378b",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Conjugate acid of NH₂⁻ is:",
+  "formula": "",
+  "options": [
+   "NH₂OH",
+   "NH₃",
+   "N₂H₄",
+   "NH₄⁺"
+  ],
+  "answer": 1,
+  "explain": "Conjugate acid = base plus one H⁺: NH₂⁻ + H⁺ = NH₃.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c39be619-5173-456d-b284-d68f4a2b0777",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Which of the following is a Lewis acid but has no proton to donate?",
+  "formula": "",
+  "options": [
+   "HCl",
+   "CH₃COOH",
+   "H₂SO₄",
+   "AlCl₃"
+  ],
+  "answer": 3,
+  "explain": "AlCl₃ has an incomplete octet and accepts an electron pair; it has no H⁺.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "777eb99e-ae0a-4821-9544-f788c640b0a5",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "According to Arrhenius, a base in water produces:",
+  "formula": "",
+  "options": [
+   "Protons only",
+   "H₃O⁺ ions",
+   "Electron pairs",
+   "OH⁻ ions"
+  ],
+  "answer": 3,
+  "explain": "Arrhenius base gives OH⁻ in aqueous solution; acid gives H⁺ (H₃O⁺).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fa2fa107-b94d-4378-8289-60e61dfe202c",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Arrhenius, Bronsted-Lowry, Lewis acids/bases",
+  "prompt": "Strongest conjugate base is that of the weakest acid. Which is the strongest base?",
+  "formula": "",
+  "options": [
+   "NO₃⁻",
+   "HSO₄⁻",
+   "Cl⁻",
+   "CH₃COO⁻"
+  ],
+  "answer": 3,
+  "explain": "CH₃COOH is the weakest acid of the parent acids, so CH₃COO⁻ is the strongest base.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bd205347-b8dd-4b99-9ad4-079eb848bee5",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Conjugate base of a strong acid like HCl is best described as:",
+  "formula": "",
+  "options": [
+   "Amphoteric",
+   "Very weak base",
+   "Strong acid",
+   "Strong base"
+  ],
+  "answer": 1,
+  "explain": "The stronger the acid, the weaker its conjugate base; Cl⁻ is negligibly basic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "52226c2d-de31-4ae1-ba7d-270f193087e3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Which halide ion is the weakest base?",
+  "formula": "",
+  "options": [
+   "F⁻",
+   "I⁻",
+   "Br⁻",
+   "Cl⁻"
+  ],
+  "answer": 1,
+  "explain": "HI is the strongest acid among the hydrogen halides, so I⁻ is the weakest conjugate base.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f25d5556-ac52-4af3-9a92-92d2b7e749e1",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Which of the following species is amphiprotic?",
+  "formula": "",
+  "options": [
+   "Cl⁻",
+   "HPO₄²⁻",
+   "PO₄³⁻",
+   "NH₄⁺"
+  ],
+  "answer": 1,
+  "explain": "HPO₄²⁻ can donate H⁺ (to PO₄³⁻) and accept H⁺ (to H₂PO₄⁻).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cace4ef9-6f1f-4e25-88c2-6512b04266e2",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "An acid has Kₐ = 10⁻⁵. Kb of its conjugate base is:",
+  "formula": "K_b = K_w/Kₐ",
+  "options": [
+   "10⁻⁵",
+   "10⁻¹⁹",
+   "10⁻⁹",
+   "10⁻⁴"
+  ],
+  "answer": 2,
+  "explain": "K_b = 10⁻¹⁴/10⁻⁵ = 10⁻⁹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6dc19e2a-e73a-454a-b885-3ecac0b4a7df",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "Strongest acid that can exist in aqueous solution is:",
+  "formula": "",
+  "options": [
+   "H₃O⁺",
+   "HClO₄",
+   "HCl",
+   "H₂SO₄"
+  ],
+  "answer": 0,
+  "explain": "Leveling effect: all stronger acids fully protonate water to give H₃O⁺.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3e88da4d-df54-4776-9a41-d3b86e8ee28d",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "Pure water at 80°C has pH below 7. Water at this temperature is:",
+  "formula": "",
+  "options": [
+   "Basic",
+   "Acidic",
+   "Neutral",
+   "Amphiprotic only"
+  ],
+  "answer": 2,
+  "explain": "[H⁺] = [OH⁻] still holds, so it is neutral. Only the neutral pH value shifts below 7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c1ba45ac-7622-465d-8702-3013cf8c93ae",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "pH of 0.005 M H₂SO₄ (treat as fully ionised) is?",
+  "formula": "[H⁺] = 2 × 0.005 = 10⁻²",
+  "options": [
+   "2",
+   "3",
+   "2.3",
+   "2.7"
+  ],
+  "answer": 0,
+  "explain": "Each H₂SO₄ gives 2 H⁺, so [H⁺] = 0.01 M and pH = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "edfe8586-afbb-4278-977e-381cce2e95e3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "pH of 0.05 M Ba(OH)₂ at 25°C is?",
+  "formula": "[OH⁻] = 2 × 0.05 = 0.1 M",
+  "options": [
+   "12.7",
+   "1",
+   "13",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "[OH⁻] = 0.1 M gives pOH = 1, so pH = 14 − 1 = 13.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b349eb35-9e37-4947-84a8-e1ffd72a3163",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "Pure water at 100°C (Kw ≈ 10⁻¹²) has pH of?",
+  "formula": "",
+  "options": [
+   "7, and it is acidic",
+   "6, and it is still neutral",
+   "7, and it is neutral",
+   "6, and it is acidic"
+  ],
+  "answer": 1,
+  "explain": "[H⁺] = [OH⁻] = 10⁻⁶ at 100°C, so pH = 6. It is neutral because [H⁺] = [OH⁻].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4266df76-3142-444a-8b24-152cae412b54",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "If [H⁺] of a solution is doubled, its pH changes by about?",
+  "formula": "log 2 = 0.30",
+  "options": [
+   "Decreases by 2",
+   "Increases by 0.3",
+   "Decreases by 0.6",
+   "Decreases by 0.3"
+  ],
+  "answer": 3,
+  "explain": "pH = −log(2[H⁺]) = pH₀ − log 2 ≈ pH₀ − 0.3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9bd8f770-8251-452d-818c-5afc82f2e341",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "When pH of a solution rises from 3 to 5, [H⁺] becomes?",
+  "formula": "",
+  "options": [
+   "2 times smaller",
+   "Unchanged",
+   "100 times smaller",
+   "100 times larger"
+  ],
+  "answer": 2,
+  "explain": "pH is logarithmic: a change of 2 units means a 10² change in [H⁺].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36051483-70e1-41fa-8bef-74468e114f4f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "At 25°C, a solution has [H⁺] = 10⁻⁹ M. Its [OH⁻] is?",
+  "formula": "Kw = [H⁺][OH⁻] = 10⁻¹⁴",
+  "options": [
+   "10⁻⁵ M",
+   "10⁻⁷ M",
+   "10⁻⁹ M",
+   "10⁻²³ M"
+  ],
+  "answer": 0,
+  "explain": "[OH⁻] = 10⁻¹⁴ / 10⁻⁹ = 10⁻⁵ M, so the solution is basic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11e60662-a434-4c9d-9ec6-0b060247b351",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "100 mL of 0.1 M HCl is diluted with water to 10 L. The pH becomes?",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "3",
+   "5"
+  ],
+  "answer": 2,
+  "explain": "Dilution is 100-fold: [H⁺] = 10⁻³ M, so pH = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3491d11b-0fa4-493d-9cf5-532ce98345d3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "pH of 10⁻⁶ M NaOH solution at 25°C is?",
+  "formula": "",
+  "options": [
+   "10",
+   "8",
+   "6",
+   "7.2"
+  ],
+  "answer": 1,
+  "explain": "[OH⁻] = 10⁻⁶ M gives pOH = 6 and pH = 8. This is well above the water-ionisation limit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e25cadc6-f2d3-4b76-8934-7abc3602fedc",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "pH scale and pH of strong acids/bases",
+  "prompt": "Which 0.1 M solution has the lowest pH?",
+  "formula": "",
+  "options": [
+   "HNO₃",
+   "HCl",
+   "CH₃COOH",
+   "H₂SO₄"
+  ],
+  "answer": 3,
+  "explain": "H₂SO₄ is dibasic and gives about 0.2 M H⁺. HCl and HNO₃ give 0.1 M, and CH₃COOH is weak.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "82b7a253-946b-41f7-bf5a-04cc04d5ffa3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "The acid has pKₐ = 4. What is pK_b of its conjugate base at 298 K?",
+  "formula": "pKₐ + pK_b = 14",
+  "options": [
+   "14",
+   "10",
+   "9.6",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "pKₐ + pK_b = 14, so pK_b = 14 − 4 = 10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bf8aa469-2755-46f6-b78b-a32956b7ab48",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "On diluting a weak acid solution, α increases but [H⁺] does what?",
+  "formula": "[H⁺] = Cα",
+  "options": [
+   "First rises, then falls",
+   "Stays constant",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 2,
+  "explain": "C falls faster than α rises (Cα = √(KₐC)), so [H⁺] decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e61ef018-8d2a-44d6-9cad-86fde3398365",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "The approximation 1 − α ≈ 1 in Ostwald's law is valid when α is?",
+  "formula": "",
+  "options": [
+   "Greater than 0.5",
+   "Below about 0.05",
+   "Close to 1",
+   "Exactly 0.5"
+  ],
+  "answer": 1,
+  "explain": "For a weak electrolyte with α below about 5%, 1 − α ≈ 1 and Kₐ ≈ Cα².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "29619b3d-43cf-4c0a-8456-a27b985c7d8f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "0.1 M weak acid HA is 1% ionized. What is the pH of the solution?",
+  "formula": "[H⁺] = Cα",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "[H⁺] = 0.1 × 0.01 = 10⁻³ M, so pH = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "91040555-974c-46aa-b2f1-7c258cdc5ed1",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "Why is K₂ ≪ K₁ for a polyprotic acid such as H₂S?",
+  "formula": "",
+  "options": [
+   "Anion has a larger size",
+   "More H⁺ is present initially",
+   "H⁺ is harder to remove from the anion",
+   "Second ionization is exothermic"
+  ],
+  "answer": 2,
+  "explain": "Removing H⁺ from a negatively charged ion (HS⁻) is harder than from neutral H₂S, so K₁ ≫ K₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "885829b4-38cd-4b78-b3a2-8ed610d1b2c9",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "Conjugate base of a stronger acid is, compared with that of a weaker acid, a ___ base.",
+  "formula": "K_b = Kw/Kₐ",
+  "options": [
+   "Amphoteric",
+   "Stronger",
+   "Weaker",
+   "Equally strong"
+  ],
+  "answer": 2,
+  "explain": "Larger Kₐ gives smaller K_b = Kw/Kₐ, so the conjugate base is weaker.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ef8ad2ae-4c52-462a-9319-7fbcdf8d4cbb",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "A base has a smaller pK_b. Its conjugate acid has a pKₐ that is:",
+  "formula": "pKₐ = 14 − pK_b",
+  "options": [
+   "Same as pK_b",
+   "Larger, so a weaker acid",
+   "Smaller, so a stronger acid",
+   "Always 7"
+  ],
+  "answer": 1,
+  "explain": "Smaller pK_b means a stronger base. Then pKₐ = 14 − pK_b is larger, so the conjugate acid is weaker.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aded1fa7-b7ce-426f-837c-e8995f2925bc",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "Cl⁻, the conjugate base of HCl, has a pK_b that is:",
+  "formula": "",
+  "options": [
+   "Very small, so a strong base",
+   "Very large, so a negligible base",
+   "About 7",
+   "Exactly 14"
+  ],
+  "answer": 1,
+  "explain": "HCl has a huge Kₐ, so K_b of Cl⁻ is negligible and pK_b is very large.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64c016d3-30e7-425f-965b-08e91c786deb",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "Hydrolysis constant Kh of NH₄Cl (salt of weak base NH₃, strong acid) is:",
+  "formula": "Kh = Kw/K_b",
+  "options": [
+   "Kw/Kₐ of NH₄Cl",
+   "Kw/K_b of NH₃",
+   "K_b/Kw",
+   "Kₐ·K_b"
+  ],
+  "answer": 1,
+  "explain": "NH₄⁺ hydrolyses as a weak acid; Kh = Kₐ(NH₄⁺) = Kw/K_b(NH₃).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8a1a99bd-a445-4ec4-93b7-93766d2e6f15",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "pH of the amphiprotic ion HCO₃⁻ (aq) in terms of the pKₐ values of H₂CO₃ is:",
+  "formula": "pH = ½(pKₐ₁ + pKₐ₂)",
+  "options": [
+   "pKₐ₁ + pKₐ₂",
+   "½(pKₐ₁ + pKₐ₂)",
+   "½(pKₐ₂ − pKₐ₁)",
+   "14 − ½(pKₐ₁ + pKₐ₂)"
+  ],
+  "answer": 1,
+  "explain": "For an amphiprotic anion, [H⁺] = √(Kₐ₁Kₐ₂), so pH is the mean of pKₐ₁ and pKₐ₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a84ec464-77a5-4770-a96b-fddb7b333f75",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "For a weak acid HA, increasing pKₐ by 1 unit changes Kₐ by what factor?",
+  "formula": "pKₐ = −log Kₐ",
+  "options": [
+   "Divided by 2.303",
+   "Multiplied by 10",
+   "Divided by 10",
+   "Increased by 1"
+  ],
+  "answer": 2,
+  "explain": "pKₐ = −log Kₐ, so a rise of 1 in pKₐ means Kₐ falls to one-tenth.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7ef9cd79-e87e-4635-9be1-edd22c419f6e",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Polyprotic acids, multistage ionization",
+  "prompt": "In a saturated H₂S solution, how does [S²⁻] vary with [H⁺]?",
+  "formula": "[S²⁻] = Ka1·Ka2·[H₂S]/[H⁺]²",
+  "options": [
+   "Independent of [H⁺]",
+   "Directly with [H⁺]",
+   "Inversely with [H⁺]",
+   "Inversely with [H⁺]²"
+  ],
+  "answer": 3,
+  "explain": "Ka1·Ka2 = [H⁺]²[S²⁻]/[H₂S], so [S²⁻] ∝ 1/[H⁺]²; this is why acid suppresses sulphide.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5ce828f1-a355-48f9-a11d-90b785457fe2",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "The common ion effect is a direct application of which principle?",
+  "formula": "",
+  "options": [
+   "Ostwald's dilution law",
+   "Le Chatelier's principle",
+   "Henry's law",
+   "Raoult's law"
+  ],
+  "answer": 1,
+  "explain": "Adding a common ion shifts the ionization equilibrium backward, as Le Chatelier's principle predicts.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11e78b68-08da-4b75-bfa8-9f9fb3c9b448",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "In H₂S solution, [H⁺] is doubled by adding HCl. [S²⁻] becomes:",
+  "formula": "[S²⁻] = K₁K₂[H₂S]/[H⁺]²",
+  "options": [
+   "Four times",
+   "One-half",
+   "One-fourth",
+   "Double"
+  ],
+  "answer": 2,
+  "explain": "[S²⁻] ∝ 1/[H⁺]², so doubling [H⁺] reduces [S²⁻] to 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7bf7fe23-d939-409d-b26e-a4d2143cd73c",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "NaOH is added to NH₄OH solution. The degree of dissociation of NH₄OH:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Remains the same",
+   "Decreases",
+   "Becomes 1"
+  ],
+  "answer": 2,
+  "explain": "The added OH⁻ is a common ion and suppresses ionization of NH₄OH.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b105fe1f-ed67-45b1-bb36-fc2d24d58005",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "Passing HCl gas through saturated NaCl solution precipitates NaCl crystals. This is due to:",
+  "formula": "",
+  "options": [
+   "Common ion effect of Cl⁻",
+   "Hydrolysis of NaCl",
+   "Salt formation with H⁺",
+   "Decrease in temperature"
+  ],
+  "answer": 0,
+  "explain": "Added Cl⁻ makes the ionic product exceed Ksp, so NaCl precipitates.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "74c3156e-4113-4536-a76a-03ac88784695",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "AgCl solubility is least in which solution?",
+  "formula": "",
+  "options": [
+   "Pure water",
+   "0.1 M NaCl",
+   "0.1 M CaCl₂",
+   "0.1 M AgNO₃"
+  ],
+  "answer": 2,
+  "explain": "0.1 M CaCl₂ gives 0.2 M Cl⁻, the highest common ion concentration, so s = Ksp/0.2 is smallest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abd6cb5a-659e-4947-b68a-4eaa545fa4c0",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "Common ion effect is mainly used to suppress ionization of:",
+  "formula": "",
+  "options": [
+   "Strong bases",
+   "Weak electrolytes",
+   "Strong acids",
+   "Neutral salts only"
+  ],
+  "answer": 1,
+  "explain": "Weak electrolytes are in equilibrium with their ions, so a common ion can shift that equilibrium markedly.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "60d2e25f-0c98-4339-a63d-386862f48253",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "Adding NH₄Cl to aqueous NH₃ solution causes [OH⁻] to:",
+  "formula": "NH₃ + H₂O ⇌ NH₄⁺ + OH⁻",
+  "options": [
+   "Decrease",
+   "Remain unchanged",
+   "Increase",
+   "Increase then decrease"
+  ],
+  "answer": 0,
+  "explain": "Common ion NH₄⁺ shifts equilibrium left, so ionization of NH₃ is suppressed and [OH⁻] falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cc30afa9-890f-4a00-8ee5-c09e012470cb",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "In Group II analysis, dilute HCl is present while passing H₂S. Its role is to:",
+  "formula": "H₂S ⇌ 2H⁺ + S²⁻",
+  "options": [
+   "Lower [S²⁻] by the common ion H⁺",
+   "Oxidise H₂S to sulphur",
+   "Raise [S²⁻] by the common ion H⁺",
+   "Form soluble chlorocomplexes"
+  ],
+  "answer": 0,
+  "explain": "Common ion H⁺ suppresses H₂S ionization; only low-Ksp Group II sulphides precipitate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "44a3d3ef-9ba1-4ebc-bd49-178300b60703",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "For Group IV sulphides, H₂S is passed in NH₄OH medium because OH⁻ ions:",
+  "formula": "",
+  "options": [
+   "Add more S²⁻ directly",
+   "Suppress ionization of NH₄OH",
+   "Lower the Ksp of sulphides",
+   "Remove H⁺, increasing [S²⁻]"
+  ],
+  "answer": 3,
+  "explain": "OH⁻ consumes H⁺, shifting H₂S ionization right; higher [S²⁻] exceeds Ksp of ZnS, NiS, CoS, MnS.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "175d0ab8-993b-452e-849a-c5a2df8a3cde",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Dilute an acidic buffer 10-fold with pure water. Its pH (ideal behaviour) will:",
+  "formula": "pH = pKₐ + log([A⁻]/[HA])",
+  "options": [
+   "Increase by 1 unit",
+   "Decrease by 1 unit",
+   "Remain nearly unchanged",
+   "Become 7"
+  ],
+  "answer": 2,
+  "explain": "Dilution changes both concentrations equally, so the ratio and the pH stay the same; only buffer capacity falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "959e3d07-4542-442c-b781-970d5ec655c7",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Which pair of mixtures forms a buffer?",
+  "formula": "",
+  "options": [
+   "1 mol CH₃COOH + 1 mol NaOH",
+   "2 mol CH₃COOH + 1 mol NaOH",
+   "2 mol HCl + 1 mol NaOH",
+   "1 mol HCl + 1 mol NH₃"
+  ],
+  "answer": 1,
+  "explain": "Excess weak acid remains after partial neutralisation, giving the CH₃COOH/CH₃COO⁻ buffer.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9e6a562-2c94-4d8f-8581-b28bc5d126a5",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "On adding a small amount of strong acid to CH₃COOH/CH₃COONa buffer, H⁺ is removed mainly by:",
+  "formula": "",
+  "options": [
+   "CH₃COOH",
+   "Water",
+   "Na⁺",
+   "CH₃COO⁻"
+  ],
+  "answer": 3,
+  "explain": "CH₃COO⁻ + H⁺ → CH₃COOH, so the added H⁺ is consumed by the conjugate base.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9cf193fd-4932-4304-999b-66b5cdac5e13",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "On adding a small amount of strong base to CH₃COOH/CH₃COONa buffer, OH⁻ is removed mainly by:",
+  "formula": "",
+  "options": [
+   "CH₃COOH",
+   "CH₃COO⁻",
+   "Na⁺",
+   "H₂O"
+  ],
+  "answer": 0,
+  "explain": "CH₃COOH + OH⁻ → CH₃COO⁻ + H₂O, so the weak acid neutralises added OH⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69998a25-5470-4dd3-9599-c0267ee4cb7a",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Buffer capacity of a given buffer is greater when:",
+  "formula": "",
+  "options": [
+   "Component concentrations are higher",
+   "The solution is diluted",
+   "[salt]/[acid] is 100",
+   "Temperature is lowered only"
+  ],
+  "answer": 0,
+  "explain": "More moles of HA and A⁻ can neutralise more added acid or base; capacity is also maximum at ratio 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a713df9d-a044-41d1-99a9-78f15ddd9b07",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Which pair is a basic buffer?",
+  "formula": "",
+  "options": [
+   "HCN + KCN",
+   "HCl + NaCl",
+   "CH₃COOH + CH₃COONa",
+   "NH₄OH + NH₄Cl"
+  ],
+  "answer": 3,
+  "explain": "A weak base with its salt (conjugate acid) gives a basic buffer, pH above 7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "adc577d6-75de-456c-b61e-90519ef6b0d7",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "Henderson equation uses the approximation that [HA] and [A⁻] are equal to:",
+  "formula": "",
+  "options": [
+   "Their equilibrium Kₐ values",
+   "Their initial (mixed) concentrations",
+   "[H⁺] each",
+   "Zero ionisation of salt"
+  ],
+  "answer": 1,
+  "explain": "Ionisation of weak acid is suppressed by the common ion and salt hydrolysis is negligible, so initial concentrations are used.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "185adb0d-dd91-4423-b5b1-e894c1e3960e",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "A buffer needed at pH ≈ 9 is best made from:",
+  "formula": "",
+  "options": [
+   "NH₃ + NH₄Cl (pK_b 4.75)",
+   "HCOOH + HCOONa (pKₐ 3.75)",
+   "CH₃COOH + CH₃COONa (pKₐ 4.75)",
+   "HCl + NaCl"
+  ],
+  "answer": 0,
+  "explain": "NH₃/NH₄⁺ has pKₐ of about 9.25, within the pKₐ ± 1 range of pH 9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d297dfef-49f8-496e-81a6-6bfc167a2615",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "In a saturated Mg(OH)₂ solution of solubility s, [OH⁻] equals?",
+  "formula": "",
+  "options": [
+   "s",
+   "2s",
+   "4s",
+   "s/2"
+  ],
+  "answer": 1,
+  "explain": "Mg(OH)₂ gives 2 OH⁻ per formula unit, so [OH⁻] = 2s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ba4cb4d9-6b47-4116-b0ef-88048e73e9e7",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Group II sulfides (CuS, CdS) precipitate in dilute HCl because their Ksp is?",
+  "formula": "",
+  "options": [
+   "Very low",
+   "Very high",
+   "Equal to ZnS",
+   "Same as NiS"
+  ],
+  "answer": 0,
+  "explain": "Even the low [S²⁻] in acid exceeds their very small Ksp, so they precipitate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d642a83b-3e6d-4d24-a3fc-0fdc20a1e62a",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Which salt's solubility is practically independent of pH?",
+  "formula": "",
+  "options": [
+   "AgCl",
+   "CaCO₃",
+   "Mg(OH)₂",
+   "ZnS"
+  ],
+  "answer": 0,
+  "explain": "Cl⁻ is the conjugate base of a strong acid and does not react with H⁺.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1042dc86-7ffc-4ff6-94a0-b30ae2c0a4e9",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Equal volumes of two solutions are mixed before checking Q against Ksp. Each ion concentration becomes?",
+  "formula": "",
+  "options": [
+   "Halved",
+   "Unchanged",
+   "Doubled",
+   "One-fourth"
+  ],
+  "answer": 0,
+  "explain": "Total volume doubles, so each ion's concentration is halved before computing Q.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6fbfe03-1da4-4b0b-b2d6-f461362c9441",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "For a sparingly soluble salt, ionic product Q < Ksp indicates the solution is?",
+  "formula": "Q > Ksp: precipitation; Q = Ksp: saturated",
+  "options": [
+   "Unsaturated; Ksp decreases",
+   "Unsaturated; more solid can dissolve",
+   "Saturated, in equilibrium with solid",
+   "Supersaturated; precipitate forms"
+  ],
+  "answer": 1,
+  "explain": "Q < Ksp means ion concentrations are below saturation, so no precipitate forms and more solid can dissolve.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c8c6172-e8e1-4198-932c-2d9c36050cd0",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "When ionic product Q = Ksp, the solution is:",
+  "formula": "",
+  "options": [
+   "Precipitating continuously",
+   "Saturated, at equilibrium",
+   "Unsaturated",
+   "Supersaturated"
+  ],
+  "answer": 1,
+  "explain": "Q = Ksp means a saturated solution with no net precipitation or dissolution.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ea05403-6f89-46d9-8215-1104c9684c34",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "Solubility of AgCl in 0.1 M NaCl (neglecting Cl⁻ from AgCl) is:",
+  "formula": "s = Ksp/[Cl⁻]",
+  "options": [
+   "Ksp²",
+   "Ksp/10",
+   "√Ksp",
+   "10 Ksp"
+  ],
+  "answer": 3,
+  "explain": "s = Ksp/0.1 = 10 Ksp, since [Cl⁻] ≈ 0.1 M.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "90b088ea-dd78-4a52-8833-444f43ab06e2",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "Pure water at 0°C (Kw < 10⁻¹⁴) is neutral and has pH:",
+  "formula": "",
+  "options": [
+   "Equal to 14",
+   "Exactly 7",
+   "Greater than 7",
+   "Less than 7"
+  ],
+  "answer": 2,
+  "explain": "Kw falls on cooling, so pKw > 14 and neutral pH = ½ pKw > 7 (about 7.5).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c7b9487-7200-4dfa-92d9-c82c93621cb7",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "In 10⁻³ M HCl at 25°C, [OH⁻] (entirely from water) is:",
+  "formula": "",
+  "options": [
+   "10⁻¹¹ M",
+   "10⁻³ M",
+   "10⁻⁷ M",
+   "10⁻¹⁴ M"
+  ],
+  "answer": 0,
+  "explain": "[OH⁻] = Kw/[H⁺] = 10⁻¹⁴/10⁻³ = 10⁻¹¹ M, and this equals the water-derived [H⁺].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c02bbcc3-2094-4b2f-b271-8e0f254a4803",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "In the autoionisation 2H₂O ⇌ H₃O⁺ + OH⁻, water behaves as both acid and base. This property is called:",
+  "formula": "",
+  "options": [
+   "Hydrolytic amphoterism only",
+   "Deliquescence",
+   "Autoprotolytic inertness",
+   "Amphiprotic nature"
+  ],
+  "answer": 3,
+  "explain": "Water both donates and accepts a proton, so it is amphiprotic (amphoteric), which gives autoprotolysis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84f5b7c1-dcee-4c7b-9377-8d0bab329685",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "For weak acids at the same concentration, the stronger acid has?",
+  "formula": "",
+  "options": [
+   "Lower Kₐ and higher pKₐ",
+   "Higher Kₐ and higher pKₐ",
+   "Lower Kₐ and lower pKₐ",
+   "Higher Kₐ and lower pKₐ"
+  ],
+  "answer": 3,
+  "explain": "pKₐ = −log Kₐ, so larger Kₐ means smaller pKₐ and a stronger acid.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97452354-8242-4771-b917-085009f695e0",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Relation Ka·Kb = Kw, pKa and pKb",
+  "prompt": "For a salt of weak acid HA and weak base BOH, hydrolysis constant Kh equals:",
+  "formula": "",
+  "options": [
+   "Kw/(Kₐ·K_b)",
+   "Kw/Kₐ",
+   "Kw/K_b",
+   "Kₐ·K_b/Kw"
+  ],
+  "answer": 0,
+  "explain": "Both ions hydrolyse: Kh = Kw/(Kₐ·K_b); pH = 7 + ½(pKₐ − pK_b).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ef5ddf74-e964-4986-9fdb-5a59648257f3",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Buffer solutions, Henderson equation",
+  "prompt": "In the H₂PO₄⁻/HPO₄²⁻ buffer (pH ≈ 7.2), the Henderson equation uses which pKₐ of H₃PO₄?",
+  "formula": "pKₐ₂ ≈ 7.2",
+  "options": [
+   "Average of pKₐ₁ and pKₐ₃",
+   "pKₐ₃ (≈ 12.3)",
+   "pKₐ₁ (≈ 2.1)",
+   "pKₐ₂ (≈ 7.2)"
+  ],
+  "answer": 3,
+  "explain": "H₂PO₄⁻ is the acid and HPO₄²⁻ its conjugate base, which is the second dissociation step, so pKₐ₂ ≈ 7.2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a751d25e-2031-4357-8e8d-0265993c715c",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "Acids HA, HB, HC have Kₐ = 10⁻³, 10⁻⁵, 10⁻⁷. Which anion is the strongest base?",
+  "formula": "",
+  "options": [
+   "C⁻",
+   "A⁻",
+   "All equal",
+   "B⁻"
+  ],
+  "answer": 0,
+  "explain": "Smallest Kₐ gives the weakest acid and hence the strongest conjugate base (K_b = K_w/Kₐ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "358721cd-e0cb-4eaa-b835-83a111e65c74",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "Ostwald's dilution law is an application of which law to the ionization equilibrium of a weak electrolyte?",
+  "formula": "",
+  "options": [
+   "Henry's law",
+   "Law of mass action",
+   "Raoult's law",
+   "Kohlrausch's law"
+  ],
+  "answer": 1,
+  "explain": "Applying the law of mass action to AB ⇌ A⁺ + B⁻ gives K = Cα²/(1−α).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1ce44826-b48e-4da2-a646-44866697c711",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Strong and weak electrolytes, ionization",
+  "prompt": "For a strong electrolyte, the plot of Λₘ against √c at low concentration is:",
+  "formula": "Λₘ = Λₘ° − A√c",
+  "options": [
+   "Line parallel to the √c axis",
+   "Straight line, positive slope",
+   "Straight line, negative slope",
+   "Steep curve rising sharply as c → 0"
+  ],
+  "answer": 2,
+  "explain": "Debye–Hückel–Onsager (Kohlrausch) equation: linear fall of Λₘ with √c; intercept is Λₘ°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a9877b1-39a1-4a19-90f5-26419f4b8594",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Conjugate acid-base pairs and strength",
+  "prompt": "In a proton-transfer equilibrium, the position of equilibrium favours the side with:",
+  "formula": "",
+  "options": [
+   "Weaker acid and stronger base",
+   "Stronger acid and weaker base",
+   "Weaker acid and weaker base",
+   "Stronger acid and stronger base"
+  ],
+  "answer": 2,
+  "explain": "Proton transfer goes from the stronger acid and base to the weaker acid and base.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fe64e6f2-d24f-467a-9206-f46a58e68b22",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "On infinite dilution of a strong acid with water at 25°C, its pH approaches:",
+  "formula": "",
+  "options": [
+   "Above 7",
+   "7 from below",
+   "7 from above",
+   "14"
+  ],
+  "answer": 1,
+  "explain": "Water's own [H⁺] of 10⁻⁷ M dominates; an acid solution stays below pH 7 and never turns basic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3d6d685-5455-4dfa-972c-546ef67e23c4",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionization of water, Kw and temperature",
+  "prompt": "For water, a plot of log Kw versus 1/T is a straight line with slope:",
+  "formula": "log Kw = const − ΔH°/(2.303 R T)",
+  "options": [
+   "Zero",
+   "−ΔH°·R/2.303",
+   "−ΔH°/2.303R (negative)",
+   "+ΔH°/2.303R (positive)"
+  ],
+  "answer": 2,
+  "explain": "Ionisation is endothermic (ΔH° > 0), so the van't Hoff slope −ΔH°/2.303R is negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "53ba39c1-36d2-4a2e-85f3-e60b80f718f9",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ka, Kb, Ostwald dilution, degree of ionization",
+  "prompt": "Which of these acids has the largest Kₐ at 25°C?",
+  "formula": "",
+  "options": [
+   "HCOOH",
+   "C₆H₅OH",
+   "HCN",
+   "CH₃COOH"
+  ],
+  "answer": 0,
+  "explain": "Kₐ: HCOOH (1.8×10⁻⁴) > CH₃COOH (1.8×10⁻⁵) > HCN (~10⁻¹⁰) ≈ C₆H₅OH (~10⁻¹⁰).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ddb9bfae-a6a9-4328-8646-a97e526bb91d",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Polyprotic acids, multistage ionization",
+  "prompt": "In aqueous H₃PO₄, [H⁺] is nearly equal to the concentration of which ion?",
+  "formula": "",
+  "options": [
+   "H₂PO₄⁻",
+   "PO₄³⁻",
+   "HPO₄²⁻",
+   "OH⁻"
+  ],
+  "answer": 0,
+  "explain": "Ka1 ≫ Ka2, Ka3, so H⁺ comes almost entirely from the first step, giving H₂PO₄⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "adc935f6-9c91-4f3f-bf4c-aad90b39be62",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Polyprotic acids, multistage ionization",
+  "prompt": "H₃PO₃ is a protic acid with how many ionisable H⁺ ions?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "1",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "H₃PO₃ is dibasic: only the two P–OH hydrogens ionise, not the P–H.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f233dd00-d837-4074-83d3-5e596756a6b0",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Polyprotic acids, multistage ionization",
+  "prompt": "In aqueous Na₂CO₃, the OH⁻ ions come mainly from which hydrolysis step?",
+  "formula": "CO₃²⁻ + H₂O ⇌ HCO₃⁻ + OH⁻",
+  "options": [
+   "Na⁺ + H₂O ⇌ NaOH + H⁺",
+   "CO₃²⁻ + H₂O ⇌ HCO₃⁻ + OH⁻",
+   "H₂CO₃ ⇌ H⁺ + HCO₃⁻",
+   "HCO₃⁻ + H₂O ⇌ H₂CO₃ + OH⁻"
+  ],
+  "answer": 1,
+  "explain": "Kh1 = Kw/Ka2 ≫ Kh2 = Kw/Ka1, so the first hydrolysis step dominates.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3aed2f03-372b-4cdc-93b2-f60efd09804f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Polyprotic acids, multistage ionization",
+  "prompt": "In 0.1 M aqueous H₂SO₄, [H⁺] is:",
+  "formula": "",
+  "options": [
+   "Exactly 0.1 M",
+   "Exactly 0.2 M",
+   "Between 0.1 M and 0.2 M",
+   "Less than 0.1 M"
+  ],
+  "answer": 2,
+  "explain": "First ionisation is complete; second is partial (Ka2 ≈ 10⁻²), so 0.1 < [H⁺] < 0.2 M.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "acc8e5ab-a745-4c66-ad96-fb1589bb65a7",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Common ion effect on ionization",
+  "prompt": "Solubility of Mg(OH)₂ is lowest in which of these?",
+  "formula": "",
+  "options": [
+   "0.1 M NaOH",
+   "0.1 M HCl",
+   "Pure water",
+   "0.1 M NH₄Cl"
+  ],
+  "answer": 0,
+  "explain": "NaOH supplies the common ion OH⁻. NH₄Cl and HCl remove OH⁻ and raise solubility.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d0791890-0c5e-4ffc-866c-276ceee17540",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Ksp expression for Hg₂Cl₂ (Hg₂²⁺ is a dimeric ion) is?",
+  "formula": "Hg₂Cl₂ ⇌ Hg₂²⁺ + 2Cl⁻",
+  "options": [
+   "[Hg₂²⁺]²[Cl⁻]²",
+   "[Hg²⁺][Cl⁻]²",
+   "[Hg₂²⁺][Cl⁻]²",
+   "[Hg²⁺]²[Cl⁻]²"
+  ],
+  "answer": 2,
+  "explain": "Hg₂²⁺ is a single ion, so its power is 1; Cl⁻ has power 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "23f3f150-b3c9-41c1-911b-f161484bbdb1",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "AgNO₃ is added dropwise to equimolar Cl⁻, Br⁻, I⁻. The first precipitate is?",
+  "formula": "",
+  "options": [
+   "AgBr",
+   "All together",
+   "AgI",
+   "AgCl"
+  ],
+  "answer": 2,
+  "explain": "AgI has the lowest Ksp, so it needs the least [Ag⁺] to reach Q = Ksp.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "41e9f403-ff56-4d22-91b5-4081b045d42a",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Zn(OH)₂ dissolves in excess NaOH because it is:",
+  "formula": "",
+  "options": [
+   "Acidic, forming ZnO",
+   "Basic, forming Zn²⁺",
+   "Oxidised to Zn(OH)₄",
+   "Amphoteric, forming zincate"
+  ],
+  "answer": 3,
+  "explain": "Amphoteric hydroxide: Zn(OH)₂ + 2OH⁻ → [Zn(OH)₄]²⁻, removing Zn²⁺.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3f61dc44-f58c-403a-8761-16d3be80449b",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Mg²⁺ is not precipitated in group III (NH₄OH/NH₄Cl) mainly because Mg(OH)₂ has:",
+  "formula": "",
+  "options": [
+   "High Ksp, so Q < Ksp",
+   "Very low Ksp",
+   "Amphoteric nature",
+   "Zero solubility"
+  ],
+  "answer": 0,
+  "explain": "NH₄Cl keeps [OH⁻] low; Q for Mg(OH)₂ stays below its relatively high Ksp.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "246fb65e-f896-42bc-8d8a-234028334f11",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "ZnS does not precipitate with H₂S in dilute HCl because:",
+  "formula": "",
+  "options": [
+   "Zn²⁺ is hydrolysed by HCl",
+   "Q < Ksp due to very low [S²⁻]",
+   "ZnS is soluble in water",
+   "HCl oxidises H₂S"
+  ],
+  "answer": 1,
+  "explain": "H⁺ suppresses [S²⁻]; ZnS has a higher Ksp than CuS, so Q stays below Ksp.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "89e45ae6-adb8-44b5-ab79-5aca3b31fb45",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Solubility product Ksp and solubility",
+  "prompt": "Solubility of ZnS calculated from Ksp is lower than the actual value mainly because of:",
+  "formula": "",
+  "options": [
+   "Increase in Ksp",
+   "Complex formation with water",
+   "Common ion effect",
+   "Hydrolysis of the ions"
+  ],
+  "answer": 3,
+  "explain": "S²⁻ hydrolyses to HS⁻ and OH⁻, lowering free [S²⁻] and dissolving more salt.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a4be04d-6d53-49b4-965c-42793ebac27b",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "Which change alters the numerical value of Ksp of AgCl?",
+  "formula": "",
+  "options": [
+   "Adding aqueous NH₃",
+   "Changing the temperature",
+   "Adding NaCl",
+   "Adding more solid AgCl"
+  ],
+  "answer": 1,
+  "explain": "Ksp is an equilibrium constant, so it changes only with temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "577605b8-acb5-4d19-a069-a499700bdd2f",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "Why is the solid AgCl(s) absent from the Ksp expression of AgCl?",
+  "formula": "Ksp = [Ag⁺][Cl⁻]",
+  "options": [
+   "It does not ionise at all",
+   "Pure solid has constant activity (unity)",
+   "It is insoluble in water",
+   "Its concentration is negligible"
+  ],
+  "answer": 1,
+  "explain": "The activity of a pure solid is taken as 1, so it is left out of the expression.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a6ecd9c-78f9-496e-84e4-528d486c52f4",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "Mg(OH)₂ dissolves in aqueous NH₄Cl mainly because NH₄⁺:",
+  "formula": "NH₄⁺ + OH⁻ → NH₃ + H₂O",
+  "options": [
+   "Raises the pH of the solution",
+   "Supplies a common Mg²⁺ ion",
+   "Forms [Mg(NH₃)₆]²⁺ complex",
+   "Removes OH⁻ as weak NH₃·H₂O"
+  ],
+  "answer": 3,
+  "explain": "NH₄⁺ lowers [OH⁻], so Q < Ksp and Mg(OH)₂ dissolves.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a54c0e29-6597-4465-971c-56c9b4c347e0",
+  "subject": "Chemistry",
+  "chapter": "Ionic Equilibrium",
+  "topic": "Ionic product vs Ksp: precipitation",
+  "prompt": "AgCl dissolves in very concentrated HCl mainly due to formation of:",
+  "formula": "AgCl + Cl⁻ → [AgCl₂]⁻",
+  "options": [
+   "Ag₂O",
+   "AgClO",
+   "Colloidal silver",
+   "[AgCl₂]⁻ complex"
+  ],
+  "answer": 3,
+  "explain": "Excess Cl⁻ forms the soluble complex [AgCl₂]⁻, which lowers [Ag⁺] so Q < Ksp.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

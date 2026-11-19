@@ -1,1546 +1,3426 @@
 [
-  {
-    "id": "80416cae-fdbb-4205-9a17-675220b8d121",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "Principal range of sin⁻¹(x)",
-    "formula": "",
-    "options": [
-      "(-π, π)",
-      "[0, 2π]",
-      "[-π/2, π/2]",
-      "[0, π]"
-    ],
-    "answer": 2,
-    "explain": "The principal value branch of sin⁻¹ is [-π/2, π/2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0fcb27f3-5278-4bfb-94cb-109d5d0d9569",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "Which identity is correct?",
-    "formula": "sin²θ + cos²θ",
-    "options": [
-      "= 0",
-      "= sinθ cosθ",
-      "= 2",
-      "= 1"
-    ],
-    "answer": 3,
-    "explain": "Pythagorean identity: sin²θ + cos²θ = 1 for all θ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "fc623e26-df8e-4c0c-9310-7b795909aa59",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Compound Angles",
-    "prompt": "tan(A+B) formula",
-    "formula": "tan(A+B) = ?",
-    "options": [
-      "tanA+tanB",
-      "tanA·tanB−1",
-      "(tanA−tanB)/(1+tanA·tanB)",
-      "(tanA+tanB)/(1−tanA·tanB)"
-    ],
-    "answer": 3,
-    "explain": "Addition formula: tan(A+B) = (tanA+tanB)/(1−tanAtanB).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f3ad7420-788e-41ab-9184-f20ba93b58ef",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Compound Angles",
-    "prompt": "sin(A−B) equals",
-    "formula": "",
-    "options": [
-      "sinAsinB − cosAcosB",
-      "sinAcosB + cosAsinB",
-      "cosAcosB − sinAsinB",
-      "sinAcosB − cosAsinB"
-    ],
-    "answer": 3,
-    "explain": "Subtraction formula: sin(A−B) = sinAcosB − cosAsinB.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "625ae020-61d1-4ddb-91b7-b67c1a6f3b5a",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "Range of principal value branch of cos⁻¹(x)",
-    "formula": "",
-    "options": [
-      "[-π/2, π/2]",
-      "[-π, π]",
-      "[0, π]",
-      "(0, π)"
-    ],
-    "answer": 2,
-    "explain": "cos⁻¹ has principal range [0, π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "dd4af847-7fa7-4d24-8089-a4f5a5056be4",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Equations",
-    "prompt": "General solution of sinθ = sinα",
-    "formula": "θ = ?",
-    "options": [
-      "nπ ± α, n∈ℤ",
-      "nπ + (−1)ⁿα, n∈ℤ",
-      "nπ + α, n∈ℤ",
-      "2nπ ± α, n∈ℤ"
-    ],
-    "answer": 1,
-    "explain": "General solution: θ = nπ + (−1)ⁿα.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a56ee0d9-8a3a-48e9-843c-1119278517f8",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Equations",
-    "prompt": "General solution of cosθ = cosα",
-    "formula": "θ = ?",
-    "options": [
-      "nπ ± α",
-      "2nπ + α",
-      "2nπ ± α, n∈ℤ",
-      "nπ + (−1)ⁿα"
-    ],
-    "answer": 2,
-    "explain": "General solution: θ = 2nπ ± α.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "41410aca-164e-4e04-84c8-786e3f9b109f",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Properties of Triangles",
-    "prompt": "In triangle, sine rule states",
-    "formula": "a/sinA = b/sinB = c/sinC",
-    "options": [
-      "= 4R",
-      "= 2R",
-      "= R/2",
-      "= R"
-    ],
-    "answer": 1,
-    "explain": "Each ratio equals 2R, the diameter of the circumscribed circle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "58e494ae-f22f-4959-b753-3f074b2b977b",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Properties of Triangles",
-    "prompt": "Cosine rule: cos A =",
-    "formula": "",
-    "options": [
-      "(b²+c²−a²)/(2bc)",
-      "(a²+b²−c²)/(2ab)",
-      "(b²−c²+a²)/(2bc)",
-      "(a²+c²−b²)/(2ac)"
-    ],
-    "answer": 0,
-    "explain": "Cosine rule: cosA = (b²+c²−a²)/(2bc).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "20e51ca4-6e72-47d9-9a8f-7e6f4a98df5f",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Double Angle Formulas",
-    "prompt": "sin 2θ equals",
-    "formula": "sin 2θ = ?",
-    "options": [
-      "2cos²θ − 1",
-      "2 sinθ cosθ",
-      "1 − 2sin²θ",
-      "sin²θ − cos²θ"
-    ],
-    "answer": 1,
-    "explain": "Double angle: sin2θ = 2sinθcosθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "15651c36-ff95-4fd2-acdc-f9220aa27819",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Double Angle Formulas",
-    "prompt": "tan 2θ equals",
-    "formula": "tan 2θ = ?",
-    "options": [
-      "2tanθ/(1+tan²θ)",
-      "2tanθ/(1−tan²θ)",
-      "2sinθcosθ",
-      "tanθ/(1−tan²θ)"
-    ],
-    "answer": 1,
-    "explain": "Double angle: tan2θ = 2tanθ/(1−tan²θ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "efc45b6d-e404-4cfe-82f5-24fa45c46dbb",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Sum-to-Product",
-    "prompt": "sinC + sinD product-to-sum form",
-    "formula": "sinC + sinD = ?",
-    "options": [
-      "2sin((C+D)/2)cos((C−D)/2)",
-      "2sin((C+D)/2)sin((C−D)/2)",
-      "2cos((C+D)/2)cos((C−D)/2)",
-      "2cos((C+D)/2)sin((C−D)/2)"
-    ],
-    "answer": 0,
-    "explain": "Sum-to-product: sinC+sinD = 2sin((C+D)/2)cos((C−D)/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2a32f4b4-3e28-44a1-92ee-f0cd509d98bb",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Product-to-Sum",
-    "prompt": "2sinAcosB equals",
-    "formula": "",
-    "options": [
-      "cos(A+B)+cos(A−B)",
-      "sin(A+B)−sin(A−B)",
-      "cos(A−B)−cos(A+B)",
-      "sin(A+B)+sin(A−B)"
-    ],
-    "answer": 3,
-    "explain": "Product-to-sum: 2sinAcosB = sin(A+B)+sin(A−B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1388df27-ffeb-4267-abfc-6fe1f941ec29",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Properties of Triangles",
-    "prompt": "Area of triangle in terms of sides & included angle",
-    "formula": "Δ = ?",
-    "options": [
-      "ab sinC",
-      "(1/2)ab sinC",
-      "(1/2)ab cosC",
-      "ab cosC/2"
-    ],
-    "answer": 1,
-    "explain": "Area = (1/2)×a×b×sinC where C is the included angle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6e3f1c78-7d43-4171-8000-396725f51e3c",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "sin⁻¹(x) + cos⁻¹(x) for x∈[−1,1]",
-    "formula": "",
-    "options": [
-      "π/2",
-      "π",
-      "0",
-      "2π"
-    ],
-    "answer": 0,
-    "explain": "Standard identity: sin⁻¹x + cos⁻¹x = π/2 for x∈[−1,1].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1cc0b4d2-8ed4-4fac-9c9a-1f6487ea4942",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "tan⁻¹(x) + cot⁻¹(x) equals",
-    "formula": "",
-    "options": [
-      "0",
-      "π",
-      "π/2",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "Identity: tan⁻¹x + cot⁻¹x = π/2 for all x∈ℝ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d3c8c440-fec9-4518-a9d9-d6aac716efb0",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "Value of tan⁻¹(1) + tan⁻¹(1)",
-    "formula": "",
-    "options": [
-      "π/4",
-      "3π/4",
-      "π",
-      "π/2"
-    ],
-    "answer": 3,
-    "explain": "tan⁻¹1 = π/4, so sum = π/4 + π/4 = π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8e910eef-4f3e-42ee-8982-47b2e29c3d00",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Equations",
-    "prompt": "General solution of tanθ = tanα",
-    "formula": "θ = ?",
-    "options": [
-      "nπ + (−1)ⁿα",
-      "2nπ ± α, n∈ℤ",
-      "nπ/2 + α",
-      "nπ + α, n∈ℤ"
-    ],
-    "answer": 3,
-    "explain": "General solution: θ = nπ + α.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5e6e964e-40a2-4f37-9762-9831d8d9108f",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "sec²θ − tan²θ equals",
-    "formula": "",
-    "options": [
-      "1",
-      "tan²θ",
-      "sec²θ",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "Pythagorean identity: sec²θ − tan²θ = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a4ea459c-46bc-4198-add1-86c90434a157",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Sum-to-Product",
-    "prompt": "cosC − cosD sum-to-product form",
-    "formula": "cosC − cosD = ?",
-    "options": [
-      "2cos((C+D)/2)cos((C−D)/2)",
-      "−2cos((C+D)/2)sin((C−D)/2)",
-      "−2sin((C+D)/2)sin((C−D)/2)",
-      "2sin((C+D)/2)sin((C−D)/2)"
-    ],
-    "answer": 2,
-    "explain": "cosC−cosD = −2sin((C+D)/2)sin((C−D)/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "da8d98be-1518-4e32-8d59-aa088b0f0ce5",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Properties of Triangles",
-    "prompt": "In-radius r of a triangle with area Δ and semi-perimeter s",
-    "formula": "r = ?",
-    "options": [
-      "s/Δ",
-      "Δ/(2s)",
-      "Δ/s",
-      "2Δ/s"
-    ],
-    "answer": 2,
-    "explain": "In-radius formula: r = Δ/s where s = (a+b+c)/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fd6e6bc4-3fb9-4538-b133-ec3e4f903598",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Values",
-    "prompt": "Value of sin(π/3) is",
-    "formula": "",
-    "options": [
-      "1/2",
-      "√3/2",
-      "√3",
-      "1/√2"
-    ],
-    "answer": 1,
-    "explain": "sin 60° = sin(π/3) = √3/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9ed6f8e8-5580-47a1-9432-9169aaf58023",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Compound Angles",
-    "prompt": "cos(A+B) formula?",
-    "formula": "cos A cos B − sin A sin B",
-    "options": [
-      "sinAsinB − cosAcosB",
-      "sinAcosB − cosAsinB",
-      "cosAcosB − sinAsinB",
-      "cosAcosB + sinAsinB"
-    ],
-    "answer": 2,
-    "explain": "cos(A+B) = cosAcosB − sinAsinB is a fundamental compound angle identity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "80229b6c-0e5c-4e78-b710-fab71d41aced",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Values",
-    "prompt": "Value of cos(π/6)?",
-    "formula": "",
-    "options": [
-      "1/√2",
-      "1/2",
-      "√3",
-      "√3/2"
-    ],
-    "answer": 3,
-    "explain": "cos 30° = cos(π/6) = √3/2 is a standard exact value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a7d4d65-2cf1-4053-87eb-445c0fd5eac8",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Multiple Angles",
-    "prompt": "sin³θ expressed in terms of multiple angles?",
-    "formula": "sin³θ = (3sinθ − sin3θ)/4",
-    "options": [
-      "(3sinθ + sin3θ)/4",
-      "(sinθ − 3sin3θ)/4",
-      "(sin3θ − 3sinθ)/4",
-      "(3sinθ − sin3θ)/4"
-    ],
-    "answer": 3,
-    "explain": "sin³θ = (3sinθ − sin3θ)/4 using the triple angle identity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2928fed6-227d-4174-a84a-134bf5792efd",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Multiple Angles",
-    "prompt": "cos³θ in terms of multiple angles?",
-    "formula": "cos³θ = (3cosθ + cos3θ)/4",
-    "options": [
-      "(3cosθ + cos3θ)/4",
-      "(cos3θ − 3cosθ)/4",
-      "(cosθ + 3cos3θ)/4",
-      "(3cosθ − cos3θ)/4"
-    ],
-    "answer": 0,
-    "explain": "cos³θ = (3cosθ + cos3θ)/4 from the triple angle expansion.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b2699882-4983-457c-9b6c-01e1afbe204a",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "tan⁻¹x + tan⁻¹y = ? when xy < 1",
-    "formula": "tan⁻¹((x+y)/(1−xy))",
-    "options": [
-      "tan⁻¹((x+y)/(1+xy))",
-      "tan⁻¹((x+y)/(1−xy))",
-      "tan⁻¹((x−y)/(1+xy))",
-      "tan⁻¹((xy−1)/(x+y))"
-    ],
-    "answer": 1,
-    "explain": "When xy < 1, tan⁻¹x + tan⁻¹y = tan⁻¹((x+y)/(1−xy)).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2a5a8799-8bf7-4911-83cb-8d7ba1054180",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "Range of tan⁻¹(x)?",
-    "formula": "",
-    "options": [
-      "(−π/2, π/2)",
-      "[−π/2, π/2]",
-      "[0, π]",
-      "(0, π)"
-    ],
-    "answer": 0,
-    "explain": "Principal value branch of tan⁻¹ is the open interval (−π/2, π/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4ae8d296-5e52-450e-b984-ab7a54d8eb6a",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Product-to-Sum",
-    "prompt": "2cosAcosB equals?",
-    "formula": "cos(A−B) + cos(A+B)",
-    "options": [
-      "cos(A−B) − cos(A+B)",
-      "sin(A+B) + sin(A−B)",
-      "sin(A+B) − sin(A−B)",
-      "cos(A−B) + cos(A+B)"
-    ],
-    "answer": 3,
-    "explain": "Product-to-sum: 2cosAcosB = cos(A−B) + cos(A+B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e91e3748-72f2-4322-8bb5-8ce72dd8264f",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Product-to-Sum",
-    "prompt": "2sinAsinB equals?",
-    "formula": "cos(A−B) − cos(A+B)",
-    "options": [
-      "cos(A−B) − cos(A+B)",
-      "cos(A−B) + cos(A+B)",
-      "cos(A+B) − cos(A−B)",
-      "sin(A+B) − sin(A−B)"
-    ],
-    "answer": 0,
-    "explain": "Product-to-sum: 2sinAsinB = cos(A−B) − cos(A+B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9661bd3f-e89b-495a-a28d-e5ebd14581de",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Sum-to-Product",
-    "prompt": "sinC − sinD sum-to-product form?",
-    "formula": "2cos((C+D)/2)sin((C−D)/2)",
-    "options": [
-      "2sin((C+D)/2)sin((C−D)/2)",
-      "2cos((C+D)/2)cos((C−D)/2)",
-      "2cos((C+D)/2)sin((C−D)/2)",
-      "2sin((C+D)/2)cos((C−D)/2)"
-    ],
-    "answer": 2,
-    "explain": "sinC − sinD = 2cos((C+D)/2)·sin((C−D)/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86f64fbd-babc-4364-b076-7858cbb5dfc4",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Values",
-    "prompt": "Value of sin(π/4)?",
-    "formula": "",
-    "options": [
-      "1",
-      "1/2",
-      "√3/2",
-      "1/√2"
-    ],
-    "answer": 3,
-    "explain": "sin 45° = sin(π/4) = 1/√2 is a standard exact value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "409842b4-266b-49a0-9cc9-c1da64628bc6",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Double Angle",
-    "prompt": "cos 2θ in terms of tanθ?",
-    "formula": "(1−tan²θ)/(1+tan²θ)",
-    "options": [
-      "(tan²θ−1)/(1+tan²θ)",
-      "(1+tan²θ)/(1−tan²θ)",
-      "(1−tan²θ)/(1+tan²θ)",
-      "2tanθ/(1+tan²θ)"
-    ],
-    "answer": 2,
-    "explain": "cos2θ = (1−tan²θ)/(1+tan²θ) is one of three standard forms.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ba24fff1-7467-4a24-9752-31fe1deb6c20",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Double Angle",
-    "prompt": "sin 2θ in terms of tanθ?",
-    "formula": "2tanθ/(1+tan²θ)",
-    "options": [
-      "2tanθ/(1+tan²θ)",
-      "2tanθ/(1−tan²θ)",
-      "2sinθcosθ/(tan²θ)",
-      "tanθ/(1+tan²θ)"
-    ],
-    "answer": 0,
-    "explain": "sin2θ = 2tanθ/(1+tan²θ) using the t-substitution form.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4f581b4d-b852-46d7-94d1-faca2743318c",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Properties of Triangles",
-    "prompt": "Circumradius R of a triangle: a/sinA =?",
-    "formula": "2R",
-    "options": [
-      "2R",
-      "R",
-      "R/2",
-      "4R"
-    ],
-    "answer": 0,
-    "explain": "By the sine rule, a/sinA = 2R where R is the circumradius.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5b7ce0e3-9433-4a10-8ebe-1565b774b7a0",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "sin⁻¹(−x) equals?",
-    "formula": "−sin⁻¹(x)",
-    "options": [
-      "π − sin⁻¹(x)",
-      "−sin⁻¹(x)",
-      "π + sin⁻¹(x)",
-      "sin⁻¹(x)"
-    ],
-    "answer": 1,
-    "explain": "sin⁻¹ is an odd function: sin⁻¹(−x) = −sin⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b6f86866-da93-4407-8393-28526743b041",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "cos⁻¹(−x) equals?",
-    "formula": "π − cos⁻¹(x)",
-    "options": [
-      "−cos⁻¹(x)",
-      "cos⁻¹(x)",
-      "π + cos⁻¹(x)",
-      "π − cos⁻¹(x)"
-    ],
-    "answer": 3,
-    "explain": "cos⁻¹(−x) = π − cos⁻¹(x); cos⁻¹ is neither odd nor even.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2564ee60-379d-42a2-895e-e2836a90c64d",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Values",
-    "prompt": "Value of tan(π/3)?",
-    "formula": "",
-    "options": [
-      "√3",
-      "1",
-      "1/√3",
-      "√3/2"
-    ],
-    "answer": 0,
-    "explain": "tan 60° = tan(π/3) = √3 is a standard exact value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef10392b-9864-4cfe-a09a-8881ffd82933",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Compound Angles",
-    "prompt": "tan(π/4 + θ) equals?",
-    "formula": "(1+tanθ)/(1−tanθ)",
-    "options": [
-      "1+tanθ",
-      "(tanθ−1)/(tanθ+1)",
-      "(1+tanθ)/(1−tanθ)",
-      "(1−tanθ)/(1+tanθ)"
-    ],
-    "answer": 2,
-    "explain": "tan(π/4+θ) = (tan π/4 + tanθ)/(1−tan π/4·tanθ) = (1+tanθ)/(1−tanθ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5106e56b-3904-43c4-85d8-1143e110edd3",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Allied Angles",
-    "prompt": "Value of cos(−θ)?",
-    "formula": "cosθ",
-    "options": [
-      "−cosθ",
-      "cosθ",
-      "sinθ",
-      "−sinθ"
-    ],
-    "answer": 1,
-    "explain": "cosine is an even function: cos(−θ) = cosθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f8fdc416-1a40-4799-bb1b-11a21f1cdef7",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Allied Angles",
-    "prompt": "sin(π − θ) equals?",
-    "formula": "sinθ",
-    "options": [
-      "−sinθ",
-      "−cosθ",
-      "cosθ",
-      "sinθ"
-    ],
-    "answer": 3,
-    "explain": "sin(π − θ) = sinθ; sine is positive in second quadrant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "76846629-4b11-461b-8715-af64287a0a98",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "tan⁻¹(1/x) for x > 0 equals?",
-    "formula": "π/2 − tan⁻¹x",
-    "options": [
-      "−tan⁻¹x",
-      "π − tan⁻¹x",
-      "cot⁻¹x (x<0 only)",
-      "π/2 − tan⁻¹x"
-    ],
-    "answer": 3,
-    "explain": "For x>0: tan⁻¹(1/x) = cot⁻¹(x) = π/2 − tan⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb79985e-e431-4ec1-bf07-ac91189b5701",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Half Angle Formulas",
-    "prompt": "Half-angle formula: sin(θ/2) = ?",
-    "formula": "±√((1−cosθ)/2)",
-    "options": [
-      "±√((cosθ)/2)",
-      "±√((1+cosθ)/2)",
-      "±√((1−cosθ)/2)",
-      "±√(1−cos²θ)"
-    ],
-    "answer": 2,
-    "explain": "sin²(θ/2) = (1−cosθ)/2, so sin(θ/2) = ±√((1−cosθ)/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c40396d5-40c4-4bcd-8c86-3be265e463ce",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "cos(π − θ) equals?",
-    "formula": "",
-    "options": [
-      "sinθ",
-      "−sinθ",
-      "−cosθ",
-      "cosθ"
-    ],
-    "answer": 2,
-    "explain": "cos(π − θ) = −cosθ, since cosine is negative in second quadrant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5339ddc8-d648-4341-8d3c-5b3c7289fbf0",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "tan(π − θ) equals?",
-    "formula": "",
-    "options": [
-      "cotθ",
-      "tanθ",
-      "−cotθ",
-      "−tanθ"
-    ],
-    "answer": 3,
-    "explain": "tan(π − θ) = −tanθ; tangent is negative in second quadrant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ce81e920-310b-43d9-a645-38e72ceb032b",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "Half-angle formula: cos(θ/2) = ?",
-    "formula": "cos(θ/2) = √((1+cosθ)/2)",
-    "options": [
-      "√(1+cosθ)",
-      "√((1+sinθ)/2)",
-      "√((1−cosθ)/2)",
-      "√((1+cosθ)/2)"
-    ],
-    "answer": 3,
-    "explain": "cos(θ/2) = √((1+cosθ)/2) is the standard half-angle formula.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5df14b0d-51d4-40c5-a74a-253cccf38b94",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Values",
-    "prompt": "Value of sin(−π/6)?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "−1/2",
-      "√3/2",
-      "−√3/2"
-    ],
-    "answer": 1,
-    "explain": "sin is odd: sin(−π/6) = −sin(π/6) = −1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c288ca94-8ee8-4e44-a7f4-67ce536f8235",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Values",
-    "prompt": "Value of cos(2π/3)?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "√2/2",
-      "−√3/2",
-      "−1/2"
-    ],
-    "answer": 3,
-    "explain": "cos(2π/3) = cos(π − π/3) = −cos(π/3) = −1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d9384c9f-1e20-4ad2-b578-5de5ce6890b8",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "Which is the correct identity for 1 + cot²θ?",
-    "formula": "1 + cot²θ = cosec²θ",
-    "options": [
-      "tan²θ + 1",
-      "cot²θ",
-      "cosec²θ",
-      "sec²θ"
-    ],
-    "answer": 2,
-    "explain": "Pythagorean identity: 1 + cot²θ = cosec²θ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "16bfc300-fb7d-409f-910b-2dc6985e3153",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "sin(90° − θ) equals?",
-    "formula": "",
-    "options": [
-      "−sinθ",
-      "−cosθ",
-      "cosθ",
-      "sinθ"
-    ],
-    "answer": 2,
-    "explain": "Co-function identity: sin(90° − θ) = cosθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d5f45eb-8c30-437b-9d0f-e4817ee4a356",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "tan(90° − θ) equals?",
-    "formula": "",
-    "options": [
-      "secθ",
-      "cotθ",
-      "−cotθ",
-      "tanθ"
-    ],
-    "answer": 1,
-    "explain": "Co-function identity: tan(90° − θ) = cotθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8d1c70f7-65bb-4997-a3c8-4d813857c96d",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Values",
-    "prompt": "Value of sin(5π/6)?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "−√3/2",
-      "−1/2",
-      "√3/2"
-    ],
-    "answer": 0,
-    "explain": "sin(5π/6) = sin(π − π/6) = sin(π/6) = 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "be0732f6-a5be-4605-8977-a7fa76040e58",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "General Solutions",
-    "prompt": "General solution of cosθ = 0 is?",
-    "formula": "θ = (2n+1)π/2",
-    "options": [
-      "(2n+1)π/2, n∈ℤ",
-      "nπ, n∈ℤ",
-      "nπ/2, n∈ℤ",
-      "2nπ, n∈ℤ"
-    ],
-    "answer": 0,
-    "explain": "cosθ = 0 gives odd multiples of π/2, i.e., θ = (2n+1)π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5175d94b-8c96-4e2f-adb9-2015b1df8905",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "tan⁻¹(−x) equals?",
-    "formula": "",
-    "options": [
-      "tan⁻¹(x)",
-      "π + tan⁻¹(x)",
-      "π − tan⁻¹(x)",
-      "−tan⁻¹(x)"
-    ],
-    "answer": 3,
-    "explain": "tan⁻¹ is an odd function: tan⁻¹(−x) = −tan⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "26986b14-086a-49ba-817a-05f6a150063d",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "cot⁻¹(−x) equals?",
-    "formula": "cot⁻¹(−x) = π − cot⁻¹(x)",
-    "options": [
-      "cot⁻¹(x)",
-      "π + cot⁻¹(x)",
-      "π − cot⁻¹(x)",
-      "−cot⁻¹(x)"
-    ],
-    "answer": 2,
-    "explain": "cot⁻¹ is NOT odd; cot⁻¹(−x) = π − cot⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "17577b3f-867f-4a34-a013-63ebbc5bbcaf",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "Range of principal branch of cot⁻¹(x)?",
-    "formula": "",
-    "options": [
-      "(−π/2, π/2)",
-      "[−π/2, π/2]",
-      "[0, π]",
-      "(0, π)"
-    ],
-    "answer": 3,
-    "explain": "Principal range of cot⁻¹(x) is the open interval (0, π).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e770f4ff-4c1b-4a6f-9a5a-0477de62def9",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "sin⁻¹(x) + sin⁻¹(y) = ? when x²+y² ≤ 1",
-    "formula": "sin⁻¹(x√(1−y²) + y√(1−x²))",
-    "options": [
-      "sin⁻¹(xy + √(1−x²)√(1−y²))",
-      "sin⁻¹(x√(1−y²)+y√(1−x²))",
-      "sin⁻¹(x+y)",
-      "cos⁻¹(xy−√(1−x²)√(1−y²))"
-    ],
-    "answer": 1,
-    "explain": "Standard formula: sin⁻¹x + sin⁻¹y = sin⁻¹(x√(1−y²) + y√(1−x²)) when x²+y²≤1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dae3eead-ecb3-4ce5-bdcd-8cba2f6d9ed6",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Properties of Triangles",
-    "prompt": "Projection formula in triangle: a = ?",
-    "formula": "a = b cosC + c cosB",
-    "options": [
-      "b sinC + c sinB",
-      "b cosC + c cosB",
-      "b cosB + c cosC",
-      "b sinB + c sinC"
-    ],
-    "answer": 1,
-    "explain": "Projection formula: a = b cosC + c cosB relates sides and angles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "575cd2fb-28f3-42a0-8edc-a20c71ea7573",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "cos⁻¹(x) + cos⁻¹(y) = ? when x,y∈[−1,1], x+y≥0",
-    "formula": "cos⁻¹(xy − √(1−x²)√(1−y²))",
-    "options": [
-      "cos⁻¹(x+y)",
-      "sin⁻¹(xy−√(1−x²)√(1−y²))",
-      "cos⁻¹(xy−√(1−x²)√(1−y²))",
-      "cos⁻¹(xy+√(1−x²)√(1−y²))"
-    ],
-    "answer": 2,
-    "explain": "Standard formula: cos⁻¹x + cos⁻¹y = cos⁻¹(xy − √(1−x²)√(1−y²)) when x+y≥0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "93de4f74-ceea-4b56-b1dd-81ec4d977583",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Properties of Triangles",
-    "prompt": "In a triangle, a/sinA = b/sinB = c/sinC = ?",
-    "formula": "= 2R",
-    "options": [
-      "2R",
-      "R/2",
-      "4R",
-      "R"
-    ],
-    "answer": 0,
-    "explain": "Sine rule: each ratio equals the diameter 2R of circumscribed circle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3cf3cf40-dd56-4a70-a88d-30d9debe0d08",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Identities",
-    "prompt": "Maximum value of sinθ + cosθ?",
-    "formula": "√2",
-    "options": [
-      "√3",
-      "1",
-      "√2",
-      "2"
-    ],
-    "answer": 2,
-    "explain": "a sinθ + b cosθ has max √(a²+b²); here √(1+1) = √2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dc140a12-40b7-480a-a0c2-a018855376d7",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "tan⁻¹x + tan⁻¹y when xy > 1, x > 0, y > 0 equals?",
-    "formula": "π + tan⁻¹((x+y)/(1−xy))",
-    "options": [
-      "−π + tan⁻¹((x+y)/(1−xy))",
-      "tan⁻¹((x+y)/(1−xy))",
-      "π/2 + tan⁻¹((x+y)/(1−xy))",
-      "π + tan⁻¹((x+y)/(1−xy))"
-    ],
-    "answer": 3,
-    "explain": "When x>0, y>0 and xy>1, result is π + tan⁻¹((x+y)/(1−xy)).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4d7cb35e-630e-4e16-85fe-ba2cc5809e4e",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Compound Angles",
-    "prompt": "Value of tan(A−B) formula?",
-    "formula": "tan(A−B) = (tanA−tanB)/(1+tanAtanB)",
-    "options": [
-      "(tanA−tanB)/(1−tanAtanB)",
-      "(tanA−tanB)/(1+tanAtanB)",
-      "(tanA+tanB)/(1−tanAtanB)",
-      "(tanA+tanB)/(1+tanAtanB)"
-    ],
-    "answer": 1,
-    "explain": "tan(A−B) = (tanA−tanB)/(1+tanAtanB); note plus sign in denominator.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61f3ee6f-93c9-4aca-8ee2-05960b7c920a",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Allied Angles",
-    "prompt": "sin(π/2 + θ) equals?",
-    "formula": "",
-    "options": [
-      "sinθ",
-      "−cosθ",
-      "cosθ",
-      "−sinθ"
-    ],
-    "answer": 2,
-    "explain": "sin(π/2 + θ) = cosθ, standard allied angle result.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b54055c0-65ca-443b-935d-77d8c948557d",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Allied Angles",
-    "prompt": "cos(π/2 − θ) equals?",
-    "formula": "",
-    "options": [
-      "cosθ",
-      "−cosθ",
-      "sinθ",
-      "−sinθ"
-    ],
-    "answer": 2,
-    "explain": "cos(π/2 − θ) = sinθ, co-function identity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "127c2aeb-f8c6-46c1-ae0d-2bafb4e09bc8",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "Which expression equals sin⁻¹(sinx) for x ∈ [π/2, π]?",
-    "formula": "",
-    "options": [
-      "π − x",
-      "x",
-      "−x",
-      "x − π"
-    ],
-    "answer": 0,
-    "explain": "For x outside [−π/2,π/2], sin⁻¹(sinx) = π−x when x∈[π/2,π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b62f53d-80a3-4a6c-8fe5-b1cc516eb6b6",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "cos⁻¹(cosθ) for θ ∈ [π, 2π] equals?",
-    "formula": "",
-    "options": [
-      "θ",
-      "2π − θ",
-      "π − θ",
-      "θ − π"
-    ],
-    "answer": 1,
-    "explain": "cos⁻¹(cosθ) = 2π−θ when θ∈[π,2π] to bring result into [0,π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "53f03842-2e95-41c5-985d-e5aa70b31dfc",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Inverse Trigonometry",
-    "prompt": "Value of sin⁻¹(√3/2)?",
-    "formula": "",
-    "options": [
-      "π/4",
-      "2π/3",
-      "π/3",
-      "π/6"
-    ],
-    "answer": 2,
-    "explain": "sin(π/3) = √3/2, and π/3 ∈ [−π/2, π/2], so sin⁻¹(√3/2) = π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "10dc1d77-92a8-4e95-9d20-109d6b14b4b4",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometric Equations",
-    "prompt": "General solution of sin²θ = sin²α is?",
-    "formula": "θ = nπ ± α",
-    "options": [
-      "θ = 2nπ ± α",
-      "θ = nπ ± α",
-      "θ = nπ/2 ± α",
-      "θ = nπ + α"
-    ],
-    "answer": 1,
-    "explain": "sin²θ = sin²α ⟹ θ = nπ ± α, same as tan²θ = tan²α and cos²θ = cos²α.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0a9b4cd3-3e02-4402-a481-396cddcb0cad",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Maxima/Minima of Trig Expressions",
-    "prompt": "Maximum value of asinθ + bcosθ is?",
-    "formula": "√(a²+b²)",
-    "options": [
-      "a²+b²",
-      "√(a²+b²)",
-      "a+b",
-      "|a−b|"
-    ],
-    "answer": 1,
-    "explain": "asinθ+bcosθ has amplitude √(a²+b²), so maximum = √(a²+b²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9fd1315e-caa0-45a5-af0b-fde70654ea01",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "Which identity is correct for sin3θ?",
-    "formula": "sin3θ = 3sinθ − 4sin³θ",
-    "options": [
-      "3sinθ − 4sin³θ",
-      "3sinθ + 4sin³θ",
-      "4sinθ − 3sin³θ",
-      "4sin³θ − 3sinθ"
-    ],
-    "answer": 0,
-    "explain": "Standard triple-angle formula: sin3θ = 3sinθ − 4sin³θ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ef75886f-bc6a-4217-b9a2-b3d75fbaaee1",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "Which identity is correct for cos3θ?",
-    "formula": "cos3θ = 4cos³θ − 3cosθ",
-    "options": [
-      "3cos³θ − 4cosθ",
-      "3cosθ − 4cos³θ",
-      "4cos³θ − 3cosθ",
-      "4cos³θ + 3cosθ"
-    ],
-    "answer": 2,
-    "explain": "Standard triple-angle formula: cos3θ = 4cos³θ − 3cosθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "989ea05d-1d49-47eb-be13-dfa3aba605f2",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "tan3θ equals?",
-    "formula": "tan3θ = (3tanθ−tan³θ)/(1−3tan²θ)",
-    "options": [
-      "(3tanθ−tan³θ)/(1+3tan²θ)",
-      "(tanθ−3tan³θ)/(1−3tan²θ)",
-      "(3tanθ−tan³θ)/(1−3tan²θ)",
-      "(3tanθ+tan³θ)/(1+3tan²θ)"
-    ],
-    "answer": 2,
-    "explain": "Triple-angle tangent formula derived from tan(2θ+θ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7a05a349-4d72-4f5e-8ebc-8c8a0d4c90ea",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "The value of sin⁻¹(sin(7π/6)) is?",
-    "formula": "",
-    "options": [
-      "5π/6",
-      "−π/6",
-      "7π/6",
-      "π/6"
-    ],
-    "answer": 1,
-    "explain": "sin(7π/6)=−1/2; sin⁻¹(−1/2)=−π/6 which lies in [−π/2, π/2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "84354844-525a-4754-a587-303f8c6d5ba3",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "cos⁻¹(cos(5π/4)) equals?",
-    "formula": "",
-    "options": [
-      "5π/4",
-      "3π/4",
-      "−3π/4",
-      "π/4"
-    ],
-    "answer": 1,
-    "explain": "cos(5π/4)=−1/√2; cos⁻¹(−1/√2)=3π/4 which lies in [0,π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8254c955-bafb-4102-b83c-ff2460798e8f",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "tan⁻¹(tan(4π/3)) equals?",
-    "formula": "",
-    "options": [
-      "π/3",
-      "4π/3",
-      "−π/3",
-      "2π/3"
-    ],
-    "answer": 0,
-    "explain": "tan(4π/3)=tan(π/3)=√3; tan⁻¹(√3)=π/3 ∈ (−π/2, π/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "85737331-1baa-48b9-9578-0892283c4998",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "Principal value of sin⁻¹(−1/2) is?",
-    "formula": "",
-    "options": [
-      "π/6",
-      "5π/6",
-      "−π/6",
-      "7π/6"
-    ],
-    "answer": 2,
-    "explain": "sin⁻¹(−1/2) = −π/6 since sin(−π/6)=−1/2 and −π/6∈[−π/2,π/2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ab362356-43d3-4c42-8faf-554bce04b8f7",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "sinA − sinB = ? (sum-to-product)",
-    "formula": "2cos((A+B)/2)sin((A−B)/2)",
-    "options": [
-      "2cos((A+B)/2)sin((A−B)/2)",
-      "2cos((A−B)/2)sin((A+B)/2)",
-      "2sin((A−B)/2)cos((A+B)/2)",
-      "2sin((A+B)/2)cos((A−B)/2)"
-    ],
-    "answer": 0,
-    "explain": "sinA−sinB = 2cos((A+B)/2)sin((A−B)/2); note sinA+sinB uses sin in front.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "3d246ad4-40ee-42ea-a6f0-f82e8b5ee7ca",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "Which is the correct expression for sin(A/2) in terms of sides a,b,c of △?",
-    "formula": "sin(A/2)=√[(s−b)(s−c)/bc]",
-    "options": [
-      "√[(s−a)(s−b)/ab]",
-      "√[(s−b)(s−c)/bc]",
-      "√[s(s−a)/bc]",
-      "√[s(s−c)/bc]"
-    ],
-    "answer": 1,
-    "explain": "Half-angle formula: sin(A/2)=√[(s−b)(s−c)/bc] where s is semi-perimeter.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1a41aeb6-fb53-4537-a1a5-775fba171c32",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "cos(A/2) in terms of sides a,b,c of triangle is?",
-    "formula": "cos(A/2)=√[s(s−a)/bc]",
-    "options": [
-      "√[s(s−b)/ac]",
-      "√[s(s−a)/bc]",
-      "√[s(s−c)/ab]",
-      "√[(s−b)(s−c)/bc]"
-    ],
-    "answer": 1,
-    "explain": "Half-angle: cos(A/2)=√[s(s−a)/bc] is the standard result.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "468ffb91-ea5a-4c0d-9247-0a750a7a4e90",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "2sin²θ − 1 equals?",
-    "formula": "",
-    "options": [
-      "−sin2θ",
-      "cos2θ",
-      "−cos2θ",
-      "sin2θ"
-    ],
-    "answer": 2,
-    "explain": "cos2θ=1−2sin²θ, so 2sin²θ−1=−cos2θ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9c0cf053-bbb8-416b-a6b5-8415c8acb1a0",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "If sin θ + cosθ = p, then sin2θ = ?",
-    "formula": "p²−1",
-    "options": [
-      "p²−1",
-      "p²+1",
-      "1−p²",
-      "2p−1"
-    ],
-    "answer": 0,
-    "explain": "(sinθ+cosθ)²=1+sin2θ=p², so sin2θ=p²−1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "18105959-8eaf-43c8-b325-ee1357244076",
-    "subject": "Mathematics",
-    "chapter": "Trigonometry",
-    "topic": "Trigonometry",
-    "prompt": "Which is the correct formula? 1 − cos2θ = ?",
-    "formula": "2sin²θ",
-    "options": [
-      "2sin²θ",
-      "2cos²θ",
-      "sin2θ",
-      "2sinθcosθ"
-    ],
-    "answer": 0,
-    "explain": "cos2θ=1−2sin²θ, so 1−cos2θ=2sin²θ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "80416cae-fdbb-4205-9a17-675220b8d121",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "Principal range of sin⁻¹(x)",
+  "formula": "",
+  "options": [
+   "(-π, π)",
+   "[0, 2π]",
+   "[-π/2, π/2]",
+   "[0, π]"
+  ],
+  "answer": 2,
+  "explain": "The principal value branch of sin⁻¹ is [-π/2, π/2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0fcb27f3-5278-4bfb-94cb-109d5d0d9569",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "Which identity is correct?",
+  "formula": "sin²θ + cos²θ",
+  "options": [
+   "= 0",
+   "= sinθ cosθ",
+   "= 2",
+   "= 1"
+  ],
+  "answer": 3,
+  "explain": "Pythagorean identity: sin²θ + cos²θ = 1 for all θ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fc623e26-df8e-4c0c-9310-7b795909aa59",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound Angles",
+  "prompt": "tan(A+B) formula",
+  "formula": "tan(A+B) = ?",
+  "options": [
+   "tanA+tanB",
+   "tanA·tanB−1",
+   "(tanA−tanB)/(1+tanA·tanB)",
+   "(tanA+tanB)/(1−tanA·tanB)"
+  ],
+  "answer": 3,
+  "explain": "Addition formula: tan(A+B) = (tanA+tanB)/(1−tanAtanB).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f3ad7420-788e-41ab-9184-f20ba93b58ef",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound Angles",
+  "prompt": "sin(A−B) equals",
+  "formula": "",
+  "options": [
+   "sinAsinB − cosAcosB",
+   "sinAcosB + cosAsinB",
+   "cosAcosB − sinAsinB",
+   "sinAcosB − cosAsinB"
+  ],
+  "answer": 3,
+  "explain": "Subtraction formula: sin(A−B) = sinAcosB − cosAsinB.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "625ae020-61d1-4ddb-91b7-b67c1a6f3b5a",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "Range of principal value branch of cos⁻¹(x)",
+  "formula": "",
+  "options": [
+   "[-π/2, π/2]",
+   "[-π, π]",
+   "[0, π]",
+   "(0, π)"
+  ],
+  "answer": 2,
+  "explain": "cos⁻¹ has principal range [0, π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dd4af847-7fa7-4d24-8089-a4f5a5056be4",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Equations",
+  "prompt": "General solution of sinθ = sinα",
+  "formula": "θ = ?",
+  "options": [
+   "nπ ± α, n∈ℤ",
+   "nπ + (−1)ⁿα, n∈ℤ",
+   "nπ + α, n∈ℤ",
+   "2nπ ± α, n∈ℤ"
+  ],
+  "answer": 1,
+  "explain": "General solution: θ = nπ + (−1)ⁿα.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a56ee0d9-8a3a-48e9-843c-1119278517f8",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Equations",
+  "prompt": "General solution of cosθ = cosα",
+  "formula": "θ = ?",
+  "options": [
+   "nπ ± α",
+   "2nπ + α",
+   "2nπ ± α, n∈ℤ",
+   "nπ + (−1)ⁿα"
+  ],
+  "answer": 2,
+  "explain": "General solution: θ = 2nπ ± α.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "41410aca-164e-4e04-84c8-786e3f9b109f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties of Triangles",
+  "prompt": "In triangle, sine rule states",
+  "formula": "a/sinA = b/sinB = c/sinC",
+  "options": [
+   "= 4R",
+   "= 2R",
+   "= R/2",
+   "= R"
+  ],
+  "answer": 1,
+  "explain": "Each ratio equals 2R, the diameter of the circumscribed circle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "58e494ae-f22f-4959-b753-3f074b2b977b",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties of Triangles",
+  "prompt": "Cosine rule: cos A =",
+  "formula": "",
+  "options": [
+   "(b²+c²−a²)/(2bc)",
+   "(a²+b²−c²)/(2ab)",
+   "(b²−c²+a²)/(2bc)",
+   "(a²+c²−b²)/(2ac)"
+  ],
+  "answer": 0,
+  "explain": "Cosine rule: cosA = (b²+c²−a²)/(2bc).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "20e51ca4-6e72-47d9-9a8f-7e6f4a98df5f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Double Angle Formulas",
+  "prompt": "sin 2θ equals",
+  "formula": "sin 2θ = ?",
+  "options": [
+   "2cos²θ − 1",
+   "2 sinθ cosθ",
+   "1 − 2sin²θ",
+   "sin²θ − cos²θ"
+  ],
+  "answer": 1,
+  "explain": "Double angle: sin2θ = 2sinθcosθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "15651c36-ff95-4fd2-acdc-f9220aa27819",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Double Angle Formulas",
+  "prompt": "tan 2θ equals",
+  "formula": "tan 2θ = ?",
+  "options": [
+   "2tanθ/(1+tan²θ)",
+   "2tanθ/(1−tan²θ)",
+   "2sinθcosθ",
+   "tanθ/(1−tan²θ)"
+  ],
+  "answer": 1,
+  "explain": "Double angle: tan2θ = 2tanθ/(1−tan²θ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "efc45b6d-e404-4cfe-82f5-24fa45c46dbb",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-Product",
+  "prompt": "sinC + sinD product-to-sum form",
+  "formula": "sinC + sinD = ?",
+  "options": [
+   "2sin((C+D)/2)cos((C−D)/2)",
+   "2sin((C+D)/2)sin((C−D)/2)",
+   "2cos((C+D)/2)cos((C−D)/2)",
+   "2cos((C+D)/2)sin((C−D)/2)"
+  ],
+  "answer": 0,
+  "explain": "Sum-to-product: sinC+sinD = 2sin((C+D)/2)cos((C−D)/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2a32f4b4-3e28-44a1-92ee-f0cd509d98bb",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Product-to-Sum",
+  "prompt": "2sinAcosB equals",
+  "formula": "",
+  "options": [
+   "cos(A+B)+cos(A−B)",
+   "sin(A+B)−sin(A−B)",
+   "cos(A−B)−cos(A+B)",
+   "sin(A+B)+sin(A−B)"
+  ],
+  "answer": 3,
+  "explain": "Product-to-sum: 2sinAcosB = sin(A+B)+sin(A−B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1388df27-ffeb-4267-abfc-6fe1f941ec29",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties of Triangles",
+  "prompt": "Area of triangle in terms of sides & included angle",
+  "formula": "Δ = ?",
+  "options": [
+   "ab sinC",
+   "(1/2)ab sinC",
+   "(1/2)ab cosC",
+   "ab cosC/2"
+  ],
+  "answer": 1,
+  "explain": "Area = (1/2)×a×b×sinC where C is the included angle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6e3f1c78-7d43-4171-8000-396725f51e3c",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "sin⁻¹(x) + cos⁻¹(x) for x∈[−1,1]",
+  "formula": "",
+  "options": [
+   "π/2",
+   "π",
+   "0",
+   "2π"
+  ],
+  "answer": 0,
+  "explain": "Standard identity: sin⁻¹x + cos⁻¹x = π/2 for x∈[−1,1].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1cc0b4d2-8ed4-4fac-9c9a-1f6487ea4942",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "tan⁻¹(x) + cot⁻¹(x) equals",
+  "formula": "",
+  "options": [
+   "0",
+   "π",
+   "π/2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Identity: tan⁻¹x + cot⁻¹x = π/2 for all x∈ℝ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d3c8c440-fec9-4518-a9d9-d6aac716efb0",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "Value of tan⁻¹(1) + tan⁻¹(1)",
+  "formula": "",
+  "options": [
+   "π/4",
+   "3π/4",
+   "π",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "tan⁻¹1 = π/4, so sum = π/4 + π/4 = π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8e910eef-4f3e-42ee-8982-47b2e29c3d00",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Equations",
+  "prompt": "General solution of tanθ = tanα",
+  "formula": "θ = ?",
+  "options": [
+   "nπ + (−1)ⁿα",
+   "2nπ ± α, n∈ℤ",
+   "nπ/2 + α",
+   "nπ + α, n∈ℤ"
+  ],
+  "answer": 3,
+  "explain": "General solution: θ = nπ + α.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5e6e964e-40a2-4f37-9762-9831d8d9108f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "sec²θ − tan²θ equals",
+  "formula": "",
+  "options": [
+   "1",
+   "tan²θ",
+   "sec²θ",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Pythagorean identity: sec²θ − tan²θ = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a4ea459c-46bc-4198-add1-86c90434a157",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-Product",
+  "prompt": "cosC − cosD sum-to-product form",
+  "formula": "cosC − cosD = ?",
+  "options": [
+   "2cos((C+D)/2)cos((C−D)/2)",
+   "−2cos((C+D)/2)sin((C−D)/2)",
+   "−2sin((C+D)/2)sin((C−D)/2)",
+   "2sin((C+D)/2)sin((C−D)/2)"
+  ],
+  "answer": 2,
+  "explain": "cosC−cosD = −2sin((C+D)/2)sin((C−D)/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "da8d98be-1518-4e32-8d59-aa088b0f0ce5",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties of Triangles",
+  "prompt": "In-radius r of a triangle with area Δ and semi-perimeter s",
+  "formula": "r = ?",
+  "options": [
+   "s/Δ",
+   "Δ/(2s)",
+   "Δ/s",
+   "2Δ/s"
+  ],
+  "answer": 2,
+  "explain": "In-radius formula: r = Δ/s where s = (a+b+c)/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fd6e6bc4-3fb9-4538-b133-ec3e4f903598",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Values",
+  "prompt": "Value of sin(π/3) is",
+  "formula": "",
+  "options": [
+   "1/2",
+   "√3/2",
+   "√3",
+   "1/√2"
+  ],
+  "answer": 1,
+  "explain": "sin 60° = sin(π/3) = √3/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9ed6f8e8-5580-47a1-9432-9169aaf58023",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound Angles",
+  "prompt": "cos(A+B) formula?",
+  "formula": "cos A cos B − sin A sin B",
+  "options": [
+   "sinAsinB − cosAcosB",
+   "sinAcosB − cosAsinB",
+   "cosAcosB − sinAsinB",
+   "cosAcosB + sinAsinB"
+  ],
+  "answer": 2,
+  "explain": "cos(A+B) = cosAcosB − sinAsinB is a fundamental compound angle identity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "80229b6c-0e5c-4e78-b710-fab71d41aced",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Values",
+  "prompt": "Value of cos(π/6)?",
+  "formula": "",
+  "options": [
+   "1/√2",
+   "1/2",
+   "√3",
+   "√3/2"
+  ],
+  "answer": 3,
+  "explain": "cos 30° = cos(π/6) = √3/2 is a standard exact value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a7d4d65-2cf1-4053-87eb-445c0fd5eac8",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple Angles",
+  "prompt": "sin³θ expressed in terms of multiple angles?",
+  "formula": "sin³θ = (3sinθ − sin3θ)/4",
+  "options": [
+   "(3sinθ + sin3θ)/4",
+   "(sinθ − 3sin3θ)/4",
+   "(sin3θ − 3sinθ)/4",
+   "(3sinθ − sin3θ)/4"
+  ],
+  "answer": 3,
+  "explain": "sin³θ = (3sinθ − sin3θ)/4 using the triple angle identity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2928fed6-227d-4174-a84a-134bf5792efd",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple Angles",
+  "prompt": "cos³θ in terms of multiple angles?",
+  "formula": "cos³θ = (3cosθ + cos3θ)/4",
+  "options": [
+   "(3cosθ + cos3θ)/4",
+   "(cos3θ − 3cosθ)/4",
+   "(cosθ + 3cos3θ)/4",
+   "(3cosθ − cos3θ)/4"
+  ],
+  "answer": 0,
+  "explain": "cos³θ = (3cosθ + cos3θ)/4 from the triple angle expansion.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b2699882-4983-457c-9b6c-01e1afbe204a",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "tan⁻¹x + tan⁻¹y = ? when xy < 1",
+  "formula": "tan⁻¹((x+y)/(1−xy))",
+  "options": [
+   "tan⁻¹((x+y)/(1+xy))",
+   "tan⁻¹((x+y)/(1−xy))",
+   "tan⁻¹((x−y)/(1+xy))",
+   "tan⁻¹((xy−1)/(x+y))"
+  ],
+  "answer": 1,
+  "explain": "When xy < 1, tan⁻¹x + tan⁻¹y = tan⁻¹((x+y)/(1−xy)).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2a5a8799-8bf7-4911-83cb-8d7ba1054180",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "Range of tan⁻¹(x)?",
+  "formula": "",
+  "options": [
+   "(−π/2, π/2)",
+   "[−π/2, π/2]",
+   "[0, π]",
+   "(0, π)"
+  ],
+  "answer": 0,
+  "explain": "Principal value branch of tan⁻¹ is the open interval (−π/2, π/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4ae8d296-5e52-450e-b984-ab7a54d8eb6a",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Product-to-Sum",
+  "prompt": "2cosAcosB equals?",
+  "formula": "cos(A−B) + cos(A+B)",
+  "options": [
+   "cos(A−B) − cos(A+B)",
+   "sin(A+B) + sin(A−B)",
+   "sin(A+B) − sin(A−B)",
+   "cos(A−B) + cos(A+B)"
+  ],
+  "answer": 3,
+  "explain": "Product-to-sum: 2cosAcosB = cos(A−B) + cos(A+B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e91e3748-72f2-4322-8bb5-8ce72dd8264f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Product-to-Sum",
+  "prompt": "2sinAsinB equals?",
+  "formula": "cos(A−B) − cos(A+B)",
+  "options": [
+   "cos(A−B) − cos(A+B)",
+   "cos(A−B) + cos(A+B)",
+   "cos(A+B) − cos(A−B)",
+   "sin(A+B) − sin(A−B)"
+  ],
+  "answer": 0,
+  "explain": "Product-to-sum: 2sinAsinB = cos(A−B) − cos(A+B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9661bd3f-e89b-495a-a28d-e5ebd14581de",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-Product",
+  "prompt": "sinC − sinD sum-to-product form?",
+  "formula": "2cos((C+D)/2)sin((C−D)/2)",
+  "options": [
+   "2sin((C+D)/2)sin((C−D)/2)",
+   "2cos((C+D)/2)cos((C−D)/2)",
+   "2cos((C+D)/2)sin((C−D)/2)",
+   "2sin((C+D)/2)cos((C−D)/2)"
+  ],
+  "answer": 2,
+  "explain": "sinC − sinD = 2cos((C+D)/2)·sin((C−D)/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86f64fbd-babc-4364-b076-7858cbb5dfc4",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Values",
+  "prompt": "Value of sin(π/4)?",
+  "formula": "",
+  "options": [
+   "1",
+   "1/2",
+   "√3/2",
+   "1/√2"
+  ],
+  "answer": 3,
+  "explain": "sin 45° = sin(π/4) = 1/√2 is a standard exact value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "409842b4-266b-49a0-9cc9-c1da64628bc6",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Double Angle",
+  "prompt": "cos 2θ in terms of tanθ?",
+  "formula": "(1−tan²θ)/(1+tan²θ)",
+  "options": [
+   "(tan²θ−1)/(1+tan²θ)",
+   "(1+tan²θ)/(1−tan²θ)",
+   "(1−tan²θ)/(1+tan²θ)",
+   "2tanθ/(1+tan²θ)"
+  ],
+  "answer": 2,
+  "explain": "cos2θ = (1−tan²θ)/(1+tan²θ) is one of three standard forms.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ba24fff1-7467-4a24-9752-31fe1deb6c20",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Double Angle",
+  "prompt": "sin 2θ in terms of tanθ?",
+  "formula": "2tanθ/(1+tan²θ)",
+  "options": [
+   "2tanθ/(1+tan²θ)",
+   "2tanθ/(1−tan²θ)",
+   "2sinθcosθ/(tan²θ)",
+   "tanθ/(1+tan²θ)"
+  ],
+  "answer": 0,
+  "explain": "sin2θ = 2tanθ/(1+tan²θ) using the t-substitution form.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4f581b4d-b852-46d7-94d1-faca2743318c",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties of Triangles",
+  "prompt": "Circumradius R of a triangle: a/sinA =?",
+  "formula": "2R",
+  "options": [
+   "2R",
+   "R",
+   "R/2",
+   "4R"
+  ],
+  "answer": 0,
+  "explain": "By the sine rule, a/sinA = 2R where R is the circumradius.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5b7ce0e3-9433-4a10-8ebe-1565b774b7a0",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "sin⁻¹(−x) equals?",
+  "formula": "−sin⁻¹(x)",
+  "options": [
+   "π − sin⁻¹(x)",
+   "−sin⁻¹(x)",
+   "π + sin⁻¹(x)",
+   "sin⁻¹(x)"
+  ],
+  "answer": 1,
+  "explain": "sin⁻¹ is an odd function: sin⁻¹(−x) = −sin⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b6f86866-da93-4407-8393-28526743b041",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "cos⁻¹(−x) equals?",
+  "formula": "π − cos⁻¹(x)",
+  "options": [
+   "−cos⁻¹(x)",
+   "cos⁻¹(x)",
+   "π + cos⁻¹(x)",
+   "π − cos⁻¹(x)"
+  ],
+  "answer": 3,
+  "explain": "cos⁻¹(−x) = π − cos⁻¹(x); cos⁻¹ is neither odd nor even.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2564ee60-379d-42a2-895e-e2836a90c64d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Values",
+  "prompt": "Value of tan(π/3)?",
+  "formula": "",
+  "options": [
+   "√3",
+   "1",
+   "1/√3",
+   "√3/2"
+  ],
+  "answer": 0,
+  "explain": "tan 60° = tan(π/3) = √3 is a standard exact value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef10392b-9864-4cfe-a09a-8881ffd82933",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound Angles",
+  "prompt": "tan(π/4 + θ) equals?",
+  "formula": "(1+tanθ)/(1−tanθ)",
+  "options": [
+   "1+tanθ",
+   "(tanθ−1)/(tanθ+1)",
+   "(1+tanθ)/(1−tanθ)",
+   "(1−tanθ)/(1+tanθ)"
+  ],
+  "answer": 2,
+  "explain": "tan(π/4+θ) = (tan π/4 + tanθ)/(1−tan π/4·tanθ) = (1+tanθ)/(1−tanθ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5106e56b-3904-43c4-85d8-1143e110edd3",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Allied Angles",
+  "prompt": "Value of cos(−θ)?",
+  "formula": "cosθ",
+  "options": [
+   "−cosθ",
+   "cosθ",
+   "sinθ",
+   "−sinθ"
+  ],
+  "answer": 1,
+  "explain": "cosine is an even function: cos(−θ) = cosθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f8fdc416-1a40-4799-bb1b-11a21f1cdef7",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Allied Angles",
+  "prompt": "sin(π − θ) equals?",
+  "formula": "sinθ",
+  "options": [
+   "−sinθ",
+   "−cosθ",
+   "cosθ",
+   "sinθ"
+  ],
+  "answer": 3,
+  "explain": "sin(π − θ) = sinθ; sine is positive in second quadrant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "76846629-4b11-461b-8715-af64287a0a98",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "tan⁻¹(1/x) for x > 0 equals?",
+  "formula": "π/2 − tan⁻¹x",
+  "options": [
+   "−tan⁻¹x",
+   "π − tan⁻¹x",
+   "cot⁻¹x (x<0 only)",
+   "π/2 − tan⁻¹x"
+  ],
+  "answer": 3,
+  "explain": "For x>0: tan⁻¹(1/x) = cot⁻¹(x) = π/2 − tan⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb79985e-e431-4ec1-bf07-ac91189b5701",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Half Angle Formulas",
+  "prompt": "Half-angle formula: sin(θ/2) = ?",
+  "formula": "±√((1−cosθ)/2)",
+  "options": [
+   "±√((cosθ)/2)",
+   "±√((1+cosθ)/2)",
+   "±√((1−cosθ)/2)",
+   "±√(1−cos²θ)"
+  ],
+  "answer": 2,
+  "explain": "sin²(θ/2) = (1−cosθ)/2, so sin(θ/2) = ±√((1−cosθ)/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c40396d5-40c4-4bcd-8c86-3be265e463ce",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "cos(π − θ) equals?",
+  "formula": "",
+  "options": [
+   "sinθ",
+   "−sinθ",
+   "−cosθ",
+   "cosθ"
+  ],
+  "answer": 2,
+  "explain": "cos(π − θ) = −cosθ, since cosine is negative in second quadrant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5339ddc8-d648-4341-8d3c-5b3c7289fbf0",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "tan(π − θ) equals?",
+  "formula": "",
+  "options": [
+   "cotθ",
+   "tanθ",
+   "−cotθ",
+   "−tanθ"
+  ],
+  "answer": 3,
+  "explain": "tan(π − θ) = −tanθ; tangent is negative in second quadrant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ce81e920-310b-43d9-a645-38e72ceb032b",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "Half-angle formula: cos(θ/2) = ?",
+  "formula": "cos(θ/2) = √((1+cosθ)/2)",
+  "options": [
+   "√(1+cosθ)",
+   "√((1+sinθ)/2)",
+   "√((1−cosθ)/2)",
+   "√((1+cosθ)/2)"
+  ],
+  "answer": 3,
+  "explain": "cos(θ/2) = √((1+cosθ)/2) is the standard half-angle formula.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5df14b0d-51d4-40c5-a74a-253cccf38b94",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Values",
+  "prompt": "Value of sin(−π/6)?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "−1/2",
+   "√3/2",
+   "−√3/2"
+  ],
+  "answer": 1,
+  "explain": "sin is odd: sin(−π/6) = −sin(π/6) = −1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c288ca94-8ee8-4e44-a7f4-67ce536f8235",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Values",
+  "prompt": "Value of cos(2π/3)?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "√2/2",
+   "−√3/2",
+   "−1/2"
+  ],
+  "answer": 3,
+  "explain": "cos(2π/3) = cos(π − π/3) = −cos(π/3) = −1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d9384c9f-1e20-4ad2-b578-5de5ce6890b8",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "Which is the correct identity for 1 + cot²θ?",
+  "formula": "1 + cot²θ = cosec²θ",
+  "options": [
+   "tan²θ + 1",
+   "cot²θ",
+   "cosec²θ",
+   "sec²θ"
+  ],
+  "answer": 2,
+  "explain": "Pythagorean identity: 1 + cot²θ = cosec²θ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "16bfc300-fb7d-409f-910b-2dc6985e3153",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "sin(90° − θ) equals?",
+  "formula": "",
+  "options": [
+   "−sinθ",
+   "−cosθ",
+   "cosθ",
+   "sinθ"
+  ],
+  "answer": 2,
+  "explain": "Co-function identity: sin(90° − θ) = cosθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d5f45eb-8c30-437b-9d0f-e4817ee4a356",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "tan(90° − θ) equals?",
+  "formula": "",
+  "options": [
+   "secθ",
+   "cotθ",
+   "−cotθ",
+   "tanθ"
+  ],
+  "answer": 1,
+  "explain": "Co-function identity: tan(90° − θ) = cotθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8d1c70f7-65bb-4997-a3c8-4d813857c96d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Values",
+  "prompt": "Value of sin(5π/6)?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "−√3/2",
+   "−1/2",
+   "√3/2"
+  ],
+  "answer": 0,
+  "explain": "sin(5π/6) = sin(π − π/6) = sin(π/6) = 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "be0732f6-a5be-4605-8977-a7fa76040e58",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General Solutions",
+  "prompt": "General solution of cosθ = 0 is?",
+  "formula": "θ = (2n+1)π/2",
+  "options": [
+   "(2n+1)π/2, n∈ℤ",
+   "nπ, n∈ℤ",
+   "nπ/2, n∈ℤ",
+   "2nπ, n∈ℤ"
+  ],
+  "answer": 0,
+  "explain": "cosθ = 0 gives odd multiples of π/2, i.e., θ = (2n+1)π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5175d94b-8c96-4e2f-adb9-2015b1df8905",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "tan⁻¹(−x) equals?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(x)",
+   "π + tan⁻¹(x)",
+   "π − tan⁻¹(x)",
+   "−tan⁻¹(x)"
+  ],
+  "answer": 3,
+  "explain": "tan⁻¹ is an odd function: tan⁻¹(−x) = −tan⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "26986b14-086a-49ba-817a-05f6a150063d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "cot⁻¹(−x) equals?",
+  "formula": "cot⁻¹(−x) = π − cot⁻¹(x)",
+  "options": [
+   "cot⁻¹(x)",
+   "π + cot⁻¹(x)",
+   "π − cot⁻¹(x)",
+   "−cot⁻¹(x)"
+  ],
+  "answer": 2,
+  "explain": "cot⁻¹ is NOT odd; cot⁻¹(−x) = π − cot⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "17577b3f-867f-4a34-a013-63ebbc5bbcaf",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "Range of principal branch of cot⁻¹(x)?",
+  "formula": "",
+  "options": [
+   "(−π/2, π/2)",
+   "[−π/2, π/2]",
+   "[0, π]",
+   "(0, π)"
+  ],
+  "answer": 3,
+  "explain": "Principal range of cot⁻¹(x) is the open interval (0, π).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e770f4ff-4c1b-4a6f-9a5a-0477de62def9",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "sin⁻¹(x) + sin⁻¹(y) = ? when x²+y² ≤ 1",
+  "formula": "sin⁻¹(x√(1−y²) + y√(1−x²))",
+  "options": [
+   "sin⁻¹(xy + √(1−x²)√(1−y²))",
+   "sin⁻¹(x√(1−y²)+y√(1−x²))",
+   "sin⁻¹(x+y)",
+   "cos⁻¹(xy−√(1−x²)√(1−y²))"
+  ],
+  "answer": 1,
+  "explain": "Standard formula: sin⁻¹x + sin⁻¹y = sin⁻¹(x√(1−y²) + y√(1−x²)) when x²+y²≤1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dae3eead-ecb3-4ce5-bdcd-8cba2f6d9ed6",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties of Triangles",
+  "prompt": "Projection formula in triangle: a = ?",
+  "formula": "a = b cosC + c cosB",
+  "options": [
+   "b sinC + c sinB",
+   "b cosC + c cosB",
+   "b cosB + c cosC",
+   "b sinB + c sinC"
+  ],
+  "answer": 1,
+  "explain": "Projection formula: a = b cosC + c cosB relates sides and angles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "575cd2fb-28f3-42a0-8edc-a20c71ea7573",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "cos⁻¹(x) + cos⁻¹(y) = ? when x,y∈[−1,1], x+y≥0",
+  "formula": "cos⁻¹(xy − √(1−x²)√(1−y²))",
+  "options": [
+   "cos⁻¹(x+y)",
+   "sin⁻¹(xy−√(1−x²)√(1−y²))",
+   "cos⁻¹(xy−√(1−x²)√(1−y²))",
+   "cos⁻¹(xy+√(1−x²)√(1−y²))"
+  ],
+  "answer": 2,
+  "explain": "Standard formula: cos⁻¹x + cos⁻¹y = cos⁻¹(xy − √(1−x²)√(1−y²)) when x+y≥0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "93de4f74-ceea-4b56-b1dd-81ec4d977583",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties of Triangles",
+  "prompt": "In a triangle, a/sinA = b/sinB = c/sinC = ?",
+  "formula": "= 2R",
+  "options": [
+   "2R",
+   "R/2",
+   "4R",
+   "R"
+  ],
+  "answer": 0,
+  "explain": "Sine rule: each ratio equals the diameter 2R of circumscribed circle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3cf3cf40-dd56-4a70-a88d-30d9debe0d08",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Identities",
+  "prompt": "Maximum value of sinθ + cosθ?",
+  "formula": "√2",
+  "options": [
+   "√3",
+   "1",
+   "√2",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "a sinθ + b cosθ has max √(a²+b²); here √(1+1) = √2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dc140a12-40b7-480a-a0c2-a018855376d7",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "tan⁻¹x + tan⁻¹y when xy > 1, x > 0, y > 0 equals?",
+  "formula": "π + tan⁻¹((x+y)/(1−xy))",
+  "options": [
+   "−π + tan⁻¹((x+y)/(1−xy))",
+   "tan⁻¹((x+y)/(1−xy))",
+   "π/2 + tan⁻¹((x+y)/(1−xy))",
+   "π + tan⁻¹((x+y)/(1−xy))"
+  ],
+  "answer": 3,
+  "explain": "When x>0, y>0 and xy>1, result is π + tan⁻¹((x+y)/(1−xy)).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4d7cb35e-630e-4e16-85fe-ba2cc5809e4e",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound Angles",
+  "prompt": "Value of tan(A−B) formula?",
+  "formula": "tan(A−B) = (tanA−tanB)/(1+tanAtanB)",
+  "options": [
+   "(tanA−tanB)/(1−tanAtanB)",
+   "(tanA−tanB)/(1+tanAtanB)",
+   "(tanA+tanB)/(1−tanAtanB)",
+   "(tanA+tanB)/(1+tanAtanB)"
+  ],
+  "answer": 1,
+  "explain": "tan(A−B) = (tanA−tanB)/(1+tanAtanB); note plus sign in denominator.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61f3ee6f-93c9-4aca-8ee2-05960b7c920a",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Allied Angles",
+  "prompt": "sin(π/2 + θ) equals?",
+  "formula": "",
+  "options": [
+   "sinθ",
+   "−cosθ",
+   "cosθ",
+   "−sinθ"
+  ],
+  "answer": 2,
+  "explain": "sin(π/2 + θ) = cosθ, standard allied angle result.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b54055c0-65ca-443b-935d-77d8c948557d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Allied Angles",
+  "prompt": "cos(π/2 − θ) equals?",
+  "formula": "",
+  "options": [
+   "cosθ",
+   "−cosθ",
+   "sinθ",
+   "−sinθ"
+  ],
+  "answer": 2,
+  "explain": "cos(π/2 − θ) = sinθ, co-function identity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "127c2aeb-f8c6-46c1-ae0d-2bafb4e09bc8",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "Which expression equals sin⁻¹(sinx) for x ∈ [π/2, π]?",
+  "formula": "",
+  "options": [
+   "π − x",
+   "x",
+   "−x",
+   "x − π"
+  ],
+  "answer": 0,
+  "explain": "For x outside [−π/2,π/2], sin⁻¹(sinx) = π−x when x∈[π/2,π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b62f53d-80a3-4a6c-8fe5-b1cc516eb6b6",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "cos⁻¹(cosθ) for θ ∈ [π, 2π] equals?",
+  "formula": "",
+  "options": [
+   "θ",
+   "2π − θ",
+   "π − θ",
+   "θ − π"
+  ],
+  "answer": 1,
+  "explain": "cos⁻¹(cosθ) = 2π−θ when θ∈[π,2π] to bring result into [0,π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "53f03842-2e95-41c5-985d-e5aa70b31dfc",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse Trigonometry",
+  "prompt": "Value of sin⁻¹(√3/2)?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "2π/3",
+   "π/3",
+   "π/6"
+  ],
+  "answer": 2,
+  "explain": "sin(π/3) = √3/2, and π/3 ∈ [−π/2, π/2], so sin⁻¹(√3/2) = π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "10dc1d77-92a8-4e95-9d20-109d6b14b4b4",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometric Equations",
+  "prompt": "General solution of sin²θ = sin²α is?",
+  "formula": "θ = nπ ± α",
+  "options": [
+   "θ = 2nπ ± α",
+   "θ = nπ ± α",
+   "θ = nπ/2 ± α",
+   "θ = nπ + α"
+  ],
+  "answer": 1,
+  "explain": "sin²θ = sin²α ⟹ θ = nπ ± α, same as tan²θ = tan²α and cos²θ = cos²α.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0a9b4cd3-3e02-4402-a481-396cddcb0cad",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Maxima/Minima of Trig Expressions",
+  "prompt": "Maximum value of asinθ + bcosθ is?",
+  "formula": "√(a²+b²)",
+  "options": [
+   "a²+b²",
+   "√(a²+b²)",
+   "a+b",
+   "|a−b|"
+  ],
+  "answer": 1,
+  "explain": "asinθ+bcosθ has amplitude √(a²+b²), so maximum = √(a²+b²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9fd1315e-caa0-45a5-af0b-fde70654ea01",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "Which identity is correct for sin3θ?",
+  "formula": "sin3θ = 3sinθ − 4sin³θ",
+  "options": [
+   "3sinθ − 4sin³θ",
+   "3sinθ + 4sin³θ",
+   "4sinθ − 3sin³θ",
+   "4sin³θ − 3sinθ"
+  ],
+  "answer": 0,
+  "explain": "Standard triple-angle formula: sin3θ = 3sinθ − 4sin³θ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ef75886f-bc6a-4217-b9a2-b3d75fbaaee1",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "Which identity is correct for cos3θ?",
+  "formula": "cos3θ = 4cos³θ − 3cosθ",
+  "options": [
+   "3cos³θ − 4cosθ",
+   "3cosθ − 4cos³θ",
+   "4cos³θ − 3cosθ",
+   "4cos³θ + 3cosθ"
+  ],
+  "answer": 2,
+  "explain": "Standard triple-angle formula: cos3θ = 4cos³θ − 3cosθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "989ea05d-1d49-47eb-be13-dfa3aba605f2",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "tan3θ equals?",
+  "formula": "tan3θ = (3tanθ−tan³θ)/(1−3tan²θ)",
+  "options": [
+   "(3tanθ−tan³θ)/(1+3tan²θ)",
+   "(tanθ−3tan³θ)/(1−3tan²θ)",
+   "(3tanθ−tan³θ)/(1−3tan²θ)",
+   "(3tanθ+tan³θ)/(1+3tan²θ)"
+  ],
+  "answer": 2,
+  "explain": "Triple-angle tangent formula derived from tan(2θ+θ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7a05a349-4d72-4f5e-8ebc-8c8a0d4c90ea",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties like sin⁻¹(sin x), graphs",
+  "prompt": "The value of sin⁻¹(sin(7π/6)) is?",
+  "formula": "",
+  "options": [
+   "5π/6",
+   "−π/6",
+   "7π/6",
+   "π/6"
+  ],
+  "answer": 1,
+  "explain": "sin(7π/6)=−1/2; sin⁻¹(−1/2)=−π/6 which lies in [−π/2, π/2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "84354844-525a-4754-a587-303f8c6d5ba3",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties like sin⁻¹(sin x), graphs",
+  "prompt": "cos⁻¹(cos(5π/4)) equals?",
+  "formula": "",
+  "options": [
+   "5π/4",
+   "3π/4",
+   "−3π/4",
+   "π/4"
+  ],
+  "answer": 1,
+  "explain": "cos(5π/4)=−1/√2; cos⁻¹(−1/√2)=3π/4 which lies in [0,π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8254c955-bafb-4102-b83c-ff2460798e8f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties like sin⁻¹(sin x), graphs",
+  "prompt": "tan⁻¹(tan(4π/3)) equals?",
+  "formula": "",
+  "options": [
+   "π/3",
+   "4π/3",
+   "−π/3",
+   "2π/3"
+  ],
+  "answer": 0,
+  "explain": "tan(4π/3)=tan(π/3)=√3; tan⁻¹(√3)=π/3 ∈ (−π/2, π/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "85737331-1baa-48b9-9578-0892283c4998",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "Principal value of sin⁻¹(−1/2) is?",
+  "formula": "",
+  "options": [
+   "π/6",
+   "5π/6",
+   "−π/6",
+   "7π/6"
+  ],
+  "answer": 2,
+  "explain": "sin⁻¹(−1/2) = −π/6 since sin(−π/6)=−1/2 and −π/6∈[−π/2,π/2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ab362356-43d3-4c42-8faf-554bce04b8f7",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-product & product-to-sum",
+  "prompt": "sinA − sinB = ? (sum-to-product)",
+  "formula": "2cos((A+B)/2)sin((A−B)/2)",
+  "options": [
+   "2cos((A+B)/2)sin((A−B)/2)",
+   "2cos((A−B)/2)sin((A+B)/2)",
+   "2sin((A−B)/2)cos((A+B)/2)",
+   "2sin((A+B)/2)cos((A−B)/2)"
+  ],
+  "answer": 0,
+  "explain": "sinA−sinB = 2cos((A+B)/2)sin((A−B)/2); note sinA+sinB uses sin in front.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3d246ad4-40ee-42ea-a6f0-f82e8b5ee7ca",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometry",
+  "prompt": "Which is the correct expression for sin(A/2) in terms of sides a,b,c of △?",
+  "formula": "sin(A/2)=√[(s−b)(s−c)/bc]",
+  "options": [
+   "√[(s−a)(s−b)/ab]",
+   "√[(s−b)(s−c)/bc]",
+   "√[s(s−a)/bc]",
+   "√[s(s−c)/bc]"
+  ],
+  "answer": 1,
+  "explain": "Half-angle formula: sin(A/2)=√[(s−b)(s−c)/bc] where s is semi-perimeter.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1a41aeb6-fb53-4537-a1a5-775fba171c32",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Trigonometry",
+  "prompt": "cos(A/2) in terms of sides a,b,c of triangle is?",
+  "formula": "cos(A/2)=√[s(s−a)/bc]",
+  "options": [
+   "√[s(s−b)/ac]",
+   "√[s(s−a)/bc]",
+   "√[s(s−c)/ab]",
+   "√[(s−b)(s−c)/bc]"
+  ],
+  "answer": 1,
+  "explain": "Half-angle: cos(A/2)=√[s(s−a)/bc] is the standard result.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "468ffb91-ea5a-4c0d-9247-0a750a7a4e90",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "2sin²θ − 1 equals?",
+  "formula": "",
+  "options": [
+   "−sin2θ",
+   "cos2θ",
+   "−cos2θ",
+   "sin2θ"
+  ],
+  "answer": 2,
+  "explain": "cos2θ=1−2sin²θ, so 2sin²θ−1=−cos2θ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9c0cf053-bbb8-416b-a6b5-8415c8acb1a0",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "If sin θ + cosθ = p, then sin2θ = ?",
+  "formula": "p²−1",
+  "options": [
+   "p²−1",
+   "p²+1",
+   "1−p²",
+   "2p−1"
+  ],
+  "answer": 0,
+  "explain": "(sinθ+cosθ)²=1+sin2θ=p², so sin2θ=p²−1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "18105959-8eaf-43c8-b325-ee1357244076",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "Which is the correct formula? 1 − cos2θ = ?",
+  "formula": "2sin²θ",
+  "options": [
+   "2sin²θ",
+   "2cos²θ",
+   "sin2θ",
+   "2sinθcosθ"
+  ],
+  "answer": 0,
+  "explain": "cos2θ=1−2sin²θ, so 1−cos2θ=2sin²θ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8436fc00-cdd8-48aa-ab1e-0a034f588d2f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "Minimum value of 5 sinθ − 12 cosθ is?",
+  "formula": "−√(a²+b²) ≤ a sinθ + b cosθ ≤ √(a²+b²)",
+  "options": [
+   "−11",
+   "−7",
+   "−13",
+   "−17"
+  ],
+  "answer": 2,
+  "explain": "Range is [−√(25+144), √(25+144)] = [−13, 13].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa023a9c-a273-4d97-8650-00dab37a9bcf",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "The value of sin75°·sin15° is?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "√3/4",
+   "1/4",
+   "1/8"
+  ],
+  "answer": 2,
+  "explain": "sin75° = cos15°, so product = ½ sin30° = 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "998bd961-fcdd-4620-b50c-b2b617112c21",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "If A+B+C = π, then tanA+tanB+tanC equals?",
+  "formula": "",
+  "options": [
+   "tanA·tanB·tanC",
+   "0",
+   "1",
+   "tanA tanB + tanB tanC + tanC tanA"
+  ],
+  "answer": 0,
+  "explain": "tan(A+B) = −tanC leads to the sum equal to the product.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5c458885-6ccd-4956-aa04-7e1708cb7d9e",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "sin²A − sin²B equals?",
+  "formula": "sin²A − sin²B = sin(A+B)·sin(A−B)",
+  "options": [
+   "sin(A+B)·sin(A−B)",
+   "cos(A+B)·cos(A−B)",
+   "sin(A+B)·cos(A−B)",
+   "sin²(A−B)"
+  ],
+  "answer": 0,
+  "explain": "Standard result: sin²A − sin²B = sin(A+B)sin(A−B).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e503eab3-665d-4563-9de3-9ca59c2e8f7b",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "cos²A − sin²B equals?",
+  "formula": "cos²A − sin²B = cos(A+B)·cos(A−B)",
+  "options": [
+   "cos(A+B)·cos(A−B)",
+   "sin(A+B)·sin(A−B)",
+   "cos(A+B)·sin(A−B)",
+   "cos²(A+B)"
+  ],
+  "answer": 0,
+  "explain": "cos²A − sin²B = cos(A+B)cos(A−B) (also equals cos²B − sin²A).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9e0c089-fe69-4427-8820-3969e4e32444",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "If A + B = 45°, then (1 + tanA)(1 + tanB) equals?",
+  "formula": "tan(A+B)=1 ⇒ tanA+tanB+tanAtanB = 1",
+  "options": [
+   "1",
+   "2",
+   "0",
+   "tanA·tanB"
+  ],
+  "answer": 1,
+  "explain": "Expanding: 1 + (tanA+tanB+tanAtanB) = 1 + 1 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9f44fe3-4ff1-4400-9b0c-84fe8dbe1965",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "cosθ·cos2θ·cos4θ equals:",
+  "formula": "cosA cos2A cos4A = sin8A / (8 sinA)",
+  "options": [
+   "sin8θ/(8 cosθ)",
+   "sin8θ/(4 sinθ)",
+   "sin4θ/(4 sinθ)",
+   "sin8θ/(8 sinθ)"
+  ],
+  "answer": 3,
+  "explain": "Multiply and divide by sinθ, then apply 2sinx cosx = sin2x three times to get sin8θ/(8sinθ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c720a54-853a-4a48-95f9-3b2a28e00ac8",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "cotθ − tanθ equals:",
+  "formula": "cotθ − tanθ = 2cot2θ",
+  "options": [
+   "2cot2θ",
+   "2tan2θ",
+   "2/sin2θ",
+   "cot2θ"
+  ],
+  "answer": 0,
+  "explain": "(cos²θ − sin²θ)/(sinθ cosθ) = 2cos2θ/sin2θ = 2cot2θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "98cd8887-5d7e-4b28-99a8-3daf8a4570bc",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "4cosθ·cos(60°−θ)·cos(60°+θ) equals:",
+  "formula": "= cos3θ",
+  "options": [
+   "cos3θ/4",
+   "cos3θ",
+   "3cosθ",
+   "sin3θ"
+  ],
+  "answer": 1,
+  "explain": "cos(60°−θ)cos(60°+θ) = cos²θ − 3/4 (because cos²60° − sin²θ), so the product is 4cos³θ − 3cosθ = cos3θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a00eb93d-7472-4a3f-95b0-0073a7a0456c",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "The value of cos(π/5)·cos(2π/5) is:",
+  "formula": "cos36° cos72° = 1/4",
+  "options": [
+   "1/8",
+   "1/4",
+   "√5/4",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "Product = sin(4π/5)/(4 sin(π/5)) = 1/4, since sin144° = sin36°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a955c3a1-bc92-4f23-b3ea-7c66289f64af",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Multiple & submultiple angle formulae",
+  "prompt": "The value of tanθ·tan(60°−θ)·tan(60°+θ) equals:",
+  "formula": "",
+  "options": [
+   "tan3θ",
+   "cot3θ",
+   "3tanθ",
+   "1/tan3θ·(−1)"
+  ],
+  "answer": 0,
+  "explain": "Standard identity: tanθ·tan(60°−θ)·tan(60°+θ) = tan3θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5158aeb-bb14-4278-aaf6-f5dfe4e71442",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "If A+B+C = π, then sin2A + sin2B + sin2C equals?",
+  "formula": "",
+  "options": [
+   "4 cosA cosB cosC",
+   "2 sinA sinB sinC",
+   "1 + 4 sinA sinB sinC",
+   "4 sinA sinB sinC"
+  ],
+  "answer": 3,
+  "explain": "Standard triangle identity: sin2A+sin2B+sin2C = 4 sinA sinB sinC.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "272e6ee7-54d2-4eb3-ac5f-ca45aad2f5dd",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-product & product-to-sum",
+  "prompt": "cosC + cosD, written as a product, equals:",
+  "formula": "",
+  "options": [
+   "2sin((C+D)/2)cos((C−D)/2)",
+   "−2sin((C+D)/2)sin((C−D)/2)",
+   "2cos((C+D)/2)sin((C−D)/2)",
+   "2cos((C+D)/2)cos((C−D)/2)"
+  ],
+  "answer": 3,
+  "explain": "cosC + cosD = 2cos((C+D)/2)·cos((C−D)/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a067b232-5724-428b-a673-7ec5857332b1",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-product & product-to-sum",
+  "prompt": "The value of cos20°·cos40°·cos80° is:",
+  "formula": "",
+  "options": [
+   "√3/8",
+   "3/16",
+   "1/8",
+   "1/16"
+  ],
+  "answer": 2,
+  "explain": "Product of cos A·cos2A·cos4A with A=20° gives sin160°/(8 sin20°) = 1/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1d37740f-6f97-45ec-a2a9-e857eff4efc5",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-product & product-to-sum",
+  "prompt": "The value of cos36° − cos72° is:",
+  "formula": "",
+  "options": [
+   "1/2",
+   "√5/4",
+   "1/4",
+   "√5/2"
+  ],
+  "answer": 0,
+  "explain": "cos36° = (√5+1)/4 and cos72° = (√5−1)/4, so the difference is 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a43a80fc-3d8a-4d40-8574-b03c594a40a8",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-product & product-to-sum",
+  "prompt": "cosA + cos(A+120°) + cos(A+240°) equals:",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "3cosA",
+   "−1/2"
+  ],
+  "answer": 0,
+  "explain": "cos(A+120°) + cos(A+240°) = 2cos(A+180°)cos60° = −cosA, which cancels cosA.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0c846de-0a26-4f32-bd7c-332560341bc5",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum-to-product & product-to-sum",
+  "prompt": "(sinA + sin3A)/(cosA + cos3A) simplifies to:",
+  "formula": "",
+  "options": [
+   "tan 4A",
+   "tan A",
+   "cot 2A",
+   "tan 2A"
+  ],
+  "answer": 3,
+  "explain": "Numerator 2sin2A·cosA, denominator 2cos2A·cosA, so the ratio is tan2A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36120991-9f71-4186-8789-b09e3ce9165a",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "If A+B+C=π, then sinA+sinB+sinC equals",
+  "formula": "4cos(A/2)cos(B/2)cos(C/2)",
+  "options": [
+   "4cos(A/2)cos(B/2)cos(C/2)",
+   "1+4cos(A/2)cos(B/2)cos(C/2)",
+   "4 sin(A/2)sin(B/2)sin(C/2)",
+   "4 cosA cosB cosC"
+  ],
+  "answer": 0,
+  "explain": "Sum-to-product on sinA+sinB, then use sinC = 2sin(C/2)cos(C/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50ed0980-a190-4b09-a697-56aacd1c8cb6",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "If A+B+C=π, then tan(A/2)tan(B/2)+tan(B/2)tan(C/2)+tan(C/2)tan(A/2) =",
+  "formula": "",
+  "options": [
+   "0",
+   "tan(A/2)tan(B/2)tan(C/2)",
+   "1/2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Since (A/2)+(B/2)+(C/2)=π/2, the pairwise sum of tangents is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c5d0040-0055-40f2-b714-1d753093c8b4",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "If A+B+C=π, then cot(A/2)+cot(B/2)+cot(C/2) equals",
+  "formula": "",
+  "options": [
+   "cot(A/2)cot(B/2)cot(C/2)",
+   "tan(A/2)tan(B/2)tan(C/2)",
+   "1",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Half-angles sum to π/2, so cot sum equals cot product.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97510360-24c3-44fe-8c82-f3d4fe414f4e",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "For A+B+C=π, the maximum value of cosA+cosB+cosC is",
+  "formula": "",
+  "options": [
+   "3/2",
+   "1",
+   "3√3/2",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "The maximum 3/2 occurs when A=B=C=π/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ba631982-d239-464e-be57-6927872b9950",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "For A+B+C=π (triangle), maximum of sinA+sinB+sinC is",
+  "formula": "",
+  "options": [
+   "√3",
+   "3√3/8",
+   "3/2",
+   "3√3/2"
+  ],
+  "answer": 3,
+  "explain": "The maximum occurs at A=B=C=π/3, giving 3·(√3/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1c49c2a2-f166-4e8b-91c6-8633eb2ad88a",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "If A+B+C=π, then sin²A+sin²B+sin²C = 2 exactly when the triangle is",
+  "formula": "",
+  "options": [
+   "Equilateral",
+   "Obtuse",
+   "Right-angled",
+   "Isosceles"
+  ],
+  "answer": 2,
+  "explain": "The sum equals 2 when cosA cosB cosC = 0, i.e. one angle is 90°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "880461b3-e449-4d18-9bb8-8e9c518fd278",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "For a triangle ABC, the maximum value of sinA sinB sinC is",
+  "formula": "",
+  "options": [
+   "3√3/8",
+   "√3/2",
+   "3/8",
+   "1/8"
+  ],
+  "answer": 0,
+  "explain": "Maximum occurs at A=B=C=60°: (√3/2)³ = 3√3/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f70affd1-3a7d-4c9d-8af7-34d883b9bc55",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "For a triangle ABC, the maximum value of sin(A/2) sin(B/2) sin(C/2) is",
+  "formula": "",
+  "options": [
+   "1/4",
+   "1/(3√3)",
+   "1/8",
+   "3√3/8"
+  ],
+  "answer": 2,
+  "explain": "The maximum occurs at the equilateral triangle: (sin30°)³ = 1/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a6bf4f44-e6ab-40a9-b589-6b898b7eb6b3",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Product of cosines cosA·cos2A·cos4A…",
+  "prompt": "cosA·cos2A·cos4A···cos(2ⁿ⁻¹A) equals?",
+  "formula": "∏cos(2ᵏA) = sin(2ⁿA)/(2ⁿ sinA)",
+  "options": [
+   "sin(2ⁿA)/(2ⁿ⁻¹ sinA)",
+   "sin(2ⁿA)/(2ⁿ sinA)",
+   "sin(2ⁿ⁻¹A)/(2ⁿ sinA)",
+   "cos(2ⁿA)/(2ⁿ cosA)"
+  ],
+  "answer": 1,
+  "explain": "Multiply and divide by 2ⁿ sinA; each step uses 2sinθcosθ = sin2θ, so n steps give sin(2ⁿA).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b6557064-5bb2-4c61-badb-29d1759e6243",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Product of cosines cosA·cos2A·cos4A…",
+  "prompt": "sinA·cosA·cos2A·cos4A = ?",
+  "formula": "",
+  "options": [
+   "sin8A/4",
+   "sin8A/8",
+   "sin4A/8",
+   "sin8A/16"
+  ],
+  "answer": 1,
+  "explain": "sinA·cosA = sin2A/2, and then each cosine doubles the angle and halves the value: sin8A/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f84c1d4b-cb56-41bc-b231-fac1bbdbe920",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Product of cosines cosA·cos2A·cos4A…",
+  "prompt": "lim n→∞ of cos(x/2)·cos(x/4)···cos(x/2ⁿ) equals?",
+  "formula": "",
+  "options": [
+   "x / sin x",
+   "cos x / x",
+   "1",
+   "sin x / x"
+  ],
+  "answer": 3,
+  "explain": "The product is sin x/(2ⁿ sin(x/2ⁿ)), and 2ⁿ sin(x/2ⁿ) → x. This is Viète's formula.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "757b5a86-8711-4a61-8025-b3c9d0373e17",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Product of cosines cosA·cos2A·cos4A…",
+  "prompt": "Limit as n→∞ of cos(π/4)·cos(π/8)·cos(π/16)···cos(π/2ⁿ⁺¹) = ?",
+  "formula": "sin x / x at x = π/2",
+  "options": [
+   "1/π",
+   "π/2",
+   "2/π",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "This is the product cos(x/2)cos(x/4)··· with x = π/2, so it tends to sin(π/2)/(π/2) = 2/π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e6cffa08-2c57-4d19-ab05-1a802f4db01d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of sinθ·cosθ is?",
+  "formula": "sinθcosθ = ½ sin2θ",
+  "options": [
+   "[0, ½]",
+   "[−½, ½]",
+   "[−1/4, 1/4]",
+   "[−1, 1]"
+  ],
+  "answer": 1,
+  "explain": "sinθcosθ = ½ sin2θ, and sin2θ ∈ [−1, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a7c9449f-8be2-4f89-ab79-a3d46943b030",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Minimum value of tan²θ + cot²θ is?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "4",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "AM–GM gives tan²θ + cot²θ ≥ 2√(tan²θ·cot²θ) = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "114039b1-f4c2-48e1-9d2e-e571a2538404",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Minimum value of sin⁴θ + cos⁴θ is?",
+  "formula": "= 1 − ½ sin²2θ",
+  "options": [
+   "3/4",
+   "1/2",
+   "1/4",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "1 − ½sin²2θ is smallest when sin²2θ = 1, giving ½.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "413d07b7-9981-4222-835f-2109416b80aa",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Minimum value of sin⁶θ + cos⁶θ is?",
+  "formula": "= 1 − ¾ sin²2θ",
+  "options": [
+   "1/4",
+   "1/8",
+   "1/2",
+   "3/8"
+  ],
+  "answer": 0,
+  "explain": "1 − ¾sin²2θ is smallest when sin²2θ = 1, giving ¼.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47427b32-6a55-4e6f-9c47-675e518c1180",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of 1/(2 − sinθ) is?",
+  "formula": "",
+  "options": [
+   "[1/2, 2]",
+   "[1/3, 1]",
+   "[−1, 1]",
+   "[1, 3]"
+  ],
+  "answer": 1,
+  "explain": "2 − sinθ ∈ [1, 3], so its reciprocal lies in [1/3, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "913b6e58-a788-4067-8c7d-0b35aecdb058",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of cos(sinθ) is?",
+  "formula": "",
+  "options": [
+   "[0, 1]",
+   "[cos1, 1]",
+   "[−1, 1]",
+   "[−cos1, cos1]"
+  ],
+  "answer": 1,
+  "explain": "sinθ ∈ [−1, 1] and cos is even and decreasing on [0, 1], so the range is [cos1, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "854e8bb0-bb64-493c-970a-eebd22853e1c",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of sin(cosθ) is?",
+  "formula": "",
+  "options": [
+   "[0, sin1]",
+   "[−1, 1]",
+   "[−sin1, sin1]",
+   "[sin1, 1]"
+  ],
+  "answer": 2,
+  "explain": "cosθ ∈ [−1, 1] and sin is increasing there, so the range is [−sin1, sin1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55885bd9-df75-41e6-85b8-6a836ebe6595",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of 2^(sinθ) is?",
+  "formula": "",
+  "options": [
+   "[1/4, 4]",
+   "[1/2, 2]",
+   "[0, 2]",
+   "[1, 2]"
+  ],
+  "answer": 1,
+  "explain": "sinθ ∈ [−1, 1], so 2^(sinθ) ∈ [2⁻¹, 2¹].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fdfe1fa1-5c92-4ba8-bd13-1056d217ce7f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of sin²θ + 2cos²θ is?",
+  "formula": "",
+  "options": [
+   "[1, 3]",
+   "[1, 2]",
+   "[0, 3]",
+   "[0, 2]"
+  ],
+  "answer": 1,
+  "explain": "The expression equals 1 + cos²θ, and cos²θ ∈ [0, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94303a83-8d42-4e0e-bd1f-3f45dec9787c",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of cos⁴θ − sin⁴θ is?",
+  "formula": "= cos2θ",
+  "options": [
+   "[−1, 1]",
+   "[−1/2, 1/2]",
+   "[−2, 2]",
+   "[0, 1]"
+  ],
+  "answer": 0,
+  "explain": "cos⁴θ − sin⁴θ = (cos²θ − sin²θ)(1) = cos2θ ∈ [−1, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "701ab78f-1870-4a22-b800-5f91bc0e2473",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Maximum value of cosθ + cos(θ + 2π/3) is?",
+  "formula": "cosC + cosD = 2cos((C+D)/2)cos((C−D)/2)",
+  "options": [
+   "√3",
+   "2",
+   "1/2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "The sum equals 2cos(π/3)·cos(θ+π/3) = cos(θ+π/3), so the maximum is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8dd12ffc-0d93-4282-904a-392f82d6ee56",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of sin²θ + sinθ is?",
+  "formula": "t² + t, t ∈ [−1, 1]",
+  "options": [
+   "[−1/2, 2]",
+   "[−1/4, 2]",
+   "[0, 2]",
+   "[−1/4, 1]"
+  ],
+  "answer": 1,
+  "explain": "(t+½)² − ¼ with t∈[−1,1]: min −¼ at t=−½, max 2 at t=1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7118286e-62db-4ad9-bbdc-61c7b346f87c",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of sinθ·cosθ·cos2θ is?",
+  "formula": "sinθcosθcos2θ = ¼ sin4θ",
+  "options": [
+   "[0, 1/4]",
+   "[−1/4, 1/4]",
+   "[−1/8, 1/8]",
+   "[−1/2, 1/2]"
+  ],
+  "answer": 1,
+  "explain": "sinθcosθcos2θ = ¼ sin4θ, so the range is [−¼, ¼].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "285c8fd2-83e6-43d9-b730-e801e423e2ea",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Fundamental period of cos(sin x)?",
+  "formula": "",
+  "options": [
+   "π/2",
+   "π",
+   "2π",
+   "not periodic"
+  ],
+  "answer": 1,
+  "explain": "sin(x+π) = −sin x and cos is even, so cos(sin x) repeats after π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a69aa4e5-9032-4704-ba7b-c7adcf923192",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "The function sin x + sin πx is…",
+  "formula": "",
+  "options": [
+   "non-periodic",
+   "periodic with period 2π²",
+   "periodic with period 2π",
+   "periodic with period 2"
+  ],
+  "answer": 0,
+  "explain": "The periods 2π and 2 have an irrational ratio, so there is no common period.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a36f03f-1cf5-41a5-8792-fb5c5b64aa18",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Fundamental period of sin(x/3) + cos(x/2)?",
+  "formula": "",
+  "options": [
+   "12π",
+   "24π",
+   "6π",
+   "4π"
+  ],
+  "answer": 0,
+  "explain": "The periods are 6π and 4π, and LCM(6π, 4π) = 12π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "88c9d5b6-aac5-4cae-89f9-adc756f7f7ae",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Fundamental period of tan x + cot x?",
+  "formula": "= 2 cosec 2x",
+  "options": [
+   "2π",
+   "π/2",
+   "π/4",
+   "π"
+  ],
+  "answer": 3,
+  "explain": "tan x + cot x = 2/sin2x, and sin 2x has period π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c035f8eb-f1ab-474f-8524-0d59e42ad269",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Vertical asymptotes of y = tan x occur at x =",
+  "formula": "",
+  "options": [
+   "2nπ",
+   "(2n+1)π/2",
+   "nπ",
+   "nπ/2"
+  ],
+  "answer": 1,
+  "explain": "cos x = 0 at x = (2n+1)π/2, where tan x is undefined.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb94698c-64ab-4ede-991c-4a1b90d1474d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Which interval has sin x increasing throughout?",
+  "formula": "",
+  "options": [
+   "[π/2, 3π/2]",
+   "[0, π]",
+   "[−π/2, π/2]",
+   "[0, 3π/2]"
+  ],
+  "answer": 2,
+  "explain": "sin x rises from −1 to 1 on [−π/2, π/2], and falls on [π/2, 3π/2].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a0973a59-536e-444d-b195-4c6eb8a9a738",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "The graph of y = cos x is the graph of y = sin x shifted…",
+  "formula": "cos x = sin(x + π/2)",
+  "options": [
+   "π/2 left",
+   "π right",
+   "π left",
+   "π/2 right"
+  ],
+  "answer": 0,
+  "explain": "cos x = sin(x + π/2), so the graph moves π/2 to the left.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9eca84b6-345c-4fdf-8e6f-0701c746fa65",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Which of these functions is NOT periodic?",
+  "formula": "",
+  "options": [
+   "sin(x/5)",
+   "sin(x²)",
+   "|sin x|",
+   "sin²x"
+  ],
+  "answer": 1,
+  "explain": "The zeros of sin(x²) at x = √(nπ) get closer together, so there is no fixed period.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d863125b-91da-45d1-abdc-af0fe84fc9b3",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Number of solutions of |sin x| = 1/2 in [0, 2π]?",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "2",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "x = π/6, 5π/6, 7π/6, 11π/6 are the four solutions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3a1cb80d-cfd5-4402-8db7-34cbe50e0e75",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "Fundamental period of cos(πx/2)?",
+  "formula": "T = 2π/|a|",
+  "options": [
+   "2",
+   "π",
+   "2π",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "T = 2π/(π/2) = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e665dcb5-f1e2-4a65-b9d8-94a966376bbb",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "The graph of y = sin x is symmetric about the line…",
+  "formula": "",
+  "options": [
+   "x = π",
+   "x = π/2",
+   "y-axis",
+   "x = π/4"
+  ],
+  "answer": 1,
+  "explain": "sin(π−x) = sin x, so the graph is symmetric about x = π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1c6168e-67b3-43a0-a866-27d7727767a4",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Graphs & periodicity of trig functions",
+  "prompt": "The function y = sin|x| is…",
+  "formula": "",
+  "options": [
+   "odd and periodic",
+   "even and periodic with period 2π",
+   "odd and non-periodic",
+   "even and non-periodic"
+  ],
+  "answer": 3,
+  "explain": "sin|x| is symmetric about the y-axis (even). The left half is the mirror of the right half, so it is not periodic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "563be689-18d1-4473-b8a5-6c652fbf0ce4",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "Common θ in [0, 2π] for sinθ = −1/2 and tanθ = 1/√3?",
+  "formula": "",
+  "options": [
+   "π/6",
+   "11π/6",
+   "5π/6",
+   "7π/6"
+  ],
+  "answer": 3,
+  "explain": "sinθ < 0 and tanθ > 0 put θ in the third quadrant: 7π/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a168c79-1b47-446b-b1b7-d29d132ab695",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of sinθ = tanθ is?",
+  "formula": "",
+  "options": [
+   "θ = nπ/2",
+   "θ = nπ",
+   "θ = 2nπ",
+   "θ = nπ ± π/4"
+  ],
+  "answer": 1,
+  "explain": "sinθ(cosθ − 1) = 0 with cosθ ≠ 0 gives sinθ = 0, so θ = nπ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "813a5316-842e-494e-b42e-2c436668e2f8",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "cosθ + √3 sinθ = k has real solutions for θ exactly when:",
+  "formula": "a cosθ + b sinθ = c needs |c| ≤ √(a²+b²)",
+  "options": [
+   "|k| ≤ 4",
+   "|k| ≤ 2",
+   "|k| ≤ √3",
+   "|k| ≤ 1"
+  ],
+  "answer": 1,
+  "explain": "Amplitude is √(1+3) = 2, so the equation is solvable iff |k| ≤ 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43a5027c-7c6f-4151-b93a-8371ed7abd6d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of tanθ = cotθ is:",
+  "formula": "tan²θ = 1",
+  "options": [
+   "nπ + π/4",
+   "nπ/4",
+   "(2n+1)π/4",
+   "2nπ ± π/4"
+  ],
+  "answer": 2,
+  "explain": "tan²θ = 1 gives θ = nπ ± π/4, which together equal (2n+1)π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "625bdaa2-3b26-4dd3-beab-9e6fec5bac1c",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of sin3θ = sinθ is:",
+  "formula": "sin3θ − sinθ = 2cos2θ·sinθ",
+  "options": [
+   "θ = nπ or (2n+1)π/4",
+   "θ = nπ or (2n+1)π/2",
+   "θ = (2n+1)π/4 only",
+   "θ = nπ/2"
+  ],
+  "answer": 0,
+  "explain": "2cos2θ sinθ = 0 gives sinθ = 0 (θ = nπ) or cos2θ = 0 (θ = (2n+1)π/4).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "100e348f-572b-4037-8b88-250a135f3c6f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "sin⁻¹(sin 2) equals (principal value)?",
+  "formula": "",
+  "options": [
+   "π − 2",
+   "2 − π",
+   "2",
+   "π/2 − 2"
+  ],
+  "answer": 0,
+  "explain": "2 lies outside [−π/2, π/2]; sin 2 = sin(π − 2) and π − 2 is in range.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b91c7335-715d-4276-b678-8bd47eee6bab",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "sin(sin⁻¹2) equals?",
+  "formula": "",
+  "options": [
+   "Not defined",
+   "0",
+   "2",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "sin⁻¹x needs |x| ≤ 1, so sin⁻¹2 does not exist.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cccd7e8a-da9b-4fe2-aeec-7cb0f10e5569",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "Value of cos⁻¹(cos 4) (principal value)?",
+  "formula": "",
+  "options": [
+   "π − 4",
+   "2π − 4",
+   "4",
+   "4 − π"
+  ],
+  "answer": 1,
+  "explain": "4 ∈ (π, 2π), so cos⁻¹(cos 4) = 2π − 4 ∈ [0, π].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3bfac04e-7cb8-42b6-b4f7-8f8b3b21aee0",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "Principal value of cot⁻¹(−√3)?",
+  "formula": "cot⁻¹(−x) = π − cot⁻¹x",
+  "options": [
+   "−π/6",
+   "5π/6",
+   "−π/3",
+   "2π/3"
+  ],
+  "answer": 1,
+  "explain": "cot⁻¹(−√3) = π − π/6 = 5π/6, which lies in (0, π).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e4e3dda7-5e92-48db-a213-255ea49a5e33",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties like sin⁻¹(sin x), graphs",
+  "prompt": "Fundamental period of the function f(x) = tan⁻¹(tan x) is?",
+  "formula": "",
+  "options": [
+   "Not periodic",
+   "2π",
+   "π/2",
+   "π"
+  ],
+  "answer": 3,
+  "explain": "tan x has period π, so tan⁻¹(tan x) repeats every π; it is undefined at odd multiples of π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22f7624b-ffad-4524-865d-0d54868e199f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties like sin⁻¹(sin x), graphs",
+  "prompt": "The graph of y = sin⁻¹(sin x) over all real x is a:",
+  "formula": "",
+  "options": [
+   "Triangular zigzag wave, period 2π",
+   "Straight line y = x",
+   "Sine wave with period 2π",
+   "Step function with period π"
+  ],
+  "answer": 0,
+  "explain": "It is piecewise linear with slope ±1, range [−π/2, π/2], period 2π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "161ec8a4-9862-4f35-bb78-42c08ae2c3d6",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties like sin⁻¹(sin x), graphs",
+  "prompt": "The graph of y = cos⁻¹(cos x) is symmetric about:",
+  "formula": "",
+  "options": [
+   "The y-axis",
+   "The line y = x",
+   "The x-axis",
+   "The origin"
+  ],
+  "answer": 0,
+  "explain": "cos⁻¹(cos(−x)) = cos⁻¹(cos x), so it is even, with range [0, π].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb63bd7c-880f-4553-8742-859e225e1277",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Properties like sin⁻¹(sin x), graphs",
+  "prompt": "The domain of f(x) = tan⁻¹(tan x) is:",
+  "formula": "",
+  "options": [
+   "R",
+   "R − {(2n+1)π/2}",
+   "R − {nπ/2}",
+   "R − {nπ}"
+  ],
+  "answer": 1,
+  "explain": "tan x is undefined at odd multiples of π/2; elsewhere the range is (−π/2, π/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b1203a0-575f-4c33-8d13-0296db8bda8f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum/difference formulae of inverse trig",
+  "prompt": "2sin⁻¹x = sin⁻¹(2x√(1−x²)) is valid for which x?",
+  "formula": "",
+  "options": [
+   "0 ≤ x ≤ 1",
+   "−1/√2 ≤ x ≤ 1/√2",
+   "1/√2 ≤ x ≤ 1",
+   "−1 ≤ x ≤ 1"
+  ],
+  "answer": 1,
+  "explain": "Need 2sin⁻¹x ∈ [−π/2, π/2], i.e. |x| ≤ 1/√2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc213f3f-840b-4294-8a23-a78ded72e207",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum/difference formulae of inverse trig",
+  "prompt": "3tan⁻¹x = tan⁻¹((3x−x³)/(1−3x²)) is valid for:",
+  "formula": "3tan⁻¹x = tan⁻¹((3x−x³)/(1−3x²))",
+  "options": [
+   "0 ≤ x ≤ 1",
+   "|x| < √3",
+   "|x| < 1",
+   "|x| < 1/√3"
+  ],
+  "answer": 3,
+  "explain": "We need 3tan⁻¹x ∈ (−π/2, π/2), so |tan⁻¹x| < π/6, giving |x| < 1/√3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "21217179-bbaf-4cb0-800c-0d6a24d5c92d",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Allied angle ratios & reduction formulae",
+  "prompt": "cos(2π − θ) + sin(3π/2 + θ) simplifies to?",
+  "formula": "",
+  "options": [
+   "2sinθ",
+   "cosθ − sinθ",
+   "0",
+   "2cosθ"
+  ],
+  "answer": 2,
+  "explain": "cos(2π−θ) = cosθ and sin(3π/2+θ) = −cosθ, so the sum is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7201a769-671c-48ec-89f0-c808e03d4764",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "sinθ·sin(60°−θ)·sin(60°+θ) equals?",
+  "formula": "",
+  "options": [
+   "sin3θ",
+   "3 sin3θ/4",
+   "cos3θ/4",
+   "sin3θ/4"
+  ],
+  "answer": 3,
+  "explain": "Standard identity: sinθ sin(60°−θ) sin(60°+θ) = (1/4) sin3θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "44b90f5e-6b06-4fa7-8ef1-48b9405bb3ee",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Compound angle identities",
+  "prompt": "If A+B+C = π/2, then tanA tanB + tanB tanC + tanC tanA equals?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "0",
+   "1",
+   "tanA tanB tanC"
+  ],
+  "answer": 2,
+  "explain": "C = π/2 − (A+B) gives tanC = cot(A+B), which rearranges to the sum of pairwise products = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "53727b1f-578e-45f4-b206-1bdd8616e4af",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum of sines/cosines with angles in AP",
+  "prompt": "For angles a, a+d, …, a+(n−1)d, Σsin ÷ Σcos equals?",
+  "formula": "",
+  "options": [
+   "cot(a + (n−1)d/2)",
+   "tan(a + (n−1)d/2)",
+   "tan(a + nd/2)",
+   "tan(nd/2)"
+  ],
+  "answer": 1,
+  "explain": "Both sums share the factor; the ratio is tan of the middle angle a+(n−1)d/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "349b257f-3697-45a8-ad3b-4794ef88fe52",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum of sines/cosines with angles in AP",
+  "prompt": "cos2θ + cos4θ + … + cos2nθ equals?",
+  "formula": "",
+  "options": [
+   "sin(nθ)cos((n+1)θ)/sinθ",
+   "sin(2nθ)/(2sinθ)",
+   "sin(nθ)sin((n+1)θ)/sinθ",
+   "sin(nθ)cos(nθ)/sin2θ"
+  ],
+  "answer": 0,
+  "explain": "Here a=d=2θ: sin(nθ)/sinθ · cos((n+1)θ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9ad417e0-28b3-40d5-915e-d12ac60a742f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum of sines/cosines with angles in AP",
+  "prompt": "sin²θ + sin²(θ+π/3) + sin²(θ+2π/3) equals?",
+  "formula": "",
+  "options": [
+   "1",
+   "Depends on θ",
+   "3/2",
+   "3/4"
+  ],
+  "answer": 2,
+  "explain": "Use sin²x=(1−cos2x)/2; cos terms at 2θ shifted by 2π/3 sum to 0, giving 3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "78fd35da-4d7a-4f22-9aa1-383a567bc22b",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum of sines/cosines with angles in AP",
+  "prompt": "Σ_{k=1}^{n−1} sin(kπ/n) equals?",
+  "formula": "",
+  "options": [
+   "tan(π/2n)",
+   "cot(π/2n)",
+   "cot(π/n)",
+   "1/sin(π/n)"
+  ],
+  "answer": 1,
+  "explain": "AP sum with a=d=π/n gives sin(π/2)·sin(π/2)... = cot(π/(2n)); check n=2: 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7da348ac-2c49-48f4-9be0-5e6b74f3bd0f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum of sines/cosines with angles in AP",
+  "prompt": "For n ≥ 2, Σ_{k=1}^{n−1} cos(kπ/n) equals?",
+  "formula": "",
+  "options": [
+   "0",
+   "cot(π/2n)",
+   "−1",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "Terms cos(kπ/n) and cos((n−k)π/n) are negatives of each other, so they cancel in pairs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e143c1ce-07f0-4861-be7f-8035d4084f65",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Sum of sines/cosines with angles in AP",
+  "prompt": "sin2θ + sin4θ + sin6θ + … + sin2nθ equals?",
+  "formula": "sin nθ·sin(n+1)θ / sinθ",
+  "options": [
+   "sin nθ·sin(n+1)θ / sinθ",
+   "sin²nθ / sinθ",
+   "sin nθ·cos(n+1)θ / sinθ",
+   "sin(2nθ) / (2 sinθ)"
+  ],
+  "answer": 0,
+  "explain": "Here a=2θ and d=2θ, so the AP formula gives sin nθ·sin(n+1)θ / sinθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "baeb546c-e44a-484b-a134-512aae36c960",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of tan3θ = tanθ is:",
+  "formula": "",
+  "options": [
+   "θ = nπ/3",
+   "θ = nπ/2",
+   "θ = nπ",
+   "θ = (2n+1)π/2"
+  ],
+  "answer": 2,
+  "explain": "3θ = nπ + θ gives θ = nπ/2, but odd multiples of π/2 make tanθ undefined, so θ = nπ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "197ba33d-8387-49cb-b746-af0e26ab77e6",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of secθ = −√2 is:",
+  "formula": "cosθ = −1/√2",
+  "options": [
+   "θ = nπ + (−1)ⁿ 3π/4",
+   "θ = 2nπ ± 3π/4",
+   "θ = 2nπ ± π/4",
+   "θ = nπ ± 3π/4"
+  ],
+  "answer": 1,
+  "explain": "cosθ = cos(3π/4) ⇒ θ = 2nπ ± 3π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0834303d-162b-48db-82f0-728a66e420f9",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of tan²θ = 3 is:",
+  "formula": "",
+  "options": [
+   "nπ + (−1)ⁿ π/3",
+   "nπ ± π/6",
+   "2nπ ± π/3",
+   "nπ ± π/3"
+  ],
+  "answer": 3,
+  "explain": "tan²θ = tan²(π/3) gives θ = nπ ± π/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a7d83f5-549f-427c-827f-5c950fd30113",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "Solutions of sinθ = cosθ in [0, 2π] are:",
+  "formula": "",
+  "options": [
+   "π/4, 5π/4",
+   "3π/4, 7π/4",
+   "π/4, 7π/4",
+   "π/4, 3π/4"
+  ],
+  "answer": 0,
+  "explain": "sinθ = cosθ means tanθ = 1, so θ = π/4 and π + π/4 = 5π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d8ae146d-1597-43f3-ae7e-274c7a0f8adf",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of sinθ = −√3/2 is:",
+  "formula": "",
+  "options": [
+   "2nπ ± π/3",
+   "nπ ± π/3",
+   "nπ + (−1)ⁿ π/3",
+   "nπ + (−1)ⁿ⁺¹ π/3"
+  ],
+  "answer": 3,
+  "explain": "sinθ = sin(−π/3), so θ = nπ + (−1)ⁿ(−π/3) = nπ + (−1)ⁿ⁺¹π/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1816d834-9295-4d17-9b89-8e6df6a03320",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "General solution of sin2θ = 1 is:",
+  "formula": "2θ = 2nπ + π/2",
+  "options": [
+   "θ = 2nπ + π/4",
+   "θ = nπ + π/2",
+   "θ = nπ + π/4",
+   "θ = nπ/2 + π/4"
+  ],
+  "answer": 2,
+  "explain": "2θ = 2nπ + π/2, so θ = nπ + π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02435d06-9a98-419c-a04c-9d3361387ccf",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "Value of tan⁻¹(tan 3) (principal value)?",
+  "formula": "",
+  "options": [
+   "3",
+   "π − 3",
+   "3 − 2π",
+   "3 − π"
+  ],
+  "answer": 3,
+  "explain": "3 lies outside (−π/2, π/2); tan has period π, so the value is 3 − π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "655f2d4e-9d47-41ed-bfb0-71c8b3a85fbd",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "General solution of trig equations",
+  "prompt": "Number of solutions of sin2θ = 1/2 in [0, 2π] is:",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "2",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "2θ ∈ [0, 4π] covers two periods, with 2 solutions each, so 4 solutions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be6cb5aa-1dc3-4029-af38-8b034269c3b5",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Allied angle ratios & reduction formulae",
+  "prompt": "The value of tan1°·tan2°·tan3°···tan89° is?",
+  "formula": "tan(90°−θ) = cotθ",
+  "options": [
+   "Not defined",
+   "0",
+   "89",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Pair tanθ with tan(90°−θ) = cotθ, so each product is 1. The middle term tan45° = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e11cdc60-7d86-4406-b063-c83f04742526",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Conditional identities (A+B+C=π)",
+  "prompt": "For a triangle ABC, the maximum value of cosA cosB cosC is:",
+  "formula": "",
+  "options": [
+   "1/4",
+   "3√3/8",
+   "1/8",
+   "3/8"
+  ],
+  "answer": 2,
+  "explain": "Maximum occurs for the equilateral triangle: (1/2)³ = 1/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f382432-aaa4-4b4a-aa25-b95cc89f863f",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of sin²θ·cos²θ is:",
+  "formula": "sin²θcos²θ = ¼ sin²2θ",
+  "options": [
+   "[0, 1/4]",
+   "[0, 1]",
+   "[0, 1/2]",
+   "[−1/4, 1/4]"
+  ],
+  "answer": 0,
+  "explain": "Equals ¼sin²2θ, and sin²2θ ∈ [0, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "505d3b61-740e-4139-944f-61fae6802aab",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Max-min & range of trig expressions",
+  "prompt": "Range of 1/(1 + sin²θ) is:",
+  "formula": "",
+  "options": [
+   "[0, 1]",
+   "[1/2, 1]",
+   "[1/2, 2]",
+   "[1/3, 1]"
+  ],
+  "answer": 1,
+  "explain": "sin²θ ∈ [0,1], so 1 + sin²θ ∈ [1,2], and the reciprocal lies in [1/2, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56e0584b-da90-4517-9e65-8800ec473fb9",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "Principal value of cosec⁻¹(−√2) is:",
+  "formula": "cosec⁻¹(−x) = −cosec⁻¹x",
+  "options": [
+   "−π/4",
+   "−π/2",
+   "5π/4",
+   "3π/4"
+  ],
+  "answer": 0,
+  "explain": "cosec⁻¹(−√2) = −cosec⁻¹√2 = −π/4, in [−π/2, π/2] − {0}.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ebbfe96b-72e9-4aab-a819-06cca940f0e2",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "cos⁻¹(cos x) = x holds exactly for:",
+  "formula": "",
+  "options": [
+   "x ∈ [0, π]",
+   "x ∈ [−π/2, π/2]",
+   "x ∈ [0, 2π]",
+   "x ∈ [−π, π]"
+  ],
+  "answer": 0,
+  "explain": "The principal range of cos⁻¹ is [0, π], so cos⁻¹(cos x) = x only there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b182cff-ed4a-4fe0-a61b-3c915d04f233",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "sin⁻¹x = cos⁻¹√(1−x²) holds for which x?",
+  "formula": "",
+  "options": [
+   "x ∈ [−1, 1]",
+   "x ∈ [0, 1]",
+   "x ∈ [−1, 0]",
+   "x ∈ ℝ"
+  ],
+  "answer": 1,
+  "explain": "cos⁻¹ is non-negative, so sin⁻¹x must be in [0, π/2], which needs x ≥ 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "27a3e5d1-f355-43e2-8c11-f8183b12250b",
+  "subject": "Mathematics",
+  "chapter": "Trigonometry",
+  "topic": "Inverse trig: domain, range, principal value",
+  "prompt": "sec⁻¹x + cosec⁻¹x = π/2 holds for which x?",
+  "formula": "",
+  "options": [
+   "All real x",
+   "|x| ≥ 1",
+   "x ∈ [−1, 1]",
+   "x > 0 only"
+  ],
+  "answer": 1,
+  "explain": "Both functions are defined only for |x| ≥ 1, and cos⁻¹(1/x) + sin⁻¹(1/x) = π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

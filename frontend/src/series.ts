@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+import { useFocusEffect } from "expo-router";
 import { api } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { istDate } from "@/src/navigation";
@@ -32,6 +34,31 @@ const fetchSeries = (signal: AbortSignal) => api<Series>("/series/all-india-jee"
 
 /** How many days the series runs, exactly as the website sets it (0 while it loads). Never a number baked into the app. */
 export const seriesDays = (s?: Series | null) => s?.total || s?.slots?.length || 0;
+
+/** "8:59 PM" in India time for a server time (unix seconds). The website's schedule decides every time shown. */
+export function istTime(unix: number) {
+  const d = new Date((unix + 19800) * 1000);
+  const h = d.getUTCHours(), m = d.getUTCMinutes();
+  return `${h % 12 || 12}:${String(m).padStart(2, "0")} ${h >= 12 ? "PM" : "AM"}`;
+}
+
+/** Paper Ready Alert: today's paper is published and can be started ("ready"), or not published yet ("waiting"). */
+export function todayPaper(d?: DayInfo): "ready" | "waiting" | null {
+  if (!d?.isToday || d.live) return null;
+  if (d.slot.ready && d.slot.can_start && d.slot.set_id) return "ready";
+  if (!d.slot.ready && !["start_closed", "ended", "archive"].includes(d.slot.state)) return "waiting";
+  return null;
+}
+
+/** While today's paper is still being published, a focused screen asks again every minute, so "Paper ready" shows by itself. */
+export function useSeriesWatch(revalidate: () => void, days: DayInfo[]) {
+  const waiting = todayPaper(days.find(d => d.isToday)) === "waiting";
+  useFocusEffect(useCallback(() => {
+    if (!waiting) return;
+    const timer = setInterval(revalidate, 60000);
+    return () => clearInterval(timer);
+  }, [waiting, revalidate]));
+}
 
 export function useSeriesData(uid?: string, historyAlways = true) {
   const series = useCached<Series>("series", fetchSeries);
@@ -87,11 +114,11 @@ export function dayAction(d: DayInfo): SeriesAction | null {
 /** Human note for days without an action. */
 export function dayNote(d: DayInfo) {
   const { slot, live } = d;
-  if (live && !live.resumable && !live.summary) return live.status === "embargoed" ? "Results at 11:59 PM IST" : "Preparing your result";
-  if (!slot.ready && slot.state === "upcoming") return `Opens ${istDate(slot.date)} · 12:01 AM IST`;
-  if (!slot.ready) return "Paper not available yet. Only published papers can be started.";
-  if (slot.state === "upcoming") return `Opens ${istDate(slot.date)} · 12:01 AM IST`;
-  if (slot.state === "start_closed") return "New starts closed at 8:59 PM. Existing attempts keep their timer.";
+  if (live && !live.resumable && !live.summary) return live.status === "embargoed" ? `Results at ${istTime(slot.closes_at)} IST` : "Preparing your result";
+  if (!slot.ready && slot.state === "upcoming") return `Opens ${istDate(slot.date)} · ${istTime(slot.opens_at)} IST`;
+  if (!slot.ready) return "Paper abhi publish ho raha hai. Ready hote hi yahin khul jayega — yeh page khud check karta rehta hai.";
+  if (slot.state === "upcoming") return `Opens ${istDate(slot.date)} · ${istTime(slot.opens_at)} IST`;
+  if (slot.state === "start_closed") return `New starts closed at ${istTime(slot.last_start_at)}. Existing attempts keep their timer.`;
   if (slot.state === "ended") return "Results released. Archive opens at midnight.";
   return "75 questions · 180 minutes · +4 / −1";
 }

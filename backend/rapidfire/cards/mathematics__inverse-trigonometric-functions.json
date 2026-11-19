@@ -1,1617 +1,3297 @@
 [
-  {
-    "id": "9dfee534-dbda-49d3-a13b-efd673435d33",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Domain of sin⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "(0, 1)",
-      "[-1, 1]",
-      "(-∞, ∞)",
-      "[-π/2, π/2]"
-    ],
-    "answer": 1,
-    "explain": "sin⁻¹(x) is defined only for x ∈ [-1, 1].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "070c2bf2-f9d3-428c-8e2d-143c56edb348",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Range of sin⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "[0, π]",
-      "[0, π/2]",
-      "[-π/2, π/2]",
-      "(-π/2, π/2)"
-    ],
-    "answer": 2,
-    "explain": "The principal value branch of sin⁻¹ has range [-π/2, π/2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4408572b-6a81-40a5-b780-0e5c1379dcc4",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Range of cos⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "[-1, 1]",
-      "[0, π]",
-      "(0, π)",
-      "[-π/2, π/2]"
-    ],
-    "answer": 1,
-    "explain": "The principal value branch of cos⁻¹ has range [0, π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aff0a266-0d4c-4704-ba54-e067a4b82113",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Range of tan⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "[0, π]",
-      "[-π/2, π/2]",
-      "(-π/2, π/2)",
-      "(-∞, ∞)"
-    ],
-    "answer": 2,
-    "explain": "tan⁻¹(x) has range (-π/2, π/2); endpoints excluded as tan→±∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec9460cd-e9bd-4275-b89d-0ad63d5c718b",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(x) + cos⁻¹(x) = ?",
-    "formula": "sin⁻¹x + cos⁻¹x = π/2",
-    "options": [
-      "2π",
-      "0",
-      "π/2",
-      "π"
-    ],
-    "answer": 2,
-    "explain": "For x ∈ [-1,1], sin⁻¹x + cos⁻¹x = π/2 is a standard identity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fb81154d-937c-4b5b-bf22-1ccb07f35281",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹(x) + cot⁻¹(x) = ?",
-    "formula": "tan⁻¹x + cot⁻¹x = π/2",
-    "options": [
-      "π/2",
-      "1",
-      "0",
-      "π"
-    ],
-    "answer": 0,
-    "explain": "For all real x, tan⁻¹x + cot⁻¹x = π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d1e7cbda-f533-4bfa-b11a-01ec3b3eba1c",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sec⁻¹(x) + cosec⁻¹(x) = ?",
-    "formula": "sec⁻¹x + cosec⁻¹x = π/2",
-    "options": [
-      "π/2",
-      "2π",
-      "π",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "For |x| ≥ 1, sec⁻¹x + cosec⁻¹x = π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3ca1a545-b3cd-49e9-abfe-493c8c626a94",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹x + tan⁻¹y = ? when xy < 1",
-    "formula": "tan⁻¹((x+y)/(1−xy))",
-    "options": [
-      "tan⁻¹((x+y)/(1−xy))",
-      "tan⁻¹(x+y)",
-      "tan⁻¹((x−y)/(1+xy))",
-      "π + tan⁻¹((x+y)/(1−xy))"
-    ],
-    "answer": 0,
-    "explain": "Addition formula: tan⁻¹x + tan⁻¹y = tan⁻¹((x+y)/(1−xy)) when xy < 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "945d7f8b-8fad-40c8-9256-d2c4c77b60c0",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹x + tan⁻¹y when x>0, y>0, xy>1?",
-    "formula": "π + tan⁻¹((x+y)/(1−xy))",
-    "options": [
-      "π + tan⁻¹((x+y)/(1−xy))",
-      "−π + tan⁻¹((x+y)/(1−xy))",
-      "π/2",
-      "tan⁻¹((x+y)/(1−xy))"
-    ],
-    "answer": 0,
-    "explain": "When x>0, y>0 and xy>1, add π to the standard formula.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "88d9560b-c5ec-43f5-9b59-2f39e9e73c63",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "2tan⁻¹(x) = sin⁻¹(?) for |x| ≤ 1",
-    "formula": "sin⁻¹(2x/(1+x²))",
-    "options": [
-      "sin⁻¹(x²)",
-      "sin⁻¹(2x/(1−x²))",
-      "sin⁻¹(2x/(1+x²))",
-      "cos⁻¹(2x/(1+x²))"
-    ],
-    "answer": 2,
-    "explain": "2tan⁻¹x = sin⁻¹(2x/(1+x²)) is valid for |x| ≤ 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bc1205fb-057e-4502-81bc-f2f0bac3f0e8",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "2tan⁻¹(x) = cos⁻¹(?) for x ≥ 0",
-    "formula": "cos⁻¹((1−x²)/(1+x²))",
-    "options": [
-      "cos⁻¹((1−x²)/(1+x²))",
-      "cos⁻¹(x²−1)",
-      "cos⁻¹(2x/(1+x²))",
-      "cos⁻¹((1+x²)/(1−x²))"
-    ],
-    "answer": 0,
-    "explain": "2tan⁻¹x = cos⁻¹((1−x²)/(1+x²)) for x ≥ 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "72f28828-99d0-4f62-a049-f24aa053c705",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "2tan⁻¹(x) = tan⁻¹(?) for |x| < 1",
-    "formula": "tan⁻¹(2x/(1−x²))",
-    "options": [
-      "tan⁻¹(2x/(1+x²))",
-      "tan⁻¹(x/(1−x²))",
-      "tan⁻¹(2x/(1−x²))",
-      "tan⁻¹(x²/(1−x))"
-    ],
-    "answer": 2,
-    "explain": "Double angle: 2tan⁻¹x = tan⁻¹(2x/(1−x²)) valid for |x| < 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "271705ab-0197-4756-963a-50dc5a21e511",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(−x) = ?",
-    "formula": "−sin⁻¹(x)",
-    "options": [
-      "π + sin⁻¹(x)",
-      "−sin⁻¹(x)",
-      "sin⁻¹(x)",
-      "π − sin⁻¹(x)"
-    ],
-    "answer": 1,
-    "explain": "sin⁻¹ is an odd function: sin⁻¹(−x) = −sin⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f0f0853d-ae64-4df0-a0fb-2554d3ba6362",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(−x) = ?",
-    "formula": "π − cos⁻¹(x)",
-    "options": [
-      "−cos⁻¹(x)",
-      "π − cos⁻¹(x)",
-      "cos⁻¹(x)",
-      "π + cos⁻¹(x)"
-    ],
-    "answer": 1,
-    "explain": "cos⁻¹ is NOT odd: cos⁻¹(−x) = π − cos⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7c412b75-5707-42db-906a-667c78f09cc8",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹(−x) = ?",
-    "formula": "−tan⁻¹(x)",
-    "options": [
-      "π − tan⁻¹(x)",
-      "tan⁻¹(x)",
-      "−tan⁻¹(x)",
-      "π + tan⁻¹(x)"
-    ],
-    "answer": 2,
-    "explain": "tan⁻¹ is an odd function: tan⁻¹(−x) = −tan⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1097cfce-b962-4534-b7a5-e1e5bcfe49d2",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin(sin⁻¹(x)) = x for x ∈ ?",
-    "formula": "",
-    "options": [
-      "(-∞, ∞)",
-      "[0, 1]",
-      "[-π/2, π/2]",
-      "[-1, 1]"
-    ],
-    "answer": 3,
-    "explain": "sin(sin⁻¹x) = x holds exactly for x in the domain [-1, 1].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef2860ad-a2b2-4313-a9e0-16b5335ac9a9",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(sin x) = x only when x ∈ ?",
-    "formula": "",
-    "options": [
-      "(-π, π)",
-      "[-π/2, π/2]",
-      "[-1, 1]",
-      "[0, π]"
-    ],
-    "answer": 1,
-    "explain": "sin⁻¹(sin x) = x iff x is in the principal range [-π/2, π/2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "07fdadbe-677c-410c-8b4c-1cae834c987b",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(cos x) = x only when x ∈ ?",
-    "formula": "",
-    "options": [
-      "[-1, 1]",
-      "[0, 2π]",
-      "[0, π]",
-      "[-π/2, π/2]"
-    ],
-    "answer": 2,
-    "explain": "cos⁻¹(cos x) = x iff x lies in the principal range [0, π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ccc3deac-c5e0-415e-8318-b0480cf8f3cc",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Domain of cos⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "[0, π]",
-      "(−∞, ∞)",
-      "[-1, 1]",
-      "(-1, 1)"
-    ],
-    "answer": 2,
-    "explain": "cos⁻¹(x) is defined for x ∈ [-1, 1] (closed interval).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6747e6a1-fb38-4742-835c-6913e58ec6c4",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Domain of sec⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "(−1,1)",
-      "(−∞,∞)",
-      "(−∞,−1]∪[1,∞)",
-      "[-1,1]"
-    ],
-    "answer": 2,
-    "explain": "sec⁻¹(x) requires |x| ≥ 1, i.e., x ∈ (−∞,−1] ∪ [1,∞).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "403c49f1-d7f5-43b2-9d15-dd06e3b4e065",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Range of cot⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "(-π/2, 0)∪(0, π/2)",
-      "[0, π]",
-      "(0, π)",
-      "(-π/2, π/2)"
-    ],
-    "answer": 2,
-    "explain": "Principal range of cot⁻¹ is the open interval (0, π).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dfb591bf-e15b-43f4-b110-22cf52c0f5b1",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹x + sin⁻¹y formula when x²+y² ≤ 1?",
-    "formula": "sin⁻¹(x√(1−y²)+y√(1−x²))",
-    "options": [
-      "sin⁻¹(xy+√(1−x²)(1−y²))",
-      "sin⁻¹(x+y)",
-      "cos⁻¹(xy)",
-      "sin⁻¹(x√(1−y²)+y√(1−x²))"
-    ],
-    "answer": 3,
-    "explain": "When x,y≥0 and x²+y²≤1: sin⁻¹x+sin⁻¹y = sin⁻¹(x√(1−y²)+y√(1−x²)).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9fa176a0-054f-4c31-9b40-45b37b9438ec",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of tan⁻¹(1) + tan⁻¹(2) + tan⁻¹(3) = ?",
-    "formula": "",
-    "options": [
-      "5π/4",
-      "π",
-      "π/2",
-      "3π/4"
-    ],
-    "answer": 1,
-    "explain": "tan⁻¹1+tan⁻¹2+tan⁻¹3 = π, a classic JEE identity result.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "db2914c1-9f52-4224-a30a-ca360adb6fb3",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Range of sec⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "[0,π]−{π/2}",
-      "[0,π]",
-      "[−π/2,π/2]−{0}",
-      "(−π/2,π/2)−{0}"
-    ],
-    "answer": 0,
-    "explain": "sec⁻¹(x) has range [0,π] excluding π/2 where sec is undefined.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4b5d0e70-0b95-4792-ab1b-4ec37a1e04cd",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Range of cosec⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "[−π/2,π/2]−{0}",
-      "[0,π]−{π/2}",
-      "(0,π)",
-      "[−π/2,π/2]"
-    ],
-    "answer": 0,
-    "explain": "cosec⁻¹(x) has range [−π/2,π/2] excluding 0 where cosec is undefined.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c379ed23-0d46-4761-bac9-6f7c431afb7e",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Domain of cot⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "All real numbers ℝ",
-      "|x|≥1",
-      "[−1,1]",
-      "ℝ−{0}"
-    ],
-    "answer": 0,
-    "explain": "cot is defined for all real x, so cot⁻¹ has domain ℝ, same as tan⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4426919a-84e8-4d42-b8f4-9861f6e659c5",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Domain of cosec⁻¹(x) is?",
-    "formula": "",
-    "options": [
-      "(−∞,−1]∪[1,∞)",
-      "ℝ−{0}",
-      "(−1,1)",
-      "[−1,1]"
-    ],
-    "answer": 0,
-    "explain": "|cosec|≥1, so cosec⁻¹(x) is defined only for |x|≥1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6a92067d-56a8-4180-ab64-20e1524553cf",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(cos 5π/3) = ?",
-    "formula": "",
-    "options": [
-      "4π/3",
-      "π/3",
-      "2π/3",
-      "5π/3"
-    ],
-    "answer": 1,
-    "explain": "5π/3 ∉ [0,π]; cos(5π/3)=cos(π/3), so cos⁻¹(cos 5π/3)=π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e1d94545-3d1b-4752-90b1-20ed01e1bf47",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(sin 5π/6) = ?",
-    "formula": "",
-    "options": [
-      "π/3",
-      "π/6",
-      "−π/6",
-      "5π/6"
-    ],
-    "answer": 1,
-    "explain": "sin(5π/6)=sin(π/6); since π/6∈[−π/2,π/2], sin⁻¹(sin 5π/6)=π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "66f4a453-6f8e-4adb-9528-74def5e8c8dc",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹x − tan⁻¹y = ? (general, xy > −1)",
-    "formula": "tan⁻¹((x−y)/(1+xy))",
-    "options": [
-      "tan⁻¹((x+y)/(1−xy))",
-      "tan⁻¹((x−y)/(1−xy))",
-      "tan⁻¹(x−y)",
-      "tan⁻¹((x−y)/(1+xy))"
-    ],
-    "answer": 3,
-    "explain": "Subtraction formula: tan⁻¹x − tan⁻¹y = tan⁻¹((x−y)/(1+xy)) when xy>−1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8aef9092-9c75-4fe6-9008-47ea1c791890",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(cos θ) = ?",
-    "formula": "",
-    "options": [
-      "π/2 − θ, θ∈[0,π]",
-      "cos⁻¹(sin θ)",
-      "π − θ",
-      "π/2 + θ"
-    ],
-    "answer": 0,
-    "explain": "sin⁻¹(cos θ) = sin⁻¹(sin(π/2−θ)) = π/2−θ for θ∈[0,π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cc657e30-02e1-49b5-8b3e-e4fbf7eef3d7",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(sin θ) = ? for θ∈[−π/2, π/2]",
-    "formula": "",
-    "options": [
-      "π/2 + θ",
-      "−π/2 − θ",
-      "π − θ",
-      "π/2 − θ"
-    ],
-    "answer": 3,
-    "explain": "cos⁻¹(sin θ) = cos⁻¹(cos(π/2−θ)) = π/2−θ when π/2−θ∈[0,π].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e1db1e82-6043-43e6-9059-bc5a1375dd91",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of tan⁻¹(−1) = ?",
-    "formula": "",
-    "options": [
-      "−π/4",
-      "3π/4",
-      "−3π/4",
-      "π/4"
-    ],
-    "answer": 0,
-    "explain": "tan(−π/4)=−1 and −π/4∈(−π/2,π/2), so tan⁻¹(−1)=−π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6a53d35e-6042-4344-9a74-065620185ead",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹x + sin⁻¹y when x²+y²>1, x,y>0 equals?",
-    "formula": "π − sin⁻¹(x√(1−y²)+y√(1−x²))",
-    "options": [
-      "π/2 − cos⁻¹(xy)",
-      "cos⁻¹(xy − √((1−x²)(1−y²)))",
-      "sin⁻¹(x√(1−y²)+y√(1−x²))",
-      "π − sin⁻¹(x√(1−y²)+y√(1−x²))"
-    ],
-    "answer": 3,
-    "explain": "When x,y>0 and x²+y²>1, sin⁻¹x+sin⁻¹y exceeds π/2, requiring π minus formula.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "788fd7f8-677b-41a2-a06e-fc481f2c46cc",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of sin(2sin⁻¹(x)) = ?",
-    "formula": "2x√(1−x²)",
-    "options": [
-      "x√(1−x²)",
-      "2x²−1",
-      "2x√(1−x²)",
-      "1−2x²"
-    ],
-    "answer": 2,
-    "explain": "Let θ=sin⁻¹x; sin 2θ=2 sin θ cos θ=2x√(1−x²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d72eaa40-ccb6-4b0a-9471-27e03af62f09",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos(2cos⁻¹x) = ?",
-    "formula": "2x²−1",
-    "options": [
-      "√(1−x²)",
-      "2x²−1",
-      "1−2x²",
-      "2x√(1−x²)"
-    ],
-    "answer": 1,
-    "explain": "Let θ=cos⁻¹x; cos 2θ=2cos²θ−1=2x²−1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e55da305-4801-4054-8faa-d91e2a1454a1",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan(2tan⁻¹x) = ?",
-    "formula": "2x/(1−x²)",
-    "options": [
-      "2x/(1−x²)",
-      "(1−x²)/(2x)",
-      "(1+x²)/(2x)",
-      "2x/(1+x²)"
-    ],
-    "answer": 0,
-    "explain": "tan 2θ = 2tanθ/(1−tan²θ); with θ=tan⁻¹x gives 2x/(1−x²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9ab9e57d-c00d-4322-a34d-379f0d39b005",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(2x√(1−x²)) = ? for x∈[1/√2,1]",
-    "formula": "",
-    "options": [
-      "π − 2sin⁻¹x",
-      "π/2 − 2sin⁻¹x",
-      "2cos⁻¹x",
-      "2sin⁻¹x"
-    ],
-    "answer": 0,
-    "explain": "For x∈[1/√2,1], 2sin⁻¹x∈[π/2,π], so sin⁻¹(2x√(1−x²))=π−2sin⁻¹x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c155d5f5-50fb-4148-9aed-54935690e8e8",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(2x√(1−x²)) = ? for x∈[−1/√2, 1/√2]",
-    "formula": "",
-    "options": [
-      "2cos⁻¹x",
-      "π − 2sin⁻¹x",
-      "2sin⁻¹x",
-      "−2sin⁻¹x"
-    ],
-    "answer": 2,
-    "explain": "Let x=sinθ; sin⁻¹(sin2θ)=2θ=2sin⁻¹x when 2θ∈[−π/2,π/2], i.e. x∈[−1/√2,1/√2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e175df28-69d8-44db-b1a6-7977efbeed9c",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "3sin⁻¹x = sin⁻¹(3x − 4x³) is valid for x ∈ ?",
-    "formula": "",
-    "options": [
-      "[−1, 1]",
-      "[−1/2, 1/2]",
-      "[−1/√2,1/√2]",
-      "[0, 1]"
-    ],
-    "answer": 1,
-    "explain": "The triple-angle identity sin⁻¹(3x−4x³)=3sin⁻¹x holds only for x∈[−1/2,1/2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "048437df-bb2b-4c49-879b-0f8524101022",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "3cos⁻¹x = cos⁻¹(4x³−3x) is valid for x ∈ ?",
-    "formula": "",
-    "options": [
-      "[0, 1]",
-      "[−1, 1]",
-      "[1/2, 1]",
-      "[−1/2, 1/2]"
-    ],
-    "answer": 2,
-    "explain": "The identity cos⁻¹(4x³−3x)=3cos⁻¹x is valid only for x∈[1/2,1].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "129becf4-24c8-4be2-a7db-3c5b7fad8dbf",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of tan⁻¹(tan 3π/4) = ?",
-    "formula": "",
-    "options": [
-      "5π/4",
-      "3π/4",
-      "π/4",
-      "−π/4"
-    ],
-    "answer": 3,
-    "explain": "3π/4 ∉ (−π/2,π/2); tan(3π/4)=−1; tan⁻¹(−1)=−π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "81e555dd-414a-4fdf-aaa0-81d448825818",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "If sin⁻¹x + sin⁻¹y = π/2, then cos⁻¹x + cos⁻¹y = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "π/2",
-      "3π/2",
-      "π"
-    ],
-    "answer": 1,
-    "explain": "Each cos⁻¹= π/2−sin⁻¹, so sum = π−(sin⁻¹x+sin⁻¹y) = π−π/2 = π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2b4028ca-d6ed-4e22-8f25-b403d83e81d0",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of cos⁻¹(−1/2) = ?",
-    "formula": "",
-    "options": [
-      "4π/3",
-      "2π/3",
-      "−π/3",
-      "π/3"
-    ],
-    "answer": 1,
-    "explain": "cos(2π/3)=−1/2 and 2π/3∈[0,π], so cos⁻¹(−1/2)=2π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cd62fc35-f3ce-46da-b890-dee0d56c89a1",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of sin⁻¹(1/2) = ?",
-    "formula": "",
-    "options": [
-      "π/6",
-      "π/3",
-      "π/4",
-      "π/2"
-    ],
-    "answer": 0,
-    "explain": "sin(π/6)=1/2 and π/6∈[−π/2,π/2], so sin⁻¹(1/2)=π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1dc18289-442d-41f7-a750-3c372c625d9d",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of tan⁻¹(√3) = ?",
-    "formula": "",
-    "options": [
-      "π/3",
-      "π/4",
-      "2π/3",
-      "π/6"
-    ],
-    "answer": 0,
-    "explain": "tan(π/3)=√3 and π/3∈(−π/2,π/2), so tan⁻¹(√3)=π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "82b2e411-ea2b-4c9d-afca-41844519cdec",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(sin 2π/3) = ?",
-    "formula": "",
-    "options": [
-      "π/6",
-      "−π/3",
-      "π/3",
-      "2π/3"
-    ],
-    "answer": 2,
-    "explain": "2π/3∉[−π/2,π/2]; sin(2π/3)=sin(π/3), so sin⁻¹(sin 2π/3)=π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "267b716c-9cdc-4f3b-bdc5-7fc887565a74",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹(tan 2π/3) = ?",
-    "formula": "",
-    "options": [
-      "−π/3",
-      "π/3",
-      "π/6",
-      "2π/3"
-    ],
-    "answer": 0,
-    "explain": "2π/3∉(−π/2,π/2); tan(2π/3)=tan(−π/3), so result is −π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "54119366-9cba-4679-bc65-6f80fa46f49a",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(cos 4π/3) = ?",
-    "formula": "",
-    "options": [
-      "2π/3",
-      "π/3",
-      "−2π/3",
-      "4π/3"
-    ],
-    "answer": 0,
-    "explain": "4π/3∉[0,π]; cos(4π/3)=cos(2π/3), so cos⁻¹(cos 4π/3)=2π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1e07760c-e4e5-48ae-aa45-2c7a1c9d45f4",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹x + sin⁻¹y when x,y>0 and x²+y²>1?",
-    "formula": "π − sin⁻¹(x√(1−y²)+y√(1−x²))",
-    "options": [
-      "cos⁻¹(xy−√((1−x²)(1−y²)))",
-      "π/2",
-      "sin⁻¹(x√(1−y²)+y√(1−x²))",
-      "π − sin⁻¹(x√(1−y²)+y√(1−x²))"
-    ],
-    "answer": 3,
-    "explain": "When x,y>0 and x²+y²>1, sum exceeds π/2, so add π−sin⁻¹(…).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2d4948ef-a80d-4317-9ad3-2f9ed9b42dab",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of sin(cos⁻¹x) = ?",
-    "formula": "√(1−x²)",
-    "options": [
-      "√(1+x²)",
-      "√(1−x²)",
-      "1/x",
-      "x"
-    ],
-    "answer": 1,
-    "explain": "If cos⁻¹x=θ, cosθ=x, sinθ=√(1−x²) (positive in [0,π]).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7ed24347-9e89-4482-bfc8-43d07adfe91e",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of tan(sin⁻¹x) = ?",
-    "formula": "x/√(1−x²)",
-    "options": [
-      "x/√(1+x²)",
-      "√(1−x²)/x",
-      "1/√(1−x²)",
-      "x/√(1−x²)"
-    ],
-    "answer": 3,
-    "explain": "If sin⁻¹x=θ, sinθ=x, tanθ=x/√(1−x²) in principal range.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f4c14542-ede3-419c-a16d-7ac243c38b1e",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of cos(tan⁻¹x) = ?",
-    "formula": "1/√(1+x²)",
-    "options": [
-      "1/x",
-      "√(1−x²)",
-      "x/√(1+x²)",
-      "1/√(1+x²)"
-    ],
-    "answer": 3,
-    "explain": "If tan⁻¹x=θ, tanθ=x, cosθ=1/√(1+x²) from right triangle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5e9e4e3d-37e0-48a9-bf21-4ac9b0ccbc1c",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of sin(tan⁻¹x) = ?",
-    "formula": "x/√(1+x²)",
-    "options": [
-      "x/√(1−x²)",
-      "√(1+x²)",
-      "x/√(1+x²)",
-      "1/√(1+x²)"
-    ],
-    "answer": 2,
-    "explain": "If tan⁻¹x=θ, tanθ=x, sinθ=x/√(1+x²) from right triangle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7eaafc48-a6ce-4f67-9b10-d95755ca92d2",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(2x²−1) = ? for x∈[0,1]",
-    "formula": "2cos⁻¹x",
-    "options": [
-      "cos⁻¹x/2",
-      "2cos⁻¹x",
-      "2sin⁻¹x",
-      "π−2cos⁻¹x"
-    ],
-    "answer": 1,
-    "explain": "Using double angle: cos2θ=2cos²θ−1; cos⁻¹(2x²−1)=2cos⁻¹x for x∈[0,1].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a10214b1-bd49-409e-8f2e-c6ac79957d28",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of tan⁻¹(1/√3) = ?",
-    "formula": "",
-    "options": [
-      "π/6",
-      "π/3",
-      "π/4",
-      "π/12"
-    ],
-    "answer": 0,
-    "explain": "tan(π/6)=1/√3 and π/6∈(−π/2,π/2), so tan⁻¹(1/√3)=π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "530aba46-e488-43a3-98dc-cd01bdf4a830",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "If sin⁻¹x = cos⁻¹y, then x²+y² = ?",
-    "formula": "",
-    "options": [
-      "π/2",
-      "0",
-      "2",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "sin⁻¹x=cos⁻¹y ⟹ cos⁻¹(√(1−x²))=cos⁻¹y ⟹ y=√(1−x²) ⟹ x²+y²=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b323c28c-5756-4685-813d-be39679f0544",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos(sin⁻¹x + cos⁻¹x) = ?",
-    "formula": "sin⁻¹x + cos⁻¹x = π/2",
-    "options": [
-      "0",
-      "π/2",
-      "1",
-      "−1"
-    ],
-    "answer": 0,
-    "explain": "sin⁻¹x+cos⁻¹x=π/2, so cos(π/2)=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "52a01638-7d94-4901-a44a-c4fdb53bfa24",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of sin⁻¹(sin 3π/4) = ?",
-    "formula": "",
-    "options": [
-      "3π/4",
-      "π/4",
-      "5π/4",
-      "−π/4"
-    ],
-    "answer": 1,
-    "explain": "3π/4 ∉ [−π/2,π/2]; sin(3π/4)=sin(π/4), and π/4∈[−π/2,π/2], so answer is π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b3ac42bc-0f1a-4f13-8945-9dbd93a914b8",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(cos 7π/6) = ?",
-    "formula": "",
-    "options": [
-      "π/6",
-      "7π/6",
-      "5π/6",
-      "−π/6"
-    ],
-    "answer": 2,
-    "explain": "7π/6 ∉ [0,π]; cos(7π/6)=cos(5π/6) and 5π/6∈[0,π], so answer is 5π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "20e972e0-86a4-4a04-971d-58ed46e4e8a3",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "If tan⁻¹x + tan⁻¹y + tan⁻¹z = π, then x+y+z = ?",
-    "formula": "x+y+z = xyz",
-    "options": [
-      "1",
-      "xy+yz+zx",
-      "0",
-      "xyz"
-    ],
-    "answer": 3,
-    "explain": "For tan⁻¹x+tan⁻¹y+tan⁻¹z=π, the identity gives x+y+z = xyz.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "59f6ca26-23bb-4528-9668-be6f09e46e1e",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹x + tan⁻¹y + tan⁻¹z = π/2 ⟹ xy+yz+zx = ?",
-    "formula": "",
-    "options": [
-      "x+y+z",
-      "1",
-      "xyz",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "When sum of three arctan = π/2, the identity gives xy+yz+zx = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96b0263b-8eec-4bc1-aafe-6428958a6184",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "2cos⁻¹x = cos⁻¹(?) for x∈[0,1]",
-    "formula": "2cos⁻¹x = cos⁻¹(2x²−1)",
-    "options": [
-      "1−2x²",
-      "2x−1",
-      "2x²−1",
-      "x²−1"
-    ],
-    "answer": 2,
-    "explain": "Using cos(2θ)=2cos²θ−1, with θ=cos⁻¹x gives cos⁻¹(2x²−1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "65342798-f26f-46e1-95c9-0e663626be95",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(−1/2) = ?",
-    "formula": "",
-    "options": [
-      "5π/6",
-      "π/6",
-      "−π/6",
-      "−5π/6"
-    ],
-    "answer": 2,
-    "explain": "sin⁻¹ is odd; sin⁻¹(1/2)=π/6, so sin⁻¹(−1/2)=−π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "550d17fc-2fa3-44b6-aa04-daf93f626237",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹(−√3) = ?",
-    "formula": "",
-    "options": [
-      "2π/3",
-      "−2π/3",
-      "π/3",
-      "−π/3"
-    ],
-    "answer": 3,
-    "explain": "tan⁻¹ is odd; tan⁻¹(√3)=π/3, so tan⁻¹(−√3)=−π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4b021a0c-50f1-4c2d-8092-6de294d05ab0",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cosec⁻¹(−2) = ?",
-    "formula": "",
-    "options": [
-      "5π/6",
-      "−π/6",
-      "−5π/6",
-      "π/6"
-    ],
-    "answer": 1,
-    "explain": "cosec⁻¹ is odd; cosec⁻¹(2)=π/6, so cosec⁻¹(−2)=−π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ae7b0f70-7aa3-4fd9-a7e1-505ccf428aa6",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sec⁻¹(−2) = ?",
-    "formula": "",
-    "options": [
-      "2π/3",
-      "4π/3",
-      "π/3",
-      "−π/3"
-    ],
-    "answer": 0,
-    "explain": "sec⁻¹(−x)=π−sec⁻¹(x); sec⁻¹(2)=π/3, so sec⁻¹(−2)=π−π/3=2π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d6c70157-9387-4321-946c-d4915290f6c2",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cot⁻¹(−x) = ? (x∈ℝ)",
-    "formula": "cot⁻¹(−x) = π − cot⁻¹(x)",
-    "options": [
-      "cot⁻¹(x) − π",
-      "−cot⁻¹(x)",
-      "π − cot⁻¹(x)",
-      "π + cot⁻¹(x)"
-    ],
-    "answer": 2,
-    "explain": "Unlike tan⁻¹, cot⁻¹ is NOT odd; cot⁻¹(−x) = π − cot⁻¹(x).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6b067140-8eb1-43fc-87e9-da7ac783e76b",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(−x) + cos⁻¹(x) = ? for x∈[−1,1]",
-    "formula": "",
-    "options": [
-      "2π",
-      "π/2",
-      "π",
-      "0"
-    ],
-    "answer": 2,
-    "explain": "cos⁻¹(−x)=π−cos⁻¹(x), so their sum = π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ab22b459-93c2-4dd8-827c-fb7b2f040d25",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan(cos⁻¹x) = ?",
-    "formula": "",
-    "options": [
-      "x/√(1−x²)",
-      "1/x",
-      "√(1+x²)/x",
-      "√(1−x²)/x"
-    ],
-    "answer": 3,
-    "explain": "If cos⁻¹x=θ, cosθ=x, tanθ=sinθ/cosθ=√(1−x²)/x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "852ef7c6-e9cb-411a-bb1f-2dc03639cfd7",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sec(tan⁻¹x) = ?",
-    "formula": "",
-    "options": [
-      "1+x²",
-      "√(1+x²)",
-      "1/√(1+x²)",
-      "√(1−x²)"
-    ],
-    "answer": 1,
-    "explain": "If tan⁻¹x=θ, tanθ=x, sec²θ=1+tan²θ=1+x², so secθ=√(1+x²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "34b5ce9e-2e63-45fa-947f-c53be5681002",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cosec(cos⁻¹x) = ?",
-    "formula": "",
-    "options": [
-      "1/√(1−x²)",
-      "√(1+x²)",
-      "√(1−x²)",
-      "1/x"
-    ],
-    "answer": 0,
-    "explain": "cos⁻¹x=θ ⟹ cosθ=x, sinθ=√(1−x²), cosecθ=1/√(1−x²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "105e99bd-67e6-471d-b969-ee1ab79d5f88",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "3tan⁻¹x = tan⁻¹((3x−x³)/(1−3x²)) valid for x∈?",
-    "formula": "",
-    "options": [
-      "(−√3, √3)",
-      "[−1,1]",
-      "(−1/√3, 1/√3)",
-      "(−1,1)"
-    ],
-    "answer": 2,
-    "explain": "Triple arctan formula valid when |x|<1/√3 to avoid crossing ±π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "fbbf8e7c-ebb0-4470-860e-840324160ceb",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "2sin⁻¹x = sin⁻¹(2x√(1−x²)) valid for x∈?",
-    "formula": "",
-    "options": [
-      "[−1/√2, 1/√2]",
-      "[0, 1/√2]",
-      "(0,1)",
-      "[−1,1]"
-    ],
-    "answer": 0,
-    "explain": "For |x|≤1/√2, 2sin⁻¹x∈[−π/2,π/2] so the identity holds directly.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "41796741-28d5-4891-9a18-ea9d54728c1f",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "2cos⁻¹x = cos⁻¹(2x²−1) valid for x∈?",
-    "formula": "",
-    "options": [
-      "[0,1]",
-      "[−1,1]",
-      "(0,1)",
-      "[−1,0]"
-    ],
-    "answer": 0,
-    "explain": "For x∈[0,1], 2cos⁻¹x∈[0,π] so the double angle formula holds.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "63fe440e-385a-4202-98ae-d3a6cd9c6b39",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹(2x/(1−x²)) = 2tan⁻¹x valid for x∈?",
-    "formula": "",
-    "options": [
-      "(−1,1)",
-      "(−∞,∞)",
-      "(1,∞)",
-      "[−1,1]"
-    ],
-    "answer": 0,
-    "explain": "2tan⁻¹x = tan⁻¹(2x/(1−x²)) only when |x|<1; otherwise add/subtract π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1acd4fdf-da53-4c37-a6f5-f3c9d5d5e084",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "If sin⁻¹x + sin⁻¹y + sin⁻¹z = 3π/2, then x+y+z = ?",
-    "formula": "",
-    "options": [
-      "3",
-      "1",
-      "0",
-      "−3"
-    ],
-    "answer": 0,
-    "explain": "Max of sin⁻¹ is π/2; sum 3π/2 forces each = π/2, so x=y=z=1, sum=3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9f75321d-7ed4-4771-bd38-b41a4f9d5787",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹x + cos⁻¹y + cos⁻¹z = 3π ⟹ x+y+z = ?",
-    "formula": "",
-    "options": [
-      "−3",
-      "3",
-      "0",
-      "π"
-    ],
-    "answer": 0,
-    "explain": "Max of cos⁻¹ is π; sum 3π forces each = π, so x=y=z=−1, sum=−3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "b4897f81-07d6-48fa-a7a5-1f31c8ebf69a",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(cos x) = ? for x∈[0,π]",
-    "formula": "sin⁻¹(cos x) = π/2 − x",
-    "options": [
-      "cos⁻¹(x)",
-      "x − π/2",
-      "π − x",
-      "π/2 − x"
-    ],
-    "answer": 3,
-    "explain": "cos x = sin(π/2−x); for x∈[0,π], π/2−x∈[−π/2,π/2], so sin⁻¹(cosx)=π/2−x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8cdd5ab6-64d0-4ba4-b19a-75faa4da2c6c",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Which identity is correct for tan⁻¹(1/2) + tan⁻¹(1/3)?",
-    "formula": "",
-    "options": [
-      "π/3",
-      "π/6",
-      "π/2",
-      "π/4"
-    ],
-    "answer": 3,
-    "explain": "xy=1/6<1, so tan⁻¹((1/2+1/3)/(1−1/6))=tan⁻¹(1)=π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1d7e1ac8-32d7-4469-850a-04dbaf82834b",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of tan⁻¹(tan(−π/3)) = ?",
-    "formula": "",
-    "options": [
-      "−π/3",
-      "π/3",
-      "2π/3",
-      "−2π/3"
-    ],
-    "answer": 0,
-    "explain": "−π/3 ∈ (−π/2, π/2), so tan⁻¹(tan(−π/3)) = −π/3 directly.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7d1d4941-f77b-482c-bd1b-a37c38c5a979",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "sin⁻¹(sin(−7π/6)) = ?",
-    "formula": "",
-    "options": [
-      "5π/6",
-      "π/6",
-      "−π/6",
-      "7π/6"
-    ],
-    "answer": 1,
-    "explain": "sin(−7π/6)=sin(π/6)=1/2, so sin⁻¹(1/2)=π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "52f7b304-3e26-46e2-b7f1-9d85df2966ac",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "cos⁻¹(cos(−π/3)) = ?",
-    "formula": "",
-    "options": [
-      "2π/3",
-      "4π/3",
-      "−π/3",
-      "π/3"
-    ],
-    "answer": 3,
-    "explain": "cos(−π/3)=1/2; cos⁻¹(1/2)=π/3 (range [0,π]).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7f5a7fff-e715-4049-947b-6228418c61e5",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Value of sin⁻¹(sin(−π/4)) = ?",
-    "formula": "",
-    "options": [
-      "−3π/4",
-      "3π/4",
-      "π/4",
-      "−π/4"
-    ],
-    "answer": 3,
-    "explain": "−π/4 ∈ [−π/2, π/2], so sin⁻¹(sin(−π/4)) = −π/4 directly.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7f7b68b5-f684-47a2-be50-64c517b7fdc4",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "tan⁻¹(tan(5π/6)) = ?",
-    "formula": "",
-    "options": [
-      "−π/6",
-      "π/6",
-      "5π/6",
-      "−5π/6"
-    ],
-    "answer": 0,
-    "explain": "5π/6 ∉ (−π/2,π/2); tan(5π/6)=−1/√3, so tan⁻¹(−1/√3)=−π/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a9552619-c6de-472e-96ae-37333b9b43b1",
-    "subject": "Mathematics",
-    "chapter": "Inverse Trigonometric Functions",
-    "topic": "Inverse Trigonometric Functions",
-    "prompt": "Principal value of sin⁻¹(sin(5π/3)) = ?",
-    "formula": "",
-    "options": [
-      "2π/3",
-      "π/3",
-      "−π/3",
-      "5π/3"
-    ],
-    "answer": 2,
-    "explain": "sin(5π/3)=−√3/2; sin⁻¹(−√3/2)=−π/3∈[−π/2,π/2].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "9dfee534-dbda-49d3-a13b-efd673435d33",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of sin⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "(0, 1)",
+   "[-1, 1]",
+   "(-∞, ∞)",
+   "[-π/2, π/2]"
+  ],
+  "answer": 1,
+  "explain": "sin⁻¹(x) is defined only for x ∈ [-1, 1].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "070c2bf2-f9d3-428c-8e2d-143c56edb348",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of sin⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "[0, π]",
+   "[0, π/2]",
+   "[-π/2, π/2]",
+   "(-π/2, π/2)"
+  ],
+  "answer": 2,
+  "explain": "The principal value branch of sin⁻¹ has range [-π/2, π/2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4408572b-6a81-40a5-b780-0e5c1379dcc4",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of cos⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "[-1, 1]",
+   "[0, π]",
+   "(0, π)",
+   "[-π/2, π/2]"
+  ],
+  "answer": 1,
+  "explain": "The principal value branch of cos⁻¹ has range [0, π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aff0a266-0d4c-4704-ba54-e067a4b82113",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of tan⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "[0, π]",
+   "[-π/2, π/2]",
+   "(-π/2, π/2)",
+   "(-∞, ∞)"
+  ],
+  "answer": 2,
+  "explain": "tan⁻¹(x) has range (-π/2, π/2); endpoints excluded as tan→±∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec9460cd-e9bd-4275-b89d-0ad63d5c718b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "sin⁻¹(x) + cos⁻¹(x) = ?",
+  "formula": "sin⁻¹x + cos⁻¹x = π/2",
+  "options": [
+   "2π",
+   "0",
+   "π/2",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "For x ∈ [-1,1], sin⁻¹x + cos⁻¹x = π/2 is a standard identity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fb81154d-937c-4b5b-bf22-1ccb07f35281",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "tan⁻¹(x) + cot⁻¹(x) = ?",
+  "formula": "tan⁻¹x + cot⁻¹x = π/2",
+  "options": [
+   "π/2",
+   "1",
+   "0",
+   "π"
+  ],
+  "answer": 0,
+  "explain": "For all real x, tan⁻¹x + cot⁻¹x = π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d1e7cbda-f533-4bfa-b11a-01ec3b3eba1c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "sec⁻¹(x) + cosec⁻¹(x) = ?",
+  "formula": "sec⁻¹x + cosec⁻¹x = π/2",
+  "options": [
+   "π/2",
+   "2π",
+   "π",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "For |x| ≥ 1, sec⁻¹x + cosec⁻¹x = π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3ca1a545-b3cd-49e9-abfe-493c8c626a94",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "tan⁻¹x + tan⁻¹y = ? when xy < 1",
+  "formula": "tan⁻¹((x+y)/(1−xy))",
+  "options": [
+   "tan⁻¹((x+y)/(1−xy))",
+   "tan⁻¹(x+y)",
+   "tan⁻¹((x−y)/(1+xy))",
+   "π + tan⁻¹((x+y)/(1−xy))"
+  ],
+  "answer": 0,
+  "explain": "Addition formula: tan⁻¹x + tan⁻¹y = tan⁻¹((x+y)/(1−xy)) when xy < 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "945d7f8b-8fad-40c8-9256-d2c4c77b60c0",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "tan⁻¹x + tan⁻¹y when x>0, y>0, xy>1?",
+  "formula": "π + tan⁻¹((x+y)/(1−xy))",
+  "options": [
+   "π + tan⁻¹((x+y)/(1−xy))",
+   "−π + tan⁻¹((x+y)/(1−xy))",
+   "π/2",
+   "tan⁻¹((x+y)/(1−xy))"
+  ],
+  "answer": 0,
+  "explain": "When x>0, y>0 and xy>1, add π to the standard formula.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "88d9560b-c5ec-43f5-9b59-2f39e9e73c63",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "2tan⁻¹(x) = sin⁻¹(?) for |x| ≤ 1",
+  "formula": "sin⁻¹(2x/(1+x²))",
+  "options": [
+   "sin⁻¹(x²)",
+   "sin⁻¹(2x/(1−x²))",
+   "sin⁻¹(2x/(1+x²))",
+   "cos⁻¹(2x/(1+x²))"
+  ],
+  "answer": 2,
+  "explain": "2tan⁻¹x = sin⁻¹(2x/(1+x²)) is valid for |x| ≤ 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bc1205fb-057e-4502-81bc-f2f0bac3f0e8",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "2tan⁻¹(x) = cos⁻¹(?) for x ≥ 0",
+  "formula": "cos⁻¹((1−x²)/(1+x²))",
+  "options": [
+   "cos⁻¹((1−x²)/(1+x²))",
+   "cos⁻¹(x²−1)",
+   "cos⁻¹(2x/(1+x²))",
+   "cos⁻¹((1+x²)/(1−x²))"
+  ],
+  "answer": 0,
+  "explain": "2tan⁻¹x = cos⁻¹((1−x²)/(1+x²)) for x ≥ 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "72f28828-99d0-4f62-a049-f24aa053c705",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "2tan⁻¹(x) = tan⁻¹(?) for |x| < 1",
+  "formula": "tan⁻¹(2x/(1−x²))",
+  "options": [
+   "tan⁻¹(2x/(1+x²))",
+   "tan⁻¹(x/(1−x²))",
+   "tan⁻¹(2x/(1−x²))",
+   "tan⁻¹(x²/(1−x))"
+  ],
+  "answer": 2,
+  "explain": "Double angle: 2tan⁻¹x = tan⁻¹(2x/(1−x²)) valid for |x| < 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "271705ab-0197-4756-963a-50dc5a21e511",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "sin⁻¹(−x) = ?",
+  "formula": "−sin⁻¹(x)",
+  "options": [
+   "π + sin⁻¹(x)",
+   "−sin⁻¹(x)",
+   "sin⁻¹(x)",
+   "π − sin⁻¹(x)"
+  ],
+  "answer": 1,
+  "explain": "sin⁻¹ is an odd function: sin⁻¹(−x) = −sin⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f0f0853d-ae64-4df0-a0fb-2554d3ba6362",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "cos⁻¹(−x) = ?",
+  "formula": "π − cos⁻¹(x)",
+  "options": [
+   "−cos⁻¹(x)",
+   "π − cos⁻¹(x)",
+   "cos⁻¹(x)",
+   "π + cos⁻¹(x)"
+  ],
+  "answer": 1,
+  "explain": "cos⁻¹ is NOT odd: cos⁻¹(−x) = π − cos⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7c412b75-5707-42db-906a-667c78f09cc8",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "tan⁻¹(−x) = ?",
+  "formula": "−tan⁻¹(x)",
+  "options": [
+   "π − tan⁻¹(x)",
+   "tan⁻¹(x)",
+   "−tan⁻¹(x)",
+   "π + tan⁻¹(x)"
+  ],
+  "answer": 2,
+  "explain": "tan⁻¹ is an odd function: tan⁻¹(−x) = −tan⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1097cfce-b962-4534-b7a5-e1e5bcfe49d2",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "sin(sin⁻¹(x)) = x for x ∈ ?",
+  "formula": "",
+  "options": [
+   "(-∞, ∞)",
+   "[0, 1]",
+   "[-π/2, π/2]",
+   "[-1, 1]"
+  ],
+  "answer": 3,
+  "explain": "sin(sin⁻¹x) = x holds exactly for x in the domain [-1, 1].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef2860ad-a2b2-4313-a9e0-16b5335ac9a9",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "sin⁻¹(sin x) = x only when x ∈ ?",
+  "formula": "",
+  "options": [
+   "(-π, π)",
+   "[-π/2, π/2]",
+   "[-1, 1]",
+   "[0, π]"
+  ],
+  "answer": 1,
+  "explain": "sin⁻¹(sin x) = x iff x is in the principal range [-π/2, π/2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "07fdadbe-677c-410c-8b4c-1cae834c987b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "cos⁻¹(cos x) = x only when x ∈ ?",
+  "formula": "",
+  "options": [
+   "[-1, 1]",
+   "[0, 2π]",
+   "[0, π]",
+   "[-π/2, π/2]"
+  ],
+  "answer": 2,
+  "explain": "cos⁻¹(cos x) = x iff x lies in the principal range [0, π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ccc3deac-c5e0-415e-8318-b0480cf8f3cc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of cos⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "[0, π]",
+   "(−∞, ∞)",
+   "[-1, 1]",
+   "(-1, 1)"
+  ],
+  "answer": 2,
+  "explain": "cos⁻¹(x) is defined for x ∈ [-1, 1] (closed interval).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6747e6a1-fb38-4742-835c-6913e58ec6c4",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of sec⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "(−1,1)",
+   "(−∞,∞)",
+   "(−∞,−1]∪[1,∞)",
+   "[-1,1]"
+  ],
+  "answer": 2,
+  "explain": "sec⁻¹(x) requires |x| ≥ 1, i.e., x ∈ (−∞,−1] ∪ [1,∞).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "403c49f1-d7f5-43b2-9d15-dd06e3b4e065",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of cot⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "(-π/2, 0)∪(0, π/2)",
+   "[0, π]",
+   "(0, π)",
+   "(-π/2, π/2)"
+  ],
+  "answer": 2,
+  "explain": "Principal range of cot⁻¹ is the open interval (0, π).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dfb591bf-e15b-43f4-b110-22cf52c0f5b1",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "sin⁻¹x + sin⁻¹y formula when x²+y² ≤ 1?",
+  "formula": "sin⁻¹(x√(1−y²)+y√(1−x²))",
+  "options": [
+   "sin⁻¹(xy+√(1−x²)(1−y²))",
+   "sin⁻¹(x+y)",
+   "cos⁻¹(xy)",
+   "sin⁻¹(x√(1−y²)+y√(1−x²))"
+  ],
+  "answer": 3,
+  "explain": "When x,y≥0 and x²+y²≤1: sin⁻¹x+sin⁻¹y = sin⁻¹(x√(1−y²)+y√(1−x²)).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9fa176a0-054f-4c31-9b40-45b37b9438ec",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "Value of tan⁻¹(1) + tan⁻¹(2) + tan⁻¹(3) = ?",
+  "formula": "",
+  "options": [
+   "5π/4",
+   "π",
+   "π/2",
+   "3π/4"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹1+tan⁻¹2+tan⁻¹3 = π, a classic JEE identity result.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "db2914c1-9f52-4224-a30a-ca360adb6fb3",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of sec⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "[0,π]−{π/2}",
+   "[0,π]",
+   "[−π/2,π/2]−{0}",
+   "(−π/2,π/2)−{0}"
+  ],
+  "answer": 0,
+  "explain": "sec⁻¹(x) has range [0,π] excluding π/2 where sec is undefined.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4b5d0e70-0b95-4792-ab1b-4ec37a1e04cd",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of cosec⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "[−π/2,π/2]−{0}",
+   "[0,π]−{π/2}",
+   "(0,π)",
+   "[−π/2,π/2]"
+  ],
+  "answer": 0,
+  "explain": "cosec⁻¹(x) has range [−π/2,π/2] excluding 0 where cosec is undefined.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c379ed23-0d46-4761-bac9-6f7c431afb7e",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of cot⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "All real numbers ℝ",
+   "|x|≥1",
+   "[−1,1]",
+   "ℝ−{0}"
+  ],
+  "answer": 0,
+  "explain": "cot is defined for all real x, so cot⁻¹ has domain ℝ, same as tan⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4426919a-84e8-4d42-b8f4-9861f6e659c5",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of cosec⁻¹(x) is?",
+  "formula": "",
+  "options": [
+   "(−∞,−1]∪[1,∞)",
+   "ℝ−{0}",
+   "(−1,1)",
+   "[−1,1]"
+  ],
+  "answer": 0,
+  "explain": "|cosec|≥1, so cosec⁻¹(x) is defined only for |x|≥1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6a92067d-56a8-4180-ab64-20e1524553cf",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "cos⁻¹(cos 5π/3) = ?",
+  "formula": "",
+  "options": [
+   "4π/3",
+   "π/3",
+   "2π/3",
+   "5π/3"
+  ],
+  "answer": 1,
+  "explain": "5π/3 ∉ [0,π]; cos(5π/3)=cos(π/3), so cos⁻¹(cos 5π/3)=π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e1d94545-3d1b-4752-90b1-20ed01e1bf47",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "sin⁻¹(sin 5π/6) = ?",
+  "formula": "",
+  "options": [
+   "π/3",
+   "π/6",
+   "−π/6",
+   "5π/6"
+  ],
+  "answer": 1,
+  "explain": "sin(5π/6)=sin(π/6); since π/6∈[−π/2,π/2], sin⁻¹(sin 5π/6)=π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "66f4a453-6f8e-4adb-9528-74def5e8c8dc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "tan⁻¹x − tan⁻¹y = ? (general, xy > −1)",
+  "formula": "tan⁻¹((x−y)/(1+xy))",
+  "options": [
+   "tan⁻¹((x+y)/(1−xy))",
+   "tan⁻¹((x−y)/(1−xy))",
+   "tan⁻¹(x−y)",
+   "tan⁻¹((x−y)/(1+xy))"
+  ],
+  "answer": 3,
+  "explain": "Subtraction formula: tan⁻¹x − tan⁻¹y = tan⁻¹((x−y)/(1+xy)) when xy>−1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8aef9092-9c75-4fe6-9008-47ea1c791890",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "sin⁻¹(cos θ) = ?",
+  "formula": "",
+  "options": [
+   "π/2 − θ, θ∈[0,π]",
+   "cos⁻¹(sin θ)",
+   "π − θ",
+   "π/2 + θ"
+  ],
+  "answer": 0,
+  "explain": "sin⁻¹(cos θ) = sin⁻¹(sin(π/2−θ)) = π/2−θ for θ∈[0,π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cc657e30-02e1-49b5-8b3e-e4fbf7eef3d7",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "cos⁻¹(sin θ) = ? for θ∈[−π/2, π/2]",
+  "formula": "",
+  "options": [
+   "π/2 + θ",
+   "−π/2 − θ",
+   "π − θ",
+   "π/2 − θ"
+  ],
+  "answer": 3,
+  "explain": "cos⁻¹(sin θ) = cos⁻¹(cos(π/2−θ)) = π/2−θ when π/2−θ∈[0,π].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e1db1e82-6043-43e6-9059-bc5a1375dd91",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "Value of tan⁻¹(−1) = ?",
+  "formula": "",
+  "options": [
+   "−π/4",
+   "3π/4",
+   "−3π/4",
+   "π/4"
+  ],
+  "answer": 0,
+  "explain": "tan(−π/4)=−1 and −π/4∈(−π/2,π/2), so tan⁻¹(−1)=−π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6a53d35e-6042-4344-9a74-065620185ead",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "sin⁻¹x + sin⁻¹y when x²+y²>1, x,y>0 equals?",
+  "formula": "π − sin⁻¹(x√(1−y²)+y√(1−x²))",
+  "options": [
+   "π/2 − cos⁻¹(xy)",
+   "cos⁻¹(xy − √((1−x²)(1−y²)))",
+   "sin⁻¹(x√(1−y²)+y√(1−x²))",
+   "π − sin⁻¹(x√(1−y²)+y√(1−x²))"
+  ],
+  "answer": 3,
+  "explain": "When x,y>0 and x²+y²>1, sin⁻¹x+sin⁻¹y exceeds π/2, requiring π minus formula.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "788fd7f8-677b-41a2-a06e-fc481f2c46cc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "Value of sin(2sin⁻¹(x)) = ?",
+  "formula": "2x√(1−x²)",
+  "options": [
+   "x√(1−x²)",
+   "2x²−1",
+   "2x√(1−x²)",
+   "1−2x²"
+  ],
+  "answer": 2,
+  "explain": "Let θ=sin⁻¹x; sin 2θ=2 sin θ cos θ=2x√(1−x²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d72eaa40-ccb6-4b0a-9471-27e03af62f09",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "cos(2cos⁻¹x) = ?",
+  "formula": "2x²−1",
+  "options": [
+   "√(1−x²)",
+   "2x²−1",
+   "1−2x²",
+   "2x√(1−x²)"
+  ],
+  "answer": 1,
+  "explain": "Let θ=cos⁻¹x; cos 2θ=2cos²θ−1=2x²−1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e55da305-4801-4054-8faa-d91e2a1454a1",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "tan(2tan⁻¹x) = ?",
+  "formula": "2x/(1−x²)",
+  "options": [
+   "2x/(1−x²)",
+   "(1−x²)/(2x)",
+   "(1+x²)/(2x)",
+   "2x/(1+x²)"
+  ],
+  "answer": 0,
+  "explain": "tan 2θ = 2tanθ/(1−tan²θ); with θ=tan⁻¹x gives 2x/(1−x²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9ab9e57d-c00d-4322-a34d-379f0d39b005",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "sin⁻¹(2x√(1−x²)) = ? for x∈[1/√2,1]",
+  "formula": "",
+  "options": [
+   "π − 2sin⁻¹x",
+   "π/2 − 2sin⁻¹x",
+   "2cos⁻¹x",
+   "2sin⁻¹x"
+  ],
+  "answer": 0,
+  "explain": "For x∈[1/√2,1], 2sin⁻¹x∈[π/2,π], so sin⁻¹(2x√(1−x²))=π−2sin⁻¹x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c155d5f5-50fb-4148-9aed-54935690e8e8",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "sin⁻¹(2x√(1−x²)) = ? for x∈[−1/√2, 1/√2]",
+  "formula": "",
+  "options": [
+   "2cos⁻¹x",
+   "π − 2sin⁻¹x",
+   "2sin⁻¹x",
+   "−2sin⁻¹x"
+  ],
+  "answer": 2,
+  "explain": "Let x=sinθ; sin⁻¹(sin2θ)=2θ=2sin⁻¹x when 2θ∈[−π/2,π/2], i.e. x∈[−1/√2,1/√2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e175df28-69d8-44db-b1a6-7977efbeed9c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "3sin⁻¹x = sin⁻¹(3x − 4x³) is valid for x ∈ ?",
+  "formula": "",
+  "options": [
+   "[−1, 1]",
+   "[−1/2, 1/2]",
+   "[−1/√2,1/√2]",
+   "[0, 1]"
+  ],
+  "answer": 1,
+  "explain": "The triple-angle identity sin⁻¹(3x−4x³)=3sin⁻¹x holds only for x∈[−1/2,1/2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "048437df-bb2b-4c49-879b-0f8524101022",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "3cos⁻¹x = cos⁻¹(4x³−3x) is valid for x ∈ ?",
+  "formula": "",
+  "options": [
+   "[0, 1]",
+   "[−1, 1]",
+   "[1/2, 1]",
+   "[−1/2, 1/2]"
+  ],
+  "answer": 2,
+  "explain": "The identity cos⁻¹(4x³−3x)=3cos⁻¹x is valid only for x∈[1/2,1].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "129becf4-24c8-4be2-a7db-3c5b7fad8dbf",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "Value of tan⁻¹(tan 3π/4) = ?",
+  "formula": "",
+  "options": [
+   "5π/4",
+   "3π/4",
+   "π/4",
+   "−π/4"
+  ],
+  "answer": 3,
+  "explain": "3π/4 ∉ (−π/2,π/2); tan(3π/4)=−1; tan⁻¹(−1)=−π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "81e555dd-414a-4fdf-aaa0-81d448825818",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "If sin⁻¹x + sin⁻¹y = π/2, then cos⁻¹x + cos⁻¹y = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "π/2",
+   "3π/2",
+   "π"
+  ],
+  "answer": 1,
+  "explain": "Each cos⁻¹= π/2−sin⁻¹, so sum = π−(sin⁻¹x+sin⁻¹y) = π−π/2 = π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2b4028ca-d6ed-4e22-8f25-b403d83e81d0",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "Value of cos⁻¹(−1/2) = ?",
+  "formula": "",
+  "options": [
+   "4π/3",
+   "2π/3",
+   "−π/3",
+   "π/3"
+  ],
+  "answer": 1,
+  "explain": "cos(2π/3)=−1/2 and 2π/3∈[0,π], so cos⁻¹(−1/2)=2π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cd62fc35-f3ce-46da-b890-dee0d56c89a1",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "Value of sin⁻¹(1/2) = ?",
+  "formula": "",
+  "options": [
+   "π/6",
+   "π/3",
+   "π/4",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "sin(π/6)=1/2 and π/6∈[−π/2,π/2], so sin⁻¹(1/2)=π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1dc18289-442d-41f7-a750-3c372c625d9d",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "Value of tan⁻¹(√3) = ?",
+  "formula": "",
+  "options": [
+   "π/3",
+   "π/4",
+   "2π/3",
+   "π/6"
+  ],
+  "answer": 0,
+  "explain": "tan(π/3)=√3 and π/3∈(−π/2,π/2), so tan⁻¹(√3)=π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "82b2e411-ea2b-4c9d-afca-41844519cdec",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "sin⁻¹(sin 2π/3) = ?",
+  "formula": "",
+  "options": [
+   "π/6",
+   "−π/3",
+   "π/3",
+   "2π/3"
+  ],
+  "answer": 2,
+  "explain": "2π/3∉[−π/2,π/2]; sin(2π/3)=sin(π/3), so sin⁻¹(sin 2π/3)=π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "267b716c-9cdc-4f3b-bdc5-7fc887565a74",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "tan⁻¹(tan 2π/3) = ?",
+  "formula": "",
+  "options": [
+   "−π/3",
+   "π/3",
+   "π/6",
+   "2π/3"
+  ],
+  "answer": 0,
+  "explain": "2π/3∉(−π/2,π/2); tan(2π/3)=tan(−π/3), so result is −π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "54119366-9cba-4679-bc65-6f80fa46f49a",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "cos⁻¹(cos 4π/3) = ?",
+  "formula": "",
+  "options": [
+   "2π/3",
+   "π/3",
+   "−2π/3",
+   "4π/3"
+  ],
+  "answer": 0,
+  "explain": "4π/3∉[0,π]; cos(4π/3)=cos(2π/3), so cos⁻¹(cos 4π/3)=2π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1e07760c-e4e5-48ae-aa45-2c7a1c9d45f4",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "sin⁻¹x + sin⁻¹y when x,y>0 and x²+y²>1?",
+  "formula": "π − sin⁻¹(x√(1−y²)+y√(1−x²))",
+  "options": [
+   "cos⁻¹(xy−√((1−x²)(1−y²)))",
+   "π/2",
+   "sin⁻¹(x√(1−y²)+y√(1−x²))",
+   "π − sin⁻¹(x√(1−y²)+y√(1−x²))"
+  ],
+  "answer": 3,
+  "explain": "When x,y>0 and x²+y²>1, sum exceeds π/2, so add π−sin⁻¹(…).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2d4948ef-a80d-4317-9ad3-2f9ed9b42dab",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "Value of sin(cos⁻¹x) = ?",
+  "formula": "√(1−x²)",
+  "options": [
+   "√(1+x²)",
+   "√(1−x²)",
+   "1/x",
+   "x"
+  ],
+  "answer": 1,
+  "explain": "If cos⁻¹x=θ, cosθ=x, sinθ=√(1−x²) (positive in [0,π]).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7ed24347-9e89-4482-bfc8-43d07adfe91e",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "Value of tan(sin⁻¹x) = ?",
+  "formula": "x/√(1−x²)",
+  "options": [
+   "x/√(1+x²)",
+   "√(1−x²)/x",
+   "1/√(1−x²)",
+   "x/√(1−x²)"
+  ],
+  "answer": 3,
+  "explain": "If sin⁻¹x=θ, sinθ=x, tanθ=x/√(1−x²) in principal range.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f4c14542-ede3-419c-a16d-7ac243c38b1e",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "Value of cos(tan⁻¹x) = ?",
+  "formula": "1/√(1+x²)",
+  "options": [
+   "1/x",
+   "√(1−x²)",
+   "x/√(1+x²)",
+   "1/√(1+x²)"
+  ],
+  "answer": 3,
+  "explain": "If tan⁻¹x=θ, tanθ=x, cosθ=1/√(1+x²) from right triangle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5e9e4e3d-37e0-48a9-bf21-4ac9b0ccbc1c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "Value of sin(tan⁻¹x) = ?",
+  "formula": "x/√(1+x²)",
+  "options": [
+   "x/√(1−x²)",
+   "√(1+x²)",
+   "x/√(1+x²)",
+   "1/√(1+x²)"
+  ],
+  "answer": 2,
+  "explain": "If tan⁻¹x=θ, tanθ=x, sinθ=x/√(1+x²) from right triangle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7eaafc48-a6ce-4f67-9b10-d95755ca92d2",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "cos⁻¹(2x²−1) = ? for x∈[0,1]",
+  "formula": "2cos⁻¹x",
+  "options": [
+   "cos⁻¹x/2",
+   "2cos⁻¹x",
+   "2sin⁻¹x",
+   "π−2cos⁻¹x"
+  ],
+  "answer": 1,
+  "explain": "Using double angle: cos2θ=2cos²θ−1; cos⁻¹(2x²−1)=2cos⁻¹x for x∈[0,1].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a10214b1-bd49-409e-8f2e-c6ac79957d28",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "Value of tan⁻¹(1/√3) = ?",
+  "formula": "",
+  "options": [
+   "π/6",
+   "π/3",
+   "π/4",
+   "π/12"
+  ],
+  "answer": 0,
+  "explain": "tan(π/6)=1/√3 and π/6∈(−π/2,π/2), so tan⁻¹(1/√3)=π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "530aba46-e488-43a3-98dc-cd01bdf4a830",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "If sin⁻¹x = cos⁻¹y, then x²+y² = ?",
+  "formula": "",
+  "options": [
+   "π/2",
+   "0",
+   "2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "sin⁻¹x=cos⁻¹y ⟹ cos⁻¹(√(1−x²))=cos⁻¹y ⟹ y=√(1−x²) ⟹ x²+y²=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b323c28c-5756-4685-813d-be39679f0544",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "cos(sin⁻¹x + cos⁻¹x) = ?",
+  "formula": "sin⁻¹x + cos⁻¹x = π/2",
+  "options": [
+   "0",
+   "π/2",
+   "1",
+   "−1"
+  ],
+  "answer": 0,
+  "explain": "sin⁻¹x+cos⁻¹x=π/2, so cos(π/2)=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "52a01638-7d94-4901-a44a-c4fdb53bfa24",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "Value of sin⁻¹(sin 3π/4) = ?",
+  "formula": "",
+  "options": [
+   "3π/4",
+   "π/4",
+   "5π/4",
+   "−π/4"
+  ],
+  "answer": 1,
+  "explain": "3π/4 ∉ [−π/2,π/2]; sin(3π/4)=sin(π/4), and π/4∈[−π/2,π/2], so answer is π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b3ac42bc-0f1a-4f13-8945-9dbd93a914b8",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "cos⁻¹(cos 7π/6) = ?",
+  "formula": "",
+  "options": [
+   "π/6",
+   "7π/6",
+   "5π/6",
+   "−π/6"
+  ],
+  "answer": 2,
+  "explain": "7π/6 ∉ [0,π]; cos(7π/6)=cos(5π/6) and 5π/6∈[0,π], so answer is 5π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "20e972e0-86a4-4a04-971d-58ed46e4e8a3",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "If tan⁻¹x + tan⁻¹y + tan⁻¹z = π, then x+y+z = ?",
+  "formula": "x+y+z = xyz",
+  "options": [
+   "1",
+   "xy+yz+zx",
+   "0",
+   "xyz"
+  ],
+  "answer": 3,
+  "explain": "For tan⁻¹x+tan⁻¹y+tan⁻¹z=π, the identity gives x+y+z = xyz.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "59f6ca26-23bb-4528-9668-be6f09e46e1e",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "tan⁻¹x + tan⁻¹y + tan⁻¹z = π/2 ⟹ xy+yz+zx = ?",
+  "formula": "",
+  "options": [
+   "x+y+z",
+   "1",
+   "xyz",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "When sum of three arctan = π/2, the identity gives xy+yz+zx = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96b0263b-8eec-4bc1-aafe-6428958a6184",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "2cos⁻¹x = cos⁻¹(?) for x∈[0,1]",
+  "formula": "2cos⁻¹x = cos⁻¹(2x²−1)",
+  "options": [
+   "1−2x²",
+   "2x−1",
+   "2x²−1",
+   "x²−1"
+  ],
+  "answer": 2,
+  "explain": "Using cos(2θ)=2cos²θ−1, with θ=cos⁻¹x gives cos⁻¹(2x²−1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "65342798-f26f-46e1-95c9-0e663626be95",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "sin⁻¹(−1/2) = ?",
+  "formula": "",
+  "options": [
+   "5π/6",
+   "π/6",
+   "−π/6",
+   "−5π/6"
+  ],
+  "answer": 2,
+  "explain": "sin⁻¹ is odd; sin⁻¹(1/2)=π/6, so sin⁻¹(−1/2)=−π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "550d17fc-2fa3-44b6-aa04-daf93f626237",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "tan⁻¹(−√3) = ?",
+  "formula": "",
+  "options": [
+   "2π/3",
+   "−2π/3",
+   "π/3",
+   "−π/3"
+  ],
+  "answer": 3,
+  "explain": "tan⁻¹ is odd; tan⁻¹(√3)=π/3, so tan⁻¹(−√3)=−π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4b021a0c-50f1-4c2d-8092-6de294d05ab0",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "cosec⁻¹(−2) = ?",
+  "formula": "",
+  "options": [
+   "5π/6",
+   "−π/6",
+   "−5π/6",
+   "π/6"
+  ],
+  "answer": 1,
+  "explain": "cosec⁻¹ is odd; cosec⁻¹(2)=π/6, so cosec⁻¹(−2)=−π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ae7b0f70-7aa3-4fd9-a7e1-505ccf428aa6",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "sec⁻¹(−2) = ?",
+  "formula": "",
+  "options": [
+   "2π/3",
+   "4π/3",
+   "π/3",
+   "−π/3"
+  ],
+  "answer": 0,
+  "explain": "sec⁻¹(−x)=π−sec⁻¹(x); sec⁻¹(2)=π/3, so sec⁻¹(−2)=π−π/3=2π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d6c70157-9387-4321-946c-d4915290f6c2",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "cot⁻¹(−x) = ? (x∈ℝ)",
+  "formula": "cot⁻¹(−x) = π − cot⁻¹(x)",
+  "options": [
+   "cot⁻¹(x) − π",
+   "−cot⁻¹(x)",
+   "π − cot⁻¹(x)",
+   "π + cot⁻¹(x)"
+  ],
+  "answer": 2,
+  "explain": "Unlike tan⁻¹, cot⁻¹ is NOT odd; cot⁻¹(−x) = π − cot⁻¹(x).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6b067140-8eb1-43fc-87e9-da7ac783e76b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "cos⁻¹(−x) + cos⁻¹(x) = ? for x∈[−1,1]",
+  "formula": "",
+  "options": [
+   "2π",
+   "π/2",
+   "π",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "cos⁻¹(−x)=π−cos⁻¹(x), so their sum = π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ab22b459-93c2-4dd8-827c-fb7b2f040d25",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "tan(cos⁻¹x) = ?",
+  "formula": "",
+  "options": [
+   "x/√(1−x²)",
+   "1/x",
+   "√(1+x²)/x",
+   "√(1−x²)/x"
+  ],
+  "answer": 3,
+  "explain": "If cos⁻¹x=θ, cosθ=x, tanθ=sinθ/cosθ=√(1−x²)/x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "852ef7c6-e9cb-411a-bb1f-2dc03639cfd7",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "sec(tan⁻¹x) = ?",
+  "formula": "",
+  "options": [
+   "1+x²",
+   "√(1+x²)",
+   "1/√(1+x²)",
+   "√(1−x²)"
+  ],
+  "answer": 1,
+  "explain": "If tan⁻¹x=θ, tanθ=x, sec²θ=1+tan²θ=1+x², so secθ=√(1+x²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "34b5ce9e-2e63-45fa-947f-c53be5681002",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "cosec(cos⁻¹x) = ?",
+  "formula": "",
+  "options": [
+   "1/√(1−x²)",
+   "√(1+x²)",
+   "√(1−x²)",
+   "1/x"
+  ],
+  "answer": 0,
+  "explain": "cos⁻¹x=θ ⟹ cosθ=x, sinθ=√(1−x²), cosecθ=1/√(1−x²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "105e99bd-67e6-471d-b969-ee1ab79d5f88",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "3tan⁻¹x = tan⁻¹((3x−x³)/(1−3x²)) valid for x∈?",
+  "formula": "",
+  "options": [
+   "(−√3, √3)",
+   "[−1,1]",
+   "(−1/√3, 1/√3)",
+   "(−1,1)"
+  ],
+  "answer": 2,
+  "explain": "Triple arctan formula valid when |x|<1/√3 to avoid crossing ±π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fbbf8e7c-ebb0-4470-860e-840324160ceb",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "2sin⁻¹x = sin⁻¹(2x√(1−x²)) valid for x∈?",
+  "formula": "",
+  "options": [
+   "[−1/√2, 1/√2]",
+   "[0, 1/√2]",
+   "(0,1)",
+   "[−1,1]"
+  ],
+  "answer": 0,
+  "explain": "For |x|≤1/√2, 2sin⁻¹x∈[−π/2,π/2] so the identity holds directly.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "41796741-28d5-4891-9a18-ea9d54728c1f",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "2cos⁻¹x = cos⁻¹(2x²−1) valid for x∈?",
+  "formula": "",
+  "options": [
+   "[0,1]",
+   "[−1,1]",
+   "(0,1)",
+   "[−1,0]"
+  ],
+  "answer": 0,
+  "explain": "For x∈[0,1], 2cos⁻¹x∈[0,π] so the double angle formula holds.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "63fe440e-385a-4202-98ae-d3a6cd9c6b39",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Multiple angle forms like 2tan⁻¹x",
+  "prompt": "tan⁻¹(2x/(1−x²)) = 2tan⁻¹x valid for x∈?",
+  "formula": "",
+  "options": [
+   "(−1,1)",
+   "(−∞,∞)",
+   "(1,∞)",
+   "[−1,1]"
+  ],
+  "answer": 0,
+  "explain": "2tan⁻¹x = tan⁻¹(2x/(1−x²)) only when |x|<1; otherwise add/subtract π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1acd4fdf-da53-4c37-a6f5-f3c9d5d5e084",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "If sin⁻¹x + sin⁻¹y + sin⁻¹z = 3π/2, then x+y+z = ?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "0",
+   "−3"
+  ],
+  "answer": 0,
+  "explain": "Max of sin⁻¹ is π/2; sum 3π/2 forces each = π/2, so x=y=z=1, sum=3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9f75321d-7ed4-4771-bd38-b41a4f9d5787",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "cos⁻¹x + cos⁻¹y + cos⁻¹z = 3π ⟹ x+y+z = ?",
+  "formula": "",
+  "options": [
+   "−3",
+   "3",
+   "0",
+   "π"
+  ],
+  "answer": 0,
+  "explain": "Max of cos⁻¹ is π; sum 3π forces each = π, so x=y=z=−1, sum=−3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b4897f81-07d6-48fa-a7a5-1f31c8ebf69a",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "sin⁻¹(cos x) = ? for x∈[0,π]",
+  "formula": "sin⁻¹(cos x) = π/2 − x",
+  "options": [
+   "cos⁻¹(x)",
+   "x − π/2",
+   "π − x",
+   "π/2 − x"
+  ],
+  "answer": 3,
+  "explain": "cos x = sin(π/2−x); for x∈[0,π], π/2−x∈[−π/2,π/2], so sin⁻¹(cosx)=π/2−x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8cdd5ab6-64d0-4ba4-b19a-75faa4da2c6c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "Which identity is correct for tan⁻¹(1/2) + tan⁻¹(1/3)?",
+  "formula": "",
+  "options": [
+   "π/3",
+   "π/6",
+   "π/2",
+   "π/4"
+  ],
+  "answer": 3,
+  "explain": "xy=1/6<1, so tan⁻¹((1/2+1/3)/(1−1/6))=tan⁻¹(1)=π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1d7e1ac8-32d7-4469-850a-04dbaf82834b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "Value of tan⁻¹(tan(−π/3)) = ?",
+  "formula": "",
+  "options": [
+   "−π/3",
+   "π/3",
+   "2π/3",
+   "−2π/3"
+  ],
+  "answer": 0,
+  "explain": "−π/3 ∈ (−π/2, π/2), so tan⁻¹(tan(−π/3)) = −π/3 directly.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7d1d4941-f77b-482c-bd1b-a37c38c5a979",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "sin⁻¹(sin(−7π/6)) = ?",
+  "formula": "",
+  "options": [
+   "5π/6",
+   "π/6",
+   "−π/6",
+   "7π/6"
+  ],
+  "answer": 1,
+  "explain": "sin(−7π/6)=sin(π/6)=1/2, so sin⁻¹(1/2)=π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "52f7b304-3e26-46e2-b7f1-9d85df2966ac",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "cos⁻¹(cos(−π/3)) = ?",
+  "formula": "",
+  "options": [
+   "2π/3",
+   "4π/3",
+   "−π/3",
+   "π/3"
+  ],
+  "answer": 3,
+  "explain": "cos(−π/3)=1/2; cos⁻¹(1/2)=π/3 (range [0,π]).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7f5a7fff-e715-4049-947b-6228418c61e5",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "Value of sin⁻¹(sin(−π/4)) = ?",
+  "formula": "",
+  "options": [
+   "−3π/4",
+   "3π/4",
+   "π/4",
+   "−π/4"
+  ],
+  "answer": 3,
+  "explain": "−π/4 ∈ [−π/2, π/2], so sin⁻¹(sin(−π/4)) = −π/4 directly.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7f7b68b5-f684-47a2-be50-64c517b7fdc4",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "tan⁻¹(tan(5π/6)) = ?",
+  "formula": "",
+  "options": [
+   "−π/6",
+   "π/6",
+   "5π/6",
+   "−5π/6"
+  ],
+  "answer": 0,
+  "explain": "5π/6 ∉ (−π/2,π/2); tan(5π/6)=−1/√3, so tan⁻¹(−1/√3)=−π/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a9552619-c6de-472e-96ae-37333b9b43b1",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "Principal value of sin⁻¹(sin(5π/3)) = ?",
+  "formula": "",
+  "options": [
+   "2π/3",
+   "π/3",
+   "−π/3",
+   "5π/3"
+  ],
+  "answer": 2,
+  "explain": "sin(5π/3)=−√3/2; sin⁻¹(−√3/2)=−π/3∈[−π/2,π/2].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "beeddda4-712c-4c33-8cef-8fbf09ac40ba",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of f(x) = 2 sin⁻¹x + π/2 is?",
+  "formula": "",
+  "options": [
+   "[−π, π]",
+   "[−π/2, 3π/2]",
+   "[0, π]",
+   "[−π/2, π/2]"
+  ],
+  "answer": 1,
+  "explain": "2sin⁻¹x ∈ [−π, π]; adding π/2 gives [−π/2, 3π/2].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "39c98b39-9522-4fc1-86b1-4520cd8cc31c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of f(x) = cos⁻¹(x²) is?",
+  "formula": "",
+  "options": [
+   "[0, π]",
+   "[−π/2, π/2]",
+   "[0, π/2]",
+   "[π/2, π]"
+  ],
+  "answer": 2,
+  "explain": "x ∈ [−1, 1] gives x² ∈ [0, 1], and cos⁻¹ maps this to [0, π/2].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "08428ccf-756e-4de2-b370-da0533affe2c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of f(x) = sin⁻¹(log₂ x) is?",
+  "formula": "−1 ≤ log₂x ≤ 1",
+  "options": [
+   "[0, 2]",
+   "[−1, 1]",
+   "[1/2, 2]",
+   "[1/2, ∞)"
+  ],
+  "answer": 2,
+  "explain": "−1 ≤ log₂x ≤ 1 gives 2⁻¹ ≤ x ≤ 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66506b8b-b45a-4a66-bd9d-de28360eec6c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of f(x) = sin⁻¹x − cos⁻¹x is?",
+  "formula": "= 2sin⁻¹x − π/2",
+  "options": [
+   "[−π/2, 3π/2]",
+   "[−π/2, π/2]",
+   "[−π, 0]",
+   "[−3π/2, π/2]"
+  ],
+  "answer": 3,
+  "explain": "Using cos⁻¹x = π/2 − sin⁻¹x, f = 2sin⁻¹x − π/2, which runs from −3π/2 to π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "065e72a5-ff4f-4de6-b5b0-775b94829f09",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of f(x) = sin⁻¹(√(x − 1)) is?",
+  "formula": "",
+  "options": [
+   "[0, 1]",
+   "[1, ∞)",
+   "[0, 2]",
+   "[1, 2]"
+  ],
+  "answer": 3,
+  "explain": "Need 0 ≤ √(x−1) ≤ 1, so 0 ≤ x−1 ≤ 1, giving 1 ≤ x ≤ 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9538aa7f-b152-419a-bb3c-84a2a4e8e6fc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "Domain of f(x) = sin⁻¹(2x − 1) is:",
+  "formula": "",
+  "options": [
+   "[0, 2]",
+   "[0, 1]",
+   "[−1, 0]",
+   "[−1, 1]"
+  ],
+  "answer": 1,
+  "explain": "−1 ≤ 2x − 1 ≤ 1 gives 0 ≤ x ≤ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "30073b90-e0b3-47da-8689-1b2996a5e04f",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "The graph of y = tan⁻¹x has horizontal asymptotes:",
+  "formula": "",
+  "options": [
+   "x = ±π/2",
+   "y = 0 and y = π",
+   "y = ±π/2",
+   "y = ±π"
+  ],
+  "answer": 2,
+  "explain": "As x → ±∞, tan⁻¹x → ±π/2, which gives horizontal asymptotes y = ±π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02d51b9f-2c8a-416e-89ab-dcc60dd33b2e",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "Principal value of cot⁻¹(0) is:",
+  "formula": "",
+  "options": [
+   "0",
+   "π",
+   "π/2",
+   "not defined"
+  ],
+  "answer": 2,
+  "explain": "cot(π/2) = 0 and π/2 ∈ (0, π), so cot⁻¹0 = π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e4a6e5ec-8f27-4e62-8fb7-20b2d0881d97",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "For |x| ≥ 1, cosec⁻¹x equals:",
+  "formula": "cosec⁻¹x = sin⁻¹(1/x)",
+  "options": [
+   "cos⁻¹(1/x)",
+   "sin⁻¹x",
+   "π/2 − sin⁻¹(1/x)",
+   "sin⁻¹(1/x)"
+  ],
+  "answer": 3,
+  "explain": "Reciprocal identity: cosec⁻¹x = sin⁻¹(1/x) for |x| ≥ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d746575a-83f0-45ba-952f-932b7f680c5b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "The graph of y = cot⁻¹x has horizontal asymptotes",
+  "formula": "",
+  "options": [
+   "y = ±π/2",
+   "y = π/2 and y = π",
+   "y = 0 and y = π",
+   "y = 0 and y = π/2"
+  ],
+  "answer": 2,
+  "explain": "cot⁻¹x → 0 as x → +∞ and → π as x → −∞, decreasing throughout.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a95b562-6ae1-4a62-9829-4f67a0bce5a3",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "y = sin⁻¹(sin x) is periodic with period and maximum value",
+  "formula": "",
+  "options": [
+   "2π, π/2",
+   "2π, π",
+   "π, π",
+   "π, π/2"
+  ],
+  "answer": 0,
+  "explain": "It is a triangular wave of period 2π, ranging over [−π/2, π/2].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0780d667-7c64-4255-bff2-2710cde14a48",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "y = cos⁻¹(cos x) is a wave of period and range",
+  "formula": "",
+  "options": [
+   "2π, [−π/2, π/2]",
+   "π, [0, π/2]",
+   "π, [0, π]",
+   "2π, [0, π]"
+  ],
+  "answer": 3,
+  "explain": "cos⁻¹(cos x) is even, with period 2π and range [0, π].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0638bb8f-0af6-403c-9b64-0ed6d3653203",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "y = tan⁻¹(tan x) has period and is undefined at",
+  "formula": "",
+  "options": [
+   "2π; x = (2n+1)π/2",
+   "2π; x = nπ",
+   "π; x = nπ",
+   "π; x = (2n+1)π/2"
+  ],
+  "answer": 3,
+  "explain": "tan x has period π and is undefined at odd multiples of π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3fcc49e6-819c-4c24-b753-224c2427ab2a",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "For x ∈ [π/2, 3π/2], sin⁻¹(sin x) equals",
+  "formula": "",
+  "options": [
+   "π − x",
+   "x",
+   "x − π",
+   "2π − x"
+  ],
+  "answer": 0,
+  "explain": "On this interval the graph is a line of slope −1 from π/2 down to −π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "798beb97-5ccd-4461-b577-b7cdd0e9cc9c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "For x ∈ [π, 2π], cos⁻¹(cos x) equals",
+  "formula": "",
+  "options": [
+   "π − x",
+   "x",
+   "2π − x",
+   "x − π"
+  ],
+  "answer": 2,
+  "explain": "cos(2π − x) = cos x with 2π − x ∈ [0, π], so the graph falls with slope −1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3d111e6d-4a09-4430-978a-bba78018ade7",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "Which pair of inverse trig functions is decreasing on its whole domain?",
+  "formula": "",
+  "options": [
+   "tan⁻¹x and cot⁻¹x",
+   "sin⁻¹x and cos⁻¹x",
+   "sin⁻¹x and tan⁻¹x",
+   "cos⁻¹x and cot⁻¹x"
+  ],
+  "answer": 3,
+  "explain": "cos⁻¹x and cot⁻¹x are decreasing, while sin⁻¹x and tan⁻¹x are increasing.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "023c035d-27f7-42c0-8c4a-8ae23aedc777",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "The graph of y = cos⁻¹x is symmetric about the point",
+  "formula": "",
+  "options": [
+   "(0, 0)",
+   "(π/2, 0)",
+   "(0, π)",
+   "(0, π/2)"
+  ],
+  "answer": 3,
+  "explain": "cos⁻¹(−x) = π − cos⁻¹x, so the graph is symmetric about (0, π/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "833f1e1b-1ead-4246-9ee5-833d8f804106",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "For x ∈ (π/2, 3π/2), tan⁻¹(tan x) equals",
+  "formula": "",
+  "options": [
+   "x − π",
+   "x",
+   "2π − x",
+   "π − x"
+  ],
+  "answer": 0,
+  "explain": "Period π: shift x by π into (−π/2, π/2), giving x − π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da3b663d-bd31-4557-ae1d-b2f9a8e70709",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Domain of f(x) = sec⁻¹(2x) is?",
+  "formula": "|2x| ≥ 1",
+  "options": [
+   "(−∞, −1/2] ∪ [1/2, ∞)",
+   "(−∞, −2] ∪ [2, ∞)",
+   "ℝ − {0}",
+   "(−∞, −1] ∪ [1, ∞)"
+  ],
+  "answer": 0,
+  "explain": "sec⁻¹ needs |2x| ≥ 1, so |x| ≥ 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c91485a-184a-41f7-96f1-8d532a67477d",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "The graph of y = sin⁻¹x has a vertical tangent at which points?",
+  "formula": "y′ = 1/√(1 − x²)",
+  "options": [
+   "It has no vertical tangent",
+   "x = 0",
+   "x = ±1",
+   "x = ±π/2"
+  ],
+  "answer": 2,
+  "explain": "y′ → ∞ as x → ±1, so the tangents at the endpoints (±1, ±π/2) are vertical.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fff2da94-b78a-4358-bf7e-bcb59974c493",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "The graph of y = cos(sin⁻¹x) over its domain has range",
+  "formula": "cos(sin⁻¹x) = √(1 − x²)",
+  "options": [
+   "[−1, 0]",
+   "[0, π/2]",
+   "[0, 1]",
+   "[−1, 1]"
+  ],
+  "answer": 2,
+  "explain": "sin⁻¹x ∈ [−π/2, π/2], so cos ≥ 0, giving √(1−x²) ∈ [0, 1].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ad46573-15e7-4019-9264-11c1ab714fcc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "The graph of y = sin⁻¹(sin x) is?",
+  "formula": "",
+  "options": [
+   "Straight line y = x",
+   "Sine curve of amplitude π/2",
+   "Step graph with jumps at odd multiples of π/2",
+   "Zigzag of slope ±1, period 2π"
+  ],
+  "answer": 3,
+  "explain": "y = x on [−π/2, π/2], y = π − x on [π/2, 3π/2], then it repeats: a triangular wave.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1be5c788-87ea-4ab9-9d21-494ffe4e1392",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Negative argument identities",
+  "prompt": "Which of these inverse functions is odd on its domain?",
+  "formula": "",
+  "options": [
+   "cos⁻¹x",
+   "sec⁻¹x",
+   "cot⁻¹x",
+   "cosec⁻¹x"
+  ],
+  "answer": 3,
+  "explain": "cosec⁻¹(−x) = −cosec⁻¹x, so it is odd. cos⁻¹, cot⁻¹ and sec⁻¹ are neither odd nor even.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "59d70ffd-a422-4f05-936b-05911ccbea1f",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For |x| ≥ 1, cos⁻¹(1/x) equals which function of x?",
+  "formula": "cos⁻¹(1/x) = sec⁻¹x",
+  "options": [
+   "cot⁻¹x",
+   "sec⁻¹x",
+   "cosec⁻¹x",
+   "π − sec⁻¹x"
+  ],
+  "answer": 1,
+  "explain": "sec⁻¹x is defined as cos⁻¹(1/x) for |x| ≥ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ba71b9e4-0d9f-4f03-af65-d1698e9d432b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "Domain and range of sec⁻¹x (principal value branch)?",
+  "formula": "",
+  "options": [
+   "|x|≥1; [0,π] − {π/2}",
+   "|x|≥1; [−π/2,π/2] − {0}",
+   "R; (0,π)",
+   "|x|≤1; [0,π]"
+  ],
+  "answer": 0,
+  "explain": "sec⁻¹x: domain R − (−1,1), range [0,π] excluding π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7aa2eda5-3164-4170-beed-0d72d9f1ef36",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "Domain and range of cosec⁻¹x (principal value branch)?",
+  "formula": "",
+  "options": [
+   "|x|≥1; [0,π] − {π/2}",
+   "R; (−π/2,π/2)",
+   "|x|≤1; [−π/2,π/2]",
+   "|x|≥1; [−π/2,π/2] − {0}"
+  ],
+  "answer": 3,
+  "explain": "cosec⁻¹x: domain R − (−1,1), range [−π/2, π/2] excluding 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a0a47117-b1a3-4deb-aea0-3def745cd9be",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For x > 0, cot⁻¹(1/x) equals?",
+  "formula": "cot⁻¹(1/x) = tan⁻¹x (x > 0)",
+  "options": [
+   "cot⁻¹x",
+   "tan⁻¹x",
+   "π/2 + tan⁻¹x",
+   "π + tan⁻¹x"
+  ],
+  "answer": 1,
+  "explain": "If θ = tan⁻¹x ∈ (0, π/2), then cotθ = 1/x, so θ = cot⁻¹(1/x).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e86f39fe-7162-4cfe-afd1-510b6f957335",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For 0 < |x| ≤ 1, sec⁻¹(1/x) equals?",
+  "formula": "sec⁻¹(1/x) = cos⁻¹x",
+  "options": [
+   "cos⁻¹x",
+   "π/2 − cos⁻¹x",
+   "cosec⁻¹x",
+   "sin⁻¹x"
+  ],
+  "answer": 0,
+  "explain": "sec⁻¹y = cos⁻¹(1/y), so with y = 1/x we get cos⁻¹x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3189e398-fda0-4060-bc11-26ec88eab18f",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For 0 < |x| ≤ 1, cosec⁻¹(1/x) equals?",
+  "formula": "cosec⁻¹(1/x) = sin⁻¹x",
+  "options": [
+   "π/2 − sin⁻¹x",
+   "sec⁻¹x",
+   "sin⁻¹x",
+   "cos⁻¹x"
+  ],
+  "answer": 2,
+  "explain": "cosec⁻¹y = sin⁻¹(1/y), so with y = 1/x we get sin⁻¹x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92fbbf7b-1ab6-48af-8f0a-c875bbff0868",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "The principal value of cot⁻¹(−1/√3) is?",
+  "formula": "",
+  "options": [
+   "5π/6",
+   "−π/6",
+   "−π/3",
+   "2π/3"
+  ],
+  "answer": 3,
+  "explain": "cot⁻¹(−1/√3) = π + tan⁻¹(−√3) = π − π/3 = 2π/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "35373bff-8e96-4a91-945a-d195bf198f45",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "Range of 2sin⁻¹x + cos⁻¹x, x ∈ [−1, 1]?",
+  "formula": "2sin⁻¹x + cos⁻¹x = π/2 + sin⁻¹x",
+  "options": [
+   "[−π/2, π/2]",
+   "[0, π/2]",
+   "[−π, π]",
+   "[0, π]"
+  ],
+  "answer": 3,
+  "explain": "The expression equals π/2 + sin⁻¹x, and sin⁻¹x ∈ [−π/2, π/2].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2576120-900f-48ec-a60b-98e15ef4c04e",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "Maximum value of sin⁻¹x · cos⁻¹x?",
+  "formula": "",
+  "options": [
+   "π²/2",
+   "π²/16",
+   "π²/8",
+   "π²/4"
+  ],
+  "answer": 1,
+  "explain": "The two factors sum to π/2, so the product is largest when both equal π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5fd44c46-7ae8-4ac8-9f12-43a1bb9c9f3b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "Range of tan⁻¹x − cot⁻¹x over ℝ?",
+  "formula": "tan⁻¹x − cot⁻¹x = 2tan⁻¹x − π/2",
+  "options": [
+   "(−π/2, π/2)",
+   "(−π, 0)",
+   "(−3π/2, π/2)",
+   "(−π, π)"
+  ],
+  "answer": 2,
+  "explain": "Since tan⁻¹x ∈ (−π/2, π/2), 2tan⁻¹x − π/2 lies in (−3π/2, π/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "862e5e37-bc64-4310-aa87-3c7fe9a64bb0",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "For |x| ≥ 1, sec⁻¹x + sec⁻¹(−x) = ?",
+  "formula": "sec⁻¹(−x) = π − sec⁻¹x",
+  "options": [
+   "π/2",
+   "0",
+   "π",
+   "2π"
+  ],
+  "answer": 2,
+  "explain": "sec⁻¹(−x) = π − sec⁻¹x, so the sum is π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "acb4d8ad-122f-4c46-abd9-bc83844ac47b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "Minimum value of sin⁻¹x · cos⁻¹x on [−1, 1]?",
+  "formula": "t(π/2 − t), t = sin⁻¹x",
+  "options": [
+   "−π²/8",
+   "−π²/4",
+   "−π²/2",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "The downward parabola t(π/2 − t) is smallest at t = −π/2, giving −π²/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1e8ed66e-6dec-4c7e-bbb6-c49c9e4cbbf0",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "2tan⁻¹(1/2) = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "tan⁻¹(3/4)",
+   "tan⁻¹(4/3)",
+   "tan⁻¹(1/4)"
+  ],
+  "answer": 2,
+  "explain": "2x/(1−x²) = 1/(3/4) = 4/3, and |x|<1 so no correction is needed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bbac57fe-daf6-48ac-a08d-e9cb4f586af9",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "tan⁻¹2 + tan⁻¹3 = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "tan⁻¹5",
+   "3π/4",
+   "π/2"
+  ],
+  "answer": 2,
+  "explain": "xy = 6 > 1, so π + tan⁻¹(5/(−5)) = π − π/4 = 3π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "971b6995-8dc9-4b13-adec-20b08a1096bf",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "sin⁻¹(3/5) + sin⁻¹(4/5) = ?",
+  "formula": "",
+  "options": [
+   "π/3",
+   "π",
+   "π/2",
+   "π/4"
+  ],
+  "answer": 2,
+  "explain": "x² + y² = 1 with x,y > 0 gives sin⁻¹x + sin⁻¹y = π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8611a09e-f228-4793-891e-2fa308bf4807",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "Range of sin⁻¹x − sin⁻¹y for x,y ∈ [−1,1]?",
+  "formula": "",
+  "options": [
+   "[0, π]",
+   "[−π, π]",
+   "[−π/2, π/2]",
+   "[−2π, 2π]"
+  ],
+  "answer": 1,
+  "explain": "Each term lies in [−π/2, π/2], so the difference ranges from −π to π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d71fbcf9-f74d-444b-8513-12f432411836",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "For x > 1, sin⁻¹(2x/(1+x²)) equals?",
+  "formula": "",
+  "options": [
+   "π − 2tan⁻¹x",
+   "2tan⁻¹x",
+   "π/2 − 2tan⁻¹x",
+   "2tan⁻¹x − π"
+  ],
+  "answer": 0,
+  "explain": "For x > 1, 2tan⁻¹x ∈ (π/2, π), outside the range of sin⁻¹, so use π − 2tan⁻¹x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e542ae99-8f15-4029-97b9-b790477f0f68",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "sin⁻¹x = tan⁻¹(x/√(1−x²)) holds for which x?",
+  "formula": "",
+  "options": [
+   "|x| ≤ 1",
+   "−1 < x < 1",
+   "x > 0",
+   "0 ≤ x < 1"
+  ],
+  "answer": 1,
+  "explain": "Both sides lie in (−π/2, π/2). The expression is undefined at x = ±1, so the domain is |x| < 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1b1faf9-ce38-4a57-a922-7b94c0543973",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "tan⁻¹x = sin⁻¹(x/√(1+x²)) holds for which x?",
+  "formula": "",
+  "options": [
+   "|x| ≤ 1",
+   "all real x",
+   "x ≥ 0 only",
+   "|x| < 1/√3"
+  ],
+  "answer": 1,
+  "explain": "Right triangle with sides x, 1: the range of tan⁻¹ and sin⁻¹ matches (−π/2, π/2) for every real x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "708e5617-55b7-4d28-a99b-52255c291df4",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For x < 0, tan⁻¹(1/x) equals which expression?",
+  "formula": "",
+  "options": [
+   "π + cot⁻¹x",
+   "π/2 − cot⁻¹x",
+   "cot⁻¹x",
+   "cot⁻¹x − π"
+  ],
+  "answer": 3,
+  "explain": "For x<0, tan⁻¹(1/x) = −π/2 − tan⁻¹x = cot⁻¹x − π. Check x=−1: −π/4 = 3π/4 − π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "680cdb01-5356-4c3b-8a32-3d4fdeffbae1",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For x < 0, cot⁻¹(1/x) equals which expression?",
+  "formula": "",
+  "options": [
+   "tan⁻¹x",
+   "π + tan⁻¹x",
+   "π/2 − tan⁻¹x",
+   "tan⁻¹x − π"
+  ],
+  "answer": 1,
+  "explain": "For x<0, cot⁻¹(1/x) lies in (π/2,π) while tan⁻¹x<0, so add π. Check x=−1: 3π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1b4ffbad-7bd1-4a74-ace6-4e3fc86fa49d",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "Range of sin⁻¹x + 2cos⁻¹x for x ∈ [−1, 1]?",
+  "formula": "= π/2 + cos⁻¹x",
+  "options": [
+   "[0, π]",
+   "[0, 3π/2]",
+   "[−π/2, π/2]",
+   "[π/2, 3π/2]"
+  ],
+  "answer": 3,
+  "explain": "The expression is π/2 + cos⁻¹x, and cos⁻¹x ∈ [0, π].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d72dfd1-8e03-46af-ba86-d8c81a128de9",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "Value of sin⁻¹(cos(2π/5))?",
+  "formula": "sin⁻¹(cos θ) = π/2 − θ, θ ∈ [0, π]",
+  "options": [
+   "π/5",
+   "3π/10",
+   "π/10",
+   "2π/5"
+  ],
+  "answer": 2,
+  "explain": "2π/5 ∈ [0, π], so the value is π/2 − 2π/5 = π/10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fcaab60d-e649-40b7-85d2-4ba66bcb3637",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "For x > −1, tan⁻¹x + tan⁻¹((1−x)/(1+x)) = ?",
+  "formula": "tan⁻¹((1−x)/(1+x)) = π/4 − tan⁻¹x",
+  "options": [
+   "tan⁻¹(1/x)",
+   "π/4",
+   "π/4 + tan⁻¹x",
+   "π/2"
+  ],
+  "answer": 1,
+  "explain": "tan(π/4 − θ) = (1−tanθ)/(1+tanθ); valid for x > −1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ecc3232-d605-4199-a087-56e382d01f31",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Domain and range of inverse trig functions",
+  "prompt": "Range of f(x) = tan⁻¹x + cot⁻¹x, for x ∈ ℝ, is?",
+  "formula": "tan⁻¹x + cot⁻¹x = π/2",
+  "options": [
+   "(−π/2, π/2)",
+   "{π/2}",
+   "(0, π)",
+   "{π}"
+  ],
+  "answer": 1,
+  "explain": "With cot⁻¹ in (0, π), tan⁻¹x + cot⁻¹x = π/2 for every real x, so the range is the single value π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e8de2d0a-c794-495e-a9a1-8d3237f7f74c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "For x > 1, tan⁻¹((1+x)/(1−x)) equals:",
+  "formula": "",
+  "options": [
+   "tan⁻¹x − π/4",
+   "3π/4 − tan⁻¹x",
+   "tan⁻¹x − 3π/4",
+   "π/4 + tan⁻¹x"
+  ],
+  "answer": 2,
+  "explain": "tan⁻¹1 + tan⁻¹x has product x>1, so it equals π + tan⁻¹(fraction); hence the fraction gives tan⁻¹x − 3π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "001ceced-3d60-44d5-801f-c9870b58b8dc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "If x + y < 0, then cos⁻¹x + cos⁻¹y = ?",
+  "formula": "",
+  "options": [
+   "π − cos⁻¹(xy − √(1−x²)√(1−y²))",
+   "2π − cos⁻¹(xy − √(1−x²)√(1−y²))",
+   "cos⁻¹(xy − √(1−x²)√(1−y²)) − π",
+   "−cos⁻¹(xy − √(1−x²)√(1−y²))"
+  ],
+  "answer": 1,
+  "explain": "The sum lies in (π,2π], so the sum equals 2π minus the principal cos⁻¹ value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "accb0f7a-c1a7-4f4b-a254-00ab9aee93bc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "For x, y ∈ [0,1], sin⁻¹x − sin⁻¹y = ?",
+  "formula": "sin⁻¹x − sin⁻¹y = sin⁻¹(x√(1−y²) − y√(1−x²))",
+  "options": [
+   "sin⁻¹(y√(1−x²) − x√(1−y²))",
+   "π − sin⁻¹(x√(1−y²) − y√(1−x²))",
+   "sin⁻¹(xy − √(1−x²)√(1−y²))",
+   "sin⁻¹(x√(1−y²) − y√(1−x²))"
+  ],
+  "answer": 3,
+  "explain": "For x,y ≥ 0 the difference lies in (−π/2, π/2), so no correction term is needed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "369fec74-60bd-416a-93fb-49a3a1bbdfa9",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "For −1/2 ≤ x ≤ 1/2, cos⁻¹(4x³ − 3x) equals?",
+  "formula": "",
+  "options": [
+   "π − 3cos⁻¹x",
+   "3cos⁻¹x − 2π",
+   "3cos⁻¹x",
+   "2π − 3cos⁻¹x"
+  ],
+  "answer": 3,
+  "explain": "Here 3cos⁻¹x ∈ [π, 2π], so cos⁻¹(cos3θ) = 2π − 3θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9ecef1be-c92c-48e2-bfb4-a3eadd5a0e50",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "tan⁻¹(1/5) + tan⁻¹(1/8) = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "tan⁻¹(1/3)",
+   "tan⁻¹(2/13)",
+   "tan⁻¹(1/4)"
+  ],
+  "answer": 1,
+  "explain": "(1/5+1/8)/(1−1/40) = (13/40)/(39/40) = 1/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3cfd84a-8dbf-40d6-8ab9-3aa0d66e1bfc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "2tan⁻¹(1/3) = ?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(3/4)",
+   "tan⁻¹(2/3)",
+   "tan⁻¹(1/6)",
+   "tan⁻¹(4/3)"
+  ],
+  "answer": 0,
+  "explain": "(2/3)/(1−1/9) = (2/3)(9/8) = 3/4, and |1/3|<1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b5c02f9-7fb1-4524-aaad-0c73b2b7591d",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "2tan⁻¹(√2 − 1) = ?",
+  "formula": "",
+  "options": [
+   "π/3",
+   "π/8",
+   "π/4",
+   "π/2"
+  ],
+  "answer": 2,
+  "explain": "tan(π/8) = √2−1, so twice the angle is π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a8df3bb9-26ea-4a39-ac46-71f5dd9e6439",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "For r ≥ 1, tan⁻¹(2/r²) can be written as the difference:",
+  "formula": "",
+  "options": [
+   "tan⁻¹(r+2) − tan⁻¹(r)",
+   "tan⁻¹(r+1) − tan⁻¹(r−1)",
+   "tan⁻¹(r) − tan⁻¹(r−1)",
+   "tan⁻¹(2r) − tan⁻¹(r)"
+  ],
+  "answer": 1,
+  "explain": "(r+1 − (r−1))/(1+(r+1)(r−1)) = 2/r², so the series telescopes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "12adf657-f876-4ace-8d73-907e0b742c5e",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "For x > y > 0, tan⁻¹(x/y) − tan⁻¹((x−y)/(x+y)) = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "π/3",
+   "π/2",
+   "tan⁻¹(y/x)"
+  ],
+  "answer": 0,
+  "explain": "The tangent of the difference is (x²+y²)/(x²+y²) = 1, so the value is π/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fcc1bfa2-e925-4be5-bb26-6515adf82b58",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "For x ≠ 0, tan⁻¹((√(1+x²) − 1)/x) = ?",
+  "formula": "",
+  "options": [
+   "½tan⁻¹x",
+   "2tan⁻¹x",
+   "π/4 − tan⁻¹x",
+   "tan⁻¹(2x)"
+  ],
+  "answer": 0,
+  "explain": "Put x = tanθ. Then (secθ−1)/tanθ = tan(θ/2), so the value is ½tan⁻¹x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c73a3a95-8085-4636-800a-d6afb16d7022",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "Principal value of cosec⁻¹(2/√3) is:",
+  "formula": "",
+  "options": [
+   "π/3",
+   "π/6",
+   "π/4",
+   "2π/3"
+  ],
+  "answer": 0,
+  "explain": "sin(π/3) = √3/2, so cosec(π/3) = 2/√3 and the value is π/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "57c61423-9fa9-4dfe-8019-0b420bb1be53",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "For x < 0, the principal value of cot⁻¹x lies in:",
+  "formula": "",
+  "options": [
+   "(π/2, π)",
+   "(−π/2, 0)",
+   "(−π, −π/2)",
+   "(0, π/2)"
+  ],
+  "answer": 0,
+  "explain": "The range of cot⁻¹ is (0, π), and cot is negative in (π/2, π).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55004a50-fd1c-4b3b-9f9f-90bcb975a44d",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "For x ≤ −1, the principal value of sec⁻¹x lies in:",
+  "formula": "",
+  "options": [
+   "[0, π/2)",
+   "(π/2, π]",
+   "[−π/2, 0)",
+   "(π, 3π/2]"
+  ],
+  "answer": 1,
+  "explain": "The range of sec⁻¹ is [0, π] − {π/2}, and sec is negative in the second quadrant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fbe48732-a4dc-4dbc-a351-59329f03c6e6",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "For x ≤ −1, the principal value of cosec⁻¹x lies in:",
+  "formula": "",
+  "options": [
+   "[−π/2, 0)",
+   "(−π, −π/2)",
+   "(0, π/2]",
+   "(π/2, π]"
+  ],
+  "answer": 0,
+  "explain": "The range of cosec⁻¹ is [−π/2, π/2] − {0}, and cosec is negative for angles in [−π/2, 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "42358b5d-4bb7-4c32-81b8-c8b4d65a8ea3",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "The value of sin⁻¹(sin 10) is:",
+  "formula": "",
+  "options": [
+   "10 − 3π",
+   "3π − 10",
+   "10 − 4π",
+   "10 − 2π"
+  ],
+  "answer": 1,
+  "explain": "sin(3π − θ) = sin θ, and 3π − 10 ≈ −0.575 lies in [−π/2, π/2].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7eab2408-f4fd-49e6-bef4-366eda15da69",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "The value of tan⁻¹(tan 2) is:",
+  "formula": "",
+  "options": [
+   "2",
+   "2 − 2π",
+   "2 − π",
+   "π − 2"
+  ],
+  "answer": 2,
+  "explain": "2 ∈ (π/2, 3π/2), so subtract π: 2 − π ∈ (−π/2, π/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7440f082-8b2e-4951-b477-2c6706fc8a40",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "The value of cos⁻¹(cos 10) is:",
+  "formula": "",
+  "options": [
+   "4π − 10",
+   "3π − 10",
+   "10 − 2π",
+   "10 − 3π"
+  ],
+  "answer": 0,
+  "explain": "cos is even and 2π-periodic, so cos 10 = cos(4π − 10), and 4π − 10 ≈ 2.57 ∈ [0, π].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3770bfc-d81b-4d80-8123-3c9b7a844500",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Principal value branches",
+  "prompt": "The value of tan⁻¹(tan 10) is:",
+  "formula": "",
+  "options": [
+   "10 − 4π",
+   "10 − 3π",
+   "3π − 10",
+   "10 − 2π"
+  ],
+  "answer": 1,
+  "explain": "tan has period π, and 10 − 3π ≈ 0.58 ∈ (−π/2, π/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8712862f-b3b5-496f-abbc-98442a5f384b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "The graph of y = cosec⁻¹x has which horizontal asymptote?",
+  "formula": "",
+  "options": [
+   "y = ±π/2",
+   "y = π/2 only",
+   "y = 0 and y = π",
+   "y = 0 only"
+  ],
+  "answer": 3,
+  "explain": "As x → ±∞, cosec⁻¹x = sin⁻¹(1/x) → 0 from both sides, so y = 0 is the only asymptote.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77b86978-e7ac-4004-8e32-87a2f23c737b",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "The graph of y = tan⁻¹x has its point of inflection at",
+  "formula": "",
+  "options": [
+   "(1, π/4)",
+   "(0, π/2)",
+   "(0, 0)",
+   "It has no point of inflection"
+  ],
+  "answer": 2,
+  "explain": "tan⁻¹x is convex for x<0 and concave for x>0, so the curvature changes at the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a147b958-fa04-4217-9ca4-bffb7efd7d75",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Graphs of inverse trig functions",
+  "prompt": "The graph of y = cos⁻¹(cos x) has sharp corners (non-differentiable) at",
+  "formula": "",
+  "options": [
+   "x = nπ",
+   "Nowhere; the graph is smooth",
+   "x = (2n+1)π/2",
+   "x = 2nπ only"
+  ],
+  "answer": 0,
+  "explain": "The zigzag turns at its max π (odd multiples of π) and its min 0 (even multiples), so corners occur at x = nπ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3a43812-46e8-48ad-b87e-84aa388abcdc",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "For x ∈ [3π/2, 5π/2], sin⁻¹(sin x) equals?",
+  "formula": "sin⁻¹(sin x) = x − 2π",
+  "options": [
+   "2π − x",
+   "3π − x",
+   "x − π",
+   "x − 2π"
+  ],
+  "answer": 3,
+  "explain": "Shift by one period 2π so the value lands in [−π/2, π/2]: sin x = sin(x − 2π).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ff1b791-e451-48c7-8a99-27508ca6f4b2",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹(sin x) type compositions",
+  "prompt": "For x ∈ [2π, 3π], cos⁻¹(cos x) equals?",
+  "formula": "cos⁻¹(cos x) = x − 2π",
+  "options": [
+   "x − 2π",
+   "x − π",
+   "3π − x",
+   "2π − x"
+  ],
+  "answer": 0,
+  "explain": "cos has period 2π, so shift x into [0, π]: x − 2π ∈ [0, π].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b04f9aa3-e2ef-46c5-8ea4-05e284846be8",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "For x ∈ [π/2, 3π/2], cos⁻¹(sin x) equals?",
+  "formula": "",
+  "options": [
+   "π/2 − x",
+   "x − π/2",
+   "x − π",
+   "3π/2 − x"
+  ],
+  "answer": 1,
+  "explain": "sin x = cos(x − π/2) with x − π/2 ∈ [0, π]. Check: x = π gives π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "76144448-cf41-4faa-8009-142cc4c4505f",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For x ≥ 1, cot(cosec⁻¹x) equals?",
+  "formula": "cot(cosec⁻¹x) = √(x²−1)",
+  "options": [
+   "√(x²−1)",
+   "1/√(x²−1)",
+   "√(x²−1)/x",
+   "x/√(x²−1)"
+  ],
+  "answer": 0,
+  "explain": "Let θ = cosec⁻¹x, so sinθ = 1/x and cosθ = √(x²−1)/x. Then cotθ = √(x²−1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "acc44a92-9df1-4599-a5ca-e8c51b37b264",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For x ≥ 1, sin(sec⁻¹x) equals?",
+  "formula": "sin(sec⁻¹x) = √(x²−1)/x",
+  "options": [
+   "1/x",
+   "√(x²−1)/x",
+   "x/√(x²−1)",
+   "√(x²−1)"
+  ],
+  "answer": 1,
+  "explain": "Let θ = sec⁻¹x, so hypotenuse = x and base = 1. Then perpendicular = √(x²−1) and sinθ = √(x²−1)/x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e18a3d21-e19c-4c86-8552-19172a6cfa83",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Reciprocal argument identities",
+  "prompt": "For x > 1, tan(cosec⁻¹x) equals?",
+  "formula": "tan(cosec⁻¹x) = 1/√(x²−1)",
+  "options": [
+   "1/√(x²−1)",
+   "√(x²−1)/x",
+   "x/√(x²−1)",
+   "√(x²−1)"
+  ],
+  "answer": 0,
+  "explain": "Let θ = cosec⁻¹x, so hypotenuse = x and perpendicular = 1. Then base = √(x²−1) and tanθ = 1/√(x²−1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cc41b75f-e2f1-4d1c-b103-5228bff0e46c",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Complementary sums like sin⁻¹x + cos⁻¹x",
+  "prompt": "For x ∈ [π/2, π], sin⁻¹(sin x) + cos⁻¹(cos x) = ?",
+  "formula": "(π − x) + x",
+  "options": [
+   "2π − 2x",
+   "π/2",
+   "2x",
+   "π"
+  ],
+  "answer": 3,
+  "explain": "sin⁻¹(sin x) = π − x and cos⁻¹(cos x) = x here, so the sum is π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07286d58-482f-4390-ae7d-99d00b3a4b63",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "The value of sin⁻¹(4/5) − sin⁻¹(3/5) is?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(1/5)",
+   "sin⁻¹(1/25)",
+   "sin⁻¹(24/25)",
+   "sin⁻¹(7/25)"
+  ],
+  "answer": 3,
+  "explain": "(4/5)(4/5) − (3/5)(3/5) = 7/25; the result is in the principal range.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6834dcfb-bdb8-4d43-8f95-d7728cbd11f8",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "For x ≥ 1, cosec⁻¹x equals which cot⁻¹ expression?",
+  "formula": "cosec⁻¹x = cot⁻¹√(x²−1)",
+  "options": [
+   "cot⁻¹√(1−x²)",
+   "cot⁻¹√(x²−1)",
+   "cot⁻¹(1/√(x²−1))",
+   "cot⁻¹(x/√(x²−1))"
+  ],
+  "answer": 1,
+  "explain": "If cosec θ = x with θ ∈ (0, π/2], then cot θ = √(x²−1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b04faadd-96f7-46c5-b0e9-ba0d7b221dd1",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "cos⁻¹x = cot⁻¹(x/√(1−x²)) holds for which x?",
+  "formula": "",
+  "options": [
+   "−1 < x < 0",
+   "x ≥ 1",
+   "−1 < x < 1",
+   "0 < x < 1"
+  ],
+  "answer": 2,
+  "explain": "Both cos⁻¹ and cot⁻¹ have range (0, π), so the identity holds for all −1 < x < 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "39c8563b-99da-4184-be01-05eb04ab9978",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin(sin⁻¹ x) and cross compositions",
+  "prompt": "For x ∈ [−1,1], x ≠ 0, cot(sin⁻¹x) = ?",
+  "formula": "",
+  "options": [
+   "√(1−x²)/x",
+   "√(1−x²)",
+   "1/√(1−x²)",
+   "x/√(1−x²)"
+  ],
+  "answer": 0,
+  "explain": "sin⁻¹x ∈ [−π/2, π/2], so cos = √(1−x²) ≥ 0. Hence cot = cos/sin = √(1−x²)/x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4f8b2262-48f3-4696-867f-71ea1f8401e8",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "tan⁻¹x ± tan⁻¹y formulas",
+  "prompt": "The value of tan⁻¹1 + tan⁻¹(1/2) + tan⁻¹(1/3) is:",
+  "formula": "",
+  "options": [
+   "π",
+   "3π/4",
+   "π/4",
+   "π/2"
+  ],
+  "answer": 3,
+  "explain": "tan⁻¹(1/2) + tan⁻¹(1/3) = π/4, and adding tan⁻¹1 = π/4 gives π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46741247-06e2-4a9a-bf0b-a82983ff7075",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "sin⁻¹x ± sin⁻¹y, cos⁻¹x ± cos⁻¹y",
+  "prompt": "The value of cos⁻¹(3/5) − cos⁻¹(4/5) is?",
+  "formula": "",
+  "options": [
+   "cos⁻¹(0)",
+   "cos⁻¹(24/25)",
+   "cos⁻¹(7/25)",
+   "sin⁻¹(24/25) + π"
+  ],
+  "answer": 1,
+  "explain": "x = 3/5 ≤ y = 4/5, so the result is cos⁻¹(12/25 + 12/25) = cos⁻¹(24/25).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f11e8233-20a4-43c9-9e92-13e9b190cddf",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "For all real x, cot⁻¹x equals which cos⁻¹ expression?",
+  "formula": "cot⁻¹x = cos⁻¹(x/√(1+x²))",
+  "options": [
+   "cos⁻¹(x/√(1+x²))",
+   "cos⁻¹(√(1+x²)/x)",
+   "sin⁻¹(x/√(1+x²))",
+   "cos⁻¹(1/√(1+x²))"
+  ],
+  "answer": 0,
+  "explain": "cot⁻¹x ∈ (0,π) matches the range of cos⁻¹, and cosθ = x/√(1+x²) for every real x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f8b4c258-f560-4cf8-aad2-26b6cb9e6343",
+  "subject": "Mathematics",
+  "chapter": "Inverse Trigonometric Functions",
+  "topic": "Conversion between inverse trig functions",
+  "prompt": "For 0 ≤ x < 1, sin⁻¹x equals which sec⁻¹ expression?",
+  "formula": "",
+  "options": [
+   "sec⁻¹(√(1−x²))",
+   "sec⁻¹(1/√(1−x²))",
+   "sec⁻¹(1/x)",
+   "sec⁻¹(x/√(1−x²))"
+  ],
+  "answer": 1,
+  "explain": "cos θ = √(1−x²) for θ = sin⁻¹x ≥ 0, so sec θ = 1/√(1−x²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

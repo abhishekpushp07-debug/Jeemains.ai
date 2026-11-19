@@ -1,0 +1,30 @@
+{
+  "summary": "Frontend-only test of the 'session ended -> number prefilled + short note' login fix and lint clean-up (web preview 390x844 + 320x700, QA learner 7004186276, 8 sign-ins total, spread so no more than 7 fell in any 15-minute window, so the rate limit was never hit). All 11 requested scenarios PASS: (1) sign-in -> Home, jl_last_phone='\"7004186276\"'; (2) server logout + reload -> entry-session-expired 'Aapka session khatam ho gaya. Number pehle se bhara hai...', phone prefilled, entry-remembered-phone + 'Doosra number?', PIN input focused (typing via keyboard went straight into PIN), PIN -> Home, jl_session_ended removed; (3) note + number survive 2 reloads (cold start with jl_user gone); (4) 401 path: My Tests -> killed session -> Rank -> My Tests: /auth/refresh 401 -> app lands on /entry with note, number and PIN focus; (5) jl_last_phone removed + kill + reload -> number taken from saved profile as 7004186276; (9) Forgot PIN prefilled with 7004186276 (not submitted); (6) Doosra number? -> field empty, row gone, jl_last_phone removed, note switches to 'Number aur PIN daal kar wapas aao...', stays empty after reload; (7) explicit sign out -> no note, empty field, jl_last_phone/jl_session_ended absent (also after reload); (8) fresh context -> no note, empty field; (10) 320x700: scrollWidth=clientWidth=320, note/row/buttons inside 16..304, Doosra number? 114x44, Forgot PIN? 89x44; (11) Rapid Fire lobby/Gang/Trophy open, no page errors, 0 extra API calls while sitting on Gang/Trophy for 5 s (no useFocusEffect loop); catalogue search sends q= to API, shows empty state for no match, clear works, and the typed search is kept when going back to the exam hub and opening the section again. expo lint: 0 warnings. tsc --noEmit: clean. No page errors in any run.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "entry (web)", "issues": ["After going to Forgot PIN and coming back (forgot-pin-back), the PIN input is no longer focused. The focus effect in app/entry.tsx:35 only runs again when expired/remembered/signup change. Small UX point, not a blocker."]},
+      {"screen": "catalogue", "issues": ["catalogue-clear-search is an 18px icon in a Press with no hitSlop or minimum size. The tap target is well under 44px (app/catalogue.tsx:111). This was there before this change."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [".screenshots/s2_expired.png", ".screenshots/s10_320.png", ".screenshots/rf_lobby.png", ".screenshots/rf_gang.png", ".screenshots/rf_trophy.png", ".screenshots/cat_search.png"],
+  "action_items": [
+    "Optional: focus the PIN input again when entry gets focus back while expired && remembered (for example inside the existing useFocusEffect).",
+    "Optional: give catalogue-clear-search hitSlop or minWidth/minHeight 44."
+  ],
+  "critical_code_review_comments": [
+    "app/catalogue.tsx:81: the catalogue only saves the debounced `query` (300 ms) in `remembered`, not `q`. If a student types and leaves within 300 ms, the text they just typed is lost. Minor.",
+    "Catalogue filtering could not be checked against real rows: JEE Main chapter-wise (Physics) and the AITS section have 0 live papers. I verified the request (q=...), the empty state, clear, and that the search is kept.",
+    "No deprecated packages (expo-av / expo-barcode-scanner / expo-background-fetch) in package.json. No SafeAreaView import from react-native."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100% (11/11 scenarios)"},
+  "seed_data_creation": "None. Only sign-in, sign-out and server logout on the QA learner. No test paper was started, answered or submitted, and nothing was created.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Simulate a server-side session end with fetch(location.origin+'/api/jl/auth/logout',{method:'POST',headers:{'X-JL-Sid':JSON.parse(localStorage.getItem('jl_sid')),'Content-Type':'application/json'},body:'{}'}). Login is limited to 8 per number per 15 min, so wait about 15 min between batches. Rapid Fire arena-tab-home goes back to the app Home. Home tile testID: home-tile-jee-main; exam hub rows: exam-destination-{pyq,aits,history}. pyq goes to /pyq, not the catalogue.",
+  "rca_of_issue": ""
+}

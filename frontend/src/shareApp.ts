@@ -9,7 +9,7 @@ export const APP_SHARE_TEXT = [
   "",
   "Built by AI after deeply analysing 4,000+ previous-year questions, so every question carries real PYQ DNA.",
   "",
-  "⚡ Rapid Fire: revise fast with 15-second cards",
+  "⚡ Rapid Fire: revise fast with 20-second cards",
   "🎯 Rank: know your rank and the colleges you can get",
   "🎓 Target: aim for your dream college with the marks you need",
   "📝 Mock tests + All India Test Series: raise your chances every day",

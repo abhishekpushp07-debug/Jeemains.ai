@@ -1,0 +1,3011 @@
+[
+ {
+  "prompt": "For any solution, the sum of mole fractions of all its components is:",
+  "formula": "Σxᵢ = 1",
+  "options": [
+   "Exactly 1",
+   "Equal to total moles",
+   "Equal to 100",
+   "Depends on the solvent"
+  ],
+  "answer": 0,
+  "explain": "xᵢ = nᵢ/Σn, so the fractions of all components always add up to 1.",
+  "kind": "fact",
+  "id": "83c69159-640c-4d99-9d74-b6a4247cb7a8",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "On diluting a solution with solvent, which quantity remains unchanged?",
+  "formula": "M₁V₁ = M₂V₂",
+  "options": [
+   "Molarity",
+   "Moles of solute",
+   "Molality",
+   "Mole fraction of solute"
+  ],
+  "answer": 1,
+  "explain": "Only solvent is added, so moles of solute stay constant; M₁V₁ = M₂V₂.",
+  "kind": "concept",
+  "id": "d75f7059-c908-4450-84f7-85a497663f3f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "In 0.1 M Al₂(SO₄)₃ (complete dissociation), the concentration of SO₄²⁻ is:",
+  "formula": "Al₂(SO₄)₃ → 2Al³⁺ + 3SO₄²⁻",
+  "options": [
+   "0.1 M",
+   "0.2 M",
+   "0.3 M",
+   "0.5 M"
+  ],
+  "answer": 2,
+  "explain": "Each formula unit gives 3 sulphate ions, so [SO₄²⁻] = 3 × 0.1 = 0.3 M.",
+  "kind": "result",
+  "id": "b2f81bc6-44e0-4fa7-a951-2954c053dba4",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "Mole fraction of solute in an aqueous solution of molality m is:",
+  "formula": "x₂ = m/(m + 55.5)",
+  "options": [
+   "m/55.5",
+   "55.5/(m + 55.5)",
+   "m/(m + 55.5)",
+   "m/(m + 1000)"
+  ],
+  "answer": 2,
+  "explain": "1 kg water = 55.5 mol, so x₂ = m/(m + 55.5).",
+  "kind": "formula",
+  "id": "6ab41dd8-7c21-49bb-a875-750264405890",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "Molality in terms of mole fractions (solvent molar mass M₁ in g mol⁻¹):",
+  "formula": "m = 1000x₂/(x₁M₁)",
+  "options": [
+   "1000x₁/(x₂M₁)",
+   "x₂M₁/(1000x₁)",
+   "1000x₂/(x₁M₁)",
+   "1000x₂/M₁"
+  ],
+  "answer": 2,
+  "explain": "Moles of solute per 1000 g solvent: (x₂/x₁) × 1000/M₁.",
+  "kind": "formula",
+  "id": "950dd960-f57f-4648-91b4-3bed8ffd4002",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "For a very dilute aqueous solution, molarity is numerically approximately equal to:",
+  "formula": "",
+  "options": [
+   "Mole fraction",
+   "Molality",
+   "Mass percent",
+   "Molality × 55.5"
+  ],
+  "answer": 1,
+  "explain": "Dilute aqueous: 1 L solution ≈ 1 kg solvent, so M ≈ m.",
+  "kind": "concept",
+  "id": "c14705d9-47bd-4b29-b6f4-ad797da8efc7",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "Molarity from mass % (w), density d (g mL⁻¹) and solute molar mass M₂:",
+  "formula": "",
+  "options": [
+   "wd/(10M₂)",
+   "10wd/M₂",
+   "1000wd/M₂",
+   "wd/M₂"
+  ],
+  "answer": 1,
+  "explain": "M = (w × 10 × d)/M₂, from w g in 100 g solution and ×1000/volume conversion.",
+  "kind": "formula",
+  "id": "5a657fdd-cfca-4370-aa5b-2284411c7740",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "Converting molality to molarity needs the solute molar mass and also the:",
+  "formula": "",
+  "options": [
+   "Density of the solution",
+   "Vapour pressure of solvent",
+   "Density of solute only",
+   "Boiling point of solution"
+  ],
+  "answer": 0,
+  "explain": "Density links solution mass to solution volume, which converts kg of solvent to litres of solution.",
+  "kind": "concept",
+  "id": "a5a2057a-4ad7-4c21-aa50-af599fcfc035",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "Mixing 1 M and 2 M solutions of the same solute in equal volumes gives a solution of molarity (ignore volume change):",
+  "formula": "M = (M₁V₁ + M₂V₂)/(V₁ + V₂)",
+  "options": [
+   "1.5 M",
+   "1.41 M",
+   "2 M",
+   "3 M"
+  ],
+  "answer": 0,
+  "explain": "Total moles/total volume: (1+2)/2 = 1.5 M for equal volumes.",
+  "kind": "result",
+  "id": "15fe5011-87a9-4148-8fe6-7ca920b523f5",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "Which pair of concentration terms both depend on temperature?",
+  "formula": "",
+  "options": [
+   "Molarity and normality",
+   "Molality and mole fraction",
+   "Molality and mass percent",
+   "Mole fraction and ppm (by mass)"
+  ],
+  "answer": 0,
+  "explain": "Molarity and normality use solution volume, which changes with temperature; mass-based terms do not.",
+  "kind": "concept",
+  "id": "141d9987-3fa6-48b2-8313-7868ef4eb8f0",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Molarity, molality and mole fraction"
+ },
+ {
+  "prompt": "Volume percentage (v/v %) of a solution is defined as:",
+  "formula": "v/v % = (V_solute / V_solution) × 100",
+  "options": [
+   "(V_solute / V_solvent) × 100",
+   "(V_solute / V_solution) × 100",
+   "(V_solvent / V_solution) × 100",
+   "(V_solute / V_solution) × 1000"
+  ],
+  "answer": 1,
+  "explain": "Volume % is volume of solute per 100 volume units of solution, not of solvent.",
+  "kind": "formula",
+  "id": "60c85510-e4de-4a6d-b142-ebe5bdfe4acb",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "A w/v % concentration expresses:",
+  "formula": "",
+  "options": [
+   "g of solute per 100 g of solution",
+   "g of solute per 100 mL of solvent",
+   "g of solute per 100 mL of solution",
+   "mL of solute per 100 mL of solution"
+  ],
+  "answer": 2,
+  "explain": "Mass by volume % = grams of solute dissolved in 100 mL of solution.",
+  "kind": "concept",
+  "id": "3cc1246b-26f4-4fb4-8d9a-b2c6778c484a",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "Which concentration term is independent of temperature?",
+  "formula": "",
+  "options": [
+   "Volume percentage (v/v)",
+   "Mass by volume percentage (w/v)",
+   "Mass percentage (w/w)",
+   "Molarity"
+  ],
+  "answer": 2,
+  "explain": "Mass does not change with temperature; volume-based terms do.",
+  "kind": "concept",
+  "id": "ffd9cf10-721b-4c40-8138-a4d4457ae876",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "10 g solute is dissolved in 40 g solvent. Its mass percentage is:",
+  "formula": "",
+  "options": [
+   "25%",
+   "20%",
+   "10%",
+   "40%"
+  ],
+  "answer": 1,
+  "explain": "Mass of solution = 50 g, so 10/50 × 100 = 20%, not 25%.",
+  "kind": "result",
+  "id": "b9f1084e-ff2a-4722-add8-082754a8459e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "A 10% (w/w) aqueous glucose solution contains how much water per 100 g of solution?",
+  "formula": "",
+  "options": [
+   "100 g",
+   "10 g",
+   "80 g",
+   "90 g"
+  ],
+  "answer": 3,
+  "explain": "100 g solution has 10 g glucose, so 90 g water.",
+  "kind": "result",
+  "id": "8dfa80c3-be32-46be-bafa-3cb488bb6b2f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "A 35% (v/v) ethylene glycol antifreeze solution means:",
+  "formula": "",
+  "options": [
+   "35 mL glycol in 100 mL solution",
+   "35 mL glycol in 100 mL water",
+   "35 g glycol in 100 mL solution",
+   "35 mL glycol in 65 mL water"
+  ],
+  "answer": 0,
+  "explain": "v/v % refers to 100 mL of the final solution.",
+  "kind": "concept",
+  "id": "6eae45a7-ef98-4cd2-982e-ee9285164b51",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "Molarity from w/w % (x), density d (g/mL) and molar mass M₀ is:",
+  "formula": "M = 10·x·d / M₀",
+  "options": [
+   "M = x·d / (10·M₀)",
+   "M = 100·x / (d·M₀)",
+   "M = 10·x·d / M₀",
+   "M = x·M₀ / (10·d)"
+  ],
+  "answer": 2,
+  "explain": "1000 mL has 1000d g solution, containing 10xd g solute; divide by M₀.",
+  "kind": "formula",
+  "id": "1a14d8a3-08ea-4ed5-b663-ef4231d13671",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "Mixing 50 mL ethanol and 50 mL water gives a solution of volume:",
+  "formula": "",
+  "options": [
+   "Exactly 100 mL",
+   "More than 100 mL",
+   "Less than 100 mL",
+   "Exactly 50 mL"
+  ],
+  "answer": 2,
+  "explain": "Volumes are not additive here; volume contraction occurs (about 96 mL).",
+  "kind": "fact",
+  "id": "b92fd894-4a99-4e85-87d4-60285b701cf4",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "For a dilute aqueous solution (d ≈ 1 g/mL), w/v % is numerically equal to:",
+  "formula": "",
+  "options": [
+   "Mass % (w/w)",
+   "Volume % (v/v)",
+   "Molarity",
+   "Mole fraction × 100"
+  ],
+  "answer": 0,
+  "explain": "With d = 1 g/mL, 100 mL solution weighs 100 g, so w/v % ≈ w/w %.",
+  "kind": "concept",
+  "id": "719d38c7-5b98-4d6c-a54d-59e2ea3c0d3f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "Equal masses of 10% and 20% (w/w) solutions of the same solute are mixed. The mass % is:",
+  "formula": "",
+  "options": [
+   "30%",
+   "12%",
+   "15%",
+   "Depends on the density"
+  ],
+  "answer": 2,
+  "explain": "Equal masses give the simple average: (10 + 20)/2 = 15%.",
+  "kind": "result",
+  "id": "edc71ff9-c542-48dc-8857-4c294ad144fa",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "Which pair of concentration terms is unit-free (dimensionless)?",
+  "formula": "",
+  "options": [
+   "Mass % and volume %",
+   "Mass % and molarity",
+   "Volume % and molality",
+   "w/v % and molarity"
+  ],
+  "answer": 0,
+  "explain": "Mass % and volume % are ratios of like quantities; molarity and molality carry units.",
+  "kind": "unit",
+  "id": "051a186b-aad8-4d81-b445-2c0f1f0144c4",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "Which concentration term is commonly used for liquid–liquid solutions like ethanol in water?",
+  "formula": "",
+  "options": [
+   "Volume percentage",
+   "Mass percentage only",
+   "Molality only",
+   "Parts per billion"
+  ],
+  "answer": 0,
+  "explain": "Volume % is the convenient term when both solute and solvent are liquids.",
+  "kind": "fact",
+  "id": "7deb5373-3b4f-459a-9705-79396c5b5aab",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Mass % and volume % concentration"
+ },
+ {
+  "prompt": "For a non-volatile solute, relative lowering of vapour pressure (P°−P)/P° equals what?",
+  "formula": "(P° − P)/P° = x₂",
+  "options": [
+   "Mole fraction of solute",
+   "Mole fraction of solvent",
+   "Molality of the solution",
+   "P°/P"
+  ],
+  "answer": 0,
+  "explain": "From P = x₁P° and x₁ + x₂ = 1, (P°−P)/P° = x₂, the solute mole fraction.",
+  "kind": "result",
+  "id": "daad7ad8-a19f-48e3-af85-a84648ca1708",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "Which pair shows positive deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Ethanol + water",
+   "Acetone + chloroform",
+   "HNO₃ + water",
+   "Chloroform + diethyl ether"
+  ],
+  "answer": 0,
+  "explain": "Ethanol–water has weaker A–B than A–A and B–B interactions, so it deviates positively. The others deviate negatively.",
+  "kind": "fact",
+  "id": "48a85363-ccf4-4528-9562-b9b975f94f19",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "Which pair shows negative deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Acetone + chloroform",
+   "Ethanol + water",
+   "Acetone + carbon disulphide",
+   "Benzene + methanol"
+  ],
+  "answer": 0,
+  "explain": "Acetone and chloroform form a hydrogen bond, so A–B attraction is stronger and the vapour pressure is lower than ideal.",
+  "kind": "fact",
+  "id": "f01fbb84-53f7-4055-9009-4a09a8208002",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "Solutions showing negative deviation from Raoult's law form which type of azeotrope?",
+  "formula": "",
+  "options": [
+   "Maximum boiling azeotrope",
+   "Minimum boiling azeotrope",
+   "No azeotrope forms",
+   "Azeotrope with ΔH_mix > 0"
+  ],
+  "answer": 0,
+  "explain": "Negative deviation gives a vapour pressure minimum, hence a boiling point maximum (e.g. HNO₃–water).",
+  "kind": "concept",
+  "id": "d02c7dd5-f814-458b-b3d1-fa1df74f8bf0",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "The vapour pressure of a pure liquid at a given temperature does NOT depend on which factor?",
+  "formula": "",
+  "options": [
+   "Amount of liquid or surface area",
+   "Temperature",
+   "Nature of the liquid",
+   "Intermolecular forces"
+  ],
+  "answer": 0,
+  "explain": "It is fixed by the nature of the liquid and the temperature, not by the quantity or surface area.",
+  "kind": "concept",
+  "id": "1756efe8-f0b3-4258-8b63-f46cc22c402c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "For an ideal binary liquid mixture, the vapour phase is richer in which component?",
+  "formula": "",
+  "options": [
+   "The one with higher P° (more volatile)",
+   "The one with lower P°",
+   "The one with higher molar mass",
+   "The one with higher liquid mole fraction"
+  ],
+  "answer": 0,
+  "explain": "Since p = xP°, the component with the higher pure vapour pressure has the greater share in the vapour.",
+  "kind": "concept",
+  "id": "165be748-5759-4276-b888-2abca68ea069",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "A liquid boils at the temperature where its vapour pressure becomes equal to what?",
+  "formula": "",
+  "options": [
+   "The external pressure",
+   "One atmosphere only",
+   "The vapour pressure of water",
+   "Its critical pressure"
+  ],
+  "answer": 0,
+  "explain": "Boiling occurs when vapour pressure equals the external pressure. The normal boiling point is the case where it is 1 atm.",
+  "kind": "fact",
+  "id": "98d701e3-11a9-42a3-96e9-f23f6c0a6b9e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "Why can an azeotropic mixture not be separated by fractional distillation?",
+  "formula": "",
+  "options": [
+   "Vapour and liquid have the same composition",
+   "Its components react on heating",
+   "Its components have equal molar masses",
+   "Its components are immiscible"
+  ],
+  "answer": 0,
+  "explain": "At the azeotropic composition the mixture boils at a constant temperature, and the vapour has the same composition as the liquid.",
+  "kind": "concept",
+  "id": "b467ff43-d888-4069-9ac2-9e9833a0364d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "Mole fraction of component 1 in the vapour phase of a binary solution is y₁ = ?",
+  "formula": "y₁ = p₁/P_total",
+  "options": [
+   "p₁/(p₁ + p₂)",
+   "p₁/P₁°",
+   "x₁P₁°/P₂°",
+   "p₁·x₁"
+  ],
+  "answer": 0,
+  "explain": "By Dalton's law, y₁ = p₁/P_total, where P_total = p₁ + p₂.",
+  "kind": "formula",
+  "id": "986f8a52-2694-4e1a-8aae-2715fa37f128",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "For an ideal binary solution, how does total vapour pressure vary with x₂ at constant temperature?",
+  "formula": "P = P₁° + (P₂° − P₁°)x₂",
+  "options": [
+   "Linearly between P₁° and P₂°",
+   "Passes through a maximum",
+   "Passes through a minimum",
+   "Falls exponentially"
+  ],
+  "answer": 0,
+  "explain": "Substituting x₁ = 1 − x₂ into P = x₁P₁° + x₂P₂° gives a straight line.",
+  "kind": "graph",
+  "id": "c472f631-d4dd-4cc0-9e40-d8fca5372d8d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "Which pair shows negative deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Acetone + chloroform",
+   "Ethanol + acetone",
+   "Benzene + toluene",
+   "Carbon disulphide + acetone"
+  ],
+  "answer": 0,
+  "explain": "Chloroform and acetone form a hydrogen bond, so A–B forces are stronger and the deviation is negative.",
+  "kind": "fact",
+  "id": "95ab0ce6-9982-45e4-8f00-826c437716d7",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "Which pair shows positive deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Ethanol + acetone",
+   "Phenol + aniline",
+   "Chloroform + acetone",
+   "HNO₃ + water"
+  ],
+  "answer": 0,
+  "explain": "Acetone breaks the H-bonding of ethanol, so A–B forces are weaker and the deviation is positive.",
+  "kind": "fact",
+  "id": "a475e9bc-4c0e-45aa-874e-1e2cf083fe4e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "Solutions with positive deviation from Raoult's law form which type of azeotrope?",
+  "formula": "",
+  "options": [
+   "Minimum-boiling",
+   "Maximum-boiling",
+   "Ideal azeotrope",
+   "No azeotrope"
+  ],
+  "answer": 0,
+  "explain": "High vapour pressure at a certain composition gives a minimum boiling point, e.g. ethanol–water at about 95% ethanol.",
+  "kind": "fact",
+  "id": "18030231-1dbc-462d-b3d8-835d9f418fd5",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "Which pair forms a maximum-boiling azeotrope (negative deviation)?",
+  "formula": "",
+  "options": [
+   "HNO₃ + H₂O",
+   "Ethanol + H₂O",
+   "Acetone + CS₂",
+   "Benzene + toluene"
+  ],
+  "answer": 0,
+  "explain": "HNO₃–water (about 68% HNO₃) shows negative deviation and boils at a maximum.",
+  "kind": "fact",
+  "id": "c8c24664-bb66-4c0c-9066-18f29341e003",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "Mole fraction of A in the vapour above an ideal solution (Dalton + Raoult) is:",
+  "formula": "yA = pA / P_total",
+  "options": [
+   "pA / P_total",
+   "pA / P°A",
+   "P_total / pA",
+   "xA·P_total"
+  ],
+  "answer": 0,
+  "explain": "By Dalton's law, the vapour mole fraction is the partial pressure divided by the total pressure.",
+  "kind": "formula",
+  "id": "f13577b5-3fb3-448c-a65a-d3df808765ef",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "An azeotropic mixture cannot be separated by fractional distillation because:",
+  "formula": "",
+  "options": [
+   "Liquid and vapour have the same composition",
+   "Its components are immiscible",
+   "Its components have equal P°",
+   "It has no boiling point"
+  ],
+  "answer": 0,
+  "explain": "At the azeotropic composition the mixture boils at constant temperature and the vapour has the liquid's composition.",
+  "kind": "concept",
+  "id": "4990927c-bef2-41e6-9b46-97fc4837b42e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "Henry's law (p = K_H·x) reduces to Raoult's law when K_H equals:",
+  "formula": "p = K_H·x",
+  "options": [
+   "P° of the pure component",
+   "1 atm",
+   "Total pressure",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Raoult's law is the special case of Henry's law in which K_H = P° of the pure component.",
+  "kind": "concept",
+  "id": "d9a39505-0e42-4bee-9c07-ea9287907b8d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "Which pair of liquids forms a nearly ideal solution?",
+  "formula": "",
+  "options": [
+   "n-Hexane + n-heptane",
+   "Ethanol + water",
+   "Acetone + chloroform",
+   "Phenol + aniline"
+  ],
+  "answer": 0,
+  "explain": "Similar structure and size give similar intermolecular forces, so n-hexane and n-heptane mix almost ideally.",
+  "kind": "fact",
+  "id": "521bfdcc-191b-45e5-b939-66312aed9e44",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "For an ideal binary solution at fixed T, the plot of total vapour pressure P against x_A is:",
+  "formula": "P = P_B° + (P_A° − P_B°)x_A",
+  "options": [
+   "A straight line",
+   "A curve with a maximum",
+   "A curve with a minimum",
+   "A rectangular hyperbola"
+  ],
+  "answer": 0,
+  "explain": "P is linear in x_A, running from P_B° at x_A = 0 to P_A° at x_A = 1.",
+  "kind": "graph",
+  "id": "ec11dee1-9e16-43a9-a3c2-089169fef5e4",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "For an ideal solution, the vapour is richer in which component than the liquid?",
+  "formula": "",
+  "options": [
+   "The more volatile component",
+   "The less volatile component",
+   "The component with higher mole fraction",
+   "The component with lower P°"
+  ],
+  "answer": 0,
+  "explain": "The component with higher P° has the larger y relative to x, so the vapour is richer in it.",
+  "kind": "concept",
+  "id": "13d7387c-5de0-4e04-bb73-01a1d85397ec",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "In a solution showing positive deviation, A–B interactions are ___ than A–A and B–B, and ΔV_mix is ___.",
+  "formula": "",
+  "options": [
+   "weaker; positive",
+   "stronger; negative",
+   "weaker; negative",
+   "stronger; positive"
+  ],
+  "answer": 0,
+  "explain": "Weaker A–B forces raise escaping tendency: P > Raoult value, ΔH_mix > 0, ΔV_mix > 0.",
+  "kind": "concept",
+  "id": "05f4b48a-6447-492f-8300-22404fae28cb",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "For a non-ideal solution showing negative deviation from Raoult's law, ΔH_mix is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Positive",
+   "Zero",
+   "Cannot be predicted"
+  ],
+  "answer": 0,
+  "explain": "Stronger A–B interactions release heat, so ΔH_mix < 0 and ΔV_mix < 0 for negative deviation.",
+  "kind": "concept",
+  "id": "0cdd25bd-616c-41fe-9c58-69194ab2a767",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "A solution showing positive deviation from Raoult's law has ΔH_mix and ΔV_mix respectively:",
+  "formula": "",
+  "options": [
+   "Positive, positive",
+   "Negative, negative",
+   "Zero, zero",
+   "Positive, negative"
+  ],
+  "answer": 0,
+  "explain": "Weaker A–B forces: endothermic mixing and volume expansion, so both are positive.",
+  "kind": "concept",
+  "id": "6f28bd72-9bd2-4ca2-aadc-1f67843e65bb",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "For an ideal solution, the total vapour pressure P of components A and B equals:",
+  "formula": "",
+  "options": [
+   "P_A° + P_B°",
+   "x_A P_A° + x_B P_B°",
+   "x_A P_B° + x_B P_A°",
+   "P_A° x_A x_B"
+  ],
+  "answer": 1,
+  "explain": "Raoult's law for each component: P = x_A P_A° + x_B P_B°.",
+  "kind": "formula",
+  "id": "0dc218cc-14fc-4e25-99de-b8bb940b0b7d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Which pair forms a solution showing positive deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Acetone + chloroform",
+   "Ethanol + acetone",
+   "Phenol + aniline",
+   "HNO₃ + water"
+  ],
+  "answer": 1,
+  "explain": "Ethanol + acetone: acetone breaks ethanol H-bonds, so A–B forces are weaker; positive deviation.",
+  "kind": "fact",
+  "id": "9dd31be0-e858-47a2-b1c9-397be9756c02",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Which pair forms a solution showing negative deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Ethanol + water",
+   "Acetone + CS₂",
+   "Chloroform + acetone",
+   "Benzene + methanol"
+  ],
+  "answer": 2,
+  "explain": "Chloroform and acetone form H-bonds, so A–B forces are stronger; negative deviation.",
+  "kind": "fact",
+  "id": "3f023610-c25d-4213-bd1e-71db0fc25d19",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Mixing is spontaneous for an ideal solution because the entropy change ΔS_mix is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Negative",
+   "Positive",
+   "Infinite"
+  ],
+  "answer": 2,
+  "explain": "With ΔH = 0, spontaneity (ΔG < 0) comes from the increase in randomness, ΔS_mix > 0.",
+  "kind": "concept",
+  "id": "dfbf8632-03ac-4b63-afbf-9ed987886b83",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "For an ideal solution of A and B, the partial vapour pressure of A is p_A = x_A·p_A°. This is valid:",
+  "formula": "p_A = x_A p_A°",
+  "options": [
+   "Only for dilute solutions of A",
+   "Only for the solvent as x_A → 1",
+   "Only when B is non-volatile",
+   "Over the entire composition range"
+  ],
+  "answer": 3,
+  "explain": "An ideal solution obeys Raoult's law for every component at all concentrations and temperatures.",
+  "kind": "concept",
+  "id": "250428a7-bdf6-4148-a6c8-c9d8e14d3224",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Minimum boiling azeotropes are formed by solutions showing which deviation?",
+  "formula": "",
+  "options": [
+   "Large positive deviation",
+   "Large negative deviation",
+   "No deviation (ideal)",
+   "Small negative deviation only"
+  ],
+  "answer": 0,
+  "explain": "Large positive deviation gives a vapour pressure maximum, so a minimum in boiling point (minimum boiling azeotrope).",
+  "kind": "concept",
+  "id": "bad07660-9c9a-4ce6-84b3-d3d1aee0ec4e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Maximum boiling azeotropes are formed by solutions showing which deviation?",
+  "formula": "",
+  "options": [
+   "Large positive deviation",
+   "Large negative deviation",
+   "Zero deviation",
+   "Positive at low x, negative at high x"
+  ],
+  "answer": 1,
+  "explain": "Large negative deviation gives a vapour pressure minimum, so a maximum in boiling point.",
+  "kind": "concept",
+  "id": "9503acdc-85dd-47d9-88cc-175a341dcaa7",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "For negative deviation, total vapour pressure p compared with p_A°x_A + p_B°x_B is:",
+  "formula": "p vs p_A°x_A + p_B°x_B",
+  "options": [
+   "Greater",
+   "Equal",
+   "Less",
+   "Equal to p_A° + p_B°"
+  ],
+  "answer": 2,
+  "explain": "Stronger A–B attraction lowers the escaping tendency, so p is less than the Raoult's law value.",
+  "kind": "concept",
+  "id": "8d97f7b7-fa8b-479f-a5ff-ae57422dce42",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Which mixture forms a maximum boiling azeotrope (≈68% by mass)?",
+  "formula": "",
+  "options": [
+   "HNO₃ + H₂O",
+   "C₂H₅OH + H₂O",
+   "Benzene + toluene",
+   "Ethanol + cyclohexane"
+  ],
+  "answer": 0,
+  "explain": "HNO₃–H₂O shows large negative deviation and boils at 393.5 K at 68% HNO₃.",
+  "kind": "fact",
+  "id": "3537f5e3-cc89-4845-888a-5fefde4ab898",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Which of these pairs shows positive deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Phenol + aniline",
+   "Ethanol + cyclohexane",
+   "HNO₃ + H₂O",
+   "Chloroform + diethyl ether"
+  ],
+  "answer": 1,
+  "explain": "Cyclohexane disrupts the H-bonding of ethanol, so A–B is weaker than A–A, giving positive deviation.",
+  "kind": "fact",
+  "id": "bef0fc95-dda0-416b-9245-d8a3e47b6c22",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Negative deviation in acetone + chloroform arises mainly due to:",
+  "formula": "",
+  "options": [
+   "Hydrogen bonding between the two",
+   "Dipole repulsion between them",
+   "Dissociation of chloroform",
+   "Association of acetone"
+  ],
+  "answer": 0,
+  "explain": "The C–H of CHCl₃ forms an H-bond with the C=O of acetone, so A–B attraction is stronger.",
+  "kind": "concept",
+  "id": "ada14e00-a5a6-47c1-85e2-5fb2adfcb583",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Phenol + aniline mixture shows which type of deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Positive deviation",
+   "Negative deviation",
+   "No deviation",
+   "Positive then negative"
+  ],
+  "answer": 1,
+  "explain": "Phenol and aniline form strong H-bonds between unlike molecules, giving negative deviation.",
+  "kind": "fact",
+  "id": "2f0464fb-2850-400c-9f2e-5e2ac404b14e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Acetone + ethanol shows positive deviation because acetone:",
+  "formula": "",
+  "options": [
+   "Breaks the H-bonding of ethanol",
+   "Forms H-bonds with ethanol",
+   "Ionises in ethanol",
+   "Reacts with ethanol"
+  ],
+  "answer": 0,
+  "explain": "Acetone molecules get between ethanol molecules and break their H-bonds, weakening the interactions and raising vapour pressure.",
+  "kind": "concept",
+  "id": "8f621e04-0c14-44f8-aeb9-f9690ffb5b14",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "The ethanol–water minimum boiling azeotrope contains approximately what % ethanol by mass?",
+  "formula": "",
+  "options": [
+   "50%",
+   "68%",
+   "95%",
+   "99.9%"
+  ],
+  "answer": 2,
+  "explain": "It has about 95.5% ethanol and boils at 351.1 K, so pure ethanol cannot be obtained by fractional distillation.",
+  "kind": "fact",
+  "id": "d6f97523-ba11-4b8e-92de-ae645a93461b",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "For a solution showing positive deviation, ΔV_mix is:",
+  "formula": "",
+  "options": [
+   "Positive (volume increases)",
+   "Negative (volume decreases)",
+   "Zero",
+   "Cannot be predicted"
+  ],
+  "answer": 0,
+  "explain": "Weaker A–B interactions make the solution expand, so ΔV_mix > 0 (and ΔH_mix > 0).",
+  "kind": "concept",
+  "id": "bf984ce7-cd59-432d-880e-86a9dcd7ebe4",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Which mixture shows positive deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Benzene + Acetone",
+   "Chloroform + Diethyl ether",
+   "Acetic acid + Pyridine",
+   "HCl + Water"
+  ],
+  "answer": 0,
+  "explain": "Acetone's dipolar interactions are weakened by benzene, so A–B is weaker; the others show negative deviation.",
+  "kind": "fact",
+  "id": "35896b28-a45a-48ff-8848-de40f328fe26",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "For an ideal binary solution, the total vapour pressure vs x_A plot is:",
+  "formula": "P = p_B° + (p_A° − p_B°)x_A",
+  "options": [
+   "A straight line from p_B° to p_A°",
+   "A curve with a maximum",
+   "A curve with a minimum",
+   "A curve through the origin"
+  ],
+  "answer": 0,
+  "explain": "P is linear in x_A, running from p_B° at x_A = 0 to p_A° at x_A = 1.",
+  "kind": "graph",
+  "id": "0647aa24-6522-4d6d-abab-e52567f9d79a",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "A total-pressure curve with a maximum in the P–x plot gives which type of azeotrope?",
+  "formula": "",
+  "options": [
+   "Minimum-boiling",
+   "Maximum-boiling",
+   "Ideal azeotrope",
+   "No azeotrope"
+  ],
+  "answer": 0,
+  "explain": "Positive deviation gives a pressure maximum, so the mixture boils below either pure component (minimum-boiling).",
+  "kind": "concept",
+  "id": "97b1a757-09ec-4617-bebd-c375c16ab822",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Which mixture forms a maximum-boiling azeotrope?",
+  "formula": "",
+  "options": [
+   "HNO₃ + H₂O",
+   "C₂H₅OH + H₂O",
+   "Acetone + CS₂",
+   "Benzene + toluene"
+  ],
+  "answer": 0,
+  "explain": "HNO₃–water shows negative deviation, giving a maximum-boiling azeotrope (about 68% HNO₃).",
+  "kind": "fact",
+  "id": "8a0aa070-7345-4b1a-a216-a2134645cba7",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "At the azeotropic composition, the vapour composition compared with the liquid is:",
+  "formula": "",
+  "options": [
+   "Identical",
+   "Richer in the less volatile component",
+   "Richer in the more volatile component",
+   "Pure A"
+  ],
+  "answer": 0,
+  "explain": "An azeotrope boils at constant temperature, with vapour and liquid having the same composition.",
+  "kind": "concept",
+  "id": "a1090852-b6ad-432d-afcc-0475f5b67091",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "For an ideal solution, the plot of partial pressure p_A vs x_A is a line through the origin with slope:",
+  "formula": "",
+  "options": [
+   "p_A°",
+   "1/p_A°",
+   "p_A° + p_B°",
+   "p_B°"
+  ],
+  "answer": 0,
+  "explain": "Raoult's law gives p_A = x_A·p_A°, a straight line of slope p_A°.",
+  "kind": "graph",
+  "id": "23f6e689-6ec0-46a1-b1bc-1732f33e67ba",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Which mixture shows negative deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "Acetone + chloroform",
+   "Acetone + ethanol",
+   "Ethanol + water",
+   "Acetone + CS₂"
+  ],
+  "answer": 0,
+  "explain": "Acetone and chloroform form H-bonds with each other, so A–B attraction is stronger and the vapour pressure is lower.",
+  "kind": "fact",
+  "id": "b863b449-89f3-4da0-9bd5-855308ffe2c6",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Azeotropic mixtures cannot be separated into pure components by:",
+  "formula": "",
+  "options": [
+   "Fractional distillation",
+   "Chemical reaction",
+   "Adding a third component",
+   "Changing pressure"
+  ],
+  "answer": 0,
+  "explain": "The vapour and liquid have the same composition, so repeated distillation does not enrich either component.",
+  "kind": "concept",
+  "id": "08da5504-0bcc-4038-baa3-f50ab1db5023",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "In a P–x plot with positive deviation, the experimental total pressure curve lies ___ the Raoult's law line.",
+  "formula": "",
+  "options": [
+   "Above",
+   "Below",
+   "Exactly on",
+   "Crossing"
+  ],
+  "answer": 0,
+  "explain": "Positive deviation: P_total is greater than the ideal value (weaker A–B interactions).",
+  "kind": "graph",
+  "id": "779f58c0-115e-49c3-9393-bd73b7b705e3",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "For a solution showing negative deviation, ΔV_mix is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Positive",
+   "Zero",
+   "Infinite"
+  ],
+  "answer": 0,
+  "explain": "Stronger A–B attractions cause contraction: ΔV_mix < 0 and ΔH_mix < 0.",
+  "kind": "concept",
+  "id": "3c5c2acb-f8e3-43a5-bc4b-b2e57bedcc42",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Which mixture shows positive deviation from Raoult's law and forms a minimum-boiling azeotrope?",
+  "formula": "",
+  "options": [
+   "Ethanol + water",
+   "Phenol + aniline",
+   "Chloroform + acetone",
+   "HNO₃ + water"
+  ],
+  "answer": 0,
+  "explain": "Ethanol–water (95.6% ethanol) shows positive deviation; it is a minimum-boiling azeotrope.",
+  "kind": "fact",
+  "id": "034fde1f-0725-4dca-8a40-e903f99d877e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "In a P–x plot with negative deviation, the total pressure curve shows a:",
+  "formula": "",
+  "options": [
+   "Minimum",
+   "Maximum",
+   "Straight line",
+   "Point of inflection only"
+  ],
+  "answer": 0,
+  "explain": "Negative deviation gives a pressure minimum, i.e. a maximum-boiling azeotrope.",
+  "kind": "graph",
+  "id": "8ced591d-fe22-4c78-b948-d3f96994713f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "For positive deviation, the A–B interactions compared to A–A and B–B are:",
+  "formula": "",
+  "options": [
+   "Weaker",
+   "Stronger",
+   "Equal",
+   "Zero for all"
+  ],
+  "answer": 0,
+  "explain": "A–B < A–A, B–B so escaping tendency rises; ΔH_mix > 0, ΔV_mix > 0.",
+  "kind": "concept",
+  "id": "ee88f808-b089-4582-9c99-41d7edab3852",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "In an ideal-solution plot of p_B vs x_A (x_B = 1 − x_A), the line for p_B has intercept p_B° at:",
+  "formula": "p_B = p_B°(1 − x_A)",
+  "options": [
+   "x_A = 0",
+   "x_A = 1",
+   "x_A = 0.5",
+   "Never"
+  ],
+  "answer": 0,
+  "explain": "At x_A = 0 the liquid is pure B, so p_B = p_B°; it falls to zero at x_A = 1.",
+  "kind": "graph",
+  "id": "debba1cd-1e5b-42ea-b358-c7b808d993ff",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Which of these pairs forms a maximum boiling azeotrope?",
+  "formula": "",
+  "options": [
+   "HNO₃ + H₂O",
+   "Ethanol + H₂O",
+   "Benzene + toluene",
+   "n-Hexane + n-heptane"
+  ],
+  "answer": 0,
+  "explain": "HNO₃–water (68% HNO₃) shows negative deviation, so it boils at a maximum (393.5 K).",
+  "kind": "fact",
+  "id": "089de93e-f7a2-4f1e-b66f-f0371ef8ce4b",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Azeotropes: min and max boiling"
+ },
+ {
+  "prompt": "Which of these mixtures forms a minimum boiling azeotrope?",
+  "formula": "",
+  "options": [
+   "Chloroform + acetone",
+   "HCl + H₂O",
+   "Ethanol + water",
+   "HNO₃ + H₂O"
+  ],
+  "answer": 2,
+  "explain": "Ethanol–water (95.6% ethanol) shows positive deviation, so it boils at a minimum, below either component.",
+  "kind": "fact",
+  "id": "ad461257-0456-4d1b-bf02-148815f884cf",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Azeotropes: min and max boiling"
+ },
+ {
+  "prompt": "Why can an azeotropic mixture not be separated by fractional distillation?",
+  "formula": "",
+  "options": [
+   "Vapour and liquid have the same composition",
+   "Components have identical molar masses",
+   "Components react on heating",
+   "Vapour pressure is zero"
+  ],
+  "answer": 0,
+  "explain": "At the azeotropic composition the vapour has the same composition as the liquid, so distillation does not enrich either component.",
+  "kind": "concept",
+  "id": "b4c2ec0a-1d95-4a16-9607-7392f27d68dc",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Azeotropes: min and max boiling"
+ },
+ {
+  "prompt": "Relative lowering of vapour pressure (non-volatile solute) depends on the solute's:",
+  "formula": "",
+  "options": [
+   "Number of particles",
+   "Chemical nature",
+   "Molar mass alone",
+   "Own vapour pressure"
+  ],
+  "answer": 0,
+  "explain": "RLVP is colligative: it depends only on the number of solute particles, i.e. on x₂.",
+  "kind": "concept",
+  "id": "a0bd622a-6c34-4432-ac61-b9e69c39fd38",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "For a non-volatile solute, (P° − P)/P is exactly equal to:",
+  "formula": "",
+  "options": [
+   "n₂/n₁",
+   "n₂/(n₁ + n₂)",
+   "n₁/n₂",
+   "n₁/(n₁ + n₂)"
+  ],
+  "answer": 0,
+  "explain": "(P° − P)/P = x₂/x₁ = n₂/n₁, with P in the denominator.",
+  "kind": "formula",
+  "id": "d1f8b655-20ad-4d83-9b8c-fa5325fc284c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Among 0.1 m aqueous solutions, the highest relative lowering of vapour pressure is shown by:",
+  "formula": "",
+  "options": [
+   "K₂SO₄",
+   "NaCl",
+   "Glucose",
+   "Urea"
+  ],
+  "answer": 0,
+  "explain": "K₂SO₄ gives 3 ions (i ≈ 3); more particles give a larger RLVP.",
+  "kind": "concept",
+  "id": "dc249d41-0ef1-4d2c-a434-9adeec70f7c2",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "For an electrolyte with van't Hoff factor i, the RLVP of a dilute solution is proportional to:",
+  "formula": "",
+  "options": [
+   "i·x₂",
+   "x₂/i",
+   "x₂ alone",
+   "x₂ᶦ"
+  ],
+  "answer": 0,
+  "explain": "The effective particle count is i times larger, so RLVP ≈ i·x₂.",
+  "kind": "formula",
+  "id": "3be37baf-fc2d-4580-93d9-259dca5acf10",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "A non-volatile solute dimerises in solution. Its observed RLVP, compared with no association, is:",
+  "formula": "",
+  "options": [
+   "Lower",
+   "Higher",
+   "Same",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Association gives i < 1, fewer particles, and so a smaller lowering.",
+  "kind": "exception",
+  "id": "0b41399b-7a99-466a-984f-843c940148d1",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Raoult's law is a special case of Henry's law when K_H equals:",
+  "formula": "",
+  "options": [
+   "P° of the pure component",
+   "Mole fraction x",
+   "Unity",
+   "Total pressure"
+  ],
+  "answer": 0,
+  "explain": "Henry's law is p = K_H·x. Setting K_H = P° gives Raoult's law, p = P°x.",
+  "kind": "fact",
+  "id": "37dd30fb-3f57-44bb-bf1f-458a132d2f9e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "For a fixed composition of an ideal dilute solution, RLVP with rising temperature:",
+  "formula": "",
+  "options": [
+   "Stays constant",
+   "Increases",
+   "Decreases",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "RLVP = x₂, which does not change with temperature, although P and P° both rise.",
+  "kind": "trend",
+  "id": "54cc355b-a431-4205-8d04-f7462f409c8d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Vapour pressure falls on adding a non-volatile solute mainly because solute particles:",
+  "formula": "",
+  "options": [
+   "Reduce solvent molecules at the surface",
+   "Raise solvent kinetic energy",
+   "Increase solvent volatility",
+   "Lower the solvent density"
+  ],
+  "answer": 0,
+  "explain": "Solute occupies part of the surface, so fewer solvent molecules escape into the vapour.",
+  "kind": "concept",
+  "id": "f2b22811-337a-44a1-8d6b-226e93bb7edd",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Molar mass of the solute (dilute solution) from RLVP, M₂ = ?",
+  "formula": "(P° − P)/P° ≈ w₂M₁/(M₂w₁)",
+  "options": [
+   "w₂M₁P° / [w₁(P° − P)]",
+   "w₁M₁P° / [w₂(P° − P)]",
+   "w₂M₁(P° − P) / (w₁P°)",
+   "w₂P° / [w₁M₁(P° − P)]"
+  ],
+  "answer": 0,
+  "explain": "Rearranging (P° − P)/P° = w₂M₁/(M₂w₁) gives M₂ = w₂M₁P°/[w₁(P° − P)].",
+  "kind": "formula",
+  "id": "fe70087d-2905-4195-aa96-4509982f2cc3",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "The unit of relative lowering of vapour pressure is:",
+  "formula": "",
+  "options": [
+   "Dimensionless",
+   "Pa",
+   "mmHg",
+   "Pa⁻¹"
+  ],
+  "answer": 0,
+  "explain": "RLVP = (P° − P)/P° is a ratio of pressures, so it is dimensionless, like x₂.",
+  "kind": "unit",
+  "id": "e2377e5c-0200-4890-929e-4265a242feff",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Ostwald–Walker dynamic method: RLVP (P°−P)/P° equals which ratio of mass losses?",
+  "formula": "",
+  "options": [
+   "Solvent bulbs loss / total loss",
+   "Solution bulbs loss / total loss",
+   "Solution bulbs loss / solvent bulbs loss",
+   "Solvent bulbs loss / solution bulbs loss"
+  ],
+  "answer": 0,
+  "explain": "Solution bulbs lose ∝ P, solvent bulbs lose ∝ (P°−P); total ∝ P°, so RLVP = solvent loss/total loss.",
+  "kind": "fact",
+  "id": "866f0b03-26ce-4600-80e4-a1744acdde82",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Graph of vapour pressure of solution (P) vs mole fraction of solute x₂ for an ideal solution is:",
+  "formula": "P = P°(1 − x₂)",
+  "options": [
+   "Straight line with negative slope −P°",
+   "Straight line with positive slope P°",
+   "Hyperbola",
+   "Parabola"
+  ],
+  "answer": 0,
+  "explain": "P = P° − P°x₂ is linear in x₂ with slope −P° and intercept P°.",
+  "kind": "graph",
+  "id": "0360d2e1-050e-4372-b750-a52e02f6dc88",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Equal masses of two non-volatile non-electrolytes in the same solvent: lower P belongs to solute with ___ molar mass.",
+  "formula": "",
+  "options": [
+   "Lower",
+   "Higher",
+   "Same",
+   "Cannot be compared"
+  ],
+  "answer": 0,
+  "explain": "Lower molar mass gives more moles of solute, a larger x₂ and a greater lowering of vapour pressure.",
+  "kind": "concept",
+  "id": "0358bf0c-055a-4371-bf13-f4198ca86cb1",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Ideal solution of non-volatile solute: for 1 mol solute in 99 mol solvent, RLVP is:",
+  "formula": "",
+  "options": [
+   "0.01",
+   "0.99",
+   "0.1",
+   "0.0101"
+  ],
+  "answer": 0,
+  "explain": "RLVP = x₂ = 1/(1+99) = 0.01.",
+  "kind": "result",
+  "id": "ff28c16d-77bc-4554-a893-988fefb9582a",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Ebullioscopic constant Kb of water (K kg mol⁻¹) is nearly:",
+  "formula": "",
+  "options": [
+   "0.52",
+   "1.86",
+   "2.53",
+   "5.12"
+  ],
+  "answer": 0,
+  "explain": "Kb(water) = 0.52 K kg/mol. 1.86 is Kf of water; 2.53 and 5.12 are Kb and Kf of benzene.",
+  "kind": "fact",
+  "id": "84015ec8-fdf1-42a1-a3cb-a3bbdaeb284a",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Ebullioscopic constant Kb of benzene (K kg mol⁻¹) is nearly:",
+  "formula": "",
+  "options": [
+   "0.52",
+   "1.86",
+   "2.53",
+   "5.12"
+  ],
+  "answer": 2,
+  "explain": "Kb(benzene) = 2.53; 5.12 is its Kf, and 0.52 and 1.86 are the Kb and Kf of water.",
+  "kind": "fact",
+  "id": "cb7d8ac5-9299-4c33-99cd-709460f4c3e6",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Physically, Kb equals the boiling point elevation for a solution of molality:",
+  "formula": "",
+  "options": [
+   "1 m (ideal behaviour)",
+   "0.5 m",
+   "1 M",
+   "Mole fraction of solute = 1"
+  ],
+  "answer": 0,
+  "explain": "Kb is the ΔTb for a hypothetical (ideal) 1 molal solution.",
+  "kind": "concept",
+  "id": "c1e543a4-5e68-4bab-a22e-7efe4d0bcd9d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Molar mass of a non-electrolyte solute from ΔTb (w₂ g in w₁ g solvent) is:",
+  "formula": "M₂ = 1000·Kb·w₂ / (ΔTb·w₁)",
+  "options": [
+   "1000·Kb·w₂ / (ΔTb·w₁)",
+   "Kb·w₂ / (1000·ΔTb·w₁)",
+   "1000·ΔTb·w₁ / (Kb·w₂)",
+   "1000·Kb·w₁ / (ΔTb·w₂)"
+  ],
+  "answer": 0,
+  "explain": "From ΔTb = Kb·(w₂/M₂)·(1000/w₁), rearranged for M₂ with w₁ in grams.",
+  "kind": "formula",
+  "id": "619a5d3c-3890-44a7-b43f-8e30a5a7356d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "ΔTb is expressed using molality rather than molarity because molality:",
+  "formula": "",
+  "options": [
+   "Is independent of temperature",
+   "Depends on solution volume",
+   "Is always larger than molarity",
+   "Includes the solvent density"
+  ],
+  "answer": 0,
+  "explain": "Molality uses masses, so it does not change with temperature, unlike molarity.",
+  "kind": "concept",
+  "id": "c279da85-4272-4007-9c7b-409d6d4bf140",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "A liquid boils at the temperature where its vapour pressure becomes equal to:",
+  "formula": "",
+  "options": [
+   "External (atmospheric) pressure",
+   "Its critical pressure",
+   "Its osmotic pressure",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Boiling occurs when vapour pressure = external pressure.",
+  "kind": "fact",
+  "id": "f0af28ad-721f-4f37-abbd-d39c8cf82715",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "A non-volatile solute raises the boiling point of the solvent mainly because it:",
+  "formula": "",
+  "options": [
+   "Lowers the vapour pressure",
+   "Raises the vapour pressure",
+   "Increases the latent heat of the solvent",
+   "Raises the external pressure"
+  ],
+  "answer": 0,
+  "explain": "Lower vapour pressure means a higher temperature is needed to reach the external pressure.",
+  "kind": "concept",
+  "id": "497266b7-01af-4709-b03f-89bba8dd9dfb",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Which 0.1 m aqueous solution has the highest boiling point?",
+  "formula": "",
+  "options": [
+   "Glucose",
+   "NaCl",
+   "K₂SO₄",
+   "Al₂(SO₄)₃"
+  ],
+  "answer": 3,
+  "explain": "ΔTb ∝ i. Al₂(SO₄)₃ gives 5 ions (i = 5), compared with 3 for K₂SO₄ and 2 for NaCl.",
+  "kind": "trend",
+  "id": "2fbe9195-cf71-45b1-bf6f-01280e299905",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "If the solute associates in the solvent, the observed ΔTb compared with the calculated value is:",
+  "formula": "i < 1",
+  "options": [
+   "Lower",
+   "Higher",
+   "Equal",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Association reduces the number of particles, so i < 1 and ΔTb is lower.",
+  "kind": "concept",
+  "id": "5ffbd8d3-1b28-445f-ba1f-ede97b42d14c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "A boiling point elevation of 0.5 K corresponds to a rise of how many °C?",
+  "formula": "",
+  "options": [
+   "0.5 °C",
+   "273.65 °C",
+   "0.5 + 273 °C",
+   "−272.5 °C"
+  ],
+  "answer": 0,
+  "explain": "A temperature difference is the same in K and °C, so 0.5 K = 0.5 °C.",
+  "kind": "unit",
+  "id": "76773ffa-4ca9-4689-8ed9-2f081fa8537b",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "ΔTb = Kb·m is strictly valid for which type of solute and solution?",
+  "formula": "",
+  "options": [
+   "Non-volatile solute, dilute solution",
+   "Volatile solute, dilute solution",
+   "Non-volatile solute, concentrated solution",
+   "Any solute at any concentration"
+  ],
+  "answer": 0,
+  "explain": "The relation assumes ideal dilute solutions with a non-volatile solute.",
+  "kind": "concept",
+  "id": "784efffb-451e-4996-a5b9-0b9e8a3d3a79",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "For a dilute solution, the plot of ΔTb versus molality m is a straight line with slope equal to:",
+  "formula": "ΔTb = Kb·m",
+  "options": [
+   "Kb, passing through the origin",
+   "1/Kb, passing through the origin",
+   "Kb, with a positive intercept",
+   "Kb·M₂, passing through the origin"
+  ],
+  "answer": 0,
+  "explain": "ΔTb = Kb·m is linear in m with zero intercept; the slope is Kb (i = 1).",
+  "kind": "graph",
+  "id": "a98db005-9624-40c7-a353-0d7a008e71cb",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "In Kb = R·Tb²·M₁/(1000·ΔH_vap), Kb is directly proportional to which quantity of the pure solvent?",
+  "formula": "Kb = R·Tb²·M₁/(1000·ΔH_vap)",
+  "options": [
+   "Square of its boiling point Tb",
+   "Its boiling point Tb (first power)",
+   "Square root of its boiling point",
+   "Inverse of its boiling point"
+  ],
+  "answer": 0,
+  "explain": "Kb ∝ Tb² (b.p. of pure solvent in K), and Kb ∝ M₁/ΔH_vap.",
+  "kind": "formula",
+  "id": "9f8a2476-4c3d-4588-b6cb-8f3e8e4b0f37",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Kf of a solvent in terms of its molar mass M₁ (g/mol), Tf and ΔH_fus is:",
+  "formula": "Kf = R·M₁·Tf² / (1000·ΔH_fus)",
+  "options": [
+   "R·M₁·Tf / (1000·ΔH_fus)",
+   "R·M₁·Tf² / (1000·ΔH_fus)",
+   "R·Tf²·ΔH_fus / (1000·M₁)",
+   "R·M₁·Tf²·ΔH_fus / 1000"
+  ],
+  "answer": 1,
+  "explain": "Kf = R M₁ Tf²/(1000 ΔH_fus); it is inversely proportional to the latent heat of fusion.",
+  "kind": "formula",
+  "id": "a486efd8-07b2-4492-865d-976fc3c1054c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "The SI-based unit of the cryoscopic constant Kf is:",
+  "formula": "",
+  "options": [
+   "K mol kg⁻¹",
+   "K kg mol⁻¹",
+   "K mol L⁻¹",
+   "K L mol⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Kf = ΔTf/m, so the unit is K divided by mol kg⁻¹, which is K kg mol⁻¹.",
+  "kind": "unit",
+  "id": "3ac2fe36-0c04-4c25-8c10-33475f552a10",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Benzoic acid completely dimerises in benzene. Its van't Hoff factor i is:",
+  "formula": "2 C₆H₅COOH ⇌ (C₆H₅COOH)₂",
+  "options": [
+   "2",
+   "1",
+   "0.5",
+   "0.25"
+  ],
+  "answer": 2,
+  "explain": "Two solute molecules form one particle, so the particle count halves and i = 0.5.",
+  "kind": "result",
+  "id": "87ea0ac8-7900-432a-8cdb-54bedbddf545",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Which 0.1 m aqueous solution has the lowest freezing point (ideal behaviour)?",
+  "formula": "",
+  "options": [
+   "NaCl",
+   "K₂SO₄",
+   "Glucose",
+   "AlCl₃"
+  ],
+  "answer": 3,
+  "explain": "AlCl₃ gives 4 ions (i = 4), the largest i here, so it gives the largest ΔTf.",
+  "kind": "concept",
+  "id": "9a1196e2-2c81-41c0-9170-a0213de3e685",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "At the freezing point of a solution, which two are in equilibrium with equal vapour pressure?",
+  "formula": "",
+  "options": [
+   "Pure solid solvent and solution",
+   "Solid solute and solution",
+   "Pure solid solvent and pure liquid solvent",
+   "Solid solute and liquid solvent"
+  ],
+  "answer": 0,
+  "explain": "Freezing point of a solution: solid solvent and the solution have equal vapour pressure.",
+  "kind": "concept",
+  "id": "4e07a789-bc79-48d6-92de-194c65f218f1",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "A plot of ΔTf (y-axis) against molality m (x-axis) for a non-electrolyte is:",
+  "formula": "",
+  "options": [
+   "A straight line with slope Kf through the origin",
+   "A straight line with slope 1/Kf",
+   "A parabola",
+   "A straight line with intercept Kf"
+  ],
+  "answer": 0,
+  "explain": "ΔTf = Kf·m is linear in m with slope Kf and passes through the origin.",
+  "kind": "graph",
+  "id": "32857489-ab9a-4a28-b2b3-d31e45f443bd",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Kf of benzene in K kg mol⁻¹ is:",
+  "formula": "",
+  "options": [
+   "2.53",
+   "1.86",
+   "5.12",
+   "3.90"
+  ],
+  "answer": 2,
+  "explain": "Benzene has Kf = 5.12 K kg mol⁻¹ (Kb = 2.53), while water has Kf = 1.86.",
+  "kind": "fact",
+  "id": "72f5e3bf-5313-4959-bc3a-069319c8ffa5",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Molar mass of a non-electrolyte from ΔTf, with w₂ g solute in w₁ g solvent, is:",
+  "formula": "M₂ = 1000·Kf·w₂ / (ΔTf·w₁)",
+  "options": [
+   "Kf·w₂ / (1000·ΔTf·w₁)",
+   "1000·ΔTf·w₂ / (Kf·w₁)",
+   "1000·Kf·w₂ / (ΔTf·w₁)",
+   "1000·Kf·w₁ / (ΔTf·w₂)"
+  ],
+  "answer": 2,
+  "explain": "From ΔTf = Kf·(w₂/M₂)·(1000/w₁), solving for M₂ gives M₂ = 1000·Kf·w₂/(ΔTf·w₁).",
+  "kind": "formula",
+  "id": "26e098d8-a28e-48e6-8e32-87b59c324434",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "If a solute dissociates in solution, the molar mass found from ΔTf is:",
+  "formula": "",
+  "options": [
+   "Higher than the normal value",
+   "Equal to the normal value",
+   "Lower than the normal value",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Dissociation raises the particle count (i > 1), which raises ΔTf, so the observed molar mass is lower.",
+  "kind": "concept",
+  "id": "f557867d-a6d3-451b-9c40-a73cc90964e5",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Camphor is used as the solvent in the Rast method because it has:",
+  "formula": "",
+  "options": [
+   "A very large Kf",
+   "A very small Kf",
+   "A very high vapour pressure",
+   "A very low molar mass"
+  ],
+  "answer": 0,
+  "explain": "Camphor's large Kf gives a measurable ΔTf even for small amounts of solute.",
+  "kind": "fact",
+  "id": "12308fc0-07a0-485b-b13f-877f6687491e",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Why is NaCl or CaCl₂ spread on icy roads in cold regions?",
+  "formula": "",
+  "options": [
+   "It raises the freezing point of water",
+   "It lowers the freezing point of water",
+   "It increases the latent heat of ice",
+   "It raises the boiling point of water"
+  ],
+  "answer": 1,
+  "explain": "The dissolved salt depresses the freezing point of water, so the ice melts.",
+  "kind": "fact",
+  "id": "647060e6-7830-413d-92f9-5895c5ca100c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Which 0.1 m aqueous solution has the same ΔTf as 0.1 m K₂SO₄ (complete ionisation, ideal)?",
+  "formula": "",
+  "options": [
+   "Ca(NO₃)₂",
+   "NaCl",
+   "Glucose",
+   "Al₂(SO₄)₃"
+  ],
+  "answer": 0,
+  "explain": "K₂SO₄ gives 3 ions (i = 3), and Ca(NO₃)₂ also gives 3 ions (i = 3), so their ΔTf is equal.",
+  "kind": "concept",
+  "id": "bf0677d5-d74d-41e4-a711-ecbef3b0e53d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Among these solvents, which has the highest Kf value?",
+  "formula": "",
+  "options": [
+   "Cyclohexane",
+   "Benzene",
+   "Ethanol",
+   "Water"
+  ],
+  "answer": 0,
+  "explain": "Kf (K kg mol⁻¹): cyclohexane 20.0 > benzene 5.12 > ethanol 1.99 > water 1.86.",
+  "kind": "fact",
+  "id": "205f2ea2-8796-4881-af2f-fe37b4974c21",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "For a given solvent, ΔTf (depression in freezing point) is independent of which of the following?",
+  "formula": "",
+  "options": [
+   "Nature of the solute particles",
+   "Molality of the solution",
+   "Nature of the solvent",
+   "Number of solute particles"
+  ],
+  "answer": 0,
+  "explain": "ΔTf is a colligative property: depends on the number of particles and the solvent's Kf, not the solute's identity.",
+  "kind": "concept",
+  "id": "30a8cc08-0869-4f76-8182-20fca73a961f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Molar mass of solute from osmotic pressure (w g in V litre): M = ?",
+  "formula": "π = (w/M)(RT/V)",
+  "options": [
+   "wRT/(πV)",
+   "πV/(wRT)",
+   "wπ/(RTV)",
+   "wRTV/π"
+  ],
+  "answer": 0,
+  "explain": "π V = nRT = (w/M)RT, so M = wRT/(πV).",
+  "kind": "formula",
+  "id": "ea940ac7-f4cf-4cb6-8f92-108e00cb4785",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "Van't Hoff factor i for a non-electrolyte like glucose in dilute aqueous solution is:",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "2",
+   "Less than 1"
+  ],
+  "answer": 0,
+  "explain": "No dissociation or association, so i = 1.",
+  "kind": "fact",
+  "id": "7c4748a0-f1d8-4d85-9eaf-9183dd4a41fe",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "Osmotic pressure of a solution at constant concentration is directly proportional to:",
+  "formula": "π = CRT",
+  "options": [
+   "Absolute temperature",
+   "Square of temperature",
+   "Inverse of temperature",
+   "Celsius temperature"
+  ],
+  "answer": 0,
+  "explain": "π = CRT, so π ∝ T (in kelvin).",
+  "kind": "concept",
+  "id": "3307d400-5a3d-4f1f-b4e8-536024dd11ca",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "Red blood cells placed in a hypotonic solution will:",
+  "formula": "",
+  "options": [
+   "Swell and may burst",
+   "Shrink",
+   "Remain unchanged",
+   "Dissolve completely at once"
+  ],
+  "answer": 0,
+  "explain": "Water enters the cell by osmosis from the lower osmotic pressure side, causing swelling.",
+  "kind": "concept",
+  "id": "92b48847-e29d-4023-8c0d-61fc5795ebba",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "Which 0.01 M solution has the highest osmotic pressure (assume complete ionisation)?",
+  "formula": "",
+  "options": [
+   "Al₂(SO₄)₃",
+   "K₂SO₄",
+   "NaCl",
+   "Glucose"
+  ],
+  "answer": 0,
+  "explain": "Al₂(SO₄)₃ gives 5 ions (i = 5), the highest i value.",
+  "kind": "exception",
+  "id": "2b690fb1-d68f-45a3-b749-82bfabad9f2f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "A cell placed in 0.9% (w/v) NaCl solution (isotonic with blood) will:",
+  "formula": "",
+  "options": [
+   "Show no net change in size",
+   "Shrink",
+   "Swell",
+   "Burst"
+  ],
+  "answer": 0,
+  "explain": "0.9% NaCl is isotonic with cell fluid, so there is no net water flow.",
+  "kind": "fact",
+  "id": "6722bda7-2495-4701-9d9e-976fb97122c0",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "Osmotic pressure of a solution is the pressure that:",
+  "formula": "",
+  "options": [
+   "Just stops osmosis when applied on the solution",
+   "Starts osmosis",
+   "Is exerted by solvent vapour",
+   "Is applied on pure solvent to stop flow"
+  ],
+  "answer": 0,
+  "explain": "It is the excess pressure applied on the solution side that just prevents solvent entry through the membrane.",
+  "kind": "concept",
+  "id": "98804817-1195-4ae2-ad13-62a629f27703",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "Which is a practical use of reverse osmosis?",
+  "formula": "",
+  "options": [
+   "Desalination of sea water",
+   "Preparing isotonic saline",
+   "Raising boiling point",
+   "Determining vapour pressure"
+  ],
+  "answer": 0,
+  "explain": "Applying pressure above π on seawater forces pure water through the membrane (desalination).",
+  "kind": "fact",
+  "id": "9d651b93-a077-4752-ac2f-caeb3ce09949",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "Modified depression in freezing point equation including van't Hoff factor:",
+  "formula": "ΔT_f = i K_f m",
+  "options": [
+   "ΔT_f = K_f m / i",
+   "ΔT_f = i K_f m",
+   "ΔT_f = K_f m i²",
+   "ΔT_f = (i − 1) K_f m"
+  ],
+  "answer": 1,
+  "explain": "Colligative property is directly proportional to i, so ΔT_f = i K_f m.",
+  "kind": "formula",
+  "id": "3c10153f-264c-448c-bcc3-297c03451774",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "van't Hoff factor, abnormal molar mass"
+ },
+ {
+  "prompt": "Osmotic pressure of a solution of an electrolyte with van't Hoff factor i is given by:",
+  "formula": "π = i C R T",
+  "options": [
+   "π = C R T / i",
+   "π = i C R T",
+   "π = (i − 1) C R T",
+   "π = C R T i²"
+  ],
+  "answer": 1,
+  "explain": "Colligative property scales with i, hence π = iCRT.",
+  "kind": "formula",
+  "id": "5a030396-a5ea-4755-9bc1-b20747585bc8",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "van't Hoff factor, abnormal molar mass"
+ },
+ {
+  "prompt": "Van't Hoff factor i is defined as the ratio of:",
+  "formula": "i = (observed colligative property)/(calculated colligative property)",
+  "options": [
+   "Observed to calculated colligative property",
+   "Calculated to observed colligative property",
+   "Observed to calculated molar mass",
+   "Moles of solute before to after dissociation"
+  ],
+  "answer": 0,
+  "explain": "i = observed colligative property / theoretical value; it equals calculated M / observed M, the inverse of the molar mass ratio.",
+  "kind": "concept",
+  "id": "d4f7b749-30f0-468c-aeb2-1c60ba3e2e25",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "van't Hoff factor, abnormal molar mass"
+ },
+ {
+  "prompt": "For a solution of a non-volatile solute, the vapour pressure over it is contributed by:",
+  "formula": "P = x₁P°",
+  "options": [
+   "Solvent only",
+   "Solute only",
+   "Solute and solvent equally",
+   "Solvent and solute in the ratio of x₂:x₁"
+  ],
+  "answer": 0,
+  "explain": "The solute does not evaporate, so the entire vapour pressure comes from the solvent.",
+  "kind": "concept",
+  "id": "ec777340-6787-4b4e-99b9-28bdf66b5e92",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "0.1 m glucose and 0.1 m urea, both in water. Their RLVP values are:",
+  "formula": "",
+  "options": [
+   "Equal",
+   "Higher for glucose",
+   "Higher for urea",
+   "Zero for urea"
+  ],
+  "answer": 0,
+  "explain": "Both are non-electrolytes at equal molality, so x₂ and RLVP are the same.",
+  "kind": "concept",
+  "id": "fd2d73e1-60fe-47be-a420-7361cd04db4c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Vapour pressure–temperature curve of a non-volatile solute solution, relative to pure solvent, lies:",
+  "formula": "",
+  "options": [
+   "Below it at every temperature",
+   "Above it at every temperature",
+   "Coincident with it",
+   "Crossing it at the boiling point"
+  ],
+  "answer": 0,
+  "explain": "P < P° at each T, so the solution curve lies below and reaches 1 atm at a higher temperature.",
+  "kind": "graph",
+  "id": "d3f35c32-3e57-467e-bac0-7087666c6b72",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Elevation of boiling point of a solution of a non-volatile solute arises directly from:",
+  "formula": "",
+  "options": [
+   "Lowering of vapour pressure",
+   "Rise in solvent density",
+   "Increase in solute volatility",
+   "Decrease in P° of the pure solvent"
+  ],
+  "answer": 0,
+  "explain": "The solution's vapour pressure is lower, so a higher temperature is needed to reach atmospheric pressure.",
+  "kind": "concept",
+  "id": "6b847543-6961-4215-b41a-5c0184ea0254",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "For a non-volatile solute in an ideal solution, P/P° equals which quantity?",
+  "formula": "P = x₁P°",
+  "options": [
+   "Mole fraction of solvent",
+   "Mole fraction of solute",
+   "Molality of solution",
+   "Molarity of solution"
+  ],
+  "answer": 0,
+  "explain": "Raoult's law: P = x₁P°, so P/P° = x₁, the mole fraction of the solvent.",
+  "kind": "result",
+  "id": "e2f24b39-22df-4bf0-8e6a-600a7c53572c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Same mole fraction of a non-volatile solute in water and in benzene. Their RLVP values are:",
+  "formula": "(P° − P)/P° = x₂",
+  "options": [
+   "Equal",
+   "Higher in water",
+   "Higher in benzene",
+   "Depends on the P° of the solvent"
+  ],
+  "answer": 0,
+  "explain": "RLVP = x₂, independent of the nature of the solvent and its P°, so the values are equal.",
+  "kind": "concept",
+  "id": "4ec28831-ec9e-4ab0-af69-d82367e8f381",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Which solvent has the highest Kb value?",
+  "formula": "",
+  "options": [
+   "Water",
+   "Benzene",
+   "Ethanol",
+   "Carbon tetrachloride"
+  ],
+  "answer": 3,
+  "explain": "Kb (K kg/mol): CCl₄ 5.03 > benzene 2.53 > water 0.52; ethanol is 1.22.",
+  "kind": "fact",
+  "id": "315d80fc-41ca-4836-8435-b123354788af",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "If a solute dissociates in the solvent, the observed ΔTb compared with the value calculated without dissociation is:",
+  "formula": "ΔTb = i·Kb·m",
+  "options": [
+   "Higher, since i > 1",
+   "Lower, since i < 1",
+   "Equal, since Kb is unchanged",
+   "Zero, since solute count is unchanged"
+  ],
+  "answer": 0,
+  "explain": "Dissociation gives more particles, so i > 1 and the observed ΔTb is higher.",
+  "kind": "concept",
+  "id": "0f3f4703-90be-4f07-acd4-6a858b33f77f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Association of solute in solvent gives van't Hoff factor i and the observed ΔTf compared with normal value is:",
+  "formula": "i < 1 ⇒ ΔTf(obs) < ΔTf(calc)",
+  "options": [
+   "Lower than the calculated value",
+   "Higher than the calculated value",
+   "Equal to the calculated value",
+   "Doubled the calculated value"
+  ],
+  "answer": 0,
+  "explain": "Association reduces the number of particles, so i < 1 and the observed ΔTf is lower than the normal value.",
+  "kind": "concept",
+  "id": "598d91b1-0a77-429f-9b92-df3b3fb97bb2",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Which of the following is a correct statement about Kf of a solvent?",
+  "formula": "",
+  "options": [
+   "It is a property of the solvent only",
+   "It depends on the nature of the solute",
+   "It depends on the solute concentration",
+   "It is same for all solvents"
+  ],
+  "answer": 0,
+  "explain": "Kf = R·M₁·Tf²/(1000·ΔH_fus) involves only solvent properties, not the solute or its concentration.",
+  "kind": "concept",
+  "id": "f34a7d42-4bc8-4e31-86eb-b2af3331fa82",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Depression of freezing point and Kf"
+ },
+ {
+  "prompt": "Dilute solution, molality m, solvent molar mass M₁ (g/mol): RLVP ≈ ?",
+  "formula": "(P° − P)/P° ≈ n₂/n₁",
+  "options": [
+   "m·M₁/1000",
+   "1000/(m·M₁)",
+   "m/(1000·M₁)",
+   "m·M₁"
+  ],
+  "answer": 0,
+  "explain": "n₂/n₁ = m×(M₁/1000), since 1000 g solvent holds 1000/M₁ mol.",
+  "kind": "formula",
+  "id": "e49ce9e5-6049-4d69-a467-b63d2fcd3e34",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "For a fixed x₂ of non-volatile solute, the absolute lowering (P° − P) with rising temperature:",
+  "formula": "P° − P = x₂P°",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Stays constant",
+   "First increases, then decreases"
+  ],
+  "answer": 0,
+  "explain": "P° − P = x₂P°; P° rises with temperature, so the absolute lowering rises while RLVP stays x₂.",
+  "kind": "trend",
+  "id": "4da98c6a-bc67-4bcd-9b87-df14c2e7d2ff",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "For a given solvent, the value of Kb is independent of which factor?",
+  "formula": "",
+  "options": [
+   "Nature of the solute",
+   "Enthalpy of vaporisation of solvent",
+   "Boiling point of solvent",
+   "Molar mass of solvent"
+  ],
+  "answer": 0,
+  "explain": "Kb = RTb²M₁/(1000ΔH_vap) involves only solvent properties, so it is independent of the solute.",
+  "kind": "concept",
+  "id": "7e4f1e0d-1d6e-4406-8401-4c04142ac57f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Ebullioscopic constant Kb of ethanol (K kg mol⁻¹) is nearly:",
+  "formula": "",
+  "options": [
+   "0.52",
+   "1.20",
+   "2.53",
+   "3.63"
+  ],
+  "answer": 1,
+  "explain": "NCERT table: water 0.52, ethanol 1.20, benzene 2.53, chloroform 3.63.",
+  "kind": "fact",
+  "id": "a02b64bb-944f-4efa-b00f-a7edc896784b",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "At equilibrium vapour pressure of a liquid in a closed vessel, which two rates are equal?",
+  "formula": "",
+  "options": [
+   "Evaporation and condensation",
+   "Boiling and freezing",
+   "Diffusion and effusion",
+   "Evaporation and sublimation"
+  ],
+  "answer": 0,
+  "explain": "Vapour pressure is the pressure at dynamic equilibrium: rate of evaporation = rate of condensation.",
+  "kind": "concept",
+  "id": "32ef1281-146d-4add-8510-f3bcf867b3b2",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "Which liquid has the highest vapour pressure at 25 °C?",
+  "formula": "",
+  "options": [
+   "Diethyl ether",
+   "Ethanol",
+   "Water",
+   "Glycerol"
+  ],
+  "answer": 0,
+  "explain": "Ether has no H-bonding and the weakest intermolecular forces, so it is the most volatile.",
+  "kind": "trend",
+  "id": "1445f8de-8ec3-4611-b649-132439c64639",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "The standard boiling point of water (vapour pressure = 1 bar) is about:",
+  "formula": "",
+  "options": [
+   "99.6 °C",
+   "100.0 °C",
+   "101.3 °C",
+   "98.4 °C"
+  ],
+  "answer": 0,
+  "explain": "The normal boiling point (1 atm) is 100 °C. At 1 bar, slightly lower pressure gives 99.6 °C.",
+  "kind": "fact",
+  "id": "81c45e4c-dbb1-41a8-b54a-6e90c5f97c30",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "At a given temperature, a liquid with higher vapour pressure has which normal boiling point and intermolecular forces?",
+  "formula": "",
+  "options": [
+   "Lower b.p., weaker forces",
+   "Higher b.p., weaker forces",
+   "Lower b.p., stronger forces",
+   "Higher b.p., stronger forces"
+  ],
+  "answer": 0,
+  "explain": "Weak forces mean easy escape and high vapour pressure, so 1 atm is reached at a lower temperature.",
+  "kind": "concept",
+  "id": "7f03895a-33a0-4c88-8bae-ceca854e7053",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure of liquids and solutions"
+ },
+ {
+  "prompt": "In an ideal binary solution, A–B intermolecular forces compared with A–A and B–B forces are:",
+  "formula": "",
+  "options": [
+   "Equal in strength",
+   "Stronger",
+   "Weaker",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Ideal solution: A–B interactions match A–A and B–B, so ΔH_mix = 0 and ΔV_mix = 0.",
+  "kind": "concept",
+  "id": "f1fb4038-1c82-4c19-8efb-ae2f58dc52a3",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "For an equimolar ideal binary mixture, vapour mole fraction y_A equals:",
+  "formula": "",
+  "options": [
+   "P_A°/(P_A° + P_B°)",
+   "P_A°/P_B°",
+   "P_B°/(P_A° + P_B°)",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "x_A = x_B gives p_A : p_B = P_A° : P_B°, so y_A = P_A°/(P_A° + P_B°).",
+  "kind": "result",
+  "id": "a9561735-b258-402d-9d41-fe5c7b5fcdab",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "The composition of an azeotrope of two given liquids depends on:",
+  "formula": "",
+  "options": [
+   "External pressure",
+   "Only the amount of mixture",
+   "Only the container volume",
+   "Nothing; it is fixed"
+  ],
+  "answer": 0,
+  "explain": "An azeotrope is a mixture, not a compound. Its composition and boiling point change with pressure.",
+  "kind": "fact",
+  "id": "f43ae381-5a5b-40e3-83ee-64e05086dd9b",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "If P_A° = P_B°, the total vapour pressure of their ideal solution:",
+  "formula": "",
+  "options": [
+   "Is independent of composition",
+   "Is zero",
+   "Is double P_A°",
+   "Rises linearly with x_A"
+  ],
+  "answer": 0,
+  "explain": "P = x_A·P° + x_B·P° = P°(x_A + x_B) = P°, which is constant.",
+  "kind": "result",
+  "id": "3a882b2b-0c33-4fa7-9cda-fe00a6cdb5e1",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "At fixed T, the total vapour pressure of an ideal solution of A and B (P_A° > P_B°) always lies:",
+  "formula": "P = P_B° + (P_A° − P_B°)x_A",
+  "options": [
+   "Between P_B° and P_A°",
+   "Above P_A°",
+   "Below P_B°",
+   "At P_A° + P_B°"
+  ],
+  "answer": 0,
+  "explain": "P is a linear mix of P_B° and P_A°, so it lies between the two pure-liquid values.",
+  "kind": "concept",
+  "id": "31272d31-ddde-4fa7-b4ca-ad3fc20cf749",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "For an ideal binary solution, which plot against vapour-phase mole fraction y_A is a straight line?",
+  "formula": "1/P = y_A/P_A° + y_B/P_B°",
+  "options": [
+   "P vs y_A",
+   "1/P vs y_A",
+   "ln P vs y_A",
+   "P² vs y_A"
+  ],
+  "answer": 1,
+  "explain": "Using y_A = x_A·P_A°/P gives 1/P = y_A/P_A° + y_B/P_B°, linear in y_A.",
+  "kind": "graph",
+  "id": "3c207504-369f-4aad-aac6-b338d977f9a9",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "For an ideal solution formed by mixing two volatile liquids, ΔG_mix is:",
+  "formula": "ΔG_mix = ΔH_mix − TΔS_mix",
+  "options": [
+   "Positive",
+   "Negative",
+   "Zero",
+   "Equal to ΔH_mix"
+  ],
+  "answer": 1,
+  "explain": "ΔH_mix = 0 and ΔS_mix > 0, so ΔG_mix = −TΔS_mix < 0.",
+  "kind": "concept",
+  "id": "69ca7397-62aa-424d-9caf-38ca3b121f0c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Raoult's law for volatile liquid mixtures"
+ },
+ {
+  "prompt": "For mixing to form an ideal solution at constant T and P, ΔG_mix is:",
+  "formula": "ΔG_mix = RT Σ nᵢ ln xᵢ",
+  "options": [
+   "Positive",
+   "Zero",
+   "Negative",
+   "Depends on ΔH_mix"
+  ],
+  "answer": 2,
+  "explain": "ΔH = 0 and ΔS > 0, so ΔG = –TΔS < 0 (each ln xᵢ < 0).",
+  "kind": "result",
+  "id": "b0d2fca0-12d9-4771-aed8-9d72d86eb31c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Two liquids forming an ideal solution are mixed in an insulated vessel. The temperature of the mixture:",
+  "formula": "",
+  "options": [
+   "Rises",
+   "Falls",
+   "Remains unchanged",
+   "Rises then falls"
+  ],
+  "answer": 2,
+  "explain": "ΔH_mix = 0, so no heat is absorbed or evolved and temperature stays constant.",
+  "kind": "concept",
+  "id": "eace66e6-a0ff-4f5d-8ed1-bb1f7214cccc",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Which statement about an ideal binary solution is correct?",
+  "formula": "",
+  "options": [
+   "It forms a minimum-boiling azeotrope",
+   "It forms a maximum-boiling azeotrope",
+   "It does not form an azeotrope",
+   "It always forms an azeotrope at x = 0.5"
+  ],
+  "answer": 2,
+  "explain": "Ideal solutions show no deviation from Raoult's law, so no azeotrope; they can be separated by fractional distillation.",
+  "kind": "fact",
+  "id": "e0d187de-930b-4166-8c57-229d863e7035",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Which feature of the two components favours ideal solution formation?",
+  "formula": "",
+  "options": [
+   "Large difference in polarity",
+   "Hydrogen bonding in only one",
+   "Very different molecular sizes",
+   "Similar molecular size and polarity"
+  ],
+  "answer": 3,
+  "explain": "Similar size, structure and polarity give nearly equal A–A, B–B and A–B interactions.",
+  "kind": "concept",
+  "id": "c92e91c4-3236-4168-b5be-1ad755200196",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Ideal solutions: conditions, ΔHmix, ΔVmix"
+ },
+ {
+  "prompt": "Which pair shows negative deviation from Raoult's law?",
+  "formula": "",
+  "options": [
+   "CS₂ + acetone",
+   "Chloroform + diethyl ether",
+   "Benzene + toluene",
+   "Ethanol + cyclohexane"
+  ],
+  "answer": 1,
+  "explain": "CHCl₃ H-bonds with the ether oxygen, so A–B attraction is stronger than A–A and B–B (negative deviation).",
+  "kind": "fact",
+  "id": "2d37444b-4267-43cc-a8c4-91f4e2c5e570",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "Aqueous HCl forms an azeotrope at about 20% HCl by mass (b.p. 108.6 °C). Its type is:",
+  "formula": "",
+  "options": [
+   "Maximum boiling, negative deviation",
+   "Minimum boiling, positive deviation",
+   "Maximum boiling, positive deviation",
+   "Minimum boiling, negative deviation"
+  ],
+  "answer": 0,
+  "explain": "HCl–water shows large negative deviation, so it gives a maximum-boiling azeotrope (b.p. 108.6 °C, above both components).",
+  "kind": "fact",
+  "id": "b22c7643-327d-4db5-af16-caf62900055c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Positive and negative deviations, examples"
+ },
+ {
+  "prompt": "In an ideal P–composition diagram, the vapour-composition curve lies ___ the liquid (straight) line.",
+  "formula": "",
+  "options": [
+   "Below",
+   "Above",
+   "On",
+   "Perpendicular to"
+  ],
+  "answer": 0,
+  "explain": "Liquid (bubble) line is on top; vapour (dew) curve lies below it. Vapour is richer in the more volatile component.",
+  "kind": "graph",
+  "id": "9b48c011-ba4d-42b0-9635-93c128f8072f",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Positive deviation: near x_A → 0, the p_A–x_A curve has slope K_H that is ___ p_A°.",
+  "formula": "",
+  "options": [
+   "Greater than",
+   "Less than",
+   "Equal to",
+   "Zero compared with"
+  ],
+  "answer": 0,
+  "explain": "p_A curve lies above Raoult's line, so initial slope K_H > p_A°; for negative deviation K_H < p_A°.",
+  "kind": "graph",
+  "id": "de18d2f2-f311-4893-b498-f4686467e25c",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "In a non-ideal p_A vs x_A plot, the curve merges with Raoult's line as:",
+  "formula": "",
+  "options": [
+   "x_A → 0",
+   "x_A → 1",
+   "x_A = 0.5",
+   "x_B → 1"
+  ],
+  "answer": 1,
+  "explain": "Solvent obeys Raoult's law as x_A → 1; the solute (x_A → 0) follows Henry's law.",
+  "kind": "graph",
+  "id": "6c516068-5c0e-4a32-9f8b-ed6698e24711",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "A boiling point–composition (T–x) curve for a system with negative deviation shows a:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Minimum",
+   "Straight line",
+   "Point of inflection only"
+  ],
+  "answer": 0,
+  "explain": "Negative deviation gives a P–x minimum, hence a T–x maximum (maximum-boiling azeotrope).",
+  "kind": "graph",
+  "id": "0e1e8fb9-78f4-478c-a96a-b0995a26c701",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Which type of binary liquid solution can never show an azeotropic point in its P–x plot?",
+  "formula": "",
+  "options": [
+   "Ideal solution",
+   "Positive-deviation solution",
+   "Negative-deviation solution",
+   "Strongly non-ideal solution"
+  ],
+  "answer": 0,
+  "explain": "Ideal solutions have a linear P–x plot with no maximum or minimum, so no azeotrope.",
+  "kind": "concept",
+  "id": "0ee1aeaf-f4bd-49e7-b604-433c6699211d",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "For a given azeotropic pair, changing the external pressure changes the azeotrope's:",
+  "formula": "",
+  "options": [
+   "Composition and boiling point",
+   "Only the sign of deviation",
+   "Nothing at all",
+   "Only the molar mass"
+  ],
+  "answer": 0,
+  "explain": "An azeotrope is a mixture, not a compound; its composition and boiling point vary with pressure.",
+  "kind": "fact",
+  "id": "b5c74761-667f-49d5-a6e1-afc8e2d0dbbf",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Vapour pressure–composition plots"
+ },
+ {
+  "prompt": "Which pair forms a minimum-boiling azeotrope with ~95.6% ethanol by mass?",
+  "formula": "",
+  "options": [
+   "Ethanol + water",
+   "Acetone + chloroform",
+   "HCl + water",
+   "HNO₃ + water"
+  ],
+  "answer": 0,
+  "explain": "Ethanol–water (95.6% ethanol) boils at 351.1 K, lower than either component; it shows positive deviation.",
+  "kind": "fact",
+  "id": "d904b655-76da-4024-b284-49a310b254cf",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Azeotropes: min and max boiling"
+ },
+ {
+  "prompt": "Which azeotrope is a maximum-boiling mixture with about 68% HNO₃ by mass, boiling near 393 K?",
+  "formula": "",
+  "options": [
+   "HNO₃ + water",
+   "Ethanol + water",
+   "Acetone + CS₂",
+   "Benzene + toluene"
+  ],
+  "answer": 0,
+  "explain": "HNO₃–water (68% HNO₃, ~393 K) shows negative deviation and is a maximum-boiling azeotrope.",
+  "kind": "fact",
+  "id": "54642f17-950c-4943-99b0-98d822ff0e82",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Azeotropes: min and max boiling"
+ },
+ {
+  "prompt": "Adding more pure solvent to a solution of a non-volatile solute at constant T, its vapour pressure:",
+  "formula": "P = P°·x₁",
+  "options": [
+   "Increases towards P° of the solvent",
+   "Decreases towards zero",
+   "Stays constant",
+   "Becomes greater than P°"
+  ],
+  "answer": 0,
+  "explain": "Dilution raises x₁ (solvent mole fraction), so P = P°x₁ rises towards P° but never exceeds it.",
+  "kind": "concept",
+  "id": "7ab436dc-27d0-47b1-9079-9564e56aeea4",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "At the normal boiling point of the pure solvent, the vapour pressure of its non-volatile solute solution is:",
+  "formula": "",
+  "options": [
+   "Less than 1 atm",
+   "Exactly 1 atm",
+   "More than 1 atm",
+   "Equal to P° of solute"
+  ],
+  "answer": 0,
+  "explain": "Vapour pressure is lowered, so it is below 1 atm and a higher temperature is needed to boil the solution.",
+  "kind": "concept",
+  "id": "d1b72edd-26b7-407e-b2cf-579e1d35d9dc",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Relative lowering of vapour pressure"
+ },
+ {
+  "prompt": "Ebullioscopic constant Kb of chloroform (K kg mol⁻¹) is nearly:",
+  "formula": "",
+  "options": [
+   "2.53",
+   "2.79",
+   "3.63",
+   "5.03"
+  ],
+  "answer": 2,
+  "explain": "Kb values: benzene 2.53, cyclohexane 2.79, chloroform 3.63, CCl₄ 5.03.",
+  "kind": "fact",
+  "id": "1cb96e6d-3c53-4c4b-9123-168d07883fe5",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Same non-electrolyte, same molality: largest ΔTb occurs in which solvent?",
+  "formula": "ΔTb = Kb·m",
+  "options": [
+   "Water",
+   "Ethanol",
+   "Acetone",
+   "Benzene"
+  ],
+  "answer": 3,
+  "explain": "ΔTb ∝ Kb: benzene 2.53 > acetone 1.72 > ethanol 1.20 > water 0.52.",
+  "kind": "trend",
+  "id": "337641e9-7df2-498b-94a9-4e86a60ebf1b",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "While a solution of non-volatile solute boils in an open vessel, its boiling point:",
+  "formula": "",
+  "options": [
+   "Stays exactly constant",
+   "Gradually rises",
+   "Gradually falls",
+   "Becomes equal to pure solvent"
+  ],
+  "answer": 1,
+  "explain": "Solvent escapes, molality rises, so ΔTb increases and the boiling point keeps rising.",
+  "kind": "concept",
+  "id": "e12af303-429e-43c4-a4ec-09aa7407d2a0",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "Equal masses dissolved in equal water: which gives the highest ΔTb?",
+  "formula": "",
+  "options": [
+   "Urea (60)",
+   "Glucose (180)",
+   "NaCl (58.5)",
+   "Sucrose (342)"
+  ],
+  "answer": 2,
+  "explain": "ΔTb ∝ i/M₂; NaCl has the lowest M₂ and i ≈ 2, so highest ΔTb.",
+  "kind": "concept",
+  "id": "01f5b2c1-e297-4a3b-bcf0-da3ff98abf33",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Elevation of boiling point and Kb"
+ },
+ {
+  "prompt": "0.1 M glucose is isotonic with which aqueous solution (complete ionisation)?",
+  "formula": "π = iCRT",
+  "options": [
+   "0.05 M NaCl",
+   "0.1 M NaCl",
+   "0.05 M Na₂SO₄",
+   "0.1 M CaCl₂"
+  ],
+  "answer": 0,
+  "explain": "Isotonic means equal iC. Glucose gives 0.1, and 0.05 M NaCl gives 2 × 0.05 = 0.1.",
+  "kind": "concept",
+  "id": "db38c86c-51d8-4e18-9e44-26c2b3dee15b",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "A plant or animal cell placed in a hypertonic solution will:",
+  "formula": "",
+  "options": [
+   "Lose water and shrink",
+   "Gain water and swell",
+   "Burst due to endosmosis",
+   "Show no net water movement"
+  ],
+  "answer": 0,
+  "explain": "Water flows out of the cell to the more concentrated outside solution, so the cell shrinks (plasmolysis).",
+  "kind": "concept",
+  "id": "5df9b296-e355-4218-bf9d-9622c9450766",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "Osmosis, osmotic pressure, isotonic solutions"
+ },
+ {
+  "prompt": "As a NaCl solution is diluted indefinitely, its van't Hoff factor i approaches:",
+  "formula": "",
+  "options": [
+   "1, as for a non-electrolyte",
+   "2, from below",
+   "Above 2",
+   "0.5"
+  ],
+  "answer": 1,
+  "explain": "At higher concentration interionic attraction makes i < 2; on dilution it approaches the ideal value of 2.",
+  "kind": "trend",
+  "id": "c2a210ca-38cb-49cd-8c6d-dc9c24f79985",
+  "subject": "Chemistry",
+  "chapter": "Solutions",
+  "topic": "van't Hoff factor, abnormal molar mass"
+ }
+]

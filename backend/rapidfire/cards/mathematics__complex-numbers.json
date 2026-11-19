@@ -1,1478 +1,3118 @@
 [
-  {
-    "id": "6fa00185-a5e9-484f-ab87-342ed5d08ecd",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Value of i⁴ⁿ where n is a positive integer?",
-    "formula": "i⁴ⁿ = 1",
-    "options": [
-      "-i",
-      "1",
-      "-1",
-      "i"
-    ],
-    "answer": 1,
-    "explain": "Powers of i cycle with period 4: i¹=i, i²=-1, i³=-i, i⁴=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b24eada8-6625-4c1d-982c-1e4ea867e05e",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Modulus of z = a + ib is?",
-    "formula": "|z| = √(a²+b²)",
-    "options": [
-      "√(a²+b²)",
-      "√(a²-b²)",
-      "a+b",
-      "a²+b²"
-    ],
-    "answer": 0,
-    "explain": "Modulus is the distance from origin in Argand plane: |z|=√(a²+b²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cf8415c2-c189-42c4-bda7-7c1532326803",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Argument of z = -1 + 0i is?",
-    "formula": "arg(z) = π",
-    "options": [
-      "-π/2",
-      "π",
-      "π/2",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "z=-1 lies on negative real axis, so arg(z)=π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "88a92be0-0284-4d3a-8fac-c6988b3268d7",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Conjugate of z = a+ib is z̄. What is z·z̄?",
-    "formula": "z·z̄ = |z|²",
-    "options": [
-      "|z|²",
-      "2a",
-      "|z|",
-      "2ib"
-    ],
-    "answer": 0,
-    "explain": "(a+ib)(a-ib)=a²+b²=|z|²; a real non-negative number.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aef20852-ee6d-48e2-a4b6-0be0607d206e",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Polar form of z with modulus r and argument θ?",
-    "formula": "z = r(cosθ + i sinθ)",
-    "options": [
-      "r·e^{-iθ}",
-      "r(cosθ-i sinθ)",
-      "r(cosθ+i sinθ)",
-      "r(sinθ+i cosθ)"
-    ],
-    "answer": 2,
-    "explain": "Polar form: z = r(cosθ+i sinθ) = re^{iθ} by Euler's formula.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c288ceca-432e-4874-af27-ab962eb22448",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Euler's formula: e^{iθ} = ?",
-    "formula": "e^{iθ} = cosθ + i sinθ",
-    "options": [
-      "cosθ+i sinθ",
-      "e^θ(cosθ+i sinθ)",
-      "sinθ+i cosθ",
-      "cosθ-i sinθ"
-    ],
-    "answer": 0,
-    "explain": "Euler's identity: e^{iθ}=cosθ+i sinθ, fundamental in complex analysis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b5a9ff93-2c9b-431b-9199-d05f0b511912",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "De Moivre's Theorem: (cosθ+i sinθ)ⁿ = ?",
-    "formula": "(cosθ+i sinθ)ⁿ = cos(nθ)+i sin(nθ)",
-    "options": [
-      "cos(nθ)-i sin(nθ)",
-      "cos(nθ)+i sin(nθ)",
-      "cosⁿθ+i sinⁿθ",
-      "n cosθ+i n sinθ"
-    ],
-    "answer": 1,
-    "explain": "De Moivre's theorem for integer n: (cosθ+i sinθ)ⁿ=cos(nθ)+i sin(nθ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e8bf84c6-5de4-4bca-b4b0-980b564677af",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "For z = re^{iθ}, what is arg(z̄)?",
-    "formula": "arg(z̄) = -θ",
-    "options": [
-      "θ",
-      "-θ",
-      "π-θ",
-      "π+θ"
-    ],
-    "answer": 1,
-    "explain": "Conjugate reflects across real axis, so argument negates: arg(z̄)=-arg(z).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4270366b-c1e7-486a-84ec-598fcead8d16",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "|z₁·z₂| equals?",
-    "formula": "|z₁||z₂|",
-    "options": [
-      "|z₁|·|z₂|",
-      "|z₁|²+|z₂|²",
-      "|z₁|-|z₂|",
-      "|z₁|+|z₂|"
-    ],
-    "answer": 0,
-    "explain": "Modulus is multiplicative: |z₁z₂|=|z₁||z₂|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "46b67e3f-f5ee-42f5-bb86-a7c5c25c1ff9",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "arg(z₁/z₂) equals?",
-    "formula": "arg(z₁)-arg(z₂)",
-    "options": [
-      "arg(z₁)+arg(z₂)",
-      "arg(z₁)-arg(z₂)",
-      "arg(z₁)/arg(z₂)",
-      "arg(z₁)·arg(z₂)"
-    ],
-    "answer": 1,
-    "explain": "Argument of quotient: arg(z₁/z₂)=arg(z₁)-arg(z₂) (mod 2π).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "539d3e70-aabd-4d9b-87f4-2d4445192053",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The cube roots of unity satisfy: 1+ω+ω² = ?",
-    "formula": "1+ω+ω² = 0",
-    "options": [
-      "3",
-      "0",
-      "1",
-      "-1"
-    ],
-    "answer": 1,
-    "explain": "Sum of all three cube roots of unity is zero: 1+ω+ω²=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1169ca3c-e115-409f-aa29-c3313a517ab1",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Product of cube roots of unity: 1·ω·ω² = ?",
-    "formula": "ω³ = 1",
-    "options": [
-      "0",
-      "1",
-      "ω",
-      "-1"
-    ],
-    "answer": 1,
-    "explain": "Product of cube roots of unity equals 1 since ω³=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e8ae9238-e435-405e-a5ac-dd7c7091d6f2",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Non-real cube root of unity: ω² equals?",
-    "formula": "ω² = ω̄",
-    "options": [
-      "conjugate of ω",
-      "1/ω²",
-      "-1/ω",
-      "-ω"
-    ],
-    "answer": 0,
-    "explain": "For |ω|=1, ω²=1/ω=ω̄ (conjugate of ω).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "95f1d17b-8439-42d7-b9c6-b78b550a2f00",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Triangle inequality for complex numbers states?",
-    "formula": "||z₁|-|z₂|| ≤ |z₁+z₂| ≤ |z₁|+|z₂|",
-    "options": [
-      "|z₁+z₂|≤|z₁|-|z₂||",
-      "|z₁+z₂|≤|z₁|+|z₂|",
-      "|z₁+z₂|≥|z₁|+|z₂|",
-      "|z₁+z₂|=|z₁|+|z₂|"
-    ],
-    "answer": 1,
-    "explain": "Triangle inequality: |z₁+z₂|≤|z₁|+|z₂|, equality iff arg(z₁)=arg(z₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ed7b7262-be4b-4e9e-a7e8-0beb33cc3ef4",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Locus of |z - z₀| = r in Argand plane?",
-    "formula": "",
-    "options": [
-      "Line through z₀",
-      "Parabola",
-      "Ellipse",
-      "Circle centre z₀ radius r"
-    ],
-    "answer": 3,
-    "explain": "|z-z₀|=r represents a circle with centre z₀ and radius r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "98d8ada7-555d-4f50-bce7-e4bb1aa117c2",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Locus of |z-a| = |z-b| in Argand plane?",
-    "formula": "",
-    "options": [
-      "Circle through a,b",
-      "Perp bisector of segment ab",
-      "Ellipse with foci a,b",
-      "Line through a,b"
-    ],
-    "answer": 1,
-    "explain": "Equal distances from two points gives perpendicular bisector of segment joining them.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a19b3581-cd84-450f-ad19-d4a5445ffd1c",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If |z| = 1, then z⁻¹ equals?",
-    "formula": "z⁻¹ = z̄",
-    "options": [
-      "-z",
-      "z̄",
-      "-z̄",
-      "z"
-    ],
-    "answer": 1,
-    "explain": "For |z|=1: z·z̄=|z|²=1, so z⁻¹=z̄.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "33e55fa1-058d-49d9-9175-85617e3022a9",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Real part of z = a+ib: Re(z) = ?",
-    "formula": "Re(z) = (z+z̄)/2",
-    "options": [
-      "(z+z̄)/2",
-      "(z-z̄)/2",
-      "z/2",
-      "(z+z̄)/2i"
-    ],
-    "answer": 0,
-    "explain": "z+z̄=2a=2Re(z), so Re(z)=(z+z̄)/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "542628db-1bbd-46ea-aac2-21c2cfc4984a",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Imaginary part of z = a+ib: Im(z) = ?",
-    "formula": "Im(z) = (z-z̄)/(2i)",
-    "options": [
-      "(z-z̄)/i",
-      "(z-z̄)/2",
-      "(z-z̄)/(2i)",
-      "(z+z̄)/(2i)"
-    ],
-    "answer": 2,
-    "explain": "z-z̄=2ib, so Im(z)=b=(z-z̄)/(2i).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f7824127-fd93-4a6d-b007-fc24af19e9b8",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "nth roots of unity: how many are there?",
-    "formula": "z = e^{2πik/n}, k=0,1,…,n-1",
-    "options": [
-      "n distinct roots",
-      "2n roots",
-      "n-1 roots",
-      "Infinite roots"
-    ],
-    "answer": 0,
-    "explain": "zⁿ=1 has exactly n distinct roots, equally spaced on unit circle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "382a1779-22e0-4896-bc20-4e58a08500f5",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Sum of all nth roots of unity is?",
-    "formula": "Σe^{2πik/n} = 0",
-    "options": [
-      "n",
-      "0",
-      "-1",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "Sum of all nth roots of unity is always 0 for n≥2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd20d4d0-be28-4c19-b533-50f65568b441",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Argument of z = 0+i (purely imaginary, positive) is?",
-    "formula": "arg(i) = π/2",
-    "options": [
-      "π/2",
-      "-π/2",
-      "π",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "z=i lies on positive imaginary axis, so its argument is π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aac091d2-ce39-449b-9a0f-78f86876c2d9",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Locus of arg(z) = α (fixed) in Argand plane?",
-    "formula": "",
-    "options": [
-      "Circle",
-      "Full line through origin",
-      "Ray from origin at angle α",
-      "Semicircle"
-    ],
-    "answer": 2,
-    "explain": "arg(z)=α represents a ray (half-line) from origin making angle α with positive x-axis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "74da506b-bcce-427f-bef2-aa8abaa9a0c9",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Which condition makes z purely imaginary?",
-    "formula": "z + z̄ = 0",
-    "options": [
-      "z-z̄=0",
-      "z+z̄=0",
-      "z²+z̄²=0",
-      "z·z̄=0"
-    ],
-    "answer": 1,
-    "explain": "z+z̄=2Re(z)=0 means Re(z)=0, so z is purely imaginary.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "74292089-9ec1-4c4d-91b6-08c07c5bd275",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "For complex z, z + z̄ equals?",
-    "formula": "z + z̄ = 2·Re(z)",
-    "options": [
-      "2·Re(z)",
-      "2·Im(z)",
-      "0",
-      "2i·Im(z)"
-    ],
-    "answer": 0,
-    "explain": "z+z̄ = (a+ib)+(a−ib) = 2a = 2·Re(z).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2b13d633-8fe8-45f4-bb18-53b37bca8914",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Argument of z = 1 − i (fourth quadrant)?",
-    "formula": "",
-    "options": [
-      "π/4",
-      "−π/4",
-      "3π/4",
-      "−3π/4"
-    ],
-    "answer": 1,
-    "explain": "z=1−i lies in Q4; arg = −arctan(1/1) = −π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3444c425-1003-45bd-b22e-6db6fb9156c0",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of i + i² + i³ + i⁴ is?",
-    "formula": "",
-    "options": [
-      "i",
-      "−1",
-      "1",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "i+(−1)+(−i)+1 = 0; sum of one full cycle of powers of i is 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "44926ffa-67d4-45d8-948e-341653337cdf",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If ω is a cube root of unity, ω³ equals?",
-    "formula": "ω³ = 1",
-    "options": [
-      "ω²",
-      "ω",
-      "1",
-      "−1"
-    ],
-    "answer": 2,
-    "explain": "By definition, cube roots of unity satisfy z³=1, so ω³=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aff5915a-343b-4002-b0f7-af41a3b8ea38",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If ω is non-real cube root of unity, 1+ω² equals?",
-    "formula": "1+ω+ω²=0",
-    "options": [
-      "ω",
-      "0",
-      "−ω",
-      "−ω²"
-    ],
-    "answer": 2,
-    "explain": "From 1+ω+ω²=0, we get 1+ω² = −ω.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5aeb1c8e-2ab6-40e6-8955-9cb166b4f47c",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The number of solutions of zⁿ = 1 in complex numbers is?",
-    "formula": "",
-    "options": [
-      "n−1",
-      "n",
-      "∞",
-      "2n"
-    ],
-    "answer": 1,
-    "explain": "zⁿ=1 is a degree-n polynomial; it has exactly n roots (nth roots of unity).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2ec0dbdd-bdd5-4795-af83-1f82f86d6431",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Conjugate of product z₁z₂ equals?",
-    "formula": "z₁z₂‾ = z̄₁·z̄₂",
-    "options": [
-      "z₁·z̄₂",
-      "z̄₁·z̄₂",
-      "z̄₁·z₂",
-      "|z₁||z₂|"
-    ],
-    "answer": 1,
-    "explain": "Conjugate distributes over multiplication: conjugate of product = product of conjugates.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3246b8c2-60cb-42cd-968b-9c5cc6bb926f",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Modulus-argument form: arg(z₁z₂) equals?",
-    "formula": "arg(z₁z₂)=arg z₁+arg z₂",
-    "options": [
-      "arg z₁+arg z₂",
-      "arg z₁/arg z₂",
-      "arg z₁·arg z₂",
-      "arg z₁−arg z₂"
-    ],
-    "answer": 0,
-    "explain": "Arguments add under multiplication (mod 2π).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "94480f15-2f60-4c6c-9d97-6a9fcae67c38",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The principal argument lies in which interval?",
-    "formula": "",
-    "options": [
-      "[0, 2π)",
-      "(0, 2π]",
-      "[−π, π)",
-      "(−π, π]"
-    ],
-    "answer": 3,
-    "explain": "Principal argument (Arg z) is defined in (−π, π] by convention.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "857cc3a4-1b04-4310-8f5f-724db154bd66",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The locus of |z−1|+|z+1|=4 in Argand plane is?",
-    "formula": "",
-    "options": [
-      "Ellipse with foci ±1",
-      "Hyperbola",
-      "Parabola",
-      "Circle"
-    ],
-    "answer": 0,
-    "explain": "Sum of distances from two fixed points (foci) is constant ⟹ ellipse.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cfbae3ff-0c1c-47b8-a54d-72318b54f6ff",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z = cosθ + i sinθ, then zⁿ + z⁻ⁿ equals?",
-    "formula": "2cos(nθ)",
-    "options": [
-      "2cos θ",
-      "2i sin(nθ)",
-      "2sin(nθ)",
-      "2cos(nθ)"
-    ],
-    "answer": 3,
-    "explain": "zⁿ=cos nθ+i sin nθ, z⁻ⁿ=cos nθ−i sin nθ; sum=2cos nθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fe611afb-4258-46e3-85cd-2d14e2a755ec",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The imaginary part of (1+i)/(1−i) is?",
-    "formula": "",
-    "options": [
-      "−1",
-      "1",
-      "0",
-      "i"
-    ],
-    "answer": 1,
-    "explain": "(1+i)/(1−i)=i after rationalising; Im(i)=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd7bb575-698c-4b52-8e2e-911a934af350",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Argument of z = −1 − i (third quadrant) is?",
-    "formula": "",
-    "options": [
-      "5π/4",
-      "−3π/4",
-      "−π/4",
-      "3π/4"
-    ],
-    "answer": 1,
-    "explain": "z in Q3: arg = −π + arctan(1) = −π+π/4 = −3π/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "544fd69b-4d6b-471a-9a6a-0a1447a07578",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Which of these is NOT a property of |z|?",
-    "formula": "",
-    "options": [
-      "||z₁|−|z₂||≤|z₁−z₂|",
-      "|z̄|=|z|",
-      "|z₁+z₂|=|z₁|+|z₂| always",
-      "|z·w|=|z||w|"
-    ],
-    "answer": 2,
-    "explain": "Triangle inequality gives ≤, not =; equality only when args are equal.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "584f47b8-e3a5-49b5-b878-8f6843d2381e",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of (1+ω)(1+ω²) where ω is cube root of unity?",
-    "formula": "",
-    "options": [
-      "3",
-      "1",
-      "ω",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "(1+ω)(1+ω²)=1+ω+ω²+ω³=0+1=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fb828df3-60bc-4450-87d4-d9350423f261",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The angle between two complex numbers: amp(z₁/z₂) represents?",
-    "formula": "arg z₁ − arg z₂",
-    "options": [
-      "arg(z₁·z₂)",
-      "|arg z₁|·|arg z₂|",
-      "arg z₁ + arg z₂",
-      "arg z₁ − arg z₂"
-    ],
-    "answer": 3,
-    "explain": "arg(z₁/z₂) = arg z₁ − arg z₂, giving angle between the two complex numbers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a119924c-15cc-418d-a718-5ed87ff2716d",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "For purely real z, which condition holds?",
-    "formula": "z = z̄",
-    "options": [
-      "z·z̄ = 0",
-      "Re(z) = 0",
-      "z = z̄",
-      "z = −z̄"
-    ],
-    "answer": 2,
-    "explain": "z is purely real iff Im(z)=0 iff z equals its own conjugate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a0212581-16cb-4c18-96c8-fddae4ce940c",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The modulus of the nth root of unity e^{2πik/n} is?",
-    "formula": "|e^{iθ}|=1",
-    "options": [
-      "2π/n",
-      "n",
-      "1",
-      "1/n"
-    ],
-    "answer": 2,
-    "explain": "All nth roots of unity lie on the unit circle, so each has modulus 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d2fbce5-5cc3-40cb-9bab-69c5b5542fc9",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z = a+ib, then |z|² equals?",
-    "formula": "|z|² = a²+b²",
-    "options": [
-      "a+b",
-      "a²+b²",
-      "a²-b²",
-      "2ab"
-    ],
-    "answer": 1,
-    "explain": "|z|² = z·z̄ = a²+b², the sum of squares of real and imaginary parts.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "394a6193-fce4-4f45-ae47-52fe5ffd62b2",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Multiplicative inverse of z = a+ib is?",
-    "formula": "z⁻¹ = z̄/|z|²",
-    "options": [
-      "1/z̄",
-      "z̄/|z|²",
-      "|z|/z̄",
-      "z̄/|z|"
-    ],
-    "answer": 1,
-    "explain": "z⁻¹ = z̄/(z·z̄) = z̄/|z|², standard formula for complex inverse.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "18dd5990-0463-428a-8f32-ecd5749438bf",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The cube roots of unity satisfy ω² + ω + 1 = 0. What is ω²?",
-    "formula": "ω² = (-1-i√3)/2",
-    "options": [
-      "(-1-i√3)/2",
-      "(1+i√3)/2",
-      "(-1+i√3)/2",
-      "(1-i√3)/2"
-    ],
-    "answer": 0,
-    "explain": "ω = (-1+i√3)/2, so ω² = (-1-i√3)/2, the other non-real cube root.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d478377-b154-4f9b-b3b3-93237ce50ab6",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "Locus of arg(z − z₀) = α is?",
-    "formula": "",
-    "options": [
-      "Ellipse",
-      "Line through z₀",
-      "Ray from z₀ at angle α",
-      "Circle centred z₀"
-    ],
-    "answer": 2,
-    "explain": "arg(z−z₀)=α represents a ray starting at z₀ (excluded) making angle α with real axis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ff8a3326-5609-407c-958d-1a35b7fb5cc5",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of iⁿ where n≡2 (mod 4) is?",
-    "formula": "",
-    "options": [
-      "i",
-      "-i",
-      "-1",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "Cycle: i¹=i, i²=-1, i³=-i, i⁴=1. n≡2 mod 4 gives i²=-1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "506dd47e-8b47-4a84-8f32-7411f33f85b5",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of iⁿ where n≡3 (mod 4) is?",
-    "formula": "",
-    "options": [
-      "i",
-      "1",
-      "-i",
-      "-1"
-    ],
-    "answer": 2,
-    "explain": "i³ = -i, and the cycle repeats every 4, so n≡3 mod 4 gives -i.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a42befbf-62d0-49e4-a2a6-63376e9262cc",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z₁ and z₂ are conjugates, then |z₁ + z₂| equals?",
-    "formula": "",
-    "options": [
-      "2|Re(z₁)|",
-      "0",
-      "2|Im(z₁)|",
-      "|z₁|²"
-    ],
-    "answer": 0,
-    "explain": "z₁+z̄₁ = 2Re(z₁), so |z₁+z₂| = |2Re(z₁)| = 2|Re(z₁)|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1a862c42-95bb-4438-9054-8ec76e37ed4e",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The modulus of a purely imaginary number bi (b≠0) is?",
-    "formula": "|bi| = |b|",
-    "options": [
-      "b²",
-      "|b|",
-      "b",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "|0+bi| = √(0²+b²) = |b|, the absolute value of the imaginary part.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "363df1fc-33e3-478e-968d-c4b2fe77f74a",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "For ω = cube root of unity, value of 1+ω⁴+ω⁸ is?",
-    "formula": "",
-    "options": [
-      "1",
-      "3",
-      "0",
-      "-1"
-    ],
-    "answer": 2,
-    "explain": "ω³=1 so ω⁴=ω, ω⁸=ω². Thus 1+ω+ω²=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ffc5f5e2-3eaf-4fec-a7e8-fb85d3243422",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The locus of |z - i| = |z + i| in the Argand plane is?",
-    "formula": "",
-    "options": [
-      "Unit circle",
-      "Imaginary axis",
-      "x = y line",
-      "Real axis"
-    ],
-    "answer": 3,
-    "explain": "|z-i|=|z+i| means equidistant from i and -i, which is the real axis (y=0).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f6d57b1a-7790-4679-b2c9-53622808a83e",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If arg(z) = π/4, then Im(z)/Re(z) equals?",
-    "formula": "tan(π/4)=1",
-    "options": [
-      "0",
-      "√3",
-      "1",
-      "1/√3"
-    ],
-    "answer": 2,
-    "explain": "tan(arg z) = Im(z)/Re(z); tan(π/4) = 1, so Im/Re = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d2720c43-1a5a-4526-94e8-0592a9c62201",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of (1+i)² equals?",
-    "formula": "(1+i)² = 2i",
-    "options": [
-      "2i",
-      "2",
-      "1+2i",
-      "-2"
-    ],
-    "answer": 0,
-    "explain": "(1+i)² = 1+2i+i² = 1+2i-1 = 2i.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f54b6424-346c-4f7d-b713-f70883329c6e",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of (−1+i√3)³ equals?",
-    "formula": "",
-    "options": [
-      "8",
-      "-1",
-      "-8",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "-1+i√3 = 2ω, so (-1+i√3)³ = 8ω³ = 8·1 = 8.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d196636f-00d8-45c3-9462-4cfa161851fb",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If |z − 1| = |z + 1|, z lies on?",
-    "formula": "",
-    "options": [
-      "Unit circle",
-      "Real axis",
-      "Imaginary axis",
-      "y = x line"
-    ],
-    "answer": 2,
-    "explain": "Equidistant from 1 and -1 on real axis means z lies on imaginary axis (x=0).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c34c0aa6-c1bf-4ba0-859d-102195541e9d",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The modulus of (1+i√3) is?",
-    "formula": "|1+i√3| = 2",
-    "options": [
-      "4",
-      "√3",
-      "2",
-      "√2"
-    ],
-    "answer": 2,
-    "explain": "|1+i√3| = √(1²+(√3)²) = √(1+3) = √4 = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e73d68ca-9129-4178-b448-ec84fb019005",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The argument of (1+i√3) is?",
-    "formula": "arg = π/3",
-    "options": [
-      "2π/3",
-      "π/3",
-      "π/6",
-      "π/4"
-    ],
-    "answer": 1,
-    "explain": "tan⁻¹(√3/1) = π/3; first quadrant confirms arg(1+i√3) = π/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a76302fa-3faa-40d7-a76e-7eccf6bdd0eb",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z₁/z₂ is purely imaginary, then |z₁+z₂|/|z₁−z₂| equals?",
-    "formula": "",
-    "options": [
-      "2",
-      "1",
-      "0",
-      "1/2"
-    ],
-    "answer": 1,
-    "explain": "When z₁/z₂ is purely imaginary, z₁ and z₂ are perpendicular; |z₁+z₂|=|z₁−z₂|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e84d10a3-6f11-4f38-8648-951bce463702",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If |z − 2| = 2|z − 1|, the locus of z is a?",
-    "formula": "",
-    "options": [
-      "Circle",
-      "Straight line",
-      "Ellipse",
-      "Parabola"
-    ],
-    "answer": 0,
-    "explain": "Apollonius circle: locus of points with ratio of distances to two fixed points constant (≠1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a07540e0-a770-4908-80d9-36174ebd0787",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The square roots of i are?",
-    "formula": "±(1+i)/√2",
-    "options": [
-      "±(1−i)/√2",
-      "±(1+i)",
-      "±(1+i)/√2",
-      "±i"
-    ],
-    "answer": 2,
-    "explain": "If z²=i, z = ±(1+i)/√2 since [(1+i)/√2]² = 2i/2 = i.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "686e3d55-3e60-477c-a367-7b9e11a442f4",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "For two complex numbers, |z₁+z₂|² + |z₁−z₂|² equals?",
-    "formula": "2(|z₁|²+|z₂|²)",
-    "options": [
-      "4|z₁||z₂|",
-      "(|z₁|+|z₂|)²",
-      "2|z₁||z₂|",
-      "2(|z₁|²+|z₂|²)"
-    ],
-    "answer": 3,
-    "explain": "Parallelogram law: sum of squares of diagonals = twice sum of squares of sides.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ba66e2d7-7afc-42d0-815b-a5bc1d82aee1",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of i^{100} + i^{101} + i^{102} + i^{103} is?",
-    "formula": "",
-    "options": [
-      "−1",
-      "0",
-      "4",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "100≡0 mod 4: i^{100}=1,i^{101}=i,i^{102}=−1,i^{103}=−i; sum=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ece3aff7-b959-471f-b159-d0aa3cce4546",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The product of all nth roots of unity is?",
-    "formula": "(−1)^{n+1}",
-    "options": [
-      "(−1)^{n+1}",
-      "−1",
-      "1",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "Product of roots of zⁿ−1=0 is (−1)ⁿ×(−1)=(−1)^{n+1} by Vieta's formulas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7d9bacef-e790-4397-9e4b-4dd8f2cce54a",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If |z₁|=r₁ and |z₂|=r₂, then |z₁/z₂| equals?",
-    "formula": "r₁/r₂",
-    "options": [
-      "r₁+r₂",
-      "r₁·r₂",
-      "r₁/r₂",
-      "r₁−r₂"
-    ],
-    "answer": 2,
-    "explain": "Modulus of quotient equals quotient of moduli: |z₁/z₂|=|z₁|/|z₂|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f07557f6-0463-45f9-82d5-3c7369b0b557",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "arg(−i) equals?",
-    "formula": "",
-    "options": [
-      "−π/2",
-      "0",
-      "π/2",
-      "π"
-    ],
-    "answer": 0,
-    "explain": "−i lies on negative imaginary axis; principal argument = −π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a28640bc-d55e-4f32-8709-1a8f5b6fc135",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z = cosθ + i sinθ, then 1/z equals?",
-    "formula": "cos θ − i sin θ",
-    "options": [
-      "−cosθ+i sinθ",
-      "cosθ + i sinθ",
-      "cosθ − i sinθ",
-      "i sinθ"
-    ],
-    "answer": 2,
-    "explain": "|z|=1, so 1/z = z̄ = cosθ − i sinθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7fc3a5a8-da7c-4143-8084-e517344be876",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "For |z − z₀| ≤ r, the locus is?",
-    "formula": "",
-    "options": [
-      "Open disk",
-      "Annulus",
-      "Circle only",
-      "Closed disk"
-    ],
-    "answer": 3,
-    "explain": "|z−z₀|≤r includes boundary and interior — a closed disk of radius r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f608e5c4-ba67-4dfc-8e3f-76908cab50c6",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z+z̄ = 0, then z is?",
-    "formula": "",
-    "options": [
-      "Purely real",
-      "Real and positive",
-      "Modulus 1",
-      "Purely imaginary or zero"
-    ],
-    "answer": 3,
-    "explain": "z+z̄=2Re(z)=0 implies Re(z)=0, so z is purely imaginary or zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4981b4af-8904-4b5c-9cf3-b6f075abcd4d",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The complex number with modulus 2 and argument 2π/3 in a+ib form is?",
-    "formula": "z = 2(cos2π/3 + i sin2π/3)",
-    "options": [
-      "1+i√3",
-      "−1+i√3",
-      "−1−i√3",
-      "1−i√3"
-    ],
-    "answer": 1,
-    "explain": "cos(2π/3)=−1/2, sin(2π/3)=√3/2; z=2(−1/2+i√3/2)=−1+i√3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36623b50-7161-4a26-b1cd-63973c6255ba",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z = x+iy, then z² + z̄² equals?",
-    "formula": "z² + z̄² = 2(x²−y²)",
-    "options": [
-      "2x²+2y²i",
-      "2(x²−y²)",
-      "2(x²+y²)",
-      "4xy·i"
-    ],
-    "answer": 1,
-    "explain": "z²+z̄² = 2·Re(z²) = 2(x²−y²) since Im parts cancel.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5999e73b-855c-4617-a486-d7fd7deee300",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "For z = x+iy, what is z²−z̄²?",
-    "formula": "z²−z̄² = 4xyi",
-    "options": [
-      "2(x²−y²)",
-      "4xy",
-      "4xyi",
-      "2xyi"
-    ],
-    "answer": 2,
-    "explain": "z²−z̄² = 2·Im(z²)·i = 2·(2xy)·i = 4xyi.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7ad81d0a-ed9f-4785-bf7d-0eff4f13038a",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z₁,z₂,z₃ are vertices of equilateral triangle, z₁²+z₂²+z₃² equals?",
-    "formula": "z₁²+z₂²+z₃² = z₁z₂+z₂z₃+z₃z₁",
-    "options": [
-      "0",
-      "z₁z₂+z₂z₃+z₃z₁",
-      "3z₁z₂z₃",
-      "|z₁|²+|z₂|²+|z₃|²"
-    ],
-    "answer": 1,
-    "explain": "Equilateral triangle condition: z₁²+z₂²+z₃²=z₁z₂+z₂z₃+z₃z₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e5f4148f-2c74-4763-bbdc-6883ae72459a",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If α,β are roots of z²+z+1=0, then α+β and αβ equal respectively?",
-    "formula": "",
-    "options": [
-      "−1 and 1",
-      "1 and −1",
-      "0 and 1",
-      "−1 and −1"
-    ],
-    "answer": 0,
-    "explain": "By Vieta's: α+β=−1, αβ=1; roots are ω,ω².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8be08588-491f-48cd-91e2-b92e841f70c9",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "The value of ω^{3n+1} where ω is non-real cube root of unity is?",
-    "formula": "ω³=1",
-    "options": [
-      "ω²",
-      "1",
-      "ω",
-      "−1"
-    ],
-    "answer": 2,
-    "explain": "ω^{3n+1}=(ω³)^n·ω=1^n·ω=ω.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f2948127-be27-4d60-a45a-fc9c553effce",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If z₁ and z₂ are non-zero complex numbers and |z₁+z₂|=|z₁−z₂|, then arg(z₁)−arg(z₂) equals?",
-    "formula": "",
-    "options": [
-      "π",
-      "±π/4",
-      "0",
-      "±π/2"
-    ],
-    "answer": 3,
-    "explain": "|z₁+z₂|=|z₁−z₂| implies z₁/z₂ is purely imaginary, so arg difference=±π/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a730c9ce-16eb-40b8-9121-93b69b0ac474",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If n is a positive integer, i^{4n+1} equals?",
-    "formula": "i^{4n+1}=i",
-    "options": [
-      "−1",
-      "i",
-      "−i",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "i^{4n+1}=(i⁴)^n·i=1^n·i=i.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0b5a499b-f551-42be-8bfd-9643f1fd3314",
-    "subject": "Mathematics",
-    "chapter": "Complex Numbers",
-    "topic": "Complex Numbers",
-    "prompt": "If |z| = 2 and arg(z) = π/3, then z in a+ib form is?",
-    "formula": "z=r(cosθ+i sinθ)",
-    "options": [
-      "√2+i√2",
-      "1+i√3",
-      "√3+i",
-      "1+i"
-    ],
-    "answer": 1,
-    "explain": "z=2(cos60°+i sin60°)=2(1/2+i√3/2)=1+i√3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "6fa00185-a5e9-484f-ab87-342ed5d08ecd",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "Value of i⁴ⁿ where n is a positive integer?",
+  "formula": "i⁴ⁿ = 1",
+  "options": [
+   "-i",
+   "1",
+   "-1",
+   "i"
+  ],
+  "answer": 1,
+  "explain": "Powers of i cycle with period 4: i¹=i, i²=-1, i³=-i, i⁴=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b24eada8-6625-4c1d-982c-1e4ea867e05e",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "Modulus of z = a + ib is?",
+  "formula": "|z| = √(a²+b²)",
+  "options": [
+   "√(a²+b²)",
+   "√(a²-b²)",
+   "a+b",
+   "a²+b²"
+  ],
+  "answer": 0,
+  "explain": "Modulus is the distance from origin in Argand plane: |z|=√(a²+b²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cf8415c2-c189-42c4-bda7-7c1532326803",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Argument of z = -1 + 0i is?",
+  "formula": "arg(z) = π",
+  "options": [
+   "-π/2",
+   "π",
+   "π/2",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "z=-1 lies on negative real axis, so arg(z)=π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "88a92be0-0284-4d3a-8fac-c6988b3268d7",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "Conjugate of z = a+ib is z̄. What is z·z̄?",
+  "formula": "z·z̄ = |z|²",
+  "options": [
+   "|z|²",
+   "2a",
+   "|z|",
+   "2ib"
+  ],
+  "answer": 0,
+  "explain": "(a+ib)(a-ib)=a²+b²=|z|²; a real non-negative number.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aef20852-ee6d-48e2-a4b6-0be0607d206e",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "Polar form of z with modulus r and argument θ?",
+  "formula": "z = r(cosθ + i sinθ)",
+  "options": [
+   "r·e^{-iθ}",
+   "r(cosθ-i sinθ)",
+   "r(cosθ+i sinθ)",
+   "r(sinθ+i cosθ)"
+  ],
+  "answer": 2,
+  "explain": "Polar form: z = r(cosθ+i sinθ) = re^{iθ} by Euler's formula.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c288ceca-432e-4874-af27-ab962eb22448",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "Euler's formula: e^{iθ} = ?",
+  "formula": "e^{iθ} = cosθ + i sinθ",
+  "options": [
+   "cosθ+i sinθ",
+   "e^θ(cosθ+i sinθ)",
+   "sinθ+i cosθ",
+   "cosθ-i sinθ"
+  ],
+  "answer": 0,
+  "explain": "Euler's identity: e^{iθ}=cosθ+i sinθ, fundamental in complex analysis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b5a9ff93-2c9b-431b-9199-d05f0b511912",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "De Moivre's Theorem: (cosθ+i sinθ)ⁿ = ?",
+  "formula": "(cosθ+i sinθ)ⁿ = cos(nθ)+i sin(nθ)",
+  "options": [
+   "cos(nθ)-i sin(nθ)",
+   "cos(nθ)+i sin(nθ)",
+   "cosⁿθ+i sinⁿθ",
+   "n cosθ+i n sinθ"
+  ],
+  "answer": 1,
+  "explain": "De Moivre's theorem for integer n: (cosθ+i sinθ)ⁿ=cos(nθ)+i sin(nθ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e8bf84c6-5de4-4bca-b4b0-980b564677af",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "For z = re^{iθ}, what is arg(z̄)?",
+  "formula": "arg(z̄) = -θ",
+  "options": [
+   "θ",
+   "-θ",
+   "π-θ",
+   "π+θ"
+  ],
+  "answer": 1,
+  "explain": "Conjugate reflects across real axis, so argument negates: arg(z̄)=-arg(z).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4270366b-c1e7-486a-84ec-598fcead8d16",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "|z₁·z₂| equals?",
+  "formula": "|z₁||z₂|",
+  "options": [
+   "|z₁|·|z₂|",
+   "|z₁|²+|z₂|²",
+   "|z₁|-|z₂|",
+   "|z₁|+|z₂|"
+  ],
+  "answer": 0,
+  "explain": "Modulus is multiplicative: |z₁z₂|=|z₁||z₂|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "46b67e3f-f5ee-42f5-bb86-a7c5c25c1ff9",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "arg(z₁/z₂) equals?",
+  "formula": "arg(z₁)-arg(z₂)",
+  "options": [
+   "arg(z₁)+arg(z₂)",
+   "arg(z₁)-arg(z₂)",
+   "arg(z₁)/arg(z₂)",
+   "arg(z₁)·arg(z₂)"
+  ],
+  "answer": 1,
+  "explain": "Argument of quotient: arg(z₁/z₂)=arg(z₁)-arg(z₂) (mod 2π).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "539d3e70-aabd-4d9b-87f4-2d4445192053",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "The cube roots of unity satisfy: 1+ω+ω² = ?",
+  "formula": "1+ω+ω² = 0",
+  "options": [
+   "3",
+   "0",
+   "1",
+   "-1"
+  ],
+  "answer": 1,
+  "explain": "Sum of all three cube roots of unity is zero: 1+ω+ω²=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1169ca3c-e115-409f-aa29-c3313a517ab1",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "Product of cube roots of unity: 1·ω·ω² = ?",
+  "formula": "ω³ = 1",
+  "options": [
+   "0",
+   "1",
+   "ω",
+   "-1"
+  ],
+  "answer": 1,
+  "explain": "Product of cube roots of unity equals 1 since ω³=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e8ae9238-e435-405e-a5ac-dd7c7091d6f2",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "Non-real cube root of unity: ω² equals?",
+  "formula": "ω² = ω̄",
+  "options": [
+   "conjugate of ω",
+   "1/ω²",
+   "-1/ω",
+   "-ω"
+  ],
+  "answer": 0,
+  "explain": "For |ω|=1, ω²=1/ω=ω̄ (conjugate of ω).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "95f1d17b-8439-42d7-b9c6-b78b550a2f00",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "Triangle inequality for complex numbers states?",
+  "formula": "||z₁|-|z₂|| ≤ |z₁+z₂| ≤ |z₁|+|z₂|",
+  "options": [
+   "|z₁+z₂|≤|z₁|-|z₂||",
+   "|z₁+z₂|≤|z₁|+|z₂|",
+   "|z₁+z₂|≥|z₁|+|z₂|",
+   "|z₁+z₂|=|z₁|+|z₂|"
+  ],
+  "answer": 1,
+  "explain": "Triangle inequality: |z₁+z₂|≤|z₁|+|z₂|, equality iff arg(z₁)=arg(z₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ed7b7262-be4b-4e9e-a7e8-0beb33cc3ef4",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "Locus of |z - z₀| = r in Argand plane?",
+  "formula": "",
+  "options": [
+   "Line through z₀",
+   "Parabola",
+   "Ellipse",
+   "Circle centre z₀ radius r"
+  ],
+  "answer": 3,
+  "explain": "|z-z₀|=r represents a circle with centre z₀ and radius r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "98d8ada7-555d-4f50-bce7-e4bb1aa117c2",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "Locus of |z-a| = |z-b| in Argand plane?",
+  "formula": "",
+  "options": [
+   "Circle through a,b",
+   "Perp bisector of segment ab",
+   "Ellipse with foci a,b",
+   "Line through a,b"
+  ],
+  "answer": 1,
+  "explain": "Equal distances from two points gives perpendicular bisector of segment joining them.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a19b3581-cd84-450f-ad19-d4a5445ffd1c",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "If |z| = 1, then z⁻¹ equals?",
+  "formula": "z⁻¹ = z̄",
+  "options": [
+   "-z",
+   "z̄",
+   "-z̄",
+   "z"
+  ],
+  "answer": 1,
+  "explain": "For |z|=1: z·z̄=|z|²=1, so z⁻¹=z̄.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "33e55fa1-058d-49d9-9175-85617e3022a9",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "Real part of z = a+ib: Re(z) = ?",
+  "formula": "Re(z) = (z+z̄)/2",
+  "options": [
+   "(z+z̄)/2",
+   "(z-z̄)/2",
+   "z/2",
+   "(z+z̄)/2i"
+  ],
+  "answer": 0,
+  "explain": "z+z̄=2a=2Re(z), so Re(z)=(z+z̄)/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "542628db-1bbd-46ea-aac2-21c2cfc4984a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "Imaginary part of z = a+ib: Im(z) = ?",
+  "formula": "Im(z) = (z-z̄)/(2i)",
+  "options": [
+   "(z-z̄)/i",
+   "(z-z̄)/2",
+   "(z-z̄)/(2i)",
+   "(z+z̄)/(2i)"
+  ],
+  "answer": 2,
+  "explain": "z-z̄=2ib, so Im(z)=b=(z-z̄)/(2i).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7824127-fd93-4a6d-b007-fc24af19e9b8",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "nth roots of unity: how many are there?",
+  "formula": "z = e^{2πik/n}, k=0,1,…,n-1",
+  "options": [
+   "n distinct roots",
+   "2n roots",
+   "n-1 roots",
+   "Infinite roots"
+  ],
+  "answer": 0,
+  "explain": "zⁿ=1 has exactly n distinct roots, equally spaced on unit circle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "382a1779-22e0-4896-bc20-4e58a08500f5",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "Sum of all nth roots of unity is?",
+  "formula": "Σe^{2πik/n} = 0",
+  "options": [
+   "n",
+   "0",
+   "-1",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Sum of all nth roots of unity is always 0 for n≥2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd20d4d0-be28-4c19-b533-50f65568b441",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Argument of z = 0+i (purely imaginary, positive) is?",
+  "formula": "arg(i) = π/2",
+  "options": [
+   "π/2",
+   "-π/2",
+   "π",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "z=i lies on positive imaginary axis, so its argument is π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aac091d2-ce39-449b-9a0f-78f86876c2d9",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Locus of arg(z) = α (fixed) in Argand plane?",
+  "formula": "",
+  "options": [
+   "Circle",
+   "Full line through origin",
+   "Ray from origin at angle α",
+   "Semicircle"
+  ],
+  "answer": 2,
+  "explain": "arg(z)=α represents a ray (half-line) from origin making angle α with positive x-axis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "74da506b-bcce-427f-bef2-aa8abaa9a0c9",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "Which condition makes z purely imaginary?",
+  "formula": "z + z̄ = 0",
+  "options": [
+   "z-z̄=0",
+   "z+z̄=0",
+   "z²+z̄²=0",
+   "z·z̄=0"
+  ],
+  "answer": 1,
+  "explain": "z+z̄=2Re(z)=0 means Re(z)=0, so z is purely imaginary.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "74292089-9ec1-4c4d-91b6-08c07c5bd275",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "For complex z, z + z̄ equals?",
+  "formula": "z + z̄ = 2·Re(z)",
+  "options": [
+   "2·Re(z)",
+   "2·Im(z)",
+   "0",
+   "2i·Im(z)"
+  ],
+  "answer": 0,
+  "explain": "z+z̄ = (a+ib)+(a−ib) = 2a = 2·Re(z).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2b13d633-8fe8-45f4-bb18-53b37bca8914",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Argument of z = 1 − i (fourth quadrant)?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "−π/4",
+   "3π/4",
+   "−3π/4"
+  ],
+  "answer": 1,
+  "explain": "z=1−i lies in Q4; arg = −arctan(1/1) = −π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3444c425-1003-45bd-b22e-6db6fb9156c0",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "The value of i + i² + i³ + i⁴ is?",
+  "formula": "",
+  "options": [
+   "i",
+   "−1",
+   "1",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "i+(−1)+(−i)+1 = 0; sum of one full cycle of powers of i is 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "44926ffa-67d4-45d8-948e-341653337cdf",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "If ω is a cube root of unity, ω³ equals?",
+  "formula": "ω³ = 1",
+  "options": [
+   "ω²",
+   "ω",
+   "1",
+   "−1"
+  ],
+  "answer": 2,
+  "explain": "By definition, cube roots of unity satisfy z³=1, so ω³=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aff5915a-343b-4002-b0f7-af41a3b8ea38",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "If ω is non-real cube root of unity, 1+ω² equals?",
+  "formula": "1+ω+ω²=0",
+  "options": [
+   "ω",
+   "0",
+   "−ω",
+   "−ω²"
+  ],
+  "answer": 2,
+  "explain": "From 1+ω+ω²=0, we get 1+ω² = −ω.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5aeb1c8e-2ab6-40e6-8955-9cb166b4f47c",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "The number of solutions of zⁿ = 1 in complex numbers is?",
+  "formula": "",
+  "options": [
+   "n−1",
+   "n",
+   "∞",
+   "2n"
+  ],
+  "answer": 1,
+  "explain": "zⁿ=1 is a degree-n polynomial; it has exactly n roots (nth roots of unity).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2ec0dbdd-bdd5-4795-af83-1f82f86d6431",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "Conjugate of product z₁z₂ equals?",
+  "formula": "z₁z₂‾ = z̄₁·z̄₂",
+  "options": [
+   "z₁·z̄₂",
+   "z̄₁·z̄₂",
+   "z̄₁·z₂",
+   "|z₁||z₂|"
+  ],
+  "answer": 1,
+  "explain": "Conjugate distributes over multiplication: conjugate of product = product of conjugates.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3246b8c2-60cb-42cd-968b-9c5cc6bb926f",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Modulus-argument form: arg(z₁z₂) equals?",
+  "formula": "arg(z₁z₂)=arg z₁+arg z₂",
+  "options": [
+   "arg z₁+arg z₂",
+   "arg z₁/arg z₂",
+   "arg z₁·arg z₂",
+   "arg z₁−arg z₂"
+  ],
+  "answer": 0,
+  "explain": "Arguments add under multiplication (mod 2π).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "94480f15-2f60-4c6c-9d97-6a9fcae67c38",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "The principal argument lies in which interval?",
+  "formula": "",
+  "options": [
+   "[0, 2π)",
+   "(0, 2π]",
+   "[−π, π)",
+   "(−π, π]"
+  ],
+  "answer": 3,
+  "explain": "Principal argument (Arg z) is defined in (−π, π] by convention.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "857cc3a4-1b04-4310-8f5f-724db154bd66",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Complex Numbers",
+  "prompt": "The locus of |z−1|+|z+1|=4 in Argand plane is?",
+  "formula": "",
+  "options": [
+   "Ellipse with foci ±1",
+   "Hyperbola",
+   "Parabola",
+   "Circle"
+  ],
+  "answer": 0,
+  "explain": "Sum of distances from two fixed points (foci) is constant ⟹ ellipse.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cfbae3ff-0c1c-47b8-a54d-72318b54f6ff",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "If z = cosθ + i sinθ, then zⁿ + z⁻ⁿ equals?",
+  "formula": "2cos(nθ)",
+  "options": [
+   "2cos θ",
+   "2i sin(nθ)",
+   "2sin(nθ)",
+   "2cos(nθ)"
+  ],
+  "answer": 3,
+  "explain": "zⁿ=cos nθ+i sin nθ, z⁻ⁿ=cos nθ−i sin nθ; sum=2cos nθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fe611afb-4258-46e3-85cd-2d14e2a755ec",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Mixed problems on complex expressions",
+  "prompt": "The imaginary part of (1+i)/(1−i) is?",
+  "formula": "",
+  "options": [
+   "−1",
+   "1",
+   "0",
+   "i"
+  ],
+  "answer": 1,
+  "explain": "(1+i)/(1−i)=i after rationalising; Im(i)=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd7bb575-698c-4b52-8e2e-911a934af350",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Argument of z = −1 − i (third quadrant) is?",
+  "formula": "",
+  "options": [
+   "5π/4",
+   "−3π/4",
+   "−π/4",
+   "3π/4"
+  ],
+  "answer": 1,
+  "explain": "z in Q3: arg = −π + arctan(1) = −π+π/4 = −3π/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "544fd69b-4d6b-471a-9a6a-0a1447a07578",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "Which of these is NOT a property of |z|?",
+  "formula": "",
+  "options": [
+   "||z₁|−|z₂||≤|z₁−z₂|",
+   "|z̄|=|z|",
+   "|z₁+z₂|=|z₁|+|z₂| always",
+   "|z·w|=|z||w|"
+  ],
+  "answer": 2,
+  "explain": "Triangle inequality gives ≤, not =; equality only when args are equal.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "584f47b8-e3a5-49b5-b878-8f6843d2381e",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "The value of (1+ω)(1+ω²) where ω is cube root of unity?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "ω",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "(1+ω)(1+ω²)=1+ω+ω²+ω³=0+1=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fb828df3-60bc-4450-87d4-d9350423f261",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "The angle between two complex numbers: amp(z₁/z₂) represents?",
+  "formula": "arg z₁ − arg z₂",
+  "options": [
+   "arg(z₁·z₂)",
+   "|arg z₁|·|arg z₂|",
+   "arg z₁ + arg z₂",
+   "arg z₁ − arg z₂"
+  ],
+  "answer": 3,
+  "explain": "arg(z₁/z₂) = arg z₁ − arg z₂, giving angle between the two complex numbers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a119924c-15cc-418d-a718-5ed87ff2716d",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "For purely real z, which condition holds?",
+  "formula": "z = z̄",
+  "options": [
+   "z·z̄ = 0",
+   "Re(z) = 0",
+   "z = z̄",
+   "z = −z̄"
+  ],
+  "answer": 2,
+  "explain": "z is purely real iff Im(z)=0 iff z equals its own conjugate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a0212581-16cb-4c18-96c8-fddae4ce940c",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "The modulus of the nth root of unity e^{2πik/n} is?",
+  "formula": "|e^{iθ}|=1",
+  "options": [
+   "2π/n",
+   "n",
+   "1",
+   "1/n"
+  ],
+  "answer": 2,
+  "explain": "All nth roots of unity lie on the unit circle, so each has modulus 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d2fbce5-5cc3-40cb-9bab-69c5b5542fc9",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "If z = a+ib, then |z|² equals?",
+  "formula": "|z|² = a²+b²",
+  "options": [
+   "a+b",
+   "a²+b²",
+   "a²-b²",
+   "2ab"
+  ],
+  "answer": 1,
+  "explain": "|z|² = z·z̄ = a²+b², the sum of squares of real and imaginary parts.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "394a6193-fce4-4f45-ae47-52fe5ffd62b2",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "Multiplicative inverse of z = a+ib is?",
+  "formula": "z⁻¹ = z̄/|z|²",
+  "options": [
+   "1/z̄",
+   "z̄/|z|²",
+   "|z|/z̄",
+   "z̄/|z|"
+  ],
+  "answer": 1,
+  "explain": "z⁻¹ = z̄/(z·z̄) = z̄/|z|², standard formula for complex inverse.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "18dd5990-0463-428a-8f32-ecd5749438bf",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "The cube roots of unity satisfy ω² + ω + 1 = 0. What is ω²?",
+  "formula": "ω² = (-1-i√3)/2",
+  "options": [
+   "(-1-i√3)/2",
+   "(1+i√3)/2",
+   "(-1+i√3)/2",
+   "(1-i√3)/2"
+  ],
+  "answer": 0,
+  "explain": "ω = (-1+i√3)/2, so ω² = (-1-i√3)/2, the other non-real cube root.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d478377-b154-4f9b-b3b3-93237ce50ab6",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Locus of arg(z − z₀) = α is?",
+  "formula": "",
+  "options": [
+   "Ellipse",
+   "Line through z₀",
+   "Ray from z₀ at angle α",
+   "Circle centred z₀"
+  ],
+  "answer": 2,
+  "explain": "arg(z−z₀)=α represents a ray starting at z₀ (excluded) making angle α with real axis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ff8a3326-5609-407c-958d-1a35b7fb5cc5",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "The value of iⁿ where n≡2 (mod 4) is?",
+  "formula": "",
+  "options": [
+   "i",
+   "-i",
+   "-1",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Cycle: i¹=i, i²=-1, i³=-i, i⁴=1. n≡2 mod 4 gives i²=-1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "506dd47e-8b47-4a84-8f32-7411f33f85b5",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "The value of iⁿ where n≡3 (mod 4) is?",
+  "formula": "",
+  "options": [
+   "i",
+   "1",
+   "-i",
+   "-1"
+  ],
+  "answer": 2,
+  "explain": "i³ = -i, and the cycle repeats every 4, so n≡3 mod 4 gives -i.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a42befbf-62d0-49e4-a2a6-63376e9262cc",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "If z₁ and z₂ are conjugates, then |z₁ + z₂| equals?",
+  "formula": "",
+  "options": [
+   "2|Re(z₁)|",
+   "0",
+   "2|Im(z₁)|",
+   "|z₁|²"
+  ],
+  "answer": 0,
+  "explain": "z₁+z̄₁ = 2Re(z₁), so |z₁+z₂| = |2Re(z₁)| = 2|Re(z₁)|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1a862c42-95bb-4438-9054-8ec76e37ed4e",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "The modulus of a purely imaginary number bi (b≠0) is?",
+  "formula": "|bi| = |b|",
+  "options": [
+   "b²",
+   "|b|",
+   "b",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "|0+bi| = √(0²+b²) = |b|, the absolute value of the imaginary part.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "363df1fc-33e3-478e-968d-c4b2fe77f74a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "For ω = cube root of unity, value of 1+ω⁴+ω⁸ is?",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "0",
+   "-1"
+  ],
+  "answer": 2,
+  "explain": "ω³=1 so ω⁴=ω, ω⁸=ω². Thus 1+ω+ω²=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ffc5f5e2-3eaf-4fec-a7e8-fb85d3243422",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "The locus of |z - i| = |z + i| in the Argand plane is?",
+  "formula": "",
+  "options": [
+   "Unit circle",
+   "Imaginary axis",
+   "x = y line",
+   "Real axis"
+  ],
+  "answer": 3,
+  "explain": "|z-i|=|z+i| means equidistant from i and -i, which is the real axis (y=0).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f6d57b1a-7790-4679-b2c9-53622808a83e",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "If arg(z) = π/4, then Im(z)/Re(z) equals?",
+  "formula": "tan(π/4)=1",
+  "options": [
+   "0",
+   "√3",
+   "1",
+   "1/√3"
+  ],
+  "answer": 2,
+  "explain": "tan(arg z) = Im(z)/Re(z); tan(π/4) = 1, so Im/Re = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d2720c43-1a5a-4526-94e8-0592a9c62201",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "The value of (1+i)² equals?",
+  "formula": "(1+i)² = 2i",
+  "options": [
+   "2i",
+   "2",
+   "1+2i",
+   "-2"
+  ],
+  "answer": 0,
+  "explain": "(1+i)² = 1+2i+i² = 1+2i-1 = 2i.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f54b6424-346c-4f7d-b713-f70883329c6e",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "The value of (−1+i√3)³ equals?",
+  "formula": "",
+  "options": [
+   "8",
+   "-1",
+   "-8",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "-1+i√3 = 2ω, so (-1+i√3)³ = 8ω³ = 8·1 = 8.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d196636f-00d8-45c3-9462-4cfa161851fb",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "If |z − 1| = |z + 1|, z lies on?",
+  "formula": "",
+  "options": [
+   "Unit circle",
+   "Real axis",
+   "Imaginary axis",
+   "y = x line"
+  ],
+  "answer": 2,
+  "explain": "Equidistant from 1 and -1 on real axis means z lies on imaginary axis (x=0).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c34c0aa6-c1bf-4ba0-859d-102195541e9d",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "The modulus of (1+i√3) is?",
+  "formula": "|1+i√3| = 2",
+  "options": [
+   "4",
+   "√3",
+   "2",
+   "√2"
+  ],
+  "answer": 2,
+  "explain": "|1+i√3| = √(1²+(√3)²) = √(1+3) = √4 = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e73d68ca-9129-4178-b448-ec84fb019005",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "The argument of (1+i√3) is?",
+  "formula": "arg = π/3",
+  "options": [
+   "2π/3",
+   "π/3",
+   "π/6",
+   "π/4"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹(√3/1) = π/3; first quadrant confirms arg(1+i√3) = π/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a76302fa-3faa-40d7-a76e-7eccf6bdd0eb",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "If z₁/z₂ is purely imaginary, then |z₁+z₂|/|z₁−z₂| equals?",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "0",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "When z₁/z₂ is purely imaginary, z₁ and z₂ are perpendicular; |z₁+z₂|=|z₁−z₂|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e84d10a3-6f11-4f38-8648-951bce463702",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "If |z − 2| = 2|z − 1|, the locus of z is a?",
+  "formula": "",
+  "options": [
+   "Circle",
+   "Straight line",
+   "Ellipse",
+   "Parabola"
+  ],
+  "answer": 0,
+  "explain": "Apollonius circle: locus of points with ratio of distances to two fixed points constant (≠1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a07540e0-a770-4908-80d9-36174ebd0787",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Equality and square root of complex number",
+  "prompt": "The square roots of i are?",
+  "formula": "±(1+i)/√2",
+  "options": [
+   "±(1−i)/√2",
+   "±(1+i)",
+   "±(1+i)/√2",
+   "±i"
+  ],
+  "answer": 2,
+  "explain": "If z²=i, z = ±(1+i)/√2 since [(1+i)/√2]² = 2i/2 = i.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "686e3d55-3e60-477c-a367-7b9e11a442f4",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "For two complex numbers, |z₁+z₂|² + |z₁−z₂|² equals?",
+  "formula": "2(|z₁|²+|z₂|²)",
+  "options": [
+   "4|z₁||z₂|",
+   "(|z₁|+|z₂|)²",
+   "2|z₁||z₂|",
+   "2(|z₁|²+|z₂|²)"
+  ],
+  "answer": 3,
+  "explain": "Parallelogram law: sum of squares of diagonals = twice sum of squares of sides.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ba66e2d7-7afc-42d0-815b-a5bc1d82aee1",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "The value of i^{100} + i^{101} + i^{102} + i^{103} is?",
+  "formula": "",
+  "options": [
+   "−1",
+   "0",
+   "4",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "100≡0 mod 4: i^{100}=1,i^{101}=i,i^{102}=−1,i^{103}=−i; sum=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ece3aff7-b959-471f-b159-d0aa3cce4546",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "The product of all nth roots of unity is?",
+  "formula": "(−1)^{n+1}",
+  "options": [
+   "(−1)^{n+1}",
+   "−1",
+   "1",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Product of roots of zⁿ−1=0 is (−1)ⁿ×(−1)=(−1)^{n+1} by Vieta's formulas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7d9bacef-e790-4397-9e4b-4dd8f2cce54a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "If |z₁|=r₁ and |z₂|=r₂, then |z₁/z₂| equals?",
+  "formula": "r₁/r₂",
+  "options": [
+   "r₁+r₂",
+   "r₁·r₂",
+   "r₁/r₂",
+   "r₁−r₂"
+  ],
+  "answer": 2,
+  "explain": "Modulus of quotient equals quotient of moduli: |z₁/z₂|=|z₁|/|z₂|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f07557f6-0463-45f9-82d5-3c7369b0b557",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "arg(−i) equals?",
+  "formula": "",
+  "options": [
+   "−π/2",
+   "0",
+   "π/2",
+   "π"
+  ],
+  "answer": 0,
+  "explain": "−i lies on negative imaginary axis; principal argument = −π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a28640bc-d55e-4f32-8709-1a8f5b6fc135",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "If z = cosθ + i sinθ, then 1/z equals?",
+  "formula": "cos θ − i sin θ",
+  "options": [
+   "−cosθ+i sinθ",
+   "cosθ + i sinθ",
+   "cosθ − i sinθ",
+   "i sinθ"
+  ],
+  "answer": 2,
+  "explain": "|z|=1, so 1/z = z̄ = cosθ − i sinθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7fc3a5a8-da7c-4143-8084-e517344be876",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "For |z − z₀| ≤ r, the locus is?",
+  "formula": "",
+  "options": [
+   "Open disk",
+   "Annulus",
+   "Circle only",
+   "Closed disk"
+  ],
+  "answer": 3,
+  "explain": "|z−z₀|≤r includes boundary and interior — a closed disk of radius r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f608e5c4-ba67-4dfc-8e3f-76908cab50c6",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "If z+z̄ = 0, then z is?",
+  "formula": "",
+  "options": [
+   "Purely real",
+   "Real and positive",
+   "Modulus 1",
+   "Purely imaginary or zero"
+  ],
+  "answer": 3,
+  "explain": "z+z̄=2Re(z)=0 implies Re(z)=0, so z is purely imaginary or zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4981b4af-8904-4b5c-9cf3-b6f075abcd4d",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "The complex number with modulus 2 and argument 2π/3 in a+ib form is?",
+  "formula": "z = 2(cos2π/3 + i sin2π/3)",
+  "options": [
+   "1+i√3",
+   "−1+i√3",
+   "−1−i√3",
+   "1−i√3"
+  ],
+  "answer": 1,
+  "explain": "cos(2π/3)=−1/2, sin(2π/3)=√3/2; z=2(−1/2+i√3/2)=−1+i√3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36623b50-7161-4a26-b1cd-63973c6255ba",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "If z = x+iy, then z² + z̄² equals?",
+  "formula": "z² + z̄² = 2(x²−y²)",
+  "options": [
+   "2x²+2y²i",
+   "2(x²−y²)",
+   "2(x²+y²)",
+   "4xy·i"
+  ],
+  "answer": 1,
+  "explain": "z²+z̄² = 2·Re(z²) = 2(x²−y²) since Im parts cancel.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5999e73b-855c-4617-a486-d7fd7deee300",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "For z = x+iy, what is z²−z̄²?",
+  "formula": "z²−z̄² = 4xyi",
+  "options": [
+   "2(x²−y²)",
+   "4xy",
+   "4xyi",
+   "2xyi"
+  ],
+  "answer": 2,
+  "explain": "z²−z̄² = 2·Im(z²)·i = 2·(2xy)·i = 4xyi.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7ad81d0a-ed9f-4785-bf7d-0eff4f13038a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Rotation and geometry in complex plane",
+  "prompt": "If z₁,z₂,z₃ are vertices of equilateral triangle, z₁²+z₂²+z₃² equals?",
+  "formula": "z₁²+z₂²+z₃² = z₁z₂+z₂z₃+z₃z₁",
+  "options": [
+   "0",
+   "z₁z₂+z₂z₃+z₃z₁",
+   "3z₁z₂z₃",
+   "|z₁|²+|z₂|²+|z₃|²"
+  ],
+  "answer": 1,
+  "explain": "Equilateral triangle condition: z₁²+z₂²+z₃²=z₁z₂+z₂z₃+z₃z₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e5f4148f-2c74-4763-bbdc-6883ae72459a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "If α,β are roots of z²+z+1=0, then α+β and αβ equal respectively?",
+  "formula": "",
+  "options": [
+   "−1 and 1",
+   "1 and −1",
+   "0 and 1",
+   "−1 and −1"
+  ],
+  "answer": 0,
+  "explain": "By Vieta's: α+β=−1, αβ=1; roots are ω,ω².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8be08588-491f-48cd-91e2-b92e841f70c9",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "The value of ω^{3n+1} where ω is non-real cube root of unity is?",
+  "formula": "ω³=1",
+  "options": [
+   "ω²",
+   "1",
+   "ω",
+   "−1"
+  ],
+  "answer": 2,
+  "explain": "ω^{3n+1}=(ω³)^n·ω=1^n·ω=ω.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f2948127-be27-4d60-a45a-fc9c553effce",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Rotation and geometry in complex plane",
+  "prompt": "If z₁ and z₂ are non-zero complex numbers and |z₁+z₂|=|z₁−z₂|, then arg(z₁)−arg(z₂) equals?",
+  "formula": "",
+  "options": [
+   "π",
+   "±π/4",
+   "0",
+   "±π/2"
+  ],
+  "answer": 3,
+  "explain": "|z₁+z₂|=|z₁−z₂| implies z₁/z₂ is purely imaginary, so arg difference=±π/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a730c9ce-16eb-40b8-9121-93b69b0ac474",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "If n is a positive integer, i^{4n+1} equals?",
+  "formula": "i^{4n+1}=i",
+  "options": [
+   "−1",
+   "i",
+   "−i",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "i^{4n+1}=(i⁴)^n·i=1^n·i=i.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0b5a499b-f551-42be-8bfd-9643f1fd3314",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "If |z| = 2 and arg(z) = π/3, then z in a+ib form is?",
+  "formula": "z=r(cosθ+i sinθ)",
+  "options": [
+   "√2+i√2",
+   "1+i√3",
+   "√3+i",
+   "1+i"
+  ],
+  "answer": 1,
+  "explain": "z=2(cos60°+i sin60°)=2(1/2+i√3/2)=1+i√3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7a1fd4d9-c323-41fe-a156-9893974939e6",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Equality and square root of complex number",
+  "prompt": "r₁(cosθ₁+i sinθ₁) = r₂(cosθ₂+i sinθ₂) with r₁, r₂ > 0 holds iff?",
+  "formula": "",
+  "options": [
+   "r₁ = r₂ only",
+   "r₁ = r₂ and θ₁ = θ₂ + nπ",
+   "θ₁ = θ₂ only",
+   "r₁ = r₂ and θ₁ = θ₂ + 2nπ"
+  ],
+  "answer": 3,
+  "explain": "Equal modulus and arguments differing by a multiple of 2π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43e74cd9-94b8-4239-9882-4ef24f0b8613",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Equality and square root of complex number",
+  "prompt": "In √(a+ib) with b<0, the two roots have Re and Im parts of which relation?",
+  "formula": "2xy = b",
+  "options": [
+   "Re and Im have the same sign",
+   "Re is always zero",
+   "Im is always zero",
+   "Re and Im have opposite signs"
+  ],
+  "answer": 3,
+  "explain": "2xy = b < 0 means x and y have opposite signs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbbc77a3-80a7-4660-ae10-586dc3c9c454",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Equality and square root of complex number",
+  "prompt": "The equation z² = (z̄)² holds for z which is?",
+  "formula": "",
+  "options": [
+   "Real or purely imaginary",
+   "Of unit modulus",
+   "Only purely imaginary",
+   "Only real"
+  ],
+  "answer": 0,
+  "explain": "z² − z̄² = 4ixy = 0 ⇒ x = 0 or y = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9ae611ba-f6df-4c62-97b4-6ec2724baab9",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "|z − z₁| + |z − z₂| = |z₁ − z₂| represents:",
+  "formula": "",
+  "options": [
+   "An ellipse",
+   "The segment joining z₁ and z₂",
+   "A circle",
+   "The full line through z₁, z₂"
+  ],
+  "answer": 1,
+  "explain": "Equality in the triangle inequality holds only when z lies on the segment between z₁ and z₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2eba6c8d-7eeb-4a5c-99cc-2032194a639f",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "|z − z₁| / |z − z₂| = k, with k > 0 and k ≠ 1, represents:",
+  "formula": "",
+  "options": [
+   "An ellipse",
+   "A circle (Apollonius)",
+   "A hyperbola",
+   "A straight line"
+  ],
+  "answer": 1,
+  "explain": "A constant ratio of distances (k ≠ 1) gives the Apollonius circle; k = 1 gives a line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54e6a037-8ac1-4f5c-871e-739467c28ac2",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "arg[(z − z₁)/(z − z₂)] = ±π/2 gives locus of z as:",
+  "formula": "",
+  "options": [
+   "Line through z₁ and z₂",
+   "Circle with z₁z₂ as diameter",
+   "Parabola",
+   "Perpendicular bisector of z₁z₂"
+  ],
+  "answer": 1,
+  "explain": "The angle subtended at z by z₁z₂ is 90°, which is the angle in a semicircle (Thales).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11d547ee-aa0f-4f14-81dc-738234b908db",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "If (z₁ − z₂)/(z₁ − z₃) is purely real, the points z₁, z₂, z₃ are:",
+  "formula": "",
+  "options": [
+   "Vertices of an equilateral triangle",
+   "Collinear",
+   "Concyclic only",
+   "Vertices of a right triangle"
+  ],
+  "answer": 1,
+  "explain": "A real ratio means the argument is 0 or π, so the segments are parallel and share z₁: collinear.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f1ea875e-5c95-4d8c-8bd5-e050ea899d8e",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "Multiplying a complex number z by i geometrically does what?",
+  "formula": "",
+  "options": [
+   "Reflects it in the imaginary axis",
+   "Reflects it in the real axis",
+   "Rotates it 90° anticlockwise about O",
+   "Rotates it 90° clockwise about O"
+  ],
+  "answer": 2,
+  "explain": "i = e^{iπ/2}, so iz rotates z by π/2 anticlockwise, keeping the modulus.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50b91b1f-6be6-463d-803e-1546b362a3e5",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "|z₁ + z₂| = |z₁| + |z₂| (z₁, z₂ ≠ 0) holds iff:",
+  "formula": "",
+  "options": [
+   "arg z₁ − arg z₂ = π",
+   "arg z₁ = arg z₂",
+   "arg z₁ − arg z₂ = π/2",
+   "|z₁| = |z₂|"
+  ],
+  "answer": 1,
+  "explain": "Equality in the triangle inequality needs both vectors in the same direction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "24fc594f-2994-4825-8865-a14360308d4a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "Rotating z about point z₀ by angle θ anticlockwise gives:",
+  "formula": "",
+  "options": [
+   "(z + z₀)e^{iθ}",
+   "z₀ e^{iθ} + z",
+   "z e^{iθ} − z₀",
+   "z₀ + (z − z₀)e^{iθ}"
+  ],
+  "answer": 3,
+  "explain": "Translate z₀ to the origin, multiply by e^{iθ}, then translate back.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a1067f1-dafa-42b7-8b3e-8e54686ad217",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "|z − z₁| − |z − z₂| = k with 0 < |k| < |z₁ − z₂| represents:",
+  "formula": "",
+  "options": [
+   "One branch of a hyperbola",
+   "A circle",
+   "A pair of straight lines",
+   "An ellipse"
+  ],
+  "answer": 0,
+  "explain": "A constant difference of distances from two foci gives one branch of a hyperbola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "122583a3-f307-4db0-8349-578822dcedd1",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "For z ≠ 0, the points z and 1/z̄ are related as:",
+  "formula": "",
+  "options": [
+   "Antipodal points on the unit circle",
+   "Reflections in the imaginary axis",
+   "Reflections in the real axis",
+   "Inverse points in the unit circle"
+  ],
+  "answer": 3,
+  "explain": "1/z̄ = z/|z|², so it lies on the same ray from O and |z|·|1/z̄| = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb07bd2a-2c89-4b47-a8d3-6227b12862bb",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "Geometrically, the point z̄ is the ___ of z in the Argand plane.",
+  "formula": "",
+  "options": [
+   "Rotation of z by 90°",
+   "Reflection in the origin",
+   "Reflection in the real axis",
+   "Reflection in the imaginary axis"
+  ],
+  "answer": 2,
+  "explain": "z = x + iy gives z̄ = x − iy, the mirror image in the real axis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d859fd67-ba3a-4f1f-8c2d-d21fb5536c81",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "For nonzero z, the points z and −z̄ are symmetric about:",
+  "formula": "",
+  "options": [
+   "The origin",
+   "The imaginary axis",
+   "The real axis",
+   "The line y = x"
+  ],
+  "answer": 1,
+  "explain": "−z̄ = −x + iy, the reflection of (x, y) in the imaginary axis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0570375a-2feb-4d2d-860f-5bd67267cb31",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argand plane representation",
+  "prompt": "Re(z) = |z − 1| represents which curve in the Argand plane?",
+  "formula": "",
+  "options": [
+   "Straight line",
+   "Circle",
+   "Ellipse",
+   "Parabola"
+  ],
+  "answer": 3,
+  "explain": "x = √((x−1)² + y²): the distance from (1,0) equals the distance from the line x = 0, so it is a parabola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b25e38b-bda8-4c1b-b277-f121a05ef3c1",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "For real a, b: a + ib = 0 holds if and only if?",
+  "formula": "",
+  "options": [
+   "a = 0 and b = 0",
+   "a = b",
+   "a = 0 only",
+   "ab = 0"
+  ],
+  "answer": 0,
+  "explain": "A complex number is zero iff both real and imaginary parts are zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "291b2a99-a8dc-47c7-9bfc-5745b09bc1c5",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "If |z − 3 − 4i| = 2, the greatest value of |z| is?",
+  "formula": "max |z| = |z₀| + r",
+  "options": [
+   "5",
+   "3",
+   "9",
+   "7"
+  ],
+  "answer": 3,
+  "explain": "The centre is at distance 5 from the origin, so the maximum |z| = 5 + 2 = 7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4e413d46-775f-4b4b-b307-7f414fd0a07b",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "If |z₁| = 5 and |z₂| = 3, the minimum possible value of |z₁ + z₂| is?",
+  "formula": "|z₁+z₂| ≥ ||z₁| − |z₂||",
+  "options": [
+   "8",
+   "2",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "The minimum is ||z₁|−|z₂|| = 2, attained when the arguments differ by π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2658b017-8510-48ec-b6bf-86935c5c0ecb",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Principal argument of sin α + i(1 − cos α), 0<α<π, equals?",
+  "formula": "",
+  "options": [
+   "α",
+   "π/2 − α",
+   "π − α/2",
+   "α/2"
+  ],
+  "answer": 3,
+  "explain": "Ratio = 2sin(α/2)cos(α/2)/2sin²(α/2) gives cot(α/2) = tan(π/2 − α/2)... check: tanθ = (1−cosα)/sinα = tan(α/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72d0bf50-b198-4682-b93b-0645569d528d",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "Principal argument of 1 + cos θ + i sin θ, for −π < θ < π, is?",
+  "formula": "",
+  "options": [
+   "π − θ",
+   "2θ",
+   "θ/2",
+   "θ"
+  ],
+  "answer": 2,
+  "explain": "1+e^{iθ} = 2cos(θ/2)e^{iθ/2} with cos(θ/2) > 0, so arg = θ/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "350a2f49-f089-4e33-b5c6-1f1d5f1cff63",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "For real θ, the modulus |e^{iθ}| equals?",
+  "formula": "|e^{iθ}| = |cosθ + i sinθ|",
+  "options": [
+   "cosθ",
+   "θ",
+   "1",
+   "e"
+  ],
+  "answer": 2,
+  "explain": "√(cos²θ + sin²θ) = 1, so e^{iθ} always lies on the unit circle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ab62d250-5edf-4130-8994-4e8c52096301",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "For −π < θ < π, |1 + e^{iθ}| equals?",
+  "formula": "1 + e^{iθ} = 2cos(θ/2)·e^{iθ/2}",
+  "options": [
+   "cos(θ/2)",
+   "2sin(θ/2)",
+   "2cosθ",
+   "2cos(θ/2)"
+  ],
+  "answer": 3,
+  "explain": "Factor e^{iθ/2}: 1 + e^{iθ} = e^{iθ/2}(e^{−iθ/2} + e^{iθ/2}) = 2cos(θ/2)e^{iθ/2}.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ab6690f6-4f09-4570-98c3-864f77e66266",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "For real θ, e^{iθ} = 1 holds exactly when θ is?",
+  "formula": "e^{iθ} has period 2π",
+  "options": [
+   "(2n+1)π, n ∈ ℤ",
+   "nπ, n ∈ ℤ",
+   "2nπ, n ∈ ℤ",
+   "nπ/2, n ∈ ℤ"
+  ],
+  "answer": 2,
+  "explain": "cosθ = 1 and sinθ = 0 occur only at θ = 2nπ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6df3f9e3-09f3-4465-a82f-1a85905c219a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "e^{iθ} + e^{−iθ} equals?",
+  "formula": "",
+  "options": [
+   "cos2θ",
+   "2 sinθ",
+   "2i sinθ",
+   "2cosθ"
+  ],
+  "answer": 3,
+  "explain": "The sine terms cancel and the cosines add, giving 2cosθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "468b7b23-1e90-4828-8efb-d2dc96194934",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "If |z−z₀| ≤ r and |z₀| < r, the least value of |z| is?",
+  "formula": "",
+  "options": [
+   "r−|z₀|",
+   "0",
+   "|z₀|−r",
+   "|z₀|"
+  ],
+  "answer": 1,
+  "explain": "The origin lies inside the disc, so z = 0 is allowed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fcc32904-abfc-45a5-bd7d-ca2ee8bcf7cc",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "For nonzero z₁, z₂, |z₁−z₂| = |z₁|+|z₂| holds exactly when z₁/z₂ is?",
+  "formula": "|z₁−z₂| ≤ |z₁|+|z₂|",
+  "options": [
+   "Of modulus 1",
+   "Purely imaginary",
+   "Positive real",
+   "Negative real"
+  ],
+  "answer": 3,
+  "explain": "Equality needs z₁ and z₂ in opposite directions: arg z₁ − arg z₂ = π, so z₁/z₂ < 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5febca8f-3bf4-4e87-9f71-394aa1384813",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "If |z| = 2, then |z+1| can take values in the interval?",
+  "formula": "||z|−1| ≤ |z+1| ≤ |z|+1",
+  "options": [
+   "[1, 3]",
+   "[2, 3]",
+   "[1, 2]",
+   "[0, 3]"
+  ],
+  "answer": 0,
+  "explain": "By the triangle inequalities, 2−1 ≤ |z+1| ≤ 2+1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54b302d7-4d72-4c05-8363-e105b3d44cff",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "If |z| ≥ 3, the least value of |z+1/z| is?",
+  "formula": "|z+1/z| ≥ |z| − 1/|z|",
+  "options": [
+   "8/3",
+   "2",
+   "10/3",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "r − 1/r increases for r ≥ 3, so the least value is 3 − 1/3 = 8/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b1ebefd1-9e4d-4385-a5f1-2578d6cee3fa",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "|z₁+z₂| = ||z₁|−|z₂|| (with |z₁| ≠ |z₂|, both nonzero) holds exactly when?",
+  "formula": "|z₁+z₂| ≥ ||z₁|−|z₂||",
+  "options": [
+   "|z₁| = |z₂|",
+   "arg z₁ = arg z₂",
+   "arg z₁ − arg z₂ = π",
+   "arg z₁ − arg z₂ = π/2"
+  ],
+  "answer": 2,
+  "explain": "The lower bound is attained only when z₁ and z₂ point in opposite directions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ae46a749-90f5-4fd2-a64c-e6f86c11fce6",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "Locus of z if |z − z₁|² + |z − z₂|² = |z₁ − z₂|²?",
+  "formula": "",
+  "options": [
+   "Circle with z₁z₂ as diameter",
+   "Perpendicular bisector of z₁z₂",
+   "Line segment z₁z₂",
+   "Circle centred at z₁ through z₂"
+  ],
+  "answer": 0,
+  "explain": "By Pythagoras, ∠z₁ z z₂ = 90°, so z lies on the circle with z₁z₂ as diameter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b2ae15e-8f70-4fce-8f18-0a20a716adcd",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "a z̄ + ā z + b = 0 (a ≠ 0, b real) represents?",
+  "formula": "",
+  "options": [
+   "A circle",
+   "A straight line",
+   "A parabola",
+   "A point"
+  ],
+  "answer": 1,
+  "explain": "With a = p+iq it becomes 2(px + qy) + b = 0, a straight line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c452bec7-2908-48ee-a5d0-35f56cca3751",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "If (z − 1)/(z + 1) is real (z ≠ −1), then z lies on?",
+  "formula": "",
+  "options": [
+   "Real axis",
+   "Imaginary axis",
+   "Unit circle",
+   "Line x = 1"
+  ],
+  "answer": 0,
+  "explain": "Imag part ∝ y; so y = 0, z is real (collinear with 1 and −1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "652ba2be-6fd7-4b85-a60f-5aa9f1fbeb68",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "If arg[(z − z₁)/(z − z₂)] = π/2, then z lies on?",
+  "formula": "",
+  "options": [
+   "The perpendicular bisector of z₁z₂",
+   "The line through z₁ and z₂",
+   "A semicircle on z₁z₂ as diameter",
+   "A major arc of a circle"
+  ],
+  "answer": 2,
+  "explain": "Angle subtended at z by z₁z₂ is 90°, so z is on a semicircle (angle in a semicircle).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad6a2f6b-d5e4-44f7-9e21-100a5774d1d4",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "arg[(z − z₁)/(z − z₂)] = π/4 represents?",
+  "formula": "",
+  "options": [
+   "A ray",
+   "A major arc of a circle",
+   "A full circle",
+   "A minor arc of a circle"
+  ],
+  "answer": 1,
+  "explain": "A constant angle of less than π/2 subtended by z₁z₂ gives a major arc.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "28ff8430-9c4a-4bf4-987a-2347440c12d3",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "Locus of Re(z²) = 0 in the Argand plane is?",
+  "formula": "",
+  "options": [
+   "Imaginary axis",
+   "Circle x² + y² = 0",
+   "Hyperbola xy = 0",
+   "Pair of lines y = ±x"
+  ],
+  "answer": 3,
+  "explain": "Re(z²) = x² − y² = 0 gives y = x and y = −x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3651de87-fc84-4287-bd70-ec01fa32b967",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "If arg[(z − z₁)/(z − z₂)] = π, then z lies on?",
+  "formula": "",
+  "options": [
+   "Perpendicular bisector of z₁z₂",
+   "Semicircle on z₁z₂ as diameter",
+   "Line z₁z₂ outside the segment",
+   "Segment between z₁ and z₂ (ends excluded)"
+  ],
+  "answer": 3,
+  "explain": "Argument π means z−z₁ and z−z₂ point in opposite directions, so z lies between z₁ and z₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "feab7e6e-8518-49fe-8893-ff022e8226fc",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "||z − 1| − |z + 1|| = 1 represents which locus?",
+  "formula": "||z − z₁| − |z − z₂|| = k < |z₁ − z₂|",
+  "options": [
+   "Ellipse",
+   "Hyperbola",
+   "Pair of rays",
+   "Perpendicular bisector"
+  ],
+  "answer": 1,
+  "explain": "The difference of focal distances is constant and 1 < 2 = |z₁ − z₂|, which gives a hyperbola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72a95aa9-9b4f-4742-b3a8-d620defa7647",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "For z ≠ 0, z² is purely imaginary iff:",
+  "formula": "Re(z²) = x²−y² = 0",
+  "options": [
+   "x² = y²",
+   "xy = 0",
+   "y = 0",
+   "x = 0"
+  ],
+  "answer": 0,
+  "explain": "Re(z²)=x²−y²=0 gives |Re z|=|Im z|, i.e. z lies on y=±x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6beae9a6-ec47-4e36-ac7b-8281a03ee261",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "(a+ib)/(c+id) is purely real iff:",
+  "formula": "",
+  "options": [
+   "ac + bd = 0",
+   "ac = bd",
+   "a² + b² = c² + d²",
+   "ad = bc"
+  ],
+  "answer": 3,
+  "explain": "Imaginary part is (bc−ad)/(c²+d²), so it is real iff ad = bc.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7945ef34-a8e8-4646-8753-ab9cc2e961d5",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "Least positive integer n for which (1+i)ⁿ is real:",
+  "formula": "1+i = √2·e^{iπ/4}",
+  "options": [
+   "4",
+   "2",
+   "3",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "arg = nπ/4 must be a multiple of π, so n=4 gives (1+i)⁴ = −4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5628ef14-ca18-4e64-9378-32af507f2c33",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "Multiplying a complex number z by ω (non-real cube root of unity) does what geometrically?",
+  "formula": "",
+  "options": [
+   "Reflects z in the real axis",
+   "Rotates by 120° anticlockwise about origin",
+   "Rotates by 120° clockwise",
+   "Rotates by 60° anticlockwise"
+  ],
+  "answer": 1,
+  "explain": "|ω| = 1 and arg ω = 120°, so zω is z rotated by 120° anticlockwise.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "28e498c9-0820-4b9a-b0f4-e21ab7946f30",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "Sum 1+ω^n+ω^{2n} equals 3 exactly when n is?",
+  "formula": "",
+  "options": [
+   "a multiple of 3",
+   "not a multiple of 3",
+   "odd",
+   "even"
+  ],
+  "answer": 0,
+  "explain": "If 3|n, each term is 1; otherwise the sum is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eba661b4-7492-43d3-86ad-336cc78249e3",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "Factorisation of a²+b²+c²−ab−bc−ca using ω gives?",
+  "formula": "",
+  "options": [
+   "(a+bω+cω²)(a+bω²+cω)",
+   "(a+bω+cω²)²",
+   "(a−bω)(b−cω)(c−aω)",
+   "(a+b+c)(a+bω+cω²)"
+  ],
+  "answer": 0,
+  "explain": "Standard identity: product of the two conjugate factors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "73983a3d-ad52-40c6-b217-322cb70a16d3",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "If n divides m, Σₖ₌₀ⁿ⁻¹ αᵏᵐ over all nth roots α of unity equals?",
+  "formula": "Σ αᵐ = n if n | m, else 0",
+  "options": [
+   "0",
+   "n",
+   "1",
+   "m"
+  ],
+  "answer": 1,
+  "explain": "Each αᵐ = 1 when n | m, so the n terms each equal 1 and add to n.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e8c8e78a-dea6-4f2a-8b19-f2e5e11e1f8a",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "On the Argand plane, the nth roots of unity (n ≥ 3) are the vertices of which figure?",
+  "formula": "",
+  "options": [
+   "Regular n-gon with centre at 1",
+   "Regular n-gon inscribed in a circle of radius n",
+   "n collinear points on the real axis",
+   "Regular n-gon inscribed in the unit circle"
+  ],
+  "answer": 3,
+  "explain": "All lie on |z| = 1, equally spaced by angle 2π/n, giving a regular n-gon.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "20e08f0d-f94c-4157-8482-6f1e34189036",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "If 1, α₁, …, αₙ₋₁ are the nth roots of unity, (1−α₁)(1−α₂)…(1−αₙ₋₁) = ?",
+  "formula": "xⁿ−1 = (x−1)(x−α₁)…(x−αₙ₋₁)",
+  "options": [
+   "n",
+   "0",
+   "1",
+   "n−1"
+  ],
+  "answer": 0,
+  "explain": "Divide xⁿ−1 by (x−1) to get 1+x+…+xⁿ⁻¹ and put x = 1, which gives n.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7248e7a6-dd92-4cac-91b8-8a63184dea75",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "The arguments of the roots of z⁴ = −1 are of the form?",
+  "formula": "",
+  "options": [
+   "π/2 + kπ",
+   "π/4 + kπ/2",
+   "π/4 + kπ",
+   "kπ/2"
+  ],
+  "answer": 1,
+  "explain": "−1 = e^{iπ}, so z = e^{i(π+2kπ)/4} = e^{i(π/4 + kπ/2)}.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "82f4e8fa-d947-43f8-b9c7-614d2c806efd",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "De Moivre's theorem, nth roots of unity",
+  "prompt": "The sum of all roots of z⁵ = 3 + 4i in the complex plane is?",
+  "formula": "",
+  "options": [
+   "3 + 4i",
+   "(3 + 4i)/5",
+   "5",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "z⁵ − (3+4i) = 0 has no z⁴ term, so the sum of the roots is 0. The roots lie symmetrically on a circle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68c03b91-3456-4a95-988f-50f9e94b347d",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "For which equations must a non-real root always come with its conjugate as another root?",
+  "formula": "",
+  "options": [
+   "Quadratics with purely imaginary coefficients",
+   "Any quadratic with complex coefficients",
+   "Quadratics with rational roots only",
+   "Quadratics with real coefficients"
+  ],
+  "answer": 3,
+  "explain": "The conjugate root theorem holds only when all coefficients are real.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "887439b9-76d1-439b-8b41-9ffa484bfb79",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "Real-coefficient quadratic z² + bz + c = 0 has a purely imaginary root. Then b equals",
+  "formula": "",
+  "options": [
+   "1",
+   "−c",
+   "c²",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "Roots are ±ki (conjugates), so their sum −b = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bbcfc1e3-3b28-40d5-9b04-1bd3a9a0ce99",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "Roots of z² − 2z cosθ + 1 = 0 (0<θ<π) are",
+  "formula": "z = cosθ ± i sinθ",
+  "options": [
+   "cosθ ± i sinθ",
+   "±cosθ ± i",
+   "sinθ ± i cosθ",
+   "cosθ ± sinθ"
+  ],
+  "answer": 0,
+  "explain": "Discriminant = −4sin²θ, so z = cosθ ± i sinθ = e^{±iθ}.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ff4c6d9-1b02-4be5-94bf-44554c3189ea",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "a, b, c real, b² < 4ac. For a non-real root α, |α|² equals",
+  "formula": "αᾱ = c/a",
+  "options": [
+   "b²/4a²",
+   "a/c",
+   "c/a",
+   "−b/a"
+  ],
+  "answer": 2,
+  "explain": "Roots are conjugates, so product αᾱ = |α|² = c/a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75c7928a-495c-42e1-bba6-f859a9b6b85c",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "Real-coefficient quadratic has non-real roots α, β. Then |α/β| equals",
+  "formula": "",
+  "options": [
+   "depends on a, b, c",
+   "α·β",
+   "2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "β = ᾱ and |ᾱ| = |α|, so the ratio of moduli is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ec32d7b-154d-45d4-a465-2e9f36c485b1",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "For real a,b,c with non-real roots, ax² + bx + c has which sign for all real x?",
+  "formula": "",
+  "options": [
+   "Opposite to sign of a",
+   "Same as sign of b",
+   "Same as sign of a",
+   "Same as sign of c only when a>0"
+  ],
+  "answer": 2,
+  "explain": "The parabola never meets the x-axis, so it has the sign of a throughout.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66821295-42be-4e0c-93b5-d2b5e8ca0ffb",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "For real k, x² + kx + 9 = 0 has non-real roots exactly when",
+  "formula": "D = k² − 36 < 0",
+  "options": [
+   "−6 < k < 6",
+   "k > 6",
+   "k < −6 or k > 6",
+   "−3 < k < 3"
+  ],
+  "answer": 0,
+  "explain": "Non-real roots need D < 0, so k² < 36, i.e. |k| < 6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8e7b91bd-c88a-4205-abb7-34edfae35e71",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Equality and square root of complex number",
+  "prompt": "The equation z² = |z|² (z≠0) holds exactly when z is?",
+  "formula": "z² = z·z̄",
+  "options": [
+   "Purely imaginary",
+   "Of unit modulus",
+   "Real",
+   "Any complex number"
+  ],
+  "answer": 2,
+  "explain": "z² = z·z̄ gives z = z̄, so z is real.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b8c4c0f4-485b-41ad-b426-569b5c36f3ec",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "The value of |(1 − i)⁶| is?",
+  "formula": "|zⁿ| = |z|ⁿ",
+  "options": [
+   "8",
+   "16",
+   "6√2",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "|1−i| = √2, so |(1−i)⁶| = (√2)⁶ = 8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1004834d-c538-4fce-a465-477ca2e20b23",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "If |z| = 1 and z ≠ ±1, then (z − 1)/(z + 1) is?",
+  "formula": "",
+  "options": [
+   "Purely imaginary",
+   "Equal to z̄",
+   "Purely real",
+   "Of modulus 2"
+  ],
+  "answer": 0,
+  "explain": "For |z|=1, z−1 ⟂ z+1 (angle in a semicircle), so the ratio is purely imaginary.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e543bd37-f4aa-4154-bf56-0a59df58b311",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Argument and principal argument",
+  "prompt": "For which non-zero z does the principal arg(z̄) = −arg(z) fail?",
+  "formula": "",
+  "options": [
+   "z in first quadrant",
+   "Purely imaginary z",
+   "Negative real z",
+   "Positive real z"
+  ],
+  "answer": 2,
+  "explain": "For z = −r, arg z = π but arg z̄ = π (not −π), since the principal range is (−π, π].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "41598feb-301e-4e64-a572-d53d88b00104",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "Least positive integer n for which (√3 + i)ⁿ is purely imaginary:",
+  "formula": "arg(√3 + i) = π/6",
+  "options": [
+   "6",
+   "3",
+   "2",
+   "12"
+  ],
+  "answer": 1,
+  "explain": "n·π/6 = π/2 gives n = 3, and (√3+i)³ = 8i.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8858b2c8-161c-46c2-84af-49d5e88d1fe4",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "If z₁z̄₂ is purely real (z₁, z₂ ≠ 0), then arg z₁ − arg z₂ is:",
+  "formula": "",
+  "options": [
+   "A multiple of π",
+   "Always 0",
+   "A multiple of π/4",
+   "An odd multiple of π/2"
+  ],
+  "answer": 0,
+  "explain": "arg(z₁z̄₂) = θ₁ − θ₂ must be 0 or π (mod 2π): the points are collinear with the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43766441-11f0-4c4a-9d31-121f9a94c428",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Rotation and geometry in complex plane",
+  "prompt": "Rotation formula: (z₃−z₁)/(z₂−z₁) = |z₃−z₁|/|z₂−z₁| · e^{iθ}. Here θ equals?",
+  "formula": "",
+  "options": [
+   "∠z₂z₁z₃ (signed, from z₁z₂ to z₁z₃)",
+   "∠z₁z₂z₃",
+   "Angle between z₂ and z₃ from origin",
+   "∠z₁z₃z₂"
+  ],
+  "answer": 0,
+  "explain": "arg[(z₃−z₁)/(z₂−z₁)] is the angle through which z₁z₂ must rotate to reach z₁z₃.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3852f9b-03b2-4b7a-b9a4-4292f6378b38",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "Real quadratic ax²+bx+c=0 has non-real roots. The real part of each root is",
+  "formula": "x = [−b ± i√(4ac − b²)] / 2a",
+  "options": [
+   "−b/2a",
+   "c/a",
+   "√(4ac − b²)/2a",
+   "−b/a"
+  ],
+  "answer": 0,
+  "explain": "Both roots share real part −b/2a, and imaginary parts ±√(4ac−b²)/2a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e3d656e-0069-4902-b9f0-e93652eb6fde",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "For ω a non-real cube root of unity, |1 − ω| equals?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "√3/2",
+   "√3"
+  ],
+  "answer": 3,
+  "explain": "1−ω = 3/2 − i√3/2, modulus² = 9/4 + 3/4 = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2efcc0b2-839c-4fd8-bc49-a49ac05baae2",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Quadratic equations with complex roots",
+  "prompt": "The roots of z² − 2iz − 1 = 0 are",
+  "formula": "z² − 2iz − 1 = (z − i)²",
+  "options": [
+   "1 + i and 1 − i",
+   "1 and −1",
+   "i, repeated",
+   "i and −i"
+  ],
+  "answer": 2,
+  "explain": "z² − 2iz − 1 = (z − i)², so i is a repeated root. Complex coefficients need not give conjugate roots.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6fdc3682-c2dd-4203-a41c-9f82eb92855d",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Polar and Euler (exponential) form",
+  "prompt": "Principal argument of z = 1 − cosα + i sinα, 0<α<π, is?",
+  "formula": "1−cosα = 2sin²(α/2), sinα = 2sin(α/2)cos(α/2)",
+  "options": [
+   "π/2 − α/2",
+   "π/2 − α",
+   "α/2",
+   "α"
+  ],
+  "answer": 0,
+  "explain": "z = 2sin(α/2)[sin(α/2) + i cos(α/2)], so arg = π/2 − α/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0cd431d4-885b-4284-8820-5a89b53bb9ad",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Algebra of complex numbers, i powers",
+  "prompt": "For an integer n, iⁿ is purely imaginary exactly when?",
+  "formula": "",
+  "options": [
+   "n is a multiple of 4",
+   "n ≡ 1 (mod 4) only",
+   "n is even",
+   "n is odd"
+  ],
+  "answer": 3,
+  "explain": "n odd gives ±i (purely imaginary); n even gives ±1 (real).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8a540e35-df67-482c-bc04-0ca657fdac65",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Equality and square root of complex number",
+  "prompt": "If (x+iy)² = a+ib with x, y, a, b real, then xy equals?",
+  "formula": "x² − y² = a, 2xy = b",
+  "options": [
+   "a/2",
+   "b/2",
+   "b",
+   "2b"
+  ],
+  "answer": 1,
+  "explain": "Equating imaginary parts of x²−y²+2ixy = a+ib gives 2xy = b, so xy = b/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b911b14a-48ad-4c41-b144-d35cb5c82b85",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "Number of complex z satisfying both |z| = 1 and |z − 1| = 1?",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "1",
+   "Infinitely many"
+  ],
+  "answer": 1,
+  "explain": "Two unit circles with centres 0 and 1 meet at two points, z = e^{±iπ/3}.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "df7594c6-6c6f-4d03-9d3e-5f5ab4c44484",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "For α ≠ odd multiple of π/2, |1 + i tanα| equals?",
+  "formula": "",
+  "options": [
+   "|tan α|",
+   "|1 + tan α|",
+   "|cosec α|",
+   "|sec α|"
+  ],
+  "answer": 3,
+  "explain": "√(1 + tan²α) = |sec α|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "351ed74a-6c15-433d-9e09-e96fc4cd9634",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "For any complex z₁, z₂: |z₁ + z₂|² equals |z₁|² + |z₂|² plus?",
+  "formula": "|z₁+z₂|² = (z₁+z₂)(z̄₁+z̄₂)",
+  "options": [
+   "Re(z₁z₂)",
+   "2|z₁||z₂| always",
+   "2Im(z₁z̄₂)",
+   "2Re(z₁z̄₂)"
+  ],
+  "answer": 3,
+  "explain": "Expanding gives |z₁|²+|z₂|²+z₁z̄₂+z̄₁z₂ = |z₁|²+|z₂|²+2Re(z₁z̄₂).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b218de6e-3537-4f98-a351-90e9994356c4",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Modulus and its properties",
+  "prompt": "If |z| = 1, then z + 1/z equals?",
+  "formula": "1/z = z̄ when |z| = 1",
+  "options": [
+   "z² + 1",
+   "2i Im(z)",
+   "2 Re(z)",
+   "2|z|"
+  ],
+  "answer": 2,
+  "explain": "For |z|=1, 1/z = z̄, so z + z̄ = 2Re(z), which is always real.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a848da03-ba15-4003-a5d8-720f678f8826",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Conjugate and its properties",
+  "prompt": "For z ≠ 0, z + 1/z is real exactly when:",
+  "formula": "Im(z + 1/z) = y(1 − 1/|z|²)",
+  "options": [
+   "z is real only",
+   "|z| = 1 only",
+   "z is real or |z| = 1",
+   "z is purely imaginary"
+  ],
+  "answer": 2,
+  "explain": "Im(z+1/z) = y(1 − 1/|z|²) = 0, so y = 0 or |z| = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eb1646fb-3c9c-4015-9f34-5838af15c678",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "For complex z satisfying |z − 1| = |z − 3|, the least value of |z| is?",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Locus is the line Re z = 2; its nearest point to the origin is 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "18a7291a-d716-405e-8aa6-dd093eb01d59",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "|z₁| = 1, |z₂| = 2, |z₃| = 5. The minimum possible value of |z₁ + z₂ + z₃| is?",
+  "formula": "",
+  "options": [
+   "8",
+   "0",
+   "3",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "|z₃| − (|z₁|+|z₂|) = 5 − 3 = 2, since 5 exceeds the sum of the other moduli.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d0112d8a-74a9-480c-9508-485265cf93af",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Triangle inequality, max/min of |z|",
+  "prompt": "If |z + 4| ≤ 3, the greatest value of |z + 1| is?",
+  "formula": "|z+1| ≤ |z+4| + |−3|",
+  "options": [
+   "7",
+   "3",
+   "6",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "|z+1| = |(z+4)−3| ≤ 3+3 = 6, attained at z = −7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d383c8de-a82a-424f-b60d-50f56b56d169",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "For |z − z₁| = k|z − z₂| (k > 0, k ≠ 1), the centre of the circle lies?",
+  "formula": "",
+  "options": [
+   "On the line through z₁ and z₂",
+   "At the origin",
+   "At the midpoint of z₁z₂",
+   "On the perpendicular bisector of z₁z₂"
+  ],
+  "answer": 0,
+  "explain": "The Apollonius circle's centre is collinear with z₁ and z₂ (it is not the midpoint unless k = 1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "65d2132b-c87c-45f2-ac9f-11a8958b44ca",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "arg[(z − z₁)/(z − z₂)] = 0 gives the locus of z as?",
+  "formula": "",
+  "options": [
+   "Segment z₁z₂ only",
+   "Semicircle on z₁z₂ as diameter",
+   "Perpendicular bisector of z₁z₂",
+   "Line z₁z₂ excluding the segment between them"
+  ],
+  "answer": 3,
+  "explain": "(z − z₁)/(z − z₂) > 0 means z is on the line outside the segment; the points z₁, z₂ are excluded.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f3e58fa-3451-468c-b470-af1e9eee63b7",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Locus: circle, line, perpendicular bisector",
+  "prompt": "The locus Im(z²) = 2 in the Argand plane is a?",
+  "formula": "2xy = 2",
+  "options": [
+   "Parabola",
+   "Pair of straight lines",
+   "Circle",
+   "Rectangular hyperbola"
+  ],
+  "answer": 3,
+  "explain": "Im(z²) = 2xy, so xy = 1, a rectangular hyperbola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc4b0d39-52a5-4280-a911-97a13dc9de59",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Purely real/imaginary conditions",
+  "prompt": "The principal value of iⁱ is:",
+  "formula": "iⁱ = e^{i·(iπ/2)}",
+  "options": [
+   "Purely real, e^{−π/2}",
+   "Non-real complex",
+   "Equal to −1",
+   "Purely imaginary"
+  ],
+  "answer": 0,
+  "explain": "i = e^{iπ/2}, so iⁱ = e^{−π/2}, a positive real number.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "70ab53e8-9cfe-4c2b-9583-5f9cda399ae8",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Cube roots of unity and properties",
+  "prompt": "x³ + y³ + z³ − 3xyz factorises, using ω, as:",
+  "formula": "",
+  "options": [
+   "(x+y+z)(x+ωy+ω²z)²",
+   "(x+y+z)(x+ωy+ω²z)(x+ω²y+ωz)",
+   "(x+y+z)(x+ωy+ωz)(x+ω²y+ω²z)",
+   "(x−y)(y−z)(z−x)"
+  ],
+  "answer": 1,
+  "explain": "Standard identity: x³+y³+z³−3xyz = (x+y+z)(x+ωy+ω²z)(x+ω²y+ωz).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0623d673-f54c-40db-850c-8d2f7b6e8bf3",
+  "subject": "Mathematics",
+  "chapter": "Complex Numbers",
+  "topic": "Rotation and geometry in complex plane",
+  "prompt": "Vertices z, iz, −z, −iz (z ≠ 0) form a square of area?",
+  "formula": "",
+  "options": [
+   "4|z|²",
+   "2|z|²",
+   "|z|²/2",
+   "|z|²"
+  ],
+  "answer": 1,
+  "explain": "The diagonal is 2|z|, so area = d²/2 = 2|z|².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

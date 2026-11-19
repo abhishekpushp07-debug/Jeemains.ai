@@ -1,1398 +1,4178 @@
 [
-  {
-    "id": "298562d5-4f46-491d-b8bd-89fd9eb622d8",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of Planck's constant h?",
-    "formula": "E = hν",
-    "options": [
-      "[ML³T⁻²]",
-      "[ML²T⁻¹]",
-      "[MLT⁻¹]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 1,
-    "explain": "h = E/ν → [ML²T⁻²]/[T⁻¹] = [ML²T⁻¹]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b6bf69b6-8996-499d-bb26-96a012bade43",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "SI Units",
-    "prompt": "SI unit of luminous intensity?",
-    "formula": "",
-    "options": [
-      "Lumen",
-      "Candela",
-      "Lux",
-      "Watt"
-    ],
-    "answer": 1,
-    "explain": "Candela (cd) is the SI base unit for luminous intensity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5bb62a79-d9ab-4825-8db5-60d485e23de4",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of universal gravitational constant G?",
-    "formula": "F = Gm₁m₂/r²",
-    "options": [
-      "[M⁻¹L²T⁻²]",
-      "[ML³T⁻²]",
-      "[M⁻¹L³T⁻²]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 2,
-    "explain": "G = Fr²/m² → [MLT⁻²·L²/M²] = [M⁻¹L³T⁻²]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a951dbfc-7821-44cd-aa80-feeeb27f0154",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Which pair has the same dimensions?",
-    "formula": "",
-    "options": [
-      "Impulse & Momentum × time",
-      "Power & Force",
-      "Pressure & Energy",
-      "Work & Torque"
-    ],
-    "answer": 3,
-    "explain": "Work = F·d and Torque = F×r both have dimensions [ML²T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c6c6d6e7-28e3-48b9-8da6-2ddf69288a65",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of coefficient of viscosity η?",
-    "formula": "F = ηA(dv/dx)",
-    "options": [
-      "[MLT⁻¹]",
-      "[ML⁻¹T⁻²]",
-      "[ML²T⁻¹]",
-      "[ML⁻¹T⁻¹]"
-    ],
-    "answer": 3,
-    "explain": "η = F/(A·dv/dx) → [MLT⁻²]/[L²·T⁻¹] = [ML⁻¹T⁻¹]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b67e48a-2fa1-4900-969f-c16c195a7594",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "In scientific notation 0.00340, significant figures are?",
-    "formula": "",
-    "options": [
-      "4",
-      "5",
-      "3",
-      "2"
-    ],
-    "answer": 2,
-    "explain": "0.00340 = 3.40×10⁻³; trailing zero after decimal counts → 3 sig figs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "adfb8fd2-158c-4ae9-ad38-d834482a3bcc",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Error Analysis",
-    "prompt": "Relative error in Z = A³/B½ if errors are ΔA/A and ΔB/B?",
-    "formula": "ΔZ/Z = 3(ΔA/A) + ½(ΔB/B)",
-    "options": [
-      "3ΔA/A + 2ΔB/B",
-      "3ΔA/A + ½ΔB/B",
-      "ΔA/A + ΔB/B",
-      "3ΔA/A – ½ΔB/B"
-    ],
-    "answer": 1,
-    "explain": "Errors add for products/quotients with powers as multipliers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "95e0a931-5c1c-4552-a66b-4e7f0dc08bc0",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of electric permittivity ε₀?",
-    "formula": "F = q²/(4πε₀r²)",
-    "options": [
-      "[ML³T⁻²A⁻²]",
-      "[M⁻¹L³T²A]",
-      "[M⁻¹L⁻³T⁴A²]",
-      "[MLT⁻⁴A⁻²]"
-    ],
-    "answer": 2,
-    "explain": "ε₀ = q²/(F·r²) → [A²T²/(MLT⁻²·L²)] = [M⁻¹L⁻³T⁴A²]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6baa9249-2384-4df6-bfd9-aa13d631d437",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "Number of significant figures in 2.400×10³?",
-    "formula": "",
-    "options": [
-      "3",
-      "4",
-      "5",
-      "2"
-    ],
-    "answer": 1,
-    "explain": "All digits in 2.400 are significant; trailing zeros after decimal count.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c72c6841-4c99-43be-821f-99dd37f59c9a",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensions of angular momentum L?",
-    "formula": "L = mvr",
-    "options": [
-      "[MLT⁻¹]",
-      "[ML²T⁻¹]",
-      "[ML³T⁻¹]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 1,
-    "explain": "L = mvr → M·LT⁻¹·L = [ML²T⁻¹], same as Planck's constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "58026006-0363-4277-8872-61e094cc96b2",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of surface tension?",
-    "formula": "T = F/L",
-    "options": [
-      "[MT⁻²]",
-      "[ML²T⁻²]",
-      "[MLT⁻²]",
-      "[ML⁻¹T⁻²]"
-    ],
-    "answer": 0,
-    "explain": "T = F/L → [MLT⁻²]/[L] = [MT⁻²]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "29215c4f-c2fc-4ee9-a6ab-56ef660272e2",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Which quantity is dimensionless?",
-    "formula": "",
-    "options": [
-      "Young's modulus",
-      "Surface tension",
-      "Strain",
-      "Stress"
-    ],
-    "answer": 2,
-    "explain": "Strain = ΔL/L is a pure ratio, hence dimensionless.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "62d491c6-019d-4a3e-a798-88d5b06f0d47",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensions of magnetic field B?",
-    "formula": "F = qvB",
-    "options": [
-      "[ML⁻¹T⁻²A]",
-      "[MT⁻²A⁻¹]",
-      "[MLT⁻²A⁻¹]",
-      "[MT⁻¹A⁻¹]"
-    ],
-    "answer": 1,
-    "explain": "B = F/(qv) → [MLT⁻²]/[AT·LT⁻¹] = [MT⁻²A⁻¹]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c6df0311-0382-4540-91f7-5cfbd737c4a5",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensions of specific heat capacity c?",
-    "formula": "Q = mcΔT",
-    "options": [
-      "[L²T⁻²K⁻¹]",
-      "[MLT⁻²K⁻¹]",
-      "[L²T⁻²]",
-      "[ML²T⁻²K⁻¹]"
-    ],
-    "answer": 0,
-    "explain": "c = Q/(mΔT) → [ML²T⁻²]/(M·K) = [L²T⁻²K⁻¹]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c4619394-769b-4f02-aaaf-050dbd100f73",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "SI Units",
-    "prompt": "Which of these is NOT a base SI quantity?",
-    "formula": "",
-    "options": [
-      "Force",
-      "Electric current",
-      "Temperature",
-      "Amount of substance"
-    ],
-    "answer": 0,
-    "explain": "Force is derived (kg·m·s⁻²); the 7 base quantities don't include force.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "838c8abc-0f22-4ca4-b2e4-6008a52307a8",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of Boltzmann constant k_B?",
-    "formula": "PV = Nk_BT",
-    "options": [
-      "[ML²T⁻¹K⁻¹]",
-      "[ML²T⁻²K⁻¹]",
-      "[MLT⁻²K⁻¹]",
-      "[L²T⁻²K⁻¹]"
-    ],
-    "answer": 1,
-    "explain": "k_B = PV/(NT) → [ML⁻¹T⁻²·L³]/K = [ML²T⁻²K⁻¹]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9b7a2c7c-555c-4f84-908d-03d1e5f273eb",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Error Analysis",
-    "prompt": "Error in sum Z = A + B is?",
-    "formula": "ΔZ = ΔA + ΔB",
-    "options": [
-      "√(ΔA²+ΔB²)",
-      "|ΔA – ΔB|",
-      "ΔA + ΔB",
-      "ΔA·ΔB"
-    ],
-    "answer": 2,
-    "explain": "For addition/subtraction, absolute errors always add.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e6a60778-7dde-4edc-a0d3-0dee6e676d23",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Which has dimensions [ML⁻¹T⁻²]?",
-    "formula": "",
-    "options": [
-      "Pressure",
-      "Impulse",
-      "Young's modulus × length",
-      "Surface tension"
-    ],
-    "answer": 0,
-    "explain": "Pressure = F/A = [MLT⁻²/L²] = [ML⁻¹T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "583f1979-8176-4228-b0b0-57318a2d9304",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensions of the RC time constant?",
-    "formula": "τ = RC",
-    "options": [
-      "[M⁻¹L⁻²T³A²]",
-      "[MT⁻¹]",
-      "[ML²T⁻³A⁻²]",
-      "[T]"
-    ],
-    "answer": 3,
-    "explain": "RC has dimensions of time [T]; it's the time constant of an RC circuit.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "34b9ae72-6875-4ab2-9c50-fd8f56491ee3",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of power P?",
-    "formula": "P = W/t",
-    "options": [
-      "[ML²T⁻¹]",
-      "[MLT⁻³]",
-      "[ML²T⁻³]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 2,
-    "explain": "Power = energy/time = [ML²T⁻²]/[T] = [ML²T⁻³].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "28ce22c0-11f5-40ba-a126-32fcf67ce138",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of impulse J?",
-    "formula": "J = F·t",
-    "options": [
-      "[MLT⁻¹]",
-      "[MLT⁻²]",
-      "[ML²T⁻²]",
-      "[ML²T⁻¹]"
-    ],
-    "answer": 0,
-    "explain": "Impulse = change in momentum = [MLT⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0cc925d7-b063-401d-87a6-65e964e73957",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of electric field E?",
-    "formula": "",
-    "options": [
-      "[ML²T⁻³A⁻¹]",
-      "[MLT⁻²A⁻¹]",
-      "[ML²T⁻²A⁻¹]",
-      "[MLT⁻³A⁻¹]"
-    ],
-    "answer": 3,
-    "explain": "E = F/q; [MLT⁻²]/[AT] = [MLT⁻³A⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "5b97bc27-6410-45fd-be2c-de95fd2fb42d",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of magnetic flux Φ?",
-    "formula": "Φ = B·A",
-    "options": [
-      "[ML²T⁻²A⁻¹]",
-      "[ML²T⁻¹A⁻¹]",
-      "[MT⁻²A⁻¹]",
-      "[ML²T⁻³A⁻¹]"
-    ],
-    "answer": 0,
-    "explain": "Φ = BA; [MT⁻²A⁻¹]×[L²] = [ML²T⁻²A⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "32be13b9-ffe9-4c5a-85b7-66531effe41a",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of inductance L?",
-    "formula": "e = L·dI/dt",
-    "options": [
-      "[ML²T⁻²A⁻²]",
-      "[ML²T⁻¹A⁻²]",
-      "[ML²T⁻³A⁻²]",
-      "[MLT⁻²A⁻²]"
-    ],
-    "answer": 0,
-    "explain": "L = e·dt/dI; [ML²T⁻³A⁻¹]·[T]/[A] = [ML²T⁻²A⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bc3a49b6-d75b-4b1e-9dd6-7a90cdef18f3",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of electric resistance R?",
-    "formula": "R = V/I",
-    "options": [
-      "[ML²T⁻²A⁻²]",
-      "[ML²T⁻³A⁻¹]",
-      "[ML²T⁻³A⁻²]",
-      "[MLT⁻³A⁻²]"
-    ],
-    "answer": 2,
-    "explain": "R = V/I; [ML²T⁻³A⁻¹]/[A] = [ML²T⁻³A⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8026e815-23f7-4b35-b541-6561b478532e",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Which pair has identical dimensions?",
-    "formula": "",
-    "options": [
-      "Work & Torque",
-      "Power & Force",
-      "Momentum & Energy",
-      "Impulse & Pressure"
-    ],
-    "answer": 0,
-    "explain": "Work = Torque = [ML²T⁻²]; they differ conceptually but share dimensions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a2bcadf9-e7f7-42aa-aa13-eebd8cbcb081",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of latent heat L?",
-    "formula": "Q = mL",
-    "options": [
-      "[ML²T⁻²]",
-      "[L²T⁻¹]",
-      "[L²T⁻²]",
-      "[MLT⁻²]"
-    ],
-    "answer": 2,
-    "explain": "L = Q/m; [ML²T⁻²]/[M] = [L²T⁻²] (M cancels).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "b90f07f5-a3bc-449a-8b63-3c09a94e67bb",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "Significant figures in 0.003060?",
-    "formula": "",
-    "options": [
-      "4",
-      "6",
-      "5",
-      "3"
-    ],
-    "answer": 0,
-    "explain": "Leading zeros not significant; trailing zero after decimal is significant: 3,0,6,0 → 4 sig figs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7741dd8e-26cb-4e56-8879-87d0e4ece180",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "Result of 2.5 × 3.6 should be reported with how many sig figs?",
-    "formula": "",
-    "options": [
-      "1",
-      "3",
-      "4",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "In multiplication, sig figs = least sig figs in operands; both have 2, so answer has 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "649e03ec-3052-4b56-b00c-ab62b065d1c9",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "Result of 12.3 + 1.45 should be rounded to which decimal place?",
-    "formula": "",
-    "options": [
-      "2 decimal places",
-      "3 decimal places",
-      "Nearest integer",
-      "1 decimal place"
-    ],
-    "answer": 3,
-    "explain": "In addition, retain fewest decimal places; 12.3 has 1, so result kept to 1 decimal place.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "3735038c-7e8d-4c9e-9dd3-cdd1c3b85f91",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Error Analysis",
-    "prompt": "Error in Z = A/B, if ΔA/A = p and ΔB/B = q?",
-    "formula": "ΔZ/Z = p + q",
-    "options": [
-      "p × q",
-      "p/q",
-      "p – q",
-      "p + q"
-    ],
-    "answer": 3,
-    "explain": "For division, relative errors add: ΔZ/Z = ΔA/A + ΔB/B.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2ea49a9a-3361-49b3-baf1-9130e3707709",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of angular velocity ω?",
-    "formula": "ω = θ/t",
-    "options": [
-      "[LT⁻¹]",
-      "[L⁻¹T⁻¹]",
-      "[MT⁻¹]",
-      "[T⁻¹]"
-    ],
-    "answer": 3,
-    "explain": "ω = angle/time; angle is dimensionless → ω has dimensions [T⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c3d0dc44-2894-45a6-ae50-a3e94d4e4ef8",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of frequency ν?",
-    "formula": "ν = 1/T",
-    "options": [
-      "[LT⁻¹]",
-      "[ML²T⁻¹]",
-      "[MT⁻¹]",
-      "[T⁻¹]"
-    ],
-    "answer": 3,
-    "explain": "Frequency = 1/time period = [T⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "98f89dc1-0c9e-4180-b4a1-f911097daa1a",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of pressure P?",
-    "formula": "P = F/A",
-    "options": [
-      "[ML⁻²T⁻²]",
-      "[MLT⁻²]",
-      "[ML²T⁻²]",
-      "[ML⁻¹T⁻²]"
-    ],
-    "answer": 3,
-    "explain": "P = Force/Area = [MLT⁻²]/[L²] = [ML⁻¹T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6ad3e8ec-97da-4931-b8fa-46eef975e6cb",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Which physical quantity has dimensions [ML²T⁻³A⁻²]?",
-    "formula": "",
-    "options": [
-      "Capacitance",
-      "Conductance",
-      "Inductance",
-      "Resistance"
-    ],
-    "answer": 3,
-    "explain": "R = V/I; dimensions work out to [ML²T⁻³A⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0b36be9b-20ee-4a0f-a465-13f63f45fe68",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of torque τ?",
-    "formula": "τ = r × F",
-    "options": [
-      "[MLT⁻²]",
-      "[ML⁻¹T⁻²]",
-      "[ML²T⁻²]",
-      "[ML²T⁻³]"
-    ],
-    "answer": 2,
-    "explain": "Torque = force × distance → [ML²T⁻²], same as energy but different physical quantity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c32cb6de-1596-4f52-a6eb-099c1708c7ca",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of gravitational potential V?",
-    "formula": "V = -GM/r",
-    "options": [
-      "[M⁰L²T⁻²]",
-      "[MLT⁻²]",
-      "[M⁰L²T⁻³]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 0,
-    "explain": "Gravitational potential = energy/mass → [L²T⁻²], mass cancels out.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7335aa32-ae79-45ed-80aa-59205efc996c",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of strain?",
-    "formula": "",
-    "options": [
-      "[M⁰L¹T⁰]",
-      "[M⁰L⁰T⁻¹]",
-      "Dimensionless",
-      "[ML⁻¹T⁻²]"
-    ],
-    "answer": 2,
-    "explain": "Strain = change in length / original length; ratio of same quantities → dimensionless.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "fffa1f92-38a7-4b8f-a870-e30f13564a7f",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of Young's modulus Y?",
-    "formula": "Y = stress/strain",
-    "options": [
-      "[ML⁻¹T⁻²]",
-      "[ML²T⁻²]",
-      "[ML⁻²T⁻²]",
-      "[MLT⁻²]"
-    ],
-    "answer": 0,
-    "explain": "Y = stress/strain; strain is dimensionless, stress = [ML⁻¹T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0eb86264-b5cf-4af2-8520-164accf7b2ec",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of charge q?",
-    "formula": "q = It",
-    "options": [
-      "[A²T]",
-      "[A]",
-      "[AT]",
-      "[AT⁻¹]"
-    ],
-    "answer": 2,
-    "explain": "Charge = current × time → [AT].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c9765eaa-e615-46a2-9f8a-1847acdce3b0",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of electric potential V?",
-    "formula": "V = W/q",
-    "options": [
-      "[MLT⁻³A⁻¹]",
-      "[ML²T⁻²A⁻¹]",
-      "[ML²T⁻²A]",
-      "[ML²T⁻³A⁻¹]"
-    ],
-    "answer": 3,
-    "explain": "V = work/charge = [ML²T⁻²]/[AT] = [ML²T⁻³A⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ee9e0793-0b40-41aa-a8e5-bb1ff76a709e",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of capacitance C?",
-    "formula": "C = q/V",
-    "options": [
-      "[M⁻¹L⁻²T⁴A²]",
-      "[ML²T⁻²A⁻²]",
-      "[M⁻¹L⁻²T²A²]",
-      "[M⁻¹L²T⁴A²]"
-    ],
-    "answer": 0,
-    "explain": "C = q/V = [AT]/[ML²T⁻³A⁻¹] = [M⁻¹L⁻²T⁴A²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9bc27ee6-99b3-4a2a-bdf3-c0aacc50944d",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Which quantity has dimensions [ML²T⁻²A⁻¹]?",
-    "formula": "",
-    "options": [
-      "Magnetic flux Φ",
-      "Electric potential V",
-      "Magnetic field B",
-      "Inductance L"
-    ],
-    "answer": 0,
-    "explain": "Φ = B·A → [MT⁻²A⁻¹]·[L²] = [ML²T⁻²A⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ad9459e7-ff07-45f4-89bf-660949bc571c",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of Stefan's constant σ?",
-    "formula": "P = σAT⁴",
-    "options": [
-      "[MT⁻²K⁻⁴]",
-      "[MLT⁻³K⁻⁴]",
-      "[ML²T⁻³K⁻⁴]",
-      "[MT⁻³K⁻⁴]"
-    ],
-    "answer": 3,
-    "explain": "σ = P/(AT⁴) = [MT⁻³] per [K⁴] = [MT⁻³K⁻⁴].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "40ebc659-47ea-4d45-94d3-6b18c276cc29",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Which of the following is a derived SI unit?",
-    "formula": "",
-    "options": [
-      "Newton",
-      "Ampere",
-      "Kilogram",
-      "Kelvin"
-    ],
-    "answer": 0,
-    "explain": "Newton (kg·m·s⁻²) is derived; kg, K, A are base SI units.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a4e8abba-97b3-4d35-a137-c379e8519ccf",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensions of velocity gradient (dv/dx)?",
-    "formula": "",
-    "options": [
-      "[LT⁻¹]",
-      "[T⁻¹]",
-      "[L⁻¹T⁻¹]",
-      "[L⁻¹T]"
-    ],
-    "answer": 1,
-    "explain": "dv/dx = (m/s)/m = s⁻¹ → [T⁻¹], same as angular velocity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a42806a2-0153-462c-b3c2-c925a0de525f",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Significant figures in 1.0 × 10⁴?",
-    "formula": "",
-    "options": [
-      "4",
-      "1",
-      "5",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "1.0 × 10⁴ has 2 significant figures; trailing zero after decimal counts.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0a7550dc-260c-458c-bba2-91cd95136048",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Significant figures in 0.00720?",
-    "formula": "",
-    "options": [
-      "2",
-      "6",
-      "3",
-      "5"
-    ],
-    "answer": 2,
-    "explain": "Leading zeros not significant; 7, 2, 0 (trailing after decimal) → 3 sig figs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "23b1d1c5-e63c-4938-ac0a-140f026261b5",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Error in Z = A²/B³ if ΔA/A = x, ΔB/B = y?",
-    "formula": "ΔZ/Z = 2(ΔA/A) + 3(ΔB/B)",
-    "options": [
-      "x + y",
-      "2x + 3y",
-      "x/2 + y/3",
-      "2x – 3y"
-    ],
-    "answer": 1,
-    "explain": "Relative error: multiply exponent by individual relative error and add.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "5a1558e1-bc7d-49bd-b58f-86d6e8a1b6a8",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Which pair has DIFFERENT dimensions?",
-    "formula": "",
-    "options": [
-      "Angular momentum & Linear momentum",
-      "Torque & Work",
-      "Force & Weight",
-      "Stress & Pressure"
-    ],
-    "answer": 0,
-    "explain": "Angular momentum [ML²T⁻¹] ≠ Linear momentum [MLT⁻¹]; rest are same-dimension pairs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "959787a5-3a4b-44ca-9d33-c1036cf78c18",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensions of gas constant R?",
-    "formula": "PV = nRT",
-    "options": [
-      "[M⁰L²T⁻²K⁻¹]",
-      "[ML²T⁻²mol⁻¹K⁻¹]",
-      "[ML²T⁻³mol⁻¹K⁻¹]",
-      "[MLT⁻²mol⁻¹K⁻¹]"
-    ],
-    "answer": 1,
-    "explain": "R = PV/nT; [ML⁻¹T⁻²·L³]/[mol·K] = [ML²T⁻²mol⁻¹K⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f40ab5b4-760f-40f1-b391-0f20d495aea2",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of momentum p?",
-    "formula": "p = mv",
-    "options": [
-      "[MLT⁻²]",
-      "[MLT⁻¹]",
-      "[ML²T⁻¹]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 1,
-    "explain": "Momentum = mass × velocity → [M][LT⁻¹] = [MLT⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f32fd13f-a1b0-43d7-be92-124fabbbd092",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Which quantity has dimensions [L²T⁻²]?",
-    "formula": "",
-    "options": [
-      "Power",
-      "Pressure",
-      "Latent heat",
-      "Force"
-    ],
-    "answer": 2,
-    "explain": "Latent heat L = Q/m → [ML²T⁻²]/[M] = [L²T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e07a62a8-d75c-4d5d-9110-2256fefd0c60",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "In a measured value, which zeros are NOT significant?",
-    "formula": "",
-    "options": [
-      "Zeros in scientific notation",
-      "Zeros between digits",
-      "Leading zeros",
-      "Trailing zeros after decimal"
-    ],
-    "answer": 2,
-    "explain": "Leading zeros (before the first non-zero digit) are never significant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5263db53-8623-42f8-baea-864ff0ee0d91",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "Significant figures in 3.800 × 10⁻² ?",
-    "formula": "",
-    "options": [
-      "5",
-      "4",
-      "2",
-      "3"
-    ],
-    "answer": 1,
-    "explain": "Trailing zeros after decimal point are significant: 3, 8, 0, 0 → 4 sig figs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a1ae74bb-3b4c-49c1-8d29-23dc6f326c56",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Error Analysis",
-    "prompt": "Error in Z = √A if error in A is ΔA/A = p?",
-    "formula": "Z = A^(1/2)",
-    "options": [
-      "p",
-      "p²",
-      "2p",
-      "p/2"
-    ],
-    "answer": 3,
-    "explain": "ΔZ/Z = (1/2)(ΔA/A) = p/2; power rule for error propagation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "29ab2cd1-0db4-44fd-afa7-8c742e58f7b2",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Error Analysis",
-    "prompt": "Error in Z = A·B·C if each has error x, y, z respectively?",
-    "formula": "ΔZ/Z = ΔA/A + ΔB/B + ΔC/C",
-    "options": [
-      "x − y + z",
-      "x·y·z",
-      "(x+y+z)/3",
-      "x + y + z"
-    ],
-    "answer": 3,
-    "explain": "For product, maximum relative error is sum of individual relative errors.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b4df2476-bdc6-4d29-8600-29d4fdd82cf1",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "A physical quantity Q = F·v. Dimensions of Q?",
-    "formula": "",
-    "options": [
-      "[MLT⁻³]",
-      "[ML²T⁻³]",
-      "[MLT⁻²]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 1,
-    "explain": "Force×velocity = [MLT⁻²][LT⁻¹] = [ML²T⁻³] (same as power).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "af77bf9c-ad40-47c7-848b-e790184f0883",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Which of the following is dimensionally equivalent to energy?",
-    "formula": "",
-    "options": [
-      "Momentum",
-      "Torque",
-      "Power",
-      "Force"
-    ],
-    "answer": 1,
-    "explain": "Torque τ = r × F has dimensions [ML²T⁻²], same as energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d6e74f9a-ccaa-4eee-8d58-2136cb09d854",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensional formula of (stress/strain)?",
-    "formula": "",
-    "options": [
-      "[MLT⁻²]",
-      "Dimensionless",
-      "[ML⁻¹T⁻²]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 2,
-    "explain": "Stress/strain = Young's modulus Y → [ML⁻¹T⁻²]; strain is dimensionless.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "35d2d85f-1953-451e-82c8-39b45166398a",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimension of (Force × displacement/time)?",
-    "formula": "",
-    "options": [
-      "[ML²T⁻²]",
-      "[MLT⁻³]",
-      "[ML²T⁻³]",
-      "[MLT⁻²]"
-    ],
-    "answer": 2,
-    "explain": "F·d/t = Power → [MLT⁻²][L]/[T] = [ML²T⁻³].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7bcc0465-55f8-494b-a9be-a5a6df1d4597",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Significant Figures",
-    "prompt": "The number 0.0520 has how many significant figures?",
-    "formula": "",
-    "options": [
-      "3",
-      "4",
-      "2",
-      "5"
-    ],
-    "answer": 0,
-    "explain": "5, 2, 0 are significant (trailing zero after decimal counts); leading zeros are not.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4f8c031f-aa73-4926-842b-d22b1bd70848",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensions of (Pressure × Volume)?",
-    "formula": "PV",
-    "options": [
-      "[ML²T⁻²]",
-      "[ML⁻¹T⁻²]",
-      "[MLT⁻²]",
-      "[ML³T⁻²]"
-    ],
-    "answer": 0,
-    "explain": "P×V = [ML⁻¹T⁻²]×[L³] = [ML²T⁻²] = dimensions of energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c61dbdc7-f28b-4aad-b1c7-060f4dd1d09e",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Dimensional Analysis",
-    "prompt": "Dimensions of (η/ρ) where η = viscosity, ρ = density?",
-    "formula": "ν = η/ρ",
-    "options": [
-      "[MLT⁻¹]",
-      "[L²T⁻²]",
-      "[L²T⁻¹]",
-      "[LT⁻¹]"
-    ],
-    "answer": 2,
-    "explain": "Kinematic viscosity ν = η/ρ → [ML⁻¹T⁻¹]/[ML⁻³] = [L²T⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e0af5a1d-d0f1-4e6d-a7d2-3702da99e11e",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensional formula of work W?",
-    "formula": "W = F·d",
-    "options": [
-      "[ML²T⁻¹]",
-      "[ML⁻¹T⁻²]",
-      "[ML²T⁻²]",
-      "[MLT⁻²]"
-    ],
-    "answer": 2,
-    "explain": "Work = Force × displacement = [MLT⁻²][L] = [ML²T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4a49acdb-40bc-4ed3-8f33-c6c9b8268e7c",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Which has dimensions [MLT⁻¹]?",
-    "formula": "",
-    "options": [
-      "Torque",
-      "Linear momentum",
-      "Kinetic energy",
-      "Angular momentum"
-    ],
-    "answer": 1,
-    "explain": "Linear momentum p = mv has dimensions [MLT⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f193d447-696e-404e-9d18-102560f2c371",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "SI unit of electric current is?",
-    "formula": "",
-    "options": [
-      "Siemens",
-      "Coulomb",
-      "Volt",
-      "Ampere"
-    ],
-    "answer": 3,
-    "explain": "Ampere (A) is the base SI unit for electric current.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ec0c379e-e4c0-48c7-9926-a48cc9fd682f",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Error in Z = Aⁿ if ΔA/A = p?",
-    "formula": "ΔZ/Z = n·p",
-    "options": [
-      "n·p",
-      "p^n",
-      "p/n",
-      "n/p"
-    ],
-    "answer": 0,
-    "explain": "Fractional error in Aⁿ is n times fractional error in A.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bbaec165-1de0-4726-afe0-e329d664e2df",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Which quantity has dimension [T⁻¹]?",
-    "formula": "",
-    "options": [
-      "Acceleration",
-      "Wavelength",
-      "Velocity",
-      "Frequency"
-    ],
-    "answer": 3,
-    "explain": "Frequency ν = 1/T has dimensions [T⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bfacf139-3079-4fed-afdd-408a59b8b8bf",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensions of (Voltage × Current × Time)?",
-    "formula": "E = VIt",
-    "options": [
-      "[ML²T⁻¹]",
-      "[MLT⁻²]",
-      "[ML²T⁻³]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 3,
-    "explain": "V·I·t = Power × time = Energy = [ML²T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "48092f4b-dee9-4bbb-9d56-8ddb2a6e9a65",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensions of universal gravitational constant G?",
-    "formula": "F = Gm₁m₂/r²",
-    "options": [
-      "[M⁻¹L²T⁻²]",
-      "[M⁻¹L³T⁻²]",
-      "[ML³T⁻²]",
-      "[ML²T⁻²]"
-    ],
-    "answer": 1,
-    "explain": "From F=Gm₁m₂/r², G = Fr²/m² → [M⁻¹L³T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "55b35c51-8e54-4b6c-b657-6d5951ddd063",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "If ΔA/A = 1% and Z = 1/A, percentage error in Z is?",
-    "formula": "ΔZ/Z = ΔA/A",
-    "options": [
-      "2%",
-      "0%",
-      "0.5%",
-      "1%"
-    ],
-    "answer": 3,
-    "explain": "For Z = A⁻¹, percentage error in Z = 1 × (ΔA/A) = 1%.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d625b2e5-c6e5-436d-b961-0476d6595666",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensions of (Force/Area) — i.e., stress?",
-    "formula": "σ = F/A",
-    "options": [
-      "[MLT⁻²]",
-      "[ML²T⁻²]",
-      "[ML⁻²T⁻²]",
-      "[ML⁻¹T⁻²]"
-    ],
-    "answer": 3,
-    "explain": "Stress = Force/Area → [MLT⁻²]/[L²] = [ML⁻¹T⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ef1a9c55-b385-4772-8265-762577d2ffde",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "In division Z = A/B, percentage error is?",
-    "formula": "ΔZ/Z × 100",
-    "options": [
-      "%ΔA + %ΔB",
-      "%ΔA − %ΔB",
-      "%ΔA/%ΔB",
-      "%ΔA × %ΔB"
-    ],
-    "answer": 0,
-    "explain": "For Z = A/B, relative errors add: ΔZ/Z = ΔA/A + ΔB/B.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6e66e50e-13df-40b5-8926-a62b9411fa0f",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Which has the same dimensions as Planck's constant h?",
-    "formula": "h → [ML²T⁻¹]",
-    "options": [
-      "Angular momentum",
-      "Torque",
-      "Linear momentum",
-      "Energy"
-    ],
-    "answer": 0,
-    "explain": "Angular momentum L = Iω or r×p → [ML²T⁻¹], same as h.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8683dc31-c41f-4b4c-a3f3-7841ef17a685",
-    "subject": "Physics",
-    "chapter": "Units & Measurements",
-    "topic": "Units & Measurements",
-    "prompt": "Dimensions of (Spring constant k)?",
-    "formula": "F = kx",
-    "options": [
-      "[ML⁻¹T⁻²]",
-      "[MLT⁻²]",
-      "[ML²T⁻²]",
-      "[MT⁻²]"
-    ],
-    "answer": 3,
-    "explain": "k = F/x → [MLT⁻²]/[L] = [MT⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "298562d5-4f46-491d-b8bd-89fd9eb622d8",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of Planck's constant h?",
+  "formula": "E = hν",
+  "options": [
+   "[ML³T⁻²]",
+   "[ML²T⁻¹]",
+   "[MLT⁻¹]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 1,
+  "explain": "h = E/ν → [ML²T⁻²]/[T⁻¹] = [ML²T⁻¹]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b6bf69b6-8996-499d-bb26-96a012bade43",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI Units",
+  "prompt": "SI unit of luminous intensity?",
+  "formula": "",
+  "options": [
+   "Lumen",
+   "Candela",
+   "Lux",
+   "Watt"
+  ],
+  "answer": 1,
+  "explain": "Candela (cd) is the SI base unit for luminous intensity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5bb62a79-d9ab-4825-8db5-60d485e23de4",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of universal gravitational constant G?",
+  "formula": "F = Gm₁m₂/r²",
+  "options": [
+   "[M⁻¹L²T⁻²]",
+   "[ML³T⁻²]",
+   "[M⁻¹L³T⁻²]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 2,
+  "explain": "G = Fr²/m² → [MLT⁻²·L²/M²] = [M⁻¹L³T⁻²]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a951dbfc-7821-44cd-aa80-feeeb27f0154",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Which pair has the same dimensions?",
+  "formula": "",
+  "options": [
+   "Impulse & Momentum × time",
+   "Power & Force",
+   "Pressure & Energy",
+   "Work & Torque"
+  ],
+  "answer": 3,
+  "explain": "Work = F·d and Torque = F×r both have dimensions [ML²T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c6c6d6e7-28e3-48b9-8da6-2ddf69288a65",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of coefficient of viscosity η?",
+  "formula": "F = ηA(dv/dx)",
+  "options": [
+   "[MLT⁻¹]",
+   "[ML⁻¹T⁻²]",
+   "[ML²T⁻¹]",
+   "[ML⁻¹T⁻¹]"
+  ],
+  "answer": 3,
+  "explain": "η = F/(A·dv/dx) → [MLT⁻²]/[L²·T⁻¹] = [ML⁻¹T⁻¹]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b67e48a-2fa1-4900-969f-c16c195a7594",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "In scientific notation 0.00340, significant figures are?",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "3",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "0.00340 = 3.40×10⁻³; trailing zero after decimal counts → 3 sig figs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "adfb8fd2-158c-4ae9-ad38-d834482a3bcc",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error Analysis",
+  "prompt": "Relative error in Z = A³/B½ if errors are ΔA/A and ΔB/B?",
+  "formula": "ΔZ/Z = 3(ΔA/A) + ½(ΔB/B)",
+  "options": [
+   "3ΔA/A + 2ΔB/B",
+   "3ΔA/A + ½ΔB/B",
+   "ΔA/A + ΔB/B",
+   "3ΔA/A – ½ΔB/B"
+  ],
+  "answer": 1,
+  "explain": "Errors add for products/quotients with powers as multipliers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "95e0a931-5c1c-4552-a66b-4e7f0dc08bc0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of electric permittivity ε₀?",
+  "formula": "F = q²/(4πε₀r²)",
+  "options": [
+   "[ML³T⁻²A⁻²]",
+   "[M⁻¹L³T²A]",
+   "[M⁻¹L⁻³T⁴A²]",
+   "[MLT⁻⁴A⁻²]"
+  ],
+  "answer": 2,
+  "explain": "ε₀ = q²/(F·r²) → [A²T²/(MLT⁻²·L²)] = [M⁻¹L⁻³T⁴A²]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6baa9249-2384-4df6-bfd9-aa13d631d437",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "Number of significant figures in 2.400×10³?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "All digits in 2.400 are significant; trailing zeros after decimal count.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c72c6841-4c99-43be-821f-99dd37f59c9a",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensions of angular momentum L?",
+  "formula": "L = mvr",
+  "options": [
+   "[MLT⁻¹]",
+   "[ML²T⁻¹]",
+   "[ML³T⁻¹]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 1,
+  "explain": "L = mvr → M·LT⁻¹·L = [ML²T⁻¹], same as Planck's constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "58026006-0363-4277-8872-61e094cc96b2",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of surface tension?",
+  "formula": "T = F/L",
+  "options": [
+   "[MT⁻²]",
+   "[ML²T⁻²]",
+   "[MLT⁻²]",
+   "[ML⁻¹T⁻²]"
+  ],
+  "answer": 0,
+  "explain": "T = F/L → [MLT⁻²]/[L] = [MT⁻²]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "29215c4f-c2fc-4ee9-a6ab-56ef660272e2",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Which quantity is dimensionless?",
+  "formula": "",
+  "options": [
+   "Young's modulus",
+   "Surface tension",
+   "Strain",
+   "Stress"
+  ],
+  "answer": 2,
+  "explain": "Strain = ΔL/L is a pure ratio, hence dimensionless.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "62d491c6-019d-4a3e-a798-88d5b06f0d47",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensions of magnetic field B?",
+  "formula": "F = qvB",
+  "options": [
+   "[ML⁻¹T⁻²A]",
+   "[MT⁻²A⁻¹]",
+   "[MLT⁻²A⁻¹]",
+   "[MT⁻¹A⁻¹]"
+  ],
+  "answer": 1,
+  "explain": "B = F/(qv) → [MLT⁻²]/[AT·LT⁻¹] = [MT⁻²A⁻¹]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c6df0311-0382-4540-91f7-5cfbd737c4a5",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensions of specific heat capacity c?",
+  "formula": "Q = mcΔT",
+  "options": [
+   "[L²T⁻²K⁻¹]",
+   "[MLT⁻²K⁻¹]",
+   "[L²T⁻²]",
+   "[ML²T⁻²K⁻¹]"
+  ],
+  "answer": 0,
+  "explain": "c = Q/(mΔT) → [ML²T⁻²]/(M·K) = [L²T⁻²K⁻¹]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c4619394-769b-4f02-aaaf-050dbd100f73",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI Units",
+  "prompt": "Which of these is NOT a base SI quantity?",
+  "formula": "",
+  "options": [
+   "Force",
+   "Electric current",
+   "Temperature",
+   "Amount of substance"
+  ],
+  "answer": 0,
+  "explain": "Force is derived (kg·m·s⁻²); the 7 base quantities don't include force.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "838c8abc-0f22-4ca4-b2e4-6008a52307a8",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of Boltzmann constant k_B?",
+  "formula": "PV = Nk_BT",
+  "options": [
+   "[ML²T⁻¹K⁻¹]",
+   "[ML²T⁻²K⁻¹]",
+   "[MLT⁻²K⁻¹]",
+   "[L²T⁻²K⁻¹]"
+  ],
+  "answer": 1,
+  "explain": "k_B = PV/(NT) → [ML⁻¹T⁻²·L³]/K = [ML²T⁻²K⁻¹]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9b7a2c7c-555c-4f84-908d-03d1e5f273eb",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error Analysis",
+  "prompt": "Error in sum Z = A + B is?",
+  "formula": "ΔZ = ΔA + ΔB",
+  "options": [
+   "√(ΔA²+ΔB²)",
+   "|ΔA – ΔB|",
+   "ΔA + ΔB",
+   "ΔA·ΔB"
+  ],
+  "answer": 2,
+  "explain": "For addition/subtraction, absolute errors always add.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e6a60778-7dde-4edc-a0d3-0dee6e676d23",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Which has dimensions [ML⁻¹T⁻²]?",
+  "formula": "",
+  "options": [
+   "Pressure",
+   "Impulse",
+   "Young's modulus × length",
+   "Surface tension"
+  ],
+  "answer": 0,
+  "explain": "Pressure = F/A = [MLT⁻²/L²] = [ML⁻¹T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "583f1979-8176-4228-b0b0-57318a2d9304",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensions of the RC time constant?",
+  "formula": "τ = RC",
+  "options": [
+   "[M⁻¹L⁻²T³A²]",
+   "[MT⁻¹]",
+   "[ML²T⁻³A⁻²]",
+   "[T]"
+  ],
+  "answer": 3,
+  "explain": "RC has dimensions of time [T]; it's the time constant of an RC circuit.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "34b9ae72-6875-4ab2-9c50-fd8f56491ee3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of power P?",
+  "formula": "P = W/t",
+  "options": [
+   "[ML²T⁻¹]",
+   "[MLT⁻³]",
+   "[ML²T⁻³]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 2,
+  "explain": "Power = energy/time = [ML²T⁻²]/[T] = [ML²T⁻³].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "28ce22c0-11f5-40ba-a126-32fcf67ce138",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of impulse J?",
+  "formula": "J = F·t",
+  "options": [
+   "[MLT⁻¹]",
+   "[MLT⁻²]",
+   "[ML²T⁻²]",
+   "[ML²T⁻¹]"
+  ],
+  "answer": 0,
+  "explain": "Impulse = change in momentum = [MLT⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0cc925d7-b063-401d-87a6-65e964e73957",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of electric field E?",
+  "formula": "",
+  "options": [
+   "[ML²T⁻³A⁻¹]",
+   "[MLT⁻²A⁻¹]",
+   "[ML²T⁻²A⁻¹]",
+   "[MLT⁻³A⁻¹]"
+  ],
+  "answer": 3,
+  "explain": "E = F/q; [MLT⁻²]/[AT] = [MLT⁻³A⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5b97bc27-6410-45fd-be2c-de95fd2fb42d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of magnetic flux Φ?",
+  "formula": "Φ = B·A",
+  "options": [
+   "[ML²T⁻²A⁻¹]",
+   "[ML²T⁻¹A⁻¹]",
+   "[MT⁻²A⁻¹]",
+   "[ML²T⁻³A⁻¹]"
+  ],
+  "answer": 0,
+  "explain": "Φ = BA; [MT⁻²A⁻¹]×[L²] = [ML²T⁻²A⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "32be13b9-ffe9-4c5a-85b7-66531effe41a",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of inductance L?",
+  "formula": "e = L·dI/dt",
+  "options": [
+   "[ML²T⁻²A⁻²]",
+   "[ML²T⁻¹A⁻²]",
+   "[ML²T⁻³A⁻²]",
+   "[MLT⁻²A⁻²]"
+  ],
+  "answer": 0,
+  "explain": "L = e·dt/dI; [ML²T⁻³A⁻¹]·[T]/[A] = [ML²T⁻²A⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bc3a49b6-d75b-4b1e-9dd6-7a90cdef18f3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of electric resistance R?",
+  "formula": "R = V/I",
+  "options": [
+   "[ML²T⁻²A⁻²]",
+   "[ML²T⁻³A⁻¹]",
+   "[ML²T⁻³A⁻²]",
+   "[MLT⁻³A⁻²]"
+  ],
+  "answer": 2,
+  "explain": "R = V/I; [ML²T⁻³A⁻¹]/[A] = [ML²T⁻³A⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8026e815-23f7-4b35-b541-6561b478532e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Which pair has identical dimensions?",
+  "formula": "",
+  "options": [
+   "Work & Torque",
+   "Power & Force",
+   "Momentum & Energy",
+   "Impulse & Pressure"
+  ],
+  "answer": 0,
+  "explain": "Work = Torque = [ML²T⁻²]; they differ conceptually but share dimensions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a2bcadf9-e7f7-42aa-aa13-eebd8cbcb081",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of latent heat L?",
+  "formula": "Q = mL",
+  "options": [
+   "[ML²T⁻²]",
+   "[L²T⁻¹]",
+   "[L²T⁻²]",
+   "[MLT⁻²]"
+  ],
+  "answer": 2,
+  "explain": "L = Q/m; [ML²T⁻²]/[M] = [L²T⁻²] (M cancels).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b90f07f5-a3bc-449a-8b63-3c09a94e67bb",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "Significant figures in 0.003060?",
+  "formula": "",
+  "options": [
+   "4",
+   "6",
+   "5",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "Leading zeros not significant; trailing zero after decimal is significant: 3,0,6,0 → 4 sig figs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7741dd8e-26cb-4e56-8879-87d0e4ece180",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "Result of 2.5 × 3.6 should be reported with how many sig figs?",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "4",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "In multiplication, sig figs = least sig figs in operands; both have 2, so answer has 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "649e03ec-3052-4b56-b00c-ab62b065d1c9",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "Result of 12.3 + 1.45 should be rounded to which decimal place?",
+  "formula": "",
+  "options": [
+   "2 decimal places",
+   "3 decimal places",
+   "Nearest integer",
+   "1 decimal place"
+  ],
+  "answer": 3,
+  "explain": "In addition, retain fewest decimal places; 12.3 has 1, so result kept to 1 decimal place.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3735038c-7e8d-4c9e-9dd3-cdd1c3b85f91",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error Analysis",
+  "prompt": "Error in Z = A/B, if ΔA/A = p and ΔB/B = q?",
+  "formula": "ΔZ/Z = p + q",
+  "options": [
+   "p × q",
+   "p/q",
+   "p – q",
+   "p + q"
+  ],
+  "answer": 3,
+  "explain": "For division, relative errors add: ΔZ/Z = ΔA/A + ΔB/B.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2ea49a9a-3361-49b3-baf1-9130e3707709",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of angular velocity ω?",
+  "formula": "ω = θ/t",
+  "options": [
+   "[LT⁻¹]",
+   "[L⁻¹T⁻¹]",
+   "[MT⁻¹]",
+   "[T⁻¹]"
+  ],
+  "answer": 3,
+  "explain": "ω = angle/time; angle is dimensionless → ω has dimensions [T⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c3d0dc44-2894-45a6-ae50-a3e94d4e4ef8",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of frequency ν?",
+  "formula": "ν = 1/T",
+  "options": [
+   "[LT⁻¹]",
+   "[ML²T⁻¹]",
+   "[MT⁻¹]",
+   "[T⁻¹]"
+  ],
+  "answer": 3,
+  "explain": "Frequency = 1/time period = [T⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "98f89dc1-0c9e-4180-b4a1-f911097daa1a",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of pressure P?",
+  "formula": "P = F/A",
+  "options": [
+   "[ML⁻²T⁻²]",
+   "[MLT⁻²]",
+   "[ML²T⁻²]",
+   "[ML⁻¹T⁻²]"
+  ],
+  "answer": 3,
+  "explain": "P = Force/Area = [MLT⁻²]/[L²] = [ML⁻¹T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6ad3e8ec-97da-4931-b8fa-46eef975e6cb",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Which physical quantity has dimensions [ML²T⁻³A⁻²]?",
+  "formula": "",
+  "options": [
+   "Capacitance",
+   "Conductance",
+   "Inductance",
+   "Resistance"
+  ],
+  "answer": 3,
+  "explain": "R = V/I; dimensions work out to [ML²T⁻³A⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0b36be9b-20ee-4a0f-a465-13f63f45fe68",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of torque τ?",
+  "formula": "τ = r × F",
+  "options": [
+   "[MLT⁻²]",
+   "[ML⁻¹T⁻²]",
+   "[ML²T⁻²]",
+   "[ML²T⁻³]"
+  ],
+  "answer": 2,
+  "explain": "Torque = force × distance → [ML²T⁻²], same as energy but different physical quantity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c32cb6de-1596-4f52-a6eb-099c1708c7ca",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of gravitational potential V?",
+  "formula": "V = -GM/r",
+  "options": [
+   "[M⁰L²T⁻²]",
+   "[MLT⁻²]",
+   "[M⁰L²T⁻³]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 0,
+  "explain": "Gravitational potential = energy/mass → [L²T⁻²], mass cancels out.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7335aa32-ae79-45ed-80aa-59205efc996c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of strain?",
+  "formula": "",
+  "options": [
+   "[M⁰L¹T⁰]",
+   "[M⁰L⁰T⁻¹]",
+   "Dimensionless",
+   "[ML⁻¹T⁻²]"
+  ],
+  "answer": 2,
+  "explain": "Strain = change in length / original length; ratio of same quantities → dimensionless.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fffa1f92-38a7-4b8f-a870-e30f13564a7f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of Young's modulus Y?",
+  "formula": "Y = stress/strain",
+  "options": [
+   "[ML⁻¹T⁻²]",
+   "[ML²T⁻²]",
+   "[ML⁻²T⁻²]",
+   "[MLT⁻²]"
+  ],
+  "answer": 0,
+  "explain": "Y = stress/strain; strain is dimensionless, stress = [ML⁻¹T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0eb86264-b5cf-4af2-8520-164accf7b2ec",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of charge q?",
+  "formula": "q = It",
+  "options": [
+   "[A²T]",
+   "[A]",
+   "[AT]",
+   "[AT⁻¹]"
+  ],
+  "answer": 2,
+  "explain": "Charge = current × time → [AT].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c9765eaa-e615-46a2-9f8a-1847acdce3b0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of electric potential V?",
+  "formula": "V = W/q",
+  "options": [
+   "[MLT⁻³A⁻¹]",
+   "[ML²T⁻²A⁻¹]",
+   "[ML²T⁻²A]",
+   "[ML²T⁻³A⁻¹]"
+  ],
+  "answer": 3,
+  "explain": "V = work/charge = [ML²T⁻²]/[AT] = [ML²T⁻³A⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ee9e0793-0b40-41aa-a8e5-bb1ff76a709e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of capacitance C?",
+  "formula": "C = q/V",
+  "options": [
+   "[M⁻¹L⁻²T⁴A²]",
+   "[ML²T⁻²A⁻²]",
+   "[M⁻¹L⁻²T²A²]",
+   "[M⁻¹L²T⁴A²]"
+  ],
+  "answer": 0,
+  "explain": "C = q/V = [AT]/[ML²T⁻³A⁻¹] = [M⁻¹L⁻²T⁴A²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9bc27ee6-99b3-4a2a-bdf3-c0aacc50944d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Which quantity has dimensions [ML²T⁻²A⁻¹]?",
+  "formula": "",
+  "options": [
+   "Magnetic flux Φ",
+   "Electric potential V",
+   "Magnetic field B",
+   "Inductance L"
+  ],
+  "answer": 0,
+  "explain": "Φ = B·A → [MT⁻²A⁻¹]·[L²] = [ML²T⁻²A⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ad9459e7-ff07-45f4-89bf-660949bc571c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of Stefan's constant σ?",
+  "formula": "P = σAT⁴",
+  "options": [
+   "[MT⁻²K⁻⁴]",
+   "[MLT⁻³K⁻⁴]",
+   "[ML²T⁻³K⁻⁴]",
+   "[MT⁻³K⁻⁴]"
+  ],
+  "answer": 3,
+  "explain": "σ = P/(AT⁴) = [MT⁻³] per [K⁴] = [MT⁻³K⁻⁴].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "40ebc659-47ea-4d45-94d3-6b18c276cc29",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Fundamental vs derived units",
+  "prompt": "Which of the following is a derived SI unit?",
+  "formula": "",
+  "options": [
+   "Newton",
+   "Ampere",
+   "Kilogram",
+   "Kelvin"
+  ],
+  "answer": 0,
+  "explain": "Newton (kg·m·s⁻²) is derived; kg, K, A are base SI units.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a4e8abba-97b3-4d35-a137-c379e8519ccf",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensions of velocity gradient (dv/dx)?",
+  "formula": "",
+  "options": [
+   "[LT⁻¹]",
+   "[T⁻¹]",
+   "[L⁻¹T⁻¹]",
+   "[L⁻¹T]"
+  ],
+  "answer": 1,
+  "explain": "dv/dx = (m/s)/m = s⁻¹ → [T⁻¹], same as angular velocity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a42806a2-0153-462c-b3c2-c925a0de525f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Significant figures in 1.0 × 10⁴?",
+  "formula": "",
+  "options": [
+   "4",
+   "1",
+   "5",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "1.0 × 10⁴ has 2 significant figures; trailing zero after decimal counts.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0a7550dc-260c-458c-bba2-91cd95136048",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Significant figures in 0.00720?",
+  "formula": "",
+  "options": [
+   "2",
+   "6",
+   "3",
+   "5"
+  ],
+  "answer": 2,
+  "explain": "Leading zeros not significant; 7, 2, 0 (trailing after decimal) → 3 sig figs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "23b1d1c5-e63c-4938-ac0a-140f026261b5",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Error in Z = A²/B³ if ΔA/A = x, ΔB/B = y?",
+  "formula": "ΔZ/Z = 2(ΔA/A) + 3(ΔB/B)",
+  "options": [
+   "x + y",
+   "2x + 3y",
+   "x/2 + y/3",
+   "2x – 3y"
+  ],
+  "answer": 1,
+  "explain": "Relative error: multiply exponent by individual relative error and add.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5a1558e1-bc7d-49bd-b58f-86d6e8a1b6a8",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "Which pair has DIFFERENT dimensions?",
+  "formula": "",
+  "options": [
+   "Angular momentum & Linear momentum",
+   "Torque & Work",
+   "Force & Weight",
+   "Stress & Pressure"
+  ],
+  "answer": 0,
+  "explain": "Angular momentum [ML²T⁻¹] ≠ Linear momentum [MLT⁻¹]; rest are same-dimension pairs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "959787a5-3a4b-44ca-9d33-c1036cf78c18",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensions of gas constant R?",
+  "formula": "PV = nRT",
+  "options": [
+   "[M⁰L²T⁻²K⁻¹]",
+   "[ML²T⁻²mol⁻¹K⁻¹]",
+   "[ML²T⁻³mol⁻¹K⁻¹]",
+   "[MLT⁻²mol⁻¹K⁻¹]"
+  ],
+  "answer": 1,
+  "explain": "R = PV/nT; [ML⁻¹T⁻²·L³]/[mol·K] = [ML²T⁻²mol⁻¹K⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f40ab5b4-760f-40f1-b391-0f20d495aea2",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of momentum p?",
+  "formula": "p = mv",
+  "options": [
+   "[MLT⁻²]",
+   "[MLT⁻¹]",
+   "[ML²T⁻¹]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 1,
+  "explain": "Momentum = mass × velocity → [M][LT⁻¹] = [MLT⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f32fd13f-a1b0-43d7-be92-124fabbbd092",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Which quantity has dimensions [L²T⁻²]?",
+  "formula": "",
+  "options": [
+   "Power",
+   "Pressure",
+   "Latent heat",
+   "Force"
+  ],
+  "answer": 2,
+  "explain": "Latent heat L = Q/m → [ML²T⁻²]/[M] = [L²T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e07a62a8-d75c-4d5d-9110-2256fefd0c60",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "In a measured value, which zeros are NOT significant?",
+  "formula": "",
+  "options": [
+   "Zeros in scientific notation",
+   "Zeros between digits",
+   "Leading zeros",
+   "Trailing zeros after decimal"
+  ],
+  "answer": 2,
+  "explain": "Leading zeros (before the first non-zero digit) are never significant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5263db53-8623-42f8-baea-864ff0ee0d91",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "Significant figures in 3.800 × 10⁻² ?",
+  "formula": "",
+  "options": [
+   "5",
+   "4",
+   "2",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "Trailing zeros after decimal point are significant: 3, 8, 0, 0 → 4 sig figs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a1ae74bb-3b4c-49c1-8d29-23dc6f326c56",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error Analysis",
+  "prompt": "Error in Z = √A if error in A is ΔA/A = p?",
+  "formula": "Z = A^(1/2)",
+  "options": [
+   "p",
+   "p²",
+   "2p",
+   "p/2"
+  ],
+  "answer": 3,
+  "explain": "ΔZ/Z = (1/2)(ΔA/A) = p/2; power rule for error propagation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "29ab2cd1-0db4-44fd-afa7-8c742e58f7b2",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error Analysis",
+  "prompt": "Error in Z = A·B·C if each has error x, y, z respectively?",
+  "formula": "ΔZ/Z = ΔA/A + ΔB/B + ΔC/C",
+  "options": [
+   "x − y + z",
+   "x·y·z",
+   "(x+y+z)/3",
+   "x + y + z"
+  ],
+  "answer": 3,
+  "explain": "For product, maximum relative error is sum of individual relative errors.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b4df2476-bdc6-4d29-8600-29d4fdd82cf1",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "A physical quantity Q = F·v. Dimensions of Q?",
+  "formula": "",
+  "options": [
+   "[MLT⁻³]",
+   "[ML²T⁻³]",
+   "[MLT⁻²]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 1,
+  "explain": "Force×velocity = [MLT⁻²][LT⁻¹] = [ML²T⁻³] (same as power).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "af77bf9c-ad40-47c7-848b-e790184f0883",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Which of the following is dimensionally equivalent to energy?",
+  "formula": "",
+  "options": [
+   "Momentum",
+   "Torque",
+   "Power",
+   "Force"
+  ],
+  "answer": 1,
+  "explain": "Torque τ = r × F has dimensions [ML²T⁻²], same as energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d6e74f9a-ccaa-4eee-8d58-2136cb09d854",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensional formula of (stress/strain)?",
+  "formula": "",
+  "options": [
+   "[MLT⁻²]",
+   "Dimensionless",
+   "[ML⁻¹T⁻²]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 2,
+  "explain": "Stress/strain = Young's modulus Y → [ML⁻¹T⁻²]; strain is dimensionless.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "35d2d85f-1953-451e-82c8-39b45166398a",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimension of (Force × displacement/time)?",
+  "formula": "",
+  "options": [
+   "[ML²T⁻²]",
+   "[MLT⁻³]",
+   "[ML²T⁻³]",
+   "[MLT⁻²]"
+  ],
+  "answer": 2,
+  "explain": "F·d/t = Power → [MLT⁻²][L]/[T] = [ML²T⁻³].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7bcc0465-55f8-494b-a9be-a5a6df1d4597",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Significant Figures",
+  "prompt": "The number 0.0520 has how many significant figures?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "2",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "5, 2, 0 are significant (trailing zero after decimal counts); leading zeros are not.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4f8c031f-aa73-4926-842b-d22b1bd70848",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensions of (Pressure × Volume)?",
+  "formula": "PV",
+  "options": [
+   "[ML²T⁻²]",
+   "[ML⁻¹T⁻²]",
+   "[MLT⁻²]",
+   "[ML³T⁻²]"
+  ],
+  "answer": 0,
+  "explain": "P×V = [ML⁻¹T⁻²]×[L³] = [ML²T⁻²] = dimensions of energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c61dbdc7-f28b-4aad-b1c7-060f4dd1d09e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional Analysis",
+  "prompt": "Dimensions of (η/ρ) where η = viscosity, ρ = density?",
+  "formula": "ν = η/ρ",
+  "options": [
+   "[MLT⁻¹]",
+   "[L²T⁻²]",
+   "[L²T⁻¹]",
+   "[LT⁻¹]"
+  ],
+  "answer": 2,
+  "explain": "Kinematic viscosity ν = η/ρ → [ML⁻¹T⁻¹]/[ML⁻³] = [L²T⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e0af5a1d-d0f1-4e6d-a7d2-3702da99e11e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensional formula of work W?",
+  "formula": "W = F·d",
+  "options": [
+   "[ML²T⁻¹]",
+   "[ML⁻¹T⁻²]",
+   "[ML²T⁻²]",
+   "[MLT⁻²]"
+  ],
+  "answer": 2,
+  "explain": "Work = Force × displacement = [MLT⁻²][L] = [ML²T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4a49acdb-40bc-4ed3-8f33-c6c9b8268e7c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Which has dimensions [MLT⁻¹]?",
+  "formula": "",
+  "options": [
+   "Torque",
+   "Linear momentum",
+   "Kinetic energy",
+   "Angular momentum"
+  ],
+  "answer": 1,
+  "explain": "Linear momentum p = mv has dimensions [MLT⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f193d447-696e-404e-9d18-102560f2c371",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI system, base & supplementary units",
+  "prompt": "SI unit of electric current is?",
+  "formula": "",
+  "options": [
+   "Siemens",
+   "Coulomb",
+   "Volt",
+   "Ampere"
+  ],
+  "answer": 3,
+  "explain": "Ampere (A) is the base SI unit for electric current.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ec0c379e-e4c0-48c7-9926-a48cc9fd682f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Error in Z = Aⁿ if ΔA/A = p?",
+  "formula": "ΔZ/Z = n·p",
+  "options": [
+   "n·p",
+   "p^n",
+   "p/n",
+   "n/p"
+  ],
+  "answer": 0,
+  "explain": "Fractional error in Aⁿ is n times fractional error in A.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bbaec165-1de0-4726-afe0-e329d664e2df",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Which quantity has dimension [T⁻¹]?",
+  "formula": "",
+  "options": [
+   "Acceleration",
+   "Wavelength",
+   "Velocity",
+   "Frequency"
+  ],
+  "answer": 3,
+  "explain": "Frequency ν = 1/T has dimensions [T⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bfacf139-3079-4fed-afdd-408a59b8b8bf",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensions of (Voltage × Current × Time)?",
+  "formula": "E = VIt",
+  "options": [
+   "[ML²T⁻¹]",
+   "[MLT⁻²]",
+   "[ML²T⁻³]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 3,
+  "explain": "V·I·t = Power × time = Energy = [ML²T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "48092f4b-dee9-4bbb-9d56-8ddb2a6e9a65",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensions of universal gravitational constant G?",
+  "formula": "F = Gm₁m₂/r²",
+  "options": [
+   "[M⁻¹L²T⁻²]",
+   "[M⁻¹L³T⁻²]",
+   "[ML³T⁻²]",
+   "[ML²T⁻²]"
+  ],
+  "answer": 1,
+  "explain": "From F=Gm₁m₂/r², G = Fr²/m² → [M⁻¹L³T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "55b35c51-8e54-4b6c-b657-6d5951ddd063",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "If ΔA/A = 1% and Z = 1/A, percentage error in Z is?",
+  "formula": "ΔZ/Z = ΔA/A",
+  "options": [
+   "2%",
+   "0%",
+   "0.5%",
+   "1%"
+  ],
+  "answer": 3,
+  "explain": "For Z = A⁻¹, percentage error in Z = 1 × (ΔA/A) = 1%.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d625b2e5-c6e5-436d-b961-0476d6595666",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensions of (Force/Area) — i.e., stress?",
+  "formula": "σ = F/A",
+  "options": [
+   "[MLT⁻²]",
+   "[ML²T⁻²]",
+   "[ML⁻²T⁻²]",
+   "[ML⁻¹T⁻²]"
+  ],
+  "answer": 3,
+  "explain": "Stress = Force/Area → [MLT⁻²]/[L²] = [ML⁻¹T⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ef1a9c55-b385-4772-8265-762577d2ffde",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "In division Z = A/B, percentage error is?",
+  "formula": "ΔZ/Z × 100",
+  "options": [
+   "%ΔA + %ΔB",
+   "%ΔA − %ΔB",
+   "%ΔA/%ΔB",
+   "%ΔA × %ΔB"
+  ],
+  "answer": 0,
+  "explain": "For Z = A/B, relative errors add: ΔZ/Z = ΔA/A + ΔB/B.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6e66e50e-13df-40b5-8926-a62b9411fa0f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "Which has the same dimensions as Planck's constant h?",
+  "formula": "h → [ML²T⁻¹]",
+  "options": [
+   "Angular momentum",
+   "Torque",
+   "Linear momentum",
+   "Energy"
+  ],
+  "answer": 0,
+  "explain": "Angular momentum L = Iω or r×p → [ML²T⁻¹], same as h.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8683dc31-c41f-4b4c-a3f3-7841ef17a685",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Dimensional formulas of physical quantities",
+  "prompt": "Dimensions of (Spring constant k)?",
+  "formula": "F = kx",
+  "options": [
+   "[ML⁻¹T⁻²]",
+   "[MLT⁻²]",
+   "[ML²T⁻²]",
+   "[MT⁻²]"
+  ],
+  "answer": 3,
+  "explain": "k = F/x → [MLT⁻²]/[L] = [MT⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "13dd4b82-6b70-4f69-8bc5-b55ad30ebdb3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI system, base & supplementary units",
+  "prompt": "Which of these is NOT one of the seven SI base units?",
+  "formula": "",
+  "options": [
+   "Mole",
+   "Radian",
+   "Kelvin",
+   "Candela"
+  ],
+  "answer": 1,
+  "explain": "Radian is a dimensionless derived unit (formerly 'supplementary'); the other three are base units.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c14a88c5-8e66-417b-a095-7fd4ad908815",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI system, base & supplementary units",
+  "prompt": "Since the 2019 redefinition, the kilogram is defined by fixing the exact value of which constant?",
+  "formula": "",
+  "options": [
+   "Elementary charge e",
+   "Planck constant h",
+   "Avogadro number Nₐ",
+   "Speed of light c"
+  ],
+  "answer": 1,
+  "explain": "The kg is fixed through h = 6.626×10⁻³⁴ J·s, replacing the old platinum-iridium prototype.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc36feeb-1234-4ec6-bd16-8790e9296d7d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI system, base & supplementary units",
+  "prompt": "Steradian is the SI unit of which quantity?",
+  "formula": "",
+  "options": [
+   "Luminous flux",
+   "Angular velocity",
+   "Solid angle",
+   "Plane angle"
+  ],
+  "answer": 2,
+  "explain": "Steradian (sr) measures solid angle, Ω = A/r²; it is dimensionless.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bbb56205-5ae9-4fde-9bb6-44b2ccfc9a4e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI system, base & supplementary units",
+  "prompt": "How many base quantities (with base units) are there in the SI system?",
+  "formula": "",
+  "options": [
+   "5",
+   "7",
+   "6",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "Seven: length, mass, time, current, temperature, amount of substance, luminous intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ec8e6df-32d0-4bbf-ae7a-3a0c1b79b623",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "SI system, base & supplementary units",
+  "prompt": "The SI second is defined using the hyperfine transition frequency of which atom?",
+  "formula": "",
+  "options": [
+   "Hydrogen-1",
+   "Caesium-133",
+   "Rubidium-87",
+   "Krypton-86"
+  ],
+  "answer": 1,
+  "explain": "1 s = 9,192,631,770 periods of the Cs-133 hyperfine transition radiation.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1b6ee49d-50dc-4692-b2c7-78f4c0a09534",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Fundamental vs derived units",
+  "prompt": "Which of these is NOT an SI base unit?",
+  "formula": "",
+  "options": [
+   "Candela",
+   "Mole",
+   "Kelvin",
+   "Coulomb"
+  ],
+  "answer": 3,
+  "explain": "Coulomb = A·s is derived; the base electrical unit is the ampere.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "24107409-c51b-4471-b67c-2f63a6b1300b",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Fundamental vs derived units",
+  "prompt": "Which SI base unit carries a prefix in its name?",
+  "formula": "",
+  "options": [
+   "Ampere",
+   "Kelvin",
+   "Candela",
+   "Kilogram"
+  ],
+  "answer": 3,
+  "explain": "Kilogram is the only SI base unit whose name contains a prefix (kilo).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7d8255df-8441-4f3e-bdb6-7f098a2eb62d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Fundamental vs derived units",
+  "prompt": "Which set gives the three base units of the CGS system?",
+  "formula": "",
+  "options": [
+   "foot, pound, second",
+   "centimetre, gram, second",
+   "metre, kilogram, second",
+   "centimetre, gram, hour"
+  ],
+  "answer": 1,
+  "explain": "CGS: centimetre, gram, second. MKS uses m, kg, s; FPS uses foot, pound, second.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "25c91a72-61c4-43bf-a2f3-91eda46bb396",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Fundamental vs derived units",
+  "prompt": "Which of the following is a base quantity in SI?",
+  "formula": "",
+  "options": [
+   "Electric charge",
+   "Illuminance",
+   "Luminous intensity",
+   "Luminous flux"
+  ],
+  "answer": 2,
+  "explain": "Luminous intensity (candela) is base; luminous flux (lumen) and illuminance (lux) are derived.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5647f97a-14fd-4758-a7cf-7e581db862c0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "Least count of a screw gauge is given by which ratio?",
+  "formula": "LC = pitch / number of circular scale divisions",
+  "options": [
+   "Pitch / number of circular divisions",
+   "Pitch / number of linear divisions",
+   "Number of divisions / pitch",
+   "Pitch × number of divisions"
+  ],
+  "answer": 0,
+  "explain": "LC = pitch ÷ total divisions on the circular scale.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cd980ede-f800-4e82-8380-0921bc2519ea",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "The pitch of a screw gauge is defined as:",
+  "formula": "",
+  "options": [
+   "Distance moved by screw in one full rotation",
+   "Distance moved per circular division",
+   "Length of the screw's threaded part",
+   "Distance between two circular divisions"
+  ],
+  "answer": 0,
+  "explain": "Pitch = linear distance advanced by the screw in one complete rotation of the circular scale.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ebbe4eaf-dc73-4b82-adab-af4e42149790",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "Vernier where 20 VSD coincide with 19 MSD (1 MSD = 1 mm). Least count?",
+  "formula": "",
+  "options": [
+   "0.01 mm",
+   "0.5 mm",
+   "0.95 mm",
+   "0.05 mm"
+  ],
+  "answer": 3,
+  "explain": "LC = 1 MSD / 20 = 1/20 mm = 0.05 mm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1480d01-f32f-406c-b60b-b194af4a6745",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "Screw gauge pitch 1 mm with 50 circular divisions has least count:",
+  "formula": "",
+  "options": [
+   "0.2 mm",
+   "0.002 mm",
+   "0.05 mm",
+   "0.02 mm"
+  ],
+  "answer": 3,
+  "explain": "LC = 1 mm / 50 = 0.02 mm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "19f66d8f-a70d-4e26-9d8a-b41388049fb0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "For a positive zero error, the correct measurement is obtained by:",
+  "formula": "",
+  "options": [
+   "Ignoring it if below LC",
+   "Multiplying the reading by the error",
+   "Adding the zero error to the reading",
+   "Subtracting the zero error from the reading"
+  ],
+  "answer": 3,
+  "explain": "True reading = observed reading − zero error (with its sign).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "784b3470-b55e-4b5a-af8c-b4b335254276",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "Backlash error in a screw gauge arises due to:",
+  "formula": "",
+  "options": [
+   "Wear of screw threads (slack)",
+   "Temperature change",
+   "Wrong zero setting",
+   "Parallax in reading"
+  ],
+  "answer": 0,
+  "explain": "Loose or worn threads cause it; rotate the screw in one direction only to avoid it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4281c95-9407-4feb-a87f-647cfd95f7d4",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "The ratchet arrangement at the end of a screw gauge is meant to:",
+  "formula": "",
+  "options": [
+   "Increase the pitch",
+   "Apply uniform, limited pressure on the object",
+   "Reduce the zero error",
+   "Magnify the circular scale"
+  ],
+  "answer": 1,
+  "explain": "It slips after a set pressure, preventing over-tightening and damage or compression of the object.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c156cd90-7417-4b4d-a416-10f919a1a067",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "The instrumental uncertainty in a single reading of a vernier or screw gauge is taken as:",
+  "formula": "",
+  "options": [
+   "The least count",
+   "Twice the pitch",
+   "The smallest main scale division squared",
+   "Half the zero error"
+  ],
+  "answer": 0,
+  "explain": "Least count is the minimum measurable value, so it is the instrument's absolute error.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "98483598-9952-4f06-8cb6-3d76b27cb4d5",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "At fixed pitch, increasing the circular scale divisions of a screw gauge makes LC:",
+  "formula": "",
+  "options": [
+   "Equal to the pitch",
+   "Stay same",
+   "Increase",
+   "Decrease"
+  ],
+  "answer": 3,
+  "explain": "LC = pitch / divisions, so more divisions give a smaller LC and higher precision.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "259d66c5-e914-4c49-b8af-1562f79e91c3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "In a screw gauge, rotating the circular scale by one division moves the screw axially by:",
+  "formula": "",
+  "options": [
+   "Number of divisions × pitch",
+   "One pitch",
+   "One least count",
+   "Half a pitch"
+  ],
+  "answer": 2,
+  "explain": "One circular division corresponds to an axial advance of one least count.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "475d8f56-ed59-4757-8aab-de5197ce4264",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "A vernier has N divisions equal to (N−1) main divisions of size s. Its least count is:",
+  "formula": "LC = s/N",
+  "options": [
+   "s/(N−1)",
+   "s(N−1)/N",
+   "s/N",
+   "N·s"
+  ],
+  "answer": 2,
+  "explain": "1 VSD = s(N−1)/N, so LC = s − s(N−1)/N = s/N.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2dace377-78a3-4e71-a559-643fb6787e85",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "A screw gauge with negative zero error: the zero error to be applied to the observed reading is:",
+  "formula": "True = Observed − (zero error)",
+  "options": [
+   "Added to the observed reading numerically",
+   "Subtracted as a positive number",
+   "Multiplied by the pitch",
+   "Ignored for thick objects"
+  ],
+  "answer": 0,
+  "explain": "Negative zero error means the correction is positive, so its magnitude is added to the reading.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "153d0f6a-0acf-42af-9725-c744524bfc2d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "A vernier's least count equals the difference between:",
+  "formula": "LC = 1 MSD − 1 VSD",
+  "options": [
+   "1 VSD and zero error",
+   "Total MSD and total VSD",
+   "1 MSD and 1 VSD",
+   "Pitch and 1 MSD"
+  ],
+  "answer": 2,
+  "explain": "LC = value of 1 MSD − value of 1 VSD.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a46cd59c-5db0-4bb6-9a27-4cbe06c9bbe3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "A screw gauge reading: PSR + (CSR × LC). In the screw gauge, PSR is read from the:",
+  "formula": "Reading = PSR + CSR × LC",
+  "options": [
+   "Sleeve of the stud",
+   "Circular scale",
+   "Linear (main) scale",
+   "Ratchet"
+  ],
+  "answer": 2,
+  "explain": "PSR is the pitch scale reading on the linear scale; CSR is the circular scale division on the reference line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2bd51856-7f46-4ea8-a630-ec3ac6116e6f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Least count of vernier & screw gauge",
+  "prompt": "In a screw gauge, the zero error is negative when the zero of the circular scale is:",
+  "formula": "",
+  "options": [
+   "Above the reference line",
+   "Exactly on the reference line",
+   "Beyond the ratchet stop",
+   "Below the reference line"
+  ],
+  "answer": 0,
+  "explain": "When the zero of the circular scale lies above the reference line, the zero error is negative. When it lies below, the error is positive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56737790-926c-4b70-94a5-d7a2512049f3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "123 m = 12300 cm = 123000 mm. How many significant figures does 12300 cm have (NCERT rule)?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Terminal zeros without a decimal point are not significant; changing units does not change significant figures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e588bcf4-bdd0-4630-b212-3f5876dae803",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Round 2.745 to three significant figures (NCERT rounding rule).",
+  "formula": "",
+  "options": [
+   "2.80",
+   "2.74",
+   "2.75",
+   "2.70"
+  ],
+  "answer": 1,
+  "explain": "Dropped digit is 5 and preceding digit 4 is even, so it stays unchanged: 2.74.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "accc9ec6-e9a3-4418-a4ae-07ed21ab498a",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Converting 2.50 m to 0.00250 km changes the number of significant figures to?",
+  "formula": "",
+  "options": [
+   "3",
+   "5",
+   "6",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Significant figures are independent of the units used; leading zeros are not counted.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "10b53e76-e4af-4db4-860f-fe9ec0e18ade",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Which measurement is most precise?",
+  "formula": "",
+  "options": [
+   "4.0 cm",
+   "4 cm",
+   "0.4 × 10 cm",
+   "4.00 cm"
+  ],
+  "answer": 3,
+  "explain": "More significant figures means smaller least count and smaller relative error; 4.00 has 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6cfa2103-0a5d-42b1-aa1b-04570fb1841e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Number of significant figures in 2005?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "2",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Zeros between two nonzero digits are always significant, so 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d54dcacd-7654-44b7-8019-c5a1fbca7520",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "4.700 m is written as 470.0 cm. The number of significant figures:",
+  "formula": "",
+  "options": [
+   "Falls to 3",
+   "Rises to 5",
+   "Stays 4",
+   "Falls to 2"
+  ],
+  "answer": 2,
+  "explain": "Changing units does not change the number of significant figures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b48b9fa-be0d-47f8-81f5-501c85992030",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Number of significant figures in 1.20 × 10⁴?",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "2",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "In scientific notation only the digits of the coefficient count: 1, 2, 0 give 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69d893de-511f-4ac5-8b13-689f89323beb",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "How many significant figures does an exact (counted) number such as 5 objects have?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Same as the measured value",
+   "Infinite",
+   "One"
+  ],
+  "answer": 2,
+  "explain": "Exact numbers have no uncertainty, so they have unlimited significant figures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "90a12e74-4596-48e6-af6b-e3723cadccaf",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Round 2.45 to two significant figures (NCERT rule).",
+  "formula": "",
+  "options": [
+   "2.5",
+   "2.6",
+   "2.4",
+   "2.0"
+  ],
+  "answer": 2,
+  "explain": "A dropped 5 with an even preceding digit leaves that digit unchanged, so 2.4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68f6ee27-b7f2-40d6-add6-2f7bf0f41f1c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Round 3.75 to two significant figures (NCERT rule).",
+  "formula": "",
+  "options": [
+   "3.6",
+   "3.8",
+   "4.0",
+   "3.7"
+  ],
+  "answer": 1,
+  "explain": "A dropped 5 with an odd preceding digit raises that digit by one, so 3.8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4978642c-66b6-475d-8d7e-28f1dacd4bd8",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Round 4.651 to two significant figures.",
+  "formula": "",
+  "options": [
+   "4.7",
+   "4.6",
+   "5.0",
+   "4.65"
+  ],
+  "answer": 0,
+  "explain": "The dropped part 51 is more than 5, so the preceding digit is raised: 4.7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81d84581-3fc6-4709-b94b-71860f555ffa",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "In a multi-step calculation, when should rounding off to the final significant figures be done?",
+  "formula": "",
+  "options": [
+   "Never",
+   "Only at the end, keeping one extra digit",
+   "Before starting",
+   "After every step"
+  ],
+  "answer": 1,
+  "explain": "Keep one extra digit in intermediate steps and round only the final result.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "571d91b1-ab0c-4496-9abb-1fe32a201b06",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Perimeter = 3 × 2.50 cm (3 is an exact count). Significant figures in the answer?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "Infinite",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "The exact number does not limit the result, so it follows 2.50, which has 3 significant figures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ac21f5b-c3bf-4625-b86d-2933e4098afe",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Number of significant figures in 6.022 × 10²³?",
+  "formula": "",
+  "options": [
+   "4",
+   "26",
+   "3",
+   "23"
+  ],
+  "answer": 0,
+  "explain": "Only the coefficient 6.022 counts; the power of ten does not, so 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8028b1ca-9301-455b-82ca-c113af0eadc9",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Number of significant figures in 10.50?",
+  "formula": "",
+  "options": [
+   "3",
+   "5",
+   "2",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "Embedded zeros and trailing zeros after a decimal point are significant, so 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b596dd14-45fa-4bdc-918e-bd5ad626fe42",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "The absolute error in the i-th measurement aᵢ is defined as",
+  "formula": "Δaᵢ = |a_mean − aᵢ|",
+  "options": [
+   "(a_mean − aᵢ)/n",
+   "|a_mean − aᵢ|",
+   "Δaᵢ/a_mean",
+   "aᵢ − a_true²"
+  ],
+  "answer": 1,
+  "explain": "Absolute error is the magnitude of the difference between the mean value and the individual reading.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4cdbd6bc-a041-4980-a7ef-072de6457a75",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Side of a cube has 2% error. Percentage error in its volume is",
+  "formula": "V = a³",
+  "options": [
+   "6%",
+   "2%",
+   "8%",
+   "4%"
+  ],
+  "answer": 0,
+  "explain": "ΔV/V = 3(Δa/a) = 3 × 2% = 6%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c85e4c6-e4bc-4c99-928f-d55cc37c6f9b",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Mass has 2% error and speed 3% error. Percentage error in K = ½mv² is",
+  "formula": "",
+  "options": [
+   "11%",
+   "12%",
+   "8%",
+   "5%"
+  ],
+  "answer": 2,
+  "explain": "%K = %m + 2(%v) = 2 + 6 = 8%; the factor ½ adds no error.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7a7f5b23-c7d7-42d3-8a3a-ff108eb03a40",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Pure numerical constants like 4π² or ½ contribute what to the relative error?",
+  "formula": "",
+  "options": [
+   "Double",
+   "Zero",
+   "Their own value",
+   "Half of it"
+  ],
+  "answer": 1,
+  "explain": "Exact numbers have no uncertainty, so they add nothing to the relative error.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd3c7788-107c-4e22-acef-f179d5334424",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Mean absolute error of n readings is",
+  "formula": "Δa_mean = (Δa₁ + Δa₂ + … + Δaₙ)/n",
+  "options": [
+   "Mean of the magnitudes |Δaᵢ|",
+   "Largest of the Δaᵢ",
+   "Mean of the squares of Δaᵢ",
+   "Sum of all Δaᵢ"
+  ],
+  "answer": 0,
+  "explain": "It is the arithmetic mean of the magnitudes of the individual absolute errors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da5b0245-af06-4b95-a770-65fdf76331f3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Which measurement is the most precise?",
+  "formula": "",
+  "options": [
+   "10.0 ± 0.1 cm",
+   "5.0 ± 0.5 cm",
+   "2.0 ± 0.2 cm",
+   "1.0 ± 0.05 cm"
+  ],
+  "answer": 0,
+  "explain": "Precision depends on percentage error: 1%, 5%, 10%, 10%. The smallest is 1%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3eeae0d4-f1b2-42fb-9128-7740f3afb772",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "If x = ka with k an exact constant, then the relative error Δx/x is",
+  "formula": "",
+  "options": [
+   "Δa/(ka)²",
+   "k·Δa/a",
+   "Δa/k",
+   "Δa/a"
+  ],
+  "answer": 3,
+  "explain": "The relative error is unchanged, while the absolute error becomes Δx = kΔa.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f45fe9da-2dca-4551-9763-476013a38557",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Percentage error in a quantity a is given by",
+  "formula": "",
+  "options": [
+   "Δa × 100 %",
+   "(a_mean/Δa) × 100 %",
+   "(Δa/a_mean) × 100 %",
+   "(Δa/a_mean)² × 100 %"
+  ],
+  "answer": 2,
+  "explain": "Percentage error is relative error multiplied by 100.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d8a1e1d-46ff-4d4b-9aef-f05d15033432",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Subtracting two nearly equal measured values gives a result with a",
+  "formula": "",
+  "options": [
+   "Zero relative error",
+   "Smaller relative error",
+   "Very large relative error",
+   "Smaller absolute error"
+  ],
+  "answer": 2,
+  "explain": "Absolute errors add while the difference is small, so the relative error becomes large.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9fd48e79-7c7e-48de-9f15-42d306ec05c9",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "x = 7.5 ± 0.1 cm and y = 4.5 ± 0.1 cm. The error in (x − y) is:",
+  "formula": "",
+  "options": [
+   "± 0.02 cm",
+   "± 0.0 cm",
+   "± 0.2 cm",
+   "± 0.1 cm"
+  ],
+  "answer": 2,
+  "explain": "Absolute errors add even for a difference: 0.1 + 0.1 = 0.2 cm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "949fdac4-0c3a-43be-bdb7-f8c5507a1346",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "Rods 4.00 ± 0.01 cm and 2.00 ± 0.02 cm are joined end to end. Error in total length?",
+  "formula": "",
+  "options": [
+   "± 0.01 cm",
+   "± 0.06 cm",
+   "± 0.02 cm",
+   "± 0.03 cm"
+  ],
+  "answer": 3,
+  "explain": "ΔL = 0.01 + 0.02 = 0.03 cm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9133f7ec-7fea-4d0f-9e9f-dc0c948ed13f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "T₁ = 20 ± 0.5 °C and T₂ = 50 ± 0.5 °C. The temperature difference is:",
+  "formula": "",
+  "options": [
+   "30 ± 0.5 °C",
+   "30 ± 1.0 °C",
+   "30 ± 0 °C",
+   "30 ± 0.25 °C"
+  ],
+  "answer": 1,
+  "explain": "ΔT error = 0.5 + 0.5 = 1.0 °C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "970235e0-c856-4043-9a3f-7e94d20d27fd",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "10 identical rods, each measured as L ± 0.1 mm, are placed end to end. The maximum error in total length is:",
+  "formula": "ΔZ = nΔa",
+  "options": [
+   "± 0.01 mm",
+   "± 10 mm",
+   "± 1 mm",
+   "± 0.1 mm"
+  ],
+  "answer": 2,
+  "explain": "Maximum errors add for n equal terms, so ΔZ = 10 × 0.1 = 1 mm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1608e6de-7141-4ff3-8e6c-28629e837220",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "x = 100 ± 1 and y = 200 ± 2. The percentage error in (x + y) is:",
+  "formula": "ΔZ/Z = (Δx + Δy)/(x + y)",
+  "options": [
+   "1.5%",
+   "1%",
+   "3%",
+   "0.5%"
+  ],
+  "answer": 1,
+  "explain": "ΔZ = 3 and Z = 300, so ΔZ/Z = 1%. Do not add the percentage errors 1% and 1%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f40bce19-9e3d-4fc5-8c92-00e634cecada",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "A = 5.0 ± 0.2 and B = 3.0 ± 0.1. The value of A − B with error is:",
+  "formula": "",
+  "options": [
+   "2.0 ± 0.05",
+   "2.0 ± 0.1",
+   "2.0 ± 0.3",
+   "2.0 ± 0.2"
+  ],
+  "answer": 2,
+  "explain": "Absolute errors add: 0.2 + 0.1 = 0.3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e942dce3-2125-4c59-b1d9-689b64ae5f62",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "Two masses 10 ± 0.1 g and 20 ± 0.2 g are combined. The fractional error in total mass is:",
+  "formula": "",
+  "options": [
+   "0.02",
+   "0.03",
+   "0.003",
+   "0.01"
+  ],
+  "answer": 3,
+  "explain": "Δm = 0.3 g on 30 g gives 0.3/30 = 0.01.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d91d3823-4346-4d41-b1e4-7a4105e331c6",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "g = 4π²L/T²; L has 1% error and T has 2% error. Percentage error in g is?",
+  "formula": "Δg/g = ΔL/L + 2ΔT/T",
+  "options": [
+   "5%",
+   "6%",
+   "3%",
+   "4%"
+  ],
+  "answer": 0,
+  "explain": "1% + 2 × 2% = 5%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e556ed5e-fe9e-445f-aaba-295bda3c21e1",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "In Z = A²B³C, which quantity must be measured most precisely?",
+  "formula": "",
+  "options": [
+   "B",
+   "A",
+   "All equally",
+   "C"
+  ],
+  "answer": 0,
+  "explain": "B has the highest power (3), so it contributes the most to the fractional error in Z.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "043d0bd6-4f8b-4441-8396-95b24eb03e53",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Cylinder: radius error 1%, height error 2%. Percentage error in volume is?",
+  "formula": "V = πr²h",
+  "options": [
+   "6%",
+   "5%",
+   "4%",
+   "3%"
+  ],
+  "answer": 2,
+  "explain": "2Δr/r + Δh/h = 2% + 2% = 4%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "121c322b-50b3-4575-b3c0-1d859410422c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "T = 2π√(L/g); L has 2% error and g has 4% error. Maximum error in T is?",
+  "formula": "ΔT/T = ½ΔL/L + ½Δg/g",
+  "options": [
+   "1%",
+   "3%",
+   "2%",
+   "6%"
+  ],
+  "answer": 1,
+  "explain": "½(2%) + ½(4%) = 3%; the errors add even though g is in the denominator.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "acebe9c5-1ee6-45ff-9197-45f542bdf86b",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Z = A², A = 5 ± 0.1. Absolute error in Z is?",
+  "formula": "ΔZ = 2A·ΔA",
+  "options": [
+   "0.1",
+   "0.2",
+   "1.0",
+   "0.5"
+  ],
+  "answer": 2,
+  "explain": "ΔZ = 2 × 5 × 0.1 = 1.0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c00f5db2-0c55-4d84-9121-684b175434e6",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Density of a cube: mass error 3%, edge error 1%. Percentage error in density is?",
+  "formula": "ρ = M/a³",
+  "options": [
+   "5%",
+   "2%",
+   "4%",
+   "6%"
+  ],
+  "answer": 3,
+  "explain": "Δρ/ρ = ΔM/M + 3Δa/a = 3% + 3% = 6%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ec3e8030-1590-41bf-8fbb-425fa2ed5387",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Z = A²B³/C, each of A, B, C has 1% error. Maximum percentage error in Z is?",
+  "formula": "",
+  "options": [
+   "4%",
+   "6%",
+   "5%",
+   "0%"
+  ],
+  "answer": 1,
+  "explain": "Errors add as 2 + 3 + 1 = 6%; the minus sign for C does not cancel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e292bb9f-0529-4d81-9665-543ff4b89ec0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Z = A√B/C²: A 1%, B 4%, C 1% error. Percentage error in Z is?",
+  "formula": "",
+  "options": [
+   "5%",
+   "4%",
+   "3%",
+   "7%"
+  ],
+  "answer": 0,
+  "explain": "1 + ½(4) + 2(1) = 5%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02c7860f-6bce-4602-86ba-855d9551face",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Systematic, random & gross errors",
+  "prompt": "Which error can be reduced by taking many readings and averaging?",
+  "formula": "",
+  "options": [
+   "Random error",
+   "Instrumental error",
+   "Zero error",
+   "Personal bias error"
+  ],
+  "answer": 0,
+  "explain": "Random errors are equally likely positive or negative, so averaging reduces them.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9e63aeb-8b6d-4f22-8489-9a6a95f34e7c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Systematic, random & gross errors",
+  "prompt": "Reading a scale wrongly or recording 25.3 as 23.5 is an example of which error?",
+  "formula": "",
+  "options": [
+   "Random error",
+   "Systematic error",
+   "Instrumental error",
+   "Gross error"
+  ],
+  "answer": 3,
+  "explain": "Careless reading or recording mistakes by the observer are gross errors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d7bebab1-b64f-4e32-a32d-8bd364703d08",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Systematic, random & gross errors",
+  "prompt": "Error that arises from the imperfection in the experimental technique or procedure is called",
+  "formula": "",
+  "options": [
+   "Gross error",
+   "Systematic error",
+   "Absolute error",
+   "Random error"
+  ],
+  "answer": 1,
+  "explain": "Instrumental, procedural, and personal-bias errors are all systematic errors, with a definite direction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1ff3617e-a8e1-4042-8bba-3b5b1bb424f1",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Systematic, random & gross errors",
+  "prompt": "Which error is always of the same sign and direction in repeated measurements?",
+  "formula": "",
+  "options": [
+   "Random error",
+   "Systematic error",
+   "Fluctuation error",
+   "Statistical error"
+  ],
+  "answer": 1,
+  "explain": "Systematic errors are one-sided, tending to be always positive or always negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2316632e-03dc-4667-979e-cd411a9f6c0a",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Systematic, random & gross errors",
+  "prompt": "Error caused by sudden change in temperature or voltage fluctuation during an experiment is",
+  "formula": "",
+  "options": [
+   "Gross error",
+   "Zero error",
+   "Random error",
+   "Systematic error"
+  ],
+  "answer": 2,
+  "explain": "Unpredictable external fluctuations cause random errors, which vary in sign and size.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6f9791ba-7e4a-4cbd-a835-4f859848026b",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Systematic, random & gross errors",
+  "prompt": "Using a wrongly calibrated thermometer in all readings causes which error?",
+  "formula": "",
+  "options": [
+   "Relative error",
+   "Random error",
+   "Gross error",
+   "Systematic error"
+  ],
+  "answer": 3,
+  "explain": "A faulty instrument gives a consistent, one-directional deviation: an instrumental systematic error.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "531acaf3-b987-402c-bffb-874a9c8d4736",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Systematic, random & gross errors",
+  "prompt": "Personal error such as parallax in reading a scale is a type of",
+  "formula": "",
+  "options": [
+   "Systematic error",
+   "Random error",
+   "Percentage error",
+   "Absolute error"
+  ],
+  "answer": 0,
+  "explain": "Parallax and habitual observer bias are personal systematic errors, not random.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ec4702e8-8c42-485c-85ed-fde5386b31d8",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "Latent heat (per unit mass) has the same dimensions as which quantity?",
+  "formula": "[L²T⁻²]",
+  "options": [
+   "Force constant",
+   "Specific heat capacity",
+   "Gravitational potential",
+   "Gravitational potential energy"
+  ],
+  "answer": 2,
+  "explain": "Heat/mass = energy/mass = L²T⁻², same as gravitational potential.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eb1953eb-a613-4490-9638-b724edb41140",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "Surface tension has the same dimensions as which quantity?",
+  "formula": "[MT⁻²]",
+  "options": [
+   "Spring (force) constant",
+   "Energy",
+   "Viscosity coefficient",
+   "Pressure"
+  ],
+  "answer": 0,
+  "explain": "Surface tension = force/length = MT⁻². Spring constant = force/length = MT⁻².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6cd8f323-23da-431e-bc65-da37b3218083",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "The Boltzmann constant k_B has the same dimensions as:",
+  "formula": "[ML²T⁻²K⁻¹]",
+  "options": [
+   "Entropy",
+   "Energy",
+   "Specific heat",
+   "Latent heat"
+  ],
+  "answer": 0,
+  "explain": "k_B = energy/temperature, the same as entropy (and heat capacity).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "71f3051d-3321-4d6a-9d1d-336649b0fdd4",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "V²/R (V: potential difference, R: resistance) has the same dimensions as:",
+  "formula": "",
+  "options": [
+   "Energy",
+   "Current",
+   "Power",
+   "Force"
+  ],
+  "answer": 2,
+  "explain": "V²/R is the power dissipated, so ML²T⁻³.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5a6e010-b079-4bc7-857a-fff9c0393bb1",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "Gravitational field intensity has the same dimensions as:",
+  "formula": "[LT⁻²]",
+  "options": [
+   "Acceleration",
+   "Momentum",
+   "Force",
+   "Gravitational potential"
+  ],
+  "answer": 0,
+  "explain": "Field = force per unit mass, which is acceleration.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "255a4ad4-6ce0-409c-99f8-b8dbccdb54ff",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "The radioactive decay constant λ has the same dimensions as:",
+  "formula": "[T⁻¹]",
+  "options": [
+   "Time period",
+   "Wave number",
+   "Wavelength",
+   "Frequency"
+  ],
+  "answer": 3,
+  "explain": "N = N₀e^(−λt) needs λt dimensionless, so λ is T⁻¹, like frequency.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c348bdd6-4b36-422b-8b90-97efd85c6e20",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "Which quantity has the same dimensions as plane angle?",
+  "formula": "",
+  "options": [
+   "Frequency",
+   "Strain",
+   "Angular velocity",
+   "Pressure"
+  ],
+  "answer": 1,
+  "explain": "Angle = arc/radius and strain = ΔL/L are both dimensionless.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b88ee93b-0a7d-424b-b2dc-55ac3e320356",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "h/λ (Planck's constant over wavelength) has the dimensions of:",
+  "formula": "p = h/λ",
+  "options": [
+   "Angular momentum",
+   "Energy",
+   "Force",
+   "Linear momentum"
+  ],
+  "answer": 3,
+  "explain": "de Broglie relation p = h/λ, so it is momentum, MLT⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ebe85e0-f059-4055-86df-e6c1da7c9e8d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Quantities with identical dimensions",
+  "prompt": "The product μ₀ε₀ has the same dimensions as:",
+  "formula": "c = 1/√(μ₀ε₀)",
+  "options": [
+   "Velocity²",
+   "Velocity",
+   "1/Velocity²",
+   "1/Velocity"
+  ],
+  "answer": 2,
+  "explain": "Since c = 1/√(μ₀ε₀), μ₀ε₀ = 1/c², with dimensions [L⁻²T²].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c233915a-555f-4119-b82e-10e4d8868be0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "Which operation is meaningful only between quantities of identical dimensions?",
+  "formula": "",
+  "options": [
+   "Division",
+   "Raising to a power",
+   "Addition or subtraction",
+   "Multiplication"
+  ],
+  "answer": 2,
+  "explain": "Homogeneity: only like quantities can be added, subtracted or equated; products and ratios can mix dimensions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4533158c-1207-4961-97d4-375574e7163c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "The argument of sin, log or exponential function in a valid physical equation must be:",
+  "formula": "",
+  "options": [
+   "Of dimension L",
+   "Dimensionless",
+   "Of dimension T",
+   "Of the same dimension as the result"
+  ],
+  "answer": 1,
+  "explain": "Such functions are defined through series with powers of the argument, so it must be a pure number.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ec3fd470-d7bf-482e-a07b-c004f878b6ac",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "Dimensional analysis cannot determine:",
+  "formula": "",
+  "options": [
+   "Dimensions of derived quantities",
+   "Dimensionless constants like 2π or ½",
+   "Dimensional consistency of an equation",
+   "Correctness of unit conversions"
+  ],
+  "answer": 1,
+  "explain": "Pure numbers (½, 2π, 6π) carry no dimensions, so the method cannot give them.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ad27991-181f-4462-a601-0afa07dd3845",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "A dimensionally correct equation is:",
+  "formula": "",
+  "options": [
+   "Only a necessary condition for correctness",
+   "Valid only in SI units",
+   "Necessarily physically correct",
+   "A sufficient condition for correctness"
+  ],
+  "answer": 0,
+  "explain": "It may still have a wrong numerical factor or be physically false, e.g. K = mv² is dimensionally fine.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bdf9b96e-edcc-42ed-bbf0-cd296def7db8",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "Which relation cannot be derived by the dimensional (power-law) method?",
+  "formula": "",
+  "options": [
+   "F ∝ mv²/r",
+   "T ∝ √(l/g) for a pendulum",
+   "s = ut + ½at²",
+   "v ∝ √(T/μ) for a string"
+  ],
+  "answer": 2,
+  "explain": "The method assumes a single product of powers; a sum of terms cannot be obtained this way.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5cacbf14-80b8-49cc-8c48-f55fb74b4079",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "With only M, L, T as base dimensions, a power-law derivation fails if a quantity depends on more than how many variables?",
+  "formula": "",
+  "options": [
+   "Three",
+   "Two",
+   "Four",
+   "Five"
+  ],
+  "answer": 0,
+  "explain": "Equating powers of M, L, T gives 3 equations, so only 3 unknown exponents can be fixed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d4f09f2d-d214-4bb9-adf9-79cb72b9725f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "In (P + a/V²)(V − b) = RT, the dimension of a is:",
+  "formula": "[a] = [P][V²]",
+  "options": [
+   "ML⁵T⁻²",
+   "ML²T⁻²",
+   "ML⁻¹T⁻²",
+   "ML³T⁻²"
+  ],
+  "answer": 0,
+  "explain": "a/V² must be pressure, so [a] = ML⁻¹T⁻² × L⁶ = ML⁵T⁻².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c331c6aa-ebd5-44a3-8d93-c5333181b050",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "In (P + a/V²)(V − b) = RT, a/b has the dimensions of:",
+  "formula": "[a/b] = [P][V]",
+  "options": [
+   "Volume",
+   "Pressure",
+   "Force",
+   "Energy"
+  ],
+  "answer": 3,
+  "explain": "a = PV² and b = V, so a/b = PV, which is energy (ML²T⁻²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b3296edc-02bd-4254-8498-70c837bc3369",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "In v = at + b/(t + c), with v velocity and t time, the dimension of b is:",
+  "formula": "",
+  "options": [
+   "LT⁻²",
+   "L",
+   "LT⁻¹",
+   "LT"
+  ],
+  "answer": 1,
+  "explain": "c is time, so b/(t+c) is velocity; [b] = LT⁻¹ × T = L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6d4bfd75-9815-48ed-97bb-9ea334bbb15c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "In x = A + Bt + Ct² (x length, t time), the dimension of B/C is:",
+  "formula": "",
+  "options": [
+   "T⁻¹",
+   "LT⁻¹",
+   "T",
+   "Dimensionless"
+  ],
+  "answer": 2,
+  "explain": "[B] = LT⁻¹ and [C] = LT⁻², so B/C = T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3ee7875f-ffc7-4722-aa4a-8917bcc20e91",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "For y = A sin(ωt − kx), the ratio ω/k has the dimensions of:",
+  "formula": "",
+  "options": [
+   "T⁻¹L⁻¹",
+   "Dimensionless",
+   "LT⁻¹",
+   "LT"
+  ],
+  "answer": 2,
+  "explain": "ωt and kx are dimensionless, so [ω] = T⁻¹ and [k] = L⁻¹; ω/k = LT⁻¹ (velocity).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d8c5ad3d-42d8-491b-bf36-b0fe8e183da0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "The quantity √(P/ρ), with P pressure and ρ density, has dimensions of:",
+  "formula": "",
+  "options": [
+   "Time",
+   "Velocity",
+   "Acceleration",
+   "Energy"
+  ],
+  "answer": 1,
+  "explain": "P/ρ = ML⁻¹T⁻² ÷ ML⁻³ = L²T⁻², so its square root is LT⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b63a681e-a03c-4726-af6a-404a8ffc41f5",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "In y = A e^(−bt), where t is time, the dimension of b is:",
+  "formula": "",
+  "options": [
+   "Dimensionless",
+   "Same as A",
+   "T⁻¹",
+   "T"
+  ],
+  "answer": 2,
+  "explain": "The exponent bt must be dimensionless, so [b] = T⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ec4dea82-3ba4-40b4-a260-8aa52e7a960e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "The ratio L/R (inductance over resistance) has the same dimensions as:",
+  "formula": "τ = L/R",
+  "options": [
+   "Charge",
+   "Current",
+   "Frequency",
+   "Time"
+  ],
+  "answer": 3,
+  "explain": "L/R is the inductive time constant, with dimension T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e752f71c-2879-420e-8e0d-901ca0acd0d3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 Pa (N/m²) equals how many dyne/cm²?",
+  "formula": "1 Pa = 10 dyne cm⁻²",
+  "options": [
+   "10 dyne/cm²",
+   "10³ dyne/cm²",
+   "10⁻¹ dyne/cm²",
+   "10⁵ dyne/cm²"
+  ],
+  "answer": 0,
+  "explain": "10⁵ dyne / 10⁴ cm² = 10 dyne/cm².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7a1c83d7-9e45-42c1-ba81-749fd1d8e620",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "Surface tension 1 N/m equals how many dyne/cm?",
+  "formula": "1 N/m = 10³ dyne/cm",
+  "options": [
+   "10⁷ dyne/cm",
+   "10³ dyne/cm",
+   "10² dyne/cm",
+   "10⁵ dyne/cm"
+  ],
+  "answer": 1,
+  "explain": "10⁵ dyne / 10² cm = 10³ dyne/cm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3522557b-2c55-4ed9-b312-642f7c4e1a06",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 atmosphere in pascal (approx.)?",
+  "formula": "1 atm ≈ 1.013×10⁵ Pa",
+  "options": [
+   "1.013×10⁷ Pa",
+   "1.013×10³ Pa",
+   "1.013×10⁴ Pa",
+   "1.013×10⁵ Pa"
+  ],
+  "answer": 3,
+  "explain": "Standard atmosphere = 760 mm Hg ≈ 1.013×10⁵ Pa.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7645115c-b4ac-4075-9e71-9c5a42acde4b",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 kilowatt-hour equals how many joule?",
+  "formula": "1 kWh = 3.6×10⁶ J",
+  "options": [
+   "3.6×10³ J",
+   "6×10⁴ J",
+   "3.6×10⁹ J",
+   "3.6×10⁶ J"
+  ],
+  "answer": 3,
+  "explain": "10³ W × 3600 s = 3.6×10⁶ J.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f2632ff9-38a4-4644-8053-790f8c0c45b4",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 light year in metres (approx.)?",
+  "formula": "1 ly = 9.46×10¹⁵ m",
+  "options": [
+   "9.46×10¹² m",
+   "9.46×10¹⁵ m",
+   "1.5×10¹¹ m",
+   "3.08×10¹⁶ m"
+  ],
+  "answer": 1,
+  "explain": "Distance light travels in one year: 3×10⁸ × 3.15×10⁷ s ≈ 9.46×10¹⁵ m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7990af67-9120-4298-b613-04f4149dc15d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "Which relation between astronomical units is correct?",
+  "formula": "1 pc ≈ 3.26 ly",
+  "options": [
+   "1 AU ≈ 3.26 ly",
+   "1 ly ≈ 3.26 pc",
+   "1 pc ≈ 3.26 AU",
+   "1 pc ≈ 3.26 ly"
+  ],
+  "answer": 3,
+  "explain": "1 parsec = 3.08×10¹⁶ m ≈ 3.26 light years.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fb041f0-120f-44de-90e9-553f90c7b0d3",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "If a physical quantity's unit is made 10 times larger, its numerical value becomes?",
+  "formula": "n₁u₁ = n₂u₂",
+  "options": [
+   "Unchanged",
+   "10 times smaller",
+   "10 times larger",
+   "100 times smaller"
+  ],
+  "answer": 1,
+  "explain": "n is inversely proportional to the unit size, since n·u stays constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b4325ad-af6d-45c4-a451-bc672bd6d7b5",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 astronomical unit (mean Earth–Sun distance) in metres is approximately?",
+  "formula": "1 AU ≈ 1.5×10¹¹ m",
+  "options": [
+   "1.5×10⁸ m",
+   "9.46×10¹⁵ m",
+   "1.5×10¹¹ m",
+   "3.08×10¹⁶ m"
+  ],
+  "answer": 2,
+  "explain": "Earth–Sun distance is 1.496×10¹¹ m; the other values are ly and pc.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "76ed1760-91cd-48be-9d5f-44253532463e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 angstrom (Å) equals how many metres?",
+  "formula": "1 Å = 10⁻¹⁰ m",
+  "options": [
+   "10⁻⁸ m",
+   "10⁻⁹ m",
+   "10⁻¹² m",
+   "10⁻¹⁰ m"
+  ],
+  "answer": 3,
+  "explain": "1 Å = 10⁻¹⁰ m = 0.1 nm; 1 fermi = 10⁻¹⁵ m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bcd29edb-954e-422b-a5e8-53145d96efba",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 joule equals how many erg?",
+  "formula": "1 J = 10⁷ erg",
+  "options": [
+   "10⁹ erg",
+   "10³ erg",
+   "10⁵ erg",
+   "10⁷ erg"
+  ],
+  "answer": 3,
+  "explain": "1 J = 1 N·m = 10⁵ dyne × 10² cm = 10⁷ erg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ea75ddb-3fca-4f45-9d72-d2059d4e4ef4",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "1 newton equals how many dyne?",
+  "formula": "1 N = 10⁵ dyne",
+  "options": [
+   "10³ dyne",
+   "10⁵ dyne",
+   "10⁷ dyne",
+   "10² dyne"
+  ],
+  "answer": 1,
+  "explain": "1 N = 1 kg·m/s² = 10³ g × 10² cm/s² = 10⁵ dyne.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "61a63171-6da9-4f12-a695-a2d77e47376c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Unit conversion between systems",
+  "prompt": "Dynamic viscosity 1 Pa·s equals how many poise?",
+  "formula": "1 Pa·s = 10 poise",
+  "options": [
+   "100 poise",
+   "10⁻³ poise",
+   "0.1 poise",
+   "10 poise"
+  ],
+  "answer": 3,
+  "explain": "1 poise = 0.1 Pa·s, so 1 Pa·s = 10 poise.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "27c4b30c-f972-4722-bb45-40a14f2ff0ce",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Limitations of dimensional analysis",
+  "prompt": "Dimensional method cannot derive relations involving which type of function?",
+  "formula": "",
+  "options": [
+   "Trigonometric or exponential",
+   "Inverse-square dependence",
+   "Square-root dependence",
+   "Product of powers"
+  ],
+  "answer": 0,
+  "explain": "Such functions have dimensionless arguments and cannot be fixed by exponent matching.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5c1f1676-ff19-4605-8055-69a1f42b0e9f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Limitations of dimensional analysis",
+  "prompt": "Dimensional analysis gives no information about which feature of a quantity?",
+  "formula": "",
+  "options": [
+   "Its dimensional homogeneity",
+   "Its base units",
+   "Its dimensional formula",
+   "Scalar or vector nature"
+  ],
+  "answer": 3,
+  "explain": "Dimensions do not reveal direction character; e.g. work (scalar) and torque (vector) are alike.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ac5a4d9-62ed-44ad-9ad6-2bf90e53d155",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Limitations of dimensional analysis",
+  "prompt": "If x = f(a/b), a and b having equal dimensions, dimensional analysis tells us about f:",
+  "formula": "",
+  "options": [
+   "f must be exponential",
+   "Nothing; the form of f is undetermined",
+   "f must be a power law",
+   "f must be linear"
+  ],
+  "answer": 1,
+  "explain": "Any function of a dimensionless ratio is dimensionally allowed, so its form is not determined.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75ff8e96-3d8d-40c7-9d6b-eb7f5d22b4d5",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Limitations of dimensional analysis",
+  "prompt": "For a pendulum, T = √(l/g) is:",
+  "formula": "",
+  "options": [
+   "Dimensionally incorrect",
+   "Dimensionally correct for l/g² only",
+   "Dimensionally correct but physically incorrect",
+   "Physically correct"
+  ],
+  "answer": 2,
+  "explain": "The factor 2π is missing; dimensional analysis cannot detect that.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac1695fe-d1b0-45a4-9cf2-acb5c8b6e5d1",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Limitations of dimensional analysis",
+  "prompt": "For a simple pendulum, which dependence can dimensional analysis NOT reveal?",
+  "formula": "",
+  "options": [
+   "Power of l in T",
+   "Dependence on amplitude θ₀",
+   "Independence of mass m",
+   "Power of g in T"
+  ],
+  "answer": 1,
+  "explain": "Angle is dimensionless, so any function of θ₀ cannot be fixed by dimensions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "60661326-df99-439e-8ba7-1f5370d31ca0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Number of significant figures in the charge value 1.60 × 10⁻¹⁹ C?",
+  "formula": "",
+  "options": [
+   "19",
+   "3",
+   "2",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Only the digits 1, 6, 0 in the coefficient count; the power of 10 is ignored.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1217e7f4-2d6c-4379-b403-3d76621580e4",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Which number has exactly the same significant figures as 0.0250?",
+  "formula": "",
+  "options": [
+   "0.0025",
+   "2.5 × 10²",
+   "0.02500",
+   "2.50 × 10⁻⁵"
+  ],
+  "answer": 3,
+  "explain": "0.0250 has 3 s.f. (trailing 0 after the decimal counts); 2.50×10⁻⁵ also has 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "106675fa-dfc0-4412-990a-e8997b701ea1",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Number of significant figures in 1000.0?",
+  "formula": "",
+  "options": [
+   "1",
+   "4",
+   "5",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "Zeros between nonzero digit and a trailing zero after the decimal point are all significant: 5 s.f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ba810ed-afe0-4c48-9a71-23c46a94f327",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Counting significant figures",
+  "prompt": "Number of significant figures in 0.030 × 10⁴ kg?",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "3",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "Leading zeros are not significant, the trailing 0 after 3 is; the 10⁴ factor is ignored: 3 and 0 → 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54dc0755-50d3-4920-8f2e-bf318cd9a720",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Density of a sphere: mass error 1%, radius error 2%. Maximum percentage error in density?",
+  "formula": "ρ = M/(4πr³/3)",
+  "options": [
+   "9%",
+   "3%",
+   "5%",
+   "7%"
+  ],
+  "answer": 3,
+  "explain": "1% + 3×2% = 7%; the constant 4π/3 adds no error.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d2877d9-90d7-4b34-aa15-56d892d5a74d",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Sig figs in arithmetic & rounding off",
+  "prompt": "Rounding off 2.350 to two significant figures by the NCERT rule gives:",
+  "formula": "",
+  "options": [
+   "2.35",
+   "2.5",
+   "2.4",
+   "2.3"
+  ],
+  "answer": 2,
+  "explain": "NCERT rule: if the preceding digit is odd and the dropped digit is 5 with only zeros after it, round up; here 3 is odd, so 2.4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "339248e4-bde3-4f3e-ab25-557d56fa6185",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in product & powers",
+  "prompt": "Z = √(AB). A has 2% error and B has 4% error. Maximum percentage error in Z is?",
+  "formula": "ΔZ/Z = ½(ΔA/A + ΔB/B)",
+  "options": [
+   "2%",
+   "3%",
+   "8%",
+   "6%"
+  ],
+  "answer": 1,
+  "explain": "Z = A^½B^½, so error = ½(2%) + ½(4%) = 3%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "903ca4a6-2a54-420f-badd-4f00f76adee0",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Fundamental vs derived units",
+  "prompt": "The SI base quantity whose base unit is the mole is:",
+  "formula": "",
+  "options": [
+   "Mass of a substance",
+   "Amount of substance",
+   "Molar mass",
+   "Number of molecules"
+  ],
+  "answer": 1,
+  "explain": "Mole is the SI base unit of amount of substance; molar mass is a derived quantity (kg/mol).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87196b9f-d846-4b96-93f8-4289daeb64d7",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "The best estimate of the true value from repeated readings aᵢ is their:",
+  "formula": "a_mean = (a₁ + a₂ + … + aₙ)/n",
+  "options": [
+   "Smallest reading",
+   "Median of the absolute errors",
+   "Largest reading",
+   "Arithmetic mean"
+  ],
+  "answer": 3,
+  "explain": "The arithmetic mean of the readings is taken as the best estimate of the true value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9326988-7482-4e60-82ec-325324ecd1bc",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "With a fixed least count, the relative error of a measurement is smallest when the measured value is:",
+  "formula": "Δa/a = LC/a",
+  "options": [
+   "Equal to the least count",
+   "Small",
+   "Large",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Δa ≈ LC is fixed, so Δa/a = LC/a decreases as a increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3da0e84a-1f78-4959-bc53-e23deba41130",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Time for n oscillations is measured with error Δt. The error in the period T is:",
+  "formula": "T = t/n",
+  "options": [
+   "Δt/n",
+   "Δt",
+   "Δt/n²",
+   "nΔt"
+  ],
+  "answer": 0,
+  "explain": "T = t/n, so ΔT = Δt/n. Timing more oscillations reduces the error in T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "88ad2d9c-7e23-4a49-a5b5-53bd3c51f156",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "Accuracy of a measurement refers to how close the result is to:",
+  "formula": "",
+  "options": [
+   "The mean absolute error",
+   "Other repeated readings",
+   "The least count",
+   "The true value"
+  ],
+  "answer": 3,
+  "explain": "Accuracy is closeness to the true value. Precision is closeness of readings to each other.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b5e8093a-e89d-472a-a65c-96559739b16c",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Absolute, relative & percentage error",
+  "prompt": "I = ½MR²; M has 1% error and R has 2% error. Percentage error in I?",
+  "formula": "ΔI/I = ΔM/M + 2ΔR/R",
+  "options": [
+   "6%",
+   "4%",
+   "5%",
+   "3%"
+  ],
+  "answer": 2,
+  "explain": "The factor ½ is exact, so error = 1% + 2×2% = 5%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d381e7be-ae82-48b1-a9cc-cc1ecb5d48ac",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "Z = A + 5, where 5 is an exact constant and A has absolute error ΔA. The absolute error in Z is:",
+  "formula": "ΔZ = ΔA",
+  "options": [
+   "5ΔA",
+   "0",
+   "ΔA + 5",
+   "ΔA"
+  ],
+  "answer": 3,
+  "explain": "An exact constant carries no error. Adding it shifts the value but leaves the absolute error ΔA unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b80c71c6-352c-4760-88d1-cf254b9c964e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "Z = 3A − 2B with ΔA = ΔB = 0.1. The maximum absolute error in Z is:",
+  "formula": "ΔZ = 3ΔA + 2ΔB",
+  "options": [
+   "± 0.3",
+   "± 0.6",
+   "± 0.5",
+   "± 0.1"
+  ],
+  "answer": 2,
+  "explain": "Each term's error is multiplied by |coefficient|, and all are added: 0.3 + 0.2 = 0.5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55ae79ef-e4cd-4666-b47a-5a57383501c2",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "A length is found as x₂ − x₁ from two scale readings, each with ±1 mm error. Maximum error in the length:",
+  "formula": "",
+  "options": [
+   "± 2 mm",
+   "± 0.5 mm",
+   "0",
+   "± 1 mm"
+  ],
+  "answer": 0,
+  "explain": "Errors add even for a difference: 1 + 1 = 2 mm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f8de8fa7-e267-4c53-9d3e-b2a089617de1",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "Z = (A + B)/2 with ΔA = 0.2 and ΔB = 0.4. The maximum absolute error in Z is:",
+  "formula": "ΔZ = (ΔA + ΔB)/2",
+  "options": [
+   "0.2",
+   "0.1",
+   "0.6",
+   "0.3"
+  ],
+  "answer": 3,
+  "explain": "The sum has error 0.6. Dividing by the exact number 2 halves it to 0.3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f29a2e43-68d7-47cf-a32c-4ddf684cd456",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "A (1% error) and B (3% error) are both positive. The percentage error in A + B is:",
+  "formula": "",
+  "options": [
+   "Exactly 4%",
+   "Between 1% and 3%",
+   "Exactly 2%",
+   "Greater than 3%"
+  ],
+  "answer": 1,
+  "explain": "(ΔA+ΔB)/(A+B) is a weighted average of ΔA/A and ΔB/B, so it lies between them.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2e75d64-5d3f-4819-85bc-38826cbc8951",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "1.00 ± 0.01 m and 20 ± 1 cm are added. The total length is:",
+  "formula": "",
+  "options": [
+   "1.20 ± 0.02 m",
+   "1.20 ± 0.11 m",
+   "1.20 ± 0.01 m",
+   "1.20 ± 1.01 m"
+  ],
+  "answer": 0,
+  "explain": "Convert to the same unit first: 0.20 ± 0.01 m. The errors then add to 0.02 m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "27012fe6-f75f-4215-b7bb-e4d2623fd21e",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Error propagation in sum & difference",
+  "prompt": "Z = A + B − C with ΔA = 0.1, ΔB = 0.2, ΔC = 0.3. The maximum absolute error in Z is:",
+  "formula": "ΔZ = ΔA + ΔB + ΔC",
+  "options": [
+   "± 0.2",
+   "± 0.0",
+   "± 0.6",
+   "± 0.4"
+  ],
+  "answer": 2,
+  "explain": "In sums and differences, maximum absolute errors of every term add: 0.1 + 0.2 + 0.3 = 0.6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b71b76a3-0e06-4fc4-b9dc-297a1452ae70",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "For a stretched string, √(T/μ), with tension T and mass per unit length μ, has dimensions of:",
+  "formula": "v = √(T/μ)",
+  "options": [
+   "Velocity",
+   "Force",
+   "Acceleration",
+   "Frequency"
+  ],
+  "answer": 0,
+  "explain": "T/μ = MLT⁻²/(ML⁻¹) = L²T⁻², so its square root has dimensions LT⁻¹, those of velocity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "904ed2bc-e1dc-4738-9d47-9f6029600992",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "The quantity 1/√(LC), with L inductance and C capacitance, has dimensions of:",
+  "formula": "ω = 1/√(LC)",
+  "options": [
+   "Dimensionless",
+   "T",
+   "T⁻¹",
+   "T²"
+  ],
+  "answer": 2,
+  "explain": "LC has dimensions T², so 1/√(LC) is T⁻¹, the dimensions of angular frequency.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b674752-2a6f-4fc1-817a-b9502c403f28",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "For a spring of constant k carrying mass m, √(k/m) has dimensions of:",
+  "formula": "ω = √(k/m)",
+  "options": [
+   "Velocity",
+   "Acceleration",
+   "Time",
+   "Frequency (T⁻¹)"
+  ],
+  "answer": 3,
+  "explain": "k = MT⁻², so k/m = T⁻² and √(k/m) = T⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05b4db78-e59c-45f8-8c54-967d3ee34967",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "The oscillation period of a liquid drop (density ρ, radius r, surface tension S) varies as:",
+  "formula": "",
+  "options": [
+   "√(Sr/ρ)",
+   "√(ρr³/S)",
+   "√(ρr/S)",
+   "√(ρS/r³)"
+  ],
+  "answer": 1,
+  "explain": "ρr³ = M and S = MT⁻², so ρr³/S = T² and its square root is a time.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8c282031-fc27-4660-b117-e7d38ee26e4f",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "Intensity I (power per unit area) divided by speed c, I/c, has the dimensions of:",
+  "formula": "I/c",
+  "options": [
+   "Pressure",
+   "Momentum",
+   "Power",
+   "Force"
+  ],
+  "answer": 0,
+  "explain": "I = MT⁻³ and I/c = ML⁻¹T⁻², the dimensions of pressure (radiation pressure).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8cf2bb31-64d2-40c4-8753-b9e41aca767a",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "The quantity e²/(4πε₀), which appears in Coulomb's law, has dimensions of:",
+  "formula": "F = e²/(4πε₀r²)",
+  "options": [
+   "Energy",
+   "Force",
+   "Energy × length",
+   "Energy/area"
+  ],
+  "answer": 2,
+  "explain": "From F = e²/(4πε₀r²), e²/(4πε₀) = F·r² = ML³T⁻², which is energy × length.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "33663619-cfba-4373-8efc-276d33f08503",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Principle of homogeneity of dimensions",
+  "prompt": "B²/μ₀ (B magnetic field, μ₀ permeability) has the dimensions of:",
+  "formula": "u = B²/(2μ₀)",
+  "options": [
+   "Force",
+   "Energy",
+   "Energy per unit volume",
+   "Power per unit volume"
+  ],
+  "answer": 2,
+  "explain": "B²/(2μ₀) is the magnetic energy density, so B²/μ₀ is ML⁻¹T⁻².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b2db1f7-250d-4384-8afd-61c80e660e62",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Limitations of dimensional analysis",
+  "prompt": "To derive a formula by the dimensional method, what must be known beforehand?",
+  "formula": "",
+  "options": [
+   "The numerical constant in it",
+   "The SI units of each variable",
+   "The variables the quantity depends on",
+   "The vector nature of the quantity"
+  ],
+  "answer": 2,
+  "explain": "The method needs the list of dependent variables; it cannot tell which ones actually matter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c6c66d75-f15f-44fc-938e-625c69b94dbc",
+  "subject": "Physics",
+  "chapter": "Units & Measurements",
+  "topic": "Limitations of dimensional analysis",
+  "prompt": "The dimensional method assumes the dependence of a quantity on others to be of which form?",
+  "formula": "",
+  "options": [
+   "Product of powers",
+   "Exponential in each variable",
+   "Sine of a ratio",
+   "Sum of powers"
+  ],
+  "answer": 0,
+  "explain": "It assumes a power-law product, Q ∝ aˣbʸcᶻ, so it cannot handle sums or special functions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

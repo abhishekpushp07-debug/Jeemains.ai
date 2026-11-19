@@ -11,6 +11,8 @@ import { Legend, PaletteGrid, PaletteState, SubjectSegment, shortSubject } from 
 import { invalidate } from "@/src/useCached";
 import { AssetImage } from "@/src/components/AssetImage";
 import { ImageWarmup } from "@/src/components/player/ImageWarmup";
+import { GetReady } from "@/src/components/player/GetReady";
+import { usePaperPack } from "@/src/assets/paperPack";
 import { MathText } from "@/src/components/MathText";
 import { ErrorBox, Icon, Notice, Press, Skeleton, T, tap } from "@/src/components/ui";
 import { DSheet, Pill, RoundButton } from "@/src/components/design";
@@ -52,8 +54,11 @@ export default function Player() {
   const questions = useMemo(() => availableQuestions<any>(a?.questions || [], bonusOpen), [a?.questions, bonusOpen]);
   const nav = useSubjectNavigation<any>(questions);
   const q = nav.question;
-  const warmPaths = usePaperAssets(id!, questions, q?.id, false);
-  useEffect(() => { if (q) { A.visit(q.id); A.watch(q.id); } }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Get-ready minute: the paper stays closed (no question clock, no visit) while every picture loads.
+  const getReady = A.ready > 0;
+  const pack = usePaperPack(id!, questions, getReady);
+  const warmPaths = usePaperAssets(id!, questions, q?.id, false, "original", !getReady);
+  useEffect(() => { if (q && !getReady) { A.visit(q.id); A.watch(q.id); } }, [q?.id, getReady]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     reading.current?.scrollTo({ y: 0, animated: false });
   }, [q?.id]);
@@ -123,6 +128,29 @@ export default function Player() {
     ? { testID: "player-next-button", label: "Save & Next", onPress: () => go(1), a11y: "Save and go to next question" }
     : nextSubject ? { testID: "player-next-subject", label: `Next: ${shortSubject(nextSubject)}`, onPress: () => nav.selectSubject(nextSubject), a11y: `Continue to ${nextSubject}` }
       : { testID: "player-open-submit", label: "Review & submit", onPress: () => setSheet("submit"), a11y: "Review and submit" };
+  // Scanned (source) papers: the picture carries the question and its options, so no text is repeated under it.
+  const source = q.render_mode === "source";
+  const labels: Record<string, string> | null = q.source_option_labels || null;
+  const typed: Record<string, string> = q.typed_options || {};
+  const optionTiles = source && q.type !== "integer" && !Object.keys(typed).length;
+  const labelOf = (k: string) => labels?.[k] || k;
+  const optionKeys = Object.keys(q.options || {});
+  const sourceHint = Object.keys(typed).length ? "Read the options in the picture above. Options the picture does not show are typed below."
+    : `Read options ${labelOf(optionKeys[0] || "A")}–${labelOf(optionKeys[optionKeys.length - 1] || "D")} in the picture above, then tap the matching ${labels ? "number" : "letter"}.`;
+
+  const exitSheet = (
+    <DSheet visible={sheet === "exit"} onClose={() => setSheet(null)} testID="player-exit-sheet" title="Leave this attempt?">
+      <T size={13} color={colors.muted}>Nothing is submitted. {a.deadline ? "The timer keeps running while you’re away. " : ""}Resume this exact attempt anytime from My Tests.{counts.pending ? " Pending drafts stay on this phone." : ""}</T>
+      <Pill testID="player-exit-stay" label="Stay" onPress={() => setSheet(null)} />
+      <Pill testID="player-exit-confirm" kind="outline" label="Leave (keep attempt)" onPress={() => router.back()} />
+    </DSheet>
+  );
+  if (getReady) return (
+    <View testID="player-screen" style={{ flex: 1, backgroundColor: colors.surface }}>
+      <GetReady attempt={a} seconds={A.ready} loaded={pack} onBegin={A.begin} onLeave={() => setSheet("exit")} />
+      {exitSheet}
+    </View>
+  );
 
   return (
     <View testID="player-screen" style={{ flex: 1, backgroundColor: colors.surface }}>
@@ -183,33 +211,49 @@ export default function Player() {
         </View>
 
         <View testID="question-reading-surface" style={styles.question}>
-          {q.render_mode !== "source" && q.text ? <MathText testID="player-question-text" size={Math.round(16 * scale)} text={q.text} /> : null}
-          {imagePaths(id!, q, "question").map((path, i) => (
-            <AssetImage key={path} testID={`question-image-${q.number}-${i}`} path={path} label={`Question ${q.number} original image`} />
-          ))}
-          {q.render_mode === "source" && q.text ? <T size={11} color={colors.custom_eyebrow}>{q.text}</T> : null}
+          {!source && q.text ? <MathText testID="player-question-text" size={Math.round(16 * scale)} text={q.text} /> : null}
+          {imagePaths(id!, q, "question").map((path, i) => <View key={path} style={{ gap: 6 }}>
+            {!source && q.asset_labels?.[i] ? <T size={11.5} w="bold" color={colors.custom_eyebrow}>{q.asset_labels[i]}</T> : null}
+            <AssetImage testID={`question-image-${q.number}-${i}`} path={path} label={(source && q.accessible_text) || q.asset_labels?.[i] || `Question ${q.number} original image`} />
+          </View>)}
         </View>
 
+        {q.type !== "integer" && source ? <T testID="player-source-options-hint" size={12.5} color={colors.muted}>{sourceHint}</T> : null}
         {q.type === "integer" ? (
           <View style={{ gap: 6 }}>
             <T w="heavy" size={10} color={colors.custom_eyebrow} style={{ letterSpacing: 1.8 }}>YOUR ANSWER</T>
             <TextInput testID="player-integer-input" editable={!disabled} value={cur.value} onChangeText={(v) => A.edit(q.id, { value: v.slice(0, 30) })} keyboardType="numbers-and-punctuation" placeholder="Type an exact integer"
               placeholderTextColor={colors.custom_dim} style={[styles.numeric, has(cur) && { borderColor: colors.onSurface }]} />
           </View>
+        ) : optionTiles ? (
+          <View testID="player-option-tiles" style={styles.tiles}>
+            {optionKeys.map(k => {
+              const sel = cur.value === k;
+              return (
+                <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => A.edit(q.id, { value: sel ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) })}
+                  accessibilityLabel={`Option ${labelOf(k)}, as shown in the picture${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.96} style={[styles.tile, sel && styles.tileOn]}>
+                  <T testID={`player-option-label-${k}`} w="mono" size={Math.round(24 * scale)} color={sel ? colors.onSurfaceInverse : colors.onSurface}>{labelOf(k)}</T>
+                  {sel ? <View style={styles.tileCheck}><Icon name="check" size={11} color={colors.onSurface} /></View> : null}
+                </Press>
+              );
+            })}
+          </View>
         ) : (
           <View style={{ gap: 10 }}>
             {Object.entries(q.options || {}).map(([k, label]) => {
               const sel = cur.value === k;
+              const text = source ? typed[k] || `Option ${labelOf(k)} (as shown above)` : String(label).startsWith("See original") ? `Option ${k} (see image)` : String(label);
               return (
                 <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => {
                     // Exam mode: the student moves on with Save & Next (review, confidence and changes stay possible).
                     A.edit(q.id, { value: sel ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) });
-                  }} accessibilityLabel={`Option ${k}${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.985}
+                  }} accessibilityLabel={`Option ${labelOf(k)}${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.985}
                   style={[styles.option, sel && styles.optionOn]}>
                   <View style={[styles.letter, sel && styles.letterOn]}>
-                    <T w="heavy" size={13} color={sel ? colors.onSurfaceInverse : colors.custom_softText}>{k}</T>
+                    <T w="heavy" size={13} color={sel ? colors.onSurfaceInverse : colors.custom_softText}>{labelOf(k)}</T>
                   </View>
-                  <T size={Math.round(15 * scale)} w={sel ? "heavy" : "medium"} style={{ flex: 1 }} color={sel ? colors.onSurface : colors.custom_softText}>{String(label).startsWith("See original") ? `Option ${k} (see image)` : String(label)}</T>
+                  {source && typed[k] ? <View style={{ flex: 1 }}><MathText testID={`player-option-math-${k}`} size={Math.round(15 * scale)} text={typed[k]} /></View>
+                    : <T size={Math.round(15 * scale)} w={sel ? "heavy" : "medium"} style={{ flex: 1 }} color={sel ? colors.onSurface : colors.custom_softText}>{text}</T>}
                   {sel ? <View style={styles.check}><Icon name="check" size={14} color={colors.onSurfaceInverse} /></View> : null}
                 </Press>
               );
@@ -324,11 +368,7 @@ export default function Player() {
         <Pill testID="player-bonus-cancel" kind="outline" label="Not yet" onPress={() => setSheet(null)} />
       </DSheet>
 
-      <DSheet visible={sheet === "exit"} onClose={() => setSheet(null)} testID="player-exit-sheet" title="Leave this attempt?">
-        <T size={13} color={colors.muted}>Nothing is submitted. {a.deadline ? "The timer keeps running while you’re away. " : ""}Resume this exact attempt anytime from My Tests.{counts.pending ? " Pending drafts stay on this phone." : ""}</T>
-        <Pill testID="player-exit-stay" label="Stay" onPress={() => setSheet(null)} />
-        <Pill testID="player-exit-confirm" kind="outline" label="Leave (keep attempt)" onPress={() => router.back()} />
-      </DSheet>
+      {exitSheet}
     </View>
   );
 }
@@ -361,6 +401,10 @@ const styles = StyleSheet.create({
   letter: { width: 30, height: 30, borderRadius: 15, borderWidth: 1.5, borderColor: colors.custom_qFreshLine, alignItems: "center", justifyContent: "center" },
   letterOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },
   check: { width: 22, height: 22, borderRadius: 11, backgroundColor: colors.onSurface, alignItems: "center", justifyContent: "center" },
+  tiles: { flexDirection: "row", gap: space.sm },
+  tile: { flex: 1, minWidth: 0, height: 68, borderRadius: 18, borderWidth: 1.5, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, alignItems: "center", justifyContent: "center" },
+  tileOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },
+  tileCheck: { position: "absolute", top: 6, right: 6, width: 16, height: 16, borderRadius: 8, backgroundColor: colors.onSurfaceInverse, alignItems: "center", justifyContent: "center" },
   conf: { flexDirection: "row", alignItems: "center", gap: space.sm, flexWrap: "wrap" },
   confChip: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, justifyContent: "center" },
   confOn: { borderColor: colors.custom_mint, backgroundColor: colors.custom_mintSoft },

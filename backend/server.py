@@ -24,7 +24,7 @@ from client_ip import client_ip
 from rf_access import make_access_router, install_access_guard, maintenance_on
 from load_guard import ArenaBusy, InflightCounter, arena_gate, busy_response, monitor as load_monitor, raise_fd_limit, snapshot as load_snapshot
 from rapid_deck import fresh_deck
-from scope import Pick, normalise, scope_fields
+from scope import CARD_COUNTS, CARD_SECONDS, Pick, normalise, scope_fields
 from metadata_cache import metadata_cache
 from performance import ServerTiming, AssetAwareCompression
 from cors_config import allowed_origins
@@ -213,13 +213,16 @@ class Card(BaseDocument):
     provenance: str = ""
 
 
+MAX_ROUND = max(CARD_COUNTS)
+
+
 class SessionCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    subject: Literal["Physics", "Chemistry", "Mathematics", "Biology"] = "Physics"
+    subject: Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning", "Biology"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
     picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters for a fresh sprint
-    count: int = Field(default=30, ge=1, le=30)
-    card_ids: Optional[List[str]] = Field(default=None, max_length=30)
+    count: int = Field(default=30, ge=1, le=MAX_ROUND)  # a fresh sprint is 30, 50 or 100 cards
+    card_ids: Optional[List[str]] = Field(default=None, max_length=MAX_ROUND)
     request_id: str = Field(min_length=8, max_length=64)
     exam: Optional[Exam] = None
     diagram_only: bool = False
@@ -235,7 +238,7 @@ class CardResult(BaseModel):
 
 class SessionComplete(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    results: List[CardResult] = Field(max_length=30)
+    results: List[CardResult] = Field(max_length=MAX_ROUND)
 
 
 class RfSession(BaseDocument):
@@ -358,7 +361,7 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
     existing = RfSession.from_mongo(await db.rf_sessions.find_one({"user_id": uid, "request_id": data.request_id}))
     if existing:
         resolve_exam(existing.exam, existing.subject)
-        cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(30)]
+        cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": existing.card_ids}}).to_list(MAX_ROUND)]
     else:
         if data.revision:
             weak = await weak_chapters(db, uid, exam)
@@ -367,14 +370,14 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
                 raise HTTPException(404, "No missed cards left here. Play a sprint to build your revision list.")
             docs = await db.rf_cards.find({"id": {"$in": selected["card_ids"]}, "exam": exam, "retired": {"$ne": True}}, {"_id": 0}).to_list(30)
             docs.sort(key=lambda c: selected["card_ids"].index(c["id"]))
-            docs = docs[:data.count]
+            docs = docs[:min(30, data.count)]
             data.chapter = selected["chapter"]
             mode = "weak_revision"
         elif data.card_ids:
-            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "exam": exam, "subject": data.subject, "retired": {"$ne": True}}, {"_id": 0}).to_list(30)
+            docs = await db.rf_cards.find({"id": {"$in": data.card_ids}, "exam": exam, "subject": data.subject, "retired": {"$ne": True}}, {"_id": 0}).to_list(MAX_ROUND)
             mode = "repeat_missed"
         else:
-            docs = await fresh_deck(db, exam, data.subject, data.chapter, data.count, picks=scope["picks"])
+            docs = await fresh_deck(db, exam, data.subject, data.chapter, data.count, picks=scope["picks"], uid=uid)
             mode = "diagrams" if data.diagram_only else "fresh"
         if not docs:
             raise HTTPException(404, "No reviewed cards are available for this selection yet.")
@@ -387,7 +390,7 @@ async def rf_create(data: SessionCreate, x_rf_user: Optional[str] = Header(None)
             return await rf_create(data, x_rf_user)
     by_id = {c.id: c for c in cards}
     return {**existing.model_dump(exclude={"mongo_id", "user_id"}),
-            "cards": [public_card(by_id[i]) for i in existing.card_ids if i in by_id], "seconds_per_card": 15}
+            "cards": [public_card(by_id[i]) for i in existing.card_ids if i in by_id], "seconds_per_card": CARD_SECONDS}
 
 
 @api.post("/rf/sessions/{sid}/complete")
@@ -399,10 +402,10 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
     resolve_exam(s.exam, s.subject)
     if s.status == "completed":
         sm = s.summary or {}
-        docs = await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(30)
+        docs = await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(MAX_ROUND)
         await record_learning(db, uid, "solo:" + sid, s.exam, s.results, docs, s.completed_at)
         return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": await award(uid, "solo:" + sid, "solo", sm.get("correct", 0), sm.get("total", 0), sm.get("answered", 0), exam=s.exam)}
-    cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(30)}
+    cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": s.card_ids}}, {"_id": 0}).to_list(MAX_ROUND)}
     seen, rows = set(), []
     for r in data.results:
         if r.card_id not in cards or r.card_id in seen:
@@ -463,10 +466,10 @@ async def rf_get(sid: str, x_rf_user: Optional[str] = Header(None)):
     if not s:
         raise HTTPException(404, "Session not found.")
     resolve_exam(s.exam, s.subject)
-    cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": s.card_ids}}).to_list(30)]
+    cards = [Card.from_mongo(d) for d in await db.rf_cards.find({"id": {"$in": s.card_ids}}).to_list(MAX_ROUND)]
     by_id = {c.id: c for c in cards}
     recorded = await db.rf_awards.find_one({'uid': uid, 'ref': 'solo:' + sid}, {'_id': 0, 'reward': 1}) if s.status == 'completed' else None
-    return {**s.model_dump(exclude={"mongo_id", "user_id"}), "cards": [public_card(by_id[i]) for i in s.card_ids if i in by_id], 'reward': (recorded or {}).get('reward')}
+    return {**s.model_dump(exclude={"mongo_id", "user_id"}), "cards": [public_card(by_id[i]) for i in s.card_ids if i in by_id], 'reward': (recorded or {}).get('reward'), "seconds_per_card": CARD_SECONDS}
 
 
 from duels import make_router as make_duels  # noqa: E402
@@ -654,6 +657,8 @@ async def setup_database():
     await db.rf_challenges.create_index("id", unique=True)
     await db.rf_challenges.create_index([("invites.uid", 1), ("status", 1), ("expires_ts", 1)])
     await db.rf_challenges.create_index([("from_uid", 1), ("status", 1)])
+    await db.rf_link_visits.create_index([("cid", 1), ("key", 1)], unique=True)
+    await db.rf_link_visits.create_index("ts", expireAfterSeconds=30 * 86400)
     await db.rf_gangs.create_index("id", unique=True)
     await db.rf_gangs.create_index([("members.uid", 1), ("closed", 1)])
     await db.rf_duels.create_index([("gang_id", 1), ("finished_ts", -1)], sparse=True)

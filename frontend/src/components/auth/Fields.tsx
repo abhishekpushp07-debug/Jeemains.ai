@@ -17,8 +17,8 @@ export function PhoneField({ value, onChange, disabled, testID = "entry-phone-in
   </View>;
 }
 
-export function PinField({ value, onChange, label = "4-digit PIN", testID, disabled, onSubmit }: {
-  value: string; onChange: (value: string) => void; label?: string; testID: string; disabled?: boolean; onSubmit?: () => void;
+export function PinField({ value, onChange, label = "4-digit PIN", testID, disabled, onSubmit, inputRef }: {
+  value: string; onChange: (value: string) => void; label?: string; testID: string; disabled?: boolean; onSubmit?: () => void; inputRef?: React.Ref<React.ComponentRef<typeof TextInput>>;
 }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => { const listener = AppState.addEventListener("change", state => { if (state !== "active") setVisible(false); }); return () => listener.remove(); }, []);
@@ -26,7 +26,7 @@ export function PinField({ value, onChange, label = "4-digit PIN", testID, disab
     <T testID={`${testID}-label`} size={13} w="bold">{label}</T>
     <View style={styles.field}>
       <Icon name="lock-outline" size={20} color={colors.muted} />
-      <TextInput testID={testID} accessibilityLabel={label} value={value} onChangeText={text => onChange(text.replace(/[^0-9]/g, "").slice(0, 4))}
+      <TextInput ref={inputRef} testID={testID} accessibilityLabel={label} value={value} onChangeText={text => onChange(text.replace(/[^0-9]/g, "").slice(0, 4))}
         editable={!disabled} placeholder="4 digits" placeholderTextColor={colors.muted} keyboardType="number-pad" maxLength={4}
         secureTextEntry={!visible} autoComplete="off" textContentType="none" autoCorrect={false} autoCapitalize="none"
         onBlur={() => setVisible(false)} returnKeyType="done" onSubmitEditing={onSubmit} style={[styles.input, styles.pin]} />

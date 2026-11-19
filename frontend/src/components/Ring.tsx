@@ -7,7 +7,7 @@ import Animated, { Easing, useAnimatedProps, useSharedValue, withTiming } from "
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-export function Ring({ left, color, light = false, limit = 15000 }: { left: number; color: string; light?: boolean; limit?: number }) {
+export function Ring({ left, color, light = false, limit = 20000 }: { left: number; color: string; light?: boolean; limit?: number }) {
   const r = 22, c = 2 * Math.PI * r, frac = Math.max(0, left / limit);
   const offset = useSharedValue(c * (1 - frac));
   useEffect(() => { offset.value = withTiming(c * (1 - frac), { duration: left === limit ? 0 : 250, easing: Easing.linear }); }, [left, frac, c, offset, limit]);

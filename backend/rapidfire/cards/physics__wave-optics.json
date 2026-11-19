@@ -1,1610 +1,3470 @@
 [
-  {
-    "id": "4d3fa50d-9fcc-4b3e-adf9-cf11f49336d1",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Interference",
-    "prompt": "Condition for constructive interference (path difference)?",
-    "formula": "Δx = nλ",
-    "options": [
-      "Δx = (2n-1)λ",
-      "Δx = nλ",
-      "Δx = (2n+1)λ/2",
-      "Δx = nλ/2"
-    ],
-    "answer": 1,
-    "explain": "Constructive interference occurs when path difference is an integer multiple of wavelength.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "529f1da1-3229-49f9-a01a-5a1957fff7e8",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Interference",
-    "prompt": "Condition for destructive interference (path difference)?",
-    "formula": "Δx = (2n-1)λ/2",
-    "options": [
-      "Δx = nλ",
-      "Δx = nλ/4",
-      "Δx = (2n+1)λ",
-      "Δx = (2n-1)λ/2"
-    ],
-    "answer": 3,
-    "explain": "Destructive interference occurs when path difference is an odd multiple of λ/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "268ae8d0-1b26-4ffb-8b93-847bf2e47fff",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Young's Double Slit Experiment",
-    "prompt": "In YDSE, fringe width when immersed in medium of refractive index μ?",
-    "formula": "β' = λD/(μd)",
-    "options": [
-      "β' = μλD/d",
-      "β' = λμ/(dD)",
-      "β' = λD/d",
-      "β' = λD/(μd)"
-    ],
-    "answer": 3,
-    "explain": "Effective wavelength becomes λ/μ, so fringe width decreases by factor μ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": true
-    }
-  },
-  {
-    "id": "991ef196-ea31-4a76-865f-7e47d64955e2",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Young's Double Slit Experiment",
-    "prompt": "Angular fringe width in YDSE?",
-    "formula": "θ = λ/d",
-    "options": [
-      "θ = λ/d",
-      "θ = λD/d",
-      "θ = λd",
-      "θ = d/λ"
-    ],
-    "answer": 0,
-    "explain": "Angular fringe width = β/D = λ/d (independent of screen distance D).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "14b9c20d-0d21-4dfb-9b6b-b825412659ad",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Interference",
-    "prompt": "Resultant intensity in interference: I = ?",
-    "formula": "I = I₁+I₂+2√(I₁I₂)cosδ",
-    "options": [
-      "I = I₁-I₂",
-      "I = 4I₁cos²(δ/2)",
-      "I = I₁+I₂+2√(I₁I₂)cosδ",
-      "I = I₁+I₂"
-    ],
-    "answer": 2,
-    "explain": "General resultant intensity formula includes the interference term 2√(I₁I₂)cosδ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6bb0a7c2-a26f-4ca5-a660-63244b20d601",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Interference",
-    "prompt": "For equal intensities I₀, max intensity in interference?",
-    "formula": "Iₘₐₓ = 4I₀",
-    "options": [
-      "Iₘₐₓ = 2I₀",
-      "Iₘₐₓ = I₀",
-      "Iₘₐₓ = 3I₀",
-      "Iₘₐₓ = 4I₀"
-    ],
-    "answer": 3,
-    "explain": "When I₁=I₂=I₀, Iₘₐₓ = (√I₀+√I₀)² = 4I₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "57086ef3-e368-4b3c-be08-bffe42f3579b",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Interference",
-    "prompt": "Ratio Iₘₐₓ/Iₘᵢₙ in terms of amplitude ratio a₁/a₂?",
-    "formula": "[(a₁+a₂)/(a₁-a₂)]²",
-    "options": [
-      "a₁/a₂",
-      "(a₁/a₂)²",
-      "(a₁-a₂)²/(a₁+a₂)²",
-      "(a₁+a₂)²/(a₁-a₂)²"
-    ],
-    "answer": 3,
-    "explain": "Iₘₐₓ/Iₘᵢₙ = (a₁+a₂)²/(a₁-a₂)² where a₁,a₂ are individual amplitudes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "69299baf-136c-4dab-84fe-d4bfeb62cb56",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Young's Double Slit Experiment",
-    "prompt": "Position of nth dark fringe in YDSE from centre?",
-    "formula": "yₙ = (2n-1)λD/2d",
-    "options": [
-      "yₙ = (2n+1)λD/d",
-      "yₙ = nλD/d",
-      "yₙ = nλd/2D",
-      "yₙ = (2n-1)λD/2d"
-    ],
-    "answer": 3,
-    "explain": "Dark fringes at yₙ = (2n±1)λD/2d for n = 1,2,3,...",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "7efefe28-e136-4a26-8029-e5630fd6990e",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Diffraction",
-    "prompt": "Central maximum in single-slit diffraction has width (angular)?",
-    "formula": "2λ/a",
-    "options": [
-      "2λ/a",
-      "λ/2a",
-      "λ/a",
-      "4λ/a"
-    ],
-    "answer": 0,
-    "explain": "Central maximum spans from -λ/a to +λ/a, so angular width = 2λ/a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bfdc6f54-5cb8-4253-8e4f-4342ee409855",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Diffraction",
-    "prompt": "Condition for minima in single-slit diffraction?",
-    "formula": "a sinθ = nλ",
-    "options": [
-      "a sinθ = nλ/2",
-      "a sinθ = (2n+1)λ/2",
-      "d sinθ = nλ",
-      "a sinθ = nλ"
-    ],
-    "answer": 3,
-    "explain": "Minima in single-slit diffraction occur when a sinθ = nλ, n = ±1,±2,...",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ea7a3ed9-d8fa-4dff-975a-4127a12aaaa0",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Diffraction",
-    "prompt": "Condition for secondary maxima in single-slit diffraction?",
-    "formula": "a sinθ = (2n+1)λ/2",
-    "options": [
-      "a sinθ = nλ/4",
-      "a sinθ = nλ",
-      "a sinθ = 2nλ",
-      "a sinθ = (2n+1)λ/2"
-    ],
-    "answer": 3,
-    "explain": "Secondary maxima occur midway between minima: a sinθ = (2n±1)λ/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0fa5cd09-a490-45f2-9b40-898abb4ff007",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Diffraction",
-    "prompt": "Resolving power of telescope (Rayleigh criterion)?",
-    "formula": "θ_min = 1.22λ/D",
-    "options": [
-      "θ_min = λ/D",
-      "θ_min = 2λ/D",
-      "θ_min = 0.61λ/D",
-      "θ_min = 1.22λ/D"
-    ],
-    "answer": 3,
-    "explain": "Rayleigh's criterion: minimum resolvable angle = 1.22λ/D for a circular aperture.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "07157705-ec4d-4155-b0ad-dd1b37c5658e",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Polarisation",
-    "prompt": "Brewster's angle θ_B relates to refractive index μ as?",
-    "formula": "tan θ_B = μ",
-    "options": [
-      "tan θ_B = 1/μ",
-      "cos θ_B = μ",
-      "tan θ_B = μ",
-      "sin θ_B = μ"
-    ],
-    "answer": 2,
-    "explain": "Brewster's law: tan θ_B = μ; at this angle reflected ray is completely plane polarised.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "63ccbf1f-ef00-451a-82d2-eccd25ffa6c3",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Polarisation",
-    "prompt": "At Brewster's angle, angle between reflected and refracted ray is?",
-    "formula": "90°",
-    "options": [
-      "0°",
-      "45°",
-      "180°",
-      "90°"
-    ],
-    "answer": 3,
-    "explain": "At Brewster's angle, reflected and refracted rays are perpendicular to each other.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9d481c83-72d2-4915-9092-4faa6f0f7d27",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Polarisation",
-    "prompt": "Malus's Law: intensity of polarised light through analyser?",
-    "formula": "I = I₀cos²θ",
-    "options": [
-      "I = I₀sinθ",
-      "I = I₀cosθ",
-      "I = I₀cos²θ",
-      "I = I₀sin²θ"
-    ],
-    "answer": 2,
-    "explain": "Malus's law: I = I₀cos²θ where θ is angle between polariser and analyser axes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4b920bee-4405-4ccd-8e12-aee19fa97a3d",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Polarisation",
-    "prompt": "Unpolarised light passes through a polariser, intensity becomes?",
-    "formula": "I = I₀/2",
-    "options": [
-      "I = I₀",
-      "I = I₀/4",
-      "I = I₀/2",
-      "I = 2I₀"
-    ],
-    "answer": 2,
-    "explain": "A polariser transmits only one plane of polarisation, halving the intensity of unpolarised light.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0e2a1b6f-b023-40c6-8a20-3ecc13051fba",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Thin Film Interference",
-    "prompt": "If a thin film of thickness t, μ, is seen in reflected light, condition for bright fringe?",
-    "formula": "2μt = (2n-1)λ/2",
-    "options": [
-      "μt = nλ",
-      "2μt = (2n-1)λ/2",
-      "2μt = nλ",
-      "2μt = (2n+1)λ"
-    ],
-    "answer": 1,
-    "explain": "Reflection from denser medium causes extra λ/2 shift; bright fringes: 2μt = (2n-1)λ/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2378a749-321d-438c-9892-ae7eef933c7e",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Width of central maximum in single-slit diffraction on screen?",
-    "formula": "W = 2λD/a",
-    "options": [
-      "2λD/a",
-      "λD/a",
-      "λD/2a",
-      "4λD/a"
-    ],
-    "answer": 0,
-    "explain": "Central maximum spans between first minima on both sides: width = 2λD/a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d8964cc4-887d-4987-8a69-b7db8e929988",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Thin film (μ) in transmitted light: condition for bright fringe?",
-    "formula": "2μt = nλ",
-    "options": [
-      "2μt = (2n+1)λ",
-      "μt = nλ",
-      "2μt = nλ",
-      "2μt = (2n-1)λ/2"
-    ],
-    "answer": 2,
-    "explain": "Transmitted bright: no net phase change, so constructive when 2μt = nλ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f21e4343-778c-48ec-a219-b970cde95674",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Thin film in reflected light: condition for dark fringe?",
-    "formula": "2μt = nλ",
-    "options": [
-      "2μt = nλ",
-      "2t = nλ",
-      "μt = nλ/2",
-      "2μt = (2n-1)λ/2"
-    ],
-    "answer": 0,
-    "explain": "Reflected dark (destructive): 2μt = nλ due to net half-wave loss cancellation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a763bd8-22e9-4e1e-a0fb-c64c1dd61b2e",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, if wavelength increases, fringe width?",
-    "formula": "β ∝ λ",
-    "options": [
-      "Remains same",
-      "Increases",
-      "Becomes zero",
-      "Decreases"
-    ],
-    "answer": 1,
-    "explain": "β = λD/d, so fringe width is directly proportional to wavelength λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "685c186e-012c-48f2-90a8-4f2fd1063554",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, if slit separation d is doubled, fringe width?",
-    "formula": "β ∝ 1/d",
-    "options": [
-      "Halved",
-      "Unchanged",
-      "Doubled",
-      "Quadrupled"
-    ],
-    "answer": 0,
-    "explain": "β = λD/d; doubling d halves the fringe width.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "725614a6-2ad5-49b7-bf9b-f8c7820042a3",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Phase difference δ corresponding to path difference Δ?",
-    "formula": "δ = (2π/λ)Δ",
-    "options": [
-      "(λ/2π)Δ",
-      "(π/λ)Δ",
-      "(π/2λ)Δ",
-      "(2π/λ)Δ"
-    ],
-    "answer": 3,
-    "explain": "Phase difference = (2π/λ) × path difference; one full wavelength = 2π phase.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21f5893b-fd60-43cd-b163-5600e6fc61b8",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Intensity in single-slit diffraction: I = I₀(sinα/α)², where α = ?",
-    "formula": "α = πa sinθ/λ",
-    "options": [
-      "2πa sinθ/λ",
-      "a sinθ/λ",
-      "πa sinθ/2λ",
-      "πa sinθ/λ"
-    ],
-    "answer": 3,
-    "explain": "α = πa sinθ/λ is half the total phase difference across the slit.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a2e5263-0e8f-4487-a7f5-ed96ff6e9f99",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In interference, if path difference = λ/2, phase difference = ?",
-    "formula": "δ = π",
-    "options": [
-      "3π/2",
-      "2π",
-      "π",
-      "π/2"
-    ],
-    "answer": 2,
-    "explain": "δ = (2π/λ)×(λ/2) = π; this corresponds to destructive interference.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "534de49b-260a-48eb-839b-c0978d0be9b4",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Polarisation proves light is which type of wave?",
-    "formula": "",
-    "options": [
-      "Longitudinal",
-      "Mechanical",
-      "Transverse",
-      "Stationary"
-    ],
-    "answer": 2,
-    "explain": "Only transverse waves can be polarised; longitudinal waves (sound) cannot.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b3fa52f8-127a-4dcc-9e57-0b3dd53bf535",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Speed of light in medium of refractive index μ?",
-    "formula": "v = c/μ",
-    "options": [
-      "c/μ²",
-      "c√μ",
-      "cμ",
-      "c/μ"
-    ],
-    "answer": 3,
-    "explain": "Refractive index μ = c/v, so speed in medium v = c/μ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7aebbf0b-d6fe-48dd-b125-19f7b86b7ce5",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Fringe pattern in YDSE uses which type of source?",
-    "formula": "",
-    "options": [
-      "Point sources only",
-      "White light only",
-      "Independent sources",
-      "Coherent sources"
-    ],
-    "answer": 3,
-    "explain": "Stable interference fringes require coherent sources with constant phase difference.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "ffb79b5c-59f9-46df-afd4-ee3b711eaf1f",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE with white light, central fringe is?",
-    "formula": "",
-    "options": [
-      "White (all colours overlap)",
-      "Violet",
-      "Red",
-      "Black (dark)"
-    ],
-    "answer": 0,
-    "explain": "At centre path difference = 0 for all wavelengths; all colours reinforce → white fringe.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "d1c0e01c-9985-48c4-a877-73328b938bed",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Two polaroids with axes at 90°, intensity of transmitted light?",
-    "formula": "I = 0",
-    "options": [
-      "I₀/2",
-      "I₀/4",
-      "Zero",
-      "I₀"
-    ],
-    "answer": 2,
-    "explain": "Malus's law: I = I₀cos²90° = 0; crossed polaroids block all light.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21de4a6e-ab34-4405-ab4a-d4c6a174f608",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, fringe width is independent of?",
-    "formula": "",
-    "options": [
-      "Slit separation d",
-      "Fringe order n",
-      "Screen distance D",
-      "Wavelength λ"
-    ],
-    "answer": 1,
-    "explain": "β = λD/d is the same for all orders n; fringe width is independent of fringe number.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "39be2eb9-6fad-4aaf-81fc-ed806856e65f",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Which colour has narrowest fringe width in YDSE?",
-    "formula": "β ∝ λ",
-    "options": [
-      "Yellow",
-      "Green",
-      "Violet",
-      "Red"
-    ],
-    "answer": 2,
-    "explain": "β = λD/d; violet has smallest λ (~400 nm) → smallest fringe width.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "53f31a3d-b5a8-44d1-8410-bee9b475bc2a",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, if screen distance D is doubled, fringe width?",
-    "formula": "β ∝ D",
-    "options": [
-      "Doubles",
-      "Quadruples",
-      "Halves",
-      "Unchanged"
-    ],
-    "answer": 0,
-    "explain": "β = λD/d; doubling D doubles the fringe width.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1,
-    "diagram": {
-      "kind": "ydse",
-      "caption": "Double-slit geometry: separation d, screen distance D",
-      "medium": false
-    }
-  },
-  {
-    "id": "55068326-9354-4faf-ab64-75088ee8cd30",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Optical path length in medium of refractive index μ, thickness t?",
-    "formula": "OPL = μt",
-    "options": [
-      "t(μ−1)",
-      "μt",
-      "μ²t",
-      "t/μ"
-    ],
-    "answer": 1,
-    "explain": "Optical path = μ × geometric path; extra path due to medium is (μ−1)t over air.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "62a086b5-5be4-4e3e-a11c-83b39628157e",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In single-slit diffraction, half-angular width of central maximum?",
-    "formula": "θ = λ/a",
-    "options": [
-      "λ/a",
-      "a/λ",
-      "2λ/a",
-      "λ/2a"
-    ],
-    "answer": 0,
-    "explain": "First minima at sinθ = λ/a; half-width of central max = λ/a (for small θ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a6b1071b-e519-46bb-9f52-095d48551c18",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, shift of fringe pattern when a slab (μ,t) covers one slit?",
-    "formula": "Shift = (μ-1)t·D/d",
-    "options": [
-      "μt·D/d",
-      "(μ-1)t/d",
-      "μt/D",
-      "(μ-1)t·D/d"
-    ],
-    "answer": 3,
-    "explain": "Extra optical path (μ-1)t shifts fringes toward slit with slab by (μ-1)tD/d.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "63f61452-96a4-4c37-bd7e-3990e3d73053",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, extra path introduced by slab (μ,t) over one slit?",
-    "formula": "(μ-1)t",
-    "options": [
-      "(μ+1)t",
-      "(μ-1)t",
-      "μt",
-      "t/μ"
-    ],
-    "answer": 1,
-    "explain": "Slab replaces air path t with optical path μt, so extra path = (μ−1)t.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef8fdd3e-be09-42de-bae3-bf3cadd23c4b",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Number of fringes shifted due to slab (μ,t) in YDSE?",
-    "formula": "n = (μ-1)t/λ",
-    "options": [
-      "t/μλ",
-      "(μ+1)t/λ",
-      "μt/λ",
-      "(μ−1)t/λ"
-    ],
-    "answer": 3,
-    "explain": "Shift = (μ−1)t; dividing by fringe width β gives n = (μ−1)t/λ fringes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ed68e717-c039-46a2-b6e4-8e1fd19f3548",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "For two sources, Iₘₐₓ/Iₘᵢₙ in terms of intensities I₁, I₂?",
-    "formula": "(√I₁+√I₂)²/(√I₁-√I₂)²",
-    "options": [
-      "(√I₁+√I₂)²/(√I₁−√I₂)²",
-      "(I₁+I₂)²/(I₁−I₂)²",
-      "I₁/I₂",
-      "(I₁+I₂)/(I₁−I₂)"
-    ],
-    "answer": 0,
-    "explain": "Iₘₐₓ = (√I₁+√I₂)², Iₘᵢₙ = (√I₁−√I₂)²; ratio follows directly.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b32727c3-5522-46d5-81f5-0bb3c8f7f061",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Wavefront from a distant (point) source at infinity is?",
-    "formula": "",
-    "options": [
-      "Plane wavefront",
-      "Elliptical wavefront",
-      "Cylindrical wavefront",
-      "Spherical wavefront"
-    ],
-    "answer": 0,
-    "explain": "At very large distances, spherical wavefronts become effectively plane wavefronts.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "204bae20-b12e-4e20-82c8-2375d5198c12",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Wavefront from a line source (long wire) is?",
-    "formula": "",
-    "options": [
-      "Plane",
-      "Cylindrical",
-      "Spherical",
-      "Parabolic"
-    ],
-    "answer": 1,
-    "explain": "A line source produces cylindrical wavefronts spreading radially outward.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3eb3b8e9-22ca-4995-9ddc-cc94a9943c81",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Using Huygens' principle, Snell's law gives sin i/sin r = ?",
-    "formula": "v₁/v₂ = μ₂/μ₁",
-    "options": [
-      "v₂/v₁ = μ₂/μ₁",
-      "v₁/v₂ = μ₂/μ₁",
-      "v₁v₂ = μ₁μ₂",
-      "sin i·sin r = const"
-    ],
-    "answer": 1,
-    "explain": "Huygens' construction yields sin i/sin r = v₁/v₂ = μ₂/μ₁ (Snell's law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "878e6400-1d34-4f5c-b693-d83bc79b4683",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In single-slit diffraction, position of nth minimum from centre?",
-    "formula": "yₙ = nλD/a",
-    "options": [
-      "nλD/a",
-      "(2n-1)λD/a",
-      "nλa/D",
-      "(2n+1)λD/2a"
-    ],
-    "answer": 0,
-    "explain": "Minima at a sinθ = nλ; on screen yₙ = nλD/a for small angles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "873f1e65-fd41-4f43-9e80-045d80d5c9ea",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In single-slit diffraction, if slit width a doubles, central max width?",
-    "formula": "W ∝ 1/a",
-    "options": [
-      "Quadruples",
-      "Stays same",
-      "Doubles",
-      "Halves"
-    ],
-    "answer": 3,
-    "explain": "Central max width = 2λD/a; doubling a halves the width.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7a4c031f-4b51-4668-94b3-ab1d845ef836",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Polarisation of light occurs when light passes through a?",
-    "formula": "",
-    "options": [
-      "Polaroid / tourmaline crystal",
-      "Plane mirror",
-      "Prism",
-      "Glass slab"
-    ],
-    "answer": 0,
-    "explain": "Polaroids selectively transmit one plane of vibration, producing plane-polarised light.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "45d3dec8-35a0-4b92-b79c-566377bc5347",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "For a soap film (μ) in air (reflected), minimum thickness for bright fringe?",
-    "formula": "t_min = λ/4μ",
-    "options": [
-      "λ/μ",
-      "λ/4μ",
-      "λ/8μ",
-      "λ/2μ"
-    ],
-    "answer": 1,
-    "explain": "Condition 2μt = (2n−1)λ/2; for n=1, tₘᵢₙ = λ/4μ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0cbd159b-b493-4b93-b0b5-5aaa35c67a2b",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Brewster's law: when reflected and refracted rays are perpendicular, the angle of incidence is?",
-    "formula": "tan θ_B = μ",
-    "options": [
-      "0°",
-      "45° always",
-      "Brewster's angle θ_B",
-      "Critical angle θ_c"
-    ],
-    "answer": 2,
-    "explain": "At Brewster's angle tan θ_B = μ; reflected light is completely plane-polarised.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ee8b285-2b5a-49b6-af31-2494180b4159",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "When a parallel beam of light passes through a convex lens, shape of emerging wavefront?",
-    "formula": "",
-    "options": [
-      "Cylindrical",
-      "Plane",
-      "Converging spherical",
-      "Diverging spherical"
-    ],
-    "answer": 2,
-    "explain": "Convex lens converges parallel beam; wavefront becomes converging spherical.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b8adc4bd-8c3b-4341-a34c-25fa72a8222b",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In diffraction grating, condition for principal maxima (grating equation)?",
-    "formula": "d sinθ = nλ",
-    "options": [
-      "d sinθ = (2n+1)λ/2",
-      "2d sinθ = nλ",
-      "d sinθ = nλ/2",
-      "d sinθ = nλ"
-    ],
-    "answer": 3,
-    "explain": "Grating equation: path difference between adjacent slits = d sinθ = nλ for maxima.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3911f48d-9358-4c3e-9d65-32a17dfd6b27",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – YDSE",
-    "prompt": "In YDSE, fringe width β = λD/d; if λ is halved and D doubled, β becomes?",
-    "formula": "β = λD/d",
-    "options": [
-      "2β",
-      "Same β",
-      "β/2",
-      "4β"
-    ],
-    "answer": 1,
-    "explain": "β ∝ λD/d; halving λ and doubling D cancel, so β remains unchanged.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5f5890c3-8f87-4734-b90e-e5e4582d9abd",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Interference",
-    "prompt": "Two coherent waves: I₁ = I₂ = I₀. Minimum intensity in interference?",
-    "formula": "Iₘᵢₙ = (√I₁ − √I₂)²",
-    "options": [
-      "I₀",
-      "4I₀",
-      "2I₀",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "When I₁ = I₂, Iₘᵢₙ = (√I₀ − √I₀)² = 0 at destructive interference.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b71220dc-2d60-46c8-aed8-391f73a1c2c8",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Diffraction",
-    "prompt": "In a single-slit diffraction, the first minimum is at sin θ = λ/a. At second minimum sin θ = ?",
-    "formula": "sin θ = nλ/a",
-    "options": [
-      "λ/a",
-      "3λ/2a",
-      "2λ/a",
-      "λ/2a"
-    ],
-    "answer": 2,
-    "explain": "Minima occur at sin θ = nλ/a; second minimum (n=2) gives sin θ = 2λ/a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "da715b61-8c5b-499e-b367-b4536f58567c",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Diffraction",
-    "prompt": "In single-slit diffraction, if wavelength doubles (slit width unchanged), central max width?",
-    "formula": "W = 2λD/a",
-    "options": [
-      "Doubles",
-      "Stays same",
-      "Halves",
-      "Quadruples"
-    ],
-    "answer": 0,
-    "explain": "Width of central maximum W = 2λD/a; doubling λ doubles W.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aa6e429e-9301-4565-a0b8-f5e1e664f715",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Diffraction Grating",
-    "prompt": "Diffraction grating: maximum order possible for wavelength λ with grating element d is?",
-    "formula": "nₘₐₓ = d/λ",
-    "options": [
-      "λ/d",
-      "d·λ",
-      "d/λ",
-      "2d/λ"
-    ],
-    "answer": 2,
-    "explain": "From d sin θ = nλ, max n when sin θ = 1, so nₘₐₓ = d/λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d131fd61-a3f8-4e16-a696-8cdb0f93ba8f",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Coherence",
-    "prompt": "For sustained interference from two independent sources, the primary requirement is?",
-    "formula": "",
-    "options": [
-      "Same colour only",
-      "Same amplitude only",
-      "Same frequency and fixed phase relation",
-      "Same intensity only"
-    ],
-    "answer": 2,
-    "explain": "Coherent sources must have same frequency and a constant phase difference.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c4241c7d-6085-4b8b-b7e8-06d71e9cb2f1",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – YDSE",
-    "prompt": "In YDSE, path difference for point on perpendicular bisector of slits is?",
-    "formula": "Δ = 0",
-    "options": [
-      "d/2",
-      "λ",
-      "Zero",
-      "λ/2"
-    ],
-    "answer": 2,
-    "explain": "Perpendicular bisector is equidistant from both slits, so path difference = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "82256f86-b388-46cc-8b33-9a28eaaeb1aa",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Huygens' Principle",
-    "prompt": "Huygens' construction: the envelope of secondary wavelets after time t gives?",
-    "formula": "",
-    "options": [
-      "New wavefront",
-      "Polarisation direction",
-      "Intensity pattern",
-      "Ray direction"
-    ],
-    "answer": 0,
-    "explain": "The common tangent (envelope) of all secondary wavelets gives the new wavefront position.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f58e26e3-0426-4028-be41-42787006804d",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Nature of Light",
-    "prompt": "Which phenomenon of light CANNOT be explained by wave theory?",
-    "formula": "",
-    "options": [
-      "Photoelectric effect",
-      "Polarisation",
-      "Interference",
-      "Diffraction"
-    ],
-    "answer": 0,
-    "explain": "Photoelectric effect requires photon (quantum) theory; wave theory explains interference, diffraction, polarisation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e2c2687d-452c-4efa-a67b-cf6d042e021e",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Polarisation",
-    "prompt": "At Brewster's angle, the reflected light is?",
-    "formula": "tan θ_B = μ",
-    "options": [
-      "Circularly polarised",
-      "Partially polarised",
-      "Completely plane polarised",
-      "Unpolarised"
-    ],
-    "answer": 2,
-    "explain": "At Brewster's angle, reflected beam has only one polarisation component; it is completely plane polarised.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "df5070cc-ebdb-43a1-aef9-e9608543c794",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Wavefronts",
-    "prompt": "Wavefront of light emerging from a convex lens (parallel incident beam) is?",
-    "formula": "",
-    "options": [
-      "Plane",
-      "Cylindrical",
-      "Converging spherical",
-      "Diverging spherical"
-    ],
-    "answer": 2,
-    "explain": "A convex lens converges parallel rays; the emerging wavefront is a converging (concave) sphere.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "32df2706-b382-4f5a-a440-95a4faa00503",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – YDSE",
-    "prompt": "In YDSE, if the two slits have a fixed initial phase difference of π, the central fringe is?",
-    "formula": "",
-    "options": [
-      "Bright",
-      "Dark",
-      "White",
-      "No fringe formed"
-    ],
-    "answer": 1,
-    "explain": "Phase diff π at slits means destructive interference at centre (zero path diff), giving dark central fringe.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e071efa1-5a06-42de-92a5-91178acdd6d7",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In single-slit diffraction, intensity at first minimum is?",
-    "formula": "",
-    "options": [
-      "0.045 I₀",
-      "I₀/4",
-      "I₀/2",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "At minima (a sinθ = nλ), resultant amplitude = 0, so intensity = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "18297b5e-b331-4d39-be97-03e5f20e8dd6",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, the central bright fringe is located where path difference is?",
-    "formula": "Δ = 0",
-    "options": [
-      "d/2",
-      "Zero",
-      "λ",
-      "λ/2"
-    ],
-    "answer": 1,
-    "explain": "Central maximum is at the point equidistant from both slits where Δ = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5407a748-fa07-4aee-bac0-7ad088741928",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Which quantity does NOT change when light travels from one medium to another?",
-    "formula": "",
-    "options": [
-      "Speed",
-      "Refractive index",
-      "Wavelength",
-      "Frequency"
-    ],
-    "answer": 3,
-    "explain": "Frequency is intrinsic to the source; speed and wavelength both change with medium.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef1c2bba-9719-4db6-9e9c-822d81ab9e63",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In thin-film interference, optical path difference for reflected light from film (μ) is?",
-    "formula": "Δ = 2μt cosθ",
-    "options": [
-      "2μt",
-      "2t cosθ",
-      "μt cosθ",
-      "2μt cosθ"
-    ],
-    "answer": 3,
-    "explain": "For oblique incidence at angle θ inside film, effective path difference = 2μt cosθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d06d999a-efe9-419e-9bbd-badc896238de",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, fringe pattern shifts by one fringe when slab (μ,t) gives extra path?",
-    "formula": "(μ-1)t = λ",
-    "options": [
-      "(μ-1)t = λ/2",
-      "(μ+1)t = λ",
-      "(μ-1)t = λ",
-      "μt = λ"
-    ],
-    "answer": 2,
-    "explain": "One fringe shift requires extra optical path = λ, i.e., (μ-1)t = λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "26a6e1c4-bb67-4f83-8b3d-0a551d8b1501",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, distance of 10th bright fringe from centre is y₁₀. What is y₅?",
-    "formula": "yₙ = nλD/d",
-    "options": [
-      "5y₁₀",
-      "2y₁₀",
-      "y₁₀/5",
-      "y₁₀/2"
-    ],
-    "answer": 3,
-    "explain": "yₙ ∝ n, so y₅ = (5/10)y₁₀ = y₁₀/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d3aab651-46a7-4bd4-a382-5efa643bdc1a",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, if screen is moved farther, fringe width?",
-    "formula": "β = λD/d",
-    "options": [
-      "Remains same",
-      "Decreases",
-      "Increases",
-      "First increases then decreases"
-    ],
-    "answer": 2,
-    "explain": "β ∝ D; increasing screen distance D increases fringe width.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0f4ae446-ea9e-4e1a-aa4e-e00f6fc57e21",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In single-slit, if a = λ (slit width = wavelength), central max angular half-width = ?",
-    "formula": "sinθ = λ/a",
-    "options": [
-      "30°",
-      "45°",
-      "60°",
-      "90°"
-    ],
-    "answer": 3,
-    "explain": "First minimum: sinθ = λ/a = 1 → θ = 90°; central max spans entire forward hemisphere.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c7319f28-c58d-492b-9317-b994389e8256",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Two identical polaroids with axes parallel: transmitted intensity from unpolarised source is?",
-    "formula": "I = I₀/2",
-    "options": [
-      "Zero",
-      "I₀/2",
-      "I₀/4",
-      "I₀"
-    ],
-    "answer": 1,
-    "explain": "First polaroid gives I₀/2; second (parallel) passes all of it: final = I₀/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b19ff4fb-fd71-44cc-bdfa-f1d8a54ff541",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In thin film, phase change of π on reflection occurs when light goes from?",
-    "formula": "",
-    "options": [
-      "Any medium",
-      "Same medium",
-      "Rarer to denser medium",
-      "Denser to rarer medium"
-    ],
-    "answer": 2,
-    "explain": "Phase change of π (equivalent to λ/2 path) occurs only at rarer-to-denser interface.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "22b347aa-bf8a-4185-9e09-e8395c50c7e8",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Fresnel distance Z_F for slit width a and wavelength λ is?",
-    "formula": "Z_F = a²/λ",
-    "options": [
-      "λ/a²",
-      "a²/λ",
-      "aλ",
-      "a/λ"
-    ],
-    "answer": 1,
-    "explain": "Fresnel distance Z_F = a²/λ separates near-field (Fresnel) from far-field (Fraunhofer) diffraction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ebd22b73-9270-4a48-8d5a-24d911a92c11",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, path difference at nth bright fringe from centre?",
-    "formula": "Δ = nλ",
-    "options": [
-      "(2n-1)λ/2",
-      "nλ/2",
-      "(2n+1)λ/4",
-      "nλ"
-    ],
-    "answer": 3,
-    "explain": "Bright fringe condition: path difference = nλ (n = 0,±1,±2,…).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "08b9eea2-a023-49f9-baf9-d2da67ba0424",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, angular position of nth bright fringe is?",
-    "formula": "θ = nλ/d",
-    "options": [
-      "nλ/d",
-      "nλ/2d",
-      "nλD/d",
-      "(2n-1)λ/2d"
-    ],
-    "answer": 0,
-    "explain": "For small angles, angular position of nth bright fringe θ = nλ/d.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7762c1b1-0577-4b42-b4e4-958a2c5d0433",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "Condition for total internal reflection requires angle of incidence?",
-    "formula": "",
-    "options": [
-      "Greater than critical angle",
-      "Less than critical angle",
-      "Equal to 45°",
-      "Equal to Brewster's angle"
-    ],
-    "answer": 0,
-    "explain": "TIR occurs when i > critical angle θ_c = sin⁻¹(1/μ), light in denser medium.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5dac41c9-cd18-4a93-953c-ed0892dd6b32",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "The phenomenon responsible for colours of soap bubble is?",
-    "formula": "",
-    "options": [
-      "Diffraction",
-      "Polarisation",
-      "Scattering",
-      "Thin film interference"
-    ],
-    "answer": 3,
-    "explain": "Soap bubble shows colours due to constructive/destructive interference in thin film.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "773c62e7-64ef-431d-b817-9765c0adfa1b",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In Malus's Law, if θ = 30°, transmitted intensity fraction I/I₀ = ?",
-    "formula": "I = I₀cos²θ",
-    "options": [
-      "1/2",
-      "3/4",
-      "1/4",
-      "√3/2"
-    ],
-    "answer": 1,
-    "explain": "I = I₀cos²30° = I₀(√3/2)² = 3I₀/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4ded7219-933d-49ce-a0d4-88400bc92717",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In single-slit diffraction, condition for 3rd minimum (n=3)?",
-    "formula": "a sinθ = 3λ",
-    "options": [
-      "a sinθ = 5λ/2",
-      "a sinθ = 2λ",
-      "a sinθ = 3λ/2",
-      "a sinθ = 3λ"
-    ],
-    "answer": 3,
-    "explain": "Minima in single-slit: a sinθ = nλ; for n=3, a sinθ = 3λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "37f24ee9-67bb-4c79-bc2b-6f6cdc3ab5a4",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "In YDSE, if one slit is covered by a glass slab (μ, t), number of fringes shifted = ?",
-    "formula": "N = (μ-1)t/λ",
-    "options": [
-      "μt/λ",
-      "(μ+1)t/λ",
-      "(μ-1)t/λ",
-      "t/μλ"
-    ],
-    "answer": 2,
-    "explain": "Extra optical path = (μ-1)t; fringe shift = (μ-1)t/λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3acd5574-4bb8-4442-a077-92bda6101ed9",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics",
-    "prompt": "The sky appears blue due to which phenomenon?",
-    "formula": "",
-    "options": [
-      "Polarisation",
-      "Interference",
-      "Scattering (Rayleigh)",
-      "Diffraction"
-    ],
-    "answer": 2,
-    "explain": "Rayleigh scattering: I ∝ 1/λ⁴; blue light (short λ) scattered most → sky appears blue.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6bf2e50d-4cfe-4d23-95ad-ffe9b80ced99",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – YDSE",
-    "prompt": "In YDSE, if separation between slits is halved and D is halved, fringe width β?",
-    "formula": "β = λD/d",
-    "options": [
-      "Halves",
-      "Doubles",
-      "Quadruples",
-      "Remains same"
-    ],
-    "answer": 3,
-    "explain": "β = λD/d; halving both D and d keeps their ratio D/d unchanged, so β stays same.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eba2f88b-fd9f-408d-8f12-616fc9c9334f",
-    "subject": "Physics",
-    "chapter": "Wave Optics",
-    "topic": "Wave Optics – Polarisation",
-    "prompt": "Malus's Law: I = I₀cos²θ. For unpolarised light on a polaroid, transmitted intensity?",
-    "formula": "I = I₀/2",
-    "options": [
-      "I₀/2",
-      "I₀/4",
-      "I₀cos²θ",
-      "I₀"
-    ],
-    "answer": 0,
-    "explain": "Averaging cos²θ over all orientations gives factor 1/2, so I = I₀/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
+ {
+  "id": "4d3fa50d-9fcc-4b3e-adf9-cf11f49336d1",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference",
+  "prompt": "Condition for constructive interference (path difference)?",
+  "formula": "Δx = nλ",
+  "options": [
+   "Δx = (2n-1)λ",
+   "Δx = nλ",
+   "Δx = (2n+1)λ/2",
+   "Δx = nλ/2"
+  ],
+  "answer": 1,
+  "explain": "Constructive interference occurs when path difference is an integer multiple of wavelength.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "529f1da1-3229-49f9-a01a-5a1957fff7e8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference",
+  "prompt": "Condition for destructive interference (path difference)?",
+  "formula": "Δx = (2n-1)λ/2",
+  "options": [
+   "Δx = nλ",
+   "Δx = nλ/4",
+   "Δx = (2n+1)λ",
+   "Δx = (2n-1)λ/2"
+  ],
+  "answer": 3,
+  "explain": "Destructive interference occurs when path difference is an odd multiple of λ/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "268ae8d0-1b26-4ffb-8b93-847bf2e47fff",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Young's Double Slit Experiment",
+  "prompt": "In YDSE, fringe width when immersed in medium of refractive index μ?",
+  "formula": "β' = λD/(μd)",
+  "options": [
+   "β' = μλD/d",
+   "β' = λμ/(dD)",
+   "β' = λD/d",
+   "β' = λD/(μd)"
+  ],
+  "answer": 3,
+  "explain": "Effective wavelength becomes λ/μ, so fringe width decreases by factor μ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": true
   }
+ },
+ {
+  "id": "991ef196-ea31-4a76-865f-7e47d64955e2",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Young's Double Slit Experiment",
+  "prompt": "Angular fringe width in YDSE?",
+  "formula": "θ = λ/d",
+  "options": [
+   "θ = λ/d",
+   "θ = λD/d",
+   "θ = λd",
+   "θ = d/λ"
+  ],
+  "answer": 0,
+  "explain": "Angular fringe width = β/D = λ/d (independent of screen distance D).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "14b9c20d-0d21-4dfb-9b6b-b825412659ad",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference",
+  "prompt": "Resultant intensity in interference: I = ?",
+  "formula": "I = I₁+I₂+2√(I₁I₂)cosδ",
+  "options": [
+   "I = I₁-I₂",
+   "I = 4I₁cos²(δ/2)",
+   "I = I₁+I₂+2√(I₁I₂)cosδ",
+   "I = I₁+I₂"
+  ],
+  "answer": 2,
+  "explain": "General resultant intensity formula includes the interference term 2√(I₁I₂)cosδ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6bb0a7c2-a26f-4ca5-a660-63244b20d601",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference",
+  "prompt": "For equal intensities I₀, max intensity in interference?",
+  "formula": "Iₘₐₓ = 4I₀",
+  "options": [
+   "Iₘₐₓ = 2I₀",
+   "Iₘₐₓ = I₀",
+   "Iₘₐₓ = 3I₀",
+   "Iₘₐₓ = 4I₀"
+  ],
+  "answer": 3,
+  "explain": "When I₁=I₂=I₀, Iₘₐₓ = (√I₀+√I₀)² = 4I₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "57086ef3-e368-4b3c-be08-bffe42f3579b",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference",
+  "prompt": "Ratio Iₘₐₓ/Iₘᵢₙ in terms of amplitude ratio a₁/a₂?",
+  "formula": "[(a₁+a₂)/(a₁-a₂)]²",
+  "options": [
+   "a₁/a₂",
+   "(a₁/a₂)²",
+   "(a₁-a₂)²/(a₁+a₂)²",
+   "(a₁+a₂)²/(a₁-a₂)²"
+  ],
+  "answer": 3,
+  "explain": "Iₘₐₓ/Iₘᵢₙ = (a₁+a₂)²/(a₁-a₂)² where a₁,a₂ are individual amplitudes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "69299baf-136c-4dab-84fe-d4bfeb62cb56",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Young's Double Slit Experiment",
+  "prompt": "Position of nth dark fringe in YDSE from centre?",
+  "formula": "yₙ = (2n-1)λD/2d",
+  "options": [
+   "yₙ = (2n+1)λD/d",
+   "yₙ = nλD/d",
+   "yₙ = nλd/2D",
+   "yₙ = (2n-1)λD/2d"
+  ],
+  "answer": 3,
+  "explain": "Dark fringes at yₙ = (2n±1)λD/2d for n = 1,2,3,...",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "7efefe28-e136-4a26-8029-e5630fd6990e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Diffraction",
+  "prompt": "Central maximum in single-slit diffraction has width (angular)?",
+  "formula": "2λ/a",
+  "options": [
+   "2λ/a",
+   "λ/2a",
+   "λ/a",
+   "4λ/a"
+  ],
+  "answer": 0,
+  "explain": "Central maximum spans from -λ/a to +λ/a, so angular width = 2λ/a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bfdc6f54-5cb8-4253-8e4f-4342ee409855",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Diffraction",
+  "prompt": "Condition for minima in single-slit diffraction?",
+  "formula": "a sinθ = nλ",
+  "options": [
+   "a sinθ = nλ/2",
+   "a sinθ = (2n+1)λ/2",
+   "d sinθ = nλ",
+   "a sinθ = nλ"
+  ],
+  "answer": 3,
+  "explain": "Minima in single-slit diffraction occur when a sinθ = nλ, n = ±1,±2,...",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ea7a3ed9-d8fa-4dff-975a-4127a12aaaa0",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Diffraction",
+  "prompt": "Condition for secondary maxima in single-slit diffraction?",
+  "formula": "a sinθ = (2n+1)λ/2",
+  "options": [
+   "a sinθ = nλ/4",
+   "a sinθ = nλ",
+   "a sinθ = 2nλ",
+   "a sinθ = (2n+1)λ/2"
+  ],
+  "answer": 3,
+  "explain": "Secondary maxima occur midway between minima: a sinθ = (2n±1)λ/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0fa5cd09-a490-45f2-9b40-898abb4ff007",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Diffraction",
+  "prompt": "Resolving power of telescope (Rayleigh criterion)?",
+  "formula": "θ_min = 1.22λ/D",
+  "options": [
+   "θ_min = λ/D",
+   "θ_min = 2λ/D",
+   "θ_min = 0.61λ/D",
+   "θ_min = 1.22λ/D"
+  ],
+  "answer": 3,
+  "explain": "Rayleigh's criterion: minimum resolvable angle = 1.22λ/D for a circular aperture.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "07157705-ec4d-4155-b0ad-dd1b37c5658e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarisation",
+  "prompt": "Brewster's angle θ_B relates to refractive index μ as?",
+  "formula": "tan θ_B = μ",
+  "options": [
+   "tan θ_B = 1/μ",
+   "cos θ_B = μ",
+   "tan θ_B = μ",
+   "sin θ_B = μ"
+  ],
+  "answer": 2,
+  "explain": "Brewster's law: tan θ_B = μ; at this angle reflected ray is completely plane polarised.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "63ccbf1f-ef00-451a-82d2-eccd25ffa6c3",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarisation",
+  "prompt": "At Brewster's angle, angle between reflected and refracted ray is?",
+  "formula": "90°",
+  "options": [
+   "0°",
+   "45°",
+   "180°",
+   "90°"
+  ],
+  "answer": 3,
+  "explain": "At Brewster's angle, reflected and refracted rays are perpendicular to each other.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9d481c83-72d2-4915-9092-4faa6f0f7d27",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarisation",
+  "prompt": "Malus's Law: intensity of polarised light through analyser?",
+  "formula": "I = I₀cos²θ",
+  "options": [
+   "I = I₀sinθ",
+   "I = I₀cosθ",
+   "I = I₀cos²θ",
+   "I = I₀sin²θ"
+  ],
+  "answer": 2,
+  "explain": "Malus's law: I = I₀cos²θ where θ is angle between polariser and analyser axes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4b920bee-4405-4ccd-8e12-aee19fa97a3d",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarisation",
+  "prompt": "Unpolarised light passes through a polariser, intensity becomes?",
+  "formula": "I = I₀/2",
+  "options": [
+   "I = I₀",
+   "I = I₀/4",
+   "I = I₀/2",
+   "I = 2I₀"
+  ],
+  "answer": 2,
+  "explain": "A polariser transmits only one plane of polarisation, halving the intensity of unpolarised light.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0e2a1b6f-b023-40c6-8a20-3ecc13051fba",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Thin Film Interference",
+  "prompt": "If a thin film of thickness t, μ, is seen in reflected light, condition for bright fringe?",
+  "formula": "2μt = (2n-1)λ/2",
+  "options": [
+   "μt = nλ",
+   "2μt = (2n-1)λ/2",
+   "2μt = nλ",
+   "2μt = (2n+1)λ"
+  ],
+  "answer": 1,
+  "explain": "Reflection from denser medium causes extra λ/2 shift; bright fringes: 2μt = (2n-1)λ/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2378a749-321d-438c-9892-ae7eef933c7e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "Width of central maximum in single-slit diffraction on screen?",
+  "formula": "W = 2λD/a",
+  "options": [
+   "2λD/a",
+   "λD/a",
+   "λD/2a",
+   "4λD/a"
+  ],
+  "answer": 0,
+  "explain": "Central maximum spans between first minima on both sides: width = 2λD/a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d8964cc4-887d-4987-8a69-b7db8e929988",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "Thin film (μ) in transmitted light: condition for bright fringe?",
+  "formula": "2μt = nλ",
+  "options": [
+   "2μt = (2n+1)λ",
+   "μt = nλ",
+   "2μt = nλ",
+   "2μt = (2n-1)λ/2"
+  ],
+  "answer": 2,
+  "explain": "Transmitted bright: no net phase change, so constructive when 2μt = nλ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f21e4343-778c-48ec-a219-b970cde95674",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "Thin film in reflected light: condition for dark fringe?",
+  "formula": "2μt = nλ",
+  "options": [
+   "2μt = nλ",
+   "2t = nλ",
+   "μt = nλ/2",
+   "2μt = (2n-1)λ/2"
+  ],
+  "answer": 0,
+  "explain": "Reflected dark (destructive): 2μt = nλ due to net half-wave loss cancellation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a763bd8-22e9-4e1e-a0fb-c64c1dd61b2e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "In YDSE, if wavelength increases, fringe width?",
+  "formula": "β ∝ λ",
+  "options": [
+   "Remains same",
+   "Increases",
+   "Becomes zero",
+   "Decreases"
+  ],
+  "answer": 1,
+  "explain": "β = λD/d, so fringe width is directly proportional to wavelength λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "685c186e-012c-48f2-90a8-4f2fd1063554",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "In YDSE, if slit separation d is doubled, fringe width?",
+  "formula": "β ∝ 1/d",
+  "options": [
+   "Halved",
+   "Unchanged",
+   "Doubled",
+   "Quadrupled"
+  ],
+  "answer": 0,
+  "explain": "β = λD/d; doubling d halves the fringe width.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "725614a6-2ad5-49b7-bf9b-f8c7820042a3",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Superposition: path & phase difference relation",
+  "prompt": "Phase difference δ corresponding to path difference Δ?",
+  "formula": "δ = (2π/λ)Δ",
+  "options": [
+   "(λ/2π)Δ",
+   "(π/λ)Δ",
+   "(π/2λ)Δ",
+   "(2π/λ)Δ"
+  ],
+  "answer": 3,
+  "explain": "Phase difference = (2π/λ) × path difference; one full wavelength = 2π phase.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21f5893b-fd60-43cd-b163-5600e6fc61b8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Intensity in single-slit diffraction: I = I₀(sinα/α)², where α = ?",
+  "formula": "α = πa sinθ/λ",
+  "options": [
+   "2πa sinθ/λ",
+   "a sinθ/λ",
+   "πa sinθ/2λ",
+   "πa sinθ/λ"
+  ],
+  "answer": 3,
+  "explain": "α = πa sinθ/λ is half the total phase difference across the slit.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a2e5263-0e8f-4487-a7f5-ed96ff6e9f99",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Superposition: path & phase difference relation",
+  "prompt": "In interference, if path difference = λ/2, phase difference = ?",
+  "formula": "δ = π",
+  "options": [
+   "3π/2",
+   "2π",
+   "π",
+   "π/2"
+  ],
+  "answer": 2,
+  "explain": "δ = (2π/λ)×(λ/2) = π; this corresponds to destructive interference.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "534de49b-260a-48eb-839b-c0978d0be9b4",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarization & plane-polarized light",
+  "prompt": "Polarisation proves light is which type of wave?",
+  "formula": "",
+  "options": [
+   "Longitudinal",
+   "Mechanical",
+   "Transverse",
+   "Stationary"
+  ],
+  "answer": 2,
+  "explain": "Only transverse waves can be polarised; longitudinal waves (sound) cannot.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b3fa52f8-127a-4dcc-9e57-0b3dd53bf535",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "Speed of light in medium of refractive index μ?",
+  "formula": "v = c/μ",
+  "options": [
+   "c/μ²",
+   "c√μ",
+   "cμ",
+   "c/μ"
+  ],
+  "answer": 3,
+  "explain": "Refractive index μ = c/v, so speed in medium v = c/μ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7aebbf0b-d6fe-48dd-b125-19f7b86b7ce5",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "Fringe pattern in YDSE uses which type of source?",
+  "formula": "",
+  "options": [
+   "Point sources only",
+   "White light only",
+   "Independent sources",
+   "Coherent sources"
+  ],
+  "answer": 3,
+  "explain": "Stable interference fringes require coherent sources with constant phase difference.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "ffb79b5c-59f9-46df-afd4-ee3b711eaf1f",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE with white light & overlapping fringes",
+  "prompt": "In YDSE with white light, central fringe is?",
+  "formula": "",
+  "options": [
+   "White (all colours overlap)",
+   "Violet",
+   "Red",
+   "Black (dark)"
+  ],
+  "answer": 0,
+  "explain": "At centre path difference = 0 for all wavelengths; all colours reinforce → white fringe.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "d1c0e01c-9985-48c4-a877-73328b938bed",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "Two polaroids with axes at 90°, intensity of transmitted light?",
+  "formula": "I = 0",
+  "options": [
+   "I₀/2",
+   "I₀/4",
+   "Zero",
+   "I₀"
+  ],
+  "answer": 2,
+  "explain": "Malus's law: I = I₀cos²90° = 0; crossed polaroids block all light.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21de4a6e-ab34-4405-ab4a-d4c6a174f608",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, fringe width is independent of?",
+  "formula": "",
+  "options": [
+   "Slit separation d",
+   "Fringe order n",
+   "Screen distance D",
+   "Wavelength λ"
+  ],
+  "answer": 1,
+  "explain": "β = λD/d is the same for all orders n; fringe width is independent of fringe number.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "39be2eb9-6fad-4aaf-81fc-ed806856e65f",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "Which colour has narrowest fringe width in YDSE?",
+  "formula": "β ∝ λ",
+  "options": [
+   "Yellow",
+   "Green",
+   "Violet",
+   "Red"
+  ],
+  "answer": 2,
+  "explain": "β = λD/d; violet has smallest λ (~400 nm) → smallest fringe width.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "53f31a3d-b5a8-44d1-8410-bee9b475bc2a",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "In YDSE, if screen distance D is doubled, fringe width?",
+  "formula": "β ∝ D",
+  "options": [
+   "Doubles",
+   "Quadruples",
+   "Halves",
+   "Unchanged"
+  ],
+  "answer": 0,
+  "explain": "β = λD/d; doubling D doubles the fringe width.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "diagram": {
+   "kind": "ydse",
+   "caption": "Double-slit geometry: separation d, screen distance D",
+   "medium": false
+  }
+ },
+ {
+  "id": "55068326-9354-4faf-ab64-75088ee8cd30",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "Optical path length in medium of refractive index μ, thickness t?",
+  "formula": "OPL = μt",
+  "options": [
+   "t(μ−1)",
+   "μt",
+   "μ²t",
+   "t/μ"
+  ],
+  "answer": 1,
+  "explain": "Optical path = μ × geometric path; extra path due to medium is (μ−1)t over air.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "62a086b5-5be4-4e3e-a11c-83b39628157e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "In single-slit diffraction, half-angular width of central maximum?",
+  "formula": "θ = λ/a",
+  "options": [
+   "λ/a",
+   "a/λ",
+   "2λ/a",
+   "λ/2a"
+  ],
+  "answer": 0,
+  "explain": "First minima at sinθ = λ/a; half-width of central max = λ/a (for small θ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a6b1071b-e519-46bb-9f52-095d48551c18",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "In YDSE, shift of fringe pattern when a slab (μ,t) covers one slit?",
+  "formula": "Shift = (μ-1)t·D/d",
+  "options": [
+   "μt·D/d",
+   "(μ-1)t/d",
+   "μt/D",
+   "(μ-1)t·D/d"
+  ],
+  "answer": 3,
+  "explain": "Extra optical path (μ-1)t shifts fringes toward slit with slab by (μ-1)tD/d.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "63f61452-96a4-4c37-bd7e-3990e3d73053",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "In YDSE, extra path introduced by slab (μ,t) over one slit?",
+  "formula": "(μ-1)t",
+  "options": [
+   "(μ+1)t",
+   "(μ-1)t",
+   "μt",
+   "t/μ"
+  ],
+  "answer": 1,
+  "explain": "Slab replaces air path t with optical path μt, so extra path = (μ−1)t.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef8fdd3e-be09-42de-bae3-bf3cadd23c4b",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "Number of fringes shifted due to slab (μ,t) in YDSE?",
+  "formula": "n = (μ-1)t/λ",
+  "options": [
+   "t/μλ",
+   "(μ+1)t/λ",
+   "μt/λ",
+   "(μ−1)t/λ"
+  ],
+  "answer": 3,
+  "explain": "Shift = (μ−1)t; dividing by fringe width β gives n = (μ−1)t/λ fringes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ed68e717-c039-46a2-b6e4-8e1fd19f3548",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Imax/Imin ratio and amplitude ratio",
+  "prompt": "For two sources, Iₘₐₓ/Iₘᵢₙ in terms of intensities I₁, I₂?",
+  "formula": "(√I₁+√I₂)²/(√I₁-√I₂)²",
+  "options": [
+   "(√I₁+√I₂)²/(√I₁−√I₂)²",
+   "(I₁+I₂)²/(I₁−I₂)²",
+   "I₁/I₂",
+   "(I₁+I₂)/(I₁−I₂)"
+  ],
+  "answer": 0,
+  "explain": "Iₘₐₓ = (√I₁+√I₂)², Iₘᵢₙ = (√I₁−√I₂)²; ratio follows directly.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b32727c3-5522-46d5-81f5-0bb3c8f7f061",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wavefronts and Huygens' principle",
+  "prompt": "Wavefront from a distant (point) source at infinity is?",
+  "formula": "",
+  "options": [
+   "Plane wavefront",
+   "Elliptical wavefront",
+   "Cylindrical wavefront",
+   "Spherical wavefront"
+  ],
+  "answer": 0,
+  "explain": "At very large distances, spherical wavefronts become effectively plane wavefronts.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "204bae20-b12e-4e20-82c8-2375d5198c12",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wavefronts and Huygens' principle",
+  "prompt": "Wavefront from a line source (long wire) is?",
+  "formula": "",
+  "options": [
+   "Plane",
+   "Cylindrical",
+   "Spherical",
+   "Parabolic"
+  ],
+  "answer": 1,
+  "explain": "A line source produces cylindrical wavefronts spreading radially outward.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3eb3b8e9-22ca-4995-9ddc-cc94a9943c81",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Reflection & refraction via Huygens' principle",
+  "prompt": "Using Huygens' principle, Snell's law gives sin i/sin r = ?",
+  "formula": "v₁/v₂ = μ₂/μ₁",
+  "options": [
+   "v₂/v₁ = μ₂/μ₁",
+   "v₁/v₂ = μ₂/μ₁",
+   "v₁v₂ = μ₁μ₂",
+   "sin i·sin r = const"
+  ],
+  "answer": 1,
+  "explain": "Huygens' construction yields sin i/sin r = v₁/v₂ = μ₂/μ₁ (Snell's law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "878e6400-1d34-4f5c-b693-d83bc79b4683",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "In single-slit diffraction, position of nth minimum from centre?",
+  "formula": "yₙ = nλD/a",
+  "options": [
+   "nλD/a",
+   "(2n-1)λD/a",
+   "nλa/D",
+   "(2n+1)λD/2a"
+  ],
+  "answer": 0,
+  "explain": "Minima at a sinθ = nλ; on screen yₙ = nλD/a for small angles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "873f1e65-fd41-4f43-9e80-045d80d5c9ea",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "In single-slit diffraction, if slit width a doubles, central max width?",
+  "formula": "W ∝ 1/a",
+  "options": [
+   "Quadruples",
+   "Stays same",
+   "Doubles",
+   "Halves"
+  ],
+  "answer": 3,
+  "explain": "Central max width = 2λD/a; doubling a halves the width.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7a4c031f-4b51-4668-94b3-ab1d845ef836",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarization & plane-polarized light",
+  "prompt": "Polarisation of light occurs when light passes through a?",
+  "formula": "",
+  "options": [
+   "Polaroid / tourmaline crystal",
+   "Plane mirror",
+   "Prism",
+   "Glass slab"
+  ],
+  "answer": 0,
+  "explain": "Polaroids selectively transmit one plane of vibration, producing plane-polarised light.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "45d3dec8-35a0-4b92-b79c-566377bc5347",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "For a soap film (μ) in air (reflected), minimum thickness for bright fringe?",
+  "formula": "t_min = λ/4μ",
+  "options": [
+   "λ/μ",
+   "λ/4μ",
+   "λ/8μ",
+   "λ/2μ"
+  ],
+  "answer": 1,
+  "explain": "Condition 2μt = (2n−1)λ/2; for n=1, tₘᵢₙ = λ/4μ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0cbd159b-b493-4b93-b0b5-5aaa35c67a2b",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "Brewster's law: when reflected and refracted rays are perpendicular, the angle of incidence is?",
+  "formula": "tan θ_B = μ",
+  "options": [
+   "0°",
+   "45° always",
+   "Brewster's angle θ_B",
+   "Critical angle θ_c"
+  ],
+  "answer": 2,
+  "explain": "At Brewster's angle tan θ_B = μ; reflected light is completely plane-polarised.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ee8b285-2b5a-49b6-af31-2494180b4159",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wavefronts and Huygens' principle",
+  "prompt": "When a parallel beam of light passes through a convex lens, shape of emerging wavefront?",
+  "formula": "",
+  "options": [
+   "Cylindrical",
+   "Plane",
+   "Converging spherical",
+   "Diverging spherical"
+  ],
+  "answer": 2,
+  "explain": "Convex lens converges parallel beam; wavefront becomes converging spherical.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b8adc4bd-8c3b-4341-a34c-25fa72a8222b",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "In diffraction grating, condition for principal maxima (grating equation)?",
+  "formula": "d sinθ = nλ",
+  "options": [
+   "d sinθ = (2n+1)λ/2",
+   "2d sinθ = nλ",
+   "d sinθ = nλ/2",
+   "d sinθ = nλ"
+  ],
+  "answer": 3,
+  "explain": "Grating equation: path difference between adjacent slits = d sinθ = nλ for maxima.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3911f48d-9358-4c3e-9d65-32a17dfd6b27",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – YDSE",
+  "prompt": "In YDSE, fringe width β = λD/d; if λ is halved and D doubled, β becomes?",
+  "formula": "β = λD/d",
+  "options": [
+   "2β",
+   "Same β",
+   "β/2",
+   "4β"
+  ],
+  "answer": 1,
+  "explain": "β ∝ λD/d; halving λ and doubling D cancel, so β remains unchanged.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5f5890c3-8f87-4734-b90e-e5e4582d9abd",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Interference",
+  "prompt": "Two coherent waves: I₁ = I₂ = I₀. Minimum intensity in interference?",
+  "formula": "Iₘᵢₙ = (√I₁ − √I₂)²",
+  "options": [
+   "I₀",
+   "4I₀",
+   "2I₀",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "When I₁ = I₂, Iₘᵢₙ = (√I₀ − √I₀)² = 0 at destructive interference.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b71220dc-2d60-46c8-aed8-391f73a1c2c8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Diffraction",
+  "prompt": "In a single-slit diffraction, the first minimum is at sin θ = λ/a. At second minimum sin θ = ?",
+  "formula": "sin θ = nλ/a",
+  "options": [
+   "λ/a",
+   "3λ/2a",
+   "2λ/a",
+   "λ/2a"
+  ],
+  "answer": 2,
+  "explain": "Minima occur at sin θ = nλ/a; second minimum (n=2) gives sin θ = 2λ/a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "da715b61-8c5b-499e-b367-b4536f58567c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Diffraction",
+  "prompt": "In single-slit diffraction, if wavelength doubles (slit width unchanged), central max width?",
+  "formula": "W = 2λD/a",
+  "options": [
+   "Doubles",
+   "Stays same",
+   "Halves",
+   "Quadruples"
+  ],
+  "answer": 0,
+  "explain": "Width of central maximum W = 2λD/a; doubling λ doubles W.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aa6e429e-9301-4565-a0b8-f5e1e664f715",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Diffraction Grating",
+  "prompt": "Diffraction grating: maximum order possible for wavelength λ with grating element d is?",
+  "formula": "nₘₐₓ = d/λ",
+  "options": [
+   "λ/d",
+   "d·λ",
+   "d/λ",
+   "2d/λ"
+  ],
+  "answer": 2,
+  "explain": "From d sin θ = nλ, max n when sin θ = 1, so nₘₐₓ = d/λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d131fd61-a3f8-4e16-a696-8cdb0f93ba8f",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Coherence",
+  "prompt": "For sustained interference from two independent sources, the primary requirement is?",
+  "formula": "",
+  "options": [
+   "Same colour only",
+   "Same amplitude only",
+   "Same frequency and fixed phase relation",
+   "Same intensity only"
+  ],
+  "answer": 2,
+  "explain": "Coherent sources must have same frequency and a constant phase difference.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c4241c7d-6085-4b8b-b7e8-06d71e9cb2f1",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – YDSE",
+  "prompt": "In YDSE, path difference for point on perpendicular bisector of slits is?",
+  "formula": "Δ = 0",
+  "options": [
+   "d/2",
+   "λ",
+   "Zero",
+   "λ/2"
+  ],
+  "answer": 2,
+  "explain": "Perpendicular bisector is equidistant from both slits, so path difference = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "82256f86-b388-46cc-8b33-9a28eaaeb1aa",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Huygens' Principle",
+  "prompt": "Huygens' construction: the envelope of secondary wavelets after time t gives?",
+  "formula": "",
+  "options": [
+   "New wavefront",
+   "Polarisation direction",
+   "Intensity pattern",
+   "Ray direction"
+  ],
+  "answer": 0,
+  "explain": "The common tangent (envelope) of all secondary wavelets gives the new wavefront position.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f58e26e3-0426-4028-be41-42787006804d",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Nature of Light",
+  "prompt": "Which phenomenon of light CANNOT be explained by wave theory?",
+  "formula": "",
+  "options": [
+   "Photoelectric effect",
+   "Polarisation",
+   "Interference",
+   "Diffraction"
+  ],
+  "answer": 0,
+  "explain": "Photoelectric effect requires photon (quantum) theory; wave theory explains interference, diffraction, polarisation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e2c2687d-452c-4efa-a67b-cf6d042e021e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Polarisation",
+  "prompt": "At Brewster's angle, the reflected light is?",
+  "formula": "tan θ_B = μ",
+  "options": [
+   "Circularly polarised",
+   "Partially polarised",
+   "Completely plane polarised",
+   "Unpolarised"
+  ],
+  "answer": 2,
+  "explain": "At Brewster's angle, reflected beam has only one polarisation component; it is completely plane polarised.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "df5070cc-ebdb-43a1-aef9-e9608543c794",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Wavefronts",
+  "prompt": "Wavefront of light emerging from a convex lens (parallel incident beam) is?",
+  "formula": "",
+  "options": [
+   "Plane",
+   "Cylindrical",
+   "Converging spherical",
+   "Diverging spherical"
+  ],
+  "answer": 2,
+  "explain": "A convex lens converges parallel rays; the emerging wavefront is a converging (concave) sphere.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "32df2706-b382-4f5a-a440-95a4faa00503",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – YDSE",
+  "prompt": "In YDSE, if the two slits have a fixed initial phase difference of π, the central fringe is?",
+  "formula": "",
+  "options": [
+   "Bright",
+   "Dark",
+   "White",
+   "No fringe formed"
+  ],
+  "answer": 1,
+  "explain": "Phase diff π at slits means destructive interference at centre (zero path diff), giving dark central fringe.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e071efa1-5a06-42de-92a5-91178acdd6d7",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "In single-slit diffraction, intensity at first minimum is?",
+  "formula": "",
+  "options": [
+   "0.045 I₀",
+   "I₀/4",
+   "I₀/2",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "At minima (a sinθ = nλ), resultant amplitude = 0, so intensity = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "18297b5e-b331-4d39-be97-03e5f20e8dd6",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, the central bright fringe is located where path difference is?",
+  "formula": "Δ = 0",
+  "options": [
+   "d/2",
+   "Zero",
+   "λ",
+   "λ/2"
+  ],
+  "answer": 1,
+  "explain": "Central maximum is at the point equidistant from both slits where Δ = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5407a748-fa07-4aee-bac0-7ad088741928",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "Which quantity does NOT change when light travels from one medium to another?",
+  "formula": "",
+  "options": [
+   "Speed",
+   "Refractive index",
+   "Wavelength",
+   "Frequency"
+  ],
+  "answer": 3,
+  "explain": "Frequency is intrinsic to the source; speed and wavelength both change with medium.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef1c2bba-9719-4db6-9e9c-822d81ab9e63",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "In thin-film interference, optical path difference for reflected light from film (μ) is?",
+  "formula": "Δ = 2μt cosθ",
+  "options": [
+   "2μt",
+   "2t cosθ",
+   "μt cosθ",
+   "2μt cosθ"
+  ],
+  "answer": 3,
+  "explain": "For oblique incidence at angle θ inside film, effective path difference = 2μt cosθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d06d999a-efe9-419e-9bbd-badc896238de",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "In YDSE, fringe pattern shifts by one fringe when slab (μ,t) gives extra path?",
+  "formula": "(μ-1)t = λ",
+  "options": [
+   "(μ-1)t = λ/2",
+   "(μ+1)t = λ",
+   "(μ-1)t = λ",
+   "μt = λ"
+  ],
+  "answer": 2,
+  "explain": "One fringe shift requires extra optical path = λ, i.e., (μ-1)t = λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "26a6e1c4-bb67-4f83-8b3d-0a551d8b1501",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, distance of 10th bright fringe from centre is y₁₀. What is y₅?",
+  "formula": "yₙ = nλD/d",
+  "options": [
+   "5y₁₀",
+   "2y₁₀",
+   "y₁₀/5",
+   "y₁₀/2"
+  ],
+  "answer": 3,
+  "explain": "yₙ ∝ n, so y₅ = (5/10)y₁₀ = y₁₀/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d3aab651-46a7-4bd4-a382-5efa643bdc1a",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "In YDSE, if screen is moved farther, fringe width?",
+  "formula": "β = λD/d",
+  "options": [
+   "Remains same",
+   "Decreases",
+   "Increases",
+   "First increases then decreases"
+  ],
+  "answer": 2,
+  "explain": "β ∝ D; increasing screen distance D increases fringe width.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0f4ae446-ea9e-4e1a-aa4e-e00f6fc57e21",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "In single-slit, if a = λ (slit width = wavelength), central max angular half-width = ?",
+  "formula": "sinθ = λ/a",
+  "options": [
+   "30°",
+   "45°",
+   "60°",
+   "90°"
+  ],
+  "answer": 3,
+  "explain": "First minimum: sinθ = λ/a = 1 → θ = 90°; central max spans entire forward hemisphere.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c7319f28-c58d-492b-9317-b994389e8256",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "Two identical polaroids with axes parallel: transmitted intensity from unpolarised source is?",
+  "formula": "I = I₀/2",
+  "options": [
+   "Zero",
+   "I₀/2",
+   "I₀/4",
+   "I₀"
+  ],
+  "answer": 1,
+  "explain": "First polaroid gives I₀/2; second (parallel) passes all of it: final = I₀/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b19ff4fb-fd71-44cc-bdfa-f1d8a54ff541",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "In thin film, phase change of π on reflection occurs when light goes from?",
+  "formula": "",
+  "options": [
+   "Any medium",
+   "Same medium",
+   "Rarer to denser medium",
+   "Denser to rarer medium"
+  ],
+  "answer": 2,
+  "explain": "Phase change of π (equivalent to λ/2 path) occurs only at rarer-to-denser interface.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "22b347aa-bf8a-4185-9e09-e8395c50c7e8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "Fresnel distance Z_F for slit width a and wavelength λ is?",
+  "formula": "Z_F = a²/λ",
+  "options": [
+   "λ/a²",
+   "a²/λ",
+   "aλ",
+   "a/λ"
+  ],
+  "answer": 1,
+  "explain": "Fresnel distance Z_F = a²/λ separates near-field (Fresnel) from far-field (Fraunhofer) diffraction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ebd22b73-9270-4a48-8d5a-24d911a92c11",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, path difference at nth bright fringe from centre?",
+  "formula": "Δ = nλ",
+  "options": [
+   "(2n-1)λ/2",
+   "nλ/2",
+   "(2n+1)λ/4",
+   "nλ"
+  ],
+  "answer": 3,
+  "explain": "Bright fringe condition: path difference = nλ (n = 0,±1,±2,…).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "08b9eea2-a023-49f9-baf9-d2da67ba0424",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, angular position of nth bright fringe is?",
+  "formula": "θ = nλ/d",
+  "options": [
+   "nλ/d",
+   "nλ/2d",
+   "nλD/d",
+   "(2n-1)λ/2d"
+  ],
+  "answer": 0,
+  "explain": "For small angles, angular position of nth bright fringe θ = nλ/d.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7762c1b1-0577-4b42-b4e4-958a2c5d0433",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "Condition for total internal reflection requires angle of incidence?",
+  "formula": "",
+  "options": [
+   "Greater than critical angle",
+   "Less than critical angle",
+   "Equal to 45°",
+   "Equal to Brewster's angle"
+  ],
+  "answer": 0,
+  "explain": "TIR occurs when i > critical angle θ_c = sin⁻¹(1/μ), light in denser medium.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5dac41c9-cd18-4a93-953c-ed0892dd6b32",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "The phenomenon responsible for colours of soap bubble is?",
+  "formula": "",
+  "options": [
+   "Diffraction",
+   "Polarisation",
+   "Scattering",
+   "Thin film interference"
+  ],
+  "answer": 3,
+  "explain": "Soap bubble shows colours due to constructive/destructive interference in thin film.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "773c62e7-64ef-431d-b817-9765c0adfa1b",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "In Malus's Law, if θ = 30°, transmitted intensity fraction I/I₀ = ?",
+  "formula": "I = I₀cos²θ",
+  "options": [
+   "1/2",
+   "3/4",
+   "1/4",
+   "√3/2"
+  ],
+  "answer": 1,
+  "explain": "I = I₀cos²30° = I₀(√3/2)² = 3I₀/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4ded7219-933d-49ce-a0d4-88400bc92717",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "In single-slit diffraction, condition for 3rd minimum (n=3)?",
+  "formula": "a sinθ = 3λ",
+  "options": [
+   "a sinθ = 5λ/2",
+   "a sinθ = 2λ",
+   "a sinθ = 3λ/2",
+   "a sinθ = 3λ"
+  ],
+  "answer": 3,
+  "explain": "Minima in single-slit: a sinθ = nλ; for n=3, a sinθ = 3λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "37f24ee9-67bb-4c79-bc2b-6f6cdc3ab5a4",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "In YDSE, if one slit is covered by a glass slab (μ, t), number of fringes shifted = ?",
+  "formula": "N = (μ-1)t/λ",
+  "options": [
+   "μt/λ",
+   "(μ+1)t/λ",
+   "(μ-1)t/λ",
+   "t/μλ"
+  ],
+  "answer": 2,
+  "explain": "Extra optical path = (μ-1)t; fringe shift = (μ-1)t/λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3acd5574-4bb8-4442-a077-92bda6101ed9",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics",
+  "prompt": "The sky appears blue due to which phenomenon?",
+  "formula": "",
+  "options": [
+   "Polarisation",
+   "Interference",
+   "Scattering (Rayleigh)",
+   "Diffraction"
+  ],
+  "answer": 2,
+  "explain": "Rayleigh scattering: I ∝ 1/λ⁴; blue light (short λ) scattered most → sky appears blue.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6bf2e50d-4cfe-4d23-95ad-ffe9b80ced99",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – YDSE",
+  "prompt": "In YDSE, if separation between slits is halved and D is halved, fringe width β?",
+  "formula": "β = λD/d",
+  "options": [
+   "Halves",
+   "Doubles",
+   "Quadruples",
+   "Remains same"
+  ],
+  "answer": 3,
+  "explain": "β = λD/d; halving both D and d keeps their ratio D/d unchanged, so β stays same.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eba2f88b-fd9f-408d-8f12-616fc9c9334f",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wave Optics – Polarisation",
+  "prompt": "Malus's Law: I = I₀cos²θ. For unpolarised light on a polaroid, transmitted intensity?",
+  "formula": "I = I₀/2",
+  "options": [
+   "I₀/2",
+   "I₀/4",
+   "I₀cos²θ",
+   "I₀"
+  ],
+  "answer": 0,
+  "explain": "Averaging cos²θ over all orientations gives factor 1/2, so I = I₀/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b107429-be45-425e-80bd-fa3df7463e4f",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wavefronts and Huygens' principle",
+  "prompt": "Rays (direction of energy flow) and wavefronts in an isotropic medium are related as:",
+  "formula": "",
+  "options": [
+   "At 45° to each other",
+   "Always parallel",
+   "Perpendicular only for plane waves",
+   "Always perpendicular"
+  ],
+  "answer": 3,
+  "explain": "In an isotropic medium, rays are normal to the wavefront at every point, for any wavefront shape.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3a9eceb2-8489-4c4a-9867-fb3bce1722b8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Wavefronts and Huygens' principle",
+  "prompt": "In Huygens' principle, secondary wavelets are considered to spread out with which speed?",
+  "formula": "",
+  "options": [
+   "Speed of wave in that medium",
+   "Twice the wave speed",
+   "Zero speed",
+   "Speed of light in vacuum always"
+  ],
+  "answer": 0,
+  "explain": "Each point on a wavefront emits wavelets that travel with the wave's speed in that medium, so the envelope gives the new wavefront.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7fe2bf8c-5886-46ca-8089-733b13aa4386",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Reflection & refraction via Huygens' principle",
+  "prompt": "On refraction at a plane interface, which wave quantity stays unchanged?",
+  "formula": "",
+  "options": [
+   "Amplitude",
+   "Frequency",
+   "Wavelength",
+   "Speed"
+  ],
+  "answer": 1,
+  "explain": "Frequency is set by the source; v and λ change with the medium, so frequency stays the same.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8bb89d0e-9ab0-4586-83b8-198ac5850623",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Reflection & refraction via Huygens' principle",
+  "prompt": "In Huygens' construction, a wavefront is defined as the locus of points having the same:",
+  "formula": "",
+  "options": [
+   "Phase",
+   "Wave speed only",
+   "Intensity only",
+   "Amplitude only"
+  ],
+  "answer": 0,
+  "explain": "A wavefront is a surface of constant phase.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c4f2ac8-6594-410b-9a15-fa5730803f50",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Reflection & refraction via Huygens' principle",
+  "prompt": "Wavefront shape for a point source in a homogeneous medium is:",
+  "formula": "",
+  "options": [
+   "Plane",
+   "Elliptical",
+   "Spherical",
+   "Cylindrical"
+  ],
+  "answer": 2,
+  "explain": "A point source gives spherical wavefronts; far away they appear plane. A line source gives cylindrical ones.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5f054633-9bc8-4eb6-9274-e6e053e18b41",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Reflection & refraction via Huygens' principle",
+  "prompt": "Huygens' proof of the law of reflection shows that:",
+  "formula": "",
+  "options": [
+   "i = 2r",
+   "sin i = μ sin r",
+   "i = r",
+   "i = 90° − r"
+  ],
+  "answer": 2,
+  "explain": "The right triangles are congruent (same hypotenuse and equal speed×time side), giving i = r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d21103f-f5e5-4aba-87ca-f2bc07126494",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Reflection & refraction via Huygens' principle",
+  "prompt": "A plane wave passes from air into glass (μ = 1.5). Its wavelength becomes:",
+  "formula": "λ' = λ/μ",
+  "options": [
+   "λ/1.5",
+   "λ/(1.5)²",
+   "1.5λ",
+   "λ unchanged"
+  ],
+  "answer": 0,
+  "explain": "v = c/μ with f unchanged, so λ' = v/f = λ/μ; the wavelength decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca7cc8fd-553a-4193-b11d-f7b40d7c79b7",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "Two incoherent sources of intensity I₀ each overlap. Resultant intensity is",
+  "formula": "I = I₁ + I₂",
+  "options": [
+   "I₀√2",
+   "4I₀",
+   "2I₀",
+   "I₀"
+  ],
+  "answer": 2,
+  "explain": "Cross term averages to zero for incoherent sources, so intensities simply add.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb86b37f-aaaf-4feb-bce6-0d7dbd783966",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "Coherent waves of amplitude ratio 2:1 interfere. Imax/Imin = ?",
+  "formula": "Imax/Imin = (a₁+a₂)²/(a₁−a₂)²",
+  "options": [
+   "4",
+   "3",
+   "1/9",
+   "9"
+  ],
+  "answer": 3,
+  "explain": "(2+1)²/(2−1)² = 9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f71d2fce-b130-4135-af10-47c8f8e4f5a5",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "Light waves polarised at right angles to each other, from the same source, will",
+  "formula": "",
+  "options": [
+   "Give fringes of double width",
+   "Give brighter fringes",
+   "Give no interference fringes",
+   "Give shifted fringes"
+  ],
+  "answer": 2,
+  "explain": "Perpendicular polarisations cannot interfere; the intensity is uniform (sum of intensities).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8b42e50f-7fe9-4d2e-b24c-4bdd7eb898a2",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "A Fresnel biprism produces coherent sources by which method?",
+  "formula": "",
+  "options": [
+   "Polarisation splitting",
+   "Diffraction at edge only",
+   "Division of amplitude",
+   "Division of wavefront"
+  ],
+  "answer": 3,
+  "explain": "Biprism refracts parts of one wavefront into two virtual coherent sources: wavefront division.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43268881-12fe-43be-898d-9150074839b8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "Coherent beams in thin-film interference are obtained by",
+  "formula": "",
+  "options": [
+   "Division of wavefront",
+   "Using two lasers",
+   "Using two slits",
+   "Division of amplitude"
+  ],
+  "answer": 3,
+  "explain": "Partial reflection/transmission splits the amplitude of a single wave into coherent parts.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64aac0da-a512-46da-864c-1c1c96a0898e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "In YDSE, widening the source slit S (keeping other things fixed) makes fringes",
+  "formula": "",
+  "options": [
+   "Shift sideways uniformly",
+   "Brighter and sharper",
+   "Wider in spacing",
+   "Less visible due to loss of spatial coherence"
+  ],
+  "answer": 3,
+  "explain": "A wide source acts as many incoherent point sources, washing out the fringes (visibility falls).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd69ffc5-ce88-46d4-8c3d-956a7c964d94",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "Two coherent equal sources (I₀ each) meet with path difference λ/4. Intensity is",
+  "formula": "φ = 2πΔx/λ",
+  "options": [
+   "4I₀",
+   "2I₀",
+   "I₀",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "φ = π/2, cosφ = 0, so I = I₀ + I₀ = 2I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "458f1134-182d-466d-9b79-8ddbdde8528c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "For maximum fringe contrast (visibility) in interference, the two beams should have",
+  "formula": "",
+  "options": [
+   "Intensity ratio 2:1",
+   "Equal intensities",
+   "Phase difference π/2",
+   "Opposite polarisations"
+  ],
+  "answer": 1,
+  "explain": "Equal intensities give Imin = 0, hence visibility = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ef5227f1-2282-4576-bbce-5aa502651715",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Coherent sources & sustained interference",
+  "prompt": "Two coherent beams of equal intensity I₀ interfere. Average intensity over the whole fringe pattern is",
+  "formula": "I = 4I₀cos²(φ/2)",
+  "options": [
+   "4I₀",
+   "2I₀",
+   "I₀",
+   "3I₀"
+  ],
+  "answer": 1,
+  "explain": "Average of 4I₀cos²(φ/2) is 2I₀. Interference only redistributes energy, so it is conserved.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c9864bfd-fd4e-4e0a-a5cd-9910e7cd225e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Superposition: path & phase difference relation",
+  "prompt": "Two coherent sources have intensity ratio 9:1. Imax : Imin = ?",
+  "formula": "Imax/Imin = (a₁+a₂)²/(a₁−a₂)²",
+  "options": [
+   "4 : 1",
+   "10 : 8",
+   "5 : 4",
+   "9 : 1"
+  ],
+  "answer": 0,
+  "explain": "Amplitude ratio 3:1 gives (3+1)²/(3−1)² = 16/4 = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c28d4b3c-206f-43a6-88d5-f5d13125d14c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Superposition: path & phase difference relation",
+  "prompt": "Two coherent sources each of intensity I₀ meet with path difference λ/3. Resultant intensity?",
+  "formula": "φ = 2π/3, I = 4I₀cos²(φ/2)",
+  "options": [
+   "I₀/2",
+   "2I₀",
+   "4I₀",
+   "I₀"
+  ],
+  "answer": 3,
+  "explain": "φ = 2π/3, so I = 4I₀cos²(π/3) = 4I₀·¼ = I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "076b21d0-dd95-4547-9aab-403ed07c2d4a",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Superposition: path & phase difference relation",
+  "prompt": "For two coherent sources, the average intensity over the whole interference pattern equals?",
+  "formula": "I_avg = I₁ + I₂",
+  "options": [
+   "2√(I₁I₂)",
+   "Imax",
+   "(√I₁ + √I₂)²",
+   "I₁ + I₂"
+  ],
+  "answer": 3,
+  "explain": "The cosφ term averages to zero; energy is only redistributed, not created.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56d68cc7-6d5b-4978-b12f-89c8fabf0c8e",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Resultant intensity in interference",
+  "prompt": "Intensity of a light wave is proportional to which quantity?",
+  "formula": "I ∝ A²",
+  "options": [
+   "Amplitude A",
+   "Square root of amplitude",
+   "Frequency only",
+   "Square of amplitude, A²"
+  ],
+  "answer": 3,
+  "explain": "Intensity is proportional to the square of the amplitude.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6cc2b5d-350d-4695-9783-4be0ecc28cb1",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Resultant intensity in interference",
+  "prompt": "Two coherent sources of equal intensity I₀ differ in phase by 60°. The resultant intensity is?",
+  "formula": "I = 4I₀cos²(δ/2)",
+  "options": [
+   "2I₀",
+   "4I₀",
+   "3I₀/2",
+   "3I₀"
+  ],
+  "answer": 3,
+  "explain": "I = 4I₀cos²30° = 4I₀ × 3/4 = 3I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7d2b2053-a7b6-4598-a947-49a12a00bf00",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Imax/Imin ratio and amplitude ratio",
+  "prompt": "For two interfering waves, Iₘₐₓ + Iₘᵢₙ equals which of these?",
+  "formula": "Iₘₐₓ + Iₘᵢₙ = 2(a₁²+a₂²)",
+  "options": [
+   "2(I₁ + I₂)",
+   "4√(I₁I₂)",
+   "(I₁ + I₂)²",
+   "I₁ + I₂"
+  ],
+  "answer": 0,
+  "explain": "(a₁+a₂)² + (a₁−a₂)² = 2(a₁²+a₂²) = 2(I₁+I₂). Energy is conserved on average.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "177a828f-ee76-43ae-96ce-319ce7a58340",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Imax/Imin ratio and amplitude ratio",
+  "prompt": "Two coherent beams have intensities I and 4I. What is the maximum resultant intensity?",
+  "formula": "",
+  "options": [
+   "3I",
+   "5I",
+   "25I",
+   "9I"
+  ],
+  "answer": 3,
+  "explain": "Iₘₐₓ = (√I + √4I)² = (1+2)²I = 9I.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9f7e3a1c-fa00-4ba8-947e-91a3208c3f96",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Imax/Imin ratio and amplitude ratio",
+  "prompt": "Two coherent beams have intensities I and 4I. What is the minimum resultant intensity?",
+  "formula": "",
+  "options": [
+   "3I",
+   "I",
+   "0",
+   "5I"
+  ],
+  "answer": 1,
+  "explain": "Iₘᵢₙ = (√4I − √I)² = I. It is not zero because the amplitudes are unequal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a265c265-1a99-44d7-8f7f-40de9113d2d6",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Imax/Imin ratio and amplitude ratio",
+  "prompt": "Two coherent waves have amplitude ratio 3:1. What is the fringe visibility V?",
+  "formula": "V = 2a₁a₂/(a₁²+a₂²)",
+  "options": [
+   "0.9",
+   "0.6",
+   "0.8",
+   "0.5"
+  ],
+  "answer": 1,
+  "explain": "V = 2·3·1/(9+1) = 6/10 = 0.6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5dfa3920-a91f-4d59-8236-2aa2e50268b9",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Imax/Imin ratio and amplitude ratio",
+  "prompt": "Two coherent waves of intensities I₁ and I₂ meet with phase difference π/2. Resultant intensity?",
+  "formula": "I = I₁ + I₂ + 2√(I₁I₂) cosφ",
+  "options": [
+   "2(I₁ + I₂)",
+   "I₁ + I₂ + √(I₁I₂)",
+   "(√I₁ + √I₂)²",
+   "I₁ + I₂"
+  ],
+  "answer": 3,
+  "explain": "At φ = π/2, cosφ = 0, so the cross term vanishes and I = I₁ + I₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67e12db5-1a6a-4178-ab58-e65fa7eb83d1",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE with white light, the first coloured fringe on either side of the central white fringe is?",
+  "formula": "",
+  "options": [
+   "Green on the inner edge",
+   "Red on the inner edge",
+   "Dark on the inner edge",
+   "Violet on the inner edge"
+  ],
+  "answer": 3,
+  "explain": "Violet has smaller λ, so its first maximum is nearest to the centre; red is outermost.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c0e7272-28d4-4564-ae53-eb4e809e8279",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "Source slit S in YDSE is shifted sideways. The central maximum on the screen shifts?",
+  "formula": "",
+  "options": [
+   "Does not shift",
+   "In the same direction",
+   "In the opposite direction",
+   "Disappears"
+  ],
+  "answer": 2,
+  "explain": "Path SS₁ − SS₂ changes, so the zero-path-difference point shifts oppositely to S.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9340df8-ac59-4076-a68f-785da37ae385",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "Separation between adjacent bright and dark fringe centres in YDSE?",
+  "formula": "",
+  "options": [
+   "β",
+   "β/4",
+   "β/2",
+   "2β"
+  ],
+  "answer": 2,
+  "explain": "Bright at nβ, dark at (n−½)β, so the gap is β/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e44d1857-aa13-47be-8263-920b6911d964",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "If d is halved and D is doubled in YDSE, the fringe width becomes?",
+  "formula": "",
+  "options": [
+   "Same",
+   "4 times",
+   "8 times",
+   "2 times"
+  ],
+  "answer": 1,
+  "explain": "β ∝ D/d, so it is 2 × 2 = 4 times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "51e2532a-cbfa-422a-b446-82674965efa9",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "Slit intensities are in ratio 4:1. Ratio I_max : I_min in YDSE?",
+  "formula": "(√I₁+√I₂)² : (√I₁−√I₂)²",
+  "options": [
+   "25:9",
+   "5:3",
+   "9:1",
+   "4:1"
+  ],
+  "answer": 2,
+  "explain": "Amplitudes 2:1, so (2+1)²:(2−1)² = 9:1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a89500ae-5a81-4481-b909-96f0905d942d",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, if the screen is perpendicular to the line joining the slits, the fringes are?",
+  "formula": "",
+  "options": [
+   "Parabolas",
+   "Straight parallel lines",
+   "Concentric circles",
+   "Hyperbolas"
+  ],
+  "answer": 2,
+  "explain": "Fringes are circles about that axis; in the usual set-up they are nearly straight lines.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5b94a1c6-cd15-4aea-b0c3-bc202e99f6a8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, one slit is made wider than the other. Fringe width β and fringe visibility?",
+  "formula": "β = λD/d",
+  "options": [
+   "β unchanged, fringes disappear",
+   "β unchanged, visibility reduces",
+   "β decreases, visibility increases",
+   "β increases, visibility unchanged"
+  ],
+  "answer": 1,
+  "explain": "β depends only on λ, D, d. Unequal intensities make I_min ≠ 0, so contrast falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4981ac4-0017-41cb-ab07-3411f54c598c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "A thin transparent sheet covers one slit of YDSE. The central fringe shifts which way?",
+  "formula": "",
+  "options": [
+   "Away from the covered slit",
+   "Toward the covered slit",
+   "It splits into two",
+   "It does not shift"
+  ],
+  "answer": 1,
+  "explain": "The covered path gains optical path, so the zero-path-difference point moves toward that slit's side.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f28d548f-0b7b-4d33-b03f-e5db4174bc41",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "A thin sheet is placed over one slit in YDSE. Fringe width β becomes?",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "Becomes zero",
+   "Decreases by factor μ",
+   "Increases by factor μ"
+  ],
+  "answer": 0,
+  "explain": "The sheet only shifts the whole pattern; β = λD/d is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d9578ff4-dc46-429f-8984-ae3683677c0a",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "In YDSE, the whole setup is immersed in a liquid. The central bright fringe position on the screen?",
+  "formula": "",
+  "options": [
+   "Shifts away from the centre",
+   "Shifts toward the upper slit",
+   "Becomes a dark fringe",
+   "Stays at the symmetric centre point"
+  ],
+  "answer": 3,
+  "explain": "Path difference is zero at the symmetric point, so the central maximum stays there; only β changes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "938b55b1-07ee-41a0-880a-496b7d0ec6f2",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "Identical slabs (same μ, t) cover both slits in YDSE. The fringe pattern?",
+  "formula": "",
+  "options": [
+   "Shifts by (μ−1)tD/d",
+   "Does not shift",
+   "Disappears",
+   "Shifts by μtD/d"
+  ],
+  "answer": 1,
+  "explain": "Extra optical paths are equal and cancel, so the path difference is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a178c45-b322-42c5-a576-b3951b505f66",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "YDSE is wholly immersed in a liquid of index μ_l. A slab of index μ covers a slit. The shift is proportional to?",
+  "formula": "",
+  "options": [
+   "μ_l(μ − 1)t",
+   "(μ/μ_l − 1)t",
+   "(μ − 1)t",
+   "(μ − μ_l)t/μ"
+  ],
+  "answer": 1,
+  "explain": "In the liquid, the effective path is (μ_rel − 1)t with μ_rel = μ/μ_l.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "35d1ae33-2caa-4c6c-9540-be627ad12b07",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "In a liquid-filled YDSE, an air-bubble slab (μ_rel < 1) covers one slit. The pattern shifts?",
+  "formula": "",
+  "options": [
+   "Not at all",
+   "Away from that slit",
+   "Only the width changes",
+   "Toward that slit"
+  ],
+  "answer": 1,
+  "explain": "For μ_rel < 1 the optical path through the slab is smaller, so (μ_rel−1)t is negative and the shift reverses.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "117597a6-5d73-4b3e-a793-1903e8658fe8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "A slab (μ, t) covers S₁ in YDSE. The new central maxima lies where the optical paths from S₁ and S₂ are what?",
+  "formula": "",
+  "options": [
+   "Equal, at the original centre",
+   "Equal, on the side of S₁",
+   "Equal, on the side of S₂",
+   "Differing by λ/2 at the same point"
+  ],
+  "answer": 1,
+  "explain": "Slab adds (μ−1)t to the S₁ path, so the equal-path point moves to the S₁ side (the shorter geometric path).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "435fefa2-53c1-4257-88ae-acab9d58246f",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Width of the central maximum compared with that of a secondary maximum is?",
+  "formula": "",
+  "options": [
+   "Twice",
+   "Four times",
+   "Half",
+   "Equal"
+  ],
+  "answer": 0,
+  "explain": "Central width = 2λD/a, while each secondary maximum has width λD/a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "175be599-451b-4b38-b816-a492cc96dc3b",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "The single-slit setup is immersed in water of refractive index μ. The central maximum width becomes?",
+  "formula": "λ' = λ/μ",
+  "options": [
+   "μ times",
+   "1/μ times",
+   "μ² times",
+   "Unchanged"
+  ],
+  "answer": 1,
+  "explain": "Wavelength reduces to λ/μ, so β₀ = 2λD/(μa) decreases by a factor μ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d853c1e2-c51a-451d-9eeb-97a524cefaa6",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Approximate intensity of the first secondary maximum relative to the central maximum?",
+  "formula": "",
+  "options": [
+   "About 25%",
+   "About 50%",
+   "About 4.5%",
+   "About 0.5%"
+  ],
+  "answer": 2,
+  "explain": "I₁/I₀ ≈ 0.045, roughly 1/22; higher secondary maxima fall off further.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6cce9b0c-071b-41d5-ba6d-71aa75582ca3",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "In single-slit diffraction with white light, the central maximum appears?",
+  "formula": "",
+  "options": [
+   "White, with coloured edges",
+   "Red at the centre",
+   "Violet at the centre",
+   "Completely dark"
+  ],
+  "answer": 0,
+  "explain": "All colours have θ = 0 at the centre; edges are coloured because β ∝ λ, with red outermost.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3b5cb63-71ee-4f05-9768-6456976a9da1",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "In I = I₀(sinα/α)², the central maximum (α → 0) has intensity?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "I₀/4",
+   "I₀/2",
+   "I₀"
+  ],
+  "answer": 3,
+  "explain": "As α → 0, sinα/α → 1, so I = I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9711b120-4433-438d-84f3-989651574762",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Linear width of the nth secondary maximum (between adjacent minima) in single-slit diffraction?",
+  "formula": "",
+  "options": [
+   "λD/2a",
+   "2λD/a",
+   "λD/a",
+   "nλD/a"
+  ],
+  "answer": 2,
+  "explain": "Adjacent minima are separated by λD/a, independent of n.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8b8cfb03-4006-4d5e-a484-8b579fe843cf",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Compared with a double-slit interference pattern, single-slit fringes are?",
+  "formula": "",
+  "options": [
+   "Unequal width, decreasing intensity",
+   "Unequal width, equal intensity",
+   "Equally wide, equally bright",
+   "Equal width, decreasing intensity"
+  ],
+  "answer": 0,
+  "explain": "Central maximum is twice as wide and brightest; secondary maxima rapidly decrease in intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9b4164d4-749f-4be6-b104-d196c6513310",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "Single slit in white light: the outer edge of the central maximum is coloured?",
+  "formula": "",
+  "options": [
+   "Yellow",
+   "Green",
+   "Red",
+   "Violet"
+  ],
+  "answer": 2,
+  "explain": "Red has the largest λ, so its first minimum lies farthest and its edge is outermost.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6544b0c7-16a3-4dce-a7d4-e4bf8b996cdf",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "Young's double slit with d = 2a (a = slit width). Bright fringes inside the central diffraction maximum?",
+  "formula": "",
+  "options": [
+   "5",
+   "3",
+   "2",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "The n = ±2 order falls on the diffraction minimum and is missing, leaving n = 0, ±1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "61d4ea8b-3698-412c-8169-013a56d82b03",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference vs diffraction differences",
+  "prompt": "Which pattern has fringes of nearly equal intensity (narrow slits)?",
+  "formula": "",
+  "options": [
+   "Straight-edge diffraction",
+   "YDSE interference",
+   "Circular-aperture diffraction",
+   "Single-slit diffraction"
+  ],
+  "answer": 1,
+  "explain": "Ideal YDSE bright fringes have equal intensity; diffraction maxima fall off rapidly away from the central one.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "71e65c2d-5b9a-4ed0-9dbc-1cc1ad507211",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference vs diffraction differences",
+  "prompt": "Diffraction arises from superposition of wavelets from",
+  "formula": "",
+  "options": [
+   "Two independent coherent sources",
+   "Reflections at two surfaces only",
+   "Two incoherent sources",
+   "Different points of the same wavefront"
+  ],
+  "answer": 3,
+  "explain": "Diffraction: secondary wavelets from the same wavefront; interference: waves from two coherent sources.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75482e2e-e4bc-4e95-a62f-7cad8484201d",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference vs diffraction differences",
+  "prompt": "In YDSE with slit separation d = 3a (a = slit width), which interference order is missing?",
+  "formula": "d sinθ = nλ, a sinθ = mλ",
+  "options": [
+   "6th",
+   "3rd",
+   "4th",
+   "2nd"
+  ],
+  "answer": 1,
+  "explain": "The 3rd interference maximum coincides with the 1st diffraction minimum, since d/a = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "987757c4-d2c6-4d84-9b82-4074c7fecd26",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference vs diffraction differences",
+  "prompt": "Diffraction at an obstacle or aperture is appreciable only when its size is",
+  "formula": "",
+  "options": [
+   "Much smaller than λ",
+   "Much larger than λ",
+   "Comparable to λ",
+   "Independent of λ"
+  ],
+  "answer": 2,
+  "explain": "Noticeable bending needs size comparable to the wavelength.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1d6ca5c3-11d7-47d1-9890-26041c75c3bd",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference vs diffraction differences",
+  "prompt": "In interference and diffraction patterns, the energy is",
+  "formula": "",
+  "options": [
+   "Doubled at maxima everywhere",
+   "Redistributed; total conserved",
+   "Destroyed at minima",
+   "Created at maxima"
+  ],
+  "answer": 1,
+  "explain": "Energy is only redistributed from minima to maxima; the total is conserved.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ad68903-bf59-43ce-aa24-049becffb44d",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarization & plane-polarized light",
+  "prompt": "Light reflected from a transparent surface at the Brewster angle is polarised in which manner?",
+  "formula": "",
+  "options": [
+   "Parallel to the plane of incidence",
+   "Unpolarised",
+   "Circularly polarised",
+   "Perpendicular to the plane of incidence"
+  ],
+  "answer": 3,
+  "explain": "At i_p the reflected light is completely plane-polarised with vibrations perpendicular to the plane of incidence.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fbc20bfb-cd15-4487-b089-8f5706eb941c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "Unpolarised light I₀ passes two polaroids with axes at angle θ. Final intensity?",
+  "formula": "I = (I₀/2)cos²θ",
+  "options": [
+   "(I₀/2)cos²θ",
+   "I₀cos²θ/4",
+   "(I₀/2)cosθ",
+   "I₀cos²θ"
+  ],
+  "answer": 0,
+  "explain": "The first polaroid gives I₀/2; Malus's law then applies for the second.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a3a624b-becb-4ba7-b1f2-9676e9956faa",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "Unpolarised light I₀ passes through crossed polaroids with a third inserted at 45° between them. Output?",
+  "formula": "",
+  "options": [
+   "I₀/4",
+   "I₀/2",
+   "I₀/8",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "I₀/2 → ×cos²45° = I₀/4 → ×cos²45° = I₀/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bdd0514b-da8d-4952-9b1e-4ed973005d59",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "An analyser rotates through 360° in plane-polarised light. How many times is intensity zero?",
+  "formula": "",
+  "options": [
+   "Once",
+   "Twice",
+   "Never",
+   "Four times"
+  ],
+  "answer": 1,
+  "explain": "Zero at θ = 90° and 270°; maximum at 0° and 180°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dc19ecf2-893f-4ad6-a450-ec20649bb900",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "Polarised light I₀ goes through two analysers, at 45° and then 90° to the original polarisation. Output?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "I₀/4",
+   "I₀/8",
+   "I₀/2"
+  ],
+  "answer": 1,
+  "explain": "Angles of 45° and 45° between successive axes give I₀cos²45°·cos²45° = I₀/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "908782f3-7bff-47f9-b3d4-e5c0ce71ebbd",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "Polaroid sunglasses reduce glare because reflected light from roads or water is:",
+  "formula": "",
+  "options": [
+   "Totally unpolarised",
+   "Polarised vertically",
+   "Partly polarised horizontally",
+   "Of higher frequency"
+  ],
+  "answer": 2,
+  "explain": "Reflected glare is partially polarised horizontally; a vertical-axis polaroid blocks it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "82841482-76c6-4671-a7b3-888efb9ffaec",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "At Brewster's angle, the refracted light is:",
+  "formula": "",
+  "options": [
+   "Totally unpolarised",
+   "Completely plane polarised",
+   "Circularly polarised",
+   "Partially polarised"
+  ],
+  "answer": 3,
+  "explain": "Only the reflected ray is fully polarised; the refracted ray is partially polarised.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a64d7b80-53c4-400a-b56b-02a727d58aae",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "Unpolarised light I₀ passes through two polaroids with axes at 60°. Final intensity is:",
+  "formula": "I = (I₀/2)cos²60°",
+  "options": [
+   "I₀/2",
+   "3I₀/8",
+   "I₀/4",
+   "I₀/8"
+  ],
+  "answer": 3,
+  "explain": "I₀/2 after the first polaroid, then × cos²60° = ¼ gives I₀/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11517017-f419-4798-8c6c-de32c9076e03",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "Unpolarised light strikes glass at Brewster's angle. The component NOT reflected is the one with E:",
+  "formula": "",
+  "options": [
+   "Parallel to plane of incidence",
+   "Perpendicular to plane of incidence",
+   "At 45° to the plane",
+   "Along the reflected ray only"
+  ],
+  "answer": 0,
+  "explain": "The component in the plane of incidence has zero reflection at θ_B and is fully transmitted.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc05ab09-196f-4d49-803b-82bcff4b585c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Imax/Imin ratio and amplitude ratio",
+  "prompt": "Fringe visibility V = (Iₘₐₓ−Iₘᵢₙ)/(Iₘₐₓ+Iₘᵢₙ) equals which expression in a₁, a₂?",
+  "formula": "V = 2a₁a₂/(a₁²+a₂²)",
+  "options": [
+   "2a₁a₂/(a₁+a₂)²",
+   "(a₁−a₂)/(a₁+a₂)",
+   "2a₁a₂/(a₁²+a₂²)",
+   "(a₁²−a₂²)/(a₁²+a₂²)"
+  ],
+  "answer": 2,
+  "explain": "Iₘₐₓ−Iₘᵢₙ = 4a₁a₂ and Iₘₐₓ+Iₘᵢₙ = 2(a₁²+a₂²), so V = 2a₁a₂/(a₁²+a₂²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "589a6954-5ca7-48da-ab9b-39174c3746ee",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "A slab that also partly absorbs light covers one slit in YDSE. Effect on fringes?",
+  "formula": "",
+  "options": [
+   "Fringe width changes",
+   "Shift is halved, minima stay dark",
+   "Shift same, minima no longer fully dark",
+   "No shift, only dimmer"
+  ],
+  "answer": 2,
+  "explain": "The shift depends only on (μ−1)t. Unequal amplitudes reduce visibility, so the minima are not zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "db078261-24df-4d16-9434-10f95cd3c7e8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "Plane-polarised light (amplitude E₀) meets an analyser at angle θ. Transmitted amplitude is?",
+  "formula": "E = E₀cosθ, I ∝ E²",
+  "options": [
+   "E₀cos²θ",
+   "E₀cosθ",
+   "E₀sinθ",
+   "E₀/2"
+  ],
+  "answer": 1,
+  "explain": "Only the component E₀cosθ along the axis passes; squaring gives I = I₀cos²θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb5d60d4-373e-4f0a-9e65-105b02ea1392",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Malus' law & intensity through polaroids",
+  "prompt": "Polarised light passes an analyser at angle θ (0° < θ < 90°). Transmitted light vibrates along?",
+  "formula": "",
+  "options": [
+   "Analyser's transmission axis",
+   "Direction at angle θ/2",
+   "Perpendicular to the analyser axis",
+   "Original polarisation direction"
+  ],
+  "answer": 0,
+  "explain": "The analyser passes only the component along its axis, so the output is polarised along that axis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50a567c9-778a-4eeb-8d27-5b652f5fbd95",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Parallel light falls on a single slit at incidence angle i. Where is the central maximum?",
+  "formula": "a(sinθ − sin i) = nλ",
+  "options": [
+   "At θ = i (along incident direction)",
+   "At θ = 0 (normal to slit)",
+   "At θ = 90° − i",
+   "At θ = 2i"
+  ],
+  "answer": 0,
+  "explain": "Zero path difference between all wavelets occurs along the incident direction, so the central maximum shifts to θ = i.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "424bf958-533c-4c5a-ace3-d6c47c900ea8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarization & plane-polarized light",
+  "prompt": "The plane of polarisation of a plane-polarised wave is the plane containing which?",
+  "formula": "",
+  "options": [
+   "Only the B vector",
+   "Direction of propagation, perpendicular to E",
+   "Direction of E and propagation",
+   "Only E and B vectors"
+  ],
+  "answer": 1,
+  "explain": "By definition, the plane of polarisation contains the propagation direction and is perpendicular to the plane of vibration (E).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "920d2f25-c571-418e-92eb-43489066c9c5",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Superposition: path & phase difference relation",
+  "prompt": "Two waves of the same period T have a time lag of T/3. Their phase difference is?",
+  "formula": "δ = 2πΔt/T",
+  "options": [
+   "π/3",
+   "π",
+   "π/2",
+   "2π/3"
+  ],
+  "answer": 3,
+  "explain": "δ = (2π/T)·(T/3) = 2π/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e4d709cb-0fd6-477b-b6fd-388d1f95405c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Resultant intensity in interference",
+  "prompt": "Three coherent waves of equal amplitude, successive phase difference 120°, superpose. Resultant intensity?",
+  "formula": "",
+  "options": [
+   "3I₀",
+   "9I₀",
+   "0",
+   "I₀"
+  ],
+  "answer": 2,
+  "explain": "Three equal phasors at 120° form a closed triangle, so the vector sum is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "282f46e1-b8ea-4efa-8a0a-f84723e0e952",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Resultant intensity in interference",
+  "prompt": "For equal coherent sources, the graph of I against path difference is?",
+  "formula": "",
+  "options": [
+   "Single peak at Δx = 0",
+   "Decaying peaks like sinc²",
+   "Straight line at 2I₀",
+   "cos² curve between 0 and 4I₀, equal peaks"
+  ],
+  "answer": 3,
+  "explain": "I = 4I₀cos²(πΔx/λ): periodic, all maxima equal 4I₀, minima touch zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b1d9aaaf-2d32-4b54-9d9b-18002f09ed87",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Resultant intensity in interference",
+  "prompt": "Two coherent sources give Iₘₐₓ : Iₘᵢₙ = 25 : 9. Their intensity ratio I₁ : I₂ is?",
+  "formula": "(a₁+a₂)/(a₁−a₂) = 5/3",
+  "options": [
+   "25 : 9",
+   "4 : 1",
+   "16 : 1",
+   "5 : 3"
+  ],
+  "answer": 2,
+  "explain": "(a₁+a₂)/(a₁−a₂) = 5/3 gives a₁ : a₂ = 4 : 1, so I₁ : I₂ = 16 : 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a14cc7e6-95df-4bda-963c-7f2c1d9b240c",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Resultant intensity in interference",
+  "prompt": "Equal coherent sources I₀ in antiphase. Intensity at a point with path difference λ/2 is?",
+  "formula": "δ = π + π = 2π",
+  "options": [
+   "0",
+   "2I₀",
+   "I₀",
+   "4I₀"
+  ],
+  "answer": 3,
+  "explain": "Path phase π adds to initial phase π, so δ = 2π and the point is bright: 4I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5f026c0c-c60b-40f5-a970-571e6898c122",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Resultant intensity in interference",
+  "prompt": "Coherent beams of intensities 9I and I meet with phase difference 60°. Resultant intensity?",
+  "formula": "I = I₁ + I₂ + 2√(I₁I₂)cosδ",
+  "options": [
+   "7I",
+   "10I",
+   "13I",
+   "16I"
+  ],
+  "answer": 2,
+  "explain": "10I + 2(3I)(½) = 13I.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "feb8fcf4-cbbe-4957-9c3a-db2089bb73ee",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE, bright fringes of 400 nm and 600 nm first coincide at which order of the 400 nm light?",
+  "formula": "n₁λ₁ = n₂λ₂",
+  "options": [
+   "4th",
+   "6th",
+   "3rd",
+   "2nd"
+  ],
+  "answer": 2,
+  "explain": "n₁·400 = n₂·600 gives n₁:n₂ = 3:2, so 3rd order of 400 nm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6829de6f-bc0f-4997-baec-46e40cf9592a",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "On the same side of the centre, distance between the 3rd bright and the 7th dark fringe is?",
+  "formula": "",
+  "options": [
+   "4β",
+   "3β",
+   "4.5β",
+   "3.5β"
+  ],
+  "answer": 3,
+  "explain": "7th dark at 6.5β, 3rd bright at 3β, so the difference is 3.5β.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "14738063-0066-4d4f-889e-a390ea3d3c6f",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE: fringe width & fringe positions",
+  "prompt": "In YDSE with d = 2.5λ and D very large, the total number of bright fringes on the screen is?",
+  "formula": "n < d/λ",
+  "options": [
+   "7",
+   "5",
+   "3",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "Need nλ ≤ d, so n = 0, ±1, ±2, which gives 5 bright fringes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d36b9f5f-ce6d-48c1-9d1d-7d8d8cdaa4a8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "YDSE in a medium & effect of changing d, D, λ",
+  "prompt": "In YDSE, the screen distance D is doubled. The angular fringe width θ = β/D becomes?",
+  "formula": "θ = λ/d",
+  "options": [
+   "Four times",
+   "Unchanged",
+   "Halved",
+   "Doubled"
+  ],
+  "answer": 1,
+  "explain": "θ = λ/d does not depend on D, since β and D scale together.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a756911d-bf58-4ced-9514-0b8a719de772",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "White light, YDSE, slab over one slit; dispersion included. Linear shift of the central maximum is greatest for:",
+  "formula": "",
+  "options": [
+   "Violet",
+   "Yellow",
+   "Same for all colours",
+   "Red"
+  ],
+  "answer": 0,
+  "explain": "Shift ∝ (μ−1); μ is largest for violet, so violet shifts most.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fafd9e2c-0264-46ea-93ee-cda899e98872",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Fringe shift by thin transparent slab",
+  "prompt": "A slab covers S₁ in YDSE. To bring the central fringe back to P₀, the source slit S must move:",
+  "formula": "",
+  "options": [
+   "Along the axis away from the slits",
+   "Sideways toward the S₁ side",
+   "Sideways toward the S₂ side",
+   "Along the axis toward the slits"
+  ],
+  "answer": 1,
+  "explain": "The slab shifts the pattern toward S₁. Moving S toward the S₁ side shifts it the opposite way, so it cancels.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3caa9f9c-db6a-487d-b9df-8b757073e8ec",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Single slit is shifted slightly parallel to its own plane (lens and screen fixed). Diffraction pattern?",
+  "formula": "",
+  "options": [
+   "Stays at the same position",
+   "Shifts by the same distance",
+   "Shifts by the opposite distance",
+   "Becomes wider"
+  ],
+  "answer": 0,
+  "explain": "Parallel rays at angle θ focus at one point whatever the slit position, so the pattern does not shift.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac082a1f-deef-47e6-96c9-d9fa124b2c83",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "Intensity of the second secondary maximum relative to the central maximum is about?",
+  "formula": "",
+  "options": [
+   "0.8%",
+   "3.2%",
+   "4.5%",
+   "1.6%"
+  ],
+  "answer": 3,
+  "explain": "Secondary maxima fall as about 4.5%, 1.6%, 0.8% of I₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2f62534d-ab30-45f9-9270-2ed01448a4dd",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Single slit diffraction: minima & maxima",
+  "prompt": "One slit, 400 nm and 600 nm light. Their minima first coincide at which orders (400 nm, 600 nm)?",
+  "formula": "n₁λ₁ = n₂λ₂",
+  "options": [
+   "3rd and 3rd",
+   "2nd and 3rd",
+   "3rd and 2nd",
+   "1st and 1st"
+  ],
+  "answer": 2,
+  "explain": "Coincident minima need n₁·400 = n₂·600, so n₁:n₂ = 3:2 and the first coincidence is (3, 2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d373b931-b830-48da-877c-26f06db906f4",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "Approximately what fraction of the total diffracted light energy lies in the central maximum of a single slit?",
+  "formula": "",
+  "options": [
+   "About 50%",
+   "About 70%",
+   "About 90%",
+   "About 99.9%"
+  ],
+  "answer": 2,
+  "explain": "About 90% of the energy is in the central maximum. The secondary maxima share the rest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72664d7a-ad74-4f1c-ac3c-7038bcfff8c8",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Width of central maximum in diffraction",
+  "prompt": "For a single slit with a < λ, the diffraction pattern shows?",
+  "formula": "sin θ = λ/a > 1",
+  "options": [
+   "Many sharp minima",
+   "No minima, broad central spread",
+   "Only secondary maxima",
+   "Only one minimum"
+  ],
+  "answer": 1,
+  "explain": "sin θ = nλ/a cannot be satisfied when a < λ, so there are no minima. Light spreads over a very wide region.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4cfb0ce3-4210-4733-bd9a-8e65b3e16181",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference vs diffraction differences",
+  "prompt": "Fraunhofer diffraction at a single slit requires the incident wavefront to be:",
+  "formula": "",
+  "options": [
+   "Spherical",
+   "Cylindrical",
+   "Plane",
+   "Of any shape"
+  ],
+  "answer": 2,
+  "explain": "Fraunhofer: source and screen effectively at infinity (or using lenses), so the incident wavefront is plane.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e71bf595-bcec-49fa-a5da-297e524bf598",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Interference vs diffraction differences",
+  "prompt": "In a real YDSE with finite slit width, the intensity envelope modulating the fringes is due to:",
+  "formula": "",
+  "options": [
+   "Diffraction at each individual slit",
+   "Dispersion in the medium",
+   "Interference between the two slits",
+   "Polarisation of the light"
+  ],
+  "answer": 0,
+  "explain": "Interference gives the fringes; each slit's single-slit diffraction pattern forms the envelope.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67fec8db-4e6b-49ad-8077-b93cb2557bb7",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarization & plane-polarized light",
+  "prompt": "Unpolarised sunlight scattered by air molecules at 90° to the incident beam is:",
+  "formula": "",
+  "options": [
+   "Polarised only in the incident direction",
+   "Unpolarised",
+   "Plane-polarised",
+   "Circularly polarised"
+  ],
+  "answer": 2,
+  "explain": "Scattered E must be transverse to both the incident and the viewing direction, so at 90° the light is plane-polarised.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ce15ef56-f9dd-416f-956d-737832e6b429",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Polarization & plane-polarized light",
+  "prompt": "For a glass surface, the polarising (Brewster) angle is largest for which colour?",
+  "formula": "",
+  "options": [
+   "Red",
+   "Yellow",
+   "Violet",
+   "Same for all colours"
+  ],
+  "answer": 2,
+  "explain": "tan i_p = μ and μ is largest for violet, so i_p is largest for violet.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2869c1b7-2e1e-43da-a354-2bf1a78d28f6",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "A light ray hits a parallel glass slab at Brewster's angle. At the second surface, incidence is:",
+  "formula": "",
+  "options": [
+   "At the critical angle",
+   "Also at Brewster's angle",
+   "Beyond the critical angle",
+   "Normal incidence"
+  ],
+  "answer": 1,
+  "explain": "Refraction angle r = 90° − θ_B, and tan r = 1/μ, the glass-to-air Brewster angle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3de8f120-f0ee-4389-b26e-3d26483679b4",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "To cut glare from a horizontal road surface, the polaroid's pass axis should be:",
+  "formula": "",
+  "options": [
+   "Horizontal",
+   "Parallel to the road's length",
+   "At 45° to the vertical",
+   "Vertical"
+  ],
+  "answer": 3,
+  "explain": "Reflected glare is horizontally polarised, so a vertical axis blocks it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fbd6d1b8-7ddb-42e6-b0c0-1c460fc8d3e7",
+  "subject": "Physics",
+  "chapter": "Wave Optics",
+  "topic": "Brewster's law & uses of polaroids",
+  "prompt": "A polaroid sheet produces plane-polarised light mainly through:",
+  "formula": "",
+  "options": [
+   "Selective absorption (dichroism)",
+   "Double refraction",
+   "Scattering",
+   "Diffraction"
+  ],
+  "answer": 0,
+  "explain": "Aligned long-chain molecules absorb E along their length and transmit the perpendicular component.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

@@ -78,7 +78,7 @@ function Catalogue() {
   const [q, setQ] = useState(remembered[memKey]?.q ?? "");
   const [query, setQuery] = useState(q);
   const [page, setPage] = useState(1);
-  remembered[memKey] = { subject, q: query };
+  useEffect(() => { remembered[memKey] = { subject, q }; }, [memKey, subject, q]);
   useEffect(() => {
     const t = setTimeout(() => { if (q.trim() !== query) { setPage(1); setQuery(q.trim()); } }, 300);
     return () => clearTimeout(t);
@@ -108,7 +108,7 @@ function Catalogue() {
           <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_card, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 }}>
             <Icon name="magnify" size={20} color={colors.muted} />
             <TextInput testID="catalogue-search-input" value={q} onChangeText={setQ} placeholder={kind === "chapters" ? "Find a chapter…" : own ? "Find a paper…" : "Find a mock test…"} placeholderTextColor={colors.muted} maxLength={100} style={[{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }, noOutline]} />
-            {q ? <Press testID="catalogue-clear-search" onPress={() => setQ("")} accessibilityLabel="Clear search"><Icon name="close-circle" size={18} color={colors.muted} /></Press> : null}
+            {q ? <Press testID="catalogue-clear-search" onPress={() => setQ("")} accessibilityLabel="Clear search" style={{ width: 44, height: 44, alignItems: "center", justifyContent: "center", marginRight: -space.md }}><Icon name="close-circle" size={18} color={colors.muted} /></Press> : null}
           </View>
         </View>
       ) : null}

@@ -1,1503 +1,3163 @@
 [
-  {
-    "id": "1e1b6ddd-0995-46b6-aa9b-dc44c02f27e1",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Average KE of one molecule of ideal gas",
-    "formula": "KE = (f/2)kT",
-    "options": [
-      "(3/2)kT for any gas",
-      "(f/2)kT where f=degrees of freedom",
-      "(f/2)RT",
-      "(3/2)RT"
-    ],
-    "answer": 1,
-    "explain": "Per molecule KE = (f/2)kT; per mole KE = (f/2)RT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b17edbb2-ad3c-4bbd-9ec6-0e1a2361043e",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Degrees of freedom for a diatomic molecule at room temperature",
-    "formula": "",
-    "options": [
-      "6",
-      "3",
-      "7",
-      "5"
-    ],
-    "answer": 3,
-    "explain": "Diatomic molecule has 3 translational + 2 rotational = 5 DOF at room temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fa21a37b-1743-42f8-a022-210a4e58a56b",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "RMS speed of gas molecules",
-    "formula": "v_rms = √(3RT/M)",
-    "options": [
-      "√(3RT/M)",
-      "√(8RT/πM)",
-      "√(2RT/M)",
-      "√(RT/M)"
-    ],
-    "answer": 0,
-    "explain": "v_rms = √(3RT/M); it is the square root of mean of squared speeds.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ed67121f-62ac-45c5-a846-a3eefbe431fe",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Most probable speed of gas molecules",
-    "formula": "v_p = √(2RT/M)",
-    "options": [
-      "√(RT/M)",
-      "√(2RT/M)",
-      "√(8RT/πM)",
-      "√(3RT/M)"
-    ],
-    "answer": 1,
-    "explain": "v_p = √(2RT/M); speed at peak of Maxwell distribution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "370cea3b-9cf6-4d41-8a14-56cf764adba0",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Mean (average) speed of gas molecules",
-    "formula": "v_avg = √(8RT/πM)",
-    "options": [
-      "√(RT/M)",
-      "√(2RT/M)",
-      "√(3RT/M)",
-      "√(8RT/πM)"
-    ],
-    "answer": 3,
-    "explain": "v_avg = √(8RT/πM) from Maxwell-Boltzmann distribution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "85698bde-83cd-4f8c-896a-1b853cf4f761",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Correct order of molecular speeds",
-    "formula": "v_p < v_avg < v_rms",
-    "options": [
-      "v_rms < v_avg < v_p",
-      "v_avg < v_p < v_rms",
-      "v_p < v_avg < v_rms",
-      "v_p < v_rms < v_avg"
-    ],
-    "answer": 2,
-    "explain": "v_p : v_avg : v_rms = √2 : √(8/π) : √3 ≈ 1 : 1.13 : 1.22.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ac2aff68-4a66-460a-af4d-bf8bcc01dbe4",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Pressure of ideal gas in terms of KE density",
-    "formula": "P = (2/3)(E/V)",
-    "options": [
-      "P = (3/2)(E/V)",
-      "P = (1/3)(E/V)",
-      "P = (2/3)(E/V)",
-      "P = E/V"
-    ],
-    "answer": 2,
-    "explain": "Pressure = (2/3) × kinetic energy per unit volume.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "decfebdb-0a3f-407d-a360-5758f671a5a5",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Internal energy of n moles of ideal gas",
-    "formula": "U = (f/2)nRT",
-    "options": [
-      "nRT",
-      "(3/2)nkT",
-      "(f/2)nRT",
-      "fRT"
-    ],
-    "answer": 2,
-    "explain": "U = (f/2)nRT; depends only on temperature for ideal gas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "072216ef-7c6d-4927-8a87-15671960b653",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Ratio γ = Cₚ/Cᵥ for monatomic ideal gas",
-    "formula": "γ = 5/3",
-    "options": [
-      "3/2",
-      "5/3",
-      "4/3",
-      "7/5"
-    ],
-    "answer": 1,
-    "explain": "Monatomic: f=3, Cᵥ=(3/2)R, Cₚ=(5/2)R, γ=5/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "48df302b-6893-4acc-8eaa-283e1a5e0096",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Ratio γ = Cₚ/Cᵥ for diatomic ideal gas (room temp)",
-    "formula": "γ = 7/5",
-    "options": [
-      "9/7",
-      "7/5",
-      "4/3",
-      "5/3"
-    ],
-    "answer": 1,
-    "explain": "Diatomic: f=5, Cᵥ=(5/2)R, Cₚ=(7/2)R, γ=7/5=1.4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "917c3458-5c21-480f-b807-40c25add3d17",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Mayer's relation between Cₚ and Cᵥ",
-    "formula": "Cₚ - Cᵥ = R",
-    "options": [
-      "Cₚ·Cᵥ = R²",
-      "Cₚ + Cᵥ = R",
-      "Cₚ - Cᵥ = R",
-      "Cₚ/Cᵥ = R"
-    ],
-    "answer": 2,
-    "explain": "Cₚ - Cᵥ = R for one mole of ideal gas (Mayer's relation).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ad8bf6f9-63b6-425f-9067-adb68d89038b",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Law of equipartition: energy per degree of freedom",
-    "formula": "E = (1/2)kT",
-    "options": [
-      "(1/2)kT",
-      "(3/2)kT",
-      "(1/2)RT",
-      "kT"
-    ],
-    "answer": 0,
-    "explain": "Each DOF contributes (1/2)kT to average energy of a molecule.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "232f9167-2292-45b5-b82d-91b6bd42005a",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Mean free path formula",
-    "formula": "λ = 1/(√2 πd²n)",
-    "options": [
-      "1/(πd²n)",
-      "1/(2πd²n)",
-      "d/(√2 πn)",
-      "1/(√2 πd²n)"
-    ],
-    "answer": 3,
-    "explain": "λ = 1/(√2 πd²n) where d=diameter, n=number density.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "da7226cd-23d9-4642-b556-841212ab650a",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Avogadro's number relates R and k as",
-    "formula": "R = Nₐk",
-    "options": [
-      "k = NₐR",
-      "R = k/Nₐ",
-      "Nₐ = Rk",
-      "R = Nₐk"
-    ],
-    "answer": 3,
-    "explain": "Boltzmann constant k = R/Nₐ, so R = Nₐ·k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "41ad2065-71c8-4f26-9d66-723856eb9595",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Degrees of freedom for monatomic gas",
-    "formula": "f = 3",
-    "options": [
-      "5",
-      "2",
-      "1",
-      "3"
-    ],
-    "answer": 3,
-    "explain": "Monatomic gas has only 3 translational degrees of freedom.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cec9df3b-52bd-4511-9acd-39d15e526a53",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Cᵥ for monatomic ideal gas (per mole)",
-    "formula": "Cᵥ = (3/2)R",
-    "options": [
-      "R",
-      "(5/2)R",
-      "(3/2)R",
-      "3R"
-    ],
-    "answer": 2,
-    "explain": "f=3 for monatomic, so Cᵥ = (f/2)R = (3/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a74ed9f1-de19-4a44-90b2-7db81c816340",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Total translational KE of n moles of any ideal gas",
-    "formula": "KE_trans = (3/2)nRT",
-    "options": [
-      "(1/2)nRT",
-      "(f/2)nRT",
-      "(3/2)nRT",
-      "nRT"
-    ],
-    "answer": 2,
-    "explain": "Translational KE is always (3/2)nRT regardless of atomicity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "844ae1a0-e77f-43d8-925b-c0ce36e16569",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At the same temperature, v_rms is ______ for heavier molecules",
-    "formula": "v_rms ∝ 1/√M",
-    "options": [
-      "Zero",
-      "Smaller",
-      "Greater",
-      "Same"
-    ],
-    "answer": 1,
-    "explain": "v_rms = √(3RT/M); heavier molecules (larger M) have smaller v_rms.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb496eb8-531e-4189-b0a0-74bad21ae3e7",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Graham's law: rate of diffusion ∝",
-    "formula": "r ∝ 1/√M",
-    "options": [
-      "1/√M",
-      "√M",
-      "1/M",
-      "M"
-    ],
-    "answer": 0,
-    "explain": "Graham's law: rate of diffusion inversely proportional to √(molecular mass).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "971a98e6-9354-4fcd-a26c-8dd775aa2ca5",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Pressure of ideal gas in terms of v_rms and density ρ",
-    "formula": "P = (1/3)ρv²_rms",
-    "options": [
-      "P = (1/2)ρv²_rms",
-      "P = (1/3)ρv²_rms",
-      "P = ρv²_rms",
-      "P = (2/3)ρv²_rms"
-    ],
-    "answer": 1,
-    "explain": "Derived from kinetic theory: P = (1/3)ρv²_rms.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4d83b230-9cda-47f1-9bcb-3b9efe7e6465",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At constant volume, pressure of ideal gas varies with T as",
-    "formula": "P ∝ T",
-    "options": [
-      "P ∝ T²",
-      "P ∝ 1/T",
-      "P ∝ T",
-      "P ∝ √T"
-    ],
-    "answer": 2,
-    "explain": "From ideal gas law PV=nRT, at constant V, P∝T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4f342f35-d121-4ec1-9529-6bc6fa57df02",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Cᵥ for diatomic ideal gas (per mole, room temp)?",
-    "formula": "Cᵥ = (5/2)R",
-    "options": [
-      "(7/2)R",
-      "2R",
-      "(5/2)R",
-      "(3/2)R"
-    ],
-    "answer": 2,
-    "explain": "Diatomic has f=5 at room temp, so Cᵥ = (5/2)R per mole.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef9d2fa1-bd7b-47e0-a9aa-a4d4b6bd9abc",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Cₚ for monatomic ideal gas (per mole)?",
-    "formula": "Cₚ = (5/2)R",
-    "options": [
-      "(7/2)R",
-      "3R",
-      "(3/2)R",
-      "(5/2)R"
-    ],
-    "answer": 3,
-    "explain": "Monatomic: Cᵥ=(3/2)R, Cₚ = Cᵥ+R = (5/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7fbc1436-b0fa-48a9-a916-0eecb8255e03",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Cₚ for diatomic ideal gas (per mole, room temp)?",
-    "formula": "Cₚ = (7/2)R",
-    "options": [
-      "(9/2)R",
-      "(7/2)R",
-      "3R",
-      "(5/2)R"
-    ],
-    "answer": 1,
-    "explain": "Diatomic: Cᵥ=(5/2)R, so Cₚ = Cᵥ+R = (7/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a76514ab-2417-4fea-9415-7a2b16fa45c4",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Degrees of freedom for nonlinear triatomic molecule (room temp)?",
-    "formula": "f = 6",
-    "options": [
-      "5",
-      "7",
-      "6",
-      "9"
-    ],
-    "answer": 2,
-    "explain": "Nonlinear triatomic: 3 translational + 3 rotational = 6 DOF.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d90a1a5c-9e33-4a4f-bc4c-0cc7303b8050",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Ratio vₘₚ : v̄ : vᵣₘₛ equals?",
-    "formula": "√(2RT/M) : √(8RT/πM) : √(3RT/M)",
-    "options": [
-      "1.13 : 1 : 1.22",
-      "1 : 1.22 : 1.13",
-      "1 : 1.13 : 1.22",
-      "1.22 : 1.13 : 1"
-    ],
-    "answer": 2,
-    "explain": "vₘₚ : v̄ : vᵣₘₛ = 1 : 1.128 : 1.225 (approx 1:1.13:1.22).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1c2b9d16-6bc5-48a4-a90c-cd8a47e88a1d",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At constant temperature, mean free path λ ∝ (pressure)?",
-    "formula": "λ ∝ 1/P",
-    "options": [
-      "λ independent of P",
-      "λ ∝ P",
-      "λ ∝ 1/P",
-      "λ ∝ P²"
-    ],
-    "answer": 2,
-    "explain": "λ = kT/(√2 π d² P); at const T, number density n ∝ P so λ ∝ 1/P.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8e0a367b-e233-438c-9c66-cf6d3549bb6d",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Internal energy of 1 mole of monatomic ideal gas at temperature T?",
-    "formula": "U = (3/2)RT",
-    "options": [
-      "3RT",
-      "(1/2)RT",
-      "(3/2)RT",
-      "(5/2)RT"
-    ],
-    "answer": 2,
-    "explain": "Monatomic f=3, so U per mole = (3/2)RT by equipartition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5216f887-366e-4ae1-a6c1-ddc191cbebf1",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "γ for nonlinear triatomic gas (f=6)?",
-    "formula": "γ = 1 + 2/f",
-    "options": [
-      "5/3",
-      "4/3",
-      "7/5",
-      "9/7"
-    ],
-    "answer": 1,
-    "explain": "γ = 1 + 2/f = 1 + 2/6 = 4/3 for nonlinear triatomic.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0e7369b3-714a-49ad-be13-e04acba22459",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which speed equals √(3kT/m) for a gas molecule?",
-    "formula": "",
-    "options": [
-      "Drift speed",
-      "Most probable speed",
-      "RMS speed",
-      "Mean speed"
-    ],
-    "answer": 2,
-    "explain": "v_rms = √(3kT/m) where m is mass of one molecule.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d4813067-aee7-4bff-a4ce-625fe0793fe2",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Kinetic energy per mole associated with each translational DOF?",
-    "formula": "(1/2)RT",
-    "options": [
-      "(1/2)RT",
-      "RT",
-      "kT",
-      "(1/2)kT"
-    ],
-    "answer": 0,
-    "explain": "Per mole, energy per DOF = (1/2)RT (since per molecule it is (1/2)kT).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6b8f6792-3a38-4c77-adab-3cf3e40c0a0b",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Mean free path λ is proportional to which power of molecular diameter d?",
-    "formula": "λ = 1/(√2 π d² n)",
-    "options": [
-      "d⁻¹",
-      "d⁻²",
-      "d²",
-      "d"
-    ],
-    "answer": 1,
-    "explain": "λ = 1/(√2 π d² n), so λ ∝ d⁻².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77b32dc7-91cc-4338-8a62-e5ac46e9a93c",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Pressure exerted by ideal gas is related to average translational KE (E) per unit volume as?",
-    "formula": "P = (2/3)E",
-    "options": [
-      "P = E",
-      "P = 3E/2",
-      "P = 2E/3",
-      "P = E/3"
-    ],
-    "answer": 2,
-    "explain": "P = (2/3)(KE per unit volume) = (2/3)E is the standard kinetic theory result.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1cc8cc86-e803-420c-977b-f90499cd290e",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Cᵥ for a gas with f degrees of freedom (per mole)?",
-    "formula": "Cᵥ = (f/2)R",
-    "options": [
-      "(f+1)R",
-      "fR",
-      "(f/2)R",
-      "(f+2)/2 · R"
-    ],
-    "answer": 2,
-    "explain": "By equipartition, internal energy U = (f/2)nRT → Cᵥ = (f/2)R per mole.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75769ec4-3f63-4640-baee-2ede4c90c6ea",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Translational degrees of freedom for ANY type of gas molecule?",
-    "formula": "",
-    "options": [
-      "3",
-      "1",
-      "depends on molecule",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "Every molecule (mono, di, poly) always has exactly 3 translational DOF.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "957fcba0-75a4-49db-8882-bc5f25b9e5c8",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "RMS speed of gas molecules varies with absolute temperature T as?",
-    "formula": "v_rms ∝ √T",
-    "options": [
-      "v_rms ∝ T²",
-      "v_rms ∝ T",
-      "v_rms ∝ √T",
-      "v_rms ∝ 1/√T"
-    ],
-    "answer": 2,
-    "explain": "v_rms = √(3RT/M), so at fixed M, v_rms ∝ √T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b5ad91e0-c4f2-4ccb-a2df-6e7d4965da0d",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Cᵥ for nonlinear triatomic gas (f=6) per mole?",
-    "formula": "Cᵥ = (f/2)R",
-    "options": [
-      "3.5R",
-      "4R",
-      "3R",
-      "2R"
-    ],
-    "answer": 2,
-    "explain": "f=6 for nonlinear triatomic; Cᵥ = (6/2)R = 3R per mole.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77494654-384f-4cce-a33f-137053e5d9fb",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Internal energy of n moles of diatomic gas (room temp) at T?",
-    "formula": "U = (5/2)nRT",
-    "options": [
-      "(5/2)nRT",
-      "(3/2)nRT",
-      "(7/2)nRT",
-      "3nRT"
-    ],
-    "answer": 0,
-    "explain": "Diatomic gas has f=5 at room temp, so U = (f/2)nRT = (5/2)nRT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f0d2791c-8f81-4b78-87df-597c1268c1c2",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Ratio of rms speeds of two gases at same T: v₁/v₂ =?",
-    "formula": "v_rms ∝ 1/√M",
-    "options": [
-      "√(M₂/M₁)",
-      "M₁/M₂",
-      "√(M₁/M₂)",
-      "M₂/M₁"
-    ],
-    "answer": 0,
-    "explain": "v_rms = √(3RT/M), so ratio v₁/v₂ = √(M₂/M₁).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c0562027-71ff-43c6-9027-a1e87ecb5998",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At same T, ratio of average KE of He to O₂ molecules?",
-    "formula": "KE = (3/2)kT",
-    "options": [
-      "4:1",
-      "8:1",
-      "1:1",
-      "1:8"
-    ],
-    "answer": 2,
-    "explain": "Average translational KE = (3/2)kT depends only on T, not mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ce8d4dbf-c9be-4fb3-898b-960015a3f268",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which expression gives mean free path λ in terms of n and d?",
-    "formula": "λ = 1/(√2 πd²n)",
-    "options": [
-      "1/(√2 πdn)",
-      "1/(2πd²n)",
-      "1/(πd²n)",
-      "1/(√2 πd²n)"
-    ],
-    "answer": 3,
-    "explain": "Standard kinetic theory result: λ = 1/(√2 πnd²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "db717519-7bea-4f0f-a83b-b4a01edd6a16",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Root mean square speed vᵣₘₛ compared to most probable speed vₘₚ?",
-    "formula": "vᵣₘₛ/vₘₚ = √(3/2)",
-    "options": [
-      "vᵣₘₛ = 2vₘₚ",
-      "vᵣₘₛ < vₘₚ",
-      "vᵣₘₛ > vₘₚ",
-      "vᵣₘₛ = vₘₚ"
-    ],
-    "answer": 2,
-    "explain": "vₘₚ=√(2RT/M), vᵣₘₛ=√(3RT/M); so vᵣₘₛ > vₘₚ always.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e9e45fa0-3aba-4fa9-b2e7-8d831b6bac2e",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Rotational degrees of freedom for a monatomic gas molecule?",
-    "formula": "",
-    "options": [
-      "3",
-      "2",
-      "1",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "Monatomic molecules are point masses; no rotational DOF considered.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "18e57d02-757d-423d-94f5-2a6e53c0166c",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Rotational degrees of freedom for a diatomic (rigid) molecule?",
-    "formula": "",
-    "options": [
-      "2",
-      "3",
-      "0",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "Linear diatomic has 2 rotational axes perpendicular to bond axis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1dd2a01d-1f5b-41ee-bc36-154b0b02d323",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Rotational degrees of freedom for a nonlinear triatomic molecule?",
-    "formula": "",
-    "options": [
-      "1",
-      "3",
-      "2",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "Nonlinear molecules can rotate about 3 independent axes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "576e8b9e-ba92-4e5c-9bd9-5aed17e50d2a",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Kinetic energy associated with each vibrational degree of freedom?",
-    "formula": "E_vib = kT (per molecule)",
-    "options": [
-      "(3/2)kT",
-      "(1/2)kT",
-      "2kT",
-      "kT"
-    ],
-    "answer": 3,
-    "explain": "Vibrational mode has KE + PE; each contributes (1/2)kT giving total kT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "215a9461-f653-4238-8b06-29910c032971",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Pressure P of ideal gas relates to number density n and T as?",
-    "formula": "P = nkT",
-    "options": [
-      "P = nT/k",
-      "P = nkT",
-      "P = nk/T",
-      "P = nRT"
-    ],
-    "answer": 1,
-    "explain": "n is number of molecules per unit volume; PV=NkT gives P = nkT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "43b788f1-e497-45de-ad32-42a97e6931ee",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which gas has highest rms speed at same temperature?",
-    "formula": "v_rms ∝ 1/√M",
-    "options": [
-      "N₂ (M=28)",
-      "He (M=4)",
-      "O₂ (M=32)",
-      "H₂ (M=2)"
-    ],
-    "answer": 3,
-    "explain": "v_rms ∝ 1/√M; lowest molar mass H₂ gives highest rms speed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ab30c211-0c85-41ba-bf2b-0e8f17c8414b",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At fixed T and V, if number of molecules doubled, pressure becomes?",
-    "formula": "P = nkT",
-    "options": [
-      "P/2",
-      "4P",
-      "2P",
-      "P"
-    ],
-    "answer": 2,
-    "explain": "P ∝ n at constant T, V; doubling molecules doubles pressure.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1a257c46-4f8a-4489-bdf3-14245016dc38",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Total degrees of freedom for a rigid diatomic molecule?",
-    "formula": "f = 5",
-    "options": [
-      "5",
-      "6",
-      "7",
-      "3"
-    ],
-    "answer": 0,
-    "explain": "Rigid diatomic: 3 translational + 2 rotational = 5 DOF at room temp.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7283c950-c662-4b27-8586-cac2eda1bbf5",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Average speed v̄ of gas molecule is related to T and M as?",
-    "formula": "v̄ = √(8RT/πM)",
-    "options": [
-      "v̄ ∝ √(M/T)",
-      "v̄ ∝ √(T/M)",
-      "v̄ ∝ T/√M",
-      "v̄ ∝ T/M"
-    ],
-    "answer": 1,
-    "explain": "v̄ = √(8RT/πM); proportional to √(T/M).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0d33f540-9645-4516-9c5a-ef4d95c53cd6",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Cᵥ for linear triatomic gas at room temperature (f=5) per mole?",
-    "formula": "Cᵥ = (5/2)R",
-    "options": [
-      "(3/2)R",
-      "3R",
-      "(7/2)R",
-      "(5/2)R"
-    ],
-    "answer": 3,
-    "explain": "Linear triatomic at room temp has f=5 (3 trans+2 rot); Cᵥ=(f/2)R=(5/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d88f7307-d7b4-4b66-9659-bda96a27b7a8",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which quantity has same value for all ideal gases at same temperature?",
-    "formula": "",
-    "options": [
-      "Average KE per molecule",
-      "Mean free path",
-      "Most probable speed",
-      "rms speed"
-    ],
-    "answer": 0,
-    "explain": "Average KE per molecule = (3/2)kT depends only on T, not on mass or type of gas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1c02d08a-ff63-4441-b531-347eba0ed10c",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "The number density n of an ideal gas at constant T is halved. Pressure becomes?",
-    "formula": "P = nkT",
-    "options": [
-      "Doubled",
-      "Halved",
-      "Same",
-      "One-fourth"
-    ],
-    "answer": 1,
-    "explain": "P = nkT; at constant T, P∝n. Halving n halves P.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4da10768-80b1-45e5-af05-77dba003fc45",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Ratio of Cₚ to Cᵥ for a gas with f degrees of freedom?",
-    "formula": "γ = 1 + 2/f",
-    "options": [
-      "(f+2)/f",
-      "(f+1)/f",
-      "2/(f+2)",
-      "f/(f+2)"
-    ],
-    "answer": 0,
-    "explain": "Cᵥ=fR/2, Cₚ=(f+2)R/2; so γ=Cₚ/Cᵥ=(f+2)/f = 1+2/f.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef3d9c77-afaf-4f4f-a3a0-ffc87a2a77e1",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At what condition does a real gas behave most like an ideal gas?",
-    "formula": "",
-    "options": [
-      "High P, low T",
-      "High P, high T",
-      "Low P, high T",
-      "Low P, low T"
-    ],
-    "answer": 2,
-    "explain": "At low pressure and high temperature, intermolecular forces and volume effects are negligible.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "82abf9cb-9c75-40d4-a670-ccf88a163ef5",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Internal energy of an ideal gas is independent of?",
-    "formula": "",
-    "options": [
-      "Temperature",
-      "Number of moles",
-      "Volume",
-      "Type of gas (f)"
-    ],
-    "answer": 2,
-    "explain": "For ideal gas, U depends only on T (and n, f), not on volume — no intermolecular PE.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f1c29ee3-384e-4b65-985f-b8d5a90e5aae",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which gas has the highest rms speed at a given temperature?",
-    "formula": "vᵣₘₛ ∝ 1/√M",
-    "options": [
-      "N₂ (M=28)",
-      "He (M=4)",
-      "O₂ (M=32)",
-      "H₂ (M=2)"
-    ],
-    "answer": 3,
-    "explain": "vᵣₘₛ = √(3RT/M); smallest molar mass M gives highest rms speed. H₂ has M=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6fb635ad-3b35-41a0-894f-e9da89f253dd",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "The Maxwell speed distribution curve peak shifts ______ as temperature increases.",
-    "formula": "",
-    "options": [
-      "Remains same",
-      "Left (lower speed)",
-      "Becomes narrower",
-      "Right (higher speed)"
-    ],
-    "answer": 3,
-    "explain": "Higher T increases most probable speed vₘₚ=√(2kT/m), shifting peak to higher speeds.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "db20c2f7-39eb-4f10-975e-728fd79d01d6",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Total KE of one mole of nonlinear triatomic gas (f=6) at temperature T?",
-    "formula": "U = 3RT",
-    "options": [
-      "(3/2)RT",
-      "3RT",
-      "(5/2)RT",
-      "(7/2)RT"
-    ],
-    "answer": 1,
-    "explain": "f=6 for nonlinear triatomic; U=(f/2)RT=(6/2)RT=3RT per mole.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d7a69d1-7481-4158-b41f-9107f5c227be",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which of these is NOT an assumption of kinetic theory of gases?",
-    "formula": "",
-    "options": [
-      "Molecular size ≪ intermolecular distance",
-      "Collisions are perfectly elastic",
-      "Intermolecular forces act at all times",
-      "Molecules move randomly"
-    ],
-    "answer": 2,
-    "explain": "Kinetic theory assumes intermolecular forces are negligible except during collisions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f393f283-5a61-4f6b-8daa-6e7f237a66f5",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At same temperature, ratio of average KE of monatomic gas to diatomic gas molecules?",
-    "formula": "",
-    "options": [
-      "3:7",
-      "5:3",
-      "1:1",
-      "3:5"
-    ],
-    "answer": 2,
-    "explain": "Average KE per molecule = (3/2)kT for ALL gases regardless of type — depends only on T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "af5ba247-07ba-4c46-b420-e15ae4de54c7",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Dalton's law: total pressure of gas mixture equals?",
-    "formula": "P = P₁ + P₂ + P₃ + ...",
-    "options": [
-      "Product of partial pressures",
-      "Ratio of partial pressures",
-      "Average of partial pressures",
-      "Sum of partial pressures"
-    ],
-    "answer": 3,
-    "explain": "Dalton's law: total pressure = sum of partial pressures of component gases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ecce34d-1bd3-43f7-aa23-aa0b1ff842a6",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Energy of one mole of gas associated with rotational motion of diatomic at room T?",
-    "formula": "U_rot = RT",
-    "options": [
-      "(1/2)RT",
-      "(3/2)RT",
-      "RT",
-      "2RT"
-    ],
-    "answer": 2,
-    "explain": "Diatomic has 2 rotational DOF; energy = 2×(1/2)RT = RT per mole by equipartition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c60dece8-33b6-4dff-be51-563cba639971",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At constant volume, if temperature of ideal gas is doubled, rms speed changes by factor?",
-    "formula": "vᵣₘₛ ∝ √T",
-    "options": [
-      "4",
-      "2",
-      "1/√2",
-      "√2"
-    ],
-    "answer": 3,
-    "explain": "vᵣₘₛ ∝ √T; doubling T multiplies vᵣₘₛ by √2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ff42e63f-104c-41f7-b967-9c9448037281",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Internal energy of ideal gas is a function of only?",
-    "formula": "U = f(T)",
-    "options": [
-      "Temperature alone",
-      "Volume alone",
-      "Temperature and volume",
-      "Pressure alone"
-    ],
-    "answer": 0,
-    "explain": "For ideal gas, U depends only on T; no intermolecular PE, so volume/pressure don't matter.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1c0d515d-f826-479d-ae4a-6e83f7084712",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At constant T and V, if mass of gas doubled (same gas), pressure?",
-    "formula": "P ∝ n",
-    "options": [
-      "Stays same",
-      "Doubles",
-      "Halves",
-      "Quadruples"
-    ],
-    "answer": 1,
-    "explain": "Doubling mass doubles number of molecules n; P = nkT/V so pressure doubles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dca215ee-6f74-482a-a233-be40c8769487",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which of these does NOT change the rms speed of gas molecules?",
-    "formula": "vᵣₘₛ = √(3RT/M)",
-    "options": [
-      "Changing temperature",
-      "Changing type of gas",
-      "Changing mass of molecules",
-      "Changing container volume at const T"
-    ],
-    "answer": 3,
-    "explain": "vᵣₘₛ depends on T and M only; volume change at constant T doesn't affect vᵣₘₛ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "235361e5-42be-41ee-bad7-c249092a907a",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "The ratio of translational KE to total KE for a diatomic gas (f=5) is?",
-    "formula": "KE_trans/KE_total = 3/5",
-    "options": [
-      "3/7",
-      "2/5",
-      "1/2",
-      "3/5"
-    ],
-    "answer": 3,
-    "explain": "3 translational DOF out of 5 total: ratio = 3/5 for diatomic gas at room temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cd600b0d-fe2b-4e63-a68f-d9078ba282bd",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Rotational KE of one mole of diatomic gas at temperature T?",
-    "formula": "KE_rot = RT",
-    "options": [
-      "(1/2)RT",
-      "2RT",
-      "RT",
-      "(3/2)RT"
-    ],
-    "answer": 2,
-    "explain": "2 rotational DOF × (1/2)RT each = RT total rotational energy per mole of diatomic gas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7b7b0f93-184a-4da0-a138-a60ea40d787f",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which molecules have zero rotational degrees of freedom?",
-    "formula": "",
-    "options": [
-      "Monatomic (e.g., He)",
-      "Linear triatomic (e.g., CO₂)",
-      "Nonlinear triatomic (e.g., H₂O)",
-      "Diatomic (e.g., O₂)"
-    ],
-    "answer": 0,
-    "explain": "Monatomic molecules are point masses; moment of inertia negligible, so 0 rotational DOF.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a678ea3d-2842-4681-9b03-63682096a22a",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "At same temperature, heavier gas molecules have ______ average KE than lighter ones.",
-    "formula": "",
-    "options": [
-      "Same",
-      "Cannot compare",
-      "Lesser",
-      "Greater"
-    ],
-    "answer": 0,
-    "explain": "Average KE per molecule = (3/2)kT depends only on T, not on molecular mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "57816600-d608-4165-9645-b833758f21e5",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which expression correctly gives pressure in terms of n, m, v_rms?",
-    "formula": "P = (1/3)nm·v²ᵣₘₛ",
-    "options": [
-      "P = (1/2)nmv²ᵣₘₛ",
-      "P = (1/3)nmv²ᵣₘₛ",
-      "P = (2/3)nmv²ᵣₘₛ",
-      "P = nmv²ᵣₘₛ"
-    ],
-    "answer": 1,
-    "explain": "Kinetic theory derivation gives P = (1/3)nmv²ᵣₘₛ where n = number density, m = mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a79f14b2-6d6b-45af-b9c7-b6a5775ce226",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Which gas at 300 K has the highest rms speed?",
-    "formula": "vᵣₘₛ ∝ 1/√M",
-    "options": [
-      "He (M=4)",
-      "O₂ (M=32)",
-      "N₂ (M=28)",
-      "H₂ (M=2)"
-    ],
-    "answer": 3,
-    "explain": "vᵣₘₛ = √(3RT/M); smallest molar mass M gives highest rms speed; H₂ has M=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b3d91af4-5861-426d-b877-1e7b080cb8d0",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Internal energy of n moles of nonlinear triatomic gas (f=6) at T?",
-    "formula": "U = 3nRT",
-    "options": [
-      "(7/2)nRT",
-      "(5/2)nRT",
-      "2nRT",
-      "3nRT"
-    ],
-    "answer": 3,
-    "explain": "U = (f/2)nRT = (6/2)nRT = 3nRT for nonlinear triatomic gas with f=6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7a3beb51-637d-491e-9f4f-c9d5b7cc5282",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Translational KE per molecule of any ideal gas at temp T?",
-    "formula": "(3/2)kT",
-    "options": [
-      "(1/2)kT",
-      "(3/2)kT",
-      "(5/2)kT",
-      "kT"
-    ],
-    "answer": 1,
-    "explain": "Each of 3 translational DOF contributes (1/2)kT; total = (3/2)kT for any ideal gas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70d3f205-6506-4c34-989c-317841495194",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Most probable speed vₘₚ of gas molecule equals?",
-    "formula": "vₘₚ = √(2RT/M)",
-    "options": [
-      "√(2RT/M)",
-      "√(8RT/πM)",
-      "√(RT/M)",
-      "√(3RT/M)"
-    ],
-    "answer": 0,
-    "explain": "vₘₚ = √(2RT/M); it is the speed at which Maxwell distribution peaks.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3ff2a517-be0c-45ab-8820-a3f841c6a7c5",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Ratio of Cₚ/Cᵥ (γ) for a monoatomic gas equals?",
-    "formula": "γ = (f+2)/f",
-    "options": [
-      "7/5",
-      "5/3",
-      "4/3",
-      "9/7"
-    ],
-    "answer": 1,
-    "explain": "Monatomic: f=3, γ=(3+2)/3 = 5/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "908bd8d7-2024-46d7-8aa1-35b95aa36a7c",
-    "subject": "Physics",
-    "chapter": "Kinetic Theory",
-    "topic": "Kinetic Theory",
-    "prompt": "Equipartition theorem: energy per DOF per molecule equals?",
-    "formula": "½kT",
-    "options": [
-      "kT",
-      "½k_BT²",
-      "½kT",
-      "³⁄₂kT"
-    ],
-    "answer": 2,
-    "explain": "Each degree of freedom contributes ½kT to average energy of a molecule (equipartition theorem).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "1e1b6ddd-0995-46b6-aa9b-dc44c02f27e1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Average KE of one molecule of ideal gas",
+  "formula": "KE = (f/2)kT",
+  "options": [
+   "(3/2)kT for any gas",
+   "(f/2)kT where f=degrees of freedom",
+   "(f/2)RT",
+   "(3/2)RT"
+  ],
+  "answer": 1,
+  "explain": "Per molecule KE = (f/2)kT; per mole KE = (f/2)RT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b17edbb2-ad3c-4bbd-9ec6-0e1a2361043e",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Degrees of freedom for a diatomic molecule at room temperature",
+  "formula": "",
+  "options": [
+   "6",
+   "3",
+   "7",
+   "5"
+  ],
+  "answer": 3,
+  "explain": "Diatomic molecule has 3 translational + 2 rotational = 5 DOF at room temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fa21a37b-1743-42f8-a022-210a4e58a56b",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "RMS speed of gas molecules",
+  "formula": "v_rms = √(3RT/M)",
+  "options": [
+   "√(3RT/M)",
+   "√(8RT/πM)",
+   "√(2RT/M)",
+   "√(RT/M)"
+  ],
+  "answer": 0,
+  "explain": "v_rms = √(3RT/M); it is the square root of mean of squared speeds.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ed67121f-62ac-45c5-a846-a3eefbe431fe",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Most probable speed of gas molecules",
+  "formula": "v_p = √(2RT/M)",
+  "options": [
+   "√(RT/M)",
+   "√(2RT/M)",
+   "√(8RT/πM)",
+   "√(3RT/M)"
+  ],
+  "answer": 1,
+  "explain": "v_p = √(2RT/M); speed at peak of Maxwell distribution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "370cea3b-9cf6-4d41-8a14-56cf764adba0",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Mean (average) speed of gas molecules",
+  "formula": "v_avg = √(8RT/πM)",
+  "options": [
+   "√(RT/M)",
+   "√(2RT/M)",
+   "√(3RT/M)",
+   "√(8RT/πM)"
+  ],
+  "answer": 3,
+  "explain": "v_avg = √(8RT/πM) from Maxwell-Boltzmann distribution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "85698bde-83cd-4f8c-896a-1b853cf4f761",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Correct order of molecular speeds",
+  "formula": "v_p < v_avg < v_rms",
+  "options": [
+   "v_rms < v_avg < v_p",
+   "v_avg < v_p < v_rms",
+   "v_p < v_avg < v_rms",
+   "v_p < v_rms < v_avg"
+  ],
+  "answer": 2,
+  "explain": "v_p : v_avg : v_rms = √2 : √(8/π) : √3 ≈ 1 : 1.13 : 1.22.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ac2aff68-4a66-460a-af4d-bf8bcc01dbe4",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Pressure of ideal gas in terms of KE density",
+  "formula": "P = (2/3)(E/V)",
+  "options": [
+   "P = (3/2)(E/V)",
+   "P = (1/3)(E/V)",
+   "P = (2/3)(E/V)",
+   "P = E/V"
+  ],
+  "answer": 2,
+  "explain": "Pressure = (2/3) × kinetic energy per unit volume.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "decfebdb-0a3f-407d-a360-5758f671a5a5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Internal energy of n moles of ideal gas",
+  "formula": "U = (f/2)nRT",
+  "options": [
+   "nRT",
+   "(3/2)nkT",
+   "(f/2)nRT",
+   "fRT"
+  ],
+  "answer": 2,
+  "explain": "U = (f/2)nRT; depends only on temperature for ideal gas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "072216ef-7c6d-4927-8a87-15671960b653",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Ratio γ = Cₚ/Cᵥ for monatomic ideal gas",
+  "formula": "γ = 5/3",
+  "options": [
+   "3/2",
+   "5/3",
+   "4/3",
+   "7/5"
+  ],
+  "answer": 1,
+  "explain": "Monatomic: f=3, Cᵥ=(3/2)R, Cₚ=(5/2)R, γ=5/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "48df302b-6893-4acc-8eaa-283e1a5e0096",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Ratio γ = Cₚ/Cᵥ for diatomic ideal gas (room temp)",
+  "formula": "γ = 7/5",
+  "options": [
+   "9/7",
+   "7/5",
+   "4/3",
+   "5/3"
+  ],
+  "answer": 1,
+  "explain": "Diatomic: f=5, Cᵥ=(5/2)R, Cₚ=(7/2)R, γ=7/5=1.4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "917c3458-5c21-480f-b807-40c25add3d17",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Mayer's relation between Cₚ and Cᵥ",
+  "formula": "Cₚ - Cᵥ = R",
+  "options": [
+   "Cₚ·Cᵥ = R²",
+   "Cₚ + Cᵥ = R",
+   "Cₚ - Cᵥ = R",
+   "Cₚ/Cᵥ = R"
+  ],
+  "answer": 2,
+  "explain": "Cₚ - Cᵥ = R for one mole of ideal gas (Mayer's relation).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ad8bf6f9-63b6-425f-9067-adb68d89038b",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Law of equipartition: energy per degree of freedom",
+  "formula": "E = (1/2)kT",
+  "options": [
+   "(1/2)kT",
+   "(3/2)kT",
+   "(1/2)RT",
+   "kT"
+  ],
+  "answer": 0,
+  "explain": "Each DOF contributes (1/2)kT to average energy of a molecule.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "232f9167-2292-45b5-b82d-91b6bd42005a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "Mean free path formula",
+  "formula": "λ = 1/(√2 πd²n)",
+  "options": [
+   "1/(πd²n)",
+   "1/(2πd²n)",
+   "d/(√2 πn)",
+   "1/(√2 πd²n)"
+  ],
+  "answer": 3,
+  "explain": "λ = 1/(√2 πd²n) where d=diameter, n=number density.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "da7226cd-23d9-4642-b556-841212ab650a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Avogadro's number and mole concept",
+  "prompt": "Avogadro's number relates R and k as",
+  "formula": "R = Nₐk",
+  "options": [
+   "k = NₐR",
+   "R = k/Nₐ",
+   "Nₐ = Rk",
+   "R = Nₐk"
+  ],
+  "answer": 3,
+  "explain": "Boltzmann constant k = R/Nₐ, so R = Nₐ·k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "41ad2065-71c8-4f26-9d66-723856eb9595",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Degrees of freedom for monatomic gas",
+  "formula": "f = 3",
+  "options": [
+   "5",
+   "2",
+   "1",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "Monatomic gas has only 3 translational degrees of freedom.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cec9df3b-52bd-4511-9acd-39d15e526a53",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Cᵥ for monatomic ideal gas (per mole)",
+  "formula": "Cᵥ = (3/2)R",
+  "options": [
+   "R",
+   "(5/2)R",
+   "(3/2)R",
+   "3R"
+  ],
+  "answer": 2,
+  "explain": "f=3 for monatomic, so Cᵥ = (f/2)R = (3/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a74ed9f1-de19-4a44-90b2-7db81c816340",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Total translational KE of n moles of any ideal gas",
+  "formula": "KE_trans = (3/2)nRT",
+  "options": [
+   "(1/2)nRT",
+   "(f/2)nRT",
+   "(3/2)nRT",
+   "nRT"
+  ],
+  "answer": 2,
+  "explain": "Translational KE is always (3/2)nRT regardless of atomicity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "844ae1a0-e77f-43d8-925b-c0ce36e16569",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "At the same temperature, v_rms is ______ for heavier molecules",
+  "formula": "v_rms ∝ 1/√M",
+  "options": [
+   "Zero",
+   "Smaller",
+   "Greater",
+   "Same"
+  ],
+  "answer": 1,
+  "explain": "v_rms = √(3RT/M); heavier molecules (larger M) have smaller v_rms.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb496eb8-531e-4189-b0a0-74bad21ae3e7",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Graham's law: rate of diffusion ∝",
+  "formula": "r ∝ 1/√M",
+  "options": [
+   "1/√M",
+   "√M",
+   "1/M",
+   "M"
+  ],
+  "answer": 0,
+  "explain": "Graham's law: rate of diffusion inversely proportional to √(molecular mass).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "971a98e6-9354-4fcd-a26c-8dd775aa2ca5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Pressure of ideal gas in terms of v_rms and density ρ",
+  "formula": "P = (1/3)ρv²_rms",
+  "options": [
+   "P = (1/2)ρv²_rms",
+   "P = (1/3)ρv²_rms",
+   "P = ρv²_rms",
+   "P = (2/3)ρv²_rms"
+  ],
+  "answer": 1,
+  "explain": "Derived from kinetic theory: P = (1/3)ρv²_rms.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4d83b230-9cda-47f1-9bcb-3b9efe7e6465",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "At constant volume, pressure of ideal gas varies with T as",
+  "formula": "P ∝ T",
+  "options": [
+   "P ∝ T²",
+   "P ∝ 1/T",
+   "P ∝ T",
+   "P ∝ √T"
+  ],
+  "answer": 2,
+  "explain": "From ideal gas law PV=nRT, at constant V, P∝T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4f342f35-d121-4ec1-9529-6bc6fa57df02",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Cᵥ for diatomic ideal gas (per mole, room temp)?",
+  "formula": "Cᵥ = (5/2)R",
+  "options": [
+   "(7/2)R",
+   "2R",
+   "(5/2)R",
+   "(3/2)R"
+  ],
+  "answer": 2,
+  "explain": "Diatomic has f=5 at room temp, so Cᵥ = (5/2)R per mole.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef9d2fa1-bd7b-47e0-a9aa-a4d4b6bd9abc",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Cₚ for monatomic ideal gas (per mole)?",
+  "formula": "Cₚ = (5/2)R",
+  "options": [
+   "(7/2)R",
+   "3R",
+   "(3/2)R",
+   "(5/2)R"
+  ],
+  "answer": 3,
+  "explain": "Monatomic: Cᵥ=(3/2)R, Cₚ = Cᵥ+R = (5/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7fbc1436-b0fa-48a9-a916-0eecb8255e03",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Cₚ for diatomic ideal gas (per mole, room temp)?",
+  "formula": "Cₚ = (7/2)R",
+  "options": [
+   "(9/2)R",
+   "(7/2)R",
+   "3R",
+   "(5/2)R"
+  ],
+  "answer": 1,
+  "explain": "Diatomic: Cᵥ=(5/2)R, so Cₚ = Cᵥ+R = (7/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a76514ab-2417-4fea-9415-7a2b16fa45c4",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Degrees of freedom for nonlinear triatomic molecule (room temp)?",
+  "formula": "f = 6",
+  "options": [
+   "5",
+   "7",
+   "6",
+   "9"
+  ],
+  "answer": 2,
+  "explain": "Nonlinear triatomic: 3 translational + 3 rotational = 6 DOF.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d90a1a5c-9e33-4a4f-bc4c-0cc7303b8050",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Ratio vₘₚ : v̄ : vᵣₘₛ equals?",
+  "formula": "√(2RT/M) : √(8RT/πM) : √(3RT/M)",
+  "options": [
+   "1.13 : 1 : 1.22",
+   "1 : 1.22 : 1.13",
+   "1 : 1.13 : 1.22",
+   "1.22 : 1.13 : 1"
+  ],
+  "answer": 2,
+  "explain": "vₘₚ : v̄ : vᵣₘₛ = 1 : 1.128 : 1.225 (approx 1:1.13:1.22).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1c2b9d16-6bc5-48a4-a90c-cd8a47e88a1d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "At constant temperature, mean free path λ ∝ (pressure)?",
+  "formula": "λ ∝ 1/P",
+  "options": [
+   "λ independent of P",
+   "λ ∝ P",
+   "λ ∝ 1/P",
+   "λ ∝ P²"
+  ],
+  "answer": 2,
+  "explain": "λ = kT/(√2 π d² P); at const T, number density n ∝ P so λ ∝ 1/P.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8e0a367b-e233-438c-9c66-cf6d3549bb6d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Internal energy of 1 mole of monatomic ideal gas at temperature T?",
+  "formula": "U = (3/2)RT",
+  "options": [
+   "3RT",
+   "(1/2)RT",
+   "(3/2)RT",
+   "(5/2)RT"
+  ],
+  "answer": 2,
+  "explain": "Monatomic f=3, so U per mole = (3/2)RT by equipartition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5216f887-366e-4ae1-a6c1-ddc191cbebf1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "γ for nonlinear triatomic gas (f=6)?",
+  "formula": "γ = 1 + 2/f",
+  "options": [
+   "5/3",
+   "4/3",
+   "7/5",
+   "9/7"
+  ],
+  "answer": 1,
+  "explain": "γ = 1 + 2/f = 1 + 2/6 = 4/3 for nonlinear triatomic.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0e7369b3-714a-49ad-be13-e04acba22459",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Which speed equals √(3kT/m) for a gas molecule?",
+  "formula": "",
+  "options": [
+   "Drift speed",
+   "Most probable speed",
+   "RMS speed",
+   "Mean speed"
+  ],
+  "answer": 2,
+  "explain": "v_rms = √(3kT/m) where m is mass of one molecule.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d4813067-aee7-4bff-a4ce-625fe0793fe2",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Kinetic energy per mole associated with each translational DOF?",
+  "formula": "(1/2)RT",
+  "options": [
+   "(1/2)RT",
+   "RT",
+   "kT",
+   "(1/2)kT"
+  ],
+  "answer": 0,
+  "explain": "Per mole, energy per DOF = (1/2)RT (since per molecule it is (1/2)kT).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6b8f6792-3a38-4c77-adab-3cf3e40c0a0b",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "Mean free path λ is proportional to which power of molecular diameter d?",
+  "formula": "λ = 1/(√2 π d² n)",
+  "options": [
+   "d⁻¹",
+   "d⁻²",
+   "d²",
+   "d"
+  ],
+  "answer": 1,
+  "explain": "λ = 1/(√2 π d² n), so λ ∝ d⁻².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77b32dc7-91cc-4338-8a62-e5ac46e9a93c",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Pressure exerted by ideal gas is related to average translational KE (E) per unit volume as?",
+  "formula": "P = (2/3)E",
+  "options": [
+   "P = E",
+   "P = 3E/2",
+   "P = 2E/3",
+   "P = E/3"
+  ],
+  "answer": 2,
+  "explain": "P = (2/3)(KE per unit volume) = (2/3)E is the standard kinetic theory result.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1cc8cc86-e803-420c-977b-f90499cd290e",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Cᵥ for a gas with f degrees of freedom (per mole)?",
+  "formula": "Cᵥ = (f/2)R",
+  "options": [
+   "(f+1)R",
+   "fR",
+   "(f/2)R",
+   "(f+2)/2 · R"
+  ],
+  "answer": 2,
+  "explain": "By equipartition, internal energy U = (f/2)nRT → Cᵥ = (f/2)R per mole.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75769ec4-3f63-4640-baee-2ede4c90c6ea",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Translational degrees of freedom for ANY type of gas molecule?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "depends on molecule",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Every molecule (mono, di, poly) always has exactly 3 translational DOF.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "957fcba0-75a4-49db-8882-bc5f25b9e5c8",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "RMS speed of gas molecules varies with absolute temperature T as?",
+  "formula": "v_rms ∝ √T",
+  "options": [
+   "v_rms ∝ T²",
+   "v_rms ∝ T",
+   "v_rms ∝ √T",
+   "v_rms ∝ 1/√T"
+  ],
+  "answer": 2,
+  "explain": "v_rms = √(3RT/M), so at fixed M, v_rms ∝ √T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b5ad91e0-c4f2-4ccb-a2df-6e7d4965da0d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Cᵥ for nonlinear triatomic gas (f=6) per mole?",
+  "formula": "Cᵥ = (f/2)R",
+  "options": [
+   "3.5R",
+   "4R",
+   "3R",
+   "2R"
+  ],
+  "answer": 2,
+  "explain": "f=6 for nonlinear triatomic; Cᵥ = (6/2)R = 3R per mole.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77494654-384f-4cce-a33f-137053e5d9fb",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Internal energy of n moles of diatomic gas (room temp) at T?",
+  "formula": "U = (5/2)nRT",
+  "options": [
+   "(5/2)nRT",
+   "(3/2)nRT",
+   "(7/2)nRT",
+   "3nRT"
+  ],
+  "answer": 0,
+  "explain": "Diatomic gas has f=5 at room temp, so U = (f/2)nRT = (5/2)nRT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f0d2791c-8f81-4b78-87df-597c1268c1c2",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Ratio of rms speeds of two gases at same T: v₁/v₂ =?",
+  "formula": "v_rms ∝ 1/√M",
+  "options": [
+   "√(M₂/M₁)",
+   "M₁/M₂",
+   "√(M₁/M₂)",
+   "M₂/M₁"
+  ],
+  "answer": 0,
+  "explain": "v_rms = √(3RT/M), so ratio v₁/v₂ = √(M₂/M₁).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c0562027-71ff-43c6-9027-a1e87ecb5998",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "At same T, ratio of average KE of He to O₂ molecules?",
+  "formula": "KE = (3/2)kT",
+  "options": [
+   "4:1",
+   "8:1",
+   "1:1",
+   "1:8"
+  ],
+  "answer": 2,
+  "explain": "Average translational KE = (3/2)kT depends only on T, not mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ce8d4dbf-c9be-4fb3-898b-960015a3f268",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "Which expression gives mean free path λ in terms of n and d?",
+  "formula": "λ = 1/(√2 πd²n)",
+  "options": [
+   "1/(√2 πdn)",
+   "1/(2πd²n)",
+   "1/(πd²n)",
+   "1/(√2 πd²n)"
+  ],
+  "answer": 3,
+  "explain": "Standard kinetic theory result: λ = 1/(√2 πnd²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "db717519-7bea-4f0f-a83b-b4a01edd6a16",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Root mean square speed vᵣₘₛ compared to most probable speed vₘₚ?",
+  "formula": "vᵣₘₛ/vₘₚ = √(3/2)",
+  "options": [
+   "vᵣₘₛ = 2vₘₚ",
+   "vᵣₘₛ < vₘₚ",
+   "vᵣₘₛ > vₘₚ",
+   "vᵣₘₛ = vₘₚ"
+  ],
+  "answer": 2,
+  "explain": "vₘₚ=√(2RT/M), vᵣₘₛ=√(3RT/M); so vᵣₘₛ > vₘₚ always.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e9e45fa0-3aba-4fa9-b2e7-8d831b6bac2e",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Rotational degrees of freedom for a monatomic gas molecule?",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "Monatomic molecules are point masses; no rotational DOF considered.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "18e57d02-757d-423d-94f5-2a6e53c0166c",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Rotational degrees of freedom for a diatomic (rigid) molecule?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "0",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Linear diatomic has 2 rotational axes perpendicular to bond axis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1dd2a01d-1f5b-41ee-bc36-154b0b02d323",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Rotational degrees of freedom for a nonlinear triatomic molecule?",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "2",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Nonlinear molecules can rotate about 3 independent axes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "576e8b9e-ba92-4e5c-9bd9-5aed17e50d2a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Kinetic energy associated with each vibrational degree of freedom?",
+  "formula": "E_vib = kT (per molecule)",
+  "options": [
+   "(3/2)kT",
+   "(1/2)kT",
+   "2kT",
+   "kT"
+  ],
+  "answer": 3,
+  "explain": "Vibrational mode has KE + PE; each contributes (1/2)kT giving total kT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "215a9461-f653-4238-8b06-29910c032971",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "Pressure P of ideal gas relates to number density n and T as?",
+  "formula": "P = nkT",
+  "options": [
+   "P = nT/k",
+   "P = nkT",
+   "P = nk/T",
+   "P = nRT"
+  ],
+  "answer": 1,
+  "explain": "n is number of molecules per unit volume; PV=NkT gives P = nkT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "43b788f1-e497-45de-ad32-42a97e6931ee",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Which gas has highest rms speed at same temperature?",
+  "formula": "v_rms ∝ 1/√M",
+  "options": [
+   "N₂ (M=28)",
+   "He (M=4)",
+   "O₂ (M=32)",
+   "H₂ (M=2)"
+  ],
+  "answer": 3,
+  "explain": "v_rms ∝ 1/√M; lowest molar mass H₂ gives highest rms speed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ab30c211-0c85-41ba-bf2b-0e8f17c8414b",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "At fixed T and V, if number of molecules doubled, pressure becomes?",
+  "formula": "P = nkT",
+  "options": [
+   "P/2",
+   "4P",
+   "2P",
+   "P"
+  ],
+  "answer": 2,
+  "explain": "P ∝ n at constant T, V; doubling molecules doubles pressure.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1a257c46-4f8a-4489-bdf3-14245016dc38",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Total degrees of freedom for a rigid diatomic molecule?",
+  "formula": "f = 5",
+  "options": [
+   "5",
+   "6",
+   "7",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "Rigid diatomic: 3 translational + 2 rotational = 5 DOF at room temp.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7283c950-c662-4b27-8586-cac2eda1bbf5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Average speed v̄ of gas molecule is related to T and M as?",
+  "formula": "v̄ = √(8RT/πM)",
+  "options": [
+   "v̄ ∝ √(M/T)",
+   "v̄ ∝ √(T/M)",
+   "v̄ ∝ T/√M",
+   "v̄ ∝ T/M"
+  ],
+  "answer": 1,
+  "explain": "v̄ = √(8RT/πM); proportional to √(T/M).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0d33f540-9645-4516-9c5a-ef4d95c53cd6",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Cᵥ for linear triatomic gas at room temperature (f=5) per mole?",
+  "formula": "Cᵥ = (5/2)R",
+  "options": [
+   "(3/2)R",
+   "3R",
+   "(7/2)R",
+   "(5/2)R"
+  ],
+  "answer": 3,
+  "explain": "Linear triatomic at room temp has f=5 (3 trans+2 rot); Cᵥ=(f/2)R=(5/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d88f7307-d7b4-4b66-9659-bda96a27b7a8",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "Which quantity has same value for all ideal gases at same temperature?",
+  "formula": "",
+  "options": [
+   "Average KE per molecule",
+   "Mean free path",
+   "Most probable speed",
+   "rms speed"
+  ],
+  "answer": 0,
+  "explain": "Average KE per molecule = (3/2)kT depends only on T, not on mass or type of gas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1c02d08a-ff63-4441-b531-347eba0ed10c",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "The number density n of an ideal gas at constant T is halved. Pressure becomes?",
+  "formula": "P = nkT",
+  "options": [
+   "Doubled",
+   "Halved",
+   "Same",
+   "One-fourth"
+  ],
+  "answer": 1,
+  "explain": "P = nkT; at constant T, P∝n. Halving n halves P.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4da10768-80b1-45e5-af05-77dba003fc45",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Ratio of Cₚ to Cᵥ for a gas with f degrees of freedom?",
+  "formula": "γ = 1 + 2/f",
+  "options": [
+   "(f+2)/f",
+   "(f+1)/f",
+   "2/(f+2)",
+   "f/(f+2)"
+  ],
+  "answer": 0,
+  "explain": "Cᵥ=fR/2, Cₚ=(f+2)R/2; so γ=Cₚ/Cᵥ=(f+2)/f = 1+2/f.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef3d9c77-afaf-4f4f-a3a0-ffc87a2a77e1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "At what condition does a real gas behave most like an ideal gas?",
+  "formula": "",
+  "options": [
+   "High P, low T",
+   "High P, high T",
+   "Low P, high T",
+   "Low P, low T"
+  ],
+  "answer": 2,
+  "explain": "At low pressure and high temperature, intermolecular forces and volume effects are negligible.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "82abf9cb-9c75-40d4-a670-ccf88a163ef5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "Internal energy of an ideal gas is independent of?",
+  "formula": "",
+  "options": [
+   "Temperature",
+   "Number of moles",
+   "Volume",
+   "Type of gas (f)"
+  ],
+  "answer": 2,
+  "explain": "For ideal gas, U depends only on T (and n, f), not on volume — no intermolecular PE.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f1c29ee3-384e-4b65-985f-b8d5a90e5aae",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Which gas has the highest rms speed at a given temperature?",
+  "formula": "vᵣₘₛ ∝ 1/√M",
+  "options": [
+   "N₂ (M=28)",
+   "He (M=4)",
+   "O₂ (M=32)",
+   "H₂ (M=2)"
+  ],
+  "answer": 3,
+  "explain": "vᵣₘₛ = √(3RT/M); smallest molar mass M gives highest rms speed. H₂ has M=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6fb635ad-3b35-41a0-894f-e9da89f253dd",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "The Maxwell speed distribution curve peak shifts ______ as temperature increases.",
+  "formula": "",
+  "options": [
+   "Remains same",
+   "Left (lower speed)",
+   "Becomes narrower",
+   "Right (higher speed)"
+  ],
+  "answer": 3,
+  "explain": "Higher T increases most probable speed vₘₚ=√(2kT/m), shifting peak to higher speeds.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "db20c2f7-39eb-4f10-975e-728fd79d01d6",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Total KE of one mole of nonlinear triatomic gas (f=6) at temperature T?",
+  "formula": "U = 3RT",
+  "options": [
+   "(3/2)RT",
+   "3RT",
+   "(5/2)RT",
+   "(7/2)RT"
+  ],
+  "answer": 1,
+  "explain": "f=6 for nonlinear triatomic; U=(f/2)RT=(6/2)RT=3RT per mole.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d7a69d1-7481-4158-b41f-9107f5c227be",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "Which of these is NOT an assumption of kinetic theory of gases?",
+  "formula": "",
+  "options": [
+   "Molecular size ≪ intermolecular distance",
+   "Collisions are perfectly elastic",
+   "Intermolecular forces act at all times",
+   "Molecules move randomly"
+  ],
+  "answer": 2,
+  "explain": "Kinetic theory assumes intermolecular forces are negligible except during collisions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f393f283-5a61-4f6b-8daa-6e7f237a66f5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "At same temperature, ratio of average KE of monatomic gas to diatomic gas molecules?",
+  "formula": "",
+  "options": [
+   "3:7",
+   "5:3",
+   "1:1",
+   "3:5"
+  ],
+  "answer": 2,
+  "explain": "Average KE per molecule = (3/2)kT for ALL gases regardless of type — depends only on T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "af5ba247-07ba-4c46-b420-e15ae4de54c7",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "Dalton's law: total pressure of gas mixture equals?",
+  "formula": "P = P₁ + P₂ + P₃ + ...",
+  "options": [
+   "Product of partial pressures",
+   "Ratio of partial pressures",
+   "Average of partial pressures",
+   "Sum of partial pressures"
+  ],
+  "answer": 3,
+  "explain": "Dalton's law: total pressure = sum of partial pressures of component gases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ecce34d-1bd3-43f7-aa23-aa0b1ff842a6",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Energy of one mole of gas associated with rotational motion of diatomic at room T?",
+  "formula": "U_rot = RT",
+  "options": [
+   "(1/2)RT",
+   "(3/2)RT",
+   "RT",
+   "2RT"
+  ],
+  "answer": 2,
+  "explain": "Diatomic has 2 rotational DOF; energy = 2×(1/2)RT = RT per mole by equipartition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c60dece8-33b6-4dff-be51-563cba639971",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "At constant volume, if temperature of ideal gas is doubled, rms speed changes by factor?",
+  "formula": "vᵣₘₛ ∝ √T",
+  "options": [
+   "4",
+   "2",
+   "1/√2",
+   "√2"
+  ],
+  "answer": 3,
+  "explain": "vᵣₘₛ ∝ √T; doubling T multiplies vᵣₘₛ by √2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ff42e63f-104c-41f7-b967-9c9448037281",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "Internal energy of ideal gas is a function of only?",
+  "formula": "U = f(T)",
+  "options": [
+   "Temperature alone",
+   "Volume alone",
+   "Temperature and volume",
+   "Pressure alone"
+  ],
+  "answer": 0,
+  "explain": "For ideal gas, U depends only on T; no intermolecular PE, so volume/pressure don't matter.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1c0d515d-f826-479d-ae4a-6e83f7084712",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "At constant T and V, if mass of gas doubled (same gas), pressure?",
+  "formula": "P ∝ n",
+  "options": [
+   "Stays same",
+   "Doubles",
+   "Halves",
+   "Quadruples"
+  ],
+  "answer": 1,
+  "explain": "Doubling mass doubles number of molecules n; P = nkT/V so pressure doubles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dca215ee-6f74-482a-a233-be40c8769487",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Which of these does NOT change the rms speed of gas molecules?",
+  "formula": "vᵣₘₛ = √(3RT/M)",
+  "options": [
+   "Changing temperature",
+   "Changing type of gas",
+   "Changing mass of molecules",
+   "Changing container volume at const T"
+  ],
+  "answer": 3,
+  "explain": "vᵣₘₛ depends on T and M only; volume change at constant T doesn't affect vᵣₘₛ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "235361e5-42be-41ee-bad7-c249092a907a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "The ratio of translational KE to total KE for a diatomic gas (f=5) is?",
+  "formula": "KE_trans/KE_total = 3/5",
+  "options": [
+   "3/7",
+   "2/5",
+   "1/2",
+   "3/5"
+  ],
+  "answer": 3,
+  "explain": "3 translational DOF out of 5 total: ratio = 3/5 for diatomic gas at room temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cd600b0d-fe2b-4e63-a68f-d9078ba282bd",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Rotational KE of one mole of diatomic gas at temperature T?",
+  "formula": "KE_rot = RT",
+  "options": [
+   "(1/2)RT",
+   "2RT",
+   "RT",
+   "(3/2)RT"
+  ],
+  "answer": 2,
+  "explain": "2 rotational DOF × (1/2)RT each = RT total rotational energy per mole of diatomic gas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7b7b0f93-184a-4da0-a138-a60ea40d787f",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Which molecules have zero rotational degrees of freedom?",
+  "formula": "",
+  "options": [
+   "Monatomic (e.g., He)",
+   "Linear triatomic (e.g., CO₂)",
+   "Nonlinear triatomic (e.g., H₂O)",
+   "Diatomic (e.g., O₂)"
+  ],
+  "answer": 0,
+  "explain": "Monatomic molecules are point masses; moment of inertia negligible, so 0 rotational DOF.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a678ea3d-2842-4681-9b03-63682096a22a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "At same temperature, heavier gas molecules have ______ average KE than lighter ones.",
+  "formula": "",
+  "options": [
+   "Same",
+   "Cannot compare",
+   "Lesser",
+   "Greater"
+  ],
+  "answer": 0,
+  "explain": "Average KE per molecule = (3/2)kT depends only on T, not on molecular mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "57816600-d608-4165-9645-b833758f21e5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Which expression correctly gives pressure in terms of n, m, v_rms?",
+  "formula": "P = (1/3)nm·v²ᵣₘₛ",
+  "options": [
+   "P = (1/2)nmv²ᵣₘₛ",
+   "P = (1/3)nmv²ᵣₘₛ",
+   "P = (2/3)nmv²ᵣₘₛ",
+   "P = nmv²ᵣₘₛ"
+  ],
+  "answer": 1,
+  "explain": "Kinetic theory derivation gives P = (1/3)nmv²ᵣₘₛ where n = number density, m = mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a79f14b2-6d6b-45af-b9c7-b6a5775ce226",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Which gas at 300 K has the highest rms speed?",
+  "formula": "vᵣₘₛ ∝ 1/√M",
+  "options": [
+   "He (M=4)",
+   "O₂ (M=32)",
+   "N₂ (M=28)",
+   "H₂ (M=2)"
+  ],
+  "answer": 3,
+  "explain": "vᵣₘₛ = √(3RT/M); smallest molar mass M gives highest rms speed; H₂ has M=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b3d91af4-5861-426d-b877-1e7b080cb8d0",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Internal energy of n moles of nonlinear triatomic gas (f=6) at T?",
+  "formula": "U = 3nRT",
+  "options": [
+   "(7/2)nRT",
+   "(5/2)nRT",
+   "2nRT",
+   "3nRT"
+  ],
+  "answer": 3,
+  "explain": "U = (f/2)nRT = (6/2)nRT = 3nRT for nonlinear triatomic gas with f=6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7a3beb51-637d-491e-9f4f-c9d5b7cc5282",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "Translational KE per molecule of any ideal gas at temp T?",
+  "formula": "(3/2)kT",
+  "options": [
+   "(1/2)kT",
+   "(3/2)kT",
+   "(5/2)kT",
+   "kT"
+  ],
+  "answer": 1,
+  "explain": "Each of 3 translational DOF contributes (1/2)kT; total = (3/2)kT for any ideal gas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70d3f205-6506-4c34-989c-317841495194",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "Most probable speed vₘₚ of gas molecule equals?",
+  "formula": "vₘₚ = √(2RT/M)",
+  "options": [
+   "√(2RT/M)",
+   "√(8RT/πM)",
+   "√(RT/M)",
+   "√(3RT/M)"
+  ],
+  "answer": 0,
+  "explain": "vₘₚ = √(2RT/M); it is the speed at which Maxwell distribution peaks.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3ff2a517-be0c-45ab-8820-a3f841c6a7c5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Ratio of Cₚ/Cᵥ (γ) for a monoatomic gas equals?",
+  "formula": "γ = (f+2)/f",
+  "options": [
+   "7/5",
+   "5/3",
+   "4/3",
+   "9/7"
+  ],
+  "answer": 1,
+  "explain": "Monatomic: f=3, γ=(3+2)/3 = 5/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "908bd8d7-2024-46d7-8aa1-35b95aa36a7c",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Equipartition theorem: energy per DOF per molecule equals?",
+  "formula": "½kT",
+  "options": [
+   "kT",
+   "½k_BT²",
+   "½kT",
+   "³⁄₂kT"
+  ],
+  "answer": 2,
+  "explain": "Each degree of freedom contributes ½kT to average energy of a molecule (equipartition theorem).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "68577247-9c6e-447b-9735-8a38d18d20e1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "For a fixed mass of ideal gas at constant T, the graph of P versus 1/V is?",
+  "formula": "",
+  "options": [
+   "Straight line through origin",
+   "Straight line with negative slope",
+   "Rectangular hyperbola",
+   "Parabola"
+  ],
+  "answer": 0,
+  "explain": "PV = constant, so P = const × (1/V), a line through the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3bdce5f-a6ea-4f52-bb93-a567579f464d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "Avogadro's law: equal volumes of all ideal gases at the same T and P contain equal?",
+  "formula": "",
+  "options": [
+   "Masses",
+   "Number of molecules",
+   "Densities",
+   "Mean molecular speeds"
+  ],
+  "answer": 1,
+  "explain": "From PV = NkT, N depends only on P, V and T, not on the gas.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "800bee1f-5b9c-434b-b259-44f4a29e2ec2",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "One mole of an ideal gas occupies about how much volume at STP (0°C, 1 atm)?",
+  "formula": "",
+  "options": [
+   "11.2 L",
+   "24.0 L",
+   "44.8 L",
+   "22.4 L"
+  ],
+  "answer": 3,
+  "explain": "V = RT/P = 8.314 × 273 / 1.013×10⁵ ≈ 22.4 L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7092752f-e4cc-4486-bed9-87a4aaa15837",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "The SI unit of the universal gas constant R is?",
+  "formula": "",
+  "options": [
+   "J mol K⁻¹",
+   "J K⁻¹",
+   "N mol⁻¹ K⁻¹",
+   "J mol⁻¹ K⁻¹"
+  ],
+  "answer": 3,
+  "explain": "R = PV/(nT), which is energy per mole per kelvin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c2ac746-8332-4bd0-bb17-285c12a15872",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "On a P–V diagram, an isotherm at higher temperature lies?",
+  "formula": "PV = nRT",
+  "options": [
+   "Closer to the axes",
+   "Coincides with the lower one",
+   "Becomes a straight line",
+   "Farther from the axes"
+  ],
+  "answer": 3,
+  "explain": "PV = nRT is larger at higher T, so the hyperbola lies farther from the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ef1643a-21bb-4e7c-9707-50950ba59e6c",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "At constant pressure, a gas's volume rises per °C by what fraction of its volume at 0 °C?",
+  "formula": "V_t = V₀(1 + t/273)",
+  "options": [
+   "1/373",
+   "1/273",
+   "1/100",
+   "1/546"
+  ],
+  "answer": 1,
+  "explain": "Charles's law gives V_t = V₀(1 + t/273), so each °C adds V₀/273.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ec4f471f-b012-46eb-b6d5-2d9e9056ae14",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "For an ideal gas at constant T, the graph of PV versus P is?",
+  "formula": "",
+  "options": [
+   "Straight line parallel to P-axis",
+   "Straight line through origin",
+   "Rectangular hyperbola",
+   "Parabola"
+  ],
+  "answer": 0,
+  "explain": "Boyle's law: PV = constant at fixed T, so the graph is a horizontal line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b477450-3c8e-4dc2-8a3a-f6536564d2a3",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "Equal masses of H₂ and O₂ are in identical vessels at the same T. Ratio P(H₂) : P(O₂) is?",
+  "formula": "P ∝ m/M at fixed V, T",
+  "options": [
+   "1 : 16",
+   "4 : 1",
+   "8 : 1",
+   "16 : 1"
+  ],
+  "answer": 3,
+  "explain": "Same m, V, T gives P ∝ 1/M, so the ratio is 32/2 = 16.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0cb98529-35fc-4e78-a938-80e1a577f74a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Work done on compressing a gas",
+  "prompt": "In isothermal compression of an ideal gas, the heat exchanged with the surroundings is:",
+  "formula": "ΔU = 0 ⇒ Q = W",
+  "options": [
+   "Released, equal to the work done on gas",
+   "Released, equal to ΔU",
+   "Absorbed, equal to the work done on gas",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "For an ideal gas at constant T, ΔU = 0. So the work done on the gas leaves as heat released.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "01bf9a18-382c-447c-899f-13e391268591",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Work done on compressing a gas",
+  "prompt": "On a P–V diagram, the magnitude of work done in compressing a gas equals:",
+  "formula": "|W| = ∫P dV",
+  "options": [
+   "Slope of the curve",
+   "Product P₁V₁",
+   "Area under the curve between V₁ and V₂",
+   "Intercept on the P-axis"
+  ],
+  "answer": 2,
+  "explain": "Work is the area under the P–V curve between the initial and final volumes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11f50479-b81f-41a8-8ff2-9f310d81620b",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Work done on compressing a gas",
+  "prompt": "Gas is compressed isobarically at pressure P from V₁ to V₂ (V₂ < V₁). Work done on the gas is:",
+  "formula": "W_on = P(V₁ − V₂) = nR(T₁ − T₂)",
+  "options": [
+   "P(V₁ + V₂)/2",
+   "P(V₂ − V₁)",
+   "P ln(V₁/V₂)",
+   "P(V₁ − V₂)"
+  ],
+  "answer": 3,
+  "explain": "At constant pressure W = PΔV; work done on the gas in compression is positive, P(V₁−V₂).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2e774858-2f11-4e57-8c38-26ed499cff86",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Work done on compressing a gas",
+  "prompt": "Gas is compressed suddenly against constant external pressure P_ext from V₁ to V₂. Work done on gas is:",
+  "formula": "W_on = P_ext(V₁ − V₂)",
+  "options": [
+   "P_ext(V₁ − V₂)",
+   "nRT ln(V₁/V₂)",
+   "P_gas(V₁ − V₂)",
+   "(P₁V₁ − P₂V₂)/(γ − 1)"
+  ],
+  "answer": 0,
+  "explain": "In an irreversible compression work uses the constant external pressure, not the gas pressure.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "40e1eb39-646d-4633-9cb3-5d19d66e0939",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "For a gas in a closed container at rest, the average velocity vector ⟨v⃗⟩ of its molecules is:",
+  "formula": "⟨v⃗⟩ = 0, but ⟨v²⟩ ≠ 0",
+  "options": [
+   "Equal to the rms speed",
+   "Zero, because motion is random",
+   "Equal to √(3kT/m) along the walls",
+   "Equal to the mean speed"
+  ],
+  "answer": 1,
+  "explain": "Random motion in all directions makes the vector average zero, while ⟨v²⟩ stays nonzero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a9de0558-c60d-4860-a60b-0124adf07168",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "By the isotropy of molecular motion, ⟨vₓ²⟩ for a gas equals:",
+  "formula": "⟨vₓ²⟩ = ⟨v²⟩/3",
+  "options": [
+   "⟨v²⟩",
+   "⟨v²⟩/3",
+   "⟨v²⟩/6",
+   "⟨v²⟩/2"
+  ],
+  "answer": 1,
+  "explain": "All directions are equally probable, so ⟨v²⟩ = ⟨vₓ²⟩ + ⟨v_y²⟩ + ⟨v_z²⟩ splits equally into three.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "edc29390-6967-48e6-9f59-9edc41f02a48",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "Kinetic theory assumes the time of a collision compared with the time between two collisions is:",
+  "formula": "",
+  "options": [
+   "Exactly equal",
+   "Negligible",
+   "Much greater",
+   "Comparable"
+  ],
+  "answer": 1,
+  "explain": "Collisions are treated as instantaneous, so molecules move freely almost all the time.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a935608-413e-4f37-8ab3-6b5d959a976f",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "In kinetic theory, the actual volume occupied by the molecules is taken to be:",
+  "formula": "",
+  "options": [
+   "Half the container volume",
+   "Dependent on temperature only",
+   "Equal to the container volume",
+   "Negligible compared to the container volume"
+  ],
+  "answer": 3,
+  "explain": "Molecules are treated as point-like, so their own size is neglected relative to the container.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0449ffca-2f12-494d-aaf3-b7c245e794fd",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "The pressure exerted by an ideal gas on the walls is explained in kinetic theory as due to:",
+  "formula": "",
+  "options": [
+   "Weight of the gas column",
+   "Attraction between wall and molecules",
+   "Repulsion between gas molecules",
+   "Rate of change of momentum from wall collisions"
+  ],
+  "answer": 3,
+  "explain": "Each elastic wall collision transfers momentum 2mvₓ; the force is the net rate of this transfer.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "91c2892f-127d-4be6-af22-efa8590e1e9d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Assumptions of kinetic theory of gases",
+  "prompt": "Neglecting gravity on molecules in kinetic theory implies that the gas has:",
+  "formula": "",
+  "options": [
+   "Zero kinetic energy",
+   "Uniform density throughout the container",
+   "Zero pressure",
+   "Curved paths between collisions"
+  ],
+  "answer": 1,
+  "explain": "With no gravity or other forces, molecules travel in straight lines and spread uniformly.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "228266b4-dfa4-4dcc-98ec-355059b0b4da",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Elastic collision of a molecule (mass m, x-velocity vₓ) with a wall ⟂ x-axis: momentum change?",
+  "formula": "Δp = 2mvₓ",
+  "options": [
+   "mvₓ/2",
+   "2mvₓ",
+   "mvₓ",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "The velocity component reverses from +vₓ to −vₓ, so Δp = 2mvₓ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8c299abb-58c3-44cb-b8b8-0b5f71df6fdc",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "In a cubical box of side L, time between successive collisions of a molecule with the same wall?",
+  "formula": "t = 2L/vₓ",
+  "options": [
+   "2L/vₓ",
+   "L/(2vₓ)",
+   "L/vₓ",
+   "2L/v"
+  ],
+  "answer": 0,
+  "explain": "The molecule travels 2L along x between two hits on the same wall, at speed vₓ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "338b4ba3-b8c7-4275-aa90-4ee36264251b",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Average force exerted on a wall by one molecule in a cubical box of side L (x-component vₓ)?",
+  "formula": "F = mvₓ²/L",
+  "options": [
+   "mvₓ²/L",
+   "mvₓ²/(2L)",
+   "mvₓ/L",
+   "2mvₓ²/L"
+  ],
+  "answer": 0,
+  "explain": "F = Δp/t = 2mvₓ ÷ (2L/vₓ) = mvₓ²/L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "464a832c-d2da-4231-a5c8-8756f7f85bdb",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "In P = ⅓ρv², the factor ⅓ arises because ⟨vₓ²⟩ equals ⟨v²⟩/3. Why?",
+  "formula": "",
+  "options": [
+   "Collisions are inelastic",
+   "Gravity acts along one axis",
+   "Only three molecules collide",
+   "Motion is random, no preferred direction"
+  ],
+  "answer": 3,
+  "explain": "Isotropic random motion gives ⟨vₓ²⟩ = ⟨v_y²⟩ = ⟨v_z²⟩ = ⟨v²⟩/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1716d570-fd01-40e2-9f8a-fe2ab830dbed",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Two ideal gases have equal n per volume and equal T but different molecular masses. Their pressures are:",
+  "formula": "P = nkT",
+  "options": [
+   "Larger for heavier gas",
+   "Larger for lighter gas",
+   "Equal",
+   "Proportional to √m"
+  ],
+  "answer": 2,
+  "explain": "P = nkT is independent of molecular mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a4c88fb1-bc0f-4989-ae0e-f445def9f230",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "At constant P and n, the V versus T (kelvin) graph of an ideal gas is?",
+  "formula": "V ∝ T",
+  "options": [
+   "Rectangular hyperbola",
+   "Parabola",
+   "Straight line with positive intercept",
+   "Straight line through the origin"
+  ],
+  "answer": 3,
+  "explain": "Charles's law: V = (nR/P)T, a straight line passing through the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "553b67f8-f773-4542-820f-c6e0ff8741dd",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Equation of state of a perfect gas",
+  "prompt": "Ideal gas equation in terms of density ρ and molar mass M is?",
+  "formula": "P = ρRT / M",
+  "options": [
+   "P = ρRT / M",
+   "P = MRT / ρ",
+   "P = ρMRT",
+   "P = ρR / (MT)"
+  ],
+  "answer": 0,
+  "explain": "PV = (m/M)RT with ρ = m/V gives P = ρRT/M.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "120e48c0-9adf-4880-bd88-e26f80682e93",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "A gas container moves with high uniform speed. Its gas temperature, as per kinetic theory, depends on?",
+  "formula": "",
+  "options": [
+   "Random molecular motion only",
+   "Total KE including bulk motion",
+   "Container mass",
+   "Bulk velocity only"
+  ],
+  "answer": 0,
+  "explain": "Temperature measures the average random translational KE relative to the centre of mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "18c50000-a74f-48e6-bcb9-0d66208c662f",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "On heating a gas at constant volume, pressure rises mainly because molecules?",
+  "formula": "",
+  "options": [
+   "Hit walls harder and more often",
+   "Grow in size",
+   "Increase in number",
+   "Attract each other"
+  ],
+  "answer": 0,
+  "explain": "Higher v_rms gives larger momentum change per collision and more collisions per second.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c41454e-1cd3-4718-83d5-6faaa08679aa",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "Value of Boltzmann constant k in SI units, where k = R/N_A?",
+  "formula": "k = R/N_A",
+  "options": [
+   "6.02 × 10⁻²³ J/K",
+   "1.38 × 10⁻²³ J/K",
+   "1.38 × 10⁻²⁷ J/K",
+   "8.31 × 10⁻²³ J/K"
+  ],
+  "answer": 1,
+  "explain": "k = 8.31 / 6.02×10²³ ≈ 1.38×10⁻²³ J K⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca251e61-475f-4052-8b63-c730038d93a8",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "Degrees of freedom of a diatomic gas at high temperature when vibration is active?",
+  "formula": "f = 3 + 2 + 2",
+  "options": [
+   "7",
+   "5",
+   "6",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "3 translational + 2 rotational + 2 vibrational (kinetic + potential) = 7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "903e634d-3f88-4222-9677-dc8703ecf69a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "At very low temperature, a diatomic gas such as H₂ behaves with how many effective degrees of freedom?",
+  "formula": "",
+  "options": [
+   "5",
+   "7",
+   "3",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Rotational and vibrational modes are frozen (quantum effect), so only 3 translational remain.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "23bc4092-71a6-4c55-8597-2853079376f2",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Diatomic gas at very low temperature: its Cv per mole approaches?",
+  "formula": "",
+  "options": [
+   "3R/2",
+   "7R/2",
+   "5R/2",
+   "R/2"
+  ],
+  "answer": 0,
+  "explain": "Rotation is frozen at low T, so only 3 translational DOF remain: Cv = 3R/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b5bf0e94-2ef3-417d-89dc-24027bd67401",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Heat is given to a monatomic ideal gas at constant pressure. What fraction goes into work?",
+  "formula": "W/Q = 2/(f+2)",
+  "options": [
+   "2/3",
+   "2/5",
+   "3/5",
+   "1/3"
+  ],
+  "answer": 1,
+  "explain": "Q = (5/2)nRΔT and W = nRΔT, so W/Q = 2/5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a0711664-e5aa-497b-996e-15abeafb4828",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "γ for a mixture of equal moles of monatomic and rigid diatomic gases?",
+  "formula": "",
+  "options": [
+   "7/5",
+   "5/3",
+   "4/3",
+   "3/2"
+  ],
+  "answer": 3,
+  "explain": "Cv(mix) = (3R/2 + 5R/2)/2 = 2R and Cp = 3R, so γ = 3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d301e2a1-e7f0-44bf-b664-303bca542169",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "γ for a diatomic gas with vibrational modes active (f = 7)?",
+  "formula": "",
+  "options": [
+   "4/3",
+   "9/7",
+   "7/5",
+   "5/3"
+  ],
+  "answer": 1,
+  "explain": "γ = 1 + 2/7 = 9/7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6c5675e2-1d2e-4c73-8046-228305bb0bc2",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Why is Cₚ greater than Cᵥ for an ideal gas?",
+  "formula": "",
+  "options": [
+   "Work done against surroundings during expansion",
+   "Gas molecules collide more often at constant P",
+   "Intermolecular forces act at constant P",
+   "Gas has more degrees of freedom at constant P"
+  ],
+  "answer": 0,
+  "explain": "At constant P, part of the heat goes into expansion work, so more heat is needed per kelvin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "128c87fe-21ea-41f1-83c7-0f668c46ad8a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "For a diatomic gas, γ with rising temperature (as vibration becomes active):",
+  "formula": "",
+  "options": [
+   "Decreases from 7/5 towards 9/7",
+   "Stays constant at 7/5",
+   "Increases above 7/5",
+   "Rises to 5/3"
+  ],
+  "answer": 0,
+  "explain": "Vibrational modes raise Cᵥ, so γ = 1 + R/Cᵥ falls from 7/5 to 9/7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbeb99b2-f625-4396-8efb-a9664526c1d1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Molar specific heat of an ideal gas during an isothermal process is:",
+  "formula": "C = Q/(nΔT)",
+  "options": [
+   "Equal to Cᵥ",
+   "Equal to Cₚ",
+   "Infinite",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "ΔT = 0 while Q ≠ 0, so C is infinite (it is zero for an adiabatic process).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d406f53-cb30-4cff-a6cf-7409f63a0411",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "For specific heats per unit mass of a gas of molar mass M:",
+  "formula": "cₚ − cᵥ = R/M",
+  "options": [
+   "cₚ − cᵥ = R/M²",
+   "cₚ − cᵥ = R/M",
+   "cₚ − cᵥ = R",
+   "cₚ − cᵥ = MR"
+  ],
+  "answer": 1,
+  "explain": "Dividing Mayer's relation Cₚ − Cᵥ = R by molar mass M gives R/M.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64bdb91a-2cde-42b6-8901-161b86df9d69",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Heat given to a diatomic gas (room temp) at constant pressure: fraction going to internal energy?",
+  "formula": "ΔU/Q = Cᵥ/Cₚ = 1/γ",
+  "options": [
+   "5/7",
+   "3/5",
+   "2/5",
+   "2/7"
+  ],
+  "answer": 0,
+  "explain": "ΔU/Q = Cᵥ/Cₚ = (5/2)/(7/2) = 5/7; the remaining 2/7 becomes work.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11cb173d-a55e-4a9c-8d80-9a1185078588",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "The factor √2 in λ = 1/(√2 πd²n) arises because:",
+  "formula": "",
+  "options": [
+   "Molecules are spherical",
+   "v_rms = √2 v_avg",
+   "Other molecules also move (relative motion)",
+   "The collision is elastic"
+  ],
+  "answer": 2,
+  "explain": "Using the average relative speed √2 v̄ instead of v̄ (targets at rest) introduces √2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "af4d0776-5526-4c37-932b-847361282cba",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "The effective collision cross-section of a gas molecule of diameter d is:",
+  "formula": "σ = πd²",
+  "options": [
+   "4πd²",
+   "πd²",
+   "πd²/4",
+   "πd³/6"
+  ],
+  "answer": 1,
+  "explain": "A collision occurs when centres come within d, so the target area is πd².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5480cb9-459e-4199-8bc5-e7795fcb7227",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "The order of magnitude of the mean free path of air molecules at STP is:",
+  "formula": "",
+  "options": [
+   "10⁻³ m",
+   "10⁻¹⁰ m",
+   "10⁻⁷ m",
+   "10⁻⁹ m"
+  ],
+  "answer": 2,
+  "explain": "At STP, λ ≈ 10⁻⁷ m (about 100 nm), far larger than d ≈ 10⁻¹⁰ m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ab8cda6c-229c-4a32-ab6a-8f6a55869c4b",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "A gas expands isothermally to double its volume. Its collision frequency becomes:",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "√2 times",
+   "Double",
+   "Half"
+  ],
+  "answer": 3,
+  "explain": "n halves so λ doubles; v̄ is unchanged, so z = v̄/λ halves.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c0ac4ea-10e0-4d6b-a768-cc44fb5469db",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "At fixed n and T, how does collision frequency z vary with molecular diameter d?",
+  "formula": "z = √2 π d² n v̄",
+  "options": [
+   "z ∝ 1/d²",
+   "z ∝ d²",
+   "z ∝ d",
+   "z ∝ d³"
+  ],
+  "answer": 1,
+  "explain": "v̄ is independent of d, and z = v̄/λ with λ ∝ 1/d², so z ∝ d².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56006e56-3d28-4d0c-a657-acf99e5625f2",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "Collision frequency of a molecule (mean speed v̄, number density n, diameter d) is:",
+  "formula": "z = √2 π d² n v̄",
+  "options": [
+   "√2 π d² n v̄",
+   "π d² n/(√2 v̄)",
+   "π d² n v̄",
+   "√2 π d² v̄/n"
+  ],
+  "answer": 0,
+  "explain": "z = v̄/λ with λ = 1/(√2 π d² n).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47300208-6e35-4cbf-8640-ed2d4b5b22bb",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "A gas in a rigid vessel has its absolute temperature made 4 times. Collision frequency becomes:",
+  "formula": "",
+  "options": [
+   "4 times",
+   "16 times",
+   "2 times",
+   "Unchanged"
+  ],
+  "answer": 2,
+  "explain": "λ is constant, v̄ ∝ √T doubles, so z = v̄/λ doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "39d33083-2253-4e50-87c9-474ba38402f5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "Two ideal gases have same n, T and d but different molecular masses. The lighter gas has:",
+  "formula": "",
+  "options": [
+   "Smaller λ, higher collision frequency",
+   "Larger λ, same collision frequency",
+   "Same λ, same collision frequency",
+   "Same λ, higher collision frequency"
+  ],
+  "answer": 3,
+  "explain": "λ is independent of mass; v̄ ∝ 1/√m is larger for the lighter gas, so z is larger.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d78da08b-175a-4aab-8a65-e1e9fffbdb62",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "At extremely low pressure, when the calculated λ exceeds the vessel size, the effective free path is:",
+  "formula": "",
+  "options": [
+   "Equal to molecular diameter",
+   "Zero",
+   "About the vessel dimension",
+   "Infinite"
+  ],
+  "answer": 2,
+  "explain": "Molecules then collide mainly with the walls, so the free path is limited by the container size.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "74426c17-1bd0-4d0d-8a58-78bc64f1e7d1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "At constant pressure, the absolute temperature of an ideal gas is doubled. Its mean free path becomes:",
+  "formula": "λ = kT/(√2 π d² P)",
+  "options": [
+   "Double",
+   "√2 times",
+   "Unchanged",
+   "Half"
+  ],
+  "answer": 0,
+  "explain": "At fixed P, λ ∝ T, since n falls as T rises. So doubling T doubles λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50419742-23b0-43d5-9b2c-7e25f7efb8d7",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Avogadro's number and mole concept",
+  "prompt": "The SI unit (dimension) of Avogadro's number Nₐ is:",
+  "formula": "",
+  "options": [
+   "mol",
+   "Dimensionless",
+   "mol⁻¹",
+   "mol kg⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Nₐ = number of entities per mole = 6.022×10²³ mol⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9682782-4ef8-4c88-a2c3-bf64cc0baa52",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Avogadro's number and mole concept",
+  "prompt": "One mole of O₂ gas contains how many oxygen atoms?",
+  "formula": "",
+  "options": [
+   "Nₐ/2",
+   "4Nₐ",
+   "Nₐ",
+   "2Nₐ"
+  ],
+  "answer": 3,
+  "explain": "O₂ is diatomic: Nₐ molecules, each with 2 atoms, so 2Nₐ atoms.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "431522c2-e89d-45df-bbd5-e2b8ca759279",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Work done on compressing a gas",
+  "prompt": "Kinetically, a gas heats up on compression because molecules striking the advancing piston:",
+  "formula": "",
+  "options": [
+   "Rebound with reduced speed",
+   "Rebound with increased speed",
+   "Rebound with unchanged speed but more often",
+   "Lose energy to the piston"
+  ],
+  "answer": 1,
+  "explain": "Collision with a moving piston adds 2u to molecular speed on rebound, raising mean KE and temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0031f55f-07a4-4504-93af-18054b3c3bbb",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "At what temperature would the rms speed of N₂ equal that of H₂ at 300 K?",
+  "formula": "v_rms ∝ √(T/M)",
+  "options": [
+   "150 K",
+   "2100 K",
+   "4200 K",
+   "600 K"
+  ],
+  "answer": 2,
+  "explain": "Equal v_rms needs T/M equal: T = 300 × 28/2 = 4200 K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cf6092f8-491e-4ae8-abb0-1217d0519759",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Work done on compressing a gas",
+  "prompt": "At the same P–V point, the adiabatic curve's slope compared with the isothermal curve's slope is:",
+  "formula": "isothermal: dP/dV = −P/V; adiabatic: dP/dV = −γP/V",
+  "options": [
+   "Equally steep",
+   "(γ − 1) times as steep",
+   "γ times as steep",
+   "1/γ times as steep"
+  ],
+  "answer": 2,
+  "explain": "PV = const gives slope −P/V. PV^γ = const gives slope −γP/V, so the adiabat is steeper by γ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1c27330a-0361-42fe-ad7c-160c251d2046",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "N molecules in a cube of side L: total average force on one wall?",
+  "formula": "F = Nmv²ᵣₘₛ/(3L)",
+  "options": [
+   "Nmv²ᵣₘₛ/L",
+   "Nmv²ᵣₘₛ/(3L²)",
+   "Nmv²ᵣₘₛ/(3L)",
+   "Nmv²ᵣₘₛ/(6L)"
+  ],
+  "answer": 2,
+  "explain": "F = Nm⟨vₓ²⟩/L with ⟨vₓ²⟩ = v²ᵣₘₛ/3; dividing by L² gives P",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "223ab942-a264-456b-829a-85524b4653fc",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "The result P = ⅓ρv²ᵣₘₛ, derived for a cube, is valid for a container of:",
+  "formula": "",
+  "options": [
+   "Only spherical shape",
+   "Only cubical shape",
+   "Any shape",
+   "Only rectangular shapes"
+  ],
+  "answer": 2,
+  "explain": "Pressure depends on ρ and v²ᵣₘₛ, not on the container's shape",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bde285e4-62de-4eaf-b3a7-82e3eabd5a87",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Pressure of an ideal gas (P = ⅓ρv²)",
+  "prompt": "Mutual collisions between molecules are ignored in deriving P = ⅓ρv² because they:",
+  "formula": "",
+  "options": [
+   "Never occur in an ideal gas",
+   "Do not change the average ⟨vₓ²⟩",
+   "Increase the pressure slightly",
+   "Are perfectly inelastic"
+  ],
+  "answer": 1,
+  "explain": "Elastic collisions only exchange momentum among molecules; the average is unchanged",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4c27b5d9-4ca7-40e4-a1fb-229ddbac67c5",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "In kinetic theory, the temperature of a gas is meaningful for which of the following?",
+  "formula": "",
+  "options": [
+   "A large collection in equilibrium",
+   "A single molecule",
+   "Only the wall molecules",
+   "Only one fast molecule"
+  ],
+  "answer": 0,
+  "explain": "Temperature is a statistical quantity: a measure of the average translational KE of many molecules.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11227738-04c9-4bf1-9cea-8448f4ea820f",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "An ideal gas expands freely into a vacuum. Its temperature:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Remains unchanged",
+   "Decreases",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "No work done and no heat exchanged, so the molecules' average KE is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68aa160c-7835-46e7-a0b2-f3cc4121813d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "H₂ and O₂ have the same v_rms. Ratio T(O₂) : T(H₂) is?",
+  "formula": "T ∝ M·v_rms²",
+  "options": [
+   "1 : 16",
+   "16 : 1",
+   "4 : 1",
+   "1 : 4"
+  ],
+  "answer": 1,
+  "explain": "For equal v_rms, T ∝ M, and M(O₂)/M(H₂) = 32/2 = 16.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "980cd40e-69b6-47b9-9ffa-ef696c38448a",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "At fixed volume and fixed number of molecules, pressure is doubled. Average KE per molecule:",
+  "formula": "P ∝ T at constant V",
+  "options": [
+   "Remains same",
+   "Becomes half",
+   "Becomes four times",
+   "Becomes double"
+  ],
+  "answer": 3,
+  "explain": "P ∝ T at constant V and N, so T doubles and KE ∝ T also doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83c4f0ca-68ef-4aed-a1f0-152206fa8765",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "Fixed N of ideal gas: both P and V are doubled. Average KE per molecule becomes?",
+  "formula": "PV = NkT",
+  "options": [
+   "Same",
+   "Four times",
+   "Double",
+   "Half"
+  ],
+  "answer": 1,
+  "explain": "T ∝ PV becomes 4 times, so KE ∝ T becomes 4 times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6669dec4-c4e6-4231-ba02-4d41f26f11f0",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "Average translational KE of a molecule in terms of v_rms is:",
+  "formula": "",
+  "options": [
+   "m·v_rms²",
+   "⅓ m·v_rms²",
+   "(3/2) m·v_rms²",
+   "½ m·v_rms²"
+  ],
+  "answer": 3,
+  "explain": "Average KE = ½m⟨v²⟩ = ½m·v_rms², which equals (3/2)kT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "669be868-4b77-40f8-8592-ec475eb642e9",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "The rms speed of air molecules at room temperature is of the order of:",
+  "formula": "",
+  "options": [
+   "5 m/s",
+   "500 m/s",
+   "50 km/s",
+   "50 m/s"
+  ],
+  "answer": 1,
+  "explain": "For N₂ and O₂ near 300 K, v_rms ≈ 480–520 m/s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c3b4d2a-4cdb-4db8-9511-2c75fba7828e",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "A moving container holding gas is stopped suddenly. Gas temperature:",
+  "formula": "",
+  "options": [
+   "Becomes zero",
+   "Rises",
+   "Unchanged",
+   "Falls"
+  ],
+  "answer": 1,
+  "explain": "The ordered bulk KE of the molecules turns into random thermal KE, so T rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "047848db-16f2-41b2-9edc-696ea1a1fe81",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Kinetic interpretation of temperature",
+  "prompt": "At the same T, translational KE per unit mass is largest for which gas?",
+  "formula": "KE/mass = 3kT/2m",
+  "options": [
+   "H₂",
+   "O₂",
+   "N₂",
+   "He"
+  ],
+  "answer": 0,
+  "explain": "KE per molecule is equal for all gases, so KE per unit mass ∝ 1/m, largest for H₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "217e5823-6ac5-4fb2-9123-a288a1b8c2a8",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "For any set of molecular speeds, v_rms ≥ v̄, with equality only when:",
+  "formula": "",
+  "options": [
+   "All molecules have the same speed",
+   "The gas is monatomic",
+   "Pressure is very low",
+   "Temperature is very high"
+  ],
+  "answer": 0,
+  "explain": "⟨v²⟩ ≥ ⟨v⟩² always, and the two are equal only when there is no spread in speeds.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66c88470-8ad7-4b87-bcf6-ec1fb7c55590",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "RMS, average and most probable speeds",
+  "prompt": "At the same T, the Maxwell curve of a heavier gas vs a lighter gas has its peak:",
+  "formula": "",
+  "options": [
+   "At lower speed, shorter and broader",
+   "At lower speed, taller and narrower",
+   "At the same speed, but taller",
+   "At higher speed, taller and narrower"
+  ],
+  "answer": 1,
+  "explain": "v_mp ∝ 1/√M, so the peak moves left. Total area is fixed, so the curve is narrower and taller.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f012fd5b-cee5-4628-8f03-65352bd226eb",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Degrees of freedom of gas molecules",
+  "prompt": "A molecule has N atoms, all free to move independently. Its total degrees of freedom (all kinds combined) are:",
+  "formula": "3N = translational + rotational + vibrational",
+  "options": [
+   "3N",
+   "2N",
+   "N + 3",
+   "3N − 3"
+  ],
+  "answer": 0,
+  "explain": "Each atom needs 3 coordinates, so N atoms give 3N. This splits into 3 translational, rotational and vibrational modes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3a9868e-88b7-4acb-8a02-82d0628d150d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "For a rigid diatomic gas (f = 5), ratio of rotational KE to translational KE at temperature T is:",
+  "formula": "",
+  "options": [
+   "3/2",
+   "3/5",
+   "2/5",
+   "2/3"
+  ],
+  "answer": 3,
+  "explain": "Rotation has 2 DOF (kT) and translation has 3 DOF (3kT/2), so the ratio is 2 : 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b1482efe-8ba9-45ec-a1db-63e4512df2c4",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "At the same T, ratio of internal energies of 1 mol He to 1 mol O₂ (room temperature) is:",
+  "formula": "U = (f/2)nRT",
+  "options": [
+   "3 : 5",
+   "3 : 7",
+   "5 : 3",
+   "1 : 1"
+  ],
+  "answer": 0,
+  "explain": "f = 3 for He and f = 5 for O₂, so U ∝ f and the ratio is 3 : 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "623c5e07-7d99-4e93-a8c5-95a7d0e8cf62",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Classical equipartition fails to explain the low-temperature Cᵥ of H₂ because:",
+  "formula": "",
+  "options": [
+   "H₂ molecules become non-elastic",
+   "molecules stop translating",
+   "energy of rotation/vibration is quantised",
+   "intermolecular forces vanish"
+  ],
+  "answer": 2,
+  "explain": "Rotational and vibrational energy levels are quantised, so these modes freeze out at low T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2bda2621-8225-4e61-a461-1b92f90e01a1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "Internal energy of a mixture of 1 mol monatomic and 1 mol rigid diatomic gas at T is:",
+  "formula": "",
+  "options": [
+   "5RT",
+   "3RT",
+   "4RT",
+   "8RT"
+  ],
+  "answer": 2,
+  "explain": "U = (3/2)RT + (5/2)RT = 4RT, since energies add.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ae1a60e-d810-4cd0-96e3-fd6bf342e7fc",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Law of equipartition of energy",
+  "prompt": "For a rigid nonlinear triatomic gas (f = 6), fraction of its total energy that is translational is:",
+  "formula": "",
+  "options": [
+   "2/3",
+   "3/5",
+   "1/2",
+   "1/3"
+  ],
+  "answer": 2,
+  "explain": "Translation has 3 of the 6 DOF, so its share is 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3bdc130-3a07-43a9-8a66-16bf1e64fc68",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "For an ideal gas, molar Cᵥ in terms of R and γ is:",
+  "formula": "Cᵥ = R/(γ − 1)",
+  "options": [
+   "γR/(γ − 1)",
+   "R/(γ − 1)",
+   "(γ − 1)R",
+   "R/γ"
+  ],
+  "answer": 1,
+  "explain": "Cₚ = γCᵥ and Cₚ − Cᵥ = R give Cᵥ(γ − 1) = R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "52006f3e-c021-46c0-ab7f-2f41c3cf6c7d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "For an ideal gas, ΔU = nCᵥΔT holds for which processes?",
+  "formula": "",
+  "options": [
+   "Only isochoric",
+   "Every process",
+   "Only adiabatic",
+   "Only isobaric"
+  ],
+  "answer": 1,
+  "explain": "U depends only on T, so ΔU = nCᵥΔT for any process between the two temperatures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3eeed31-4468-40b2-8826-c3672c32cab1",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Heat is given to a diatomic gas (room temp) at constant pressure. Fraction converted to work?",
+  "formula": "W/Q = R/Cₚ",
+  "options": [
+   "2/5",
+   "5/7",
+   "2/7",
+   "1/7"
+  ],
+  "answer": 2,
+  "explain": "W/Q = R/Cₚ = R/(7R/2) = 2/7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "96b8640a-53ed-4114-b4ed-eec793fd581c",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Specific heats Cv, Cp and γ of gases",
+  "prompt": "Molar Cₚ of a nonlinear triatomic ideal gas (f = 6, no vibration) is:",
+  "formula": "Cₚ = Cᵥ + R",
+  "options": [
+   "(7/2)R",
+   "4R",
+   "3R",
+   "(9/2)R"
+  ],
+  "answer": 1,
+  "explain": "Cᵥ = (6/2)R = 3R, so Cₚ = Cᵥ + R = 4R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d87f32f-eb37-44bb-bffa-a3d54ffba84d",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "Mean free path λ, mean speed v̄ and mean time between collisions τ are related by:",
+  "formula": "τ = 1/z",
+  "options": [
+   "λ = τ/v̄",
+   "λ = v̄²τ",
+   "λ = v̄τ",
+   "λ = v̄τ²"
+  ],
+  "answer": 2,
+  "explain": "Average distance between collisions = mean speed × mean time between collisions, so λ = v̄τ = v̄/z.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a5b9554-3793-4100-98a4-c4de440c6160",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Mean free path and collision frequency",
+  "prompt": "A gas in a sealed rigid vessel is heated from 300 K to 600 K. Its mean free path becomes:",
+  "formula": "λ = 1/(√2 πd²n)",
+  "options": [
+   "Unchanged",
+   "Halved",
+   "Doubled",
+   "√2 times"
+  ],
+  "answer": 0,
+  "explain": "λ depends only on n and d. In a sealed rigid vessel n is fixed, so λ is independent of T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e6f680c-072e-405d-b16b-853cde7ba473",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Avogadro's number and mole concept",
+  "prompt": "The value of Avogadro's number Nₐ is closest to:",
+  "formula": "",
+  "options": [
+   "6.626 × 10²³ mol⁻¹",
+   "1.38 × 10²³ mol⁻¹",
+   "6.022 × 10²³ mol⁻¹",
+   "6.022 × 10²⁶ mol⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Nₐ ≈ 6.022×10²³ per mole; 6.626×10⁻³⁴ is Planck's constant and 1.38×10⁻²³ is k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "887930f1-a41e-433d-a138-7c30f57c165c",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Avogadro's number and mole concept",
+  "prompt": "Loschmidt number: molecules per m³ of an ideal gas at STP is about:",
+  "formula": "n = Nₐ/22.4×10⁻³ m³",
+  "options": [
+   "6.0 × 10²³",
+   "2.7 × 10¹⁹",
+   "2.7 × 10²⁵",
+   "2.7 × 10²²"
+  ],
+  "answer": 2,
+  "explain": "6.02×10²³ per 22.4 L gives about 2.7×10²⁵ m⁻³ (2.7×10¹⁹ cm⁻³).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11fbda1d-a40b-4feb-bb28-339a38e85178",
+  "subject": "Physics",
+  "chapter": "Kinetic Theory",
+  "topic": "Avogadro's number and mole concept",
+  "prompt": "Equal masses of He (M = 4) and CH₄ (M = 16) are taken. Ratio of molecules N(He) : N(CH₄)?",
+  "formula": "N ∝ m/M",
+  "options": [
+   "1 : 4",
+   "2 : 1",
+   "4 : 1",
+   "1 : 1"
+  ],
+  "answer": 2,
+  "explain": "For equal mass, N ∝ 1/M, so He has 16/4 = 4 times as many molecules.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

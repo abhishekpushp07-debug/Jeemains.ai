@@ -11,13 +11,14 @@ import { DayCard, DayStrip, ResultsList, TodayCard } from "@/src/components/seri
 import { ScoreTrend, trendSummary } from "@/src/components/series/ScoreTrend";
 import { DayMap } from "@/src/components/series/DayMap";
 import { colors, space } from "@/src/theme";
-import { seriesDays, useSeriesData } from "@/src/series";
+import { istTime, seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
 
 export default function Live() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
   const { series, streak, history, days, reload } = useSeriesData(user?.id);
+  useSeriesWatch(series.revalidate, days);
   const [open, setOpen] = useState(false);
   const [picked, setPicked] = useState<number | null>(null);
   const [allResults, setAllResults] = useState(false);
@@ -55,7 +56,8 @@ export default function Live() {
       {!d && !series.error ? <Skeleton h={190} style={{ borderRadius: 24 }} /> : null}
       {d ? <>
         <View style={{ gap: space.sm }}>
-          <SectionLabel title="Today" right={<T testID="series-timing-note" size={11} color={colors.custom_eyebrow}>Live 12:01 AM – 11:59 PM IST</T>} />
+          <SectionLabel title="Today" right={<T testID="series-timing-note" size={11} color={colors.custom_eyebrow}>{today ? `Live ${istTime(today.slot.opens_at)} – ${istTime(today.slot.closes_at)} IST` : "Live 12:01 AM – 11:59 PM IST"}</T>} />
+          {todayPaper(today) === "ready" ? <T testID="series-paper-ready" w="heavy" size={12} color={colors.success}>● Aaj ka paper ready hai — abhi shuru kar sakte ho</T> : null}
           <TodayCard series={d} day={today} />
         </View>
 

@@ -1,0 +1,2807 @@
+[
+ {
+  "prompt": "A sphere's volume grows at a constant rate. Then dr/dt is proportional to",
+  "formula": "dV/dt = 4πr²·dr/dt",
+  "options": [
+   "r²",
+   "1/r²",
+   "1/r",
+   "r"
+  ],
+  "answer": 1,
+  "explain": "dr/dt = (dV/dt)/(4πr²), so it varies as 1/r².",
+  "kind": "result",
+  "id": "1265b5dd-21c7-4e80-a800-079147226995",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "A ladder slides down a wall. At 45° with the floor, |dy/dt| compared with |dx/dt| is",
+  "formula": "",
+  "options": [
+   "Twice",
+   "Half",
+   "Equal",
+   "√2 times"
+  ],
+  "answer": 2,
+  "explain": "y′ = −(x/y)x′ and x = y at 45°, so the speeds are equal.",
+  "kind": "result",
+  "id": "f7acd94f-d79b-4c55-96d2-c2290294bd39",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "A circle's radius grows at 2 cm/s. Its circumference grows at the rate",
+  "formula": "C = 2πr",
+  "options": [
+   "2π cm/s",
+   "4π cm/s",
+   "8π cm/s",
+   "π cm/s"
+  ],
+  "answer": 1,
+  "explain": "dC/dt = 2π·dr/dt = 4π cm/s, independent of r.",
+  "kind": "result",
+  "id": "73b80234-48a7-467b-a9a0-f38ece6dd83e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "Rate of change of x² with respect to x³ is",
+  "formula": "",
+  "options": [
+   "3x/2",
+   "2/(3x)",
+   "2x/3",
+   "3/(2x)"
+  ],
+  "answer": 1,
+  "explain": "(d/dx x²)/(d/dx x³) = 2x/3x² = 2/(3x).",
+  "kind": "result",
+  "id": "a7b07450-92ec-458f-99c0-8872c91d1d73",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "Rate of change of surface area of a sphere with respect to its radius r is",
+  "formula": "S = 4πr²",
+  "options": [
+   "4πr",
+   "8πr",
+   "8πr²",
+   "4πr²"
+  ],
+  "answer": 1,
+  "explain": "dS/dr = 8πr.",
+  "kind": "formula",
+  "id": "58d76141-70ad-4c85-9c16-4ccba9d0997f",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "For a sphere, the rate of change of volume with respect to surface area is",
+  "formula": "dV/dS = (dV/dr)/(dS/dr)",
+  "options": [
+   "r",
+   "r/2",
+   "2r",
+   "r²/2"
+  ],
+  "answer": 1,
+  "explain": "4πr²/(8πr) = r/2.",
+  "kind": "result",
+  "id": "91b3a45b-1297-4e5f-8d84-9d726d49decd",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "Rate of change of area of an equilateral triangle with respect to its side a is",
+  "formula": "A = (√3/4)a²",
+  "options": [
+   "(√3/4)a",
+   "(√3/2)a",
+   "√3 a²/2",
+   "(√3/4)a²"
+  ],
+  "answer": 1,
+  "explain": "dA/da = (√3/4)·2a = (√3/2)a.",
+  "kind": "formula",
+  "id": "4a19bb8b-65c6-4cbd-abb4-f85e8f7c7146",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "A cube's side increases at a constant rate. Its volume's rate of increase is proportional to which power of the side?",
+  "formula": "V = x³ ⇒ dV/dt = 3x² dx/dt",
+  "options": [
+   "x²",
+   "x",
+   "x³",
+   "x⁰"
+  ],
+  "answer": 0,
+  "explain": "dV/dt = 3x²·dx/dt, with dx/dt constant, so dV/dt ∝ x².",
+  "kind": "result",
+  "id": "5cad2ca1-3d37-4385-be55-8c62377bea63",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Rate of change of quantities"
+ },
+ {
+  "prompt": "f(x)=x³ on ℝ (note f′(0)=0) is:",
+  "formula": "",
+  "options": [
+   "Strictly increasing on ℝ",
+   "Increasing but not strictly",
+   "Decreasing at x=0",
+   "Not monotonic on ℝ"
+  ],
+  "answer": 0,
+  "explain": "f′≥0 with f′=0 only at isolated points keeps f strictly increasing.",
+  "kind": "concept",
+  "id": "542e4cad-7098-419d-b438-173e59120729",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x)=x^(1/3) on ℝ is:",
+  "formula": "",
+  "options": [
+   "Strictly increasing on ℝ",
+   "Increasing only for x>0",
+   "Not monotonic as f′(0) fails",
+   "Decreasing for x<0"
+  ],
+  "answer": 0,
+  "explain": "It is strictly increasing even though f′(0) does not exist (x₁<x₂ ⇒ f(x₁)<f(x₂)).",
+  "kind": "exception",
+  "id": "f19125d3-e2d2-4e13-a358-7e468a024ec3",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x)=2x³−9x²+12x+4 is decreasing on:",
+  "formula": "f′=6(x−1)(x−2)",
+  "options": [
+   "(1,2)",
+   "(−∞,1)",
+   "(2,∞)",
+   "(0,1)"
+  ],
+  "answer": 0,
+  "explain": "The quadratic f′ is negative between its roots 1 and 2.",
+  "kind": "result",
+  "id": "39e62953-1066-4c29-995a-7691e4e10681",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x)=(ln x)/x is increasing on:",
+  "formula": "f′=(1−ln x)/x²",
+  "options": [
+   "(0,e)",
+   "(e,∞)",
+   "(1,∞)",
+   "(0,1/e)"
+  ],
+  "answer": 0,
+  "explain": "f′>0 iff ln x<1, i.e. 0<x<e.",
+  "kind": "result",
+  "id": "631c875a-7605-4d13-a4d4-7e84bec454f9",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x)=x−sin x on ℝ is:",
+  "formula": "f′=1−cos x ≥ 0",
+  "options": [
+   "Strictly increasing on ℝ",
+   "Increasing only on (0,π)",
+   "Decreasing on (0,π)",
+   "Not monotonic"
+  ],
+  "answer": 0,
+  "explain": "f′≥0 and vanishes only at isolated points 2nπ.",
+  "kind": "result",
+  "id": "95d02176-98e8-4860-906b-ef1f64b4b3b4",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "sin x + cos x is increasing on:",
+  "formula": "f′=cos x − sin x",
+  "options": [
+   "(0, π/4)",
+   "(π/4, π/2)",
+   "(π/2, π)",
+   "(3π/4, π)"
+  ],
+  "answer": 0,
+  "explain": "cos x>sin x only for x in (0,π/4) among these.",
+  "kind": "result",
+  "id": "fabd2bbe-a051-4acf-aee3-aab3d6086351",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "tan x on its domain is:",
+  "formula": "f′=sec²x>0",
+  "options": [
+   "Increasing in each interval of its domain",
+   "Increasing on all of ℝ",
+   "Decreasing in (0,π/2)",
+   "Not monotonic in (−π/2,π/2)"
+  ],
+  "answer": 0,
+  "explain": "sec²x>0 gives increase on each branch, not on ℝ (discontinuities).",
+  "kind": "concept",
+  "id": "f57d72d0-eff0-41c0-a907-604faecc2396",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "If f and g are both decreasing, then f∘g is:",
+  "formula": "",
+  "options": [
+   "Increasing",
+   "Decreasing",
+   "Constant",
+   "Cannot be determined"
+  ],
+  "answer": 0,
+  "explain": "Two reversals of order give an increasing composition.",
+  "kind": "concept",
+  "id": "18c14db7-d45e-4dd9-9f13-fdae2d86e9c3",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "If f>0 is increasing, then 1/f is:",
+  "formula": "(1/f)′ = −f′/f²",
+  "options": [
+   "Decreasing",
+   "Increasing",
+   "Constant",
+   "Cannot be determined"
+  ],
+  "answer": 0,
+  "explain": "(1/f)′=−f′/f² ≤ 0.",
+  "kind": "concept",
+  "id": "5a7ff8ef-5baa-4b4f-8008-be8b96feb438",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f is increasing and g is decreasing on I. Then f−g is:",
+  "formula": "",
+  "options": [
+   "Increasing",
+   "Decreasing",
+   "Constant",
+   "Cannot be determined"
+  ],
+  "answer": 0,
+  "explain": "−g is increasing, so f+(−g) is increasing.",
+  "kind": "concept",
+  "id": "e3cd17eb-e791-4a8f-bca2-66ca19a222f8",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "cos x is strictly decreasing on:",
+  "formula": "f′=−sin x",
+  "options": [
+   "(0, π)",
+   "(−π/2, π/2)",
+   "(π, 2π)",
+   "(π/2, 3π/2)"
+  ],
+  "answer": 0,
+  "explain": "−sin x<0 exactly where sin x>0, i.e. on (0,π).",
+  "kind": "fact",
+  "id": "3ae94361-1293-4808-91ea-f893e346e534",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x) = x ln x is strictly decreasing on:",
+  "formula": "f′(x) = 1 + ln x",
+  "options": [
+   "(0, 1/e)",
+   "(1/e, ∞)",
+   "(0, 1)",
+   "(0, e)"
+  ],
+  "answer": 0,
+  "explain": "f′ = 1 + ln x < 0 ⇔ x < 1/e (with x > 0).",
+  "kind": "result",
+  "id": "3bb112ca-8393-47d6-9314-f93f2a3e1607",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x) = tan⁻¹x − x on ℝ is:",
+  "formula": "f′(x) = −x²/(1 + x²)",
+  "options": [
+   "Strictly decreasing",
+   "Strictly increasing",
+   "Increasing for x>0 only",
+   "Constant"
+  ],
+  "answer": 0,
+  "explain": "f′ ≤ 0 with equality only at x = 0, so f is strictly decreasing.",
+  "kind": "result",
+  "id": "70012ada-0efb-4b93-bc58-f463e8268e27",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x) = x/(1 + x²) is strictly increasing on:",
+  "formula": "f′(x) = (1 − x²)/(1 + x²)²",
+  "options": [
+   "(−∞, ∞)",
+   "(1, ∞)",
+   "(−1, 1)",
+   "(0, ∞)"
+  ],
+  "answer": 2,
+  "explain": "f′ > 0 iff 1 − x² > 0, i.e. −1 < x < 1.",
+  "kind": "result",
+  "id": "8985adfe-595b-438f-bd09-83b645620dd2",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x) = 2x + cos x on ℝ is:",
+  "formula": "f′(x) = 2 − sin x",
+  "options": [
+   "Strictly increasing",
+   "Strictly decreasing",
+   "Increasing only on (0, π)",
+   "Not monotonic"
+  ],
+  "answer": 0,
+  "explain": "sin x ≤ 1 gives f′ = 2 − sin x ≥ 1 > 0 for all x, so f is strictly increasing.",
+  "kind": "result",
+  "id": "1cccc3fc-1108-4ef2-8db1-df7709de0a6f",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x) = x + 1/x is strictly increasing on:",
+  "formula": "f′(x) = 1 − 1/x²",
+  "options": [
+   "(1, ∞)",
+   "(−1, 1)",
+   "(0, 1)",
+   "(0, ∞)"
+  ],
+  "answer": 0,
+  "explain": "f′ = (x²−1)/x² > 0 for |x| > 1, so increasing on (1, ∞) (and (−∞,−1)).",
+  "kind": "result",
+  "id": "97319c38-782f-49fb-b688-0667c8feb540",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "A differentiable f is strictly increasing if f′ ≥ 0 and f′ = 0 at:",
+  "formula": "",
+  "options": [
+   "every point of some interval",
+   "no point at all",
+   "only isolated points",
+   "exactly one interval"
+  ],
+  "answer": 2,
+  "explain": "f′ ≥ 0 with zeros only at isolated points, never on a whole interval, gives strict increase.",
+  "kind": "concept",
+  "id": "606bb29f-f908-4c5f-bba9-af06a449eec3",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "If f′ ≥ 0 on an interval and f′ = 0 throughout a sub-interval, then f on the whole interval is:",
+  "formula": "",
+  "options": [
+   "strictly increasing",
+   "strictly decreasing",
+   "non-decreasing, not strictly",
+   "not monotonic"
+  ],
+  "answer": 2,
+  "explain": "f is constant on that sub-interval, so it is non-decreasing but not strictly increasing.",
+  "kind": "concept",
+  "id": "e4b68f6d-1926-444f-ae0c-e78a35df4210",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "In f(x) = x³ − 3x + c, how does c affect monotonicity intervals?",
+  "formula": "",
+  "options": [
+   "Shifts the critical points",
+   "It has no effect",
+   "Changes the intervals' length",
+   "Makes f always increasing"
+  ],
+  "answer": 1,
+  "explain": "f′ does not contain c; a constant only shifts the graph vertically.",
+  "kind": "concept",
+  "id": "70876ae5-6226-49c0-89d8-9746d89aa549",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "f(x) = x² + kx is increasing on [1, 2] iff:",
+  "formula": "f′ = 2x + k",
+  "options": [
+   "k ≥ −4",
+   "k ≥ −1",
+   "k ≥ 0",
+   "k ≥ −2"
+  ],
+  "answer": 3,
+  "explain": "2x + k ≥ 0 on [1, 2]; the minimum is at x = 1, so k ≥ −2.",
+  "kind": "result",
+  "id": "b617c76e-36bd-43e5-8e2f-7d60be3de451",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "f(x)=x²e^(−x) is strictly increasing on:",
+  "formula": "f′(x) = x e^(−x)(2−x)",
+  "options": [
+   "(0, 2)",
+   "(2, ∞)",
+   "(−∞, 0)",
+   "(0, 1)"
+  ],
+  "answer": 0,
+  "explain": "f′ = x(2−x)e^(−x) > 0 exactly when 0 < x < 2.",
+  "kind": "result",
+  "id": "c811a58e-5b19-4c8f-bbdd-3845cddab4c1",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x)=cos x is strictly increasing on which interval?",
+  "formula": "",
+  "options": [
+   "(π, 2π)",
+   "(0, π)",
+   "(π/2, 3π/2)",
+   "(−π, 0)"
+  ],
+  "answer": 0,
+  "explain": "f′ = −sin x > 0 when sin x < 0, i.e. on (π, 2π). (−π, 0) is also valid, but it is not listed as an option here.",
+  "kind": "result",
+  "id": "5aba3890-670b-4c6b-9c49-2cf216a9a60c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x) = e^x/x is strictly decreasing on which set?",
+  "formula": "",
+  "options": [
+   "(0, 1) only",
+   "(−∞, 0) and (0, 1)",
+   "(1, ∞)",
+   "(−∞, 0) only"
+  ],
+  "answer": 1,
+  "explain": "f′ = e^x(x−1)/x² < 0 when x < 1, x ≠ 0, so decreasing on (−∞,0) and (0,1).",
+  "kind": "result",
+  "id": "9166fed4-c887-4f26-927a-9666ec39a26e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "x³ + kx² + 3x + 5 is increasing on ℝ iff:",
+  "formula": "f′ = 3x² + 2kx + 3",
+  "options": [
+   "−3 ≤ k ≤ 3",
+   "−9 ≤ k ≤ 9",
+   "k ≥ 3",
+   "−1 ≤ k ≤ 1"
+  ],
+  "answer": 0,
+  "explain": "Need D = 4k² − 36 ≤ 0, so |k| ≤ 3.",
+  "kind": "result",
+  "id": "a039f01c-0878-4a2c-8081-a6cfeecad858",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "f(x) = (k² − 3k + 2)x is strictly decreasing on ℝ iff:",
+  "formula": "slope = (k − 1)(k − 2)",
+  "options": [
+   "k < 1 or k > 2",
+   "1 < k < 2",
+   "k > 2",
+   "k < 1"
+  ],
+  "answer": 1,
+  "explain": "A line decreases iff its slope is negative; (k − 1)(k − 2) < 0 for 1 < k < 2.",
+  "kind": "result",
+  "id": "6379c576-5ad2-4585-9b81-2037e3c5674a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "For k > 0, f(x) = x + k/x is decreasing on:",
+  "formula": "f′(x) = 1 − k/x²",
+  "options": [
+   "(−∞, −√k) and (√k, ∞)",
+   "(−k, k)",
+   "(0, √k) only",
+   "(−√k, 0) and (0, √k)"
+  ],
+  "answer": 3,
+  "explain": "f′ < 0 iff x² < k with x ≠ 0, so f decreases on (−√k,0) and (0,√k).",
+  "kind": "fact",
+  "id": "95fe96ee-d81a-4705-94bf-0bc2c060bd62",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "f and g both strictly decreasing on their domains. The composite g∘f is:",
+  "formula": "(g∘f)′ = g′(f(x))·f′(x)",
+  "options": [
+   "Strictly decreasing",
+   "Strictly increasing",
+   "Constant",
+   "Not necessarily monotonic"
+  ],
+  "answer": 1,
+  "explain": "Both derivatives are negative, so their product is positive and g∘f is increasing.",
+  "kind": "concept",
+  "id": "cfe45b6d-e60a-4963-aee4-bc5573d43fd2",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f is strictly increasing and g is strictly decreasing. Then g∘f is:",
+  "formula": "(g∘f)′ = g′(f(x))·f′(x)",
+  "options": [
+   "Strictly increasing",
+   "Constant",
+   "Strictly decreasing",
+   "Not necessarily monotonic"
+  ],
+  "answer": 2,
+  "explain": "g′<0 and f′>0 give a negative product, so g∘f is decreasing.",
+  "kind": "concept",
+  "id": "5b7300a6-1083-4534-a41a-675ab531ec7c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "For a differentiable bijection f with f′(x)≠0, (f⁻¹)′(y) at y = f(x) equals:",
+  "formula": "(f⁻¹)′(y) = 1/f′(x)",
+  "options": [
+   "f′(y)",
+   "1/f′(y)",
+   "1/f′(x), where y = f(x)",
+   "−1/f′(x)"
+  ],
+  "answer": 2,
+  "explain": "Differentiating f(f⁻¹(y)) = y gives f′(x)·(f⁻¹)′(y) = 1.",
+  "kind": "formula",
+  "id": "1dd73a8f-5239-4f3a-b42e-041987287324",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "If f′(x) > 0 for all x in an interval I, then on I the function f:",
+  "formula": "",
+  "options": [
+   "Is one-one, so f⁻¹ exists on f(I)",
+   "Has a local maximum",
+   "Is an even function",
+   "Is one-one only if f″>0"
+  ],
+  "answer": 0,
+  "explain": "Strictly increasing implies one-one, so an inverse exists on the range.",
+  "kind": "concept",
+  "id": "fdea942c-59ed-42aa-927f-c91473e0dfab",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f(x) = x + eˣ. The value of (f⁻¹)′(1) is:",
+  "formula": "(f⁻¹)′(f(a)) = 1/f′(a)",
+  "options": [
+   "1",
+   "1/2",
+   "2",
+   "1/e"
+  ],
+  "answer": 1,
+  "explain": "f(0) = 1 and f′(0) = 1 + 1 = 2, so (f⁻¹)′(1) = 1/2.",
+  "kind": "formula",
+  "id": "6974645c-5d08-486e-9146-188108c00ee8",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f is positive and strictly decreasing on an interval. Then 1/f(x) on that interval is:",
+  "formula": "(1/f)′ = −f′/f²",
+  "options": [
+   "Strictly decreasing",
+   "Constant",
+   "Strictly increasing",
+   "Not monotonic"
+  ],
+  "answer": 2,
+  "explain": "f′<0 gives (1/f)′ = −f′/f² > 0, so 1/f is increasing.",
+  "kind": "result",
+  "id": "214f9a39-ac15-4bd8-bd4f-fca355eb3cbe",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f is strictly increasing on ℝ. Then g(x) = f(cos x) on (0, π) is:",
+  "formula": "g′(x) = −sin x · f′(cos x)",
+  "options": [
+   "Strictly increasing",
+   "Strictly decreasing",
+   "Constant",
+   "Increasing then decreasing"
+  ],
+  "answer": 1,
+  "explain": "cos x decreases on (0,π) and f increases, so g is decreasing; g′ = −sin x·f′(cos x) < 0.",
+  "kind": "concept",
+  "id": "c54eb8c6-489e-4304-8c25-afbee060c8ab",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "If f is strictly increasing and differentiable, f⁻¹ (where it exists) is:",
+  "formula": "(f⁻¹)′(y) = 1/f′(x)",
+  "options": [
+   "Strictly increasing",
+   "Strictly decreasing",
+   "Constant",
+   "Not monotonic in general"
+  ],
+  "answer": 0,
+  "explain": "(f⁻¹)′ = 1/f′ has the same sign as f′, so f⁻¹ is increasing too.",
+  "kind": "concept",
+  "id": "66eb1e33-8493-4af5-a91a-de4d94dc0c3b",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f is increasing and g is increasing, both differentiable. Then g(f(x)) has derivative sign equal to:",
+  "formula": "(g∘f)′(x) = g′(f(x))·f′(x)",
+  "options": [
+   "Positive (g′ ≥ 0, f′ ≥ 0 gives ≥ 0)",
+   "Negative",
+   "Sign of f′ − g′",
+   "Cannot be determined"
+  ],
+  "answer": 0,
+  "explain": "Product of two non-negative terms g′(f(x))·f′(x) is non-negative, so g∘f is increasing.",
+  "kind": "concept",
+  "id": "7aa223aa-eb14-4ce6-ad2f-676029f4fe45",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "For f(x) = |x|, the point x = 0 is:",
+  "formula": "",
+  "options": [
+   "stationary and a local maximum",
+   "critical (f' undefined) and a local minimum",
+   "stationary and a local minimum",
+   "not a critical point"
+  ],
+  "answer": 1,
+  "explain": "f'(0) does not exist, so 0 is critical but not stationary. f' changes − to +, giving a minimum.",
+  "kind": "concept",
+  "id": "bbff20d6-4dc8-4ff9-a4a6-4fcb38cbb29b",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "If f'(c) = 0 and f''(c) < 0, then f has at x = c a:",
+  "formula": "",
+  "options": [
+   "local minimum",
+   "point of inflection",
+   "local maximum",
+   "no conclusion possible"
+  ],
+  "answer": 2,
+  "explain": "Second derivative test: f'(c) = 0 and f''(c) < 0 means the graph is concave down, so a local maximum.",
+  "kind": "concept",
+  "id": "6addf8d6-4fbe-4441-b110-5b4794df0358",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "If f'(c) = 0 and f''(c) = 0, the second derivative test:",
+  "formula": "",
+  "options": [
+   "gives a local minimum",
+   "gives a local maximum",
+   "gives a point of inflection",
+   "is inconclusive"
+  ],
+  "answer": 3,
+  "explain": "With f'' = 0 the test fails. Use the first derivative test or higher derivatives.",
+  "kind": "concept",
+  "id": "5030345e-427e-46d5-bb71-355e36ec2e08",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "For f(x) = x⁴, the point x = 0 (where f' = f'' = 0) is:",
+  "formula": "",
+  "options": [
+   "a local minimum",
+   "a local maximum",
+   "a point of inflection",
+   "not a stationary point"
+  ],
+  "answer": 0,
+  "explain": "f' = 4x³ changes from − to + at 0, so by the first derivative test it is a local minimum.",
+  "kind": "exception",
+  "id": "4eeee03e-cb10-4916-b78a-816881e33400",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "The absolute maximum of a continuous f on [a, b] must occur at:",
+  "formula": "",
+  "options": [
+   "only at stationary points",
+   "only at the endpoints",
+   "a critical point or an endpoint",
+   "only where f'' < 0"
+  ],
+  "answer": 2,
+  "explain": "By the extreme value theorem, absolute extrema lie at critical points in (a, b) or at a or b.",
+  "kind": "concept",
+  "id": "545b96f9-0c60-495a-8182-d0f5e26c5d65",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "f(x) = x·e⁻ˣ has its stationary point at x = 1, which is a:",
+  "formula": "f'(x) = e⁻ˣ(1 − x)",
+  "options": [
+   "local maximum",
+   "local minimum",
+   "point of inflection",
+   "non-differentiable point"
+  ],
+  "answer": 0,
+  "explain": "f' = e⁻ˣ(1 − x) changes from + to − at x = 1, so it is a local maximum.",
+  "kind": "result",
+  "id": "9162c067-0bdd-46bf-beb8-e54643cd0bcc",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "f(x) = (ln x)/x (x > 0) has its stationary point at:",
+  "formula": "f'(x) = (1 − ln x)/x²",
+  "options": [
+   "x = 1",
+   "x = e",
+   "x = 1/e",
+   "x = e²"
+  ],
+  "answer": 1,
+  "explain": "f' = 0 gives ln x = 1, so x = e. It is a maximum with value 1/e.",
+  "kind": "result",
+  "id": "85f40b6d-ac5c-4ae7-a521-71e0fc3c89bf",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "Stationary points of f(x) = sin x in [0, 2π] are:",
+  "formula": "",
+  "options": [
+   "0 and π",
+   "π/2 and 3π/2",
+   "π and 2π",
+   "0, π and 2π"
+  ],
+  "answer": 1,
+  "explain": "f' = cos x = 0 at x = π/2 and 3π/2, which are the maximum and minimum points.",
+  "kind": "fact",
+  "id": "6d665044-638b-429b-a879-63957c887d1d",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "For f(x) = x^(2/3), the point x = 0 is:",
+  "formula": "f'(x) = (2/3)x^(−1/3)",
+  "options": [
+   "stationary, point of inflection",
+   "critical (cusp), local minimum",
+   "critical (cusp), local maximum",
+   "not critical"
+  ],
+  "answer": 1,
+  "explain": "f'(0) is undefined and f' changes − to +, so x = 0 is a cusp with a local minimum.",
+  "kind": "exception",
+  "id": "fac517f1-9692-4b29-a8e5-bac2e77798a1",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "For f(x) = x³, the point x = 0 where f'(0) = 0 is:",
+  "formula": "",
+  "options": [
+   "A stationary point of inflexion",
+   "A local maximum",
+   "A local minimum",
+   "Not a stationary point"
+  ],
+  "answer": 0,
+  "explain": "f' = 3x² ≥ 0 does not change sign at 0, so it is neither max nor min; it is an inflexion.",
+  "kind": "concept",
+  "id": "bce1972e-31b7-410f-b8c9-d53534e82ef0",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "Number of stationary points of f(x) = x³ − 3x is:",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "f' = 3x² − 3 = 0 gives x = ±1, so two stationary points.",
+  "kind": "result",
+  "id": "4bda94dc-52cb-485e-aa9f-fe2c6bb155b5",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "First derivative test: f' changes from − to + at c. Then c is a:",
+  "formula": "",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Point of inflexion",
+   "Not a critical point"
+  ],
+  "answer": 0,
+  "explain": "Function decreases then increases, so f has a local minimum at c.",
+  "kind": "concept",
+  "id": "f302dda8-f0ba-4884-bd53-5ecb4e853484",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "For f(x) = x + 1/x (x > 0), the stationary point is at x =",
+  "formula": "f' = 1 − 1/x²",
+  "options": [
+   "1",
+   "2",
+   "e",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "1 − 1/x² = 0 gives x = 1 for x > 0; f'' = 2/x³ > 0, so it is a minimum.",
+  "kind": "result",
+  "id": "10cf28dc-afdc-49b1-b728-0a19671fd3db",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Critical & stationary points"
+ },
+ {
+  "prompt": "Critical points of f in its domain are the points where f'(x) is:",
+  "formula": "",
+  "options": [
+   "zero only",
+   "zero or does not exist",
+   "undefined only",
+   "positive or negative"
+  ],
+  "answer": 1,
+  "explain": "Critical points: f'(c)=0 or f'(c) does not exist (c in the domain). Extrema are searched among them.",
+  "kind": "concept",
+  "id": "bd218b9c-cb74-4022-82c2-44326288524b",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "For f(x)=x^(2/3), the point x=0 is a:",
+  "formula": "f'(x) = (2/3)x^(−1/3)",
+  "options": [
+   "local maximum",
+   "local minimum",
+   "point of inflection with no extremum",
+   "point where f' = 0"
+  ],
+  "answer": 1,
+  "explain": "f' is negative for x<0 and positive for x>0, so f has a local minimum (cusp) at 0.",
+  "kind": "fact",
+  "id": "a4b47c22-c470-4bc2-ae1c-061c2f497343",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "For f(x)=x^(1/3), the point x=0 is:",
+  "formula": "",
+  "options": [
+   "a local minimum",
+   "a local maximum",
+   "a critical point with no extremum",
+   "not a critical point"
+  ],
+  "answer": 2,
+  "explain": "f' = (1/3)x^(−2/3) is undefined at 0 but positive on both sides, so there is no extremum.",
+  "kind": "exception",
+  "id": "ff291f0a-4608-4ba7-813b-a74d8f46b35d",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "f(x)=x ln x (x>0) has its local minimum at x=",
+  "formula": "f'(x) = ln x + 1",
+  "options": [
+   "e",
+   "1/e",
+   "1",
+   "e⁻²"
+  ],
+  "answer": 1,
+  "explain": "f'=0 gives ln x = −1, so x=1/e. f' changes from − to +, giving a minimum.",
+  "kind": "result",
+  "id": "106991c6-eeeb-42e7-a802-8c56fec9e11a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "f(x)=(ln x)/x (x>0) has its local maximum at x=",
+  "formula": "f'(x) = (1 − ln x)/x²",
+  "options": [
+   "1",
+   "e²",
+   "e",
+   "1/e"
+  ],
+  "answer": 2,
+  "explain": "f' is positive for x<e and negative for x>e, so there is a maximum at x=e.",
+  "kind": "result",
+  "id": "1e6c53d2-e42f-4f00-a4ff-85b4a23f9009",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "The local maximum value of f(x)=x·e^(−x) is:",
+  "formula": "f'(x) = (1−x)e^(−x)",
+  "options": [
+   "e",
+   "1/e",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "f' changes from + to − at x=1, so the maximum value is f(1)=1/e.",
+  "kind": "result",
+  "id": "dc0f687d-00c1-458f-9f6f-c88ac9481f1f",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "If f'(x)=x(x−1)(x−2), the local maximum occurs at x=",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "1",
+   "none"
+  ],
+  "answer": 2,
+  "explain": "Signs of f' are −, +, −, + across 0, 1, 2. The change from + to − occurs at x=1.",
+  "kind": "result",
+  "id": "35f52486-af75-44e9-8a5e-f48a4dcc7a98",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "If f'(x)=(x−1)²(x−3), f has an extremum:",
+  "formula": "",
+  "options": [
+   "only at x=3, a minimum",
+   "at x=1 a maximum, x=3 a minimum",
+   "only at x=1, a minimum",
+   "only at x=3, a maximum"
+  ],
+  "answer": 0,
+  "explain": "(x−1)² does not change sign at 1. f' goes from − to + at 3, so there is a minimum only at x=3.",
+  "kind": "exception",
+  "id": "d4098f3d-cabc-47e2-87f8-3b6d1a5808fb",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "The local maximum value of f(x)=2x³−9x²+12x is:",
+  "formula": "f'(x) = 6(x−1)(x−2)",
+  "options": [
+   "4",
+   "5",
+   "9",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "f' changes from + to − at x=1, so the local maximum value is f(1)=2−9+12=5.",
+  "kind": "result",
+  "id": "ca98fe1f-effa-4156-b605-24d17dbfa9a3",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "The first derivative test can be applied at c where f' does not exist provided f is:",
+  "formula": "",
+  "options": [
+   "continuous at c",
+   "twice differentiable at c",
+   "bounded near c",
+   "periodic"
+  ],
+  "answer": 0,
+  "explain": "Continuity at c plus a sign change of f' around c is enough for an extremum, as with |x| at 0.",
+  "kind": "concept",
+  "id": "5148e545-04c4-4f7a-b679-0900c09bd9cd",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "If f'(x)>0 on both sides of a point c in a neighbourhood of c, then f has at c:",
+  "formula": "",
+  "options": [
+   "a local maximum",
+   "a local minimum",
+   "no extremum, since f is increasing",
+   "an extremum only if f'(c)=0"
+  ],
+  "answer": 2,
+  "explain": "No sign change of f' means f is strictly increasing across c, so there is no extremum.",
+  "kind": "concept",
+  "id": "497ce733-47ce-4a97-a32d-de7f170ab0ed",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "f(x) = x²e^(−x) has a local maximum at x =",
+  "formula": "f′(x) = x(2 − x)e^(−x)",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "e"
+  ],
+  "answer": 2,
+  "explain": "f′ is + on (0,2) and − for x>2, so max at x=2; x=0 is a local minimum.",
+  "kind": "result",
+  "id": "dcf0d040-71be-4557-bb2b-a2c6ded9d825",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "For f(x)=sin x+cos x on (0, 2π), the local maximum is at x =",
+  "formula": "f'(x)=cos x − sin x",
+  "options": [
+   "π/4",
+   "3π/4",
+   "5π/4",
+   "π/2"
+  ],
+  "answer": 0,
+  "explain": "f'=0 at π/4 and 5π/4. At π/4 f' changes + to − (max), and at 5π/4 − to + (min).",
+  "kind": "result",
+  "id": "770fc25c-711d-480e-8407-492adb9551bb",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "f'(c)=f''(c)=f'''(c)=0 and f⁗(c)>0. Then x=c is a point of",
+  "formula": "",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Inflection point",
+   "Undetermined"
+  ],
+  "answer": 1,
+  "explain": "First nonzero derivative has even order 4 and is positive, so it is a local minimum.",
+  "kind": "result",
+  "id": "4d20baae-0964-4e2c-b407-0e62c863a937",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "For f(x)=x⁴, the point x=0 is a",
+  "formula": "f⁗(0)=24>0",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Point of inflection",
+   "Not a critical point"
+  ],
+  "answer": 1,
+  "explain": "f'=f''=f'''=0 at 0 and f⁗>0 (even order), so it is a local minimum.",
+  "kind": "fact",
+  "id": "1f204c88-94b8-4561-becc-8fb5a0173c48",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "If f''(x)>0 on an interval, then f'(x) on that interval is",
+  "formula": "",
+  "options": [
+   "Decreasing",
+   "Increasing",
+   "Constant",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "f'' is the derivative of f', so f''>0 means f' is increasing (slope increases).",
+  "kind": "concept",
+  "id": "ca70e6b0-bbd5-4018-851f-2f5ed7d360c6",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "On an interval where f''>0, the graph of f lies relative to its tangents",
+  "formula": "",
+  "options": [
+   "Below them",
+   "Above them",
+   "Crossing them",
+   "On them"
+  ],
+  "answer": 1,
+  "explain": "A concave upward curve lies above all of its tangent lines.",
+  "kind": "fact",
+  "id": "cf4a7b0c-eb50-4676-abcc-03f830dd1176",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The inflection point of the cubic ax³+bx²+cx+d (a≠0) is at x =",
+  "formula": "",
+  "options": [
+   "−b/a",
+   "−b/(2a)",
+   "−b/(3a)",
+   "−c/(3a)"
+  ],
+  "answer": 2,
+  "explain": "f''=6ax+2b=0 gives x=−b/(3a); every cubic has exactly one inflection point.",
+  "kind": "formula",
+  "id": "b8d5370f-f6fb-4ec1-a71e-a7afd45ad23a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The points of inflection of y=sin x are at x =",
+  "formula": "",
+  "options": [
+   "nπ",
+   "(2n+1)π/2",
+   "2nπ",
+   "nπ/2"
+  ],
+  "answer": 0,
+  "explain": "f''=−sin x vanishes and changes sign at x=nπ.",
+  "kind": "fact",
+  "id": "a152c1a0-d278-4336-a6c3-fbec9f24612c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "y=ln x is concave",
+  "formula": "f''(x)=−1/x²",
+  "options": [
+   "Upward for x>0",
+   "Downward for x>0",
+   "Upward for x>1 only",
+   "Downward for x>1 only"
+  ],
+  "answer": 1,
+  "explain": "f''=−1/x²<0 for every x>0, so it is concave downward throughout.",
+  "kind": "fact",
+  "id": "edb293bf-ce3e-4fb3-b1fc-bca46fc34a9b",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "If f''(x)>0 for all x and f'(c)=0, then f(c) is the",
+  "formula": "",
+  "options": [
+   "Global maximum",
+   "Global minimum",
+   "Inflection value",
+   "Zero of f"
+  ],
+  "answer": 1,
+  "explain": "f is concave up everywhere, so its only critical point is a global minimum.",
+  "kind": "result",
+  "id": "29a770c7-629d-4693-b226-464d3d7d116e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x)=x³−3x has at x=−1 a",
+  "formula": "f''(x)=6x",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Inflection point",
+   "Global minimum"
+  ],
+  "answer": 1,
+  "explain": "f'(−1)=0 and f''(−1)=−6<0, so it is a local maximum.",
+  "kind": "result",
+  "id": "3ea1c459-b71c-47ee-84ca-1b7178105bfc",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The number of points of inflection of y=x⁴ is",
+  "formula": "f''=12x²",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "f''=12x²≥0 never changes sign, so there is no inflection point.",
+  "kind": "exception",
+  "id": "6d6238c0-f92f-41d4-ade4-8140e41ccbd0",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "For y=x^(1/3), the point x=0 is",
+  "formula": "",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Inflection point though f''(0) is undefined",
+   "Not an inflection since f''(0) does not exist"
+  ],
+  "answer": 2,
+  "explain": "Concavity changes from downward to upward across 0 (f'' undefined at 0), so it is an inflection point.",
+  "kind": "exception",
+  "id": "ffadd90e-82ab-4785-b6e6-9cb44e778684",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "Geometrically, f''(x) measures the",
+  "formula": "",
+  "options": [
+   "Rate of change of slope",
+   "Slope of the tangent",
+   "Area under the curve",
+   "Length of the arc"
+  ],
+  "answer": 0,
+  "explain": "f'' is the derivative of the slope f', i.e. how fast the slope changes (concavity).",
+  "kind": "concept",
+  "id": "145f62ee-b9b4-42e1-9e26-8457f0cc26b8",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "y = e^(−x²) has points of inflection at x =",
+  "formula": "f″ = (4x² − 2)e^(−x²)",
+  "options": [
+   "±1",
+   "±1/√2",
+   "±√2",
+   "0 only"
+  ],
+  "answer": 1,
+  "explain": "f″ = (4x²−2)e^(−x²) = 0 gives x = ±1/√2, and f″ changes sign there.",
+  "kind": "result",
+  "id": "32e667f6-52d7-486a-8e99-5a649b67145c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "For f(x) = x + 1/x, the second derivative test at x = −1 shows a",
+  "formula": "f″(x) = 2/x³",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Point of inflection",
+   "Test fails"
+  ],
+  "answer": 0,
+  "explain": "f′(−1)=0 and f″(−1) = −2 < 0, so x = −1 is a local maximum.",
+  "kind": "result",
+  "id": "cd1eabe8-0e66-4e2e-9045-3942cc7b5cc6",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f'(c)=0, f''(c)=0, f'''(c)=0, f⁗(c)<0. Then x=c is a point of:",
+  "formula": "",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Point of inflection",
+   "Cannot be decided"
+  ],
+  "answer": 0,
+  "explain": "First non-vanishing derivative is of even order (4th) and negative, so local maximum.",
+  "kind": "result",
+  "id": "2afb2652-eaa5-42e0-ac4a-22dee8fcb2f8",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "Range of 3 sin x + 4 cos x + 2 is",
+  "formula": "",
+  "options": [
+   "[−5, 5]",
+   "[−3, 7]",
+   "[−1, 3]",
+   "[−2, 9]"
+  ],
+  "answer": 1,
+  "explain": "3 sin x + 4 cos x lies in [−5,5]; adding 2 gives [−3,7].",
+  "kind": "result",
+  "id": "72fe253f-ecea-4f85-b6fc-4f77dbfbbdf1",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "For a < b, the range of a sin²x + b cos²x is",
+  "formula": "",
+  "options": [
+   "[a, b]",
+   "[a+b, 2b]",
+   "[0, a+b]",
+   "[−b, b]"
+  ],
+  "answer": 0,
+  "explain": "It equals a + (b−a)cos²x, with cos²x in [0,1], so it runs from a to b.",
+  "kind": "result",
+  "id": "4ebf52e0-7c69-4267-9b83-f29c8b34524e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "For a, b > 0, the minimum value of a²tan²x + b²cot²x is",
+  "formula": "AM ≥ GM",
+  "options": [
+   "ab",
+   "a² + b²",
+   "2ab",
+   "2(a²+b²)"
+  ],
+  "answer": 2,
+  "explain": "AM–GM gives a²tan²x + b²cot²x ≥ 2√(a²b²) = 2ab.",
+  "kind": "result",
+  "id": "353dd3f6-47ea-4a8f-90fd-a208a2de8cba",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The minimum value of sin⁴x + cos⁴x is",
+  "formula": "1 − ½ sin²2x",
+  "options": [
+   "1/4",
+   "1/2",
+   "3/4",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "sin⁴x+cos⁴x = 1 − ½sin²2x, which is least (1/2) when sin²2x = 1.",
+  "kind": "result",
+  "id": "1579ed61-d292-4251-b36a-98d7fee2bbbe",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The maximum value of f(x) = (ln x)/x for x>0 is",
+  "formula": "",
+  "options": [
+   "e",
+   "1/e",
+   "1",
+   "2/e"
+  ],
+  "answer": 1,
+  "explain": "f′ = (1−ln x)/x² = 0 at x = e, a maximum with f(e) = 1/e.",
+  "kind": "result",
+  "id": "b3a45661-f175-4bd2-8092-9993ef17e440",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "Among rectangles of fixed perimeter, the one with maximum area is",
+  "formula": "",
+  "options": [
+   "a square",
+   "one with sides in ratio 2:1",
+   "a golden rectangle",
+   "one with sides in ratio 3:2"
+  ],
+  "answer": 0,
+  "explain": "Sides x and P/2−x give area x(P/2−x), maximum at x = P/4, so a square.",
+  "kind": "fact",
+  "id": "8d30d114-4cce-43b1-a6ad-cde3342e9563",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "Right circular cylinder of max volume inscribed in a sphere of radius R has height",
+  "formula": "",
+  "options": [
+   "R",
+   "2R/√3",
+   "R√2",
+   "4R/3"
+  ],
+  "answer": 1,
+  "explain": "V = πr²h with r² = R² − h²/4; maximising gives h = 2R/√3.",
+  "kind": "fact",
+  "id": "53df3070-1db8-42d5-a5d0-db137376d04c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "Right circular cone of max volume inscribed in a sphere of radius R has height",
+  "formula": "",
+  "options": [
+   "3R/2",
+   "4R/3",
+   "2R/√3",
+   "R√2"
+  ],
+  "answer": 1,
+  "explain": "Standard result: the maximum volume cone has h = 4R/3, with V = 8/27 of the sphere's volume.",
+  "kind": "fact",
+  "id": "27c9c8c9-302d-40cc-b9f6-b8cb00376319",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "A closed cylinder of fixed volume has minimum total surface area when h : r =",
+  "formula": "",
+  "options": [
+   "1 : 1",
+   "2 : 1",
+   "1 : 2",
+   "π : 1"
+  ],
+  "answer": 1,
+  "explain": "Minimising 2πr² + 2V/r gives h = 2r, so the height equals the diameter.",
+  "kind": "fact",
+  "id": "46d32e62-e2ba-45d3-bdbc-27b485f42731",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The minimum value of 4 sin x − 3 cos x − 1 is",
+  "formula": "a sin x + b cos x ∈ [−√(a²+b²), √(a²+b²)]",
+  "options": [
+   "−6",
+   "−5",
+   "−4",
+   "−7"
+  ],
+  "answer": 0,
+  "explain": "Amplitude √(16+9)=5, so min = −5 − 1 = −6.",
+  "kind": "result",
+  "id": "4ecc02d4-2f41-4b64-af04-79a036fe07ca",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The maximum value of the product xy, given x + y = 10 with x, y > 0, occurs when",
+  "formula": "",
+  "options": [
+   "x = y = 5",
+   "x = 4, y = 6",
+   "x = 2, y = 8",
+   "x = 1, y = 9"
+  ],
+  "answer": 0,
+  "explain": "By AM–GM, xy is maximum when x = y, giving 25.",
+  "kind": "concept",
+  "id": "5257665b-1fa7-41bd-873a-891701d2729c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "Max-volume right circular cylinder inscribed in a sphere of radius R has height equal to",
+  "formula": "V = 2πr²·√(R² − r²)·…",
+  "options": [
+   "2R/√3",
+   "R√2",
+   "4R/3",
+   "R/√3"
+  ],
+  "answer": 0,
+  "explain": "Maximising V gives h = 2R/√3 and r² = 2R²/3, so h/r = √2.",
+  "kind": "result",
+  "id": "f3e41d15-f69a-4f28-93d5-9a2f92981d9b",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Right circular cone of max volume inscribed in a sphere of radius R has height",
+  "formula": "",
+  "options": [
+   "3R/2",
+   "2R/√3",
+   "4R/3",
+   "R√2"
+  ],
+  "answer": 2,
+  "explain": "Standard result: h = 4R/3, with base radius² = 8R²/9.",
+  "kind": "result",
+  "id": "05ad757c-54a0-400b-9e00-535e6b4afa18",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Cone of fixed slant height has max volume when semi-vertical angle θ satisfies",
+  "formula": "",
+  "options": [
+   "tan θ = √2",
+   "tan θ = 1/√2",
+   "tan θ = 1",
+   "sin θ = 1/3"
+  ],
+  "answer": 0,
+  "explain": "h = l/√3 and r = l√(2/3), so tan θ = r/h = √2.",
+  "kind": "result",
+  "id": "faf9779c-8eaa-47fb-83fa-700eb0925de9",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Right cone of least volume circumscribed about a sphere of radius r has height",
+  "formula": "",
+  "options": [
+   "3r",
+   "4r",
+   "2√2 r",
+   "√2 r"
+  ],
+  "answer": 1,
+  "explain": "Standard result: h = 4r, and base radius = √2·r.",
+  "kind": "result",
+  "id": "a1b9fa96-26fd-4702-96a7-78da2a85c3d5",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Least volume of a cone circumscribed about a sphere is how many times the sphere's volume?",
+  "formula": "",
+  "options": [
+   "2",
+   "3/2",
+   "8/3",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "V = (8/3)πr³ and sphere volume = (4/3)πr³, so the ratio is 2.",
+  "kind": "result",
+  "id": "32c4a717-5420-474b-b916-ebc530534d3f",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Max-volume cylinder inscribed in a cone (radius R, height H) has base radius",
+  "formula": "",
+  "options": [
+   "R/2",
+   "2R/3",
+   "R/3",
+   "3R/4"
+  ],
+  "answer": 1,
+  "explain": "V = πr²H(1 − r/R) is maximum at r = 2R/3.",
+  "kind": "result",
+  "id": "58dac176-733e-4b58-bc1e-fc66a24c4245",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Max-volume cylinder inscribed in a cone of height H has height",
+  "formula": "",
+  "options": [
+   "H/2",
+   "H/4",
+   "2H/3",
+   "H/3"
+  ],
+  "answer": 3,
+  "explain": "With r = 2R/3, the similar-triangle relation gives h = H(1 − r/R) = H/3.",
+  "kind": "result",
+  "id": "2f4a4eb1-4072-4851-8051-48b6cfdf2801",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Max cylinder inscribed in a cone has volume equal to what fraction of the cone's volume?",
+  "formula": "",
+  "options": [
+   "4/9",
+   "1/3",
+   "2/3",
+   "8/27"
+  ],
+  "answer": 0,
+  "explain": "π(4R²/9)(H/3) = 4πR²H/27 = (4/9)·(πR²H/3).",
+  "kind": "result",
+  "id": "3256ba9a-c3e0-4275-856d-2eebc4c4ca6d",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Max volume of a cone inscribed in a sphere is what fraction of the sphere's volume?",
+  "formula": "",
+  "options": [
+   "8/27",
+   "4/9",
+   "1/√3",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "V = (1/3)π(8R²/9)(4R/3) = 32πR³/81 = (8/27)·(4πR³/3).",
+  "kind": "result",
+  "id": "a55db116-ff20-4e5d-a256-937f768e32c5",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Max volume of a cylinder inscribed in a sphere of radius R is",
+  "formula": "",
+  "options": [
+   "4πR³/(3√3)",
+   "4πR³/3",
+   "2πR³/(3√3)",
+   "πR³/√3"
+  ],
+  "answer": 0,
+  "explain": "V = π(2R²/3)(2R/√3) = 4πR³/(3√3), i.e. 1/√3 of the sphere's volume.",
+  "kind": "result",
+  "id": "fee635dd-a29c-4a58-bd41-3cbc49da4a1f",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Max volume of a cone with slant height l is",
+  "formula": "",
+  "options": [
+   "πl³/(3√3)",
+   "2πl³/(9√3)",
+   "πl³/9",
+   "2πl³/(3√3)"
+  ],
+  "answer": 1,
+  "explain": "V = (π/3)(2l²/3)(l/√3) = 2πl³/(9√3).",
+  "kind": "result",
+  "id": "df81c4e5-eb5b-409d-b160-c63d3d534a3d",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Cylinder with fixed sum r + h has max volume when h : r is",
+  "formula": "r + h = constant",
+  "options": [
+   "1 : 2",
+   "1 : 1",
+   "2 : 1",
+   "1 : 3"
+  ],
+  "answer": 0,
+  "explain": "V = πr²(s − r) is max at r = 2s/3, so h = s/3 = r/2.",
+  "kind": "result",
+  "id": "439e659f-dbac-4f1b-b8b9-f227de7ec981",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Base radius of the max-volume cone inscribed in a sphere of radius R is",
+  "formula": "r² = h(2R − h), h = 4R/3",
+  "options": [
+   "2√2R/3",
+   "√3R/2",
+   "2R/3",
+   "R/√2"
+  ],
+  "answer": 0,
+  "explain": "r² = (4R/3)(2R/3) = 8R²/9, so r = 2√2R/3.",
+  "kind": "result",
+  "id": "673fce08-2360-42c5-a74f-bfcf2efe9798",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Max curved surface area of a cylinder inscribed in a sphere of radius R is",
+  "formula": "",
+  "options": [
+   "2πR²",
+   "4πR²",
+   "πR²√2",
+   "πR²"
+  ],
+  "answer": 0,
+  "explain": "S = 4πr√(R²−r²) is max at r = R/√2, giving 2πR².",
+  "kind": "result",
+  "id": "486dc671-2478-4b67-8f7a-2e6bc1b4ed5c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "Cylinder inscribed in a cone (base radius R) has max curved surface area when its radius is?",
+  "formula": "S = 2πrh, h = H(1 − r/R)",
+  "options": [
+   "R/2",
+   "2R/3",
+   "R/3",
+   "3R/4"
+  ],
+  "answer": 0,
+  "explain": "S ∝ r(1 − r/R) is maximum at r = R/2, giving h = H/2.",
+  "kind": "result",
+  "id": "6f253a47-d704-4e81-8493-a27edae00dec",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Standard max/min results (cone, cylinder)"
+ },
+ {
+  "prompt": "f(x) = xˣ (x > 0) is strictly increasing on:",
+  "formula": "f′(x) = xˣ(1 + ln x)",
+  "options": [
+   "(0, ∞)",
+   "(0, 1/e)",
+   "(1/e, ∞)",
+   "(1, ∞)"
+  ],
+  "answer": 2,
+  "explain": "xˣ > 0, so the sign of f′ is the sign of 1 + ln x, positive when x > 1/e.",
+  "kind": "result",
+  "id": "1ab14452-eca3-49c8-ae01-927fbf7b4721",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "f(x)=sin x is strictly decreasing on which interval?",
+  "formula": "",
+  "options": [
+   "(π/2, 3π/2)",
+   "(0, π/2)",
+   "(−π/2, π/2)",
+   "(π, 2π)"
+  ],
+  "answer": 0,
+  "explain": "f′ = cos x < 0 for x in (π/2, 3π/2), so sin x is decreasing there.",
+  "kind": "fact",
+  "id": "77333c38-bf9d-4b74-8656-a128c936321c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Increasing/decreasing: definition & f' test"
+ },
+ {
+  "prompt": "For k < 0, f(x) = x + k/x is:",
+  "formula": "f′ = 1 − k/x² = 1 + |k|/x²",
+  "options": [
+   "increasing on (−∞,0) and (0,∞)",
+   "decreasing on (−∞,0) and (0,∞)",
+   "increasing on ℝ",
+   "decreasing on (−√|k|, √|k|)"
+  ],
+  "answer": 0,
+  "explain": "f′ = 1 + |k|/x² > 0 wherever defined. It is increasing on each piece, though not on all of ℝ since x = 0 is excluded.",
+  "kind": "concept",
+  "id": "a68f45f1-72f2-43d1-a7ff-4094ff28802c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "f(x) = log_{(k−1)} x is increasing on its domain iff:",
+  "formula": "",
+  "options": [
+   "k > 2",
+   "1 < k < 2",
+   "k > 1",
+   "0 < k < 1"
+  ],
+  "answer": 0,
+  "explain": "A logarithm increases iff its base exceeds 1, so k − 1 > 1 gives k > 2.",
+  "kind": "concept",
+  "id": "8ce03e53-46e8-4785-9b4a-eebd6b7c416c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "f(x) = (a² − 1)ˣ is decreasing on ℝ iff:",
+  "formula": "0 < base < 1",
+  "options": [
+   "1 < |a| < √2",
+   "|a| > √2",
+   "|a| < 1",
+   "0 < |a| < √2"
+  ],
+  "answer": 0,
+  "explain": "0 < a² − 1 < 1 gives 1 < a² < 2, i.e. 1 < |a| < √2.",
+  "kind": "result",
+  "id": "94ea1712-2385-4b24-8fa4-920c080e69aa",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "For k > 0, f(x) = x³ − kx is decreasing on:",
+  "formula": "f′ = 3x² − k",
+  "options": [
+   "(−√k, √k)",
+   "(−√(k/3), √(k/3))",
+   "(−∞, −√(k/3))",
+   "(−√(3k), √(3k))"
+  ],
+  "answer": 1,
+  "explain": "3x² − k < 0 gives |x| < √(k/3).",
+  "kind": "result",
+  "id": "ab181762-d2fc-46b1-8487-838ad5a57590",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "f is increasing with f″>0 (convex) on an interval. Then f⁻¹ is:",
+  "formula": "",
+  "options": [
+   "Increasing and concave",
+   "Increasing and convex",
+   "Decreasing and concave",
+   "Decreasing and convex"
+  ],
+  "answer": 0,
+  "explain": "(f⁻¹)′ = 1/f′ > 0 and (f⁻¹)″ = −f″/f′³ < 0, so concave.",
+  "kind": "result",
+  "id": "2f18dbce-24cb-4051-91e7-faafa5c022e2",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f(x) = x³ is strictly increasing on ℝ. Its inverse f⁻¹ at y = 0 is:",
+  "formula": "",
+  "options": [
+   "Not differentiable (vertical tangent)",
+   "Differentiable with derivative 0",
+   "Differentiable with derivative 1",
+   "Not defined at y = 0"
+  ],
+  "answer": 0,
+  "explain": "f′(0)=0, so (f⁻¹)′(0)=1/0 fails; f⁻¹(y)=y^(1/3) has vertical tangent.",
+  "kind": "exception",
+  "id": "3ec174e1-3895-492f-9e82-5c8f5aada2e8",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f is differentiable and strictly decreasing and invertible. Then f⁻¹ is:",
+  "formula": "",
+  "options": [
+   "Strictly decreasing",
+   "Strictly increasing",
+   "Constant",
+   "Not monotonic in general"
+  ],
+  "answer": 0,
+  "explain": "(f⁻¹)′ = 1/f′ has the same (negative) sign as f′.",
+  "kind": "result",
+  "id": "c09e07fb-154e-43b1-97a4-2dc3d81604e9",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f is strictly decreasing with f″>0 (convex) on an interval. Then f⁻¹ is:",
+  "formula": "",
+  "options": [
+   "Decreasing and convex",
+   "Decreasing and concave",
+   "Increasing and convex",
+   "Increasing and concave"
+  ],
+  "answer": 0,
+  "explain": "Reflection in y = x keeps a decreasing convex graph decreasing and convex, e.g. f = eˣ⁻ˣ type: e⁻ˣ ↔ −ln x.",
+  "kind": "trend",
+  "id": "e986b1cb-4f2d-42b2-b7fc-99ee11cbb765",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity of composite & inverse functions"
+ },
+ {
+  "prompt": "f(x)=x ln x (x>0) has a local minimum at x =",
+  "formula": "",
+  "options": [
+   "1",
+   "e",
+   "1/e",
+   "e²"
+  ],
+  "answer": 2,
+  "explain": "f′=ln x+1=0 gives x=1/e, and f″=1/x>0, so it is a minimum.",
+  "kind": "result",
+  "id": "56768431-6aac-4728-8153-2286c18e883a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The points of inflection of y=cos x are at x =",
+  "formula": "",
+  "options": [
+   "nπ",
+   "2nπ",
+   "(2n+1)π/2",
+   "nπ/4"
+  ],
+  "answer": 2,
+  "explain": "f″=−cos x=0 gives x=(2n+1)π/2, and f″ changes sign there.",
+  "kind": "fact",
+  "id": "2b5c684b-f4db-43ef-9b72-6f3d6c736c1b",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The number of points of inflection of y = x⁴ − 4x³ is",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "y″=12x(x−2) vanishes at x=0 and x=2, changing sign at both.",
+  "kind": "result",
+  "id": "1b97a6d2-ffb6-4eaf-9ace-1636a1a731c7",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "On (0, π/2), the graph of y = tan x is",
+  "formula": "",
+  "options": [
+   "Concave upward",
+   "Concave downward",
+   "Linear",
+   "Has an inflection point"
+  ],
+  "answer": 0,
+  "explain": "y″=2sec²x·tan x>0 on (0, π/2).",
+  "kind": "graph",
+  "id": "0bac6f8b-df40-496e-bf8c-b05441257b95",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x)=x³−3x² has a local minimum at x =",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "f′=3x(x−2); f″=6x−6 is 6>0 at x=2 (minimum) and −6<0 at x=0 (maximum).",
+  "kind": "result",
+  "id": "ad787291-612e-43f9-b39d-f4eb2dd3b132",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The graph of y = 1/x for x > 0 is",
+  "formula": "",
+  "options": [
+   "Concave downward",
+   "Concave upward",
+   "Has an inflection point",
+   "Straight line"
+  ],
+  "answer": 1,
+  "explain": "y″=2/x³>0 for x>0.",
+  "kind": "graph",
+  "id": "a106052a-bd0d-4213-8fde-98b95a47dfc0",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "On the interval (π, 2π), y = sin x is",
+  "formula": "",
+  "options": [
+   "Concave downward",
+   "Concave upward",
+   "Linear",
+   "Having an inflection point inside"
+  ],
+  "answer": 1,
+  "explain": "y″=−sin x>0 when sin x<0, which holds on (π, 2π).",
+  "kind": "graph",
+  "id": "c9da632d-9548-4623-b9b3-77b2f1ab8142",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The curve y = eˣ is concave",
+  "formula": "",
+  "options": [
+   "Downward everywhere",
+   "Upward everywhere",
+   "Upward only for x>0",
+   "Has one inflection point"
+  ],
+  "answer": 1,
+  "explain": "y″=eˣ>0 for all x, so there is no inflection point.",
+  "kind": "fact",
+  "id": "e61c9a09-9e6a-4ffa-86ee-2594c5e717c5",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x)=cos x at x = π has a",
+  "formula": "",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Inflection point",
+   "Inconclusive test"
+  ],
+  "answer": 1,
+  "explain": "f′(π)=−sin π=0 and f″(π)=−cos π=1>0, so it is a local minimum.",
+  "kind": "result",
+  "id": "d27b97e3-7844-43ea-9401-be1339f8e004",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x)=2x³−9x²+12x: f''(x)=12x−18. Which x is the point of inflection?",
+  "formula": "f''(x) = 12x − 18",
+  "options": [
+   "x = 3/2",
+   "x = 1",
+   "x = 2",
+   "x = 3"
+  ],
+  "answer": 0,
+  "explain": "f''=12x−18=0 gives x=3/2, and f'' changes sign there.",
+  "kind": "result",
+  "id": "529244bb-b271-415e-8106-ba4a1152815c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The maximum value of f(x) = x^(1/x) for x > 0 is",
+  "formula": "",
+  "options": [
+   "e^(1/e)",
+   "e",
+   "1/e",
+   "e^e"
+  ],
+  "answer": 0,
+  "explain": "ln f = (ln x)/x is maximum at x = e, so the maximum of f is e^(1/e).",
+  "kind": "result",
+  "id": "29e1a49e-0f8b-4a3a-ae3f-788bd6c1a39a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The maximum area of a rectangle inscribed in a circle of radius r is",
+  "formula": "",
+  "options": [
+   "2r²",
+   "πr²",
+   "r²",
+   "4r²"
+  ],
+  "answer": 0,
+  "explain": "The maximum occurs for a square with diagonal 2r, so its area is (2r)²/2 = 2r².",
+  "kind": "result",
+  "id": "1596f22a-8936-4ece-a630-89e56079664d",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "A cone of fixed slant height has maximum volume when its semi-vertical angle θ satisfies",
+  "formula": "",
+  "options": [
+   "tan θ = √2",
+   "tan θ = 1",
+   "tan θ = 1/√2",
+   "sin θ = 1/2"
+  ],
+  "answer": 0,
+  "explain": "V ∝ sin²θ cosθ, which is maximum when tan²θ = 2, i.e. tan θ = √2.",
+  "kind": "result",
+  "id": "b2a10dff-702f-4fd5-a936-8caebb2a24cb",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "Minimum value of 9 tan²x + 4 cot²x is",
+  "formula": "",
+  "options": [
+   "12",
+   "13",
+   "24",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "AM–GM: a²tan²x + b²cot²x ≥ 2ab, with a=3, b=2 gives 12... hence check.",
+  "kind": "result",
+  "id": "8989fbf2-8087-41a6-92d1-5391c8d0d83c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The minimum value of sec²x + cosec²x is",
+  "formula": "sec²x + cosec²x = 4/sin²2x",
+  "options": [
+   "2",
+   "4",
+   "8",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "sec²x + cosec²x = 4/sin²2x, and sin²2x ≤ 1, so the minimum is 4.",
+  "kind": "result",
+  "id": "017fccf0-1780-47af-9a3e-ff3340407e23",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The maximum value of sin x · cos x · ... i.e. of sin²x·cos²x over ℝ is",
+  "formula": "sin²x cos²x = (sin²2x)/4",
+  "options": [
+   "1/4",
+   "1/2",
+   "1/8",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "sin²x cos²x = sin²2x/4, whose maximum is 1/4 at sin²2x = 1.",
+  "kind": "result",
+  "id": "bb8261ab-d347-4428-8a56-b34a42278c1e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "f(x) = kx − ln x is increasing on (1, ∞) iff:",
+  "formula": "f′ = k − 1/x ≥ 0 for x > 1",
+  "options": [
+   "k > 1 only",
+   "k ≥ 0",
+   "k ≥ 1",
+   "k ≥ 2"
+  ],
+  "answer": 2,
+  "explain": "We need k ≥ 1/x for all x > 1. The supremum of 1/x is 1 and is not attained, so k = 1 works.",
+  "kind": "exception",
+  "id": "68f95a86-c04c-444b-8d15-8b90989d120a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Monotonicity condition with parameter"
+ },
+ {
+  "prompt": "The points of inflection of y = ln(1+x²) are at x =",
+  "formula": "y'' = 2(1−x²)/(1+x²)²",
+  "options": [
+   "0",
+   "±1",
+   "±√2",
+   "±1/√2"
+  ],
+  "answer": 1,
+  "explain": "y'' vanishes at x = ±1, where its sign changes.",
+  "kind": "result",
+  "id": "6537d3ad-3639-4f41-b1ee-6a6b4bce12fe",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "For y = ax²+bx+c with a<0, the vertex x = −b/(2a) is a",
+  "formula": "y'' = 2a",
+  "options": [
+   "Local minimum",
+   "Point of inflection",
+   "Local maximum",
+   "Test inconclusive"
+  ],
+  "answer": 2,
+  "explain": "y'' = 2a < 0 at the stationary point, so it is a (global) maximum.",
+  "kind": "concept",
+  "id": "1866e6da-d650-4975-86c3-8cccb1c90fc1",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The point of inflection of y = (x−1)³ + 2 is",
+  "formula": "",
+  "options": [
+   "(0, 1)",
+   "(1, 0)",
+   "(2, 1)",
+   "(1, 2)"
+  ],
+  "answer": 3,
+  "explain": "y'' = 6(x−1) changes sign at x = 1, and y(1) = 2.",
+  "kind": "result",
+  "id": "41fad06a-3b1c-4e51-93a0-813dc167c329",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x) = x·e^(−x) has at x = 1 a:",
+  "formula": "f′ = e^(−x)(1−x), f″ = e^(−x)(x−2)",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Point of inflection",
+   "Test inconclusive"
+  ],
+  "answer": 1,
+  "explain": "f′(1)=0 and f″(1)=−1/e<0, so x=1 is a local maximum.",
+  "kind": "result",
+  "id": "1183aa3b-8d15-4b3e-9d06-ce020dd5469e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x) = x·eˣ has at x = −1 a:",
+  "formula": "f′ = eˣ(x+1), f″ = eˣ(x+2)",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Point of inflection",
+   "Test inconclusive"
+  ],
+  "answer": 1,
+  "explain": "f′(−1)=0 and f″(−1)=e⁻¹>0, so x=−1 is a local minimum.",
+  "kind": "result",
+  "id": "2c6f8c51-80d4-4a7b-9d9f-7aa8426598b2",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x) = x⁴ − 2x² at x = 0 has a:",
+  "formula": "f″(x) = 12x² − 4",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Point of inflection",
+   "Test inconclusive"
+  ],
+  "answer": 1,
+  "explain": "f′(0)=0 and f″(0)=−4<0, so x=0 is a local maximum.",
+  "kind": "result",
+  "id": "50889530-5f65-44d0-9f2a-044f16c0c451",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "A right circular cone circumscribes a sphere of radius r. Its minimum volume occurs at height",
+  "formula": "",
+  "options": [
+   "3r",
+   "4r",
+   "2r√2",
+   "6r"
+  ],
+  "answer": 1,
+  "explain": "Minimum volume cone about a sphere has h = 4r, base radius r√2, V = 8πr³/3.",
+  "kind": "result",
+  "id": "d76bda9a-8f94-403d-b6e4-cfa49ccf364d",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "Of all triangles inscribed in a circle of radius r, maximum area is",
+  "formula": "",
+  "options": [
+   "√3r²/2",
+   "3√3r²/4",
+   "r²",
+   "2r²"
+  ],
+  "answer": 1,
+  "explain": "The maximum is for the equilateral triangle: area 3√3r²/4.",
+  "kind": "result",
+  "id": "44222bf5-bdf6-4618-a62c-415c01702383",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "For a>0, the minimum value of a sin x + a cosec x ... over x in (0, π) is?",
+  "formula": "",
+  "options": [
+   "2a",
+   "a",
+   "a√2",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Let t = sin x in (0,1]; t + 1/t ≥ 2, so a(t + 1/t) ≥ 2a, attained at t = 1.",
+  "kind": "result",
+  "id": "bb4a1c15-600a-48f9-9022-d9c54752517e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "f(x) = sin x + cos x has at x = π/4 a:",
+  "formula": "f'' = −(sin x + cos x)",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Point of inflection",
+   "Test inconclusive"
+  ],
+  "answer": 1,
+  "explain": "f'(π/4)=0 and f''(π/4)=−√2<0, so it is a local maximum.",
+  "kind": "result",
+  "id": "7cd49e11-f916-43b5-9d1e-f72054aa0c5f",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The maximum number of points of inflection of a quartic polynomial is",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "f'' is a quadratic with at most 2 real roots, so a quartic has at most 2 inflection points.",
+  "kind": "fact",
+  "id": "1fd311a3-9347-4b78-aa24-dc2738d39181",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The graph of y = √x for x > 0 is",
+  "formula": "",
+  "options": [
+   "Concave upward",
+   "Concave downward",
+   "Has an inflection point at x=1",
+   "Linear"
+  ],
+  "answer": 1,
+  "explain": "y'' = −¼x^(−3/2) < 0 for x>0, so it is concave downward.",
+  "kind": "result",
+  "id": "0d1c4263-295b-4123-ac4c-c44f224cac77",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x)=sin x − x at x=0 has a",
+  "formula": "f′=cos x−1, f″=−sin x",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Point of inflection",
+   "Global minimum"
+  ],
+  "answer": 2,
+  "explain": "f′(0)=f″(0)=0 and f‴(0)=−1≠0, so x=0 is a point of inflection.",
+  "kind": "exception",
+  "id": "cd7c82e7-6679-4d91-b374-30bb72169c3a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f'(c)=f''(c)=0 and the first non-zero derivative at c is f⁽⁵⁾(c)≠0. Then x=c is:",
+  "formula": "",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Point of inflection (no extremum)",
+   "Global minimum"
+  ],
+  "answer": 2,
+  "explain": "If the first non-zero derivative at c is of odd order, there is no extremum; the curve crosses its tangent (inflection).",
+  "kind": "concept",
+  "id": "310d5e23-f0cb-4839-8d39-399964861b7a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x) = x − ln x (x>0) has at x = 1 a:",
+  "formula": "f'' = 1/x²",
+  "options": [
+   "Local maximum",
+   "Local minimum",
+   "Point of inflection",
+   "Test inconclusive"
+  ],
+  "answer": 1,
+  "explain": "f'(x)=1−1/x=0 at x=1, and f''(1)=1>0, so it is a local minimum.",
+  "kind": "result",
+  "id": "94db77c9-f279-488c-9c48-ac00109c1e2c",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "Maximum value of sin θ(1 + cos θ) on [0, π] is",
+  "formula": "",
+  "options": [
+   "3√3/4",
+   "√3/2",
+   "1",
+   "3/4"
+  ],
+  "answer": 0,
+  "explain": "Derivative gives cos θ = 1/2, θ = π/3, so value = (√3/2)(3/2) = 3√3/4.",
+  "kind": "result",
+  "id": "73ca30c2-7aee-43d6-b29c-d4d2cd0431c6",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The minimum value of eˣ + e⁻ˣ over ℝ is",
+  "formula": "eˣ + e⁻ˣ ≥ 2",
+  "options": [
+   "1",
+   "2",
+   "e + 1/e",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "AM–GM: eˣ + e⁻ˣ ≥ 2√(eˣ·e⁻ˣ) = 2, with equality at x = 0.",
+  "kind": "result",
+  "id": "cd871195-3a50-40de-89ed-b5d36aff57cb",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "If f′(x) = (x−1)(x−2)²(x−3)³, the number of local extrema is",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "1",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "f′ changes sign at x=1 and x=3 (odd powers) but not at x=2 (even power). That gives 2 extrema.",
+  "kind": "concept",
+  "id": "fdef4727-9d8b-4cd0-b2db-cee14d27a758",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "On (0, 2π), f(x) = x + 2 sin x has a local maximum at x =",
+  "formula": "f′(x) = 1 + 2cos x",
+  "options": [
+   "2π/3",
+   "π/3",
+   "4π/3",
+   "5π/6"
+  ],
+  "answer": 0,
+  "explain": "f′ = 0 gives cos x = −1/2. f′ changes from + to − at 2π/3, so it is a max. 4π/3 is the min.",
+  "kind": "result",
+  "id": "8ed820ca-96f4-4ca2-8d0b-eca6dc939e85",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "First derivative test for local extrema"
+ },
+ {
+  "prompt": "The points of inflection of y = 1/(1+x²) are at x =",
+  "formula": "y″ = (6x²−2)/(1+x²)³",
+  "options": [
+   "±1/√3",
+   "±1/√2",
+   "±1",
+   "±√3"
+  ],
+  "answer": 0,
+  "explain": "y″ = (6x²−2)/(1+x²)³ = 0 gives x² = 1/3, with a sign change.",
+  "kind": "result",
+  "id": "be226f0d-6027-474c-9d37-f04676d6a32e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "A polynomial of degree n ≥ 2 has at most how many points of inflection?",
+  "formula": "",
+  "options": [
+   "n − 2",
+   "n − 1",
+   "n",
+   "n − 3"
+  ],
+  "answer": 0,
+  "explain": "f″ has degree n−2, so it has at most n−2 real roots.",
+  "kind": "fact",
+  "id": "6391e0f9-8f42-47c1-8b52-fef22b930239",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "On (−π/2, π/2), the graph of y = cos x is",
+  "formula": "y″ = −cos x",
+  "options": [
+   "Concave downward",
+   "Concave upward",
+   "Concave downward only for x > 0",
+   "Has an inflection at 0"
+  ],
+  "answer": 0,
+  "explain": "y″ = −cos x < 0 on (−π/2, π/2).",
+  "kind": "graph",
+  "id": "001c9a01-9f0b-40a9-84b5-c95a776883e7",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "The points of inflection of y = x⁴ − 6x² are at x =",
+  "formula": "y″ = 12x² − 12",
+  "options": [
+   "±1",
+   "±√2",
+   "±1/√2",
+   "0 only"
+  ],
+  "answer": 0,
+  "explain": "y″ = 12(x²−1) = 0 gives x = ±1, and the sign changes at both.",
+  "kind": "result",
+  "id": "553f770d-5696-48e9-9fd4-98f38daa2de8",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x) = sin x at x = 3π/2 has a",
+  "formula": "f′ = 0, f″ = −sin x = 1 > 0",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Point of inflection",
+   "Test inconclusive"
+  ],
+  "answer": 0,
+  "explain": "f′(3π/2) = 0 and f″(3π/2) = 1 > 0, so it is a local minimum.",
+  "kind": "result",
+  "id": "99beb721-e1b1-4643-b847-57053d8e6b8e",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "If f″>0 on an interval, the chord joining two points of its graph lies",
+  "formula": "",
+  "options": [
+   "Above the graph",
+   "Below the graph",
+   "On the graph",
+   "Partly above, partly below"
+  ],
+  "answer": 0,
+  "explain": "For a concave-up (convex) function the chord lies above the graph.",
+  "kind": "concept",
+  "id": "ea3f9ee7-70ef-4eb2-98be-b8096511b339",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "f(x) = eˣ + e⁻ˣ has at x = 0 a:",
+  "formula": "f′ = eˣ − e⁻ˣ, f″ = eˣ + e⁻ˣ",
+  "options": [
+   "Local minimum",
+   "Local maximum",
+   "Point of inflection",
+   "Test inconclusive"
+  ],
+  "answer": 0,
+  "explain": "f′(0)=0 and f″(0)=2>0, so x=0 is a local (indeed global) minimum.",
+  "kind": "result",
+  "id": "e46cffae-cda8-40c1-b7da-a164ff46a97d",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Second derivative test"
+ },
+ {
+  "prompt": "Maximum value of 1/(3 sin x + 4 cos x + 7) over ℝ is:",
+  "formula": "a sin x + b cos x ∈ [−√(a²+b²), √(a²+b²)]",
+  "options": [
+   "1/12",
+   "1/7",
+   "1/2",
+   "1/5"
+  ],
+  "answer": 2,
+  "explain": "3sin x+4cos x ∈ [−5,5], so the denominator's minimum is 2 and the maximum of the fraction is 1/2.",
+  "kind": "result",
+  "id": "c9c63949-144f-4b2e-b892-2f909f37a25a",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ },
+ {
+  "prompt": "The minimum value of |sin x| + |cos x| over ℝ is:",
+  "formula": "(|sin x|+|cos x|)² = 1 + |sin 2x|",
+  "options": [
+   "0",
+   "1",
+   "1/√2",
+   "√2"
+  ],
+  "answer": 1,
+  "explain": "Square: 1 + |sin 2x| ≥ 1, so the minimum is 1 (range [1, √2]).",
+  "kind": "result",
+  "id": "8ab26a25-4400-43bc-8636-3ec71351b494",
+  "subject": "Mathematics",
+  "chapter": "Application of Derivatives",
+  "topic": "Range of a·sinx + b·cosx & standard extrema"
+ }
+]

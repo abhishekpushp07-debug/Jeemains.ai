@@ -1,1499 +1,3219 @@
 [
-  {
-    "id": "77e1d848-96c2-435f-82c6-696728a20c40",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Rate of reaction has SI units:",
-    "formula": "",
-    "options": [
-      "mol s⁻¹",
-      "mol L s⁻¹",
-      "mol L⁻¹ s⁻¹",
-      "L mol⁻¹ s⁻¹"
-    ],
-    "answer": 2,
-    "explain": "Rate = Δ[conc]/Δt, so units are mol L⁻¹ s⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2eb52709-9809-4f5d-b0e6-9f4a5e46cea3",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For zero-order reaction, rate constant k has units:",
-    "formula": "r = k",
-    "options": [
-      "s⁻¹",
-      "mol L⁻¹ s⁻¹",
-      "L² mol⁻² s⁻¹",
-      "L mol⁻¹ s⁻¹"
-    ],
-    "answer": 1,
-    "explain": "Zero-order: rate = k, so k has same units as rate: mol L⁻¹ s⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "990df5cd-ee5e-458e-a4a6-5988addfef83",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For first-order reaction, k has units:",
-    "formula": "r = k[A]",
-    "options": [
-      "L² mol⁻² s⁻¹",
-      "s⁻¹",
-      "L mol⁻¹ s⁻¹",
-      "mol L⁻¹ s⁻¹"
-    ],
-    "answer": 1,
-    "explain": "First-order: k = rate/[A] = (mol L⁻¹ s⁻¹)/(mol L⁻¹) = s⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "abc4b1cf-0c2c-420d-ac1e-c824842ec7fd",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Half-life of zero-order reaction is:",
-    "formula": "t½ = [A]₀/2k",
-    "options": [
-      "[A]₀/2k",
-      "k/[A]₀",
-      "0.693/k",
-      "2k/[A]₀"
-    ],
-    "answer": 0,
-    "explain": "Zero-order: [A] = [A]₀ − kt, so at [A]=½[A]₀, t½ = [A]₀/2k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "826825f3-3562-4579-a3e3-222d57beeef1",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Integrated rate law for first-order reaction:",
-    "formula": "ln[A] = ln[A]₀ − kt",
-    "options": [
-      "1/[A]−1/[A]₀ = kt",
-      "[A]² = [A]₀²−2kt",
-      "ln([A]₀/[A]) = kt",
-      "[A]₀−[A] = kt"
-    ],
-    "answer": 2,
-    "explain": "First-order: −d[A]/dt = k[A] integrates to ln([A]₀/[A]) = kt.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1896ddbb-e3e7-4fa7-a5a2-eae1195cae22",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Integrated rate law for second-order (one reactant):",
-    "formula": "1/[A] − 1/[A]₀ = kt",
-    "options": [
-      "[A]₀−[A] = kt",
-      "ln([A]₀/[A]) = kt",
-      "[A]²−[A]₀² = −kt",
-      "1/[A]−1/[A]₀ = kt"
-    ],
-    "answer": 3,
-    "explain": "Second-order: −d[A]/dt = k[A]² integrates to 1/[A]−1/[A]₀ = kt.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "edd56f8c-e89b-43af-a47d-c538a1a9d0a5",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Molecularity of a reaction can be:",
-    "formula": "",
-    "options": [
-      "Any real number",
-      "Zero or positive integer",
-      "Any positive integer",
-      "Only 1, 2, or 3"
-    ],
-    "answer": 3,
-    "explain": "Molecularity is number of molecules colliding; only 1, 2, or 3 (never 0 or >3).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7418270a-cd2d-484b-a3c4-3ebc21439572",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Order of reaction is determined by:",
-    "formula": "",
-    "options": [
-      "Stoichiometry",
-      "Experiment",
-      "Molecularity",
-      "Mechanism only"
-    ],
-    "answer": 1,
-    "explain": "Order is experimentally determined; it need not equal stoichiometric coefficients.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4fed6284-dd37-4bae-8856-502c85fde9c1",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Arrhenius equation relates k to temperature as:",
-    "formula": "k = Ae^(−Eₐ/RT)",
-    "options": [
-      "k = Ae^(−Eₐ/RT)",
-      "k = A/Eₐ·RT",
-      "k = A·Eₐ·e^(RT)",
-      "k = Ae^(Eₐ/RT)"
-    ],
-    "answer": 0,
-    "explain": "Arrhenius: k = Ae^(−Eₐ/RT); A is frequency factor, Eₐ is activation energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ebe9bf32-9f20-47c9-967a-dbd1b633eded",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Slope of ln k vs 1/T graph gives:",
-    "formula": "slope = −Eₐ/R",
-    "options": [
-      "A",
-      "−Eₐ·R",
-      "−Eₐ/R",
-      "Eₐ/R"
-    ],
-    "answer": 2,
-    "explain": "ln k = ln A − Eₐ/RT; plot of ln k vs 1/T is linear with slope = −Eₐ/R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dfc9d8cb-60bc-4e17-a0be-792e06deb229",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "A catalyst increases reaction rate by:",
-    "formula": "",
-    "options": [
-      "Changing equilibrium constant",
-      "Increasing temperature",
-      "Lowering activation energy",
-      "Increasing ΔH"
-    ],
-    "answer": 2,
-    "explain": "Catalyst provides alternate path with lower Eₐ; does not alter ΔH or equilibrium.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9c49a208-1794-4584-921d-b4229896b4cc",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Overall order = sum of powers in rate law. For r = k[A]²[B], order is:",
-    "formula": "order = 2+1 = 3",
-    "options": [
-      "3",
-      "1",
-      "2",
-      "Depends on stoichiometry"
-    ],
-    "answer": 0,
-    "explain": "Overall order = sum of individual orders = 2+1 = 3 (third order).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dbb5cdb3-99f6-4df7-bf83-cc59805b4039",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Temperature coefficient of a reaction is ratio k(T+10)/k(T). Typical value:",
-    "formula": "",
-    "options": [
-      "0.5 to 1",
-      "100",
-      "2 to 3",
-      "10 to 20"
-    ],
-    "answer": 2,
-    "explain": "Temperature coefficient ≈ 2–3; rate roughly doubles/triples per 10°C rise.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a7b871ad-e12d-4166-91a5-f4ac6b78fea3",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For reaction A→B, if rate = k[A]⁰, plot of [A] vs t is:",
-    "formula": "[A] = [A]₀ − kt",
-    "options": [
-      "Hyperbola",
-      "Parabola",
-      "Straight line",
-      "Exponential decay"
-    ],
-    "answer": 2,
-    "explain": "Zero-order: [A] = [A]₀ − kt; [A] vs t is a straight line with slope −k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "59c397fb-82c8-4cd5-8cf9-b015e99a65ed",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For first-order, plot of ln[A] vs t is:",
-    "formula": "ln[A] = ln[A]₀ − kt",
-    "options": [
-      "Hyperbola",
-      "Straight line with slope +k",
-      "Straight line with slope −k",
-      "Curved upward"
-    ],
-    "answer": 2,
-    "explain": "ln[A] = ln[A]₀ − kt is linear; slope = −k, intercept = ln[A]₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8f7aa4ff-18b5-43f0-914f-78acf25f457c",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For second-order, straight-line plot is obtained for:",
-    "formula": "1/[A] = 1/[A]₀ + kt",
-    "options": [
-      "1/[A] vs t",
-      "[A]² vs t",
-      "[A] vs t",
-      "ln[A] vs t"
-    ],
-    "answer": 0,
-    "explain": "Second-order: 1/[A] vs t is linear with slope = k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c89d3ef8-05a2-4cec-971a-ad23c94e6d5a",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Rate-determining step in a mechanism is the:",
-    "formula": "",
-    "options": [
-      "Slowest step",
-      "First step always",
-      "Fastest step",
-      "Last step always"
-    ],
-    "answer": 0,
-    "explain": "The slowest step controls overall rate; called the rate-determining step.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "88bbc54b-5d91-4315-946c-d851f1a513b3",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "If Eₐ(forward) > Eₐ(backward), the reaction is:",
-    "formula": "ΔH = Eₐf − Eₐb",
-    "options": [
-      "Exothermic",
-      "Endothermic",
-      "Cannot determine",
-      "Thermoneutral"
-    ],
-    "answer": 1,
-    "explain": "ΔH = Eₐf − Eₐb; if Eₐf > Eₐb then ΔH > 0 → endothermic reaction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e87c9487-d454-438e-a415-48e90b2680af",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Unit of k for nth-order reaction:",
-    "formula": "k: (mol L⁻¹)^(1−n) s⁻¹",
-    "options": [
-      "(mol L⁻¹)^n s⁻¹",
-      "(mol L⁻¹)^(1−n) s⁻¹",
-      "s^n mol⁻¹",
-      "mol^n L^n s⁻¹"
-    ],
-    "answer": 1,
-    "explain": "General formula: k has units (concentration)^(1−n)·time⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d600905d-1e35-43f6-bbff-b6467e81a032",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Radioactive decay follows which order kinetics?",
-    "formula": "N = N₀e^(−λt)",
-    "options": [
-      "Zero order",
-      "Second order",
-      "First order",
-      "Pseudo-first order"
-    ],
-    "answer": 2,
-    "explain": "Radioactive decay: dN/dt = −λN, which is first-order kinetics.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ebde7b78-91b4-4be5-a7c9-42ac633354a4",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Log form of Arrhenius for two temperatures T₁ and T₂:",
-    "formula": "log(k₂/k₁) = Eₐ/2.303R·(1/T₁−1/T₂)",
-    "options": [
-      "Eₐ(T₁−T₂)/R·T₁T₂",
-      "Eₐ(T₂−T₁)/2.303R·T₁T₂",
-      "R·T₁T₂/Eₐ(T₂−T₁)",
-      "2.303Eₐ/R(T₂−T₁)"
-    ],
-    "answer": 1,
-    "explain": "log(k₂/k₁) = Eₐ/2.303R × (T₂−T₁)/(T₁T₂); key JEE formula.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3ea2ef1c-0557-43d2-95a5-641df61e8785",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Half-life of second-order reaction (one reactant) is:",
-    "formula": "t½ = 1/(k[A]₀)",
-    "options": [
-      "2/k[A]₀",
-      "0.693/k",
-      "1/(k[A]₀)",
-      "[A]₀/(2k)"
-    ],
-    "answer": 2,
-    "explain": "For 2nd-order, t½ = 1/(k[A]₀); depends on initial concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "50efd3bd-78a0-4439-8af6-1ea41f7f9def",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For zero-order reaction, [A] at time t is:",
-    "formula": "[A] = [A]₀ − kt",
-    "options": [
-      "[A]₀ e^(−kt)",
-      "[A]₀ − kt",
-      "1/[A]₀ + kt",
-      "[A]₀/(1+kt)"
-    ],
-    "answer": 1,
-    "explain": "Zero-order integrated law: [A] = [A]₀ − kt; linear decrease with time.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3508a360-f3f3-433a-8cd0-a482cbf0602b",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Which graph gives straight line for zero-order reaction?",
-    "formula": "",
-    "options": [
-      "log[A] vs 1/t",
-      "ln[A] vs t",
-      "[A] vs t",
-      "1/[A] vs t"
-    ],
-    "answer": 2,
-    "explain": "[A] vs t is linear for zero-order; slope = −k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "01219f60-fbe3-4049-805c-42a6f607038e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Molecularity is defined for:",
-    "formula": "",
-    "options": [
-      "Rate-determining step only",
-      "Any balanced equation",
-      "Overall reaction",
-      "Elementary steps only"
-    ],
-    "answer": 3,
-    "explain": "Molecularity is meaningful only for elementary (single-step) reactions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7d6dfee2-58a8-47e4-b4bb-e951ce312cbc",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Order of reaction can be:",
-    "formula": "",
-    "options": [
-      "Positive integers only",
-      "Only 1 or 2",
-      "Never negative",
-      "Fractional or zero"
-    ],
-    "answer": 3,
-    "explain": "Order can be zero, fractional, integer, or even negative; it is experimentally determined.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "04b03f36-0e6c-4e7f-bc4b-f70ad26e7425",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For A+B→P, if doubling [A] doubles rate and doubling [B] quadruples rate, order in B is:",
-    "formula": "",
-    "options": [
-      "3",
-      "0",
-      "1",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "Quadrupling rate on doubling [B] means rate ∝ [B]², so order in B = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c51e1b24-b5b3-4be6-ab91-cd85459e6209",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Pre-exponential factor A in Arrhenius equation represents:",
-    "formula": "k = Ae^(−Eₐ/RT)",
-    "options": [
-      "Rate at 0 K",
-      "Collision frequency factor",
-      "Activation energy",
-      "Threshold energy"
-    ],
-    "answer": 1,
-    "explain": "A (frequency factor) accounts for collision frequency and proper orientation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "372bc778-85eb-4e22-a699-d7f06ede4f1e",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Effect of catalyst on ΔH of reaction:",
-    "formula": "",
-    "options": [
-      "ΔH becomes zero",
-      "ΔH increases",
-      "ΔH decreases",
-      "No change in ΔH"
-    ],
-    "answer": 3,
-    "explain": "Catalyst lowers Eₐ but does not alter ΔH (thermodynamics unchanged).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "508d1332-859e-4c31-a7ab-aff1835653ac",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "In Arrhenius equation, units of pre-exponential factor A are same as:",
-    "formula": "",
-    "options": [
-      "Rate of reaction",
-      "Rate constant k",
-      "Activation energy",
-      "Concentration"
-    ],
-    "answer": 1,
-    "explain": "A has same units as k since e^(−Eₐ/RT) is dimensionless.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "51f1160e-a62f-4440-8b76-e1e79c963750",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For first-order reaction, time for 75% completion equals:",
-    "formula": "",
-    "options": [
-      "2 × t½",
-      "t½/2",
-      "3 × t½",
-      "1.5 × t½"
-    ],
-    "answer": 0,
-    "explain": "75% done ⟹ [A] = [A]₀/4; two half-lives are needed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7e51b1b9-0529-4318-a3de-471ac863fd50",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For the reaction 2A → products, rate = k[A]². Units of k are:",
-    "formula": "",
-    "options": [
-      "mol² L⁻² s⁻¹",
-      "L mol⁻¹ s⁻¹",
-      "mol L⁻¹ s⁻¹",
-      "s⁻¹"
-    ],
-    "answer": 1,
-    "explain": "Second-order k has units L mol⁻¹ s⁻¹ (= M⁻¹s⁻¹).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a92e5b24-b02a-4ec5-9a14-8a55041eda12",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "A reaction has rate = k regardless of [A]. Its order is:",
-    "formula": "",
-    "options": [
-      "Zero",
-      "First",
-      "Second",
-      "Cannot determine"
-    ],
-    "answer": 0,
-    "explain": "Rate independent of concentration means zero-order reaction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "00f2c229-4ade-4d4c-84f4-1bb6ad2dee3d",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Pseudo-first-order rate constant k' for A+B→P (B in excess) equals:",
-    "formula": "k' = k[B]₀",
-    "options": [
-      "k[B]₀",
-      "k·[A]₀",
-      "k/[B]₀",
-      "k+[B]₀"
-    ],
-    "answer": 0,
-    "explain": "When [B]≫[A], [B] ≈ constant=[B]₀, so observed k' = k[B]₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7859efdf-f985-4cd4-bbaf-69f0678c04f8",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Energy of activation (Eₐ) can be calculated from two rate constants k₁,k₂ at T₁,T₂ using:",
-    "formula": "ln(k₂/k₁)=Eₐ/R·(1/T₁−1/T₂)",
-    "options": [
-      "Gibbs equation",
-      "Clausius-Clapeyron",
-      "Arrhenius equation at two T",
-      "van't Hoff equation"
-    ],
-    "answer": 2,
-    "explain": "Two-temperature Arrhenius form directly gives Eₐ from k₁,k₂,T₁,T₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "cd2cc345-b3f6-4b29-ad9f-078e762d6fc6",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a first-order reaction, if initial concentration triples, t½:",
-    "formula": "t½ = 0.693/k",
-    "options": [
-      "Decreases by 1/3",
-      "Triples",
-      "Remains the same",
-      "Doubles"
-    ],
-    "answer": 2,
-    "explain": "First-order t½ = 0.693/k; independent of initial concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d490f04b-65de-49b8-b4a5-e8498b0766c9",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "The rate of reaction is expressed as −d[A]/dt. For 2A→B, rate of formation of B is:",
-    "formula": "",
-    "options": [
-      "½(−d[A]/dt)",
-      "−d[A]/dt",
-      "−2d[A]/dt",
-      "2(−d[A]/dt)"
-    ],
-    "answer": 0,
-    "explain": "Stoichiometry: rate = −(1/2)d[A]/dt = d[B]/dt, so d[B]/dt = ½(−d[A]/dt).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f9f234df-383e-421a-83db-af61f7b2b29d",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Which plot distinguishes first-order from second-order reaction?",
-    "formula": "",
-    "options": [
-      "[A] vs t",
-      "k vs [A]",
-      "ln[A] vs t (linear=1st) and 1/[A] vs t (linear=2nd)",
-      "rate vs T"
-    ],
-    "answer": 2,
-    "explain": "ln[A] vs t linear ⟹ first-order; 1/[A] vs t linear ⟹ second-order.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0edf2b24-24a4-4603-a035-c7250dbdf4ec",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For reaction A→P, if t½ is independent of initial [A], order is:",
-    "formula": "",
-    "options": [
-      "First order",
-      "Second order",
-      "Third order",
-      "Zero order"
-    ],
-    "answer": 0,
-    "explain": "t½ = 0.693/k for first-order; independent of initial concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "af9125cc-b919-4da9-a4a2-651efdbde74b",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a second-order reaction, doubling [A] changes rate by factor:",
-    "formula": "r = k[A]²",
-    "options": [
-      "4",
-      "2",
-      "1",
-      "8"
-    ],
-    "answer": 0,
-    "explain": "Rate ∝ [A]², so doubling [A] increases rate by 2² = 4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ff5be45f-b6f7-4389-8813-8529260480a7",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "The unit of rate of reaction is:",
-    "formula": "",
-    "options": [
-      "mol L⁻¹ s⁻¹",
-      "mol⁻¹ L s⁻¹",
-      "L mol⁻¹ s⁻¹",
-      "mol L s⁻¹"
-    ],
-    "answer": 0,
-    "explain": "Rate = Δ[conc]/Δt has units mol L⁻¹ s⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "5fc616c1-831d-4e99-8ce6-371fb74f20cd",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "A reaction is 2nd order in A and 0th order in B. Doubling [B] changes rate by:",
-    "formula": "",
-    "options": [
-      "Factor of 1/2",
-      "Factor of 2",
-      "No change",
-      "Factor of 4"
-    ],
-    "answer": 2,
-    "explain": "Zero order in B means rate is independent of [B]; no change.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "042ed655-7dd2-406b-bc0c-d6c5b55ab58b",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Which quantity has same unit as frequency (s⁻¹) in Arrhenius equation?",
-    "formula": "k = Ae^(−Eₐ/RT)",
-    "options": [
-      "T",
-      "Eₐ",
-      "R",
-      "A (pre-exponential factor)"
-    ],
-    "answer": 3,
-    "explain": "For first-order, A has units s⁻¹, same as frequency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8d27b8f7-193c-46b8-b0e7-f0e8a2b1f980",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For first-order reaction, t₇₅% (75% completion) equals:",
-    "formula": "",
-    "options": [
-      "4 × t½",
-      "2 × t½",
-      "3 × t½",
-      "t½"
-    ],
-    "answer": 1,
-    "explain": "75% done means 25% remains → 2 half-lives; t = 2t½.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "55f659b9-dcc4-42ac-a0b2-9485a60e54b6",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "A catalyst lowers activation energy. Its effect on rate constant k is:",
-    "formula": "",
-    "options": [
-      "k increases",
-      "k decreases",
-      "k unchanged",
-      "k becomes zero"
-    ],
-    "answer": 0,
-    "explain": "Lower Eₐ increases e^(−Eₐ/RT), so k increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "463c7e91-a3d7-48fc-9a97-9c6d297508b3",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a zero-order reaction, rate = k. Doubling volume (halving concentration) changes rate by:",
-    "formula": "",
-    "options": [
-      "Halves it",
-      "Quadruples it",
-      "Doubles it",
-      "No change: rate=k always"
-    ],
-    "answer": 3,
-    "explain": "Zero-order rate = k, independent of concentration; rate unchanged.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "53318416-69e2-4d3c-8c21-1ec7882227e7",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For first-order reaction, fraction remaining after n half-lives is:",
-    "formula": "",
-    "options": [
-      "2ⁿ",
-      "n/2",
-      "1/n",
-      "(1/2)ⁿ"
-    ],
-    "answer": 3,
-    "explain": "After each t½, concentration halves; after n half-lives → (1/2)ⁿ remains.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c992ed06-d293-4d2a-bc07-2265e3420bed",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "If rate = k[A][B]², tripling [B] alone changes rate by factor:",
-    "formula": "",
-    "options": [
-      "6",
-      "27",
-      "3",
-      "9"
-    ],
-    "answer": 3,
-    "explain": "Rate ∝ [B]²; tripling [B] → rate × 3² = 9.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "27c66802-6472-42d7-9982-7fccbef160d8",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For reaction 2A + B → C, rate law is r = k[A][B]. Order w.r.t. A is:",
-    "formula": "",
-    "options": [
-      "2",
-      "1",
-      "3",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "Order is from experimental rate law, not stoichiometry; order in A = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8edf1705-dc2c-4c05-849d-2d317e0b3c7b",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For second-order reaction (one reactant), t½ is proportional to:",
-    "formula": "t½ = 1/(k[A]₀)",
-    "options": [
-      "1/[A]₀²",
-      "[A]₀",
-      "1/[A]₀",
-      "[A]₀²"
-    ],
-    "answer": 2,
-    "explain": "t½ = 1/(k[A]₀); half-life is inversely proportional to initial concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4d623eff-b926-4f43-bc89-3a536501bf02",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Which of the following affects only the rate of reaction but NOT rate constant k?",
-    "formula": "",
-    "options": [
-      "Concentration of reactants",
-      "Temperature",
-      "Solvent polarity",
-      "Catalyst"
-    ],
-    "answer": 0,
-    "explain": "k depends on T and catalyst; concentration changes rate (r=k[A]ⁿ) but not k itself.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f6688750-6b81-42ad-9b91-f4df597567d9",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For the reaction 2H₂O₂ → 2H₂O + O₂, if rate of disappearance of H₂O₂ is x, rate of O₂ formation is:",
-    "formula": "",
-    "options": [
-      "x/2",
-      "x",
-      "x/4",
-      "2x"
-    ],
-    "answer": 0,
-    "explain": "Stoichiometry: 2 mol H₂O₂ gives 1 mol O₂; rate(O₂) = ½ × rate(−H₂O₂) = x/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0c5950f5-f32a-42a3-ab32-41b11c93f17d",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a first-order reaction, after 4 half-lives, fraction of reactant remaining is:",
-    "formula": "(1/2)ⁿ",
-    "options": [
-      "1/32",
-      "1/16",
-      "1/8",
-      "1/4"
-    ],
-    "answer": 1,
-    "explain": "After n = 4 half-lives, fraction remaining = (1/2)⁴ = 1/16.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2fc3807e-82b2-4f66-8a7d-2cbc07cc406d",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For reaction A→P, order is 1. If [A]₀ is doubled, rate at t=0:",
-    "formula": "r = k[A]",
-    "options": [
-      "Stays same",
-      "Quadruples",
-      "Doubles",
-      "Halves"
-    ],
-    "answer": 2,
-    "explain": "Rate is directly proportional to [A]; doubling [A]₀ doubles initial rate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d9c662fa-bcda-49eb-aa8b-b344f4ff4c79",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For rate = k[A][B], if [A] is doubled and [B] is halved, rate:",
-    "formula": "r = k[A][B]",
-    "options": [
-      "Halves",
-      "Remains unchanged",
-      "Doubles",
-      "Quadruples"
-    ],
-    "answer": 1,
-    "explain": "Doubling [A] and halving [B] cancel each other; rate = k·2[A]·[B]/2 = k[A][B].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "73c0a14f-adcc-4d0a-aa12-0ec8022a3570",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For reaction N₂O₅ → 2NO₂ + ½O₂, if rate of N₂O₅ disappearance is r, rate of NO₂ formation is:",
-    "formula": "",
-    "options": [
-      "4r",
-      "r",
-      "r/2",
-      "2r"
-    ],
-    "answer": 3,
-    "explain": "Stoichiometry: 1 mol N₂O₅ gives 2 mol NO₂, so rate of NO₂ = 2 × rate of N₂O₅ disappearance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "fa3351de-426b-4643-abaa-ba9c6135c989",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For second-order reaction with two reactants (r=k[A][B]), unit of k is:",
-    "formula": "",
-    "options": [
-      "mol² L⁻² s⁻¹",
-      "L mol⁻¹ s⁻¹",
-      "mol L⁻¹ s⁻¹",
-      "s⁻¹"
-    ],
-    "answer": 1,
-    "explain": "For any second-order reaction, k has units L mol⁻¹ s⁻¹ (same as second-order one-reactant).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d65dfe5c-e891-40f0-98f7-cbdac6283462",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a reversible reaction, catalyst changes which of the following?",
-    "formula": "",
-    "options": [
-      "ΔH of reaction",
-      "Only Eₐ of backward step",
-      "Eₐ of both fwd & bwd equally",
-      "Only Eₐ of forward step"
-    ],
-    "answer": 2,
-    "explain": "Catalyst lowers Eₐ of forward and backward reactions equally, not affecting ΔH or equilibrium constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2aaa2b00-1038-495a-b702-54932b1bcfbf",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For the reaction 2NO(g) + Cl₂(g) → 2NOCl(g), rate = k[NO]²[Cl₂]. Overall order is:",
-    "formula": "",
-    "options": [
-      "3",
-      "4",
-      "1",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "Overall order = 2 + 1 = 3 (sum of exponents in rate law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "185c701d-5c4b-40c5-8163-9ff22cb95d84",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For reaction A → products, if 1/[A] vs t is linear, order of reaction is:",
-    "formula": "",
-    "options": [
-      "0",
-      "1",
-      "3",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "Integrated rate law for second-order gives 1/[A] = kt + 1/[A]₀; straight line confirms 2nd order.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "74749536-82ab-4386-88c0-abb1ee99149d",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Which graph is linear for a first-order reaction?",
-    "formula": "ln[A] = −kt + ln[A]₀",
-    "options": [
-      "1/[A] vs t",
-      "[A] vs t",
-      "ln[A] vs t",
-      "[A]² vs t"
-    ],
-    "answer": 2,
-    "explain": "Integrated first-order law gives ln[A] vs t as a straight line with slope −k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "14335fe0-b8cb-4b6a-b73d-68c9d0aaf417",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "The rate constant k has units of mol·L⁻¹·s⁻¹ for which order?",
-    "formula": "k units: (mol/L)^(1−n)/s",
-    "options": [
-      "Zero order",
-      "Second order",
-      "Third order",
-      "First order"
-    ],
-    "answer": 0,
-    "explain": "For n=0: units of k = mol·L⁻¹·s⁻¹ (same as rate), since concentration term is absent.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5e5707ad-b3ed-4cee-89a7-c6f8e1ee7bbd",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a first-order reaction, k = (2.303/t) log([A]₀/[A]). After time t = t½, [A]₀/[A] equals:",
-    "formula": "",
-    "options": [
-      "4",
-      "2",
-      "10",
-      "0.5"
-    ],
-    "answer": 1,
-    "explain": "At t½, [A] = [A]₀/2, so [A]₀/[A] = 2; confirming the first-order half-life formula.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36db7efe-1d23-44ec-a5fd-61af985a6d57",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For first-order reaction, k has units of:",
-    "formula": "",
-    "options": [
-      "L²·mol⁻²·s⁻¹",
-      "L·mol⁻¹·s⁻¹",
-      "mol·L⁻¹·s⁻¹",
-      "s⁻¹"
-    ],
-    "answer": 3,
-    "explain": "First-order k unit = (concentration)^(1-1)·time⁻¹ = s⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "88afc3e4-81fe-4a99-be95-799071f81a9f",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For reaction A+B→P, if rate is unaffected by [A], order w.r.t. A is:",
-    "formula": "",
-    "options": [
-      "Zero",
-      "One",
-      "Two",
-      "Half"
-    ],
-    "answer": 0,
-    "explain": "If rate is independent of [A], the exponent of [A] in rate law is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c5538ecd-2448-4d62-838e-ed11b7f8a1e3",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For zero-order reaction, half-life t½ is proportional to:",
-    "formula": "t½ = [A]₀/2k",
-    "options": [
-      "1/[A]₀",
-      "[A]₀²",
-      "[A]₀",
-      "Independent of [A]₀"
-    ],
-    "answer": 2,
-    "explain": "Zero-order t½ = [A]₀/2k, so t½ ∝ [A]₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "87480f53-e7ed-4743-9a53-50cf1e5ec36b",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For rate = k[A]^(3/2), the order of reaction is:",
-    "formula": "",
-    "options": [
-      "2",
-      "3",
-      "3/2",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "Order equals the exponent in the rate law; here it is 3/2 (fractional order).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "94021843-b6e4-448b-b90f-76e1928cfa5f",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Which is the correct relationship between rate of disappearance of A and B for A+2B→P?",
-    "formula": "−d[A]/dt = ½·(−d[B]/dt)",
-    "options": [
-      "−d[A]/dt = (−d[B]/dt)²",
-      "−d[A]/dt = 2·(−d[B]/dt)",
-      "−d[A]/dt = −d[B]/dt",
-      "−d[A]/dt = ½·(−d[B]/dt)"
-    ],
-    "answer": 3,
-    "explain": "Stoichiometry: A:B = 1:2, so rate of disappearance of A = ½ that of B.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "82265933-728c-4468-8b51-2d2d555e9f37",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "The slope of [A] vs t for a zero-order reaction is:",
-    "formula": "",
-    "options": [
-      "−k",
-      "Zero",
-      "−2k",
-      "+k"
-    ],
-    "answer": 0,
-    "explain": "[A] = [A]₀ − kt, so slope of [A] vs t = −k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "78db2579-7b75-42fd-87f6-f7661072a1eb",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a first-order reaction, the half-life is independent of:",
-    "formula": "",
-    "options": [
-      "Activation energy",
-      "Initial concentration",
-      "Rate constant k",
-      "Temperature"
-    ],
-    "answer": 1,
-    "explain": "t½ = 0.693/k for first-order; it does not depend on initial concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4bf632ed-da89-4fdc-ad4c-76aac0ce9b6b",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "The rate of reaction has which SI unit?",
-    "formula": "",
-    "options": [
-      "L·mol⁻¹·s⁻¹",
-      "mol·s⁻¹",
-      "mol·L⁻¹·s⁻¹",
-      "s⁻¹"
-    ],
-    "answer": 2,
-    "explain": "Rate = change in concentration per unit time = mol·L⁻¹·s⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e4175409-eead-4920-ad6c-0f4228fb0544",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a reaction, if rate = k[A]⁰[B]¹, doubling [A] and halving [B] changes rate by:",
-    "formula": "",
-    "options": [
-      "Factor of 4",
-      "Factor of ½",
-      "No change",
-      "Factor of 2"
-    ],
-    "answer": 1,
-    "explain": "Rate ∝ [B]; halving [B] halves the rate regardless of [A].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c64a492d-feba-4b13-ae56-e5f7685e1fba",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "The term 'order of reaction' is determined by:",
-    "formula": "",
-    "options": [
-      "Stoichiometry",
-      "Molecularity",
-      "Experiment",
-      "Mechanism alone"
-    ],
-    "answer": 2,
-    "explain": "Order is determined experimentally from the rate law, not from stoichiometry.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d565cef2-07a4-4e92-9410-1b4bd9ee89c5",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For the reaction 2A → products, if rate = k[A]¹, t½ is:",
-    "formula": "t½ = 0.693/k",
-    "options": [
-      "2/k",
-      "[A]₀/2k",
-      "0.693/k",
-      "1/(k[A]₀)"
-    ],
-    "answer": 2,
-    "explain": "Even though stoichiometry shows 2A, if rate law is first-order, t½ = 0.693/k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "33899f6f-0ab5-4b22-b6b9-dfce3a82d963",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a second-order reaction (one reactant), plot of 1/[A] vs t gives slope equal to:",
-    "formula": "",
-    "options": [
-      "+k",
-      "−k",
-      "+2k",
-      "k/2"
-    ],
-    "answer": 0,
-    "explain": "Integrated 2nd-order law: 1/[A] = 1/[A]₀ + kt; slope = +k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bec1cf00-a36e-495c-b1b0-c5d74d2fb1a0",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a first-order reaction, the plot of log[A] vs t has slope:",
-    "formula": "slope = −k/2.303",
-    "options": [
-      "+k/2.303",
-      "−k/2.303",
-      "−2.303k",
-      "−k"
-    ],
-    "answer": 1,
-    "explain": "log[A] = log[A]₀ − (k/2.303)t; slope = −k/2.303.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9c38b3ab-dfcb-438f-ae64-6d46c0d91b89",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "Which statement is correct about the rate-determining step?",
-    "formula": "",
-    "options": [
-      "It is always the first step",
-      "It is the fastest step",
-      "It has lowest Eₐ",
-      "It is the slowest step in mechanism"
-    ],
-    "answer": 3,
-    "explain": "The rate-determining step is the slowest step and governs overall reaction rate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2d14671b-c46d-4027-a5c2-6ce6dee463a5",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For the reaction 2NO₂ → 2NO + O₂, if rate of disappearance of NO₂ is r, rate of formation of O₂ is:",
-    "formula": "",
-    "options": [
-      "r/2",
-      "r",
-      "2r",
-      "r/4"
-    ],
-    "answer": 0,
-    "explain": "Stoichiometry 2NO₂:O₂ = 2:1; rate of O₂ formation = ½ × rate of NO₂ disappearance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "609db0d6-e84e-4210-b2a2-2c5833ae7ae9",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "For a first-order reaction, after time equal to 2t½, fraction of reactant remaining is:",
-    "formula": "",
-    "options": [
-      "1/8",
-      "1/2",
-      "1/4",
-      "1/3"
-    ],
-    "answer": 2,
-    "explain": "After each t½, fraction halves: after 2t½, fraction = (1/2)² = 1/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "432008c3-e6bd-45df-b3de-8daa348bb271",
-    "subject": "Chemistry",
-    "chapter": "Chemical Kinetics",
-    "topic": "Chemical Kinetics",
-    "prompt": "In Arrhenius equation k = Ae^(−Eₐ/RT), the factor e^(−Eₐ/RT) represents:",
-    "formula": "",
-    "options": [
-      "Total collision frequency",
-      "Steric factor",
-      "Fraction of molecules with E ≥ Eₐ",
-      "Pre-exponential factor"
-    ],
-    "answer": 2,
-    "explain": "Boltzmann factor e^(−Eₐ/RT) gives the fraction of molecules having energy ≥ Eₐ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "77e1d848-96c2-435f-82c6-696728a20c40",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "Rate of reaction has SI units:",
+  "formula": "",
+  "options": [
+   "mol s⁻¹",
+   "mol L s⁻¹",
+   "mol L⁻¹ s⁻¹",
+   "L mol⁻¹ s⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Rate = Δ[conc]/Δt, so units are mol L⁻¹ s⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2eb52709-9809-4f5d-b0e6-9f4a5e46cea3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "For zero-order reaction, rate constant k has units:",
+  "formula": "r = k",
+  "options": [
+   "s⁻¹",
+   "mol L⁻¹ s⁻¹",
+   "L² mol⁻² s⁻¹",
+   "L mol⁻¹ s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Zero-order: rate = k, so k has same units as rate: mol L⁻¹ s⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "990df5cd-ee5e-458e-a4a6-5988addfef83",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "For first-order reaction, k has units:",
+  "formula": "r = k[A]",
+  "options": [
+   "L² mol⁻² s⁻¹",
+   "s⁻¹",
+   "L mol⁻¹ s⁻¹",
+   "mol L⁻¹ s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "First-order: k = rate/[A] = (mol L⁻¹ s⁻¹)/(mol L⁻¹) = s⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "abc4b1cf-0c2c-420d-ac1e-c824842ec7fd",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "Half-life of zero-order reaction is:",
+  "formula": "t½ = [A]₀/2k",
+  "options": [
+   "[A]₀/2k",
+   "k/[A]₀",
+   "0.693/k",
+   "2k/[A]₀"
+  ],
+  "answer": 0,
+  "explain": "Zero-order: [A] = [A]₀ − kt, so at [A]=½[A]₀, t½ = [A]₀/2k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "826825f3-3562-4579-a3e3-222d57beeef1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Integrated rate law for first-order reaction:",
+  "formula": "ln[A] = ln[A]₀ − kt",
+  "options": [
+   "1/[A]−1/[A]₀ = kt",
+   "[A]² = [A]₀²−2kt",
+   "ln([A]₀/[A]) = kt",
+   "[A]₀−[A] = kt"
+  ],
+  "answer": 2,
+  "explain": "First-order: −d[A]/dt = k[A] integrates to ln([A]₀/[A]) = kt.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1896ddbb-e3e7-4fa7-a5a2-eae1195cae22",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "Integrated rate law for second-order (one reactant):",
+  "formula": "1/[A] − 1/[A]₀ = kt",
+  "options": [
+   "[A]₀−[A] = kt",
+   "ln([A]₀/[A]) = kt",
+   "[A]²−[A]₀² = −kt",
+   "1/[A]−1/[A]₀ = kt"
+  ],
+  "answer": 3,
+  "explain": "Second-order: −d[A]/dt = k[A]² integrates to 1/[A]−1/[A]₀ = kt.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "edd56f8c-e89b-43af-a47d-c538a1a9d0a5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "Molecularity of a reaction can be:",
+  "formula": "",
+  "options": [
+   "Any real number",
+   "Zero or positive integer",
+   "Any positive integer",
+   "Only 1, 2, or 3"
+  ],
+  "answer": 3,
+  "explain": "Molecularity is number of molecules colliding; only 1, 2, or 3 (never 0 or >3).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7418270a-cd2d-484b-a3c4-3ebc21439572",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "Order of reaction is determined by:",
+  "formula": "",
+  "options": [
+   "Stoichiometry",
+   "Experiment",
+   "Molecularity",
+   "Mechanism only"
+  ],
+  "answer": 1,
+  "explain": "Order is experimentally determined; it need not equal stoichiometric coefficients.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4fed6284-dd37-4bae-8856-502c85fde9c1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "Arrhenius equation relates k to temperature as:",
+  "formula": "k = Ae^(−Eₐ/RT)",
+  "options": [
+   "k = Ae^(−Eₐ/RT)",
+   "k = A/Eₐ·RT",
+   "k = A·Eₐ·e^(RT)",
+   "k = Ae^(Eₐ/RT)"
+  ],
+  "answer": 0,
+  "explain": "Arrhenius: k = Ae^(−Eₐ/RT); A is frequency factor, Eₐ is activation energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ebe9bf32-9f20-47c9-967a-dbd1b633eded",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "Slope of ln k vs 1/T graph gives:",
+  "formula": "slope = −Eₐ/R",
+  "options": [
+   "A",
+   "−Eₐ·R",
+   "−Eₐ/R",
+   "Eₐ/R"
+  ],
+  "answer": 2,
+  "explain": "ln k = ln A − Eₐ/RT; plot of ln k vs 1/T is linear with slope = −Eₐ/R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dfc9d8cb-60bc-4e17-a0be-792e06deb229",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of catalyst on activation energy",
+  "prompt": "A catalyst increases reaction rate by:",
+  "formula": "",
+  "options": [
+   "Changing equilibrium constant",
+   "Increasing temperature",
+   "Lowering activation energy",
+   "Increasing ΔH"
+  ],
+  "answer": 2,
+  "explain": "Catalyst provides alternate path with lower Eₐ; does not alter ΔH or equilibrium.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9c49a208-1794-4584-921d-b4229896b4cc",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "Overall order = sum of powers in rate law. For r = k[A]²[B], order is:",
+  "formula": "order = 2+1 = 3",
+  "options": [
+   "3",
+   "1",
+   "2",
+   "Depends on stoichiometry"
+  ],
+  "answer": 0,
+  "explain": "Overall order = sum of individual orders = 2+1 = 3 (third order).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dbb5cdb3-99f6-4df7-bf83-cc59805b4039",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "Temperature coefficient of a reaction is ratio k(T+10)/k(T). Typical value:",
+  "formula": "",
+  "options": [
+   "0.5 to 1",
+   "100",
+   "2 to 3",
+   "10 to 20"
+  ],
+  "answer": 2,
+  "explain": "Temperature coefficient ≈ 2–3; rate roughly doubles/triples per 10°C rise.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a7b871ad-e12d-4166-91a5-f4ac6b78fea3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "For reaction A→B, if rate = k[A]⁰, plot of [A] vs t is:",
+  "formula": "[A] = [A]₀ − kt",
+  "options": [
+   "Hyperbola",
+   "Parabola",
+   "Straight line",
+   "Exponential decay"
+  ],
+  "answer": 2,
+  "explain": "Zero-order: [A] = [A]₀ − kt; [A] vs t is a straight line with slope −k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "59c397fb-82c8-4cd5-8cf9-b015e99a65ed",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "For first-order, plot of ln[A] vs t is:",
+  "formula": "ln[A] = ln[A]₀ − kt",
+  "options": [
+   "Hyperbola",
+   "Straight line with slope +k",
+   "Straight line with slope −k",
+   "Curved upward"
+  ],
+  "answer": 2,
+  "explain": "ln[A] = ln[A]₀ − kt is linear; slope = −k, intercept = ln[A]₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8f7aa4ff-18b5-43f0-914f-78acf25f457c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For second-order, straight-line plot is obtained for:",
+  "formula": "1/[A] = 1/[A]₀ + kt",
+  "options": [
+   "1/[A] vs t",
+   "[A]² vs t",
+   "[A] vs t",
+   "ln[A] vs t"
+  ],
+  "answer": 0,
+  "explain": "Second-order: 1/[A] vs t is linear with slope = k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c89d3ef8-05a2-4cec-971a-ad23c94e6d5a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Elementary and complex reactions",
+  "prompt": "Rate-determining step in a mechanism is the:",
+  "formula": "",
+  "options": [
+   "Slowest step",
+   "First step always",
+   "Fastest step",
+   "Last step always"
+  ],
+  "answer": 0,
+  "explain": "The slowest step controls overall rate; called the rate-determining step.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "88bbc54b-5d91-4315-946c-d851f1a513b3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "If Eₐ(forward) > Eₐ(backward), the reaction is:",
+  "formula": "ΔH = Eₐf − Eₐb",
+  "options": [
+   "Exothermic",
+   "Endothermic",
+   "Cannot determine",
+   "Thermoneutral"
+  ],
+  "answer": 1,
+  "explain": "ΔH = Eₐf − Eₐb; if Eₐf > Eₐb then ΔH > 0 → endothermic reaction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e87c9487-d454-438e-a415-48e90b2680af",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "Unit of k for nth-order reaction:",
+  "formula": "k: (mol L⁻¹)^(1−n) s⁻¹",
+  "options": [
+   "(mol L⁻¹)^n s⁻¹",
+   "(mol L⁻¹)^(1−n) s⁻¹",
+   "s^n mol⁻¹",
+   "mol^n L^n s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "General formula: k has units (concentration)^(1−n)·time⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d600905d-1e35-43f6-bbff-b6467e81a032",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Radioactive decay follows which order kinetics?",
+  "formula": "N = N₀e^(−λt)",
+  "options": [
+   "Zero order",
+   "Second order",
+   "First order",
+   "Pseudo-first order"
+  ],
+  "answer": 2,
+  "explain": "Radioactive decay: dN/dt = −λN, which is first-order kinetics.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ebde7b78-91b4-4be5-a7c9-42ac633354a4",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Calculating Ea from k at two temperatures",
+  "prompt": "Log form of Arrhenius for two temperatures T₁ and T₂:",
+  "formula": "log(k₂/k₁) = Eₐ/2.303R·(1/T₁−1/T₂)",
+  "options": [
+   "Eₐ(T₁−T₂)/R·T₁T₂",
+   "Eₐ(T₂−T₁)/2.303R·T₁T₂",
+   "R·T₁T₂/Eₐ(T₂−T₁)",
+   "2.303Eₐ/R(T₂−T₁)"
+  ],
+  "answer": 1,
+  "explain": "log(k₂/k₁) = Eₐ/2.303R × (T₂−T₁)/(T₁T₂); key JEE formula.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3ea2ef1c-0557-43d2-95a5-641df61e8785",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "Half-life of second-order reaction (one reactant) is:",
+  "formula": "t½ = 1/(k[A]₀)",
+  "options": [
+   "2/k[A]₀",
+   "0.693/k",
+   "1/(k[A]₀)",
+   "[A]₀/(2k)"
+  ],
+  "answer": 2,
+  "explain": "For 2nd-order, t½ = 1/(k[A]₀); depends on initial concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "50efd3bd-78a0-4439-8af6-1ea41f7f9def",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "For zero-order reaction, [A] at time t is:",
+  "formula": "[A] = [A]₀ − kt",
+  "options": [
+   "[A]₀ e^(−kt)",
+   "[A]₀ − kt",
+   "1/[A]₀ + kt",
+   "[A]₀/(1+kt)"
+  ],
+  "answer": 1,
+  "explain": "Zero-order integrated law: [A] = [A]₀ − kt; linear decrease with time.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3508a360-f3f3-433a-8cd0-a482cbf0602b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "Which graph gives straight line for zero-order reaction?",
+  "formula": "",
+  "options": [
+   "log[A] vs 1/t",
+   "ln[A] vs t",
+   "[A] vs t",
+   "1/[A] vs t"
+  ],
+  "answer": 2,
+  "explain": "[A] vs t is linear for zero-order; slope = −k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "01219f60-fbe3-4049-805c-42a6f607038e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Elementary and complex reactions",
+  "prompt": "Molecularity is defined for:",
+  "formula": "",
+  "options": [
+   "Rate-determining step only",
+   "Any balanced equation",
+   "Overall reaction",
+   "Elementary steps only"
+  ],
+  "answer": 3,
+  "explain": "Molecularity is meaningful only for elementary (single-step) reactions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7d6dfee2-58a8-47e4-b4bb-e951ce312cbc",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "Order of reaction can be:",
+  "formula": "",
+  "options": [
+   "Positive integers only",
+   "Only 1 or 2",
+   "Never negative",
+   "Fractional or zero"
+  ],
+  "answer": 3,
+  "explain": "Order can be zero, fractional, integer, or even negative; it is experimentally determined.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "04b03f36-0e6c-4e7f-bc4b-f70ad26e7425",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law and rate expression from data",
+  "prompt": "For A+B→P, if doubling [A] doubles rate and doubling [B] quadruples rate, order in B is:",
+  "formula": "",
+  "options": [
+   "3",
+   "0",
+   "1",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "Quadrupling rate on doubling [B] means rate ∝ [B]², so order in B = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c51e1b24-b5b3-4be6-ab91-cd85459e6209",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "Pre-exponential factor A in Arrhenius equation represents:",
+  "formula": "k = Ae^(−Eₐ/RT)",
+  "options": [
+   "Rate at 0 K",
+   "Collision frequency factor",
+   "Activation energy",
+   "Threshold energy"
+  ],
+  "answer": 1,
+  "explain": "A (frequency factor) accounts for collision frequency and proper orientation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "372bc778-85eb-4e22-a699-d7f06ede4f1e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of catalyst on activation energy",
+  "prompt": "Effect of catalyst on ΔH of reaction:",
+  "formula": "",
+  "options": [
+   "ΔH becomes zero",
+   "ΔH increases",
+   "ΔH decreases",
+   "No change in ΔH"
+  ],
+  "answer": 3,
+  "explain": "Catalyst lowers Eₐ but does not alter ΔH (thermodynamics unchanged).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "508d1332-859e-4c31-a7ab-aff1835653ac",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "In Arrhenius equation, units of pre-exponential factor A are same as:",
+  "formula": "",
+  "options": [
+   "Rate of reaction",
+   "Rate constant k",
+   "Activation energy",
+   "Concentration"
+  ],
+  "answer": 1,
+  "explain": "A has same units as k since e^(−Eₐ/RT) is dimensionless.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "51f1160e-a62f-4440-8b76-e1e79c963750",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For first-order reaction, time for 75% completion equals:",
+  "formula": "",
+  "options": [
+   "2 × t½",
+   "t½/2",
+   "3 × t½",
+   "1.5 × t½"
+  ],
+  "answer": 0,
+  "explain": "75% done ⟹ [A] = [A]₀/4; two half-lives are needed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7e51b1b9-0529-4318-a3de-471ac863fd50",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "For the reaction 2A → products, rate = k[A]². Units of k are:",
+  "formula": "",
+  "options": [
+   "mol² L⁻² s⁻¹",
+   "L mol⁻¹ s⁻¹",
+   "mol L⁻¹ s⁻¹",
+   "s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Second-order k has units L mol⁻¹ s⁻¹ (= M⁻¹s⁻¹).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a92e5b24-b02a-4ec5-9a14-8a55041eda12",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "A reaction has rate = k regardless of [A]. Its order is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "First",
+   "Second",
+   "Cannot determine"
+  ],
+  "answer": 0,
+  "explain": "Rate independent of concentration means zero-order reaction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "00f2c229-4ade-4d4c-84f4-1bb6ad2dee3d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Pseudo first-order reactions",
+  "prompt": "Pseudo-first-order rate constant k' for A+B→P (B in excess) equals:",
+  "formula": "k' = k[B]₀",
+  "options": [
+   "k[B]₀",
+   "k·[A]₀",
+   "k/[B]₀",
+   "k+[B]₀"
+  ],
+  "answer": 0,
+  "explain": "When [B]≫[A], [B] ≈ constant=[B]₀, so observed k' = k[B]₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7859efdf-f985-4cd4-bbaf-69f0678c04f8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Calculating Ea from k at two temperatures",
+  "prompt": "Energy of activation (Eₐ) can be calculated from two rate constants k₁,k₂ at T₁,T₂ using:",
+  "formula": "ln(k₂/k₁)=Eₐ/R·(1/T₁−1/T₂)",
+  "options": [
+   "Gibbs equation",
+   "Clausius-Clapeyron",
+   "Arrhenius equation at two T",
+   "van't Hoff equation"
+  ],
+  "answer": 2,
+  "explain": "Two-temperature Arrhenius form directly gives Eₐ from k₁,k₂,T₁,T₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cd2cc345-b3f6-4b29-ad9f-078e762d6fc6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, if initial concentration triples, t½:",
+  "formula": "t½ = 0.693/k",
+  "options": [
+   "Decreases by 1/3",
+   "Triples",
+   "Remains the same",
+   "Doubles"
+  ],
+  "answer": 2,
+  "explain": "First-order t½ = 0.693/k; independent of initial concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d490f04b-65de-49b8-b4a5-e8498b0766c9",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "The rate of reaction is expressed as −d[A]/dt. For 2A→B, rate of formation of B is:",
+  "formula": "",
+  "options": [
+   "½(−d[A]/dt)",
+   "−d[A]/dt",
+   "−2d[A]/dt",
+   "2(−d[A]/dt)"
+  ],
+  "answer": 0,
+  "explain": "Stoichiometry: rate = −(1/2)d[A]/dt = d[B]/dt, so d[B]/dt = ½(−d[A]/dt).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f9f234df-383e-421a-83db-af61f7b2b29d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "Which plot distinguishes first-order from second-order reaction?",
+  "formula": "",
+  "options": [
+   "[A] vs t",
+   "k vs [A]",
+   "ln[A] vs t (linear=1st) and 1/[A] vs t (linear=2nd)",
+   "rate vs T"
+  ],
+  "answer": 2,
+  "explain": "ln[A] vs t linear ⟹ first-order; 1/[A] vs t linear ⟹ second-order.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0edf2b24-24a4-4603-a035-c7250dbdf4ec",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For reaction A→P, if t½ is independent of initial [A], order is:",
+  "formula": "",
+  "options": [
+   "First order",
+   "Second order",
+   "Third order",
+   "Zero order"
+  ],
+  "answer": 0,
+  "explain": "t½ = 0.693/k for first-order; independent of initial concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "af9125cc-b919-4da9-a4a2-651efdbde74b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For a second-order reaction, doubling [A] changes rate by factor:",
+  "formula": "r = k[A]²",
+  "options": [
+   "4",
+   "2",
+   "1",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Rate ∝ [A]², so doubling [A] increases rate by 2² = 4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ff5be45f-b6f7-4389-8813-8529260480a7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "The unit of rate of reaction is:",
+  "formula": "",
+  "options": [
+   "mol L⁻¹ s⁻¹",
+   "mol⁻¹ L s⁻¹",
+   "L mol⁻¹ s⁻¹",
+   "mol L s⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Rate = Δ[conc]/Δt has units mol L⁻¹ s⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5fc616c1-831d-4e99-8ce6-371fb74f20cd",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law and rate expression from data",
+  "prompt": "A reaction is 2nd order in A and 0th order in B. Doubling [B] changes rate by:",
+  "formula": "",
+  "options": [
+   "Factor of 1/2",
+   "Factor of 2",
+   "No change",
+   "Factor of 4"
+  ],
+  "answer": 2,
+  "explain": "Zero order in B means rate is independent of [B]; no change.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "042ed655-7dd2-406b-bc0c-d6c5b55ab58b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "Which quantity has same unit as frequency (s⁻¹) in Arrhenius equation?",
+  "formula": "k = Ae^(−Eₐ/RT)",
+  "options": [
+   "T",
+   "Eₐ",
+   "R",
+   "A (pre-exponential factor)"
+  ],
+  "answer": 3,
+  "explain": "For first-order, A has units s⁻¹, same as frequency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8d27b8f7-193c-46b8-b0e7-f0e8a2b1f980",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For first-order reaction, t₇₅% (75% completion) equals:",
+  "formula": "",
+  "options": [
+   "4 × t½",
+   "2 × t½",
+   "3 × t½",
+   "t½"
+  ],
+  "answer": 1,
+  "explain": "75% done means 25% remains → 2 half-lives; t = 2t½.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "55f659b9-dcc4-42ac-a0b2-9485a60e54b6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of catalyst on activation energy",
+  "prompt": "A catalyst lowers activation energy. Its effect on rate constant k is:",
+  "formula": "",
+  "options": [
+   "k increases",
+   "k decreases",
+   "k unchanged",
+   "k becomes zero"
+  ],
+  "answer": 0,
+  "explain": "Lower Eₐ increases e^(−Eₐ/RT), so k increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "463c7e91-a3d7-48fc-9a97-9c6d297508b3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "For a zero-order reaction, rate = k. Doubling volume (halving concentration) changes rate by:",
+  "formula": "",
+  "options": [
+   "Halves it",
+   "Quadruples it",
+   "Doubles it",
+   "No change: rate=k always"
+  ],
+  "answer": 3,
+  "explain": "Zero-order rate = k, independent of concentration; rate unchanged.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "53318416-69e2-4d3c-8c21-1ec7882227e7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For first-order reaction, fraction remaining after n half-lives is:",
+  "formula": "",
+  "options": [
+   "2ⁿ",
+   "n/2",
+   "1/n",
+   "(1/2)ⁿ"
+  ],
+  "answer": 3,
+  "explain": "After each t½, concentration halves; after n half-lives → (1/2)ⁿ remains.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c992ed06-d293-4d2a-bc07-2265e3420bed",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law and rate expression from data",
+  "prompt": "If rate = k[A][B]², tripling [B] alone changes rate by factor:",
+  "formula": "",
+  "options": [
+   "6",
+   "27",
+   "3",
+   "9"
+  ],
+  "answer": 3,
+  "explain": "Rate ∝ [B]²; tripling [B] → rate × 3² = 9.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "27c66802-6472-42d7-9982-7fccbef160d8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law and rate expression from data",
+  "prompt": "For reaction 2A + B → C, rate law is r = k[A][B]. Order w.r.t. A is:",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Order is from experimental rate law, not stoichiometry; order in A = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8edf1705-dc2c-4c05-849d-2d317e0b3c7b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For second-order reaction (one reactant), t½ is proportional to:",
+  "formula": "t½ = 1/(k[A]₀)",
+  "options": [
+   "1/[A]₀²",
+   "[A]₀",
+   "1/[A]₀",
+   "[A]₀²"
+  ],
+  "answer": 2,
+  "explain": "t½ = 1/(k[A]₀); half-life is inversely proportional to initial concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4d623eff-b926-4f43-bc89-3a536501bf02",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Factors affecting rate: conc, T, P, catalyst",
+  "prompt": "Which of the following affects only the rate of reaction but NOT rate constant k?",
+  "formula": "",
+  "options": [
+   "Concentration of reactants",
+   "Temperature",
+   "Solvent polarity",
+   "Catalyst"
+  ],
+  "answer": 0,
+  "explain": "k depends on T and catalyst; concentration changes rate (r=k[A]ⁿ) but not k itself.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f6688750-6b81-42ad-9b91-f4df597567d9",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "For the reaction 2H₂O₂ → 2H₂O + O₂, if rate of disappearance of H₂O₂ is x, rate of O₂ formation is:",
+  "formula": "",
+  "options": [
+   "x/2",
+   "x",
+   "x/4",
+   "2x"
+  ],
+  "answer": 0,
+  "explain": "Stoichiometry: 2 mol H₂O₂ gives 1 mol O₂; rate(O₂) = ½ × rate(−H₂O₂) = x/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0c5950f5-f32a-42a3-ab32-41b11c93f17d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, after 4 half-lives, fraction of reactant remaining is:",
+  "formula": "(1/2)ⁿ",
+  "options": [
+   "1/32",
+   "1/16",
+   "1/8",
+   "1/4"
+  ],
+  "answer": 1,
+  "explain": "After n = 4 half-lives, fraction remaining = (1/2)⁴ = 1/16.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2fc3807e-82b2-4f66-8a7d-2cbc07cc406d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law and rate expression from data",
+  "prompt": "For reaction A→P, order is 1. If [A]₀ is doubled, rate at t=0:",
+  "formula": "r = k[A]",
+  "options": [
+   "Stays same",
+   "Quadruples",
+   "Doubles",
+   "Halves"
+  ],
+  "answer": 2,
+  "explain": "Rate is directly proportional to [A]; doubling [A]₀ doubles initial rate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d9c662fa-bcda-49eb-aa8b-b344f4ff4c79",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law and rate expression from data",
+  "prompt": "For rate = k[A][B], if [A] is doubled and [B] is halved, rate:",
+  "formula": "r = k[A][B]",
+  "options": [
+   "Halves",
+   "Remains unchanged",
+   "Doubles",
+   "Quadruples"
+  ],
+  "answer": 1,
+  "explain": "Doubling [A] and halving [B] cancel each other; rate = k·2[A]·[B]/2 = k[A][B].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "73c0a14f-adcc-4d0a-aa12-0ec8022a3570",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "For reaction N₂O₅ → 2NO₂ + ½O₂, if rate of N₂O₅ disappearance is r, rate of NO₂ formation is:",
+  "formula": "",
+  "options": [
+   "4r",
+   "r",
+   "r/2",
+   "2r"
+  ],
+  "answer": 3,
+  "explain": "Stoichiometry: 1 mol N₂O₅ gives 2 mol NO₂, so rate of NO₂ = 2 × rate of N₂O₅ disappearance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fa3351de-426b-4643-abaa-ba9c6135c989",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "For second-order reaction with two reactants (r=k[A][B]), unit of k is:",
+  "formula": "",
+  "options": [
+   "mol² L⁻² s⁻¹",
+   "L mol⁻¹ s⁻¹",
+   "mol L⁻¹ s⁻¹",
+   "s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "For any second-order reaction, k has units L mol⁻¹ s⁻¹ (same as second-order one-reactant).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d65dfe5c-e891-40f0-98f7-cbdac6283462",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of catalyst on activation energy",
+  "prompt": "For a reversible reaction, catalyst changes which of the following?",
+  "formula": "",
+  "options": [
+   "ΔH of reaction",
+   "Only Eₐ of backward step",
+   "Eₐ of both fwd & bwd equally",
+   "Only Eₐ of forward step"
+  ],
+  "answer": 2,
+  "explain": "Catalyst lowers Eₐ of forward and backward reactions equally, not affecting ΔH or equilibrium constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2aaa2b00-1038-495a-b702-54932b1bcfbf",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For the reaction 2NO(g) + Cl₂(g) → 2NOCl(g), rate = k[NO]²[Cl₂]. Overall order is:",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "1",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Overall order = 2 + 1 = 3 (sum of exponents in rate law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "185c701d-5c4b-40c5-8163-9ff22cb95d84",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For reaction A → products, if 1/[A] vs t is linear, order of reaction is:",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "3",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "Integrated rate law for second-order gives 1/[A] = kt + 1/[A]₀; straight line confirms 2nd order.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "74749536-82ab-4386-88c0-abb1ee99149d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Which graph is linear for a first-order reaction?",
+  "formula": "ln[A] = −kt + ln[A]₀",
+  "options": [
+   "1/[A] vs t",
+   "[A] vs t",
+   "ln[A] vs t",
+   "[A]² vs t"
+  ],
+  "answer": 2,
+  "explain": "Integrated first-order law gives ln[A] vs t as a straight line with slope −k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "14335fe0-b8cb-4b6a-b73d-68c9d0aaf417",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "The rate constant k has units of mol·L⁻¹·s⁻¹ for which order?",
+  "formula": "k units: (mol/L)^(1−n)/s",
+  "options": [
+   "Zero order",
+   "Second order",
+   "Third order",
+   "First order"
+  ],
+  "answer": 0,
+  "explain": "For n=0: units of k = mol·L⁻¹·s⁻¹ (same as rate), since concentration term is absent.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5e5707ad-b3ed-4cee-89a7-c6f8e1ee7bbd",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "For a first-order reaction, k = (2.303/t) log([A]₀/[A]). After time t = t½, [A]₀/[A] equals:",
+  "formula": "",
+  "options": [
+   "4",
+   "2",
+   "10",
+   "0.5"
+  ],
+  "answer": 1,
+  "explain": "At t½, [A] = [A]₀/2, so [A]₀/[A] = 2; confirming the first-order half-life formula.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36db7efe-1d23-44ec-a5fd-61af985a6d57",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "For first-order reaction, k has units of:",
+  "formula": "",
+  "options": [
+   "L²·mol⁻²·s⁻¹",
+   "L·mol⁻¹·s⁻¹",
+   "mol·L⁻¹·s⁻¹",
+   "s⁻¹"
+  ],
+  "answer": 3,
+  "explain": "First-order k unit = (concentration)^(1-1)·time⁻¹ = s⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "88afc3e4-81fe-4a99-be95-799071f81a9f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For reaction A+B→P, if rate is unaffected by [A], order w.r.t. A is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "One",
+   "Two",
+   "Half"
+  ],
+  "answer": 0,
+  "explain": "If rate is independent of [A], the exponent of [A] in rate law is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c5538ecd-2448-4d62-838e-ed11b7f8a1e3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For zero-order reaction, half-life t½ is proportional to:",
+  "formula": "t½ = [A]₀/2k",
+  "options": [
+   "1/[A]₀",
+   "[A]₀²",
+   "[A]₀",
+   "Independent of [A]₀"
+  ],
+  "answer": 2,
+  "explain": "Zero-order t½ = [A]₀/2k, so t½ ∝ [A]₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "87480f53-e7ed-4743-9a53-50cf1e5ec36b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For rate = k[A]^(3/2), the order of reaction is:",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "3/2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Order equals the exponent in the rate law; here it is 3/2 (fractional order).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "94021843-b6e4-448b-b90f-76e1928cfa5f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "Which is the correct relationship between rate of disappearance of A and B for A+2B→P?",
+  "formula": "−d[A]/dt = ½·(−d[B]/dt)",
+  "options": [
+   "−d[A]/dt = (−d[B]/dt)²",
+   "−d[A]/dt = 2·(−d[B]/dt)",
+   "−d[A]/dt = −d[B]/dt",
+   "−d[A]/dt = ½·(−d[B]/dt)"
+  ],
+  "answer": 3,
+  "explain": "Stoichiometry: A:B = 1:2, so rate of disappearance of A = ½ that of B.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "82265933-728c-4468-8b51-2d2d555e9f37",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "The slope of [A] vs t for a zero-order reaction is:",
+  "formula": "",
+  "options": [
+   "−k",
+   "Zero",
+   "−2k",
+   "+k"
+  ],
+  "answer": 0,
+  "explain": "[A] = [A]₀ − kt, so slope of [A] vs t = −k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "78db2579-7b75-42fd-87f6-f7661072a1eb",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, the half-life is independent of:",
+  "formula": "",
+  "options": [
+   "Activation energy",
+   "Initial concentration",
+   "Rate constant k",
+   "Temperature"
+  ],
+  "answer": 1,
+  "explain": "t½ = 0.693/k for first-order; it does not depend on initial concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4bf632ed-da89-4fdc-ad4c-76aac0ce9b6b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "The rate of reaction has which SI unit?",
+  "formula": "",
+  "options": [
+   "L·mol⁻¹·s⁻¹",
+   "mol·s⁻¹",
+   "mol·L⁻¹·s⁻¹",
+   "s⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Rate = change in concentration per unit time = mol·L⁻¹·s⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e4175409-eead-4920-ad6c-0f4228fb0544",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate law and rate expression from data",
+  "prompt": "For a reaction, if rate = k[A]⁰[B]¹, doubling [A] and halving [B] changes rate by:",
+  "formula": "",
+  "options": [
+   "Factor of 4",
+   "Factor of ½",
+   "No change",
+   "Factor of 2"
+  ],
+  "answer": 1,
+  "explain": "Rate ∝ [B]; halving [B] halves the rate regardless of [A].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c64a492d-feba-4b13-ae56-e5f7685e1fba",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "The term 'order of reaction' is determined by:",
+  "formula": "",
+  "options": [
+   "Stoichiometry",
+   "Molecularity",
+   "Experiment",
+   "Mechanism alone"
+  ],
+  "answer": 2,
+  "explain": "Order is determined experimentally from the rate law, not from stoichiometry.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d565cef2-07a4-4e92-9410-1b4bd9ee89c5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For the reaction 2A → products, if rate = k[A]¹, t½ is:",
+  "formula": "t½ = 0.693/k",
+  "options": [
+   "2/k",
+   "[A]₀/2k",
+   "0.693/k",
+   "1/(k[A]₀)"
+  ],
+  "answer": 2,
+  "explain": "Even though stoichiometry shows 2A, if rate law is first-order, t½ = 0.693/k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "33899f6f-0ab5-4b22-b6b9-dfce3a82d963",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Order and molecularity of reaction",
+  "prompt": "For a second-order reaction (one reactant), plot of 1/[A] vs t gives slope equal to:",
+  "formula": "",
+  "options": [
+   "+k",
+   "−k",
+   "+2k",
+   "k/2"
+  ],
+  "answer": 0,
+  "explain": "Integrated 2nd-order law: 1/[A] = 1/[A]₀ + kt; slope = +k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bec1cf00-a36e-495c-b1b0-c5d74d2fb1a0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "For a first-order reaction, the plot of log[A] vs t has slope:",
+  "formula": "slope = −k/2.303",
+  "options": [
+   "+k/2.303",
+   "−k/2.303",
+   "−2.303k",
+   "−k"
+  ],
+  "answer": 1,
+  "explain": "log[A] = log[A]₀ − (k/2.303)t; slope = −k/2.303.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9c38b3ab-dfcb-438f-ae64-6d46c0d91b89",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Elementary and complex reactions",
+  "prompt": "Which statement is correct about the rate-determining step?",
+  "formula": "",
+  "options": [
+   "It is always the first step",
+   "It is the fastest step",
+   "It has lowest Eₐ",
+   "It is the slowest step in mechanism"
+  ],
+  "answer": 3,
+  "explain": "The rate-determining step is the slowest step and governs overall reaction rate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2d14671b-c46d-4027-a5c2-6ce6dee463a5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "For the reaction 2NO₂ → 2NO + O₂, if rate of disappearance of NO₂ is r, rate of formation of O₂ is:",
+  "formula": "",
+  "options": [
+   "r/2",
+   "r",
+   "2r",
+   "r/4"
+  ],
+  "answer": 0,
+  "explain": "Stoichiometry 2NO₂:O₂ = 2:1; rate of O₂ formation = ½ × rate of NO₂ disappearance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "609db0d6-e84e-4210-b2a2-2c5833ae7ae9",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, after time equal to 2t½, fraction of reactant remaining is:",
+  "formula": "",
+  "options": [
+   "1/8",
+   "1/2",
+   "1/4",
+   "1/3"
+  ],
+  "answer": 2,
+  "explain": "After each t½, fraction halves: after 2t½, fraction = (1/2)² = 1/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "432008c3-e6bd-45df-b3de-8daa348bb271",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "In Arrhenius equation k = Ae^(−Eₐ/RT), the factor e^(−Eₐ/RT) represents:",
+  "formula": "",
+  "options": [
+   "Total collision frequency",
+   "Steric factor",
+   "Fraction of molecules with E ≥ Eₐ",
+   "Pre-exponential factor"
+  ],
+  "answer": 2,
+  "explain": "Boltzmann factor e^(−Eₐ/RT) gives the fraction of molecules having energy ≥ Eₐ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5b30df13-5b3e-4883-8e8a-6f6c8c123061",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "On a concentration–time graph, the instantaneous rate at time t is given by:",
+  "formula": "",
+  "options": [
+   "Magnitude of the slope of the tangent at t",
+   "Intercept of the curve on the conc. axis",
+   "Slope of the chord from t = 0 to t",
+   "Area under the curve up to t"
+  ],
+  "answer": 0,
+  "explain": "Instantaneous rate = |d[C]/dt| = magnitude of the slope of the tangent drawn at that instant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f084bca1-2701-4505-9f49-67648b9fe0ad",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "On a concentration–time curve, the average rate between t₁ and t₂ equals the:",
+  "formula": "r_av = −Δ[R]/Δt",
+  "options": [
+   "Area between t₁ and t₂",
+   "Slope of the chord joining the two points",
+   "Slope of the tangent at t₁",
+   "Slope of the tangent at t₂"
+  ],
+  "answer": 1,
+  "explain": "Average rate = Δconc/Δt, which is the slope of the secant (chord) joining the two points.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "08126fab-01b8-453c-8e91-e322ac0915f8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "Average rate of reaction becomes the instantaneous rate in the limit:",
+  "formula": "",
+  "options": [
+   "Δ[C] → ∞",
+   "Δt → ∞",
+   "[C] → 0",
+   "Δt → 0"
+  ],
+  "answer": 3,
+  "explain": "r_inst = lim(Δt→0) Δ[C]/Δt = d[C]/dt.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "720f88a7-3984-45c4-af09-b68e8c2040fa",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "For a gas-phase reaction followed by pressure change, the unit of rate is:",
+  "formula": "",
+  "options": [
+   "atm mol⁻¹",
+   "atm s⁻¹",
+   "mol atm s⁻¹",
+   "atm⁻¹ s"
+  ],
+  "answer": 1,
+  "explain": "Rate = Δp/Δt, so its unit is atm s⁻¹ (or bar s⁻¹).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad496a80-7fb3-4cfc-8517-17db3340714c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "Which quantity depends on the species chosen to follow the reaction?",
+  "formula": "",
+  "options": [
+   "Rate constant of the reaction",
+   "Order of the reaction",
+   "Rate of reaction (unique, with coefficients)",
+   "Rate of change of concentration"
+  ],
+  "answer": 3,
+  "explain": "Rates of change of concentration differ by stoichiometric coefficients; the rate of reaction (divided by coefficients) is unique.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "500d5594-1120-4bd1-9b5d-5722e04b0d88",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Factors affecting rate: conc, T, P, catalyst",
+  "prompt": "On raising temperature, the rate constant increases mainly because of what?",
+  "formula": "",
+  "options": [
+   "Change in ΔH",
+   "Increase in collision frequency only",
+   "Decrease in Ea",
+   "More molecules with energy ≥ Ea"
+  ],
+  "answer": 3,
+  "explain": "Collision frequency rises only slightly (∝√T); the fraction of effective molecules rises exponentially.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5ebe1599-4787-4c94-b0a4-309e2a457c1b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Factors affecting rate: conc, T, P, catalyst",
+  "prompt": "In the Arrhenius equation, which reaction shows greater sensitivity of k to temperature change?",
+  "formula": "",
+  "options": [
+   "One with zero Ea",
+   "One with lower Ea",
+   "One with higher A only",
+   "One with higher Ea"
+  ],
+  "answer": 3,
+  "explain": "Since ln k depends on −Ea/RT, a higher Ea gives a larger change in k with T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "27278207-7b7e-462f-b200-b9dd9fe8bfef",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Factors affecting rate: conc, T, P, catalyst",
+  "prompt": "For a gaseous reaction, increasing pressure (reducing volume) raises the rate because of what?",
+  "formula": "",
+  "options": [
+   "Increased rate constant k",
+   "Increased threshold energy",
+   "Decreased activation energy",
+   "Increased concentration of reactants"
+  ],
+  "answer": 3,
+  "explain": "Pressure raises partial pressures/concentrations; k and Ea remain unchanged at constant T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b2f0eff-e353-4f3e-a44e-9cd8c3385400",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Factors affecting rate: conc, T, P, catalyst",
+  "prompt": "A catalyst changes which of these for a reversible reaction?",
+  "formula": "",
+  "options": [
+   "ΔH of the reaction",
+   "Gibbs energy change ΔG",
+   "Equilibrium constant K",
+   "Time to reach equilibrium"
+  ],
+  "answer": 3,
+  "explain": "A catalyst speeds both forward and backward rates equally; ΔH, ΔG and K stay unchanged, only the time to equilibrium falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f08b41b-f58c-4e55-a99a-e0cc5496f7e5",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Elementary and complex reactions",
+  "prompt": "For an elementary reaction 2A + B → products, the rate law is:",
+  "formula": "",
+  "options": [
+   "k[A][B]",
+   "k[A][B]²",
+   "k[2A][B]",
+   "k[A]²[B]"
+  ],
+  "answer": 3,
+  "explain": "For elementary steps, order of each species equals its stoichiometric coefficient.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c748d919-19c9-41ec-8d6b-b923457fa1f7",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Elementary and complex reactions",
+  "prompt": "In a multistep mechanism, the overall rate law is written using the reactants of:",
+  "formula": "",
+  "options": [
+   "The slow step (with intermediates eliminated)",
+   "The fastest step",
+   "The first step always",
+   "The last step always"
+  ],
+  "answer": 0,
+  "explain": "Rate depends on the slow step; intermediates are replaced via fast equilibrium steps.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d659a281-e816-43b2-b6a0-aa4a3909365b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Elementary and complex reactions",
+  "prompt": "A species formed in one step and consumed in a later step of a mechanism is called:",
+  "formula": "",
+  "options": [
+   "Intermediate",
+   "Catalyst",
+   "Inhibitor",
+   "Activated complex"
+  ],
+  "answer": 0,
+  "explain": "Intermediates are formed and consumed during mechanism; they do not appear in the overall equation.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43d8b4c2-a765-446b-a5aa-2873e23e5d6f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "A zero-order reaction goes to completion in time:",
+  "formula": "t = [A]₀/k",
+  "options": [
+   "[A]₀/k",
+   "Infinite time",
+   "0.693/k",
+   "[A]₀/2k"
+  ],
+  "answer": 0,
+  "explain": "Setting [A] = 0 in [A]₀ − kt gives t = [A]₀/k. This is unlike first order.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3d769a2b-4ad9-4a7b-bcae-631e8a58bca8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "For a zero-order reaction, successive half-lives are:",
+  "formula": "",
+  "options": [
+   "Doubling each time",
+   "Halving each time",
+   "Tripling each time",
+   "Equal"
+  ],
+  "answer": 1,
+  "explain": "t½ ∝ [A]₀, and [A]₀ halves after each half-life, so t½ halves.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4294dcd8-c247-4d64-a646-f34d79765aad",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "Which reaction is a standard example of zero order?",
+  "formula": "",
+  "options": [
+   "N₂O₅ decomposition in CCl₄",
+   "Acid hydrolysis of ethyl acetate",
+   "H₂O₂ decomposition in solution",
+   "NH₃ decomposition on hot Pt surface"
+  ],
+  "answer": 3,
+  "explain": "NH₃ on a hot Pt surface is zero order because the surface is saturated.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e45d1442-3fa8-490d-b8f1-036fa6fdf924",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "For zero order, t₇₅% (75% completion) in terms of t½ is:",
+  "formula": "",
+  "options": [
+   "1.5 t½",
+   "2 t½",
+   "4 t½",
+   "t½"
+  ],
+  "answer": 0,
+  "explain": "t₇₅ = 0.75[A]₀/k and t½ = 0.5[A]₀/k, so t₇₅ = 1.5 t½.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "448c62b5-3fd3-4049-884b-44ce747a215d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "Why does a surface-catalysed reaction like NH₃ on Pt behave as zero order?",
+  "formula": "",
+  "options": [
+   "Catalyst surface is saturated with reactant",
+   "Reactant is present in large excess",
+   "Temperature is very high",
+   "Products block the reaction"
+  ],
+  "answer": 0,
+  "explain": "With the active sites saturated, the rate no longer depends on the gas concentration.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "af08d852-ff12-47d8-a942-ac0b6276187e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "Order of the decomposition 2HI → H₂ + I₂ on a hot gold surface is:",
+  "formula": "",
+  "options": [
+   "First",
+   "Zero",
+   "Fractional",
+   "Second"
+  ],
+  "answer": 1,
+  "explain": "On the gold surface, the catalyst is saturated with HI, so the rate is independent of [HI]: zero order.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7592f73c-eed1-4495-884e-e787f4075960",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Time for 99.9% completion of a first-order reaction is about:",
+  "formula": "",
+  "options": [
+   "5 t½",
+   "100 t½",
+   "10 t½",
+   "3 t½"
+  ],
+  "answer": 2,
+  "explain": "ln1000/k = 6.909/k ≈ 10 × 0.693/k ≈ 10 t½.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b603d56b-cf23-48d9-909f-e70f1de17ae6",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "For first-order reaction, t₉₀ (90% completion) in terms of k is:",
+  "formula": "",
+  "options": [
+   "2.303/k",
+   "4.606/k",
+   "0.693/k",
+   "1/k"
+  ],
+  "answer": 0,
+  "explain": "t = (2.303/k) log(100/10) = 2.303/k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2000835e-a233-433e-a9da-7686a12eaa1d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "For a first-order reaction, t₉₉ / t₉₀ equals:",
+  "formula": "",
+  "options": [
+   "2",
+   "10",
+   "1.5",
+   "99/90"
+  ],
+  "answer": 0,
+  "explain": "t₉₉ = (2.303/k)·log100 = 2×2.303/k; t₉₀ = 2.303/k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "138094c5-7fa5-4214-b428-402a4b76b6be",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "In a plot of ln[A] vs t for a first-order reaction, the intercept on the ln[A] axis is:",
+  "formula": "",
+  "options": [
+   "[A]₀",
+   "ln[A]₀",
+   "−k",
+   "k/2.303"
+  ],
+  "answer": 1,
+  "explain": "ln[A] = −kt + ln[A]₀; at t = 0 value is ln[A]₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "109fe07d-a758-4006-8c95-3047cff81d96",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "For a first-order reaction, the rate vs [A] graph is:",
+  "formula": "",
+  "options": [
+   "Straight line through origin",
+   "Parabola",
+   "Line parallel to [A] axis",
+   "Rectangular hyperbola"
+  ],
+  "answer": 0,
+  "explain": "Rate = k[A] is linear in [A], slope k, zero intercept.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "606092bf-841b-438e-9a3e-d646cb72cc40",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Gas-phase A(g) → B(g) + C(g), pressures P₀ (initial) and Pₜ (total). First-order k =",
+  "formula": "",
+  "options": [
+   "(2.303/t) log[P₀/(2P₀ − Pₜ)]",
+   "(2.303/t) log[(2P₀ − Pₜ)/P₀]",
+   "(2.303/t) log[P₀/Pₜ]",
+   "(2.303/t) log[P₀/(Pₜ − P₀)]"
+  ],
+  "answer": 0,
+  "explain": "Pₐ = P₀ − x, Pₜ = P₀ + x ⇒ Pₐ = 2P₀ − Pₜ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "70a881df-80fa-434e-ae76-f8d3af6af638",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Acid-catalysed hydrolysis of sucrose (excess water) follows which kinetics?",
+  "formula": "",
+  "options": [
+   "Third order",
+   "True second order",
+   "Zero order",
+   "Pseudo first order"
+  ],
+  "answer": 3,
+  "explain": "Water is in large excess, so its concentration is constant; rate depends only on sucrose.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c628e7af-0a52-48e9-9b65-c4d8b52c42a1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Which decomposition is a standard example of a first-order gas-phase reaction?",
+  "formula": "",
+  "options": [
+   "2N₂O₅ → 4NO₂ + O₂",
+   "H₂ + Cl₂ → 2HCl",
+   "2HI → H₂ + I₂ on gold",
+   "2NH₃ → N₂ + 3H₂ on Pt"
+  ],
+  "answer": 0,
+  "explain": "N₂O₅ decomposition has rate = k[N₂O₅]; NH₃ on Pt (hot) is zero order.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8c233271-4aa6-4d4b-a3ca-6eedfbb353a3",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Ester hydrolysis titrated with NaOH (V₀, Vₜ, V∞): first-order k = (2.303/t)·log of:",
+  "formula": "k = (2.303/t) log[(V∞ − V₀)/(V∞ − Vₜ)]",
+  "options": [
+   "(V∞ − Vₜ)/(V∞ − V₀)",
+   "(Vₜ − V₀)/(V∞ − V₀)",
+   "V₀/Vₜ",
+   "(V∞ − V₀)/(V∞ − Vₜ)"
+  ],
+  "answer": 3,
+  "explain": "[A]₀ ∝ V∞ − V₀ and [A] ∝ V∞ − Vₜ, so the ratio is (V∞−V₀)/(V∞−Vₜ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8303ef01-10ff-421b-9713-6c5fad81d4d1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "The numerical value of a first-order rate constant does NOT depend on:",
+  "formula": "",
+  "options": [
+   "Units of concentration",
+   "Units of time",
+   "Temperature",
+   "Presence of a catalyst"
+  ],
+  "answer": 0,
+  "explain": "k has unit time⁻¹ only; concentration cancels in the ratio [A]₀/[A].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ba83e19c-a5ff-42f5-b65b-e7955bcb536f",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "If k of a first-order reaction is doubled, time needed for any given fraction of conversion becomes:",
+  "formula": "t = (1/k) ln([A]₀/[A])",
+  "options": [
+   "Unchanged",
+   "Half",
+   "One-fourth",
+   "Double"
+  ],
+  "answer": 1,
+  "explain": "For fixed [A]₀/[A], t ∝ 1/k, so doubling k halves t.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad517d40-d66a-49e7-8e15-c4ad9aeca293",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "For a first-order reaction, the plot of [A] against time t is:",
+  "formula": "[A] = [A]₀e^(−kt)",
+  "options": [
+   "Rectangular hyperbola",
+   "Exponentially decaying curve",
+   "Straight line with negative slope",
+   "Straight line parallel to time axis"
+  ],
+  "answer": 1,
+  "explain": "[A] = [A]₀e^(−kt) is an exponential decay; only ln[A] vs t is linear. Zero order gives the straight line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e28b6315-5716-4e06-a3e6-763252d53c20",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, time for 87.5% completion equals:",
+  "formula": "",
+  "options": [
+   "4 t½",
+   "3.5 t½",
+   "2 t½",
+   "3 t½"
+  ],
+  "answer": 3,
+  "explain": "87.5% done leaves 1/8 = (1/2)³, so three half-lives.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "21e56bc7-ff8a-4881-9bdf-ae3d5fda30ec",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction with Eₐ > 0, raising the temperature makes t½:",
+  "formula": "",
+  "options": [
+   "Stay the same",
+   "Decrease",
+   "First rise, then fall",
+   "Increase"
+  ],
+  "answer": 1,
+  "explain": "k increases with T (Arrhenius), and t½ = 0.693/k, so t½ decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fef71e0d-f53d-4039-bc8b-46c5cbe41d82",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "Rate constant k has units mol L⁻¹ s⁻¹ if t½ is proportional to:",
+  "formula": "",
+  "options": [
+   "[A]₀²",
+   "1/[A]₀",
+   "[A]₀⁰",
+   "[A]₀"
+  ],
+  "answer": 3,
+  "explain": "t½ ∝ [A]₀ means zero order, and zero-order k has units of rate, mol L⁻¹ s⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "328c7594-9dcc-4a03-a151-c4953b0e5e94",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Pseudo first-order reactions",
+  "prompt": "Acid hydrolysis of ethyl acetate is pseudo-first-order mainly because:",
+  "formula": "CH₃COOC₂H₅ + H₂O → CH₃COOH + C₂H₅OH",
+  "options": [
+   "Acid is consumed in the reaction",
+   "Water is in large excess, so [H₂O] is constant",
+   "The reaction is truly unimolecular",
+   "Ester is in large excess"
+  ],
+  "answer": 1,
+  "explain": "[H₂O] ≫ [ester] and barely changes, so rate = k'[ester]; H⁺ is a catalyst and stays constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3a5f76aa-cf6d-47ba-a536-fd278cdf42f2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Pseudo first-order reactions",
+  "prompt": "Acid-catalysed hydrolysis of ethyl acetate with excess water: order and molecularity are:",
+  "formula": "",
+  "options": [
+   "Order 1, molecularity 1",
+   "Order 1, molecularity 2",
+   "Order 2, molecularity 2",
+   "Order 2, molecularity 1"
+  ],
+  "answer": 1,
+  "explain": "Two molecules react (molecularity 2), but the water term is constant, so the observed order is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f1f3ea48-bac5-48de-bd39-81d390c813c2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Pseudo first-order reactions",
+  "prompt": "For A + B → P (B in large excess), k (true) has units L mol⁻¹ s⁻¹. Units of k' are:",
+  "formula": "",
+  "options": [
+   "L² mol⁻² s⁻¹",
+   "s⁻¹",
+   "L mol⁻¹ s⁻¹",
+   "mol L⁻¹ s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "k' = k[B]₀ has the units of a first-order constant, s⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07b883af-1e3d-4f24-8b1d-4d348454bcd4",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Pseudo first-order reactions",
+  "prompt": "In A + B → P with B in large excess, the apparent order with respect to B is:",
+  "formula": "rate = k[A][B]",
+  "options": [
+   "One",
+   "Zero",
+   "Fractional",
+   "Two"
+  ],
+  "answer": 1,
+  "explain": "[B] stays practically constant, so the rate seems independent of [B]; the apparent order in B is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d5f54b1-91a7-4012-87e5-19212184ad78",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Pseudo first-order reactions",
+  "prompt": "Ethyl acetate with equimolar NaOH (saponification) is described by which kinetics?",
+  "formula": "",
+  "options": [
+   "Second order",
+   "Zero order",
+   "Pseudo-first-order",
+   "True first order"
+  ],
+  "answer": 0,
+  "explain": "No reactant is in large excess, so rate = k[ester][OH⁻] and the reaction is second order.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0840580c-baa8-43cf-aa43-498e9352e9e2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "As T → ∞, the rate constant k in the Arrhenius equation tends to",
+  "formula": "",
+  "options": [
+   "0",
+   "A",
+   "A/e",
+   "Ea"
+  ],
+  "answer": 1,
+  "explain": "e^(−Ea/RT) → 1 as T → ∞, so k → A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f68c037-eb46-4a82-acbc-e398b5ff90b1",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "On raising temperature, the rate constant of an exothermic reaction",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Decreases only if ΔH is large",
+   "Increases",
+   "Stays the same"
+  ],
+  "answer": 2,
+  "explain": "k = A e^(−Ea/RT) rises with T for any reaction with Ea > 0, whatever the sign of ΔH.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0070eff2-5030-48dc-994e-7403f5e1965a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "Activation energy is the difference between",
+  "formula": "",
+  "options": [
+   "Threshold energy and energy of products",
+   "Threshold energy and average energy of reactants",
+   "Energy of products and reactants",
+   "Average energy of products and reactants"
+  ],
+  "answer": 1,
+  "explain": "Ea = threshold energy − average kinetic energy of the reacting molecules.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a04f4e08-08dc-4d68-aec4-00e1eac6e91e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "On heating, the Maxwell–Boltzmann energy distribution curve's peak",
+  "formula": "",
+  "options": [
+   "Shifts right and lowers",
+   "Shifts left and rises",
+   "Stays unchanged",
+   "Shifts right and rises"
+  ],
+  "answer": 0,
+  "explain": "The most probable energy increases and the curve flattens and broadens, with a larger high-energy tail.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f0673dca-e726-4695-9910-c1561d48e566",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "The graph of k versus T for an Arrhenius reaction is",
+  "formula": "",
+  "options": [
+   "Exponential rise approaching A",
+   "Straight line through origin",
+   "Straight line with negative slope",
+   "Decreasing hyperbola"
+  ],
+  "answer": 0,
+  "explain": "k = A e^(−Ea/RT) rises exponentially and levels off towards A at very high T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a95a6a9-7d8b-4c5c-83d2-e4f5386fb68d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "In the plot of log k versus 1/T, the intercept on the log k axis is",
+  "formula": "log k = log A − Ea/(2.303RT)",
+  "options": [
+   "Ea/2.303R",
+   "log A",
+   "ln A",
+   "−Ea/R"
+  ],
+  "answer": 1,
+  "explain": "At 1/T = 0, log k = log A, so the intercept is log A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1d8ba580-ae83-462e-bb3d-a4e05e758bfa",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "Ea is determined experimentally from the Arrhenius plot of ln k against 1/T, which is a",
+  "formula": "",
+  "options": [
+   "Straight line with negative slope",
+   "Parabola",
+   "Straight line parallel to the axis",
+   "Straight line with positive slope"
+  ],
+  "answer": 0,
+  "explain": "ln k decreases linearly as 1/T increases, giving a negative slope −Ea/R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c4b7e104-8d21-4fb3-8c67-f53211359f97",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "A reaction with a higher Ea shows a ln k vs 1/T line that is",
+  "formula": "",
+  "options": [
+   "Horizontal",
+   "Steeper",
+   "Less steep",
+   "Unchanged in slope"
+  ],
+  "answer": 1,
+  "explain": "Slope = −Ea/R, so larger Ea gives a steeper line, i.e. greater temperature sensitivity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f71fbc0e-e3b7-4c30-bbf0-70f6c9bf3f73",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "For a reaction with Eₐ = 0, the rate constant k:",
+  "formula": "",
+  "options": [
+   "Increases with T",
+   "Is independent of T",
+   "Is zero",
+   "Decreases with T"
+  ],
+  "answer": 1,
+  "explain": "With Eₐ = 0, e^(−Eₐ/RT) = 1, so k = A at every temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b819e62-3fe1-4043-9223-e8936be776d2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "The SI unit of activation energy Eₐ is:",
+  "formula": "",
+  "options": [
+   "mol L⁻¹ s⁻¹",
+   "J mol⁻¹",
+   "J mol⁻¹ K⁻¹",
+   "s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Eₐ is energy per mole, in J mol⁻¹ (commonly kJ mol⁻¹).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05176a51-0358-4e7f-8264-878a17f49dbc",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "In collision theory, k = P·Z·e^(−Eₐ/RT). The steric factor P is usually:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Exactly 1",
+   "Less than 1",
+   "Greater than 1"
+  ],
+  "answer": 2,
+  "explain": "P accounts for proper orientation of molecules, so generally 0 < P < 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69c4def2-0988-45ff-86fd-1937bc971222",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "For an effective collision, the colliding molecules must have:",
+  "formula": "",
+  "options": [
+   "Proper orientation only",
+   "Energy ≥ threshold energy and proper orientation",
+   "Energy ≥ threshold energy only",
+   "Equal kinetic energies"
+  ],
+  "answer": 1,
+  "explain": "Both sufficient energy and proper orientation are required.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f632681-bf56-43bd-b8aa-550b11b4efb0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of catalyst on activation energy",
+  "prompt": "Adding a catalyst to a reversible reaction at fixed T changes the equilibrium constant K by:",
+  "formula": "",
+  "options": [
+   "Decreases it",
+   "Doubles it",
+   "No change",
+   "Increases it"
+  ],
+  "answer": 2,
+  "explain": "Forward and backward rates rise equally, so K is unchanged; equilibrium is reached faster.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "24574bdd-1c04-4410-a1dc-c689fc4720f9",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of catalyst on activation energy",
+  "prompt": "At constant T, a catalyst lowers Eₐ. The fraction of molecules with energy ≥ Eₐ:",
+  "formula": "f = e^(−Eₐ/RT)",
+  "options": [
+   "Stays the same",
+   "Increases",
+   "Decreases",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "Lower Eₐ gives a larger e^(−Eₐ/RT), so more collisions are effective.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "efb22ec6-9586-4f08-a866-f9b3e83af7a0",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of catalyst on activation energy",
+  "prompt": "A catalyst makes a non-spontaneous reaction (ΔG > 0) under given conditions:",
+  "formula": "",
+  "options": [
+   "Spontaneous with ΔG = 0",
+   "Spontaneous",
+   "Spontaneous only on heating",
+   "Still non-spontaneous"
+  ],
+  "answer": 3,
+  "explain": "A catalyst only changes the rate (kinetics) and never alters ΔG or the spontaneity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68dcc796-f0e6-4695-8404-e6d3051abc5e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Collision theory of bimolecular gas reactions",
+  "prompt": "In k = P·Z·e^(−Ea/RT), the factor P is called the:",
+  "formula": "k = P·Z_AB·e^(−Ea/RT)",
+  "options": [
+   "Steric (orientation) factor",
+   "Activation factor",
+   "Threshold factor",
+   "Transmission coefficient"
+  ],
+  "answer": 0,
+  "explain": "P is the probability factor that accounts for the proper orientation of colliding molecules.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9fd1376a-5bd7-4ee1-a410-de5f2af87a0e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Collision theory of bimolecular gas reactions",
+  "prompt": "Doubling the concentration of A in A + B → products at constant T doubles rate because:",
+  "formula": "",
+  "options": [
+   "Steric factor increases",
+   "Ea decreases",
+   "Fraction with E ≥ Ea increases",
+   "Collision frequency increases"
+  ],
+  "answer": 3,
+  "explain": "Z ∝ [A][B]. The Ea, P and energetic fraction depend on T and nature, not concentration.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b792d46f-4f54-495c-b698-ea81ae1eaa08",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Collision theory of bimolecular gas reactions",
+  "prompt": "On raising temperature, the Maxwell–Boltzmann energy distribution curve shows its peak:",
+  "formula": "",
+  "options": [
+   "Shifted left and lowered, area unchanged",
+   "Shifted right and lowered, area unchanged",
+   "Shifted right and raised, area increased",
+   "Unshifted but broadened, area increased"
+  ],
+  "answer": 1,
+  "explain": "The most probable energy rises and the curve flattens; total area (number of molecules) stays constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "71b3ccb9-7df0-4169-bfa0-9d7bf233d19c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate of reaction: average and instantaneous",
+  "prompt": "For aA + bB → cC + dD, the rate of reaction (unique for the reaction) is defined as:",
+  "formula": "",
+  "options": [
+   "−(1/a)·d[A]/dt",
+   "−a·d[A]/dt",
+   "−(1/a)·d[A]/dt + (1/b)·d[B]/dt",
+   "−d[A]/dt"
+  ],
+  "answer": 0,
+  "explain": "Rate = −(1/a)d[A]/dt = −(1/b)d[B]/dt = (1/c)d[C]/dt; dividing by the stoichiometric coefficient gives one rate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "51ae5226-bf5f-41a6-a40d-5942e962eb6e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "For 2A → P, rate = −½ d[A]/dt = k[A]. If −d[A]/dt = k_A[A], then k_A equals:",
+  "formula": "rate = −(1/a) d[A]/dt",
+  "options": [
+   "k²",
+   "k/2",
+   "k",
+   "2k"
+  ],
+  "answer": 3,
+  "explain": "−d[A]/dt = 2·rate = 2k[A], so k_A = 2k (k depends on how the rate is defined).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "667acbf6-699d-4eb3-9314-64877f41233a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a second-order reaction (rate = k[A]²), each successive half-life compared with the previous one is:",
+  "formula": "t½ = 1/(k[A]₀)",
+  "options": [
+   "Half",
+   "Four times",
+   "Same",
+   "Double"
+  ],
+  "answer": 3,
+  "explain": "t½ ∝ 1/[A]₀. The concentration halves each time, so each successive half-life doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "03dd32e0-72b4-4ae9-ad74-daa4af676e8a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, the time for 99% completion is nearly:",
+  "formula": "t = (2.303/k) log 100",
+  "options": [
+   "6.6 t½",
+   "9.9 t½",
+   "4.6 t½",
+   "3.3 t½"
+  ],
+  "answer": 0,
+  "explain": "t₉₉% = 2.303×2/k = 4.606/k, and t½ = 0.693/k, so t₉₉% ≈ 6.64 t½.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "71185f07-4755-45dc-b745-97f2833ff375",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Factors affecting rate: conc, T, P, catalyst",
+  "prompt": "An inert gas is added at constant volume to a gaseous reaction mixture. The rate of reaction:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Becomes zero",
+   "Decreases",
+   "Remains unchanged"
+  ],
+  "answer": 3,
+  "explain": "At constant volume the concentrations (partial pressures) of the reactants stay the same, so the rate is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "34cc164b-1484-4910-a73e-95757ce9c1cf",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Factors affecting rate: conc, T, P, catalyst",
+  "prompt": "A catalytic poison (e.g., As on Pt) lowers the rate of a catalysed reaction by:",
+  "formula": "",
+  "options": [
+   "Blocking active sites of catalyst",
+   "Reducing ΔH of reaction",
+   "Decreasing reactant concentration",
+   "Lowering the temperature of the system"
+  ],
+  "answer": 0,
+  "explain": "Poisons are strongly adsorbed on the catalyst surface and block its active sites.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b5711cd-9523-41d7-b220-ed4c3cdca5c9",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Elementary and complex reactions",
+  "prompt": "For a complex reaction, the stoichiometric coefficients of the balanced overall equation:",
+  "formula": "",
+  "options": [
+   "Always equal the orders in the rate law",
+   "Equal the molecularity of the slow step",
+   "Need not equal the orders in the rate law",
+   "Equal the number of steps"
+  ],
+  "answer": 2,
+  "explain": "Orders come from the slow step/experiment; only elementary reactions have orders equal to the coefficients.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c54db241-7af8-45d3-8017-a0885091077c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Rate constant and its units",
+  "prompt": "For a single-step reversible reaction (elementary), the ratio k_f/k_b equals:",
+  "formula": "",
+  "options": [
+   "Rate of reaction",
+   "Eₐ(forward)/Eₐ(backward)",
+   "ΔH of the reaction",
+   "Equilibrium constant K_c"
+  ],
+  "answer": 3,
+  "explain": "At equilibrium k_f[reactants] = k_b[products], so k_f/k_b = K_c.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a1f282b7-3092-46d9-8fd2-c505468a90d4",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "For a zero-order reaction, the slope of the t½ vs [A]₀ plot is:",
+  "formula": "t½ = [A]₀/2k",
+  "options": [
+   "2k",
+   "0.693/k",
+   "k/2",
+   "1/(2k)"
+  ],
+  "answer": 3,
+  "explain": "t½ = (1/2k)·[A]₀ is a line through the origin with slope 1/2k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "552843ef-68a8-4763-baab-42b84f024fb8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Zero-order: integrated form and graphs",
+  "prompt": "For a zero-order reaction, the time for 25% completion in terms of t½ is:",
+  "formula": "t = x[A]₀/k",
+  "options": [
+   "0.75 t½",
+   "0.693 t½",
+   "0.5 t½",
+   "0.25 t½"
+  ],
+  "answer": 2,
+  "explain": "t = x[A]₀/k is linear in the fraction x. 25% takes half the time of 50%, so 0.5 t½.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c46b86bf-f96d-4a8f-a8be-81445cbb80c2",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "Theoretically, time needed for 100% completion of a first-order reaction is:",
+  "formula": "[A] = [A]₀e^(−kt)",
+  "options": [
+   "2.303/k",
+   "Infinite",
+   "1/k",
+   "10 t½"
+  ],
+  "answer": 1,
+  "explain": "Exponential decay: [A] reaches zero only as t → ∞, so 100% completion needs infinite time.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fc64e306-c8eb-4f02-acf6-ed05df317318",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "First-order: integrated rate equation",
+  "prompt": "In a first-order reaction, concentrations at equal time intervals form which progression?",
+  "formula": "[A]ₙ₊₁/[A]ₙ = e^(−kΔt)",
+  "options": [
+   "Arithmetic progression",
+   "Constant value",
+   "Harmonic progression",
+   "Geometric progression"
+  ],
+  "answer": 3,
+  "explain": "Equal fraction decomposes in equal time, so the ratio of successive [A] is constant: a G.P.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1860cd4e-932a-4d98-9981-26780721133b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, the graph of t½ against 1/k is:",
+  "formula": "t½ = 0.693 × (1/k)",
+  "options": [
+   "Line parallel to the 1/k axis",
+   "Straight line through the origin",
+   "Rectangular hyperbola",
+   "Straight line with negative slope"
+  ],
+  "answer": 1,
+  "explain": "t½ = 0.693/k is directly proportional to 1/k, so the line passes through the origin with slope 0.693.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d73854ba-9914-415e-9d71-e6af116fc2aa",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "For a first-order reaction, the rate at t = t½ compared with the initial rate is:",
+  "formula": "rate = k[A]",
+  "options": [
+   "Same",
+   "One-fourth",
+   "Double",
+   "Half"
+  ],
+  "answer": 3,
+  "explain": "Rate = k[A] and [A] falls to half at t½, so the rate is also half the initial rate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abff5a11-291e-4900-93c1-22a15569b11c",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Half-life of zero and first-order reactions",
+  "prompt": "A catalyst lowers Eₐ of a first-order reaction at fixed temperature. Its half-life:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Becomes zero",
+   "Increases",
+   "Remains unchanged"
+  ],
+  "answer": 0,
+  "explain": "Lower Eₐ gives a larger k, and t½ = 0.693/k is therefore smaller.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb12c764-b873-4391-a8dd-f419db96531a",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Pseudo first-order reactions",
+  "prompt": "Rate of pseudo-first-order inversion of cane sugar is usually followed by measuring:",
+  "formula": "",
+  "options": [
+   "Change in optical rotation",
+   "Change in conductance",
+   "Change in pH",
+   "Change in colour intensity"
+  ],
+  "answer": 0,
+  "explain": "Dextrorotatory sucrose gives laevorotatory invert sugar, so a polarimeter tracks the progress.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "90ffb138-eab3-45c5-b15f-5648bc939cd4",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "A 10 K rise increases k by a larger factor at",
+  "formula": "",
+  "options": [
+   "Higher initial temperature",
+   "Lower initial temperature",
+   "Temperature depending only on A",
+   "Same factor at every temperature"
+  ],
+  "answer": 1,
+  "explain": "ln(k₂/k₁) ≈ EaΔT/RT², so the effect falls as T increases; the temperature coefficient is smaller at high T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "41c56aac-37a7-4d7b-8978-bfbb7f34a101",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Effect of temperature, temperature coefficient",
+  "prompt": "In the Arrhenius treatment, the activation energy of a reaction on raising temperature",
+  "formula": "",
+  "options": [
+   "Decreases steadily",
+   "Remains nearly constant",
+   "Increases steadily",
+   "Becomes zero at high T"
+  ],
+  "answer": 1,
+  "explain": "Ea is taken as temperature-independent over a moderate range. Only the fraction of molecules with E ≥ Ea changes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b00b4483-1c2c-4685-9573-babb8bf301a8",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "Exothermic reaction: ΔH = −40 kJ/mol, Eₐ(forward) = 50 kJ/mol. Eₐ(backward) is:",
+  "formula": "Eₐ(b) = Eₐ(f) − ΔH",
+  "options": [
+   "10 kJ/mol",
+   "50 kJ/mol",
+   "40 kJ/mol",
+   "90 kJ/mol"
+  ],
+  "answer": 3,
+  "explain": "Eₐ(b) = 50 − (−40) = 90 kJ/mol.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69b89833-3782-4ac3-85a9-7262d339973e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "On a potential-energy profile, the activated complex lies at:",
+  "formula": "",
+  "options": [
+   "A local minimum between two peaks",
+   "The energy level of products",
+   "The energy level of reactants",
+   "The maximum (peak) of the profile"
+  ],
+  "answer": 3,
+  "explain": "The activated complex is the unstable species at the top of the energy barrier.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2afc0918-249d-4b7e-ac75-b28cb5744e7e",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "In a two-step energy profile, a reaction intermediate corresponds to:",
+  "formula": "",
+  "options": [
+   "A valley between two peaks",
+   "The reactant level",
+   "The highest peak",
+   "The product level"
+  ],
+  "answer": 0,
+  "explain": "An intermediate sits in a local energy minimum between two transition states; a complex sits at a peak.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "663f3081-89d5-4f35-8917-0d200a8af8fd",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "The quantity Eₐ/RT in the Arrhenius exponent is:",
+  "formula": "",
+  "options": [
+   "In s⁻¹",
+   "In J mol⁻¹",
+   "Dimensionless",
+   "In K⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Eₐ is in J mol⁻¹ and RT is in J mol⁻¹, so the ratio is dimensionless.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "63cf813c-fb2b-4a84-bee4-55a60583bf4b",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "The slope of ln k versus 1/T has the unit:",
+  "formula": "slope = −Eₐ/R",
+  "options": [
+   "mol K J⁻¹",
+   "K⁻¹",
+   "K",
+   "J mol⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Eₐ/R = (J mol⁻¹)/(J K⁻¹ mol⁻¹) = K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2dbeca8a-9fd9-4b87-9d96-14a37b1fdd76",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "The unit of the pre-exponential factor A for a zero-order reaction is:",
+  "formula": "",
+  "options": [
+   "s⁻¹",
+   "mol⁻² L² s⁻¹",
+   "L mol⁻¹ s⁻¹",
+   "mol L⁻¹ s⁻¹"
+  ],
+  "answer": 3,
+  "explain": "A has the same unit as k, and k for a zero-order reaction is mol L⁻¹ s⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a2c8576-090c-4e90-a858-b0450cf17f45",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "At the same T and same A, the reaction with the larger Eₐ has:",
+  "formula": "",
+  "options": [
+   "A larger k",
+   "The same k",
+   "A larger A",
+   "A smaller k"
+  ],
+  "answer": 3,
+  "explain": "k = Ae^(−Eₐ/RT) decreases as Eₐ increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c42d99b7-2aba-4393-8de5-64f75ee50002",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Arrhenius equation and activation energy",
+  "prompt": "For a given reaction without a catalyst, Eₐ is determined mainly by:",
+  "formula": "",
+  "options": [
+   "Initial concentration of reactants",
+   "Total pressure of the system",
+   "Volume of the container",
+   "Nature of the reactants (bonds broken)"
+  ],
+  "answer": 3,
+  "explain": "Eₐ is a characteristic of the reaction (bonds broken and formed); it is independent of concentration, pressure and volume.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3b0c7e9-9c6b-4ef5-be3f-c6e405aca6bc",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Collision theory of bimolecular gas reactions",
+  "prompt": "In an effective collision, the colliding molecules first form:",
+  "formula": "",
+  "options": [
+   "The products directly",
+   "Free radicals",
+   "An unstable activated complex",
+   "A stable intermediate"
+  ],
+  "answer": 2,
+  "explain": "An effective collision gives an activated complex, which then breaks down into products.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c5d0ee7f-1617-4e12-a8d9-61f90835495d",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Collision theory of bimolecular gas reactions",
+  "prompt": "Collisions between molecules with energy below the threshold energy are:",
+  "formula": "",
+  "options": [
+   "Effective only if oriented properly",
+   "Absent at room temperature",
+   "Ineffective, with molecules rebounding",
+   "Effective, giving products"
+  ],
+  "answer": 2,
+  "explain": "With insufficient energy no activated complex forms, so the molecules just bounce apart.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3f7226b-de02-40f5-8ed8-b3279986db98",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Collision theory of bimolecular gas reactions",
+  "prompt": "The steric factor P is close to 1 for a reaction between:",
+  "formula": "",
+  "options": [
+   "Two atoms (no orientation needed)",
+   "A solid and a gas",
+   "Ions in solution",
+   "Two large polyatomic molecules"
+  ],
+  "answer": 0,
+  "explain": "Atoms are spherical, so orientation does not matter and P ≈ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "886c0fe0-b8d9-4350-8268-54a8993d7d96",
+  "subject": "Chemistry",
+  "chapter": "Chemical Kinetics",
+  "topic": "Collision theory of bimolecular gas reactions",
+  "prompt": "At fixed T, increasing the molecular diameter of the gas molecules makes the collision frequency:",
+  "formula": "",
+  "options": [
+   "Increase, as the cross-section increases",
+   "Stay unchanged",
+   "Decrease",
+   "Become zero"
+  ],
+  "answer": 0,
+  "explain": "Z is proportional to the collision cross-section (πσ²), so larger molecules collide more often.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

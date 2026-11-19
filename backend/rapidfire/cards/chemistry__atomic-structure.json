@@ -1,1609 +1,4269 @@
 [
-  {
-    "id": "bd4080f4-2258-43d1-94c4-a3425eb55531",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Bohr Model",
-    "prompt": "Energy of nth Bohr orbit of hydrogen atom?",
-    "formula": "Eₙ = -13.6/n² eV",
-    "options": [
-      "-13.6/n eV",
-      "-13.6·n² eV",
-      "-13.6·n eV",
-      "-13.6/n² eV"
-    ],
-    "answer": 3,
-    "explain": "Bohr orbit energy is inversely proportional to n²; ground state E₁ = -13.6 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "588864cd-ff63-4320-b8eb-d06b9014b9dd",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Bohr Model",
-    "prompt": "Radius of nth Bohr orbit of hydrogen?",
-    "formula": "rₙ = 0.529·n² Å",
-    "options": [
-      "0.529·n² Å",
-      "0.529/n² Å",
-      "0.529·n Å",
-      "0.529/n Å"
-    ],
-    "answer": 0,
-    "explain": "Bohr radius rₙ ∝ n²; for H, r₁ = 0.529 Å (a₀).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dd0ba230-dfa2-4a72-80e0-2f9439756024",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Wave-Particle Duality",
-    "prompt": "de Broglie wavelength of a particle?",
-    "formula": "λ = h/mv",
-    "options": [
-      "λ = mv/h",
-      "λ = h/mv",
-      "λ = h·mv",
-      "λ = h/m²v"
-    ],
-    "answer": 1,
-    "explain": "de Broglie relation: wavelength = Planck's constant / momentum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "91b01000-60d0-4e46-a429-aa64ff022c74",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Uncertainty Principle",
-    "prompt": "Heisenberg uncertainty principle?",
-    "formula": "Δx·Δp ≥ h/4π",
-    "options": [
-      "Δx·Δp ≥ h",
-      "Δx·Δp ≥ h/4π",
-      "Δx·Δp ≥ h/2π",
-      "Δx·Δp ≥ 4πh"
-    ],
-    "answer": 1,
-    "explain": "Uncertainty in position × uncertainty in momentum ≥ h/4π.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f1b8af31-a2a7-4316-b721-00b338344d71",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Bohr Model",
-    "prompt": "Velocity of electron in nth Bohr orbit of H?",
-    "formula": "vₙ = 2.18×10⁶/n m/s",
-    "options": [
-      "2.18×10⁶·n² m/s",
-      "2.18×10⁶/n² m/s",
-      "2.18×10⁶·n m/s",
-      "2.18×10⁶/n m/s"
-    ],
-    "answer": 3,
-    "explain": "Electron velocity in Bohr orbit decreases as 1/n with increasing n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "68aa8824-ef4e-4440-b7e2-7c93d41dac11",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Quantum Numbers",
-    "prompt": "Maximum electrons in a shell with principal quantum number n?",
-    "formula": "N = 2n²",
-    "options": [
-      "2n²",
-      "n²",
-      "n²/2",
-      "2n"
-    ],
-    "answer": 0,
-    "explain": "Each shell n can hold a maximum of 2n² electrons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "efd96401-fa8f-4fe9-9678-05b36336439f",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Quantum Numbers",
-    "prompt": "Which quantum number determines shape of orbital?",
-    "formula": "",
-    "options": [
-      "Spin (ms)",
-      "Principal (n)",
-      "Magnetic (mₗ)",
-      "Azimuthal (l)"
-    ],
-    "answer": 3,
-    "explain": "Azimuthal quantum number l determines the shape (s,p,d,f) of the orbital.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ac275f18-084e-41da-a159-d2180ecf4d73",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Quantum Numbers",
-    "prompt": "Allowed values of magnetic quantum number mₗ for a given l?",
-    "formula": "mₗ = -l to +l",
-    "options": [
-      "1 to l",
-      "-l to +l",
-      "-l to 0",
-      "0 to l"
-    ],
-    "answer": 1,
-    "explain": "mₗ ranges from -l to +l, giving (2l+1) values total.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3024251a-50c7-4a72-9aee-a348d7f0db7f",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Photoelectric Effect",
-    "prompt": "Photoelectric effect: threshold frequency condition?",
-    "formula": "hν₀ = φ (work function)",
-    "options": [
-      "hν₀ = mv²/2",
-      "hν₀ = hν - φ",
-      "hν₀ = φ",
-      "hν₀ = KE_max"
-    ],
-    "answer": 2,
-    "explain": "At threshold frequency ν₀, photon energy exactly equals the work function φ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "74eb71d6-3e9e-4eb8-9620-370d75ee4ac9",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Orbitals",
-    "prompt": "Number of radial nodes in an orbital?",
-    "formula": "Radial nodes = n - l - 1",
-    "options": [
-      "l",
-      "n - 1",
-      "n - l",
-      "n - l - 1"
-    ],
-    "answer": 3,
-    "explain": "Radial nodes = n - l - 1; angular nodes = l.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9e47b749-ca00-47ad-8b80-9334451f35ce",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Electronic Configuration",
-    "prompt": "Pauli Exclusion Principle states?",
-    "formula": "",
-    "options": [
-      "Electrons pair after all orbitals half-filled",
-      "Half-filled orbitals are stable",
-      "Electrons fill lowest energy first",
-      "No two electrons have all 4 QNs same"
-    ],
-    "answer": 3,
-    "explain": "Pauli: no two electrons in an atom can have all four quantum numbers identical.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2bd8d739-731b-4003-8747-bec40cc31632",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Electronic Configuration",
-    "prompt": "Hund's rule of maximum multiplicity states?",
-    "formula": "",
-    "options": [
-      "Pair electrons before filling new orbitals",
-      "Electrons occupy degenerate orbitals singly first",
-      "Half-filled shells are always stable",
-      "Fill lowest energy orbital first"
-    ],
-    "answer": 1,
-    "explain": "Hund's rule: electrons occupy degenerate orbitals one each before pairing.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4b315465-f145-4c95-9f49-a1f8f5b2af6b",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Electronic Configuration",
-    "prompt": "Aufbau principle: order of orbital filling follows?",
-    "formula": "(n + l) rule",
-    "options": [
-      "Increasing (n+l), then n",
-      "Increasing l only",
-      "Increasing n only",
-      "Decreasing (n+l)"
-    ],
-    "answer": 0,
-    "explain": "Aufbau: orbitals fill in order of increasing (n+l); for equal (n+l), lower n fills first.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6190380e-0717-42bc-b589-db8783a5a085",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Lyman series of hydrogen corresponds to transitions to?",
-    "formula": "n_final = 1",
-    "options": [
-      "n=2",
-      "n=4",
-      "n=3",
-      "n=1"
-    ],
-    "answer": 3,
-    "explain": "Lyman series: electron transitions to n=1 (UV region).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bf196b1d-1225-4578-a521-6af23e08c0d9",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Balmer series lies in which region of EM spectrum?",
-    "formula": "",
-    "options": [
-      "UV",
-      "Visible",
-      "IR",
-      "Microwave"
-    ],
-    "answer": 1,
-    "explain": "Balmer series (n→2) transitions emit visible light (λ ~ 400-700 nm).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86174a30-162b-476d-84db-6c1fcb670abf",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Hydrogen Spectrum",
-    "prompt": "Rydberg formula for H-spectrum wavenumber?",
-    "formula": "ν̄ = R_H(1/n₁² - 1/n₂²)",
-    "options": [
-      "R_H(n₂² - n₁²)",
-      "R_H(1/n₁ - 1/n₂)",
-      "R_H(1/n₂² - 1/n₁²)",
-      "R_H(1/n₁² - 1/n₂²)"
-    ],
-    "answer": 3,
-    "explain": "Wavenumber = R_H(1/n₁² - 1/n₂²); R_H = 1.097×10⁷ m⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0ef50c4a-13bc-4372-a7ad-c086bf29db68",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Quantum Numbers",
-    "prompt": "The quantum number that defines spin of electron?",
-    "formula": "ms = +½ or -½",
-    "options": [
-      "ms = +½ or -½",
-      "ms = 1 or 2",
-      "ms = -1 to +1",
-      "ms = 0 or 1"
-    ],
-    "answer": 0,
-    "explain": "Spin quantum number ms can only be +½ (spin-up) or -½ (spin-down).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5e83795b-2094-42bd-b0ad-69e6c6989e74",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Quantum Numbers",
-    "prompt": "For l = 2 (d subshell), number of orbitals is?",
-    "formula": "2l + 1",
-    "options": [
-      "5",
-      "4",
-      "3",
-      "7"
-    ],
-    "answer": 0,
-    "explain": "Number of orbitals = 2l+1; for d (l=2): 2(2)+1 = 5 orbitals.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2865335-661f-479e-a352-fcc02636e7ed",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Planck's Quantum Theory",
-    "prompt": "Energy of photon in terms of frequency?",
-    "formula": "E = hν",
-    "options": [
-      "E = ν/h",
-      "E = hν",
-      "E = hν²",
-      "E = h/ν"
-    ],
-    "answer": 1,
-    "explain": "Planck's relation: photon energy E = hν where h = 6.626×10⁻³⁴ J·s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a478546b-3e6d-40b8-b466-a9b776387c23",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Electronic Configuration",
-    "prompt": "Cr (Z=24) ground state configuration is?",
-    "formula": "",
-    "options": [
-      "[Ar]3d⁵4s¹",
-      "[Ar]3d⁴4s²",
-      "[Ar]3d³4s²",
-      "[Ar]3d⁶4s⁰"
-    ],
-    "answer": 0,
-    "explain": "Cr has [Ar]3d⁵4s¹ due to extra stability of half-filled d subshell.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "301244e7-5d17-46ea-904e-eb579807fa00",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Electronic Configuration",
-    "prompt": "Cu (Z=29) ground state configuration is?",
-    "formula": "",
-    "options": [
-      "[Ar]3d¹⁰4s¹",
-      "[Ar]3d¹⁰4s²",
-      "[Ar]3d⁹4s²",
-      "[Ar]3d⁸4s²"
-    ],
-    "answer": 0,
-    "explain": "Cu has [Ar]3d¹⁰4s¹ due to extra stability of completely filled d subshell.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "201cb308-9802-45be-bc03-704cb6be2061",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Quantum Numbers",
-    "prompt": "Orbital angular momentum of electron for quantum number l?",
-    "formula": "L = √[l(l+1)]·h/2π",
-    "options": [
-      "√[l(l+1)]·h/2π",
-      "l·h/2π",
-      "√l·h/2π",
-      "(l+1)·h/2π"
-    ],
-    "answer": 0,
-    "explain": "Orbital angular momentum L = √[l(l+1)]·ℏ; not simply l·ℏ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e7dcd4a3-a6f1-4706-a52f-3b41672a45f0",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Photoelectric Effect",
-    "prompt": "Photoelectric effect: KE of emitted electron?",
-    "formula": "KE = hν - φ",
-    "options": [
-      "KE = φ - hν",
-      "KE = hν·φ",
-      "KE = hν + φ",
-      "KE = hν - φ"
-    ],
-    "answer": 3,
-    "explain": "Einstein's photoelectric equation: KE_max = hν - φ (work function).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ecaf1e92-e2d9-441e-be6a-b1f0dbc86a3f",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Angular momentum of electron in nth Bohr orbit?",
-    "formula": "L = nh/2π",
-    "options": [
-      "n²h/2π",
-      "h/2πn",
-      "nh/4π",
-      "nh/2π"
-    ],
-    "answer": 3,
-    "explain": "Bohr's quantization condition: angular momentum = nh/2π, where n is principal quantum number.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96004201-e467-4232-986a-edd14a0283bc",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of angular nodes in an orbital?",
-    "formula": "",
-    "options": [
-      "Equal to n−1",
-      "Equal to n−l−1",
-      "Equal to l",
-      "Equal to n"
-    ],
-    "answer": 2,
-    "explain": "Angular (planar) nodes = l (azimuthal quantum number); total nodes = n−1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "427a7e1d-bf29-4b2c-b6f0-4844deb21d9c",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which series of H-spectrum has transitions ending at n=4?",
-    "formula": "",
-    "options": [
-      "Lyman series",
-      "Paschen series",
-      "Pfund series",
-      "Brackett series"
-    ],
-    "answer": 3,
-    "explain": "Brackett series: transitions from higher levels to n=4, lies in infrared region.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "111dc52f-0421-4439-ac8c-370756702d64",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of spherical (radial) nodes in 2s orbital?",
-    "formula": "radial nodes = n−l−1",
-    "options": [
-      "0",
-      "3",
-      "1",
-      "2"
-    ],
-    "answer": 2,
-    "explain": "2s: n=2, l=0; radial nodes = 2−0−1 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b002769b-9de9-4225-8114-ff30fde5dd95",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Total number of nodes in 3p orbital?",
-    "formula": "nodes = n−1",
-    "options": [
-      "3",
-      "2",
-      "0",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "Total nodes = n−1 = 3−1 = 2 (1 radial + 1 angular).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e3d8003b-35ca-44c3-8ec1-83137abe47cd",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Spin multiplicity for an atom with 3 unpaired electrons?",
-    "formula": "2S+1",
-    "options": [
-      "6",
-      "2",
-      "4",
-      "3"
-    ],
-    "answer": 2,
-    "explain": "S = 3×½ = 3/2; spin multiplicity = 2S+1 = 4 (quartet state).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "90cfb62c-f8b7-4618-8683-7d650db36faa",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "For n=3 shell, number of subshells is?",
-    "formula": "",
-    "options": [
-      "4",
-      "2",
-      "3",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "Number of subshells = n; for n=3: s, p, d → 3 subshells.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "da0615d9-e14b-4412-9455-3e9efc96de0c",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Magnetic quantum number (mₗ) values for p subshell?",
-    "formula": "",
-    "options": [
-      "−2 to +2",
-      "0 only",
-      "−1, 0, +1",
-      "0, +1, +2"
-    ],
-    "answer": 2,
-    "explain": "For l=1 (p), mₗ ranges from −l to +l: −1, 0, +1 → 3 orbitals.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3d1aa56a-2a48-4015-93cb-3a3151d960d5",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "What is the shape of s orbital?",
-    "formula": "",
-    "options": [
-      "Dumbbell",
-      "Double dumbbell",
-      "Spherical",
-      "Complex lobed"
-    ],
-    "answer": 2,
-    "explain": "s orbital (l=0) has spherical shape with no directional preference.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4accd035-e9f3-402c-b683-131efe3b2a85",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Energy of H-like ion in nth orbit depends on Z as?",
-    "formula": "Eₙ ∝ Z²/n²",
-    "options": [
-      "1/n²",
-      "Z²/n²",
-      "Z/n²",
-      "Z²/n"
-    ],
-    "answer": 1,
-    "explain": "For hydrogen-like ions, Eₙ = −13.6 Z²/n² eV; energy scales as Z².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2836c40b-63c3-4161-840a-a5b3a6492da1",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of orbitals in f subshell (l=3)?",
-    "formula": "2l+1",
-    "options": [
-      "3",
-      "7",
-      "9",
-      "5"
-    ],
-    "answer": 1,
-    "explain": "Number of orbitals = 2l+1 = 2(3)+1 = 7 for f subshell.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d68396d7-3f2e-4cdb-8520-b0790fb5cdbe",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Radius of nth Bohr orbit of H-like ion with atomic number Z?",
-    "formula": "rₙ = 0.529 n²/Z Å",
-    "options": [
-      "0.529 n²/Z Å",
-      "0.529 nZ Å",
-      "0.529 n/Z Å",
-      "0.529 Z/n² Å"
-    ],
-    "answer": 0,
-    "explain": "For H-like ions, radius = (0.529 n²/Z) Å; radius decreases as Z increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c3a4d37e-27c8-43cd-9f89-c69f6f87485b",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which quantum number is NOT required to define an orbital?",
-    "formula": "",
-    "options": [
-      "Magnetic (mₗ)",
-      "Azimuthal (l)",
-      "Principal (n)",
-      "Spin (ms)"
-    ],
-    "answer": 3,
-    "explain": "An orbital is defined by n, l, mₗ; spin quantum number ms defines the electron, not orbital.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9d729a6c-5efa-4cda-af3d-33da481da98f",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Ground state electronic configuration of Fe (Z=26)?",
-    "formula": "",
-    "options": [
-      "[Ar]3d⁷4s¹",
-      "[Ar]3d⁸",
-      "[Ar]3d⁶4s²",
-      "[Ar]3d⁵4s²4p¹"
-    ],
-    "answer": 2,
-    "explain": "Fe (Z=26) = [Ar] 3d⁶ 4s²; normal Aufbau filling, no half-fill exception here.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "00d5300c-45a5-4556-92c0-39b28ee6332e",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which series of H-spectrum is in UV region?",
-    "formula": "",
-    "options": [
-      "Brackett series",
-      "Lyman series",
-      "Paschen series",
-      "Balmer series"
-    ],
-    "answer": 1,
-    "explain": "Lyman series (transitions to n=1) lies entirely in ultraviolet region.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8001aa4e-77b8-46e0-87f2-d13be0c29ac0",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Ionization energy of hydrogen atom from ground state?",
-    "formula": "IE = 13.6 eV",
-    "options": [
-      "1.51 eV",
-      "13.6 eV",
-      "27.2 eV",
-      "3.4 eV"
-    ],
-    "answer": 1,
-    "explain": "Energy of n=1 level is −13.6 eV; energy needed to ionize = 13.6 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8e26fcda-05ac-4bff-b833-b7b0f09e14f4",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which principle states no two electrons can have same 4 quantum numbers?",
-    "formula": "",
-    "options": [
-      "Hund's Rule",
-      "Pauli Exclusion Principle",
-      "Aufbau Principle",
-      "Heisenberg Principle"
-    ],
-    "answer": 1,
-    "explain": "Pauli Exclusion Principle: no two electrons in an atom can have identical set of all four quantum numbers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0ada5199-ec99-4e1d-8f5e-d490085ac6b0",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Wavelength of first line of Lyman series corresponds to transition?",
-    "formula": "",
-    "options": [
-      "n=3 → n=1",
-      "n=4 → n=1",
-      "n=∞ → n=1",
-      "n=2 → n=1"
-    ],
-    "answer": 3,
-    "explain": "First line of any series = transition from (n+1) to n; first Lyman line: 2→1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "97d7b167-facc-416f-ab5c-9d3df0a5da7c",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Maximum number of electrons in d subshell?",
-    "formula": "",
-    "options": [
-      "14",
-      "8",
-      "10",
-      "6"
-    ],
-    "answer": 2,
-    "explain": "d subshell has 5 orbitals (l=2); max electrons = 5×2 = 10.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "53b35367-3832-4706-971b-0878b679710e",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which orbital has TWO angular nodes?",
-    "formula": "",
-    "options": [
-      "d orbital (l=2)",
-      "f orbital (l=3)",
-      "p orbital (l=1)",
-      "s orbital (l=0)"
-    ],
-    "answer": 0,
-    "explain": "Angular nodes = l; for d orbital l=2, so it has 2 angular nodes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a4429091-410f-4fad-a696-908854edf4e4",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Paschen series: electron transitions end at which n?",
-    "formula": "",
-    "options": [
-      "n = 1",
-      "n = 4",
-      "n = 3",
-      "n = 2"
-    ],
-    "answer": 2,
-    "explain": "Paschen series corresponds to transitions ending at n=3, emitting infrared radiation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "35cec152-ffbb-4cac-9119-f8e03317ff93",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which set of quantum numbers is impossible?",
-    "formula": "",
-    "options": [
-      "n=2, l=2, mₗ=0",
-      "n=4, l=0, mₗ=0",
-      "n=2, l=1, mₗ=0",
-      "n=3, l=2, mₗ=-2"
-    ],
-    "answer": 0,
-    "explain": "l must be less than n; l=2 with n=2 is not allowed (l ranges 0 to n-1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fcb34fab-2c4a-4bfb-aff8-f9f8c8acbabc",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of radial nodes in 3d orbital?",
-    "formula": "Radial nodes = n - l - 1",
-    "options": [
-      "0",
-      "2",
-      "1",
-      "3"
-    ],
-    "answer": 0,
-    "explain": "3d: n=3, l=2; radial nodes = 3-2-1 = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bece28d4-ad12-45b9-a177-390903cf57e3",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Total number of nodes in 4s orbital?",
-    "formula": "Total nodes = n - 1",
-    "options": [
-      "3",
-      "2",
-      "1",
-      "4"
-    ],
-    "answer": 0,
-    "explain": "Total nodes = n-1 = 4-1 = 3; all are radial since l=0 for s orbital.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aeec9560-ead2-43ae-9d3a-9344b4f9ea32",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which quantum number has half-integer values?",
-    "formula": "",
-    "options": [
-      "Magnetic (mₗ)",
-      "Azimuthal (l)",
-      "Spin quantum number (mₛ)",
-      "Principal (n)"
-    ],
-    "answer": 2,
-    "explain": "Spin quantum number mₛ = +½ or −½, the only half-integer quantum number.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4af1b85a-b0e1-46e3-b552-bf81437ce0be",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Energy needed to remove electron from nth orbit of H-like ion?",
-    "formula": "IE = 13.6Z²/n² eV",
-    "options": [
-      "13.6Z/n eV",
-      "13.6n²/Z² eV",
-      "13.6Z²/n² eV",
-      "13.6/n² eV"
-    ],
-    "answer": 2,
-    "explain": "Ionization energy of H-like ion from nth orbit = 13.6Z²/n² eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d1a40376-507c-4e9e-841c-905ede973c84",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Splitting of spectral lines in electric field is called?",
-    "formula": "",
-    "options": [
-      "Raman effect",
-      "Stark effect",
-      "Doppler effect",
-      "Zeeman effect"
-    ],
-    "answer": 1,
-    "explain": "Stark effect: splitting of spectral lines of H when placed in an external electric field.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cf411834-386e-4036-bc3f-db4c6aad518c",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Brackett series of H-spectrum: transitions end at n =?",
-    "formula": "",
-    "options": [
-      "3",
-      "5",
-      "6",
-      "4"
-    ],
-    "answer": 3,
-    "explain": "Brackett series corresponds to electron transitions terminating at n=4, in infrared region.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2a5de0b0-7ebc-44b2-b5f9-dc9a53336c5a",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "For 2p orbital, total number of nodes is?",
-    "formula": "Total nodes = n-1",
-    "options": [
-      "1",
-      "0",
-      "2",
-      "3"
-    ],
-    "answer": 0,
-    "explain": "2p: total nodes = n-1 = 2-1 = 1 (one angular node, zero radial nodes).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6c8e85db-750f-43dc-8fc2-549268c21699",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Momentum of photon in terms of wavelength?",
-    "formula": "p = h/λ",
-    "options": [
-      "hν/c²",
-      "h/λ",
-      "hλ",
-      "hc/λ²"
-    ],
-    "answer": 1,
-    "explain": "Photon momentum p = h/λ; same as de Broglie relation applied to photon.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "930414c6-ba3f-42c4-be3c-18555b74d24b",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of orbitals in n=4 shell is?",
-    "formula": "Orbitals = n²",
-    "options": [
-      "16",
-      "32",
-      "12",
-      "8"
-    ],
-    "answer": 0,
-    "explain": "Total orbitals in nth shell = n²; for n=4, orbitals = 16.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3372e715-74ec-4616-a99a-665d02e75d5c",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which orbital is filled after 3d according to Aufbau?",
-    "formula": "(n+l) rule",
-    "options": [
-      "4p",
-      "4f",
-      "5s",
-      "4s"
-    ],
-    "answer": 0,
-    "explain": "After 3d (n+l=5), next is 4p (n+l=5, higher n), before 4d or 5s comes into play.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c3b17d3b-57c1-446f-bfbe-54da60f0bbb8",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "For n=2 shell, maximum number of electrons is?",
-    "formula": "Max e⁻ = 2n²",
-    "options": [
-      "2",
-      "4",
-      "6",
-      "8"
-    ],
-    "answer": 3,
-    "explain": "Maximum electrons in nth shell = 2n²; for n=2, max = 2×4 = 8.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9a614fb0-8c41-4d19-8dca-9b2f67393da6",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of spectral lines when electron falls from n=3 to n=1 in H?",
-    "formula": "Lines = n(n-1)/2",
-    "options": [
-      "6",
-      "1",
-      "3",
-      "2"
-    ],
-    "answer": 2,
-    "explain": "From n=3: transitions 3→1, 3→2, 2→1 give 3 spectral lines; n(n-1)/2 = 3×2/2 = 3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e6f14068-13e6-441d-b7fc-11bd833cd4b0",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Ground state configuration of Mn (Z=25)?",
-    "formula": "",
-    "options": [
-      "[Ar] 3d⁶ 4s¹",
-      "[Ar] 3d⁴ 4s²",
-      "[Ar] 3d⁵ 4s²",
-      "[Ar] 3d⁷"
-    ],
-    "answer": 2,
-    "explain": "Mn (Z=25): [Ar] 3d⁵ 4s²; half-filled 3d⁵ gives extra stability, no exception needed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a5a22154-36f9-4382-8442-407055f96632",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Hydrogen atom: which transition gives longest wavelength in Balmer series?",
-    "formula": "",
-    "options": [
-      "n=4 → n=2",
-      "n=5 → n=2",
-      "n=3 → n=2",
-      "n=∞ → n=2"
-    ],
-    "answer": 2,
-    "explain": "Longest wavelength = smallest energy gap; n=3→2 is the smallest gap in Balmer series.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f140db38-f4af-4500-8096-9db2e0a2fd4d",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which quantum number is responsible for Zeeman effect (line splitting in B-field)?",
-    "formula": "",
-    "options": [
-      "Azimuthal quantum number l",
-      "Spin quantum number mₛ",
-      "Principal quantum number n",
-      "Magnetic quantum number mₗ"
-    ],
-    "answer": 3,
-    "explain": "mₗ values split in a magnetic field, causing Zeeman splitting of spectral lines.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77334b01-1f14-47ba-a726-c70993456c03",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "The wave function ψ² represents?",
-    "formula": "ψ²",
-    "options": [
-      "Energy of electron",
-      "Amplitude of wave",
-      "Angular momentum",
-      "Probability density of electron"
-    ],
-    "answer": 3,
-    "explain": "ψ² (or |ψ|²) gives the probability density of finding an electron at a point in space.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f7a7827b-e8da-43f0-b050-ddcc5b7d7b7a",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Ionization energy of He⁺ (Z=2) compared to H atom is?",
-    "formula": "IE ∝ Z²",
-    "options": [
-      "Same",
-      "2 times greater",
-      "8 times greater",
-      "4 times greater"
-    ],
-    "answer": 3,
-    "explain": "IE of H-like ion ∝ Z²; for He⁺, Z=2, so IE = 4 × 13.6 = 54.4 eV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "20b73acd-3725-439b-b387-6ee9577c68ea",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of unpaired electrons in ground state N (Z=7)?",
-    "formula": "",
-    "options": [
-      "1",
-      "2",
-      "3",
-      "0"
-    ],
-    "answer": 2,
-    "explain": "N: 1s²2s²2p³; by Hund's rule, all three 2p electrons are unpaired → 3 unpaired electrons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "431f9ed5-3d0a-429b-8b84-42c3ac9fcece",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Bohr's model failed to explain which phenomenon?",
-    "formula": "",
-    "options": [
-      "Fine structure of spectral lines",
-      "H-atom spectrum",
-      "Ionization energy of H",
-      "Radius of H orbit"
-    ],
-    "answer": 0,
-    "explain": "Bohr's model couldn't explain fine structure, Zeeman/Stark effect, or multi-electron atoms.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8acd9a35-0187-4c7d-9462-b3c7522c298b",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Ground state configuration of Ni (Z=28)?",
-    "formula": "",
-    "options": [
-      "[Ar] 3d¹⁰",
-      "[Ar] 3d⁹ 4s¹",
-      "[Ar] 3d⁷ 4s²",
-      "[Ar] 3d⁸ 4s²"
-    ],
-    "answer": 3,
-    "explain": "Ni (Z=28): [Ar] 3d⁸ 4s² — no special half-filled/full-filled stability applies here.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5f9be733-bb65-468e-ab3f-654a5a99c83f",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of unpaired electrons in ground state O (Z=8)?",
-    "formula": "",
-    "options": [
-      "2",
-      "0",
-      "1",
-      "3"
-    ],
-    "answer": 0,
-    "explain": "O: 1s²2s²2p⁴; by Hund's rule, 2p has 2 paired + 2 unpaired electrons → 2 unpaired.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0dd9c25b-1fc0-4157-aa12-c02d454dff94",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of subshells in n=4 shell?",
-    "formula": "",
-    "options": [
-      "4 (s, p, d, f)",
-      "5",
-      "3 (s, p, d)",
-      "2 (s, p)"
-    ],
-    "answer": 0,
-    "explain": "For n=4, l = 0,1,2,3 → four subshells: 4s, 4p, 4d, 4f.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8f3a0696-4c8a-4b9f-abfa-cd7e09fd9bba",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which is the correct order of energy in multi-electron atoms?",
-    "formula": "",
-    "options": [
-      "3d > 3s > 3p",
-      "3s = 3p = 3d",
-      "3d > 3p > 3s",
-      "3s > 3p > 3d"
-    ],
-    "answer": 2,
-    "explain": "In multi-electron atoms, for same n: energy increases with l, so 3s < 3p < 3d.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1903e802-d2d6-44e2-9af5-267f215f3f2c",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Work function (φ) of metal in photoelectric effect equals?",
-    "formula": "φ = hν₀",
-    "options": [
-      "hν₀",
-      "h/ν₀",
-      "hν",
-      "½mv²"
-    ],
-    "answer": 0,
-    "explain": "Work function φ = hν₀ where ν₀ is threshold frequency; minimum energy needed to eject electron.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "04b57aaf-2f0b-4736-8482-fb9540859f89",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of radial nodes in 2p orbital?",
-    "formula": "Radial nodes = n - l - 1",
-    "options": [
-      "2",
-      "0",
-      "1",
-      "3"
-    ],
-    "answer": 1,
-    "explain": "Radial nodes = n - l - 1 = 2 - 1 - 1 = 0 for 2p orbital.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9b1e80f9-9f66-41f0-bcff-8e860a52e982",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Ratio of radii of 1st and 2nd Bohr orbits of H?",
-    "formula": "r ∝ n²",
-    "options": [
-      "1 : 8",
-      "1 : 4",
-      "2 : 1",
-      "1 : 2"
-    ],
-    "answer": 1,
-    "explain": "r ∝ n²; r₁:r₂ = 1²:2² = 1:4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2c6d3914-e5aa-460b-81ff-31043cd9ce81",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "The principal quantum number 'n' can have values?",
-    "formula": "",
-    "options": [
-      "½, 1, 3/2, …",
-      "1, 2, 3, … (positive integers)",
-      "0, 1, 2, 3, …",
-      "-1, 0, 1, 2, …"
-    ],
-    "answer": 1,
-    "explain": "n is a positive integer: 1, 2, 3, … ; it cannot be zero or negative.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9deea1a0-2c64-4c9a-a35f-ff963d3e45bb",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "The 4s orbital is filled before 3d because?",
-    "formula": "",
-    "options": [
-      "4s has higher n value",
-      "4s has lower (n+l) value",
-      "4s has larger radius",
-      "4s has more nodes"
-    ],
-    "answer": 1,
-    "explain": "Aufbau: 4s has (n+l)=4+0=4, while 3d has (n+l)=3+2=5; lower (n+l) filled first.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6f3a10d2-aba6-4699-aa53-3edc361ebab1",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which property of electron is shown by Davisson-Germer experiment?",
-    "formula": "",
-    "options": [
-      "Charge",
-      "Wave nature",
-      "Particle nature",
-      "Spin"
-    ],
-    "answer": 1,
-    "explain": "Davisson-Germer showed electron diffraction, confirming de Broglie's wave nature of electrons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7effdf95-bc41-4cbb-bbc2-8e1bb2e413e3",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Emission spectrum of hydrogen is due to?",
-    "formula": "",
-    "options": [
-      "Ionization",
-      "Electron absorbing photon",
-      "Electron falling to lower energy level",
-      "Nuclear decay"
-    ],
-    "answer": 2,
-    "explain": "Emission occurs when excited electron drops to a lower orbit, releasing a photon.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f6d3d2bc-6236-4a38-9e81-5d3afd456727",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of unpaired electrons in ground state Cr (Z=24)?",
-    "formula": "",
-    "options": [
-      "3",
-      "6",
-      "5",
-      "4"
-    ],
-    "answer": 1,
-    "explain": "Cr: [Ar]3d⁵4s¹ — all 6 electrons are unpaired (half-filled d and s).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "91484eb2-fd4f-45f3-830e-e1799b200610",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which transition in H-atom gives maximum wavelength in Lyman series?",
-    "formula": "",
-    "options": [
-      "n=3 → n=1",
-      "n=2 → n=1",
-      "n=4 → n=1",
-      "n=∞ → n=1"
-    ],
-    "answer": 1,
-    "explain": "Smallest energy difference (n=2→1) gives longest wavelength in Lyman series.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f8891f97-ffab-4476-b22b-418fc5f2fedc",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Total number of orbitals in 4th shell (n=4)?",
-    "formula": "n²",
-    "options": [
-      "16",
-      "4",
-      "12",
-      "9"
-    ],
-    "answer": 0,
-    "explain": "Total orbitals = n² = 4² = 16 for n=4 shell.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "eac98fb0-988b-41a1-9cdc-3f4b3d955277",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Which type of spectrum does hydrogen emit when excited?",
-    "formula": "",
-    "options": [
-      "Line spectrum",
-      "Absorption spectrum",
-      "Continuous spectrum",
-      "Band spectrum"
-    ],
-    "answer": 0,
-    "explain": "Hydrogen emits a discrete line emission spectrum due to quantized energy levels.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "622f7d93-2035-4da7-99c9-2f9952fcc9ca",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of unpaired electrons in ground state Cu (Z=29)?",
-    "formula": "",
-    "options": [
-      "3",
-      "0",
-      "1",
-      "2"
-    ],
-    "answer": 2,
-    "explain": "Cu: [Ar]3d¹⁰4s¹ — only one unpaired electron in 4s orbital.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "5c7bd76a-7ac2-4a58-a48e-26f70cb092d8",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Maximum number of electrons in 4f subshell?",
-    "formula": "",
-    "options": [
-      "7",
-      "10",
-      "8",
-      "14"
-    ],
-    "answer": 3,
-    "explain": "f subshell has 7 orbitals × 2 electrons each = 14 electrons maximum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e9b92635-1350-4368-8ba2-a407b57db35a",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of radial nodes in 3s orbital?",
-    "formula": "Radial nodes = n - l - 1",
-    "options": [
-      "3",
-      "2",
-      "1",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "3s: n=3, l=0; radial nodes = 3-0-1 = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f309b52b-bdf5-4533-b1b3-9fd0b61fc225",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "de Broglie wavelength formula for a particle of mass m, velocity v?",
-    "formula": "λ = h/mv",
-    "options": [
-      "λ = mv/h",
-      "λ = m/hv",
-      "λ = h/mv",
-      "λ = h·mv"
-    ],
-    "answer": 2,
-    "explain": "de Broglie relation: wavelength inversely proportional to momentum (mv).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "de367425-98c8-4712-8681-0c4ecc6a06c7",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Heisenberg uncertainty principle: product Δx·Δp is?",
-    "formula": "Δx·Δp ≥ h/4π",
-    "options": [
-      "= h",
-      "≥ h/4π",
-      "≥ h/2π",
-      "≤ h/4π"
-    ],
-    "answer": 1,
-    "explain": "Minimum uncertainty product Δx·Δp = h/4π (ħ/2); position & momentum cannot both be exact.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "27e81dec-c5e0-4bb8-b983-e9758c45b0d8",
-    "subject": "Chemistry",
-    "chapter": "Atomic Structure",
-    "topic": "Atomic Structure",
-    "prompt": "Number of radial nodes in 4p orbital?",
-    "formula": "Radial nodes = n - l - 1",
-    "options": [
-      "2",
-      "0",
-      "3",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "4p: n=4, l=1; radial nodes = 4-1-1 = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "bd4080f4-2258-43d1-94c4-a3425eb55531",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr Model",
+  "prompt": "Energy of nth Bohr orbit of hydrogen atom?",
+  "formula": "Eₙ = -13.6/n² eV",
+  "options": [
+   "-13.6/n eV",
+   "-13.6·n² eV",
+   "-13.6·n eV",
+   "-13.6/n² eV"
+  ],
+  "answer": 3,
+  "explain": "Bohr orbit energy is inversely proportional to n²; ground state E₁ = -13.6 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "588864cd-ff63-4320-b8eb-d06b9014b9dd",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr Model",
+  "prompt": "Radius of nth Bohr orbit of hydrogen?",
+  "formula": "rₙ = 0.529·n² Å",
+  "options": [
+   "0.529·n² Å",
+   "0.529/n² Å",
+   "0.529·n Å",
+   "0.529/n Å"
+  ],
+  "answer": 0,
+  "explain": "Bohr radius rₙ ∝ n²; for H, r₁ = 0.529 Å (a₀).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dd0ba230-dfa2-4a72-80e0-2f9439756024",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Wave-Particle Duality",
+  "prompt": "de Broglie wavelength of a particle?",
+  "formula": "λ = h/mv",
+  "options": [
+   "λ = mv/h",
+   "λ = h/mv",
+   "λ = h·mv",
+   "λ = h/m²v"
+  ],
+  "answer": 1,
+  "explain": "de Broglie relation: wavelength = Planck's constant / momentum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "91b01000-60d0-4e46-a429-aa64ff022c74",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Uncertainty Principle",
+  "prompt": "Heisenberg uncertainty principle?",
+  "formula": "Δx·Δp ≥ h/4π",
+  "options": [
+   "Δx·Δp ≥ h",
+   "Δx·Δp ≥ h/4π",
+   "Δx·Δp ≥ h/2π",
+   "Δx·Δp ≥ 4πh"
+  ],
+  "answer": 1,
+  "explain": "Uncertainty in position × uncertainty in momentum ≥ h/4π.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f1b8af31-a2a7-4316-b721-00b338344d71",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr Model",
+  "prompt": "Velocity of electron in nth Bohr orbit of H?",
+  "formula": "vₙ = 2.18×10⁶/n m/s",
+  "options": [
+   "2.18×10⁶·n² m/s",
+   "2.18×10⁶/n² m/s",
+   "2.18×10⁶·n m/s",
+   "2.18×10⁶/n m/s"
+  ],
+  "answer": 3,
+  "explain": "Electron velocity in Bohr orbit decreases as 1/n with increasing n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "68aa8824-ef4e-4440-b7e2-7c93d41dac11",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum Numbers",
+  "prompt": "Maximum electrons in a shell with principal quantum number n?",
+  "formula": "N = 2n²",
+  "options": [
+   "2n²",
+   "n²",
+   "n²/2",
+   "2n"
+  ],
+  "answer": 0,
+  "explain": "Each shell n can hold a maximum of 2n² electrons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "efd96401-fa8f-4fe9-9678-05b36336439f",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum Numbers",
+  "prompt": "Which quantum number determines shape of orbital?",
+  "formula": "",
+  "options": [
+   "Spin (ms)",
+   "Principal (n)",
+   "Magnetic (mₗ)",
+   "Azimuthal (l)"
+  ],
+  "answer": 3,
+  "explain": "Azimuthal quantum number l determines the shape (s,p,d,f) of the orbital.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ac275f18-084e-41da-a159-d2180ecf4d73",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum Numbers",
+  "prompt": "Allowed values of magnetic quantum number mₗ for a given l?",
+  "formula": "mₗ = -l to +l",
+  "options": [
+   "1 to l",
+   "-l to +l",
+   "-l to 0",
+   "0 to l"
+  ],
+  "answer": 1,
+  "explain": "mₗ ranges from -l to +l, giving (2l+1) values total.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3024251a-50c7-4a72-9aee-a348d7f0db7f",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric Effect",
+  "prompt": "Photoelectric effect: threshold frequency condition?",
+  "formula": "hν₀ = φ (work function)",
+  "options": [
+   "hν₀ = mv²/2",
+   "hν₀ = hν - φ",
+   "hν₀ = φ",
+   "hν₀ = KE_max"
+  ],
+  "answer": 2,
+  "explain": "At threshold frequency ν₀, photon energy exactly equals the work function φ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "74eb71d6-3e9e-4eb8-9620-370d75ee4ac9",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Atomic Orbitals",
+  "prompt": "Number of radial nodes in an orbital?",
+  "formula": "Radial nodes = n - l - 1",
+  "options": [
+   "l",
+   "n - 1",
+   "n - l",
+   "n - l - 1"
+  ],
+  "answer": 3,
+  "explain": "Radial nodes = n - l - 1; angular nodes = l.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9e47b749-ca00-47ad-8b80-9334451f35ce",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic Configuration",
+  "prompt": "Pauli Exclusion Principle states?",
+  "formula": "",
+  "options": [
+   "Electrons pair after all orbitals half-filled",
+   "Half-filled orbitals are stable",
+   "Electrons fill lowest energy first",
+   "No two electrons have all 4 QNs same"
+  ],
+  "answer": 3,
+  "explain": "Pauli: no two electrons in an atom can have all four quantum numbers identical.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2bd8d739-731b-4003-8747-bec40cc31632",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic Configuration",
+  "prompt": "Hund's rule of maximum multiplicity states?",
+  "formula": "",
+  "options": [
+   "Pair electrons before filling new orbitals",
+   "Electrons occupy degenerate orbitals singly first",
+   "Half-filled shells are always stable",
+   "Fill lowest energy orbital first"
+  ],
+  "answer": 1,
+  "explain": "Hund's rule: electrons occupy degenerate orbitals one each before pairing.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4b315465-f145-4c95-9f49-a1f8f5b2af6b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic Configuration",
+  "prompt": "Aufbau principle: order of orbital filling follows?",
+  "formula": "(n + l) rule",
+  "options": [
+   "Increasing (n+l), then n",
+   "Increasing l only",
+   "Increasing n only",
+   "Decreasing (n+l)"
+  ],
+  "answer": 0,
+  "explain": "Aufbau: orbitals fill in order of increasing (n+l); for equal (n+l), lower n fills first.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6190380e-0717-42bc-b589-db8783a5a085",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Lyman series of hydrogen corresponds to transitions to?",
+  "formula": "n_final = 1",
+  "options": [
+   "n=2",
+   "n=4",
+   "n=3",
+   "n=1"
+  ],
+  "answer": 3,
+  "explain": "Lyman series: electron transitions to n=1 (UV region).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bf196b1d-1225-4578-a521-6af23e08c0d9",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Balmer series lies in which region of EM spectrum?",
+  "formula": "",
+  "options": [
+   "UV",
+   "Visible",
+   "IR",
+   "Microwave"
+  ],
+  "answer": 1,
+  "explain": "Balmer series (n→2) transitions emit visible light (λ ~ 400-700 nm).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86174a30-162b-476d-84db-6c1fcb670abf",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen Spectrum",
+  "prompt": "Rydberg formula for H-spectrum wavenumber?",
+  "formula": "ν̄ = R_H(1/n₁² - 1/n₂²)",
+  "options": [
+   "R_H(n₂² - n₁²)",
+   "R_H(1/n₁ - 1/n₂)",
+   "R_H(1/n₂² - 1/n₁²)",
+   "R_H(1/n₁² - 1/n₂²)"
+  ],
+  "answer": 3,
+  "explain": "Wavenumber = R_H(1/n₁² - 1/n₂²); R_H = 1.097×10⁷ m⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0ef50c4a-13bc-4372-a7ad-c086bf29db68",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum Numbers",
+  "prompt": "The quantum number that defines spin of electron?",
+  "formula": "ms = +½ or -½",
+  "options": [
+   "ms = +½ or -½",
+   "ms = 1 or 2",
+   "ms = -1 to +1",
+   "ms = 0 or 1"
+  ],
+  "answer": 0,
+  "explain": "Spin quantum number ms can only be +½ (spin-up) or -½ (spin-down).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5e83795b-2094-42bd-b0ad-69e6c6989e74",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum Numbers",
+  "prompt": "For l = 2 (d subshell), number of orbitals is?",
+  "formula": "2l + 1",
+  "options": [
+   "5",
+   "4",
+   "3",
+   "7"
+  ],
+  "answer": 0,
+  "explain": "Number of orbitals = 2l+1; for d (l=2): 2(2)+1 = 5 orbitals.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2865335-661f-479e-a352-fcc02636e7ed",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's Quantum Theory",
+  "prompt": "Energy of photon in terms of frequency?",
+  "formula": "E = hν",
+  "options": [
+   "E = ν/h",
+   "E = hν",
+   "E = hν²",
+   "E = h/ν"
+  ],
+  "answer": 1,
+  "explain": "Planck's relation: photon energy E = hν where h = 6.626×10⁻³⁴ J·s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a478546b-3e6d-40b8-b466-a9b776387c23",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic Configuration",
+  "prompt": "Cr (Z=24) ground state configuration is?",
+  "formula": "",
+  "options": [
+   "[Ar]3d⁵4s¹",
+   "[Ar]3d⁴4s²",
+   "[Ar]3d³4s²",
+   "[Ar]3d⁶4s⁰"
+  ],
+  "answer": 0,
+  "explain": "Cr has [Ar]3d⁵4s¹ due to extra stability of half-filled d subshell.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "301244e7-5d17-46ea-904e-eb579807fa00",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic Configuration",
+  "prompt": "Cu (Z=29) ground state configuration is?",
+  "formula": "",
+  "options": [
+   "[Ar]3d¹⁰4s¹",
+   "[Ar]3d¹⁰4s²",
+   "[Ar]3d⁹4s²",
+   "[Ar]3d⁸4s²"
+  ],
+  "answer": 0,
+  "explain": "Cu has [Ar]3d¹⁰4s¹ due to extra stability of completely filled d subshell.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "201cb308-9802-45be-bc03-704cb6be2061",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum Numbers",
+  "prompt": "Orbital angular momentum of electron for quantum number l?",
+  "formula": "L = √[l(l+1)]·h/2π",
+  "options": [
+   "√[l(l+1)]·h/2π",
+   "l·h/2π",
+   "√l·h/2π",
+   "(l+1)·h/2π"
+  ],
+  "answer": 0,
+  "explain": "Orbital angular momentum L = √[l(l+1)]·ℏ; not simply l·ℏ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e7dcd4a3-a6f1-4706-a52f-3b41672a45f0",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric Effect",
+  "prompt": "Photoelectric effect: KE of emitted electron?",
+  "formula": "KE = hν - φ",
+  "options": [
+   "KE = φ - hν",
+   "KE = hν·φ",
+   "KE = hν + φ",
+   "KE = hν - φ"
+  ],
+  "answer": 3,
+  "explain": "Einstein's photoelectric equation: KE_max = hν - φ (work function).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ecaf1e92-e2d9-441e-be6a-b1f0dbc86a3f",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Angular momentum of electron in nth Bohr orbit?",
+  "formula": "L = nh/2π",
+  "options": [
+   "n²h/2π",
+   "h/2πn",
+   "nh/4π",
+   "nh/2π"
+  ],
+  "answer": 3,
+  "explain": "Bohr's quantization condition: angular momentum = nh/2π, where n is principal quantum number.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96004201-e467-4232-986a-edd14a0283bc",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Number of angular nodes in an orbital?",
+  "formula": "",
+  "options": [
+   "Equal to n−1",
+   "Equal to n−l−1",
+   "Equal to l",
+   "Equal to n"
+  ],
+  "answer": 2,
+  "explain": "Angular (planar) nodes = l (azimuthal quantum number); total nodes = n−1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "427a7e1d-bf29-4b2c-b6f0-4844deb21d9c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Which series of H-spectrum has transitions ending at n=4?",
+  "formula": "",
+  "options": [
+   "Lyman series",
+   "Paschen series",
+   "Pfund series",
+   "Brackett series"
+  ],
+  "answer": 3,
+  "explain": "Brackett series: transitions from higher levels to n=4, lies in infrared region.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "111dc52f-0421-4439-ac8c-370756702d64",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Number of spherical (radial) nodes in 2s orbital?",
+  "formula": "radial nodes = n−l−1",
+  "options": [
+   "0",
+   "3",
+   "1",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "2s: n=2, l=0; radial nodes = 2−0−1 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b002769b-9de9-4225-8114-ff30fde5dd95",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Total number of nodes in 3p orbital?",
+  "formula": "nodes = n−1",
+  "options": [
+   "3",
+   "2",
+   "0",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Total nodes = n−1 = 3−1 = 2 (1 radial + 1 angular).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e3d8003b-35ca-44c3-8ec1-83137abe47cd",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Spin multiplicity for an atom with 3 unpaired electrons?",
+  "formula": "2S+1",
+  "options": [
+   "6",
+   "2",
+   "4",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "S = 3×½ = 3/2; spin multiplicity = 2S+1 = 4 (quartet state).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "90cfb62c-f8b7-4618-8683-7d650db36faa",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "For n=3 shell, number of subshells is?",
+  "formula": "",
+  "options": [
+   "4",
+   "2",
+   "3",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Number of subshells = n; for n=3: s, p, d → 3 subshells.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "da0615d9-e14b-4412-9455-3e9efc96de0c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Magnetic quantum number (mₗ) values for p subshell?",
+  "formula": "",
+  "options": [
+   "−2 to +2",
+   "0 only",
+   "−1, 0, +1",
+   "0, +1, +2"
+  ],
+  "answer": 2,
+  "explain": "For l=1 (p), mₗ ranges from −l to +l: −1, 0, +1 → 3 orbitals.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3d1aa56a-2a48-4015-93cb-3a3151d960d5",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "What is the shape of s orbital?",
+  "formula": "",
+  "options": [
+   "Dumbbell",
+   "Double dumbbell",
+   "Spherical",
+   "Complex lobed"
+  ],
+  "answer": 2,
+  "explain": "s orbital (l=0) has spherical shape with no directional preference.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4accd035-e9f3-402c-b683-131efe3b2a85",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Energy of H-like ion in nth orbit depends on Z as?",
+  "formula": "Eₙ ∝ Z²/n²",
+  "options": [
+   "1/n²",
+   "Z²/n²",
+   "Z/n²",
+   "Z²/n"
+  ],
+  "answer": 1,
+  "explain": "For hydrogen-like ions, Eₙ = −13.6 Z²/n² eV; energy scales as Z².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2836c40b-63c3-4161-840a-a5b3a6492da1",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Number of orbitals in f subshell (l=3)?",
+  "formula": "2l+1",
+  "options": [
+   "3",
+   "7",
+   "9",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "Number of orbitals = 2l+1 = 2(3)+1 = 7 for f subshell.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d68396d7-3f2e-4cdb-8520-b0790fb5cdbe",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Radius of nth Bohr orbit of H-like ion with atomic number Z?",
+  "formula": "rₙ = 0.529 n²/Z Å",
+  "options": [
+   "0.529 n²/Z Å",
+   "0.529 nZ Å",
+   "0.529 n/Z Å",
+   "0.529 Z/n² Å"
+  ],
+  "answer": 0,
+  "explain": "For H-like ions, radius = (0.529 n²/Z) Å; radius decreases as Z increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c3a4d37e-27c8-43cd-9f89-c69f6f87485b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Which quantum number is NOT required to define an orbital?",
+  "formula": "",
+  "options": [
+   "Magnetic (mₗ)",
+   "Azimuthal (l)",
+   "Principal (n)",
+   "Spin (ms)"
+  ],
+  "answer": 3,
+  "explain": "An orbital is defined by n, l, mₗ; spin quantum number ms defines the electron, not orbital.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9d729a6c-5efa-4cda-af3d-33da481da98f",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state electronic configuration of Fe (Z=26)?",
+  "formula": "",
+  "options": [
+   "[Ar]3d⁷4s¹",
+   "[Ar]3d⁸",
+   "[Ar]3d⁶4s²",
+   "[Ar]3d⁵4s²4p¹"
+  ],
+  "answer": 2,
+  "explain": "Fe (Z=26) = [Ar] 3d⁶ 4s²; normal Aufbau filling, no half-fill exception here.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "00d5300c-45a5-4556-92c0-39b28ee6332e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Which series of H-spectrum is in UV region?",
+  "formula": "",
+  "options": [
+   "Brackett series",
+   "Lyman series",
+   "Paschen series",
+   "Balmer series"
+  ],
+  "answer": 1,
+  "explain": "Lyman series (transitions to n=1) lies entirely in ultraviolet region.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8001aa4e-77b8-46e0-87f2-d13be0c29ac0",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Ionization energy of hydrogen atom from ground state?",
+  "formula": "IE = 13.6 eV",
+  "options": [
+   "1.51 eV",
+   "13.6 eV",
+   "27.2 eV",
+   "3.4 eV"
+  ],
+  "answer": 1,
+  "explain": "Energy of n=1 level is −13.6 eV; energy needed to ionize = 13.6 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8e26fcda-05ac-4bff-b833-b7b0f09e14f4",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "Which principle states no two electrons can have same 4 quantum numbers?",
+  "formula": "",
+  "options": [
+   "Hund's Rule",
+   "Pauli Exclusion Principle",
+   "Aufbau Principle",
+   "Heisenberg Principle"
+  ],
+  "answer": 1,
+  "explain": "Pauli Exclusion Principle: no two electrons in an atom can have identical set of all four quantum numbers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0ada5199-ec99-4e1d-8f5e-d490085ac6b0",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Wavelength of first line of Lyman series corresponds to transition?",
+  "formula": "",
+  "options": [
+   "n=3 → n=1",
+   "n=4 → n=1",
+   "n=∞ → n=1",
+   "n=2 → n=1"
+  ],
+  "answer": 3,
+  "explain": "First line of any series = transition from (n+1) to n; first Lyman line: 2→1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "97d7b167-facc-416f-ab5c-9d3df0a5da7c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Maximum number of electrons in d subshell?",
+  "formula": "",
+  "options": [
+   "14",
+   "8",
+   "10",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "d subshell has 5 orbitals (l=2); max electrons = 5×2 = 10.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "53b35367-3832-4706-971b-0878b679710e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Which orbital has TWO angular nodes?",
+  "formula": "",
+  "options": [
+   "d orbital (l=2)",
+   "f orbital (l=3)",
+   "p orbital (l=1)",
+   "s orbital (l=0)"
+  ],
+  "answer": 0,
+  "explain": "Angular nodes = l; for d orbital l=2, so it has 2 angular nodes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a4429091-410f-4fad-a696-908854edf4e4",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Paschen series: electron transitions end at which n?",
+  "formula": "",
+  "options": [
+   "n = 1",
+   "n = 4",
+   "n = 3",
+   "n = 2"
+  ],
+  "answer": 2,
+  "explain": "Paschen series corresponds to transitions ending at n=3, emitting infrared radiation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "35cec152-ffbb-4cac-9119-f8e03317ff93",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Which set of quantum numbers is impossible?",
+  "formula": "",
+  "options": [
+   "n=2, l=2, mₗ=0",
+   "n=4, l=0, mₗ=0",
+   "n=2, l=1, mₗ=0",
+   "n=3, l=2, mₗ=-2"
+  ],
+  "answer": 0,
+  "explain": "l must be less than n; l=2 with n=2 is not allowed (l ranges 0 to n-1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fcb34fab-2c4a-4bfb-aff8-f9f8c8acbabc",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Number of radial nodes in 3d orbital?",
+  "formula": "Radial nodes = n - l - 1",
+  "options": [
+   "0",
+   "2",
+   "1",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "3d: n=3, l=2; radial nodes = 3-2-1 = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bece28d4-ad12-45b9-a177-390903cf57e3",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Total number of nodes in 4s orbital?",
+  "formula": "Total nodes = n - 1",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "Total nodes = n-1 = 4-1 = 3; all are radial since l=0 for s orbital.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aeec9560-ead2-43ae-9d3a-9344b4f9ea32",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Which quantum number has half-integer values?",
+  "formula": "",
+  "options": [
+   "Magnetic (mₗ)",
+   "Azimuthal (l)",
+   "Spin quantum number (mₛ)",
+   "Principal (n)"
+  ],
+  "answer": 2,
+  "explain": "Spin quantum number mₛ = +½ or −½, the only half-integer quantum number.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4af1b85a-b0e1-46e3-b552-bf81437ce0be",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Energy needed to remove electron from nth orbit of H-like ion?",
+  "formula": "IE = 13.6Z²/n² eV",
+  "options": [
+   "13.6Z/n eV",
+   "13.6n²/Z² eV",
+   "13.6Z²/n² eV",
+   "13.6/n² eV"
+  ],
+  "answer": 2,
+  "explain": "Ionization energy of H-like ion from nth orbit = 13.6Z²/n² eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d1a40376-507c-4e9e-841c-905ede973c84",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Atomic Structure",
+  "prompt": "Splitting of spectral lines in electric field is called?",
+  "formula": "",
+  "options": [
+   "Raman effect",
+   "Stark effect",
+   "Doppler effect",
+   "Zeeman effect"
+  ],
+  "answer": 1,
+  "explain": "Stark effect: splitting of spectral lines of H when placed in an external electric field.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cf411834-386e-4036-bc3f-db4c6aad518c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Brackett series of H-spectrum: transitions end at n =?",
+  "formula": "",
+  "options": [
+   "3",
+   "5",
+   "6",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "Brackett series corresponds to electron transitions terminating at n=4, in infrared region.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2a5de0b0-7ebc-44b2-b5f9-dc9a53336c5a",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "For 2p orbital, total number of nodes is?",
+  "formula": "Total nodes = n-1",
+  "options": [
+   "1",
+   "0",
+   "2",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "2p: total nodes = n-1 = 2-1 = 1 (one angular node, zero radial nodes).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6c8e85db-750f-43dc-8fc2-549268c21699",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Momentum of photon in terms of wavelength?",
+  "formula": "p = h/λ",
+  "options": [
+   "hν/c²",
+   "h/λ",
+   "hλ",
+   "hc/λ²"
+  ],
+  "answer": 1,
+  "explain": "Photon momentum p = h/λ; same as de Broglie relation applied to photon.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "930414c6-ba3f-42c4-be3c-18555b74d24b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Number of orbitals in n=4 shell is?",
+  "formula": "Orbitals = n²",
+  "options": [
+   "16",
+   "32",
+   "12",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "Total orbitals in nth shell = n²; for n=4, orbitals = 16.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3372e715-74ec-4616-a99a-665d02e75d5c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "Which orbital is filled after 3d according to Aufbau?",
+  "formula": "(n+l) rule",
+  "options": [
+   "4p",
+   "4f",
+   "5s",
+   "4s"
+  ],
+  "answer": 0,
+  "explain": "After 3d (n+l=5), next is 4p (n+l=5, higher n), before 4d or 5s comes into play.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c3b17d3b-57c1-446f-bfbe-54da60f0bbb8",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "For n=2 shell, maximum number of electrons is?",
+  "formula": "Max e⁻ = 2n²",
+  "options": [
+   "2",
+   "4",
+   "6",
+   "8"
+  ],
+  "answer": 3,
+  "explain": "Maximum electrons in nth shell = 2n²; for n=2, max = 2×4 = 8.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9a614fb0-8c41-4d19-8dca-9b2f67393da6",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Number of spectral lines when electron falls from n=3 to n=1 in H?",
+  "formula": "Lines = n(n-1)/2",
+  "options": [
+   "6",
+   "1",
+   "3",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "From n=3: transitions 3→1, 3→2, 2→1 give 3 spectral lines; n(n-1)/2 = 3×2/2 = 3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e6f14068-13e6-441d-b7fc-11bd833cd4b0",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Mn (Z=25)?",
+  "formula": "",
+  "options": [
+   "[Ar] 3d⁶ 4s¹",
+   "[Ar] 3d⁴ 4s²",
+   "[Ar] 3d⁵ 4s²",
+   "[Ar] 3d⁷"
+  ],
+  "answer": 2,
+  "explain": "Mn (Z=25): [Ar] 3d⁵ 4s²; half-filled 3d⁵ gives extra stability, no exception needed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a5a22154-36f9-4382-8442-407055f96632",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Hydrogen atom: which transition gives longest wavelength in Balmer series?",
+  "formula": "",
+  "options": [
+   "n=4 → n=2",
+   "n=5 → n=2",
+   "n=3 → n=2",
+   "n=∞ → n=2"
+  ],
+  "answer": 2,
+  "explain": "Longest wavelength = smallest energy gap; n=3→2 is the smallest gap in Balmer series.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f140db38-f4af-4500-8096-9db2e0a2fd4d",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Which quantum number is responsible for Zeeman effect (line splitting in B-field)?",
+  "formula": "",
+  "options": [
+   "Azimuthal quantum number l",
+   "Spin quantum number mₛ",
+   "Principal quantum number n",
+   "Magnetic quantum number mₗ"
+  ],
+  "answer": 3,
+  "explain": "mₗ values split in a magnetic field, causing Zeeman splitting of spectral lines.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77334b01-1f14-47ba-a726-c70993456c03",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "The wave function ψ² represents?",
+  "formula": "ψ²",
+  "options": [
+   "Energy of electron",
+   "Amplitude of wave",
+   "Angular momentum",
+   "Probability density of electron"
+  ],
+  "answer": 3,
+  "explain": "ψ² (or |ψ|²) gives the probability density of finding an electron at a point in space.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7a7827b-e8da-43f0-b050-ddcc5b7d7b7a",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Ionization energy of He⁺ (Z=2) compared to H atom is?",
+  "formula": "IE ∝ Z²",
+  "options": [
+   "Same",
+   "2 times greater",
+   "8 times greater",
+   "4 times greater"
+  ],
+  "answer": 3,
+  "explain": "IE of H-like ion ∝ Z²; for He⁺, Z=2, so IE = 4 × 13.6 = 54.4 eV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "20b73acd-3725-439b-b387-6ee9577c68ea",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Number of unpaired electrons in ground state N (Z=7)?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "N: 1s²2s²2p³; by Hund's rule, all three 2p electrons are unpaired → 3 unpaired electrons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "431f9ed5-3d0a-429b-8b84-42c3ac9fcece",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr's model failed to explain which phenomenon?",
+  "formula": "",
+  "options": [
+   "Fine structure of spectral lines",
+   "H-atom spectrum",
+   "Ionization energy of H",
+   "Radius of H orbit"
+  ],
+  "answer": 0,
+  "explain": "Bohr's model couldn't explain fine structure, Zeeman/Stark effect, or multi-electron atoms.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8acd9a35-0187-4c7d-9462-b3c7522c298b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Ni (Z=28)?",
+  "formula": "",
+  "options": [
+   "[Ar] 3d¹⁰",
+   "[Ar] 3d⁹ 4s¹",
+   "[Ar] 3d⁷ 4s²",
+   "[Ar] 3d⁸ 4s²"
+  ],
+  "answer": 3,
+  "explain": "Ni (Z=28): [Ar] 3d⁸ 4s² — no special half-filled/full-filled stability applies here.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5f9be733-bb65-468e-ab3f-654a5a99c83f",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Number of unpaired electrons in ground state O (Z=8)?",
+  "formula": "",
+  "options": [
+   "2",
+   "0",
+   "1",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "O: 1s²2s²2p⁴; by Hund's rule, 2p has 2 paired + 2 unpaired electrons → 2 unpaired.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0dd9c25b-1fc0-4157-aa12-c02d454dff94",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Number of subshells in n=4 shell?",
+  "formula": "",
+  "options": [
+   "4 (s, p, d, f)",
+   "5",
+   "3 (s, p, d)",
+   "2 (s, p)"
+  ],
+  "answer": 0,
+  "explain": "For n=4, l = 0,1,2,3 → four subshells: 4s, 4p, 4d, 4f.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8f3a0696-4c8a-4b9f-abfa-cd7e09fd9bba",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "Which is the correct order of energy in multi-electron atoms?",
+  "formula": "",
+  "options": [
+   "3d > 3s > 3p",
+   "3s = 3p = 3d",
+   "3d > 3p > 3s",
+   "3s > 3p > 3d"
+  ],
+  "answer": 2,
+  "explain": "In multi-electron atoms, for same n: energy increases with l, so 3s < 3p < 3d.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1903e802-d2d6-44e2-9af5-267f215f3f2c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Work function (φ) of metal in photoelectric effect equals?",
+  "formula": "φ = hν₀",
+  "options": [
+   "hν₀",
+   "h/ν₀",
+   "hν",
+   "½mv²"
+  ],
+  "answer": 0,
+  "explain": "Work function φ = hν₀ where ν₀ is threshold frequency; minimum energy needed to eject electron.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "04b57aaf-2f0b-4736-8482-fb9540859f89",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Number of radial nodes in 2p orbital?",
+  "formula": "Radial nodes = n - l - 1",
+  "options": [
+   "2",
+   "0",
+   "1",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "Radial nodes = n - l - 1 = 2 - 1 - 1 = 0 for 2p orbital.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9b1e80f9-9f66-41f0-bcff-8e860a52e982",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Ratio of radii of 1st and 2nd Bohr orbits of H?",
+  "formula": "r ∝ n²",
+  "options": [
+   "1 : 8",
+   "1 : 4",
+   "2 : 1",
+   "1 : 2"
+  ],
+  "answer": 1,
+  "explain": "r ∝ n²; r₁:r₂ = 1²:2² = 1:4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2c6d3914-e5aa-460b-81ff-31043cd9ce81",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "The principal quantum number 'n' can have values?",
+  "formula": "",
+  "options": [
+   "½, 1, 3/2, …",
+   "1, 2, 3, … (positive integers)",
+   "0, 1, 2, 3, …",
+   "-1, 0, 1, 2, …"
+  ],
+  "answer": 1,
+  "explain": "n is a positive integer: 1, 2, 3, … ; it cannot be zero or negative.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9deea1a0-2c64-4c9a-a35f-ff963d3e45bb",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "The 4s orbital is filled before 3d because?",
+  "formula": "",
+  "options": [
+   "4s has higher n value",
+   "4s has lower (n+l) value",
+   "4s has larger radius",
+   "4s has more nodes"
+  ],
+  "answer": 1,
+  "explain": "Aufbau: 4s has (n+l)=4+0=4, while 3d has (n+l)=3+2=5; lower (n+l) filled first.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6f3a10d2-aba6-4699-aa53-3edc361ebab1",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "Which property of electron is shown by Davisson-Germer experiment?",
+  "formula": "",
+  "options": [
+   "Charge",
+   "Wave nature",
+   "Particle nature",
+   "Spin"
+  ],
+  "answer": 1,
+  "explain": "Davisson-Germer showed electron diffraction, confirming de Broglie's wave nature of electrons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7effdf95-bc41-4cbb-bbc2-8e1bb2e413e3",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Emission spectrum of hydrogen is due to?",
+  "formula": "",
+  "options": [
+   "Ionization",
+   "Electron absorbing photon",
+   "Electron falling to lower energy level",
+   "Nuclear decay"
+  ],
+  "answer": 2,
+  "explain": "Emission occurs when excited electron drops to a lower orbit, releasing a photon.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f6d3d2bc-6236-4a38-9e81-5d3afd456727",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Number of unpaired electrons in ground state Cr (Z=24)?",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "5",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "Cr: [Ar]3d⁵4s¹ — all 6 electrons are unpaired (half-filled d and s).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "91484eb2-fd4f-45f3-830e-e1799b200610",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Which transition in H-atom gives maximum wavelength in Lyman series?",
+  "formula": "",
+  "options": [
+   "n=3 → n=1",
+   "n=2 → n=1",
+   "n=4 → n=1",
+   "n=∞ → n=1"
+  ],
+  "answer": 1,
+  "explain": "Smallest energy difference (n=2→1) gives longest wavelength in Lyman series.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f8891f97-ffab-4476-b22b-418fc5f2fedc",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Total number of orbitals in 4th shell (n=4)?",
+  "formula": "n²",
+  "options": [
+   "16",
+   "4",
+   "12",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "Total orbitals = n² = 4² = 16 for n=4 shell.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "eac98fb0-988b-41a1-9cdc-3f4b3d955277",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Which type of spectrum does hydrogen emit when excited?",
+  "formula": "",
+  "options": [
+   "Line spectrum",
+   "Absorption spectrum",
+   "Continuous spectrum",
+   "Band spectrum"
+  ],
+  "answer": 0,
+  "explain": "Hydrogen emits a discrete line emission spectrum due to quantized energy levels.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "622f7d93-2035-4da7-99c9-2f9952fcc9ca",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Number of unpaired electrons in ground state Cu (Z=29)?",
+  "formula": "",
+  "options": [
+   "3",
+   "0",
+   "1",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "Cu: [Ar]3d¹⁰4s¹ — only one unpaired electron in 4s orbital.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5c7bd76a-7ac2-4a58-a48e-26f70cb092d8",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum numbers n, l, m, s; spin",
+  "prompt": "Maximum number of electrons in 4f subshell?",
+  "formula": "",
+  "options": [
+   "7",
+   "10",
+   "8",
+   "14"
+  ],
+  "answer": 3,
+  "explain": "f subshell has 7 orbitals × 2 electrons each = 14 electrons maximum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e9b92635-1350-4368-8ba2-a407b57db35a",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Number of radial nodes in 3s orbital?",
+  "formula": "Radial nodes = n - l - 1",
+  "options": [
+   "3",
+   "2",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "3s: n=3, l=0; radial nodes = 3-0-1 = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f309b52b-bdf5-4533-b1b3-9fd0b61fc225",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "de Broglie wavelength formula for a particle of mass m, velocity v?",
+  "formula": "λ = h/mv",
+  "options": [
+   "λ = mv/h",
+   "λ = m/hv",
+   "λ = h/mv",
+   "λ = h·mv"
+  ],
+  "answer": 2,
+  "explain": "de Broglie relation: wavelength inversely proportional to momentum (mv).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "de367425-98c8-4712-8681-0c4ecc6a06c7",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "Heisenberg uncertainty principle: product Δx·Δp is?",
+  "formula": "Δx·Δp ≥ h/4π",
+  "options": [
+   "= h",
+   "≥ h/4π",
+   "≥ h/2π",
+   "≤ h/4π"
+  ],
+  "answer": 1,
+  "explain": "Minimum uncertainty product Δx·Δp = h/4π (ħ/2); position & momentum cannot both be exact.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "27e81dec-c5e0-4bb8-b983-e9758c45b0d8",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Number of radial nodes in 4p orbital?",
+  "formula": "Radial nodes = n - l - 1",
+  "options": [
+   "2",
+   "0",
+   "3",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "4p: n=4, l=1; radial nodes = 4-1-1 = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f77787e6-5538-47f2-b9cb-68ed9174ba11",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "SI unit of wavenumber is:",
+  "formula": "",
+  "options": [
+   "m",
+   "m⁻¹",
+   "s⁻¹",
+   "m s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Wavenumber = 1/λ, so its SI unit is m⁻¹ (cm⁻¹ is commonly used).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eef34de4-fc47-4941-a855-cbd98ecbe132",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "Which statement about EM waves in vacuum is correct?",
+  "formula": "",
+  "options": [
+   "Higher frequency waves travel faster",
+   "Speed depends on intensity",
+   "All travel at the same speed c",
+   "Longer wavelength waves travel faster"
+  ],
+  "answer": 2,
+  "explain": "In vacuum all EM radiations travel at c ≈ 3×10⁸ m s⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d829b271-c9c0-4f27-b680-2b0371c560a3",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "Correct decreasing order of wavelength of EM radiation:",
+  "formula": "",
+  "options": [
+   "IR > radio > visible > X-ray > UV",
+   "Radio > UV > visible > IR > X-ray",
+   "X-ray > UV > visible > IR > radio",
+   "Radio > IR > visible > UV > X-ray"
+  ],
+  "answer": 3,
+  "explain": "Wavelength falls from radio, microwave, IR, visible, UV, X-ray to γ-ray.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6702a672-0598-4085-a039-0941ddef453e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "Approximate wavelength range of visible light is:",
+  "formula": "",
+  "options": [
+   "400–750 nm",
+   "750–1500 nm",
+   "100–400 nm",
+   "200–600 nm"
+  ],
+  "answer": 0,
+  "explain": "Visible range is about 400 nm (violet) to 750 nm (red).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c1760de9-242a-4de8-a930-d7d890e4c818",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "When light passes from vacuum into glass, which quantity stays unchanged?",
+  "formula": "",
+  "options": [
+   "Wavenumber",
+   "Speed",
+   "Frequency",
+   "Wavelength"
+  ],
+  "answer": 2,
+  "explain": "Frequency is fixed by the source; speed and wavelength decrease in a medium.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4d4c4652-4136-4cf5-86de-071f5b17ddeb",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "Wavenumber of radiation of wavelength 1 μm is:",
+  "formula": "",
+  "options": [
+   "10⁴ cm⁻¹",
+   "10³ cm⁻¹",
+   "10⁶ cm⁻¹",
+   "10² cm⁻¹"
+  ],
+  "answer": 0,
+  "explain": "1 μm = 10⁻⁴ cm, so ν̄ = 1/λ = 10⁴ cm⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2eaf4781-9dbe-42f8-a423-00a4df5c16e9",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "Radiation of frequency 3×10¹⁴ Hz has wavelength (c = 3×10⁸ m/s):",
+  "formula": "λ = c/ν",
+  "options": [
+   "10⁴ nm",
+   "100 nm",
+   "1000 nm",
+   "10 nm"
+  ],
+  "answer": 2,
+  "explain": "λ = 3×10⁸/3×10¹⁴ = 10⁻⁶ m = 1000 nm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83dba557-af92-4182-a8e9-020f3f817837",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "1 nm equals:",
+  "formula": "",
+  "options": [
+   "10⁻⁹ m",
+   "10⁻¹² m",
+   "10⁻¹⁰ m",
+   "10⁻⁷ m"
+  ],
+  "answer": 0,
+  "explain": "1 nm = 10⁻⁹ m = 10 Å; 1 Å = 10⁻¹⁰ m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84800f9b-161c-49eb-9db6-e0809deb7e1c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "Among UV, IR, X-rays and microwaves, which has the highest wavenumber?",
+  "formula": "",
+  "options": [
+   "X-rays",
+   "UV",
+   "Microwaves",
+   "IR"
+  ],
+  "answer": 0,
+  "explain": "Shortest wavelength means highest wavenumber; X-rays are shortest here.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3e738329-a9fb-4061-addc-f22abf617e74",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "Which phenomenon can NOT be explained by the wave nature of radiation?",
+  "formula": "",
+  "options": [
+   "Interference",
+   "Refraction",
+   "Diffraction",
+   "Photoelectric effect"
+  ],
+  "answer": 3,
+  "explain": "Photoelectric effect and black-body radiation need the particle (quantum) model.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6dd04ced-ec88-4ae8-806d-b9b6c9dd3b41",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "EM radiation: wave nature, c=νλ, wavenumber",
+  "prompt": "For an EM wave in vacuum, if its frequency is doubled, its wavelength:",
+  "formula": "c = νλ",
+  "options": [
+   "Becomes one-fourth",
+   "Becomes half",
+   "Stays same",
+   "Doubles"
+  ],
+  "answer": 1,
+  "explain": "c is constant, so λ ∝ 1/ν; doubling ν halves λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "99ba4e7e-dccd-4af0-b212-f0b6efe1a08a",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "According to Planck, a body can emit or absorb energy only in which amounts?",
+  "formula": "E = nhν",
+  "options": [
+   "Integral multiples of hν",
+   "Any continuous value",
+   "Half-integral multiples of hν",
+   "Multiples of hν²"
+  ],
+  "answer": 0,
+  "explain": "Energy is quantised: E = nhν with n = 1, 2, 3, …",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94bc5529-e7b0-4180-b3ec-59a2b01d0507",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Value of Planck's constant h?",
+  "formula": "",
+  "options": [
+   "6.022 × 10⁻³⁴ J s",
+   "6.626 × 10⁻²⁷ J s",
+   "6.626 × 10⁻³⁴ J s",
+   "1.602 × 10⁻³⁴ J s"
+  ],
+  "answer": 2,
+  "explain": "h = 6.626 × 10⁻³⁴ J s (= 6.626 × 10⁻²⁷ erg s).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "30e201a9-ec01-4448-9151-8eafc9cb1352",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Planck's quantum theory was first introduced to explain which phenomenon?",
+  "formula": "",
+  "options": [
+   "Compton effect",
+   "Hydrogen line spectrum",
+   "Photoelectric effect",
+   "Black body radiation"
+  ],
+  "answer": 3,
+  "explain": "Planck (1900) explained the intensity distribution of black body radiation.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "52b6552c-7ede-4721-906b-88ebd8977204",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Planck's constant h has the same dimensions as which quantity?",
+  "formula": "[h] = ML²T⁻¹",
+  "options": [
+   "Torque",
+   "Angular momentum",
+   "Linear momentum",
+   "Energy"
+  ],
+  "answer": 1,
+  "explain": "h = E/ν gives J s = kg m² s⁻¹, the same as angular momentum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f72ddff6-e1f7-4e7e-98d7-f0d062690619",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "For monochromatic light, increasing intensity changes which quantity?",
+  "formula": "",
+  "options": [
+   "Frequency of photons",
+   "Energy per photon",
+   "Wavelength of photons",
+   "Number of photons per second"
+  ],
+  "answer": 3,
+  "explain": "Intensity ∝ number of photons per unit time; the energy per photon depends only on ν.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7ff85f7f-4461-4f5f-ab97-3a493c88ca85",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Energy of a photon of wavelength 620 nm is about? (hc ≈ 1240 eV nm)",
+  "formula": "E(eV) ≈ 1240 / λ(nm)",
+  "options": [
+   "2 eV",
+   "0.5 eV",
+   "1 eV",
+   "4 eV"
+  ],
+  "answer": 0,
+  "explain": "1240/620 = 2 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d0202eb-b7e1-492c-8390-e8222107c5c2",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Classical prediction of infinite black body intensity at short wavelengths is called?",
+  "formula": "",
+  "options": [
+   "Stark effect",
+   "Compton shift",
+   "Ultraviolet catastrophe",
+   "Zeeman effect"
+  ],
+  "answer": 2,
+  "explain": "Classical theory failed here; Planck's quantisation resolved it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3e171a91-eaaa-450f-910b-be9729e52140",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Photon A has twice the wavelength of photon B in vacuum. Ratio E_A : E_B?",
+  "formula": "E ∝ 1/λ",
+  "options": [
+   "1 : 4",
+   "4 : 1",
+   "2 : 1",
+   "1 : 2"
+  ],
+  "answer": 3,
+  "explain": "E = hc/λ, so doubling λ halves the energy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3ce9cd7e-2fad-4c79-9a60-77fef0f4d614",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Energy of one mole of photons of frequency ν is given by which expression?",
+  "formula": "E = N_A hν",
+  "options": [
+   "hν",
+   "hν / N_A",
+   "N_A hν",
+   "h N_A / ν"
+  ],
+  "answer": 2,
+  "explain": "One photon has hν; one mole contains N_A photons, so the energy is N_A hν.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ae9b1490-b3bf-470f-8923-e44902d865db",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "A photon has rest mass equal to which value?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "hν/c²",
+   "h/c",
+   "h/λ"
+  ],
+  "answer": 0,
+  "explain": "A photon has zero rest mass; its effective mass hν/c² arises only from its motion.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e2d728b-ae07-4fac-afbd-e483c5be7e5b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Planck's quantum theory, E=hν, photon energy",
+  "prompt": "Which radiation has the highest photon energy?",
+  "formula": "E = hc/λ",
+  "options": [
+   "Microwave",
+   "X-ray",
+   "Infrared",
+   "Visible"
+  ],
+  "answer": 1,
+  "explain": "X-rays have the highest frequency and shortest wavelength here, so each photon carries the most energy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94deece1-ebcb-4798-8d39-6463388774eb",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Light above threshold frequency: raising intensity at fixed ν changes KEmax of photoelectrons how?",
+  "formula": "",
+  "options": [
+   "Increases proportionally",
+   "Does not change",
+   "Increases as square root",
+   "Decreases"
+  ],
+  "answer": 1,
+  "explain": "KEmax = hν − φ depends only on ν; intensity only changes the number of electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "651b9322-7af9-46ca-b23e-93b0c0852064",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "At fixed ν > ν₀, the photoelectric current (saturation) is directly proportional to which quantity?",
+  "formula": "",
+  "options": [
+   "Wavelength",
+   "Work function",
+   "Intensity of light",
+   "Stopping potential"
+  ],
+  "answer": 2,
+  "explain": "More photons per second means more electrons per second, so current ∝ intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6bcac828-b106-4085-9fc7-f63a36f244a4",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Light of ν < ν₀ falls on a metal. Increasing its intensity greatly will cause:",
+  "formula": "",
+  "options": [
+   "No electron emission",
+   "Emission after a time lag",
+   "Emission with low KE",
+   "Emission of more energetic electrons"
+  ],
+  "answer": 0,
+  "explain": "Each photon has energy below φ; one photon ejects one electron, so intensity cannot compensate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d65e2b7-ceee-4815-8942-39b1dfd899aa",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "In the plot of KEmax vs ν for a metal, the slope equals:",
+  "formula": "",
+  "options": [
+   "h/e",
+   "Threshold frequency ν₀",
+   "Planck's constant h",
+   "Work function φ"
+  ],
+  "answer": 2,
+  "explain": "KEmax = hν − φ is a straight line with slope h, the same for all metals.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3e62912-c35b-4c4d-91b7-71073187326e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "KEmax vs ν lines for two different metals are:",
+  "formula": "",
+  "options": [
+   "Intersecting at ν₀",
+   "Coincident",
+   "Parallel, different ν₀",
+   "Of different slopes"
+  ],
+  "answer": 2,
+  "explain": "The slope h is universal, so the lines are parallel and differ only in intercepts (φ, ν₀).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ce4f31d1-6d38-4921-95c5-3aff6d16dd0c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "The stopping potential V₀ in the photoelectric effect depends on:",
+  "formula": "eV₀ = hν − φ",
+  "options": [
+   "Intensity only",
+   "Number of electrons",
+   "Frequency and metal used",
+   "Intensity and area"
+  ],
+  "answer": 2,
+  "explain": "eV₀ = KEmax = hν − φ, so V₀ depends on ν and φ, not on intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e9dfe38d-3626-478f-855e-865ed004bae9",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "The graph of stopping potential V₀ vs frequency ν has slope:",
+  "formula": "",
+  "options": [
+   "h/e",
+   "e/h",
+   "φ",
+   "h"
+  ],
+  "answer": 0,
+  "explain": "V₀ = (h/e)ν − φ/e, so the slope is h/e.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "237390cc-368c-4022-8089-9c968a92e37c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Time lag between light incidence and photoelectron emission above threshold is:",
+  "formula": "",
+  "options": [
+   "Dependent on φ only",
+   "About 1 s at low intensity",
+   "Practically zero (~10⁻⁹ s)",
+   "Dependent on intensity"
+  ],
+  "answer": 2,
+  "explain": "Emission is instantaneous even at very low intensity, contradicting the wave theory's prediction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84ef57a9-8e51-48e1-bff3-9e96bef7c63b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Work function is commonly expressed in which unit, with 1 eV equal to:",
+  "formula": "",
+  "options": [
+   "6.626 × 10⁻³⁴ J",
+   "1.602 × 10⁻¹⁶ J",
+   "1.602 × 10⁻¹⁹ J",
+   "1.602 × 10⁻¹⁹ erg"
+  ],
+  "answer": 2,
+  "explain": "1 eV = 1.602 × 10⁻¹⁹ J is the energy gained by an electron through 1 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "20e4e6cc-8635-4fb2-816d-68e186eca932",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Why do emitted photoelectrons show a range of KE from 0 up to KEmax?",
+  "formula": "",
+  "options": [
+   "Electrons bound at different depths",
+   "Intensity varies",
+   "Metal heats up",
+   "Photons have different energies"
+  ],
+  "answer": 0,
+  "explain": "Only surface-level electrons get KEmax; deeper electrons lose more energy before escaping.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aee0dabd-55ed-4f30-accb-8ca125b1e9d6",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Classical wave theory wrongly predicted that KE of photoelectrons would depend on:",
+  "formula": "",
+  "options": [
+   "Light intensity",
+   "Frequency only",
+   "Metal's colour",
+   "Photon number only"
+  ],
+  "answer": 0,
+  "explain": "Wave theory said greater intensity gives more energy; experiments show KEmax is independent of intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e279e275-f542-45f2-b49a-0ea81f3f7b53",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Pfund series of hydrogen spectrum: electron transitions end at which level?",
+  "formula": "",
+  "options": [
+   "n = 4",
+   "n = 5",
+   "n = 3",
+   "n = 6"
+  ],
+  "answer": 1,
+  "explain": "Pfund series has n₁ = 5 and n₂ = 6, 7, … It lies in the far infrared.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ab123c14-a596-42c8-9804-491dbaee29ec",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Series limit (shortest wavelength) of the Balmer series equals?",
+  "formula": "",
+  "options": [
+   "1/R_H",
+   "9/R_H",
+   "4/R_H",
+   "36/(5R_H)"
+  ],
+  "answer": 2,
+  "explain": "For n₁ = 2 and n₂ = ∞, 1/λ = R_H/4, so λ = 4/R_H.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac92f95c-f5fe-4332-ae39-5763a62e23d9",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Rydberg formula for a hydrogen-like ion of atomic number Z: wavenumber is multiplied by?",
+  "formula": "ν̄ = R_H Z² (1/n₁² − 1/n₂²)",
+  "options": [
+   "Z²",
+   "Z",
+   "Z³",
+   "1/Z²"
+  ],
+  "answer": 0,
+  "explain": "Energy levels scale as Z², so ν̄ = R_H·Z²(1/n₁² − 1/n₂²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6440a2e7-ffad-46aa-835e-e70fe192e624",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Within a given hydrogen series, as n₂ increases the spacing between successive lines?",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases, lines converge",
+   "Becomes zero at n₂ = 3",
+   "Stays constant"
+  ],
+  "answer": 1,
+  "explain": "Energy gaps shrink at higher n, so lines converge to the series limit at n₂ = ∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff3d0aed-30d7-42b6-b42d-b4c91c23d5db",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "The Hα line (first line of Balmer series, 3→2) has wavelength about and colour?",
+  "formula": "",
+  "options": [
+   "486 nm, blue-green",
+   "122 nm, UV",
+   "656 nm, red",
+   "410 nm, violet"
+  ],
+  "answer": 2,
+  "explain": "Hα (n=3→2) is at 656.3 nm, red. Hβ is 486 nm and Hγ is 434 nm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66661e8d-063f-4d9b-b173-83da7c90f238",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Ratio of longest wavelength of Lyman series to longest wavelength of Balmer series in H atom is?",
+  "formula": "ν̄ = R_H(1/n₁² − 1/n₂²)",
+  "options": [
+   "5 : 27",
+   "3 : 4",
+   "27 : 5",
+   "4 : 3"
+  ],
+  "answer": 0,
+  "explain": "Lyman longest: 3R/4; Balmer longest: 5R/36; λ ratio = (4/3):(36/5) = 5:27.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "14f83eb6-3ad2-4a06-ac29-a8dce7a17af5",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Hydrogen spectrum: series, Rydberg formula",
+  "prompt": "Number of spectral lines emitted when H electron falls from n = 4 to ground state (all paths)?",
+  "formula": "N = n(n−1)/2",
+  "options": [
+   "6",
+   "10",
+   "4",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "Lines = 4×3/2 = 6 for all possible transitions from n=4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02f6202a-4819-4215-91e0-30dc39278038",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Wavelength of the Lyman series limit of hydrogen is approximately?",
+  "formula": "1/λ = R(1/1² − 1/∞²)",
+  "options": [
+   "6563 Å",
+   "1216 Å",
+   "3646 Å",
+   "912 Å"
+  ],
+  "answer": 3,
+  "explain": "The limit is n=∞→1, λ = 1/R ≈ 912 Å.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "32761235-d8df-4f84-bd89-5483f14b5157",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "The longest wavelength line of any hydrogen series arises from which transition?",
+  "formula": "",
+  "options": [
+   "n₂ = n₁+2 → n₁",
+   "n₂ = ∞ → n₁",
+   "n₂ = 2n₁ → n₁",
+   "n₂ = n₁+1 → n₁"
+  ],
+  "answer": 3,
+  "explain": "The smallest energy gap in a series is between adjacent levels, n₁+1 → n₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa0005d3-9259-4b4f-af95-0656c88051b9",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Ratio of series-limit wavelengths of Lyman to Paschen series in hydrogen?",
+  "formula": "λ_limit = n₁²/R",
+  "options": [
+   "9 : 1",
+   "1 : 9",
+   "1 : 4",
+   "1 : 3"
+  ],
+  "answer": 1,
+  "explain": "The limit is λ = n₁²/R, so 1² : 3² = 1 : 9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4018c39e-18e7-46cf-bb60-f5a307eeb162",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "An H electron in n=6 de-excites. How many lines of the Balmer series can appear?",
+  "formula": "lines = n − n₁",
+  "options": [
+   "3",
+   "5",
+   "4",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Balmer lines come from 6→2, 5→2, 4→2 and 3→2: 4 lines.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56965d69-f1e2-41ce-9870-05f1234a12a3",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Value of the Rydberg constant for hydrogen (in m⁻¹)?",
+  "formula": "R_H",
+  "options": [
+   "1.097×10⁷",
+   "2.18×10⁻¹⁸",
+   "1.097×10⁵",
+   "1.602×10⁻¹⁹"
+  ],
+  "answer": 0,
+  "explain": "R_H ≈ 1.097×10⁷ m⁻¹. 2.18×10⁻¹⁸ J is the energy equivalent, Rhc.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "627fa406-2baf-4d1b-9408-fa8b6893b2e4",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "The first line of the Lyman series (n=2→1) of hydrogen has wavelength about?",
+  "formula": "1/λ = 3R/4",
+  "options": [
+   "121.6 nm",
+   "91.2 nm",
+   "656 nm",
+   "486 nm"
+  ],
+  "answer": 0,
+  "explain": "λ = 4/(3R) ≈ 1216 Å = 121.6 nm, in the UV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87afacb6-cca5-4544-b38c-ee642594af3b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Wavenumber of the Lyman series limit of Li²⁺ in terms of R?",
+  "formula": "ν̄ = RZ²(1/n₁² − 1/n₂²)",
+  "options": [
+   "9R",
+   "6R",
+   "R",
+   "3R"
+  ],
+  "answer": 0,
+  "explain": "Z=3, n₁=1, n₂=∞ give ν̄ = 9R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72476865-b156-4296-8d5c-84e4e2c75253",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Which He⁺ transition gives a line of the same wavelength as the n=2→1 line of H?",
+  "formula": "",
+  "options": [
+   "n=4→2",
+   "n=2→1",
+   "n=3→2",
+   "n=3→1"
+  ],
+  "answer": 0,
+  "explain": "For He⁺, Z²=4: 4(1/4 − 1/16) = 3/4 = 1 − 1/4, the H value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54668639-9155-4f09-b530-a9e36e1a96af",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Bohr's first postulate: an electron in a stationary orbit does what?",
+  "formula": "",
+  "options": [
+   "Moves without emitting radiation",
+   "Emits radiation continuously",
+   "Spirals into the nucleus",
+   "Absorbs energy continuously"
+  ],
+  "answer": 0,
+  "explain": "Electrons revolve only in fixed stationary orbits of definite energy, with no radiation emitted.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4952a29e-f2ee-4815-b8b0-6b465b86422c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "In Bohr's model, what supplies the centripetal force on the orbiting electron?",
+  "formula": "mv²/r = kZe²/r²",
+  "options": [
+   "Coulombic attraction by nucleus",
+   "Gravitational attraction",
+   "Electron–electron repulsion",
+   "Magnetic force of nucleus"
+  ],
+  "answer": 0,
+  "explain": "Electrostatic attraction between nucleus and electron provides mv²/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b40f2eae-0852-4e20-a4d6-9fbfc0842069",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "He⁺ in n = 2 has the same electron speed as H in which orbit?",
+  "formula": "v ∝ Z/n",
+  "options": [
+   "n = 1",
+   "n = 2",
+   "n = 3",
+   "n = 4"
+  ],
+  "answer": 0,
+  "explain": "v ∝ Z/n = 2/2 = 1, the same as H with n = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b7142ab-feb5-423f-8726-b22c00641141",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Electron speed in the ground state of Li²⁺ compared with ground-state H is",
+  "formula": "v ∝ Z/n",
+  "options": [
+   "1/3 times",
+   "Same",
+   "9 times",
+   "3 times"
+  ],
+  "answer": 3,
+  "explain": "At fixed n, v ∝ Z, so Z = 3 gives 3 times the speed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2221d13d-8848-4a57-af0c-8d193765322a",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Time period of revolution in n = 2 of H is how many times that in n = 1?",
+  "formula": "T = 2πr/v ∝ n³/Z²",
+  "options": [
+   "2",
+   "8",
+   "4",
+   "16"
+  ],
+  "answer": 1,
+  "explain": "r ∝ n² and v ∝ 1/n, so T ∝ n³ and the ratio is 8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "40be7158-8f5c-478a-b14b-63955bbf2eb4",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "For H-like species, the frequency of revolution of the electron is proportional to",
+  "formula": "",
+  "options": [
+   "Z³/n",
+   "Z²/n³",
+   "Z/n²",
+   "Z²/n²"
+  ],
+  "answer": 1,
+  "explain": "Frequency = 1/T, and T ∝ n³/Z², so frequency ∝ Z²/n³.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac6bcfc7-9f13-4f5d-8813-512ef82a07d2",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Number of de Broglie wavelengths that fit in the nth Bohr orbit is",
+  "formula": "2πr = nλ",
+  "options": [
+   "n²",
+   "n",
+   "1/n",
+   "2n"
+  ],
+  "answer": 1,
+  "explain": "Standing-wave condition 2πr = nλ gives the quantised angular momentum mvr = nh/2π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f22a18e9-626e-41f2-bc42-454080be14ba",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Bohr's model fails to explain the spectra of which kind of species?",
+  "formula": "",
+  "options": [
+   "He⁺",
+   "Multi-electron atoms",
+   "H",
+   "Li²⁺"
+  ],
+  "answer": 1,
+  "explain": "It works only for one-electron species; it cannot handle electron–electron repulsion.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02a9126e-6b73-4cac-91aa-43a29bd5db58",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "Which observation of hydrogen's spectrum can Bohr's model NOT explain?",
+  "formula": "",
+  "options": [
+   "Line spectrum of H",
+   "Lyman series wavelengths",
+   "Splitting of lines in a magnetic field",
+   "Spectrum of He⁺ ion"
+  ],
+  "answer": 2,
+  "explain": "Bohr's model cannot explain the Zeeman effect (magnetic field) or the Stark effect (electric field).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c732caa7-c324-4249-8660-1e70c6507e49",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "In Bohr's model, radiation is emitted or absorbed when an electron does what?",
+  "formula": "ΔE = E₂ − E₁ = hν",
+  "options": [
+   "Revolves in a stationary orbit",
+   "Is present in the ground state",
+   "Moves with angular momentum nh/2π",
+   "Jumps between two stationary orbits"
+  ],
+  "answer": 3,
+  "explain": "Bohr's third postulate: energy hν is exchanged only when the electron changes orbit, and ΔE = hν.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8d36c581-ac5b-47db-8d96-1a6057c643bc",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Speed of the electron in the nth Bohr orbit varies with Z and n as?",
+  "formula": "vₙ ∝ Z/n",
+  "options": [
+   "Z/n²",
+   "Z/n",
+   "Z²/n²",
+   "n/Z"
+  ],
+  "answer": 1,
+  "explain": "vₙ = 2.18×10⁶ × Z/n m/s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b30a4fc-e473-4aa0-a3a8-a81d467a46d2",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Bohr's model can be applied to which of these species?",
+  "formula": "",
+  "options": [
+   "H₂",
+   "Li⁺",
+   "Li²⁺",
+   "He"
+  ],
+  "answer": 2,
+  "explain": "Bohr's model applies only to one-electron species: H, He⁺, Li²⁺, etc.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "103eeb3c-767d-4b45-bc5f-274da052d926",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Maximum number of different emission lines when an electron falls from n = 5 to lower levels?",
+  "formula": "N = n(n−1)/2",
+  "options": [
+   "15",
+   "5",
+   "10",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "5×4/2 = 10 lines.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ef251478-8c0a-4fec-b202-bd051cc2b2b1",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "As n increases, the energy gap between successive Bohr levels of hydrogen?",
+  "formula": "",
+  "options": [
+   "Stays constant",
+   "Decreases",
+   "Increases",
+   "Increases then decreases"
+  ],
+  "answer": 1,
+  "explain": "Levels converge as n increases: ΔE ∝ 1/n³ for large n.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8973ac05-35eb-417c-a991-19f4808f9406",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "Energy absorbed by a ground-state hydrogen atom to reach n = 2 (first excitation energy) is?",
+  "formula": "ΔE = 13.6(1 − 1/4)",
+  "options": [
+   "3.4 eV",
+   "13.6 eV",
+   "12.1 eV",
+   "10.2 eV"
+  ],
+  "answer": 3,
+  "explain": "E₂ − E₁ = −3.4 − (−13.6) = 10.2 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7b86879e-57a7-49d3-97ff-99033e3007ac",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr's model gives ground-state angular momentum of hydrogen as h/2π; the actual value (quantum mechanics) is:",
+  "formula": "L = √(l(l+1)) ħ",
+  "options": [
+   "h/2π",
+   "Zero",
+   "√2 h/2π",
+   "h/π"
+  ],
+  "answer": 1,
+  "explain": "Ground state is 1s with l = 0, so L = 0; Bohr's value of h/2π is wrong.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2aab46a-008d-408d-9728-6ba0562e24c5",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr's model could not account for which of these features of atoms?",
+  "formula": "",
+  "options": [
+   "Energy of H-atom ground state",
+   "Radius of first Bohr orbit",
+   "Wavelength of Balmer lines of H",
+   "Ability of atoms to form molecules (bonding)"
+  ],
+  "answer": 3,
+  "explain": "Bohr's model cannot explain chemical bonding or molecular 3-D shapes; the others it explains for H.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8e005162-4f8e-4ce6-aaeb-ac37630bf897",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "A proton and an α-particle move with the same velocity. Ratio λ(proton) : λ(α)?",
+  "formula": "λ ∝ 1/m (same v)",
+  "options": [
+   "4 : 1",
+   "2 : 1",
+   "1 : 2",
+   "1 : 4"
+  ],
+  "answer": 0,
+  "explain": "Same v gives λ ∝ 1/m; mα = 4mₚ, so λₚ : λα = 4 : 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ceb29717-878f-46db-b4d5-4c45ad409f53",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "A proton and an α-particle have the same kinetic energy. Ratio λ(proton) : λ(α)?",
+  "formula": "λ ∝ 1/√m (same K)",
+  "options": [
+   "2 : 1",
+   "4 : 1",
+   "1 : 4",
+   "1 : 2"
+  ],
+  "answer": 0,
+  "explain": "λ ∝ 1/√m and mα/mₚ = 4, so λₚ/λα = √4 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84222529-1028-4afe-9e03-52d2b3b7f04c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "A proton and an α-particle are accelerated through the same potential. λ(proton) : λ(α)?",
+  "formula": "λ = h/√(2mqV)",
+  "options": [
+   "4 : 1",
+   "2√2 : 1",
+   "2 : 1",
+   "1 : 2√2"
+  ],
+  "answer": 1,
+  "explain": "λ ∝ 1/√(mq); mq is 4×2 = 8 times larger for α, so λₚ/λα = √8 = 2√2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b89aaf7a-d8c2-4cd8-918b-4b7377db8711",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "If the kinetic energy of a particle is made four times, its de Broglie wavelength becomes:",
+  "formula": "λ ∝ 1/√K",
+  "options": [
+   "One-fourth",
+   "Double",
+   "Half",
+   "Four times"
+  ],
+  "answer": 2,
+  "explain": "λ ∝ 1/√K, so 4K gives λ/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50f03732-5a1c-47bc-b0b6-e0a735e9ef32",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "Which statement about matter waves is correct?",
+  "formula": "",
+  "options": [
+   "Every moving particle has them",
+   "They are electromagnetic waves",
+   "Only charged particles have them",
+   "They travel at speed c always"
+  ],
+  "answer": 0,
+  "explain": "Matter waves are not electromagnetic. Any moving particle, charged or neutral, has one.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5258712-f49c-495e-ad5d-3cb5f8b81979",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "de Broglie wavelength of a particle at rest is:",
+  "formula": "λ = h/mv",
+  "options": [
+   "Equal to its Compton wavelength",
+   "Zero",
+   "Infinite",
+   "h/m"
+  ],
+  "answer": 2,
+  "explain": "v = 0 gives λ = h/mv → ∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d2297be1-5814-4e87-9841-8a1d636b0cb2",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "Why is the wave nature of a moving cricket ball not observed?",
+  "formula": "",
+  "options": [
+   "It is uncharged",
+   "Its λ is extremely large",
+   "It has no momentum",
+   "Its λ is extremely small"
+  ],
+  "answer": 3,
+  "explain": "Large mass makes h/mv far smaller than any measurable length.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d9d2da6a-b3bb-423b-8c9d-6597d7780b45",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "An electron microscope has high resolving power because the electrons used have:",
+  "formula": "",
+  "options": [
+   "Very short de Broglie wavelength",
+   "Low frequency",
+   "High charge",
+   "High mass"
+  ],
+  "answer": 0,
+  "explain": "Resolution improves as wavelength decreases. Fast electrons have λ of about 0.1 Å or less.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75e13c2c-037b-4717-a74b-81420d938992",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "Who proposed in 1924 that matter has wave character?",
+  "formula": "",
+  "options": [
+   "Louis de Broglie",
+   "Max Born",
+   "Schrödinger",
+   "Heisenberg"
+  ],
+  "answer": 0,
+  "explain": "Louis de Broglie extended the wave-particle duality of light to matter in 1924.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46eb12e5-762d-44af-b4cc-51853b85e54c",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "Energy–time form of Heisenberg's uncertainty principle is:",
+  "formula": "ΔE·Δt ≥ h/4π",
+  "options": [
+   "ΔE·Δt ≥ h/2π",
+   "ΔE·Δt ≥ h/4π",
+   "ΔE·Δt ≥ h/π",
+   "ΔE·Δt ≥ 4π/h"
+  ],
+  "answer": 1,
+  "explain": "Energy and time are a conjugate pair; their product of uncertainties is at least h/4π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "03d5822a-d366-4ed7-86bc-3b3000081978",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "Uncertainty principle in terms of velocity (mass m) gives Δx·Δv ≥ ?",
+  "formula": "Δx·Δv ≥ h/(4πm)",
+  "options": [
+   "h/(4πm)",
+   "h/(4π m²)",
+   "hm/4π",
+   "4πm/h"
+  ],
+  "answer": 0,
+  "explain": "Put Δp = mΔv in Δx·Δp ≥ h/4π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a92e3a61-cf84-4bab-82dd-b91ccb688c84",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "Why is the uncertainty principle not noticed for a moving cricket ball?",
+  "formula": "",
+  "options": [
+   "It carries no momentum",
+   "It has no wave nature at all",
+   "Its mass is large, so uncertainty is negligible",
+   "It moves slower than light"
+  ],
+  "answer": 2,
+  "explain": "Δx·Δv ≥ h/4πm; for large m the lower limit is immeasurably small.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "220ca65d-4649-4a29-b7f6-ffd48e4a9a30",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "The uncertainty principle is significant mainly for:",
+  "formula": "",
+  "options": [
+   "Microscopic particles like electrons",
+   "Only photons",
+   "Macroscopic bodies only",
+   "Only neutral atoms"
+  ],
+  "answer": 0,
+  "explain": "h is tiny, so the effect matters only for very small mass particles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b51ce563-c9ba-4a54-a375-3cc2e9f8ba20",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "If Δx of a particle is made zero, the minimum Δp becomes:",
+  "formula": "",
+  "options": [
+   "h/2π",
+   "Zero",
+   "Infinite",
+   "h/4π"
+  ],
+  "answer": 2,
+  "explain": "Δp ≥ h/(4πΔx) → ∞ as Δx → 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d35788c7-6b27-4c3e-970a-f323f7820796",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "Δx·Δp has the same dimensions as:",
+  "formula": "",
+  "options": [
+   "Angular momentum",
+   "Linear momentum",
+   "Energy",
+   "Force"
+  ],
+  "answer": 0,
+  "explain": "Dimensions of h: kg m² s⁻¹, same as angular momentum (also energy × time).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "70e46ceb-ff4c-4d4f-97cd-185538a500d6",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "Which pair can both be known exactly at the same time, per Heisenberg's principle?",
+  "formula": "",
+  "options": [
+   "Δx and Δp_x of same axis",
+   "x-position and y-momentum",
+   "Energy and time interval",
+   "x-position and x-momentum"
+  ],
+  "answer": 1,
+  "explain": "Restriction applies only to conjugate pairs along the same axis; x and p_y are independent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "139ad644-2d25-4ef9-9361-eefe399a6d00",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "The uncertainty principle arises fundamentally from:",
+  "formula": "",
+  "options": [
+   "Hund's rule",
+   "Wave–particle duality of matter",
+   "Aufbau principle",
+   "Pauli exclusion principle"
+  ],
+  "answer": 1,
+  "explain": "Dual nature of matter makes simultaneous exact position and momentum meaningless.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d05e07a3-a73d-4933-adc2-63fdec6f860e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Heisenberg uncertainty principle",
+  "prompt": "The uncertainty principle leads to the replacement of orbits by:",
+  "formula": "",
+  "options": [
+   "Nodal planes only",
+   "Stationary circular shells",
+   "Fixed elliptical paths",
+   "Orbitals (probability regions)"
+  ],
+  "answer": 3,
+  "explain": "Only the probability of finding the electron can be described, giving the orbital concept.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "33939fc6-f2a8-47b2-9066-9e620b42fbf8",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum mechanical model, Schrödinger basics",
+  "prompt": "Number of radial nodes in a 3p orbital?",
+  "formula": "radial nodes = n − l − 1",
+  "options": [
+   "2",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "n − l − 1 = 3 − 1 − 1 = 1 radial node.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3487f7a8-fc68-4f7e-8151-1584bec48b00",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum mechanical model, Schrödinger basics",
+  "prompt": "Which orbitals have non-zero ψ² at the nucleus?",
+  "formula": "",
+  "options": [
+   "All orbitals",
+   "Only p orbitals",
+   "Only s orbitals",
+   "s and p orbitals"
+  ],
+  "answer": 2,
+  "explain": "Only s orbitals have a finite electron density at the nucleus; p, d and f orbitals have a nodal point there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7e4eecae-7ee2-4bd3-ab2c-9209a85136e4",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum mechanical model, Schrödinger basics",
+  "prompt": "In the Schrödinger treatment, the quantum numbers n, l, m arise from:",
+  "formula": "Ĥψ = Eψ",
+  "options": [
+   "Pauli's exclusion principle",
+   "Boundary conditions on the solutions of ψ",
+   "The de Broglie relation",
+   "Postulates fixed arbitrarily, as in Bohr's model"
+  ],
+  "answer": 1,
+  "explain": "Acceptable solutions of Ĥψ = Eψ give n, l, m naturally. Bohr had to postulate quantisation.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c48a2ae8-b767-42da-9b40-762d92b35fcb",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum mechanical model, Schrödinger basics",
+  "prompt": "In a hydrogen atom, orbital energy depends on which quantum number(s)?",
+  "formula": "Eₙ = −13.6/n² eV",
+  "options": [
+   "l and m only",
+   "n and l",
+   "n only",
+   "n, l and m"
+  ],
+  "answer": 2,
+  "explain": "For a one-electron species, 2s and 2p (and likewise 3s, 3p, 3d) are degenerate. Energy depends only on n.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d6bff7c-2367-47d4-a3da-f4a9c3144b23",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum mechanical model, Schrödinger basics",
+  "prompt": "Which set of conditions must an acceptable wave function ψ satisfy?",
+  "formula": "",
+  "options": [
+   "Infinite at the nucleus",
+   "Always positive and discontinuous",
+   "Equal to ψ² everywhere",
+   "Single-valued, continuous and finite"
+  ],
+  "answer": 3,
+  "explain": "A well-behaved ψ must be single-valued, continuous and finite. Its square must also be normalisable.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3a7deed-cc21-41e5-8503-fea6ed68761b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Quantum mechanical model, Schrödinger basics",
+  "prompt": "For a hydrogenic orbital, the total number of nodes (radial + angular) equals:",
+  "formula": "radial = n − l − 1; angular = l",
+  "options": [
+   "n + l",
+   "n − l − 1",
+   "l + 1",
+   "n − 1"
+  ],
+  "answer": 3,
+  "explain": "Radial nodes n−l−1 plus angular nodes l gives n−1 total nodes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e536bca2-eb78-435b-b7e2-2916cb88333e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "Which quantity is plotted as 4πr²ψ² against r for an orbital?",
+  "formula": "",
+  "options": [
+   "Probability density at nucleus",
+   "Wave function amplitude",
+   "Radial probability distribution",
+   "Orbital angular momentum"
+  ],
+  "answer": 2,
+  "explain": "4πr²ψ² (radial probability function) gives probability of finding the electron in a thin shell at distance r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c70492c6-c94f-4053-b25e-1e7260a937d8",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "For a 1s orbital, ψ² at the nucleus (r = 0) is:",
+  "formula": "",
+  "options": [
+   "Maximum and non-zero",
+   "Equal to 4πr²ψ²",
+   "Infinite",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "s orbitals have non-zero ψ at nucleus; ψ² is maximum at r = 0 for 1s and decreases exponentially.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "86721b27-b1cf-4aa7-b888-e69164d2e476",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "ψ and ψ² vs r for 1s, 2s; radial nodes",
+  "prompt": "In 2s orbital, radial probability 4πr²ψ² vs r shows how many maxima?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Two",
+   "One",
+   "Three"
+  ],
+  "answer": 1,
+  "explain": "2s has (n − l) = 2 maxima, with a node between them; the outer peak is larger.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dc452527-4941-4bcd-ac38-dbbdb4540a78",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Lobes of the 3d_xy orbital are directed:",
+  "formula": "",
+  "options": [
+   "Along the z-axis",
+   "Along x and y axes",
+   "Between x and y axes",
+   "Only in the xy plane's centre"
+  ],
+  "answer": 2,
+  "explain": "d_xy, d_yz, d_zx lobes lie between the axes; d_x²−y² lobes lie along the axes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b52e253c-3ec0-4526-8178-c3e3744727d0",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Which d orbital has a ring-shaped (collar) region of density in the xy plane?",
+  "formula": "",
+  "options": [
+   "d_yz",
+   "d_xy",
+   "d_z²",
+   "d_x²−y²"
+  ],
+  "answer": 2,
+  "explain": "d_z² has two lobes along z plus a donut-shaped collar in the xy plane.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ed792863-0811-4906-870c-31d207581993",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "The nodal plane of the 2p_x orbital is:",
+  "formula": "",
+  "options": [
+   "xy plane",
+   "xz plane",
+   "x-axis only",
+   "yz plane"
+  ],
+  "answer": 3,
+  "explain": "p_x lobes lie along the x-axis, so the plane perpendicular to it (yz) is the nodal plane.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "808aec59-ff9b-4af1-aa9e-33ab6e4404ad",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "The angular nodal planes of d_x²−y² are:",
+  "formula": "",
+  "options": [
+   "Planes bisecting x and y axes",
+   "xz and yz planes",
+   "Only the xy plane",
+   "xy and xz planes"
+  ],
+  "answer": 0,
+  "explain": "d_x²−y² ∝ (x²−y²) vanishes where x = ±y, i.e. planes bisecting the x and y axes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fcc1e86-529a-4e1f-9076-f844e8803d0f",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Total number of nodes in a 3s orbital:",
+  "formula": "Total nodes = n − 1",
+  "options": [
+   "2",
+   "3",
+   "0",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "3s: l=0, so 0 angular + (3−0−1)=2 radial nodes; total n−1 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b87afc2f-8b7e-4d58-a382-dbc83ec2105a",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Out of the five d orbitals, how many have four lobes of density?",
+  "formula": "",
+  "options": [
+   "Three",
+   "Two",
+   "Four",
+   "Five"
+  ],
+  "answer": 2,
+  "explain": "All except d_z² (two lobes + collar) are four-lobed (cloverleaf).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fecf1962-f4a9-40cd-8f24-fcca040a4468",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "The angular nodes of d_z² orbital are:",
+  "formula": "",
+  "options": [
+   "One spherical surface",
+   "Two conical surfaces",
+   "Two perpendicular planes",
+   "One plane and one cone"
+  ],
+  "answer": 1,
+  "explain": "d_z² has two nodal cones (surfaces) at about 54.7° to the z-axis, unlike the nodal planes of other d orbitals.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7ccd69b9-e74f-499e-9e7a-bc940ee7fd46",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Number of radial nodes in a 4d orbital:",
+  "formula": "n − l − 1",
+  "options": [
+   "0",
+   "3",
+   "2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "4d: n=4, l=2, radial nodes = 4−2−1 = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "051c3785-053f-4eda-8f73-2a6afb358144",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Shapes of s, p, d orbitals; angular nodes",
+  "prompt": "Shape of the p orbital and its angular-node count:",
+  "formula": "",
+  "options": [
+   "Dumbbell, 1 nodal plane",
+   "Double dumbbell, 1 nodal plane",
+   "Dumbbell, 2 nodal planes",
+   "Spherical, 1 node"
+  ],
+  "answer": 0,
+  "explain": "p (l=1) has dumbbell lobes separated by one nodal plane through the nucleus.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75c4a6e0-98a8-494c-989a-6e2e7055d6bb",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "Number of unpaired electrons in ground-state Fe²⁺ (Z = 26)?",
+  "formula": "",
+  "options": [
+   "5",
+   "2",
+   "6",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "Fe²⁺ is [Ar]3d⁶; by Hund's rule one d orbital is paired, leaving 4 unpaired.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47e3fbd1-22d8-496a-aad2-e043d0a52755",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "During ionisation of a transition element like Fe, electrons are removed first from?",
+  "formula": "",
+  "options": [
+   "Equally from 4s and 3d",
+   "3d",
+   "3p",
+   "4s"
+  ],
+  "answer": 3,
+  "explain": "After filling, 4s lies higher in energy than 3d, so 4s electrons are lost first.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f1cc499b-b3f4-4959-8b36-4055885b0e66",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Mo (Z = 42)?",
+  "formula": "",
+  "options": [
+   "[Kr]4d⁶",
+   "[Kr]4d⁴5s²",
+   "[Kr]4d⁵5s¹",
+   "[Kr]4d⁵5s²"
+  ],
+  "answer": 2,
+  "explain": "Like Cr, Mo shifts one 5s electron to give half-filled 4d⁵5s¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb251f6a-7448-4677-ae9c-8d0fad9cdb0b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Pd (Z = 46)?",
+  "formula": "",
+  "options": [
+   "[Kr]4d⁸5s²",
+   "[Kr]4d⁹5s¹",
+   "[Kr]4d¹⁰5s²",
+   "[Kr]4d¹⁰"
+  ],
+  "answer": 3,
+  "explain": "Pd is the exception with a fully filled 4d¹⁰ and no 5s electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f31e4443-60a7-405f-896f-9940b36b9783",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Cu⁺ (Z = 29)?",
+  "formula": "",
+  "options": [
+   "[Ar]3d¹⁰4s¹",
+   "[Ar]3d¹⁰",
+   "[Ar]3d⁸4s²",
+   "[Ar]3d⁹4s¹"
+  ],
+  "answer": 1,
+  "explain": "Cu loses its 4s¹ electron, leaving the stable, diamagnetic 3d¹⁰.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a21f430e-6581-45d3-b712-bdc877a7ae2b",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Ag (Z = 47)?",
+  "formula": "",
+  "options": [
+   "[Kr]4d¹⁰5s¹",
+   "[Kr]4d⁹5s²",
+   "[Kr]4d⁸5s²5p¹",
+   "[Kr]4d¹⁰5s²"
+  ],
+  "answer": 0,
+  "explain": "Ag is a Cu-type exception: fully filled 4d¹⁰ with one 5s electron.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ee71739-5530-433d-8094-0e5c6d67ea08",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Ni²⁺ (Z = 28)?",
+  "formula": "Cations: ns electrons leave first",
+  "options": [
+   "[Ar]3d⁷4s¹",
+   "[Ar]3d⁶4s²",
+   "[Ar]3d⁸",
+   "[Ar]3d⁹4s¹"
+  ],
+  "answer": 2,
+  "explain": "Ni is 3d⁸4s². The 4s electrons are removed first, giving 3d⁸.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9f8850b9-6705-4413-9cac-759a8ba389e5",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Extra stability of half-filled and fully filled subshells is mainly due to?",
+  "formula": "",
+  "options": [
+   "Lower principal quantum number",
+   "Greater exchange energy and symmetry",
+   "Pauli exclusion repulsion",
+   "Higher effective nuclear charge only"
+  ],
+  "answer": 1,
+  "explain": "Stability comes from more exchange energy (parallel-spin electrons) and symmetric distribution.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77e54367-693f-42f2-9ef4-6021da60bc64",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Number of possible exchanges between parallel-spin electrons in a d⁵ configuration?",
+  "formula": "⁵C₂",
+  "options": [
+   "15",
+   "6",
+   "10",
+   "5"
+  ],
+  "answer": 2,
+  "explain": "Five parallel-spin electrons give ⁵C₂ = 10 possible exchange pairs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6fed5e57-219c-4d6f-bdf9-65c3f1229d96",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state valence configuration of Au (Z = 79)?",
+  "formula": "",
+  "options": [
+   "4f¹⁴5d¹⁰6s²",
+   "4f¹⁴5d⁹6s²",
+   "4f¹⁴5d⁸6s²6p¹",
+   "4f¹⁴5d¹⁰6s¹"
+  ],
+  "answer": 3,
+  "explain": "Au is a Cu-group exception: 5d¹⁰6s¹ with a full 4f¹⁴ core.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b07c3a36-cabe-4215-986e-0dda17b5258d",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Gd (Z = 64)?",
+  "formula": "",
+  "options": [
+   "[Xe]4f⁷6s²6p¹",
+   "[Xe]4f⁷5d¹6s²",
+   "[Xe]4f⁸6s²",
+   "[Xe]4f⁶5d²6s²"
+  ],
+  "answer": 1,
+  "explain": "Gd keeps the half-filled 4f⁷ by placing one electron in 5d.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "13473160-f409-489a-8089-3719b27824f1",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Electronic configuration, half/full stability",
+  "prompt": "Ground state configuration of Nb (Z = 41)?",
+  "formula": "",
+  "options": [
+   "[Kr]4d⁴5s¹",
+   "[Kr]4d⁵",
+   "[Kr]4d³5s²",
+   "[Kr]4d²5s²5p¹"
+  ],
+  "answer": 0,
+  "explain": "Nb is an exception, with 4d⁴5s¹ instead of the expected 4d³5s².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ff8e448-08db-46a5-b666-c91179810c52",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "Stopping potential V₀ is related to KEmax of photoelectrons by:",
+  "formula": "eV₀ = KEmax",
+  "options": [
+   "V₀ = KEmax·e",
+   "V₀ = KEmax/φ",
+   "eV₀ = KEmax",
+   "eV₀ = ½ KEmax"
+  ],
+  "answer": 2,
+  "explain": "Retarding potential V₀ just stops the fastest electrons, so work done eV₀ equals KEmax.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ea9a201-fbcc-4baa-b223-76336b9d3e66",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "The value of hc in convenient units for photoelectric problems is about:",
+  "formula": "hc ≈ 1240 eV·nm",
+  "options": [
+   "124 eV·nm",
+   "12400 eV·nm",
+   "1240 eV·nm",
+   "6.63 eV·nm"
+  ],
+  "answer": 2,
+  "explain": "hc = 6.626×10⁻³⁴ × 3×10⁸ J·m ≈ 1240 eV·nm, so E(eV) = 1240/λ(nm).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1afe05ff-caa9-4677-93e3-ebc01147747e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "In Bohr orbits of hydrogen, electron speed v varies with orbit radius r as",
+  "formula": "v ∝ 1/n, r ∝ n²",
+  "options": [
+   "v ∝ 1/r",
+   "v ∝ r",
+   "v ∝ r²",
+   "v ∝ r⁻¹ᐟ²"
+  ],
+  "answer": 3,
+  "explain": "v ∝ 1/n and r ∝ n², so n ∝ √r and v ∝ r⁻¹ᐟ².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "78f1e0b7-62aa-4373-96ae-47776315d367",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "In a Bohr orbit, the potential energy of the electron equals how many times its total energy?",
+  "formula": "E = −K, U = 2E",
+  "options": [
+   "Four times",
+   "Half",
+   "Twice",
+   "Equal to"
+  ],
+  "answer": 2,
+  "explain": "For a Coulomb orbit, K = −E and U = −2K = 2E.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3fcf5391-330a-48f7-8f73-524fae606943",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Photoelectric effect: work function, KEmax",
+  "prompt": "In Einstein's explanation, one photon transfers its energy to how many electrons?",
+  "formula": "",
+  "options": [
+   "Two electrons",
+   "Exactly one electron",
+   "Any number, by intensity",
+   "All surface electrons"
+  ],
+  "answer": 1,
+  "explain": "One photon–one electron interaction: the photon's energy is absorbed entirely by a single electron.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f0fdd5b3-969b-4d9b-8be8-f3d04efc2f87",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Wavelength of the Paschen series limit of hydrogen is closest to:",
+  "formula": "λ(limit) = 9/R",
+  "options": [
+   "1458 nm",
+   "365 nm",
+   "1875 nm",
+   "820 nm"
+  ],
+  "answer": 3,
+  "explain": "λ = 9/R = 9 × 91.2 nm ≈ 820 nm, in the infrared.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "00e66ad3-7374-45f5-9263-6e8d7a506216",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Photon energy at the Paschen series limit of hydrogen (n=∞ → 3) is about:",
+  "formula": "E = 13.6/3² eV",
+  "options": [
+   "0.54 eV",
+   "3.4 eV",
+   "1.51 eV",
+   "0.85 eV"
+  ],
+  "answer": 2,
+  "explain": "The limit equals the binding energy of n=3: 13.6/9 ≈ 1.51 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "21fff8f2-a5f0-428c-914c-e9c74ba3ff29",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Many H atoms are excited to n = 7. How many Paschen lines can they emit?",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "4",
+   "5"
+  ],
+  "answer": 2,
+  "explain": "Paschen lines end at n=3: 7→3, 6→3, 5→3, 4→3, which gives 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "705669b4-4403-484e-9035-3c4b8c812246",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Spectral lines count n(n-1)/2, series limits",
+  "prompt": "Series limit wavenumber of the He⁺ series ending at n = 2 is:",
+  "formula": "ν̄ = Z²R/n₁²",
+  "options": [
+   "R",
+   "R/4",
+   "4R",
+   "2R"
+  ],
+  "answer": 0,
+  "explain": "ν̄ = Z²R/n² = 4R/4 = R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69babfdd-8f6b-4917-8cef-cb86e6c7c1d5",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr model: postulates, radius, velocity",
+  "prompt": "If Planck's constant h were doubled, the radius of each Bohr orbit would become how many times?",
+  "formula": "r = n²h²/(4π²mke²) ∝ h²",
+  "options": [
+   "4 times",
+   "1/4 times",
+   "2 times",
+   "1/2 times"
+  ],
+  "answer": 0,
+  "explain": "Bohr radius r ∝ h², so doubling h makes r four times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c345b23a-c5eb-4626-aff7-6347ce7d0761",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Bohr energy levels, ionisation energy (H-like)",
+  "prompt": "In a Bohr orbit, the kinetic energy of the electron equals which quantity?",
+  "formula": "KE = −E, PE = 2E",
+  "options": [
+   "+E (the total energy)",
+   "−E (negative of total energy)",
+   "−2E",
+   "E/2"
+  ],
+  "answer": 1,
+  "explain": "By the virial relation KE = −E (total energy is negative), so KE has the same magnitude as E.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b51a5bc-70e0-44f6-9bdb-1ed84c138707",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr's model treats the electron only as a particle. Which property of the electron does it ignore?",
+  "formula": "",
+  "options": [
+   "Mass",
+   "Circular motion",
+   "Negative charge",
+   "Wave nature"
+  ],
+  "answer": 3,
+  "explain": "Bohr's model ignores the dual (wave) nature of the electron, which de Broglie proposed later.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8f992144-16ae-4550-952c-2f80a8b4ae3d",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Bohr's non-radiating stationary orbits contradict which classical theory?",
+  "formula": "",
+  "options": [
+   "Dalton's atomic theory",
+   "Newton's law of gravitation",
+   "Maxwell's electromagnetic theory",
+   "Planck's quantum theory"
+  ],
+  "answer": 2,
+  "explain": "By Maxwell, an accelerated charge must radiate energy, so a revolving electron should spiral into the nucleus.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55f81f97-53c7-48e3-b8b5-2428549bcb68",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Limitations of Bohr model",
+  "prompt": "Which feature of hydrogen spectral lines can Bohr's model NOT explain?",
+  "formula": "",
+  "options": [
+   "Their wavelengths in the Balmer series",
+   "Existence of discrete lines",
+   "Lyman series limit",
+   "Their relative intensities"
+  ],
+  "answer": 3,
+  "explain": "Bohr's model gives line positions but cannot predict why some lines are brighter than others.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "287ab037-f039-4a6a-bdff-14f366651564",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "In the Davisson–Germer experiment, electrons were scattered from which target?",
+  "formula": "",
+  "options": [
+   "Nickel single crystal",
+   "Copper wire",
+   "Thin gold foil",
+   "Platinum plate"
+  ],
+  "answer": 0,
+  "explain": "Davisson and Germer diffracted electrons from a nickel single crystal; Thomson used thin foil.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92199cd2-84ec-441d-8f64-b523a133376e",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "Matter waves associated with a moving electron are:",
+  "formula": "",
+  "options": [
+   "Longitudinal sound waves",
+   "Not electromagnetic waves",
+   "Electromagnetic waves",
+   "Emitted only by accelerated charges"
+  ],
+  "answer": 1,
+  "explain": "Matter waves are associated with any moving particle, charged or neutral, and are not EM waves.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f5dffee4-8819-4aff-b102-df3329c04b80",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "The de Broglie wavelength of the electron in the nth Bohr orbit of H varies as:",
+  "formula": "λ = 2πr/n",
+  "options": [
+   "1/n",
+   "n",
+   "1/n²",
+   "n²"
+  ],
+  "answer": 1,
+  "explain": "v ∝ 1/n, so λ = h/mv ∝ n. Equivalently 2πr = nλ with r ∝ n².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dc96e56c-dea9-471e-b0ce-333242e7c32f",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "de Broglie wavelength, dual nature of matter",
+  "prompt": "de Broglie obtained λ = h/mc for a photon by combining which relations?",
+  "formula": "",
+  "options": [
+   "E = ½mv² and E = hν",
+   "Δx·Δp ≥ h/4π and E = mc²",
+   "L = nh/2π and E = hν",
+   "E = mc² and E = hν"
+  ],
+  "answer": 3,
+  "explain": "Equating mc² = hν = hc/λ gives λ = h/mc, extended to λ = h/mv for particles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8e9cde1b-3b5f-4047-a83d-fc258c201bc9",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "As per the Aufbau principle, which subshell is filled immediately after 5p?",
+  "formula": "",
+  "options": [
+   "4f",
+   "5d",
+   "6s",
+   "4d"
+  ],
+  "answer": 2,
+  "explain": "5p has n+l = 6; 6s also has n+l = 6 but higher n, so it follows. 4f (7) and 5d (7) come later.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ec3133a4-2aad-4b46-8a92-bb550a6e0212",
+  "subject": "Chemistry",
+  "chapter": "Atomic Structure",
+  "topic": "Aufbau, Pauli exclusion, Hund's rule",
+  "prompt": "Maximum number of unpaired electrons possible in a set of 4f orbitals, per Hund's rule?",
+  "formula": "",
+  "options": [
+   "6",
+   "7",
+   "14",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "f subshell has 7 degenerate orbitals; each is singly occupied with parallel spin first, giving 7 unpaired electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

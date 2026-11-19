@@ -1,0 +1,3198 @@
+[
+ {
+  "prompt": "A frame moving with constant velocity relative to an inertial frame is:",
+  "formula": "",
+  "options": [
+   "Also an inertial frame",
+   "A non-inertial frame",
+   "Inertial only if the speed is small",
+   "Inertial only if it is at rest"
+  ],
+  "answer": 0,
+  "explain": "Frames with constant relative velocity (no acceleration) are all inertial; Newton's laws hold in each.",
+  "kind": "concept",
+  "id": "dbc07ec2-4a26-4de3-8db4-11245b56a344",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Frame of reference, position & displacement"
+ },
+ {
+  "prompt": "Pseudo (fictitious) force has to be introduced when working in a frame that is:",
+  "formula": "",
+  "options": [
+   "Moving with constant velocity",
+   "At rest relative to the ground",
+   "Accelerated relative to an inertial frame",
+   "Any frame fixed in space"
+  ],
+  "answer": 2,
+  "explain": "Pseudo force appears only in non-inertial (accelerated or rotating) frames.",
+  "kind": "concept",
+  "id": "883ac5e4-70d5-4716-90f2-3267111838a4",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Frame of reference, position & displacement"
+ },
+ {
+  "prompt": "On shifting the origin of the coordinate system, which quantity remains unchanged?",
+  "formula": "",
+  "options": [
+   "Position vector of the particle",
+   "Displacement of the particle",
+   "x-coordinate of the particle",
+   "Initial position of the particle"
+  ],
+  "answer": 1,
+  "explain": "Positions change with the origin, but Δr = r₂ − r₁ is the same since both shift equally.",
+  "kind": "concept",
+  "id": "65e77ba2-9ca3-4f40-80fd-d26401a3da70",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Frame of reference, position & displacement"
+ },
+ {
+  "prompt": "A particle goes along a semicircle of radius R. Displacement : distance =",
+  "formula": "",
+  "options": [
+   "1 : π",
+   "2 : π",
+   "π : 2",
+   "π : 1"
+  ],
+  "answer": 1,
+  "explain": "Displacement = diameter = 2R; distance = πR; ratio 2 : π.",
+  "kind": "result",
+  "id": "0336aba0-7fe4-4f14-89d2-ecf4d240e714",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Frame of reference, position & displacement"
+ },
+ {
+  "prompt": "Displacement of a particle between two instants depends on:",
+  "formula": "Δr = r_f − r_i",
+  "options": [
+   "Only the initial and final positions",
+   "The actual path followed",
+   "The time taken for the motion",
+   "The speed along the path"
+  ],
+  "answer": 0,
+  "explain": "Displacement is path-independent; it is the vector from initial to final position.",
+  "kind": "concept",
+  "id": "a0d36c57-88d3-4835-95fc-ee1ba13817bb",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Frame of reference, position & displacement"
+ },
+ {
+  "prompt": "A particle moves from A to B and back to A along the same path. What is its average velocity over the whole trip?",
+  "formula": "v_avg = total displacement / total time",
+  "options": [
+   "Zero",
+   "Equal to average speed",
+   "Twice the average speed",
+   "Half the average speed"
+  ],
+  "answer": 0,
+  "explain": "Net displacement is zero for a round trip, so average velocity is zero, while average speed is non-zero.",
+  "kind": "concept",
+  "id": "9730c5aa-1caa-4362-8c76-4f9b3db64029",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Frame of reference, position & displacement"
+ },
+ {
+  "prompt": "Instantaneous velocity of a particle is defined as:",
+  "formula": "v = lim(Δt→0) Δx/Δt",
+  "options": [
+   "Total displacement / total time",
+   "lim(Δt→0) Δx/Δt = dx/dt",
+   "Total distance / total time",
+   "(u + v)/2 always"
+  ],
+  "answer": 1,
+  "explain": "Instantaneous velocity is the limit of average velocity as Δt→0, i.e. the derivative dx/dt.",
+  "kind": "formula",
+  "id": "5609edc5-a55a-4729-9d46-3addd582f587",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "On an x–t graph, the slope of the chord joining two points gives:",
+  "formula": "",
+  "options": [
+   "Instantaneous velocity at the midpoint",
+   "Average velocity between the points",
+   "Average speed between the points",
+   "Acceleration between the points"
+  ],
+  "answer": 1,
+  "explain": "The chord slope is Δx/Δt, the average velocity. The tangent slope is the instantaneous velocity.",
+  "kind": "graph",
+  "id": "92a7e7a8-0db6-4b80-9506-ddf73adbed4c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "The slope of a distance–time graph of a moving particle can never be:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Constant",
+   "Negative",
+   "Positive"
+  ],
+  "answer": 2,
+  "explain": "Distance never decreases, so the slope (speed) is ≥ 0. Zero slope means rest.",
+  "kind": "graph",
+  "id": "aa374db0-4434-4ac6-8b51-d712b2cb899c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "Average speed equals the magnitude of average velocity only when motion is:",
+  "formula": "",
+  "options": [
+   "Along a straight line without reversal",
+   "Along any straight line",
+   "In a circle at constant speed",
+   "Under constant acceleration"
+  ],
+  "answer": 0,
+  "explain": "Distance equals the displacement magnitude only if there is no change of direction along a line.",
+  "kind": "concept",
+  "id": "10aba428-4cc6-4027-8e90-b7ba35cb6711",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "Speed v on a circle. Magnitude of average velocity in half a revolution is:",
+  "formula": "",
+  "options": [
+   "v/π",
+   "πv/2",
+   "2v/π",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Displacement 2R, time πR/v, so the average velocity magnitude is 2v/π.",
+  "kind": "result",
+  "id": "05301b14-b709-4590-9c4f-cbb4b991b87f",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "The relation v_avg = (u + v)/2 is valid only when:",
+  "formula": "",
+  "options": [
+   "Speed is constant in a circle",
+   "Acceleration is constant",
+   "Motion is in any straight line",
+   "Velocity changes direction"
+  ],
+  "answer": 1,
+  "explain": "The simple mean of initial and final velocity gives the average velocity only for uniform (constant) acceleration.",
+  "kind": "concept",
+  "id": "bd117067-d910-42e4-84d0-f4b00ed06bef",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "If x = A + Bt + Ct², the velocity of the particle at t = 0 is:",
+  "formula": "",
+  "options": [
+   "A",
+   "B",
+   "A + B",
+   "2C"
+  ],
+  "answer": 1,
+  "explain": "v = dx/dt = B + 2Ct, so v(0) = B.",
+  "kind": "result",
+  "id": "ff671a57-4c99-4bc1-900b-aad969f54f84",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "Instantaneous speed compared with the magnitude of instantaneous velocity is:",
+  "formula": "",
+  "options": [
+   "Always equal",
+   "Greater in curved paths",
+   "Equal only in straight-line motion",
+   "Smaller when direction changes"
+  ],
+  "answer": 0,
+  "explain": "Speed is |v| at every instant. Only average speed and average velocity can differ.",
+  "kind": "concept",
+  "id": "51d0b6f2-40f5-4e8c-b98a-1dbfcf3345a9",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "The instantaneous velocity of a particle on a curved path is directed:",
+  "formula": "",
+  "options": [
+   "Along the radius vector",
+   "Along the tangent to the path",
+   "Perpendicular to the path",
+   "Along the acceleration"
+  ],
+  "answer": 1,
+  "explain": "As Δt→0 the displacement lies along the tangent to the path.",
+  "kind": "fact",
+  "id": "c9d54aee-f2c0-44d9-bcd5-809d5c67f362",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "An x–t graph is a straight line parallel to the time axis. The particle is:",
+  "formula": "",
+  "options": [
+   "Moving with uniform velocity",
+   "Uniformly accelerated",
+   "At rest",
+   "Moving with decreasing speed"
+  ],
+  "answer": 2,
+  "explain": "Zero slope means dx/dt = 0, so the particle is at rest at a fixed position.",
+  "kind": "graph",
+  "id": "2b880c6b-3990-4fe1-9db6-319aafc9828c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "In 1-D motion, a negative velocity means the particle:",
+  "formula": "",
+  "options": [
+   "Is slowing down",
+   "Has negative speed",
+   "Has negative acceleration",
+   "Moves opposite to the chosen positive direction"
+  ],
+  "answer": 3,
+  "explain": "The sign of velocity only gives direction. Speed is always non-negative.",
+  "kind": "concept",
+  "id": "b363d63b-0183-4782-96b3-5bb68cf8f760",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "If x ∝ t², the instantaneous velocity of the particle is proportional to:",
+  "formula": "",
+  "options": [
+   "t",
+   "t²",
+   "t⁰ (constant)",
+   "1/t"
+  ],
+  "answer": 0,
+  "explain": "v = dx/dt ∝ 2t, so v ∝ t.",
+  "kind": "result",
+  "id": "a67c1c5b-7467-4c24-b54a-67e4773b7125",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "The area under a speed–time graph over an interval gives:",
+  "formula": "",
+  "options": [
+   "Displacement",
+   "Distance travelled",
+   "Average velocity",
+   "Acceleration"
+  ],
+  "answer": 1,
+  "explain": "Speed is non-negative, so the area is the total path length (distance). Area under a v–t graph is displacement.",
+  "kind": "fact",
+  "id": "51356d5b-c3f3-45a2-b1e2-037d7a39f3de",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "For motion along a line, the magnitude of average velocity over an interval is never greater than:",
+  "formula": "|v_avg| ≤ average speed",
+  "options": [
+   "Average speed",
+   "Maximum instantaneous velocity squared",
+   "Average acceleration",
+   "Final velocity always"
+  ],
+  "answer": 0,
+  "explain": "Displacement ≤ distance, so |v_avg| ≤ average speed, with equality for motion without reversal.",
+  "kind": "concept",
+  "id": "6e817558-da44-457d-86e6-34d6e5821696",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Speed, velocity: average and instantaneous"
+ },
+ {
+  "prompt": "A car covers half the distance at speed v₁ and the other half at v₂. Its average speed is:",
+  "formula": "v_avg = total distance / total time",
+  "options": [
+   "(v₁ + v₂)/2",
+   "√(v₁v₂)",
+   "2v₁v₂/(v₁ + v₂)",
+   "v₁v₂/(v₁ + v₂)"
+  ],
+  "answer": 2,
+  "explain": "Equal distances give the harmonic mean: 2v₁v₂/(v₁+v₂).",
+  "kind": "result",
+  "id": "d91028c2-7aa0-4a2e-acf6-3d0c6858022a",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A body moves with speed v₁ for half the time and v₂ for the other half. Average speed equals:",
+  "formula": "v_avg = (v₁ + v₂)/2",
+  "options": [
+   "Harmonic mean of v₁, v₂",
+   "Geometric mean of v₁, v₂",
+   "Arithmetic mean of v₁, v₂",
+   "v₁v₂/(v₁ + v₂)"
+  ],
+  "answer": 2,
+  "explain": "For equal time intervals, average speed is the arithmetic mean.",
+  "kind": "result",
+  "id": "7b7b0ff9-9486-480b-a649-2e06ce4f3c5e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A particle's x–t graph is a curve, not a straight line. The motion is:",
+  "formula": "",
+  "options": [
+   "Uniform, with constant velocity",
+   "Non-uniform, with changing velocity",
+   "At rest",
+   "Uniform, with zero acceleration"
+  ],
+  "answer": 1,
+  "explain": "The x–t slope is velocity. A changing slope means changing velocity.",
+  "kind": "graph",
+  "id": "c25c41a5-e1bb-4f8a-aff1-d5c8a21a1978",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A particle moves in a circle with constant speed. Its velocity is:",
+  "formula": "",
+  "options": [
+   "Constant, since speed is constant",
+   "Zero at every instant",
+   "Changing, since direction changes",
+   "Constant in direction only"
+  ],
+  "answer": 2,
+  "explain": "Velocity is a vector. Its direction changes, so the motion is non-uniform and accelerated.",
+  "kind": "concept",
+  "id": "593dd541-ce37-4f9e-84d8-8be9edd59f55",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A particle returns to its starting point after time T. Its average velocity is:",
+  "formula": "v_avg = Δx/Δt",
+  "options": [
+   "Zero",
+   "Total distance / T",
+   "Equal to its average speed",
+   "Equal to its final speed"
+  ],
+  "answer": 0,
+  "explain": "Net displacement is zero, so average velocity is zero. Average speed is not zero.",
+  "kind": "concept",
+  "id": "521578a4-f751-4f7c-99ee-cd7e139dd4e4",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "Net signed area under a v–t graph between t₁ and t₂ gives the:",
+  "formula": "Δx = ∫v dt",
+  "options": [
+   "Acceleration",
+   "Change in velocity",
+   "Displacement",
+   "Total distance always"
+  ],
+  "answer": 2,
+  "explain": "∫v dt is displacement. Area below the axis counts as negative.",
+  "kind": "graph",
+  "id": "95b27bb7-4472-4171-be31-5a91853c2fa2",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "Instantaneous velocity at time t from an x–t graph is the:",
+  "formula": "v = dx/dt",
+  "options": [
+   "Slope of the chord from t = 0",
+   "Slope of the tangent at t",
+   "Area under the graph up to t",
+   "Value of x divided by t"
+  ],
+  "answer": 1,
+  "explain": "v = dx/dt is the slope of the tangent to the x–t curve at that instant.",
+  "kind": "graph",
+  "id": "f0752d5b-2d0f-479a-b8b9-d9a1068a72d5",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "The magnitude of average velocity equals average speed only if the motion is:",
+  "formula": "",
+  "options": [
+   "Along a straight line without reversing",
+   "Along any straight line",
+   "In a circle",
+   "Uniformly accelerated"
+  ],
+  "answer": 0,
+  "explain": "Distance equals the magnitude of displacement only for straight-line motion without reversal.",
+  "kind": "concept",
+  "id": "f39fec1c-0d11-4d80-9e00-e1881af7bec1",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A ball thrown vertically up is at its highest point. Its velocity and acceleration are:",
+  "formula": "",
+  "options": [
+   "v = 0, a = 0",
+   "v = 0, a = g downward",
+   "v = max, a = g",
+   "v = 0, a = g upward"
+  ],
+  "answer": 1,
+  "explain": "At the top v = 0 but a = g downward, so the motion is non-uniform.",
+  "kind": "exception",
+  "id": "6ba260a3-e6ad-49c3-b87f-765ad8785807",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "Same braking deceleration; initial speed doubled. Stopping distance becomes",
+  "formula": "v² = u² − 2as",
+  "options": [
+   "Twice",
+   "Four times",
+   "Eight times",
+   "Half"
+  ],
+  "answer": 1,
+  "explain": "With v = 0, s = u²/2a, so s ∝ u². Doubling u gives 4s.",
+  "kind": "result",
+  "id": "162d0fd9-f348-4292-9ccb-b21e22c244e4",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Maximum height reached by a body projected vertically up with speed u (no air resistance)",
+  "formula": "",
+  "options": [
+   "u²/g",
+   "u²/2g",
+   "u/2g",
+   "2u²/g"
+  ],
+  "answer": 1,
+  "explain": "At the top v = 0, so 0 = u² − 2gH and H = u²/2g.",
+  "kind": "formula",
+  "id": "ca4f7773-d79d-4feb-ba06-33f085667a24",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Time of flight of a body thrown vertically up with speed u and returning to the same point",
+  "formula": "",
+  "options": [
+   "u/g",
+   "u/2g",
+   "2u/g",
+   "u²/g"
+  ],
+  "answer": 2,
+  "explain": "Ascent time u/g plus equal descent time gives 2u/g.",
+  "kind": "formula",
+  "id": "fbd505ca-e069-4271-b6ce-b4f6c2f06c7e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "For constant nonzero acceleration, the position–time graph is",
+  "formula": "",
+  "options": [
+   "A straight line",
+   "A parabola",
+   "A hyperbola",
+   "A circle"
+  ],
+  "answer": 1,
+  "explain": "x is quadratic in t, so the x–t graph is a parabola.",
+  "kind": "graph",
+  "id": "bc944af5-af34-4543-baca-6acb2000f611",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "A body decelerating uniformly to rest covers how much distance in its last second?",
+  "formula": "",
+  "options": [
+   "a",
+   "a/2",
+   "2a",
+   "a/4"
+  ],
+  "answer": 1,
+  "explain": "By reversing the motion, s = ½a(1)² = a/2.",
+  "kind": "result",
+  "id": "f6fe6d86-e224-427e-a14c-6a52c8e1df04",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Two bodies are freely falling under gravity. Their relative acceleration is",
+  "formula": "",
+  "options": [
+   "g",
+   "2g",
+   "Zero",
+   "g/2"
+  ],
+  "answer": 2,
+  "explain": "Both have acceleration g downward, so the relative acceleration is zero.",
+  "kind": "concept",
+  "id": "5c352aa2-18e1-490c-b05b-6526b49f2775",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "At the highest point of a vertical throw, the acceleration of the body is",
+  "formula": "",
+  "options": [
+   "Zero",
+   "g upward",
+   "g downward",
+   "Infinite"
+  ],
+  "answer": 2,
+  "explain": "Velocity is momentarily zero but gravity still gives g downward.",
+  "kind": "concept",
+  "id": "9c6769d5-f2c5-4938-bfaf-9f3c572c4032",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "A ball thrown up with speed u from a tower vs one thrown down with u: speeds on reaching the ground",
+  "formula": "",
+  "options": [
+   "Up-thrown is greater",
+   "Down-thrown is greater",
+   "Equal",
+   "Depends on mass"
+  ],
+  "answer": 2,
+  "explain": "The up-thrown ball returns to the tower top with speed u downward, so both hit with √(u² + 2gh).",
+  "kind": "concept",
+  "id": "fd1f7da2-99fc-439c-afba-80190bf1f2a6",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Launch speed of a vertical throw is doubled. Maximum height becomes",
+  "formula": "H = u²/2g",
+  "options": [
+   "2 times",
+   "3 times",
+   "4 times",
+   "8 times"
+  ],
+  "answer": 2,
+  "explain": "H ∝ u², so doubling u gives 4 times the height.",
+  "kind": "result",
+  "id": "358cb723-9554-469e-a6d5-6b8fe51fb4f5",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "In vertical motion without air resistance, time of ascent compared with time of descent (same levels) is",
+  "formula": "",
+  "options": [
+   "Greater",
+   "Smaller",
+   "Equal",
+   "Twice"
+  ],
+  "answer": 2,
+  "explain": "Motion is symmetric, so both times are u/g.",
+  "kind": "concept",
+  "id": "350fb23a-5527-4bf2-85ee-e0449f02e4e5",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "The equations v = u + at, s = ut + ½at² and v² = u² + 2as hold only if",
+  "formula": "",
+  "options": [
+   "Velocity is constant",
+   "Acceleration is constant",
+   "Motion is in a circle",
+   "Displacement is zero"
+  ],
+  "answer": 1,
+  "explain": "They are derived assuming constant acceleration along a straight line.",
+  "kind": "concept",
+  "id": "f648cb68-90a9-421c-a2a5-6db1ccb6a9ed",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Total distance travelled by a ball thrown up with speed u until it returns to the start",
+  "formula": "",
+  "options": [
+   "u²/2g",
+   "u²/g",
+   "2u²/g",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Distance is up + down = 2 × u²/2g = u²/g, while displacement is zero.",
+  "kind": "result",
+  "id": "4fd673dd-fdd2-4b03-9fd3-3c0a5ae15032",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Time to fall from rest through height 4h compared with time for height h",
+  "formula": "t = √(2h/g)",
+  "options": [
+   "Twice",
+   "Four times",
+   "√2 times",
+   "Same"
+  ],
+  "answer": 0,
+  "explain": "t ∝ √h, so quadrupling h doubles t.",
+  "kind": "result",
+  "id": "fed05c43-4362-4521-a71a-868cc524e6e0",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "In a velocity–time graph, the acceleration and displacement are given respectively by",
+  "formula": "",
+  "options": [
+   "Area; slope",
+   "Slope; area",
+   "Slope; slope",
+   "Area; area"
+  ],
+  "answer": 1,
+  "explain": "The slope of the v–t graph is a and the area under it is displacement.",
+  "kind": "graph",
+  "id": "8a37ad89-6395-4b67-8149-b54b8137141c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Uniform acceleration, speed u to v. Speed at the midpoint of the DISTANCE covered is",
+  "formula": "",
+  "options": [
+   "(u + v)/2",
+   "√(uv)",
+   "√((u² + v²)/2)",
+   "√(u² + v²)"
+  ],
+  "answer": 2,
+  "explain": "Using v² = u² + 2as over s/2 and s gives v_mid² = (u² + v²)/2.",
+  "kind": "result",
+  "id": "c9702a0f-6635-40ec-8b99-08a9be44030a",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "A ball thrown vertically up passes the same height going up and coming down. Its velocities there are",
+  "formula": "",
+  "options": [
+   "Equal in magnitude, opposite in direction",
+   "Equal in magnitude and direction",
+   "Larger while descending",
+   "Larger while ascending"
+  ],
+  "answer": 0,
+  "explain": "v² = u² − 2gh is the same at both passes, so the speeds are equal and the directions are opposite.",
+  "kind": "concept",
+  "id": "54b6943c-7ecb-423f-830e-036ed7339eda",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "In uniform acceleration a, displacements in successive equal intervals T differ by:",
+  "formula": "Δs = aT²",
+  "options": [
+   "aT",
+   "aT²",
+   "½aT²",
+   "2aT²"
+  ],
+  "answer": 1,
+  "explain": "s₂ − s₁ = aT² for any two consecutive equal time intervals T.",
+  "kind": "formula",
+  "id": "0edf9931-65b6-449d-97a2-e7ced1bdf580",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "From rest with uniform acceleration, times to cover 1st, 2nd, 3rd equal successive distances are in ratio:",
+  "formula": "s = ½at² ⇒ t ∝ √s",
+  "options": [
+   "1 : √2 : √3",
+   "1 : (√2−1) : (√3−√2)",
+   "1 : 3 : 5",
+   "1 : 4 : 9"
+  ],
+  "answer": 1,
+  "explain": "t ∝ √s, so the time for the nth equal segment is ∝ √n − √(n−1).",
+  "kind": "result",
+  "id": "a7dbbbb1-119f-48d9-a58d-726c16a2ebd4",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Total distance travelled from a v–t graph equals:",
+  "formula": "",
+  "options": [
+   "Net signed area under the graph",
+   "Slope of the graph",
+   "Sum of areas taken without sign",
+   "Area of the largest portion only"
+  ],
+  "answer": 2,
+  "explain": "Distance uses |v|, so areas below the axis are added as positive; net signed area gives displacement.",
+  "kind": "concept",
+  "id": "4851db80-2f0b-4b83-aaa8-359b6f648c55",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "An x–t graph is a horizontal line (parallel to t-axis). The particle is:",
+  "formula": "",
+  "options": [
+   "At rest",
+   "Moving with uniform velocity",
+   "Moving with uniform acceleration",
+   "Moving with zero speed only at t = 0"
+  ],
+  "answer": 0,
+  "explain": "Slope = 0, so v = 0 at all times; the position stays constant.",
+  "kind": "concept",
+  "id": "1dbea7ae-d03b-4d22-b124-6c09dfe2c65d",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "At the peak (maximum) of an x–t curve, the particle's:",
+  "formula": "",
+  "options": [
+   "Velocity is maximum",
+   "Acceleration is zero",
+   "Velocity is zero and it reverses direction",
+   "Speed is a minimum non-zero value"
+  ],
+  "answer": 2,
+  "explain": "Slope of x–t is zero at a turning point, so v = 0 and the sign of v changes.",
+  "kind": "concept",
+  "id": "7683d569-6a2a-4e34-9dd4-c6c19bb93a1c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Two particles' x–t graphs intersect at a point. This means they have the same:",
+  "formula": "",
+  "options": [
+   "Velocity at that instant",
+   "Position at that instant",
+   "Acceleration at that instant",
+   "Speed throughout"
+  ],
+  "answer": 1,
+  "explain": "Intersection means equal x at equal t, so the particles meet. Their velocities need not be equal.",
+  "kind": "concept",
+  "id": "432d125b-f07f-4438-99a8-d1f16ec14e02",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Average velocity between two instants on an x–t graph is the slope of:",
+  "formula": "v_avg = Δx/Δt",
+  "options": [
+   "The tangent at the midpoint",
+   "The chord joining the two points",
+   "The tangent at the later point",
+   "The line from the origin to the later point"
+  ],
+  "answer": 1,
+  "explain": "Δx/Δt is the slope of the chord. The tangent slope gives instantaneous velocity.",
+  "kind": "concept",
+  "id": "abd671dd-8902-46c9-927b-ce9443bd3d7a",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "A v–t graph cuts the time axis going from positive to negative. At that instant the particle:",
+  "formula": "",
+  "options": [
+   "Stops permanently",
+   "Has maximum acceleration",
+   "Is momentarily at rest and reverses direction",
+   "Has zero acceleration"
+  ],
+  "answer": 2,
+  "explain": "v changes sign through zero, so the direction of motion reverses at that instant.",
+  "kind": "concept",
+  "id": "0b3ea2d7-ca67-4376-bf8a-5473cca3c030",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "The part of a v–t graph lying below the time axis contributes what to displacement?",
+  "formula": "",
+  "options": [
+   "Positive displacement",
+   "Zero displacement",
+   "Displacement doubled",
+   "Negative displacement"
+  ],
+  "answer": 3,
+  "explain": "v < 0 means motion in the negative direction, so that area is negative.",
+  "kind": "concept",
+  "id": "60856f9b-7993-4c39-b624-39640efa9c34",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "A v–t graph is a horizontal straight line. The particle has:",
+  "formula": "",
+  "options": [
+   "Zero acceleration and constant velocity",
+   "Constant non-zero acceleration",
+   "Zero velocity throughout",
+   "Increasing speed"
+  ],
+  "answer": 0,
+  "explain": "Slope of v–t is zero, so a = 0 and v is constant (not necessarily zero).",
+  "kind": "concept",
+  "id": "223d7d79-0813-459f-aa98-377f76f316c2",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "A body speeds up uniformly from rest to v, then slows uniformly to rest, in total time T. Distance covered?",
+  "formula": "",
+  "options": [
+   "vT",
+   "vT/2",
+   "vT/4",
+   "2vT"
+  ],
+  "answer": 1,
+  "explain": "The v–t graph is a triangle with base T and height v, so area = ½vT.",
+  "kind": "result",
+  "id": "1ca2dd07-3d2f-42ab-908b-dccae6fd1279",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Why can an x–t graph never contain a vertical segment?",
+  "formula": "",
+  "options": [
+   "It would mean zero velocity",
+   "It would mean zero acceleration",
+   "It would mean constant velocity",
+   "The particle would be at two places at once"
+  ],
+  "answer": 3,
+  "explain": "A vertical segment means many positions at one instant, i.e. infinite velocity, which is physically impossible.",
+  "kind": "concept",
+  "id": "01fcfd5e-b7b2-410c-aa2c-9024abb31882",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "A ball is thrown vertically up (up positive). Its x–t graph up to return is:",
+  "formula": "",
+  "options": [
+   "Straight line with negative slope",
+   "Upward-opening parabola",
+   "Downward-opening parabola",
+   "Straight line through origin"
+  ],
+  "answer": 2,
+  "explain": "x = ut − ½gt² has a negative t² coefficient, so the parabola opens downward with its vertex at the top.",
+  "kind": "graph",
+  "id": "f38568ba-bd89-4f25-9d68-1864edfb188a",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "An x–t curve with a positive slope that keeps increasing (concave up) shows:",
+  "formula": "",
+  "options": [
+   "Positive acceleration",
+   "Negative acceleration",
+   "Zero acceleration",
+   "Constant speed"
+  ],
+  "answer": 0,
+  "explain": "Slope is v, so increasing slope means dv/dt > 0, i.e. positive acceleration (d²x/dt² > 0).",
+  "kind": "concept",
+  "id": "d003887c-b50e-4236-b2dd-068ff4392bc8",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Average acceleration over an interval on a v–t graph is the slope of:",
+  "formula": "a_avg = Δv/Δt",
+  "options": [
+   "The area under the graph",
+   "The tangent at the end point",
+   "The line from the origin",
+   "The chord joining the endpoints"
+  ],
+  "answer": 3,
+  "explain": "Δv/Δt is the chord slope; the tangent slope gives instantaneous acceleration.",
+  "kind": "concept",
+  "id": "5e000f71-9db2-4414-b970-7ef4a5c64f6f",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "An x–t graph is falling and getting steeper with time. The particle is:",
+  "formula": "",
+  "options": [
+   "Slowing down with positive acceleration",
+   "Moving with constant velocity",
+   "At rest",
+   "Speeding up with negative acceleration"
+  ],
+  "answer": 3,
+  "explain": "Velocity is negative and its magnitude grows, so v decreases and a is negative.",
+  "kind": "concept",
+  "id": "0e4d2bab-507f-411a-b876-d2aaa80e1a0e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "In a v–t graph, area above the axis equals area below it. The net displacement is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to the total distance",
+   "Twice the area above",
+   "Maximum"
+  ],
+  "answer": 0,
+  "explain": "The signed areas cancel, so displacement and average velocity are zero, but distance is not.",
+  "kind": "result",
+  "id": "40b4abf7-b139-4c17-92aa-896e8e8749c2",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "A v–t graph is curved upward (slope increasing with time). This indicates:",
+  "formula": "",
+  "options": [
+   "Constant acceleration",
+   "Decreasing acceleration",
+   "Zero acceleration",
+   "Increasing acceleration"
+  ],
+  "answer": 3,
+  "explain": "Slope of v–t is a, so a rising slope means a increases with time (non-uniform acceleration).",
+  "kind": "concept",
+  "id": "f19bd513-d97c-40e6-afd0-7788980852a8",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Of two straight lines on an x–t graph, the one making a larger angle with the t-axis shows:",
+  "formula": "",
+  "options": [
+   "Smaller speed",
+   "Greater speed",
+   "Greater acceleration",
+   "Smaller displacement at t = 0"
+  ],
+  "answer": 1,
+  "explain": "A steeper line means a larger |slope|, so greater speed. Both lines have zero acceleration.",
+  "kind": "concept",
+  "id": "f8fe4838-2a7f-489f-acda-617cd54c203b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Which of these physical quantities is a scalar even though it is shown with an arrow in circuits?",
+  "formula": "",
+  "options": [
+   "Electric current",
+   "Current density",
+   "Torque",
+   "Impulse"
+  ],
+  "answer": 0,
+  "explain": "Current adds algebraically, not by the vector law, so it is a scalar. Current density is a vector.",
+  "kind": "fact",
+  "id": "59da018c-c0bc-4c59-93c8-d5afe64d0cb5",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "A force F has components that sum to F. A unit vector Â = A/|A| has what dimensions?",
+  "formula": "Â = A/|A|",
+  "options": [
+   "Same as A",
+   "Dimensionless",
+   "Inverse of A",
+   "Length"
+  ],
+  "answer": 1,
+  "explain": "Â is the vector divided by its own magnitude, so it is dimensionless with magnitude 1.",
+  "kind": "unit",
+  "id": "8a68355b-dfd7-42b7-9d1c-1da80a582257",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Two vectors of equal magnitude A act at 120°. What is the magnitude of the resultant?",
+  "formula": "R² = P² + Q² + 2PQ cosθ",
+  "options": [
+   "A√3",
+   "2A",
+   "A",
+   "A/2"
+  ],
+  "answer": 2,
+  "explain": "R² = 2A² + 2A²cos120° = A², so R = A.",
+  "kind": "result",
+  "id": "416f96dd-e7ab-49f0-aa44-5a1c424336af",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Which magnitude can NOT be the resultant of a 3 N and a 5 N vector?",
+  "formula": "|P−Q| ≤ R ≤ P+Q",
+  "options": [
+   "2 N",
+   "5 N",
+   "8 N",
+   "1 N"
+  ],
+  "answer": 3,
+  "explain": "The resultant lies between 5−3 = 2 N and 5+3 = 8 N, so 1 N is impossible.",
+  "kind": "concept",
+  "id": "b9d0dad6-9039-4348-9564-27d1e352cd4b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Which set of three forces (in N) can keep a particle in equilibrium?",
+  "formula": "",
+  "options": [
+   "2, 3, 7",
+   "1, 2, 4",
+   "3, 4, 5",
+   "1, 1, 3"
+  ],
+  "answer": 2,
+  "explain": "For zero resultant, each force must lie between the difference and sum of the other two. Only 3, 4, 5 satisfies this.",
+  "kind": "concept",
+  "id": "c5283158-49cb-4f05-86c5-2c164560cd98",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "For a vector making angles α, β, γ with the x, y, z axes, what is cos²α + cos²β + cos²γ?",
+  "formula": "l² + m² + n² = 1",
+  "options": [
+   "0",
+   "3",
+   "1",
+   "1/3"
+  ],
+  "answer": 2,
+  "explain": "The direction cosines l, m, n of any vector satisfy l² + m² + n² = 1.",
+  "kind": "result",
+  "id": "a47487ad-8c4e-4cc1-a6b4-a2b485ce9de2",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Two equal vectors of magnitude A are inclined at 60°. What is the magnitude of their difference?",
+  "formula": "|A−B| = 2A sin(θ/2)",
+  "options": [
+   "A",
+   "A√3",
+   "2A",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "|A−B| = 2A sin30° = A.",
+  "kind": "result",
+  "id": "aff38e9b-e692-4028-97c3-71e5ca1bda17",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "If |A + B| = |A − B| for non-zero vectors, what is the angle between A and B?",
+  "formula": "",
+  "options": [
+   "0°",
+   "180°",
+   "45°",
+   "90°"
+  ],
+  "answer": 3,
+  "explain": "The condition requires AB cosθ = 0, so cosθ = 0 and θ = 90°.",
+  "kind": "concept",
+  "id": "b241bf2d-480d-45ef-9c95-dbb3874bbe89",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "What is the unit vector along 3î + 4ĵ?",
+  "formula": "Â = A/|A|",
+  "options": [
+   "(3î + 4ĵ)/7",
+   "(3î + 4ĵ)/5",
+   "(3î + 4ĵ)/25",
+   "(4î + 3ĵ)/5"
+  ],
+  "answer": 1,
+  "explain": "The magnitude is √(9+16) = 5, so divide the vector by 5.",
+  "kind": "result",
+  "id": "0a84755c-54f0-483e-8144-a69416e4a79b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "What is the direction of a null vector?",
+  "formula": "",
+  "options": [
+   "Along the x-axis",
+   "Arbitrary or indeterminate",
+   "Opposite to the previous vector",
+   "Along the z-axis"
+  ],
+  "answer": 1,
+  "explain": "A null vector has zero magnitude, so no definite direction can be assigned to it.",
+  "kind": "concept",
+  "id": "c50e41f8-c5bc-48ce-a959-fff4aec2e2d3",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Three vectors are represented by the three sides of a triangle taken in the same order. What is their sum?",
+  "formula": "",
+  "options": [
+   "Twice the largest vector",
+   "Zero vector",
+   "Equal to the smallest side",
+   "Equal to the largest side"
+  ],
+  "answer": 1,
+  "explain": "By the triangle law, sides taken in the same order form a closed polygon, so the sum is the null vector.",
+  "kind": "concept",
+  "id": "f7f6bb05-dfbc-4bd8-968f-c11eba542226",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Two equal-magnitude vectors are inclined at angle θ. At what angle does the resultant lie from either vector?",
+  "formula": "tanα = Q sinθ / (P + Q cosθ)",
+  "options": [
+   "θ",
+   "θ/2",
+   "2θ",
+   "90°"
+  ],
+  "answer": 1,
+  "explain": "For P = Q, tanα = sinθ/(1+cosθ) = tan(θ/2). The resultant bisects the angle.",
+  "kind": "result",
+  "id": "50eaacd0-e22c-4106-930a-b1ff1ee34887",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Which of these quantities is a vector?",
+  "formula": "",
+  "options": [
+   "Pressure",
+   "Surface tension",
+   "Electric current density",
+   "Electric flux"
+  ],
+  "answer": 2,
+  "explain": "Current density has a definite direction and obeys the vector law. The others are scalars.",
+  "kind": "fact",
+  "id": "2105f6c4-7427-45a8-b63d-f2d0e09210c7",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Why is a finite angular displacement NOT a vector?",
+  "formula": "",
+  "options": [
+   "It has no direction",
+   "It has no magnitude",
+   "It has no units",
+   "It does not add commutatively"
+  ],
+  "answer": 3,
+  "explain": "Finite rotations about different axes depend on order, so they fail commutative vector addition.",
+  "kind": "exception",
+  "id": "7cd85fbd-6ebf-426d-8a89-9af397d6d7ea",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "A vector of magnitude 5 has one perpendicular component of 3. What is the other component?",
+  "formula": "A² = Ax² + Ay²",
+  "options": [
+   "2",
+   "4",
+   "√34",
+   "8"
+  ],
+  "answer": 1,
+  "explain": "Ay = √(25 − 9) = 4.",
+  "kind": "result",
+  "id": "a7843526-fa4f-4d24-8f20-9fffe54efc5f",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "What does a vector A look like when multiplied by a negative scalar −k?",
+  "formula": "",
+  "options": [
+   "Magnitude k|A|, same direction",
+   "Magnitude |A|/k, opposite direction",
+   "Magnitude k|A|, opposite direction",
+   "Magnitude |A|, opposite direction"
+  ],
+  "answer": 2,
+  "explain": "A negative scalar scales the magnitude by k and reverses the direction.",
+  "kind": "concept",
+  "id": "bf1063ee-1158-410a-b501-56463c52f7c8",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "For perpendicular unit vectors, which result is correct?",
+  "formula": "î × ĵ = k̂",
+  "options": [
+   "ĵ × î = k̂",
+   "k̂ × î = ĵ",
+   "ĵ × k̂ = î",
+   "î × k̂ = ĵ"
+  ],
+  "answer": 2,
+  "explain": "Cyclic order î→ĵ→k̂→î gives +. ĵ×k̂ = î. The others are in the reverse order, so they are negative.",
+  "kind": "fact",
+  "id": "e80b0580-cf43-4c69-a7bf-1cabcddbc8be",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "For vectors A and B, the magnitude of the resultant is maximum when the angle between them is:",
+  "formula": "R² = A² + B² + 2AB cosθ",
+  "options": [
+   "0°",
+   "90°",
+   "180°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "R is maximum (A + B) when cosθ = 1, i.e. θ = 0°, for parallel vectors.",
+  "kind": "result",
+  "id": "f3ce0e41-2af8-4b70-adda-c9237b5581e9",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalars, vectors, unit vectors & resolution"
+ },
+ {
+  "prompt": "Which cannot be the magnitude of the resultant of a 4 N and a 7 N force?",
+  "formula": "|A−B| ≤ R ≤ A+B",
+  "options": [
+   "2 N",
+   "3 N",
+   "6 N",
+   "11 N"
+  ],
+  "answer": 0,
+  "explain": "R lies between 7−4 = 3 N and 7+4 = 11 N, so 2 N is impossible.",
+  "kind": "concept",
+  "id": "54d5f0ad-cafd-4d2b-89d6-50676765567d",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "If |A + B| = |A − B| for non-zero vectors, the angle between A and B is:",
+  "formula": "A·B = 0",
+  "options": [
+   "0°",
+   "45°",
+   "90°",
+   "180°"
+  ],
+  "answer": 2,
+  "explain": "Equating the squares gives 4A·B = 0, so the vectors are perpendicular.",
+  "kind": "result",
+  "id": "5462467e-fe01-49d3-a830-c464a88d0301",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "For the sum of two equal-magnitude vectors, the resultant's direction is:",
+  "formula": "R = 2A cos(θ/2)",
+  "options": [
+   "Along the bisector of the angle",
+   "Perpendicular to either vector",
+   "Along the first vector",
+   "Along the difference vector"
+  ],
+  "answer": 0,
+  "explain": "The parallelogram is a rhombus, so its diagonal bisects the angle between the sides.",
+  "kind": "concept",
+  "id": "badfc9f0-cce5-422c-b822-1c5387018f73",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "Electric current has magnitude and direction but is a scalar because it:",
+  "formula": "",
+  "options": [
+   "Has no unit vector",
+   "Is measured in ampere",
+   "Depends on the area",
+   "Does not obey vector addition laws"
+  ],
+  "answer": 3,
+  "explain": "Currents add algebraically at a junction, not by the triangle or parallelogram law.",
+  "kind": "fact",
+  "id": "9d865419-3434-400e-8663-9599a3883299",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "Finite rotations are not vectors mainly because they fail:",
+  "formula": "",
+  "options": [
+   "Commutativity of addition",
+   "Having a magnitude",
+   "Having a direction",
+   "Being measured in radian"
+  ],
+  "answer": 0,
+  "explain": "Finite rotations about different axes give different results when the order is changed.",
+  "kind": "fact",
+  "id": "4c65d4ac-c4ca-4e33-a828-31328a09b7ee",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "If |A + B|² = |A|² + |B|², the angle between A and B is:",
+  "formula": "R² = A² + B² + 2AB cosθ",
+  "options": [
+   "0°",
+   "90°",
+   "120°",
+   "180°"
+  ],
+  "answer": 1,
+  "explain": "The extra term 2AB cosθ must vanish, so cosθ = 0.",
+  "kind": "result",
+  "id": "703a19bf-3e44-4890-841c-72818ef7b6e1",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "Vectors A, B, C are represented by the three sides of a triangle taken in order. A + B + C equals:",
+  "formula": "",
+  "options": [
+   "2A",
+   "The largest side",
+   "Null vector",
+   "Twice the smallest side"
+  ],
+  "answer": 2,
+  "explain": "By the triangle law, the vector sum of sides taken in order around a closed figure is zero.",
+  "kind": "concept",
+  "id": "5b202171-1786-4066-9a20-06e27c7068bf",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "For two vectors of equal magnitude A at angle θ, |A₁ − A₂| equals:",
+  "formula": "",
+  "options": [
+   "2A sin(θ/2)",
+   "2A cos(θ/2)",
+   "A sinθ",
+   "2A sinθ"
+  ],
+  "answer": 0,
+  "explain": "√(2A² − 2A² cosθ) = 2A sin(θ/2). At 60° the difference equals A.",
+  "kind": "formula",
+  "id": "c9aa8c45-b58e-4949-ae53-c9e095545c94",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "Minimum number of coplanar vectors of unequal magnitudes that can give a zero resultant:",
+  "formula": "",
+  "options": [
+   "3",
+   "2",
+   "4",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "Two unequal vectors cannot cancel. Three can, if they can form a triangle.",
+  "kind": "concept",
+  "id": "ecf2f003-9349-48e3-b0fe-a12e07685723",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "|A + B| = |A| + |B| holds only when A and B are:",
+  "formula": "",
+  "options": [
+   "Parallel, same direction",
+   "Antiparallel",
+   "Perpendicular",
+   "Equal in magnitude at any angle"
+  ],
+  "answer": 0,
+  "explain": "The resultant is maximum at θ = 0°, where the magnitudes simply add.",
+  "kind": "concept",
+  "id": "1d6ed926-0b7b-4c86-9254-35cede56f883",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "Compared with A − B, the vector B − A has:",
+  "formula": "",
+  "options": [
+   "Same magnitude, opposite direction",
+   "Same magnitude, same direction",
+   "Different magnitude, same direction",
+   "Same magnitude, perpendicular direction"
+  ],
+  "answer": 0,
+  "explain": "B − A = −(A − B). Vector subtraction is not commutative.",
+  "kind": "concept",
+  "id": "4a01a8ce-1834-4cef-b913-977505dba6f8",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "Three coplanar vectors of equal magnitude, inclined at 120° to each other, have resultant:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to one vector",
+   "Twice one vector",
+   "√3 times one vector"
+  ],
+  "answer": 0,
+  "explain": "They form a closed equilateral triangle, so the sum is zero.",
+  "kind": "result",
+  "id": "80dda9b7-57d0-43be-aba0-e70b621606ba",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "In a parallelogram with A and B as adjacent sides, the diagonal joining their tips represents:",
+  "formula": "",
+  "options": [
+   "A − B (up to sign)",
+   "A + B",
+   "(A + B)/2",
+   "½(A − B)"
+  ],
+  "answer": 0,
+  "explain": "The diagonal through the common point is A + B. The other diagonal is the difference.",
+  "kind": "concept",
+  "id": "65203386-464c-4aaa-bb09-028b0716ce99",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "A + B is perpendicular to A and |B| = 2|A|. The angle between A and B is:",
+  "formula": "A + B cosθ = 0",
+  "options": [
+   "60°",
+   "120°",
+   "135°",
+   "150°"
+  ],
+  "answer": 1,
+  "explain": "Resultant ⊥ A needs A + B cosθ = 0, so cosθ = −A/B = −1/2, giving θ = 120°.",
+  "kind": "result",
+  "id": "3af84d0b-df5c-4699-b9cb-242ce17f6d2b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "For any two vectors, |A + B|² + |A − B|² equals:",
+  "formula": "Parallelogram law",
+  "options": [
+   "A² + B²",
+   "2(A² + B²)",
+   "2AB",
+   "4AB cosθ"
+  ],
+  "answer": 1,
+  "explain": "Adding (A²+B²+2AB cosθ) and (A²+B²−2AB cosθ) cancels the cross terms, leaving 2(A²+B²).",
+  "kind": "result",
+  "id": "6a86f849-9b88-4f23-9936-a08cf2ee4174",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "In the polygon law, the resultant of vectors placed head to tail is the side joining:",
+  "formula": "",
+  "options": [
+   "Tail of last to head of first",
+   "Head of first to head of last",
+   "Tail of first to head of last",
+   "Midpoints of first and last"
+  ],
+  "answer": 2,
+  "explain": "The closing side runs from the tail of the first vector to the head of the last.",
+  "kind": "concept",
+  "id": "6e2d2790-3f85-47c6-954e-8f871f2106ed",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "For two vectors of fixed magnitudes A and B, |A − B| is maximum when the angle between them is:",
+  "formula": "|A − B|² = A² + B² − 2AB cosθ",
+  "options": [
+   "0°",
+   "90°",
+   "180°",
+   "120°"
+  ],
+  "answer": 2,
+  "explain": "cosθ = −1 at 180°, so |A − B| = A + B (maximum).",
+  "kind": "result",
+  "id": "4fcef5a8-2155-493f-bf3c-9d85ef4609e9",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "For nonzero vectors A and B, if |A × B| = A·B, the angle between them is:",
+  "formula": "|A×B| = AB sinθ, A·B = AB cosθ",
+  "options": [
+   "30°",
+   "60°",
+   "45°",
+   "90°"
+  ],
+  "answer": 2,
+  "explain": "AB sinθ = AB cosθ gives tanθ = 1, so θ = 45°.",
+  "kind": "result",
+  "id": "416694e3-6580-4331-9cb0-6aca573bce51",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "If |A + B| = |A − B| for nonzero vectors, the angle between A and B is:",
+  "formula": "|A±B|² = A² + B² ± 2A·B",
+  "options": [
+   "0°",
+   "90°",
+   "60°",
+   "180°"
+  ],
+  "answer": 1,
+  "explain": "Equal magnitudes need A·B = 0, so the vectors are perpendicular.",
+  "kind": "result",
+  "id": "e5321c29-6a66-4aff-a13a-e4dd8662c19e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The value of A·(A × B) is:",
+  "formula": "",
+  "options": [
+   "A²B",
+   "Zero",
+   "AB sinθ",
+   "A²B sinθ"
+  ],
+  "answer": 1,
+  "explain": "A × B is perpendicular to A, so the dot product is zero.",
+  "kind": "result",
+  "id": "7f55d99f-f1c7-45f1-abc3-72fc005034ae",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The scalar triple product |A·(B × C)| gives the:",
+  "formula": "",
+  "options": [
+   "Area of a triangle",
+   "Area of a parallelogram",
+   "Volume of a parallelepiped",
+   "Length of the projection"
+  ],
+  "answer": 2,
+  "explain": "|A·(B×C)| is the volume of the parallelepiped on A, B, C.",
+  "kind": "concept",
+  "id": "acad7b83-e6bd-48fe-8598-640244f79411",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Two vectors lie in the x–y plane. Their cross product points along:",
+  "formula": "",
+  "options": [
+   "x-axis",
+   "y-axis",
+   "In the x–y plane",
+   "z-axis"
+  ],
+  "answer": 3,
+  "explain": "A × B is perpendicular to the plane of A and B, which is the z-axis here.",
+  "kind": "concept",
+  "id": "3d0e6279-9839-420e-b07b-afa946dc2349",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The vector triple product A × (B × C) equals:",
+  "formula": "",
+  "options": [
+   "B(A·C) − C(A·B)",
+   "A(B·C) − C(A·B)",
+   "(A·B)C − (A·C)B",
+   "(A×B)×C"
+  ],
+  "answer": 0,
+  "explain": "BAC–CAB rule: A×(B×C) = B(A·C) − C(A·B). The cross product is not associative.",
+  "kind": "formula",
+  "id": "1f7ea93e-0c3c-4838-a13f-e90bb71551f7",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Magnetic force F = q(v × B) does no work on a charge because:",
+  "formula": "W = F·d",
+  "options": [
+   "F is parallel to v",
+   "F is perpendicular to v",
+   "B is constant",
+   "v is zero"
+  ],
+  "answer": 1,
+  "explain": "F ⟂ v gives F·v = 0, so the power and work are zero.",
+  "kind": "concept",
+  "id": "59a6f4b9-45cf-4c6d-a753-b5831e9027c1",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The dot product A·B is negative when the angle between the vectors is:",
+  "formula": "A·B = AB cosθ",
+  "options": [
+   "0° ≤ θ < 90°",
+   "θ = 90° only",
+   "90° < θ ≤ 180°",
+   "Never negative"
+  ],
+  "answer": 2,
+  "explain": "cosθ < 0 for 90° < θ ≤ 180°, so the dot product is negative there.",
+  "kind": "concept",
+  "id": "4c8c3c62-b26b-45aa-a9ee-2ee4542353ca",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Which of these physical quantities is a cross product of two vectors?",
+  "formula": "",
+  "options": [
+   "Power",
+   "Work",
+   "Kinetic energy",
+   "Angular momentum"
+  ],
+  "answer": 3,
+  "explain": "L = r × p; power and work are dot products, KE is a scalar.",
+  "kind": "fact",
+  "id": "ef44194e-7320-43dd-babf-49d2d611ac35",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "For nonzero vectors, A × B = 0 means A and B are:",
+  "formula": "",
+  "options": [
+   "Perpendicular",
+   "Parallel only",
+   "Parallel or antiparallel",
+   "Of equal magnitude"
+  ],
+  "answer": 2,
+  "explain": "sinθ = 0 gives θ = 0° or 180°.",
+  "kind": "concept",
+  "id": "c616c7c4-a09d-472f-a4d9-c8ba78c7bbb4",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The torque on an electric dipole, τ = p × E, vanishes when the angle between p and E is:",
+  "formula": "τ = p × E",
+  "options": [
+   "90° only",
+   "45° only",
+   "0° or 180°",
+   "60° or 120°"
+  ],
+  "answer": 2,
+  "explain": "τ = pE sinθ = 0 for θ = 0° or 180°.",
+  "kind": "result",
+  "id": "e1b942f5-1ba4-4abf-9463-0ed6708da3da",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The magnitude |A × B| represents geometrically the:",
+  "formula": "|A × B| = AB sinθ",
+  "options": [
+   "Area of the parallelogram",
+   "Area of the triangle",
+   "Volume of the parallelepiped",
+   "Projection of A on B"
+  ],
+  "answer": 0,
+  "explain": "A and B as adjacent sides of a parallelogram give area |A × B|.",
+  "kind": "fact",
+  "id": "dc4cfb40-4ca8-4d78-97fd-ea7917a8bb03",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Which of these is NOT a dot product of two vectors?",
+  "formula": "",
+  "options": [
+   "Work done",
+   "Power",
+   "Magnetic flux",
+   "Torque"
+  ],
+  "answer": 3,
+  "explain": "Torque = r × F is a cross product; W = F·s, P = F·v, φ = B·A are dot products.",
+  "kind": "exception",
+  "id": "dbe82a0e-71d7-42c6-95cc-f6c221ed66dd",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The value of A × A for any vector A is:",
+  "formula": "",
+  "options": [
+   "A²",
+   "Null vector",
+   "1",
+   "A"
+  ],
+  "answer": 1,
+  "explain": "sin 0° = 0, so A × A = 0 (a null vector, not scalar zero).",
+  "kind": "result",
+  "id": "0dd7f13b-4d89-462e-965c-fadfc85839c2",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Dot product of î·î and î·ĵ respectively are:",
+  "formula": "",
+  "options": [
+   "1 and 1",
+   "0 and 0",
+   "1 and 0",
+   "0 and 1"
+  ],
+  "answer": 2,
+  "explain": "Same unit vectors give 1; perpendicular ones give 0.",
+  "kind": "fact",
+  "id": "70b945f5-5fbe-4718-b9b1-b34305fe860f",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Vectors A and B are perpendicular. Then which relation holds?",
+  "formula": "",
+  "options": [
+   "A·B = AB",
+   "A × B = 0",
+   "A·B = 0 and |A × B| = AB",
+   "A·B = AB and |A × B| = 0"
+  ],
+  "answer": 2,
+  "explain": "θ = 90°: cosθ = 0, sinθ = 1.",
+  "kind": "concept",
+  "id": "a617d322-4526-4a0a-9edd-22004bfaf2e0",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "A·B = |A × B| in magnitude means tan θ equals:",
+  "formula": "AB cosθ = AB sinθ",
+  "options": [
+   "0",
+   "1",
+   "√3",
+   "∞"
+  ],
+  "answer": 1,
+  "explain": "Equating cosθ and sinθ gives tanθ = 1 (θ = 45°).",
+  "kind": "result",
+  "id": "96083b11-a9f6-4a87-a495-d3bd17a3c106",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Two bodies in free fall near Earth (no air drag). Their relative acceleration is:",
+  "formula": "a_AB = g − g = 0",
+  "options": [
+   "g",
+   "2g",
+   "Zero",
+   "g/2"
+  ],
+  "answer": 2,
+  "explain": "Both have acceleration g, so a_A − a_B = 0 and relative velocity stays constant.",
+  "kind": "concept",
+  "id": "ee8fa72b-5ec2-4099-b7a1-7ab6e01d2f42",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Two balls are in flight under gravity only. Their separation vs time graph is:",
+  "formula": "",
+  "options": [
+   "A parabola",
+   "A straight line",
+   "A circle",
+   "An exponential curve"
+  ],
+  "answer": 1,
+  "explain": "Relative acceleration is zero, so relative velocity is constant and separation changes linearly with t.",
+  "kind": "graph",
+  "id": "c0de91e5-0704-4302-baad-ad3589671103",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "The slope of the (x_A − x_B) versus time graph gives:",
+  "formula": "",
+  "options": [
+   "Relative acceleration",
+   "Relative velocity v_AB",
+   "Relative displacement",
+   "Average speed of A"
+  ],
+  "answer": 1,
+  "explain": "d(x_A − x_B)/dt = v_A − v_B = v_AB.",
+  "kind": "graph",
+  "id": "f5ec9534-9779-4b99-adb4-6ec22d3109c6",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Ball A is thrown up at speed u from ground; ball B is dropped from height h at the same instant. They meet after:",
+  "formula": "t = h/u",
+  "options": [
+   "h/(2u)",
+   "h/u",
+   "2h/u",
+   "√(2h/g)"
+  ],
+  "answer": 1,
+  "explain": "Relative acceleration is zero; relative speed is u, so t = h/u.",
+  "kind": "result",
+  "id": "829122ed-7640-43ee-8f8f-bf7ae1cbbcfd",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "If v_AB = 0 for two bodies on a line, their separation:",
+  "formula": "",
+  "options": [
+   "Increases uniformly",
+   "Decreases uniformly",
+   "Remains constant",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Equal velocities mean no relative motion, so the gap stays constant.",
+  "kind": "concept",
+  "id": "eb0aa2d5-ce7a-4969-ae39-ce3a0db9f560",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Along +x, A moves at +20 m/s and B at −30 m/s. The magnitude of v_AB is:",
+  "formula": "v_AB = v_A − v_B",
+  "options": [
+   "10 m/s",
+   "50 m/s",
+   "25 m/s",
+   "600 m/s"
+  ],
+  "answer": 1,
+  "explain": "v_AB = 20 − (−30) = 50 m/s. Opposite directions: speeds add.",
+  "kind": "fact",
+  "id": "30b1708d-aad0-4378-b375-f35ec47fb99d",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "A is dropped; B is dropped Δt later. While both fall, v_AB is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Constant, equal to gΔt",
+   "Increasing with time",
+   "Constant, equal to ½gΔt²"
+  ],
+  "answer": 1,
+  "explain": "Same acceleration g, so v_A − v_B = g(t) − g(t−Δt) = gΔt, constant.",
+  "kind": "result",
+  "id": "f138c801-adb8-498c-93af-dc40bc7d4b86",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "On velocity–time graphs of two bodies, the intersection point means:",
+  "formula": "",
+  "options": [
+   "They meet at that instant",
+   "They have the same velocity then",
+   "They have the same acceleration",
+   "They have the same displacement"
+  ],
+  "answer": 1,
+  "explain": "v–t crossing means v_A = v_B (v_rel = 0), not necessarily the same position.",
+  "kind": "graph",
+  "id": "18f4054d-0ee8-4a49-abcc-7252718c1eeb",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "From one point, one ball is thrown up and another down, both at speed u. Their relative velocity in flight:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "u",
+   "2u, constant",
+   "2u − gt"
+  ],
+  "answer": 2,
+  "explain": "Both have acceleration g, so v_rel stays at u − (−u) = 2u.",
+  "kind": "result",
+  "id": "2258ee5c-9bc2-448e-9d40-297cb0a21be6",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "A lift rises at constant speed v. A bolt falls from its ceiling, height h. Time to hit the floor:",
+  "formula": "",
+  "options": [
+   "√(2h/g)",
+   "√(2h/g) + h/v",
+   "h/(v + g)",
+   "2h/(g + v)"
+  ],
+  "answer": 0,
+  "explain": "In the lift frame (inertial), the bolt starts at rest with acceleration g, so t = √(2h/g).",
+  "kind": "concept",
+  "id": "314e17f7-edbe-4c6a-8321-50c36aef4171",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "A car starts from rest with uniform acceleration behind a truck moving at constant speed. Separation is extreme when:",
+  "formula": "v_rel = 0",
+  "options": [
+   "Their accelerations are equal",
+   "Their velocities are equal",
+   "Their positions are equal",
+   "The car's velocity is double the truck's"
+  ],
+  "answer": 1,
+  "explain": "Separation is stationary (d(Δx)/dt = 0) when the relative velocity is zero, i.e. the velocities are equal.",
+  "kind": "concept",
+  "id": "fc2859bd-75b5-4476-a342-5bed694c406f",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Two frames move with constant relative velocity. A body's accelerations measured in them are:",
+  "formula": "",
+  "options": [
+   "Equal",
+   "Differ by the relative velocity",
+   "Differ by the relative speed ÷ time",
+   "Opposite in sign"
+  ],
+  "answer": 0,
+  "explain": "The relative acceleration of the frames is zero, so a' = a. This is Galilean invariance of acceleration.",
+  "kind": "concept",
+  "id": "d5ab9f89-4e37-45b4-8469-83ae5dee1fd8",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "For a projectile landing at launch level, max height H and time of flight T are related by:",
+  "formula": "H = gT²/8",
+  "options": [
+   "H = gT²/2",
+   "H = gT²/4",
+   "H = gT²/8",
+   "H = gT²/16"
+  ],
+  "answer": 2,
+  "explain": "H = u²sin²α/2g and T = 2u sinα/g, so H = g(T/2)²/2 = gT²/8.",
+  "kind": "formula",
+  "id": "2d4abca0-503d-4ae5-a4b2-c8b3271950cf",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "Same speed, angles α and (90° − α). Ratio of times of flight T₁/T₂ is:",
+  "formula": "T₁/T₂ = tanα",
+  "options": [
+   "tanα",
+   "cotα",
+   "sin2α",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "T ∝ sinα, and sinα/sin(90°−α) = sinα/cosα = tanα.",
+  "kind": "result",
+  "id": "214b4789-07ed-486c-92ec-59d3c83faceb",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "Trajectory equation of a projectile in terms of its range R and launch angle α:",
+  "formula": "y = x tanα (1 − x/R)",
+  "options": [
+   "y = x tanα (1 − x/R)",
+   "y = x tanα (1 − x²/R)",
+   "y = x cotα (1 − x/R)",
+   "y = x tanα (1 − 2x/R)"
+  ],
+  "answer": 0,
+  "explain": "From y = x tanα − gx²/(2u²cos²α), using R = 2u²sinα cosα/g.",
+  "kind": "formula",
+  "id": "d984a4c2-2ef5-49d9-bc10-f8128984ce17",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "A projectile of mass m is launched at α with speed u and lands at the same level. Change in momentum is:",
+  "formula": "Δp = 2mu sinα",
+  "options": [
+   "Zero",
+   "mu sinα",
+   "2mu cosα",
+   "2mu sinα"
+  ],
+  "answer": 3,
+  "explain": "Horizontal momentum is unchanged; vertical goes from +mu sinα to −mu sinα, so Δp = 2mu sinα downward.",
+  "kind": "result",
+  "id": "46c890d6-398c-420e-840b-976bbd148b3b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "For a projectile (same level landing), R = 4H cotα. What is R for α with tanα = 1/2 in terms of H?",
+  "formula": "R = 4H/tanα",
+  "options": [
+   "2H",
+   "4H",
+   "8H",
+   "16H"
+  ],
+  "answer": 2,
+  "explain": "R/H = 4/tanα = 4×2 = 8, so R = 8H.",
+  "kind": "formula",
+  "id": "b110328d-e05b-4ce8-a717-f0f6c5e3b571",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "Radius of curvature at the highest point of a projectile launched at angle α with speed u:",
+  "formula": "g = v²/r, v = u cosα",
+  "options": [
+   "u² cos²α / g",
+   "u² sin²α / g",
+   "u² cos²α / 2g",
+   "u² / (g cosα)"
+  ],
+  "answer": 0,
+  "explain": "At the top, velocity is u cosα and g is wholly centripetal, so r = u²cos²α/g.",
+  "kind": "result",
+  "id": "78a88a66-d7dc-4666-a49a-82a971beb54e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "A particle moves uniformly with speed v on a circle. Magnitude of change in velocity in half a revolution?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "v",
+   "2v",
+   "πv"
+  ],
+  "answer": 2,
+  "explain": "Velocity reverses: Δv = v − (−v) = 2v.",
+  "kind": "result",
+  "id": "ab8681b8-39e2-4b09-97f9-ed2bbe415f52",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Speed v, angular displacement θ in uniform circular motion. Magnitude of change in velocity is",
+  "formula": "|Δv| = 2v sin(θ/2)",
+  "options": [
+   "2v cos(θ/2)",
+   "2v sin(θ/2)",
+   "v sin θ",
+   "2v sin θ"
+  ],
+  "answer": 1,
+  "explain": "Chord of the velocity-vector triangle gives |Δv| = 2v sin(θ/2).",
+  "kind": "formula",
+  "id": "17456946-8720-4bb1-babd-a2a2513131f8",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Centripetal acceleration in terms of radius r and time period T is",
+  "formula": "",
+  "options": [
+   "2πr/T²",
+   "4π²r/T",
+   "4π²r/T²",
+   "2π²r/T²"
+  ],
+  "answer": 2,
+  "explain": "a = ω²r with ω = 2π/T gives 4π²r/T².",
+  "kind": "formula",
+  "id": "f0c5b3a5-d191-412f-bdad-2b438b237935",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Work done by the centripetal force in uniform circular motion is",
+  "formula": "W = F·d = 0",
+  "options": [
+   "Positive, equal to mv²/2",
+   "Negative",
+   "Zero in every displacement",
+   "Zero only over full revolution"
+  ],
+  "answer": 2,
+  "explain": "Force is always perpendicular to displacement, so work is zero always.",
+  "kind": "concept",
+  "id": "3d581187-301f-40f3-856d-9c791ef11355",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "For a particle in uniform circular motion, the average velocity over one full revolution is",
+  "formula": "",
+  "options": [
+   "v",
+   "Zero",
+   "2v",
+   "v/2"
+  ],
+  "answer": 1,
+  "explain": "Net displacement over a full revolution is zero, so average velocity is zero.",
+  "kind": "concept",
+  "id": "9eaf28c0-47b1-4229-a834-b6e1b4944190",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "The angular velocity vector of a particle in circular motion is directed",
+  "formula": "",
+  "options": [
+   "Along the tangent",
+   "Radially inward",
+   "Radially outward",
+   "Along the axis, by right-hand rule"
+  ],
+  "answer": 3,
+  "explain": "ω is an axial vector along the rotation axis, fixed by the right-hand rule.",
+  "kind": "fact",
+  "id": "bdfb8c30-1d00-4d2d-b690-a5cc41c31025",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "At constant speed, the graph of centripetal acceleration versus radius r is a",
+  "formula": "a = v²/r",
+  "options": [
+   "Straight line through origin",
+   "Parabola a ∝ r²",
+   "Rectangular hyperbola",
+   "Horizontal line"
+  ],
+  "answer": 2,
+  "explain": "a ∝ 1/r at constant v gives a rectangular hyperbola.",
+  "kind": "graph",
+  "id": "7885bd4f-2a6c-4d30-bca1-1affeabc8917",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Angular velocity of the second hand of a clock is",
+  "formula": "",
+  "options": [
+   "π/30 rad/s",
+   "π/60 rad/s",
+   "2π/3600 rad/s",
+   "π/6 rad/s"
+  ],
+  "answer": 0,
+  "explain": "One revolution (2π) in 60 s gives ω = 2π/60 = π/30 rad/s.",
+  "kind": "fact",
+  "id": "0e840416-d153-42c6-9cdb-3d012a689bd8",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Centripetal acceleration of a particle in a circle of radius r with frequency n is",
+  "formula": "",
+  "options": [
+   "2π²n²r",
+   "4π²nr",
+   "4π²n²r",
+   "2πn²r"
+  ],
+  "answer": 2,
+  "explain": "ω = 2πn, so a = ω²r = 4π²n²r.",
+  "kind": "formula",
+  "id": "e4487a47-f261-4ae0-998d-b983b3a58f9f",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "At constant angular velocity, the graph of centripetal acceleration versus radius r is",
+  "formula": "a = ω²r",
+  "options": [
+   "Straight line through origin",
+   "Rectangular hyperbola",
+   "Parabola",
+   "Straight line parallel to r-axis"
+  ],
+  "answer": 0,
+  "explain": "With ω fixed, a ∝ r, so the graph is a straight line through the origin.",
+  "kind": "graph",
+  "id": "0c0a1631-1233-4400-88ee-7507cd37f06a",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "In uniform circular motion, the average acceleration over one complete revolution is",
+  "formula": "",
+  "options": [
+   "Zero",
+   "v²/r",
+   "ω²r",
+   "2v/T"
+  ],
+  "answer": 0,
+  "explain": "Average acceleration = Δv/T, and Δv = 0 after a full turn, so it is zero.",
+  "kind": "concept",
+  "id": "12a25089-c87c-4ccc-9b74-0b659b982a8b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "In uniform circular motion, the angle between velocity and angular velocity vectors is",
+  "formula": "v = ω × r",
+  "options": [
+   "0°",
+   "90°",
+   "180°",
+   "45°"
+  ],
+  "answer": 1,
+  "explain": "v = ω × r, so v is perpendicular to ω (ω lies along the axis).",
+  "kind": "fact",
+  "id": "a0c3df3c-8b51-44bf-8997-1cd9ce37f29a",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Two particles move in circles of radii r₁ and r₂ with equal periods. Ratio of centripetal accelerations a₁/a₂ is",
+  "formula": "a = 4π²r/T²",
+  "options": [
+   "r₁/r₂",
+   "r₂/r₁",
+   "(r₁/r₂)²",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "With equal T, a = 4π²r/T² ∝ r, so a₁/a₂ = r₁/r₂.",
+  "kind": "result",
+  "id": "01b18593-fc77-4a8f-86e3-0e5b6622624e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Dot product A·B is commutative, while the cross product A × B is:",
+  "formula": "",
+  "options": [
+   "Also commutative",
+   "Anticommutative",
+   "Associative only",
+   "Always zero"
+  ],
+  "answer": 1,
+  "explain": "A × B = −B × A, direction reverses on swapping order.",
+  "kind": "concept",
+  "id": "166cf73f-fb3c-476b-b0f8-af62e2acb865",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Work done W = F·s is a:",
+  "formula": "W = F·s",
+  "options": [
+   "Vector",
+   "Scalar",
+   "Pseudovector",
+   "Tensor of rank 2"
+  ],
+  "answer": 1,
+  "explain": "Dot product of two vectors gives a scalar.",
+  "kind": "fact",
+  "id": "58dddcf0-f5a1-4ee5-bb94-72e6a06caabd",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Power P = F·v is a scalar, because it is a:",
+  "formula": "P = F·v",
+  "options": [
+   "Cross product",
+   "Dot product",
+   "Triple product",
+   "Vector sum"
+  ],
+  "answer": 1,
+  "explain": "Dot product of force and velocity gives a scalar.",
+  "kind": "fact",
+  "id": "f198fd35-b2b9-4ff0-91f9-9caa152d9c57",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "For A·B = AB (maximum positive value), the angle between A and B is:",
+  "formula": "",
+  "options": [
+   "0°",
+   "90°",
+   "180°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "A·B = AB cosθ is maximum at θ = 0°.",
+  "kind": "result",
+  "id": "407a61a4-e2a4-431d-b323-4148b21c2340",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "For three nonzero vectors, A·(B × C) = 0 means the vectors are:",
+  "formula": "",
+  "options": [
+   "Coplanar",
+   "Mutually perpendicular",
+   "All parallel to each other",
+   "Of equal magnitude"
+  ],
+  "answer": 0,
+  "explain": "Zero parallelepiped volume means the three vectors lie in one plane.",
+  "kind": "concept",
+  "id": "356c4f31-1600-4bd3-ad86-6f055d67a091",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "The scalar triple product A·(B × C) equals:",
+  "formula": "cyclic symmetry",
+  "options": [
+   "A·(C × B)",
+   "C·(B × A)",
+   "C·(A × B)",
+   "B·(A × C)"
+  ],
+  "answer": 2,
+  "explain": "Cyclic permutation (A,B,C)→(C,A,B) keeps the sign; swapping two vectors reverses it.",
+  "kind": "result",
+  "id": "a1314f59-d1ad-45a5-a9f3-b72c1f00cf23",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "Which pair of unit-vector products is correct?",
+  "formula": "î × ĵ = k̂",
+  "options": [
+   "ĵ × î = k̂",
+   "ĵ × k̂ = î",
+   "k̂ × î = −ĵ",
+   "î × k̂ = ĵ"
+  ],
+  "answer": 1,
+  "explain": "Cyclic order î→ĵ→k̂ gives positive results: ĵ × k̂ = î; î × k̂ = −ĵ and k̂ × î = ĵ.",
+  "kind": "fact",
+  "id": "aca80ff3-0fac-4161-8608-68035ee4cf68",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Scalar (dot) and vector (cross) products"
+ },
+ {
+  "prompt": "From a freely falling frame, a ball thrown upward from the ground with speed u appears to move with:",
+  "formula": "a_rel = g − g = 0",
+  "options": [
+   "Constant velocity u",
+   "Acceleration g downward",
+   "Acceleration 2g",
+   "Velocity decreasing to zero"
+  ],
+  "answer": 0,
+  "explain": "The relative acceleration is zero, so the relative velocity stays constant at u.",
+  "kind": "concept",
+  "id": "1ab1bbee-b185-49a4-b52b-227ca0d70bc2",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Two bodies on a line have v_AB = +5 m/s. From B, body A appears to move:",
+  "formula": "",
+  "options": [
+   "Away along +x at 5 m/s",
+   "Toward B at 5 m/s",
+   "Along −x at 5 m/s",
+   "At rest"
+  ],
+  "answer": 0,
+  "explain": "v_AB = v_A − v_B > 0 means A moves in +x direction as seen from B.",
+  "kind": "concept",
+  "id": "3fd78e9c-be8f-4320-b255-75f5f76c30cb",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "A passenger in a train moving at v sees a ball at rest on the ground. The ball appears to move with velocity:",
+  "formula": "v_ball,train = 0 − v",
+  "options": [
+   "v opposite to train's motion",
+   "v along train's motion",
+   "Zero",
+   "2v opposite to train's motion"
+  ],
+  "answer": 0,
+  "explain": "v_ball,train = v_ball − v_train = 0 − v = −v, i.e. backward with speed v.",
+  "kind": "concept",
+  "id": "20cbacab-4806-406c-9b9f-8eb6b43085e9",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Projectile launched at 60° to horizontal. KE at highest point as fraction of initial KE:",
+  "formula": "K_top = ½mu²cos²α",
+  "options": [
+   "1/2",
+   "3/4",
+   "1/4",
+   "√3/2"
+  ],
+  "answer": 2,
+  "explain": "Only horizontal component survives: cos²60° = 1/4.",
+  "kind": "result",
+  "id": "1e38e757-8204-4c83-9383-770a97131f26",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "Two projectiles fired together from one point. Motion of one as seen from the other is:",
+  "formula": "a_rel = g − g = 0",
+  "options": [
+   "A parabola",
+   "A straight line",
+   "A circle",
+   "A straight line only if same speed"
+  ],
+  "answer": 1,
+  "explain": "Relative acceleration is zero, so relative velocity is constant: straight-line path.",
+  "kind": "concept",
+  "id": "b32bd869-788f-42fd-bb63-4aeef9bf089b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "Range of a projectile launched at 15° with speed u on level ground:",
+  "formula": "R = u² sin2α / g",
+  "options": [
+   "u²/g",
+   "u²/4g",
+   "√3u²/2g",
+   "u²/2g"
+  ],
+  "answer": 3,
+  "explain": "sin30° = 1/2, so R = u²/2g.",
+  "kind": "formula",
+  "id": "70cbe163-6c40-4125-8254-25e43f4ab6d1",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Projectile: range, max height, time of flight"
+ },
+ {
+  "prompt": "On a line, v_AB = 3 m/s and v_BC = 4 m/s (both along +x). The velocity v_AC is:",
+  "formula": "v_AC = v_AB + v_BC",
+  "options": [
+   "1 m/s",
+   "7 m/s",
+   "12 m/s",
+   "5 m/s"
+  ],
+  "answer": 1,
+  "explain": "Relative velocities add along a line: v_AC = v_A − v_B + v_B − v_C = 7 m/s.",
+  "kind": "formula",
+  "id": "79e5c1eb-ebc0-46d8-a8a0-30201660f22a",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Two cars approach each other head-on at constant speeds. Their separation vs time graph is:",
+  "formula": "",
+  "options": [
+   "Straight line with negative slope",
+   "Straight line with positive slope",
+   "Parabola opening upward",
+   "Horizontal line"
+  ],
+  "answer": 0,
+  "explain": "Relative velocity is constant and closing, so separation decreases linearly until they meet.",
+  "kind": "graph",
+  "id": "aefaf6fb-0d5e-48fd-a4b5-adaa09e00815",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "For two bodies A and B moving on a straight line, v_AB + v_BA equals:",
+  "formula": "v_BA = −v_AB",
+  "options": [
+   "v_A + v_B",
+   "2v_AB",
+   "0",
+   "2v_A"
+  ],
+  "answer": 2,
+  "explain": "v_AB = v_A − v_B and v_BA = v_B − v_A, so they are equal in magnitude and opposite in sign; the sum is zero.",
+  "kind": "concept",
+  "id": "ee419b33-1e34-49d0-abaa-9b7a06b91caa",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "A car's speedometer reading at any instant gives its:",
+  "formula": "",
+  "options": [
+   "Instantaneous speed",
+   "Average speed",
+   "Average velocity",
+   "Instantaneous velocity"
+  ],
+  "answer": 0,
+  "explain": "A speedometer shows the magnitude only, with no direction, at that instant: instantaneous speed.",
+  "kind": "fact",
+  "id": "d9fab5f3-bd71-4715-85e5-77cdd9e2a312",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A particle has v = −5 m/s and a = −2 m/s² along a line. Its speed is:",
+  "formula": "",
+  "options": [
+   "Increasing, since a and v have same sign",
+   "Decreasing, since a is negative",
+   "Constant",
+   "Zero at that instant"
+  ],
+  "answer": 0,
+  "explain": "When a and v point the same way (both negative here), speed increases. Sign of a alone does not decide.",
+  "kind": "exception",
+  "id": "983e2724-8f5f-491e-b378-ac9ebdd112a5",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A car covers three equal distances at v₁, v₂, v₃. Its average speed is:",
+  "formula": "v_avg = 3/(1/v₁ + 1/v₂ + 1/v₃)",
+  "options": [
+   "(v₁ + v₂ + v₃)/3",
+   "3/(v₁ + v₂ + v₃)",
+   "3v₁v₂v₃/(v₁v₂ + v₂v₃ + v₃v₁)",
+   "(v₁v₂v₃)^(1/3)"
+  ],
+  "answer": 2,
+  "explain": "Equal distances give the harmonic mean: total distance/total time = 3/(1/v₁ + 1/v₂ + 1/v₃).",
+  "kind": "formula",
+  "id": "4d5b18f3-dfa7-41cf-a161-dbadacc037e0",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "Acceleration of a particle in terms of its velocity and position is:",
+  "formula": "a = v dv/dx",
+  "options": [
+   "a = dv/dx",
+   "a = v dv/dx",
+   "a = v dx/dv",
+   "a = v² dv/dx"
+  ],
+  "answer": 1,
+  "explain": "a = dv/dt = (dv/dx)(dx/dt) = v dv/dx by the chain rule.",
+  "kind": "formula",
+  "id": "c04a6484-dabd-452f-8a29-99b44aaaa1d7",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "In straight-line motion, at the instant speed is maximum (smooth variation), acceleration is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Maximum",
+   "Equal to g",
+   "Opposite to velocity"
+  ],
+  "answer": 0,
+  "explain": "Speed is at an extremum, so dv/dt = 0 and the acceleration is zero at that instant.",
+  "kind": "concept",
+  "id": "abd1bb14-b890-48a2-a1cd-52a8f7accfad",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "The direction of the average velocity vector over an interval is along the:",
+  "formula": "",
+  "options": [
+   "Initial velocity",
+   "Final velocity",
+   "Net displacement vector",
+   "Path tangent at the midpoint"
+  ],
+  "answer": 2,
+  "explain": "v_avg = Δr/Δt, a positive scalar multiple of the displacement, so it points along the displacement.",
+  "kind": "concept",
+  "id": "b1e5ca03-c429-4a67-b9f3-605647816cc2",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "The odometer of a vehicle records the:",
+  "formula": "",
+  "options": [
+   "Net displacement",
+   "Total path length covered",
+   "Average velocity",
+   "Instantaneous speed"
+  ],
+  "answer": 1,
+  "explain": "An odometer adds up the path length (distance), a scalar that never decreases.",
+  "kind": "fact",
+  "id": "15adc968-3728-46b6-88f8-61ae84de0334",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform and non-uniform motion"
+ },
+ {
+  "prompt": "A ball thrown up at speed u passes a height h at times t₁ (up) and t₂ (down). t₁ + t₂ =",
+  "formula": "h = ut − ½gt² (quadratic in t)",
+  "options": [
+   "u/g",
+   "2u/g",
+   "4u/g",
+   "2√(2h/g)"
+  ],
+  "answer": 1,
+  "explain": "Sum of roots of ½gt² − ut + h = 0 is 2u/g.",
+  "kind": "result",
+  "id": "a3cfc721-b54f-4b70-b5dc-1d572e86a824",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "A body starts from rest with constant acceleration. Its v² versus s graph is",
+  "formula": "v² = 2as",
+  "options": [
+   "A parabola through the origin",
+   "A straight line through the origin",
+   "A straight line with positive intercept",
+   "A rectangular hyperbola"
+  ],
+  "answer": 1,
+  "explain": "v² = 2as is linear in s with slope 2a and zero intercept.",
+  "kind": "graph",
+  "id": "200b30bf-8bdc-47f1-a929-8a87510bb52f",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Acceleration expressed in terms of velocity v and position x is",
+  "formula": "a = dv/dt = (dv/dx)(dx/dt)",
+  "options": [
+   "dv/dx",
+   "v·dv/dx",
+   "v²·dv/dx",
+   "(1/v)·dv/dx"
+  ],
+  "answer": 1,
+  "explain": "Chain rule gives a = v dv/dx; this is how v² = u² + 2as is derived.",
+  "kind": "formula",
+  "id": "db8a74e7-e591-4824-81ef-a8f2db7d7533",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Equations of uniformly accelerated motion"
+ },
+ {
+  "prompt": "Two particles have parallel straight-line v–t graphs. They have equal:",
+  "formula": "slope of v–t = a",
+  "options": [
+   "Velocities at every instant",
+   "Accelerations",
+   "Displacements",
+   "Positions at every instant"
+  ],
+  "answer": 1,
+  "explain": "Parallel lines have equal slopes, so the accelerations are equal. The velocities differ by a constant.",
+  "kind": "concept",
+  "id": "522c8682-cd5e-4170-8dfb-4f0d2f49ab56",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Speed–time graph of a ball thrown up and caught back at the start (no air drag) is:",
+  "formula": "speed = |v|",
+  "options": [
+   "Straight line of slope −g throughout",
+   "Downward-opening parabola",
+   "V-shape, vertex on the axis at the top",
+   "Horizontal line at speed u"
+  ],
+  "answer": 2,
+  "explain": "Speed = |v|. It falls linearly to zero at the top, then rises linearly. Both slopes have magnitude g.",
+  "kind": "graph",
+  "id": "9b94d426-1346-44f8-bfda-34ac8d4d2d89",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Position-time & velocity-time graphs"
+ },
+ {
+  "prompt": "Two vectors of equal magnitude A are inclined at angle θ. Their resultant has magnitude:",
+  "formula": "R = √(2A² + 2A²cosθ)",
+  "options": [
+   "2A cos(θ/2)",
+   "2A sin(θ/2)",
+   "A cos(θ/2)",
+   "2A cosθ"
+  ],
+  "answer": 0,
+  "explain": "R² = 2A²(1 + cosθ) = 4A²cos²(θ/2), so R = 2A cos(θ/2).",
+  "kind": "formula",
+  "id": "ea7a3219-f92c-4ce1-8d2c-6c2e1a70c28e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "As the angle between two vectors of fixed magnitudes rises from 0° to 180°, the resultant's magnitude:",
+  "formula": "",
+  "options": [
+   "Increases continuously",
+   "Decreases continuously",
+   "First increases, then decreases",
+   "Remains constant"
+  ],
+  "answer": 1,
+  "explain": "R² = A² + B² + 2AB cosθ and cosθ decreases on 0° to 180°, so R falls from A+B to |A−B|.",
+  "kind": "trend",
+  "id": "1adb1760-bb8c-4840-aa70-e656d480cb5e",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Vector addition and subtraction"
+ },
+ {
+  "prompt": "A stone is released from a balloon rising at speed v. Its initial velocity relative to the balloon is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "v upward",
+   "v downward",
+   "2v downward"
+  ],
+  "answer": 0,
+  "explain": "At release, stone and balloon have the same velocity v, so v_rel = 0.",
+  "kind": "concept",
+  "id": "bc831988-dc0c-4713-a99d-cb5f46ad4925",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Man standing on an escalator reaches the top in t₁; walking on a stopped one takes t₂. Walking on moving one:",
+  "formula": "t = t₁t₂/(t₁+t₂)",
+  "options": [
+   "t₁t₂/(t₁+t₂)",
+   "(t₁+t₂)/2",
+   "t₁t₂/(t₂−t₁)",
+   "t₁ + t₂"
+  ],
+  "answer": 0,
+  "explain": "Speeds add: L/t = L/t₁ + L/t₂, so t = t₁t₂/(t₁+t₂).",
+  "kind": "result",
+  "id": "83b42887-fcd9-475b-a447-6600f3c21d6c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Two bodies start with v_AB = 0 but have constant nonzero relative acceleration. Separation vs time graph is:",
+  "formula": "Δx = ½a_rel t²",
+  "options": [
+   "A straight line through origin",
+   "A horizontal line",
+   "A parabola",
+   "A straight line with intercept"
+  ],
+  "answer": 2,
+  "explain": "With v_rel = 0 initially and constant a_rel, Δx = ½a_rel t², a parabola.",
+  "kind": "graph",
+  "id": "50f90791-7980-4535-ac63-236808a3041c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "A boat goes distance d downstream and back in a river flowing steadily. Compared with still water, the time taken is:",
+  "formula": "t = 2dv/(v² − u²) > 2d/v",
+  "options": [
+   "Same",
+   "Less",
+   "Greater",
+   "Less if the river is fast"
+  ],
+  "answer": 2,
+  "explain": "Upstream leg loses more time than the downstream leg gains, so the total time is greater.",
+  "kind": "concept",
+  "id": "bed84dac-9492-4bf2-9636-92e1bf556d8d",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Relative velocity in 1D"
+ },
+ {
+  "prompt": "Speed of a particle in a fixed circle is doubled. Its centripetal acceleration becomes:",
+  "formula": "a = v²/r",
+  "options": [
+   "Half",
+   "Double",
+   "Four times",
+   "Unchanged"
+  ],
+  "answer": 2,
+  "explain": "a ∝ v² at fixed r, so doubling v gives 4a.",
+  "kind": "result",
+  "id": "c3034316-bbc3-4178-9abc-ffd2ee17f25b",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Two particles have equal speeds on circles of radii in ratio 1 : 2. Ratio of centripetal accelerations is:",
+  "formula": "a = v²/r",
+  "options": [
+   "1 : 2",
+   "2 : 1",
+   "1 : 4",
+   "4 : 1"
+  ],
+  "answer": 1,
+  "explain": "At equal v, a ∝ 1/r, so a₁ : a₂ = r₂ : r₁ = 2 : 1.",
+  "kind": "result",
+  "id": "e7035fef-7be7-4d10-a3af-f10986cb48cb",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "In uniform circular motion, the tangential acceleration of the particle is:",
+  "formula": "a_t = dv/dt = 0",
+  "options": [
+   "v²/r",
+   "ω²r",
+   "Zero",
+   "rα with α ≠ 0"
+  ],
+  "answer": 2,
+  "explain": "Speed is constant, so dv/dt = 0 and angular acceleration α = 0.",
+  "kind": "concept",
+  "id": "a26f968c-9b1d-4373-a450-c7bd901a4f45",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "Ratio of angular speed of the minute hand to that of the hour hand of a clock is:",
+  "formula": "",
+  "options": [
+   "60 : 1",
+   "12 : 1",
+   "24 : 1",
+   "6 : 1"
+  ],
+  "answer": 1,
+  "explain": "Minute hand: 1 rev/hour; hour hand: 1 rev/12 hours, so 12 : 1.",
+  "kind": "fact",
+  "id": "d1d30c09-7c6b-48f5-9797-39c9d4ed120c",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "A particle revolves at 120 revolutions per minute. Its angular velocity is:",
+  "formula": "ω = 2πn",
+  "options": [
+   "2π rad/s",
+   "4π rad/s",
+   "120π rad/s",
+   "240π rad/s"
+  ],
+  "answer": 1,
+  "explain": "n = 2 rev/s, so ω = 2π × 2 = 4π rad/s.",
+  "kind": "result",
+  "id": "ad074997-27fd-4fc2-ba85-4038bacdb785",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "For a fixed radius, the graph of centripetal acceleration versus speed v is a:",
+  "formula": "a = v²/r",
+  "options": [
+   "Straight line through origin",
+   "Parabola through origin",
+   "Rectangular hyperbola",
+   "Line parallel to v-axis"
+  ],
+  "answer": 1,
+  "explain": "a ∝ v² at fixed r, so the a–v graph is a parabola through the origin.",
+  "kind": "graph",
+  "id": "d287fb22-ce77-474f-b676-d653dde8b2cd",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ },
+ {
+  "prompt": "A particle in uniform circular motion has speed v. Magnitude of rate of change of speed is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "v²/r",
+   "v/r",
+   "ω²r"
+  ],
+  "answer": 0,
+  "explain": "Speed is constant, so d|v|/dt = 0, even though |dv/dt| = v²/r.",
+  "kind": "concept",
+  "id": "5b1defa4-3081-4adc-912f-e3323a0ba63d",
+  "subject": "Physics",
+  "chapter": "Kinematics",
+  "topic": "Uniform circular motion & centripetal accel."
+ }
+]

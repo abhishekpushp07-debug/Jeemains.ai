@@ -21,12 +21,25 @@ async def selection_pool(db, exam, subject):
     return (await metadata_cache.get_or_load(f'{db.name}:pool:{exam}:{subject}', load, ttl=120))[0]
 
 
-def choose(pools, picks, count):
-    """Every pick (a whole subject or one chapter) gets an even share; inside a whole subject every chapter does. No prompt twice."""
+async def seen_cards(db, uid, exam):
+    """Cards this student met in their recent rounds (solo sprints and matches): dealt again only after the unseen ones."""
+    ids = set()
+    async for s in db.rf_sessions.find({'user_id': uid, 'exam': exam}, {'_id': 0, 'card_ids': 1}).sort('created_at', -1).limit(40):
+        ids.update(s.get('card_ids') or [])
+    async for e in db.rf_learning_events.find({'uid': uid, 'exam': exam, 'ref': {'$regex': '^duel:'}}, {'_id': 0, 'results.card_id': 1}).sort('completed_at', -1).limit(40):
+        ids.update(r['card_id'] for r in e.get('results') or [])
+    return ids
+
+
+def choose(pools, picks, count, avoid=frozenset()):
+    """Every pick (a whole subject or one chapter) gets an even share; inside a whole subject every chapter does. No prompt twice.
+    Inside each chapter the cards in `avoid` (already seen by this student) come last."""
     seen, lanes = set(), []
     for p in picks:
         groups = {}
-        for row in random.sample(pools[p['subject']], len(pools[p['subject']])):
+        rows = random.sample(pools[p['subject']], len(pools[p['subject']]))
+        rows.sort(key=lambda row: row['id'] not in avoid)  # take() pops from the end: unseen cards first
+        for row in rows:
             if not p['chapter'] or row['chapter'] == p['chapter']:
                 groups.setdefault(row['chapter'], []).append(row)
         keys = list(groups)
@@ -53,14 +66,15 @@ def choose(pools, picks, count):
             if card_id:
                 picked.append(card_id)
     if len(picked) < count:
-        raise HTTPException(400, f'This selection has {len(picked)} unique quick-recall cards. Add another chapter for a full {count}-card round.')
+        raise HTTPException(400, f'This selection has {len(picked)} unique quick-recall cards. Add another chapter or choose fewer cards for a {count}-card round.')
     return picked
 
 
-async def fresh_deck(db, exam, subject, chapter=None, count=30, picks=None):
-    """`picks` (up to 5 subjects or chapters) wins over the single subject and chapter."""
+async def fresh_deck(db, exam, subject, chapter=None, count=30, picks=None, uid=None):
+    """`picks` (up to 5 subjects or chapters) wins over the single subject and chapter. With `uid`, unseen cards come first."""
     picks = picks or [{'subject': subject, 'chapter': chapter}]
     subjects = list(dict.fromkeys(p['subject'] for p in picks))
+    avoid = await seen_cards(db, uid, exam) if uid else frozenset()
 
     async def forget():
         for s in subjects:
@@ -68,7 +82,7 @@ async def fresh_deck(db, exam, subject, chapter=None, count=30, picks=None):
 
     for attempt in range(2):
         try:
-            ids = choose({s: await selection_pool(db, exam, s) for s in subjects}, picks, count)
+            ids = choose({s: await selection_pool(db, exam, s) for s in subjects}, picks, count, avoid)
         except HTTPException:
             if attempt:
                 raise

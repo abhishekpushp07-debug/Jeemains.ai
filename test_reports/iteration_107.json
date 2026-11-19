@@ -1,0 +1,34 @@
+{
+  "summary": "Frontend-only test of Analysis 2.0 Phases 3–5 in the web preview at 390x844 and 320x700, logged in as QA learner 7004186276. No test was started, answered or submitted. PHASE 5: all 8 sections on real attempt ed6543db render real data at both widths. There was no red screen and no page errors, scrollWidth equals the viewport width, and no element sticks out past the screen. result-score shows -25 / 300. Qs by Qs shows 75/75 after 'Aur sawaal' paging, and sorting by time reorders the list (Q1 12s, Q75 9s, Q26 6s). PHASE 3 real data: this paper now has 3 students, not 1. 'Topper' compare is AVAILABLE with real data (Topper score 13, per-question Topper times in Qs cards). Top 10% and Class average show an honest a2-compare-off note: 'kam se kam 10 students ke baad dikhta hai. Abhi 3 students ne diya hai.' PHASE 3 fixture (page.route on mode=comparative, attempt 8725c731): all of these pass at 390 and 320: compare head, key Aap/Topper, tiles 48/212/164, biggest-gap bullets, split rows, subject chart and table ('17 vs 64'), quality table, pace chart, difficulty table. The pills switch with no crash. One bug: at 320 the subject table cuts off the Accuracy and Time values ('68…', '82.…'). PHASE 4 Solutions pass at both widths: the panel, CHOOSE A SUBJECT, the 25-question count, subject tabs, rail, legend, the UNDERSTAND THE WHY title, position text ('Mathematics · Question 22 · 22 of 25'). Filters wrap onto 2–3 rows and filter the rail, with an empty state for overtime/confused. Card headers are right: Q12 CORRECT +4 marks, Q13 SKIPPED 0 marks, Q22 Numerical, INCORRECT -1 marks. The insight line shows time/par. The subject switch remembers the last question. The grid sheet opens and tapping 40 goes to Physics Q40. 3 seekh: saved (PUT 200), success note shown, values still there after reload. PDF: 10-page %PDF-1.7 file (306 KB) downloads with note 'Report download ho gayi.' Scorecard: 1080x1350 PNG downloads with note 'Scorecard download ho gaya…'.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Compare subject table Duo (Overview + Performance, comparative mode)", "issue": "At 320 px width the Accuracy and Time values are cut off with an ellipsis: '4m 09s vs 68…', '57.1% vs 82.…', '1m 18s vs 50…', '6m 19s vs 52…'. Duo uses numberOfLines={1} inside a 50%-width cell. Fine at 390. Fix: let it wrap (drop numberOfLines, or put 'vs them' on a second line), or use 1 column / a smaller font under 360 px. Reference: /app/frontend/src/analysis/Compare.tsx:50 and styles.duo line 140", "testID": "a2-compare-subject-table", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Solutions", "issues": ["Filter chip counts are for the whole paper (Incorrect 61, Correct 9, Skipped 5, Marked 8), but the rail only shows the chosen subject (Maths + Correct shows just 1). This can confuse users. Consider counts per subject, or a hint like 'poore paper mein'.", "At 320 px the Chemistry subject tab is off-screen in the horizontal tab row, and there is no fade or arrow to show more tabs (it still works by swiping)."]},
+      {"screen": "Share scorecard PNG", "issues": ["The ring on the scorecard shows '0%' for a negative score (-25/300), while the app's score ring shows -8.33%. These don't match (minor)."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/iteration_107.json"],
+  "action_items": [
+    "Fix the 320 px cut-off in the Compare subject table Duo cells (Compare.tsx:50 numberOfLines={1}, styles.duo width 50%). Values must stay readable: wrap them, or stack the cells under 360 px.",
+    "Optional: make Solutions filter counts match the chosen subject, or label them as paper-wide.",
+    "Optional: make the scorecard PNG ring percent match the app (negative percent, or hide the ring) when the score is below 0.",
+    "Optional: add compare.times to /app/.cmp_tmp/compare_fixture.json so the per-question Topper time in Qs by Qs is covered by the fixture as well (the real API does return times; checked on ed6543db: 'Topper 0m 10s')."
+  ],
+  "critical_code_review_comments": [
+    "The review request expected a locked 'Compare abhi nahi khula' for Topper on ed6543db (1 student). Live data now has 3 students: Topper compare opens with real data, and only Top 10%/Class average are locked (min 10 finishers). The UI handles this correctly and honestly.",
+    "solution-back-to-analysis only appears when Solutions is opened from a question or chart (from=true). It does not appear from 'Solutions dekho', where the user goes back with the result-tab-analysis tab. This looks intentional.",
+    "Opening a solution sends POST /attempts/{id}/questions/{qid}/solution-open, which records a solution consult on the real attempt (this is expected app behavior, and it happened during the read-only browse)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "~96% (1 medium UI bug at 320 px)"},
+  "seed_data_creation": "No seed data. As allowed, saved 3 private learnings on attempt ed6543db: 'TEST_ Pehle easy sawaal karo', 'TEST_ Guess mat karo', 'TEST_ Har subject ko time do'. They are still saved; main agent can clear them if wanted. Opening solutions recorded solution-open consults for Q1, Q3, Q12, Q13, Q22, Q26 and Q40 on ed6543db.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login flow: entry-phone-input, entry-pin-input, entry-continue-button, then wait for tab-mission. ed6543db opens straight into analysis2 (no share gate). Compare fixture: page.route('**/api/jl/attempts/*/analysis*') and fulfill only when the URL contains mode=comparative. Real ed6543db comparative: topper available (n=1 topper profile, score 13, times for 75 questions); top10/average locked with 3 students. Leave the browser's normal download handling on; expect_download works for both the PDF and the PNG.",
+  "rca_of_issue": "Duo truncation: in Compare.tsx the Duo cell is width:50% with paddingRight 8. Inside it, a single Text with numberOfLines={1} holds a 14px mono 'you', ' vs ', and a 12.5px mono 'them'. At 320 px the StatRow content is about 230 px wide, so each cell is about 107 px, which is narrower than '4m 09s vs 68m 20s' (about 140 px), so RN web cuts it with an ellipsis."
+}

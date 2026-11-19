@@ -7,4 +7,13 @@ module.exports = defineConfig([
   {
     ignores: ['dist/*'],
   },
+  {
+    // These rules only guard React Compiler optimisations. The compiler is not enabled in this app (app.json
+    // experiments), and the flagged patterns (latest-value refs, reset-on-key effects, live clocks) are intentional.
+    rules: {
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/refs': 'off',
+      'react-hooks/purity': 'off',
+    },
+  },
 ]);

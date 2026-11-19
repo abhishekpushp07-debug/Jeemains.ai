@@ -1,1560 +1,3140 @@
 [
-  {
-    "id": "42229a9b-1188-4e13-b63e-a335b6074375",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photoelectric Effect",
-    "prompt": "Work function relation to threshold frequency?",
-    "formula": "φ = hν₀",
-    "options": [
-      "φ = hcν₀",
-      "φ = hν₀",
-      "φ = h/ν₀",
-      "φ = hν₀/c"
-    ],
-    "answer": 1,
-    "explain": "Work function equals Planck's constant times threshold frequency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "25d53823-4e60-4057-a987-5c9cc401b168",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photoelectric Effect",
-    "prompt": "Einstein's photoelectric equation (max KE)?",
-    "formula": "KE_max = hν − φ",
-    "options": [
-      "φ − hν",
-      "hν + φ",
-      "hν − φ",
-      "hν/φ"
-    ],
-    "answer": 2,
-    "explain": "Maximum KE of emitted electron = photon energy minus work function.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "de19f48e-85a3-4855-a3f7-5632545f93b9",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photoelectric Effect",
-    "prompt": "Stopping potential relates to KE_max by?",
-    "formula": "eV₀ = KE_max",
-    "options": [
-      "eV₀ = hν",
-      "eV₀ = KE_max/2",
-      "2eV₀ = KE_max",
-      "eV₀ = KE_max"
-    ],
-    "answer": 3,
-    "explain": "Stopping potential V₀ is the potential needed to stop electrons with max KE.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8d271369-4e4d-4185-ba9b-3910b7ca4daa",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "de Broglie Hypothesis",
-    "prompt": "de Broglie wavelength of a particle?",
-    "formula": "λ = h/p",
-    "options": [
-      "λ = h/p",
-      "λ = h/mv²",
-      "λ = h·p",
-      "λ = p/h"
-    ],
-    "answer": 0,
-    "explain": "de Broglie wavelength λ = h/momentum; applies to all matter particles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6cc57fdc-3186-423a-936d-c0b6f20daf32",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "de Broglie Hypothesis",
-    "prompt": "de Broglie wavelength in terms of KE?",
-    "formula": "λ = h/√(2mK)",
-    "options": [
-      "h/√(mK)",
-      "h/2mK",
-      "h²/2mK",
-      "h/√(2mK)"
-    ],
-    "answer": 3,
-    "explain": "Using p = √(2mK), substituting gives λ = h/√(2mK).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "58afbf1c-9bd0-4532-a8c4-aa4441531585",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photoelectric Effect",
-    "prompt": "Photoelectric effect: increasing frequency affects?",
-    "formula": "",
-    "options": [
-      "KE_max increases",
-      "Work function changes",
-      "Photocurrent increases",
-      "Stopping potential decreases"
-    ],
-    "answer": 0,
-    "explain": "Higher frequency → higher photon energy → greater KE_max of electrons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec612dc5-ed45-4fd0-b8ea-0456d3658ac8",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photon Properties",
-    "prompt": "Photon momentum in terms of wavelength?",
-    "formula": "p = h/λ",
-    "options": [
-      "p = h/λ",
-      "p = hλ/c",
-      "p = hλ",
-      "p = h/cλ"
-    ],
-    "answer": 0,
-    "explain": "Photon momentum p = h/λ = E/c; photons have zero rest mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e0ce11a0-4c4c-4ce9-9dda-c0c909d03458",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photon Properties",
-    "prompt": "Energy of a photon in terms of wavelength?",
-    "formula": "E = hc/λ",
-    "options": [
-      "E = hc/λ",
-      "E = hλ/c",
-      "E = h/cλ",
-      "E = hc·λ"
-    ],
-    "answer": 0,
-    "explain": "Using ν = c/λ, photon energy E = hν = hc/λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1ba20e9a-ce10-4560-b094-44526f0279d6",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photon Properties",
-    "prompt": "Photon rest mass is?",
-    "formula": "",
-    "options": [
-      "hν/c",
-      "h/c",
-      "hν/c²",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "Photons are massless particles; they have zero rest mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7ab72a00-d59d-4268-99cc-680d9f89db98",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photoelectric Effect",
-    "prompt": "Threshold wavelength λ₀ in terms of work function?",
-    "formula": "λ₀ = hc/φ",
-    "options": [
-      "λ₀ = hφ/c",
-      "λ₀ = φ/hc",
-      "λ₀ = hc/φ",
-      "λ₀ = h/φ"
-    ],
-    "answer": 2,
-    "explain": "At threshold, photon energy exactly equals work function: hc/λ₀ = φ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "739bc8e6-c646-488b-9424-4e08c2f14fed",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photoelectric Effect",
-    "prompt": "Slope of stopping potential vs frequency graph?",
-    "formula": "slope = h/e",
-    "options": [
-      "h/e",
-      "he",
-      "e/h",
-      "h"
-    ],
-    "answer": 0,
-    "explain": "From eV₀ = hν − φ, slope of V₀ vs ν is h/e (Planck's constant/charge).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "58ac4a3e-b1b9-42f7-a1f3-2293f9d6d197",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "de Broglie Hypothesis",
-    "prompt": "de Broglie wavelength of electron accelerated through V volts?",
-    "formula": "λ = 1.227/√V nm",
-    "options": [
-      "0.1227/√V nm",
-      "12.27/√V nm",
-      "1.227/√V nm",
-      "12.27/V nm"
-    ],
-    "answer": 2,
-    "explain": "λ = h/√(2meV) numerically gives λ (nm) = 1.227/√V for an electron.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7b447d1b-c6da-4194-8480-58ddaef51365",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "de Broglie Hypothesis",
-    "prompt": "Heavier particle at same KE has __ de Broglie wavelength?",
-    "formula": "λ ∝ 1/√m",
-    "options": [
-      "Smaller",
-      "Same",
-      "Larger",
-      "Zero"
-    ],
-    "answer": 0,
-    "explain": "λ = h/√(2mK); at fixed K, larger mass gives smaller wavelength.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dfc3c25b-cfc0-413f-bdac-ec026d776377",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "de Broglie Hypothesis",
-    "prompt": "Davisson-Germer experiment confirmed?",
-    "formula": "",
-    "options": [
-      "Particle nature of electrons",
-      "Photoelectric effect",
-      "X-ray diffraction",
-      "Wave nature of electrons"
-    ],
-    "answer": 3,
-    "explain": "Diffraction of electrons by Ni crystal confirmed de Broglie's hypothesis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a21040e-2875-4f03-ba22-77dd0a84bed6",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photoelectric Effect",
-    "prompt": "In photoelectric effect, saturation current depends on?",
-    "formula": "",
-    "options": [
-      "Intensity of light",
-      "Frequency of light",
-      "Work function",
-      "Stopping potential"
-    ],
-    "answer": 0,
-    "explain": "Saturation current ∝ number of photoelectrons ∝ intensity of incident light.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d712b34c-731d-48e3-bee5-27bdd2aac896",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photon Properties",
-    "prompt": "Number of photons emitted per second by source of power P?",
-    "formula": "n = P/hν",
-    "options": [
-      "P/hν",
-      "Phν",
-      "P/hc",
-      "P·hν/c"
-    ],
-    "answer": 0,
-    "explain": "Each photon carries energy hν, so n = P/hν photons emitted per second.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ab45f8ac-970e-4ef5-9c09-4ef98c64fddd",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Photon Properties",
-    "prompt": "Photon has zero charge and zero rest mass; its energy is?",
-    "formula": "E = pc",
-    "options": [
-      "E = mc²",
-      "E = p²/2m",
-      "E = p/c",
-      "E = pc"
-    ],
-    "answer": 3,
-    "explain": "For massless photon, E = pc (relativistic energy-momentum relation).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "265f7c4b-a4ad-42a8-9621-a645aa28c606",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which phenomenon shows PARTICLE nature of light?",
-    "formula": "",
-    "options": [
-      "Diffraction",
-      "Photoelectric effect",
-      "Interference",
-      "Polarisation"
-    ],
-    "answer": 1,
-    "explain": "Photoelectric effect proves light behaves as discrete quanta (photons).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8ba26244-88cf-4061-bdbd-79c099e0eee2",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which phenomenon shows WAVE nature of electrons?",
-    "formula": "",
-    "options": [
-      "Davisson-Germer experiment",
-      "Compton effect",
-      "Thermionic emission",
-      "Photoelectric effect"
-    ],
-    "answer": 0,
-    "explain": "Electron diffraction in Davisson-Germer proves wave nature of electrons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "90367be9-fdb8-4ea1-8174-363291518f03",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Stopping potential vs frequency: y-intercept gives?",
-    "formula": "eV₀ = hν − φ",
-    "options": [
-      "-φ/e",
-      "h/e",
-      "φ/h",
-      "hν/e"
-    ],
-    "answer": 0,
-    "explain": "At ν=0 intercept, V₀ = −φ/e; magnitude equals work function divided by electron charge.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "13079155-3f01-4e7d-a16a-89e65a274912",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of a particle moving at speed v?",
-    "formula": "λ = h/mv",
-    "options": [
-      "h/mv²",
-      "2h/mv",
-      "mv/h",
-      "h/mv"
-    ],
-    "answer": 3,
-    "explain": "de Broglie relation: λ = h/p = h/mv for non-relativistic particle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "22101089-5394-42fb-a464-0fa5bb10bb12",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: below threshold frequency, emission occurs?",
-    "formula": "",
-    "options": [
-      "Never, regardless of intensity",
-      "After a time delay",
-      "Only for UV light",
-      "Only at high intensity"
-    ],
-    "answer": 0,
-    "explain": "Below threshold frequency, no photoelectric emission occurs no matter how intense the light.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bcfc4d26-4aa6-44b4-880d-bc4f5cd44a96",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of particle with momentum p?",
-    "formula": "λ = h/p",
-    "options": [
-      "hp",
-      "h/p",
-      "h²/p",
-      "p/h"
-    ],
-    "answer": 1,
-    "explain": "Fundamental de Broglie relation directly gives λ = h/p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "46def76f-108b-4ce9-954d-35e5d376431a",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "If accelerating voltage doubles, de Broglie λ of electron changes by?",
-    "formula": "λ ∝ 1/√V",
-    "options": [
-      "Decreases by √2",
-      "Halves",
-      "Doubles",
-      "Increases by √2"
-    ],
-    "answer": 0,
-    "explain": "λ = h/√(2meV), so doubling V multiplies λ by 1/√2, i.e., decreases by factor √2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ff07a686-35c1-4ddb-a305-5d2ecf0c51e1",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photon momentum in terms of energy E?",
-    "formula": "p = E/c",
-    "options": [
-      "E/c",
-      "Ec",
-      "E/c²",
-      "hc/E"
-    ],
-    "answer": 0,
-    "explain": "For a photon, E = pc, so momentum p = E/c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a7c3ce91-78ec-4f2e-87d4-b2d15ea4bae9",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which quantity remains UNCHANGED when intensity of light increases in photoelectric effect?",
-    "formula": "",
-    "options": [
-      "Photoelectric current",
-      "Maximum KE of photoelectrons",
-      "Rate of emission",
-      "Number of photoelectrons"
-    ],
-    "answer": 1,
-    "explain": "Intensity increases photon count, not photon energy; so max KE (and stopping potential) stays same.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "084c128d-5cb0-4aef-88a0-d2250a06861a",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric current vs collector potential: saturation region means?",
-    "formula": "",
-    "options": [
-      "No electrons reach collector",
-      "Intensity is zero",
-      "Emission stops",
-      "All emitted electrons reach collector"
-    ],
-    "answer": 3,
-    "explain": "Saturation current occurs when every emitted photoelectron is collected regardless of extra voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "25b3e505-c4d5-4310-857b-42e552a4b2e3",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Einstein's photoelectric equation is based on which quantum concept?",
-    "formula": "KE_max = hν − φ",
-    "options": [
-      "Intensity determines KE",
-      "One photon ejects one electron",
-      "Wave packet ejects electrons",
-      "Many photons combine"
-    ],
-    "answer": 1,
-    "explain": "Einstein proposed one photon interacts with one electron; single photon energy must exceed work function.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "285bcf62-d8a2-4890-bf37-fe1a9f6ca464",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: maximum KE vs frequency graph slope equals?",
-    "formula": "KE_max = hν − φ",
-    "options": [
-      "Planck's constant h",
-      "e/h",
-      "h/e",
-      "Work function φ"
-    ],
-    "answer": 0,
-    "explain": "KE_max = hν − φ is linear in ν; slope = h (Planck's constant).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2c46b1c7-64ee-454b-84de-2d19ae6f155c",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Dual nature of matter was proposed by?",
-    "formula": "λ = h/p",
-    "options": [
-      "Bohr",
-      "de Broglie",
-      "Einstein",
-      "Heisenberg"
-    ],
-    "answer": 1,
-    "explain": "Louis de Broglie (1924) proposed matter has wave properties with λ = h/p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb719601-aa52-4df9-9e4d-47e91195fc3f",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "In Davisson-Germer experiment, electron beam was diffracted by?",
-    "formula": "",
-    "options": [
-      "Double slit",
-      "Diffraction grating",
-      "Nickel crystal",
-      "Gold foil"
-    ],
-    "answer": 2,
-    "explain": "Electrons diffracted from Ni crystal planes confirmed de Broglie's matter-wave hypothesis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e877b4da-99dc-43be-978f-92bda17b13ee",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: retarding potential needed for fastest electrons equals?",
-    "formula": "eV₀ = KE_max",
-    "options": [
-      "hν / e",
-      "KE_max / e",
-      "KE_max × e",
-      "φ / e"
-    ],
-    "answer": 1,
-    "explain": "Stopping potential V₀ = KE_max/e; work done by retarding field equals max kinetic energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d152f97-7e5d-43fb-9792-c3e98bb8bc9c",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Threshold frequency ν₀ is related to stopping potential V₀ for frequency ν by?",
-    "formula": "V₀ = (h/e)(ν − ν₀)",
-    "options": [
-      "V₀ = eν/h",
-      "V₀ = (h/e)(ν − ν₀)",
-      "V₀ = hν₀/e",
-      "V₀ = h(ν+ν₀)/e"
-    ],
-    "answer": 1,
-    "explain": "From KE_max = h(ν−ν₀), stopping potential V₀ = (h/e)(ν−ν₀).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fc0da2be-463b-4ea9-b864-9dc02ea191d2",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of a macroscopic object (e.g., ball) is negligible because?",
-    "formula": "λ = h/mv",
-    "options": [
-      "Velocity is very small",
-      "h is very large",
-      "Charge is zero",
-      "Mass m is very large"
-    ],
-    "answer": 3,
-    "explain": "h ≈ 6.6×10⁻³⁴ Js; large m makes λ = h/mv immeasurably small for macroscopic objects.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21ea328f-94d7-452d-9955-6fba9b15baf0",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Intensity of light in photoelectric effect is proportional to?",
-    "formula": "",
-    "options": [
-      "Frequency of photons",
-      "Energy of each photon",
-      "Stopping potential",
-      "Number of photons per second"
-    ],
-    "answer": 3,
-    "explain": "Intensity = (number of photons/s) × (energy per photon); at fixed frequency, intensity ∝ photon count.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a4aa502f-7f4b-4efa-a96e-9008d5894548",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photon energy in terms of momentum p?",
-    "formula": "E = pc",
-    "options": [
-      "E = p/c",
-      "E = p²/2m",
-      "E = pc",
-      "E = hc/p²"
-    ],
-    "answer": 2,
-    "explain": "Photon has zero rest mass, so E = pc where c is speed of light.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d1c37932-5886-4bd4-a00b-566fba5a1441",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of electron vs proton at same KE: ratio λₑ/λₚ?",
-    "formula": "λ = h/√(2mK)",
-    "options": [
-      "1 (equal)",
-      "mₚ/mₑ",
-      "√(mₑ/mₚ) < 1",
-      "√(mₚ/mₑ) > 1"
-    ],
-    "answer": 3,
-    "explain": "λ ∝ 1/√m at same KE, so λₑ/λₚ = √(mₚ/mₑ) ≫ 1; electron has longer λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0c0f288a-f61b-481a-bbfa-56a35278bfe7",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photon has momentum but no ___?",
-    "formula": "",
-    "options": [
-      "Rest mass",
-      "Energy",
-      "Frequency",
-      "Wavelength"
-    ],
-    "answer": 0,
-    "explain": "Photon travels at c and has zero rest mass; it has momentum p = h/λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d44fd5c5-8969-429f-99a7-f4058ad9fc6e",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of gas molecule at absolute temperature T?",
-    "formula": "λ = h/√(3mkT)",
-    "options": [
-      "h/√(mkT)",
-      "h/√(kT)",
-      "h/√(2mkT)",
-      "h/√(3mkT)"
-    ],
-    "answer": 3,
-    "explain": "For gas molecule, average KE = (3/2)kT, so λ = h/√(3mkT).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ad8ff2f-ec88-419e-9bb7-9a02c23bb075",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which has largest de Broglie wavelength at same speed?",
-    "formula": "λ = h/mv",
-    "options": [
-      "Neutron",
-      "Electron",
-      "Proton",
-      "Alpha particle"
-    ],
-    "answer": 1,
-    "explain": "λ ∝ 1/m at same speed; electron has smallest mass, so largest wavelength.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a8d0af7c-1e30-4143-9e0a-8231ff3186a8",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Compton wavelength shift Δλ is maximum when scattering angle is?",
-    "formula": "Δλ = (h/m₀c)(1−cosθ)",
-    "options": [
-      "0°",
-      "90°",
-      "180°",
-      "45°"
-    ],
-    "answer": 2,
-    "explain": "Δλ = (h/m₀c)(1−cosθ); maximum when θ = 180°, giving Δλ = 2h/m₀c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "78066174-3fff-44a3-97d3-e6e058a83aaa",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: photo-current is zero at?",
-    "formula": "",
-    "options": [
-      "Saturation potential",
-      "Any positive potential",
-      "Zero potential",
-      "Stopping potential (negative)"
-    ],
-    "answer": 3,
-    "explain": "When retarding potential equals stopping potential V₀, photocurrent becomes zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef4ef54b-e7c9-4570-9cdb-6a70ce2b291a",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of charged particle accelerated through V: λ ∝?",
-    "formula": "λ = h/√(2mqV)",
-    "options": [
-      "√V",
-      "1/V²",
-      "1/√V",
-      "1/V"
-    ],
-    "answer": 2,
-    "explain": "λ = h/√(2mqV), so λ ∝ 1/√V for same charge and mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fa5c4777-2db6-46eb-b058-61fe8847b151",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Intensity of monochromatic light is doubled; photoelectric current?",
-    "formula": "",
-    "options": [
-      "Remains same",
-      "Quadruples",
-      "Doubles",
-      "Halves"
-    ],
-    "answer": 2,
-    "explain": "More intensity → more photons → more electrons emitted → current doubles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "493fc353-0fb9-49c2-8f28-53e6fcc64a21",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Slope of KE_max vs frequency graph in photoelectric effect equals?",
-    "formula": "KE = hν − φ",
-    "options": [
-      "φ",
-      "h (Planck's constant)",
-      "e/h",
-      "h/e"
-    ],
-    "answer": 1,
-    "explain": "KE_max = hν − φ; slope of KE_max vs ν is h, Planck's constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e49e4a4f-d1e2-4b59-af9a-6ef92a527bed",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: work function φ and threshold wavelength λ₀ relation?",
-    "formula": "φ = hc/λ₀",
-    "options": [
-      "φ = λ₀c/h",
-      "φ = hλ₀/c",
-      "φ = h/λ₀",
-      "φ = hc/λ₀"
-    ],
-    "answer": 3,
-    "explain": "At threshold, photon energy just equals work function: φ = hc/λ₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6d453857-879b-43ab-910f-d73ba89bcf09",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Number of photons in energy E of monochromatic light of frequency ν?",
-    "formula": "n = E/hν",
-    "options": [
-      "E/hν",
-      "E·hν",
-      "E/hc",
-      "hν/E"
-    ],
-    "answer": 0,
-    "explain": "Each photon has energy hν, so number of photons n = E/hν.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "84233efc-d706-4788-945e-d53b173fca56",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of alpha particle vs proton at same accelerating voltage?",
-    "formula": "λ = h/√(2mqV)",
-    "options": [
-      "λ_α < λ_p",
-      "Depends on voltage",
-      "λ_α = λ_p",
-      "λ_α > λ_p"
-    ],
-    "answer": 0,
-    "explain": "For α: m=4u, q=2e; for p: m=u, q=e; √(2mqV) larger for α, so λ_α < λ_p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d99d79e6-9169-4254-bb3f-d9fe705f0bb9",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Radiation pressure on a perfectly reflecting surface is?",
-    "formula": "P = 2I/c",
-    "options": [
-      "I/c",
-      "I/2c",
-      "2I/c",
-      "4I/c"
-    ],
-    "answer": 2,
-    "explain": "For perfect reflection, momentum change is 2h/λ per photon, giving pressure = 2I/c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c9fdba93-ab0a-4b92-b78b-770d24ec94c7",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Compton shift formula Δλ = ?",
-    "formula": "Δλ = (h/m₀c)(1 - cosθ)",
-    "options": [
-      "(2h/m₀c)sinθ",
-      "(h/m₀c)(1 + cosθ)",
-      "(h/m₀c)cosθ",
-      "(h/m₀c)(1 - cosθ)"
-    ],
-    "answer": 3,
-    "explain": "Compton shift depends on scattering angle θ via (1-cosθ); m₀ is electron rest mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "25dfbaf3-8aef-4e41-98a1-2aef568b50b1",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photo-electric effect: collector potential at which current first becomes zero is called?",
-    "formula": "",
-    "options": [
-      "Ionisation potential",
-      "Stopping potential",
-      "Threshold potential",
-      "Saturation potential"
-    ],
-    "answer": 1,
-    "explain": "Stopping potential V₀ is the minimum retarding potential that stops even the fastest photoelectrons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5a84fe70-46d1-411a-bbfd-26b5bf313254",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of a particle: doubling its speed (non-relativistic) changes λ by factor?",
-    "formula": "λ = h/mv",
-    "options": [
-      "1/√2",
-      "√2",
-      "2",
-      "1/2"
-    ],
-    "answer": 3,
-    "explain": "λ = h/mv; doubling v halves λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d94fe7d8-bb07-4a03-8a63-f87c41a63e31",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which particle has de Broglie wavelength λ = 1.226/√V Å when accelerated through V volts?",
-    "formula": "λ = 1.226/√V Å",
-    "options": [
-      "Neutron",
-      "Proton",
-      "Electron",
-      "Alpha particle"
-    ],
-    "answer": 2,
-    "explain": "For electron: λ = h/√(2meV) = 1.226/√V Å is the standard result used in JEE.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3749ca29-d3ac-40d1-9a14-047e847bfd9e",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Radiation pressure on a perfectly ABSORBING surface for intensity I is?",
-    "formula": "P = I/c",
-    "options": [
-      "I/2c",
-      "2I/c",
-      "Ic",
-      "I/c"
-    ],
-    "answer": 3,
-    "explain": "Absorbing surface: P = I/c. Reflecting surface: P = 2I/c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cc14b3bb-3ea5-4f03-b794-45efc527883c",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "In photoelectric effect, KE_max is INDEPENDENT of which quantity?",
-    "formula": "",
-    "options": [
-      "Work function of metal",
-      "Planck's constant",
-      "Intensity of light",
-      "Frequency of light"
-    ],
-    "answer": 2,
-    "explain": "KE_max = hν - φ depends on frequency and work function, NOT on intensity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "80b10642-cb06-44ca-a801-800d3bfa6084",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "For same kinetic energy, de Broglie wavelength is LARGEST for which particle?",
-    "formula": "λ = h/√(2mK)",
-    "options": [
-      "Electron",
-      "Alpha particle",
-      "Proton",
-      "Deuteron"
-    ],
-    "answer": 0,
-    "explain": "λ ∝ 1/√m at same KE; electron has smallest mass so largest λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d645c4e-c6a8-4c95-b9b8-ee2166fa9010",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "If photon energy exactly equals work function, maximum KE of emitted electron is?",
-    "formula": "KE = hν - φ",
-    "options": [
-      "Equal to φ",
-      "Negative",
-      "Zero",
-      "Equal to hν"
-    ],
-    "answer": 2,
-    "explain": "KE_max = hν - φ = 0 when hν = φ; electron is emitted with zero kinetic energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86e53a3b-10d2-4baf-a49b-7250df9bfc81",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: which quantity is plotted on y-axis to get a straight line vs ν?",
-    "formula": "",
-    "options": [
-      "Work function",
-      "Stopping potential V₀",
-      "Photoelectric current",
-      "Wavelength of light"
-    ],
-    "answer": 1,
-    "explain": "V₀ = (h/e)ν - φ/e is linear in ν; slope = h/e, y-intercept = -φ/e.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "79aa5169-124e-4a32-bb74-c9b91182d212",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Relation between stopping potential V₀ and work function φ for frequency ν?",
-    "formula": "eV₀ = hν - φ",
-    "options": [
-      "eV₀ = φ - hν",
-      "eV₀ = hν + φ",
-      "eV₀ = hν/φ",
-      "eV₀ = hν - φ"
-    ],
-    "answer": 3,
-    "explain": "Einstein equation: KE_max = eV₀ = hν - φ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8944ae81-10e0-4b48-9e1e-21259df511b9",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric current depends on: (at fixed frequency above threshold)",
-    "formula": "",
-    "options": [
-      "Stopping potential",
-      "Number of incident photons (intensity)",
-      "Energy of each photon",
-      "Frequency of light"
-    ],
-    "answer": 1,
-    "explain": "Each photon ejects one electron; more photons (higher intensity) → more electrons → more current.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0ce08548-3766-4c1d-814b-92bf0b759a44",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Dual nature of radiation: photoelectric effect shows __ nature; diffraction shows __ nature.",
-    "formula": "",
-    "options": [
-      "Wave; Particle",
-      "Particle; Wave",
-      "Particle; Particle",
-      "Wave; Wave"
-    ],
-    "answer": 1,
-    "explain": "Photoelectric effect → particle (photon); diffraction/interference → wave nature of light.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ea22bbae-5dbf-4c02-aaf1-0d89b6f137d0",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of alpha particle accelerated through V volts compared to proton at same V?",
-    "formula": "λ ∝ 1/√(qmV)",
-    "options": [
-      "λ_α > λ_p",
-      "λ_α < λ_p",
-      "λ_α = λ_p",
-      "λ_α = 2λ_p"
-    ],
-    "answer": 1,
-    "explain": "λ = h/√(2mqV); alpha has m=4, q=2 → √(8) times bigger denominator → λ_α = λ_p/√8 < λ_p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "141ff050-b996-4c84-b042-de15dd9086a1",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Stopping potential is INDEPENDENT of which parameter in photoelectric effect?",
-    "formula": "",
-    "options": [
-      "Frequency of incident light",
-      "Intensity of incident light",
-      "Planck's constant",
-      "Work function of metal"
-    ],
-    "answer": 1,
-    "explain": "V₀ = (hν - φ)/e; depends on ν and φ, NOT on intensity (number of photons).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ee0d4174-832a-42d7-8edc-f1055b0671e1",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Momentum of a photon of wavelength λ is?",
-    "formula": "p = h/λ",
-    "options": [
-      "h/λc",
-      "h/λ",
-      "hλ",
-      "hc/λ"
-    ],
-    "answer": 1,
-    "explain": "Photon momentum p = h/λ = E/c; this is also the de Broglie relation applied to photons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "da69e5c0-4957-453c-a464-76d39e15da0e",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "If wavelength of incident light is halved (same metal), stopping potential?",
-    "formula": "eV₀ = hc/λ - φ",
-    "options": [
-      "Decreases",
-      "Increases",
-      "Becomes zero",
-      "Remains same"
-    ],
-    "answer": 1,
-    "explain": "Halving λ doubles photon energy hc/λ, so KE_max = hc/λ - φ increases → V₀ increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "87b944b6-c32f-405e-8903-e05912076480",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which colour of light has minimum stopping potential for a given metal?",
-    "formula": "",
-    "options": [
-      "Red (lowest frequency above threshold)",
-      "All colours give same V₀",
-      "Green (mid frequency)",
-      "Violet (highest frequency)"
-    ],
-    "answer": 0,
-    "explain": "V₀ ∝ (ν - ν₀); red has lowest frequency → smallest V₀ (provided ν > ν₀).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8ea9290e-5f25-4764-a3cb-0a10b1a7813a",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Heisenberg's uncertainty principle: Δx·Δp ≥ ?",
-    "formula": "Δx·Δp ≥ h/4π",
-    "options": [
-      "h/4π",
-      "h/2π",
-      "h",
-      "h/π"
-    ],
-    "answer": 0,
-    "explain": "Uncertainty principle: Δx·Δp ≥ ℏ/2 = h/4π; sets fundamental limit on simultaneous measurement.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2dc4252f-d10f-4712-be4b-a55028db8ae9",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of electron at same KE as a proton: λₑ vs λₚ?",
-    "formula": "λ = h/√(2mK)",
-    "options": [
-      "λₑ > λₚ",
-      "λₑ = λₚ",
-      "λₑ < λₚ",
-      "Depends on velocity"
-    ],
-    "answer": 0,
-    "explain": "λ ∝ 1/√m at same KE; mₑ < mₚ so λₑ > λₚ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "23eda7ef-6e93-4fbe-9774-5c8b0338f895",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: photocurrent vs intensity graph is?",
-    "formula": "",
-    "options": [
-      "Straight line through origin",
-      "Parabola",
-      "Exponential curve",
-      "Hyperbola"
-    ],
-    "answer": 0,
-    "explain": "Photocurrent ∝ intensity (number of photons), so graph is linear through origin.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fcdb93fd-1d4e-4740-9343-f5b1e19803cd",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Radiation pressure on a perfectly reflecting surface for intensity I is?",
-    "formula": "P = 2I/c",
-    "options": [
-      "I/2c",
-      "2I/c",
-      "I/c",
-      "4I/c"
-    ],
-    "answer": 1,
-    "explain": "Reflecting surface gets momentum 2p per photon, so pressure = 2I/c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cec07e0f-ad72-4b80-aa1d-29414802a7be",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Increasing intensity of light (above threshold) increases which quantity?",
-    "formula": "",
-    "options": [
-      "Threshold frequency",
-      "Saturation photocurrent",
-      "KE of photoelectrons",
-      "Stopping potential"
-    ],
-    "answer": 1,
-    "explain": "More photons → more electrons ejected → greater saturation current; KE unchanged.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d397feb-4e9f-4dac-b2dc-c808c94de8c6",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of a particle accelerated through V: λ ∝?",
-    "formula": "λ = h/√(2mqV)",
-    "options": [
-      "V²",
-      "1/√V",
-      "√V",
-      "1/V"
-    ],
-    "answer": 1,
-    "explain": "KE = qV, λ = h/√(2mqV), so λ ∝ 1/√V.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2f26ca5b-f562-4c95-b318-32ba8af87cfb",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photon of red light vs photon of blue light: which has greater momentum?",
-    "formula": "p = h/λ",
-    "options": [
-      "Blue photon",
-      "Red photon",
-      "Equal momentum",
-      "Depends on intensity"
-    ],
-    "answer": 0,
-    "explain": "Blue has smaller λ, so p = h/λ is larger for blue.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "540e836c-f277-41c2-b3d9-65ede8972a73",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Compton scattering: wavelength of scattered photon compared to incident photon?",
-    "formula": "Δλ = (h/m₀c)(1−cosθ)",
-    "options": [
-      "Always larger",
-      "Always smaller",
-      "Equal",
-      "Depends on intensity"
-    ],
-    "answer": 0,
-    "explain": "Photon loses energy to electron; λ_scattered > λ_incident always (Δλ ≥ 0).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ea1f2abc-488e-4897-9cf1-a250e579d54a",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which phenomenon cannot be explained by wave theory of light?",
-    "formula": "",
-    "options": [
-      "Diffraction",
-      "Interference",
-      "Photoelectric effect",
-      "Polarisation"
-    ],
-    "answer": 2,
-    "explain": "Photoelectric effect requires photon concept; interference, diffraction, polarisation are wave phenomena.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "de05d5c3-9eec-4c61-a076-87b5f1fc019b",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photon travels from glass to vacuum: its frequency?",
-    "formula": "E = hν",
-    "options": [
-      "Increases",
-      "Decreases",
-      "Becomes zero",
-      "Remains same"
-    ],
-    "answer": 3,
-    "explain": "Photon frequency (energy) is invariant; only speed and wavelength change at interface.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bfbbd0c1-28cb-4c4d-9b00-2217c0095729",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of a particle: if KE is doubled, λ changes by factor?",
-    "formula": "λ = h/√(2mK)",
-    "options": [
-      "2",
-      "√2",
-      "1/2",
-      "1/√2"
-    ],
-    "answer": 3,
-    "explain": "λ ∝ 1/√K; doubling K gives λ → λ/√2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7bc8e82e-8a78-4530-891a-c3adf1a34934",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: photo-current becomes zero when retarding potential equals?",
-    "formula": "eV₀ = KE_max",
-    "options": [
-      "Ionisation potential",
-      "Threshold potential",
-      "Stopping potential",
-      "Work function/e"
-    ],
-    "answer": 2,
-    "explain": "Current becomes zero when retarding potential = stopping potential V₀, which decelerates fastest electrons to rest.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "41803ff5-8bb9-4d1b-babd-ffa461461975",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "de Broglie wavelength of particle of charge q, mass m through potential V is?",
-    "formula": "λ = h/√(2mqV)",
-    "options": [
-      "h/√(2mqV)",
-      "h/(mqV)",
-      "h√(2mqV)",
-      "h/√(mqV)"
-    ],
-    "answer": 0,
-    "explain": "KE = qV, so p = √(2mqV) and λ = h/p = h/√(2mqV).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1db9f4cc-7001-4bf2-b904-216b1f51a622",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Which graph gives a straight line in photoelectric effect?",
-    "formula": "KE_max = hν − φ",
-    "options": [
-      "Current vs voltage",
-      "KE_max vs frequency ν",
-      "Current vs frequency",
-      "KE_max vs intensity"
-    ],
-    "answer": 1,
-    "explain": "Einstein's equation: KE_max = hν − φ is linear in ν; slope = h, y-intercept = −φ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9bbb9531-a9c0-4629-a12b-abba338e9108",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "Photoelectric effect: KE_max of emitted electrons is measured using?",
-    "formula": "KE_max = eV₀",
-    "options": [
-      "Saturation current",
-      "Intensity of light",
-      "Stopping potential",
-      "Threshold frequency"
-    ],
-    "answer": 2,
-    "explain": "Stopping potential V₀ decelerates fastest electrons to rest; KE_max = eV₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0e500ff5-c484-459d-aba6-dfc5a7dd2192",
-    "subject": "Physics",
-    "chapter": "Dual Nature",
-    "topic": "Dual Nature",
-    "prompt": "In photoelectric effect, what does the x-intercept of V₀ vs ν graph represent?",
-    "formula": "V₀ = (h/e)ν − φ/e",
-    "options": [
-      "Planck's constant h",
-      "Threshold frequency ν₀",
-      "Work function φ",
-      "Saturation current"
-    ],
-    "answer": 1,
-    "explain": "At V₀ = 0: ν = ν₀ = φ/h; so x-intercept of V₀ vs ν graph gives threshold frequency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "42229a9b-1188-4e13-b63e-a335b6074375",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photoelectric Effect",
+  "prompt": "Work function relation to threshold frequency?",
+  "formula": "φ = hν₀",
+  "options": [
+   "φ = hcν₀",
+   "φ = hν₀",
+   "φ = h/ν₀",
+   "φ = hν₀/c"
+  ],
+  "answer": 1,
+  "explain": "Work function equals Planck's constant times threshold frequency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "25d53823-4e60-4057-a987-5c9cc401b168",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photoelectric Effect",
+  "prompt": "Einstein's photoelectric equation (max KE)?",
+  "formula": "KE_max = hν − φ",
+  "options": [
+   "φ − hν",
+   "hν + φ",
+   "hν − φ",
+   "hν/φ"
+  ],
+  "answer": 2,
+  "explain": "Maximum KE of emitted electron = photon energy minus work function.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "de19f48e-85a3-4855-a3f7-5632545f93b9",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photoelectric Effect",
+  "prompt": "Stopping potential relates to KE_max by?",
+  "formula": "eV₀ = KE_max",
+  "options": [
+   "eV₀ = hν",
+   "eV₀ = KE_max/2",
+   "2eV₀ = KE_max",
+   "eV₀ = KE_max"
+  ],
+  "answer": 3,
+  "explain": "Stopping potential V₀ is the potential needed to stop electrons with max KE.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8d271369-4e4d-4185-ba9b-3910b7ca4daa",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie Hypothesis",
+  "prompt": "de Broglie wavelength of a particle?",
+  "formula": "λ = h/p",
+  "options": [
+   "λ = h/p",
+   "λ = h/mv²",
+   "λ = h·p",
+   "λ = p/h"
+  ],
+  "answer": 0,
+  "explain": "de Broglie wavelength λ = h/momentum; applies to all matter particles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6cc57fdc-3186-423a-936d-c0b6f20daf32",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie Hypothesis",
+  "prompt": "de Broglie wavelength in terms of KE?",
+  "formula": "λ = h/√(2mK)",
+  "options": [
+   "h/√(mK)",
+   "h/2mK",
+   "h²/2mK",
+   "h/√(2mK)"
+  ],
+  "answer": 3,
+  "explain": "Using p = √(2mK), substituting gives λ = h/√(2mK).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "58afbf1c-9bd0-4532-a8c4-aa4441531585",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photoelectric Effect",
+  "prompt": "Photoelectric effect: increasing frequency affects?",
+  "formula": "",
+  "options": [
+   "KE_max increases",
+   "Work function changes",
+   "Photocurrent increases",
+   "Stopping potential decreases"
+  ],
+  "answer": 0,
+  "explain": "Higher frequency → higher photon energy → greater KE_max of electrons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec612dc5-ed45-4fd0-b8ea-0456d3658ac8",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon Properties",
+  "prompt": "Photon momentum in terms of wavelength?",
+  "formula": "p = h/λ",
+  "options": [
+   "p = h/λ",
+   "p = hλ/c",
+   "p = hλ",
+   "p = h/cλ"
+  ],
+  "answer": 0,
+  "explain": "Photon momentum p = h/λ = E/c; photons have zero rest mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e0ce11a0-4c4c-4ce9-9dda-c0c909d03458",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon Properties",
+  "prompt": "Energy of a photon in terms of wavelength?",
+  "formula": "E = hc/λ",
+  "options": [
+   "E = hc/λ",
+   "E = hλ/c",
+   "E = h/cλ",
+   "E = hc·λ"
+  ],
+  "answer": 0,
+  "explain": "Using ν = c/λ, photon energy E = hν = hc/λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1ba20e9a-ce10-4560-b094-44526f0279d6",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon Properties",
+  "prompt": "Photon rest mass is?",
+  "formula": "",
+  "options": [
+   "hν/c",
+   "h/c",
+   "hν/c²",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Photons are massless particles; they have zero rest mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7ab72a00-d59d-4268-99cc-680d9f89db98",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photoelectric Effect",
+  "prompt": "Threshold wavelength λ₀ in terms of work function?",
+  "formula": "λ₀ = hc/φ",
+  "options": [
+   "λ₀ = hφ/c",
+   "λ₀ = φ/hc",
+   "λ₀ = hc/φ",
+   "λ₀ = h/φ"
+  ],
+  "answer": 2,
+  "explain": "At threshold, photon energy exactly equals work function: hc/λ₀ = φ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "739bc8e6-c646-488b-9424-4e08c2f14fed",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photoelectric Effect",
+  "prompt": "Slope of stopping potential vs frequency graph?",
+  "formula": "slope = h/e",
+  "options": [
+   "h/e",
+   "he",
+   "e/h",
+   "h"
+  ],
+  "answer": 0,
+  "explain": "From eV₀ = hν − φ, slope of V₀ vs ν is h/e (Planck's constant/charge).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "58ac4a3e-b1b9-42f7-a1f3-2293f9d6d197",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie Hypothesis",
+  "prompt": "de Broglie wavelength of electron accelerated through V volts?",
+  "formula": "λ = 1.227/√V nm",
+  "options": [
+   "0.1227/√V nm",
+   "12.27/√V nm",
+   "1.227/√V nm",
+   "12.27/V nm"
+  ],
+  "answer": 2,
+  "explain": "λ = h/√(2meV) numerically gives λ (nm) = 1.227/√V for an electron.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7b447d1b-c6da-4194-8480-58ddaef51365",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie Hypothesis",
+  "prompt": "Heavier particle at same KE has __ de Broglie wavelength?",
+  "formula": "λ ∝ 1/√m",
+  "options": [
+   "Smaller",
+   "Same",
+   "Larger",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "λ = h/√(2mK); at fixed K, larger mass gives smaller wavelength.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dfc3c25b-cfc0-413f-bdac-ec026d776377",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie Hypothesis",
+  "prompt": "Davisson-Germer experiment confirmed?",
+  "formula": "",
+  "options": [
+   "Particle nature of electrons",
+   "Photoelectric effect",
+   "X-ray diffraction",
+   "Wave nature of electrons"
+  ],
+  "answer": 3,
+  "explain": "Diffraction of electrons by Ni crystal confirmed de Broglie's hypothesis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a21040e-2875-4f03-ba22-77dd0a84bed6",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photoelectric Effect",
+  "prompt": "In photoelectric effect, saturation current depends on?",
+  "formula": "",
+  "options": [
+   "Intensity of light",
+   "Frequency of light",
+   "Work function",
+   "Stopping potential"
+  ],
+  "answer": 0,
+  "explain": "Saturation current ∝ number of photoelectrons ∝ intensity of incident light.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d712b34c-731d-48e3-bee5-27bdd2aac896",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon Properties",
+  "prompt": "Number of photons emitted per second by source of power P?",
+  "formula": "n = P/hν",
+  "options": [
+   "P/hν",
+   "Phν",
+   "P/hc",
+   "P·hν/c"
+  ],
+  "answer": 0,
+  "explain": "Each photon carries energy hν, so n = P/hν photons emitted per second.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ab45f8ac-970e-4ef5-9c09-4ef98c64fddd",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon Properties",
+  "prompt": "Photon has zero charge and zero rest mass; its energy is?",
+  "formula": "E = pc",
+  "options": [
+   "E = mc²",
+   "E = p²/2m",
+   "E = p/c",
+   "E = pc"
+  ],
+  "answer": 3,
+  "explain": "For massless photon, E = pc (relativistic energy-momentum relation).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "265f7c4b-a4ad-42a8-9621-a645aa28c606",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Failure of wave theory, particle nature",
+  "prompt": "Which phenomenon shows PARTICLE nature of light?",
+  "formula": "",
+  "options": [
+   "Diffraction",
+   "Photoelectric effect",
+   "Interference",
+   "Polarisation"
+  ],
+  "answer": 1,
+  "explain": "Photoelectric effect proves light behaves as discrete quanta (photons).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8ba26244-88cf-4061-bdbd-79c099e0eee2",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "Which phenomenon shows WAVE nature of electrons?",
+  "formula": "",
+  "options": [
+   "Davisson-Germer experiment",
+   "Compton effect",
+   "Thermionic emission",
+   "Photoelectric effect"
+  ],
+  "answer": 0,
+  "explain": "Electron diffraction in Davisson-Germer proves wave nature of electrons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "90367be9-fdb8-4ea1-8174-363291518f03",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential vs frequency graph (h/e)",
+  "prompt": "Stopping potential vs frequency: y-intercept gives?",
+  "formula": "eV₀ = hν − φ",
+  "options": [
+   "-φ/e",
+   "h/e",
+   "φ/h",
+   "hν/e"
+  ],
+  "answer": 0,
+  "explain": "At ν=0 intercept, V₀ = −φ/e; magnitude equals work function divided by electron charge.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "13079155-3f01-4e7d-a16a-89e65a274912",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "de Broglie wavelength of a particle moving at speed v?",
+  "formula": "λ = h/mv",
+  "options": [
+   "h/mv²",
+   "2h/mv",
+   "mv/h",
+   "h/mv"
+  ],
+  "answer": 3,
+  "explain": "de Broglie relation: λ = h/p = h/mv for non-relativistic particle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "22101089-5394-42fb-a464-0fa5bb10bb12",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "Photoelectric effect: below threshold frequency, emission occurs?",
+  "formula": "",
+  "options": [
+   "Never, regardless of intensity",
+   "After a time delay",
+   "Only for UV light",
+   "Only at high intensity"
+  ],
+  "answer": 0,
+  "explain": "Below threshold frequency, no photoelectric emission occurs no matter how intense the light.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bcfc4d26-4aa6-44b4-880d-bc4f5cd44a96",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "de Broglie wavelength of particle with momentum p?",
+  "formula": "λ = h/p",
+  "options": [
+   "hp",
+   "h/p",
+   "h²/p",
+   "p/h"
+  ],
+  "answer": 1,
+  "explain": "Fundamental de Broglie relation directly gives λ = h/p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "46def76f-108b-4ce9-954d-35e5d376431a",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "If accelerating voltage doubles, de Broglie λ of electron changes by?",
+  "formula": "λ ∝ 1/√V",
+  "options": [
+   "Decreases by √2",
+   "Halves",
+   "Doubles",
+   "Increases by √2"
+  ],
+  "answer": 0,
+  "explain": "λ = h/√(2meV), so doubling V multiplies λ by 1/√2, i.e., decreases by factor √2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ff07a686-35c1-4ddb-a305-5d2ecf0c51e1",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "Photon momentum in terms of energy E?",
+  "formula": "p = E/c",
+  "options": [
+   "E/c",
+   "Ec",
+   "E/c²",
+   "hc/E"
+  ],
+  "answer": 0,
+  "explain": "For a photon, E = pc, so momentum p = E/c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a7c3ce91-78ec-4f2e-87d4-b2d15ea4bae9",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Which quantity remains UNCHANGED when intensity of light increases in photoelectric effect?",
+  "formula": "",
+  "options": [
+   "Photoelectric current",
+   "Maximum KE of photoelectrons",
+   "Rate of emission",
+   "Number of photoelectrons"
+  ],
+  "answer": 1,
+  "explain": "Intensity increases photon count, not photon energy; so max KE (and stopping potential) stays same.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "084c128d-5cb0-4aef-88a0-d2250a06861a",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Photoelectric current vs collector potential: saturation region means?",
+  "formula": "",
+  "options": [
+   "No electrons reach collector",
+   "Intensity is zero",
+   "Emission stops",
+   "All emitted electrons reach collector"
+  ],
+  "answer": 3,
+  "explain": "Saturation current occurs when every emitted photoelectron is collected regardless of extra voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "25b3e505-c4d5-4310-857b-42e552a4b2e3",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Einstein's photoelectric equation is based on which quantum concept?",
+  "formula": "KE_max = hν − φ",
+  "options": [
+   "Intensity determines KE",
+   "One photon ejects one electron",
+   "Wave packet ejects electrons",
+   "Many photons combine"
+  ],
+  "answer": 1,
+  "explain": "Einstein proposed one photon interacts with one electron; single photon energy must exceed work function.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "285bcf62-d8a2-4890-bf37-fe1a9f6ca464",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Photoelectric effect: maximum KE vs frequency graph slope equals?",
+  "formula": "KE_max = hν − φ",
+  "options": [
+   "Planck's constant h",
+   "e/h",
+   "h/e",
+   "Work function φ"
+  ],
+  "answer": 0,
+  "explain": "KE_max = hν − φ is linear in ν; slope = h (Planck's constant).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2c46b1c7-64ee-454b-84de-2d19ae6f155c",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "Dual nature of matter was proposed by?",
+  "formula": "λ = h/p",
+  "options": [
+   "Bohr",
+   "de Broglie",
+   "Einstein",
+   "Heisenberg"
+  ],
+  "answer": 1,
+  "explain": "Louis de Broglie (1924) proposed matter has wave properties with λ = h/p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb719601-aa52-4df9-9e4d-47e91195fc3f",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "In Davisson-Germer experiment, electron beam was diffracted by?",
+  "formula": "",
+  "options": [
+   "Double slit",
+   "Diffraction grating",
+   "Nickel crystal",
+   "Gold foil"
+  ],
+  "answer": 2,
+  "explain": "Electrons diffracted from Ni crystal planes confirmed de Broglie's matter-wave hypothesis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e877b4da-99dc-43be-978f-92bda17b13ee",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Photoelectric effect: retarding potential needed for fastest electrons equals?",
+  "formula": "eV₀ = KE_max",
+  "options": [
+   "hν / e",
+   "KE_max / e",
+   "KE_max × e",
+   "φ / e"
+  ],
+  "answer": 1,
+  "explain": "Stopping potential V₀ = KE_max/e; work done by retarding field equals max kinetic energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d152f97-7e5d-43fb-9792-c3e98bb8bc9c",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential vs frequency graph (h/e)",
+  "prompt": "Threshold frequency ν₀ is related to stopping potential V₀ for frequency ν by?",
+  "formula": "V₀ = (h/e)(ν − ν₀)",
+  "options": [
+   "V₀ = eν/h",
+   "V₀ = (h/e)(ν − ν₀)",
+   "V₀ = hν₀/e",
+   "V₀ = h(ν+ν₀)/e"
+  ],
+  "answer": 1,
+  "explain": "From KE_max = h(ν−ν₀), stopping potential V₀ = (h/e)(ν−ν₀).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fc0da2be-463b-4ea9-b864-9dc02ea191d2",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "de Broglie wavelength of a macroscopic object (e.g., ball) is negligible because?",
+  "formula": "λ = h/mv",
+  "options": [
+   "Velocity is very small",
+   "h is very large",
+   "Charge is zero",
+   "Mass m is very large"
+  ],
+  "answer": 3,
+  "explain": "h ≈ 6.6×10⁻³⁴ Js; large m makes λ = h/mv immeasurably small for macroscopic objects.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21ea328f-94d7-452d-9955-6fba9b15baf0",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Intensity of light in photoelectric effect is proportional to?",
+  "formula": "",
+  "options": [
+   "Frequency of photons",
+   "Energy of each photon",
+   "Stopping potential",
+   "Number of photons per second"
+  ],
+  "answer": 3,
+  "explain": "Intensity = (number of photons/s) × (energy per photon); at fixed frequency, intensity ∝ photon count.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a4aa502f-7f4b-4efa-a96e-9008d5894548",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "Photon energy in terms of momentum p?",
+  "formula": "E = pc",
+  "options": [
+   "E = p/c",
+   "E = p²/2m",
+   "E = pc",
+   "E = hc/p²"
+  ],
+  "answer": 2,
+  "explain": "Photon has zero rest mass, so E = pc where c is speed of light.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d1c37932-5886-4bd4-a00b-566fba5a1441",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "de Broglie wavelength of electron vs proton at same KE: ratio λₑ/λₚ?",
+  "formula": "λ = h/√(2mK)",
+  "options": [
+   "1 (equal)",
+   "mₚ/mₑ",
+   "√(mₑ/mₚ) < 1",
+   "√(mₚ/mₑ) > 1"
+  ],
+  "answer": 3,
+  "explain": "λ ∝ 1/√m at same KE, so λₑ/λₚ = √(mₚ/mₑ) ≫ 1; electron has longer λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0c0f288a-f61b-481a-bbfa-56a35278bfe7",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "Photon has momentum but no ___?",
+  "formula": "",
+  "options": [
+   "Rest mass",
+   "Energy",
+   "Frequency",
+   "Wavelength"
+  ],
+  "answer": 0,
+  "explain": "Photon travels at c and has zero rest mass; it has momentum p = h/λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d44fd5c5-8969-429f-99a7-f4058ad9fc6e",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Thermal de Broglie wavelength (λ=h/√(3mkT))",
+  "prompt": "de Broglie wavelength of gas molecule at absolute temperature T?",
+  "formula": "λ = h/√(3mkT)",
+  "options": [
+   "h/√(mkT)",
+   "h/√(kT)",
+   "h/√(2mkT)",
+   "h/√(3mkT)"
+  ],
+  "answer": 3,
+  "explain": "For gas molecule, average KE = (3/2)kT, so λ = h/√(3mkT).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ad8ff2f-ec88-419e-9bb7-9a02c23bb075",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "Which has largest de Broglie wavelength at same speed?",
+  "formula": "λ = h/mv",
+  "options": [
+   "Neutron",
+   "Electron",
+   "Proton",
+   "Alpha particle"
+  ],
+  "answer": 1,
+  "explain": "λ ∝ 1/m at same speed; electron has smallest mass, so largest wavelength.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a8d0af7c-1e30-4143-9e0a-8231ff3186a8",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Dual Nature",
+  "prompt": "Compton wavelength shift Δλ is maximum when scattering angle is?",
+  "formula": "Δλ = (h/m₀c)(1−cosθ)",
+  "options": [
+   "0°",
+   "90°",
+   "180°",
+   "45°"
+  ],
+  "answer": 2,
+  "explain": "Δλ = (h/m₀c)(1−cosθ); maximum when θ = 180°, giving Δλ = 2h/m₀c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "78066174-3fff-44a3-97d3-e6e058a83aaa",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Photoelectric effect: photo-current is zero at?",
+  "formula": "",
+  "options": [
+   "Saturation potential",
+   "Any positive potential",
+   "Zero potential",
+   "Stopping potential (negative)"
+  ],
+  "answer": 3,
+  "explain": "When retarding potential equals stopping potential V₀, photocurrent becomes zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef4ef54b-e7c9-4570-9cdb-6a70ce2b291a",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "de Broglie wavelength of charged particle accelerated through V: λ ∝?",
+  "formula": "λ = h/√(2mqV)",
+  "options": [
+   "√V",
+   "1/V²",
+   "1/√V",
+   "1/V"
+  ],
+  "answer": 2,
+  "explain": "λ = h/√(2mqV), so λ ∝ 1/√V for same charge and mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fa5c4777-2db6-46eb-b058-61fe8847b151",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Intensity of monochromatic light is doubled; photoelectric current?",
+  "formula": "",
+  "options": [
+   "Remains same",
+   "Quadruples",
+   "Doubles",
+   "Halves"
+  ],
+  "answer": 2,
+  "explain": "More intensity → more photons → more electrons emitted → current doubles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "493fc353-0fb9-49c2-8f28-53e6fcc64a21",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Slope of KE_max vs frequency graph in photoelectric effect equals?",
+  "formula": "KE = hν − φ",
+  "options": [
+   "φ",
+   "h (Planck's constant)",
+   "e/h",
+   "h/e"
+  ],
+  "answer": 1,
+  "explain": "KE_max = hν − φ; slope of KE_max vs ν is h, Planck's constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e49e4a4f-d1e2-4b59-af9a-6ef92a527bed",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "Photoelectric effect: work function φ and threshold wavelength λ₀ relation?",
+  "formula": "φ = hc/λ₀",
+  "options": [
+   "φ = λ₀c/h",
+   "φ = hλ₀/c",
+   "φ = h/λ₀",
+   "φ = hc/λ₀"
+  ],
+  "answer": 3,
+  "explain": "At threshold, photon energy just equals work function: φ = hc/λ₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6d453857-879b-43ab-910f-d73ba89bcf09",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Number of photons in energy E of monochromatic light of frequency ν?",
+  "formula": "n = E/hν",
+  "options": [
+   "E/hν",
+   "E·hν",
+   "E/hc",
+   "hν/E"
+  ],
+  "answer": 0,
+  "explain": "Each photon has energy hν, so number of photons n = E/hν.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "84233efc-d706-4788-945e-d53b173fca56",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "de Broglie wavelength of alpha particle vs proton at same accelerating voltage?",
+  "formula": "λ = h/√(2mqV)",
+  "options": [
+   "λ_α < λ_p",
+   "Depends on voltage",
+   "λ_α = λ_p",
+   "λ_α > λ_p"
+  ],
+  "answer": 0,
+  "explain": "For α: m=4u, q=2e; for p: m=u, q=e; √(2mqV) larger for α, so λ_α < λ_p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d99d79e6-9169-4254-bb3f-d9fe705f0bb9",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Radiation pressure and force from photons",
+  "prompt": "Radiation pressure on a perfectly reflecting surface is?",
+  "formula": "P = 2I/c",
+  "options": [
+   "I/c",
+   "I/2c",
+   "2I/c",
+   "4I/c"
+  ],
+  "answer": 2,
+  "explain": "For perfect reflection, momentum change is 2h/λ per photon, giving pressure = 2I/c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c9fdba93-ab0a-4b92-b78b-770d24ec94c7",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Dual Nature",
+  "prompt": "Compton shift formula Δλ = ?",
+  "formula": "Δλ = (h/m₀c)(1 - cosθ)",
+  "options": [
+   "(2h/m₀c)sinθ",
+   "(h/m₀c)(1 + cosθ)",
+   "(h/m₀c)cosθ",
+   "(h/m₀c)(1 - cosθ)"
+  ],
+  "answer": 3,
+  "explain": "Compton shift depends on scattering angle θ via (1-cosθ); m₀ is electron rest mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "25dfbaf3-8aef-4e41-98a1-2aef568b50b1",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Photo-electric effect: collector potential at which current first becomes zero is called?",
+  "formula": "",
+  "options": [
+   "Ionisation potential",
+   "Stopping potential",
+   "Threshold potential",
+   "Saturation potential"
+  ],
+  "answer": 1,
+  "explain": "Stopping potential V₀ is the minimum retarding potential that stops even the fastest photoelectrons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5a84fe70-46d1-411a-bbfd-26b5bf313254",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "de Broglie wavelength of a particle: doubling its speed (non-relativistic) changes λ by factor?",
+  "formula": "λ = h/mv",
+  "options": [
+   "1/√2",
+   "√2",
+   "2",
+   "1/2"
+  ],
+  "answer": 3,
+  "explain": "λ = h/mv; doubling v halves λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d94fe7d8-bb07-4a03-8a63-f87c41a63e31",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "Which particle has de Broglie wavelength λ = 1.226/√V Å when accelerated through V volts?",
+  "formula": "λ = 1.226/√V Å",
+  "options": [
+   "Neutron",
+   "Proton",
+   "Electron",
+   "Alpha particle"
+  ],
+  "answer": 2,
+  "explain": "For electron: λ = h/√(2meV) = 1.226/√V Å is the standard result used in JEE.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3749ca29-d3ac-40d1-9a14-047e847bfd9e",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Radiation pressure and force from photons",
+  "prompt": "Radiation pressure on a perfectly ABSORBING surface for intensity I is?",
+  "formula": "P = I/c",
+  "options": [
+   "I/2c",
+   "2I/c",
+   "Ic",
+   "I/c"
+  ],
+  "answer": 3,
+  "explain": "Absorbing surface: P = I/c. Reflecting surface: P = 2I/c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cc14b3bb-3ea5-4f03-b794-45efc527883c",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "In photoelectric effect, KE_max is INDEPENDENT of which quantity?",
+  "formula": "",
+  "options": [
+   "Work function of metal",
+   "Planck's constant",
+   "Intensity of light",
+   "Frequency of light"
+  ],
+  "answer": 2,
+  "explain": "KE_max = hν - φ depends on frequency and work function, NOT on intensity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "80b10642-cb06-44ca-a801-800d3bfa6084",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "For same kinetic energy, de Broglie wavelength is LARGEST for which particle?",
+  "formula": "λ = h/√(2mK)",
+  "options": [
+   "Electron",
+   "Alpha particle",
+   "Proton",
+   "Deuteron"
+  ],
+  "answer": 0,
+  "explain": "λ ∝ 1/√m at same KE; electron has smallest mass so largest λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d645c4e-c6a8-4c95-b9b8-ee2166fa9010",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "If photon energy exactly equals work function, maximum KE of emitted electron is?",
+  "formula": "KE = hν - φ",
+  "options": [
+   "Equal to φ",
+   "Negative",
+   "Zero",
+   "Equal to hν"
+  ],
+  "answer": 2,
+  "explain": "KE_max = hν - φ = 0 when hν = φ; electron is emitted with zero kinetic energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86e53a3b-10d2-4baf-a49b-7250df9bfc81",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential vs frequency graph (h/e)",
+  "prompt": "Photoelectric effect: which quantity is plotted on y-axis to get a straight line vs ν?",
+  "formula": "",
+  "options": [
+   "Work function",
+   "Stopping potential V₀",
+   "Photoelectric current",
+   "Wavelength of light"
+  ],
+  "answer": 1,
+  "explain": "V₀ = (h/e)ν - φ/e is linear in ν; slope = h/e, y-intercept = -φ/e.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "79aa5169-124e-4a32-bb74-c9b91182d212",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Relation between stopping potential V₀ and work function φ for frequency ν?",
+  "formula": "eV₀ = hν - φ",
+  "options": [
+   "eV₀ = φ - hν",
+   "eV₀ = hν + φ",
+   "eV₀ = hν/φ",
+   "eV₀ = hν - φ"
+  ],
+  "answer": 3,
+  "explain": "Einstein equation: KE_max = eV₀ = hν - φ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8944ae81-10e0-4b48-9e1e-21259df511b9",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Photoelectric current depends on: (at fixed frequency above threshold)",
+  "formula": "",
+  "options": [
+   "Stopping potential",
+   "Number of incident photons (intensity)",
+   "Energy of each photon",
+   "Frequency of light"
+  ],
+  "answer": 1,
+  "explain": "Each photon ejects one electron; more photons (higher intensity) → more electrons → more current.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0ce08548-3766-4c1d-814b-92bf0b759a44",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Failure of wave theory, particle nature",
+  "prompt": "Dual nature of radiation: photoelectric effect shows __ nature; diffraction shows __ nature.",
+  "formula": "",
+  "options": [
+   "Wave; Particle",
+   "Particle; Wave",
+   "Particle; Particle",
+   "Wave; Wave"
+  ],
+  "answer": 1,
+  "explain": "Photoelectric effect → particle (photon); diffraction/interference → wave nature of light.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ea22bbae-5dbf-4c02-aaf1-0d89b6f137d0",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "de Broglie wavelength of alpha particle accelerated through V volts compared to proton at same V?",
+  "formula": "λ ∝ 1/√(qmV)",
+  "options": [
+   "λ_α > λ_p",
+   "λ_α < λ_p",
+   "λ_α = λ_p",
+   "λ_α = 2λ_p"
+  ],
+  "answer": 1,
+  "explain": "λ = h/√(2mqV); alpha has m=4, q=2 → √(8) times bigger denominator → λ_α = λ_p/√8 < λ_p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "141ff050-b996-4c84-b042-de15dd9086a1",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Stopping potential is INDEPENDENT of which parameter in photoelectric effect?",
+  "formula": "",
+  "options": [
+   "Frequency of incident light",
+   "Intensity of incident light",
+   "Planck's constant",
+   "Work function of metal"
+  ],
+  "answer": 1,
+  "explain": "V₀ = (hν - φ)/e; depends on ν and φ, NOT on intensity (number of photons).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ee0d4174-832a-42d7-8edc-f1055b0671e1",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "Momentum of a photon of wavelength λ is?",
+  "formula": "p = h/λ",
+  "options": [
+   "h/λc",
+   "h/λ",
+   "hλ",
+   "hc/λ"
+  ],
+  "answer": 1,
+  "explain": "Photon momentum p = h/λ = E/c; this is also the de Broglie relation applied to photons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "da69e5c0-4957-453c-a464-76d39e15da0e",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "If wavelength of incident light is halved (same metal), stopping potential?",
+  "formula": "eV₀ = hc/λ - φ",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Becomes zero",
+   "Remains same"
+  ],
+  "answer": 1,
+  "explain": "Halving λ doubles photon energy hc/λ, so KE_max = hc/λ - φ increases → V₀ increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "87b944b6-c32f-405e-8903-e05912076480",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Which colour of light has minimum stopping potential for a given metal?",
+  "formula": "",
+  "options": [
+   "Red (lowest frequency above threshold)",
+   "All colours give same V₀",
+   "Green (mid frequency)",
+   "Violet (highest frequency)"
+  ],
+  "answer": 0,
+  "explain": "V₀ ∝ (ν - ν₀); red has lowest frequency → smallest V₀ (provided ν > ν₀).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8ea9290e-5f25-4764-a3cb-0a10b1a7813a",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Dual Nature",
+  "prompt": "Heisenberg's uncertainty principle: Δx·Δp ≥ ?",
+  "formula": "Δx·Δp ≥ h/4π",
+  "options": [
+   "h/4π",
+   "h/2π",
+   "h",
+   "h/π"
+  ],
+  "answer": 0,
+  "explain": "Uncertainty principle: Δx·Δp ≥ ℏ/2 = h/4π; sets fundamental limit on simultaneous measurement.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2dc4252f-d10f-4712-be4b-a55028db8ae9",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "de Broglie wavelength of electron at same KE as a proton: λₑ vs λₚ?",
+  "formula": "λ = h/√(2mK)",
+  "options": [
+   "λₑ > λₚ",
+   "λₑ = λₚ",
+   "λₑ < λₚ",
+   "Depends on velocity"
+  ],
+  "answer": 0,
+  "explain": "λ ∝ 1/√m at same KE; mₑ < mₚ so λₑ > λₚ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "23eda7ef-6e93-4fbe-9774-5c8b0338f895",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Photoelectric effect: photocurrent vs intensity graph is?",
+  "formula": "",
+  "options": [
+   "Straight line through origin",
+   "Parabola",
+   "Exponential curve",
+   "Hyperbola"
+  ],
+  "answer": 0,
+  "explain": "Photocurrent ∝ intensity (number of photons), so graph is linear through origin.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fcdb93fd-1d4e-4740-9343-f5b1e19803cd",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Radiation pressure and force from photons",
+  "prompt": "Radiation pressure on a perfectly reflecting surface for intensity I is?",
+  "formula": "P = 2I/c",
+  "options": [
+   "I/2c",
+   "2I/c",
+   "I/c",
+   "4I/c"
+  ],
+  "answer": 1,
+  "explain": "Reflecting surface gets momentum 2p per photon, so pressure = 2I/c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cec07e0f-ad72-4b80-aa1d-29414802a7be",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Increasing intensity of light (above threshold) increases which quantity?",
+  "formula": "",
+  "options": [
+   "Threshold frequency",
+   "Saturation photocurrent",
+   "KE of photoelectrons",
+   "Stopping potential"
+  ],
+  "answer": 1,
+  "explain": "More photons → more electrons ejected → greater saturation current; KE unchanged.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d397feb-4e9f-4dac-b2dc-c808c94de8c6",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "de Broglie wavelength of a particle accelerated through V: λ ∝?",
+  "formula": "λ = h/√(2mqV)",
+  "options": [
+   "V²",
+   "1/√V",
+   "√V",
+   "1/V"
+  ],
+  "answer": 1,
+  "explain": "KE = qV, λ = h/√(2mqV), so λ ∝ 1/√V.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2f26ca5b-f562-4c95-b318-32ba8af87cfb",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "Photon of red light vs photon of blue light: which has greater momentum?",
+  "formula": "p = h/λ",
+  "options": [
+   "Blue photon",
+   "Red photon",
+   "Equal momentum",
+   "Depends on intensity"
+  ],
+  "answer": 0,
+  "explain": "Blue has smaller λ, so p = h/λ is larger for blue.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "540e836c-f277-41c2-b3d9-65ede8972a73",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Dual Nature",
+  "prompt": "Compton scattering: wavelength of scattered photon compared to incident photon?",
+  "formula": "Δλ = (h/m₀c)(1−cosθ)",
+  "options": [
+   "Always larger",
+   "Always smaller",
+   "Equal",
+   "Depends on intensity"
+  ],
+  "answer": 0,
+  "explain": "Photon loses energy to electron; λ_scattered > λ_incident always (Δλ ≥ 0).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ea1f2abc-488e-4897-9cf1-a250e579d54a",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Failure of wave theory, particle nature",
+  "prompt": "Which phenomenon cannot be explained by wave theory of light?",
+  "formula": "",
+  "options": [
+   "Diffraction",
+   "Interference",
+   "Photoelectric effect",
+   "Polarisation"
+  ],
+  "answer": 2,
+  "explain": "Photoelectric effect requires photon concept; interference, diffraction, polarisation are wave phenomena.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "de05d5c3-9eec-4c61-a076-87b5f1fc019b",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Dual Nature",
+  "prompt": "Photon travels from glass to vacuum: its frequency?",
+  "formula": "E = hν",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Becomes zero",
+   "Remains same"
+  ],
+  "answer": 3,
+  "explain": "Photon frequency (energy) is invariant; only speed and wavelength change at interface.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bfbbd0c1-28cb-4c4d-9b00-2217c0095729",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "de Broglie wavelength of a particle: if KE is doubled, λ changes by factor?",
+  "formula": "λ = h/√(2mK)",
+  "options": [
+   "2",
+   "√2",
+   "1/2",
+   "1/√2"
+  ],
+  "answer": 3,
+  "explain": "λ ∝ 1/√K; doubling K gives λ → λ/√2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7bc8e82e-8a78-4530-891a-c3adf1a34934",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Photoelectric effect: photo-current becomes zero when retarding potential equals?",
+  "formula": "eV₀ = KE_max",
+  "options": [
+   "Ionisation potential",
+   "Threshold potential",
+   "Stopping potential",
+   "Work function/e"
+  ],
+  "answer": 2,
+  "explain": "Current becomes zero when retarding potential = stopping potential V₀, which decelerates fastest electrons to rest.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "41803ff5-8bb9-4d1b-babd-ffa461461975",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "de Broglie wavelength of particle of charge q, mass m through potential V is?",
+  "formula": "λ = h/√(2mqV)",
+  "options": [
+   "h/√(2mqV)",
+   "h/(mqV)",
+   "h√(2mqV)",
+   "h/√(mqV)"
+  ],
+  "answer": 0,
+  "explain": "KE = qV, so p = √(2mqV) and λ = h/p = h/√(2mqV).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1db9f4cc-7001-4bf2-b904-216b1f51a622",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Which graph gives a straight line in photoelectric effect?",
+  "formula": "KE_max = hν − φ",
+  "options": [
+   "Current vs voltage",
+   "KE_max vs frequency ν",
+   "Current vs frequency",
+   "KE_max vs intensity"
+  ],
+  "answer": 1,
+  "explain": "Einstein's equation: KE_max = hν − φ is linear in ν; slope = h, y-intercept = −φ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9bbb9531-a9c0-4629-a12b-abba338e9108",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Photoelectric effect: KE_max of emitted electrons is measured using?",
+  "formula": "KE_max = eV₀",
+  "options": [
+   "Saturation current",
+   "Intensity of light",
+   "Stopping potential",
+   "Threshold frequency"
+  ],
+  "answer": 2,
+  "explain": "Stopping potential V₀ decelerates fastest electrons to rest; KE_max = eV₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0e500ff5-c484-459d-aba6-dfc5a7dd2192",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential vs frequency graph (h/e)",
+  "prompt": "In photoelectric effect, what does the x-intercept of V₀ vs ν graph represent?",
+  "formula": "V₀ = (h/e)ν − φ/e",
+  "options": [
+   "Planck's constant h",
+   "Threshold frequency ν₀",
+   "Work function φ",
+   "Saturation current"
+  ],
+  "answer": 1,
+  "explain": "At V₀ = 0: ν = ν₀ = φ/h; so x-intercept of V₀ vs ν graph gives threshold frequency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb9946c5-05a8-4790-95f9-3ef950b40fcd",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "Value of hc in convenient units (approx.)?",
+  "formula": "E(eV) = 1240 / λ(nm)",
+  "options": [
+   "6.63 eV·nm",
+   "1240 eV·nm",
+   "124 eV·nm",
+   "12400 eV·nm"
+  ],
+  "answer": 1,
+  "explain": "hc ≈ 1240 eV·nm, so E(eV) = 1240/λ(nm).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5d67aca-ca8c-437e-8161-367079200022",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "A photon is reflected back normally from a mirror. Magnitude of its momentum change?",
+  "formula": "Δp = 2h/λ",
+  "options": [
+   "2h/λ",
+   "h/2λ",
+   "Zero",
+   "h/λ"
+  ],
+  "answer": 0,
+  "explain": "Momentum goes from +h/λ to −h/λ, so the change is 2h/λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a8b21833-a2cb-45fc-ae73-597c7b8a59a2",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "A photon beam in an electric or magnetic field behaves how?",
+  "formula": "",
+  "options": [
+   "Not deflected",
+   "Deflected like protons",
+   "Deflected opposite to electrons",
+   "Deflected only by the magnetic field"
+  ],
+  "answer": 0,
+  "explain": "A photon is electrically neutral, so neither field deflects it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "28e8b6cb-8049-401d-a281-df818f3f3000",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "In photon–matter interactions, which quantity is not conserved?",
+  "formula": "",
+  "options": [
+   "Number of photons",
+   "Total momentum",
+   "Total charge",
+   "Total energy"
+  ],
+  "answer": 0,
+  "explain": "Photons can be created or absorbed, so photon number is not conserved.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7fc7f8fe-67bf-4009-af3b-864e831ce971",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Distance from a point source doubles. Photons per second crossing a fixed small area become:",
+  "formula": "Φ ∝ 1/r²",
+  "options": [
+   "One-fourth",
+   "One-eighth",
+   "Double",
+   "Half"
+  ],
+  "answer": 0,
+  "explain": "I = P/4πr², so photon flux falls as 1/r²; doubling r gives 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0d5521fc-96f1-4471-88b4-224a7dc1487b",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Two beams have equal photon flux; their frequencies are in ratio 1:2. Ratio of intensities is:",
+  "formula": "I = Φhν",
+  "options": [
+   "1:1",
+   "2:1",
+   "1:2",
+   "1:4"
+  ],
+  "answer": 2,
+  "explain": "At equal Φ, I = Φhν, so intensity is proportional to frequency.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "18a8c553-1d55-40dd-815c-9fe2d62137b4",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Beam of intensity I and frequency ν in vacuum: photons per unit volume equal:",
+  "formula": "n = I/(hν·c)",
+  "options": [
+   "I·c/(hν)",
+   "I/(hν·c)",
+   "I/(hν)",
+   "hν/(I·c)"
+  ],
+  "answer": 1,
+  "explain": "Photon flux I/hν travels at speed c, so photon density = flux/c = I/(hνc).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f2f334dc-4dbd-4fbd-8dc1-a2e6d8fe46dd",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Intensity fixed, ν raised (ν > ν₀, same efficiency). Saturation photocurrent:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Unchanged",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "Same energy flux with larger hν means fewer photons per second, so fewer electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f38c93d5-a3cf-4b86-9152-541bc4916e07",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Parallel beam falls at angle θ to the normal. Photons absorbed per second per unit surface area ∝",
+  "formula": "",
+  "options": [
+   "Independent of θ",
+   "sin θ",
+   "cos θ",
+   "tan θ"
+  ],
+  "answer": 2,
+  "explain": "Projected area is A cosθ, so the photon rate per unit surface area scales as cosθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc21bf09-bbfa-44dd-aff5-166238430e56",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Radiation pressure and force from photons",
+  "prompt": "Light of intensity I hits a perfect mirror at incidence angle θ (from normal). Radiation pressure is?",
+  "formula": "P = 2I cos²θ / c",
+  "options": [
+   "2I / (c cosθ)",
+   "2I cos²θ / c",
+   "2I sin²θ / c",
+   "2I cosθ / c"
+  ],
+  "answer": 1,
+  "explain": "Force along normal gets one cosθ from momentum component and another from the projected area/intensity: 2I cos²θ/c.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "32ede939-f652-4e5e-a775-6caabfb862aa",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Radiation pressure and force from photons",
+  "prompt": "n photons of wavelength λ hit a surface per second and are fully absorbed normally. Force on the surface?",
+  "formula": "F = n·h/λ",
+  "options": [
+   "nhc/λ",
+   "nλ/h",
+   "2nh/λ",
+   "nh/λ"
+  ],
+  "answer": 3,
+  "explain": "Force is the rate of momentum transfer. Each absorbed photon gives h/λ, so F = n(h/λ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "34238699-0207-43d7-935e-a91807f51762",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "Hertz (1887) noticed that UV light falling on a spark-gap electrode did what?",
+  "formula": "",
+  "options": [
+   "Produced X-rays at the gap",
+   "Only heated the electrodes",
+   "Stopped the spark discharge",
+   "Made the spark jump more easily"
+  ],
+  "answer": 3,
+  "explain": "UV on the electrode eased the spark discharge, the first sign of photoelectric emission.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e8dcb232-3177-46c0-aba2-ca76ef6fa2cd",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "Lenard's e/m measurement showed photoelectric emission consists of which particles?",
+  "formula": "",
+  "options": [
+   "Photons",
+   "α-particles",
+   "Protons",
+   "Electrons"
+  ],
+  "answer": 3,
+  "explain": "The measured e/m matched that of cathode-ray particles, so the emitted particles are electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b75a2141-f12a-40be-8ff6-8a8ad438658d",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "The time lag between light incidence and photoemission is observed to be about:",
+  "formula": "",
+  "options": [
+   "About 10⁻³ s",
+   "Less than 10⁻⁹ s",
+   "About 1 s",
+   "Depends on intensity, minutes"
+  ],
+  "answer": 1,
+  "explain": "Photoemission is practically instantaneous, with a lag below 10⁻⁹ s even at very low intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bfc3edd4-aada-4c6d-8a1a-6007aac9c1c7",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "Classical wave theory wrongly predicted that K_max of photoelectrons increases with:",
+  "formula": "",
+  "options": [
+   "Work function",
+   "Frequency of light",
+   "Stopping potential only",
+   "Intensity of light"
+  ],
+  "answer": 3,
+  "explain": "Wave theory expects more energy with greater intensity. Experiment shows K_max is independent of intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "928b7d16-9e56-486b-a924-14c666394795",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "V₀–ν lines for different metals under the photoelectric effect are?",
+  "formula": "",
+  "options": [
+   "Intersecting at ν₀",
+   "Parallel, with different ν-intercepts",
+   "Parallel, with the same ν-intercept",
+   "Of different slopes, same intercept"
+  ],
+  "answer": 1,
+  "explain": "The slope h/e is universal; ν₀ differs from metal to metal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dc3a833e-c895-4928-bee6-9d12f94c7981",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "The work function of a metal depends on?",
+  "formula": "",
+  "options": [
+   "Stopping potential applied",
+   "Frequency of incident light",
+   "Nature of the metal surface",
+   "Intensity of incident light"
+  ],
+  "answer": 2,
+  "explain": "φ is a property of the metal (and its surface), not of the incident light.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "164e5ed7-da12-439f-a01d-a4f5b9b1fe9c",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "Using hc = 1240 eV·nm, the photon energy of 620 nm light is?",
+  "formula": "E(eV) = 1240 / λ(nm)",
+  "options": [
+   "1 eV",
+   "4 eV",
+   "0.5 eV",
+   "2 eV"
+  ],
+  "answer": 3,
+  "explain": "E = 1240/620 = 2 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "324a5b28-20e8-41be-bf1c-7079e4672bc0",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "The unit electron-volt is a unit of work function. 1 eV equals?",
+  "formula": "",
+  "options": [
+   "1.6 × 10⁻¹⁹ J",
+   "9.1 × 10⁻¹⁹ J",
+   "6.63 × 10⁻³⁴ J",
+   "1.6 × 10⁻³¹ J"
+  ],
+  "answer": 0,
+  "explain": "1 eV is the energy gained by an electron across 1 V: 1.6 × 10⁻¹⁹ J.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2391460d-6150-4834-84a1-d0efc04ade97",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "For ν > ν₀, if the frequency is doubled, KE_max becomes?",
+  "formula": "KE′ = 2hν − φ = KE + hν",
+  "options": [
+   "Unchanged",
+   "Exactly double",
+   "Less than double",
+   "More than double"
+  ],
+  "answer": 3,
+  "explain": "KE′ = 2hν − φ = KE_max + hν, which is greater than 2KE_max.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ef05e4fb-5f7f-4254-bdbb-50af5f979112",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Photoelectrons emitted by monochromatic light have KE ranging from?",
+  "formula": "",
+  "options": [
+   "Only KE_max",
+   "KE_max up to hν",
+   "Zero up to hν",
+   "Zero up to KE_max"
+  ],
+  "answer": 3,
+  "explain": "Electrons from deeper levels lose extra energy, so KE ranges from 0 to hν − φ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb933af9-bc82-4432-bf58-f08d3d7088d8",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Photon energy is exactly twice the work function φ. The stopping potential is?",
+  "formula": "eV₀ = hν − φ",
+  "options": [
+   "2φ/e",
+   "φ/(2e)",
+   "3φ/e",
+   "φ/e"
+  ],
+  "answer": 3,
+  "explain": "KE_max = 2φ − φ = φ, so V₀ = φ/e.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "564bb09e-0625-4870-b8a3-d6d305981da9",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Incident frequency is ν = 3ν₀ (threshold ν₀). KE_max of photoelectrons equals?",
+  "formula": "KE_max = hν − hν₀",
+  "options": [
+   "4hν₀",
+   "3hν₀",
+   "2hν₀",
+   "hν₀"
+  ],
+  "answer": 2,
+  "explain": "KE_max = 3hν₀ − hν₀ = 2hν₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c8d7cfea-bc06-483c-87bc-32fe78b75039",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "For a V₀ versus 1/λ graph, the slope equals?",
+  "formula": "V₀ = (hc/e)(1/λ) − φ/e",
+  "options": [
+   "h/e",
+   "hc/e",
+   "e/hc",
+   "hc"
+  ],
+  "answer": 1,
+  "explain": "From eV₀ = hc/λ − φ, the slope is hc/e.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "14c0a7ba-1024-4048-9ce3-5bdb04a34459",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Millikan's photoelectric experiment verified which relation, and gave which constant?",
+  "formula": "",
+  "options": [
+   "Bohr's postulate; the Bohr radius",
+   "Charge quantisation; the electron mass",
+   "Einstein's equation; Planck's constant h",
+   "Wave nature; the Rydberg constant"
+  ],
+  "answer": 2,
+  "explain": "The V₀–ν line verified Einstein's equation and its slope gave h.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b3c166f-81e2-4876-8345-c4988aef298e",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Two I–V curves, same intensity, different ν (both above threshold). The higher-ν curve has?",
+  "formula": "",
+  "options": [
+   "Larger magnitude of stopping potential",
+   "Smaller magnitude of stopping potential",
+   "No stopping potential",
+   "Same stopping potential"
+  ],
+  "answer": 0,
+  "explain": "eV₀ = hν − φ, so a higher ν gives a larger |V₀|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "44e666a2-e88b-4fc3-86e0-6f008d46b6ee",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "In the photocurrent vs collector potential graph, at zero applied potential the photocurrent is?",
+  "formula": "",
+  "options": [
+   "Equal to saturation current",
+   "Zero",
+   "Non-zero",
+   "Negative"
+  ],
+  "answer": 2,
+  "explain": "Emitted electrons have KE and some reach the collector, so I ≠ 0 at V = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a18cf881-b9e4-47b0-9093-3a760b11ffad",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "Bohr's quantisation of angular momentum in de Broglie's picture means the orbit holds?",
+  "formula": "2πr = nλ",
+  "options": [
+   "Integral number of wavelengths",
+   "Half-integral wavelengths",
+   "Only one wavelength",
+   "Number of nodes = n²"
+  ],
+  "answer": 0,
+  "explain": "A standing electron wave requires the circumference to be nλ, which gives mvr = nh/2π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "030d300f-3748-4546-a3fb-bbb9562cabbe",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "Matter waves of de Broglie are associated with which particles?",
+  "formula": "",
+  "options": [
+   "Every moving particle, charged or neutral",
+   "Only charged particles",
+   "Only electrons",
+   "Only particles moving near c"
+  ],
+  "answer": 0,
+  "explain": "λ = h/p holds for any moving body, and the waves are not electromagnetic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea0f2a78-1b6e-40e0-b1e6-3c105d4ffd3f",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "Kinetic energy gained by an α-particle (from rest) through potential difference V is?",
+  "formula": "K = qV",
+  "options": [
+   "eV",
+   "eV/2",
+   "4eV",
+   "2eV"
+  ],
+  "answer": 3,
+  "explain": "The α-particle has charge 2e, so K = qV = 2eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "03c9e348-e141-4ef9-a2d4-891f89931377",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "Proton and α-particle have equal λ. The ratio of accelerating potentials V_p : V_α is",
+  "formula": "V = h²/(2mqλ²)",
+  "options": [
+   "8 : 1",
+   "2 : 1",
+   "4 : 1",
+   "1 : 8"
+  ],
+  "answer": 0,
+  "explain": "At fixed λ, V ∝ 1/(mq). m_α q_α = 8 m_p q_p, so V_p/V_α = 8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69a9f8f0-c3e4-41f0-a2d0-99caed605c56",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "Photoelectric effect: work function is defined as the minimum energy needed to remove which electron?",
+  "formula": "",
+  "options": [
+   "The most loosely bound electron at the surface",
+   "Any electron from the inner shell",
+   "An electron from the nucleus",
+   "The electron with the highest kinetic energy"
+  ],
+  "answer": 0,
+  "explain": "φ is the minimum energy to free the least tightly bound (surface) electron from the metal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b7dd815-9119-4940-bb0c-1c7b13d9ab63",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "An electron microscope resolves finer detail than an optical one because electrons have?",
+  "formula": "",
+  "options": [
+   "Greater speed of light",
+   "Larger amplitude",
+   "Greater charge",
+   "Smaller wavelength"
+  ],
+  "answer": 3,
+  "explain": "Accelerated electrons have λ far below that of visible light, so diffraction limits resolution much less.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5d13539-e389-4fda-8eec-ea222ae4cac5",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "The relation λ = 12.27/√V Å assumes the electron starts with what initial speed?",
+  "formula": "",
+  "options": [
+   "Speed of light",
+   "Zero",
+   "Any value",
+   "Thermal speed"
+  ],
+  "answer": 1,
+  "explain": "It uses eV = ½mv² with the electron starting from rest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b297014b-e943-46f5-86bb-3a7b17d97be8",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "An accelerated electron enters a uniform magnetic field perpendicular to its velocity. Its λ?",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Becomes zero",
+   "Decreases",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "The magnetic force does no work, so speed and momentum magnitude stay the same and λ is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "509c4797-b3a6-4fd3-83dc-651a13bfeed6",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "For a particle of rest mass m₀ moving at relativistic speed v, the de Broglie wavelength is?",
+  "formula": "λ = h/p, p = γm₀v",
+  "options": [
+   "h/(m₀v)",
+   "γh/(m₀v)",
+   "h/(γm₀v)",
+   "h/(m₀c)"
+  ],
+  "answer": 2,
+  "explain": "Relativistic momentum is p = γm₀v, so λ = h/(γm₀v).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4eca7f76-a08a-4dd4-8adc-83dee5ab1d62",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "The energy of a single photon of monochromatic light depends on?",
+  "formula": "E = hν",
+  "options": [
+   "Intensity of the beam",
+   "Amplitude of the wave",
+   "Distance from the source",
+   "Its frequency only"
+  ],
+  "answer": 3,
+  "explain": "E = hν. Intensity only changes the number of photons, not the energy of each.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cd57555c-46fe-4236-88bf-924dcf97ffc3",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "Planck's quantum hypothesis: energy exchanged by radiation of frequency ν is?",
+  "formula": "",
+  "options": [
+   "nhν, n = integer",
+   "(n + ½)hν",
+   "Any continuous value",
+   "nh/ν"
+  ],
+  "answer": 0,
+  "explain": "Energy comes in discrete packets: integral multiples of hν.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "115051f1-76e6-4c1d-877f-f47caad634c4",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "The value of Planck's constant h is about?",
+  "formula": "",
+  "options": [
+   "6.63×10⁻³⁴ eV·s",
+   "6.63×10⁻³² J·s",
+   "4.14×10⁻¹⁵ J·s",
+   "6.63×10⁻³⁴ J·s"
+  ],
+  "answer": 3,
+  "explain": "h = 6.63×10⁻³⁴ J·s, which equals 4.14×10⁻¹⁵ eV·s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "657289f9-7bbf-4b79-a5a8-bc25336a69d1",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Intensity and frequency of light are both doubled (ν > ν₀). Saturation photocurrent becomes:",
+  "formula": "n ∝ I/ν",
+  "options": [
+   "Unchanged",
+   "Doubled",
+   "Halved",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "Photon rate ∝ I/ν. Doubling both leaves it unchanged, so the saturation current is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3f96a254-8558-4aa2-8287-c2a13fc3ace6",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Isotropic source of power P, frequency ν. Photons per second through area A (normal) at distance r:",
+  "formula": "",
+  "options": [
+   "PA/(4πr²hν)",
+   "PAhν/(4πr²)",
+   "P/(4πr²hν)",
+   "PA/(2πr²hν)"
+  ],
+  "answer": 0,
+  "explain": "Intensity = P/4πr², power on A = PA/4πr², and dividing by hν gives the photon rate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "512a4b69-6fc5-483d-9d21-0c5b2d2e3dc4",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "Saturation current i_s, quantum efficiency η. Photons incident per second equal:",
+  "formula": "",
+  "options": [
+   "i_s e/η",
+   "i_s/(ηe)",
+   "η i_s/e",
+   "i_s/e"
+  ],
+  "answer": 1,
+  "explain": "Electrons per second = i_s/e. Photons = electrons/η.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c3793a3-0cb1-4a6a-8caa-d42f6391a158",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "Which metal shows photoelectric emission even with visible light, unlike Zn, Cd and Mg (UV only)?",
+  "formula": "",
+  "options": [
+   "Magnesium",
+   "Caesium",
+   "Cadmium",
+   "Zinc"
+  ],
+  "answer": 1,
+  "explain": "Alkali metals (Li, Na, K, Rb, Cs) have low work functions, so they respond to visible light.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b663a039-72b7-4607-a82e-b6b345ad36e9",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "UV light falls on an initially neutral, insulated zinc plate. The plate gradually acquires what charge?",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Stays neutral",
+   "Positive",
+   "Alternately + and −"
+  ],
+  "answer": 2,
+  "explain": "Photoelectrons leave the plate, so it becomes positively charged (Hallwachs–Lenard observation).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dda9ff48-0bd0-4624-84f1-ab482ded7e1c",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "Hertz noticed the photoelectric effect while experimenting on which topic?",
+  "formula": "",
+  "options": [
+   "Producing X-rays",
+   "Generating and detecting EM waves",
+   "Studying cathode rays",
+   "Measuring radioactivity"
+  ],
+  "answer": 1,
+  "explain": "In 1887 Hertz was producing and detecting EM waves with spark gaps; UV on the electrodes eased the spark.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "60748c69-38b5-4274-bd9d-1660f34e2af5",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Hertz and Lenard's observations",
+  "prompt": "In Lenard's photoelectric tube, the glass tube is evacuated mainly so that photoelectrons:",
+  "formula": "",
+  "options": [
+   "Are not scattered by gas molecules",
+   "Emit light on the way",
+   "Move with a higher work function",
+   "Gain extra energy from the gas"
+  ],
+  "answer": 0,
+  "explain": "Without gas, electrons reach the collector without collisions, so the measured current is reliable.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1c2d8796-62c7-425b-ade5-56d974b5b9e3",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "Which group of metals shows photoemission even with visible light?",
+  "formula": "",
+  "options": [
+   "Transition metals (Cu, Ag)",
+   "Platinum group metals",
+   "Zinc and cadmium",
+   "Alkali metals (Cs, K, Na)"
+  ],
+  "answer": 3,
+  "explain": "Alkali metals have φ ≈ 2–2.8 eV, so visible photons can eject electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "674d2e08-b2a6-4296-8392-3b1cfd9657ed",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "A free electron cannot fully absorb a photon, because doing so would violate:",
+  "formula": "",
+  "options": [
+   "Charge conservation",
+   "Energy and momentum conservation together",
+   "Mass conservation",
+   "Pauli exclusion principle"
+  ],
+  "answer": 1,
+  "explain": "Photon absorption needs a bound electron, with the lattice taking up momentum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8b173b17-8161-4c21-bd88-2f10f5191218",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "The work function arises physically because electrons in a metal are held by:",
+  "formula": "",
+  "options": [
+   "The nuclear strong force",
+   "Magnetic forces of the lattice",
+   "Gravitational attraction",
+   "A potential barrier at the surface"
+  ],
+  "answer": 3,
+  "explain": "Attraction by the positive ion lattice creates a surface barrier of height φ above the Fermi level.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cfd878d6-28dd-4a90-825c-fa8510dd8834",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Why do some photoelectrons come out with KE less than hν − φ?",
+  "formula": "",
+  "options": [
+   "They lose energy in collisions inside the metal",
+   "Their mass is smaller than the electron mass",
+   "They are emitted after a time lag",
+   "Photon gives them only part of its energy"
+  ],
+  "answer": 0,
+  "explain": "hν − φ is the maximum; electrons from deeper levels lose energy in internal collisions before escaping.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a2991dc-c91e-41c3-91ae-a32b947e7bac",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Einstein extended Planck's idea by proposing that quantisation applies to:",
+  "formula": "",
+  "options": [
+   "Only the electron's orbital energy",
+   "The radiation (light) itself, as photons",
+   "Only absorption by the metal surface",
+   "Only emission of radiation by oscillators"
+  ],
+  "answer": 1,
+  "explain": "Planck quantised emission/absorption; Einstein treated light itself as localised quanta (photons).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ba6968f-f46f-48c7-8cad-ca2e69c3798e",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "In photoemission, how much of its energy does one absorbed photon give to one electron?",
+  "formula": "",
+  "options": [
+   "Half of hν",
+   "Only hν − φ",
+   "The entire hν",
+   "Only φ"
+  ],
+  "answer": 2,
+  "explain": "The photon is absorbed wholly; hν is split into φ (work done to escape) and KE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "13740b5f-0bd2-47fe-aad3-61c99a6cbe90",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "In the KE_max vs 1/λ graph, the intercept on the 1/λ axis gives:",
+  "formula": "",
+  "options": [
+   "1/λ₀",
+   "λ₀",
+   "h/e",
+   "φ/hc²"
+  ],
+  "answer": 0,
+  "explain": "KE_max = 0 when hc/λ = φ, i.e. 1/λ = 1/λ₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22dfad03-aa71-4f1f-8867-ce8e4f9bb5b3",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "The V₀ versus wavelength λ graph for a metal is?",
+  "formula": "V₀ = (hc/e)(1/λ − 1/λ₀)",
+  "options": [
+   "Straight line of negative slope",
+   "Straight line of positive slope",
+   "Horizontal line at V₀ = φ/e",
+   "Falling curve reaching V₀ = 0 at λ = λ₀"
+  ],
+  "answer": 3,
+  "explain": "V₀ is linear in 1/λ, so against λ it is a non-linear decreasing curve with zero at λ₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ca50c47-0e7a-4184-9159-a531e6df6762",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential and max kinetic energy",
+  "prompt": "Stopping potential is made 4 times larger. de Broglie wavelength of the fastest photoelectron becomes:",
+  "formula": "λ = h/√(2m·eV₀)",
+  "options": [
+   "One-fourth",
+   "Double",
+   "Four times",
+   "Half"
+  ],
+  "answer": 3,
+  "explain": "λ ∝ 1/√V₀, so V₀ → 4V₀ halves λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c675186-b379-4b84-8a7b-342e8fe14668",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "In the retarding-potential region of the I–V graph, photocurrent falls gradually to zero because electrons have:",
+  "formula": "",
+  "options": [
+   "Photon energies that vary across the beam",
+   "Different charges on the electrons",
+   "A spread of kinetic energies up to KE_max",
+   "Identical kinetic energy for all electrons"
+  ],
+  "answer": 2,
+  "explain": "Emitted electrons have KE from 0 to KE_max, so more are repelled back as the retarding voltage grows, until V₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "369a2ed9-feab-4c48-b1f5-c453726889eb",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "At constant incident power, photocurrent vs wavelength λ (ideal efficiency) behaves how?",
+  "formula": "N = Pλ/hc",
+  "options": [
+   "Rises ∝ λ up to λ₀, then drops to zero",
+   "Stays constant up to λ₀, then zero",
+   "Falls ∝ λ up to λ₀, then drops to zero",
+   "Rises ∝ λ² up to λ₀, then zero"
+  ],
+  "answer": 0,
+  "explain": "At fixed power, photons per second ∝ λ; for λ > λ₀ there is no emission.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c412387-707f-4e71-aa78-6c8d26c329c3",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential vs frequency graph (h/e)",
+  "prompt": "Among Na, Cs, Zn and Pt, the V₀–ν line cutting the ν-axis at the lowest frequency is for:",
+  "formula": "",
+  "options": [
+   "Pt",
+   "Cs",
+   "Na",
+   "Zn"
+  ],
+  "answer": 1,
+  "explain": "Cs has the lowest work function (~2.1 eV), so it has the lowest ν₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb679c23-ebd5-40fd-9b1c-4e804e75ee57",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "The matter waves associated with a moving electron are best described as:",
+  "formula": "",
+  "options": [
+   "Not electromagnetic in nature",
+   "Waves produced by accelerated charge",
+   "Electromagnetic waves",
+   "Longitudinal sound waves"
+  ],
+  "answer": 0,
+  "explain": "Matter waves are not EM waves; they exist even for neutral particles and are not radiated by charges.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "57bfbc52-2170-4404-bc4a-069d8999b8df",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "de Broglie relation for matter waves",
+  "prompt": "In the Davisson–Germer experiment, the strong electron peak at 50° occurred at accelerating voltage:",
+  "formula": "",
+  "options": [
+   "12.4 V",
+   "54 V",
+   "100 V",
+   "150 V"
+  ],
+  "answer": 1,
+  "explain": "At 54 V the peak at 50° gave λ ≈ 1.65 Å, matching de Broglie's value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "836d2db1-2bb6-4a86-85c5-196a08bd5097",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Thermal de Broglie wavelength (λ=h/√(3mkT))",
+  "prompt": "For a diatomic gas at T, the thermal λ = h/√(3mkT) uses which energy of a molecule?",
+  "formula": "K_trans = (3/2)kT",
+  "options": [
+   "Total internal energy (5/2)kT",
+   "Translational KE only",
+   "Translational + rotational KE",
+   "Vibrational KE only"
+  ],
+  "answer": 1,
+  "explain": "Matter wave of the molecule's motion uses its translational KE (3/2)kT; rotation does not enter p.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5667c887-d653-40f2-b28f-14c4805dfaa3",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon energy and momentum (E=hν, p=h/λ)",
+  "prompt": "A photon of wavelength λ reflects from a plane mirror at incidence angle θ. Magnitude of momentum change?",
+  "formula": "Δp = (2h/λ) cosθ",
+  "options": [
+   "(h/λ) cosθ",
+   "2h/λ",
+   "(2h/λ) cosθ",
+   "(2h/λ) sinθ"
+  ],
+  "answer": 2,
+  "explain": "Only the normal component of momentum reverses, so Δp = 2(h/λ)cosθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "053f64b3-092f-47de-8bcb-cad1506c50db",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photon flux, intensity and photon count",
+  "prompt": "For monochromatic light of fixed ν, photon flux is proportional to which field quantity?",
+  "formula": "I ∝ E₀²",
+  "options": [
+   "Square of electric amplitude E₀²",
+   "Inverse of E₀",
+   "Electric amplitude E₀",
+   "Square root of E₀"
+  ],
+  "answer": 0,
+  "explain": "Intensity ∝ E₀², and at fixed ν the photon flux ∝ I, so it ∝ E₀².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "caa6c6a7-a3ae-4b9e-bd0d-4f51777fe40f",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Failure of wave theory, particle nature",
+  "prompt": "Light behaves as a wave during ___ and as a stream of photons during ___.",
+  "formula": "",
+  "options": [
+   "reflection; refraction",
+   "interference; diffraction",
+   "emission/absorption; propagation",
+   "propagation; emission/absorption"
+  ],
+  "answer": 3,
+  "explain": "Interference and diffraction occur as light propagates. Photoemission and Compton scattering occur when it interacts with matter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94525424-4a70-4614-95f5-5954b777684c",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Failure of wave theory, particle nature",
+  "prompt": "In classical wave theory, the intensity of a light wave is proportional to:",
+  "formula": "I ∝ E₀²",
+  "options": [
+   "Wavelength",
+   "Electric-field amplitude E₀",
+   "Frequency squared",
+   "Square of the electric-field amplitude"
+  ],
+  "answer": 3,
+  "explain": "Wave intensity ∝ E₀². This is why the wave theory wrongly predicted that KE of photoelectrons grows with intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ef8dd5e3-c711-48fa-8baa-deb2e6719989",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Work function and threshold frequency",
+  "prompt": "Photon energy 5 eV falls on a metal of φ = 2 eV. The stopping potential is:",
+  "formula": "eV₀ = E − φ",
+  "options": [
+   "5 V",
+   "3 V",
+   "2 V",
+   "7 V"
+  ],
+  "answer": 1,
+  "explain": "K_max = 5 − 2 = 3 eV, so V₀ = 3 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7d5a986d-4542-4c7a-8c01-bd69968e63ec",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Plot of v_max² of photoelectrons against ν (ν > ν₀) for one metal is:",
+  "formula": "½mv²_max = hν − hν₀",
+  "options": [
+   "Straight line through the origin",
+   "Straight line cutting ν-axis at ν₀",
+   "Parabola through the origin",
+   "Straight line cutting ν-axis at φ"
+  ],
+  "answer": 1,
+  "explain": "v_max² = (2h/m)(ν − ν₀): linear in ν, with zero at ν = ν₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "14c9d0bd-6437-4cd3-b2af-68b794ceae99",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Einstein's photoelectric equation",
+  "prompt": "Metal has threshold wavelength λ₀. Light of wavelength λ₀/2 falls on it. KE_max of photoelectrons is:",
+  "formula": "KE_max = hc/λ − hc/λ₀",
+  "options": [
+   "2φ",
+   "φ/2",
+   "φ",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Photon energy = hc/(λ₀/2) = 2φ, so KE_max = 2φ − φ = φ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5ba8cc08-030f-4230-b2d9-a4aeb703dba3",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Photocurrent vs intensity and potential graphs",
+  "prompt": "Same light falls on metals A and B with φ_A > φ_B (both emit). Compared with B, A's I–V curve has:",
+  "formula": "eV₀ = hν − φ",
+  "options": [
+   "Smaller magnitude of V₀",
+   "Larger magnitude of V₀",
+   "Same V₀ but lower saturation current",
+   "No saturation region"
+  ],
+  "answer": 0,
+  "explain": "A larger φ leaves less KE_max, so the stopping potential magnitude is smaller.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64fce249-4653-4e8a-b4fc-d8c0ba2e1817",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Stopping potential vs frequency graph (h/e)",
+  "prompt": "Minimum (ν, V₀) readings, ν > ν₀, needed to find h from one metal without knowing its φ?",
+  "formula": "h = e(V₂ − V₁)/(ν₂ − ν₁)",
+  "options": [
+   "4",
+   "2",
+   "3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Two points fix the straight line; its slope gives h/e and φ cancels out in the difference.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d099cbb7-ff92-438c-9870-b6a198e590ec",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "Electron and proton accelerated through the same V: speed ratio v_e / v_p is nearly?",
+  "formula": "v = √(2qV/m)",
+  "options": [
+   "43",
+   "1",
+   "1836",
+   "√2"
+  ],
+  "answer": 0,
+  "explain": "Same KE, so v ∝ 1/√m. v_e/v_p = √(m_p/m_e) ≈ √1836 ≈ 43.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b2b7530-23a0-434d-a6f3-32d0214f1ed6",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "λ = 12.27/√V Å for an electron becomes inaccurate when eV becomes comparable to?",
+  "formula": "",
+  "options": [
+   "Rest energy m₀c² (≈ 511 keV)",
+   "Ionisation energy of hydrogen",
+   "Thermal energy kT",
+   "Work function of the metal"
+  ],
+  "answer": 0,
+  "explain": "Relativistic correction matters once the gained KE is comparable to m₀c² ≈ 511 keV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ab4559b-92d7-4783-9008-113f33b0cf41",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "An electron starts from rest in a uniform field. After it covers 4 times the distance, λ becomes?",
+  "formula": "V = Ex ⇒ λ ∝ 1/√x",
+  "options": [
+   "One-sixteenth",
+   "One-fourth",
+   "Half",
+   "Double"
+  ],
+  "answer": 2,
+  "explain": "Potential drop V = Ex, so λ ∝ 1/√V ∝ 1/√x; 4x distance halves λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "20f789d5-d3e0-49d9-a11f-15710b9536b4",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "λ of accelerated charge (λ=12.27/√V Å)",
+  "prompt": "An electron starts from rest in a uniform electric field. If the time elapsed doubles, its de Broglie λ becomes?",
+  "formula": "λ = h/mv, v = at ⇒ λ ∝ 1/t",
+  "options": [
+   "Half",
+   "Double",
+   "1/√2 times",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "Constant force gives v = at, so p ∝ t and λ ∝ 1/t. Doubling t halves λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9dbcef8-5df7-4db7-898e-5524a6cc3a2f",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "A proton and an α-particle have the same momentum. Ratio of kinetic energies K_p : K_α is",
+  "formula": "K = p²/2m",
+  "options": [
+   "1 : 4",
+   "4 : 1",
+   "2 : 1",
+   "1 : 2"
+  ],
+  "answer": 1,
+  "explain": "At equal p, K ∝ 1/m, and m_α = 4m_p, so K_p : K_α = 4 : 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6e93fa88-7f3a-4bcc-9546-488aff443a3f",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "A proton accelerated from rest through V volts has de Broglie wavelength (approx.)",
+  "formula": "λ = h/√(2m_p eV)",
+  "options": [
+   "0.0286/√V Å",
+   "0.101/√V Å",
+   "0.286/√V Å",
+   "12.27/√V Å"
+  ],
+  "answer": 2,
+  "explain": "λ_p = 12.27/√1836 ≈ 0.286/√V Å.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "45d7cc43-9178-47a7-a57c-f9a481a119b4",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "An α-particle accelerated from rest through V volts has de Broglie wavelength (approx.)",
+  "formula": "λ = h/√(2m_α(2e)V)",
+  "options": [
+   "0.286/√V Å",
+   "0.101/√V Å",
+   "12.27/√V Å",
+   "0.202/√V Å"
+  ],
+  "answer": 1,
+  "explain": "λ_α = λ_p/(2√2) = 0.286/2.83 ≈ 0.101/√V Å.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "62f80fdf-5c53-4626-b679-ab4927899e7f",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Comparing λ of e, p, α at same KE/V",
+  "prompt": "A proton and an α-particle are accelerated through the same V. Ratio of momenta p_p : p_α is",
+  "formula": "p = √(2mqV)",
+  "options": [
+   "2√2 : 1",
+   "1 : 2√2",
+   "1 : 2",
+   "1 : 4"
+  ],
+  "answer": 1,
+  "explain": "p ∝ √(mq); α has mq = 8 times the proton's, so p_α = 2√2 p_p.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea9e9a72-ab33-4d05-9089-bc9dc1690b41",
+  "subject": "Physics",
+  "chapter": "Dual Nature",
+  "topic": "Thermal de Broglie wavelength (λ=h/√(3mkT))",
+  "prompt": "The thermal energy kT at room temperature (300 K) is about:",
+  "formula": "k = 8.62×10⁻⁵ eV/K",
+  "options": [
+   "0.1 eV",
+   "1/40 eV",
+   "1/400 eV",
+   "1 eV"
+  ],
+  "answer": 1,
+  "explain": "kT = 8.62×10⁻⁵ × 300 ≈ 0.026 eV ≈ 1/40 eV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

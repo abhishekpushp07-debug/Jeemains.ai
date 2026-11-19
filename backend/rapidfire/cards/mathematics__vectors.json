@@ -1,1375 +1,3235 @@
 [
-  {
-    "id": "97918e42-4feb-436c-a831-8e9feff54ddd",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "a·b = 0 implies the vectors are?",
-    "formula": "a·b = |a||b|cosθ",
-    "options": [
-      "Equal",
-      "Perpendicular",
-      "Anti-parallel",
-      "Parallel"
-    ],
-    "answer": 1,
-    "explain": "Dot product zero ⟹ cosθ = 0 ⟹ θ = 90°, so vectors are perpendicular.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7570c4dc-9360-48ea-b23b-4978f89633f5",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "a×b = 0 implies vectors are?",
-    "formula": "|a×b| = |a||b|sinθ",
-    "options": [
-      "Zero vectors only",
-      "Perpendicular",
-      "Parallel or anti-parallel",
-      "Unit vectors"
-    ],
-    "answer": 2,
-    "explain": "Cross product zero ⟹ sinθ = 0 ⟹ θ = 0° or 180°, i.e., parallel/anti-parallel.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1021f32e-ea02-45e4-a13b-0cafd3a318ee",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Scalar triple product [a b c] geometrically equals?",
-    "formula": "[a b c] = a·(b×c)",
-    "options": [
-      "Length of diagonal",
-      "Area of parallelogram",
-      "Volume of parallelepiped",
-      "Area of triangle"
-    ],
-    "answer": 2,
-    "explain": "[a b c] gives the volume of the parallelepiped formed by a, b, c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ada154ea-de36-49e1-907f-97276535dea0",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "i×j = ?",
-    "formula": "i×j = k",
-    "options": [
-      "-k",
-      "i",
-      "k",
-      "j"
-    ],
-    "answer": 2,
-    "explain": "By right-hand rule, i×j = k (cyclic: i→j→k).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "51cf0994-e57d-44b5-be45-07f29e7e6574",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "j×i = ?",
-    "formula": "a×b = -b×a",
-    "options": [
-      "-k",
-      "i",
-      "k",
-      "-j"
-    ],
-    "answer": 0,
-    "explain": "Cross product is anti-commutative, so j×i = -(i×j) = -k.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2b572acb-8271-40c5-b494-6419db4eb78a",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Direction cosines l,m,n satisfy which relation?",
-    "formula": "l²+m²+n² = 1",
-    "options": [
-      "l+m+n=0",
-      "l²+m²+n²=1",
-      "l²+m²+n²=0",
-      "l+m+n=1"
-    ],
-    "answer": 1,
-    "explain": "Sum of squares of direction cosines always equals 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "877b7061-fc41-4098-909e-997a5fa8f277",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Area of parallelogram with sides a and b?",
-    "formula": "A = |a×b|",
-    "options": [
-      "|a×b|",
-      "|a||b|",
-      "|a×b|/2",
-      "a·b"
-    ],
-    "answer": 0,
-    "explain": "Area of parallelogram = magnitude of cross product of its adjacent sides.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a55b6349-7acf-4eb4-96ae-dee3832654c1",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Area of triangle with sides a and b?",
-    "formula": "A = ½|a×b|",
-    "options": [
-      "|a||b|/2",
-      "|a×b|",
-      "½(a·b)",
-      "½|a×b|"
-    ],
-    "answer": 3,
-    "explain": "Triangle area = half the parallelogram area = ½|a×b|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "01c51418-a8a8-4308-be00-def9857b3f69",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Vector triple product a×(b×c) equals?",
-    "formula": "a×(b×c) = (a·c)b-(a·b)c",
-    "options": [
-      "(a·c)b-(a·b)c",
-      "(a·b)c-(a·c)b",
-      "a(b·c)-c(a·b)",
-      "(b·c)a-(a·c)b"
-    ],
-    "answer": 0,
-    "explain": "BAC-CAB rule: a×(b×c) = (a·c)b - (a·b)c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7d9175b7-51d0-481c-bc87-3a8a4b421c27",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Angle between a=(1,0,0) and b=(0,1,0)?",
-    "formula": "cosθ = a·b/(|a||b|)",
-    "options": [
-      "45°",
-      "90°",
-      "180°",
-      "0°"
-    ],
-    "answer": 1,
-    "explain": "a·b = 0, both unit vectors, so cosθ = 0, θ = 90°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2255770e-7846-4223-b542-0539a577bdcd",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Position vector of midpoint of A(a) and B(b)?",
-    "formula": "M = (a+b)/2",
-    "options": [
-      "a+b",
-      "(a+b)/2",
-      "(b-a)/2",
-      "(a-b)/2"
-    ],
-    "answer": 1,
-    "explain": "Midpoint divides AB in 1:1, so position vector = (a+b)/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "222cd67f-df38-4910-bb86-eb22d3334ae4",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Section formula: point dividing AB in m:n internally?",
-    "formula": "r = (mb+na)/(m+n)",
-    "options": [
-      "(mb-na)/(m+n)",
-      "(ma+nb)/(m+n)",
-      "(mb+na)/(m+n)",
-      "(ma-nb)/(m-n)"
-    ],
-    "answer": 2,
-    "explain": "Internal division: P = (m·b + n·a)/(m+n), where a,b are PVs of A,B.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "14809359-308d-4636-9e24-ddab86b0dfec",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Centroid of triangle with vertices a, b, c?",
-    "formula": "G = (a+b+c)/3",
-    "options": [
-      "(a+b-c)/3",
-      "(a+b+c)/2",
-      "a+b+c",
-      "(a+b+c)/3"
-    ],
-    "answer": 3,
-    "explain": "Centroid position vector = average of the three vertex position vectors.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "89aee88d-cfb0-46e5-9a47-aa1897c847be",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "i·i = j·j = k·k = ?",
-    "formula": "a·a = |a|²",
-    "options": [
-      "1",
-      "-1",
-      "0",
-      "√3"
-    ],
-    "answer": 0,
-    "explain": "Dot product of a unit vector with itself = 1² = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b97c7c0-700c-4905-98ac-421fe354fe64",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "i·j = i·k = j·k = ?",
-    "formula": "a·b = cosθ (unit vectors, θ=90°)",
-    "options": [
-      "-1",
-      "1",
-      "0",
-      "1/2"
-    ],
-    "answer": 2,
-    "explain": "Basis vectors are mutually perpendicular, so their dot products = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1af33e4a-fadd-4dbd-ba3b-e8505ec0d6ec",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Three points A,B,C are collinear if?",
-    "formula": "AB = λ AC",
-    "options": [
-      "AB·AC = 0",
-      "AB×AC = 0",
-      "AB+AC = 0",
-      "[AB AC] = 1"
-    ],
-    "answer": 1,
-    "explain": "Points collinear ⟺ AB and AC are parallel ⟺ AB×AC = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "962397a6-6452-47fb-9c79-ca2050830d60",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "For any vector a, a×a equals?",
-    "formula": "",
-    "options": [
-      "2a",
-      "|a|²",
-      "Unit vector",
-      "Zero vector"
-    ],
-    "answer": 3,
-    "explain": "Cross product of a vector with itself is always the zero vector.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "366030fa-57d8-4039-99f9-920c42dc2794",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If |a+b| = |a-b|, then a and b are?",
-    "formula": "|a+b|²-|a-b|² = 4a·b",
-    "options": [
-      "Equal",
-      "Perpendicular",
-      "Parallel",
-      "Anti-parallel"
-    ],
-    "answer": 1,
-    "explain": "|a+b|=|a-b| ⟹ 4a·b=0 ⟹ a·b=0 ⟹ perpendicular.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "92a2684d-61d8-4d7e-8a20-d50a871ad453",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "a·b in terms of |a|,|b|,θ?",
-    "formula": "a·b = |a||b|cosθ",
-    "options": [
-      "|a||b|cosθ",
-      "|a||b|cos²θ",
-      "|a||b|tanθ",
-      "|a||b|sinθ"
-    ],
-    "answer": 0,
-    "explain": "Dot product equals product of magnitudes times cosine of included angle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2b20b049-ba98-4b41-960f-daa49e92db51",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "j×k = ?",
-    "formula": "",
-    "options": [
-      "-i",
-      "k",
-      "-k",
-      "i"
-    ],
-    "answer": 3,
-    "explain": "Cyclic order i→j→k gives j×k = i (right-hand rule).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75f546ab-fde9-439c-985f-eb1d23265af9",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "k×i = ?",
-    "formula": "",
-    "options": [
-      "-i",
-      "j",
-      "-j",
-      "i"
-    ],
-    "answer": 1,
-    "explain": "Cyclic order i→j→k gives k×i = j.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef13afd8-3e76-4fee-bb00-33aed99e382e",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "k×j = ?",
-    "formula": "",
-    "options": [
-      "j",
-      "i",
-      "-j",
-      "-i"
-    ],
-    "answer": 3,
-    "explain": "Reversing cyclic order gives negative: k×j = -i.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1c2e7301-22cf-4b5d-847e-973d414228b6",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Scalar triple product [a b c] equals?",
-    "formula": "[a b c] = a·(b×c)",
-    "options": [
-      "(a×b)·c",
-      "(a·b)×c",
-      "a·(b·c)",
-      "a×(b·c)"
-    ],
-    "answer": 0,
-    "explain": "[a b c] = a·(b×c) = (a×b)·c — both forms are equal.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7a76bd5d-59f0-4d24-aa05-485eadb0fa1f",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If two vectors in [a b c] are swapped, sign?",
-    "formula": "[a b c] = -[b a c]",
-    "options": [
-      "Doubled",
-      "Reversed (negated)",
-      "Zero",
-      "Unchanged"
-    ],
-    "answer": 1,
-    "explain": "Interchanging any two vectors in a scalar triple product changes its sign.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "91cae63a-7050-4de2-be92-621a323dc7f4",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Component of a perpendicular to b is?",
-    "formula": "",
-    "options": [
-      "(a·b)b",
-      "(a·b̂)b̂",
-      "a×b/|b|",
-      "a - (a·b̂)b̂"
-    ],
-    "answer": 3,
-    "explain": "Subtract the projection along b̂ from a to get the perpendicular component.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21c3fbdd-3a69-418d-bd81-2f3d26adc712",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a = αb + βc, then a, b, c are?",
-    "formula": "",
-    "options": [
-      "Collinear",
-      "Unit vectors",
-      "Orthogonal",
-      "Coplanar"
-    ],
-    "answer": 3,
-    "explain": "Any vector expressible as linear combination of two others is coplanar with them.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b43dec38-3ba6-4e07-a122-295a5ba0f7e3",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "|a×b|² + (a·b)² = ?",
-    "formula": "|a×b|²+(a·b)² = |a|²|b|²",
-    "options": [
-      "(|a|+|b|)²",
-      "|a|²+|b|²",
-      "|a|²|b|²",
-      "|a|+|b|"
-    ],
-    "answer": 2,
-    "explain": "Uses sin²θ + cos²θ = 1, giving |a|²|b|²(sin²θ+cos²θ) = |a|²|b|².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8f0683d3-c946-49da-8a6b-f18888d38a5a",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "For coplanar vectors, scalar triple product = ?",
-    "formula": "[a b c] = 0",
-    "options": [
-      "-1",
-      "|a||b||c|",
-      "0",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "Coplanarity condition: [a b c] = 0 since volume of parallelepiped collapses.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd9af6b9-6577-4585-b084-1225904e98f8",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "|a - b|² = ?",
-    "formula": "|a-b|² = |a|²-2a·b+|b|²",
-    "options": [
-      "|a|²-2a·b+|b|²",
-      "|a|²+|b|²",
-      "|a|²+2a·b+|b|²",
-      "|a|²-|b|²"
-    ],
-    "answer": 0,
-    "explain": "Expanding (a-b)·(a-b) = |a|² - 2a·b + |b|².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f27f3bfa-fc09-47d7-b6dd-7b362bde105e",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Work done by force F over displacement d is?",
-    "formula": "W = F·d",
-    "options": [
-      "|F|+|d|",
-      "F·d",
-      "|F||d|sinθ",
-      "F×d"
-    ],
-    "answer": 1,
-    "explain": "Work is the dot product of force and displacement vectors.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "38a783b6-26a5-415b-8518-69911814c789",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Moment of force (torque) τ = ?",
-    "formula": "τ = r×F",
-    "options": [
-      "F×r",
-      "r·F",
-      "r×F",
-      "|r||F|cosθ"
-    ],
-    "answer": 2,
-    "explain": "Torque is the cross product of position vector r and force F.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "874498ea-d34e-4b64-9c5f-0e7f9f82090c",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a is any vector, then (a·i)i+(a·j)j+(a·k)k = ?",
-    "formula": "",
-    "options": [
-      "3a",
-      "a",
-      "0",
-      "|a|"
-    ],
-    "answer": 1,
-    "explain": "Resolving a along i,j,k and summing reconstructs the original vector a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "07fbef36-0d69-4fde-9d91-45c3c551b149",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Angle between two planes is the angle between their?",
-    "formula": "",
-    "options": [
-      "Direction cosines sum",
-      "Normal vectors",
-      "Position vectors",
-      "Tangent vectors"
-    ],
-    "answer": 1,
-    "explain": "Angle between planes equals angle between their normal vectors (or its supplement).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "be629918-a276-4729-9f88-8290e10d9038",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "For unit vectors â and b̂, â×b̂ has magnitude?",
-    "formula": "|â×b̂| = sinθ",
-    "options": [
-      "tanθ",
-      "cosθ",
-      "1",
-      "sinθ"
-    ],
-    "answer": 3,
-    "explain": "|â×b̂| = |â||b̂|sinθ = 1·1·sinθ = sinθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "018be18a-84c7-4a9c-a7e1-9356ce6fcb09",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "a×(b×c) expands to? (Vector triple product)",
-    "formula": "a×(b×c) = (a·c)b-(a·b)c",
-    "options": [
-      "a(b·c)-c(a·b)",
-      "(a·c)b-(a·b)c",
-      "(a·b)c-(a·c)b",
-      "(a×b)c"
-    ],
-    "answer": 1,
-    "explain": "BAC-CAB rule: a×(b×c) = (a·c)b - (a·b)c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1cfdb906-2414-4305-9afe-c1a3e5f6beb6",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If vectors a,b,c are mutually perpendicular unit vectors, [a b c]=?",
-    "formula": "",
-    "options": [
-      "±1",
-      "3",
-      "√3",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "Orthonormal set forms a parallelepiped of volume 1; sign depends on orientation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1d1a5330-8304-42a3-b7b7-189abc070ca4",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Position vector of point dividing AB externally in m:n?",
-    "formula": "r = (mb - na)/(m-n)",
-    "options": [
-      "(mb-na)/(m-n)",
-      "(ma+nb)/(m+n)",
-      "(ma-nb)/(m-n)",
-      "(mb+na)/(m+n)"
-    ],
-    "answer": 0,
-    "explain": "External division formula: r = (mb - na)/(m - n), m ≠ n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "41f28433-5b61-40b5-8a29-b29dc1ab9089",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Angle between vectors a and b if a·b = |a×b|?",
-    "formula": "θ = 45°",
-    "options": [
-      "30°",
-      "60°",
-      "90°",
-      "45°"
-    ],
-    "answer": 3,
-    "explain": "a·b=|a||b|cosθ, |a×b|=|a||b|sinθ; equal when tanθ=1, so θ=45°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d8c17242-3108-4f34-ba32-79e7743f107e",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If â and b̂ are unit vectors, |â – b̂|² equals?",
-    "formula": "2(1 – cosθ)",
-    "options": [
-      "1–cosθ",
-      "2(1–cosθ)",
-      "2(1+cosθ)",
-      "2cosθ"
-    ],
-    "answer": 1,
-    "explain": "|â–b̂|²=|â|²+|b̂|²–2â·b̂=1+1–2cosθ=2(1–cosθ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9fe5ecd2-e120-4e59-8509-4811e852714a",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Scalar projection of b onto a equals?",
-    "formula": "(a·b)/|a|",
-    "options": [
-      "(a·b)/|b|",
-      "(a·b)/|a|",
-      "a·b",
-      "(a×b)/|a|"
-    ],
-    "answer": 1,
-    "explain": "Scalar projection = b·â = (a·b)/|a|, a number (not a vector).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0314dc83-b61d-45f5-9678-2a7d55063245",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a+b+c = 0, then a×b equals?",
-    "formula": "b×c = c×a",
-    "options": [
-      "b×c",
-      "–b×c",
-      "a×c",
-      "zero vector"
-    ],
-    "answer": 0,
-    "explain": "a+b+c=0 ⟹ a×b=b×c=c×a (useful standard result).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "96d4adbe-8abb-4cf7-9fc1-21fee836f8cd",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Volume of parallelepiped with edges a,b,c is?",
-    "formula": "|[a b c]|",
-    "options": [
-      "|a×b|·|c|",
-      "½|[a b c]|",
-      "[a b c]²",
-      "|[a b c]|"
-    ],
-    "answer": 3,
-    "explain": "Volume = |scalar triple product| = |[a b c]|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "60b6c134-7a6b-4479-b504-bd0c144f4838",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Which expression gives the angle between a and b?",
-    "formula": "cos⁻¹[(a·b)/(|a||b|)]",
-    "options": [
-      "sin⁻¹[(a·b)/(|a||b|)]",
-      "tan⁻¹(|a×b|/a·b)",
-      "cos⁻¹[(a·b)/(|a||b|)]",
-      "cos⁻¹[|a×b|/(|a||b|)]"
-    ],
-    "answer": 2,
-    "explain": "The angle between two vectors is always found via the dot product formula.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "8d111cb4-ffb8-47ec-a34c-7f97ac5f61d8",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a and b are adjacent sides of a parallelogram, its diagonal vectors are?",
-    "formula": "a+b and a–b",
-    "options": [
-      "a+b and a–b",
-      "2a and 2b",
-      "a–b and b–a",
-      "a+b and b–a"
-    ],
-    "answer": 0,
-    "explain": "Two diagonals of parallelogram OACB are a+b and a–b.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "95c9ca91-0398-4810-bdc9-c6d6193f971d",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Direction cosines of vector (1,1,1) are?",
-    "formula": "(1/√3, 1/√3, 1/√3)",
-    "options": [
-      "(1,1,1)",
-      "(1/√3,1/√3,1/√3)",
-      "(1/√2,1/√2,0)",
-      "(1/3,1/3,1/3)"
-    ],
-    "answer": 1,
-    "explain": "Divide each component by magnitude √3; all direction cosines = 1/√3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "98a5ec9c-39a0-42cd-b917-9ba87c55d3f3",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Sum of squares of direction cosines of any line equals?",
-    "formula": "l²+m²+n²=1",
-    "options": [
-      "0",
-      "3",
-      "√3",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "l²+m²+n²=1 is the fundamental identity for direction cosines.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2b389090-9fe8-4526-8f67-124cc78e7881",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Two vectors are parallel if their cross product is?",
-    "formula": "a×b = 0",
-    "options": [
-      "Unit vector",
-      "Equal to a·b",
-      "Zero vector",
-      "Undefined"
-    ],
-    "answer": 2,
-    "explain": "a×b=|a||b|sinθ n̂; parallel⟹θ=0°or180°⟹sinθ=0⟹a×b=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "04a0a09e-1787-418c-81bc-413641e613ae",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If [a b c] = 5, what is [2a 3b 4c]?",
-    "formula": "24[a b c]",
-    "options": [
-      "5",
-      "60",
-      "24",
-      "120"
-    ],
-    "answer": 3,
-    "explain": "[2a 3b 4c]=2·3·4[a b c]=24×5=120. Scalar factors multiply out.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "b047361a-2782-4406-9711-996396c1a7f9",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The vector (a·b̂)b̂ represents?",
-    "formula": "",
-    "options": [
-      "Unit vector along a",
-      "a×b",
-      "Component of a perp to b",
-      "Projection vector of a onto b"
-    ],
-    "answer": 3,
-    "explain": "(a·b̂)b̂ is the vector projection of a along b.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8848a017-0dfc-4a7b-875e-6fb6aa51225c",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If â·b̂ = 1, what can we conclude?",
-    "formula": "",
-    "options": [
-      "Nothing specific",
-      "â ⊥ b̂",
-      "â = –b̂",
-      "â and b̂ are identical (same direction)"
-    ],
-    "answer": 3,
-    "explain": "â·b̂=cosθ=1⟹θ=0°, so unit vectors point in identical direction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "236be224-daf4-4d2d-a37d-3422e7af20ea",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "For vectors a,b,c: [a+b, b+c, c+a] equals?",
-    "formula": "2[a b c]",
-    "options": [
-      "0",
-      "4[a b c]",
-      "[a b c]",
-      "2[a b c]"
-    ],
-    "answer": 3,
-    "explain": "Expanding the triple product and using properties gives 2[a b c].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5412e1f1-2fbb-422e-9fec-2951dc24d677",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Lagrange's identity: |a×b|² = ?",
-    "formula": "|a|²|b|² – (a·b)²",
-    "options": [
-      "|a|²|b|²+(a·b)²",
-      "(a·b)²–|a|²|b|²",
-      "|a|²|b|²–(a·b)²",
-      "|a×b|²+(a·b)²"
-    ],
-    "answer": 2,
-    "explain": "Lagrange's identity: |a×b|²=|a|²|b|²–(a·b)², equivalent to sin²θ+cos²θ=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "be35d270-7fad-4ef2-96f5-3dde39fc217c",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a,b,c are coplanar, which statement is TRUE?",
-    "formula": "[a b c] = 0",
-    "options": [
-      "[a b c]=1",
-      "a×b=c",
-      "a·b=0",
-      "[a b c]=0"
-    ],
-    "answer": 3,
-    "explain": "Coplanar vectors have zero scalar triple product since volume of parallelepiped = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86a90e27-9393-4265-8110-be9ad7ef9063",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "Vector perpendicular to both a and b has direction along?",
-    "formula": "",
-    "options": [
-      "a·b",
-      "a–b",
-      "a×b",
-      "a+b"
-    ],
-    "answer": 2,
-    "explain": "Cross product a×b is perpendicular to both a and b by definition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4904ba84-e6b6-4431-896a-4a6e54267ad5",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The cross product is anti-commutative means?",
-    "formula": "a×b = –(b×a)",
-    "options": [
-      "a×b = 0",
-      "a×b = a·b",
-      "a×b = –b×a",
-      "a×b = b×a"
-    ],
-    "answer": 2,
-    "explain": "Cross product reverses sign on swapping order: a×b = –(b×a).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bf8049ed-ff61-41d4-88f9-a857ffd51a32",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If â is a unit vector along a, then |â| = ?",
-    "formula": "â = a/|a|",
-    "options": [
-      "0",
-      "|a|",
-      "1/|a|",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "By definition, a unit vector has magnitude exactly 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a91350ba-28f3-43e6-a9bc-93591bb1af3d",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a and b are unit vectors inclined at θ, |a–b| = ?",
-    "formula": "",
-    "options": [
-      "√2sinθ",
-      "2sinθ",
-      "2sin(θ/2)",
-      "2cos(θ/2)"
-    ],
-    "answer": 2,
-    "explain": "|a–b|²=2–2cosθ=4sin²(θ/2), so |a–b|=2sin(θ/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6084daa8-3f08-4360-9972-cdedc8aabd90",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The scalar triple product [a b c] = [a c b] times?",
-    "formula": "[a c b] = –[a b c]",
-    "options": [
-      "0",
-      "+1",
-      "2",
-      "–1"
-    ],
-    "answer": 3,
-    "explain": "Swapping any two vectors in scalar triple product changes its sign by –1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a9cab2a0-1e23-40d0-82f5-214afd452664",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a,b,c are position vectors of vertices of △, vector area = ?",
-    "formula": "½|a×b + b×c + c×a|",
-    "options": [
-      "½|a×b+b×c+c×a|",
-      "|a×b+b×c|",
-      "½|a+b+c|",
-      "|a×b×c|"
-    ],
-    "answer": 0,
-    "explain": "Vector area of triangle with PVs a,b,c equals ½|a×b + b×c + c×a|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9f595885-366f-4ea0-9469-f51ab20455a6",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If |a×b| = a·b, angle between a and b is?",
-    "formula": "tanθ = 1 ⟹ θ = 45°",
-    "options": [
-      "45°",
-      "90°",
-      "60°",
-      "30°"
-    ],
-    "answer": 0,
-    "explain": "|a×b|=|a||b|sinθ = a·b=|a||b|cosθ ⟹ tanθ=1 ⟹ θ=45°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "34ad9873-183d-410c-8446-f6c1fe428c4a",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a+b+c = 0, value of a·b + b·c + c·a is?",
-    "formula": "",
-    "options": [
-      "–(|a|²+|b|²+|c|²)/2",
-      "0",
-      "(|a|²+|b|²+|c|²)/2",
-      "|a|²+|b|²+|c|²"
-    ],
-    "answer": 0,
-    "explain": "|a+b+c|²=0 ⟹ |a|²+|b|²+|c|²+2(a·b+b·c+c·a)=0, so sum=–(|a|²+|b|²+|c|²)/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "355b8521-8582-4aeb-a901-4a52834d5aa8",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The dot product a·(b×c) is also equal to?",
-    "formula": "(a×b)·c",
-    "options": [
-      "a×(b·c)",
-      "b·(a×c)",
-      "(a×b)·c",
-      "(a·b)×c"
-    ],
-    "answer": 2,
-    "explain": "Scalar triple product: a·(b×c) = (a×b)·c, dots and cross are interchangeable.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a3b6a78a-6933-4a35-b1e6-b79c2e0f4b22",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The value of (i×j)·k + (j×k)·i + (k×i)·j = ?",
-    "formula": "",
-    "options": [
-      "–3",
-      "1",
-      "3",
-      "0"
-    ],
-    "answer": 2,
-    "explain": "Each term equals k·k = j·j = i·i = 1, so sum = 3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1da12edc-cd07-421d-913c-eb4b6163bae7",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The unit vector perpendicular to plane of a and b is?",
-    "formula": "n̂ = (a×b)/|a×b|",
-    "options": [
-      "(a+b)/|a+b|",
-      "(a×b)/|a×b|",
-      "(a·b)/|a||b|",
-      "a×b"
-    ],
-    "answer": 1,
-    "explain": "Normalising the cross product gives the unit normal to the plane.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c1a2d4bf-9688-443d-9dca-0fe38730a1c0",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a,b,c are unit vectors and a+b+c=0, then a·b+b·c+c·a=?",
-    "formula": "",
-    "options": [
-      "3",
-      "0",
-      "–3/2",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "|a+b+c|²=0 ⟹ 3+2(a·b+b·c+c·a)=0 ⟹ sum=–3/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "509b39b6-9f14-4b2e-a0ca-b647b6510937",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The vector equation of a line through A(a) parallel to b is?",
-    "formula": "r = a + λb",
-    "options": [
-      "r = a + λb",
-      "r·b = a·b",
-      "r = a × b",
-      "r = λa + b"
-    ],
-    "answer": 0,
-    "explain": "Every point on line is a + scalar multiple of direction b.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6984437b-26db-4b1e-a28a-94d958387e42",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If three vectors are linearly dependent, [a b c] = ?",
-    "formula": "",
-    "options": [
-      "|a||b||c|",
-      "0",
-      "–1",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "Linear dependence (coplanarity) makes scalar triple product zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "291ec615-3eb0-4673-be61-15c7569349d2",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If [a b c] = k, then [a c b] = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "2k",
-      "–k",
-      "k"
-    ],
-    "answer": 2,
-    "explain": "Swapping any two vectors in scalar triple product changes its sign.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e0be7d40-8c4d-4ddd-8e31-f405c951a1c8",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a·b = 0 and |a|=|b|=1, then |a×b| = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "2",
-      "0",
-      "1/2"
-    ],
-    "answer": 0,
-    "explain": "|a×b|=|a||b|sinθ; θ=90°, so sin90°=1, giving |a×b|=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "fc1bb293-3d8a-4cb2-a99a-0cdff33fb30d",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "The vector (a×b)×c equals which expression?",
-    "formula": "(a×b)×c = ?",
-    "options": [
-      "(a·c)b–(b·c)a",
-      "(b·c)a–(a·c)b",
-      "(c·a)b–(c·b)a",
-      "(a·b)c–(a·c)b"
-    ],
-    "answer": 0,
-    "explain": "(a×b)×c = (a·c)b–(b·c)a by the BAC-CAB rule applied on left triple product.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d0190301-ce19-4ce4-bc3f-3853edf01f6b",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "For a unit vector n̂ perpendicular to a and b, a×b equals?",
-    "formula": "a×b = |a||b|sinθ n̂",
-    "options": [
-      "|a||b|cosθ n̂",
-      "|a||b|sinθ",
-      "|a||b|sinθ n̂",
-      "|a||b|cosθ"
-    ],
-    "answer": 2,
-    "explain": "Cross product magnitude is |a||b|sinθ and direction is n̂ (right-hand rule).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bf0f3d1a-8700-4e0f-9107-80f039ee911d",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If a, b are two sides of a triangle, its area is?",
-    "formula": "Area = ½|a×b|",
-    "options": [
-      "a·b/2",
-      "½|a×b|",
-      "|a×b|",
-      "¼|a×b|"
-    ],
-    "answer": 1,
-    "explain": "Area of triangle = ½|a×b| where a and b are two adjacent side vectors.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6888b0dc-e51f-45c2-956a-d0a3df8666bc",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "For non-zero vectors a,b: (a×b) = 0 implies?",
-    "formula": "",
-    "options": [
-      "a and b are parallel",
-      "|a|=|b|",
-      "a = b",
-      "a and b are perpendicular"
-    ],
-    "answer": 0,
-    "explain": "|a×b|=|a||b|sinθ=0 → sinθ=0 → θ=0° or 180°, so a ∥ b.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "188ff791-dc73-4346-97f0-ba6ca27e96f0",
-    "subject": "Mathematics",
-    "chapter": "Vectors",
-    "topic": "Vectors",
-    "prompt": "If |a+b| = |a–b|, the angle between a and b is?",
-    "formula": "a·b = 0",
-    "options": [
-      "90°",
-      "180°",
-      "0°",
-      "60°"
-    ],
-    "answer": 0,
-    "explain": "|a+b|=|a–b| ⟹ 4a·b=0 ⟹ a⊥b, angle=90°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "97918e42-4feb-436c-a831-8e9feff54ddd",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "a·b = 0 implies the vectors are?",
+  "formula": "a·b = |a||b|cosθ",
+  "options": [
+   "Equal",
+   "Perpendicular",
+   "Anti-parallel",
+   "Parallel"
+  ],
+  "answer": 1,
+  "explain": "Dot product zero ⟹ cosθ = 0 ⟹ θ = 90°, so vectors are perpendicular.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7570c4dc-9360-48ea-b23b-4978f89633f5",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "a×b = 0 implies vectors are?",
+  "formula": "|a×b| = |a||b|sinθ",
+  "options": [
+   "Zero vectors only",
+   "Perpendicular",
+   "Parallel or anti-parallel",
+   "Unit vectors"
+  ],
+  "answer": 2,
+  "explain": "Cross product zero ⟹ sinθ = 0 ⟹ θ = 0° or 180°, i.e., parallel/anti-parallel.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1021f32e-ea02-45e4-a13b-0cafd3a318ee",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "Scalar triple product [a b c] geometrically equals?",
+  "formula": "[a b c] = a·(b×c)",
+  "options": [
+   "Length of diagonal",
+   "Area of parallelogram",
+   "Volume of parallelepiped",
+   "Area of triangle"
+  ],
+  "answer": 2,
+  "explain": "[a b c] gives the volume of the parallelepiped formed by a, b, c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ada154ea-de36-49e1-907f-97276535dea0",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "i×j = ?",
+  "formula": "i×j = k",
+  "options": [
+   "-k",
+   "i",
+   "k",
+   "j"
+  ],
+  "answer": 2,
+  "explain": "By right-hand rule, i×j = k (cyclic: i→j→k).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "51cf0994-e57d-44b5-be45-07f29e7e6574",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "j×i = ?",
+  "formula": "a×b = -b×a",
+  "options": [
+   "-k",
+   "i",
+   "k",
+   "-j"
+  ],
+  "answer": 0,
+  "explain": "Cross product is anti-commutative, so j×i = -(i×j) = -k.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2b572acb-8271-40c5-b494-6419db4eb78a",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "Direction cosines l,m,n satisfy which relation?",
+  "formula": "l²+m²+n² = 1",
+  "options": [
+   "l+m+n=0",
+   "l²+m²+n²=1",
+   "l²+m²+n²=0",
+   "l+m+n=1"
+  ],
+  "answer": 1,
+  "explain": "Sum of squares of direction cosines always equals 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "877b7061-fc41-4098-909e-997a5fa8f277",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Area of parallelogram with sides a and b?",
+  "formula": "A = |a×b|",
+  "options": [
+   "|a×b|",
+   "|a||b|",
+   "|a×b|/2",
+   "a·b"
+  ],
+  "answer": 0,
+  "explain": "Area of parallelogram = magnitude of cross product of its adjacent sides.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a55b6349-7acf-4eb4-96ae-dee3832654c1",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Area of triangle with sides a and b?",
+  "formula": "A = ½|a×b|",
+  "options": [
+   "|a||b|/2",
+   "|a×b|",
+   "½(a·b)",
+   "½|a×b|"
+  ],
+  "answer": 3,
+  "explain": "Triangle area = half the parallelogram area = ½|a×b|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "01c51418-a8a8-4308-be00-def9857b3f69",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "Vector triple product a×(b×c) equals?",
+  "formula": "a×(b×c) = (a·c)b-(a·b)c",
+  "options": [
+   "(a·c)b-(a·b)c",
+   "(a·b)c-(a·c)b",
+   "a(b·c)-c(a·b)",
+   "(b·c)a-(a·c)b"
+  ],
+  "answer": 0,
+  "explain": "BAC-CAB rule: a×(b×c) = (a·c)b - (a·b)c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7d9175b7-51d0-481c-bc87-3a8a4b421c27",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "Angle between a=(1,0,0) and b=(0,1,0)?",
+  "formula": "cosθ = a·b/(|a||b|)",
+  "options": [
+   "45°",
+   "90°",
+   "180°",
+   "0°"
+  ],
+  "answer": 1,
+  "explain": "a·b = 0, both unit vectors, so cosθ = 0, θ = 90°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2255770e-7846-4223-b542-0539a577bdcd",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Position vector of midpoint of A(a) and B(b)?",
+  "formula": "M = (a+b)/2",
+  "options": [
+   "a+b",
+   "(a+b)/2",
+   "(b-a)/2",
+   "(a-b)/2"
+  ],
+  "answer": 1,
+  "explain": "Midpoint divides AB in 1:1, so position vector = (a+b)/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "222cd67f-df38-4910-bb86-eb22d3334ae4",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Section formula: point dividing AB in m:n internally?",
+  "formula": "r = (mb+na)/(m+n)",
+  "options": [
+   "(mb-na)/(m+n)",
+   "(ma+nb)/(m+n)",
+   "(mb+na)/(m+n)",
+   "(ma-nb)/(m-n)"
+  ],
+  "answer": 2,
+  "explain": "Internal division: P = (m·b + n·a)/(m+n), where a,b are PVs of A,B.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "14809359-308d-4636-9e24-ddab86b0dfec",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Centroid of triangle with vertices a, b, c?",
+  "formula": "G = (a+b+c)/3",
+  "options": [
+   "(a+b-c)/3",
+   "(a+b+c)/2",
+   "a+b+c",
+   "(a+b+c)/3"
+  ],
+  "answer": 3,
+  "explain": "Centroid position vector = average of the three vertex position vectors.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "89aee88d-cfb0-46e5-9a47-aa1897c847be",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "i·i = j·j = k·k = ?",
+  "formula": "a·a = |a|²",
+  "options": [
+   "1",
+   "-1",
+   "0",
+   "√3"
+  ],
+  "answer": 0,
+  "explain": "Dot product of a unit vector with itself = 1² = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b97c7c0-700c-4905-98ac-421fe354fe64",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "i·j = i·k = j·k = ?",
+  "formula": "a·b = cosθ (unit vectors, θ=90°)",
+  "options": [
+   "-1",
+   "1",
+   "0",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "Basis vectors are mutually perpendicular, so their dot products = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1af33e4a-fadd-4dbd-ba3b-e8505ec0d6ec",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Collinearity of points and vectors",
+  "prompt": "Three points A,B,C are collinear if?",
+  "formula": "AB = λ AC",
+  "options": [
+   "AB·AC = 0",
+   "AB×AC = 0",
+   "AB+AC = 0",
+   "[AB AC] = 1"
+  ],
+  "answer": 1,
+  "explain": "Points collinear ⟺ AB and AC are parallel ⟺ AB×AC = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "962397a6-6452-47fb-9c79-ca2050830d60",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "For any vector a, a×a equals?",
+  "formula": "",
+  "options": [
+   "2a",
+   "|a|²",
+   "Unit vector",
+   "Zero vector"
+  ],
+  "answer": 3,
+  "explain": "Cross product of a vector with itself is always the zero vector.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "366030fa-57d8-4039-99f9-920c42dc2794",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "If |a+b| = |a-b|, then a and b are?",
+  "formula": "|a+b|²-|a-b|² = 4a·b",
+  "options": [
+   "Equal",
+   "Perpendicular",
+   "Parallel",
+   "Anti-parallel"
+  ],
+  "answer": 1,
+  "explain": "|a+b|=|a-b| ⟹ 4a·b=0 ⟹ a·b=0 ⟹ perpendicular.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "92a2684d-61d8-4d7e-8a20-d50a871ad453",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "a·b in terms of |a|,|b|,θ?",
+  "formula": "a·b = |a||b|cosθ",
+  "options": [
+   "|a||b|cosθ",
+   "|a||b|cos²θ",
+   "|a||b|tanθ",
+   "|a||b|sinθ"
+  ],
+  "answer": 0,
+  "explain": "Dot product equals product of magnitudes times cosine of included angle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2b20b049-ba98-4b41-960f-daa49e92db51",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "j×k = ?",
+  "formula": "",
+  "options": [
+   "-i",
+   "k",
+   "-k",
+   "i"
+  ],
+  "answer": 3,
+  "explain": "Cyclic order i→j→k gives j×k = i (right-hand rule).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75f546ab-fde9-439c-985f-eb1d23265af9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "k×i = ?",
+  "formula": "",
+  "options": [
+   "-i",
+   "j",
+   "-j",
+   "i"
+  ],
+  "answer": 1,
+  "explain": "Cyclic order i→j→k gives k×i = j.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef13afd8-3e76-4fee-bb00-33aed99e382e",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "k×j = ?",
+  "formula": "",
+  "options": [
+   "j",
+   "i",
+   "-j",
+   "-i"
+  ],
+  "answer": 3,
+  "explain": "Reversing cyclic order gives negative: k×j = -i.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1c2e7301-22cf-4b5d-847e-973d414228b6",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "Scalar triple product [a b c] equals?",
+  "formula": "[a b c] = a·(b×c)",
+  "options": [
+   "(a×b)·c",
+   "(a·b)×c",
+   "a·(b·c)",
+   "a×(b·c)"
+  ],
+  "answer": 0,
+  "explain": "[a b c] = a·(b×c) = (a×b)·c — both forms are equal.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7a76bd5d-59f0-4d24-aa05-485eadb0fa1f",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "If two vectors in [a b c] are swapped, sign?",
+  "formula": "[a b c] = -[b a c]",
+  "options": [
+   "Doubled",
+   "Reversed (negated)",
+   "Zero",
+   "Unchanged"
+  ],
+  "answer": 1,
+  "explain": "Interchanging any two vectors in a scalar triple product changes its sign.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "91cae63a-7050-4de2-be92-621a323dc7f4",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Component of a perpendicular to b is?",
+  "formula": "",
+  "options": [
+   "(a·b)b",
+   "(a·b̂)b̂",
+   "a×b/|b|",
+   "a - (a·b̂)b̂"
+  ],
+  "answer": 3,
+  "explain": "Subtract the projection along b̂ from a to get the perpendicular component.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21c3fbdd-3a69-418d-bd81-2f3d26adc712",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "If a = αb + βc, then a, b, c are?",
+  "formula": "",
+  "options": [
+   "Collinear",
+   "Unit vectors",
+   "Orthogonal",
+   "Coplanar"
+  ],
+  "answer": 3,
+  "explain": "Any vector expressible as linear combination of two others is coplanar with them.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b43dec38-3ba6-4e07-a122-295a5ba0f7e3",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "|a×b|² + (a·b)² = ?",
+  "formula": "|a×b|²+(a·b)² = |a|²|b|²",
+  "options": [
+   "(|a|+|b|)²",
+   "|a|²+|b|²",
+   "|a|²|b|²",
+   "|a|+|b|"
+  ],
+  "answer": 2,
+  "explain": "Uses sin²θ + cos²θ = 1, giving |a|²|b|²(sin²θ+cos²θ) = |a|²|b|².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8f0683d3-c946-49da-8a6b-f18888d38a5a",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "For coplanar vectors, scalar triple product = ?",
+  "formula": "[a b c] = 0",
+  "options": [
+   "-1",
+   "|a||b||c|",
+   "0",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Coplanarity condition: [a b c] = 0 since volume of parallelepiped collapses.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd9af6b9-6577-4585-b084-1225904e98f8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "|a - b|² = ?",
+  "formula": "|a-b|² = |a|²-2a·b+|b|²",
+  "options": [
+   "|a|²-2a·b+|b|²",
+   "|a|²+|b|²",
+   "|a|²+2a·b+|b|²",
+   "|a|²-|b|²"
+  ],
+  "answer": 0,
+  "explain": "Expanding (a-b)·(a-b) = |a|² - 2a·b + |b|².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f27f3bfa-fc09-47d7-b6dd-7b362bde105e",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "Work done by force F over displacement d is?",
+  "formula": "W = F·d",
+  "options": [
+   "|F|+|d|",
+   "F·d",
+   "|F||d|sinθ",
+   "F×d"
+  ],
+  "answer": 1,
+  "explain": "Work is the dot product of force and displacement vectors.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "38a783b6-26a5-415b-8518-69911814c789",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "Moment of force (torque) τ = ?",
+  "formula": "τ = r×F",
+  "options": [
+   "F×r",
+   "r·F",
+   "r×F",
+   "|r||F|cosθ"
+  ],
+  "answer": 2,
+  "explain": "Torque is the cross product of position vector r and force F.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "874498ea-d34e-4b64-9c5f-0e7f9f82090c",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "If a is any vector, then (a·i)i+(a·j)j+(a·k)k = ?",
+  "formula": "",
+  "options": [
+   "3a",
+   "a",
+   "0",
+   "|a|"
+  ],
+  "answer": 1,
+  "explain": "Resolving a along i,j,k and summing reconstructs the original vector a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "07fbef36-0d69-4fde-9d91-45c3c551b149",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "Angle between two planes is the angle between their?",
+  "formula": "",
+  "options": [
+   "Direction cosines sum",
+   "Normal vectors",
+   "Position vectors",
+   "Tangent vectors"
+  ],
+  "answer": 1,
+  "explain": "Angle between planes equals angle between their normal vectors (or its supplement).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "be629918-a276-4729-9f88-8290e10d9038",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "For unit vectors â and b̂, â×b̂ has magnitude?",
+  "formula": "|â×b̂| = sinθ",
+  "options": [
+   "tanθ",
+   "cosθ",
+   "1",
+   "sinθ"
+  ],
+  "answer": 3,
+  "explain": "|â×b̂| = |â||b̂|sinθ = 1·1·sinθ = sinθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "018be18a-84c7-4a9c-a7e1-9356ce6fcb09",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "a×(b×c) expands to? (Vector triple product)",
+  "formula": "a×(b×c) = (a·c)b-(a·b)c",
+  "options": [
+   "a(b·c)-c(a·b)",
+   "(a·c)b-(a·b)c",
+   "(a·b)c-(a·c)b",
+   "(a×b)c"
+  ],
+  "answer": 1,
+  "explain": "BAC-CAB rule: a×(b×c) = (a·c)b - (a·b)c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1cfdb906-2414-4305-9afe-c1a3e5f6beb6",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "If vectors a,b,c are mutually perpendicular unit vectors, [a b c]=?",
+  "formula": "",
+  "options": [
+   "±1",
+   "3",
+   "√3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Orthonormal set forms a parallelepiped of volume 1; sign depends on orientation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1d1a5330-8304-42a3-b7b7-189abc070ca4",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Position vector of point dividing AB externally in m:n?",
+  "formula": "r = (mb - na)/(m-n)",
+  "options": [
+   "(mb-na)/(m-n)",
+   "(ma+nb)/(m+n)",
+   "(ma-nb)/(m-n)",
+   "(mb+na)/(m+n)"
+  ],
+  "answer": 0,
+  "explain": "External division formula: r = (mb - na)/(m - n), m ≠ n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "41f28433-5b61-40b5-8a29-b29dc1ab9089",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "Angle between vectors a and b if a·b = |a×b|?",
+  "formula": "θ = 45°",
+  "options": [
+   "30°",
+   "60°",
+   "90°",
+   "45°"
+  ],
+  "answer": 3,
+  "explain": "a·b=|a||b|cosθ, |a×b|=|a||b|sinθ; equal when tanθ=1, so θ=45°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d8c17242-3108-4f34-ba32-79e7743f107e",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "If â and b̂ are unit vectors, |â – b̂|² equals?",
+  "formula": "2(1 – cosθ)",
+  "options": [
+   "1–cosθ",
+   "2(1–cosθ)",
+   "2(1+cosθ)",
+   "2cosθ"
+  ],
+  "answer": 1,
+  "explain": "|â–b̂|²=|â|²+|b̂|²–2â·b̂=1+1–2cosθ=2(1–cosθ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9fe5ecd2-e120-4e59-8509-4811e852714a",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Scalar projection of b onto a equals?",
+  "formula": "(a·b)/|a|",
+  "options": [
+   "(a·b)/|b|",
+   "(a·b)/|a|",
+   "a·b",
+   "(a×b)/|a|"
+  ],
+  "answer": 1,
+  "explain": "Scalar projection = b·â = (a·b)/|a|, a number (not a vector).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0314dc83-b61d-45f5-9678-2a7d55063245",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "If a+b+c = 0, then a×b equals?",
+  "formula": "b×c = c×a",
+  "options": [
+   "b×c",
+   "–b×c",
+   "a×c",
+   "zero vector"
+  ],
+  "answer": 0,
+  "explain": "a+b+c=0 ⟹ a×b=b×c=c×a (useful standard result).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "96d4adbe-8abb-4cf7-9fc1-21fee836f8cd",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "Volume of parallelepiped with edges a,b,c is?",
+  "formula": "|[a b c]|",
+  "options": [
+   "|a×b|·|c|",
+   "½|[a b c]|",
+   "[a b c]²",
+   "|[a b c]|"
+  ],
+  "answer": 3,
+  "explain": "Volume = |scalar triple product| = |[a b c]|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "60b6c134-7a6b-4479-b504-bd0c144f4838",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "Which expression gives the angle between a and b?",
+  "formula": "cos⁻¹[(a·b)/(|a||b|)]",
+  "options": [
+   "sin⁻¹[(a·b)/(|a||b|)]",
+   "tan⁻¹(|a×b|/a·b)",
+   "cos⁻¹[(a·b)/(|a||b|)]",
+   "cos⁻¹[|a×b|/(|a||b|)]"
+  ],
+  "answer": 2,
+  "explain": "The angle between two vectors is always found via the dot product formula.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "8d111cb4-ffb8-47ec-a34c-7f97ac5f61d8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Addition of vectors: triangle/parallelogram law",
+  "prompt": "If a and b are adjacent sides of a parallelogram, its diagonal vectors are?",
+  "formula": "a+b and a–b",
+  "options": [
+   "a+b and a–b",
+   "2a and 2b",
+   "a–b and b–a",
+   "a+b and b–a"
+  ],
+  "answer": 0,
+  "explain": "Two diagonals of parallelogram OACB are a+b and a–b.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "95c9ca91-0398-4810-bdc9-c6d6193f971d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "Direction cosines of vector (1,1,1) are?",
+  "formula": "(1/√3, 1/√3, 1/√3)",
+  "options": [
+   "(1,1,1)",
+   "(1/√3,1/√3,1/√3)",
+   "(1/√2,1/√2,0)",
+   "(1/3,1/3,1/3)"
+  ],
+  "answer": 1,
+  "explain": "Divide each component by magnitude √3; all direction cosines = 1/√3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "98a5ec9c-39a0-42cd-b917-9ba87c55d3f3",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "Sum of squares of direction cosines of any line equals?",
+  "formula": "l²+m²+n²=1",
+  "options": [
+   "0",
+   "3",
+   "√3",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "l²+m²+n²=1 is the fundamental identity for direction cosines.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2b389090-9fe8-4526-8f67-124cc78e7881",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "Two vectors are parallel if their cross product is?",
+  "formula": "a×b = 0",
+  "options": [
+   "Unit vector",
+   "Equal to a·b",
+   "Zero vector",
+   "Undefined"
+  ],
+  "answer": 2,
+  "explain": "a×b=|a||b|sinθ n̂; parallel⟹θ=0°or180°⟹sinθ=0⟹a×b=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "04a0a09e-1787-418c-81bc-413641e613ae",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "If [a b c] = 5, what is [2a 3b 4c]?",
+  "formula": "24[a b c]",
+  "options": [
+   "5",
+   "60",
+   "24",
+   "120"
+  ],
+  "answer": 3,
+  "explain": "[2a 3b 4c]=2·3·4[a b c]=24×5=120. Scalar factors multiply out.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b047361a-2782-4406-9711-996396c1a7f9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "The vector (a·b̂)b̂ represents?",
+  "formula": "",
+  "options": [
+   "Unit vector along a",
+   "a×b",
+   "Component of a perp to b",
+   "Projection vector of a onto b"
+  ],
+  "answer": 3,
+  "explain": "(a·b̂)b̂ is the vector projection of a along b.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8848a017-0dfc-4a7b-875e-6fb6aa51225c",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "If â·b̂ = 1, what can we conclude?",
+  "formula": "",
+  "options": [
+   "Nothing specific",
+   "â ⊥ b̂",
+   "â = –b̂",
+   "â and b̂ are identical (same direction)"
+  ],
+  "answer": 3,
+  "explain": "â·b̂=cosθ=1⟹θ=0°, so unit vectors point in identical direction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "236be224-daf4-4d2d-a37d-3422e7af20ea",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "For vectors a,b,c: [a+b, b+c, c+a] equals?",
+  "formula": "2[a b c]",
+  "options": [
+   "0",
+   "4[a b c]",
+   "[a b c]",
+   "2[a b c]"
+  ],
+  "answer": 3,
+  "explain": "Expanding the triple product and using properties gives 2[a b c].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5412e1f1-2fbb-422e-9fec-2951dc24d677",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "Lagrange's identity: |a×b|² = ?",
+  "formula": "|a|²|b|² – (a·b)²",
+  "options": [
+   "|a|²|b|²+(a·b)²",
+   "(a·b)²–|a|²|b|²",
+   "|a|²|b|²–(a·b)²",
+   "|a×b|²+(a·b)²"
+  ],
+  "answer": 2,
+  "explain": "Lagrange's identity: |a×b|²=|a|²|b|²–(a·b)², equivalent to sin²θ+cos²θ=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "be35d270-7fad-4ef2-96f5-3dde39fc217c",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "If a,b,c are coplanar, which statement is TRUE?",
+  "formula": "[a b c] = 0",
+  "options": [
+   "[a b c]=1",
+   "a×b=c",
+   "a·b=0",
+   "[a b c]=0"
+  ],
+  "answer": 3,
+  "explain": "Coplanar vectors have zero scalar triple product since volume of parallelepiped = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86a90e27-9393-4265-8110-be9ad7ef9063",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "Vector perpendicular to both a and b has direction along?",
+  "formula": "",
+  "options": [
+   "a·b",
+   "a–b",
+   "a×b",
+   "a+b"
+  ],
+  "answer": 2,
+  "explain": "Cross product a×b is perpendicular to both a and b by definition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4904ba84-e6b6-4431-896a-4a6e54267ad5",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "The cross product is anti-commutative means?",
+  "formula": "a×b = –(b×a)",
+  "options": [
+   "a×b = 0",
+   "a×b = a·b",
+   "a×b = –b×a",
+   "a×b = b×a"
+  ],
+  "answer": 2,
+  "explain": "Cross product reverses sign on swapping order: a×b = –(b×a).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bf8049ed-ff61-41d4-88f9-a857ffd51a32",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "If â is a unit vector along a, then |â| = ?",
+  "formula": "â = a/|a|",
+  "options": [
+   "0",
+   "|a|",
+   "1/|a|",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "By definition, a unit vector has magnitude exactly 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a91350ba-28f3-43e6-a9bc-93591bb1af3d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "If a and b are unit vectors inclined at θ, |a–b| = ?",
+  "formula": "",
+  "options": [
+   "√2sinθ",
+   "2sinθ",
+   "2sin(θ/2)",
+   "2cos(θ/2)"
+  ],
+  "answer": 2,
+  "explain": "|a–b|²=2–2cosθ=4sin²(θ/2), so |a–b|=2sin(θ/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6084daa8-3f08-4360-9972-cdedc8aabd90",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "The scalar triple product [a b c] = [a c b] times?",
+  "formula": "[a c b] = –[a b c]",
+  "options": [
+   "0",
+   "+1",
+   "2",
+   "–1"
+  ],
+  "answer": 3,
+  "explain": "Swapping any two vectors in scalar triple product changes its sign by –1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a9cab2a0-1e23-40d0-82f5-214afd452664",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "If a,b,c are position vectors of vertices of △, vector area = ?",
+  "formula": "½|a×b + b×c + c×a|",
+  "options": [
+   "½|a×b+b×c+c×a|",
+   "|a×b+b×c|",
+   "½|a+b+c|",
+   "|a×b×c|"
+  ],
+  "answer": 0,
+  "explain": "Vector area of triangle with PVs a,b,c equals ½|a×b + b×c + c×a|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9f595885-366f-4ea0-9469-f51ab20455a6",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "If |a×b| = a·b, angle between a and b is?",
+  "formula": "tanθ = 1 ⟹ θ = 45°",
+  "options": [
+   "45°",
+   "90°",
+   "60°",
+   "30°"
+  ],
+  "answer": 0,
+  "explain": "|a×b|=|a||b|sinθ = a·b=|a||b|cosθ ⟹ tanθ=1 ⟹ θ=45°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "34ad9873-183d-410c-8446-f6c1fe428c4a",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "If a+b+c = 0, value of a·b + b·c + c·a is?",
+  "formula": "",
+  "options": [
+   "–(|a|²+|b|²+|c|²)/2",
+   "0",
+   "(|a|²+|b|²+|c|²)/2",
+   "|a|²+|b|²+|c|²"
+  ],
+  "answer": 0,
+  "explain": "|a+b+c|²=0 ⟹ |a|²+|b|²+|c|²+2(a·b+b·c+c·a)=0, so sum=–(|a|²+|b|²+|c|²)/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "355b8521-8582-4aeb-a901-4a52834d5aa8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "The dot product a·(b×c) is also equal to?",
+  "formula": "(a×b)·c",
+  "options": [
+   "a×(b·c)",
+   "b·(a×c)",
+   "(a×b)·c",
+   "(a·b)×c"
+  ],
+  "answer": 2,
+  "explain": "Scalar triple product: a·(b×c) = (a×b)·c, dots and cross are interchangeable.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a3b6a78a-6933-4a35-b1e6-b79c2e0f4b22",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "The value of (i×j)·k + (j×k)·i + (k×i)·j = ?",
+  "formula": "",
+  "options": [
+   "–3",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Each term equals k·k = j·j = i·i = 1, so sum = 3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1da12edc-cd07-421d-913c-eb4b6163bae7",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "The unit vector perpendicular to plane of a and b is?",
+  "formula": "n̂ = (a×b)/|a×b|",
+  "options": [
+   "(a+b)/|a+b|",
+   "(a×b)/|a×b|",
+   "(a·b)/|a||b|",
+   "a×b"
+  ],
+  "answer": 1,
+  "explain": "Normalising the cross product gives the unit normal to the plane.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c1a2d4bf-9688-443d-9dca-0fe38730a1c0",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "If a,b,c are unit vectors and a+b+c=0, then a·b+b·c+c·a=?",
+  "formula": "",
+  "options": [
+   "3",
+   "0",
+   "–3/2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "|a+b+c|²=0 ⟹ 3+2(a·b+b·c+c·a)=0 ⟹ sum=–3/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "509b39b6-9f14-4b2e-a0ca-b647b6510937",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector equations and solving for unknown vector",
+  "prompt": "The vector equation of a line through A(a) parallel to b is?",
+  "formula": "r = a + λb",
+  "options": [
+   "r = a + λb",
+   "r·b = a·b",
+   "r = a × b",
+   "r = λa + b"
+  ],
+  "answer": 0,
+  "explain": "Every point on line is a + scalar multiple of direction b.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6984437b-26db-4b1e-a28a-94d958387e42",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Linear combination, linear independence",
+  "prompt": "If three vectors are linearly dependent, [a b c] = ?",
+  "formula": "",
+  "options": [
+   "|a||b||c|",
+   "0",
+   "–1",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Linear dependence (coplanarity) makes scalar triple product zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "291ec615-3eb0-4673-be61-15c7569349d2",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar triple product and coplanarity",
+  "prompt": "If [a b c] = k, then [a c b] = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "2k",
+   "–k",
+   "k"
+  ],
+  "answer": 2,
+  "explain": "Swapping any two vectors in scalar triple product changes its sign.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e0be7d40-8c4d-4ddd-8e31-f405c951a1c8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "If a·b = 0 and |a|=|b|=1, then |a×b| = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "0",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "|a×b|=|a||b|sinθ; θ=90°, so sin90°=1, giving |a×b|=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "fc1bb293-3d8a-4cb2-a99a-0cdff33fb30d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "The vector (a×b)×c equals which expression?",
+  "formula": "(a×b)×c = ?",
+  "options": [
+   "(a·c)b–(b·c)a",
+   "(b·c)a–(a·c)b",
+   "(c·a)b–(c·b)a",
+   "(a·b)c–(a·c)b"
+  ],
+  "answer": 0,
+  "explain": "(a×b)×c = (a·c)b–(b·c)a by the BAC-CAB rule applied on left triple product.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d0190301-ce19-4ce4-bc3f-3853edf01f6b",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "For a unit vector n̂ perpendicular to a and b, a×b equals?",
+  "formula": "a×b = |a||b|sinθ n̂",
+  "options": [
+   "|a||b|cosθ n̂",
+   "|a||b|sinθ",
+   "|a||b|sinθ n̂",
+   "|a||b|cosθ"
+  ],
+  "answer": 2,
+  "explain": "Cross product magnitude is |a||b|sinθ and direction is n̂ (right-hand rule).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bf0f3d1a-8700-4e0f-9107-80f039ee911d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "If a, b are two sides of a triangle, its area is?",
+  "formula": "Area = ½|a×b|",
+  "options": [
+   "a·b/2",
+   "½|a×b|",
+   "|a×b|",
+   "¼|a×b|"
+  ],
+  "answer": 1,
+  "explain": "Area of triangle = ½|a×b| where a and b are two adjacent side vectors.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6888b0dc-e51f-45c2-956a-d0a3df8666bc",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector (cross) product and its properties",
+  "prompt": "For non-zero vectors a,b: (a×b) = 0 implies?",
+  "formula": "",
+  "options": [
+   "a and b are parallel",
+   "|a|=|b|",
+   "a = b",
+   "a and b are perpendicular"
+  ],
+  "answer": 0,
+  "explain": "|a×b|=|a||b|sinθ=0 → sinθ=0 → θ=0° or 180°, so a ∥ b.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "188ff791-dc73-4346-97f0-ba6ca27e96f0",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "If |a+b| = |a–b|, the angle between a and b is?",
+  "formula": "a·b = 0",
+  "options": [
+   "90°",
+   "180°",
+   "0°",
+   "60°"
+  ],
+  "answer": 0,
+  "explain": "|a+b|=|a–b| ⟹ 4a·b=0 ⟹ a⊥b, angle=90°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "64b1615a-8614-4c1a-a642-dcf17f2ab204",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vectors and scalars: types, equality",
+  "prompt": "Two vectors are equal exactly when they have the same:",
+  "formula": "",
+  "options": [
+   "Magnitude and initial point",
+   "Magnitude and direction",
+   "Magnitude only",
+   "Direction only"
+  ],
+  "answer": 1,
+  "explain": "Equality needs the same magnitude and the same direction; the position of the initial point is irrelevant for free vectors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "58792622-55c3-4ebd-a4a4-d33bc7d98cf3",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vectors and scalars: types, equality",
+  "prompt": "Which of these is a scalar quantity?",
+  "formula": "",
+  "options": [
+   "Force",
+   "Torque",
+   "Angular momentum",
+   "Electric current"
+  ],
+  "answer": 3,
+  "explain": "Current has a sense of flow but does not obey the vector addition law, so it is a scalar.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4756e4e6-80c0-405f-bc1c-cee951f511d8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vectors and scalars: types, equality",
+  "prompt": "Vectors a and b are called parallel (collinear) vectors if they are:",
+  "formula": "",
+  "options": [
+   "Along the same line only",
+   "Along the same or parallel lines",
+   "Equal in magnitude",
+   "Perpendicular to each other"
+  ],
+  "answer": 1,
+  "explain": "Collinear vectors lie on the same line or parallel lines; they may have the same or opposite sense.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fe0cb413-9185-4c07-b272-2f496fa41d7d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vectors and scalars: types, equality",
+  "prompt": "A vector having the same magnitude as a but the opposite direction is called the ___ of a.",
+  "formula": "",
+  "options": [
+   "Null vector",
+   "Reciprocal",
+   "Negative",
+   "Unit vector"
+  ],
+  "answer": 2,
+  "explain": "The negative of a is −a, with equal magnitude and opposite direction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b206c9a3-e0f1-4d87-ab13-8e83c6af30a8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Addition of vectors: triangle/parallelogram law",
+  "prompt": "In any triangle ABC, the vector sum AB + BC + CA equals?",
+  "formula": "AB + BC = AC",
+  "options": [
+   "Zero vector",
+   "Zero scalar only if equilateral",
+   "2·AC",
+   "Vector AC"
+  ],
+  "answer": 0,
+  "explain": "By the triangle law AB + BC = AC, and AC + CA = 0, so the closed-loop sum is the zero vector.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3d1c5001-d258-48f9-9b90-629e9fc88f03",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Addition of vectors: triangle/parallelogram law",
+  "prompt": "For |a| = 5 and |b| = 3, which value is impossible for |a + b|?",
+  "formula": "||a|−|b|| ≤ |a+b| ≤ |a|+|b|",
+  "options": [
+   "1",
+   "4",
+   "8",
+   "7"
+  ],
+  "answer": 0,
+  "explain": "|a+b| lies in [2, 8], so 1 is not possible.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "901de536-05a7-49a7-8501-92acf00c4bb4",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Addition of vectors: triangle/parallelogram law",
+  "prompt": "In parallelogram ABCD, AC + BD equals which vector?",
+  "formula": "",
+  "options": [
+   "2 DC·(−1)",
+   "0",
+   "2 AB",
+   "2 AD"
+  ],
+  "answer": 3,
+  "explain": "AC = AB+AD, BD = AD−AB, so the sum is 2AD.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca72ccb1-88d4-4726-9be7-71296cffb2fa",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Addition of vectors: triangle/parallelogram law",
+  "prompt": "If D is the midpoint of BC in triangle ABC, then AB + AC equals?",
+  "formula": "",
+  "options": [
+   "AD",
+   "2 DA",
+   "2 BC",
+   "2 AD"
+  ],
+  "answer": 3,
+  "explain": "Median: AB + AC = 2AD, since BD + CD = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c6abe3d-fa02-4fd2-8de5-2918689fb142",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Points A(a), B(b), C(c) form a parallelogram ABCD in order. Position vector of D?",
+  "formula": "AD = BC",
+  "options": [
+   "a + c − b",
+   "b + c − a",
+   "a + b − c",
+   "(a + c)/2 − b"
+  ],
+  "answer": 0,
+  "explain": "AD = BC gives d − a = c − b, so d = a + c − b (diagonals AC and BD bisect each other).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2a69872-0244-4816-916a-5209b9bf617f",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Foot D of the internal bisector of ∠A on BC divides BC (B to C) in the ratio:",
+  "formula": "",
+  "options": [
+   "AB² : AC²",
+   "BC : AB",
+   "AB : AC",
+   "AC : AB"
+  ],
+  "answer": 2,
+  "explain": "Angle bisector theorem: BD/DC = AB/AC, so d = (|AB|c + |AC|b)... in ratio AB:AC.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "660f09c2-79e0-49ee-b6a1-1c97bdd18693",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Incentre of triangle ABC (sides a, b, c opposite A, B, C) with position vectors A, B, C:",
+  "formula": "",
+  "options": [
+   "(bA + cB + aC)/(a+b+c)",
+   "(aA + bB + cC)/(a+b+c)",
+   "(A/a + B/b + C/c)/3",
+   "(A + B + C)/3"
+  ],
+  "answer": 1,
+  "explain": "Incentre weights each vertex by the length of the opposite side.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6d9f0a6c-d7dd-43e4-99ab-2d8471009ffd",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "For P = (1−t)a + tb on line AB, the point P lies beyond B when:",
+  "formula": "",
+  "options": [
+   "t = 1/2",
+   "t > 1",
+   "0 < t < 1",
+   "t < 0"
+  ],
+  "answer": 1,
+  "explain": "t=0 gives A, t=1 gives B, t>1 lies on extension past B, t<0 past A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ed45abb-a516-4103-914e-7f5bbf180d8d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Points A, B, C with position vectors a, b, c are collinear iff there exist scalars x, y, z (not all 0) with:",
+  "formula": "xa + yb + zc = 0",
+  "options": [
+   "x + y + z = 0 and xa + yb + zc = 0",
+   "xa + yb + zc = 0 only",
+   "x + y + z = 1 and xa + yb + zc = 0",
+   "a·x + b·y + c·z = 0"
+  ],
+  "answer": 0,
+  "explain": "Collinearity needs xa+yb+zc=0 with x+y+z=0 (nontrivial); the sum condition makes it independent of origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9af459e1-3556-47e1-8b27-141628d5918d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "Direction cosines of the vector 2i − 2j + k are:",
+  "formula": "(a, b, c)/|r|",
+  "options": [
+   "1/3, 1/3, 1/3",
+   "2, −2, 1",
+   "2/3, −2/3, 1/3",
+   "2/9, −2/9, 1/9"
+  ],
+  "answer": 2,
+  "explain": "|r| = √(4+4+1) = 3, so divide each component by 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "acbbd6b3-eed5-4300-88ff-ccaf7eb82a02",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "A vector parallel to the xy-plane must have which component equal to zero?",
+  "formula": "",
+  "options": [
+   "k-component",
+   "none of them",
+   "j-component",
+   "i-component"
+  ],
+  "answer": 0,
+  "explain": "A vector parallel to the xy-plane has no z-direction part, so its k-coefficient is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e8866fcb-0d6f-4b8a-b9f8-15b53ba2fde7",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "The vector i + √3 j makes which angle with the positive x-axis?",
+  "formula": "cosα = a/|r|",
+  "options": [
+   "30°",
+   "45°",
+   "60°",
+   "90°"
+  ],
+  "answer": 2,
+  "explain": "|r| = 2, so cosα = 1/2 and α = 60°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "562f4aba-0513-4d9d-a5e8-2ad07a0ebbf4",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "A vector of magnitude r with direction cosines l, m, n equals:",
+  "formula": "r = r(l i + m j + n k)",
+  "options": [
+   "r²(li + mj + nk)",
+   "(li + mj + nk)/r",
+   "r(i/l + j/m + k/n)",
+   "r(li + mj + nk)"
+  ],
+  "answer": 3,
+  "explain": "Components are r·l, r·m, r·n along the axes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "669da157-3b15-4c76-b9ea-ec6d7b921fc3",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "The vector component of 3i + 4j + 5k along the z-axis is:",
+  "formula": "",
+  "options": [
+   "3i + 4j",
+   "5k",
+   "5",
+   "√50 k"
+  ],
+  "answer": 1,
+  "explain": "The component along the z-axis is the vector (a·k)k = 5k. The scalar component is 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92ba2466-579d-4b65-96c8-d040dbcf94a1",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "The unit vector along 6i − 2j + 3k is:",
+  "formula": "â = a/|a|",
+  "options": [
+   "(6i − 2j + 3k)/5",
+   "(6i − 2j + 3k)/√47",
+   "(6i − 2j + 3k)/11",
+   "(6i − 2j + 3k)/7"
+  ],
+  "answer": 3,
+  "explain": "|a| = √(36+4+9) = 7.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "af21b3a6-3d69-4b06-828d-1b14b521cd76",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "Vectors a₁i + a₂j + a₃k and b₁i + b₂j + b₃k are parallel iff their components are:",
+  "formula": "a₁/b₁ = a₂/b₂ = a₃/b₃",
+  "options": [
+   "Such that Σaᵢ = Σbᵢ",
+   "Equal in magnitude only",
+   "Such that a₁b₁ + a₂b₂ + a₃b₃ = 0",
+   "Proportional"
+  ],
+  "answer": 3,
+  "explain": "Parallel means a = λb, so corresponding components are in the same ratio.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ca7a85f-a42c-4170-b4fe-8c842fd27cae",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "A vector of magnitude r in the xy-plane makes angle θ with the +x-axis. Its form is:",
+  "formula": "r cosθ i + r sinθ j",
+  "options": [
+   "r(cosθ + sinθ)i",
+   "r sinθ i + r cosθ j",
+   "r cosθ i + r sinθ k",
+   "r cosθ i + r sinθ j"
+  ],
+  "answer": 3,
+  "explain": "The x-component is r cosθ and the y-component is r sinθ, with zero k-component.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bfdb6956-ac08-4bcd-815c-3a51c6cb0130",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "Position vector of the foot of perpendicular from (x, y, z) to the xy-plane is:",
+  "formula": "",
+  "options": [
+   "xi + yj + zk",
+   "zk",
+   "yj + zk",
+   "xi + yj"
+  ],
+  "answer": 3,
+  "explain": "Projection on the xy-plane drops the k-component: xi + yj.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "86b1980b-60c8-43ae-992e-3838eb38c6b8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "A line makes 90° with x-axis and 60° with y-axis. Its angle with z-axis is?",
+  "formula": "l²+m²+n² = 1",
+  "options": [
+   "30° only",
+   "45° or 135°",
+   "30° or 150°",
+   "60° only"
+  ],
+  "answer": 2,
+  "explain": "n² = 1 − 0 − 1/4 = 3/4, so n = ±√3/2, giving 30° or 150°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "932720cd-7fd3-41b2-b324-83ec4b5f4d3c",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "|a + b| = |a| + |b| holds exactly when a and b are?",
+  "formula": "",
+  "options": [
+   "Parallel in the same direction",
+   "Of equal magnitude",
+   "Perpendicular",
+   "Parallel in opposite directions"
+  ],
+  "answer": 0,
+  "explain": "Equality in the triangle inequality needs the same direction (angle 0°).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "296ad8a7-ccfa-4f5b-ab4d-f8bed71df934",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "|a + b|² + |a − b|² equals?",
+  "formula": "Parallelogram law",
+  "options": [
+   "2|a||b|",
+   "4a·b",
+   "2(|a|² + |b|²)",
+   "|a|² + |b|²"
+  ],
+  "answer": 2,
+  "explain": "The a·b terms cancel, leaving 2|a|² + 2|b|².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "518e4c0a-fe6c-4a16-aeef-f4cb11964ffe",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "a and b are unit vectors with |a + b| = 1. The angle between them is?",
+  "formula": "|a+b|² = 2 + 2cosθ",
+  "options": [
+   "60°",
+   "90°",
+   "120°",
+   "150°"
+  ],
+  "answer": 2,
+  "explain": "1 = 2 + 2cosθ gives cosθ = −1/2, so θ = 120°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5a3e340e-2521-4535-9f2e-378678bdfcbd",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Collinearity of points and vectors",
+  "prompt": "For two nonzero collinear vectors a and b, a·b equals:",
+  "formula": "a·b = ±|a||b|",
+  "options": [
+   "±|a||b|",
+   "|a||b| only",
+   "|a|² + |b|²",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Angle is 0 or π, so cosθ = ±1 (+ for same direction, − for opposite).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "49c37c4f-48f3-4d43-adc0-e89010b0f406",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Collinearity of points and vectors",
+  "prompt": "Point C divides AB in ratio λ:1 (internal). Position vector of C in terms of a, b (A=a, B=b)?",
+  "formula": "c = (λb + a)/(λ+1)",
+  "options": [
+   "(λa + b)/(λ+1)",
+   "(λb + a)/(λ+1)",
+   "(b − λa)/(1−λ)",
+   "(a + b)/(λ+1)"
+  ],
+  "answer": 1,
+  "explain": "Section formula: C divides AB as AC:CB = λ:1, so c = (λb + a)/(λ+1); always collinear with A and B.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ce29e512-e1ef-479f-a1b2-813f9c1a8622",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Collinearity of points and vectors",
+  "prompt": "If a and b are non-collinear, then xa + yb = 0 implies:",
+  "formula": "",
+  "options": [
+   "x = y",
+   "x = y = 0",
+   "x or y can be nonzero",
+   "x = −y only"
+  ],
+  "answer": 1,
+  "explain": "Non-collinear vectors are linearly independent, so only the trivial combination gives zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "351973d7-708c-4ec5-a88a-d40aad726381",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Collinearity of points and vectors",
+  "prompt": "Vectors a and b are non-collinear. Vectors (a+2b) and (3a+λb) are collinear when λ equals:",
+  "formula": "",
+  "options": [
+   "3/2",
+   "2",
+   "6",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "Collinear means coefficients are proportional: 1/3 = 2/λ, so λ = 6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3fca55d0-aed8-45de-8542-d17135928d38",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "For nonzero a, b with fixed magnitudes, a·b is greatest when the angle between them is?",
+  "formula": "|a·b| ≤ |a||b|",
+  "options": [
+   "π/4",
+   "π/2",
+   "0",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "Maximum is |a||b|, attained at cosθ = 1, i.e. θ = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "78c7f0d1-8857-45ee-a891-e36a7b75a1ff",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "For nonzero a, b, a·b < 0 means the angle θ lies in?",
+  "formula": "",
+  "options": [
+   "(π/2, π]",
+   "exactly π",
+   "exactly π/2",
+   "[0, π/2)"
+  ],
+  "answer": 0,
+  "explain": "cosθ < 0 gives θ obtuse, and θ = π is also included.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "388677c2-4585-4911-a3d9-2b0a3281d755",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "The expression a·(b·c) for vectors a, b, c is?",
+  "formula": "",
+  "options": [
+   "Undefined",
+   "A scalar",
+   "Always zero",
+   "A vector"
+  ],
+  "answer": 0,
+  "explain": "b·c is a scalar, and a vector cannot be dotted with a scalar.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eaeb0c0d-77cd-4ecd-a1b5-2495de1ad8df",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "For a = a₁i + a₂j + a₃k, a·j equals?",
+  "formula": "",
+  "options": [
+   "a₂",
+   "a₂j",
+   "a₁ + a₂ + a₃",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "j·i = j·k = 0 and j·j = 1, so a·j = a₂, a scalar.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7dc0892e-ce78-4204-b1b4-6b9873da5878",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "If a·b = −|a||b| for nonzero vectors, the angle between them is?",
+  "formula": "",
+  "options": [
+   "π/2",
+   "3π/4",
+   "π",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "cosθ = −1 gives θ = π, so the vectors are antiparallel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "73582987-b21e-4af2-804c-51c18a2a0194",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "For nonzero a, b, the inequality |a·b| ≤ |a||b| is called?",
+  "formula": "|a·b| ≤ |a||b|",
+  "options": [
+   "Triangle inequality",
+   "Lagrange identity",
+   "Cauchy–Schwarz inequality",
+   "AM–GM inequality"
+  ],
+  "answer": 2,
+  "explain": "Since |cosθ| ≤ 1; equality iff a ∥ b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e9b1a978-6662-43e1-8ffb-2372332d117a",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "(a+b)·(a−b) = 0 for nonzero a, b means the parallelogram with sides a, b is a?",
+  "formula": "",
+  "options": [
+   "Rhombus",
+   "Square",
+   "Trapezium",
+   "Rectangle"
+  ],
+  "answer": 0,
+  "explain": "|a| = |b|: diagonals a+b and a−b are perpendicular, equal sides.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3010bd9e-e96c-405b-b4a2-2079fd3cfa45",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "For vectors a and b, a·b = 0 implies which of the following?",
+  "formula": "",
+  "options": [
+   "a ∥ b",
+   "a = 0 and b = 0",
+   "a = 0 or b = 0 only",
+   "a = 0, or b = 0, or a ⟂ b"
+  ],
+  "answer": 3,
+  "explain": "Dot product vanishes also for nonzero perpendicular vectors, so zero product does not force a zero vector.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "db753cf0-1ee9-4af8-a5c1-b2bb26819dd0",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "If a·b = a·c with a ≠ 0, then b − c is?",
+  "formula": "a·(b − c) = 0",
+  "options": [
+   "Parallel to a",
+   "Equal to a",
+   "Orthogonal to a (possibly zero)",
+   "Always the zero vector"
+  ],
+  "answer": 2,
+  "explain": "a·(b−c)=0, so b−c is zero or perpendicular to a; cancellation of a is not allowed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "18a62119-570e-49fe-802e-824eb7f428ee",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "If |a×b| = √3 (a·b), the angle between a and b is?",
+  "formula": "tanθ = |a×b|/(a·b)",
+  "options": [
+   "30°",
+   "60°",
+   "120°",
+   "45°"
+  ],
+  "answer": 1,
+  "explain": "tanθ = √3 gives θ = 60° (a·b is positive, so θ is acute).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a713c9c4-19c9-4b87-befd-1dca73475f4d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "Angle between i + j and j + k is?",
+  "formula": "cosθ = (a·b)/(|a||b|)",
+  "options": [
+   "30°",
+   "60°",
+   "45°",
+   "90°"
+  ],
+  "answer": 1,
+  "explain": "a·b = 1 and |a||b| = 2, so cosθ = 1/2 and θ = 60°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9635887e-9933-4108-957b-5ec28dbc58bd",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Scalar projection of a on b is negative when the angle θ between them satisfies?",
+  "formula": "a·b = |a||b|cosθ",
+  "options": [
+   "θ = 0° only",
+   "0° ≤ θ < 90°",
+   "θ = 90°",
+   "90° < θ ≤ 180°"
+  ],
+  "answer": 3,
+  "explain": "cosθ < 0 for obtuse θ, so a·b < 0 and the projection is negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "91d4fd07-5097-4355-9e30-ef88efa6c6f5",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Scalar projection of a on −b (b ≠ 0) compared with that on b is?",
+  "formula": "",
+  "options": [
+   "Negative of it",
+   "Same",
+   "Double",
+   "Reciprocal"
+  ],
+  "answer": 0,
+  "explain": "Direction of b reverses, so a·b̂ changes sign.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "82315e87-a10e-4281-a404-fe03f41bf8ed",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Scalar projection of a on kb (k > 0) compared with that on b is?",
+  "formula": "",
+  "options": [
+   "k times larger",
+   "Negated",
+   "k times smaller",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "Depends only on the direction of b: a·kb/(k|b|) = a·b/|b|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5cb3f54-4d03-4132-9fa0-d548eef03ef4",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "If a lies in the plane of b and c (b×c ≠ 0), projection of a on b × c is?",
+  "formula": "",
+  "options": [
+   "0",
+   "a·b",
+   "|b×c|",
+   "|a|"
+  ],
+  "answer": 0,
+  "explain": "b × c is normal to that plane, so a·(b×c) = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "88aad800-86b5-4c67-ae0d-77ed632139b7",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Scalar projection of a = a₁i + a₂j + a₃k on the x-axis (i) is?",
+  "formula": "",
+  "options": [
+   "a₁ + a₂ + a₃",
+   "a₂",
+   "a₁",
+   "√(a₁²+a₂²+a₃²)"
+  ],
+  "answer": 2,
+  "explain": "a·i = a₁ since |i| = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81dd45e4-52a0-4fd7-a32e-d0bf02dce8b9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Greatest possible scalar projection of a on any direction is?",
+  "formula": "",
+  "options": [
+   "1",
+   "|a|²",
+   "|a|",
+   "Unbounded"
+  ],
+  "answer": 2,
+  "explain": "|a|cosθ ≤ |a|, attained when the direction equals a's.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "969f1712-4746-49e2-ad10-466afdd22b45",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "If a·b < 0, the projection vector of a on b is directed?",
+  "formula": "",
+  "options": [
+   "Along a × b",
+   "Perpendicular to b",
+   "Along b",
+   "Opposite to b"
+  ],
+  "answer": 3,
+  "explain": "Projection vector = (a·b/|b|²)b with negative coefficient.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a8d7ef70-9cae-4072-85cf-baf254a99f43",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Projection vector of a on b equals b itself when?",
+  "formula": "",
+  "options": [
+   "a·b = |b|²",
+   "a·b = |a|²",
+   "a·b = |a||b|",
+   "a·b = 1"
+  ],
+  "answer": 0,
+  "explain": "(a·b/|b|²)b = b requires a·b = |b|².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "083d6a11-7013-4142-915e-fdd5f574ad2c",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Projection vector of a on −b compared with that on b (b ≠ 0) is?",
+  "formula": "(a·b̂)b̂",
+  "options": [
+   "Same vector",
+   "Twice it",
+   "Negative of it",
+   "Zero vector"
+  ],
+  "answer": 0,
+  "explain": "(a·b̂)b̂ is unchanged when b̂ → −b̂, since the sign cancels.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7fe7889c-34c8-43c2-ac5f-3fc6a2486b09",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "In triangle ABC (a, b, c opposite A, B, C), scalar projection of AB on AC is?",
+  "formula": "",
+  "options": [
+   "b cos A",
+   "a cos A",
+   "c cos A",
+   "c sin A"
+  ],
+  "answer": 2,
+  "explain": "|AB| = c, and the angle between AB and AC is A, so the projection is c cos A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9988ac0a-e877-4f40-84f9-89b0687a778a",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Sum of squares of the scalar projections of a on i, j and k equals?",
+  "formula": "",
+  "options": [
+   "|a|²",
+   "a₁ + a₂ + a₃",
+   "|a|",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Projections are a₁, a₂, a₃, and a₁² + a₂² + a₃² = |a|².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bd5d5af2-bfa5-4175-b28c-67970bb60bb1",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Scalar projection of a on b equals |a| (a, b ≠ 0). Then a and b are?",
+  "formula": "",
+  "options": [
+   "Perpendicular",
+   "Parallel, opposite direction",
+   "Equal vectors",
+   "Parallel, same direction"
+  ],
+  "answer": 3,
+  "explain": "|a|cosθ = |a| gives cosθ = 1, so θ = 0°. Only the direction is the same; the magnitudes may differ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "163574cd-1b5a-460a-8d99-cab63db1fee0",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Parallelogram has adjacent sides a + b and a − b. Its area is?",
+  "formula": "",
+  "options": [
+   "|a|² − |b|²",
+   "2|a × b|",
+   "½|a × b|",
+   "|a × b|"
+  ],
+  "answer": 1,
+  "explain": "(a+b)×(a−b) = −2(a×b), so the magnitude is 2|a×b|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02a67e7f-5797-431e-b8e4-07f5dc2d1cd0",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Replacing b by b + λa in a parallelogram with sides a, b changes its area to?",
+  "formula": "",
+  "options": [
+   "Multiplied by λ",
+   "Zero",
+   "Multiplied by (1+λ)",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "a×(b+λa) = a×b, since a×a = 0. This is a shear with the same base and height.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81ee5f2b-8ef6-45a0-8190-cd91317336ca",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "For |a| = 3, |b| = 4, the maximum area of the parallelogram on a, b is?",
+  "formula": "",
+  "options": [
+   "7",
+   "6",
+   "24",
+   "12"
+  ],
+  "answer": 3,
+  "explain": "Area = 12 sinθ, which is maximum at θ = 90°, giving 12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ec210cf-22f1-49d3-ab17-d6474ded9a5f",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Area of parallelogram with diagonals d₁ and d₂ is?",
+  "formula": "A = ½|d₁ × d₂|",
+  "options": [
+   "¼|d₁ × d₂|",
+   "½|d₁ × d₂|",
+   "2|d₁ × d₂|",
+   "|d₁ × d₂|"
+  ],
+  "answer": 1,
+  "explain": "d₁ = a+b, d₂ = b−a gives d₁×d₂ = 2(a×b), so area |a×b| = ½|d₁×d₂|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "536570f1-48a2-4651-8688-cf913a93ef95",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "If a×b = 0 for sides a, b of a parallelogram, the area is?",
+  "formula": "",
+  "options": [
+   "Zero (sides are parallel)",
+   "Maximum",
+   "½|a||b|",
+   "|a||b|"
+  ],
+  "answer": 0,
+  "explain": "a×b = 0 means a ∥ b, so the figure degenerates and area = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ee9cd140-729d-47f9-b05e-00ce524758b1",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Area of parallelogram with sides a, b equals |a||b| when the angle between them is?",
+  "formula": "|a×b| = |a||b| sin θ",
+  "options": [
+   "π/2",
+   "π/4",
+   "π",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "sin θ = 1 only at θ = π/2 (rectangle).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5493fd3c-b5df-4ae7-b835-379e43a47c0f",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Area of any quadrilateral ABCD in terms of its diagonal vectors AC and BD is?",
+  "formula": "½|AC × BD|",
+  "options": [
+   "½|AB × BC|",
+   "½|AC × BD|",
+   "¼|AC × BD|",
+   "|AC × BD|"
+  ],
+  "answer": 1,
+  "explain": "This holds for every quadrilateral, not just parallelograms: area = ½|d₁×d₂|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36df7130-aecb-4c49-8af4-e512ccb63614",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "If θ is the angle between a and b, |a×(a×b)| equals?",
+  "formula": "",
+  "options": [
+   "|a|²|b| cosθ",
+   "|a||b| sinθ",
+   "|a|²|b| sinθ",
+   "|a||b|² sinθ"
+  ],
+  "answer": 2,
+  "explain": "a×b ⟂ a, so |a×(a×b)| = |a||a×b| = |a|²|b| sinθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be0143e8-2661-493c-9eb1-3bcaf58fa73b",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "For any vector a, i×(a×i) + j×(a×j) + k×(a×k) equals?",
+  "formula": "Σ î×(a×î) = ?",
+  "options": [
+   "a",
+   "3a",
+   "2a",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Each term is a − (a·î)î. The sum is 3a − a = 2a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "29f2f2d8-f1ee-408e-b08c-ab91251fa6ea",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Linear combination, linear independence",
+  "prompt": "Two non-zero vectors a and b are linearly dependent exactly when they are:",
+  "formula": "",
+  "options": [
+   "Parallel (collinear)",
+   "Perpendicular",
+   "Non-coplanar",
+   "Of equal magnitude"
+  ],
+  "answer": 0,
+  "explain": "a = λb for some scalar λ, so the two vectors are parallel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff9afda9-0226-4e2b-bdd1-15873976e72e",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Linear combination, linear independence",
+  "prompt": "A set of vectors containing the zero vector is always:",
+  "formula": "",
+  "options": [
+   "Linearly independent",
+   "Independent only in 3D",
+   "Coplanar but independent",
+   "Linearly dependent"
+  ],
+  "answer": 3,
+  "explain": "1·0 + 0·(others) = 0 is a non-trivial combination equal to zero, so the set is dependent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f2d30f22-a4d0-4b8a-997d-3bbe3cf0cfe3",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Linear combination, linear independence",
+  "prompt": "Maximum number of linearly independent vectors in three-dimensional space is:",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "3",
+   "Infinite"
+  ],
+  "answer": 2,
+  "explain": "Space has dimension 3, so any 4 vectors in it are linearly dependent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a071cbd7-9eee-4e92-be56-34b252d7f8c9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Linear combination, linear independence",
+  "prompt": "For non-zero, non-parallel vectors a and b, the vectors a, b, a×b are:",
+  "formula": "",
+  "options": [
+   "Linearly independent",
+   "Linearly dependent",
+   "Coplanar",
+   "Dependent only if a ⊥ b"
+  ],
+  "answer": 0,
+  "explain": "a×b is perpendicular to the plane of a and b, so [a b a×b] = |a×b|² ≠ 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ba2cb693-70ae-47b9-a6e1-ec13f6eb8fcb",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Linear combination, linear independence",
+  "prompt": "For any three vectors a, b, c, the vectors a−b, b−c, c−a are always:",
+  "formula": "(a−b) + (b−c) + (c−a) = 0",
+  "options": [
+   "Mutually perpendicular",
+   "Linearly independent",
+   "Independent if a, b, c are non-coplanar",
+   "Linearly dependent"
+  ],
+  "answer": 3,
+  "explain": "Their sum is zero, a non-trivial combination, so they are always dependent (coplanar).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b2b23f7d-bffd-4961-b475-a8f33c63421d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Linear combination, linear independence",
+  "prompt": "If a, b, c are non-coplanar, a vector r = xa + yb + zc can be written in how many ways?",
+  "formula": "",
+  "options": [
+   "Only if r ⊥ a",
+   "Infinitely many",
+   "Exactly two",
+   "Exactly one"
+  ],
+  "answer": 3,
+  "explain": "Non-coplanar vectors form a basis of space, so the coefficients x, y, z are unique.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "31189e27-88ed-4977-afb2-836d3ed94211",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "P = (1−t)a + tb with 0 < t < 1 lies on AB. For t = 1/4, AP : PB equals:",
+  "formula": "AP : PB = t : (1−t)",
+  "options": [
+   "1 : 3",
+   "3 : 1",
+   "1 : 4",
+   "4 : 1"
+  ],
+  "answer": 0,
+  "explain": "AP = t·AB and PB = (1−t)·AB, so AP:PB = (1/4):(3/4) = 1:3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8dc3f46c-3b18-4a85-ab7e-b575ea2069e8",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "The xy-plane divides A(1,3,2) and B(2,−1,−4) in the ratio AP : PB =",
+  "formula": "ratio = −z₁ : z₂",
+  "options": [
+   "1 : 1 internally",
+   "1 : 2 internally",
+   "2 : 1 internally",
+   "1 : 2 externally"
+  ],
+  "answer": 1,
+  "explain": "At z = 0: ratio = −z₁/z₂ = −2/(−4) = 1/2 > 0, so it is internal, 1:2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e45f3aab-5a5e-4cbe-b3f7-743bec016fd6",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "(a×b)×(a×c) equals which expression?",
+  "formula": "[a b c]a",
+  "options": [
+   "[a b c]a",
+   "[a b c]c",
+   "[a b c]b",
+   "|a|²[b c a]"
+  ],
+  "answer": 0,
+  "explain": "Put c→a, d→c in (a×b)×(c×d) = [a b d]c − [a b c]d; the [a b a] term vanishes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5f0b5283-b9a9-4bb9-921f-5d0e291ed641",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "(a×b)×(b×c) equals which expression?",
+  "formula": "[a b c]b",
+  "options": [
+   "[a b c]c",
+   "[a b c]b",
+   "0",
+   "[a b c]a"
+  ],
+  "answer": 1,
+  "explain": "By the four-vector expansion with c→b, d→c; the [a b b] term is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c7d843f-d5ac-4d25-b090-0666468a9bfa",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "If a×(b×c) = b with b, c non-collinear, then which pair of conditions holds?",
+  "formula": "(a·c)b − (a·b)c = b",
+  "options": [
+   "a·b = −1, a·c = 1",
+   "a·b = 0, a·c = 0",
+   "a·b = 1, a·c = 0",
+   "a·b = 0, a·c = 1"
+  ],
+  "answer": 3,
+  "explain": "Compare coefficients of independent b and c: a·c = 1 and a·b = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "29bf9551-8c29-4c25-a08f-3689a7c17dc9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "Unit vectors a, b, c satisfy a + b + c = 0. The angle between any two of them is?",
+  "formula": "",
+  "options": [
+   "120°",
+   "60°",
+   "150°",
+   "90°"
+  ],
+  "answer": 0,
+  "explain": "|a+b| = |c| = 1 gives 2 + 2cosθ = 1, so cosθ = −1/2 and θ = 120°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "59351c3a-9f69-4a27-8691-b794cebb04ce",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "(a×b)×(c×d) is parallel to which line?",
+  "formula": "",
+  "options": [
+   "Normal to the plane of a, b only",
+   "Intersection of planes (a,b) and (c,d)",
+   "Direction of b×d",
+   "Direction of a×c"
+  ],
+  "answer": 1,
+  "explain": "It lies in both the plane of a,b and the plane of c,d, so it lies along their line of intersection.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "367132c7-cb88-462c-ab7f-d4d1989ad55c",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "The dot product [a×(b×c)]·(b×c) equals:",
+  "formula": "",
+  "options": [
+   "a·(b×c)",
+   "(a·b)(a·c)",
+   "0",
+   "|b×c|²"
+  ],
+  "answer": 2,
+  "explain": "a×(b×c) is perpendicular to the vector b×c, so the dot product is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a6b9d2da-a2d1-4475-aff1-4f3f9b47fac9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Addition of vectors: triangle/parallelogram law",
+  "prompt": "Two vectors of equal magnitude a have angle θ between them. The magnitude of their sum is?",
+  "formula": "|a + b| = 2a cos(θ/2)",
+  "options": [
+   "2a sin(θ/2)",
+   "2a cos(θ/2)",
+   "a cos(θ/2)",
+   "2a cosθ"
+  ],
+  "answer": 1,
+  "explain": "|a+b|² = 2a²(1 + cosθ) = 4a² cos²(θ/2); the resultant bisects the angle between them (rhombus).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f2d69a28-67a8-4660-a4c9-14fd0ac795cf",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Position vector and section formula",
+  "prompt": "Midpoints of consecutive sides of any quadrilateral, taken in order, form a:",
+  "formula": "",
+  "options": [
+   "Square",
+   "Parallelogram",
+   "Rhombus",
+   "Rectangle"
+  ],
+  "answer": 1,
+  "explain": "Varignon: each side of the midpoint figure is half a diagonal and parallel to it, so it is a parallelogram.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a8851ce-d959-4061-88be-7db5a8ad6e92",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "Can a vector make angles 30°, 45°, 60° with the x, y, z axes respectively?",
+  "formula": "",
+  "options": [
+   "No, since Σcos² = 1/2 ≠ 1",
+   "Yes, if its magnitude is 1",
+   "No, since Σcos² = 3/2 ≠ 1",
+   "Yes, always possible"
+  ],
+  "answer": 2,
+  "explain": "cos²30°+cos²45°+cos²60° = 3/4+1/2+1/4 = 3/2, but it must equal 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9947d895-b4b3-41bc-8f58-42fe456e468d",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Components of a vector in 2D and 3D",
+  "prompt": "A vector makes an obtuse angle with the +y-axis exactly when its:",
+  "formula": "cosβ = a·j/|a|",
+  "options": [
+   "j-component is zero",
+   "i-component is negative",
+   "k-component is negative",
+   "j-component is negative"
+  ],
+  "answer": 3,
+  "explain": "cosβ has the sign of the j-component, so it is negative when β is obtuse.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4f763f4c-84a0-430c-8077-b4014852e197",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "For any vector a, the value of a·a equals?",
+  "formula": "",
+  "options": [
+   "1",
+   "|a|²",
+   "|a|",
+   "0 (for a ≠ 0)"
+  ],
+  "answer": 1,
+  "explain": "a·a = |a||a|cos0° = |a|².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2745c1fc-7da1-4e7c-8868-b732e6c4b1ed",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Magnitude, unit vector, direction cosines",
+  "prompt": "How many unit vectors are parallel to a given non-zero vector a?",
+  "formula": "",
+  "options": [
+   "Exactly one",
+   "None",
+   "Exactly two",
+   "Infinitely many"
+  ],
+  "answer": 2,
+  "explain": "Only ±a/|a| are unit vectors parallel to a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5f40c92-6736-422e-9294-7b4f9b602525",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "If a·x = 0 holds for every vector x, then a must be:",
+  "formula": "",
+  "options": [
+   "a unit vector",
+   "the zero vector",
+   "parallel to i",
+   "perpendicular to b only"
+  ],
+  "answer": 1,
+  "explain": "Taking x = a gives |a|² = 0, so a = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2392a606-0d5a-4394-9014-b952320bc23c",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "If a·b = 0 and a·c = 0, then a·(xb + yc) equals:",
+  "formula": "",
+  "options": [
+   "0",
+   "x(a·b) + y|c|",
+   "xy|a|²",
+   "x + y"
+  ],
+  "answer": 0,
+  "explain": "The dot product is distributive: x(a·b) + y(a·c) = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0518ae8a-8e8e-4751-846a-ea125493ba8b",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Scalar (dot) product and its properties",
+  "prompt": "For a real vector a, if a·a = 0, then a must be:",
+  "formula": "a·a = |a|²",
+  "options": [
+   "any vector along i",
+   "the zero vector",
+   "a unit vector",
+   "perpendicular to itself only"
+  ],
+  "answer": 1,
+  "explain": "a·a = |a|² = 0 forces |a| = 0, so a is the zero vector.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3c406ed-ad70-4918-8167-e28024c2d3c9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "Unit vectors a, b are inclined at θ. The angle between a+b and a is?",
+  "formula": "",
+  "options": [
+   "2θ",
+   "90° – θ",
+   "θ",
+   "θ/2"
+  ],
+  "answer": 3,
+  "explain": "For equal magnitudes, a+b is the rhombus diagonal and bisects the angle between a and b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "06d67032-d4cb-43be-a784-50b774cc08c5",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "For nonzero mutually perpendicular a, b, c, |a+b+c|² equals?",
+  "formula": "",
+  "options": [
+   "|a||b||c|",
+   "|a|² + |b|² + |c|²",
+   "(|a| + |b| + |c|)²",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "All cross dot terms vanish, so only the squares of the magnitudes survive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a0a4cf33-8322-462e-b04b-578c348c0cf4",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Angle between vectors, perpendicularity",
+  "prompt": "a·b can be written in terms of magnitudes of a, b and a+b as:",
+  "formula": "a·b = ½(|a+b|² − |a|² − |b|²)",
+  "options": [
+   "¼(|a+b|² − |a−b|²)·2",
+   "½(|a|² + |b|² − |a+b|²)",
+   "½(|a+b|² − |a|² − |b|²)",
+   "|a+b|² − |a|² − |b|²"
+  ],
+  "answer": 2,
+  "explain": "|a+b|² = |a|² + |b|² + 2a·b, so a·b = ½(|a+b|² − |a|² − |b|²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0adab476-9939-4be5-a8d9-08b7df7f53ff",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "Magnitude of the projection vector of a on b (b ≠ 0) is?",
+  "formula": "",
+  "options": [
+   "|a·b|",
+   "|a·b|/|b|²",
+   "|a·b|/|b|",
+   "|a·b|/|a|"
+  ],
+  "answer": 2,
+  "explain": "Projection vector = (a·b/|b|²)b, so its length is |a·b|/|b|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8bf7ee4a-5afb-4504-a801-4af5be3efdc9",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "If a ⟂ b (both nonzero), scalar projection of (a + b) on a is?",
+  "formula": "",
+  "options": [
+   "|a|",
+   "|b|",
+   "0",
+   "|a| + |b|"
+  ],
+  "answer": 0,
+  "explain": "(a+b)·a/|a| = (|a|² + 0)/|a| = |a|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9e1d1a9f-74ba-4d68-93fa-25d441b192d3",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Projection of a vector on another",
+  "prompt": "For P(x₁, y₁, z₁) and Q(x₂, y₂, z₂), scalar projection of PQ on the y-axis is?",
+  "formula": "",
+  "options": [
+   "y₂ − y₁",
+   "y₁ − y₂",
+   "x₂ − x₁",
+   "√(y₁² + y₂²)"
+  ],
+  "answer": 0,
+  "explain": "PQ = (x₂−x₁)i + (y₂−y₁)j + (z₂−z₁)k; its j-component is y₂ − y₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca621b3a-6ac5-4e62-a6be-7a5be8986f20",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Area of triangle/parallelogram via cross",
+  "prompt": "Vectors a, b, c form the sides of a triangle (a+b+c=0). Then |a×b + b×c + c×a| equals?",
+  "formula": "a×b = b×c = c×a when a+b+c = 0",
+  "options": [
+   "(3/2)|a × b|",
+   "|a × b|",
+   "3|a × b|",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "c = −a−b gives b×c = c×a = a×b, so the sum is 3(a×b), which is 6 times the area.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3be0d13-821b-40dd-ba22-9d6be1fffd41",
+  "subject": "Mathematics",
+  "chapter": "Vectors",
+  "topic": "Vector triple product expansion",
+  "prompt": "Is the vector triple product associative, i.e. a×(b×c) = (a×b)×c for all a, b, c?",
+  "formula": "",
+  "options": [
+   "Yes, only for unit vectors",
+   "Yes, always",
+   "Yes, only in 2D",
+   "No, in general it is not"
+  ],
+  "answer": 3,
+  "explain": "Cross product is non-associative; the two sides differ in general (e.g. i×(i×j) = −j but (i×i)×j = 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

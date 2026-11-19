@@ -1,0 +1,2722 @@
+[
+ {
+  "prompt": "Pascal's law: pressure applied to an enclosed static fluid is transmitted…",
+  "formula": "",
+  "options": [
+   "Only along the direction of force",
+   "Undiminished to every point of fluid and walls",
+   "Diminished with distance from source",
+   "Only to the walls, not the fluid"
+  ],
+  "answer": 1,
+  "explain": "Pascal's law: external pressure change is transmitted undiminished to every part of the enclosed fluid and the walls.",
+  "kind": "concept",
+  "id": "bd422605-b550-43f3-84cb-115984770578",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "Open tank moves with horizontal acceleration a. Free surface makes angle θ with horizontal, where:",
+  "formula": "tanθ = a/g",
+  "options": [
+   "tanθ = g/a",
+   "sinθ = a/g",
+   "tanθ = a/g",
+   "tanθ = a²/g"
+  ],
+  "answer": 2,
+  "explain": "Surface is perpendicular to effective gravity (g down, a backward), giving tanθ = a/g.",
+  "kind": "result",
+  "id": "f7124141-c6c3-4ee1-9971-150d3971b8f3",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "Liquid of depth h behind a vertical dam wall: average pressure on the wall is:",
+  "formula": "P_avg = ½ρgh",
+  "options": [
+   "ρgh",
+   "½ρgh",
+   "2ρgh",
+   "¼ρgh"
+  ],
+  "answer": 1,
+  "explain": "Pressure rises linearly from 0 at the surface to ρgh at the bottom, so average is ρgh/2.",
+  "kind": "result",
+  "id": "c31879b4-c1e1-4038-8e8d-f47b5fb29c74",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "A container of water falls freely under gravity. Pressure difference between two points at different depths:",
+  "formula": "",
+  "options": [
+   "ρgh",
+   "Zero",
+   "ρgh/2",
+   "Infinite"
+  ],
+  "answer": 1,
+  "explain": "Effective gravity is zero in free fall, so ρg_eff h = 0.",
+  "kind": "concept",
+  "id": "3086681a-9db4-4d48-a5c4-4ce48ffffcbc",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "A mercury barometer tube is tilted. The vertical height of the mercury column:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Remains the same",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Vertical height fixes P₀ = ρgh; only the column length along the tube increases.",
+  "kind": "concept",
+  "id": "efebc8a0-2660-4913-8179-b6a578b8ef42",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "Liquid rotating with angular speed ω about a vertical axis: shape of free surface is:",
+  "formula": "y = ω²r²/(2g)",
+  "options": [
+   "Plane inclined",
+   "Paraboloid",
+   "Cone",
+   "Hemisphere"
+  ],
+  "answer": 1,
+  "explain": "Height varies as y = ω²r²/2g, which is a paraboloid of revolution.",
+  "kind": "fact",
+  "id": "9a71b59d-daa1-4d5b-9b53-f441536d43c1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "Open tank with horizontal acceleration a: pressure at the same height increases along the direction of…",
+  "formula": "dP/dx = −ρa (pressure rises toward rear)",
+  "options": [
+   "Acceleration, in the forward direction",
+   "Motion, toward the front wall",
+   "Opposite to acceleration, toward the rear",
+   "Pressure stays same horizontally"
+  ],
+  "answer": 2,
+  "explain": "Pressure gradient is ρa opposite to acceleration, so the rear wall has higher pressure.",
+  "kind": "concept",
+  "id": "0a60f65b-5f6c-4a70-9b2b-ad62a197c8c1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "A barometer tube of mercury is lowered, with its open end deeper in the mercury trough. Column height h above the trough is…",
+  "formula": "P₀ = ρgh",
+  "options": [
+   "Increased",
+   "Decreased",
+   "Unchanged",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Height above the trough surface depends only on P₀ = ρgh, not on tube depth.",
+  "kind": "concept",
+  "id": "cf80b2d5-8f44-4374-bf18-833cc39de19e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "Small piston (area A₁) moves down d₁ in a hydraulic lift. Large piston (A₂) rises by:",
+  "formula": "A₁d₁ = A₂d₂",
+  "options": [
+   "d₁A₂/A₁",
+   "d₁A₁/A₂",
+   "d₁(A₁/A₂)²",
+   "d₁"
+  ],
+  "answer": 1,
+  "explain": "Incompressible liquid: volume displaced is equal, so d₂ = d₁A₁/A₂ (smaller than d₁).",
+  "kind": "formula",
+  "id": "79a6ae5f-0dd6-403c-9b95-02c7cd91167c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "In an ideal hydraulic lift, work done by input force compared with work done on the load is:",
+  "formula": "F₁d₁ = F₂d₂",
+  "options": [
+   "Less than output work",
+   "Greater than output work",
+   "Equal to output work",
+   "A₂/A₁ times the output work"
+  ],
+  "answer": 2,
+  "explain": "Energy is conserved: the force gain is exactly balanced by the loss in distance moved.",
+  "kind": "concept",
+  "id": "48530d45-31a9-4b8a-bc43-251505f6b17a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Piston radii of a hydraulic press are in ratio 1 : 5. The force multiplication is:",
+  "formula": "F₂/F₁ = (r₂/r₁)²",
+  "options": [
+   "5",
+   "10",
+   "25",
+   "125"
+  ],
+  "answer": 2,
+  "explain": "Area ∝ r², so F₂/F₁ = A₂/A₁ = 25.",
+  "kind": "result",
+  "id": "30ee34a0-31e8-4570-b1aa-66c3055bb1b0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Hydraulic machines use liquid rather than gas because the liquid is:",
+  "formula": "",
+  "options": [
+   "Denser than gas",
+   "Incompressible",
+   "More viscous",
+   "Non-volatile"
+  ],
+  "answer": 1,
+  "explain": "An incompressible liquid transmits pressure fully; a gas would be compressed and absorb the applied force.",
+  "kind": "concept",
+  "id": "7a02bc61-42b4-4fd5-9659-728c7c8dc968",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Pressure at a point in a fluid at rest is a:",
+  "formula": "",
+  "options": [
+   "Vector along the surface normal",
+   "Scalar quantity",
+   "Second-rank tensor",
+   "Vector along gravity"
+  ],
+  "answer": 1,
+  "explain": "Pressure acts equally in all directions at a point, so it has no direction: it is a scalar.",
+  "kind": "fact",
+  "id": "3de82a57-7cad-42d1-b745-00cf56449f77",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Which device does NOT work on Pascal's law?",
+  "formula": "",
+  "options": [
+   "Hydraulic brake",
+   "Hydraulic jack",
+   "Atomizer (sprayer)",
+   "Hydraulic press"
+  ],
+  "answer": 2,
+  "explain": "An atomizer works on Bernoulli's principle (low pressure in a fast air stream).",
+  "kind": "exception",
+  "id": "68bceac5-62f8-4ed8-9122-1059007fd6dc",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "In hydraulic brakes, pressing the pedal results in:",
+  "formula": "",
+  "options": [
+   "Equal pressure on all brake cylinders",
+   "Equal force on pedal and shoes",
+   "Larger piston moving farther",
+   "Pressure that decreases with distance"
+  ],
+  "answer": 0,
+  "explain": "Pascal's law: the pressure is transmitted equally to all wheel cylinders through the brake fluid.",
+  "kind": "fact",
+  "id": "3c3149b7-ae9f-4b0e-a0b1-91e56c3f609a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "In a hydraulic lift with both pistons at the same level, the quantity that is equal under both is:",
+  "formula": "",
+  "options": [
+   "Force",
+   "Pressure",
+   "Displacement",
+   "Work done"
+  ],
+  "answer": 1,
+  "explain": "Pressure is equal at the same level in a static liquid; forces differ in proportion to area.",
+  "kind": "concept",
+  "id": "29db00be-4eab-4d18-a708-0a0e9691a82f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Pascal's law in its basic form strictly applies to a fluid that is:",
+  "formula": "",
+  "options": [
+   "Flowing steadily",
+   "Compressible and moving",
+   "Static and enclosed",
+   "Viscous and turbulent"
+  ],
+  "answer": 2,
+  "explain": "The law is stated for an enclosed static fluid, giving a uniform change in pressure.",
+  "kind": "concept",
+  "id": "bdd9d869-8f5d-4d64-935c-f91428b6fa9a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Small piston moves 10 cm while the large piston rises 1 cm. The ideal mechanical advantage is:",
+  "formula": "MA = d₁/d₂ = F₂/F₁",
+  "options": [
+   "0.1",
+   "1",
+   "10",
+   "100"
+  ],
+  "answer": 2,
+  "explain": "Ideal MA equals the ratio of distances moved (input to output), so MA = 10/1 = 10.",
+  "kind": "result",
+  "id": "be5c5d39-7602-4075-b35e-94c2fb3a41f2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "In a hydraulic lift, the large piston is at height h above the small one. Pressure at the large piston is:",
+  "formula": "P₂ = P₁ − ρgh",
+  "options": [
+   "Equal to P₁ always",
+   "Less than P₁ by ρgh",
+   "Greater than P₁ by ρgh",
+   "Independent of P₁ and ρ"
+  ],
+  "answer": 1,
+  "explain": "Pressure drops by ρgh going up in a static fluid, so the large piston at height h sees P₁ − ρgh.",
+  "kind": "concept",
+  "id": "142ea782-d151-44cf-b2b3-54efa846c91a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Ice cube floats in water; when it melts completely, the water level in the glass:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Rises",
+   "Falls",
+   "Rises then falls"
+  ],
+  "answer": 0,
+  "explain": "Ice displaces water equal to its own weight; melted water has same volume as displaced water.",
+  "kind": "result",
+  "id": "47feb4e6-8ce2-4376-8fa8-298d516d7307",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle"
+ },
+ {
+  "prompt": "A lift containing a floating block accelerates upward. The fraction of block submerged:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Increases",
+   "Decreases",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "Both weight and buoyancy scale with g_eff, so ρ_body/ρ_liquid fixes the fraction.",
+  "kind": "concept",
+  "id": "9cf41667-9b14-4bc6-9a4f-a3fe79bcb3c1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle"
+ },
+ {
+  "prompt": "Point of application of buoyant force on a body is the centre of:",
+  "formula": "",
+  "options": [
+   "Buoyancy (centroid of displaced fluid)",
+   "Gravity of the body",
+   "Mass of the body",
+   "Pressure of the body"
+  ],
+  "answer": 0,
+  "explain": "Buoyant force acts at the centre of mass of the displaced fluid, called the centre of buoyancy.",
+  "kind": "fact",
+  "id": "49d975dd-e0ba-4b9e-9fa2-d84a009d6f47",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle"
+ },
+ {
+  "prompt": "Reynolds number for flow of a fluid (density ρ, viscosity η, speed v) in a pipe of diameter D is:",
+  "formula": "Re = ρvD/η",
+  "options": [
+   "ρvD/η",
+   "ηvD/ρ",
+   "ρη/(vD)",
+   "ρv/(ηD)"
+  ],
+  "answer": 0,
+  "explain": "Re = ρvD/η is the ratio of inertial to viscous forces.",
+  "kind": "formula",
+  "id": "4cb3f77b-7021-4d0c-a230-b2a71c1c4c8c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow"
+ },
+ {
+  "prompt": "Reynolds number is a quantity that is:",
+  "formula": "",
+  "options": [
+   "Dimensionless",
+   "Having dimensions of velocity",
+   "Having dimensions of viscosity",
+   "Having dimensions of pressure"
+  ],
+  "answer": 0,
+  "explain": "ρvD/η has dimensions M⁰L⁰T⁰, so it is a pure number.",
+  "kind": "unit",
+  "id": "e2b150b1-5630-4f0f-b45e-ce4bbdd3f9ad",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow"
+ },
+ {
+  "prompt": "As per NCERT, flow through a pipe is turbulent when Reynolds number exceeds about:",
+  "formula": "",
+  "options": [
+   "10",
+   "100",
+   "500",
+   "2000"
+  ],
+  "answer": 3,
+  "explain": "Re < 1000 is streamline, 1000–2000 is unsteady, Re > 2000 is turbulent.",
+  "kind": "fact",
+  "id": "1c3d1093-e5f7-475e-850b-157059700fe8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow"
+ },
+ {
+  "prompt": "Two streamlines in steady flow cannot intersect because at the crossing point:",
+  "formula": "",
+  "options": [
+   "Velocity would have two directions",
+   "Pressure would become infinite",
+   "Density would become zero",
+   "Viscosity would vanish"
+  ],
+  "answer": 0,
+  "explain": "Tangent to a streamline gives the velocity direction, which must be unique at a point.",
+  "kind": "concept",
+  "id": "54a410b2-c42e-4a26-ba81-b5894d4a4ad6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow"
+ },
+ {
+  "prompt": "Incompressible liquid in steady flow: pipe radius is halved. The flow speed becomes:",
+  "formula": "A₁v₁ = A₂v₂",
+  "options": [
+   "Half",
+   "Double",
+   "Four times",
+   "Eight times"
+  ],
+  "answer": 2,
+  "explain": "A ∝ r², so halving r reduces A to ¼ and v rises 4 times.",
+  "kind": "result",
+  "id": "05a71e87-bac9-4e1a-914b-4035252b941e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow"
+ },
+ {
+  "prompt": "In a steady-flow streamline diagram, regions where streamlines are closer together indicate:",
+  "formula": "",
+  "options": [
+   "Higher fluid speed",
+   "Lower fluid speed",
+   "Higher viscosity",
+   "Turbulence onset"
+  ],
+  "answer": 0,
+  "explain": "Closer streamlines mean smaller area of flow, so by continuity the speed is greater.",
+  "kind": "concept",
+  "id": "1fbdd201-3b11-410d-a338-745770cdbc2d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow"
+ },
+ {
+  "prompt": "In steady (streamline) flow, the path traced by a fluid particle coincides with:",
+  "formula": "",
+  "options": [
+   "The streamline through that point",
+   "A line perpendicular to the streamline",
+   "A curve of constant pressure",
+   "A curve of constant speed"
+  ],
+  "answer": 0,
+  "explain": "In steady flow, every particle passing a point follows the same path, so the streamline is the particle's path.",
+  "kind": "concept",
+  "id": "0f364139-74ec-4a03-897d-294714df795d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow"
+ },
+ {
+  "prompt": "The equation of continuity expresses conservation of which quantity in fluid flow?",
+  "formula": "",
+  "options": [
+   "Energy",
+   "Linear momentum",
+   "Mass",
+   "Angular momentum"
+  ],
+  "answer": 2,
+  "explain": "Mass entering a tube per second equals mass leaving per second in steady flow, so continuity is mass conservation.",
+  "kind": "concept",
+  "id": "8984d855-4717-4734-a3f4-16c99778e679",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "Continuity equation for steady flow of a compressible fluid (density ρ) is:",
+  "formula": "ρ₁A₁v₁ = ρ₂A₂v₂",
+  "options": [
+   "A₁v₁ = ρ₂A₂v₂",
+   "ρ₁A₁v₁ = ρ₂A₂v₂",
+   "ρ₁A₂v₁ = ρ₂A₁v₂",
+   "ρ₁v₁ = ρ₂v₂ only"
+  ],
+  "answer": 1,
+  "explain": "Mass flow rate ρAv is constant; ρ cancels only for an incompressible fluid.",
+  "kind": "formula",
+  "id": "4d0ac4f4-a832-40a6-a458-47b27a029b5b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "In a flow-line diagram, streamlines crowded closer together indicate:",
+  "formula": "",
+  "options": [
+   "Lower fluid speed",
+   "Higher fluid speed",
+   "Higher fluid density",
+   "Turbulent flow"
+  ],
+  "answer": 1,
+  "explain": "Closer streamlines mean a smaller cross-section, so the speed is greater by continuity.",
+  "kind": "concept",
+  "id": "a71d314f-c772-4b69-904f-2ac16dd4dbbf",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "Two streamlines can never cross because at the crossing point the fluid would have:",
+  "formula": "",
+  "options": [
+   "Two different densities",
+   "Two different pressures",
+   "Two velocity directions at once",
+   "Zero velocity"
+  ],
+  "answer": 2,
+  "explain": "Velocity at a point in steady flow is tangent to the streamline, so it must be unique.",
+  "kind": "concept",
+  "id": "33c55de4-ca52-4408-ba49-d8b7108c3638",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "A water stream from a tap narrows as it falls because:",
+  "formula": "",
+  "options": [
+   "Speed rises, so area must fall",
+   "Surface tension increases speed",
+   "Density of water increases",
+   "Pressure rises with depth"
+  ],
+  "answer": 0,
+  "explain": "Gravity increases speed downward; Av = constant forces the cross-section to decrease.",
+  "kind": "concept",
+  "id": "8bf8b3b7-54a9-416d-9c9a-4159440a3660",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "A pipe's radius is reduced to one-third at a constriction. Flow speed there is:",
+  "formula": "v ∝ 1/r²",
+  "options": [
+   "3 times",
+   "6 times",
+   "9 times",
+   "27 times"
+  ],
+  "answer": 2,
+  "explain": "A ∝ r², so A becomes 1/9 and v becomes 9 times.",
+  "kind": "result",
+  "id": "8089223e-1c62-4259-a39f-616dabb21382",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "For a steady incompressible flow, the graph of v against 1/A is:",
+  "formula": "v = Q·(1/A)",
+  "options": [
+   "A parabola",
+   "A rectangular hyperbola",
+   "A straight line through origin",
+   "A straight line with intercept"
+  ],
+  "answer": 2,
+  "explain": "v = Q/A with Q constant, so v is proportional to 1/A, a straight line through the origin.",
+  "kind": "graph",
+  "id": "b0a9a55c-b377-4fbf-b05f-d103a0202889",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "Blood speed is least in the capillaries mainly because:",
+  "formula": "",
+  "options": [
+   "Capillary walls are rough",
+   "Total capillary area is very large",
+   "Blood density is lowest there",
+   "Pressure is zero there"
+  ],
+  "answer": 1,
+  "explain": "The combined cross-section of all capillaries far exceeds the aorta's, so v = Q/A is smallest.",
+  "kind": "fact",
+  "id": "45702cd4-37b8-4ab0-b750-73189fb86075",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "A fluid flows steadily through a tube of varying area. Which quantity is the same at all sections?",
+  "formula": "",
+  "options": [
+   "Speed of the fluid",
+   "Mass per second flowing",
+   "Kinetic energy per volume",
+   "Pressure of the fluid"
+  ],
+  "answer": 1,
+  "explain": "Mass flow rate is constant at every section; speed, pressure and KE density change with area.",
+  "kind": "concept",
+  "id": "7ef52265-aa32-4a37-b464-004f7969aa08",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "Pipe diameter is doubled along the flow. Fluid speed becomes how many times (incompressible)?",
+  "formula": "v ∝ 1/d²",
+  "options": [
+   "1/2",
+   "1/4",
+   "2",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "A ∝ d², so area becomes 4 times and speed falls to 1/4 by Av = constant.",
+  "kind": "result",
+  "id": "9cd777e1-3167-4d0c-977a-77dc5995c022",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "A main pipe splits into branches, steady incompressible flow. Then A_main·v_main equals:",
+  "formula": "",
+  "options": [
+   "Sum of A·v of all branches",
+   "Average of A·v of branches",
+   "A·v of any one branch",
+   "Product of branch A·v values"
+  ],
+  "answer": 0,
+  "explain": "Volume flow rate is conserved at a junction: Q_in = ΣQ_out.",
+  "kind": "concept",
+  "id": "4c4c445e-e9f3-4aa8-a59b-3e4cf913b66f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity"
+ },
+ {
+  "prompt": "Tank of height H full of water; hole at depth h. Horizontal range of jet on ground (tank on ground)?",
+  "formula": "R = 2√(h(H−h))",
+  "options": [
+   "2√(h(H−h))",
+   "√(h(H−h))",
+   "2√(hH)",
+   "4√(h(H−h))"
+  ],
+  "answer": 0,
+  "explain": "v = √(2gh), fall time = √(2(H−h)/g), so R = 2√(h(H−h)).",
+  "kind": "formula",
+  "id": "9a8b71ae-5f40-45df-8265-d23118af7fb3",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "For maximum horizontal range of a jet from a full tank of height H, the hole must be at depth",
+  "formula": "",
+  "options": [
+   "H/3",
+   "H/2",
+   "2H/3",
+   "H/4"
+  ],
+  "answer": 1,
+  "explain": "h(H−h) is maximum at h = H/2.",
+  "kind": "result",
+  "id": "e50dad89-954e-4a5b-8d4f-f786a4d8dd74",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "In an ideal open tank, halving the hole's area (same depth) changes the efflux speed to",
+  "formula": "",
+  "options": [
+   "Half",
+   "Double",
+   "1/√2 times",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "v = √(2gh) does not depend on hole area; only the flow rate changes.",
+  "kind": "concept",
+  "id": "5e1ec7a0-9e6f-4b14-b333-864323645bde",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Jet from hole of area a at depth h pushes the tank back with a force of magnitude",
+  "formula": "F = ρav² = 2ρagh",
+  "options": [
+   "ρagh",
+   "2ρagh",
+   "ρagh/2",
+   "4ρagh"
+  ],
+  "answer": 1,
+  "explain": "Rate of momentum loss = ρa v², with v² = 2gh, giving F = 2ρagh.",
+  "kind": "formula",
+  "id": "0678bfb4-66b9-4a76-9bc8-8ebce1ed8ec8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Torricelli's law follows from Bernoulli's equation by assuming the free-surface speed is",
+  "formula": "",
+  "options": [
+   "Negligible, since A ≫ a",
+   "Equal to the efflux speed",
+   "Equal to √(gh)",
+   "Twice the efflux speed"
+  ],
+  "answer": 0,
+  "explain": "For a ≪ A, surface speed ≈ 0, giving v = √(2gh).",
+  "kind": "concept",
+  "id": "fe265f58-63f6-4fb9-a937-b8b992aacbe7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Torricelli efflux speed equals the speed of a body that has",
+  "formula": "",
+  "options": [
+   "Fallen freely through height h",
+   "Fallen freely through height 2h",
+   "Been thrown up to height h",
+   "Fallen freely through height h/2"
+  ],
+  "answer": 0,
+  "explain": "v² = 2gh is the free-fall result for a drop of h.",
+  "kind": "concept",
+  "id": "5f7fd83a-8f89-4951-9377-c973c06ea128",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "A cylindrical open tank drains through a small bottom hole. The graph of water height h versus time t is",
+  "formula": "",
+  "options": [
+   "A straight line",
+   "Exponential decay",
+   "A parabola",
+   "A hyperbola"
+  ],
+  "answer": 2,
+  "explain": "dh/dt ∝ −√h gives √h linear in t, so h is quadratic in t.",
+  "kind": "graph",
+  "id": "f67307d3-a4bd-4779-a4e5-0cde941505d6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "As the water level in an open tank falls to one-fourth of its depth above the hole, efflux speed becomes",
+  "formula": "v ∝ √h",
+  "options": [
+   "One-fourth",
+   "One-half",
+   "One-eighth",
+   "One-sixteenth"
+  ],
+  "answer": 1,
+  "explain": "v ∝ √h, so h → h/4 gives v → v/2.",
+  "kind": "trend",
+  "id": "36e0575b-da3c-46bb-a6ee-a412069aa8fe",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Two different liquids in identical open tanks, holes at same depth h. Efflux speeds compare as:",
+  "formula": "v = √(2gh)",
+  "options": [
+   "Denser liquid flows faster",
+   "Denser liquid flows slower",
+   "Equal, independent of density",
+   "Ratio is √(ρ₁/ρ₂)"
+  ],
+  "answer": 2,
+  "explain": "ρ cancels in Bernoulli's equation, so v = √(2gh) for any ideal liquid.",
+  "kind": "concept",
+  "id": "d4110d0d-3efa-4cff-81f1-19db5c0f21b2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Cylindrical tank drains through a bottom hole. Hole radius is doubled; the draining time becomes:",
+  "formula": "t = (A/a)√(2H/g)",
+  "options": [
+   "Half",
+   "One-fourth",
+   "Double",
+   "One-eighth"
+  ],
+  "answer": 1,
+  "explain": "t ∝ 1/a and a ∝ r², so doubling r makes t one-fourth.",
+  "kind": "result",
+  "id": "1848673d-c046-4866-b8f2-b2d0cbf9fdcc",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "In a full tank of height H, holes at depths h₁ and h₂ give equal horizontal range when",
+  "formula": "R = 2√(h(H−h))",
+  "options": [
+   "h₁ + h₂ = H",
+   "h₁h₂ = H²",
+   "h₁ = h₂ only",
+   "h₁ − h₂ = H/2"
+  ],
+  "answer": 0,
+  "explain": "R is symmetric under h → H−h, so depths h and H−h give equal ranges.",
+  "kind": "result",
+  "id": "a62fb5c4-a885-4214-9b49-daae8694183a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "An ideal vertical upward jet from a side-tube at depth h below the free surface rises to a height",
+  "formula": "",
+  "options": [
+   "h/2",
+   "h",
+   "2h",
+   "√(2gh)"
+  ],
+  "answer": 1,
+  "explain": "From v² = 2gh, the jet rises to h, the free-surface level (no losses).",
+  "kind": "concept",
+  "id": "cc6c180e-5bac-4a09-94b6-4980582ab4ce",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Sealed tank: air above water at gauge pressure P. Efflux speed from a hole at depth h is (ρ = density)?",
+  "formula": "v = √(2gh + 2P/ρ)",
+  "options": [
+   "√(2gh)",
+   "√(2gh + 2P/ρ)",
+   "√(2gh + P/ρ)",
+   "√(2P/ρ) only"
+  ],
+  "answer": 1,
+  "explain": "Bernoulli: the extra gauge pressure P adds P/ρ per unit mass, so v² = 2gh + 2P/ρ.",
+  "kind": "formula",
+  "id": "c9af09f5-c4cb-4679-b8e3-a3c4abe915a6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Terminal velocity of a small sphere falling in a viscous fluid varies with its radius r as:",
+  "formula": "v_t = 2r²(ρ − σ)g / 9η",
+  "options": [
+   "v_t ∝ r",
+   "v_t ∝ r²",
+   "v_t ∝ r³",
+   "v_t ∝ 1/r"
+  ],
+  "answer": 1,
+  "explain": "Stokes' law with weight, buoyancy and drag balanced gives v_t = 2r²(ρ−σ)g/9η, so v_t ∝ r².",
+  "kind": "formula",
+  "id": "e92927b1-2ae8-4694-88e7-4be7702df4fd",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity"
+ },
+ {
+  "prompt": "Stokes' viscous drag force on a small sphere of radius r moving at speed v in a fluid of viscosity η is:",
+  "formula": "F = 6πηrv",
+  "options": [
+   "3πηrv",
+   "6πηr²v",
+   "6πηrv",
+   "12πηrv"
+  ],
+  "answer": 2,
+  "explain": "Stokes' law: F = 6πηrv, which is linear in r and v.",
+  "kind": "formula",
+  "id": "8f8719d5-9846-47f5-896c-a5c947596200",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity"
+ },
+ {
+  "prompt": "Dimensional formula of coefficient of viscosity η is:",
+  "formula": "η = F/(6πrv)",
+  "options": [
+   "ML⁻¹T⁻¹",
+   "MLT⁻¹",
+   "ML⁻²T⁻²",
+   "ML²T⁻¹"
+  ],
+  "answer": 0,
+  "explain": "η = F/(6πrv) gives N/(m·m/s) = kg m⁻¹ s⁻¹, so ML⁻¹T⁻¹.",
+  "kind": "unit",
+  "id": "0094b655-1c0a-432a-8899-6a10a2c119cb",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "1 poise (CGS unit of viscosity) equals how many Pa·s?",
+  "formula": "",
+  "options": [
+   "0.1",
+   "10",
+   "0.01",
+   "100"
+  ],
+  "answer": 0,
+  "explain": "1 poise = 1 g cm⁻¹ s⁻¹ = 0.1 Pa·s.",
+  "kind": "unit",
+  "id": "ef99b9d8-d4b4-4566-b46c-5d262dfe8ee6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "When a sphere falling in a viscous fluid reaches terminal velocity, its acceleration is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "g",
+   "g(1 − σ/ρ)",
+   "Maximum"
+  ],
+  "answer": 0,
+  "explain": "Net force is zero at terminal velocity, so acceleration is zero.",
+  "kind": "concept",
+  "id": "1ce7ccf1-9768-43f4-9a07-a470327bbbed",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "At terminal velocity, which force balance holds for a sphere falling in a fluid?",
+  "formula": "",
+  "options": [
+   "W = viscous drag + upthrust",
+   "W = viscous drag",
+   "W + upthrust = drag",
+   "Drag = upthrust"
+  ],
+  "answer": 0,
+  "explain": "Weight acts down; viscous drag and buoyant upthrust act up.",
+  "kind": "concept",
+  "id": "06eb2283-1912-4dd2-95f0-385080811d63",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "A sphere of density ρ is released in a liquid of density σ > ρ. It attains terminal velocity:",
+  "formula": "",
+  "options": [
+   "Upward",
+   "Downward",
+   "Zero",
+   "Horizontal"
+  ],
+  "answer": 0,
+  "explain": "For ρ < σ, vₜ = 2r²(ρ−σ)g/9η is negative, so the sphere rises.",
+  "kind": "concept",
+  "id": "d3d6fa6b-db35-4412-8f50-9a3af8b01855",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "For a given sphere and fluid density, terminal velocity varies with viscosity η as:",
+  "formula": "",
+  "options": [
+   "1/η",
+   "η",
+   "η²",
+   "1/η²"
+  ],
+  "answer": 0,
+  "explain": "vₜ = 2r²(ρ−σ)g/9η, so vₜ ∝ 1/η.",
+  "kind": "trend",
+  "id": "4b8e0de4-2bbd-431a-be84-9dbbdea9e2f7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "8 identical rain drops, each with terminal velocity v, coalesce. New terminal velocity is:",
+  "formula": "",
+  "options": [
+   "4v",
+   "2v",
+   "8v",
+   "16v"
+  ],
+  "answer": 0,
+  "explain": "Volume conserved gives R = 2r. vₜ ∝ R², so it becomes 4v.",
+  "kind": "result",
+  "id": "16e78f77-b806-456a-9d9d-f57e09f98215",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "For a sphere falling from rest in a viscous fluid, the v–t graph is:",
+  "formula": "",
+  "options": [
+   "Rising curve approaching a constant value",
+   "Straight line through origin",
+   "Parabola",
+   "Rising then falling curve"
+  ],
+  "answer": 0,
+  "explain": "Velocity increases exponentially and saturates asymptotically at vₜ.",
+  "kind": "graph",
+  "id": "674b2d75-60fe-4079-b7d6-a74f9b1723f7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "With rising temperature, viscosity of a liquid:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Stays constant",
+   "Increases then decreases"
+  ],
+  "answer": 0,
+  "explain": "In liquids, η falls as temperature rises, so vₜ of a falling sphere rises.",
+  "kind": "trend",
+  "id": "273e13ef-9d48-42b6-8998-85f265409d89",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "With rising temperature, viscosity of a gas:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Stays constant",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "Gas viscosity arises from molecular momentum transfer, which grows with temperature.",
+  "kind": "exception",
+  "id": "765c33a8-5e61-473d-81ba-474e10295fa6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Stokes' viscous drag on a sphere at the instant it is released from rest is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to its weight",
+   "Equal to upthrust",
+   "Maximum"
+  ],
+  "answer": 0,
+  "explain": "Drag = 6πηrv is proportional to v, so it is zero when v = 0.",
+  "kind": "concept",
+  "id": "9452fcee-b8a3-4063-8956-725c0c8198a8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Stokes' law is valid for a sphere moving in a fluid under which condition?",
+  "formula": "",
+  "options": [
+   "Low speed, laminar flow",
+   "High speed, turbulent flow",
+   "Only in vacuum",
+   "Only for hollow spheres"
+  ],
+  "answer": 0,
+  "explain": "It applies at low Reynolds number, smooth laminar flow, small spheres.",
+  "kind": "concept",
+  "id": "3487c9e2-1e95-481a-bde6-12a70c55a954",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Terminal velocity of a sphere of density equal to the fluid density is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Infinite",
+   "Maximum",
+   "Depends on r only"
+  ],
+  "answer": 0,
+  "explain": "vₜ ∝ (ρ − σ) = 0, since weight and upthrust cancel.",
+  "kind": "result",
+  "id": "5d3ddb72-3dec-436d-92c9-f20da63602d1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Power dissipated by viscous drag on a sphere moving at terminal velocity vₜ is:",
+  "formula": "P = Fv",
+  "options": [
+   "6πηr vₜ²",
+   "6πηr vₜ",
+   "3πηr vₜ²",
+   "6πηr² vₜ"
+  ],
+  "answer": 0,
+  "explain": "P = F·vₜ with F = 6πηr vₜ gives 6πηr vₜ².",
+  "kind": "formula",
+  "id": "3c63b304-807a-4b8b-b4d5-1af199f8d676",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "The same sphere falls in the same liquid on the Moon instead of Earth. Its terminal velocity:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Unchanged",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "vₜ ∝ g, and g on the Moon is smaller.",
+  "kind": "trend",
+  "id": "869568da-58a1-4af9-8130-e8ab11604377",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Millikan's oil drop experiment uses which law to find drop radius from terminal velocity?",
+  "formula": "",
+  "options": [
+   "Stokes' law",
+   "Bernoulli's principle",
+   "Poiseuille's law",
+   "Pascal's law"
+  ],
+  "answer": 0,
+  "explain": "Drop radius comes from vₜ in air via Stokes' drag balance.",
+  "kind": "fact",
+  "id": "b82ece89-2ad8-406e-9512-7add56b20047",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "A sphere has reached terminal velocity in a very deep viscous liquid. On falling further, its speed:",
+  "formula": "",
+  "options": [
+   "Stays constant",
+   "Keeps increasing slowly",
+   "Decreases steadily",
+   "Increases, then decreases"
+  ],
+  "answer": 0,
+  "explain": "Drag + upthrust already balance weight, so vₜ is fixed and does not depend on the depth fallen.",
+  "kind": "concept",
+  "id": "e86a56f2-18cc-4821-aac0-5b66b60d4497",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Two spheres of the same material have radii in ratio 1:2. Their terminal velocities in the same liquid are in the ratio:",
+  "formula": "vₜ ∝ r²",
+  "options": [
+   "1:2",
+   "1:4",
+   "1:8",
+   "1:16"
+  ],
+  "answer": 1,
+  "explain": "vₜ ∝ r², so the ratio is 1² : 2² = 1:4.",
+  "kind": "result",
+  "id": "31fce1e3-0ec2-4b79-89df-cea71e8b27a7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Dimensions of Reynolds number are:",
+  "formula": "Re = ρvD/η",
+  "options": [
+   "[M⁰L⁰T⁰]",
+   "[M L⁻¹T⁻¹]",
+   "[M L⁻³]",
+   "[L T⁻¹]"
+  ],
+  "answer": 0,
+  "explain": "Re is a ratio of inertial to viscous forces, hence dimensionless.",
+  "kind": "unit",
+  "id": "07fc0c7a-116f-4bb1-b7fa-e8a901a3e760",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number"
+ },
+ {
+  "prompt": "If the tube diameter is doubled for the same fluid, the critical velocity becomes:",
+  "formula": "v_c ∝ 1/D",
+  "options": [
+   "Half",
+   "Double",
+   "One-fourth",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "v_c = Re·η/(ρD) is inversely proportional to diameter, so it halves.",
+  "kind": "result",
+  "id": "9b125dcc-086c-4991-9c98-fb5e63d2e1f4",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number"
+ },
+ {
+  "prompt": "For flow through a pipe, critical velocity v_c is directly proportional to which combination?",
+  "formula": "v_c = Re·η/(ρD)",
+  "options": [
+   "η/(ρD)",
+   "ρ/(ηD)",
+   "ηD/ρ",
+   "ρD/η"
+  ],
+  "answer": 0,
+  "explain": "From Re = ρvD/η, v_c = Re_c·η/(ρD), so v_c ∝ η/(ρD).",
+  "kind": "formula",
+  "id": "6d420c26-398d-43a8-99a3-a7cd1a23c68a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number"
+ },
+ {
+  "prompt": "Excess pressure inside a spherical liquid drop of radius R and surface tension T is:",
+  "formula": "ΔP = 2T/R",
+  "options": [
+   "2T/R",
+   "4T/R",
+   "T/R",
+   "T/2R"
+  ],
+  "answer": 0,
+  "explain": "A drop has one free surface, so ΔP = 2T/R.",
+  "kind": "formula",
+  "id": "63e1eb60-9799-4524-8cba-23be4a29a8d9",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Excess pressure inside a soap bubble of radius R in air (surface tension T) is:",
+  "formula": "ΔP = 4T/R",
+  "options": [
+   "2T/R",
+   "4T/R",
+   "8T/R",
+   "T/R"
+  ],
+  "answer": 1,
+  "explain": "A soap bubble has two free surfaces, so ΔP = 2T/R + 2T/R = 4T/R.",
+  "kind": "formula",
+  "id": "efda61ec-b776-4c03-9dab-6696b36066fa",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Excess pressure inside an air bubble of radius R formed deep within a liquid is:",
+  "formula": "ΔP = 2T/R",
+  "options": [
+   "4T/R",
+   "T/R",
+   "2T/R",
+   "8T/R"
+  ],
+  "answer": 2,
+  "explain": "An air bubble in a liquid has a single liquid–air surface, so ΔP = 2T/R.",
+  "kind": "formula",
+  "id": "9b5cb5f4-d2d1-4c4b-8f63-7094c157e0a4",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Capillary rise of a liquid (density ρ, contact angle θ) in a tube of radius r is:",
+  "formula": "h = 2T cosθ/(rρg)",
+  "options": [
+   "T cosθ/(rρg)",
+   "2T sinθ/(rρg)",
+   "2T cosθ/(rρg)",
+   "4T cosθ/(rρg)"
+  ],
+  "answer": 2,
+  "explain": "Jurin's law: balance 2πrT cosθ against the weight πr²hρg.",
+  "kind": "formula",
+  "id": "c4a1f1fd-2fd2-424c-82ac-9940e2d4de57",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "The angle of contact between mercury and clean glass is:",
+  "formula": "",
+  "options": [
+   "0°",
+   "Acute, less than 90°",
+   "Exactly 90°",
+   "Obtuse, about 135–140°"
+  ],
+  "answer": 3,
+  "explain": "Mercury does not wet glass, so it has an obtuse contact angle and a convex meniscus.",
+  "kind": "fact",
+  "id": "94c380a7-da99-4f85-98b0-89d63cd45c5d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Surface energy per unit area of a liquid surface is numerically equal to:",
+  "formula": "",
+  "options": [
+   "Surface tension",
+   "Twice the surface tension",
+   "Surface tension per unit length squared",
+   "Excess pressure"
+  ],
+  "answer": 0,
+  "explain": "T = W/ΔA, so N/m is the same as J/m².",
+  "kind": "concept",
+  "id": "483b0af9-bf3e-4c15-b9d8-838b4d3a9f19",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "A drop of radius R splits into 8 identical drops. Total surface area becomes how many times the original?",
+  "formula": "r = R/2",
+  "options": [
+   "8",
+   "4",
+   "2",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "New radius is R/2. Area = 8·4π(R/2)² = 2 × (4πR²).",
+  "kind": "result",
+  "id": "036ab75f-b02c-474c-a62f-cc5665894712",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "When many small liquid drops coalesce into one large drop, the energy is:",
+  "formula": "",
+  "options": [
+   "Released, as the surface area decreases",
+   "Absorbed, as the surface area decreases",
+   "Absorbed, as the surface area increases",
+   "Unchanged"
+  ],
+  "answer": 0,
+  "explain": "Total surface area falls, so surface energy is released. The drop warms slightly.",
+  "kind": "concept",
+  "id": "bed740e9-0c91-4ec0-88c6-f0680b620d0b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "A straight wire of length l is pulled by a soap film on both sides. Force due to surface tension is:",
+  "formula": "F = 2Tl",
+  "options": [
+   "Tl",
+   "2Tl",
+   "4Tl",
+   "Tl/2"
+  ],
+  "answer": 1,
+  "explain": "The film has two surfaces, and each pulls with force T per unit length.",
+  "kind": "formula",
+  "id": "b0666490-54da-4d0c-ba60-188f461487a1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "At the critical temperature of a liquid, its surface tension becomes:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Equal to that at 0 °C",
+   "Infinite",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "The liquid–vapour boundary vanishes at the critical temperature, so T = 0.",
+  "kind": "fact",
+  "id": "90791480-c379-48d1-b37a-a4b9767b7c85",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "A capillary tube is placed in a lift accelerating upward. The liquid rise in it:",
+  "formula": "h ∝ 1/g_eff",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Stays the same",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "g_eff = g + a is larger, and h = 2T cosθ/(rρg_eff) is smaller.",
+  "kind": "concept",
+  "id": "65195847-2f8b-4f48-a8e7-b02db7113967",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Adding detergent to water mainly causes its surface tension to:",
+  "formula": "",
+  "options": [
+   "Increase greatly",
+   "Become infinite",
+   "Decrease",
+   "Remain unchanged"
+  ],
+  "answer": 2,
+  "explain": "Detergent is a surface-active agent, so it lowers T and improves wetting.",
+  "kind": "fact",
+  "id": "9b73d7dc-fb03-4ef9-8049-e43ad3e7ea92",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Two soap bubbles of radii r₁ < r₂ touch. Radius of the common interface is:",
+  "formula": "r = r₁r₂/(r₂ − r₁)",
+  "options": [
+   "r₁r₂/(r₁ + r₂)",
+   "r₁r₂/(r₂ − r₁)",
+   "r₂ − r₁",
+   "(r₁ + r₂)/2"
+  ],
+  "answer": 1,
+  "explain": "The pressure difference across the interface is 4T(1/r₁ − 1/r₂) = 4T/r, which gives r = r₁r₂/(r₂ − r₁).",
+  "kind": "result",
+  "id": "15c1b001-9c52-4dcd-9258-00d3abff859a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "A liquid forms a concave meniscus in a tube when:",
+  "formula": "",
+  "options": [
+   "Adhesive force is greater than cohesive force",
+   "Cohesive force is greater than adhesive force",
+   "The contact angle is obtuse",
+   "Surface tension is zero"
+  ],
+  "answer": 0,
+  "explain": "The liquid wets the wall, so θ is acute and the liquid climbs up (concave meniscus).",
+  "kind": "concept",
+  "id": "3e64bcaf-f4d3-465f-a3e0-01bad9a3b0a4",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "For a liquid in a capillary tube, the angle of contact θ = 90° gives a capillary rise of:",
+  "formula": "h ∝ cosθ",
+  "options": [
+   "Maximum",
+   "Zero",
+   "2T/(rρg)",
+   "Negative"
+  ],
+  "answer": 1,
+  "explain": "cos 90° = 0, so h = 0 and the meniscus is flat.",
+  "kind": "result",
+  "id": "eb019901-a183-4afd-abc2-12012905175a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Rise of liquid in a capillary vanishes (no rise, no fall) when the angle of contact is:",
+  "formula": "h = 2S cosθ/(rρg)",
+  "options": [
+   "0°",
+   "90°",
+   "45°",
+   "180°"
+  ],
+  "answer": 1,
+  "explain": "At θ = 90°, cosθ = 0, so h = 0 and the meniscus is flat.",
+  "kind": "result",
+  "id": "62fbaf13-a000-4fac-bea1-6a772ad36bfa",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting"
+ },
+ {
+  "prompt": "Ideal complete wetting of a surface by a liquid corresponds to angle of contact:",
+  "formula": "",
+  "options": [
+   "90°",
+   "0°",
+   "180°",
+   "Between 90° and 180°"
+  ],
+  "answer": 1,
+  "explain": "Complete wetting: the liquid spreads fully, so θ = 0°; θ = 180° means completely non-wetting.",
+  "kind": "fact",
+  "id": "81e36e37-e6bc-4cc7-989f-8808a983b4d5",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting"
+ },
+ {
+  "prompt": "Angle of contact between a liquid and a solid depends on all EXCEPT:",
+  "formula": "",
+  "options": [
+   "Nature of the liquid and solid",
+   "Inclination of the solid surface in the liquid",
+   "Medium above the free liquid surface",
+   "Temperature of the liquid"
+  ],
+  "answer": 1,
+  "explain": "θ depends on the liquid–solid pair, the medium above and the temperature, not on the inclination of the solid surface.",
+  "kind": "exception",
+  "id": "1e56601d-ba90-4c59-9a77-de49ddc7c295",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting"
+ },
+ {
+  "prompt": "The common film between two touching soap bubbles of unequal size bulges:",
+  "formula": "",
+  "options": [
+   "into the larger bubble",
+   "into the smaller bubble",
+   "stays flat",
+   "is flat only if T is large"
+  ],
+  "answer": 0,
+  "explain": "The smaller bubble is at higher pressure, so the film curves (convex) into the larger bubble.",
+  "kind": "concept",
+  "id": "6824b1c1-7681-4a6a-91fb-dc046eec0d1f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Excess pressure inside a soap bubble of diameter D is:",
+  "formula": "ΔP = 8T/D",
+  "options": [
+   "2T/D",
+   "4T/D",
+   "8T/D",
+   "16T/D"
+  ],
+  "answer": 2,
+  "explain": "ΔP = 4T/R with R = D/2 gives 8T/D.",
+  "kind": "formula",
+  "id": "b0bce306-4540-4e80-a1fa-f01cf6319db0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Work done in blowing a soap bubble of radius R (tension T) isothermally, ignoring air pressure work:",
+  "formula": "W = T × ΔA",
+  "options": [
+   "4πR²T",
+   "8πR²T",
+   "2πR²T",
+   "16πR²T"
+  ],
+  "answer": 1,
+  "explain": "The film has two surfaces, so ΔA = 2 × 4πR² and W = 8πR²T.",
+  "kind": "formula",
+  "id": "0f62be21-b4c0-44da-beac-6dc5cf9d2f6c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Soap bubble radius is increased from r₁ to r₂. Work done against surface tension is:",
+  "formula": "",
+  "options": [
+   "4πT(r₂² − r₁²)",
+   "8πT(r₂² − r₁²)",
+   "8πT(r₂ − r₁)",
+   "4πT(r₂³ − r₁³)"
+  ],
+  "answer": 1,
+  "explain": "Two surfaces: W = T × 2 × 4π(r₂² − r₁²) = 8πT(r₂² − r₁²).",
+  "kind": "formula",
+  "id": "f7ed7451-fceb-41b8-8949-e5732fa13364",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Excess pressure across a plane liquid surface is:",
+  "formula": "",
+  "options": [
+   "2T",
+   "T/2",
+   "zero",
+   "infinite"
+  ],
+  "answer": 2,
+  "explain": "R → ∞ for a plane surface, so ΔP = T(1/R₁ + 1/R₂) = 0.",
+  "kind": "fact",
+  "id": "85c235ad-0489-48b0-8515-ce82ddaccc19",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "When temperature rises, the excess pressure inside a bubble of fixed radius:",
+  "formula": "",
+  "options": [
+   "increases",
+   "decreases",
+   "stays the same",
+   "first rises, then falls"
+  ],
+  "answer": 1,
+  "explain": "Surface tension T decreases with temperature, and ΔP ∝ T.",
+  "kind": "trend",
+  "id": "e090671b-36c1-4261-b4c4-9561da5de4d0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "The product (excess pressure × radius) has the dimensions of:",
+  "formula": "ΔP·R ∝ T",
+  "options": [
+   "surface energy",
+   "surface tension",
+   "force",
+   "pressure"
+  ],
+  "answer": 1,
+  "explain": "ΔP·R = 2T or 4T, so it has the dimensions of surface tension, MT⁻² (N/m).",
+  "kind": "unit",
+  "id": "3376f963-616c-4924-80e8-205485cf8130",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Same radius and tension: excess pressure of an air bubble in a liquid vs a soap bubble in air is in ratio:",
+  "formula": "",
+  "options": [
+   "1 : 2",
+   "2 : 1",
+   "1 : 1",
+   "1 : 4"
+  ],
+  "answer": 0,
+  "explain": "The air bubble has one surface (2T/R) and the soap bubble has two (4T/R), so the ratio is 1 : 2.",
+  "kind": "concept",
+  "id": "d5404c3c-3bcd-4b28-a296-13f5c4dc4d3b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Two soap bubbles of radii r₁, r₂ merge isothermally in vacuum (P₀ = 0) into one of radius r. Then:",
+  "formula": "",
+  "options": [
+   "r = r₁ + r₂",
+   "r² = r₁² + r₂²",
+   "r³ = r₁³ + r₂³",
+   "1/r = 1/r₁ + 1/r₂"
+  ],
+  "answer": 1,
+  "explain": "With P₀ = 0 the condition PV = P₁V₁ + P₂V₂ with P = 4T/r leaves r² = r₁² + r₂². This is the same as conserving film area.",
+  "kind": "result",
+  "id": "ae770b41-aada-4b93-b526-3856dcdb4d37",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Soap bubble of radius R has excess pressure p. Its surface tension is:",
+  "formula": "p = 4T/R",
+  "options": [
+   "pR/2",
+   "pR/4",
+   "4pR",
+   "p/(4R)"
+  ],
+  "answer": 1,
+  "explain": "From p = 4T/R, T = pR/4.",
+  "kind": "formula",
+  "id": "e1dd5082-ba4c-4e88-83a5-56d4b7692a37",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Blowing a bubble from a tube of radius r, the pressure needed is maximum when the bubble is:",
+  "formula": "",
+  "options": [
+   "a hemisphere of radius r",
+   "a full sphere of radius 2r",
+   "very large",
+   "just a flat film"
+  ],
+  "answer": 0,
+  "explain": "ΔP ∝ 1/R is largest at the smallest bubble radius, which is the hemisphere with R = r (4T/r for soap).",
+  "kind": "concept",
+  "id": "b8cb5d24-0159-4e1a-baa4-f939080e0ef6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Excess pressure inside a bubble or drop depends on the liquid's density:",
+  "formula": "",
+  "options": [
+   "directly",
+   "inversely",
+   "as ρ²",
+   "not at all"
+  ],
+  "answer": 3,
+  "explain": "ΔP depends only on T and R (2T/R or 4T/R), not on density.",
+  "kind": "concept",
+  "id": "4c35b419-7993-4e50-b5a6-ccb356c442b8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "A soap bubble of radius R is in equilibrium. If its excess pressure is ΔP, which relation holds for the film?",
+  "formula": "",
+  "options": [
+   "ΔP·R = 2T",
+   "ΔP·R = 4T",
+   "ΔP·R = T",
+   "ΔP·R = 8T"
+  ],
+  "answer": 1,
+  "explain": "Two surfaces give ΔP = 4T/R, so ΔP·R = 4T.",
+  "kind": "formula",
+  "id": "43c108e1-7ed3-4694-b10d-e10d9f13bbaf",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Soap bubbles of radii r₁ < r₂ touch. Radius of their common film is:",
+  "formula": "r = r₁r₂/(r₂ − r₁)",
+  "options": [
+   "r₁r₂/(r₁ + r₂)",
+   "r₁r₂/(r₂ − r₁)",
+   "(r₁ + r₂)/2",
+   "r₂ − r₁"
+  ],
+  "answer": 1,
+  "explain": "4T/r = 4T/r₁ − 4T/r₂ gives 1/r = 1/r₁ − 1/r₂, so r = r₁r₂/(r₂ − r₁).",
+  "kind": "formula",
+  "id": "d85c6e7d-de32-4dc3-851b-40708611d722",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "A liquid drop of radius R splits into 8 identical drops. Excess pressure inside each drop becomes:",
+  "formula": "ΔP = 2T/R",
+  "options": [
+   "Half of the original",
+   "Same as the original",
+   "Twice the original",
+   "Four times the original"
+  ],
+  "answer": 2,
+  "explain": "Volume conservation gives r = R/2, so ΔP = 2T/r doubles.",
+  "kind": "result",
+  "id": "9bae4025-dd71-47c5-a6b2-77634ef027fe",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Two soap bubbles of unequal radii are joined by a tube. Air flows from:",
+  "formula": "",
+  "options": [
+   "Smaller bubble to larger bubble",
+   "Larger bubble to smaller bubble",
+   "No flow; pressures are equal",
+   "Depends on the gas in each bubble"
+  ],
+  "answer": 0,
+  "explain": "ΔP = 4T/R is higher in the smaller bubble, so air flows to the larger and it grows.",
+  "kind": "concept",
+  "id": "c73de42f-b8d3-4324-a8ff-14062714af83",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Capillary tube in a lift accelerating upward with a: the capillary rise h will",
+  "formula": "h = 2T cosθ / [ρ(g + a) r]",
+  "options": [
+   "Increase",
+   "Decrease",
+   "Remain unchanged",
+   "Become zero"
+  ],
+  "answer": 1,
+  "explain": "Effective gravity is g + a, which is larger, so h decreases.",
+  "kind": "concept",
+  "id": "bd3a09a1-7136-4301-9859-35dddc0328df",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Capillary tube in a lift accelerating downward with a < g: the rise of water",
+  "formula": "h = 2T cosθ / [ρ(g − a) r]",
+  "options": [
+   "Decreases",
+   "Remains unchanged",
+   "Increases",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "g_eff = g − a is smaller, so h increases.",
+  "kind": "concept",
+  "id": "dfb0d50c-55f2-4a30-83ff-a10a7e37e781",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "In a freely falling lift (g_eff = 0), water in a capillary tube rises up to",
+  "formula": "",
+  "options": [
+   "Zero height",
+   "The same height as on the ground",
+   "Half the usual height",
+   "The entire length of the tube"
+  ],
+  "answer": 3,
+  "explain": "As g_eff → 0, h = 2T cosθ/(ρ g_eff r) → ∞, so water fills the whole tube.",
+  "kind": "concept",
+  "id": "2cee8a3a-3624-4271-bfe6-56982b585788",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Water is in a vertical capillary whose length is less than Jurin height h. At the top end, the water",
+  "formula": "",
+  "options": [
+   "Overflows as a fountain",
+   "Drips continuously",
+   "Does not overflow; meniscus becomes flatter",
+   "Falls to height h/2"
+  ],
+  "answer": 2,
+  "explain": "Meniscus radius R increases so that h′R stays constant. The liquid does not overflow.",
+  "kind": "exception",
+  "id": "bc61eb7e-e733-4ea2-a68a-d5d87b5e4d73",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "On heating a liquid, capillary rise in a given tube generally",
+  "formula": "",
+  "options": [
+   "Increases, since ρ decreases",
+   "Decreases, since T decreases",
+   "Stays the same",
+   "First increases, then decreases"
+  ],
+  "answer": 1,
+  "explain": "Surface tension falls with temperature, so h decreases.",
+  "kind": "trend",
+  "id": "2ce7f80f-0f70-4d2b-b3e0-260e1fc7cee8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Adding detergent to water in which a capillary is dipped makes the rise",
+  "formula": "",
+  "options": [
+   "Larger, because it wets better",
+   "Unchanged",
+   "Smaller, because T decreases",
+   "Zero, because θ becomes 90°"
+  ],
+  "answer": 2,
+  "explain": "Detergent lowers surface tension T, so h ∝ T decreases.",
+  "kind": "concept",
+  "id": "73ef180a-e9c0-43cf-a526-ece68bcfcada",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "If the contact angle between liquid and tube is exactly 90°, the capillary rise is",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Half the maximum",
+   "Zero, with a flat meniscus",
+   "Negative"
+  ],
+  "answer": 2,
+  "explain": "cos 90° = 0, so h = 0 and the meniscus is flat.",
+  "kind": "result",
+  "id": "3c7ef443-17d8-4433-8ddf-7205d5e2d4d0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Pressure just below the concave water meniscus in a capillary, compared with atmospheric pressure, is",
+  "formula": "P = P₀ − 2T/R",
+  "options": [
+   "Less by 2T/R",
+   "More by 2T/R",
+   "More by 4T/R",
+   "Equal"
+  ],
+  "answer": 0,
+  "explain": "The pressure is lower on the concave side, which pulls the liquid up.",
+  "kind": "concept",
+  "id": "b40b9a83-4b37-4e5a-b778-6873587dd3ce",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Two vertical parallel plates, gap d, dipped in a liquid (angle θ). The rise between them is",
+  "formula": "",
+  "options": [
+   "T cosθ / ρgd",
+   "2T cosθ / ρgd",
+   "4T cosθ / ρgd",
+   "2T cosθ / ρgd²"
+  ],
+  "answer": 1,
+  "explain": "Force balance: 2T L cosθ = ρ g (L d h), giving h = 2T cosθ/ρgd.",
+  "kind": "formula",
+  "id": "06e41a5f-ac84-452d-a0b6-6e5e5c1303ae",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "In capillary rise, the potential energy gained by the liquid is what fraction of the work done by surface tension?",
+  "formula": "",
+  "options": [
+   "Half",
+   "All of it",
+   "One-third",
+   "Twice"
+  ],
+  "answer": 0,
+  "explain": "Work = 2πrT cosθ·h, while PE = ½·(2πrT cosθ)·h. The other half is dissipated as heat.",
+  "kind": "result",
+  "id": "e4df653e-cbf8-462f-91ff-d35b08c75d8f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "For a given liquid and fixed θ, the mass of liquid raised in a capillary is proportional to",
+  "formula": "m = (2πrT cosθ)/g",
+  "options": [
+   "r²",
+   "1/r",
+   "r",
+   "r⁰ (independent of r)"
+  ],
+  "answer": 2,
+  "explain": "m = ρπr²h with h ∝ 1/r, so m ∝ r.",
+  "kind": "result",
+  "id": "0ec3c2d1-06a1-47d4-8296-c477d513dc42",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Two liquids have the same T and θ, with densities in ratio 1 : 2. In the same tube the rise ratio is",
+  "formula": "h ∝ 1/ρ",
+  "options": [
+   "1 : 2",
+   "2 : 1",
+   "1 : 4",
+   "1 : 1"
+  ],
+  "answer": 1,
+  "explain": "h ∝ 1/ρ, so the denser liquid rises half as much, giving 2 : 1.",
+  "kind": "result",
+  "id": "d90a8674-14e2-4d95-89d3-d9b950f8ed72",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "A lift moves up with constant velocity. The capillary rise of water in a tube inside it",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Is unchanged",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "There is no acceleration, so g_eff = g and h is unchanged.",
+  "kind": "concept",
+  "id": "38625da7-d437-48f8-86db-d51652c6efcf",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "For pure water and clean glass, the contact angle is approximately",
+  "formula": "",
+  "options": [
+   "0°",
+   "45°",
+   "90°",
+   "135°"
+  ],
+  "answer": 0,
+  "explain": "Water wets clean glass almost perfectly, so θ ≈ 0° and cosθ ≈ 1.",
+  "kind": "fact",
+  "id": "eeb51d79-5c19-4817-b8a9-f73b42dd833f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "The Jurin height of a liquid in a capillary does NOT depend on the",
+  "formula": "",
+  "options": [
+   "Tube radius",
+   "Surface tension",
+   "Liquid density",
+   "Length of tube above the liquid (if long enough)"
+  ],
+  "answer": 3,
+  "explain": "h = 2T cosθ/ρgr depends only on T, θ, ρ, g and r, not on the tube length.",
+  "kind": "concept",
+  "id": "45af2e6c-2ec6-480b-807e-c750af492955",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "For a given liquid and θ, the product h·r in Jurin's law has dimensions of:",
+  "formula": "hr = 2T cosθ / ρg",
+  "options": [
+   "[L]",
+   "[L²]",
+   "[L³]",
+   "[L⁻¹]"
+  ],
+  "answer": 1,
+  "explain": "T/(ρg) has dimension (MT⁻²)/(ML⁻³·LT⁻²) = L². So h·r has dimension L².",
+  "kind": "unit",
+  "id": "4a102ea3-66aa-4fba-8770-fbccc22b640c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "A capillary dipped in water is in a car accelerating horizontally with a. The rise h:",
+  "formula": "g_eff = √(g² + a²)",
+  "options": [
+   "Increases, as g_eff = √(g²+a²)",
+   "Decreases, as g_eff = √(g²+a²)",
+   "Stays same, as a is horizontal",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "g_eff > g, so h = 2Tcosθ/(ρ g_eff r) decreases.",
+  "kind": "concept",
+  "id": "723ca940-8f3f-43b8-a9ef-4623be3373b7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Open cylindrical tank drains via a small bottom hole. If the initial water height is made 4 times, drain time becomes:",
+  "formula": "t = (A/a)√(2H/g)",
+  "options": [
+   "Doubled",
+   "4 times",
+   "Unchanged",
+   "16 times"
+  ],
+  "answer": 0,
+  "explain": "Total drain time t ∝ √H, so 4 times the height gives 2 times the time.",
+  "kind": "result",
+  "id": "ae09cdb9-0a9d-4c0d-b0d6-000d68664c8e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed"
+ },
+ {
+  "prompt": "Re = ρvD/η. If the fluid's viscosity η is doubled, the critical velocity v_c becomes:",
+  "formula": "v_c = Re_c·η/(ρD)",
+  "options": [
+   "Doubled",
+   "Halved",
+   "Unchanged",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "v_c ∝ η at fixed ρ and D, so doubling η doubles v_c.",
+  "kind": "formula",
+  "id": "9e5e0d6b-dbeb-48ce-841a-12d75c58d5cf",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number"
+ },
+ {
+  "prompt": "For flow through a pipe, the flow is generally turbulent when Reynolds number exceeds about:",
+  "formula": "",
+  "options": [
+   "Re > 3000",
+   "Re > 100",
+   "Re > 1",
+   "Re > 500"
+  ],
+  "answer": 0,
+  "explain": "Re < 1000 laminar, 1000–2000 unstable, Re > 3000 turbulent.",
+  "kind": "fact",
+  "id": "a619b2d5-a3ba-4043-ae1a-0b4e36125a08",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number"
+ },
+ {
+  "prompt": "Soap bubble of radius r formed inside a liquid at depth h. Pressure of air inside is:",
+  "formula": "P = P₀ + hρg + 4T/r",
+  "options": [
+   "P₀ + hρg + 2T/r",
+   "P₀ + hρg + 4T/r",
+   "P₀ + hρg + 8T/r",
+   "P₀ + 4T/r"
+  ],
+  "answer": 1,
+  "explain": "A soap film has two surfaces, so excess pressure 4T/r is added to the pressure at depth h.",
+  "kind": "formula",
+  "id": "7fc492b7-3c16-4b48-9e42-be70a39014d2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Two soap bubbles of equal radii touch each other. Their common film is:",
+  "formula": "",
+  "options": [
+   "Plane",
+   "Bulging into the first bubble",
+   "Bulging into the second bubble",
+   "Hemispherical"
+  ],
+  "answer": 0,
+  "explain": "Equal pressures on both sides give r = r₁r₂/(r₂−r₁) → ∞, so the film is flat.",
+  "kind": "result",
+  "id": "13f6e317-15b4-415d-808e-9bb272e3e493",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "For a soap bubble, a graph of excess pressure ΔP against 1/R is:",
+  "formula": "ΔP = 4T·(1/R)",
+  "options": [
+   "Parabola",
+   "Straight line through origin, slope 4T",
+   "Straight line through origin, slope 2T",
+   "Rectangular hyperbola"
+  ],
+  "answer": 1,
+  "explain": "ΔP = 4T/R is linear in 1/R, with slope 4T and passing through the origin.",
+  "kind": "graph",
+  "id": "b7e1263a-bf40-4c0c-a861-176c030166e6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Excess pressure inside a bubble equals the rate of change of surface energy U with volume V:",
+  "formula": "ΔP = dU/dV",
+  "options": [
+   "ΔP = U/V",
+   "ΔP = dV/dU",
+   "ΔP = dU/dV",
+   "ΔP = U·dV"
+  ],
+  "answer": 2,
+  "explain": "Energy balance for expansion: ΔP·dV = dU (e.g. soap bubble: 8πTR·dR / 4πR²·dR gives 2T/R per surface ×2).",
+  "kind": "concept",
+  "id": "e70eda7e-306f-405d-9567-29c3b681756e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Two liquid drops of radii r₁ and r₂ coalesce into one drop of radius R. Which relation holds?",
+  "formula": "",
+  "options": [
+   "R³ = r₁³ + r₂³",
+   "R² = r₁² + r₂²",
+   "R = r₁ + r₂",
+   "R = r₁r₂/(r₁ + r₂)"
+  ],
+  "answer": 0,
+  "explain": "The liquid is incompressible, so total volume is conserved: (4/3)πR³ = (4/3)π(r₁³ + r₂³).",
+  "kind": "result",
+  "id": "1f7bd0f8-d1b8-4645-8263-cc97e11e2ab1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "An air bubble of radius r is at depth h in a liquid of density ρ. Excess pressure of the air over the liquid is:",
+  "formula": "",
+  "options": [
+   "2T/r",
+   "4T/r",
+   "2T/r + hρg",
+   "T/r"
+  ],
+  "answer": 0,
+  "explain": "An air bubble in a liquid has only one surface, so ΔP = 2T/r. The depth h is not included in the excess pressure.",
+  "kind": "concept",
+  "id": "9ab8d8a3-4597-4857-bc16-ca30c899c480",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "A capillary tilted at angle α to the vertical is dipped in water. The vertical height of the water column:",
+  "formula": "",
+  "options": [
+   "Unchanged, equal to h",
+   "Increases to h/cosα",
+   "Decreases to h cosα",
+   "Decreases to h sinα"
+  ],
+  "answer": 0,
+  "explain": "Vertical height is fixed by T, ρ, r, θ. Only the length along the tube increases, to h/cosα.",
+  "kind": "concept",
+  "id": "8cd50a55-a216-4128-af78-95463224ed28",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "Two halves of a soap bubble of radius R are held together by surface tension. The force at the rim is:",
+  "formula": "F = ΔP·πR² = 4πRT",
+  "options": [
+   "2πRT",
+   "4πRT",
+   "8πRT",
+   "πRT"
+  ],
+  "answer": 1,
+  "explain": "Two surfaces each pull 2πRT along the rim, so F = 4πRT, which balances (4T/R)·πR².",
+  "kind": "result",
+  "id": "c8ccbe11-2c7f-41b6-8cc4-62951af53b9b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Soap bubbles radii r₁, r₂ merge isothermally in air at P₀ into radius r. Surface tension T equals:",
+  "formula": "T = P₀(r³ − r₁³ − r₂³) / 4(r₁² + r₂² − r²)",
+  "options": [
+   "P₀(r³ − r₁³ − r₂³) / 4(r₁² + r₂² − r²)",
+   "P₀(r² − r₁² − r₂²) / 4(r₁³ + r₂³ − r³)",
+   "P₀(r₁³ + r₂³ − r³) / 4(r² − r₁² − r₂²)",
+   "P₀(r³ − r₁³ − r₂³) / 8(r₁² + r₂² − r²)"
+  ],
+  "answer": 0,
+  "explain": "Apply PV = constant: (P₀+4T/r)r³ = Σ(P₀+4T/rᵢ)rᵢ³, giving this result.",
+  "kind": "formula",
+  "id": "746d17f3-843e-48d6-a318-feff07b9dd58",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "A soap bubble blown at a tube's end is left with the tube open to the atmosphere. The bubble will:",
+  "formula": "",
+  "options": [
+   "Stay at the same size",
+   "Collapse as air flows out",
+   "Grow larger slowly",
+   "Become a hemisphere and stay"
+  ],
+  "answer": 1,
+  "explain": "Inside pressure is P₀ + 4T/R, above P₀, so air escapes through the tube and the bubble shrinks.",
+  "kind": "concept",
+  "id": "b84494c5-7dfd-45db-a8aa-95298f76a264",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "Two immiscible liquids in a U-tube stand h₁, h₂ above their common interface level. Then:",
+  "formula": "h₁ρ₁ = h₂ρ₂",
+  "options": [
+   "h₁ρ₁ = h₂ρ₂",
+   "h₁ρ₂ = h₂ρ₁",
+   "h₁ = h₂",
+   "h₁ρ₁² = h₂ρ₂²"
+  ],
+  "answer": 0,
+  "explain": "Equal pressure at the interface level gives ρ₁gh₁ = ρ₂gh₂, so the denser liquid has the shorter column.",
+  "kind": "result",
+  "id": "41a6586d-3168-47ce-9844-4cbfb4e2119e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "Vessels of different shapes, same base area, same liquid filled to same height. Force on the base is:",
+  "formula": "F = ρgh·A",
+  "options": [
+   "Greatest in the vessel widest at top",
+   "Greatest in the vessel narrowest at top",
+   "Equal for all vessels",
+   "Equal to liquid's weight in each vessel"
+  ],
+  "answer": 2,
+  "explain": "Hydrostatic paradox: base pressure ρgh depends only on depth, so F = ρghA is the same; shape is irrelevant.",
+  "kind": "concept",
+  "id": "e830fa9a-a76f-4e34-a130-5b1c3cc37903",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth"
+ },
+ {
+  "prompt": "Extra pressure ΔP is applied to an enclosed static liquid. The pressure increase at any other point is:",
+  "formula": "",
+  "options": [
+   "Zero away from the piston",
+   "ΔP, same at every point",
+   "ΔP + ρgh at depth h",
+   "ΔP reduced with distance"
+  ],
+  "answer": 1,
+  "explain": "Pascal's law: an external pressure change is transmitted undiminished to every point of the enclosed fluid.",
+  "kind": "concept",
+  "id": "34674a84-e25e-4a49-8972-3bd225873c04",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "Air bubble trapped in hydraulic brake fluid gives a 'spongy' pedal because air is:",
+  "formula": "",
+  "options": [
+   "Compressible, absorbing pedal pressure",
+   "Lighter, so it rises in the line",
+   "Viscous, so it resists flow",
+   "Unable to transmit any pressure"
+  ],
+  "answer": 0,
+  "explain": "Air compresses, so part of the pedal effort is lost and the transmitted pressure falls.",
+  "kind": "concept",
+  "id": "5d961578-9281-4227-b96d-e13826d45808",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines"
+ },
+ {
+  "prompt": "In Newton's law of viscosity, the velocity gradient du/dy has SI unit:",
+  "formula": "τ = η·(du/dy)",
+  "options": [
+   "m·s⁻¹",
+   "s⁻¹",
+   "m²·s⁻¹",
+   "N·s"
+  ],
+  "answer": 1,
+  "explain": "du/dy = (m/s)/m = s⁻¹, so its dimension is T⁻¹.",
+  "kind": "unit",
+  "id": "3afccfbd-d7f8-4c32-b134-191a6cd76029",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity"
+ },
+ {
+  "prompt": "In viscous flow through a pipe, the fluid layer in contact with the pipe wall has velocity:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Equal to the average velocity",
+   "Half of v_max",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "The layer touching the wall sticks to it (no-slip), so its velocity is zero.",
+  "kind": "concept",
+  "id": "baf706d7-795f-4369-8698-7051fd210aa2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity"
+ },
+ {
+  "prompt": "An air bubble (negligible density) rises in a liquid of density σ. Its terminal velocity is:",
+  "formula": "vₜ = 2r²(ρ−σ)g/9η with ρ ≈ 0",
+  "options": [
+   "2r²σg/9η, upward",
+   "2r²σg/9η, downward",
+   "2r²(σ−1)g/9η, upward",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Upthrust far exceeds weight, so the bubble rises with |vₜ| = 2r²σg/9η.",
+  "kind": "fact",
+  "id": "0b98bce4-ae50-40f5-85ad-c1696b80a14f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "A sphere of density ρ is released from rest in a liquid of density σ < ρ. Its initial acceleration is:",
+  "formula": "a₀ = g(1 − σ/ρ)",
+  "options": [
+   "g",
+   "g(1 − σ/ρ)",
+   "g(1 − ρ/σ)",
+   "gσ/ρ"
+  ],
+  "answer": 1,
+  "explain": "Drag is zero at release, so ρVa = (ρ−σ)Vg, which gives a = g(1−σ/ρ).",
+  "kind": "result",
+  "id": "bdd8d8a5-8fb5-403f-94b3-abe5a3886176",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Spheres of radii 1:2 move at the same low speed in the same fluid. Ratio of Stokes' drag forces:",
+  "formula": "F = 6πηrv",
+  "options": [
+   "1:4",
+   "1:2",
+   "1:8",
+   "1:1"
+  ],
+  "answer": 1,
+  "explain": "At fixed v, drag is linear in r, so the ratio is 1:2.",
+  "kind": "result",
+  "id": "68b22b40-be86-48d2-9749-b8bc7b9b9f0c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Same-material spheres of radii 1:2 fall at terminal velocity in the same liquid. Ratio of viscous forces:",
+  "formula": "F = (4/3)πr³(ρ−σ)g",
+  "options": [
+   "1:2",
+   "1:4",
+   "1:16",
+   "1:8"
+  ],
+  "answer": 3,
+  "explain": "At terminal velocity drag equals weight minus upthrust, which is ∝ r³, so 1:8.",
+  "kind": "result",
+  "id": "85c6601b-5641-41c1-b8d8-1cc7335a816d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "A liquid is heated slowly. The terminal velocity of a steel ball falling in it:",
+  "formula": "vₜ ∝ 1/η",
+  "options": [
+   "Decreases",
+   "Remains unchanged",
+   "Increases",
+   "First falls then rises"
+  ],
+  "answer": 2,
+  "explain": "Heating lowers the viscosity of a liquid, and vₜ ∝ 1/η, so vₜ increases.",
+  "kind": "trend",
+  "id": "87a2a5a2-99c1-4311-ae58-34ed5d55a024",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Equal spheres of density 3 and 2 g/cc fall in a liquid of 1 g/cc. Ratio of their terminal speeds is:",
+  "formula": "vₜ ∝ (ρ − σ)",
+  "options": [
+   "3 : 2",
+   "2 : 1",
+   "9 : 4",
+   "3 : 1"
+  ],
+  "answer": 1,
+  "explain": "vₜ ∝ (ρ−σ) for equal radii, so (3−1):(2−1) = 2:1.",
+  "kind": "result",
+  "id": "eab1da30-d5ba-4ed7-b44f-eabdfb0daf8f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity"
+ },
+ {
+  "prompt": "Re = ρvD/η. Written with kinematic viscosity ν = η/ρ, the Reynolds number becomes:",
+  "formula": "Re = ρvD/η, ν = η/ρ",
+  "options": [
+   "vD/ν",
+   "vν/D",
+   "νD/v",
+   "ν/(vD)"
+  ],
+  "answer": 0,
+  "explain": "Since ρ/η = 1/ν, Re = vD/ν. Re is inversely proportional to the kinematic viscosity.",
+  "kind": "formula",
+  "id": "a9436eb4-73de-4010-be4d-977e8d5fb48e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number"
+ },
+ {
+  "prompt": "In a pipe, the speed is doubled and the diameter halved, same fluid. The Reynolds number:",
+  "formula": "Re ∝ vD",
+  "options": [
+   "Becomes four times",
+   "Is unchanged",
+   "Becomes half",
+   "Becomes double"
+  ],
+  "answer": 1,
+  "explain": "Re ∝ vD for the same fluid. Doubling v and halving D leaves vD, and hence Re, unchanged.",
+  "kind": "concept",
+  "id": "69243c49-eab9-4481-bce0-227f68ade5db",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number"
+ },
+ {
+  "prompt": "Dissolving a highly soluble salt like NaCl in water generally makes its surface tension:",
+  "formula": "",
+  "options": [
+   "Increase",
+   "Decrease",
+   "Remain exactly unchanged",
+   "Become zero"
+  ],
+  "answer": 0,
+  "explain": "Soluble inorganic salts raise surface tension; sparingly soluble organics like soap or detergent lower it.",
+  "kind": "fact",
+  "id": "7e01bc03-5f72-438b-8f90-9fe8f2841528",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "A drop of radius R splits into n identical droplets. Energy supplied against surface tension (tension T) is:",
+  "formula": "W = T·ΔA",
+  "options": [
+   "4πR²T(n^{1/3} − 1)",
+   "4πR²T(n^{1/2} − 1)",
+   "4πR²T(n − 1)",
+   "4πR²T(1 − n^{−1/3})"
+  ],
+  "answer": 0,
+  "explain": "Each droplet has r = R/n^{1/3}, so total area = 4πR²n^{1/3}. W = T(ΔA) = 4πR²T(n^{1/3} − 1).",
+  "kind": "formula",
+  "id": "8a76af5f-7bb8-4ea4-a5e1-e3a3b8595792",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy"
+ },
+ {
+  "prompt": "Excess pressure inside a liquid drop equals what fraction of its surface energy per unit volume?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "3/2",
+   "1/3",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Surface energy per volume = 4πR²T/(4πR³/3) = 3T/R, while ΔP = 2T/R. So ΔP is 2/3 of it.",
+  "kind": "result",
+  "id": "9d9d0abd-952a-4ca0-8a90-c6eae7383b76",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "A soap bubble of radius r lies inside another soap bubble of radius R in air at P₀. Pressure inside the inner one:",
+  "formula": "",
+  "options": [
+   "P₀ + 4T/R + 4T/r",
+   "P₀ + 4T/r",
+   "P₀ + 4T(1/r − 1/R)",
+   "P₀ + 8T/(R + r)"
+  ],
+  "answer": 0,
+  "explain": "The excesses add: the outer bubble gives 4T/R over P₀, and the inner gives a further 4T/r.",
+  "kind": "result",
+  "id": "aee77ab7-d9e3-41c2-a1fd-2bfa220a0498",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles"
+ },
+ {
+  "prompt": "In Jurin's law h = 2T cosθ/ρgr, the height h is measured from the free surface to the:",
+  "formula": "h = 2T cosθ / ρgr",
+  "options": [
+   "Lowest point of the concave meniscus",
+   "Edge where meniscus meets the wall",
+   "Mid-height of the meniscus",
+   "Top end of the tube"
+  ],
+  "answer": 0,
+  "explain": "h is measured to the bottom of the meniscus; the liquid in the meniscus above it is neglected.",
+  "kind": "fact",
+  "id": "aa38b51e-5f81-45ed-8a4c-b215b5dbd123",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ },
+ {
+  "prompt": "For a fixed liquid and tube material, the graph of capillary rise h versus 1/r is:",
+  "formula": "h = (2T cosθ/ρg)·(1/r)",
+  "options": [
+   "Straight line through the origin",
+   "Rectangular hyperbola",
+   "Parabola",
+   "Straight line with negative slope"
+  ],
+  "answer": 0,
+  "explain": "h ∝ 1/r, so h against 1/r is a straight line through the origin (h against r is a hyperbola).",
+  "kind": "graph",
+  "id": "14bc235e-401b-41bc-b879-1c9416b3bbbe",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)"
+ }
+]

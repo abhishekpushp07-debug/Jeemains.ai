@@ -24,18 +24,19 @@ export function useSubjectNavigation<T extends PaperQuestion>(questions: T[]) {
   return { subjects, question, subject, rows, index, select, selectSubject };
 }
 
-export function SubjectTabs({ questions, subject, onSelect, prefix }: { questions: PaperQuestion[]; subject: string; onSelect: (subject: string) => void; prefix: string }) {
+export function SubjectTabs({ questions, subject, onSelect, prefix, wrap }: { questions: PaperQuestion[]; subject: string; onSelect: (subject: string) => void; prefix: string; wrap?: boolean }) {
   const subjects = [...new Set(questions.map(subjectOf))];
-  return <ScrollView testID={`${prefix}-tabs`} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs}>
-    {subjects.map(name => {
-      // Same black selection as every other segmented control in the app.
-      const active = name === subject;
-      return <Press testID={`${prefix}-${subjectId(name)}`} key={name} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={`${name}, ${questions.filter(q => subjectOf(q) === name).length} questions`} onPress={() => onSelect(name)} style={[styles.tab, { backgroundColor: active ? colors.onSurface : colors.custom_card, borderColor: active ? colors.onSurface : colors.custom_cardLine }]}>
-        <T testID={`${prefix}-${subjectId(name)}-label`} w="bold" size={13} color={active ? colors.onSurfaceInverse : colors.onSurface}>{name}</T>
-        <T testID={`${prefix}-${subjectId(name)}-count`} size={11} w="bold" color={active ? colors.custom_qFreshLine : colors.muted}>{questions.filter(q => subjectOf(q) === name).length}</T>
-      </Press>;
-    })}
-  </ScrollView>;
+  const tabs = subjects.map(name => {
+    // Same black selection as every other segmented control in the app.
+    const active = name === subject;
+    return <Press testID={`${prefix}-${subjectId(name)}`} key={name} accessibilityRole="tab" accessibilityState={{ selected: active }} accessibilityLabel={`${name}, ${questions.filter(q => subjectOf(q) === name).length} questions`} onPress={() => onSelect(name)} style={[styles.tab, { backgroundColor: active ? colors.onSurface : colors.custom_card, borderColor: active ? colors.onSurface : colors.custom_cardLine }]}>
+      <T testID={`${prefix}-${subjectId(name)}-label`} w="bold" size={13} color={active ? colors.onSurfaceInverse : colors.onSurface}>{name}</T>
+      <T testID={`${prefix}-${subjectId(name)}-count`} size={11} w="bold" color={active ? colors.custom_qFreshLine : colors.muted}>{questions.filter(q => subjectOf(q) === name).length}</T>
+    </Press>;
+  });
+  // `wrap`: every subject stays in sight on a narrow phone (rows instead of a sideways list).
+  return wrap ? <View testID={`${prefix}-tabs`} style={[styles.tabs, styles.wrap]}>{tabs}</View>
+    : <ScrollView testID={`${prefix}-tabs`} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.tabs}>{tabs}</ScrollView>;
 }
 
 export type QuestionAppearance = { bg: string; fg: string; label: string; icon?: IconName };
@@ -51,7 +52,7 @@ export function QuestionGrid({ questions, onSelect, appearance, prefix }: { ques
   </View>;
 }
 const styles = StyleSheet.create({
-  tabs: { gap: space.sm, paddingVertical: 2 }, tab: { flexDirection: "row", alignItems: "center", justifyContent: "center", minHeight: 44, gap: 8, paddingHorizontal: space.lg, borderRadius: radius.pill, borderWidth: 1 },
+  tabs: { gap: space.sm, paddingVertical: 2 }, wrap: { flexDirection: "row", flexWrap: "wrap" }, tab: { flexDirection: "row", alignItems: "center", justifyContent: "center", minHeight: 44, gap: 8, paddingHorizontal: space.lg, borderRadius: radius.pill, borderWidth: 1 },
   grid: { width: "100%", flexShrink: 1 }, list: { maxHeight: 300 }, listContent: { gap: 8, paddingBottom: 4 }, row: { gap: 8 },
   cell: { width: 44, height: 44, borderRadius: 10, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: colors.borderStrong }, state: { position: "absolute", top: 3, right: 3 },
 });

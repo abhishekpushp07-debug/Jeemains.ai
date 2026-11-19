@@ -1,0 +1,1382 @@
+[
+ {
+  "id": "4b54a402-5262-4cae-ad33-22c59ec22db2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement",
+  "prompt": "Rule: 'If a card has a star, it is blue.' A card is blue. What follows?",
+  "formula": "",
+  "options": [
+   "It has a star",
+   "It is not blue",
+   "Cannot be determined",
+   "It has no star"
+  ],
+  "answer": 2,
+  "explain": "The rule is P→Q. Q being true does not fix P, because the converse is invalid.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "006cdba4-1be6-4e58-8573-d75da482a0d3",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement",
+  "prompt": "Rule: 'If a figure is a square, it is shaded.' A figure is not shaded. Then it is:",
+  "formula": "",
+  "options": [
+   "A square",
+   "A shaded non-square",
+   "Not a square",
+   "Possibly a square"
+  ],
+  "answer": 2,
+  "explain": "The contrapositive of P→Q is ¬Q→¬P, so the figure is not a square.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de417414-0112-41f6-802e-90e949e93a78",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement",
+  "prompt": "Rule: tag A if divisible by 2 or 3 but not both. Which number gets tag A?",
+  "formula": "",
+  "options": [
+   "18",
+   "12",
+   "8",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "'But not both' excludes multiples of 6. 6, 12 and 18 are excluded, and 8 is divisible by 2 only.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "719572ae-12e3-4073-b4f3-6350612c434c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Dots in successive figures: 1, 3, 7, 15, ? How many dots in the next figure?",
+  "formula": "",
+  "options": [
+   "29",
+   "30",
+   "33",
+   "31"
+  ],
+  "answer": 3,
+  "explain": "Each figure has double the previous count plus 1: 15×2+1 = 31.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f34a5968-3333-4aa6-99ed-6f077c98b0e5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of dots: 2, 4, 7, 12, 19, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "29",
+   "30",
+   "31",
+   "28"
+  ],
+  "answer": 1,
+  "explain": "The increments are consecutive primes 2, 3, 5, 7, 11, so 19+11 = 30.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7b77686a-392e-46ed-8c84-c338c3f012d0",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of leaves in each figure: 1, 1, 2, 3, 5, 8, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "13",
+   "14",
+   "12",
+   "11"
+  ],
+  "answer": 0,
+  "explain": "Each count is the sum of the previous two (Fibonacci): 5+8 = 13.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3e4516c0-18e8-47b0-afbb-b84347cdc523",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of arrows in the figures: 1, 2, 6, 24, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "120",
+   "96",
+   "48",
+   "72"
+  ],
+  "answer": 0,
+  "explain": "Multipliers rise by 1 each step (×2, ×3, ×4), so the next is ×5: 24×5 = 120.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b46c332-95ee-461a-87a8-870049a0f345",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of circles in the figures: 2, 5, 10, 17, ? Find the next count.",
+  "formula": "n² + 1",
+  "options": [
+   "26",
+   "25",
+   "28",
+   "24"
+  ],
+  "answer": 0,
+  "explain": "The counts are n²+1 for n = 1, 2, 3, 4, so the fifth is 25+1 = 26.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "96448583-653b-44fd-a559-94be65c4cc6b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of dots in the figures: 3, 6, 4, 8, 6, 12, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "10",
+   "24",
+   "14",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "The rule alternates ×2 and −2: 3→6→4→8→6→12→10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3ee80b34-0b75-41a1-aba9-19ff6c22a825",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of lines in the figures: 2, 6, 3, 5, 4, 4, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Two interleaved series: 2, 3, 4, 5 (rising) and 6, 5, 4 (falling). The 7th term is 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d717d456-4132-4ff1-ae00-d3e1de8a682d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Elements in the figures: 50, 48, 44, 36, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "24",
+   "20",
+   "28",
+   "16"
+  ],
+  "answer": 1,
+  "explain": "The decrements double each time (2, 4, 8, 16), so 36−16 = 20.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7a9b49d1-8423-4a36-9795-893c32c81793",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Odd one out by number of elements: 4, 9, 16, 24, 25",
+  "formula": "",
+  "options": [
+   "25",
+   "24",
+   "16",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "All the others are perfect squares; 24 is not.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "78761fa9-9376-4451-b131-e3836f8229e9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of dots: 1, 3, 6, 10, 15, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "25",
+   "21",
+   "20",
+   "22"
+  ],
+  "answer": 1,
+  "explain": "These are triangular numbers. The increments are 2, 3, 4, 5, 6, so 15+6 = 21.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "069aade4-2273-4a9c-a44a-e5c9297b4c3c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements",
+  "prompt": "Number of elements: 2, 3, 5, 8, ? Each figure adds the two previous counts. Next is:",
+  "formula": "",
+  "options": [
+   "12",
+   "11",
+   "13",
+   "14"
+  ],
+  "answer": 2,
+  "explain": "Each count is the sum of the previous two: 5 + 8 = 13.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "988bb7ba-3377-4138-9151-34e576ed41ee",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements",
+  "prompt": "Element counts: 2, 10, 4, 8, 6, 6, 8, ? Alternate figures add and delete. Next is:",
+  "formula": "",
+  "options": [
+   "10",
+   "2",
+   "4",
+   "5"
+  ],
+  "answer": 2,
+  "explain": "Odd positions go 2, 4, 6, 8 (+2); even positions go 10, 8, 6, 4 (−2). Next is 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e20e7a5e-7206-429a-be94-ce77ae2f3081",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements",
+  "prompt": "Number of dots in successive figures: 2, 3, 5, 7, ? The counts follow a special sequence. Next is:",
+  "formula": "",
+  "options": [
+   "12",
+   "11",
+   "10",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "The counts are consecutive primes, and the prime after 7 is 11.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c59028d4-1bfc-45a1-a5e6-fb2dbf1554eb",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "4, 8, 6, 12, 10, 20, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "40",
+   "16",
+   "22",
+   "18"
+  ],
+  "answer": 3,
+  "explain": "The operations alternate ×2, −2, ×2, −2, ×2, −2. So 20 − 2 = 18.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a7f46994-9a8e-4380-89f2-5dc2b4466b41",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "1, 8, 9, 64, 25, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "100",
+   "125",
+   "36",
+   "216"
+  ],
+  "answer": 3,
+  "explain": "Odd places are squares (1², 3², 5²); even places are cubes (2³, 4³, 6³). 6³ = 216.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a7fa972b-4404-4783-b6d0-58dcd5fa7344",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "1, 100, 2, 90, 3, 80, 4, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "70",
+   "85",
+   "60",
+   "75"
+  ],
+  "answer": 0,
+  "explain": "One subseries rises by 1 (1,2,3,4); the other falls by 10 (100,90,80,70).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa70b5c6-255e-418b-8c16-2b9ff9f925e2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "3, 9, 4, 16, 5, 25, 6, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "12",
+   "49",
+   "30",
+   "36"
+  ],
+  "answer": 3,
+  "explain": "The pattern alternates n and n²: 3,3²; 4,4²; 5,5²; 6,6². So the next term is 36.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5322e3f1-24b4-4231-965f-665c2de5c090",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "3, 6, 7, 14, 15, 30, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "60",
+   "31",
+   "32",
+   "45"
+  ],
+  "answer": 1,
+  "explain": "The operations alternate ×2, +1, ×2, +1, ×2, +1. So 30 + 1 = 31.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5f17582-b024-4081-b7af-cdef25b00399",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "Sides of successive polygons: 3, 4, 7, 11, ? How many sides does the next polygon have?",
+  "formula": "",
+  "options": [
+   "18",
+   "19",
+   "15",
+   "16"
+  ],
+  "answer": 0,
+  "explain": "Each term is the sum of the previous two, so 7 + 11 = 18.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3cc458e7-1e23-4d07-88c9-8413a5690a88",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "The midpoints of consecutive sides of a non-square rectangle are joined. The inner figure is a:",
+  "formula": "",
+  "options": [
+   "Rhombus",
+   "Equilateral triangle",
+   "Square",
+   "Rectangle"
+  ],
+  "answer": 0,
+  "explain": "Each side of the inner figure is half a diagonal, and the diagonals are equal, so all four sides are equal. It is a rhombus.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "940cd8cc-af96-4695-b963-4ebadfe1a884",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "The smallest rotation (>0°) mapping a non-square rectangle onto itself is:",
+  "formula": "",
+  "options": [
+   "45°",
+   "180°",
+   "360°",
+   "90°"
+  ],
+  "answer": 1,
+  "explain": "A rectangle has only 2-fold rotational symmetry, so 180°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "716d8bfa-20e5-42e9-9059-241bc82c8d83",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "Rotating a figure 450° clockwise is the same as rotating it:",
+  "formula": "450° − 360° = 90°",
+  "options": [
+   "45° clockwise",
+   "90° clockwise",
+   "180° clockwise",
+   "90° anticlockwise"
+  ],
+  "answer": 1,
+  "explain": "A full 360° turn changes nothing, so 450° leaves 90° clockwise.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da96fbfe-6e1a-444e-bb27-5b250b94968d",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "A figure turns 90° clockwise, then 270° clockwise. The net effect is:",
+  "formula": "90° + 270° = 360°",
+  "options": [
+   "270° clockwise",
+   "90° anticlockwise",
+   "Back to original position",
+   "180° turn"
+  ],
+  "answer": 2,
+  "explain": "The total is 360°, a full turn, so the figure is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ac6fe50-33e6-4581-ae10-905fe3dc4e97",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "Arrow series: N, NW, W, ? Each step turns 45° anticlockwise. Next?",
+  "formula": "",
+  "options": [
+   "South-West",
+   "South",
+   "North-East",
+   "South-East"
+  ],
+  "answer": 0,
+  "explain": "Another 45° anticlockwise from W gives SW.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a1735dcd-a679-4893-a121-b649eeed21f6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of dots in successive figures: 2, 3, 5, 7, 11, ? Find the next count.",
+  "formula": "",
+  "options": [
+   "15",
+   "13",
+   "12",
+   "14"
+  ],
+  "answer": 1,
+  "explain": "The counts are consecutive primes, and the prime after 11 is 13.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fa8a42d5-2a61-4b73-b0ec-9749349e113f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements",
+  "prompt": "Dots in successive figures: 1, 4, 9, 16, ? How many dots in the next figure?",
+  "formula": "n²",
+  "options": [
+   "36",
+   "24",
+   "20",
+   "25"
+  ],
+  "answer": 3,
+  "explain": "Counts are perfect squares 1², 2², 3², 4²; next is 5² = 25.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b9218a7-939b-4418-a2c9-910c315d7366",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "2, 6, 4, 12, 8, 24, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "48",
+   "16",
+   "32",
+   "36"
+  ],
+  "answer": 1,
+  "explain": "Odd places 2, 4, 8 double → 16; even places 6, 12, 24 also double.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a757650-97dd-4ea3-9054-3cdcc7605fe5",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "2, 4, 8, 10, 20, 22, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "46",
+   "44",
+   "24",
+   "42"
+  ],
+  "answer": 1,
+  "explain": "Operations alternate +2, ×2, +2, ×2, … so 22 × 2 = 44.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "114d2c56-4a6e-4076-ace4-a8519830205f",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Alternating/repeating pattern rules",
+  "prompt": "10, 15, 12, 17, 14, 19, ? Find the next term.",
+  "formula": "",
+  "options": [
+   "21",
+   "24",
+   "16",
+   "18"
+  ],
+  "answer": 2,
+  "explain": "Odd places fall by 2 only: 10, 12, 14 → 16; even places 15, 17, 19 rise by 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "93d44d5b-9886-4767-bf1c-bd91f9322905",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement",
+  "prompt": "Rule: 'If a bag is red, it is large.' A bag is not red. Then the bag is:",
+  "formula": "",
+  "options": [
+   "Size cannot be determined",
+   "Small",
+   "Not large",
+   "Large"
+  ],
+  "answer": 0,
+  "explain": "Denying the antecedent proves nothing; a non-red bag may or may not be large.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e29b880e-7da7-462c-8241-2b5cd4a73593",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "Rotating a figure 180° clockwise gives the same result as rotating it:",
+  "formula": "",
+  "options": [
+   "270° clockwise",
+   "90° anticlockwise",
+   "180° anticlockwise",
+   "360° anticlockwise"
+  ],
+  "answer": 2,
+  "explain": "A half turn lands in the same place in either direction: +180° ≡ −180°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "206c4c90-65aa-4f84-84bb-42d389a88b72",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "An arrow points up and is turned 90° clockwise six times in a row. It now points:",
+  "formula": "6 × 90° = 540° ≡ 180°",
+  "options": [
+   "Right",
+   "Left",
+   "Up",
+   "Down"
+  ],
+  "answer": 3,
+  "explain": "540° clockwise is one full turn plus 180°, so Up becomes Down.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "388713d6-e7ed-4c70-8dba-6feecc79d80a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "A dot at the midpoint of a square's bottom side turns 90° clockwise. It is now at the midpoint of the:",
+  "formula": "",
+  "options": [
+   "Right side",
+   "Bottom side",
+   "Top side",
+   "Left side"
+  ],
+  "answer": 3,
+  "explain": "Clockwise order of sides: top → right → bottom → left, so bottom goes to left.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d0bca16-1b09-4039-8d96-55b364563d81",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure",
+  "prompt": "A figure is rotated 270° clockwise. An element at its top-left corner moves to the:",
+  "formula": "270° clockwise = 90° anticlockwise",
+  "options": [
+   "Bottom-left",
+   "Bottom-right",
+   "Top-left",
+   "Top-right"
+  ],
+  "answer": 0,
+  "explain": "270° clockwise equals 90° anticlockwise, which takes top-left to bottom-left.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "feda5e92-8898-483c-ad4e-41c43b41d1b1",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure",
+  "prompt": "A figure is reflected in the diagonal joining top-right and bottom-left. Top-left element goes to:",
+  "formula": "",
+  "options": [
+   "Stays top-left",
+   "Top-right",
+   "Bottom-left",
+   "Bottom-right"
+  ],
+  "answer": 3,
+  "explain": "Reflection in the anti-diagonal swaps top-left and bottom-right; the other two corners lie on the axis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "58df14be-5379-4a22-bf39-00920b7f151c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure",
+  "prompt": "A dot moves clockwise through 8 points (4 corners and 4 side-midpoints alternately), one point per step, from top-left. After 3 steps?",
+  "formula": "",
+  "options": [
+   "Bottom-right corner",
+   "Top-right corner",
+   "Middle of top side",
+   "Middle of right side"
+  ],
+  "answer": 3,
+  "explain": "Order: TL → top-mid → TR → right-mid, so step 3 gives the middle of the right side.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bebdc8f1-07e0-4deb-84bf-5c7cdd262725",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure",
+  "prompt": "2×2 grid: A B on top, C D below. Each step all four move one cell clockwise. Top row after 1 step?",
+  "formula": "",
+  "options": [
+   "C A",
+   "D C",
+   "B D",
+   "B A"
+  ],
+  "answer": 0,
+  "explain": "Clockwise: A→top-right, B→bottom-right, D→bottom-left, C→top-left. Top row = C A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5c4f26df-60fa-480f-86a2-9f42602ad28a",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure",
+  "prompt": "A figure is rotated 90° clockwise, then reflected about the vertical axis. A top-left element ends at:",
+  "formula": "",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Bottom-right",
+   "Top-right"
+  ],
+  "answer": 0,
+  "explain": "Rotation takes top-left to top-right; the vertical-axis flip takes it back to top-left.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83fd07c7-0810-4f6c-9135-470d29fd2c4c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure",
+  "prompt": "A dot in a row of 3 cells starts in cell 1, moves 1 right per step and reverses at the ends (no wrap). Cell after 5 steps?",
+  "formula": "",
+  "options": [
+   "Cell 1",
+   "Cell 3",
+   "Cell 2",
+   "Cell 4"
+  ],
+  "answer": 2,
+  "explain": "Path: 1→2→3→2→1→2, so it is in cell 2 after 5 steps.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f8bb165e-a5f4-4421-9f61-9fd4d28652dc",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Position shift of elements in figure",
+  "prompt": "A row of 5 cells is reflected left-to-right (mirror about the middle). An element in cell 2 moves to:",
+  "formula": "cell k → cell 6 − k",
+  "options": [
+   "Cell 1",
+   "Cell 5",
+   "Cell 4",
+   "Cell 3"
+  ],
+  "answer": 2,
+  "explain": "Mirror maps cell k to 6 − k, so cell 2 goes to cell 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "084865ae-11c9-43cd-afe9-4268e4faf453",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "The midpoints of consecutive sides of a non-square rhombus are joined. The inner figure is a:",
+  "formula": "",
+  "options": [
+   "Kite",
+   "Rectangle",
+   "Rhombus",
+   "Square"
+  ],
+  "answer": 1,
+  "explain": "Diagonals of a rhombus are perpendicular, so the midpoint figure is a rectangle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "33ee754e-c3cc-43fd-9a98-a27058e39b69",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "Sides in successive figures: 3, 6, 5, 10, 9, ? How many sides does the next figure have?",
+  "formula": "",
+  "options": [
+   "19",
+   "17",
+   "16",
+   "18"
+  ],
+  "answer": 3,
+  "explain": "The pattern alternates ×2, −1: 3→6→5→10→9→18.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dfde463e-7678-4305-b8ed-e9687a270ac2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "Pick the odd one out: square, rectangle, rhombus, trapezium.",
+  "formula": "",
+  "options": [
+   "Square",
+   "Rhombus",
+   "Rectangle",
+   "Trapezium"
+  ],
+  "answer": 3,
+  "explain": "The other three have two pairs of parallel sides. A trapezium has only one pair.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbf8d1d8-7a13-40c1-a101-d0b3711c9374",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements",
+  "prompt": "Rule: Fig 3 keeps only elements common to both figures. A = {●,▲,■,◆}, B = {▲,◆,★,✚}. Elements in Fig 3?",
+  "formula": "",
+  "options": [
+   "4",
+   "6",
+   "1",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "Common elements are ▲ and ◆, so 2 remain.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cf37ee3b-c510-4351-b6eb-99c214e97e24",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "Shaded parts in successive figures: 2, 6, 12, 20, … Next figure?",
+  "formula": "n(n+1): differences 4, 6, 8, 10",
+  "options": [
+   "26",
+   "32",
+   "30",
+   "28"
+  ],
+  "answer": 2,
+  "explain": "Differences rise by 2 (4, 6, 8), so the next is +10 → 30.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47097630-7f2d-41d2-885b-fe8ac5d5e4ba",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "Shaded parts in successive figures: 1, 3, 6, 10, … Next figure?",
+  "formula": "Triangular numbers",
+  "options": [
+   "16",
+   "14",
+   "15",
+   "13"
+  ],
+  "answer": 2,
+  "explain": "The differences are 2, 3, 4, so the next is +5 → 15.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3046228-441f-4bc3-a7a2-8d59cbd08620",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "Shaded parts in successive figures: 1, 8, 27, … Next figure?",
+  "formula": "n³",
+  "options": [
+   "64",
+   "36",
+   "54",
+   "81"
+  ],
+  "answer": 0,
+  "explain": "The counts are perfect cubes: 1³, 2³, 3³, so the next is 4³ = 64.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "51fbac64-7d7b-4077-9479-f8aeba99bbd6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "Shaded parts in successive figures: 20, 10, 12, 6, 8, … Next figure?",
+  "formula": "Alternately ÷2 and +2",
+  "options": [
+   "10",
+   "6",
+   "2",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "The steps alternate ÷2 and +2. After 8 comes ÷2 → 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22716ac7-6392-4724-a7f3-1eeb3828519e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "Octagon parts numbered 1–8 clockwise. Shaded part moves 3 places per step: 1, 4, 7, … Next part?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "2",
+   "10"
+  ],
+  "answer": 2,
+  "explain": "7 + 3 = 10, and 10 − 8 = 2 after wrapping around.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "653226ed-e05c-407f-8988-d4034f3a8d09",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "The top-right quadrant is shaded. The figure is rotated 90° anticlockwise. Which quadrant is shaded now?",
+  "formula": "Anticlockwise: TR → TL → BL → BR",
+  "options": [
+   "Top-left",
+   "Bottom-left",
+   "Top-right",
+   "Bottom-right"
+  ],
+  "answer": 0,
+  "explain": "A 90° anticlockwise turn takes the top-right corner to the top-left.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6c775f38-4b2a-47bc-bd3d-2326eb8587aa",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "Square: shaded corners alternate TL+BR, then TR+BL, repeating. Which pair is shaded in figure 5?",
+  "formula": "",
+  "options": [
+   "TR and BL",
+   "BL and BR",
+   "TL and TR",
+   "TL and BR"
+  ],
+  "answer": 3,
+  "explain": "Odd-numbered figures show TL+BR, so figure 5 matches figure 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e7da8c9a-405b-40e6-b77f-e8e57bbf5338",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shading/colour change rules",
+  "prompt": "XOR overlay: A has 3 shaded parts, B has 2, and B's parts lie within A's. How many are shaded in the result?",
+  "formula": "XOR cancels the common shaded parts",
+  "options": [
+   "1",
+   "3",
+   "2",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "The 2 common parts become white, leaving 3 − 2 = 1 shaded part.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d61235a0-b3e8-4cce-b099-f58a6da0db41",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)",
+  "prompt": "Sizes of a shape: 2, 3, 5, 8, 13, ? Which size comes next?",
+  "formula": "",
+  "options": [
+   "21",
+   "20",
+   "18",
+   "26"
+  ],
+  "answer": 0,
+  "explain": "Each size is the sum of the previous two (Fibonacci-type): 8 + 13 = 21.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2dcf6e3-7031-4d70-9dbb-b91c8bc7911c",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)",
+  "prompt": "Sizes: 100, 90, 79, 67, ? The decrease grows by 1 each step. Next size is:",
+  "formula": "",
+  "options": [
+   "55",
+   "57",
+   "56",
+   "54"
+  ],
+  "answer": 3,
+  "explain": "Decreases are 10, 11, 12, then 13: 67 − 13 = 54.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f12b7b4e-a7a4-417e-b82d-d7d4e77d4dd7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "All diagonals of a regular pentagon are drawn. The central region enclosed by them is a:",
+  "formula": "",
+  "options": [
+   "Square",
+   "Regular hexagon",
+   "Pentagram",
+   "Regular pentagon"
+  ],
+  "answer": 3,
+  "explain": "The diagonals form a pentagram whose inner central region is a smaller regular pentagon.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "45c0ded3-73f3-4f78-b632-089bf9bd0cb4",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Understanding the given rule statement",
+  "prompt": "Rule: each letter shifts back by 3 places in the alphabet. 'DOG' becomes:",
+  "formula": "",
+  "options": [
+   "ALE",
+   "ALD",
+   "GRJ",
+   "ARD"
+  ],
+  "answer": 1,
+  "explain": "D−3=A, O−3=L, G−3=D.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "df4c1577-2ec5-428d-8aeb-870f50e11bf2",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements",
+  "prompt": "Number of elements in figures: 1, 2, 3, 6, 11, ? Each figure equals the sum of the previous three. Next is:",
+  "formula": "Tₙ = Tₙ₋₁ + Tₙ₋₂ + Tₙ₋₃",
+  "options": [
+   "18",
+   "19",
+   "20",
+   "22"
+  ],
+  "answer": 2,
+  "explain": "6 + 11 + 3 = 20; each term is the sum of the three before it (1+2+3=6, 2+3+6=11).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f8dd4bb8-ab47-491c-a42e-0b85a66bc195",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Addition/deletion of lines or elements",
+  "prompt": "Lines in figures: 50, 49, 45, 36, ? Deleted lines are successive perfect squares. Next figure has:",
+  "formula": "deleted: 1², 2², 3², 4², …",
+  "options": [
+   "25",
+   "16",
+   "21",
+   "20"
+  ],
+  "answer": 3,
+  "explain": "Deletions are 1, 4, 9, so the next is 16 and 36 − 16 = 20.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1bc958a5-121e-4d86-adcf-0c2f89518c61",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Size change rules (enlarge/shrink)",
+  "prompt": "Sizes alternate rules: 3, 6, 4, 8, 6, 12, ? Which size comes next?",
+  "formula": "",
+  "options": [
+   "24",
+   "14",
+   "10",
+   "9"
+  ],
+  "answer": 2,
+  "explain": "The steps alternate ×2 and −2: 12 − 2 = 10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "61e8ff14-0014-4682-b86d-d96274ecf5f6",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "Sides of successive polygons: 3, 6, 10, 15, ? How many sides does the next polygon have?",
+  "formula": "Differences: +3, +4, +5, +6",
+  "options": [
+   "22",
+   "19",
+   "20",
+   "21"
+  ],
+  "answer": 3,
+  "explain": "The differences rise by 1 (3, 4, 5, 6), so the next term is 15 + 6 = 21.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97985d1d-25e2-41e2-9d05-96d1a4cbe542",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "An arrow turns 45° anticlockwise each step. After how many steps does it first return to its start?",
+  "formula": "360° ÷ 45° = 8",
+  "options": [
+   "6",
+   "8",
+   "12",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "A full turn of 360° needs 360/45 = 8 steps.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92daef91-72bf-4663-810d-282e38fee42b",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "An arrow points North and is turned 90° clockwise seven times in a row. It now points:",
+  "formula": "7 × 90° = 630° ≡ 270°",
+  "options": [
+   "East",
+   "West",
+   "North",
+   "South"
+  ],
+  "answer": 1,
+  "explain": "630° − 360° = 270° clockwise from North, which is West.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d030f105-a175-43a6-b341-3aa97ff94d76",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Rotation rules (45°/90° clockwise/anticlockwise)",
+  "prompt": "A dot is at the top-right corner and moves 90° anticlockwise per figure. Its corner in figure 7 is:",
+  "formula": "6 turns = 540° ≡ 180°",
+  "options": [
+   "Top-right",
+   "Bottom-left",
+   "Top-left",
+   "Bottom-right"
+  ],
+  "answer": 1,
+  "explain": "Six turns = 540° ≡ 180°, so top-right goes to bottom-left.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc506dfb-a9ea-4cd8-bdfc-ae962f7e4bd7",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Increasing/decreasing count of elements",
+  "prompt": "Number of lines in the figures: 720, 120, 24, 6, ? Find the next count.",
+  "formula": "÷6, ÷5, ÷4, ÷3, ÷2",
+  "options": [
+   "0",
+   "2",
+   "3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "The divisors fall 6, 5, 4, 3, so the next divisor is 2: 6 ÷ 3 = 2 (reverse factorials 6!, 5!, 4!, 3!, 2!).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "04ef902e-6225-4683-9306-6e7b0e955d1e",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "A small square is removed from one corner of a larger square. How many sides does the remaining L-shaped figure have?",
+  "formula": "",
+  "options": [
+   "8",
+   "5",
+   "7",
+   "6"
+  ],
+  "answer": 3,
+  "explain": "The corner notch replaces 2 sides with 4 sides, so the figure gains 2 sides: 4 + 2 = 6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1388f8e-f80d-4ca8-a08b-87a45d4523b9",
+  "subject": "Logical Reasoning",
+  "chapter": "Rule Detection",
+  "topic": "Shape transformation & side-count rules",
+  "prompt": "An equilateral triangle is attached outward on every side of a square. How many sides does the outer outline have?",
+  "formula": "",
+  "options": [
+   "16",
+   "12",
+   "8",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Each square side is replaced by 2 triangle sides: 4 × 2 = 8 sides.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "BITSAT",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
+]

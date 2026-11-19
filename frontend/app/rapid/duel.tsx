@@ -20,11 +20,11 @@ import { RapidText } from "@/src/rapid/RapidText";
 import { GemFlare, gemAt, trailingStreak } from "@/src/rapid/StreakGem";
 import { ErrorBox, Icon, Press, Sheet, T, buzz, tap, withRapid } from "@/src/rapid/ui";
 import { go } from "@/src/rapid/social";
-import { encodePicks, picksFrom, scopeLabel } from "@/src/rapid/scope";
+import { CARD_COUNTS, CARD_SECONDS, encodePicks, getCardCount, isBitsat, picksFrom, scopeLabel } from "@/src/rapid/scope";
 import { ArenaWait, useArenaWait } from "@/src/rapid/ArenaWait";
 
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
-type Params = { mode?: "random" | "ai"; subject?: string; chapter?: string; picks?: string; review?: string; did?: string };
+type Params = { mode?: "random" | "ai"; subject?: string; chapter?: string; picks?: string; review?: string; did?: string; n?: string };
 
 function Duel() {
   const p = useLocalSearchParams();
@@ -45,7 +45,7 @@ function Soon({ at, now }: { at: number; now: () => number }) {
 
 /**
  * One match from start to finish: finding a rival (or waiting on a code), the entry show in step with the server clock,
- * 30 cards against 1 to 4 rivals with the Phoenix streak, then the result. `did` opens a match seated by a Match Room, `review` an old one.
+ * 30, 50 or 100 cards against 1 to 4 rivals with the Phoenix streak, then the result. `did` opens a match seated by a Match Room, `review` an old one.
  */
 function Match() {
   const p = useLocalSearchParams<Params>();
@@ -57,7 +57,7 @@ function Match() {
   const [idx, setIdx] = useState(0);
   const [choice, setChoice] = useState<number | null>(null);
   const [fb, setFb] = useState<any>(null);
-  const [left, setLeft] = useState(15000);
+  const [left, setLeft] = useState(CARD_SECONDS * 1000);
   const [clock, setClock] = useState(0);
   const [streak, setStreak] = useState(0);
   const [flare, setFlare] = useState<GemColor | null>(null);
@@ -67,7 +67,7 @@ function Match() {
   const anchor = useRef({ server: 0, mono: 0 });
   const startedAt = useRef(0), lastTick = useRef(0), hold = useRef(0), sending = useRef(false), outcomes = useRef<string[]>([]);
   const serverNow = () => anchor.current.server + (mono() - anchor.current.mono) / 1000;
-  // Live pushes leave out the 30 cards once this phone has them ("lite"): keep the ones we already hold.
+  // Live pushes leave out the cards once this phone has them ("lite"): keep the ones we already hold.
   const apply = useCallback((v: any) => { anchor.current = { server: v.server_now, mono: mono() }; setD((prev: any) => (v.cards === undefined && prev?.id === v.id ? { ...v, cards: prev.cards } : v)); }, []);
   const seat = useArenaWait(() => setN((x) => x + 1));
 
@@ -76,7 +76,8 @@ function Match() {
     let alive = true;
     if (!uid) return; // wait for sign-in to settle (a cold link would get a 401)
     const picks = picksFrom(p);
-    const create = (mode: "random" | "invite") => rf<any>("/duels", uid, { method: "POST", body: { exam: "JEE", subject: picks[0].subject, picks, mode, name, request_id: reqId.current } });
+    const count = (CARD_COUNTS as readonly number[]).includes(Number(p.n)) ? Number(p.n) : getCardCount();
+    const create = (mode: "random" | "invite") => rf<any>("/duels", uid, { method: "POST", body: { exam: "JEE", subject: picks[0].subject, picks, mode, name, count, request_id: reqId.current } });
     const run = p.review || p.did ? rf<any>(`/duels/${p.review || p.did}`, uid)
       // Practice Rival: open a private match and seat the rival at once, no waiting.
       : p.mode === "ai" ? create("invite").then((v) => (v.status === "waiting" ? rf<any>(`/duels/${v.id}/bot`, uid, { method: "POST", body: {} }) : v))
@@ -114,7 +115,7 @@ function Match() {
 
   const players: MatchPlayer[] = d?.players || [];
   const me = players.find((x) => x.you), opp = players.find((x) => !x.you);
-  const total = d?.total || 30, limit = (d?.seconds_per_card || 15) * 1000;
+  const total = d?.total || 30, limit = (d?.seconds_per_card || CARD_SECONDS) * 1000;
   const ready = d?.status === "ready";
   // The entry show runs on the server clock and ends exactly when card 1 opens, on every phone.
   const showStart = ready ? d.start_at - d.entry_seconds : 0;
@@ -308,7 +309,7 @@ function Match() {
       <View style={styles.top}>
         <CloseButton testID="duel-exit-button" label={inMatch ? "Leave match" : "Close"} onPress={close} />
         <View style={styles.flex}>
-          <T testID="duel-exam-group" w="heavy" size={12} color={arena.aqua} numberOfLines={1}>{(d?.cup_id ? "KNOCKOUT CUP · " : d?.team_mode ? "GANG WAR · " : "") + label.toUpperCase()}</T>
+          <T testID="duel-exam-group" w="heavy" size={12} color={arena.aqua} numberOfLines={1}>{(d?.cup_id ? "KNOCKOUT CUP · " : d?.team_mode ? "GANG WAR · " : "") + (picks.length && picks.every((x: { subject: string }) => isBitsat(x.subject)) ? "BITSAT · " : "") + label.toUpperCase()}</T>
           <T testID="duel-card-counter" w="heavy" size={17} color={arena.text} numberOfLines={1}>{playing ? `Card ${idx + 1} / ${total}` : d?.status === "finished" ? (p.review ? "Match review" : "Match result") : d?.team_mode ? "Gang vs Gang" : players.length > 2 ? `${players.length}-player match` : "1 v 1 match"}</T>
         </View>
         {d?.watchers && d.status === "ready" ? <View testID="duel-watchers" style={styles.watchers}><Icon name="eye" size={14} color={arena.aqua} /><T w="heavy" size={11} color={arena.aqua}>{d.watchers}</T></View> : null}

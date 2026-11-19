@@ -44,7 +44,7 @@ export default function SetDetail() {
       key.current ||= uuid();
       if (!await storage.setItem(startKeyName, key.current)) throw new Error("Device storage is unavailable. Please retry before starting.");
       // Same start_key on every retry of this intent → no duplicate attempts.
-      const a = await post(`/sets/${id}/start`, { start_key: key.current, device_checked: true, preview: false });
+      const a = await post(`/sets/${id}/start`, { start_key: key.current, device_checked: true, preview: false, get_ready: true });
       if (!a?.id) throw new Error("The start could not be confirmed. Your retry key is preserved.");
       void warmAttempt(a.id, a);
       await storage.removeItem(startKeyName);
@@ -101,7 +101,7 @@ export default function SetDetail() {
             {[
               "One correct option per question, or an exact integer where stated. Mark for review and return anytime.",
               s.rules.numeric_rule,
-              minutes ? "The timer starts when the attempt opens and keeps running if you disconnect or leave the app. Only answers the server receives before the deadline are scored." : "Untimed practice — come back to your saved attempt whenever you need.",
+              minutes ? "You get a 60-second get-ready while the whole paper loads. Your clock starts only when you press Begin now or the countdown ends, and keeps running if you disconnect or leave the app. Only answers the server receives before the deadline are scored." : "Untimed practice — come back to your saved attempt whenever you need.",
               s.series_id ? "Live results and solutions are sealed until 11:59 PM IST." : s.solution_kind === "answer_key_only" ? "Submitting is final. Score and supplied answer keys appear after grading. This book has no worked solutions." : "Submitting is final. Your result and supplied solutions appear afterwards.",
               s.test_kind === "chapter" ? "This is chapter practice, not a full exam simulation. Rank estimates are not shown for chapter scores." : null,
             ].filter(Boolean).map((x: any) => (
@@ -114,7 +114,7 @@ export default function SetDetail() {
         {user ? (
           <>
             <Pill testID="set-start-button" size="lg" label={s.attempt?.status === "active" ? "Resume attempt" : "Start attempt"} icon="play" busy={busy} onPress={() => { if (s.attempt?.status === "active") { void warmAttempt(s.attempt.id); router.replace(`/attempt/${s.attempt.id}`); } else void start(); }} />
-            <T testID="set-start-note" size={11} color={colors.custom_eyebrow} style={{ textAlign: "center" }}>Starting accepts the rules above. Your official timer begins when the server opens your attempt.</T>
+            <T testID="set-start-note" size={11} color={colors.custom_eyebrow} style={{ textAlign: "center" }}>Starting accepts the rules above. A 60-second get-ready comes first; your official timer starts after it.</T>
           </>
         ) : <Pill testID="set-signin-button" size="lg" label="Sign in to start" onPress={() => router.push("/entry")} />}
       </ScrollView>

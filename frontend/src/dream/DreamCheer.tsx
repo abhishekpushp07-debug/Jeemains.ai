@@ -178,10 +178,10 @@ function DreamCheer({ win, exam, name, onClose }: { win: CheerWin; exam: DreamEx
     milestones.current = new Set();
     setFired([]);
     setStart(Date.now());
-    clock.value = 0;
-    clock.value = withTiming((COUNTS - 0.001) / COUNTS, { duration: ROUTINE_MS, easing: Easing.linear });
-    drop.value = 0;
-    drop.value = withDelay(BEAT * 1.5, withSpring(1, { damping: 9, stiffness: 90, mass: 0.9 }));
+    clock.set(0);
+    clock.set(withTiming((COUNTS - 0.001) / COUNTS, { duration: ROUTINE_MS, easing: Easing.linear }));
+    drop.set(0);
+    drop.set(withDelay(BEAT * 1.5, withSpring(1, { damping: 9, stiffness: 90, mass: 0.9 })));
     const end = setTimeout(() => setPhase("done"), ROUTINE_MS + 300);
     return () => clearTimeout(end);
   }, [phase, round]); // eslint-disable-line react-hooks/exhaustive-deps

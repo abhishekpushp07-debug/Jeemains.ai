@@ -1,1408 +1,3668 @@
 [
-  {
-    "id": "d242078c-5d0a-4109-9374-a7a50edd6b19",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitance of a parallel plate capacitor",
-    "formula": "C = ε₀A/d",
-    "options": [
-      "ε₀A·d",
-      "ε₀A/d",
-      "ε₀d/A",
-      "A/(ε₀d)"
-    ],
-    "answer": 1,
-    "explain": "C = ε₀A/d; increases with area, decreases with separation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c50d630d-2cac-4806-b283-021ba0833dfb",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Energy stored in a capacitor",
-    "formula": "U = Q²/2C",
-    "options": [
-      "Q²/C",
-      "2Q²/C",
-      "Q/2C",
-      "Q²/2C"
-    ],
-    "answer": 3,
-    "explain": "U = Q²/2C = CV²/2 = QV/2; three equivalent forms.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "13353c82-3bde-4476-afa5-cbc8e86d1e5a",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitors in series: equivalent capacitance",
-    "formula": "1/C = Σ1/Cᵢ",
-    "options": [
-      "C = C₁C₂/(C₁+C₂) always",
-      "1/C = Σ1/Cᵢ",
-      "C = ΣCᵢ",
-      "C = ΣCᵢ/n"
-    ],
-    "answer": 1,
-    "explain": "Series combination: reciprocals add. Charge is same on each capacitor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "39e0ee32-96ea-4c2e-ae47-6c7988dcb157",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitors in parallel: equivalent capacitance",
-    "formula": "C = ΣCᵢ",
-    "options": [
-      "1/C = Σ1/Cᵢ",
-      "C = Cᵢ/n",
-      "C = C₁C₂/(C₁+C₂)",
-      "C = ΣCᵢ"
-    ],
-    "answer": 3,
-    "explain": "Parallel combination: capacitances add directly. Voltage is same on each.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aab7ac57-b2a2-474f-8119-360e703bf3d4",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Effect of dielectric on capacitance",
-    "formula": "C = KC₀",
-    "options": [
-      "C remains same",
-      "C increases K times",
-      "C increases K² times",
-      "C decreases K times"
-    ],
-    "answer": 1,
-    "explain": "Inserting dielectric (K>1) increases C by factor K = εᵣ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bcc33097-be31-445f-ac3d-66d30a128848",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "SI unit of capacitance",
-    "formula": "",
-    "options": [
-      "Joule/Volt",
-      "Coulomb/Joule",
-      "Farad (C/V)",
-      "Henry"
-    ],
-    "answer": 2,
-    "explain": "1 Farad = 1 Coulomb per Volt; F = C V⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "96a2aba5-0847-4aaa-b76a-b5d6b13ba472",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitance of an isolated sphere of radius R",
-    "formula": "C = 4πε₀R",
-    "options": [
-      "4πε₀R²",
-      "4πε₀/R",
-      "4πε₀R",
-      "R/4πε₀"
-    ],
-    "answer": 2,
-    "explain": "C = 4πε₀R; larger sphere holds more charge at same potential.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2a2614d6-4fc6-47bf-a520-390d8eb5e19c",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Energy density in electric field between capacitor plates",
-    "formula": "u = ½ε₀E²",
-    "options": [
-      "½ε₀E²",
-      "E²/2ε₀",
-      "ε₀E²",
-      "½ε₀E"
-    ],
-    "answer": 0,
-    "explain": "Energy per unit volume = ½ε₀E²; SI unit J/m³.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "17c5e085-5cf4-4914-841f-13180aa0bd2f",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Charge on capacitor connected to battery when plate separation doubles",
-    "formula": "C = ε₀A/d",
-    "options": [
-      "Charge quadruples",
-      "Charge unchanged",
-      "Charge doubles",
-      "Charge halves"
-    ],
-    "answer": 3,
-    "explain": "V fixed by battery; C halves (d doubles) so Q = CV halves.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2d150a2d-f298-4cd8-9805-583c52d39e1e",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Energy stored when isolated charged capacitor has plate separation doubled",
-    "formula": "U = Q²/2C",
-    "options": [
-      "Energy doubles",
-      "Energy quadruples",
-      "Energy unchanged",
-      "Energy halves"
-    ],
-    "answer": 0,
-    "explain": "Q constant (isolated); C halves so U = Q²/2C doubles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9e2018d6-c092-41e2-a18b-6c960a32f690",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Common potential when two charged capacitors are connected",
-    "formula": "V = (C₁V₁+C₂V₂)/(C₁+C₂)",
-    "options": [
-      "(V₁+V₂)/2",
-      "(C₁+C₂)/(V₁+V₂)",
-      "(C₁V₁+C₂V₂)/(C₁+C₂)",
-      "C₁V₁/C₂V₂"
-    ],
-    "answer": 2,
-    "explain": "Charge conserved; common V = total charge / total capacitance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d04c036-c3c6-49fa-9688-10524ddee5ed",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Loss in energy when two capacitors share charge",
-    "formula": "ΔU = C₁C₂(V₁-V₂)²/2(C₁+C₂)",
-    "options": [
-      "Zero always",
-      "C₁C₂(V₁+V₂)²/2(C₁+C₂)",
-      "(V₁-V₂)²/2",
-      "C₁C₂(V₁-V₂)²/2(C₁+C₂)"
-    ],
-    "answer": 3,
-    "explain": "Energy is always lost as heat when capacitors share charge (unless V₁=V₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8c6bfd6d-f7cb-47bb-8956-daed223c9a18",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Effect of dielectric on voltage (isolated capacitor, fixed Q)",
-    "formula": "V = Q/KC",
-    "options": [
-      "Voltage increases by K",
-      "Voltage increases by K²",
-      "Voltage decreases by K",
-      "Voltage unchanged"
-    ],
-    "answer": 2,
-    "explain": "Q fixed; C increases K times so V = Q/C decreases K times.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e2daa80b-9377-4063-ab1d-59db31f1f549",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Dimensions of capacitance",
-    "formula": "",
-    "options": [
-      "M⁻¹L²T²A",
-      "M⁻¹L⁻²T⁴A²",
-      "M L²T⁻²A⁻¹",
-      "ML²T⁻³A⁻²"
-    ],
-    "answer": 1,
-    "explain": "C = Q/V; dimensions [M⁻¹L⁻²T⁴A²] from Q = It, V = W/Q.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e288d224-05d4-4a6c-bf51-0ed695e1dc9c",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "When dielectric partially fills gap (thickness t), new capacitance",
-    "formula": "C = ε₀A/(d-t+t/K)",
-    "options": [
-      "ε₀A/(d-t+t/K)",
-      "ε₀A/(d-t)",
-      "Kε₀A/d",
-      "ε₀A/(d+t/K)"
-    ],
-    "answer": 0,
-    "explain": "Equivalent to two capacitors in series: air gap (d-t) and dielectric (t).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b78ab091-d924-4647-982d-452e513b310a",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Which quantity is same for capacitors in series?",
-    "formula": "",
-    "options": [
-      "Capacitance of each",
-      "Energy in each",
-      "Charge on each capacitor",
-      "Voltage across each"
-    ],
-    "answer": 2,
-    "explain": "In series, same charge Q flows; voltages are different across each.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a792a828-9d43-4881-91f3-0a312b099c02",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Which quantity is same for capacitors in parallel?",
-    "formula": "",
-    "options": [
-      "Voltage across each",
-      "Current through each",
-      "Charge on each",
-      "Energy in each"
-    ],
-    "answer": 0,
-    "explain": "Parallel connection: same potential difference across all capacitors.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d1df4a9b-c172-4c05-bd44-39d900d9f789",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Charge on capacitor plates is ±Q; electric field between plates",
-    "formula": "E = σ/ε₀ = Q/ε₀A",
-    "options": [
-      "σ/ε₀",
-      "σε₀",
-      "2σ/ε₀",
-      "σ/2ε₀"
-    ],
-    "answer": 0,
-    "explain": "Both plates contribute σ/2ε₀ each; total field = σ/ε₀ between plates.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7b37c4b3-b955-4674-85bf-e9f7763a8f70",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "RC Circuits",
-    "prompt": "Time constant of RC circuit is:",
-    "formula": "τ = RC",
-    "options": [
-      "RC",
-      "C/R",
-      "R/C",
-      "R²C"
-    ],
-    "answer": 0,
-    "explain": "Time constant τ = RC gives time for charge to reach ~63% of final value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "04028bc1-015f-4d47-9f80-502e549f8a9d",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "RC Circuits",
-    "prompt": "Charge on capacitor at time t during charging:",
-    "formula": "Q = Q₀(1 − e^(−t/RC))",
-    "options": [
-      "Q₀e^(t/RC)",
-      "Q₀(1+e^(−t/RC))",
-      "Q₀e^(−t/RC)",
-      "Q₀(1−e^(−t/RC))"
-    ],
-    "answer": 3,
-    "explain": "Charge grows exponentially toward Q₀ = CV during capacitor charging.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f4472701-976f-49ef-bfb9-f5c75ccf66a6",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "RC Circuits",
-    "prompt": "Voltage across capacitor at time t during discharging:",
-    "formula": "V = V₀e^(−t/RC)",
-    "options": [
-      "V₀e^(t/RC)",
-      "V₀(1−e^(−t/RC))",
-      "V₀e^(−t/RC)",
-      "V₀/RC"
-    ],
-    "answer": 2,
-    "explain": "During discharging, voltage decays exponentially with time constant RC.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0758deb0-d94e-4183-8b53-0f68274373a8",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Energy in RC Circuits",
-    "prompt": "Heat dissipated in resistor when capacitor C charges to V from zero:",
-    "formula": "H = ½CV²",
-    "options": [
-      "CV²",
-      "¼CV²",
-      "½CV²",
-      "2CV²"
-    ],
-    "answer": 2,
-    "explain": "Battery supplies CV², half stored in C, half dissipated as heat in R regardless of R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0ead94ed-b2f9-4c4f-bcf5-5bed201d0b42",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Dielectrics",
-    "prompt": "Capacitance of parallel plate capacitor with two dielectrics side by side (areas A/2 each):",
-    "formula": "C = ε₀A(K₁+K₂)/(2d)",
-    "options": [
-      "ε₀A(K₁+K₂)/(2d)",
-      "ε₀AK₁K₂/d",
-      "ε₀A/(d(K₁+K₂))",
-      "2ε₀AK₁K₂/((K₁+K₂)d)"
-    ],
-    "answer": 0,
-    "explain": "Two dielectrics side by side act as parallel capacitors; C = C₁ + C₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "31f78026-4f4d-4fe3-bc03-d45631635cfe",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Dielectrics",
-    "prompt": "Two dielectrics stacked in series (each thickness d/2, same area A), equivalent C:",
-    "formula": "C = 2ε₀AK₁K₂/((K₁+K₂)d)",
-    "options": [
-      "ε₀A/(K₁+K₂)d",
-      "ε₀AK₁K₂/d",
-      "ε₀A(K₁+K₂)/(2d)",
-      "2ε₀AK₁K₂/((K₁+K₂)d)"
-    ],
-    "answer": 3,
-    "explain": "Dielectrics in series give series combination of capacitances; harmonic mean of K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a54247ce-bcf8-435c-9958-4eb9ac069cf2",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Electrostatic Energy",
-    "prompt": "Potential energy of a system of two point charges q₁, q₂ separated by r:",
-    "formula": "U = Kq₁q₂/r",
-    "options": [
-      "Kq₁q₂/r",
-      "Kq₁²q₂²/r",
-      "K(q₁+q₂)/r",
-      "Kq₁q₂/r²"
-    ],
-    "answer": 0,
-    "explain": "Electrostatic PE of two charges equals work done to assemble them from infinity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "07709442-0b0d-485e-ba1b-fb7209e67ce8",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Parallel Plate Capacitor",
-    "prompt": "When battery remains connected and plate area halved, charge on capacitor:",
-    "formula": "",
-    "options": [
-      "Remains same",
-      "Doubles",
-      "Becomes zero",
-      "Halves"
-    ],
-    "answer": 3,
-    "explain": "Battery keeps V constant; C halves (A halved), so Q = CV halves too.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "57d07627-c483-4e17-9a4d-3237e7c91293",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Energy in Capacitor",
-    "prompt": "Energy stored in capacitor when battery connected and plate separation halved:",
-    "formula": "U = ½CV²",
-    "options": [
-      "Doubled",
-      "Unchanged",
-      "Quadrupled",
-      "Halved"
-    ],
-    "answer": 0,
-    "explain": "V fixed by battery; C doubles (d halved); U = ½CV² doubles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d44abb02-d114-4d47-b424-f40104f490bc",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Series Capacitors",
-    "prompt": "Equivalent capacitance of n identical capacitors C in series:",
-    "formula": "Cₑq = C/n",
-    "options": [
-      "n²C",
-      "nC",
-      "C/n",
-      "C/n²"
-    ],
-    "answer": 2,
-    "explain": "Series combination: 1/Cₑq = n/C, so Cₑq = C/n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "817d6960-3e96-4a4a-b333-34762be15dc6",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Dielectrics",
-    "prompt": "Which of these increases when dielectric is inserted with battery connected?",
-    "formula": "",
-    "options": [
-      "Voltage",
-      "Electric field",
-      "Plate separation",
-      "Charge stored"
-    ],
-    "answer": 3,
-    "explain": "Battery keeps V constant; C increases with K, so Q = CV increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "52a46b5d-0be7-4de8-8739-ef638a1f97bb",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Energy in Capacitor",
-    "prompt": "The work done by external agent to charge a capacitor C to potential V is:",
-    "formula": "W = ½CV²",
-    "options": [
-      "2CV²",
-      "CV²/4",
-      "½CV²",
-      "CV²"
-    ],
-    "answer": 2,
-    "explain": "Work done equals energy stored = ½CV² (not CV², as voltage builds gradually).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b238ff33-7b98-4691-a9e2-bef6ee219c65",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Charge Sharing",
-    "prompt": "When two capacitors C₁ (charged to V₁) and C₂ (uncharged) are connected, final V is:",
-    "formula": "V = C₁V₁/(C₁+C₂)",
-    "options": [
-      "V₁/2",
-      "C₂V₁/(C₁+C₂)",
-      "C₁V₁/(C₁+C₂)",
-      "(C₁+C₂)V₁/C₁"
-    ],
-    "answer": 2,
-    "explain": "Charge conserved: Q = C₁V₁; shared over total capacitance C₁+C₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "71ad872b-12bd-44f6-9b7f-3ec739080c4b",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Energy stored in capacitor C charged to V, then disconnected; C doubled. New energy?",
-    "formula": "U = Q²/(2C)",
-    "options": [
-      "4U",
-      "2U",
-      "U/2",
-      "U"
-    ],
-    "answer": 2,
-    "explain": "Q fixed, C doubled → U=Q²/2C halves.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "708ec216-899c-45b0-8d90-7f2fb6fff499",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "For isolated charged capacitor, inserting dielectric changes which quantity?",
-    "formula": "",
-    "options": [
-      "Voltage decreases",
-      "Charge increases",
-      "Voltage increases",
-      "Energy increases"
-    ],
-    "answer": 0,
-    "explain": "Q fixed, C increases by K, so V=Q/C decreases by factor K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2da7e4a3-53bf-4c77-8b1a-08ba62e8d173",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "For a parallel plate capacitor, increasing plate separation with battery connected, energy stored:",
-    "formula": "U = CV²/2",
-    "options": [
-      "Becomes zero",
-      "Decreases",
-      "Remains same",
-      "Increases"
-    ],
-    "answer": 1,
-    "explain": "V fixed, C=ε₀A/d decreases as d increases, so U=CV²/2 decreases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e47ccb2c-0f1a-4c06-b416-a3aafc02e23c",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor is charged to V and disconnected. Plate area is doubled. New voltage?",
-    "formula": "C = ε₀A/d",
-    "options": [
-      "4V",
-      "V/2",
-      "2V",
-      "V"
-    ],
-    "answer": 1,
-    "explain": "Q fixed, C doubles (A doubled) → V=Q/C halves.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec185f5b-97b8-4feb-8bfc-b75e16352e3d",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "What is the electric field between plates of capacitor in terms of surface charge density σ?",
-    "formula": "E = σ/ε₀",
-    "options": [
-      "2σ/ε₀",
-      "σ/2ε₀",
-      "σε₀",
-      "σ/ε₀"
-    ],
-    "answer": 3,
-    "explain": "Each plate contributes σ/2ε₀; both together give E=σ/ε₀ between plates.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b03099ef-b2b0-4bba-900b-5b0aea6516e7",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitance of a parallel plate capacitor is C. If both plate area and separation are doubled, new C?",
-    "formula": "C = ε₀A/d",
-    "options": [
-      "4C",
-      "2C",
-      "C",
-      "C/2"
-    ],
-    "answer": 2,
-    "explain": "C∝A/d; both A and d double → ratio unchanged, C stays same.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0be7413c-0ee5-4e3a-b3f7-c9fb2afd6a8a",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "At t=RC during charging, charge on capacitor C from EMF ε is approximately:",
-    "formula": "q = Cε(1−e⁻¹)",
-    "options": [
-      "0.63 Cε",
-      "0.37 Cε",
-      "Cε",
-      "0.5 Cε"
-    ],
-    "answer": 0,
-    "explain": "At t=τ=RC, q=Cε(1−e⁻¹)≈0.632Cε.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dfeaab15-f315-4bdf-8c3f-96830b9a237b",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "In steady state, a capacitor in a DC circuit acts as:",
-    "formula": "",
-    "options": [
-      "Resistor",
-      "Open circuit",
-      "Inductor",
-      "Short circuit"
-    ],
-    "answer": 1,
-    "explain": "No current flows through capacitor in DC steady state; it is fully charged.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9a85765e-e256-43a2-a59e-bb0352e6c173",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "When dielectric is inserted with battery disconnected, which quantity remains constant?",
-    "formula": "",
-    "options": [
-      "Voltage V",
-      "Energy U",
-      "Charge Q",
-      "Electric field E"
-    ],
-    "answer": 2,
-    "explain": "Disconnected capacitor has no path for charge to flow; Q is conserved.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6f46bcac-0ae8-4601-a837-ad990a8ead8d",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Equivalent capacitance of two capacitors C₁ and C₂ in parallel is:",
-    "formula": "C = C₁ + C₂",
-    "options": [
-      "C₁C₂/(C₁+C₂)",
-      "(C₁+C₂)/2",
-      "C₁C₂",
-      "C₁+C₂"
-    ],
-    "answer": 3,
-    "explain": "Parallel capacitors add directly: C_eq = C₁ + C₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0357d3ae-0b47-4241-b8be-2e7a1c899523",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "The unit of ε₀ (permittivity of free space) in terms of F and m is:",
-    "formula": "",
-    "options": [
-      "F·m",
-      "N/C²",
-      "F/m",
-      "C²/N"
-    ],
-    "answer": 2,
-    "explain": "ε₀ has SI units of farads per metre (F m⁻¹).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "24dfb1d7-47c4-4585-b93f-a4e868eac902",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitance depends on geometry. For a sphere of radius R, C = 4πε₀R. If R is doubled, C:",
-    "formula": "C = 4πε₀R",
-    "options": [
-      "Quadruples",
-      "Halves",
-      "Doubles",
-      "Unchanged"
-    ],
-    "answer": 2,
-    "explain": "C∝R, so doubling R doubles the capacitance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "701c6d64-ad8e-4c71-a665-c8aed87f92b8",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Introducing a dielectric (K>1) with battery connected increases which quantity?",
-    "formula": "C = Kε₀A/d",
-    "options": [
-      "Stored charge Q",
-      "Electric field E",
-      "Voltage V",
-      "Plate separation d"
-    ],
-    "answer": 0,
-    "explain": "V fixed by battery; C increases by K, so Q=CV also increases by K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a134bfe8-2432-4840-b79d-d20f763efc42",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Energy stored in electric field per unit volume (energy density) formula:",
-    "formula": "u = ½ε₀E²",
-    "options": [
-      "ε₀E²",
-      "ε₀E²/4",
-      "½ε₀E²",
-      "½E²/ε₀"
-    ],
-    "answer": 2,
-    "explain": "Energy density in a vacuum electric field is u=½ε₀E² (J/m³).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e9242a9f-3d9f-4431-8b8d-a70be5b41210",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitor C disconnected, then plate separation tripled. New capacitance?",
-    "formula": "C' = C/3",
-    "options": [
-      "C",
-      "3C",
-      "C/3",
-      "C/9"
-    ],
-    "answer": 2,
-    "explain": "C = ε₀A/d; tripling d reduces C by factor 3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b83965cc-13b3-49b4-bcce-659411cae3a0",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Which physical quantity has the same unit as capacitance × resistance?",
-    "formula": "RC = τ",
-    "options": [
-      "Charge",
-      "Impedance",
-      "Time",
-      "Frequency"
-    ],
-    "answer": 2,
-    "explain": "RC has SI unit of seconds; it is the time constant τ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "db5a06f9-17ea-48c0-9701-b4867c3b647f",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor fully charged to ε in RC circuit. Voltage across resistor R is?",
-    "formula": "",
-    "options": [
-      "0",
-      "ε",
-      "ε/RC",
-      "ε/2"
-    ],
-    "answer": 0,
-    "explain": "At steady state, current = 0, so V_R = IR = 0; all voltage is across C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "31394198-1114-4ed5-a53e-43ce94841ee1",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitors C₁ and C₂ in series across V. Voltage across C₁ is?",
-    "formula": "V₁ = V·C₂/(C₁+C₂)",
-    "options": [
-      "VC₂/(C₁+C₂)",
-      "V/2",
-      "VC₁C₂/(C₁+C₂)",
-      "VC₁/(C₁+C₂)"
-    ],
-    "answer": 0,
-    "explain": "In series, voltage divides inversely with capacitance: V₁ = QC₂/(C₁+C₂) × (1/Q)... V₁ = VC₂/(C₁+C₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5512ba93-e973-4f59-9daf-8366fec598fd",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "For a capacitor, the ratio Q²/2C equals?",
-    "formula": "U = Q²/2C",
-    "options": [
-      "Energy stored",
-      "Electric field",
-      "Charge density",
-      "Capacitive reactance"
-    ],
-    "answer": 0,
-    "explain": "U = Q²/2C is the energy stored in the capacitor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2c70efa5-6320-441b-83b5-21322af8716d",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A leaky capacitor has resistance R between plates. Its time constant is?",
-    "formula": "τ = RC",
-    "options": [
-      "RC",
-      "1/RC",
-      "R/C",
-      "C/R"
-    ],
-    "answer": 0,
-    "explain": "Even for discharge through internal leakage resistance, τ = RC.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2d068aa9-b8aa-432e-badf-8771a5539770",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "The capacitance of a parallel plate capacitor is INDEPENDENT of which?",
-    "formula": "",
-    "options": [
-      "Applied voltage",
-      "Medium between plates",
-      "Plate separation",
-      "Plate area"
-    ],
-    "answer": 0,
-    "explain": "Capacitance depends on geometry and medium, NOT on applied voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f7e04780-2538-45bd-aee5-a510874d690f",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "If n identical capacitors each C are connected in parallel, equivalent C_p is?",
-    "formula": "C_p = nC",
-    "options": [
-      "C/n",
-      "C",
-      "n²C",
-      "nC"
-    ],
-    "answer": 3,
-    "explain": "Parallel combination: C_eq = C + C + … n times = nC.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3afdaaa3-d9a1-43c5-b05e-5e2a1819415b",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "During charging of capacitor in RC circuit, energy from battery = CV². Energy in C = CV²/2. Rest goes to?",
-    "formula": "",
-    "options": [
-      "Radiation",
-      "Heat in resistor",
-      "Magnetic field",
-      "Electric field outside"
-    ],
-    "answer": 1,
-    "explain": "Half the energy from battery is dissipated as heat in R, regardless of R value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2fa9cb7c-c01a-42ab-b653-e798d4af0d73",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "For a conductor placed between capacitor plates (not touching), electric field inside conductor is?",
-    "formula": "E = 0",
-    "options": [
-      "Zero",
-      "σ/2ε₀",
-      "σ/ε₀",
-      "σK/ε₀"
-    ],
-    "answer": 0,
-    "explain": "Inside a conductor, electrostatic field is always zero (Faraday shielding).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "81e6a2ee-2163-4b2e-926b-45830811da32",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "The electric potential energy stored per unit volume in a field E in medium ε₀ is?",
-    "formula": "u = ½ε₀E²",
-    "options": [
-      "ε₀E²",
-      "½ε₀E²",
-      "½E²/ε₀",
-      "ε₀E"
-    ],
-    "answer": 1,
-    "explain": "Energy density u = ½ε₀E² in free space between capacitor plates.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3f7efda1-3e14-4dfd-83a2-7d3b79af7cb8",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor of capacitance C has charge Q. The electric potential energy is?",
-    "formula": "U = Q²/2C",
-    "options": [
-      "Q²/2C",
-      "2Q²/C",
-      "Q²/C",
-      "Q/2C"
-    ],
-    "answer": 0,
-    "explain": "U = Q²/2C; derived from U = ½CV² with Q = CV.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1e90a0db-e81c-4719-b563-477221568482",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Inserting dielectric (K=2) with battery disconnected: energy stored becomes?",
-    "formula": "U' = U/K",
-    "options": [
-      "4U",
-      "U/2",
-      "2U",
-      "U"
-    ],
-    "answer": 1,
-    "explain": "Q fixed, C becomes KC; U = Q²/2C → U' = Q²/2KC = U/K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a2722206-5fd0-4aab-9e55-4ac0a1803468",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "The electric field due to a capacitor plate (surface charge density σ) on ONE side is?",
-    "formula": "E = σ/2ε₀",
-    "options": [
-      "σ/2ε₀",
-      "σ/ε₀",
-      "σε₀",
-      "2σ/ε₀"
-    ],
-    "answer": 0,
-    "explain": "Each infinite plate contributes E = σ/2ε₀; both plates give σ/ε₀ between them.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6033c5fd-9c9e-4a79-962b-1fa2dc4c7cad",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Voltage across an uncharged capacitor at t=0 (just after switch is closed in RC circuit) is?",
-    "formula": "V_C(0) = 0",
-    "options": [
-      "ε/RC",
-      "0",
-      "ε/2",
-      "ε"
-    ],
-    "answer": 1,
-    "explain": "Initially uncharged capacitor acts as short circuit; all voltage drops across R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "674de02d-4239-4b32-9534-d058435b5bb8",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitor stores charge Q at V. If V is doubled (battery), charge becomes?",
-    "formula": "Q = CV",
-    "options": [
-      "2Q",
-      "4Q",
-      "Q/2",
-      "Q"
-    ],
-    "answer": 0,
-    "explain": "Q=CV; capacitance unchanged, so doubling V doubles Q.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "34c119d0-ff81-46b3-a102-928accd96dc5",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "For parallel plate capacitor, E between plates in terms of V and d is?",
-    "formula": "E = V/d",
-    "options": [
-      "d/V",
-      "V/d",
-      "V²/d",
-      "V·d"
-    ],
-    "answer": 1,
-    "explain": "Uniform field between plates: E = V/d where d is plate separation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "deb63288-ffe5-4c28-8eaf-4a390652c933",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor is charged, disconnected, then dielectric (K=3) inserted. Voltage becomes?",
-    "formula": "V' = V/K",
-    "options": [
-      "V/9",
-      "V/3",
-      "3V",
-      "V"
-    ],
-    "answer": 1,
-    "explain": "Q constant; C increases K times; so V=Q/C decreases to V/K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "427e2cdf-062d-4ad1-b170-e8fe62617d92",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor C is charged to potential V₀. At time t, voltage while discharging through R?",
-    "formula": "V = V₀e^(−t/RC)",
-    "options": [
-      "V₀e^t/RC",
-      "V₀(1−e^−t/RC)",
-      "V₀e^−t/RC",
-      "V₀/2 always"
-    ],
-    "answer": 2,
-    "explain": "During discharge, voltage decays exponentially: V=V₀e^(−t/RC).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "02cbc79d-147c-446d-82f7-0b6d5659d212",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Energy dissipated as heat when capacitor C charges from 0 to V through resistor R is?",
-    "formula": "H = ½CV²",
-    "options": [
-      "½CV²",
-      "CV²",
-      "depends on R",
-      "¼CV²"
-    ],
-    "answer": 0,
-    "explain": "Battery supplies CV²; capacitor stores ½CV²; remaining ½CV² dissipated regardless of R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d0ced35a-6082-458e-9f34-a9635374470a",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Capacitor C charged to V, disconnected. A identical C connected in parallel. Final V?",
-    "formula": "V_f = V/2",
-    "options": [
-      "2V",
-      "V/4",
-      "V",
-      "V/2"
-    ],
-    "answer": 3,
-    "explain": "Charge Q shared equally between two equal capacitors: V_f = Q/(2C) = V/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2cc11e23-1771-476c-817e-2889ffe3c349",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor C is charged by EMF ε through R. Maximum charge stored is:",
-    "formula": "Q_max = Cε",
-    "options": [
-      "Cε",
-      "Cε²/2",
-      "ε/R",
-      "Cε/2"
-    ],
-    "answer": 0,
-    "explain": "At t→∞ capacitor is fully charged to ε, so Q_max = Cε regardless of R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "57e71089-de3e-4dd0-9c9c-34d591ee2379",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "Which physical quantity is conserved when two isolated charged capacitors are connected?",
-    "formula": "",
-    "options": [
-      "Capacitance of each",
-      "Total charge",
-      "Voltage on each",
-      "Total energy"
-    ],
-    "answer": 1,
-    "explain": "Charge is conserved; energy is NOT conserved (lost as heat/radiation).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f765f43e-1959-44bd-ba61-fc6fd9bdf344",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A series RC circuit: at t = 0⁺ after switch closes, capacitor behaves as:",
-    "formula": "",
-    "options": [
-      "Resistor",
-      "Short circuit (wire)",
-      "Battery of emf V",
-      "Open circuit"
-    ],
-    "answer": 1,
-    "explain": "Uncharged capacitor at t=0⁺ has V=0, so it acts like a short circuit.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "be7b145c-7df9-4216-8bd1-998e6a387c77",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor in an AC circuit with angular frequency ω. Reactance X_C is:",
-    "formula": "X_C = 1/(ωC)",
-    "options": [
-      "1/ω²C",
-      "ωL",
-      "1/ωC",
-      "ωC"
-    ],
-    "answer": 2,
-    "explain": "Capacitive reactance X_C = 1/(ωC); it decreases with increasing frequency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b934f5ab-1c27-4ba4-966e-8053dcdc788b",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "If a battery of EMF ε charges capacitor C, energy supplied by battery is:",
-    "formula": "W_battery = Cε²",
-    "options": [
-      "Cε²/2",
-      "Cε²/4",
-      "Cε²",
-      "2Cε²"
-    ],
-    "answer": 2,
-    "explain": "Battery supplies Q×ε = Cε², half stored in C, half dissipated in resistance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d2d7af05-bd6c-44b0-a4ed-ca0b98232e0a",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "For capacitors in series, which statement about equivalent capacitance C_eq is correct?",
-    "formula": "1/C_eq = Σ1/Cᵢ",
-    "options": [
-      "C_eq < smallest individual C",
-      "C_eq = average of all C",
-      "C_eq > largest individual C",
-      "C_eq = sum of all C"
-    ],
-    "answer": 0,
-    "explain": "Series combination always gives C_eq less than the smallest capacitor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3323b326-0903-4116-9010-4ffe458922e3",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "A capacitor C charged to V₀ is discharged through resistor R. Time for voltage to fall to V₀/e is:",
-    "formula": "t = RC",
-    "options": [
-      "R/C",
-      "C/R",
-      "RC",
-      "√(RC)"
-    ],
-    "answer": 2,
-    "explain": "V = V₀e^(−t/RC); at t = RC, V = V₀/e. RC is the time constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7301af12-e48f-4a93-9f2c-dc17b5a3e3e8",
-    "subject": "Physics",
-    "chapter": "Capacitance",
-    "topic": "Capacitance",
-    "prompt": "The capacitance of a capacitor does NOT depend on:",
-    "formula": "",
-    "options": [
-      "Medium between plates",
-      "Separation of plates",
-      "Area of plates",
-      "The charge placed on it"
-    ],
-    "answer": 3,
-    "explain": "Capacitance is a geometric property; C = Q/V but is independent of Q or V.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "d242078c-5d0a-4109-9374-a7a50edd6b19",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Capacitance of a parallel plate capacitor",
+  "formula": "C = ε₀A/d",
+  "options": [
+   "ε₀A·d",
+   "ε₀A/d",
+   "ε₀d/A",
+   "A/(ε₀d)"
+  ],
+  "answer": 1,
+  "explain": "C = ε₀A/d; increases with area, decreases with separation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c50d630d-2cac-4806-b283-021ba0833dfb",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Energy stored in a capacitor",
+  "formula": "U = Q²/2C",
+  "options": [
+   "Q²/C",
+   "2Q²/C",
+   "Q/2C",
+   "Q²/2C"
+  ],
+  "answer": 3,
+  "explain": "U = Q²/2C = CV²/2 = QV/2; three equivalent forms.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "13353c82-3bde-4476-afa5-cbc8e86d1e5a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Capacitors in series: equivalent capacitance",
+  "formula": "1/C = Σ1/Cᵢ",
+  "options": [
+   "C = C₁C₂/(C₁+C₂) always",
+   "1/C = Σ1/Cᵢ",
+   "C = ΣCᵢ",
+   "C = ΣCᵢ/n"
+  ],
+  "answer": 1,
+  "explain": "Series combination: reciprocals add. Charge is same on each capacitor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "39e0ee32-96ea-4c2e-ae47-6c7988dcb157",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Capacitors in parallel: equivalent capacitance",
+  "formula": "C = ΣCᵢ",
+  "options": [
+   "1/C = Σ1/Cᵢ",
+   "C = Cᵢ/n",
+   "C = C₁C₂/(C₁+C₂)",
+   "C = ΣCᵢ"
+  ],
+  "answer": 3,
+  "explain": "Parallel combination: capacitances add directly. Voltage is same on each.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aab7ac57-b2a2-474f-8119-360e703bf3d4",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Effect of dielectric on capacitance",
+  "formula": "C = KC₀",
+  "options": [
+   "C remains same",
+   "C increases K times",
+   "C increases K² times",
+   "C decreases K times"
+  ],
+  "answer": 1,
+  "explain": "Inserting dielectric (K>1) increases C by factor K = εᵣ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bcc33097-be31-445f-ac3d-66d30a128848",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "SI unit of capacitance",
+  "formula": "",
+  "options": [
+   "Joule/Volt",
+   "Coulomb/Joule",
+   "Farad (C/V)",
+   "Henry"
+  ],
+  "answer": 2,
+  "explain": "1 Farad = 1 Coulomb per Volt; F = C V⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "96a2aba5-0847-4aaa-b76a-b5d6b13ba472",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Capacitance of an isolated sphere of radius R",
+  "formula": "C = 4πε₀R",
+  "options": [
+   "4πε₀R²",
+   "4πε₀/R",
+   "4πε₀R",
+   "R/4πε₀"
+  ],
+  "answer": 2,
+  "explain": "C = 4πε₀R; larger sphere holds more charge at same potential.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2a2614d6-4fc6-47bf-a520-390d8eb5e19c",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Energy density in electric field between capacitor plates",
+  "formula": "u = ½ε₀E²",
+  "options": [
+   "½ε₀E²",
+   "E²/2ε₀",
+   "ε₀E²",
+   "½ε₀E"
+  ],
+  "answer": 0,
+  "explain": "Energy per unit volume = ½ε₀E²; SI unit J/m³.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "17c5e085-5cf4-4914-841f-13180aa0bd2f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "Charge on capacitor connected to battery when plate separation doubles",
+  "formula": "C = ε₀A/d",
+  "options": [
+   "Charge quadruples",
+   "Charge unchanged",
+   "Charge doubles",
+   "Charge halves"
+  ],
+  "answer": 3,
+  "explain": "V fixed by battery; C halves (d doubles) so Q = CV halves.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2d150a2d-f298-4cd8-9805-583c52d39e1e",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Energy stored when isolated charged capacitor has plate separation doubled",
+  "formula": "U = Q²/2C",
+  "options": [
+   "Energy doubles",
+   "Energy quadruples",
+   "Energy unchanged",
+   "Energy halves"
+  ],
+  "answer": 0,
+  "explain": "Q constant (isolated); C halves so U = Q²/2C doubles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9e2018d6-c092-41e2-a18b-6c960a32f690",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Common potential when two charged capacitors are connected",
+  "formula": "V = (C₁V₁+C₂V₂)/(C₁+C₂)",
+  "options": [
+   "(V₁+V₂)/2",
+   "(C₁+C₂)/(V₁+V₂)",
+   "(C₁V₁+C₂V₂)/(C₁+C₂)",
+   "C₁V₁/C₂V₂"
+  ],
+  "answer": 2,
+  "explain": "Charge conserved; common V = total charge / total capacitance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d04c036-c3c6-49fa-9688-10524ddee5ed",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Loss in energy when two capacitors share charge",
+  "formula": "ΔU = C₁C₂(V₁-V₂)²/2(C₁+C₂)",
+  "options": [
+   "Zero always",
+   "C₁C₂(V₁+V₂)²/2(C₁+C₂)",
+   "(V₁-V₂)²/2",
+   "C₁C₂(V₁-V₂)²/2(C₁+C₂)"
+  ],
+  "answer": 3,
+  "explain": "Energy is always lost as heat when capacitors share charge (unless V₁=V₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8c6bfd6d-f7cb-47bb-8956-daed223c9a18",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Effect of dielectric on voltage (isolated capacitor, fixed Q)",
+  "formula": "V = Q/KC",
+  "options": [
+   "Voltage increases by K",
+   "Voltage increases by K²",
+   "Voltage decreases by K",
+   "Voltage unchanged"
+  ],
+  "answer": 2,
+  "explain": "Q fixed; C increases K times so V = Q/C decreases K times.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e2daa80b-9377-4063-ab1d-59db31f1f549",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Dimensions of capacitance",
+  "formula": "",
+  "options": [
+   "M⁻¹L²T²A",
+   "M⁻¹L⁻²T⁴A²",
+   "M L²T⁻²A⁻¹",
+   "ML²T⁻³A⁻²"
+  ],
+  "answer": 1,
+  "explain": "C = Q/V; dimensions [M⁻¹L⁻²T⁴A²] from Q = It, V = W/Q.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e288d224-05d4-4a6c-bf51-0ed695e1dc9c",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "When dielectric partially fills gap (thickness t), new capacitance",
+  "formula": "C = ε₀A/(d-t+t/K)",
+  "options": [
+   "ε₀A/(d-t+t/K)",
+   "ε₀A/(d-t)",
+   "Kε₀A/d",
+   "ε₀A/(d+t/K)"
+  ],
+  "answer": 0,
+  "explain": "Equivalent to two capacitors in series: air gap (d-t) and dielectric (t).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b78ab091-d924-4647-982d-452e513b310a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Which quantity is same for capacitors in series?",
+  "formula": "",
+  "options": [
+   "Capacitance of each",
+   "Energy in each",
+   "Charge on each capacitor",
+   "Voltage across each"
+  ],
+  "answer": 2,
+  "explain": "In series, same charge Q flows; voltages are different across each.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a792a828-9d43-4881-91f3-0a312b099c02",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Which quantity is same for capacitors in parallel?",
+  "formula": "",
+  "options": [
+   "Voltage across each",
+   "Current through each",
+   "Charge on each",
+   "Energy in each"
+  ],
+  "answer": 0,
+  "explain": "Parallel connection: same potential difference across all capacitors.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d1df4a9b-c172-4c05-bd44-39d900d9f789",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Charge on capacitor plates is ±Q; electric field between plates",
+  "formula": "E = σ/ε₀ = Q/ε₀A",
+  "options": [
+   "σ/ε₀",
+   "σε₀",
+   "2σ/ε₀",
+   "σ/2ε₀"
+  ],
+  "answer": 0,
+  "explain": "Both plates contribute σ/2ε₀ each; total field = σ/ε₀ between plates.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7b37c4b3-b955-4674-85bf-e9f7763a8f70",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "RC Circuits",
+  "prompt": "Time constant of RC circuit is:",
+  "formula": "τ = RC",
+  "options": [
+   "RC",
+   "C/R",
+   "R/C",
+   "R²C"
+  ],
+  "answer": 0,
+  "explain": "Time constant τ = RC gives time for charge to reach ~63% of final value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "04028bc1-015f-4d47-9f80-502e549f8a9d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "RC Circuits",
+  "prompt": "Charge on capacitor at time t during charging:",
+  "formula": "Q = Q₀(1 − e^(−t/RC))",
+  "options": [
+   "Q₀e^(t/RC)",
+   "Q₀(1+e^(−t/RC))",
+   "Q₀e^(−t/RC)",
+   "Q₀(1−e^(−t/RC))"
+  ],
+  "answer": 3,
+  "explain": "Charge grows exponentially toward Q₀ = CV during capacitor charging.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f4472701-976f-49ef-bfb9-f5c75ccf66a6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "RC Circuits",
+  "prompt": "Voltage across capacitor at time t during discharging:",
+  "formula": "V = V₀e^(−t/RC)",
+  "options": [
+   "V₀e^(t/RC)",
+   "V₀(1−e^(−t/RC))",
+   "V₀e^(−t/RC)",
+   "V₀/RC"
+  ],
+  "answer": 2,
+  "explain": "During discharging, voltage decays exponentially with time constant RC.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0758deb0-d94e-4183-8b53-0f68274373a8",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy in RC Circuits",
+  "prompt": "Heat dissipated in resistor when capacitor C charges to V from zero:",
+  "formula": "H = ½CV²",
+  "options": [
+   "CV²",
+   "¼CV²",
+   "½CV²",
+   "2CV²"
+  ],
+  "answer": 2,
+  "explain": "Battery supplies CV², half stored in C, half dissipated as heat in R regardless of R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0ead94ed-b2f9-4c4f-bcf5-5bed201d0b42",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics",
+  "prompt": "Capacitance of parallel plate capacitor with two dielectrics side by side (areas A/2 each):",
+  "formula": "C = ε₀A(K₁+K₂)/(2d)",
+  "options": [
+   "ε₀A(K₁+K₂)/(2d)",
+   "ε₀AK₁K₂/d",
+   "ε₀A/(d(K₁+K₂))",
+   "2ε₀AK₁K₂/((K₁+K₂)d)"
+  ],
+  "answer": 0,
+  "explain": "Two dielectrics side by side act as parallel capacitors; C = C₁ + C₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "31f78026-4f4d-4fe3-bc03-d45631635cfe",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics",
+  "prompt": "Two dielectrics stacked in series (each thickness d/2, same area A), equivalent C:",
+  "formula": "C = 2ε₀AK₁K₂/((K₁+K₂)d)",
+  "options": [
+   "ε₀A/(K₁+K₂)d",
+   "ε₀AK₁K₂/d",
+   "ε₀A(K₁+K₂)/(2d)",
+   "2ε₀AK₁K₂/((K₁+K₂)d)"
+  ],
+  "answer": 3,
+  "explain": "Dielectrics in series give series combination of capacitances; harmonic mean of K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a54247ce-bcf8-435c-9958-4eb9ac069cf2",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Electrostatic Energy",
+  "prompt": "Potential energy of a system of two point charges q₁, q₂ separated by r:",
+  "formula": "U = Kq₁q₂/r",
+  "options": [
+   "Kq₁q₂/r",
+   "Kq₁²q₂²/r",
+   "K(q₁+q₂)/r",
+   "Kq₁q₂/r²"
+  ],
+  "answer": 0,
+  "explain": "Electrostatic PE of two charges equals work done to assemble them from infinity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "07709442-0b0d-485e-ba1b-fb7209e67ce8",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel Plate Capacitor",
+  "prompt": "When battery remains connected and plate area halved, charge on capacitor:",
+  "formula": "",
+  "options": [
+   "Remains same",
+   "Doubles",
+   "Becomes zero",
+   "Halves"
+  ],
+  "answer": 3,
+  "explain": "Battery keeps V constant; C halves (A halved), so Q = CV halves too.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "57d07627-c483-4e17-9a4d-3237e7c91293",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy in Capacitor",
+  "prompt": "Energy stored in capacitor when battery connected and plate separation halved:",
+  "formula": "U = ½CV²",
+  "options": [
+   "Doubled",
+   "Unchanged",
+   "Quadrupled",
+   "Halved"
+  ],
+  "answer": 0,
+  "explain": "V fixed by battery; C doubles (d halved); U = ½CV² doubles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d44abb02-d114-4d47-b424-f40104f490bc",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series Capacitors",
+  "prompt": "Equivalent capacitance of n identical capacitors C in series:",
+  "formula": "Cₑq = C/n",
+  "options": [
+   "n²C",
+   "nC",
+   "C/n",
+   "C/n²"
+  ],
+  "answer": 2,
+  "explain": "Series combination: 1/Cₑq = n/C, so Cₑq = C/n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "817d6960-3e96-4a4a-b333-34762be15dc6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics",
+  "prompt": "Which of these increases when dielectric is inserted with battery connected?",
+  "formula": "",
+  "options": [
+   "Voltage",
+   "Electric field",
+   "Plate separation",
+   "Charge stored"
+  ],
+  "answer": 3,
+  "explain": "Battery keeps V constant; C increases with K, so Q = CV increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "52a46b5d-0be7-4de8-8739-ef638a1f97bb",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy in Capacitor",
+  "prompt": "The work done by external agent to charge a capacitor C to potential V is:",
+  "formula": "W = ½CV²",
+  "options": [
+   "2CV²",
+   "CV²/4",
+   "½CV²",
+   "CV²"
+  ],
+  "answer": 2,
+  "explain": "Work done equals energy stored = ½CV² (not CV², as voltage builds gradually).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b238ff33-7b98-4691-a9e2-bef6ee219c65",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge Sharing",
+  "prompt": "When two capacitors C₁ (charged to V₁) and C₂ (uncharged) are connected, final V is:",
+  "formula": "V = C₁V₁/(C₁+C₂)",
+  "options": [
+   "V₁/2",
+   "C₂V₁/(C₁+C₂)",
+   "C₁V₁/(C₁+C₂)",
+   "(C₁+C₂)V₁/C₁"
+  ],
+  "answer": 2,
+  "explain": "Charge conserved: Q = C₁V₁; shared over total capacitance C₁+C₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "71ad872b-12bd-44f6-9b7f-3ec739080c4b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Energy stored in capacitor C charged to V, then disconnected; C doubled. New energy?",
+  "formula": "U = Q²/(2C)",
+  "options": [
+   "4U",
+   "2U",
+   "U/2",
+   "U"
+  ],
+  "answer": 2,
+  "explain": "Q fixed, C doubled → U=Q²/2C halves.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "708ec216-899c-45b0-8d90-7f2fb6fff499",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "For isolated charged capacitor, inserting dielectric changes which quantity?",
+  "formula": "",
+  "options": [
+   "Voltage decreases",
+   "Charge increases",
+   "Voltage increases",
+   "Energy increases"
+  ],
+  "answer": 0,
+  "explain": "Q fixed, C increases by K, so V=Q/C decreases by factor K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2da7e4a3-53bf-4c77-8b1a-08ba62e8d173",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "For a parallel plate capacitor, increasing plate separation with battery connected, energy stored:",
+  "formula": "U = CV²/2",
+  "options": [
+   "Becomes zero",
+   "Decreases",
+   "Remains same",
+   "Increases"
+  ],
+  "answer": 1,
+  "explain": "V fixed, C=ε₀A/d decreases as d increases, so U=CV²/2 decreases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e47ccb2c-0f1a-4c06-b416-a3aafc02e23c",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "A capacitor is charged to V and disconnected. Plate area is doubled. New voltage?",
+  "formula": "C = ε₀A/d",
+  "options": [
+   "4V",
+   "V/2",
+   "2V",
+   "V"
+  ],
+  "answer": 1,
+  "explain": "Q fixed, C doubles (A doubled) → V=Q/C halves.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec185f5b-97b8-4feb-8bfc-b75e16352e3d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "What is the electric field between plates of capacitor in terms of surface charge density σ?",
+  "formula": "E = σ/ε₀",
+  "options": [
+   "2σ/ε₀",
+   "σ/2ε₀",
+   "σε₀",
+   "σ/ε₀"
+  ],
+  "answer": 3,
+  "explain": "Each plate contributes σ/2ε₀; both together give E=σ/ε₀ between plates.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b03099ef-b2b0-4bba-900b-5b0aea6516e7",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Capacitance of a parallel plate capacitor is C. If both plate area and separation are doubled, new C?",
+  "formula": "C = ε₀A/d",
+  "options": [
+   "4C",
+   "2C",
+   "C",
+   "C/2"
+  ],
+  "answer": 2,
+  "explain": "C∝A/d; both A and d double → ratio unchanged, C stays same.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0be7413c-0ee5-4e3a-b3f7-c9fb2afd6a8a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance",
+  "prompt": "At t=RC during charging, charge on capacitor C from EMF ε is approximately:",
+  "formula": "q = Cε(1−e⁻¹)",
+  "options": [
+   "0.63 Cε",
+   "0.37 Cε",
+   "Cε",
+   "0.5 Cε"
+  ],
+  "answer": 0,
+  "explain": "At t=τ=RC, q=Cε(1−e⁻¹)≈0.632Cε.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dfeaab15-f315-4bdf-8c3f-96830b9a237b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "In steady state, a capacitor in a DC circuit acts as:",
+  "formula": "",
+  "options": [
+   "Resistor",
+   "Open circuit",
+   "Inductor",
+   "Short circuit"
+  ],
+  "answer": 1,
+  "explain": "No current flows through capacitor in DC steady state; it is fully charged.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9a85765e-e256-43a2-a59e-bb0352e6c173",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "When dielectric is inserted with battery disconnected, which quantity remains constant?",
+  "formula": "",
+  "options": [
+   "Voltage V",
+   "Energy U",
+   "Charge Q",
+   "Electric field E"
+  ],
+  "answer": 2,
+  "explain": "Disconnected capacitor has no path for charge to flow; Q is conserved.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6f46bcac-0ae8-4601-a837-ad990a8ead8d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Equivalent capacitance of two capacitors C₁ and C₂ in parallel is:",
+  "formula": "C = C₁ + C₂",
+  "options": [
+   "C₁C₂/(C₁+C₂)",
+   "(C₁+C₂)/2",
+   "C₁C₂",
+   "C₁+C₂"
+  ],
+  "answer": 3,
+  "explain": "Parallel capacitors add directly: C_eq = C₁ + C₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0357d3ae-0b47-4241-b8be-2e7a1c899523",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "The unit of ε₀ (permittivity of free space) in terms of F and m is:",
+  "formula": "",
+  "options": [
+   "F·m",
+   "N/C²",
+   "F/m",
+   "C²/N"
+  ],
+  "answer": 2,
+  "explain": "ε₀ has SI units of farads per metre (F m⁻¹).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "24dfb1d7-47c4-4585-b93f-a4e868eac902",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Capacitance depends on geometry. For a sphere of radius R, C = 4πε₀R. If R is doubled, C:",
+  "formula": "C = 4πε₀R",
+  "options": [
+   "Quadruples",
+   "Halves",
+   "Doubles",
+   "Unchanged"
+  ],
+  "answer": 2,
+  "explain": "C∝R, so doubling R doubles the capacitance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "701c6d64-ad8e-4c71-a665-c8aed87f92b8",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Introducing a dielectric (K>1) with battery connected increases which quantity?",
+  "formula": "C = Kε₀A/d",
+  "options": [
+   "Stored charge Q",
+   "Electric field E",
+   "Voltage V",
+   "Plate separation d"
+  ],
+  "answer": 0,
+  "explain": "V fixed by battery; C increases by K, so Q=CV also increases by K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a134bfe8-2432-4840-b79d-d20f763efc42",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Energy stored in electric field per unit volume (energy density) formula:",
+  "formula": "u = ½ε₀E²",
+  "options": [
+   "ε₀E²",
+   "ε₀E²/4",
+   "½ε₀E²",
+   "½E²/ε₀"
+  ],
+  "answer": 2,
+  "explain": "Energy density in a vacuum electric field is u=½ε₀E² (J/m³).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e9242a9f-3d9f-4431-8b8d-a70be5b41210",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Capacitor C disconnected, then plate separation tripled. New capacitance?",
+  "formula": "C' = C/3",
+  "options": [
+   "C",
+   "3C",
+   "C/3",
+   "C/9"
+  ],
+  "answer": 2,
+  "explain": "C = ε₀A/d; tripling d reduces C by factor 3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b83965cc-13b3-49b4-bcce-659411cae3a0",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance",
+  "prompt": "Which physical quantity has the same unit as capacitance × resistance?",
+  "formula": "RC = τ",
+  "options": [
+   "Charge",
+   "Impedance",
+   "Time",
+   "Frequency"
+  ],
+  "answer": 2,
+  "explain": "RC has SI unit of seconds; it is the time constant τ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "db5a06f9-17ea-48c0-9701-b4867c3b647f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "A capacitor fully charged to ε in RC circuit. Voltage across resistor R is?",
+  "formula": "",
+  "options": [
+   "0",
+   "ε",
+   "ε/RC",
+   "ε/2"
+  ],
+  "answer": 0,
+  "explain": "At steady state, current = 0, so V_R = IR = 0; all voltage is across C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "31394198-1114-4ed5-a53e-43ce94841ee1",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Capacitors C₁ and C₂ in series across V. Voltage across C₁ is?",
+  "formula": "V₁ = V·C₂/(C₁+C₂)",
+  "options": [
+   "VC₂/(C₁+C₂)",
+   "V/2",
+   "VC₁C₂/(C₁+C₂)",
+   "VC₁/(C₁+C₂)"
+  ],
+  "answer": 0,
+  "explain": "In series, voltage divides inversely with capacitance: V₁ = QC₂/(C₁+C₂) × (1/Q)... V₁ = VC₂/(C₁+C₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5512ba93-e973-4f59-9daf-8366fec598fd",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "For a capacitor, the ratio Q²/2C equals?",
+  "formula": "U = Q²/2C",
+  "options": [
+   "Energy stored",
+   "Electric field",
+   "Charge density",
+   "Capacitive reactance"
+  ],
+  "answer": 0,
+  "explain": "U = Q²/2C is the energy stored in the capacitor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2c70efa5-6320-441b-83b5-21322af8716d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "A leaky capacitor has resistance R between plates. Its time constant is?",
+  "formula": "τ = RC",
+  "options": [
+   "RC",
+   "1/RC",
+   "R/C",
+   "C/R"
+  ],
+  "answer": 0,
+  "explain": "Even for discharge through internal leakage resistance, τ = RC.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2d068aa9-b8aa-432e-badf-8771a5539770",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "The capacitance of a parallel plate capacitor is INDEPENDENT of which?",
+  "formula": "",
+  "options": [
+   "Applied voltage",
+   "Medium between plates",
+   "Plate separation",
+   "Plate area"
+  ],
+  "answer": 0,
+  "explain": "Capacitance depends on geometry and medium, NOT on applied voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7e04780-2538-45bd-aee5-a510874d690f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "If n identical capacitors each C are connected in parallel, equivalent C_p is?",
+  "formula": "C_p = nC",
+  "options": [
+   "C/n",
+   "C",
+   "n²C",
+   "nC"
+  ],
+  "answer": 3,
+  "explain": "Parallel combination: C_eq = C + C + … n times = nC.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3afdaaa3-d9a1-43c5-b05e-5e2a1819415b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "During charging of capacitor in RC circuit, energy from battery = CV². Energy in C = CV²/2. Rest goes to?",
+  "formula": "",
+  "options": [
+   "Radiation",
+   "Heat in resistor",
+   "Magnetic field",
+   "Electric field outside"
+  ],
+  "answer": 1,
+  "explain": "Half the energy from battery is dissipated as heat in R, regardless of R value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2fa9cb7c-c01a-42ab-b653-e798d4af0d73",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conducting slab inserted between plates",
+  "prompt": "For a conductor placed between capacitor plates (not touching), electric field inside conductor is?",
+  "formula": "E = 0",
+  "options": [
+   "Zero",
+   "σ/2ε₀",
+   "σ/ε₀",
+   "σK/ε₀"
+  ],
+  "answer": 0,
+  "explain": "Inside a conductor, electrostatic field is always zero (Faraday shielding).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "81e6a2ee-2163-4b2e-926b-45830811da32",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "The electric potential energy stored per unit volume in a field E in medium ε₀ is?",
+  "formula": "u = ½ε₀E²",
+  "options": [
+   "ε₀E²",
+   "½ε₀E²",
+   "½E²/ε₀",
+   "ε₀E"
+  ],
+  "answer": 1,
+  "explain": "Energy density u = ½ε₀E² in free space between capacitor plates.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3f7efda1-3e14-4dfd-83a2-7d3b79af7cb8",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "A capacitor of capacitance C has charge Q. The electric potential energy is?",
+  "formula": "U = Q²/2C",
+  "options": [
+   "Q²/2C",
+   "2Q²/C",
+   "Q²/C",
+   "Q/2C"
+  ],
+  "answer": 0,
+  "explain": "U = Q²/2C; derived from U = ½CV² with Q = CV.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1e90a0db-e81c-4719-b563-477221568482",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Inserting dielectric (K=2) with battery disconnected: energy stored becomes?",
+  "formula": "U' = U/K",
+  "options": [
+   "4U",
+   "U/2",
+   "2U",
+   "U"
+  ],
+  "answer": 1,
+  "explain": "Q fixed, C becomes KC; U = Q²/2C → U' = Q²/2KC = U/K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a2722206-5fd0-4aab-9e55-4ac0a1803468",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "The electric field due to a capacitor plate (surface charge density σ) on ONE side is?",
+  "formula": "E = σ/2ε₀",
+  "options": [
+   "σ/2ε₀",
+   "σ/ε₀",
+   "σε₀",
+   "2σ/ε₀"
+  ],
+  "answer": 0,
+  "explain": "Each infinite plate contributes E = σ/2ε₀; both plates give σ/ε₀ between them.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6033c5fd-9c9e-4a79-962b-1fa2dc4c7cad",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "Voltage across an uncharged capacitor at t=0 (just after switch is closed in RC circuit) is?",
+  "formula": "V_C(0) = 0",
+  "options": [
+   "ε/RC",
+   "0",
+   "ε/2",
+   "ε"
+  ],
+  "answer": 1,
+  "explain": "Initially uncharged capacitor acts as short circuit; all voltage drops across R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "674de02d-4239-4b32-9534-d058435b5bb8",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Capacitor stores charge Q at V. If V is doubled (battery), charge becomes?",
+  "formula": "Q = CV",
+  "options": [
+   "2Q",
+   "4Q",
+   "Q/2",
+   "Q"
+  ],
+  "answer": 0,
+  "explain": "Q=CV; capacitance unchanged, so doubling V doubles Q.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "34c119d0-ff81-46b3-a102-928accd96dc5",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "For parallel plate capacitor, E between plates in terms of V and d is?",
+  "formula": "E = V/d",
+  "options": [
+   "d/V",
+   "V/d",
+   "V²/d",
+   "V·d"
+  ],
+  "answer": 1,
+  "explain": "Uniform field between plates: E = V/d where d is plate separation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "deb63288-ffe5-4c28-8eaf-4a390652c933",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "A capacitor is charged, disconnected, then dielectric (K=3) inserted. Voltage becomes?",
+  "formula": "V' = V/K",
+  "options": [
+   "V/9",
+   "V/3",
+   "3V",
+   "V"
+  ],
+  "answer": 1,
+  "explain": "Q constant; C increases K times; so V=Q/C decreases to V/K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "427e2cdf-062d-4ad1-b170-e8fe62617d92",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "A capacitor C is charged to potential V₀. At time t, voltage while discharging through R?",
+  "formula": "V = V₀e^(−t/RC)",
+  "options": [
+   "V₀e^t/RC",
+   "V₀(1−e^−t/RC)",
+   "V₀e^−t/RC",
+   "V₀/2 always"
+  ],
+  "answer": 2,
+  "explain": "During discharge, voltage decays exponentially: V=V₀e^(−t/RC).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "02cbc79d-147c-446d-82f7-0b6d5659d212",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "Energy dissipated as heat when capacitor C charges from 0 to V through resistor R is?",
+  "formula": "H = ½CV²",
+  "options": [
+   "½CV²",
+   "CV²",
+   "depends on R",
+   "¼CV²"
+  ],
+  "answer": 0,
+  "explain": "Battery supplies CV²; capacitor stores ½CV²; remaining ½CV² dissipated regardless of R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d0ced35a-6082-458e-9f34-a9635374470a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Capacitor C charged to V, disconnected. A identical C connected in parallel. Final V?",
+  "formula": "V_f = V/2",
+  "options": [
+   "2V",
+   "V/4",
+   "V",
+   "V/2"
+  ],
+  "answer": 3,
+  "explain": "Charge Q shared equally between two equal capacitors: V_f = Q/(2C) = V/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2cc11e23-1771-476c-817e-2889ffe3c349",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "A capacitor C is charged by EMF ε through R. Maximum charge stored is:",
+  "formula": "Q_max = Cε",
+  "options": [
+   "Cε",
+   "Cε²/2",
+   "ε/R",
+   "Cε/2"
+  ],
+  "answer": 0,
+  "explain": "At t→∞ capacitor is fully charged to ε, so Q_max = Cε regardless of R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "57e71089-de3e-4dd0-9c9c-34d591ee2379",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Which physical quantity is conserved when two isolated charged capacitors are connected?",
+  "formula": "",
+  "options": [
+   "Capacitance of each",
+   "Total charge",
+   "Voltage on each",
+   "Total energy"
+  ],
+  "answer": 1,
+  "explain": "Charge is conserved; energy is NOT conserved (lost as heat/radiation).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f765f43e-1959-44bd-ba61-fc6fd9bdf344",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "A series RC circuit: at t = 0⁺ after switch closes, capacitor behaves as:",
+  "formula": "",
+  "options": [
+   "Resistor",
+   "Short circuit (wire)",
+   "Battery of emf V",
+   "Open circuit"
+  ],
+  "answer": 1,
+  "explain": "Uncharged capacitor at t=0⁺ has V=0, so it acts like a short circuit.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "be7b145c-7df9-4216-8bd1-998e6a387c77",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance",
+  "prompt": "A capacitor in an AC circuit with angular frequency ω. Reactance X_C is:",
+  "formula": "X_C = 1/(ωC)",
+  "options": [
+   "1/ω²C",
+   "ωL",
+   "1/ωC",
+   "ωC"
+  ],
+  "answer": 2,
+  "explain": "Capacitive reactance X_C = 1/(ωC); it decreases with increasing frequency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b934f5ab-1c27-4ba4-966e-8053dcdc788b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "If a battery of EMF ε charges capacitor C, energy supplied by battery is:",
+  "formula": "W_battery = Cε²",
+  "options": [
+   "Cε²/2",
+   "Cε²/4",
+   "Cε²",
+   "2Cε²"
+  ],
+  "answer": 2,
+  "explain": "Battery supplies Q×ε = Cε², half stored in C, half dissipated in resistance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d2d7af05-bd6c-44b0-a4ed-ca0b98232e0a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "For capacitors in series, which statement about equivalent capacitance C_eq is correct?",
+  "formula": "1/C_eq = Σ1/Cᵢ",
+  "options": [
+   "C_eq < smallest individual C",
+   "C_eq = average of all C",
+   "C_eq > largest individual C",
+   "C_eq = sum of all C"
+  ],
+  "answer": 0,
+  "explain": "Series combination always gives C_eq less than the smallest capacitor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3323b326-0903-4116-9010-4ffe458922e3",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitor circuits with batteries (steady state)",
+  "prompt": "A capacitor C charged to V₀ is discharged through resistor R. Time for voltage to fall to V₀/e is:",
+  "formula": "t = RC",
+  "options": [
+   "R/C",
+   "C/R",
+   "RC",
+   "√(RC)"
+  ],
+  "answer": 2,
+  "explain": "V = V₀e^(−t/RC); at t = RC, V = V₀/e. RC is the time constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7301af12-e48f-4a93-9f2c-dc17b5a3e3e8",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "The capacitance of a capacitor does NOT depend on:",
+  "formula": "",
+  "options": [
+   "Medium between plates",
+   "Separation of plates",
+   "Area of plates",
+   "The charge placed on it"
+  ],
+  "answer": 3,
+  "explain": "Capacitance is a geometric property; C = Q/V but is independent of Q or V.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb4fc803-87d5-4eab-b3cc-d0e2b383d627",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Isolated sphere of radius R is immersed in a medium of dielectric constant K. Its capacitance becomes:",
+  "formula": "",
+  "options": [
+   "4πε₀R",
+   "4πε₀KR",
+   "4πε₀R/K",
+   "4πε₀K²R"
+  ],
+  "answer": 1,
+  "explain": "The medium multiplies capacitance by K: C = 4πε₀KR.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "19927c61-3bc1-4f9f-9b90-3ad63d636b39",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Energy stored in an isolated sphere of radius R carrying charge Q (vacuum):",
+  "formula": "U = Q²/2C",
+  "options": [
+   "Q²/(8πε₀R)",
+   "Q²/(4πε₀R)",
+   "Q²/(2πε₀R)",
+   "Q²/(16πε₀R)"
+  ],
+  "answer": 0,
+  "explain": "U = Q²/2C with C = 4πε₀R gives Q²/(8πε₀R).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "90f34a97-5752-46ab-a276-c679930f3c22",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conductors in electrostatic field, induced charge",
+  "prompt": "In electrostatic equilibrium, field inside a conductor is zero because induced charges produce a field that is:",
+  "formula": "",
+  "options": [
+   "Perpendicular to the external field",
+   "Zero, as no induced charge forms",
+   "Equal and opposite to the external field",
+   "Equal to the external field in direction"
+  ],
+  "answer": 2,
+  "explain": "Free charges rearrange until their field exactly cancels the external field inside the metal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8feacb13-57cf-4a93-893f-e9d439067558",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conductors in electrostatic field, induced charge",
+  "prompt": "For a charged conductor in electrostatic equilibrium, the potential at points inside it is:",
+  "formula": "",
+  "options": [
+   "Constant, equal to the surface potential",
+   "Decreasing from the surface inward",
+   "Zero",
+   "Maximum at the centre"
+  ],
+  "answer": 0,
+  "explain": "E = 0 inside, so the whole conductor is an equipotential, V = surface value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6531c3b5-a685-49f5-9e81-2534151d66c0",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conductors in electrostatic field, induced charge",
+  "prompt": "At the surface of a charged conductor in equilibrium, the electric field lines are:",
+  "formula": "",
+  "options": [
+   "Tangential to the surface",
+   "Along the surface towards sharp points",
+   "At 45° to the surface",
+   "Normal to the surface"
+  ],
+  "answer": 3,
+  "explain": "A tangential component would drive surface charges, so E must be normal to the surface.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b068d0eb-3c64-4bdc-bf41-4ed216beba90",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conductors in electrostatic field, induced charge",
+  "prompt": "Outward electrostatic pressure on the surface of a charged conductor with surface density σ is:",
+  "formula": "P = σ²/2ε₀",
+  "options": [
+   "σ²/4ε₀",
+   "σ²/ε₀",
+   "σ/2ε₀",
+   "σ²/2ε₀"
+  ],
+  "answer": 3,
+  "explain": "Force per unit area = σ × average field (E/2) = σ·σ/2ε₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8dd066b1-2629-4077-b086-f4586499e779",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conductors in electrostatic field, induced charge",
+  "prompt": "Two charged spheres of radii r₁, r₂ are joined by a long wire. The ratio of surface charge densities σ₁/σ₂ is:",
+  "formula": "σ₁/σ₂ = r₂/r₁",
+  "options": [
+   "r₁/r₂",
+   "r₂/r₁",
+   "r₁²/r₂²",
+   "r₂²/r₁²"
+  ],
+  "answer": 1,
+  "explain": "Equal potentials give kσ₁r₁ = kσ₂r₂ ⇒ σ ∝ 1/r, so the smaller sphere has higher σ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8da685e4-a031-4ca5-996b-735935aac5c2",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conductors in electrostatic field, induced charge",
+  "prompt": "An uncharged conductor is brought near a point charge +q. The net force on the conductor is:",
+  "formula": "",
+  "options": [
+   "Attractive",
+   "Repulsive",
+   "Zero",
+   "Attractive or repulsive by sign of q"
+  ],
+  "answer": 0,
+  "explain": "Opposite induced charge lies nearer to q, so attraction exceeds repulsion for either sign of q.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83e1dc80-1092-49ad-ba53-88818aa1eb9a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Metal slab of thickness d/2 is inserted in the gap d of a capacitor (C₀ = ε₀A/d). New capacitance?",
+  "formula": "C = ε₀A/(d − t)",
+  "options": [
+   "C₀",
+   "C₀/2",
+   "2C₀",
+   "4C₀"
+  ],
+  "answer": 2,
+  "explain": "The conducting slab removes t from the gap: d − d/2 = d/2, so C doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d42a2e66-a659-4aa0-9abc-208d89c63f5f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Battery stays connected; a dielectric K fills the gap. Field between plates?",
+  "formula": "E = V/d",
+  "options": [
+   "Becomes K times",
+   "Becomes 1/K times",
+   "Unchanged",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "V and d are fixed, so E = V/d is unchanged; the charge on the plates increases K times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a318723e-a473-4cb3-b6f2-82cb8fe9b13e",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Charged capacitor is isolated; a dielectric K then fills the gap. Stored energy becomes?",
+  "formula": "U = Q²/2C",
+  "options": [
+   "U₀",
+   "U₀/K²",
+   "U₀/K",
+   "KU₀"
+  ],
+  "answer": 2,
+  "explain": "Q is constant and C becomes KC, so U = Q²/2C falls to U₀/K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ccd908b-7780-4643-8932-5ded1897be09",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Capacitor stays connected to a battery; plate separation is doubled. Stored energy becomes?",
+  "formula": "U = ½CV²",
+  "options": [
+   "Doubles",
+   "Unchanged",
+   "Halves",
+   "Quarters"
+  ],
+  "answer": 2,
+  "explain": "V is fixed and C halves, so U = ½CV² halves.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "557f4dee-26c4-4185-9d2d-c2955bc6342d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "A conducting slab inserted between plates behaves like a dielectric with K equal to:",
+  "formula": "",
+  "options": [
+   "1",
+   "∞",
+   "0",
+   "Very large but finite"
+  ],
+  "answer": 1,
+  "explain": "The field inside a conductor is zero, which corresponds to K → ∞ in C = ε₀A/(d − t + t/K).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abfce976-1f87-4537-829a-9ba8af18d5ad",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "C = ε₀A/d is accurate only when:",
+  "formula": "",
+  "options": [
+   "Plates are circular only",
+   "d is much larger than plate size",
+   "d is much smaller than plate dimensions",
+   "Plates carry no charge"
+  ],
+  "answer": 2,
+  "explain": "For d ≪ plate size, edge (fringing) effects are negligible and the field is uniform.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e6e0fd19-98e0-4a92-bb9a-e1fa85a8747c",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Battery V stays connected. How does the force between plates vary with separation d?",
+  "formula": "F = ε₀AV²/2d²",
+  "options": [
+   "∝ 1/d²",
+   "Independent of d",
+   "∝ d",
+   "∝ 1/d"
+  ],
+  "answer": 0,
+  "explain": "F = ½ε₀AE²·... = ε₀AV²/(2d²) since E = V/d, so F ∝ 1/d².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92dda21c-af2b-4bc8-bd99-8d24fa18e6a1",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "The capacitance of a parallel plate capacitor with a dielectric K filling the gap is:",
+  "formula": "C = Kε₀A/d",
+  "options": [
+   "K²ε₀A/d",
+   "ε₀A/(Kd)",
+   "Kε₀A/d",
+   "ε₀A/(d + K)"
+  ],
+  "answer": 2,
+  "explain": "A dielectric fully filling the gap multiplies capacitance by K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c0da6359-0394-43d8-a0f4-7ac634354192",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Charged capacitor kept isolated; plate separation is changed. Force between the plates varies as:",
+  "formula": "F = Q²/2ε₀A",
+  "options": [
+   "Proportional to 1/d²",
+   "Proportional to 1/d",
+   "Independent of d",
+   "Proportional to d"
+  ],
+  "answer": 2,
+  "explain": "With Q fixed, E = σ/ε₀ is constant, so F = Q²/2ε₀A does not depend on d.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "26f98e24-ebc4-47b1-9689-c6f34935848f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Isolated capacitor, dielectric K fills the gap. Field between the plates becomes:",
+  "formula": "E = E₀/K",
+  "options": [
+   "K E₀",
+   "E₀/K²",
+   "E₀ (unchanged)",
+   "E₀/K"
+  ],
+  "answer": 3,
+  "explain": "Bound charges set up an opposing field. The net field is E₀/K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fe4205e8-facd-4379-b1f5-f3d7d7be00eb",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Which molecule has a permanent electric dipole moment?",
+  "formula": "",
+  "options": [
+   "O₂",
+   "H₂O",
+   "CH₄",
+   "CO₂"
+  ],
+  "answer": 1,
+  "explain": "H₂O is bent, so its bond dipoles do not cancel. CO₂, CH₄ and O₂ are non-polar.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "df3aed93-a0d9-4d7b-ab96-b7dcc9750d12",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Polarization P of a dielectric is defined as dipole moment per:",
+  "formula": "",
+  "options": [
+   "Unit charge; unit m",
+   "Unit volume; unit C m⁻³",
+   "Unit volume; unit C m⁻²",
+   "Unit area; unit C m⁻¹"
+  ],
+  "answer": 2,
+  "explain": "P = p/V, so (C m)/m³ = C m⁻². It equals the bound surface charge density.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50a4f5ed-0e16-45d5-9220-291a32d8ccdd",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Dielectric slab placed at the edge of a charged parallel-plate capacitor is:",
+  "formula": "",
+  "options": [
+   "Unaffected by the plates",
+   "Pulled into the gap by fringing fields",
+   "Pushed out by repulsion",
+   "Pulled in only if the battery is connected"
+  ],
+  "answer": 1,
+  "explain": "Fringing fields polarize the slab, and the net force draws it into the field region.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5fd6f16f-14a9-41e9-8595-66c803fbc989",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "For a polar dielectric at fixed field, polarization on raising the temperature:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Stays constant",
+   "Becomes zero immediately"
+  ],
+  "answer": 1,
+  "explain": "Thermal agitation disturbs the alignment of permanent dipoles, so P decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbdeb467-f3e7-4af5-9e5e-b82d18cbae0c",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Energy density of the electric field inside a dielectric of constant K is:",
+  "formula": "u = ½ Kε₀E²",
+  "options": [
+   "½ Kε₀E²",
+   "Kε₀E²",
+   "½ ε₀E²",
+   "½ ε₀E²/K"
+  ],
+  "answer": 0,
+  "explain": "u = ½εE² with ε = Kε₀, where E is the field inside the dielectric.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "258aef67-c499-49e2-a9f7-4f14f6bff57a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Dielectric in an external field: the induced field inside it is directed:",
+  "formula": "",
+  "options": [
+   "Opposite to the applied field",
+   "Zero for non-polar types",
+   "Along the applied field",
+   "Perpendicular to the applied field"
+  ],
+  "answer": 0,
+  "explain": "Bound surface charges produce a field opposing E₀. It reduces but does not cancel the net field.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a6ab323e-6b4e-4157-ad0b-fb377d3f669b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Battery stays connected; dielectric K fully inserted. Charge on the plates becomes:",
+  "formula": "Q = CV",
+  "options": [
+   "Q₀/K²",
+   "Q₀/K",
+   "Q₀",
+   "KQ₀"
+  ],
+  "answer": 3,
+  "explain": "V fixed, C becomes KC, so Q = KC₀V = KQ₀ (battery supplies extra charge).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ed1ff6c1-47fe-40c4-ae25-caa0e7a23088",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Capacitor stays connected to battery; dielectric K fully inserted. Stored energy becomes:",
+  "formula": "U = ½CV² = KU₀",
+  "options": [
+   "U₀/K",
+   "K²U₀",
+   "KU₀",
+   "U₀"
+  ],
+  "answer": 2,
+  "explain": "V is constant and C rises K times, so U = ½CV² rises K times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e40dc43-2952-4462-a6e4-ee539e18e512",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "A dielectric K fills half the plate area (side by side, full gap d). Capacitance is:",
+  "formula": "C = ε₀A(1 + K)/2d",
+  "options": [
+   "2Kε₀A/(1 + K)d",
+   "ε₀A(1 + K)/d",
+   "Kε₀A/2d",
+   "ε₀A(1 + K)/2d"
+  ],
+  "answer": 3,
+  "explain": "The two halves are in parallel: ε₀(A/2)/d + Kε₀(A/2)/d.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f345d481-a37f-4dc5-a7e5-2d533e7378dc",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Battery disconnected; the dielectric slab is slowly withdrawn. The work done by the external agent is:",
+  "formula": "",
+  "options": [
+   "Positive, raising stored energy",
+   "Equal to QV",
+   "Negative, as energy is lost",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "The slab is attracted inward, so pulling it out needs positive work. This raises U = Q²/2C because C falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2d89120-c1ea-4382-8dd2-7e5279fd45da",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Slab inserted with the battery connected. Energy supplied by the battery vs. rise in capacitor energy:",
+  "formula": "W_b = VΔQ = 2ΔU",
+  "options": [
+   "Equal to ΔU",
+   "Four times ΔU",
+   "Twice ΔU",
+   "Half of ΔU"
+  ],
+  "answer": 2,
+  "explain": "W_b = V·ΔQ = (K−1)C₀V², while ΔU = ½(K−1)C₀V². The rest goes into mechanical work on the slab.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d9af3e23-618c-4e31-bed4-07be18199977",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Dielectric strength of a material is the maximum value of which quantity, and its SI unit?",
+  "formula": "",
+  "options": [
+   "Potential before breakdown, J/C·m",
+   "Energy density, J/m²",
+   "Charge before breakdown, C",
+   "Electric field before breakdown, V/m"
+  ],
+  "answer": 3,
+  "explain": "Dielectric strength is the maximum electric field the material withstands before breakdown. Its unit is V/m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "757a3e4b-6d6d-49c7-9b66-e06a5bcb9784",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Battery connected, dielectric K fully fills the gap d. The field inside the dielectric is:",
+  "formula": "E = V/d",
+  "options": [
+   "V/Kd",
+   "V/(K + 1)d",
+   "KV/d",
+   "V/d"
+  ],
+  "answer": 3,
+  "explain": "V and d are unchanged, so E = V/d. The free charge rises K times to compensate for the bound charges.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5f75ae8f-4992-43c4-9fe4-c6146fef989e",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Slabs placed in a capacitor: layers parallel to plates combine as ___, layers side by side as ___.",
+  "formula": "",
+  "options": [
+   "parallel; series",
+   "parallel; parallel",
+   "series; parallel",
+   "series; series"
+  ],
+  "answer": 2,
+  "explain": "Layers stacked along the field (parallel to plates) are in series. Layers side by side across the plate area are in parallel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9ef6c702-1fe2-459e-a006-c41523432e6e",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Battery connected, slab being pushed in at constant V. Force on the slab (ignoring edge effects) is:",
+  "formula": "F = ½V² dC/dx",
+  "options": [
+   "Zero throughout",
+   "Decreasing with x",
+   "Constant, independent of x",
+   "Increasing linearly with x"
+  ],
+  "answer": 2,
+  "explain": "C varies linearly with the inserted length, so dC/dx is constant and F = ½V² dC/dx is constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a8187c2-181b-4390-b522-0223d6375dec",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Isolated capacitor, dielectric K fills the gap fully. Energy density ½ε₀KE² changes by factor:",
+  "formula": "u = ½ε E²",
+  "options": [
+   "1/K",
+   "K",
+   "1",
+   "1/K²"
+  ],
+  "answer": 0,
+  "explain": "E falls to E₀/K and ε = Kε₀, so u = ½Kε₀(E₀/K)² = u₀/K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cfb38261-ecff-440f-afbe-9a267898739f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "A dielectric fills half the plate area side by side (battery on). Ratio of charge on the dielectric half to the air half:",
+  "formula": "",
+  "options": [
+   "K : 1",
+   "1 : 1",
+   "1 : K",
+   "K² : 1"
+  ],
+  "answer": 0,
+  "explain": "Both halves have the same V and C ∝ K, so Q ∝ K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "13f52008-7feb-4386-b482-a78791cf7bcf",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Isolated charged capacitor; a slab of thickness t < d is inserted. Field in the remaining air gap is:",
+  "formula": "",
+  "options": [
+   "E₀/K",
+   "Zero",
+   "E₀",
+   "KE₀"
+  ],
+  "answer": 2,
+  "explain": "The field in air is σ/ε₀, and σ is fixed since Q is constant. Only inside the slab is it E₀/K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0951f4df-b13d-40ef-b60f-41cc1ea2278a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Isolated charged capacitor; a slab is released and slides in. The fall in electrostatic energy appears as:",
+  "formula": "",
+  "options": [
+   "Kinetic energy of the slab",
+   "Heat in the plates",
+   "Rise in potential",
+   "Charge on the plates"
+  ],
+  "answer": 0,
+  "explain": "Q is constant and U = Q²/2C falls as C rises. The lost energy becomes the slab's kinetic energy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1190c731-1bf2-4e63-a2cc-a8845c64edf6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Plate charge Q, dielectric K fills the gap. Magnitude of induced surface charge on the dielectric is:",
+  "formula": "q′ = Q(1 − 1/K)",
+  "options": [
+   "Q/K",
+   "Q(1 − 1/K)",
+   "Q(K − 1)",
+   "KQ"
+  ],
+  "answer": 1,
+  "explain": "Net field E₀/K = (Q − q′)/(ε₀A), which gives q′ = Q(1 − 1/K).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f94294ad-445b-445d-877f-f25548fe8ef7",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Battery stays on; slab (K, thickness t < d) inserted. Field in the remaining air gap compared to V/d:",
+  "formula": "",
+  "options": [
+   "Equal to V/d",
+   "Larger than V/d",
+   "Smaller than V/d",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "E_air = V/(d − t + t/K) > V/d, since the slab lowers the field inside itself and the air gap must carry more.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6898030-e448-4b4e-a00a-bcf2fa482dfe",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Isolated capacitor with field E₀; slab (K, thickness t) inserted. Potential difference falls by:",
+  "formula": "ΔV = E₀t(1 − 1/K)",
+  "options": [
+   "E₀t(K − 1)",
+   "E₀t/K",
+   "E₀t",
+   "E₀t(1 − 1/K)"
+  ],
+  "answer": 3,
+  "explain": "V = E₀(d − t) + E₀t/K = E₀d − E₀t(1 − 1/K), with Q and E₀ unchanged in the air.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1379170c-60b0-49b2-b60f-301af6d57d22",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conducting slab inserted between plates",
+  "prompt": "A conducting slab (not touching plates) is slid parallel to the plates within the gap. Capacitance?",
+  "formula": "",
+  "options": [
+   "Maximum near a plate",
+   "Maximum at the centre",
+   "Minimum at the centre",
+   "Unchanged, depends only on t"
+  ],
+  "answer": 3,
+  "explain": "C = ε₀A/(d − t) has no dependence on the slab's position, only on its thickness.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ab8cd41-dd4c-40e9-87ad-d80a3b3c782b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conducting slab inserted between plates",
+  "prompt": "Charged capacitor is isolated; a conducting slab is inserted. Potential difference across the plates?",
+  "formula": "V = Q(d − t)/ε₀A",
+  "options": [
+   "Increases",
+   "Unchanged",
+   "Decreases",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Q is fixed and C rises, so V = Q/C falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9e0b6915-e7fe-4d76-95cb-53c571897bf4",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conducting slab inserted between plates",
+  "prompt": "Capacitor stays connected to a battery; a conducting slab is inserted. Charge on the plates?",
+  "formula": "Q = CV",
+  "options": [
+   "Decreases",
+   "First decreases, then increases",
+   "Unchanged",
+   "Increases"
+  ],
+  "answer": 3,
+  "explain": "V is fixed by the battery and C increases, so the battery supplies more charge.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "892ae3e7-10b8-43b6-a01d-79a82cd1143f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conducting slab inserted between plates",
+  "prompt": "Isolated charged capacitor, conducting slab inserted. Electric field in the remaining air gaps?",
+  "formula": "E = σ/ε₀",
+  "options": [
+   "Doubles",
+   "Zero",
+   "Halves",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "σ on the plates is unchanged (Q fixed), so E = σ/ε₀ stays the same in the air gaps.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d976e44-c3ec-4d99-a7d9-5ebc06fd6415",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Conducting slab inserted between plates",
+  "prompt": "Isolated charged capacitor: stored energy as a conducting slab is inserted, and the slab's behaviour?",
+  "formula": "U = Q²/2C",
+  "options": [
+   "U decreases; slab is pulled in",
+   "U unchanged; no force",
+   "U decreases; slab is pushed out",
+   "U increases; slab is pushed out"
+  ],
+  "answer": 0,
+  "explain": "At fixed Q, C rises so U falls. The system lowers its energy by drawing the slab in.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94ee1dc8-7992-4b1b-9a94-b8b6581df4ea",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Slab (K) fills half the gap thickness over the full area. Capacitance?",
+  "formula": "C = 2Kε₀A/[(K+1)d]",
+  "options": [
+   "(1 + K)ε₀A/2d",
+   "Kε₀A/2d",
+   "2Kε₀A/[(K+1)d]",
+   "Kε₀A/d"
+  ],
+  "answer": 2,
+  "explain": "Series: 2ε₀A/d and 2Kε₀A/d give 2Kε₀A/[(K+1)d].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6fc6595a-3ed7-42d5-8124-99b58d9907d2",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Isolated capacitor with dielectric K fully in. Work needed to withdraw it, in terms of energy U₁ with slab?",
+  "formula": "W = U₂ − U₁, U₂ = K U₁",
+  "options": [
+   "U₁/K",
+   "(K − 1)U₁",
+   "K U₁",
+   "(1 − 1/K)U₁"
+  ],
+  "answer": 1,
+  "explain": "At fixed Q, energy after removal is K U₁, so W = (K − 1)U₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9371283c-4fdf-4ff0-b17c-3bd27af37e83",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "For capacitors in series across a battery, which one stores the most energy?",
+  "formula": "U = Q²/2C",
+  "options": [
+   "The smallest capacitance",
+   "All store equal energy",
+   "The one nearest the battery",
+   "The largest capacitance"
+  ],
+  "answer": 0,
+  "explain": "Q is the same in series, so U ∝ 1/C and the smallest C stores the most.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "06247c28-69c3-43a5-8fe2-513645d07e3c",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "For capacitors in parallel across a battery, energy stored in each is proportional to",
+  "formula": "U = ½CV²",
+  "options": [
+   "C²",
+   "C",
+   "Independent of C",
+   "1/C"
+  ],
+  "answer": 1,
+  "explain": "V is the same in parallel, so U = ½CV² ∝ C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1d537dbf-18cc-4a9b-8606-b7b6601c1cf6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Two capacitors C₁ and C₂ in parallel across a battery: Q₁ : Q₂ equals",
+  "formula": "",
+  "options": [
+   "C₂ : C₁",
+   "C₁ : C₂",
+   "C₁² : C₂²",
+   "1 : 1"
+  ],
+  "answer": 1,
+  "explain": "V is the same, so Q = CV ∝ C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a726c91b-1d29-445d-bc6d-d4d98495a8cd",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "A charged capacitor is joined to an identical uncharged one. Final energy is what fraction of the initial?",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "1/4",
+   "1/2",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "V becomes V/2, so U = ½(2C)(V/2)² = U₀/2. The rest is lost as heat or radiation.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f190b0b5-f438-402a-9e9a-d5eba1d94b58",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Two identical capacitors with equal charge are joined with opposite plates together (reverse polarity). Final energy is",
+  "formula": "",
+  "options": [
+   "Half the initial",
+   "Double the initial",
+   "Unchanged",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Net charge is 0, so the common V = 0 and all the energy is lost.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d62435b2-5465-4d59-b843-4ac6f62706b7",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "If both plates of a capacitor in a network are at the same potential, the charge on it is",
+  "formula": "",
+  "options": [
+   "Half of the maximum",
+   "Zero",
+   "CV of the battery",
+   "Infinite"
+  ],
+  "answer": 1,
+  "explain": "Q = C(V₁ − V₂) = 0 when the potential difference is zero, as in a balanced bridge.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7b920292-810f-4fcf-9ea3-1265b11680d3",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "In a series combination, the safe maximum charge is limited by the capacitor with the smallest",
+  "formula": "Q_max = C·V_max",
+  "options": [
+   "Capacitance",
+   "Plate area",
+   "Q_max rating",
+   "Dielectric constant"
+  ],
+  "answer": 2,
+  "explain": "Every capacitor carries the same Q, so the smallest Q_max = CV_max sets the limit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e149628d-6580-43e6-9180-24821db17eb3",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "A capacitor in a network is short-circuited by a wire. It then",
+  "formula": "",
+  "options": [
+   "Has zero charge and drops out",
+   "Stores double charge",
+   "Doubles the C_eq",
+   "Acts as an open circuit"
+  ],
+  "answer": 0,
+  "explain": "Its plates are at the same potential, so Q = 0 and it does not contribute to C_eq.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6719f9d0-dcac-4d38-b85f-8fe571256a25",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Two identical capacitors C in parallel, connected in series with a third identical C. C_eq is",
+  "formula": "",
+  "options": [
+   "3C/2",
+   "2C/3",
+   "C/3",
+   "3C"
+  ],
+  "answer": 1,
+  "explain": "2C in series with C gives (2C·C)/(3C) = 2C/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "944d283f-4e56-4d9a-84e2-740bac783f7a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Series and parallel combination of capacitors",
+  "prompt": "Two charged capacitors are connected by a wire. Charge flows until their ___ become equal.",
+  "formula": "",
+  "options": [
+   "Energies",
+   "Potentials",
+   "Capacitances",
+   "Charges"
+  ],
+  "answer": 1,
+  "explain": "Charge redistributes until the common potential V = Q_total/C_total is reached.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1e4da8e4-c0d0-4d1d-b379-abcef3f75781",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Capacitors C₁ and C₂ in series carry equal charge. The ratio of their stored energies U₁:U₂ is?",
+  "formula": "U = Q²/2C",
+  "options": [
+   "C₁² : C₂²",
+   "C₁ : C₂",
+   "C₂ : C₁",
+   "1 : 1"
+  ],
+  "answer": 2,
+  "explain": "Q is the same, so U ∝ 1/C and U₁/U₂ = C₂/C₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fc865e0-3907-4f8c-a444-01198a83d44d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Capacitors C₁ and C₂ in parallel across a battery. The ratio of stored energies U₁:U₂ is?",
+  "formula": "U = ½CV²",
+  "options": [
+   "1 : 1",
+   "C₁² : C₂²",
+   "C₁ : C₂",
+   "C₂ : C₁"
+  ],
+  "answer": 2,
+  "explain": "V is the same, so U ∝ C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2250d2a3-3cfe-424b-bf70-e87a152b96dc",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Isolated charged parallel plate capacitor: plates are pulled apart. Energy density between the plates?",
+  "formula": "u = ½ε₀E²",
+  "options": [
+   "Becomes zero",
+   "Remains unchanged",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 1,
+  "explain": "E = σ/ε₀ stays fixed when Q is fixed, so u is unchanged. Energy rises only because the volume increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9fe73c1e-6e2b-4081-a1b1-d9fd01d43850",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Energy density just outside a charged conductor's surface with surface charge density σ is?",
+  "formula": "u = ½ε₀E², E = σ/ε₀",
+  "options": [
+   "σ²/ε₀",
+   "ε₀σ²/2",
+   "σ²/(2ε₀)",
+   "σ/(2ε₀)"
+  ],
+  "answer": 2,
+  "explain": "Just outside a conductor E = σ/ε₀, so u = ½ε₀(σ/ε₀)² = σ²/(2ε₀).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0112e107-9167-4c69-b61e-f19e92fe22e9",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "After two capacitors C₁, C₂ share charge and reach a common V, the ratio q₁ : q₂ is:",
+  "formula": "q = CV",
+  "options": [
+   "C₁² : C₂²",
+   "C₁ : C₂",
+   "1 : 1",
+   "C₂ : C₁"
+  ],
+  "answer": 1,
+  "explain": "Same V on both, so q ∝ C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "96e61762-1c67-4f4f-babc-e7563cb95c57",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Two charged capacitors are joined by a wire of resistance R. The total energy lost as heat depends on:",
+  "formula": "",
+  "options": [
+   "R, directly proportional",
+   "Independent of R",
+   "R, inversely proportional",
+   "Only the time of connection"
+  ],
+  "answer": 1,
+  "explain": "Loss = C₁C₂(V₁−V₂)²/2(C₁+C₂), fixed by initial and final states; R only sets how fast.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a6739178-1e7b-4dd6-b756-1ba040b29bcb",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Force between capacitor plates",
+  "prompt": "Work needed to increase plate separation by x at constant charge Q (area A, air) is:",
+  "formula": "",
+  "options": [
+   "Q²x/(2ε₀A)",
+   "Q²x²/(2ε₀A)",
+   "Q²x/(4ε₀A)",
+   "Q²x/(ε₀A)"
+  ],
+  "answer": 0,
+  "explain": "F is constant at fixed Q, so W = F·x = Q²x/(2ε₀A), equal to the energy gain.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2f31ba7-c37c-46cc-8539-6f5be4b906a5",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Force between capacitor plates",
+  "prompt": "Plates of fixed charge ±Q are immersed in a liquid of dielectric constant K. The plate force becomes:",
+  "formula": "",
+  "options": [
+   "K² times larger",
+   "1/K times",
+   "Unchanged",
+   "K times larger"
+  ],
+  "answer": 1,
+  "explain": "Field reduces by K at fixed Q, so F = Q²/(2Kε₀A).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c32934e2-e966-4dce-b2fa-04a2af5cd4c4",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Force between capacitor plates",
+  "prompt": "Capacitor kept at fixed V and fixed d. If plate area is doubled, the plate force becomes:",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "Four times",
+   "Half",
+   "Double"
+  ],
+  "answer": 3,
+  "explain": "F = ε₀AV²/(2d²) ∝ A at fixed V and d.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f34213e-89e6-444e-95f5-8193d9e39d77",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Spherical and cylindrical capacitors",
+  "prompt": "Concentric spherical capacitor, radii a < b. Capacitance with the outer shell earthed is",
+  "formula": "C = 4πε₀ab/(b − a)",
+  "options": [
+   "4πε₀(b − a)/ab",
+   "4πε₀ab/(b − a)",
+   "4πε₀(a + b)",
+   "4πε₀ab/(a + b)"
+  ],
+  "answer": 1,
+  "explain": "V = kQ(1/a − 1/b) = kQ(b − a)/ab, so C = 4πε₀ab/(b − a).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abf75f47-790f-4340-98e8-d6e396403715",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Spherical and cylindrical capacitors",
+  "prompt": "In a cylindrical capacitor, the field between the cylinders at distance r from the axis varies as",
+  "formula": "E = λ/(2πε₀r)",
+  "options": [
+   "independent of r",
+   "1/r²",
+   "r",
+   "1/r"
+  ],
+  "answer": 3,
+  "explain": "Gauss's law for a long cylinder gives E ∝ 1/r. A spherical capacitor gives E ∝ 1/r².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7281f68e-0bc3-486f-be73-8b1f8238f53f",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Spherical and cylindrical capacitors",
+  "prompt": "For a spherical capacitor with inner radius a, letting outer radius b → ∞ gives capacitance",
+  "formula": "C = 4πε₀ab/(b − a)",
+  "options": [
+   "infinite",
+   "4πε₀b",
+   "4πε₀a",
+   "zero"
+  ],
+  "answer": 2,
+  "explain": "As b → ∞, ab/(b − a) → a, so C = 4πε₀a, the isolated-sphere value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be10f3b9-bc31-49e0-840f-48caf089f961",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Spherical and cylindrical capacitors",
+  "prompt": "Spherical capacitor with a very thin gap d = b − a ≪ a. Capacitance approximately equals",
+  "formula": "",
+  "options": [
+   "ε₀A/d², with A = 4πa²",
+   "ε₀A/d, with A = 4πa²",
+   "ε₀d/A, with A = 4πa²",
+   "4πε₀d"
+  ],
+  "answer": 1,
+  "explain": "ab/(b − a) ≈ a²/d, so C ≈ 4πε₀a²/d = ε₀A/d, like a parallel-plate capacitor.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de378fe9-bfac-4b5d-8565-f85619a1ead7",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Spherical and cylindrical capacitors",
+  "prompt": "Cylindrical capacitor, radii a < b, length L (end effects ignored). Capacitance C is?",
+  "formula": "C = 2πε₀L / ln(b/a)",
+  "options": [
+   "4πε₀L / ln(b/a)",
+   "2πε₀ ln(b/a) / L",
+   "2πε₀L / ln(b/a)",
+   "2πε₀L / (b − a)"
+  ],
+  "answer": 2,
+  "explain": "Integrating E = λ/(2πε₀r) from a to b gives V ∝ ln(b/a), so C = 2πε₀L/ln(b/a).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0da5cf46-144b-484c-b1ad-ec417af7f73c",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "For a conductor, the graph of charge Q (y-axis) versus potential V (x-axis) is:",
+  "formula": "C = Q/V",
+  "options": [
+   "Straight line through origin, slope C",
+   "Parabola through origin",
+   "Straight line through origin, slope 1/C",
+   "Rectangular hyperbola"
+  ],
+  "answer": 0,
+  "explain": "Q = CV with C constant, so Q–V is linear through the origin with slope C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e949e846-fbea-4d09-bbb0-e8ee62ca9a9d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Two identical charged conducting drops merge into one drop. Its capacitance becomes how many times one drop's?",
+  "formula": "C ∝ R",
+  "options": [
+   "2^(1/3)",
+   "2",
+   "2^(2/3)",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "Volume is conserved, so R′ = 2^(1/3)R. Since C ∝ R, C′ = 2^(1/3)C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e519fe6f-273c-413b-9dc5-c6bf93ae7521",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Two charged conducting spheres joined by a wire lose no energy as heat only if they initially have equal:",
+  "formula": "",
+  "options": [
+   "Surface charge densities",
+   "Radii",
+   "Charges",
+   "Potentials"
+  ],
+  "answer": 3,
+  "explain": "Charge flows only if there is a potential difference. The energy loss is proportional to (V₁−V₂)².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5a0d8b3-7bed-4ede-b4f8-be5c96fd49c1",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Isolated charged capacitor: slab slides in between plates. Force on slab as it goes deeper?",
+  "formula": "F = (Q²/2C²)(dC/dx)",
+  "options": [
+   "Zero throughout",
+   "Decreases",
+   "Increases",
+   "Constant"
+  ],
+  "answer": 1,
+  "explain": "At fixed Q, dC/dx is constant but C grows with x, so F ∝ 1/C² decreases (at constant V, F is constant).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f324b5d6-6a33-4bea-9002-d004b4d34d8d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "The energy lost when two charged capacitors are connected appears mainly as:",
+  "formula": "",
+  "options": [
+   "Loss of charge from the system",
+   "Heat and electromagnetic radiation",
+   "Magnetic energy stored permanently",
+   "Increase in capacitance"
+  ],
+  "answer": 1,
+  "explain": "Charge is conserved; energy goes as Joule heat in the wire and radiation (spark) during the transient.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3e1e36b9-9eb1-4ab5-8dbf-28c574a30a29",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Charged C₁ (at V) is joined to uncharged C₂. Charge that flows through the connection is:",
+  "formula": "q = C₁C₂V/(C₁ + C₂)",
+  "options": [
+   "C₁V",
+   "(C₁ + C₂)V/2",
+   "C₂V",
+   "C₁C₂V/(C₁ + C₂)"
+  ],
+  "answer": 3,
+  "explain": "C₂ ends at potential C₁V/(C₁+C₂), so its charge is C₂ × that = C₁C₂V/(C₁+C₂).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b25187e2-300f-45d3-8873-b9bb81468df7",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Capacitors C at 3V and C at V are joined with opposite plates together. Common potential is:",
+  "formula": "V = (C₁V₁ − C₂V₂)/(C₁ + C₂)",
+  "options": [
+   "2V",
+   "V",
+   "4V",
+   "V/2"
+  ],
+  "answer": 1,
+  "explain": "Opposite polarity subtracts charge: (3CV − CV)/2C = V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cd12796d-12e2-49a0-98b7-cf126cd0a9b8",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "64 identical charged conducting drops, each at potential V, merge into one drop. Its potential is:",
+  "formula": "V′ = n^(2/3)·V",
+  "options": [
+   "8V",
+   "16V",
+   "4V",
+   "64V"
+  ],
+  "answer": 1,
+  "explain": "Q′ = nq and R′ = n^(1/3)r, so V ∝ Q/R gives n^(2/3) = 64^(2/3) = 16.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f7040142-e3f1-48cb-8610-21341553981b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "An earthed conductor is brought near an isolated charged conductor. The latter's capacitance:",
+  "formula": "C = Q/V",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Becomes zero",
+   "Remains unchanged"
+  ],
+  "answer": 1,
+  "explain": "Induced opposite charge lowers the potential V for the same Q, so C = Q/V rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "978d5a3c-e71c-4a9c-ab35-6ce74a76b0a6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Capacitance definition, units, isolated sphere",
+  "prompt": "Isolated spheres of radii R and 2R, far apart, are joined by a thin wire. Combined capacitance is:",
+  "formula": "C = C₁ + C₂",
+  "options": [
+   "8πε₀R",
+   "12πε₀R",
+   "8πε₀R/3",
+   "16πε₀R"
+  ],
+  "answer": 1,
+  "explain": "Joined spheres are at a common potential, so they add like parallel capacitors: 4πε₀R + 8πε₀R = 12πε₀R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ae30ec2a-b8a3-4547-9887-d67d991b32e2",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Two isolated parallel plates carry +5q and +q. Charge on the inner face of the +5q plate?",
+  "formula": "inner face = (Q₁ − Q₂)/2",
+  "options": [
+   "q",
+   "2q",
+   "5q",
+   "3q"
+  ],
+  "answer": 1,
+  "explain": "Inner faces carry ±(Q₁−Q₂)/2 = ±2q; each outer face carries (Q₁+Q₂)/2 = 3q.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94601ea1-7621-48a6-b0b6-88ba28598425",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Parallel plate capacitor C = ε0A/d",
+  "prompt": "Isolated plates carry +6q and +2q, capacitance C. Potential difference between the plates?",
+  "formula": "V = (Q₁ − Q₂)/2C",
+  "options": [
+   "q/C",
+   "2q/C",
+   "4q/C",
+   "8q/C"
+  ],
+  "answer": 1,
+  "explain": "Inner faces carry (Q₁−Q₂)/2 = 2q, so V = 2q/C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d1eb974d-0e00-4df5-9fa3-66a37edfc90b",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Electric susceptibility χₑ of a linear dielectric is related to its dielectric constant K by:",
+  "formula": "P = ε₀χₑE",
+  "options": [
+   "K = 1/(1 + χₑ)",
+   "K = χₑ",
+   "K = 1 + χₑ",
+   "K = χₑ − 1"
+  ],
+  "answer": 2,
+  "explain": "D = ε₀E + P = ε₀(1 + χₑ)E, so K = 1 + χₑ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3fd3a017-bd80-469c-b36d-037a6439f9ab",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Two point charges are in a medium of dielectric constant K. The force between them, compared with vacuum, is:",
+  "formula": "F = q₁q₂/(4πKε₀r²)",
+  "options": [
+   "Unchanged",
+   "K times larger",
+   "K² times larger",
+   "K times smaller"
+  ],
+  "answer": 3,
+  "explain": "The medium reduces the force: F = F₀/K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "59969b87-6cda-4641-83ac-89477f7c0d16",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "For a non-polar dielectric in a fixed field, polarization on raising the temperature:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Decreases",
+   "Increases",
+   "First rises, then falls"
+  ],
+  "answer": 0,
+  "explain": "Induced dipoles do not depend on thermal agitation, so P is practically temperature independent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "76f4e04e-2c72-4d6b-9bfe-4007ceaf0b40",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectrics, polarization, dielectric constant",
+  "prompt": "Which is the approximate dielectric constant of water at room temperature?",
+  "formula": "",
+  "options": [
+   "8",
+   "1.8",
+   "800",
+   "80"
+  ],
+  "answer": 3,
+  "explain": "Water is strongly polar, with K ≈ 80 at room temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6861f84-bbea-4e05-a2d9-9408bfacbd13",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Isolated charged capacitor; slab slides in by x. Stored energy U versus x is:",
+  "formula": "U = Q²/2C(x), C(x) linear in x",
+  "options": [
+   "Linearly decreasing",
+   "Linearly increasing",
+   "Decreasing, non-linear (hyperbolic)",
+   "Constant"
+  ],
+  "answer": 2,
+  "explain": "Q is fixed and C rises linearly with x, so U = Q²/2C falls as 1/(a + bx), not linearly.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66e1dfbc-6848-4e3e-92df-4c9e9c4662a6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Battery V connected; slab K fills the gap (C₀ initially). Extra charge that flows through the battery:",
+  "formula": "Δq = (K − 1)C₀V",
+  "options": [
+   "(1 − 1/K)C₀V",
+   "C₀V/K",
+   "(K − 1)C₀V",
+   "KC₀V"
+  ],
+  "answer": 2,
+  "explain": "Final charge is KC₀V and initial is C₀V, so the extra charge is (K − 1)C₀V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c387c318-36c1-4dd5-9782-5dc6a0528a4a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Slab K of thickness t < d placed in a charged capacitor. Field inside slab vs field in the air gap:",
+  "formula": "E_slab = E_air/K",
+  "options": [
+   "1/K times the air-gap field",
+   "K times the air-gap field",
+   "Equal to the air-gap field",
+   "1/K² times the air-gap field"
+  ],
+  "answer": 0,
+  "explain": "Induced surface charges reduce the field in the dielectric to E_air/K, where E_air = σ/ε₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4c4178e-b71b-4149-a5c9-de654e3703ee",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Battery stays connected; a dielectric slab slides in a distance x between the plates. Stored energy U varies with x as:",
+  "formula": "U = ½C(x)V², C(x) linear in x",
+  "options": [
+   "Hyperbolic decreasing",
+   "Linearly decreasing",
+   "Linearly increasing",
+   "Constant"
+  ],
+  "answer": 2,
+  "explain": "C is linear in x and V is fixed, so U = ½CV² rises linearly with x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a5b9979-fe0e-4b99-83a6-4bdfe9702a44",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric slab partially/fully filling plates",
+  "prompt": "Two slabs K₁ and K₂, each of thickness d/2, fill a capacitor gap fully. Ratio of fields E₁ : E₂ in them is:",
+  "formula": "D = ε₀KE is the same in both slabs",
+  "options": [
+   "1 : 1",
+   "K₂ : K₁",
+   "K₁² : K₂²",
+   "K₁ : K₂"
+  ],
+  "answer": 1,
+  "explain": "Same σ (same D) in both layers, so KE is constant. Hence E ∝ 1/K and E₁:E₂ = K₂:K₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0eeea467-d164-4649-a609-dd8fe259b550",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Battery V connected; slab (K) fully inside is slowly pulled out. Work by external agent? (C₀ = air capacitance)",
+  "formula": "W_ext = ΔU − W_battery",
+  "options": [
+   "½(1 − 1/K)C₀V²",
+   "½K C₀V²",
+   "(K − 1)C₀V²",
+   "½(K − 1)C₀V²"
+  ],
+  "answer": 3,
+  "explain": "ΔU = −½(K−1)C₀V², battery work = −(K−1)C₀V², so W_ext = ½(K−1)C₀V².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54eddb86-b526-4cf2-8b0c-689a593aa478",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "For a linear dielectric of constant K in field E, the polarization P equals?",
+  "formula": "P = ε₀χE",
+  "options": [
+   "ε₀(K − 1)E",
+   "ε₀K E",
+   "(K − 1)E/ε₀",
+   "ε₀(1 − 1/K)E"
+  ],
+  "answer": 0,
+  "explain": "Susceptibility χ = K − 1, so P = ε₀(K − 1)E.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ef36d5d-4c11-4d20-8ca2-7f0f159d21f2",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Two identical capacitors in series across a battery V. Dielectric K fills one. Voltage across it becomes?",
+  "formula": "",
+  "options": [
+   "KV/(K + 1)",
+   "V/(K + 1)",
+   "V/2K",
+   "V/K"
+  ],
+  "answer": 1,
+  "explain": "Equal charge Q: V₁ = Q/KC, V₂ = Q/C. So V₁ = V/(K+1) and V₂ = KV/(K+1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "223bff61-2e9c-4771-be79-0a82585f6460",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Battery on; slab slid in to depth x (width b). Graph of plate charge Q against x is?",
+  "formula": "Q = V(C₀ + αx)",
+  "options": [
+   "Straight line falling with x",
+   "Straight line rising with x",
+   "Parabola rising with x",
+   "Hyperbola falling with x"
+  ],
+  "answer": 1,
+  "explain": "C is linear in x, and at constant V, Q = CV is linear in x too.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "66a602a4-ef5a-4029-a745-31dfd5453273",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Isolated charged capacitor; slab slid in to depth x. Graph of voltage V against x is?",
+  "formula": "V = Q/(C₀ + αx)",
+  "options": [
+   "Falling hyperbola-type curve",
+   "Straight line falling",
+   "Straight line rising",
+   "Constant"
+  ],
+  "answer": 0,
+  "explain": "Q is fixed and C is linear in x, so V ∝ 1/(C₀ + αx) falls non-linearly.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "49df755e-b43c-49d5-babb-70f33bb4bbb2",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Slab K fills the gap with battery V on. Battery is removed, then the slab is taken out. Voltage becomes?",
+  "formula": "",
+  "options": [
+   "KV",
+   "V/K",
+   "V",
+   "K²V"
+  ],
+  "answer": 0,
+  "explain": "Q = KC₀V stays fixed; after removal C returns to C₀, so V′ = Q/C₀ = KV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d05cd109-e6b9-456b-b4d6-3d80452863bb",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Dielectric insertion: battery on vs off",
+  "prompt": "Slab K filled with battery on; battery removed, slab withdrawn. Energy vs original ½C₀V² (before slab)?",
+  "formula": "U = Q²/2C₀",
+  "options": [
+   "K² times",
+   "1/K times",
+   "K times",
+   "Same"
+  ],
+  "answer": 0,
+  "explain": "Q = KC₀V and C = C₀ at the end, so U = K²C₀V²/2, which is K² times the original.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cd36bf23-37b5-404b-bd2f-7fec7b08a9d9",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "A capacitor C holds charge q. Work needed to add a further small charge dq is:",
+  "formula": "dW = V dq",
+  "options": [
+   "(q/2C) dq",
+   "(q²/2C) dq",
+   "(C/q) dq",
+   "(q/C) dq"
+  ],
+  "answer": 3,
+  "explain": "Potential at that instant is q/C, so dW = (q/C) dq; integrating gives Q²/2C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5eb3101b-f3de-4077-b42f-fd23b94787c6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "C is charged to V by raising the EMF in many tiny steps. Heat lost in the circuit resistance is:",
+  "formula": "",
+  "options": [
+   "½CV²",
+   "CV²",
+   "≈ 0",
+   "¼CV²"
+  ],
+  "answer": 2,
+  "explain": "Loss per step ∝ (ΔV)² → 0 as steps shrink; the source work equals the stored ½CV².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "831f329e-2efa-448b-b4d6-9f5f52c7fb0a",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Capacitor C at voltage V discharges completely through a resistor R. Heat produced in R is:",
+  "formula": "",
+  "options": [
+   "CV²",
+   "¼CV²",
+   "Depends on R",
+   "½CV²"
+  ],
+  "answer": 3,
+  "explain": "All stored energy ½CV² becomes heat, whatever the value of R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2bda731d-2a7e-4069-980f-225e7220c040",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "For a point charge, the electric energy density at distance r from it varies as:",
+  "formula": "u = ½ε₀E²",
+  "options": [
+   "r⁻⁴",
+   "r⁻³",
+   "r⁻²",
+   "r⁻¹"
+  ],
+  "answer": 0,
+  "explain": "E ∝ 1/r², so u ∝ E² ∝ r⁻⁴.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7fc87188-7c00-4458-bc54-2d9a4aee56db",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Electrostatic energy density inside the material of a charged conductor in equilibrium is:",
+  "formula": "",
+  "options": [
+   "Uniform and non-zero",
+   "σ²/(2ε₀)",
+   "Zero",
+   "Infinite"
+  ],
+  "answer": 2,
+  "explain": "E = 0 inside the conductor, so u = ½ε₀E² = 0; the energy lies in the outside field.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "167156c0-45de-497f-a31c-8eb17cf2c593",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "Battery V stays connected and d is halved. Energy density between the plates becomes:",
+  "formula": "u = ½ε₀(V/d)²",
+  "options": [
+   "Same",
+   "Four times",
+   "Double",
+   "Half"
+  ],
+  "answer": 1,
+  "explain": "E = V/d doubles, so ½ε₀E² becomes 4 times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5f577a3-b3ce-463b-9ea5-d3deac793fea",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "At the breakdown field E_max, the maximum energy a parallel plate capacitor can store is proportional to:",
+  "formula": "U_max = ½ε₀E_max²·(Ad)",
+  "options": [
+   "d²",
+   "1/d",
+   "Plate area only",
+   "Volume between plates (Ad)"
+  ],
+  "answer": 3,
+  "explain": "U = (energy density)×(volume), and the density is fixed at E_max.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "12a9ff07-0ae4-4a4a-b854-3eab6a3f394d",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Energy stored in capacitor, energy density",
+  "prompt": "A capacitor C is charged from V to 2V. The extra energy supplied to it is:",
+  "formula": "ΔU = ½C(4V² − V²)",
+  "options": [
+   "2CV²",
+   "3CV²/2",
+   "½CV²",
+   "3CV²"
+  ],
+  "answer": 1,
+  "explain": "ΔU = ½C(2V)² − ½CV² = 3CV²/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2f0e883-0fae-4238-8d48-6e973ed64aff",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Charged inner sphere (Q, radius a) inside an uncharged hollow shell (radius b) is joined to it by a wire. Inner charge becomes:",
+  "formula": "",
+  "options": [
+   "Q/2",
+   "Unchanged, Q",
+   "Q·a/(a+b)",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Charge on a conductor resides on its outer surface, so all of Q moves to the shell. Final potential is kQ/b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "217f391f-4a56-4044-bd6a-e7c4d40dde00",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Charge sharing and energy loss on connection",
+  "prompt": "Capacitor C at V₁ is connected to a battery of emf V₂ (same polarity). Heat produced in the circuit is:",
+  "formula": "H = ½C(V₂−V₁)²",
+  "options": [
+   "C(V₂−V₁)²",
+   "½C(V₂−V₁)²",
+   "½CV₂²",
+   "½C(V₂²−V₁²)"
+  ],
+  "answer": 1,
+  "explain": "Battery work is CV₂(V₂−V₁). Subtracting the gain in capacitor energy leaves ½C(V₂−V₁)².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "987168e0-2e84-42cb-9556-e9a9b8fbffd3",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Force between capacitor plates",
+  "prompt": "Isolated capacitor (fixed Q, fixed d) has its plate area doubled. The plate force becomes:",
+  "formula": "F = Q²/(2ε₀A)",
+  "options": [
+   "Half",
+   "Double",
+   "Unchanged",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "F ∝ Q²/A at fixed Q, so doubling A halves F.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3f1befa2-05b9-42b6-92a2-829bfa535c57",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Force between capacitor plates",
+  "prompt": "Charge on each plate and the plate area are both doubled (air gap). The plate force becomes:",
+  "formula": "F = Q²/(2ε₀A)",
+  "options": [
+   "Double",
+   "Four times",
+   "Half",
+   "Unchanged"
+  ],
+  "answer": 0,
+  "explain": "F ∝ Q²/A, so the factor is 4/2 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2453c0ec-f6a8-4f57-b193-7972e88420a5",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Spherical and cylindrical capacitors",
+  "prompt": "Spherical capacitor: energy density of the field at distance r (a<r<b) from the centre varies as?",
+  "formula": "",
+  "options": [
+   "1/r⁴",
+   "1/r³",
+   "1/r²",
+   "1/r"
+  ],
+  "answer": 0,
+  "explain": "E ∝ 1/r², so energy density ½ε₀E² ∝ 1/r⁴.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67b52efb-6beb-4014-9455-76ce621235d6",
+  "subject": "Physics",
+  "chapter": "Capacitance",
+  "topic": "Spherical and cylindrical capacitors",
+  "prompt": "Spherical capacitor: inner shell +Q, outer shell −Q (radii a<b). Field at a point r > b is?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Q/(4πε₀r²)",
+   "2Q/(4πε₀r²)",
+   "Q/(4πε₀b²) (constant)"
+  ],
+  "answer": 0,
+  "explain": "By Gauss's law, the net enclosed charge is +Q − Q = 0, so E = 0 outside the outer shell.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

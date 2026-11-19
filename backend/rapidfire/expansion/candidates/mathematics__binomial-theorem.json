@@ -1,0 +1,3079 @@
+[
+ {
+  "prompt": "For even n, the middle term of (x + a)ⁿ is",
+  "formula": "",
+  "options": [
+   "T₍ₙ/₂₎",
+   "T₍ₙ/₂₊₁₎",
+   "T₍ₙ/₂₊₂₎",
+   "T₍ₙ₊₁₎"
+  ],
+  "answer": 1,
+  "explain": "There are n+1 terms (odd count), so the single middle term is T₍ₙ/₂₊₁₎.",
+  "kind": "fact",
+  "id": "f22f24e4-8a08-4f47-a815-2301141e9118",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For odd n, (x + a)ⁿ has middle terms",
+  "formula": "",
+  "options": [
+   "One: T₍ₙ₊₁₎/₂",
+   "Two: T₍ₙ₊₁₎/₂ and T₍ₙ₊₃₎/₂",
+   "Two: T₍ₙ₋₁₎/₂ and T₍ₙ₊₁₎/₂",
+   "One: T₍ₙ₊₃₎/₂"
+  ],
+  "answer": 1,
+  "explain": "n+1 terms is even, so two middle terms: T₍ₙ₊₁₎/₂ and T₍ₙ₊₃₎/₂.",
+  "kind": "fact",
+  "id": "9b50e1cf-480e-428d-81e9-997f2a2a91b3",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "ⁿC₀ − ⁿC₁ + ⁿC₂ − … + (−1)ⁿ ⁿCₙ equals (n ≥ 1)",
+  "formula": "",
+  "options": [
+   "2ⁿ",
+   "1",
+   "0",
+   "(−1)ⁿ"
+  ],
+  "answer": 2,
+  "explain": "Put x = −1 in (1+x)ⁿ: (1−1)ⁿ = 0.",
+  "kind": "result",
+  "id": "00d0f1f7-34ee-4db5-9ad9-3961096bf440",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "ⁿC₀² + ⁿC₁² + … + ⁿCₙ² equals",
+  "formula": "",
+  "options": [
+   "²ⁿCₙ",
+   "2ⁿ",
+   "²ⁿCₙ₊₁",
+   "ⁿ²"
+  ],
+  "answer": 0,
+  "explain": "Coefficient of xⁿ in (1+x)ⁿ(1+x)ⁿ gives ²ⁿCₙ.",
+  "kind": "result",
+  "id": "9a35e166-2063-4d4d-b362-f8616b1216de",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "1·ⁿC₁ + 2·ⁿC₂ + 3·ⁿC₃ + … + n·ⁿCₙ equals",
+  "formula": "",
+  "options": [
+   "n·2ⁿ",
+   "n·2ⁿ⁻¹",
+   "(n+1)·2ⁿ⁻¹",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 1,
+  "explain": "Differentiate (1+x)ⁿ and put x = 1: n·2ⁿ⁻¹.",
+  "kind": "result",
+  "id": "f4c69551-4ae8-46d2-a31a-226cd2c0c93c",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "r·ⁿCᵣ is equal to",
+  "formula": "",
+  "options": [
+   "n·ⁿ⁻¹Cᵣ",
+   "n·ⁿ⁻¹Cᵣ₋₁",
+   "(n−1)·ⁿ⁻¹Cᵣ₋₁",
+   "n·ⁿCᵣ₋₁"
+  ],
+  "answer": 1,
+  "explain": "r·n!/(r!(n−r)!) = n·(n−1)!/((r−1)!(n−r)!) = n·ⁿ⁻¹Cᵣ₋₁.",
+  "kind": "formula",
+  "id": "12477f2f-54e7-4722-8688-4e3c79c1d9bb",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Ratio ⁿCᵣ / ⁿCᵣ₋₁ equals",
+  "formula": "",
+  "options": [
+   "(n−r)/r",
+   "(n−r+1)/r",
+   "(n−r+1)/(r+1)",
+   "(r+1)/(n−r)"
+  ],
+  "answer": 1,
+  "explain": "ⁿCᵣ/ⁿCᵣ₋₁ = (n−r+1)/r, used in ratio of consecutive terms.",
+  "kind": "formula",
+  "id": "c3bb80be-60c2-4aed-ae73-94fed775ac8f",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "The rth term from the end in (a + b)ⁿ is which term from the beginning?",
+  "formula": "",
+  "options": [
+   "(n−r)th",
+   "(n−r+1)th",
+   "(n−r+2)th",
+   "(n−r+3)th"
+  ],
+  "answer": 2,
+  "explain": "Total n+1 terms, so rth from end = (n+1 − r + 1) = (n−r+2)th from start.",
+  "kind": "formula",
+  "id": "c924c3cf-1832-4e19-aca9-7b6e2628be0d",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "If ⁿCᵣ = ⁿCₛ, then",
+  "formula": "",
+  "options": [
+   "r = s only",
+   "r + s = n only",
+   "r = s or r + s = n",
+   "r − s = n"
+  ],
+  "answer": 2,
+  "explain": "ⁿCᵣ = ⁿCₙ₋ᵣ, so equality holds when r = s or r + s = n.",
+  "kind": "concept",
+  "id": "c0ea2125-f25d-44e0-9d30-6dded3114de7",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "In (x² + 1/x)ⁿ, the power of x in T₍ᵣ₊₁₎ is",
+  "formula": "",
+  "options": [
+   "2n − 3r",
+   "2n − r",
+   "n − 3r",
+   "2n − 2r"
+  ],
+  "answer": 0,
+  "explain": "x^{2(n−r)}·x^{−r} = x^{2n−3r}.",
+  "kind": "formula",
+  "id": "7aab7bf5-75e0-4fdb-b43c-3de7e66eab7a",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Number of terms in the expansion of (x + a)⁸ + (x − a)⁸ is",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "8",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "Odd powers of a cancel; only even r = 0,2,4,6,8 survive: 5 terms.",
+  "kind": "result",
+  "id": "3fb3f056-0b2f-4ffa-8be5-8dab88941156",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "C₀ + C₁/2 + C₂/3 + … + Cₙ/(n+1) equals",
+  "formula": "",
+  "options": [
+   "2ⁿ/(n+1)",
+   "(2ⁿ⁺¹ − 1)/(n+1)",
+   "(2ⁿ − 1)/(n+1)",
+   "2ⁿ⁺¹/(n+1)"
+  ],
+  "answer": 1,
+  "explain": "Integrate (1+x)ⁿ from 0 to 1: (2ⁿ⁺¹ − 1)/(n+1).",
+  "kind": "result",
+  "id": "fb802736-1e85-4eb6-aa4a-55dd2c780d01",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For odd n, the greatest binomial coefficient in (1+x)ⁿ is",
+  "formula": "",
+  "options": [
+   "ⁿCₙ/₂ only",
+   "ⁿC₍ₙ₋₁₎/₂ and ⁿC₍ₙ₊₁₎/₂ (equal)",
+   "ⁿC₍ₙ₊₁₎/₂ only",
+   "ⁿC₍ₙ₊₃₎/₂"
+  ],
+  "answer": 1,
+  "explain": "Two equal central coefficients: ⁿC₍ₙ₋₁₎/₂ = ⁿC₍ₙ₊₁₎/₂.",
+  "kind": "fact",
+  "id": "fc7e0521-0dc7-445b-b113-463072c881b8",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Constant term in the expansion of (x + 1/x)¹¹ is",
+  "formula": "",
+  "options": [
+   "¹¹C₅",
+   "¹¹C₆",
+   "0",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Power of x is 11 − 2r, which is odd and never 0, so no constant term.",
+  "kind": "concept",
+  "id": "7378a2c3-09ea-471f-a1c4-28df818f80bd",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "C₀ − C₁/2 + C₂/3 − … + (−1)ⁿ Cₙ/(n+1) equals",
+  "formula": "",
+  "options": [
+   "1/(n+1)",
+   "1/n",
+   "0",
+   "(2ⁿ⁺¹ − 1)/(n+1)"
+  ],
+  "answer": 0,
+  "explain": "Integrate (1−x)ⁿ from 0 to 1 to get 1/(n+1).",
+  "kind": "result",
+  "id": "0696e18c-dd24-4bc7-b7bc-ed01de1e7836",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "9ⁿ⁺¹ − 8n − 9 (n ∈ N) is always divisible by",
+  "formula": "",
+  "options": [
+   "64",
+   "8",
+   "72",
+   "81"
+  ],
+  "answer": 0,
+  "explain": "9ⁿ⁺¹ = (1+8)ⁿ⁺¹; the terms after 1 + 8(n+1) carry 8², so 64 divides it.",
+  "kind": "result",
+  "id": "16534ada-7f37-41cc-8d6f-58904df6fdec",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For any positive integer n, (2+√3)ⁿ + (2−√3)ⁿ is",
+  "formula": "",
+  "options": [
+   "A positive integer",
+   "Always irrational",
+   "A negative integer",
+   "Always of the form k√3"
+  ],
+  "answer": 0,
+  "explain": "The √3 terms of odd order cancel; 2·(even-index terms) is an integer.",
+  "kind": "concept",
+  "id": "f16b9263-7ef4-4446-8523-111a4d29e678",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "The (r+1)th term in the expansion of (x − a)ⁿ is",
+  "formula": "Tᵣ₊₁ = ?",
+  "options": [
+   "(−1)ʳ ⁿCᵣ xⁿ⁻ʳ aʳ",
+   "ⁿCᵣ xⁿ⁻ʳ aʳ",
+   "(−1)ʳ ⁿCᵣ xʳ aⁿ⁻ʳ",
+   "(−1)ʳ⁺¹ ⁿCᵣ xⁿ⁻ʳ aʳ"
+  ],
+  "answer": 0,
+  "explain": "Replace a by −a in the general term ⁿCᵣ xⁿ⁻ʳ aʳ.",
+  "kind": "formula",
+  "id": "6f5a09a0-0bcf-41f7-893c-73e0e3a9e0ad",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "In (x + a)ⁿ, the ratio Tᵣ₊₁ / Tᵣ equals",
+  "formula": "",
+  "options": [
+   "((n−r+1)/r)·(a/x)",
+   "((n−r)/r)·(a/x)",
+   "((n−r+1)/r)·(x/a)",
+   "((r+1)/(n−r))·(a/x)"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁/Tᵣ = [ⁿCᵣ/ⁿCᵣ₋₁]·(a/x) = ((n−r+1)/r)(a/x).",
+  "kind": "formula",
+  "id": "d7202b46-d6ec-4e7e-8a4f-2e14752d2175",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "C₀ + 2C₁ + 3C₂ + … + (n+1)Cₙ equals",
+  "formula": "",
+  "options": [
+   "(n+2)·2ⁿ⁻¹",
+   "(n+1)·2ⁿ",
+   "n·2ⁿ⁻¹",
+   "(n+2)·2ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Σ(r+1)Cᵣ = n2ⁿ⁻¹ + 2ⁿ = (n+2)2ⁿ⁻¹.",
+  "kind": "result",
+  "id": "3efdea4a-4d74-48a9-b159-f59a922cb99b",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "ʳCᵣ + ʳ⁺¹Cᵣ + ʳ⁺²Cᵣ + … + ⁿCᵣ equals",
+  "formula": "Hockey-stick identity",
+  "options": [
+   "ⁿ⁺¹Cᵣ₊₁",
+   "ⁿ⁺¹Cᵣ",
+   "ⁿCᵣ₊₁",
+   "ⁿ⁺²Cᵣ₊₁"
+  ],
+  "answer": 0,
+  "explain": "Repeated use of Pascal's rule telescopes the sum to ⁿ⁺¹Cᵣ₊₁.",
+  "kind": "result",
+  "id": "07a4bce0-dbb3-4909-b62f-c51dacf2bdd0",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For n = 2m, C₀² − C₁² + C₂² − … + C₂ₘ² equals",
+  "formula": "Cᵣ = ²ᵐCᵣ",
+  "options": [
+   "(−1)ᵐ·²ᵐCₘ",
+   "²ᵐCₘ",
+   "0",
+   "(−1)ᵐ·²ᵐ⁺¹Cₘ"
+  ],
+  "answer": 0,
+  "explain": "It is the coefficient of x²ᵐ in (1+x)²ᵐ(1−x)²ᵐ = (1−x²)²ᵐ, which is (−1)ᵐ ²ᵐCₘ.",
+  "kind": "result",
+  "id": "a2490607-54a3-41d7-a10a-7334827c71e2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For n ≥ 1, C₀ + C₂ + C₄ + … (even-indexed binomial coefficients of (1+x)ⁿ) equals",
+  "formula": "",
+  "options": [
+   "2ⁿ⁻¹",
+   "2ⁿ",
+   "2ⁿ⁻²",
+   "2ⁿ − 1"
+  ],
+  "answer": 0,
+  "explain": "Adding (1+1)ⁿ and (1−1)ⁿ gives 2(C₀+C₂+…) = 2ⁿ, so the sum is 2ⁿ⁻¹.",
+  "kind": "result",
+  "id": "4013b89d-d89f-4ee4-b719-af356a6e81bb",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "C₀C₁ + C₁C₂ + … + Cₙ₋₁Cₙ for (1+x)ⁿ equals",
+  "formula": "",
+  "options": [
+   "²ⁿCₙ₊₁",
+   "²ⁿCₙ",
+   "²ⁿ⁺¹Cₙ",
+   "²ⁿCₙ₊₂"
+  ],
+  "answer": 0,
+  "explain": "It is the coefficient of xⁿ⁺¹ in (1+x)ⁿ(1+x)ⁿ, which gives ²ⁿCₙ₊₁ (= ²ⁿCₙ₋₁).",
+  "kind": "result",
+  "id": "1a012011-28c2-4a25-9556-3342e8ad06ca",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Number of terms in (a+b)⁹ + (a−b)⁹ after simplification is",
+  "formula": "n odd: (n+1)/2",
+  "options": [
+   "4",
+   "5",
+   "10",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "Only even powers of b survive: b⁰, b², b⁴, b⁶, b⁸, so 5 terms.",
+  "kind": "result",
+  "id": "83d188e5-7575-4525-97b1-329ee19e8c47",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Number of terms in the expansion of (a+b+c)⁴ is",
+  "formula": "(n+1)(n+2)/2",
+  "options": [
+   "12",
+   "15",
+   "10",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "(n+1)(n+2)/2 with n=4 gives 5·6/2 = 15.",
+  "kind": "formula",
+  "id": "f96f1e72-9ab2-41eb-85d8-52302e94a03a",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Number of terms in the expansion of (1+x)ⁿ(1+1/x)ⁿ is",
+  "formula": "= x⁻ⁿ(1+x)²ⁿ",
+  "options": [
+   "n+1",
+   "2n+1",
+   "2n",
+   "n²"
+  ],
+  "answer": 1,
+  "explain": "The product is x⁻ⁿ(1+x)²ⁿ, which has 2n+1 terms (powers x⁻ⁿ to xⁿ).",
+  "kind": "result",
+  "id": "44c6be28-4fb0-49cb-aa65-4e15fccd5b6f",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "For |x|<1, the number of terms in the expansion of (1+x)⁻³ is",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "infinite"
+  ],
+  "answer": 3,
+  "explain": "A negative integer index gives a non-terminating series.",
+  "kind": "concept",
+  "id": "ca4fc106-4d45-4d54-8a8f-44766f9b3ce9",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "For even n, the greatest binomial coefficient in (1+x)ⁿ is",
+  "formula": "",
+  "options": [
+   "ⁿC_{n/2}",
+   "ⁿC_{(n+1)/2}",
+   "ⁿC_{n/2+1}",
+   "ⁿCₙ"
+  ],
+  "answer": 0,
+  "explain": "Coefficients are symmetric and peak at the single middle term, ⁿC_{n/2}.",
+  "kind": "fact",
+  "id": "420a5542-f31c-479a-a5d5-f4aead254ed2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "In (1+x)¹¹, the greatest binomial coefficient is ¹¹Cᵣ for r =",
+  "formula": "",
+  "options": [
+   "5 only",
+   "6 only",
+   "5 and 6",
+   "4 and 7"
+  ],
+  "answer": 2,
+  "explain": "For odd n, ⁿC_{(n−1)/2} = ⁿC_{(n+1)/2} are both greatest: ¹¹C₅ = ¹¹C₆.",
+  "kind": "exception",
+  "id": "2e57cc3d-32c4-4ed0-98e5-2b34be5113f0",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "In (1+2x)ⁿ, coefficients of xʳ and xⁿ⁻ʳ are equal only when r =",
+  "formula": "2ʳ·ⁿCᵣ vs 2ⁿ⁻ʳ·ⁿCᵣ",
+  "options": [
+   "n−1",
+   "n/2",
+   "1",
+   "any r"
+  ],
+  "answer": 1,
+  "explain": "The ⁿCᵣ parts match, but 2ʳ = 2ⁿ⁻ʳ needs r = n/2. Symmetry holds only for (1+x)ⁿ.",
+  "kind": "exception",
+  "id": "5d9ad805-2298-4b6d-a0b0-166743513ca1",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Number of terms in (x+y)⁸ − (x−y)⁸ after simplification is",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "8",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "Only odd powers of y survive: y, y³, y⁵, y⁷, giving 4 terms.",
+  "kind": "result",
+  "id": "8adae82d-b3f9-4cd9-aa3e-29b1ea36eeec",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "If ⁿC₈ = ⁿC₁₂, then the value of ⁿC₂₂ is",
+  "formula": "ⁿCᵣ = ⁿCₛ ⇒ r+s = n",
+  "options": [
+   "1",
+   "0",
+   "22",
+   "²²C₂₀"
+  ],
+  "answer": 1,
+  "explain": "n = 8+12 = 20, and ²⁰C₂₂ = 0 since r > n.",
+  "kind": "exception",
+  "id": "ae83028e-e4c5-4338-a9e2-07248a4c5d18",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Number of terms in the expansion of (1+x)¹⁰(1−x)¹⁰ is",
+  "formula": "(1+x)ⁿ(1−x)ⁿ = (1−x²)ⁿ",
+  "options": [
+   "11",
+   "21",
+   "10",
+   "20"
+  ],
+  "answer": 0,
+  "explain": "The product is (1−x²)¹⁰, which has 10+1 = 11 terms.",
+  "kind": "result",
+  "id": "367ccf2b-3609-4157-bd36-373f65eb8feb",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Middle term of (a + b)ⁿ when n is even is which term?",
+  "formula": "",
+  "options": [
+   "Tₙ/₂",
+   "T₍ₙ₊₁₎/₂",
+   "Tₙ/₂₊₁",
+   "Tₙ₊₁"
+  ],
+  "answer": 2,
+  "explain": "There are n+1 terms (odd count), so the middle one is T₍ₙ/₂₎₊₁.",
+  "kind": "fact",
+  "id": "66c0afa7-94eb-46d2-a81b-7a48c387f581",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "Middle terms of (a + b)ⁿ when n is odd are?",
+  "formula": "",
+  "options": [
+   "T₍ₙ₊₁₎/₂ and T₍ₙ₊₃₎/₂",
+   "Tₙ/₂ and Tₙ/₂₊₁",
+   "T₍ₙ₋₁₎/₂ and T₍ₙ₊₁₎/₂",
+   "Only T₍ₙ₊₁₎/₂"
+  ],
+  "answer": 0,
+  "explain": "n+1 terms is even, so two middle terms: T₍ₙ₊₁₎/₂ and T₍ₙ₊₃₎/₂.",
+  "kind": "fact",
+  "id": "7c9900ad-9768-4a71-93ed-3083f5aaf872",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "A term independent of x exists in (x + 1/x)ⁿ only if n is?",
+  "formula": "",
+  "options": [
+   "Odd",
+   "Even",
+   "Multiple of 3",
+   "Any integer"
+  ],
+  "answer": 1,
+  "explain": "Power of x is n−2r = 0 gives r = n/2, an integer only for even n.",
+  "kind": "concept",
+  "id": "727e11de-e24e-41ec-8e26-09a7bdf4f19d",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "Term independent of x in (x + 1/x)²ⁿ is?",
+  "formula": "",
+  "options": [
+   "²ⁿCₙ",
+   "²ⁿCₙ₊₁",
+   "²ⁿⁿ C₂",
+   "ⁿC₂ₙ"
+  ],
+  "answer": 0,
+  "explain": "Power 2n−2r = 0 gives r = n, so the term is ²ⁿCₙ (the middle term).",
+  "kind": "result",
+  "id": "99cbe622-4822-4393-87d2-ab13af8b26bf",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (x³ + 1/x²)¹⁰, the term independent of x has r equal to?",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "6",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "Power 3(10−r) − 2r = 30 − 5r = 0 gives r = 6.",
+  "kind": "result",
+  "id": "ef992c8c-0b90-435c-9531-ccc296cec9fb",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "Number of terms in (a + b + c)ⁿ is?",
+  "formula": "",
+  "options": [
+   "(n+1)(n+2)/2",
+   "n(n+1)/2",
+   "(n+1)²",
+   "3n + 1"
+  ],
+  "answer": 0,
+  "explain": "Non-negative solutions of p+q+s = n number ⁿ⁺²C₂ = (n+1)(n+2)/2.",
+  "kind": "formula",
+  "id": "b24e51f3-1eb6-47f2-820d-608a68181119",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "Number of terms in (x + a)¹⁰⁰ + (x − a)¹⁰⁰ after simplification?",
+  "formula": "",
+  "options": [
+   "50",
+   "51",
+   "100",
+   "101"
+  ],
+  "answer": 1,
+  "explain": "Only even r survive and are doubled: r = 0, 2, …, 100 gives 51 terms.",
+  "kind": "result",
+  "id": "f3306224-e048-438b-a5f1-238209059504",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "Number of terms in (x + a)⁹ − (x − a)⁹ after simplification?",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "9",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "Only odd r survive: r = 1, 3, 5, 7, 9 gives 5 terms.",
+  "kind": "result",
+  "id": "2b8c0c56-12b3-45d7-ba34-04abcfa672e8",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (1 + x)ⁿ, the coefficients of Tᵣ₊₁ and Tₙ₋ᵣ₊₁ are?",
+  "formula": "",
+  "options": [
+   "Equal",
+   "Negatives of each other",
+   "In ratio n : r",
+   "Differ by 1"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ = ⁿCₙ₋ᵣ, so terms equidistant from the ends have equal coefficients.",
+  "kind": "concept",
+  "id": "249d5b84-2cd8-483a-9913-969bb4a3a5c9",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (√2 + ³√3)ⁿ, a term is rational only if r and n − r satisfy?",
+  "formula": "",
+  "options": [
+   "r even, n − r multiple of 3",
+   "r multiple of 3, n − r even",
+   "r multiple of 6",
+   "r odd, n − r odd"
+  ],
+  "answer": 1,
+  "explain": "Term has 2^((n−r)/2)·3^(r/3): need (n−r) even and r a multiple of 3.",
+  "kind": "concept",
+  "id": "3cb8dd91-1311-4b79-bf4f-ee63cd1de6cf",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "The 5th term of (a + b)ⁿ is?",
+  "formula": "",
+  "options": [
+   "ⁿC₅ aⁿ⁻⁵ b⁵",
+   "ⁿC₄ aⁿ⁻⁴ b⁴",
+   "ⁿC₄ aⁿ⁻⁵ b⁴",
+   "ⁿC₅ aⁿ⁻⁴ b⁴"
+  ],
+  "answer": 1,
+  "explain": "5th term is T₅ = T₄₊₁, so r = 4: ⁿC₄ aⁿ⁻⁴ b⁴.",
+  "kind": "formula",
+  "id": "c3133568-cfc8-49d4-aca0-612b4d468205",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (a+b)ⁿ, the ratio Tᵣ₊₂ / Tᵣ₊₁ equals?",
+  "formula": "Tᵣ₊₂/Tᵣ₊₁ = ((n−r)/(r+1))·(b/a)",
+  "options": [
+   "(n−r)b / ((r+1)a)",
+   "(n−r+1)b / (r·a)",
+   "(r+1)b / ((n−r)a)",
+   "(n−r)a / ((r+1)b)"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ₊₁/ⁿCᵣ = (n−r)/(r+1), and the extra factor b/a comes from the powers.",
+  "kind": "formula",
+  "id": "03de3081-b774-4690-af79-3786bbe28260",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (a+b)ⁿ, the rth term from the end is?",
+  "formula": "rth from end = Tₙ₋ᵣ₊₂",
+  "options": [
+   "Tₙ₋ᵣ₊₂",
+   "Tₙ₋ᵣ₊₁",
+   "Tₙ₋ᵣ",
+   "Tₙ₋ᵣ₊₃"
+  ],
+  "answer": 0,
+  "explain": "There are n+1 terms; the 1st from the end is Tₙ₊₁, so the rth from the end is Tₙ₋ᵣ₊₂.",
+  "kind": "formula",
+  "id": "194c5a56-0a88-4e6d-bac4-d9cef717e884",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (x + 1/x)ⁿ, the power of x in Tᵣ₊₁ is?",
+  "formula": "xⁿ⁻ʳ · x⁻ʳ",
+  "options": [
+   "n − 2r",
+   "n − r",
+   "2n − r",
+   "n − 2r + 1"
+  ],
+  "answer": 0,
+  "explain": "xⁿ⁻ʳ·(1/x)ʳ = xⁿ⁻²ʳ.",
+  "kind": "formula",
+  "id": "fcd70a90-967e-46ab-bb29-5eb1f2634c85",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "A term independent of x exists in (x² + 1/x)ⁿ only if n is a multiple of?",
+  "formula": "2n − 3r = 0 ⇒ r = 2n/3",
+  "options": [
+   "3",
+   "2",
+   "6",
+   "Any positive integer"
+  ],
+  "answer": 0,
+  "explain": "r = 2n/3 must be an integer, and gcd(2,3)=1, so 3 | n.",
+  "kind": "concept",
+  "id": "58c3f0b0-94ea-452e-b1b0-b30e2aac16a8",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (2x + 3)ⁿ, the binomial coefficient of Tᵣ₊₁ is?",
+  "formula": "",
+  "options": [
+   "ⁿCᵣ",
+   "ⁿCᵣ · 2ⁿ⁻ʳ · 3ʳ",
+   "ⁿCᵣ · 2ⁿ⁻ʳ",
+   "ⁿCᵣ₊₁"
+  ],
+  "answer": 0,
+  "explain": "The binomial coefficient is only ⁿCᵣ; the coefficient of the term also includes the constants 2ⁿ⁻ʳ3ʳ.",
+  "kind": "concept",
+  "id": "56f70f82-1d01-4f69-8f1c-36618cd0e139",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "The (r+1)th term of (b + a)ⁿ is which term of (a + b)ⁿ?",
+  "formula": "",
+  "options": [
+   "Tₙ₋ᵣ₊₁",
+   "Tₙ₋ᵣ",
+   "Tᵣ",
+   "Tₙ₋ᵣ₊₂"
+  ],
+  "answer": 0,
+  "explain": "Swapping a and b reverses the order of terms, so Tᵣ₊₁ becomes Tₙ₋ᵣ₊₁.",
+  "kind": "concept",
+  "id": "77f197a4-fa56-4a27-84db-42812edb77c1",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "The coefficient of xⁿ⁻ʳ in (x + a)ⁿ is?",
+  "formula": "",
+  "options": [
+   "ⁿCᵣ · aʳ",
+   "ⁿCᵣ · aⁿ⁻ʳ",
+   "ⁿCᵣ₊₁ · aʳ",
+   "ⁿCᵣ₋₁ · aʳ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "xⁿ⁻ʳ appears in Tᵣ₊₁ = ⁿCᵣ xⁿ⁻ʳ aʳ.",
+  "kind": "formula",
+  "id": "a6a46037-5df9-4761-82ea-9acabaa8e347",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (1+x)ⁿ, (coefficient of xʳ)/(coefficient of xʳ⁻¹) equals?",
+  "formula": "ⁿCᵣ/ⁿCᵣ₋₁",
+  "options": [
+   "(n−r+1)/r",
+   "(n−r)/(r+1)",
+   "(n−r+1)/(r+1)",
+   "(n−r)/r"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ/ⁿCᵣ₋₁ = (n−r+1)/r.",
+  "kind": "formula",
+  "id": "3f931ed3-c109-4ef9-97f4-ed384af02ce7",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (x + 1/x)ⁿ with n odd, which powers of x can occur?",
+  "formula": "power = n − 2r",
+  "options": [
+   "Only odd powers",
+   "Only even powers",
+   "Zero power as well",
+   "Every integer power"
+  ],
+  "answer": 0,
+  "explain": "n − 2r has the same parity as n, so for odd n only odd powers occur and there is no constant term.",
+  "kind": "concept",
+  "id": "f8d6e89f-f2fa-46ab-8e20-8af59ef2dac4",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "The second term from the end in (a + b)ⁿ is?",
+  "formula": "Tₙ",
+  "options": [
+   "n · a · bⁿ⁻¹",
+   "n · aⁿ⁻¹ · b",
+   "ⁿC₂ · a² · bⁿ⁻²",
+   "a · bⁿ"
+  ],
+  "answer": 0,
+  "explain": "Tₙ = ⁿCₙ₋₁ aⁿ⁻⁽ⁿ⁻¹⁾ bⁿ⁻¹ = n·a·bⁿ⁻¹.",
+  "kind": "result",
+  "id": "05c31a4e-449f-4b76-9191-c5dcaa21d1b6",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "Constant term in (1+x)ⁿ(1+1/x)ⁿ is?",
+  "formula": "(1+x)ⁿ(1+1/x)ⁿ = (1+x)²ⁿ/xⁿ",
+  "options": [
+   "2ⁿ",
+   "ⁿCₙ/₂",
+   "²ⁿCₙ",
+   "²ⁿCₙ₊₁"
+  ],
+  "answer": 2,
+  "explain": "Constant term = coefficient of xⁿ in (1+x)²ⁿ = ²ⁿCₙ.",
+  "kind": "result",
+  "id": "92cc79c9-e49d-4c6a-b360-e22e6368b779",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (x³ + 1/x)ⁿ, the power of x in Tᵣ₊₁ is?",
+  "formula": "",
+  "options": [
+   "3n − 4r",
+   "3n − 2r",
+   "3n − 3r",
+   "n − 4r"
+  ],
+  "answer": 0,
+  "explain": "x³⁽ⁿ⁻ʳ⁾ · x⁻ʳ = x³ⁿ⁻⁴ʳ.",
+  "kind": "formula",
+  "id": "12eb8967-8cf5-418e-b4b1-c99c6584157b",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "A term independent of x exists in (x² + 1/x³)ⁿ only if n is a multiple of?",
+  "formula": "",
+  "options": [
+   "5",
+   "6",
+   "3",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Power = 2n − 5r = 0 gives r = 2n/5, so n must be a multiple of 5.",
+  "kind": "result",
+  "id": "4303a21e-dc6b-4e72-9c4d-792592d3edfa",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (a+b)ⁿ with n odd, the two middle terms are",
+  "formula": "",
+  "options": [
+   "T_{(n−1)/2} and T_{(n+1)/2}",
+   "T_{(n+1)/2} and T_{(n+3)/2}",
+   "T_{n/2} and T_{n/2+1}",
+   "T_{(n+3)/2} and T_{(n+5)/2}"
+  ],
+  "answer": 1,
+  "explain": "n+1 terms (even count); the middle pair is T_{(n+1)/2} and T_{(n+3)/2}.",
+  "kind": "fact",
+  "id": "790fd4d5-8957-4c63-bb23-1885f5df21b5",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "For n odd, the greatest binomial coefficients in (1+x)ⁿ are",
+  "formula": "",
+  "options": [
+   "ⁿC_{(n−1)/2} and ⁿC_{(n+1)/2}, equal",
+   "ⁿC_{n/2} only",
+   "ⁿC_{(n+1)/2} and ⁿC_{(n+3)/2}",
+   "ⁿC₀ and ⁿCₙ"
+  ],
+  "answer": 0,
+  "explain": "ⁿC_r is largest at r=(n±1)/2, and these two are equal by symmetry.",
+  "kind": "fact",
+  "id": "8d503987-b49e-4a4f-b142-528bef7c372e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "In (x+1/x)²ⁿ⁺¹, the two middle terms contain powers",
+  "formula": "",
+  "options": [
+   "x⁰ and x¹",
+   "x⁻¹ and x⁰",
+   "x² and x⁻²",
+   "x¹ and x⁻¹"
+  ],
+  "answer": 3,
+  "explain": "T_{n+1} gives x^{(n+1)−n}=x, and T_{n+2} gives x⁻¹.",
+  "kind": "result",
+  "id": "97d62e55-cc25-4f8f-b457-3acd2068eef8",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Sum of coefficients of the two middle terms of (1+x)²ⁿ⁻¹ equals",
+  "formula": "",
+  "options": [
+   "²ⁿCₙ",
+   "²ⁿ⁻¹Cₙ",
+   "²ⁿCₙ₋₁ − 1",
+   "2·²ⁿ⁻¹Cₙ₋₂"
+  ],
+  "answer": 0,
+  "explain": "²ⁿ⁻¹Cₙ₋₁ + ²ⁿ⁻¹Cₙ = ²ⁿCₙ by Pascal's rule.",
+  "kind": "result",
+  "id": "3bb4b62c-05bf-4054-8317-c4cfa51057f8",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Sum of coefficients of the middle terms of (1+x)²ⁿ⁺¹ equals",
+  "formula": "",
+  "options": [
+   "²ⁿ⁺¹Cₙ",
+   "²ⁿ⁺²Cₙ₊₁",
+   "²ⁿCₙ",
+   "²ⁿ⁺²Cₙ"
+  ],
+  "answer": 1,
+  "explain": "²ⁿ⁺¹Cₙ + ²ⁿ⁺¹Cₙ₊₁ = ²ⁿ⁺²Cₙ₊₁ by Pascal's rule.",
+  "kind": "result",
+  "id": "b31344f6-5ad7-4cda-bd5e-f9aa3daebc3c",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Coefficient of the middle term in (1+x)¹⁰ is",
+  "formula": "",
+  "options": [
+   "210",
+   "120",
+   "252",
+   "126"
+  ],
+  "answer": 2,
+  "explain": "Middle term is T₆, coefficient ¹⁰C₅ = 252.",
+  "kind": "result",
+  "id": "1f5fa4dc-ef70-4570-93ee-8c247e34fb8f",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Each middle term of (1+x)⁹ has coefficient",
+  "formula": "",
+  "options": [
+   "84",
+   "126",
+   "252",
+   "63"
+  ],
+  "answer": 1,
+  "explain": "Middle terms are T₅ and T₆ with ⁹C₄ = ⁹C₅ = 126.",
+  "kind": "result",
+  "id": "ae7ac514-bb84-48cb-af07-c3215daee3be",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "In (a−b)ⁿ with n odd, the two middle terms have",
+  "formula": "",
+  "options": [
+   "the same sign and equal coefficients",
+   "opposite signs and equal numerical coefficients",
+   "opposite signs and unequal coefficients",
+   "the same sign and unequal coefficients"
+  ],
+  "answer": 1,
+  "explain": "Binomial coefficients are equal, but (−b) powers differ by one, so signs are opposite.",
+  "kind": "concept",
+  "id": "02f7959b-5eb6-4bb0-8da0-7a370036d590",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "In the expansion of (x+y)¹², the number of terms before the middle term is",
+  "formula": "",
+  "options": [
+   "5",
+   "7",
+   "6",
+   "12"
+  ],
+  "answer": 2,
+  "explain": "Middle term is T₇, so 6 terms come before it.",
+  "kind": "fact",
+  "id": "d748b621-4023-4820-a68d-b810deab07e0",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "The binomial coefficients ⁿC_r, r = 0 to n, are",
+  "formula": "",
+  "options": [
+   "increasing throughout",
+   "decreasing throughout",
+   "increasing to the middle, then decreasing",
+   "decreasing to the middle, then increasing"
+  ],
+  "answer": 2,
+  "explain": "ⁿC_r/ⁿC_{r−1} = (n−r+1)/r >1 until about the middle, so the maximum is central.",
+  "kind": "graph",
+  "id": "911486ce-17ae-404b-8189-319625e5d53c",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "For which n does (a+b)ⁿ have a single middle term?",
+  "formula": "",
+  "options": [
+   "n even",
+   "n odd",
+   "n a multiple of 3",
+   "every n"
+  ],
+  "answer": 0,
+  "explain": "Number of terms n+1 is odd only for even n, giving one central term.",
+  "kind": "concept",
+  "id": "0d10eede-18b4-4e65-97b9-7fe76144385b",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "For n ≥ 2, C₁ − 2C₂ + 3C₃ − … + (−1)ⁿ⁻¹·n·Cₙ equals",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "n",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Differentiate (1−x)ⁿ: −n(1−x)ⁿ⁻¹ → 0 at x=1 when n ≥ 2, so the alternating sum is 0.",
+  "kind": "result",
+  "id": "23d8f573-5075-450d-8a5d-7ecb0ecd1240",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Middle term of (2x + y)⁴ is",
+  "formula": "T₃ = ⁴C₂ (2x)² y²",
+  "options": [
+   "6x²y²",
+   "12x²y²",
+   "24x²y²",
+   "32x²y²"
+  ],
+  "answer": 2,
+  "explain": "T₃ = ⁴C₂·4x²·y² = 6·4 x²y² = 24x²y².",
+  "kind": "formula",
+  "id": "bdf44189-09a0-404a-9835-b7060a785122",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "In the middle term of (x² + 1/x)⁶, the power of x is",
+  "formula": "T₄ = ⁶C₃ (x²)³(1/x)³",
+  "options": [
+   "0",
+   "3",
+   "6",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "T₄ = 20·x⁶·x⁻³ = 20x³, so the power is 3.",
+  "kind": "result",
+  "id": "bb3034fa-e5bb-4836-9605-7bcf65b10c00",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "In (x² + 1/x)ⁿ, the power of x in Tᵣ₊₁ is",
+  "formula": "Tᵣ₊₁ = ⁿCᵣ x^{2(n−r)} x^{−r}",
+  "options": [
+   "2n − r",
+   "2n − 3r",
+   "n − 3r",
+   "2n − 2r"
+  ],
+  "answer": 1,
+  "explain": "x^{2(n−r)}·x^{−r} = x^{2n−3r}; set it to 0 for the constant term.",
+  "kind": "formula",
+  "id": "4c7446de-810a-40f6-a92f-a6d42369f57a",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "(x³ + 1/x²)ⁿ has a term independent of x only if n is a multiple of",
+  "formula": "3(n−r) = 2r",
+  "options": [
+   "3",
+   "2",
+   "6",
+   "5"
+  ],
+  "answer": 3,
+  "explain": "3(n−r) − 2r = 0 gives r = 3n/5, so 5 must divide n.",
+  "kind": "result",
+  "id": "3ea7d0c7-6ec2-4eaf-b10d-c27d67ba6a9c",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "(x³ + 1/x)ⁿ has a term independent of x only if n is a multiple of",
+  "formula": "3(n−r) = r",
+  "options": [
+   "3",
+   "4",
+   "2",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "3(n−r) − r = 0 gives r = 3n/4, so 4 must divide n.",
+  "kind": "result",
+  "id": "d9efced6-2077-4548-86d7-275b77ce0044",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Constant term in (1 + x)ⁿ(1 + 1/x)ⁿ equals",
+  "formula": "Σ (ⁿCᵣ)²",
+  "options": [
+   "2ⁿ",
+   "²ⁿCₙ",
+   "ⁿCₙ/₂",
+   "2ⁿ − 1"
+  ],
+  "answer": 1,
+  "explain": "(1+x)²ⁿ/xⁿ: the coefficient of xⁿ in (1+x)²ⁿ is ²ⁿCₙ.",
+  "kind": "result",
+  "id": "0270cae6-2a8c-4d85-808e-d11162c2dd3a",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (1 + x)ⁿ / xᵏ (k ≤ n) is",
+  "formula": "",
+  "options": [
+   "ⁿCₖ₊₁",
+   "ⁿCₖ",
+   "ⁿCₙ₋ₖ₋₁",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "It is the coefficient of xᵏ in (1+x)ⁿ, which is ⁿCₖ.",
+  "kind": "formula",
+  "id": "e0ec4f2d-74c8-42c1-8eb8-c74b3bdebe8e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x² + 1/x)⁶ is",
+  "formula": "",
+  "options": [
+   "20",
+   "15",
+   "6",
+   "30"
+  ],
+  "answer": 1,
+  "explain": "12 − 3r = 0 gives r = 4, and ⁶C₄ = 15.",
+  "kind": "result",
+  "id": "22d4c446-aa6b-4076-9b3e-30d231fd7d77",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x² + 1/x³)¹⁰ is",
+  "formula": "",
+  "options": [
+   "252",
+   "120",
+   "210",
+   "45"
+  ],
+  "answer": 2,
+  "explain": "20 − 5r = 0 gives r = 4, and ¹⁰C₄ = 210.",
+  "kind": "result",
+  "id": "f0c2bdd3-de46-4d71-98fb-0db64473f4b3",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x + 1/x)⁷ is",
+  "formula": "",
+  "options": [
+   "⁷C₃",
+   "⁷C₄",
+   "0 (no such term)",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "The power is 7 − 2r, which is always odd, so it is never 0.",
+  "kind": "exception",
+  "id": "a49c2473-f7fd-4428-9e5b-d7ae55eba411",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "(x² + 1/x²)ⁿ has a term independent of x only when n is",
+  "formula": "2(n−r) = 2r",
+  "options": [
+   "a multiple of 3",
+   "odd",
+   "even",
+   "a multiple of 4"
+  ],
+  "answer": 2,
+  "explain": "The power is 2n − 4r = 0, so r = n/2 must be an integer and n even.",
+  "kind": "concept",
+  "id": "a1420a5c-bb97-4899-9fe8-3585fe649c73",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (1 + x²)(x + 1/x)⁴ is",
+  "formula": "",
+  "options": [
+   "6",
+   "10",
+   "4",
+   "14"
+  ],
+  "answer": 1,
+  "explain": "Constant = 1·6 + x²·(4x⁻²) = 6 + 4 = 10.",
+  "kind": "result",
+  "id": "290336dd-5e5b-4368-b658-976a7d30d425",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (1 + x + 1/x)² is",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Constant terms are 1·1 and 2·(x·1/x) = 2, so the total is 3.",
+  "kind": "result",
+  "id": "e5ab3842-1789-4cb5-951a-6cc244a2a7e7",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "In (√x + 1/x^{1/3})ⁿ, the term independent of x is Tᵣ₊₁ with r =",
+  "formula": "",
+  "options": [
+   "2n/5",
+   "3n/5",
+   "n/5",
+   "n/3"
+  ],
+  "answer": 1,
+  "explain": "(n−r)/2 = r/3 gives r = 3n/5.",
+  "kind": "result",
+  "id": "363e0aea-156f-4506-abeb-bc23f9df47d9",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "A constant term in (x^a + x^{−b})ⁿ needs r = an/(a+b) to be",
+  "formula": "",
+  "options": [
+   "any real number",
+   "an integer with 0 ≤ r ≤ n",
+   "a positive even integer",
+   "a prime number"
+  ],
+  "answer": 1,
+  "explain": "r is the index of the term, so it must be an integer from 0 to n.",
+  "kind": "concept",
+  "id": "f72548d8-f971-48d0-9066-0d0321a1d04e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x⁴ + 1/x)¹⁰ is",
+  "formula": "",
+  "options": [
+   "45",
+   "120",
+   "210",
+   "10"
+  ],
+  "answer": 0,
+  "explain": "40 − 5r = 0 gives r = 8, and ¹⁰C₈ = 45.",
+  "kind": "result",
+  "id": "65d34636-055b-4d41-a506-80dcdef1fcda",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "(x⁴ + 1/x²)ⁿ has a term independent of x only if n is a multiple of",
+  "formula": "4(n−r) − 2r = 0",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "4n − 6r = 0 gives r = 2n/3, which is an integer only when 3 | n.",
+  "kind": "exception",
+  "id": "5a742d59-e300-419c-b54d-562a3156a9dd",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "(x³ + 1/x⁵)ⁿ has a term independent of x only if n is a multiple of",
+  "formula": "3(n−r) − 5r = 0",
+  "options": [
+   "5",
+   "3",
+   "8",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "3n = 8r gives r = 3n/8, so 8 | n.",
+  "kind": "concept",
+  "id": "f3620bbe-7de6-4e0d-8af3-780e407674d7",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Constant term in (x² + 2 + 1/x²)³ is",
+  "formula": "x² + 2 + 1/x² = (x + 1/x)²",
+  "options": [
+   "20",
+   "15",
+   "8",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "The expression is (x + 1/x)⁶, whose constant term is ⁶C₃ = 20.",
+  "kind": "result",
+  "id": "e07a624d-afe9-409a-93eb-508c109b87a4",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in x(1 + 1/x)ⁿ is",
+  "formula": "",
+  "options": [
+   "1",
+   "n",
+   "ⁿC₂",
+   "n(n−1)"
+  ],
+  "answer": 1,
+  "explain": "Terms are ⁿCᵣ x^{1−r}. For r = 1 the coefficient is ⁿC₁ = n.",
+  "kind": "result",
+  "id": "37e362a7-ec7a-4c19-a851-e729d2b55285",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "When (x² − 1/x)ⁿ has a constant term, its sign is always",
+  "formula": "r = 2n/3",
+  "options": [
+   "positive",
+   "negative",
+   "(−1)ⁿ",
+   "depends on n being odd"
+  ],
+  "answer": 0,
+  "explain": "n = 3k gives r = 2k, which is even, so (−1)ʳ = +1.",
+  "kind": "concept",
+  "id": "8b2315c8-5188-49a5-ad69-931b499aa794",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x³ + 1/x)⁸ is",
+  "formula": "",
+  "options": [
+   "56",
+   "70",
+   "28",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "3(8−r) − r = 0 gives r = 6, so ⁸C₆ = 28.",
+  "kind": "result",
+  "id": "bc8f51dd-2e69-4d5a-a180-5de578fa74b7",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Constant term in (x² + 3/x)³ is",
+  "formula": "Tᵣ₊₁ = ³Cᵣ x^{6−3r}·3ʳ",
+  "options": [
+   "9",
+   "27",
+   "81",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "6 − 3r = 0 gives r = 2, so the term is ³C₂·3² = 3·9 = 27.",
+  "kind": "result",
+  "id": "a323ac27-c938-4157-8bc7-cdf2eb0d6573",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x³ + 2/x)⁴ is",
+  "formula": "",
+  "options": [
+   "8",
+   "24",
+   "32",
+   "16"
+  ],
+  "answer": 2,
+  "explain": "12 − 4r = 0 gives r = 3, so the term is ⁴C₃·2³ = 4·8 = 32.",
+  "kind": "result",
+  "id": "cb002efe-1599-4481-9aa6-9566f7b5cfcf",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Constant term in (x + 1 + 1/x)³ is",
+  "formula": "",
+  "options": [
+   "6",
+   "7",
+   "9",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "Choose exponents summing to 0: (1,1,1) gives 1 way, and (x,1,1/x) gives 3! = 6 ways. Total 7.",
+  "kind": "result",
+  "id": "9c169875-4522-482a-bffe-d10ef05b1821",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x/2 + 2/x)⁶ is",
+  "formula": "",
+  "options": [
+   "20",
+   "160",
+   "15",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "r = 3: ⁶C₃(1/2)³(2)³ = 20, since the coefficient product is 1.",
+  "kind": "result",
+  "id": "04e010a1-dc18-45a2-9341-c0a49e0578c9",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Pascal-type relation: ⁿCᵣ₋₁ + 2·ⁿCᵣ + ⁿCᵣ₊₁ equals",
+  "formula": "",
+  "options": [
+   "ⁿ⁺¹Cᵣ₊₁",
+   "ⁿ⁺²Cᵣ₊₁",
+   "ⁿ⁺²Cᵣ",
+   "2·ⁿ⁺¹Cᵣ"
+  ],
+  "answer": 1,
+  "explain": "(ⁿCᵣ₋₁+ⁿCᵣ)+(ⁿCᵣ+ⁿCᵣ₊₁) = ⁿ⁺¹Cᵣ + ⁿ⁺¹Cᵣ₊₁ = ⁿ⁺²Cᵣ₊₁.",
+  "kind": "result",
+  "id": "b140b984-e926-41b8-bb2c-1be9dd428751",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "(n − r)·ⁿCᵣ equals",
+  "formula": "",
+  "options": [
+   "n·ⁿ⁻¹Cᵣ₋₁",
+   "n·ⁿ⁻¹Cᵣ",
+   "(n−1)·ⁿ⁻¹Cᵣ",
+   "r·ⁿ⁻¹Cᵣ"
+  ],
+  "answer": 1,
+  "explain": "(n−r)·n!/(r!(n−r)!) = n·(n−1)!/(r!(n−r−1)!) = n·ⁿ⁻¹Cᵣ.",
+  "kind": "formula",
+  "id": "8647f804-23d1-4eb0-bfda-d3f75eb37a0e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "ⁿ⁺¹Cᵣ₊₁ expressed through ⁿCᵣ equals",
+  "formula": "",
+  "options": [
+   "(n+1)/(r+1) · ⁿCᵣ",
+   "(n+1)/r · ⁿCᵣ",
+   "n/(r+1) · ⁿCᵣ",
+   "(r+1)/(n+1) · ⁿCᵣ"
+  ],
+  "answer": 0,
+  "explain": "ⁿ⁺¹Cᵣ₊₁ = (n+1)/(r+1) · ⁿCᵣ.",
+  "kind": "formula",
+  "id": "5617baaa-e2e2-4044-a79d-73a65f0a8669",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "Hockey-stick result: rCᵣ + ʳ⁺¹Cᵣ + … + ⁿCᵣ equals",
+  "formula": "",
+  "options": [
+   "ⁿ⁺¹Cᵣ",
+   "ⁿ⁺¹Cᵣ₊₁",
+   "ⁿCᵣ₊₁",
+   "ⁿ⁺²Cᵣ₊₁"
+  ],
+  "answer": 1,
+  "explain": "Repeated use of Pascal's rule telescopes the sum to ⁿ⁺¹Cᵣ₊₁.",
+  "kind": "result",
+  "id": "f4910d91-d25f-428d-a446-9ab03dd10ee4",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "ⁿCᵣ in terms of ⁿ⁻¹Cᵣ is",
+  "formula": "",
+  "options": [
+   "n/(n−r) · ⁿ⁻¹Cᵣ",
+   "n/r · ⁿ⁻¹Cᵣ",
+   "(n−r)/n · ⁿ⁻¹Cᵣ",
+   "n/(n−r+1) · ⁿ⁻¹Cᵣ"
+  ],
+  "answer": 0,
+  "explain": "ⁿCᵣ = n!/(r!(n−r)!) = n/(n−r) · (n−1)!/(r!(n−r−1)!).",
+  "kind": "formula",
+  "id": "3a02a983-cc4c-41fa-8fa7-af2fe6a71f55",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "For odd n, the greatest binomial coefficients in (1+x)ⁿ are at r =",
+  "formula": "",
+  "options": [
+   "n/2 only",
+   "(n−1)/2 and (n+1)/2",
+   "(n+1)/2 only",
+   "(n−1)/2 and (n+3)/2"
+  ],
+  "answer": 1,
+  "explain": "For odd n, ⁿC₍ₙ₋₁₎/₂ = ⁿC₍ₙ₊₁₎/₂ are equal and the largest.",
+  "kind": "fact",
+  "id": "8361e9ec-e0f3-4e20-b6d1-2aa1a5e55f11",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "For even n, the greatest binomial coefficient in (1+x)ⁿ is",
+  "formula": "",
+  "options": [
+   "ⁿCₙ/₂",
+   "ⁿCₙ/₂₊₁ only",
+   "ⁿC₍ₙ₋₁₎/₂",
+   "ⁿCₙ/₂₋₁"
+  ],
+  "answer": 0,
+  "explain": "For even n the coefficients rise up to r = n/2, so the middle one ⁿCₙ/₂ is the unique maximum.",
+  "kind": "fact",
+  "id": "5c0dedc9-896d-40ea-8dfb-4c36e87f76b2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "ⁿCᵣ · ʳCₛ (s ≤ r ≤ n) equals",
+  "formula": "",
+  "options": [
+   "ⁿCₛ · ⁿ⁻ˢCᵣ₋ₛ",
+   "ⁿCₛ · ⁿ⁻ʳCᵣ₋ₛ",
+   "ⁿCᵣ₋ₛ · ⁿ⁻ˢCₛ",
+   "ⁿCₛ · ⁿCᵣ₋ₛ"
+  ],
+  "answer": 0,
+  "explain": "Both equal n!/[(n−r)!·s!·(r−s)!] (choose the s-subset first, then the rest).",
+  "kind": "result",
+  "id": "dd0af064-7f26-4067-91dc-b087c0c2ce42",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "Sum of all coefficients in the expansion of (x² + x + 1)ⁿ is",
+  "formula": "put x = 1",
+  "options": [
+   "2ⁿ",
+   "3ⁿ",
+   "3ⁿ − 1",
+   "(3ⁿ + 1)/2"
+  ],
+  "answer": 1,
+  "explain": "Put x = 1: (1+1+1)ⁿ = 3ⁿ.",
+  "kind": "result",
+  "id": "7410d8ac-0d8d-46bf-8bd2-b13bed4ca032",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "Σᵣ₌₀ⁿ r·ⁿCᵣ equals",
+  "formula": "n·2ⁿ⁻¹",
+  "options": [
+   "n·2ⁿ",
+   "n·2ⁿ⁻¹",
+   "2ⁿ⁻¹",
+   "(n+1)·2ⁿ"
+  ],
+  "answer": 1,
+  "explain": "r·ⁿCᵣ = n·ⁿ⁻¹Cᵣ₋₁, and the sum of those terms is 2ⁿ⁻¹.",
+  "kind": "result",
+  "id": "93522369-5dce-401e-950c-e50a4af3f2f2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "Sum of coefficients in the expansion of (3x − 2y)ⁿ is",
+  "formula": "put x = y = 1",
+  "options": [
+   "1",
+   "(−1)ⁿ",
+   "5ⁿ",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Put x = y = 1: (3 − 2)ⁿ = 1 for every n.",
+  "kind": "result",
+  "id": "9345ec89-b0d7-4057-9a0e-a3ab95d356bc",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "In (1+x)ⁿ, C₀ − 2C₁ + 4C₂ − 8C₃ + ... + (−2)ⁿCₙ equals",
+  "formula": "(1 − 2)ⁿ",
+  "options": [
+   "(−1)ⁿ",
+   "3ⁿ",
+   "1",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Put x = −2 in (1+x)ⁿ to get (1−2)ⁿ = (−1)ⁿ.",
+  "kind": "result",
+  "id": "28c7fdbc-e646-4703-b1e0-73d0e5fef428",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "For n ≥ 2, Σᵣ₌₀ⁿ (−1)ʳ·r·ⁿCᵣ equals",
+  "formula": "",
+  "options": [
+   "n·2ⁿ⁻¹",
+   "−n",
+   "1",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "r·ⁿCᵣ = n·ⁿ⁻¹Cᵣ₋₁, so the sum is n(1−1)ⁿ⁻¹ = 0 for n ≥ 2.",
+  "kind": "result",
+  "id": "d4495f30-7c95-4910-acbf-506df79e029e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "Σᵣ₌₀ⁿ ⁿCᵣ/(r+1) equals",
+  "formula": "ⁿCᵣ/(r+1) = ⁿ⁺¹Cᵣ₊₁/(n+1)",
+  "options": [
+   "2ⁿ/(n+1)",
+   "(2ⁿ⁺¹ − 1)/(n+1)",
+   "(2ⁿ⁺¹ − 1)/n",
+   "2ⁿ⁺¹/(n+1)"
+  ],
+  "answer": 1,
+  "explain": "Sum of ⁿ⁺¹Cₖ for k ≥ 1 is 2ⁿ⁺¹ − 1, divided by (n+1).",
+  "kind": "result",
+  "id": "46e165c1-0f78-4e8c-92bd-2bbfbb2a3171",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "Σᵣ₌₀ⁿ (−1)ʳ·ⁿCᵣ/(r+1) equals",
+  "formula": "∫₀¹ (1−x)ⁿ dx",
+  "options": [
+   "1/(n+1)",
+   "0",
+   "1/n",
+   "2ⁿ/(n+1)"
+  ],
+  "answer": 0,
+  "explain": "Integrating (1−x)ⁿ from 0 to 1 term by term gives 1/(n+1).",
+  "kind": "result",
+  "id": "9e90fd6d-0ecb-4217-940f-a45972a02238",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "C₀² + C₁² + C₂² + ... + Cₙ² equals",
+  "formula": "Σ (ⁿCᵣ)² = ²ⁿCₙ",
+  "options": [
+   "²ⁿCₙ",
+   "2ⁿ",
+   "²ⁿCₙ₋₁",
+   "4ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Coefficient of xⁿ in (1+x)ⁿ(1+x)ⁿ is ²ⁿCₙ, and ΣCᵣCₙ₋ᵣ = ΣCᵣ².",
+  "kind": "result",
+  "id": "c65032ba-2738-495e-832d-6d9531c70d7e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "In (1+x)ⁿ, if (n+1)x/(1+x) = m is a positive integer, the greatest term(s) is/are?",
+  "formula": "",
+  "options": [
+   "Tₘ and Tₘ₊₁, equal",
+   "Tₘ only",
+   "Tₘ₊₁ only",
+   "Tₘ₊₁ and Tₘ₊₂, equal"
+  ],
+  "answer": 0,
+  "explain": "At r = m the ratio Tₘ₊₁/Tₘ = 1, so Tₘ = Tₘ₊₁ and both are greatest.",
+  "kind": "concept",
+  "id": "b8d70fc5-00fc-4058-bc33-2aeaa66ede47",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "The greatest binomial coefficient in (1+x)ⁿ is always at least?",
+  "formula": "",
+  "options": [
+   "2ⁿ/(n+1)",
+   "2ⁿ⁻¹",
+   "2ⁿ/(n+1) at most",
+   "2ⁿ/2n"
+  ],
+  "answer": 0,
+  "explain": "The n+1 coefficients sum to 2ⁿ, so the largest is at least their average 2ⁿ/(n+1).",
+  "kind": "result",
+  "id": "e46283f9-5f2d-4072-8059-c0fa16af9a41",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "The greatest coefficient ²ⁿCₙ (n ≥ 1) is always which of these?",
+  "formula": "²ⁿCₙ = 2·(²ⁿ⁻¹Cₙ₋₁)",
+  "options": [
+   "Even",
+   "Odd",
+   "A perfect square",
+   "Divisible by n+1"
+  ],
+  "answer": 0,
+  "explain": "²ⁿCₙ = 2·²ⁿ⁻¹Cₙ₋₁, so it is even for every n ≥ 1.",
+  "kind": "result",
+  "id": "23f63da6-69f2-4b14-8554-171872f479e4",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "In (x + 1/x)¹⁰, the term with the greatest binomial coefficient is?",
+  "formula": "",
+  "options": [
+   "T₆, independent of x",
+   "T₅, containing x²",
+   "T₆, containing x",
+   "T₅ and T₆, equal"
+  ],
+  "answer": 0,
+  "explain": "n=10 is even, so the middle term T₆ has the greatest coefficient ¹⁰C₅, and its power of x is 10−2·5 = 0.",
+  "kind": "result",
+  "id": "fae8cb41-968b-4c2b-ae4c-704b8540b3af",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "In (1+x)ⁿ, m = (n+1)x/(1+x) is not an integer. The numerically greatest term is T of index?",
+  "formula": "Tᵣ₊₁ ≥ Tᵣ ⇔ r ≤ (n+1)x/(1+x)",
+  "options": [
+   "⌊m⌋",
+   "⌊m⌋ + 1",
+   "⌊m⌋ + 2",
+   "⌊m⌋ + 1 and ⌊m⌋ + 2"
+  ],
+  "answer": 1,
+  "explain": "Tᵣ₊₁ ≥ Tᵣ holds up to r = ⌊m⌋, so the greatest term is T_{⌊m⌋+1}.",
+  "kind": "result",
+  "id": "e9a2a9b4-9f29-46fd-82dd-0038867952ad",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "Greatest coefficient of (1+x)²ⁿ compared with greatest coefficient of (1+x)²ⁿ⁻¹ is?",
+  "formula": "²ⁿCₙ = ²ⁿ⁻¹Cₙ₋₁ + ²ⁿ⁻¹Cₙ = 2·²ⁿ⁻¹Cₙ",
+  "options": [
+   "Equal to it",
+   "Twice it",
+   "Half of it",
+   "Exactly one more than it"
+  ],
+  "answer": 1,
+  "explain": "Pascal's rule gives ²ⁿCₙ = 2·²ⁿ⁻¹Cₙ, since ²ⁿ⁻¹Cₙ₋₁ = ²ⁿ⁻¹Cₙ.",
+  "kind": "result",
+  "id": "a5fdb649-2cf2-4c2a-9838-06515dc45edd",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "Which term is the middle term in the expansion of (a+b)¹²?",
+  "formula": "",
+  "options": [
+   "T₆",
+   "T₇",
+   "T₆ and T₇",
+   "T₈"
+  ],
+  "answer": 1,
+  "explain": "n=12 is even, so there is one middle term, T_{n/2+1} = T₇.",
+  "kind": "fact",
+  "id": "6f2b494d-5323-4d48-8db0-bfb30c58b8c5",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Value of ¹⁵C₈ + ¹⁵C₉ − ¹⁵C₆ − ¹⁵C₇ is",
+  "formula": "ⁿCᵣ = ⁿC_{n−r}",
+  "options": [
+   "0",
+   "¹⁵C₇",
+   "¹⁶C₈",
+   "2·¹⁵C₇"
+  ],
+  "answer": 0,
+  "explain": "¹⁵C₈=¹⁵C₇ and ¹⁵C₉=¹⁵C₆, so the terms cancel in pairs.",
+  "kind": "result",
+  "id": "481af610-9be3-4740-8e10-b903e25b976e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "If ²⁰Cᵣ = ²⁰C_{r+4}, then r equals",
+  "formula": "r + (r+4) = 20",
+  "options": [
+   "6",
+   "8",
+   "10",
+   "12"
+  ],
+  "answer": 1,
+  "explain": "The two lower indices are unequal, so they must sum to n: 2r+4=20, r=8.",
+  "kind": "result",
+  "id": "561ea4bb-0ccb-4795-8afa-34f7f3f441fd",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Number of distinct values among the binomial coefficients of (1+x)¹² is",
+  "formula": "",
+  "options": [
+   "6",
+   "7",
+   "12",
+   "13"
+  ],
+  "answer": 1,
+  "explain": "The row is symmetric, so ¹²C₀ to ¹²C₆ give all the distinct values: 7.",
+  "kind": "fact",
+  "id": "c1842936-e271-4a6c-aded-dcbd4c839ad9",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "If T₄ and T₅ are the two middle terms of (a+b)ⁿ, then n equals",
+  "formula": "T_{(n+1)/2}, T_{(n+3)/2}",
+  "options": [
+   "6",
+   "7",
+   "8",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "(n+1)/2 = 4 gives n = 7, and (n+3)/2 = 5 agrees.",
+  "kind": "concept",
+  "id": "2ab142e1-8b22-4d83-b453-7bce70cfc18e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Term independent of x in (ax + b/x)²ⁿ is",
+  "formula": "²ⁿCₙ (ab)ⁿ",
+  "options": [
+   "²ⁿCₙ aⁿbⁿ",
+   "²ⁿCₙ (a/b)ⁿ",
+   "²ⁿCₙ a²ⁿ",
+   "²ⁿCₙ₊₁ (ab)ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Middle term has n factors of ax and n of b/x, so the coefficient is ²ⁿCₙ aⁿbⁿ.",
+  "kind": "formula",
+  "id": "03157940-92a5-457b-835c-9342dbbaa722",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "In (1+x)ⁿ the greatest binomial coefficient is 35. Then n equals?",
+  "formula": "",
+  "options": [
+   "6",
+   "7",
+   "8",
+   "9"
+  ],
+  "answer": 1,
+  "explain": "⁷C₃ = ⁷C₄ = 35 is the greatest coefficient for n = 7. For n = 6, 8, 9 it is 20, 70, 126.",
+  "kind": "fact",
+  "id": "b3111a48-2fd6-4a43-a7f6-5d5d3b870e08",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "In (1+x)ⁿ with 0 < x < 1/n, the numerically greatest term is?",
+  "formula": "",
+  "options": [
+   "T₁",
+   "T₂",
+   "Tₙ",
+   "Tₙ₊₁"
+  ],
+  "answer": 0,
+  "explain": "m = (n+1)x/(1+x) < 1 exactly when nx < 1, so ⌊m⌋+1 = 1 and T₁ is greatest.",
+  "kind": "result",
+  "id": "f0cbf5ee-053f-4b18-b9db-8b9f07692867",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "In (a+b)ⁿ the ratio Tᵣ₊₁/Tᵣ equals?",
+  "formula": "Tᵣ₊₁/Tᵣ = ((n−r+1)/r)·(b/a)",
+  "options": [
+   "((n−r)/(r+1))·(b/a)",
+   "((n−r+1)/r)·(a/b)",
+   "((n−r+1)/r)·(b/a)",
+   "((n−r+1)/(r+1))·(b/a)"
+  ],
+  "answer": 2,
+  "explain": "Tᵣ₊₁ = ⁿCᵣ aⁿ⁻ʳbʳ, so dividing by Tᵣ gives (n−r+1)/r · b/a. Use it to find the greatest term.",
+  "kind": "formula",
+  "id": "df017e6c-17d5-41f8-95f2-bb3e101b73be",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "The greatest coefficient ²ⁿCₙ of (1+x)²ⁿ equals which sum?",
+  "formula": "²ⁿCₙ = Σ (ⁿCᵣ)²",
+  "options": [
+   "Σ (ⁿCᵣ)², r = 0 to n",
+   "Σ ⁿCᵣ, r = 0 to n",
+   "Σ ⁿCᵣ·ⁿCᵣ₊₁, r = 0 to n−1",
+   "Σ ²ⁿCᵣ, r = 0 to n"
+  ],
+  "answer": 0,
+  "explain": "Comparing the coefficient of xⁿ in (1+x)ⁿ(1+x)ⁿ gives ²ⁿCₙ = Σ (ⁿCᵣ)².",
+  "kind": "result",
+  "id": "825f13bd-7049-44c5-870f-f006a0e2030f",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "The greatest coefficient ²ⁿCₙ equals which expression?",
+  "formula": "",
+  "options": [
+   "2ⁿ·[1·3·5…(2n−1)]/n!",
+   "2ⁿ·[2·4·6…(2n)]/n!",
+   "[1·3·5…(2n−1)]/n!",
+   "2ⁿ·n!/[1·3·5…(2n−1)]"
+  ],
+  "answer": 0,
+  "explain": "(2n)! = [1·3…(2n−1)]·2ⁿ·n!, so ²ⁿCₙ = 2ⁿ·[1·3…(2n−1)]/n!.",
+  "kind": "result",
+  "id": "13ab4187-3832-4cc4-a051-47855fa43b44",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "In the expansion of (1+x)¹⁵, which two terms have the greatest binomial coefficients?",
+  "formula": "ⁿC₇ = ⁿC₈ for n = 15",
+  "options": [
+   "T₇ and T₈",
+   "T₈ and T₉",
+   "T₈ only",
+   "T₉ and T₁₀"
+  ],
+  "answer": 1,
+  "explain": "For n = 15 the greatest coefficients are ¹⁵C₇ = ¹⁵C₈, and these belong to T₈ and T₉.",
+  "kind": "fact",
+  "id": "b2e0fd48-b299-4a64-93e0-1fe3dcc44d80",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "If T₆ is the only middle term of (a+b)ⁿ, then n equals",
+  "formula": "n/2 + 1 = 6",
+  "options": [
+   "9",
+   "10",
+   "11",
+   "12"
+  ],
+  "answer": 1,
+  "explain": "A single middle term is T_{n/2+1}. Setting n/2 + 1 = 6 gives n = 10.",
+  "kind": "concept",
+  "id": "8a44c23a-efad-4554-a03e-cd13606a2216",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "For (a+b)ⁿ with n even, the middle term T_{n/2+1} is the term with the ___ binomial coefficient.",
+  "formula": "",
+  "options": [
+   "greatest",
+   "least",
+   "zero",
+   "average of neighbours"
+  ],
+  "answer": 0,
+  "explain": "ⁿC_{n/2} is the maximum of ⁿC_r, so the middle term has the greatest binomial coefficient.",
+  "kind": "concept",
+  "id": "03a28e04-59dc-4cc4-aa1d-3c10bff1b857",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Term independent of x in (√x + 1/(2x²))¹⁰ is",
+  "formula": "(10 − r)/2 − 2r = 0",
+  "options": [
+   "45/2",
+   "45/4",
+   "15/2",
+   "45/8"
+  ],
+  "answer": 1,
+  "explain": "The power is zero at r = 2, so the term is ¹⁰C₂(1/2)² = 45/4.",
+  "kind": "result",
+  "id": "09b7f5fe-55f1-4134-9d87-344aca930876",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Term independent of x in (x + 2/x²)⁶ is",
+  "formula": "",
+  "options": [
+   "30",
+   "15",
+   "60",
+   "120"
+  ],
+  "answer": 2,
+  "explain": "(6−r) − 2r = 0 gives r = 2, so the term is ⁶C₂·2² = 15·4 = 60.",
+  "kind": "result",
+  "id": "12e8c5a6-22dd-4b69-8fe5-d2c1fe5e2bef",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "Constant term in the expansion of (x + 1 + 1/x)⁴ is",
+  "formula": "Σ 4!/(k!·k!·(4−2k)!)",
+  "options": [
+   "15",
+   "17",
+   "19",
+   "21"
+  ],
+  "answer": 2,
+  "explain": "Add 1 + 12 + 6 for k = 0, 1, 2. Central trinomial coefficients run 1, 3, 7, 19.",
+  "kind": "result",
+  "id": "25aa4807-7336-438b-a4b3-b43be32936b1",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "C₀ − C₂ + C₄ − C₆ + … for (1+x)ⁿ equals",
+  "formula": "Re (1+i)ⁿ",
+  "options": [
+   "2ⁿ/² cos(nπ/4)",
+   "2ⁿ/² sin(nπ/4)",
+   "2ⁿ cos(nπ/4)",
+   "2ⁿ⁻¹ cos(nπ/2)"
+  ],
+  "answer": 0,
+  "explain": "(1+i)ⁿ = (√2)ⁿ(cos nπ/4 + i sin nπ/4); the real part is C₀ − C₂ + C₄ − ….",
+  "kind": "result",
+  "id": "e9151a23-0d01-429f-8835-3905c3014bf1",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "C₁ − C₃ + C₅ − … for (1+x)ⁿ equals",
+  "formula": "Im (1+i)ⁿ",
+  "options": [
+   "2ⁿ/² cos(nπ/4)",
+   "2ⁿ/² sin(nπ/4)",
+   "2ⁿ sin(nπ/4)",
+   "2ⁿ⁻¹ sin(nπ/2)"
+  ],
+  "answer": 1,
+  "explain": "The imaginary part of (1+i)ⁿ = 2ⁿ/²(cos nπ/4 + i sin nπ/4) is C₁ − C₃ + C₅ − ….",
+  "kind": "result",
+  "id": "334e0457-ccc3-4bea-9cdf-346b8bf36f64",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Σ r·(ⁿCᵣ)² for r = 0 to n equals",
+  "formula": "",
+  "options": [
+   "n·²ⁿ⁻¹Cₙ₋₁",
+   "n·²ⁿCₙ",
+   "n·2ⁿ⁻¹",
+   "²ⁿ⁻¹Cₙ"
+  ],
+  "answer": 0,
+  "explain": "r·Cᵣ = n·ⁿ⁻¹Cᵣ₋₁, then Vandermonde gives n·²ⁿ⁻¹Cₙ₋₁.",
+  "kind": "result",
+  "id": "c085adc1-a0b4-4172-ae96-088c5ff0ab44",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Product (1 + C₁/C₀)(1 + C₂/C₁)…(1 + Cₙ/Cₙ₋₁) for (1+x)ⁿ equals",
+  "formula": "",
+  "options": [
+   "(n+1)ⁿ/n!",
+   "(n+1)ⁿ⁺¹/(n+1)!",
+   "nⁿ/n!",
+   "(n+1)!/nⁿ"
+  ],
+  "answer": 0,
+  "explain": "1 + Cₖ/Cₖ₋₁ = 1 + (n−k+1)/k = (n+1)/k; the product is (n+1)ⁿ/n!.",
+  "kind": "result",
+  "id": "d223bc8a-5278-4468-9430-82c082ef0484",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For n ≥ 3, Σ (−1)ʳ r²·ⁿCᵣ over r = 0 to n equals",
+  "formula": "",
+  "options": [
+   "0",
+   "n(n+1)2ⁿ⁻²",
+   "(−1)ⁿ n²",
+   "n(n−1)"
+  ],
+  "answer": 0,
+  "explain": "r² = r(r−1) + r; both alternating sums carry a factor (1−1)ⁿ⁻² or (1−1)ⁿ⁻¹, so they vanish.",
+  "kind": "result",
+  "id": "86e1ac25-c4e4-4a55-93f4-9337e43da76c",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "7⁹ + 9⁷ is divisible by",
+  "formula": "",
+  "options": [
+   "64",
+   "72",
+   "49",
+   "128"
+  ],
+  "answer": 0,
+  "explain": "(8−1)⁹ + (8+1)⁷ ≡ 8(9+7) = 128 ≡ 0 (mod 64), though not mod 128.",
+  "kind": "result",
+  "id": "74301664-8cf3-4728-bd85-f29652ac0843",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For n ∈ ℕ, 11ⁿ⁺² + 12²ⁿ⁺¹ is always divisible by",
+  "formula": "",
+  "options": [
+   "133",
+   "131",
+   "121",
+   "144"
+  ],
+  "answer": 0,
+  "explain": "Write it as 121·11ⁿ + 12·144ⁿ = 121(11ⁿ − 144ⁿ) + 133·144ⁿ, and 11ⁿ − 144ⁿ is divisible by 133.",
+  "kind": "result",
+  "id": "dd69f91c-bdc2-409f-ad96-20113335adfb",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For n ∈ ℕ, 2³ⁿ − 7n − 1 is always divisible by",
+  "formula": "(1+7)ⁿ − 7n − 1",
+  "options": [
+   "49",
+   "7",
+   "56",
+   "64"
+  ],
+  "answer": 0,
+  "explain": "8ⁿ = (1+7)ⁿ = 1 + 7n + 49(…), so 8ⁿ − 7n − 1 is divisible by 49.",
+  "kind": "result",
+  "id": "485f2875-1f08-4570-ac59-46eb7b17ff19",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Compare 101⁵⁰ and 99⁵⁰ + 100⁵⁰.",
+  "formula": "",
+  "options": [
+   "101⁵⁰ is larger",
+   "99⁵⁰ + 100⁵⁰ is larger",
+   "They are equal",
+   "Differ by exactly 1"
+  ],
+  "answer": 0,
+  "explain": "Dividing by 100⁵⁰: (1.01)⁵⁰ > 1 + 0.5 + … (≈1.64) exceeds 1 + (0.99)⁵⁰ (≈1.6), so 101⁵⁰ is larger.",
+  "kind": "result",
+  "id": "bdc7ac57-74a5-4f64-b76f-5cca451b4434",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "If (7+4√3)ⁿ = I + f with I ∈ ℤ and 0 < f < 1, then (I+f)(1−f) equals",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "7ⁿ",
+   "f"
+  ],
+  "answer": 0,
+  "explain": "(7−4√3)ⁿ = 1−f, and (7+4√3)(7−4√3) = 1, so (I+f)(1−f) = 1.",
+  "kind": "result",
+  "id": "56461079-cb40-4c46-b9b9-ec0a6e774c02",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "If (2+√3)ⁿ = I + f, I ∈ ℤ and 0 < f < 1, then I is",
+  "formula": "",
+  "options": [
+   "Odd",
+   "Even",
+   "Prime",
+   "Depends on n"
+  ],
+  "answer": 0,
+  "explain": "(2+√3)ⁿ + (2−√3)ⁿ is an even integer and equals I + 1, so I is odd.",
+  "kind": "result",
+  "id": "6e7ad4c5-7de4-496e-a270-ca3a9ff1b086",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "In (1+x)ⁿ (x > 0), if (n+1)x/(1+x) = m is an integer, the greatest term is",
+  "formula": "",
+  "options": [
+   "Tₘ and Tₘ₊₁ (equal)",
+   "Tₘ only",
+   "Tₘ₊₁ only",
+   "Tₘ₊₂"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁/Tᵣ = (n−r+1)x/r equals 1 at r = m, so Tₘ₊₁ = Tₘ are the greatest terms.",
+  "kind": "concept",
+  "id": "01ffcf53-36b9-44a0-8d0d-ae2eeac1a7a3",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Coefficient of xʳ in (1+x)ⁿ(1+1/x)ⁿ, 0 ≤ r ≤ n, is",
+  "formula": "",
+  "options": [
+   "²ⁿCₙ₊ᵣ",
+   "²ⁿCᵣ",
+   "²ⁿCₙ₋₁₊ᵣ",
+   "ⁿCᵣ²"
+  ],
+  "answer": 0,
+  "explain": "The product is (1+x)²ⁿ/xⁿ, so the coefficient of xʳ is that of xⁿ⁺ʳ in (1+x)²ⁿ.",
+  "kind": "result",
+  "id": "3542e1b5-6df9-4f69-9ef5-f2f8bfdf204d",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Number of distinct powers of x in the expansion of (1 + x + x²)ⁿ is",
+  "formula": "",
+  "options": [
+   "2n + 1",
+   "n + 1",
+   "2n",
+   "3n"
+  ],
+  "answer": 0,
+  "explain": "Powers run from x⁰ to x²ⁿ with every coefficient positive, giving 2n + 1 terms.",
+  "kind": "fact",
+  "id": "52018179-f224-4b73-93f9-b400b3a26f93",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "ⁿC₀ − ⁿC₁ + ⁿC₂ − … + (−1)ᵐ ⁿCₘ (m < n) equals",
+  "formula": "Σᵣ₌₀ᵐ (−1)ʳ ⁿCᵣ",
+  "options": [
+   "(−1)ᵐ ⁿ⁻¹Cₘ",
+   "(−1)ᵐ ⁿCₘ",
+   "ⁿ⁻¹Cₘ",
+   "(−1)ᵐ ⁿ⁻¹Cₘ₋₁"
+  ],
+  "answer": 0,
+  "explain": "Using ⁿCᵣ = ⁿ⁻¹Cᵣ + ⁿ⁻¹Cᵣ₋₁, the alternating sum telescopes to (−1)ᵐ ⁿ⁻¹Cₘ.",
+  "kind": "result",
+  "id": "e0aece75-05ba-4ed0-a9d2-88fe23661041",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Σᵣ₌₀ⁿ (−1)ʳ ⁿCᵣ rⁿ equals",
+  "formula": "",
+  "options": [
+   "(−1)ⁿ n!",
+   "n!",
+   "0",
+   "(−1)ⁿ⁺¹ n!"
+  ],
+  "answer": 0,
+  "explain": "The n-th finite difference of xⁿ is n!, which gives (−1)ⁿ n! (checks: n = 1 gives −1, n = 2 gives 2).",
+  "kind": "result",
+  "id": "df57660b-f2a8-4d5a-a574-b07969a2edfe",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "For x > 0 and integer n ≥ 2, (1+x)ⁿ compared with 1 + nx is",
+  "formula": "",
+  "options": [
+   "Strictly greater",
+   "Strictly smaller",
+   "Equal",
+   "Depends on x"
+  ],
+  "answer": 0,
+  "explain": "Binomial expansion has extra positive terms ⁿC₂x² + …, so (1+x)ⁿ > 1 + nx.",
+  "kind": "concept",
+  "id": "eb629b52-f202-47f7-84b8-72c539b1b59e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "The last two digits of 11¹⁰ are",
+  "formula": "11¹⁰ = (1 + 10)¹⁰",
+  "options": [
+   "01",
+   "11",
+   "21",
+   "10"
+  ],
+  "answer": 0,
+  "explain": "1 + 10·10 + (multiples of 100) = 101 + 100k, so it ends in 01.",
+  "kind": "fact",
+  "id": "35e40de6-1ad0-4494-8468-6c9e92a8b31e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Binomial theorem for positive integral index"
+ },
+ {
+  "prompt": "Number of terms in the simplified expansion of (x+y)⁶(x−y)⁶ is",
+  "formula": "(x+y)ⁿ(x−y)ⁿ = (x²−y²)ⁿ",
+  "options": [
+   "7",
+   "13",
+   "6",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "(x²−y²)⁶ is a binomial expansion with 6+1 = 7 terms.",
+  "kind": "result",
+  "id": "1b7e82ea-7918-48ea-8b10-f2890b1d6027",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "Number of distinct powers of x (dissimilar terms) in the expansion of (1 + x + x²)¹⁰ is",
+  "formula": "",
+  "options": [
+   "21",
+   "11",
+   "66",
+   "31"
+  ],
+  "answer": 0,
+  "explain": "Powers of x run from 0 to 20, and every power occurs, so there are 2n+1 = 21 terms.",
+  "kind": "result",
+  "id": "ae3c374b-5df3-4b45-bad0-220c12200051",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Number of terms; symmetric coefficients nCr=nCn-r"
+ },
+ {
+  "prompt": "In (ax + b)ⁿ, the coefficient of xʳ is?",
+  "formula": "",
+  "options": [
+   "ⁿCᵣ aʳ bⁿ⁻ʳ",
+   "ⁿCᵣ aⁿ⁻ʳ bʳ",
+   "ⁿCᵣ aʳ bʳ",
+   "ⁿCᵣ₊₁ aʳ bⁿ⁻ʳ"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁ = ⁿCᵣ (ax)ʳ bⁿ⁻ʳ, so the coefficient of xʳ is ⁿCᵣ aʳ bⁿ⁻ʳ.",
+  "kind": "formula",
+  "id": "4bb0663a-9c4b-4724-8227-116b9c50a903",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (1+x)⁻ⁿ (n ∈ ℕ), the coefficient of xʳ is?",
+  "formula": "",
+  "options": [
+   "(−1)ʳ ⁿ⁺ʳ⁻¹Cᵣ",
+   "ⁿ⁺ʳ⁻¹Cᵣ",
+   "(−1)ʳ ⁿCᵣ",
+   "(−1)ʳ ⁿ⁺ʳCᵣ"
+  ],
+  "answer": 0,
+  "explain": "Replacing x by −x in (1−x)⁻ⁿ gives (−1)ʳ · ⁿ⁺ʳ⁻¹Cᵣ.",
+  "kind": "formula",
+  "id": "c2e4aa56-76c7-488f-aa88-1125e63c363e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "Number of distinct powers of x in (x + 1 + 1/x)ⁿ is?",
+  "formula": "",
+  "options": [
+   "2n + 1",
+   "n + 1",
+   "2n",
+   "3n"
+  ],
+  "answer": 0,
+  "explain": "Powers run from −n to n in steps of 1, giving 2n+1 values.",
+  "kind": "result",
+  "id": "06022cf2-2970-460c-8136-801a3688dfed",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (x² + 1/x)ⁿ, exponents of x in successive terms decrease by?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "2",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "The power is 2n − 3r, so each step in r lowers it by 3.",
+  "kind": "concept",
+  "id": "2abd983f-5457-4e42-8d83-085a043cdc18",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (a + b)ⁿ, the term containing aᵏ is?",
+  "formula": "",
+  "options": [
+   "Tₙ₋ₖ₊₁",
+   "Tₖ₊₁",
+   "Tₖ",
+   "Tₙ₋ₖ"
+  ],
+  "answer": 0,
+  "explain": "aⁿ⁻ʳ = aᵏ gives r = n−k, so the term is Tₙ₋ₖ₊₁.",
+  "kind": "concept",
+  "id": "33da35b1-f78d-47b1-a7a2-5da83a55674c",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (a+b)ⁿ, if (n+1)b/(a+b) = m is a positive integer, the two equal greatest terms are",
+  "formula": "Tᵣ₊₁/Tᵣ = (n−r+1)b/(ra)",
+  "options": [
+   "Tₘ and Tₘ₊₁",
+   "Tₘ₋₁ and Tₘ",
+   "Tₘ₊₁ and Tₘ₊₂",
+   "Tₙ₋ₘ and Tₙ₋ₘ₊₂"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁/Tᵣ = 1 when r = (n+1)b/(a+b) = m, so Tₘ₊₁ = Tₘ.",
+  "kind": "result",
+  "id": "3427bf07-1dee-4a3e-b3ba-e3b846c9ae61",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (x + 1/x)ⁿ, the powers of x in Tᵣ₊₁ and Tₙ₋ᵣ₊₁ are",
+  "formula": "n − 2r and 2r − n",
+  "options": [
+   "Negatives of each other",
+   "Equal",
+   "Reciprocals of each other",
+   "Differing by n"
+  ],
+  "answer": 0,
+  "explain": "Tᵣ₊₁ has xⁿ⁻²ʳ and Tₙ₋ᵣ₊₁ has x²ʳ⁻ⁿ, so the powers are negatives of each other.",
+  "kind": "concept",
+  "id": "00c70a38-49f9-4825-a180-ba68c8b623ae",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "(x + a)ⁿ + (x − a)ⁿ equals twice the sum of which terms of (x + a)ⁿ?",
+  "formula": "",
+  "options": [
+   "T₁, T₃, T₅, …",
+   "T₂, T₄, T₆, …",
+   "T₁, T₂, T₃, …",
+   "Only the middle terms"
+  ],
+  "answer": 0,
+  "explain": "Terms with odd r (even-numbered terms) cancel, so only T₁, T₃, T₅, … (even r) double.",
+  "kind": "concept",
+  "id": "7692d60d-ab40-45d9-8998-d883cd29a9a5",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "In (x⁴ + 1/x³)ⁿ, the power of x in Tᵣ₊₁ is?",
+  "formula": "",
+  "options": [
+   "4n − 7r",
+   "4n − 3r",
+   "4n − 5r",
+   "7n − 4r"
+  ],
+  "answer": 0,
+  "explain": "x^(4(n−r)) · x^(−3r) = x^(4n − 7r).",
+  "kind": "formula",
+  "id": "95556136-438e-4675-9a2f-e12eb69c4cde",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "General term T(r+1) formula"
+ },
+ {
+  "prompt": "If (a+b)ⁿ has 14 terms, its middle terms are",
+  "formula": "n = 13 → T₇ and T₈",
+  "options": [
+   "T₆ and T₇",
+   "T₇ only",
+   "T₇ and T₈",
+   "T₈ and T₉"
+  ],
+  "answer": 2,
+  "explain": "14 terms means n = 13 (odd), so the middle terms are T₍ₙ₊₁₎/₂ = T₇ and T₍ₙ₊₃₎/₂ = T₈.",
+  "kind": "concept",
+  "id": "7571d03e-ff0d-4270-97f2-c9025edcb685",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Middle term of (a+b)²ᵐ is",
+  "formula": "T₍ₘ₊₁₎",
+  "options": [
+   "²ᵐCₘ aᵐ⁺¹bᵐ⁻¹",
+   "²ᵐCₘ₊₁ aᵐbᵐ",
+   "²ᵐCₘ aᵐbᵐ",
+   "²ᵐCₘ a²ᵐ"
+  ],
+  "answer": 2,
+  "explain": "T₍ₘ₊₁₎ = ²ᵐCₘ a²ᵐ⁻ᵐ bᵐ = ²ᵐCₘ aᵐbᵐ, so a and b have equal powers.",
+  "kind": "formula",
+  "id": "cb0421b9-474a-4e7c-8f40-ca61a2cf64f4",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Middle-term coefficient ²ⁿCₙ of (1+x)²ⁿ equals",
+  "formula": "",
+  "options": [
+   "2ⁿ·(1·3·5…(2n−1))/n!",
+   "2ⁿ·(2·4·6…2n)/n!",
+   "(1·3·5…(2n−1))/n!",
+   "2ⁿ·(1·3·5…(2n−1))/(2n)!"
+  ],
+  "answer": 0,
+  "explain": "(2n)! = 2ⁿ·n!·1·3·5…(2n−1), so ²ⁿCₙ = 2ⁿ·1·3·5…(2n−1)/n!. Check n=2: 4·3/2 = 6.",
+  "kind": "result",
+  "id": "33663e57-ee72-43b9-bc2b-19dfb99aa12e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Middle term of (1 + x²)⁶ is",
+  "formula": "T₄ = ⁶C₃ (x²)³",
+  "options": [
+   "20x³",
+   "15x⁶",
+   "20x⁶",
+   "15x⁴"
+  ],
+  "answer": 2,
+  "explain": "T₄ = ⁶C₃(x²)³ = 20x⁶; the power of x² is doubled.",
+  "kind": "result",
+  "id": "9b4023f0-3b63-4923-8227-388c1e048e21",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Middle term(s) for n even and odd"
+ },
+ {
+  "prompt": "Term independent of x in (x² + 1/x)³ⁿ is",
+  "formula": "",
+  "options": [
+   "³ⁿCₙ",
+   "³ⁿC₃ₙ/₂",
+   "⁶ⁿCₙ",
+   "³ⁿCₙ₊₁"
+  ],
+  "answer": 0,
+  "explain": "Power 6n − 3r = 0 gives r = 2n; ³ⁿC₂ₙ = ³ⁿCₙ.",
+  "kind": "result",
+  "id": "b922e23c-23b4-4005-ac05-c06605396d0e",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "In (x² + 1/x)¹², the term independent of x is which term?",
+  "formula": "",
+  "options": [
+   "8th",
+   "9th",
+   "7th",
+   "10th"
+  ],
+  "answer": 1,
+  "explain": "24 − 3r = 0 gives r = 8, so it is T₉.",
+  "kind": "fact",
+  "id": "ddfc9191-400f-48e2-bcb2-a63c5f5ff045",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "(x⁵ + 1/x²)ⁿ has a term independent of x only if n is a multiple of",
+  "formula": "5(n − r) − 2r = 0",
+  "options": [
+   "3",
+   "5",
+   "7",
+   "10"
+  ],
+  "answer": 2,
+  "explain": "r = 5n/7 must be an integer, and gcd(5,7) = 1, so 7 | n.",
+  "kind": "fact",
+  "id": "33519be3-0db6-4017-bbfa-7bfe9f92223a",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Term independent of x (constant term)"
+ },
+ {
+  "prompt": "ⁿCᵣ − ⁿ⁻¹Cᵣ₋₁ equals (Pascal's rule rearranged)",
+  "formula": "ⁿCᵣ = ⁿ⁻¹Cᵣ + ⁿ⁻¹Cᵣ₋₁",
+  "options": [
+   "ⁿ⁻¹Cᵣ",
+   "ⁿ⁻¹Cᵣ₋₂",
+   "ⁿCᵣ₋₁",
+   "ⁿ⁻¹Cᵣ₊₁"
+  ],
+  "answer": 0,
+  "explain": "Pascal: ⁿCᵣ = ⁿ⁻¹Cᵣ + ⁿ⁻¹Cᵣ₋₁, so subtracting ⁿ⁻¹Cᵣ₋₁ leaves ⁿ⁻¹Cᵣ.",
+  "kind": "formula",
+  "id": "a00c248c-5239-4b40-babc-2d520bfdd0f6",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "r(r−1)·ⁿCᵣ equals (2 ≤ r ≤ n)",
+  "formula": "r(r−1)·ⁿCᵣ = n(n−1)·ⁿ⁻²Cᵣ₋₂",
+  "options": [
+   "n(n−1)·ⁿ⁻²Cᵣ₋₂",
+   "n(n−1)·ⁿ⁻²Cᵣ",
+   "n(n−1)·ⁿ⁻¹Cᵣ₋₁",
+   "n²·ⁿ⁻²Cᵣ₋₂"
+  ],
+  "answer": 0,
+  "explain": "Apply r·ⁿCᵣ = n·ⁿ⁻¹Cᵣ₋₁ twice: lowers n and r by 1 each time.",
+  "kind": "formula",
+  "id": "1d691cb4-d2f5-4008-a191-f34a72b45069",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "ⁿCᵣ expressed in terms of ⁿ⁺¹Cᵣ equals",
+  "formula": "ⁿCᵣ = [(n+1−r)/(n+1)]·ⁿ⁺¹Cᵣ",
+  "options": [
+   "(n+1−r)/(n+1) · ⁿ⁺¹Cᵣ",
+   "(n+1)/(n+1−r) · ⁿ⁺¹Cᵣ",
+   "(n−r)/(n+1) · ⁿ⁺¹Cᵣ",
+   "(r+1)/(n+1) · ⁿ⁺¹Cᵣ"
+  ],
+  "answer": 0,
+  "explain": "ⁿ⁺¹Cᵣ = (n+1)!/[r!(n+1−r)!] = (n+1)/(n+1−r) · ⁿCᵣ.",
+  "kind": "formula",
+  "id": "f97464a7-5ba5-4726-9727-a087044c78b2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "Pascal's rule applied three times: ⁿCᵣ₋₁ + 3ⁿCᵣ + 3ⁿCᵣ₊₁ + ⁿCᵣ₊₂ equals",
+  "formula": "(1+x)³(1+x)ⁿ = (1+x)ⁿ⁺³",
+  "options": [
+   "ⁿ⁺³Cᵣ₊₂",
+   "ⁿ⁺³Cᵣ₊₁",
+   "ⁿ⁺²Cᵣ₊₂",
+   "ⁿ⁺³Cᵣ"
+  ],
+  "answer": 0,
+  "explain": "Coefficient of xʳ⁺² in (1+x)³(1+x)ⁿ is ⁿ⁺³Cᵣ₊₂.",
+  "kind": "result",
+  "id": "58ac4923-c5f9-45d8-9cc2-a039e8243bce",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Pascal's rule and coefficient ratio relations"
+ },
+ {
+  "prompt": "Σᵣ₌₀ⁿ (−1)ʳ·ⁿCᵣ/2ʳ equals",
+  "formula": "(1 − 1/2)ⁿ",
+  "options": [
+   "1/2ⁿ",
+   "(3/2)ⁿ",
+   "0",
+   "1/(n+1)"
+  ],
+  "answer": 0,
+  "explain": "Put x = −1/2 in (1+x)ⁿ: (1 − 1/2)ⁿ = 1/2ⁿ.",
+  "kind": "formula",
+  "id": "ab2f5cf9-e7ab-4c6d-93f8-ea21de66f52b",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "Sum of absolute values of all coefficients in (1 − 2x)ⁿ is",
+  "formula": "",
+  "options": [
+   "3ⁿ",
+   "(−1)ⁿ",
+   "1",
+   "2ⁿ"
+  ],
+  "answer": 0,
+  "explain": "Absolute values equal the coefficients of (1+2x)ⁿ, so put x = 1 to get 3ⁿ.",
+  "kind": "concept",
+  "id": "66eae9ba-b032-4258-a310-636ff75b3bdc",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "C₀ − C₂ + C₄ − C₆ + ... in (1+x)ⁿ equals",
+  "formula": "Re (1+i)ⁿ",
+  "options": [
+   "2ⁿ/² cos(nπ/4)",
+   "2ⁿ/² sin(nπ/4)",
+   "2ⁿ cos(nπ/4)",
+   "2ⁿ⁻¹ cos(nπ/2)"
+  ],
+  "answer": 0,
+  "explain": "(1+i)ⁿ = 2ⁿ/²(cos nπ/4 + i sin nπ/4); the real part is C₀ − C₂ + C₄ − ...",
+  "kind": "result",
+  "id": "6587c331-45d4-4ba4-b422-d5e24c0d0ea2",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Sum of coefficients: 2^n, odd/even, alternating"
+ },
+ {
+  "prompt": "If ⁿC₁₀ is a greatest binomial coefficient of (1+x)ⁿ, then n can be?",
+  "formula": "",
+  "options": [
+   "19, 20 or 21",
+   "20 only",
+   "10 or 11",
+   "18, 19 or 20"
+  ],
+  "answer": 0,
+  "explain": "n=20 gives r=n/2=10; n odd needs (n±1)/2=10, so n=19 or 21.",
+  "kind": "result",
+  "id": "31ba9723-15f0-470c-882f-e97bf55f025c",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "The greatest coefficient in the expansion of (1+x)⁸ is?",
+  "formula": "⁸C₄",
+  "options": [
+   "56",
+   "70",
+   "64",
+   "35"
+  ],
+  "answer": 1,
+  "explain": "n=8 is even, so greatest is ⁸C₄ = 70.",
+  "kind": "fact",
+  "id": "6f109b27-f43c-4f30-b6e3-26b2388d82d5",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ },
+ {
+  "prompt": "The greatest binomial coefficient in the expansion of (1+x)¹⁰ is?",
+  "formula": "¹⁰C₅ = 10·9·8·7·6/5!",
+  "options": [
+   "210",
+   "252",
+   "126",
+   "120"
+  ],
+  "answer": 1,
+  "explain": "n = 10 is even, so the greatest coefficient is ¹⁰C₅ = 252.",
+  "kind": "fact",
+  "id": "545ce82a-a78d-4217-abe3-be1a4ac59e78",
+  "subject": "Mathematics",
+  "chapter": "Binomial Theorem",
+  "topic": "Greatest binomial coefficient"
+ }
+]

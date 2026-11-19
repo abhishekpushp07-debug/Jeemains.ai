@@ -1,1505 +1,3745 @@
 [
-  {
-    "id": "a2d6806e-5553-4ad5-bfe1-1c318b14ee6d",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Standard EMF of cell from standard reduction potentials:",
-    "formula": "E°cell = E°cathode − E°anode",
-    "options": [
-      "E°cat − E°an",
-      "E°cat × E°an",
-      "E°cat + E°an",
-      "E°an − E°cat"
-    ],
-    "answer": 0,
-    "explain": "E°cell = E°cathode − E°anode; cathode is reduction, anode is oxidation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "12b7a908-2d23-40a1-97a5-ce0e54b9063f",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Relation between ΔG° and E°cell:",
-    "formula": "ΔG° = −nFE°",
-    "options": [
-      "+nFE°",
-      "−nE°/F",
-      "−nRTE°",
-      "−nFE°"
-    ],
-    "answer": 3,
-    "explain": "ΔG° = −nFE°cell; negative ΔG° means spontaneous cell reaction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4c44e234-aaf8-4fd0-bb7c-d929c1e3a929",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Relation between E°cell and equilibrium constant K:",
-    "formula": "E° = (0.0592/n)logK",
-    "options": [
-      "(0.0592/n)lnK",
-      "0.0592·n·logK",
-      "(0.0592/n)logK",
-      "(n/0.0592)logK"
-    ],
-    "answer": 2,
-    "explain": "At equilibrium ΔG° = 0, so E° = (0.0592/n)logK at 298 K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a1b5d33-2128-4736-96db-5d036f04e497",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Faraday's first law: mass deposited is proportional to:",
-    "formula": "m = ZIt",
-    "options": [
-      "Voltage applied",
-      "Time only",
-      "Current only",
-      "Charge passed (Q = It)"
-    ],
-    "answer": 3,
-    "explain": "m = ZIt; mass deposited ∝ charge passed (Q = It).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4bbda7d4-2e52-4b75-9160-ab6d7d5caf01",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "One Faraday equals:",
-    "formula": "F = 96500 C mol⁻¹",
-    "options": [
-      "9650 C mol⁻¹",
-      "6.022×10²³ C",
-      "96500 J mol⁻¹",
-      "96500 C mol⁻¹"
-    ],
-    "answer": 3,
-    "explain": "1 F = 96500 C mol⁻¹ = charge of one mole of electrons.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eb59e15d-4e39-4a67-96b1-b4c4a135912e",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For a Daniel cell, the standard EMF is approximately:",
-    "formula": "E° = +1.10 V",
-    "options": [
-      "0.76 V",
-      "1.10 V",
-      "0.34 V",
-      "1.34 V"
-    ],
-    "answer": 1,
-    "explain": "E°(Zn²⁺/Zn) = −0.76 V (anode), E°(Cu²⁺/Cu) = +0.34 V (cathode); E° = 1.10 V.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "279a6e2e-fa5e-4886-a9dd-d6615e52a5e4",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Kohlrausch's law of independent migration of ions states:",
-    "formula": "Λ°m = ν₊λ°₊ + ν₋λ°₋",
-    "options": [
-      "Λ°m = λ°₊ − λ°₋",
-      "Λ°m = λ°₊ × λ°₋",
-      "Λ°m = (λ°₊ + λ°₋)/2",
-      "Λ°m = ν₊λ°₊ + ν₋λ°₋"
-    ],
-    "answer": 3,
-    "explain": "Each ion contributes independently to limiting molar conductivity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d5af16f4-cdb4-4902-9dd6-8dd55a7f378e",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Unit of molar conductivity (Λm):",
-    "formula": "",
-    "options": [
-      "S mol cm⁻²",
-      "S cm⁻¹ mol⁻¹",
-      "S cm² mol⁻¹",
-      "Ω cm mol⁻¹"
-    ],
-    "answer": 2,
-    "explain": "Λm = κ/c; SI unit is S m² mol⁻¹, but commonly S cm² mol⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b4b95de6-6aff-425a-9235-6bbaaf25991f",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For weak electrolytes, degree of dissociation α from conductivity:",
-    "formula": "α = Λm/Λ°m",
-    "options": [
-      "Λ°m / Λm",
-      "(Λm − Λ°m)/Λ°m",
-      "Λm / Λ°m",
-      "Λm · Λ°m"
-    ],
-    "answer": 2,
-    "explain": "α = Λm/Λ°m; fraction of electrolyte that is dissociated at given concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a908b487-8dc2-4f28-975f-d64437264ae6",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "As concentration decreases, molar conductivity of a strong electrolyte:",
-    "formula": "Λm = Λ°m − A√c",
-    "options": [
-      "Decreases",
-      "First decreases then increases",
-      "Remains constant",
-      "Increases towards Λ°m"
-    ],
-    "answer": 3,
-    "explain": "Debye–Hückel–Onsager: Λm = Λ°m − A√c; Λm increases as c → 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "386d95d6-6f7f-48f0-906d-ba780f7d63a3",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "At the anode of an electrolytic cell, the process is:",
-    "formula": "",
-    "options": [
-      "Reduction",
-      "Oxidation",
-      "Precipitation",
-      "Neutralization"
-    ],
-    "answer": 1,
-    "explain": "Anode = oxidation (loss of electrons) in both galvanic and electrolytic cells.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8282fb7a-ee5b-4388-9f6b-372582a282b2",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "During electrolysis of aqueous NaCl, product at cathode is:",
-    "formula": "",
-    "options": [
-      "NaOH solution only",
-      "Cl₂ gas",
-      "H₂ gas",
-      "Na metal"
-    ],
-    "answer": 2,
-    "explain": "H₂O is preferentially reduced at cathode: 2H₂O + 2e⁻ → H₂ + 2OH⁻.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d5484f70-6aa1-467d-b3bf-4e798cf034b1",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "SHE (Standard Hydrogen Electrode) is assigned E° value:",
-    "formula": "E° = 0.00 V",
-    "options": [
-      "−1.00 V",
-      "1.00 V",
-      "0.00 V",
-      "0.76 V"
-    ],
-    "answer": 2,
-    "explain": "SHE is the reference electrode; its standard reduction potential is defined as 0.00 V.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dce0fc54-4b19-4e31-a2e3-21e37e75b506",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "A higher (more positive) standard reduction potential means:",
-    "formula": "",
-    "options": [
-      "Lower reactivity",
-      "Weaker oxidising agent",
-      "Stronger reducing agent",
-      "Stronger oxidising agent"
-    ],
-    "answer": 3,
-    "explain": "Higher E°red → greater tendency to gain electrons → stronger oxidising agent.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "51aabebd-a890-4007-b692-c6c417add1c0",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Limiting molar conductivity of CH₃COOH using Kohlrausch's law:",
-    "formula": "Λ°(CH₃COOH) = Λ°(HCl) + Λ°(CH₃COONa) − Λ°(NaCl)",
-    "options": [
-      "Λ°(CH₃COONa)+Λ°(NaCl)−Λ°(HCl)",
-      "Λ°(HCl)+Λ°(CH₃COONa)−Λ°(NaCl)",
-      "Λ°(HCl)+Λ°(NaCl)−Λ°(CH₃COONa)",
-      "Λ°(HCl)−Λ°(CH₃COONa)+Λ°(NaCl)"
-    ],
-    "answer": 1,
-    "explain": "Kohlrausch's law allows Λ°m of weak electrolyte from strong electrolyte data.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8fb95931-5757-4a04-b4f0-a712b97282f5",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For spontaneous cell reaction, which condition must hold?",
-    "formula": "E°cell > 0, ΔG° < 0, K > 1",
-    "options": [
-      "ΔG° > 0",
-      "E°cell = 0",
-      "E°cell > 0",
-      "E°cell < 0"
-    ],
-    "answer": 2,
-    "explain": "Spontaneous reaction: E°cell > 0 ↔ ΔG° < 0 ↔ K > 1 (all equivalent criteria).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f00e63ac-b283-4266-adfa-bc7b63e40f87",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Molar conductivity Λm relates to conductivity κ and molarity C by:",
-    "formula": "Λm = κ/C × 1000",
-    "options": [
-      "Λm = κ/C²",
-      "Λm = κ × C/1000",
-      "Λm = κ × 1000/C",
-      "Λm = C/κ"
-    ],
-    "answer": 2,
-    "explain": "Λm (S·cm²/mol) = κ(S/cm) × 1000/C(mol/L); divides by molarity, multiplies by 1000.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "20f543e0-ca23-4dbf-84c2-abeb12082bfb",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Faraday's second law: masses deposited by same charge for different substances are in ratio of:",
-    "formula": "",
-    "options": [
-      "Their equivalent weights",
-      "Their atomic numbers",
-      "Their valencies",
-      "Their molar masses"
-    ],
-    "answer": 0,
-    "explain": "Same charge deposits substances in proportion to their equivalent weights (M/n).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec6600e7-3c53-46de-b279-f8dd26ef91f0",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "During electrolysis of molten NaCl, product at cathode is:",
-    "formula": "",
-    "options": [
-      "Sodium metal",
-      "Hydrogen gas",
-      "Sodium hydroxide",
-      "Chlorine gas"
-    ],
-    "answer": 0,
-    "explain": "Na⁺ ions are reduced at cathode giving Na metal; no water present in molten salt.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aff6cedc-f8d9-4bd6-96a7-ef00917a0ce9",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Which electrode is the anode in a galvanic cell?",
-    "formula": "",
-    "options": [
-      "Electrode with higher E°",
-      "Inert electrode only",
-      "Negative electrode (oxidation occurs)",
-      "Positive electrode (reduction occurs)"
-    ],
-    "answer": 2,
-    "explain": "Anode is negative in galvanic cell; oxidation occurs here and electrons flow out.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "660e9d68-9bcd-4d5c-b4be-a8c4f05c2712",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Conductivity of a solution GENERALLY increases with temperature because:",
-    "formula": "",
-    "options": [
-      "Viscosity increases",
-      "Ionic mobility increases with temperature",
-      "Dissociation decreases",
-      "Ion concentration decreases"
-    ],
-    "answer": 1,
-    "explain": "Higher temperature lowers viscosity, increasing ionic mobility and thus conductivity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cb1cd817-4e91-4c1a-873e-c3e36e203e4d",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Limiting molar conductivity of a strong electrolyte is obtained by:",
-    "formula": "Λ°m = A − B√C",
-    "options": [
-      "Extrapolating Λm vs C plot to C = 0",
-      "Using Ostwald dilution law",
-      "Measuring at highest concentration",
-      "Extrapolating Λm vs √C plot to C = 0"
-    ],
-    "answer": 3,
-    "explain": "Debye–Hückel–Onsager: Λm = Λ°m − B√C; intercept of Λm vs √C gives Λ°m.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e83650f3-34d7-4d35-876f-4536475945d8",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Cell constant has units of:",
-    "formula": "Cell constant = l/A",
-    "options": [
-      "Ω·cm",
-      "cm",
-      "S·cm⁻¹",
-      "cm⁻¹"
-    ],
-    "answer": 3,
-    "explain": "Cell constant = l/A has unit of length/area = cm/cm² = cm⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cadce7d8-2a30-4879-96ff-4ec822b996d6",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For a weak electrolyte, Λ°m CANNOT be obtained by extrapolation because:",
-    "formula": "",
-    "options": [
-      "Dissociation is complete at all concentrations",
-      "It has no limiting value",
-      "Λm vs √C curve is not linear at low C",
-      "Kohlrausch's law doesn't apply to ions"
-    ],
-    "answer": 2,
-    "explain": "Weak electrolytes show steep non-linear rise near C→0, making extrapolation inaccurate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a85d5686-100c-48b0-9656-e12aa74b2f6e",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Number of electrons transferred (n) in: MnO₄⁻ → Mn²⁺ in acidic medium is:",
-    "formula": "",
-    "options": [
-      "5",
-      "2",
-      "3",
-      "7"
-    ],
-    "answer": 0,
-    "explain": "Mn goes from +7 in MnO₄⁻ to +2 in Mn²⁺; change = 5 electrons per Mn.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1be3086a-9b08-49ff-9d54-55c2555346a6",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "During electrolysis, the cathode in an electrolytic cell is connected to:",
-    "formula": "",
-    "options": [
-      "Positive terminal of external source",
-      "Negative terminal of external source",
-      "Anode directly",
-      "Salt bridge"
-    ],
-    "answer": 1,
-    "explain": "Cathode is negative in electrolytic cell; reduction (cation discharge) occurs here.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a35311cb-4aa3-4d21-bef6-16f643b972e3",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The Nernst equation shows that E_cell increases when Q (reaction quotient):",
-    "formula": "E = E° − (RT/nF)lnQ",
-    "options": [
-      "Equals 1",
-      "Equals K",
-      "Increases",
-      "Decreases"
-    ],
-    "answer": 3,
-    "explain": "E = E° − (0.0592/n)logQ; smaller Q gives larger E_cell.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "386c9b9a-4746-4e2c-9943-d920c7a861af",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Ostwald dilution law for weak acid: Ka equals:",
-    "formula": "Kₐ = Cα²/(1−α)",
-    "options": [
-      "Cα²/(1−α)",
-      "C(1−α)/α²",
-      "α²/C",
-      "Cα²"
-    ],
-    "answer": 0,
-    "explain": "For HA ⇌ H⁺ + A⁻, Ka = Cα²/(1−α); for small α, Ka ≈ Cα².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "143f878e-d555-481c-a827-73a7646f6752",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Molar conductance of a strong electrolyte at infinite dilution follows additivity of:",
-    "formula": "Λ°m = ν₊λ°₊ + ν₋λ°₋",
-    "options": [
-      "Equivalent weights",
-      "Molecular conductances",
-      "Molar masses",
-      "Individual ionic conductances"
-    ],
-    "answer": 3,
-    "explain": "Kohlrausch's law: Λ°m = sum of contributions of individual ions (ν±λ°±).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4a039a9d-09ca-4dfb-98f7-2d1ec23d0bab",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "During electrolysis of aqueous CuSO₄ with Cu electrodes, anode:",
-    "formula": "",
-    "options": [
-      "Remains unchanged",
-      "Dissolves (Cu → Cu²⁺ + 2e⁻)",
-      "Releases H₂ gas",
-      "Releases O₂ gas"
-    ],
-    "answer": 1,
-    "explain": "Active Cu anode dissolves preferentially rather than oxidation of water to O₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5b63a5f1-37b1-4a25-9411-e07d4001c8ac",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Conductivity κ of a solution is related to resistance R and cell constant G* by:",
-    "formula": "κ = G*/R",
-    "options": [
-      "κ = G*/R",
-      "κ = R × G*",
-      "κ = R/G*",
-      "κ = 1/(R + G*)"
-    ],
-    "answer": 0,
-    "explain": "κ = (l/A)/R = cell constant/R; conductivity = cell constant divided by resistance.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3b9e8111-fde8-4199-bd09-bffa629893a8",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "When E°cell > 0, the value of ΔG° is:",
-    "formula": "ΔG° = −nFE°",
-    "options": [
-      "Negative (reaction spontaneous)",
-      "Positive (non-spontaneous)",
-      "Zero (equilibrium)",
-      "Cannot determine"
-    ],
-    "answer": 0,
-    "explain": "ΔG° = −nFE°cell; positive E°cell gives negative ΔG°, indicating spontaneous reaction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3bcaa56d-d8c1-4911-b00b-f4031312f78b",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Debye-Hückel-Onsager equation: Λm vs √C for strong electrolyte",
-    "formula": "Λm = Λ°m − b√C",
-    "options": [
-      "Λm = Λ°m − b√C",
-      "Λm = Λ°m − bC",
-      "Λm = Λ°m / √C",
-      "Λm = Λ°m + b√C"
-    ],
-    "answer": 0,
-    "explain": "Debye-Hückel-Onsager: molar conductivity decreases linearly with √C for strong electrolytes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "00cca277-807d-42ec-b300-07801f725e9b",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The standard reduction potential of F₂/F⁻ half-cell is the:",
-    "formula": "",
-    "options": [
-      "Most positive among all electrodes",
-      "Equal to zero by definition",
-      "Most negative among all electrodes",
-      "Equal to +1.23 V"
-    ],
-    "answer": 0,
-    "explain": "F₂ is the strongest oxidising agent; E°(F₂/F⁻) = +2.87 V, most positive standard reduction potential.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "68286814-84c2-46d0-9196-f81cff2d52a7",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Standard reduction potential of Li⁺/Li is the:",
-    "formula": "",
-    "options": [
-      "Equal to −0.76 V",
-      "Most negative standard reduction potential",
-      "Zero by definition",
-      "Most positive standard reduction potential"
-    ],
-    "answer": 1,
-    "explain": "Li⁺/Li has E° = −3.04 V, the most negative, making Li the strongest reducing agent.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f1d10e1f-1959-483c-8a70-5ecb5b8c7704",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "During electrolysis, the quantity (charge/n×F) gives:",
-    "formula": "moles deposited = Q/(nF)",
-    "options": [
-      "Moles of substance deposited",
-      "Equivalent weight deposited",
-      "Current in amperes",
-      "Mass in grams deposited"
-    ],
-    "answer": 0,
-    "explain": "Faraday's first law: moles = Q/(nF), where Q = charge passed, n = electrons per ion.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f526faa2-5ce1-4890-88b7-126a2c65b3a3",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "During electrolysis of aqueous AgNO₃ with Ag electrodes, the anode:",
-    "formula": "",
-    "options": [
-      "Dissolves, releasing Ag⁺ into solution",
-      "Evolves H₂ gas",
-      "Deposits Ag metal",
-      "Evolves O₂ gas"
-    ],
-    "answer": 0,
-    "explain": "Active Ag anode dissolves (Ag → Ag⁺ + e⁻); concentration of AgNO₃ remains roughly constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1eb8e738-7853-4a75-8bb6-446e624ebe33",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Molar conductivity Λm has SI unit:",
-    "formula": "",
-    "options": [
-      "S m² mol⁻¹",
-      "Ω m mol⁻¹",
-      "S m⁻¹",
-      "S cm⁻¹ mol⁻¹"
-    ],
-    "answer": 0,
-    "explain": "Λm = κ/C; units: (S m⁻¹)/(mol m⁻³) = S m² mol⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5db6aaf5-a506-4e01-8841-cd8750f9e225",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For electrolysis, time t, current I and charge Q are related by:",
-    "formula": "Q = I × t",
-    "options": [
-      "Q = I × t",
-      "Q = t / I",
-      "Q = I² × t",
-      "Q = I / t"
-    ],
-    "answer": 0,
-    "explain": "Charge = current × time (coulombs = amperes × seconds); fundamental relation in electrolysis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2d24f6e1-f0b4-44d2-9e54-96b90e4403ef",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The EMF of a cell is zero at equilibrium; this means ΔG equals:",
-    "formula": "ΔG = −nFE",
-    "options": [
-      "−RT ln K",
-      "nFE°",
-      "Zero",
-      "−nFE°"
-    ],
-    "answer": 2,
-    "explain": "ΔG = −nFE; when E = 0 (equilibrium), ΔG = 0 by definition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "119774b6-73db-45c9-a075-0754e4fd6ddd",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Preferential discharge at cathode follows the rule of:",
-    "formula": "",
-    "options": [
-      "Lower reduction potential discharged first",
-      "Higher charge ion discharged first",
-      "Lighter ion discharged first",
-      "Higher (more positive) reduction potential discharged first"
-    ],
-    "answer": 3,
-    "explain": "Ion with higher (more positive) E° is easier to reduce; it is preferentially discharged at cathode.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7478f739-e788-4cc7-aed0-440271e08dbb",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "In electrorefining of copper, impure Cu acts as:",
-    "formula": "",
-    "options": [
-      "Salt bridge",
-      "Cathode (deposits)",
-      "Electrolyte",
-      "Anode (dissolves)"
-    ],
-    "answer": 3,
-    "explain": "Impure Cu = anode; pure Cu = cathode; CuSO₄ solution transfers Cu from anode to cathode.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1224de87-6fe2-424c-b3b4-39d5b1438bbb",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The relation between E°cell and ΔG° and K at 298 K: which set is CONSISTENT?",
-    "formula": "E°>0, ΔG°<0, K>1",
-    "options": [
-      "E°>0, ΔG°>0, K>1",
-      "E°>0, ΔG°<0, K<1",
-      "E°>0, ΔG°<0, K>1",
-      "E°<0, ΔG°<0, K<1"
-    ],
-    "answer": 2,
-    "explain": "Spontaneous cell: E°>0 ↔ ΔG°<0 ↔ K>1; all three conditions are equivalent.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a2f7e4dd-b004-4cbe-912d-8c85475f9c5f",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "What does 'cell constant' (G*) physically represent?",
-    "formula": "G* = l/A",
-    "options": [
-      "Conductance of the cell",
-      "Ratio of electrode area to distance",
-      "Resistance of the cell",
-      "Ratio of electrode distance to electrode area"
-    ],
-    "answer": 3,
-    "explain": "Cell constant G* = l/A (distance between electrodes / area); unit m⁻¹ or cm⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d9b612fa-773c-4ae3-b91f-c52d6eac8a66",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "During electrolysis of aqueous CuSO₄ with Pt electrodes, cathode product is:",
-    "formula": "",
-    "options": [
-      "Copper metal",
-      "Oxygen gas",
-      "Hydrogen gas",
-      "Sulphur dioxide"
-    ],
-    "answer": 0,
-    "explain": "Cu²⁺ has higher reduction potential than H⁺/H₂; Cu deposits at cathode preferentially.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4dd3d98c-cc08-4b51-a88d-b96e0ff7b87f",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For electrolysis, mass deposited m = ZIt; the unit of Z (electrochemical equivalent) is:",
-    "formula": "Z = M/(nF)",
-    "options": [
-      "g mol⁻¹",
-      "mol C⁻¹",
-      "g C⁻¹",
-      "C g⁻¹"
-    ],
-    "answer": 2,
-    "explain": "Z = M/(nF); m = Z×Q, so Z = mass/charge → unit: g C⁻¹ (grams per coulomb).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6f06592c-a704-4fb0-b48a-0d5e430628e9",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For a concentration cell: Zn|Zn²⁺(C₁)||Zn²⁺(C₂)|Zn, EMF > 0 when:",
-    "formula": "E = (0.0592/2)log(C₂/C₁)",
-    "options": [
-      "C₁ = 1 M only",
-      "C₂ > C₁",
-      "C₂ < C₁",
-      "C₂ = C₁"
-    ],
-    "answer": 1,
-    "explain": "Anode has lower concentration (C₁); cathode higher (C₂); EMF = (0.0592/2)log(C₂/C₁) > 0 when C₂ > C₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a4132cc-ccb5-47ce-a109-c3242e30c87c",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The standard reduction potential E° of the hydrogen electrode at pH = 0 is:",
-    "formula": "E° = 0.00 V",
-    "options": [
-      "+1.23 V",
-      "−0.83 V",
-      "+0.76 V",
-      "Exactly 0.00 V by convention"
-    ],
-    "answer": 3,
-    "explain": "SHE (H⁺ at 1 M, H₂ at 1 atm, 298 K) is assigned E° = 0.00 V as the reference electrode.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2ad17a60-2d9b-491c-8f67-e015aed236e1",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Increasing dilution of a weak electrolyte causes its degree of dissociation α to:",
-    "formula": "α = √(Ka/C)",
-    "options": [
-      "Decrease",
-      "Remain constant",
-      "First increase then decrease",
-      "Increase"
-    ],
-    "answer": 3,
-    "explain": "α = √(Ka/C); as C decreases (dilution), α increases → more dissociation at higher dilution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bf44b4fb-5d67-41c2-b1da-eada8c1bd676",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Conductance G is the reciprocal of:",
-    "formula": "G = 1/R",
-    "options": [
-      "Resistivity ρ",
-      "Resistance R",
-      "Molar conductivity Λm",
-      "Cell constant G*"
-    ],
-    "answer": 1,
-    "explain": "Conductance G = 1/R; unit is siemens (S).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "088f4b71-deac-494f-8265-dceed8a531a1",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The SI unit of conductance is:",
-    "formula": "",
-    "options": [
-      "S·cm⁻¹",
-      "Siemens (S)",
-      "S·m²·mol⁻¹",
-      "Ohm (Ω)"
-    ],
-    "answer": 1,
-    "explain": "Conductance is measured in siemens (S), also written as Ω⁻¹ or mho.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c67bf9b9-aaa8-4a4f-b8e3-ae8cbf431872",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Resistivity ρ is related to resistance R, length l, area A by:",
-    "formula": "ρ = R·A/l",
-    "options": [
-      "ρ = l/(R·A)",
-      "ρ = R·A/l",
-      "ρ = A/(R·l)",
-      "ρ = R·l/A"
-    ],
-    "answer": 1,
-    "explain": "Resistivity ρ = R·A/l; conductivity κ = 1/ρ = l/(R·A).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "288090b5-ca74-45e3-bf98-23559134099c",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "In electrolysis, Faraday's law: moles of substance deposited = ?",
-    "formula": "mol = Q/(n·F)",
-    "options": [
-      "n·F/Q",
-      "F/(n·Q)",
-      "Q·n/F",
-      "Q/(n·F)"
-    ],
-    "answer": 3,
-    "explain": "Moles deposited = Q/(nF), where Q = charge, n = electrons per ion, F = 96500 C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fbc9b350-55e8-4782-b379-a6cd2d726096",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Which among these is a secondary (rechargeable) cell?",
-    "formula": "",
-    "options": [
-      "Dry cell (Leclanché)",
-      "Mercury cell",
-      "Hydrogen-oxygen fuel cell",
-      "Lead storage battery"
-    ],
-    "answer": 3,
-    "explain": "Lead storage battery is rechargeable (secondary cell); dry cell and mercury cell are primary.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ffdeac0e-fbb5-4d9d-8f75-7a45cacb14b6",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "In lead storage battery, anode material is:",
-    "formula": "",
-    "options": [
-      "Pb",
-      "H₂SO₄",
-      "PbO₂",
-      "PbSO₄"
-    ],
-    "answer": 0,
-    "explain": "Pb (lead) is the anode; PbO₂ is the cathode in a lead storage battery.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "cee39a90-1e24-46b1-ae4d-9edbfa835e93",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Rusting of iron is an example of:",
-    "formula": "",
-    "options": [
-      "Chemical corrosion only",
-      "Electrochemical corrosion",
-      "Galvanisation",
-      "Passivation"
-    ],
-    "answer": 1,
-    "explain": "Rusting involves oxidation of Fe at anode and reduction of O₂/H⁺ at cathode — electrochemical.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "b42d730a-b6f3-4eed-9ff5-61ec981323b1",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Galvanisation protects iron by coating it with:",
-    "formula": "",
-    "options": [
-      "Tin",
-      "Nickel",
-      "Copper",
-      "Zinc"
-    ],
-    "answer": 3,
-    "explain": "Galvanisation coats iron with Zn; Zn acts as sacrificial anode, protecting Fe from corrosion.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "12cbc936-928b-4c57-abd2-d106809a3db7",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The product formed at cathode during electrolysis of brine (conc. NaCl) is:",
-    "formula": "",
-    "options": [
-      "Cl₂ gas",
-      "NaOH solid",
-      "H₂ gas",
-      "Na metal"
-    ],
-    "answer": 2,
-    "explain": "At cathode: 2H₂O + 2e⁻ → H₂ + 2OH⁻; Na⁺ is not discharged in aqueous solution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f9344e0a-c585-49b2-9ee4-0d353d7abf0d",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "In the chlor-alkali process (electrolysis of brine), Cl₂ is produced at the:",
-    "formula": "",
-    "options": [
-      "Anode",
-      "Salt bridge",
-      "Cathode",
-      "Both electrodes"
-    ],
-    "answer": 0,
-    "explain": "Cl⁻ is oxidised at anode to give Cl₂; at cathode H₂ is produced.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "351e9be5-5121-44a4-8b53-79b835c821dc",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Molar conductivity Λm of a strong electrolyte at concentration C follows:",
-    "formula": "Λm = Λ°m − b√C",
-    "options": [
-      "Λm = Λ°m − b√C",
-      "Λm = Λ°m/√C",
-      "Λm = Λ°m + b√C",
-      "Λm = Λ°m − bC"
-    ],
-    "answer": 0,
-    "explain": "Debye-Hückel-Onsager: Λm decreases linearly with √C for strong electrolytes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d1d5f329-f0b4-4848-bd1f-610668fb56c8",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Which quantity is plotted on x-axis to get Λ°m of strong electrolyte by extrapolation?",
-    "formula": "",
-    "options": [
-      "log C",
-      "√C",
-      "1/C",
-      "C"
-    ],
-    "answer": 1,
-    "explain": "Λm vs √C graph for strong electrolyte is linear; y-intercept gives Λ°m.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "5026b333-5a8f-4bf6-b8d8-57a9e666a0d4",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The standard EMF of a cell is related to n, F and ΔG° by:",
-    "formula": "E°cell = −ΔG°/(nF)",
-    "options": [
-      "E°cell = ΔG°/(nF)",
-      "E°cell = nF·ΔG°",
-      "E°cell = −ΔG°/(nF)",
-      "E°cell = −nF/ΔG°"
-    ],
-    "answer": 2,
-    "explain": "ΔG° = −nFE°cell, so E°cell = −ΔG°/(nF); positive E° means negative ΔG° (spontaneous).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e2953546-6186-4968-bf7c-88f7293ca12f",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For the cell Zn|Zn²⁺||Cu²⁺|Cu, electrons in external circuit flow from:",
-    "formula": "",
-    "options": [
-      "Cu to Zn",
-      "Zn²⁺ to Cu²⁺",
-      "Zn to Cu",
-      "Inside salt bridge only"
-    ],
-    "answer": 2,
-    "explain": "Zn is anode (oxidation); electrons flow through external wire from Zn (anode) to Cu (cathode).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "67c319b2-ce85-4fdf-a69f-a5407384222f",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The standard reduction potential E° for Cu²⁺/Cu is +0.34 V. For Cu/Cu²⁺ (oxidation), E° is:",
-    "formula": "",
-    "options": [
-      "+0.68 V",
-      "−0.34 V",
-      "0 V",
-      "+0.34 V"
-    ],
-    "answer": 1,
-    "explain": "Oxidation potential = −(reduction potential); sign is reversed when reaction is reversed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e567b95c-b9cd-4874-8848-3792f256de7e",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "If E°cell = E°cathode − E°anode, and both half-cells are same, E°cell is:",
-    "formula": "",
-    "options": [
-      "Negative",
-      "Depends on concentration",
-      "Positive",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "Identical half-cells give E°cell = 0; actual EMF depends on concentration difference.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2f240288-aadb-4af1-8f9f-6efffdd051d1",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "What happens to conductivity of a metallic conductor with rise in temperature?",
-    "formula": "",
-    "options": [
-      "Decreases",
-      "Increases",
-      "Remains constant",
-      "First increases then decreases"
-    ],
-    "answer": 0,
-    "explain": "Metallic conductors: conductivity decreases with temperature (more collisions); opposite for electrolytes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a3742aee-d91f-46dd-9424-1b0357065cdf",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The degree of dissociation α of weak electrolyte from conductivity data is:",
-    "formula": "α = Λm/Λ°m",
-    "options": [
-      "Λm/Λ°m",
-      "κ/Λ°m",
-      "Λ°m/Λm",
-      "Λm·C/κ"
-    ],
-    "answer": 0,
-    "explain": "α = Λm/Λ°m; at infinite dilution, complete dissociation assumed, giving Λ°m.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "26a9eeeb-f90b-412a-a673-ccd5b8314ec5",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "In electrolysis, which ion is preferentially discharged at anode if both Cl⁻ and SO₄²⁻ present (conc.)?",
-    "formula": "",
-    "options": [
-      "Both equally",
-      "OH⁻ from water",
-      "Cl⁻",
-      "SO₄²⁻"
-    ],
-    "answer": 2,
-    "explain": "At higher concentration, Cl⁻ is preferentially oxidised at anode over SO₄²⁻ (overpotential effect).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1488fac7-76d4-46ca-9c95-fc24ba20e806",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The relation ln K = nFE°cell/RT at 298 K simplifies to log K =",
-    "formula": "log K = nE°cell/0.0592",
-    "options": [
-      "nE°cell×0.0592",
-      "nE°cell/0.0592",
-      "E°cell/(n×0.0592)",
-      "nE°cell/0.0257"
-    ],
-    "answer": 1,
-    "explain": "log K = nE°cell/0.0592 at 298 K; derived from ΔG° = −nFE°cell = −RT ln K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ed4b9fbd-a7ae-4277-a9dd-898c40e6e173",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The EMF of a cell at non-standard conditions is given by Nernst equation. E_cell equals:",
-    "formula": "E = E° − (0.0592/n)log Q",
-    "options": [
-      "E° + (0.0592/n)log Q",
-      "E° − (0.0592/n)log Q",
-      "E°/(0.0592 n log Q)",
-      "E° × (0.0592/n)log Q"
-    ],
-    "answer": 1,
-    "explain": "Nernst equation: E = E° − (RT/nF)ln Q = E° − (0.0592/n)log Q at 298 K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9e87118e-eb7b-4b7d-b71d-d4b6ba6c4190",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For the reaction: Cr₂O₇²⁻ → 2Cr³⁺ (acidic medium), n-factor (electrons per formula unit) is:",
-    "formula": "",
-    "options": [
-      "2",
-      "12",
-      "3",
-      "6"
-    ],
-    "answer": 3,
-    "explain": "Each Cr goes from +6 to +3 (gain 3e⁻); two Cr atoms → 6 electrons transferred per Cr₂O₇²⁻.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3f8ff3db-4db1-427e-817f-bbccad94591f",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "In electrolysis, if same charge is passed through AgNO₃ and CuSO₄ in series, ratio of moles deposited Ag:Cu is:",
-    "formula": "",
-    "options": [
-      "108:32",
-      "1:1",
-      "1:2",
-      "2:1"
-    ],
-    "answer": 3,
-    "explain": "Ag needs 1e⁻/atom (n=1), Cu needs 2e⁻/atom (n=2); same charge → moles Ag:Cu = 2:1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "abb75db1-3aaf-46b9-a841-7493a497504e",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The Nernst equation for electrode E(M^n+/M) at 298 K is:",
-    "formula": "E = E° + (0.0592/n)log[Mⁿ⁺]",
-    "options": [
-      "E° − 0.0592 log[Mⁿ⁺]",
-      "E° − (0.0592/n)log[Mⁿ⁺]",
-      "E° + (0.0592 n)log[Mⁿ⁺]",
-      "E° + (0.0592/n)log[Mⁿ⁺]"
-    ],
-    "answer": 3,
-    "explain": "For reduction half-cell Mⁿ⁺+ne⁻→M, E = E° + (0.0592/n)log[Mⁿ⁺]; higher [Mⁿ⁺] raises E.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "82699bd3-cc32-4d00-8598-1d9ef9819650",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "Specific resistance (resistivity) ρ has SI unit:",
-    "formula": "ρ = R·A/l",
-    "options": [
-      "Ω m",
-      "Ω m⁻¹",
-      "S cm⁻¹",
-      "S m⁻¹"
-    ],
-    "answer": 0,
-    "explain": "Resistivity ρ = R×A/l; unit = Ω × m²/m = Ω m (SI). Conductivity κ = 1/ρ has unit S m⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "af2c96de-61f4-4ee8-8504-300ff1e9f878",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "At constant temperature, molar conductivity Λm of weak electrolyte (e.g., CH₃COOH) at concentration C is related to α by:",
-    "formula": "α = Λm/Λ°m",
-    "options": [
-      "α = Λm − Λ°m",
-      "α = Λm × Λ°m",
-      "α = Λm/Λ°m",
-      "α = Λ°m/Λm"
-    ],
-    "answer": 2,
-    "explain": "Degree of dissociation α = Λm/Λ°m for weak electrolyte; as dilution increases, α → 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ee3bb009-30af-4eb3-8974-f5ae801379f7",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The n-factor for H₂SO₄ acting as an acid in neutralisation reactions is:",
-    "formula": "",
-    "options": [
-      "1",
-      "4",
-      "3",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "H₂SO₄ donates 2 H⁺ per molecule; its n-factor (basicity) = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "43b60f23-454a-4fdf-8cbc-99f665486508",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "The Nernst equation: RT/nF × ln Q uses ln. At 298 K, 2.303RT/F ≈",
-    "formula": "2.303RT/F ≈ 0.0592 V",
-    "options": [
-      "0.1183 V",
-      "0.0830 V",
-      "0.0592 V",
-      "0.0257 V"
-    ],
-    "answer": 2,
-    "explain": "At 298 K, 2.303RT/F = 0.0592 V, used to convert ln to log₁₀ in Nernst equation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8c111d0d-c9a0-4d18-b153-cbee66d4228e",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For Cr₂O₇²⁻ → 2Cr³⁺ in acidic medium, n-factor per Cr₂O₇²⁻ ion is:",
-    "formula": "",
-    "options": [
-      "6",
-      "2",
-      "3",
-      "12"
-    ],
-    "answer": 0,
-    "explain": "Each Cr goes from +6 to +3 (gain of 3e⁻); two Cr atoms means n = 6 per formula unit.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6d6555e3-1ff4-4283-92d4-1b75fd210499",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "What is the n-factor (electrons transferred) for MnO₄⁻ → MnO₂ in neutral medium?",
-    "formula": "",
-    "options": [
-      "7",
-      "2",
-      "3",
-      "5"
-    ],
-    "answer": 2,
-    "explain": "Mn goes from +7 to +4 in neutral medium, so n = 3 electrons per MnO₄⁻.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "181fab03-11fa-45c1-ae08-f712e5db80cb",
-    "subject": "Chemistry",
-    "chapter": "Electrochemistry",
-    "topic": "Electrochemistry",
-    "prompt": "For the equilibrium constant K of cell reaction at 298 K: log K =",
-    "formula": "log K = nE°cell/0.0592",
-    "options": [
-      "nFE°/R",
-      "nE°/0.0592",
-      "E°/0.0592n",
-      "nE°/0.0257"
-    ],
-    "answer": 1,
-    "explain": "From ΔG° = −nFE° = −RT ln K, at 298 K: log K = nE°cell/0.0592.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "a2d6806e-5553-4ad5-bfe1-1c318b14ee6d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "Standard EMF of cell from standard reduction potentials:",
+  "formula": "E°cell = E°cathode − E°anode",
+  "options": [
+   "E°cat − E°an",
+   "E°cat × E°an",
+   "E°cat + E°an",
+   "E°an − E°cat"
+  ],
+  "answer": 0,
+  "explain": "E°cell = E°cathode − E°anode; cathode is reduction, anode is oxidation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "12b7a908-2d23-40a1-97a5-ce0e54b9063f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "Relation between ΔG° and E°cell:",
+  "formula": "ΔG° = −nFE°",
+  "options": [
+   "+nFE°",
+   "−nE°/F",
+   "−nRTE°",
+   "−nFE°"
+  ],
+  "answer": 3,
+  "explain": "ΔG° = −nFE°cell; negative ΔG° means spontaneous cell reaction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4c44e234-aaf8-4fd0-bb7c-d929c1e3a929",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "Relation between E°cell and equilibrium constant K:",
+  "formula": "E° = (0.0592/n)logK",
+  "options": [
+   "(0.0592/n)lnK",
+   "0.0592·n·logK",
+   "(0.0592/n)logK",
+   "(n/0.0592)logK"
+  ],
+  "answer": 2,
+  "explain": "At equilibrium ΔG° = 0, so E° = (0.0592/n)logK at 298 K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a1b5d33-2128-4736-96db-5d036f04e497",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "Faraday's first law: mass deposited is proportional to:",
+  "formula": "m = ZIt",
+  "options": [
+   "Voltage applied",
+   "Time only",
+   "Current only",
+   "Charge passed (Q = It)"
+  ],
+  "answer": 3,
+  "explain": "m = ZIt; mass deposited ∝ charge passed (Q = It).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4bbda7d4-2e52-4b75-9160-ab6d7d5caf01",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "One Faraday equals:",
+  "formula": "F = 96500 C mol⁻¹",
+  "options": [
+   "9650 C mol⁻¹",
+   "6.022×10²³ C",
+   "96500 J mol⁻¹",
+   "96500 C mol⁻¹"
+  ],
+  "answer": 3,
+  "explain": "1 F = 96500 C mol⁻¹ = charge of one mole of electrons.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eb59e15d-4e39-4a67-96b1-b4c4a135912e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "For a Daniel cell, the standard EMF is approximately:",
+  "formula": "E° = +1.10 V",
+  "options": [
+   "0.76 V",
+   "1.10 V",
+   "0.34 V",
+   "1.34 V"
+  ],
+  "answer": 1,
+  "explain": "E°(Zn²⁺/Zn) = −0.76 V (anode), E°(Cu²⁺/Cu) = +0.34 V (cathode); E° = 1.10 V.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "279a6e2e-fa5e-4886-a9dd-d6615e52a5e4",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Kohlrausch's law of independent migration of ions states:",
+  "formula": "Λ°m = ν₊λ°₊ + ν₋λ°₋",
+  "options": [
+   "Λ°m = λ°₊ − λ°₋",
+   "Λ°m = λ°₊ × λ°₋",
+   "Λ°m = (λ°₊ + λ°₋)/2",
+   "Λ°m = ν₊λ°₊ + ν₋λ°₋"
+  ],
+  "answer": 3,
+  "explain": "Each ion contributes independently to limiting molar conductivity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d5af16f4-cdb4-4902-9dd6-8dd55a7f378e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Unit of molar conductivity (Λm):",
+  "formula": "",
+  "options": [
+   "S mol cm⁻²",
+   "S cm⁻¹ mol⁻¹",
+   "S cm² mol⁻¹",
+   "Ω cm mol⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Λm = κ/c; SI unit is S m² mol⁻¹, but commonly S cm² mol⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b4b95de6-6aff-425a-9235-6bbaaf25991f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Degree of dissociation & Ka from conductance",
+  "prompt": "For weak electrolytes, degree of dissociation α from conductivity:",
+  "formula": "α = Λm/Λ°m",
+  "options": [
+   "Λ°m / Λm",
+   "(Λm − Λ°m)/Λ°m",
+   "Λm / Λ°m",
+   "Λm · Λ°m"
+  ],
+  "answer": 2,
+  "explain": "α = Λm/Λ°m; fraction of electrolyte that is dissociated at given concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a908b487-8dc2-4f28-975f-d64437264ae6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "As concentration decreases, molar conductivity of a strong electrolyte:",
+  "formula": "Λm = Λ°m − A√c",
+  "options": [
+   "Decreases",
+   "First decreases then increases",
+   "Remains constant",
+   "Increases towards Λ°m"
+  ],
+  "answer": 3,
+  "explain": "Debye–Hückel–Onsager: Λm = Λ°m − A√c; Λm increases as c → 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "386d95d6-6f7f-48f0-906d-ba780f7d63a3",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "At the anode of an electrolytic cell, the process is:",
+  "formula": "",
+  "options": [
+   "Reduction",
+   "Oxidation",
+   "Precipitation",
+   "Neutralization"
+  ],
+  "answer": 1,
+  "explain": "Anode = oxidation (loss of electrons) in both galvanic and electrolytic cells.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8282fb7a-ee5b-4388-9f6b-372582a282b2",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "During electrolysis of aqueous NaCl, product at cathode is:",
+  "formula": "",
+  "options": [
+   "NaOH solution only",
+   "Cl₂ gas",
+   "H₂ gas",
+   "Na metal"
+  ],
+  "answer": 2,
+  "explain": "H₂O is preferentially reduced at cathode: 2H₂O + 2e⁻ → H₂ + 2OH⁻.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d5484f70-6aa1-467d-b3bf-4e798cf034b1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "SHE (Standard Hydrogen Electrode) is assigned E° value:",
+  "formula": "E° = 0.00 V",
+  "options": [
+   "−1.00 V",
+   "1.00 V",
+   "0.00 V",
+   "0.76 V"
+  ],
+  "answer": 2,
+  "explain": "SHE is the reference electrode; its standard reduction potential is defined as 0.00 V.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dce0fc54-4b19-4e31-a2e3-21e37e75b506",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "A higher (more positive) standard reduction potential means:",
+  "formula": "",
+  "options": [
+   "Lower reactivity",
+   "Weaker oxidising agent",
+   "Stronger reducing agent",
+   "Stronger oxidising agent"
+  ],
+  "answer": 3,
+  "explain": "Higher E°red → greater tendency to gain electrons → stronger oxidising agent.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "51aabebd-a890-4007-b692-c6c417add1c0",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Limiting molar conductivity of CH₃COOH using Kohlrausch's law:",
+  "formula": "Λ°(CH₃COOH) = Λ°(HCl) + Λ°(CH₃COONa) − Λ°(NaCl)",
+  "options": [
+   "Λ°(CH₃COONa)+Λ°(NaCl)−Λ°(HCl)",
+   "Λ°(HCl)+Λ°(CH₃COONa)−Λ°(NaCl)",
+   "Λ°(HCl)+Λ°(NaCl)−Λ°(CH₃COONa)",
+   "Λ°(HCl)−Λ°(CH₃COONa)+Λ°(NaCl)"
+  ],
+  "answer": 1,
+  "explain": "Kohlrausch's law allows Λ°m of weak electrolyte from strong electrolyte data.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8fb95931-5757-4a04-b4f0-a712b97282f5",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "For spontaneous cell reaction, which condition must hold?",
+  "formula": "E°cell > 0, ΔG° < 0, K > 1",
+  "options": [
+   "ΔG° > 0",
+   "E°cell = 0",
+   "E°cell > 0",
+   "E°cell < 0"
+  ],
+  "answer": 2,
+  "explain": "Spontaneous reaction: E°cell > 0 ↔ ΔG° < 0 ↔ K > 1 (all equivalent criteria).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f00e63ac-b283-4266-adfa-bc7b63e40f87",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Molar conductivity Λm relates to conductivity κ and molarity C by:",
+  "formula": "Λm = κ/C × 1000",
+  "options": [
+   "Λm = κ/C²",
+   "Λm = κ × C/1000",
+   "Λm = κ × 1000/C",
+   "Λm = C/κ"
+  ],
+  "answer": 2,
+  "explain": "Λm (S·cm²/mol) = κ(S/cm) × 1000/C(mol/L); divides by molarity, multiplies by 1000.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "20f543e0-ca23-4dbf-84c2-abeb12082bfb",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "Faraday's second law: masses deposited by same charge for different substances are in ratio of:",
+  "formula": "",
+  "options": [
+   "Their equivalent weights",
+   "Their atomic numbers",
+   "Their valencies",
+   "Their molar masses"
+  ],
+  "answer": 0,
+  "explain": "Same charge deposits substances in proportion to their equivalent weights (M/n).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec6600e7-3c53-46de-b279-f8dd26ef91f0",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "During electrolysis of molten NaCl, product at cathode is:",
+  "formula": "",
+  "options": [
+   "Sodium metal",
+   "Hydrogen gas",
+   "Sodium hydroxide",
+   "Chlorine gas"
+  ],
+  "answer": 0,
+  "explain": "Na⁺ ions are reduced at cathode giving Na metal; no water present in molten salt.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aff6cedc-f8d9-4bd6-96a7-ef00917a0ce9",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Which electrode is the anode in a galvanic cell?",
+  "formula": "",
+  "options": [
+   "Electrode with higher E°",
+   "Inert electrode only",
+   "Negative electrode (oxidation occurs)",
+   "Positive electrode (reduction occurs)"
+  ],
+  "answer": 2,
+  "explain": "Anode is negative in galvanic cell; oxidation occurs here and electrons flow out.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "660e9d68-9bcd-4d5c-b4be-a8c4f05c2712",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Conductivity of a solution GENERALLY increases with temperature because:",
+  "formula": "",
+  "options": [
+   "Viscosity increases",
+   "Ionic mobility increases with temperature",
+   "Dissociation decreases",
+   "Ion concentration decreases"
+  ],
+  "answer": 1,
+  "explain": "Higher temperature lowers viscosity, increasing ionic mobility and thus conductivity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cb1cd817-4e91-4c1a-873e-c3e36e203e4d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Limiting molar conductivity of a strong electrolyte is obtained by:",
+  "formula": "Λ°m = A − B√C",
+  "options": [
+   "Extrapolating Λm vs C plot to C = 0",
+   "Using Ostwald dilution law",
+   "Measuring at highest concentration",
+   "Extrapolating Λm vs √C plot to C = 0"
+  ],
+  "answer": 3,
+  "explain": "Debye–Hückel–Onsager: Λm = Λ°m − B√C; intercept of Λm vs √C gives Λ°m.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e83650f3-34d7-4d35-876f-4536475945d8",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Cell constant has units of:",
+  "formula": "Cell constant = l/A",
+  "options": [
+   "Ω·cm",
+   "cm",
+   "S·cm⁻¹",
+   "cm⁻¹"
+  ],
+  "answer": 3,
+  "explain": "Cell constant = l/A has unit of length/area = cm/cm² = cm⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cadce7d8-2a30-4879-96ff-4ec822b996d6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "For a weak electrolyte, Λ°m CANNOT be obtained by extrapolation because:",
+  "formula": "",
+  "options": [
+   "Dissociation is complete at all concentrations",
+   "It has no limiting value",
+   "Λm vs √C curve is not linear at low C",
+   "Kohlrausch's law doesn't apply to ions"
+  ],
+  "answer": 2,
+  "explain": "Weak electrolytes show steep non-linear rise near C→0, making extrapolation inaccurate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a85d5686-100c-48b0-9656-e12aa74b2f6e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "Number of electrons transferred (n) in: MnO₄⁻ → Mn²⁺ in acidic medium is:",
+  "formula": "",
+  "options": [
+   "5",
+   "2",
+   "3",
+   "7"
+  ],
+  "answer": 0,
+  "explain": "Mn goes from +7 in MnO₄⁻ to +2 in Mn²⁺; change = 5 electrons per Mn.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1be3086a-9b08-49ff-9d54-55c2555346a6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "During electrolysis, the cathode in an electrolytic cell is connected to:",
+  "formula": "",
+  "options": [
+   "Positive terminal of external source",
+   "Negative terminal of external source",
+   "Anode directly",
+   "Salt bridge"
+  ],
+  "answer": 1,
+  "explain": "Cathode is negative in electrolytic cell; reduction (cation discharge) occurs here.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a35311cb-4aa3-4d21-bef6-16f643b972e3",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "The Nernst equation shows that E_cell increases when Q (reaction quotient):",
+  "formula": "E = E° − (RT/nF)lnQ",
+  "options": [
+   "Equals 1",
+   "Equals K",
+   "Increases",
+   "Decreases"
+  ],
+  "answer": 3,
+  "explain": "E = E° − (0.0592/n)logQ; smaller Q gives larger E_cell.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "386c9b9a-4746-4e2c-9943-d920c7a861af",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Degree of dissociation & Ka from conductance",
+  "prompt": "Ostwald dilution law for weak acid: Ka equals:",
+  "formula": "Kₐ = Cα²/(1−α)",
+  "options": [
+   "Cα²/(1−α)",
+   "C(1−α)/α²",
+   "α²/C",
+   "Cα²"
+  ],
+  "answer": 0,
+  "explain": "For HA ⇌ H⁺ + A⁻, Ka = Cα²/(1−α); for small α, Ka ≈ Cα².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "143f878e-d555-481c-a827-73a7646f6752",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Molar conductance of a strong electrolyte at infinite dilution follows additivity of:",
+  "formula": "Λ°m = ν₊λ°₊ + ν₋λ°₋",
+  "options": [
+   "Equivalent weights",
+   "Molecular conductances",
+   "Molar masses",
+   "Individual ionic conductances"
+  ],
+  "answer": 3,
+  "explain": "Kohlrausch's law: Λ°m = sum of contributions of individual ions (ν±λ°±).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4a039a9d-09ca-4dfb-98f7-2d1ec23d0bab",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "During electrolysis of aqueous CuSO₄ with Cu electrodes, anode:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Dissolves (Cu → Cu²⁺ + 2e⁻)",
+   "Releases H₂ gas",
+   "Releases O₂ gas"
+  ],
+  "answer": 1,
+  "explain": "Active Cu anode dissolves preferentially rather than oxidation of water to O₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5b63a5f1-37b1-4a25-9411-e07d4001c8ac",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Conductivity κ of a solution is related to resistance R and cell constant G* by:",
+  "formula": "κ = G*/R",
+  "options": [
+   "κ = G*/R",
+   "κ = R × G*",
+   "κ = R/G*",
+   "κ = 1/(R + G*)"
+  ],
+  "answer": 0,
+  "explain": "κ = (l/A)/R = cell constant/R; conductivity = cell constant divided by resistance.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3b9e8111-fde8-4199-bd09-bffa629893a8",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "When E°cell > 0, the value of ΔG° is:",
+  "formula": "ΔG° = −nFE°",
+  "options": [
+   "Negative (reaction spontaneous)",
+   "Positive (non-spontaneous)",
+   "Zero (equilibrium)",
+   "Cannot determine"
+  ],
+  "answer": 0,
+  "explain": "ΔG° = −nFE°cell; positive E°cell gives negative ΔG°, indicating spontaneous reaction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3bcaa56d-d8c1-4911-b00b-f4031312f78b",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Debye-Hückel-Onsager equation: Λm vs √C for strong electrolyte",
+  "formula": "Λm = Λ°m − b√C",
+  "options": [
+   "Λm = Λ°m − b√C",
+   "Λm = Λ°m − bC",
+   "Λm = Λ°m / √C",
+   "Λm = Λ°m + b√C"
+  ],
+  "answer": 0,
+  "explain": "Debye-Hückel-Onsager: molar conductivity decreases linearly with √C for strong electrolytes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "00cca277-807d-42ec-b300-07801f725e9b",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "The standard reduction potential of F₂/F⁻ half-cell is the:",
+  "formula": "",
+  "options": [
+   "Most positive among all electrodes",
+   "Equal to zero by definition",
+   "Most negative among all electrodes",
+   "Equal to +1.23 V"
+  ],
+  "answer": 0,
+  "explain": "F₂ is the strongest oxidising agent; E°(F₂/F⁻) = +2.87 V, most positive standard reduction potential.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "68286814-84c2-46d0-9196-f81cff2d52a7",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "Standard reduction potential of Li⁺/Li is the:",
+  "formula": "",
+  "options": [
+   "Equal to −0.76 V",
+   "Most negative standard reduction potential",
+   "Zero by definition",
+   "Most positive standard reduction potential"
+  ],
+  "answer": 1,
+  "explain": "Li⁺/Li has E° = −3.04 V, the most negative, making Li the strongest reducing agent.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f1d10e1f-1959-483c-8a70-5ecb5b8c7704",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "During electrolysis, the quantity (charge/n×F) gives:",
+  "formula": "moles deposited = Q/(nF)",
+  "options": [
+   "Moles of substance deposited",
+   "Equivalent weight deposited",
+   "Current in amperes",
+   "Mass in grams deposited"
+  ],
+  "answer": 0,
+  "explain": "Faraday's first law: moles = Q/(nF), where Q = charge passed, n = electrons per ion.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f526faa2-5ce1-4890-88b7-126a2c65b3a3",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "During electrolysis of aqueous AgNO₃ with Ag electrodes, the anode:",
+  "formula": "",
+  "options": [
+   "Dissolves, releasing Ag⁺ into solution",
+   "Evolves H₂ gas",
+   "Deposits Ag metal",
+   "Evolves O₂ gas"
+  ],
+  "answer": 0,
+  "explain": "Active Ag anode dissolves (Ag → Ag⁺ + e⁻); concentration of AgNO₃ remains roughly constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1eb8e738-7853-4a75-8bb6-446e624ebe33",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Molar conductivity Λm has SI unit:",
+  "formula": "",
+  "options": [
+   "S m² mol⁻¹",
+   "Ω m mol⁻¹",
+   "S m⁻¹",
+   "S cm⁻¹ mol⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Λm = κ/C; units: (S m⁻¹)/(mol m⁻³) = S m² mol⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5db6aaf5-a506-4e01-8841-cd8750f9e225",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "For electrolysis, time t, current I and charge Q are related by:",
+  "formula": "Q = I × t",
+  "options": [
+   "Q = I × t",
+   "Q = t / I",
+   "Q = I² × t",
+   "Q = I / t"
+  ],
+  "answer": 0,
+  "explain": "Charge = current × time (coulombs = amperes × seconds); fundamental relation in electrolysis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2d24f6e1-f0b4-44d2-9e54-96b90e4403ef",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "The EMF of a cell is zero at equilibrium; this means ΔG equals:",
+  "formula": "ΔG = −nFE",
+  "options": [
+   "−RT ln K",
+   "nFE°",
+   "Zero",
+   "−nFE°"
+  ],
+  "answer": 2,
+  "explain": "ΔG = −nFE; when E = 0 (equilibrium), ΔG = 0 by definition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "119774b6-73db-45c9-a075-0754e4fd6ddd",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "Preferential discharge at cathode follows the rule of:",
+  "formula": "",
+  "options": [
+   "Lower reduction potential discharged first",
+   "Higher charge ion discharged first",
+   "Lighter ion discharged first",
+   "Higher (more positive) reduction potential discharged first"
+  ],
+  "answer": 3,
+  "explain": "Ion with higher (more positive) E° is easier to reduce; it is preferentially discharged at cathode.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7478f739-e788-4cc7-aed0-440271e08dbb",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "In electrorefining of copper, impure Cu acts as:",
+  "formula": "",
+  "options": [
+   "Salt bridge",
+   "Cathode (deposits)",
+   "Electrolyte",
+   "Anode (dissolves)"
+  ],
+  "answer": 3,
+  "explain": "Impure Cu = anode; pure Cu = cathode; CuSO₄ solution transfers Cu from anode to cathode.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1224de87-6fe2-424c-b3b4-39d5b1438bbb",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "The relation between E°cell and ΔG° and K at 298 K: which set is CONSISTENT?",
+  "formula": "E°>0, ΔG°<0, K>1",
+  "options": [
+   "E°>0, ΔG°>0, K>1",
+   "E°>0, ΔG°<0, K<1",
+   "E°>0, ΔG°<0, K>1",
+   "E°<0, ΔG°<0, K<1"
+  ],
+  "answer": 2,
+  "explain": "Spontaneous cell: E°>0 ↔ ΔG°<0 ↔ K>1; all three conditions are equivalent.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a2f7e4dd-b004-4cbe-912d-8c85475f9c5f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "What does 'cell constant' (G*) physically represent?",
+  "formula": "G* = l/A",
+  "options": [
+   "Conductance of the cell",
+   "Ratio of electrode area to distance",
+   "Resistance of the cell",
+   "Ratio of electrode distance to electrode area"
+  ],
+  "answer": 3,
+  "explain": "Cell constant G* = l/A (distance between electrodes / area); unit m⁻¹ or cm⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d9b612fa-773c-4ae3-b91f-c52d6eac8a66",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "During electrolysis of aqueous CuSO₄ with Pt electrodes, cathode product is:",
+  "formula": "",
+  "options": [
+   "Copper metal",
+   "Oxygen gas",
+   "Hydrogen gas",
+   "Sulphur dioxide"
+  ],
+  "answer": 0,
+  "explain": "Cu²⁺ has higher reduction potential than H⁺/H₂; Cu deposits at cathode preferentially.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4dd3d98c-cc08-4b51-a88d-b96e0ff7b87f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "For electrolysis, mass deposited m = ZIt; the unit of Z (electrochemical equivalent) is:",
+  "formula": "Z = M/(nF)",
+  "options": [
+   "g mol⁻¹",
+   "mol C⁻¹",
+   "g C⁻¹",
+   "C g⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Z = M/(nF); m = Z×Q, so Z = mass/charge → unit: g C⁻¹ (grams per coulomb).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6f06592c-a704-4fb0-b48a-0d5e430628e9",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Concentration cells",
+  "prompt": "For a concentration cell: Zn|Zn²⁺(C₁)||Zn²⁺(C₂)|Zn, EMF > 0 when:",
+  "formula": "E = (0.0592/2)log(C₂/C₁)",
+  "options": [
+   "C₁ = 1 M only",
+   "C₂ > C₁",
+   "C₂ < C₁",
+   "C₂ = C₁"
+  ],
+  "answer": 1,
+  "explain": "Anode has lower concentration (C₁); cathode higher (C₂); EMF = (0.0592/2)log(C₂/C₁) > 0 when C₂ > C₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a4132cc-ccb5-47ce-a109-c3242e30c87c",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "The standard reduction potential E° of the hydrogen electrode at pH = 0 is:",
+  "formula": "E° = 0.00 V",
+  "options": [
+   "+1.23 V",
+   "−0.83 V",
+   "+0.76 V",
+   "Exactly 0.00 V by convention"
+  ],
+  "answer": 3,
+  "explain": "SHE (H⁺ at 1 M, H₂ at 1 atm, 298 K) is assigned E° = 0.00 V as the reference electrode.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2ad17a60-2d9b-491c-8f67-e015aed236e1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Degree of dissociation & Ka from conductance",
+  "prompt": "Increasing dilution of a weak electrolyte causes its degree of dissociation α to:",
+  "formula": "α = √(Ka/C)",
+  "options": [
+   "Decrease",
+   "Remain constant",
+   "First increase then decrease",
+   "Increase"
+  ],
+  "answer": 3,
+  "explain": "α = √(Ka/C); as C decreases (dilution), α increases → more dissociation at higher dilution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bf44b4fb-5d67-41c2-b1da-eada8c1bd676",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Conductance G is the reciprocal of:",
+  "formula": "G = 1/R",
+  "options": [
+   "Resistivity ρ",
+   "Resistance R",
+   "Molar conductivity Λm",
+   "Cell constant G*"
+  ],
+  "answer": 1,
+  "explain": "Conductance G = 1/R; unit is siemens (S).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "088f4b71-deac-494f-8265-dceed8a531a1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "The SI unit of conductance is:",
+  "formula": "",
+  "options": [
+   "S·cm⁻¹",
+   "Siemens (S)",
+   "S·m²·mol⁻¹",
+   "Ohm (Ω)"
+  ],
+  "answer": 1,
+  "explain": "Conductance is measured in siemens (S), also written as Ω⁻¹ or mho.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c67bf9b9-aaa8-4a4f-b8e3-ae8cbf431872",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Resistivity ρ is related to resistance R, length l, area A by:",
+  "formula": "ρ = R·A/l",
+  "options": [
+   "ρ = l/(R·A)",
+   "ρ = R·A/l",
+   "ρ = A/(R·l)",
+   "ρ = R·l/A"
+  ],
+  "answer": 1,
+  "explain": "Resistivity ρ = R·A/l; conductivity κ = 1/ρ = l/(R·A).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "288090b5-ca74-45e3-bf98-23559134099c",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "In electrolysis, Faraday's law: moles of substance deposited = ?",
+  "formula": "mol = Q/(n·F)",
+  "options": [
+   "n·F/Q",
+   "F/(n·Q)",
+   "Q·n/F",
+   "Q/(n·F)"
+  ],
+  "answer": 3,
+  "explain": "Moles deposited = Q/(nF), where Q = charge, n = electrons per ion, F = 96500 C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fbc9b350-55e8-4782-b379-a6cd2d726096",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "Which among these is a secondary (rechargeable) cell?",
+  "formula": "",
+  "options": [
+   "Dry cell (Leclanché)",
+   "Mercury cell",
+   "Hydrogen-oxygen fuel cell",
+   "Lead storage battery"
+  ],
+  "answer": 3,
+  "explain": "Lead storage battery is rechargeable (secondary cell); dry cell and mercury cell are primary.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ffdeac0e-fbb5-4d9d-8f75-7a45cacb14b6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "In lead storage battery, anode material is:",
+  "formula": "",
+  "options": [
+   "Pb",
+   "H₂SO₄",
+   "PbO₂",
+   "PbSO₄"
+  ],
+  "answer": 0,
+  "explain": "Pb (lead) is the anode; PbO₂ is the cathode in a lead storage battery.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cee39a90-1e24-46b1-ae4d-9edbfa835e93",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemistry",
+  "prompt": "Rusting of iron is an example of:",
+  "formula": "",
+  "options": [
+   "Chemical corrosion only",
+   "Electrochemical corrosion",
+   "Galvanisation",
+   "Passivation"
+  ],
+  "answer": 1,
+  "explain": "Rusting involves oxidation of Fe at anode and reduction of O₂/H⁺ at cathode — electrochemical.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b42d730a-b6f3-4eed-9ff5-61ec981323b1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemistry",
+  "prompt": "Galvanisation protects iron by coating it with:",
+  "formula": "",
+  "options": [
+   "Tin",
+   "Nickel",
+   "Copper",
+   "Zinc"
+  ],
+  "answer": 3,
+  "explain": "Galvanisation coats iron with Zn; Zn acts as sacrificial anode, protecting Fe from corrosion.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "12cbc936-928b-4c57-abd2-d106809a3db7",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "The product formed at cathode during electrolysis of brine (conc. NaCl) is:",
+  "formula": "",
+  "options": [
+   "Cl₂ gas",
+   "NaOH solid",
+   "H₂ gas",
+   "Na metal"
+  ],
+  "answer": 2,
+  "explain": "At cathode: 2H₂O + 2e⁻ → H₂ + 2OH⁻; Na⁺ is not discharged in aqueous solution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f9344e0a-c585-49b2-9ee4-0d353d7abf0d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "In the chlor-alkali process (electrolysis of brine), Cl₂ is produced at the:",
+  "formula": "",
+  "options": [
+   "Anode",
+   "Salt bridge",
+   "Cathode",
+   "Both electrodes"
+  ],
+  "answer": 0,
+  "explain": "Cl⁻ is oxidised at anode to give Cl₂; at cathode H₂ is produced.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "351e9be5-5121-44a4-8b53-79b835c821dc",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Molar conductivity Λm of a strong electrolyte at concentration C follows:",
+  "formula": "Λm = Λ°m − b√C",
+  "options": [
+   "Λm = Λ°m − b√C",
+   "Λm = Λ°m/√C",
+   "Λm = Λ°m + b√C",
+   "Λm = Λ°m − bC"
+  ],
+  "answer": 0,
+  "explain": "Debye-Hückel-Onsager: Λm decreases linearly with √C for strong electrolytes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d1d5f329-f0b4-4848-bd1f-610668fb56c8",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Which quantity is plotted on x-axis to get Λ°m of strong electrolyte by extrapolation?",
+  "formula": "",
+  "options": [
+   "log C",
+   "√C",
+   "1/C",
+   "C"
+  ],
+  "answer": 1,
+  "explain": "Λm vs √C graph for strong electrolyte is linear; y-intercept gives Λ°m.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5026b333-5a8f-4bf6-b8d8-57a9e666a0d4",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "The standard EMF of a cell is related to n, F and ΔG° by:",
+  "formula": "E°cell = −ΔG°/(nF)",
+  "options": [
+   "E°cell = ΔG°/(nF)",
+   "E°cell = nF·ΔG°",
+   "E°cell = −ΔG°/(nF)",
+   "E°cell = −nF/ΔG°"
+  ],
+  "answer": 2,
+  "explain": "ΔG° = −nFE°cell, so E°cell = −ΔG°/(nF); positive E° means negative ΔG° (spontaneous).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e2953546-6186-4968-bf7c-88f7293ca12f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "For the cell Zn|Zn²⁺||Cu²⁺|Cu, electrons in external circuit flow from:",
+  "formula": "",
+  "options": [
+   "Cu to Zn",
+   "Zn²⁺ to Cu²⁺",
+   "Zn to Cu",
+   "Inside salt bridge only"
+  ],
+  "answer": 2,
+  "explain": "Zn is anode (oxidation); electrons flow through external wire from Zn (anode) to Cu (cathode).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "67c319b2-ce85-4fdf-a69f-a5407384222f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "The standard reduction potential E° for Cu²⁺/Cu is +0.34 V. For Cu/Cu²⁺ (oxidation), E° is:",
+  "formula": "",
+  "options": [
+   "+0.68 V",
+   "−0.34 V",
+   "0 V",
+   "+0.34 V"
+  ],
+  "answer": 1,
+  "explain": "Oxidation potential = −(reduction potential); sign is reversed when reaction is reversed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e567b95c-b9cd-4874-8848-3792f256de7e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "If E°cell = E°cathode − E°anode, and both half-cells are same, E°cell is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Depends on concentration",
+   "Positive",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Identical half-cells give E°cell = 0; actual EMF depends on concentration difference.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2f240288-aadb-4af1-8f9f-6efffdd051d1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolytic vs metallic conduction",
+  "prompt": "What happens to conductivity of a metallic conductor with rise in temperature?",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Remains constant",
+   "First increases then decreases"
+  ],
+  "answer": 0,
+  "explain": "Metallic conductors: conductivity decreases with temperature (more collisions); opposite for electrolytes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a3742aee-d91f-46dd-9424-1b0357065cdf",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Degree of dissociation & Ka from conductance",
+  "prompt": "The degree of dissociation α of weak electrolyte from conductivity data is:",
+  "formula": "α = Λm/Λ°m",
+  "options": [
+   "Λm/Λ°m",
+   "κ/Λ°m",
+   "Λ°m/Λm",
+   "Λm·C/κ"
+  ],
+  "answer": 0,
+  "explain": "α = Λm/Λ°m; at infinite dilution, complete dissociation assumed, giving Λ°m.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "26a9eeeb-f90b-412a-a673-ccd5b8314ec5",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "In electrolysis, which ion is preferentially discharged at anode if both Cl⁻ and SO₄²⁻ present (conc.)?",
+  "formula": "",
+  "options": [
+   "Both equally",
+   "OH⁻ from water",
+   "Cl⁻",
+   "SO₄²⁻"
+  ],
+  "answer": 2,
+  "explain": "At higher concentration, Cl⁻ is preferentially oxidised at anode over SO₄²⁻ (overpotential effect).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1488fac7-76d4-46ca-9c95-fc24ba20e806",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "The relation ln K = nFE°cell/RT at 298 K simplifies to log K =",
+  "formula": "log K = nE°cell/0.0592",
+  "options": [
+   "nE°cell×0.0592",
+   "nE°cell/0.0592",
+   "E°cell/(n×0.0592)",
+   "nE°cell/0.0257"
+  ],
+  "answer": 1,
+  "explain": "log K = nE°cell/0.0592 at 298 K; derived from ΔG° = −nFE°cell = −RT ln K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ed4b9fbd-a7ae-4277-a9dd-898c40e6e173",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "The EMF of a cell at non-standard conditions is given by Nernst equation. E_cell equals:",
+  "formula": "E = E° − (0.0592/n)log Q",
+  "options": [
+   "E° + (0.0592/n)log Q",
+   "E° − (0.0592/n)log Q",
+   "E°/(0.0592 n log Q)",
+   "E° × (0.0592/n)log Q"
+  ],
+  "answer": 1,
+  "explain": "Nernst equation: E = E° − (RT/nF)ln Q = E° − (0.0592/n)log Q at 298 K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9e87118e-eb7b-4b7d-b71d-d4b6ba6c4190",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemistry",
+  "prompt": "For the reaction: Cr₂O₇²⁻ → 2Cr³⁺ (acidic medium), n-factor (electrons per formula unit) is:",
+  "formula": "",
+  "options": [
+   "2",
+   "12",
+   "3",
+   "6"
+  ],
+  "answer": 3,
+  "explain": "Each Cr goes from +6 to +3 (gain 3e⁻); two Cr atoms → 6 electrons transferred per Cr₂O₇²⁻.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3f8ff3db-4db1-427e-817f-bbccad94591f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolysis products & Faraday calculations",
+  "prompt": "In electrolysis, if same charge is passed through AgNO₃ and CuSO₄ in series, ratio of moles deposited Ag:Cu is:",
+  "formula": "",
+  "options": [
+   "108:32",
+   "1:1",
+   "1:2",
+   "2:1"
+  ],
+  "answer": 3,
+  "explain": "Ag needs 1e⁻/atom (n=1), Cu needs 2e⁻/atom (n=2); same charge → moles Ag:Cu = 2:1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "abb75db1-3aaf-46b9-a841-7493a497504e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "The Nernst equation for electrode E(M^n+/M) at 298 K is:",
+  "formula": "E = E° + (0.0592/n)log[Mⁿ⁺]",
+  "options": [
+   "E° − 0.0592 log[Mⁿ⁺]",
+   "E° − (0.0592/n)log[Mⁿ⁺]",
+   "E° + (0.0592 n)log[Mⁿ⁺]",
+   "E° + (0.0592/n)log[Mⁿ⁺]"
+  ],
+  "answer": 3,
+  "explain": "For reduction half-cell Mⁿ⁺+ne⁻→M, E = E° + (0.0592/n)log[Mⁿ⁺]; higher [Mⁿ⁺] raises E.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "82699bd3-cc32-4d00-8598-1d9ef9819650",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Specific resistance (resistivity) ρ has SI unit:",
+  "formula": "ρ = R·A/l",
+  "options": [
+   "Ω m",
+   "Ω m⁻¹",
+   "S cm⁻¹",
+   "S m⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Resistivity ρ = R×A/l; unit = Ω × m²/m = Ω m (SI). Conductivity κ = 1/ρ has unit S m⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "af2c96de-61f4-4ee8-8504-300ff1e9f878",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Degree of dissociation & Ka from conductance",
+  "prompt": "At constant temperature, molar conductivity Λm of weak electrolyte (e.g., CH₃COOH) at concentration C is related to α by:",
+  "formula": "α = Λm/Λ°m",
+  "options": [
+   "α = Λm − Λ°m",
+   "α = Λm × Λ°m",
+   "α = Λm/Λ°m",
+   "α = Λ°m/Λm"
+  ],
+  "answer": 2,
+  "explain": "Degree of dissociation α = Λm/Λ°m for weak electrolyte; as dilution increases, α → 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ee3bb009-30af-4eb3-8974-f5ae801379f7",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemistry",
+  "prompt": "The n-factor for H₂SO₄ acting as an acid in neutralisation reactions is:",
+  "formula": "",
+  "options": [
+   "1",
+   "4",
+   "3",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "H₂SO₄ donates 2 H⁺ per molecule; its n-factor (basicity) = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "43b60f23-454a-4fdf-8cbc-99f665486508",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "The Nernst equation: RT/nF × ln Q uses ln. At 298 K, 2.303RT/F ≈",
+  "formula": "2.303RT/F ≈ 0.0592 V",
+  "options": [
+   "0.1183 V",
+   "0.0830 V",
+   "0.0592 V",
+   "0.0257 V"
+  ],
+  "answer": 2,
+  "explain": "At 298 K, 2.303RT/F = 0.0592 V, used to convert ln to log₁₀ in Nernst equation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8c111d0d-c9a0-4d18-b153-cbee66d4228e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemistry",
+  "prompt": "For Cr₂O₇²⁻ → 2Cr³⁺ in acidic medium, n-factor per Cr₂O₇²⁻ ion is:",
+  "formula": "",
+  "options": [
+   "6",
+   "2",
+   "3",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "Each Cr goes from +6 to +3 (gain of 3e⁻); two Cr atoms means n = 6 per formula unit.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6d6555e3-1ff4-4283-92d4-1b75fd210499",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemistry",
+  "prompt": "What is the n-factor (electrons transferred) for MnO₄⁻ → MnO₂ in neutral medium?",
+  "formula": "",
+  "options": [
+   "7",
+   "2",
+   "3",
+   "5"
+  ],
+  "answer": 2,
+  "explain": "Mn goes from +7 to +4 in neutral medium, so n = 3 electrons per MnO₄⁻.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "181fab03-11fa-45c1-ae08-f712e5db80cb",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "For the equilibrium constant K of cell reaction at 298 K: log K =",
+  "formula": "log K = nE°cell/0.0592",
+  "options": [
+   "nFE°/R",
+   "nE°/0.0592",
+   "E°/0.0592n",
+   "nE°/0.0257"
+  ],
+  "answer": 1,
+  "explain": "From ΔG° = −nFE° = −RT ln K, at 298 K: log K = nE°cell/0.0592.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a4c52acd-da8a-410f-8fbe-e6dd53ff6c51",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolytic vs metallic conduction",
+  "prompt": "Electrolytic conduction (in solution) is due to the movement of which species?",
+  "formula": "",
+  "options": [
+   "Neutral molecules",
+   "Free electrons",
+   "Holes only",
+   "Ions"
+  ],
+  "answer": 3,
+  "explain": "Electrolytic conduction occurs by migration of ions; metallic conduction occurs by free electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d26bc55c-2e13-44d5-a5bb-3ac58edd802f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolytic vs metallic conduction",
+  "prompt": "Which conduction involves no transfer of matter and no chemical change?",
+  "formula": "",
+  "options": [
+   "Metallic conduction",
+   "Conduction in aqueous CuSO₄",
+   "Conduction in molten NaCl",
+   "Electrolytic conduction"
+  ],
+  "answer": 0,
+  "explain": "Metallic conduction is by electrons only; electrolytic conduction causes chemical change at electrodes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1e1fbd8a-de1e-40b0-b818-7dfdba808b29",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolytic vs metallic conduction",
+  "prompt": "Why is DC not used to measure conductivity of an electrolytic solution?",
+  "formula": "",
+  "options": [
+   "It increases ionic mobility",
+   "It gives zero resistance",
+   "It heats the metal electrodes",
+   "It causes electrolysis changing concentration"
+  ],
+  "answer": 3,
+  "explain": "DC causes electrolysis and polarisation; hence AC is used in conductivity measurements.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "362f2cd4-c86d-4af8-8e76-9a4d9a4f9956",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrolytic vs metallic conduction",
+  "prompt": "Metallic conductivity is generally ___ than electrolytic conductivity.",
+  "formula": "",
+  "options": [
+   "Much higher",
+   "Slightly lower",
+   "Exactly equal",
+   "Much lower"
+  ],
+  "answer": 0,
+  "explain": "Free electrons are much more mobile than ions, so metals conduct far better.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c8ca429-02a5-4a3c-98ad-5ad3698b1ce6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "Cell constant of a conductivity cell is usually determined by measuring resistance of a standard solution of:",
+  "formula": "",
+  "options": [
+   "0.1 M KCl",
+   "0.1 M CH₃COOH",
+   "0.1 M NaCl",
+   "0.1 M HCl"
+  ],
+  "answer": 0,
+  "explain": "KCl has accurately known κ values, and its K⁺ and Cl⁻ ions have nearly equal mobilities.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b55bbedf-cfaf-4d22-80e1-10b2c8a3e4e6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Sharp rise of Λm of a weak electrolyte on dilution is mainly due to:",
+  "formula": "",
+  "options": [
+   "Decrease in viscosity of solvent",
+   "Decrease in interionic attraction",
+   "Increase in degree of dissociation",
+   "Increase in ionic charge"
+  ],
+  "answer": 2,
+  "explain": "Dilution raises α, so the number of ions per mole of electrolyte rises sharply.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fc7a1cc3-147f-4154-ab1e-8b485618488a",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "In Λm = Λ°m − b√C, the constant b depends on:",
+  "formula": "Λm = Λ°m − b√C",
+  "options": [
+   "Solvent, temperature and type of electrolyte",
+   "Electrode area and cell constant",
+   "Concentration of the solution only",
+   "Only the nature of the cation"
+  ],
+  "answer": 0,
+  "explain": "b depends on the solvent, temperature and the charge type (stoichiometry) of the electrolyte.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "802506e3-c886-42fa-bddb-e6fd810898f8",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Λ°m of Al₂(SO₄)₃ in terms of limiting ionic conductivities:",
+  "formula": "",
+  "options": [
+   "3λ°(Al³⁺) + 2λ°(SO₄²⁻)",
+   "2λ°(Al³⁺) + 3λ°(SO₄²⁻)",
+   "λ°(Al³⁺) + λ°(SO₄²⁻)",
+   "5λ°(Al³⁺) + λ°(SO₄²⁻)"
+  ],
+  "answer": 1,
+  "explain": "Kohlrausch: Λ°m = ν₊λ°₊ + ν₋λ°₋, and Al₂(SO₄)₃ gives 2 Al³⁺ and 3 SO₄²⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b3bd1e92-06fe-4701-a6c9-d0ffaad2529a",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Effect of raising temperature on molar conductivity of an electrolyte:",
+  "formula": "",
+  "options": [
+   "Unchanged for strong electrolytes",
+   "Increases, as ion mobility rises",
+   "Decreases, as α falls for all electrolytes",
+   "Decreases, as ion mobility falls"
+  ],
+  "answer": 1,
+  "explain": "Higher temperature lowers solvent viscosity and raises ionic mobility, so Λm increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eb47cb13-6e8f-47b9-96b9-6c9ab4c23718",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "On increasing concentration of a weak electrolyte, its α and Λm:",
+  "formula": "",
+  "options": [
+   "α decreases, Λm increases",
+   "α increases, Λm increases",
+   "α increases, Λm decreases",
+   "α decreases, Λm decreases"
+  ],
+  "answer": 3,
+  "explain": "Higher C lowers α (Ostwald), so fewer ions per mole and Λm falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5623190f-f435-4821-8f79-9acd53ce7aec",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "On dilution, conductivity (κ) of an electrolyte solution:",
+  "formula": "",
+  "options": [
+   "Decreases, as ions per unit volume fall",
+   "Increases, as Λm rises",
+   "Increases for weak, decreases for strong",
+   "Stays constant"
+  ],
+  "answer": 0,
+  "explain": "κ depends on ion number per unit volume, which falls on dilution, even though Λm rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e48076fd-43fe-46ad-90bf-fe554eeb5055",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "A weak acid (α ≪ 1) is diluted 4 times. Its degree of dissociation becomes about:",
+  "formula": "α ≈ √(Ka/C)",
+  "options": [
+   "Remains same",
+   "Halves",
+   "Becomes 4 times",
+   "Doubles"
+  ],
+  "answer": 3,
+  "explain": "α ∝ 1/√C (Ostwald dilution law), so 4-fold dilution doubles α.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2e633fdf-6ee1-4e19-815f-93ce0146b621",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "Λm vs √C lines for 1:1 and 2:1 strong electrolytes: the 2:1 electrolyte shows a slope that is:",
+  "formula": "Λm = Λ°m − b√C",
+  "options": [
+   "Same, as b is independent of charge",
+   "Zero, as it is fully dissociated",
+   "Gentler, as b falls with ionic charges",
+   "Steeper, as b rises with ionic charges"
+  ],
+  "answer": 3,
+  "explain": "b depends on charge type of the electrolyte; higher-valent ions give larger b, hence a steeper line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff9a8b0f-e451-4068-b45b-2d8bb7e2eeb7",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "For a weak electrolyte at very low concentration, Λm vs C shows:",
+  "formula": "",
+  "options": [
+   "Constant value equal to Λ°m",
+   "Very steep rise approaching Λ°m only at C → 0",
+   "Small linear rise with a finite intercept",
+   "Sharp fall as C decreases"
+  ],
+  "answer": 1,
+  "explain": "α → 1 only at infinite dilution, so Λm rises steeply at low C and reaches Λ°m only as C → 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3849e856-6f12-4345-8020-e81a7e5220c6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Which ion has the highest limiting ionic conductance in water at 298 K?",
+  "formula": "",
+  "options": [
+   "H⁺",
+   "Cl⁻",
+   "OH⁻",
+   "K⁺"
+  ],
+  "answer": 0,
+  "explain": "λ°(H⁺) ≈ 350 S cm² mol⁻¹, far above OH⁻ (≈199), because of proton hopping.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "85978e3b-722d-4784-8a5f-7e96e66e308a",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Among Li⁺, Na⁺, K⁺, Cs⁺ in water, the lowest λ° belongs to Li⁺ because:",
+  "formula": "",
+  "options": [
+   "It is the heaviest",
+   "It is least hydrated",
+   "It has the largest hydrated radius",
+   "It has the smallest charge"
+  ],
+  "answer": 2,
+  "explain": "Small Li⁺ is most strongly hydrated, so its hydrated ion is largest and moves slowest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9b94521-b13c-4c7e-85c7-c04204225ce3",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "The unusually high λ° of H⁺ and OH⁻ in water is explained by:",
+  "formula": "",
+  "options": [
+   "Absence of hydration",
+   "Their very small mass alone",
+   "Grotthuss proton-hopping mechanism",
+   "Their high charge"
+  ],
+  "answer": 2,
+  "explain": "Protons transfer along hydrogen-bonded water molecules, adding to normal ionic migration.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3bed7352-f80f-48fd-b5e0-a08573bf9b3e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Kohlrausch's law is strictly valid under which condition?",
+  "formula": "",
+  "options": [
+   "Infinite dilution",
+   "Molar concentration of 1 M",
+   "High temperature only",
+   "Saturated solution"
+  ],
+  "answer": 0,
+  "explain": "Only at infinite dilution are ions independent, with no interionic interactions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9eaafe93-ef04-4c2b-a890-82e4febddd86",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "For a sparingly soluble salt in its saturated solution, Λm is taken as approximately:",
+  "formula": "",
+  "options": [
+   "Λm of pure water",
+   "Λ°m, as the solution is extremely dilute",
+   "Λ°m/2, as dissociation is half",
+   "Zero, as the salt is insoluble"
+  ],
+  "answer": 1,
+  "explain": "Very low solubility means near infinite dilution, so Λm ≈ Λ°m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "791c3f65-5812-4df9-927f-e7c3f36427f1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "By Kohlrausch's law, Λ°(KCl) − Λ°(NaCl) is equal to:",
+  "formula": "λ°(K⁺) − λ°(Na⁺)",
+  "options": [
+   "Λ°(KNO₃) − Λ°(KCl)",
+   "Λ°(KNO₃) − Λ°(NaNO₃)",
+   "Λ°(NaNO₃) − Λ°(KNO₃)",
+   "Λ°(KCl) + Λ°(NaCl)"
+  ],
+  "answer": 1,
+  "explain": "Both differences equal λ°(K⁺) − λ°(Na⁺); the common anion cancels.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "191bec19-1b11-4813-925f-272deb26f87b",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "For a weak monobasic acid, Kₐ in terms of c, Λm and Λ°m is:",
+  "formula": "α = Λm/Λ°m ; Kₐ = cα²/(1−α)",
+  "options": [
+   "Λm² / [cΛ°m(Λ°m − Λm)]",
+   "cΛm / (Λ°m − Λm)",
+   "cΛm² / [Λ°m(Λ°m − Λm)]",
+   "cΛm² / Λ°m²"
+  ],
+  "answer": 2,
+  "explain": "Put α = Λm/Λ°m in Kₐ = cα²/(1−α) to get cΛm²/[Λ°m(Λ°m−Λm)].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fb14420a-76fd-485a-b2bc-994bf617f011",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Daniell cell (E° = 1.1 V): external opposing voltage is greater than 1.1 V. What happens at the Zn electrode?",
+  "formula": "",
+  "options": [
+   "Zn²⁺ is reduced to Zn",
+   "Cell discharges faster",
+   "Zn is oxidised to Zn²⁺",
+   "Zn is unchanged; Cu dissolves"
+  ],
+  "answer": 0,
+  "explain": "Opposing V > 1.1 V reverses the reaction: the cell becomes electrolytic, Zn²⁺ deposits as Zn and Cu dissolves.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "adaaf6da-5c29-433c-9e9f-d982c0960af3",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Why is a KCl salt bridge unsuitable for a cell containing Ag⁺ ions?",
+  "formula": "",
+  "options": [
+   "AgCl precipitates",
+   "Cl⁻ oxidises Ag⁺",
+   "KCl is a non-electrolyte",
+   "K⁺ is reduced by Ag"
+  ],
+  "answer": 0,
+  "explain": "Ag⁺ + Cl⁻ → AgCl(s) blocks the bridge; KNO₃ is used instead.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e647483-0be0-4bfa-8c2f-5a25d1205329",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "For the cell reaction occurring in an electrolytic cell (as driven), the sign of ΔG is:",
+  "formula": "ΔG = −nFE°",
+  "options": [
+   "Positive",
+   "Depends only on temperature",
+   "Negative",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Electrolysis drives a non-spontaneous reaction: ΔG > 0, E°cell < 0, so applied voltage must exceed |E°cell|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5cf840c6-4cf2-4756-8d65-a64f0ef08416",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Electrolysis of aqueous CuSO₄ using inert Pt electrodes: product at the anode is:",
+  "formula": "",
+  "options": [
+   "SO₂",
+   "O₂",
+   "H₂",
+   "Cu²⁺"
+  ],
+  "answer": 1,
+  "explain": "Water is oxidised (2H₂O → O₂ + 4H⁺ + 4e⁻); Cu deposits at the cathode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1d0bd458-1d3a-4ca0-9a37-06af94ea6e7d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Electrolysis of molten NaCl: products at cathode and anode respectively are:",
+  "formula": "",
+  "options": [
+   "Na and O₂",
+   "H₂ and O₂",
+   "Na and Cl₂",
+   "H₂ and Cl₂"
+  ],
+  "answer": 2,
+  "explain": "No water is present: Na⁺ + e⁻ → Na at the cathode; 2Cl⁻ → Cl₂ + 2e⁻ at the anode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02cc48ac-1cbe-4fb7-8c2d-dfd7af9bae74",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Electrolysis of concentrated aqueous NaCl: gases evolved at cathode and anode are:",
+  "formula": "",
+  "options": [
+   "Cl₂ and H₂",
+   "H₂ and Cl₂",
+   "O₂ and H₂",
+   "H₂ and O₂"
+  ],
+  "answer": 1,
+  "explain": "Cathode: water reduced to H₂ (Na⁺ not reduced); anode: Cl₂ forms due to the overpotential of O₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "52a3c361-3c25-46cb-8042-f73f8eb306a5",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "During the working of either a galvanic or an electrolytic cell, anions migrate towards the:",
+  "formula": "",
+  "options": [
+   "Electrode of higher potential",
+   "Anode",
+   "Cathode",
+   "Salt bridge only"
+  ],
+  "answer": 1,
+  "explain": "Anions always move to the anode (where oxidation occurs); cations move to the cathode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a139d9c-c383-42f8-a154-0f7e9cbd2108",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "A lead storage battery during charging behaves as which type of cell?",
+  "formula": "",
+  "options": [
+   "Galvanic cell",
+   "Concentration cell",
+   "Fuel cell",
+   "Electrolytic cell"
+  ],
+  "answer": 3,
+  "explain": "Charging uses an external source to reverse the reaction (PbSO₄ → Pb and PbO₂), i.e. electrolytic action.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81966826-04f7-4a9a-abae-963617e0535d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "In a standard hydrogen electrode, why is the platinum foil coated with platinum black?",
+  "formula": "",
+  "options": [
+   "To react with H⁺ to form a hydride",
+   "To prevent H₂ from escaping as bubbles",
+   "To raise the electrode's E° above zero",
+   "To adsorb H₂ and give a large catalytic surface"
+  ],
+  "answer": 3,
+  "explain": "Platinum black adsorbs H₂ and catalyses the H₂ ⇌ 2H⁺ + 2e⁻ equilibrium. Pt itself stays inert.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3a0a1475-b16d-4249-ac58-b77e2a14f7e4",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "The calomel electrode Hg|Hg₂Cl₂|KCl is reversible with respect to which ion?",
+  "formula": "Hg₂Cl₂ + 2e⁻ → 2Hg + 2Cl⁻",
+  "options": [
+   "Cl⁻",
+   "Hg₂²⁺ only in solid form",
+   "Hg²⁺",
+   "K⁺"
+  ],
+  "answer": 0,
+  "explain": "It is a metal–insoluble salt–anion electrode, so its potential depends on [Cl⁻].",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ce447b9-3f7d-43fa-88e8-38eac760d7cc",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "Approximate potential of the saturated calomel electrode (SCE) vs SHE at 298 K is:",
+  "formula": "",
+  "options": [
+   "+0.80 V",
+   "0.00 V",
+   "−0.76 V",
+   "+0.24 V"
+  ],
+  "answer": 3,
+  "explain": "SCE (saturated KCl) is about +0.244 V, a widely used secondary reference electrode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "018ebba5-6adc-4693-ac7d-893300c0f0ea",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "On increasing [Cl⁻] in a calomel electrode, its reduction potential:",
+  "formula": "E = E° − 0.059 log[Cl⁻]",
+  "options": [
+   "Stays constant",
+   "Decreases",
+   "Becomes zero",
+   "Increases"
+  ],
+  "answer": 1,
+  "explain": "Cl⁻ is a product of the reduction half-reaction, so higher [Cl⁻] lowers E.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b259379c-3e9e-4749-be88-fe87c857fb2e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "In a SHE, H₂ gas is bubbled at what pressure and H⁺ concentration (activity)?",
+  "formula": "Pt | H₂(1 bar) | H⁺(1 M)",
+  "options": [
+   "1 bar and 1 M",
+   "2 bar and 1 M",
+   "1 bar and 0.1 M",
+   "1 atm and 0.1 M"
+  ],
+  "answer": 0,
+  "explain": "SHE: H₂ at 1 bar, H⁺ at unit activity (~1 M), at the stated temperature, with Pt black.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1f218e74-111b-487d-977f-08c78a3c79b6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Types of electrodes (SHE, calomel, gas, metal)",
+  "prompt": "In the Pt|H₂(g)|H⁺ electrode, what is the role of the platinum foil?",
+  "formula": "",
+  "options": [
+   "It acts as a salt bridge",
+   "Inert conductor that adsorbs H₂",
+   "It supplies H⁺ ions",
+   "It takes part in the redox reaction"
+  ],
+  "answer": 1,
+  "explain": "Pt is inert; it only provides electron transfer and a surface for the H⁺/H₂ equilibrium.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69f48cab-d8cd-414d-9073-ee5d32a46da6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "When a half-reaction is multiplied by 2, its E° value:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Doubles",
+   "Halves",
+   "Becomes negative"
+  ],
+  "answer": 0,
+  "explain": "E° is an intensive property; it does not depend on the stoichiometric coefficients. ΔG° does change.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05a4ebcd-c0b4-4788-a3f5-5d3a9404ea52",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "Which of these metals will NOT liberate H₂ from dilute HCl?",
+  "formula": "",
+  "options": [
+   "Mg",
+   "Zn",
+   "Fe",
+   "Cu"
+  ],
+  "answer": 3,
+  "explain": "Cu has E° = +0.34 V (above SHE), so it cannot reduce H⁺ to H₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d4785f57-b446-486c-8a50-5e0e6d1fcf86",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "On diluting the Mⁿ⁺ solution of an Mⁿ⁺/M electrode, its reduction potential:",
+  "formula": "",
+  "options": [
+   "Becomes equal to E°",
+   "Stays constant",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 2,
+  "explain": "E = E° + (0.059/n) log[Mⁿ⁺]; lower [Mⁿ⁺] gives lower E.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "28ee2ca3-a3f9-4dca-ab7a-63cc55403821",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "Standard electrode potential refers to ion concentration, gas pressure and temperature of:",
+  "formula": "",
+  "options": [
+   "0.1 M, 1 atm, 273 K",
+   "1 M, 1 bar, 298 K",
+   "1 M, 1 atm, 0 K",
+   "1 M, 2 atm, 298 K"
+  ],
+  "answer": 1,
+  "explain": "Standard conditions: 1 M solution, 1 bar (≈1 atm) gas pressure, 298 K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4e2c46fb-bcf0-4af6-9692-9eb3b5ea4140",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "In the Nernst equation, the activity of pure solid M and of H₂O (solvent) is taken as:",
+  "formula": "",
+  "options": [
+   "One",
+   "Equal to molar mass",
+   "Zero",
+   "Equal to 55.5"
+  ],
+  "answer": 0,
+  "explain": "Pure solids and liquids have unit activity and don't appear in Q.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0a9b55b4-6a0e-45a1-84a5-e2f895eda04f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "In acidic medium, which couple has the highest E° (strongest oxidising agent)?",
+  "formula": "",
+  "options": [
+   "Cl₂/Cl⁻ (+1.36 V)",
+   "Cr₂O₇²⁻/Cr³⁺ (+1.33 V)",
+   "MnO₄⁻/Mn²⁺ (+1.51 V)",
+   "O₂/H₂O (+1.23 V)"
+  ],
+  "answer": 2,
+  "explain": "MnO₄⁻/Mn²⁺ has E° ≈ +1.51 V, the highest of the four.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d7223601-fd31-427e-b7f3-bac55d754999",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "The electrode potential of a metal in its ion solution does NOT depend on the:",
+  "formula": "",
+  "options": [
+   "Nature of the metal",
+   "Temperature",
+   "Size (surface area) of the electrode",
+   "Concentration of metal ions"
+  ],
+  "answer": 2,
+  "explain": "Electrode potential is intensive; it does not depend on the size or amount of the electrode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72ca815c-a1c3-40ee-85fb-29603890b4ef",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "A half-cell with negative E° (vs SHE) when coupled with SHE acts as the:",
+  "formula": "",
+  "options": [
+   "Anode, with oxidation occurring",
+   "Cathode, with the metal depositing",
+   "Cathode, with reduction occurring",
+   "Salt bridge"
+  ],
+  "answer": 0,
+  "explain": "Negative E° means a greater tendency to oxidise than H⁺/H₂, so it acts as the anode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "25c238c3-fd82-48e8-a016-89066e97bd8c",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "Which metal will displace copper from aqueous CuSO₄ solution?",
+  "formula": "",
+  "options": [
+   "Ag",
+   "Au",
+   "Zn",
+   "Hg"
+  ],
+  "answer": 2,
+  "explain": "Only Zn has E° (−0.76 V) lower than Cu²⁺/Cu (+0.34 V), so it reduces Cu²⁺; Ag, Au and Hg lie above Cu.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b16256cb-f6ab-4612-ba8a-615f00197050",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "For the Zn²⁺/Zn electrode at 298 K, E = E° + (0.059/2) log[Zn²⁺]. If [Zn²⁺] is 0.01 M, E compared to E° is:",
+  "formula": "E = E° + (0.059/n) log[Mⁿ⁺]",
+  "options": [
+   "Lower by 0.059 V",
+   "Lower by 0.118 V",
+   "Higher by 0.059 V",
+   "Equal to E°"
+  ],
+  "answer": 0,
+  "explain": "log 0.01 = −2, so shift = (0.059/2)(−2) = −0.059 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7e4e06bc-09d8-4bac-b729-4e71d05121b3",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "Which of the following cannot oxidise Br⁻ to Br₂ under standard conditions?",
+  "formula": "",
+  "options": [
+   "I₂",
+   "Cl₂",
+   "F₂",
+   "MnO₄⁻ (acidic)"
+  ],
+  "answer": 0,
+  "explain": "E°(I₂/I⁻) = 0.54 V is below E°(Br₂/Br⁻) = 1.09 V, so I₂ cannot oxidise Br⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8eb6e46e-4dd8-4017-8905-30f87584ba1d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "In a galvanic cell, electrons flow externally from the electrode with:",
+  "formula": "",
+  "options": [
+   "Equal E° values",
+   "Higher E° to the SHE only",
+   "Higher E° to lower E°",
+   "Lower E° to higher E°"
+  ],
+  "answer": 3,
+  "explain": "The lower-E° electrode is the anode (oxidation); electrons move to the cathode with higher E°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67ccf07b-3dab-4a7a-b90c-dbd9036f2498",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "Strongest oxidising agent among Ag⁺, Cu²⁺, Zn²⁺, Fe²⁺ (aq) is:",
+  "formula": "",
+  "options": [
+   "Cu²⁺",
+   "Fe²⁺",
+   "Ag⁺",
+   "Zn²⁺"
+  ],
+  "answer": 2,
+  "explain": "Ag⁺/Ag has the highest E° (+0.80 V), so Ag⁺ is the strongest oxidising agent here.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4dce59c7-b2f1-4dff-8596-5cf7cc88a6e6",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "For the half-cell Fe³⁺/Fe²⁺, the electrode used and its notation is:",
+  "formula": "",
+  "options": [
+   "Pt | Fe²⁺, Fe³⁺",
+   "Fe | Fe²⁺, Fe³⁺",
+   "Pt | Fe",
+   "Graphite | Fe(s)"
+  ],
+  "answer": 0,
+  "explain": "No metallic phase of the couple exists, so an inert Pt electrode dips in the mixed ion solution.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cffe09b2-05d0-4815-96c4-cad5009833d8",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "Which condition set defines the Standard Hydrogen Electrode (SHE)?",
+  "formula": "Pt|H₂(1 bar)|H⁺(1 M); E° = 0",
+  "options": [
+   "H₂ at 1 bar, H⁺ at 2 M, Pt black",
+   "H₂ at 1 bar, H⁺ at 1 M, Pt black",
+   "H₂ at 1 atm, H⁺ at 0.1 M, Pt black",
+   "H₂ at 1 bar, pH = 7, Pt foil"
+  ],
+  "answer": 1,
+  "explain": "SHE: H₂ gas at 1 bar over platinised Pt in 1 M H⁺; E° taken as zero at all temperatures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "15e0341c-f798-4ddb-89c4-effde8a3a982",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "Cell notation for Zn + 2Ag⁺ → Zn²⁺ + 2Ag is:",
+  "formula": "",
+  "options": [
+   "Zn|Zn²⁺||Ag⁺|Ag",
+   "Zn²⁺|Zn||Ag|Ag⁺",
+   "Zn|Ag⁺||Zn²⁺|Ag",
+   "Ag|Ag⁺||Zn²⁺|Zn"
+  ],
+  "answer": 0,
+  "explain": "Zn is oxidised so it is the anode on the left; Ag⁺/Ag is the cathode on the right.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ceb04d2-b017-4dc6-a7c5-4f09f81033bf",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "The half-reaction occurring at the Ag|AgCl|Cl⁻ electrode when it acts as cathode is:",
+  "formula": "",
+  "options": [
+   "AgCl + e⁻ → Ag + Cl⁻",
+   "Ag + Cl⁻ → AgCl + e⁻",
+   "AgCl → Ag⁺ + Cl⁻",
+   "Ag⁺ + e⁻ → Ag only, no Cl⁻"
+  ],
+  "answer": 0,
+  "explain": "The sparingly soluble salt electrode is reduced: AgCl(s) + e⁻ → Ag(s) + Cl⁻(aq).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "28d1bc71-3168-41be-91c9-c5b667282ee8",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "Cell notation for the reaction H₂ + Cl₂ → 2H⁺ + 2Cl⁻ using inert electrodes is:",
+  "formula": "",
+  "options": [
+   "Pt|H₂|H⁺||Cl⁻|Cl₂|Pt",
+   "Pt|H⁺|H₂||Cl₂|Cl⁻|Pt",
+   "H₂|Pt|H⁺||Cl⁻|Pt|Cl₂",
+   "Pt|Cl₂|Cl⁻||H⁺|H₂|Pt"
+  ],
+  "answer": 0,
+  "explain": "H₂ is oxidised (anode, left); Cl₂ is reduced (cathode, right); the order is electrode|gas|ion.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6c5be22f-0ee9-4a33-89d6-f019f24f68e7",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "A potentiometer measures the EMF of a cell accurately because at the balance point the cell:",
+  "formula": "",
+  "options": [
+   "Delivers no current",
+   "Has its E° set to zero",
+   "Delivers maximum current",
+   "Has zero internal resistance"
+  ],
+  "answer": 0,
+  "explain": "At null point no current is drawn, so no potential drop across internal resistance; the reading equals the EMF.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "53ce71be-406e-48d8-a186-7bf1829c6077",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "In the standard cell notation, the electrode written on the left-hand side is the:",
+  "formula": "",
+  "options": [
+   "Reference electrode",
+   "Anode (oxidation)",
+   "Cathode (reduction)",
+   "Positive terminal"
+  ],
+  "answer": 1,
+  "explain": "By convention, anode (oxidation) is written on the left and cathode (reduction) on the right.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36318fc4-1fb6-4b1a-9d83-ee895d0a92fd",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "When a galvanic cell supplies current, its terminal voltage compared with its EMF is:",
+  "formula": "",
+  "options": [
+   "Smaller",
+   "Greater",
+   "Zero always",
+   "Equal"
+  ],
+  "answer": 0,
+  "explain": "V = E − Ir, so voltage across the terminals is lower than EMF due to internal resistance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7f1b6e3-3a13-474c-9c54-8485ffd83928",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "In Zn|Zn²⁺(aq)||Cu²⁺(aq)|Cu, increasing [Zn²⁺] keeping others fixed, the EMF:",
+  "formula": "E = E° − (0.0591/2) log([Zn²⁺]/[Cu²⁺])",
+  "options": [
+   "Becomes E° exactly",
+   "Increases",
+   "Decreases",
+   "Remains constant"
+  ],
+  "answer": 2,
+  "explain": "Q = [Zn²⁺]/[Cu²⁺] rises, so the log term grows and E falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97c2ee92-6b9e-4e82-bc0f-fbf5d5884f58",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "Besides completing the circuit, a salt bridge in a galvanic cell mainly serves to:",
+  "formula": "",
+  "options": [
+   "Minimise liquid junction potential",
+   "Lower the internal resistance to zero",
+   "Increase the cell E°",
+   "Supply electrons to the cathode"
+  ],
+  "answer": 0,
+  "explain": "Salt bridge (e.g. KCl, KNO₃) keeps neutrality and minimises the liquid junction potential.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "48df9e97-5f74-4c46-8ee6-40f8caa9a0dc",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "EMF of a galvanic cell & its measurement",
+  "prompt": "A cell has E > 0 under given conditions. Its ΔG for the cell reaction is:",
+  "formula": "ΔG = −nFE",
+  "options": [
+   "Equal to ΔG° always",
+   "Zero",
+   "Positive",
+   "Negative"
+  ],
+  "answer": 3,
+  "explain": "ΔG = −nFE; positive EMF means ΔG < 0, i.e. a spontaneous reaction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b7ce4ffe-7553-4743-bca8-3c43e2264f5c",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "At equilibrium, a galvanic cell reaction has E_cell = ? and Q = ?",
+  "formula": "E = E° − (0.0592/n) log Q",
+  "options": [
+   "E_cell = 0, Q = K",
+   "E_cell = E°, Q = K",
+   "E_cell = E°, Q = 1",
+   "E_cell = 0, Q = 1"
+  ],
+  "answer": 0,
+  "explain": "At equilibrium the cell is 'dead': E = 0 and Q = K, so E° = (0.0592/n) log K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "971ce2b1-5753-4414-83ea-3950cd1c5b8c",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "The Nernst equation follows from which thermodynamic relation?",
+  "formula": "ΔG = ΔG° + RT ln Q",
+  "options": [
+   "ΔG = −nFE°",
+   "ΔG = ΔH − TΔS only",
+   "ΔG° = −RT ln Q",
+   "ΔG = ΔG° + RT ln Q"
+  ],
+  "answer": 3,
+  "explain": "Substituting ΔG = −nFE and ΔG° = −nFE° and dividing by −nF gives E = E° − (RT/nF) ln Q.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7387cec-3fbf-41f8-9dc3-158b9a924176",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "Daniell cell with [Zn²⁺] = [Cu²⁺] has E_cell:",
+  "formula": "",
+  "options": [
+   "Less than E°",
+   "Greater than E°",
+   "Equal to E°",
+   "Equal to zero"
+  ],
+  "answer": 2,
+  "explain": "Q = [Zn²⁺]/[Cu²⁺] = 1, so log Q = 0 and E = E° = 1.10 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a013a3f6-710e-484e-93d6-c079c5ac3133",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "For Zn + 2Ag⁺ → Zn²⁺ + 2Ag, the Nernst quotient Q and n are:",
+  "formula": "",
+  "options": [
+   "[Zn²⁺]/[Ag⁺]², n = 2",
+   "[Zn²⁺]/[Ag⁺], n = 2",
+   "[Ag⁺]²/[Zn²⁺], n = 2",
+   "[Zn²⁺]/[Ag⁺]², n = 1"
+  ],
+  "answer": 0,
+  "explain": "Q = products/reactants with stoichiometric powers; 2 electrons are transferred, so n = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c099f557-df75-4d9a-af3c-eabd6537205d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "As a Daniell cell discharges, [Zn²⁺]/[Cu²⁺] rises and E_cell:",
+  "formula": "",
+  "options": [
+   "Rises toward E°",
+   "Stays at E°",
+   "Becomes negative permanently",
+   "Falls toward zero"
+  ],
+  "answer": 3,
+  "explain": "Q increases toward K (~10³⁷), so E falls to 0 at equilibrium and the cell stops.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e020c9b4-bc67-4e90-b6f8-44e87f126786",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "The reduction potential of MnO₄⁻/Mn²⁺ (acidic medium) as pH is raised:",
+  "formula": "MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O",
+  "options": [
+   "Decreases",
+   "Unchanged",
+   "Becomes zero",
+   "Increases"
+  ],
+  "answer": 0,
+  "explain": "E = E° − (0.0592/5) log([Mn²⁺]/([MnO₄⁻][H⁺]⁸)); lower [H⁺] lowers E, so oxidising power falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6d6f4450-f660-4ab1-8c46-cb6ae881aee1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "Concentration ratio 10:1 in a Ag|Ag⁺ concentration cell gives emf at 298 K of:",
+  "formula": "",
+  "options": [
+   "0.592 V",
+   "0.0296 V",
+   "0.0592 V",
+   "0 V"
+  ],
+  "answer": 2,
+  "explain": "n = 1, so E = 0.0592 log 10 = 0.0592 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "103f6583-3133-431d-bed4-9894f516b416",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "Increasing H₂ gas pressure on a hydrogen electrode (fixed [H⁺]) makes its reduction potential:",
+  "formula": "E = E° − (0.0592/2) log(P_H₂/[H⁺]²)",
+  "options": [
+   "Decrease",
+   "Unchanged",
+   "Increase",
+   "Become zero"
+  ],
+  "answer": 0,
+  "explain": "P_H₂ appears in the numerator of Q for 2H⁺ + 2e⁻ → H₂, so E falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8bf21d69-c05b-4fc4-baed-7deefa33ebb2",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "In a hydrogen gas concentration cell with H₂ at pressures P₁ and P₂ (same [H⁺]), the cathode has H₂ at:",
+  "formula": "",
+  "options": [
+   "Lower pressure",
+   "Same pressure as anode",
+   "Higher pressure",
+   "Either, depending on [H⁺]"
+  ],
+  "answer": 0,
+  "explain": "Reduction potential is greater at lower P_H₂, so that electrode is the cathode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d9cd7724-84d2-4e24-b43f-e9d9599e86df",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "Zn|Zn²⁺(C₁)||Zn²⁺(C₂)|Zn with C₂/C₁ = 10 has emf at 298 K of:",
+  "formula": "E = (0.0592/n) log(C₂/C₁)",
+  "options": [
+   "0.0592 V",
+   "0.0148 V",
+   "0.0296 V",
+   "0.118 V"
+  ],
+  "answer": 2,
+  "explain": "n = 2 for Zn²⁺, so E = (0.0592/2)·log 10 = 0.0296 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b000e5e-6b28-4c32-a6f5-9df753dc5118",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "In Zn|Zn²⁺||Cu²⁺|Cu, increasing [Cu²⁺] while keeping [Zn²⁺] fixed does what to E_cell?",
+  "formula": "",
+  "options": [
+   "Decreases it",
+   "Makes E° larger",
+   "Leaves it unchanged",
+   "Increases it"
+  ],
+  "answer": 3,
+  "explain": "[Cu²⁺] is in the denominator of Q, so Q falls and E rises. E° is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22a85fb4-55b7-44f5-a0b2-8ebd912b4983",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "If Q > K for a cell reaction, then E_cell is:",
+  "formula": "",
+  "options": [
+   "Negative; reverse reaction occurs",
+   "Equal to E°",
+   "Positive; forward reaction occurs",
+   "Zero; at equilibrium"
+  ],
+  "answer": 0,
+  "explain": "Q > K makes the log term exceed that of E°, so E < 0 and the reaction goes backward.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5ca80dd8-60c4-406e-bd52-1a63158ae4e9",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "On adding half-reactions having different n, which quantity is directly additive?",
+  "formula": "",
+  "options": [
+   "Q values",
+   "E° values",
+   "ΔG° values",
+   "K values"
+  ],
+  "answer": 2,
+  "explain": "ΔG° is a state function and additive; E° is intensive, so not simply added when n differs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b517ba55-8564-418e-857f-2c7ce382fd1f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "Temperature coefficient of cell EMF gives which quantity of the cell reaction?",
+  "formula": "ΔS = nF(∂E/∂T)ₚ",
+  "options": [
+   "ΔU",
+   "ΔG",
+   "ΔH",
+   "ΔS"
+  ],
+  "answer": 3,
+  "explain": "From (∂G/∂T)ₚ = −ΔS and ΔG = −nFE, we get ΔS = nF(∂E/∂T)ₚ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "89dfa03b-e458-4935-8623-e3e4c8704833",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "E of Cu|Cu²⁺(0.01 M)||Cu²⁺(1 M)|Cu at 298 K is:",
+  "formula": "E = (0.0592/n) log(C_cathode/C_anode)",
+  "options": [
+   "0.0296 V",
+   "0.118 V",
+   "0 V",
+   "0.0592 V"
+  ],
+  "answer": 3,
+  "explain": "E = (0.0592/2)·log(1/0.01) = 0.0296 × 2 = 0.0592 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ba4cbdd-0022-4937-b93c-acc331ed2738",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "ΔG for a cell reaction equals ΔG° when the reaction quotient Q is:",
+  "formula": "ΔG = ΔG° + RT ln Q",
+  "options": [
+   "K",
+   "Equal to E°",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "If Q = 1, ln Q = 0, so ΔG = ΔG° (and E = E°).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1504d20a-05af-4403-9778-b045a0ea2b6b",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "Approximate emf of one lead accumulator cell (so a 12 V battery has 6 cells)?",
+  "formula": "",
+  "options": [
+   "1.0 V",
+   "2.0 V",
+   "1.5 V",
+   "3.0 V"
+  ],
+  "answer": 1,
+  "explain": "Each Pb–PbO₂ cell gives about 2 V, so six cells in series give 12 V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0e51ecfe-80fc-40d4-99b0-0a1c456483db",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "During discharge of a lead accumulator, the density of the H₂SO₄ electrolyte:",
+  "formula": "Pb + PbO₂ + 2H₂SO₄ → 2PbSO₄ + 2H₂O",
+  "options": [
+   "Increases",
+   "Remains constant",
+   "Increases, then decreases",
+   "Decreases"
+  ],
+  "answer": 3,
+  "explain": "H₂SO₄ is consumed and water is formed, so the density falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4903e49b-79fd-482e-9ecc-b4b9b64b5164",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "In a lead accumulator during discharge, the cathode (positive plate) is made of:",
+  "formula": "",
+  "options": [
+   "Pb",
+   "PbSO₄ only",
+   "Graphite",
+   "PbO₂ packed on a lead grid"
+  ],
+  "answer": 3,
+  "explain": "PbO₂ on a lead grid is reduced to PbSO₄ at the cathode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a98615e5-2703-4fd6-8e88-0ce7d2e5d5b9",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "Moles of H₂SO₄ consumed per mole of electrons passed during discharge of a lead accumulator:",
+  "formula": "",
+  "options": [
+   "1 mol",
+   "2 mol",
+   "0.5 mol",
+   "4 mol"
+  ],
+  "answer": 0,
+  "explain": "2 mol H₂SO₄ are used per 2 mol e⁻, so 1 mol per mole of e⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92d8bba5-a017-4c42-8552-df04a15d6c4a",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "On charging a lead accumulator, PbSO₄ at the positive plate is converted to:",
+  "formula": "",
+  "options": [
+   "Pb₃O₄",
+   "Pb",
+   "PbO",
+   "PbO₂"
+  ],
+  "answer": 3,
+  "explain": "Charging reverses discharge: PbSO₄ is oxidised to PbO₂ at the positive plate and reduced to Pb at the negative plate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5a094a8a-cb3d-4f29-8679-97174c7ed69d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "In the Leclanché dry cell, the cathode is:",
+  "formula": "",
+  "options": [
+   "Copper rod in ZnCl₂",
+   "Platinum gauze",
+   "Graphite rod surrounded by MnO₂ + C",
+   "Zinc container"
+  ],
+  "answer": 2,
+  "explain": "The zinc container is the anode. The graphite rod with MnO₂ and carbon is the cathode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "db12b97e-2054-43ba-a329-d2986f03be3b",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "In the dry cell, the electrolytic paste is made of:",
+  "formula": "",
+  "options": [
+   "NH₄Cl + ZnCl₂",
+   "H₂SO₄ + PbSO₄",
+   "KCl + HgO",
+   "KOH + ZnO"
+  ],
+  "answer": 0,
+  "explain": "A moist paste of NH₄Cl and ZnCl₂ is the electrolyte in the Leclanché cell.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7957a3a6-e5bb-4666-83e9-e2d1d308fdb1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "In the H₂–O₂ fuel cell with alkaline electrolyte, the anode reaction is:",
+  "formula": "",
+  "options": [
+   "O₂ + 2H₂O + 4e⁻ → 4OH⁻",
+   "2H₂O → O₂ + 4H⁺ + 4e⁻",
+   "H₂ + 2OH⁻ → 2H₂O + 2e⁻",
+   "H₂ → 2H⁺ + 2e⁻"
+  ],
+  "answer": 2,
+  "explain": "H₂ is oxidised at the anode in alkaline medium: H₂ + 2OH⁻ → 2H₂O + 2e⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92174229-6e1a-47d1-8d00-7a96d1a533eb",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "In the H₂–O₂ fuel cell, O₂ is reduced at the cathode to give:",
+  "formula": "O₂ + 2H₂O + 4e⁻ → 4OH⁻",
+  "options": [
+   "H₂O₂",
+   "OH⁻",
+   "O²⁻",
+   "H₂O only, with no OH⁻"
+  ],
+  "answer": 1,
+  "explain": "In the alkaline electrolyte O₂ becomes OH⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa0310c5-1087-4ddd-8f09-d178a3477e8f",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "The electrolyte used in the common H₂–O₂ fuel cell is:",
+  "formula": "",
+  "options": [
+   "Fused NaCl",
+   "Concentrated H₂SO₄",
+   "Aqueous NH₄Cl",
+   "Concentrated KOH or NaOH solution"
+  ],
+  "answer": 3,
+  "explain": "The cell uses a concentrated aqueous KOH or NaOH solution, with porous carbon electrodes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "156e1c02-2109-4f85-8b01-a58d82c45d15",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "Porous carbon electrodes in the H₂–O₂ fuel cell carry finely divided Pt or Pd to:",
+  "formula": "",
+  "options": [
+   "Act as a catalyst",
+   "Act as the electrolyte",
+   "Act as a salt bridge",
+   "Prevent water formation"
+  ],
+  "answer": 0,
+  "explain": "Pt or Pd acts as an electrocatalyst and speeds up the electrode reactions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e4b22f87-dad9-48e1-80d1-b9e42940320d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Conductance, conductivity & cell constant",
+  "prompt": "The conductivity κ of a solution is defined as the conductance of a solution of:",
+  "formula": "κ = G × (l/A)",
+  "options": [
+   "1 mol of electrolyte in 1 L",
+   "1 g-equivalent in 1 cm³",
+   "1 M concentration between any electrodes",
+   "1 cm length and 1 cm² cross-section"
+  ],
+  "answer": 3,
+  "explain": "κ is the conductance of a unit cube (1 cm length, 1 cm² area) of the solution.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "26caad94-c15e-4d3d-aa59-379c14bb6388",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "As C → 0, the degree of dissociation of a weak electrolyte tends to:",
+  "formula": "",
+  "options": [
+   "0, so Λm → 0",
+   "a constant below 1",
+   "1, so Λm → Λ°m",
+   "0.5, so Λm → Λ°m/2"
+  ],
+  "answer": 2,
+  "explain": "At infinite dilution even a weak electrolyte is almost fully dissociated, so α → 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa965c97-b8f2-477a-815e-491769a50d93",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Molar conductivity variation with concentration",
+  "prompt": "For a weak electrolyte, a plot of 1/Λm (y-axis) against CΛm (x-axis) is a straight line with intercept:",
+  "formula": "1/Λm = 1/Λ°m + CΛm/(Kₐ·Λ°m²)",
+  "options": [
+   "1/(Kₐ·Λ°m²)",
+   "1/Λ°m",
+   "Λ°m",
+   "1/Kₐ"
+  ],
+  "answer": 1,
+  "explain": "From Ostwald's law, at CΛm = 0 the value of 1/Λm is 1/Λ°m; the slope is 1/(KₐΛ°m²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e7178e5c-50e4-4d54-b585-906c4a565041",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Limiting molar ionic conductivity λ° of an ion is related to its mobility u and charge z by:",
+  "formula": "",
+  "options": [
+   "λ° = Fu/z",
+   "λ° = zu/F",
+   "λ° = zFu",
+   "λ° = z²Fu"
+  ],
+  "answer": 2,
+  "explain": "Ionic conductivity = (charge number) × F × ionic mobility, so λ° = zFu.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4bf8c1d2-5450-4e8b-a419-22660f143ce1",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "For a sparingly soluble salt, κ of the salt alone is obtained from the measured κ of its saturated solution by:",
+  "formula": "",
+  "options": [
+   "Adding κ of water",
+   "Multiplying by κ of water",
+   "Subtracting κ of water",
+   "Dividing by κ of water"
+  ],
+  "answer": 2,
+  "explain": "Water's own conductivity is not negligible, so κ(salt) = κ(solution) − κ(water).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ab98f35-c293-4700-acfe-0c5c3a29ff6e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Kohlrausch's law & its applications",
+  "prompt": "Which anion has the highest limiting ionic conductivity in water at 298 K?",
+  "formula": "",
+  "options": [
+   "NO₃⁻",
+   "SO₄²⁻",
+   "OH⁻",
+   "Cl⁻"
+  ],
+  "answer": 2,
+  "explain": "OH⁻ (≈199 S cm² mol⁻¹) is highest among anions, due to proton-transfer (Grotthuss-type) conduction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cfbf10ef-ec7d-4d63-af25-7478e6c73b3b",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Energy conversion in a galvanic cell and in an electrolytic cell respectively is:",
+  "formula": "",
+  "options": [
+   "Electrical→chemical; electrical→chemical",
+   "Electrical→chemical; chemical→electrical",
+   "Chemical→electrical; chemical→electrical",
+   "Chemical→electrical; electrical→chemical"
+  ],
+  "answer": 3,
+  "explain": "Galvanic: spontaneous redox gives electrical energy. Electrolytic: electrical energy drives non-spontaneous redox.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "73457385-94ca-4a1d-bb8a-3c07fffd2542",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Galvanic vs electrolytic cells",
+  "prompt": "Electrolysis of aqueous Na₂SO₄ with inert Pt electrodes: products at cathode and anode respectively?",
+  "formula": "",
+  "options": [
+   "O₂ and H₂",
+   "Na and O₂",
+   "H₂ and O₂",
+   "Na and SO₂"
+  ],
+  "answer": 2,
+  "explain": "Na⁺ and SO₄²⁻ are not discharged; water is reduced to H₂ at cathode and oxidised to O₂ at anode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "51d8eccd-ad15-4f48-85fa-69ee87d06b39",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "E°(Fe³⁺/Fe²⁺)=0.77 V; I₂/I⁻ 0.54 V; Br₂/Br⁻ 1.09 V; Cl₂/Cl⁻ 1.36 V. Fe³⁺ can oxidise:",
+  "formula": "",
+  "options": [
+   "I⁻ only",
+   "Br⁻ only",
+   "Cl⁻, Br⁻ and I⁻",
+   "I⁻ and Br⁻ only"
+  ],
+  "answer": 0,
+  "explain": "Fe³⁺ oxidises only species whose couple has lower E° than 0.77 V: only I⁻ (0.54 V).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11cc06e7-821a-4387-b38c-3333ed2e3b10",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "E°(Co³⁺/Co²⁺) = +1.82 V and E°(O₂/H₂O) = +1.23 V in acid. Co³⁺ in aqueous acid will:",
+  "formula": "",
+  "options": [
+   "Oxidise water to O₂",
+   "Stay stable indefinitely",
+   "Reduce water to H₂",
+   "Disproportionate to Co and Co²⁺"
+  ],
+  "answer": 0,
+  "explain": "Co³⁺ has a higher E° than O₂/H₂O, so it is a stronger oxidant than O₂ and oxidises water to O₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "649e6158-1f16-4d68-9a90-0313226417a4",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "For the Fe³⁺/Fe²⁺ electrode, E equals E° when:",
+  "formula": "E = E° − (0.059/1) log([Fe²⁺]/[Fe³⁺])",
+  "options": [
+   "[Fe³⁺] = [Fe²⁺]",
+   "[Fe³⁺] = 2[Fe²⁺]",
+   "[Fe²⁺] = 0",
+   "Only [Fe³⁺] = 1 M"
+  ],
+  "answer": 0,
+  "explain": "The log term vanishes when the ratio [Fe²⁺]/[Fe³⁺] = 1, so E = E° whatever the actual concentrations.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55a2d57d-5dd3-4d68-b7ca-fc26689ffbfc",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "Among Mg²⁺/Mg, Al³⁺/Al, Zn²⁺/Zn and Fe²⁺/Fe, the most negative standard reduction potential is of:",
+  "formula": "",
+  "options": [
+   "Mg²⁺/Mg",
+   "Al³⁺/Al",
+   "Fe²⁺/Fe",
+   "Zn²⁺/Zn"
+  ],
+  "answer": 0,
+  "explain": "E° values: Mg −2.37 V, Al −1.66 V, Zn −0.76 V, Fe −0.44 V. Mg is more negative than Al despite Al's higher charge.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "735fa8b2-4d04-43fc-a9a6-89f9a8d3a18d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrode potential & standard potential",
+  "prompt": "Li⁺/Li has the most negative E° in water mainly because Li⁺ has an exceptionally high:",
+  "formula": "",
+  "options": [
+   "Hydration enthalpy",
+   "Ionisation enthalpy",
+   "Sublimation enthalpy",
+   "Electronegativity"
+  ],
+  "answer": 0,
+  "explain": "Small Li⁺ has very high hydration enthalpy, which outweighs its high ionisation enthalpy, so E° is most negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6929748-3532-4f27-985c-fae103075d12",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "Which has the most negative E° (M⁺/M or M²⁺/M) among K, Ca, Na and Mg?",
+  "formula": "",
+  "options": [
+   "Mg",
+   "Na",
+   "K",
+   "Ca"
+  ],
+  "answer": 2,
+  "explain": "E°: K (−2.93 V) < Ca (−2.87) < Na (−2.71) < Mg (−2.37), so K is the most negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "61d6bbde-8968-4840-8428-e858403d9a69",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "Correct order of reducing power among Al, Zn, Fe and Cu:",
+  "formula": "",
+  "options": [
+   "Al > Zn > Fe > Cu",
+   "Zn > Al > Fe > Cu",
+   "Al > Fe > Zn > Cu",
+   "Cu > Fe > Zn > Al"
+  ],
+  "answer": 0,
+  "explain": "E° (V): Al −1.66, Zn −0.76, Fe −0.44, Cu +0.34. More negative E° means a stronger reducing agent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ae2e3d23-c765-480b-9e86-f33f1a03552d",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Electrochemical series & its applications",
+  "prompt": "Which of these can oxidise Cl⁻ to Cl₂ under standard conditions (E° Cl₂/Cl⁻ = 1.36 V)?",
+  "formula": "",
+  "options": [
+   "Br₂/Br⁻ (1.09 V)",
+   "MnO₄⁻/Mn²⁺ (1.51 V)",
+   "Fe³⁺/Fe²⁺ (0.77 V)",
+   "Cr₂O₇²⁻/Cr³⁺ (1.33 V)"
+  ],
+  "answer": 1,
+  "explain": "Only MnO₄⁻/Mn²⁺ has E° (1.51 V) greater than 1.36 V, so only MnO₄⁻ oxidises Cl⁻.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "91c3ccb6-8c63-4670-8c5a-f7f0e014296e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "In the cell notation Zn|Zn²⁺||Cu²⁺|Cu, each single vertical line (|) represents a:",
+  "formula": "",
+  "options": [
+   "Phase boundary",
+   "Salt bridge",
+   "Separation of species in same phase",
+   "Direction of electron flow"
+  ],
+  "answer": 0,
+  "explain": "A single line marks a phase boundary (e.g. solid electrode | solution); a comma separates species in the same phase.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46b7347b-78eb-4555-a486-553b28ed6851",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "An ideal salt bridge electrolyte must have cations and anions with:",
+  "formula": "",
+  "options": [
+   "Very low solubility",
+   "Opposite redox activity",
+   "Very high charges",
+   "Nearly equal ionic mobilities"
+  ],
+  "answer": 3,
+  "explain": "Equal mobilities (e.g. KCl, KNO₃) cancel the liquid junction potential; the ions must also be inert to the cell solutions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c782114b-4b29-444f-aba1-19b234b9de1e",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "Cell Pt|H₂(g)|H⁺||Cu²⁺|Cu has the overall cell reaction:",
+  "formula": "",
+  "options": [
+   "H₂ + Cu → 2H⁺ + Cu²⁺",
+   "H₂ + Cu²⁺ → 2H⁺ + Cu",
+   "2H⁺ + Cu → H₂ + Cu²⁺",
+   "Cu²⁺ + 2H⁺ → Cu + H₂"
+  ],
+  "answer": 1,
+  "explain": "H₂ is oxidised at the left (anode) electrode and Cu²⁺ is reduced at the right (cathode).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "01d5dfa4-53be-4bbe-8a75-73236b6e9fde",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "Number of electrons transferred in the cell reaction of Al|Al³⁺||Cu²⁺|Cu is:",
+  "formula": "2Al + 3Cu²⁺ → 2Al³⁺ + 3Cu",
+  "options": [
+   "2",
+   "6",
+   "3",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "Balancing the charge: 2 Al lose 6 e⁻ and 3 Cu²⁺ gain 6 e⁻, so n = 6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5060905-5368-4aac-97c4-d8da47bd90cf",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "Correct cell notation for Cu + 2Fe³⁺ → Cu²⁺ + 2Fe²⁺ is:",
+  "formula": "",
+  "options": [
+   "Cu|Cu²⁺||Fe³⁺,Fe²⁺|Pt",
+   "Pt|Fe³⁺,Fe²⁺||Cu²⁺|Cu",
+   "Cu|Cu²⁺||Fe³⁺|Fe",
+   "Pt|Cu²⁺||Fe²⁺,Fe³⁺|Cu"
+  ],
+  "answer": 0,
+  "explain": "Cu is oxidised, so it is the anode on the left; Fe³⁺/Fe²⁺ needs an inert Pt electrode on the right.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5236108-e111-4da9-867a-553347207f98",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Half-cell, cell reactions & cell notation",
+  "prompt": "In a working Daniell cell, the mass of the zinc electrode and the copper electrode respectively:",
+  "formula": "",
+  "options": [
+   "Decreases, increases",
+   "Increases, increases",
+   "Decreases, decreases",
+   "Increases, decreases"
+  ],
+  "answer": 0,
+  "explain": "Zn → Zn²⁺ + 2e⁻ dissolves the anode; Cu²⁺ + 2e⁻ → Cu deposits on the cathode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "03f27240-ae95-43be-966a-4b3085069b37",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "In a Zn|Zn²⁺||Cu²⁺|Cu cell, both solutions are diluted 10 times. E_cell:",
+  "formula": "E = E° − (0.0592/2) log([Zn²⁺]/[Cu²⁺])",
+  "options": [
+   "Becomes zero",
+   "Increases by 0.0296 V",
+   "Remains unchanged",
+   "Decreases by 0.0296 V"
+  ],
+  "answer": 2,
+  "explain": "Both ions are 2+, so Q = [Zn²⁺]/[Cu²⁺] is unchanged and E stays the same.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a4847485-7d1e-4d42-9a8d-15687581d301",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Nernst equation & its applications",
+  "prompt": "In the concentration cell Ag|AgCl|Cl⁻(C₁)||Cl⁻(C₂)|AgCl|Ag, the cathode has Cl⁻ concentration:",
+  "formula": "AgCl + e⁻ → Ag + Cl⁻",
+  "options": [
+   "Lower",
+   "Equal to the anode",
+   "Independent of concentration",
+   "Higher"
+  ],
+  "answer": 0,
+  "explain": "E = E° − 0.0592 log[Cl⁻], so the lower [Cl⁻] half-cell has the higher E and is the cathode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa509292-860c-4fe6-b722-9b1fd8667665",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Cell potential, ΔG and equilibrium constant",
+  "prompt": "ΔG° of a cell reaction is related to its equilibrium constant K by:",
+  "formula": "ΔG° = −RT ln K",
+  "options": [
+   "ΔG° = −2.303RT log K",
+   "ΔG° = RT ln K",
+   "ΔG° = −RT log K/n",
+   "ΔG° = −nRT ln K"
+  ],
+  "answer": 0,
+  "explain": "ΔG° = −RT ln K = −2.303RT log K; n appears only in −nFE°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "727f424f-0b77-4f44-a054-e91a134a22f5",
+  "subject": "Chemistry",
+  "chapter": "Electrochemistry",
+  "topic": "Dry cell, lead accumulator & fuel cells",
+  "prompt": "A fuel cell differs from an ordinary primary cell because:",
+  "formula": "",
+  "options": [
+   "It produces only heat",
+   "Reactants are fed continuously from outside",
+   "It has no electrodes",
+   "It works only at 1 atm"
+  ],
+  "answer": 1,
+  "explain": "Fuel and oxidant are supplied continuously, so the cell does not run down like a battery.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

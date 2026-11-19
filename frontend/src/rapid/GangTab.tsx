@@ -20,8 +20,8 @@ export function GangTab() {
   const inbox = useInbox(), friends = useFriends(uid), gangs = useGangs(uid), myCode = useFriendCode(uid).data?.code;
   const [busy, setBusy] = useState(""), [error, setError] = useState("");
   const narrow = useWindowDimensions().width < 360; // small phones: an icon-only Challenge button leaves room for the name and crown
-  const reloads = [friends.reload, gangs.reload];
-  useFocusEffect(useCallback(() => { reloads.forEach((f) => f()); if (uid) refreshInbox(uid); }, [...reloads, uid])); // eslint-disable-line react-hooks/exhaustive-deps
+  const { reload: reloadFriends } = friends, { reload: reloadGangs } = gangs;
+  useFocusEffect(useCallback(() => { reloadFriends(); reloadGangs(); if (uid) refreshInbox(uid); }, [reloadFriends, reloadGangs, uid]));
 
   const act = async (key: string, run: () => Promise<unknown>) => {
     setBusy(key); setError("");

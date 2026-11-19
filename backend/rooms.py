@@ -4,20 +4,24 @@ A room stays open for 3 minutes. It starts when the single invited friend accept
 when all 5 seats are full, when everyone invited has answered, or at the 3-minute mark with whoever joined.
 """
 import asyncio
+import hashlib
 import html
 import re
 import time
 import uuid
 from typing import List, Literal, Optional
 
-from fastapi import APIRouter, Depends, Header, HTTPException
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
+from pymongo.errors import DuplicateKeyError
 
+from client_ip import client_ip
 from exam_groups import resolve_exam
 from load_guard import arena_gate, busy
-from scope import Pick, label_for, normalise, scope_fields, scope_of
+from mission_links import BOTS
+from scope import CARD_SECONDS, Pick, label_for, normalise, scope_fields, scope_of
 from social import blocked_between, blocked_uids, card, find_player, make_friends, make_pid, public_name
 
 ROOM_SECONDS = 180
@@ -32,9 +36,10 @@ class RoomCreate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     pids: List[str] = Field(default_factory=list, max_length=SEATS - 1)
     gang_id: Optional[str] = Field(default=None, max_length=16)
-    subject: Literal["Physics", "Chemistry", "Mathematics"] = "Physics"
+    subject: Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning"] = "Physics"
     chapter: Optional[str] = Field(default=None, max_length=80)
     picks: Optional[List[Pick]] = Field(default=None, max_length=5)  # up to 5 subjects or chapters; wins over subject and chapter
+    count: Literal[30, 50, 100] = 30  # cards in the match (rule R2)
     rematch_of: Optional[str] = Field(default=None, max_length=64)
     # Gang Battle: my gang (gang_id) against this gang, as two teams of up to 5.
     rival_gang_id: Optional[str] = Field(default=None, max_length=16)
@@ -86,7 +91,7 @@ def make_router(db, rf_user, seat_duel):
             seats = teams["a"]["uids"] + teams["b"]["uids"]
         else:
             seats = [got["from_uid"]] + [i["uid"] for i in joined][:SEATS - 1]
-        duel_id = await seat_duel(got["exam"], scope_of(got), seats, got["id"], got.get("gang_id"), teams)
+        duel_id = await seat_duel(got["exam"], scope_of(got), seats, got["id"], got.get("gang_id"), teams, cards=got.get("cards_n") or 30)
         return await db.rf_challenges.find_one_and_update({"id": c["id"]}, {"$set": {"status": "started", "duel_id": duel_id}}, return_document=after)
 
     async def settle(c):
@@ -126,10 +131,16 @@ def make_router(db, rf_user, seat_duel):
             a, b = team_counts(c)
             ready = b >= 1
             vs = {"a": {**c["vs"]["a"], "joined": a + 1, "seats": SEATS}, "b": {**c["vs"]["b"], "joined": b, "seats": SEATS}}
-        return {"id": c["id"], "status": c["status"], "subject": c["subject"], "chapter": c.get("chapter"), "label": label_for(c), "picks": scope_of(c), "revenge": bool(c.get("revenge")), "exam": c["exam"], "duel_id": c.get("duel_id"), "single": bool(c.get("single")),
+        # Match Link Stats (host only): people who opened this link, people who took a seat with it, and all-time totals.
+        stats = None
+        if link and host:
+            mine_all = profs.get(uid, {}).get("link_stats") or {}
+            stats = {"opened": c.get("link_opens", 0), "joined": sum(1 for i in c["invites"] if i.get("via") == "link" and i["status"] == "joined"),
+                     "all_opened": mine_all.get("opened", 0), "all_joined": mine_all.get("joined", 0), "links": mine_all.get("links", 0)}
+        return {"id": c["id"], "status": c["status"], "subject": c["subject"], "chapter": c.get("chapter"), "label": label_for(c), "picks": scope_of(c), "cards": c.get("cards_n") or 30, "revenge": bool(c.get("revenge")), "exam": c["exam"], "duel_id": c.get("duel_id"), "single": bool(c.get("single")),
                 "rematch_of": c.get("rematch_of"), "expires_in": max(0, round(c["expires_ts"] - time.time())), "seats": SEATS, "joined": joined + 1, "is_host": host,
                 # "link": opened from a match link and not seated yet
-                "my_status": "host" if host else mine["status"] if mine else "link", "link": link, "friend": friend,
+                "my_status": "host" if host else mine["status"] if mine else "link", "link": link, "friend": friend, "link_stats": stats,
                 "can_start": host and c["status"] == "open" and ready, "gang": await gang_tag(c),
                 "team_mode": battle, "vs": vs, "my_team": ("a" if host else mine.get("team")) if battle else None,
                 "host": card(profs.get(c["from_uid"], {"uid": c["from_uid"]})),
@@ -179,6 +190,7 @@ def make_router(db, rf_user, seat_duel):
         await free(uid, keep=cid)
         if via_link:  # taking a seat from a match link makes you the host's friend
             await make_friends(db, uid, c["from_uid"], strict=False, via="link")
+            await db.rf_profiles.update_one({"uid": c["from_uid"]}, {"$inc": {"link_stats.joined": 1}})
         return await view(c, uid)
 
     @r.post("/challenges", dependencies=[Depends(arena_gate)])
@@ -234,11 +246,13 @@ def make_router(db, rf_user, seat_duel):
             raise HTTPException(400, "There’s nobody to challenge here yet.")
         await free(uid)
         exam = resolve_exam("JEE", picks[0]["subject"])
-        c = {"id": str(uuid.uuid4()), "from_uid": uid, "exam": exam, **scope_fields(picks), "revenge": revenge, "status": "open", "created_ts": now,
+        c = {"id": str(uuid.uuid4()), "from_uid": uid, "exam": exam, **scope_fields(picks), "cards_n": data.count, "revenge": revenge, "status": "open", "created_ts": now,
              "expires_ts": now + ROOM_SECONDS, "rematch_of": data.rematch_of, "gang_id": gang_id, "single": len(targets) == 1 and not data.gang_id and not vs and not link, "joined": 0,
              **({"team_mode": True, "vs": vs} if vs else {}), **({"link": True} if link else {}),
              "invites": [{"uid": t, "status": "sent", "ts": now, **({"team": team_of[t]} if vs else {})} for t in targets]}
         await db.rf_challenges.insert_one(c)
+        if link:
+            await db.rf_profiles.update_one({"uid": uid}, {"$inc": {"link_stats.links": 1}})
         return await view(c, uid)
 
     @r.get("/challenges/{cid}")
@@ -344,24 +358,40 @@ a{{display:block;margin-top:14px;padding:16px;border-radius:16px;font-weight:800
         return page(f"Join {g['name']} on Rapid Fire", f"{len(g['members'])} players are already in. Take your place and battle other gangs together.",
                     "Join the gang", f"{APP_SCHEME}://rapid/gang/{gid}?code={code}", gid, "Rival gangs can battle you with this gang code.", web=f"/api/arena/rapid/gang/{gid}?code={code}")
 
+    async def count_open(c, request: Request):
+        """A person opening a match link (not a link-preview robot): counted once per browser and per phone."""
+        ua = request.headers.get("user-agent", "")
+        if not ua or BOTS.search(ua):
+            return
+        device = hashlib.sha256(f"{client_ip(request)}|{ua}".encode()).hexdigest()[:32]
+        try:
+            await db.rf_link_visits.insert_one({"cid": c["id"], "key": device, "ts": time.time()})
+        except DuplicateKeyError:
+            return  # this phone already opened this link
+        await db.rf_challenges.update_one({"id": c["id"]}, {"$inc": {"link_opens": 1}})
+        await db.rf_profiles.update_one({"uid": c["from_uid"]}, {"$inc": {"link_stats.opened": 1}})
+
     @r.get("/c/{cid}", include_in_schema=False)
-    async def challenge_page(cid: str):
+    async def challenge_page(cid: str, request: Request):
         c = await db.rf_challenges.find_one({"id": cid}) if re.fullmatch(r"[0-9a-f-]{36}", cid) else None
         if not c:
             raise HTTPException(404, "Challenge not found.")
+        if c.get("link"):
+            await count_open(c, request)
         p = await db.rf_profiles.find_one({"uid": c["from_uid"]}) or {}
         open_ = c["status"] == "open" and c["expires_ts"] > time.time()
         name, web = public_name(p), f"/api/arena/rapid/room/{cid}"  # the browser arena on this same server
+        size = f"{c.get('cards_n') or 30} cards · {CARD_SECONDS} seconds each"
         if c.get("link"):
             seats = SEATS - 1 - c.get("joined", 0)
             if open_ and seats > 0:
                 return page(f"{name} wants you in a Rapid Fire match · {label_for(c)}",
-                            f"30 cards · 15 seconds each · {seats} of {SEATS - 1} seats open. Take a seat before the timer ends and you two become friends.",
+                            f"{size} · {seats} of {SEATS - 1} seats open. Take a seat before the timer ends and you two become friends.",
                             "Open in the app", f"{APP_SCHEME}://rapid/room/{cid}", hint="No app? Play in your browser with the same JEELIVE.AI account.", web=web)
             return page("This match has started" if c["status"] in ("starting", "started") or open_ else "This match link has closed",
                         f"Ask {name} for a new link, or play a Quick Match in Rapid Fire.", "Open Rapid Fire", f"{APP_SCHEME}://rapid", web="/api/arena/rapid")
         return page(f"{name} challenged you · {label_for(c)}" if open_ else "This challenge has closed",
-                    "30 cards · 15 seconds each. Take your seat in the Match Room before the timer runs out." if open_ else "Ask your friend to send a new one from Rapid Fire.",
+                    f"{size}. Take your seat in the Match Room before the timer runs out." if open_ else "Ask your friend to send a new one from Rapid Fire.",
                     "Open the Match Room", f"{APP_SCHEME}://rapid/room/{cid}", hint="Already in the app? The invitation is waiting on your Rapid Fire screen.", web=web)
 
     return r

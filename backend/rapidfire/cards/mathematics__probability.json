@@ -1,1117 +1,2757 @@
 [
-  {
-    "id": "3e705bb1-81fe-4598-b71b-418ac907efb3",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Addition Theorem",
-    "prompt": "P(A∪B) equals?",
-    "formula": "P(A∪B) = P(A)+P(B)−P(A∩B)",
-    "options": [
-      "P(A)+P(B)",
-      "P(A)·P(B)",
-      "P(A)+P(B)+P(A∩B)",
-      "P(A)+P(B)−P(A∩B)"
-    ],
-    "answer": 3,
-    "explain": "Addition theorem of probability; subtract intersection to avoid double counting.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "80fc7826-1cdd-43bf-a082-9fb0585c9ffd",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Independence",
-    "prompt": "For independent events A and B, P(A∩B) =?",
-    "formula": "P(A∩B) = P(A)·P(B)",
-    "options": [
-      "P(A)+P(B)",
-      "P(A)·P(B|A)",
-      "P(A)·P(B)",
-      "P(A|B)"
-    ],
-    "answer": 2,
-    "explain": "Independence means joint probability equals product of individual probabilities.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e7c5631f-3a99-46dd-943c-b660f5f6372a",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Conditional Probability",
-    "prompt": "Conditional probability P(A|B) =?",
-    "formula": "P(A|B) = P(A∩B)/P(B)",
-    "options": [
-      "P(B)/P(A∩B)",
-      "P(A∩B)/P(B)",
-      "P(A)/P(B)",
-      "P(A∩B)/P(A)"
-    ],
-    "answer": 1,
-    "explain": "Conditional probability restricts sample space to event B.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d3ef3d8-7858-4756-ae83-6841f051da21",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Bayes' Theorem",
-    "prompt": "Bayes' theorem: P(Aᵢ|B) =?",
-    "formula": "P(Aᵢ|B) = P(Aᵢ)P(B|Aᵢ)/ΣP(Aⱼ)P(B|Aⱼ)",
-    "options": [
-      "P(Aᵢ)P(B)/ΣP(Aⱼ)",
-      "P(B|Aᵢ)/ΣP(B|Aⱼ)",
-      "P(B|Aᵢ)/P(Aᵢ)",
-      "P(Aᵢ)P(B|Aᵢ)/ΣP(Aⱼ)P(B|Aⱼ)"
-    ],
-    "answer": 3,
-    "explain": "Bayes' theorem uses prior probabilities and likelihoods to find posterior.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "368af061-4fc7-4eda-8db4-a3d4185eed31",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "Mean of Binomial distribution B(n,p) is?",
-    "formula": "μ = np",
-    "options": [
-      "√(npq)",
-      "np",
-      "npq",
-      "n/p"
-    ],
-    "answer": 1,
-    "explain": "Expected value of binomial random variable is np.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6e09e4fe-33d4-41a2-8776-ae51c14bf2ba",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "Variance of Binomial distribution B(n,p) is?",
-    "formula": "σ² = npq, q=1−p",
-    "options": [
-      "npq",
-      "nq",
-      "np²",
-      "np"
-    ],
-    "answer": 0,
-    "explain": "Variance of B(n,p) is npq where q = 1−p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bccfa1e0-a859-4e64-b689-066bf1061826",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "P(exactly r successes) in B(n,p) is?",
-    "formula": "P(X=r) = ⁿCᵣ pʳ qⁿ⁻ʳ",
-    "options": [
-      "ⁿCᵣ pʳ",
-      "ⁿCᵣ pⁿ⁻ʳ qʳ",
-      "pʳ qⁿ⁻ʳ",
-      "ⁿCᵣ pʳ qⁿ⁻ʳ"
-    ],
-    "answer": 3,
-    "explain": "Binomial PMF chooses r positions then multiplies success and failure probabilities.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "12be31d4-f46e-48e0-8046-fabf1d96ee8f",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Mutually Exclusive Events",
-    "prompt": "For mutually exclusive events, P(A∩B) =?",
-    "formula": "P(A∩B) = 0",
-    "options": [
-      "1",
-      "P(A)·P(B)",
-      "0",
-      "P(A)+P(B)"
-    ],
-    "answer": 2,
-    "explain": "Mutually exclusive events cannot occur simultaneously, so their intersection is empty.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1282f96c-bc59-4a1d-9742-f8f9b8100013",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Complement Rule",
-    "prompt": "P(A') (complement of A) equals?",
-    "formula": "P(A') = 1 − P(A)",
-    "options": [
-      "P(A)/P(S)",
-      "P(A)−1",
-      "1 − P(A)",
-      "1/P(A)"
-    ],
-    "answer": 2,
-    "explain": "Total probability is 1; complement covers all outcomes not in A.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "30df4f00-dc24-4117-88ae-17899b441e45",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Total Probability",
-    "prompt": "Total Probability theorem: P(B) =?",
-    "formula": "P(B) = ΣP(Aᵢ)·P(B|Aᵢ)",
-    "options": [
-      "P(A)·P(B)",
-      "ΣP(Aᵢ)·P(B|Aᵢ)",
-      "P(B|A)·P(A)+P(B)",
-      "ΣP(B|Aᵢ)"
-    ],
-    "answer": 1,
-    "explain": "Partition sample space into exhaustive mutually exclusive events Aᵢ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b4cd243-d490-4e02-a85f-ad0eed181be6",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Odds",
-    "prompt": "Odds in favour of event A are?",
-    "formula": "P(A) : P(A')",
-    "options": [
-      "P(A') : P(A)",
-      "1 : P(A)",
-      "P(A) : 1",
-      "P(A) : P(A')"
-    ],
-    "answer": 3,
-    "explain": "Odds in favour = ratio of probability of occurrence to non-occurrence.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "63381cf5-494d-4efe-b1fa-ddc36d071dee",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Addition Theorem",
-    "prompt": "P(A∪B∪C) for mutually exclusive A,B,C =?",
-    "formula": "P(A)+P(B)+P(C)",
-    "options": [
-      "P(A)P(B)P(C)",
-      "1−P(A')P(B')P(C')",
-      "P(A)+P(B)+P(C)−1",
-      "P(A)+P(B)+P(C)"
-    ],
-    "answer": 3,
-    "explain": "Mutually exclusive: all pairwise and triple intersections are empty.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fba058d1-9ebb-4d67-9043-bf2e928ede0b",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "Standard deviation of B(n,p) is?",
-    "formula": "σ = √(npq)",
-    "options": [
-      "npq",
-      "√(npq)",
-      "np/q",
-      "√(np)"
-    ],
-    "answer": 1,
-    "explain": "Standard deviation is square root of variance npq.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fff47130-78ce-4d07-ac10-b51a363d552a",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Independence vs Mutual Exclusivity",
-    "prompt": "Which condition makes A and B both independent AND mutually exclusive?",
-    "formula": "",
-    "options": [
-      "P(A∩B)=P(A)P(B)≠0",
-      "P(A)=P(B)",
-      "P(A)+P(B)=1",
-      "P(A)=0 or P(B)=0"
-    ],
-    "answer": 3,
-    "explain": "Independent+mutually exclusive ⇒ P(A)P(B)=0, so at least one probability is 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "45ede65e-a5b6-4641-9f68-4bc4373d3a60",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Axioms of Probability",
-    "prompt": "Probability of sample space S equals?",
-    "formula": "P(S) = 1",
-    "options": [
-      "∞",
-      "n (total outcomes)",
-      "0",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "Axiom of probability: certain event (sample space) has probability 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0e6bd815-6f89-42cd-9d08-a585b9b4ab4a",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Classical Probability",
-    "prompt": "Classical probability: equally likely outcomes, P(A) =?",
-    "formula": "P(A) = n(A)/n(S)",
-    "options": [
-      "n(A)·n(S)",
-      "n(A)/n(S)",
-      "n(S)/n(A)",
-      "1/n(A)"
-    ],
-    "answer": 1,
-    "explain": "Classical definition: favourable outcomes divided by total equally likely outcomes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ca79e5ba-c522-44d6-80c7-561fd9dba1f5",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "P(B|A) in terms of P(A|B), P(A), P(B) by Bayes is?",
-    "formula": "P(B|A)=P(A|B)·P(B)/P(A)",
-    "options": [
-      "P(A)·P(B)/P(A|B)",
-      "P(A|B)·P(A)/P(B)",
-      "P(A|B)·P(B)/P(A)",
-      "P(A|B)/P(B)"
-    ],
-    "answer": 2,
-    "explain": "Direct application of Bayes' theorem with two events.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7d011d7a-a3c1-42f9-831c-fd1261393a1f",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "P(A∩B) in terms of P(A), P(B|A) =?",
-    "formula": "P(A∩B)=P(A)·P(B|A)",
-    "options": [
-      "P(A)/P(B|A)",
-      "P(B)·P(A|B)+P(A)",
-      "P(A)·P(B|A)",
-      "P(A)+P(B|A)"
-    ],
-    "answer": 2,
-    "explain": "Multiplication theorem of probability: P(A∩B)=P(A)·P(B|A).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b268631d-89f0-4095-9b37-65828aec7b06",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "If A and B are mutually exclusive, P(A|B) =?",
-    "formula": "",
-    "options": [
-      "P(B)",
-      "1",
-      "0",
-      "P(A)"
-    ],
-    "answer": 2,
-    "explain": "Mutually exclusive ⟹ A∩B=∅, so P(A|B)=P(A∩B)/P(B)=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8a693bae-aba0-4d54-9c2a-1d2e0682a4ae",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "Odds against event A with P(A)=p are?",
-    "formula": "q:p where q=1−p",
-    "options": [
-      "p : (1−p)",
-      "1 : p",
-      "(1−p) : p",
-      "p : 1"
-    ],
-    "answer": 2,
-    "explain": "Odds against = unfavourable : favourable = (1−p) : p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ccc9a795-5a78-47fc-8218-02bcf15a408e",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "P(exactly 0 successes) in B(n,p) =?",
-    "formula": "P(X=0)=qⁿ",
-    "options": [
-      "(1−p)ⁿ⁻¹·p",
-      "1−pⁿ",
-      "pⁿ",
-      "qⁿ"
-    ],
-    "answer": 3,
-    "explain": "P(X=0)=C(n,0)·p⁰·qⁿ = qⁿ where q=1−p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "97978b26-d185-4733-948a-c3139c062260",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "If P(A∪B)=1 and A,B mutually exclusive, then P(A)+P(B)=?",
-    "formula": "",
-    "options": [
-      "0",
-      "2",
-      "1",
-      "P(A)·P(B)"
-    ],
-    "answer": 2,
-    "explain": "Mutually exclusive ⟹ P(A∪B)=P(A)+P(B)=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bff0f885-52d3-4ec6-a070-f6a39f4016aa",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "P(A'∪B') equals (De Morgan's law)?",
-    "formula": "P(A'∪B')=1−P(A∩B)",
-    "options": [
-      "P(A∩B)",
-      "1−P(A∩B)",
-      "P(A')+P(B')",
-      "1−P(A∪B)"
-    ],
-    "answer": 1,
-    "explain": "By De Morgan: A'∪B'=(A∩B)', so probability = 1−P(A∩B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0f1e798a-1264-452b-b03b-e5fb7c6bf59d",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "For B(n,p), relation between mean (μ) and variance (σ²) is?",
-    "formula": "σ²=μ·q = μ(1−p)",
-    "options": [
-      "σ²= μ(1−p)",
-      "σ²= μ·p",
-      "σ²= μ/p",
-      "σ²= μ²(1−p)"
-    ],
-    "answer": 0,
-    "explain": "Mean=np, Variance=npq=np·(1−p)=μ·q, so variance < mean always.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21097625-8b05-4cc7-91a2-b6ad80f5ef47",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "Which inequality always holds for P(A∩B)?",
-    "formula": "P(A∩B) ≥ P(A)+P(B)−1",
-    "options": [
-      "P(A∩B) ≤ P(A)−P(B)",
-      "P(A∩B) = P(A)·P(B)",
-      "P(A∩B) ≥ P(A)+P(B)−1",
-      "P(A∩B) ≥ P(A∪B)"
-    ],
-    "answer": 2,
-    "explain": "Bonferroni inequality: P(A∩B)≥P(A)+P(B)−1 (since P(A∪B)≤1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "91a811cf-c9d2-44bc-9f45-d1f16efa968c",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "For B(n,p): P(X=r+1)/P(X=r) =?",
-    "formula": "(n−r)p / [(r+1)q]",
-    "options": [
-      "np/q",
-      "p/q",
-      "(r+1)q/[(n−r)p]",
-      "(n−r)p/[(r+1)q]"
-    ],
-    "answer": 3,
-    "explain": "Recurrence relation for binomial: ratio of consecutive terms = (n−r)p/[(r+1)(1−p)].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7e2317ce-af1d-4e23-a89a-d51ca2c33304",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Independent Events",
-    "prompt": "For independent A,B: P(A∩B') =?",
-    "formula": "P(A)·[1−P(B)]",
-    "options": [
-      "P(A)+P(B')−1",
-      "P(A)/P(B')",
-      "P(A)·[1−P(B)]",
-      "P(A)−P(A∩B)/(P(B))"
-    ],
-    "answer": 2,
-    "explain": "Independence extends to complements: P(A∩B')=P(A)·P(B')=P(A)[1−P(B)].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3e5a5109-316f-4aab-8526-3cba5b8e9447",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability Inequalities",
-    "prompt": "P(A∩B) ≥ ? (Bonferroni inequality lower bound)",
-    "formula": "P(A)+P(B)−1",
-    "options": [
-      "0",
-      "P(A)·P(B)",
-      "P(A)+P(B)−1",
-      "P(A)−P(B)"
-    ],
-    "answer": 2,
-    "explain": "Bonferroni: P(A∩B) ≥ P(A)+P(B)−1, since P(A∪B) ≤ 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "85c84605-aa7a-443b-be41-cd39632d51a4",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Independent Events",
-    "prompt": "If A and B independent, A and B' are?",
-    "formula": "",
-    "options": [
-      "Exhaustive",
-      "Mutually exclusive",
-      "Also independent",
-      "Dependent"
-    ],
-    "answer": 2,
-    "explain": "Independence of A,B implies A is independent of B', B' of A, and A' of B'.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec4abd9d-e856-42ed-88f9-b66acb74130c",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "For Binomial B(n,p), E[X(X−1)] =?",
-    "formula": "n(n−1)p²",
-    "options": [
-      "n²p²",
-      "n(n−1)p²",
-      "n(n−1)pq",
-      "np(1−p)"
-    ],
-    "answer": 1,
-    "explain": "E[X(X−1)] = n(n−1)p² is the second factorial moment of the binomial.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2ea7ee86-837e-4e8a-afae-4e469b37a67e",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "For B(n,p), variance is always __ the mean?",
-    "formula": "σ²= npq < np",
-    "options": [
-      "Unrelated to",
-      "Less than",
-      "Greater than",
-      "Equal to"
-    ],
-    "answer": 1,
-    "explain": "Variance=npq=np·(1−p) < np=mean since 0<p<1, so variance < mean.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3e742c1e-d199-4321-9a0b-ee9edd8f5a3d",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Conditional Probability",
-    "prompt": "P(B'|A) in terms of P(B|A) is?",
-    "formula": "1 − P(B|A)",
-    "options": [
-      "1 − P(A|B)",
-      "1 − P(B|A)",
-      "P(A|B)/P(B)",
-      "P(B|A')"
-    ],
-    "answer": 1,
-    "explain": "Complementary rule holds within conditional: P(B'|A)=1−P(B|A).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bedc9bff-f9b4-439e-8209-a150a5af5f0c",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability Inequalities",
-    "prompt": "If P(A)=p, the maximum value of P(A∩B) is?",
-    "formula": "min(P(A),P(B))",
-    "options": [
-      "P(A)+P(B)",
-      "P(A)·P(B)",
-      "min(P(A),P(B))",
-      "P(A)/P(B)"
-    ],
-    "answer": 2,
-    "explain": "P(A∩B) ≤ min(P(A),P(B)); maximum achieved when one event is subset of other.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7601895e-f39a-4116-b98b-3e4a543cc293",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Bayes' Theorem",
-    "prompt": "In Bayes' theorem, P(B|Aᵢ) are called?",
-    "formula": "",
-    "options": [
-      "Prior probabilities",
-      "Marginal probabilities",
-      "Likelihoods",
-      "Posterior probabilities"
-    ],
-    "answer": 2,
-    "explain": "P(B|Aᵢ) are likelihoods; P(Aᵢ) are priors; P(Aᵢ|B) are posteriors in Bayes' theorem.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8e7e1c11-19b4-4b3b-b775-1877a6f55c34",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Total Probability",
-    "prompt": "If A₁,A₂,…,Aₙ partition S and P(B)>0, then ΣP(B|Aᵢ)P(Aᵢ)=?",
-    "formula": "P(B)",
-    "options": [
-      "P(B)",
-      "1",
-      "ΣP(Aᵢ)",
-      "P(B)/n"
-    ],
-    "answer": 0,
-    "explain": "This is the Total Probability Theorem: P(B)=Σ P(B|Aᵢ)P(Aᵢ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36b19257-056f-4b8a-b4b2-6640ae058f79",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Conditional Probability",
-    "prompt": "P(A'|B) in terms of P(A|B) is?",
-    "formula": "P(A'|B) = 1 − P(A|B)",
-    "options": [
-      "1 − P(A|B)",
-      "1 − P(A)",
-      "P(B|A')",
-      "P(A|B)"
-    ],
-    "answer": 0,
-    "explain": "Complement rule applies within conditional probability: P(A'|B)=1−P(A|B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "01107b7d-2ee2-48aa-982b-439c9ddf17b0",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "For Binomial B(n,p), E[X(X−1)(X−2)] =?",
-    "formula": "n(n−1)(n−2)p³",
-    "options": [
-      "n(n−1)(n−2)p²q",
-      "n³p³",
-      "n(n−1)(n−2)p³",
-      "n(n−1)p²"
-    ],
-    "answer": 2,
-    "explain": "Third factorial moment of Binomial: E[X(X−1)(X−2)] = n(n−1)(n−2)p³.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "671926ec-73fb-42cb-b970-e32530084497",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Classical Probability",
-    "prompt": "Probability that a card drawn from 52 is a red king?",
-    "formula": "",
-    "options": [
-      "1/13",
-      "1/52",
-      "1/26",
-      "2/13"
-    ],
-    "answer": 2,
-    "explain": "There are 2 red kings in 52 cards, so P = 2/52 = 1/26.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9e473895-8cf5-40b3-87ae-830977f3848b",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Multiplication Theorem",
-    "prompt": "Multiplication theorem for dependent events: P(A∩B∩C) =?",
-    "formula": "P(A)·P(B|A)·P(C|A∩B)",
-    "options": [
-      "P(A∩B)·P(C)",
-      "P(A)·P(B|A)·P(C|A∩B)",
-      "P(A|B)·P(B|C)·P(C)",
-      "P(A)·P(B)·P(C)"
-    ],
-    "answer": 1,
-    "explain": "Chain rule: P(A∩B∩C)=P(A)·P(B|A)·P(C|A∩B) for any events.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c949946a-c594-46a1-ae7e-78d0a5643bb6",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Set Relations in Probability",
-    "prompt": "If P(A)=0.4 and A⊂B, what is P(B'∩A)?",
-    "formula": "",
-    "options": [
-      "0",
-      "P(A)−P(B)",
-      "P(B')",
-      "0.4"
-    ],
-    "answer": 0,
-    "explain": "If A⊂B, every outcome of A is in B, so A∩B'=∅ and P(A∩B')=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a765caee-2e73-40b0-934d-a026687fef1c",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Total Probability",
-    "prompt": "Which formula gives P(B) using Bayes' prior info?",
-    "formula": "ΣP(B|Aᵢ)P(Aᵢ)",
-    "options": [
-      "P(B|A)·P(A)",
-      "ΣP(Aᵢ|B)",
-      "P(A|B)/P(A)",
-      "ΣP(B|Aᵢ)P(Aᵢ)"
-    ],
-    "answer": 3,
-    "explain": "Total Probability Theorem: P(B)=ΣP(B|Aᵢ)P(Aᵢ) over exhaustive partition {Aᵢ}.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b9f67e8a-50f8-49d9-a917-e14401c77de8",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Binomial Distribution",
-    "prompt": "For Binomial B(n,p), max value of variance npq for fixed n occurs at?",
-    "formula": "",
-    "options": [
-      "p = 1",
-      "p = 1/4",
-      "p = 1/2",
-      "p = 1/3"
-    ],
-    "answer": 2,
-    "explain": "npq = np(1−p) is maximised at p=1/2, giving variance = n/4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ef8a299-1944-428c-a8a0-1a519fba3aeb",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Independence",
-    "prompt": "If A and B are independent, P(A∪B) = 1−P(A')P(B'). This equals?",
-    "formula": "P(A)+P(B)−P(A)P(B)",
-    "options": [
-      "1−P(A)−P(B)",
-      "P(A)+P(B)",
-      "P(A)·P(B)",
-      "P(A)+P(B)−P(A)P(B)"
-    ],
-    "answer": 3,
-    "explain": "For independent events P(A∩B)=P(A)P(B), so P(A∪B)=P(A)+P(B)−P(A)P(B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "df07959c-218c-4af6-9850-de4cd7c88edd",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Bounds on Probability",
-    "prompt": "P(A∩B) ≤ ? (maximum possible value)",
-    "formula": "min(P(A), P(B))",
-    "options": [
-      "min(P(A), P(B))",
-      "P(A)+P(B)",
-      "max(P(A),P(B))",
-      "P(A)·P(B)"
-    ],
-    "answer": 0,
-    "explain": "A∩B⊂A and A∩B⊂B, so P(A∩B)≤P(A) and P(A∩B)≤P(B), i.e., ≤min(P(A),P(B)).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "66b7f3d4-4de4-4439-ae10-7998e34594cd",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Multiplication Theorem",
-    "prompt": "P(A∩B) = P(A)·P(B|A) = P(B)·P(A|B). This is called?",
-    "formula": "",
-    "options": [
-      "Total probability theorem",
-      "Multiplication theorem",
-      "Addition theorem",
-      "Bayes' theorem"
-    ],
-    "answer": 1,
-    "explain": "The general Multiplication Theorem expresses P(A∩B) using conditional probabilities.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b2220084-5c9a-4446-ab25-feeb7796650e",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "For B(n,p), E[X²] − (E[X])² equals?",
-    "formula": "Var(X) = npq",
-    "options": [
-      "npq",
-      "npq²",
-      "np²q",
-      "n²p²q"
-    ],
-    "answer": 0,
-    "explain": "Variance of Binomial = npq = np(1−p); this is the definition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "558e0ea5-2101-484e-a098-599484be9ea8",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "P(A∩B) = 0 and A,B independent ⇒ at least one of P(A),P(B) is?",
-    "formula": "",
-    "options": [
-      "One",
-      "Cannot determine",
-      "0.5",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "For independent events P(A∩B)=P(A)P(B)=0 ⟹ P(A)=0 or P(B)=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "818cd88a-5740-49b4-994e-8814e6ebc5a6",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "P(A∩B) in terms of conditional probability is P(A|B)·?",
-    "formula": "P(A|B)·P(B)",
-    "options": [
-      "P(B|A)",
-      "P(A)",
-      "P(A∪B)",
-      "P(B)"
-    ],
-    "answer": 3,
-    "explain": "Multiplication rule: P(A∩B) = P(A|B)·P(B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "153ad3d9-a505-49ff-bc62-f42b9e292bbb",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "For independent events, P(A∪B) = P(A)+P(B)−?",
-    "formula": "P(A)·P(B)",
-    "options": [
-      "P(B|A)",
-      "P(A)+P(B)",
-      "P(A|B)",
-      "P(A)·P(B)"
-    ],
-    "answer": 3,
-    "explain": "P(A∪B)=P(A)+P(B)−P(A∩B)=P(A)+P(B)−P(A)P(B) for independent events.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9f8222b0-e141-4f74-aa3b-d1de1948067f",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "Two dice rolled. P(sum = 7) =?",
-    "formula": "6/36",
-    "options": [
-      "5/36",
-      "7/36",
-      "6/36",
-      "4/36"
-    ],
-    "answer": 2,
-    "explain": "Favourable pairs: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = 6 out of 36.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "afe98254-406a-4d14-b034-6fa415fbc3e6",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "A fair die is thrown. P(prime number) =?",
-    "formula": "",
-    "options": [
-      "1/3",
-      "2/3",
-      "1/6",
-      "1/2"
-    ],
-    "answer": 3,
-    "explain": "Primes on die: 2,3,5 → 3 outcomes out of 6; P = 3/6 = 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d2ad5da1-61a7-47b6-aa80-76c6f976dfe3",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "Bernoulli trial requires each trial to have exactly how many outcomes?",
-    "formula": "",
-    "options": [
-      "2 (success/failure)",
-      "3",
-      "Infinite",
-      "n outcomes"
-    ],
-    "answer": 0,
-    "explain": "A Bernoulli trial has exactly two outcomes: success (p) and failure (q=1−p).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7d04fe12-7603-4887-b42f-1ab6b7964e8a",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "Conditional probability P(A|B) is defined only when?",
-    "formula": "P(B) > 0",
-    "options": [
-      "P(A∩B) > 0",
-      "P(A∪B) > 0",
-      "P(B) > 0",
-      "P(A) > 0"
-    ],
-    "answer": 2,
-    "explain": "P(A|B) = P(A∩B)/P(B) requires P(B) > 0 to avoid division by zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "641121f6-497d-4b8b-8c6b-3bd4cde5e5c5",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "For independent events A,B,C: P(A∩B∩C) =?",
-    "formula": "P(A)·P(B)·P(C)",
-    "options": [
-      "P(A)·P(B)·P(C)",
-      "P(A∪B∪C)−1",
-      "P(A)+P(B)+P(C)",
-      "P(A)·P(B|C)"
-    ],
-    "answer": 0,
-    "explain": "Mutual independence of A,B,C implies P(A∩B∩C) = P(A)·P(B)·P(C).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b8fe3ebb-8462-4899-b7ac-b041b5172bb6",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "52-card deck: P(drawing a face card)?",
-    "formula": "12/52 = 3/13",
-    "options": [
-      "1/4",
-      "1/13",
-      "3/13",
-      "4/13"
-    ],
-    "answer": 2,
-    "explain": "There are 12 face cards (J,Q,K in 4 suits) out of 52, so P = 12/52 = 3/13.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a8032001-5c13-4f88-a704-517cd1d10218",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "For B(n,p), which expression equals n·p·q?",
-    "formula": "npq = Variance",
-    "options": [
-      "Mean",
-      "Standard Deviation",
-      "Variance",
-      "E[X²]"
-    ],
-    "answer": 2,
-    "explain": "Variance of B(n,p) = npq where q = 1−p.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "efc55d02-726d-45a0-b8dd-1c00d50e7bf3",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "Two dice rolled. P(sum ≤ 3)?",
-    "formula": "",
-    "options": [
-      "2/36",
-      "4/36",
-      "5/36",
-      "3/36 = 1/12"
-    ],
-    "answer": 3,
-    "explain": "Sums ≤ 3: (1,1),(1,2),(2,1) → 3 outcomes out of 36, P = 1/12.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6949824e-720a-417d-942f-ebee088d1d1c",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "P(A∪B) in terms of P(A), P(B), P(A∩B)?",
-    "formula": "P(A)+P(B)−P(A∩B)",
-    "options": [
-      "P(A)+P(B)",
-      "P(A)·P(B)",
-      "P(A)−P(B)+P(A∩B)",
-      "P(A)+P(B)−P(A∩B)"
-    ],
-    "answer": 3,
-    "explain": "General addition rule: P(A∪B) = P(A)+P(B)−P(A∩B).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0572c758-9155-4b39-9fad-1af10e71420c",
-    "subject": "Mathematics",
-    "chapter": "Probability",
-    "topic": "Probability",
-    "prompt": "Probability of getting exactly 2 sixes in 6 rolls of a fair die?",
-    "formula": "C(6,2)(1/6)²(5/6)⁴",
-    "options": [
-      "C(6,2)(1/6)⁴(5/6)²",
-      "6·(1/6)²(5/6)⁵",
-      "C(6,2)(1/6)²(5/6)⁴",
-      "(1/6)²·(5/6)⁴"
-    ],
-    "answer": 2,
-    "explain": "Binomial probability: C(6,2)·(1/6)²·(5/6)⁴ with n=6, p=1/6, r=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "3e705bb1-81fe-4598-b71b-418ac907efb3",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition Theorem",
+  "prompt": "P(A∪B) equals?",
+  "formula": "P(A∪B) = P(A)+P(B)−P(A∩B)",
+  "options": [
+   "P(A)+P(B)",
+   "P(A)·P(B)",
+   "P(A)+P(B)+P(A∩B)",
+   "P(A)+P(B)−P(A∩B)"
+  ],
+  "answer": 3,
+  "explain": "Addition theorem of probability; subtract intersection to avoid double counting.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "80fc7826-1cdd-43bf-a082-9fb0585c9ffd",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence",
+  "prompt": "For independent events A and B, P(A∩B) =?",
+  "formula": "P(A∩B) = P(A)·P(B)",
+  "options": [
+   "P(A)+P(B)",
+   "P(A)·P(B|A)",
+   "P(A)·P(B)",
+   "P(A|B)"
+  ],
+  "answer": 2,
+  "explain": "Independence means joint probability equals product of individual probabilities.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e7c5631f-3a99-46dd-943c-b660f5f6372a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional Probability",
+  "prompt": "Conditional probability P(A|B) =?",
+  "formula": "P(A|B) = P(A∩B)/P(B)",
+  "options": [
+   "P(B)/P(A∩B)",
+   "P(A∩B)/P(B)",
+   "P(A)/P(B)",
+   "P(A∩B)/P(A)"
+  ],
+  "answer": 1,
+  "explain": "Conditional probability restricts sample space to event B.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d3ef3d8-7858-4756-ae83-6841f051da21",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' Theorem",
+  "prompt": "Bayes' theorem: P(Aᵢ|B) =?",
+  "formula": "P(Aᵢ|B) = P(Aᵢ)P(B|Aᵢ)/ΣP(Aⱼ)P(B|Aⱼ)",
+  "options": [
+   "P(Aᵢ)P(B)/ΣP(Aⱼ)",
+   "P(B|Aᵢ)/ΣP(B|Aⱼ)",
+   "P(B|Aᵢ)/P(Aᵢ)",
+   "P(Aᵢ)P(B|Aᵢ)/ΣP(Aⱼ)P(B|Aⱼ)"
+  ],
+  "answer": 3,
+  "explain": "Bayes' theorem uses prior probabilities and likelihoods to find posterior.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "368af061-4fc7-4eda-8db4-a3d4185eed31",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "Mean of Binomial distribution B(n,p) is?",
+  "formula": "μ = np",
+  "options": [
+   "√(npq)",
+   "np",
+   "npq",
+   "n/p"
+  ],
+  "answer": 1,
+  "explain": "Expected value of binomial random variable is np.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6e09e4fe-33d4-41a2-8776-ae51c14bf2ba",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "Variance of Binomial distribution B(n,p) is?",
+  "formula": "σ² = npq, q=1−p",
+  "options": [
+   "npq",
+   "nq",
+   "np²",
+   "np"
+  ],
+  "answer": 0,
+  "explain": "Variance of B(n,p) is npq where q = 1−p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bccfa1e0-a859-4e64-b689-066bf1061826",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "P(exactly r successes) in B(n,p) is?",
+  "formula": "P(X=r) = ⁿCᵣ pʳ qⁿ⁻ʳ",
+  "options": [
+   "ⁿCᵣ pʳ",
+   "ⁿCᵣ pⁿ⁻ʳ qʳ",
+   "pʳ qⁿ⁻ʳ",
+   "ⁿCᵣ pʳ qⁿ⁻ʳ"
+  ],
+  "answer": 3,
+  "explain": "Binomial PMF chooses r positions then multiplies success and failure probabilities.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "12be31d4-f46e-48e0-8046-fabf1d96ee8f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually Exclusive Events",
+  "prompt": "For mutually exclusive events, P(A∩B) =?",
+  "formula": "P(A∩B) = 0",
+  "options": [
+   "1",
+   "P(A)·P(B)",
+   "0",
+   "P(A)+P(B)"
+  ],
+  "answer": 2,
+  "explain": "Mutually exclusive events cannot occur simultaneously, so their intersection is empty.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1282f96c-bc59-4a1d-9742-f8f9b8100013",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Complement Rule",
+  "prompt": "P(A') (complement of A) equals?",
+  "formula": "P(A') = 1 − P(A)",
+  "options": [
+   "P(A)/P(S)",
+   "P(A)−1",
+   "1 − P(A)",
+   "1/P(A)"
+  ],
+  "answer": 2,
+  "explain": "Total probability is 1; complement covers all outcomes not in A.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "30df4f00-dc24-4117-88ae-17899b441e45",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Total Probability",
+  "prompt": "Total Probability theorem: P(B) =?",
+  "formula": "P(B) = ΣP(Aᵢ)·P(B|Aᵢ)",
+  "options": [
+   "P(A)·P(B)",
+   "ΣP(Aᵢ)·P(B|Aᵢ)",
+   "P(B|A)·P(A)+P(B)",
+   "ΣP(B|Aᵢ)"
+  ],
+  "answer": 1,
+  "explain": "Partition sample space into exhaustive mutually exclusive events Aᵢ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b4cd243-d490-4e02-a85f-ad0eed181be6",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Odds",
+  "prompt": "Odds in favour of event A are?",
+  "formula": "P(A) : P(A')",
+  "options": [
+   "P(A') : P(A)",
+   "1 : P(A)",
+   "P(A) : 1",
+   "P(A) : P(A')"
+  ],
+  "answer": 3,
+  "explain": "Odds in favour = ratio of probability of occurrence to non-occurrence.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "63381cf5-494d-4efe-b1fa-ddc36d071dee",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition Theorem",
+  "prompt": "P(A∪B∪C) for mutually exclusive A,B,C =?",
+  "formula": "P(A)+P(B)+P(C)",
+  "options": [
+   "P(A)P(B)P(C)",
+   "1−P(A')P(B')P(C')",
+   "P(A)+P(B)+P(C)−1",
+   "P(A)+P(B)+P(C)"
+  ],
+  "answer": 3,
+  "explain": "Mutually exclusive: all pairwise and triple intersections are empty.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fba058d1-9ebb-4d67-9043-bf2e928ede0b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "Standard deviation of B(n,p) is?",
+  "formula": "σ = √(npq)",
+  "options": [
+   "npq",
+   "√(npq)",
+   "np/q",
+   "√(np)"
+  ],
+  "answer": 1,
+  "explain": "Standard deviation is square root of variance npq.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fff47130-78ce-4d07-ac10-b51a363d552a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence vs Mutual Exclusivity",
+  "prompt": "Which condition makes A and B both independent AND mutually exclusive?",
+  "formula": "",
+  "options": [
+   "P(A∩B)=P(A)P(B)≠0",
+   "P(A)=P(B)",
+   "P(A)+P(B)=1",
+   "P(A)=0 or P(B)=0"
+  ],
+  "answer": 3,
+  "explain": "Independent+mutually exclusive ⇒ P(A)P(B)=0, so at least one probability is 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "45ede65e-a5b6-4641-9f68-4bc4373d3a60",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Axioms of Probability",
+  "prompt": "Probability of sample space S equals?",
+  "formula": "P(S) = 1",
+  "options": [
+   "∞",
+   "n (total outcomes)",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Axiom of probability: certain event (sample space) has probability 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0e6bd815-6f89-42cd-9d08-a585b9b4ab4a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Classical Probability",
+  "prompt": "Classical probability: equally likely outcomes, P(A) =?",
+  "formula": "P(A) = n(A)/n(S)",
+  "options": [
+   "n(A)·n(S)",
+   "n(A)/n(S)",
+   "n(S)/n(A)",
+   "1/n(A)"
+  ],
+  "answer": 1,
+  "explain": "Classical definition: favourable outcomes divided by total equally likely outcomes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ca79e5ba-c522-44d6-80c7-561fd9dba1f5",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "P(B|A) in terms of P(A|B), P(A), P(B) by Bayes is?",
+  "formula": "P(B|A)=P(A|B)·P(B)/P(A)",
+  "options": [
+   "P(A)·P(B)/P(A|B)",
+   "P(A|B)·P(A)/P(B)",
+   "P(A|B)·P(B)/P(A)",
+   "P(A|B)/P(B)"
+  ],
+  "answer": 2,
+  "explain": "Direct application of Bayes' theorem with two events.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7d011d7a-a3c1-42f9-831c-fd1261393a1f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Multiplication theorem of probability",
+  "prompt": "P(A∩B) in terms of P(A), P(B|A) =?",
+  "formula": "P(A∩B)=P(A)·P(B|A)",
+  "options": [
+   "P(A)/P(B|A)",
+   "P(B)·P(A|B)+P(A)",
+   "P(A)·P(B|A)",
+   "P(A)+P(B|A)"
+  ],
+  "answer": 2,
+  "explain": "Multiplication theorem of probability: P(A∩B)=P(A)·P(B|A).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b268631d-89f0-4095-9b37-65828aec7b06",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "If A and B are mutually exclusive, P(A|B) =?",
+  "formula": "",
+  "options": [
+   "P(B)",
+   "1",
+   "0",
+   "P(A)"
+  ],
+  "answer": 2,
+  "explain": "Mutually exclusive ⟹ A∩B=∅, so P(A|B)=P(A∩B)/P(B)=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8a693bae-aba0-4d54-9c2a-1d2e0682a4ae",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Classical probability of an event",
+  "prompt": "Odds against event A with P(A)=p are?",
+  "formula": "q:p where q=1−p",
+  "options": [
+   "p : (1−p)",
+   "1 : p",
+   "(1−p) : p",
+   "p : 1"
+  ],
+  "answer": 2,
+  "explain": "Odds against = unfavourable : favourable = (1−p) : p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ccc9a795-5a78-47fc-8218-02bcf15a408e",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Repeated independent trials (dice, coins)",
+  "prompt": "P(exactly 0 successes) in B(n,p) =?",
+  "formula": "P(X=0)=qⁿ",
+  "options": [
+   "(1−p)ⁿ⁻¹·p",
+   "1−pⁿ",
+   "pⁿ",
+   "qⁿ"
+  ],
+  "answer": 3,
+  "explain": "P(X=0)=C(n,0)·p⁰·qⁿ = qⁿ where q=1−p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "97978b26-d185-4733-948a-c3139c062260",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "If P(A∪B)=1 and A,B mutually exclusive, then P(A)+P(B)=?",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "1",
+   "P(A)·P(B)"
+  ],
+  "answer": 2,
+  "explain": "Mutually exclusive ⟹ P(A∪B)=P(A)+P(B)=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bff0f885-52d3-4ec6-a070-f6a39f4016aa",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Complementary events & De Morgan's laws",
+  "prompt": "P(A'∪B') equals (De Morgan's law)?",
+  "formula": "P(A'∪B')=1−P(A∩B)",
+  "options": [
+   "P(A∩B)",
+   "1−P(A∩B)",
+   "P(A')+P(B')",
+   "1−P(A∪B)"
+  ],
+  "answer": 1,
+  "explain": "By De Morgan: A'∪B'=(A∩B)', so probability = 1−P(A∩B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0f1e798a-1264-452b-b03b-e5fb7c6bf59d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Variance of a random variable",
+  "prompt": "For B(n,p), relation between mean (μ) and variance (σ²) is?",
+  "formula": "σ²=μ·q = μ(1−p)",
+  "options": [
+   "σ²= μ(1−p)",
+   "σ²= μ·p",
+   "σ²= μ/p",
+   "σ²= μ²(1−p)"
+  ],
+  "answer": 0,
+  "explain": "Mean=np, Variance=npq=np·(1−p)=μ·q, so variance < mean always.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21097625-8b05-4cc7-91a2-b6ad80f5ef47",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "Which inequality always holds for P(A∩B)?",
+  "formula": "P(A∩B) ≥ P(A)+P(B)−1",
+  "options": [
+   "P(A∩B) ≤ P(A)−P(B)",
+   "P(A∩B) = P(A)·P(B)",
+   "P(A∩B) ≥ P(A)+P(B)−1",
+   "P(A∩B) ≥ P(A∪B)"
+  ],
+  "answer": 2,
+  "explain": "Bonferroni inequality: P(A∩B)≥P(A)+P(B)−1 (since P(A∪B)≤1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "91a811cf-c9d2-44bc-9f45-d1f16efa968c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Repeated independent trials (dice, coins)",
+  "prompt": "For B(n,p): P(X=r+1)/P(X=r) =?",
+  "formula": "(n−r)p / [(r+1)q]",
+  "options": [
+   "np/q",
+   "p/q",
+   "(r+1)q/[(n−r)p]",
+   "(n−r)p/[(r+1)q]"
+  ],
+  "answer": 3,
+  "explain": "Recurrence relation for binomial: ratio of consecutive terms = (n−r)p/[(r+1)(1−p)].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7e2317ce-af1d-4e23-a89a-d51ca2c33304",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent Events",
+  "prompt": "For independent A,B: P(A∩B') =?",
+  "formula": "P(A)·[1−P(B)]",
+  "options": [
+   "P(A)+P(B')−1",
+   "P(A)/P(B')",
+   "P(A)·[1−P(B)]",
+   "P(A)−P(A∩B)/(P(B))"
+  ],
+  "answer": 2,
+  "explain": "Independence extends to complements: P(A∩B')=P(A)·P(B')=P(A)[1−P(B)].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3e5a5109-316f-4aab-8526-3cba5b8e9447",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability Inequalities",
+  "prompt": "P(A∩B) ≥ ? (Bonferroni inequality lower bound)",
+  "formula": "P(A)+P(B)−1",
+  "options": [
+   "0",
+   "P(A)·P(B)",
+   "P(A)+P(B)−1",
+   "P(A)−P(B)"
+  ],
+  "answer": 2,
+  "explain": "Bonferroni: P(A∩B) ≥ P(A)+P(B)−1, since P(A∪B) ≤ 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "85c84605-aa7a-443b-be41-cd39632d51a4",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent Events",
+  "prompt": "If A and B independent, A and B' are?",
+  "formula": "",
+  "options": [
+   "Exhaustive",
+   "Mutually exclusive",
+   "Also independent",
+   "Dependent"
+  ],
+  "answer": 2,
+  "explain": "Independence of A,B implies A is independent of B', B' of A, and A' of B'.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec4abd9d-e856-42ed-88f9-b66acb74130c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "For Binomial B(n,p), E[X(X−1)] =?",
+  "formula": "n(n−1)p²",
+  "options": [
+   "n²p²",
+   "n(n−1)p²",
+   "n(n−1)pq",
+   "np(1−p)"
+  ],
+  "answer": 1,
+  "explain": "E[X(X−1)] = n(n−1)p² is the second factorial moment of the binomial.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2ea7ee86-837e-4e8a-afae-4e469b37a67e",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "For B(n,p), variance is always __ the mean?",
+  "formula": "σ²= npq < np",
+  "options": [
+   "Unrelated to",
+   "Less than",
+   "Greater than",
+   "Equal to"
+  ],
+  "answer": 1,
+  "explain": "Variance=npq=np·(1−p) < np=mean since 0<p<1, so variance < mean.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3e742c1e-d199-4321-9a0b-ee9edd8f5a3d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional Probability",
+  "prompt": "P(B'|A) in terms of P(B|A) is?",
+  "formula": "1 − P(B|A)",
+  "options": [
+   "1 − P(A|B)",
+   "1 − P(B|A)",
+   "P(A|B)/P(B)",
+   "P(B|A')"
+  ],
+  "answer": 1,
+  "explain": "Complementary rule holds within conditional: P(B'|A)=1−P(B|A).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bedc9bff-f9b4-439e-8209-a150a5af5f0c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability Inequalities",
+  "prompt": "If P(A)=p, the maximum value of P(A∩B) is?",
+  "formula": "min(P(A),P(B))",
+  "options": [
+   "P(A)+P(B)",
+   "P(A)·P(B)",
+   "min(P(A),P(B))",
+   "P(A)/P(B)"
+  ],
+  "answer": 2,
+  "explain": "P(A∩B) ≤ min(P(A),P(B)); maximum achieved when one event is subset of other.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7601895e-f39a-4116-b98b-3e4a543cc293",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' Theorem",
+  "prompt": "In Bayes' theorem, P(B|Aᵢ) are called?",
+  "formula": "",
+  "options": [
+   "Prior probabilities",
+   "Marginal probabilities",
+   "Likelihoods",
+   "Posterior probabilities"
+  ],
+  "answer": 2,
+  "explain": "P(B|Aᵢ) are likelihoods; P(Aᵢ) are priors; P(Aᵢ|B) are posteriors in Bayes' theorem.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8e7e1c11-19b4-4b3b-b775-1877a6f55c34",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Total Probability",
+  "prompt": "If A₁,A₂,…,Aₙ partition S and P(B)>0, then ΣP(B|Aᵢ)P(Aᵢ)=?",
+  "formula": "P(B)",
+  "options": [
+   "P(B)",
+   "1",
+   "ΣP(Aᵢ)",
+   "P(B)/n"
+  ],
+  "answer": 0,
+  "explain": "This is the Total Probability Theorem: P(B)=Σ P(B|Aᵢ)P(Aᵢ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36b19257-056f-4b8a-b4b2-6640ae058f79",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional Probability",
+  "prompt": "P(A'|B) in terms of P(A|B) is?",
+  "formula": "P(A'|B) = 1 − P(A|B)",
+  "options": [
+   "1 − P(A|B)",
+   "1 − P(A)",
+   "P(B|A')",
+   "P(A|B)"
+  ],
+  "answer": 0,
+  "explain": "Complement rule applies within conditional probability: P(A'|B)=1−P(A|B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "01107b7d-2ee2-48aa-982b-439c9ddf17b0",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "For Binomial B(n,p), E[X(X−1)(X−2)] =?",
+  "formula": "n(n−1)(n−2)p³",
+  "options": [
+   "n(n−1)(n−2)p²q",
+   "n³p³",
+   "n(n−1)(n−2)p³",
+   "n(n−1)p²"
+  ],
+  "answer": 2,
+  "explain": "Third factorial moment of Binomial: E[X(X−1)(X−2)] = n(n−1)(n−2)p³.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "671926ec-73fb-42cb-b970-e32530084497",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Classical Probability",
+  "prompt": "Probability that a card drawn from 52 is a red king?",
+  "formula": "",
+  "options": [
+   "1/13",
+   "1/52",
+   "1/26",
+   "2/13"
+  ],
+  "answer": 2,
+  "explain": "There are 2 red kings in 52 cards, so P = 2/52 = 1/26.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9e473895-8cf5-40b3-87ae-830977f3848b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Multiplication Theorem",
+  "prompt": "Multiplication theorem for dependent events: P(A∩B∩C) =?",
+  "formula": "P(A)·P(B|A)·P(C|A∩B)",
+  "options": [
+   "P(A∩B)·P(C)",
+   "P(A)·P(B|A)·P(C|A∩B)",
+   "P(A|B)·P(B|C)·P(C)",
+   "P(A)·P(B)·P(C)"
+  ],
+  "answer": 1,
+  "explain": "Chain rule: P(A∩B∩C)=P(A)·P(B|A)·P(C|A∩B) for any events.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c949946a-c594-46a1-ae7e-78d0a5643bb6",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Set Relations in Probability",
+  "prompt": "If P(A)=0.4 and A⊂B, what is P(B'∩A)?",
+  "formula": "",
+  "options": [
+   "0",
+   "P(A)−P(B)",
+   "P(B')",
+   "0.4"
+  ],
+  "answer": 0,
+  "explain": "If A⊂B, every outcome of A is in B, so A∩B'=∅ and P(A∩B')=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a765caee-2e73-40b0-934d-a026687fef1c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Total Probability",
+  "prompt": "Which formula gives P(B) using Bayes' prior info?",
+  "formula": "ΣP(B|Aᵢ)P(Aᵢ)",
+  "options": [
+   "P(B|A)·P(A)",
+   "ΣP(Aᵢ|B)",
+   "P(A|B)/P(A)",
+   "ΣP(B|Aᵢ)P(Aᵢ)"
+  ],
+  "answer": 3,
+  "explain": "Total Probability Theorem: P(B)=ΣP(B|Aᵢ)P(Aᵢ) over exhaustive partition {Aᵢ}.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b9f67e8a-50f8-49d9-a917-e14401c77de8",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Binomial Distribution",
+  "prompt": "For Binomial B(n,p), max value of variance npq for fixed n occurs at?",
+  "formula": "",
+  "options": [
+   "p = 1",
+   "p = 1/4",
+   "p = 1/2",
+   "p = 1/3"
+  ],
+  "answer": 2,
+  "explain": "npq = np(1−p) is maximised at p=1/2, giving variance = n/4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ef8a299-1944-428c-a8a0-1a519fba3aeb",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independence",
+  "prompt": "If A and B are independent, P(A∪B) = 1−P(A')P(B'). This equals?",
+  "formula": "P(A)+P(B)−P(A)P(B)",
+  "options": [
+   "1−P(A)−P(B)",
+   "P(A)+P(B)",
+   "P(A)·P(B)",
+   "P(A)+P(B)−P(A)P(B)"
+  ],
+  "answer": 3,
+  "explain": "For independent events P(A∩B)=P(A)P(B), so P(A∪B)=P(A)+P(B)−P(A)P(B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "df07959c-218c-4af6-9850-de4cd7c88edd",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bounds on Probability",
+  "prompt": "P(A∩B) ≤ ? (maximum possible value)",
+  "formula": "min(P(A), P(B))",
+  "options": [
+   "min(P(A), P(B))",
+   "P(A)+P(B)",
+   "max(P(A),P(B))",
+   "P(A)·P(B)"
+  ],
+  "answer": 0,
+  "explain": "A∩B⊂A and A∩B⊂B, so P(A∩B)≤P(A) and P(A∩B)≤P(B), i.e., ≤min(P(A),P(B)).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "66b7f3d4-4de4-4439-ae10-7998e34594cd",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Multiplication Theorem",
+  "prompt": "P(A∩B) = P(A)·P(B|A) = P(B)·P(A|B). This is called?",
+  "formula": "",
+  "options": [
+   "Total probability theorem",
+   "Multiplication theorem",
+   "Addition theorem",
+   "Bayes' theorem"
+  ],
+  "answer": 1,
+  "explain": "The general Multiplication Theorem expresses P(A∩B) using conditional probabilities.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b2220084-5c9a-4446-ab25-feeb7796650e",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Variance of a random variable",
+  "prompt": "For B(n,p), E[X²] − (E[X])² equals?",
+  "formula": "Var(X) = npq",
+  "options": [
+   "npq",
+   "npq²",
+   "np²q",
+   "n²p²q"
+  ],
+  "answer": 0,
+  "explain": "Variance of Binomial = npq = np(1−p); this is the definition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "558e0ea5-2101-484e-a098-599484be9ea8",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "P(A∩B) = 0 and A,B independent ⇒ at least one of P(A),P(B) is?",
+  "formula": "",
+  "options": [
+   "One",
+   "Cannot determine",
+   "0.5",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "For independent events P(A∩B)=P(A)P(B)=0 ⟹ P(A)=0 or P(B)=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "818cd88a-5740-49b4-994e-8814e6ebc5a6",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Multiplication theorem of probability",
+  "prompt": "P(A∩B) in terms of conditional probability is P(A|B)·?",
+  "formula": "P(A|B)·P(B)",
+  "options": [
+   "P(B|A)",
+   "P(A)",
+   "P(A∪B)",
+   "P(B)"
+  ],
+  "answer": 3,
+  "explain": "Multiplication rule: P(A∩B) = P(A|B)·P(B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "153ad3d9-a505-49ff-bc62-f42b9e292bbb",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "For independent events, P(A∪B) = P(A)+P(B)−?",
+  "formula": "P(A)·P(B)",
+  "options": [
+   "P(B|A)",
+   "P(A)+P(B)",
+   "P(A|B)",
+   "P(A)·P(B)"
+  ],
+  "answer": 3,
+  "explain": "P(A∪B)=P(A)+P(B)−P(A∩B)=P(A)+P(B)−P(A)P(B) for independent events.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9f8222b0-e141-4f74-aa3b-d1de1948067f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability via counting (P&C based)",
+  "prompt": "Two dice rolled. P(sum = 7) =?",
+  "formula": "6/36",
+  "options": [
+   "5/36",
+   "7/36",
+   "6/36",
+   "4/36"
+  ],
+  "answer": 2,
+  "explain": "Favourable pairs: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) = 6 out of 36.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "afe98254-406a-4d14-b034-6fa415fbc3e6",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Classical probability of an event",
+  "prompt": "A fair die is thrown. P(prime number) =?",
+  "formula": "",
+  "options": [
+   "1/3",
+   "2/3",
+   "1/6",
+   "1/2"
+  ],
+  "answer": 3,
+  "explain": "Primes on die: 2,3,5 → 3 outcomes out of 6; P = 3/6 = 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d2ad5da1-61a7-47b6-aa80-76c6f976dfe3",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Repeated independent trials (dice, coins)",
+  "prompt": "Bernoulli trial requires each trial to have exactly how many outcomes?",
+  "formula": "",
+  "options": [
+   "2 (success/failure)",
+   "3",
+   "Infinite",
+   "n outcomes"
+  ],
+  "answer": 0,
+  "explain": "A Bernoulli trial has exactly two outcomes: success (p) and failure (q=1−p).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7d04fe12-7603-4887-b42f-1ab6b7964e8a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Conditional probability P(A|B) is defined only when?",
+  "formula": "P(B) > 0",
+  "options": [
+   "P(A∩B) > 0",
+   "P(A∪B) > 0",
+   "P(B) > 0",
+   "P(A) > 0"
+  ],
+  "answer": 2,
+  "explain": "P(A|B) = P(A∩B)/P(B) requires P(B) > 0 to avoid division by zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "641121f6-497d-4b8b-8c6b-3bd4cde5e5c5",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "For independent events A,B,C: P(A∩B∩C) =?",
+  "formula": "P(A)·P(B)·P(C)",
+  "options": [
+   "P(A)·P(B)·P(C)",
+   "P(A∪B∪C)−1",
+   "P(A)+P(B)+P(C)",
+   "P(A)·P(B|C)"
+  ],
+  "answer": 0,
+  "explain": "Mutual independence of A,B,C implies P(A∩B∩C) = P(A)·P(B)·P(C).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b8fe3ebb-8462-4899-b7ac-b041b5172bb6",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Classical probability of an event",
+  "prompt": "52-card deck: P(drawing a face card)?",
+  "formula": "12/52 = 3/13",
+  "options": [
+   "1/4",
+   "1/13",
+   "3/13",
+   "4/13"
+  ],
+  "answer": 2,
+  "explain": "There are 12 face cards (J,Q,K in 4 suits) out of 52, so P = 12/52 = 3/13.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a8032001-5c13-4f88-a704-517cd1d10218",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Variance of a random variable",
+  "prompt": "For B(n,p), which expression equals n·p·q?",
+  "formula": "npq = Variance",
+  "options": [
+   "Mean",
+   "Standard Deviation",
+   "Variance",
+   "E[X²]"
+  ],
+  "answer": 2,
+  "explain": "Variance of B(n,p) = npq where q = 1−p.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "efc55d02-726d-45a0-b8dd-1c00d50e7bf3",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Probability via counting (P&C based)",
+  "prompt": "Two dice rolled. P(sum ≤ 3)?",
+  "formula": "",
+  "options": [
+   "2/36",
+   "4/36",
+   "5/36",
+   "3/36 = 1/12"
+  ],
+  "answer": 3,
+  "explain": "Sums ≤ 3: (1,1),(1,2),(2,1) → 3 outcomes out of 36, P = 1/12.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6949824e-720a-417d-942f-ebee088d1d1c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "P(A∪B) in terms of P(A), P(B), P(A∩B)?",
+  "formula": "P(A)+P(B)−P(A∩B)",
+  "options": [
+   "P(A)+P(B)",
+   "P(A)·P(B)",
+   "P(A)−P(B)+P(A∩B)",
+   "P(A)+P(B)−P(A∩B)"
+  ],
+  "answer": 3,
+  "explain": "General addition rule: P(A∪B) = P(A)+P(B)−P(A∩B).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0572c758-9155-4b39-9fad-1af10e71420c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Repeated independent trials (dice, coins)",
+  "prompt": "Probability of getting exactly 2 sixes in 6 rolls of a fair die?",
+  "formula": "C(6,2)(1/6)²(5/6)⁴",
+  "options": [
+   "C(6,2)(1/6)⁴(5/6)²",
+   "6·(1/6)²(5/6)⁵",
+   "C(6,2)(1/6)²(5/6)⁴",
+   "(1/6)²·(5/6)⁴"
+  ],
+  "answer": 2,
+  "explain": "Binomial probability: C(6,2)·(1/6)²·(5/6)⁴ with n=6, p=1/6, r=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f66e050e-8500-4b9e-ae48-74b9284f632c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random experiments, sample space, events",
+  "prompt": "Three coins are tossed. The complement of the event 'at least one head' is:",
+  "formula": "",
+  "options": [
+   "At least one tail",
+   "Exactly one tail",
+   "No head (all tails)",
+   "Exactly one head"
+  ],
+  "answer": 2,
+  "explain": "The complement of 'at least one head' is 'no head', i.e. only TTT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "52ef3850-4d39-4fef-a5ca-0d7267bb0990",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random experiments, sample space, events",
+  "prompt": "Events E₁, E₂, …, Eₖ are called exhaustive if:",
+  "formula": "E₁ ∪ E₂ ∪ … ∪ Eₖ = S",
+  "options": [
+   "Their intersection is ∅",
+   "Each has probability 1/k",
+   "Their union is S",
+   "Their union is ∅"
+  ],
+  "answer": 2,
+  "explain": "Exhaustive means at least one of the events must occur, so their union is the whole sample space S.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fdcd7eab-acf2-4558-a674-cd7e73d09e81",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random experiments, sample space, events",
+  "prompt": "A pair of dice is thrown once. The number of elements in the sample space is:",
+  "formula": "n(S) = 6 × 6",
+  "options": [
+   "21",
+   "36",
+   "12",
+   "30"
+  ],
+  "answer": 1,
+  "explain": "Ordered pairs (a,b) with a,b ∈ {1,…,6} give 6² = 36 outcomes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "59ba141b-6654-4949-990d-16580448a1a2",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "If A and B are exhaustive events, then P(A'∩B') equals:",
+  "formula": "",
+  "options": [
+   "P(A)P(B)",
+   "0",
+   "1 − P(A∩B)",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "A∪B=S, so (A∪B)' = A'∩B' = ∅ by De Morgan.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0410c7ac-4e31-48d0-aa0b-9f9993a2720d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "Events A∩B and A∩B' are always:",
+  "formula": "",
+  "options": [
+   "Mutually exclusive with union S",
+   "Mutually exclusive with union A",
+   "Exhaustive with union S",
+   "Independent with union B"
+  ],
+  "answer": 1,
+  "explain": "(A∩B)∩(A∩B') = ∅ and (A∩B)∪(A∩B') = A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "12b620b2-0b80-463f-b943-fc1c88601fed",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "Three coins tossed: 'at least two heads' and 'at most one head' are:",
+  "formula": "",
+  "options": [
+   "Mutually exclusive and exhaustive",
+   "Mutually exclusive only",
+   "Exhaustive only",
+   "Independent"
+  ],
+  "answer": 0,
+  "explain": "Number of heads ≥2 or ≤1 covers all outcomes with no overlap.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f54db2a4-4d9f-449b-8864-1ff9b47dd189",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "If P(A)=0.3, P(B)=0.5 and A, B are mutually exclusive, P(A'∩B') equals:",
+  "formula": "P(A'∩B') = 1 − P(A∪B)",
+  "options": [
+   "0.8",
+   "0.35",
+   "0.15",
+   "0.2"
+  ],
+  "answer": 3,
+  "explain": "P(A∪B)=0.3+0.5=0.8, so P(A'∩B') = 1−0.8 = 0.2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9b43ddcb-78f9-4c4a-8fc6-19b781df96a5",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "If A and B are exhaustive events, then P(A)+P(B) satisfies:",
+  "formula": "P(A)+P(B) = 1 + P(A∩B)",
+  "options": [
+   "Exactly 1",
+   "Exactly 2",
+   "At most 1",
+   "At least 1"
+  ],
+  "answer": 3,
+  "explain": "P(A∪B)=1 gives P(A)+P(B)=1+P(A∩B) ≥ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55d3ab9b-dea2-41cc-afd3-fa18c3ec717e",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "Which pair (P(A), P(B)) can belong to mutually exclusive events A and B?",
+  "formula": "P(A)+P(B) ≤ 1",
+  "options": [
+   "(0.4, 0.7)",
+   "(0.6, 0.5)",
+   "(0.8, 0.3)",
+   "(0.3, 0.6)"
+  ],
+  "answer": 3,
+  "explain": "Mutually exclusive means P(A∪B)=P(A)+P(B) ≤ 1; only 0.3+0.6=0.9 works.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a57841e6-09bf-4601-aae7-f98ffafe6189",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "The minimum possible value of P(A∪B) is?",
+  "formula": "",
+  "options": [
+   "P(A)·P(B)",
+   "P(A)+P(B)−1",
+   "min{P(A), P(B)}",
+   "max{P(A), P(B)}"
+  ],
+  "answer": 3,
+  "explain": "A∪B contains both A and B, so P(A∪B) ≥ max{P(A), P(B)}.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b717b3c-59fa-4737-ad83-d611eac4013e",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "P(exactly one of A, B occurs) equals?",
+  "formula": "P(A)+P(B)−2P(A∩B)",
+  "options": [
+   "P(A)+P(B)−2P(A∩B)",
+   "P(A)+P(B)−P(A∩B)−1",
+   "P(A)+P(B)−P(A∩B)",
+   "P(A∪B)+P(A∩B)"
+  ],
+  "answer": 0,
+  "explain": "P(A∩B′)+P(A′∩B) = P(A)+P(B)−2P(A∩B).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1e2c6615-7aa9-4555-9488-53658aad98f7",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "P(A∪B∪C) in the three-event addition theorem has the term P(A∩B∩C) with which sign?",
+  "formula": "P(A∪B∪C) = ΣP(A) − ΣP(A∩B) + P(A∩B∩C)",
+  "options": [
+   "Plus only if independent",
+   "Zero coefficient",
+   "Minus",
+   "Plus"
+  ],
+  "answer": 3,
+  "explain": "Inclusion–exclusion: singles +, pairs −, triple intersection +.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f8adac7b-6759-467a-9d7a-664869b3b59d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "P(at least one of A, B occurs) − P(exactly one occurs) equals?",
+  "formula": "",
+  "options": [
+   "P(A)+P(B)",
+   "1 − P(A∩B)",
+   "2P(A∩B)",
+   "P(A∩B)"
+  ],
+  "answer": 3,
+  "explain": "P(A∪B)−[P(A)+P(B)−2P(A∩B)] = P(A∩B).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8f1b511a-bb5c-40a8-9d99-2424a9759cbf",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "For any two events A and B, P(A ∩ B′) equals?",
+  "formula": "P(A∩B′) = P(A) − P(A∩B)",
+  "options": [
+   "P(A) − P(B)",
+   "1 − P(A) − P(B)",
+   "P(A) + P(B) − P(A∩B)",
+   "P(A) − P(A∩B)"
+  ],
+  "answer": 3,
+  "explain": "A splits into A∩B and A∩B′ (disjoint), so P(A∩B′) = P(A) − P(A∩B).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea7936e5-2c25-48a7-822b-02cf82d266f6",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Addition theorem of probability",
+  "prompt": "Boole's inequality: P(A∪B∪C) is always at most?",
+  "formula": "P(A∪B∪C) ≤ P(A)+P(B)+P(C)",
+  "options": [
+   "max{P(A), P(B), P(C)}",
+   "1 − P(A)P(B)P(C)",
+   "P(A)+P(B)+P(C) − 1",
+   "P(A)+P(B)+P(C)"
+  ],
+  "answer": 3,
+  "explain": "Subtracting the overlaps only reduces the sum, so the union is ≤ the sum of the individual probabilities.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be90c603-eecd-431f-8193-16ca3c21ae20",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "If B ⊂ A and P(B) > 0, then P(A|B) equals?",
+  "formula": "B ⊂ A ⇒ A∩B = B",
+  "options": [
+   "P(B)/P(A)",
+   "P(A)",
+   "1",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "A∩B = B, so P(A|B) = P(B)/P(B) = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8053965c-26bb-470c-b334-538835af4ce5",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Which set of conditions defines a partition E₁,…,Eₙ of the sample space for Bayes' theorem?",
+  "formula": "",
+  "options": [
+   "Union = S, P(Eᵢ∩Eⱼ) = P(Eᵢ)P(Eⱼ)",
+   "Pairwise independent, union = S",
+   "Pairwise disjoint, union = S, P(Eᵢ) > 0",
+   "Pairwise disjoint, P(Eᵢ)=1/n each"
+  ],
+  "answer": 2,
+  "explain": "Events must be mutually exclusive, exhaustive and each of nonzero probability.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de20823e-2ba6-4a92-96b7-b32e600c5a2f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Three fair coins are tossed. Given at least two heads, P(all three heads) = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1/3",
+   "1/4",
+   "1/8"
+  ],
+  "answer": 2,
+  "explain": "At least two heads: HHH, HHT, HTH, THH, so 4 outcomes. Favourable: 1, giving 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "49c2675c-2852-4f69-9d82-451cb41dbc10",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Two fair dice are thrown. Given the sum is 7, P(at least one die shows 3) = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1/6",
+   "2/3",
+   "1/3"
+  ],
+  "answer": 3,
+  "explain": "Sum 7 has 6 outcomes; those containing a 3 are (3,4) and (4,3), so 2/6 = 1/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6bb64ead-0cd6-47ab-83ad-9f630fe57a49",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "For 0 < P(B) < 1, if P(A|B) = P(A|B′), then A and B are:",
+  "formula": "",
+  "options": [
+   "Exhaustive",
+   "Complementary",
+   "Mutually exclusive",
+   "Independent"
+  ],
+  "answer": 3,
+  "explain": "P(A) = P(B)P(A|B) + P(B′)P(A|B′) = P(A|B), so P(A∩B) = P(A)P(B): independent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36e33a57-2392-4553-8d00-bb7b2a6f45f5",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Multiplication theorem of probability",
+  "prompt": "Urn: 3 red, 2 black. Two balls drawn without replacement. P(both red)?",
+  "formula": "3/5 · 2/4",
+  "options": [
+   "3/10",
+   "9/25",
+   "2/5",
+   "3/5"
+  ],
+  "answer": 0,
+  "explain": "P(R)·P(R|R) = (3/5)(2/4) = 3/10; without replacement the events are dependent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8a6fc549-2435-49e4-86d9-269f27308936",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Multiplication theorem of probability",
+  "prompt": "Three events are pairwise independent. Are they necessarily mutually independent?",
+  "formula": "",
+  "options": [
+   "Yes, if all have equal probability",
+   "No; they must be exclusive",
+   "Yes, always",
+   "No; need P(A∩B∩C)=P(A)P(B)P(C) too"
+  ],
+  "answer": 3,
+  "explain": "Mutual independence needs the triple product condition in addition to the three pair conditions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c1090a0b-2886-4ef7-b8ba-e8b9d2b535fc",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Multiplication theorem of probability",
+  "prompt": "Number of conditions needed for mutual independence of 3 events A, B, C?",
+  "formula": "2ⁿ − n − 1",
+  "options": [
+   "4",
+   "3",
+   "8",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "2³ − 3 − 1 = 4: three pairwise product conditions plus P(A∩B∩C)=P(A)P(B)P(C).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2229c092-e542-420c-be3d-e9066425ae9f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "Three events are mutually independent. Which set of conditions must hold?",
+  "formula": "",
+  "options": [
+   "Only the three pairwise product rules",
+   "A, B, C pairwise disjoint",
+   "Only P(A∩B∩C)=P(A)P(B)P(C)",
+   "Pairwise and triple product rules all hold"
+  ],
+  "answer": 3,
+  "explain": "Mutual independence needs all pairwise rules plus the triple product rule.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83201941-cc89-477b-a22d-ac8f4e17b450",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Theorem of total probability",
+  "prompt": "Which two properties must the events A₁,…,Aₙ have to form a partition of S for total probability?",
+  "formula": "",
+  "options": [
+   "Independent and exhaustive",
+   "Mutually exclusive and exhaustive",
+   "Equally likely and independent",
+   "Independent and mutually exclusive"
+  ],
+  "answer": 1,
+  "explain": "The Aᵢ must be pairwise disjoint with union S, with P(Aᵢ)>0. They are not independent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "df6ae863-8e21-4ce3-bbb4-57eb1979f484",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Theorem of total probability",
+  "prompt": "In total probability, if P(B|Aᵢ)=c for every i in the partition, then P(B) = ?",
+  "formula": "",
+  "options": [
+   "c/n",
+   "c",
+   "nc",
+   "c²"
+  ],
+  "answer": 1,
+  "explain": "P(B)=Σc·P(Aᵢ)=c·ΣP(Aᵢ)=c.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e7d453c1-f946-4a7d-b0a9-d7d9c8899d22",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Theorem of total probability",
+  "prompt": "P(B) from the total probability theorem always lies where relative to the P(B|Aᵢ) values?",
+  "formula": "",
+  "options": [
+   "Between the minimum and maximum",
+   "Above their maximum",
+   "Below their minimum",
+   "Equal to their mean"
+  ],
+  "answer": 0,
+  "explain": "P(B) is a weighted average of the P(B|Aᵢ), with weights P(Aᵢ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02486739-f2e6-4f27-80db-4910164a9a55",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Theorem of total probability",
+  "prompt": "On a probability tree, P(B) is found by doing what with the branches ending in B?",
+  "formula": "",
+  "options": [
+   "Multiplying all path products",
+   "Taking the largest path product",
+   "Adding all branch probabilities",
+   "Adding the path products"
+  ],
+  "answer": 3,
+  "explain": "Multiply along each path (multiplication rule) and add over the paths that end in B.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "70fa7ebf-fe23-4207-b4bb-99d7656da720",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Theorem of total probability",
+  "prompt": "A bag has 3 red and 2 blue balls. Two are drawn without replacement. P(2nd is red) = ?",
+  "formula": "",
+  "options": [
+   "3/4",
+   "1/2",
+   "2/5",
+   "3/5"
+  ],
+  "answer": 3,
+  "explain": "Total probability gives 3/5·1/2 + 2/5·3/4 = 3/5, the same as for the first draw by symmetry.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87e358b3-122f-489e-b807-7cf5e3be2a06",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Theorem of total probability",
+  "prompt": "Urn I has 1 white, 1 black ball; urn II has 2 white balls. An urn is chosen at random. P(white) = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "3/4",
+   "1/4",
+   "2/3"
+  ],
+  "answer": 1,
+  "explain": "P(W) = ½·½ + ½·1 = 3/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "01f45372-df18-4de3-ae67-07de8021a079",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Theorem of total probability",
+  "prompt": "For a partition A₁,…,Aₙ of S and P(B)>0, what is the value of ΣP(Aᵢ|B), summed over i = 1 to n?",
+  "formula": "ΣP(Aᵢ|B) = ΣP(Aᵢ∩B)/P(B)",
+  "options": [
+   "n",
+   "ΣP(B|Aᵢ)",
+   "P(B)",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "The sets Aᵢ∩B partition B, so ΣP(Aᵢ∩B)=P(B). Dividing by P(B) gives 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "37f4a270-4675-4acb-beeb-c4978adb03bc",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "If all priors P(Aᵢ) are equal, P(Aₖ|B) is proportional to?",
+  "formula": "",
+  "options": [
+   "P(B|Aₖ)",
+   "P(Aₖ)²",
+   "P(Aₖ|B)²",
+   "1/P(B|Aₖ)"
+  ],
+  "answer": 0,
+  "explain": "Equal priors cancel: P(Aₖ|B) = P(B|Aₖ)/ΣP(B|Aⱼ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2f683a4c-ea2b-4477-8757-97bac4cd3b8b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "Bag I: 3 red, 1 black; Bag II: 1 red, 3 black. A bag is picked at random, red drawn. P(Bag I)?",
+  "formula": "",
+  "options": [
+   "3/8",
+   "1/4",
+   "1/2",
+   "3/4"
+  ],
+  "answer": 3,
+  "explain": "Equal priors: (3/4)/(3/4+1/4) = 3/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b812e1e-d575-497e-a074-0b9c2d9273df",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "One fair and one two-headed coin; a coin picked at random shows head. P(two-headed coin)?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "1/3",
+   "1/2",
+   "3/4"
+  ],
+  "answer": 0,
+  "explain": "(1/2·1)/(1/2·1/2+1/2·1) = (1/2)/(3/4) = 2/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "104c33aa-dd31-4725-b1a9-390744d35bf9",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "Two fair coins and one two-headed coin; one picked at random shows head. P(two-headed)?",
+  "formula": "",
+  "options": [
+   "3/4",
+   "2/3",
+   "1/2",
+   "1/3"
+  ],
+  "answer": 2,
+  "explain": "P(H)=2/3; posterior=(1/3)/(2/3)=1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6db414fb-298f-4391-b523-545ade4524fc",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "For a partition with P(A₁)=P(A₂)=1/2, P(B|A₁)=2P(B|A₂). Then P(A₁|B) =?",
+  "formula": "",
+  "options": [
+   "1/3",
+   "3/4",
+   "2/3",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "Equal priors: ratio of likelihoods 2:1 gives 2/(2+1)=2/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f5b64b03-e3ea-4697-b242-938207d4bd94",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "For a partition, the ratio P(A₁|B) : P(A₂|B) equals?",
+  "formula": "",
+  "options": [
+   "P(A₁)P(B|A₂) : P(A₂)P(B|A₁)",
+   "P(B|A₂) : P(B|A₁)",
+   "P(A₁)P(B|A₁) : P(A₂)P(B|A₂)",
+   "P(A₁) : P(A₂)"
+  ],
+  "answer": 2,
+  "explain": "Both posteriors share the same denominator P(B), so the ratio is prior × likelihood for each event.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dfdcd546-721a-471e-a401-b67133751a1d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "P(A₁)=1/4, P(A₂)=3/4 form a partition and P(B|A₁)=3·P(B|A₂). Then P(A₁|B) =?",
+  "formula": "",
+  "options": [
+   "1/4",
+   "3/4",
+   "1/2",
+   "3/5"
+  ],
+  "answer": 2,
+  "explain": "Weights: (1/4)(3k) = 3k/4 and (3/4)(k) = 3k/4 are equal, so P(A₁|B) = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a19e187c-f2a6-4f48-bf5c-8a5930ad8351",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "For a partition A₁,…,Aₙ, P(B|Aᵢ) has the same non-zero value for every i. Then P(Aₖ|B) equals?",
+  "formula": "P(Aₖ|B) = P(Aₖ)P(B|Aₖ)/ΣP(Aᵢ)P(B|Aᵢ)",
+  "options": [
+   "P(B|Aₖ)",
+   "P(Aₖ)",
+   "1/n",
+   "P(B)"
+  ],
+  "answer": 1,
+  "explain": "The common likelihood cancels, as ΣP(Aᵢ)=1, so the posterior equals the prior: B gives no information.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea10187b-aa40-43b6-a15a-ee842ce27e6a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "Conditions for pᵢ = P(X = xᵢ) to form a probability distribution:",
+  "formula": "",
+  "options": [
+   "pᵢ > 1 and Σpᵢ = 1",
+   "pᵢ ≥ 0 and Σxᵢpᵢ = 1",
+   "0 ≤ pᵢ ≤ 1 and Σpᵢ = 0",
+   "pᵢ ≥ 0 and Σpᵢ = 1"
+  ],
+  "answer": 3,
+  "explain": "Each probability is non-negative and all probabilities add up to 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d1d0ebe3-9219-4cd9-8420-557fa1fcc41c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "For constants a, b: E(aX + b) equals",
+  "formula": "",
+  "options": [
+   "E(X) + b",
+   "a²E(X) + b",
+   "aE(X)",
+   "aE(X) + b"
+  ],
+  "answer": 3,
+  "explain": "Expectation is linear: E(aX + b) = aE(X) + b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c1f065c0-3243-440c-a03c-ad3a64270a03",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "A binomial distribution has mean 4 and variance 3. The value of q is",
+  "formula": "q = Variance / Mean",
+  "options": [
+   "3/4",
+   "4/3",
+   "1/4",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "npq/np = q = 3/4 (then p = 1/4, n = 16).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4c34e3d-2eb9-4610-814e-a127bfd1f09c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "In n Bernoulli trials with success probability p, P(at least one success) equals",
+  "formula": "",
+  "options": [
+   "npqⁿ⁻¹",
+   "1 − pⁿ",
+   "qⁿ",
+   "1 − qⁿ"
+  ],
+  "answer": 3,
+  "explain": "Complement of no success: 1 − P(X = 0) = 1 − qⁿ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f3398002-dff0-4c78-885a-b25fbe1aee51",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "Var(X) = 0 for a random variable X exactly when",
+  "formula": "",
+  "options": [
+   "X is a constant",
+   "X takes only two values",
+   "all values are equally likely",
+   "E(X) = 0"
+  ],
+  "answer": 0,
+  "explain": "Var = Σpᵢ(xᵢ − μ)² = 0 forces every xᵢ with pᵢ > 0 to equal μ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "96f31bd2-a74f-48a2-8d85-95b4f65b71f3",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "X = number of heads in two tosses of a fair coin. Then P(X = 1) is",
+  "formula": "",
+  "options": [
+   "1/4",
+   "1/2",
+   "3/4",
+   "1/3"
+  ],
+  "answer": 1,
+  "explain": "Outcomes HT, TH out of 4, so P(X=1) = 1/2; P(0) = P(2) = 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f98777c-05c0-4ae8-8fde-eb25ee03eb9a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "Mean (expected value) of a discrete random variable X with P(X = xᵢ) = pᵢ is",
+  "formula": "E(X) = Σ xᵢpᵢ",
+  "options": [
+   "Σ pᵢ / xᵢ",
+   "Σ xᵢ²pᵢ",
+   "Σ xᵢpᵢ",
+   "Σ xᵢ / n"
+  ],
+  "answer": 2,
+  "explain": "E(X) is the probability-weighted sum of the values of X.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "98179954-2138-45a4-b11b-b304395aac36",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "For binomial distribution B(n, p), the mean and variance are respectively:",
+  "formula": "μ = np, σ² = npq",
+  "options": [
+   "n p and n²pq",
+   "np and np²q",
+   "npq and np",
+   "np and npq"
+  ],
+  "answer": 3,
+  "explain": "Mean = np and variance = npq, so variance is always less than mean.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e15f8c8-7029-47e2-ba17-e9bc264506d4",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "E(X + Y) = E(X) + E(Y) holds when X and Y are?",
+  "formula": "",
+  "options": [
+   "Only independent",
+   "Only mutually exclusive",
+   "Only identically distributed",
+   "Any random variables"
+  ],
+  "answer": 3,
+  "explain": "Linearity of expectation needs no independence.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c79dd872-6404-49a2-8415-9e25f7940e3b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "E(XY) = E(X)·E(Y) is guaranteed when X and Y are?",
+  "formula": "",
+  "options": [
+   "Independent",
+   "Mutually exclusive events",
+   "Uncorrelated in sign",
+   "Having equal means"
+  ],
+  "answer": 0,
+  "explain": "The product rule for expectation holds for independent random variables.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36d5cac0-e4d7-4be4-8c6b-d16e0ade530b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "The value of a that minimises E[(X − a)²] is?",
+  "formula": "",
+  "options": [
+   "Mode of X",
+   "E(X²)",
+   "E(X)",
+   "Median of X"
+  ],
+  "answer": 2,
+  "explain": "E[(X−a)²]=Var(X)+(μ−a)², minimum at a=μ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c363e50e-5877-4acb-9c6e-3aed2a8744e8",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "X takes 1, 2, …, n equally likely. Then E(X²) =?",
+  "formula": "",
+  "options": [
+   "n(n+1)/2",
+   "(n+1)(2n+1)/6",
+   "n(2n+1)/6",
+   "(n+1)²/4"
+  ],
+  "answer": 1,
+  "explain": "Σk²/n = n(n+1)(2n+1)/(6n) = (n+1)(2n+1)/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3edc7b9-fb8f-4bd4-be5e-5a03eec179d3",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "A game is fair when the expected gain of the player is?",
+  "formula": "",
+  "options": [
+   "Positive but small",
+   "Equal to 1",
+   "Zero",
+   "Equal to the stake squared"
+  ],
+  "answer": 2,
+  "explain": "A fair game has E(gain)=0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4034de11-f306-4383-ae82-a866d2e63534",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "For X ~ B(n, p) and q = 1 − p, E(n − X) =?",
+  "formula": "",
+  "options": [
+   "npq",
+   "np",
+   "n²q",
+   "nq"
+  ],
+  "answer": 3,
+  "explain": "n−X counts failures, which is B(n,q), so mean nq.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e436f4d2-e58e-4fc7-b1dc-a0df70974ad8",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "Expected number of tosses of a fair coin to get the first head is?",
+  "formula": "E(X) = 1/p",
+  "options": [
+   "1",
+   "1/2",
+   "4",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "Geometric distribution: mean = 1/p = 2 for p = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d37029f4-5b80-463e-8431-a00514baa73f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Variance of a random variable",
+  "prompt": "For a random variable X, which statement about Var(X) is always true?",
+  "formula": "",
+  "options": [
+   "Var(X) ≤ 1",
+   "Var(X) ≥ 0",
+   "Var(X) can be negative",
+   "Var(X) ≤ E(X)"
+  ],
+  "answer": 1,
+  "explain": "Var(X) = Σpᵢ(xᵢ−μ)² is a sum of non-negative terms, so ≥ 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5c9e497c-bf46-4172-a6be-3c82e71a7225",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "If P(A|B) > P(A) with P(A), P(B) > 0, then P(B|A) compared with P(B) is:",
+  "formula": "P(A∩B) > P(A)P(B)",
+  "options": [
+   "Cannot be compared",
+   "Greater than P(B)",
+   "Less than P(B)",
+   "Equal to P(B)"
+  ],
+  "answer": 1,
+  "explain": "P(A|B) > P(A) gives P(A∩B) > P(A)P(B), so dividing by P(A) gives P(B|A) > P(B).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "93c9d065-926f-4ecc-b5eb-de125d7e40b9",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Two cards are drawn one by one without replacement from 52. Given the first is an ace, P(second is ace) = ?",
+  "formula": "3/51",
+  "options": [
+   "1/17",
+   "4/51",
+   "3/52",
+   "1/13"
+  ],
+  "answer": 0,
+  "explain": "3 aces remain among 51 cards: 3/51 = 1/17.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a9eceae1-bb1c-42a6-b029-fb958b0f712b",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "Prior odds of A₁:A₂ are 1:2 and likelihood ratio P(B|A₁):P(B|A₂) is 4:1. Posterior odds A₁:A₂?",
+  "formula": "",
+  "options": [
+   "2:1",
+   "1:8",
+   "4:1",
+   "1:2"
+  ],
+  "answer": 0,
+  "explain": "Posterior odds = (1/2)·4 = 2, so 2:1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4e68a5bc-9cdb-4534-b49c-bf969b687130",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "Three equally likely causes A₁,A₂,A₃ have P(B|Aᵢ) in ratio 1:2:3. Then P(A₃|B) =?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1/3",
+   "2/3",
+   "3/5"
+  ],
+  "answer": 0,
+  "explain": "Equal priors, so posterior ∝ likelihood: 3/(1+2+3) = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "20931ae6-a4a6-44e0-85a3-ff9dc3aec675",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Variance of a random variable",
+  "prompt": "Variance of the number of heads in 1 toss of a fair coin vs. Var of the sum of two independent such tosses: ratio?",
+  "formula": "Var(X+Y) = Var X + Var Y",
+  "options": [
+   "1 : 1",
+   "1 : 4",
+   "1 : 2",
+   "2 : 1"
+  ],
+  "answer": 2,
+  "explain": "Var(single) = 1/4; the sum of two independent tosses has 1/2, so the ratio is 1:2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1aa30d1e-27d7-4f41-85d9-337020a6ec37",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "A fair coin and a two-headed coin: one is picked at random and tossed twice, giving HH. P(two-headed coin)=?",
+  "formula": "",
+  "options": [
+   "3/4",
+   "2/3",
+   "4/5",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "Two-headed: ½·1 = ½. Fair: ½·¼ = ⅛. So P = (½)/(½+⅛) = 4/5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2cbf323-522b-41b7-b284-92552bd2ba55",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "Bayes' theorem is derived by combining which two results?",
+  "formula": "P(Aᵢ|B) = P(Aᵢ∩B)/P(B)",
+  "options": [
+   "Binomial law and addition theorem",
+   "Multiplication rule and total probability",
+   "Addition theorem and De Morgan's laws",
+   "Independence and complement rule"
+  ],
+  "answer": 1,
+  "explain": "Numerator P(Aᵢ)P(B|Aᵢ) is the multiplication rule; denominator P(B) comes from total probability.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4337dfa3-6a49-412d-8a6b-9089bd59b2b0",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mutually exclusive & exhaustive events",
+  "prompt": "A and B are mutually exclusive events. Then P(A ∪ B′) equals:",
+  "formula": "A ∩ B = ∅ ⇒ A ⊂ B′",
+  "options": [
+   "1 − P(A) − P(B)",
+   "1 − P(B)",
+   "1 − P(A)",
+   "P(A) + P(B′)"
+  ],
+  "answer": 1,
+  "explain": "A ∩ B = ∅ means A ⊂ B′, so A ∪ B′ = B′ and P(B′) = 1 − P(B).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ffc316c-f526-4354-9731-599a992b05b8",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Complementary events & De Morgan's laws",
+  "prompt": "A, B independent, P(A) = 1/2, P(B) = 1/4. P(neither A nor B occurs) = ?",
+  "formula": "P(A'∩B') = P(A')·P(B')",
+  "options": [
+   "5/8",
+   "1/8",
+   "3/8",
+   "1/4"
+  ],
+  "answer": 2,
+  "explain": "A', B' are independent, so P(A'∩B') = (1/2)(3/4) = 3/8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c63e853-587b-4ce0-812f-05c55f3067b4",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Complementary events & De Morgan's laws",
+  "prompt": "If A ⊂ B, then P(A′∩B′) equals:",
+  "formula": "A′∩B′ = (A∪B)′ = B′",
+  "options": [
+   "P(B) − P(A)",
+   "1 − P(A) − P(B)",
+   "1 − P(A)",
+   "1 − P(B)"
+  ],
+  "answer": 3,
+  "explain": "A ⊂ B gives A∪B = B, so P(A′∩B′) = P((A∪B)′) = 1 − P(B).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "24e6ed38-daa5-47ed-a6d8-e5454259af2a",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Two fair dice are thrown. Given the sum is 6, P(both dice show the same number) = ?",
+  "formula": "",
+  "options": [
+   "1/36",
+   "1/3",
+   "1/6",
+   "1/5"
+  ],
+  "answer": 3,
+  "explain": "Sum 6 has 5 outcomes: (1,5),(2,4),(3,3),(4,2),(5,1). Only (3,3) is a double, so 1/5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54c5e5b9-417d-4f8d-b8a0-796ed6d0f505",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Three fair coins are tossed. Given the first coin shows a head, P(at least two heads) = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1/4",
+   "3/4",
+   "2/3"
+  ],
+  "answer": 2,
+  "explain": "The first is H, so we need at least one H in the other two coins: 1 − 1/4 = 3/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ed43ba6-4170-460f-8148-fab87eb96542",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Conditional probability",
+  "prompt": "Two fair dice are thrown. Given the numbers are different, P(sum = 6) = ?",
+  "formula": "",
+  "options": [
+   "1/5",
+   "4/36",
+   "2/15",
+   "1/6"
+  ],
+  "answer": 2,
+  "explain": "Different numbers: 30 outcomes; sum 6 gives (1,5),(5,1),(2,4),(4,2) = 4, so 4/30 = 2/15.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7cbee715-518e-4600-896f-0d2a69dcc343",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "An event A is independent of itself exactly when P(A) equals?",
+  "formula": "P(A∩A) = P(A)·P(A)",
+  "options": [
+   "Only 1/2",
+   "0 or 1",
+   "0 or 1/2",
+   "Any value in [0, 1]"
+  ],
+  "answer": 1,
+  "explain": "P(A) = P(A)² gives P(A)(1−P(A)) = 0, so P(A) = 0 or 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9b596fc-773e-46c6-b837-09eda8835ca4",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "A ⊂ B and A, B are independent events. Then necessarily:",
+  "formula": "",
+  "options": [
+   "P(A)=1 or P(B)=0",
+   "P(A)=0 or P(B)=1",
+   "P(A)+P(B)=1",
+   "P(A)=P(B)"
+  ],
+  "answer": 1,
+  "explain": "A∩B = A, so P(A) = P(A)P(B), giving P(A)=0 or P(B)=1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d508e742-a56c-432d-835b-61f0a2c5f1d4",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "Number of conditions to be checked for mutual independence of 4 events A, B, C, D?",
+  "formula": "2ⁿ − n − 1",
+  "options": [
+   "15",
+   "10",
+   "11",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "2⁴ − 4 − 1 = 11 (6 pairs + 4 triples + 1 quadruple).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7eb5993b-19ab-4426-b09d-bc9d0fd58042",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Independent events",
+  "prompt": "Two dice are thrown. A: sum is 7; B: first die shows 4. A and B are:",
+  "formula": "",
+  "options": [
+   "Mutually exclusive",
+   "Dependent, not exclusive",
+   "Independent",
+   "Complementary"
+  ],
+  "answer": 2,
+  "explain": "P(A)=1/6, P(B)=1/6, P(A∩B)=1/36 = P(A)P(B), so independent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46c32cf5-dc06-4efe-a003-92d0a755110c",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Bayes' theorem",
+  "prompt": "Bag I: 1 red, 1 black; Bag II: 3 red, 1 black. A bag is chosen at random, red drawn. P(Bag II)?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "3/5",
+   "2/5",
+   "3/4"
+  ],
+  "answer": 1,
+  "explain": "(½·¾)/(½·½+½·¾) = (3/8)/(5/8) = 3/5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c45f0524-6027-4eaf-bbb3-d8e67f0205ac",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "In probability, a random variable X on a sample space S is best described as:",
+  "formula": "X : S → ℝ",
+  "options": [
+   "A real-valued function defined on S",
+   "An event whose probability is one",
+   "A subset of the sample space S",
+   "A probability value between 0 and 1"
+  ],
+  "answer": 0,
+  "explain": "A random variable assigns a real number to each outcome of the sample space.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "30469995-4750-470b-88ba-d304de17d0c1",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Random variable & its probability distribution",
+  "prompt": "The binomial distribution B(n, p) satisfies P(X = r) = P(X = n − r) for every r exactly when p equals:",
+  "formula": "",
+  "options": [
+   "n/2",
+   "1/n",
+   "1/2",
+   "1/4"
+  ],
+  "answer": 2,
+  "explain": "ⁿCᵣ pʳqⁿ⁻ʳ = ⁿCₙ₋ᵣ pⁿ⁻ʳqʳ for all r only when p = q = 1/2, so the distribution is symmetric.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d0eb3014-94b0-4e19-9be5-0d49ac821dc9",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "If a ≤ X ≤ b always, where could E(X) lie?",
+  "formula": "",
+  "options": [
+   "E(X) ≤ a",
+   "E(X) ≥ b",
+   "E(X) = (a+b)/2 always",
+   "a ≤ E(X) ≤ b"
+  ],
+  "answer": 3,
+  "explain": "Expectation is a weighted average of values, so it lies between the minimum and maximum of X.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea8c5f0e-7934-42d2-ba26-c1e5a33fbc32",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "Fair coin: win ₹10 on head, lose ₹4 on tail. Expected gain is?",
+  "formula": "E = Σ xᵢpᵢ",
+  "options": [
+   "₹6",
+   "₹3",
+   "₹0",
+   "₹7"
+  ],
+  "answer": 1,
+  "explain": "E = ½(10) + ½(−4) = 5 − 2 = ₹3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "76b353be-66c2-4350-9ed0-1956429d9686",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "Two fair dice are thrown. The mean of the product of the two numbers is?",
+  "formula": "E(XY) = E(X)·E(Y)",
+  "options": [
+   "49/6",
+   "49/4",
+   "91/6",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "The dice are independent, so E(XY) = (7/2)(7/2) = 49/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1477b6b9-a1d9-4ae3-969a-f95065a3f2e3",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "The mean of the sum of the numbers on three fair dice thrown together is?",
+  "formula": "E(X₁+X₂+X₃) = 3·(7/2)",
+  "options": [
+   "7",
+   "10",
+   "21/2",
+   "11"
+  ],
+  "answer": 2,
+  "explain": "By linearity each die contributes 7/2, so the total is 3 × 7/2 = 21/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46b5f86c-1c8c-4aef-91a3-ecffc0f12f7f",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "For the indicator variable I_A of an event A (1 if A occurs, else 0), E(I_A) equals?",
+  "formula": "E(I_A) = 1·P(A) + 0·P(A′)",
+  "options": [
+   "P(A)",
+   "[P(A)]²",
+   "P(A)·P(A′)",
+   "1 − P(A)"
+  ],
+  "answer": 0,
+  "explain": "I_A takes 1 with probability P(A) and 0 otherwise, so E(I_A) = P(A).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ad9a5a6-db5e-41cb-850b-a64cae9a7edd",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Mean (expectation) of a random variable",
+  "prompt": "n letters are put at random into n addressed envelopes. Expected number of letters correctly placed?",
+  "formula": "X = Σ Iᵢ, E(Iᵢ) = 1/n",
+  "options": [
+   "n",
+   "1",
+   "n/2",
+   "1/n"
+  ],
+  "answer": 1,
+  "explain": "Each letter is correct with probability 1/n, so by linearity E(X) = n·(1/n) = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4dd9db05-86fc-49a9-8429-b829abdbfb9d",
+  "subject": "Mathematics",
+  "chapter": "Probability",
+  "topic": "Variance of a random variable",
+  "prompt": "X takes values a and b with probability ½ each. Var(X) equals:",
+  "formula": "",
+  "options": [
+   "(b − a)/4",
+   "(a² + b²)/4",
+   "(b − a)²/4",
+   "(b − a)²/2"
+  ],
+  "answer": 2,
+  "explain": "Mean is (a+b)/2, so Var = ½[(a−b)²/4]·2 = (b−a)²/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

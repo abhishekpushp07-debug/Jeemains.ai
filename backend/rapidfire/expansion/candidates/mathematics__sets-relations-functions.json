@@ -1,0 +1,2620 @@
+[
+ {
+  "prompt": "Number of non-empty proper subsets of a set with n elements is",
+  "formula": "",
+  "options": [
+   "2ⁿ − 2",
+   "2ⁿ − 1",
+   "2ⁿ",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Total 2ⁿ subsets; remove ∅ and the set itself, leaving 2ⁿ − 2.",
+  "kind": "formula",
+  "id": "920aa196-2cdd-4c42-be47-5bd2f5f19f29",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "Number of elements in P(P(∅)) is",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "4",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "P(∅) = {∅}, so P(P(∅)) = {∅, {∅}}, which has 2 elements.",
+  "kind": "result",
+  "id": "e968a737-734c-461c-874d-ffa83ae65e2f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "The set {∅} is",
+  "formula": "",
+  "options": [
+   "The empty set",
+   "A singleton set",
+   "A set with 2 elements",
+   "Not a valid set"
+  ],
+  "answer": 1,
+  "explain": "{∅} has exactly one element, namely ∅, so it is a non-empty singleton.",
+  "kind": "concept",
+  "id": "93501bae-e03f-4e89-9890-f3c55f97e849",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "The set {x ∈ ℝ : x² + 1 = 0} is",
+  "formula": "",
+  "options": [
+   "{i, −i}",
+   "{0}",
+   "An empty set",
+   "{1, −1}"
+  ],
+  "answer": 2,
+  "explain": "x² + 1 = 0 has no real root, so the set is empty over ℝ.",
+  "kind": "concept",
+  "id": "5b2e739e-c36b-4055-909b-c8b09aedce8b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "The sets {1, 2, 2, 3} and {3, 1, 2} are",
+  "formula": "",
+  "options": [
+   "Unequal",
+   "Disjoint",
+   "Equivalent but not equal",
+   "Equal"
+  ],
+  "answer": 3,
+  "explain": "Repetition and order do not matter; both sets have the same elements 1, 2, 3.",
+  "kind": "concept",
+  "id": "ee60adaf-0bc9-469a-b322-9ec0c415ac6e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "Roster form of letters in the word MISSISSIPPI has how many elements?",
+  "formula": "",
+  "options": [
+   "11",
+   "4",
+   "5",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "A set lists each distinct element once: {M, I, S, P}, so 4.",
+  "kind": "fact",
+  "id": "e340c34d-a485-4614-8906-7f2028552f5d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "Which of the following is an infinite set?",
+  "formula": "",
+  "options": [
+   "{x ∈ ℚ : 1 < x < 2}",
+   "{x ∈ ℕ : x² < 50}",
+   "{x ∈ ℤ : |x| < 100}",
+   "{x ∈ ℕ : x is prime, x < 100}"
+  ],
+  "answer": 0,
+  "explain": "Infinitely many rationals lie between 1 and 2; the other sets are finite.",
+  "kind": "concept",
+  "id": "0845bf69-7a5f-4ddb-a65b-3193971deb74",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "Number of subsets of a set A with n elements that contain a particular fixed element is:",
+  "formula": "",
+  "options": [
+   "2ⁿ⁻¹",
+   "2ⁿ − 1",
+   "2ⁿ⁻¹ − 1",
+   "n·2ⁿ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Fix that element in; each of the remaining n−1 elements is either in or out: 2ⁿ⁻¹.",
+  "kind": "result",
+  "id": "02b3ca85-7ae8-41cf-97be-18fa5d4c789d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "Number of subsets of a set with n elements is",
+  "formula": "",
+  "options": [
+   "2ⁿ",
+   "2ⁿ − 1",
+   "n²",
+   "2ⁿ − 2"
+  ],
+  "answer": 0,
+  "explain": "Each element is either in or out of a subset, so 2ⁿ subsets in all.",
+  "kind": "formula",
+  "id": "fdaf180e-b6d1-4501-92c6-60b3cddcafc3",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "Number of proper subsets of a set having n elements is",
+  "formula": "",
+  "options": [
+   "2ⁿ − 1",
+   "2ⁿ",
+   "2ⁿ − 2",
+   "2ⁿ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Proper subsets exclude only the set itself: 2ⁿ − 1.",
+  "kind": "formula",
+  "id": "ab5065af-8a49-4e94-ba8c-fbb5b62e132b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "Number of non-empty proper subsets of an n-element set is",
+  "formula": "",
+  "options": [
+   "2ⁿ − 2",
+   "2ⁿ − 1",
+   "2ⁿ",
+   "2ⁿ − 3"
+  ],
+  "answer": 0,
+  "explain": "Remove both ∅ and the set itself from 2ⁿ subsets.",
+  "kind": "formula",
+  "id": "a6722422-d367-4944-be52-54248f204f5e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "The set {x : x ∈ ℝ, x² + 1 = 0} is",
+  "formula": "",
+  "options": [
+   "An empty set",
+   "A singleton set",
+   "A set with two elements",
+   "An infinite set"
+  ],
+  "answer": 0,
+  "explain": "x² = −1 has no real solution, so the set is empty.",
+  "kind": "concept",
+  "id": "602c3645-d3ee-40d1-bbda-da63092c4d9f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "Number of subsets of A = {1, 2, {3}} that contain element 1 is",
+  "formula": "",
+  "options": [
+   "4",
+   "8",
+   "2",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "A has 3 distinct elements; fixing 1 leaves 2² = 4 subsets.",
+  "kind": "result",
+  "id": "c4ecb3f3-c0f7-4866-b659-41801048f2f4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "Number of elements in the power set of P(∅), where P denotes the power set, is",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "4",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "P(∅) = {∅} has 1 element, so P({∅}) has 2¹ = 2 elements. Hence P(P(∅)) has 2 elements, so power set of P(∅) has 2 elements.",
+  "kind": "result",
+  "id": "e0915969-3038-4155-9fb9-263ff19d6efd",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "A ∩ B = A holds if and only if?",
+  "formula": "",
+  "options": [
+   "B ⊆ A",
+   "A ⊆ B",
+   "A = Bᶜ",
+   "A ∩ Bᶜ = A"
+  ],
+  "answer": 1,
+  "explain": "A ∩ B = A means every element of A lies in B, i.e. A ⊆ B.",
+  "kind": "concept",
+  "id": "b58b4e6c-4ad3-4327-8e2f-5b5cd33b28a1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "If n(A)=5 and n(B)=8, the minimum possible n(A ∪ B) is?",
+  "formula": "",
+  "options": [
+   "5",
+   "3",
+   "8",
+   "13"
+  ],
+  "answer": 2,
+  "explain": "Minimum occurs when A ⊆ B, giving n(A ∪ B) = max(5,8) = 8.",
+  "kind": "result",
+  "id": "dace4e46-6155-4bcb-872e-ccaf4eca56a1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "Aᶜ ∩ B equals which set?",
+  "formula": "",
+  "options": [
+   "A − B",
+   "B − A",
+   "A Δ B",
+   "(A ∪ B)ᶜ"
+  ],
+  "answer": 1,
+  "explain": "B − A = B ∩ Aᶜ, the elements of B not in A.",
+  "kind": "formula",
+  "id": "dccaa693-96ea-4e21-ab98-6b2a23f90fb8",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "For any sets A and B, (A − B) ∪ (A ∩ B) equals?",
+  "formula": "",
+  "options": [
+   "A ∪ B",
+   "B",
+   "A",
+   "A Δ B"
+  ],
+  "answer": 2,
+  "explain": "Elements of A are either outside B or inside B.",
+  "kind": "result",
+  "id": "652adea5-ec2f-48c4-9441-9c9067c08172",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "If A ⊆ B, then A ∪ B equals?",
+  "formula": "",
+  "options": [
+   "A",
+   "B",
+   "A ∩ B",
+   "Bᶜ"
+  ],
+  "answer": 1,
+  "explain": "When A lies inside B, the union adds nothing new: A ∪ B = B.",
+  "kind": "concept",
+  "id": "5908a611-8cc5-4fd5-9a68-d7205a330449",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "Number of elements in exactly one of A or B equals?",
+  "formula": "",
+  "options": [
+   "n(A) + n(B) − 2n(A ∩ B)",
+   "n(A) + n(B) − n(A ∩ B)",
+   "n(A ∪ B) + n(A ∩ B)",
+   "n(A) − n(B)"
+  ],
+  "answer": 0,
+  "explain": "Exactly one means n(A Δ B) = n(A) + n(B) − 2n(A ∩ B).",
+  "kind": "formula",
+  "id": "a13c2150-5de4-4676-804d-f5e9b8968419",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "If A ⊂ B, then which statement is always true?",
+  "formula": "",
+  "options": [
+   "Bᶜ ⊂ Aᶜ",
+   "Aᶜ ⊂ Bᶜ",
+   "A ∩ B = B",
+   "A ∪ B = A"
+  ],
+  "answer": 0,
+  "explain": "Complementation reverses inclusion: A ⊂ B ⇒ Bᶜ ⊂ Aᶜ.",
+  "kind": "concept",
+  "id": "e155356e-b47d-49bf-a4a3-c00dd0b2ea26",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "Which statement is true for the empty set ∅ and any set A?",
+  "formula": "∅ ⊆ A",
+  "options": [
+   "∅ ⊆ A, but ∅ ∈ A is not always true",
+   "∅ ∈ A for every set A",
+   "∅ ⊄ A when A is non-empty",
+   "∅ ⊆ A only when A is finite"
+  ],
+  "answer": 0,
+  "explain": "∅ is a subset of every set; it is an element of A only if listed in A.",
+  "kind": "concept",
+  "id": "03396c7b-fbbb-4bf1-86e3-a4add13c7c9d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "(A ∪ B) ∩ (A ∪ Bᶜ) simplifies to which set?",
+  "formula": "",
+  "options": [
+   "A",
+   "B",
+   "A ∩ B",
+   "U"
+  ],
+  "answer": 0,
+  "explain": "A ∪ (B ∩ Bᶜ) = A ∪ ∅ = A.",
+  "kind": "result",
+  "id": "8bb8b827-9ef7-4332-91db-a8ea0588f506",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "In n(A∪B∪C), the term n(A∩B∩C) appears with which sign?",
+  "formula": "n(A∪B∪C) = Σn(A) − Σn(A∩B) + n(A∩B∩C)",
+  "options": [
+   "Minus, coefficient −1",
+   "Plus, coefficient +1",
+   "Plus, coefficient +2",
+   "Minus, coefficient −2"
+  ],
+  "answer": 1,
+  "explain": "Inclusion–exclusion: singles +, pairs −, triple intersection +.",
+  "kind": "formula",
+  "id": "a5aa5bec-2f01-4849-b417-553d5d933833",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "For finite sets, n(A Δ B) equals",
+  "formula": "",
+  "options": [
+   "n(A) + n(B) − n(A∩B)",
+   "n(A) + n(B) − 2n(A∩B)",
+   "n(A) − n(B)",
+   "n(A∪B) + n(A∩B)"
+  ],
+  "answer": 1,
+  "explain": "Subtract the common part twice: n(A∪B) − n(A∩B).",
+  "kind": "formula",
+  "id": "7cc7e18d-3896-4e8d-8e79-36f49a463999",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "Number of non-empty proper subsets of a set with n elements?",
+  "formula": "2ⁿ − 2",
+  "options": [
+   "2ⁿ − 2",
+   "2ⁿ − 1",
+   "2ⁿ − 3",
+   "2ⁿ⁻¹ − 1"
+  ],
+  "answer": 0,
+  "explain": "Remove both ∅ and the set itself from the 2ⁿ subsets.",
+  "kind": "formula",
+  "id": "5adb0240-fae2-412b-924f-6d3543094883",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of subsets of an n-element set that contain one fixed element?",
+  "formula": "2ⁿ⁻¹",
+  "options": [
+   "2ⁿ − 1",
+   "2ⁿ⁻¹",
+   "2ⁿ⁻¹ − 1",
+   "2ⁿ⁻²"
+  ],
+  "answer": 1,
+  "explain": "The fixed element is forced in; each of the other n−1 elements is in or out.",
+  "kind": "formula",
+  "id": "5f5d7086-8d91-49bb-bab8-6276de744d0c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of subsets of an n-element set containing two fixed elements?",
+  "formula": "2ⁿ⁻²",
+  "options": [
+   "2ⁿ⁻¹",
+   "2ⁿ − 2",
+   "2ⁿ⁻²",
+   "2ⁿ⁻² − 1"
+  ],
+  "answer": 2,
+  "explain": "Two elements are forced in; the remaining n−2 are free.",
+  "kind": "formula",
+  "id": "731effe8-d02b-4cfa-bd1f-9c51dcffd270",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of elements in P(∅)?",
+  "formula": "P(∅) = {∅}",
+  "options": [
+   "0",
+   "1",
+   "2",
+   "Undefined"
+  ],
+  "answer": 1,
+  "explain": "∅ has one subset, itself, so P(∅) = {∅} has 1 element.",
+  "kind": "fact",
+  "id": "65da54ea-7e7f-4b29-8504-525fb432eedf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of elements in P(P(∅))?",
+  "formula": "P({∅}) = {∅, {∅}}",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "P(∅) = {∅} has 1 element, so its power set has 2¹ = 2 elements.",
+  "kind": "result",
+  "id": "fafce5f1-83b6-4638-9953-f97027395430",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of subsets of an n-element set with an odd number of elements?",
+  "formula": "ⁿC₁ + ⁿC₃ + … = 2ⁿ⁻¹",
+  "options": [
+   "2ⁿ⁻¹",
+   "2ⁿ⁻¹ − 1",
+   "2ⁿ − 1",
+   "2ⁿ⁻²"
+  ],
+  "answer": 0,
+  "explain": "Odd-size and even-size subsets are equal in number, each 2ⁿ⁻¹ (n ≥ 1).",
+  "kind": "result",
+  "id": "96918a18-64e7-491e-89e3-7ab6fc0128fb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of subsets of an n-element set having at least 2 elements?",
+  "formula": "2ⁿ − n − 1",
+  "options": [
+   "2ⁿ − n",
+   "2ⁿ − n − 1",
+   "2ⁿ − 2n",
+   "2ⁿ − n − 2"
+  ],
+  "answer": 1,
+  "explain": "Subtract the ∅ (1) and the n singletons from 2ⁿ.",
+  "kind": "formula",
+  "id": "e4309527-d2eb-447d-a126-a59d1e7f655d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "If A = {∅, {∅}}, how many elements does P(A) have?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "A has 2 elements (∅ and {∅}), so n(P(A)) = 2² = 4.",
+  "kind": "concept",
+  "id": "3577baf4-4916-41c1-b401-7cf42ef3bd9f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "If P(A) has 128 elements, then n(A) equals?",
+  "formula": "n(P(A)) = 2ⁿ",
+  "options": [
+   "6",
+   "7",
+   "8",
+   "64"
+  ],
+  "answer": 1,
+  "explain": "2ⁿ = 128 = 2⁷, so n = 7.",
+  "kind": "result",
+  "id": "d50b169e-db49-47d7-b74f-253947795b08",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of subsets of an n-element set containing exactly 2 elements?",
+  "formula": "ⁿC₂",
+  "options": [
+   "2ⁿ − 2",
+   "n(n−1)",
+   "n(n−1)/2",
+   "2ⁿ⁻²"
+  ],
+  "answer": 2,
+  "explain": "Choosing 2 of n elements gives ⁿC₂ = n(n−1)/2.",
+  "kind": "formula",
+  "id": "bcf67bf6-8641-4d5d-99f7-7740cd634bdb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "For any set A, which relation always holds between A and its power set P(A)?",
+  "formula": "",
+  "options": [
+   "A ∈ P(A) and A ⊂ P(A)",
+   "A ∈ P(A) and ∅ ∈ P(A)",
+   "A ⊂ P(A) and ∅ ∈ A",
+   "A ∈ A and ∅ ⊂ P(A)"
+  ],
+  "answer": 1,
+  "explain": "A and ∅ are both subsets of A, so both are elements of P(A). A ⊂ P(A) is not generally true.",
+  "kind": "concept",
+  "id": "4f3fe9ae-8f79-4424-918b-35c23ca4d7af",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "If n(A×B) = 7, with A and B non-empty, then n(A) + n(B) equals?",
+  "formula": "n(A×B) = n(A)·n(B)",
+  "options": [
+   "7",
+   "8",
+   "49",
+   "14"
+  ],
+  "answer": 1,
+  "explain": "7 is prime, so the sizes are 1 and 7, giving a sum of 8.",
+  "kind": "result",
+  "id": "48df76b7-4095-418f-b5c0-e9c30eb69dbb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Number of reflexive relations on a set A with n elements?",
+  "formula": "",
+  "options": [
+   "2^(n²)",
+   "2^(n²−n)",
+   "2^(n(n+1)/2)",
+   "2^(n²−1)"
+  ],
+  "answer": 1,
+  "explain": "All n diagonal pairs (a,a) are forced. Each of the other n²−n pairs is free.",
+  "kind": "formula",
+  "id": "61b804f4-3766-4d4b-9364-e0d4fb58d940",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Number of antisymmetric relations on a set A with n elements?",
+  "formula": "",
+  "options": [
+   "2^n · 3^(n(n−1)/2)",
+   "3^(n(n−1)/2)",
+   "2^n · 2^(n(n−1)/2)",
+   "3^n · 2^(n(n−1)/2)"
+  ],
+  "answer": 0,
+  "explain": "Each diagonal pair is in or out (2^n). Each off-diagonal pair of elements has 3 choices.",
+  "kind": "formula",
+  "id": "6699c990-2b93-44d1-aa85-9865c06605fb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "How many equivalence relations exist on the set {1, 2, 3}?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "Equivalence relations correspond to partitions of the set. A 3-element set has 5 partitions.",
+  "kind": "result",
+  "id": "fcf99f8e-2bfa-4056-b9cf-40510fe119b4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Smallest equivalence relation on an n-element set A has how many ordered pairs?",
+  "formula": "",
+  "options": [
+   "n",
+   "n²",
+   "n(n−1)",
+   "2n"
+  ],
+  "answer": 0,
+  "explain": "The smallest is the identity relation {(a,a) : a ∈ A}, which has n pairs. The largest is A×A.",
+  "kind": "fact",
+  "id": "bd0472d3-6bad-4c4d-8b3f-1eae2f026b40",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Number of relations on an n-element set that are both symmetric and antisymmetric is?",
+  "formula": "2^n",
+  "options": [
+   "2^n",
+   "n²",
+   "2^(n²)",
+   "2^(n(n−1)/2)"
+  ],
+  "answer": 0,
+  "explain": "Such a relation is a subset of the diagonal {(a,a)}, which has n elements, giving 2^n subsets.",
+  "kind": "result",
+  "id": "f9fb2d96-cdec-4a91-b81e-6242a3936099",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Number of non-empty relations from A to B, with n(A)=m and n(B)=n, is?",
+  "formula": "2^(mn) − 1",
+  "options": [
+   "2^(mn) − 1",
+   "2^(mn) − 2",
+   "2^m·2^n − 1",
+   "(2^m − 1)(2^n − 1)"
+  ],
+  "answer": 0,
+  "explain": "Total subsets of A×B is 2^(mn). Remove only the empty relation.",
+  "kind": "formula",
+  "id": "df54cfe4-b826-4aaf-8fa7-f5b6e4d1f464",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Number of asymmetric relations on an n-element set?",
+  "formula": "",
+  "options": [
+   "3^(n(n−1)/2)",
+   "2^n · 3^(n(n−1)/2)",
+   "2^(n(n−1)/2)",
+   "3^(n²)"
+  ],
+  "answer": 0,
+  "explain": "Diagonal pairs are excluded. Each unordered pair {a,b} has 3 choices: none, (a,b) or (b,a).",
+  "kind": "formula",
+  "id": "abec48a2-80d3-4443-a75f-91356221c434",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Total number of relations on a set A with n elements is:",
+  "formula": "2^(n²)",
+  "options": [
+   "2ⁿ",
+   "n²",
+   "2^(n²)",
+   "2^(n²) − 1"
+  ],
+  "answer": 2,
+  "explain": "Relations are subsets of A×A, which has n² elements, so there are 2^(n²) of them.",
+  "kind": "formula",
+  "id": "ec4f8a4b-5c6c-4af8-96f9-4d559e1937ef",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "Number of reflexive relations on a set with n elements is:",
+  "formula": "2^(n²−n)",
+  "options": [
+   "2^(n²−n)",
+   "2^(n²)",
+   "2^(n(n+1)/2)",
+   "2^(n²−1)"
+  ],
+  "answer": 0,
+  "explain": "All n diagonal pairs are forced; the other n²−n pairs are free to include or not.",
+  "kind": "formula",
+  "id": "4b4a01e4-16ba-4023-8184-b1d909131f4c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "The empty relation on a non-empty set A is:",
+  "formula": "",
+  "options": [
+   "Reflexive and symmetric",
+   "Symmetric and transitive, not reflexive",
+   "Equivalence relation",
+   "Reflexive and transitive"
+  ],
+  "answer": 1,
+  "explain": "Symmetry and transitivity hold vacuously, but (a,a)∉∅, so it is not reflexive.",
+  "kind": "exception",
+  "id": "671feea2-c1b1-485a-92c3-c4bb67f6a3b9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "On the set of lines in a plane, 'is perpendicular to' is:",
+  "formula": "",
+  "options": [
+   "Equivalence relation",
+   "Reflexive and symmetric only",
+   "Transitive only",
+   "Symmetric only"
+  ],
+  "answer": 3,
+  "explain": "L⊥M ⇒ M⊥L; but L⊥L is false, and L⊥M, M⊥N does not give L⊥N.",
+  "kind": "concept",
+  "id": "712ac61c-559e-4ebc-8df2-b49a5f27cd38",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "On the set of lines in a plane, 'is parallel to' is:",
+  "formula": "",
+  "options": [
+   "An equivalence relation",
+   "Symmetric only",
+   "Symmetric and transitive, not reflexive",
+   "Reflexive only"
+  ],
+  "answer": 0,
+  "explain": "Reflexive, symmetric and transitive (a line is parallel to itself), so it is an equivalence relation.",
+  "kind": "concept",
+  "id": "15c20527-a2aa-4d39-a734-44cd1d8df4b0",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "The relation a ≤ b on ℝ is:",
+  "formula": "",
+  "options": [
+   "Reflexive, transitive, not symmetric",
+   "Reflexive, symmetric, transitive",
+   "Symmetric and transitive only",
+   "Reflexive and symmetric only"
+  ],
+  "answer": 0,
+  "explain": "a≤a, and a≤b≤c ⇒ a≤c, but a≤b does not give b≤a. It is a partial order.",
+  "kind": "concept",
+  "id": "fda187cb-7821-483f-af3c-f6797161d9ea",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "On ℕ, the relation 'a divides b' is:",
+  "formula": "",
+  "options": [
+   "Symmetric and transitive",
+   "Equivalence relation",
+   "Reflexive and symmetric",
+   "Reflexive, antisymmetric, transitive"
+  ],
+  "answer": 3,
+  "explain": "a|a, a|b and b|a ⇒ a=b in ℕ, and a|b, b|c ⇒ a|c; but 2|4 while 4∤2, so not symmetric.",
+  "kind": "concept",
+  "id": "87b5d6d1-519a-4111-9c3c-8adfa6f9d856",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "On ℝ, aRb iff ab ≥ 0. Then R is:",
+  "formula": "",
+  "options": [
+   "Equivalence relation",
+   "Reflexive and symmetric, not transitive",
+   "Symmetric and transitive only",
+   "Transitive only"
+  ],
+  "answer": 1,
+  "explain": "a²≥0 and ab=ba, but 1R0 and 0R(−1) while 1·(−1)<0.",
+  "kind": "exception",
+  "id": "17cf51e2-eec1-4c34-9b86-0e36f30e7d85",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "On ℤ, aRb iff a − b is odd. Then R is:",
+  "formula": "",
+  "options": [
+   "Transitive only",
+   "Reflexive only",
+   "Symmetric only",
+   "Equivalence relation"
+  ],
+  "answer": 2,
+  "explain": "a−a=0 is not odd; b−a is odd if a−b is odd; odd+odd=even, so it is not transitive.",
+  "kind": "concept",
+  "id": "0690eb8c-9345-471a-817d-8e3e0d9c2aba",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "On A = {1,2,3}, R = {(1,2),(2,1)} is:",
+  "formula": "",
+  "options": [
+   "Symmetric and transitive",
+   "Reflexive and symmetric",
+   "Symmetric only",
+   "Transitive only"
+  ],
+  "answer": 2,
+  "explain": "Not reflexive, and 1R2, 2R1 would need (1,1), which is absent, so it is not transitive.",
+  "kind": "concept",
+  "id": "95a27220-0c14-40e4-842a-48b60b2c4195",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "The intersection of two equivalence relations on a set A is always:",
+  "formula": "",
+  "options": [
+   "Only reflexive",
+   "An equivalence relation",
+   "Symmetric but not transitive",
+   "Not necessarily reflexive"
+  ],
+  "answer": 1,
+  "explain": "All three properties survive intersection. A union need not be transitive.",
+  "kind": "result",
+  "id": "6aa22db1-fc66-4315-a410-d53158264666",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "Number of equivalence relations on the set {1,2,3} is:",
+  "formula": "Bell number B₃ = 5",
+  "options": [
+   "3",
+   "4",
+   "6",
+   "5"
+  ],
+  "answer": 3,
+  "explain": "They correspond to partitions of a 3-element set: 1 + 3 + 1 = 5.",
+  "kind": "result",
+  "id": "87c4e8e1-3c0b-4533-a65e-dcfebc07ba09",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "Distinct equivalence classes of an equivalence relation on A form:",
+  "formula": "",
+  "options": [
+   "A partition of A",
+   "A chain in A",
+   "A cover with overlaps",
+   "A subgroup of A"
+  ],
+  "answer": 0,
+  "explain": "Classes are non-empty, pairwise disjoint, and their union is A, so they partition A.",
+  "kind": "fact",
+  "id": "e2be650c-663a-4947-af5c-b3a87d0b2670",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "For a relation R on A, R⁻¹ = R holds exactly when R is:",
+  "formula": "",
+  "options": [
+   "Reflexive",
+   "Transitive",
+   "Antisymmetric",
+   "Symmetric"
+  ],
+  "answer": 3,
+  "explain": "Symmetry means (a,b)∈R ⇒ (b,a)∈R, which is the same as R⁻¹ = R.",
+  "kind": "concept",
+  "id": "95db3ea1-d6b8-4ccd-9032-8ecbc4cbe666",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "A relation that is both symmetric and antisymmetric must be:",
+  "formula": "",
+  "options": [
+   "A subset of the identity relation",
+   "The universal relation",
+   "Reflexive",
+   "Empty only"
+  ],
+  "answer": 0,
+  "explain": "aRb and bRa force a=b, so only pairs (a,a) can occur.",
+  "kind": "result",
+  "id": "ae6a6cf1-171d-4ccf-ac5e-f259637666a0",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "The smallest equivalence relation on a set A is:",
+  "formula": "",
+  "options": [
+   "The empty relation",
+   "The universal relation A×A",
+   "The identity relation",
+   "A relation with one pair"
+  ],
+  "answer": 2,
+  "explain": "Reflexivity forces every (a,a), and the identity relation is already symmetric and transitive.",
+  "kind": "fact",
+  "id": "3db48ad5-5a82-4e7d-9ba9-3fbcfbf9bc22",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "The union of two equivalence relations on a set A is always:",
+  "formula": "",
+  "options": [
+   "An equivalence relation",
+   "Reflexive and symmetric, maybe not transitive",
+   "Symmetric and transitive, not reflexive",
+   "Reflexive and transitive, not symmetric"
+  ],
+  "answer": 1,
+  "explain": "Union keeps reflexivity and symmetry, but transitivity can fail, e.g. {(1,2),(2,1)} ∪ {(2,3),(3,2)} plus the diagonal.",
+  "kind": "exception",
+  "id": "2367e397-c680-4a54-95c9-ff54dcdca135",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "Total number of relations on a set A with n elements is:",
+  "formula": "|A×A| = n²",
+  "options": [
+   "2^n",
+   "2^(n²)",
+   "n²",
+   "2^(n²−n)"
+  ],
+  "answer": 1,
+  "explain": "A relation is any subset of A×A, which has n² elements, so there are 2^(n²) subsets.",
+  "kind": "formula",
+  "id": "c85dbf63-e3bc-48b3-bd1b-8700d3ffeca2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of antisymmetric relations on an n-element set:",
+  "formula": "2ⁿ · 3^(n(n−1)/2)",
+  "options": [
+   "2ⁿ · 3^(n(n−1)/2)",
+   "3^(n(n−1)/2)",
+   "2^(n(n−1)/2)",
+   "3ⁿ · 2^(n(n−1)/2)"
+  ],
+  "answer": 0,
+  "explain": "Each diagonal pair is in or out (2ⁿ). Each off-diagonal pair {a,b} has 3 choices: (a,b), (b,a) or neither.",
+  "kind": "formula",
+  "id": "e8190c89-8b70-458e-b876-2dec9291cbb2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of relations on an n-element set that are both symmetric and antisymmetric:",
+  "formula": "2ⁿ",
+  "options": [
+   "2^(n²)",
+   "n",
+   "2ⁿ",
+   "2^(n(n−1)/2)"
+  ],
+  "answer": 2,
+  "explain": "Off-diagonal pairs are forced out. Only subsets of the diagonal remain, giving 2ⁿ.",
+  "kind": "result",
+  "id": "c88c17ef-7b63-4f2a-8097-8578eb75e119",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of reflexive and antisymmetric relations on an n-element set:",
+  "formula": "3^(n(n−1)/2)",
+  "options": [
+   "2ⁿ·3^(n(n−1)/2)",
+   "3^(n(n−1)/2)",
+   "2^(n(n−1)/2)",
+   "3^(n²−n)"
+  ],
+  "answer": 1,
+  "explain": "The diagonal is forced in. Each off-diagonal unordered pair has 3 choices.",
+  "kind": "formula",
+  "id": "9c00a89f-f50e-485d-9027-0f6c4ec09b64",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of equivalence relations on the set {1, 2, 3}:",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "5",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "Equivalence relations correspond to partitions of the set, and {1,2,3} has 5 partitions (Bell number B₃).",
+  "kind": "result",
+  "id": "68acae23-0649-41a6-b0c0-3f8d0da3a4c4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of equivalence relations on a 4-element set:",
+  "formula": "",
+  "options": [
+   "15",
+   "14",
+   "24",
+   "16"
+  ],
+  "answer": 0,
+  "explain": "It equals the number of partitions of the set, the Bell number B₄ = 15.",
+  "kind": "result",
+  "id": "311527a4-3c8d-4a54-bf5b-2f951beb4adf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "The smallest equivalence relation on a set A is:",
+  "formula": "",
+  "options": [
+   "The empty relation",
+   "A×A",
+   "The identity relation {(a,a): a∈A}",
+   "Any reflexive relation"
+  ],
+  "answer": 2,
+  "explain": "Reflexivity forces every (a,a) into the relation. The diagonal alone is already symmetric and transitive.",
+  "kind": "concept",
+  "id": "c6d57b38-5aad-443e-8536-f4aa615408d2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of non-reflexive relations on an n-element set:",
+  "formula": "2^(n²) − 2^(n²−n)",
+  "options": [
+   "2^(n²−n)",
+   "2^(n²) − 2^(n²−n)",
+   "2^(n²) − 2ⁿ",
+   "2^(n²−n) − 1"
+  ],
+  "answer": 1,
+  "explain": "Non-reflexive = total relations minus reflexive relations.",
+  "kind": "formula",
+  "id": "9ad0fe00-42c1-4a89-8c3e-35a7df695bf6",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of irreflexive relations (no (a,a) present) on an n-element set:",
+  "formula": "2^(n²−n)",
+  "options": [
+   "2^(n²−n)",
+   "2^(n²)−1",
+   "2^(n²)−2ⁿ",
+   "2^(n(n−1)/2)"
+  ],
+  "answer": 0,
+  "explain": "All n diagonal pairs are excluded, and the n²−n off-diagonal pairs are free.",
+  "kind": "formula",
+  "id": "2dff4ffd-2a73-4d94-88a2-9dc3b8b669ea",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Symmetric relations on an n-element set that are not reflexive:",
+  "formula": "",
+  "options": [
+   "2^(n(n+1)/2) − 2^(n(n−1)/2)",
+   "2^(n(n+1)/2) − 2^(n²−n)",
+   "2^(n(n+1)/2) − 1",
+   "2^(n²) − 2^(n(n+1)/2)"
+  ],
+  "answer": 0,
+  "explain": "Subtract the reflexive symmetric relations, 2^(n(n−1)/2), from all symmetric ones, 2^(n(n+1)/2).",
+  "kind": "result",
+  "id": "ae6d53d6-7b2b-41ae-9dab-1e731dd0cfd4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "The empty relation on a non-empty set A is:",
+  "formula": "",
+  "options": [
+   "Reflexive only",
+   "Equivalence relation",
+   "Symmetric and transitive, not reflexive",
+   "Reflexive and symmetric"
+  ],
+  "answer": 2,
+  "explain": "The symmetry and transitivity conditions hold vacuously, but the pairs (a,a) are missing, so it is not reflexive.",
+  "kind": "exception",
+  "id": "4ee8595e-65ca-47d6-848a-c3b4447d4ace",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of asymmetric relations on an n-element set (aRb ⇒ b R̸ a):",
+  "formula": "",
+  "options": [
+   "2ⁿ · 3^(n(n−1)/2)",
+   "3^(n(n−1)/2)",
+   "3^(n²)",
+   "2^(n(n−1)/2)"
+  ],
+  "answer": 1,
+  "explain": "No diagonal pairs; each of the n(n−1)/2 unordered pairs has 3 choices: none, (a,b) or (b,a).",
+  "kind": "result",
+  "id": "0eb966d2-f928-4a9d-82a6-1d87efa1ca9e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "One-one functions from A (m elements) to B (n elements), m ≤ n, number:",
+  "formula": "",
+  "options": [
+   "ⁿPₘ",
+   "ⁿCₘ",
+   "nᵐ",
+   "mⁿ"
+  ],
+  "answer": 0,
+  "explain": "Images are chosen in order without repetition: n(n−1)…(n−m+1) = ⁿPₘ.",
+  "kind": "formula",
+  "id": "57f0feb7-7256-4c92-acbe-26047dded5ba",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "For a finite set A, a one-one function f: A→A is necessarily:",
+  "formula": "",
+  "options": [
+   "Onto",
+   "Many-one",
+   "Into",
+   "Constant"
+  ],
+  "answer": 0,
+  "explain": "On a finite set, injective ⇔ surjective, so f is a bijection.",
+  "kind": "result",
+  "id": "88f7fbc2-a1c5-47f2-b983-7e6013cb27e8",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "Number of onto functions from an m-element set to a 2-element set (m ≥ 2):",
+  "formula": "2ᵐ − 2",
+  "options": [
+   "2ᵐ − 2",
+   "2ᵐ",
+   "2ᵐ − 1",
+   "m² − 2"
+  ],
+  "answer": 0,
+  "explain": "Total 2ᵐ functions minus the 2 constant (non-onto) ones.",
+  "kind": "formula",
+  "id": "3a40a22a-8931-42be-8151-44d8fb7a0498",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "A polynomial of odd degree f: ℝ→ℝ is always:",
+  "formula": "",
+  "options": [
+   "Onto",
+   "One-one",
+   "Many-one",
+   "Into"
+  ],
+  "answer": 0,
+  "explain": "Its limits at ±∞ are opposite infinities, so by continuity the range is ℝ.",
+  "kind": "concept",
+  "id": "5733b5be-4290-40e4-9899-ed0569ca04ae",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "A polynomial of even degree f: ℝ→ℝ is always:",
+  "formula": "",
+  "options": [
+   "Many-one",
+   "One-one",
+   "Onto",
+   "Bijective"
+  ],
+  "answer": 0,
+  "explain": "Both ends go to the same infinity, so f turns and repeats values; it is also into.",
+  "kind": "concept",
+  "id": "6d467e8e-2b0e-46c2-9ac4-0440da35153f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ→ℝ, f(x) = x|x| is:",
+  "formula": "",
+  "options": [
+   "One-one onto",
+   "One-one into",
+   "Many-one onto",
+   "Many-one into"
+  ],
+  "answer": 0,
+  "explain": "f is strictly increasing and continuous with range ℝ.",
+  "kind": "result",
+  "id": "aeb0dd5e-a97a-410d-b404-fe2efffa7f34",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ→ℤ, f(x) = [x] (greatest integer) is:",
+  "formula": "",
+  "options": [
+   "Many-one onto",
+   "One-one onto",
+   "One-one into",
+   "Many-one into"
+  ],
+  "answer": 0,
+  "explain": "f(0.2)=f(0.7), and every integer n is attained at x=n.",
+  "kind": "result",
+  "id": "492c6f48-b01f-4cd8-9be6-546e16913e5d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ∖{0}→ℝ, f(x) = x + 1/x is:",
+  "formula": "",
+  "options": [
+   "Many-one into",
+   "One-one onto",
+   "One-one into",
+   "Many-one onto"
+  ],
+  "answer": 0,
+  "explain": "f(2)=f(1/2); range (−∞,−2]∪[2,∞) ≠ ℝ.",
+  "kind": "result",
+  "id": "5ae9299a-480c-496c-a9a4-4f04851f5143",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "A non-constant periodic function f: ℝ→ℝ is always:",
+  "formula": "",
+  "options": [
+   "Many-one",
+   "One-one",
+   "Onto",
+   "Bijective"
+  ],
+  "answer": 0,
+  "explain": "f(x)=f(x+T) with x≠x+T, so values repeat.",
+  "kind": "concept",
+  "id": "97103480-f039-4419-af09-02927c012bda",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "Horizontal line test: f is one-one if every horizontal line meets its graph:",
+  "formula": "",
+  "options": [
+   "At most once",
+   "At least once",
+   "Exactly twice",
+   "At most twice"
+  ],
+  "answer": 0,
+  "explain": "At most once ⇒ injective; at least once for every y in codomain ⇒ onto.",
+  "kind": "concept",
+  "id": "c7364211-552b-4bcc-b95a-51cdfa27f877",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ→ℝ, f(x) = eˣ is:",
+  "formula": "",
+  "options": [
+   "One-one into",
+   "One-one onto",
+   "Many-one onto",
+   "Many-one into"
+  ],
+  "answer": 0,
+  "explain": "eˣ is strictly increasing, but its range is (0,∞) ≠ ℝ.",
+  "kind": "result",
+  "id": "619b5dec-9dc6-4626-9ae7-8e6b744642ab",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: (0,∞)→ℝ, f(x) = ln x is:",
+  "formula": "",
+  "options": [
+   "Bijective",
+   "One-one into",
+   "Many-one onto",
+   "Many-one into"
+  ],
+  "answer": 0,
+  "explain": "Strictly increasing with range ℝ; it is the inverse of eˣ.",
+  "kind": "result",
+  "id": "3e54311d-36f0-4142-acee-ffd6f3836931",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: [0, π]→[−1, 1], f(x) = cos x is:",
+  "formula": "",
+  "options": [
+   "Bijective",
+   "One-one into",
+   "Many-one onto",
+   "Many-one into"
+  ],
+  "answer": 0,
+  "explain": "cos x decreases strictly from 1 to −1 on [0, π].",
+  "kind": "result",
+  "id": "d8d8f6ab-24ec-4905-977a-010ed3cef4cb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "If f′(x) > 0 for all x in the domain interval, then f is:",
+  "formula": "",
+  "options": [
+   "One-one",
+   "Many-one",
+   "Onto",
+   "Periodic"
+  ],
+  "answer": 0,
+  "explain": "Strictly increasing implies injective; onto depends on the codomain.",
+  "kind": "concept",
+  "id": "8f562f87-73a6-41fe-a688-7271ad3496b1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "Number of constant functions from A (m elements) to B (n elements):",
+  "formula": "",
+  "options": [
+   "n",
+   "m",
+   "nᵐ",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "One constant function for each choice of the fixed image in B.",
+  "kind": "formula",
+  "id": "bab54cdc-bbe9-4e2c-98ba-306d4908359d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ→[0, ∞), f(x) = x² is:",
+  "formula": "",
+  "options": [
+   "Many-one onto",
+   "One-one onto",
+   "One-one into",
+   "Many-one into"
+  ],
+  "answer": 0,
+  "explain": "f(−2)=f(2), and the range [0,∞) equals the codomain.",
+  "kind": "result",
+  "id": "0e5a48ce-3d92-4992-829d-1ba0a399b47a",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "Number of functions from A (m elements) to B (n elements) is:",
+  "formula": "n(A)=m, n(B)=n",
+  "options": [
+   "nᵐ",
+   "mⁿ",
+   "m·n",
+   "ⁿPₘ"
+  ],
+  "answer": 0,
+  "explain": "Each of the m elements of A has n choices of image, giving nᵐ functions.",
+  "kind": "formula",
+  "id": "c3b7fe74-d380-4452-8f68-c268993aa7a2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ→ℝ, f(x) = x³ − x. Which classification is correct?",
+  "formula": "",
+  "options": [
+   "Many-one onto",
+   "One-one into",
+   "One-one onto",
+   "Many-one into"
+  ],
+  "answer": 0,
+  "explain": "Cubic is onto; f(0)=f(1)=f(−1)=0, so it is many-one.",
+  "kind": "result",
+  "id": "72a69156-d4eb-4482-9107-b689501bb652",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ→ℝ, f(x) = 2x/(1+x²). Which classification is correct?",
+  "formula": "",
+  "options": [
+   "One-one onto",
+   "Many-one into",
+   "Many-one onto",
+   "One-one into"
+  ],
+  "answer": 1,
+  "explain": "f(x)=f(1/x) so many-one; range is [−1,1] ≠ ℝ, so into.",
+  "kind": "result",
+  "id": "b36e4c43-0b44-4c7a-8328-1359765516cd",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "Number of functions from A (m elements) to B (n elements) is?",
+  "formula": "",
+  "options": [
+   "mⁿ",
+   "nᵐ",
+   "n!/(n−m)!",
+   "m·n"
+  ],
+  "answer": 1,
+  "explain": "Each of m elements has n independent choices of image, so nᵐ.",
+  "kind": "formula",
+  "id": "451c7d6f-db59-4fb6-acdc-68dd7bbf5515",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Number of onto functions from an m-element set to a 3-element set (m≥3) is?",
+  "formula": "",
+  "options": [
+   "3ᵐ − 2ᵐ + 1",
+   "3ᵐ − 3·2ᵐ",
+   "3ᵐ − 3·2ᵐ + 3",
+   "3ᵐ − 3"
+  ],
+  "answer": 2,
+  "explain": "Inclusion–exclusion: 3ᵐ − C(3,1)2ᵐ + C(3,2)1ᵐ = 3ᵐ − 3·2ᵐ + 3.",
+  "kind": "formula",
+  "id": "c79b7a91-3b80-4fb6-b19e-9d270ebf62e9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Number of onto functions from a 4-element set to a 3-element set is?",
+  "formula": "",
+  "options": [
+   "24",
+   "36",
+   "72",
+   "81"
+  ],
+  "answer": 1,
+  "explain": "3⁴ − 3·2⁴ + 3 = 36 (also C(4,2)·3! = 36).",
+  "kind": "result",
+  "id": "e42f384c-86ed-4c67-89ca-f1b5321546cf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Number of onto functions from a 5-element set to a 3-element set is?",
+  "formula": "",
+  "options": [
+   "120",
+   "150",
+   "180",
+   "243"
+  ],
+  "answer": 1,
+  "explain": "3⁵ − 3·2⁵ + 3 = 243 − 96 + 3 = 150.",
+  "kind": "result",
+  "id": "cf3d5931-c975-4bd8-92d7-ae34c5efeaf7",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "For a finite set A, a function f: A→A that is one-one must be?",
+  "formula": "",
+  "options": [
+   "Onto",
+   "Many-one",
+   "Constant",
+   "Identity"
+  ],
+  "answer": 0,
+  "explain": "For equal finite cardinality, one-one ⇔ onto, so f is a bijection.",
+  "kind": "concept",
+  "id": "ccf1ce15-3547-4f2a-a85b-2ef7afdd9082",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "If n(A)=m < n(B)=n, the number of onto functions A→B is?",
+  "formula": "",
+  "options": [
+   "nᵐ − mⁿ",
+   "n!/(n−m)!",
+   "1",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "Range has at most m elements, which is fewer than n, so onto is impossible.",
+  "kind": "concept",
+  "id": "ce9a55c0-2510-4501-bcaa-dd177084b51e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Strictly increasing functions from {1,…,m} to {1,…,n}, m≤n, number?",
+  "formula": "",
+  "options": [
+   "ⁿCₘ",
+   "ⁿPₘ",
+   "ⁿ⁺ᵐ⁻¹Cₘ",
+   "nᵐ"
+  ],
+  "answer": 0,
+  "explain": "Choose any m images from n; their increasing order fixes f. So ⁿCₘ.",
+  "kind": "formula",
+  "id": "7ed8bc55-9c63-4c76-ab84-6c7fe4dcd038",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Non-decreasing functions from {1,…,m} to {1,…,n} number?",
+  "formula": "",
+  "options": [
+   "ⁿCₘ",
+   "ⁿ⁺ᵐCₘ",
+   "ⁿ⁺ᵐ⁻¹Cₘ",
+   "ⁿᵐ⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Repetition allowed in selection of m images from n: ⁿ⁺ᵐ⁻¹Cₘ.",
+  "kind": "formula",
+  "id": "ecacd9a7-6f70-47b0-a9a9-9a56bec6f54e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Number of constant functions from A to B, where n(A)=m and n(B)=n?",
+  "formula": "",
+  "options": [
+   "m",
+   "n",
+   "nᵐ",
+   "mⁿ"
+  ],
+  "answer": 1,
+  "explain": "A constant function is fixed by its single value in B, giving n choices.",
+  "kind": "fact",
+  "id": "c88566c7-3d0f-4de4-9b77-cf70993575aa",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Bijections f on {1,2,3} with f(i)≠i for every i: how many?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "3",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "Derangements of 3 objects: the two 3-cycles, so D₃ = 2.",
+  "kind": "result",
+  "id": "fc4fa337-7b84-47df-8a9f-d67b5fa8bbbe",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Number of onto functions from m-set to n-set in terms of Stirling number S(m,n)?",
+  "formula": "",
+  "options": [
+   "S(m,n)",
+   "m!·S(m,n)",
+   "n!·S(m,n)",
+   "ⁿCₘ·S(m,n)"
+  ],
+  "answer": 2,
+  "explain": "Partition domain into n non-empty groups S(m,n), then assign them to n images in n! ways.",
+  "kind": "formula",
+  "id": "2042373c-0cc4-4530-b820-6c7bf5ee5ae0",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "For n(A)=3, number of many-one functions from A to A is?",
+  "formula": "",
+  "options": [
+   "6",
+   "21",
+   "24",
+   "27"
+  ],
+  "answer": 1,
+  "explain": "Total 3³ = 27 minus one-one functions 3! = 6 gives 21.",
+  "kind": "result",
+  "id": "3de652ea-886e-432b-9f7c-9cc9cf745aa5",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "Functions A→B (n(A)=m, n(B)=n) with image of one given element fixed: how many?",
+  "formula": "",
+  "options": [
+   "nᵐ⁻¹",
+   "nᵐ",
+   "mⁿ⁻¹",
+   "(n−1)ᵐ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "One element has a fixed image; remaining m−1 elements have n choices each.",
+  "kind": "formula",
+  "id": "2d16bf3e-9fa1-4a2f-a718-de84f2d78c42",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "For bijective f and g with g∘f defined, (g∘f)⁻¹ equals?",
+  "formula": "(g∘f)⁻¹ = f⁻¹∘g⁻¹",
+  "options": [
+   "f⁻¹∘g⁻¹",
+   "g⁻¹∘f⁻¹",
+   "(f∘g)⁻¹",
+   "f∘g"
+  ],
+  "answer": 0,
+  "explain": "Inverse reverses the order: undo g first, then f.",
+  "kind": "formula",
+  "id": "8c287946-f146-4dc3-a929-fce6dc2980d8",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "If f is bijective, then (f⁻¹)⁻¹ equals?",
+  "formula": "(f⁻¹)⁻¹ = f",
+  "options": [
+   "f",
+   "f⁻¹",
+   "I (identity)",
+   "1/f"
+  ],
+  "answer": 0,
+  "explain": "The inverse of the inverse returns the original function.",
+  "kind": "result",
+  "id": "fd7a8018-4824-4c50-b140-866d128c8a47",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "For bijective f: A→B, f∘f⁻¹ equals?",
+  "formula": "f∘f⁻¹ = I_B, f⁻¹∘f = I_A",
+  "options": [
+   "Identity on B",
+   "Identity on A",
+   "f²",
+   "Constant function"
+  ],
+  "answer": 0,
+  "explain": "f∘f⁻¹ acts on B, giving the identity I_B.",
+  "kind": "formula",
+  "id": "7c566acd-c2a2-49a7-9e8c-a57a5fb141a8",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "Number of onto functions from a 4-element set to a 2-element set?",
+  "formula": "2⁴ − 2",
+  "options": [
+   "14",
+   "16",
+   "12",
+   "8"
+  ],
+  "answer": 0,
+  "explain": "All 2⁴ = 16 maps minus the 2 constant maps gives 14.",
+  "kind": "result",
+  "id": "a5f07b7a-dd23-4220-8e76-ee927ec7d148",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "Number of one-one functions from a 3-element set to a 5-element set?",
+  "formula": "⁵P₃",
+  "options": [
+   "60",
+   "10",
+   "125",
+   "243"
+  ],
+  "answer": 0,
+  "explain": "5·4·3 = 60 injective maps.",
+  "kind": "result",
+  "id": "b3056a0e-8821-44d9-9cf1-3d33119e82a9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "Which of these functions on its natural domain is its own inverse?",
+  "formula": "f(f(x)) = x",
+  "options": [
+   "f(x) = 1/x",
+   "f(x) = x²",
+   "f(x) = 2x",
+   "f(x) = eˣ"
+  ],
+  "answer": 0,
+  "explain": "f(f(x)) = 1/(1/x) = x, so 1/x is self-inverse.",
+  "kind": "fact",
+  "id": "0e2e252d-1f85-412e-8756-8bb8433191c1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "Which function R→R is bijective?",
+  "formula": "",
+  "options": [
+   "f(x) = x³",
+   "f(x) = x²",
+   "f(x) = |x|",
+   "f(x) = sin x"
+  ],
+  "answer": 0,
+  "explain": "x³ is strictly increasing with range R. The others are many-one or not onto.",
+  "kind": "exception",
+  "id": "261b5951-f150-4cb8-854c-7a9c36fb58a1",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "Composition of two bijections f: A→B and g: B→C is always?",
+  "formula": "",
+  "options": [
+   "Bijective",
+   "One-one only",
+   "Onto only",
+   "Many-one"
+  ],
+  "answer": 0,
+  "explain": "The composite of injective maps is injective, and of surjective maps is surjective, so it is bijective.",
+  "kind": "result",
+  "id": "ad206181-53aa-488d-8626-e650d4dfc5d2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "Inverse of f(x) = (2x+1)/(x−1) (x≠1) is?",
+  "formula": "",
+  "options": [
+   "f itself",
+   "(x+1)/(x−2)",
+   "(x−1)/(2x+1)",
+   "(2x−1)/(x+1)"
+  ],
+  "answer": 1,
+  "explain": "f(x)=(ax+b)/(cx−a) is self-inverse; here a=2... check: y(x−1)=2x+1 gives x=(y+1)/(y−2), so f⁻¹=(x+1)/(x−2).",
+  "kind": "result",
+  "id": "b3bd5cea-a503-4397-b712-1d40130d85b8",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "Which of these is a bijection from R to R?",
+  "formula": "",
+  "options": [
+   "f(x) = eˣ",
+   "f(x) = x|x|",
+   "f(x) = x² + x",
+   "f(x) = sin x"
+  ],
+  "answer": 1,
+  "explain": "x|x| equals x² for x≥0 and −x² for x<0; it is strictly increasing with range R, so it is bijective.",
+  "kind": "exception",
+  "id": "72265946-8292-4e31-93da-d2a3a9517beb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "If f: A→B and g: B→C are such that g∘f is one-one, then which must be true?",
+  "formula": "",
+  "options": [
+   "f is one-one",
+   "g is one-one",
+   "f is onto",
+   "g is onto"
+  ],
+  "answer": 0,
+  "explain": "If g∘f is injective, then f must be injective. g need not be injective.",
+  "kind": "result",
+  "id": "103e62fa-8aac-41fb-bf2c-3819f5a5b82d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "If A = {∅, {∅}}, which statement is true?",
+  "formula": "",
+  "options": [
+   "{∅} ∈ A and {∅} ⊂ A",
+   "∅ ∈ A but {∅} ⊄ A",
+   "{∅} ∉ A but ∅ ⊂ A only",
+   "{{∅}} ∈ A"
+  ],
+  "answer": 0,
+  "explain": "∅ and {∅} are both elements of A, so {∅} ∈ A. Also ∅ ∈ A makes {∅} ⊂ A. {{∅}} is a subset, not an element.",
+  "kind": "concept",
+  "id": "f14f3edc-b0b5-4679-a7cb-7872ca49e4da",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "Number of elements in the power set of A = {1, {2, 3}, ∅} is:",
+  "formula": "",
+  "options": [
+   "8",
+   "16",
+   "4",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "A has 3 distinct elements: 1, {2,3} and ∅. So |P(A)| = 2³ = 8.",
+  "kind": "result",
+  "id": "c9ba50b8-782e-4fa4-b659-625bf29024bf",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Sets and their representation"
+ },
+ {
+  "prompt": "If A ⊆ B, then Bᶜ ∩ Aᶜ equals?",
+  "formula": "",
+  "options": [
+   "Bᶜ",
+   "Aᶜ",
+   "∅",
+   "U"
+  ],
+  "answer": 0,
+  "explain": "A ⊆ B implies Bᶜ ⊆ Aᶜ, so the intersection is the smaller set Bᶜ.",
+  "kind": "result",
+  "id": "da5b9563-e8bd-4dfc-9cdb-7da86b5384d2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "If A ⊂ B, then A ∪ (B − A) equals",
+  "formula": "",
+  "options": [
+   "A",
+   "B",
+   "A ∩ B ᶜ",
+   "Bᶜ"
+  ],
+  "answer": 1,
+  "explain": "B − A is the part of B outside A; adding A gives B.",
+  "kind": "result",
+  "id": "7000705e-348a-4b2f-8de6-07f0a0159299",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "If A ∪ B = A ∩ B, then which must hold?",
+  "formula": "",
+  "options": [
+   "A = B",
+   "A ∩ B = φ",
+   "A ⊂ B properly",
+   "A = φ"
+  ],
+  "answer": 0,
+  "explain": "A∩B ⊂ A ⊂ A∪B = A∩B forces A = A∩B; same for B, so A = B.",
+  "kind": "result",
+  "id": "d3dce5a9-18f0-4f64-9a3f-9c5e35702cc0",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "For any sets A and B, (A − B) ∩ B equals",
+  "formula": "",
+  "options": [
+   "A",
+   "B",
+   "∅",
+   "A ∩ B"
+  ],
+  "answer": 2,
+  "explain": "A−B has no element of B, so intersection with B is empty.",
+  "kind": "result",
+  "id": "9628e317-3660-4d68-9cfd-0f98b9d2038f",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "For any sets A, B, the set (A ∩ B) ∪ (A ∩ Bᶜ) equals",
+  "formula": "",
+  "options": [
+   "B",
+   "A",
+   "A ∪ B",
+   "∅"
+  ],
+  "answer": 1,
+  "explain": "A ∩ (B ∪ Bᶜ) = A ∩ U = A.",
+  "kind": "result",
+  "id": "9550cbad-2be3-4d94-b0ce-ddfc070288d6",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "The set (A ∪ B) − (A ∩ B) represents which set?",
+  "formula": "",
+  "options": [
+   "A − B only",
+   "Aᶜ ∩ Bᶜ",
+   "A Δ B (symmetric difference)",
+   "A ∩ B"
+  ],
+  "answer": 2,
+  "explain": "Elements in exactly one of A, B: (A−B) ∪ (B−A) = A Δ B.",
+  "kind": "concept",
+  "id": "f0580bdd-3ecb-4ff9-959b-59099f91f345",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "P(A) ∪ P(B) = P(A ∪ B) holds exactly when which condition is true?",
+  "formula": "P(A) ∪ P(B) ⊆ P(A ∪ B)",
+  "options": [
+   "A ∩ B = ∅",
+   "A = B only",
+   "A ⊆ B or B ⊆ A",
+   "It holds for all A, B"
+  ],
+  "answer": 2,
+  "explain": "If neither set contains the other, A ∪ B is a subset of A ∪ B but lies in neither P(A) nor P(B). So equality needs A ⊆ B or B ⊆ A.",
+  "kind": "exception",
+  "id": "d20d8617-98f8-4e2b-8759-387aec31a759",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "With n(A)=m, n(B)=n, relations from A to B having exactly k ordered pairs number?",
+  "formula": "",
+  "options": [
+   "ᵐⁿPₖ",
+   "ᵐⁿCₖ",
+   "ᵐCₖ · ⁿCₖ",
+   "2^k"
+  ],
+  "answer": 1,
+  "explain": "Choose k of the mn elements of A×B; the order of pairs is irrelevant in a set.",
+  "kind": "formula",
+  "id": "68ec19d2-2939-4b1c-83ab-d2091420b4c5",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "If n(A∩B) = p, then n[(A×B) ∩ (B×A)] equals?",
+  "formula": "(A×B)∩(B×A) = (A∩B)×(A∩B)",
+  "options": [
+   "p",
+   "p²",
+   "2p",
+   "p(p+1)/2"
+  ],
+  "answer": 1,
+  "explain": "(A×B)∩(B×A) = (A∩B)×(A∩B), which has p² elements.",
+  "kind": "result",
+  "id": "830c6799-aabf-4bc3-94c9-d6e425b7ff07",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "On ℝ, aRb iff |a − b| ≤ 1. Then R is:",
+  "formula": "",
+  "options": [
+   "Equivalence relation",
+   "Reflexive and symmetric, not transitive",
+   "Symmetric and transitive, not reflexive",
+   "Reflexive and transitive, not symmetric"
+  ],
+  "answer": 1,
+  "explain": "0R1 and 1R2 but |0−2| = 2 > 1, so transitivity fails.",
+  "kind": "result",
+  "id": "a4f6b9ab-6c0d-4ce5-a63b-3f1fae243847",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "A × (B − C) equals which of the following?",
+  "formula": "",
+  "options": [
+   "(A×B) − C",
+   "(A×B) − (A×C)",
+   "(A×B) − (C×C)",
+   "(A−A) × (B−C)"
+  ],
+  "answer": 1,
+  "explain": "Cartesian product distributes over set difference: A×(B−C) = (A×B) − (A×C).",
+  "kind": "result",
+  "id": "d2c148a8-87ff-4233-b302-ce04fba1e956",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Cartesian product and number of relations"
+ },
+ {
+  "prompt": "Which of the following sets is finite?",
+  "formula": "",
+  "options": [
+   "{x ∈ ℚ : 0 < x < 1}",
+   "{x ∈ ℤ : x² < 10}",
+   "{x ∈ ℝ : sin x = 0}",
+   "Set of lines through the origin"
+  ],
+  "answer": 1,
+  "explain": "x² < 10 gives x = −3,…,3, which is 7 elements. The other sets are infinite.",
+  "kind": "fact",
+  "id": "f9355615-c030-4dfd-af4c-3cebd90f1a39",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "Number of subsets of an n-element set having exactly r elements is",
+  "formula": "",
+  "options": [
+   "ⁿCᵣ",
+   "ⁿPᵣ",
+   "2ʳ",
+   "ⁿCᵣ + 1"
+  ],
+  "answer": 0,
+  "explain": "Choosing r elements out of n gives ⁿCᵣ subsets, and the sum over r is 2ⁿ.",
+  "kind": "formula",
+  "id": "c278812b-f897-4415-9fbb-bd1e19b443fd",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "Which of the following sets is NON-empty?",
+  "formula": "",
+  "options": [
+   "{x ∈ ℝ : x² + 4 = 0}",
+   "{x ∈ ℤ : 0 < |x| < 1}",
+   "{x ∈ ℚ : x² = 2}",
+   "{x ∈ ℝ : x² = 0}"
+  ],
+  "answer": 3,
+  "explain": "x² = 0 gives {0}. The others have no solution: no real root, no integer in (0,1), and √2 is irrational.",
+  "kind": "exception",
+  "id": "28fd0096-5f5c-4bc3-907d-065e8d46e12d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "The set {∅} (the set whose only member is the empty set) is:",
+  "formula": "",
+  "options": [
+   "The empty set",
+   "A singleton set with 1 element",
+   "A set with 2 elements",
+   "A set with no subsets"
+  ],
+  "answer": 1,
+  "explain": "{∅} has exactly one element, namely ∅, so it is a non-empty singleton; its subsets are ∅ and {∅}.",
+  "kind": "concept",
+  "id": "6cc476c3-3e02-4ed4-b3b7-b5a76e90bbeb",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "Which pair of sets is equal?",
+  "formula": "",
+  "options": [
+   "{1, 2, 2, 3} and {3, 2, 1}",
+   "{∅} and ∅",
+   "{1, 2} and {{1, 2}}",
+   "{0} and ∅"
+  ],
+  "answer": 0,
+  "explain": "Repetition and order of elements do not matter, so both sets are {1, 2, 3}.",
+  "kind": "concept",
+  "id": "6d4f95d6-ccdd-4507-86a8-8f7a963a7456",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Types of sets: empty, finite, equal, subsets"
+ },
+ {
+  "prompt": "A ∩ B = ∅ holds if and only if?",
+  "formula": "",
+  "options": [
+   "A ⊆ Bᶜ",
+   "A ⊆ B",
+   "Aᶜ ⊆ Bᶜ",
+   "A ∪ B = U"
+  ],
+  "answer": 0,
+  "explain": "No common elements means every element of A lies outside B, so A ⊆ Bᶜ.",
+  "kind": "concept",
+  "id": "2c6bcd4d-0b31-4200-b7ff-0eb74dfc2e3d",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Union, intersection, complement of sets"
+ },
+ {
+  "prompt": "For subsets of a universal set, Aᶜ − Bᶜ equals?",
+  "formula": "Aᶜ − Bᶜ = Aᶜ ∩ B = B − A",
+  "options": [
+   "A − B",
+   "B − A",
+   "A Δ B",
+   "Aᶜ ∩ Bᶜ"
+  ],
+  "answer": 1,
+  "explain": "Aᶜ − Bᶜ = Aᶜ ∩ (Bᶜ)ᶜ = Aᶜ ∩ B = B − A.",
+  "kind": "result",
+  "id": "ca1f511b-720b-4646-b102-9aab6a9280a4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "For any sets A and B within a universal set, Aᶜ Δ Bᶜ equals",
+  "formula": "Aᶜ Δ Bᶜ = A Δ B",
+  "options": [
+   "(A Δ B)ᶜ",
+   "A Δ B",
+   "Aᶜ ∩ Bᶜ",
+   "A ∩ B"
+  ],
+  "answer": 1,
+  "explain": "Being in exactly one of Aᶜ, Bᶜ is the same as being in exactly one of A, B.",
+  "kind": "result",
+  "id": "64e4b880-e661-41e8-8290-eaf0457cd8e2",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Algebraic properties & De Morgan's laws"
+ },
+ {
+  "prompt": "If n(A) = 2, then n(P(P(A))) equals?",
+  "formula": "n(P(A)) = 2ⁿ",
+  "options": [
+   "8",
+   "16",
+   "4",
+   "32"
+  ],
+  "answer": 1,
+  "explain": "n(P(A)) = 4, so n(P(P(A))) = 2⁴ = 16.",
+  "kind": "result",
+  "id": "51757b33-83bd-4772-b633-f7cd349df8ab",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of ordered pairs (X, Y) with X ⊆ Y ⊆ S, where n(S) = n, is?",
+  "formula": "3ⁿ",
+  "options": [
+   "2ⁿ",
+   "3ⁿ",
+   "n²",
+   "2ⁿ⁺¹"
+  ],
+  "answer": 1,
+  "explain": "Each element lies in X, in Y − X, or outside Y: 3 choices, so 3ⁿ.",
+  "kind": "result",
+  "id": "429fbdd6-20cb-4345-99d6-77a4dc9cefc4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Subsets of an n-element set containing at least one of two given elements?",
+  "formula": "2ⁿ − 2ⁿ⁻²",
+  "options": [
+   "2ⁿ⁻²",
+   "2ⁿ⁻¹",
+   "3·2ⁿ⁻²",
+   "2ⁿ − 2ⁿ⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Total 2ⁿ minus subsets avoiding both (2ⁿ⁻²) gives 3·2ⁿ⁻².",
+  "kind": "formula",
+  "id": "5193338d-07ec-4514-94dd-6c7bcd19754e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "Number of subsets of an n-element set having at most one element is?",
+  "formula": "",
+  "options": [
+   "n + 1",
+   "n",
+   "2ⁿ − n",
+   "n(n + 1)/2"
+  ],
+  "answer": 0,
+  "explain": "Empty set (1) plus n singletons gives n + 1 subsets.",
+  "kind": "result",
+  "id": "36daa00b-613b-4016-810f-15923819919c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Power set and number of subsets"
+ },
+ {
+  "prompt": "On ℝ, the relation aRb iff a < b is:",
+  "formula": "",
+  "options": [
+   "Transitive only",
+   "Symmetric only",
+   "Reflexive and transitive",
+   "Reflexive and symmetric"
+  ],
+  "answer": 0,
+  "explain": "a<a is false, so not reflexive; a<b does not give b<a; a<b<c gives a<c.",
+  "kind": "concept",
+  "id": "9bcedfa5-bf1c-494c-b96c-6eb44be4feb3",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "R is symmetric and transitive, and every a∈A is related to some b∈A. Then R is:",
+  "formula": "aRb, bRa ⇒ aRa",
+  "options": [
+   "Reflexive, hence an equivalence",
+   "Antisymmetric",
+   "Empty relation",
+   "The identity relation"
+  ],
+  "answer": 0,
+  "explain": "aRb gives bRa by symmetry, then aRa by transitivity, so R is reflexive.",
+  "kind": "result",
+  "id": "8ebda7fc-408c-4efe-befb-0276cfb367c6",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "On the set ℝ, define aRb iff a ≠ b. Then R is:",
+  "formula": "",
+  "options": [
+   "Symmetric only",
+   "Reflexive and symmetric only",
+   "Symmetric and transitive only",
+   "An equivalence relation"
+  ],
+  "answer": 0,
+  "explain": "a≠b ⇒ b≠a, so symmetric. Not reflexive since a=a. Not transitive: 1R2, 2R1 but 1 is not R-related to 1.",
+  "kind": "concept",
+  "id": "9c39bf0a-5843-4f1c-84b2-e5da4a43f49c",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Reflexive, symmetric, transitive relations"
+ },
+ {
+  "prompt": "R = {(1,2)} on {1,2,3}. Least number of pairs to add to make R reflexive and symmetric?",
+  "formula": "",
+  "options": [
+   "4",
+   "3",
+   "5",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "Add (1,1),(2,2),(3,3) for reflexivity and (2,1) for symmetry: 4 pairs.",
+  "kind": "concept",
+  "id": "5d54239d-10ec-439a-b5a9-7538f579e79e",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "Number of reflexive relations on {1,2,3} that are NOT symmetric:",
+  "formula": "",
+  "options": [
+   "56",
+   "64",
+   "8",
+   "60"
+  ],
+  "answer": 0,
+  "explain": "Reflexive: 2⁶ = 64; reflexive and symmetric: 2³ = 8; so 64 − 8 = 56.",
+  "kind": "result",
+  "id": "47549d51-ae52-42c7-8cdf-0823f4d0e9ea",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting reflexive/symmetric relations"
+ },
+ {
+  "prompt": "If g∘f: A→C is onto (f: A→B, g: B→C), which must be true?",
+  "formula": "",
+  "options": [
+   "g is onto",
+   "f is onto",
+   "f is one-one",
+   "g is one-one"
+  ],
+  "answer": 0,
+  "explain": "Range(g∘f) ⊆ Range(g) ⊆ C, so g∘f onto forces g onto; f need not be onto.",
+  "kind": "result",
+  "id": "a89dd5cf-4f63-4e8e-aadc-c5c875726b91",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "f: ℝ∖{1}→ℝ, f(x) = (x+1)/(x−1) is:",
+  "formula": "",
+  "options": [
+   "One-one onto",
+   "One-one into",
+   "Many-one onto",
+   "Many-one into"
+  ],
+  "answer": 1,
+  "explain": "Injective (Möbius form), but y = 1 is never attained, so it is not onto.",
+  "kind": "exception",
+  "id": "70bef7c2-e4de-4061-9530-904f170e6773",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "One-one, many-one, into, onto functions"
+ },
+ {
+  "prompt": "Number of bijections f on {1,2,3,4} with f(i) ≠ i for every i (derangements of 4)?",
+  "formula": "D₄ = 4!(1 − 1/1! + 1/2! − 1/3! + 1/4!)",
+  "options": [
+   "9",
+   "11",
+   "12",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "Derangement numbers: D₂=1, D₃=2, D₄=9, D₅=44.",
+  "kind": "fact",
+  "id": "74bcb431-d85e-43ab-afd9-917aeedfa493",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "A→B, n(A)=m, n(B)=n. Functions whose range excludes one given element of B?",
+  "formula": "(n−1)ᵐ",
+  "options": [
+   "(n−1)ᵐ",
+   "mⁿ⁻¹",
+   "nᵐ − 1",
+   "n(n−1)ᵐ"
+  ],
+  "answer": 0,
+  "explain": "Each of the m elements of A has only n−1 allowed images, giving (n−1)ᵐ.",
+  "kind": "formula",
+  "id": "2917c5e2-68b9-404c-a785-b51627324cf9",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "One-one functions from A (3 elements) to B (5 elements) with f(a₁) fixed as a given element of B: how many?",
+  "formula": "ⁿ⁻¹Pₘ₋₁ = (n−1)!/(n−m)!",
+  "options": [
+   "12",
+   "20",
+   "60",
+   "24"
+  ],
+  "answer": 0,
+  "explain": "Fix f(a₁); the other 2 elements map one-one into the remaining 4: 4·3 = 12.",
+  "kind": "result",
+  "id": "028009ed-c851-405e-9d97-09d5863e576b",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Counting one-one/onto functions"
+ },
+ {
+  "prompt": "If g∘f is onto (f: A→B, g: B→C), which statement must be true?",
+  "formula": "",
+  "options": [
+   "g is onto",
+   "f is onto",
+   "f is one-one",
+   "g is one-one"
+  ],
+  "answer": 0,
+  "explain": "Every element of C is g(f(a)), so g already reaches all of C. f need not be onto.",
+  "kind": "result",
+  "id": "117a1a3f-73b9-4683-99bb-a32b3d5a3d73",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "f(x) = (ax+b)/(cx+d), c≠0, is its own inverse exactly when?",
+  "formula": "f⁻¹(x) = (−dx+b)/(cx−a)",
+  "options": [
+   "a + d = 0",
+   "a = d",
+   "b + c = 0",
+   "ad − bc = 0"
+  ],
+  "answer": 0,
+  "explain": "Inverse is (dx−b)/(−cx+a); it equals f only if d = −a, i.e. a + d = 0.",
+  "kind": "result",
+  "id": "c9c5a9bf-e4cb-43b3-828a-ba1eb62cc4dc",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ },
+ {
+  "prompt": "f: ℝ→ℝ, f(x) = x³ + x has inverse f⁻¹ because f is:",
+  "formula": "",
+  "options": [
+   "Strictly increasing, hence bijective",
+   "Odd, hence bijective",
+   "One-one but not onto",
+   "Onto but not one-one"
+  ],
+  "answer": 0,
+  "explain": "f′ = 3x²+1 > 0 gives one-one, and the cubic's range is ℝ, so f is onto. Oddness alone does not ensure bijectivity.",
+  "kind": "concept",
+  "id": "23749cb5-b0be-4d19-a2bd-a0e5567d57c4",
+  "subject": "Mathematics",
+  "chapter": "Sets Relations & Functions",
+  "topic": "Bijection and invertibility of functions"
+ }
+]

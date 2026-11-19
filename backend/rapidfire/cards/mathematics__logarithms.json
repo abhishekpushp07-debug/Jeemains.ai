@@ -1,1153 +1,2853 @@
 [
-  {
-    "id": "c1b17ca8-c7d1-4f10-8d7a-6ceda4c07d0d",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a(mn) equals?",
-    "formula": "log_a(mn) = log_a m + log_a n",
-    "options": [
-      "log_a(m+n)",
-      "log_a m · log_a n",
-      "log_a m − log_a n",
-      "log_a m + log_a n"
-    ],
-    "answer": 3,
-    "explain": "Product rule of logarithms: log of product = sum of logs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "56d7afd9-ef07-4e76-9cee-5819fc98c1b0",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a(mⁿ) equals?",
-    "formula": "log_a(mⁿ) = n·log_a m",
-    "options": [
-      "log_a m / n",
-      "n·log_a m",
-      "log_a m + n",
-      "(log_a m)ⁿ"
-    ],
-    "answer": 1,
-    "explain": "Power rule: exponent comes out as coefficient.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "289cdf4c-1aa1-4c7c-8eef-147898595ccd",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "Change of base formula: log_a b = ?",
-    "formula": "log_a b = log_c b / log_c a",
-    "options": [
-      "log_c a / log_c b",
-      "log_c b · log_c a",
-      "log_b c / log_a c",
-      "log_c b / log_c a"
-    ],
-    "answer": 3,
-    "explain": "Change of base: divide log of argument by log of base in any common base.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2423dded-1398-4c70-9504-3e878672e3b0",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "Value of log_a a = ?",
-    "formula": "log_a a = 1",
-    "options": [
-      "1/a",
-      "1",
-      "0",
-      "a"
-    ],
-    "answer": 1,
-    "explain": "Any base raised to power 1 gives the base itself, so log_a a = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e7b2ee2d-5628-4edc-9b69-caa6f9b78809",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "Value of log_a 1 = ?",
-    "formula": "log_a 1 = 0",
-    "options": [
-      "−1",
-      "0",
-      "1",
-      "a"
-    ],
-    "answer": 1,
-    "explain": "a⁰ = 1 for any valid base a, so log_a 1 = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "137f08e1-cb62-49d8-82c4-2bdc8038e314",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a b · log_b a = ?",
-    "formula": "log_a b · log_b a = 1",
-    "options": [
-      "log_a b",
-      "1",
-      "0",
-      "2"
-    ],
-    "answer": 1,
-    "explain": "By change of base, log_a b = 1/log_b a, so their product is 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "edf5fa08-1bf8-4760-b034-f2af35d70328",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "For log_a x to be defined, which condition is required?",
-    "formula": "",
-    "options": [
-      "x > 1, a > 0",
-      "x > 0, a ≥ 1",
-      "x > 0, a > 0, a ≠ 1",
-      "x ≥ 0, a > 1"
-    ],
-    "answer": 2,
-    "explain": "Logarithm requires positive argument, positive base not equal to 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c7235619-5726-4f1e-8182-598b26c68451",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x = p and log_a y = q, then log_a(x²y³) = ?",
-    "formula": "",
-    "options": [
-      "2p · 3q",
-      "p² + q³",
-      "2p + 3q",
-      "6pq"
-    ],
-    "answer": 2,
-    "explain": "Power and product rules: log(x²y³) = 2log x + 3log y = 2p + 3q.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b76c61e2-ee51-4ad5-95be-d1b6c8e321b9",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "For a > 1: log_a x > log_a y ⟺ ?",
-    "formula": "",
-    "options": [
-      "x > 0",
-      "x < y",
-      "x = y",
-      "x > y"
-    ],
-    "answer": 3,
-    "explain": "log is strictly increasing when base a > 1, so order is preserved.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3d4e7f7e-c1b8-449c-b4c0-05cf531fb524",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "For 0 < a < 1: log_a x > log_a y ⟺ ?",
-    "formula": "",
-    "options": [
-      "x < y",
-      "x > y",
-      "x = y",
-      "x · y > 1"
-    ],
-    "answer": 0,
-    "explain": "log is strictly decreasing when 0 < a < 1, so inequality reverses.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70ba9736-8a5b-4b07-98e3-c45f34f28d53",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a b · log_b c · log_c d = ?",
-    "formula": "log_a b · log_b c · log_c d = log_a d",
-    "options": [
-      "1",
-      "log_a d",
-      "log_b d",
-      "log_c d"
-    ],
-    "answer": 1,
-    "explain": "Chain rule: consecutive change-of-base telescopes to log_a d.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e03b4580-f043-46be-bee3-ed632273dbfb",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "a^(log_a x) = ?",
-    "formula": "a^(log_a x) = x",
-    "options": [
-      "1",
-      "a",
-      "log_a x",
-      "x"
-    ],
-    "answer": 3,
-    "explain": "Exponential and logarithm are inverse functions: a^(log_a x) = x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "92bbc03c-586e-446a-989e-bbef975c2539",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a(√x) equals?",
-    "formula": "log_a(√x) = (1/2)log_a x",
-    "options": [
-      "(log_a x)²",
-      "log_a x − 2",
-      "(1/2)log_a x",
-      "2 log_a x"
-    ],
-    "answer": 2,
-    "explain": "√x = x^(1/2), power rule gives coefficient 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "acfba274-4bf3-415c-a43c-3150202951a0",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₂ 8 = ?",
-    "formula": "log₂ 2³ = 3",
-    "options": [
-      "8",
-      "2",
-      "3",
-      "4"
-    ],
-    "answer": 2,
-    "explain": "8 = 2³, so log₂ 8 = 3 by definition of logarithm.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "752224c9-585c-4fce-9be9-f249b8eedce5",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_{1/a} x equals?",
-    "formula": "log_{1/a} x",
-    "options": [
-      "1/log_a x",
-      "log_a(1/x)",
-      "log_a x",
-      "−log_a x"
-    ],
-    "answer": 3,
-    "explain": "log_{1/a} x = log x / log(a⁻¹) = log x / (−log a) = −log_a x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f285adc3-17bd-4c27-a512-cf2deb1d71fd",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a b is rational when b = a^(p/q). log_a 8 where a=2 is?",
-    "formula": "log₂ 8",
-    "options": [
-      "3",
-      "8",
-      "1/3",
-      "log 8"
-    ],
-    "answer": 0,
-    "explain": "log₂ 8 = log₂ 2³ = 3. Direct integer value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "49bab9e6-b080-43dd-bc93-d5e47acb8b6e",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "For log_a x to be real, which must hold?",
-    "formula": "",
-    "options": [
-      "x > 1, a > 1",
-      "x ∈ ℝ, a > 0",
-      "x ≥ 0, a > 1",
-      "x > 0, a > 0, a ≠ 1"
-    ],
-    "answer": 3,
-    "explain": "Logarithm is defined only for positive base ≠1 and positive argument.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d4f13b5c-3b22-4c82-b427-e79b1612b91e",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a x + log_a(1/x) = ?",
-    "formula": "log_a x + log_a(1/x)",
-    "options": [
-      "0",
-      "1",
-      "−1",
-      "2 log_a x"
-    ],
-    "answer": 0,
-    "explain": "log_a x + log_a(x⁻¹) = log_a x − log_a x = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d2c4d9e8-8685-4942-b526-12563da80797",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x = p, then x = ?",
-    "formula": "log_a x = p",
-    "options": [
-      "pᵃ",
-      "a/p",
-      "aᵖ",
-      "p/a"
-    ],
-    "answer": 2,
-    "explain": "By definition of logarithm, log_a x = p means x = aᵖ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bc868f59-5400-4051-95c6-b752e8cfbf38",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a(1/x) equals?",
-    "formula": "log_a(1/x)",
-    "options": [
-      "log_a x",
-      "1/log_a x",
-      "log_x a",
-      "−log_a x"
-    ],
-    "answer": 3,
-    "explain": "log_a(x⁻¹) = −1·log_a x = −log_a x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d144f999-e9be-4d40-8bb8-fd0f52e9c135",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "2^(log₂ 5) = ?",
-    "formula": "a^(log_a x) = x",
-    "options": [
-      "2",
-      "10",
-      "5",
-      "log 5"
-    ],
-    "answer": 2,
-    "explain": "By the fundamental identity a^(log_a x) = x, so 2^(log₂5) = 5.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "038aa01a-b161-4b10-850d-09c66f58c75b",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a b × log_b c equals?",
-    "formula": "log_a b × log_b c",
-    "options": [
-      "log_a c",
-      "log_b a",
-      "1",
-      "log_c a"
-    ],
-    "answer": 0,
-    "explain": "Chain rule: (lnb/lna)×(lnc/lnb) = lnc/lna = log_a c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b8e5426b-6818-47e9-8cbd-7755be1f253b",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x < log_a y and a > 1, then the inequality in x,y is?",
-    "formula": "",
-    "options": [
-      "x > y",
-      "x < y",
-      "x·y < 1",
-      "x = y"
-    ],
-    "answer": 1,
-    "explain": "For a > 1, log_a is increasing, so log_a x < log_a y ⟺ x < y.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e51e0d87-a092-4261-bf1f-000f51018b58",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₄ 2 = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "1/2",
-      "1/4",
-      "4"
-    ],
-    "answer": 1,
-    "explain": "4^(1/2) = 2, so log₄ 2 = 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c32ed3f2-1e75-4311-b41d-f4e92135435b",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₂(1/8) = ?",
-    "formula": "",
-    "options": [
-      "1/3",
-      "-3",
-      "-1/3",
-      "3"
-    ],
-    "answer": 1,
-    "explain": "1/8 = 2⁻³, so log₂(2⁻³) = −3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "34490ee3-a5d9-464d-b61a-e6a04ed30d58",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₃ x = 4, then x = ?",
-    "formula": "x = 3⁴",
-    "options": [
-      "81",
-      "12",
-      "64",
-      "27"
-    ],
-    "answer": 0,
-    "explain": "By definition log_a x = n ⟺ x = aⁿ; so x = 3⁴ = 81.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6d2b0b90-e42b-47dd-bdec-6fbaef97f52d",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_{0.5} 4 = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "-1/2",
-      "-2",
-      "1/2"
-    ],
-    "answer": 2,
-    "explain": "(0.5)⁻² = 4, so log_{0.5} 4 = −2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "b686684f-3d17-41e7-836d-544cf7cf1396",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a b is negative when?",
-    "formula": "",
-    "options": [
-      "a and b on opposite sides of 1",
-      "a = b",
-      "a > 1 and b > 1",
-      "0 < a < 1 and 0 < b < 1"
-    ],
-    "answer": 0,
-    "explain": "log_a b < 0 when (a > 1, 0 < b < 1) or (0 < a < 1, b > 1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f695ab0b-7ef7-41f5-98f3-18e03480d579",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₂ 3 · log₃ 4 · log₄ 8 = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "6",
-      "1",
-      "3"
-    ],
-    "answer": 3,
-    "explain": "Chain rule: log₂ 3 · log₃ 4 · log₄ 8 = log₂ 8 = 3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "2c704476-4023-4368-aca7-d7b2a3cf8e84",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x = p, then log_{a²} x = ?",
-    "formula": "",
-    "options": [
-      "2p",
-      "p²",
-      "p",
-      "p/2"
-    ],
-    "answer": 3,
-    "explain": "log_{a²} x = log_a x / log_a(a²) = p/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "4998153f-55ac-429c-b28e-2e3aa3ecfe33",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a b = c, then log_a(b²) = ?",
-    "formula": "log_a(b²) = 2c",
-    "options": [
-      "c/2",
-      "c²",
-      "2/c",
-      "2c"
-    ],
-    "answer": 3,
-    "explain": "Power rule: log_a(bⁿ) = n·log_a b, so log_a(b²) = 2c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e285cfab-d5ce-4867-bb10-1bc80a413ef7",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₂ x = log₂ 3 + log₂ 5, then x = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "8",
-      "30",
-      "15"
-    ],
-    "answer": 3,
-    "explain": "log₂ x = log₂(3×5) = log₂15, so x = 15.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1fe93e9f-af0d-4340-9cc3-e7a38810b4e2",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If logₐ x = m and logₐ y = n, then logₐ(x/y²) = ?",
-    "formula": "",
-    "options": [
-      "m + 2n",
-      "m − 2n",
-      "2m − n",
-      "m/2n"
-    ],
-    "answer": 1,
-    "explain": "logₐ(x/y²) = logₐx − 2logₐy = m − 2n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f0eaa1d5-d06d-413d-afd9-1d54a59b97eb",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₅ 125 = ?",
-    "formula": "",
-    "options": [
-      "3",
-      "25",
-      "5",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "125 = 5³, so log₅ 125 = 3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1a1c85d8-21f9-409e-9f21-b65c3f5b57d3",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If 0 < a < 1, the function f(x) = log_a x is?",
-    "formula": "",
-    "options": [
-      "Periodic",
-      "Constant",
-      "Strictly increasing",
-      "Strictly decreasing"
-    ],
-    "answer": 3,
-    "explain": "For base 0 < a < 1, larger x gives smaller log_a x — decreasing function.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4efa3439-e5fe-4d25-8842-b50e3cae3b0c",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₄ 64 = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "4",
-      "3",
-      "16"
-    ],
-    "answer": 2,
-    "explain": "64 = 4³, so log₄ 64 = 3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ee5d168d-fae8-4c31-bace-8d258f384fc8",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₂ x > 3, then x lies in?",
-    "formula": "",
-    "options": [
-      "x > 9",
-      "x > 3",
-      "x > 6",
-      "x > 8"
-    ],
-    "answer": 3,
-    "explain": "Base 2 > 1, so log₂ x > 3 ⟹ x > 2³ = 8.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fea14873-677c-4b6b-9387-7d9cdd228862",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₀.₅ x > 2, then x lies in?",
-    "formula": "",
-    "options": [
-      "x > 4",
-      "x < 2",
-      "x > 0.25",
-      "0 < x < 0.25"
-    ],
-    "answer": 3,
-    "explain": "Base 0.5 < 1 reverses inequality: x < (0.5)² = 0.25, with x > 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7b558aad-2321-478c-a8eb-abfaf878096a",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₂(log₃ 9) = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "0",
-      "1",
-      "3"
-    ],
-    "answer": 2,
-    "explain": "log₃ 9 = 2; then log₂ 2 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a354f03b-f04f-4c5f-8ef8-d26d4d18a510",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a x · log_x b = ?",
-    "formula": "log_a b",
-    "options": [
-      "log_a b",
-      "1",
-      "log_b a",
-      "log_x(ab)"
-    ],
-    "answer": 0,
-    "explain": "Chain rule: (log x/log a)·(log b/log x) = log b/log a = log_a b.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70e898ce-87b3-49e8-8de7-18ff08cb5568",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₅ 5^(2x) = ?",
-    "formula": "log_a a^n = n",
-    "options": [
-      "2x log 5",
-      "2x",
-      "5^(2x)",
-      "x"
-    ],
-    "answer": 1,
-    "explain": "log_a a^n = n, so log₅ 5^(2x) = 2x.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "383c3bb4-93d9-44e0-afa7-04108ab1b7ec",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₂ 5 + log₂ (1/5) = ?",
-    "formula": "log x + log(1/x) = 0",
-    "options": [
-      "2",
-      "1",
-      "0",
-      "log₂ 10"
-    ],
-    "answer": 2,
-    "explain": "log_a x + log_a(1/x) = log_a(x · 1/x) = log_a 1 = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4faa390e-27b9-4860-8550-68c05b3df698",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x = p·log_a y, then x equals?",
-    "formula": "log_a x = p·log_a y ⟹ x = yᵖ",
-    "options": [
-      "y+p",
-      "aᵖ",
-      "p·y",
-      "yᵖ"
-    ],
-    "answer": 3,
-    "explain": "p·log_a y = log_a(yᵖ), and log_a x = log_a(yᵖ) gives x = yᵖ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "873cd388-57d9-4686-beda-048d3a6e16e2",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x = m, then log_{1/a} x = ?",
-    "formula": "log_{1/a} x = −log_a x",
-    "options": [
-      "m",
-      "1/m",
-      "−1/m",
-      "−m"
-    ],
-    "answer": 3,
-    "explain": "log_{1/a} x = log x / log(1/a) = log x/(−log a) = −log_a x = −m.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3324d512-15a3-4b02-864f-4090307c078f",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₃ x = log₃ 4 − log₃ 2, then x = ?",
-    "formula": "log_a m − log_a n = log_a(m/n)",
-    "options": [
-      "8",
-      "1/2",
-      "2",
-      "6"
-    ],
-    "answer": 2,
-    "explain": "log₃ 4 − log₃ 2 = log₃(4/2) = log₃ 2, so x = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36264e23-5fa6-4386-bffe-bc7014f33a48",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_{a²} (a³) = ?",
-    "formula": "log_{aⁿ}(aᵐ) = m/n",
-    "options": [
-      "3/2",
-      "2/3",
-      "3",
-      "6"
-    ],
-    "answer": 0,
-    "explain": "log_{a²}(a³) = 3·log a / 2·log a = 3/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e222c0ea-5b32-46d1-97d9-d2c4f45d0ae3",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₄ 8 = ?",
-    "formula": "log_{2²}(2³) = 3/2",
-    "options": [
-      "4/3",
-      "2",
-      "1/2",
-      "3/2"
-    ],
-    "answer": 3,
-    "explain": "log₄ 8 = log 8/log 4 = 3log2/2log2 = 3/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6b07fee7-4ef8-4986-8940-8a45be18543f",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x < 0 and a > 1, then x lies in?",
-    "formula": "log_a x < 0 ⟺ 0 < x < 1",
-    "options": [
-      "(1, ∞)",
-      "(−∞, 0)",
-      "(0, 1)",
-      "(0, a)"
-    ],
-    "answer": 2,
-    "explain": "For base a > 1, log_a x < 0 iff 0 < x < 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec288231-5468-4e9b-8444-c3e7c13fa37a",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₂ 3 · log₃ 5 · log₅ 2 = ?",
-    "formula": "log_a b·log_b c·log_c a = 1",
-    "options": [
-      "1",
-      "log 30",
-      "3",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "Chain rule collapses to log₂ 2 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d4ce08f8-e47e-408f-8594-9b4dff1821a0",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x > 0 and 0 < a < 1, then x lies in?",
-    "formula": "log_a x > 0 ⟺ 0 < x < 1 when 0<a<1",
-    "options": [
-      "(a, ∞)",
-      "(1, ∞)",
-      "(0, 1)",
-      "(0, a)"
-    ],
-    "answer": 2,
-    "explain": "For 0 < a < 1, log_a x > 0 iff 0 < x < 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6b2f41d5-1aca-4cc1-89c2-84b913e000ad",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₉ 27 = ?",
-    "formula": "log_{3²}(3³) = 3/2",
-    "options": [
-      "2",
-      "3/2",
-      "2/3",
-      "3"
-    ],
-    "answer": 1,
-    "explain": "log₉ 27 = log 27/log 9 = 3log3/2log3 = 3/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "18d4ec9f-7b83-4492-9a27-d941a262a9f2",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₂ x = 4, then log₂(x²) = ?",
-    "formula": "log_a(x²) = 2·log_a x",
-    "options": [
-      "2",
-      "4",
-      "16",
-      "8"
-    ],
-    "answer": 3,
-    "explain": "log₂(x²) = 2·log₂ x = 2×4 = 8.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "03f12a22-47f6-473e-8fb8-f7dc16442818",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log_a(bⁿ) / log_a(b) = ?",
-    "formula": "n·log_a b / log_a b = n",
-    "options": [
-      "n",
-      "log_a b",
-      "1",
-      "b^n"
-    ],
-    "answer": 0,
-    "explain": "n·log_a b divided by log_a b = n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a187f58-ab7f-44ef-bc68-a414eb5faded",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₁₀(log₁₀ 10) = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "1",
-      "undefined",
-      "10"
-    ],
-    "answer": 0,
-    "explain": "log₁₀ 10 = 1, then log₁₀ 1 = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e80cc8a8-0ed0-442b-b753-b585871ec0c9",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log_a x = p and log_a z = r, then log_a(x³/z²) = ?",
-    "formula": "",
-    "options": [
-      "3p − 2r",
-      "p³ − r²",
-      "3p + 2r",
-      "2p − 3r"
-    ],
-    "answer": 0,
-    "explain": "log_a(x³/z²) = 3·log_a x − 2·log_a z = 3p − 2r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5c479a4a-f538-4d49-920d-d689e6ada91a",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₅ x = log₅ 2 + log₅ 3 − log₅ 6, then x = ?",
-    "formula": "",
-    "options": [
-      "3",
-      "1",
-      "6",
-      "1/6"
-    ],
-    "answer": 1,
-    "explain": "log₅(2·3/6) = log₅ 1 = 0, so x = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f60acac2-897d-4860-8c5c-20cdc10e8085",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₂ 48 − log₂ 3 = ?",
-    "formula": "",
-    "options": [
-      "4",
-      "2",
-      "16",
-      "3"
-    ],
-    "answer": 0,
-    "explain": "log₂(48/3) = log₂ 16 = 4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f4dee9e6-2b85-4423-a9da-6c4fd4e3990a",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₁₀ 2 = 0.3010, then log₁₀ 20 = ?",
-    "formula": "",
-    "options": [
-      "0.6020",
-      "1.3010",
-      "0.3010",
-      "2.3010"
-    ],
-    "answer": 1,
-    "explain": "log₁₀ 20 = log₁₀ 2 + log₁₀ 10 = 0.3010 + 1 = 1.3010.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c2c2e5ed-8509-4a5b-b274-2629d55c69fa",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₃ 243 = ?",
-    "formula": "",
-    "options": [
-      "3",
-      "4",
-      "6",
-      "5"
-    ],
-    "answer": 3,
-    "explain": "3⁵ = 243, so log₃ 243 = 5.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b88e9593-bafb-431f-a57c-8967a5b7ca0e",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "log₁₀ 0.001 = ?",
-    "formula": "",
-    "options": [
-      "−3",
-      "−2",
-      "−4",
-      "3"
-    ],
-    "answer": 0,
-    "explain": "0.001 = 10⁻³, so log₁₀ 0.001 = −3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "df8f18a7-0efa-47ad-bf26-2a39d86b5882",
-    "subject": "Mathematics",
-    "chapter": "Logarithms",
-    "topic": "Logarithms",
-    "prompt": "If log₂ x > 4, then x must satisfy?",
-    "formula": "",
-    "options": [
-      "x > 8",
-      "x > 2",
-      "x > 16",
-      "x > 4"
-    ],
-    "answer": 2,
-    "explain": "log₂ x > 4 ⟹ x > 2⁴ = 16 (base 2 > 1, inequality preserved).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "c1b17ca8-c7d1-4f10-8d7a-6ceda4c07d0d",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "log_a(mn) equals?",
+  "formula": "log_a(mn) = log_a m + log_a n",
+  "options": [
+   "log_a(m+n)",
+   "log_a m · log_a n",
+   "log_a m − log_a n",
+   "log_a m + log_a n"
+  ],
+  "answer": 3,
+  "explain": "Product rule of logarithms: log of product = sum of logs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "56d7afd9-ef07-4e76-9cee-5819fc98c1b0",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "log_a(mⁿ) equals?",
+  "formula": "log_a(mⁿ) = n·log_a m",
+  "options": [
+   "log_a m / n",
+   "n·log_a m",
+   "log_a m + n",
+   "(log_a m)ⁿ"
+  ],
+  "answer": 1,
+  "explain": "Power rule: exponent comes out as coefficient.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "289cdf4c-1aa1-4c7c-8eef-147898595ccd",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "Change of base formula: log_a b = ?",
+  "formula": "log_a b = log_c b / log_c a",
+  "options": [
+   "log_c a / log_c b",
+   "log_c b · log_c a",
+   "log_b c / log_a c",
+   "log_c b / log_c a"
+  ],
+  "answer": 3,
+  "explain": "Change of base: divide log of argument by log of base in any common base.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2423dded-1398-4c70-9504-3e878672e3b0",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "Value of log_a a = ?",
+  "formula": "log_a a = 1",
+  "options": [
+   "1/a",
+   "1",
+   "0",
+   "a"
+  ],
+  "answer": 1,
+  "explain": "Any base raised to power 1 gives the base itself, so log_a a = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e7b2ee2d-5628-4edc-9b69-caa6f9b78809",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "Value of log_a 1 = ?",
+  "formula": "log_a 1 = 0",
+  "options": [
+   "−1",
+   "0",
+   "1",
+   "a"
+  ],
+  "answer": 1,
+  "explain": "a⁰ = 1 for any valid base a, so log_a 1 = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "137f08e1-cb62-49d8-82c4-2bdc8038e314",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "log_a b · log_b a = ?",
+  "formula": "log_a b · log_b a = 1",
+  "options": [
+   "log_a b",
+   "1",
+   "0",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "By change of base, log_a b = 1/log_b a, so their product is 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "edf5fa08-1bf8-4760-b034-f2af35d70328",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "For log_a x to be defined, which condition is required?",
+  "formula": "",
+  "options": [
+   "x > 1, a > 0",
+   "x > 0, a ≥ 1",
+   "x > 0, a > 0, a ≠ 1",
+   "x ≥ 0, a > 1"
+  ],
+  "answer": 2,
+  "explain": "Logarithm requires positive argument, positive base not equal to 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c7235619-5726-4f1e-8182-598b26c68451",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "If log_a x = p and log_a y = q, then log_a(x²y³) = ?",
+  "formula": "",
+  "options": [
+   "2p · 3q",
+   "p² + q³",
+   "2p + 3q",
+   "6pq"
+  ],
+  "answer": 2,
+  "explain": "Power and product rules: log(x²y³) = 2log x + 3log y = 2p + 3q.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b76c61e2-ee51-4ad5-95be-d1b6c8e321b9",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "For a > 1: log_a x > log_a y ⟺ ?",
+  "formula": "",
+  "options": [
+   "x > 0",
+   "x < y",
+   "x = y",
+   "x > y"
+  ],
+  "answer": 3,
+  "explain": "log is strictly increasing when base a > 1, so order is preserved.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3d4e7f7e-c1b8-449c-b4c0-05cf531fb524",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "For 0 < a < 1: log_a x > log_a y ⟺ ?",
+  "formula": "",
+  "options": [
+   "x < y",
+   "x > y",
+   "x = y",
+   "x · y > 1"
+  ],
+  "answer": 0,
+  "explain": "log is strictly decreasing when 0 < a < 1, so inequality reverses.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70ba9736-8a5b-4b07-98e3-c45f34f28d53",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "log_a b · log_b c · log_c d = ?",
+  "formula": "log_a b · log_b c · log_c d = log_a d",
+  "options": [
+   "1",
+   "log_a d",
+   "log_b d",
+   "log_c d"
+  ],
+  "answer": 1,
+  "explain": "Chain rule: consecutive change-of-base telescopes to log_a d.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e03b4580-f043-46be-bee3-ed632273dbfb",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "a^(log_a x) = ?",
+  "formula": "a^(log_a x) = x",
+  "options": [
+   "1",
+   "a",
+   "log_a x",
+   "x"
+  ],
+  "answer": 3,
+  "explain": "Exponential and logarithm are inverse functions: a^(log_a x) = x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "92bbc03c-586e-446a-989e-bbef975c2539",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "log_a(√x) equals?",
+  "formula": "log_a(√x) = (1/2)log_a x",
+  "options": [
+   "(log_a x)²",
+   "log_a x − 2",
+   "(1/2)log_a x",
+   "2 log_a x"
+  ],
+  "answer": 2,
+  "explain": "√x = x^(1/2), power rule gives coefficient 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "acfba274-4bf3-415c-a43c-3150202951a0",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "log₂ 8 = ?",
+  "formula": "log₂ 2³ = 3",
+  "options": [
+   "8",
+   "2",
+   "3",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "8 = 2³, so log₂ 8 = 3 by definition of logarithm.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "752224c9-585c-4fce-9be9-f249b8eedce5",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "log_{1/a} x equals?",
+  "formula": "log_{1/a} x",
+  "options": [
+   "1/log_a x",
+   "log_a(1/x)",
+   "log_a x",
+   "−log_a x"
+  ],
+  "answer": 3,
+  "explain": "log_{1/a} x = log x / log(a⁻¹) = log x / (−log a) = −log_a x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f285adc3-17bd-4c27-a512-cf2deb1d71fd",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "log_a b is rational when b = a^(p/q). log_a 8 where a=2 is?",
+  "formula": "log₂ 8",
+  "options": [
+   "3",
+   "8",
+   "1/3",
+   "log 8"
+  ],
+  "answer": 0,
+  "explain": "log₂ 8 = log₂ 2³ = 3. Direct integer value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "49bab9e6-b080-43dd-bc93-d5e47acb8b6e",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "For log_a x to be real, which must hold?",
+  "formula": "",
+  "options": [
+   "x > 1, a > 1",
+   "x ∈ ℝ, a > 0",
+   "x ≥ 0, a > 1",
+   "x > 0, a > 0, a ≠ 1"
+  ],
+  "answer": 3,
+  "explain": "Logarithm is defined only for positive base ≠1 and positive argument.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d4f13b5c-3b22-4c82-b427-e79b1612b91e",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Simplification of logarithmic expressions",
+  "prompt": "log_a x + log_a(1/x) = ?",
+  "formula": "log_a x + log_a(1/x)",
+  "options": [
+   "0",
+   "1",
+   "−1",
+   "2 log_a x"
+  ],
+  "answer": 0,
+  "explain": "log_a x + log_a(x⁻¹) = log_a x − log_a x = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d2c4d9e8-8685-4942-b526-12563da80797",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "If log_a x = p, then x = ?",
+  "formula": "log_a x = p",
+  "options": [
+   "pᵃ",
+   "a/p",
+   "aᵖ",
+   "p/a"
+  ],
+  "answer": 2,
+  "explain": "By definition of logarithm, log_a x = p means x = aᵖ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bc868f59-5400-4051-95c6-b752e8cfbf38",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "log_a(1/x) equals?",
+  "formula": "log_a(1/x)",
+  "options": [
+   "log_a x",
+   "1/log_a x",
+   "log_x a",
+   "−log_a x"
+  ],
+  "answer": 3,
+  "explain": "log_a(x⁻¹) = −1·log_a x = −log_a x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d144f999-e9be-4d40-8bb8-fd0f52e9c135",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "2^(log₂ 5) = ?",
+  "formula": "a^(log_a x) = x",
+  "options": [
+   "2",
+   "10",
+   "5",
+   "log 5"
+  ],
+  "answer": 2,
+  "explain": "By the fundamental identity a^(log_a x) = x, so 2^(log₂5) = 5.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "038aa01a-b161-4b10-850d-09c66f58c75b",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "log_a b × log_b c equals?",
+  "formula": "log_a b × log_b c",
+  "options": [
+   "log_a c",
+   "log_b a",
+   "1",
+   "log_c a"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: (lnb/lna)×(lnc/lnb) = lnc/lna = log_a c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b8e5426b-6818-47e9-8cbd-7755be1f253b",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "If log_a x < log_a y and a > 1, then the inequality in x,y is?",
+  "formula": "",
+  "options": [
+   "x > y",
+   "x < y",
+   "x·y < 1",
+   "x = y"
+  ],
+  "answer": 1,
+  "explain": "For a > 1, log_a is increasing, so log_a x < log_a y ⟺ x < y.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e51e0d87-a092-4261-bf1f-000f51018b58",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "log₄ 2 = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "1/2",
+   "1/4",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "4^(1/2) = 2, so log₄ 2 = 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c32ed3f2-1e75-4311-b41d-f4e92135435b",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "log₂(1/8) = ?",
+  "formula": "",
+  "options": [
+   "1/3",
+   "-3",
+   "-1/3",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "1/8 = 2⁻³, so log₂(2⁻³) = −3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "34490ee3-a5d9-464d-b61a-e6a04ed30d58",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic equations",
+  "prompt": "If log₃ x = 4, then x = ?",
+  "formula": "x = 3⁴",
+  "options": [
+   "81",
+   "12",
+   "64",
+   "27"
+  ],
+  "answer": 0,
+  "explain": "By definition log_a x = n ⟺ x = aⁿ; so x = 3⁴ = 81.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6d2b0b90-e42b-47dd-bdec-6fbaef97f52d",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "log_{0.5} 4 = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "-1/2",
+   "-2",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "(0.5)⁻² = 4, so log_{0.5} 4 = −2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "b686684f-3d17-41e7-836d-544cf7cf1396",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Comparison of logarithmic values",
+  "prompt": "log_a b is negative when?",
+  "formula": "",
+  "options": [
+   "a and b on opposite sides of 1",
+   "a = b",
+   "a > 1 and b > 1",
+   "0 < a < 1 and 0 < b < 1"
+  ],
+  "answer": 0,
+  "explain": "log_a b < 0 when (a > 1, 0 < b < 1) or (0 < a < 1, b > 1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f695ab0b-7ef7-41f5-98f3-18e03480d579",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "log₂ 3 · log₃ 4 · log₄ 8 = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "6",
+   "1",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "Chain rule: log₂ 3 · log₃ 4 · log₄ 8 = log₂ 8 = 3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2c704476-4023-4368-aca7-d7b2a3cf8e84",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "If log_a x = p, then log_{a²} x = ?",
+  "formula": "",
+  "options": [
+   "2p",
+   "p²",
+   "p",
+   "p/2"
+  ],
+  "answer": 3,
+  "explain": "log_{a²} x = log_a x / log_a(a²) = p/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "4998153f-55ac-429c-b28e-2e3aa3ecfe33",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "If log_a b = c, then log_a(b²) = ?",
+  "formula": "log_a(b²) = 2c",
+  "options": [
+   "c/2",
+   "c²",
+   "2/c",
+   "2c"
+  ],
+  "answer": 3,
+  "explain": "Power rule: log_a(bⁿ) = n·log_a b, so log_a(b²) = 2c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e285cfab-d5ce-4867-bb10-1bc80a413ef7",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic equations",
+  "prompt": "If log₂ x = log₂ 3 + log₂ 5, then x = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "8",
+   "30",
+   "15"
+  ],
+  "answer": 3,
+  "explain": "log₂ x = log₂(3×5) = log₂15, so x = 15.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1fe93e9f-af0d-4340-9cc3-e7a38810b4e2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "If logₐ x = m and logₐ y = n, then logₐ(x/y²) = ?",
+  "formula": "",
+  "options": [
+   "m + 2n",
+   "m − 2n",
+   "2m − n",
+   "m/2n"
+  ],
+  "answer": 1,
+  "explain": "logₐ(x/y²) = logₐx − 2logₐy = m − 2n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f0eaa1d5-d06d-413d-afd9-1d54a59b97eb",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "log₅ 125 = ?",
+  "formula": "",
+  "options": [
+   "3",
+   "25",
+   "5",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "125 = 5³, so log₅ 125 = 3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1a1c85d8-21f9-409e-9f21-b65c3f5b57d3",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "If 0 < a < 1, the function f(x) = log_a x is?",
+  "formula": "",
+  "options": [
+   "Periodic",
+   "Constant",
+   "Strictly increasing",
+   "Strictly decreasing"
+  ],
+  "answer": 3,
+  "explain": "For base 0 < a < 1, larger x gives smaller log_a x — decreasing function.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4efa3439-e5fe-4d25-8842-b50e3cae3b0c",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "log₄ 64 = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "4",
+   "3",
+   "16"
+  ],
+  "answer": 2,
+  "explain": "64 = 4³, so log₄ 64 = 3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ee5d168d-fae8-4c31-bace-8d258f384fc8",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "If log₂ x > 3, then x lies in?",
+  "formula": "",
+  "options": [
+   "x > 9",
+   "x > 3",
+   "x > 6",
+   "x > 8"
+  ],
+  "answer": 3,
+  "explain": "Base 2 > 1, so log₂ x > 3 ⟹ x > 2³ = 8.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fea14873-677c-4b6b-9387-7d9cdd228862",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "If log₀.₅ x > 2, then x lies in?",
+  "formula": "",
+  "options": [
+   "x > 4",
+   "x < 2",
+   "x > 0.25",
+   "0 < x < 0.25"
+  ],
+  "answer": 3,
+  "explain": "Base 0.5 < 1 reverses inequality: x < (0.5)² = 0.25, with x > 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7b558aad-2321-478c-a8eb-abfaf878096a",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Simplification of logarithmic expressions",
+  "prompt": "log₂(log₃ 9) = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "0",
+   "1",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "log₃ 9 = 2; then log₂ 2 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a354f03b-f04f-4c5f-8ef8-d26d4d18a510",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "log_a x · log_x b = ?",
+  "formula": "log_a b",
+  "options": [
+   "log_a b",
+   "1",
+   "log_b a",
+   "log_x(ab)"
+  ],
+  "answer": 0,
+  "explain": "Chain rule: (log x/log a)·(log b/log x) = log b/log a = log_a b.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70e898ce-87b3-49e8-8de7-18ff08cb5568",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Simplification of logarithmic expressions",
+  "prompt": "log₅ 5^(2x) = ?",
+  "formula": "log_a a^n = n",
+  "options": [
+   "2x log 5",
+   "2x",
+   "5^(2x)",
+   "x"
+  ],
+  "answer": 1,
+  "explain": "log_a a^n = n, so log₅ 5^(2x) = 2x.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "383c3bb4-93d9-44e0-afa7-04108ab1b7ec",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Simplification of logarithmic expressions",
+  "prompt": "log₂ 5 + log₂ (1/5) = ?",
+  "formula": "log x + log(1/x) = 0",
+  "options": [
+   "2",
+   "1",
+   "0",
+   "log₂ 10"
+  ],
+  "answer": 2,
+  "explain": "log_a x + log_a(1/x) = log_a(x · 1/x) = log_a 1 = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4faa390e-27b9-4860-8550-68c05b3df698",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic equations",
+  "prompt": "If log_a x = p·log_a y, then x equals?",
+  "formula": "log_a x = p·log_a y ⟹ x = yᵖ",
+  "options": [
+   "y+p",
+   "aᵖ",
+   "p·y",
+   "yᵖ"
+  ],
+  "answer": 3,
+  "explain": "p·log_a y = log_a(yᵖ), and log_a x = log_a(yᵖ) gives x = yᵖ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "873cd388-57d9-4686-beda-048d3a6e16e2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "If log_a x = m, then log_{1/a} x = ?",
+  "formula": "log_{1/a} x = −log_a x",
+  "options": [
+   "m",
+   "1/m",
+   "−1/m",
+   "−m"
+  ],
+  "answer": 3,
+  "explain": "log_{1/a} x = log x / log(1/a) = log x/(−log a) = −log_a x = −m.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3324d512-15a3-4b02-864f-4090307c078f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic equations",
+  "prompt": "If log₃ x = log₃ 4 − log₃ 2, then x = ?",
+  "formula": "log_a m − log_a n = log_a(m/n)",
+  "options": [
+   "8",
+   "1/2",
+   "2",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "log₃ 4 − log₃ 2 = log₃(4/2) = log₃ 2, so x = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36264e23-5fa6-4386-bffe-bc7014f33a48",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "log_{a²} (a³) = ?",
+  "formula": "log_{aⁿ}(aᵐ) = m/n",
+  "options": [
+   "3/2",
+   "2/3",
+   "3",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "log_{a²}(a³) = 3·log a / 2·log a = 3/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e222c0ea-5b32-46d1-97d9-d2c4f45d0ae3",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "log₄ 8 = ?",
+  "formula": "log_{2²}(2³) = 3/2",
+  "options": [
+   "4/3",
+   "2",
+   "1/2",
+   "3/2"
+  ],
+  "answer": 3,
+  "explain": "log₄ 8 = log 8/log 4 = 3log2/2log2 = 3/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6b07fee7-4ef8-4986-8940-8a45be18543f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "If log_a x < 0 and a > 1, then x lies in?",
+  "formula": "log_a x < 0 ⟺ 0 < x < 1",
+  "options": [
+   "(1, ∞)",
+   "(−∞, 0)",
+   "(0, 1)",
+   "(0, a)"
+  ],
+  "answer": 2,
+  "explain": "For base a > 1, log_a x < 0 iff 0 < x < 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec288231-5468-4e9b-8444-c3e7c13fa37a",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "log₂ 3 · log₃ 5 · log₅ 2 = ?",
+  "formula": "log_a b·log_b c·log_c a = 1",
+  "options": [
+   "1",
+   "log 30",
+   "3",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Chain rule collapses to log₂ 2 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d4ce08f8-e47e-408f-8594-9b4dff1821a0",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "If log_a x > 0 and 0 < a < 1, then x lies in?",
+  "formula": "log_a x > 0 ⟺ 0 < x < 1 when 0<a<1",
+  "options": [
+   "(a, ∞)",
+   "(1, ∞)",
+   "(0, 1)",
+   "(0, a)"
+  ],
+  "answer": 2,
+  "explain": "For 0 < a < 1, log_a x > 0 iff 0 < x < 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6b2f41d5-1aca-4cc1-89c2-84b913e000ad",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "log₉ 27 = ?",
+  "formula": "log_{3²}(3³) = 3/2",
+  "options": [
+   "2",
+   "3/2",
+   "2/3",
+   "3"
+  ],
+  "answer": 1,
+  "explain": "log₉ 27 = log 27/log 9 = 3log3/2log3 = 3/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "18d4ec9f-7b83-4492-9a27-d941a262a9f2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "If log₂ x = 4, then log₂(x²) = ?",
+  "formula": "log_a(x²) = 2·log_a x",
+  "options": [
+   "2",
+   "4",
+   "16",
+   "8"
+  ],
+  "answer": 3,
+  "explain": "log₂(x²) = 2·log₂ x = 2×4 = 8.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "03f12a22-47f6-473e-8fb8-f7dc16442818",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "log_a(bⁿ) / log_a(b) = ?",
+  "formula": "n·log_a b / log_a b = n",
+  "options": [
+   "n",
+   "log_a b",
+   "1",
+   "b^n"
+  ],
+  "answer": 0,
+  "explain": "n·log_a b divided by log_a b = n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a187f58-ab7f-44ef-bc68-a414eb5faded",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Natural and common logarithms (ln, log10)",
+  "prompt": "log₁₀(log₁₀ 10) = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "undefined",
+   "10"
+  ],
+  "answer": 0,
+  "explain": "log₁₀ 10 = 1, then log₁₀ 1 = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e80cc8a8-0ed0-442b-b753-b585871ec0c9",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "If log_a x = p and log_a z = r, then log_a(x³/z²) = ?",
+  "formula": "",
+  "options": [
+   "3p − 2r",
+   "p³ − r²",
+   "3p + 2r",
+   "2p − 3r"
+  ],
+  "answer": 0,
+  "explain": "log_a(x³/z²) = 3·log_a x − 2·log_a z = 3p − 2r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5c479a4a-f538-4d49-920d-d689e6ada91a",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "If log₅ x = log₅ 2 + log₅ 3 − log₅ 6, then x = ?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "6",
+   "1/6"
+  ],
+  "answer": 1,
+  "explain": "log₅(2·3/6) = log₅ 1 = 0, so x = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f60acac2-897d-4860-8c5c-20cdc10e8085",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "log₂ 48 − log₂ 3 = ?",
+  "formula": "",
+  "options": [
+   "4",
+   "2",
+   "16",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "log₂(48/3) = log₂ 16 = 4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f4dee9e6-2b85-4423-a9da-6c4fd4e3990a",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Natural and common logarithms (ln, log10)",
+  "prompt": "If log₁₀ 2 = 0.3010, then log₁₀ 20 = ?",
+  "formula": "",
+  "options": [
+   "0.6020",
+   "1.3010",
+   "0.3010",
+   "2.3010"
+  ],
+  "answer": 1,
+  "explain": "log₁₀ 20 = log₁₀ 2 + log₁₀ 10 = 0.3010 + 1 = 1.3010.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c2c2e5ed-8509-4a5b-b274-2629d55c69fa",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "log₃ 243 = ?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "6",
+   "5"
+  ],
+  "answer": 3,
+  "explain": "3⁵ = 243, so log₃ 243 = 5.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b88e9593-bafb-431f-a57c-8967a5b7ca0e",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Natural and common logarithms (ln, log10)",
+  "prompt": "log₁₀ 0.001 = ?",
+  "formula": "",
+  "options": [
+   "−3",
+   "−2",
+   "−4",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "0.001 = 10⁻³, so log₁₀ 0.001 = −3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "df8f18a7-0efa-47ad-bf26-2a39d86b5882",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "If log₂ x > 4, then x must satisfy?",
+  "formula": "",
+  "options": [
+   "x > 8",
+   "x > 2",
+   "x > 16",
+   "x > 4"
+  ],
+  "answer": 2,
+  "explain": "log₂ x > 4 ⟹ x > 2⁴ = 16 (base 2 > 1, inequality preserved).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "53755ea4-15f8-4a65-aefc-d623ec7962de",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "Real domain of f(x) = log₁₀(x² − 4)?",
+  "formula": "",
+  "options": [
+   "x ≠ ±2",
+   "−2 < x < 2",
+   "x > 2 only",
+   "x < −2 or x > 2"
+  ],
+  "answer": 3,
+  "explain": "Need x² − 4 > 0, so |x| > 2, i.e. x < −2 or x > 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b41b5da-58b6-4542-89af-ca327eb06e97",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "Vertical asymptote of the graph of y = logₐ x (a > 0, a ≠ 1)?",
+  "formula": "",
+  "options": [
+   "y = 1",
+   "y = 0",
+   "x = 1",
+   "x = 0"
+  ],
+  "answer": 3,
+  "explain": "As x → 0⁺, |logₐ x| → ∞, so the y-axis (x = 0) is the asymptote.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "168e0e57-b3a7-4080-8921-3e1632b16567",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "Domain of f(x) = log_{x}(2 − x)?",
+  "formula": "",
+  "options": [
+   "0 < x < 2, x ≠ 1",
+   "x < 2, x ≠ 1",
+   "0 < x < 2",
+   "x > 0, x ≠ 1"
+  ],
+  "answer": 0,
+  "explain": "Base x > 0, x ≠ 1 and argument 2 − x > 0 give 0 < x < 2, x ≠ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1ba8eb85-bb60-41e7-954b-a969c5f685bb",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "For real x ≠ 0, log(x²) equals which of these?",
+  "formula": "log(x²) = 2 log|x|",
+  "options": [
+   "log 2 + log x",
+   "(log x)²",
+   "2 log|x|",
+   "2 log x for all x ≠ 0"
+  ],
+  "answer": 2,
+  "explain": "The power law needs a positive base. For negative x, use |x| inside the log.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "298d6849-a09c-4989-9cec-f311d4a0d138",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "If log_a x + log_a y = 0 (x, y > 0, a > 0, a ≠ 1), then xy = ?",
+  "formula": "",
+  "options": [
+   "a",
+   "0",
+   "1",
+   "x + y"
+  ],
+  "answer": 2,
+  "explain": "log_a(xy) = 0 gives xy = a⁰ = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "51e5465e-441d-43b8-b575-a7cd459d67bf",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "2 log₂ 6 − log₂ 9 = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "log₂ 27",
+   "log₂ 3"
+  ],
+  "answer": 0,
+  "explain": "2 log₂ 6 − log₂ 9 = log₂(36/9) = log₂ 4 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75a24bd1-88a8-4f3a-a34e-73ead79b6f3a",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "For m, n > 0, log_a √(m/n) equals?",
+  "formula": "",
+  "options": [
+   "½(log_a m + log_a n)",
+   "2(log_a m − log_a n)",
+   "√(log_a m − log_a n)",
+   "(log_a m − log_a n)/2"
+  ],
+  "answer": 3,
+  "explain": "The square root is a power ½, and the quotient becomes a difference: ½(log_a m − log_a n).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6af1a7e7-d693-4439-9077-598b0f7dabbc",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "Is log(x+y) = log x + log y a valid law? Which statement is correct?",
+  "formula": "",
+  "options": [
+   "Valid only when x = y",
+   "Valid only when x+y = xy",
+   "Valid for all positive x, y",
+   "Never valid for any x, y"
+  ],
+  "answer": 1,
+  "explain": "log x + log y = log(xy); equals log(x+y) only if xy = x+y, so it's not a general law.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ab99168-1ef3-430a-8884-c8b2bd4eb2c3",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Fundamental laws: product, quotient, power",
+  "prompt": "Domain of log(x(x−2)) as written: which condition correctly gives log x + log(x−2) the same value?",
+  "formula": "log(mn) = log m + log n needs m, n > 0",
+  "options": [
+   "x > 0",
+   "All real x ≠ 0, 2",
+   "x > 2",
+   "x < 0 or x > 2"
+  ],
+  "answer": 2,
+  "explain": "The split needs both x > 0 and x − 2 > 0, so x > 2; the combined log alone is defined for x < 0 or x > 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9067d11d-3893-4db3-9977-b707453b3cef",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "a^(log_b c) is always equal to which expression?",
+  "formula": "a^(log_b c) = c^(log_b a)",
+  "options": [
+   "c^(log_a b)",
+   "c^(log_b a)",
+   "a^(log_c b)",
+   "b^(log_c a)"
+  ],
+  "answer": 1,
+  "explain": "Taking log_b of both sides gives (log_b c)(log_b a) on each side, so they are equal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d8063790-a858-4162-a509-f33f0ed0fe63",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "Value of log_{√2} 8?",
+  "formula": "",
+  "options": [
+   "3",
+   "3/2",
+   "6",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "log_{2^(1/2)} 2³ = 3 ÷ (1/2) = 6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1112852b-e385-44f6-b3b2-f18499827585",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "Value of 9^(log₃ 5)?",
+  "formula": "",
+  "options": [
+   "5",
+   "10",
+   "15",
+   "25"
+  ],
+  "answer": 3,
+  "explain": "9^(log₃ 5) = 3^(2·log₃ 5) = 5² = 25.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "660397d3-ee5a-489f-a820-206cc77ae0d0",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "Which expression equals log_x a · log_y b (all bases valid)?",
+  "formula": "",
+  "options": [
+   "log_x y · log_a b",
+   "log_y a · log_b x",
+   "log_x b · log_y a",
+   "log_a x · log_b y"
+  ],
+  "answer": 2,
+  "explain": "Both equal (ln a · ln b)/(ln x · ln y).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81237562-1e36-4165-a45d-c4fdb039163f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "log_{ab} x (valid values) equals?",
+  "formula": "",
+  "options": [
+   "log_a x + log_b x",
+   "log_x a + log_x b",
+   "1/(log_x a + log_x b)",
+   "1/(log_a x + log_b x)"
+  ],
+  "answer": 2,
+  "explain": "log_{ab} x = 1/log_x(ab) = 1/(log_x a + log_x b).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "38d95cad-d431-45c0-8f30-4a68f4477602",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "Value of 5^(log₂₅ 9)?",
+  "formula": "",
+  "options": [
+   "3",
+   "√5",
+   "81",
+   "9"
+  ],
+  "answer": 0,
+  "explain": "5^(log₂₅ 9) = 5^(log₅ 3) = 3, since log_{5²} 3² = log₅ 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7b2f7c46-9425-4ed5-a9d6-f681cde1ebb3",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "1/log₂N + 1/log₃N + 1/log₅N equals?",
+  "formula": "",
+  "options": [
+   "log_N 30",
+   "log_N 10",
+   "log_{30} N",
+   "1/log_N 30"
+  ],
+  "answer": 0,
+  "explain": "Each 1/log_a N = log_N a, so the sum = log_N(2·3·5) = log_N 30.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "906a2d55-d7f5-494e-88a3-e0a9d398d5f4",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "Which equals log₄ 9?",
+  "formula": "",
+  "options": [
+   "log₂ 3",
+   "½·log₂ 3",
+   "log₃ 2",
+   "2·log₂ 3"
+  ],
+  "answer": 0,
+  "explain": "log_{2²} 3² = (2/2)·log₂ 3 = log₂ 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3d6714b-6c01-4165-85b9-971ca05b90d8",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "For valid a, b, log_{a²} (b³) equals which expression?",
+  "formula": "log_{aᵐ} bⁿ = (n/m)·log_a b",
+  "options": [
+   "(2/3)·log_a b",
+   "(3/2)·log_a b",
+   "(log_a b)^(3/2)",
+   "6·log_a b"
+  ],
+  "answer": 1,
+  "explain": "Exponent of the argument goes up, exponent of the base comes down: log_{a²} b³ = (3/2)·log_a b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7c9ea60b-6d7f-4ff8-bab6-307740d11d9f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "For a, b > 1, the minimum value of log_a b + log_b a is?",
+  "formula": "t + 1/t ≥ 2 for t > 0",
+  "options": [
+   "2",
+   "1/2",
+   "4",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "With t = log_a b > 0 and log_b a = 1/t, AM–GM gives t + 1/t ≥ 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "171ce209-bab4-42a3-9ac2-a878bd4222cb",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "5^(log₃ 4) equals which expression?",
+  "formula": "a^(log_b c) = c^(log_b a)",
+  "options": [
+   "3^(log₅ 4)",
+   "3^(log₄ 5)",
+   "4^(log₅ 3)",
+   "4^(log₃ 5)"
+  ],
+  "answer": 3,
+  "explain": "Swap a and c: 5^(log₃4) = 4^(log₃5).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ecb02364-a0c3-4e52-8f78-2dee21c166b3",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 9^(log₃ 7)?",
+  "formula": "",
+  "options": [
+   "14",
+   "21",
+   "49",
+   "7"
+  ],
+  "answer": 2,
+  "explain": "9^(log₃7) = (3^(log₃7))² = 7² = 49.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bd159aff-c2bd-4d68-85bf-85056870dcdb",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 2^(log₄ 9)?",
+  "formula": "",
+  "options": [
+   "3",
+   "9",
+   "81",
+   "3/2"
+  ],
+  "answer": 0,
+  "explain": "log₄9 = log₂3, so 2^(log₂3) = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6cc0b38f-4f85-4d7d-bc03-92e25c353a53",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 10^(1 + log₁₀ 3)?",
+  "formula": "",
+  "options": [
+   "30",
+   "3",
+   "10³",
+   "13"
+  ],
+  "answer": 0,
+  "explain": "10¹ · 10^(log₁₀3) = 10 · 3 = 30.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d90c4104-704c-47d8-8fbf-a4e92a0a8521",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 3^(2 log₃ 5)?",
+  "formula": "",
+  "options": [
+   "10",
+   "15",
+   "25",
+   "5"
+  ],
+  "answer": 2,
+  "explain": "2 log₃5 = log₃25, so 3^(log₃25) = 25.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3632169c-c778-44e7-af3e-fd555916f044",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 4^(log₂ 3)?",
+  "formula": "",
+  "options": [
+   "6",
+   "3",
+   "12",
+   "9"
+  ],
+  "answer": 3,
+  "explain": "4^(log₂3) = 2^(2 log₂3) = 2^(log₂9) = 9.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "10de8e52-6a13-4dc7-862c-a2a558f6270f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 7^(log₇ 9 − log₇ 3)?",
+  "formula": "",
+  "options": [
+   "3",
+   "27",
+   "9",
+   "6"
+  ],
+  "answer": 0,
+  "explain": "The difference is log₇(9/3) = log₇3, so the value is 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7a169bb6-8ada-4169-a2e4-905135abb382",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 2^(log₂3 · log₃5)?",
+  "formula": "",
+  "options": [
+   "5",
+   "8",
+   "15",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "log₂3 · log₃5 = log₂5, so 2^(log₂5) = 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa917ce1-8305-4d78-a98e-6a09972f7c50",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 7^(1/log₅ 7)?",
+  "formula": "1/log_b a = log_a b",
+  "options": [
+   "1/5",
+   "35",
+   "7",
+   "5"
+  ],
+  "answer": 3,
+  "explain": "1/log₅7 = log₇5, so 7^(log₇5) = 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ecce45d0-2531-48ce-b0ea-5bf74c3e3c24",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of (3^(log₅ 7))^(log₇ 5)?",
+  "formula": "",
+  "options": [
+   "35",
+   "5",
+   "3",
+   "7"
+  ],
+  "answer": 2,
+  "explain": "The exponent is log₅7·log₇5 = 1, so the value is 3¹ = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84154b7f-f514-44eb-846d-d4311aa9add2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Identity a^(log_a x) = x and a^(log_b c) = c^(log_b a)",
+  "prompt": "Value of 9^(−log₃ 2)?",
+  "formula": "",
+  "options": [
+   "1/9",
+   "−4",
+   "1/2",
+   "1/4"
+  ],
+  "answer": 3,
+  "explain": "9^(−log₃2) = 3^(−2 log₃2) = 3^(log₃(1/4)) = 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "04e2df66-90a7-43dd-bbc0-5e0477ecb644",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Natural and common logarithms (ln, log10)",
+  "prompt": "Relation between natural and common logarithm of x (x > 0)?",
+  "formula": "ln x = (ln 10)·log₁₀ x",
+  "options": [
+   "ln x = 0.4343·log₁₀ x",
+   "ln x = 2.718·log₁₀ x",
+   "ln x = log₁₀ x / 2.303",
+   "ln x = 2.303·log₁₀ x"
+  ],
+  "answer": 3,
+  "explain": "ln x = ln 10 · log₁₀ x, and ln 10 ≈ 2.303.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5c9acab-873e-47c2-96bb-eaa188166243",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Natural and common logarithms (ln, log10)",
+  "prompt": "Characteristic of log₁₀ 4567 is?",
+  "formula": "Characteristic = (digits in integer part) − 1",
+  "options": [
+   "3",
+   "2",
+   "0.4567",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "A 4-digit number has characteristic 4 − 1 = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dcd6552e-08ee-4a12-a891-4dc03618023f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Natural and common logarithms (ln, log10)",
+  "prompt": "If log₁₀ N has characteristic −3, how many zeros follow the decimal point before the first nonzero digit of N?",
+  "formula": "",
+  "options": [
+   "4",
+   "1",
+   "3",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "Characteristic −k means (k − 1) zeros after the decimal point, so 2 zeros.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3e13627a-2b9c-473b-9dac-aa5168c7d86b",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Natural and common logarithms (ln, log10)",
+  "prompt": "Which equals 2^(ln 3) for positive a, b identity a^(ln b) = b^(ln a)?",
+  "formula": "a^(ln b) = b^(ln a)",
+  "options": [
+   "3^(ln 2)",
+   "e^(ln 6)",
+   "6^(ln e)",
+   "2^(ln 3 · ln 2)"
+  ],
+  "answer": 0,
+  "explain": "Taking ln of both sides gives ln a · ln b, so 2^(ln 3) = 3^(ln 2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "888f980d-0bbf-4de8-9d23-a64dd073d0b7",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "Solve log₂(x²) > 2 for real x.",
+  "formula": "",
+  "options": [
+   "x < −2 or x > 2",
+   "x > 2 only",
+   "x > 4",
+   "−2 < x < 2"
+  ],
+  "answer": 0,
+  "explain": "x² > 4 with x ≠ 0 gives |x| > 2, so x < −2 or x > 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8bb2cc2a-90be-4070-a996-8cd41cf9606d",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "For a, b > 0 (a ≠ 1), log_a b > 0 holds exactly when?",
+  "formula": "",
+  "options": [
+   "a > b",
+   "a, b on same side of 1",
+   "a, b on opposite sides of 1",
+   "b > 1 only"
+  ],
+  "answer": 1,
+  "explain": "The log is positive if a, b > 1 or 0 < a, b < 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b4fbdf8-ea0b-4162-a8e5-299790224eaa",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "Solve log_{1/2}(log₃ x) > 0.",
+  "formula": "",
+  "options": [
+   "0 < x < 3",
+   "0 < x < 1",
+   "x > 3",
+   "1 < x < 3"
+  ],
+  "answer": 3,
+  "explain": "Base <1 gives 0 < log₃x < 1, so 1 < x < 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2937ab20-0aa1-4cda-9ac9-09a229c7d7a2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "Solve log_x 2 > 1 (variable base).",
+  "formula": "",
+  "options": [
+   "1 < x < 2",
+   "0 < x < 2",
+   "x > 2",
+   "x < 1"
+  ],
+  "answer": 0,
+  "explain": "Base must be >1 for a positive log; then 2 > x. The case 0<x<1 gives a negative value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e47ff9a6-009e-4a9c-bc90-3d030d3365c2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Logarithmic inequalities (base >1 vs 0<base<1)",
+  "prompt": "For which x is log_x 7 < 0 (x > 0, x ≠ 1)?",
+  "formula": "",
+  "options": [
+   "x > 7",
+   "0 < x < 7",
+   "0 < x < 1",
+   "x > 1"
+  ],
+  "answer": 2,
+  "explain": "Since 7 > 1, the log is negative only when the base is below 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "19d65e88-dd24-4e88-a62e-adf048300258",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = log_x 5?",
+  "formula": "",
+  "options": [
+   "x > 0, x ≠ 1",
+   "x > 0",
+   "R − {0, 1}",
+   "x > 1"
+  ],
+  "answer": 0,
+  "explain": "Variable base needs x > 0 and x ≠ 1; the argument 5 > 0 always.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f707788f-29a7-4729-acc7-6457e89aba98",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = log₁₀(log₁₀(log₁₀ x))?",
+  "formula": "",
+  "options": [
+   "x > 1",
+   "x > 10",
+   "x > 100",
+   "x > 0"
+  ],
+  "answer": 1,
+  "explain": "log log x > 0 ⇒ log x > 1 ⇒ x > 10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "786c16a6-2e2a-43f6-8495-37b9d355876f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln(x − 1) + ln(x − 2)?",
+  "formula": "",
+  "options": [
+   "x ≠ 1, 2",
+   "x > 2",
+   "1 < x < 2",
+   "x > 1"
+  ],
+  "answer": 1,
+  "explain": "Both x − 1 > 0 and x − 2 > 0 must hold, so x > 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3e55fca-3ce8-45b1-9b72-3e11dc949c37",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln[(x − 1)(x − 2)]?",
+  "formula": "",
+  "options": [
+   "R∖{1, 2}",
+   "1 < x < 2",
+   "x < 1 or x > 2",
+   "x > 2"
+  ],
+  "answer": 2,
+  "explain": "The product must be positive, so x < 1 or x > 2. This is not the same as a sum of two logs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d1430006-8e9e-4698-8cbe-7aa3b59eb70f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = log_{(x−1)}(x)?",
+  "formula": "",
+  "options": [
+   "x > 1",
+   "x > 1, x ≠ 2",
+   "x > 0, x ≠ 2",
+   "x > 0, x ≠ 1"
+  ],
+  "answer": 1,
+  "explain": "Base: x − 1 > 0 and x − 1 ≠ 1. Argument: x > 0. Together x > 1, x ≠ 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07271a73-5118-45d2-abf7-b7e28f2548d4",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln[(x − 1)/(x + 1)]?",
+  "formula": "",
+  "options": [
+   "R∖{−1}",
+   "x < −1 or x > 1",
+   "−1 < x < 1",
+   "x > 1"
+  ],
+  "answer": 1,
+  "explain": "The fraction is positive when x < −1 or x > 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa1dbe2b-7c19-45e3-86df-93fb1b516d56",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = log₂(log_{1/2} x)?",
+  "formula": "",
+  "options": [
+   "0 < x < 1/2",
+   "x > 1",
+   "x > 0",
+   "0 < x < 1"
+  ],
+  "answer": 3,
+  "explain": "Need log_{1/2} x > 0, which gives 0 < x < 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f84f3133-5783-4466-b8c9-619e4202d43f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = log_{|x|} 2?",
+  "formula": "",
+  "options": [
+   "x ≠ 0",
+   "x > 0, x ≠ 1",
+   "x ≠ 0, ±1",
+   "x > 1"
+  ],
+  "answer": 2,
+  "explain": "Base |x| > 0 and |x| ≠ 1, so x ≠ 0, 1, −1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d91d6b62-4f42-44c6-9b61-65ae1b8d62c3",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln(ln x)?",
+  "formula": "",
+  "options": [
+   "x > 1",
+   "x > 0",
+   "x > e",
+   "0 < x < 1"
+  ],
+  "answer": 0,
+  "explain": "Need ln x > 0, which gives x > 1 (this already implies x > 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ce1bceb-3f7c-402b-a5e5-38cc465fdeb7",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln|sin x|?",
+  "formula": "",
+  "options": [
+   "x ≠ nπ",
+   "(2nπ, (2n+1)π)",
+   "x ≠ nπ/2",
+   "R"
+  ],
+  "answer": 0,
+  "explain": "|sin x| > 0 unless sin x = 0, i.e. x = nπ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d48f0216-a219-4dd0-85d2-c04c9adebc09",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Which function has domain x > 0 only (not R∖{0})?",
+  "formula": "",
+  "options": [
+   "ln(x²) + ln|x|",
+   "2 ln x",
+   "ln|x|",
+   "ln(x²)"
+  ],
+  "answer": 1,
+  "explain": "2 ln x needs x > 0, while ln(x²) and ln|x| allow negative x too.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9dfa03dd-9a6f-41c2-a7c6-5c3517ef4f66",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "The graph of y = log_a |x| is?",
+  "formula": "",
+  "options": [
+   "Defined only for x > 0",
+   "Symmetric about the origin",
+   "Symmetric about the y-axis",
+   "Symmetric about y = x"
+  ],
+  "answer": 2,
+  "explain": "log_a|−x| = log_a|x|, so it is an even function with domain x ≠ 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f8427e58-faf9-41be-83b1-79d4ace26a69",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "The graph of y = ln(−x) is the graph of y = ln x reflected in?",
+  "formula": "",
+  "options": [
+   "y-axis",
+   "origin",
+   "y = x",
+   "x-axis"
+  ],
+  "answer": 0,
+  "explain": "Replacing x by −x reflects in the y-axis. Its domain is x < 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "32c3bea6-ed5a-4f30-af24-850b1d02773e",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "Slope of y = log_a x at x = 1?",
+  "formula": "y′ = 1/(x ln a)",
+  "options": [
+   "ln a",
+   "1/ln a",
+   "1/a",
+   "a"
+  ],
+  "answer": 1,
+  "explain": "y′ = 1/(x ln a), which equals 1/ln a at x = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ee1283f2-53dd-4682-aa87-39b1188aaa7f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "For a > 1, the graph of y = log_a x is?",
+  "formula": "y″ = −1/(x² ln a)",
+  "options": [
+   "Concave up only for x > 1",
+   "Concave up",
+   "Concave down",
+   "Straight line"
+  ],
+  "answer": 2,
+  "explain": "y″ = −1/(x² ln a) < 0 when a > 1, so the curve is concave down.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "faaac111-d1d5-439d-b1c5-d1c8dce7fd5d",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "y = |log_a x| fails to be differentiable at which point?",
+  "formula": "",
+  "options": [
+   "x = a",
+   "x = 0",
+   "x = 1/a",
+   "x = 1"
+  ],
+  "answer": 3,
+  "explain": "log_a x changes sign at x = 1, so the folded graph has a corner at (1, 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e7eadebb-0d6b-417f-b70d-7c27dabfe230",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Comparison of logarithmic values",
+  "prompt": "Which is larger: log₂3 or log₃4?",
+  "formula": "log_n(n+1) decreases as n increases (n>1)",
+  "options": [
+   "Cannot be compared",
+   "They are equal",
+   "log₃4",
+   "log₂3"
+  ],
+  "answer": 3,
+  "explain": "log_n(n+1) decreases with n, so log₂3 (≈1.58) > log₃4 (≈1.26).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81ba00c4-eeec-4329-9841-3a4b175745a8",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Comparison of logarithmic values",
+  "prompt": "Which is greater: log₂3 or 3/2?",
+  "formula": "log₂3 > 3/2 ⇔ 3² > 2³",
+  "options": [
+   "Cannot be compared",
+   "3/2",
+   "log₂3",
+   "They are equal"
+  ],
+  "answer": 2,
+  "explain": "log₂3 > 3/2 ⇔ 2·log₂3 > 3 ⇔ 9 > 8, which is true.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "013137c5-b6aa-4e34-9d00-43806a322e4a",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Number of digits using log10",
+  "prompt": "Given log₁₀2 = 0.3010, the number of digits in 2¹⁰⁰ is",
+  "formula": "",
+  "options": [
+   "31",
+   "33",
+   "32",
+   "30"
+  ],
+  "answer": 0,
+  "explain": "100 × 0.3010 = 30.10, and ⌊30.10⌋ + 1 = 31.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d32a8cd3-6ada-46e6-b517-2860726a5021",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Number of digits using log10",
+  "prompt": "Given log₁₀2 = 0.3010, the number of digits in 5²⁰ is",
+  "formula": "log₁₀5 = 1 − log₁₀2",
+  "options": [
+   "20",
+   "13",
+   "14",
+   "15"
+  ],
+  "answer": 2,
+  "explain": "log₁₀5 = 0.6990, so 20 × 0.6990 = 13.98 and digits = 13 + 1 = 14.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c659fee2-481a-40ae-9c2d-2940992eb687",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Number of digits using log10",
+  "prompt": "If a positive integer N has k digits, the number of digits in N² can be",
+  "formula": "",
+  "options": [
+   "2k−1 or 2k",
+   "k² only",
+   "2k or 2k+1",
+   "2k only"
+  ],
+  "answer": 0,
+  "explain": "10^(k−1) ≤ N < 10^k gives 10^(2k−2) ≤ N² < 10^(2k), so 2k−1 or 2k digits.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a51a9703-2dc7-4a41-9631-f179ac2acef5",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Number of digits using log10",
+  "prompt": "The number of digits in 2⁵⁰ × 5⁴⁸ is",
+  "formula": "",
+  "options": [
+   "48",
+   "50",
+   "51",
+   "49"
+  ],
+  "answer": 3,
+  "explain": "2⁵⁰·5⁴⁸ = 4·10⁴⁸, which has 1 + 48 = 49 digits.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbe9b1eb-6ed5-4834-9175-f7d21eaa3e9e",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = log_{(2x−1)} 5?",
+  "formula": "",
+  "options": [
+   "x > 1/2",
+   "x ≠ 1/2, 1",
+   "x > 0, x ≠ 1",
+   "x > 1/2, x ≠ 1"
+  ],
+  "answer": 3,
+  "explain": "Base must be positive and ≠ 1: 2x − 1 > 0 and 2x − 1 ≠ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3af1653-3844-42ac-acfe-aa525e32c8c2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln(x² − 2x + 1)?",
+  "formula": "",
+  "options": [
+   "x > 1",
+   "(−∞, 1)",
+   "R",
+   "R∖{1}"
+  ],
+  "answer": 3,
+  "explain": "x² − 2x + 1 = (x − 1)² > 0 for all x except x = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3ab04ad6-51e9-4aee-b5ef-0fb2745c7175",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln(sin x), n ∈ Z?",
+  "formula": "",
+  "options": [
+   "x ≠ nπ",
+   "2nπ < x < (2n+1)π",
+   "(2n−1)π < x < 2nπ",
+   "R"
+  ],
+  "answer": 1,
+  "explain": "sin x > 0 only in the upper half-cycle: 2nπ < x < (2n+1)π.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b5cb1129-a21b-49ad-bb1a-35d337827f7a",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = 1/ln x?",
+  "formula": "",
+  "options": [
+   "x > 0",
+   "x > 0, x ≠ 1",
+   "R∖{1}",
+   "x > 1"
+  ],
+  "answer": 1,
+  "explain": "Need x > 0 for ln x to exist, and ln x ≠ 0, so x ≠ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67f9395e-56d3-45ee-9188-b32bd620d55f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Number of digits using log10",
+  "prompt": "The number of digits in 10¹⁰⁰ − 1 is",
+  "formula": "",
+  "options": [
+   "99",
+   "100",
+   "101",
+   "102"
+  ],
+  "answer": 1,
+  "explain": "10¹⁰⁰ − 1 is 99…9 (100 nines), so it has 100 digits. 10¹⁰⁰ itself has 101.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2f5b27b-88b8-4cb8-80d6-26d51dc149b0",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "Solutions of log_{x²} 16 = 2 are:",
+  "formula": "(x²)² = 16",
+  "options": [
+   "x = 2 only",
+   "x = ±2",
+   "x = ±4",
+   "x = 4 only"
+  ],
+  "answer": 1,
+  "explain": "x⁴ = 16 gives x = ±2; base x² = 4 is valid for both.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fda51c15-feb2-41e8-8d42-26cebad8da62",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "If a² = b³ (a, b > 0, ≠ 1), then log_a b = ?",
+  "formula": "2 log a = 3 log b",
+  "options": [
+   "1/6",
+   "6",
+   "3/2",
+   "2/3"
+  ],
+  "answer": 3,
+  "explain": "Taking logs, 2 log a = 3 log b, so log b / log a = 2/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97db5e55-539c-45dc-88d4-d4e4a0871ff2",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Domain of logarithmic functions",
+  "prompt": "Domain of f(x) = ln(|x| − 2)?",
+  "formula": "",
+  "options": [
+   "R∖{−2, 2}",
+   "−2 < x < 2",
+   "x < −2 or x > 2",
+   "x > 2"
+  ],
+  "answer": 2,
+  "explain": "|x| > 2 gives x < −2 or x > 2, so the domain has two pieces.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c416a722-8902-4c1f-aa70-0b061b2a178d",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Number of digits using log10",
+  "prompt": "Given log₁₀2 = 0.3010, the number of digits in 5³⁰ is",
+  "formula": "digits = ⌊log₁₀N⌋ + 1",
+  "options": [
+   "20",
+   "19",
+   "22",
+   "21"
+  ],
+  "answer": 3,
+  "explain": "log 5³⁰ = 30(1 − 0.3010) = 20.97, so the digit count is 20 + 1 = 21.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72945a31-d9c4-4eff-acc3-178e83319598",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Number of digits using log10",
+  "prompt": "For which integer N does ⌈log₁₀N⌉ NOT equal the number of digits of N?",
+  "formula": "digits = ⌊log₁₀N⌋ + 1",
+  "options": [
+   "1001",
+   "1000",
+   "999",
+   "1234"
+  ],
+  "answer": 1,
+  "explain": "For N = 10ᵏ, log₁₀N = k exactly, so ⌈log₁₀N⌉ = k but the digit count is k+1; 1000 has 4 digits.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eade9ba2-5029-4387-bd7b-13edd43aa089",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "Real domain of f(x) = ln(x² + x + 1)?",
+  "formula": "",
+  "options": [
+   "ℝ ∖ {−1, 0}",
+   "x > −1",
+   "ℝ",
+   "x > 0"
+  ],
+  "answer": 2,
+  "explain": "Discriminant 1 − 4 < 0 and the leading coefficient is positive, so x² + x + 1 > 0 for all x.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "637618ee-09ce-4ddf-953d-9796d6cb6cf3",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Definition of logarithm and existence conditions",
+  "prompt": "Real domain of f(x) = ln(1 − 1/x)?",
+  "formula": "",
+  "options": [
+   "0 < x < 1",
+   "x ≠ 0",
+   "x > 1",
+   "x < 0 or x > 1"
+  ],
+  "answer": 3,
+  "explain": "1 − 1/x = (x−1)/x > 0 gives x < 0 or x > 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "99f79338-825d-489e-bce2-ea6d6196b679",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Change of base formula",
+  "prompt": "If log_a b = log_b a (a, b > 0, ≠ 1), then which holds?",
+  "formula": "t = 1/t ⇒ t = ±1",
+  "options": [
+   "ab = 1 only",
+   "a = b only",
+   "a = b or ab = 1",
+   "a = b² or b = a²"
+  ],
+  "answer": 2,
+  "explain": "With t = log_a b, t = 1/t gives t = ±1, so b = a or b = 1/a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "39e62f6e-4eee-4105-938f-35b430448deb",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Base-power rule: log_(a^m) b^n = (n/m) log_a b",
+  "prompt": "log₈ 9 · log₃ 2 = ?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "3",
+   "3/2",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "log₈ 9 = (2/3) log₂ 3, and log₂ 3 · log₃ 2 = 1, so the product is 2/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "70e6622c-1ea8-48e0-bb71-0d7625a32e36",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "y = ln(2x) is obtained from y = ln x by?",
+  "formula": "ln 2x = ln x + ln 2",
+  "options": [
+   "Shifting up by ln 2",
+   "Shifting left by ln 2",
+   "Shifting right by 2",
+   "Shifting down by ln 2"
+  ],
+  "answer": 0,
+  "explain": "ln(2x) = ln x + ln 2, which is a vertical upward shift by ln 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de7b4016-7472-4fe9-9459-f4fa28c18fa9",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "How many x-intercepts does the graph of y = ln|x| have?",
+  "formula": "",
+  "options": [
+   "0",
+   "Infinitely many",
+   "1",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "ln|x| = 0 gives |x| = 1, so x = ±1, which is two intercepts.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f65a8af9-0ef3-4a18-9da4-6f215d2fe901",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "On x > 0, the function f(x) = log_{1/2}(x² + 1) is?",
+  "formula": "",
+  "options": [
+   "Increasing then decreasing",
+   "Constant",
+   "Increasing",
+   "Decreasing"
+  ],
+  "answer": 3,
+  "explain": "x² + 1 increases for x > 0 and log_{1/2} is decreasing, so f decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eacfc55a-066f-4fd8-9e46-faca925b20de",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "y = ln(x + 3) is obtained from y = ln x by shifting:",
+  "formula": "",
+  "options": [
+   "3 units down",
+   "3 units left",
+   "3 units right",
+   "3 units up"
+  ],
+  "answer": 1,
+  "explain": "Replacing x by x + 3 shifts the graph 3 units left; the asymptote moves to x = −3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca78686a-1a0f-4435-822e-c768b156e5f1",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "How many points do the graphs of y = ln x and y = x have in common?",
+  "formula": "ln x ≤ x − 1 < x",
+  "options": [
+   "Infinitely many",
+   "2",
+   "0",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "ln x ≤ x − 1 < x for all x > 0, so the curves never meet.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50fef524-2927-4df6-91b1-a31e8c0f0464",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Graph and monotonicity of y = log_a x",
+  "prompt": "How many points do y = ln x and y = −x have in common?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "Infinitely many",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "ln x is increasing and −x is decreasing, so they meet exactly once, at a point in (0, 1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4ed92d64-182a-4e33-a71b-3f29a7c09a9f",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Comparison of logarithmic values",
+  "prompt": "For 0 < x < 1, which is greater: log₂ x or log₃ x?",
+  "formula": "",
+  "options": [
+   "log₂ x",
+   "They are equal",
+   "Depends on x",
+   "log₃ x"
+  ],
+  "answer": 3,
+  "explain": "Both are negative; log₂x = ln x/ln 2 is more negative than ln x/ln 3, so log₃x is greater.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "149781c7-131a-455f-bce8-c355e14893f9",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Comparison of logarithmic values",
+  "prompt": "Compare (log₂ 3)² and log₂ 9.",
+  "formula": "",
+  "options": [
+   "They are equal",
+   "log₂ 9 is greater",
+   "(log₂ 3)² is greater",
+   "Cannot be compared"
+  ],
+  "answer": 1,
+  "explain": "log₂9 = 2·log₂3 and log₂3 < 2, so t² < 2t for t = log₂3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f5d7f8c-4ff3-45f1-8367-9d6ca9c56292",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Comparison of logarithmic values",
+  "prompt": "Which is greater: log_{1/2} 3 or log_{1/3} 3?",
+  "formula": "",
+  "options": [
+   "log_{1/3} 3",
+   "log_{1/2} 3",
+   "Cannot be compared",
+   "They are equal"
+  ],
+  "answer": 0,
+  "explain": "log_{1/2}3 = −log₂3 ≈ −1.58, while log_{1/3}3 = −1, so log_{1/3}3 is greater.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d10e1ba2-a0dc-46ab-8f46-8f29e6d8a40c",
+  "subject": "Mathematics",
+  "chapter": "Logarithms",
+  "topic": "Comparison of logarithmic values",
+  "prompt": "Compare log₉ 26 and log₃ 5.",
+  "formula": "log₉ 26 = log₃ √26",
+  "options": [
+   "They are equal",
+   "Cannot be compared",
+   "log₉ 26 is greater",
+   "log₃ 5 is greater"
+  ],
+  "answer": 2,
+  "explain": "log₉26 = log₃√26, and √26 > 5 with base 3 > 1, so log₉26 > log₃5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

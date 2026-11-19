@@ -1,1674 +1,3514 @@
 [
-  {
-    "id": "165893ab-69b2-4f60-9a6f-3fbfc8111f05",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Pressure at depth h in a liquid of density ρ:",
-    "formula": "P = P₀ + ρgh",
-    "options": [
-      "P₀ + ρg/h",
-      "P₀ − ρgh",
-      "ρgh only",
-      "P₀ + ρgh"
-    ],
-    "answer": 3,
-    "explain": "Gauge pressure increases linearly with depth; absolute pressure includes atmospheric pressure P₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3516ddd1-027b-453c-9573-7d69bdb92118",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Pascal's law: pressure applied to enclosed fluid is transmitted —",
-    "formula": "",
-    "options": [
-      "Only downward",
-      "Only upward",
-      "Equally in all directions",
-      "Along flow direction"
-    ],
-    "answer": 2,
-    "explain": "Pascal's law states pressure change is transmitted undiminished to every point of the fluid.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "54ff0682-879b-4cac-b24e-810568b4f20d",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Buoyant force on a submerged object equals:",
-    "formula": "F_B = ρ_fluid · V_sub · g",
-    "options": [
-      "Weight of object",
-      "Weight difference",
-      "ρ_object·V·g",
-      "Weight of displaced fluid"
-    ],
-    "answer": 3,
-    "explain": "Archimedes' principle: buoyant force = weight of fluid displaced by the submerged volume.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b7df1cab-a79d-4d17-95f9-a1fd41c419d4",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Equation of continuity for incompressible flow:",
-    "formula": "A₁v₁ = A₂v₂",
-    "options": [
-      "A₁v₁² = A₂v₂²",
-      "A₁/v₁ = A₂/v₂",
-      "A₁v₁ = A₂v₂",
-      "ρA₁ = ρA₂"
-    ],
-    "answer": 2,
-    "explain": "Conservation of mass for incompressible fluid: volume flow rate Q = Av is constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2e74220-407f-40a2-92dc-abbf95538717",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Bernoulli's equation represents conservation of:",
-    "formula": "P + ½ρv² + ρgh = const",
-    "options": [
-      "Mass flow rate",
-      "Momentum",
-      "Energy per unit volume",
-      "Pressure only"
-    ],
-    "answer": 2,
-    "explain": "Bernoulli's equation is energy conservation per unit volume for ideal, steady, incompressible flow.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b2b858d-0aed-4d74-ba53-257b50bec05e",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Speed of efflux from a hole at depth h (Torricelli's theorem):",
-    "formula": "v = √(2gh)",
-    "options": [
-      "√(gh)",
-      "√(ρgh)",
-      "√(2gh)",
-      "2gh"
-    ],
-    "answer": 2,
-    "explain": "Torricelli's theorem: efflux speed = √(2gh), same as free-fall speed from height h.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c626ece1-359d-43db-abb3-a6fd9d550632",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "SI unit of dynamic (absolute) viscosity η is:",
-    "formula": "",
-    "options": [
-      "N/m²",
-      "Pa·s",
-      "kg/m³",
-      "Pa/s"
-    ],
-    "answer": 1,
-    "explain": "Dynamic viscosity η has SI unit pascal-second (Pa·s) or equivalently N·s/m².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1fa50e99-c74a-4d80-8f9d-1d2bff026abc",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Stokes' law: drag force on sphere of radius r moving at speed v:",
-    "formula": "F = 6πηrv",
-    "options": [
-      "6πηr²v",
-      "4πηrv",
-      "πηrv/6",
-      "6πηrv"
-    ],
-    "answer": 3,
-    "explain": "Stokes' law applies to laminar flow; drag F = 6πηrv for a sphere in a viscous fluid.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7380b071-ceaa-45dd-bd0a-dd159f9d0c49",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Terminal velocity of a sphere is proportional to:",
-    "formula": "v_T = 2r²(ρ−σ)g / 9η",
-    "options": [
-      "r³",
-      "r",
-      "r²",
-      "1/r"
-    ],
-    "answer": 2,
-    "explain": "Terminal velocity ∝ r²; derived by balancing gravity, buoyancy, and Stokes drag.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "09f09cce-0d1c-4044-9a28-42d0dc3eaaf8",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Reynolds number Re determines:",
-    "formula": "Re = ρvD/η",
-    "options": [
-      "Nature of flow (laminar/turbulent)",
-      "Buoyant force",
-      "Viscosity directly",
-      "Surface tension"
-    ],
-    "answer": 0,
-    "explain": "Re < ~1000 → laminar; Re > ~2000 → turbulent flow in a pipe.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e1bad472-4cfb-4f30-b042-b1a86887d509",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Surface tension T has SI unit:",
-    "formula": "",
-    "options": [
-      "N/m²",
-      "J/m³",
-      "Pa·m",
-      "N/m"
-    ],
-    "answer": 3,
-    "explain": "Surface tension = force per unit length, so SI unit is N/m (equivalent to J/m²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fed8a495-3809-4b3a-9433-a95ce3cd8530",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Excess pressure inside a soap bubble of radius R:",
-    "formula": "ΔP = 4T/R",
-    "options": [
-      "T/R",
-      "4T/R",
-      "2T/R",
-      "8T/R"
-    ],
-    "answer": 1,
-    "explain": "Soap bubble has two surfaces; excess pressure = 4T/R (factor 2 for each surface).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "388ec3b6-25b5-4387-a802-b2d5a380321d",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Excess pressure inside a liquid drop of radius R:",
-    "formula": "ΔP = 2T/R",
-    "options": [
-      "T/R",
-      "4T/R",
-      "2T/R",
-      "T/2R"
-    ],
-    "answer": 2,
-    "explain": "Liquid drop has one surface; excess pressure inside = 2T/R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5296754c-4ce0-49a2-b422-bcf763d246cd",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Capillary rise formula:",
-    "formula": "h = 2T cosθ / (ρgr)",
-    "options": [
-      "4T cosθ / ρgr",
-      "T cosθ / ρgr",
-      "2T cosθ / ρgr",
-      "2T / ρgr²"
-    ],
-    "answer": 2,
-    "explain": "Height of capillary rise balances surface tension force with weight of liquid column.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36d5c261-2b25-4324-91fc-1904ceae5cec",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "For mercury in glass (obtuse contact angle), capillary shows:",
-    "formula": "",
-    "options": [
-      "No change",
-      "Overflow",
-      "Rise",
-      "Depression"
-    ],
-    "answer": 3,
-    "explain": "Mercury has obtuse contact angle (~140°) with glass, so cosθ < 0 → capillary depression.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "954ee290-1a01-4ced-baea-0687a8d7f49e",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Volume flow rate Q through a pipe:",
-    "formula": "Q = Av",
-    "options": [
-      "v/A",
-      "A/v",
-      "A²v",
-      "Av"
-    ],
-    "answer": 3,
-    "explain": "Volume flow rate Q = cross-sectional area × fluid speed; SI unit is m³/s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "48ecd2e5-e3f4-40df-a003-131b113cab7b",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "In Bernoulli's theorem, which type of flow is assumed?",
-    "formula": "",
-    "options": [
-      "Rotational flow",
-      "Steady, incompressible, non-viscous",
-      "Turbulent, viscous",
-      "Compressible, laminar"
-    ],
-    "answer": 1,
-    "explain": "Bernoulli's equation holds for ideal (non-viscous), incompressible, steady, irrotational flow.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "578dbecb-e332-4810-9214-1c3328cee84f",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "The angle of contact for a liquid that wets the surface is:",
-    "formula": "",
-    "options": [
-      "180°",
-      "Acute (< 90°)",
-      "Exactly 90°",
-      "Obtuse (> 90°)"
-    ],
-    "answer": 1,
-    "explain": "Wetting liquids (e.g., water on glass) have acute contact angle; non-wetting have obtuse.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8dcd4e7e-3ae3-4084-baac-7b456421e4c5",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Hydraulic press works on which law?",
-    "formula": "F₂/A₂ = F₁/A₁",
-    "options": [
-      "Bernoulli's theorem",
-      "Newton's third law",
-      "Archimedes' principle",
-      "Pascal's law"
-    ],
-    "answer": 3,
-    "explain": "Hydraulic press multiplies force using Pascal's law: P is same throughout enclosed fluid.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b7786ab7-503a-46ae-a9c3-0c40705e8b3f",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Dimension of coefficient of viscosity η:",
-    "formula": "",
-    "options": [
-      "ML⁻¹T⁻¹",
-      "ML⁻²T⁻¹",
-      "ML⁰T⁻¹",
-      "MLT⁻"
-    ],
-    "answer": 0,
-    "explain": "From F = ηA(dv/dy), η has dimensions ML⁻¹T⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7c82621d-c1ee-469d-a7ae-227693ec56d6",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "When speed of fluid increases in Bernoulli's equation, pressure:",
-    "formula": "P + ½ρv² = const",
-    "options": [
-      "Becomes zero",
-      "Increases",
-      "Decreases",
-      "Remains same"
-    ],
-    "answer": 2,
-    "explain": "Higher fluid speed → lower pressure at same height; basis of lift on aerofoils.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9c6273d4-9be0-4d21-bc05-7a2e7d8127a0",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Fraction of iceberg submerged in water (ρ_ice/ρ_water ≈ 0.9):",
-    "formula": "f = ρ_ice/ρ_water",
-    "options": [
-      "0.5 (50%)",
-      "0.1 (10%)",
-      "0.9 (90%)",
-      "1.0 (100%)"
-    ],
-    "answer": 2,
-    "explain": "Floating condition: fraction submerged = ρ_object/ρ_fluid ≈ 0.9 for ice in water.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "76d3688c-6e7f-4ae1-9f3b-3cd45338cdd0",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Gauge pressure at depth h equals:",
-    "formula": "P_gauge = ρgh",
-    "options": [
-      "ρgh",
-      "2ρgh",
-      "P₀ − ρgh",
-      "ρgh + P₀"
-    ],
-    "answer": 0,
-    "explain": "Gauge pressure excludes atmospheric pressure; it equals ρgh alone.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d18bd83e-e6bd-4c20-8d9e-b5043acd36d1",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Bernoulli's equation is valid only for:",
-    "formula": "",
-    "options": [
-      "Viscous, compressible flow",
-      "Turbulent, viscous flow",
-      "Non-viscous, incompressible flow",
-      "Any real fluid flow"
-    ],
-    "answer": 2,
-    "explain": "Bernoulli's theorem assumes ideal (non-viscous), incompressible, streamline flow.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5ed09bc7-23eb-46e9-b3f3-3e64daeefd0f",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Terminal velocity vₜ is proportional to which power of radius r?",
-    "formula": "vₜ ∝ r²",
-    "options": [
-      "r²",
-      "r^(1/2)",
-      "r³",
-      "r"
-    ],
-    "answer": 0,
-    "explain": "From Stokes' law and buoyancy balance: vₜ = 2r²(ρ−σ)g/9η, so vₜ ∝ r².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2f7451b2-300e-4dba-b837-ad863a612980",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Which quantity remains constant along a streamline in ideal flow?",
-    "formula": "P + ½ρv² + ρgh = const",
-    "options": [
-      "Total mechanical energy per unit volume",
-      "Kinetic energy alone",
-      "Velocity alone",
-      "Pressure alone"
-    ],
-    "answer": 0,
-    "explain": "Bernoulli's theorem states total energy per unit volume is constant along a streamline.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "353e7245-6f23-4d66-b4da-fa594e142615",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "A body is in neutral buoyancy when:",
-    "formula": "",
-    "options": [
-      "ρ_body > ρ_fluid",
-      "Weight > Buoyant force",
-      "ρ_body < ρ_fluid",
-      "ρ_body = ρ_fluid"
-    ],
-    "answer": 3,
-    "explain": "Neutral buoyancy means the object is fully submerged and neither sinks nor rises.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b81c0015-5c59-46f1-88b1-9a19385c1cc2",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Venturimeter measures:",
-    "formula": "",
-    "options": [
-      "Flow speed / volume flow rate",
-      "Fluid viscosity",
-      "Fluid density",
-      "Surface tension"
-    ],
-    "answer": 0,
-    "explain": "Venturimeter uses Bernoulli's principle to measure flow speed by pressure difference.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f6d3fe83-d1f1-42ce-86d1-9ab91de6cac6",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "For Venturimeter, flow rate Q = A₁A₂√(2gh/(A₁²−A₂²)). What is h?",
-    "formula": "",
-    "options": [
-      "Capillary rise",
-      "Height of pipe",
-      "Depth of inlet",
-      "Pressure head difference"
-    ],
-    "answer": 3,
-    "explain": "h is the manometric head difference corresponding to the pressure drop between sections.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b2eb1da1-c571-48d3-a37c-96ba0b5baf6c",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Work done to increase bubble radius from R to R+dR (soap bubble):",
-    "formula": "dW = 8πRT dR",
-    "options": [
-      "16πRT dR",
-      "4πRT dR",
-      "8πRT dR",
-      "2πRT dR"
-    ],
-    "answer": 2,
-    "explain": "Soap bubble has two surfaces; dW = T × d(2 × 4πR²) = 8πRT dR.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a3337129-a7bc-4414-a877-24799ed636be",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Reynolds number Re < 1000 indicates:",
-    "formula": "Re = ρvD/η",
-    "options": [
-      "Laminar flow",
-      "Compressible flow",
-      "Turbulent flow",
-      "Critical flow"
-    ],
-    "answer": 0,
-    "explain": "Re < ~1000 (or 2000 by some texts) indicates laminar (streamlined) flow in a pipe.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5d4af272-38d6-439a-9348-14f18de8c2d2",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Pressure at the same horizontal level in connected static fluid is:",
-    "formula": "",
-    "options": [
-      "Depends on container shape",
-      "Equal throughout",
-      "Depends on fluid velocity",
-      "Greater near walls"
-    ],
-    "answer": 1,
-    "explain": "In a connected static fluid, pressure is equal at the same horizontal level regardless of shape.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bcc2f817-afe8-4076-a03b-475d60694c71",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Which principle explains the lifting force on an aircraft wing?",
-    "formula": "",
-    "options": [
-      "Pascal's law",
-      "Stokes' law",
-      "Archimedes' principle",
-      "Bernoulli's principle"
-    ],
-    "answer": 3,
-    "explain": "Higher airspeed above wing → lower pressure → net upward (lift) force by Bernoulli's principle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c661d317-0efd-40e7-bee1-b47e80d5efc8",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "In Poiseuille's law, volume flow rate Q ∝ which power of radius R?",
-    "formula": "Q = πR⁴ΔP/(8ηL)",
-    "options": [
-      "R",
-      "R²",
-      "R³",
-      "R⁴"
-    ],
-    "answer": 3,
-    "explain": "Poiseuille's law: Q = πR⁴ΔP/8ηL, so Q ∝ R⁴.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3dbcaf8c-cc1a-46c4-b0ce-26b4676d4a63",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Velocity profile for viscous flow in a pipe is:",
-    "formula": "",
-    "options": [
-      "Uniform",
-      "Linear",
-      "Parabolic",
-      "Elliptical"
-    ],
-    "answer": 2,
-    "explain": "In Poiseuille flow, velocity is maximum at centre and zero at walls: parabolic profile.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "792ae0e8-62ed-4856-aec9-3a848648020d",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Surface tension of a liquid generally __ with temperature:",
-    "formula": "",
-    "options": [
-      "Increases",
-      "Remains constant",
-      "First increases then decreases",
-      "Decreases"
-    ],
-    "answer": 3,
-    "explain": "Higher temperature weakens intermolecular cohesion, reducing surface tension.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "529ccfd7-98db-47d0-99f0-abf47c6c3d83",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Excess pressure inside a cylindrical liquid jet of radius R is:",
-    "formula": "ΔP = T/R",
-    "options": [
-      "T/R",
-      "2T/R",
-      "T/2R",
-      "4T/R"
-    ],
-    "answer": 0,
-    "explain": "Cylindrical jet has curvature in one plane only, so excess pressure = T/R (not 2T/R).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5b74671a-5f2a-4e3b-b68e-a081776986c9",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "If a liquid has obtuse contact angle θ, then cosθ is:",
-    "formula": "",
-    "options": [
-      "Equal to 1",
-      "Positive",
-      "Negative",
-      "Zero"
-    ],
-    "answer": 2,
-    "explain": "For θ > 90° (e.g., mercury-glass), cosθ < 0, causing capillary depression.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3b9eac51-d955-46e3-9568-66ca5f560f3a",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Apparent weight of a submerged body = actual weight −",
-    "formula": "W_app = W − F_B",
-    "options": [
-      "Weight of body",
-      "Buoyant force",
-      "Atmospheric pressure × Area",
-      "Weight of fluid"
-    ],
-    "answer": 1,
-    "explain": "Apparent weight = W − Buoyant force = W − ρ_fluid·V·g.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77e51c40-3a91-4e91-8d89-15252f8007c9",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Unit of surface tension in SI system:",
-    "formula": "T = F/L",
-    "options": [
-      "N/m",
-      "N·m",
-      "N/m²",
-      "J/m³"
-    ],
-    "answer": 0,
-    "explain": "Surface tension = force per unit length, SI unit is N/m (equivalent to J/m²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "85b51059-7af5-4368-9d29-0e46cb4ec7a9",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "For streamline flow, the product Av at every cross section is:",
-    "formula": "A₁v₁ = A₂v₂",
-    "options": [
-      "Zero",
-      "Constant",
-      "Decreasing downstream",
-      "Increasing downstream"
-    ],
-    "answer": 1,
-    "explain": "Continuity equation for incompressible fluid: A₁v₁ = A₂v₂ = constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "49e56157-5dd2-41cd-aa26-09372514baee",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Dimension of surface tension T is:",
-    "formula": "",
-    "options": [
-      "[ML²T⁻²]",
-      "[ML⁻¹T⁻²]",
-      "[MT⁻²]",
-      "[MLT⁻²]"
-    ],
-    "answer": 2,
-    "explain": "T = F/L → [MLT⁻²]/[L] = [MT⁻²].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70e474ea-c096-4df4-a6d9-3b8725586929",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Stokes' terminal velocity vₜ formula for sphere in viscous fluid:",
-    "formula": "vₜ = 2r²(ρ−σ)g / 9η",
-    "options": [
-      "vₜ = 2r²(ρ−σ)g/9η",
-      "vₜ = 2r(ρ−σ)g/9η",
-      "vₜ = r²(ρ−σ)g/6η",
-      "vₜ = 4r²(ρ−σ)g/9η"
-    ],
-    "answer": 0,
-    "explain": "Terminal velocity from balancing gravity, buoyancy, and Stokes drag gives vₜ = 2r²(ρ−σ)g/9η.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "27ceeb59-6a4c-4984-b91a-fcc1579d034f",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Pressure difference between two points in fluid at rest with height Δh:",
-    "formula": "ΔP = ρgΔh",
-    "options": [
-      "ρΔh/g",
-      "ρg/Δh",
-      "2ρgΔh",
-      "ρgΔh"
-    ],
-    "answer": 3,
-    "explain": "Hydrostatic pressure difference depends only on vertical separation: ΔP = ρgΔh.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3899c26e-a628-4afe-a204-fd4e3b0bdbd6",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Which force keeps a floating body in equilibrium?",
-    "formula": "",
-    "options": [
-      "Buoyant force = Weight",
-      "Viscous force = Weight",
-      "Surface tension = Weight",
-      "Normal force = Weight"
-    ],
-    "answer": 0,
-    "explain": "A floating body is in equilibrium when the upward buoyant force equals its weight.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "290f1633-f2ca-4ad3-830d-4d16b364f431",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Height of capillary rise for water in a tube of radius r (contact angle θ):",
-    "formula": "h = 2Tcosθ / ρgr",
-    "options": [
-      "2Tsinθ/ρgr",
-      "Tcosθ/ρgr",
-      "4Tcosθ/ρgr",
-      "2Tcosθ/ρgr"
-    ],
-    "answer": 3,
-    "explain": "Capillary rise balances surface tension force with weight of liquid column: h = 2Tcosθ/ρgr.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "84fb0a29-c455-47ed-98aa-66890be318e4",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "In Poiseuille's flow, velocity at the axis (centre) is:",
-    "formula": "v_max = PR²/4ηL",
-    "options": [
-      "Minimum",
-      "Zero",
-      "Equal to average",
-      "Maximum (parabolic peak)"
-    ],
-    "answer": 3,
-    "explain": "In Poiseuille flow, the parabolic profile has maximum velocity at the central axis of the pipe.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4c90f64c-650e-4c1e-beba-3fbb7f53306e",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Average velocity in Poiseuille flow compared to maximum velocity:",
-    "formula": "v_avg = v_max/2",
-    "options": [
-      "v_max",
-      "2v_max",
-      "v_max/4",
-      "v_max/2"
-    ],
-    "answer": 3,
-    "explain": "For parabolic velocity profile in viscous pipe flow, average velocity = half of maximum velocity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "187571e1-ef0f-4a88-b98a-e7d46409f00f",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "The pressure at the bottom of a dam depends on:",
-    "formula": "P = ρgh",
-    "options": [
-      "Depth of water only",
-      "Width of dam",
-      "Volume of water",
-      "Shape of dam"
-    ],
-    "answer": 0,
-    "explain": "Hydrostatic pressure P = ρgh depends only on depth h, not on shape or volume of the reservoir.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bc58a54b-375f-4ad7-91dd-92792b637646",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Which number is used to distinguish laminar from turbulent flow?",
-    "formula": "Re = ρvD/η",
-    "options": [
-      "Mach number",
-      "Reynolds number",
-      "Froude number",
-      "Euler number"
-    ],
-    "answer": 1,
-    "explain": "Reynolds number Re = ρvD/η determines whether flow is laminar (Re<1000) or turbulent (Re>2000).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d8199119-8860-4286-b111-be473eca2e99",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "For a soap film (two surfaces) of area A, work done to form it is:",
-    "formula": "W = 2TA",
-    "options": [
-      "4TA",
-      "T/A",
-      "TA",
-      "2TA"
-    ],
-    "answer": 3,
-    "explain": "A soap film has two surfaces, so work done = 2T × area (factor 2 for inner and outer surfaces).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fb0d6846-090f-44ae-a93c-c5b932330ebe",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Bernoulli's equation is NOT applicable when the flow is:",
-    "formula": "",
-    "options": [
-      "Turbulent",
-      "Irrotational",
-      "Steady",
-      "Incompressible"
-    ],
-    "answer": 0,
-    "explain": "Bernoulli's equation assumes steady, non-viscous, incompressible, irrotational flow; fails for turbulent flow.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c3e43d12-e00b-475d-8148-9818643f18b0",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Torricelli's theorem: speed of efflux v = √(2gh). What is h?",
-    "formula": "v = √(2gh)",
-    "options": [
-      "Diameter of hole",
-      "Height of container",
-      "Depth of hole below free surface",
-      "Total liquid height"
-    ],
-    "answer": 2,
-    "explain": "In Torricelli's theorem, h is the vertical distance from the free surface to the hole.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "65485fe0-c558-4066-b919-f953a352cf3d",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "At the narrowest part of a Venturimeter, the pressure is:",
-    "formula": "",
-    "options": [
-      "Zero",
-      "Maximum",
-      "Minimum",
-      "Equal throughout"
-    ],
-    "answer": 2,
-    "explain": "By Bernoulli's theorem, maximum velocity at constriction means minimum pressure there.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8461f424-395d-47a2-9d24-d42e7395b045",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "The unit of kinematic viscosity ν = η/ρ in SI system is:",
-    "formula": "ν = η/ρ",
-    "options": [
-      "Pa·s",
-      "kg/(m·s)",
-      "m²/s",
-      "N·s/m²"
-    ],
-    "answer": 2,
-    "explain": "Kinematic viscosity ν = η/ρ has SI unit m²/s (dynamic viscosity Pa·s divided by density kg/m³).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "00a00537-0573-4635-891b-458c44d0e2f5",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Meniscus of water in a glass tube is:",
-    "formula": "",
-    "options": [
-      "Convex upward",
-      "Concave downward",
-      "Flat",
-      "Concave upward"
-    ],
-    "answer": 3,
-    "explain": "Water wets glass (θ < 90°), so adhesion dominates, producing a concave (upward curving) meniscus.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "db5f2044-53ef-4448-a117-daa60d8fda9d",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Meniscus of mercury in a glass tube is:",
-    "formula": "",
-    "options": [
-      "Concave upward",
-      "Parabolic",
-      "Flat",
-      "Convex upward"
-    ],
-    "answer": 3,
-    "explain": "Mercury does not wet glass (θ > 90°), cohesion dominates, giving a convex (downward curving) meniscus.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c20870e0-5e43-4ab5-ac06-8a4dfd710350",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "In Stokes' law, drag force F = 6πηrv. What is r?",
-    "formula": "F = 6πηrv",
-    "options": [
-      "Radius of tube",
-      "Radius of sphere",
-      "Reynolds number",
-      "Distance from wall"
-    ],
-    "answer": 1,
-    "explain": "In Stokes' law, r is the radius of the spherical body moving through the viscous fluid.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6211e35f-720e-4e7b-8db8-a8b9d3ae3b89",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Archimedes' principle: buoyant force equals weight of fluid —",
-    "formula": "F_b = ρ_fluid·V_sub·g",
-    "options": [
-      "Displaced",
-      "Surrounding the body",
-      "Above the body",
-      "In the container"
-    ],
-    "answer": 0,
-    "explain": "Archimedes' principle: buoyant force = weight of fluid displaced by the submerged part of the body.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "16f3b128-578c-49b0-bc38-a5d0637be9e2",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "If tube radius is halved, Poiseuille flow rate Q changes by factor:",
-    "formula": "Q ∝ R⁴",
-    "options": [
-      "1/2",
-      "1/8",
-      "1/16",
-      "1/4"
-    ],
-    "answer": 2,
-    "explain": "Q ∝ R⁴; halving R gives Q → (1/2)⁴ = 1/16 of original flow rate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "98492ae8-5cb8-444c-8d86-444f2055d1b9",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Liquid rise in capillary is higher when tube radius is:",
-    "formula": "h = 2Tcosθ/ρgr",
-    "options": [
-      "Independent of radius",
-      "Larger",
-      "Equal to drop radius",
-      "Smaller"
-    ],
-    "answer": 3,
-    "explain": "h = 2Tcosθ/ρgr; smaller r gives larger h, so thinner tubes show greater capillary rise.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eda58dcb-1034-4af9-964d-021f411cf87b",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Net upward force on a body partially submerged (volume V_sub) is:",
-    "formula": "F = ρ_L·V_sub·g − mg",
-    "options": [
-      "mg − ρ_L·V_sub·g",
-      "ρ_L·V_total·g − mg",
-      "ρ_L·V_sub·g",
-      "ρ_L·V_sub·g − mg"
-    ],
-    "answer": 3,
-    "explain": "Net upward force = buoyant force − weight = ρ_L·V_sub·g − mg; positive means body rises.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b8d2ffb4-b293-43e7-9261-6851ed73a588",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Hydraulic lift: force ratio F₁/F₂ = ?",
-    "formula": "F₁/F₂ = A₁/A₂",
-    "options": [
-      "(A₁/A₂)²",
-      "A₂/A₁",
-      "r₁/r₂",
-      "A₁/A₂"
-    ],
-    "answer": 3,
-    "explain": "Pascal's law: same pressure transmitted, so F/A = const → F₁/F₂ = A₁/A₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "670f0b1c-3622-4e67-97a6-e9311ce48f73",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Which law relates pressure drop to viscosity in pipe flow?",
-    "formula": "Q = πR⁴ΔP/8ηL",
-    "options": [
-      "Pascal's law",
-      "Stokes' law",
-      "Bernoulli's law",
-      "Poiseuille's law"
-    ],
-    "answer": 3,
-    "explain": "Poiseuille's law gives laminar flow rate Q = πR⁴ΔP/(8ηL).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fdfdafee-62d3-4442-863f-ebb1ab6bbbce",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "The critical velocity for turbulent flow depends on η, ρ, and:",
-    "formula": "vₒ = Kη/ρr",
-    "options": [
-      "Tube radius r",
-      "Atmospheric pressure",
-      "Tube length L",
-      "Fluid temperature"
-    ],
-    "answer": 0,
-    "explain": "Critical velocity vₒ = Kη/(ρr); it depends on tube radius r, η and ρ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c576cc6d-03a7-40c8-80eb-4f0caeff3741",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "If a liquid rises in a capillary of radius r, the weight supported equals:",
-    "formula": "2πrT cosθ",
-    "options": [
-      "πr²T cosθ",
-      "2πrT cosθ",
-      "4πrT cosθ",
-      "πrT cosθ"
-    ],
-    "answer": 1,
-    "explain": "Upward component of surface tension force = 2πrT cosθ balances weight of liquid column.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0bf7d670-f29a-4508-ad77-8a6ff4c864be",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Viscosity of a gas with increase in temperature:",
-    "formula": "",
-    "options": [
-      "Decreases",
-      "Increases",
-      "Remains same",
-      "First increases then decreases"
-    ],
-    "answer": 1,
-    "explain": "Gas viscosity increases with T due to increased molecular momentum transfer.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fa8b388e-5896-471f-b98c-2dc7af779826",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Viscosity of a liquid with increase in temperature:",
-    "formula": "",
-    "options": [
-      "Remains same",
-      "Increases",
-      "Decreases",
-      "First decreases then increases"
-    ],
-    "answer": 2,
-    "explain": "Liquid viscosity decreases with T as intermolecular cohesive forces weaken.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "626f95e0-4077-4e48-b818-b88618c6f8d5",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "The pressure inside a spherical soap bubble exceeds outside by ΔP. If R doubles, ΔP becomes:",
-    "formula": "ΔP = 4T/R",
-    "options": [
-      "2ΔP",
-      "4ΔP",
-      "ΔP",
-      "ΔP/2"
-    ],
-    "answer": 3,
-    "explain": "ΔP = 4T/R; doubling R halves ΔP.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e9fa1e89-33d6-4d89-86cc-4abe29af58c9",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "A block of wood floats with 60% submerged. Its density is __ × density of water.",
-    "formula": "ρ_body/ρ_fluid = V_sub/V",
-    "options": [
-      "0.4",
-      "0.067",
-      "0.6",
-      "1.6"
-    ],
-    "answer": 2,
-    "explain": "Fraction submerged = ρ_body/ρ_fluid → ρ_body = 0.6 ρ_water.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3f998479-240c-47e0-87fd-0df5f793035f",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Newton's law of viscosity: shear stress τ = η × (du/dy). Here du/dy is called:",
-    "formula": "τ = η(du/dy)",
-    "options": [
-      "Strain",
-      "Velocity gradient",
-      "Pressure gradient",
-      "Shear strain"
-    ],
-    "answer": 1,
-    "explain": "du/dy is the velocity gradient (rate of shear strain) perpendicular to flow direction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fd36ab90-781b-4c37-9afc-7abfa5d0b9a4",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "A liquid drop breaks into n smaller drops of radius r. The energy released/absorbed depends on change in:",
-    "formula": "ΔE = TΔA",
-    "options": [
-      "Volume",
-      "Surface area",
-      "Density",
-      "Mass"
-    ],
-    "answer": 1,
-    "explain": "Energy change = T × ΔA (change in total surface area); volume is conserved.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c5dd0d5b-79d3-406f-9f97-affa366df07e",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "For ideal fluid flow, which condition is NOT assumed?",
-    "formula": "",
-    "options": [
-      "Incompressible",
-      "Irrotational",
-      "Viscosity present",
-      "Steady flow"
-    ],
-    "answer": 2,
-    "explain": "Ideal fluid is non-viscous (η=0), incompressible, irrotational and flow is steady.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a7508cb7-d83c-45d9-a61b-2928480750aa",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "CGS unit of dynamic viscosity η is Poise. 1 Poise = ?",
-    "formula": "",
-    "options": [
-      "1 Pa·s",
-      "0.1 Pa·s",
-      "10 Pa·s",
-      "0.01 Pa·s"
-    ],
-    "answer": 1,
-    "explain": "1 Poise = 0.1 Pa·s (since 1 dyne/cm² = 0.1 Pa and 1 cm = 0.01 m).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3c6dfa76-146f-4089-9d8e-86822a2cb3c6",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Excess pressure inside a cylindrical soap film (both surfaces) of radius R is:",
-    "formula": "ΔP = 2T/R",
-    "options": [
-      "4T/R",
-      "T/R",
-      "8T/R",
-      "2T/R"
-    ],
-    "answer": 3,
-    "explain": "Cylindrical film has two surfaces but one radius of curvature: ΔP = 2T/R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d9cb9f58-b27e-4cf9-836f-aa129fccb5d8",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "For a floating body, centre of gravity G must be __ metacentre M for stability:",
-    "formula": "",
-    "options": [
-      "Below M",
-      "At M",
-      "Above M",
-      "At centre of buoyancy"
-    ],
-    "answer": 0,
-    "explain": "Stable equilibrium requires G below metacentre M (positive metacentric height GM).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8dbdef90-33c3-4218-93d0-bf3e7f413fe7",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "The cohesive force between liquid molecules is responsible for which property?",
-    "formula": "",
-    "options": [
-      "Capillary rise due to adhesion",
-      "Viscosity",
-      "Buoyancy",
-      "Surface tension"
-    ],
-    "answer": 3,
-    "explain": "Surface tension arises from cohesive (like-molecule) forces at the liquid surface.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e726d3aa-c21d-4a48-961e-a4c7c0abc0cf",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Pressure in a fluid is transmitted equally in all directions. This is:",
-    "formula": "",
-    "options": [
-      "Pascal's law",
-      "Bernoulli's theorem",
-      "Newton's law of viscosity",
-      "Archimedes' principle"
-    ],
-    "answer": 0,
-    "explain": "Pascal's law states pressure applied to enclosed fluid is transmitted equally in all directions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5fddadf7-60bf-4410-b9ed-ed1db7c011d5",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "In Bernoulli's equation, ½ρv² represents which energy per unit volume?",
-    "formula": "",
-    "options": [
-      "Potential energy density",
-      "Pressure energy density",
-      "Kinetic energy density",
-      "Thermal energy density"
-    ],
-    "answer": 2,
-    "explain": "½ρv² is kinetic energy per unit volume; ρgh is potential energy density; P is pressure energy density.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b4389e8c-c90b-4505-bdec-421993974556",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "The ratio of inertial force to viscous force in a fluid is called:",
-    "formula": "Re = ρvD/η",
-    "options": [
-      "Reynolds number",
-      "Mach number",
-      "Weber number",
-      "Froude number"
-    ],
-    "answer": 0,
-    "explain": "Reynolds number Re = ρvD/η is the ratio of inertial to viscous forces.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "06502728-2de4-4d8b-a488-e2cb3243bccb",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "An object of volume V is fully submerged in a liquid of density ρ_L. Buoyant force is:",
-    "formula": "F_B = ρ_L Vg",
-    "options": [
-      "ρ_L V²g",
-      "(ρ_L − ρ_object)Vg",
-      "ρ_object Vg",
-      "ρ_L Vg"
-    ],
-    "answer": 3,
-    "explain": "Buoyant force = weight of displaced liquid = ρ_L Vg regardless of object's density.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eb815e0b-43d8-4fef-9b31-6b15c7c90e9c",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Which property of a liquid is responsible for the spherical shape of a free liquid drop?",
-    "formula": "",
-    "options": [
-      "Viscosity",
-      "Surface tension",
-      "Density",
-      "Compressibility"
-    ],
-    "answer": 1,
-    "explain": "Surface tension minimises surface area for given volume; sphere has minimum surface area.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "483c13be-7507-4000-8b28-013b489d191a",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "When a pipe narrows, according to continuity equation, velocity of fluid:",
-    "formula": "A₁v₁ = A₂v₂",
-    "options": [
-      "Becomes zero",
-      "Remains same",
-      "Increases",
-      "Decreases"
-    ],
-    "answer": 2,
-    "explain": "A₁v₁ = A₂v₂; smaller area A₂ means larger velocity v₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4deb1b99-61fb-4530-9346-85be6ad69f92",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Statics",
-    "prompt": "Hydrostatic pressure P at depth h in liquid density ρ:",
-    "formula": "P = P₀ + ρgh",
-    "options": [
-      "P₀ − ρgh",
-      "P₀ + ρg/h",
-      "ρgh²/2",
-      "P₀ + ρgh"
-    ],
-    "answer": 3,
-    "explain": "Absolute pressure = atmospheric pressure + gauge pressure ρgh.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ce0a0802-c0d4-4871-bd5e-177b002fb98a",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Bernoulli's Theorem",
-    "prompt": "Bernoulli's principle: in horizontal flow, if area decreases, velocity __ and pressure __:",
-    "formula": "",
-    "options": [
-      "decreases; decreases",
-      "decreases; increases",
-      "increases; increases",
-      "increases; decreases"
-    ],
-    "answer": 3,
-    "explain": "Continuity forces v up in narrow section; Bernoulli then requires P to drop.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d98881c3-428e-4cd3-bef7-fa1e2be9c150",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Floatation",
-    "prompt": "A body floats if its average density is __ the liquid density:",
-    "formula": "",
-    "options": [
-      "Greater than",
-      "Less than or equal to",
-      "Independent of",
-      "Equal to only"
-    ],
-    "answer": 1,
-    "explain": "Floating requires buoyant force ≥ weight, i.e., ρ_body ≤ ρ_liquid.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "951c5cc6-9ad1-42b8-a190-c1209fa7f61d",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Pascal's Law",
-    "prompt": "Hydraulic press: when piston of area A₁ is pressed with force F₁, force on area A₂ is:",
-    "formula": "F₂ = F₁(A₂/A₁)",
-    "options": [
-      "F₁·(A₂/A₁)",
-      "F₁·(A₁/A₂)",
-      "F₁/(A₁+A₂)",
-      "F₁·A₁·A₂"
-    ],
-    "answer": 0,
-    "explain": "Pascal's law: pressure P = F₁/A₁ = F₂/A₂, so F₂ = F₁A₂/A₁.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5c1a4276-1fd1-470d-983f-2634fa839810",
-    "subject": "Physics",
-    "chapter": "Fluid Mechanics",
-    "topic": "Fluid Mechanics",
-    "prompt": "Absolute pressure = gauge pressure + ?",
-    "formula": "P_abs = P_gauge + P_atm",
-    "options": [
-      "Hydrostatic pressure",
-      "Vapour pressure",
-      "Zero (they are equal)",
-      "Atmospheric pressure"
-    ],
-    "answer": 3,
-    "explain": "Absolute pressure is gauge pressure plus atmospheric pressure (101.3 kPa at sea level).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "165893ab-69b2-4f60-9a6f-3fbfc8111f05",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Pressure at depth h in a liquid of density ρ:",
+  "formula": "P = P₀ + ρgh",
+  "options": [
+   "P₀ + ρg/h",
+   "P₀ − ρgh",
+   "ρgh only",
+   "P₀ + ρgh"
+  ],
+  "answer": 3,
+  "explain": "Gauge pressure increases linearly with depth; absolute pressure includes atmospheric pressure P₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3516ddd1-027b-453c-9573-7d69bdb92118",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Pascal's law: pressure applied to enclosed fluid is transmitted —",
+  "formula": "",
+  "options": [
+   "Only downward",
+   "Only upward",
+   "Equally in all directions",
+   "Along flow direction"
+  ],
+  "answer": 2,
+  "explain": "Pascal's law states pressure change is transmitted undiminished to every point of the fluid.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "54ff0682-879b-4cac-b24e-810568b4f20d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Buoyant force on a submerged object equals:",
+  "formula": "F_B = ρ_fluid · V_sub · g",
+  "options": [
+   "Weight of object",
+   "Weight difference",
+   "ρ_object·V·g",
+   "Weight of displaced fluid"
+  ],
+  "answer": 3,
+  "explain": "Archimedes' principle: buoyant force = weight of fluid displaced by the submerged volume.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b7df1cab-a79d-4d17-95f9-a1fd41c419d4",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "Equation of continuity for incompressible flow:",
+  "formula": "A₁v₁ = A₂v₂",
+  "options": [
+   "A₁v₁² = A₂v₂²",
+   "A₁/v₁ = A₂/v₂",
+   "A₁v₁ = A₂v₂",
+   "ρA₁ = ρA₂"
+  ],
+  "answer": 2,
+  "explain": "Conservation of mass for incompressible fluid: volume flow rate Q = Av is constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2e74220-407f-40a2-92dc-abbf95538717",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "Bernoulli's equation represents conservation of:",
+  "formula": "P + ½ρv² + ρgh = const",
+  "options": [
+   "Mass flow rate",
+   "Momentum",
+   "Energy per unit volume",
+   "Pressure only"
+  ],
+  "answer": 2,
+  "explain": "Bernoulli's equation is energy conservation per unit volume for ideal, steady, incompressible flow.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b2b858d-0aed-4d74-ba53-257b50bec05e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Speed of efflux from a hole at depth h (Torricelli's theorem):",
+  "formula": "v = √(2gh)",
+  "options": [
+   "√(gh)",
+   "√(ρgh)",
+   "√(2gh)",
+   "2gh"
+  ],
+  "answer": 2,
+  "explain": "Torricelli's theorem: efflux speed = √(2gh), same as free-fall speed from height h.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c626ece1-359d-43db-abb3-a6fd9d550632",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "SI unit of dynamic (absolute) viscosity η is:",
+  "formula": "",
+  "options": [
+   "N/m²",
+   "Pa·s",
+   "kg/m³",
+   "Pa/s"
+  ],
+  "answer": 1,
+  "explain": "Dynamic viscosity η has SI unit pascal-second (Pa·s) or equivalently N·s/m².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1fa50e99-c74a-4d80-8f9d-1d2bff026abc",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Stokes' law: drag force on sphere of radius r moving at speed v:",
+  "formula": "F = 6πηrv",
+  "options": [
+   "6πηr²v",
+   "4πηrv",
+   "πηrv/6",
+   "6πηrv"
+  ],
+  "answer": 3,
+  "explain": "Stokes' law applies to laminar flow; drag F = 6πηrv for a sphere in a viscous fluid.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7380b071-ceaa-45dd-bd0a-dd159f9d0c49",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Terminal velocity of a sphere is proportional to:",
+  "formula": "v_T = 2r²(ρ−σ)g / 9η",
+  "options": [
+   "r³",
+   "r",
+   "r²",
+   "1/r"
+  ],
+  "answer": 2,
+  "explain": "Terminal velocity ∝ r²; derived by balancing gravity, buoyancy, and Stokes drag.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "09f09cce-0d1c-4044-9a28-42d0dc3eaaf8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number",
+  "prompt": "Reynolds number Re determines:",
+  "formula": "Re = ρvD/η",
+  "options": [
+   "Nature of flow (laminar/turbulent)",
+   "Buoyant force",
+   "Viscosity directly",
+   "Surface tension"
+  ],
+  "answer": 0,
+  "explain": "Re < ~1000 → laminar; Re > ~2000 → turbulent flow in a pipe.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e1bad472-4cfb-4f30-b042-b1a86887d509",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Surface tension T has SI unit:",
+  "formula": "",
+  "options": [
+   "N/m²",
+   "J/m³",
+   "Pa·m",
+   "N/m"
+  ],
+  "answer": 3,
+  "explain": "Surface tension = force per unit length, so SI unit is N/m (equivalent to J/m²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fed8a495-3809-4b3a-9433-a95ce3cd8530",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Excess pressure inside a soap bubble of radius R:",
+  "formula": "ΔP = 4T/R",
+  "options": [
+   "T/R",
+   "4T/R",
+   "2T/R",
+   "8T/R"
+  ],
+  "answer": 1,
+  "explain": "Soap bubble has two surfaces; excess pressure = 4T/R (factor 2 for each surface).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "388ec3b6-25b5-4387-a802-b2d5a380321d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Excess pressure inside a liquid drop of radius R:",
+  "formula": "ΔP = 2T/R",
+  "options": [
+   "T/R",
+   "4T/R",
+   "2T/R",
+   "T/2R"
+  ],
+  "answer": 2,
+  "explain": "Liquid drop has one surface; excess pressure inside = 2T/R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5296754c-4ce0-49a2-b422-bcf763d246cd",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Capillary rise formula:",
+  "formula": "h = 2T cosθ / (ρgr)",
+  "options": [
+   "4T cosθ / ρgr",
+   "T cosθ / ρgr",
+   "2T cosθ / ρgr",
+   "2T / ρgr²"
+  ],
+  "answer": 2,
+  "explain": "Height of capillary rise balances surface tension force with weight of liquid column.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36d5c261-2b25-4324-91fc-1904ceae5cec",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "For mercury in glass (obtuse contact angle), capillary shows:",
+  "formula": "",
+  "options": [
+   "No change",
+   "Overflow",
+   "Rise",
+   "Depression"
+  ],
+  "answer": 3,
+  "explain": "Mercury has obtuse contact angle (~140°) with glass, so cosθ < 0 → capillary depression.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "954ee290-1a01-4ced-baea-0687a8d7f49e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "Volume flow rate Q through a pipe:",
+  "formula": "Q = Av",
+  "options": [
+   "v/A",
+   "A/v",
+   "A²v",
+   "Av"
+  ],
+  "answer": 3,
+  "explain": "Volume flow rate Q = cross-sectional area × fluid speed; SI unit is m³/s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "48ecd2e5-e3f4-40df-a003-131b113cab7b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "In Bernoulli's theorem, which type of flow is assumed?",
+  "formula": "",
+  "options": [
+   "Rotational flow",
+   "Steady, incompressible, non-viscous",
+   "Turbulent, viscous",
+   "Compressible, laminar"
+  ],
+  "answer": 1,
+  "explain": "Bernoulli's equation holds for ideal (non-viscous), incompressible, steady, irrotational flow.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "578dbecb-e332-4810-9214-1c3328cee84f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting",
+  "prompt": "The angle of contact for a liquid that wets the surface is:",
+  "formula": "",
+  "options": [
+   "180°",
+   "Acute (< 90°)",
+   "Exactly 90°",
+   "Obtuse (> 90°)"
+  ],
+  "answer": 1,
+  "explain": "Wetting liquids (e.g., water on glass) have acute contact angle; non-wetting have obtuse.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8dcd4e7e-3ae3-4084-baac-7b456421e4c5",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Hydraulic press works on which law?",
+  "formula": "F₂/A₂ = F₁/A₁",
+  "options": [
+   "Bernoulli's theorem",
+   "Newton's third law",
+   "Archimedes' principle",
+   "Pascal's law"
+  ],
+  "answer": 3,
+  "explain": "Hydraulic press multiplies force using Pascal's law: P is same throughout enclosed fluid.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b7786ab7-503a-46ae-a9c3-0c40705e8b3f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "Dimension of coefficient of viscosity η:",
+  "formula": "",
+  "options": [
+   "ML⁻¹T⁻¹",
+   "ML⁻²T⁻¹",
+   "ML⁰T⁻¹",
+   "MLT⁻"
+  ],
+  "answer": 0,
+  "explain": "From F = ηA(dv/dy), η has dimensions ML⁻¹T⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7c82621d-c1ee-469d-a7ae-227693ec56d6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "When speed of fluid increases in Bernoulli's equation, pressure:",
+  "formula": "P + ½ρv² = const",
+  "options": [
+   "Becomes zero",
+   "Increases",
+   "Decreases",
+   "Remains same"
+  ],
+  "answer": 2,
+  "explain": "Higher fluid speed → lower pressure at same height; basis of lift on aerofoils.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9c6273d4-9be0-4d21-bc05-7a2e7d8127a0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Fraction of iceberg submerged in water (ρ_ice/ρ_water ≈ 0.9):",
+  "formula": "f = ρ_ice/ρ_water",
+  "options": [
+   "0.5 (50%)",
+   "0.1 (10%)",
+   "0.9 (90%)",
+   "1.0 (100%)"
+  ],
+  "answer": 2,
+  "explain": "Floating condition: fraction submerged = ρ_object/ρ_fluid ≈ 0.9 for ice in water.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "76d3688c-6e7f-4ae1-9f3b-3cd45338cdd0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Gauge pressure at depth h equals:",
+  "formula": "P_gauge = ρgh",
+  "options": [
+   "ρgh",
+   "2ρgh",
+   "P₀ − ρgh",
+   "ρgh + P₀"
+  ],
+  "answer": 0,
+  "explain": "Gauge pressure excludes atmospheric pressure; it equals ρgh alone.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d18bd83e-e6bd-4c20-8d9e-b5043acd36d1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "Bernoulli's equation is valid only for:",
+  "formula": "",
+  "options": [
+   "Viscous, compressible flow",
+   "Turbulent, viscous flow",
+   "Non-viscous, incompressible flow",
+   "Any real fluid flow"
+  ],
+  "answer": 2,
+  "explain": "Bernoulli's theorem assumes ideal (non-viscous), incompressible, streamline flow.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5ed09bc7-23eb-46e9-b3f3-3e64daeefd0f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Terminal velocity vₜ is proportional to which power of radius r?",
+  "formula": "vₜ ∝ r²",
+  "options": [
+   "r²",
+   "r^(1/2)",
+   "r³",
+   "r"
+  ],
+  "answer": 0,
+  "explain": "From Stokes' law and buoyancy balance: vₜ = 2r²(ρ−σ)g/9η, so vₜ ∝ r².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2f7451b2-300e-4dba-b837-ad863a612980",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "Which quantity remains constant along a streamline in ideal flow?",
+  "formula": "P + ½ρv² + ρgh = const",
+  "options": [
+   "Total mechanical energy per unit volume",
+   "Kinetic energy alone",
+   "Velocity alone",
+   "Pressure alone"
+  ],
+  "answer": 0,
+  "explain": "Bernoulli's theorem states total energy per unit volume is constant along a streamline.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "353e7245-6f23-4d66-b4da-fa594e142615",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "A body is in neutral buoyancy when:",
+  "formula": "",
+  "options": [
+   "ρ_body > ρ_fluid",
+   "Weight > Buoyant force",
+   "ρ_body < ρ_fluid",
+   "ρ_body = ρ_fluid"
+  ],
+  "answer": 3,
+  "explain": "Neutral buoyancy means the object is fully submerged and neither sinks nor rises.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b81c0015-5c59-46f1-88b1-9a19385c1cc2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "Venturimeter measures:",
+  "formula": "",
+  "options": [
+   "Flow speed / volume flow rate",
+   "Fluid viscosity",
+   "Fluid density",
+   "Surface tension"
+  ],
+  "answer": 0,
+  "explain": "Venturimeter uses Bernoulli's principle to measure flow speed by pressure difference.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f6d3fe83-d1f1-42ce-86d1-9ab91de6cac6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "For Venturimeter, flow rate Q = A₁A₂√(2gh/(A₁²−A₂²)). What is h?",
+  "formula": "",
+  "options": [
+   "Capillary rise",
+   "Height of pipe",
+   "Depth of inlet",
+   "Pressure head difference"
+  ],
+  "answer": 3,
+  "explain": "h is the manometric head difference corresponding to the pressure drop between sections.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b2eb1da1-c571-48d3-a37c-96ba0b5baf6c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Work done to increase bubble radius from R to R+dR (soap bubble):",
+  "formula": "dW = 8πRT dR",
+  "options": [
+   "16πRT dR",
+   "4πRT dR",
+   "8πRT dR",
+   "2πRT dR"
+  ],
+  "answer": 2,
+  "explain": "Soap bubble has two surfaces; dW = T × d(2 × 4πR²) = 8πRT dR.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a3337129-a7bc-4414-a877-24799ed636be",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number",
+  "prompt": "Reynolds number Re < 1000 indicates:",
+  "formula": "Re = ρvD/η",
+  "options": [
+   "Laminar flow",
+   "Compressible flow",
+   "Turbulent flow",
+   "Critical flow"
+  ],
+  "answer": 0,
+  "explain": "Re < ~1000 (or 2000 by some texts) indicates laminar (streamlined) flow in a pipe.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5d4af272-38d6-439a-9348-14f18de8c2d2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Pressure at the same horizontal level in connected static fluid is:",
+  "formula": "",
+  "options": [
+   "Depends on container shape",
+   "Equal throughout",
+   "Depends on fluid velocity",
+   "Greater near walls"
+  ],
+  "answer": 1,
+  "explain": "In a connected static fluid, pressure is equal at the same horizontal level regardless of shape.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bcc2f817-afe8-4076-a03b-475d60694c71",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "Which principle explains the lifting force on an aircraft wing?",
+  "formula": "",
+  "options": [
+   "Pascal's law",
+   "Stokes' law",
+   "Archimedes' principle",
+   "Bernoulli's principle"
+  ],
+  "answer": 3,
+  "explain": "Higher airspeed above wing → lower pressure → net upward (lift) force by Bernoulli's principle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c661d317-0efd-40e7-bee1-b47e80d5efc8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "In Poiseuille's law, volume flow rate Q ∝ which power of radius R?",
+  "formula": "Q = πR⁴ΔP/(8ηL)",
+  "options": [
+   "R",
+   "R²",
+   "R³",
+   "R⁴"
+  ],
+  "answer": 3,
+  "explain": "Poiseuille's law: Q = πR⁴ΔP/8ηL, so Q ∝ R⁴.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3dbcaf8c-cc1a-46c4-b0ce-26b4676d4a63",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "Velocity profile for viscous flow in a pipe is:",
+  "formula": "",
+  "options": [
+   "Uniform",
+   "Linear",
+   "Parabolic",
+   "Elliptical"
+  ],
+  "answer": 2,
+  "explain": "In Poiseuille flow, velocity is maximum at centre and zero at walls: parabolic profile.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "792ae0e8-62ed-4856-aec9-3a848648020d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Surface tension of a liquid generally __ with temperature:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Remains constant",
+   "First increases then decreases",
+   "Decreases"
+  ],
+  "answer": 3,
+  "explain": "Higher temperature weakens intermolecular cohesion, reducing surface tension.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "529ccfd7-98db-47d0-99f0-abf47c6c3d83",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Excess pressure inside a cylindrical liquid jet of radius R is:",
+  "formula": "ΔP = T/R",
+  "options": [
+   "T/R",
+   "2T/R",
+   "T/2R",
+   "4T/R"
+  ],
+  "answer": 0,
+  "explain": "Cylindrical jet has curvature in one plane only, so excess pressure = T/R (not 2T/R).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5b74671a-5f2a-4e3b-b68e-a081776986c9",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting",
+  "prompt": "If a liquid has obtuse contact angle θ, then cosθ is:",
+  "formula": "",
+  "options": [
+   "Equal to 1",
+   "Positive",
+   "Negative",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "For θ > 90° (e.g., mercury-glass), cosθ < 0, causing capillary depression.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3b9eac51-d955-46e3-9568-66ca5f560f3a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Apparent weight of a submerged body = actual weight −",
+  "formula": "W_app = W − F_B",
+  "options": [
+   "Weight of body",
+   "Buoyant force",
+   "Atmospheric pressure × Area",
+   "Weight of fluid"
+  ],
+  "answer": 1,
+  "explain": "Apparent weight = W − Buoyant force = W − ρ_fluid·V·g.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77e51c40-3a91-4e91-8d89-15252f8007c9",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Unit of surface tension in SI system:",
+  "formula": "T = F/L",
+  "options": [
+   "N/m",
+   "N·m",
+   "N/m²",
+   "J/m³"
+  ],
+  "answer": 0,
+  "explain": "Surface tension = force per unit length, SI unit is N/m (equivalent to J/m²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "85b51059-7af5-4368-9d29-0e46cb4ec7a9",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "For streamline flow, the product Av at every cross section is:",
+  "formula": "A₁v₁ = A₂v₂",
+  "options": [
+   "Zero",
+   "Constant",
+   "Decreasing downstream",
+   "Increasing downstream"
+  ],
+  "answer": 1,
+  "explain": "Continuity equation for incompressible fluid: A₁v₁ = A₂v₂ = constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "49e56157-5dd2-41cd-aa26-09372514baee",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Dimension of surface tension T is:",
+  "formula": "",
+  "options": [
+   "[ML²T⁻²]",
+   "[ML⁻¹T⁻²]",
+   "[MT⁻²]",
+   "[MLT⁻²]"
+  ],
+  "answer": 2,
+  "explain": "T = F/L → [MLT⁻²]/[L] = [MT⁻²].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70e474ea-c096-4df4-a6d9-3b8725586929",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Stokes' terminal velocity vₜ formula for sphere in viscous fluid:",
+  "formula": "vₜ = 2r²(ρ−σ)g / 9η",
+  "options": [
+   "vₜ = 2r²(ρ−σ)g/9η",
+   "vₜ = 2r(ρ−σ)g/9η",
+   "vₜ = r²(ρ−σ)g/6η",
+   "vₜ = 4r²(ρ−σ)g/9η"
+  ],
+  "answer": 0,
+  "explain": "Terminal velocity from balancing gravity, buoyancy, and Stokes drag gives vₜ = 2r²(ρ−σ)g/9η.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "27ceeb59-6a4c-4984-b91a-fcc1579d034f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Pressure difference between two points in fluid at rest with height Δh:",
+  "formula": "ΔP = ρgΔh",
+  "options": [
+   "ρΔh/g",
+   "ρg/Δh",
+   "2ρgΔh",
+   "ρgΔh"
+  ],
+  "answer": 3,
+  "explain": "Hydrostatic pressure difference depends only on vertical separation: ΔP = ρgΔh.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3899c26e-a628-4afe-a204-fd4e3b0bdbd6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Which force keeps a floating body in equilibrium?",
+  "formula": "",
+  "options": [
+   "Buoyant force = Weight",
+   "Viscous force = Weight",
+   "Surface tension = Weight",
+   "Normal force = Weight"
+  ],
+  "answer": 0,
+  "explain": "A floating body is in equilibrium when the upward buoyant force equals its weight.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "290f1633-f2ca-4ad3-830d-4d16b364f431",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Height of capillary rise for water in a tube of radius r (contact angle θ):",
+  "formula": "h = 2Tcosθ / ρgr",
+  "options": [
+   "2Tsinθ/ρgr",
+   "Tcosθ/ρgr",
+   "4Tcosθ/ρgr",
+   "2Tcosθ/ρgr"
+  ],
+  "answer": 3,
+  "explain": "Capillary rise balances surface tension force with weight of liquid column: h = 2Tcosθ/ρgr.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "84fb0a29-c455-47ed-98aa-66890be318e4",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "In Poiseuille's flow, velocity at the axis (centre) is:",
+  "formula": "v_max = PR²/4ηL",
+  "options": [
+   "Minimum",
+   "Zero",
+   "Equal to average",
+   "Maximum (parabolic peak)"
+  ],
+  "answer": 3,
+  "explain": "In Poiseuille flow, the parabolic profile has maximum velocity at the central axis of the pipe.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4c90f64c-650e-4c1e-beba-3fbb7f53306e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "Average velocity in Poiseuille flow compared to maximum velocity:",
+  "formula": "v_avg = v_max/2",
+  "options": [
+   "v_max",
+   "2v_max",
+   "v_max/4",
+   "v_max/2"
+  ],
+  "answer": 3,
+  "explain": "For parabolic velocity profile in viscous pipe flow, average velocity = half of maximum velocity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "187571e1-ef0f-4a88-b98a-e7d46409f00f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "The pressure at the bottom of a dam depends on:",
+  "formula": "P = ρgh",
+  "options": [
+   "Depth of water only",
+   "Width of dam",
+   "Volume of water",
+   "Shape of dam"
+  ],
+  "answer": 0,
+  "explain": "Hydrostatic pressure P = ρgh depends only on depth h, not on shape or volume of the reservoir.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bc58a54b-375f-4ad7-91dd-92792b637646",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number",
+  "prompt": "Which number is used to distinguish laminar from turbulent flow?",
+  "formula": "Re = ρvD/η",
+  "options": [
+   "Mach number",
+   "Reynolds number",
+   "Froude number",
+   "Euler number"
+  ],
+  "answer": 1,
+  "explain": "Reynolds number Re = ρvD/η determines whether flow is laminar (Re<1000) or turbulent (Re>2000).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d8199119-8860-4286-b111-be473eca2e99",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "For a soap film (two surfaces) of area A, work done to form it is:",
+  "formula": "W = 2TA",
+  "options": [
+   "4TA",
+   "T/A",
+   "TA",
+   "2TA"
+  ],
+  "answer": 3,
+  "explain": "A soap film has two surfaces, so work done = 2T × area (factor 2 for inner and outer surfaces).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fb0d6846-090f-44ae-a93c-c5b932330ebe",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow",
+  "prompt": "Bernoulli's equation is NOT applicable when the flow is:",
+  "formula": "",
+  "options": [
+   "Turbulent",
+   "Irrotational",
+   "Steady",
+   "Incompressible"
+  ],
+  "answer": 0,
+  "explain": "Bernoulli's equation assumes steady, non-viscous, incompressible, irrotational flow; fails for turbulent flow.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c3e43d12-e00b-475d-8148-9818643f18b0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Torricelli's theorem: speed of efflux v = √(2gh). What is h?",
+  "formula": "v = √(2gh)",
+  "options": [
+   "Diameter of hole",
+   "Height of container",
+   "Depth of hole below free surface",
+   "Total liquid height"
+  ],
+  "answer": 2,
+  "explain": "In Torricelli's theorem, h is the vertical distance from the free surface to the hole.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "65485fe0-c558-4066-b919-f953a352cf3d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "At the narrowest part of a Venturimeter, the pressure is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Maximum",
+   "Minimum",
+   "Equal throughout"
+  ],
+  "answer": 2,
+  "explain": "By Bernoulli's theorem, maximum velocity at constriction means minimum pressure there.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8461f424-395d-47a2-9d24-d42e7395b045",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "The unit of kinematic viscosity ν = η/ρ in SI system is:",
+  "formula": "ν = η/ρ",
+  "options": [
+   "Pa·s",
+   "kg/(m·s)",
+   "m²/s",
+   "N·s/m²"
+  ],
+  "answer": 2,
+  "explain": "Kinematic viscosity ν = η/ρ has SI unit m²/s (dynamic viscosity Pa·s divided by density kg/m³).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "00a00537-0573-4635-891b-458c44d0e2f5",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting",
+  "prompt": "Meniscus of water in a glass tube is:",
+  "formula": "",
+  "options": [
+   "Convex upward",
+   "Concave downward",
+   "Flat",
+   "Concave upward"
+  ],
+  "answer": 3,
+  "explain": "Water wets glass (θ < 90°), so adhesion dominates, producing a concave (upward curving) meniscus.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "db5f2044-53ef-4448-a117-daa60d8fda9d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting",
+  "prompt": "Meniscus of mercury in a glass tube is:",
+  "formula": "",
+  "options": [
+   "Concave upward",
+   "Parabolic",
+   "Flat",
+   "Convex upward"
+  ],
+  "answer": 3,
+  "explain": "Mercury does not wet glass (θ > 90°), cohesion dominates, giving a convex (downward curving) meniscus.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c20870e0-5e43-4ab5-ac06-8a4dfd710350",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "In Stokes' law, drag force F = 6πηrv. What is r?",
+  "formula": "F = 6πηrv",
+  "options": [
+   "Radius of tube",
+   "Radius of sphere",
+   "Reynolds number",
+   "Distance from wall"
+  ],
+  "answer": 1,
+  "explain": "In Stokes' law, r is the radius of the spherical body moving through the viscous fluid.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6211e35f-720e-4e7b-8db8-a8b9d3ae3b89",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Archimedes' principle: buoyant force equals weight of fluid —",
+  "formula": "F_b = ρ_fluid·V_sub·g",
+  "options": [
+   "Displaced",
+   "Surrounding the body",
+   "Above the body",
+   "In the container"
+  ],
+  "answer": 0,
+  "explain": "Archimedes' principle: buoyant force = weight of fluid displaced by the submerged part of the body.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "16f3b128-578c-49b0-bc38-a5d0637be9e2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "If tube radius is halved, Poiseuille flow rate Q changes by factor:",
+  "formula": "Q ∝ R⁴",
+  "options": [
+   "1/2",
+   "1/8",
+   "1/16",
+   "1/4"
+  ],
+  "answer": 2,
+  "explain": "Q ∝ R⁴; halving R gives Q → (1/2)⁴ = 1/16 of original flow rate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "98492ae8-5cb8-444c-8d86-444f2055d1b9",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Liquid rise in capillary is higher when tube radius is:",
+  "formula": "h = 2Tcosθ/ρgr",
+  "options": [
+   "Independent of radius",
+   "Larger",
+   "Equal to drop radius",
+   "Smaller"
+  ],
+  "answer": 3,
+  "explain": "h = 2Tcosθ/ρgr; smaller r gives larger h, so thinner tubes show greater capillary rise.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eda58dcb-1034-4af9-964d-021f411cf87b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Net upward force on a body partially submerged (volume V_sub) is:",
+  "formula": "F = ρ_L·V_sub·g − mg",
+  "options": [
+   "mg − ρ_L·V_sub·g",
+   "ρ_L·V_total·g − mg",
+   "ρ_L·V_sub·g",
+   "ρ_L·V_sub·g − mg"
+  ],
+  "answer": 3,
+  "explain": "Net upward force = buoyant force − weight = ρ_L·V_sub·g − mg; positive means body rises.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b8d2ffb4-b293-43e7-9261-6851ed73a588",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Hydraulic lift: force ratio F₁/F₂ = ?",
+  "formula": "F₁/F₂ = A₁/A₂",
+  "options": [
+   "(A₁/A₂)²",
+   "A₂/A₁",
+   "r₁/r₂",
+   "A₁/A₂"
+  ],
+  "answer": 3,
+  "explain": "Pascal's law: same pressure transmitted, so F/A = const → F₁/F₂ = A₁/A₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "670f0b1c-3622-4e67-97a6-e9311ce48f73",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "Which law relates pressure drop to viscosity in pipe flow?",
+  "formula": "Q = πR⁴ΔP/8ηL",
+  "options": [
+   "Pascal's law",
+   "Stokes' law",
+   "Bernoulli's law",
+   "Poiseuille's law"
+  ],
+  "answer": 3,
+  "explain": "Poiseuille's law gives laminar flow rate Q = πR⁴ΔP/(8ηL).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fdfdafee-62d3-4442-863f-ebb1ab6bbbce",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number",
+  "prompt": "The critical velocity for turbulent flow depends on η, ρ, and:",
+  "formula": "vₒ = Kη/ρr",
+  "options": [
+   "Tube radius r",
+   "Atmospheric pressure",
+   "Tube length L",
+   "Fluid temperature"
+  ],
+  "answer": 0,
+  "explain": "Critical velocity vₒ = Kη/(ρr); it depends on tube radius r, η and ρ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c576cc6d-03a7-40c8-80eb-4f0caeff3741",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "If a liquid rises in a capillary of radius r, the weight supported equals:",
+  "formula": "2πrT cosθ",
+  "options": [
+   "πr²T cosθ",
+   "2πrT cosθ",
+   "4πrT cosθ",
+   "πrT cosθ"
+  ],
+  "answer": 1,
+  "explain": "Upward component of surface tension force = 2πrT cosθ balances weight of liquid column.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0bf7d670-f29a-4508-ad77-8a6ff4c864be",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "Viscosity of a gas with increase in temperature:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Remains same",
+   "First increases then decreases"
+  ],
+  "answer": 1,
+  "explain": "Gas viscosity increases with T due to increased molecular momentum transfer.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fa8b388e-5896-471f-b98c-2dc7af779826",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "Viscosity of a liquid with increase in temperature:",
+  "formula": "",
+  "options": [
+   "Remains same",
+   "Increases",
+   "Decreases",
+   "First decreases then increases"
+  ],
+  "answer": 2,
+  "explain": "Liquid viscosity decreases with T as intermolecular cohesive forces weaken.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "626f95e0-4077-4e48-b818-b88618c6f8d5",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "The pressure inside a spherical soap bubble exceeds outside by ΔP. If R doubles, ΔP becomes:",
+  "formula": "ΔP = 4T/R",
+  "options": [
+   "2ΔP",
+   "4ΔP",
+   "ΔP",
+   "ΔP/2"
+  ],
+  "answer": 3,
+  "explain": "ΔP = 4T/R; doubling R halves ΔP.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e9fa1e89-33d6-4d89-86cc-4abe29af58c9",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "A block of wood floats with 60% submerged. Its density is __ × density of water.",
+  "formula": "ρ_body/ρ_fluid = V_sub/V",
+  "options": [
+   "0.4",
+   "0.067",
+   "0.6",
+   "1.6"
+  ],
+  "answer": 2,
+  "explain": "Fraction submerged = ρ_body/ρ_fluid → ρ_body = 0.6 ρ_water.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3f998479-240c-47e0-87fd-0df5f793035f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "Newton's law of viscosity: shear stress τ = η × (du/dy). Here du/dy is called:",
+  "formula": "τ = η(du/dy)",
+  "options": [
+   "Strain",
+   "Velocity gradient",
+   "Pressure gradient",
+   "Shear strain"
+  ],
+  "answer": 1,
+  "explain": "du/dy is the velocity gradient (rate of shear strain) perpendicular to flow direction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fd36ab90-781b-4c37-9afc-7abfa5d0b9a4",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Merging drops and energy released",
+  "prompt": "A liquid drop breaks into n smaller drops of radius r. The energy released/absorbed depends on change in:",
+  "formula": "ΔE = TΔA",
+  "options": [
+   "Volume",
+   "Surface area",
+   "Density",
+   "Mass"
+  ],
+  "answer": 1,
+  "explain": "Energy change = T × ΔA (change in total surface area); volume is conserved.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c5dd0d5b-79d3-406f-9f97-affa366df07e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "For ideal fluid flow, which condition is NOT assumed?",
+  "formula": "",
+  "options": [
+   "Incompressible",
+   "Irrotational",
+   "Viscosity present",
+   "Steady flow"
+  ],
+  "answer": 2,
+  "explain": "Ideal fluid is non-viscous (η=0), incompressible, irrotational and flow is steady.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a7508cb7-d83c-45d9-a61b-2928480750aa",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "CGS unit of dynamic viscosity η is Poise. 1 Poise = ?",
+  "formula": "",
+  "options": [
+   "1 Pa·s",
+   "0.1 Pa·s",
+   "10 Pa·s",
+   "0.01 Pa·s"
+  ],
+  "answer": 1,
+  "explain": "1 Poise = 0.1 Pa·s (since 1 dyne/cm² = 0.1 Pa and 1 cm = 0.01 m).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3c6dfa76-146f-4089-9d8e-86822a2cb3c6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Excess pressure inside a cylindrical soap film (both surfaces) of radius R is:",
+  "formula": "ΔP = 2T/R",
+  "options": [
+   "4T/R",
+   "T/R",
+   "8T/R",
+   "2T/R"
+  ],
+  "answer": 3,
+  "explain": "Cylindrical film has two surfaces but one radius of curvature: ΔP = 2T/R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d9cb9f58-b27e-4cf9-836f-aa129fccb5d8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "For a floating body, centre of gravity G must be __ metacentre M for stability:",
+  "formula": "",
+  "options": [
+   "Below M",
+   "At M",
+   "Above M",
+   "At centre of buoyancy"
+  ],
+  "answer": 0,
+  "explain": "Stable equilibrium requires G below metacentre M (positive metacentric height GM).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8dbdef90-33c3-4218-93d0-bf3e7f413fe7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "The cohesive force between liquid molecules is responsible for which property?",
+  "formula": "",
+  "options": [
+   "Capillary rise due to adhesion",
+   "Viscosity",
+   "Buoyancy",
+   "Surface tension"
+  ],
+  "answer": 3,
+  "explain": "Surface tension arises from cohesive (like-molecule) forces at the liquid surface.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e726d3aa-c21d-4a48-961e-a4c7c0abc0cf",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Pressure in a fluid is transmitted equally in all directions. This is:",
+  "formula": "",
+  "options": [
+   "Pascal's law",
+   "Bernoulli's theorem",
+   "Newton's law of viscosity",
+   "Archimedes' principle"
+  ],
+  "answer": 0,
+  "explain": "Pascal's law states pressure applied to enclosed fluid is transmitted equally in all directions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5fddadf7-60bf-4410-b9ed-ed1db7c011d5",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's principle and applications",
+  "prompt": "In Bernoulli's equation, ½ρv² represents which energy per unit volume?",
+  "formula": "",
+  "options": [
+   "Potential energy density",
+   "Pressure energy density",
+   "Kinetic energy density",
+   "Thermal energy density"
+  ],
+  "answer": 2,
+  "explain": "½ρv² is kinetic energy per unit volume; ρgh is potential energy density; P is pressure energy density.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b4389e8c-c90b-4505-bdec-421993974556",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number",
+  "prompt": "The ratio of inertial force to viscous force in a fluid is called:",
+  "formula": "Re = ρvD/η",
+  "options": [
+   "Reynolds number",
+   "Mach number",
+   "Weber number",
+   "Froude number"
+  ],
+  "answer": 0,
+  "explain": "Reynolds number Re = ρvD/η is the ratio of inertial to viscous forces.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "06502728-2de4-4d8b-a488-e2cb3243bccb",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "An object of volume V is fully submerged in a liquid of density ρ_L. Buoyant force is:",
+  "formula": "F_B = ρ_L Vg",
+  "options": [
+   "ρ_L V²g",
+   "(ρ_L − ρ_object)Vg",
+   "ρ_object Vg",
+   "ρ_L Vg"
+  ],
+  "answer": 3,
+  "explain": "Buoyant force = weight of displaced liquid = ρ_L Vg regardless of object's density.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eb815e0b-43d8-4fef-9b31-6b15c7c90e9c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Which property of a liquid is responsible for the spherical shape of a free liquid drop?",
+  "formula": "",
+  "options": [
+   "Viscosity",
+   "Surface tension",
+   "Density",
+   "Compressibility"
+  ],
+  "answer": 1,
+  "explain": "Surface tension minimises surface area for given volume; sphere has minimum surface area.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "483c13be-7507-4000-8b28-013b489d191a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "When a pipe narrows, according to continuity equation, velocity of fluid:",
+  "formula": "A₁v₁ = A₂v₂",
+  "options": [
+   "Becomes zero",
+   "Remains same",
+   "Increases",
+   "Decreases"
+  ],
+  "answer": 2,
+  "explain": "A₁v₁ = A₂v₂; smaller area A₂ means larger velocity v₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4deb1b99-61fb-4530-9346-85be6ad69f92",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid Statics",
+  "prompt": "Hydrostatic pressure P at depth h in liquid density ρ:",
+  "formula": "P = P₀ + ρgh",
+  "options": [
+   "P₀ − ρgh",
+   "P₀ + ρg/h",
+   "ρgh²/2",
+   "P₀ + ρgh"
+  ],
+  "answer": 3,
+  "explain": "Absolute pressure = atmospheric pressure + gauge pressure ρgh.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ce0a0802-c0d4-4871-bd5e-177b002fb98a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Bernoulli's Theorem",
+  "prompt": "Bernoulli's principle: in horizontal flow, if area decreases, velocity __ and pressure __:",
+  "formula": "",
+  "options": [
+   "decreases; decreases",
+   "decreases; increases",
+   "increases; increases",
+   "increases; decreases"
+  ],
+  "answer": 3,
+  "explain": "Continuity forces v up in narrow section; Bernoulli then requires P to drop.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d98881c3-428e-4cd3-bef7-fa1e2be9c150",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Floatation",
+  "prompt": "A body floats if its average density is __ the liquid density:",
+  "formula": "",
+  "options": [
+   "Greater than",
+   "Less than or equal to",
+   "Independent of",
+   "Equal to only"
+  ],
+  "answer": 1,
+  "explain": "Floating requires buoyant force ≥ weight, i.e., ρ_body ≤ ρ_liquid.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "951c5cc6-9ad1-42b8-a190-c1209fa7f61d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's Law",
+  "prompt": "Hydraulic press: when piston of area A₁ is pressed with force F₁, force on area A₂ is:",
+  "formula": "F₂ = F₁(A₂/A₁)",
+  "options": [
+   "F₁·(A₂/A₁)",
+   "F₁·(A₁/A₂)",
+   "F₁/(A₁+A₂)",
+   "F₁·A₁·A₂"
+  ],
+  "answer": 0,
+  "explain": "Pascal's law: pressure P = F₁/A₁ = F₂/A₂, so F₂ = F₁A₂/A₁.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5c1a4276-1fd1-470d-983f-2634fa839810",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Absolute pressure = gauge pressure + ?",
+  "formula": "P_abs = P_gauge + P_atm",
+  "options": [
+   "Hydrostatic pressure",
+   "Vapour pressure",
+   "Zero (they are equal)",
+   "Atmospheric pressure"
+  ],
+  "answer": 3,
+  "explain": "Absolute pressure is gauge pressure plus atmospheric pressure (101.3 kPa at sea level).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7124141-c6c3-4ee1-9971-150d3971b8f3",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Open tank moves with horizontal acceleration a. Free surface makes angle θ with horizontal, where:",
+  "formula": "tanθ = a/g",
+  "options": [
+   "tanθ = a²/g",
+   "tanθ = a/g",
+   "tanθ = g/a",
+   "sinθ = a/g"
+  ],
+  "answer": 1,
+  "explain": "Surface is perpendicular to effective gravity (g down, a backward), giving tanθ = a/g.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c31879b4-c1e1-4038-8e8d-f47b5fb29c74",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Liquid of depth h behind a vertical dam wall: average pressure on the wall is:",
+  "formula": "P_avg = ½ρgh",
+  "options": [
+   "ρgh",
+   "¼ρgh",
+   "½ρgh",
+   "2ρgh"
+  ],
+  "answer": 2,
+  "explain": "Pressure rises linearly from 0 at the surface to ρgh at the bottom, so average is ρgh/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3086681a-9db4-4d48-a5c4-4ce48ffffcbc",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "A container of water falls freely under gravity. Pressure difference between two points at different depths:",
+  "formula": "",
+  "options": [
+   "Infinite",
+   "ρgh/2",
+   "Zero",
+   "ρgh"
+  ],
+  "answer": 2,
+  "explain": "Effective gravity is zero in free fall, so ρg_eff h = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9a71b59d-daa1-4d5b-9b53-f441536d43c1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Liquid rotating with angular speed ω about a vertical axis: shape of free surface is:",
+  "formula": "y = ω²r²/(2g)",
+  "options": [
+   "Plane inclined",
+   "Hemisphere",
+   "Paraboloid",
+   "Cone"
+  ],
+  "answer": 2,
+  "explain": "Height varies as y = ω²r²/2g, which is a paraboloid of revolution.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0a60f65b-5f6c-4a70-9b2b-ad62a197c8c1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Open tank with horizontal acceleration a: pressure at the same height increases along the direction of…",
+  "formula": "dP/dx = −ρa (pressure rises toward rear)",
+  "options": [
+   "Acceleration, in the forward direction",
+   "Pressure stays same horizontally",
+   "Opposite to acceleration, toward the rear",
+   "Motion, toward the front wall"
+  ],
+  "answer": 2,
+  "explain": "Pressure gradient is ρa opposite to acceleration, so the rear wall has higher pressure.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "79a6ae5f-0dd6-403c-9b95-02c7cd91167c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Small piston (area A₁) moves down d₁ in a hydraulic lift. Large piston (A₂) rises by:",
+  "formula": "A₁d₁ = A₂d₂",
+  "options": [
+   "d₁A₂/A₁",
+   "d₁(A₁/A₂)²",
+   "d₁",
+   "d₁A₁/A₂"
+  ],
+  "answer": 3,
+  "explain": "Incompressible liquid: volume displaced is equal, so d₂ = d₁A₁/A₂ (smaller than d₁).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "48530d45-31a9-4b8a-bc43-251505f6b17a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "In an ideal hydraulic lift, work done by input force compared with work done on the load is:",
+  "formula": "F₁d₁ = F₂d₂",
+  "options": [
+   "Less than output work",
+   "Equal to output work",
+   "Greater than output work",
+   "A₂/A₁ times the output work"
+  ],
+  "answer": 1,
+  "explain": "Energy is conserved: the force gain is exactly balanced by the loss in distance moved.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "30ee34a0-31e8-4570-b1aa-66c3055bb1b0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Piston radii of a hydraulic press are in ratio 1 : 5. The force multiplication is:",
+  "formula": "F₂/F₁ = (r₂/r₁)²",
+  "options": [
+   "5",
+   "25",
+   "10",
+   "125"
+  ],
+  "answer": 1,
+  "explain": "Area ∝ r², so F₂/F₁ = A₂/A₁ = 25.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7a02bc61-42b4-4fd5-9659-728c7c8dc968",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Hydraulic machines use liquid rather than gas because the liquid is:",
+  "formula": "",
+  "options": [
+   "Denser than gas",
+   "Non-volatile",
+   "More viscous",
+   "Incompressible"
+  ],
+  "answer": 3,
+  "explain": "An incompressible liquid transmits pressure fully; a gas would be compressed and absorb the applied force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3de82a57-7cad-42d1-b745-00cf56449f77",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Pressure at a point in a fluid at rest is a:",
+  "formula": "",
+  "options": [
+   "Second-rank tensor",
+   "Scalar quantity",
+   "Vector along the surface normal",
+   "Vector along gravity"
+  ],
+  "answer": 1,
+  "explain": "Pressure acts equally in all directions at a point, so it has no direction: it is a scalar.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68bceac5-62f8-4ed8-9122-1059007fd6dc",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Which device does NOT work on Pascal's law?",
+  "formula": "",
+  "options": [
+   "Atomizer (sprayer)",
+   "Hydraulic press",
+   "Hydraulic brake",
+   "Hydraulic jack"
+  ],
+  "answer": 0,
+  "explain": "An atomizer works on Bernoulli's principle (low pressure in a fast air stream).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be5c5d39-7602-4075-b35e-94c2fb3a41f2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Small piston moves 10 cm while the large piston rises 1 cm. The ideal mechanical advantage is:",
+  "formula": "MA = d₁/d₂ = F₂/F₁",
+  "options": [
+   "0.1",
+   "10",
+   "1",
+   "100"
+  ],
+  "answer": 1,
+  "explain": "Ideal MA equals the ratio of distances moved (input to output), so MA = 10/1 = 10.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47feb4e6-8ce2-4376-8fa8-298d516d7307",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Ice cube floats in water; when it melts completely, the water level in the glass:",
+  "formula": "",
+  "options": [
+   "Remains unchanged",
+   "Rises then falls",
+   "Falls",
+   "Rises"
+  ],
+  "answer": 0,
+  "explain": "Ice displaces water equal to its own weight; melted water has same volume as displaced water.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9cf41667-9b14-4bc6-9a4f-a3fe79bcb3c1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "A lift containing a floating block accelerates upward. The fraction of block submerged:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Remains unchanged",
+   "Increases",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "Both weight and buoyancy scale with g_eff, so ρ_body/ρ_liquid fixes the fraction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "49d975dd-e0ba-4b9e-9fa2-d84a009d6f47",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Buoyancy and Archimedes' principle",
+  "prompt": "Point of application of buoyant force on a body is the centre of:",
+  "formula": "",
+  "options": [
+   "Mass of the body",
+   "Buoyancy (centroid of displaced fluid)",
+   "Pressure of the body",
+   "Gravity of the body"
+  ],
+  "answer": 1,
+  "explain": "Buoyant force acts at the centre of mass of the displaced fluid, called the centre of buoyancy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4cb3f77b-7021-4d0c-a230-b2a71c1c4c8c",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow",
+  "prompt": "Reynolds number for flow of a fluid (density ρ, viscosity η, speed v) in a pipe of diameter D is:",
+  "formula": "Re = ρvD/η",
+  "options": [
+   "ρvD/η",
+   "ρη/(vD)",
+   "ρv/(ηD)",
+   "ηvD/ρ"
+  ],
+  "answer": 0,
+  "explain": "Re = ρvD/η is the ratio of inertial to viscous forces.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2b150b1-5630-4f0f-b45e-ce4bbdd3f9ad",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow",
+  "prompt": "Reynolds number is a quantity that is:",
+  "formula": "",
+  "options": [
+   "Having dimensions of viscosity",
+   "Having dimensions of velocity",
+   "Having dimensions of pressure",
+   "Dimensionless"
+  ],
+  "answer": 3,
+  "explain": "ρvD/η has dimensions M⁰L⁰T⁰, so it is a pure number.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1c3d1093-e5f7-475e-850b-157059700fe8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow",
+  "prompt": "As per NCERT, flow through a pipe is turbulent when Reynolds number exceeds about:",
+  "formula": "",
+  "options": [
+   "10",
+   "500",
+   "100",
+   "2000"
+  ],
+  "answer": 3,
+  "explain": "Re < 1000 is streamline, 1000–2000 is unsteady, Re > 2000 is turbulent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05a71e87-bac9-4e1a-914b-4035252b941e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow",
+  "prompt": "Incompressible liquid in steady flow: pipe radius is halved. The flow speed becomes:",
+  "formula": "A₁v₁ = A₂v₂",
+  "options": [
+   "Half",
+   "Double",
+   "Eight times",
+   "Four times"
+  ],
+  "answer": 3,
+  "explain": "A ∝ r², so halving r reduces A to ¼ and v rises 4 times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f364139-74ec-4a03-897d-294714df795d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Streamline and turbulent flow",
+  "prompt": "In steady (streamline) flow, the path traced by a fluid particle coincides with:",
+  "formula": "",
+  "options": [
+   "A curve of constant speed",
+   "A curve of constant pressure",
+   "A line perpendicular to the streamline",
+   "The streamline through that point"
+  ],
+  "answer": 3,
+  "explain": "In steady flow, every particle passing a point follows the same path, so the streamline is the particle's path.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8984d855-4717-4734-a3f4-16c99778e679",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "The equation of continuity expresses conservation of which quantity in fluid flow?",
+  "formula": "",
+  "options": [
+   "Energy",
+   "Mass",
+   "Linear momentum",
+   "Angular momentum"
+  ],
+  "answer": 1,
+  "explain": "Mass entering a tube per second equals mass leaving per second in steady flow, so continuity is mass conservation.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4d0ac4f4-a832-40a6-a458-47b27a029b5b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "Continuity equation for steady flow of a compressible fluid (density ρ) is:",
+  "formula": "ρ₁A₁v₁ = ρ₂A₂v₂",
+  "options": [
+   "ρ₁A₁v₁ = ρ₂A₂v₂",
+   "ρ₁v₁ = ρ₂v₂ only",
+   "ρ₁A₂v₁ = ρ₂A₁v₂",
+   "A₁v₁ = ρ₂A₂v₂"
+  ],
+  "answer": 0,
+  "explain": "Mass flow rate ρAv is constant; ρ cancels only for an incompressible fluid.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8089223e-1c62-4259-a39f-616dabb21382",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "A pipe's radius is reduced to one-third at a constriction. Flow speed there is:",
+  "formula": "v ∝ 1/r²",
+  "options": [
+   "9 times",
+   "27 times",
+   "3 times",
+   "6 times"
+  ],
+  "answer": 0,
+  "explain": "A ∝ r², so A becomes 1/9 and v becomes 9 times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0a9a55c-b377-4fbf-b05f-d103a0202889",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "For a steady incompressible flow, the graph of v against 1/A is:",
+  "formula": "v = Q·(1/A)",
+  "options": [
+   "A straight line through origin",
+   "A rectangular hyperbola",
+   "A straight line with intercept",
+   "A parabola"
+  ],
+  "answer": 0,
+  "explain": "v = Q/A with Q constant, so v is proportional to 1/A, a straight line through the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "45702cd4-37b8-4ab0-b750-73189fb86075",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "Blood speed is least in the capillaries mainly because:",
+  "formula": "",
+  "options": [
+   "Pressure is zero there",
+   "Blood density is lowest there",
+   "Capillary walls are rough",
+   "Total capillary area is very large"
+  ],
+  "answer": 3,
+  "explain": "The combined cross-section of all capillaries far exceeds the aorta's, so v = Q/A is smallest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7ef52265-aa32-4a37-b464-004f7969aa08",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "A fluid flows steadily through a tube of varying area. Which quantity is the same at all sections?",
+  "formula": "",
+  "options": [
+   "Pressure of the fluid",
+   "Kinetic energy per volume",
+   "Speed of the fluid",
+   "Mass per second flowing"
+  ],
+  "answer": 3,
+  "explain": "Mass flow rate is constant at every section; speed, pressure and KE density change with area.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9cd777e1-3167-4d0c-977a-77dc5995c022",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "Pipe diameter is doubled along the flow. Fluid speed becomes how many times (incompressible)?",
+  "formula": "v ∝ 1/d²",
+  "options": [
+   "4",
+   "1/2",
+   "1/4",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "A ∝ d², so area becomes 4 times and speed falls to 1/4 by Av = constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4c4c445e-e9f3-4aa8-a59b-3e4cf913b66f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Equation of continuity",
+  "prompt": "A main pipe splits into branches, steady incompressible flow. Then A_main·v_main equals:",
+  "formula": "",
+  "options": [
+   "A·v of any one branch",
+   "Product of branch A·v values",
+   "Average of A·v of branches",
+   "Sum of A·v of all branches"
+  ],
+  "answer": 3,
+  "explain": "Volume flow rate is conserved at a junction: Q_in = ΣQ_out.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e50dad89-954e-4a5b-8d4f-f786a4d8dd74",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "For maximum horizontal range of a jet from a full tank of height H, the hole must be at depth",
+  "formula": "",
+  "options": [
+   "H/2",
+   "H/4",
+   "2H/3",
+   "H/3"
+  ],
+  "answer": 0,
+  "explain": "h(H−h) is maximum at h = H/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e1ec7a0-9e6f-4b14-b333-864323645bde",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "In an ideal open tank, halving the hole's area (same depth) changes the efflux speed to",
+  "formula": "",
+  "options": [
+   "1/√2 times",
+   "Half",
+   "Double",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "v = √(2gh) does not depend on hole area; only the flow rate changes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0678bfb4-66b9-4a76-9bc8-8ebce1ed8ec8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Jet from hole of area a at depth h pushes the tank back with a force of magnitude",
+  "formula": "F = ρav² = 2ρagh",
+  "options": [
+   "4ρagh",
+   "ρagh",
+   "2ρagh",
+   "ρagh/2"
+  ],
+  "answer": 2,
+  "explain": "Rate of momentum loss = ρa v², with v² = 2gh, giving F = 2ρagh.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fe265f58-63f6-4fb9-a937-b8b992aacbe7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Torricelli's law follows from Bernoulli's equation by assuming the free-surface speed is",
+  "formula": "",
+  "options": [
+   "Negligible, since A ≫ a",
+   "Equal to √(gh)",
+   "Equal to the efflux speed",
+   "Twice the efflux speed"
+  ],
+  "answer": 0,
+  "explain": "For a ≪ A, surface speed ≈ 0, giving v = √(2gh).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d4110d0d-3efa-4cff-81f1-19db5c0f21b2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Two different liquids in identical open tanks, holes at same depth h. Efflux speeds compare as:",
+  "formula": "v = √(2gh)",
+  "options": [
+   "Ratio is √(ρ₁/ρ₂)",
+   "Equal, independent of density",
+   "Denser liquid flows slower",
+   "Denser liquid flows faster"
+  ],
+  "answer": 1,
+  "explain": "ρ cancels in Bernoulli's equation, so v = √(2gh) for any ideal liquid.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1848673d-c046-4866-b8f2-b2d0cbf9fdcc",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Cylindrical tank drains through a bottom hole. Hole radius is doubled; the draining time becomes:",
+  "formula": "t = (A/a)√(2H/g)",
+  "options": [
+   "Half",
+   "One-fourth",
+   "Double",
+   "One-eighth"
+  ],
+  "answer": 1,
+  "explain": "t ∝ 1/a and a ∝ r², so doubling r makes t one-fourth.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a62fb5c4-a885-4214-9b49-daae8694183a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "In a full tank of height H, holes at depths h₁ and h₂ give equal horizontal range when",
+  "formula": "R = 2√(h(H−h))",
+  "options": [
+   "h₁ + h₂ = H",
+   "h₁ − h₂ = H/2",
+   "h₁ = h₂ only",
+   "h₁h₂ = H²"
+  ],
+  "answer": 0,
+  "explain": "R is symmetric under h → H−h, so depths h and H−h give equal ranges.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cc6c180e-5bac-4a09-94b6-4980582ab4ce",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "An ideal vertical upward jet from a side-tube at depth h below the free surface rises to a height",
+  "formula": "",
+  "options": [
+   "2h",
+   "h/2",
+   "√(2gh)",
+   "h"
+  ],
+  "answer": 3,
+  "explain": "From v² = 2gh, the jet rises to h, the free-surface level (no losses).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c9af09f5-c4cb-4679-b8e3-a3c4abe915a6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Sealed tank: air above water at gauge pressure P. Efflux speed from a hole at depth h is (ρ = density)?",
+  "formula": "v = √(2gh + 2P/ρ)",
+  "options": [
+   "√(2gh + 2P/ρ)",
+   "√(2gh)",
+   "√(2gh + P/ρ)",
+   "√(2P/ρ) only"
+  ],
+  "answer": 0,
+  "explain": "Bernoulli: the extra gauge pressure P adds P/ρ per unit mass, so v² = 2gh + 2P/ρ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "06eb2283-1912-4dd2-95f0-385080811d63",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "At terminal velocity, which force balance holds for a sphere falling in a fluid?",
+  "formula": "",
+  "options": [
+   "W = viscous drag",
+   "W + upthrust = drag",
+   "Drag = upthrust",
+   "W = viscous drag + upthrust"
+  ],
+  "answer": 3,
+  "explain": "Weight acts down; viscous drag and buoyant upthrust act up.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3d6fa6b-db35-4412-8f50-9a3af8b01855",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "A sphere of density ρ is released in a liquid of density σ > ρ. It attains terminal velocity:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Upward",
+   "Downward",
+   "Horizontal"
+  ],
+  "answer": 1,
+  "explain": "For ρ < σ, vₜ = 2r²(ρ−σ)g/9η is negative, so the sphere rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b8e0de4-2bbd-431a-be84-9dbbdea9e2f7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "For a given sphere and fluid density, terminal velocity varies with viscosity η as:",
+  "formula": "",
+  "options": [
+   "1/η²",
+   "η²",
+   "1/η",
+   "η"
+  ],
+  "answer": 2,
+  "explain": "vₜ = 2r²(ρ−σ)g/9η, so vₜ ∝ 1/η.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "16e78f77-b806-456a-9d9d-f57e09f98215",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "8 identical rain drops, each with terminal velocity v, coalesce. New terminal velocity is:",
+  "formula": "",
+  "options": [
+   "4v",
+   "2v",
+   "8v",
+   "16v"
+  ],
+  "answer": 0,
+  "explain": "Volume conserved gives R = 2r. vₜ ∝ R², so it becomes 4v.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "674b2d75-60fe-4079-b7d6-a74f9b1723f7",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "For a sphere falling from rest in a viscous fluid, the v–t graph is:",
+  "formula": "",
+  "options": [
+   "Rising curve approaching a constant value",
+   "Straight line through origin",
+   "Rising then falling curve",
+   "Parabola"
+  ],
+  "answer": 0,
+  "explain": "Velocity increases exponentially and saturates asymptotically at vₜ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3487c9e2-1e95-481a-bde6-12a70c55a954",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Stokes' law is valid for a sphere moving in a fluid under which condition?",
+  "formula": "",
+  "options": [
+   "Only for hollow spheres",
+   "Low speed, laminar flow",
+   "High speed, turbulent flow",
+   "Only in vacuum"
+  ],
+  "answer": 1,
+  "explain": "It applies at low Reynolds number, smooth laminar flow, small spheres.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d3ddb72-3dec-436d-92c9-f20da63602d1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Terminal velocity of a sphere of density equal to the fluid density is:",
+  "formula": "",
+  "options": [
+   "Infinite",
+   "Maximum",
+   "Zero",
+   "Depends on r only"
+  ],
+  "answer": 2,
+  "explain": "vₜ ∝ (ρ − σ) = 0, since weight and upthrust cancel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c63b304-807a-4b8b-b4d5-1af199f8d676",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Power dissipated by viscous drag on a sphere moving at terminal velocity vₜ is:",
+  "formula": "P = Fv",
+  "options": [
+   "6πηr vₜ²",
+   "3πηr vₜ²",
+   "6πηr vₜ",
+   "6πηr² vₜ"
+  ],
+  "answer": 0,
+  "explain": "P = F·vₜ with F = 6πηr vₜ gives 6πηr vₜ².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "869568da-58a1-4af9-8130-e8ab11604377",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "The same sphere falls in the same liquid on the Moon instead of Earth. Its terminal velocity:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Unchanged",
+   "Increases",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "vₜ ∝ g, and g on the Moon is smaller.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "483b0af9-bf3e-4c15-b9d8-838b4d3a9f19",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Surface energy per unit area of a liquid surface is numerically equal to:",
+  "formula": "",
+  "options": [
+   "Surface tension per unit length squared",
+   "Twice the surface tension",
+   "Surface tension",
+   "Excess pressure"
+  ],
+  "answer": 2,
+  "explain": "T = W/ΔA, so N/m is the same as J/m².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "036ab75f-b02c-474c-a62f-cc5665894712",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "A drop of radius R splits into 8 identical drops. Total surface area becomes how many times the original?",
+  "formula": "r = R/2",
+  "options": [
+   "1/2",
+   "8",
+   "4",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "New radius is R/2. Area = 8·4π(R/2)² = 2 × (4πR²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bed740e9-0c91-4ec0-88c6-f0680b620d0b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "When many small liquid drops coalesce into one large drop, the energy is:",
+  "formula": "",
+  "options": [
+   "Released, as the surface area decreases",
+   "Absorbed, as the surface area increases",
+   "Absorbed, as the surface area decreases",
+   "Unchanged"
+  ],
+  "answer": 0,
+  "explain": "Total surface area falls, so surface energy is released. The drop warms slightly.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0666490-54da-4d0c-ba60-188f461487a1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "A straight wire of length l is pulled by a soap film on both sides. Force due to surface tension is:",
+  "formula": "F = 2Tl",
+  "options": [
+   "Tl/2",
+   "4Tl",
+   "Tl",
+   "2Tl"
+  ],
+  "answer": 3,
+  "explain": "The film has two surfaces, and each pulls with force T per unit length.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "90791480-c379-48d1-b37a-a4b9767b7c85",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "At the critical temperature of a liquid, its surface tension becomes:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Infinite",
+   "Maximum",
+   "Equal to that at 0 °C"
+  ],
+  "answer": 0,
+  "explain": "The liquid–vapour boundary vanishes at the critical temperature, so T = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "65195847-2f8b-4f48-a8e7-b02db7113967",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "A capillary tube is placed in a lift accelerating upward. The liquid rise in it:",
+  "formula": "h ∝ 1/g_eff",
+  "options": [
+   "Stays the same",
+   "Becomes zero",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 2,
+  "explain": "g_eff = g + a is larger, and h = 2T cosθ/(rρg_eff) is smaller.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9b73d7dc-fb03-4ef9-8049-e43ad3e7ea92",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Adding detergent to water mainly causes its surface tension to:",
+  "formula": "",
+  "options": [
+   "Decrease",
+   "Increase greatly",
+   "Become infinite",
+   "Remain unchanged"
+  ],
+  "answer": 0,
+  "explain": "Detergent is a surface-active agent, so it lowers T and improves wetting.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "15c1b001-9c52-4dcd-9258-00d3abff859a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "Two soap bubbles of radii r₁ < r₂ touch. Radius of the common interface is:",
+  "formula": "r = r₁r₂/(r₂ − r₁)",
+  "options": [
+   "r₂ − r₁",
+   "r₁r₂/(r₂ − r₁)",
+   "r₁r₂/(r₁ + r₂)",
+   "(r₁ + r₂)/2"
+  ],
+  "answer": 1,
+  "explain": "The pressure difference across the interface is 4T(1/r₁ − 1/r₂) = 4T/r, which gives r = r₁r₂/(r₂ − r₁).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3e64bcaf-f4d3-465f-a3e0-01bad9a3b0a4",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "A liquid forms a concave meniscus in a tube when:",
+  "formula": "",
+  "options": [
+   "Cohesive force is greater than adhesive force",
+   "Adhesive force is greater than cohesive force",
+   "Surface tension is zero",
+   "The contact angle is obtuse"
+  ],
+  "answer": 1,
+  "explain": "The liquid wets the wall, so θ is acute and the liquid climbs up (concave meniscus).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eb019901-a183-4afd-abc2-12012905175a",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Surface tension and surface energy",
+  "prompt": "For a liquid in a capillary tube, the angle of contact θ = 90° gives a capillary rise of:",
+  "formula": "h ∝ cosθ",
+  "options": [
+   "Zero",
+   "Maximum",
+   "2T/(rρg)",
+   "Negative"
+  ],
+  "answer": 0,
+  "explain": "cos 90° = 0, so h = 0 and the meniscus is flat.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81e36e37-e6bc-4cc7-989f-8808a983b4d5",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting",
+  "prompt": "Ideal complete wetting of a surface by a liquid corresponds to angle of contact:",
+  "formula": "",
+  "options": [
+   "0°",
+   "Between 90° and 180°",
+   "90°",
+   "180°"
+  ],
+  "answer": 0,
+  "explain": "Complete wetting: the liquid spreads fully, so θ = 0°; θ = 180° means completely non-wetting.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1e56601d-ba90-4c59-9a77-de49ddc7c295",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Angle of contact and wetting",
+  "prompt": "Angle of contact between a liquid and a solid depends on all EXCEPT:",
+  "formula": "",
+  "options": [
+   "Nature of the liquid and solid",
+   "Temperature of the liquid",
+   "Medium above the free liquid surface",
+   "Inclination of the solid surface in the liquid"
+  ],
+  "answer": 3,
+  "explain": "θ depends on the liquid–solid pair, the medium above and the temperature, not on the inclination of the solid surface.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6824b1c1-7681-4a6a-91fb-dc046eec0d1f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "The common film between two touching soap bubbles of unequal size bulges:",
+  "formula": "",
+  "options": [
+   "into the smaller bubble",
+   "is flat only if T is large",
+   "into the larger bubble",
+   "stays flat"
+  ],
+  "answer": 2,
+  "explain": "The smaller bubble is at higher pressure, so the film curves (convex) into the larger bubble.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "85c235ad-0489-48b0-8515-ce82ddaccc19",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Excess pressure across a plane liquid surface is:",
+  "formula": "",
+  "options": [
+   "2T",
+   "infinite",
+   "T/2",
+   "zero"
+  ],
+  "answer": 3,
+  "explain": "R → ∞ for a plane surface, so ΔP = T(1/R₁ + 1/R₂) = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e090671b-36c1-4261-b4c4-9561da5de4d0",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "When temperature rises, the excess pressure inside a bubble of fixed radius:",
+  "formula": "",
+  "options": [
+   "stays the same",
+   "first rises, then falls",
+   "decreases",
+   "increases"
+  ],
+  "answer": 2,
+  "explain": "Surface tension T decreases with temperature, and ΔP ∝ T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3376f963-616c-4924-80e8-205485cf8130",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "The product (excess pressure × radius) has the dimensions of:",
+  "formula": "ΔP·R ∝ T",
+  "options": [
+   "surface energy",
+   "surface tension",
+   "pressure",
+   "force"
+  ],
+  "answer": 1,
+  "explain": "ΔP·R = 2T or 4T, so it has the dimensions of surface tension, MT⁻² (N/m).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5404c3c-3bcd-4b28-a296-13f5c4dc4d3b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Same radius and tension: excess pressure of an air bubble in a liquid vs a soap bubble in air is in ratio:",
+  "formula": "",
+  "options": [
+   "1 : 2",
+   "1 : 1",
+   "1 : 4",
+   "2 : 1"
+  ],
+  "answer": 0,
+  "explain": "The air bubble has one surface (2T/R) and the soap bubble has two (4T/R), so the ratio is 1 : 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b8cb5d24-0159-4e1a-baa4-f939080e0ef6",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Blowing a bubble from a tube of radius r, the pressure needed is maximum when the bubble is:",
+  "formula": "",
+  "options": [
+   "just a flat film",
+   "very large",
+   "a hemisphere of radius r",
+   "a full sphere of radius 2r"
+  ],
+  "answer": 2,
+  "explain": "ΔP ∝ 1/R is largest at the smallest bubble radius, which is the hemisphere with R = r (4T/r for soap).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9bae4025-dd71-47c5-a6b2-77634ef027fe",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "A liquid drop of radius R splits into 8 identical drops. Excess pressure inside each drop becomes:",
+  "formula": "ΔP = 2T/R",
+  "options": [
+   "Twice the original",
+   "Four times the original",
+   "Half of the original",
+   "Same as the original"
+  ],
+  "answer": 0,
+  "explain": "Volume conservation gives r = R/2, so ΔP = 2T/r doubles.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c73de42f-b8d3-4324-a8ff-14062714af83",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Two soap bubbles of unequal radii are joined by a tube. Air flows from:",
+  "formula": "",
+  "options": [
+   "Smaller bubble to larger bubble",
+   "No flow; pressures are equal",
+   "Depends on the gas in each bubble",
+   "Larger bubble to smaller bubble"
+  ],
+  "answer": 0,
+  "explain": "ΔP = 4T/R is higher in the smaller bubble, so air flows to the larger and it grows.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dfb0d50c-55f2-4a30-83ff-a10a7e37e781",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Capillary tube in a lift accelerating downward with a < g: the rise of water",
+  "formula": "h = 2T cosθ / [ρ(g − a) r]",
+  "options": [
+   "Remains unchanged",
+   "Increases",
+   "Becomes zero",
+   "Decreases"
+  ],
+  "answer": 1,
+  "explain": "g_eff = g − a is smaller, so h increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2cee8a3a-3624-4271-bfe6-56982b585788",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "In a freely falling lift (g_eff = 0), water in a capillary tube rises up to",
+  "formula": "",
+  "options": [
+   "The entire length of the tube",
+   "Zero height",
+   "The same height as on the ground",
+   "Half the usual height"
+  ],
+  "answer": 0,
+  "explain": "As g_eff → 0, h = 2T cosθ/(ρ g_eff r) → ∞, so water fills the whole tube.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ce7f80f-0f70-4d2b-b3e0-260e1fc7cee8",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "On heating a liquid, capillary rise in a given tube generally",
+  "formula": "",
+  "options": [
+   "Decreases, since T decreases",
+   "Stays the same",
+   "First increases, then decreases",
+   "Increases, since ρ decreases"
+  ],
+  "answer": 0,
+  "explain": "Surface tension falls with temperature, so h decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "73ef180a-e9c0-43cf-a526-ece68bcfcada",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Adding detergent to water in which a capillary is dipped makes the rise",
+  "formula": "",
+  "options": [
+   "Zero, because θ becomes 90°",
+   "Smaller, because T decreases",
+   "Larger, because it wets better",
+   "Unchanged"
+  ],
+  "answer": 1,
+  "explain": "Detergent lowers surface tension T, so h ∝ T decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b40b9a83-4b37-4e5a-b778-6873587dd3ce",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Pressure just below the concave water meniscus in a capillary, compared with atmospheric pressure, is",
+  "formula": "P = P₀ − 2T/R",
+  "options": [
+   "More by 2T/R",
+   "Less by 2T/R",
+   "Equal",
+   "More by 4T/R"
+  ],
+  "answer": 1,
+  "explain": "The pressure is lower on the concave side, which pulls the liquid up.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "06e41a5f-ac84-452d-a0b6-6e5e5c1303ae",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Two vertical parallel plates, gap d, dipped in a liquid (angle θ). The rise between them is",
+  "formula": "",
+  "options": [
+   "4T cosθ / ρgd",
+   "2T cosθ / ρgd²",
+   "T cosθ / ρgd",
+   "2T cosθ / ρgd"
+  ],
+  "answer": 3,
+  "explain": "Force balance: 2T L cosθ = ρ g (L d h), giving h = 2T cosθ/ρgd.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e4df653e-cbf8-462f-91ff-d35b08c75d8f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "In capillary rise, the potential energy gained by the liquid is what fraction of the work done by surface tension?",
+  "formula": "",
+  "options": [
+   "Half",
+   "Twice",
+   "One-third",
+   "All of it"
+  ],
+  "answer": 0,
+  "explain": "Work = 2πrT cosθ·h, while PE = ½·(2πrT cosθ)·h. The other half is dissipated as heat.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ec3c2d1-06a1-47d4-8296-c477d513dc42",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "For a given liquid and fixed θ, the mass of liquid raised in a capillary is proportional to",
+  "formula": "m = (2πrT cosθ)/g",
+  "options": [
+   "r²",
+   "r⁰ (independent of r)",
+   "1/r",
+   "r"
+  ],
+  "answer": 3,
+  "explain": "m = ρπr²h with h ∝ 1/r, so m ∝ r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d90a8674-14e2-4d95-89d3-d9b950f8ed72",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "Two liquids have the same T and θ, with densities in ratio 1 : 2. In the same tube the rise ratio is",
+  "formula": "h ∝ 1/ρ",
+  "options": [
+   "1 : 1",
+   "2 : 1",
+   "1 : 4",
+   "1 : 2"
+  ],
+  "answer": 1,
+  "explain": "h ∝ 1/ρ, so the denser liquid rises half as much, giving 2 : 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eeb51d79-5c19-4817-b8a9-f73b42dd833f",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "For pure water and clean glass, the contact angle is approximately",
+  "formula": "",
+  "options": [
+   "135°",
+   "0°",
+   "90°",
+   "45°"
+  ],
+  "answer": 1,
+  "explain": "Water wets clean glass almost perfectly, so θ ≈ 0° and cosθ ≈ 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "45af2e6c-2ec6-480b-807e-c750af492955",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "The Jurin height of a liquid in a capillary does NOT depend on the",
+  "formula": "",
+  "options": [
+   "Length of tube above the liquid (if long enough)",
+   "Surface tension",
+   "Liquid density",
+   "Tube radius"
+  ],
+  "answer": 0,
+  "explain": "h = 2T cosθ/ρgr depends only on T, θ, ρ, g and r, not on the tube length.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ae09cdb9-0a9d-4c0d-b0d6-000d68664c8e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Torricelli's law and efflux speed",
+  "prompt": "Open cylindrical tank drains via a small bottom hole. If the initial water height is made 4 times, drain time becomes:",
+  "formula": "t = (A/a)√(2H/g)",
+  "options": [
+   "4 times",
+   "Doubled",
+   "16 times",
+   "Unchanged"
+  ],
+  "answer": 1,
+  "explain": "Total drain time t ∝ √H, so 4 times the height gives 2 times the time.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a619b2d5-a3ba-4043-ae1a-0b4e36125a08",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Critical velocity and Reynolds number",
+  "prompt": "For flow through a pipe, the flow is generally turbulent when Reynolds number exceeds about:",
+  "formula": "",
+  "options": [
+   "Re > 3000",
+   "Re > 100",
+   "Re > 1",
+   "Re > 500"
+  ],
+  "answer": 0,
+  "explain": "Re < 1000 laminar, 1000–2000 unstable, Re > 3000 turbulent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e70eda7e-306f-405d-9567-29c3b681756e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Excess pressure inside a bubble equals the rate of change of surface energy U with volume V:",
+  "formula": "ΔP = dU/dV",
+  "options": [
+   "ΔP = dV/dU",
+   "ΔP = U·dV",
+   "ΔP = dU/dV",
+   "ΔP = U/V"
+  ],
+  "answer": 2,
+  "explain": "Energy balance for expansion: ΔP·dV = dU (e.g. soap bubble: 8πTR·dR / 4πR²·dR gives 2T/R per surface ×2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1f7bd0f8-d1b8-4645-8263-cc97e11e2ab1",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Two liquid drops of radii r₁ and r₂ coalesce into one drop of radius R. Which relation holds?",
+  "formula": "",
+  "options": [
+   "R² = r₁² + r₂²",
+   "R = r₁r₂/(r₁ + r₂)",
+   "R³ = r₁³ + r₂³",
+   "R = r₁ + r₂"
+  ],
+  "answer": 2,
+  "explain": "The liquid is incompressible, so total volume is conserved: (4/3)πR³ = (4/3)π(r₁³ + r₂³).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8cd50a55-a216-4128-af78-95463224ed28",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Capillary rise (Jurin's law)",
+  "prompt": "A capillary tilted at angle α to the vertical is dipped in water. The vertical height of the water column:",
+  "formula": "",
+  "options": [
+   "Unchanged, equal to h",
+   "Decreases to h cosα",
+   "Increases to h/cosα",
+   "Decreases to h sinα"
+  ],
+  "answer": 0,
+  "explain": "Vertical height is fixed by T, ρ, r, θ. Only the length along the tube increases, to h/cosα.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c8ccbe11-2c7f-41b6-8cc4-62951af53b9b",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "Two halves of a soap bubble of radius R are held together by surface tension. The force at the rim is:",
+  "formula": "F = ΔP·πR² = 4πRT",
+  "options": [
+   "4πRT",
+   "πRT",
+   "8πRT",
+   "2πRT"
+  ],
+  "answer": 0,
+  "explain": "Two surfaces each pull 2πRT along the rim, so F = 4πRT, which balances (4T/R)·πR².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b84494c5-7dfd-45db-a8aa-95298f76a264",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "A soap bubble blown at a tube's end is left with the tube open to the atmosphere. The bubble will:",
+  "formula": "",
+  "options": [
+   "Become a hemisphere and stay",
+   "Stay at the same size",
+   "Collapse as air flows out",
+   "Grow larger slowly"
+  ],
+  "answer": 2,
+  "explain": "Inside pressure is P₀ + 4T/R, above P₀, so air escapes through the tube and the bubble shrinks.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "41a6586d-3168-47ce-9844-4cbfb4e2119e",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Fluid pressure and variation with depth",
+  "prompt": "Two immiscible liquids in a U-tube stand h₁, h₂ above their common interface level. Then:",
+  "formula": "h₁ρ₁ = h₂ρ₂",
+  "options": [
+   "h₁ρ₁ = h₂ρ₂",
+   "h₁ρ₂ = h₂ρ₁",
+   "h₁ρ₁² = h₂ρ₂²",
+   "h₁ = h₂"
+  ],
+  "answer": 0,
+  "explain": "Equal pressure at the interface level gives ρ₁gh₁ = ρ₂gh₂, so the denser liquid has the shorter column.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d961578-9281-4227-b96d-e13826d45808",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Pascal's law and hydraulic machines",
+  "prompt": "Air bubble trapped in hydraulic brake fluid gives a 'spongy' pedal because air is:",
+  "formula": "",
+  "options": [
+   "Compressible, absorbing pedal pressure",
+   "Viscous, so it resists flow",
+   "Unable to transmit any pressure",
+   "Lighter, so it rises in the line"
+  ],
+  "answer": 0,
+  "explain": "Air compresses, so part of the pedal effort is lost and the transmitted pressure falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3afccfbd-d7f8-4c32-b134-191a6cd76029",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "In Newton's law of viscosity, the velocity gradient du/dy has SI unit:",
+  "formula": "τ = η·(du/dy)",
+  "options": [
+   "N·s",
+   "s⁻¹",
+   "m²·s⁻¹",
+   "m·s⁻¹"
+  ],
+  "answer": 1,
+  "explain": "du/dy = (m/s)/m = s⁻¹, so its dimension is T⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "baf706d7-795f-4369-8698-7051fd210aa2",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Viscosity and Newton's law of viscosity",
+  "prompt": "In viscous flow through a pipe, the fluid layer in contact with the pipe wall has velocity:",
+  "formula": "",
+  "options": [
+   "Equal to the average velocity",
+   "Maximum",
+   "Zero",
+   "Half of v_max"
+  ],
+  "answer": 2,
+  "explain": "The layer touching the wall sticks to it (no-slip), so its velocity is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bdd8d8a5-8fb5-403f-94b3-abe5a3886176",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "A sphere of density ρ is released from rest in a liquid of density σ < ρ. Its initial acceleration is:",
+  "formula": "a₀ = g(1 − σ/ρ)",
+  "options": [
+   "g(1 − ρ/σ)",
+   "g",
+   "g(1 − σ/ρ)",
+   "gσ/ρ"
+  ],
+  "answer": 2,
+  "explain": "Drag is zero at release, so ρVa = (ρ−σ)Vg, which gives a = g(1−σ/ρ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "85c6601b-5641-41c1-b8d8-1cc7335a816d",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "Same-material spheres of radii 1:2 fall at terminal velocity in the same liquid. Ratio of viscous forces:",
+  "formula": "F = (4/3)πr³(ρ−σ)g",
+  "options": [
+   "1:2",
+   "1:16",
+   "1:8",
+   "1:4"
+  ],
+  "answer": 2,
+  "explain": "At terminal velocity drag equals weight minus upthrust, which is ∝ r³, so 1:8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87a2a5a2-99c1-4311-ae58-34ed5d55a024",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Stokes' law and terminal velocity",
+  "prompt": "A liquid is heated slowly. The terminal velocity of a steel ball falling in it:",
+  "formula": "vₜ ∝ 1/η",
+  "options": [
+   "First falls then rises",
+   "Decreases",
+   "Increases",
+   "Remains unchanged"
+  ],
+  "answer": 2,
+  "explain": "Heating lowers the viscosity of a liquid, and vₜ ∝ 1/η, so vₜ increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aee77ab7-d9e3-41c2-a1fd-2bfa220a0498",
+  "subject": "Physics",
+  "chapter": "Fluid Mechanics",
+  "topic": "Excess pressure in drops and bubbles",
+  "prompt": "A soap bubble of radius r lies inside another soap bubble of radius R in air at P₀. Pressure inside the inner one:",
+  "formula": "",
+  "options": [
+   "P₀ + 4T(1/r − 1/R)",
+   "P₀ + 4T/R + 4T/r",
+   "P₀ + 8T/(R + r)",
+   "P₀ + 4T/r"
+  ],
+  "answer": 1,
+  "explain": "The excesses add: the outer bubble gives 4T/R over P₀, and the inner gives a further 4T/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

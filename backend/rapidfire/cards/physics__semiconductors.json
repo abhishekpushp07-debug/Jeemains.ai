@@ -1,1636 +1,3776 @@
 [
-  {
-    "id": "4d5e8b3e-d2a0-4084-a05a-62058b2523f9",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Intrinsic Semiconductors",
-    "prompt": "In an intrinsic semiconductor, relation between nₑ and nₕ?",
-    "formula": "nₑ = nₕ = nᵢ",
-    "options": [
-      "nₑ · nₕ = 0",
-      "nₕ > nₑ",
-      "nₑ = nₕ = nᵢ",
-      "nₑ > nₕ"
-    ],
-    "answer": 2,
-    "explain": "In pure semiconductor, electron-hole pairs are generated equally, so nₑ = nₕ = nᵢ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3b4e3f60-9c97-4d6b-bb90-f2cf03987a4e",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Extrinsic Semiconductors",
-    "prompt": "Which is the majority carrier in p-type semiconductor?",
-    "formula": "",
-    "options": [
-      "Neutrons",
-      "Electrons",
-      "Holes",
-      "Protons"
-    ],
-    "answer": 2,
-    "explain": "p-type is doped with trivalent impurity creating excess holes as majority carriers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ff8cbf84-e1fa-4d19-a239-9a77683fb041",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Extrinsic Semiconductors",
-    "prompt": "Which is the majority carrier in n-type semiconductor?",
-    "formula": "",
-    "options": [
-      "Electrons",
-      "Positrons",
-      "Holes",
-      "Ions"
-    ],
-    "answer": 0,
-    "explain": "n-type is doped with pentavalent impurity providing extra electrons as majority carriers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a589d82f-7766-41c5-b69e-6f306d842f2d",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Extrinsic Semiconductors",
-    "prompt": "Law of mass action for semiconductors:",
-    "formula": "nₑ · nₕ = nᵢ²",
-    "options": [
-      "nₑ · nₕ = nᵢ",
-      "nₑ + nₕ = nᵢ",
-      "nₑ / nₕ = nᵢ",
-      "nₑ · nₕ = nᵢ²"
-    ],
-    "answer": 3,
-    "explain": "Product of electron and hole concentrations equals square of intrinsic concentration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ace7fb84-f8d6-4c90-a062-51e7ed8e4d14",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "p-n Junction",
-    "prompt": "In forward bias of p-n junction, the depletion layer:",
-    "formula": "",
-    "options": [
-      "Remains same",
-      "Decreases in width",
-      "Disappears completely",
-      "Increases in width"
-    ],
-    "answer": 1,
-    "explain": "Forward bias reduces the potential barrier, so depletion layer width decreases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "900c0fec-ba5e-4a0b-b22a-6d6ce40e1f68",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "p-n Junction Diode",
-    "prompt": "Knee voltage (cut-in voltage) for Silicon diode is approximately:",
-    "formula": "",
-    "options": [
-      "0.3 V",
-      "1.1 V",
-      "0.7 V",
-      "0.0 V"
-    ],
-    "answer": 2,
-    "explain": "Si diode starts conducting significantly at ~0.7 V; Ge diode at ~0.3 V.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "55eafc4e-8703-45ae-90c8-00990afa1f44",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Rectifiers",
-    "prompt": "A half-wave rectifier uses how many diodes?",
-    "formula": "",
-    "options": [
-      "4",
-      "0",
-      "1",
-      "2"
-    ],
-    "answer": 2,
-    "explain": "Half-wave rectifier uses a single diode, conducting only during one half cycle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a4de0e96-623b-43b8-aefe-0a01da010e2e",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Rectifiers",
-    "prompt": "A full-wave bridge rectifier uses how many diodes?",
-    "formula": "",
-    "options": [
-      "1",
-      "4",
-      "2",
-      "6"
-    ],
-    "answer": 1,
-    "explain": "Bridge rectifier uses 4 diodes arranged so both half cycles pass through the load.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef211465-7d5a-4428-b0fe-96217c166cc5",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Rectifiers",
-    "prompt": "Output frequency of full-wave rectifier for input frequency f is:",
-    "formula": "f_out = 2f",
-    "options": [
-      "f",
-      "2f",
-      "f/2",
-      "4f"
-    ],
-    "answer": 1,
-    "explain": "Full-wave rectifier conducts in both half cycles, doubling the output frequency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6d0ef9a4-2644-4274-9d9f-43985e6cbd0d",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Special Diodes",
-    "prompt": "Zener diode operates in which bias condition for voltage regulation?",
-    "formula": "",
-    "options": [
-      "Alternating bias",
-      "Zero bias",
-      "Reverse bias (breakdown)",
-      "Forward bias"
-    ],
-    "answer": 2,
-    "explain": "Zener diode is used in reverse breakdown region to maintain constant voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "80b39631-374d-468d-b49a-f84ee5abc6de",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Transistors",
-    "prompt": "In a transistor, which terminal is common in CE configuration?",
-    "formula": "",
-    "options": [
-      "Base",
-      "Collector",
-      "Source",
-      "Emitter"
-    ],
-    "answer": 3,
-    "explain": "CE (Common Emitter) configuration has emitter common to both input and output circuits.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4f435bcc-9188-4d4b-9638-a35bb6f87f0f",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Transistors",
-    "prompt": "Current gain β in CE configuration is defined as:",
-    "formula": "β = ΔIc / ΔIb",
-    "options": [
-      "ΔIc / ΔIe",
-      "ΔIc / ΔIb",
-      "ΔIb / ΔIc",
-      "ΔIe / ΔIc"
-    ],
-    "answer": 1,
-    "explain": "β (hFE) is ratio of change in collector current to change in base current in CE config.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "131a7583-f685-4eb4-a7d2-8917668095b8",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Transistor as Amplifier",
-    "prompt": "In CE amplifier, phase difference between input and output voltage is:",
-    "formula": "",
-    "options": [
-      "180°",
-      "90°",
-      "0°",
-      "270°"
-    ],
-    "answer": 0,
-    "explain": "CE amplifier inverts the signal; output is 180° out of phase with input.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "814b0c5b-693e-4942-8ec7-0bfe8c493303",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Transistors",
-    "prompt": "For transistor action, emitter-base junction must be:",
-    "formula": "",
-    "options": [
-      "Reverse biased",
-      "Forward biased",
-      "Zero biased",
-      "Broken down"
-    ],
-    "answer": 1,
-    "explain": "E-B junction is forward biased to inject majority carriers; C-B is reverse biased.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6420cfec-0e21-4fee-a1ef-3afdf35896ce",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Logic Gates",
-    "prompt": "Truth table output of AND gate for inputs A=1, B=0:",
-    "formula": "Y = A·B",
-    "options": [
-      "A+B=1",
-      "1",
-      "Undefined",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "AND gate output is 1 only when both inputs are 1; A=1,B=0 gives Y=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "60c9fab6-8f6f-435b-ae5a-c4192850307c",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Logic Gates",
-    "prompt": "Boolean expression for NAND gate output:",
-    "formula": "Y = ‾(A·B)",
-    "options": [
-      "‾(A·B)",
-      "A·B",
-      "‾(A+B)",
-      "A+B"
-    ],
-    "answer": 0,
-    "explain": "NAND is complement of AND; output is 0 only when both inputs are 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cc19934b-180a-40a9-88e6-d575a864b64a",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Logic Gates",
-    "prompt": "Output of NOT gate for input A=0:",
-    "formula": "Y = ‾A",
-    "options": [
-      "undefined",
-      "1",
-      "0",
-      "A"
-    ],
-    "answer": 1,
-    "explain": "NOT gate inverts input; if A=0 then Y=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "548e0377-3694-431e-acec-cbee003c017f",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Energy Bands",
-    "prompt": "Energy gap of Silicon at room temperature is approximately:",
-    "formula": "",
-    "options": [
-      "1.1 eV",
-      "0.7 eV",
-      "3.0 eV",
-      "0.0 eV"
-    ],
-    "answer": 0,
-    "explain": "Si bandgap ≈ 1.1 eV; Ge ≈ 0.7 eV. Si is preferred for higher temperature operation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b8f1ea6b-fd18-45c7-af54-fea032626a6c",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Energy Bands",
-    "prompt": "In conductors, the energy gap between valence and conduction band is:",
-    "formula": "",
-    "options": [
-      ">5 eV",
-      "Zero (overlapping)",
-      "~3 eV",
-      "~1 eV"
-    ],
-    "answer": 1,
-    "explain": "Conductors have overlapping valence and conduction bands; no energy gap exists.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7949b289-9c5b-42d4-8acc-589b0e4563b2",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors Properties",
-    "prompt": "Resistivity of semiconductor with rising temperature:",
-    "formula": "",
-    "options": [
-      "First increases then decreases",
-      "Increases",
-      "Decreases",
-      "Remains same"
-    ],
-    "answer": 2,
-    "explain": "More carriers are thermally excited at higher T, so resistivity decreases (unlike metals).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8b46e950-d60c-4c67-9a80-2ab17eaea788",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Extrinsic Semiconductors",
-    "prompt": "Trivalent dopant added to Si creates which type semiconductor?",
-    "formula": "",
-    "options": [
-      "n-type",
-      "p-type",
-      "Intrinsic",
-      "Metallic"
-    ],
-    "answer": 1,
-    "explain": "Trivalent atoms (B, Al, In) create holes (acceptors) making p-type semiconductor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "59ac7680-0a04-4751-9ad5-210e008bbd53",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Pentavalent dopant added to Si creates which type semiconductor?",
-    "formula": "",
-    "options": [
-      "Insulator",
-      "p-type",
-      "n-type",
-      "Intrinsic"
-    ],
-    "answer": 2,
-    "explain": "Pentavalent atoms (P, As, Sb) donate extra electrons, making n-type semiconductor.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ece07ed8-3d3d-4f5b-92a4-145874d72a36",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Energy gap of Germanium at room temperature is approximately:",
-    "formula": "",
-    "options": [
-      "1.1 eV",
-      "3.0 eV",
-      "0.1 eV",
-      "0.67 eV"
-    ],
-    "answer": 3,
-    "explain": "Ge has band gap ≈ 0.67 eV; Si has ≈ 1.1 eV at room temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b9225850-9cff-43ae-a0b9-e2f083dc4c22",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Knee voltage for Germanium diode is approximately:",
-    "formula": "",
-    "options": [
-      "0.3 V",
-      "1.1 V",
-      "0.7 V",
-      "1.4 V"
-    ],
-    "answer": 0,
-    "explain": "Ge diode starts conducting at ≈ 0.3 V; Si diode at ≈ 0.7 V.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5eef3c1a-241e-423d-8057-7bd50bedad16",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In reverse bias, the depletion layer width:",
-    "formula": "",
-    "options": [
-      "Decreases",
-      "Remains same",
-      "Increases",
-      "Becomes zero"
-    ],
-    "answer": 2,
-    "explain": "Reverse bias widens the depletion layer, increasing the barrier potential.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ccd47d36-782e-4ab7-a7dc-3978cb330470",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Output frequency of half-wave rectifier for input frequency f:",
-    "formula": "",
-    "options": [
-      "f",
-      "4f",
-      "2f",
-      "f/2"
-    ],
-    "answer": 0,
-    "explain": "Half-wave rectifier passes only one half-cycle, so output frequency equals input f.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c1a2870a-abe2-4452-8c49-83036eeccfc0",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a p-n junction diode, diffusion current is due to:",
-    "formula": "",
-    "options": [
-      "Electric field",
-      "Temperature only",
-      "Concentration gradient",
-      "Applied voltage only"
-    ],
-    "answer": 2,
-    "explain": "Diffusion current arises from majority carrier concentration gradient across junction.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0aec354c-5caa-4a97-969a-f57656cc8544",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "NAND gate is universal because it can implement:",
-    "formula": "",
-    "options": [
-      "Only AND",
-      "Only OR",
-      "NOT, AND, OR",
-      "Only NOT"
-    ],
-    "answer": 2,
-    "explain": "NAND gate alone can realize NOT, AND, OR — hence it is a universal gate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "06b95102-83f0-4ae8-9445-785fbdf580b5",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Boolean expression for XOR gate output:",
-    "formula": "Y = A⊕B",
-    "options": [
-      "Y = AB",
-      "Y = A+B",
-      "Y = (AB)̄",
-      "Y = AB̅ + A̅B"
-    ],
-    "answer": 3,
-    "explain": "XOR output is high when inputs differ: Y = AB̅ + A̅B.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "081b5888-7e8d-4fb4-8d5a-6723e0f54600",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Output of XNOR gate when A=1, B=1:",
-    "formula": "",
-    "options": [
-      "0",
-      "Depends on supply",
-      "Undefined",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "XNOR gives 1 when inputs are equal; A=B=1 gives output 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b1adc2d0-c176-4e00-9da6-a639c377fa92",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In CB configuration, current gain α is defined as:",
-    "formula": "α = ΔIc/ΔIe",
-    "options": [
-      "ΔIb/ΔIe",
-      "ΔIc/ΔIb",
-      "ΔIc/ΔIe",
-      "ΔIe/ΔIc"
-    ],
-    "answer": 2,
-    "explain": "α (CB gain) = ratio of collector current change to emitter current change.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "25133038-c6aa-43da-b6b6-234f9e862087",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Value of α for a transistor is always:",
-    "formula": "",
-    "options": [
-      "Greater than 1",
-      "Greater than 100",
-      "Equal to 1",
-      "Less than 1"
-    ],
-    "answer": 3,
-    "explain": "α = Ic/Ie < 1 since Ie = Ib + Ic and Ib > 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0b5998d2-a8d4-4609-8524-7c5f299d3317",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a transistor, Ie = ?",
-    "formula": "Ie = Ib + Ic",
-    "options": [
-      "Ic only",
-      "Ib − Ic",
-      "Ib + Ic",
-      "Ic − Ib"
-    ],
-    "answer": 2,
-    "explain": "KCL at transistor: emitter current = base current + collector current.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6c4167eb-688c-4976-a387-5ca107940d3a",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In CE configuration, voltage gain Av is:",
-    "formula": "Av = −β(Rc/Ri)",
-    "options": [
-      "Rc/Ri",
-      "β(Rc/Ri)",
-      "α(Rc/Ri)",
-      "−β(Rc/Ri)"
-    ],
-    "answer": 3,
-    "explain": "CE amplifier voltage gain is −β×(Rc/Ri); negative sign indicates phase inversion.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7110e9cb-6d90-4169-ac7b-4a96962f17fb",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a p-type semiconductor, minority carriers are:",
-    "formula": "",
-    "options": [
-      "Holes",
-      "Protons",
-      "Electrons",
-      "Positrons"
-    ],
-    "answer": 2,
-    "explain": "In p-type, holes are majority; electrons thermally generated are minority carriers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd8a8671-fb2d-43a3-a546-b6071fdaf149",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In an n-type semiconductor, minority carriers are:",
-    "formula": "",
-    "options": [
-      "Protons",
-      "Electrons",
-      "Holes",
-      "Neutrons"
-    ],
-    "answer": 2,
-    "explain": "In n-type, electrons are majority; holes thermally generated are minority carriers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "19f3b520-1725-44dd-be82-91fd53c4f5f3",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "A Zener diode is used primarily as:",
-    "formula": "",
-    "options": [
-      "Current amplifier",
-      "Rectifier",
-      "Voltage regulator",
-      "Oscillator"
-    ],
-    "answer": 2,
-    "explain": "Zener diode maintains constant voltage across load — used as voltage regulator.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "df279e9e-1801-434c-bef7-65935610fe92",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In forward bias, the barrier potential of p-n junction:",
-    "formula": "",
-    "options": [
-      "Increases",
-      "Decreases",
-      "Becomes infinite",
-      "Remains same"
-    ],
-    "answer": 1,
-    "explain": "Forward bias opposes the built-in field, reducing the barrier potential.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fb94f9c6-f031-4836-83ff-d06b1f751164",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Boolean expression for AND gate output:",
-    "formula": "Y = A·B",
-    "options": [
-      "Y = (A·B)̄",
-      "Y = A̅·B̅",
-      "Y = A+B",
-      "Y = A·B"
-    ],
-    "answer": 3,
-    "explain": "AND gate output Y = A·B; high only when both inputs are high.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c4c901d7-726f-4193-b3fe-25bfeab802af",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Semiconductors have _______ temperature coefficient of resistivity:",
-    "formula": "",
-    "options": [
-      "Positive",
-      "Infinite",
-      "Negative",
-      "Zero"
-    ],
-    "answer": 2,
-    "explain": "Semiconductors: more carriers at higher T, so resistivity decreases — negative TCR.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "acd1864d-3b5f-4515-8fab-8e2ca947b819",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a full-wave centre-tap rectifier, how many diodes are used?",
-    "formula": "",
-    "options": [
-      "4",
-      "3",
-      "2",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "Centre-tap full-wave rectifier uses exactly 2 diodes, one for each half cycle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "49180da1-4309-4bfe-8524-f2e8c7af0ce3",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Which gate produces output 1 only when all inputs are 1?",
-    "formula": "",
-    "options": [
-      "NOR gate",
-      "AND gate",
-      "OR gate",
-      "NAND gate"
-    ],
-    "answer": 1,
-    "explain": "AND gate output is 1 only when all inputs are HIGH (1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0f80c44b-27ce-409e-a7c0-11d3983a85f3",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Which logic gate output is 0 only when all inputs are 1?",
-    "formula": "Y = (A·B)̄",
-    "options": [
-      "XOR",
-      "OR",
-      "NAND",
-      "AND"
-    ],
-    "answer": 2,
-    "explain": "NAND gate gives output 0 only when ALL inputs are 1; complement of AND.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b4351650-19e6-4ed2-ba52-0c0b72650ca7",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Depletion region in a p-n junction is devoid of:",
-    "formula": "",
-    "options": [
-      "Fixed ions",
-      "Free charge carriers",
-      "Donor atoms",
-      "Acceptor atoms"
-    ],
-    "answer": 1,
-    "explain": "Depletion region lacks free mobile charge carriers (electrons and holes).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5036004a-1ab8-4b50-b28f-a38d8583c614",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a Zener diode voltage regulator, Zener is connected in:",
-    "formula": "",
-    "options": [
-      "Series with load, forward biased",
-      "Parallel with load, forward biased",
-      "Parallel with load, reverse biased",
-      "Series with load, reverse biased"
-    ],
-    "answer": 2,
-    "explain": "Zener is connected in parallel with load in reverse bias for voltage regulation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "671342e2-114d-42fc-9439-07d1b721f25d",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In n-type Si, donor energy level lies:",
-    "formula": "",
-    "options": [
-      "At middle of energy gap",
-      "Near valence band edge",
-      "Near conduction band edge",
-      "Inside valence band"
-    ],
-    "answer": 2,
-    "explain": "Donor level is just below conduction band, enabling easy electron excitation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "878f79de-bab8-427c-ad8e-66a517f51911",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In p-type Si, acceptor energy level lies:",
-    "formula": "",
-    "options": [
-      "Near valence band edge",
-      "At middle of energy gap",
-      "Inside conduction band",
-      "Near conduction band edge"
-    ],
-    "answer": 0,
-    "explain": "Acceptor level is just above valence band, so holes are easily created.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dd1aa974-74ce-4614-a5f1-de0fc401d917",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a transistor, the emitter is heavily doped compared to base and collector because:",
-    "formula": "",
-    "options": [
-      "To increase breakdown voltage",
-      "To reduce leakage current",
-      "To supply large number of majority carriers",
-      "To increase depletion width"
-    ],
-    "answer": 2,
-    "explain": "Heavy emitter doping ensures adequate carrier injection into base for transistor action.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "94a0f875-9992-4682-a8f4-28fd72d06d8f",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Base of a transistor is kept very thin to ensure:",
-    "formula": "",
-    "options": [
-      "High breakdown voltage",
-      "High input impedance",
-      "Large base current",
-      "Most injected carriers reach collector"
-    ],
-    "answer": 3,
-    "explain": "Thin base minimises recombination so most carriers diffuse to collector.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f4a6f16c-b7e1-417a-b38e-f29311bebf28",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "An LED emits light when p-n junction is:",
-    "formula": "",
-    "options": [
-      "Unbiased",
-      "Under breakdown",
-      "Reverse biased",
-      "Forward biased"
-    ],
-    "answer": 3,
-    "explain": "Forward bias causes electron-hole recombination at junction, emitting photons (LED).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b14d9042-e0c0-4f41-9737-69eb3a3129d7",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Photodiode is operated under which bias for detection?",
-    "formula": "",
-    "options": [
-      "Either bias",
-      "Zero bias only",
-      "Reverse bias",
-      "Forward bias"
-    ],
-    "answer": 2,
-    "explain": "Photodiode works in reverse bias; photocurrent increases with light intensity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3cb7ff65-0ac2-4286-96b1-cf26c4746717",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a solar cell, the emf is generated due to:",
-    "formula": "",
-    "options": [
-      "Thermionic emission",
-      "Zener breakdown",
-      "Avalanche breakdown",
-      "Photovoltaic effect"
-    ],
-    "answer": 3,
-    "explain": "Solar cell uses photovoltaic effect: absorbed photons create electron-hole pairs separated by junction field.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b197944-6124-478e-9296-ba06d146a21e",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In an intrinsic semiconductor at absolute zero (0 K), it behaves as:",
-    "formula": "",
-    "options": [
-      "A perfect insulator",
-      "A p-type semiconductor",
-      "A conductor",
-      "A superconductor"
-    ],
-    "answer": 0,
-    "explain": "At 0 K, all electrons are in valence band; no free carriers — acts as perfect insulator.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d5322e0f-6fbe-415e-89d1-974fb9a12f89",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In CE config, input is applied between which terminals?",
-    "formula": "",
-    "options": [
-      "Collector and emitter",
-      "Emitter and ground",
-      "Base and collector",
-      "Base and emitter"
-    ],
-    "answer": 3,
-    "explain": "In CE configuration, input signal is given between base and emitter terminals.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "34e7ac6b-6250-4df1-9188-8701f90c98ea",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In cut-off region of transistor, both junctions are:",
-    "formula": "",
-    "options": [
-      "Unbiased",
-      "Reverse biased",
-      "Forward biased",
-      "One forward one reverse"
-    ],
-    "answer": 1,
-    "explain": "In cut-off, both EB and CB junctions are reverse biased; transistor is OFF (switch open).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "951d27a0-f975-41c9-93b1-ef4b1f1c97c1",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "The reverse breakdown in a lightly doped p-n junction is mainly due to:",
-    "formula": "",
-    "options": [
-      "Zener effect",
-      "Diffusion",
-      "Tunneling",
-      "Avalanche effect"
-    ],
-    "answer": 3,
-    "explain": "Lightly doped junctions have wide depletion layer; breakdown occurs by avalanche multiplication.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d533fc10-0c8a-4789-9c8e-e5854b110996",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Zener breakdown occurs in _______ doped p-n junctions.",
-    "formula": "",
-    "options": [
-      "Moderately",
-      "Intrinsic",
-      "Heavily",
-      "Lightly"
-    ],
-    "answer": 2,
-    "explain": "Heavily doped junctions have narrow depletion layer; strong field causes Zener (tunneling) breakdown.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e051b025-b0b8-4be8-b423-eb49bbc709b4",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "At equilibrium, net current across p-n junction is:",
-    "formula": "",
-    "options": [
-      "Equal to drift current",
-      "Zero",
-      "Equal to diffusion current",
-      "Maximum"
-    ],
-    "answer": 1,
-    "explain": "At equilibrium, diffusion current exactly equals drift current, so net current = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f4a535c8-a1ea-4b7a-9970-ede5e8554cd4",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In forward bias, which current dominates in a p-n junction?",
-    "formula": "",
-    "options": [
-      "Diffusion current",
-      "Leakage current",
-      "Drift current",
-      "Displacement current"
-    ],
-    "answer": 0,
-    "explain": "Forward bias lowers barrier, greatly increasing diffusion of majority carriers (diffusion current dominates).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fb670e7e-73c9-4c66-af41-de2a2955a9fc",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Which of the following has the largest energy gap?",
-    "formula": "",
-    "options": [
-      "Carbon (diamond)",
-      "Germanium",
-      "GaAs",
-      "Silicon"
-    ],
-    "answer": 0,
-    "explain": "Diamond (carbon) has Eg ≈ 5.5 eV, far larger than Si (1.1 eV) or Ge (0.7 eV).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ee6b7d99-f453-445c-92ce-737e1bfd8c4c",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "For a transistor in active region, IC ≈ IE because:",
-    "formula": "α = Ic/Ie ≈ 1",
-    "options": [
-      "α is close to 1",
-      "Base current is large",
-      "Collector is heavily doped",
-      "β is close to 1"
-    ],
-    "answer": 0,
-    "explain": "Since α = Ic/Ie is close to but less than 1, almost all emitter current reaches collector.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b4dd2a6f-56f0-4e76-883b-e9912052ca1e",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Which gate outputs 1 when inputs are different?",
-    "formula": "Y = A⊕B",
-    "options": [
-      "NAND",
-      "XNOR",
-      "NOR",
-      "XOR"
-    ],
-    "answer": 3,
-    "explain": "XOR outputs 1 only when inputs differ (A≠B); Y = A⊕B.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7e63c6c7-242c-4ad9-a880-fbfef80e6bde",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "A photodiode in reverse bias — photocurrent increases when light intensity:",
-    "formula": "",
-    "options": [
-      "Increases",
-      "Decreases",
-      "Stays constant",
-      "Becomes zero"
-    ],
-    "answer": 0,
-    "explain": "More photons generate more electron-hole pairs, increasing reverse photocurrent with light intensity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ae43a665-eeb9-4da4-a98d-49d39524ff93",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "For LED operation, the material must have which type of band gap?",
-    "formula": "",
-    "options": [
-      "Direct band gap",
-      "Zero band gap",
-      "Indirect band gap",
-      "Wide indirect gap"
-    ],
-    "answer": 0,
-    "explain": "Direct band gap semiconductors (GaAs, GaP) allow efficient photon emission in LEDs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "079061ad-4e9e-4487-a520-b7b4bd7a1499",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In an intrinsic semiconductor, Fermi level lies:",
-    "formula": "",
-    "options": [
-      "At top of valence band",
-      "Above conduction band",
-      "Midway in energy gap",
-      "At bottom of conduction band"
-    ],
-    "answer": 2,
-    "explain": "For intrinsic semiconductor, Fermi level is approximately at the middle of the forbidden energy gap.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "39cf60e7-edcb-4d61-9f3a-a35ce920e410",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In n-type semiconductor, Fermi level shifts towards:",
-    "formula": "",
-    "options": [
-      "Middle of gap",
-      "Valence band",
-      "Below valence band",
-      "Conduction band"
-    ],
-    "answer": 3,
-    "explain": "Extra donor electrons shift Fermi level upward, closer to the conduction band in n-type.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7140e233-5936-47fc-8e7d-e4e6f3037590",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In p-type semiconductor, Fermi level shifts towards:",
-    "formula": "",
-    "options": [
-      "Middle of gap",
-      "Conduction band",
-      "Valence band",
-      "Above conduction band"
-    ],
-    "answer": 2,
-    "explain": "Acceptor levels near valence band pull Fermi level downward, closer to valence band in p-type.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "185b6bad-e64f-4bfe-b219-05bf92da48f9",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Conductivity of a semiconductor is given by:",
-    "formula": "σ = e(nₑμₑ + nₕμₕ)",
-    "options": [
-      "e(nₑμₑ + nₕμₕ)",
-      "e·nᵢ·(μₑ + μₕ)",
-      "nₑμₑ/e",
-      "e(nₑμₑ - nₕμₕ)"
-    ],
-    "answer": 0,
-    "explain": "Total conductivity sums contributions from both electrons and holes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c54d564a-4997-4738-9e4e-51804480241d",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Which region of transistor operation is used for amplification?",
-    "formula": "",
-    "options": [
-      "Saturation region",
-      "Cut-off region",
-      "Breakdown region",
-      "Active region"
-    ],
-    "answer": 3,
-    "explain": "In active region, E-B is forward biased and C-B is reverse biased; used for amplification.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ce34253-d66a-4db1-b044-90a72c9e9265",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In saturation region of a transistor, both junctions are:",
-    "formula": "",
-    "options": [
-      "E-B forward, C-B reverse",
-      "Reverse biased",
-      "Forward biased",
-      "E-B reverse, C-B forward"
-    ],
-    "answer": 2,
-    "explain": "In saturation, both E-B and C-B junctions are forward biased; transistor is fully ON.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "208c9045-0a1e-49e8-b831-04460d80070c",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In n-type semiconductor, which relation holds for carrier concentrations?",
-    "formula": "nₑ >> nₕ",
-    "options": [
-      "nₑ = nᵢ",
-      "nₑ = nₕ",
-      "nₕ >> nₑ",
-      "nₑ >> nₕ"
-    ],
-    "answer": 3,
-    "explain": "Pentavalent doping adds extra electrons, making electrons the majority carriers.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fad10ec6-3245-475f-b871-ffec3b48103b",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Boolean identity: A + Ā = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "A",
-      "Ā",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "A OR NOT-A is always 1; this is a fundamental Boolean complementary law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "48419ba4-4b74-48a0-b3c7-2908158a3cc0",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "De Morgan's theorem: (A·B)' = ?",
-    "formula": "",
-    "options": [
-      "Ā · B̄",
-      "A + B",
-      "A · B",
-      "Ā + B̄"
-    ],
-    "answer": 3,
-    "explain": "NAND of A,B equals OR of individual complements: (AB)' = Ā + B̄.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "27aeb111-f3f8-474f-bd5e-3276286fc469",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a p-n junction diode, reverse saturation current I₀ with temperature:",
-    "formula": "",
-    "options": [
-      "Decreases with temperature",
-      "Remains constant",
-      "Becomes zero",
-      "Increases with temperature"
-    ],
-    "answer": 3,
-    "explain": "I₀ is due to minority carriers; their concentration rises with T, so I₀ increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "052f7b39-cd7d-4dfa-b8b3-04c796009e51",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a full-wave bridge rectifier, how many diodes conduct during each half-cycle?",
-    "formula": "",
-    "options": [
-      "3",
-      "4",
-      "2",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "In bridge rectifier, two diodes conduct per half-cycle, forming a current path.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d9cd1917-38b2-4d5e-8cb3-42feca2b2d43",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "The peak inverse voltage (PIV) across each diode in a bridge rectifier is:",
-    "formula": "PIV = Vm",
-    "options": [
-      "Vm/2",
-      "Vm",
-      "2Vm",
-      "√2·Vm"
-    ],
-    "answer": 1,
-    "explain": "In bridge rectifier, PIV on each diode is Vm (peak input voltage), not 2Vm.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "46399511-6107-4bf6-a109-97778c60ec1c",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "PIV across diode in a centre-tap full-wave rectifier is:",
-    "formula": "PIV = 2Vm",
-    "options": [
-      "Vm",
-      "√2·Vm",
-      "2Vm",
-      "Vm/2"
-    ],
-    "answer": 2,
-    "explain": "In centre-tap rectifier, non-conducting diode sees full secondary voltage = 2Vm.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2cdc997c-a277-4199-9317-aa714b971b4f",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "The current through a forward-biased diode follows (ideal diode equation):",
-    "formula": "I = I₀(e^(eV/kT) - 1)",
-    "options": [
-      "I₀(e^(eV/kT))",
-      "I₀·V",
-      "I₀(e^(eV/kT) − 1)",
-      "I₀(1 − e^(eV/kT))"
-    ],
-    "answer": 2,
-    "explain": "Shockley diode equation describes exponential rise of current with forward voltage.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f16a077d-fbdd-4ea8-a19b-44b19f81a490",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Boolean identity: A + A = ?",
-    "formula": "",
-    "options": [
-      "2A",
-      "0",
-      "1",
-      "A"
-    ],
-    "answer": 3,
-    "explain": "Idempotent law: A OR A = A in Boolean algebra (not 2A as in normal algebra).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a776e875-7054-4eef-8cde-119d87519023",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Which transistor has two p-regions sandwiching an n-region?",
-    "formula": "",
-    "options": [
-      "UJT",
-      "p-n-p transistor",
-      "n-p-n transistor",
-      "FET"
-    ],
-    "answer": 1,
-    "explain": "A p-n-p transistor has emitter(p), base(n), collector(p) structure.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70ba8dce-0f51-40ef-9ce1-feaae8919e99",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Boolean identity: A + 1 = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "A",
-      "Ā",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "OR-ing any variable with 1 always gives 1 (domination law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d98d5ee3-28ca-4ecf-a152-8fafe7ffe2f1",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Boolean identity: A + 0 = ?",
-    "formula": "",
-    "options": [
-      "Ā",
-      "A",
-      "0",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "OR-ing any variable with 0 returns the variable itself (identity law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "306be72b-19e2-4cfc-947b-41441ea51588",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "The relation between IE, IB, IC in a transistor is:",
-    "formula": "IE = IB + IC",
-    "options": [
-      "IB = IE + IC",
-      "IC = IB + IE",
-      "IE = IC − IB",
-      "IE = IB + IC"
-    ],
-    "answer": 3,
-    "explain": "KCL at transistor: emitter current equals sum of base and collector currents.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "18c3a901-8fb3-4370-b715-0f7836d0ec29",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Output frequency of full-wave rectifier for input frequency f:",
-    "formula": "f_out = 2f",
-    "options": [
-      "f",
-      "4f",
-      "f/2",
-      "2f"
-    ],
-    "answer": 3,
-    "explain": "Full-wave rectifier conducts on both half-cycles, doubling the output pulse frequency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "17f9a109-be67-4e80-a972-b96f569303e9",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "In a CE amplifier, phase difference between input and output voltage is:",
-    "formula": "",
-    "options": [
-      "0°",
-      "90°",
-      "270°",
-      "180°"
-    ],
-    "answer": 3,
-    "explain": "CE configuration inverts the signal; output is 180° out of phase with input.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4353533b-6741-43ca-8d91-b395482c6842",
-    "subject": "Physics",
-    "chapter": "Semiconductors",
-    "topic": "Semiconductors",
-    "prompt": "Knee voltage for Silicon diode is approximately:",
-    "formula": "",
-    "options": [
-      "1.1 V",
-      "0.3 V",
-      "0.7 V",
-      "1.5 V"
-    ],
-    "answer": 2,
-    "explain": "Si diode starts conducting significantly at ~0.7 V (Ge at ~0.3 V) in forward bias.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "4d5e8b3e-d2a0-4084-a05a-62058b2523f9",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic Semiconductors",
+  "prompt": "In an intrinsic semiconductor, relation between nₑ and nₕ?",
+  "formula": "nₑ = nₕ = nᵢ",
+  "options": [
+   "nₑ · nₕ = 0",
+   "nₕ > nₑ",
+   "nₑ = nₕ = nᵢ",
+   "nₑ > nₕ"
+  ],
+  "answer": 2,
+  "explain": "In pure semiconductor, electron-hole pairs are generated equally, so nₑ = nₕ = nᵢ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3b4e3f60-9c97-4d6b-bb90-f2cf03987a4e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic Semiconductors",
+  "prompt": "Which is the majority carrier in p-type semiconductor?",
+  "formula": "",
+  "options": [
+   "Neutrons",
+   "Electrons",
+   "Holes",
+   "Protons"
+  ],
+  "answer": 2,
+  "explain": "p-type is doped with trivalent impurity creating excess holes as majority carriers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ff8cbf84-e1fa-4d19-a239-9a77683fb041",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic Semiconductors",
+  "prompt": "Which is the majority carrier in n-type semiconductor?",
+  "formula": "",
+  "options": [
+   "Electrons",
+   "Positrons",
+   "Holes",
+   "Ions"
+  ],
+  "answer": 0,
+  "explain": "n-type is doped with pentavalent impurity providing extra electrons as majority carriers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a589d82f-7766-41c5-b69e-6f306d842f2d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic Semiconductors",
+  "prompt": "Law of mass action for semiconductors:",
+  "formula": "nₑ · nₕ = nᵢ²",
+  "options": [
+   "nₑ · nₕ = nᵢ",
+   "nₑ + nₕ = nᵢ",
+   "nₑ / nₕ = nᵢ",
+   "nₑ · nₕ = nᵢ²"
+  ],
+  "answer": 3,
+  "explain": "Product of electron and hole concentrations equals square of intrinsic concentration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ace7fb84-f8d6-4c90-a062-51e7ed8e4d14",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n Junction",
+  "prompt": "In forward bias of p-n junction, the depletion layer:",
+  "formula": "",
+  "options": [
+   "Remains same",
+   "Decreases in width",
+   "Disappears completely",
+   "Increases in width"
+  ],
+  "answer": 1,
+  "explain": "Forward bias reduces the potential barrier, so depletion layer width decreases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "900c0fec-ba5e-4a0b-b22a-6d6ce40e1f68",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n Junction Diode",
+  "prompt": "Knee voltage (cut-in voltage) for Silicon diode is approximately:",
+  "formula": "",
+  "options": [
+   "0.3 V",
+   "1.1 V",
+   "0.7 V",
+   "0.0 V"
+  ],
+  "answer": 2,
+  "explain": "Si diode starts conducting significantly at ~0.7 V; Ge diode at ~0.3 V.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "55eafc4e-8703-45ae-90c8-00990afa1f44",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Rectifiers",
+  "prompt": "A half-wave rectifier uses how many diodes?",
+  "formula": "",
+  "options": [
+   "4",
+   "0",
+   "1",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "Half-wave rectifier uses a single diode, conducting only during one half cycle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a4de0e96-623b-43b8-aefe-0a01da010e2e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Rectifiers",
+  "prompt": "A full-wave bridge rectifier uses how many diodes?",
+  "formula": "",
+  "options": [
+   "1",
+   "4",
+   "2",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "Bridge rectifier uses 4 diodes arranged so both half cycles pass through the load.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef211465-7d5a-4428-b0fe-96217c166cc5",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Rectifiers",
+  "prompt": "Output frequency of full-wave rectifier for input frequency f is:",
+  "formula": "f_out = 2f",
+  "options": [
+   "f",
+   "2f",
+   "f/2",
+   "4f"
+  ],
+  "answer": 1,
+  "explain": "Full-wave rectifier conducts in both half cycles, doubling the output frequency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6d0ef9a4-2644-4274-9d9f-43985e6cbd0d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Special Diodes",
+  "prompt": "Zener diode operates in which bias condition for voltage regulation?",
+  "formula": "",
+  "options": [
+   "Alternating bias",
+   "Zero bias",
+   "Reverse bias (breakdown)",
+   "Forward bias"
+  ],
+  "answer": 2,
+  "explain": "Zener diode is used in reverse breakdown region to maintain constant voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "80b39631-374d-468d-b49a-f84ee5abc6de",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Transistors",
+  "prompt": "In a transistor, which terminal is common in CE configuration?",
+  "formula": "",
+  "options": [
+   "Base",
+   "Collector",
+   "Source",
+   "Emitter"
+  ],
+  "answer": 3,
+  "explain": "CE (Common Emitter) configuration has emitter common to both input and output circuits.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4f435bcc-9188-4d4b-9638-a35bb6f87f0f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Transistors",
+  "prompt": "Current gain β in CE configuration is defined as:",
+  "formula": "β = ΔIc / ΔIb",
+  "options": [
+   "ΔIc / ΔIe",
+   "ΔIc / ΔIb",
+   "ΔIb / ΔIc",
+   "ΔIe / ΔIc"
+  ],
+  "answer": 1,
+  "explain": "β (hFE) is ratio of change in collector current to change in base current in CE config.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "131a7583-f685-4eb4-a7d2-8917668095b8",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Transistor as Amplifier",
+  "prompt": "In CE amplifier, phase difference between input and output voltage is:",
+  "formula": "",
+  "options": [
+   "180°",
+   "90°",
+   "0°",
+   "270°"
+  ],
+  "answer": 0,
+  "explain": "CE amplifier inverts the signal; output is 180° out of phase with input.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "814b0c5b-693e-4942-8ec7-0bfe8c493303",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Transistors",
+  "prompt": "For transistor action, emitter-base junction must be:",
+  "formula": "",
+  "options": [
+   "Reverse biased",
+   "Forward biased",
+   "Zero biased",
+   "Broken down"
+  ],
+  "answer": 1,
+  "explain": "E-B junction is forward biased to inject majority carriers; C-B is reverse biased.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6420cfec-0e21-4fee-a1ef-3afdf35896ce",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic Gates",
+  "prompt": "Truth table output of AND gate for inputs A=1, B=0:",
+  "formula": "Y = A·B",
+  "options": [
+   "A+B=1",
+   "1",
+   "Undefined",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "AND gate output is 1 only when both inputs are 1; A=1,B=0 gives Y=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "60c9fab6-8f6f-435b-ae5a-c4192850307c",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic Gates",
+  "prompt": "Boolean expression for NAND gate output:",
+  "formula": "Y = ‾(A·B)",
+  "options": [
+   "‾(A·B)",
+   "A·B",
+   "‾(A+B)",
+   "A+B"
+  ],
+  "answer": 0,
+  "explain": "NAND is complement of AND; output is 0 only when both inputs are 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cc19934b-180a-40a9-88e6-d575a864b64a",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic Gates",
+  "prompt": "Output of NOT gate for input A=0:",
+  "formula": "Y = ‾A",
+  "options": [
+   "undefined",
+   "1",
+   "0",
+   "A"
+  ],
+  "answer": 1,
+  "explain": "NOT gate inverts input; if A=0 then Y=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "548e0377-3694-431e-acec-cbee003c017f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy Bands",
+  "prompt": "Energy gap of Silicon at room temperature is approximately:",
+  "formula": "",
+  "options": [
+   "1.1 eV",
+   "0.7 eV",
+   "3.0 eV",
+   "0.0 eV"
+  ],
+  "answer": 0,
+  "explain": "Si bandgap ≈ 1.1 eV; Ge ≈ 0.7 eV. Si is preferred for higher temperature operation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b8f1ea6b-fd18-45c7-af54-fea032626a6c",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy Bands",
+  "prompt": "In conductors, the energy gap between valence and conduction band is:",
+  "formula": "",
+  "options": [
+   ">5 eV",
+   "Zero (overlapping)",
+   "~3 eV",
+   "~1 eV"
+  ],
+  "answer": 1,
+  "explain": "Conductors have overlapping valence and conduction bands; no energy gap exists.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7949b289-9c5b-42d4-8acc-589b0e4563b2",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors Properties",
+  "prompt": "Resistivity of semiconductor with rising temperature:",
+  "formula": "",
+  "options": [
+   "First increases then decreases",
+   "Increases",
+   "Decreases",
+   "Remains same"
+  ],
+  "answer": 2,
+  "explain": "More carriers are thermally excited at higher T, so resistivity decreases (unlike metals).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8b46e950-d60c-4c67-9a80-2ab17eaea788",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic Semiconductors",
+  "prompt": "Trivalent dopant added to Si creates which type semiconductor?",
+  "formula": "",
+  "options": [
+   "n-type",
+   "p-type",
+   "Intrinsic",
+   "Metallic"
+  ],
+  "answer": 1,
+  "explain": "Trivalent atoms (B, Al, In) create holes (acceptors) making p-type semiconductor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "59ac7680-0a04-4751-9ad5-210e008bbd53",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "Pentavalent dopant added to Si creates which type semiconductor?",
+  "formula": "",
+  "options": [
+   "Insulator",
+   "p-type",
+   "n-type",
+   "Intrinsic"
+  ],
+  "answer": 2,
+  "explain": "Pentavalent atoms (P, As, Sb) donate extra electrons, making n-type semiconductor.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ece07ed8-3d3d-4f5b-92a4-145874d72a36",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "Energy gap of Germanium at room temperature is approximately:",
+  "formula": "",
+  "options": [
+   "1.1 eV",
+   "3.0 eV",
+   "0.1 eV",
+   "0.67 eV"
+  ],
+  "answer": 3,
+  "explain": "Ge has band gap ≈ 0.67 eV; Si has ≈ 1.1 eV at room temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b9225850-9cff-43ae-a0b9-e2f083dc4c22",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "Knee voltage for Germanium diode is approximately:",
+  "formula": "",
+  "options": [
+   "0.3 V",
+   "1.1 V",
+   "0.7 V",
+   "1.4 V"
+  ],
+  "answer": 0,
+  "explain": "Ge diode starts conducting at ≈ 0.3 V; Si diode at ≈ 0.7 V.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5eef3c1a-241e-423d-8057-7bd50bedad16",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "In reverse bias, the depletion layer width:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Remains same",
+   "Increases",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Reverse bias widens the depletion layer, increasing the barrier potential.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ccd47d36-782e-4ab7-a7dc-3978cb330470",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "Output frequency of half-wave rectifier for input frequency f:",
+  "formula": "",
+  "options": [
+   "f",
+   "4f",
+   "2f",
+   "f/2"
+  ],
+  "answer": 0,
+  "explain": "Half-wave rectifier passes only one half-cycle, so output frequency equals input f.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c1a2870a-abe2-4452-8c49-83036eeccfc0",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "In a p-n junction diode, diffusion current is due to:",
+  "formula": "",
+  "options": [
+   "Electric field",
+   "Temperature only",
+   "Concentration gradient",
+   "Applied voltage only"
+  ],
+  "answer": 2,
+  "explain": "Diffusion current arises from majority carrier concentration gradient across junction.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0aec354c-5caa-4a97-969a-f57656cc8544",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "NAND gate is universal because it can implement:",
+  "formula": "",
+  "options": [
+   "Only AND",
+   "Only OR",
+   "NOT, AND, OR",
+   "Only NOT"
+  ],
+  "answer": 2,
+  "explain": "NAND gate alone can realize NOT, AND, OR — hence it is a universal gate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "06b95102-83f0-4ae8-9445-785fbdf580b5",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Boolean expression for XOR gate output:",
+  "formula": "Y = A⊕B",
+  "options": [
+   "Y = AB",
+   "Y = A+B",
+   "Y = (AB)̄",
+   "Y = AB̅ + A̅B"
+  ],
+  "answer": 3,
+  "explain": "XOR output is high when inputs differ: Y = AB̅ + A̅B.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "081b5888-7e8d-4fb4-8d5a-6723e0f54600",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Output of XNOR gate when A=1, B=1:",
+  "formula": "",
+  "options": [
+   "0",
+   "Depends on supply",
+   "Undefined",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "XNOR gives 1 when inputs are equal; A=B=1 gives output 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b1adc2d0-c176-4e00-9da6-a639c377fa92",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "In CB configuration, current gain α is defined as:",
+  "formula": "α = ΔIc/ΔIe",
+  "options": [
+   "ΔIb/ΔIe",
+   "ΔIc/ΔIb",
+   "ΔIc/ΔIe",
+   "ΔIe/ΔIc"
+  ],
+  "answer": 2,
+  "explain": "α (CB gain) = ratio of collector current change to emitter current change.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "25133038-c6aa-43da-b6b6-234f9e862087",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "Value of α for a transistor is always:",
+  "formula": "",
+  "options": [
+   "Greater than 1",
+   "Greater than 100",
+   "Equal to 1",
+   "Less than 1"
+  ],
+  "answer": 3,
+  "explain": "α = Ic/Ie < 1 since Ie = Ib + Ic and Ib > 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0b5998d2-a8d4-4609-8524-7c5f299d3317",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "In a transistor, Ie = ?",
+  "formula": "Ie = Ib + Ic",
+  "options": [
+   "Ic only",
+   "Ib − Ic",
+   "Ib + Ic",
+   "Ic − Ib"
+  ],
+  "answer": 2,
+  "explain": "KCL at transistor: emitter current = base current + collector current.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6c4167eb-688c-4976-a387-5ca107940d3a",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "In CE configuration, voltage gain Av is:",
+  "formula": "Av = −β(Rc/Ri)",
+  "options": [
+   "Rc/Ri",
+   "β(Rc/Ri)",
+   "α(Rc/Ri)",
+   "−β(Rc/Ri)"
+  ],
+  "answer": 3,
+  "explain": "CE amplifier voltage gain is −β×(Rc/Ri); negative sign indicates phase inversion.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7110e9cb-6d90-4169-ac7b-4a96962f17fb",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "In a p-type semiconductor, minority carriers are:",
+  "formula": "",
+  "options": [
+   "Holes",
+   "Protons",
+   "Electrons",
+   "Positrons"
+  ],
+  "answer": 2,
+  "explain": "In p-type, holes are majority; electrons thermally generated are minority carriers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd8a8671-fb2d-43a3-a546-b6071fdaf149",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode as voltage regulator",
+  "prompt": "In an n-type semiconductor, minority carriers are:",
+  "formula": "",
+  "options": [
+   "Protons",
+   "Electrons",
+   "Holes",
+   "Neutrons"
+  ],
+  "answer": 2,
+  "explain": "In n-type, electrons are majority; holes thermally generated are minority carriers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "19f3b520-1725-44dd-be82-91fd53c4f5f3",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "A Zener diode is used primarily as:",
+  "formula": "",
+  "options": [
+   "Current amplifier",
+   "Rectifier",
+   "Voltage regulator",
+   "Oscillator"
+  ],
+  "answer": 2,
+  "explain": "Zener diode maintains constant voltage across load — used as voltage regulator.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "df279e9e-1801-434c-bef7-65935610fe92",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "In forward bias, the barrier potential of p-n junction:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Becomes infinite",
+   "Remains same"
+  ],
+  "answer": 1,
+  "explain": "Forward bias opposes the built-in field, reducing the barrier potential.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fb94f9c6-f031-4836-83ff-d06b1f751164",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "Boolean expression for AND gate output:",
+  "formula": "Y = A·B",
+  "options": [
+   "Y = (A·B)̄",
+   "Y = A̅·B̅",
+   "Y = A+B",
+   "Y = A·B"
+  ],
+  "answer": 3,
+  "explain": "AND gate output Y = A·B; high only when both inputs are high.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c4c901d7-726f-4193-b3fe-25bfeab802af",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "Semiconductors have _______ temperature coefficient of resistivity:",
+  "formula": "",
+  "options": [
+   "Positive",
+   "Infinite",
+   "Negative",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Semiconductors: more carriers at higher T, so resistivity decreases — negative TCR.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "acd1864d-3b5f-4515-8fab-8e2ca947b819",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "In a full-wave centre-tap rectifier, how many diodes are used?",
+  "formula": "",
+  "options": [
+   "4",
+   "3",
+   "2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Centre-tap full-wave rectifier uses exactly 2 diodes, one for each half cycle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "49180da1-4309-4bfe-8524-f2e8c7af0ce3",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "Which gate produces output 1 only when all inputs are 1?",
+  "formula": "",
+  "options": [
+   "NOR gate",
+   "AND gate",
+   "OR gate",
+   "NAND gate"
+  ],
+  "answer": 1,
+  "explain": "AND gate output is 1 only when all inputs are HIGH (1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0f80c44b-27ce-409e-a7c0-11d3983a85f3",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Which logic gate output is 0 only when all inputs are 1?",
+  "formula": "Y = (A·B)̄",
+  "options": [
+   "XOR",
+   "OR",
+   "NAND",
+   "AND"
+  ],
+  "answer": 2,
+  "explain": "NAND gate gives output 0 only when ALL inputs are 1; complement of AND.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b4351650-19e6-4ed2-ba52-0c0b72650ca7",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "Depletion region in a p-n junction is devoid of:",
+  "formula": "",
+  "options": [
+   "Fixed ions",
+   "Free charge carriers",
+   "Donor atoms",
+   "Acceptor atoms"
+  ],
+  "answer": 1,
+  "explain": "Depletion region lacks free mobile charge carriers (electrons and holes).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5036004a-1ab8-4b50-b28f-a38d8583c614",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode as voltage regulator",
+  "prompt": "In a Zener diode voltage regulator, Zener is connected in:",
+  "formula": "",
+  "options": [
+   "Series with load, forward biased",
+   "Parallel with load, forward biased",
+   "Parallel with load, reverse biased",
+   "Series with load, reverse biased"
+  ],
+  "answer": 2,
+  "explain": "Zener is connected in parallel with load in reverse bias for voltage regulation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "671342e2-114d-42fc-9439-07d1b721f25d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "In n-type Si, donor energy level lies:",
+  "formula": "",
+  "options": [
+   "At middle of energy gap",
+   "Near valence band edge",
+   "Near conduction band edge",
+   "Inside valence band"
+  ],
+  "answer": 2,
+  "explain": "Donor level is just below conduction band, enabling easy electron excitation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "878f79de-bab8-427c-ad8e-66a517f51911",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "In p-type Si, acceptor energy level lies:",
+  "formula": "",
+  "options": [
+   "Near valence band edge",
+   "At middle of energy gap",
+   "Inside conduction band",
+   "Near conduction band edge"
+  ],
+  "answer": 0,
+  "explain": "Acceptor level is just above valence band, so holes are easily created.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dd1aa974-74ce-4614-a5f1-de0fc401d917",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "In a transistor, the emitter is heavily doped compared to base and collector because:",
+  "formula": "",
+  "options": [
+   "To increase breakdown voltage",
+   "To reduce leakage current",
+   "To supply large number of majority carriers",
+   "To increase depletion width"
+  ],
+  "answer": 2,
+  "explain": "Heavy emitter doping ensures adequate carrier injection into base for transistor action.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "94a0f875-9992-4682-a8f4-28fd72d06d8f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "Base of a transistor is kept very thin to ensure:",
+  "formula": "",
+  "options": [
+   "High breakdown voltage",
+   "High input impedance",
+   "Large base current",
+   "Most injected carriers reach collector"
+  ],
+  "answer": 3,
+  "explain": "Thin base minimises recombination so most carriers diffuse to collector.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f4a6f16c-b7e1-417a-b38e-f29311bebf28",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "An LED emits light when p-n junction is:",
+  "formula": "",
+  "options": [
+   "Unbiased",
+   "Under breakdown",
+   "Reverse biased",
+   "Forward biased"
+  ],
+  "answer": 3,
+  "explain": "Forward bias causes electron-hole recombination at junction, emitting photons (LED).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b14d9042-e0c0-4f41-9737-69eb3a3129d7",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "Photodiode is operated under which bias for detection?",
+  "formula": "",
+  "options": [
+   "Either bias",
+   "Zero bias only",
+   "Reverse bias",
+   "Forward bias"
+  ],
+  "answer": 2,
+  "explain": "Photodiode works in reverse bias; photocurrent increases with light intensity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3cb7ff65-0ac2-4286-96b1-cf26c4746717",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Solar cell: I-V curve & working",
+  "prompt": "In a solar cell, the emf is generated due to:",
+  "formula": "",
+  "options": [
+   "Thermionic emission",
+   "Zener breakdown",
+   "Avalanche breakdown",
+   "Photovoltaic effect"
+  ],
+  "answer": 3,
+  "explain": "Solar cell uses photovoltaic effect: absorbed photons create electron-hole pairs separated by junction field.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b197944-6124-478e-9296-ba06d146a21e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "In an intrinsic semiconductor at absolute zero (0 K), it behaves as:",
+  "formula": "",
+  "options": [
+   "A perfect insulator",
+   "A p-type semiconductor",
+   "A conductor",
+   "A superconductor"
+  ],
+  "answer": 0,
+  "explain": "At 0 K, all electrons are in valence band; no free carriers — acts as perfect insulator.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d5322e0f-6fbe-415e-89d1-974fb9a12f89",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "In CE config, input is applied between which terminals?",
+  "formula": "",
+  "options": [
+   "Collector and emitter",
+   "Emitter and ground",
+   "Base and collector",
+   "Base and emitter"
+  ],
+  "answer": 3,
+  "explain": "In CE configuration, input signal is given between base and emitter terminals.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "34e7ac6b-6250-4df1-9188-8701f90c98ea",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "In cut-off region of transistor, both junctions are:",
+  "formula": "",
+  "options": [
+   "Unbiased",
+   "Reverse biased",
+   "Forward biased",
+   "One forward one reverse"
+  ],
+  "answer": 1,
+  "explain": "In cut-off, both EB and CB junctions are reverse biased; transistor is OFF (switch open).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "951d27a0-f975-41c9-93b1-ef4b1f1c97c1",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "The reverse breakdown in a lightly doped p-n junction is mainly due to:",
+  "formula": "",
+  "options": [
+   "Zener effect",
+   "Diffusion",
+   "Tunneling",
+   "Avalanche effect"
+  ],
+  "answer": 3,
+  "explain": "Lightly doped junctions have wide depletion layer; breakdown occurs by avalanche multiplication.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d533fc10-0c8a-4789-9c8e-e5854b110996",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "Zener breakdown occurs in _______ doped p-n junctions.",
+  "formula": "",
+  "options": [
+   "Moderately",
+   "Intrinsic",
+   "Heavily",
+   "Lightly"
+  ],
+  "answer": 2,
+  "explain": "Heavily doped junctions have narrow depletion layer; strong field causes Zener (tunneling) breakdown.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e051b025-b0b8-4be8-b423-eb49bbc709b4",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "At equilibrium, net current across p-n junction is:",
+  "formula": "",
+  "options": [
+   "Equal to drift current",
+   "Zero",
+   "Equal to diffusion current",
+   "Maximum"
+  ],
+  "answer": 1,
+  "explain": "At equilibrium, diffusion current exactly equals drift current, so net current = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f4a535c8-a1ea-4b7a-9970-ede5e8554cd4",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "In forward bias, which current dominates in a p-n junction?",
+  "formula": "",
+  "options": [
+   "Diffusion current",
+   "Leakage current",
+   "Drift current",
+   "Displacement current"
+  ],
+  "answer": 0,
+  "explain": "Forward bias lowers barrier, greatly increasing diffusion of majority carriers (diffusion current dominates).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fb670e7e-73c9-4c66-af41-de2a2955a9fc",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "Which of the following has the largest energy gap?",
+  "formula": "",
+  "options": [
+   "Carbon (diamond)",
+   "Germanium",
+   "GaAs",
+   "Silicon"
+  ],
+  "answer": 0,
+  "explain": "Diamond (carbon) has Eg ≈ 5.5 eV, far larger than Si (1.1 eV) or Ge (0.7 eV).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ee6b7d99-f453-445c-92ce-737e1bfd8c4c",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "For a transistor in active region, IC ≈ IE because:",
+  "formula": "α = Ic/Ie ≈ 1",
+  "options": [
+   "α is close to 1",
+   "Base current is large",
+   "Collector is heavily doped",
+   "β is close to 1"
+  ],
+  "answer": 0,
+  "explain": "Since α = Ic/Ie is close to but less than 1, almost all emitter current reaches collector.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b4dd2a6f-56f0-4e76-883b-e9912052ca1e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Which gate outputs 1 when inputs are different?",
+  "formula": "Y = A⊕B",
+  "options": [
+   "NAND",
+   "XNOR",
+   "NOR",
+   "XOR"
+  ],
+  "answer": 3,
+  "explain": "XOR outputs 1 only when inputs differ (A≠B); Y = A⊕B.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7e63c6c7-242c-4ad9-a880-fbfef80e6bde",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "A photodiode in reverse bias — photocurrent increases when light intensity:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Stays constant",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "More photons generate more electron-hole pairs, increasing reverse photocurrent with light intensity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ae43a665-eeb9-4da4-a98d-49d39524ff93",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "For LED operation, the material must have which type of band gap?",
+  "formula": "",
+  "options": [
+   "Direct band gap",
+   "Zero band gap",
+   "Indirect band gap",
+   "Wide indirect gap"
+  ],
+  "answer": 0,
+  "explain": "Direct band gap semiconductors (GaAs, GaP) allow efficient photon emission in LEDs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "079061ad-4e9e-4487-a520-b7b4bd7a1499",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "In an intrinsic semiconductor, Fermi level lies:",
+  "formula": "",
+  "options": [
+   "At top of valence band",
+   "Above conduction band",
+   "Midway in energy gap",
+   "At bottom of conduction band"
+  ],
+  "answer": 2,
+  "explain": "For intrinsic semiconductor, Fermi level is approximately at the middle of the forbidden energy gap.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "39cf60e7-edcb-4d61-9f3a-a35ce920e410",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "In n-type semiconductor, Fermi level shifts towards:",
+  "formula": "",
+  "options": [
+   "Middle of gap",
+   "Valence band",
+   "Below valence band",
+   "Conduction band"
+  ],
+  "answer": 3,
+  "explain": "Extra donor electrons shift Fermi level upward, closer to the conduction band in n-type.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7140e233-5936-47fc-8e7d-e4e6f3037590",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "In p-type semiconductor, Fermi level shifts towards:",
+  "formula": "",
+  "options": [
+   "Middle of gap",
+   "Conduction band",
+   "Valence band",
+   "Above conduction band"
+  ],
+  "answer": 2,
+  "explain": "Acceptor levels near valence band pull Fermi level downward, closer to valence band in p-type.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "185b6bad-e64f-4bfe-b219-05bf92da48f9",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "Conductivity of a semiconductor is given by:",
+  "formula": "σ = e(nₑμₑ + nₕμₕ)",
+  "options": [
+   "e(nₑμₑ + nₕμₕ)",
+   "e·nᵢ·(μₑ + μₕ)",
+   "nₑμₑ/e",
+   "e(nₑμₑ - nₕμₕ)"
+  ],
+  "answer": 0,
+  "explain": "Total conductivity sums contributions from both electrons and holes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c54d564a-4997-4738-9e4e-51804480241d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "Which region of transistor operation is used for amplification?",
+  "formula": "",
+  "options": [
+   "Saturation region",
+   "Cut-off region",
+   "Breakdown region",
+   "Active region"
+  ],
+  "answer": 3,
+  "explain": "In active region, E-B is forward biased and C-B is reverse biased; used for amplification.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ce34253-d66a-4db1-b044-90a72c9e9265",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "In saturation region of a transistor, both junctions are:",
+  "formula": "",
+  "options": [
+   "E-B forward, C-B reverse",
+   "Reverse biased",
+   "Forward biased",
+   "E-B reverse, C-B forward"
+  ],
+  "answer": 2,
+  "explain": "In saturation, both E-B and C-B junctions are forward biased; transistor is fully ON.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "208c9045-0a1e-49e8-b831-04460d80070c",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "In n-type semiconductor, which relation holds for carrier concentrations?",
+  "formula": "nₑ >> nₕ",
+  "options": [
+   "nₑ = nᵢ",
+   "nₑ = nₕ",
+   "nₕ >> nₑ",
+   "nₑ >> nₕ"
+  ],
+  "answer": 3,
+  "explain": "Pentavalent doping adds extra electrons, making electrons the majority carriers.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fad10ec6-3245-475f-b871-ffec3b48103b",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Boolean identity: A + Ā = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "A",
+   "Ā",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "A OR NOT-A is always 1; this is a fundamental Boolean complementary law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "48419ba4-4b74-48a0-b3c7-2908158a3cc0",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "De Morgan's theorem: (A·B)' = ?",
+  "formula": "",
+  "options": [
+   "Ā · B̄",
+   "A + B",
+   "A · B",
+   "Ā + B̄"
+  ],
+  "answer": 3,
+  "explain": "NAND of A,B equals OR of individual complements: (AB)' = Ā + B̄.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "27aeb111-f3f8-474f-bd5e-3276286fc469",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "In a p-n junction diode, reverse saturation current I₀ with temperature:",
+  "formula": "",
+  "options": [
+   "Decreases with temperature",
+   "Remains constant",
+   "Becomes zero",
+   "Increases with temperature"
+  ],
+  "answer": 3,
+  "explain": "I₀ is due to minority carriers; their concentration rises with T, so I₀ increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "052f7b39-cd7d-4dfa-b8b3-04c796009e51",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "In a full-wave bridge rectifier, how many diodes conduct during each half-cycle?",
+  "formula": "",
+  "options": [
+   "3",
+   "4",
+   "2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "In bridge rectifier, two diodes conduct per half-cycle, forming a current path.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d9cd1917-38b2-4d5e-8cb3-42feca2b2d43",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "The peak inverse voltage (PIV) across each diode in a bridge rectifier is:",
+  "formula": "PIV = Vm",
+  "options": [
+   "Vm/2",
+   "Vm",
+   "2Vm",
+   "√2·Vm"
+  ],
+  "answer": 1,
+  "explain": "In bridge rectifier, PIV on each diode is Vm (peak input voltage), not 2Vm.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "46399511-6107-4bf6-a109-97778c60ec1c",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "PIV across diode in a centre-tap full-wave rectifier is:",
+  "formula": "PIV = 2Vm",
+  "options": [
+   "Vm",
+   "√2·Vm",
+   "2Vm",
+   "Vm/2"
+  ],
+  "answer": 2,
+  "explain": "In centre-tap rectifier, non-conducting diode sees full secondary voltage = 2Vm.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2cdc997c-a277-4199-9317-aa714b971b4f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "The current through a forward-biased diode follows (ideal diode equation):",
+  "formula": "I = I₀(e^(eV/kT) - 1)",
+  "options": [
+   "I₀(e^(eV/kT))",
+   "I₀·V",
+   "I₀(e^(eV/kT) − 1)",
+   "I₀(1 − e^(eV/kT))"
+  ],
+  "answer": 2,
+  "explain": "Shockley diode equation describes exponential rise of current with forward voltage.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f16a077d-fbdd-4ea8-a19b-44b19f81a490",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "Boolean identity: A + A = ?",
+  "formula": "",
+  "options": [
+   "2A",
+   "0",
+   "1",
+   "A"
+  ],
+  "answer": 3,
+  "explain": "Idempotent law: A OR A = A in Boolean algebra (not 2A as in normal algebra).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a776e875-7054-4eef-8cde-119d87519023",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Which transistor has two p-regions sandwiching an n-region?",
+  "formula": "",
+  "options": [
+   "UJT",
+   "p-n-p transistor",
+   "n-p-n transistor",
+   "FET"
+  ],
+  "answer": 1,
+  "explain": "A p-n-p transistor has emitter(p), base(n), collector(p) structure.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70ba8dce-0f51-40ef-9ce1-feaae8919e99",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Boolean identity: A + 1 = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "A",
+   "Ā",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "OR-ing any variable with 1 always gives 1 (domination law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d98d5ee3-28ca-4ecf-a152-8fafe7ffe2f1",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Boolean identity: A + 0 = ?",
+  "formula": "",
+  "options": [
+   "Ā",
+   "A",
+   "0",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "OR-ing any variable with 0 returns the variable itself (identity law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "306be72b-19e2-4cfc-947b-41441ea51588",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "The relation between IE, IB, IC in a transistor is:",
+  "formula": "IE = IB + IC",
+  "options": [
+   "IB = IE + IC",
+   "IC = IB + IE",
+   "IE = IC − IB",
+   "IE = IB + IC"
+  ],
+  "answer": 3,
+  "explain": "KCL at transistor: emitter current equals sum of base and collector currents.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "18c3a901-8fb3-4370-b715-0f7836d0ec29",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "Output frequency of full-wave rectifier for input frequency f:",
+  "formula": "f_out = 2f",
+  "options": [
+   "f",
+   "4f",
+   "f/2",
+   "2f"
+  ],
+  "answer": 3,
+  "explain": "Full-wave rectifier conducts on both half-cycles, doubling the output pulse frequency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "17f9a109-be67-4e80-a972-b96f569303e9",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Semiconductors",
+  "prompt": "In a CE amplifier, phase difference between input and output voltage is:",
+  "formula": "",
+  "options": [
+   "0°",
+   "90°",
+   "270°",
+   "180°"
+  ],
+  "answer": 3,
+  "explain": "CE configuration inverts the signal; output is 180° out of phase with input.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4353533b-6741-43ca-8d91-b395482c6842",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "Knee voltage for Silicon diode is approximately:",
+  "formula": "",
+  "options": [
+   "1.1 V",
+   "0.3 V",
+   "0.7 V",
+   "1.5 V"
+  ],
+  "answer": 2,
+  "explain": "Si diode starts conducting significantly at ~0.7 V (Ge at ~0.3 V) in forward bias.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7f49aee7-b4d9-4975-bbee-b3e50d592dac",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "Typical energy gap of an insulator is:",
+  "formula": "",
+  "options": [
+   "Greater than about 3 eV",
+   "About 0.1 eV",
+   "About 1 eV",
+   "Exactly zero"
+  ],
+  "answer": 0,
+  "explain": "Insulators have a large gap (Eg > ~3 eV), so electrons cannot reach the conduction band at ordinary temperatures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a166251-d35f-4dff-9945-7e06a3d26dae",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "A solid has Eg ≈ 1 eV. At room temperature it is a:",
+  "formula": "",
+  "options": [
+   "Semiconductor",
+   "Perfect insulator",
+   "Superconductor",
+   "Conductor"
+  ],
+  "answer": 0,
+  "explain": "Eg of about 0.1–3 eV with a small thermal population of the conduction band means a semiconductor.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5b2fb235-d12d-41d1-b36e-c96c60e7249f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "Energy bands in solids arise due to:",
+  "formula": "",
+  "options": [
+   "Photoelectric effect",
+   "Splitting of energy levels of interacting atoms",
+   "Ionisation of the atoms",
+   "Nuclear forces between atoms"
+  ],
+  "answer": 1,
+  "explain": "Atomic levels split into closely spaced levels when many atoms come close, forming bands.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "34434ba1-fb0d-4400-951e-2c2f7798bb1e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "Approximate energy gaps of Ge and Si respectively are:",
+  "formula": "",
+  "options": [
+   "0.30 eV and 0.70 eV",
+   "5.4 eV and 1.1 eV",
+   "0.67 eV and 1.1 eV",
+   "1.1 eV and 0.67 eV"
+  ],
+  "answer": 2,
+  "explain": "E_g(Ge) ≈ 0.67 eV and E_g(Si) ≈ 1.1 eV; Si has the larger gap.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "42c62d81-4797-4210-b6ed-ff9884cdba66",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "With rising temperature, intrinsic carrier density nᵢ varies:",
+  "formula": "nᵢ ∝ T^(3/2) e^(−E_g/2kT)",
+  "options": [
+   "Increases linearly",
+   "Decreases exponentially",
+   "Stays constant",
+   "Increases exponentially"
+  ],
+  "answer": 3,
+  "explain": "The exponential factor e^(−E_g/2kT) dominates, so nᵢ rises sharply with T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "130efcaf-1662-4b4a-9135-110ba8f758e2",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "On applying an electric field to a pure semiconductor, holes drift:",
+  "formula": "",
+  "options": [
+   "Perpendicular to the field",
+   "Along the field",
+   "Do not drift",
+   "Opposite to the field"
+  ],
+  "answer": 1,
+  "explain": "Holes act as positive carriers and drift along E; electrons drift opposite to E.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "130737e2-4b27-449b-bb65-2a1f936f1b97",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "In an intrinsic semiconductor, electron current Iₑ and hole current Iₕ combine as:",
+  "formula": "I = Iₑ + Iₕ",
+  "options": [
+   "I = √(Iₑ² + Iₕ²)",
+   "They add, same current direction",
+   "Only Iₑ contributes",
+   "They subtract, since drifts are opposite"
+  ],
+  "answer": 1,
+  "explain": "Opposite drifts of opposite charges give currents in the same direction, so they add.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ac103cbe-0629-4261-9170-2e194ce4ca1b",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "At thermal equilibrium in an intrinsic semiconductor, the generation rate of electron-hole pairs is:",
+  "formula": "",
+  "options": [
+   "Equal to the recombination rate",
+   "Less than the recombination rate",
+   "Zero",
+   "Greater than the recombination rate"
+  ],
+  "answer": 0,
+  "explain": "Steady carrier concentration at a given T requires generation rate = recombination rate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bedf3ad4-6a32-4609-b1d0-6c791f16d3d5",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "A hole in a pure semiconductor is best described as:",
+  "formula": "",
+  "options": [
+   "A positive ion in conduction band",
+   "A free proton",
+   "An extra bonded electron",
+   "A vacant covalent bond site"
+  ],
+  "answer": 3,
+  "explain": "A hole is the vacancy left when a bond electron is excited, acting as an effective positive charge.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb0e74ee-0673-4a4b-9e57-f86f249a36c0",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "Order of intrinsic carrier density of Si at 300 K:",
+  "formula": "",
+  "options": [
+   "~10⁶ m⁻³",
+   "~10¹⁶ m⁻³",
+   "~10²² m⁻³",
+   "~10²⁸ m⁻³"
+  ],
+  "answer": 1,
+  "explain": "Si has nᵢ ≈ 1.5 × 10¹⁶ m⁻³ at room temperature, far below metals (~10²⁸ m⁻³).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92395fa3-a502-4684-9569-f0f4831625b3",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "Doped n-type or p-type semiconductor: what is its net electrical charge?",
+  "formula": "",
+  "options": [
+   "Negative for n-type, positive for p-type",
+   "Positive for n-type, negative for p-type",
+   "Neutral",
+   "Charged, depending on doping level"
+  ],
+  "answer": 2,
+  "explain": "Dopant atoms are neutral; the extra carriers are balanced by immobile ions, so the crystal stays neutral.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "80388ca6-c54d-48f0-8fe3-889e041437da",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "Which of these is a donor impurity for Ge or Si?",
+  "formula": "",
+  "options": [
+   "Indium",
+   "Boron",
+   "Phosphorus",
+   "Aluminium"
+  ],
+  "answer": 2,
+  "explain": "P is pentavalent, so it is a donor. B, Al and In are trivalent acceptors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ffce6cc-d28f-4176-a50a-c8a0e832090b",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "Drift current in an unbiased p-n junction is mainly due to which carriers?",
+  "formula": "",
+  "options": [
+   "Minority carriers",
+   "Only the immobile ions",
+   "Majority carriers",
+   "Only free electrons from the p-side"
+  ],
+  "answer": 0,
+  "explain": "The barrier field sweeps minority carriers across; majority carriers cross by diffusion.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "017dd059-f6c9-4b37-9b0c-1863c3a199f9",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "Conventional diffusion current across the junction flows from ___, and drift current from ___.",
+  "formula": "",
+  "options": [
+   "n to p; p to n",
+   "p to n; n to p",
+   "p to n; p to n",
+   "n to p; n to p"
+  ],
+  "answer": 1,
+  "explain": "Diffusion (holes p→n) gives current p→n; drift opposes it, so conventional current n→p.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56ab21fe-5511-4374-bf5d-8b517682502d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "Under reverse bias of a p-n junction, the potential barrier height:",
+  "formula": "",
+  "options": [
+   "Becomes zero",
+   "Stays the same",
+   "Increases",
+   "Decreases"
+  ],
+  "answer": 2,
+  "explain": "Reverse bias adds to the built-in potential, so the barrier and depletion width both grow.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bbdf9329-7fec-42aa-bc66-855f442d4a11",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "The depletion layer on the n-side of the junction contains:",
+  "formula": "",
+  "options": [
+   "Immobile negative acceptor ions",
+   "Free holes only",
+   "Free electrons only",
+   "Immobile positive donor ions"
+  ],
+  "answer": 3,
+  "explain": "Electrons leave the n-side, uncovering fixed positively ionised donor atoms.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "287d8427-75cf-4dc0-9a8c-6ced95e9070b",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "With rise in temperature, the barrier potential of a p-n junction generally:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Stays constant",
+   "Becomes infinite",
+   "Decreases"
+  ],
+  "answer": 3,
+  "explain": "More thermally generated carriers reduce the barrier by about 2 mV per °C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b21b3587-412a-476d-83b9-c55acbbc1b6e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "An unbiased p-n junction crystal as a whole is:",
+  "formula": "",
+  "options": [
+   "Negatively charged",
+   "Positively charged",
+   "Charged only in the depletion layer",
+   "Electrically neutral"
+  ],
+  "answer": 3,
+  "explain": "Both p and n pieces were neutral, and charge only moves inside the crystal, so the net charge stays zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4513374c-84e9-4f68-9765-d150b2ad12ee",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "At equilibrium, the n-side of the p-n junction is at ___ potential relative to the p-side.",
+  "formula": "",
+  "options": [
+   "Fluctuating",
+   "Lower",
+   "Higher",
+   "Equal"
+  ],
+  "answer": 2,
+  "explain": "The positive donor ions on the n-side make it higher in potential, giving the barrier potential V₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a11ea52-8b02-4714-80ee-91e80fbc687e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "Typical thickness of the depletion layer in a p-n junction is of the order of:",
+  "formula": "",
+  "options": [
+   "10⁻¹⁰ m",
+   "10⁻³ m",
+   "10⁻⁶ m",
+   "10⁻² m"
+  ],
+  "answer": 2,
+  "explain": "The depletion width is about a micrometre, so the field is of order 10⁵–10⁶ V/m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "64f13432-226d-4f4a-aa70-f98e8c1bb70e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "At the same temperature, nᵢ of intrinsic Ge compared with intrinsic Si is:",
+  "formula": "nᵢ ∝ e^(−E_g/2kT)",
+  "options": [
+   "Greater, as Ge has smaller E_g",
+   "Smaller, as Ge has larger E_g",
+   "Equal, same crystal structure",
+   "Smaller, as Ge has smaller E_g"
+  ],
+  "answer": 0,
+  "explain": "Ge has E_g ≈ 0.67 eV < Si's 1.1 eV, so more pairs are thermally generated.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ed66c19c-be49-4634-bc3d-9a6b58a8cd82",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "p-n junction formation & depletion layer",
+  "prompt": "During p-n junction formation, electrons diffusing from n to p side recombine with holes, leaving which ions on the p-side?",
+  "formula": "",
+  "options": [
+   "Negative donor ions",
+   "Negative acceptor ions",
+   "Positive acceptor ions",
+   "Positive donor ions"
+  ],
+  "answer": 1,
+  "explain": "Acceptor atoms on the p-side become immobile negative ions after capturing electrons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4edea24a-8c31-4d0f-9ff9-1a53f5ece03b",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "Typical reverse saturation current of a junction diode is of the order of:",
+  "formula": "",
+  "options": [
+   "Ampere",
+   "Milliampere",
+   "Microampere or less",
+   "Kiloampere"
+  ],
+  "answer": 2,
+  "explain": "Reverse current is tiny (μA, even nA for Si), while forward current is in mA.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7551a982-5994-43ae-9fae-089b4aea7fef",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "Dynamic (AC) resistance of a diode at an operating point is defined as:",
+  "formula": "r_d = ΔV/ΔI",
+  "options": [
+   "ΔI/ΔV",
+   "I/V",
+   "V/I",
+   "ΔV/ΔI"
+  ],
+  "answer": 3,
+  "explain": "Dynamic resistance is the inverse slope of the I-V curve at the operating point.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3cf41377-86ac-4009-9c6b-5a86ccf96be5",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "As forward current through a diode increases, its dynamic resistance:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Stays constant",
+   "First rises, then becomes infinite",
+   "Increases"
+  ],
+  "answer": 0,
+  "explain": "The I-V curve gets steeper at higher current, so ΔV/ΔI falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46ac8d91-be53-4d92-8ce9-53727e9e15fe",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "In reverse bias, before breakdown, the I-V curve of a diode is nearly:",
+  "formula": "",
+  "options": [
+   "Exponentially rising",
+   "Parabolic",
+   "Linear with large slope",
+   "Flat (current almost independent of V)"
+  ],
+  "answer": 3,
+  "explain": "Reverse current saturates at I₀, nearly independent of reverse voltage until breakdown.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "607c081b-c7d7-4d8e-a395-c1239bf19b51",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "Zener breakdown occurs in a junction that is:",
+  "formula": "",
+  "options": [
+   "Lightly doped, with a wide depletion layer",
+   "Heavily doped, with a thin depletion layer",
+   "Undoped (intrinsic)",
+   "Forward biased at the knee"
+  ],
+  "answer": 1,
+  "explain": "Heavy doping gives a thin layer and a strong field (~10⁶ V/m) that breaks covalent bonds.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f25f55f6-64d4-4110-92d5-051eca2b0cde",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "The built-in electric field in the depletion region of a p-n junction points from:",
+  "formula": "",
+  "options": [
+   "Along the junction plane",
+   "Outward from the n-side surface",
+   "n-side to p-side",
+   "p-side to n-side"
+  ],
+  "answer": 2,
+  "explain": "Ionised donors (+) on the n-side and acceptors (−) on the p-side give a field from n to p.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8b721cd2-5100-404e-a113-7e17e593f641",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "A diode conducts appreciably (beyond knee) only when the p-side potential relative to the n-side is:",
+  "formula": "",
+  "options": [
+   "Positive and above knee voltage",
+   "Negative",
+   "Zero",
+   "Positive but below 0.1 V"
+  ],
+  "answer": 0,
+  "explain": "Forward bias with V greater than the knee voltage is needed for appreciable conduction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0a18c702-fb7f-46d2-b7f5-7909c5ac6b95",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "The forward I-V characteristic of a diode above the knee voltage is:",
+  "formula": "",
+  "options": [
+   "Constant current",
+   "Exponential-like rise",
+   "Logarithmic fall",
+   "Linear through the origin"
+  ],
+  "answer": 1,
+  "explain": "I ∝ e^(eV/kT) in forward bias, so the current rises very steeply beyond the knee.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cb59ae22-900a-42bb-8c41-e649e0ea2e91",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Diode I-V: forward & reverse bias",
+  "prompt": "In a p-n junction, the reverse current is mainly due to flow of:",
+  "formula": "",
+  "options": [
+   "Minority carriers",
+   "Only free ions",
+   "Only holes from p-side",
+   "Majority carriers"
+  ],
+  "answer": 0,
+  "explain": "Reverse bias sweeps minority carriers across the junction, giving a small drift current.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d6dea21-509b-47f7-b557-6ede7a295ad9",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "Maximum rectification efficiency of an ideal half-wave rectifier (resistive load) is about:",
+  "formula": "η = 4/π² ≈ 0.406",
+  "options": [
+   "40.6%",
+   "81.2%",
+   "50%",
+   "63.7%"
+  ],
+  "answer": 0,
+  "explain": "Half-wave η_max = 40.6%; full-wave is double, 81.2%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7aab987-3b22-4688-a330-5ef1311738b1",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "In a rectifier, the smoothing filter capacitor is connected:",
+  "formula": "",
+  "options": [
+   "In series with the diode only",
+   "In parallel with the load",
+   "In series with the load",
+   "Across the input AC source"
+  ],
+  "answer": 1,
+  "explain": "Capacitor shunts the load; it charges at peaks and discharges when the output falls, reducing ripple.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a578857a-4a9b-48cc-8c04-e10db5267fc3",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "Ripple factor of a full-wave rectifier without a filter is about:",
+  "formula": "r = √((V_rms/V_dc)² − 1)",
+  "options": [
+   "0.406",
+   "0.48",
+   "1.21",
+   "0.81"
+  ],
+  "answer": 1,
+  "explain": "Full-wave r ≈ 0.48; half-wave r ≈ 1.21.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d8a252af-810e-4f4d-8bcd-ac7923d208b8",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Half-wave & full-wave rectifier",
+  "prompt": "Maximum rectification efficiency of an ideal full-wave rectifier with resistive load is about:",
+  "formula": "η = 8/π² ≈ 81.2%",
+  "options": [
+   "81.2%",
+   "40.6%",
+   "100%",
+   "50%"
+  ],
+  "answer": 0,
+  "explain": "The full-wave efficiency is double the half-wave value: 8/π² ≈ 81.2%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b579b9c-e8f5-4d73-84db-dbcfebb91783",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "In the breakdown region of a Zener diode, which quantity stays nearly constant while the current changes widely?",
+  "formula": "",
+  "options": [
+   "Depletion width increase",
+   "Current",
+   "Power dissipated",
+   "Voltage across it"
+  ],
+  "answer": 3,
+  "explain": "The reverse I–V curve is almost vertical, so V ≈ V_Z for a wide range of current.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4ee2570-edf3-4aec-abb5-d8ff9cc640cf",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "Zener breakdown (V_Z below about 5 V) is caused by:",
+  "formula": "",
+  "options": [
+   "Collisional carrier multiplication",
+   "Minority carrier injection",
+   "Field-induced rupture of covalent bonds",
+   "Thermal ionisation of dopants"
+  ],
+  "answer": 2,
+  "explain": "A strong field (~10⁶ V/m) pulls electrons out of covalent bonds (tunnelling).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e8695b00-4042-4df7-9a77-959594abf9b1",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "Which breakdown mechanism dominates in diodes with V_Z above about 6 V?",
+  "formula": "",
+  "options": [
+   "Field emission only",
+   "Thermal runaway only",
+   "Punch-through of base",
+   "Avalanche breakdown"
+  ],
+  "answer": 3,
+  "explain": "At higher V_Z, carriers gain energy, collide and multiply: avalanche.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cbd0a098-7daa-4113-ab4b-accf5bda2290",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "For a Zener diode with low V_Z (below ~5 V), the temperature coefficient of V_Z is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Infinite",
+   "Zero exactly",
+   "Positive"
+  ],
+  "answer": 0,
+  "explain": "The field (Zener) mechanism gives a negative coefficient; avalanche gives a positive one.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c5e8314b-7ceb-43fe-b5da-a0f1d235ad37",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "The dynamic resistance r_z = ΔV/ΔI of a Zener in breakdown is:",
+  "formula": "r_z = ΔV/ΔI",
+  "options": [
+   "Very large",
+   "Equal to forward resistance",
+   "Infinite",
+   "Very small"
+  ],
+  "answer": 3,
+  "explain": "A large ΔI produces a tiny ΔV, as the curve is almost vertical.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a42471df-b849-4338-996d-21a3209dc9d0",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "In a Zener regulator, if the load is removed (open circuit), the Zener current:",
+  "formula": "",
+  "options": [
+   "Becomes negative",
+   "Becomes zero",
+   "Equals the full series current",
+   "Is halved"
+  ],
+  "answer": 2,
+  "explain": "With I_L = 0, I = I_Z, so all the current flows through the Zener.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "27029051-b7f6-4dc4-b746-262d8aeb6a01",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "For reverse voltage below V_Z, the reverse current in a Zener diode is:",
+  "formula": "",
+  "options": [
+   "Large and increasing",
+   "Equal to forward current",
+   "Very small, nearly constant",
+   "Exactly zero"
+  ],
+  "answer": 2,
+  "explain": "Only a small minority-carrier reverse saturation current flows before breakdown.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c78b1daf-3043-4f82-85be-cdd0b94c33e2",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "Why does a Zener diode break down at a low reverse voltage?",
+  "formula": "",
+  "options": [
+   "Its band gap is zero",
+   "It has no space charge",
+   "Its depletion layer is very wide",
+   "Its depletion layer is very thin"
+  ],
+  "answer": 3,
+  "explain": "A thin depletion layer gives a strong field (~10⁶ V/m) even at small reverse voltage.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5ba39682-a41b-4f9e-9edb-9cfc144ac590",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "The ideal Zener I–V curve in breakdown appears as:",
+  "formula": "",
+  "options": [
+   "A horizontal line in the 3rd quadrant",
+   "A vertical line in the 3rd quadrant",
+   "A horizontal line in the 1st quadrant",
+   "A straight line through the origin"
+  ],
+  "answer": 1,
+  "explain": "At V = −V_Z the current changes sharply (vertical line) in the reverse (3rd quadrant) region.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fcf151cc-bf3e-44d2-a529-6f610b213a9f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "The series resistor in a Zener regulator mainly serves to:",
+  "formula": "",
+  "options": [
+   "Convert ac to dc",
+   "Increase V_Z",
+   "Limit current through the Zener",
+   "Reduce the load resistance"
+  ],
+  "answer": 2,
+  "explain": "R_s drops the excess voltage and keeps I_Z below the maximum safe value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "08e3f4c5-f2aa-46bb-8939-a1d670603171",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Zener diode I-V characteristics",
+  "prompt": "A Zener diode is not damaged in breakdown provided that:",
+  "formula": "",
+  "options": [
+   "Voltage exceeds 2V_Z",
+   "Power dissipated stays within its rating",
+   "It is forward biased",
+   "The temperature is made zero"
+  ],
+  "answer": 1,
+  "explain": "Breakdown is non-destructive while current is limited so P = V_Z·I stays within the rated power.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77e98e91-09c4-411b-93bb-a50cf07317c0",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "Process by which an LED converts electrical energy directly into light is called",
+  "formula": "",
+  "options": [
+   "Photoconduction",
+   "Electroluminescence",
+   "Photoelectric emission",
+   "Thermionic emission"
+  ],
+  "answer": 1,
+  "explain": "Carrier recombination under injection by current gives light: electroluminescence.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b43491f-51a8-4f69-9200-f7268df42e55",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "Light in an LED is produced mainly by which process at the junction?",
+  "formula": "",
+  "options": [
+   "Thermal ionisation of dopants",
+   "Avalanche multiplication",
+   "Zener tunnelling",
+   "Electron–hole recombination"
+  ],
+  "answer": 3,
+  "explain": "Electrons recombine with holes and release the energy as photons.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "29eb900f-edec-45e4-a53c-7eb7f52d2ab2",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "The colour of light emitted by an LED is decided mainly by its",
+  "formula": "E = hν ≈ E_g",
+  "options": [
+   "Band gap of semiconductor",
+   "Forward current",
+   "Size of the dome",
+   "Applied voltage"
+  ],
+  "answer": 0,
+  "explain": "Photon energy hν ≈ E_g, so the band gap fixes the wavelength/colour.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d6f056d1-eb91-426d-befa-801fd9f2763a",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "An LED is typically a ___ p-n junction.",
+  "formula": "",
+  "options": [
+   "Intrinsic only",
+   "Lightly doped",
+   "Heavily doped",
+   "Doped only on n side"
+  ],
+  "answer": 2,
+  "explain": "A heavily doped p-n junction gives enough carriers for efficient recombination emission.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a91327f7-16fc-4188-8c58-e9349f7dda6f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "Typical reverse breakdown voltage of an LED is",
+  "formula": "",
+  "options": [
+   "About 50 V",
+   "About 5 V",
+   "About 500 V",
+   "About 0.5 mV"
+  ],
+  "answer": 1,
+  "explain": "LEDs have low reverse breakdown (~5 V); large reverse voltage must be avoided.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2e0195f8-ebad-461a-92cf-ec5668601181",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "For an LED above threshold voltage, light intensity varies with forward current as",
+  "formula": "",
+  "options": [
+   "Decreases with current",
+   "Maximum at zero current",
+   "Independent of current",
+   "Increases with current"
+  ],
+  "answer": 3,
+  "explain": "Higher forward current injects more carriers, giving more recombination and intensity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "322899eb-97d3-4a20-9718-9b1c5683ab58",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "A semiconductor must have band gap of roughly at least ___ to give a visible-light LED.",
+  "formula": "",
+  "options": [
+   "0.7 eV",
+   "4.5 eV",
+   "1.8 eV",
+   "1.1 eV"
+  ],
+  "answer": 2,
+  "explain": "Visible photons span about 1.8 eV (red) to 3.1 eV (violet).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "242e220a-572d-46b2-ab20-1626f5937dce",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "A GaAs LED (E_g ≈ 1.4 eV) emits mostly",
+  "formula": "",
+  "options": [
+   "Blue light",
+   "Red visible light",
+   "Ultraviolet",
+   "Infrared"
+  ],
+  "answer": 3,
+  "explain": "1.4 eV corresponds to about 890 nm, which is infrared.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9054f7e6-3d1d-452b-8831-e4eb46cb8469",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "Light from an LED is best described as",
+  "formula": "",
+  "options": [
+   "Coherent and monochromatic",
+   "Incoherent with narrow spectral width",
+   "Polarised and coherent",
+   "White with a broad spectrum"
+  ],
+  "answer": 1,
+  "explain": "Spontaneous emission is incoherent; the spectrum is narrow, near E_g.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8cb154b3-83f4-4c1b-aa23-8de56401c8d9",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "LED: working & characteristics",
+  "prompt": "Compared with a red LED, a blue LED has",
+  "formula": "",
+  "options": [
+   "Same threshold voltage",
+   "Lower threshold voltage",
+   "No threshold voltage",
+   "Higher threshold voltage"
+  ],
+  "answer": 3,
+  "explain": "Blue photons have more energy, so a larger band gap and higher threshold voltage.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eb53de6b-fe1d-459e-828a-278893c8d745",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "In which quadrant of the I–V plot is the photodiode's working characteristic mainly drawn?",
+  "formula": "",
+  "options": [
+   "Third quadrant",
+   "Fourth quadrant",
+   "First quadrant",
+   "Second quadrant"
+  ],
+  "answer": 0,
+  "explain": "Reverse voltage and reverse current are both negative, so the working region is the third quadrant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "18c93ea5-37f7-4e17-a3dc-2ae03435afd4",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "The small reverse current of a photodiode with no illumination is called:",
+  "formula": "",
+  "options": [
+   "Dark current",
+   "Saturation photocurrent",
+   "Zener current",
+   "Leakage emission"
+  ],
+  "answer": 0,
+  "explain": "With no light, only thermally generated minority carriers contribute to the reverse current, called dark current.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b4d18bc5-db09-4255-8b19-4d3bfbee728d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "Photogenerated electron-hole pairs in a photodiode are separated mainly by:",
+  "formula": "",
+  "options": [
+   "The incident photon's momentum",
+   "The external magnetic field",
+   "Thermal diffusion only",
+   "The junction's built-in electric field"
+  ],
+  "answer": 3,
+  "explain": "The field in the depletion region sweeps electrons to the n-side and holes to the p-side.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ccb76a5f-5105-4a9a-aefb-98c810f200e0",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "At fixed intensity, the reverse photocurrent of a photodiode on increasing reverse voltage:",
+  "formula": "",
+  "options": [
+   "Increases linearly without limit",
+   "Decreases exponentially",
+   "Stays nearly constant",
+   "Reverses direction"
+  ],
+  "answer": 2,
+  "explain": "The photocurrent is set by the carriers generated by light, so it is nearly independent of reverse voltage.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e070df8c-7712-4157-99a6-6550fe476281",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "A photodiode with E_g = 2 eV responds to a photon of energy:",
+  "formula": "",
+  "options": [
+   "1.8 eV",
+   "0.5 eV",
+   "2.5 eV",
+   "1.2 eV"
+  ],
+  "answer": 2,
+  "explain": "Only photons with energy ≥ E_g (2 eV) create electron-hole pairs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bcee6d87-0e90-4780-94b4-4c265a3a50e9",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "A photodiode's threshold wavelength is given by:",
+  "formula": "λ = hc/E_g ≈ 1240/E_g(eV) nm",
+  "options": [
+   "λ = hc/E_g",
+   "λ = E_g/hc",
+   "λ = hE_g/c",
+   "λ = c/(hE_g)"
+  ],
+  "answer": 0,
+  "explain": "A photon creates a pair only if λ ≤ hc/E_g, so the threshold wavelength is hc/E_g.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6843cf6b-9ea3-4f7f-996e-b043a01c09cd",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "Compared with an LED, the energy conversion in a photodiode is:",
+  "formula": "",
+  "options": [
+   "Heat → light",
+   "Electrical → light",
+   "Light → heat only",
+   "Light → electrical signal"
+  ],
+  "answer": 3,
+  "explain": "The photodiode is an optical sensor producing current from light, the reverse of an LED.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9cf9ac56-c124-4a14-b1da-58ee93d04453",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "If the photon energy is less than the band gap, the reverse current of a photodiode:",
+  "formula": "",
+  "options": [
+   "Rises sharply",
+   "Reverses direction",
+   "Stays at the dark-current value",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Photons with hν < E_g create no extra pairs, so only the dark current flows.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c86701bf-1eb2-4950-917c-f6cbd9ef4227",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "For a photodiode, the photocurrent flows inside the device from:",
+  "formula": "",
+  "options": [
+   "n-side to p-side",
+   "p-side to n-side",
+   "Along the junction only",
+   "Nowhere, it is zero"
+  ],
+  "answer": 0,
+  "explain": "The photocurrent has the same direction as the reverse current, which is n to p inside the diode.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c2742885-09d0-4af8-8c64-e36c9b4b410f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "Photodiode works in reverse bias because light causes a large fractional change in which current?",
+  "formula": "",
+  "options": [
+   "Diffusion current of majority carriers",
+   "Minority-carrier current",
+   "Majority-carrier current",
+   "Forward recombination current"
+  ],
+  "answer": 1,
+  "explain": "Minority carriers are few, so the same photogeneration changes them by a large fraction; majority carriers barely change.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "98e8d271-8d53-41d9-9a07-68cb9d9d959c",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Photodiode: working & I-V curve",
+  "prompt": "Total reverse current of an illuminated photodiode equals:",
+  "formula": "I = I_dark + I_photo",
+  "options": [
+   "Dark current minus photocurrent",
+   "Product of dark and photocurrent",
+   "Dark current plus photocurrent",
+   "Photocurrent alone"
+  ],
+  "answer": 2,
+  "explain": "Light adds photocurrent on top of the thermally generated reverse (dark) current.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fa497ff4-6f8f-447c-adfd-931f9db33c3b",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Solar cell: I-V curve & working",
+  "prompt": "For a solar cell, the short-circuit current Isc varies with light intensity as:",
+  "formula": "",
+  "options": [
+   "Isc independent of intensity",
+   "Isc ∝ intensity",
+   "Isc ∝ (intensity)²",
+   "Isc ∝ 1/intensity"
+  ],
+  "answer": 1,
+  "explain": "Photocurrent is proportional to the number of photons absorbed, so Isc ∝ intensity (Voc rises only logarithmically).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a42c5f44-3799-4500-bdd3-901e0e58950a",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Solar cell: I-V curve & working",
+  "prompt": "Fill factor of a solar cell is defined as:",
+  "formula": "FF = (Vm·Im)/(Voc·Isc)",
+  "options": [
+   "Isc / Im",
+   "Voc / Vm",
+   "Vm·Im / (Voc·Isc)",
+   "Voc·Isc / (Vm·Im)"
+  ],
+  "answer": 2,
+  "explain": "Fill factor is the ratio of maximum power to the product Voc·Isc, so it is always less than 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "35efd71f-4b5a-49df-83ef-21e891dc6af7",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Solar cell: I-V curve & working",
+  "prompt": "Open-circuit voltage Voc of a solar cell is measured when the external load resistance is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to the internal resistance",
+   "Infinite",
+   "Equal to the load for maximum power"
+  ],
+  "answer": 2,
+  "explain": "Voc is the voltage at I = 0, which corresponds to an infinite (open) external resistance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e0a9eb7e-520f-43ac-a664-c1c22660e9fe",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Solar cell: I-V curve & working",
+  "prompt": "With increasing light intensity, the open-circuit voltage Voc of a solar cell varies how?",
+  "formula": "Voc ∝ ln(1 + Isc/I₀)",
+  "options": [
+   "Decreases with intensity",
+   "Exactly constant",
+   "Logarithmically, rising slowly",
+   "Linearly with intensity"
+  ],
+  "answer": 2,
+  "explain": "Isc ∝ intensity, but Voc depends on ln(Isc), so it rises only slowly and tends to saturate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd47164b-bc69-45a6-909d-1b9b8e5e8c53",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Solar cell: I-V curve & working",
+  "prompt": "For a solar cell to generate emf, the incident photon energy must be:",
+  "formula": "hν ≥ E_g",
+  "options": [
+   "Equal to or greater than the band gap",
+   "Strictly less than the band gap",
+   "Equal to the work function of the metal contact",
+   "Greater than twice the band gap"
+  ],
+  "answer": 0,
+  "explain": "Photons with hν ≥ E_g create electron-hole pairs in the depletion region, which the junction field separates.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fe449d15-b7e5-42d0-bf8c-7adc0379394a",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "A NOT gate is also called a/an:",
+  "formula": "Y = ‾A",
+  "options": [
+   "Inverter",
+   "Amplifier",
+   "Buffer",
+   "Comparator"
+  ],
+  "answer": 0,
+  "explain": "A NOT gate has one input and inverts it, so it is called an inverter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3f435772-e61d-4d7b-b642-08b6f8d74e33",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "Which two gates are called universal gates?",
+  "formula": "",
+  "options": [
+   "AND and OR",
+   "OR and NOT",
+   "XOR and NOT",
+   "NAND and NOR"
+  ],
+  "answer": 3,
+  "explain": "NAND and NOR can each build AND, OR and NOT, so they are universal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cef01207-5c1e-469c-a300-2c30e6fd2c44",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "A NAND gate with both inputs joined together behaves as a:",
+  "formula": "",
+  "options": [
+   "NOR gate",
+   "OR gate",
+   "NOT gate",
+   "AND gate"
+  ],
+  "answer": 2,
+  "explain": "‾(A·A) = ‾A, which is a NOT gate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b7cc69f-2615-4a08-a487-717f17a0c66d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "A NOR gate with both inputs joined together acts as a:",
+  "formula": "",
+  "options": [
+   "XOR gate",
+   "OR gate",
+   "NOT gate",
+   "AND gate"
+  ],
+  "answer": 2,
+  "explain": "‾(A + A) = ‾A, which is a NOT gate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9f24ba52-a62f-4bfc-9f5a-bf5f1ad400df",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "A 3-input gate has how many rows in its truth table?",
+  "formula": "2ⁿ rows",
+  "options": [
+   "9",
+   "8",
+   "3",
+   "6"
+  ],
+  "answer": 1,
+  "explain": "n inputs give 2ⁿ combinations, so 2³ = 8 rows.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dc557657-1d54-4652-9f8d-ae06e2a7a94e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "For a 2-input OR gate, how many of the 4 input combinations give output 1?",
+  "formula": "",
+  "options": [
+   "1",
+   "4",
+   "2",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "Only 00 gives 0, so the other three combinations give 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5371afa1-db6f-4691-ad93-eae449c46933",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "The small circle (bubble) at a gate's output in its symbol indicates:",
+  "formula": "",
+  "options": [
+   "Amplification",
+   "Feedback",
+   "Inversion",
+   "Grounding"
+  ],
+  "answer": 2,
+  "explain": "A bubble denotes negation, as in NOT, NAND and NOR.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87d2df7f-5bf7-4295-a1ba-b3d0c0b2cd1d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "In positive logic, logic state 1 is represented by:",
+  "formula": "",
+  "options": [
+   "The lower voltage level",
+   "The higher voltage level",
+   "Zero current always",
+   "Negative voltage only"
+  ],
+  "answer": 1,
+  "explain": "Positive logic assigns 1 to the high voltage and 0 to the low voltage.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a9a0472b-0311-4e20-83da-af582813b840",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "A NOR gate gives output 1 only when its inputs are:",
+  "formula": "Y = ‾(A + B)",
+  "options": [
+   "All 1",
+   "Any one input is 1",
+   "All 0",
+   "Different from each other"
+  ],
+  "answer": 2,
+  "explain": "NOR = OR followed by NOT; the OR output is 0 only when all inputs are 0, so NOR gives 1 only then.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02b01999-b3f1-4a35-9102-f4962e41b7ca",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "Minimum number of NAND gates needed to build a 2-input OR gate:",
+  "formula": "A + B = ‾(‾A · ‾B)",
+  "options": [
+   "3",
+   "2",
+   "4",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Two NANDs act as NOTs on A and B, and a third NAND combines them: ‾(‾A·‾B) = A + B.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "60efeb1e-0991-407a-9a7b-0d6c8ef009c8",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "If one input of a NAND gate is held at 0, the output is:",
+  "formula": "",
+  "options": [
+   "Always 1",
+   "Equal to the other input",
+   "Always 0",
+   "Complement of the other input"
+  ],
+  "answer": 0,
+  "explain": "A·0 = 0, and inverting gives 1 regardless of the other input.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "122c117b-a8fe-4857-b02a-d1ed56ad94a6",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "If one input of a NOR gate is held at 1, the output is:",
+  "formula": "",
+  "options": [
+   "Equal to the other input",
+   "Complement of the other input",
+   "Always 1",
+   "Always 0"
+  ],
+  "answer": 3,
+  "explain": "A + 1 = 1, and inverting gives 0 regardless of the other input.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6e15b5ec-fab8-4b89-bd72-9eb6b08236d5",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Logic gates: AND, OR, NOT truth tables",
+  "prompt": "Minimum number of NAND gates needed to build a 2-input AND gate:",
+  "formula": "",
+  "options": [
+   "2",
+   "1",
+   "4",
+   "3"
+  ],
+  "answer": 0,
+  "explain": "The first NAND gives ‾(AB). The second, wired as a NOT, inverts it to give AB.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "690a5ea3-2802-48b7-989d-bab1928746de",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "A NAND gate followed by a NOT gate is equivalent to which gate?",
+  "formula": "((A·B)')' = A·B",
+  "options": [
+   "NOR",
+   "XOR",
+   "OR",
+   "AND"
+  ],
+  "answer": 3,
+  "explain": "Double complement cancels, leaving A·B, which is AND.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bccbbfd6-7cce-4fce-871d-aeaa7033a2f6",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "A NOR gate followed by a NOT gate is equivalent to which gate?",
+  "formula": "((A+B)')' = A + B",
+  "options": [
+   "AND",
+   "XNOR",
+   "OR",
+   "NAND"
+  ],
+  "answer": 2,
+  "explain": "Double complement cancels, leaving A+B, which is OR.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3e0a589-a0b0-4f23-9112-085ef2123e39",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Minimum number of NOR gates needed to construct an AND gate is:",
+  "formula": "A·B = (Ā + B̄)′",
+  "options": [
+   "2",
+   "1",
+   "3",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Two NOR gates used as NOT give Ā and B̄; a third NOR combines them to give A·B.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8feb61bb-b528-49ca-ac8f-e36e7bff0e1e",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "A 2-input NAND gate has one input permanently held at 1. It then behaves as a:",
+  "formula": "Y = (A·1)′ = Ā",
+  "options": [
+   "NOT gate",
+   "Buffer (Y = A)",
+   "OR gate",
+   "AND gate"
+  ],
+  "answer": 0,
+  "explain": "Y = (A·1)′ = Ā, so the gate acts as an inverter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0cf08f09-950a-4340-b7fc-fd8b5952b772",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Extrinsic semiconductors: n-type & p-type",
+  "prompt": "Doping an intrinsic semiconductor with a donor impurity does what to its conductivity at room temperature?",
+  "formula": "",
+  "options": [
+   "Increases it greatly",
+   "Makes it zero",
+   "Decreases it slightly",
+   "Leaves it unchanged"
+  ],
+  "answer": 0,
+  "explain": "Dopants add many extra charge carriers, so conductivity rises greatly compared with the intrinsic value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ab86d45-beed-47d9-9681-42bc3c1313ef",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "At a very high temperature, a doped semiconductor tends to behave as:",
+  "formula": "",
+  "options": [
+   "An insulator",
+   "A superconductor",
+   "A metal",
+   "An intrinsic semiconductor"
+  ],
+  "answer": 3,
+  "explain": "nᵢ becomes much larger than the dopant density, so nₑ ≈ nₕ ≈ nᵢ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2ec4a07f-9e22-4fc7-ba3e-6359fa340a40",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "At fixed temperature, doping a pure semiconductor changes its intrinsic concentration nᵢ to:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "No change",
+   "A larger value",
+   "A smaller value"
+  ],
+  "answer": 1,
+  "explain": "nᵢ depends only on T and E_g, not on the doping.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cafafc44-5fec-41a3-afbf-6905fcb911b6",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "In a doped semiconductor, the minority carriers mainly arise from:",
+  "formula": "",
+  "options": [
+   "Ohmic contacts",
+   "Ionisation of impurity atoms",
+   "Doping with the opposite impurity",
+   "Thermal generation of electron–hole pairs"
+  ],
+  "answer": 3,
+  "explain": "Impurities supply the majority carriers. Minority carriers come from thermally generated pairs.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "03c7218d-e6b5-403f-b3d9-00973174201d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "The reverse saturation current of a diode rises sharply with T mainly because:",
+  "formula": "",
+  "options": [
+   "Barrier height drops to zero",
+   "Doping increases with T",
+   "Majority density changes greatly",
+   "Minority density ∝ nᵢ² rises"
+  ],
+  "answer": 3,
+  "explain": "The reverse current is carried by minority carriers, with density nᵢ²/N, which rises rapidly with T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "395d2f15-0dbe-431a-928d-b7cac8c38bd8",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "At the same T, a Ge diode has a larger reverse saturation current than a Si diode because Ge has:",
+  "formula": "",
+  "options": [
+   "Larger nᵢ",
+   "Larger band gap",
+   "Fewer majority carriers",
+   "Higher melting point"
+  ],
+  "answer": 0,
+  "explain": "Ge has a smaller E_g, so a larger nᵢ and more minority carriers (∝ nᵢ²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56232970-dce3-47c8-b6be-64c0c1438459",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "In a pure semiconductor nₑ = nₕ because:",
+  "formula": "",
+  "options": [
+   "Fermi level is at the band edge",
+   "Donors equal acceptors",
+   "Holes are heavier",
+   "Each broken bond gives one electron and one hole"
+  ],
+  "answer": 3,
+  "explain": "Thermal excitation creates electron–hole pairs, so nₑ = nₕ = nᵢ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da322646-796c-4080-a939-3ac2e9b534b7",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "At room temperature, the majority electrons in n-type Si come mostly from:",
+  "formula": "",
+  "options": [
+   "Broken Si–Si bonds",
+   "Recombination",
+   "Surface states",
+   "Ionised donor atoms"
+  ],
+  "answer": 3,
+  "explain": "Donor levels lie very close to the conduction band and are almost fully ionised, so nₑ ≈ N_D.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f808deaa-3697-43dd-9597-8607a8287d2c",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "The region between the top of the valence band and the bottom of the conduction band is called:",
+  "formula": "Eg = Ec − Ev",
+  "options": [
+   "Donor band",
+   "Fermi band",
+   "Forbidden energy gap",
+   "Allowed band"
+  ],
+  "answer": 2,
+  "explain": "No electron states exist there; its width is the energy gap Eg = Ec − Ev.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bcb81c35-d2bc-4daf-9c13-4a5cf09f7776",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "In the extrinsic range, as T rises moderately, majority carrier density in n-type Si:",
+  "formula": "",
+  "options": [
+   "Falls exponentially",
+   "Stays nearly constant ≈ N_D",
+   "Rises as T^{3/2}e^{−E_g/2kT}",
+   "Falls as 1/T"
+  ],
+  "answer": 1,
+  "explain": "All donors are already ionised, so nₑ ≈ N_D; only the minority nₕ = nᵢ²/N_D rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cb0c660c-6b95-4827-9c09-0824cff2532d",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "Room-temperature resistivity of semiconductors lies roughly in the range (Ω m):",
+  "formula": "",
+  "options": [
+   "10¹¹ to 10¹⁹",
+   "10²⁰ to 10²⁵",
+   "10⁻⁸ to 10⁻⁶",
+   "10⁻⁵ to 10⁶"
+  ],
+  "answer": 3,
+  "explain": "Metals ~10⁻⁸–10⁻² Ω m, semiconductors ~10⁻⁵–10⁶ Ω m, insulators ~10¹¹–10¹⁹ Ω m.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd719974-c33f-4aad-b2cf-e64a9c1a9807",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "In a crystal of N atoms, each single atomic energy level splits into how many closely spaced levels?",
+  "formula": "",
+  "options": [
+   "N/2",
+   "2N",
+   "N²",
+   "N"
+  ],
+  "answer": 3,
+  "explain": "N interacting atoms split each atomic level into N levels, which together form a band.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ab57fafe-8d50-427d-89e8-ea7e2f58aadc",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Energy bands: conductors, insulators, semis",
+  "prompt": "Which of the following is a compound semiconductor?",
+  "formula": "",
+  "options": [
+   "Gallium arsenide",
+   "Carbon (diamond)",
+   "Silicon",
+   "Germanium"
+  ],
+  "answer": 0,
+  "explain": "Si and Ge are elemental semiconductors; GaAs (also CdS, InP) are compound semiconductors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3df5e0e4-309f-4439-9092-82a90ffbe49f",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "Temperature dependence of intrinsic carrier density has the exponential factor:",
+  "formula": "nᵢ ∝ T^{3/2} e^{−E_g/2kT}",
+  "options": [
+   "e^{−E_g/kT}",
+   "e^{−E_g/2kT}",
+   "e^{−2E_g/kT}",
+   "e^{−E_g/4kT}"
+  ],
+  "answer": 1,
+  "explain": "Fermi level sits mid-gap, so each carrier needs E_g/2; nᵢ² ∝ e^{−E_g/kT}, hence nᵢ ∝ e^{−E_g/2kT}.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ebb3b1b-320a-4347-aef8-c7371d7eb953",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Intrinsic semiconductors & carrier density",
+  "prompt": "In intrinsic Si or Ge, the mobility of electrons μₑ compared with that of holes μₕ is:",
+  "formula": "μₑ > μₕ",
+  "options": [
+   "μₑ is greater than μₕ",
+   "μₑ is less than μₕ",
+   "μₑ equals μₕ",
+   "μₕ is zero at 300 K"
+  ],
+  "answer": 0,
+  "explain": "Electrons move freely in the conduction band; holes move by slower hopping in the valence band, so μₑ > μₕ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87fd6626-b0be-4874-aff9-387fa740fe92",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "Mass action law n_e·n_h = n_i²",
+  "prompt": "At equilibrium the Fermi level E_F lies above the intrinsic level E_i. The carrier densities satisfy:",
+  "formula": "nₑ = nᵢ e^{(E_F − E_i)/kT}",
+  "options": [
+   "nₑ > nᵢ > nₕ",
+   "nₑ > nᵢ and nₕ > nᵢ",
+   "nₕ > nᵢ > nₑ",
+   "nₑ = nₕ = nᵢ"
+  ],
+  "answer": 0,
+  "explain": "E_F above E_i gives nₑ > nᵢ, and nₕ = nᵢ²/nₑ < nᵢ, so the sample is n-type.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e068103e-8649-499f-a139-a08597960730",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "Minimum number of NAND gates needed to build an XOR gate is:",
+  "formula": "Y = AB̅ + A̅B",
+  "options": [
+   "4",
+   "3",
+   "6",
+   "5"
+  ],
+  "answer": 0,
+  "explain": "The standard XOR circuit uses 4 NAND gates, with the first NAND output feeding the other three.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "99d55902-f9d8-46f1-986d-2403dc99a893",
+  "subject": "Physics",
+  "chapter": "Semiconductors",
+  "topic": "NAND, NOR & gate combinations",
+  "prompt": "A and B are each inverted, then fed to a NAND gate. The overall gate is:",
+  "formula": "Y = (Ā·B̄)' = A + B",
+  "options": [
+   "XOR",
+   "AND",
+   "OR",
+   "NOR"
+  ],
+  "answer": 2,
+  "explain": "By De Morgan, (Ā·B̄)' = A + B, so the circuit is an OR gate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

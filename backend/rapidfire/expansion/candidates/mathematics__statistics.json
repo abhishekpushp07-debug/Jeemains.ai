@@ -1,0 +1,3249 @@
+[
+ {
+  "prompt": "Each xᵢ is replaced by axᵢ + b. The new mean is?",
+  "formula": "ȳ = a·x̄ + b",
+  "options": [
+   "a·x̄ + b",
+   "a·x̄ + a·b",
+   "x̄ + b",
+   "a(x̄ + b)/2"
+  ],
+  "answer": 0,
+  "explain": "Mean is linear: scaling by a and shifting by b both carry through to the mean.",
+  "kind": "result",
+  "id": "bc61264b-ae85-4f8e-8e35-fe0bc5f19007",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Two groups have sizes n₁, n₂ and means x̄₁, x̄₂. The combined mean is?",
+  "formula": "x̄ = (n₁x̄₁ + n₂x̄₂)/(n₁ + n₂)",
+  "options": [
+   "(x̄₁ + x̄₂)/2",
+   "(n₁x̄₁ + n₂x̄₂)/(n₁ + n₂)",
+   "(n₁x̄₂ + n₂x̄₁)/(n₁ + n₂)",
+   "(n₁x̄₁ + n₂x̄₂)/2"
+  ],
+  "answer": 1,
+  "explain": "The combined mean is the size-weighted mean of the group means.",
+  "kind": "formula",
+  "id": "7000d65b-b391-4189-b662-e7062c2b04c4",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "For a class interval in grouped data, the value xᵢ used in computing the mean is?",
+  "formula": "xᵢ = (lower limit + upper limit)/2",
+  "options": [
+   "Lower class limit",
+   "Class width",
+   "Upper class limit",
+   "Class mark (midpoint)"
+  ],
+  "answer": 3,
+  "explain": "Each class is represented by its class mark, the midpoint of its limits.",
+  "kind": "fact",
+  "id": "97cfb9a2-4b9b-49af-b2f3-d60e00bc6ad7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of the first n odd natural numbers 1, 3, 5, … is?",
+  "formula": "Σ(2k−1) = n²",
+  "options": [
+   "n",
+   "n + 1",
+   "n²",
+   "(n + 1)/2"
+  ],
+  "answer": 0,
+  "explain": "The sum of the first n odd numbers is n², so the mean is n²/n = n.",
+  "kind": "result",
+  "id": "ddaf1066-4ca7-4328-89e0-009a590c89f4",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of the first n even natural numbers 2, 4, …, 2n is?",
+  "formula": "2·n(n+1)/2 ÷ n",
+  "options": [
+   "n",
+   "n + 1",
+   "2n + 1",
+   "n(n + 1)"
+  ],
+  "answer": 1,
+  "explain": "The sum is n(n+1), so the mean is n + 1.",
+  "kind": "result",
+  "id": "d28a3423-7713-4c93-b825-c6daca635037",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of the squares of the first n natural numbers is?",
+  "formula": "Σk²/n",
+  "options": [
+   "n(n + 1)/2",
+   "(n + 1)²/4",
+   "(n + 1)(2n + 1)/6",
+   "n(n + 1)(2n + 1)/6"
+  ],
+  "answer": 2,
+  "explain": "Σk² = n(n+1)(2n+1)/6; dividing by n gives (n+1)(2n+1)/6.",
+  "kind": "result",
+  "id": "10d90cc0-8d0c-4ef0-bb92-f1ce18e376db",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of the cubes of the first n natural numbers is?",
+  "formula": "Σk³/n",
+  "options": [
+   "n(n + 1)²/4",
+   "n²(n + 1)²/4",
+   "(n + 1)²/4",
+   "n(n + 1)/2"
+  ],
+  "answer": 0,
+  "explain": "Σk³ = n²(n+1)²/4; dividing by n gives n(n+1)²/4.",
+  "kind": "result",
+  "id": "b4306006-8674-4ff7-9540-7874b2a030fa",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Every frequency in a distribution is multiplied by the same nonzero constant k. The mean?",
+  "formula": "Σkfx/Σkf = Σfx/Σf",
+  "options": [
+   "Becomes k times larger",
+   "Becomes k times smaller",
+   "Is unchanged",
+   "Increases by k"
+  ],
+  "answer": 2,
+  "explain": "k cancels in the ratio Σfx/Σf, so the mean is unchanged.",
+  "kind": "concept",
+  "id": "26d0303d-db59-4482-abe5-b22065b5bb47",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Σ(xᵢ − a)² is least when a equals which quantity?",
+  "formula": "",
+  "options": [
+   "Median",
+   "Arithmetic mean",
+   "Mode",
+   "Mid-range"
+  ],
+  "answer": 1,
+  "explain": "The sum of squared deviations is minimised about the mean (minimum-property of the mean).",
+  "kind": "concept",
+  "id": "867b22b0-5a2f-40cc-b80f-73bbb29c672b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "A new observation equal to the existing mean is added to the data. The mean?",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Becomes zero",
+   "Remains unchanged"
+  ],
+  "answer": 3,
+  "explain": "New sum = n·x̄ + x̄ = (n+1)x̄, so the mean stays x̄.",
+  "kind": "concept",
+  "id": "66df2a29-d733-4686-a526-fc01d88d2138",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of the n terms of an AP a, a+d, …, with last term l, is?",
+  "formula": "(a + l)/2",
+  "options": [
+   "(a + l)/2",
+   "(a + l)/n",
+   "n(a + l)/2",
+   "a + nd/2"
+  ],
+  "answer": 0,
+  "explain": "Terms are symmetric about the middle, so mean = (first + last)/2.",
+  "kind": "result",
+  "id": "3cab95b1-f0a0-4bc3-8d00-cf35f80f370e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Values 1, 2, …, n occur with frequencies 1, 2, …, n respectively. Their mean is?",
+  "formula": "x̄ = Σk² / Σk",
+  "options": [
+   "(n + 1)/2",
+   "(2n + 1)/3",
+   "(n + 1)(2n + 1)/6",
+   "n(n + 1)/2"
+  ],
+  "answer": 1,
+  "explain": "Σk² = n(n+1)(2n+1)/6 and Σk = n(n+1)/2, so the ratio is (2n+1)/3.",
+  "kind": "result",
+  "id": "7489442b-fb96-4565-b053-6df494c4ba57",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "An observation greater than the mean is removed from a data set (others remain). The new mean is?",
+  "formula": "",
+  "options": [
+   "Increased",
+   "Decreased",
+   "Unchanged",
+   "Equal to the removed value"
+  ],
+  "answer": 1,
+  "explain": "Removing a value above the mean pulls the average down; the mean falls.",
+  "kind": "concept",
+  "id": "b42becae-a763-4a53-a9bc-af6bc7551bf9",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "The median is read from the x-coordinate of the point where which two curves meet?",
+  "formula": "",
+  "options": [
+   "Frequency polygon and histogram",
+   "Less-than and more-than ogives",
+   "Two less-than ogives",
+   "Ogive and the x-axis"
+  ],
+  "answer": 1,
+  "explain": "The less-than and more-than ogives intersect at the median.",
+  "kind": "graph",
+  "id": "ccbf1cba-9195-4012-a7e0-f75d616cb535",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "The sum of absolute deviations Σ|xᵢ − a| is least when a equals the",
+  "formula": "",
+  "options": [
+   "Mean",
+   "Mode",
+   "Median",
+   "Midrange"
+  ],
+  "answer": 2,
+  "explain": "Mean deviation is minimum about the median.",
+  "kind": "result",
+  "id": "cdbe5dc5-595c-48a8-8d34-05bfa2972c2a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Median of a distribution equals which quartile, decile and percentile?",
+  "formula": "",
+  "options": [
+   "Q₂, D₅, P₅₀",
+   "Q₁, D₅, P₅₀",
+   "Q₂, D₄, P₄₀",
+   "Q₃, D₅, P₅₀"
+  ],
+  "answer": 0,
+  "explain": "Median = Q₂ = D₅ = P₅₀ (it halves the data).",
+  "kind": "fact",
+  "id": "bd313ea4-e878-456c-8c47-c8c042025be1",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Classes 10–19, 20–29, 30–39 are inclusive. Lower boundary of class 20–29 for median formula is",
+  "formula": "",
+  "options": [
+   "20",
+   "20.5",
+   "19",
+   "19.5"
+  ],
+  "answer": 3,
+  "explain": "Make classes continuous: subtract 0.5, so 19.5–29.5.",
+  "kind": "concept",
+  "id": "eaf33e89-6bb2-4578-bee9-192c15d8e6ed",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "In the grouped median formula, 'cf' denotes the cumulative frequency of the",
+  "formula": "l + [(n/2 − cf)/f]·h",
+  "options": [
+   "Median class itself",
+   "Class preceding the median class",
+   "Class after the median class",
+   "Last class"
+  ],
+  "answer": 1,
+  "explain": "cf is the cumulative frequency of the class just before the median class.",
+  "kind": "concept",
+  "id": "72493f17-fd0d-40a4-ab14-8c6507585adc",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "For a positively skewed distribution, the correct order is",
+  "formula": "",
+  "options": [
+   "Mean > Median > Mode",
+   "Mode > Median > Mean",
+   "Median > Mean > Mode",
+   "Mean < Mode < Median"
+  ],
+  "answer": 0,
+  "explain": "Positive skew pulls the mean toward the tail: Mean > Median > Mode.",
+  "kind": "trend",
+  "id": "b6f1febf-e47a-46e3-8bbc-3354405bff84",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Median of the first 20 natural numbers is",
+  "formula": "",
+  "options": [
+   "10",
+   "10.5",
+   "11",
+   "9.5"
+  ],
+  "answer": 1,
+  "explain": "Average of 10th and 11th terms = 10.5, i.e. (n+1)/2.",
+  "kind": "result",
+  "id": "6d18063f-8f40-4b39-9743-25af2d23deba",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Empirical relation among mean, median and mode for a moderately skewed distribution is",
+  "formula": "",
+  "options": [
+   "Mode = 3 Median − 2 Mean",
+   "Mode = 2 Median − 3 Mean",
+   "Mode = 3 Mean − 2 Median",
+   "Mode = Mean + Median"
+  ],
+  "answer": 0,
+  "explain": "Empirical relation: Mode = 3 Median − 2 Mean (equivalently Mean − Mode = 3(Mean − Median)).",
+  "kind": "formula",
+  "id": "b8fcce10-b693-4dde-b019-986db6f0e2e3",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Empirical relation connecting mode, median and mean of a moderately skewed distribution?",
+  "formula": "Mode = 3 Median − 2 Mean",
+  "options": [
+   "Mode = 3 Mean − 2 Median",
+   "Mode = 3 Median − 2 Mean",
+   "Mode = 2 Median − 3 Mean",
+   "Mode = 2 Mean − 3 Median"
+  ],
+  "answer": 1,
+  "explain": "Standard empirical relation: Mode = 3 Median − 2 Mean.",
+  "kind": "formula",
+  "id": "eccb0dae-82f2-40a5-9cd2-b1bcd921300f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "In the grouped mode formula, if f₀ = f₂, the mode equals which value?",
+  "formula": "l + [(f₁−f₀)/(2f₁−f₀−f₂)]·h",
+  "options": [
+   "l",
+   "l + h",
+   "l + h/2",
+   "l + 2h"
+  ],
+  "answer": 2,
+  "explain": "f₀ = f₂ gives (f₁−f₀)/(2(f₁−f₀)) = ½, so mode = l + h/2, the class midpoint.",
+  "kind": "result",
+  "id": "354eae96-9b83-4994-b247-1adc06329f27",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "How many modes does the data 2, 3, 3, 5, 5, 7, 9 have?",
+  "formula": "",
+  "options": [
+   "One",
+   "Two",
+   "Three",
+   "None"
+  ],
+  "answer": 1,
+  "explain": "3 and 5 both occur twice, the highest frequency, so the data is bimodal.",
+  "kind": "concept",
+  "id": "5efa57cb-2229-42d8-91a6-34ea17f6cb52",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Which measure of central tendency can be found even for qualitative (non-numerical) data?",
+  "formula": "",
+  "options": [
+   "Mean",
+   "Median",
+   "Mode",
+   "Harmonic mean"
+  ],
+  "answer": 2,
+  "explain": "Mode only needs the most frequent category, so it works for qualitative data and ignores extreme values.",
+  "kind": "fact",
+  "id": "6cdbbc7e-acaf-443e-8f19-bedfa42ef11b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean deviation is least when deviations are taken about which measure?",
+  "formula": "",
+  "options": [
+   "Mean",
+   "Median",
+   "Mode",
+   "Midrange"
+  ],
+  "answer": 1,
+  "explain": "Σ|xᵢ−a| is minimum when a is the median.",
+  "kind": "fact",
+  "id": "6ea4f743-8d9a-4610-9ff6-ee1ae9af4ca2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "For any data set, the algebraic sum Σ(xᵢ − x̄) equals what?",
+  "formula": "Σ(xᵢ − x̄) = 0",
+  "options": [
+   "n",
+   "Σxᵢ",
+   "0",
+   "x̄"
+  ],
+  "answer": 2,
+  "explain": "Deviations about the mean cancel, so absolute values are used in MD.",
+  "kind": "fact",
+  "id": "21acd19e-cef9-4d3e-8808-56bb3121b055",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Every observation is increased by 7. What happens to the mean deviation about the mean?",
+  "formula": "",
+  "options": [
+   "Increases by 7",
+   "Unchanged",
+   "Multiplied by 7",
+   "Decreases by 7"
+  ],
+  "answer": 1,
+  "explain": "MD is independent of change of origin; deviations stay the same.",
+  "kind": "concept",
+  "id": "4adda091-0c61-43d3-b305-f59c7063caec",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Mean deviation about the mean of 1, 2, 3, …, n for even n is:",
+  "formula": "",
+  "options": [
+   "n/4",
+   "n/2",
+   "(n²−1)/4n",
+   "n²/4"
+  ],
+  "answer": 0,
+  "explain": "For even n the MD is n/4; for odd n it is (n²−1)/(4n).",
+  "kind": "result",
+  "id": "64755f45-2fba-4445-90e9-ce4ce4e2b96e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Mean deviation about the mean of 1, 2, 3, …, n for odd n is:",
+  "formula": "",
+  "options": [
+   "n/4",
+   "(n²−1)/(4n)",
+   "(n+1)/4",
+   "(n²−1)/(2n)"
+  ],
+  "answer": 1,
+  "explain": "Standard result for odd n; e.g. n=3 gives 2/3.",
+  "kind": "result",
+  "id": "4ddf90da-2c75-4eed-a787-961dfa55c4ca",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "The mean deviation about the mean of a data set is zero exactly when:",
+  "formula": "",
+  "options": [
+   "Mean equals median",
+   "Data has no mode",
+   "All observations are equal",
+   "Data is symmetric"
+  ],
+  "answer": 2,
+  "explain": "Σ|xᵢ−x̄| = 0 only if every xᵢ = x̄.",
+  "kind": "concept",
+  "id": "39402a6b-46f3-421c-851c-41f015a2ad6e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "For a continuous frequency distribution, xᵢ in the MD formula is taken as the:",
+  "formula": "",
+  "options": [
+   "Lower class limit",
+   "Upper class limit",
+   "Class mark",
+   "Class width"
+  ],
+  "answer": 2,
+  "explain": "The class mark (midpoint) represents each class.",
+  "kind": "fact",
+  "id": "a27bf948-8d4d-464e-9fbb-e2d84b3de7ab",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "A new observation equal to the existing mean is added. The mean deviation about the mean:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Stays the same",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "Mean unchanged and Σ|xᵢ−x̄| unchanged, but n increases, so MD decreases.",
+  "kind": "concept",
+  "id": "d10b0a15-e630-407b-bc33-fb627be1381f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "The unit of the coefficient of mean deviation is:",
+  "formula": "",
+  "options": [
+   "Same as data",
+   "Square of data unit",
+   "Unitless",
+   "Percent squared"
+  ],
+  "answer": 2,
+  "explain": "Ratio of MD to mean, both in the same unit, so it is unitless.",
+  "kind": "unit",
+  "id": "b5021a07-2c96-4276-8dfb-387edca8cef2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Mean deviation about the mean for data −d and d (equal frequency) equals:",
+  "formula": "",
+  "options": [
+   "0",
+   "d/2",
+   "d",
+   "2d"
+  ],
+  "answer": 2,
+  "explain": "Mean is 0 and each observation is d away, so MD = d.",
+  "kind": "result",
+  "id": "f3645547-fb72-4f8d-8288-b5e5ccb7fe7c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "An AP has n terms (n even) and common difference d. Its mean deviation about the mean is:",
+  "formula": "nd/4",
+  "options": [
+   "nd/2",
+   "nd/4",
+   "d(n²−1)/(4n)",
+   "d/4"
+  ],
+  "answer": 1,
+  "explain": "Scaling 1,2,…,n (M.D. = n/4) by d gives nd/4; a shift does not change it.",
+  "kind": "result",
+  "id": "b4b488ef-697c-4030-b5ca-3b77e3745f8f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Coefficient of mean deviation about the mean is defined as:",
+  "formula": "",
+  "options": [
+   "MD ÷ mean",
+   "MD ÷ median",
+   "MD ÷ standard deviation",
+   "Mean ÷ MD"
+  ],
+  "answer": 0,
+  "explain": "The coefficient of MD about A is MD about A divided by A, so about the mean it is MD/x̄.",
+  "kind": "formula",
+  "id": "2e9ee199-21f0-4329-b3ac-afdb87bf16bb",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "In the step-deviation method with uᵢ = (xᵢ − A)/h, the mean x̄ equals which expression?",
+  "formula": "x̄ = A + h·(Σfᵢuᵢ / Σfᵢ)",
+  "options": [
+   "A + h·Σfᵢuᵢ / Σfᵢ",
+   "A + Σfᵢuᵢ / (h·Σfᵢ)",
+   "h·A + Σfᵢuᵢ / Σfᵢ",
+   "A + Σfᵢuᵢ / Σfᵢ"
+  ],
+  "answer": 0,
+  "explain": "Since xᵢ = A + h·uᵢ, taking the frequency-weighted mean gives x̄ = A + h·Σfᵢuᵢ/Σfᵢ.",
+  "kind": "formula",
+  "id": "f164a414-5078-4ded-be74-5a0adc825b23",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "For n observations (n even) in ascending order, the median equals:",
+  "formula": "",
+  "options": [
+   "mean of (n/2)th and (n/2 + 1)th terms",
+   "(n/2)th term",
+   "(n/2 + 1)th term",
+   "mean of ((n−1)/2)th and ((n+1)/2)th terms"
+  ],
+  "answer": 0,
+  "explain": "For even n, the median is the average of the two middle terms, (n/2)th and (n/2+1)th.",
+  "kind": "fact",
+  "id": "8cd3782f-e71a-46e9-8ef0-453651fd394b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For grouped continuous data, xᵢ in Σfᵢ|xᵢ − M| denotes the:",
+  "formula": "",
+  "options": [
+   "lower class limit",
+   "upper class limit",
+   "class mark (midpoint)",
+   "class width"
+  ],
+  "answer": 2,
+  "explain": "Each class is represented by its class mark, the midpoint of the class.",
+  "kind": "fact",
+  "id": "5c5b31b8-97d9-4c2f-9dcf-0b454219877e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Each observation is increased by 7. The mean deviation about median:",
+  "formula": "",
+  "options": [
+   "increases by 7",
+   "is multiplied by 7",
+   "remains unchanged",
+   "decreases by 7"
+  ],
+  "answer": 2,
+  "explain": "A shift moves the median equally, so every |xᵢ − M| stays the same.",
+  "kind": "concept",
+  "id": "73b1a7b0-5663-49db-98cd-a31aebb5c319",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "The coefficient of mean deviation about the median has which unit?",
+  "formula": "",
+  "options": [
+   "Same as the data",
+   "Square of the data unit",
+   "Unitless (pure number)",
+   "Reciprocal of the data unit"
+  ],
+  "answer": 2,
+  "explain": "MD and median share the same unit, so their ratio is unitless.",
+  "kind": "unit",
+  "id": "5bf09a9d-53fd-4e7a-a3aa-ef5bb32ff6b5",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Mean deviation about the median equals zero only when:",
+  "formula": "",
+  "options": [
+   "the number of observations is odd",
+   "the mean equals the median",
+   "all observations are equal",
+   "the data are symmetric"
+  ],
+  "answer": 2,
+  "explain": "MD is a mean of nonnegative terms; it is 0 only if every xᵢ equals M.",
+  "kind": "result",
+  "id": "f4ea6448-bfed-4bbf-b774-929db266e13d",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For the first n natural numbers with n odd, the mean deviation about the median is:",
+  "formula": "",
+  "options": [
+   "(n² − 1)/(4n)",
+   "n/4",
+   "(n² − 1)/(2n)",
+   "(n + 1)/4"
+  ],
+  "answer": 0,
+  "explain": "For odd n the median is (n+1)/2, giving MD = (n² − 1)/(4n); for even n it is n/4.",
+  "kind": "result",
+  "id": "cc8dc092-0d03-4e6b-95e3-f8ae95ed9ceb",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Regarding the sum of signed deviations Σ(xᵢ − M) about the median M:",
+  "formula": "",
+  "options": [
+   "it is always zero",
+   "it is always positive",
+   "it is always negative",
+   "it need not be zero in general"
+  ],
+  "answer": 3,
+  "explain": "Only deviations about the mean always sum to zero; so absolute values are used for MD.",
+  "kind": "concept",
+  "id": "de467e6f-aebf-4cf1-91ad-5c388fd246f1",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For the first n natural numbers with n even, the mean deviation about the median is:",
+  "formula": "",
+  "options": [
+   "n/4",
+   "(n² − 1)/(4n)",
+   "n/2",
+   "n²/(4(n+1))"
+  ],
+  "answer": 0,
+  "explain": "For n even, MD = n/4. The expression (n² − 1)/(4n) applies only to odd n.",
+  "kind": "result",
+  "id": "705e079d-ef1a-4521-bfb4-290630917a08",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "An observation equal to the median is added to a data set. The mean deviation about the median:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Remains the same",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "The median is unchanged and Σ|xᵢ − M| is unchanged, but n becomes n+1, so MD falls.",
+  "kind": "concept",
+  "id": "ddc68d2e-f16a-401a-b77b-10539508e88d",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For grouped continuous data, the median class is the class where the cumulative frequency first becomes:",
+  "formula": "",
+  "options": [
+   "≥ N/2",
+   "≥ N",
+   "≥ N/4",
+   "≥ (N+1)"
+  ],
+  "answer": 0,
+  "explain": "The median class is the first class whose cumulative frequency reaches or exceeds N/2.",
+  "kind": "fact",
+  "id": "48d5fd64-ea7a-4a26-ae84-67b17f631763",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "In the grouped median formula M = l + [(N/2 − C)/f]·h, what does C denote?",
+  "formula": "M = l + ((N/2 − C)/f)·h",
+  "options": [
+   "Frequency of the median class",
+   "Cumulative frequency before the median class",
+   "Cumulative frequency of the median class",
+   "Class width of the median class"
+  ],
+  "answer": 1,
+  "explain": "C is the cumulative frequency of the class preceding the median class; f is the median class frequency.",
+  "kind": "fact",
+  "id": "febbd0fa-6d09-4dfb-969f-667839144726",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For just two observations a < b, the mean deviation about the median equals:",
+  "formula": "",
+  "options": [
+   "b − a",
+   "(b − a)/2",
+   "(b − a)/4",
+   "(a + b)/2"
+  ],
+  "answer": 1,
+  "explain": "The median is (a+b)/2, and each point lies (b−a)/2 from it, so the mean deviation is (b−a)/2.",
+  "kind": "result",
+  "id": "dedab755-5290-4a46-9863-e880256da213",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Each observation is increased by 5. The variance of the data becomes?",
+  "formula": "Var(x + c) = Var(x)",
+  "options": [
+   "Increases by 5",
+   "Increases by 25",
+   "Unchanged",
+   "Multiplied by 5"
+  ],
+  "answer": 2,
+  "explain": "Variance is independent of change of origin.",
+  "kind": "concept",
+  "id": "292a3797-5b6d-4c79-879a-83e768932a64",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "Each observation is multiplied by k. The variance becomes?",
+  "formula": "Var(kx) = k²·Var(x)",
+  "options": [
+   "k·σ²",
+   "k²·σ²",
+   "σ²/k",
+   "σ²"
+  ],
+  "answer": 1,
+  "explain": "Variance depends on scale: Var(kx) = k²Var(x).",
+  "kind": "formula",
+  "id": "0d008167-bf12-483e-b701-dfe3cbd7a677",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "For n observations, Σxᵢ² = n(σ² + ?)",
+  "formula": "Σxᵢ²/n = σ² + x̄²",
+  "options": [
+   "x̄",
+   "x̄²",
+   "2x̄",
+   "1/x̄²"
+  ],
+  "answer": 1,
+  "explain": "From σ² = Σxᵢ²/n − x̄², we get Σxᵢ² = n(σ² + x̄²).",
+  "kind": "formula",
+  "id": "d20f2f2e-ca46-4fce-a6f4-9325a5b1d439",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "Observations x are transformed to y = (x − a)/h. Then σₓ equals?",
+  "formula": "σᵧ = σₓ/|h|",
+  "options": [
+   "σᵧ/|h|",
+   "|h|·σᵧ",
+   "σᵧ − a",
+   "|h|·σᵧ + a"
+  ],
+  "answer": 1,
+  "explain": "Shifting by a has no effect; dividing by h scales SD by 1/|h|, so σₓ = |h|σᵧ.",
+  "kind": "formula",
+  "id": "f9e14afe-9a45-4f4e-9f32-4622661e76b3",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "Coefficient of variation of a data set with mean x̄ and SD σ (x̄ ≠ 0) is?",
+  "formula": "C.V. = (σ/x̄) × 100",
+  "options": [
+   "(x̄/σ) × 100",
+   "(σ/x̄) × 100",
+   "(σ²/x̄) × 100",
+   "(σ/x̄²) × 100"
+  ],
+  "answer": 1,
+  "explain": "C.V. is the relative dispersion: SD divided by mean, expressed as a percentage.",
+  "kind": "formula",
+  "id": "e668be0d-48e1-45bc-9f7b-d3dabc34095f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "With u = (x−a)/h for grouped data, variance of x equals",
+  "formula": "σₓ² = h²·σᵤ²",
+  "options": [
+   "h²·σᵤ²",
+   "h·σᵤ²",
+   "σᵤ²/h²",
+   "σᵤ²/h"
+  ],
+  "answer": 0,
+  "explain": "Variance scales by the square of the multiplier h; the shift a has no effect.",
+  "kind": "formula",
+  "id": "9d3092e7-e74d-4821-a052-1ac7741341c2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Every class mark is increased by 5, frequencies unchanged. The variance becomes",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "Increased by 5",
+   "Increased by 25",
+   "Multiplied by 5"
+  ],
+  "answer": 0,
+  "explain": "Variance is independent of change of origin.",
+  "kind": "concept",
+  "id": "253ec8f2-3e37-4c5b-9411-45a7f4b9dd91",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Mean square deviation about a is least when a equals the",
+  "formula": "",
+  "options": [
+   "Mean",
+   "Median",
+   "Mode",
+   "Mid-range"
+  ],
+  "answer": 0,
+  "explain": "Since MSD = σ² + (x̄−a)², its minimum σ² occurs at a = x̄.",
+  "kind": "concept",
+  "id": "4f16640a-3109-4057-8fcb-945a2efe964a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Combined variance of two groups equals the weighted mean of their variances when",
+  "formula": "",
+  "options": [
+   "Their means are equal",
+   "Their sizes are equal",
+   "Their variances are equal",
+   "Their SDs differ"
+  ],
+  "answer": 0,
+  "explain": "The extra term n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)² vanishes only if x̄₁ = x̄₂.",
+  "kind": "concept",
+  "id": "5590e539-992f-45e2-bd4d-08b411d81c4e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Of two series, the one with smaller coefficient of variation is",
+  "formula": "",
+  "options": [
+   "More consistent",
+   "Less consistent",
+   "Has larger mean",
+   "Has larger SD"
+  ],
+  "answer": 0,
+  "explain": "Lower CV means less relative variability, hence more consistency.",
+  "kind": "concept",
+  "id": "d7d23f01-385e-4838-a18b-3835f88cb249",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "The variance of a frequency distribution is zero only if",
+  "formula": "",
+  "options": [
+   "All observations are equal",
+   "The mean is zero",
+   "Frequencies are equal",
+   "N = 1 only"
+  ],
+  "answer": 0,
+  "explain": "Σf(x−x̄)² = 0 forces every xᵢ = x̄ (N = 1 is a special case of this).",
+  "kind": "concept",
+  "id": "63e87c8a-905d-4870-a296-6e62f67e9385",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Data are in centimetres. The variance is expressed in",
+  "formula": "",
+  "options": [
+   "cm²",
+   "cm",
+   "cm³",
+   "No unit"
+  ],
+  "answer": 0,
+  "explain": "Variance is the mean of squared deviations; SD has the original unit.",
+  "kind": "unit",
+  "id": "198a59ea-83e9-4cb4-8072-f89258987348",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Variance of the first n even natural numbers 2, 4, …, 2n is",
+  "formula": "(n² − 1)/3",
+  "options": [
+   "(n² − 1)/3",
+   "(n² − 1)/12",
+   "4(n² − 1)/3",
+   "(n² − 1)/6"
+  ],
+  "answer": 0,
+  "explain": "It is 2², i.e. 4 times (n²−1)/12, which is (n²−1)/3.",
+  "kind": "result",
+  "id": "a0beda34-639e-4bfc-8697-9407d51a9d7b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "An observation equal to the mean is added to N observations with variance σ². New variance is",
+  "formula": "",
+  "options": [
+   "Nσ²/(N+1)",
+   "σ²",
+   "(N+1)σ²/N",
+   "σ²/(N+1)"
+  ],
+  "answer": 0,
+  "explain": "Σ(x−x̄)² is unchanged while the count becomes N+1.",
+  "kind": "result",
+  "id": "e6c8cdde-d144-4439-b9be-dc5bc8c66ee2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "For continuous grouped data, each class is represented in the formulas by its",
+  "formula": "",
+  "options": [
+   "Class mark",
+   "Lower limit",
+   "Upper limit",
+   "Class width"
+  ],
+  "answer": 0,
+  "explain": "The class mark (mid-point) is taken as xᵢ.",
+  "kind": "fact",
+  "id": "f573da8b-6f74-470d-a8cc-e32fa02d1045",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Compared with the mean deviation about the mean, the standard deviation is always",
+  "formula": "",
+  "options": [
+   "Greater than or equal to it",
+   "Less than or equal to it",
+   "Exactly equal to it",
+   "Half of it"
+  ],
+  "answer": 0,
+  "explain": "The root mean square of deviations is at least their mean absolute value.",
+  "kind": "fact",
+  "id": "1046e1db-fea0-4b29-b2bb-2fa198dcf3e0",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "For any frequency distribution, Σfᵢ(xᵢ − x̄) equals",
+  "formula": "",
+  "options": [
+   "0",
+   "N",
+   "σ²",
+   "Nσ²"
+  ],
+  "answer": 0,
+  "explain": "The sum of deviations about the arithmetic mean is zero.",
+  "kind": "fact",
+  "id": "eb50500d-db13-4ae6-a853-8eb3c864ee28",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Groups of sizes n₁, n₂, means x̄₁, x̄₂. The extra term in combined variance is",
+  "formula": "",
+  "options": [
+   "n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)²",
+   "n₁n₂(x̄₁−x̄₂)/(n₁+n₂)",
+   "(x̄₁−x̄₂)²/(n₁+n₂)",
+   "n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)"
+  ],
+  "answer": 0,
+  "explain": "σ² = (n₁σ₁²+n₂σ₂²)/(n₁+n₂) + n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)².",
+  "kind": "formula",
+  "id": "f0b51d7d-e259-4395-947e-1cb90487eaa8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Coefficient of variation of a distribution with mean x̄ and SD σ is",
+  "formula": "C.V. = (σ/x̄) × 100",
+  "options": [
+   "(x̄/σ) × 100",
+   "(σ/x̄) × 100",
+   "(σ²/x̄) × 100",
+   "(σ/x̄²) × 100"
+  ],
+  "answer": 1,
+  "explain": "C.V. = (σ/x̄)×100, used to compare consistency of two series.",
+  "kind": "formula",
+  "id": "a0c39a35-3fe9-4364-89fb-c71282830fcf",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Every observation is multiplied by k (frequencies unchanged). The variance becomes",
+  "formula": "",
+  "options": [
+   "kσ²",
+   "σ²",
+   "k²σ²",
+   "σ²/k"
+  ],
+  "answer": 2,
+  "explain": "Scaling x by k scales SD by |k| and variance by k².",
+  "kind": "result",
+  "id": "08af9eba-10cc-4fc4-aec6-9c84142422c3",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "All frequencies are multiplied by the same constant. The variance of the distribution",
+  "formula": "",
+  "options": [
+   "Is multiplied by that constant",
+   "Is multiplied by its square",
+   "Remains unchanged",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "N and Σfx², Σfx scale equally, so relative weights and σ² are unchanged.",
+  "kind": "concept",
+  "id": "770db28a-3106-4a89-aebd-7ca310142c88",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "The coefficient of variation is",
+  "formula": "",
+  "options": [
+   "Measured in the units of data",
+   "Measured in squared units",
+   "Unit-free, expressed in percent",
+   "Always less than 1"
+  ],
+  "answer": 2,
+  "explain": "σ and x̄ share units, so their ratio is dimensionless.",
+  "kind": "unit",
+  "id": "79603972-05be-42ae-9447-7a82184eef7c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Every observation is multiplied by 3. The coefficient of variation",
+  "formula": "",
+  "options": [
+   "Becomes 3 times",
+   "Becomes 9 times",
+   "Becomes one-third",
+   "Remains unchanged"
+  ],
+  "answer": 3,
+  "explain": "Both σ and x̄ get multiplied by 3, so their ratio is unchanged.",
+  "kind": "concept",
+  "id": "ccc841e7-8bbd-4ce7-a565-c90c262129a3",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Combined variance of two groups (sizes n₁, n₂) has numerator, with dᵢ = x̄ᵢ − x̄ (combined mean)",
+  "formula": "σ² = [n₁(σ₁²+d₁²) + n₂(σ₂²+d₂²)]/(n₁+n₂)",
+  "options": [
+   "n₁σ₁² + n₂σ₂²",
+   "n₁(σ₁²+d₁²) + n₂(σ₂²+d₂²)",
+   "n₁(σ₁+d₁)² + n₂(σ₂+d₂)²",
+   "n₁σ₁² + n₂σ₂² − n₁d₁² − n₂d₂²"
+  ],
+  "answer": 1,
+  "explain": "Each group's sum of squares about combined mean is nᵢ(σᵢ² + dᵢ²).",
+  "kind": "formula",
+  "id": "4762a20a-321f-484e-8fad-8acd62a73ac5",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Each positive observation is increased by 5 (frequencies same). The coefficient of variation",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Remains unchanged",
+   "Becomes 5 times"
+  ],
+  "answer": 0,
+  "explain": "σ is unchanged but the mean rises, so CV = (σ/x̄)×100 falls.",
+  "kind": "concept",
+  "id": "6a31f5f2-6688-4c1d-b4f0-e90b7328ef90",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Data have mean x̄ and SD σ (σ ≠ 0). The variance of the values (x − x̄)/σ is",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "σ",
+   "1/σ²"
+  ],
+  "answer": 0,
+  "explain": "Shifting by x̄ changes nothing; dividing by σ gives σ²/σ² = 1 (the mean becomes 0).",
+  "kind": "result",
+  "id": "8cf30de9-feb0-4cc0-94d1-ed014179342f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Two distinct observations a and b, each with frequency 1. Their standard deviation is",
+  "formula": "",
+  "options": [
+   "|a − b|/2",
+   "|a − b|",
+   "(a − b)²/4",
+   "|a − b|/4"
+  ],
+  "answer": 0,
+  "explain": "Each value lies |a−b|/2 from the mean (a+b)/2, so σ = |a−b|/2.",
+  "kind": "result",
+  "id": "06d9244a-ee07-462b-b4ef-4786ee16e1fc",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Mean of the standardised data zᵢ = (xᵢ − x̄)/σ is?",
+  "formula": "",
+  "options": [
+   "0",
+   "1",
+   "x̄",
+   "σ"
+  ],
+  "answer": 0,
+  "explain": "Σ(xᵢ − x̄) = 0, so the mean of zᵢ is 0 (and its SD is 1).",
+  "kind": "result",
+  "id": "06b7c3be-f74b-4f16-9ec2-d19773978964",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Each observation is multiplied by k > 0. Coefficient of variation (σ/x̄ × 100) becomes?",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "k times",
+   "k² times",
+   "1/k times"
+  ],
+  "answer": 0,
+  "explain": "σ and x̄ both scale by k, so their ratio is unchanged.",
+  "kind": "concept",
+  "id": "bca98b98-3b70-43f9-a30f-67784e5d9255",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "A positive constant is added to every observation (mean > 0). The coefficient of variation?",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Unchanged",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "σ is unchanged but the mean increases, so σ/x̄ decreases.",
+  "kind": "trend",
+  "id": "b2db012f-e6f4-49b0-a2f3-83b42f5e98ad",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Range of x is R. Range of the data axᵢ + b is?",
+  "formula": "",
+  "options": [
+   "|a|R",
+   "aR + b",
+   "a²R",
+   "R + b"
+  ],
+  "answer": 0,
+  "explain": "Shift cancels in max − min; scale multiplies the range by |a|.",
+  "kind": "formula",
+  "id": "2b5d44c2-1fc9-450d-9bde-03dcbe06ce5c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Which measure is NOT affected by a change of origin (adding a constant)?",
+  "formula": "",
+  "options": [
+   "Variance",
+   "Mean",
+   "Median",
+   "Mode"
+  ],
+  "answer": 0,
+  "explain": "Mean, median and mode shift by c; measures of dispersion like variance stay unchanged.",
+  "kind": "concept",
+  "id": "671d13ee-eff3-49d7-aad8-fed160a926a2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "If u = (x − a)/h, then variance of x equals?",
+  "formula": "",
+  "options": [
+   "h²·Var(u)",
+   "h·Var(u)",
+   "Var(u)/h²",
+   "Var(u) + a²"
+  ],
+  "answer": 0,
+  "explain": "x = a + hu; shift a is ignored and scale h gives h² times Var(u).",
+  "kind": "formula",
+  "id": "344b826f-f620-49ee-a017-ca0f62bc4653",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Every observation is increased by 10%. If variance was σ², new variance is?",
+  "formula": "",
+  "options": [
+   "1.21σ²",
+   "1.1σ²",
+   "σ² + 0.1",
+   "1.01σ²"
+  ],
+  "answer": 0,
+  "explain": "xᵢ → 1.1xᵢ, so variance scales by (1.1)² = 1.21.",
+  "kind": "result",
+  "id": "cd36baf7-7008-485a-adf0-b635748ba123",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "The mean of (xᵢ − a)² is least when a equals the?",
+  "formula": "",
+  "options": [
+   "Mean",
+   "Median",
+   "Mode",
+   "Midrange"
+  ],
+  "answer": 0,
+  "explain": "Since it equals σ² + (x̄ − a)², the minimum σ² occurs at a = x̄.",
+  "kind": "concept",
+  "id": "42de56a5-f2a5-4690-b26e-b671cf2d71a6",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Mean of x is x̄. The mean of the data axᵢ + b is?",
+  "formula": "",
+  "options": [
+   "a·x̄ + b",
+   "a·x̄ + a·b",
+   "a²·x̄ + b",
+   "a·x̄"
+  ],
+  "answer": 0,
+  "explain": "The mean is affected by both scale and shift: mean(axᵢ + b) = a·x̄ + b.",
+  "kind": "formula",
+  "id": "82867bbe-5861-41f7-9c5a-30e25ca39b6e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Mean deviation about the mean of x is M. For the data axᵢ + b it becomes?",
+  "formula": "",
+  "options": [
+   "|a|M",
+   "a²M",
+   "|a|M + b",
+   "M"
+  ],
+  "answer": 0,
+  "explain": "The shift cancels in the deviations, and the scale multiplies them by |a|.",
+  "kind": "result",
+  "id": "2d25697f-778c-4d96-a541-0f1d1b40d98d",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Every observation is increased by c. The interquartile range (Q₃ − Q₁) becomes?",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "Increased by c",
+   "Increased by 2c",
+   "Multiplied by c"
+  ],
+  "answer": 0,
+  "explain": "Both quartiles shift by c, so their difference is unchanged (like the range and variance).",
+  "kind": "concept",
+  "id": "7154b89d-9ea7-400b-82b6-a3eeee1ce233",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Each observation is replaced by 2xᵢ − 3. The median M becomes?",
+  "formula": "",
+  "options": [
+   "2M − 3",
+   "2M",
+   "M − 3",
+   "4M − 3"
+  ],
+  "answer": 0,
+  "explain": "For a > 0 the median transforms like the mean: a·M + b.",
+  "kind": "concept",
+  "id": "14243fc3-9804-4c2b-8677-fbb886912d4b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Each xᵢ is increased by c. The mean of the squares (Σxᵢ²/n) increases by?",
+  "formula": "Σ(xᵢ+c)²/n = Σxᵢ²/n + 2c·x̄ + c²",
+  "options": [
+   "2c·x̄ + c²",
+   "c²",
+   "2c·x̄",
+   "c² + σ²"
+  ],
+  "answer": 0,
+  "explain": "Expanding (xᵢ + c)² and averaging gives an increase of 2c·x̄ + c².",
+  "kind": "formula",
+  "id": "0fb31853-6733-4784-8900-055813f272b2",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Combined variance of two groups (sizes n₁, n₂), with dᵢ = x̄ᵢ − x̄ (x̄ = combined mean)?",
+  "formula": "σ² = [n₁(σ₁²+d₁²)+n₂(σ₂²+d₂²)]/(n₁+n₂)",
+  "options": [
+   "[n₁σ₁²+n₂σ₂²]/(n₁+n₂) only",
+   "[n₁(σ₁²+d₁²)+n₂(σ₂²+d₂²)]/(n₁+n₂)",
+   "[n₁(σ₁+d₁)²+n₂(σ₂+d₂)²]/(n₁+n₂)",
+   "(σ₁²+d₁²+σ₂²+d₂²)/(n₁+n₂)"
+  ],
+  "answer": 1,
+  "explain": "Each group's spread about the combined mean is σᵢ² + dᵢ², weighted by size.",
+  "kind": "formula",
+  "id": "cb7db984-4976-4975-a0c1-6bd7f332ad5a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Combined variance of two groups in terms of n₁, n₂, σ₁², σ₂², x̄₁, x̄₂ is?",
+  "formula": "σ² = (n₁σ₁²+n₂σ₂²)/(n₁+n₂) + n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)²",
+  "options": [
+   "(n₁σ₁²+n₂σ₂²)/(n₁+n₂) + (x̄₁−x̄₂)²/(n₁+n₂)",
+   "(n₁σ₁²+n₂σ₂²)/(n₁+n₂) + n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)",
+   "(n₁σ₁²+n₂σ₂²)/(n₁+n₂) + n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)²",
+   "(n₁σ₁²+n₂σ₂²)/(n₁+n₂) + n₁n₂(x̄₁−x̄₂)/(n₁+n₂)²"
+  ],
+  "answer": 2,
+  "explain": "Within-group weighted variance plus between-group term n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)².",
+  "kind": "formula",
+  "id": "348efa59-509b-4565-acb6-d47136f118d4",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Distance d₁ = x̄₁ − x̄ of group 1's mean from the combined mean equals?",
+  "formula": "d₁ = n₂(x̄₁−x̄₂)/(n₁+n₂)",
+  "options": [
+   "n₁(x̄₁−x̄₂)/(n₁+n₂)",
+   "n₂(x̄₁−x̄₂)/(n₁+n₂)",
+   "(x̄₁−x̄₂)/2",
+   "n₂(x̄₁−x̄₂)/n₁"
+  ],
+  "answer": 1,
+  "explain": "x̄₁ − (n₁x̄₁+n₂x̄₂)/(n₁+n₂) = n₂(x̄₁−x̄₂)/(n₁+n₂).",
+  "kind": "formula",
+  "id": "5b535fae-55a4-4761-b904-09550c642a65",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "If both groups have the same mean, the combined variance is?",
+  "formula": "x̄₁ = x̄₂ ⇒ σ² = (n₁σ₁²+n₂σ₂²)/(n₁+n₂)",
+  "options": [
+   "σ₁²+σ₂²",
+   "Weighted average of σ₁², σ₂²",
+   "Weighted average of σ₁ and σ₂, squared",
+   "Greater than the weighted average"
+  ],
+  "answer": 1,
+  "explain": "With d₁ = d₂ = 0 the between-group term vanishes.",
+  "kind": "concept",
+  "id": "a62979de-4726-4a66-b18e-d6c9ca8a27c4",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Combined variance compared with weighted average (n₁σ₁²+n₂σ₂²)/(n₁+n₂)?",
+  "formula": "",
+  "options": [
+   "Always smaller",
+   "Always equal",
+   "Always ≥, equality iff x̄₁ = x̄₂",
+   "Always ≥, equality iff σ₁ = σ₂"
+  ],
+  "answer": 2,
+  "explain": "Between-group term n₁n₂(x̄₁−x̄₂)²/(n₁+n₂)² ≥ 0, zero only if means are equal.",
+  "kind": "concept",
+  "id": "a69c40a7-3fe0-4e31-8b03-a3b71eae648f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Distances of group means from the combined mean satisfy d₁ : d₂ (in magnitude) = ?",
+  "formula": "",
+  "options": [
+   "n₁ : n₂",
+   "n₂ : n₁",
+   "σ₁ : σ₂",
+   "σ₂ : σ₁"
+  ],
+  "answer": 1,
+  "explain": "n₁d₁ + n₂d₂ = 0, so |d₁|/|d₂| = n₂/n₁.",
+  "kind": "result",
+  "id": "992f7144-d639-4c48-8876-b85ef33aa6b0",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "The combined mean of two groups with unequal sizes lies closer to the mean of which group?",
+  "formula": "",
+  "options": [
+   "Group with larger variance",
+   "Group with smaller variance",
+   "Group with larger size",
+   "Group with smaller size"
+  ],
+  "answer": 2,
+  "explain": "It is a weighted mean; the larger weight pulls it toward that group's mean.",
+  "kind": "concept",
+  "id": "b9e7cb48-6c93-4f9f-9c51-9039eba9f23f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Group sizes 3 and 2 have means 10 and 15. The combined mean is?",
+  "formula": "",
+  "options": [
+   "12",
+   "12.5",
+   "13",
+   "11"
+  ],
+  "answer": 0,
+  "explain": "(30+30)/5 = 12.",
+  "kind": "result",
+  "id": "a04f8e72-1314-4c3e-bcf5-1e8b0731c47b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Sizes 1 and 3, both with mean 5, variances 4 and 8. Combined variance?",
+  "formula": "",
+  "options": [
+   "6",
+   "7",
+   "7.5",
+   "12"
+  ],
+  "answer": 1,
+  "explain": "Means are equal, so σ² = (1·4+3·8)/4 = 7.",
+  "kind": "result",
+  "id": "c0bffb7d-3cc3-4d3e-b8df-13f71f4db1ed",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "If two groups of any sizes have the same mean m, the combined mean is?",
+  "formula": "",
+  "options": [
+   "m/2",
+   "2m",
+   "Depends on sizes",
+   "m"
+  ],
+  "answer": 3,
+  "explain": "(n₁m+n₂m)/(n₁+n₂) = m.",
+  "kind": "concept",
+  "id": "d44396e1-f96c-439c-af2a-b8b2f94dd913",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "With x̄ the combined mean, which identity always holds for two groups?",
+  "formula": "n₁(x̄₁−x̄) + n₂(x̄₂−x̄) = 0",
+  "options": [
+   "n₁(x̄₁−x̄) + n₂(x̄₂−x̄) = 0",
+   "(x̄₁−x̄) + (x̄₂−x̄) = 0",
+   "n₁(x̄₁−x̄)² = n₂(x̄₂−x̄)²",
+   "σ₁(x̄₁−x̄) = σ₂(x̄₂−x̄)"
+  ],
+  "answer": 0,
+  "explain": "Sum of weighted deviations about the combined mean is zero; (x̄₁−x̄)+(x̄₂−x̄)=0 only if n₁=n₂.",
+  "kind": "result",
+  "id": "85eeabd6-8e11-49c5-adf1-69d98ed3c525",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "When is the combined variance of two groups zero?",
+  "formula": "",
+  "options": [
+   "Only when x̄₁ = x̄₂",
+   "Only when n₁ = n₂",
+   "When σ₁ = σ₂ = 0 only",
+   "When σ₁ = σ₂ = 0 and x̄₁ = x̄₂"
+  ],
+  "answer": 3,
+  "explain": "Both groups must be constant and equal in value: all terms σᵢ² and (x̄₁−x̄₂)² vanish.",
+  "kind": "exception",
+  "id": "5aca3a89-577e-4670-9480-054e2b392b57",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "n items have variance σ². m more items, each equal to their mean, are added. New variance?",
+  "formula": "σ'² = nσ²/(n+m)",
+  "options": [
+   "σ²",
+   "mσ²/(n+m)",
+   "nσ²/(n+m)",
+   "(n+m)σ²/n"
+  ],
+  "answer": 2,
+  "explain": "Added group has variance 0 and mean equal to the old mean, so only the weighting changes.",
+  "kind": "result",
+  "id": "7e5c40ec-27af-45fd-b7c1-02ac29b14fe8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Σx² for the first n natural numbers 1, 2, …, n equals",
+  "formula": "Σk² = n(n+1)(2n+1)/6",
+  "options": [
+   "n(n+1)(2n+1)/6",
+   "[n(n+1)/2]²",
+   "n(n+1)(2n+1)/3",
+   "n(n+1)(n+2)/6"
+  ],
+  "answer": 0,
+  "explain": "Standard sum of squares, used to derive the variance of 1..n.",
+  "kind": "formula",
+  "id": "785d2a76-ce17-4647-907b-533c27e77dd5",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Variance of the first n natural numbers is 10. Then n equals",
+  "formula": "(n²−1)/12 = 10",
+  "options": [
+   "10",
+   "11",
+   "12",
+   "13"
+  ],
+  "answer": 1,
+  "explain": "n² − 1 = 120 gives n² = 121, so n = 11.",
+  "kind": "result",
+  "id": "835edb9d-1866-4d8e-bc57-c3b695077129",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Variance of the first n natural numbers is 2. Then n equals",
+  "formula": "(n²−1)/12 = 2",
+  "options": [
+   "4",
+   "5",
+   "6",
+   "7"
+  ],
+  "answer": 1,
+  "explain": "n² − 1 = 24 gives n = 5.",
+  "kind": "result",
+  "id": "4b57da2e-bbea-4cde-abd3-50f91654b4f0",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Each observation 1, 2, …, n is replaced by 1 − 2x. The new variance is",
+  "formula": "Var(a+bx) = b²·Var(x)",
+  "options": [
+   "(n²−1)/12",
+   "(n²−1)/6",
+   "(n²−1)/3",
+   "(1−n²)/6"
+  ],
+  "answer": 2,
+  "explain": "Var = (−2)²·(n²−1)/12 = (n²−1)/3; the sign and shift do not matter.",
+  "kind": "concept",
+  "id": "c30f192e-4b4c-4ce4-8833-7426e9d755a4",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Variance of the 2n+1 numbers −n, …, −1, 0, 1, …, n is",
+  "formula": "",
+  "options": [
+   "n(n+1)/3",
+   "n(n+1)/6",
+   "(2n+1)/12",
+   "n²/3"
+  ],
+  "answer": 0,
+  "explain": "Mean 0, so σ² = 2·n(n+1)(2n+1)/6 ÷ (2n+1) = n(n+1)/3.",
+  "kind": "result",
+  "id": "a292839f-fa63-4fe5-bcd9-ad1db013fd8b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "For 1, 2, …, n, replace each x by n+1−x (reverse order). The variance",
+  "formula": "",
+  "options": [
+   "becomes zero",
+   "is unchanged",
+   "becomes (n²+1)/12",
+   "changes sign"
+  ],
+  "answer": 1,
+  "explain": "This is x → a − x, i.e. b = −1, and Var(a+bx) = b²Var(x) is unchanged.",
+  "kind": "concept",
+  "id": "a5058745-3485-49b3-b06a-bb479d70b40b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Variance of the first 10 natural numbers is",
+  "formula": "(n²−1)/12 with n = 10",
+  "options": [
+   "33/4",
+   "99/10",
+   "10",
+   "11/2"
+  ],
+  "answer": 0,
+  "explain": "σ² = 99/12 = 33/4 = 8.25.",
+  "kind": "result",
+  "id": "bc5914d9-6564-48bf-9681-825dd382bc69",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Variance of the data 1, 1, 2, 2, …, n, n (each repeated twice) is",
+  "formula": "",
+  "options": [
+   "(n²−1)/6",
+   "(n²−1)/24",
+   "(n²−1)/12",
+   "(n²−1)/3"
+  ],
+  "answer": 2,
+  "explain": "Equal repetition keeps the mean and the mean of squares, so variance is unchanged.",
+  "kind": "concept",
+  "id": "2e40bfb6-7fcc-43ee-94aa-3813e2c0ebcd",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Variance of the first 7 natural numbers is",
+  "formula": "(n²−1)/12 with n = 7",
+  "options": [
+   "3",
+   "4",
+   "49/12",
+   "7/2"
+  ],
+  "answer": 1,
+  "explain": "σ² = (49−1)/12 = 4.",
+  "kind": "result",
+  "id": "fbcf04ab-c421-44fa-96d7-493d0e8f3ce9",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Variance of the 13 consecutive integers 50, 51, …, 62 is",
+  "formula": "σ² = (n²−1)/12, shift-invariant",
+  "options": [
+   "14",
+   "13",
+   "12",
+   "169/12"
+  ],
+  "answer": 0,
+  "explain": "Shifting by a constant leaves variance unchanged, so σ² = (169−1)/12 = 14.",
+  "kind": "result",
+  "id": "bce101d0-b086-4552-8fbc-f2c28502b523",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "For 1, 2, …, n, the mean of the squares (Σx²/n) equals",
+  "formula": "Σx²/n = (n+1)(2n+1)/6",
+  "options": [
+   "(n+1)(2n+1)/6",
+   "n(n+1)(2n+1)/6",
+   "(n+1)(2n+1)/12",
+   "(n+1)²/4"
+  ],
+  "answer": 0,
+  "explain": "Divide Σx² = n(n+1)(2n+1)/6 by n.",
+  "kind": "formula",
+  "id": "c25d6349-8b95-47a4-bf73-f643c0ac7866",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Σx³ for the first n natural numbers 1, 2, …, n equals",
+  "formula": "Σn³ = [n(n+1)/2]²",
+  "options": [
+   "n²(n+1)²/4",
+   "n(n+1)(2n+1)/6",
+   "n(n+1)/2",
+   "n²(n+1)²/2"
+  ],
+  "answer": 0,
+  "explain": "Sum of cubes equals the square of the sum of the first n naturals.",
+  "kind": "formula",
+  "id": "f8a09682-4d4d-4d3b-94ee-34e0bb2b86f0",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Standard deviation of the first 17 natural numbers is",
+  "formula": "σ = √((n²−1)/12)",
+  "options": [
+   "2√6",
+   "√24·3",
+   "√17",
+   "24"
+  ],
+  "answer": 0,
+  "explain": "σ² = (289−1)/12 = 24, so σ = √24 = 2√6.",
+  "kind": "result",
+  "id": "c32ed655-ad8f-4ec9-988e-2472bac10658",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Each observation is multiplied by k (k>0). What happens to the coefficient of variation?",
+  "formula": "CV = (σ/x̄)×100",
+  "options": [
+   "It remains unchanged",
+   "It becomes k times",
+   "It becomes k² times",
+   "It becomes 1/k times"
+  ],
+  "answer": 0,
+  "explain": "Both σ and x̄ scale by k, so their ratio (CV) is unchanged.",
+  "kind": "result",
+  "id": "13e96728-0a14-469f-a2ac-6fafabe80972",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Coefficient of variation and comparison"
+ },
+ {
+  "prompt": "A constant c>0 is added to every observation. How does the CV change?",
+  "formula": "σ unchanged, x̄ → x̄ + c",
+  "options": [
+   "It decreases",
+   "It increases",
+   "It remains unchanged",
+   "It becomes zero"
+  ],
+  "answer": 0,
+  "explain": "σ stays same while mean rises by c, so σ/x̄ decreases.",
+  "kind": "result",
+  "id": "102ca7d5-b953-4ebe-a255-bd28863f01cc",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Coefficient of variation and comparison"
+ },
+ {
+  "prompt": "Mean of the binomial coefficients ⁿC₀, ⁿC₁, …, ⁿCₙ is?",
+  "formula": "Σ ⁿCᵣ = 2ⁿ",
+  "options": [
+   "2ⁿ/n",
+   "2ⁿ/(n + 1)",
+   "2ⁿ⁻¹/(n + 1)",
+   "(2ⁿ − 1)/(n + 1)"
+  ],
+  "answer": 1,
+  "explain": "The sum is 2ⁿ and there are n + 1 terms, so the mean is 2ⁿ/(n+1).",
+  "kind": "result",
+  "id": "dd41de82-d0b5-43df-8721-e2bf8fb1b133",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of the n numbers 1, 2, 2², …, 2ⁿ⁻¹ is?",
+  "formula": "",
+  "options": [
+   "(2ⁿ − 1)/n",
+   "(2ⁿ − 1)/(n + 1)",
+   "2ⁿ/n",
+   "(2ⁿ⁻¹ − 1)/n"
+  ],
+  "answer": 0,
+  "explain": "GP sum = 2ⁿ − 1 over n terms, so the mean is (2ⁿ − 1)/n.",
+  "kind": "result",
+  "id": "54d026ff-2a05-42ab-a7f0-8ff20b49aed4",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of the n numbers 1·2, 2·3, 3·4, …, n(n+1) is?",
+  "formula": "Σk(k+1) = n(n+1)(n+2)/3",
+  "options": [
+   "(n + 1)(n + 2)/3",
+   "n(n + 1)/3",
+   "(n + 1)(2n + 1)/6",
+   "(n + 2)(n + 3)/3"
+  ],
+  "answer": 0,
+  "explain": "Σk(k+1) = n(n+1)(n+2)/3; dividing by n gives (n+1)(n+2)/3.",
+  "kind": "result",
+  "id": "10ea0285-9439-4eb2-a583-da1afb911b8b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mode from a histogram is the x-coordinate of which point?",
+  "formula": "",
+  "options": [
+   "Intersection of cross-joined bar tops",
+   "Intersection of the two ogives",
+   "Midpoint of the modal class",
+   "Point of highest cumulative frequency"
+  ],
+  "answer": 0,
+  "explain": "Join the modal bar's top corners to the adjacent bars' top corners crosswise. The crossing point's x-value is the mode.",
+  "kind": "fact",
+  "id": "eeed1c72-e94e-434d-88b1-22b053609b77",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "The sum of positive deviations (xᵢ − x̄ > 0) from the mean equals:",
+  "formula": "",
+  "options": [
+   "Sum of |negative deviations|",
+   "Zero",
+   "n·x̄",
+   "Σ|xᵢ|"
+  ],
+  "answer": 0,
+  "explain": "Σ(xᵢ−x̄)=0, so positive and negative deviations cancel in magnitude.",
+  "kind": "concept",
+  "id": "055b0054-0512-4505-aec2-4c0a769f083f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Every observation is multiplied by 5. The coefficient of MD about the mean:",
+  "formula": "MD/mean",
+  "options": [
+   "Unchanged",
+   "Multiplied by 5",
+   "Divided by 5",
+   "Multiplied by 25"
+  ],
+  "answer": 0,
+  "explain": "Both MD and mean scale by 5, so the ratio is unchanged.",
+  "kind": "concept",
+  "id": "389bc89e-a054-4ba4-aeed-5d2e1fa40ba1",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Mean deviation about the mean of the three observations −a, 0, a (a > 0) is:",
+  "formula": "",
+  "options": [
+   "2a/3",
+   "a/3",
+   "a",
+   "2a"
+  ],
+  "answer": 0,
+  "explain": "Mean = 0; Σ|x| = 2a; MD = 2a/3.",
+  "kind": "result",
+  "id": "8c9d4c0e-42e8-403e-8d3f-a876bbe474e7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "For any data set, the mean deviation about the median is always:",
+  "formula": "MD(M) ≤ MD(x̄) ≤ σ",
+  "options": [
+   "Greater than the standard deviation",
+   "At most the standard deviation",
+   "Exactly equal to the standard deviation",
+   "Unrelated to the standard deviation"
+  ],
+  "answer": 1,
+  "explain": "MD about median ≤ MD about mean ≤ σ (σ is the root mean square deviation).",
+  "kind": "result",
+  "id": "8ddb423c-a4d2-46a9-85fe-b4cf293be469",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For three observations x₁ < x₂ < x₃, Σ|xᵢ − M| about the median equals:",
+  "formula": "",
+  "options": [
+   "x₃ − x₁",
+   "x₃ − x₂",
+   "x₁ + x₃ − 2x₂",
+   "(x₃ − x₁)/3"
+  ],
+  "answer": 0,
+  "explain": "M = x₂, so the sum is (x₂ − x₁) + 0 + (x₃ − x₂) = x₃ − x₁.",
+  "kind": "result",
+  "id": "9a1eb914-dfee-4582-8139-991b15b7ff9f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For odd n ≥ 3, the largest observation is increased further. The mean deviation about the median:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Remains unchanged",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "The median is unchanged (the middle term stays), but |x_max − M| grows, so the MD increases.",
+  "kind": "concept",
+  "id": "1d8ba92e-1d55-4387-be1b-813d9bcf0b37",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "The coefficient of mean deviation about the median is defined as:",
+  "formula": "Coefficient = MD(M) / M",
+  "options": [
+   "MD(M) / Mean",
+   "M / MD(M)",
+   "MD(M) / Median",
+   "MD(M) / Standard deviation"
+  ],
+  "answer": 2,
+  "explain": "Coefficient of mean deviation = (mean deviation about the median) ÷ (median).",
+  "kind": "formula",
+  "id": "4f78e126-b3b2-4865-89ef-5e6459e6abda",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For a frequency distribution with N = Σfᵢ, Σfᵢxᵢ² − N·x̄² equals",
+  "formula": "",
+  "options": [
+   "σ²",
+   "Nσ²",
+   "N²σ²",
+   "σ"
+  ],
+  "answer": 1,
+  "explain": "Σfᵢ(xᵢ−x̄)² = Σfᵢxᵢ² − N x̄², which equals Nσ².",
+  "kind": "formula",
+  "id": "5b6f5911-68b7-4608-ae74-c706d9c656e7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "The coefficient of variation (σ/x̄)×100 is not defined when",
+  "formula": "",
+  "options": [
+   "σ = 0",
+   "The mean x̄ = 0",
+   "The variance is 1",
+   "Frequencies are unequal"
+  ],
+  "answer": 1,
+  "explain": "x̄ is in the denominator, so the CV is undefined when the mean is zero.",
+  "kind": "exception",
+  "id": "cde93249-5644-4dbb-bc20-c7e1c6005880",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Quartile deviation of x is Q. For the data axᵢ + b (a ≠ 0), the quartile deviation becomes?",
+  "formula": "Q.D. = (Q₃ − Q₁)/2",
+  "options": [
+   "aQ + b",
+   "|a|Q",
+   "a²Q",
+   "Q"
+  ],
+  "answer": 1,
+  "explain": "Shift cancels in Q₃ − Q₁, and scaling multiplies it by |a|, so Q.D. becomes |a|Q.",
+  "kind": "result",
+  "id": "24c21f72-fe8b-4faa-b075-ebc476a22b75",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Σ(xᵢ − x̄)² for x is S. For the data axᵢ + b, the sum of squared deviations from its mean is?",
+  "formula": "Σ(yᵢ − ȳ)² = a²Σ(xᵢ − x̄)²",
+  "options": [
+   "a²S + b",
+   "a²S",
+   "|a|S",
+   "S"
+  ],
+  "answer": 1,
+  "explain": "yᵢ − ȳ = a(xᵢ − x̄), so b cancels and each squared deviation is multiplied by a².",
+  "kind": "result",
+  "id": "ee9f9e9b-bbaa-457d-8478-efabb4071368",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Mean deviation about the mean of 1, 2, …, n, for even n, is",
+  "formula": "",
+  "options": [
+   "n/4",
+   "(n²−1)/(4n)",
+   "n/2",
+   "(n+1)/4"
+  ],
+  "answer": 0,
+  "explain": "For even n the deviations pair up to give n/4. For odd n it is (n²−1)/(4n).",
+  "kind": "result",
+  "id": "34f0c5a3-7702-4979-b100-5d9472ea68d6",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "For the data 1, 2, …, n, the sum Σ(xᵢ − x̄)² equals",
+  "formula": "Σ(x−x̄)² = n·σ²",
+  "options": [
+   "n(n²−1)/12",
+   "(n²−1)/12",
+   "n²(n²−1)/12",
+   "n(n+1)(2n+1)/6"
+  ],
+  "answer": 0,
+  "explain": "Σ(x−x̄)² = n·σ² = n(n²−1)/12.",
+  "kind": "result",
+  "id": "d8e4a4f1-9082-407e-8faa-bf0f185da82b",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Sum of squares of the first n even natural numbers 2² + 4² + … + (2n)² is",
+  "formula": "",
+  "options": [
+   "2n(n+1)(2n+1)/3",
+   "n(n+1)(2n+1)/6",
+   "n(n+1)(2n+1)/3",
+   "4n(n+1)(2n+1)/3"
+  ],
+  "answer": 0,
+  "explain": "4·Σk² = 4·n(n+1)(2n+1)/6 = 2n(n+1)(2n+1)/3.",
+  "kind": "formula",
+  "id": "31e216ab-2603-4154-b3c8-d0eac6359d8a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "Sum of squares of the first n odd natural numbers 1² + 3² + … + (2n−1)² is",
+  "formula": "",
+  "options": [
+   "n(2n−1)(2n+1)/3",
+   "n(n+1)(2n+1)/6",
+   "n(2n−1)(2n+1)/6",
+   "n²(2n−1)/3"
+  ],
+  "answer": 0,
+  "explain": "Σ(2k−1)² = n(4n²−1)/3 = n(2n−1)(2n+1)/3. Check n=2: 1+9 = 10.",
+  "kind": "formula",
+  "id": "e91c3b17-30f5-4fc3-97b6-52ffdc60c7d6",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "For a positively skewed distribution, the correct order of the three averages is:",
+  "formula": "Mode < Median < Mean",
+  "options": [
+   "Mode < Median < Mean",
+   "Mean < Median < Mode",
+   "Median < Mode < Mean",
+   "Mode < Mean < Median"
+  ],
+  "answer": 0,
+  "explain": "A long right tail pulls the mean up most and the mode least, so Mode < Median < Mean.",
+  "kind": "trend",
+  "id": "aeb19ce3-c18c-4d9d-955c-148e7a300d8e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "For even n, Σ|xᵢ − a| attains its same minimum value for a lying:",
+  "formula": "",
+  "options": [
+   "Only at the arithmetic mean",
+   "Anywhere between the two middle terms",
+   "Only at the lower middle term",
+   "Only at the mode"
+  ],
+  "answer": 1,
+  "explain": "For even n, Σ|xᵢ − a| is constant and minimal for every a in [x_{n/2}, x_{n/2+1}].",
+  "kind": "concept",
+  "id": "d9f69253-c397-40df-a574-4c073583e152",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Two groups of equal size, each with variance σ², means x̄₁ and x̄₂. Combined variance is",
+  "formula": "",
+  "options": [
+   "σ² + (x̄₁ − x̄₂)²/4",
+   "σ² + (x̄₁ − x̄₂)²/2",
+   "σ² + (x̄₁ − x̄₂)²",
+   "σ²"
+  ],
+  "answer": 0,
+  "explain": "Each mean is |x̄₁ − x̄₂|/2 from the combined mean, so the extra term is (x̄₁ − x̄₂)²/4.",
+  "kind": "result",
+  "id": "7d9c613a-16e8-4cdb-a9d6-7a8eba001a09",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "All observations lie in the interval [a, b]. The variance can never exceed:",
+  "formula": "σ² ≤ (b − a)²/4",
+  "options": [
+   "(b − a)²",
+   "(b − a)²/2",
+   "(b − a)²/4",
+   "(b − a)²/12"
+  ],
+  "answer": 2,
+  "explain": "Maximum spread occurs with half the data at a and half at b, giving σ = (b−a)/2.",
+  "kind": "result",
+  "id": "7453fb99-2971-4ef4-8c0e-ca76181ad494",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Value 0 occurs m times and value 1 occurs n times. The variance of this data is:",
+  "formula": "",
+  "options": [
+   "mn/(m+n)²",
+   "mn/(m+n)",
+   "m²n²/(m+n)²",
+   "(m+n)²/mn"
+  ],
+  "answer": 0,
+  "explain": "Mean = n/(m+n); σ² = n/(m+n) − n²/(m+n)² = mn/(m+n)².",
+  "kind": "result",
+  "id": "b5bf0d66-ee2a-49b4-9199-ddad4cdbae14",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "With yᵢ = (xᵢ − a)/h and N = Σfᵢ, the standard deviation of grouped data is:",
+  "formula": "σ = (h/N)·√(NΣfᵢyᵢ² − (Σfᵢyᵢ)²)",
+  "options": [
+   "(h/N)√(NΣfy² − (Σfy)²)",
+   "(1/N)√(NΣfy² − (Σfy)²)",
+   "h√(NΣfy² − (Σfy)²)",
+   "(h²/N)√(NΣfy² − (Σfy)²)"
+  ],
+  "answer": 0,
+  "explain": "σ² = h²[Σfy²/N − (Σfy/N)²]; taking the root gives (h/N)√(NΣfy² − (Σfy)²).",
+  "kind": "formula",
+  "id": "47c70137-7c74-4ced-af3d-78ffed1e699f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Values r = 0, 1, …, n occur with frequencies ⁿC₀, ⁿC₁, …, ⁿCₙ respectively. Their mean is?",
+  "formula": "Σr·ⁿCᵣ = n·2ⁿ⁻¹, ΣⁿCᵣ = 2ⁿ",
+  "options": [
+   "n/2",
+   "2ⁿ/(n + 1)",
+   "(n + 1)/2",
+   "n·2ⁿ⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Σr·ⁿCᵣ = n·2ⁿ⁻¹ and ΣⁿCᵣ = 2ⁿ, so the mean is n/2.",
+  "kind": "result",
+  "id": "5b08343a-c7a9-4553-b297-28443eb4ca74",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Mean of n observations is x̄. The 1st is increased by 1, 2nd by 2, …, nth by n. New mean is?",
+  "formula": "x̄_new = x̄ + (1 + 2 + … + n)/n",
+  "options": [
+   "x̄ + (n + 1)/2",
+   "x̄ + n/2",
+   "x̄ + n(n + 1)/2",
+   "x̄ + (n + 1)"
+  ],
+  "answer": 0,
+  "explain": "Total increase is n(n+1)/2; dividing by n gives an increase of (n+1)/2 in the mean.",
+  "kind": "result",
+  "id": "50d2fb21-ea69-4b2a-8aaa-27cd40e881a7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Grouped data has open-ended classes (e.g. 'below 10', '50 and above'). Which measure can still be found?",
+  "formula": "",
+  "options": [
+   "Arithmetic mean",
+   "Median",
+   "Standard deviation",
+   "Mean deviation about mean"
+  ],
+  "answer": 1,
+  "explain": "Median needs only cumulative frequencies, so it can be found if the median class is closed; mean and SD need all class marks.",
+  "kind": "concept",
+  "id": "0254fba4-7b8d-4303-b397-8a1227ee384d",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "A 'less than' ogive is plotted using which points?",
+  "formula": "",
+  "options": [
+   "(Lower limit, cf)",
+   "(Upper limit, cf)",
+   "(Class mark, frequency)",
+   "(Upper limit, frequency)"
+  ],
+  "answer": 1,
+  "explain": "Less-than ogive: upper class limits against 'less than' cumulative frequency; more-than uses lower limits.",
+  "kind": "fact",
+  "id": "5e06b14e-bbf2-46aa-acbc-f8c62ed121df",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "The grouped-median formula l + [(N/2 − cf)/f]·h assumes frequencies in the median class are",
+  "formula": "",
+  "options": [
+   "Concentrated at the class mark",
+   "Uniformly spread over the class",
+   "Increasing within the class",
+   "Concentrated at the lower limit"
+  ],
+  "answer": 1,
+  "explain": "Linear interpolation is used, which assumes the f observations are uniformly distributed in the median class.",
+  "kind": "concept",
+  "id": "272b51f0-0517-447b-b6c7-a6a788e76ff3",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "The largest of 9 distinct observations is replaced by a much larger value. The median:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Remains unchanged",
+   "Becomes equal to the mean"
+  ],
+  "answer": 2,
+  "explain": "Median is the 5th ordered term; changing an extreme value that stays extreme does not alter it.",
+  "kind": "concept",
+  "id": "23b8691d-67d2-440a-ae85-8f265e3d0f42",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "In grouped data, the cumulative frequency up to a class exactly equals N/2. The median is that class's",
+  "formula": "",
+  "options": [
+   "Upper boundary",
+   "Lower boundary",
+   "Class mark",
+   "Class mark of the next class"
+  ],
+  "answer": 0,
+  "explain": "Exactly half the observations lie up to the upper boundary of that class, so it is the median.",
+  "kind": "result",
+  "id": "a776db50-8280-40a7-a648-abd9f4557a7f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Median of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Ungrouped data in which every observation occurs exactly once has how many modes?",
+  "formula": "",
+  "options": [
+   "No mode",
+   "One mode",
+   "Two modes",
+   "As many modes as observations"
+  ],
+  "answer": 0,
+  "explain": "All frequencies are equal, so no value is most frequent and there is no mode.",
+  "kind": "concept",
+  "id": "835dc1be-85c9-4767-a893-de02f5b38eb8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "In the grouped mode formula, if the post-modal frequency f₂ equals the modal frequency f₁, the mode is:",
+  "formula": "Mode = l + [(f₁−f₀)/(2f₁−f₀−f₂)]·h",
+  "options": [
+   "l + h",
+   "l",
+   "l + h/2",
+   "l + 2h"
+  ],
+  "answer": 0,
+  "explain": "With f₂ = f₁ the denominator is f₁ − f₀, so the fraction is 1 and mode = l + h.",
+  "kind": "result",
+  "id": "4e21897f-0289-43e5-ac5c-6f7dbade39a8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "The grouped-data mode formula l + [(f₁−f₀)/(2f₁−f₀−f₂)]·h assumes the classes have:",
+  "formula": "",
+  "options": [
+   "Equal width",
+   "Equal frequency",
+   "Zero cumulative frequency",
+   "Open-ended limits"
+  ],
+  "answer": 0,
+  "explain": "The interpolation uses a common class width h, so the classes must be of equal width.",
+  "kind": "concept",
+  "id": "39a44954-71f6-45d6-90d4-7bbbbf248b84",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mode of ungrouped and grouped data"
+ },
+ {
+  "prompt": "Every observation xᵢ is replaced by −xᵢ. The mean deviation about the mean:",
+  "formula": "",
+  "options": [
+   "Unchanged",
+   "Changes sign",
+   "Becomes zero",
+   "Becomes negative of the old value"
+  ],
+  "answer": 0,
+  "explain": "Mean becomes −x̄ and every |−xᵢ−(−x̄)| = |xᵢ−x̄|, so MD stays the same.",
+  "kind": "concept",
+  "id": "a49ff078-b8ac-4b63-b4aa-f0702322b99f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Data are in kg. The mean deviation about the mean is expressed in:",
+  "formula": "",
+  "options": [
+   "kg",
+   "kg²",
+   "No unit",
+   "Percent"
+  ],
+  "answer": 0,
+  "explain": "MD uses |xᵢ−x̄|, which has the same unit as the data (unlike its coefficient).",
+  "kind": "unit",
+  "id": "8db7a5fb-6a2a-4a52-a46a-13c2fd0d5f53",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "0 occurs m times and 1 occurs n times. Mean deviation about the mean is:",
+  "formula": "",
+  "options": [
+   "2mn/(m+n)²",
+   "mn/(m+n)²",
+   "mn/(m+n)",
+   "2mn/(m+n)"
+  ],
+  "answer": 0,
+  "explain": "x̄ = n/(m+n); Σ|dev| = 2mn/(m+n); dividing by (m+n) gives 2mn/(m+n)².",
+  "kind": "result",
+  "id": "6a85e825-806f-4b32-a070-a01a7f4ef0cc",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "For 10 observations the positive deviations from the mean sum to 30. MD about mean is:",
+  "formula": "",
+  "options": [
+   "6",
+   "3",
+   "9",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "Positive and negative deviations balance, so Σ|dev| = 60; 60/10 = 6.",
+  "kind": "result",
+  "id": "104de37a-4fa4-4706-867d-a6af379998f1",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Main drawback of mean deviation as a measure of dispersion:",
+  "formula": "",
+  "options": [
+   "Absolute values hinder algebraic treatment",
+   "It ignores some observations",
+   "It is not expressed in data units",
+   "It is affected by origin shift"
+  ],
+  "answer": 0,
+  "explain": "Using |xᵢ−x̄| makes further algebraic/statistical treatment difficult; SD is preferred.",
+  "kind": "concept",
+  "id": "71ac6543-9a7b-438e-a47d-8b8645437de6",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "All frequencies of a distribution are multiplied by the same constant. MD about the mean:",
+  "formula": "Σfᵢ|xᵢ−x̄|/Σfᵢ",
+  "options": [
+   "Unchanged",
+   "Multiplied by the constant",
+   "Divided by the constant",
+   "Squared"
+  ],
+  "answer": 0,
+  "explain": "The constant cancels in numerator and denominator; x̄ also stays the same.",
+  "kind": "concept",
+  "id": "2627096f-d5e5-4c1a-97b9-154bf3803a0a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "Data −b, −a, a, b with 0 < a < b. Mean deviation about the mean is:",
+  "formula": "",
+  "options": [
+   "(a+b)/2",
+   "(b−a)/2",
+   "a+b",
+   "(a²+b²)/4"
+  ],
+  "answer": 0,
+  "explain": "Mean = 0; Σ|x| = 2(a+b); divided by 4 gives (a+b)/2.",
+  "kind": "result",
+  "id": "1049d289-853b-49b5-b381-d0987582a25f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "A positive constant is added to every observation (mean, MD > 0). Coefficient of MD about mean:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Unchanged",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "MD is unchanged but the mean increases, so MD ÷ mean decreases.",
+  "kind": "trend",
+  "id": "e7409e60-8332-428a-80d1-1ac3aa68c6ae",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about mean"
+ },
+ {
+  "prompt": "MD about median M for a grouped frequency distribution with N = Σfᵢ is:",
+  "formula": "",
+  "options": [
+   "Σfᵢ|xᵢ − M| / N",
+   "Σ|xᵢ − M| / N",
+   "Σfᵢ(xᵢ − M)² / N",
+   "Σfᵢ|xᵢ − x̄| / N"
+  ],
+  "answer": 0,
+  "explain": "Each class mark's absolute deviation from the median is weighted by its frequency and divided by N.",
+  "kind": "formula",
+  "id": "f777a491-412f-47e7-81a8-abf33e259901",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Compared with the mean deviation about the mean, the mean deviation about the median is always:",
+  "formula": "",
+  "options": [
+   "Greater than or equal",
+   "Strictly greater",
+   "Strictly less",
+   "Less than or equal"
+  ],
+  "answer": 3,
+  "explain": "MD about the median is the minimum over all centres, so it is ≤ MD about the mean.",
+  "kind": "result",
+  "id": "c68f01bf-9365-4370-a2c9-d133d4ae75c7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Mean deviation about the median is expressed in which unit?",
+  "formula": "",
+  "options": [
+   "Same unit as the observations",
+   "Square of the observation unit",
+   "Unitless",
+   "Percentage"
+  ],
+  "answer": 0,
+  "explain": "It averages absolute deviations in original units, so it keeps the units of the data.",
+  "kind": "unit",
+  "id": "bea3051b-c2d2-4380-8702-74b6da4cfae8",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For a perfectly symmetric distribution, the MD about the median compared with the MD about the mean is:",
+  "formula": "",
+  "options": [
+   "Smaller",
+   "Equal",
+   "Larger",
+   "Half of it"
+  ],
+  "answer": 1,
+  "explain": "Symmetry makes mean = median, so both deviations are taken about the same point.",
+  "kind": "concept",
+  "id": "12d86186-f931-49e7-88a3-c3b63059e425",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "For even n, Σ|xᵢ − M| about the median equals:",
+  "formula": "",
+  "options": [
+   "Sum of all observations − nM",
+   "Sum of lower half − sum of upper half",
+   "Sum of upper half − sum of lower half",
+   "(Sum of all observations)/2"
+  ],
+  "answer": 2,
+  "explain": "Upper-half terms contribute (x − M) and lower-half terms (M − x); the M terms cancel.",
+  "kind": "result",
+  "id": "d08c3671-22c1-40c6-beda-2064e130924e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "The graph of f(a) = Σ|xᵢ − a| against a is:",
+  "formula": "",
+  "options": [
+   "A parabola opening upward",
+   "Piecewise linear and convex",
+   "Piecewise linear and concave",
+   "A horizontal straight line"
+  ],
+  "answer": 1,
+  "explain": "A sum of V-shaped |xᵢ − a| graphs is piecewise linear and convex, with kinks at the xᵢ and minimum at the median.",
+  "kind": "graph",
+  "id": "106835fd-ffe3-4f30-b56c-548547462977",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Mean deviation about median"
+ },
+ {
+  "prompt": "Mean square deviation about any value a, (1/n)Σ(xᵢ − a)², equals σ² plus",
+  "formula": "(1/n)Σ(xᵢ−a)² = σ² + (x̄−a)²",
+  "options": [
+   "(x̄ − a)²",
+   "|x̄ − a|",
+   "n(x̄ − a)²",
+   "(x̄ − a)²/n"
+  ],
+  "answer": 0,
+  "explain": "Parallel-axis type result: mean square deviation about a is σ² + (x̄ − a)², minimal at a = x̄.",
+  "kind": "result",
+  "id": "5001c742-4890-4b51-a38a-e2bb58defcc3",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "Observations are measured in cm. In what unit is the variance expressed?",
+  "formula": "",
+  "options": [
+   "cm²",
+   "cm",
+   "cm³",
+   "Unitless"
+  ],
+  "answer": 0,
+  "explain": "Variance averages squared deviations, so its unit is the square of the observation unit; SD keeps cm.",
+  "kind": "unit",
+  "id": "3a228dbb-fcef-4672-886d-54583f0f8947",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "All observations lie in [m, M]. The largest possible variance is",
+  "formula": "σ²_max = (M − m)²/4",
+  "options": [
+   "(M − m)²/4",
+   "(M − m)²/2",
+   "(M − m)²/12",
+   "(M − m)/2"
+  ],
+  "answer": 0,
+  "explain": "Maximum occurs when half the data sit at m and half at M, giving σ = (M − m)/2.",
+  "kind": "result",
+  "id": "c5d5658f-5b36-42ce-800a-68c35f20763e",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "Variance equals (1/2n²)ΣΣ(xᵢ − xⱼ)². The double sum runs over",
+  "formula": "σ² = (1/2n²) Σᵢ Σⱼ (xᵢ − xⱼ)²",
+  "options": [
+   "All ordered pairs (i, j)",
+   "Only pairs with i < j",
+   "Only pairs with i ≠ j, halved",
+   "Consecutive pairs only"
+  ],
+  "answer": 0,
+  "explain": "ΣΣ over all n² ordered pairs gives 2n²σ², since 2nΣxᵢ² − 2(Σxᵢ)² = 2n²σ².",
+  "kind": "formula",
+  "id": "299291e3-3ed6-432e-ab45-4dc787aa9d69",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "Two observations a ≠ b are each replaced by (a+b)/2, others unchanged. The variance:",
+  "formula": "Σx² falls by (a−b)²/2, mean unchanged",
+  "options": [
+   "Strictly decreases",
+   "Strictly increases",
+   "Remains the same",
+   "Becomes zero"
+  ],
+  "answer": 0,
+  "explain": "Mean is unchanged but Σx² falls by (a−b)²/2 > 0, so the variance strictly decreases.",
+  "kind": "concept",
+  "id": "8e3f9a29-8fb3-43af-b636-d0572676861c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "For n observations with mean x̄ and variance σ², the sum Σ(xᵢ − x̄)² equals?",
+  "formula": "σ² = Σ(xᵢ − x̄)²/n",
+  "options": [
+   "nσ²",
+   "σ²/n",
+   "n(σ² + x̄²)",
+   "(n − 1)σ²"
+  ],
+  "answer": 0,
+  "explain": "By definition σ² = Σ(xᵢ − x̄)²/n, so the sum of squared deviations is nσ².",
+  "kind": "formula",
+  "id": "435ae749-c563-4dd3-a557-a0480b35a876",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of ungrouped data"
+ },
+ {
+  "prompt": "Values 0,1,…,n occur with frequencies ⁿC₀, ⁿC₁, …, ⁿCₙ. The variance of this distribution is",
+  "formula": "",
+  "options": [
+   "n/2",
+   "n/4",
+   "n(n+1)/12",
+   "n²/4"
+  ],
+  "answer": 1,
+  "explain": "This is the binomial pattern with p = q = ½, so variance = npq = n/4.",
+  "kind": "result",
+  "id": "f8b48656-56b5-4817-9c5c-93bfda945977",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "For dᵢ = xᵢ − A in grouped data, Σfᵢdᵢ = 0 implies that",
+  "formula": "",
+  "options": [
+   "A equals the median",
+   "A equals the mean",
+   "The variance is zero",
+   "Σfᵢdᵢ² = 0"
+  ],
+  "answer": 1,
+  "explain": "Σfᵢdᵢ/N = x̄ − A, so it vanishes exactly when A = x̄.",
+  "kind": "concept",
+  "id": "f6f042d6-0841-42e5-b018-8dfdd6c5ff61",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "A constant 3 is subtracted from every positive observation (mean stays positive). The coefficient of variation",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Remains unchanged",
+   "Increases",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "σ is unchanged but the mean falls, so (σ/x̄)×100 rises.",
+  "kind": "trend",
+  "id": "ec84ef9a-05e7-4941-a6c2-9301659b2d45",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Class marks are equally spaced; the list of frequencies is written in reverse order. The variance",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Remains unchanged",
+   "Decreases",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "Reversal is a reflection about the midpoint of the class marks; spread is unchanged.",
+  "kind": "concept",
+  "id": "ce56b3d4-2436-4697-8502-9badb78b5478",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "A new observation x₀ is added to N observations (mean x̄, variance σ²). The new variance is",
+  "formula": "",
+  "options": [
+   "Nσ²/(N+1) + (x₀−x̄)²/(N+1)",
+   "Nσ²/(N+1) + N(x₀−x̄)²/(N+1)²",
+   "σ²/(N+1) + N(x₀−x̄)²/(N+1)²",
+   "Nσ²/(N+1) + N(x₀−x̄)²/(N+1)"
+  ],
+  "answer": 1,
+  "explain": "Combine with a one-item group (variance 0): extra term n₁n₂d²/(n₁+n₂)² with n₁=N, n₂=1.",
+  "kind": "formula",
+  "id": "9d8bdc9b-5802-407f-8c23-e07e5760658f",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Because deviations are squared, the SD is more sensitive than the mean deviation to",
+  "formula": "",
+  "options": [
+   "Change of origin",
+   "Sign of deviations",
+   "Extreme values",
+   "Class width"
+  ],
+  "answer": 2,
+  "explain": "Squaring magnifies large deviations, so outliers influence σ more than MD.",
+  "kind": "concept",
+  "id": "49bb4aab-c7b3-476a-8ca8-b8d4c39002bb",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "For any frequency data, Σfx²/N compared with (Σfx/N)² is",
+  "formula": "",
+  "options": [
+   "Always strictly greater",
+   "Less than or equal",
+   "Always equal",
+   "Greater than or equal"
+  ],
+  "answer": 3,
+  "explain": "Σfx²/N − (Σfx/N)² = σ² ≥ 0; equality only when all observations are equal.",
+  "kind": "concept",
+  "id": "b8075fae-9bfc-4c28-9dc9-2563e010791c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "A grouped distribution has mean 0. Its variance equals",
+  "formula": "",
+  "options": [
+   "Σfᵢxᵢ²",
+   "(Σfᵢxᵢ/N)²",
+   "Σfᵢxᵢ²/N²",
+   "Σfᵢxᵢ²/N"
+  ],
+  "answer": 3,
+  "explain": "σ² = Σfx²/N − x̄², and x̄ = 0.",
+  "kind": "formula",
+  "id": "ea5ea47e-55c5-4c0b-8123-35ea8cd1d272",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Equal-width classes: lower limits are used instead of class marks. The computed variance",
+  "formula": "",
+  "options": [
+   "Increases by (h/2)²",
+   "Decreases by h/2",
+   "Remains unchanged",
+   "Becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Every value shifts by the same h/2 (change of origin), so the variance is unchanged.",
+  "kind": "concept",
+  "id": "557127a2-1ea4-4959-b2e7-02df37acff0c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Two groups are merged. The combined SD is never less than",
+  "formula": "",
+  "options": [
+   "The larger of the two SDs",
+   "The mean of the two SDs",
+   "The difference of the two SDs",
+   "The smaller of the two SDs"
+  ],
+  "answer": 3,
+  "explain": "Combined variance ≥ weighted average of σ₁², σ₂² ≥ the smaller one.",
+  "kind": "result",
+  "id": "8c4123c7-ce09-48a4-98bc-a656a9b19d33",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Class marks 10, 20, 30, 40 each have frequency 5. Variance is 125. The frequencies become 1 each; variance is",
+  "formula": "",
+  "options": [
+   "25",
+   "125",
+   "625",
+   "5"
+  ],
+  "answer": 1,
+  "explain": "Equal scaling of all frequencies leaves the variance unchanged.",
+  "kind": "concept",
+  "id": "ccf36274-c912-4533-8a57-759d27a59b3c",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance and SD of grouped/frequency data"
+ },
+ {
+  "prompt": "Data has mean x̄, variance σ². The mean of squares of the new values (xᵢ − x̄) is:",
+  "formula": "",
+  "options": [
+   "σ²",
+   "x̄²",
+   "σ² + x̄²",
+   "σ²/n"
+  ],
+  "answer": 0,
+  "explain": "Shifted data has mean 0, so its mean of squares = variance = σ².",
+  "kind": "concept",
+  "id": "893e68dc-4c84-4f41-a314-1f3f1a137ca0",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "Temperatures in °C have SD σ. Using F = (9/5)C + 32, the SD in °F is:",
+  "formula": "SD(aX + b) = |a|·SD(X)",
+  "options": [
+   "9σ/5",
+   "9σ/5 + 32",
+   "81σ²/25",
+   "5σ/9"
+  ],
+  "answer": 0,
+  "explain": "The shift 32 does not change the SD, and the scale factor 9/5 multiplies it, giving 9σ/5.",
+  "kind": "concept",
+  "id": "04a3c27f-5322-4e1c-870d-f050273a92e1",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Effect of shift/scale on mean and variance"
+ },
+ {
+  "prompt": "For x̄₁ ≠ x̄₂, the combined mean equals (x̄₁+x̄₂)/2 exactly when",
+  "formula": "x̄ = (n₁x̄₁+n₂x̄₂)/(n₁+n₂)",
+  "options": [
+   "n₁ = n₂",
+   "σ₁ = σ₂",
+   "n₁σ₁ = n₂σ₂",
+   "n₁ + n₂ is even"
+  ],
+  "answer": 0,
+  "explain": "Weights n₁, n₂ must be equal for a simple average of the two means (x̄₁ ≠ x̄₂).",
+  "kind": "concept",
+  "id": "5adc410a-e2b2-4272-b4c2-ac273a76cc90",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Two equal-size groups, each with variance σ², have means differing by 2d. Combined variance is?",
+  "formula": "σ² = (σ₁²+σ₂²)/2 + (x̄₁−x̄₂)²/4",
+  "options": [
+   "σ² + d²",
+   "σ² + 2d²",
+   "σ² + 4d²",
+   "σ² + d²/2"
+  ],
+  "answer": 0,
+  "explain": "Equal sizes: σ² + (2d)²/4 = σ² + d²; each mean lies d from the combined mean.",
+  "kind": "result",
+  "id": "a891762d-62f0-4b8a-928f-1acfa872ceec",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Combined mean and variance of two groups"
+ },
+ {
+  "prompt": "Variance of the first n odd natural numbers 1, 3, 5, …, (2n−1) is",
+  "formula": "",
+  "options": [
+   "(n²−1)/3",
+   "(n²−1)/12",
+   "(n²−1)/6",
+   "4(n²−1)/3"
+  ],
+  "answer": 0,
+  "explain": "AP with d = 2: d²(n²−1)/12 = 4(n²−1)/12 = (n²−1)/3.",
+  "kind": "result",
+  "id": "76481531-4004-423f-a794-7fb5f92e57a7",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "For the data 1, 2, …, n, the mean of the cubes (Σx³/n) equals",
+  "formula": "",
+  "options": [
+   "n(n+1)²/4",
+   "n²(n+1)²/4",
+   "(n+1)²/4",
+   "(n+1)(2n+1)/6"
+  ],
+  "answer": 0,
+  "explain": "Σx³ = n²(n+1)²/4; dividing by n gives n(n+1)²/4.",
+  "kind": "formula",
+  "id": "8ab4bb88-6e63-4939-81f4-d83c7d20fe53",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Variance of first n naturals/standard series"
+ },
+ {
+  "prompt": "For which data set is the coefficient of variation (σ/x̄ × 100) not defined?",
+  "formula": "CV = (σ/x̄)×100",
+  "options": [
+   "Mean equal to zero",
+   "Standard deviation equal to zero",
+   "All observations positive",
+   "Odd number of observations"
+  ],
+  "answer": 0,
+  "explain": "CV has x̄ in the denominator, so it is undefined when x̄ = 0.",
+  "kind": "concept",
+  "id": "4f23f174-8a3d-402d-88ad-b474d3598e0a",
+  "subject": "Mathematics",
+  "chapter": "Statistics",
+  "topic": "Coefficient of variation and comparison"
+ }
+]

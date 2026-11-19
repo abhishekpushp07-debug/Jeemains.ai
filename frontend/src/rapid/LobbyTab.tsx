@@ -18,7 +18,8 @@ import { BadlaStrip } from "./BadlaStrip";
 import { CupNightBanner } from "./CupNight";
 import { ChampionsWall } from "./ChampionsWall";
 import { ScopeSheet, SubjectChips } from "./ScopeSheet";
-import { MAX_PICKS, cardCount, encodePicks, scopeLabel, scopeSubjects, setScope, useScope } from "./scope";
+import { CardCountPicker } from "./CardCount";
+import { CARD_SECONDS, MAX_PICKS, cardCount, encodePicks, fitCount, scopeLabel, scopeSubjects, setScope, useCardCount, useScope } from "./scope";
 import { ErrorBox, Sheet } from "./ui";
 import { Friend, GangRow, go, seenText, sendChallenge, setArenaTab, useFriends, useGangs, useInbox } from "./social";
 
@@ -53,15 +54,16 @@ export function LobbyTab() {
   const cat = useCached<any>("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", uid));
   const prof = useGameProfile(uid), friends = useFriends(uid), gangs = useGangs(uid);
   const weak = useCached<any>(uid ? `u.${uid}.revision.JEE` : null, () => rf("/revision?exam=JEE", uid), false);
-  const refresh = [prof.revalidate, friends.reload, gangs.reload, weak.reload];
-  useFocusEffect(useCallback(() => { refresh.forEach((f) => f()); }, refresh)); // eslint-disable-line react-hooks/exhaustive-deps
+  const { revalidate } = prof, { reload: reloadFriends } = friends, { reload: reloadGangs } = gangs, { reload: reloadWeak } = weak;
+  useFocusEffect(useCallback(() => { revalidate(); reloadFriends(); reloadGangs(); reloadWeak(); }, [revalidate, reloadFriends, reloadGangs, reloadWeak]));
 
   const available = cardCount(picks, cat.data?.subjects);
-  const can = available >= 30 && !!uid;
-  const play = (mode: "random" | "ai" | "solo") => router.push(mode === "solo" ? { pathname: "/rapid/session", params: { exam: "JEE", picks: encodePicks(picks), r: uuid() } } : go.duel({ mode, exam: "JEE", picks: encodePicks(picks), r: uuid() }));
+  const chosen = useCardCount(), size = cat.data ? fitCount(chosen, available) : 0;
+  const can = size > 0 && !!uid;
+  const play = (mode: "random" | "ai" | "solo") => router.push(mode === "solo" ? { pathname: "/rapid/session", params: { exam: "JEE", picks: encodePicks(picks), n: String(size), r: uuid() } } : go.duel({ mode, exam: "JEE", picks: encodePicks(picks), n: String(size), r: uuid() }));
   const challenge = async (body: { pids?: string[]; gang_id?: string }) => {
     setBusy(true); setError("");
-    try { const room = await sendChallenge(uid, { ...body, picks }); setQuick(null); router.push(go.room(room)); }
+    try { const room = await sendChallenge(uid, { ...body, picks, count: size || 30 }); setQuick(null); router.push(go.room(room)); }
     catch (e: any) { setError(e.message); }
     finally { setBusy(false); }
   };
@@ -87,13 +89,14 @@ export function LobbyTab() {
         </View>
         <Ribbon testID="rf-chapter-picker" label={label} sub={cat.loading && !cat.data ? "Loading your cards…" : `${scopeSubjects(picks)} · ${picks.length}/${MAX_PICKS} · ${available} cards`} onPress={() => setSheet("chapters")} />
         <View style={styles.chipRow}><SubjectChips picks={picks} onChange={setScope} onLimit={() => setSheet("chapters")} /></View>
+        <View style={styles.chipRow}><CardCountPicker available={cat.data ? available : undefined} /></View>
       </View>
       <ErrorBox testID="rf-catalog-error" error={cat.error || prof.error} retry={() => { cat.reload(); prof.reload(); }} />
 
       <View style={styles.tiles}>
         <Tile testID="rf-play-friends" icon="friends" label="Play Friends" sub={online ? `${online} online` : "Gang or friends"} badge={online} delay={300} narrow={narrow} onPress={() => router.push(go.challenge())} />
         <Tile testID="rf-duel-ai" icon="rival" label="Practice Rival" sub="No waiting" delay={1300} narrow={narrow} disabled={!can} onPress={() => play("ai")} />
-        <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub="30 cards · 15 s" delay={2300} narrow={narrow} disabled={!can} onPress={() => play("solo")} />
+        <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub={`${size || chosen} cards · ${CARD_SECONDS} s`} delay={2300} narrow={narrow} disabled={!can} onPress={() => play("solo")} />
       </View>
 
       <CupNightBanner uid={uid} />
@@ -144,7 +147,7 @@ export function LobbyTab() {
     </ScrollView>
 
     <View style={styles.dock}>
-      <RaisedButton testID="rf-duel-random" label="PLAY" sub={`Quick Match · ${label}`} icon="swords" height={64} streak disabled={!can} onPress={() => play("random")} />
+      <RaisedButton testID="rf-duel-random" label="PLAY" sub={`Quick Match · ${label}${size ? ` · ${size} cards` : ""}`} icon="swords" height={64} streak disabled={!can} onPress={() => play("random")} />
     </View>
 
     <ScopeSheet visible={sheet === "chapters"} onClose={() => setSheet("")} subjects={cat.data?.subjects || []} value={picks} onDone={setScope} />

@@ -1,1636 +1,3516 @@
 [
-  {
-    "id": "2d0579bc-393d-4020-97ba-578591ce445c",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Newton's 2nd law in vector form",
-    "formula": "F⃗ = ma⃗",
-    "options": [
-      "F⃗ = ma⃗",
-      "F⃗ = m/a⃗",
-      "F⃗ = mv⃗",
-      "F⃗ = pa⃗"
-    ],
-    "answer": 0,
-    "explain": "Net force equals mass times acceleration; direction of F⃗ same as a⃗.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "009f3ed1-4876-4b47-9070-8ec9554de2d1",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Impulse equals change in",
-    "formula": "J = Δp",
-    "options": [
-      "Force",
-      "Velocity",
-      "Momentum",
-      "Kinetic energy"
-    ],
-    "answer": 2,
-    "explain": "Impulse J = F·Δt = Δp; it measures change in linear momentum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e8c9181b-7b1f-4339-b4ff-7117fafe6da4",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "SI unit of linear momentum",
-    "formula": "p = mv",
-    "options": [
-      "kg·m/s",
-      "N·m",
-      "J·s/m",
-      "kg·m/s²"
-    ],
-    "answer": 0,
-    "explain": "p = mv; units are kg·m/s, equivalent to N·s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "514b6744-d1fd-4fec-b21b-c132e8d78e9c",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Which law states 'every action has equal & opposite reaction'?",
-    "formula": "",
-    "options": [
-      "Newton's 2nd law",
-      "Law of inertia",
-      "Newton's 3rd law",
-      "Newton's 1st law"
-    ],
-    "answer": 2,
-    "explain": "3rd law: F₁₂ = −F₂₁; action-reaction forces act on DIFFERENT bodies.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75f58222-40f1-4f60-9aae-211dfc60f7d2",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Static friction max value formula",
-    "formula": "f_s ≤ μₛN",
-    "options": [
-      "μₖN",
-      "μₛN",
-      "μₖmg cosθ",
-      "μₛmg sinθ"
-    ],
-    "answer": 1,
-    "explain": "Maximum static friction = μₛN; kinetic friction = μₖN (μₛ > μₖ always).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "42679d62-2f21-4026-9134-3f93a5e92667",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Acceleration of system: two blocks m₁, m₂ on frictionless surface, force F",
-    "formula": "a = F/(m₁+m₂)",
-    "options": [
-      "F/m₂",
-      "F·m₁/(m₁+m₂)",
-      "F/(m₁+m₂)",
-      "F/m₁"
-    ],
-    "answer": 2,
-    "explain": "Total mass resists force; a = F/(m₁+m₂) by Newton's 2nd law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ce3bfa7c-1f86-47d0-b8d1-4a6341b48086",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Tension in string connecting m₁ & m₂ (force F on m₁ side)",
-    "formula": "T = Fm₂/(m₁+m₂)",
-    "options": [
-      "Fm₁/(m₁+m₂)",
-      "Fm₂/(m₁+m₂)",
-      "F(m₁+m₂)/m₂",
-      "F/(m₁+m₂)"
-    ],
-    "answer": 1,
-    "explain": "T pulls m₂ alone: T = m₂·a = m₂·F/(m₁+m₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "53dc0c6f-e546-4566-8c38-f2b27c96a519",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Acceleration of Atwood machine (m₁ > m₂, frictionless pulley)",
-    "formula": "a=(m₁-m₂)g/(m₁+m₂)",
-    "options": [
-      "(m₁+m₂)g/(m₁-m₂)",
-      "(m₁-m₂)g/(m₁+m₂)",
-      "g/2",
-      "(m₁-m₂)g/m₁"
-    ],
-    "answer": 1,
-    "explain": "Net force = (m₁−m₂)g; total mass = m₁+m₂; so a = (m₁−m₂)g/(m₁+m₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a189ca8b-94c9-4b21-bea9-d9c7d2e9a14f",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Normal force on a body in a lift accelerating upward",
-    "formula": "N = m(g+a)",
-    "options": [
-      "ma",
-      "mg",
-      "m(g+a)",
-      "m(g−a)"
-    ],
-    "answer": 2,
-    "explain": "Lift accelerates up: N−mg = ma, so N = m(g+a); apparent weight increases.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c4aa2c13-1878-46da-9ea8-745910c89525",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Apparent weight in freely falling lift",
-    "formula": "N = m(g−g) = 0",
-    "options": [
-      "2mg",
-      "mg/2",
-      "mg",
-      "Zero (weightlessness)"
-    ],
-    "answer": 3,
-    "explain": "Free fall: a = g downward; N = m(g−g) = 0; apparent weightlessness.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6a59cfde-7507-4afd-bafa-3a1d58374824",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Law of conservation of momentum applies when",
-    "formula": "F_ext = 0 ⇒ p = const",
-    "options": [
-      "Body is at rest",
-      "Friction is absent",
-      "Net external force is zero",
-      "Net internal force is zero"
-    ],
-    "answer": 2,
-    "explain": "Total momentum conserved only when net external force on system is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1f664a53-6d3a-445f-961e-28ce9701e0bd",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Angle of friction λ is related to μ by",
-    "formula": "tan λ = μ",
-    "options": [
-      "cos λ = μ",
-      "tan λ = μ",
-      "tan λ = 1/μ",
-      "sin λ = μ"
-    ],
-    "answer": 1,
-    "explain": "Angle of friction λ: tan λ = f/N = μN/N = μ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c4dd8851-ab63-4355-8527-a3409fceed3b",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Angle of repose θᵣ for a block on incline",
-    "formula": "tan θᵣ = μₛ",
-    "options": [
-      "tan θᵣ = μₛ",
-      "cos θᵣ = μₛ",
-      "sin θᵣ = μₛ",
-      "tan θᵣ = μₖ"
-    ],
-    "answer": 0,
-    "explain": "At repose, mg sinθ = μₛ mg cosθ, so tan θᵣ = μₛ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a066187d-e31a-461d-9264-d5bbbaa7f5d3",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Inertia of a body depends on its",
-    "formula": "",
-    "options": [
-      "Mass",
-      "Velocity",
-      "Weight",
-      "Shape"
-    ],
-    "answer": 0,
-    "explain": "Inertia is the tendency to resist change in motion; it depends only on mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3315f04d-aa1d-4de2-a8e1-272c7b875d90",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Newton's 1st law is also called",
-    "formula": "",
-    "options": [
-      "Law of momentum",
-      "Law of inertia",
-      "Law of action-reaction",
-      "Law of gravitation"
-    ],
-    "answer": 1,
-    "explain": "1st law defines inertia: body stays at rest/uniform motion unless acted upon by force.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "20030611-0ef4-4875-99f9-51ebd7fa7c56",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Pseudo force magnitude on mass m in non-inertial frame (acceleration A)",
-    "formula": "F_pseudo = mA",
-    "options": [
-      "mg",
-      "mA (along A)",
-      "mA (opposite to A)",
-      "m(g+A)"
-    ],
-    "answer": 2,
-    "explain": "Pseudo force = mA directed opposite to the acceleration of the non-inertial frame.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0da11729-a143-4eb9-b063-b87630e612ea",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For block on frictionless incline (angle θ), acceleration along incline",
-    "formula": "a = g sinθ",
-    "options": [
-      "g sinθ",
-      "g tanθ",
-      "g",
-      "g cosθ"
-    ],
-    "answer": 0,
-    "explain": "Component of gravity along incline = mg sinθ; a = g sinθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9ca3c6be-f0ca-4739-bb9e-657923e2da9a",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Normal force on block on incline (angle θ)",
-    "formula": "N = mg cosθ",
-    "options": [
-      "mg",
-      "mg tanθ",
-      "mg cosθ",
-      "mg sinθ"
-    ],
-    "answer": 2,
-    "explain": "Perpendicular equilibrium on incline: N = mg cosθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c2a07f22-2f71-429d-bce7-006976385790",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Action-reaction forces act on",
-    "formula": "",
-    "options": [
-      "Different bodies",
-      "Same body, opposite sides",
-      "Massless string",
-      "Same body"
-    ],
-    "answer": 0,
-    "explain": "Newton's 3rd law: action and reaction always act on two DIFFERENT bodies.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "897bef18-56cc-474c-b5f5-e1a3f761c0a1",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Friction force on a stationary block on a surface with no applied force",
-    "formula": "",
-    "options": [
-      "Zero",
-      "mg",
-      "μₛmg",
-      "μₖmg"
-    ],
-    "answer": 0,
-    "explain": "Static friction is self-adjusting; with no applied force, friction = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a5354328-35fb-4481-a85e-14ec13c7731e",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Dimension of impulse",
-    "formula": "[J] = MLT⁻¹",
-    "options": [
-      "ML²T⁻¹",
-      "MLT⁻¹",
-      "MLT⁻²",
-      "ML²T⁻²"
-    ],
-    "answer": 1,
-    "explain": "Impulse = Δp = mv; dimensions = MLT⁻¹, same as momentum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ef43839-e953-4697-b0b8-6bdc13693bd9",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For two blocks in contact on frictionless surface, contact force between them",
-    "formula": "F_c = m₂F/(m₁+m₂)",
-    "options": [
-      "F/2",
-      "m₂F/(m₁+m₂)",
-      "F",
-      "m₁F/(m₁+m₂)"
-    ],
-    "answer": 1,
-    "explain": "Contact force on m₂ = m₂·a = m₂·F/(m₁+m₂); force applied on m₁ side.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3c137ea3-d01b-47ef-8cd4-b4576772f468",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Limiting friction is independent of:",
-    "formula": "f_s(max) = μₛN",
-    "options": [
-      "Nature of surfaces",
-      "Coefficient μₛ",
-      "Area of contact",
-      "Normal force"
-    ],
-    "answer": 2,
-    "explain": "Limiting static friction depends on N and μₛ, NOT on area of contact.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3c8a2cf9-4cd6-4dad-8582-08b0a970908b",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A body moves with constant velocity. Net force on it is:",
-    "formula": "",
-    "options": [
-      "Zero",
-      "Equal to friction",
-      "Non-zero constant",
-      "Equal to its weight"
-    ],
-    "answer": 0,
-    "explain": "Constant velocity ⟹ zero acceleration ⟹ net force = 0 (Newton's 1st law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "948b9b74-8542-4bde-82d5-24a215c9103b",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Tension in string of Atwood machine (m₁>m₂):",
-    "formula": "T = 2m₁m₂g/(m₁+m₂)",
-    "options": [
-      "2m₁m₂g/(m₁+m₂)",
-      "m₁m₂g/(m₁+m₂)",
-      "(m₁−m₂)g",
-      "(m₁+m₂)g/2"
-    ],
-    "answer": 0,
-    "explain": "Standard Atwood result: T = 2m₁m₂g/(m₁+m₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "05fa65e1-d5ab-4d7f-be16-a0ec5709f369",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Normal force on mass m in a lift decelerating while moving upward:",
-    "formula": "N = m(g − a)",
-    "options": [
-      "zero",
-      "mg",
-      "m(g − a)",
-      "m(g + a)"
-    ],
-    "answer": 2,
-    "explain": "Deceleration upward means net acceleration is downward ⟹ N = m(g−a).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0db8405d-ade9-442b-a4fc-1627d0be38c7",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block rests on a rough incline. Which force balances the gravitational component along the incline?",
-    "formula": "",
-    "options": [
-      "Static friction",
-      "Kinetic friction",
-      "Pseudo force",
-      "Normal force"
-    ],
-    "answer": 0,
-    "explain": "Static friction acts up the incline to balance mg sinθ when block is at rest.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77cd11d3-a8be-421f-a29f-4d7ca5b6945f",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Coefficient of friction μ = tan θ corresponds to which condition?",
-    "formula": "μ = tan θ",
-    "options": [
-      "Angle of repose",
-      "Critical angle",
-      "Angle of projection",
-      "Angle of incidence"
-    ],
-    "answer": 0,
-    "explain": "At angle of repose, block just starts sliding: μ = tan θᵣ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70243829-dd3a-49db-ac6f-b705810a4c4b",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A 10 N force acts on a body for 3 s then stops. Which quantity changes by 30 N·s?",
-    "formula": "J = FΔt",
-    "options": [
-      "Acceleration",
-      "Velocity",
-      "Linear momentum",
-      "Kinetic energy"
-    ],
-    "answer": 2,
-    "explain": "Impulse J = FΔt = change in momentum; J = 10×3 = 30 N·s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "446c2b43-123b-4a09-820a-66fb85934c9e",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Two equal masses collide and stick together. Speed of combined mass (initial speed u of one, other at rest):",
-    "formula": "v = u/2",
-    "options": [
-      "2u",
-      "u/4",
-      "u",
-      "u/2"
-    ],
-    "answer": 3,
-    "explain": "By conservation of momentum: mu = 2m·v ⟹ v = u/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a38c2df5-8cd1-4aa2-8270-46c1c87883cc",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A horse pulls a cart. By Newton's 3rd law, cart pulls horse equally. Why does the system move?",
-    "formula": "",
-    "options": [
-      "Action = reaction cancel within system",
-      "Inertia of cart is less",
-      "Horse has more mass",
-      "Net external force on system is non-zero"
-    ],
-    "answer": 3,
-    "explain": "Action-reaction act on different bodies; ground friction on horse provides net external force.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0c6d6e0e-7e86-4d07-bca2-171c82df1c7e",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a block on a rough surface, kinetic friction force direction is:",
-    "formula": "f_k = μ_k N",
-    "options": [
-      "Opposite to motion",
-      "Vertically downward",
-      "Perpendicular to surface",
-      "Along motion"
-    ],
-    "answer": 0,
-    "explain": "Kinetic friction always opposes the direction of relative motion of the block.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ce7c0211-0353-4991-b3cf-9a48b139fc75",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Which of these is NOT a contact force?",
-    "formula": "",
-    "options": [
-      "Normal reaction",
-      "Tension",
-      "Friction",
-      "Gravitational force"
-    ],
-    "answer": 3,
-    "explain": "Gravity acts at a distance (non-contact); normal, friction, tension are contact forces.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2e4b4113-c93d-4fff-be4c-93f08a2f6441",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block of mass m on a frictionless surface connected via string over pulley to hanging mass M. Acceleration:",
-    "formula": "a = Mg/(M+m)",
-    "options": [
-      "(M−m)g/(M+m)",
-      "Mg/m",
-      "Mg/(M+m)",
-      "g"
-    ],
-    "answer": 2,
-    "explain": "Only M drives the system; total mass = M+m ⟹ a = Mg/(M+m).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "36cb4d31-866e-4c14-bb12-50951e1908b6",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Centripetal force on mass m moving in circle (radius r, speed v) is provided by:",
-    "formula": "F = mv²/r",
-    "options": [
-      "Normal force only",
-      "Tangential force",
-      "Net inward force",
-      "Net outward force"
-    ],
-    "answer": 2,
-    "explain": "Any net inward force (friction, tension, etc.) acts as centripetal force = mv²/r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b12a5227-6fe1-4d5f-9def-525b79e95032",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Maximum speed of a car on a level circular road (radius r, μ, g):",
-    "formula": "v_max = √(μrg)",
-    "options": [
-      "μrg",
-      "√(rg/μ)",
-      "√(μrg)",
-      "μ√(rg)"
-    ],
-    "answer": 2,
-    "explain": "Friction provides centripetal force: μmg = mv²/r ⟹ v_max = √(μrg).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "620fd9b3-0ee5-4ba5-bc90-17039d537a71",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Banking angle θ for ideal (frictionless) circular road of radius r at speed v:",
-    "formula": "tan θ = v²/rg",
-    "options": [
-      "sin θ = v²/rg",
-      "tan θ = v/rg",
-      "tan θ = rg/v²",
-      "tan θ = v²/rg"
-    ],
-    "answer": 3,
-    "explain": "On banked road: N sinθ = mv²/r, N cosθ = mg ⟹ tan θ = v²/rg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e5a7ed23-1c01-40d0-8cd0-d2b8b44ab7f5",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "If net force on a system of particles is zero, which is conserved?",
-    "formula": "",
-    "options": [
-      "Total kinetic energy",
-      "Total potential energy",
-      "Total linear momentum",
-      "Angular velocity"
-    ],
-    "answer": 2,
-    "explain": "Zero net external force ⟹ dp/dt = 0 ⟹ total linear momentum is conserved.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9db2b41a-149d-43ee-8b03-69032a397118",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A spring balance shows less reading when in a downward-accelerating lift. The reduction equals:",
-    "formula": "ΔW = ma",
-    "options": [
-      "ma",
-      "zero",
-      "m(g+a)",
-      "mg"
-    ],
-    "answer": 0,
-    "explain": "Apparent weight = m(g−a); reduction from true weight mg is ma.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "99b9527d-bdb6-4869-9fd0-10eea8dc4667",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a body in equilibrium on a rough incline, max angle before sliding is equal to:",
-    "formula": "",
-    "options": [
-      "Brewster's angle",
-      "Angle of projection",
-      "Angle of friction",
-      "Critical angle"
-    ],
-    "answer": 2,
-    "explain": "Angle of repose equals angle of friction λ = arctan(μ); body slides beyond this.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd621919-60a7-4427-bb0a-bf01110f87c9",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block is pushed against a wall by horizontal force F. Friction on block acts:",
-    "formula": "",
-    "options": [
-      "Upward",
-      "Away from the wall",
-      "Downward",
-      "Into the wall"
-    ],
-    "answer": 0,
-    "explain": "Friction acts upward to balance gravity when block is pressed against vertical wall.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3e888143-301b-4912-a4bd-8fc1c8977c94",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A man of mass m stands on a weighing scale in a lift moving up at constant speed. Reading is:",
-    "formula": "",
-    "options": [
-      "mg",
-      "m(g+a)",
-      "zero",
-      "m(g−a)"
-    ],
-    "answer": 0,
-    "explain": "Constant speed means zero acceleration; net force = 0, so normal force = mg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8c6eb318-c695-4894-81df-dd254ca655d3",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Impulse-momentum theorem: Impulse = ?",
-    "formula": "J = Δp = mΔv",
-    "options": [
-      "Change in momentum",
-      "Change in KE",
-      "Change in velocity",
-      "Force × distance"
-    ],
-    "answer": 0,
-    "explain": "Impulse equals the change in linear momentum of the body.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d2e01d42-bb38-4022-afd0-ba62f9ecd3a8",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block on frictionless floor: force F at angle θ above horizontal. Normal force?",
-    "formula": "N = mg − F sinθ",
-    "options": [
-      "mg − F cosθ",
-      "mg + F sinθ",
-      "mg − F sinθ",
-      "mg"
-    ],
-    "answer": 2,
-    "explain": "Vertical equilibrium: N + F sinθ = mg, so N = mg − F sinθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fab643dc-43e3-410a-8a59-6d2255271fda",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Static friction is a __ force.",
-    "formula": "",
-    "options": [
-      "Constant value",
-      "Always less than μₖN",
-      "Always equal to μₛN",
-      "Self-adjusting (up to max)"
-    ],
-    "answer": 3,
-    "explain": "Static friction adjusts itself to match applied force until it reaches its maximum μₛN.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "55df7cde-f203-416d-a5e8-781aa17c4148",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Two blocks m₁ (on table) & m₂ (hanging) via string over frictionless pulley. Tension?",
-    "formula": "T = m₁m₂g/(m₁+m₂)",
-    "options": [
-      "m₁g/(m₁+m₂)",
-      "(m₁+m₂)g/2",
-      "m₁m₂g/(m₁+m₂)",
-      "m₂g"
-    ],
-    "answer": 2,
-    "explain": "Solving equations: T = m₁m₂g/(m₁+m₂) for frictionless table and pulley.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c02ec870-2336-417b-8153-874efcbc4014",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For Atwood machine, acceleration a = ?",
-    "formula": "a = (m₁−m₂)g/(m₁+m₂)",
-    "options": [
-      "(m₁+m₂)g/(m₁−m₂)",
-      "(m₁−m₂)g/(m₁+m₂)",
-      "g/2",
-      "(m₁−m₂)g/2m₁"
-    ],
-    "answer": 1,
-    "explain": "Net force = (m₁−m₂)g acts on total mass (m₁+m₂), giving this acceleration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3494df81-62fd-4d1f-8a16-d832c3371961",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A lift accelerates downward with acceleration a. Normal force on mass m?",
-    "formula": "N = m(g − a)",
-    "options": [
-      "mg",
-      "m(g − a)",
-      "ma",
-      "m(g + a)"
-    ],
-    "answer": 1,
-    "explain": "Net downward force equation: mg − N = ma, so N = m(g−a).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "245fd645-9308-4d63-af97-6f8376f3b43e",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Which law gives the concept of inertia directly?",
-    "formula": "",
-    "options": [
-      "Newton's First Law",
-      "Newton's Second Law",
-      "Newton's Third Law",
-      "Law of gravitation"
-    ],
-    "answer": 0,
-    "explain": "Newton's First Law defines inertia: body continues its state unless acted on by net force.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2c53fca-7564-4a88-b50e-8ca59f835a8c",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a block on rough incline at angle θ > angle of repose, the block:",
-    "formula": "",
-    "options": [
-      "Slides up",
-      "Oscillates",
-      "Slides down with acceleration",
-      "Remains stationary"
-    ],
-    "answer": 2,
-    "explain": "When θ exceeds angle of repose (tan⁻¹μ), static friction cannot balance gravity component.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5c14332d-3ebb-41ab-8c4c-29023a2ebc84",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A body of mass m is on a rough horizontal surface. Applied force < μₛmg. Acceleration?",
-    "formula": "a = 0",
-    "options": [
-      "μₛg",
-      "Zero",
-      "F/m",
-      "μₖg"
-    ],
-    "answer": 1,
-    "explain": "If applied force is less than maximum static friction, the body stays at rest; a = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eeb8f89e-f295-42f0-bd39-0f76b77fe5e0",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block is on a rough surface. If normal force doubles, kinetic friction:",
-    "formula": "fₖ = μₖN",
-    "options": [
-      "Halves",
-      "Becomes zero",
-      "Remains same",
-      "Doubles"
-    ],
-    "answer": 3,
-    "explain": "Kinetic friction fₖ = μₖN; doubling N doubles fₖ since μₖ is constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5a83f695-99d5-4d19-954e-e66511841e2c",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Free body diagram of a block on a rough incline moving UP the incline: friction acts?",
-    "formula": "",
-    "options": [
-      "Down the incline",
-      "Perpendicular to incline",
-      "Horizontally",
-      "Up the incline"
-    ],
-    "answer": 0,
-    "explain": "Kinetic friction always opposes relative motion; block moving up → friction acts down the incline.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "46c9f489-09d5-4d32-bf71-79925631a7c4",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "The coefficient of kinetic friction μₖ depends on:",
-    "formula": "",
-    "options": [
-      "Area of contact",
-      "Speed of sliding",
-      "Nature of surfaces in contact",
-      "Weight of body"
-    ],
-    "answer": 2,
-    "explain": "μₖ depends only on the nature (material and roughness) of the surfaces in contact.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "268dd70a-e838-4caf-ab4f-1c1ad5e1ebc1",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "In a non-inertial frame, a pseudo force is applied. Its direction is:",
-    "formula": "F_pseudo = −mA",
-    "options": [
-      "Same as frame's acceleration",
-      "Opposite to frame's acceleration",
-      "Perpendicular to motion",
-      "Along velocity of body"
-    ],
-    "answer": 1,
-    "explain": "Pseudo force = −mA, directed opposite to the acceleration of the non-inertial reference frame.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2318c112-e48a-4030-9a7b-a7d98e066254",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "If a body is in equilibrium, the resultant of ALL forces on it equals:",
-    "formula": "ΣF = 0",
-    "options": [
-      "Normal force",
-      "Zero",
-      "Its weight",
-      "Friction force"
-    ],
-    "answer": 1,
-    "explain": "Equilibrium condition: vector sum of all forces acting on the body must be zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cf67a658-0830-4139-b030-279d4b67b83e",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block is pulled on a rough floor at constant velocity. Applied force equals:",
-    "formula": "F = μₖmg",
-    "options": [
-      "Zero",
-      "Kinetic friction force",
-      "Static friction force",
-      "More than kinetic friction"
-    ],
-    "answer": 1,
-    "explain": "Constant velocity ⟹ net force = 0; applied force exactly balances kinetic friction μₖmg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1f7cd073-ae8f-40d7-958f-e6d8d0dcea9b",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Impulse is a __ quantity.",
-    "formula": "J = FΔt",
-    "options": [
-      "Vector",
-      "Dimensionless",
-      "Tensor",
-      "Scalar"
-    ],
-    "answer": 0,
-    "explain": "Impulse J = FΔt has direction (same as force), so it is a vector quantity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cc9c1384-2402-4920-bb8f-8b0c2ad85198",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a system of two blocks m₁ & m₂ with friction μ between them (m₂ on m₁, m₁ on floor): max friction on m₂?",
-    "formula": "f = μm₂g",
-    "options": [
-      "μ(m₁−m₂)g",
-      "μ(m₁+m₂)g",
-      "μm₁g",
-      "μm₂g"
-    ],
-    "answer": 3,
-    "explain": "Normal force between m₂ and m₁ is m₂g, so max static friction on m₂ = μm₂g.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8af2115a-e90b-40a9-b314-35d641d6cf72",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A bullet embeds in a stationary block. This is an example of:",
-    "formula": "",
-    "options": [
-      "Perfectly inelastic collision",
-      "Perfectly elastic collision",
-      "Elastic collision",
-      "Explosion"
-    ],
-    "answer": 0,
-    "explain": "Bodies stick together after collision → maximum KE loss → perfectly inelastic collision.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9fcadfdc-a525-4735-86a6-773fa768017f",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A gun fires a bullet. Gun recoils due to Newton's __ law.",
-    "formula": "",
-    "options": [
-      "Second",
-      "First",
-      "Third",
-      "Zeroth"
-    ],
-    "answer": 2,
-    "explain": "Bullet pushed forward, gun pushed backward with equal force — Newton's Third Law (action-reaction).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d3b93361-02e3-40c6-a157-5f1005bfbabc",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a conical pendulum of mass m, string length L, half-angle θ: tension in string?",
-    "formula": "T = mg/cosθ",
-    "options": [
-      "mg/cosθ",
-      "mg tanθ",
-      "mg sinθ",
-      "mg cosθ"
-    ],
-    "answer": 0,
-    "explain": "Vertical equilibrium: T cosθ = mg, so T = mg/cosθ for a conical pendulum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "24e97062-1ec9-43c5-b85e-3b1f5e1758bf",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Friction force on a block just about to slide is called:",
-    "formula": "f_limit = μₛN",
-    "options": [
-      "Rolling friction",
-      "Kinetic friction",
-      "Limiting friction",
-      "Viscous friction"
-    ],
-    "answer": 2,
-    "explain": "Limiting friction is the maximum static friction, just before motion begins.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "40686f98-ab29-48f4-b77e-2a2ce5be2acb",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block moves up a rough incline. Net force along incline acts:",
-    "formula": "",
-    "options": [
-      "Up the incline",
-      "Zero",
-      "Perpendicular to incline",
-      "Down the incline"
-    ],
-    "answer": 3,
-    "explain": "Both gravity component and kinetic friction act down the incline when block moves up.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "558a36f7-7833-4770-92a4-02cefe5a9752",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "When two blocks connected by string accelerate, tension is same throughout if string is:",
-    "formula": "",
-    "options": [
-      "Light and elastic",
-      "Heavy and elastic",
-      "Massless and inextensible",
-      "Massive and inextensible"
-    ],
-    "answer": 2,
-    "explain": "Only a massless inextensible string transmits same tension throughout its length.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2455c5ee-a0e5-4b53-b35f-6048e416e14e",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A body of mass m is on a frictionless incline of angle θ. Normal force is:",
-    "formula": "N = mg cosθ",
-    "options": [
-      "mg sinθ",
-      "mg cosθ",
-      "mg tanθ",
-      "mg"
-    ],
-    "answer": 1,
-    "explain": "Normal force balances the component of gravity perpendicular to the incline surface.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c7480ce6-3c8a-4590-8b52-a8cd1de7e2cc",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Which condition correctly defines dynamic (kinetic) friction?",
-    "formula": "f_k = μₖN",
-    "options": [
-      "f_k > μₛN always",
-      "f_k = μₛN",
-      "f_k = μₖN, acts when body moves",
-      "f_k = μₖmg cosθ only on inclines"
-    ],
-    "answer": 2,
-    "explain": "Kinetic friction f_k = μₖN acts when there is relative sliding motion between surfaces.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fe26b907-a1fa-4034-b7b6-d83f36446dc4",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a block on rough horizontal surface: if applied force > limiting friction, block:",
-    "formula": "",
-    "options": [
-      "Accelerates with kinetic friction acting",
-      "Decelerates",
-      "Remains stationary",
-      "Moves with zero friction"
-    ],
-    "answer": 0,
-    "explain": "Once applied force exceeds limiting friction, block accelerates; kinetic friction then acts.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4c9246ab-f8ec-4e97-b289-5d9f0c341477",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A car rounds a banked curve at exactly the ideal speed. Friction required is:",
-    "formula": "tanθ = v²/rg",
-    "options": [
-      "Zero friction",
-      "Kinetic friction",
-      "Maximum static friction",
-      "Minimum static friction"
-    ],
-    "answer": 0,
-    "explain": "At ideal banking speed, centripetal force is fully provided by normal force component; no friction needed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cb4e98c5-d841-49bb-9bc5-5e96afc50286",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a massless pulley with inextensible string, tension on both sides of string is:",
-    "formula": "",
-    "options": [
-      "Different on each side",
-      "Zero",
-      "Equal throughout",
-      "Equal to total weight"
-    ],
-    "answer": 2,
-    "explain": "A massless frictionless pulley only changes direction of tension; magnitude stays equal throughout.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c1816ffd-8874-4117-8a43-7c7f3e55183c",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Newton's 2nd law in terms of momentum: F =",
-    "formula": "F = dp/dt",
-    "options": [
-      "p/t",
-      "Δp",
-      "dp/dt",
-      "d²p/dt²"
-    ],
-    "answer": 2,
-    "explain": "Force equals rate of change of linear momentum; F = dp/dt is the fundamental statement.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cc9c6b34-b852-42e9-9ff3-7abf6756757a",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block is dragged at constant velocity on rough floor. Work done by friction is:",
-    "formula": "",
-    "options": [
-      "Zero",
-      "Positive",
-      "Negative",
-      "Equal to kinetic energy"
-    ],
-    "answer": 2,
-    "explain": "Friction opposes motion; displacement and friction force are opposite, so work done is negative.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aad63139-e036-4338-a740-4fa6276b679a",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a block on rough incline sliding down, net acceleration is:",
-    "formula": "a = g(sinθ − μₖcosθ)",
-    "options": [
-      "g(sinθ − μₖcosθ)",
-      "g(sinθ + μₖcosθ)",
-      "g sinθ",
-      "g cosθ"
-    ],
-    "answer": 0,
-    "explain": "Gravity component pulls down (g sinθ); kinetic friction opposes motion (μₖg cosθ) up the incline.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0dd48a91-10b9-4c14-84a0-4b0a9c3a6131",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A constant force F acts on mass m for time t starting from rest. Final momentum is:",
-    "formula": "p = Ft",
-    "options": [
-      "Ft",
-      "½Ft²/m",
-      "Ft²/2",
-      "F/t"
-    ],
-    "answer": 0,
-    "explain": "By impulse-momentum theorem, change in momentum = Ft; starting from rest, final momentum = Ft.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a1564d60-dd69-4825-abf4-7852f769e65a",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Which of the following pairs have same dimensions?",
-    "formula": "",
-    "options": [
-      "Momentum and energy",
-      "Impulse and momentum",
-      "Force and impulse",
-      "Force and momentum"
-    ],
-    "answer": 1,
-    "explain": "Impulse = Ft [MLT⁻¹] and momentum = mv [MLT⁻¹] have identical dimensions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1292132f-e44c-4328-8dff-3d682e29856b",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For block on rough incline moving DOWN, kinetic friction acts:",
-    "formula": "",
-    "options": [
-      "Down the incline",
-      "Up the incline",
-      "Perpendicular to incline",
-      "Horizontally"
-    ],
-    "answer": 1,
-    "explain": "Kinetic friction always opposes relative motion; block moves down so friction acts up the incline.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "56e10287-8171-4bbe-b424-7b967e1c5fb0",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Tension in string connecting m₁ & m₂ (force F on m₂ side, frictionless surface):",
-    "formula": "T = m₁F/(m₁+m₂)",
-    "options": [
-      "m₁F/(m₁+m₂)",
-      "F/(m₁+m₂)",
-      "m₂F/(m₁+m₂)",
-      "(m₁+m₂)F"
-    ],
-    "answer": 0,
-    "explain": "T pulls m₁ alone; T = m₁·a = m₁·F/(m₁+m₂).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6d7ba05e-0e3c-48eb-b1a9-94b811fe0176",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block is on a rough surface. Normal force N, μₛ = 0.4, μₖ = 0.3. Body sliding; friction force =",
-    "formula": "f = μₖN",
-    "options": [
-      "μₖN",
-      "Zero",
-      "μₛN",
-      "(μₛ+μₖ)N/2"
-    ],
-    "answer": 0,
-    "explain": "Once the body is sliding, kinetic friction applies: f = μₖN.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d2f8f6c7-7d76-47fa-950f-61dca1cf37d0",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block of mass m on rough incline (angle θ). If θ < angle of repose, block:",
-    "formula": "",
-    "options": [
-      "Slides down",
-      "Remains stationary",
-      "Slides up",
-      "Accelerates down"
-    ],
-    "answer": 1,
-    "explain": "Below angle of repose, static friction is sufficient to hold the block stationary.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "159c3819-9179-4bc1-adf4-998cfc697fa3",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "When lift moves DOWNWARD at constant speed, apparent weight of person inside is:",
-    "formula": "",
-    "options": [
-      "Equal to true weight",
-      "Greater than true weight",
-      "Zero",
-      "Less than true weight"
-    ],
-    "answer": 0,
-    "explain": "Constant velocity → zero acceleration → N = mg; apparent weight equals true weight.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d7439f73-013c-4826-a090-a62f3bf1a380",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block is stationary. Applied force < μₛmg. Static friction equals:",
-    "formula": "f = F_applied",
-    "options": [
-      "μₛmg",
-      "Applied force",
-      "Zero",
-      "μₖmg"
-    ],
-    "answer": 1,
-    "explain": "Static friction is self-adjusting and exactly equals applied force when body is stationary.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61ca1870-4e35-454a-9fdf-6cee6de60958",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block on rough surface: μₛ > μₖ. Just after sliding starts, friction:",
-    "formula": "",
-    "options": [
-      "Decreases to μₖN",
-      "Remains μₛN",
-      "Becomes zero",
-      "Increases to μₛN"
-    ],
-    "answer": 0,
-    "explain": "Once motion starts, static friction is replaced by lower kinetic friction μₖN.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "58be6236-8552-413d-9bea-ccbc2bfc928c",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A block rests on a rough incline. Friction force direction is:",
-    "formula": "",
-    "options": [
-      "Down the incline",
-      "Perpendicular to incline",
-      "Horizontal",
-      "Up the incline"
-    ],
-    "answer": 3,
-    "explain": "Friction opposes tendency to slide; block tends to slide down, so friction acts up the incline.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7640959e-cc6c-40f4-8658-a88f4a88aed2",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "For a body, net force ≠ 0. Which quantity MUST change?",
-    "formula": "F = dp/dt",
-    "options": [
-      "Direction of motion",
-      "Kinetic energy",
-      "Speed",
-      "Momentum"
-    ],
-    "answer": 3,
-    "explain": "By Newton's 2nd law, net force changes momentum (magnitude or direction or both).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8d237b14-31b8-439b-a28a-ed8fec7c2c18",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "A mass m on frictionless incline of angle θ. Component of weight along incline =",
-    "formula": "F = mg sinθ",
-    "options": [
-      "mg/sinθ",
-      "mg sinθ",
-      "mg tanθ",
-      "mg cosθ"
-    ],
-    "answer": 1,
-    "explain": "Resolving gravity along incline gives mg sinθ (causes acceleration) and mg cosθ perpendicular.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "346a05f8-2835-4bc4-be7b-05512f2a160b",
-    "subject": "Physics",
-    "chapter": "Laws of Motion",
-    "topic": "Laws of Motion",
-    "prompt": "Impulse = F × t has the same dimensions as:",
-    "formula": "J = Δp",
-    "options": [
-      "Force",
-      "Energy",
-      "Linear momentum",
-      "Power"
-    ],
-    "answer": 2,
-    "explain": "Impulse = change in momentum = kg·m/s. Both impulse and momentum share dimension [MLT⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "2d0579bc-393d-4020-97ba-578591ce445c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "Newton's 2nd law in vector form",
+  "formula": "F⃗ = ma⃗",
+  "options": [
+   "F⃗ = ma⃗",
+   "F⃗ = m/a⃗",
+   "F⃗ = mv⃗",
+   "F⃗ = pa⃗"
+  ],
+  "answer": 0,
+  "explain": "Net force equals mass times acceleration; direction of F⃗ same as a⃗.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "009f3ed1-4876-4b47-9070-8ec9554de2d1",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Impulse equals change in",
+  "formula": "J = Δp",
+  "options": [
+   "Force",
+   "Velocity",
+   "Momentum",
+   "Kinetic energy"
+  ],
+  "answer": 2,
+  "explain": "Impulse J = F·Δt = Δp; it measures change in linear momentum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e8c9181b-7b1f-4339-b4ff-7117fafe6da4",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "SI unit of linear momentum",
+  "formula": "p = mv",
+  "options": [
+   "kg·m/s",
+   "N·m",
+   "J·s/m",
+   "kg·m/s²"
+  ],
+  "answer": 0,
+  "explain": "p = mv; units are kg·m/s, equivalent to N·s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "514b6744-d1fd-4fec-b21b-c132e8d78e9c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "Which law states 'every action has equal & opposite reaction'?",
+  "formula": "",
+  "options": [
+   "Newton's 2nd law",
+   "Law of inertia",
+   "Newton's 3rd law",
+   "Newton's 1st law"
+  ],
+  "answer": 2,
+  "explain": "3rd law: F₁₂ = −F₂₁; action-reaction forces act on DIFFERENT bodies.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75f58222-40f1-4f60-9aae-211dfc60f7d2",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Static friction max value formula",
+  "formula": "f_s ≤ μₛN",
+  "options": [
+   "μₖN",
+   "μₛN",
+   "μₖmg cosθ",
+   "μₛmg sinθ"
+  ],
+  "answer": 1,
+  "explain": "Maximum static friction = μₛN; kinetic friction = μₖN (μₛ > μₖ always).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "42679d62-2f21-4026-9134-3f93a5e92667",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "Acceleration of system: two blocks m₁, m₂ on frictionless surface, force F",
+  "formula": "a = F/(m₁+m₂)",
+  "options": [
+   "F/m₂",
+   "F·m₁/(m₁+m₂)",
+   "F/(m₁+m₂)",
+   "F/m₁"
+  ],
+  "answer": 2,
+  "explain": "Total mass resists force; a = F/(m₁+m₂) by Newton's 2nd law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ce3bfa7c-1f86-47d0-b8d1-4a6341b48086",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "Tension in string connecting m₁ & m₂ (force F on m₁ side)",
+  "formula": "T = Fm₂/(m₁+m₂)",
+  "options": [
+   "Fm₁/(m₁+m₂)",
+   "Fm₂/(m₁+m₂)",
+   "F(m₁+m₂)/m₂",
+   "F/(m₁+m₂)"
+  ],
+  "answer": 1,
+  "explain": "T pulls m₂ alone: T = m₂·a = m₂·F/(m₁+m₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "53dc0c6f-e546-4566-8c38-f2b27c96a519",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "Acceleration of Atwood machine (m₁ > m₂, frictionless pulley)",
+  "formula": "a=(m₁-m₂)g/(m₁+m₂)",
+  "options": [
+   "(m₁+m₂)g/(m₁-m₂)",
+   "(m₁-m₂)g/(m₁+m₂)",
+   "g/2",
+   "(m₁-m₂)g/m₁"
+  ],
+  "answer": 1,
+  "explain": "Net force = (m₁−m₂)g; total mass = m₁+m₂; so a = (m₁−m₂)g/(m₁+m₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a189ca8b-94c9-4b21-bea9-d9c7d2e9a14f",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "Normal force on a body in a lift accelerating upward",
+  "formula": "N = m(g+a)",
+  "options": [
+   "ma",
+   "mg",
+   "m(g+a)",
+   "m(g−a)"
+  ],
+  "answer": 2,
+  "explain": "Lift accelerates up: N−mg = ma, so N = m(g+a); apparent weight increases.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c4aa2c13-1878-46da-9ea8-745910c89525",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "Apparent weight in freely falling lift",
+  "formula": "N = m(g−g) = 0",
+  "options": [
+   "2mg",
+   "mg/2",
+   "mg",
+   "Zero (weightlessness)"
+  ],
+  "answer": 3,
+  "explain": "Free fall: a = g downward; N = m(g−g) = 0; apparent weightlessness.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6a59cfde-7507-4afd-bafa-3a1d58374824",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "Law of conservation of momentum applies when",
+  "formula": "F_ext = 0 ⇒ p = const",
+  "options": [
+   "Body is at rest",
+   "Friction is absent",
+   "Net external force is zero",
+   "Net internal force is zero"
+  ],
+  "answer": 2,
+  "explain": "Total momentum conserved only when net external force on system is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1f664a53-6d3a-445f-961e-28ce9701e0bd",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "Angle of friction λ is related to μ by",
+  "formula": "tan λ = μ",
+  "options": [
+   "cos λ = μ",
+   "tan λ = μ",
+   "tan λ = 1/μ",
+   "sin λ = μ"
+  ],
+  "answer": 1,
+  "explain": "Angle of friction λ: tan λ = f/N = μN/N = μ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c4dd8851-ab63-4355-8527-a3409fceed3b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "Angle of repose θᵣ for a block on incline",
+  "formula": "tan θᵣ = μₛ",
+  "options": [
+   "tan θᵣ = μₛ",
+   "cos θᵣ = μₛ",
+   "sin θᵣ = μₛ",
+   "tan θᵣ = μₖ"
+  ],
+  "answer": 0,
+  "explain": "At repose, mg sinθ = μₛ mg cosθ, so tan θᵣ = μₛ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a066187d-e31a-461d-9264-d5bbbaa7f5d3",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Force, inertia and Newton's first law",
+  "prompt": "Inertia of a body depends on its",
+  "formula": "",
+  "options": [
+   "Mass",
+   "Velocity",
+   "Weight",
+   "Shape"
+  ],
+  "answer": 0,
+  "explain": "Inertia is the tendency to resist change in motion; it depends only on mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3315f04d-aa1d-4de2-a8e1-272c7b875d90",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Force, inertia and Newton's first law",
+  "prompt": "Newton's 1st law is also called",
+  "formula": "",
+  "options": [
+   "Law of momentum",
+   "Law of inertia",
+   "Law of action-reaction",
+   "Law of gravitation"
+  ],
+  "answer": 1,
+  "explain": "1st law defines inertia: body stays at rest/uniform motion unless acted upon by force.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "20030611-0ef4-4875-99f9-51ebd7fa7c56",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "Pseudo force magnitude on mass m in non-inertial frame (acceleration A)",
+  "formula": "F_pseudo = mA",
+  "options": [
+   "mg",
+   "mA (along A)",
+   "mA (opposite to A)",
+   "m(g+A)"
+  ],
+  "answer": 2,
+  "explain": "Pseudo force = mA directed opposite to the acceleration of the non-inertial frame.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0da11729-a143-4eb9-b063-b87630e612ea",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Free body diagrams, normal reaction",
+  "prompt": "For block on frictionless incline (angle θ), acceleration along incline",
+  "formula": "a = g sinθ",
+  "options": [
+   "g sinθ",
+   "g tanθ",
+   "g",
+   "g cosθ"
+  ],
+  "answer": 0,
+  "explain": "Component of gravity along incline = mg sinθ; a = g sinθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9ca3c6be-f0ca-4739-bb9e-657923e2da9a",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Free body diagrams, normal reaction",
+  "prompt": "Normal force on block on incline (angle θ)",
+  "formula": "N = mg cosθ",
+  "options": [
+   "mg",
+   "mg tanθ",
+   "mg cosθ",
+   "mg sinθ"
+  ],
+  "answer": 2,
+  "explain": "Perpendicular equilibrium on incline: N = mg cosθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c2a07f22-2f71-429d-bce7-006976385790",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "Action-reaction forces act on",
+  "formula": "",
+  "options": [
+   "Different bodies",
+   "Same body, opposite sides",
+   "Massless string",
+   "Same body"
+  ],
+  "answer": 0,
+  "explain": "Newton's 3rd law: action and reaction always act on two DIFFERENT bodies.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "897bef18-56cc-474c-b5f5-e1a3f761c0a1",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Friction force on a stationary block on a surface with no applied force",
+  "formula": "",
+  "options": [
+   "Zero",
+   "mg",
+   "μₛmg",
+   "μₖmg"
+  ],
+  "answer": 0,
+  "explain": "Static friction is self-adjusting; with no applied force, friction = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a5354328-35fb-4481-a85e-14ec13c7731e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Dimension of impulse",
+  "formula": "[J] = MLT⁻¹",
+  "options": [
+   "ML²T⁻¹",
+   "MLT⁻¹",
+   "MLT⁻²",
+   "ML²T⁻²"
+  ],
+  "answer": 1,
+  "explain": "Impulse = Δp = mv; dimensions = MLT⁻¹, same as momentum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ef43839-e953-4697-b0b8-6bdc13693bd9",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "For two blocks in contact on frictionless surface, contact force between them",
+  "formula": "F_c = m₂F/(m₁+m₂)",
+  "options": [
+   "F/2",
+   "m₂F/(m₁+m₂)",
+   "F",
+   "m₁F/(m₁+m₂)"
+  ],
+  "answer": 1,
+  "explain": "Contact force on m₂ = m₂·a = m₂·F/(m₁+m₂); force applied on m₁ side.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3c137ea3-d01b-47ef-8cd4-b4576772f468",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Limiting friction is independent of:",
+  "formula": "f_s(max) = μₛN",
+  "options": [
+   "Nature of surfaces",
+   "Coefficient μₛ",
+   "Area of contact",
+   "Normal force"
+  ],
+  "answer": 2,
+  "explain": "Limiting static friction depends on N and μₛ, NOT on area of contact.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3c8a2cf9-4cd6-4dad-8582-08b0a970908b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Force, inertia and Newton's first law",
+  "prompt": "A body moves with constant velocity. Net force on it is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to friction",
+   "Non-zero constant",
+   "Equal to its weight"
+  ],
+  "answer": 0,
+  "explain": "Constant velocity ⟹ zero acceleration ⟹ net force = 0 (Newton's 1st law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "948b9b74-8542-4bde-82d5-24a215c9103b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "Tension in string of Atwood machine (m₁>m₂):",
+  "formula": "T = 2m₁m₂g/(m₁+m₂)",
+  "options": [
+   "2m₁m₂g/(m₁+m₂)",
+   "m₁m₂g/(m₁+m₂)",
+   "(m₁−m₂)g",
+   "(m₁+m₂)g/2"
+  ],
+  "answer": 0,
+  "explain": "Standard Atwood result: T = 2m₁m₂g/(m₁+m₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "05fa65e1-d5ab-4d7f-be16-a0ec5709f369",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "Normal force on mass m in a lift decelerating while moving upward:",
+  "formula": "N = m(g − a)",
+  "options": [
+   "zero",
+   "mg",
+   "m(g − a)",
+   "m(g + a)"
+  ],
+  "answer": 2,
+  "explain": "Deceleration upward means net acceleration is downward ⟹ N = m(g−a).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0db8405d-ade9-442b-a4fc-1627d0be38c7",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Block on inclined plane with friction",
+  "prompt": "A block rests on a rough incline. Which force balances the gravitational component along the incline?",
+  "formula": "",
+  "options": [
+   "Static friction",
+   "Kinetic friction",
+   "Pseudo force",
+   "Normal force"
+  ],
+  "answer": 0,
+  "explain": "Static friction acts up the incline to balance mg sinθ when block is at rest.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77cd11d3-a8be-421f-a29f-4d7ca5b6945f",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "Coefficient of friction μ = tan θ corresponds to which condition?",
+  "formula": "μ = tan θ",
+  "options": [
+   "Angle of repose",
+   "Critical angle",
+   "Angle of projection",
+   "Angle of incidence"
+  ],
+  "answer": 0,
+  "explain": "At angle of repose, block just starts sliding: μ = tan θᵣ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70243829-dd3a-49db-ac6f-b705810a4c4b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "A 10 N force acts on a body for 3 s then stops. Which quantity changes by 30 N·s?",
+  "formula": "J = FΔt",
+  "options": [
+   "Acceleration",
+   "Velocity",
+   "Linear momentum",
+   "Kinetic energy"
+  ],
+  "answer": 2,
+  "explain": "Impulse J = FΔt = change in momentum; J = 10×3 = 30 N·s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "446c2b43-123b-4a09-820a-66fb85934c9e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "Two equal masses collide and stick together. Speed of combined mass (initial speed u of one, other at rest):",
+  "formula": "v = u/2",
+  "options": [
+   "2u",
+   "u/4",
+   "u",
+   "u/2"
+  ],
+  "answer": 3,
+  "explain": "By conservation of momentum: mu = 2m·v ⟹ v = u/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a38c2df5-8cd1-4aa2-8270-46c1c87883cc",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "A horse pulls a cart. By Newton's 3rd law, cart pulls horse equally. Why does the system move?",
+  "formula": "",
+  "options": [
+   "Action = reaction cancel within system",
+   "Inertia of cart is less",
+   "Horse has more mass",
+   "Net external force on system is non-zero"
+  ],
+  "answer": 3,
+  "explain": "Action-reaction act on different bodies; ground friction on horse provides net external force.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0c6d6e0e-7e86-4d07-bca2-171c82df1c7e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "For a block on a rough surface, kinetic friction force direction is:",
+  "formula": "f_k = μ_k N",
+  "options": [
+   "Opposite to motion",
+   "Vertically downward",
+   "Perpendicular to surface",
+   "Along motion"
+  ],
+  "answer": 0,
+  "explain": "Kinetic friction always opposes the direction of relative motion of the block.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ce7c0211-0353-4991-b3cf-9a48b139fc75",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Force, inertia and Newton's first law",
+  "prompt": "Which of these is NOT a contact force?",
+  "formula": "",
+  "options": [
+   "Normal reaction",
+   "Tension",
+   "Friction",
+   "Gravitational force"
+  ],
+  "answer": 3,
+  "explain": "Gravity acts at a distance (non-contact); normal, friction, tension are contact forces.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2e4b4113-c93d-4fff-be4c-93f08a2f6441",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "A block of mass m on a frictionless surface connected via string over pulley to hanging mass M. Acceleration:",
+  "formula": "a = Mg/(M+m)",
+  "options": [
+   "(M−m)g/(M+m)",
+   "Mg/m",
+   "Mg/(M+m)",
+   "g"
+  ],
+  "answer": 2,
+  "explain": "Only M drives the system; total mass = M+m ⟹ a = Mg/(M+m).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "36cb4d31-866e-4c14-bb12-50951e1908b6",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "Centripetal force on mass m moving in circle (radius r, speed v) is provided by:",
+  "formula": "F = mv²/r",
+  "options": [
+   "Normal force only",
+   "Tangential force",
+   "Net inward force",
+   "Net outward force"
+  ],
+  "answer": 2,
+  "explain": "Any net inward force (friction, tension, etc.) acts as centripetal force = mv²/r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b12a5227-6fe1-4d5f-9def-525b79e95032",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "Maximum speed of a car on a level circular road (radius r, μ, g):",
+  "formula": "v_max = √(μrg)",
+  "options": [
+   "μrg",
+   "√(rg/μ)",
+   "√(μrg)",
+   "μ√(rg)"
+  ],
+  "answer": 2,
+  "explain": "Friction provides centripetal force: μmg = mv²/r ⟹ v_max = √(μrg).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "620fd9b3-0ee5-4ba5-bc90-17039d537a71",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "Banking angle θ for ideal (frictionless) circular road of radius r at speed v:",
+  "formula": "tan θ = v²/rg",
+  "options": [
+   "sin θ = v²/rg",
+   "tan θ = v/rg",
+   "tan θ = rg/v²",
+   "tan θ = v²/rg"
+  ],
+  "answer": 3,
+  "explain": "On banked road: N sinθ = mv²/r, N cosθ = mg ⟹ tan θ = v²/rg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e5a7ed23-1c01-40d0-8cd0-d2b8b44ab7f5",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "If net force on a system of particles is zero, which is conserved?",
+  "formula": "",
+  "options": [
+   "Total kinetic energy",
+   "Total potential energy",
+   "Total linear momentum",
+   "Angular velocity"
+  ],
+  "answer": 2,
+  "explain": "Zero net external force ⟹ dp/dt = 0 ⟹ total linear momentum is conserved.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9db2b41a-149d-43ee-8b03-69032a397118",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "A spring balance shows less reading when in a downward-accelerating lift. The reduction equals:",
+  "formula": "ΔW = ma",
+  "options": [
+   "ma",
+   "zero",
+   "m(g+a)",
+   "mg"
+  ],
+  "answer": 0,
+  "explain": "Apparent weight = m(g−a); reduction from true weight mg is ma.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "99b9527d-bdb6-4869-9fd0-10eea8dc4667",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "For a body in equilibrium on a rough incline, max angle before sliding is equal to:",
+  "formula": "",
+  "options": [
+   "Brewster's angle",
+   "Angle of projection",
+   "Angle of friction",
+   "Critical angle"
+  ],
+  "answer": 2,
+  "explain": "Angle of repose equals angle of friction λ = arctan(μ); body slides beyond this.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd621919-60a7-4427-bb0a-bf01110f87c9",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block is pushed against a wall by horizontal force F. Friction on block acts:",
+  "formula": "",
+  "options": [
+   "Upward",
+   "Away from the wall",
+   "Downward",
+   "Into the wall"
+  ],
+  "answer": 0,
+  "explain": "Friction acts upward to balance gravity when block is pressed against vertical wall.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3e888143-301b-4912-a4bd-8fc1c8977c94",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "A man of mass m stands on a weighing scale in a lift moving up at constant speed. Reading is:",
+  "formula": "",
+  "options": [
+   "mg",
+   "m(g+a)",
+   "zero",
+   "m(g−a)"
+  ],
+  "answer": 0,
+  "explain": "Constant speed means zero acceleration; net force = 0, so normal force = mg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8c6eb318-c695-4894-81df-dd254ca655d3",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Impulse-momentum theorem: Impulse = ?",
+  "formula": "J = Δp = mΔv",
+  "options": [
+   "Change in momentum",
+   "Change in KE",
+   "Change in velocity",
+   "Force × distance"
+  ],
+  "answer": 0,
+  "explain": "Impulse equals the change in linear momentum of the body.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d2e01d42-bb38-4022-afd0-ba62f9ecd3a8",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Free body diagrams, normal reaction",
+  "prompt": "A block on frictionless floor: force F at angle θ above horizontal. Normal force?",
+  "formula": "N = mg − F sinθ",
+  "options": [
+   "mg − F cosθ",
+   "mg + F sinθ",
+   "mg − F sinθ",
+   "mg"
+  ],
+  "answer": 2,
+  "explain": "Vertical equilibrium: N + F sinθ = mg, so N = mg − F sinθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fab643dc-43e3-410a-8a59-6d2255271fda",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Static friction is a __ force.",
+  "formula": "",
+  "options": [
+   "Constant value",
+   "Always less than μₖN",
+   "Always equal to μₛN",
+   "Self-adjusting (up to max)"
+  ],
+  "answer": 3,
+  "explain": "Static friction adjusts itself to match applied force until it reaches its maximum μₛN.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "55df7cde-f203-416d-a5e8-781aa17c4148",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "Two blocks m₁ (on table) & m₂ (hanging) via string over frictionless pulley. Tension?",
+  "formula": "T = m₁m₂g/(m₁+m₂)",
+  "options": [
+   "m₁g/(m₁+m₂)",
+   "(m₁+m₂)g/2",
+   "m₁m₂g/(m₁+m₂)",
+   "m₂g"
+  ],
+  "answer": 2,
+  "explain": "Solving equations: T = m₁m₂g/(m₁+m₂) for frictionless table and pulley.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c02ec870-2336-417b-8153-874efcbc4014",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "For Atwood machine, acceleration a = ?",
+  "formula": "a = (m₁−m₂)g/(m₁+m₂)",
+  "options": [
+   "(m₁+m₂)g/(m₁−m₂)",
+   "(m₁−m₂)g/(m₁+m₂)",
+   "g/2",
+   "(m₁−m₂)g/2m₁"
+  ],
+  "answer": 1,
+  "explain": "Net force = (m₁−m₂)g acts on total mass (m₁+m₂), giving this acceleration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3494df81-62fd-4d1f-8a16-d832c3371961",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "A lift accelerates downward with acceleration a. Normal force on mass m?",
+  "formula": "N = m(g − a)",
+  "options": [
+   "mg",
+   "m(g − a)",
+   "ma",
+   "m(g + a)"
+  ],
+  "answer": 1,
+  "explain": "Net downward force equation: mg − N = ma, so N = m(g−a).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "245fd645-9308-4d63-af97-6f8376f3b43e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Force, inertia and Newton's first law",
+  "prompt": "Which law gives the concept of inertia directly?",
+  "formula": "",
+  "options": [
+   "Newton's First Law",
+   "Newton's Second Law",
+   "Newton's Third Law",
+   "Law of gravitation"
+  ],
+  "answer": 0,
+  "explain": "Newton's First Law defines inertia: body continues its state unless acted on by net force.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2c53fca-7564-4a88-b50e-8ca59f835a8c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Block on inclined plane with friction",
+  "prompt": "For a block on rough incline at angle θ > angle of repose, the block:",
+  "formula": "",
+  "options": [
+   "Slides up",
+   "Oscillates",
+   "Slides down with acceleration",
+   "Remains stationary"
+  ],
+  "answer": 2,
+  "explain": "When θ exceeds angle of repose (tan⁻¹μ), static friction cannot balance gravity component.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5c14332d-3ebb-41ab-8c4c-29023a2ebc84",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A body of mass m is on a rough horizontal surface. Applied force < μₛmg. Acceleration?",
+  "formula": "a = 0",
+  "options": [
+   "μₛg",
+   "Zero",
+   "F/m",
+   "μₖg"
+  ],
+  "answer": 1,
+  "explain": "If applied force is less than maximum static friction, the body stays at rest; a = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eeb8f89e-f295-42f0-bd39-0f76b77fe5e0",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block is on a rough surface. If normal force doubles, kinetic friction:",
+  "formula": "fₖ = μₖN",
+  "options": [
+   "Halves",
+   "Becomes zero",
+   "Remains same",
+   "Doubles"
+  ],
+  "answer": 3,
+  "explain": "Kinetic friction fₖ = μₖN; doubling N doubles fₖ since μₖ is constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5a83f695-99d5-4d19-954e-e66511841e2c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Block on inclined plane with friction",
+  "prompt": "Free body diagram of a block on a rough incline moving UP the incline: friction acts?",
+  "formula": "",
+  "options": [
+   "Down the incline",
+   "Perpendicular to incline",
+   "Horizontally",
+   "Up the incline"
+  ],
+  "answer": 0,
+  "explain": "Kinetic friction always opposes relative motion; block moving up → friction acts down the incline.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "46c9f489-09d5-4d32-bf71-79925631a7c4",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "The coefficient of kinetic friction μₖ depends on:",
+  "formula": "",
+  "options": [
+   "Area of contact",
+   "Speed of sliding",
+   "Nature of surfaces in contact",
+   "Weight of body"
+  ],
+  "answer": 2,
+  "explain": "μₖ depends only on the nature (material and roughness) of the surfaces in contact.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "268dd70a-e838-4caf-ab4f-1c1ad5e1ebc1",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "In a non-inertial frame, a pseudo force is applied. Its direction is:",
+  "formula": "F_pseudo = −mA",
+  "options": [
+   "Same as frame's acceleration",
+   "Opposite to frame's acceleration",
+   "Perpendicular to motion",
+   "Along velocity of body"
+  ],
+  "answer": 1,
+  "explain": "Pseudo force = −mA, directed opposite to the acceleration of the non-inertial reference frame.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2318c112-e48a-4030-9a7b-a7d98e066254",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "If a body is in equilibrium, the resultant of ALL forces on it equals:",
+  "formula": "ΣF = 0",
+  "options": [
+   "Normal force",
+   "Zero",
+   "Its weight",
+   "Friction force"
+  ],
+  "answer": 1,
+  "explain": "Equilibrium condition: vector sum of all forces acting on the body must be zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cf67a658-0830-4139-b030-279d4b67b83e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block is pulled on a rough floor at constant velocity. Applied force equals:",
+  "formula": "F = μₖmg",
+  "options": [
+   "Zero",
+   "Kinetic friction force",
+   "Static friction force",
+   "More than kinetic friction"
+  ],
+  "answer": 1,
+  "explain": "Constant velocity ⟹ net force = 0; applied force exactly balances kinetic friction μₖmg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1f7cd073-ae8f-40d7-958f-e6d8d0dcea9b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Impulse is a __ quantity.",
+  "formula": "J = FΔt",
+  "options": [
+   "Vector",
+   "Dimensionless",
+   "Tensor",
+   "Scalar"
+  ],
+  "answer": 0,
+  "explain": "Impulse J = FΔt has direction (same as force), so it is a vector quantity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cc9c1384-2402-4920-bb8f-8b0c2ad85198",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "For a system of two blocks m₁ & m₂ with friction μ between them (m₂ on m₁, m₁ on floor): max friction on m₂?",
+  "formula": "f = μm₂g",
+  "options": [
+   "μ(m₁−m₂)g",
+   "μ(m₁+m₂)g",
+   "μm₁g",
+   "μm₂g"
+  ],
+  "answer": 3,
+  "explain": "Normal force between m₂ and m₁ is m₂g, so max static friction on m₂ = μm₂g.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8af2115a-e90b-40a9-b314-35d641d6cf72",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "A bullet embeds in a stationary block. This is an example of:",
+  "formula": "",
+  "options": [
+   "Perfectly inelastic collision",
+   "Perfectly elastic collision",
+   "Elastic collision",
+   "Explosion"
+  ],
+  "answer": 0,
+  "explain": "Bodies stick together after collision → maximum KE loss → perfectly inelastic collision.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9fcadfdc-a525-4735-86a6-773fa768017f",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "A gun fires a bullet. Gun recoils due to Newton's __ law.",
+  "formula": "",
+  "options": [
+   "Second",
+   "First",
+   "Third",
+   "Zeroth"
+  ],
+  "answer": 2,
+  "explain": "Bullet pushed forward, gun pushed backward with equal force — Newton's Third Law (action-reaction).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d3b93361-02e3-40c6-a157-5f1005bfbabc",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "For a conical pendulum of mass m, string length L, half-angle θ: tension in string?",
+  "formula": "T = mg/cosθ",
+  "options": [
+   "mg/cosθ",
+   "mg tanθ",
+   "mg sinθ",
+   "mg cosθ"
+  ],
+  "answer": 0,
+  "explain": "Vertical equilibrium: T cosθ = mg, so T = mg/cosθ for a conical pendulum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "24e97062-1ec9-43c5-b85e-3b1f5e1758bf",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Friction force on a block just about to slide is called:",
+  "formula": "f_limit = μₛN",
+  "options": [
+   "Rolling friction",
+   "Kinetic friction",
+   "Limiting friction",
+   "Viscous friction"
+  ],
+  "answer": 2,
+  "explain": "Limiting friction is the maximum static friction, just before motion begins.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "40686f98-ab29-48f4-b77e-2a2ce5be2acb",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Block on inclined plane with friction",
+  "prompt": "A block moves up a rough incline. Net force along incline acts:",
+  "formula": "",
+  "options": [
+   "Up the incline",
+   "Zero",
+   "Perpendicular to incline",
+   "Down the incline"
+  ],
+  "answer": 3,
+  "explain": "Both gravity component and kinetic friction act down the incline when block moves up.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "558a36f7-7833-4770-92a4-02cefe5a9752",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "When two blocks connected by string accelerate, tension is same throughout if string is:",
+  "formula": "",
+  "options": [
+   "Light and elastic",
+   "Heavy and elastic",
+   "Massless and inextensible",
+   "Massive and inextensible"
+  ],
+  "answer": 2,
+  "explain": "Only a massless inextensible string transmits same tension throughout its length.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2455c5ee-a0e5-4b53-b35f-6048e416e14e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Free body diagrams, normal reaction",
+  "prompt": "A body of mass m is on a frictionless incline of angle θ. Normal force is:",
+  "formula": "N = mg cosθ",
+  "options": [
+   "mg sinθ",
+   "mg cosθ",
+   "mg tanθ",
+   "mg"
+  ],
+  "answer": 1,
+  "explain": "Normal force balances the component of gravity perpendicular to the incline surface.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c7480ce6-3c8a-4590-8b52-a8cd1de7e2cc",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Which condition correctly defines dynamic (kinetic) friction?",
+  "formula": "f_k = μₖN",
+  "options": [
+   "f_k > μₛN always",
+   "f_k = μₛN",
+   "f_k = μₖN, acts when body moves",
+   "f_k = μₖmg cosθ only on inclines"
+  ],
+  "answer": 2,
+  "explain": "Kinetic friction f_k = μₖN acts when there is relative sliding motion between surfaces.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fe26b907-a1fa-4034-b7b6-d83f36446dc4",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "For a block on rough horizontal surface: if applied force > limiting friction, block:",
+  "formula": "",
+  "options": [
+   "Accelerates with kinetic friction acting",
+   "Decelerates",
+   "Remains stationary",
+   "Moves with zero friction"
+  ],
+  "answer": 0,
+  "explain": "Once applied force exceeds limiting friction, block accelerates; kinetic friction then acts.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4c9246ab-f8ec-4e97-b289-5d9f0c341477",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "A car rounds a banked curve at exactly the ideal speed. Friction required is:",
+  "formula": "tanθ = v²/rg",
+  "options": [
+   "Zero friction",
+   "Kinetic friction",
+   "Maximum static friction",
+   "Minimum static friction"
+  ],
+  "answer": 0,
+  "explain": "At ideal banking speed, centripetal force is fully provided by normal force component; no friction needed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cb4e98c5-d841-49bb-9bc5-5e96afc50286",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "For a massless pulley with inextensible string, tension on both sides of string is:",
+  "formula": "",
+  "options": [
+   "Different on each side",
+   "Zero",
+   "Equal throughout",
+   "Equal to total weight"
+  ],
+  "answer": 2,
+  "explain": "A massless frictionless pulley only changes direction of tension; magnitude stays equal throughout.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c1816ffd-8874-4117-8a43-7c7f3e55183c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "Newton's 2nd law in terms of momentum: F =",
+  "formula": "F = dp/dt",
+  "options": [
+   "p/t",
+   "Δp",
+   "dp/dt",
+   "d²p/dt²"
+  ],
+  "answer": 2,
+  "explain": "Force equals rate of change of linear momentum; F = dp/dt is the fundamental statement.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cc9c6b34-b852-42e9-9ff3-7abf6756757a",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block is dragged at constant velocity on rough floor. Work done by friction is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Positive",
+   "Negative",
+   "Equal to kinetic energy"
+  ],
+  "answer": 2,
+  "explain": "Friction opposes motion; displacement and friction force are opposite, so work done is negative.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aad63139-e036-4338-a740-4fa6276b679a",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Block on inclined plane with friction",
+  "prompt": "For a block on rough incline sliding down, net acceleration is:",
+  "formula": "a = g(sinθ − μₖcosθ)",
+  "options": [
+   "g(sinθ − μₖcosθ)",
+   "g(sinθ + μₖcosθ)",
+   "g sinθ",
+   "g cosθ"
+  ],
+  "answer": 0,
+  "explain": "Gravity component pulls down (g sinθ); kinetic friction opposes motion (μₖg cosθ) up the incline.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0dd48a91-10b9-4c14-84a0-4b0a9c3a6131",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "A constant force F acts on mass m for time t starting from rest. Final momentum is:",
+  "formula": "p = Ft",
+  "options": [
+   "Ft",
+   "½Ft²/m",
+   "Ft²/2",
+   "F/t"
+  ],
+  "answer": 0,
+  "explain": "By impulse-momentum theorem, change in momentum = Ft; starting from rest, final momentum = Ft.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a1564d60-dd69-4825-abf4-7852f769e65a",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Which of the following pairs have same dimensions?",
+  "formula": "",
+  "options": [
+   "Momentum and energy",
+   "Impulse and momentum",
+   "Force and impulse",
+   "Force and momentum"
+  ],
+  "answer": 1,
+  "explain": "Impulse = Ft [MLT⁻¹] and momentum = mv [MLT⁻¹] have identical dimensions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1292132f-e44c-4328-8dff-3d682e29856b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Block on inclined plane with friction",
+  "prompt": "For block on rough incline moving DOWN, kinetic friction acts:",
+  "formula": "",
+  "options": [
+   "Down the incline",
+   "Up the incline",
+   "Perpendicular to incline",
+   "Horizontally"
+  ],
+  "answer": 1,
+  "explain": "Kinetic friction always opposes relative motion; block moves down so friction acts up the incline.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "56e10287-8171-4bbe-b424-7b967e1c5fb0",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Connected bodies, pulleys, tension",
+  "prompt": "Tension in string connecting m₁ & m₂ (force F on m₂ side, frictionless surface):",
+  "formula": "T = m₁F/(m₁+m₂)",
+  "options": [
+   "m₁F/(m₁+m₂)",
+   "F/(m₁+m₂)",
+   "m₂F/(m₁+m₂)",
+   "(m₁+m₂)F"
+  ],
+  "answer": 0,
+  "explain": "T pulls m₁ alone; T = m₁·a = m₁·F/(m₁+m₂).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6d7ba05e-0e3c-48eb-b1a9-94b811fe0176",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block is on a rough surface. Normal force N, μₛ = 0.4, μₖ = 0.3. Body sliding; friction force =",
+  "formula": "f = μₖN",
+  "options": [
+   "μₖN",
+   "Zero",
+   "μₛN",
+   "(μₛ+μₖ)N/2"
+  ],
+  "answer": 0,
+  "explain": "Once the body is sliding, kinetic friction applies: f = μₖN.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d2f8f6c7-7d76-47fa-950f-61dca1cf37d0",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "A block of mass m on rough incline (angle θ). If θ < angle of repose, block:",
+  "formula": "",
+  "options": [
+   "Slides down",
+   "Remains stationary",
+   "Slides up",
+   "Accelerates down"
+  ],
+  "answer": 1,
+  "explain": "Below angle of repose, static friction is sufficient to hold the block stationary.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "159c3819-9179-4bc1-adf4-998cfc697fa3",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "When lift moves DOWNWARD at constant speed, apparent weight of person inside is:",
+  "formula": "",
+  "options": [
+   "Equal to true weight",
+   "Greater than true weight",
+   "Zero",
+   "Less than true weight"
+  ],
+  "answer": 0,
+  "explain": "Constant velocity → zero acceleration → N = mg; apparent weight equals true weight.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d7439f73-013c-4826-a090-a62f3bf1a380",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block is stationary. Applied force < μₛmg. Static friction equals:",
+  "formula": "f = F_applied",
+  "options": [
+   "μₛmg",
+   "Applied force",
+   "Zero",
+   "μₖmg"
+  ],
+  "answer": 1,
+  "explain": "Static friction is self-adjusting and exactly equals applied force when body is stationary.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61ca1870-4e35-454a-9fdf-6cee6de60958",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block on rough surface: μₛ > μₖ. Just after sliding starts, friction:",
+  "formula": "",
+  "options": [
+   "Decreases to μₖN",
+   "Remains μₛN",
+   "Becomes zero",
+   "Increases to μₛN"
+  ],
+  "answer": 0,
+  "explain": "Once motion starts, static friction is replaced by lower kinetic friction μₖN.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "58be6236-8552-413d-9bea-ccbc2bfc928c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Block on inclined plane with friction",
+  "prompt": "A block rests on a rough incline. Friction force direction is:",
+  "formula": "",
+  "options": [
+   "Down the incline",
+   "Perpendicular to incline",
+   "Horizontal",
+   "Up the incline"
+  ],
+  "answer": 3,
+  "explain": "Friction opposes tendency to slide; block tends to slide down, so friction acts up the incline.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7640959e-cc6c-40f4-8658-a88f4a88aed2",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "For a body, net force ≠ 0. Which quantity MUST change?",
+  "formula": "F = dp/dt",
+  "options": [
+   "Direction of motion",
+   "Kinetic energy",
+   "Speed",
+   "Momentum"
+  ],
+  "answer": 3,
+  "explain": "By Newton's 2nd law, net force changes momentum (magnitude or direction or both).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8d237b14-31b8-439b-a28a-ed8fec7c2c18",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Free body diagrams, normal reaction",
+  "prompt": "A mass m on frictionless incline of angle θ. Component of weight along incline =",
+  "formula": "F = mg sinθ",
+  "options": [
+   "mg/sinθ",
+   "mg sinθ",
+   "mg tanθ",
+   "mg cosθ"
+  ],
+  "answer": 1,
+  "explain": "Resolving gravity along incline gives mg sinθ (causes acceleration) and mg cosθ perpendicular.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "346a05f8-2835-4bc4-be7b-05512f2a160b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Impulse = F × t has the same dimensions as:",
+  "formula": "J = Δp",
+  "options": [
+   "Force",
+   "Energy",
+   "Linear momentum",
+   "Power"
+  ],
+  "answer": 2,
+  "explain": "Impulse = change in momentum = kg·m/s. Both impulse and momentum share dimension [MLT⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "99803d5e-7719-4c43-8637-32855dd689b3",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Force, inertia and Newton's first law",
+  "prompt": "A passenger in a bus falls backward when the bus suddenly starts. This is due to inertia of:",
+  "formula": "",
+  "options": [
+   "Momentum transfer",
+   "Rest",
+   "Motion",
+   "Direction"
+  ],
+  "answer": 1,
+  "explain": "Lower body moves with the bus, upper body tends to stay at rest (inertia of rest), so he falls backward.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fde4385-90cc-4ac1-a4a9-c9435e8a6546",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Force, inertia and Newton's first law",
+  "prompt": "Newton's first law qualitatively defines which physical quantity?",
+  "formula": "",
+  "options": [
+   "Momentum",
+   "Impulse",
+   "Work",
+   "Force"
+  ],
+  "answer": 3,
+  "explain": "The first law defines force as that which changes (or tends to change) a body's state of rest or uniform motion.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d1552561-2dc5-4135-862e-1de42af400c5",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "The same constant force acts for the same time on bodies of different masses. What is the same for them?",
+  "formula": "Δp = FΔt",
+  "options": [
+   "Change in momentum",
+   "Displacement",
+   "Change in velocity",
+   "Final kinetic energy"
+  ],
+  "answer": 0,
+  "explain": "Impulse FΔt is equal, so Δp is equal. Δv and K depend on the mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "896849d2-b480-47c9-a29d-3b3361441bf5",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "F = dp/dt in the form F⃗ = ma⃗ holds as given only in which frames?",
+  "formula": "",
+  "options": [
+   "Rotating frames only",
+   "Inertial frames",
+   "Any accelerating frame",
+   "Frames moving with the body"
+  ],
+  "answer": 1,
+  "explain": "In non-inertial frames a pseudo force must be added to the real force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "304d5c09-f4a7-420e-9b47-aa317a6aeeea",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "A particle in uniform circular motion completes one full revolution. Net impulse on it?",
+  "formula": "",
+  "options": [
+   "2mv",
+   "Zero",
+   "2πmv",
+   "mv"
+  ],
+  "answer": 1,
+  "explain": "The final momentum equals the initial momentum, so Δp = 0 and the net impulse is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad6ceb40-3ab7-412b-8047-34db87e45715",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Average force is the ratio of impulse to what?",
+  "formula": "F_avg = J / Δt",
+  "options": [
+   "Velocity change",
+   "Time of contact",
+   "Mass",
+   "Displacement"
+  ],
+  "answer": 1,
+  "explain": "F_avg = J/Δt, where Δt is the duration of force action.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "371bced4-9ffb-407f-b3e9-65bdfea57074",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "Action and reaction forces are always of the:",
+  "formula": "",
+  "options": [
+   "Same nature (type)",
+   "Different magnitude",
+   "Different nature (type)",
+   "Same direction"
+  ],
+  "answer": 0,
+  "explain": "A pair is always of the same type (e.g. gravitational pairs with gravitational, contact with contact).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5904373-b6d8-4d46-b425-345f5cd22046",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "Rain falls vertically into a trolley moving on a smooth horizontal track. The trolley's speed:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Decreases",
+   "Becomes zero immediately",
+   "Stays constant"
+  ],
+  "answer": 1,
+  "explain": "Horizontal momentum is conserved while the mass increases, so v decreases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2f45db88-031d-456c-bc78-d7af8caceca5",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "Lami's theorem for three concurrent forces in equilibrium: each force is proportional to the sine of the angle...",
+  "formula": "F₁/sinα = F₂/sinβ = F₃/sinγ",
+  "options": [
+   "of its own line with the horizontal",
+   "between the other two forces",
+   "between it and the nearest force",
+   "between it and the vertical"
+  ],
+  "answer": 1,
+  "explain": "Each force is divided by the sine of the angle between the other two (the angle opposite to it).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2dc12182-4eb0-40d3-912b-975a5c246f82",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "Lami's theorem is applicable to a body in equilibrium under how many forces?",
+  "formula": "",
+  "options": [
+   "Any number of concurrent forces",
+   "Three non-coplanar forces",
+   "Exactly two collinear forces",
+   "Exactly three coplanar concurrent forces"
+  ],
+  "answer": 3,
+  "explain": "Lami's theorem holds only for three coplanar, concurrent, non-collinear forces in equilibrium.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d3105303-0d7b-4ade-b880-6eccb9de700c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "Three concurrent forces in equilibrium, drawn head to tail in order, form a:",
+  "formula": "",
+  "options": [
+   "Straight line",
+   "Open polygon",
+   "Parallelogram with a diagonal",
+   "Closed triangle"
+  ],
+  "answer": 3,
+  "explain": "The vector sum is zero, so the tip of the last force returns to the tail of the first: a closed triangle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d786c44-18d9-4213-b997-88034650098b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "Forces 5 N and 12 N act at a point. Which third force can keep the point in equilibrium?",
+  "formula": "7 N ≤ F₃ ≤ 17 N",
+  "options": [
+   "20 N",
+   "10 N",
+   "18 N",
+   "4 N"
+  ],
+  "answer": 1,
+  "explain": "The third force must lie between |F₁−F₂| = 7 N and F₁+F₂ = 17 N, so only 10 N works.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c4902cc2-0eb7-46f0-9bf6-6add55c1519a",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "A weight mg hangs from two identical strings, each at angle θ to the vertical. Tension in each string is:",
+  "formula": "2T cosθ = mg",
+  "options": [
+   "mg cosθ/2",
+   "mg/cosθ",
+   "mg/(2 cosθ)",
+   "mg/(2 sinθ)"
+  ],
+  "answer": 2,
+  "explain": "Vertical balance gives 2T cosθ = mg, so T = mg/(2cosθ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e762a6f5-a872-47b8-83ee-30bfaecd5167",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "A bob of weight mg on a string is pulled by a horizontal force F; the string makes angle θ with the vertical. Then:",
+  "formula": "",
+  "options": [
+   "tanθ = mg/F",
+   "sinθ = F/mg",
+   "cosθ = F/mg",
+   "tanθ = F/mg"
+  ],
+  "answer": 3,
+  "explain": "T cosθ = mg and T sinθ = F, so tanθ = F/mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8dbd43a3-8f21-42d5-9d15-41667ff8fb3e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "A block of mass m rests on a smooth incline of angle θ under a horizontal force F. F equals:",
+  "formula": "",
+  "options": [
+   "mg cotθ",
+   "mg cosθ",
+   "mg tanθ",
+   "mg sinθ"
+  ],
+  "answer": 2,
+  "explain": "Along the incline: F cosθ = mg sinθ, so F = mg tanθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07157fa0-02c8-431d-b8d6-008c368f7c56",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "Three forces acting at a point keep it in equilibrium. They must be:",
+  "formula": "",
+  "options": [
+   "Of equal magnitude",
+   "Parallel",
+   "Mutually perpendicular",
+   "Coplanar"
+  ],
+  "answer": 3,
+  "explain": "The sum of two forces lies in their plane, so the third must lie in that plane to balance it.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0aaedac-f879-477c-b24e-a66a0a7b235e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "The equilibrant of two concurrent forces is a force that is:",
+  "formula": "",
+  "options": [
+   "Equal to their resultant, same direction",
+   "Perpendicular to their resultant",
+   "Equal and opposite to their resultant",
+   "Equal to their vector difference"
+  ],
+  "answer": 2,
+  "explain": "Adding the equilibrant to the forces makes the net force zero, so it is −(resultant).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "df2e1efd-8b8d-4519-b949-76485940aef1",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "A body in equilibrium under only two forces needs them to be:",
+  "formula": "",
+  "options": [
+   "Equal and opposite, along any lines",
+   "Equal, opposite and collinear",
+   "Equal and perpendicular",
+   "Opposite with unequal magnitudes"
+  ],
+  "answer": 1,
+  "explain": "Net force must be zero, and collinearity avoids a net torque.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a02be3f-a25c-4cc9-b47d-2b4c3fc1c38c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "A block on a smooth incline (angle θ) is held by a force F parallel to the incline. F equals:",
+  "formula": "F = mg sinθ",
+  "options": [
+   "mg sinθ",
+   "mg cosθ",
+   "mg",
+   "mg tanθ"
+  ],
+  "answer": 0,
+  "explain": "Along the incline, F balances the component mg sinθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "19be5be0-d74f-47bf-8772-383c00c99f0a",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Equilibrium of concurrent forces",
+  "prompt": "A ball hangs by a string from a smooth wall, the string making angle θ with the wall. Wall reaction is:",
+  "formula": "R = mg tanθ",
+  "options": [
+   "mg cosθ",
+   "mg tanθ",
+   "mg sinθ",
+   "mg cotθ"
+  ],
+  "answer": 1,
+  "explain": "T cosθ = mg and T sinθ = R, so R = mg tanθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f749ed0d-4cda-4234-9a56-8f87bd32e2cc",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "Lift accelerates downward with a > g. A person inside is:",
+  "formula": "",
+  "options": [
+   "Pressed to the floor, N = m(a − g)",
+   "Weightless",
+   "Pressed against the ceiling, N = m(a − g)",
+   "Unaffected, N = mg"
+  ],
+  "answer": 2,
+  "explain": "The floor cannot pull the person down faster than g, so the ceiling pushes down with m(a − g).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b7e06df2-8650-4abe-95c9-79402ad28f6f",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "Which statement about a pseudo force is correct?",
+  "formula": "",
+  "options": [
+   "It has no Newton's third-law reaction pair",
+   "It arises from interaction with another body",
+   "It has a reaction pair on the frame",
+   "It acts only in inertial frames"
+  ],
+  "answer": 0,
+  "explain": "A pseudo force comes from the frame's acceleration, not from any body, so it has no reaction partner.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1181e8a7-c2fe-441b-8711-1eb8a165e365",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "A pendulum in a freely falling lift has a time period that is:",
+  "formula": "g_eff = 0",
+  "options": [
+   "Unchanged, 2π√(L/g)",
+   "Infinite",
+   "Zero",
+   "Half of the normal value"
+  ],
+  "answer": 1,
+  "explain": "g_eff = 0, so T = 2π√(L/g_eff) → ∞ (no oscillation).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1558d1c5-c1a2-4da1-8a56-238ff25dc420",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "A block hangs from a string in a car accelerating forward with a. String's angle with vertical satisfies:",
+  "formula": "",
+  "options": [
+   "sinθ = a/g",
+   "cosθ = a/g",
+   "tanθ = a/g",
+   "tanθ = g/a"
+  ],
+  "answer": 2,
+  "explain": "In the car frame: pseudo force ma backward, mg down, so tanθ = ma/mg = a/g; the bob tilts backward.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5572dc31-92d6-41e8-a450-ae7367663bfe",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "A helium balloon in an accelerating car (forward) moves relative to the car:",
+  "formula": "",
+  "options": [
+   "Forward",
+   "Backward",
+   "Stays at rest",
+   "Upward only"
+  ],
+  "answer": 0,
+  "explain": "Pseudo force acts backward, so the denser air shifts back and the lighter balloon moves forward, opposite to the effective gravity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "248a1485-054f-4bcb-9611-d1d8e7e64c29",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Friction f vs applied force F graph for a block starting from rest looks like:",
+  "formula": "",
+  "options": [
+   "Parabola rising with F",
+   "Horizontal line at μₖN throughout",
+   "Line of slope 1, then drops to a constant",
+   "Straight line of slope 1 continuing forever"
+  ],
+  "answer": 2,
+  "explain": "f = F up to μₛN, then falls to constant μₖN once sliding begins.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "043cc9cc-f79e-41aa-987c-f7642eec2372",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block rests on a horizontal truck bed (coefficient μₛ). Maximum truck acceleration without slipping:",
+  "formula": "",
+  "options": [
+   "μₛmg",
+   "g/μₛ",
+   "g(1 − μₛ)",
+   "μₛg"
+  ],
+  "answer": 3,
+  "explain": "Only friction accelerates the block: μₛmg = ma_max, so a_max = μₛg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "329f8032-b813-4712-81fd-dad67fc37671",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block on a rough incline of angle θ stays at rest. The static friction on it equals:",
+  "formula": "",
+  "options": [
+   "mg sinθ",
+   "μₛ mg sinθ",
+   "mg cosθ",
+   "μₛ mg cosθ"
+  ],
+  "answer": 0,
+  "explain": "At rest, friction balances the component along the incline: f = mg sinθ (not necessarily limiting).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e74143ce-6a30-4be5-a75d-101f6a6a3e9c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "Minimum force to pull a block on rough ground with friction angle λ is applied at what angle with horizontal?",
+  "formula": "θ = λ, tanλ = μ",
+  "options": [
+   "tan⁻¹μ",
+   "45°",
+   "cot⁻¹μ",
+   "sin⁻¹μ"
+  ],
+  "answer": 0,
+  "explain": "Minimum pulling force occurs at θ = λ = tan⁻¹μ, with value mg sinλ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c5c6a7e-e2ee-48c1-bcbe-565264d31849",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Static and kinetic friction, laws",
+  "prompt": "A block is pressed on a wall with force F; it stays at rest. Static friction on it equals:",
+  "formula": "",
+  "options": [
+   "μₛF",
+   "μₛmg",
+   "mg",
+   "F"
+  ],
+  "answer": 2,
+  "explain": "Vertical equilibrium: friction balances weight, f = mg (≤ μₛF), not μₛF unless limiting.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eec7c43d-9f2d-49e3-839b-bab42e5c0944",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "Angle of friction is the angle between normal reaction N and which force?",
+  "formula": "",
+  "options": [
+   "Applied force alone",
+   "Weight of the body",
+   "Resultant of N and kinetic friction only",
+   "Resultant of N and limiting friction"
+  ],
+  "answer": 3,
+  "explain": "λ is the angle between N and the resultant contact force R of N and limiting friction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9023f3a0-9d42-4d3f-9ba3-b01abbd1758d",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "Block at rest on an incline with θ below the angle of repose: contact force from incline on it is:",
+  "formula": "",
+  "options": [
+   "μmg cos θ, along the incline",
+   "mg, vertically upward",
+   "mg sin θ, up the incline",
+   "mg cos θ, perpendicular to incline"
+  ],
+  "answer": 1,
+  "explain": "For equilibrium, the total contact force (N + f) must balance the weight mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "739aa203-c51b-46e8-8b92-62380803e3ab",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "In terms of contact force R and limiting friction f, the angle of friction λ satisfies:",
+  "formula": "",
+  "options": [
+   "sin λ = f/R",
+   "cos λ = f/R",
+   "sin λ = N/R",
+   "tan λ = f/R"
+  ],
+  "answer": 0,
+  "explain": "f = R sin λ and N = R cos λ, so tan λ = f/N.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84fa6cb1-2663-469b-a31c-45eb6640b786",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "A block slides down an incline with constant velocity. The incline angle θ satisfies:",
+  "formula": "",
+  "options": [
+   "sin θ = μ_k",
+   "cos θ = μ_k",
+   "tan θ = μₛ always",
+   "tan θ = μ_k"
+  ],
+  "answer": 3,
+  "explain": "Zero acceleration: mg sin θ = μ_k mg cos θ, so tan θ = μ_k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b09e81c-bc39-429b-9a52-310c55edb67c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "Minimum force needed to drag a block of weight mg on rough horizontal ground (angle of friction λ) is:",
+  "formula": "F_min = μmg/√(1+μ²)",
+  "options": [
+   "mg tan λ",
+   "μmg",
+   "mg cos λ",
+   "mg sin λ"
+  ],
+  "answer": 3,
+  "explain": "F_min = μmg/√(1+μ²) = mg sin λ, applied at angle λ above the horizontal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "93675671-c223-4ada-adf7-b7e61c329c69",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "A block is at rest on a rough surface (not limiting). Contact force makes what angle with the normal?",
+  "formula": "",
+  "options": [
+   "Exactly λ",
+   "Exactly 90° − λ",
+   "Less than or equal to λ",
+   "Greater than λ"
+  ],
+  "answer": 2,
+  "explain": "Static friction f ≤ f_max, so tan(angle) = f/N ≤ μₛ; the angle never exceeds λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4fde5963-a4b3-4831-af3e-619ad5e58f9f",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "A conical sand heap of base radius R is stable with maximum height h equal to (μ = tan θᵣ):",
+  "formula": "h = R tan θᵣ",
+  "options": [
+   "μR²",
+   "R/μ",
+   "μR",
+   "R√(1+μ²)"
+  ],
+  "answer": 2,
+  "explain": "The steepest stable slope equals the angle of repose, so h/R = tan θᵣ = μ, giving h = μR.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "74493f4c-52c4-491d-a406-150c1239b81e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Rolling friction and lubrication",
+  "prompt": "The main cause of rolling friction is:",
+  "formula": "",
+  "options": [
+   "Gravitational pull on the rim",
+   "Viscous drag of air on the wheel",
+   "Cold welding of surface asperities",
+   "Deformation of wheel and surface at contact"
+  ],
+  "answer": 3,
+  "explain": "Rolling bodies slightly deform the surface and themselves, giving a resisting torque at the contact region.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "857914a6-24cb-490f-b9e8-e100711e093e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Rolling friction and lubrication",
+  "prompt": "For a rolling wheel of radius r, rolling friction force varies with r as:",
+  "formula": "F = μᵣN / r",
+  "options": [
+   "Directly proportional to r",
+   "Inversely proportional to r",
+   "Independent of r",
+   "Proportional to r²"
+  ],
+  "answer": 1,
+  "explain": "A larger wheel deforms less and F = μᵣN/r, so larger wheels roll more easily.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3bec2714-c17c-4747-b367-4693e2bd7cfe",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Rolling friction and lubrication",
+  "prompt": "In F = μᵣN/r for rolling friction, the coefficient μᵣ has the dimension of:",
+  "formula": "F = μᵣN / r",
+  "options": [
+   "Dimensionless",
+   "Length",
+   "Force",
+   "Length⁻¹"
+  ],
+  "answer": 1,
+  "explain": "μᵣ = Fr/N, which has the dimension of length (metre).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "28f852a4-3e5c-46af-a06b-47935354fa80",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Rolling friction and lubrication",
+  "prompt": "Increasing the air pressure in a bicycle tyre does what to rolling friction?",
+  "formula": "",
+  "options": [
+   "No change at all",
+   "Makes it zero",
+   "Increases it",
+   "Decreases it"
+  ],
+  "answer": 3,
+  "explain": "A harder, less deformed tyre has a smaller contact deformation, so rolling friction falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1ce7fb62-d981-46ec-8e9d-29e758a62133",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Rolling friction and lubrication",
+  "prompt": "Lubricants reduce friction mainly by:",
+  "formula": "",
+  "options": [
+   "Making the surfaces rougher",
+   "Separating the surfaces with a fluid film",
+   "Increasing the contact area",
+   "Increasing the normal reaction"
+  ],
+  "answer": 1,
+  "explain": "A fluid layer replaces solid-solid contact, so only the small viscous friction of the fluid acts.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dec5af28-0f7d-45d3-a4a3-ac8ef7ef9a30",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Rolling friction and lubrication",
+  "prompt": "Ball bearings reduce friction because they replace:",
+  "formula": "",
+  "options": [
+   "Sliding friction by rolling friction",
+   "Kinetic friction by static friction",
+   "Static friction by air drag",
+   "Rolling friction by sliding friction"
+  ],
+  "answer": 0,
+  "explain": "The balls roll between the shaft and housing, so the much smaller rolling friction acts.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9731aa9-063d-4ed5-9aaa-0772aa4a2526",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Rolling friction and lubrication",
+  "prompt": "With a lubricant between surfaces, the resistance to motion depends mainly on the lubricant's:",
+  "formula": "",
+  "options": [
+   "Specific heat",
+   "Density",
+   "Viscosity",
+   "Surface tension"
+  ],
+  "answer": 2,
+  "explain": "Fluid friction in a lubricating layer arises from viscous forces within the film.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd05bcb7-6b31-4d97-b485-a298191ea668",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "If the string breaks while a stone whirls in a horizontal circle, the stone moves:",
+  "formula": "",
+  "options": [
+   "Radially outward",
+   "Radially inward",
+   "Along a parabola toward the centre",
+   "Along the tangent"
+  ],
+  "answer": 3,
+  "explain": "With no net force the stone keeps its instantaneous velocity, which is tangential (ignoring gravity).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4bc61ddf-37f4-4bf2-b3ee-76d95866361f",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "Two equal masses rotate at the same ω in circles of radii r and 2r. Ratio of centripetal forces?",
+  "formula": "F = mω²r",
+  "options": [
+   "2 : 1",
+   "1 : 4",
+   "1 : 1",
+   "1 : 2"
+  ],
+  "answer": 3,
+  "explain": "At fixed ω, F ∝ r, so the ratio is 1:2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c9971316-0638-4628-a317-4e686b05b2c6",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "In the wall of death, the rider's weight is balanced by:",
+  "formula": "",
+  "options": [
+   "Centrifugal force",
+   "Static friction",
+   "Centripetal force",
+   "Normal reaction"
+  ],
+  "answer": 1,
+  "explain": "The normal reaction supplies mv²/r; the vertical friction balances mg (f = mg ≤ μN).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8a36048e-87ba-48bd-9279-11f8f4751587",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "In uniform circular motion, the angle between velocity and acceleration is:",
+  "formula": "",
+  "options": [
+   "180° always",
+   "Varies with time",
+   "0° always",
+   "90° always"
+  ],
+  "answer": 3,
+  "explain": "Acceleration is radial inward and velocity is tangential, so they are always perpendicular.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "31cb90d0-eda5-4ee4-afd6-ae5ad922a230",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "The required centripetal force on a level bend exceeds limiting friction. The car then:",
+  "formula": "",
+  "options": [
+   "Moves toward the centre",
+   "Continues on the same circle",
+   "Moves along a tangent, outward from the circle",
+   "Stops immediately"
+  ],
+  "answer": 2,
+  "explain": "With insufficient friction the car skids and slides outward, along the tangent to its path.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "50c5aa24-f6a0-4b3f-af30-90ad335d3e5b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "A car turning on a level bend also brakes hard. The friction available for turning:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Stays the same",
+   "Becomes zero",
+   "Increases"
+  ],
+  "answer": 0,
+  "explain": "Total friction is limited to μmg. Braking uses part of it, so less remains for the centripetal component.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97653ff2-4735-4990-8a3b-71a8be1633fc",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "In a level turn, the outward push felt by a passenger in the car frame is:",
+  "formula": "",
+  "options": [
+   "Pseudo (centrifugal) force",
+   "Real force: centrifugal reaction",
+   "Real force: friction on passenger",
+   "Normal reaction"
+  ],
+  "answer": 0,
+  "explain": "In the non-inertial frame of the turning car, the outward centrifugal force is a pseudo force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "61b58080-fb4e-4bba-a837-222190c97aea",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "On a banked road, the maximum safe speed becomes infinite (theoretically) when",
+  "formula": "",
+  "options": [
+   "μ = tanθ",
+   "μ = 1",
+   "μ tanθ = 1",
+   "μ = sinθ"
+  ],
+  "answer": 2,
+  "explain": "The denominator 1 − μ tanθ of the v²max formula becomes zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "190693b3-b0fd-4ee6-a93a-040801c3fd3a",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "On a curved banked road the safe speed range is unaffected by changing the vehicle's",
+  "formula": "",
+  "options": [
+   "Mass",
+   "Friction coefficient",
+   "Banking angle",
+   "Radius"
+  ],
+  "answer": 0,
+  "explain": "Every term in v²min and v²max has m cancelled, so the speeds are independent of mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6ac1b3a9-a613-4152-b42c-6f5901256a7b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "On a banked curved road, the horizontal direction of the centripetal acceleration is",
+  "formula": "",
+  "options": [
+   "Along the incline, upward",
+   "Along the incline, downward",
+   "Perpendicular to the road surface",
+   "Toward the centre, horizontal"
+  ],
+  "answer": 3,
+  "explain": "The car moves in a horizontal circle, so its acceleration points horizontally toward the centre of that circle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9ebfe473-f91c-41ed-9c34-5bc8dd66dab6",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "In banking of a road or railway track, the outer edge is made",
+  "formula": "",
+  "options": [
+   "Lower than the inner edge",
+   "Rough while the inner edge is smooth",
+   "Higher than the inner edge",
+   "Level with the inner edge"
+  ],
+  "answer": 2,
+  "explain": "The raised outer edge tilts N inward and gives a centripetal component.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "73a7c809-7ec4-4250-bb5a-e8f8cca930e5",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "On a wet banked road, μ decreases. The range of safe speeds on the road",
+  "formula": "",
+  "options": [
+   "Is unchanged",
+   "Narrows",
+   "Widens",
+   "Shifts upward without changing width"
+  ],
+  "answer": 1,
+  "explain": "v_max decreases and v_min increases as μ decreases; at μ = 0 only the ideal speed remains.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6fca6aff-6308-4baa-9f74-1d39d294a8d6",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "A train takes a banked curve faster than the designed speed. The extra centripetal force comes from the",
+  "formula": "",
+  "options": [
+   "Weight of the train",
+   "Inner rail pushing outward",
+   "Extra friction from the sleepers",
+   "Outer rail pushing inward on the flange"
+  ],
+  "answer": 3,
+  "explain": "The outer rail's flange thrust is directed inward, so the outer rail wears.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a45384ae-2c6f-4554-bb91-0416743ab526",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "For the same μ and r, the maximum safe speed on a banked road compared with a flat road is",
+  "formula": "",
+  "options": [
+   "Depends on mass",
+   "Equal",
+   "Larger",
+   "Smaller"
+  ],
+  "answer": 2,
+  "explain": "v_max² = rg(tanθ+μ)/(1−μtanθ) > μrg, because the normal reaction also contributes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cc1e012c-f509-4c4f-940c-00f71978f49c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "On a frictionless banked road, the net force on a car of mass m at the ideal speed is",
+  "formula": "F = mv²/r",
+  "options": [
+   "mg cosθ, horizontal",
+   "mg tanθ, horizontal",
+   "mg/cosθ, vertical",
+   "mg sinθ, along the incline"
+  ],
+  "answer": 1,
+  "explain": "N sinθ = mg tanθ, directed horizontally toward the centre; it equals mv²/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e343b496-278a-40fc-9d0c-edb509ef4fc7",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "A car is at rest on a banked road with μ < tanθ. It will",
+  "formula": "",
+  "options": [
+   "Slide down the incline",
+   "Slide only if mass is large",
+   "Stay at rest",
+   "Slide up the incline"
+  ],
+  "answer": 0,
+  "explain": "Limiting friction μmg cosθ < mg sinθ when μ < tanθ, so it slides down, independent of mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cb170a15-a9d8-4498-9a70-db5429b94653",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "A car moves at constant speed on a level circular road. Net friction on it is directed:",
+  "formula": "f = mv²/r",
+  "options": [
+   "Radially away from the centre",
+   "Along the velocity",
+   "Radially toward the centre",
+   "Opposite to the velocity"
+  ],
+  "answer": 2,
+  "explain": "Static friction is the only horizontal force, so it points to the centre and supplies the centripetal force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8a1dd438-148e-446a-bfeb-3091b62f6d77",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "A car speeds up while on a level circular bend. The friction on it points:",
+  "formula": "f = m√(a_t² + v⁴/r²)",
+  "options": [
+   "Inward and tilted forward",
+   "Purely along the tangent",
+   "Purely toward the centre",
+   "Inward and tilted backward"
+  ],
+  "answer": 0,
+  "explain": "Friction supplies a radial part mv²/r and a forward tangential part ma_t.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3fc592ae-0878-4c29-984a-3de3a06c2f90",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "Cars of mass m and 2m take the same level bend at the same speed without skidding. Friction ratio is:",
+  "formula": "f = mv²/r",
+  "options": [
+   "1 : 2",
+   "1 : 4",
+   "1 : 1",
+   "2 : 1"
+  ],
+  "answer": 0,
+  "explain": "Required friction mv²/r is proportional to mass at fixed v and r, so the ratio is 1 : 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8a4271cf-bb86-447d-b99a-283e7183d189",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "A car turns at high speed on a level bend. Compared with the inner wheels, the normal reaction on the outer wheels is:",
+  "formula": "",
+  "options": [
+   "Equal",
+   "Zero for all speeds",
+   "Greater",
+   "Smaller"
+  ],
+  "answer": 2,
+  "explain": "The torque of friction about the CM shifts the load outward, so the outer wheels carry more normal reaction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa463a62-b3b0-4d24-a4cb-5fa65dd6215c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "On a frictionless banked road, a car at more than the ideal speed will",
+  "formula": "",
+  "options": [
+   "Lose contact with the road",
+   "Move steadily on the same path",
+   "Skid up the slope toward the outer edge",
+   "Slip down toward the inner edge"
+  ],
+  "answer": 2,
+  "explain": "N sinθ is too small for the required centripetal force, so the car drifts outward and up the slope.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "53745ca0-2ff0-4d74-840e-5a3a375ee929",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "A train takes a banked curve slower than the designed speed. The extra lateral force comes from the",
+  "formula": "",
+  "options": [
+   "Inner rail pushing inward on the flange",
+   "Outer rail pushing outward on the flange",
+   "Outer rail pushing inward on the flange",
+   "Inner rail pushing outward on the flange"
+  ],
+  "answer": 3,
+  "explain": "At low speed the train tends to slide inward, so the inner rail's flange pushes it outward, away from the centre.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "31515752-dea6-4e57-88bd-1a3f7034ffcd",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "Two bodies of masses 1 kg and 9 kg have equal momentum. Ratio of KE (lighter : heavier) is:",
+  "formula": "K = p²/2m",
+  "options": [
+   "9 : 1",
+   "1 : 9",
+   "3 : 1",
+   "1 : 3"
+  ],
+  "answer": 0,
+  "explain": "For equal p, K ∝ 1/m, so the lighter body has 9 times the KE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1424c09a-51e0-4862-998c-36cdff4a402e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "The KE of a body of fixed mass increases by 44%. Its momentum increases by:",
+  "formula": "p ∝ √K",
+  "options": [
+   "44%",
+   "22%",
+   "20%",
+   "12%"
+  ],
+  "answer": 2,
+  "explain": "p ∝ √K, and √1.44 = 1.2, so p rises by 20%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9206399e-5d9b-4b25-b9d6-108e4ca78529",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "Bodies of different masses with equal momentum are stopped by the same constant retarding force. What is equal?",
+  "formula": "t = p/F",
+  "options": [
+   "Work done by force",
+   "Deceleration",
+   "Stopping time",
+   "Stopping distance"
+  ],
+  "answer": 2,
+  "explain": "F t = p, so equal p and equal F give equal time. Distance and deceleration differ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6d91ca05-4540-482a-867f-3568bc84ff2d",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "Bodies of different masses with equal KE are stopped by the same constant retarding force. What is equal?",
+  "formula": "F·s = K",
+  "options": [
+   "Initial momentum",
+   "Deceleration",
+   "Stopping distance",
+   "Stopping time"
+  ],
+  "answer": 2,
+  "explain": "By the work–energy theorem, F s = K, so equal K and equal F give equal distance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c8f81dc-7ef0-4ad6-8b8a-e809bd277667",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "A water jet (ρ, A, v) strikes a wall and rebounds with the same speed. Force on the wall is:",
+  "formula": "F = 2ρAv²",
+  "options": [
+   "ρAv²/2",
+   "2ρAv²",
+   "ρAv²",
+   "4ρAv²"
+  ],
+  "answer": 1,
+  "explain": "Δp per kg is 2v for a rebound, so F = (ρAv)(2v) = 2ρAv².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "546ceb35-9b22-4d29-b934-21b5261629d0",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Momentum and Newton's second law",
+  "prompt": "For a projectile in vacuum, the rate of change of its momentum is:",
+  "formula": "",
+  "options": [
+   "mv²/R, along the velocity",
+   "mg, vertically downward",
+   "mg cosθ, along the velocity",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "Only gravity acts, so dp/dt = mg downward. Horizontal momentum stays constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9c82f37-8001-49f3-9bd6-b99953610503",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "In a very short collision, which force is neglected compared with the impulsive force?",
+  "formula": "",
+  "options": [
+   "Force between colliding bodies",
+   "Finite forces like weight",
+   "Normal contact force",
+   "Net external force"
+  ],
+  "answer": 1,
+  "explain": "Impulsive force is very large over a tiny time; finite forces such as weight give negligible impulse then.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d65e3f92-532e-4b84-9ecf-da3fa18fee68",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Equal impulse acts on bodies of mass m and 4m, both at rest. Ratio of KE gained (lighter : heavier)?",
+  "formula": "K = p²/2m",
+  "options": [
+   "2 : 1",
+   "1 : 1",
+   "4 : 1",
+   "1 : 4"
+  ],
+  "answer": 2,
+  "explain": "Same impulse gives same p, so K ∝ 1/m; the lighter body gains 4 times more KE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "542c3abe-9931-4140-9e11-ddbdb3bba84c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "Force rises linearly from 0 to F₀ in time T on a body, then stops. Impulse delivered is:",
+  "formula": "",
+  "options": [
+   "F₀T",
+   "2F₀T",
+   "½F₀T",
+   "F₀T/4"
+  ],
+  "answer": 2,
+  "explain": "Impulse is the area under the F–t graph, a triangle: ½ × T × F₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c213f28b-fc05-4056-ab7a-ef78a1f3288b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "A ball of mass m thrown up with speed u returns to the hand. Impulse of gravity over the flight?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "2mu downward",
+   "2mu upward",
+   "mu downward"
+  ],
+  "answer": 1,
+  "explain": "Δp = (−mu) − (+mu) = −2mu, i.e. 2mu downward (also mg·2u/g).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9978804c-ad56-41d7-b4bd-dbae7b695599",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Impulse and impulse-momentum theorem",
+  "prompt": "A ball hits a smooth wall obliquely and rebounds elastically. Impulse on the ball is directed:",
+  "formula": "",
+  "options": [
+   "Along the wall surface",
+   "Along the incident velocity",
+   "Along the reflected velocity",
+   "Along the normal to the wall"
+  ],
+  "answer": 3,
+  "explain": "Smooth wall gives no tangential force, so only the normal momentum component changes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0cbc66db-71e3-41d9-997d-bf524ca987aa",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "While you walk forward, the force that pushes you ahead is:",
+  "formula": "",
+  "options": [
+   "Your foot's push on the ground",
+   "Your weight",
+   "Normal force from the ground",
+   "Friction by ground on your foot"
+  ],
+  "answer": 3,
+  "explain": "Foot pushes ground backward (action); ground's static friction on foot, forward, is the reaction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "df7a8156-0104-429f-bdba-00d049d3368c",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "For a book resting on a table, which is a genuine action-reaction pair?",
+  "formula": "",
+  "options": [
+   "Weight of book and normal force on book",
+   "Normal force on book and book's push on table",
+   "Weight of book and book's push on table",
+   "Normal force on book and Earth's pull on table"
+  ],
+  "answer": 1,
+  "explain": "Table pushes book up, book pushes table down: same nature, different bodies. Weight and N act on the same body.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7858b6d8-3c22-4eae-af23-32cad10e7a91",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Newton's third law, action-reaction pairs",
+  "prompt": "An apple falls; Earth pulls it with F, so apple pulls Earth with F. Earth's acceleration is negligible because:",
+  "formula": "",
+  "options": [
+   "Earth's reaction acts after a delay",
+   "Gravity acts only on the apple",
+   "Earth's mass is enormous",
+   "Force on Earth is much smaller"
+  ],
+  "answer": 2,
+  "explain": "Forces are equal in magnitude; a = F/M is tiny for Earth's huge mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f9ae038-4a34-4b5c-bba2-c9f314da79fd",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "In a 1D elastic collision, relative speed of separation compared with relative speed of approach is:",
+  "formula": "e = 1",
+  "options": [
+   "Double",
+   "Zero",
+   "Half",
+   "Equal"
+  ],
+  "answer": 3,
+  "explain": "Elastic collision has e = 1, so separation speed equals approach speed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e76cba48-7277-406b-b2f3-422acb96180e",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "Two blocks with a spring between them collide. At maximum compression, the two blocks have:",
+  "formula": "",
+  "options": [
+   "Equal and opposite velocities",
+   "Zero relative velocity",
+   "Maximum relative velocity",
+   "Zero velocities"
+  ],
+  "answer": 1,
+  "explain": "At maximum compression, both move with the same common velocity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ab38ecb-6b15-4485-b1c1-58fd69a2d51d",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Conservation of linear momentum & uses",
+  "prompt": "A light ball hits a much heavier ball at rest elastically with speed v. The light ball:",
+  "formula": "",
+  "options": [
+   "Stops",
+   "Rebounds with speed nearly v",
+   "Rebounds with speed nearly 2v",
+   "Continues with speed v/2"
+  ],
+  "answer": 1,
+  "explain": "For m₁ ≪ m₂, v₁′ ≈ −v, just like a rigid wall.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77f72816-4fcc-4e1b-9e86-8db5d9ec331d",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Pseudo force, apparent weight in lift",
+  "prompt": "A block stays at rest on a smooth wedge of angle θ that accelerates horizontally. The wedge's acceleration is:",
+  "formula": "N sinθ = ma, N cosθ = mg",
+  "options": [
+   "g cosθ",
+   "g tanθ",
+   "g cotθ",
+   "g sinθ"
+  ],
+  "answer": 1,
+  "explain": "In the wedge frame, the pseudo force ma, mg and N balance. This gives tanθ = a/g, so a = g tanθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2bc57af-40ba-40c9-afcc-c3db0f5ce3e0",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Angle of friction, angle of repose",
+  "prompt": "While a block slides on a rough surface, its contact force makes what angle with the normal?",
+  "formula": "",
+  "options": [
+   "90°",
+   "tan⁻¹(μₖ)",
+   "tan⁻¹(μₛ)",
+   "sin⁻¹(μₖ)"
+  ],
+  "answer": 1,
+  "explain": "Kinetic friction is μₖN, so the contact force is inclined at tan⁻¹μₖ, which is less than λ because μₖ < μₛ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75248e22-fa75-452f-b2b1-1fd79cb70f91",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "Centripetal force in terms of linear momentum p of the particle (mass m, radius r) is:",
+  "formula": "F = p²/(mr)",
+  "options": [
+   "p/(mr)",
+   "p²/(mr)",
+   "p²r/m",
+   "pm/r²"
+  ],
+  "answer": 1,
+  "explain": "F = mv²/r with v = p/m gives p²/(mr).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad620ebf-afd0-447a-aa4d-286167d753fa",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "At constant speed v, the centripetal force on a given mass varies with radius r as:",
+  "formula": "F = mv²/r",
+  "options": [
+   "F ∝ r²",
+   "F ∝ 1/r",
+   "F ∝ 1/r²",
+   "F ∝ r"
+  ],
+  "answer": 1,
+  "explain": "With v fixed, F = mv²/r ∝ 1/r, whereas at fixed ω it would be ∝ r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa117982-481d-426d-987d-3c645d70f633",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Centripetal force, uniform circular motion",
+  "prompt": "A particle moves in a circle with increasing speed. Its net acceleration points:",
+  "formula": "",
+  "options": [
+   "Exactly towards the centre",
+   "Along the tangent only",
+   "Away from the centre",
+   "Inclined between the radius and tangent"
+  ],
+  "answer": 3,
+  "explain": "It has a radial part v²/r and a tangential part dv/dt, so the net acceleration does not point to the centre.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "542c9454-753b-49f5-bc47-c0613d78012b",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "At speed v on a level road, the minimum turning radius compared with the minimum straight stopping distance is:",
+  "formula": "r_min = v²/μg ; s_min = v²/2μg",
+  "options": [
+   "Half as large",
+   "Twice as large",
+   "Four times as large",
+   "Equal"
+  ],
+  "answer": 1,
+  "explain": "r_min = v²/(μg) is twice s_min = v²/(2μg), so braking straight is safer.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b47e7278-b509-4b0a-a33e-857b8744bf50",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on level circular road",
+  "prompt": "A cyclist leans at angle θ to the vertical on a level curve without slipping. The minimum μ needed is:",
+  "formula": "",
+  "options": [
+   "tanθ",
+   "sinθ",
+   "cosθ",
+   "cotθ"
+  ],
+  "answer": 0,
+  "explain": "f/N = (mv²/r)/mg = tanθ, and this must not exceed μ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e66654a2-c20d-44a6-b487-185891dddfaa",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "At maximum safe speed on a rough banked road, the normal reaction N compared with that at ideal speed is",
+  "formula": "",
+  "options": [
+   "Greater",
+   "Zero",
+   "Smaller",
+   "Equal"
+  ],
+  "answer": 0,
+  "explain": "Friction down the slope has a downward vertical part, so N cosθ = mg + μN sinθ gives larger N.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "17b8c005-baad-4465-98e9-87fda5403303",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "The main advantage of banking a curved road is that it",
+  "formula": "",
+  "options": [
+   "Reduces dependence on friction and tyre wear",
+   "Makes the ideal speed independent of radius",
+   "Increases the vehicle's weight",
+   "Reduces the radius of the turn"
+  ],
+  "answer": 0,
+  "explain": "The normal reaction's horizontal component supplies part or all of the centripetal force, so less friction is needed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eead879f-1a1e-402a-9618-8353f43b2f42",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "On a frictionless banked road, a car moving slower than the ideal speed will:",
+  "formula": "",
+  "options": [
+   "Move safely along the curve",
+   "Skid up toward the outer edge",
+   "Topple outward",
+   "Slide down toward the inner edge"
+  ],
+  "answer": 3,
+  "explain": "N sinθ exceeds the needed mv²/r, so the car slides down the slope.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c79f7656-3fb7-4d5f-bcf8-f9eca5bd9bd6",
+  "subject": "Physics",
+  "chapter": "Laws of Motion",
+  "topic": "Vehicle on banked road",
+  "prompt": "A cyclist leans on a turn. The resultant of normal reaction and friction at the ground passes through the:",
+  "formula": "",
+  "options": [
+   "Centre of the circle",
+   "Point of contact only",
+   "Handle bar",
+   "Centre of mass of cyclist plus cycle"
+  ],
+  "answer": 3,
+  "explain": "For rotational balance, the resultant ground force passes through the centre of mass, so the lean angle follows tanθ = v²/rg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

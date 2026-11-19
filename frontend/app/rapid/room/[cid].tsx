@@ -89,7 +89,7 @@ function Room() {
         <CloseButton testID="room-close" label={room?.is_host ? "Cancel challenge" : "Leave room"} onPress={close} />
         <View style={styles.flex}>
           <GoldTitle testID="room-title">{title}</GoldTitle>
-          {room ? <T testID="room-meta" w="bold" size={12} color={arena.aqua} numberOfLines={1}>{label}</T> : null}
+          {room ? <T testID="room-meta" w="bold" size={12} color={arena.aqua} numberOfLines={1}>{label}{room.cards ? ` · ${room.cards} cards` : ""}</T> : null}
         </View>
         {room?.gang ? <Emblem id={room.gang.emblem} size={46} /> : <GameIcon name="swords" size={42} />}
       </View>
@@ -137,6 +137,7 @@ function Room() {
                 <RaisedButton testID="room-copy-link" tone="wine" height={48} glyph={copied ? "check" : "content-copy"} label={copied ? "Copied" : "Copy link"} onPress={copy} style={styles.flex} />
                 <RaisedButton testID="room-share-link" glyph="whatsapp" height={48} label="Share on WhatsApp" onPress={remind} style={styles.wide} />
               </View>
+              {room.link_stats ? <LinkStats s={room.link_stats} /> : null}
             </Panel> : null}
             <View style={[styles.seats, room.single && styles.seatsDuo]} testID="room-seats">
               {seated.map((p: any) => <Pop key={p.pid} style={styles.seat}>
@@ -175,6 +176,23 @@ function Room() {
   </ArenaBg>;
 }
 
+/** Match Link Stats (host): how many opened this link and took a seat, and the all-time count of every link shared. */
+function LinkStats({ s }: { s: { opened: number; joined: number; all_opened: number; all_joined: number; links: number } }) {
+  return <View testID="room-link-stats" style={styles.stats}>
+    <View style={styles.statRow}>
+      {([["eye-outline", s.opened, "opened the link", "room-link-opened"], ["seat-outline", s.joined, "took a seat", "room-link-joined"]] as const).map(([icon, n, label, id]) =>
+        <View key={id} style={styles.stat} accessibilityLabel={`${n} ${label}`}>
+          <Icon name={icon} size={18} color={arena.aqua} />
+          <T testID={id} w="heavy" size={22} color={arena.gold}>{n}</T>
+          <T w="bold" size={11} color={arena.muted} style={styles.flex} numberOfLines={2}>{label}</T>
+        </View>)}
+    </View>
+    <T testID="room-link-alltime" w="bold" size={11} color={arena.faint} style={styles.center}>
+      {s.links > 1 ? `All your match links: ${s.all_opened} opened · ${s.all_joined} played` : "Opens count once per phone. Link-preview robots are never counted."}
+    </T>
+  </View>;
+}
+
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, wide: { flex: 1.6 }, stretch: { alignSelf: "stretch" }, center: { textAlign: "center" }, spaced: { letterSpacing: 2 },
   frame: { flex: 1, width: "100%", maxWidth: 560, alignSelf: "center" },
@@ -189,6 +207,9 @@ const styles = StyleSheet.create({
   seats: { flexDirection: "row", justifyContent: "space-between" }, seatsDuo: { justifyContent: "center", gap: 40 }, seat: { width: "19%", alignItems: "center", gap: 2 },
   empty: { width: 54, height: 54, borderRadius: 27, alignItems: "center", justifyContent: "center", borderWidth: 2, borderStyle: "dashed", borderColor: arena.rimHi, backgroundColor: arena.panelEdge },
   dock: { paddingHorizontal: 16, paddingTop: 8, gap: 10 }, row: { flexDirection: "row", gap: 10 },
+  stats: { gap: 8, paddingTop: 10, borderTopWidth: 1, borderTopColor: arena.rim },
+  statRow: { flexDirection: "row", gap: 10 },
+  stat: { flex: 1, minWidth: 0, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 10, minHeight: 48, borderRadius: 14, backgroundColor: arena.panelEdge },
 });
 
 export default withRapid(Room, { banner: false });

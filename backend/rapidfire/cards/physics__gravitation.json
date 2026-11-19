@@ -1,1541 +1,3321 @@
 [
-  {
-    "id": "cacfb7c1-30e7-4f55-af0f-060f9238d641",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Newton's Law of Gravitation",
-    "prompt": "Gravitational force between two masses separated by r",
-    "formula": "F = Gm₁m₂/r²",
-    "options": [
-      "Directly proportional to r",
-      "Inversely proportional to r",
-      "Independent of r",
-      "Inversely proportional to r²"
-    ],
-    "answer": 3,
-    "explain": "Newton's law of gravitation: F ∝ 1/r²",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "25f4e0aa-bc53-4599-a027-be6c31b8139e",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Newton's Law of Gravitation",
-    "prompt": "Value of universal gravitational constant G",
-    "formula": "G = 6.67×10⁻¹¹ N m² kg⁻²",
-    "options": [
-      "9.8 N m² kg⁻²",
-      "6.67×10⁻⁸ N m² kg⁻²",
-      "3.84×10⁻¹¹ N m² kg⁻²",
-      "6.67×10⁻¹¹ N m² kg⁻²"
-    ],
-    "answer": 3,
-    "explain": "G = 6.67×10⁻¹¹ N m² kg⁻² is the universal gravitational constant",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4c0b9f44-d6a0-4719-aa9a-92b58516b31e",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Newton's Law of Gravitation",
-    "prompt": "Dimensions of gravitational constant G",
-    "formula": "",
-    "options": [
-      "[M⁻¹L³T⁻¹]",
-      "[M⁻¹L²T⁻²]",
-      "[M¹L³T⁻²]",
-      "[M⁻¹L³T⁻²]"
-    ],
-    "answer": 3,
-    "explain": "From F=Gm₁m₂/r², G has dimensions [M⁻¹L³T⁻²]",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eb115e84-c27d-40f4-aab3-ed8d52b12074",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Acceleration due to Gravity",
-    "prompt": "Acceleration due to gravity on Earth's surface",
-    "formula": "g = GM/R²",
-    "options": [
-      "2GM/R²",
-      "GM/R²",
-      "GM/R",
-      "GM/2R²"
-    ],
-    "answer": 1,
-    "explain": "g = GM/R² where M and R are Earth's mass and radius",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3e118b8b-f658-4669-a958-1c9c1ad6ddf4",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Variation of g",
-    "prompt": "Variation of g with height h above Earth's surface (h << R)",
-    "formula": "g_h ≈ g(1 − 2h/R)",
-    "options": [
-      "g(1 + 2h/R)",
-      "g(1 − h/R)",
-      "g(1 − h²/R²)",
-      "g(1 − 2h/R)"
-    ],
-    "answer": 3,
-    "explain": "For h << R, binomial approximation gives gₕ ≈ g(1 − 2h/R)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "195ddabe-51c1-42fa-bd4e-abf5379ff231",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Variation of g",
-    "prompt": "Variation of g with depth d below Earth's surface",
-    "formula": "g_d = g(1 − d/R)",
-    "options": [
-      "g(1 − 2d/R)",
-      "g(1 − d/R)",
-      "g(1 + d/R)",
-      "g · d/R"
-    ],
-    "answer": 1,
-    "explain": "g decreases linearly with depth: gd = g(1 − d/R)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6fceb0b6-c20b-4c86-88ef-814cced2bbdf",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Variation of g",
-    "prompt": "Value of g at Earth's centre",
-    "formula": "",
-    "options": [
-      "g",
-      "Zero",
-      "Infinite",
-      "g/2"
-    ],
-    "answer": 1,
-    "explain": "At centre d = R, so gd = g(1−R/R) = 0",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a32ccd3a-5fbe-434f-a264-bd1814bd3e19",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Variation of g",
-    "prompt": "Effect of Earth's rotation on g at latitude λ",
-    "formula": "g' = g − ω²R cos²λ",
-    "options": [
-      "g' = g − ω²R sinλ",
-      "g' = g − ωR cosλ",
-      "g' = g − ω²R cos²λ",
-      "g' = g + ω²R cos²λ"
-    ],
-    "answer": 2,
-    "explain": "Centrifugal effect reduces g; maximum at equator (λ=0), zero at poles",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6d6a66ca-d3ec-4c2f-95c6-dbd83ee64ace",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitational Potential",
-    "prompt": "Gravitational potential at distance r from mass M",
-    "formula": "V = −GM/r",
-    "options": [
-      "−GM/r²",
-      "+GM/r",
-      "−GM/r",
-      "−GM·r"
-    ],
-    "answer": 2,
-    "explain": "Gravitational potential is always negative: V = −GM/r",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7f322512-5929-4551-9ad6-7c528952b457",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitational Potential Energy",
-    "prompt": "Gravitational potential energy of mass m at distance r from M",
-    "formula": "U = −GMm/r",
-    "options": [
-      "+GMm/r",
-      "−GMm/r²",
-      "GMm/2r",
-      "−GMm/r"
-    ],
-    "answer": 3,
-    "explain": "U = −GMm/r; negative because work done against gravity to bring from ∞",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c3c690c0-fe1d-46bd-8237-88385646a95d",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Escape Velocity",
-    "prompt": "Escape velocity from Earth's surface",
-    "formula": "vₑ = √(2GM/R) = √(2gR)",
-    "options": [
-      "√(2gR)",
-      "√(gR)",
-      "2√(gR)",
-      "√(gR/2)"
-    ],
-    "answer": 0,
-    "explain": "Setting KE = |PE|: ½mv² = GMm/R gives vₑ = √(2GM/R)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d521b8fd-e767-459f-9fe3-2c7c0053aa56",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Escape Velocity",
-    "prompt": "Escape velocity from Earth's surface (approximate value)",
-    "formula": "",
-    "options": [
-      "7.9 km/s",
-      "11.2 km/s",
-      "3.0 km/s",
-      "15.8 km/s"
-    ],
-    "answer": 1,
-    "explain": "vₑ = √(2×9.8×6.4×10⁶) ≈ 11.2 km/s for Earth",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3b45fde7-8f98-44b3-9c2a-7a6a8e34658b",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Satellites",
-    "prompt": "Relation between escape velocity and orbital velocity at surface",
-    "formula": "vₑ = √2 · v₀",
-    "options": [
-      "vₑ = v₀/√2",
-      "vₑ = v₀",
-      "vₑ = √2 · v₀",
-      "vₑ = 2v₀"
-    ],
-    "answer": 2,
-    "explain": "vₑ = √(2gR), v₀ = √(gR) at surface, so vₑ = √2 · v₀",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7a9a0f78-fe86-4a77-93d9-21d82cf5b6ab",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Satellites",
-    "prompt": "Time period of a satellite in orbit at height h",
-    "formula": "T = 2π√((R+h)³/GM)",
-    "options": [
-      "2π√((R+h)³/GM)",
-      "2π√((R+h)/GM)",
-      "2π√((R+h)²/GM)",
-      "2π(R+h)/√(GM)"
-    ],
-    "answer": 0,
-    "explain": "T = circumference/speed = 2π(R+h)/v₀ = 2π√((R+h)³/GM)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8d09bbda-b345-4f2a-99bd-6dec0e214e76",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Kepler's Laws",
-    "prompt": "Kepler's Third Law: T² ∝ ?",
-    "formula": "T² ∝ a³",
-    "options": [
-      "a",
-      "a³",
-      "a^(3/2)",
-      "a²"
-    ],
-    "answer": 1,
-    "explain": "Law of periods: square of time period ∝ cube of semi-major axis",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bcba3032-c0d4-4ba2-ba47-85d6fc7a4245",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Kepler's Laws",
-    "prompt": "Kepler's Second Law is a consequence of conservation of",
-    "formula": "",
-    "options": [
-      "Linear momentum",
-      "Angular momentum",
-      "Energy",
-      "Mass"
-    ],
-    "answer": 1,
-    "explain": "Equal areas in equal times ↔ dA/dt = L/2m = const (angular momentum conserved)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5b62674d-0b29-42a0-9507-af3bd5d05202",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Satellites",
-    "prompt": "Total mechanical energy of a satellite in circular orbit",
-    "formula": "E = −GMm/2r",
-    "options": [
-      "Zero",
-      "−GMm/2r",
-      "−GMm/r",
-      "+GMm/2r"
-    ],
-    "answer": 1,
-    "explain": "E = KE + PE = GMm/2r − GMm/r = −GMm/2r (negative → bound)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8b2827ba-427f-4a32-bf9d-ad5e7c0c8314",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Satellites",
-    "prompt": "Binding energy of satellite in circular orbit of radius r",
-    "formula": "BE = GMm/2r",
-    "options": [
-      "2GMm/r",
-      "GMm/2r",
-      "GMm/4r",
-      "GMm/r"
-    ],
-    "answer": 1,
-    "explain": "Binding energy = −E = GMm/2r; energy needed to free satellite",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4168e3f8-5e7d-4751-b412-368e75b41e9b",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitational Field",
-    "prompt": "Gravitational field intensity E at distance r from mass M",
-    "formula": "E = GM/r²",
-    "options": [
-      "−GM/r²",
-      "GMr",
-      "GM/r",
-      "GM/r²"
-    ],
-    "answer": 3,
-    "explain": "Magnitude of gravitational field: E = GM/r² (directed toward M)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c80b62ee-6fa7-4dbd-b69a-a9686dade242",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitational Potential",
-    "prompt": "Relation between gravitational field E and potential V",
-    "formula": "E = −dV/dr",
-    "options": [
-      "E = dV/dr",
-      "E = −V/r",
-      "E = V·r",
-      "E = −dV/dr"
-    ],
-    "answer": 3,
-    "explain": "Gravitational field is negative gradient of potential: E = −dV/dr",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d790b994-fd2a-4fce-a4fb-1a227543d61d",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Satellites",
-    "prompt": "Orbital speed of a satellite close to Earth's surface (h≈0)",
-    "formula": "v₀ = √(gR)",
-    "options": [
-      "≈ 3.0 km/s",
-      "≈ 5.0 km/s",
-      "≈ 11.2 km/s",
-      "≈ 7.9 km/s"
-    ],
-    "answer": 3,
-    "explain": "v₀ = √(gR) = √(9.8×6.4×10⁶) ≈ 7.9 km/s for near-Earth orbit",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3ff9465f-e510-4941-82c7-2dbdfa00fb25",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Kepler's Laws",
-    "prompt": "Kepler's First Law: planets move in orbits of shape",
-    "formula": "",
-    "options": [
-      "Ellipse with Sun at one focus",
-      "Circle with Sun at centre",
-      "Parabola",
-      "Hyperbola"
-    ],
-    "answer": 0,
-    "explain": "Kepler's 1st law: planetary orbits are ellipses with the Sun at one focus.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "23ed93e4-b4e9-4951-8ea5-56a5b3e67db0",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitational Potential Energy",
-    "prompt": "Gravitational PE of a system of two masses m₁,m₂ separated by r",
-    "formula": "U = −Gm₁m₂/r",
-    "options": [
-      "Gm₁m₂/r",
-      "−Gm₁m₂/r²",
-      "−Gm₁m₂/r",
-      "−2Gm₁m₂/r"
-    ],
-    "answer": 2,
-    "explain": "Gravitational PE is negative, indicating a bound attractive system.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f0bf363e-0b5d-4a0a-afd3-07a4b0132438",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitational Potential",
-    "prompt": "Gravitational potential on surface of Earth (in terms of g,R)",
-    "formula": "V = −gR",
-    "options": [
-      "gR",
-      "−gR²",
-      "−gR/2",
-      "−gR"
-    ],
-    "answer": 3,
-    "explain": "V_surface = −GM/R and g = GM/R², so V = −gR.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c05dc7c2-186d-4e6e-a1cf-ede0f9cb6f77",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Escape Velocity",
-    "prompt": "Escape speed depends on the mass of the escaping object?",
-    "formula": "vₑ = √(2GM/R)",
-    "options": [
-      "Only for non-zero mass",
-      "Yes, inversely",
-      "No, it is independent of object's mass",
-      "Yes, proportional to m"
-    ],
-    "answer": 2,
-    "explain": "vₑ = √(2GM/R) has no m term; escape speed is mass-independent.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2cf0dc4a-e1f6-4ab8-b783-3833288560d5",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Satellite Energy",
-    "prompt": "For a satellite, KE : |PE| : |Total E| ratio",
-    "formula": "",
-    "options": [
-      "2 : 1 : 1",
-      "1 : 1 : 1",
-      "1 : 2 : 1",
-      "1 : 2 : 2"
-    ],
-    "answer": 2,
-    "explain": "KE = GMm/2r, PE = −GMm/r, E = −GMm/2r → KE:|PE|:|E| = 1:2:1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "927d9903-4922-4c9b-a33e-f3bc0e182674",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Satellite Orbital Period",
-    "prompt": "Time period of satellite orbiting just above Earth's surface (h≈0)",
-    "formula": "T = 2π√(R/g)",
-    "options": [
-      "≈ 90 s",
-      "≈ 60 min",
-      "≈ 84 min",
-      "≈ 24 h"
-    ],
-    "answer": 2,
-    "explain": "T = 2π√(R/g) ≈ 2π√(6.4×10⁶/10) ≈ 5060 s ≈ 84 min.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "977f39e8-192e-4216-982e-d52d90849746",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Kepler's Laws",
-    "prompt": "Which quantity is conserved in planetary motion due to Kepler's 2nd law?",
-    "formula": "dA/dt = L/2m = const",
-    "options": [
-      "Kinetic energy",
-      "Linear momentum",
-      "Total momentum",
-      "Angular momentum"
-    ],
-    "answer": 3,
-    "explain": "Equal areas in equal times ↔ constant areal velocity ↔ L = const.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2bf005c2-ec5c-43b6-9de6-402c964a696d",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Orbital Velocity",
-    "prompt": "Relation between orbital radius r and orbital speed v for circular orbit",
-    "formula": "v = √(GM/r)",
-    "options": [
-      "v ∝ √r",
-      "v ∝ 1/√r",
-      "v ∝ r",
-      "v ∝ 1/r"
-    ],
-    "answer": 1,
-    "explain": "v = √(GM/r) → as r increases, v decreases as 1/√r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d1f6c2c8-e43d-42c0-bd11-530db31ae316",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Kepler's Laws",
-    "prompt": "Kepler's third law: T² ∝ aⁿ where a = semi-major axis. Value of n?",
-    "formula": "T² ∝ a³",
-    "options": [
-      "2",
-      "1",
-      "4",
-      "3"
-    ],
-    "answer": 3,
-    "explain": "Kepler's 3rd law: T² ∝ a³ for any orbit around the same central body.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9e12b27a-57a6-4dbb-8b79-0cbe59394650",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Escape Velocity",
-    "prompt": "If Earth's radius suddenly halved (mass constant), escape velocity becomes",
-    "formula": "vₑ = √(2GM/R)",
-    "options": [
-      "2 times original",
-      "1/√2 times original",
-      "Same",
-      "√2 times original"
-    ],
-    "answer": 3,
-    "explain": "vₑ ∝ 1/√R; R→R/2 ⇒ vₑ → vₑ√2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e6c86506-f360-4219-bbd8-a98f3ac69afb",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Geostationary Satellite",
-    "prompt": "Period of geostationary satellite changes if its mass is doubled?",
-    "formula": "T = 2π√(r³/GM)",
-    "options": [
-      "Halves",
-      "Increases by √2",
-      "Doubles",
-      "No change"
-    ],
-    "answer": 3,
-    "explain": "T depends on orbital radius and M_Earth only, not on satellite mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c5db9e98-9ecb-49b7-ba64-10cc4c56ba46",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Kepler's Laws",
-    "prompt": "A planet's orbital speed is maximum at which point?",
-    "formula": "",
-    "options": [
-      "Perihelion (closest to Sun)",
-      "Semi-latus rectum",
-      "Aphelion (farthest)",
-      "All points equal"
-    ],
-    "answer": 0,
-    "explain": "By Kepler's 2nd law and energy conservation, speed is max at perihelion.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cdfa04f4-9612-4071-9070-09c3dd6c6184",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Escape Velocity",
-    "prompt": "Ratio of escape velocities of two planets with same density but radii R and 2R",
-    "formula": "vₑ ∝ R√ρ",
-    "options": [
-      "1 : 4",
-      "2 : 1",
-      "1 : 2",
-      "1 : √2"
-    ],
-    "answer": 2,
-    "explain": "M ∝ ρR³, vₑ = √(2GM/R) ∝ R√ρ; same ρ → vₑ ∝ R → ratio 1:2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "41c0ed6b-0d0d-4d22-a2d4-dd02094a3e8a",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Kepler's Laws",
-    "prompt": "Angular momentum of a planet in elliptical orbit is",
-    "formula": "L = const",
-    "options": [
-      "Constant throughout orbit",
-      "Maximum at perihelion",
-      "Minimum at perihelion",
-      "Varies sinusoidally"
-    ],
-    "answer": 0,
-    "explain": "No torque acts on planet (force is central), so L = mvr⊥ = constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f49ce2b7-4916-40e5-b149-4e64f165d011",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational PE of mass m on Earth's surface (R = radius)",
-    "formula": "U = -GMm/R",
-    "options": [
-      "-GMm/R²",
-      "-GMm/R",
-      "-mgR²",
-      "-2GMm/R"
-    ],
-    "answer": 1,
-    "explain": "PE at surface = -GMm/R; this equals -mgR using g = GM/R².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e1084809-ba31-4265-bffc-bbe1a0f00a2b",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational field intensity just outside a uniform spherical shell of mass M, radius R",
-    "formula": "E = GM/R²",
-    "options": [
-      "Zero",
-      "GM/R²  (same as point mass)",
-      "Depends on shell thickness",
-      "GM/R³"
-    ],
-    "answer": 1,
-    "explain": "Outside a spherical shell, field is identical to that of a point mass M at centre.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "695aedf4-a2ba-4571-95e2-f8c7f316ab9f",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational field inside a uniform solid sphere varies with r as",
-    "formula": "E ∝ r",
-    "options": [
-      "E = constant",
-      "E ∝ 1/r²",
-      "E ∝ r²",
-      "E ∝ r"
-    ],
-    "answer": 3,
-    "explain": "Inside solid sphere, E = GMr/R³, so E varies linearly with r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e721ff9b-bb61-4393-b35f-971e50e22957",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "If orbital radius doubles, orbital speed of satellite becomes",
-    "formula": "v ∝ 1/√r",
-    "options": [
-      "v/√2",
-      "2v",
-      "v√2",
-      "v/2"
-    ],
-    "answer": 0,
-    "explain": "v = √(GM/r), so doubling r gives v/√2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7877fcaf-0475-487c-bede-97c5f0bf074c",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational field just inside the surface of a spherical shell is",
-    "formula": "",
-    "options": [
-      "Zero",
-      "GM/R²",
-      "-GM/R²",
-      "GM/2R²"
-    ],
-    "answer": 0,
-    "explain": "Gravitational field everywhere inside a uniform spherical shell is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "91003153-4d4c-4748-bad6-e3749cc4723a",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "If mass of Earth doubles (radius constant), escape velocity becomes",
-    "formula": "vₑ = √(2GM/R)",
-    "options": [
-      "2vₑ",
-      "vₑ/√2",
-      "√2 vₑ",
-      "4vₑ"
-    ],
-    "answer": 2,
-    "explain": "vₑ ∝ √M, so doubling M multiplies vₑ by √2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b93a29e7-eec4-48e4-b13d-8b916543ad34",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "A satellite's total mechanical energy is negative. This means the satellite is",
-    "formula": "",
-    "options": [
-      "Escaping Earth",
-      "In hyperbolic orbit",
-      "At rest",
-      "Bound to Earth"
-    ],
-    "answer": 3,
-    "explain": "Negative total energy means the satellite is gravitationally bound.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b02c9a39-c733-434f-9cde-8e5abed08984",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational potential at centre of a uniform solid sphere of radius R",
-    "formula": "V = -3GM/2R",
-    "options": [
-      "-GM/R",
-      "-3GM/2R",
-      "Zero",
-      "-2GM/R"
-    ],
-    "answer": 1,
-    "explain": "V at centre of solid sphere = -(3/2)(GM/R), deeper than surface value.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bf2f50c7-dea1-4c35-80ab-a43d05b8888e",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For two satellites at radii r and 4r, ratio of their time periods T₁:T₂ is",
-    "formula": "T ∝ r^(3/2)",
-    "options": [
-      "1:16",
-      "1:2",
-      "1:4",
-      "1:8"
-    ],
-    "answer": 3,
-    "explain": "T ∝ r^(3/2): T₁/T₂ = (r/4r)^(3/2) = (1/4)^(3/2) = 1/8.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a3ba308a-baa6-4a87-b4d8-7a5d7449e84b",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For a satellite of mass m in orbit of radius r, KE is equal to",
-    "formula": "KE = GMm/2r",
-    "options": [
-      "GMm/2r",
-      "GMm/4r",
-      "GMm/r",
-      "-GMm/r"
-    ],
-    "answer": 0,
-    "explain": "KE = ½mv² = GMm/2r for circular orbit.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ff1ea5fb-c50b-4592-bb71-8a2552fff8d2",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "The gravitational force between masses is independent of",
-    "formula": "",
-    "options": [
-      "Value of G",
-      "Product of masses",
-      "Medium between masses",
-      "Square of distance"
-    ],
-    "answer": 2,
-    "explain": "Newton's gravity law has no medium dependence; F = Gm₁m₂/r².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "26b242e6-b17a-4b86-a755-a3c2e57d83c7",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Variation of g with height h (exact formula) is",
-    "formula": "g' = g(1+h/R)⁻²",
-    "options": [
-      "g·R/(R+h)",
-      "g(1−h/R)²",
-      "g(1−2h/R)",
-      "g(1+h/R)⁻²"
-    ],
-    "answer": 3,
-    "explain": "Exact: g' = GM/(R+h)² = g·R²/(R+h)² = g(1+h/R)⁻².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "438a86cf-39f6-4b19-954b-311f164413a8",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "At height h = R above Earth's surface, value of g becomes",
-    "formula": "g' = g/4",
-    "options": [
-      "g/4",
-      "g/2",
-      "g/9",
-      "g/3"
-    ],
-    "answer": 0,
-    "explain": "g' = g·R²/(R+R)² = g/4 when h = R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1577371b-9970-4300-b914-63e452d863c8",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Kepler's law that gives information about speed variation of planets is",
-    "formula": "",
-    "options": [
-      "Second law (equal areas)",
-      "Third law (T²∝a³)",
-      "First law (ellipse)",
-      "Newton's law"
-    ],
-    "answer": 0,
-    "explain": "Second law: equal areas in equal time → planet moves faster near Sun.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ffbf3253-448f-4e76-b64a-627e1b14a56b",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Escape velocity from surface of a planet of density ρ and radius R is",
-    "formula": "vₑ = R√(8πGρ/3)",
-    "options": [
-      "R√(8πGρ/3)",
-      "R√(4πGρ/3)",
-      "√(2GρR)",
-      "√(GρR)"
-    ],
-    "answer": 0,
-    "explain": "M = (4/3)πR³ρ, so vₑ = √(2GM/R) = R√(8πGρ/3).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "139ae7a3-eb96-4b78-9693-cd381d3761fe",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Which of these is NOT a property of gravitational force?",
-    "formula": "",
-    "options": [
-      "Acts along line joining masses",
-      "It can be repulsive",
-      "Central force",
-      "Conservative force"
-    ],
-    "answer": 1,
-    "explain": "Gravitational force is always attractive; it cannot be repulsive.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bfb1109b-66b9-4944-b28a-dcaa12000c23",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Orbital speed of satellite is independent of",
-    "formula": "v = √(GM/r)",
-    "options": [
-      "Mass of satellite",
-      "G",
-      "Mass of Earth",
-      "Orbital radius"
-    ],
-    "answer": 0,
-    "explain": "v = √(GM/r) has no dependence on the satellite's own mass.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a7f56719-d500-4fcb-a743-2d0ad1595c7e",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "The weight of a person in a freely falling lift (satellite) is",
-    "formula": "",
-    "options": [
-      "mg/2",
-      "2mg",
-      "Zero (weightless)",
-      "mg"
-    ],
-    "answer": 2,
-    "explain": "In free fall, apparent weight = m(g−g) = 0; person is weightless.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ec48d220-d0d7-4ed6-9cd3-d78218aafa0f",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational field inside a uniform solid sphere at r < R is",
-    "formula": "E = GMr/R³",
-    "options": [
-      "Zero",
-      "Proportional to 1/r²",
-      "Proportional to r²",
-      "Proportional to r"
-    ],
-    "answer": 3,
-    "explain": "Inside solid sphere, only mass within r contributes; E ∝ r (linear).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "20ed1519-25bf-4e91-a72e-83caea74ccaf",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Work done to move mass m from Earth's surface to infinity is",
-    "formula": "W = GMm/R",
-    "options": [
-      "GMm/2R",
-      "-GMm/R",
-      "2GMm/R",
-      "GMm/R"
-    ],
-    "answer": 3,
-    "explain": "W = 0 - (-GMm/R) = GMm/R = binding energy at surface.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "85a67474-24b8-4bd9-96dc-bb1b27aacf51",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "If satellite orbits at r = 2R from Earth's centre, its orbital speed vs v₀ (at R) is",
-    "formula": "v ∝ 1/√r",
-    "options": [
-      "v₀√2",
-      "v₀/2",
-      "2v₀",
-      "v₀/√2"
-    ],
-    "answer": 3,
-    "explain": "v ∝ 1/√r; doubling r reduces v by factor √2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ac38bffb-8dac-4f30-8aec-195e65ea24dc",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For a planet in elliptical orbit, speed is minimum at",
-    "formula": "",
-    "options": [
-      "Aphelion",
-      "Perihelion",
-      "Focus",
-      "Semi-latus rectum"
-    ],
-    "answer": 0,
-    "explain": "By Kepler's 2nd law, speed is minimum at farthest point (aphelion).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "10476115-f2fb-4d7d-9ff1-10fe57ab0812",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Ratio of KE to PE for a satellite in circular orbit of radius r is",
-    "formula": "KE/PE = -1/2",
-    "options": [
-      "1/2",
-      "-1",
-      "-1/2",
-      "2"
-    ],
-    "answer": 2,
-    "explain": "KE = GMm/2r; PE = -GMm/r; so KE/PE = -1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "306436d8-fe86-479e-a892-1e1ca8023ed8",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "If Earth's density is ρ, escape velocity from its surface is",
-    "formula": "vₑ = R√(8πGρ/3)",
-    "options": [
-      "√(2GρR)",
-      "R√(4πGρ/3)",
-      "R√(8πGρ/3)",
-      "R√(Gρ)"
-    ],
-    "answer": 2,
-    "explain": "M = (4/3)πR³ρ; substituting in vₑ = √(2GM/R) gives R√(8πGρ/3).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "98ba3460-7a57-4e38-8bd9-b92353044ed6",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Two spheres of same radius R but masses M and 2M: ratio of surface gravity g₁:g₂ is",
-    "formula": "g ∝ M",
-    "options": [
-      "1:√2",
-      "1:2",
-      "1:4",
-      "2:1"
-    ],
-    "answer": 1,
-    "explain": "g = GM/R²; same R so g ∝ M; thus g₁:g₂ = M:2M = 1:2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cb294d35-64e3-438a-8c5a-e27925422a00",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For a satellite in circular orbit, which energy is always positive?",
-    "formula": "",
-    "options": [
-      "Binding energy change",
-      "Potential energy",
-      "Kinetic energy",
-      "Total mechanical energy"
-    ],
-    "answer": 2,
-    "explain": "KE = GMm/2r > 0; PE < 0; Total E < 0 for bound satellite.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21a81588-408d-445a-b1d1-b68c0f7fc005",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "If g at poles = gₚ and at equator = gₑ, then",
-    "formula": "gₚ > gₑ",
-    "options": [
-      "gₑ > gₚ",
-      "Depends on altitude",
-      "gₚ = gₑ",
-      "gₚ > gₑ"
-    ],
-    "answer": 3,
-    "explain": "At poles: no centrifugal effect and closer to centre; so gₚ > gₑ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "52974732-bac9-4807-81c4-b3aa720c696e",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "The gravitational force between two masses is medium-dependent?",
-    "formula": "",
-    "options": [
-      "No, it is independent of medium",
-      "Depends on charge",
-      "Depends on temperature",
-      "Yes, depends on medium"
-    ],
-    "answer": 0,
-    "explain": "Gravitational force is independent of the intervening medium.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "837a58f2-4e63-41ed-b705-8ef1024fc572",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Satellite energy equation: as orbital radius increases, total energy",
-    "formula": "E = -GMm/2r",
-    "options": [
-      "Becomes zero",
-      "Stays constant",
-      "Increases (becomes less negative)",
-      "Decreases (more negative)"
-    ],
-    "answer": 2,
-    "explain": "E = -GMm/2r; as r increases, |E| decreases, so E increases toward zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1e09d2e2-8ac6-4b5b-89df-fe322a508f4a",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "The weight of astronaut in a satellite orbiting Earth is",
-    "formula": "",
-    "options": [
-      "Less than mg",
-      "More than mg",
-      "mg",
-      "Zero (apparent weight)"
-    ],
-    "answer": 3,
-    "explain": "In orbit, normal force = 0; astronaut is in free fall — apparent weightlessness.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8c222548-d5b1-4d38-a1b8-0dabfe0bb9c2",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "If Earth stops rotating, the value of g at the poles would",
-    "formula": "",
-    "options": [
-      "Remain unchanged",
-      "Become zero",
-      "Increase",
-      "Decrease"
-    ],
-    "answer": 0,
-    "explain": "At poles, centrifugal effect is zero regardless of rotation; g poles unchanged.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9540d060-d5bc-427c-a89e-ac8606be2260",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For a geostationary satellite, the orbital plane must be",
-    "formula": "",
-    "options": [
-      "Polar plane",
-      "Plane at 45° to equator",
-      "Any plane through centre",
-      "Equatorial plane"
-    ],
-    "answer": 3,
-    "explain": "Geostationary satellite must orbit in Earth's equatorial plane to stay fixed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0ee653bb-db38-4780-a482-9821af40c94a",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For a satellite, if speed is increased beyond orbital speed but below escape speed, orbit becomes",
-    "formula": "",
-    "options": [
-      "Parabolic",
-      "Hyperbolic",
-      "Circular (same)",
-      "Elliptical (larger)"
-    ],
-    "answer": 3,
-    "explain": "Orbit changes to larger ellipse; escape requires speed ≥ vₑ for parabola/hyperbola.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bfcdf0a0-fc43-471c-9377-84765d829ac8",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Which physical quantity has same value for all planets in solar system per Kepler's 3rd law?",
-    "formula": "T²/a³ = const",
-    "options": [
-      "T/a",
-      "T²/a³",
-      "T²/a²",
-      "T³/a²"
-    ],
-    "answer": 1,
-    "explain": "Kepler's 3rd law: T²/a³ is the same constant for all planets orbiting the Sun.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7c4169d7-4225-4472-b7c2-328290995572",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Minimum energy needed to launch a satellite into orbit (height h≈0) from Earth's surface is",
-    "formula": "E = GMm/2R",
-    "options": [
-      "GMm/2R",
-      "2GMm/R",
-      "GMm/4R",
-      "GMm/R"
-    ],
-    "answer": 0,
-    "explain": "Total orbital energy = -GMm/2R; work done = 0-(-GMm/2R) = GMm/2R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a91009aa-e239-453b-ac93-bc5d869f4487",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational field outside a uniform spherical shell of mass M at distance r is",
-    "formula": "E = GM/r²",
-    "options": [
-      "GMr/R³",
-      "Zero",
-      "GM/r² directed inward",
-      "GM/r² directed outward"
-    ],
-    "answer": 2,
-    "explain": "Outside a shell, it behaves like a point mass; field is GM/r² directed toward centre",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9d3536ab-addb-4485-bb6e-14958b9fa4ca",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For two satellites of same orbital radius but different masses, which is same?",
-    "formula": "",
-    "options": [
-      "Binding energy",
-      "Total energy",
-      "Kinetic energy",
-      "Time period"
-    ],
-    "answer": 3,
-    "explain": "Time period T=2π√(r³/GM) is independent of satellite mass; same for both",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dacb0b44-b37f-4fb9-9323-d89b592a8936",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For a satellite in orbit, if its speed is suddenly doubled, it will",
-    "formula": "vₑ = √2·vₒ",
-    "options": [
-      "Remain in same orbit",
-      "Escape to infinity",
-      "Move to smaller orbit",
-      "Move to larger orbit"
-    ],
-    "answer": 1,
-    "explain": "Doubling orbital speed gives v=2vₒ > √2·vₒ = vₑ; satellite escapes",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7623c5e1-7415-4149-8aeb-54fe8dc54223",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Gravitational field at centre of a uniform solid sphere is",
-    "formula": "E = GMr/R³",
-    "options": [
-      "3GM/2R²",
-      "GM/2R²",
-      "Zero",
-      "GM/R²"
-    ],
-    "answer": 2,
-    "explain": "At r=0, E=GMr/R³=0; field is zero at the centre by symmetry",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8c87910e-e113-4c0f-a71d-2e8376e76071",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "A satellite moving in elliptical orbit: which quantity varies throughout?",
-    "formula": "",
-    "options": [
-      "Total mechanical energy",
-      "Areal velocity",
-      "Speed",
-      "Angular momentum"
-    ],
-    "answer": 2,
-    "explain": "Speed varies; angular momentum, total energy and areal velocity remain constant",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "633469d0-1bb6-40ed-ac2c-3e1dd47fce9f",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Two planets have same surface gravity g but different radii R₁ and R₂. Their mass ratio M₁:M₂ is",
-    "formula": "g = GM/R²",
-    "options": [
-      "R₁:R₂",
-      "R₂:R₁",
-      "R₁²:R₂²",
-      "R₁³:R₂³"
-    ],
-    "answer": 2,
-    "explain": "M = gR²/G; so M₁/M₂ = R₁²/R₂²",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d05a3801-0920-4a9e-8028-146785b86d27",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "If a tunnel is dug through Earth's centre, a ball dropped shows what motion?",
-    "formula": "T = 2π√(R/g)",
-    "options": [
-      "Simple harmonic motion",
-      "Uniform motion",
-      "Circular motion",
-      "Projectile motion"
-    ],
-    "answer": 0,
-    "explain": "Restoring force ∝ displacement; ball executes SHM with T=2π√(R/g)≈84 min",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aa4c80e3-7874-4253-9a30-a5fdd15bc628",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "For satellite in circular orbit, work done by gravitational force in one complete revolution is",
-    "formula": "",
-    "options": [
-      "−GMm/r",
-      "GMm/r",
-      "2πGMm/r",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "Gravity is centripetal (perpendicular to velocity); net work over complete orbit = 0",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7bfdfd6e-67e1-409b-a155-d40f7e6bfd1e",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Variation of g with depth d below Earth's surface (uniform density) is",
-    "formula": "g_d = g(1 − d/R)",
-    "options": [
-      "g(1 − d²/R²)",
-      "g·d/R",
-      "g(1 − d/R)",
-      "g/(1 + d/R)²"
-    ],
-    "answer": 2,
-    "explain": "Inside uniform sphere, g decreases linearly with depth: g_d = g(1 − d/R).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "56507a21-08b4-43d5-a945-40e47a5b5fa6",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Escape velocity from Earth is vₑ. Orbital speed at Earth's surface v₀ is related to vₑ by",
-    "formula": "vₑ = √2 · v₀",
-    "options": [
-      "vₑ = √2·v₀",
-      "vₑ = 2v₀",
-      "vₑ = v₀",
-      "vₑ = v₀/√2"
-    ],
-    "answer": 0,
-    "explain": "v₀ = √(gR), vₑ = √(2gR); hence vₑ = √2·v₀.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "448e1cc3-1d08-4c90-b3e0-2f5bd2fd9b13",
-    "subject": "Physics",
-    "chapter": "Gravitation",
-    "topic": "Gravitation",
-    "prompt": "Weight of a body at height h above Earth's surface where h << R is approximately",
-    "formula": "W_h ≈ W(1 − 2h/R)",
-    "options": [
-      "W(1 − 2h/R)",
-      "W(1 − h/R)",
-      "W·R²/(R+h)",
-      "W(1 + 2h/R)"
-    ],
-    "answer": 0,
-    "explain": "For h<<R, g_h ≈ g(1−2h/R) using binomial approximation, so W_h ≈ W(1−2h/R).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "cacfb7c1-30e7-4f55-af0f-060f9238d641",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's Law of Gravitation",
+  "prompt": "Gravitational force between two masses separated by r",
+  "formula": "F = Gm₁m₂/r²",
+  "options": [
+   "Directly proportional to r",
+   "Inversely proportional to r",
+   "Independent of r",
+   "Inversely proportional to r²"
+  ],
+  "answer": 3,
+  "explain": "Newton's law of gravitation: F ∝ 1/r²",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "25f4e0aa-bc53-4599-a027-be6c31b8139e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's Law of Gravitation",
+  "prompt": "Value of universal gravitational constant G",
+  "formula": "G = 6.67×10⁻¹¹ N m² kg⁻²",
+  "options": [
+   "9.8 N m² kg⁻²",
+   "6.67×10⁻⁸ N m² kg⁻²",
+   "3.84×10⁻¹¹ N m² kg⁻²",
+   "6.67×10⁻¹¹ N m² kg⁻²"
+  ],
+  "answer": 3,
+  "explain": "G = 6.67×10⁻¹¹ N m² kg⁻² is the universal gravitational constant",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4c0b9f44-d6a0-4719-aa9a-92b58516b31e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's Law of Gravitation",
+  "prompt": "Dimensions of gravitational constant G",
+  "formula": "",
+  "options": [
+   "[M⁻¹L³T⁻¹]",
+   "[M⁻¹L²T⁻²]",
+   "[M¹L³T⁻²]",
+   "[M⁻¹L³T⁻²]"
+  ],
+  "answer": 3,
+  "explain": "From F=Gm₁m₂/r², G has dimensions [M⁻¹L³T⁻²]",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eb115e84-c27d-40f4-aab3-ed8d52b12074",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Acceleration due to Gravity",
+  "prompt": "Acceleration due to gravity on Earth's surface",
+  "formula": "g = GM/R²",
+  "options": [
+   "2GM/R²",
+   "GM/R²",
+   "GM/R",
+   "GM/2R²"
+  ],
+  "answer": 1,
+  "explain": "g = GM/R² where M and R are Earth's mass and radius",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3e118b8b-f658-4669-a958-1c9c1ad6ddf4",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g",
+  "prompt": "Variation of g with height h above Earth's surface (h << R)",
+  "formula": "g_h ≈ g(1 − 2h/R)",
+  "options": [
+   "g(1 + 2h/R)",
+   "g(1 − h/R)",
+   "g(1 − h²/R²)",
+   "g(1 − 2h/R)"
+  ],
+  "answer": 3,
+  "explain": "For h << R, binomial approximation gives gₕ ≈ g(1 − 2h/R)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "195ddabe-51c1-42fa-bd4e-abf5379ff231",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g",
+  "prompt": "Variation of g with depth d below Earth's surface",
+  "formula": "g_d = g(1 − d/R)",
+  "options": [
+   "g(1 − 2d/R)",
+   "g(1 − d/R)",
+   "g(1 + d/R)",
+   "g · d/R"
+  ],
+  "answer": 1,
+  "explain": "g decreases linearly with depth: gd = g(1 − d/R)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6fceb0b6-c20b-4c86-88ef-814cced2bbdf",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g",
+  "prompt": "Value of g at Earth's centre",
+  "formula": "",
+  "options": [
+   "g",
+   "Zero",
+   "Infinite",
+   "g/2"
+  ],
+  "answer": 1,
+  "explain": "At centre d = R, so gd = g(1−R/R) = 0",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a32ccd3a-5fbe-434f-a264-bd1814bd3e19",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g",
+  "prompt": "Effect of Earth's rotation on g at latitude λ",
+  "formula": "g' = g − ω²R cos²λ",
+  "options": [
+   "g' = g − ω²R sinλ",
+   "g' = g − ωR cosλ",
+   "g' = g − ω²R cos²λ",
+   "g' = g + ω²R cos²λ"
+  ],
+  "answer": 2,
+  "explain": "Centrifugal effect reduces g; maximum at equator (λ=0), zero at poles",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6d6a66ca-d3ec-4c2f-95c6-dbd83ee64ace",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational Potential",
+  "prompt": "Gravitational potential at distance r from mass M",
+  "formula": "V = −GM/r",
+  "options": [
+   "−GM/r²",
+   "+GM/r",
+   "−GM/r",
+   "−GM·r"
+  ],
+  "answer": 2,
+  "explain": "Gravitational potential is always negative: V = −GM/r",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7f322512-5929-4551-9ad6-7c528952b457",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational Potential Energy",
+  "prompt": "Gravitational potential energy of mass m at distance r from M",
+  "formula": "U = −GMm/r",
+  "options": [
+   "+GMm/r",
+   "−GMm/r²",
+   "GMm/2r",
+   "−GMm/r"
+  ],
+  "answer": 3,
+  "explain": "U = −GMm/r; negative because work done against gravity to bring from ∞",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c3c690c0-fe1d-46bd-8237-88385646a95d",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape Velocity",
+  "prompt": "Escape velocity from Earth's surface",
+  "formula": "vₑ = √(2GM/R) = √(2gR)",
+  "options": [
+   "√(2gR)",
+   "√(gR)",
+   "2√(gR)",
+   "√(gR/2)"
+  ],
+  "answer": 0,
+  "explain": "Setting KE = |PE|: ½mv² = GMm/R gives vₑ = √(2GM/R)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d521b8fd-e767-459f-9fe3-2c7c0053aa56",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape Velocity",
+  "prompt": "Escape velocity from Earth's surface (approximate value)",
+  "formula": "",
+  "options": [
+   "7.9 km/s",
+   "11.2 km/s",
+   "3.0 km/s",
+   "15.8 km/s"
+  ],
+  "answer": 1,
+  "explain": "vₑ = √(2×9.8×6.4×10⁶) ≈ 11.2 km/s for Earth",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3b45fde7-8f98-44b3-9c2a-7a6a8e34658b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Satellites",
+  "prompt": "Relation between escape velocity and orbital velocity at surface",
+  "formula": "vₑ = √2 · v₀",
+  "options": [
+   "vₑ = v₀/√2",
+   "vₑ = v₀",
+   "vₑ = √2 · v₀",
+   "vₑ = 2v₀"
+  ],
+  "answer": 2,
+  "explain": "vₑ = √(2gR), v₀ = √(gR) at surface, so vₑ = √2 · v₀",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7a9a0f78-fe86-4a77-93d9-21d82cf5b6ab",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Satellites",
+  "prompt": "Time period of a satellite in orbit at height h",
+  "formula": "T = 2π√((R+h)³/GM)",
+  "options": [
+   "2π√((R+h)³/GM)",
+   "2π√((R+h)/GM)",
+   "2π√((R+h)²/GM)",
+   "2π(R+h)/√(GM)"
+  ],
+  "answer": 0,
+  "explain": "T = circumference/speed = 2π(R+h)/v₀ = 2π√((R+h)³/GM)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8d09bbda-b345-4f2a-99bd-6dec0e214e76",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's Laws",
+  "prompt": "Kepler's Third Law: T² ∝ ?",
+  "formula": "T² ∝ a³",
+  "options": [
+   "a",
+   "a³",
+   "a^(3/2)",
+   "a²"
+  ],
+  "answer": 1,
+  "explain": "Law of periods: square of time period ∝ cube of semi-major axis",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bcba3032-c0d4-4ba2-ba47-85d6fc7a4245",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's Laws",
+  "prompt": "Kepler's Second Law is a consequence of conservation of",
+  "formula": "",
+  "options": [
+   "Linear momentum",
+   "Angular momentum",
+   "Energy",
+   "Mass"
+  ],
+  "answer": 1,
+  "explain": "Equal areas in equal times ↔ dA/dt = L/2m = const (angular momentum conserved)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5b62674d-0b29-42a0-9507-af3bd5d05202",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Satellites",
+  "prompt": "Total mechanical energy of a satellite in circular orbit",
+  "formula": "E = −GMm/2r",
+  "options": [
+   "Zero",
+   "−GMm/2r",
+   "−GMm/r",
+   "+GMm/2r"
+  ],
+  "answer": 1,
+  "explain": "E = KE + PE = GMm/2r − GMm/r = −GMm/2r (negative → bound)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8b2827ba-427f-4a32-bf9d-ad5e7c0c8314",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Satellites",
+  "prompt": "Binding energy of satellite in circular orbit of radius r",
+  "formula": "BE = GMm/2r",
+  "options": [
+   "2GMm/r",
+   "GMm/2r",
+   "GMm/4r",
+   "GMm/r"
+  ],
+  "answer": 1,
+  "explain": "Binding energy = −E = GMm/2r; energy needed to free satellite",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4168e3f8-5e7d-4751-b412-368e75b41e9b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational Field",
+  "prompt": "Gravitational field intensity E at distance r from mass M",
+  "formula": "E = GM/r²",
+  "options": [
+   "−GM/r²",
+   "GMr",
+   "GM/r",
+   "GM/r²"
+  ],
+  "answer": 3,
+  "explain": "Magnitude of gravitational field: E = GM/r² (directed toward M)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c80b62ee-6fa7-4dbd-b69a-a9686dade242",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational Potential",
+  "prompt": "Relation between gravitational field E and potential V",
+  "formula": "E = −dV/dr",
+  "options": [
+   "E = dV/dr",
+   "E = −V/r",
+   "E = V·r",
+   "E = −dV/dr"
+  ],
+  "answer": 3,
+  "explain": "Gravitational field is negative gradient of potential: E = −dV/dr",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d790b994-fd2a-4fce-a4fb-1a227543d61d",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Satellites",
+  "prompt": "Orbital speed of a satellite close to Earth's surface (h≈0)",
+  "formula": "v₀ = √(gR)",
+  "options": [
+   "≈ 3.0 km/s",
+   "≈ 5.0 km/s",
+   "≈ 11.2 km/s",
+   "≈ 7.9 km/s"
+  ],
+  "answer": 3,
+  "explain": "v₀ = √(gR) = √(9.8×6.4×10⁶) ≈ 7.9 km/s for near-Earth orbit",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3ff9465f-e510-4941-82c7-2dbdfa00fb25",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's Laws",
+  "prompt": "Kepler's First Law: planets move in orbits of shape",
+  "formula": "",
+  "options": [
+   "Ellipse with Sun at one focus",
+   "Circle with Sun at centre",
+   "Parabola",
+   "Hyperbola"
+  ],
+  "answer": 0,
+  "explain": "Kepler's 1st law: planetary orbits are ellipses with the Sun at one focus.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "23ed93e4-b4e9-4951-8ea5-56a5b3e67db0",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational Potential Energy",
+  "prompt": "Gravitational PE of a system of two masses m₁,m₂ separated by r",
+  "formula": "U = −Gm₁m₂/r",
+  "options": [
+   "Gm₁m₂/r",
+   "−Gm₁m₂/r²",
+   "−Gm₁m₂/r",
+   "−2Gm₁m₂/r"
+  ],
+  "answer": 2,
+  "explain": "Gravitational PE is negative, indicating a bound attractive system.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f0bf363e-0b5d-4a0a-afd3-07a4b0132438",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational Potential",
+  "prompt": "Gravitational potential on surface of Earth (in terms of g,R)",
+  "formula": "V = −gR",
+  "options": [
+   "gR",
+   "−gR²",
+   "−gR/2",
+   "−gR"
+  ],
+  "answer": 3,
+  "explain": "V_surface = −GM/R and g = GM/R², so V = −gR.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c05dc7c2-186d-4e6e-a1cf-ede0f9cb6f77",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape Velocity",
+  "prompt": "Escape speed depends on the mass of the escaping object?",
+  "formula": "vₑ = √(2GM/R)",
+  "options": [
+   "Only for non-zero mass",
+   "Yes, inversely",
+   "No, it is independent of object's mass",
+   "Yes, proportional to m"
+  ],
+  "answer": 2,
+  "explain": "vₑ = √(2GM/R) has no m term; escape speed is mass-independent.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2cf0dc4a-e1f6-4ab8-b783-3833288560d5",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Satellite Energy",
+  "prompt": "For a satellite, KE : |PE| : |Total E| ratio",
+  "formula": "",
+  "options": [
+   "2 : 1 : 1",
+   "1 : 1 : 1",
+   "1 : 2 : 1",
+   "1 : 2 : 2"
+  ],
+  "answer": 2,
+  "explain": "KE = GMm/2r, PE = −GMm/r, E = −GMm/2r → KE:|PE|:|E| = 1:2:1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "927d9903-4922-4c9b-a33e-f3bc0e182674",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Satellite Orbital Period",
+  "prompt": "Time period of satellite orbiting just above Earth's surface (h≈0)",
+  "formula": "T = 2π√(R/g)",
+  "options": [
+   "≈ 90 s",
+   "≈ 60 min",
+   "≈ 84 min",
+   "≈ 24 h"
+  ],
+  "answer": 2,
+  "explain": "T = 2π√(R/g) ≈ 2π√(6.4×10⁶/10) ≈ 5060 s ≈ 84 min.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "977f39e8-192e-4216-982e-d52d90849746",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's Laws",
+  "prompt": "Which quantity is conserved in planetary motion due to Kepler's 2nd law?",
+  "formula": "dA/dt = L/2m = const",
+  "options": [
+   "Kinetic energy",
+   "Linear momentum",
+   "Total momentum",
+   "Angular momentum"
+  ],
+  "answer": 3,
+  "explain": "Equal areas in equal times ↔ constant areal velocity ↔ L = const.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2bf005c2-ec5c-43b6-9de6-402c964a696d",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital Velocity",
+  "prompt": "Relation between orbital radius r and orbital speed v for circular orbit",
+  "formula": "v = √(GM/r)",
+  "options": [
+   "v ∝ √r",
+   "v ∝ 1/√r",
+   "v ∝ r",
+   "v ∝ 1/r"
+  ],
+  "answer": 1,
+  "explain": "v = √(GM/r) → as r increases, v decreases as 1/√r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d1f6c2c8-e43d-42c0-bd11-530db31ae316",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's Laws",
+  "prompt": "Kepler's third law: T² ∝ aⁿ where a = semi-major axis. Value of n?",
+  "formula": "T² ∝ a³",
+  "options": [
+   "2",
+   "1",
+   "4",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "Kepler's 3rd law: T² ∝ a³ for any orbit around the same central body.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9e12b27a-57a6-4dbb-8b79-0cbe59394650",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape Velocity",
+  "prompt": "If Earth's radius suddenly halved (mass constant), escape velocity becomes",
+  "formula": "vₑ = √(2GM/R)",
+  "options": [
+   "2 times original",
+   "1/√2 times original",
+   "Same",
+   "√2 times original"
+  ],
+  "answer": 3,
+  "explain": "vₑ ∝ 1/√R; R→R/2 ⇒ vₑ → vₑ√2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e6c86506-f360-4219-bbd8-a98f3ac69afb",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Geostationary Satellite",
+  "prompt": "Period of geostationary satellite changes if its mass is doubled?",
+  "formula": "T = 2π√(r³/GM)",
+  "options": [
+   "Halves",
+   "Increases by √2",
+   "Doubles",
+   "No change"
+  ],
+  "answer": 3,
+  "explain": "T depends on orbital radius and M_Earth only, not on satellite mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c5db9e98-9ecb-49b7-ba64-10cc4c56ba46",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's Laws",
+  "prompt": "A planet's orbital speed is maximum at which point?",
+  "formula": "",
+  "options": [
+   "Perihelion (closest to Sun)",
+   "Semi-latus rectum",
+   "Aphelion (farthest)",
+   "All points equal"
+  ],
+  "answer": 0,
+  "explain": "By Kepler's 2nd law and energy conservation, speed is max at perihelion.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cdfa04f4-9612-4071-9070-09c3dd6c6184",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape Velocity",
+  "prompt": "Ratio of escape velocities of two planets with same density but radii R and 2R",
+  "formula": "vₑ ∝ R√ρ",
+  "options": [
+   "1 : 4",
+   "2 : 1",
+   "1 : 2",
+   "1 : √2"
+  ],
+  "answer": 2,
+  "explain": "M ∝ ρR³, vₑ = √(2GM/R) ∝ R√ρ; same ρ → vₑ ∝ R → ratio 1:2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "41c0ed6b-0d0d-4d22-a2d4-dd02094a3e8a",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's Laws",
+  "prompt": "Angular momentum of a planet in elliptical orbit is",
+  "formula": "L = const",
+  "options": [
+   "Constant throughout orbit",
+   "Maximum at perihelion",
+   "Minimum at perihelion",
+   "Varies sinusoidally"
+  ],
+  "answer": 0,
+  "explain": "No torque acts on planet (force is central), so L = mvr⊥ = constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f49ce2b7-4916-40e5-b149-4e64f165d011",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Gravitational PE of mass m on Earth's surface (R = radius)",
+  "formula": "U = -GMm/R",
+  "options": [
+   "-GMm/R²",
+   "-GMm/R",
+   "-mgR²",
+   "-2GMm/R"
+  ],
+  "answer": 1,
+  "explain": "PE at surface = -GMm/R; this equals -mgR using g = GM/R².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e1084809-ba31-4265-bffc-bbe1a0f00a2b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational field intensity just outside a uniform spherical shell of mass M, radius R",
+  "formula": "E = GM/R²",
+  "options": [
+   "Zero",
+   "GM/R²  (same as point mass)",
+   "Depends on shell thickness",
+   "GM/R³"
+  ],
+  "answer": 1,
+  "explain": "Outside a spherical shell, field is identical to that of a point mass M at centre.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "695aedf4-a2ba-4571-95e2-f8c7f316ab9f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational field inside a uniform solid sphere varies with r as",
+  "formula": "E ∝ r",
+  "options": [
+   "E = constant",
+   "E ∝ 1/r²",
+   "E ∝ r²",
+   "E ∝ r"
+  ],
+  "answer": 3,
+  "explain": "Inside solid sphere, E = GMr/R³, so E varies linearly with r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e721ff9b-bb61-4393-b35f-971e50e22957",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "If orbital radius doubles, orbital speed of satellite becomes",
+  "formula": "v ∝ 1/√r",
+  "options": [
+   "v/√2",
+   "2v",
+   "v√2",
+   "v/2"
+  ],
+  "answer": 0,
+  "explain": "v = √(GM/r), so doubling r gives v/√2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7877fcaf-0475-487c-bede-97c5f0bf074c",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational field just inside the surface of a spherical shell is",
+  "formula": "",
+  "options": [
+   "Zero",
+   "GM/R²",
+   "-GM/R²",
+   "GM/2R²"
+  ],
+  "answer": 0,
+  "explain": "Gravitational field everywhere inside a uniform spherical shell is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "91003153-4d4c-4748-bad6-e3749cc4723a",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "If mass of Earth doubles (radius constant), escape velocity becomes",
+  "formula": "vₑ = √(2GM/R)",
+  "options": [
+   "2vₑ",
+   "vₑ/√2",
+   "√2 vₑ",
+   "4vₑ"
+  ],
+  "answer": 2,
+  "explain": "vₑ ∝ √M, so doubling M multiplies vₑ by √2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b93a29e7-eec4-48e4-b13d-8b916543ad34",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Binding energy and weightlessness",
+  "prompt": "A satellite's total mechanical energy is negative. This means the satellite is",
+  "formula": "",
+  "options": [
+   "Escaping Earth",
+   "In hyperbolic orbit",
+   "At rest",
+   "Bound to Earth"
+  ],
+  "answer": 3,
+  "explain": "Negative total energy means the satellite is gravitationally bound.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b02c9a39-c733-434f-9cde-8e5abed08984",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational potential at centre of a uniform solid sphere of radius R",
+  "formula": "V = -3GM/2R",
+  "options": [
+   "-GM/R",
+   "-3GM/2R",
+   "Zero",
+   "-2GM/R"
+  ],
+  "answer": 1,
+  "explain": "V at centre of solid sphere = -(3/2)(GM/R), deeper than surface value.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bf2f50c7-dea1-4c35-80ab-a43d05b8888e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "For two satellites at radii r and 4r, ratio of their time periods T₁:T₂ is",
+  "formula": "T ∝ r^(3/2)",
+  "options": [
+   "1:16",
+   "1:2",
+   "1:4",
+   "1:8"
+  ],
+  "answer": 3,
+  "explain": "T ∝ r^(3/2): T₁/T₂ = (r/4r)^(3/2) = (1/4)^(3/2) = 1/8.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a3ba308a-baa6-4a87-b4d8-7a5d7449e84b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "For a satellite of mass m in orbit of radius r, KE is equal to",
+  "formula": "KE = GMm/2r",
+  "options": [
+   "GMm/2r",
+   "GMm/4r",
+   "GMm/r",
+   "-GMm/r"
+  ],
+  "answer": 0,
+  "explain": "KE = ½mv² = GMm/2r for circular orbit.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ff1ea5fb-c50b-4592-bb71-8a2552fff8d2",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "The gravitational force between masses is independent of",
+  "formula": "",
+  "options": [
+   "Value of G",
+   "Product of masses",
+   "Medium between masses",
+   "Square of distance"
+  ],
+  "answer": 2,
+  "explain": "Newton's gravity law has no medium dependence; F = Gm₁m₂/r².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "26b242e6-b17a-4b86-a755-a3c2e57d83c7",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "Variation of g with height h (exact formula) is",
+  "formula": "g' = g(1+h/R)⁻²",
+  "options": [
+   "g·R/(R+h)",
+   "g(1−h/R)²",
+   "g(1−2h/R)",
+   "g(1+h/R)⁻²"
+  ],
+  "answer": 3,
+  "explain": "Exact: g' = GM/(R+h)² = g·R²/(R+h)² = g(1+h/R)⁻².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "438a86cf-39f6-4b19-954b-311f164413a8",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "At height h = R above Earth's surface, value of g becomes",
+  "formula": "g' = g/4",
+  "options": [
+   "g/4",
+   "g/2",
+   "g/9",
+   "g/3"
+  ],
+  "answer": 0,
+  "explain": "g' = g·R²/(R+R)² = g/4 when h = R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1577371b-9970-4300-b914-63e452d863c8",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "Kepler's law that gives information about speed variation of planets is",
+  "formula": "",
+  "options": [
+   "Second law (equal areas)",
+   "Third law (T²∝a³)",
+   "First law (ellipse)",
+   "Newton's law"
+  ],
+  "answer": 0,
+  "explain": "Second law: equal areas in equal time → planet moves faster near Sun.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ffbf3253-448f-4e76-b64a-627e1b14a56b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "Escape velocity from surface of a planet of density ρ and radius R is",
+  "formula": "vₑ = R√(8πGρ/3)",
+  "options": [
+   "R√(8πGρ/3)",
+   "R√(4πGρ/3)",
+   "√(2GρR)",
+   "√(GρR)"
+  ],
+  "answer": 0,
+  "explain": "M = (4/3)πR³ρ, so vₑ = √(2GM/R) = R√(8πGρ/3).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "139ae7a3-eb96-4b78-9693-cd381d3761fe",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "Which of these is NOT a property of gravitational force?",
+  "formula": "",
+  "options": [
+   "Acts along line joining masses",
+   "It can be repulsive",
+   "Central force",
+   "Conservative force"
+  ],
+  "answer": 1,
+  "explain": "Gravitational force is always attractive; it cannot be repulsive.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bfb1109b-66b9-4944-b28a-dcaa12000c23",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "Orbital speed of satellite is independent of",
+  "formula": "v = √(GM/r)",
+  "options": [
+   "Mass of satellite",
+   "G",
+   "Mass of Earth",
+   "Orbital radius"
+  ],
+  "answer": 0,
+  "explain": "v = √(GM/r) has no dependence on the satellite's own mass.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a7f56719-d500-4fcb-a743-2d0ad1595c7e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Binding energy and weightlessness",
+  "prompt": "The weight of a person in a freely falling lift (satellite) is",
+  "formula": "",
+  "options": [
+   "mg/2",
+   "2mg",
+   "Zero (weightless)",
+   "mg"
+  ],
+  "answer": 2,
+  "explain": "In free fall, apparent weight = m(g−g) = 0; person is weightless.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ec48d220-d0d7-4ed6-9cd3-d78218aafa0f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational field inside a uniform solid sphere at r < R is",
+  "formula": "E = GMr/R³",
+  "options": [
+   "Zero",
+   "Proportional to 1/r²",
+   "Proportional to r²",
+   "Proportional to r"
+  ],
+  "answer": 3,
+  "explain": "Inside solid sphere, only mass within r contributes; E ∝ r (linear).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "20ed1519-25bf-4e91-a72e-83caea74ccaf",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Work done to move mass m from Earth's surface to infinity is",
+  "formula": "W = GMm/R",
+  "options": [
+   "GMm/2R",
+   "-GMm/R",
+   "2GMm/R",
+   "GMm/R"
+  ],
+  "answer": 3,
+  "explain": "W = 0 - (-GMm/R) = GMm/R = binding energy at surface.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "85a67474-24b8-4bd9-96dc-bb1b27aacf51",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "If satellite orbits at r = 2R from Earth's centre, its orbital speed vs v₀ (at R) is",
+  "formula": "v ∝ 1/√r",
+  "options": [
+   "v₀√2",
+   "v₀/2",
+   "2v₀",
+   "v₀/√2"
+  ],
+  "answer": 3,
+  "explain": "v ∝ 1/√r; doubling r reduces v by factor √2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ac38bffb-8dac-4f30-8aec-195e65ea24dc",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "For a planet in elliptical orbit, speed is minimum at",
+  "formula": "",
+  "options": [
+   "Aphelion",
+   "Perihelion",
+   "Focus",
+   "Semi-latus rectum"
+  ],
+  "answer": 0,
+  "explain": "By Kepler's 2nd law, speed is minimum at farthest point (aphelion).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "10476115-f2fb-4d7d-9ff1-10fe57ab0812",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "Ratio of KE to PE for a satellite in circular orbit of radius r is",
+  "formula": "KE/PE = -1/2",
+  "options": [
+   "1/2",
+   "-1",
+   "-1/2",
+   "2"
+  ],
+  "answer": 2,
+  "explain": "KE = GMm/2r; PE = -GMm/r; so KE/PE = -1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "306436d8-fe86-479e-a892-1e1ca8023ed8",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "If Earth's density is ρ, escape velocity from its surface is",
+  "formula": "vₑ = R√(8πGρ/3)",
+  "options": [
+   "√(2GρR)",
+   "R√(4πGρ/3)",
+   "R√(8πGρ/3)",
+   "R√(Gρ)"
+  ],
+  "answer": 2,
+  "explain": "M = (4/3)πR³ρ; substituting in vₑ = √(2GM/R) gives R√(8πGρ/3).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "98ba3460-7a57-4e38-8bd9-b92353044ed6",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Acceleration due to gravity g",
+  "prompt": "Two spheres of same radius R but masses M and 2M: ratio of surface gravity g₁:g₂ is",
+  "formula": "g ∝ M",
+  "options": [
+   "1:√2",
+   "1:2",
+   "1:4",
+   "2:1"
+  ],
+  "answer": 1,
+  "explain": "g = GM/R²; same R so g ∝ M; thus g₁:g₂ = M:2M = 1:2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cb294d35-64e3-438a-8c5a-e27925422a00",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "For a satellite in circular orbit, which energy is always positive?",
+  "formula": "",
+  "options": [
+   "Binding energy change",
+   "Potential energy",
+   "Kinetic energy",
+   "Total mechanical energy"
+  ],
+  "answer": 2,
+  "explain": "KE = GMm/2r > 0; PE < 0; Total E < 0 for bound satellite.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21a81588-408d-445a-b1d1-b68c0f7fc005",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with latitude/rotation",
+  "prompt": "If g at poles = gₚ and at equator = gₑ, then",
+  "formula": "gₚ > gₑ",
+  "options": [
+   "gₑ > gₚ",
+   "Depends on altitude",
+   "gₚ = gₑ",
+   "gₚ > gₑ"
+  ],
+  "answer": 3,
+  "explain": "At poles: no centrifugal effect and closer to centre; so gₚ > gₑ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "52974732-bac9-4807-81c4-b3aa720c696e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "The gravitational force between two masses is medium-dependent?",
+  "formula": "",
+  "options": [
+   "No, it is independent of medium",
+   "Depends on charge",
+   "Depends on temperature",
+   "Yes, depends on medium"
+  ],
+  "answer": 0,
+  "explain": "Gravitational force is independent of the intervening medium.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "837a58f2-4e63-41ed-b705-8ef1024fc572",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "Satellite energy equation: as orbital radius increases, total energy",
+  "formula": "E = -GMm/2r",
+  "options": [
+   "Becomes zero",
+   "Stays constant",
+   "Increases (becomes less negative)",
+   "Decreases (more negative)"
+  ],
+  "answer": 2,
+  "explain": "E = -GMm/2r; as r increases, |E| decreases, so E increases toward zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1e09d2e2-8ac6-4b5b-89df-fe322a508f4a",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Binding energy and weightlessness",
+  "prompt": "The weight of astronaut in a satellite orbiting Earth is",
+  "formula": "",
+  "options": [
+   "Less than mg",
+   "More than mg",
+   "mg",
+   "Zero (apparent weight)"
+  ],
+  "answer": 3,
+  "explain": "In orbit, normal force = 0; astronaut is in free fall — apparent weightlessness.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8c222548-d5b1-4d38-a1b8-0dabfe0bb9c2",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with latitude/rotation",
+  "prompt": "If Earth stops rotating, the value of g at the poles would",
+  "formula": "",
+  "options": [
+   "Remain unchanged",
+   "Become zero",
+   "Increase",
+   "Decrease"
+  ],
+  "answer": 0,
+  "explain": "At poles, centrifugal effect is zero regardless of rotation; g poles unchanged.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9540d060-d5bc-427c-a89e-ac8606be2260",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Geostationary and polar satellites",
+  "prompt": "For a geostationary satellite, the orbital plane must be",
+  "formula": "",
+  "options": [
+   "Polar plane",
+   "Plane at 45° to equator",
+   "Any plane through centre",
+   "Equatorial plane"
+  ],
+  "answer": 3,
+  "explain": "Geostationary satellite must orbit in Earth's equatorial plane to stay fixed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0ee653bb-db38-4780-a482-9821af40c94a",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "For a satellite, if speed is increased beyond orbital speed but below escape speed, orbit becomes",
+  "formula": "",
+  "options": [
+   "Parabolic",
+   "Hyperbolic",
+   "Circular (same)",
+   "Elliptical (larger)"
+  ],
+  "answer": 3,
+  "explain": "Orbit changes to larger ellipse; escape requires speed ≥ vₑ for parabola/hyperbola.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bfcdf0a0-fc43-471c-9377-84765d829ac8",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "Which physical quantity has same value for all planets in solar system per Kepler's 3rd law?",
+  "formula": "T²/a³ = const",
+  "options": [
+   "T/a",
+   "T²/a³",
+   "T²/a²",
+   "T³/a²"
+  ],
+  "answer": 1,
+  "explain": "Kepler's 3rd law: T²/a³ is the same constant for all planets orbiting the Sun.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7c4169d7-4225-4472-b7c2-328290995572",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "Minimum energy needed to launch a satellite into orbit (height h≈0) from Earth's surface is",
+  "formula": "E = GMm/2R",
+  "options": [
+   "GMm/2R",
+   "2GMm/R",
+   "GMm/4R",
+   "GMm/R"
+  ],
+  "answer": 0,
+  "explain": "Total orbital energy = -GMm/2R; work done = 0-(-GMm/2R) = GMm/2R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a91009aa-e239-453b-ac93-bc5d869f4487",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational field outside a uniform spherical shell of mass M at distance r is",
+  "formula": "E = GM/r²",
+  "options": [
+   "GMr/R³",
+   "Zero",
+   "GM/r² directed inward",
+   "GM/r² directed outward"
+  ],
+  "answer": 2,
+  "explain": "Outside a shell, it behaves like a point mass; field is GM/r² directed toward centre",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9d3536ab-addb-4485-bb6e-14958b9fa4ca",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "For two satellites of same orbital radius but different masses, which is same?",
+  "formula": "",
+  "options": [
+   "Binding energy",
+   "Total energy",
+   "Kinetic energy",
+   "Time period"
+  ],
+  "answer": 3,
+  "explain": "Time period T=2π√(r³/GM) is independent of satellite mass; same for both",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dacb0b44-b37f-4fb9-9323-d89b592a8936",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "For a satellite in orbit, if its speed is suddenly doubled, it will",
+  "formula": "vₑ = √2·vₒ",
+  "options": [
+   "Remain in same orbit",
+   "Escape to infinity",
+   "Move to smaller orbit",
+   "Move to larger orbit"
+  ],
+  "answer": 1,
+  "explain": "Doubling orbital speed gives v=2vₒ > √2·vₒ = vₑ; satellite escapes",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7623c5e1-7415-4149-8aeb-54fe8dc54223",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational field at centre of a uniform solid sphere is",
+  "formula": "E = GMr/R³",
+  "options": [
+   "3GM/2R²",
+   "GM/2R²",
+   "Zero",
+   "GM/R²"
+  ],
+  "answer": 2,
+  "explain": "At r=0, E=GMr/R³=0; field is zero at the centre by symmetry",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8c87910e-e113-4c0f-a71d-2e8376e76071",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "A satellite moving in elliptical orbit: which quantity varies throughout?",
+  "formula": "",
+  "options": [
+   "Total mechanical energy",
+   "Areal velocity",
+   "Speed",
+   "Angular momentum"
+  ],
+  "answer": 2,
+  "explain": "Speed varies; angular momentum, total energy and areal velocity remain constant",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "633469d0-1bb6-40ed-ac2c-3e1dd47fce9f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Acceleration due to gravity g",
+  "prompt": "Two planets have same surface gravity g but different radii R₁ and R₂. Their mass ratio M₁:M₂ is",
+  "formula": "g = GM/R²",
+  "options": [
+   "R₁:R₂",
+   "R₂:R₁",
+   "R₁²:R₂²",
+   "R₁³:R₂³"
+  ],
+  "answer": 2,
+  "explain": "M = gR²/G; so M₁/M₂ = R₁²/R₂²",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d05a3801-0920-4a9e-8028-146785b86d27",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "If a tunnel is dug through Earth's centre, a ball dropped shows what motion?",
+  "formula": "T = 2π√(R/g)",
+  "options": [
+   "Simple harmonic motion",
+   "Uniform motion",
+   "Circular motion",
+   "Projectile motion"
+  ],
+  "answer": 0,
+  "explain": "Restoring force ∝ displacement; ball executes SHM with T=2π√(R/g)≈84 min",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aa4c80e3-7874-4253-9a30-a5fdd15bc628",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "For satellite in circular orbit, work done by gravitational force in one complete revolution is",
+  "formula": "",
+  "options": [
+   "−GMm/r",
+   "GMm/r",
+   "2πGMm/r",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Gravity is centripetal (perpendicular to velocity); net work over complete orbit = 0",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7bfdfd6e-67e1-409b-a155-d40f7e6bfd1e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "Variation of g with depth d below Earth's surface (uniform density) is",
+  "formula": "g_d = g(1 − d/R)",
+  "options": [
+   "g(1 − d²/R²)",
+   "g·d/R",
+   "g(1 − d/R)",
+   "g/(1 + d/R)²"
+  ],
+  "answer": 2,
+  "explain": "Inside uniform sphere, g decreases linearly with depth: g_d = g(1 − d/R).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "56507a21-08b4-43d5-a945-40e47a5b5fa6",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "Escape velocity from Earth is vₑ. Orbital speed at Earth's surface v₀ is related to vₑ by",
+  "formula": "vₑ = √2 · v₀",
+  "options": [
+   "vₑ = √2·v₀",
+   "vₑ = 2v₀",
+   "vₑ = v₀",
+   "vₑ = v₀/√2"
+  ],
+  "answer": 0,
+  "explain": "v₀ = √(gR), vₑ = √(2gR); hence vₑ = √2·v₀.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "448e1cc3-1d08-4c90-b3e0-2f5bd2fd9b13",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "Weight of a body at height h above Earth's surface where h << R is approximately",
+  "formula": "W_h ≈ W(1 − 2h/R)",
+  "options": [
+   "W(1 − 2h/R)",
+   "W(1 − h/R)",
+   "W·R²/(R+h)",
+   "W(1 + 2h/R)"
+  ],
+  "answer": 0,
+  "explain": "For h<<R, g_h ≈ g(1−2h/R) using binomial approximation, so W_h ≈ W(1−2h/R).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6a4b4c92-5e8d-4ac9-b35f-5129784306b3",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "Areal velocity of a planet of mass m and angular momentum L about the Sun is:",
+  "formula": "dA/dt = L/2m",
+  "options": [
+   "2L/m",
+   "L/2m",
+   "L·m/2",
+   "L/m"
+  ],
+  "answer": 1,
+  "explain": "dA = ½r·v⊥dt, so dA/dt = L/(2m), which is constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4617110b-4c84-42c8-9af6-5507d049116e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "In T² = (4π²/GM)a³ for planets around the Sun, the constant 4π²/GM depends on:",
+  "formula": "T²/a³ = 4π²/GM",
+  "options": [
+   "Eccentricity of the orbit",
+   "Mass of the planet",
+   "Mass of the Sun",
+   "Radius of the planet"
+  ],
+  "answer": 2,
+  "explain": "The constant contains only the central mass M, so it is the same for all planets of the Sun.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6c6a7f32-37fb-4668-b377-a41754068000",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "Two planets have orbital radii ratio R₁:R₂ = 1:4. The ratio of their orbital speeds v₁:v₂ is:",
+  "formula": "v = √(GM/r)",
+  "options": [
+   "4:1",
+   "1:2",
+   "2:1",
+   "1:8"
+  ],
+  "answer": 2,
+  "explain": "v ∝ r^(-1/2), so v₁/v₂ = √(4/1) = 2:1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de0c92ac-3ada-45e4-b1d3-bf3bbe129fcb",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "In an elliptical orbit, which quantity is conserved for the planet besides angular momentum (Sun's field only)?",
+  "formula": "",
+  "options": [
+   "Total mechanical energy",
+   "Kinetic energy",
+   "Linear momentum",
+   "Potential energy"
+  ],
+  "answer": 0,
+  "explain": "Gravity is conservative: KE + PU is constant, while KE and PE individually vary.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c8add9c9-6d89-4cd9-b2f2-0417199225b7",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "Newton's third law applied to gravitation: forces between two masses m₁ and m₂ are",
+  "formula": "",
+  "options": [
+   "Larger on the heavier mass",
+   "Equal in magnitude, opposite in direction",
+   "Larger on the lighter mass",
+   "Equal and in the same direction"
+  ],
+  "answer": 1,
+  "explain": "Gravitational forces form an action-reaction pair: equal magnitude, opposite direction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "808855c9-0188-4f66-b696-44077acd642a",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "Newton's law of gravitation holds exactly for point masses; for uniform spheres, r is measured between their",
+  "formula": "",
+  "options": [
+   "Nearest surface points",
+   "Surfaces along the line joining",
+   "Farthest surface points",
+   "Centres"
+  ],
+  "answer": 3,
+  "explain": "A uniform sphere acts as if its mass is concentrated at its centre.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "aa2a0581-f7d5-46cd-aa21-92ac066be44d",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "Gravitational force on a mass m due to a third mass nearby is affected by presence of other masses?",
+  "formula": "",
+  "options": [
+   "Yes, it is screened",
+   "No, forces add vectorially (superposition)",
+   "Yes, it becomes zero",
+   "Yes, it is reduced by half"
+  ],
+  "answer": 1,
+  "explain": "Gravitation obeys superposition: net force is the vector sum of pairwise forces; no shielding.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ed3d2ba6-5fa4-4c94-99d1-8232bdbe9c33",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational field intensity",
+  "prompt": "SI unit of gravitational field intensity is equivalent to which of these?",
+  "formula": "E = F/m",
+  "options": [
+   "J kg⁻¹",
+   "N kg",
+   "N m² kg⁻¹",
+   "N kg⁻¹"
+  ],
+  "answer": 3,
+  "explain": "E is force per unit mass, so its unit is N/kg = m/s². J/kg is the unit of potential.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7618e214-f403-4538-9e5d-1680c7da47b3",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational field intensity",
+  "prompt": "Masses M and 4M are a distance d apart. Where is the point of zero net field between them?",
+  "formula": "",
+  "options": [
+   "d/5 from M",
+   "d/4 from M",
+   "d/3 from M",
+   "d/2 from M"
+  ],
+  "answer": 2,
+  "explain": "GM/x² = 4GM/(d−x)² gives d−x = 2x, so x = d/3 from M.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fe589cb-3adb-455b-b68d-7ed2504a6a8f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational potential at any point inside a thin uniform spherical shell (mass M, radius R) is",
+  "formula": "V_in = −GM/R",
+  "options": [
+   "−GM/2R",
+   "−3GM/2R",
+   "Zero",
+   "−GM/R"
+  ],
+  "answer": 3,
+  "explain": "Field is zero inside, so potential is constant and equals the surface value −GM/R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "011e8fb9-4fa1-48bc-9cc3-2e35aa5af880",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "Gravitational field of a ring of mass M, radius R, at axial distance x from its centre is",
+  "formula": "E = GMx/(R²+x²)^{3/2}",
+  "options": [
+   "GMR/(R²+x²)^{3/2}",
+   "GMx/(R²+x²)^{3/2}",
+   "GMx/(R²+x²)^{1/2}",
+   "GM/(R²+x²)"
+  ],
+  "answer": 1,
+  "explain": "Only the axial components add: E = (GM/(R²+x²))·x/√(R²+x²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ce12b319-c207-488b-8589-1da523e3ab06",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "At height h (h << R) and depth d, g is equal. The relation between d and h is",
+  "formula": "2h/R = d/R",
+  "options": [
+   "d = h",
+   "d = 4h",
+   "d = h/2",
+   "d = 2h"
+  ],
+  "answer": 3,
+  "explain": "Equating decreases: 2h/R = d/R, so d = 2h.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f3e836cd-90a2-4cc8-a752-5349cd433935",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "Time period of a ball oscillating in a frictionless tunnel through the centre of a uniform Earth is",
+  "formula": "T = 2π√(R/g)",
+  "options": [
+   "2π√(R/g)",
+   "π√(R/g)",
+   "2π√(g/R)",
+   "2π√(2R/g)"
+  ],
+  "answer": 0,
+  "explain": "Inside, a = −(g/R)x, so ω² = g/R. T ≈ 84 min, the same as a near-surface satellite.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1f7bdacc-eba8-4c91-88c2-ae9227a2be4e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with latitude/rotation",
+  "prompt": "Because of Earth's rotation, a plumb line points exactly towards Earth's centre only at",
+  "formula": "",
+  "options": [
+   "Latitude 45° only",
+   "Equator and poles only",
+   "Poles only",
+   "Equator only"
+  ],
+  "answer": 1,
+  "explain": "The centrifugal component is along the true gravity direction only at the equator (along g) and at the poles (zero), so the plumb line points to the centre only there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f41b4f6-de37-4f66-a27e-d886a84e4dc3",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "Potential at the midpoint of two point masses M each, separated by distance d:",
+  "formula": "",
+  "options": [
+   "−2GM/d",
+   "Zero",
+   "−GM/d",
+   "−4GM/d"
+  ],
+  "answer": 3,
+  "explain": "Each mass is d/2 away and contributes −2GM/d. Scalars add, so V = −4GM/d.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "35b59f12-8668-44a8-bc18-da69b31b56e7",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "For a point mass, the equipotential surfaces are:",
+  "formula": "",
+  "options": [
+   "Concentric cylinders",
+   "Parallel planes",
+   "Concentric spheres",
+   "Radial lines"
+  ],
+  "answer": 2,
+  "explain": "V = −GM/r is constant on spheres centred at the mass. The field is perpendicular to them.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7b2443d0-cda8-4f86-b6ed-b7f02be3db4f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "Ratio of potential at the centre to that at the surface of a uniform solid sphere:",
+  "formula": "",
+  "options": [
+   "2",
+   "3/2",
+   "1/2",
+   "2/3"
+  ],
+  "answer": 1,
+  "explain": "V_centre/V_surface = (−3GM/2R)/(−GM/R) = 3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c997da9c-4fc0-4a4e-bd11-7a0e935e7f3e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "Gravitational potential at a point equals work done by an external agent per unit mass in moving it from:",
+  "formula": "",
+  "options": [
+   "That point to infinity",
+   "Earth's surface to that point",
+   "Earth's centre to that point",
+   "Infinity to that point, slowly"
+  ],
+  "answer": 3,
+  "explain": "V = W_ext/m for bringing a mass from infinity (V = 0) to the point without acceleration.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "21dc5e13-0963-45e5-b6c4-64d386b8f323",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "Potential inside a uniform solid sphere (mass M, radius R) at distance r < R:",
+  "formula": "V = −GM(3R² − r²)/2R³",
+  "options": [
+   "−GM/r",
+   "−GM(3R² − r²)/2R³",
+   "−GM(R² − r²)/2R³",
+   "−GMr/R³"
+  ],
+  "answer": 1,
+  "explain": "It reduces to −3GM/2R at r = 0 and −GM/R at r = R, so it is parabolic in r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "254f667e-38a5-4e5c-b3bc-85d165899617",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "Gravitational potential at the centre of a uniform ring (mass M, radius R):",
+  "formula": "",
+  "options": [
+   "−GM/2R",
+   "−2GM/R",
+   "−GM/R",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Potential is a scalar and every mass element is at distance R, so V = −GM/R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "706288f0-3b60-4b95-897a-68a7c2c641ad",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "PE of a system of three equal masses m at the corners of an equilateral triangle of side a is",
+  "formula": "",
+  "options": [
+   "−3Gm²/(2a)",
+   "−3Gm²/a",
+   "−Gm²/a",
+   "−6Gm²/a"
+  ],
+  "answer": 1,
+  "explain": "There are three pairs, each contributing −Gm²/a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c6ff0f5-dc90-484c-a4c9-5c1fa6e475cc",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Minimum work to raise mass m from Earth's surface to height h = R (g at surface)",
+  "formula": "",
+  "options": [
+   "mgR/4",
+   "2mgR",
+   "mgR/2",
+   "mgR"
+  ],
+  "answer": 2,
+  "explain": "ΔU = mgh/(1 + h/R) = mgR/2 for h = R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ee9f8c2d-d713-4632-b410-6aca27aeea05",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "A body with total energy (KE + PE) exactly zero in Earth's gravitational field moves along",
+  "formula": "",
+  "options": [
+   "A circle",
+   "A parabola",
+   "A hyperbola",
+   "An ellipse"
+  ],
+  "answer": 1,
+  "explain": "E = 0 means it just escapes; the path is a parabola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "65cb3ef7-4a31-4d49-b140-85f1456a64da",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "From U = −GMm/r, the slope dU/dr is positive. This shows the gravitational force is",
+  "formula": "F = −dU/dr",
+  "options": [
+   "Attractive, magnitude GMm/r²",
+   "Attractive, magnitude GMm/r",
+   "Repulsive, magnitude GMm/r²",
+   "Zero at all r"
+  ],
+  "answer": 0,
+  "explain": "F = −dU/dr = −GMm/r², negative sign means towards M (attractive).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e6e46198-9a57-42bb-8de6-ab9123a61404",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Total energy of a satellite in an elliptical orbit of semi-major axis a around mass M is",
+  "formula": "E = −GMm/(2a)",
+  "options": [
+   "−GMm/a",
+   "−GMm/(a + b)",
+   "−GMm/(2a)",
+   "−GMm/(2b), b = semi-minor axis"
+  ],
+  "answer": 2,
+  "explain": "Circular-orbit result E = −GMm/(2r) holds for an ellipse with r replaced by the semi-major axis a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "95368bfc-25d6-4b0f-9f19-e8d969fe9d41",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Inside a uniform solid sphere (radius R), U(r) of mass m varies with r as",
+  "formula": "U = −GMm(3R² − r²)/(2R³)",
+  "options": [
+   "Linear in r, falling outward",
+   "Proportional to −1/r",
+   "Parabolic in r, rising from centre to surface",
+   "Constant everywhere"
+  ],
+  "answer": 2,
+  "explain": "U contains an r² term: it goes from −3GMm/2R at centre to −GMm/R at surface, increasing.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f496fe03-a9a2-4027-83d8-dc62d4be855f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Extra energy needed to lift a satellite from circular orbit r to circular orbit 2r around Earth (mass M).",
+  "formula": "ΔE = GMm/(2r₁) − GMm/(2r₂)",
+  "options": [
+   "GMm/(8r)",
+   "GMm/(2r)",
+   "GMm/(4r)",
+   "GMm/r"
+  ],
+  "answer": 2,
+  "explain": "E = −GMm/2r. ΔE = −GMm/(4r) + GMm/(2r) = GMm/(4r).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a8863ab-5260-445c-960f-b4bfdd12f687",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "Total mechanical energy of a body projected with exactly the escape speed from Earth's surface is",
+  "formula": "",
+  "options": [
+   "Negative, equal to −GMm/2R",
+   "Negative, equal to −GMm/R",
+   "Positive, equal to GMm/R",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "At escape: ½mvₑ² − GMm/R = 0, so it just reaches infinity with zero KE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c17c88d0-94c8-46b0-a0b3-fa8d4b161db0",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "Escape speed from Earth's surface depends on the direction of projection (ignoring air and rotation)?",
+  "formula": "",
+  "options": [
+   "Yes, it is least when fired vertically",
+   "Yes, it is greatest at 45°",
+   "No, it is independent of direction",
+   "Yes, it is least when fired horizontally"
+  ],
+  "answer": 2,
+  "explain": "Escape speed comes from energy conservation, a scalar relation, so direction does not matter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd36ab6a-dd94-4003-b41f-5fb1d0f2b298",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "Escape velocity from the Moon's surface is approximately",
+  "formula": "",
+  "options": [
+   "11.2 km/s",
+   "0.9 km/s",
+   "4.7 km/s",
+   "2.4 km/s"
+  ],
+  "answer": 3,
+  "explain": "Moon's small g and R give vₑ ≈ 2.4 km/s, which is why it holds no atmosphere.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9b0d1650-0a96-41b5-83e3-1bb0e94e2cad",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "Minimum kinetic energy needed at Earth's surface for a mass m to escape (g at surface, radius R)",
+  "formula": "K = ½mvₑ² = mgR",
+  "options": [
+   "mgR",
+   "2mgR",
+   "mgR²",
+   "½mgR"
+  ],
+  "answer": 0,
+  "explain": "½m(2gR) = mgR, equal to GMm/R, the magnitude of the potential energy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6c4ea822-6e83-4736-8cbf-b6ab4e0ea7a4",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Escape velocity",
+  "prompt": "Escape speed from a point at height h above Earth's surface (radius R, surface gravity g) is:",
+  "formula": "vₑ = √(2GM/(R+h))",
+  "options": [
+   "√(2gR) · (R+h)/R",
+   "√(2gR²/(R+h))",
+   "√(2g(R+h))",
+   "√(2gR/(R+h))"
+  ],
+  "answer": 1,
+  "explain": "vₑ = √(2GM/r) with r = R+h and GM = gR², so vₑ = √(2gR²/(R+h)); it decreases with height.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "79ab2fc8-b344-4149-92a5-2b7a91d042e1",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "Speed of a geostationary satellite in its orbit is approximately",
+  "formula": "",
+  "options": [
+   "1.0 km/s",
+   "11.2 km/s",
+   "3.1 km/s",
+   "7.9 km/s"
+  ],
+  "answer": 2,
+  "explain": "Its orbit radius is ≈ 4.2×10⁷ m with T = 24 h, so v = 2πr/T ≈ 3.1 km/s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c8b26917-e1bf-4fce-a66b-b9c7e7ae139c",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "Apparent weightlessness inside an orbiting satellite occurs because",
+  "formula": "",
+  "options": [
+   "Earth's pull is cancelled by air",
+   "Gravity is balanced by the Moon",
+   "Gravity supplies the centripetal force",
+   "Gravity is zero there"
+  ],
+  "answer": 2,
+  "explain": "Everything is in free fall, so there is no normal reaction. Gravity is not zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "585bc3a2-4d5e-49d5-922b-f80a740f9581",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "Orbital speed at radius r equals √(g_r · r), where g_r is",
+  "formula": "v = √(g_r r)",
+  "options": [
+   "Zero in orbit",
+   "g at Earth's surface",
+   "Average g between R and r",
+   "g at distance r from Earth's centre"
+  ],
+  "answer": 3,
+  "explain": "Gravity at r supplies the centripetal acceleration: g_r = v²/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de5d3ad4-abcb-4d25-bdd4-b0abcb076bc8",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "A satellite in circular orbit has its speed suddenly made √2 times v₀. Its new path is",
+  "formula": "",
+  "options": [
+   "Spiral inward",
+   "Parabola (escapes)",
+   "Ellipse",
+   "Larger circle"
+  ],
+  "answer": 1,
+  "explain": "√2·v₀ equals the escape speed at that r, so total energy is zero and the orbit is a parabola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dd22ab35-bfea-4964-bf36-2d2f092584fb",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "At the same orbital radius, a satellite around a planet of 4× Earth's mass has orbital speed",
+  "formula": "v = √(GM/r)",
+  "options": [
+   "Twice",
+   "Half",
+   "Same",
+   "Four times"
+  ],
+  "answer": 0,
+  "explain": "v ∝ √M, so 4× the mass gives 2× the speed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "08717715-9efc-47da-ac52-a8696641f43a",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "Orbital height of a geostationary satellite above Earth's surface is about",
+  "formula": "",
+  "options": [
+   "3.6 × 10³ km",
+   "3.8 × 10⁵ km",
+   "3.6 × 10⁴ km",
+   "6.4 × 10³ km"
+  ],
+  "answer": 2,
+  "explain": "Geostationary orbit radius ≈ 4.2 × 10⁴ km, so height ≈ 36,000 km above the surface.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "24923576-7e11-462a-9336-e6b218d0f565",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "A geostationary satellite orbits in which plane and direction?",
+  "formula": "",
+  "options": [
+   "Any plane, west to east",
+   "Equatorial plane, west to east",
+   "Equatorial plane, east to west",
+   "Polar plane, south to north"
+  ],
+  "answer": 1,
+  "explain": "It must move in the equatorial plane in Earth's own sense of rotation (west to east) to stay fixed overhead.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6d781009-d611-4308-a6d9-e3188f4f77c0",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "Two planets have equal density but different radii. Their near-surface satellites have periods in the ratio",
+  "formula": "",
+  "options": [
+   "R₁² : R₂²",
+   "R₂ : R₁",
+   "R₁ : R₂",
+   "1 : 1"
+  ],
+  "answer": 3,
+  "explain": "T = √(3π/Gρ) depends only on density, not on radius.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "eeb02134-e654-49e2-a6cc-1d6290a173f4",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "At the same orbital radius, the central planet's mass is made 4 times. The satellite's period becomes",
+  "formula": "T ∝ 1/√M",
+  "options": [
+   "Double",
+   "One-fourth",
+   "Half",
+   "Four times"
+  ],
+  "answer": 2,
+  "explain": "T = 2π√(r³/GM) ∝ M^(−1/2), so 4 times the mass halves T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0151db74-fe9a-41ee-a08d-678cd0fff30f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "A polar satellite at 500–800 km altitude has a period of about",
+  "formula": "",
+  "options": [
+   "24 hours",
+   "12 hours",
+   "10 minutes",
+   "100 minutes"
+  ],
+  "answer": 3,
+  "explain": "Low polar orbits have T ≈ 100 min, slightly above the 84 min near-surface value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4167cfd9-235a-4ca0-9c8f-4c85feec9611",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "A satellite slowly spirals inward due to air drag. Its KE and total energy change as",
+  "formula": "",
+  "options": [
+   "KE decreases, total energy decreases",
+   "KE increases, total energy decreases",
+   "KE decreases, total energy increases",
+   "KE increases, total energy increases"
+  ],
+  "answer": 1,
+  "explain": "Smaller r gives larger v, so KE rises. Total E = −GMm/2r becomes more negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1c4ecde8-0cba-4843-87ef-6a41d4115020",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Geostationary and polar satellites",
+  "prompt": "Minimum number of geostationary satellites needed to cover the whole Earth, except polar regions, for communication:",
+  "formula": "",
+  "options": [
+   "Three",
+   "Six",
+   "Four",
+   "Two"
+  ],
+  "answer": 0,
+  "explain": "Three satellites placed 120° apart on the equatorial orbit cover nearly the entire Earth apart from the polar regions.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7069fa9f-a900-4ed6-b696-76ab25b7bdc7",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Areal velocity and angular momentum in orbit",
+  "prompt": "In a circular orbit, if radius becomes 4 times, angular momentum becomes",
+  "formula": "L ∝ √r",
+  "options": [
+   "Half",
+   "2 times",
+   "4 times",
+   "8 times"
+  ],
+  "answer": 1,
+  "explain": "L = m√(GMr) ∝ √r, so 4r gives 2L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bf003ccd-7f31-423b-b71e-bed2a4492f98",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Areal velocity and angular momentum in orbit",
+  "prompt": "At the extreme points (perihelion/aphelion) of an orbit, the angle between r and v is",
+  "formula": "L = m r v sinθ",
+  "options": [
+   "45°",
+   "90°",
+   "180°",
+   "0°"
+  ],
+  "answer": 1,
+  "explain": "At the apsides, velocity is perpendicular to the position vector, so L = mvr.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3cd460ac-6bca-4763-8541-bf298ca07032",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational field intensity",
+  "prompt": "A small test mass m released at a point where the field is E has initial acceleration:",
+  "formula": "a = F/m = E",
+  "options": [
+   "E, independent of m",
+   "mE",
+   "E/m²",
+   "E/m"
+  ],
+  "answer": 0,
+  "explain": "E is force per unit test mass, so it equals the acceleration of any test body there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "473e898e-14df-461c-952c-1aa4ab373c34",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational field intensity",
+  "prompt": "For a thin uniform spherical shell (mass M, radius R), E–r graph at r = R shows:",
+  "formula": "E = 0 (r<R), GM/r² (r≥R)",
+  "options": [
+   "Continuous, rising linearly to GM/R²",
+   "Continuous maximum of GM/(2R²)",
+   "Jump from GM/R² to 0",
+   "Jump from 0 to GM/R²"
+  ],
+  "answer": 3,
+  "explain": "Inside E = 0; just outside E = GM/R². The field is discontinuous at the shell surface.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2f5fd323-a957-4895-95b2-117c912377b7",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Acceleration due to gravity g",
+  "prompt": "Earth's rotation stops suddenly. Weight of a body at the equator changes by what fraction of mg?",
+  "formula": "g' = g − Rω²cos²λ",
+  "options": [
+   "Increases by Rω²/g",
+   "Unchanged",
+   "Increases by 2Rω²/g",
+   "Decreases by Rω²/g"
+  ],
+  "answer": 0,
+  "explain": "At the equator g_eq = g − Rω²; with ω = 0 it becomes g, so weight increases by Rω²/g (fractionally).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3ecc9df1-cdbf-49e4-87e2-26f9fbfd7a57",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "A frictionless straight chord tunnel is dug in a uniform Earth. Its oscillation period compared with the diametral tunnel is",
+  "formula": "T = 2π√(R/g)",
+  "options": [
+   "Zero for a chord",
+   "Shorter for a shorter chord",
+   "Same for every chord",
+   "Longer for a shorter chord"
+  ],
+  "answer": 2,
+  "explain": "The component of gx/R along the chord is still ∝ displacement with the same ω = √(g/R), so T is independent of the chord.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "44d2d64d-315a-4b1e-9892-34874b290722",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "Two satellites share the same semi-major axis but have different eccentricities. Their periods are",
+  "formula": "T = 2π√(a³/GM)",
+  "options": [
+   "Smaller for the more eccentric",
+   "Equal",
+   "Equal only if masses are equal",
+   "Larger for the more eccentric"
+  ],
+  "answer": 1,
+  "explain": "T depends only on the semi-major axis a (and central mass), not on eccentricity or satellite mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4f42c30a-1f41-4e2e-be72-2c8498f13afc",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "Atmospheric drag slowly acts on a low circular-orbit satellite. Its orbital period",
+  "formula": "",
+  "options": [
+   "Increases as its speed drops",
+   "Stays constant",
+   "Decreases as it spirals inward",
+   "Increases as it spirals inward"
+  ],
+  "answer": 2,
+  "explain": "Drag lowers the orbit radius, so T ∝ r^{3/2} decreases and the speed increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f5be743a-c0b2-4cfb-992b-7e8c33e16480",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "Kepler's third law T² ∝ r³ for circular orbits follows from which force law?",
+  "formula": "",
+  "options": [
+   "Inverse-square law",
+   "Force ∝ r (linear)",
+   "Inverse-cube law",
+   "Force independent of r"
+  ],
+  "answer": 0,
+  "explain": "F = GMm/r² = mω²r gives T² = 4π²r³/GM; only an inverse-square force gives r³.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "08ea376d-d469-4430-9388-65af571503e5",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Time period of satellite and Kepler's 3rd law",
+  "prompt": "The exact orbital period of a geostationary satellite equals Earth's sidereal day, which is about",
+  "formula": "",
+  "options": [
+   "24 h 00 min",
+   "24 h 04 min",
+   "23 h 56 min",
+   "12 h"
+  ],
+  "answer": 2,
+  "explain": "It must match Earth's rotation relative to the stars, the sidereal day of 23 h 56 min 4 s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "70cc1e15-7b61-4213-962b-a357123df052",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "A body moving in a gravitational field with positive total energy follows which path?",
+  "formula": "",
+  "options": [
+   "Parabola",
+   "Hyperbola",
+   "Ellipse",
+   "Circle"
+  ],
+  "answer": 1,
+  "explain": "E < 0 gives an ellipse or circle, E = 0 a parabola, and E > 0 a hyperbola.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "90076c63-ab3d-41fa-b4a2-77221b6545a8",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Binding energy and weightlessness",
+  "prompt": "Escape energy of a body at Earth's surface is how many times the binding energy of a satellite orbiting near the surface?",
+  "formula": "E_esc = mgR, BE_orbit = mgR/2",
+  "options": [
+   "Two times",
+   "Equal",
+   "Four times",
+   "Half"
+  ],
+  "answer": 0,
+  "explain": "Escape energy at the surface is mgR; the near-surface orbit has binding energy mgR/2, so the ratio is 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6d0f0c8c-c4b2-4bce-880e-a4ce9c3c7333",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational field intensity",
+  "prompt": "Concentric thin shells M₁ (radius R₁) and M₂ (R₂>R₁). Field at r with R₁<r<R₂ is:",
+  "formula": "",
+  "options": [
+   "GM₂/r²",
+   "GM₁/r²",
+   "G(M₁+M₂)/r²",
+   "Zero"
+  ],
+  "answer": 1,
+  "explain": "The outer shell gives zero field inside it, so only the inner shell (M₁) acts, as a point mass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8ce487b4-0911-42ed-b4e2-aaa6ea26c215",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational field intensity",
+  "prompt": "Gravitational field lines due to static masses:",
+  "formula": "",
+  "options": [
+   "Form closed loops around the mass",
+   "Are tangent to equipotential surfaces",
+   "Never intersect; point toward the mass",
+   "Point away from the mass"
+  ],
+  "answer": 2,
+  "explain": "The field is attractive and unique at each point, so lines point inward, never cross and never close. They are normal to equipotentials.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9ca1837f-2c02-4610-bec6-ef7f0c3379f7",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "In a diametral tunnel of a uniform Earth, time for a ball dropped at the surface to reach the centre is",
+  "formula": "t = T/4",
+  "options": [
+   "(π/2)√(R/g)",
+   "2π√(R/g)",
+   "π√(R/g)",
+   "(π/4)√(R/g)"
+  ],
+  "answer": 0,
+  "explain": "Surface to centre is a quarter of the period T = 2π√(R/g), so t = (π/2)√(R/g).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2cbfb95a-6d07-4f94-a07d-154614e8e8cc",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "Ball dropped in a frictionless diametral tunnel of uniform Earth: speed on passing the centre is",
+  "formula": "v_max = ωR, ω = √(g/R)",
+  "options": [
+   "Zero",
+   "√(gR)",
+   "√(gR/2)",
+   "√(2gR)"
+  ],
+  "answer": 1,
+  "explain": "SHM with ω = √(g/R) and amplitude R gives v_max = ωR = √(gR); this is less than escape speed √(2gR).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "19765998-080a-4a60-a273-89d673057a30",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with latitude/rotation",
+  "prompt": "Earth's rotation: centrifugal force on mass m at latitude λ (radius R, angular speed ω) has magnitude",
+  "formula": "F = mω²(R cosλ)",
+  "options": [
+   "mω²R cos²λ",
+   "mω²R cosλ",
+   "mω²R sinλ",
+   "mω²R"
+  ],
+  "answer": 1,
+  "explain": "The body moves in a circle of radius R cosλ; only its radial component is mω²R cos²λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b247b90-508e-45e8-b2eb-cc1ae7c0b6b5",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with latitude/rotation",
+  "prompt": "Apart from rotation, g is larger at the poles than at the equator because Earth's polar radius is",
+  "formula": "g ∝ 1/R²",
+  "options": [
+   "Smaller, as Earth is oblate",
+   "Smaller, as Earth is prolate",
+   "Larger, as Earth is oblate",
+   "Equal to the equatorial radius"
+  ],
+  "answer": 0,
+  "explain": "Earth bulges at the equator (oblate), so the pole is closer to the centre and g ∝ 1/R² is larger there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3b2a11c-7291-4e68-a5ab-060676fcbba9",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "For an elliptical orbit of semi-major axis a, perihelion distance + aphelion distance equals:",
+  "formula": "rₚ + rₐ = 2a",
+  "options": [
+   "a",
+   "a(1 − e²)",
+   "a/2",
+   "2a"
+  ],
+  "answer": 3,
+  "explain": "The perihelion and aphelion points lie at the two ends of the major axis, whose length is 2a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3d05c962-1a79-4f8f-bf9a-9d565e65f76e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Kepler's laws of planetary motion",
+  "prompt": "Kepler's second law (equal areas) remains valid for any force that is:",
+  "formula": "",
+  "options": [
+   "Conservative but non-central",
+   "Central",
+   "Attractive and constant in magnitude",
+   "Inverse-square only"
+  ],
+  "answer": 1,
+  "explain": "A central force gives zero torque, so L is conserved and areal velocity is constant, whatever the force's r-dependence.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a7690b2-b1d2-46d2-9f6c-81ffe686896e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "Cavendish's experiment to determine G used which apparatus?",
+  "formula": "",
+  "options": [
+   "Bifilar suspension",
+   "Kater's pendulum",
+   "Torsion balance",
+   "Atwood machine"
+  ],
+  "answer": 2,
+  "explain": "Cavendish measured the tiny attraction between lead spheres using a torsion balance, which gave G.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c79fcc1b-23bd-4200-ace7-571f0d731a3b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Newton's universal law of gravitation",
+  "prompt": "Equality of gravitational and inertial mass implies free-fall acceleration at a place is independent of the body's:",
+  "formula": "a = GM/r², no m",
+  "options": [
+   "Mass of Earth",
+   "Position",
+   "Mass",
+   "Distance from Earth's centre"
+  ],
+  "answer": 2,
+  "explain": "m_grav = m_inertial, so m cancels in ma = GMm/r², leaving a = GM/r² for any body.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5b028628-54cf-4a60-a413-7a0a23f40e04",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Field due to ring, shell and solid sphere",
+  "prompt": "A small mass displaced slightly along the axis from the centre of a ring (M, R), released, shows a time period:",
+  "formula": "For x ≪ R: a ≈ −GMx/R³",
+  "options": [
+   "2π√(GM/R³)",
+   "2π√(R³/GM)",
+   "2π√(R²/GM)",
+   "2π√(R³/2GM)"
+  ],
+  "answer": 1,
+  "explain": "For x ≪ R the force is −(GMm/R³)x, so it is SHM with ω² = GM/R³ and T = 2π√(R³/GM).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0b113131-9b4f-4cce-ac3e-94298722c120",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Acceleration due to gravity g",
+  "prompt": "Loss in apparent g due to rotation at latitude 60° is what fraction of the loss at the equator?",
+  "formula": "Δg = Rω²cos²λ",
+  "options": [
+   "1/4",
+   "1/2",
+   "3/4",
+   "√3/2"
+  ],
+  "answer": 0,
+  "explain": "cos²60° = 1/4, so the reduction is one quarter of Rω².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4e5f15fe-f0c7-4fa7-aec6-2a387428e69b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Acceleration due to gravity g",
+  "prompt": "Earth's radius is halved with its density unchanged. The surface g becomes:",
+  "formula": "g = (4/3)πGρR",
+  "options": [
+   "2g",
+   "g",
+   "g/4",
+   "g/2"
+  ],
+  "answer": 3,
+  "explain": "At constant ρ, g ∝ R, so halving R halves g.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "accf1bac-1a4b-4d90-947d-8bf77533efea",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Acceleration due to gravity g",
+  "prompt": "A planet has the same mean density as Earth but twice the radius. Its surface g is:",
+  "formula": "g = (4/3)πGρR ⇒ g ∝ R at fixed ρ",
+  "options": [
+   "8g",
+   "2g",
+   "4g",
+   "g/2"
+  ],
+  "answer": 1,
+  "explain": "At constant density g ∝ R, so doubling the radius doubles g.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d070d06e-dc77-44f0-bc1f-97b41bcf1626",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "Uniform Earth: |dg/dr| just outside the surface compared with just inside is",
+  "formula": "outside: 2g/R, inside: g/R",
+  "options": [
+   "Half as large",
+   "Twice as large",
+   "Equal",
+   "Four times as large"
+  ],
+  "answer": 1,
+  "explain": "Outside g ∝ 1/r² gives slope 2g/R. Inside g ∝ r gives slope g/R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d6cf6bf9-cbf1-498d-b979-160f601616b7",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Variation of g with altitude and depth",
+  "prompt": "A simple pendulum is moved to height h = R above Earth's surface. Its time period becomes (T = surface value):",
+  "formula": "T = 2π√(l/g)",
+  "options": [
+   "T/2",
+   "T",
+   "2T",
+   "4T"
+  ],
+  "answer": 2,
+  "explain": "At h = R, g' = g/4. Since T ∝ 1/√g, the period doubles to 2T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "937337fa-548f-4a8f-965d-97315ae5144b",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "Potential of a uniform ring (mass M, radius R) at axial distance x from its centre is:",
+  "formula": "V = −GM/√(R² + x²)",
+  "options": [
+   "−GM/x",
+   "−GMx/(R² + x²)^{3/2}",
+   "−GM/(R + x)",
+   "−GM/√(R² + x²)"
+  ],
+  "answer": 3,
+  "explain": "Every ring element is at distance √(R²+x²); potential is a scalar, so the contributions add directly.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e74ad783-3d10-470e-b39f-2d279691bb83",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential",
+  "prompt": "Gravitational potential at height h = R above Earth's surface (g = surface gravity, R = Earth's radius) is:",
+  "formula": "V = −GM/(R+h), GM = gR²",
+  "options": [
+   "−gR",
+   "−gR/2",
+   "−2gR",
+   "−gR/4"
+  ],
+  "answer": 1,
+  "explain": "At r = 2R, V = −GM/2R = −gR²/2R = −gR/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9f5fbd61-526b-4b48-a7c2-55748d55bfec",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Gravitational self-energy of a uniform solid sphere of mass M and radius R is",
+  "formula": "U = −3GM²/(5R)",
+  "options": [
+   "−GM²/(2R)",
+   "−3GM²/(2R)",
+   "−3GM²/(5R)",
+   "−GM²/R"
+  ],
+  "answer": 2,
+  "explain": "Building the sphere shell by shell gives U = −3GM²/(5R).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8705985a-ba34-435e-a5fd-38bab268124f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "Gravitational self-energy of a thin uniform spherical shell of mass M and radius R is",
+  "formula": "U = −GM²/(2R)",
+  "options": [
+   "−GM²/R",
+   "−GM²/(4R)",
+   "−GM²/(2R)",
+   "−3GM²/(5R)"
+  ],
+  "answer": 2,
+  "explain": "Adding charge-like shells: ∫(−GM q/R)dq from 0 to M gives −GM²/(2R).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "910b9396-7534-4e92-814c-e4e924bc375f",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Gravitational potential energy",
+  "prompt": "PE of mass m at height h = R above Earth's surface, in terms of surface g and R, is",
+  "formula": "U = −GMm/(2R) = −mgR/2",
+  "options": [
+   "−mgR/4",
+   "−mgR",
+   "−2mgR",
+   "−mgR/2"
+  ],
+  "answer": 3,
+  "explain": "Distance from centre is 2R, so U = −GMm/(2R), and GM = gR² gives −mgR/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7868c5f1-59d1-4ac3-b5dc-5534b26985e3",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "Minimum fractional increase in a satellite's orbital speed (circular orbit) needed to escape the planet is about",
+  "formula": "v_e = √2 v_o",
+  "options": [
+   "100%",
+   "29%",
+   "50%",
+   "41%"
+  ],
+  "answer": 3,
+  "explain": "v_e = √2 v_o, so the increase is (√2 − 1) ≈ 0.41, i.e. 41%.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cf498a16-9f03-4810-8190-cf927383772c",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "Satellites are launched eastward mainly because",
+  "formula": "",
+  "options": [
+   "Earth's rotational speed adds to launch speed",
+   "Gravity is weaker towards the east",
+   "Air drag vanishes eastward",
+   "Orbital speed is lower in the east"
+  ],
+  "answer": 0,
+  "explain": "The eastward launch gains Earth's surface speed (≈0.46 km/s at equator), so less launch speed is needed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7602b10e-d0ac-472d-81e8-aaf896d0cd1d",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Orbital velocity of satellite",
+  "prompt": "A satellite in circular orbit has its speed slightly reduced tangentially at one point. Its new orbit is",
+  "formula": "",
+  "options": [
+   "Smaller circle",
+   "Ellipse with that point as apogee",
+   "Straight-line fall to Earth",
+   "Ellipse with that point as perigee"
+  ],
+  "answer": 1,
+  "explain": "At less than circular speed, the point lies at the farthest distance, so it becomes the apogee of an ellipse.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e7e3ef37-3ace-4b3e-bb19-d61e6f06c819",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "If a satellite's orbital radius is doubled, its gravitational potential energy becomes",
+  "formula": "U = −GMm/r",
+  "options": [
+   "Half (less negative)",
+   "Double (more negative)",
+   "Four times",
+   "One-fourth"
+  ],
+  "answer": 0,
+  "explain": "U ∝ −1/r, so doubling r halves the magnitude and U rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cd697975-edc1-44db-afa3-d49957ec6023",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "A satellite in circular orbit gets a small tangential speed boost (below √2 v₀) at point P. P becomes the",
+  "formula": "",
+  "options": [
+   "Centre of the new orbit",
+   "Apogee of the new ellipse",
+   "End of a parabolic path",
+   "Perigee of the new ellipse"
+  ],
+  "answer": 3,
+  "explain": "Higher KE gives a less negative E; the satellite moves outward, so P is the nearest point.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "577db773-5877-4da0-95db-37af23675cc1",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Energy of satellite (KE, PE, total)",
+  "prompt": "A satellite moves in an ellipse of semi-major axis a. At distance r from the central mass M, its KE is",
+  "formula": "KE = E − U",
+  "options": [
+   "GMm(1/2r − 1/a)",
+   "GMm(1/2a − 1/r)",
+   "GMm(1/r − 1/2a)",
+   "GMm(1/r − 1/a)"
+  ],
+  "answer": 2,
+  "explain": "KE = E − U = −GMm/2a + GMm/r = GMm(1/r − 1/2a).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02b98e7b-9c35-41d2-a035-137f05a7c18d",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Geostationary and polar satellites",
+  "prompt": "Angular velocity of a geostationary satellite relative to a point on Earth's equator is:",
+  "formula": "",
+  "options": [
+   "Twice Earth's angular velocity",
+   "7.3×10⁻⁵ rad/s",
+   "Equal to 2π rad/day",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "It has the same ω as Earth and the same sense, so it stays fixed over one point and the relative ω is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5bf4718f-bc3a-4b7a-b170-f9e04fd57f1e",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Geostationary and polar satellites",
+  "prompt": "The orbital plane of a polar satellite is inclined to Earth's equatorial plane at about:",
+  "formula": "",
+  "options": [
+   "90°",
+   "45°",
+   "0°",
+   "23.5°"
+  ],
+  "answer": 0,
+  "explain": "A polar satellite passes over both poles, so its orbit is inclined at about 90° to the equator.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8763aec9-8758-4b39-8d9b-3202325f4215",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Geostationary and polar satellites",
+  "prompt": "Angular speed of a geostationary satellite about Earth's axis is about:",
+  "formula": "ω = 2π/T, T ≈ 24 h",
+  "options": [
+   "4.2×10⁻³ rad/s",
+   "1.2×10⁻³ rad/s",
+   "7.3×10⁻⁴ rad/s",
+   "7.3×10⁻⁵ rad/s"
+  ],
+  "answer": 3,
+  "explain": "ω = 2π/86400 s ≈ 7.3×10⁻⁵ rad/s, equal to Earth's angular speed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "23f1b002-6f5b-4099-8b78-bd5bc1992ebb",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Areal velocity and angular momentum in orbit",
+  "prompt": "A planet has r_a = 3r_p. The ratio of its kinetic energies KE_p : KE_a at perihelion and aphelion is",
+  "formula": "",
+  "options": [
+   "1 : 3",
+   "3 : 1",
+   "1 : 9",
+   "9 : 1"
+  ],
+  "answer": 3,
+  "explain": "v_p/v_a = r_a/r_p = 3, and KE ∝ v², so KE_p : KE_a = 9 : 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0ca29402-6058-48ec-8c47-c5b19ce29d77",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Areal velocity and angular momentum in orbit",
+  "prompt": "Planet in elliptical orbit has semi-axes a, b and period T. Its areal velocity dA/dt equals",
+  "formula": "dA/dt = area / T",
+  "options": [
+   "πab/T",
+   "ab/T",
+   "πab/2T",
+   "πa²/T"
+  ],
+  "answer": 0,
+  "explain": "dA/dt is constant, so it equals total ellipse area πab divided by the period T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a55c6306-4fd5-4b9a-bb27-22da7057f683",
+  "subject": "Physics",
+  "chapter": "Gravitation",
+  "topic": "Areal velocity and angular momentum in orbit",
+  "prompt": "A planet's distance from the Sun at aphelion is twice that at perihelion. Its ω_perihelion : ω_aphelion is",
+  "formula": "L = mr²ω = constant ⇒ ω ∝ 1/r²",
+  "options": [
+   "1 : 4",
+   "1 : 2",
+   "4 : 1",
+   "2 : 1"
+  ],
+  "answer": 2,
+  "explain": "L = mr²ω is constant, so ω ∝ 1/r². With r_a = 2r_p, ω_p/ω_a = (r_a/r_p)² = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

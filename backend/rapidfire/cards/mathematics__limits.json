@@ -1,1449 +1,3209 @@
 [
-  {
-    "id": "4e9516a1-1ae1-4462-ac36-1f75b5fac63b",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) sinx/x = ?",
-    "formula": "lim_{x→0} sinx/x",
-    "options": [
-      "x",
-      "∞",
-      "1",
-      "0"
-    ],
-    "answer": 2,
-    "explain": "Standard limit: sinx/x → 1 as x → 0 (x in radians).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61a277fa-1192-4975-b705-227f1167ed48",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) tanx/x = ?",
-    "formula": "lim_{x→0} tanx/x",
-    "options": [
-      "1",
-      "1/2",
-      "0",
-      "∞"
-    ],
-    "answer": 0,
-    "explain": "Standard limit: tanx/x → 1 as x → 0 (x in radians).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "587aac28-611e-49b6-a07e-f0f76b053291",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) (eˣ - 1)/x = ?",
-    "formula": "lim_{x→0} (eˣ−1)/x",
-    "options": [
-      "1",
-      "e",
-      "ln e",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "Standard exponential limit: (eˣ−1)/x → 1 as x → 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e8e7c24d-9e2e-441c-a4ce-cd72c55cdcc7",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) (aˣ - 1)/x = ?",
-    "formula": "lim_{x→0} (aˣ−1)/x",
-    "options": [
-      "a",
-      "1",
-      "ln a",
-      "log₁₀a"
-    ],
-    "answer": 2,
-    "explain": "Standard limit: (aˣ−1)/x → ln a as x → 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fc79fe61-0690-4452-9160-3812968b03d1",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) ln(1+x)/x = ?",
-    "formula": "lim_{x→0} ln(1+x)/x",
-    "options": [
-      "1",
-      "e",
-      "ln e",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "Standard logarithmic limit: ln(1+x)/x → 1 as x → 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "04b5933a-5fad-4806-ac04-d486eb40232e",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→∞) (1 + 1/x)ˣ = ?",
-    "formula": "lim_{x→∞}(1+1/x)ˣ",
-    "options": [
-      "e²",
-      "∞",
-      "1",
-      "e"
-    ],
-    "answer": 3,
-    "explain": "Definition of e: (1+1/x)ˣ → e as x → ∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fa00fae0-0eaf-43db-9d84-0955c7c04e36",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) (1 + x)^(1/x) = ?",
-    "formula": "lim_{x→0}(1+x)^{1/x}",
-    "options": [
-      "1",
-      "0",
-      "e",
-      "∞"
-    ],
-    "answer": 2,
-    "explain": "Equivalent form of the definition of e.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dfb43ccf-3e25-40e4-ab50-a32608de10b9",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) sin(ax)/sin(bx) = ?",
-    "formula": "lim_{x→0} sin(ax)/sin(bx)",
-    "options": [
-      "a/b",
-      "b/a",
-      "1",
-      "ab"
-    ],
-    "answer": 0,
-    "explain": "Both → their arguments × 1/x, so ratio → a/b.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9dc47018-e806-4f7c-aa59-baa89d4bc9bd",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "L'Hôpital's Rule",
-    "prompt": "0/0 form is resolved by L'Hôpital's rule as?",
-    "formula": "lim f/g = lim f'/g'",
-    "options": [
-      "lim f'·g'",
-      "lim f'/g'",
-      "lim f·g",
-      "lim f/g'"
-    ],
-    "answer": 1,
-    "explain": "L'Hôpital: differentiate numerator and denominator separately.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b3fd3724-d6ce-4ce3-807e-4b3dd9492c56",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) (1−cosx)/x² = ?",
-    "formula": "lim_{x→0}(1−cosx)/x²",
-    "options": [
-      "2",
-      "1/2",
-      "1",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "1−cosx ≈ x²/2 near 0, so limit = 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a2c6e79d-b887-41e9-ae50-e64d905569ba",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Indeterminate Forms",
-    "prompt": "lim(x→0⁺) x·ln x = ?",
-    "formula": "lim_{x→0⁺} x ln x",
-    "options": [
-      "0",
-      "∞",
-      "−1",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "0·(−∞) form; x dominates lnx, so limit = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77c144a0-6825-45c3-9e0f-48ad621258aa",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Indeterminate Forms",
-    "prompt": "1^∞ form: if f→1, g→∞, lim f^g = ?",
-    "formula": "lim f^g = e^{lim g(f−1)}",
-    "options": [
-      "1",
-      "e^{lim g·ln f}",
-      "∞",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "1^∞ form evaluated as e^{lim g·ln f} = e^{lim g(f−1)} when f→1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b7b66129-10cc-4e8b-b5aa-06fd54d1ea09",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→∞) (1 + a/x)ˣ = ?",
-    "formula": "lim_{x→∞}(1+a/x)ˣ",
-    "options": [
-      "eᵃ",
-      "aᵉ",
-      "1",
-      "e^(1/a)"
-    ],
-    "answer": 0,
-    "explain": "Standard result: (1+a/x)ˣ → eᵃ as x → ∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "146fabf7-1bfd-4090-9ce6-06b5ab3025a7",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Existence of Limits",
-    "prompt": "lim(x→0) x/|x| = ?",
-    "formula": "",
-    "options": [
-      "−1",
-      "Does not exist",
-      "1",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "LHL = −1, RHL = +1; limit does not exist.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1e5933f7-344c-4469-a27e-f68f94184ef2",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits at Infinity",
-    "prompt": "lim(x→∞) xⁿ/eˣ = ? for any finite n",
-    "formula": "lim_{x→∞} xⁿ/eˣ",
-    "options": [
-      "∞",
-      "0",
-      "1",
-      "n!"
-    ],
-    "answer": 1,
-    "explain": "Exponential grows faster than any polynomial; limit = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f3cbaac9-64cf-4972-9c0e-4bbf6223f435",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) sin(x°)/x = ? (x in degrees)",
-    "formula": "",
-    "options": [
-      "1",
-      "180/π",
-      "0",
-      "π/180"
-    ],
-    "answer": 3,
-    "explain": "x° = πx/180 radians, so limit = π/180.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "58b8b96e-6979-4812-ab6b-e72a83544e7d",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits with Special Functions",
-    "prompt": "lim(x→0⁺) [x]/x = ? ([x] = floor function)",
-    "formula": "",
-    "options": [
-      "1",
-      "Does not exist",
-      "∞",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "As x→0⁺, [x]=0, so [x]/x = 0/x = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7c1e852b-daf2-4d24-ac1e-1f6615d54d3f",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits at Infinity",
-    "prompt": "lim(x→∞) (x²+1)/(2x²−3) = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "1/2",
-      "1",
-      "∞"
-    ],
-    "answer": 1,
-    "explain": "Divide by x²: (1+1/x²)/(2−3/x²) → 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eee774b8-2879-4650-bc26-a97b256a68f5",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) (sin⁻¹x)/x = ?",
-    "formula": "lim_{x→0} sin⁻¹x/x",
-    "options": [
-      "π",
-      "0",
-      "1/π",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "sin⁻¹x ≈ x near 0, so (sin⁻¹x)/x → 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "feb8fa9b-0d2f-4919-94a9-e57d7f1a64dd",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Standard Limits",
-    "prompt": "lim(x→0) (tan⁻¹x)/x = ?",
-    "formula": "lim_{x→0} tan⁻¹x/x",
-    "options": [
-      "1/π",
-      "0",
-      "π",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "tan⁻¹x ≈ x near 0, so (tan⁻¹x)/x → 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9d87ca1a-fa47-4b71-a184-b12390bd4c55",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (eˢⁱⁿˣ − 1)/x = ?",
-    "formula": "",
-    "options": [
-      "∞",
-      "1",
-      "e",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "sin x ~ x near 0, so (eˢⁱⁿˣ−1)/sin x · sin x/x → 1·1 = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "306c85d6-d0d2-4fe1-9468-ed21d1aa2e49",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) x·sin(1/x) = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "1/2",
-      "0",
-      "∞"
-    ],
-    "answer": 0,
-    "explain": "Let t=1/x→0; x·sin(1/x)=sin t/t → 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7881aaf6-2d33-499e-9f6a-cb47159828eb",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 − cos x)/x = ?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "1",
-      "0",
-      "∞"
-    ],
-    "answer": 2,
-    "explain": "(1−cos x)/x ~ x/2 → 0 as x→0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61430ccb-2d01-43e7-8163-564aa1b387fe",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) x²sin(1/x) = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "does not exist",
-      "1",
-      "∞"
-    ],
-    "answer": 0,
-    "explain": "|x²sin(1/x)| ≤ x² → 0 by Sandwich theorem.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "747c55eb-4823-4eec-a4ed-d7cf98874136",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0⁺) xˣ = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "∞",
-      "e",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "x·ln x → 0 as x→0⁺, so xˣ = eˣˡⁿˣ → e⁰ = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0298524d-46a0-44c9-82aa-a46e53e7061e",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) n-th root of xⁿ, i.e. lim x^(1/x) as x→∞ = ?",
-    "formula": "x^(1/x)",
-    "options": [
-      "0",
-      "∞",
-      "e",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "ln(x)/x → 0, so x^(1/x) = e^(ln x/x) → e⁰ = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b1eb705d-9c97-4914-a561-91e2002bf584",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (log cos x)/x² = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "−1/2",
-      "−1",
-      "1/2"
-    ],
-    "answer": 1,
-    "explain": "ln(cos x) ~ −x²/2 near 0, so limit = −1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e330a506-c2a3-4423-b77c-fc76f4491c01",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (tan x − sin x)/x³ = ?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "1",
-      "0",
-      "1/3"
-    ],
-    "answer": 0,
-    "explain": "tan x − sin x ~ x³/2 for small x, so limit = 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a10eb24d-e916-4316-b650-aa4d80cbac2d",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→π/2) (cos x)/(π/2 − x) = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "∞",
-      "π/2",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "Let t=π/2−x→0; cos x=sin t, so sin t/t → 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e62320ef-b14a-43a7-97f1-1704f06cffff",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) [sin(x+a) − sin a]/x = ?",
-    "formula": "cos a",
-    "options": [
-      "cos a",
-      "sin a",
-      "1",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "This is the derivative of sin x at x=a, which equals cos a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb10177d-412f-4724-a9fb-9b89b7bbca85",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) (3x²+2x)/(5x²−7) = ?",
-    "formula": "",
-    "options": [
-      "∞",
-      "2/7",
-      "0",
-      "3/5"
-    ],
-    "answer": 3,
-    "explain": "Divide numerator and denominator by x²; leading coefficients give 3/5.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "51fd45b0-841d-494e-9e63-6fe8096c3d83",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (eˣ − e⁻ˣ)/x = ?",
-    "formula": "",
-    "options": [
-      "e",
-      "0",
-      "1",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "(eˣ−e⁻ˣ)/x = (eˣ−1)/x + (1−e⁻ˣ)/x → 1+1 = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1b4dcdec-1cd2-4776-befd-d57a30f2b563",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1+sin x)^(cot x) = ?",
-    "formula": "e",
-    "options": [
-      "0",
-      "e²",
-      "1",
-      "e"
-    ],
-    "answer": 3,
-    "explain": "1^∞ form; exponent sin x · cot x = cos x → 1, so limit = e¹ = e.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a1fa7aeb-86be-4e91-b49f-b32aaf514a42",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) (√(x²+x) − x) = ?",
-    "formula": "1/2",
-    "options": [
-      "1",
-      "∞",
-      "1/2",
-      "0"
-    ],
-    "answer": 2,
-    "explain": "Rationalise: x/( √(x²+x)+x) → 1/2 as x→∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "af809cf7-bfee-4a80-aec1-4b017a65a6ac",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(n→∞) (1 + 1/n²)^n = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "∞",
-      "e²",
-      "e"
-    ],
-    "answer": 0,
-    "explain": "n·(1/n²) = 1/n → 0, so limit = e⁰ = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0aa9acdb-33f6-49d3-b76f-cde9b9b2106d",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) sin(x²)/x² = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "2",
-      "0",
-      "∞"
-    ],
-    "answer": 0,
-    "explain": "Let t=x²→0; sin t/t → 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "1c4a9774-d0ff-4b0a-9281-4cdaa7913b14",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (2ˣ−1)/x = ?",
-    "formula": "ln 2",
-    "options": [
-      "2",
-      "log₁₀2",
-      "1",
-      "ln 2"
-    ],
-    "answer": 3,
-    "explain": "Standard limit: (aˣ−1)/x = ln a; here a=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0b314b17-73a4-4be5-80a0-b6a2a5976ab6",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "If f is differentiable at a, lim(h→0) [f(a+h)−f(a−h)]/(2h) = ?",
-    "formula": "f′(a)",
-    "options": [
-      "0",
-      "2f′(a)",
-      "f′(a)/2",
-      "f′(a)"
-    ],
-    "answer": 3,
-    "explain": "Symmetric difference quotient equals f′(a) for differentiable f.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "91e1b96f-c170-4c9d-ae0a-3882a8f5339d",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (sin 3x + sin 5x)/(sin 4x) = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "3/4",
-      "8/4",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "Each sin kx/x → k; (3+5)/4 = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0f0ff378-2dac-44a8-bb69-4f08d451a7ea",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (eˣ − 1 − x)/x² = ?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "0",
-      "1",
-      "1/6"
-    ],
-    "answer": 0,
-    "explain": "Taylor: eˣ=1+x+x²/2+…, so (eˣ−1−x)/x²→1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "cc806376-ef93-418d-b895-6a99deb64db9",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (x − sin x)/x³ = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "1/6",
-      "1/2",
-      "1/3"
-    ],
-    "answer": 1,
-    "explain": "Taylor: sin x=x−x³/6+…, so (x−sin x)/x³→1/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "c62f7a5f-6bee-43c3-a81a-5fb620463e53",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (tan x − x)/x³ = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "1/6",
-      "1/3",
-      "1/2"
-    ],
-    "answer": 2,
-    "explain": "Taylor: tan x=x+x³/3+…, so (tan x−x)/x³→1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "5ad63721-23d0-4995-9789-173a2787b852",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 − cos x)/sin²x = ?",
-    "formula": "",
-    "options": [
-      "2",
-      "0",
-      "1",
-      "1/2"
-    ],
-    "answer": 3,
-    "explain": "sin²x≈x² and 1−cos x≈x²/2 near 0, so ratio→1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f4414d2d-9058-4e91-aaab-237c1dfdfe00",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) sin(3x)/tan(5x) = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "0",
-      "3/5",
-      "5/3"
-    ],
-    "answer": 2,
-    "explain": "sin(ax)/x→a and tan(bx)/x→b, so ratio→3/5.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "62195252-f18a-4ee5-8ec0-b61686788d35",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (aˣ + bˣ − 2)/x = ?",
-    "formula": "",
-    "options": [
-      "ln(ab)",
-      "ln(a)·ln(b)",
-      "ln(a+b)",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "(aˣ−1)/x→ln a and (bˣ−1)/x→ln b; sum = ln a+ln b = ln(ab).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "82e4fe54-056c-4b3b-a6ac-67c6e22a4694",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) x·(a^(1/x) − 1) = ? (a > 0)",
-    "formula": "",
-    "options": [
-      "0",
-      "ln a",
-      "1/a",
-      "a"
-    ],
-    "answer": 1,
-    "explain": "Let t=1/x→0; t→0: (aᵗ−1)/t→ln a.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ddb634c1-fcba-4349-9ec1-304cc4038ef4",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (ln(1+x) − x)/x² = ?",
-    "formula": "",
-    "options": [
-      "−1",
-      "1/2",
-      "0",
-      "−1/2"
-    ],
-    "answer": 3,
-    "explain": "Taylor: ln(1+x)=x−x²/2+…, so (ln(1+x)−x)/x²→−1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bb0a8ec9-4133-4b45-9083-840edc51ca53",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (sin x − x cos x)/x³ = ?",
-    "formula": "",
-    "options": [
-      "1/6",
-      "2/3",
-      "1/2",
-      "1/3"
-    ],
-    "answer": 3,
-    "explain": "Expand: sin x−x cos x≈x³/3 using Taylor series; ratio→1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "07543f10-f18b-4aaf-9eaf-80870c3ca47f",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) x^(1/x) equals which value?",
-    "formula": "lim x^(1/x) = 1",
-    "options": [
-      "1",
-      "e",
-      "∞",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "ln L = lim (ln x)/x = 0 as x→∞, so L = e⁰ = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "64d1bdc9-7cc9-4c19-9dc8-086552b629ec",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (e^(x²)−1)/x² = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "1/2",
-      "2",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "Substitute t=x²→0; (eᵗ−1)/t→1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "af993cd1-a7dc-40f8-903d-4092c1046178",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(n→∞) (1 + r/n)^n = ?",
-    "formula": "eʳ",
-    "options": [
-      "e^(1/r)",
-      "1",
-      "r·e",
-      "eʳ"
-    ],
-    "answer": 3,
-    "explain": "Standard exponential limit: (1+r/n)ⁿ→eʳ as n→∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1f1f4920-6000-41ef-b4b3-e88ad06fea31",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (ln(cos x))/x² = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "−1/2",
-      "1/2",
-      "−1"
-    ],
-    "answer": 1,
-    "explain": "cos x≈1−x²/2; ln(1−x²/2)≈−x²/2; ratio→−1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "338955d9-ab30-49d1-9954-2da5ca847ef8",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→π) (sin x)/(π − x) = ?",
-    "formula": "",
-    "options": [
-      "−1",
-      "1",
-      "π",
-      "0"
-    ],
-    "answer": 1,
-    "explain": "Let t=π−x→0; sin(π−t)=sin t; sin t/t→1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3f30a388-fa6e-4e20-8c61-76b059b8f59e",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 + 3x)^(2/x) = ?",
-    "formula": "",
-    "options": [
-      "e²",
-      "e³",
-      "e⁶",
-      "e^(1/6)"
-    ],
-    "answer": 2,
-    "explain": "1^∞ form: exponent×base factor = (2/x)·3x = 6; limit = e⁶.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2df7cbde-39a9-4f00-af9a-8e14838078ab",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (cos x)^(1/x²) = ?",
-    "formula": "",
-    "options": [
-      "e^(−1/2)",
-      "e^(1/2)",
-      "0",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "ln L=(ln cos x)/x²≈(−x²/2)/x²=−1/2; L=e^(−1/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75405cb3-d328-40ff-90b1-43840ae774c7",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) √(x²+x) − √(x²−x) = ?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "∞",
-      "0",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "Rationalise: 2x/(√(x²+x)+√(x²−x))→2x/(2x)=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e2ff040e-0c3e-4e5f-85a3-d6fa2eda4f88",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) x²(1 − cos(1/x)) = ?",
-    "formula": "1−cosθ ≈ θ²/2",
-    "options": [
-      "0",
-      "∞",
-      "1",
-      "1/2"
-    ],
-    "answer": 3,
-    "explain": "1−cos(1/x) ≈ 1/(2x²), so x²·1/(2x²) = 1/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6f7d541e-334c-4236-a290-e2375252af18",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) (ln x)/xⁿ = ? (n > 0)",
-    "formula": "",
-    "options": [
-      "1",
-      "∞",
-      "1/n",
-      "0"
-    ],
-    "answer": 3,
-    "explain": "Logarithm grows slower than any positive power of x; limit is 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77167b6f-6109-4b08-906c-d65bc20fad93",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→1) (x^m − 1)/(x^n − 1) = ?",
-    "formula": "",
-    "options": [
-      "m/n",
-      "m−n",
-      "n/m",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "Using xᵏ−1=(x−1)(1+x+…+x^(k−1)), ratio of degrees gives m/n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "217f2175-1754-4f22-9c61-f1df68fcd741",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (e^x − 1 − x − x²/2)/x³ = ?",
-    "formula": "eˣ = 1+x+x²/2!+x³/3!+…",
-    "options": [
-      "1/2",
-      "1/24",
-      "1/3",
-      "1/6"
-    ],
-    "answer": 3,
-    "explain": "Next term in eˣ series after x²/2 is x³/6, so limit = 1/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "715a33cd-1f18-44a7-a1e5-69615a093d60",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (tan⁻¹x − x)/x³ = ?",
-    "formula": "tan⁻¹x = x − x³/3 + …",
-    "options": [
-      "1/6",
-      "1/3",
-      "-1/6",
-      "-1/3"
-    ],
-    "answer": 3,
-    "explain": "tan⁻¹x − x ≈ −x³/3, divided by x³ gives −1/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f6d21c44-ba15-4ba6-85b9-56538243e01c",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (sin⁻¹x − x)/x³ = ?",
-    "formula": "sin⁻¹x = x + x³/6 + …",
-    "options": [
-      "1/3",
-      "-1/3",
-      "-1/6",
-      "1/6"
-    ],
-    "answer": 3,
-    "explain": "sin⁻¹x − x ≈ x³/6, divided by x³ gives 1/6.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2695a56e-74ba-4637-8727-19cdf24ec803",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) x(ln(x+1) − ln x) = ?",
-    "formula": "ln(1+1/x)≈1/x",
-    "options": [
-      "e",
-      "0",
-      "1",
-      "∞"
-    ],
-    "answer": 2,
-    "explain": "x·ln(1+1/x) ≈ x·(1/x) = 1 as x→∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86999b54-77a9-4c6c-9b3a-f9d1ed676a94",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (3sin x − sin 3x)/x³ = ?",
-    "formula": "sin 3x = 3sin x − 4sin³x",
-    "options": [
-      "12",
-      "8",
-      "4",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "3sin x−sin 3x = 3sin x−(3sin x−4sin³x) = 4sin³x ≈ 4x³, limit = 4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8248b9f0-fc55-49f3-81f5-b12195f0d2ce",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 + sin x)^(1/x) = ?",
-    "formula": "1^∞ form: e^(lim g(f−1))",
-    "options": [
-      "e",
-      "e²",
-      "∞",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "(1+sin x)^(1/x): exponent = (1/x)·sin x → 1, so limit = e¹ = e.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1bc07c8b-e105-4b6c-b831-344ec8b4670b",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 − cos 2x)/x² = ?",
-    "formula": "1−cos 2x = 2sin²x",
-    "options": [
-      "1",
-      "2",
-      "1/2",
-      "4"
-    ],
-    "answer": 1,
-    "explain": "2sin²x/x² = 2·(sin x/x)² → 2·1 = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2e44c37e-8378-44c1-b9e1-469919da856c",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) x·cosec x = lim(x→0) x/sin x = ?",
-    "formula": "",
-    "options": [
-      "1/2",
-      "0",
-      "∞",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "x/sin x = 1/(sin x/x) → 1/1 = 1 as x→0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "67ecba5f-c54f-4723-a776-9c71455d7bd3",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→π/4) (tan x − 1)/(x − π/4) = ?",
-    "formula": "d/dx(tan x) = sec²x",
-    "options": [
-      "√2",
-      "1/2",
-      "2",
-      "1"
-    ],
-    "answer": 2,
-    "explain": "By definition of derivative, limit = sec²(π/4) = (√2)² = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "98cb3f00-8130-47d8-9b4d-4fe15f5a0efb",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (x²)/(1 − cos x) = ?",
-    "formula": "",
-    "options": [
-      "0",
-      "2",
-      "1/2",
-      "1"
-    ],
-    "answer": 1,
-    "explain": "1−cosx ~ x²/2 for small x, so x²/(x²/2) = 2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6584479d-ec0c-4747-a1a0-83ebf2e8b547",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 + sin 2x)^(1/(3x)) = ?",
-    "formula": "e^(2/3)",
-    "options": [
-      "e^(2/3)",
-      "e^(1/3)",
-      "e",
-      "e²"
-    ],
-    "answer": 0,
-    "explain": "1^∞ form: exponent→∞·sin2x/3x→2/3, so limit = e^(2/3).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e022f746-f842-4cf5-898d-2fe9ff4ad747",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (tan⁻¹ 3x)/(sin⁻¹ 2x) = ?",
-    "formula": "",
-    "options": [
-      "2/3",
-      "0",
-      "1",
-      "3/2"
-    ],
-    "answer": 3,
-    "explain": "Both → kx/x as x→0; (tan⁻¹3x)/x→3 and (sin⁻¹2x)/x→2, ratio = 3/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "07f0d118-e05d-4832-9242-bb6a73ec7388",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (ln(1 + sin x))/x = ?",
-    "formula": "",
-    "options": [
-      "sin 1",
-      "0",
-      "1",
-      "∞"
-    ],
-    "answer": 2,
-    "explain": "ln(1+sinx)/sinx→1 and sinx/x→1, so product →1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ca030430-c267-4fa6-94f9-4dc790ef4b19",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→∞) (1 − 1/x)^x = ?",
-    "formula": "e^(−1)",
-    "options": [
-      "1/e",
-      "0",
-      "e",
-      "1"
-    ],
-    "answer": 0,
-    "explain": "Standard form: lim(1+t)^(1/t)=e with t=−1/x gives e^(−1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9ea54cbc-b926-4b6d-abf4-e327400b9d8e",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 + 2x)^(1/x) = ?",
-    "formula": "e²",
-    "options": [
-      "e^(1/2)",
-      "e",
-      "1",
-      "e²"
-    ],
-    "answer": 3,
-    "explain": "1^∞ form: exponent (1/x)·2x=2 as x→0, so limit = e².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eb079ada-bbb4-4907-ae7f-16ce7dbbe959",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (e^x − 1)/sin x = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "∞",
-      "0",
-      "e"
-    ],
-    "answer": 0,
-    "explain": "Both →0 as x→0; (eˣ−1)/x →1 and x/sinx→1, product=1",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "815401e6-84fb-4467-9984-a0dd033cbd74",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (tan 3x)/(sin 2x) = ?",
-    "formula": "",
-    "options": [
-      "1",
-      "2/3",
-      "3",
-      "3/2"
-    ],
-    "answer": 3,
-    "explain": "lim tan(ax)/x=a, lim sin(bx)/x=b; ratio=3/2",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1467987e-e436-4234-abdf-1c126a1bd7dd",
-    "subject": "Mathematics",
-    "chapter": "Limits",
-    "topic": "Limits",
-    "prompt": "lim(x→0) (1 + ax)^(b/x) = ?",
-    "formula": "",
-    "options": [
-      "e^(ab)",
-      "e^(a+b)",
-      "e^(a/b)",
-      "e^(b/a)"
-    ],
-    "answer": 0,
-    "explain": "ln L=(b/x)·ln(1+ax)→(b/x)·ax=ab, so L=e^(ab)",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "4e9516a1-1ae1-4462-ac36-1f75b5fac63b",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) sinx/x = ?",
+  "formula": "lim_{x→0} sinx/x",
+  "options": [
+   "x",
+   "∞",
+   "1",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Standard limit: sinx/x → 1 as x → 0 (x in radians).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61a277fa-1192-4975-b705-227f1167ed48",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) tanx/x = ?",
+  "formula": "lim_{x→0} tanx/x",
+  "options": [
+   "1",
+   "1/2",
+   "0",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "Standard limit: tanx/x → 1 as x → 0 (x in radians).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "587aac28-611e-49b6-a07e-f0f76b053291",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) (eˣ - 1)/x = ?",
+  "formula": "lim_{x→0} (eˣ−1)/x",
+  "options": [
+   "1",
+   "e",
+   "ln e",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Standard exponential limit: (eˣ−1)/x → 1 as x → 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e8e7c24d-9e2e-441c-a4ce-cd72c55cdcc7",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) (aˣ - 1)/x = ?",
+  "formula": "lim_{x→0} (aˣ−1)/x",
+  "options": [
+   "a",
+   "1",
+   "ln a",
+   "log₁₀a"
+  ],
+  "answer": 2,
+  "explain": "Standard limit: (aˣ−1)/x → ln a as x → 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fc79fe61-0690-4452-9160-3812968b03d1",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) ln(1+x)/x = ?",
+  "formula": "lim_{x→0} ln(1+x)/x",
+  "options": [
+   "1",
+   "e",
+   "ln e",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Standard logarithmic limit: ln(1+x)/x → 1 as x → 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "04b5933a-5fad-4806-ac04-d486eb40232e",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→∞) (1 + 1/x)ˣ = ?",
+  "formula": "lim_{x→∞}(1+1/x)ˣ",
+  "options": [
+   "e²",
+   "∞",
+   "1",
+   "e"
+  ],
+  "answer": 3,
+  "explain": "Definition of e: (1+1/x)ˣ → e as x → ∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fa00fae0-0eaf-43db-9d84-0955c7c04e36",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) (1 + x)^(1/x) = ?",
+  "formula": "lim_{x→0}(1+x)^{1/x}",
+  "options": [
+   "1",
+   "0",
+   "e",
+   "∞"
+  ],
+  "answer": 2,
+  "explain": "Equivalent form of the definition of e.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dfb43ccf-3e25-40e4-ab50-a32608de10b9",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) sin(ax)/sin(bx) = ?",
+  "formula": "lim_{x→0} sin(ax)/sin(bx)",
+  "options": [
+   "a/b",
+   "b/a",
+   "1",
+   "ab"
+  ],
+  "answer": 0,
+  "explain": "Both → their arguments × 1/x, so ratio → a/b.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9dc47018-e806-4f7c-aa59-baa89d4bc9bd",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hôpital's Rule",
+  "prompt": "0/0 form is resolved by L'Hôpital's rule as?",
+  "formula": "lim f/g = lim f'/g'",
+  "options": [
+   "lim f'·g'",
+   "lim f'/g'",
+   "lim f·g",
+   "lim f/g'"
+  ],
+  "answer": 1,
+  "explain": "L'Hôpital: differentiate numerator and denominator separately.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b3fd3724-d6ce-4ce3-807e-4b3dd9492c56",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) (1−cosx)/x² = ?",
+  "formula": "lim_{x→0}(1−cosx)/x²",
+  "options": [
+   "2",
+   "1/2",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "1−cosx ≈ x²/2 near 0, so limit = 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a2c6e79d-b887-41e9-ae50-e64d905569ba",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate Forms",
+  "prompt": "lim(x→0⁺) x·ln x = ?",
+  "formula": "lim_{x→0⁺} x ln x",
+  "options": [
+   "0",
+   "∞",
+   "−1",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "0·(−∞) form; x dominates lnx, so limit = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77c144a0-6825-45c3-9e0f-48ad621258aa",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate Forms",
+  "prompt": "1^∞ form: if f→1, g→∞, lim f^g = ?",
+  "formula": "lim f^g = e^{lim g(f−1)}",
+  "options": [
+   "1",
+   "e^{lim g·ln f}",
+   "∞",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "1^∞ form evaluated as e^{lim g·ln f} = e^{lim g(f−1)} when f→1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b7b66129-10cc-4e8b-b5aa-06fd54d1ea09",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→∞) (1 + a/x)ˣ = ?",
+  "formula": "lim_{x→∞}(1+a/x)ˣ",
+  "options": [
+   "eᵃ",
+   "aᵉ",
+   "1",
+   "e^(1/a)"
+  ],
+  "answer": 0,
+  "explain": "Standard result: (1+a/x)ˣ → eᵃ as x → ∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "146fabf7-1bfd-4090-9ce6-06b5ab3025a7",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Existence of Limits",
+  "prompt": "lim(x→0) x/|x| = ?",
+  "formula": "",
+  "options": [
+   "−1",
+   "Does not exist",
+   "1",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "LHL = −1, RHL = +1; limit does not exist.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1e5933f7-344c-4469-a27e-f68f94184ef2",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at Infinity",
+  "prompt": "lim(x→∞) xⁿ/eˣ = ? for any finite n",
+  "formula": "lim_{x→∞} xⁿ/eˣ",
+  "options": [
+   "∞",
+   "0",
+   "1",
+   "n!"
+  ],
+  "answer": 1,
+  "explain": "Exponential grows faster than any polynomial; limit = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f3cbaac9-64cf-4972-9c0e-4bbf6223f435",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) sin(x°)/x = ? (x in degrees)",
+  "formula": "",
+  "options": [
+   "1",
+   "180/π",
+   "0",
+   "π/180"
+  ],
+  "answer": 3,
+  "explain": "x° = πx/180 radians, so limit = π/180.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "58b8b96e-6979-4812-ab6b-e72a83544e7d",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits with Special Functions",
+  "prompt": "lim(x→0⁺) [x]/x = ? ([x] = floor function)",
+  "formula": "",
+  "options": [
+   "1",
+   "Does not exist",
+   "∞",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "As x→0⁺, [x]=0, so [x]/x = 0/x = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7c1e852b-daf2-4d24-ac1e-1f6615d54d3f",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at Infinity",
+  "prompt": "lim(x→∞) (x²+1)/(2x²−3) = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "1/2",
+   "1",
+   "∞"
+  ],
+  "answer": 1,
+  "explain": "Divide by x²: (1+1/x²)/(2−3/x²) → 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eee774b8-2879-4650-bc26-a97b256a68f5",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) (sin⁻¹x)/x = ?",
+  "formula": "lim_{x→0} sin⁻¹x/x",
+  "options": [
+   "π",
+   "0",
+   "1/π",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "sin⁻¹x ≈ x near 0, so (sin⁻¹x)/x → 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "feb8fa9b-0d2f-4919-94a9-e57d7f1a64dd",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard Limits",
+  "prompt": "lim(x→0) (tan⁻¹x)/x = ?",
+  "formula": "lim_{x→0} tan⁻¹x/x",
+  "options": [
+   "1/π",
+   "0",
+   "π",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "tan⁻¹x ≈ x near 0, so (tan⁻¹x)/x → 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9d87ca1a-fa47-4b71-a184-b12390bd4c55",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (eˢⁱⁿˣ − 1)/x = ?",
+  "formula": "",
+  "options": [
+   "∞",
+   "1",
+   "e",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "sin x ~ x near 0, so (eˢⁱⁿˣ−1)/sin x · sin x/x → 1·1 = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "306c85d6-d0d2-4fe1-9468-ed21d1aa2e49",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→∞) x·sin(1/x) = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "1/2",
+   "0",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "Let t=1/x→0; x·sin(1/x)=sin t/t → 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7881aaf6-2d33-499e-9f6a-cb47159828eb",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) (1 − cos x)/x = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1",
+   "0",
+   "∞"
+  ],
+  "answer": 2,
+  "explain": "(1−cos x)/x ~ x/2 → 0 as x→0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61430ccb-2d01-43e7-8163-564aa1b387fe",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Sandwich (squeeze) theorem",
+  "prompt": "lim(x→0) x²sin(1/x) = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "does not exist",
+   "1",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "|x²sin(1/x)| ≤ x² → 0 by Sandwich theorem.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "747c55eb-4823-4eec-a4ed-d7cf98874136",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0⁺) xˣ = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "∞",
+   "e",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "x·ln x → 0 as x→0⁺, so xˣ = eˣˡⁿˣ → e⁰ = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0298524d-46a0-44c9-82aa-a46e53e7061e",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) n-th root of xⁿ, i.e. lim x^(1/x) as x→∞ = ?",
+  "formula": "x^(1/x)",
+  "options": [
+   "0",
+   "∞",
+   "e",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "ln(x)/x → 0, so x^(1/x) = e^(ln x/x) → e⁰ = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b1eb705d-9c97-4914-a561-91e2002bf584",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (log cos x)/x² = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "−1/2",
+   "−1",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "ln(cos x) ~ −x²/2 near 0, so limit = −1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e330a506-c2a3-4423-b77c-fc76f4491c01",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (tan x − sin x)/x³ = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1",
+   "0",
+   "1/3"
+  ],
+  "answer": 0,
+  "explain": "tan x − sin x ~ x³/2 for small x, so limit = 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a10eb24d-e916-4316-b650-aa4d80cbac2d",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→π/2) (cos x)/(π/2 − x) = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "∞",
+   "π/2",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Let t=π/2−x→0; cos x=sin t, so sin t/t → 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e62320ef-b14a-43a7-97f1-1704f06cffff",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) [sin(x+a) − sin a]/x = ?",
+  "formula": "cos a",
+  "options": [
+   "cos a",
+   "sin a",
+   "1",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "This is the derivative of sin x at x=a, which equals cos a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb10177d-412f-4724-a9fb-9b89b7bbca85",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) (3x²+2x)/(5x²−7) = ?",
+  "formula": "",
+  "options": [
+   "∞",
+   "2/7",
+   "0",
+   "3/5"
+  ],
+  "answer": 3,
+  "explain": "Divide numerator and denominator by x²; leading coefficients give 3/5.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "51fd45b0-841d-494e-9e63-6fe8096c3d83",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (eˣ − e⁻ˣ)/x = ?",
+  "formula": "",
+  "options": [
+   "e",
+   "0",
+   "1",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "(eˣ−e⁻ˣ)/x = (eˣ−1)/x + (1−e⁻ˣ)/x → 1+1 = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1b4dcdec-1cd2-4776-befd-d57a30f2b563",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (1+sin x)^(cot x) = ?",
+  "formula": "e",
+  "options": [
+   "0",
+   "e²",
+   "1",
+   "e"
+  ],
+  "answer": 3,
+  "explain": "1^∞ form; exponent sin x · cot x = cos x → 1, so limit = e¹ = e.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a1fa7aeb-86be-4e91-b49f-b32aaf514a42",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Factorization and rationalization method",
+  "prompt": "lim(x→∞) (√(x²+x) − x) = ?",
+  "formula": "1/2",
+  "options": [
+   "1",
+   "∞",
+   "1/2",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Rationalise: x/( √(x²+x)+x) → 1/2 as x→∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "af809cf7-bfee-4a80-aec1-4b017a65a6ac",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limit as sum / product of sequences",
+  "prompt": "lim(n→∞) (1 + 1/n²)^n = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "∞",
+   "e²",
+   "e"
+  ],
+  "answer": 0,
+  "explain": "n·(1/n²) = 1/n → 0, so limit = e⁰ = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0aa9acdb-33f6-49d3-b76f-cde9b9b2106d",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) sin(x²)/x² = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "0",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "Let t=x²→0; sin t/t → 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "1c4a9774-d0ff-4b0a-9281-4cdaa7913b14",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (2ˣ−1)/x = ?",
+  "formula": "ln 2",
+  "options": [
+   "2",
+   "log₁₀2",
+   "1",
+   "ln 2"
+  ],
+  "answer": 3,
+  "explain": "Standard limit: (aˣ−1)/x = ln a; here a=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0b314b17-73a4-4be5-80a0-b6a2a5976ab6",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits",
+  "prompt": "If f is differentiable at a, lim(h→0) [f(a+h)−f(a−h)]/(2h) = ?",
+  "formula": "f′(a)",
+  "options": [
+   "0",
+   "2f′(a)",
+   "f′(a)/2",
+   "f′(a)"
+  ],
+  "answer": 3,
+  "explain": "Symmetric difference quotient equals f′(a) for differentiable f.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "91e1b96f-c170-4c9d-ae0a-3882a8f5339d",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) (sin 3x + sin 5x)/(sin 4x) = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "3/4",
+   "8/4",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Each sin kx/x → k; (3+5)/4 = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0f0ff378-2dac-44a8-bb69-4f08d451a7ea",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (eˣ − 1 − x)/x² = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "0",
+   "1",
+   "1/6"
+  ],
+  "answer": 0,
+  "explain": "Taylor: eˣ=1+x+x²/2+…, so (eˣ−1−x)/x²→1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "cc806376-ef93-418d-b895-6a99deb64db9",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (x − sin x)/x³ = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "1/6",
+   "1/2",
+   "1/3"
+  ],
+  "answer": 1,
+  "explain": "Taylor: sin x=x−x³/6+…, so (x−sin x)/x³→1/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "c62f7a5f-6bee-43c3-a81a-5fb620463e53",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (tan x − x)/x³ = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "1/6",
+   "1/3",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "Taylor: tan x=x+x³/3+…, so (tan x−x)/x³→1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "5ad63721-23d0-4995-9789-173a2787b852",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) (1 − cos x)/sin²x = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "0",
+   "1",
+   "1/2"
+  ],
+  "answer": 3,
+  "explain": "sin²x≈x² and 1−cos x≈x²/2 near 0, so ratio→1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f4414d2d-9058-4e91-aaab-237c1dfdfe00",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) sin(3x)/tan(5x) = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "3/5",
+   "5/3"
+  ],
+  "answer": 2,
+  "explain": "sin(ax)/x→a and tan(bx)/x→b, so ratio→3/5.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "62195252-f18a-4ee5-8ec0-b61686788d35",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (aˣ + bˣ − 2)/x = ?",
+  "formula": "",
+  "options": [
+   "ln(ab)",
+   "ln(a)·ln(b)",
+   "ln(a+b)",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "(aˣ−1)/x→ln a and (bˣ−1)/x→ln b; sum = ln a+ln b = ln(ab).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "82e4fe54-056c-4b3b-a6ac-67c6e22a4694",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→∞) x·(a^(1/x) − 1) = ? (a > 0)",
+  "formula": "",
+  "options": [
+   "0",
+   "ln a",
+   "1/a",
+   "a"
+  ],
+  "answer": 1,
+  "explain": "Let t=1/x→0; t→0: (aᵗ−1)/t→ln a.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ddb634c1-fcba-4349-9ec1-304cc4038ef4",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (ln(1+x) − x)/x² = ?",
+  "formula": "",
+  "options": [
+   "−1",
+   "1/2",
+   "0",
+   "−1/2"
+  ],
+  "answer": 3,
+  "explain": "Taylor: ln(1+x)=x−x²/2+…, so (ln(1+x)−x)/x²→−1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bb0a8ec9-4133-4b45-9083-840edc51ca53",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (sin x − x cos x)/x³ = ?",
+  "formula": "",
+  "options": [
+   "1/6",
+   "2/3",
+   "1/2",
+   "1/3"
+  ],
+  "answer": 3,
+  "explain": "Expand: sin x−x cos x≈x³/3 using Taylor series; ratio→1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "07543f10-f18b-4aaf-9eaf-80870c3ca47f",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) x^(1/x) equals which value?",
+  "formula": "lim x^(1/x) = 1",
+  "options": [
+   "1",
+   "e",
+   "∞",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "ln L = lim (ln x)/x = 0 as x→∞, so L = e⁰ = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "64d1bdc9-7cc9-4c19-9dc8-086552b629ec",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (e^(x²)−1)/x² = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "1/2",
+   "2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Substitute t=x²→0; (eᵗ−1)/t→1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "af993cd1-a7dc-40f8-903d-4092c1046178",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(n→∞) (1 + r/n)^n = ?",
+  "formula": "eʳ",
+  "options": [
+   "e^(1/r)",
+   "1",
+   "r·e",
+   "eʳ"
+  ],
+  "answer": 3,
+  "explain": "Standard exponential limit: (1+r/n)ⁿ→eʳ as n→∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1f1f4920-6000-41ef-b4b3-e88ad06fea31",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (ln(cos x))/x² = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "−1/2",
+   "1/2",
+   "−1"
+  ],
+  "answer": 1,
+  "explain": "cos x≈1−x²/2; ln(1−x²/2)≈−x²/2; ratio→−1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "338955d9-ab30-49d1-9954-2da5ca847ef8",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→π) (sin x)/(π − x) = ?",
+  "formula": "",
+  "options": [
+   "−1",
+   "1",
+   "π",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Let t=π−x→0; sin(π−t)=sin t; sin t/t→1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3f30a388-fa6e-4e20-8c61-76b059b8f59e",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (1 + 3x)^(2/x) = ?",
+  "formula": "",
+  "options": [
+   "e²",
+   "e³",
+   "e⁶",
+   "e^(1/6)"
+  ],
+  "answer": 2,
+  "explain": "1^∞ form: exponent×base factor = (2/x)·3x = 6; limit = e⁶.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2df7cbde-39a9-4f00-af9a-8e14838078ab",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (cos x)^(1/x²) = ?",
+  "formula": "",
+  "options": [
+   "e^(−1/2)",
+   "e^(1/2)",
+   "0",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "ln L=(ln cos x)/x²≈(−x²/2)/x²=−1/2; L=e^(−1/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75405cb3-d328-40ff-90b1-43840ae774c7",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Factorization and rationalization method",
+  "prompt": "lim(x→∞) √(x²+x) − √(x²−x) = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "∞",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Rationalise: 2x/(√(x²+x)+√(x²−x))→2x/(2x)=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e2ff040e-0c3e-4e5f-85a3-d6fa2eda4f88",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→∞) x²(1 − cos(1/x)) = ?",
+  "formula": "1−cosθ ≈ θ²/2",
+  "options": [
+   "0",
+   "∞",
+   "1",
+   "1/2"
+  ],
+  "answer": 3,
+  "explain": "1−cos(1/x) ≈ 1/(2x²), so x²·1/(2x²) = 1/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6f7d541e-334c-4236-a290-e2375252af18",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→∞) (ln x)/xⁿ = ? (n > 0)",
+  "formula": "",
+  "options": [
+   "1",
+   "∞",
+   "1/n",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "Logarithm grows slower than any positive power of x; limit is 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77167b6f-6109-4b08-906c-d65bc20fad93",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→1) (x^m − 1)/(x^n − 1) = ?",
+  "formula": "",
+  "options": [
+   "m/n",
+   "m−n",
+   "n/m",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Using xᵏ−1=(x−1)(1+x+…+x^(k−1)), ratio of degrees gives m/n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "217f2175-1754-4f22-9c61-f1df68fcd741",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (e^x − 1 − x − x²/2)/x³ = ?",
+  "formula": "eˣ = 1+x+x²/2!+x³/3!+…",
+  "options": [
+   "1/2",
+   "1/24",
+   "1/3",
+   "1/6"
+  ],
+  "answer": 3,
+  "explain": "Next term in eˣ series after x²/2 is x³/6, so limit = 1/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "715a33cd-1f18-44a7-a1e5-69615a093d60",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (tan⁻¹x − x)/x³ = ?",
+  "formula": "tan⁻¹x = x − x³/3 + …",
+  "options": [
+   "1/6",
+   "1/3",
+   "-1/6",
+   "-1/3"
+  ],
+  "answer": 3,
+  "explain": "tan⁻¹x − x ≈ −x³/3, divided by x³ gives −1/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f6d21c44-ba15-4ba6-85b9-56538243e01c",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (sin⁻¹x − x)/x³ = ?",
+  "formula": "sin⁻¹x = x + x³/6 + …",
+  "options": [
+   "1/3",
+   "-1/3",
+   "-1/6",
+   "1/6"
+  ],
+  "answer": 3,
+  "explain": "sin⁻¹x − x ≈ x³/6, divided by x³ gives 1/6.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2695a56e-74ba-4637-8727-19cdf24ec803",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→∞) x(ln(x+1) − ln x) = ?",
+  "formula": "ln(1+1/x)≈1/x",
+  "options": [
+   "e",
+   "0",
+   "1",
+   "∞"
+  ],
+  "answer": 2,
+  "explain": "x·ln(1+1/x) ≈ x·(1/x) = 1 as x→∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86999b54-77a9-4c6c-9b3a-f9d1ed676a94",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (3sin x − sin 3x)/x³ = ?",
+  "formula": "sin 3x = 3sin x − 4sin³x",
+  "options": [
+   "12",
+   "8",
+   "4",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "3sin x−sin 3x = 3sin x−(3sin x−4sin³x) = 4sin³x ≈ 4x³, limit = 4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8248b9f0-fc55-49f3-81f5-b12195f0d2ce",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (1 + sin x)^(1/x) = ?",
+  "formula": "1^∞ form: e^(lim g(f−1))",
+  "options": [
+   "e",
+   "e²",
+   "∞",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "(1+sin x)^(1/x): exponent = (1/x)·sin x → 1, so limit = e¹ = e.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1bc07c8b-e105-4b6c-b831-344ec8b4670b",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) (1 − cos 2x)/x² = ?",
+  "formula": "1−cos 2x = 2sin²x",
+  "options": [
+   "1",
+   "2",
+   "1/2",
+   "4"
+  ],
+  "answer": 1,
+  "explain": "2sin²x/x² = 2·(sin x/x)² → 2·1 = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2e44c37e-8378-44c1-b9e1-469919da856c",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) x·cosec x = lim(x→0) x/sin x = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "0",
+   "∞",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "x/sin x = 1/(sin x/x) → 1/1 = 1 as x→0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "67ecba5f-c54f-4723-a776-9c71455d7bd3",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→π/4) (tan x − 1)/(x − π/4) = ?",
+  "formula": "d/dx(tan x) = sec²x",
+  "options": [
+   "√2",
+   "1/2",
+   "2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "By definition of derivative, limit = sec²(π/4) = (√2)² = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "98cb3f00-8130-47d8-9b4d-4fe15f5a0efb",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) (x²)/(1 − cos x) = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "2",
+   "1/2",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "1−cosx ~ x²/2 for small x, so x²/(x²/2) = 2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6584479d-ec0c-4747-a1a0-83ebf2e8b547",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (1 + sin 2x)^(1/(3x)) = ?",
+  "formula": "e^(2/3)",
+  "options": [
+   "e^(2/3)",
+   "e^(1/3)",
+   "e",
+   "e²"
+  ],
+  "answer": 0,
+  "explain": "1^∞ form: exponent→∞·sin2x/3x→2/3, so limit = e^(2/3).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e022f746-f842-4cf5-898d-2fe9ff4ad747",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) (tan⁻¹ 3x)/(sin⁻¹ 2x) = ?",
+  "formula": "",
+  "options": [
+   "2/3",
+   "0",
+   "1",
+   "3/2"
+  ],
+  "answer": 3,
+  "explain": "Both → kx/x as x→0; (tan⁻¹3x)/x→3 and (sin⁻¹2x)/x→2, ratio = 3/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "07f0d118-e05d-4832-9242-bb6a73ec7388",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (ln(1 + sin x))/x = ?",
+  "formula": "",
+  "options": [
+   "sin 1",
+   "0",
+   "1",
+   "∞"
+  ],
+  "answer": 2,
+  "explain": "ln(1+sinx)/sinx→1 and sinx/x→1, so product →1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ca030430-c267-4fa6-94f9-4dc790ef4b19",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→∞) (1 − 1/x)^x = ?",
+  "formula": "e^(−1)",
+  "options": [
+   "1/e",
+   "0",
+   "e",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Standard form: lim(1+t)^(1/t)=e with t=−1/x gives e^(−1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9ea54cbc-b926-4b6d-abf4-e327400b9d8e",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (1 + 2x)^(1/x) = ?",
+  "formula": "e²",
+  "options": [
+   "e^(1/2)",
+   "e",
+   "1",
+   "e²"
+  ],
+  "answer": 3,
+  "explain": "1^∞ form: exponent (1/x)·2x=2 as x→0, so limit = e².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eb079ada-bbb4-4907-ae7f-16ce7dbbe959",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Algebra of limits (sum, product, quotient)",
+  "prompt": "lim(x→0) (e^x − 1)/sin x = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "∞",
+   "0",
+   "e"
+  ],
+  "answer": 0,
+  "explain": "Both →0 as x→0; (eˣ−1)/x →1 and x/sinx→1, product=1",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "815401e6-84fb-4467-9984-a0dd033cbd74",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Trigonometric limits: sin x/x, tan x/x",
+  "prompt": "lim(x→0) (tan 3x)/(sin 2x) = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "2/3",
+   "3",
+   "3/2"
+  ],
+  "answer": 3,
+  "explain": "lim tan(ax)/x=a, lim sin(bx)/x=b; ratio=3/2",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1467987e-e436-4234-abdf-1c126a1bd7dd",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (1 + ax)^(b/x) = ?",
+  "formula": "",
+  "options": [
+   "e^(ab)",
+   "e^(a+b)",
+   "e^(a/b)",
+   "e^(b/a)"
+  ],
+  "answer": 0,
+  "explain": "ln L=(b/x)·ln(1+ax)→(b/x)·ax=ab, so L=e^(ab)",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "26ff6ca8-1637-450c-a824-c9259c3f5224",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→0) sin(1/x) is:",
+  "formula": "",
+  "options": [
+   "Does not exist",
+   "1",
+   "0",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "sin(1/x) oscillates between −1 and 1 infinitely often near 0, so there is no limit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8f89fd77-0fe6-4081-8ea2-c125ecf47b58",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→0⁺) e^(1/x) equals:",
+  "formula": "",
+  "options": [
+   "e",
+   "∞",
+   "0",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "As x→0⁺, 1/x→+∞, so e^(1/x)→∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc3461a7-da12-490d-b3b6-05e2198b2ed7",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "Which of these is NOT an indeterminate form?",
+  "formula": "",
+  "options": [
+   "1^∞",
+   "∞ − ∞",
+   "∞⁰",
+   "0^∞"
+  ],
+  "answer": 3,
+  "explain": "0^∞ (base →0⁺) tends to 0, so it is determinate; the others are indeterminate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "386a43f8-8556-4e33-aeb0-dfc30be2e98c",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "Limit of f(x) as x→a depends on f(a) in which way?",
+  "formula": "",
+  "options": [
+   "Does not depend on f(a)",
+   "Equals f(a) if f(a) is finite",
+   "Must equal f(a)",
+   "Must be defined at a"
+  ],
+  "answer": 0,
+  "explain": "A limit depends only on values near a, not at a; f(a) may even be undefined.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "552a5534-c6c9-4f18-a4c8-ef2601c6c250",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→∞) (sin x)/x equals:",
+  "formula": "",
+  "options": [
+   "0",
+   "∞",
+   "1",
+   "Does not exist"
+  ],
+  "answer": 0,
+  "explain": "Since |sin x| ≤ 1, |sin x / x| ≤ 1/x → 0 (squeeze theorem).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5cac6eee-ca46-4840-847c-aa1727a2e090",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→∞) sin x is:",
+  "formula": "",
+  "options": [
+   "1",
+   "Does not exist",
+   "0",
+   "∞"
+  ],
+  "answer": 1,
+  "explain": "sin x keeps oscillating between −1 and 1 and never settles to one value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67f0eff7-183b-4ce5-9605-0e43a47f0db4",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "If g(x) ≤ f(x) ≤ h(x) and g, h → L at a, then f(x) at a:",
+  "formula": "",
+  "options": [
+   "Is undefined",
+   "Tends to L",
+   "May not have a limit",
+   "Tends to g(a)+h(a)"
+  ],
+  "answer": 1,
+  "explain": "Sandwich (squeeze) theorem: f is trapped between two functions with the same limit L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7cda13d2-5085-4894-92ed-fa60bc9dc5c2",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→a) f(x) exists as a finite number if and only if:",
+  "formula": "",
+  "options": [
+   "RHL exists",
+   "f(a) is defined",
+   "LHL and RHL exist and are equal",
+   "f is continuous near a"
+  ],
+  "answer": 2,
+  "explain": "The limit exists iff LHL = RHL, both finite. f(a) is irrelevant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d2f3504-64d3-4cc8-be1a-c8f298701983",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "LHL at x = 0 of 1/(1 + e^(1/x)) is:",
+  "formula": "",
+  "options": [
+   "0",
+   "1/2",
+   "1",
+   "∞"
+  ],
+  "answer": 2,
+  "explain": "As x→0⁻, e^(1/x)→0, so the value → 1/(1+0) = 1. The RHL is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2e64688d-3ab7-43cb-9b6b-7c27e79c4199",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "If lim f(x) exists at a but lim g(x) does not, then lim (f+g)(x) at a:",
+  "formula": "",
+  "options": [
+   "Exists",
+   "Does not exist",
+   "Equals lim f(x)",
+   "Equals 0"
+  ],
+  "answer": 1,
+  "explain": "If f+g had a limit, then g = (f+g) − f would too, a contradiction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3dfc8fd7-ef9d-4c26-927b-6867a35fa0da",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→0) x·[1/x] equals:",
+  "formula": "[·] = greatest integer",
+  "options": [
+   "1",
+   "Does not exist",
+   "∞",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "x[1/x] = 1 − x{1/x}, and 0 ≤ x{1/x} < |x| → 0, so the limit is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9b44a1b8-ad61-44dd-af56-0a6bb9bf3c58",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→a) [x] exists for which value of a?",
+  "formula": "",
+  "options": [
+   "a = 3",
+   "a = −2",
+   "a = 0",
+   "a = 5/2"
+  ],
+  "answer": 3,
+  "explain": "[x] is locally constant at non-integers, so the limit exists there. At every integer LHL ≠ RHL.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5bbd0b6-5a14-4048-bb40-fd88251c9a80",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Concept of limit, LHL and RHL, existence",
+  "prompt": "lim(x→∞) [x]/x, where [·] is the greatest integer function, equals:",
+  "formula": "x − 1 < [x] ≤ x",
+  "options": [
+   "∞",
+   "Does not exist",
+   "1",
+   "0"
+  ],
+  "answer": 2,
+  "explain": "Dividing x−1 < [x] ≤ x by x and using sandwich gives limit 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d8832504-5713-48b4-9368-d2add56cba87",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Algebra of limits (sum, product, quotient)",
+  "prompt": "Quotient rule lim f/g = (lim f)/(lim g) holds when both limits exist and:",
+  "formula": "lim f/g = lim f / lim g",
+  "options": [
+   "lim g ≠ 0",
+   "g(a) is defined",
+   "lim f ≠ 0",
+   "lim f = lim g"
+  ],
+  "answer": 0,
+  "explain": "The quotient rule needs the denominator's limit to be nonzero; otherwise the rule fails.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a00e660-9941-49f7-bf95-1eb52dc0e9dc",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Algebra of limits (sum, product, quotient)",
+  "prompt": "If lim(x→a) f/g is finite and lim(x→a) g = 0, then lim(x→a) f is:",
+  "formula": "f = (f/g)·g",
+  "options": [
+   "0",
+   "not determinable",
+   "∞",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "lim f = lim(f/g)·lim g = (finite)·0 = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f7051067-2815-44ee-90c2-83f49ef871ef",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Algebra of limits (sum, product, quotient)",
+  "prompt": "If lim f and lim (f+g) both exist at x→a, then lim g:",
+  "formula": "lim g = lim(f+g) − lim f",
+  "options": [
+   "exists and equals 0",
+   "exists and equals lim(f+g)",
+   "may not exist",
+   "exists and equals lim(f+g) − lim f"
+  ],
+  "answer": 3,
+  "explain": "Apply the difference rule to g = (f+g) − f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5985db94-b8e8-49fa-beba-a7ffec1f126f",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Algebra of limits (sum, product, quotient)",
+  "prompt": "If lim(x→a) f = 3 and lim(x→a) f·g exists, then lim(x→a) g:",
+  "formula": "g = (f·g)/f, lim f ≠ 0",
+  "options": [
+   "exists",
+   "exists only if lim f·g = 0",
+   "need not exist",
+   "equals 0"
+  ],
+  "answer": 0,
+  "explain": "Since lim f ≠ 0, g = (fg)/f, and the quotient rule gives lim g = lim(fg)/lim f.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "07b68695-efa3-42c2-a036-7ae80470297d",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→0) (1 + x)^(1/x) before evaluation?",
+  "formula": "",
+  "options": [
+   "∞^∞",
+   "0⁰",
+   "1^∞",
+   "∞⁰"
+  ],
+  "answer": 2,
+  "explain": "Base → 1 and exponent → ∞, so it is 1^∞ (the value is e).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "563a81cb-37a3-44ac-bacb-b1689026fce0",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→0⁺) xˣ?",
+  "formula": "",
+  "options": [
+   "∞⁰",
+   "0⁰",
+   "1^∞",
+   "0·∞"
+  ],
+  "answer": 1,
+  "explain": "Base → 0⁺ and exponent → 0, so it is 0⁰ (the value is 1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e6875682-9949-4602-8cd9-de4b3b3d53ae",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→∞) x^(1/x)?",
+  "formula": "",
+  "options": [
+   "∞/∞",
+   "∞⁰",
+   "0⁰",
+   "1^∞"
+  ],
+  "answer": 1,
+  "explain": "Base → ∞ and exponent → 0, so it is ∞⁰ (the value is 1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f42c133c-06c1-4086-8a93-ddbac5b12712",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→π/2) (sin x)^(tan x)?",
+  "formula": "",
+  "options": [
+   "0⁰",
+   "∞⁰",
+   "0^∞",
+   "1^∞"
+  ],
+  "answer": 3,
+  "explain": "sin x → 1 and tan x → ∞, so it is 1^∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cb5f3250-f9d6-4930-bc94-cd2760333605",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→0⁺) (cot x)^(sin x)?",
+  "formula": "",
+  "options": [
+   "1^∞",
+   "0⁰",
+   "∞⁰",
+   "∞^∞"
+  ],
+  "answer": 2,
+  "explain": "cot x → ∞ and sin x → 0, so it is ∞⁰.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55e30c35-6b44-43ed-8cee-46bb27f2c8b4",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→0) (cos x)^(1/x²)?",
+  "formula": "",
+  "options": [
+   "0⁰",
+   "1^∞",
+   "∞⁰",
+   "0^∞"
+  ],
+  "answer": 1,
+  "explain": "cos x → 1 and 1/x² → ∞, so it is 1^∞ (the value is e^(−1/2)).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2821786-05c1-4a39-b686-7f2c2278d552",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→1) x^(1/(1−x))?",
+  "formula": "",
+  "options": [
+   "0/0",
+   "∞⁰",
+   "0⁰",
+   "1^∞"
+  ],
+  "answer": 3,
+  "explain": "The base → 1 and the exponent → ±∞, so it is 1^∞ (the value is 1/e).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2eec40b-b707-4855-b29c-9552a74b4cf5",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Is lim(x→∞) (sin x)/x of the form ∞/∞?",
+  "formula": "",
+  "options": [
+   "Yes, apply L'Hôpital",
+   "No, it is bounded/∞ and equals 0",
+   "Yes, the limit does not exist",
+   "No, it is 0/0"
+  ],
+  "answer": 1,
+  "explain": "The numerator is bounded, so the form is not ∞/∞; by the sandwich theorem the limit is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c0486104-960f-4388-869d-21682d9c5a3c",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "L'Hôpital's rule applies directly only to which forms?",
+  "formula": "",
+  "options": [
+   "0·∞ and 1^∞",
+   "0/0 and ∞/∞",
+   "0⁰ and ∞⁰",
+   "∞ − ∞ and 1^∞"
+  ],
+  "answer": 1,
+  "explain": "The rule needs a quotient of the form 0/0 or ∞/∞. Other forms must first be converted to one of these.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e37149a5-ad71-4d4c-9b0f-26b3e1be409a",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→0) (1 − cos x)/x²?",
+  "formula": "",
+  "options": [
+   "0·∞",
+   "∞/∞",
+   "1^∞",
+   "0/0"
+  ],
+  "answer": 3,
+  "explain": "Numerator and denominator both → 0, so it is 0/0 (the value is ½).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47959b64-23a3-48fc-be72-4a8a9581cc97",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "lim(x→0) x·sin(1/x) is best described as:",
+  "formula": "",
+  "options": [
+   "Determinate: bounded × 0 = 0",
+   "0·∞ indeterminate",
+   "0/0 indeterminate",
+   "Determinate: limit is 1"
+  ],
+  "answer": 0,
+  "explain": "sin(1/x) is bounded and x → 0, so the product → 0 (squeeze). It is not 0·∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3ca93c7-ff2a-45ef-99eb-c7b4fd1bf47b",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→0⁺) (sin x)^(tan x)?",
+  "formula": "",
+  "options": [
+   "0⁰",
+   "∞⁰",
+   "0^∞",
+   "1^∞"
+  ],
+  "answer": 0,
+  "explain": "Base sin x → 0⁺ and exponent tan x → 0, so it is 0⁰.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ae1e6b4d-5985-4264-9d77-41aa0108577b",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→∞) x·sin(1/x) before evaluation?",
+  "formula": "",
+  "options": [
+   "Determinate, equals 0",
+   "∞/∞",
+   "1^∞",
+   "∞ · 0"
+  ],
+  "answer": 3,
+  "explain": "x → ∞ and sin(1/x) → 0, so it is ∞·0 (the limit is 1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c8cbbe4a-16bd-4b13-a104-ccd84ed7e031",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "For lim(x→∞) (x + sin x)/x, applying L'Hôpital's rule:",
+  "formula": "",
+  "options": [
+   "Is inconclusive, since (1 + cos x) has no limit",
+   "Gives limit 2",
+   "Gives limit ∞",
+   "Gives limit 0"
+  ],
+  "answer": 0,
+  "explain": "The derivative ratio 1 + cos x oscillates, so the rule fails; the limit is 1 by division.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5a86de04-cd42-4b66-8b2e-95476577cfdd",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Indeterminate forms identification",
+  "prompt": "Form of lim(x→π/2⁻) (sec x − tan x) before evaluation?",
+  "formula": "",
+  "options": [
+   "1^∞",
+   "0/0",
+   "∞ − ∞",
+   "∞ · 0"
+  ],
+  "answer": 2,
+  "explain": "Both sec x and tan x → +∞ as x → π/2⁻, so the form is ∞ − ∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7c14d24d-94e6-42b6-bfcc-48ce471e83ac",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→a) (xⁿ − aⁿ)/(x − a) = ?",
+  "formula": "n·aⁿ⁻¹",
+  "options": [
+   "(n−1)·aⁿ⁻¹",
+   "n·aⁿ⁻¹",
+   "n·aⁿ",
+   "aⁿ⁻¹/n"
+  ],
+  "answer": 1,
+  "explain": "Standard result: it is the derivative of xⁿ at x = a, namely n aⁿ⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7e8f9d63-445c-4569-a9b8-e3af466483be",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→a) (√x − √a)/(x − a), a > 0, = ?",
+  "formula": "",
+  "options": [
+   "√a/2",
+   "1/(2√a)",
+   "2√a",
+   "1/√a"
+  ],
+  "answer": 1,
+  "explain": "n = 1/2 gives (1/2)a^(−1/2) = 1/(2√a).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e3275c92-9c80-4c3c-9c49-f3044dc13b3a",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→0) ((1 + x)ⁿ − 1)/x = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "n",
+   "0",
+   "n − 1"
+  ],
+  "answer": 1,
+  "explain": "Put x−1 → h, a = 1: n·1ⁿ⁻¹ = n.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02fcf2bd-602f-4e2f-866b-cc99121e44d0",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→2) (x³ − 8)/(x² − 4) = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "3/2",
+   "4",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "(3·4)/(2·2) = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5fd36f0-9ee5-48a0-9586-8b1618f805c0",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→1) (x + x² + x³ + … + x¹⁰ − 10)/(x − 1) = ?",
+  "formula": "Σ k·1ᵏ⁻¹ = 1 + 2 + … + 10",
+  "options": [
+   "100",
+   "55",
+   "45",
+   "10"
+  ],
+  "answer": 1,
+  "explain": "Split into (xᵏ − 1)/(x − 1) → k each; sum 1 to 10 = 55.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87e8c138-cd84-4e67-918e-3c5898444827",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "For a ≠ 0, lim(x→a) (x⁵ − a⁵)/(x³ − a³) = ?",
+  "formula": "(xᵐ − aᵐ)/(xⁿ − aⁿ) → (m/n)·aᵐ⁻ⁿ",
+  "options": [
+   "(5/3)a⁸",
+   "(5/3)a²",
+   "(3/5)a²",
+   "(5/3)a"
+  ],
+  "answer": 1,
+  "explain": "Divide by (x − a): 5a⁴/(3a²) = (5/3)a².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8dc5abed-6591-46bc-9524-6ece811eb025",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (e^(3x) − 1)/(e^(2x) − 1) = ?",
+  "formula": "",
+  "options": [
+   "3",
+   "2/3",
+   "3/2",
+   "1"
+  ],
+  "answer": 2,
+  "explain": "Numerator ≈ 3x, denominator ≈ 2x, so 3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f714847c-311f-4996-86e5-ca1e0cebef7d",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) logₐ(1 + x)/x = ? (a > 0, a ≠ 1)",
+  "formula": "",
+  "options": [
+   "ln a",
+   "1",
+   "a",
+   "1/ln a"
+  ],
+  "answer": 3,
+  "explain": "logₐ(1+x) = ln(1+x)/ln a, so the limit is 1/ln a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "35d45b23-389b-4f4e-825b-939e1cc46661",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0⁻) e^(1/x) = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "e",
+   "∞"
+  ],
+  "answer": 1,
+  "explain": "As x→0⁻, 1/x → −∞, so e^(1/x) → 0. (On the right side it is ∞.)",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6b4f6296-7b20-4a0f-8c25-4700d73574f7",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (3ˣ − 2ˣ)/x = ?",
+  "formula": "(aˣ − bˣ)/x → ln(a/b)",
+  "options": [
+   "ln 6",
+   "ln(3/2)",
+   "1",
+   "ln 3 + ln 2"
+  ],
+  "answer": 1,
+  "explain": "(3ˣ−1)/x → ln 3 and (2ˣ−1)/x → ln 2, so the difference is ln 3 − ln 2 = ln(3/2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9291354a-0feb-4ca1-854a-395e7dc2817c",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (2ˣ − 1)/(3ˣ − 1) = ?",
+  "formula": "ln 2 / ln 3",
+  "options": [
+   "2/3",
+   "ln 3 / ln 2",
+   "ln(2/3)",
+   "ln 2 / ln 3"
+  ],
+  "answer": 3,
+  "explain": "Divide numerator and denominator by x: ln 2 / ln 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72579176-5d48-4212-b38a-2c65d8c10995",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→∞) (sin(1/x) + cos(1/x))ˣ = ?",
+  "formula": "",
+  "options": [
+   "e^(1/2)",
+   "1",
+   "e",
+   "e²"
+  ],
+  "answer": 2,
+  "explain": "f−1 ~ 1/x, so x(f−1) → 1 and the limit is e.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abdf590a-47b9-4c2b-98cd-e26dabf4ec48",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→∞) (1 + 1/x)^(x²) = ?",
+  "formula": "",
+  "options": [
+   "∞",
+   "1",
+   "e",
+   "e²"
+  ],
+  "answer": 0,
+  "explain": "g(f−1) = x²·(1/x) = x → ∞, so the limit is e^∞ = ∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "765a9add-ad4a-437e-9493-71da8e18d3f1",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "For polynomials P, Q with deg P < deg Q, lim(x→∞) P(x)/Q(x) = ?",
+  "formula": "",
+  "options": [
+   "Ratio of leading coefficients",
+   "∞",
+   "1",
+   "0"
+  ],
+  "answer": 3,
+  "explain": "The denominator grows faster, so the ratio tends to 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "396d8590-4b36-4ad5-9845-d32980961e73",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) (√(x²+1) − x) = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "0",
+   "1",
+   "∞"
+  ],
+  "answer": 1,
+  "explain": "Rationalise: 1/(√(x²+1)+x) → 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4928bc13-fde1-4136-87af-5b5a98ffa32f",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) (2ˣ + 3ˣ)^(1/x) = ?",
+  "formula": "",
+  "options": [
+   "6",
+   "3",
+   "5",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "The larger base dominates: (3ˣ)^(1/x) = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca15965d-0127-433a-ab6c-11a1bbaae72f",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→∞) (x + sin x)/x = 1, but f'/g' = 1 + cos x has no limit. This shows?",
+  "formula": "",
+  "options": [
+   "The limit is actually non-existent",
+   "Rule needs ∞/∞ to be 0/0",
+   "Converse of L'Hôpital's rule is false",
+   "The rule fails whenever f is trigonometric"
+  ],
+  "answer": 2,
+  "explain": "If lim f'/g' does not exist, lim f/g may still exist.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d859f8d9-4845-44ab-86b7-e194304ce75e",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→π/2) (tan x)/(tan 3x) = ?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "1/3",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "∞/∞ form: sec²x/(3sec²3x) = cos²3x/(3cos²x), and cos3x ≈ −3cos x, so the limit is 9/3 = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d6a94fb2-a730-4da7-91cc-851c345dabfc",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→0) (1+x)/(2+x): applying f'/g' blindly gives 1. The true value is?",
+  "formula": "Use only if form is 0/0 or ∞/∞",
+  "options": [
+   "1/2",
+   "0",
+   "Does not exist",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "Form is 1/2, not indeterminate, so L'Hôpital is invalid; direct substitution gives 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e206cc93-585f-4fd2-b630-b85b3076a48a",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (eˣ − e⁻ˣ − 2x)/x³ = ?",
+  "formula": "eˣ − e⁻ˣ = 2(x + x³/3! + …)",
+  "options": [
+   "1/6",
+   "1/3",
+   "1",
+   "2/3"
+  ],
+  "answer": 1,
+  "explain": "eˣ − e⁻ˣ − 2x = 2x³/6 + … = x³/3 + …, so the limit is 1/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "926c524e-5570-4900-9ca9-76701fa4e1ae",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Series expansions (sin, cos, e^x, ln, binomial)",
+  "prompt": "lim(x→0) (e^(x²) − cos x)/x² = ?",
+  "formula": "e^(x²) ≈ 1 + x², cos x ≈ 1 − x²/2",
+  "options": [
+   "3/2",
+   "1",
+   "1/2",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "Numerator ≈ (1 + x²) − (1 − x²/2) = 3x²/2, so the limit is 3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2fbc2d86-8544-4630-8461-011d036203da",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Sandwich (squeeze) theorem",
+  "prompt": "Which inequality on (0, π/2) is used to prove lim(x→0) sin x / x = 1 by squeezing?",
+  "formula": "",
+  "options": [
+   "cos x < x < sin x",
+   "x < sin x < tan x",
+   "sin x < x < tan x",
+   "tan x < x < sin x"
+  ],
+  "answer": 2,
+  "explain": "sin x < x < tan x gives cos x < sin x/x < 1; cos x → 1, so the limit is 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "647aa786-2650-4113-9e9f-d2ba660fe7f1",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Sandwich (squeeze) theorem",
+  "prompt": "If |f(x)| ≤ x² for all x, then lim(x→0) f(x)/x equals?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "2",
+   "Does not exist"
+  ],
+  "answer": 1,
+  "explain": "|f(x)/x| ≤ |x| → 0, so by squeeze f(x)/x → 0 (hence f(0)=0 and f′(0)=0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a42b96a-528d-4226-b286-a863314e1bff",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Sandwich (squeeze) theorem",
+  "prompt": "lim(x→∞) (3x + sin x)/(x + cos x) = ?",
+  "formula": "",
+  "options": [
+   "3",
+   "1",
+   "Does not exist",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "sin x and cos x are bounded, so divide by x: (3 + sin x/x)/(1 + cos x/x) → 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d27c16ea-90c7-418f-aa66-26cee12a679d",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→a) (sin x / sin a)^(1/(x−a)), sin a ≠ 0, = ?",
+  "formula": "",
+  "options": [
+   "e^(cot a)",
+   "cot a",
+   "e^(cos a)",
+   "e^(tan a)"
+  ],
+  "answer": 0,
+  "explain": "(sin x − sin a)/(sin a·(x−a)) → cos a/sin a = cot a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "96678ce0-d8dd-4a48-8608-e4f2b1b74799",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "L'Hôpital at x→a needs which condition on g'?",
+  "formula": "",
+  "options": [
+   "g'(x) = f'(x) near a",
+   "g'(x) ≠ 0 near a",
+   "g'(a) = 0",
+   "g' continuous only at a"
+  ],
+  "answer": 1,
+  "explain": "f, g differentiable near a with g' ≠ 0 near a, and lim f'/g' must exist.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "43599a95-f908-41b4-906f-0b4b18d74b4a",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→0) (1 + tan²√x)^(1/(2x)) = ?",
+  "formula": "",
+  "options": [
+   "e²",
+   "e",
+   "1",
+   "e^(1/2)"
+  ],
+  "answer": 3,
+  "explain": "tan²√x ≈ x, so exponent = x/(2x) = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "176ec5a5-da62-4291-822b-36b1a8700272",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→0) (cos x − cos 3x)/x² = ?",
+  "formula": "",
+  "options": [
+   "8",
+   "2",
+   "9/2",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "0/0 form; L'Hôpital gives (−sin x + 3 sin 3x)/(2x) → (−1 + 9)/2 = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "36e55c58-e28a-4d33-b746-cbcde327cbe2",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→1) (√x + x^(1/3) − 2)/(x − 1) = ?",
+  "formula": "split into two standard limits",
+  "options": [
+   "1/6",
+   "5/6",
+   "2/3",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Subtract 1 from each term: 1/2 + 1/3 = 5/6.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c1a6b5b7-11e9-4654-bea0-deb08b792415",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Algebra of limits (sum, product, quotient)",
+  "prompt": "If lim(x→a) f(x) = 0 but lim(x→a) g(x) does not exist, then lim(x→a) f(x)·g(x):",
+  "formula": "",
+  "options": [
+   "exists and is nonzero",
+   "does not exist",
+   "always equals 0",
+   "may or may not exist"
+  ],
+  "answer": 3,
+  "explain": "f=x,g=sin(1/x) gives 0; f=x,g=1/x gives 1; f=x,g=1/x² gives no finite limit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5971d48f-f28e-4f99-9b3f-97b7bf024d57",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Algebra of limits (sum, product, quotient)",
+  "prompt": "If lim(x→a) [f(x)]² exists, then lim(x→a) f(x):",
+  "formula": "",
+  "options": [
+   "exists and is non-negative",
+   "need not exist",
+   "always exists",
+   "exists only if it is nonzero"
+  ],
+  "answer": 1,
+  "explain": "f = x/|x| at 0: f² → 1 but f has no limit. Only lim f² = 0 forces lim f = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1956f569-8d3f-46ff-880f-8b2c65a32d2e",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→0) ((1 + x)⁹ − (1 − x)⁹)/x = ?",
+  "formula": "",
+  "options": [
+   "18",
+   "9",
+   "81",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Each part contributes 9 (derivative +9 and −(−9)), so the total is 18.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3ff30561-f003-41a5-9a23-9cf7300ae0ed",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "If lim(x→a) (x³ − a³)/(x − a) = 27, the possible values of a are:",
+  "formula": "3a² = 27",
+  "options": [
+   "±9",
+   "9 only",
+   "±3",
+   "3 only"
+  ],
+  "answer": 2,
+  "explain": "The limit is 3a² = 27, so a² = 9 and a = ±3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "046bb737-8f3a-4be5-9fa0-20ca966b9ec8",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→2) (x − 2)/(x³ − 8) = ?",
+  "formula": "reciprocal of n·aⁿ⁻¹",
+  "options": [
+   "1/12",
+   "12",
+   "1/6",
+   "1/8"
+  ],
+  "answer": 0,
+  "explain": "This is the reciprocal of the standard limit: 1/(3·2²) = 1/12.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87dcba4d-0ada-41ac-aab0-a234484ac9d5",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→1) (x^(3/2) − x^(1/2))/(x − 1) = ?",
+  "formula": "split: (x^(3/2) − 1) − (x^(1/2) − 1)",
+  "options": [
+   "3/2",
+   "1",
+   "2",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "Limit = 3/2 − 1/2 = 1, using n·aⁿ⁻¹ on each part.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "db5f0933-fe4a-4918-a3bb-8a53f69ad50e",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→e) (eˣ − xᵉ)/(x − e) = ?",
+  "formula": "",
+  "options": [
+   "eᵉ",
+   "eᵉ(e − 1)",
+   "0",
+   "eᵉ⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Derivative of eˣ at e is eᵉ; derivative of xᵉ at e is e·eᵉ⁻¹ = eᵉ. The difference is 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ed2c3105-381a-41bc-9c26-0a78c4b4f1da",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Standard limit (x^n - a^n)/(x - a)",
+  "prompt": "lim(x→2) (xˣ − 4)/(x − 2) = ?",
+  "formula": "d/dx(xˣ) = xˣ(1 + ln x)",
+  "options": [
+   "4(1 + ln 2)",
+   "4 ln 2",
+   "8",
+   "4"
+  ],
+  "answer": 0,
+  "explain": "The limit is the derivative of xˣ at 2: 2²(1 + ln 2) = 4(1 + ln 2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "294424d4-b324-473a-bc29-407c8f3531e2",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (e^(5x) − e^(2x))/x = ?",
+  "formula": "(e^(ax) − e^(bx))/x → a − b",
+  "options": [
+   "3",
+   "7",
+   "e³",
+   "ln(5/2)"
+  ],
+  "answer": 0,
+  "explain": "(e^(5x)−1)/x − (e^(2x)−1)/x → 5 − 2 = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7dfaf7a7-2479-4aa5-b4ca-9f6fe3182b9c",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→e) (ln x − 1)/(x − e) = ?",
+  "formula": "derivative of ln x at x = e",
+  "options": [
+   "e",
+   "1/e",
+   "0",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Limit is d/dx(ln x) at x = e, which is 1/e.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5377f59-189f-4da2-aef5-28f0c077cfac",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Exponential & log limits: (e^x-1)/x, ln(1+x)/x",
+  "prompt": "lim(x→0) (e^(2x) − 1)/sin x = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "2",
+   "1/2"
+  ],
+  "answer": 2,
+  "explain": "(e^(2x)−1)/(2x)·(2x/sin x) → 1·2 = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d0e9b066-4117-413b-bb45-b38ff9382bcf",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "1^infinity form: e^(lim g(f-1))",
+  "prompt": "lim(x→π/4) (tan x)^(tan 2x) = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "e",
+   "e²",
+   "e⁻¹"
+  ],
+  "answer": 3,
+  "explain": "(t−1)·2t/(1−t²) = −2t/(1+t) → −1 as t = tan x → 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1955994f-75fd-4977-afe4-11af6d71cce0",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) tan⁻¹x = ?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "∞",
+   "π/2",
+   "π"
+  ],
+  "answer": 2,
+  "explain": "The principal value of tan⁻¹ is bounded in (−π/2, π/2), with supremum π/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8e61ea02-6c5b-4135-8e4a-3becb3f7f522",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) cot⁻¹x (principal value, range (0, π)) = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "π",
+   "π/2",
+   "∞"
+  ],
+  "answer": 0,
+  "explain": "cot⁻¹x = π/2 − tan⁻¹x → π/2 − π/2 = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0bc80216-a214-4af5-aa5e-24758db958ea",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(n→∞) (1 + 2 + … + n)/n² = ?",
+  "formula": "n(n+1)/2 ÷ n²",
+  "options": [
+   "1",
+   "∞",
+   "1/2",
+   "1/3"
+  ],
+  "answer": 2,
+  "explain": "Sum = n(n+1)/2, so the ratio is (n+1)/(2n) → 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9fe7d501-bfad-4540-b24c-1ab7d6eef052",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(n→∞) (1³ + 2³ + … + n³)/n⁴ = ?",
+  "formula": "Σk³ = [n(n+1)/2]²",
+  "options": [
+   "1",
+   "1/4",
+   "1/3",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "Σk³ = n²(n+1)²/4, so dividing by n⁴ gives 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ffcaea7e-2364-4c8d-b075-935d482a8437",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) (x − √(x² − 4x)) = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "0",
+   "2",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "Rationalise: 4x/(x + √(x²−4x)) → 4x/2x = 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4dcb7282-8c0c-4431-baa1-6e10efdc55f6",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Limits at infinity, rational functions",
+  "prompt": "lim(x→∞) ((x+3)/(x+1))ˣ = ?",
+  "formula": "(1 + 2/(x+1))ˣ",
+  "options": [
+   "e³",
+   "1",
+   "e²",
+   "e"
+  ],
+  "answer": 2,
+  "explain": "1^∞ form: exponent x·2/(x+1) → 2, so the limit is e².",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "18a02c21-746f-4fcb-8b76-ce445804e234",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→∞) ln(x²+1)/ln x = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1",
+   "∞",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "∞/∞: (2x/(x²+1))/(1/x) = 2x²/(x²+1) → 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8d90d0ba-5c7a-4159-b228-9383c457d48c",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "For lim f·g of form 0·∞, which rewriting lets L'Hôpital's rule apply?",
+  "formula": "f·g = f/(1/g)",
+  "options": [
+   "ln f · ln g",
+   "f' · g' directly",
+   "f/(1/g) as a quotient",
+   "f + g as a sum"
+  ],
+  "answer": 2,
+  "explain": "Convert 0·∞ to 0/0 or ∞/∞ by writing f·g = f/(1/g); only then differentiate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f44ed1af-5287-464c-958f-e1f258ab05c7",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "When may L'Hôpital's rule be applied repeatedly?",
+  "formula": "",
+  "options": [
+   "Only if f' = g'",
+   "Only twice at most",
+   "Until the form is no longer 0/0 or ∞/∞",
+   "Always, whatever the form"
+  ],
+  "answer": 2,
+  "explain": "Reapply only while the new quotient is still 0/0 or ∞/∞; stop once it is determinate.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cfc1b7a4-9fc7-4b1b-93bd-a46eeebc649f",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→0) (eˣ + e⁻ˣ − 2)/x² = ?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "2",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Apply the rule twice: (eˣ − e⁻ˣ)/2x → (eˣ + e⁻ˣ)/2 → 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2db857b6-15a6-42ba-b79f-61d9f5a9cfed",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→0) (eˣ − cos x)/x²: after one L'Hôpital step the limit is?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "Does not exist",
+   "0",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "(eˣ + sin x)/2x has the form 1/0, so stop. The one-sided limits are +∞ and −∞.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9cc51fa1-30fd-45bd-b125-2527cc5829ca",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "L'Hospital's rule for 0/0, inf/inf",
+  "prompt": "lim(x→0) (1 − cos x·cos 2x)/x² = ?",
+  "formula": "",
+  "options": [
+   "2",
+   "3/2",
+   "1/2",
+   "5/2"
+  ],
+  "answer": 3,
+  "explain": "Numerator ~ x²/2 + (2x)²/2 = 5x²/2; one L'Hôpital step gives sin x cos 2x + 2cos x sin 2x over 2x → 5/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "723d3378-ea4b-45d3-8f11-dbd7869f7d15",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Sandwich (squeeze) theorem",
+  "prompt": "lim(n→∞) Σ (k=1 to n) 1/√(n²+k) equals?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "∞",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Each term lies between 1/√(n²+n) and 1/√(n²+1); n terms squeeze the sum to 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6cfcd4da-c5ed-433e-95cd-c05d114180a9",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Sandwich (squeeze) theorem",
+  "prompt": "For the squeeze theorem, g(x) ≤ f(x) ≤ h(x) must hold:",
+  "formula": "",
+  "options": [
+   "Only at x = a",
+   "In a deleted neighbourhood of a",
+   "Only for x > a",
+   "Only for integer x"
+  ],
+  "answer": 1,
+  "explain": "The inequality is needed near a, on both sides; the value at a itself is irrelevant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "521ada78-690e-4414-995e-c789e7739d2b",
+  "subject": "Mathematics",
+  "chapter": "Limits",
+  "topic": "Sandwich (squeeze) theorem",
+  "prompt": "lim(n→∞) n!/nⁿ = ?",
+  "formula": "0 < n!/nⁿ ≤ 1/n",
+  "options": [
+   "0",
+   "∞",
+   "1/e",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "n!/nⁿ = (1/n)(2/n)…(n/n) ≤ 1/n → 0, so the squeeze gives 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

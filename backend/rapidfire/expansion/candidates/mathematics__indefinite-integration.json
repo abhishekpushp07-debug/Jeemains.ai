@@ -1,0 +1,3759 @@
+[
+ {
+  "prompt": "If F′(x) = G′(x) on an interval, then F(x) − G(x) is:",
+  "formula": "",
+  "options": [
+   "a constant",
+   "zero only",
+   "a linear function",
+   "a function of x²"
+  ],
+  "answer": 0,
+  "explain": "Zero derivative on an interval means constant, so antiderivatives differ by a constant.",
+  "kind": "concept",
+  "id": "5ade8261-2696-444f-a4a3-02226aacf2f1",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "∫ dx/√x equals:",
+  "formula": "∫ x^(−1/2) dx",
+  "options": [
+   "2√x + C",
+   "√x/2 + C",
+   "−2x^(−3/2) + C",
+   "x^(1/2) + C"
+  ],
+  "answer": 0,
+  "explain": "Using xⁿ⁺¹/(n+1) with n = −1/2 gives x^(1/2)/(1/2) = 2√x.",
+  "kind": "formula",
+  "id": "18a7cd92-6eb3-43ba-ac01-002ce37c2167",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "∫ 0 dx equals:",
+  "formula": "",
+  "options": [
+   "0",
+   "C",
+   "x + C",
+   "1 + C"
+  ],
+  "answer": 1,
+  "explain": "Derivative of a constant is 0, so the antiderivative of 0 is an arbitrary constant C.",
+  "kind": "fact",
+  "id": "770166c0-6aa3-473f-babf-cae58ddd0431",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "∫ xⁿ dx = xⁿ⁺¹/(n+1) + C is valid for:",
+  "formula": "",
+  "options": [
+   "all real n",
+   "n ≠ −1",
+   "n > 0 only",
+   "n a positive integer only"
+  ],
+  "answer": 1,
+  "explain": "For n = −1 the denominator vanishes; the result is ln|x| + C.",
+  "kind": "exception",
+  "id": "cab64816-d277-4a2c-9c25-35ca90299c79",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "The graphs of different antiderivatives of f(x) are related by:",
+  "formula": "",
+  "options": [
+   "Vertical translation",
+   "Horizontal translation",
+   "Reflection in x-axis",
+   "Different slopes at same x"
+  ],
+  "answer": 0,
+  "explain": "They differ by a constant C, and all have the same slope f(x) at each x.",
+  "kind": "graph",
+  "id": "7944da91-d67b-4a81-b8c9-fe1a04a2f39b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "∫ dx/(1 + x²) equals (principal values):",
+  "formula": "",
+  "options": [
+   "tan⁻¹x + C",
+   "ln(1 + x²) + C",
+   "sec⁻¹x + C",
+   "−cot x + C"
+  ],
+  "answer": 0,
+  "explain": "d/dx (tan⁻¹x) = 1/(1 + x²). Also equals −cot⁻¹x + C.",
+  "kind": "formula",
+  "id": "a932da66-5b63-471f-ad06-1be010f49062",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "∫ dx/√(1 − x²) equals?",
+  "formula": "",
+  "options": [
+   "cos⁻¹x + C",
+   "tan⁻¹x + C",
+   "sec⁻¹x + C",
+   "sin⁻¹x + C"
+  ],
+  "answer": 3,
+  "explain": "d/dx(sin⁻¹x) = 1/√(1−x²); also equals −cos⁻¹x + C.",
+  "kind": "formula",
+  "id": "364f9878-8263-4ce5-9226-258cb6126e56",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ dx/(x√(x² − 1)), x > 1, equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹x + C",
+   "sec⁻¹x + C",
+   "cosec⁻¹x + C",
+   "ln|x + √(x²−1)| + C"
+  ],
+  "answer": 1,
+  "explain": "d/dx(sec⁻¹x) = 1/(|x|√(x²−1)).",
+  "kind": "formula",
+  "id": "22048e28-0965-40f7-9a8a-f33e32b1828e",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ dx/(x² + a²) equals?",
+  "formula": "",
+  "options": [
+   "a tan⁻¹(x/a) + C",
+   "tan⁻¹(x/a) + C",
+   "(1/a) tan⁻¹(x/a) + C",
+   "(1/2a) ln|(x−a)/(x+a)| + C"
+  ],
+  "answer": 2,
+  "explain": "Put x = a tanθ; the result is (1/a) tan⁻¹(x/a) + C.",
+  "kind": "formula",
+  "id": "215f0e7a-19f5-4eb1-be96-3c553cd968bc",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ dx/(a² − x²) equals?",
+  "formula": "",
+  "options": [
+   "(1/2a) ln|(x−a)/(x+a)| + C",
+   "sin⁻¹(x/a) + C",
+   "(1/2a) ln|(a+x)/(a−x)| + C",
+   "(1/a) tan⁻¹(x/a) + C"
+  ],
+  "answer": 2,
+  "explain": "Sign flips from x²−a²: (1/2a) ln|(a+x)/(a−x)| + C.",
+  "kind": "formula",
+  "id": "575c0a41-0762-49e9-99cf-e2f86371fa88",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ sec²x dx equals?",
+  "formula": "",
+  "options": [
+   "tan x + C",
+   "−cot x + C",
+   "sec x + C",
+   "sec x tan x + C"
+  ],
+  "answer": 0,
+  "explain": "d/dx(tan x) = sec²x.",
+  "kind": "formula",
+  "id": "991c5370-0eeb-4153-afb9-a0b510aaead7",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ dx/√(x² − a²), x > a, equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(x/a) + C",
+   "ln|x + √(x²−a²)| + C",
+   "sec⁻¹(x/a) + C",
+   "ln|x − √(x²−a²)|/a + C"
+  ],
+  "answer": 1,
+  "explain": "Standard: ln|x + √(x²−a²)| + C.",
+  "kind": "formula",
+  "id": "e25f5bc0-96cb-47e5-b00c-aa49db5c7157",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ cosec x dx equals?",
+  "formula": "",
+  "options": [
+   "ln|tan(x/2)| + C",
+   "ln|cot(x/2)| + C",
+   "ln|cosec x + cot x| + C",
+   "−cosec x cot x + C"
+  ],
+  "answer": 0,
+  "explain": "∫cosec x dx = ln|tan(x/2)| = ln|cosec x − cot x| + C.",
+  "kind": "formula",
+  "id": "18c8e5d3-f750-4068-a00b-aef2cfff84d3",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "For f(x) ≠ 0, ∫ f′(x)/f(x) dx equals",
+  "formula": "∫ f′/f dx = ln|f(x)| + C",
+  "options": [
+   "ln f(x) + C only when f > 0",
+   "1/f(x) + C",
+   "ln|f(x)| + C",
+   "f(x)·ln|f′(x)| + C"
+  ],
+  "answer": 2,
+  "explain": "Put t = f(x): ∫dt/t = ln|t| + C, with the modulus kept.",
+  "kind": "formula",
+  "id": "8f50ff11-9083-4470-9bd4-f8155748501c",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "If ∫f(x)dx = F(x) + C, then ∫f(ax+b)dx (a≠0) equals",
+  "formula": "(1/a)F(ax+b) + C",
+  "options": [
+   "aF(ax+b) + C",
+   "F(ax+b) + C",
+   "(1/a)F(x) + b + C",
+   "(1/a)F(ax+b) + C"
+  ],
+  "answer": 3,
+  "explain": "Substituting t = ax+b gives dx = dt/a, which brings in the factor 1/a.",
+  "kind": "formula",
+  "id": "2b6c0206-6843-49c0-bb17-02207719a4a6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "Any two antiderivatives of the same function on an interval differ by",
+  "formula": "F₁(x) − F₂(x) = constant",
+  "options": [
+   "a linear function of x",
+   "a constant",
+   "a multiple of f(x)",
+   "a function with zero integral"
+  ],
+  "answer": 1,
+  "explain": "Their derivatives are equal, so their difference has zero derivative and is a constant on the interval.",
+  "kind": "concept",
+  "id": "50249962-582e-4736-a690-159ab76602fb",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "For n ≠ −1, ∫[f(x)]ⁿ f′(x)dx equals",
+  "formula": "[f(x)]ⁿ⁺¹/(n+1) + C",
+  "options": [
+   "[f(x)]ⁿ⁺¹ + C",
+   "n[f(x)]ⁿ⁻¹ + C",
+   "[f(x)]ⁿ⁺¹/(n+1) + C",
+   "[f(x)]ⁿ⁺¹/((n+1)f′(x)) + C"
+  ],
+  "answer": 2,
+  "explain": "Put t = f(x), so dt = f′(x)dx, and ∫tⁿdt = tⁿ⁺¹/(n+1) + C.",
+  "kind": "formula",
+  "id": "14fd8b04-4a63-405f-9d61-c275abda0363",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "∫ f′(x)/√f(x) dx (f > 0) equals",
+  "formula": "2√f(x) + C",
+  "options": [
+   "√f(x) + C",
+   "2√f(x) + C",
+   "1/(2√f(x)) + C",
+   "ln√f(x) + C"
+  ],
+  "answer": 1,
+  "explain": "Put t = f(x): ∫t^(−1/2)dt = 2√t + C.",
+  "kind": "formula",
+  "id": "7724dcc3-416d-42fc-9808-80929b9d47f1",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "∫[f(x) + g(x)]dx = ∫f dx + ∫g dx is the property of which type?",
+  "formula": "",
+  "options": [
+   "Linearity (sum rule)",
+   "Product rule",
+   "Chain rule",
+   "Substitution rule"
+  ],
+  "answer": 0,
+  "explain": "Integration is linear: it distributes over sums and constant multiples.",
+  "kind": "concept",
+  "id": "56080099-b70f-41b4-ba1e-1e031fe62e57",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "If ∫ f(x) dx = F(x) + C, then ∫ f(ax + b) dx (a ≠ 0) equals:",
+  "formula": "",
+  "options": [
+   "F(ax + b)/a + C",
+   "a·F(ax + b) + C",
+   "F(ax + b) + C",
+   "F(x)/a + b + C"
+  ],
+  "answer": 0,
+  "explain": "By the chain rule, d/dx[F(ax+b)/a] = f(ax+b), so divide by a.",
+  "kind": "result",
+  "id": "dda33d1f-6043-4369-99ff-1160f4f94442",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "An antiderivative of |x| valid for all real x is:",
+  "formula": "",
+  "options": [
+   "x²/2",
+   "x|x|/2",
+   "|x|³/3",
+   "|x|/2"
+  ],
+  "answer": 1,
+  "explain": "d/dx[x|x|/2] = |x| for all x; x²/2 has derivative x, which fails for x < 0.",
+  "kind": "exception",
+  "id": "e80bfb01-047b-4bbd-95f3-64e4d53ec5ae",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "For a constant k ≠ 0, ∫k·f(x)dx equals which of the following?",
+  "formula": "∫k f(x)dx = k∫f(x)dx",
+  "options": [
+   "k∫f(x)dx",
+   "∫f(x)dx + k",
+   "k·x∫f(x)dx",
+   "(1/k)∫f(x)dx"
+  ],
+  "answer": 0,
+  "explain": "A constant factor can be taken outside the integral sign (homogeneity property).",
+  "kind": "formula",
+  "id": "4663681c-9697-4a65-9afd-9a359ddca47b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "∫ dx/(4x²+9) equals?",
+  "formula": "",
+  "options": [
+   "(1/6)tan⁻¹(2x/3) + C",
+   "(1/3)tan⁻¹(2x/3) + C",
+   "(1/6)tan⁻¹(x/3) + C",
+   "(2/3)tan⁻¹(2x/3) + C"
+  ],
+  "answer": 0,
+  "explain": "(1/4)∫dx/(x²+(3/2)²) = (1/4)(2/3)tan⁻¹(2x/3) = (1/6)tan⁻¹(2x/3).",
+  "kind": "formula",
+  "id": "7308ccb1-9d53-4138-bf0a-9004d4fd7565",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(x²+2x+2) equals?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(x) + C",
+   "ln|x²+2x+2| + C",
+   "tan⁻¹(x+1) + C",
+   "(1/2)tan⁻¹((x+1)/2) + C"
+  ],
+  "answer": 2,
+  "explain": "x²+2x+2 = (x+1)²+1, so the integral is tan⁻¹(x+1).",
+  "kind": "formula",
+  "id": "3881db31-bfe4-457e-95bd-fceaef8ff611",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(x²−2x+5) equals?",
+  "formula": "",
+  "options": [
+   "tan⁻¹((x−1)/2) + C",
+   "(1/2)tan⁻¹((x−1)/2) + C",
+   "(1/2)tan⁻¹(x−1) + C",
+   "(1/4)tan⁻¹((x−1)/2) + C"
+  ],
+  "answer": 1,
+  "explain": "x²−2x+5 = (x−1)²+2², so the result is (1/2)tan⁻¹((x−1)/2).",
+  "kind": "formula",
+  "id": "f221008c-3d1c-41f0-9f86-d6bf7bbf4a27",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(x²−4x+3) equals?",
+  "formula": "",
+  "options": [
+   "(1/2)ln|(x−1)/(x−3)| + C",
+   "ln|(x−3)/(x−1)| + C",
+   "(1/2)ln|(x−3)/(x−1)| + C",
+   "(1/2)ln|(x−2)/(x+2)| + C"
+  ],
+  "answer": 2,
+  "explain": "x²−4x+3 = (x−2)²−1; (1/2)ln|(x−2−1)/(x−2+1)| = (1/2)ln|(x−3)/(x−1)|.",
+  "kind": "formula",
+  "id": "81f0c468-0751-431b-a0e1-21314b5b8fdc",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ eˣ/(1+e²ˣ) dx equals?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(eˣ) + C",
+   "ln(1+e²ˣ) + C",
+   "(1/2)tan⁻¹(eˣ) + C",
+   "eˣ·tan⁻¹(eˣ) + C"
+  ],
+  "answer": 0,
+  "explain": "Put t = eˣ: ∫dt/(1+t²) = tan⁻¹t.",
+  "kind": "result",
+  "id": "110f4cde-acc7-40b7-bca7-ded1a1b8746e",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ cos x/(1+sin²x) dx equals?",
+  "formula": "",
+  "options": [
+   "−tan⁻¹(cos x) + C",
+   "tan⁻¹(sin x) + C",
+   "ln(1+sin²x) + C",
+   "cot⁻¹(sin x) + C"
+  ],
+  "answer": 1,
+  "explain": "Put t = sin x: ∫dt/(1+t²) = tan⁻¹(sin x).",
+  "kind": "result",
+  "id": "374d337a-6eda-476e-a6c1-8ca4a2a2e5cc",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ x/(1+x⁴) dx equals?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(x²) + C",
+   "(1/2)tan⁻¹(x²) + C",
+   "(1/4)ln(1+x⁴) + C",
+   "2tan⁻¹(x²) + C"
+  ],
+  "answer": 1,
+  "explain": "Put t = x², x dx = dt/2: (1/2)∫dt/(1+t²) = (1/2)tan⁻¹(x²).",
+  "kind": "result",
+  "id": "c5e448d4-c6ef-48be-a20b-3435233e2048",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(x(1+(ln x)²)) equals?",
+  "formula": "",
+  "options": [
+   "ln(1+(ln x)²) + C",
+   "tan⁻¹(ln x) + C",
+   "(1/x)tan⁻¹(ln x) + C",
+   "tan⁻¹(x) + C"
+  ],
+  "answer": 1,
+  "explain": "Put t = ln x, dt = dx/x: ∫dt/(1+t²) = tan⁻¹(ln x).",
+  "kind": "result",
+  "id": "776a8f9b-ad15-4bd5-8409-3b5cf74eba2f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(x²+x+1) equals?",
+  "formula": "",
+  "options": [
+   "(2/√3)tan⁻¹((2x+1)/√3) + C",
+   "(1/√3)tan⁻¹((2x+1)/√3) + C",
+   "(2/√3)tan⁻¹(x+1/2) + C",
+   "tan⁻¹((2x+1)/√3) + C"
+  ],
+  "answer": 0,
+  "explain": "x²+x+1 = (x+½)²+(√3/2)²; (1/a) = 2/√3 with argument (2x+1)/√3.",
+  "kind": "formula",
+  "id": "53c42115-1826-4ff0-ad93-241fefdd8d16",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(x²+2x+1) equals?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(x+1) + C",
+   "−1/(x+1) + C",
+   "ln|x+1| + C",
+   "(1/2)ln|x+1| + C"
+  ],
+  "answer": 1,
+  "explain": "Perfect square: ∫(x+1)⁻²dx = −1/(x+1); no tan⁻¹ or log form applies.",
+  "kind": "exception",
+  "id": "6cb94a02-d1fd-45be-af69-2e9d707af08b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(x²+4x+13) equals?",
+  "formula": "",
+  "options": [
+   "(1/3)tan⁻¹((x+2)/3) + C",
+   "tan⁻¹((x+2)/3) + C",
+   "(1/3)tan⁻¹((x+2)/13) + C",
+   "(1/2)tan⁻¹((x+2)/2) + C"
+  ],
+  "answer": 0,
+  "explain": "x²+4x+13 = (x+2)²+3², so the result is (1/3)tan⁻¹((x+2)/3).",
+  "kind": "formula",
+  "id": "76add0ff-4ec6-434f-8ffb-7b3e18ed0ccf",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(5−4x−x²) equals? (no square root)",
+  "formula": "",
+  "options": [
+   "(1/6)ln|(x+5)/(1−x)| + C",
+   "(1/3)ln|(x+5)/(1−x)| + C",
+   "(1/6)ln|(1−x)/(x+5)| + C",
+   "(1/3)tan⁻¹((x+2)/3) + C"
+  ],
+  "answer": 0,
+  "explain": "5−4x−x² = 9−(x+2)²; (1/6)ln|(3+x+2)/(3−x−2)| = (1/6)ln|(x+5)/(1−x)|.",
+  "kind": "formula",
+  "id": "327a343a-5fec-42d6-970d-5cd793635b0b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "For |x|<a, ∫ dx/(a²−x²) can be written as?",
+  "formula": "",
+  "options": [
+   "(1/a)tanh⁻¹(x/a) + C",
+   "(1/a)tan⁻¹(x/a) + C",
+   "(1/a)coth⁻¹(x/a) + C",
+   "(1/a)sinh⁻¹(x/a) + C"
+  ],
+  "answer": 0,
+  "explain": "tanh⁻¹(u) = ½ln((1+u)/(1−u)) for |u|<1, matching (1/2a)ln((a+x)/(a−x)).",
+  "kind": "fact",
+  "id": "dcb446c2-4e30-4e20-887e-d6ac952dcadc",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "Value of ∫₀^∞ dx/(x²+a²), a>0?",
+  "formula": "",
+  "options": [
+   "π/a",
+   "π/(2a)",
+   "π/(4a)",
+   "1/a"
+  ],
+  "answer": 1,
+  "explain": "(1/a)[tan⁻¹(x/a)]₀^∞ = (1/a)(π/2) = π/(2a).",
+  "kind": "result",
+  "id": "a2bf9bf3-35dc-401b-962e-b1e9646304fe",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(√x(1+x)) equals?",
+  "formula": "put x = t²",
+  "options": [
+   "2tan⁻¹(√x) + C",
+   "tan⁻¹(√x) + C",
+   "(1/2)tan⁻¹(√x) + C",
+   "2√x·tan⁻¹x + C"
+  ],
+  "answer": 0,
+  "explain": "x = t², dx = 2t dt, so the integral is 2∫dt/(1+t²) = 2tan⁻¹√x.",
+  "kind": "result",
+  "id": "25c5dcad-e3c0-4bce-916a-1ccc20117260",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "Value of ∫₂³ dx/(x²−1)?",
+  "formula": "",
+  "options": [
+   "(1/2)ln(3/2)",
+   "(1/2)ln(2/3)",
+   "ln(3/2)",
+   "(1/2)ln 3"
+  ],
+  "answer": 0,
+  "explain": "F = ½ln((x−1)/(x+1)); F(3)−F(2) = ½[ln(1/2) − ln(1/3)] = ½ln(3/2).",
+  "kind": "result",
+  "id": "11b1de85-54d3-487a-9506-4e84fa027c2a",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ sec²x/(4+tan²x) dx equals?",
+  "formula": "put t = tan x",
+  "options": [
+   "tan⁻¹(tan x/2) + C",
+   "(1/2)tan⁻¹(tan x/2) + C",
+   "(1/2)tan⁻¹(tan x) + C",
+   "(1/4)tan⁻¹(tan x/2) + C"
+  ],
+  "answer": 1,
+  "explain": "With t = tan x, ∫dt/(t²+4) = (1/2)tan⁻¹(t/2) + C.",
+  "kind": "result",
+  "id": "59d0c8f1-a91e-4e58-ac45-a41aa9363f37",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(1−x²) equals (valid for x ≠ ±1)?",
+  "formula": "∫ dx/(a²−x²) = (1/2a)·ln|(a+x)/(a−x)| + C",
+  "options": [
+   "½ ln|(1+x)/(1−x)| + C",
+   "½ ln|(x−1)/(x+1)| + C",
+   "ln|1−x²| + C",
+   "tan⁻¹x + C"
+  ],
+  "answer": 0,
+  "explain": "1/(1−x²) = ½[1/(1−x) + 1/(1+x)], which integrates to ½ ln|(1+x)/(1−x)|.",
+  "kind": "formula",
+  "id": "f001462f-0257-4dcb-aee1-ff4d86bff3d7",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/√(x²−a²) equals?",
+  "formula": "",
+  "options": [
+   "ln|x+√(x²−a²)|+C",
+   "sin⁻¹(x/a)+C",
+   "(1/a)sec⁻¹(x/a)+C",
+   "½ln|(x−a)/(x+a)|+C"
+  ],
+  "answer": 0,
+  "explain": "Standard result: ∫dx/√(x²−a²) = ln|x+√(x²−a²)|+C.",
+  "kind": "formula",
+  "id": "647d6b00-9aac-4909-9281-1e862f196ff7",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/√(9−4x²) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(2x/3)+C",
+   "2 sin⁻¹(2x/3)+C",
+   "½ sin⁻¹(2x/3)+C",
+   "½ sin⁻¹(x/3)+C"
+  ],
+  "answer": 2,
+  "explain": "Put u=2x, du=2dx, giving ½ sin⁻¹(u/3)+C.",
+  "kind": "formula",
+  "id": "0c417b6b-192a-442b-91fb-e0b58bfdd9af",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/√(4x²−9) equals?",
+  "formula": "",
+  "options": [
+   "ln|2x+√(4x²−9)|+C",
+   "½ln|2x+√(4x²−9)|+C",
+   "2ln|2x+√(4x²−9)|+C",
+   "½ln|x+√(4x²−9)|+C"
+  ],
+  "answer": 1,
+  "explain": "Put u=2x: ½∫du/√(u²−9) = ½ln|u+√(u²−9)|+C.",
+  "kind": "formula",
+  "id": "731bc6b8-15fe-43c8-9bb7-7cb5165627cf",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "Substitution that suits ∫dx/√(x²−a²)?",
+  "formula": "",
+  "options": [
+   "x = a sinθ",
+   "x = a tanθ",
+   "x = a secθ",
+   "x = a cosθ"
+  ],
+  "answer": 2,
+  "explain": "√(x²−a²) = a tanθ when x = a secθ, which makes the integrand simplify.",
+  "kind": "concept",
+  "id": "dcf2cd69-d25c-418b-95fb-8b89711acd9b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/(x√(x²−a²)) equals?",
+  "formula": "",
+  "options": [
+   "ln|x+√(x²−a²)|+C",
+   "(1/a)sec⁻¹(x/a)+C",
+   "a·sec⁻¹(x/a)+C",
+   "(1/a)sin⁻¹(a/x)+C"
+  ],
+  "answer": 1,
+  "explain": "Standard result: (1/a)sec⁻¹|x/a|+C.",
+  "kind": "formula",
+  "id": "b2c484d3-2a4b-4d25-b047-dfa682d1ed46",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫eˣ dx/√(1−e²ˣ) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(eˣ)+C",
+   "eˣ sin⁻¹(eˣ)+C",
+   "ln|eˣ+√(1−e²ˣ)|+C",
+   "cos⁻¹(eˣ)+C"
+  ],
+  "answer": 0,
+  "explain": "Put t=eˣ: ∫dt/√(1−t²) = sin⁻¹t+C.",
+  "kind": "result",
+  "id": "bae6a789-479f-45ca-aea9-cb2a4d9b6e1a",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫cos x dx/√(4−sin²x) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(sin x)+C",
+   "sin⁻¹(2 sin x)+C",
+   "sin⁻¹(sin x/2)+C",
+   "ln|sin x+√(4−sin²x)|+C"
+  ],
+  "answer": 2,
+  "explain": "Put t=sin x: ∫dt/√(4−t²) = sin⁻¹(t/2)+C.",
+  "kind": "result",
+  "id": "b167d860-1737-47a0-bfda-7f2f4854c2a7",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/√(x−x²) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(x−½)+C",
+   "sin⁻¹(2x−1)+C",
+   "sin⁻¹(x−1)+C",
+   "½ sin⁻¹(2x−1)+C"
+  ],
+  "answer": 1,
+  "explain": "x−x² = ¼−(x−½)², so ∫ = sin⁻¹((x−½)/(½)) = sin⁻¹(2x−1)+C.",
+  "kind": "formula",
+  "id": "4f472ba0-46a4-4ea6-b457-732982544668",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/√(x(x+1)) equals?",
+  "formula": "",
+  "options": [
+   "ln(√x+√(x+1))+C",
+   "2ln(√x+√(x+1))+C",
+   "2sin⁻¹√x+C",
+   "ln|x+√(x²+x)|+C"
+  ],
+  "answer": 1,
+  "explain": "Put x=sinh²θ: integrand becomes 2dθ, so 2θ = 2ln(√x+√(x+1))+C.",
+  "kind": "result",
+  "id": "1cc93208-cb9f-46ff-b9c5-e50f303cc42d",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫sec²x dx/√(tan²x+4) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(tan x/2)+C",
+   "ln|tan x+√(tan²x+4)|+C",
+   "½ln|tan x+√(tan²x+4)|+C",
+   "ln|sec x+√(tan²x+4)|+C"
+  ],
+  "answer": 1,
+  "explain": "Put t=tan x: ∫dt/√(t²+4) = ln|t+√(t²+4)|+C.",
+  "kind": "result",
+  "id": "4aec03d8-6523-4247-9384-f802a94592c0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫x dx/√(1−x⁴) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(x²)+C",
+   "½ sin⁻¹(x²)+C",
+   "2 sin⁻¹(x²)+C",
+   "½ ln|x²+√(1−x⁴)|+C"
+  ],
+  "answer": 1,
+  "explain": "Put t=x², dt=2x dx: ½∫dt/√(1−t²) = ½ sin⁻¹(x²)+C.",
+  "kind": "result",
+  "id": "1f2d4d03-5494-466b-b9bc-5bb47d3419f6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫x² dx/√(x⁶−1) equals?",
+  "formula": "",
+  "options": [
+   "ln|x³+√(x⁶−1)|+C",
+   "⅓ sin⁻¹(x³)+C",
+   "⅓ ln|x³+√(x⁶−1)|+C",
+   "3 ln|x³+√(x⁶−1)|+C"
+  ],
+  "answer": 2,
+  "explain": "Put t=x³, dt=3x²dx: ⅓∫dt/√(t²−1) = ⅓ln|t+√(t²−1)|+C.",
+  "kind": "result",
+  "id": "9ea44103-15bb-48c4-ae64-4f2c2d971b5f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫x dx/√(x²+a²) equals?",
+  "formula": "",
+  "options": [
+   "ln|x+√(x²+a²)|+C",
+   "√(x²+a²)+C",
+   "½√(x²+a²)+C",
+   "x√(x²+a²)+C"
+  ],
+  "answer": 1,
+  "explain": "Put t=x²+a²: ½∫dt/√t = √t = √(x²+a²).",
+  "kind": "result",
+  "id": "0ae5f150-f6d1-4174-8b16-3022ace9c2f8",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/√(x²+a²) in inverse hyperbolic form is?",
+  "formula": "ln|x+√(x²+a²)| = sinh⁻¹(x/a) + const",
+  "options": [
+   "sinh⁻¹(x/a)+C",
+   "cosh⁻¹(x/a)+C",
+   "tanh⁻¹(x/a)+C",
+   "(1/a)sinh⁻¹(x/a)+C"
+  ],
+  "answer": 0,
+  "explain": "ln(x+√(x²+a²)) = sinh⁻¹(x/a) + ln a, so the integral is sinh⁻¹(x/a)+C.",
+  "kind": "formula",
+  "id": "373824db-3237-4aa5-92d6-2ad0d4536e15",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "x = a tanθ converts ∫dx/√(x²+a²) into which integral?",
+  "formula": "",
+  "options": [
+   "∫secθ dθ",
+   "∫dθ",
+   "∫cosecθ dθ",
+   "(1/a)∫sec²θ dθ"
+  ],
+  "answer": 0,
+  "explain": "dx = a sec²θ dθ and √(x²+a²) = a secθ, so the integrand becomes secθ dθ.",
+  "kind": "concept",
+  "id": "c46a78f1-c405-4562-8a49-4f605429ff1e",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "Value of ∫₀^{1/2} dx/√(1−x²)?",
+  "formula": "[sin⁻¹x]₀^{1/2}",
+  "options": [
+   "π/6",
+   "π/3",
+   "π/4",
+   "π/12"
+  ],
+  "answer": 0,
+  "explain": "sin⁻¹(1/2) − sin⁻¹(0) = π/6.",
+  "kind": "result",
+  "id": "909b8ea7-ad87-4000-9d25-263ef30dd618",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/(x√(1−(ln x)²)) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(ln x)+C",
+   "cos⁻¹(ln x)+C",
+   "ln|ln x+√(1−ln²x)|+C",
+   "sin⁻¹(x)+C"
+  ],
+  "answer": 0,
+  "explain": "Put t = ln x, so dt = dx/x and ∫dt/√(1−t²) = sin⁻¹t.",
+  "kind": "result",
+  "id": "8299e433-ebba-4e82-8d94-b8fe7e161d78",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "Substituting x = a sinθ reduces ∫dx/√(a²−x²) to?",
+  "formula": "",
+  "options": [
+   "∫dθ",
+   "∫secθ dθ",
+   "∫tanθ dθ",
+   "a∫dθ"
+  ],
+  "answer": 0,
+  "explain": "dx = a cosθ dθ and √(a²−x²) = a cosθ, so the integrand is 1 and the result is θ = sin⁻¹(x/a).",
+  "kind": "concept",
+  "id": "c4524b6d-2c7e-494b-8b07-072e93065ed4",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "For x>a>0, ∫dx/√(x²−a²) in inverse hyperbolic form is?",
+  "formula": "cosh⁻¹(x/a) = ln(x+√(x²−a²)) − ln a",
+  "options": [
+   "cosh⁻¹(x/a)+C",
+   "sinh⁻¹(x/a)+C",
+   "tanh⁻¹(x/a)+C",
+   "(1/a)cosh⁻¹(x/a)+C"
+  ],
+  "answer": 0,
+  "explain": "cosh⁻¹(x/a) = ln[(x+√(x²−a²))/a], which differs from the log form only by a constant.",
+  "kind": "formula",
+  "id": "1e411073-4751-4928-b824-3ff93f468410",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "Standard substitution to evaluate ∫√(x²−a²) dx?",
+  "formula": "",
+  "options": [
+   "x = a sin θ",
+   "x = a tan θ",
+   "x = a sec θ",
+   "x = a cos 2θ"
+  ],
+  "answer": 2,
+  "explain": "x = a sec θ gives √(x²−a²) = a tan θ.",
+  "kind": "concept",
+  "id": "41d97900-73ef-46f5-a999-8f27dfbc0292",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "Standard trigonometric substitution for ∫√(x²+a²) dx?",
+  "formula": "",
+  "options": [
+   "x = a tan θ",
+   "x = a sec θ",
+   "x = a sin θ",
+   "x = a cot²θ"
+  ],
+  "answer": 0,
+  "explain": "x = a tan θ gives √(x²+a²) = a sec θ.",
+  "kind": "concept",
+  "id": "15f24732-9c58-48dd-acfe-e5b0155f138c",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫dx/√(x²−a²) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(x/a) + C",
+   "ln|x+√(x²−a²)| + C",
+   "(1/a)sec⁻¹(x/a) + C",
+   "ln|x−√(x²−a²)|/a + C"
+  ],
+  "answer": 1,
+  "explain": "Standard result: ∫dx/√(x²−a²) = ln|x+√(x²−a²)| + C.",
+  "kind": "formula",
+  "id": "f8d0f71e-3cb6-4d75-a79d-7d60426533a2",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "The value of ∫₀ᵃ √(a²−x²) dx is?",
+  "formula": "",
+  "options": [
+   "πa²/2",
+   "πa²/4",
+   "πa/4",
+   "a²/2"
+  ],
+  "answer": 1,
+  "explain": "This is the area of a quarter circle of radius a.",
+  "kind": "result",
+  "id": "cd2f78a8-ae2d-42c5-9df8-7128021783da",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫x√(x²+a²) dx equals?",
+  "formula": "",
+  "options": [
+   "(x²+a²)^{3/2}/3 + C",
+   "(x²+a²)^{3/2}/2 + C",
+   "x²√(x²+a²)/2 + C",
+   "(x²+a²)^{1/2}/2 + C"
+  ],
+  "answer": 0,
+  "explain": "Put t = x²+a², so x dx = dt/2 and the integral is (1/2)·t^{3/2}/(3/2).",
+  "kind": "result",
+  "id": "6d09cb8b-5164-40fa-bdb9-6e82db276eec",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫dx/√(x²+a²) can also be written as?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(x/a) + C",
+   "cosh⁻¹(x/a) + C",
+   "tan⁻¹(x/a)/a + C",
+   "sinh⁻¹(x/a) + C"
+  ],
+  "answer": 3,
+  "explain": "sinh⁻¹(x/a) = ln[(x+√(x²+a²))/a], which differs only by a constant.",
+  "kind": "concept",
+  "id": "007c308e-3fd4-4276-ada3-1d303698fe58",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫ dx/√(9−4x²) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(2x/3) + C",
+   "½ sin⁻¹(2x/3) + C",
+   "2 sin⁻¹(2x/3) + C",
+   "⅓ sin⁻¹(2x/3) + C"
+  ],
+  "answer": 1,
+  "explain": "Write 9−4x² = 9−(2x)². With u=2x, ∫du/(2√(9−u²)) = ½sin⁻¹(2x/3).",
+  "kind": "result",
+  "id": "e5e03750-a32a-4096-9da6-6f06dfcba0b2",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫ dx/√(x²−4x+13) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹((x−2)/3) + C",
+   "ln|x−2+√(x²−4x+13)| + C",
+   "ln|x+√(x²−4x+13)| + C",
+   "⅓ tan⁻¹((x−2)/3) + C"
+  ],
+  "answer": 1,
+  "explain": "x²−4x+13 = (x−2)²+3², so the integral is ln|(x−2)+√((x−2)²+9)|.",
+  "kind": "result",
+  "id": "aad498e8-c978-46aa-9910-b61f344a2995",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "The value of ∫₋ₐᵃ √(a²−x²) dx is?",
+  "formula": "",
+  "options": [
+   "πa²/4",
+   "πa²/2",
+   "πa²",
+   "2πa"
+  ],
+  "answer": 1,
+  "explain": "It is the area of a semicircle of radius a: πa²/2.",
+  "kind": "result",
+  "id": "22b7591f-7e85-496e-a9fb-ce4b805759bc",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "The value of ∫₀² √(2x−x²) dx is?",
+  "formula": "",
+  "options": [
+   "π",
+   "π/4",
+   "π/2",
+   "2π"
+  ],
+  "answer": 2,
+  "explain": "2x−x² = 1−(x−1)², a semicircle of radius 1, so the area is π/2.",
+  "kind": "result",
+  "id": "dd89e9a5-a619-4198-a081-b354ceec37cc",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫√(x²+2x+5) dx: after completing the square, which standard form applies?",
+  "formula": "",
+  "options": [
+   "∫√(a²−t²) dt, t = x+1",
+   "∫√(t²−a²) dt, t = x+1",
+   "∫√(t²+a²) dt, t = x+1, a = 2",
+   "∫√(t²+a²) dt, t = x+1, a = 4"
+  ],
+  "answer": 2,
+  "explain": "x²+2x+5 = (x+1)²+2², so t = x+1 and a = 2.",
+  "kind": "concept",
+  "id": "40e6b90e-be20-44b8-9fc2-227d3cc1204b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "Standard substitution for ∫dx/(a + b cos x) in the general case?",
+  "formula": "t = tan(x/2)",
+  "options": [
+   "t = tan x",
+   "t = tan(x/2)",
+   "t = sin x",
+   "t = cos(x/2)"
+  ],
+  "answer": 1,
+  "explain": "The half-angle substitution turns cos x and sin x into rational functions of t.",
+  "kind": "concept",
+  "id": "f49b15ca-7802-44f6-8be5-23a777590ff5",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(5 + 4cos x) = ?",
+  "formula": "",
+  "options": [
+   "(2/9) tan⁻¹(⅓ tan(x/2)) + C",
+   "(2/3) tan⁻¹(3 tan(x/2)) + C",
+   "(1/3) tan⁻¹(3 tan(x/2)) + C",
+   "(2/3) tan⁻¹(⅓ tan(x/2)) + C"
+  ],
+  "answer": 3,
+  "explain": "Use 2/√(a²−b²) = 2/3 and √((a−b)/(a+b)) = 1/3.",
+  "kind": "result",
+  "id": "961581da-e78e-49b5-a949-ae0a33f0a8c5",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(2 + cos x) = ?",
+  "formula": "",
+  "options": [
+   "(2/√3) tan⁻¹(tan(x/2)/√3) + C",
+   "(1/√3) tan⁻¹(√3 tan(x/2)) + C",
+   "(2/√5) tan⁻¹(tan(x/2)/√5) + C",
+   "(2/√3) tan⁻¹(√3 tan(x/2)) + C"
+  ],
+  "answer": 0,
+  "explain": "√(a²−b²) = √3 and √((a−b)/(a+b)) = 1/√3.",
+  "kind": "result",
+  "id": "7f112b58-ff7b-4297-8db6-1914aa0f37cd",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "For |a| < |b|, ∫dx/(a + b cos x) is of which form?",
+  "formula": "",
+  "options": [
+   "Inverse tangent",
+   "Logarithmic",
+   "Inverse sine",
+   "Purely trigonometric"
+  ],
+  "answer": 1,
+  "explain": "With a² < b², the denominator (a+b) − (b−a)t² gives a log form.",
+  "kind": "concept",
+  "id": "f7c7abda-443a-484f-ba6d-8d04cf34bd82",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(1 + 2cos x) = ?",
+  "formula": "",
+  "options": [
+   "(1/√3) ln|(√3 + tan(x/2))/(√3 − tan(x/2))| + C",
+   "(2/√3) tan⁻¹(tan(x/2)/√3) + C",
+   "(1/√5) ln|(√5 + t)/(√5 − t)| + C",
+   "(1/3) ln|(√3 + t)/(√3 − t)| + C"
+  ],
+  "answer": 0,
+  "explain": "The denominator becomes 3 − t², so ∫2dt/(3−t²) = (1/√3) ln|(√3+t)/(√3−t)|.",
+  "kind": "result",
+  "id": "907d91ac-f86d-4b35-99d7-197da35a7051",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "For a = b, ∫dx/(a + a cos x) equals?",
+  "formula": "",
+  "options": [
+   "(1/a) tan(x/2) + C",
+   "(2/a) tan(x/2) + C",
+   "a tan(x/2) + C",
+   "−(1/a) cot(x/2) + C"
+  ],
+  "answer": 0,
+  "explain": "a(1+cos x) = 2a cos²(x/2), so the integral is (1/a) tan(x/2).",
+  "kind": "result",
+  "id": "b5d8ede0-6e19-41eb-a175-dcceec4787bb",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(3 + 2 sin x) is of which type?",
+  "formula": "",
+  "options": [
+   "Inverse tangent",
+   "Logarithmic",
+   "Pure algebraic",
+   "Inverse sine"
+  ],
+  "answer": 0,
+  "explain": "|a| > |b|: 3t² + 2t + 3 has negative discriminant, so tan⁻¹ form.",
+  "kind": "concept",
+  "id": "dc62503c-4d9d-4528-a0cb-43f1f9ae6a4a",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(2 + 3 sin x) is of which type?",
+  "formula": "",
+  "options": [
+   "Logarithmic",
+   "Inverse tangent",
+   "Inverse sine",
+   "Pure algebraic"
+  ],
+  "answer": 0,
+  "explain": "|a| < |b|: 2t² + 3t + 2 → 2(1+t²)+6t has real roots, so log form.",
+  "kind": "concept",
+  "id": "e0b41208-adab-4b34-8f71-4afd8010dcf0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(sin x + cos x) = ?",
+  "formula": "",
+  "options": [
+   "(1/√2) ln|tan(x/2 + π/8)| + C",
+   "√2 ln|tan(x/2 + π/4)| + C",
+   "(1/√2) ln|tan(x + π/8)| + C",
+   "(1/√2) tan⁻¹(tan x) + C"
+  ],
+  "answer": 0,
+  "explain": "sin x + cos x = √2 sin(x + π/4); ∫cosec θ dθ = ln|tan(θ/2)|.",
+  "kind": "result",
+  "id": "5e676293-aefb-4cae-9f91-7e9117492f5f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(1 + sin x + cos x) = ?",
+  "formula": "",
+  "options": [
+   "ln|1 + tan x| + C",
+   "tan(x/2) + C",
+   "2 ln|1 + tan(x/2)| + C",
+   "ln|1 + tan(x/2)| + C"
+  ],
+  "answer": 3,
+  "explain": "With t = tan(x/2) the denominator is 2(1+t)/(1+t²), so the integral is ∫dt/(1+t).",
+  "kind": "result",
+  "id": "d9a12419-7d5c-4937-81d6-e8e8ba4b42da",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(5 + 3cos x) = ?",
+  "formula": "",
+  "options": [
+   "½ tan⁻¹(2 tan(x/2)) + C",
+   "¼ tan⁻¹(½ tan(x/2)) + C",
+   "½ tan⁻¹(½ tan(x/2)) + C",
+   "2 tan⁻¹(½ tan(x/2)) + C"
+  ],
+  "answer": 2,
+  "explain": "t = tan(x/2): ∫2dt/(8+2t²) = ∫dt/(4+t²) = ½ tan⁻¹(t/2) + C.",
+  "kind": "result",
+  "id": "c5bbc812-c83d-449b-806c-68cce9dba162",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫eˣ(sin x + cos x)dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ cos x + C",
+   "eˣ(sin x − cos x) + C",
+   "eˣ sin x + C",
+   "2eˣ sin x + C"
+  ],
+  "answer": 2,
+  "explain": "f = sin x, f′ = cos x, so the result is eˣ f(x) = eˣ sin x.",
+  "kind": "result",
+  "id": "54653e46-5b15-4124-a44e-fbfb8fdb2814",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ(ln x + 1/x)dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ ln x + C",
+   "eˣ/x + C",
+   "eˣ(ln x − 1/x) + C",
+   "eˣ ln x /x + C"
+  ],
+  "answer": 0,
+  "explain": "f = ln x, f′ = 1/x, so the result is eˣ ln x + C.",
+  "kind": "result",
+  "id": "3561d9de-902d-491a-ad68-aeed9d450c1b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ(tan x + sec²x)dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ sec x + C",
+   "eˣ sec²x + C",
+   "eˣ tan x + C",
+   "eˣ(tan x − sec²x) + C"
+  ],
+  "answer": 2,
+  "explain": "f = tan x, f′ = sec²x, so the result is eˣ tan x + C.",
+  "kind": "result",
+  "id": "cc2fa96f-a5df-4a34-9f41-5b3758e3e045",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ(x+1)/(x+2)² dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ/(x+2)² + C",
+   "eˣ/(x+1) + C",
+   "eˣ(x+1)/(x+2) + C",
+   "eˣ/(x+2) + C"
+  ],
+  "answer": 3,
+  "explain": "(x+1)/(x+2)² = 1/(x+2) − 1/(x+2)², so f = 1/(x+2).",
+  "kind": "result",
+  "id": "ce4bff85-29cd-44ae-9a61-83b97a9baba3",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ(1+sin x)/(1+cos x) dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ tan(x/2) + C",
+   "eˣ tan x + C",
+   "eˣ sec(x/2) + C",
+   "eˣ cot(x/2) + C"
+  ],
+  "answer": 0,
+  "explain": "Integrand = eˣ[tan(x/2) + ½sec²(x/2)] = eˣ[f + f′], f = tan(x/2).",
+  "kind": "result",
+  "id": "5d9fdf0d-6219-4a78-b8d2-9d85c5e84ddb",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "In ∫eˣ[f(x)+f′(x)]dx, why does the integral vanish after one parts step?",
+  "formula": "∫eˣf dx = eˣf − ∫eˣf′dx",
+  "options": [
+   "The f′ term cancels the remaining integral",
+   "f must be a polynomial",
+   "eˣ is its own derivative only",
+   "The limits are symmetric"
+  ],
+  "answer": 0,
+  "explain": "∫eˣf dx = eˣf − ∫eˣf′dx, which cancels +∫eˣf′dx, leaving eˣf.",
+  "kind": "concept",
+  "id": "def69d02-5cea-4a3b-8f7e-b000802aadb6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ(ln x + 1/x) dx = ?",
+  "formula": "f = ln x, f′ = 1/x",
+  "options": [
+   "eˣ/x + C",
+   "eˣ ln x + C",
+   "eˣ(ln x − 1/x) + C",
+   "x eˣ ln x + C"
+  ],
+  "answer": 1,
+  "explain": "f = ln x and f′ = 1/x, so the integral is eˣ f = eˣ ln x.",
+  "kind": "result",
+  "id": "88ee20a2-9e2a-4de2-9a60-e3f779c2ace9",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(1 + tan x + tan²x) dx = ?",
+  "formula": "f = tan x, f′ = 1 + tan²x",
+  "options": [
+   "eˣ sec x + C",
+   "eˣ tan x + C",
+   "eˣ sec²x + C",
+   "eˣ(1 + tan x) + C"
+  ],
+  "answer": 1,
+  "explain": "sec²x = 1 + tan²x is f′ for f = tan x, so the result is eˣ tan x.",
+  "kind": "result",
+  "id": "06d8a7c6-d661-476b-a45e-773b82901f39",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(tan x + sec²x) dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ sec x + C",
+   "eˣ sec²x + C",
+   "eˣ tan x + C",
+   "eˣ ln|sec x| + C"
+  ],
+  "answer": 2,
+  "explain": "f = tan x, f′ = sec²x, so the integral is eˣ tan x.",
+  "kind": "result",
+  "id": "6d74e3de-ce7d-4bf7-88c6-ce7dbbbb01e0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ (1 + sin x)/(1 + cos x) dx = ?",
+  "formula": "f = tan(x/2), f′ = 1/(1 + cos x)",
+  "options": [
+   "eˣ tan x + C",
+   "eˣ cot(x/2) + C",
+   "eˣ tan(x/2) + C",
+   "eˣ sec(x/2) + C"
+  ],
+  "answer": 2,
+  "explain": "sin x/(1+cos x) = tan(x/2) and ½sec²(x/2) = 1/(1+cos x), so f + f′ matches.",
+  "kind": "result",
+  "id": "f6517bb5-3228-4382-a109-c1da01c8b196",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(2 + sin 2x)/(1 + cos 2x) dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ tan x + C",
+   "eˣ tan 2x + C",
+   "eˣ sec 2x + C",
+   "eˣ cot x + C"
+  ],
+  "answer": 0,
+  "explain": "tan x = sin2x/(1+cos2x) and sec²x = 2/(1+cos2x), so the integral is eˣ tan x.",
+  "kind": "result",
+  "id": "0ef6ac6e-6068-4506-9940-78958c868f22",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e²ˣ(2 sin x + cos x) dx = ?",
+  "formula": "∫e^{ax}[a f + f′] dx = e^{ax} f",
+  "options": [
+   "e²ˣ cos x + C",
+   "e²ˣ sin x + C",
+   "e²ˣ(sin x + cos x) + C",
+   "½e²ˣ sin x + C"
+  ],
+  "answer": 1,
+  "explain": "With a = 2 and f = sin x, a f + f′ = 2 sin x + cos x, so the result is e²ˣ sin x.",
+  "kind": "formula",
+  "id": "01e66f97-1a82-4cae-b846-fbf8bfb9bbc0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[tan⁻¹x + 1/(1 + x²)] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ tan⁻¹x + C",
+   "eˣ/(1 + x²) + C",
+   "eˣ cot⁻¹x + C",
+   "eˣ ln(1 + x²) + C"
+  ],
+  "answer": 0,
+  "explain": "f = tan⁻¹x and f′ = 1/(1+x²), so the integral is eˣ tan⁻¹x.",
+  "kind": "result",
+  "id": "735b68df-edf2-4e89-adaa-5942c98511b9",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[ln(sec x + tan x) + sec x] dx = ?",
+  "formula": "f′ = sec x for f = ln(sec x + tan x)",
+  "options": [
+   "eˣ sec x + C",
+   "eˣ ln(sec x + tan x) + C",
+   "eˣ ln cos x + C",
+   "eˣ tan x + C"
+  ],
+  "answer": 1,
+  "explain": "d/dx ln(sec x + tan x) = sec x, so the pair is f + f′.",
+  "kind": "result",
+  "id": "0d728ca5-bac7-486d-9666-94a5b1d34ac3",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x² + 2x) dx = ?",
+  "formula": "f = x², f′ = 2x",
+  "options": [
+   "eˣ(x² − 2x) + C",
+   "x² eˣ + C",
+   "eˣ(x² + 2) + C",
+   "2x eˣ + C"
+  ],
+  "answer": 1,
+  "explain": "f = x² and f′ = 2x, so the integral is x² eˣ.",
+  "kind": "result",
+  "id": "b976d7ff-bed3-4b9e-b609-cfd9cadd931d",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e³ˣ(3x + 1) dx = ?",
+  "formula": "∫e^{ax}[a f + f′] dx = e^{ax} f",
+  "options": [
+   "x e³ˣ + C",
+   "3x e³ˣ + C",
+   "x e³ˣ/3 + C",
+   "e³ˣ(3x − 1) + C"
+  ],
+  "answer": 0,
+  "explain": "With a = 3 and f = x, a f + f′ = 3x + 1, so the integral is x e³ˣ.",
+  "kind": "formula",
+  "id": "de51e194-5f9d-4a80-ab1d-110b1e31fc4a",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[sin⁻¹x + 1/√(1−x²)] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ sin⁻¹x + C",
+   "eˣ cos⁻¹x + C",
+   "eˣ/√(1−x²) + C",
+   "eˣ sin⁻¹x/√(1−x²) + C"
+  ],
+  "answer": 0,
+  "explain": "f = sin⁻¹x and f′ = 1/√(1−x²), so the integral is eˣ sin⁻¹x.",
+  "kind": "result",
+  "id": "655da09b-751b-4210-94a1-41b99839e831",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[f(x)+f′(x)]dx = eˣf(x)+C comes from which method?",
+  "formula": "∫eˣf dx = eˣf − ∫eˣf′ dx",
+  "options": [
+   "Integration by parts on ∫eˣf dx",
+   "Substitution t = eˣ",
+   "Partial fractions",
+   "Substitution t = f(x)"
+  ],
+  "answer": 0,
+  "explain": "By parts gives ∫eˣf dx = eˣf − ∫eˣf′ dx, so the eˣf′ term cancels against the f′ term.",
+  "kind": "concept",
+  "id": "bbefd3f0-8470-4c48-989a-64336a8db824",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(sec x + sec x tan x) dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ tan x + C",
+   "eˣ sec x + C",
+   "eˣ sec x tan x + C",
+   "eˣ ln(sec x) + C"
+  ],
+  "answer": 1,
+  "explain": "f = sec x, f′ = sec x tan x, so the integral is eˣ sec x.",
+  "kind": "result",
+  "id": "ecacebd7-6198-4e43-b78e-3f5b35d5f36b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ (1−x)²/(1+x²)² dx = ?",
+  "formula": "f = 1/(1+x²), f′ = −2x/(1+x²)²",
+  "options": [
+   "eˣ/(1+x²) + C",
+   "eˣ/(1+x²)² + C",
+   "eˣ(1−x)/(1+x²) + C",
+   "eˣ tan⁻¹x + C"
+  ],
+  "answer": 0,
+  "explain": "f + f′ = (1+x²−2x)/(1+x²)² = (1−x)²/(1+x²)², so the result is eˣ/(1+x²).",
+  "kind": "result",
+  "id": "dec36af8-015e-43c8-b214-10c40b11e949",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(sin x + cos x) dx equals?",
+  "formula": "∫eˣ[f(x)+f′(x)]dx = eˣf(x)+C",
+  "options": [
+   "eˣ sin x + C",
+   "eˣ cos x + C",
+   "eˣ(sin x − cos x) + C",
+   "2eˣ sin x + C"
+  ],
+  "answer": 0,
+  "explain": "Here f = sin x and f′ = cos x, so the integral is eˣ sin x + C.",
+  "kind": "result",
+  "id": "83f73f7e-b5e4-4ccc-8a32-b365a5d616b1",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "∫e^(ax) cos bx dx equals which part of e^((a+ib)x)/(a+ib)?",
+  "formula": "e^((a+ib)x) = eᵃˣ(cos bx + i sin bx)",
+  "options": [
+   "Real part",
+   "Imaginary part",
+   "Modulus",
+   "Argument"
+  ],
+  "answer": 0,
+  "explain": "cos bx is the real part of e^(ibx), so the integral is Re[e^((a+ib)x)/(a+ib)].",
+  "kind": "concept",
+  "id": "0261a4e5-3541-4722-a581-14dba8455c59",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "Let I_s = ∫eᵃˣ sin bx dx and I_c = ∫eᵃˣ cos bx dx. Then a·I_s + b·I_c = ?",
+  "formula": "",
+  "options": [
+   "eᵃˣ sin bx",
+   "eᵃˣ cos bx",
+   "eᵃˣ(sin bx + cos bx)",
+   "a·eᵃˣ sin bx"
+  ],
+  "answer": 0,
+  "explain": "d/dx(eᵃˣ sin bx) = eᵃˣ(a sin bx + b cos bx), so a·I_s + b·I_c = eᵃˣ sin bx.",
+  "kind": "result",
+  "id": "d73aa6b3-af8d-4258-833d-8c2c55e277b6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "Standard method for ∫eᵃˣ sin bx dx by parts?",
+  "formula": "",
+  "options": [
+   "Apply parts twice, get I again, solve for I",
+   "Apply parts once only",
+   "Substitute t = eᵃˣ",
+   "Use partial fractions"
+  ],
+  "answer": 0,
+  "explain": "Parts twice returns a multiple of the original I, so I is solved algebraically from I = … − (b²/a²)I.",
+  "kind": "concept",
+  "id": "d9334d28-c4eb-4fdc-9a16-5a8ea7dd2428",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "In by-parts for ∫eᵃˣ sin bx dx, the second step must…",
+  "formula": "",
+  "options": [
+   "swap u and dv from the first step",
+   "keep the same choice of u as in step 1",
+   "use only the trig factor as dv",
+   "use the LIATE order again afresh"
+  ],
+  "answer": 1,
+  "explain": "Swapping the choice undoes step 1 and gives the trivial identity I = I; keep the same type of u.",
+  "kind": "concept",
+  "id": "379106e8-fe3a-4605-a1d6-ed819673fbc5",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "∫e^(ax) sin bx dx is which part of e^((a+ib)x)/(a+ib) (+C)?",
+  "formula": "e^((a+ib)x) = e^(ax)(cos bx + i sin bx)",
+  "options": [
+   "Real part",
+   "Imaginary part",
+   "Modulus",
+   "Argument"
+  ],
+  "answer": 1,
+  "explain": "Im of e^(ax)e^(ibx) is e^(ax) sin bx, so its integral is the imaginary part.",
+  "kind": "concept",
+  "id": "93497d9a-5525-467b-843c-0bdf51185925",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "With I_s=∫eᵃˣ sin bx dx and I_c=∫eᵃˣ cos bx dx, a·I_c − b·I_s = ?",
+  "formula": "d/dx(eᵃˣ cos bx) = eᵃˣ(a cos bx − b sin bx)",
+  "options": [
+   "eᵃˣ cos bx",
+   "eᵃˣ sin bx",
+   "(a²+b²)·eᵃˣ cos bx",
+   "eᵃˣ(cos bx − sin bx)"
+  ],
+  "answer": 0,
+  "explain": "Differentiating eᵃˣ cos bx gives eᵃˣ(a cos bx − b sin bx), so a·I_c − b·I_s = eᵃˣ cos bx.",
+  "kind": "result",
+  "id": "4f6760b4-5379-478e-9a52-55e8da4bad39",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "∫ tan x dx equals?",
+  "formula": "",
+  "options": [
+   "ln|sec x| + C",
+   "ln|cos x| + C",
+   "−ln|sin x| + C",
+   "sec²x + C"
+  ],
+  "answer": 0,
+  "explain": "∫tan x dx = −ln|cos x| + C = ln|sec x| + C.",
+  "kind": "formula",
+  "id": "d468e608-a4bd-4296-914a-91072bd51d37",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ x/(1 + x²) dx equals?",
+  "formula": "",
+  "options": [
+   "½ ln(1+x²) + C",
+   "tan⁻¹x + C",
+   "ln(1+x²) + C",
+   "½ tan⁻¹(x²) + C"
+  ],
+  "answer": 0,
+  "explain": "Numerator is ½·d(1+x²), so this is a log form, not an inverse tangent.",
+  "kind": "exception",
+  "id": "91e70aa0-ff0e-447b-9bc0-037b3ffe10ee",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ x²/(1 + x⁶) dx equals?",
+  "formula": "",
+  "options": [
+   "(1/3)tan⁻¹(x³) + C",
+   "tan⁻¹(x³) + C",
+   "(1/3)ln(1+x⁶) + C",
+   "(1/2)tan⁻¹(x³) + C"
+  ],
+  "answer": 0,
+  "explain": "Put t = x³, so x²dx = dt/3 and the integral is (1/3)∫dt/(1+t²).",
+  "kind": "formula",
+  "id": "8688b324-8ea9-4f8f-84c4-10b67ee9c225",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ from −∞ to ∞ of dx/(1+x²) equals?",
+  "formula": "",
+  "options": [
+   "π",
+   "π/2",
+   "2π",
+   "Diverges"
+  ],
+  "answer": 0,
+  "explain": "[tan⁻¹x] from −∞ to ∞ = π/2 − (−π/2) = π.",
+  "kind": "result",
+  "id": "c7469540-155a-4422-90b3-dffd02d686a6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "For a>0, ∫₀^a dx/(x²+a²) equals?",
+  "formula": "",
+  "options": [
+   "π/(2a)",
+   "π/(4a²)",
+   "π/4",
+   "π/(4a)"
+  ],
+  "answer": 3,
+  "explain": "(1/a)[tan⁻¹(x/a)]₀^a = (1/a)(π/4).",
+  "kind": "result",
+  "id": "030384b3-ee16-4603-a966-e2d4b677fdb3",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "Value of ∫₀^√3 dx/(x²+3)?",
+  "formula": "(1/√3)tan⁻¹(x/√3)",
+  "options": [
+   "π/(3√3)",
+   "π/(6√3)",
+   "π/4",
+   "π/(4√3)"
+  ],
+  "answer": 3,
+  "explain": "(1/√3)[tan⁻¹(1) − tan⁻¹(0)] = (1/√3)(π/4) = π/(4√3).",
+  "kind": "result",
+  "id": "1af5dc0a-b9ae-4b1d-bcac-4f206e70b4e4",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "The improper integral ∫₀¹ dx/(1−x²) is?",
+  "formula": "",
+  "options": [
+   "(1/2)ln 2",
+   "ln 2",
+   "Divergent",
+   "π/4"
+  ],
+  "answer": 2,
+  "explain": "Antiderivative ½ln|(1+x)/(1−x)| → ∞ as x→1⁻, so the integral diverges.",
+  "kind": "exception",
+  "id": "a7677afa-fc41-4697-82ac-533481857ae4",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(a²cos²x + b²sin²x) = ?",
+  "formula": "divide by cos²x, put t = tan x",
+  "options": [
+   "(1/ab) tan⁻¹(a tan x / b) + C",
+   "(1/ab) tan⁻¹(b tan x / a) + C",
+   "ab tan⁻¹(b tan x / a) + C",
+   "(1/(a²+b²)) tan⁻¹(b tan x / a) + C"
+  ],
+  "answer": 1,
+  "explain": "∫sec²x dx/(a² + b²tan²x) = (1/ab) tan⁻¹(b tan x/a).",
+  "kind": "formula",
+  "id": "d0877122-5590-44ba-aa5b-c2ee58bec54a",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/(sin x + √3 cos x) = ?",
+  "formula": "",
+  "options": [
+   "½ ln|tan(x/2 + π/6)| + C",
+   "½ ln|tan(x/2 + π/3)| + C",
+   "ln|tan(x/2 + π/6)| + C",
+   "½ ln|tan(x + π/3)| + C"
+  ],
+  "answer": 0,
+  "explain": "Denominator = 2sin(x+π/3); ∫cosec θ dθ = ln|tan(θ/2)|, so ½ ln|tan(x/2+π/6)|.",
+  "kind": "result",
+  "id": "25e818f8-5e11-44c6-b010-8ec7c54bbcd9",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "With t = tan(x/2), ∫dx/(a + b sin x) becomes which integrand in t?",
+  "formula": "sin x = 2t/(1 + t²)",
+  "options": [
+   "2dt/(at² + bt + a)",
+   "dt/(at² + 2bt + a)",
+   "2dt/(at² + 2bt + a)",
+   "2dt/(a + 2bt + bt²)"
+  ],
+  "answer": 2,
+  "explain": "a(1+t²) + 2bt = at² + 2bt + a, and the numerator is 2dt after cancelling 1+t².",
+  "kind": "formula",
+  "id": "5c834c72-b85b-423b-abed-48d372d64506",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫x sec²x dx equals?",
+  "formula": "",
+  "options": [
+   "x tan x − ln|sin x| + C",
+   "x tan x + ln|cos x| + C",
+   "x tan x + ln|sec x| + C",
+   "x sec x − ln|sec x + tan x| + C"
+  ],
+  "answer": 1,
+  "explain": "x tan x − ∫tan x dx = x tan x + ln|cos x|.",
+  "kind": "result",
+  "id": "e975daf8-4ad2-4a98-b7c2-223c400d15a6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ[ln(sec x + tan x) + sec x]dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ sec x + C",
+   "eˣ ln(sec x + tan x) + C",
+   "eˣ tan x + C",
+   "eˣ sec x tan x + C"
+  ],
+  "answer": 1,
+  "explain": "f = ln(sec x + tan x), f′ = sec x, so the result is eˣ f(x).",
+  "kind": "result",
+  "id": "e4dd41fc-f2ac-44d7-b8f3-069cc023a51d",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫e²ˣ(2 tan x + sec²x)dx equals?",
+  "formula": "∫eᵃˣ[a f + f′]dx = eᵃˣ f",
+  "options": [
+   "e²ˣ sec²x + C",
+   "e²ˣ tan x + C",
+   "e²ˣ tan x /2 + C",
+   "2e²ˣ tan x + C"
+  ],
+  "answer": 1,
+  "explain": "Form eᵃˣ[a f + f′] with a = 2, f = tan x, giving e²ˣ tan x.",
+  "kind": "formula",
+  "id": "f2259ced-c7de-4f7d-b202-939a4cc926b0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫e^(2x) cos 2x dx equals?",
+  "formula": "a = 2, b = 2, a²+b² = 8",
+  "options": [
+   "e^(2x)(sin 2x + cos 2x)/4 + C",
+   "e^(2x)(sin 2x + cos 2x)/8 + C",
+   "e^(2x)(cos 2x − sin 2x)/4 + C",
+   "e^(2x)(sin 2x + cos 2x)/2 + C"
+  ],
+  "answer": 0,
+  "explain": "e^(2x)(2cos2x+2sin2x)/8 = e^(2x)(sin2x+cos2x)/4.",
+  "kind": "result",
+  "id": "cf328a96-ef8f-41b5-9d56-bed551b34ab9",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "Value of ∫₁^∞ dx/(1+x²)?",
+  "formula": "[tan⁻¹x]₁^∞ = π/2 − π/4",
+  "options": [
+   "π/2",
+   "π/4",
+   "π/3",
+   "3π/4"
+  ],
+  "answer": 1,
+  "explain": "tan⁻¹(∞) − tan⁻¹(1) = π/2 − π/4 = π/4.",
+  "kind": "result",
+  "id": "3025386b-e750-4657-953a-9a3782a4d5ee",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "Value of ∫₂^∞ dx/(x²−1)?",
+  "formula": "",
+  "options": [
+   "½ ln 3",
+   "½ ln(3/2)",
+   "ln 3",
+   "ln 2"
+  ],
+  "answer": 0,
+  "explain": "½ ln|(x−1)/(x+1)| from 2 to ∞ = 0 − ½ ln(1/3) = ½ ln 3.",
+  "kind": "result",
+  "id": "1131e3d7-e026-41c4-b683-f09994157776",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(3 + 5cos x) = ?",
+  "formula": "",
+  "options": [
+   "¼ ln|(2 + tan(x/2))/(2 − tan(x/2))| + C",
+   "¼ tan⁻¹(tan(x/2)/2) + C",
+   "½ ln|(2 + tan(x/2))/(2 − tan(x/2))| + C",
+   "¼ ln|(1 + 2tan(x/2))/(1 − 2tan(x/2))| + C"
+  ],
+  "answer": 0,
+  "explain": "t = tan(x/2) gives ∫dt/(4 − t²) = ¼ ln|(2+t)/(2−t)|.",
+  "kind": "result",
+  "id": "17457ab0-9616-4a06-ad56-9adbb9d75e4e",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫eˣ(x + 1) dx = ?",
+  "formula": "f = x, f′ = 1",
+  "options": [
+   "x eˣ + C",
+   "(x+1)eˣ + C",
+   "(x²/2 + x)eˣ + C",
+   "eˣ/x + C"
+  ],
+  "answer": 0,
+  "explain": "f = x, f′ = 1, so the integral is x eˣ.",
+  "kind": "result",
+  "id": "c568985c-f176-47d6-ae2d-6a1a09ba08c3",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x³ + 3x²) dx = ?",
+  "formula": "f = x³, f′ = 3x²",
+  "options": [
+   "x⁴eˣ/4 + C",
+   "(x³ + 3x²)eˣ + C",
+   "x³eˣ + C",
+   "3x²eˣ + C"
+  ],
+  "answer": 2,
+  "explain": "With f = x³, f′ = 3x², the integral is x³eˣ.",
+  "kind": "result",
+  "id": "3feeb0de-928e-4249-8020-3dffa199955f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[ln(1 + x²) + 2x/(1 + x²)] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ ln(1+x²) + C",
+   "eˣ/(1+x²) + C",
+   "eˣ tan⁻¹x + C",
+   "2x eˣ ln(1+x²) + C"
+  ],
+  "answer": 0,
+  "explain": "f = ln(1+x²) and f′ = 2x/(1+x²), so the result is eˣ f.",
+  "kind": "result",
+  "id": "e56d6d64-48a4-45db-b128-f8dd4c72de4f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫2e²ˣ dx, viewed as ∫eˣ[f+f′]dx with f = eˣ, gives?",
+  "formula": "f = eˣ ⇒ f + f′ = 2eˣ",
+  "options": [
+   "2e²ˣ + C",
+   "e²ˣ/2 + C",
+   "e²ˣ + C",
+   "eˣ + C"
+  ],
+  "answer": 2,
+  "explain": "eˣ[eˣ + eˣ] = 2e²ˣ, and the integral is eˣ·eˣ = e²ˣ.",
+  "kind": "result",
+  "id": "b30597a9-eb5e-4a61-b8d1-66759fbe2d28",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x ln x + ln x + 1) dx = ?",
+  "formula": "f = x ln x, f′ = ln x + 1",
+  "options": [
+   "eˣ ln x + C",
+   "x eˣ ln x + C",
+   "eˣ(ln x + 1) + C",
+   "eˣ x² ln x + C"
+  ],
+  "answer": 1,
+  "explain": "f = x ln x, f′ = ln x + 1, so the integrand is f + f′ and the result is x eˣ ln x.",
+  "kind": "result",
+  "id": "de2ccdfd-3abd-481c-81c6-9a8507612410",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ·x/(x+1)² dx = ?",
+  "formula": "f = 1/(x+1)",
+  "options": [
+   "eˣ/(x+1)² + C",
+   "eˣ/(x+1) + C",
+   "x eˣ/(x+1) + C",
+   "eˣ ln(x+1) + C"
+  ],
+  "answer": 1,
+  "explain": "f + f′ = 1/(x+1) − 1/(x+1)² = x/(x+1)², so the integral is eˣ/(x+1).",
+  "kind": "result",
+  "id": "4628c33a-0ecd-4e7a-a26f-22f31e476538",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(ln sin x + cot x) dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ ln sin x + C",
+   "eˣ ln cos x + C",
+   "eˣ cot x + C",
+   "eˣ ln tan x + C"
+  ],
+  "answer": 0,
+  "explain": "f = ln sin x gives f′ = cot x, so the integral is eˣ ln sin x.",
+  "kind": "result",
+  "id": "090f7104-e8dd-4d00-b1b8-f005f04b5a84",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[(ln x)² + 2 ln x / x] dx = ?",
+  "formula": "f = (ln x)²",
+  "options": [
+   "eˣ ln x + C",
+   "2eˣ(ln x)² + C",
+   "eˣ(ln x)² + C",
+   "eˣ(ln x)²/x + C"
+  ],
+  "answer": 2,
+  "explain": "f = (ln x)² gives f′ = 2 ln x / x, so the integral is eˣ(ln x)².",
+  "kind": "result",
+  "id": "fe7a9950-df53-45a8-8390-c35dbc7e565f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(sin 2x + 2cos 2x) dx = ?",
+  "formula": "f = sin 2x, f′ = 2cos 2x",
+  "options": [
+   "eˣ cos 2x + C",
+   "eˣ sin 2x + C",
+   "eˣ(sin 2x − cos 2x) + C",
+   "2eˣ sin 2x + C"
+  ],
+  "answer": 1,
+  "explain": "f = sin 2x and f′ = 2cos 2x, so the integral is eˣ sin 2x.",
+  "kind": "result",
+  "id": "811025b2-7601-45ab-933c-34c1d072dc92",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(sin²x + sin 2x) dx = ?",
+  "formula": "f = sin²x, f′ = sin 2x",
+  "options": [
+   "eˣ sin²x + C",
+   "eˣ sin 2x + C",
+   "eˣ cos²x + C",
+   "eˣ(sin²x + cos 2x) + C"
+  ],
+  "answer": 0,
+  "explain": "d(sin²x)/dx = 2 sin x cos x = sin 2x, so the integral is eˣ sin²x.",
+  "kind": "result",
+  "id": "4c461c3d-bb03-4529-b704-46035450b38a",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(ln cos x − tan x) dx = ?",
+  "formula": "f = ln cos x, f′ = −tan x",
+  "options": [
+   "eˣ ln cos x + C",
+   "eˣ ln sin x + C",
+   "eˣ ln sec x + C",
+   "eˣ tan x + C"
+  ],
+  "answer": 0,
+  "explain": "d(ln cos x)/dx = −tan x, so the integral is eˣ ln cos x.",
+  "kind": "result",
+  "id": "f169e059-f416-4e48-bb0a-811c0fdfd4b4",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x² + 3x + 1) dx = ?",
+  "formula": "f = x² + x, f′ = 2x + 1",
+  "options": [
+   "eˣ(x² + 3x) + C",
+   "eˣ(x² + x) + C",
+   "eˣ(x² + x + 1) + C",
+   "eˣ(x² + 2x) + C"
+  ],
+  "answer": 1,
+  "explain": "Take f = x² + x. Then f + f′ = x² + 3x + 1, so the integral is eˣ(x² + x) + C.",
+  "kind": "result",
+  "id": "5ed0708d-2e11-4e48-9f15-401ca17a9a6e",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "In ∫e^(3x) sin 4x dx, the denominator in the standard result is?",
+  "formula": "a² + b²",
+  "options": [
+   "25",
+   "7",
+   "5",
+   "12"
+  ],
+  "answer": 0,
+  "explain": "The denominator is a²+b² = 9+16 = 25, not its square root.",
+  "kind": "fact",
+  "id": "e2ecfd91-7bc5-40ca-86d8-48266ff79159",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "First step for ∫eˣ sin²x dx?",
+  "formula": "",
+  "options": [
+   "Write sin²x = (1 − cos 2x)/2",
+   "Use sin²x = (1 + cos 2x)/2",
+   "Substitute t = sin x",
+   "Take u = sin²x only, no rewriting"
+  ],
+  "answer": 0,
+  "explain": "Reduce the power first; then use the e^(ax)cos bx formula on the cos 2x term.",
+  "kind": "concept",
+  "id": "108c23d6-7b2d-4f57-b133-537e27bdd946",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "Under x = a tanθ, ∫ dx/(x²+a²) reduces to which integral?",
+  "formula": "",
+  "options": [
+   "(1/a)∫dθ",
+   "a∫dθ",
+   "(1/a²)∫sec θ dθ",
+   "(1/a)∫cosec²θ dθ"
+  ],
+  "answer": 0,
+  "explain": "dx = a sec²θ dθ and x²+a² = a² sec²θ, so the integrand becomes (1/a)dθ.",
+  "kind": "concept",
+  "id": "9049b847-2c83-402e-a8ca-90706d9501c8",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "Antiderivatives tan⁻¹x and −cot⁻¹x of 1/(1+x²) differ by what constant?",
+  "formula": "tan⁻¹x + cot⁻¹x = π/2",
+  "options": [
+   "π/2",
+   "π",
+   "0",
+   "π/4"
+  ],
+  "answer": 0,
+  "explain": "tan⁻¹x − (−cot⁻¹x) = tan⁻¹x + cot⁻¹x = π/2, a constant absorbed in C.",
+  "kind": "concept",
+  "id": "0240a09a-13a2-4be2-bb70-5e4e9cfdf49d",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "For a>0, ∫ from −a to a of dx/(x²+a²) equals?",
+  "formula": "",
+  "options": [
+   "π/(4a)",
+   "π/(2a)",
+   "π/a",
+   "0"
+  ],
+  "answer": 1,
+  "explain": "(1/a)[tan⁻¹(x/a)] from −a to a = (1/a)(π/4+π/4) = π/(2a).",
+  "kind": "result",
+  "id": "a32ab16e-bfbe-43f9-bd5c-ca9b6fe7d916",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "For a>0, ∫ from −∞ to ∞ of dx/(x²+a²) equals?",
+  "formula": "",
+  "options": [
+   "π/(2a)",
+   "π/a",
+   "π",
+   "2π/a"
+  ],
+  "answer": 1,
+  "explain": "(1/a)[π/2−(−π/2)] = π/a.",
+  "kind": "result",
+  "id": "47449835-8efa-4155-860a-545c147d7005",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(5 + 4 sin x) = ?",
+  "formula": "",
+  "options": [
+   "(2/3) tan⁻¹((5tan(x/2) + 4)/3) + C",
+   "(1/3) tan⁻¹((5tan(x/2) + 4)/3) + C",
+   "(2/3) tan⁻¹((4tan(x/2) + 5)/3) + C",
+   "(2/9) tan⁻¹((5tan(x/2) + 4)/3) + C"
+  ],
+  "answer": 0,
+  "explain": "2dt/(5t²+8t+5) with t = tan(x/2) gives (2/3)tan⁻¹((5t+4)/3).",
+  "kind": "result",
+  "id": "277cb4c4-83cf-4e5c-922b-b49e25c3d6d2",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/cos x (the case a = 0, b = 1) = ?",
+  "formula": "",
+  "options": [
+   "ln|tan(x/2 + π/4)| + C",
+   "ln|tan(x/2)| + C",
+   "ln|tan(x/2 + π/8)| + C",
+   "ln|sin x + cos x| + C"
+  ],
+  "answer": 0,
+  "explain": "∫sec x dx = ln|sec x + tan x| = ln|tan(π/4 + x/2)| + C.",
+  "kind": "result",
+  "id": "247c91f9-81f2-4843-b5c0-78557e8e7e83",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫ dx/sin x (the case a = 0, b = 1) = ?",
+  "formula": "",
+  "options": [
+   "ln|tan(x/2)| + C",
+   "ln|tan x| + C",
+   "ln|cot(x/2)| + C",
+   "ln|sec x + tan x| + C"
+  ],
+  "answer": 0,
+  "explain": "With t = tan(x/2), dx/sin x = dt/t, so the integral is ln|tan(x/2)| + C.",
+  "kind": "result",
+  "id": "44ee4293-2978-4c7b-931b-52ccce79f623",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫sec³x dx equals?",
+  "formula": "",
+  "options": [
+   "sec x tan x + ln|sec x + tan x| + C",
+   "½ sec x tan x − ½ ln|sec x + tan x| + C",
+   "½[sec x tan x + ln|sec x + tan x|] + C",
+   "⅓ sec³x tan x + C"
+  ],
+  "answer": 2,
+  "explain": "Parts: I = sec x tan x − ∫sec x tan²x dx = sec x tan x − I + ∫sec x dx.",
+  "kind": "result",
+  "id": "e506a3b4-4284-4bdd-be28-88b872eda5dd",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫₀¹ eˣ(x² + 2x) dx = ?",
+  "formula": "",
+  "options": [
+   "e",
+   "e − 1",
+   "2e",
+   "3e − 1"
+  ],
+  "answer": 0,
+  "explain": "The antiderivative is x²eˣ, so the value is [x²eˣ]₀¹ = e.",
+  "kind": "result",
+  "id": "2aa1d26f-44fe-4e41-b64e-03cfbbbd8996",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(cos²x − sin 2x) dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ sin²x + C",
+   "eˣ cos 2x + C",
+   "eˣ cos²x + C",
+   "eˣ sin 2x + C"
+  ],
+  "answer": 2,
+  "explain": "f = cos²x, f′ = −2 sin x cos x = −sin 2x.",
+  "kind": "result",
+  "id": "ba7411df-0d7c-42a3-babe-326aa44e9c94",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[ln(x+√(x²+1)) + 1/√(x²+1)] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ/√(x²+1) + C",
+   "eˣ tan⁻¹x + C",
+   "eˣ ln(x²+1) + C",
+   "eˣ ln(x+√(x²+1)) + C"
+  ],
+  "answer": 3,
+  "explain": "d/dx ln(x+√(x²+1)) = 1/√(x²+1), so the pattern f + f′ holds.",
+  "kind": "result",
+  "id": "5989803f-9b46-4d03-b6aa-cb63a102823f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x sin x + sin x + x cos x) dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ sin x + C",
+   "x eˣ cos x + C",
+   "x eˣ sin x + C",
+   "eˣ x² sin x + C"
+  ],
+  "answer": 2,
+  "explain": "f = x sin x, f′ = sin x + x cos x.",
+  "kind": "result",
+  "id": "2d624aae-f461-4960-b906-5b14b87cdb27",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[sin x/x + (x cos x − sin x)/x²] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ cos x/x + C",
+   "eˣ sin x/x + C",
+   "eˣ sin x/x² + C",
+   "eˣ x sin x + C"
+  ],
+  "answer": 1,
+  "explain": "f = sin x/x, f′ = (x cos x − sin x)/x², so the integral is eˣ sin x/x.",
+  "kind": "result",
+  "id": "489f5d9e-3523-4fd9-9b61-b9ea2ee75fd0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e²ˣ(2 tan x + sec²x) dx = ?",
+  "formula": "∫e^{ax}[a f + f′]dx = e^{ax}f",
+  "options": [
+   "e²ˣ sec²x + C",
+   "e²ˣ tan x + C",
+   "2e²ˣ tan x + C",
+   "eˣ tan x + C"
+  ],
+  "answer": 1,
+  "explain": "d(e²ˣ tan x) = e²ˣ(2 tan x + sec²x).",
+  "kind": "result",
+  "id": "f321edf7-8ea2-4442-93f3-8f7ce25d3d82",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e²ˣ(2 ln x + 1/x) dx = ?",
+  "formula": "",
+  "options": [
+   "e²ˣ ln x + C",
+   "2e²ˣ ln x + C",
+   "e²ˣ ln x/2 + C",
+   "eˣ ln x + C"
+  ],
+  "answer": 0,
+  "explain": "Form e^(ax)(a f + f′) with a = 2, f = ln x, so the integral is e²ˣ ln x.",
+  "kind": "result",
+  "id": "a610a22f-c205-4df0-bda7-49e8ca4c5ee0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x⁴ + 4x³) dx = ?",
+  "formula": "f = x⁴",
+  "options": [
+   "x⁴eˣ + C",
+   "x³eˣ + C",
+   "(x⁴ + 4x³)eˣ + C",
+   "x⁴eˣ/4 + C"
+  ],
+  "answer": 0,
+  "explain": "f = x⁴, f′ = 4x³, so the integrand is f + f′ and the integral is x⁴eˣ.",
+  "kind": "result",
+  "id": "3f8ddee5-15e8-4ac4-9d66-c58fd36414c3",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e^(2x)(2cos x − sin x) dx equals?",
+  "formula": "",
+  "options": [
+   "e^(2x) cos x + C",
+   "e^(2x) sin x + C",
+   "e^(2x)(2 sin x + cos x) + C",
+   "e^(2x)(cos x − sin x)/5 + C"
+  ],
+  "answer": 0,
+  "explain": "d/dx(e^(2x) cos x) = e^(2x)(2cos x − sin x), so the integrand is already a derivative.",
+  "kind": "result",
+  "id": "fe29c56b-4674-41c7-90e5-89e4069b8787",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "∫ [d/dx (x³)] dx equals:",
+  "formula": "∫ F′(x) dx = F(x) + C",
+  "options": [
+   "3x²",
+   "3x² + C",
+   "x³",
+   "x³ + C"
+  ],
+  "answer": 3,
+  "explain": "Integrating a derivative gives back the function plus an arbitrary constant.",
+  "kind": "concept",
+  "id": "d0f28a6d-a592-4917-8968-d3bef93785c9",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "Which condition on f over an interval guarantees that ∫ f(x) dx exists there?",
+  "formula": "",
+  "options": [
+   "f is continuous",
+   "f is bounded",
+   "f has a jump discontinuity",
+   "f is even"
+  ],
+  "answer": 0,
+  "explain": "Every continuous function has an antiderivative on its interval (boundedness alone is not enough).",
+  "kind": "fact",
+  "id": "a0cff337-7397-4cf0-a186-956edda2f6af",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "Which function has no antiderivative on ℝ?",
+  "formula": "",
+  "options": [
+   "|x|",
+   "[x] (greatest integer function)",
+   "x²",
+   "cos x"
+  ],
+  "answer": 1,
+  "explain": "A derivative cannot have a jump discontinuity, so [x] has no antiderivative on ℝ.",
+  "kind": "exception",
+  "id": "27280dae-cd69-4b3a-99e2-eac8a83cd4d5",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "∫ e^(ln x) dx (x > 0) equals:",
+  "formula": "",
+  "options": [
+   "x²/2 + C",
+   "eˣ ln x + C",
+   "x + C",
+   "1/x + C"
+  ],
+  "answer": 0,
+  "explain": "e^(ln x) = x, so the integral is ∫x dx = x²/2 + C.",
+  "kind": "result",
+  "id": "4d42267c-e4a0-4d5d-a30d-d3456e305ee2",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "Which is NOT an antiderivative of sin x cos x?",
+  "formula": "",
+  "options": [
+   "sin²x/2",
+   "−cos²x/2",
+   "−cos 2x/4",
+   "sin 2x/4"
+  ],
+  "answer": 3,
+  "explain": "sin 2x/4 has derivative cos 2x/2, not sin x cos x. The others differ from each other only by constants.",
+  "kind": "exception",
+  "id": "afa64198-659a-4257-a8ae-5261e3df57dd",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "If d/dx[F(x)] = f(x), then ∫ f(x) dx = F(x) + C. Which is an antiderivative of 1/(2√x) on x>0?",
+  "formula": "",
+  "options": [
+   "√x",
+   "2√x",
+   "1/√x",
+   "x^(3/2)"
+  ],
+  "answer": 0,
+  "explain": "d/dx(√x) = 1/(2√x), so √x is an antiderivative.",
+  "kind": "fact",
+  "id": "616838e8-2374-4e04-be48-3d948fff3d90",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration as inverse of differentiation"
+ },
+ {
+  "prompt": "∫ dx/(1 + cos x) equals?",
+  "formula": "1 + cos x = 2cos²(x/2)",
+  "options": [
+   "tan(x/2) + C",
+   "2 tan(x/2) + C",
+   "−cot(x/2) + C",
+   "ln|sec x + tan x| + C"
+  ],
+  "answer": 0,
+  "explain": "1/(2cos²(x/2)) = ½sec²(x/2), and its integral is tan(x/2) + C.",
+  "kind": "formula",
+  "id": "d327af93-ef47-4746-aa4d-b7cf374fa3cd",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ dx/√x (x > 0) equals?",
+  "formula": "",
+  "options": [
+   "2√x + C",
+   "√x/2 + C",
+   "−1/(2x√x) + C",
+   "ln√x + C"
+  ],
+  "answer": 0,
+  "explain": "∫x^(−1/2) dx = x^(1/2)/(1/2) = 2√x + C.",
+  "kind": "formula",
+  "id": "99b77962-d84d-4e15-91f1-fcbe596dccb6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ dx/(1 + cos 2x) equals?",
+  "formula": "1 + cos 2x = 2cos²x",
+  "options": [
+   "½ tan x + C",
+   "tan x + C",
+   "−½ cot x + C",
+   "2 tan x + C"
+  ],
+  "answer": 0,
+  "explain": "1/(2cos²x) = ½sec²x, and its integral is ½ tan x + C.",
+  "kind": "formula",
+  "id": "2ecdef5a-c263-4e16-be8e-5c235b698722",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ sec x·cosec x dx equals?",
+  "formula": "",
+  "options": [
+   "ln|tan x| + C",
+   "ln|cot x| + C",
+   "ln|sin x cos x| + C",
+   "ln|sec x + cosec x| + C"
+  ],
+  "answer": 0,
+  "explain": "sec x cosec x = sec²x/tan x, so ∫ = ln|tan x| + C.",
+  "kind": "result",
+  "id": "4e36b3c4-67af-4117-b16f-358227956881",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "For a > 0, ∫ dx/(x√(x² − a²)) equals?",
+  "formula": "",
+  "options": [
+   "a·sec⁻¹(x/a) + C",
+   "sec⁻¹(x/a) + C",
+   "(1/a)·cos⁻¹(x/a) + C",
+   "(1/a)·sec⁻¹(x/a) + C"
+  ],
+  "answer": 3,
+  "explain": "Standard result: (1/a) sec⁻¹(x/a) + C, from x = a sec θ.",
+  "kind": "formula",
+  "id": "119ec588-62c0-47f7-8688-5399c98125d6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "For a > 0, ∫ dx/√(a² − x²) equals?",
+  "formula": "",
+  "options": [
+   "sin⁻¹(x/a) + C",
+   "(1/a) sin⁻¹(x/a) + C",
+   "a sin⁻¹(x/a) + C",
+   "sin⁻¹(ax) + C"
+  ],
+  "answer": 0,
+  "explain": "With x = a sinθ, dx = a cosθ dθ, so the integral is θ = sin⁻¹(x/a); no 1/a factor appears.",
+  "kind": "formula",
+  "id": "9888f911-1fbc-48d9-9ffa-d56d288bedd0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "Which is NOT a valid property of indefinite integrals?",
+  "formula": "",
+  "options": [
+   "∫f(x)g(x)dx = ∫f(x)dx · ∫g(x)dx",
+   "∫[f(x) − g(x)]dx = ∫f dx − ∫g dx",
+   "∫k f(x)dx = k∫f(x)dx",
+   "∫f′(x)dx = f(x) + C"
+  ],
+  "answer": 0,
+  "explain": "The integral of a product is not the product of integrals; only sums, differences and constant multiples split.",
+  "kind": "exception",
+  "id": "31f03600-ef26-4cfc-9200-da58a52e4781",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "If ∫f(x)dx = g(x) + C, then ∫f⁻¹(x)dx equals:",
+  "formula": "",
+  "options": [
+   "x·f⁻¹(x) − g(f⁻¹(x)) + C",
+   "x·f⁻¹(x) − g(x) + C",
+   "f⁻¹(x)·g(x) + C",
+   "g⁻¹(x) + C"
+  ],
+  "answer": 0,
+  "explain": "Put x = f(t): ∫t f′(t)dt = t f(t) − ∫f(t)dt, giving x f⁻¹(x) − g(f⁻¹(x)) + C.",
+  "kind": "formula",
+  "id": "14d8a58b-9f81-4db0-8f30-427d26c790e2",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "If f is a continuous odd function, every antiderivative of f is:",
+  "formula": "",
+  "options": [
+   "An even function",
+   "An odd function",
+   "Odd only when C = 0",
+   "A periodic function"
+  ],
+  "answer": 0,
+  "explain": "F(x) and F(−x) have the same derivative f(x), so they differ by a constant. Putting x = 0 shows that constant is 0, so F is even.",
+  "kind": "concept",
+  "id": "e3af9582-cb8c-460e-8e47-adbc2dbf4362",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "∫ dx/(2x² + 2x + 1) equals?",
+  "formula": "",
+  "options": [
+   "tan⁻¹(2x+1) + C",
+   "½tan⁻¹(2x+1) + C",
+   "2tan⁻¹(2x+1) + C",
+   "tan⁻¹(x+½) + C"
+  ],
+  "answer": 0,
+  "explain": "2x²+2x+1 = ½[(2x+1)²+1]; ∫2dx/((2x+1)²+1) = tan⁻¹(2x+1) + C.",
+  "kind": "result",
+  "id": "2fa054a2-d84b-492c-8400-0eb95bcafb84",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/(4−9x²) equals?",
+  "formula": "",
+  "options": [
+   "(1/12)ln|(2+3x)/(2−3x)| + C",
+   "(1/6)ln|(2+3x)/(2−3x)| + C",
+   "(1/12)ln|(3x−2)/(3x+2)| + C",
+   "(1/6)tan⁻¹(3x/2) + C"
+  ],
+  "answer": 0,
+  "explain": "u = 3x gives (1/3)∫du/(4−u²) = (1/3)(1/4)ln|(2+u)/(2−u)|.",
+  "kind": "result",
+  "id": "45281e3c-1b8f-4a50-8311-859218911504",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "Value of ∫₀^∞ dx/(x²+2x+2)?",
+  "formula": "",
+  "options": [
+   "π/4",
+   "π/2",
+   "3π/4",
+   "π"
+  ],
+  "answer": 0,
+  "explain": "x²+2x+2 = (x+1)²+1, so tan⁻¹(x+1) from 0 to ∞ = π/2 − π/4 = π/4.",
+  "kind": "result",
+  "id": "bbf25002-bea1-4ae8-b57f-168840777934",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "Value of ∫₀¹ dx/√(1+x²)?",
+  "formula": "[ln(x+√(1+x²))]₀¹",
+  "options": [
+   "ln(1+√2)",
+   "ln 2",
+   "π/4",
+   "ln(√2−1)"
+  ],
+  "answer": 0,
+  "explain": "Antiderivative is ln(x+√(1+x²)); at 1 it is ln(1+√2), at 0 it is 0.",
+  "kind": "result",
+  "id": "34952e8a-c266-4f55-a430-143b6fe53205",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/(√x·√(1−x)) equals?",
+  "formula": "",
+  "options": [
+   "2 sin⁻¹(√x)+C",
+   "sin⁻¹(√x)+C",
+   "2 ln|√x+√(1−x)|+C",
+   "sin⁻¹(2x−1)/2+C"
+  ],
+  "answer": 0,
+  "explain": "Put t=√x: dx=2t dt, giving 2∫dt/√(1−t²)=2 sin⁻¹√x+C.",
+  "kind": "result",
+  "id": "ceae4d53-73a1-4e40-ab4d-2785f70b30d6",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "For a>0, the value of ∫ from −a to a of dx/√(a²−x²) is?",
+  "formula": "∫dx/√(a²−x²) = sin⁻¹(x/a) + C",
+  "options": [
+   "π",
+   "π/2",
+   "πa",
+   "2π"
+  ],
+  "answer": 0,
+  "explain": "sin⁻¹(1) − sin⁻¹(−1) = π/2 + π/2 = π, independent of a.",
+  "kind": "result",
+  "id": "84aedf78-8b3b-40d8-9c03-c6a68188c9b1",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫√(1−4x²) dx equals?",
+  "formula": "",
+  "options": [
+   "x√(1−4x²)/2 + ¼ sin⁻¹(2x) + C",
+   "x√(1−4x²)/2 + ½ sin⁻¹(2x) + C",
+   "x√(1−4x²) + ¼ sin⁻¹(2x) + C",
+   "x√(1−4x²)/4 + ¼ sin⁻¹(2x) + C"
+  ],
+  "answer": 0,
+  "explain": "√(1−4x²) = 2√(¼−x²); apply the standard formula with a = ½ and multiply by 2.",
+  "kind": "result",
+  "id": "0a30966a-d30b-4e8d-8ec8-f25c548ff9c3",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫₀^{2π} dx/(13 + 5cos x) = ?",
+  "formula": "∫₀^{2π} dx/(a + b cos x) = 2π/√(a²−b²), a > |b|",
+  "options": [
+   "π/6",
+   "π/12",
+   "π/3",
+   "2π/13"
+  ],
+  "answer": 0,
+  "explain": "√(169−25) = 12, so the value is 2π/12 = π/6.",
+  "kind": "result",
+  "id": "1da48288-ef7f-4ed4-8131-68d89c1491ac",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "The value of ∫₀^{π/2} dx/(1 + sin x) is:",
+  "formula": "",
+  "options": [
+   "1",
+   "½",
+   "2",
+   "π/4"
+  ],
+  "answer": 0,
+  "explain": "The substitution x → π/2 − x gives ∫₀^{π/2} dx/(1+cos x) = [tan(x/2)]₀^{π/2} = 1.",
+  "kind": "result",
+  "id": "1b89b2b6-c0c1-4f84-b45e-cf99a632a48b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫eˣ(2 + sin 2x)/(1 + cos 2x) dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ sec²x + C",
+   "eˣ tan x + C",
+   "eˣ tan 2x + C",
+   "eˣ cot x + C"
+  ],
+  "answer": 1,
+  "explain": "Integrand = eˣ(sec²x + tan x), since 1 + cos 2x = 2cos²x.",
+  "kind": "result",
+  "id": "affd6bc5-0cb7-416f-b2f4-370b3fb6965e",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ(x² + 2x) dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ(x² − 2) + C",
+   "x²eˣ + C",
+   "eˣ(x²+2x) + C",
+   "eˣ(x²+x) + C"
+  ],
+  "answer": 1,
+  "explain": "f = x², f′ = 2x, so the integrand is eˣ(f+f′); result x²eˣ.",
+  "kind": "result",
+  "id": "a3cd570a-9051-4923-aded-8a2ee0ca4cd4",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫e²ˣ(2x + 1) dx equals?",
+  "formula": "",
+  "options": [
+   "x e²ˣ + C",
+   "e²ˣ(x+1) + C",
+   "½ x e²ˣ + C",
+   "e²ˣ(2x−1)/4 + C"
+  ],
+  "answer": 0,
+  "explain": "Form e^{ax}(a f + f′) with f = x, a = 2: result e^{ax}f = x e²ˣ.",
+  "kind": "result",
+  "id": "956f4c6b-7ba3-4c19-b2c7-2f1178b7c7f1",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ(1−x)²/(1+x²)² dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ/(1+x²) + C",
+   "eˣ x/(1+x²) + C",
+   "eˣ/(1+x²)² + C",
+   "eˣ(1−x)/(1+x²) + C"
+  ],
+  "answer": 0,
+  "explain": "f = 1/(1+x²), f′ = −2x/(1+x²)²; f + f′ = (1−x)²/(1+x²)².",
+  "kind": "result",
+  "id": "56d94c00-4a00-418b-843e-f9f0ddf64253",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ[tan⁻¹x + 1/(1+x²)] dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ tan⁻¹x + C",
+   "eˣ/(1+x²) + C",
+   "eˣ(tan⁻¹x − 1/(1+x²)) + C",
+   "eˣ ln(1+x²) + C"
+  ],
+  "answer": 0,
+  "explain": "f = tan⁻¹x, f′ = 1/(1+x²), so the result is eˣ f(x).",
+  "kind": "result",
+  "id": "cb5fe22f-0ae5-4338-8eb5-e2b129246d2d",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫₀^(π/2) eˣ(sin x + cos x) dx = ?",
+  "formula": "[eˣ sin x]₀^(π/2)",
+  "options": [
+   "e^(π/2)",
+   "e^(π/2) − 1",
+   "1",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "The antiderivative is eˣ sin x. At π/2 it is e^(π/2) and at 0 it is 0.",
+  "kind": "result",
+  "id": "92cfc4b9-2593-4c05-87df-9aa8c32e3f41",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(xⁿ + n xⁿ⁻¹) dx = ?",
+  "formula": "f = xⁿ",
+  "options": [
+   "xⁿeˣ + C",
+   "xⁿ⁺¹eˣ + C",
+   "n xⁿ⁻¹eˣ + C",
+   "xⁿeˣ/n + C"
+  ],
+  "answer": 0,
+  "explain": "f = xⁿ and f′ = n xⁿ⁻¹, so the integral is xⁿeˣ.",
+  "kind": "formula",
+  "id": "ae407cdb-dc74-49a4-a95a-ec60598494f1",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x cos x + cos x − x sin x) dx = ?",
+  "formula": "f = x cos x",
+  "options": [
+   "x eˣ cos x + C",
+   "x eˣ sin x + C",
+   "eˣ cos x + C",
+   "eˣ(x cos x + sin x) + C"
+  ],
+  "answer": 0,
+  "explain": "f = x cos x and f′ = cos x − x sin x, so the integral is x eˣ cos x.",
+  "kind": "result",
+  "id": "1c29c672-9486-45d8-bd0a-255e88b987b8",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(sec²x + 2 sec²x tan x) dx = ?",
+  "formula": "f = sec²x, f′ = 2sec²x tan x",
+  "options": [
+   "eˣ sec²x + C",
+   "eˣ tan²x + C",
+   "eˣ sec x tan x + C",
+   "eˣ tan x + C"
+  ],
+  "answer": 0,
+  "explain": "f = sec²x has f′ = 2 sec²x tan x, so the integral is eˣ sec²x.",
+  "kind": "result",
+  "id": "219f605b-9c4a-4dff-b319-ecc7cdedea3f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(tan x + ln sec x) dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ ln cos x + C",
+   "eˣ tan x + C",
+   "eˣ sec x + C",
+   "eˣ ln sec x + C"
+  ],
+  "answer": 3,
+  "explain": "f = ln sec x, f′ = tan x, so the integral is eˣ ln sec x + C.",
+  "kind": "result",
+  "id": "307e0fbe-efe7-4de6-9db0-d945d64eb50c",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫₁² eˣ(1/x − 1/x²) dx = ?",
+  "formula": "",
+  "options": [
+   "e² − e",
+   "e²/2 − e",
+   "e² − e/2",
+   "e²/2 − e/2"
+  ],
+  "answer": 1,
+  "explain": "The antiderivative is eˣ/x, so the value is e²/2 − e.",
+  "kind": "result",
+  "id": "e2bd0f05-39eb-45c7-95cb-16c7cf596a39",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "If ∫eˣ g(x)dx = eˣ(x²+1) + C, then g(x) = ?",
+  "formula": "",
+  "options": [
+   "x² + 1",
+   "x² + 2x",
+   "(x + 1)²",
+   "2x"
+  ],
+  "answer": 2,
+  "explain": "Differentiate: g = (x²+1) + 2x = (x+1)².",
+  "kind": "concept",
+  "id": "105ca9b3-23c9-4411-b6ac-246b77b40e14",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ(x tan x + tan x + x sec²x) dx = ?",
+  "formula": "f = x tan x",
+  "options": [
+   "eˣ tan x + C",
+   "x eˣ sec x + C",
+   "x eˣ tan x + C",
+   "eˣ x sec²x + C"
+  ],
+  "answer": 2,
+  "explain": "f = x tan x, f′ = tan x + x sec²x, so f + f′ is the integrand. The integral is x eˣ tan x + C.",
+  "kind": "result",
+  "id": "e2e2464c-f448-4bfd-aaf4-52c075f6d109",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫₀¹ eˣ[1/(1+x) − 1/(1+x)²] dx = ?",
+  "formula": "",
+  "options": [
+   "e/2 − 1",
+   "e − 1",
+   "e/2",
+   "e − 1/2"
+  ],
+  "answer": 0,
+  "explain": "Antiderivative eˣ/(1+x): e/2 − 1.",
+  "kind": "result",
+  "id": "c1c9b301-c6ef-479a-a6e0-de67a3e8a0b7",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[x² + 2x + sin x + cos x] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ(x² + sin x) + C",
+   "eˣ(x² + cos x) + C",
+   "eˣ(x + sin x) + C",
+   "eˣ(2x + sin x) + C"
+  ],
+  "answer": 0,
+  "explain": "Split: (x² + 2x) gives x²eˣ and (sin x + cos x) gives eˣ sin x.",
+  "kind": "result",
+  "id": "051314a5-cb77-4588-b7e5-fbcc2aac2717",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "Value of ∫₀^∞ e^(−x) sin x dx?",
+  "formula": "",
+  "options": [
+   "1/2",
+   "1",
+   "0",
+   "1/4"
+  ],
+  "answer": 0,
+  "explain": "Antiderivative −e^(−x)(sin x+cos x)/2 goes from −1/2 at 0 to 0 at ∞, so value 1/2.",
+  "kind": "result",
+  "id": "b38e6965-de8c-4c64-9740-4774d337e769",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "Putting b = 0 in the formula for ∫eᵃˣ cos bx dx gives?",
+  "formula": "",
+  "options": [
+   "eᵃˣ/a",
+   "a·eᵃˣ",
+   "eᵃˣ/a²",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "eᵃˣ(a·1 + 0)/a² = eᵃˣ/a, which matches ∫eᵃˣ dx.",
+  "kind": "concept",
+  "id": "8e8321b3-3cb0-446f-9787-d0be77fdcaee",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "∫₀^∞ e^(−2x) sin x dx equals?",
+  "formula": "∫₀^∞ e^(−ax) sin bx dx = b/(a²+b²)",
+  "options": [
+   "1/5",
+   "2/5",
+   "1/3",
+   "1/2"
+  ],
+  "answer": 0,
+  "explain": "b/(a²+b²) with a = 2, b = 1 gives 1/5.",
+  "kind": "result",
+  "id": "02f9985a-13b3-4a85-9d9d-037ef51e4610",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "Value of ∫₀^∞ e^(−x) cos 2x dx?",
+  "formula": "∫₀^∞ e^(−ax) cos bx dx = a/(a²+b²)",
+  "options": [
+   "1/5",
+   "2/5",
+   "1/3",
+   "1"
+  ],
+  "answer": 0,
+  "explain": "a = 1, b = 2 gives a/(a²+b²) = 1/5. The b/(a²+b²) form belongs to the sine integral.",
+  "kind": "result",
+  "id": "0d26cebb-ce6a-4be5-8e3e-ae4e2a29e155",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ },
+ {
+  "prompt": "∫ eˣ·2ˣ dx equals?",
+  "formula": "∫aˣ dx = aˣ/ln a, with a = 2e",
+  "options": [
+   "(2e)ˣ/(1 + ln 2) + C",
+   "(2e)ˣ/ln 2 + C",
+   "2ˣeˣ(1 + ln 2) + C",
+   "(2e)ˣ/(2e) + C"
+  ],
+  "answer": 0,
+  "explain": "eˣ2ˣ = (2e)ˣ and ln(2e) = 1 + ln 2.",
+  "kind": "result",
+  "id": "117ee328-06ec-4fc7-bb98-c7683db3b55c",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "∫ dx/(x ln x), x > 1, equals?",
+  "formula": "",
+  "options": [
+   "ln|ln x| + C",
+   "(ln x)²/2 + C",
+   "ln|x ln x| + C",
+   "−1/(ln x)² + C"
+  ],
+  "answer": 0,
+  "explain": "Put t = ln x, then dt = dx/x, so ∫dt/t = ln|t| + C = ln|ln x| + C.",
+  "kind": "result",
+  "id": "6f20ce23-c962-4b16-882b-846b57e1bc82",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Standard integrals of elementary functions"
+ },
+ {
+  "prompt": "f is continuous and even. Which antiderivative F of f is guaranteed to be an odd function?",
+  "formula": "",
+  "options": [
+   "Every antiderivative of f",
+   "The one with F(0) = 0",
+   "The one with F(1) = 0",
+   "None of them can be odd"
+  ],
+  "answer": 1,
+  "explain": "F(x) = ∫₀ˣ f(t)dt is odd for even f; adding a nonzero constant destroys oddness.",
+  "kind": "concept",
+  "id": "985545f0-d07c-4184-a4b6-7b188942248c",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Properties of indefinite integrals"
+ },
+ {
+  "prompt": "For |x|>a, ∫ dx/(x²−a²) can be written as?",
+  "formula": "",
+  "options": [
+   "(1/a)coth⁻¹(x/a) + C",
+   "(1/a)tanh⁻¹(x/a) + C",
+   "(1/a)tan⁻¹(x/a) + C",
+   "(1/a)sinh⁻¹(x/a) + C"
+  ],
+  "answer": 0,
+  "explain": "For |x|>a, (1/2a)ln|(x−a)/(x+a)| = −(1/a)coth⁻¹(x/a)... check sign: d/dx coth⁻¹(x/a)=a/(a²−x²), so the antiderivative is −(1/a)coth⁻¹(x/a) in the form 1/(x²−a²).",
+  "kind": "formula",
+  "id": "ed9ee542-094c-486b-9963-88c4aa651317",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(x²±a²), 1/(a²−x²) forms"
+ },
+ {
+  "prompt": "∫dx/√(e²ˣ−1) equals?",
+  "formula": "",
+  "options": [
+   "sec⁻¹(eˣ)+C",
+   "ln|eˣ+√(e²ˣ−1)|+C",
+   "sin⁻¹(eˣ)+C",
+   "cos⁻¹(eˣ)+C"
+  ],
+  "answer": 0,
+  "explain": "Put t=eˣ, so dx=dt/t. Then ∫dt/(t√(t²−1)) = sec⁻¹t.",
+  "kind": "formula",
+  "id": "12dd6d0b-00da-424f-81bf-0df8fdcb554b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "∫ dx/√(x²+2x) equals?",
+  "formula": "x²+2x = (x+1)² − 1",
+  "options": [
+   "ln|x+√(x²+2x)|+C",
+   "sin⁻¹(x+1)+C",
+   "ln|x+1+√(x²+2x)|+C",
+   "sec⁻¹(x+1)+C"
+  ],
+  "answer": 2,
+  "explain": "Complete the square: (x+1)²−1² gives the form ∫dt/√(t²−1) = ln|t+√(t²−1)|, t = x+1.",
+  "kind": "result",
+  "id": "c746efac-ddde-4561-a1b8-ae6565ff3b81",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/√(x²±a²), 1/√(a²−x²) forms"
+ },
+ {
+  "prompt": "In ∫√(x²+4) dx, the coefficient of the logarithmic term is?",
+  "formula": "",
+  "options": [
+   "1",
+   "2",
+   "4",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "The coefficient is a²/2 with a = 2, which gives 2·ln|x+√(x²+4)|.",
+  "kind": "result",
+  "id": "08946c01-72d5-4e73-848f-7d913a67752f",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫₋ₐᵃ x√(a²−x²) dx equals?",
+  "formula": "",
+  "options": [
+   "0",
+   "a³/3",
+   "2a³/3",
+   "πa³/4"
+  ],
+  "answer": 0,
+  "explain": "The integrand x√(a²−x²) is odd and the limits are symmetric, so the integral is 0.",
+  "kind": "concept",
+  "id": "85c89951-88f7-4312-84b0-07c06e5326e0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of √(a²±x²), √(x²−a²)"
+ },
+ {
+  "prompt": "∫ dx/(4 + 3cos x) = ?",
+  "formula": "a>|b|: (2/√(a²−b²)) tan⁻¹(√((a−b)/(a+b)) tan(x/2))",
+  "options": [
+   "(2/√7) tan⁻¹(tan(x/2)/√7) + C",
+   "(2/√7) tan⁻¹(√7 tan(x/2)) + C",
+   "2 tan⁻¹(tan(x/2)/7) + C",
+   "(1/√7) tan⁻¹(tan(x/2)/√7) + C"
+  ],
+  "answer": 0,
+  "explain": "a−b = 1, a+b = 7, √(a²−b²) = √7, so the result is (2/√7) tan⁻¹(tan(x/2)/√7).",
+  "kind": "result",
+  "id": "f5266c8b-6b7f-43d2-8496-ba0eeb6e2708",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of 1/(a+b cos x), 1/(a+b sin x)"
+ },
+ {
+  "prompt": "∫x³ sin x dx needs how many parts steps (ILATE, u = x³)?",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "4",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "Each step lowers the power of x by one: x³ → x² → x → 1, so 3 steps.",
+  "kind": "concept",
+  "id": "3cb23927-61ae-43f5-b70a-7cab58ea99c4",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ sec x(1 + tan x) dx equals?",
+  "formula": "",
+  "options": [
+   "eˣ sec x + C",
+   "eˣ tan x + C",
+   "eˣ(sec x + tan x) + C",
+   "eˣ ln|sec x| + C"
+  ],
+  "answer": 0,
+  "explain": "f = sec x, f′ = sec x tan x, so eˣ[f+f′] integrates to eˣ sec x.",
+  "kind": "result",
+  "id": "a729910d-aee4-481a-bc6e-f8221e57878d",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integration by parts (ILATE)"
+ },
+ {
+  "prompt": "∫eˣ[ln(1+x) + 1/(1+x)] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ ln(1+x) + C",
+   "eˣ/(1+x) + C",
+   "eˣ ln x + C",
+   "eˣ(1+x) ln(1+x) + C"
+  ],
+  "answer": 0,
+  "explain": "f = ln(1+x), f′ = 1/(1+x).",
+  "kind": "formula",
+  "id": "3fe4bb78-6daf-46a6-bc49-3c9916d283ce",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ[tan(x/2) + ½ sec²(x/2)] dx = ?",
+  "formula": "",
+  "options": [
+   "eˣ sec²(x/2) + C",
+   "2eˣ tan(x/2) + C",
+   "eˣ tan x + C",
+   "eˣ tan(x/2) + C"
+  ],
+  "answer": 3,
+  "explain": "f = tan(x/2), so f′ = ½ sec²(x/2).",
+  "kind": "formula",
+  "id": "c23366fa-dd8f-4882-8358-e13cab2bd42b",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫eˣ (x²+x+1)/(x+1)² dx = ?",
+  "formula": "",
+  "options": [
+   "x eˣ/(x+1) + C",
+   "eˣ/(x+1) + C",
+   "eˣ(x+1)/x + C",
+   "x² eˣ/(x+1) + C"
+  ],
+  "answer": 0,
+  "explain": "f = x/(x+1), f′ = 1/(x+1)², so f + f′ = (x²+x+1)/(x+1)².",
+  "kind": "result",
+  "id": "aab69705-8bd3-424f-97e3-5abff94eb764",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e^(x/2)(x/2 + 1) dx = ?",
+  "formula": "",
+  "options": [
+   "x e^(x/2) + C",
+   "2x e^(x/2) + C",
+   "x e^(x/2)/2 + C",
+   "(x+1)e^(x/2) + C"
+  ],
+  "answer": 0,
+  "explain": "a = ½, f = x: a f + f′ = x/2 + 1, so the integral is x e^(x/2).",
+  "kind": "result",
+  "id": "8861844a-028f-438a-a31b-352c3f799ce0",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫₀¹ eˣ (x²+1)/(x+1)² dx = ?",
+  "formula": "",
+  "options": [
+   "1",
+   "0",
+   "e",
+   "e − 1"
+  ],
+  "answer": 0,
+  "explain": "[eˣ(x−1)/(x+1)] from 0 to 1 = 0 − (−1) = 1.",
+  "kind": "result",
+  "id": "bb3a0cde-17f1-4949-aa2b-32c3037b7470",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫₀^π eˣ(sin x + cos x) dx = ?",
+  "formula": "",
+  "options": [
+   "0",
+   "eᵖ",
+   "e^π − 1",
+   "−1"
+  ],
+  "answer": 0,
+  "explain": "[eˣ sin x]₀^π = e^π·0 − 0 = 0.",
+  "kind": "result",
+  "id": "471c8b55-692c-4880-a504-a0d19054a2c2",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e²ˣ(sin 2x + cos 2x) dx = ?",
+  "formula": "",
+  "options": [
+   "e²ˣ sin 2x + C",
+   "½ e²ˣ sin 2x + C",
+   "½ e²ˣ cos 2x + C",
+   "2e²ˣ sin 2x + C"
+  ],
+  "answer": 1,
+  "explain": "With f = ½ sin 2x: 2f + f′ = sin 2x + cos 2x, so ½e²ˣ sin 2x.",
+  "kind": "result",
+  "id": "9b324059-9879-4df3-a57a-cadc5d2e789c",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫₀^(π/4) eˣ(tan x + sec²x) dx = ?",
+  "formula": "",
+  "options": [
+   "e^(π/4)",
+   "e^(π/4) − 1",
+   "1",
+   "2e^(π/4)"
+  ],
+  "answer": 0,
+  "explain": "[eˣ tan x]₀^(π/4) = e^(π/4)·1 − 0.",
+  "kind": "result",
+  "id": "b54a135f-53be-414e-a4bc-05e1cd4ad9f5",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e³ˣ(3 cos x − sin x) dx = ?",
+  "formula": "",
+  "options": [
+   "e³ˣ sin x + C",
+   "e³ˣ cos x + C",
+   "3e³ˣ cos x + C",
+   "e³ˣ cos x/3 + C"
+  ],
+  "answer": 1,
+  "explain": "f = cos x: 3f + f′ = 3cos x − sin x, so the integral is e³ˣ cos x + C.",
+  "kind": "result",
+  "id": "bb9cdb3c-f35e-49a6-8ea7-46e0578572e8",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫(1 + x)eˣ / cos²(x eˣ) dx = ?",
+  "formula": "",
+  "options": [
+   "tan(x eˣ) + C",
+   "eˣ tan x + C",
+   "x eˣ tan x + C",
+   "sec(x eˣ) + C"
+  ],
+  "answer": 0,
+  "explain": "Put u = x eˣ, so du = (1+x)eˣ dx; then ∫sec²u du = tan(x eˣ).",
+  "kind": "result",
+  "id": "a97a6250-a4bb-4c5f-9ea8-6fd32509920d",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integral of e^x[f(x)+f'(x)]"
+ },
+ {
+  "prompt": "∫e^(2x)(sin 2x + cos 2x) dx equals?",
+  "formula": "",
+  "options": [
+   "e^(2x) sin 2x / 2 + C",
+   "e^(2x) sin 2x + C",
+   "e^(2x) cos 2x / 2 + C",
+   "e^(2x)(sin 2x − cos 2x)/2 + C"
+  ],
+  "answer": 0,
+  "explain": "d/dx[e^(2x) sin 2x] = 2e^(2x)(sin 2x + cos 2x), so divide by 2.",
+  "kind": "result",
+  "id": "6bf79041-80d7-4ec1-8b74-bded8e6aa789",
+  "subject": "Mathematics",
+  "chapter": "Indefinite Integration",
+  "topic": "Integrals of e^ax sin bx, e^ax cos bx"
+ }
+]

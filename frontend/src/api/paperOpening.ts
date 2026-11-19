@@ -16,6 +16,8 @@ export function prepareImages(data: any, solutions = false, version = "original"
   const paths = rows.flatMap((q: any) => (solutions ? ["question", "solution"] : ["question"]).flatMap(kind =>
     Array.from({ length: Number(kind === "question" ? q.asset_count : q.solution_asset_count) || 0 }, (_, i) =>
       `/attempts/${encodeURIComponent(data.id)}/questions/${encodeURIComponent(q.id)}/asset/${kind}/${i}${version === "original" ? "" : `?score_version=${encodeURIComponent(version)}`}`)));
+  // During the get-ready minute the paper pack brings every picture in a few requests (src/assets/paperPack.ts).
+  if (!solutions && Number(data.ready_until) > Number(data.server_now)) return;
   privateAssets.preload(paths);
 }
 

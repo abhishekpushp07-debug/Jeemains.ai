@@ -153,7 +153,7 @@ def test_solo_session_partial_then_reopen_no_duplicate_credit(state):
     )
     assert create.status_code == 200
     payload = create.json()
-    assert payload.get("seconds_per_card") == 15  # solo cards are 15 s since iteration 61
+    assert payload.get("seconds_per_card") == 20  # rule R1: 20 s per card (June 2026)
     cards = payload.get("cards") or []
     assert len(cards) == 30
     sid = payload["id"]

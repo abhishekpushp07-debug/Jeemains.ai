@@ -1,1522 +1,3362 @@
 [
-  {
-    "id": "682696cf-418a-437b-9edf-ed930e1fa3b6",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Isothermal Process",
-    "prompt": "Work done by gas in isothermal expansion (ideal gas):",
-    "formula": "W = nRT ln(V₂/V₁)",
-    "options": [
-      "nCᵥ(T₂−T₁)",
-      "nCₚ(T₂−T₁)",
-      "nRT ln(V₂/V₁)",
-      "P(V₂−V₁)"
-    ],
-    "answer": 2,
-    "explain": "Isothermal work uses W = nRT ln(V₂/V₁) since T is constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a12305df-d5be-4a12-8e3d-28758689c02c",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Isothermal Process",
-    "prompt": "Change in internal energy in an isothermal process (ideal gas):",
-    "formula": "ΔU = 0",
-    "options": [
-      "nRΔT",
-      "Zero",
-      "nCᵥΔT",
-      "nCₚΔT"
-    ],
-    "answer": 1,
-    "explain": "Internal energy of ideal gas depends only on T; isothermal means ΔT = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0a0d797a-324b-44bd-9dea-80e8339f76ae",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Adiabatic Process",
-    "prompt": "For adiabatic process, heat exchange Q equals:",
-    "formula": "Q = 0",
-    "options": [
-      "W",
-      "Zero",
-      "nCᵥΔT",
-      "nRΔT"
-    ],
-    "answer": 1,
-    "explain": "Adiabatic process: no heat exchange between system and surroundings.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "666fe160-1aa6-41a3-a868-c382c76aff0a",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Adiabatic Process",
-    "prompt": "Work done in adiabatic process:",
-    "formula": "W = nCᵥ(T₁−T₂)",
-    "options": [
-      "nCₚ(T₁−T₂)",
-      "nCᵥ(T₁−T₂)",
-      "nRT ln(V₂/V₁)",
-      "P(V₂−V₁)"
-    ],
-    "answer": 1,
-    "explain": "Adiabatic W = −ΔU = nCᵥ(T₁−T₂) since Q = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c9666303-2bed-4bc1-bb43-c9933f5f7b62",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Adiabatic Process",
-    "prompt": "Adiabatic process condition relating P and V:",
-    "formula": "PVᵞ = constant",
-    "options": [
-      "PV = const",
-      "P/V = const",
-      "TV = const",
-      "PVᵞ = const"
-    ],
-    "answer": 3,
-    "explain": "For reversible adiabatic: PVᵞ = constant where γ = Cₚ/Cᵥ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a898b79e-93c5-4d3d-93e1-c5a242f48e60",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Carnot Engine",
-    "prompt": "Efficiency of Carnot engine:",
-    "formula": "η = 1 − T₂/T₁",
-    "options": [
-      "1 − T₂/T₁",
-      "T₂/T₁",
-      "1 − T₁/T₂",
-      "1 + T₂/T₁"
-    ],
-    "answer": 0,
-    "explain": "Carnot efficiency depends only on source (T₁) and sink (T₂) temperatures.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fe7cf818-e198-4c8d-8103-0feabc090515",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Isobaric Process",
-    "prompt": "For isobaric process, work done by gas is:",
-    "formula": "W = PΔV = nRΔT",
-    "options": [
-      "nCᵥΔT",
-      "nRT ln(V₂/V₁)",
-      "zero",
-      "PΔV = nRΔT"
-    ],
-    "answer": 3,
-    "explain": "Constant pressure: W = PΔV and by ideal gas law PΔV = nRΔT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e294b35f-00c4-4b73-abc9-8e9c7bff609d",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Isochoric Process",
-    "prompt": "Work done in isochoric (isovolumetric) process:",
-    "formula": "W = 0",
-    "options": [
-      "Zero",
-      "nCₚΔT",
-      "nCᵥΔT",
-      "PΔV"
-    ],
-    "answer": 0,
-    "explain": "Constant volume means ΔV = 0, so W = PΔV = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb7edea5-f68e-48e7-bf88-e5808d067124",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Specific Heats",
-    "prompt": "Ratio γ = Cₚ/Cᵥ for monoatomic ideal gas:",
-    "formula": "γ = 5/3",
-    "options": [
-      "3/2",
-      "4/3",
-      "5/3",
-      "7/5"
-    ],
-    "answer": 2,
-    "explain": "Monoatomic gas has 3 translational DOF; Cᵥ = 3R/2, Cₚ = 5R/2, γ = 5/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b4416ebe-857e-4c2c-8bc2-7c20d9d3bfb3",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Specific Heats",
-    "prompt": "γ = Cₚ/Cᵥ for diatomic ideal gas (room temperature):",
-    "formula": "γ = 7/5",
-    "options": [
-      "7/5",
-      "6/5",
-      "5/3",
-      "4/3"
-    ],
-    "answer": 0,
-    "explain": "Diatomic gas has 5 DOF at room T; Cᵥ = 5R/2, Cₚ = 7R/2, γ = 7/5.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86fdf6f5-d120-4cc0-b251-9432ad9056bf",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Specific Heats",
-    "prompt": "Mayer's relation between Cₚ and Cᵥ:",
-    "formula": "Cₚ − Cᵥ = R",
-    "options": [
-      "Cₚ − Cᵥ = R",
-      "Cₚ − Cᵥ = 2R",
-      "Cₚ/Cᵥ = R",
-      "Cₚ + Cᵥ = R"
-    ],
-    "answer": 0,
-    "explain": "Mayer's relation: for 1 mole of ideal gas, Cₚ − Cᵥ = R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7050169b-975a-4a56-904d-047212b3d32b",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Refrigerator",
-    "prompt": "COP of refrigerator:",
-    "formula": "COP = T₂/(T₁−T₂)",
-    "options": [
-      "T₂/(T₁−T₂)",
-      "T₁/(T₁−T₂)",
-      "T₁/T₂",
-      "(T₁−T₂)/T₂"
-    ],
-    "answer": 0,
-    "explain": "Refrigerator COP = Q₂/W = T₂/(T₁−T₂) for Carnot refrigerator.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4c663196-55a3-4102-abab-3caebf793674",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Internal Energy",
-    "prompt": "Internal energy of n moles of monoatomic ideal gas:",
-    "formula": "U = (3/2)nRT",
-    "options": [
-      "(3/2)nRT",
-      "(5/2)nRT",
-      "nRT",
-      "(7/2)nRT"
-    ],
-    "answer": 0,
-    "explain": "Monoatomic gas has 3 translational DOF; U = (f/2)nRT = (3/2)nRT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9cf14e3c-6e8b-444d-b32b-3d1392200da3",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Isobaric Process",
-    "prompt": "Heat absorbed by ideal gas in isobaric process:",
-    "formula": "Q = nCₚΔT",
-    "options": [
-      "nRΔT",
-      "nCᵥΔT",
-      "nCₚΔT",
-      "zero"
-    ],
-    "answer": 2,
-    "explain": "At constant pressure, heat exchanged Q = nCₚΔT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "598263b1-48dc-4ca7-b2b3-61c35f7ae21d",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Isochoric Process",
-    "prompt": "Heat absorbed in isochoric process:",
-    "formula": "Q = nCᵥΔT",
-    "options": [
-      "nRΔT",
-      "nCᵥΔT",
-      "nCₚΔT",
-      "zero"
-    ],
-    "answer": 1,
-    "explain": "At constant volume, all heat goes to internal energy: Q = nCᵥΔT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "412037e6-6fb1-4b71-8702-bf09cf3b508f",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Carnot Engine",
-    "prompt": "Carnot cycle consists of how many processes?",
-    "formula": "",
-    "options": [
-      "4 isothermal",
-      "2 isochoric + 2 isothermal",
-      "2 isothermal + 2 adiabatic",
-      "2 isobaric + 2 adiabatic"
-    ],
-    "answer": 2,
-    "explain": "Carnot cycle: isothermal expansion → adiabatic expansion → isothermal compression → adiabatic compression.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "466d1fd4-5e1b-4d44-8144-16ff3c6d7fc4",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Adiabatic Process",
-    "prompt": "Slope of adiabatic curve on P-V diagram vs isothermal:",
-    "formula": "Slope_ad = γ × Slope_iso",
-    "options": [
-      "Less steep",
-      "γ times steeper",
-      "1/γ times steeper",
-      "Same slope"
-    ],
-    "answer": 1,
-    "explain": "Adiabatic slope = −γP/V; isothermal slope = −P/V; adiabatic is γ times steeper.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "173e3e5f-423f-48af-b888-6de559ecb95c",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Cyclic Process",
-    "prompt": "Work done by gas in one complete cyclic process:",
-    "formula": "W = Area enclosed on P-V diagram",
-    "options": [
-      "Area enclosed in P-V diagram",
-      "nCᵥΔT",
-      "nRT ln(V₂/V₁)",
-      "Zero always"
-    ],
-    "answer": 0,
-    "explain": "For cyclic process, net work = area enclosed by the curve on P-V diagram.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ac3c21ea-2a39-488f-954e-1cf07531c574",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Cyclic Process",
-    "prompt": "ΔU for a cyclic process:",
-    "formula": "ΔU = 0",
-    "options": [
-      "Positive",
-      "Zero",
-      "Depends on path",
-      "Negative"
-    ],
-    "answer": 1,
-    "explain": "Internal energy is a state function; returns to initial state in a cycle, so ΔU = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c50cf09c-ed64-4f13-bff1-407f7a6bdaf7",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Carnot Engine",
-    "prompt": "Efficiency of any real heat engine compared to Carnot:",
-    "formula": "η_real < η_Carnot",
-    "options": [
-      "Always less than Carnot",
-      "Can exceed Carnot",
-      "Always greater than Carnot",
-      "Always equal to Carnot"
-    ],
-    "answer": 0,
-    "explain": "Second law: no engine operating between same temperatures can exceed Carnot efficiency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dbaa4870-e785-4276-a021-d866854700cc",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Cᵥ for monoatomic ideal gas (per mole):",
-    "formula": "Cᵥ = (3/2)R",
-    "options": [
-      "(5/2)R",
-      "R",
-      "(3/2)R",
-      "(7/2)R"
-    ],
-    "answer": 2,
-    "explain": "Monoatomic gas has 3 translational DOF, so Cᵥ = (f/2)R = (3/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "538a1fe5-10c1-4383-81b2-018ab0eb8fa3",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Cₚ for diatomic ideal gas (room temperature, per mole):",
-    "formula": "Cₚ = (7/2)R",
-    "options": [
-      "(7/2)R",
-      "(9/2)R",
-      "(3/2)R",
-      "(5/2)R"
-    ],
-    "answer": 0,
-    "explain": "Diatomic gas: Cᵥ=(5/2)R, so Cₚ = Cᵥ+R = (7/2)R via Mayer's relation.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c75b39eb-f99d-42bf-b611-e02e62012021",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Heat engine efficiency η in terms of Q_H and Q_L:",
-    "formula": "η = 1 − Q_L/Q_H",
-    "options": [
-      "Q_L/Q_H",
-      "Q_H/Q_L − 1",
-      "1 − Q_L/Q_H",
-      "1 + Q_L/Q_H"
-    ],
-    "answer": 2,
-    "explain": "η = W/Q_H = (Q_H−Q_L)/Q_H = 1 − Q_L/Q_H by definition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f2b84e8e-1099-4cdd-885b-fdf0d354f9d4",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Entropy change when n mol ideal gas expands isothermally from V₁ to V₂:",
-    "formula": "ΔS = nR ln(V₂/V₁)",
-    "options": [
-      "nCₚ ln(V₂/V₁)",
-      "zero",
-      "nR ln(V₂/V₁)",
-      "nCᵥ ln(V₂/V₁)"
-    ],
-    "answer": 2,
-    "explain": "Isothermal: ΔU=0, Q=W=nRT ln(V₂/V₁), so ΔS=Q/T=nR ln(V₂/V₁).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "37806477-0577-42d7-961d-c814712cde0a",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Internal energy of n mol diatomic ideal gas (room temp):",
-    "formula": "U = (5/2)nRT",
-    "options": [
-      "(3/2)nRT",
-      "(7/2)nRT",
-      "(1/2)nRT",
-      "(5/2)nRT"
-    ],
-    "answer": 3,
-    "explain": "Diatomic gas has f=5 active DOF at room temp, so U = (5/2)nRT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b9b3e076-876b-4576-869c-353853a2b227",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "COP of Carnot refrigerator in terms of T_H and T_L:",
-    "formula": "COP = T_L/(T_H − T_L)",
-    "options": [
-      "T_L/(T_H−T_L)",
-      "T_H/T_L",
-      "T_H/(T_H−T_L)",
-      "(T_H−T_L)/T_L"
-    ],
-    "answer": 0,
-    "explain": "Carnot COP = Q_L/W = T_L/(T_H−T_L) from Carnot efficiency.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c8024da2-57fb-4a0f-855c-0cad5520e5f0",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Work done by gas in isothermal process when pressure halves:",
-    "formula": "W = nRT ln2",
-    "options": [
-      "nRT ln(1/2)",
-      "nRΔT",
-      "zero",
-      "nRT ln2"
-    ],
-    "answer": 3,
-    "explain": "P halves ⟹ V doubles (isothermal PV=const), W = nRT ln(V₂/V₁) = nRT ln2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "790e7873-6c7b-4591-97d6-f9d9a8374c40",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "In a P-V diagram, area enclosed by a cycle represents:",
-    "formula": "",
-    "options": [
-      "Change in internal energy",
-      "Total heat absorbed",
-      "Change in entropy",
-      "Net work done by gas"
-    ],
-    "answer": 3,
-    "explain": "The enclosed area on a P-V diagram equals the net work done per cycle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "26d89cca-2774-463f-8b85-de55e603bc82",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Zeroth law of thermodynamics defines the concept of:",
-    "formula": "",
-    "options": [
-      "Enthalpy",
-      "Entropy",
-      "Internal energy",
-      "Temperature"
-    ],
-    "answer": 3,
-    "explain": "Zeroth law: if A & B are in thermal equilibrium with C, they define temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "13edd209-06ce-44bf-8ab6-2009f138511f",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Effective molar specific heat for an adiabatic process is:",
-    "formula": "C_adiabatic = 0",
-    "options": [
-      "Cₚ",
-      "Zero",
-      "Cᵥ",
-      "Negative infinity"
-    ],
-    "answer": 1,
-    "explain": "In adiabatic process Q=0, so dQ/dT=0; molar specific heat C = Q/nΔT = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "999946b5-0104-41af-9bb5-d1d7b2c57817",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Effective molar specific heat for isothermal process is:",
-    "formula": "C_isothermal → ∞",
-    "options": [
-      "Zero",
-      "Cₚ",
-      "Cᵥ",
-      "Infinity"
-    ],
-    "answer": 3,
-    "explain": "Isothermal: ΔT=0 but Q≠0, so C = Q/nΔT → ∞.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1c36981e-752f-43ad-a826-4d34470de976",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Which law forbids efficiency of heat engine equal to 100%?",
-    "formula": "",
-    "options": [
-      "First law",
-      "Second law",
-      "Zeroth law",
-      "Third law"
-    ],
-    "answer": 1,
-    "explain": "Second law: impossible to convert all heat to work; η < 100% always.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9b2f3de9-7ad7-4edf-84cc-50df33eec6d6",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "In free expansion of ideal gas into vacuum, work done is:",
-    "formula": "W = 0, Q = 0, ΔU = 0",
-    "options": [
-      "Negative",
-      "Zero",
-      "Positive",
-      "nRT ln(V₂/V₁)"
-    ],
-    "answer": 1,
-    "explain": "Against vacuum: P_ext=0, so W=0; adiabatic container Q=0; hence ΔU=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0f8ca127-8438-40ca-9830-aacb535408e2",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For a polytropic process PVⁿ=const, adiabatic corresponds to n=:",
-    "formula": "n = γ",
-    "options": [
-      "∞",
-      "1",
-      "0",
-      "γ"
-    ],
-    "answer": 3,
-    "explain": "Adiabatic: PV^γ=const, so polytropic index n=γ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f0f0849f-998a-4251-b70f-fa3518e17810",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For a polytropic process PVⁿ=const, isothermal corresponds to n=:",
-    "formula": "n = 1",
-    "options": [
-      "γ",
-      "∞",
-      "0",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "Isothermal: PV=const (T fixed), so polytropic index n=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1a16858f-33cf-40d6-8e66-221ad94ceedd",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Work done by n mol ideal gas in isobaric process:",
-    "formula": "W = nRΔT",
-    "options": [
-      "nCᵥΔT",
-      "nCₚΔT",
-      "nRΔT",
-      "zero"
-    ],
-    "answer": 2,
-    "explain": "W = PΔV = nRΔT from ideal gas law at constant pressure.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7f4a7878-e8ea-4a2a-9ec3-ba02abff3d05",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Carnot efficiency depends only on:",
-    "formula": "η = 1 − T_L/T_H",
-    "options": [
-      "Number of moles",
-      "Working substance",
-      "Type of gas used",
-      "Source & sink temperatures"
-    ],
-    "answer": 3,
-    "explain": "Carnot η = 1 − T_L/T_H depends solely on absolute temperatures of reservoirs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1d01a1f2-c78d-463f-b421-8a8b8f0d4f23",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Ratio Q_L/Q_H for a Carnot engine equals:",
-    "formula": "Q_L/Q_H = T_L/T_H",
-    "options": [
-      "T_H/T_L",
-      "(T_H−T_L)/T_H",
-      "T_L/(T_H+T_L)",
-      "T_L/T_H"
-    ],
-    "answer": 3,
-    "explain": "For Carnot cycle Q_L/Q_H = T_L/T_H; this is the defining property of Carnot cycle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "894b1d05-c60c-45cf-898c-60f3469e711f",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Cᵥ for diatomic ideal gas (per mole, room temp)?",
-    "formula": "Cᵥ = (5/2)R",
-    "options": [
-      "(7/2)R",
-      "(5/2)R",
-      "2R",
-      "(3/2)R"
-    ],
-    "answer": 1,
-    "explain": "Diatomic gas has 5 degrees of freedom at room temp, so Cᵥ = (5/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4d0908e2-3084-482a-83ad-d7b298ba5936",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Cₚ for monoatomic ideal gas (per mole)?",
-    "formula": "Cₚ = (5/2)R",
-    "options": [
-      "(3/2)R",
-      "(5/2)R",
-      "2R",
-      "(7/2)R"
-    ],
-    "answer": 1,
-    "explain": "Monoatomic: Cᵥ = (3/2)R, so Cₚ = Cᵥ + R = (5/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8ce1e2ee-99fa-4781-ba9b-6fedd4a0cfe6",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "In an isochoric process, which quantity remains constant?",
-    "formula": "",
-    "options": [
-      "Volume",
-      "Pressure",
-      "Entropy",
-      "Temperature"
-    ],
-    "answer": 0,
-    "explain": "Isochoric means constant volume; no work is done by or on the gas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "76bfadd6-8fce-4963-ba17-7fc409f449cf",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For n mol ideal gas, ΔU when temperature changes by ΔT?",
-    "formula": "ΔU = nCᵥΔT",
-    "options": [
-      "nCᵥΔT",
-      "nCₚΔT",
-      "nRΔT",
-      "nγCᵥΔT"
-    ],
-    "answer": 0,
-    "explain": "Internal energy change always equals nCᵥΔT for ideal gas, regardless of process.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "87c7307a-b3d9-47df-9afb-f9940b665b15",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For a Carnot engine, which cycle process absorbs heat from source?",
-    "formula": "",
-    "options": [
-      "Isothermal compression",
-      "Isothermal expansion",
-      "Adiabatic expansion",
-      "Adiabatic compression"
-    ],
-    "answer": 1,
-    "explain": "Heat Q_H is absorbed during isothermal expansion at the higher temperature T_H.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb3e3aa9-df38-40bf-b9e6-65770eb9e412",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "First law for an adiabatic process simplifies to?",
-    "formula": "ΔU = −W",
-    "options": [
-      "ΔU = −W",
-      "ΔU = Q",
-      "W = Q",
-      "ΔU = 0"
-    ],
-    "answer": 0,
-    "explain": "Since Q = 0 adiabatically, first law gives ΔU = −W (work done by gas).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "73912a23-751f-44b5-a845-f7d8fc619d53",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For an ideal gas undergoing isothermal compression, entropy change ΔS is?",
-    "formula": "ΔS = nR ln(V₂/V₁)",
-    "options": [
-      "Zero",
-      "Positive",
-      "Negative",
-      "Depends on temperature"
-    ],
-    "answer": 2,
-    "explain": "Compression means V₂ < V₁, so ln(V₂/V₁) < 0, hence ΔS < 0 (entropy decreases).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "332b9e1b-c0c9-4bf0-a30f-f044a7bb1733",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Heat rejected by Carnot engine Q_L in terms of Q_H, T_H, T_L?",
-    "formula": "Q_L = Q_H·(T_L/T_H)",
-    "options": [
-      "Q_H·(1−T_L/T_H)",
-      "Q_H·(T_L/T_H)",
-      "Q_H·(T_H/T_L)",
-      "Q_H·(T_H−T_L)/T_H"
-    ],
-    "answer": 1,
-    "explain": "For Carnot engine, Q_L/Q_H = T_L/T_H, so Q_L = Q_H(T_L/T_H).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b22417c0-0661-4c5f-9c0e-8e646e7c39c3",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Isobaric work done when n mol ideal gas is heated by ΔT?",
-    "formula": "W = nRΔT",
-    "options": [
-      "nCᵥΔT",
-      "½nRΔT",
-      "nRΔT",
-      "nCₚΔT"
-    ],
-    "answer": 2,
-    "explain": "At constant pressure, W = PΔV = nRΔT by ideal gas law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1e28493b-62fd-4018-a580-826757598c74",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Which process satisfies dU = dQ (all heat → internal energy)?",
-    "formula": "",
-    "options": [
-      "Isothermal",
-      "Adiabatic",
-      "Isobaric",
-      "Isochoric"
-    ],
-    "answer": 3,
-    "explain": "At constant volume W = 0, so first law gives dU = dQ entirely.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "72df5523-b378-44cb-b140-04b378c9d293",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "In a P-V diagram, slope of adiabat at a point compared to isotherm?",
-    "formula": "(dP/dV)_ad = γ·(dP/dV)_iso",
-    "options": [
-      "Equal",
-      "γ times steeper",
-      "γ² times steeper",
-      "1/γ times steeper"
-    ],
-    "answer": 1,
-    "explain": "Adiabatic slope = −γP/V and isothermal slope = −P/V, so adiabat is γ times steeper.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2721bf9e-f4d2-4c93-9912-ac8de2766f4e",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Entropy of universe for any irreversible process?",
-    "formula": "ΔS_universe > 0",
-    "options": [
-      "> 0",
-      "= 0",
-      "= Q/T",
-      "< 0"
-    ],
-    "answer": 0,
-    "explain": "Second law: entropy of the universe always increases for irreversible (natural) processes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70ba1fa1-c500-4512-972d-2d1d7bea2b61",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For free adiabatic expansion of ideal gas into vacuum, ΔT is?",
-    "formula": "",
-    "options": [
-      "Positive (temp rises)",
-      "Depends on γ",
-      "Zero",
-      "Negative (temp falls)"
-    ],
-    "answer": 2,
-    "explain": "No work done (vacuum), no heat exchange; so ΔU = 0 and ΔT = 0 for ideal gas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "12987947-4307-446f-b775-25e21b4184ee",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For n mol ideal gas heated isobarically, ratio ΔU/Q equals?",
-    "formula": "ΔU/Q = Cᵥ/Cₚ = 1/γ",
-    "options": [
-      "γ−1",
-      "1/γ",
-      "1/(γ−1)",
-      "γ"
-    ],
-    "answer": 1,
-    "explain": "ΔU = nCᵥΔT and Q = nCₚΔT, so ΔU/Q = Cᵥ/Cₚ = 1/γ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e5149342-fb6d-4665-bc72-1aa452e0a85c",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "If Carnot efficiency is η, working between T_L and T_H, then T_L/T_H = ?",
-    "formula": "T_L/T_H = 1 − η",
-    "options": [
-      "η/(1−η)",
-      "1/η",
-      "η",
-      "1 − η"
-    ],
-    "answer": 3,
-    "explain": "η = 1 − T_L/T_H ⟹ T_L/T_H = 1 − η.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "beeffc1c-30a8-46b7-94c2-3b5482d60ae4",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Clausius statement: it is impossible to transfer heat from",
-    "formula": "",
-    "options": [
-      "Cold to hot without external work",
-      "Hot to cold without external work",
-      "Cold to hot spontaneously with work",
-      "Hot to cold in any process"
-    ],
-    "answer": 0,
-    "explain": "Clausius statement: heat cannot flow cold→hot without external work input.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "70d94388-5d01-4eb3-8823-2dd37d39f642",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Kelvin-Planck statement forbids which type of engine?",
-    "formula": "",
-    "options": [
-      "Engine with efficiency < Carnot",
-      "Engine with two heat reservoirs",
-      "Engine operating in reverse cycle",
-      "Engine converting all heat to work"
-    ],
-    "answer": 3,
-    "explain": "Kelvin-Planck: no engine can convert entire heat absorbed into work (η=100% impossible).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "995c1a75-f987-4713-8cc8-25a427adc419",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For n mol ideal gas, Cₚ − Cᵥ equals:",
-    "formula": "Cₚ − Cᵥ = R",
-    "options": [
-      "R/2",
-      "R (per mole)",
-      "nR",
-      "γR"
-    ],
-    "answer": 1,
-    "explain": "Mayer's relation per mole: Cₚ − Cᵥ = R (universal gas constant).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9c2a4756-aab7-46fc-88b8-c6447bcb7cdc",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Degree of freedom of a rigid diatomic molecule at room temp?",
-    "formula": "",
-    "options": [
-      "3",
-      "6",
-      "5",
-      "7"
-    ],
-    "answer": 2,
-    "explain": "Rigid diatomic: 3 translational + 2 rotational = 5 degrees of freedom.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "115cec61-0c9a-4f08-892a-4ac2daf1c706",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Equipartition theorem: energy per degree of freedom per molecule?",
-    "formula": "½kT",
-    "options": [
-      "kT",
-      "½RT",
-      "³⁄₂kT",
-      "½kT"
-    ],
-    "answer": 3,
-    "explain": "Each degree of freedom contributes ½kT of thermal energy per molecule.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "381935e6-4d8f-476f-b7bf-fa387768a045",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For monoatomic ideal gas, degrees of freedom f =",
-    "formula": "",
-    "options": [
-      "2",
-      "5",
-      "6",
-      "3"
-    ],
-    "answer": 3,
-    "explain": "Monoatomic gas has only 3 translational degrees of freedom.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7151ce1f-25da-42e1-8f85-9ba3f81b5765",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "γ for a gas with f degrees of freedom equals:",
-    "formula": "γ = 1 + 2/f",
-    "options": [
-      "1 + 2/f",
-      "f/(f+2)",
-      "1 + f/2",
-      "2/f"
-    ],
-    "answer": 0,
-    "explain": "γ = Cₚ/Cᵥ = (f+2)/f = 1 + 2/f where f is degrees of freedom.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "90765757-dcc8-4f2a-a783-4c259231ad6b",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Cᵥ per mole in terms of degrees of freedom f:",
-    "formula": "Cᵥ = (f/2)R",
-    "options": [
-      "fR",
-      "(f/2)R",
-      "(f+2)R/2",
-      "R/f"
-    ],
-    "answer": 1,
-    "explain": "By equipartition, Cᵥ = (f/2)R per mole.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dce63697-9d19-4716-839c-974b5c11725c",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Work done in one complete reversible cycle by Carnot engine equals:",
-    "formula": "W = Q_H − Q_L",
-    "options": [
-      "Q_H − Q_L",
-      "Q_H / Q_L",
-      "Q_H + Q_L",
-      "Q_H · Q_L"
-    ],
-    "answer": 0,
-    "explain": "By first law for a cycle ΔU=0, so W = Q_net = Q_H − Q_L.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4e39e248-b1be-411a-92ab-4519b07d1b1f",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Heat pump COP defined as:",
-    "formula": "COP_HP = Q_H / W",
-    "options": [
-      "Q_H / W (heat delivered to hot body per work)",
-      "Q_L / W (heat removed per work)",
-      "W / Q_H",
-      "Q_L / Q_H"
-    ],
-    "answer": 0,
-    "explain": "Heat pump COP = useful heat delivered to hot reservoir / work input = Q_H/W.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ed42b4fa-066a-4a2e-b997-ef9de2f8c091",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "In a throttling process (Joule-Thomson), which quantity is conserved?",
-    "formula": "",
-    "options": [
-      "Entropy S",
-      "Temperature T",
-      "Enthalpy H",
-      "Internal energy U"
-    ],
-    "answer": 2,
-    "explain": "Joule-Thomson (throttling) is isenthalpic: enthalpy H = U + PV remains constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bb679d46-c942-4101-bd1f-3980eca60919",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For a reversible Carnot cycle, total entropy change of universe is:",
-    "formula": "ΔS_universe = 0",
-    "options": [
-      "Negative",
-      "Zero",
-      "Positive",
-      "Q_H/T_H"
-    ],
-    "answer": 1,
-    "explain": "Carnot cycle is reversible, so ΔS_universe = 0 (entropy of universe unchanged).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "98bcd99c-3119-43f9-9c5d-96c5b52dcafb",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "In an isobaric expansion, which is true about Q and ΔU?",
-    "formula": "",
-    "options": [
-      "Q = ΔU",
-      "Q > ΔU (since W > 0)",
-      "Q < ΔU",
-      "Q = 0"
-    ],
-    "answer": 1,
-    "explain": "Q = ΔU + W; since gas expands isobarically W = PΔV > 0, so Q > ΔU.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "79d1e6f2-e955-4600-a6f5-bf2b7d9e41bf",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Slope of isothermal curve (PV=const) on P-V diagram at point (P,V):",
-    "formula": "dP/dV = −P/V",
-    "options": [
-      "−γP/V",
-      "−γV/P",
-      "P/V",
-      "−P/V"
-    ],
-    "answer": 3,
-    "explain": "For PV = const, differentiating: dP/dV = −P/V (magnitude = P/V).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2e3cb410-5671-4dd8-a94e-0a7e91e784d9",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Slope of adiabatic curve PVᵞ=const on P-V diagram at (P,V):",
-    "formula": "dP/dV = −γP/V",
-    "options": [
-      "−γP/V",
-      "−P/V",
-      "−P/(γV)",
-      "γP/V"
-    ],
-    "answer": 0,
-    "explain": "Differentiating PVᵞ=const gives dP/dV = −γP/V, steeper than isotherm by factor γ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2ebad2e6-8b33-4665-8fa4-01988471dd9f",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For n mol of ideal gas, internal energy per mole per kelvin at const V is:",
-    "formula": "Cᵥ = (f/2)R",
-    "options": [
-      "(f+2)R/2",
-      "γR",
-      "R only",
-      "(f/2)R, where f = degrees of freedom"
-    ],
-    "answer": 3,
-    "explain": "Molar Cᵥ = (f/2)R by equipartition; e.g., monoatomic f=3 → Cᵥ=3R/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b53fbd0e-3eed-475a-b3c2-b7db1b6a8475",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Maximum work obtainable from a heat engine between T_H and T_L is:",
-    "formula": "W_max = Q_H(1 − T_L/T_H)",
-    "options": [
-      "Q_L(T_H/T_L − 1)",
-      "Q_H · T_L/T_H",
-      "Q_H − Q_L regardless of temps",
-      "Q_H(1 − T_L/T_H)"
-    ],
-    "answer": 3,
-    "explain": "Max work = Carnot efficiency × Q_H = Q_H·η_Carnot = Q_H(1 − T_L/T_H).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "69dd7641-b8ce-45ea-a721-e1d93a5cab04",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For n mol ideal gas, work done in isothermal process at temp T when V→2V:",
-    "formula": "W = nRT ln2",
-    "options": [
-      "nCᵥΔT",
-      "nRΔT",
-      "nRT ln2",
-      "PΔV only"
-    ],
-    "answer": 2,
-    "explain": "W = nRT ln(V₂/V₁) = nRT ln2 when volume doubles isothermally.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "701e0ba0-864d-4eac-ace0-a4f91e7383bf",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "The process in which internal energy increases but no work is done:",
-    "formula": "",
-    "options": [
-      "Isothermal",
-      "Isobaric",
-      "Adiabatic",
-      "Isochoric"
-    ],
-    "answer": 3,
-    "explain": "Isochoric: W=0, so all heat added goes to increasing internal energy.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "872dc121-adee-4361-bcdc-5a576a2f10c4",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For an ideal gas adiabatic process, relation between V and T is:",
-    "formula": "TV^(γ−1) = const",
-    "options": [
-      "TV^(γ−1)=const",
-      "T^γV=const",
-      "TV=const",
-      "TV^γ=const"
-    ],
-    "answer": 0,
-    "explain": "Derived from PVᵞ=C and PV=nRT: TV^(γ−1) = constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0b16a88a-7c36-4624-8a62-cd337a1c9cca",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Which law of thermodynamics introduces the concept of entropy?",
-    "formula": "",
-    "options": [
-      "Zeroth law",
-      "Third law",
-      "First law",
-      "Second law"
-    ],
-    "answer": 3,
-    "explain": "Entropy is introduced via the second law; dS = dQ_rev/T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "790af1cc-9c9e-4a88-a4f9-a2d0c0de8c3d",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "For an ideal gas, ratio of slopes |adiabat|/|isotherm| on P-V diagram equals:",
-    "formula": "γ = Cₚ/Cᵥ",
-    "options": [
-      "γ+1",
-      "γ−1",
-      "γ",
-      "1/γ"
-    ],
-    "answer": 2,
-    "explain": "Slope of adiabat = −γP/V; slope of isotherm = −P/V; ratio = γ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d81fe506-4bf1-431c-9c06-04015bcc140f",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "If a gas expands isothermally and reversibly, the work done BY gas equals heat:",
-    "formula": "W = Q",
-    "options": [
-      "Zero",
-      "Absorbed from surroundings",
-      "Equal to ΔU",
-      "Rejected to surroundings"
-    ],
-    "answer": 1,
-    "explain": "Isothermal ideal gas: ΔU=0, so by first law W = Q (heat absorbed).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "40bfcbcf-d00a-49e6-b66f-64fe1d71f0de",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Heat supplied to a gas in isobaric process when temperature rises by ΔT (n mol):",
-    "formula": "Q = nCₚΔT",
-    "options": [
-      "nCₚΔT",
-      "nRΔT",
-      "nCᵥΔT",
-      "n(Cₚ+Cᵥ)ΔT"
-    ],
-    "answer": 0,
-    "explain": "At constant pressure, heat exchanged is Q = nCₚΔT by definition of Cₚ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b84ac020-eaa6-4eb3-a971-310fb3cea5d0",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Which of these is NOT a state function?",
-    "formula": "",
-    "options": [
-      "Internal energy U",
-      "Entropy S",
-      "Work W",
-      "Enthalpy H"
-    ],
-    "answer": 2,
-    "explain": "Work W is a path function; U, S, H are all state functions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "81c0c98f-39f9-476f-bb6c-2aa0fb0757e2",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "Which thermodynamic law is the basis for thermometry?",
-    "formula": "",
-    "options": [
-      "Second law",
-      "First law",
-      "Third law",
-      "Zeroth law"
-    ],
-    "answer": 3,
-    "explain": "Zeroth law: if A≡B and B≡C thermally, then A≡C — basis of temperature measurement.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "be84e665-64a8-4af9-a8ef-5d3842331f33",
-    "subject": "Physics",
-    "chapter": "Thermodynamics",
-    "topic": "Thermodynamics",
-    "prompt": "In which process does the gas exchange NO heat with surroundings?",
-    "formula": "Q = 0",
-    "options": [
-      "Adiabatic",
-      "Isochoric",
-      "Isobaric",
-      "Isothermal"
-    ],
-    "answer": 0,
-    "explain": "Adiabatic process: Q=0 by definition; all energy exchange is via work only.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "682696cf-418a-437b-9edf-ed930e1fa3b6",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal Process",
+  "prompt": "Work done by gas in isothermal expansion (ideal gas):",
+  "formula": "W = nRT ln(V₂/V₁)",
+  "options": [
+   "nCᵥ(T₂−T₁)",
+   "nCₚ(T₂−T₁)",
+   "nRT ln(V₂/V₁)",
+   "P(V₂−V₁)"
+  ],
+  "answer": 2,
+  "explain": "Isothermal work uses W = nRT ln(V₂/V₁) since T is constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a12305df-d5be-4a12-8e3d-28758689c02c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal Process",
+  "prompt": "Change in internal energy in an isothermal process (ideal gas):",
+  "formula": "ΔU = 0",
+  "options": [
+   "nRΔT",
+   "Zero",
+   "nCᵥΔT",
+   "nCₚΔT"
+  ],
+  "answer": 1,
+  "explain": "Internal energy of ideal gas depends only on T; isothermal means ΔT = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0a0d797a-324b-44bd-9dea-80e8339f76ae",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic Process",
+  "prompt": "For adiabatic process, heat exchange Q equals:",
+  "formula": "Q = 0",
+  "options": [
+   "W",
+   "Zero",
+   "nCᵥΔT",
+   "nRΔT"
+  ],
+  "answer": 1,
+  "explain": "Adiabatic process: no heat exchange between system and surroundings.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "666fe160-1aa6-41a3-a868-c382c76aff0a",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic Process",
+  "prompt": "Work done in adiabatic process:",
+  "formula": "W = nCᵥ(T₁−T₂)",
+  "options": [
+   "nCₚ(T₁−T₂)",
+   "nCᵥ(T₁−T₂)",
+   "nRT ln(V₂/V₁)",
+   "P(V₂−V₁)"
+  ],
+  "answer": 1,
+  "explain": "Adiabatic W = −ΔU = nCᵥ(T₁−T₂) since Q = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c9666303-2bed-4bc1-bb43-c9933f5f7b62",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic Process",
+  "prompt": "Adiabatic process condition relating P and V:",
+  "formula": "PVᵞ = constant",
+  "options": [
+   "PV = const",
+   "P/V = const",
+   "TV = const",
+   "PVᵞ = const"
+  ],
+  "answer": 3,
+  "explain": "For reversible adiabatic: PVᵞ = constant where γ = Cₚ/Cᵥ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a898b79e-93c5-4d3d-93e1-c5a242f48e60",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Carnot Engine",
+  "prompt": "Efficiency of Carnot engine:",
+  "formula": "η = 1 − T₂/T₁",
+  "options": [
+   "1 − T₂/T₁",
+   "T₂/T₁",
+   "1 − T₁/T₂",
+   "1 + T₂/T₁"
+  ],
+  "answer": 0,
+  "explain": "Carnot efficiency depends only on source (T₁) and sink (T₂) temperatures.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fe7cf818-e198-4c8d-8103-0feabc090515",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isobaric Process",
+  "prompt": "For isobaric process, work done by gas is:",
+  "formula": "W = PΔV = nRΔT",
+  "options": [
+   "nCᵥΔT",
+   "nRT ln(V₂/V₁)",
+   "zero",
+   "PΔV = nRΔT"
+  ],
+  "answer": 3,
+  "explain": "Constant pressure: W = PΔV and by ideal gas law PΔV = nRΔT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e294b35f-00c4-4b73-abc9-8e9c7bff609d",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric Process",
+  "prompt": "Work done in isochoric (isovolumetric) process:",
+  "formula": "W = 0",
+  "options": [
+   "Zero",
+   "nCₚΔT",
+   "nCᵥΔT",
+   "PΔV"
+  ],
+  "answer": 0,
+  "explain": "Constant volume means ΔV = 0, so W = PΔV = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb7edea5-f68e-48e7-bf88-e5808d067124",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Specific Heats",
+  "prompt": "Ratio γ = Cₚ/Cᵥ for monoatomic ideal gas:",
+  "formula": "γ = 5/3",
+  "options": [
+   "3/2",
+   "4/3",
+   "5/3",
+   "7/5"
+  ],
+  "answer": 2,
+  "explain": "Monoatomic gas has 3 translational DOF; Cᵥ = 3R/2, Cₚ = 5R/2, γ = 5/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b4416ebe-857e-4c2c-8bc2-7c20d9d3bfb3",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Specific Heats",
+  "prompt": "γ = Cₚ/Cᵥ for diatomic ideal gas (room temperature):",
+  "formula": "γ = 7/5",
+  "options": [
+   "7/5",
+   "6/5",
+   "5/3",
+   "4/3"
+  ],
+  "answer": 0,
+  "explain": "Diatomic gas has 5 DOF at room T; Cᵥ = 5R/2, Cₚ = 7R/2, γ = 7/5.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86fdf6f5-d120-4cc0-b251-9432ad9056bf",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Specific Heats",
+  "prompt": "Mayer's relation between Cₚ and Cᵥ:",
+  "formula": "Cₚ − Cᵥ = R",
+  "options": [
+   "Cₚ − Cᵥ = R",
+   "Cₚ − Cᵥ = 2R",
+   "Cₚ/Cᵥ = R",
+   "Cₚ + Cᵥ = R"
+  ],
+  "answer": 0,
+  "explain": "Mayer's relation: for 1 mole of ideal gas, Cₚ − Cᵥ = R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7050169b-975a-4a56-904d-047212b3d32b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Refrigerator",
+  "prompt": "COP of refrigerator:",
+  "formula": "COP = T₂/(T₁−T₂)",
+  "options": [
+   "T₂/(T₁−T₂)",
+   "T₁/(T₁−T₂)",
+   "T₁/T₂",
+   "(T₁−T₂)/T₂"
+  ],
+  "answer": 0,
+  "explain": "Refrigerator COP = Q₂/W = T₂/(T₁−T₂) for Carnot refrigerator.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4c663196-55a3-4102-abab-3caebf793674",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal Energy",
+  "prompt": "Internal energy of n moles of monoatomic ideal gas:",
+  "formula": "U = (3/2)nRT",
+  "options": [
+   "(3/2)nRT",
+   "(5/2)nRT",
+   "nRT",
+   "(7/2)nRT"
+  ],
+  "answer": 0,
+  "explain": "Monoatomic gas has 3 translational DOF; U = (f/2)nRT = (3/2)nRT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9cf14e3c-6e8b-444d-b32b-3d1392200da3",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isobaric Process",
+  "prompt": "Heat absorbed by ideal gas in isobaric process:",
+  "formula": "Q = nCₚΔT",
+  "options": [
+   "nRΔT",
+   "nCᵥΔT",
+   "nCₚΔT",
+   "zero"
+  ],
+  "answer": 2,
+  "explain": "At constant pressure, heat exchanged Q = nCₚΔT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "598263b1-48dc-4ca7-b2b3-61c35f7ae21d",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric Process",
+  "prompt": "Heat absorbed in isochoric process:",
+  "formula": "Q = nCᵥΔT",
+  "options": [
+   "nRΔT",
+   "nCᵥΔT",
+   "nCₚΔT",
+   "zero"
+  ],
+  "answer": 1,
+  "explain": "At constant volume, all heat goes to internal energy: Q = nCᵥΔT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "412037e6-6fb1-4b71-8702-bf09cf3b508f",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Carnot Engine",
+  "prompt": "Carnot cycle consists of how many processes?",
+  "formula": "",
+  "options": [
+   "4 isothermal",
+   "2 isochoric + 2 isothermal",
+   "2 isothermal + 2 adiabatic",
+   "2 isobaric + 2 adiabatic"
+  ],
+  "answer": 2,
+  "explain": "Carnot cycle: isothermal expansion → adiabatic expansion → isothermal compression → adiabatic compression.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "466d1fd4-5e1b-4d44-8144-16ff3c6d7fc4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic Process",
+  "prompt": "Slope of adiabatic curve on P-V diagram vs isothermal:",
+  "formula": "Slope_ad = γ × Slope_iso",
+  "options": [
+   "Less steep",
+   "γ times steeper",
+   "1/γ times steeper",
+   "Same slope"
+  ],
+  "answer": 1,
+  "explain": "Adiabatic slope = −γP/V; isothermal slope = −P/V; adiabatic is γ times steeper.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "173e3e5f-423f-48af-b888-6de559ecb95c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Cyclic Process",
+  "prompt": "Work done by gas in one complete cyclic process:",
+  "formula": "W = Area enclosed on P-V diagram",
+  "options": [
+   "Area enclosed in P-V diagram",
+   "nCᵥΔT",
+   "nRT ln(V₂/V₁)",
+   "Zero always"
+  ],
+  "answer": 0,
+  "explain": "For cyclic process, net work = area enclosed by the curve on P-V diagram.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ac3c21ea-2a39-488f-954e-1cf07531c574",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Cyclic Process",
+  "prompt": "ΔU for a cyclic process:",
+  "formula": "ΔU = 0",
+  "options": [
+   "Positive",
+   "Zero",
+   "Depends on path",
+   "Negative"
+  ],
+  "answer": 1,
+  "explain": "Internal energy is a state function; returns to initial state in a cycle, so ΔU = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c50cf09c-ed64-4f13-bff1-407f7a6bdaf7",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Carnot Engine",
+  "prompt": "Efficiency of any real heat engine compared to Carnot:",
+  "formula": "η_real < η_Carnot",
+  "options": [
+   "Always less than Carnot",
+   "Can exceed Carnot",
+   "Always greater than Carnot",
+   "Always equal to Carnot"
+  ],
+  "answer": 0,
+  "explain": "Second law: no engine operating between same temperatures can exceed Carnot efficiency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dbaa4870-e785-4276-a021-d866854700cc",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "Cᵥ for monoatomic ideal gas (per mole):",
+  "formula": "Cᵥ = (3/2)R",
+  "options": [
+   "(5/2)R",
+   "R",
+   "(3/2)R",
+   "(7/2)R"
+  ],
+  "answer": 2,
+  "explain": "Monoatomic gas has 3 translational DOF, so Cᵥ = (f/2)R = (3/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "538a1fe5-10c1-4383-81b2-018ab0eb8fa3",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "Cₚ for diatomic ideal gas (room temperature, per mole):",
+  "formula": "Cₚ = (7/2)R",
+  "options": [
+   "(7/2)R",
+   "(9/2)R",
+   "(3/2)R",
+   "(5/2)R"
+  ],
+  "answer": 0,
+  "explain": "Diatomic gas: Cᵥ=(5/2)R, so Cₚ = Cᵥ+R = (7/2)R via Mayer's relation.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c75b39eb-f99d-42bf-b611-e02e62012021",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "Heat engine efficiency η in terms of Q_H and Q_L:",
+  "formula": "η = 1 − Q_L/Q_H",
+  "options": [
+   "Q_L/Q_H",
+   "Q_H/Q_L − 1",
+   "1 − Q_L/Q_H",
+   "1 + Q_L/Q_H"
+  ],
+  "answer": 2,
+  "explain": "η = W/Q_H = (Q_H−Q_L)/Q_H = 1 − Q_L/Q_H by definition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f2b84e8e-1099-4cdd-885b-fdf0d354f9d4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "Entropy change when n mol ideal gas expands isothermally from V₁ to V₂:",
+  "formula": "ΔS = nR ln(V₂/V₁)",
+  "options": [
+   "nCₚ ln(V₂/V₁)",
+   "zero",
+   "nR ln(V₂/V₁)",
+   "nCᵥ ln(V₂/V₁)"
+  ],
+  "answer": 2,
+  "explain": "Isothermal: ΔU=0, Q=W=nRT ln(V₂/V₁), so ΔS=Q/T=nR ln(V₂/V₁).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "37806477-0577-42d7-961d-c814712cde0a",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "Internal energy of n mol diatomic ideal gas (room temp):",
+  "formula": "U = (5/2)nRT",
+  "options": [
+   "(3/2)nRT",
+   "(7/2)nRT",
+   "(1/2)nRT",
+   "(5/2)nRT"
+  ],
+  "answer": 3,
+  "explain": "Diatomic gas has f=5 active DOF at room temp, so U = (5/2)nRT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b9b3e076-876b-4576-869c-353853a2b227",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "COP of Carnot refrigerator in terms of T_H and T_L:",
+  "formula": "COP = T_L/(T_H − T_L)",
+  "options": [
+   "T_L/(T_H−T_L)",
+   "T_H/T_L",
+   "T_H/(T_H−T_L)",
+   "(T_H−T_L)/T_L"
+  ],
+  "answer": 0,
+  "explain": "Carnot COP = Q_L/W = T_L/(T_H−T_L) from Carnot efficiency.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c8024da2-57fb-4a0f-855c-0cad5520e5f0",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "Work done by gas in isothermal process when pressure halves:",
+  "formula": "W = nRT ln2",
+  "options": [
+   "nRT ln(1/2)",
+   "nRΔT",
+   "zero",
+   "nRT ln2"
+  ],
+  "answer": 3,
+  "explain": "P halves ⟹ V doubles (isothermal PV=const), W = nRT ln(V₂/V₁) = nRT ln2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "790e7873-6c7b-4591-97d6-f9d9a8374c40",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Cyclic process & net work",
+  "prompt": "In a P-V diagram, area enclosed by a cycle represents:",
+  "formula": "",
+  "options": [
+   "Change in internal energy",
+   "Total heat absorbed",
+   "Change in entropy",
+   "Net work done by gas"
+  ],
+  "answer": 3,
+  "explain": "The enclosed area on a P-V diagram equals the net work done per cycle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "26d89cca-2774-463f-8b85-de55e603bc82",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermal equilibrium & zeroth law",
+  "prompt": "Zeroth law of thermodynamics defines the concept of:",
+  "formula": "",
+  "options": [
+   "Enthalpy",
+   "Entropy",
+   "Internal energy",
+   "Temperature"
+  ],
+  "answer": 3,
+  "explain": "Zeroth law: if A & B are in thermal equilibrium with C, they define temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "13edd209-06ce-44bf-8ab6-2009f138511f",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "Effective molar specific heat for an adiabatic process is:",
+  "formula": "C_adiabatic = 0",
+  "options": [
+   "Cₚ",
+   "Zero",
+   "Cᵥ",
+   "Negative infinity"
+  ],
+  "answer": 1,
+  "explain": "In adiabatic process Q=0, so dQ/dT=0; molar specific heat C = Q/nΔT = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "999946b5-0104-41af-9bb5-d1d7b2c57817",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "Effective molar specific heat for isothermal process is:",
+  "formula": "C_isothermal → ∞",
+  "options": [
+   "Zero",
+   "Cₚ",
+   "Cᵥ",
+   "Infinity"
+  ],
+  "answer": 3,
+  "explain": "Isothermal: ΔT=0 but Q≠0, so C = Q/nΔT → ∞.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1c36981e-752f-43ad-a826-4d34470de976",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Second law: Kelvin-Planck & Clausius",
+  "prompt": "Which law forbids efficiency of heat engine equal to 100%?",
+  "formula": "",
+  "options": [
+   "First law",
+   "Second law",
+   "Zeroth law",
+   "Third law"
+  ],
+  "answer": 1,
+  "explain": "Second law: impossible to convert all heat to work; η < 100% always.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9b2f3de9-7ad7-4edf-84cc-50df33eec6d6",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Reversible & irreversible processes",
+  "prompt": "In free expansion of ideal gas into vacuum, work done is:",
+  "formula": "W = 0, Q = 0, ΔU = 0",
+  "options": [
+   "Negative",
+   "Zero",
+   "Positive",
+   "nRT ln(V₂/V₁)"
+  ],
+  "answer": 1,
+  "explain": "Against vacuum: P_ext=0, so W=0; adiabatic container Q=0; hence ΔU=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0f8ca127-8438-40ca-9830-aacb535408e2",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "For a polytropic process PVⁿ=const, adiabatic corresponds to n=:",
+  "formula": "n = γ",
+  "options": [
+   "∞",
+   "1",
+   "0",
+   "γ"
+  ],
+  "answer": 3,
+  "explain": "Adiabatic: PV^γ=const, so polytropic index n=γ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f0f0849f-998a-4251-b70f-fa3518e17810",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "For a polytropic process PVⁿ=const, isothermal corresponds to n=:",
+  "formula": "n = 1",
+  "options": [
+   "γ",
+   "∞",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Isothermal: PV=const (T fixed), so polytropic index n=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1a16858f-33cf-40d6-8e66-221ad94ceedd",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "Work done by n mol ideal gas in isobaric process:",
+  "formula": "W = nRΔT",
+  "options": [
+   "nCᵥΔT",
+   "nCₚΔT",
+   "nRΔT",
+   "zero"
+  ],
+  "answer": 2,
+  "explain": "W = PΔV = nRΔT from ideal gas law at constant pressure.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7f4a7878-e8ea-4a2a-9ec3-ba02abff3d05",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "Carnot efficiency depends only on:",
+  "formula": "η = 1 − T_L/T_H",
+  "options": [
+   "Number of moles",
+   "Working substance",
+   "Type of gas used",
+   "Source & sink temperatures"
+  ],
+  "answer": 3,
+  "explain": "Carnot η = 1 − T_L/T_H depends solely on absolute temperatures of reservoirs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1d01a1f2-c78d-463f-b421-8a8b8f0d4f23",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "Ratio Q_L/Q_H for a Carnot engine equals:",
+  "formula": "Q_L/Q_H = T_L/T_H",
+  "options": [
+   "T_H/T_L",
+   "(T_H−T_L)/T_H",
+   "T_L/(T_H+T_L)",
+   "T_L/T_H"
+  ],
+  "answer": 3,
+  "explain": "For Carnot cycle Q_L/Q_H = T_L/T_H; this is the defining property of Carnot cycle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "894b1d05-c60c-45cf-898c-60f3469e711f",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "Cᵥ for diatomic ideal gas (per mole, room temp)?",
+  "formula": "Cᵥ = (5/2)R",
+  "options": [
+   "(7/2)R",
+   "(5/2)R",
+   "2R",
+   "(3/2)R"
+  ],
+  "answer": 1,
+  "explain": "Diatomic gas has 5 degrees of freedom at room temp, so Cᵥ = (5/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4d0908e2-3084-482a-83ad-d7b298ba5936",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "Cₚ for monoatomic ideal gas (per mole)?",
+  "formula": "Cₚ = (5/2)R",
+  "options": [
+   "(3/2)R",
+   "(5/2)R",
+   "2R",
+   "(7/2)R"
+  ],
+  "answer": 1,
+  "explain": "Monoatomic: Cᵥ = (3/2)R, so Cₚ = Cᵥ + R = (5/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8ce1e2ee-99fa-4781-ba9b-6fedd4a0cfe6",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "In an isochoric process, which quantity remains constant?",
+  "formula": "",
+  "options": [
+   "Volume",
+   "Pressure",
+   "Entropy",
+   "Temperature"
+  ],
+  "answer": 0,
+  "explain": "Isochoric means constant volume; no work is done by or on the gas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "76bfadd6-8fce-4963-ba17-7fc409f449cf",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "For n mol ideal gas, ΔU when temperature changes by ΔT?",
+  "formula": "ΔU = nCᵥΔT",
+  "options": [
+   "nCᵥΔT",
+   "nCₚΔT",
+   "nRΔT",
+   "nγCᵥΔT"
+  ],
+  "answer": 0,
+  "explain": "Internal energy change always equals nCᵥΔT for ideal gas, regardless of process.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "87c7307a-b3d9-47df-9afb-f9940b665b15",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "For a Carnot engine, which cycle process absorbs heat from source?",
+  "formula": "",
+  "options": [
+   "Isothermal compression",
+   "Isothermal expansion",
+   "Adiabatic expansion",
+   "Adiabatic compression"
+  ],
+  "answer": 1,
+  "explain": "Heat Q_H is absorbed during isothermal expansion at the higher temperature T_H.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb3e3aa9-df38-40bf-b9e6-65770eb9e412",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "First law for an adiabatic process simplifies to?",
+  "formula": "ΔU = −W",
+  "options": [
+   "ΔU = −W",
+   "ΔU = Q",
+   "W = Q",
+   "ΔU = 0"
+  ],
+  "answer": 0,
+  "explain": "Since Q = 0 adiabatically, first law gives ΔU = −W (work done by gas).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "73912a23-751f-44b5-a845-f7d8fc619d53",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "For an ideal gas undergoing isothermal compression, entropy change ΔS is?",
+  "formula": "ΔS = nR ln(V₂/V₁)",
+  "options": [
+   "Zero",
+   "Positive",
+   "Negative",
+   "Depends on temperature"
+  ],
+  "answer": 2,
+  "explain": "Compression means V₂ < V₁, so ln(V₂/V₁) < 0, hence ΔS < 0 (entropy decreases).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "332b9e1b-c0c9-4bf0-a30f-f044a7bb1733",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "Heat rejected by Carnot engine Q_L in terms of Q_H, T_H, T_L?",
+  "formula": "Q_L = Q_H·(T_L/T_H)",
+  "options": [
+   "Q_H·(1−T_L/T_H)",
+   "Q_H·(T_L/T_H)",
+   "Q_H·(T_H/T_L)",
+   "Q_H·(T_H−T_L)/T_H"
+  ],
+  "answer": 1,
+  "explain": "For Carnot engine, Q_L/Q_H = T_L/T_H, so Q_L = Q_H(T_L/T_H).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b22417c0-0661-4c5f-9c0e-8e646e7c39c3",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "Isobaric work done when n mol ideal gas is heated by ΔT?",
+  "formula": "W = nRΔT",
+  "options": [
+   "nCᵥΔT",
+   "½nRΔT",
+   "nRΔT",
+   "nCₚΔT"
+  ],
+  "answer": 2,
+  "explain": "At constant pressure, W = PΔV = nRΔT by ideal gas law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1e28493b-62fd-4018-a580-826757598c74",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "Which process satisfies dU = dQ (all heat → internal energy)?",
+  "formula": "",
+  "options": [
+   "Isothermal",
+   "Adiabatic",
+   "Isobaric",
+   "Isochoric"
+  ],
+  "answer": 3,
+  "explain": "At constant volume W = 0, so first law gives dU = dQ entirely.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "72df5523-b378-44cb-b140-04b378c9d293",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "In a P-V diagram, slope of adiabat at a point compared to isotherm?",
+  "formula": "(dP/dV)_ad = γ·(dP/dV)_iso",
+  "options": [
+   "Equal",
+   "γ times steeper",
+   "γ² times steeper",
+   "1/γ times steeper"
+  ],
+  "answer": 1,
+  "explain": "Adiabatic slope = −γP/V and isothermal slope = −P/V, so adiabat is γ times steeper.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2721bf9e-f4d2-4c93-9912-ac8de2766f4e",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Reversible & irreversible processes",
+  "prompt": "Entropy of universe for any irreversible process?",
+  "formula": "ΔS_universe > 0",
+  "options": [
+   "> 0",
+   "= 0",
+   "= Q/T",
+   "< 0"
+  ],
+  "answer": 0,
+  "explain": "Second law: entropy of the universe always increases for irreversible (natural) processes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70ba1fa1-c500-4512-972d-2d1d7bea2b61",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "For free adiabatic expansion of ideal gas into vacuum, ΔT is?",
+  "formula": "",
+  "options": [
+   "Positive (temp rises)",
+   "Depends on γ",
+   "Zero",
+   "Negative (temp falls)"
+  ],
+  "answer": 2,
+  "explain": "No work done (vacuum), no heat exchange; so ΔU = 0 and ΔT = 0 for ideal gas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "12987947-4307-446f-b775-25e21b4184ee",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "For n mol ideal gas heated isobarically, ratio ΔU/Q equals?",
+  "formula": "ΔU/Q = Cᵥ/Cₚ = 1/γ",
+  "options": [
+   "γ−1",
+   "1/γ",
+   "1/(γ−1)",
+   "γ"
+  ],
+  "answer": 1,
+  "explain": "ΔU = nCᵥΔT and Q = nCₚΔT, so ΔU/Q = Cᵥ/Cₚ = 1/γ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e5149342-fb6d-4665-bc72-1aa452e0a85c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "If Carnot efficiency is η, working between T_L and T_H, then T_L/T_H = ?",
+  "formula": "T_L/T_H = 1 − η",
+  "options": [
+   "η/(1−η)",
+   "1/η",
+   "η",
+   "1 − η"
+  ],
+  "answer": 3,
+  "explain": "η = 1 − T_L/T_H ⟹ T_L/T_H = 1 − η.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "beeffc1c-30a8-46b7-94c2-3b5482d60ae4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Second law: Kelvin-Planck & Clausius",
+  "prompt": "Clausius statement: it is impossible to transfer heat from",
+  "formula": "",
+  "options": [
+   "Cold to hot without external work",
+   "Hot to cold without external work",
+   "Cold to hot spontaneously with work",
+   "Hot to cold in any process"
+  ],
+  "answer": 0,
+  "explain": "Clausius statement: heat cannot flow cold→hot without external work input.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "70d94388-5d01-4eb3-8823-2dd37d39f642",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Second law: Kelvin-Planck & Clausius",
+  "prompt": "Kelvin-Planck statement forbids which type of engine?",
+  "formula": "",
+  "options": [
+   "Engine with efficiency < Carnot",
+   "Engine with two heat reservoirs",
+   "Engine operating in reverse cycle",
+   "Engine converting all heat to work"
+  ],
+  "answer": 3,
+  "explain": "Kelvin-Planck: no engine can convert entire heat absorbed into work (η=100% impossible).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "995c1a75-f987-4713-8cc8-25a427adc419",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "For n mol ideal gas, Cₚ − Cᵥ equals:",
+  "formula": "Cₚ − Cᵥ = R",
+  "options": [
+   "R/2",
+   "R (per mole)",
+   "nR",
+   "γR"
+  ],
+  "answer": 1,
+  "explain": "Mayer's relation per mole: Cₚ − Cᵥ = R (universal gas constant).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9c2a4756-aab7-46fc-88b8-c6447bcb7cdc",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermodynamics",
+  "prompt": "Degree of freedom of a rigid diatomic molecule at room temp?",
+  "formula": "",
+  "options": [
+   "3",
+   "6",
+   "5",
+   "7"
+  ],
+  "answer": 2,
+  "explain": "Rigid diatomic: 3 translational + 2 rotational = 5 degrees of freedom.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "115cec61-0c9a-4f08-892a-4ac2daf1c706",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermodynamics",
+  "prompt": "Equipartition theorem: energy per degree of freedom per molecule?",
+  "formula": "½kT",
+  "options": [
+   "kT",
+   "½RT",
+   "³⁄₂kT",
+   "½kT"
+  ],
+  "answer": 3,
+  "explain": "Each degree of freedom contributes ½kT of thermal energy per molecule.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "381935e6-4d8f-476f-b7bf-fa387768a045",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermodynamics",
+  "prompt": "For monoatomic ideal gas, degrees of freedom f =",
+  "formula": "",
+  "options": [
+   "2",
+   "5",
+   "6",
+   "3"
+  ],
+  "answer": 3,
+  "explain": "Monoatomic gas has only 3 translational degrees of freedom.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7151ce1f-25da-42e1-8f85-9ba3f81b5765",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermodynamics",
+  "prompt": "γ for a gas with f degrees of freedom equals:",
+  "formula": "γ = 1 + 2/f",
+  "options": [
+   "1 + 2/f",
+   "f/(f+2)",
+   "1 + f/2",
+   "2/f"
+  ],
+  "answer": 0,
+  "explain": "γ = Cₚ/Cᵥ = (f+2)/f = 1 + 2/f where f is degrees of freedom.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "90765757-dcc8-4f2a-a783-4c259231ad6b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "Cᵥ per mole in terms of degrees of freedom f:",
+  "formula": "Cᵥ = (f/2)R",
+  "options": [
+   "fR",
+   "(f/2)R",
+   "(f+2)R/2",
+   "R/f"
+  ],
+  "answer": 1,
+  "explain": "By equipartition, Cᵥ = (f/2)R per mole.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dce63697-9d19-4716-839c-974b5c11725c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Cyclic process & net work",
+  "prompt": "Work done in one complete reversible cycle by Carnot engine equals:",
+  "formula": "W = Q_H − Q_L",
+  "options": [
+   "Q_H − Q_L",
+   "Q_H / Q_L",
+   "Q_H + Q_L",
+   "Q_H · Q_L"
+  ],
+  "answer": 0,
+  "explain": "By first law for a cycle ΔU=0, so W = Q_net = Q_H − Q_L.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4e39e248-b1be-411a-92ab-4519b07d1b1f",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermodynamics",
+  "prompt": "Heat pump COP defined as:",
+  "formula": "COP_HP = Q_H / W",
+  "options": [
+   "Q_H / W (heat delivered to hot body per work)",
+   "Q_L / W (heat removed per work)",
+   "W / Q_H",
+   "Q_L / Q_H"
+  ],
+  "answer": 0,
+  "explain": "Heat pump COP = useful heat delivered to hot reservoir / work input = Q_H/W.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ed42b4fa-066a-4a2e-b997-ef9de2f8c091",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermodynamics",
+  "prompt": "In a throttling process (Joule-Thomson), which quantity is conserved?",
+  "formula": "",
+  "options": [
+   "Entropy S",
+   "Temperature T",
+   "Enthalpy H",
+   "Internal energy U"
+  ],
+  "answer": 2,
+  "explain": "Joule-Thomson (throttling) is isenthalpic: enthalpy H = U + PV remains constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bb679d46-c942-4101-bd1f-3980eca60919",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Reversible & irreversible processes",
+  "prompt": "For a reversible Carnot cycle, total entropy change of universe is:",
+  "formula": "ΔS_universe = 0",
+  "options": [
+   "Negative",
+   "Zero",
+   "Positive",
+   "Q_H/T_H"
+  ],
+  "answer": 1,
+  "explain": "Carnot cycle is reversible, so ΔS_universe = 0 (entropy of universe unchanged).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "98bcd99c-3119-43f9-9c5d-96c5b52dcafb",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "In an isobaric expansion, which is true about Q and ΔU?",
+  "formula": "",
+  "options": [
+   "Q = ΔU",
+   "Q > ΔU (since W > 0)",
+   "Q < ΔU",
+   "Q = 0"
+  ],
+  "answer": 1,
+  "explain": "Q = ΔU + W; since gas expands isobarically W = PΔV > 0, so Q > ΔU.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "79d1e6f2-e955-4600-a6f5-bf2b7d9e41bf",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "Slope of isothermal curve (PV=const) on P-V diagram at point (P,V):",
+  "formula": "dP/dV = −P/V",
+  "options": [
+   "−γP/V",
+   "−γV/P",
+   "P/V",
+   "−P/V"
+  ],
+  "answer": 3,
+  "explain": "For PV = const, differentiating: dP/dV = −P/V (magnitude = P/V).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2e3cb410-5671-4dd8-a94e-0a7e91e784d9",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "Slope of adiabatic curve PVᵞ=const on P-V diagram at (P,V):",
+  "formula": "dP/dV = −γP/V",
+  "options": [
+   "−γP/V",
+   "−P/V",
+   "−P/(γV)",
+   "γP/V"
+  ],
+  "answer": 0,
+  "explain": "Differentiating PVᵞ=const gives dP/dV = −γP/V, steeper than isotherm by factor γ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2ebad2e6-8b33-4665-8fa4-01988471dd9f",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "For n mol of ideal gas, internal energy per mole per kelvin at const V is:",
+  "formula": "Cᵥ = (f/2)R",
+  "options": [
+   "(f+2)R/2",
+   "γR",
+   "R only",
+   "(f/2)R, where f = degrees of freedom"
+  ],
+  "answer": 3,
+  "explain": "Molar Cᵥ = (f/2)R by equipartition; e.g., monoatomic f=3 → Cᵥ=3R/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b53fbd0e-3eed-475a-b3c2-b7db1b6a8475",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "Maximum work obtainable from a heat engine between T_H and T_L is:",
+  "formula": "W_max = Q_H(1 − T_L/T_H)",
+  "options": [
+   "Q_L(T_H/T_L − 1)",
+   "Q_H · T_L/T_H",
+   "Q_H − Q_L regardless of temps",
+   "Q_H(1 − T_L/T_H)"
+  ],
+  "answer": 3,
+  "explain": "Max work = Carnot efficiency × Q_H = Q_H·η_Carnot = Q_H(1 − T_L/T_H).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "69dd7641-b8ce-45ea-a721-e1d93a5cab04",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "For n mol ideal gas, work done in isothermal process at temp T when V→2V:",
+  "formula": "W = nRT ln2",
+  "options": [
+   "nCᵥΔT",
+   "nRΔT",
+   "nRT ln2",
+   "PΔV only"
+  ],
+  "answer": 2,
+  "explain": "W = nRT ln(V₂/V₁) = nRT ln2 when volume doubles isothermally.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "701e0ba0-864d-4eac-ace0-a4f91e7383bf",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "The process in which internal energy increases but no work is done:",
+  "formula": "",
+  "options": [
+   "Isothermal",
+   "Isobaric",
+   "Adiabatic",
+   "Isochoric"
+  ],
+  "answer": 3,
+  "explain": "Isochoric: W=0, so all heat added goes to increasing internal energy.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "872dc121-adee-4361-bcdc-5a576a2f10c4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "For an ideal gas adiabatic process, relation between V and T is:",
+  "formula": "TV^(γ−1) = const",
+  "options": [
+   "TV^(γ−1)=const",
+   "T^γV=const",
+   "TV=const",
+   "TV^γ=const"
+  ],
+  "answer": 0,
+  "explain": "Derived from PVᵞ=C and PV=nRT: TV^(γ−1) = constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0b16a88a-7c36-4624-8a62-cd337a1c9cca",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Second law: Kelvin-Planck & Clausius",
+  "prompt": "Which law of thermodynamics introduces the concept of entropy?",
+  "formula": "",
+  "options": [
+   "Zeroth law",
+   "Third law",
+   "First law",
+   "Second law"
+  ],
+  "answer": 3,
+  "explain": "Entropy is introduced via the second law; dS = dQ_rev/T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "790af1cc-9c9e-4a88-a4f9-a2d0c0de8c3d",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "For an ideal gas, ratio of slopes |adiabat|/|isotherm| on P-V diagram equals:",
+  "formula": "γ = Cₚ/Cᵥ",
+  "options": [
+   "γ+1",
+   "γ−1",
+   "γ",
+   "1/γ"
+  ],
+  "answer": 2,
+  "explain": "Slope of adiabat = −γP/V; slope of isotherm = −P/V; ratio = γ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d81fe506-4bf1-431c-9c06-04015bcc140f",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "If a gas expands isothermally and reversibly, the work done BY gas equals heat:",
+  "formula": "W = Q",
+  "options": [
+   "Zero",
+   "Absorbed from surroundings",
+   "Equal to ΔU",
+   "Rejected to surroundings"
+  ],
+  "answer": 1,
+  "explain": "Isothermal ideal gas: ΔU=0, so by first law W = Q (heat absorbed).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "40bfcbcf-d00a-49e6-b66f-64fe1d71f0de",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "Heat supplied to a gas in isobaric process when temperature rises by ΔT (n mol):",
+  "formula": "Q = nCₚΔT",
+  "options": [
+   "nCₚΔT",
+   "nRΔT",
+   "nCᵥΔT",
+   "n(Cₚ+Cᵥ)ΔT"
+  ],
+  "answer": 0,
+  "explain": "At constant pressure, heat exchanged is Q = nCₚΔT by definition of Cₚ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b84ac020-eaa6-4eb3-a971-310fb3cea5d0",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Internal energy as state function, ΔU=nCvΔT",
+  "prompt": "Which of these is NOT a state function?",
+  "formula": "",
+  "options": [
+   "Internal energy U",
+   "Entropy S",
+   "Work W",
+   "Enthalpy H"
+  ],
+  "answer": 2,
+  "explain": "Work W is a path function; U, S, H are all state functions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "81c0c98f-39f9-476f-bb6c-2aa0fb0757e2",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermal equilibrium & zeroth law",
+  "prompt": "Which thermodynamic law is the basis for thermometry?",
+  "formula": "",
+  "options": [
+   "Second law",
+   "First law",
+   "Third law",
+   "Zeroth law"
+  ],
+  "answer": 3,
+  "explain": "Zeroth law: if A≡B and B≡C thermally, then A≡C — basis of temperature measurement.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "be84e665-64a8-4af9-a8ef-5d3842331f33",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "In which process does the gas exchange NO heat with surroundings?",
+  "formula": "Q = 0",
+  "options": [
+   "Adiabatic",
+   "Isochoric",
+   "Isobaric",
+   "Isothermal"
+  ],
+  "answer": 0,
+  "explain": "Adiabatic process: Q=0 by definition; all energy exchange is via work only.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3970396e-7428-4515-86db-32831e6c2539",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermal equilibrium & zeroth law",
+  "prompt": "A~C and B~C in thermal equilibrium imply A~B. Which property of thermal equilibrium is this?",
+  "formula": "",
+  "options": [
+   "Reflexivity",
+   "Symmetry",
+   "Transitivity",
+   "Conservation of energy"
+  ],
+  "answer": 2,
+  "explain": "The zeroth law says thermal equilibrium is transitive: A~C and B~C give A~B.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9612122c-239b-41a8-8f32-9495f3a0ffd9",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermal equilibrium & zeroth law",
+  "prompt": "Complete thermodynamic equilibrium of a system needs which three equilibria together?",
+  "formula": "",
+  "options": [
+   "Mechanical, thermal, chemical",
+   "Mechanical, electrical, radiative",
+   "Thermal, chemical, magnetic",
+   "Mechanical, thermal, nuclear"
+  ],
+  "answer": 0,
+  "explain": "Mechanical, thermal and chemical equilibrium must all hold simultaneously.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "02af245a-5258-4215-bfbd-015c9dffcbe3",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermal equilibrium & zeroth law",
+  "prompt": "Which decides the direction of net heat flow between two bodies in contact?",
+  "formula": "",
+  "options": [
+   "Their total heat contents",
+   "Their temperature difference",
+   "Their specific heats",
+   "Their masses"
+  ],
+  "answer": 1,
+  "explain": "Heat flows from higher to lower temperature, regardless of mass or heat content.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8bb4694f-5070-49c0-83bb-7c9352c973f8",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermal equilibrium & zeroth law",
+  "prompt": "Two bodies in thermal equilibrium must have the same value of which property?",
+  "formula": "",
+  "options": [
+   "Heat content",
+   "Temperature",
+   "Internal energy",
+   "Specific heat capacity"
+  ],
+  "answer": 1,
+  "explain": "Thermal equilibrium means equal temperature; internal energy, heat content and specific heat can differ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e713b4dc-cbf3-4f7a-8293-778ad2b46fc5",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Concept of temperature",
+  "prompt": "Average translational KE per molecule of an ideal gas depends only on:",
+  "formula": "⟨KE⟩ = (3/2) k_B T",
+  "options": [
+   "Absolute temperature",
+   "Volume and temperature",
+   "Temperature and molar mass",
+   "Pressure alone"
+  ],
+  "answer": 0,
+  "explain": "⟨KE⟩ = (3/2)k_BT is independent of the gas's mass, so temperature measures mean molecular KE.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d30c298-56c5-4c4c-a7a2-f15cdc012e3d",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Concept of temperature",
+  "prompt": "In an ideal constant-volume gas thermometer, the measured temperature is proportional to:",
+  "formula": "T = 273.16 × (P / P_tp)",
+  "options": [
+   "1/P",
+   "√P",
+   "P²",
+   "Gas pressure P"
+  ],
+  "answer": 3,
+  "explain": "At constant V, P ∝ T for an ideal gas, so T = 273.16 (P/P_tp).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "abcec3d8-8d8e-4114-9882-4e98a5c6c7a9",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Concept of temperature",
+  "prompt": "A temperature rise of 20 °C corresponds to what rise on the Fahrenheit scale?",
+  "formula": "ΔF = (9/5) ΔC",
+  "options": [
+   "68 °F",
+   "11.1 °F",
+   "36 °F",
+   "20 °F"
+  ],
+  "answer": 2,
+  "explain": "A Celsius degree is 9/5 of a Fahrenheit degree in size, so ΔF = 1.8 × 20 = 36.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9edde11c-6614-40d9-b82b-653712b4476c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Concept of temperature",
+  "prompt": "Which of these thermodynamic variables is intensive?",
+  "formula": "",
+  "options": [
+   "Entropy",
+   "Internal energy",
+   "Volume",
+   "Temperature"
+  ],
+  "answer": 3,
+  "explain": "Temperature does not depend on the amount of substance; U, V and S are extensive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de78a00d-3303-4f2c-9fe1-b60ccdb6957c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "In a complete cyclic process of a gas, which relation always holds?",
+  "formula": "",
+  "options": [
+   "W = 0",
+   "ΔU = Q + W",
+   "Q = W",
+   "Q = 0"
+  ],
+  "answer": 2,
+  "explain": "U is a state function so ΔU = 0 over a cycle, giving Q = W.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e1c4528c-5a3e-4cc4-94a6-d5ccbe80ddc5",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "The work done by a gas in a P–V diagram is represented by:",
+  "formula": "",
+  "options": [
+   "Area under the P–V curve",
+   "Intercept on P-axis",
+   "Slope of the curve",
+   "Area under T–V curve"
+  ],
+  "answer": 0,
+  "explain": "W = ∫P dV equals the area under the P–V curve.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "093807f2-8423-4ac5-8d0d-a3f45ee7fe5a",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "A cycle traced clockwise on a P–V diagram gives net work done by the gas that is:",
+  "formula": "",
+  "options": [
+   "Equal to ΔU",
+   "Zero",
+   "Positive",
+   "Negative"
+  ],
+  "answer": 2,
+  "explain": "Clockwise loop: expansion at higher P exceeds compression work; W is positive.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "272081eb-bb24-4ad1-82cf-735e452c77af",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "First law of thermodynamics ΔU = Q − W: here W denotes work done by or on the system?",
+  "formula": "ΔU = Q − W",
+  "options": [
+   "Work done by the system",
+   "Work done on the system",
+   "Net work of surroundings",
+   "Work against friction only"
+  ],
+  "answer": 0,
+  "explain": "In the Q − W convention, W is work done by the gas; on-gas convention gives ΔU = Q + W.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1ea7a96b-0017-4229-b4eb-57687b80ea5c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "The first law of thermodynamics is a statement of conservation of:",
+  "formula": "",
+  "options": [
+   "Mass",
+   "Energy",
+   "Entropy",
+   "Momentum"
+  ],
+  "answer": 1,
+  "explain": "First law: heat supplied = increase in internal energy + work done; it is energy conservation including heat.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "87668698-260c-45e1-8625-6952ef0607a2",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "For an ideal gas, internal energy depends only on:",
+  "formula": "",
+  "options": [
+   "Temperature",
+   "Volume",
+   "Pressure",
+   "Pressure and volume separately"
+  ],
+  "answer": 0,
+  "explain": "No intermolecular forces, so U contains only kinetic energy, a function of T alone.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "242f5b60-dfea-493f-a6eb-7c9654fc4462",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Ice melts at 0 °C and 1 atm (volume decreases). Compared with Q absorbed, ΔU is:",
+  "formula": "ΔU = Q − PΔV",
+  "options": [
+   "Zero",
+   "Less than Q",
+   "Greater than Q",
+   "Equal to Q"
+  ],
+  "answer": 2,
+  "explain": "ΔV < 0 so W < 0 and ΔU = Q − W is greater than Q.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7d19e47-e612-434a-bacb-f021fe2151ad",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Internal energy of 2 mol of a rigid diatomic ideal gas at temperature T:",
+  "formula": "U = (f/2) nRT",
+  "options": [
+   "7RT",
+   "10RT",
+   "3RT",
+   "5RT"
+  ],
+  "answer": 3,
+  "explain": "f = 5, n = 2: U = (5/2)(2)RT = 5RT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "769a6ca0-fa13-49c3-85b6-fa51f08e0d44",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "A paddle stirs a gas in a thermally insulated rigid vessel. Then:",
+  "formula": "Q = 0, ΔU = −W",
+  "options": [
+   "ΔU = 0, T constant",
+   "ΔU > 0, T rises",
+   "ΔU < 0, T falls",
+   "Q > 0, ΔU = Q"
+  ],
+  "answer": 1,
+  "explain": "Work is done on the gas (W < 0) with Q = 0, so ΔU > 0 and T rises (Joule's experiment).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c6038c87-88f5-4262-8797-739f2c332643",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "In free expansion of a gas in an insulated rigid container, which quantity is always conserved?",
+  "formula": "",
+  "options": [
+   "Internal energy",
+   "Temperature (any gas)",
+   "Enthalpy-free volume",
+   "Pressure"
+  ],
+  "answer": 0,
+  "explain": "Q = 0 and W = 0, so ΔU = 0. T stays constant only for an ideal gas.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d572d233-c011-4849-b788-a395d80d3809",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "For a gas, the sign of ΔU in a process where Q = +W (W done by gas) is:",
+  "formula": "ΔU = Q − W",
+  "options": [
+   "Cannot be decided",
+   "Positive",
+   "Zero",
+   "Negative"
+  ],
+  "answer": 2,
+  "explain": "ΔU = Q − W = 0 when Q = W; for an ideal gas this means no temperature change.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "33b0e810-0415-467a-a8e6-1701ebd7b364",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "On a P–V diagram, an isochoric process is represented by:",
+  "formula": "",
+  "options": [
+   "A horizontal straight line",
+   "A straight line through the origin",
+   "A rectangular hyperbola",
+   "A vertical straight line"
+  ],
+  "answer": 3,
+  "explain": "V is constant, so the process is a vertical line parallel to the P-axis.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6f1fe264-c7c6-4959-a76c-19d6e7983db5",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "For an ideal gas, the ratio W : ΔU : Q in an isobaric process for a monatomic gas is:",
+  "formula": "",
+  "options": [
+   "2 : 3 : 5",
+   "1 : 3 : 4",
+   "2 : 5 : 7",
+   "3 : 2 : 5"
+  ],
+  "answer": 0,
+  "explain": "W = nRΔT, ΔU = (3/2)nRΔT, Q = (5/2)nRΔT, so the ratio is 2 : 3 : 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2f379eea-a4f9-40fa-9107-5d2a23fddd61",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isochoric & isobaric processes",
+  "prompt": "Isobaric heating of an ideal gas: the slope of the V–T graph is proportional to:",
+  "formula": "V/T = nR/P",
+  "options": [
+   "P²",
+   "P",
+   "Independent of P",
+   "1/P"
+  ],
+  "answer": 3,
+  "explain": "V = (nR/P)T, so the slope is nR/P. A lower pressure gives a steeper line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0855ba17-85d7-408a-ad6c-36f68fc628bd",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "For an isothermal process of an ideal gas, the P versus 1/V graph is:",
+  "formula": "PV = const",
+  "options": [
+   "Straight line parallel to the P-axis",
+   "Rectangular hyperbola",
+   "Straight line through the origin",
+   "Parabola"
+  ],
+  "answer": 2,
+  "explain": "P = (nRT)(1/V) is linear in 1/V with zero intercept.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0483afdf-9fae-4b10-b4af-d875d93be2a4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "In an isothermal process of an ideal gas, the change in enthalpy ΔH is:",
+  "formula": "H = U + PV = U + nRT",
+  "options": [
+   "Equal to the work done",
+   "Equal to Q",
+   "Zero",
+   "nRT ln(V₂/V₁)"
+  ],
+  "answer": 2,
+  "explain": "Both U and PV (= nRT) stay constant when T is constant, so ΔH = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ca954e29-c36a-42c0-b4d9-f5195120ceca",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "For isothermal expansion between the same two states, work by the gas is maximum in:",
+  "formula": "",
+  "options": [
+   "Reversible expansion",
+   "Same in all",
+   "Free expansion",
+   "Expansion against constant external pressure"
+  ],
+  "answer": 0,
+  "explain": "The gas pressure is matched at every step in a reversible process, so the area under P–V is greatest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e06e9e7f-7071-441b-9cbe-c3d62d5bd01b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "Two isotherms of the same gas on a P–V diagram have T₂ > T₁. Which statement is correct?",
+  "formula": "",
+  "options": [
+   "They intersect at one point",
+   "They are parallel straight lines",
+   "T₂ isotherm lies farther from the axes",
+   "T₂ isotherm lies closer to the axes"
+  ],
+  "answer": 2,
+  "explain": "PV = nRT is larger for larger T, so the hyperbola shifts outward. Isotherms never intersect.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "de130e97-6eff-43dd-b3f7-7eb66539b03c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "Water boils at constant T and P. Why is ΔU = 0 NOT valid for this isothermal process?",
+  "formula": "",
+  "options": [
+   "ΔU = 0 holds only for ideal gas",
+   "Heat absorbed is zero here",
+   "Work done is zero here",
+   "Pressure is not constant here"
+  ],
+  "answer": 0,
+  "explain": "ΔU depends only on T for an ideal gas. In a phase change, latent heat raises the internal energy even at constant T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "32fdce99-6a90-40b7-8235-8ad107b09d83",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "On a P–V diagram, an isothermal curve of an ideal gas has which shape?",
+  "formula": "PV = constant",
+  "options": [
+   "Parabola",
+   "Straight line with negative slope",
+   "Rectangular hyperbola",
+   "Straight line parallel to V-axis"
+  ],
+  "answer": 2,
+  "explain": "PV = nRT = constant gives P ∝ 1/V, a rectangular hyperbola (Boyle's law).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cde90e53-d622-4af1-93ed-40c112c890e1",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "For a reversible adiabatic process, the entropy change of the gas is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Positive",
+   "Equal to R ln γ",
+   "Negative"
+  ],
+  "answer": 0,
+  "explain": "dS = dQ_rev/T = 0, so the process is isentropic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c8bf1152-e2a8-4425-8aa8-e0cba4661fd4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "Newton assumed sound propagation to be isothermal; Laplace's correction used which process?",
+  "formula": "v = √(γP/ρ)",
+  "options": [
+   "Isochoric",
+   "Isothermal with γ = 1",
+   "Adiabatic",
+   "Isobaric"
+  ],
+  "answer": 2,
+  "explain": "Compressions and rarefactions are too fast for heat flow, so they are adiabatic. This gives the factor γ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4087445f-43e7-49d5-b341-a7455d4ac49b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "Same initial state, expansion to the same final volume: which does more work?",
+  "formula": "",
+  "options": [
+   "Cannot be compared",
+   "Equal work",
+   "Isothermal",
+   "Adiabatic"
+  ],
+  "answer": 2,
+  "explain": "The adiabat falls faster on the P–V graph, so the area under it is smaller. Isothermal work is greater.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "81081586-ebe8-4476-baf1-4f1c0034bcdb",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "Which process does NOT obey PV^γ = const although Q = 0?",
+  "formula": "",
+  "options": [
+   "Reversible adiabatic expansion",
+   "Free expansion into vacuum",
+   "Quasi-static insulated compression",
+   "Slow expansion in an insulated cylinder"
+  ],
+  "answer": 1,
+  "explain": "PV^γ = const holds only for reversible (quasi-static) adiabatic processes. Free expansion is irreversible.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f96c133-54e3-4e4e-af97-c6df34a1e0e4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "From the same initial state, adiabatic expansion to a given volume ends at what pressure vs isothermal?",
+  "formula": "",
+  "options": [
+   "Lower than isothermal",
+   "Higher than isothermal",
+   "Equal to isothermal",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Adiabat is steeper, and the gas cools, so final P is lower than for the isotherm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "420afcfe-3c62-4d8a-92d2-917d9a0ec696",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "During adiabatic expansion of an ideal gas, its temperature:",
+  "formula": "",
+  "options": [
+   "Increases then decreases",
+   "Increases",
+   "Decreases",
+   "Remains constant"
+  ],
+  "answer": 2,
+  "explain": "Gas does work at the cost of internal energy, so T falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0dd5d81f-1be0-40fa-9d96-d98eafded45f",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "During adiabatic compression of an ideal gas, internal energy:",
+  "formula": "",
+  "options": [
+   "Remains constant",
+   "Decreases, as work is done on gas",
+   "Increases, as work is done on gas",
+   "Equals heat released"
+  ],
+  "answer": 2,
+  "explain": "Q = 0, work done on gas raises ΔU and hence temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0a1524d7-25c6-4a53-95da-0e8d24b04163",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "Free expansion of an ideal gas into vacuum in an insulated container: work done is:",
+  "formula": "",
+  "options": [
+   "Zero, with temperature fall",
+   "Nonzero, with temperature fall",
+   "Zero, with no temperature change",
+   "Nonzero, with temperature rise"
+  ],
+  "answer": 2,
+  "explain": "Q = 0, W = 0 ⇒ ΔU = 0, so T is unchanged for an ideal gas; PV^γ = const is not valid here.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "359d908c-e992-4bbb-98a0-bb232f240860",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "For a reversible adiabatic process of a monatomic ideal gas, pressure P varies with temperature T as:",
+  "formula": "P ∝ T^(γ/(γ−1))",
+  "options": [
+   "P ∝ T^(5/2)",
+   "P ∝ T^(3/2)",
+   "P ∝ T^(5/3)",
+   "P ∝ T^(2/5)"
+  ],
+  "answer": 0,
+  "explain": "From T^γP^(1−γ) = constant, P ∝ T^(γ/(γ−1)); with γ = 5/3 the exponent is 5/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9c1b45ae-441d-4b61-b467-4482edd99c8e",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "Fuel ignites without a spark in a diesel engine because air undergoes rapid:",
+  "formula": "",
+  "options": [
+   "Adiabatic compression",
+   "Isothermal compression",
+   "Isobaric expansion",
+   "Adiabatic expansion"
+  ],
+  "answer": 0,
+  "explain": "Rapid compression is adiabatic: work done on the gas raises its temperature above the fuel's ignition point.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22ac15f2-16dc-4b19-b2d7-79e1147bc5ce",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "On a ln T versus ln V graph, an adiabatic process of an ideal gas has slope:",
+  "formula": "TVᵞ⁻¹ = const",
+  "options": [
+   "−(γ−1)",
+   "−γ",
+   "0",
+   "γ − 1 with positive sign"
+  ],
+  "answer": 0,
+  "explain": "TVᵞ⁻¹ = const gives ln T = −(γ−1) ln V + const.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3fb2871-2ef0-49a9-af5c-47c3a0a74b6d",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "For an adiabatic process of an ideal gas, the graph of P versus 1/V is:",
+  "formula": "P ∝ (1/V)^γ",
+  "options": [
+   "Straight line with negative slope",
+   "Straight line through origin",
+   "Curve bending upward, P ∝ (1/V)^γ",
+   "Curve bending downward"
+  ],
+  "answer": 2,
+  "explain": "Since γ > 1, P ∝ (1/V)^γ is a power curve with increasing slope, unlike the isothermal straight line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84db2285-111f-41ab-b784-10fad548bd8d",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "On a ln P versus ln V graph, an adiabatic process of an ideal gas is a straight line of slope:",
+  "formula": "PVᵞ = const",
+  "options": [
+   "−1",
+   "−1/γ",
+   "−γ",
+   "−(γ−1)"
+  ],
+  "answer": 2,
+  "explain": "ln P + γ ln V = const, so the slope is −γ. An isotherm has slope −1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8121200d-3286-4330-b9a3-826def995a53",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Reversible & irreversible processes",
+  "prompt": "A reversible process must be carried out in a manner that is:",
+  "formula": "",
+  "options": [
+   "Very fast with no heat exchange",
+   "At constant pressure only",
+   "Quasi-static with no dissipative effects",
+   "Adiabatic only"
+  ],
+  "answer": 2,
+  "explain": "Reversible = quasi-static (infinitesimal gradients) and no dissipation like friction or viscosity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "05baca70-09e9-48e8-8039-ae0de5314e88",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Reversible & irreversible processes",
+  "prompt": "Heat conduction through a finite temperature difference is:",
+  "formula": "",
+  "options": [
+   "Reversible",
+   "Reversible if slow",
+   "Irreversible",
+   "Reversible if adiabatic"
+  ],
+  "answer": 2,
+  "explain": "Heat flows spontaneously hot to cold; finite ΔT conduction cannot reverse itself, so irreversible.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "82db0a3d-dd60-4a89-8109-45df14ef6380",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Reversible & irreversible processes",
+  "prompt": "Entropy change of a system in a reversible process is given by:",
+  "formula": "dS = δQ_rev / T",
+  "options": [
+   "∫δW / T",
+   "∫δQ_rev / T",
+   "∫T δQ",
+   "∫δQ_irr / T"
+  ],
+  "answer": 1,
+  "explain": "Entropy is a state function, calculated along a reversible path: dS = δQ_rev/T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e17ebfe7-e981-43fa-88ce-4ce776e6f8ee",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Reversible & irreversible processes",
+  "prompt": "Entropy change of a system between two states in an irreversible process equals:",
+  "formula": "",
+  "options": [
+   "Greater than reversible path value",
+   "∫δQ_irr / T",
+   "Zero always",
+   "That for any reversible path between them"
+  ],
+  "answer": 3,
+  "explain": "S is a state function, so ΔS depends only on end states, not on the path.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "00911f1f-b285-4fe9-ab9d-f38e8f78f4e2",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "Relation between COP (β) of a Carnot refrigerator and engine efficiency η (same reservoirs)?",
+  "formula": "β = (1 − η)/η",
+  "options": [
+   "β = 1/(1 − η)",
+   "β = (1 − η)/η",
+   "β = η/(1 − η)",
+   "β = 1 − η"
+  ],
+  "answer": 1,
+  "explain": "η = 1 − T₂/T₁ gives T₂/T₁ = 1−η; β = T₂/(T₁−T₂) = (1−η)/η.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56532144-2463-45c1-aa73-d5a70ad35015",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat engine efficiency (2nd law context)",
+  "prompt": "Net entropy change of the working substance over one complete Carnot cycle is:",
+  "formula": "∮dQ/T = 0",
+  "options": [
+   "Positive",
+   "Equal to Q_H/T_H",
+   "Negative",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Entropy is a state function, so ΔS = 0 over any complete cycle; for Carnot, Q_H/T_H = Q_L/T_L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7ff67844-3ab1-415d-843c-c0697757f779",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Thermal equilibrium & zeroth law",
+  "prompt": "Two bodies in contact are in thermal equilibrium. What is the net rate of heat exchange between them?",
+  "formula": "",
+  "options": [
+   "Proportional to their masses",
+   "Equal to their heat capacities",
+   "Zero",
+   "Maximum"
+  ],
+  "answer": 2,
+  "explain": "At equal temperature, heat flowing each way balances, so the net heat flow is zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c08fd44-c3bd-4964-a06b-4ce442b96150",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "Slope dT/dV of an ideal-gas reversible adiabat on a T–V diagram at (T, V) is:",
+  "formula": "TV^(γ−1) = const",
+  "options": [
+   "−(γ−1)T/V",
+   "−γT/V",
+   "−T/V",
+   "−(γ−1)V/T"
+  ],
+  "answer": 0,
+  "explain": "Differentiating TV^(γ−1) = const gives dT/dV = −(γ−1)T/V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "563c27a2-6489-4449-9691-c671a7894125",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Slopes: adiabatic vs isothermal curves",
+  "prompt": "On a ln P versus ln T graph, a reversible adiabatic process of an ideal gas is a straight line of slope:",
+  "formula": "P^(1−γ) Tᵞ = const",
+  "options": [
+   "1−γ",
+   "(γ−1)/γ",
+   "−γ",
+   "γ/(γ−1)"
+  ],
+  "answer": 3,
+  "explain": "PV^γ = const with V ∝ T/P gives P^(1−γ)Tᵞ = const, so ln P = [γ/(γ−1)] ln T + const.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5ebdc6fc-ef56-4ce3-9ae4-05c48c7d0044",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "An ideal gas expands reversibly from the same initial state to the same final volume. Work done is greatest for:",
+  "formula": "",
+  "options": [
+   "Adiabatic expansion",
+   "Equal for all three",
+   "Isothermal expansion",
+   "Isobaric expansion"
+  ],
+  "answer": 3,
+  "explain": "On the P–V graph, the isobaric line lies highest, then isothermal, then adiabatic, so the isobaric area is the largest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f960f06d-b330-4584-bbbf-7a6f68eb8f3b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Concept of temperature",
+  "prompt": "Constant-volume thermometers with different gases agree with each other in the limit of:",
+  "formula": "",
+  "options": [
+   "Very high gas density",
+   "Very high pressure",
+   "Pressure tending to zero",
+   "Volume tending to zero"
+  ],
+  "answer": 2,
+  "explain": "Real gases approach ideal behaviour as P → 0, so readings converge only at very low pressure.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "55ededda-64d0-4991-bbe7-9fe9a6b4a7d3",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Concept of temperature",
+  "prompt": "A thermocouple thermometer measures temperature using the emf produced due to:",
+  "formula": "",
+  "options": [
+   "Change in resistance of a metal wire",
+   "Temperature difference between two junctions",
+   "Linear expansion of a liquid column",
+   "Change of gas pressure at constant volume"
+  ],
+  "answer": 1,
+  "explain": "Seebeck effect: emf appears when the two junctions of dissimilar metals are at different temperatures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9506eeda-c2c7-4b60-8a65-79c369fbc74a",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "Heat is best defined as energy in transit due to a difference in:",
+  "formula": "",
+  "options": [
+   "Temperature",
+   "Volume",
+   "Pressure",
+   "Mass"
+  ],
+  "answer": 0,
+  "explain": "Heat is energy transferred only because of a temperature difference.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54c3f513-64a2-4625-9fb9-a75af5042a48",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "Internal energy of a real gas depends on:",
+  "formula": "",
+  "options": [
+   "Temperature and volume",
+   "Temperature only",
+   "Volume only",
+   "Pressure only"
+  ],
+  "answer": 0,
+  "explain": "A real gas has intermolecular potential energy, which depends on volume as well as on T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "129538e3-30b1-4952-a628-21959314eb65",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "A wall that allows heat to flow between system and surroundings is called:",
+  "formula": "",
+  "options": [
+   "Isolating",
+   "Adiabatic",
+   "Rigid",
+   "Diathermic"
+  ],
+  "answer": 3,
+  "explain": "A diathermic wall conducts heat. An adiabatic wall does not.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7c41e657-16c1-420b-a309-8a3fb77b990c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "A system exchanging neither energy nor matter with its surroundings is:",
+  "formula": "",
+  "options": [
+   "Open",
+   "Isolated",
+   "Diathermic",
+   "Closed"
+  ],
+  "answer": 1,
+  "explain": "Isolated system: no exchange of heat, work or matter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7d2b3bec-2dfe-444f-8054-e96862c3430c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "A system that exchanges energy but not matter with its surroundings is called:",
+  "formula": "",
+  "options": [
+   "Adiabatic",
+   "Closed",
+   "Open",
+   "Isolated"
+  ],
+  "answer": 1,
+  "explain": "A closed system allows energy transfer only. An open system also exchanges matter.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "159bb016-ea74-4421-83a5-b6aec84f92a3",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "For solids and liquids, Cₚ ≈ Cᵥ because:",
+  "formula": "",
+  "options": [
+   "Volume change on heating is negligible",
+   "Work done is always large",
+   "Their heat capacity is zero",
+   "They have no internal energy"
+  ],
+  "answer": 0,
+  "explain": "ΔV is tiny, so PΔV is negligible and Q ≈ ΔU at constant P or V.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c749a1e5-132a-4001-904d-8c10f9b7ba96",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "For a gas, Cₚ > Cᵥ because at constant pressure the extra heat goes into:",
+  "formula": "",
+  "options": [
+   "Raising internal energy more",
+   "Rotational energy only",
+   "Work of expansion",
+   "Intermolecular attraction"
+  ],
+  "answer": 2,
+  "explain": "At constant P the gas does work PΔV, so Cₚ − Cᵥ = R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d2b9761f-7afb-4f23-b5a5-c07f26c763a1",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "A gas expands against a constant external pressure Pₑₓₜ from V₁ to V₂. Work done by the gas is:",
+  "formula": "W = Pₑₓₜ(V₂ − V₁)",
+  "options": [
+   "P_gas(V₂ − V₁) always",
+   "nRT ln(V₂/V₁)",
+   "Pₑₓₜ(V₁ − V₂)",
+   "Pₑₓₜ(V₂ − V₁)"
+  ],
+  "answer": 3,
+  "explain": "In an irreversible expansion, work is done against the external pressure, so W = Pₑₓₜ ΔV.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb354313-27c3-4526-8f8c-5b2d5eb34723",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Heat, work & internal energy concepts",
+  "prompt": "Joule's mechanical equivalent of heat, J, has a value closest to:",
+  "formula": "W = J·Q",
+  "options": [
+   "8.4 J per calorie",
+   "0.24 J per calorie",
+   "2.4 J per calorie",
+   "4.2 J per calorie"
+  ],
+  "answer": 3,
+  "explain": "Joule's paddle-wheel experiment gave 1 cal ≈ 4.18 J, so J ≈ 4.2 J/cal (0.24 cal/J is its reciprocal).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d9be501c-2835-4e9a-ad4c-2a77b9965ac1",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Monatomic ideal gas follows P ∝ V. Its molar heat capacity in this process is:",
+  "formula": "C = C_v + R/(1 − x), x = −1",
+  "options": [
+   "2R",
+   "3R",
+   "3R/2",
+   "5R/2"
+  ],
+  "answer": 0,
+  "explain": "P ∝ V means x = −1, so C = 3R/2 + R/2 = 2R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11b4cbe4-5545-4c0f-8f8b-25dd2931c6be",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "In a polytropic process PVˣ = const with 1 < x < γ, the molar heat capacity of an ideal gas is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Negative",
+   "Positive and greater than C_p",
+   "Positive and less than C_v"
+  ],
+  "answer": 1,
+  "explain": "R/(1−x) is negative with magnitude > C_v when 1 < x < γ, so C < 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff86a542-d12e-4c0c-bedd-4ac1beb72c78",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "For an ideal gas, the enthalpy change ΔH = nC_pΔT holds for:",
+  "formula": "H = U + PV = U + nRT",
+  "options": [
+   "Only isothermal processes",
+   "Every process",
+   "Only reversible adiabatic processes",
+   "Only isobaric processes"
+  ],
+  "answer": 1,
+  "explain": "H depends only on T for an ideal gas, so ΔH = nC_pΔT for any process.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f1cf9595-3d01-41fa-a78f-06fa17672476",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Rigid non-linear polyatomic ideal gas heated at constant pressure: fraction of heat converted to work is:",
+  "formula": "W/Q = R/C_p = 2/(f + 2)",
+  "options": [
+   "1/3",
+   "1/5",
+   "1/4",
+   "2/7"
+  ],
+  "answer": 2,
+  "explain": "f = 6, C_p = 4R, so W/Q = R/4R = 1/4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f15fa024-6f33-47ef-bb21-8c791b4cfd9a",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "The molar heat capacity of an ideal gas in different processes can take values:",
+  "formula": "",
+  "options": [
+   "Any value from −∞ to +∞",
+   "Between C_v and C_p only",
+   "Only C_v or C_p",
+   "Only positive values"
+  ],
+  "answer": 0,
+  "explain": "C = C_v + R/(1−x) ranges from −∞ to +∞ depending on the process.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3662b00-3a43-4121-b7fd-ef7afbe27b8a",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Isothermal expansion turns all absorbed heat into work. Why is Kelvin–Planck not violated?",
+  "formula": "",
+  "options": [
+   "Work done is negative",
+   "Heat is rejected elsewhere",
+   "The process is not cyclic",
+   "Temperature changes"
+  ],
+  "answer": 2,
+  "explain": "Kelvin–Planck forbids complete conversion in a cycle; here the gas state changes.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "71bc525a-8891-4dea-909b-e07bd62ca0ea",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "A solid is heated at atmospheric pressure. The heat supplied is nearly equal to:",
+  "formula": "",
+  "options": [
+   "PV of the solid",
+   "ΔU",
+   "Zero",
+   "Work done on surroundings"
+  ],
+  "answer": 1,
+  "explain": "Expansion of a solid is tiny, so PΔV is negligible and Q ≈ ΔU (C_p ≈ C_v).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "972a25b4-a41a-4650-bb13-0f3d25cd462b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "A gas in a conducting cylinder is compressed very slowly in a large heat bath. The process is:",
+  "formula": "",
+  "options": [
+   "Isochoric",
+   "Isothermal",
+   "Isobaric",
+   "Adiabatic"
+  ],
+  "answer": 1,
+  "explain": "Slow change with good thermal contact keeps T equal to the bath temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "42b51b6d-0d95-40a9-9584-9599ad083c20",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "The first law ΔU = Q − W applies to:",
+  "formula": "",
+  "options": [
+   "Only quasi-static processes",
+   "Any process between equilibrium states",
+   "Only ideal gases",
+   "Only reversible processes"
+  ],
+  "answer": 1,
+  "explain": "It is energy conservation; valid for reversible and irreversible changes of any system.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "54501485-13d9-4fe5-8a56-7d5d38a5651c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Molar heat capacity of an ideal gas in the process PVˣ = const is:",
+  "formula": "C = C_v + R/(1−x)",
+  "options": [
+   "C_p/(1−x)",
+   "C_v + R/(x−1)",
+   "C_v + R/(1−x)",
+   "C_v − xR"
+  ],
+  "answer": 2,
+  "explain": "Checks: x = 0 gives C_p, x = 1 gives ∞, x = γ gives 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d7381a70-eaee-4e37-afd2-d3de4904a4be",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Work done by n mol ideal gas in PVˣ = const (x ≠ 1) as T goes from T₁ to T₂:",
+  "formula": "W = nR(T₁−T₂)/(x−1)",
+  "options": [
+   "nR(T₁−T₂)/(1+x)",
+   "nR(T₂−T₁)/(x−1)",
+   "nR(T₁−T₂)x",
+   "nR(T₁−T₂)/(x−1)"
+  ],
+  "answer": 3,
+  "explain": "W = (P₁V₁−P₂V₂)/(x−1) = nR(T₁−T₂)/(x−1); x = γ is the adiabatic case.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8f89f926-0ffa-440e-8b49-119030131e19",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Same heat at constant volume to 1 mol monatomic and 1 mol rigid diatomic gas: ΔT_mono : ΔT_di =",
+  "formula": "Q = nC_vΔT",
+  "options": [
+   "3 : 5",
+   "5 : 7",
+   "7 : 5",
+   "5 : 3"
+  ],
+  "answer": 3,
+  "explain": "ΔT ∝ 1/C_v, with C_v = 3R/2 and 5R/2, so the ratio is 5 : 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "41e170bb-47c4-45a1-81b9-ad250b114687",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Path 1 between two states: Q = 10 J, W = 4 J. On path 2, W = 6 J. Heat Q on path 2 is:",
+  "formula": "ΔU path-independent",
+  "options": [
+   "14 J",
+   "12 J",
+   "10 J",
+   "8 J"
+  ],
+  "answer": 1,
+  "explain": "ΔU = 10 − 4 = 6 J on both paths, so Q₂ = 6 + 6 = 12 J.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5eb9d9b4-da01-4a96-aa54-5ed09fc174fc",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "First law of thermodynamics",
+  "prompt": "Equal moles of the same ideal gas at 300 K and 500 K mix in an insulated rigid vessel. Final T:",
+  "formula": "",
+  "options": [
+   "~387 K",
+   "350 K",
+   "500 K",
+   "400 K"
+  ],
+  "answer": 3,
+  "explain": "Q = 0, W = 0 so U is conserved. With equal n and C_v, T = (T₁+T₂)/2 = 400 K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e83f3956-85fd-4bdc-b313-25ecca943a76",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "Isothermal expansion of n mol ideal gas by a fixed volume ratio. If T is doubled, work done by the gas:",
+  "formula": "W = nRT ln(V₂/V₁)",
+  "options": [
+   "Becomes four times",
+   "Becomes double",
+   "Becomes half",
+   "Remains unchanged"
+  ],
+  "answer": 1,
+  "explain": "For fixed n and volume ratio, W ∝ T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "09203ef9-c0cb-45b7-9f41-4a6e8b6baa5b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "From the same state, gas expands V→2V. Isothermal work compared with isobaric work at initial pressure P is:",
+  "formula": "P₁V₁ ln2 vs P₁V₁",
+  "options": [
+   "Less, since ln2 ≈ 0.69 < 1",
+   "Twice as large",
+   "Greater, since ln2 > 1",
+   "Equal"
+  ],
+  "answer": 0,
+  "explain": "Isothermal pressure falls during expansion, so W = 0.69 P₁V₁ < P₁V₁ (isobaric).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "545901a1-99be-4251-a8f2-66e34f9a2d4d",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "For an ideal gas in an isothermal process, pressure P is directly proportional to its:",
+  "formula": "PV = const, ρ ∝ 1/V",
+  "options": [
+   "Specific volume",
+   "Square of density",
+   "Density",
+   "Volume"
+  ],
+  "answer": 2,
+  "explain": "At constant T, PV = const and ρ ∝ 1/V, so P ∝ ρ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b83e62d-d00c-48b3-8bdb-f0320a3b3dc8",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Isothermal process: work & heat",
+  "prompt": "In a reversible isothermal process at temperature T, heat absorbed Q for entropy increase ΔS is:",
+  "formula": "Q = TΔS",
+  "options": [
+   "T²ΔS",
+   "ΔS/T",
+   "TΔS",
+   "Zero, since ΔU = 0"
+  ],
+  "answer": 2,
+  "explain": "For a reversible process ΔS = Q/T at constant T, so Q = TΔS (nonzero even though ΔU = 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2cd54774-c658-4841-9fea-c29ae27ce96b",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "Entropy change of a gas in an irreversible adiabatic process (Q = 0) between two states is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Negative",
+   "Equal to nC_v ln(T₂/T₁)",
+   "Positive"
+  ],
+  "answer": 3,
+  "explain": "Irreversibility generates entropy even though Q = 0, so ΔS > 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "44642bc2-0c0f-402e-8b95-dad93f3d6a76",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "Adiabatic compressibility of an ideal gas at pressure P is:",
+  "formula": "κ = 1/B",
+  "options": [
+   "1/P",
+   "1/(γP)",
+   "P/γ",
+   "γ/P"
+  ],
+  "answer": 1,
+  "explain": "B_adiabatic = γP, so κ = 1/(γP).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8f5f8151-ed59-40f0-8000-503b26e825f4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "On a T–S diagram, a reversible adiabatic process of a gas appears as:",
+  "formula": "",
+  "options": [
+   "A horizontal line",
+   "A line of slope γ",
+   "A vertical line",
+   "A rectangular hyperbola"
+  ],
+  "answer": 2,
+  "explain": "Entropy is constant while T changes, so the line is vertical.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ef65048b-e405-44fa-a4c1-c787cbc4a692",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "For any ideal gas, γ = Cₚ/Cᵥ always lies in the range:",
+  "formula": "",
+  "options": [
+   "0 < γ < 1",
+   "4/3 ≤ γ ≤ 2",
+   "1 < γ ≤ 5/3",
+   "5/3 ≤ γ < 2"
+  ],
+  "answer": 2,
+  "explain": "γ = 1 + 2/f with f ≥ 3 gives 1 < γ ≤ 5/3, the maximum being for a monatomic gas.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83298333-e243-4093-968a-ea1800177c64",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "A parcel of air rising rapidly in the atmosphere cools mainly because it:",
+  "formula": "",
+  "options": [
+   "Expands isothermally",
+   "Expands adiabatically",
+   "Loses heat by conduction",
+   "Is compressed adiabatically"
+  ],
+  "answer": 1,
+  "explain": "Rising air meets lower pressure and expands with negligible heat exchange, so work comes from internal energy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "65360ac0-c5a8-4460-9ed9-d0a0afb89002",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Adiabatic process: PV^γ, TV^(γ-1) relations",
+  "prompt": "Between two given equilibrium states, work done by an ideal gas in an adiabatic process depends on:",
+  "formula": "W = −ΔU (Q = 0)",
+  "options": [
+   "The heat supplied to the gas",
+   "The rate of the process",
+   "The path taken between them",
+   "Only the initial and final states"
+  ],
+  "answer": 3,
+  "explain": "Since Q = 0, W = −ΔU, which depends only on the end-state temperatures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "01462935-f521-434a-aa99-56851a10464c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "A monatomic ideal gas expands reversibly and adiabatically to 8 times its volume. Pressure becomes:",
+  "formula": "PV^γ = const, γ = 5/3",
+  "options": [
+   "P/32",
+   "P/16",
+   "P/8",
+   "P/64"
+  ],
+  "answer": 0,
+  "explain": "P₂ = P₁(1/8)^(5/3) = P₁/32, since 8^(5/3) = 2⁵ = 32.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4044cb9e-c79f-4202-8dda-0cc42d3dad11",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "An ideal gas is compressed reversibly and adiabatically to half its volume. Pressure becomes:",
+  "formula": "P₂ = P₁(V₁/V₂)^γ",
+  "options": [
+   "2P",
+   "2^γ P",
+   "2^(γ−1) P",
+   "2^(1/γ) P"
+  ],
+  "answer": 1,
+  "explain": "PV^γ = const gives P₂ = P₁(2)^γ, which is more than 2P₁ because the gas also heats up.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "80bee061-7dda-4507-850b-8c6f6eeee0c5",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "A monatomic ideal gas is compressed reversibly and adiabatically to 1/8 of its volume. Its Kelvin temperature becomes",
+  "formula": "TV^(γ−1) = constant",
+  "options": [
+   "32 times",
+   "8 times",
+   "2 times",
+   "4 times"
+  ],
+  "answer": 3,
+  "explain": "T₂ = T₁·8^(2/3) = 4T₁ for γ = 5/3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2881751-c651-48a1-9c4a-08fff7a5699c",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Work done in adiabatic process",
+  "prompt": "Two reversible adiabatic curves of the same ideal gas on a P–V diagram:",
+  "formula": "",
+  "options": [
+   "Intersect at exactly one point",
+   "Never intersect each other",
+   "Intersect at two points",
+   "Intersect only if γ differs"
+  ],
+  "answer": 1,
+  "explain": "Intersecting adiabats plus an isotherm would form a cycle with one reservoir, violating the Kelvin–Planck statement.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb596fdb-894e-439e-814d-7309a4cbb6da",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Second law: Kelvin-Planck & Clausius",
+  "prompt": "If a Kelvin–Planck-violating engine could exist, which other statement would also be violated?",
+  "formula": "",
+  "options": [
+   "Charles's law",
+   "Carnot's theorem is unaffected",
+   "Clausius statement",
+   "Zeroth law"
+  ],
+  "answer": 2,
+  "explain": "The Kelvin–Planck and Clausius statements are equivalent: violating one lets you violate the other.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5021dfd0-5fec-4de9-8338-dfc14ea1c9b4",
+  "subject": "Physics",
+  "chapter": "Thermodynamics",
+  "topic": "Second law: Kelvin-Planck & Clausius",
+  "prompt": "A refrigerator runs with its door open in a closed, insulated room. The room temperature will:",
+  "formula": "Q_H = Q_L + W",
+  "options": [
+   "Rise",
+   "Remain constant",
+   "Fall",
+   "Fall first, then rise"
+  ],
+  "answer": 0,
+  "explain": "Heat rejected to the room is Q_L + W, which exceeds the heat extracted, so net heat is added to the room.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

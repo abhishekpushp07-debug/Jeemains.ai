@@ -26,6 +26,7 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
   const [online, setOnline] = useState(true);
   const [seconds, setSeconds] = useState<number | null>(null);
   const [conflict, setConflict] = useState(false);
+  const [, setBeat] = useState(0); // re-renders the get-ready countdown
   const data = useRef<Attempt | null>(null);
   const drafts = useRef<DraftMap>({});
   const running = useRef(false);
@@ -347,5 +348,23 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     setAttempt(data.current);
   };
 
-  return { attempt, pending, inflight, error, setError, online, seconds, conflict, load, edit, visit, watch, discard, submit, enterBonus };
+  // Get-ready minute (website contract): the paper was started with get_ready, the clock begins at ready_until or
+  // when the student presses Begin now. Read on the server's clock, like the deadline.
+  const ready = attempt?.status === "active" && Number(attempt?.ready_until) > 0
+    ? Math.max(0, Math.ceil((attempt.ready_until * 1000 - (anchor.current.server + mono() - anchor.current.mono)) / 1000)) : 0;
+  const gettingReady = ready > 0;
+  useEffect(() => {
+    if (!gettingReady) return;
+    const timer = setInterval(() => setBeat(b => b + 1), 250);
+    return () => clearInterval(timer);
+  }, [gettingReady, attempt?.ready_until]);
+  const begin = useCallback(async () => {
+    const r = await post(`/attempts/${id}/begin`, {});
+    if (!data.current) return;
+    if (r?.server_now) syncClock(r.server_now);
+    data.current = { ...data.current, ready_until: r?.ready_until ?? null, deadline: r?.deadline ?? data.current.deadline };
+    setAttempt(data.current);
+  }, [id]);
+
+  return { attempt, pending, inflight, error, setError, online, seconds, ready, begin, conflict, load, edit, visit, watch, discard, submit, enterBonus };
 }

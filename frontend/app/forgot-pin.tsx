@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/src/auth";
 import { resetForgottenPin } from "@/src/api/client";
-import { cleanPhone, pinFormError, useAuthSubmit, validPhone, validPin } from "@/src/authPin";
+import { cleanPhone, pinFormError, useAuthSubmit, validPhone, validPin, waitText } from "@/src/authPin";
 import { AuthShell } from "@/src/components/auth/AuthShell";
 import { PhoneField, PinField } from "@/src/components/auth/Fields";
 import { Button, ErrorBox, Header, Icon, T } from "@/src/components/ui";
@@ -12,9 +12,10 @@ import { HOME_ROUTE } from "@/src/arenaMode";
 
 /** Forgot PIN: mobile number, new PIN, confirm PIN, done. The student is signed in straight away. */
 export default function ForgotPin() {
-  const { signIn } = useAuth();
+  const { signIn, lastPhone } = useAuth();
   const router = useRouter();
-  const [phone, setPhone] = useState("");
+  const [typed, setTyped] = useState<string | null>(null); // null: the number kept from the last sign-in is shown
+  const phone = typed ?? lastPhone;
   const [pin, setPin] = useState("");
   const [confirm, setConfirm] = useState("");
   const [saved, setSaved] = useState(false); // new PIN saved, but signing in needs another try
@@ -44,11 +45,11 @@ export default function ForgotPin() {
       <T testID="forgot-pin-description" size={14} color={colors.muted}>Enter your mobile number and choose a new 4-digit PIN. Your tests and results stay with your account.</T>
     </View>
     <View style={styles.section}>
-      <PhoneField testID="forgot-pin-phone-input" value={phone} onChange={setPhone} disabled={submit.busy} />
+      <PhoneField testID="forgot-pin-phone-input" value={phone} onChange={setTyped} disabled={submit.busy} />
       <PinField testID="forgot-pin-new-input" label="New 4-digit PIN" value={pin} onChange={setPin} disabled={submit.busy} />
       <PinField testID="forgot-pin-confirm-input" label="Confirm new PIN" value={confirm} onChange={setConfirm} disabled={submit.busy} onSubmit={go} />
       <ErrorBox testID="forgot-pin-error" error={submit.error} />
-      {submit.retrySeconds > 0 ? <T testID="forgot-pin-rate-limit" size={13} color={colors.warning}>Please wait {submit.retrySeconds > 90 ? `${Math.ceil(submit.retrySeconds / 60)} min` : `${submit.retrySeconds}s`} before trying again.</T> : null}
+      {submit.retrySeconds > 0 ? <T testID="forgot-pin-rate-limit" size={13} color={colors.warning}>Please wait {waitText(submit.retrySeconds)} before trying again.</T> : null}
       <Button testID="forgot-pin-submit" label="Set new PIN" icon="check" onPress={go} busy={submit.busy}
         disabled={!validPhone(phone) || !validPin(pin) || !validPin(confirm) || submit.retrySeconds > 0} />
     </View>

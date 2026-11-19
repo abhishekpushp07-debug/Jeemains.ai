@@ -92,7 +92,7 @@ async function begin(uid: string, paper: PyqPaper, checkedAt = 0): Promise<Opene
   const intent = previous?.key && previous.priorResult === priorResult ? previous : { key: uuid(), priorResult };
   if (!await storage.setItem(storageKey, JSON.stringify(intent))) throw new Error("Phone storage is unavailable. Free some space and retry so your start can be recovered safely.");
   const attempt = await post<OpenedAttempt>(`/sets/${encodeURIComponent(paper.id)}/start`, {
-    start_key: intent.key, device_checked: true, preview: false,
+    start_key: intent.key, device_checked: true, preview: false, get_ready: true,
   });
   if (!attempt?.id || !attempt.status) throw new Error("The start could not be confirmed. Retry safely; your start request is saved.");
   // Start asset requests before navigation, storage cleanup or a Player render.

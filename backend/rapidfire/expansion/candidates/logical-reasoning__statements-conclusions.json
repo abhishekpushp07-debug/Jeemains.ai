@@ -1,0 +1,2263 @@
+[
+ {
+  "prompt": "Statement: Some pens are books. Which conclusion definitely follows?",
+  "formula": "Some A are B ⇒ Some B are A",
+  "options": [
+   "All books are pens",
+   "Some books are pens",
+   "Some books are not pens",
+   "No book is a pen"
+  ],
+  "answer": 1,
+  "explain": "A particular affirmative converts simply: Some B are A.",
+  "kind": "concept",
+  "id": "96583534-6cc3-4bb8-866f-f81616e4aba5",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement: All roses are flowers. Which definitely follows?",
+  "formula": "All A are B ⇒ Some B are A",
+  "options": [
+   "All flowers are roses",
+   "No flower is a rose",
+   "Some flowers are roses",
+   "Some flowers are not roses"
+  ],
+  "answer": 2,
+  "explain": "A universal affirmative converts only partially: Some B are A.",
+  "kind": "concept",
+  "id": "bdf26d03-259b-4530-94a7-538ea562e326",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement: No cat is a rat. Which definitely follows?",
+  "formula": "No A is B ⇒ No B is A",
+  "options": [
+   "Some rats are cats",
+   "No rat is a cat",
+   "All rats are cats",
+   "Some cats are rats"
+  ],
+  "answer": 1,
+  "explain": "A universal negative converts simply: No B is A.",
+  "kind": "concept",
+  "id": "85a664cd-2a84-4b5d-9f0a-52cc51508964",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "All pens are books. All books are cups. Which definitely follows?",
+  "formula": "All A are B, All B are C ⇒ All A are C",
+  "options": [
+   "All cups are pens",
+   "Some pens are not cups",
+   "All pens are cups",
+   "No pen is a cup"
+  ],
+  "answer": 2,
+  "explain": "Two universal affirmatives give a universal affirmative.",
+  "kind": "result",
+  "id": "773f8f2c-d88e-4532-9a16-9b203d1d686f",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "All kings are men. No man is a bird. Which definitely follows?",
+  "formula": "All A are B, No B is C ⇒ No A is C",
+  "options": [
+   "Some kings are birds",
+   "All birds are kings",
+   "No king is a bird",
+   "Some men are kings and birds"
+  ],
+  "answer": 2,
+  "explain": "All A are B, No B is C gives No A is C.",
+  "kind": "result",
+  "id": "9249cf14-4cdc-40d2-bcdb-9cd54af55e94",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Some tables are chairs. All chairs are woods. Which definitely follows?",
+  "formula": "Some A are B, All B are C ⇒ Some A are C",
+  "options": [
+   "All tables are woods",
+   "Some tables are woods",
+   "All woods are chairs",
+   "No table is a wood"
+  ],
+  "answer": 1,
+  "explain": "Particular + universal affirmative gives a particular affirmative.",
+  "kind": "result",
+  "id": "b43ee9b3-ce43-41de-915b-fa11db44cccf",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "All cats are dogs. Some dogs are rats. Which definitely follows?",
+  "formula": "All A are B, Some B are C ⇒ no link of A with C",
+  "options": [
+   "Some cats are rats",
+   "No cat is a rat",
+   "All rats are dogs",
+   "Some rats are dogs"
+  ],
+  "answer": 3,
+  "explain": "Only the converse of the 2nd statement follows; A–C is undetermined.",
+  "kind": "exception",
+  "id": "87501ef9-7ac2-4032-96fd-66a317e23f99",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Some A are B. No B is C. Which definitely follows?",
+  "formula": "Some A are B, No B is C ⇒ Some A are not C",
+  "options": [
+   "No A is C",
+   "Some A are C",
+   "Some A are not C",
+   "All A are C"
+  ],
+  "answer": 2,
+  "explain": "Particular + universal negative gives a particular negative.",
+  "kind": "result",
+  "id": "123eaef3-dbaa-40c4-89f3-9cccaa794986",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement: Most buses in the city run late. Which definitely follows?",
+  "formula": "",
+  "options": [
+   "All buses run late",
+   "No bus runs on time",
+   "Every late vehicle is a bus",
+   "At least some buses run late"
+  ],
+  "answer": 3,
+  "explain": "'Most' implies 'some'; 'all' and 'no' go beyond the statement.",
+  "kind": "concept",
+  "id": "4882828d-9ac5-4a9a-b6a1-8c82b19ea90b",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "A conclusion based on outside general knowledge, not the statement, is...",
+  "formula": "",
+  "options": [
+   "Always definitely following",
+   "Definitely not following",
+   "Following if true in real life",
+   "Following if it is probable"
+  ],
+  "answer": 1,
+  "explain": "Only information given in the statement may be used.",
+  "kind": "concept",
+  "id": "ed12732e-6053-4a9b-b01d-e877bd6fde59",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement: Only graduates are eligible for the post. Which definitely follows?",
+  "formula": "Only A are B ⇒ All B are A",
+  "options": [
+   "All graduates will get the post",
+   "Every eligible person is a graduate",
+   "Graduates are better workers",
+   "All graduates will apply"
+  ],
+  "answer": 1,
+  "explain": "'Only A are B' means every B is an A.",
+  "kind": "concept",
+  "id": "071cd5d8-289d-4202-a552-215705702879",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement: Some books are not novels. Which definitely follows?",
+  "formula": "",
+  "options": [
+   "Some novels are not books",
+   "No book is a novel",
+   "Not all books are novels",
+   "All books are novels"
+  ],
+  "answer": 2,
+  "explain": "'Some A are not B' means not all A are B; it has no simple converse.",
+  "kind": "exception",
+  "id": "14e1e68f-db77-4cca-b934-564ff8850684",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "All fans are lamps. No lamp is a pen. Which definitely follows?",
+  "formula": "No B is C ⇒ No C is B",
+  "options": [
+   "No pen is a fan",
+   "Some pens are fans",
+   "All pens are lamps",
+   "Some fans are pens"
+  ],
+  "answer": 0,
+  "explain": "No fan is a pen, and a universal negative converts: No pen is a fan.",
+  "kind": "result",
+  "id": "4785f18c-5c98-4e1c-bc5d-cb8158fad1fb",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Some A are B. Some B are C. All C are D. Which definitely follows?",
+  "formula": "Some B are C, All C are D ⇒ Some B are D",
+  "options": [
+   "All B are D",
+   "Some A are D",
+   "Some B are D",
+   "No A is D"
+  ],
+  "answer": 2,
+  "explain": "Only the pair B–C–D links: Some B are D. A–B is only partial.",
+  "kind": "result",
+  "id": "e98b4c1a-0909-4c3d-bcc2-022affc4ba2c",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Neither of two conclusions follows alone. Which pair makes 'Either I or II' follow?",
+  "formula": "Contradictory pair (same terms)",
+  "options": [
+   "Some A are B / No A is B",
+   "All A are B / No A is B",
+   "All A are B / All B are A",
+   "Some A are B / Some B are A"
+  ],
+  "answer": 0,
+  "explain": "Either-or needs a complementary pair; one is always true.",
+  "kind": "concept",
+  "id": "ff80f20e-e291-481a-ad16-26fbe0a1190e",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement: Only 20% of the voters cast their votes. Which definitely follows?",
+  "formula": "",
+  "options": [
+   "Voters were unaware of elections",
+   "Voting was compulsory",
+   "More than half did not vote",
+   "The election was unfair"
+  ],
+  "answer": 2,
+  "explain": "20% voted means 80% did not, which is more than half.",
+  "kind": "fact",
+  "id": "b312ce41-b8ae-4ff1-a337-55dee0280360",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "All dogs are animals. All cats are animals. Which definitely follows?",
+  "formula": "All A are C, All B are C ⇒ no A–B link",
+  "options": [
+   "Some dogs are cats",
+   "All dogs are cats",
+   "No dog is a cat",
+   "Some animals are dogs"
+  ],
+  "answer": 3,
+  "explain": "Two universals sharing the predicate give no link between subjects.",
+  "kind": "exception",
+  "id": "ea48f090-dd73-42c8-ad21-abf9e813ef57",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement silent on X and Y. Which conclusion pair, if neither follows alone, gives “either I or II”?",
+  "formula": "",
+  "options": [
+   "All X are Y / No X is Y",
+   "Some X are Y / No X is Y",
+   "All X are Y / Some X are Y",
+   "Some X are Y / Some Y are X"
+  ],
+  "answer": 1,
+  "explain": "“Some X are Y” and “No X is Y” are contradictory: exactly one is true.",
+  "kind": "concept",
+  "id": "b6ae442f-0bf9-41b0-9060-755211d8a121",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Statement is silent on X and Y. Neither conclusion follows alone. Which pair gives “either I or II”?",
+  "formula": "",
+  "options": [
+   "All X are Y / No X is Y",
+   "All X are Y / Some X are not Y",
+   "No X is Y / Some X are not Y",
+   "Some X are Y / All X are Y"
+  ],
+  "answer": 1,
+  "explain": "Exactly one of 'All X are Y' and 'Some X are not Y' must be true: they are contradictories.",
+  "kind": "concept",
+  "id": "8ab470c1-758c-4f06-8b97-a28233ac82c7",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Which pair of conclusions can NOT give an either-or option?",
+  "formula": "",
+  "options": [
+   "Some X are Y / No X is Y",
+   "All X are Y / Some X are not Y",
+   "All X are Y / No X is Y",
+   "Some X are Y / No Y is X"
+  ],
+  "answer": 2,
+  "explain": "All X are Y and No X is Y are contraries, since both can be false. The other pairs are contradictories.",
+  "kind": "exception",
+  "id": "aeedb660-a3f7-4b26-b1b7-75adcab4dd90",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "In statement–assumption questions, an implicit assumption is best described as:",
+  "formula": "",
+  "options": [
+   "A conclusion drawn from the statement",
+   "Something taken for granted but left unstated",
+   "A fact explicitly mentioned in the statement",
+   "A course of action suggested by it"
+  ],
+  "answer": 1,
+  "explain": "An implicit assumption is an unstated idea the speaker takes as true when making the statement.",
+  "kind": "concept",
+  "id": "82919bac-739c-4350-957d-850eaf19faf2",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "Which wording in an option is a red flag for an INVALID assumption?",
+  "formula": "",
+  "options": [
+   "'may' or 'can'",
+   "'generally'",
+   "'some' or 'likely'",
+   "'only', 'always' or 'never'"
+  ],
+  "answer": 3,
+  "explain": "Absolute or extreme words go beyond what the statement needs, so such options are usually invalid.",
+  "kind": "exception",
+  "id": "ed09bd57-482e-4a28-aeed-1460b11a3ae1",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "Statement: 'Wear a helmet while riding.' Which is the implicit assumption?",
+  "formula": "",
+  "options": [
+   "Helmets reduce the risk of head injury",
+   "Every rider meets with an accident",
+   "Helmets are very costly",
+   "Riding is banned without a helmet"
+  ],
+  "answer": 0,
+  "explain": "The advice only makes sense if helmets protect the head.",
+  "kind": "pattern",
+  "id": "2775509f-1879-42bf-bbca-41ee5a290d5b",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "'Ban plastic bags to curb pollution.' Which is implicit in this statement?",
+  "formula": "",
+  "options": [
+   "Only plastic causes pollution",
+   "Paper bags are costlier",
+   "Plastic bags contribute to pollution",
+   "People will never use plastic again"
+  ],
+  "answer": 2,
+  "explain": "The ban is meant to curb pollution, so plastic bags must be assumed to add to it.",
+  "kind": "pattern",
+  "id": "4fb04343-1c9a-49c0-b936-5a5484608132",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "'Fuel prices have been raised to curb consumption.' Implicit assumption?",
+  "formula": "",
+  "options": [
+   "Fuel is not available",
+   "A price rise lowers demand",
+   "Consumption is already low",
+   "The public will protest"
+  ],
+  "answer": 1,
+  "explain": "The measure works only if higher price reduces consumption.",
+  "kind": "pattern",
+  "id": "bdd3b883-5a0b-4861-83f9-8449740be3ed",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "An assumption differs from an inference because an assumption is:",
+  "formula": "",
+  "options": [
+   "Derived only after reading the statement",
+   "Always stated in the statement",
+   "Always false",
+   "Taken as true before the statement is made"
+  ],
+  "answer": 3,
+  "explain": "An assumption is the background belief behind a statement. An inference is drawn from it afterwards.",
+  "kind": "concept",
+  "id": "11f7edac-a0a6-4763-a756-609444056912",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "Notice: 'Do not litter. Fine ₹500.' Which is implicit?",
+  "formula": "",
+  "options": [
+   "The fine will deter people from littering",
+   "Everyone litters",
+   "No dustbins are provided",
+   "₹500 is the highest possible fine"
+  ],
+  "answer": 0,
+  "explain": "A fine is imposed assuming the fear of penalty deters the act.",
+  "kind": "pattern",
+  "id": "8280a879-e23d-4e26-87c6-b82a09c402ba",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "'Read the manual before operating the machine.' Implicit assumption?",
+  "formula": "",
+  "options": [
+   "The manual gives useful operating guidance",
+   "The machine is always faulty",
+   "Nobody has read it before",
+   "The machine has no risks"
+  ],
+  "answer": 0,
+  "explain": "The advice is meaningful only if the manual helps in correct operation.",
+  "kind": "pattern",
+  "id": "de528e73-7171-495a-aeaa-4bb1e58a1ea9",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "A valid implicit assumption must be:",
+  "formula": "",
+  "options": [
+   "Merely consistent with the statement",
+   "Necessary for the statement to hold",
+   "Stronger than the statement",
+   "A restatement of the statement"
+  ],
+  "answer": 1,
+  "explain": "It must be a needed background link, not just a compatible or repeated idea.",
+  "kind": "concept",
+  "id": "308266b8-4416-438d-afac-b001539500d6",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "'Send it by speed post so that it reaches by Monday.' Implicit assumption?",
+  "formula": "",
+  "options": [
+   "Ordinary post never delivers",
+   "Monday is a holiday",
+   "Speed post is free of cost",
+   "Speed post is faster than ordinary post"
+  ],
+  "answer": 3,
+  "explain": "Choosing speed post for timely arrival assumes it is faster.",
+  "kind": "pattern",
+  "id": "91673418-7452-4a4f-96ea-0b9b89f57d0b",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "Teacher: 'Submit by Friday, else marks will be deducted.' Implicit assumption?",
+  "formula": "",
+  "options": [
+   "Students care about their marks",
+   "All students will submit late",
+   "Marks are never deducted",
+   "Friday is a holiday"
+  ],
+  "answer": 0,
+  "explain": "The threat works only if students value their marks.",
+  "kind": "pattern",
+  "id": "9535d5cd-1ead-4f6d-bc7e-b64f304e065c",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "'Dial 100 in case of an emergency.' Which is implicit?",
+  "formula": "",
+  "options": [
+   "Emergencies are rare",
+   "Only police can help in emergencies",
+   "Help is available through that number",
+   "Nobody knows other numbers"
+  ],
+  "answer": 2,
+  "explain": "The advice assumes calling 100 will bring a response.",
+  "kind": "pattern",
+  "id": "3fa430cc-8ea9-4d29-bd16-da41b3d2b3c1",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "'Our hotel is 5 minutes from the airport. Book now!' Implicit assumption?",
+  "formula": "",
+  "options": [
+   "All travellers arrive by air",
+   "Travellers prefer hotels close to the airport",
+   "All other hotels are far away",
+   "Rooms here are cheap"
+  ],
+  "answer": 1,
+  "explain": "The proximity claim attracts customers only if they value nearness to the airport.",
+  "kind": "pattern",
+  "id": "98fa890a-2320-4d4c-88f9-034fdb430f9e",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "A statement uses an appeal or advice to act. Its implicit assumption most often concerns:",
+  "formula": "",
+  "options": [
+   "The effectiveness of the suggested action",
+   "The speaker's age",
+   "A future event unrelated to it",
+   "The statistics of other cities"
+  ],
+  "answer": 0,
+  "explain": "Advice or appeals assume the suggested action is effective or beneficial.",
+  "kind": "concept",
+  "id": "48e383bf-5e7e-4699-aaa4-1171ed685481",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "'Use LED bulbs to cut electricity bills.' Which is the implicit assumption?",
+  "formula": "",
+  "options": [
+   "LED bulbs consume less power than ordinary bulbs",
+   "LED bulbs are cheaper than all other bulbs",
+   "Electricity bills are going to rise soon",
+   "Everyone will switch to LED bulbs"
+  ],
+  "answer": 0,
+  "explain": "Advice to cut bills works only if LEDs use less power; the others are extra or absolute claims.",
+  "kind": "concept",
+  "id": "3c702e48-f439-4eab-8c2f-6990d83a6295",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Assumption: implicit assumptions"
+ },
+ {
+  "prompt": "Should smoking be banned in public places? Pick the STRONG argument.",
+  "formula": "",
+  "options": [
+   "Yes, it harms the health of non-smokers",
+   "Yes, smokers are bad people",
+   "No, it has been allowed for decades",
+   "No, many people enjoy smoking"
+  ],
+  "answer": 0,
+  "explain": "Strong arguments are factual, important and directly relevant to the issue.",
+  "kind": "concept",
+  "id": "11d9156b-1534-428c-b207-af25195b9595",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "An argument that only rephrases the statement, e.g. 'Yes, because it should be done', is:",
+  "formula": "",
+  "options": [
+   "Strong",
+   "Strong if the statement is true",
+   "Weak",
+   "Strong if it is short"
+  ],
+  "answer": 2,
+  "explain": "Restating the claim gives no reason, so it is circular and weak.",
+  "kind": "concept",
+  "id": "9eddba60-b054-4c06-ac69-45f528a481d3",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "An argument built on one personal example or an isolated case is generally judged:",
+  "formula": "",
+  "options": [
+   "Strong, as it is real",
+   "Strong if the case is recent",
+   "Weak",
+   "Strong for 'No' arguments only"
+  ],
+  "answer": 2,
+  "explain": "One instance cannot justify a general policy, so the argument is weak.",
+  "kind": "concept",
+  "id": "a8262e34-d6f7-4e19-be31-c662223c28ca",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "'Yes, because several other nations have already done it' is usually treated as:",
+  "formula": "",
+  "options": [
+   "Weak",
+   "Strong",
+   "Strong if the nations are developed",
+   "Strong only for 'No' statements"
+  ],
+  "answer": 0,
+  "explain": "Imitation is not a reason; it does not address merit or local conditions.",
+  "kind": "concept",
+  "id": "32e1d0c8-5fca-47ee-8ca6-e9e88c25bb43",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "A true fact that has no bearing on the question asked makes an argument:",
+  "formula": "",
+  "options": [
+   "Strong, because it is true",
+   "Strong, if it is widely known",
+   "Weak, because it is irrelevant",
+   "Strong, if it is recent"
+  ],
+  "answer": 2,
+  "explain": "An argument must be relevant to the statement; truth alone is not enough.",
+  "kind": "concept",
+  "id": "22086950-9a5e-4410-93e6-950cda38e6b4",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "Should the retirement age be raised? Pick the STRONG argument.",
+  "formula": "",
+  "options": [
+   "No, my uncle retired happily at 60",
+   "Yes, young people dislike working",
+   "No, it has never been changed",
+   "Yes, life expectancy and fitness have increased"
+  ],
+  "answer": 3,
+  "explain": "It gives a relevant, general, factual reason; the others are personal, vague or traditional.",
+  "kind": "concept",
+  "id": "59c64be0-1ebf-4a84-a7f1-86c32c00039a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "An argument that uses 'always', 'never' or 'all' with no support is typically:",
+  "formula": "",
+  "options": [
+   "Strong",
+   "Weak",
+   "Strong if it is negative",
+   "Strong if it is a 'Yes' argument"
+  ],
+  "answer": 1,
+  "explain": "Sweeping generalisations without evidence are weak arguments.",
+  "kind": "concept",
+  "id": "5d1ab5f9-b3ea-48ee-b547-44d4be4579de",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "'Yes, because the Prime Minister has said so' is judged as:",
+  "formula": "",
+  "options": [
+   "Strong, due to authority",
+   "Strong if in public interest",
+   "Strong if the PM is an expert",
+   "Weak"
+  ],
+  "answer": 3,
+  "explain": "Mere reliance on a person's say-so gives no reason on merit.",
+  "kind": "concept",
+  "id": "495c04be-9af2-4629-98c7-942ec3d85de7",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "'No, because it has never been done before' is a typical example of a:",
+  "formula": "",
+  "options": [
+   "Strong argument",
+   "Strong if the tradition is old",
+   "Strong if it protects culture",
+   "Weak argument"
+  ],
+  "answer": 3,
+  "explain": "Appeal to tradition or precedent is not a valid reason, so it is weak.",
+  "kind": "concept",
+  "id": "dd2ed607-d3f3-48b5-ae65-410482e9268c",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "For a statement-argument item, a STRONG argument must be:",
+  "formula": "",
+  "options": [
+   "Long and emotional",
+   "Popular and widely believed",
+   "Important and directly related to the issue",
+   "Supported by a famous name"
+  ],
+  "answer": 2,
+  "explain": "Strength = importance + direct relevance + universal, factual basis.",
+  "kind": "concept",
+  "id": "607dc5e7-3c16-4569-af5f-e80ca1d8e14d",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Argument: strong vs weak arguments"
+ },
+ {
+  "prompt": "Statement: A lake is polluted by factory waste. Which course of action is most suitable?",
+  "formula": "",
+  "options": [
+   "Shut all factories in the country permanently",
+   "Ban people from the city",
+   "Make factories treat waste before discharge",
+   "Drain the lake completely"
+  ],
+  "answer": 2,
+  "explain": "Treating waste at source is practical and proportionate; the others are drastic or irrelevant.",
+  "kind": "concept",
+  "id": "170b09a7-a413-4baf-868a-666d0a93f410",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "A course of action that is drastic or extreme (e.g. 'dismiss all staff permanently') is generally…",
+  "formula": "",
+  "options": [
+   "Valid if the problem is serious",
+   "Not valid, being disproportionate",
+   "Valid when stated firmly",
+   "Valid only for government problems"
+  ],
+  "answer": 1,
+  "explain": "Extreme, sweeping steps are impractical and disproportionate, so they are usually rejected.",
+  "kind": "concept",
+  "id": "d07482ea-fe12-4d33-9667-04866d422bbb",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Statement: Many students of a school failed in Maths. Which course of action follows?",
+  "formula": "",
+  "options": [
+   "Remove Maths from the syllabus",
+   "Arrange remedial classes in Maths",
+   "Expel all failed students",
+   "Stop conducting Maths exams"
+  ],
+  "answer": 1,
+  "explain": "Remedial classes address the weakness directly; the others avoid or worsen the problem.",
+  "kind": "concept",
+  "id": "82e1f7b7-95d6-41eb-81fa-b1014bfffa51",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Statement: The cause of repeated fires in a factory is unknown. Which course is most apt?",
+  "formula": "",
+  "options": [
+   "Close every factory in the state",
+   "Wait until more fires occur",
+   "Cut the fire-safety budget",
+   "Order an inquiry into the cause"
+  ],
+  "answer": 3,
+  "explain": "When the cause is unknown, a probe into it is the logical and practical first step.",
+  "kind": "concept",
+  "id": "0f01b048-b908-4adf-b9c1-8d93c0f1c6c8",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Statement: A bridge has been found structurally unsafe. Which course of action follows?",
+  "formula": "",
+  "options": [
+   "Close it to traffic until repaired",
+   "Demolish all bridges in the city",
+   "Raise the toll on the bridge",
+   "Continue use as before"
+  ],
+  "answer": 0,
+  "explain": "Stopping use until repair protects lives and is proportionate to the problem.",
+  "kind": "concept",
+  "id": "01008d35-54f4-4707-9074-9b27b4c78ddf",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "A course of action unrelated to the problem in the statement…",
+  "formula": "",
+  "options": [
+   "Is valid if it is beneficial",
+   "Does not follow",
+   "Is valid if the government does it",
+   "Follows if it is practical"
+  ],
+  "answer": 1,
+  "explain": "A course must address the given problem; an unrelated step does not follow, however good it is.",
+  "kind": "concept",
+  "id": "c40dac04-d70c-4ddf-bcfe-922e4f826c8e",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Statement: Heavy rain may flood riverside villages. Which course of action follows?",
+  "formula": "",
+  "options": [
+   "Wait for flooding before acting",
+   "Shift villagers to safe places in advance",
+   "Stop issuing weather forecasts",
+   "Ask villagers to dig wells"
+  ],
+  "answer": 1,
+  "explain": "Timely evacuation is a practical preventive step against the predicted danger.",
+  "kind": "concept",
+  "id": "213fc94c-22f1-402f-b3fd-540fb1258e0b",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Statement: Pulse prices have risen sharply. Which course of action is most suitable?",
+  "formula": "",
+  "options": [
+   "Ban all consumption of pulses",
+   "Stop farmers from growing pulses",
+   "Release buffer stock into the market",
+   "Raise income tax rates"
+  ],
+  "answer": 2,
+  "explain": "Releasing buffer stock increases supply and eases prices; the others are irrelevant or harmful.",
+  "kind": "concept",
+  "id": "39f39b02-114d-4285-b9d3-757880cb86e1",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Statement: A clerk was found negligent in his duties. Which course of action is most suitable?",
+  "formula": "",
+  "options": [
+   "Close the entire branch",
+   "Dismiss all the clerks",
+   "Promote him to encourage him",
+   "Issue him a warning or show-cause notice"
+  ],
+  "answer": 3,
+  "explain": "A proportionate, corrective step targets only the negligent person; the others are extreme or illogical.",
+  "kind": "concept",
+  "id": "f15cad2e-3bf3-4d29-9cb2-df6218e73dd8",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Statement: Dengue cases are rising in a city ward. Which course of action is most apt?",
+  "formula": "",
+  "options": [
+   "Begin fogging and clear stagnant water",
+   "Ban all outdoor activities in the city",
+   "Shut down every hospital for cleaning",
+   "Transfer all ward residents elsewhere"
+  ],
+  "answer": 0,
+  "explain": "A practical, proportionate step that tackles the cause (mosquito breeding); others are extreme or irrelevant.",
+  "kind": "concept",
+  "id": "93dca858-a2dd-4c3c-b5ef-e4a05685bbb3",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Course of Action evaluation"
+ },
+ {
+  "prompt": "Rohan wore a 'lucky' shirt and then won. Concluding 'the shirt caused the win' is which flaw?",
+  "formula": "Post hoc ergo propter hoc",
+  "options": [
+   "Circular reasoning",
+   "Post hoc fallacy",
+   "Hasty generalisation",
+   "Reverse causation"
+  ],
+  "answer": 1,
+  "explain": "Coming after an event in time does not make something its cause.",
+  "kind": "concept",
+  "id": "4053840a-9a69-4af7-88e8-29e69b6d7c40",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "Water is necessary for plant growth. A plant has water. Conclusion: it will surely grow. This:",
+  "formula": "Necessary ≠ sufficient",
+  "options": [
+   "Follows definitely",
+   "Follows only in summer",
+   "Does not follow",
+   "Follows if soil is present"
+  ],
+  "answer": 2,
+  "explain": "Water is a necessary condition, not a sufficient one; other factors are also needed.",
+  "kind": "concept",
+  "id": "109997eb-9c3b-4195-b046-38ffdb26fdee",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "Fever occurs due to infection. Ravi has no infection. Conclusion: Ravi has no fever. This:",
+  "formula": "",
+  "options": [
+   "Follows",
+   "Does not follow; other causes exist",
+   "Follows if he is healthy",
+   "Follows only for adults"
+  ],
+  "answer": 1,
+  "explain": "An effect can have several causes; removing one cause does not guarantee the effect is absent.",
+  "kind": "exception",
+  "id": "c2ea85f8-ba76-44fb-a042-9953ed8fa295",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "Which pair of words typically introduces an EFFECT in a statement?",
+  "formula": "",
+  "options": [
+   "Since, because",
+   "Hence, consequently",
+   "Due to, owing to",
+   "As, for"
+  ],
+  "answer": 1,
+  "explain": "'Hence' and 'consequently' lead into the result; 'since', 'because', 'due to' and 'owing to' introduce the cause.",
+  "kind": "fact",
+  "id": "57a8a367-2a76-4eae-8b55-d504fc5eb972",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "Fit people exercise daily. Concluding 'fitness makes people exercise' instead of the reverse is called:",
+  "formula": "",
+  "options": [
+   "Post hoc fallacy",
+   "Common cause",
+   "Reverse causation",
+   "Circular reasoning"
+  ],
+  "answer": 2,
+  "explain": "Reverse causation means mistaking the effect for the cause.",
+  "kind": "concept",
+  "id": "567918c8-8ae6-4972-91ef-cb1c73fc5ed5",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "'The delay was mostly due to traffic.' Conclusion: Traffic was the only cause. This:",
+  "formula": "mostly ≠ only",
+  "options": [
+   "Follows",
+   "Does not follow",
+   "Follows if traffic was heavy",
+   "Is the exact restatement"
+  ],
+  "answer": 1,
+  "explain": "'Mostly' allows other minor causes, so 'only' is too strong.",
+  "kind": "exception",
+  "id": "73da9536-70d3-42ec-a77c-30b976d919dc",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "Ice-cream sales and drowning cases both rise in summer. Conclusion: ice cream causes drowning. The flaw is:",
+  "formula": "",
+  "options": [
+   "Reverse causation",
+   "Post hoc",
+   "Hidden common cause (confounder)",
+   "Circular reasoning"
+  ],
+  "answer": 2,
+  "explain": "Both effects arise from a third factor, summer heat; correlation is not causation.",
+  "kind": "concept",
+  "id": "c20acba0-52b2-4e8a-afc0-0abee2a91b38",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "If it rains, the road gets wet. The road is wet. Conclusion: It rained. This:",
+  "formula": "",
+  "options": [
+   "Follows",
+   "Does not follow",
+   "Follows only if the road is old",
+   "Is definitely false"
+  ],
+  "answer": 1,
+  "explain": "Affirming the effect is invalid; the road may be wet from other causes.",
+  "kind": "exception",
+  "id": "e0934a17-aea7-489d-af15-cf7922034c1b",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "If the power fails, the lights go off. The lights are on. Conclusion: The power did not fail. This:",
+  "formula": "If P → Q, then not Q → not P",
+  "options": [
+   "Does not follow",
+   "Follows",
+   "Follows only partly",
+   "Cannot be decided"
+  ],
+  "answer": 1,
+  "explain": "Absence of the effect rules out a sufficient cause (contrapositive).",
+  "kind": "result",
+  "id": "a7a0aadc-e5c3-4833-b42e-731a7958b894",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "Statement: Smoking causes lung disease. Conclusion: Every smoker will get lung disease. This:",
+  "formula": "",
+  "options": [
+   "Follows",
+   "Follows only for heavy smokers",
+   "Is the reverse of the statement",
+   "Does not follow"
+  ],
+  "answer": 3,
+  "explain": "A cause raises the risk or likelihood; it does not guarantee the effect in every case.",
+  "kind": "exception",
+  "id": "0e425f24-702e-490b-987d-5759e4a51482",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Cause and Effect relationships"
+ },
+ {
+  "prompt": "Statements: All A are B; Some B are C. Which conclusion definitely follows?",
+  "formula": "A + I (1st figure) → no conclusion",
+  "options": [
+   "Some A are C",
+   "All A are C",
+   "No definite conclusion",
+   "Some C are not A"
+  ],
+  "answer": 2,
+  "explain": "Middle term B is undistributed in both premises, so nothing definite follows.",
+  "kind": "rule",
+  "id": "3323835e-8441-4d14-b02b-735bbf7754b8",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: Some A are B; All B are C. Which follows?",
+  "formula": "I + A → I",
+  "options": [
+   "All A are C",
+   "Some A are C",
+   "Some C are not A",
+   "No A is C"
+  ],
+  "answer": 1,
+  "explain": "I + A gives a particular affirmative: Some A are C.",
+  "kind": "rule",
+  "id": "b2c9092d-7ff3-4fcb-b5eb-34c641f7926a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: All A are B; No B is C. Which follows?",
+  "formula": "A + E → E",
+  "options": [
+   "Some A are C",
+   "All A are C",
+   "All C are A",
+   "No A is C"
+  ],
+  "answer": 3,
+  "explain": "A + E gives a universal negative: No A is C.",
+  "kind": "rule",
+  "id": "b04a856f-8aea-42b5-bc20-9368b2f4abcd",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: No A is B; All B are C. Which follows?",
+  "formula": "E + A → O (Some C are not A)",
+  "options": [
+   "No A is C",
+   "Some C are not A",
+   "Some A are C",
+   "All C are A"
+  ],
+  "answer": 1,
+  "explain": "The B's are C but not A, so some C are not A. No A is C is not forced.",
+  "kind": "rule",
+  "id": "d34b1142-2bb2-411a-8064-d7f925b886d6",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: Some A are B; No B is C. Which follows?",
+  "formula": "I + E → O",
+  "options": [
+   "No A is C",
+   "Some A are C",
+   "Some A are not C",
+   "No definite conclusion"
+  ],
+  "answer": 2,
+  "explain": "I + E gives a particular negative: Some A are not C.",
+  "kind": "rule",
+  "id": "cc9b35cb-fea0-4a4d-b815-9a2a16438b35",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: No A is B; No B is C. Which follows?",
+  "formula": "E + E → no conclusion",
+  "options": [
+   "No A is C",
+   "Some A are C",
+   "All A are C",
+   "No definite conclusion"
+  ],
+  "answer": 3,
+  "explain": "Two negative premises never give a definite conclusion.",
+  "kind": "rule",
+  "id": "36717ffd-5ad2-46ba-a562-d5d0e8ae0c0e",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: Some A are B; Some B are C. Which follows?",
+  "formula": "I + I → no conclusion",
+  "options": [
+   "Some A are C",
+   "Some C are A",
+   "No definite conclusion",
+   "Some A are not C"
+  ],
+  "answer": 2,
+  "explain": "Two particular premises give no definite conclusion.",
+  "kind": "rule",
+  "id": "5a9cd11c-36da-4615-8c07-ab1f6faa2442",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: All A are B; All C are B. Which follows?",
+  "formula": "Undistributed middle (B is predicate twice)",
+  "options": [
+   "All A are C",
+   "Some A are C",
+   "All C are A",
+   "No definite conclusion"
+  ],
+  "answer": 3,
+  "explain": "B is the predicate of both premises, so it is undistributed; nothing definite follows.",
+  "kind": "rule",
+  "id": "dc549b5e-cec6-4933-a2e7-59ada52b30c6",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Which conversion is valid?",
+  "formula": "E and I convert simply; A converts by limitation",
+  "options": [
+   "All A are B → All B are A",
+   "Some A are not B → Some B are not A",
+   "Some A are B → All B are A",
+   "No A is B → No B is A"
+  ],
+  "answer": 3,
+  "explain": "Only E and I convert simply. A converts only to I, and O does not convert.",
+  "kind": "rule",
+  "id": "337cade2-5fa6-4486-840a-80a1da72fb08",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "If \"All A are B\" is true, what is the valid converse?",
+  "formula": "A → I (conversion by limitation)",
+  "options": [
+   "All B are A",
+   "Some B are A",
+   "No B is A",
+   "Some B are not A"
+  ],
+  "answer": 1,
+  "explain": "A-type converts to I-type: Some B are A.",
+  "kind": "rule",
+  "id": "b0d4b0b6-8932-4bfc-bf84-03684ddd5798",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Which statement is the contradictory (opposite) of \"All A are B\"?",
+  "formula": "A ↔ O and E ↔ I are contradictories",
+  "options": [
+   "No A is B",
+   "Some A are B",
+   "Some A are not B",
+   "Some B are not A"
+  ],
+  "answer": 2,
+  "explain": "A and O are contradictories: they cannot both be true or both be false.",
+  "kind": "rule",
+  "id": "568f20d9-2b89-4717-a560-fda4f8a3cd01",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Conclusions: I. Some A are B; II. No A is B. When is this a valid pair?",
+  "formula": "I and E on the same terms → either-or",
+  "options": [
+   "Only I follows",
+   "Only II follows",
+   "Either I or II follows",
+   "I and II together follow"
+  ],
+  "answer": 2,
+  "explain": "I and E on the same terms are complementary, so exactly one holds: either-or.",
+  "kind": "rule",
+  "id": "86a16dc0-db91-4ed6-8925-ab450c61f88d",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: All A are B; Some A are C. Which follows?",
+  "formula": "A + I (3rd figure) → I",
+  "options": [
+   "All B are C",
+   "Some B are C",
+   "Some C are not B",
+   "No B is C"
+  ],
+  "answer": 1,
+  "explain": "The A's that are C are also B, so Some B are C.",
+  "kind": "rule",
+  "id": "a5c191a2-36e3-4507-85dd-e39bc162fecb",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: All A are B; All B are C. Which conclusion follows?",
+  "formula": "A + A → A, and A converts to I",
+  "options": [
+   "Some C are A",
+   "All C are A",
+   "No C is A",
+   "Some C are not A"
+  ],
+  "answer": 0,
+  "explain": "All A are C converts to Some C are A. All C are A is not forced.",
+  "kind": "rule",
+  "id": "3db391da-9aee-4d7d-b290-018277223959",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: No A is B; Some A are C. Which conclusion definitely follows?",
+  "formula": "E + I → O",
+  "options": [
+   "Some C are not B",
+   "No C is B",
+   "Some C are B",
+   "No definite conclusion"
+  ],
+  "answer": 0,
+  "explain": "Some A are C gives Some C are A; those A are not B, so Some C are not B.",
+  "kind": "result",
+  "id": "2854f77d-3168-4b60-baeb-2f1411f21059",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Which pair of conclusions on the same terms forms a valid either-or (complementary) pair?",
+  "formula": "I–E and A–O pairs",
+  "options": [
+   "Some A are B; No A is B",
+   "All A are B; No A is B",
+   "Some A are B; Some A are not B",
+   "All A are B; Some A are B"
+  ],
+  "answer": 0,
+  "explain": "Some and No are contradictory: exactly one is true, so they form an either-or pair.",
+  "kind": "concept",
+  "id": "25b0d2b2-a6a2-4dd3-ab9e-e0b40f83bc25",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Which pair of conclusions on the same terms is complementary (either-or)?",
+  "formula": "A–O contradictory pair",
+  "options": [
+   "All S are P; No S is P",
+   "All S are P; Some S are not P",
+   "Some S are P; Some S are not P",
+   "No S is P; Some S are not P"
+  ],
+  "answer": 1,
+  "explain": "All and Some-not contradict each other: exactly one must hold, so they form an either-or pair.",
+  "kind": "concept",
+  "id": "9f476f93-9d16-4e58-8436-1f4bf4d8d782",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Given 'All A are B', which is a valid possibility?",
+  "formula": "",
+  "options": [
+   "No A is B",
+   "Some A are not B",
+   "No B is A",
+   "Some B are not A"
+  ],
+  "answer": 3,
+  "explain": "A can be a proper subset of B, so some B may be non-A. The other options contradict the premise.",
+  "kind": "result",
+  "id": "2b35d305-bae1-4500-a86d-64a109b05c5b",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "All A are B; All B are C. Which is a possibility?",
+  "formula": "",
+  "options": [
+   "No A is C",
+   "Some A are not C",
+   "Some C are not A",
+   "No C is A"
+  ],
+  "answer": 2,
+  "explain": "A ⊂ B ⊂ C, and C can be larger than A. The others contradict the chain.",
+  "kind": "result",
+  "id": "2f912cbf-13cd-4efa-bacc-db997053cce5",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Given 'Some A are B', which is NOT a possibility?",
+  "formula": "",
+  "options": [
+   "All A are B",
+   "All B are A",
+   "Some A are not B",
+   "No A is B"
+  ],
+  "answer": 3,
+  "explain": "'No A is B' directly contradicts 'Some A are B'. The other three can all be drawn in a Venn diagram.",
+  "kind": "exception",
+  "id": "173f5f66-3cb4-48d2-b2c3-c3c4a280b2f6",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "No A is B; No B is C. Which is a possibility?",
+  "formula": "",
+  "options": [
+   "Some A are B",
+   "Some B are C",
+   "All A are C",
+   "All B are A"
+  ],
+  "answer": 2,
+  "explain": "A and C both lie outside B, so they can overlap or coincide. The other options contradict a premise.",
+  "kind": "result",
+  "id": "38d9dcf7-6a59-48b9-9e36-33bf30b1dfb6",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Given 'Some A are not B', which is NOT a possibility?",
+  "formula": "",
+  "options": [
+   "No A is B",
+   "Some A are B",
+   "All B are A",
+   "All A are B"
+  ],
+  "answer": 3,
+  "explain": "'All A are B' directly contradicts 'Some A are not B'. B can still lie wholly inside A.",
+  "kind": "exception",
+  "id": "3871740c-56ca-4696-afaa-81f1b6c7a752",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Given 'Some A are B', which of these is a valid possibility?",
+  "formula": "",
+  "options": [
+   "No A is B",
+   "All A are B",
+   "No B is A",
+   "Some A are not A"
+  ],
+  "answer": 1,
+  "explain": "'Some' includes 'all'; the others contradict the given statement.",
+  "kind": "concept",
+  "id": "505150b4-1f7d-43e2-9a32-5f44b7ea649e",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Given: All A are B; Some B are C. Which is a possibility?",
+  "formula": "",
+  "options": [
+   "No B is C",
+   "Some A are not B",
+   "Some A are C",
+   "No A is B"
+  ],
+  "answer": 2,
+  "explain": "Some A may lie within the B that are C; the others contradict a given statement.",
+  "kind": "result",
+  "id": "e56453c6-3e94-46ce-8fac-ed886a87912a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Which pair on the same terms can both be true together, so it is NOT an either-or pair?",
+  "formula": "",
+  "options": [
+   "Some A are B; No A is B",
+   "All A are B; Some A are not B",
+   "Some A are B; Some A are not B",
+   "All A are B; No A is B"
+  ],
+  "answer": 2,
+  "explain": "Some A are B and Some A are not B can both hold (partial overlap), so they are not complementary.",
+  "kind": "concept",
+  "id": "bef5d7c3-5d2d-4284-9599-54a037e6868a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Ad launched; sales rose; so the ad caused the rise. Which statement most weakens this?",
+  "formula": "",
+  "options": [
+   "Prices were halved the same month",
+   "The ad was shown on prime-time TV",
+   "The ad agency is well known",
+   "The ad cost a large amount"
+  ],
+  "answer": 0,
+  "explain": "A rival cause (price cut) for the same effect weakens a causal claim.",
+  "kind": "concept",
+  "id": "1c8a7536-4abf-439a-a67c-b08d506394ad",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Strengthening & weakening an argument"
+ },
+ {
+  "prompt": "Which test shows that a statement is a necessary assumption of an argument?",
+  "formula": "Negation test",
+  "options": [
+   "It repeats the conclusion",
+   "Its negation makes the conclusion collapse",
+   "It is a widely known fact",
+   "Its negation supports the premise"
+  ],
+  "answer": 1,
+  "explain": "If denying the assumption destroys the conclusion, the assumption is necessary.",
+  "kind": "concept",
+  "id": "66e5fe6a-5ef1-4deb-962d-b5e36688ed01",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Strengthening & weakening an argument"
+ },
+ {
+  "prompt": "Drug X cured mice, so it will cure humans. Which most weakens this?",
+  "formula": "",
+  "options": [
+   "X was tested on many mice",
+   "Humans lack the enzyme through which X acts",
+   "Mice are cheap to use in labs",
+   "X is manufactured in India"
+  ],
+  "answer": 1,
+  "explain": "In an argument by analogy, a relevant difference between the cases weakens it.",
+  "kind": "concept",
+  "id": "072b854f-0ba4-40e9-97fd-98043d0c4716",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Strengthening & weakening an argument"
+ },
+ {
+  "prompt": "90% of 50 people surveyed like the new park, so most citizens like it. Which weakens this?",
+  "formula": "",
+  "options": [
+   "All 50 surveyed were park employees",
+   "The survey took only one day",
+   "The park opened last year",
+   "The park is quite large"
+  ],
+  "answer": 0,
+  "explain": "An unrepresentative sample weakens a generalisation from it.",
+  "kind": "concept",
+  "id": "2542ade4-cda5-4b0f-9f6a-9f6005c6fe76",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Strengthening & weakening an argument"
+ },
+ {
+  "prompt": "Argument: Roads widened, so accidents will fall. Which statement most strengthens this?",
+  "formula": "",
+  "options": [
+   "Wider roads in similar towns saw fewer accidents",
+   "Roads were widened at great cost",
+   "Most drivers prefer wider roads",
+   "Accidents occurred on narrow roads earlier"
+  ],
+  "answer": 0,
+  "explain": "Evidence from comparable cases linking the cause to the effect supports the causal claim.",
+  "kind": "concept",
+  "id": "a0149a5a-7e13-41ec-b1db-b21543c23c44",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Strengthening & weakening an argument"
+ },
+ {
+  "prompt": "Which type of statement strengthens an argument by removing a rival explanation of the evidence?",
+  "formula": "",
+  "options": [
+   "One that rules out an alternative cause",
+   "One that restates the conclusion",
+   "One that adds an unrelated fact",
+   "One that questions the evidence given"
+  ],
+  "answer": 0,
+  "explain": "Ruling out alternative causes makes the stated cause more likely, so it strengthens a causal argument.",
+  "kind": "concept",
+  "id": "83f1f715-4c61-4f0a-b775-7ebfebedff2e",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Strengthening & weakening an argument"
+ },
+ {
+  "prompt": "Statement: \"Only a few students passed the test.\" Which conclusion follows?",
+  "formula": "",
+  "options": [
+   "Some students failed",
+   "All students failed",
+   "Most students passed",
+   "No student failed"
+  ],
+  "answer": 0,
+  "explain": "\"Only a few\" means a small number passed, so the rest failed.",
+  "kind": "concept",
+  "id": "fada7ba1-ea5e-452f-80ce-3ae877034cc4",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Only graduates can apply.\" Which conclusion follows?",
+  "formula": "",
+  "options": [
+   "All graduates can apply",
+   "Non-graduates cannot apply",
+   "Every applicant gets selected",
+   "Some graduates will be selected"
+  ],
+  "answer": 1,
+  "explain": "\"Only\" gives a necessary condition, not a sufficient one.",
+  "kind": "concept",
+  "id": "bd16bcb0-b944-4ee9-a90e-4b54013b451f",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Only doctors are surgeons here.\" Which conclusion follows?",
+  "formula": "\"Only A are B\" ⇒ All B are A",
+  "options": [
+   "All doctors are surgeons",
+   "All surgeons are doctors",
+   "No doctor is a surgeon",
+   "Some surgeons are not doctors"
+  ],
+  "answer": 1,
+  "explain": "\"Only A are B\" reverses to \"All B are A\".",
+  "kind": "formula",
+  "id": "eab27cd6-813c-4536-9965-b6ee5186f19c",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Some birds are black.\" Which conclusion definitely follows?",
+  "formula": "Some A are B ⇒ Some B are A",
+  "options": [
+   "All birds are black",
+   "Some black things are birds",
+   "No bird is white",
+   "Some birds are not black"
+  ],
+  "answer": 1,
+  "explain": "A particular affirmative converts simply: some B are A.",
+  "kind": "concept",
+  "id": "6ca48345-6040-4cb5-b94f-7583c3b8d6e0",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Which qualifier in a conclusion most often makes it invalid when the statement is general?",
+  "formula": "",
+  "options": [
+   "some",
+   "may",
+   "always",
+   "can"
+  ],
+  "answer": 2,
+  "explain": "Absolute words like always, never, only go beyond the given data.",
+  "kind": "concept",
+  "id": "f545b19f-d827-43da-bb61-6f78a70bad5a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Smokers may develop lung disease.\" Which conclusion follows?",
+  "formula": "",
+  "options": [
+   "Every smoker will get lung disease",
+   "Smokers can never avoid lung disease",
+   "Lung disease is possible in smokers",
+   "Only smokers get lung disease"
+  ],
+  "answer": 2,
+  "explain": "\"May\" signals possibility; \"will\", \"never\" and \"only\" overstate it.",
+  "kind": "concept",
+  "id": "521f9016-a209-4662-87c8-58593a5dbc28",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Few employees got a bonus.\" Which conclusion follows?",
+  "formula": "",
+  "options": [
+   "No employee got a bonus",
+   "Some employees got a bonus",
+   "Most employees got a bonus",
+   "All employees got a bonus"
+  ],
+  "answer": 1,
+  "explain": "\"Few\" means a small number, but at least some, got it.",
+  "kind": "exception",
+  "id": "60f87a3f-6e02-4daa-bae0-01ae780116ad",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Most roads in the city are damaged.\" Which conclusion follows?",
+  "formula": "Most ⇒ Some",
+  "options": [
+   "All roads are damaged",
+   "Some roads are damaged",
+   "No road is undamaged",
+   "Most roads are undamaged"
+  ],
+  "answer": 1,
+  "explain": "\"Most\" includes \"some\", but never \"all\" or \"none\".",
+  "kind": "concept",
+  "id": "b4db0181-1db0-4b2b-8b3f-566780a13418",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"All cats are animals.\" Which conclusion follows?",
+  "formula": "All A are B ⇒ Some B are A",
+  "options": [
+   "All animals are cats",
+   "Some animals are cats",
+   "No animal is a cat",
+   "Some cats are not animals"
+  ],
+  "answer": 1,
+  "explain": "The converse of \"All\" is only \"Some\"; \"All B are A\" does not follow.",
+  "kind": "concept",
+  "id": "5194ccd1-5e48-4a89-aa8e-6427de4bf585",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"No teacher is a student.\" Which conclusion follows?",
+  "formula": "No A is B ⇒ No B is A",
+  "options": [
+   "Some students are teachers",
+   "No student is a teacher",
+   "All teachers are students",
+   "Some teachers are students"
+  ],
+  "answer": 1,
+  "explain": "A universal negative converts simply: no B is A.",
+  "kind": "concept",
+  "id": "203e09be-546b-4643-88c9-763ef18be14f",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement silent on Rahul. I: Rahul is honest. II: Rahul is not honest. Which option is correct?",
+  "formula": "",
+  "options": [
+   "Only I follows",
+   "Only II follows",
+   "Either I or II follows",
+   "I and II together follow"
+  ],
+  "answer": 2,
+  "explain": "Complementary pair: exactly one must be true, and neither follows alone.",
+  "kind": "concept",
+  "id": "d935d4a8-f635-44e9-b217-6e82b965b348",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Statement: All X are Y. I: Some X are Y. II: No X is Y. Which option is correct?",
+  "formula": "",
+  "options": [
+   "Only I follows",
+   "Only II follows",
+   "Either I or II follows",
+   "I and II together follow"
+  ],
+  "answer": 0,
+  "explain": "I follows definitely from the statement, so no either-or option is used.",
+  "kind": "concept",
+  "id": "e7d5a506-03cd-409e-8514-581553e633a7",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Silent statement. I: A is better than B. II: A is not better than B. Which option is correct?",
+  "formula": "",
+  "options": [
+   "Only I follows",
+   "Only II follows",
+   "Either I or II follows",
+   "I and II together follow"
+  ],
+  "answer": 2,
+  "explain": "A statement and its direct negation are complementary, so either I or II.",
+  "kind": "concept",
+  "id": "4984daa5-19c6-4e1a-9662-61c046ed034c",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Silent statement. I: Some X are Y. II: No Y is X. Which option is correct?",
+  "formula": "",
+  "options": [
+   "Only I follows",
+   "Either I or II follows",
+   "Only II follows",
+   "I and II together follow"
+  ],
+  "answer": 1,
+  "explain": "No Y is X ≡ No X is Y, which contradicts Some X are Y; so either-or.",
+  "kind": "result",
+  "id": "5eb9026e-cc60-4cd8-8beb-36ba18e70844",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Statement: No X is Y. I: Some X are not Y. II: No Y is X. Which option is correct?",
+  "formula": "",
+  "options": [
+   "Only I follows",
+   "Only II follows",
+   "Either I or II follows",
+   "I and II together follow"
+  ],
+  "answer": 3,
+  "explain": "E gives O by implication, and E converts simply to No Y is X.",
+  "kind": "result",
+  "id": "ac13b946-7f82-4b7d-8701-5a461502250d",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Which pair of conclusions on the same terms can both be false together, so it is NOT an either-or pair?",
+  "formula": "",
+  "options": [
+   "All A are B; No A is B",
+   "All A are B; Some A are not B",
+   "Some A are B; No A is B",
+   "Some A are B; Some A are not B"
+  ],
+  "answer": 0,
+  "explain": "If some A are B and some are not, both 'All A are B' and 'No A is B' fail; they are contraries.",
+  "kind": "concept",
+  "id": "1def2ba6-4577-4251-b5da-01e1e8043583",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Given 'All A are B', which of these is NOT a possibility?",
+  "formula": "",
+  "options": [
+   "All B are A",
+   "Some B are not A",
+   "Some A are not B",
+   "Some B are A"
+  ],
+  "answer": 2,
+  "explain": "'Some A are not B' contradicts 'All A are B'; the others can hold.",
+  "kind": "concept",
+  "id": "397c8dad-7556-4a8d-b7ca-4417b21a58fe",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Statement: Some A are B. Conclusion: Some A are not B. This conclusion:",
+  "formula": "",
+  "options": [
+   "Definitely follows",
+   "Does not definitely follow",
+   "Definitely false",
+   "Follows only if all B are A"
+  ],
+  "answer": 1,
+  "explain": "'Some A are B' leaves open that all A are B, so 'some A are not B' is only a possibility.",
+  "kind": "concept",
+  "id": "872fd136-125f-4250-af61-4547bf44db6c",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "All A are B. Some C are not B. Which conclusion definitely follows?",
+  "formula": "A ⊆ B; some C outside B",
+  "options": [
+   "Some C are not A",
+   "No C is A",
+   "All C are A",
+   "Some A are C"
+  ],
+  "answer": 0,
+  "explain": "Those C outside B are outside A as well, since A lies inside B. 'No C is A' is too strong.",
+  "kind": "result",
+  "id": "32ce9512-91f2-4565-ac4e-325f356b5294",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Statement-Conclusion: definitely follows test"
+ },
+ {
+  "prompt": "Statement: All X are Y. I: All Y are X. II: Some Y are not X. Which is correct?",
+  "formula": "",
+  "options": [
+   "Only I follows",
+   "Only II follows",
+   "Either I or II follows",
+   "No conclusion follows"
+  ],
+  "answer": 2,
+  "explain": "Neither is definite from 'All X are Y', but All/Some-not on Y, X are complementary.",
+  "kind": "result",
+  "id": "4573d85b-a978-46f3-9c52-f53fa1e4874e",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "If conclusion I alone follows from the statement, the option 'Either I or II' is:",
+  "formula": "",
+  "options": [
+   "Correct if II is its opposite",
+   "Never correct",
+   "Correct if II is negative",
+   "Always correct"
+  ],
+  "answer": 1,
+  "explain": "Either-or applies only when neither conclusion follows individually.",
+  "kind": "concept",
+  "id": "870ff0ba-2670-4c5d-97a5-2e7d38357dce",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Either-or & neither-nor conclusion options"
+ },
+ {
+  "prompt": "Which conversion is NOT valid in syllogism?",
+  "formula": "",
+  "options": [
+   "Some A are B → Some B are A",
+   "No A is B → No B is A",
+   "All A are B → Some B are A",
+   "Some A are not B → Some B are not A"
+  ],
+  "answer": 3,
+  "explain": "'Some … are not' statements cannot be converted; the other three conversions are valid.",
+  "kind": "exception",
+  "id": "92d06b73-c91e-4c7d-b6c4-57f7235d8c6c",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: Some A are not B; All A are C. Which definitely follows?",
+  "formula": "",
+  "options": [
+   "No C is B",
+   "Some C are not B",
+   "Some B are not C",
+   "All C are B"
+  ],
+  "answer": 1,
+  "explain": "The A's that are not B are also C, so some C are not B.",
+  "kind": "result",
+  "id": "7e7f664d-b905-4765-9bb3-d565806326f8",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Which statement is the contradictory (opposite) of 'No A is B'?",
+  "formula": "",
+  "options": [
+   "All A are B",
+   "Some A are not B",
+   "Some A are B",
+   "No B is A"
+  ],
+  "answer": 2,
+  "explain": "'No A is B' and 'Some A are B' cannot both be true or both be false.",
+  "kind": "concept",
+  "id": "3d44a70f-4939-44c6-a011-99570aa560e6",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Statements: Some A are B; No A is C. Which definitely follows?",
+  "formula": "",
+  "options": [
+   "No B is C",
+   "Some B are not C",
+   "Some C are not A",
+   "All B are C"
+  ],
+  "answer": 1,
+  "explain": "Those A that are B are not C, so some B are not C.",
+  "kind": "result",
+  "id": "75b86103-8157-400d-8fb4-a8f75bff0042",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: All/Some/No combination rules"
+ },
+ {
+  "prompt": "Given 'No A is B', which of these is NOT a possibility?",
+  "formula": "",
+  "options": [
+   "Some A are B",
+   "Some A are not B",
+   "No B is A",
+   "Some B are not A"
+  ],
+  "answer": 0,
+  "explain": "'No A is B' makes 'Some A are B' false; the others follow from it.",
+  "kind": "concept",
+  "id": "7655ea55-d300-4b7a-bf41-1152d4d2cbbf",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Given 'All A are B', which of these is a valid possibility?",
+  "formula": "",
+  "options": [
+   "All B are A",
+   "No A is B",
+   "Some A are not B",
+   "No B is A"
+  ],
+  "answer": 0,
+  "explain": "A and B may coincide (same set), so 'All B are A' is possible.",
+  "kind": "concept",
+  "id": "261ebe69-759e-4e76-a7f2-a9be464cb59a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Some A are B; All B are C. Which is NOT a possibility?",
+  "formula": "",
+  "options": [
+   "No A is C",
+   "All A are C",
+   "Some C are not A",
+   "Some A are C"
+  ],
+  "answer": 0,
+  "explain": "'Some A are C' definitely follows, so 'No A is C' is ruled out.",
+  "kind": "concept",
+  "id": "4e99db2a-4b36-4bdd-a185-deec6b319728",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Some A are B; No B is C. Which is NOT a possibility?",
+  "formula": "",
+  "options": [
+   "All A are C",
+   "Some C are A",
+   "Some C are not A",
+   "Some A are not C"
+  ],
+  "answer": 0,
+  "explain": "The A's that are B cannot be C, so 'All A are C' is false.",
+  "kind": "concept",
+  "id": "739ce1e0-f060-42b9-9381-5986d267ab4d",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Which pair on the same terms forms a valid either-or pair?",
+  "formula": "",
+  "options": [
+   "Some B are A; No A is B",
+   "All A are B; No A is B",
+   "Some A are B; Some A are not B",
+   "All A are B; Some B are A"
+  ],
+  "answer": 0,
+  "explain": "'Some B are A' equals 'Some A are B'; with 'No A is B' it is a complementary pair.",
+  "kind": "concept",
+  "id": "87b679df-870a-4f46-9a8b-cbae0296f252",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "In syllogism, a 'possibility' conclusion is acceptable when it:",
+  "formula": "",
+  "options": [
+   "Is not contradicted by the statements",
+   "Is definitely true from the statements",
+   "Is just the converse of a statement",
+   "Matches general knowledge"
+  ],
+  "answer": 0,
+  "explain": "A possibility only needs to be consistent with the given statements, not forced.",
+  "kind": "concept",
+  "id": "74fbf608-fffe-4566-8241-9e270459df8f",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "All A are B; Some A are C. Which is NOT a possibility?",
+  "formula": "",
+  "options": [
+   "No B is C",
+   "All B are C",
+   "Some B are not C",
+   "All C are B"
+  ],
+  "answer": 0,
+  "explain": "'Some B are C' definitely follows, so 'No B is C' is impossible.",
+  "kind": "concept",
+  "id": "232b6e3c-e304-4b3d-b963-e93a12ff2bc9",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Syllogism: possibility & complementary pairs"
+ },
+ {
+  "prompt": "Statement: \"Not all students passed the exam.\" Which conclusion definitely follows?",
+  "formula": "Not all A are B ⇒ Some A are not B",
+  "options": [
+   "Some students did not pass",
+   "No student passed",
+   "Most students failed",
+   "Only a few students passed"
+  ],
+  "answer": 0,
+  "explain": "'Not all' denies 'all', so at least some did not pass; 'no' or 'most' is not implied.",
+  "kind": "concept",
+  "id": "be8c0a80-ef12-4e51-a5c9-aeffa425bdda",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Only Ravi scored full marks.\" Which conclusion definitely follows?",
+  "formula": "",
+  "options": [
+   "Nobody else scored full marks",
+   "Ravi was the class topper",
+   "Few others scored full marks",
+   "Ravi scored more than all others"
+  ],
+  "answer": 0,
+  "explain": "'Only Ravi' excludes everyone else from that group; ranking is not stated.",
+  "kind": "concept",
+  "id": "1315e156-271f-4092-abec-1f79fba8229a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Only members can enter the club.\" Which does NOT definitely follow?",
+  "formula": "Only A are B ⇒ All B are A, not All A are B",
+  "options": [
+   "Non-members cannot enter",
+   "All members can enter",
+   "Anyone who entered is a member",
+   "A non-member cannot be inside"
+  ],
+  "answer": 1,
+  "explain": "'Only' gives a necessary condition, not a sufficient one; membership need not guarantee entry.",
+  "kind": "exception",
+  "id": "3a7395df-b422-4a01-bfed-72f929cd0d73",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "Statement: \"Candidates must be above 21 to apply.\" Which conclusion follows?",
+  "formula": "",
+  "options": [
+   "A 20-year-old cannot apply",
+   "Everyone above 21 will be selected",
+   "Everyone above 21 will apply",
+   "Age is the only criterion"
+  ],
+  "answer": 0,
+  "explain": "'Must' sets a necessary condition; it does not guarantee selection or exclude other criteria.",
+  "kind": "concept",
+  "id": "bd552da4-5307-4bfd-a371-8e1db9e1fa0a",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ },
+ {
+  "prompt": "\"Ravi gets the job only if he clears the interview.\" Ravi got the job. Which follows?",
+  "formula": "B only if A: B ⇒ A",
+  "options": [
+   "He cleared the interview",
+   "He did not clear the interview",
+   "Clearing it guarantees the job",
+   "No one else got the job"
+  ],
+  "answer": 0,
+  "explain": "'B only if A' means B ⇒ A, so B having happened shows A. The reverse does not hold.",
+  "kind": "concept",
+  "id": "cec6a356-8c84-4804-8756-2c100273c829",
+  "subject": "Logical Reasoning",
+  "chapter": "Statements & Conclusions",
+  "topic": "Extreme words & qualifiers (only, all, must)"
+ }
+]

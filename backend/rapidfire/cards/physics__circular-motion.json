@@ -1,1561 +1,3461 @@
 [
-  {
-    "id": "9b506148-5c24-402e-83ed-e2098b3f0c41",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal acceleration formula",
-    "formula": "a = v²/r = ω²r",
-    "options": [
-      "v/r² toward center",
-      "v²/r toward center",
-      "v²/r away from center",
-      "vr toward center"
-    ],
-    "answer": 1,
-    "explain": "Centripetal acceleration always points toward the center; magnitude = v²/r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fc5cb983-0290-4117-9685-bd6794a7d267",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal force on mass m in circular motion",
-    "formula": "F = mv²/r",
-    "options": [
-      "mvr",
-      "mv²/r",
-      "mv/r²",
-      "m²v/r"
-    ],
-    "answer": 1,
-    "explain": "Net inward force required for circular motion is mv²/r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "fba8b7d3-6f22-4c44-abe7-02b126b7db54",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Relation between linear speed v and angular speed ω",
-    "formula": "v = ωr",
-    "options": [
-      "v = ωr",
-      "v = r/ω",
-      "v = ω/r",
-      "v = ω²r"
-    ],
-    "answer": 0,
-    "explain": "Linear speed equals angular speed times radius of the circular path.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "705a3414-c761-45a0-93a3-ec1d4e70338e",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Time period T in terms of angular frequency ω",
-    "formula": "T = 2π/ω",
-    "options": [
-      "π/ω",
-      "2π/ω",
-      "2ω/π",
-      "ω/2π"
-    ],
-    "answer": 1,
-    "explain": "One complete revolution corresponds to angle 2π, so T = 2π/ω.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a389ad19-1cf1-4d6f-a74d-9131f8f7733f",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Banking angle θ for frictionless road (speed v, radius r)",
-    "formula": "tan θ = v²/rg",
-    "options": [
-      "sin θ = v²/rg",
-      "cos θ = v²/rg",
-      "tan θ = rg/v²",
-      "tan θ = v²/rg"
-    ],
-    "answer": 3,
-    "explain": "On banked frictionless road, normal force components give tan θ = v²/rg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd152afb-7dda-4969-afc1-781c7458a481",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Minimum speed at top of vertical loop to maintain contact",
-    "formula": "v_min = √(rg)",
-    "options": [
-      "√(rg)",
-      "√(rg/2)",
-      "√(2rg)",
-      "√(5rg)"
-    ],
-    "answer": 0,
-    "explain": "At top, mg provides centripetal force minimally; mv²/r = mg gives v = √(rg).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "66526f55-f988-41ab-b8f3-5c828bf0868f",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Minimum speed at bottom of vertical loop",
-    "formula": "v_bottom = √(5rg)",
-    "options": [
-      "√(rg)",
-      "√(2rg)",
-      "√(5rg)",
-      "√(3rg)"
-    ],
-    "answer": 2,
-    "explain": "Energy conservation from top (v=√rg) to bottom gives v_bottom = √(5rg).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dc67d86f-f4b9-4d9b-bb2c-8ffcfffe5490",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Normal force at bottom of vertical circular loop",
-    "formula": "N = mg + mv²/r",
-    "options": [
-      "mg + mv²/r",
-      "mg",
-      "mg − mv²/r",
-      "mv²/r"
-    ],
-    "answer": 0,
-    "explain": "At bottom, N − mg = mv²/r (both N and centripetal force upward).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e34230a3-d03e-409a-8aed-a5fb52626657",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Normal force at top of vertical circular loop",
-    "formula": "N = mv²/r − mg",
-    "options": [
-      "mv²/r − mg",
-      "mv²/r",
-      "mg − mv²/r",
-      "mg + mv²/r"
-    ],
-    "answer": 0,
-    "explain": "At top, N + mg = mv²/r; so N = mv²/r − mg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2595a4e9-8b94-4dea-b5f2-1cad83aa5ecb",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Maximum safe speed on a flat road with friction μ",
-    "formula": "v_max = √(μrg)",
-    "options": [
-      "√(μrg)",
-      "√(rg/μ)",
-      "μrg",
-      "√(μg/r)"
-    ],
-    "answer": 0,
-    "explain": "Friction provides centripetal force: μmg = mv²/r → v = √(μrg).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e8ab817e-6aab-474d-b39c-447679204368",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal acceleration in terms of T (time period)",
-    "formula": "a = 4π²r/T²",
-    "options": [
-      "4π²r/T²",
-      "4π²r²/T",
-      "πr/T²",
-      "2πr/T²"
-    ],
-    "answer": 0,
-    "explain": "v = 2πr/T, so a = v²/r = 4π²r/T².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e7f651ea-e0c6-4a38-9cf2-e1c70ad8a24e",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Angle subtended in time t at angular speed ω",
-    "formula": "θ = ωt",
-    "options": [
-      "t/ω",
-      "ωt",
-      "ω²t",
-      "ω/t"
-    ],
-    "answer": 1,
-    "explain": "For uniform circular motion, angular displacement θ = ωt.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "40808028-427a-4d3d-ba2c-d3ef1f65de41",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Work done by centripetal force in uniform circular motion",
-    "formula": "W = 0",
-    "options": [
-      "mv²",
-      "mv²/r per second",
-      "2πmv²/r",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "Centripetal force is perpendicular to velocity, so work done is always zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "018a5a76-6e0e-4860-8d6a-e740fdee1181",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Tension at angle θ from bottom in vertical circle (speed v)",
-    "formula": "T = mv²/r + mg cosθ",
-    "options": [
-      "mv²/r − mg cosθ",
-      "mv²/r + mg cosθ",
-      "mv²/r",
-      "mv²/r + mg sinθ"
-    ],
-    "answer": 1,
-    "explain": "Radial equation: T − mg cosθ = mv²/r at angle θ from bottom of loop.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "05c68de4-3f12-45a0-bfc9-b9881ebbe62e",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For uniform circular motion, which quantity is constant?",
-    "formula": "",
-    "options": [
-      "Acceleration vector is constant",
-      "Speed (magnitude of velocity)",
-      "Kinetic energy changes",
-      "Velocity vector is constant"
-    ],
-    "answer": 1,
-    "explain": "In UCM, speed and KE are constant; velocity and acceleration directions change continuously.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0d29fac4-a473-449d-9560-0fa1447c387e",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Optimum speed on banked road (with friction μ, angle θ)",
-    "formula": "v_opt = √(rg tanθ)",
-    "options": [
-      "√(rg cosθ)",
-      "√(rg sinθ)",
-      "√(rg/tanθ)",
-      "√(rg tanθ)"
-    ],
-    "answer": 3,
-    "explain": "At optimum speed, friction is zero; only banking provides centripetal force.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "30ccdad2-fcdb-4fcf-8e98-0d8c7a82538e",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Conical pendulum: time period T depends on",
-    "formula": "T = 2π√(L cosθ/g)",
-    "options": [
-      "2π√(L cosθ/g)",
-      "2π√(L sinθ/g)",
-      "2π√(L/g)",
-      "2π√(g/L cosθ)"
-    ],
-    "answer": 0,
-    "explain": "For conical pendulum, vertical equilibrium gives T = 2π√(L cosθ/g).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d54ac1dc-38b7-4a9c-a56b-9d1b50ca14b9",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Tangential acceleration in circular motion",
-    "formula": "aₜ = r·α",
-    "options": [
-      "ω²r",
-      "r·α",
-      "v·ω",
-      "v²/r"
-    ],
-    "answer": 1,
-    "explain": "Tangential acceleration aₜ = r·α where α is angular acceleration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bf2e2618-8c50-44a9-819f-9cae43bd97ce",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Relation between angular acceleration α and linear acceleration aₜ",
-    "formula": "aₜ = rα",
-    "options": [
-      "aₜ = r²α",
-      "aₜ = α/r",
-      "aₜ = rα",
-      "aₜ = r/α"
-    ],
-    "answer": 2,
-    "explain": "Just as v = rω, differentiating gives tangential acceleration aₜ = rα.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "85b021b7-f4dd-4f98-a68c-2f3d8cebcfe9",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Frequency f and angular speed ω relation",
-    "formula": "ω = 2πf",
-    "options": [
-      "ω = 2πf",
-      "ω = f²",
-      "ω = πf",
-      "ω = f/2π"
-    ],
-    "answer": 0,
-    "explain": "Each cycle covers 2π radians, so ω = 2πf.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8d58e751-745b-400e-84e1-edaee3b720cb",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Net force on particle in uniform circular motion",
-    "formula": "F_net = mv²/r (centripetal)",
-    "options": [
-      "Constant magnitude, changing direction",
-      "Constant in magnitude and direction",
-      "Changing magnitude only",
-      "Zero"
-    ],
-    "answer": 0,
-    "explain": "In UCM, |F_net| = mv²/r is constant but direction continuously changes toward center.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "83f4603f-c8a4-4ed1-a001-27c644288f7a",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal acceleration in terms of ω and r?",
-    "formula": "a = ω²r",
-    "options": [
-      "ωr²",
-      "ω²/r",
-      "ω²r",
-      "ωr"
-    ],
-    "answer": 2,
-    "explain": "Centripetal acceleration = ω²r, directed toward center.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6ac10308-4f4d-45ef-bcb3-5bb0e63615e4",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Radius of circular path of charge q in magnetic field B?",
-    "formula": "r = mv/(qB)",
-    "options": [
-      "qBv/m",
-      "mv/qB",
-      "mv²/qB",
-      "qB/mv"
-    ],
-    "answer": 1,
-    "explain": "Magnetic force provides centripetal force: qvB = mv²/r → r = mv/qB.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9684ef3e-01c4-4d8b-b7d7-975e58e3be49",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In vertical circle, speed at top if speed at bottom is v₀?",
-    "formula": "v_top²= v₀²− 4gR",
-    "options": [
-      "v₀²−5gR",
-      "v₀²−2gR",
-      "v₀²−4gR",
-      "v₀²−gR"
-    ],
-    "answer": 2,
-    "explain": "Energy conservation: ½mv₀² = ½mv_top² + mg(2R) → v_top² = v₀²−4gR.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "121228f1-50a1-4bbe-ae77-dc72358db004",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a particle in uniform circular motion, acceleration is?",
-    "formula": "",
-    "options": [
-      "Perpendicular to velocity",
-      "Zero",
-      "Parallel to velocity",
-      "At 45° to velocity"
-    ],
-    "answer": 0,
-    "explain": "Centripetal acceleration is always directed toward center, perpendicular to velocity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "56a2c880-93b1-4cac-85de-ba3b7069f453",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In a conical pendulum, tension T in the string equals?",
-    "formula": "T = mg/cosθ",
-    "options": [
-      "mg/sinθ",
-      "mg/cosθ",
-      "mg·cosθ",
-      "mg·tanθ"
-    ],
-    "answer": 1,
-    "explain": "Vertical equilibrium: T·cosθ = mg → T = mg/cosθ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d036d1ee-bdca-4b8c-a0fe-99010c9cd423",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Angular momentum L of particle in circular motion?",
-    "formula": "L = mvr",
-    "options": [
-      "mr²/v",
-      "mvr",
-      "mv²r",
-      "mv/r"
-    ],
-    "answer": 1,
-    "explain": "L = r × p; for circular motion, L = mvr (perpendicular r and v).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3c919580-7b49-4de3-b438-21eeec210891",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal force in terms of angular speed ω?",
-    "formula": "F = mω²r",
-    "options": [
-      "mω²r",
-      "mω²/r",
-      "mωr²",
-      "mωr"
-    ],
-    "answer": 0,
-    "explain": "F = mv²/r and v = ωr → F = mω²r directed toward center.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "976a5f37-9472-4b0d-bbb5-23dd1ba99160",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Which physical quantity changes in uniform circular motion?",
-    "formula": "",
-    "options": [
-      "Velocity",
-      "Kinetic energy",
-      "Angular speed",
-      "Speed"
-    ],
-    "answer": 0,
-    "explain": "Velocity (a vector) changes direction continuously; speed and KE remain constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "af21dc34-23a5-4fc2-985f-e5f519bb1a98",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Radius of curvature of projectile at highest point (initial speed u, angle θ)?",
-    "formula": "R = u²cos²θ/g",
-    "options": [
-      "u²cosθ/g",
-      "u²cos²θ/g",
-      "u²/g",
-      "u²sin²θ/g"
-    ],
-    "answer": 1,
-    "explain": "At top, speed = ucosθ; centripetal acc = g → R = v²/g = u²cos²θ/g.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "81147995-0b7b-4049-ac7e-8db8cd629c47",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Critical velocity at top of vertical loop to just maintain contact?",
-    "formula": "v = √(gR)",
-    "options": [
-      "√(gR)",
-      "√(5gR)",
-      "√(3gR)",
-      "√(2gR)"
-    ],
-    "answer": 0,
-    "explain": "At top, N=0 → mg = mv²/R → v = √(gR) is the minimum speed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bf2ce170-dad5-4a19-b8e2-17de69c50ae9",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "If particle moves in circle of radius r with speed v, its acceleration magnitude?",
-    "formula": "a = v²/r",
-    "options": [
-      "v²/r",
-      "v/r²",
-      "v²r",
-      "vr"
-    ],
-    "answer": 0,
-    "explain": "Centripetal acceleration magnitude = v²/r, always pointing toward center.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "81428c3c-1c31-487a-8336-a4776a71d6a3",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Net acceleration magnitude in non-uniform circular motion?",
-    "formula": "a = √(aₜ²+ac²)",
-    "options": [
-      "√(aₜ²−ac²)",
-      "aₜ + ac",
-      "aₜ − ac",
-      "√(aₜ²+ac²)"
-    ],
-    "answer": 3,
-    "explain": "Tangential and centripetal accelerations are perpendicular; net = √(aₜ²+ac²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b308c053-6c3d-4c86-a206-d184a07a7bd7",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A particle completes n revolutions per second. Its angular speed ω is?",
-    "formula": "ω = 2πn",
-    "options": [
-      "πn",
-      "2πn",
-      "2π/n",
-      "n/2π"
-    ],
-    "answer": 1,
-    "explain": "Frequency f = n rev/s; ω = 2πf = 2πn rad/s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0dff6e42-a72c-4177-bea9-7cce7aba0e9c",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal force direction relative to velocity in UCM?",
-    "formula": "",
-    "options": [
-      "Opposite to velocity",
-      "Parallel to velocity",
-      "At 45° to velocity",
-      "Perpendicular to velocity"
-    ],
-    "answer": 3,
-    "explain": "Centripetal force always points toward center, hence perpendicular to instantaneous velocity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6e622286-bb39-4096-b5ea-a2751502628c",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a car on flat road, which force provides centripetal force?",
-    "formula": "",
-    "options": [
-      "Gravity",
-      "Friction (static)",
-      "Friction (kinetic)",
-      "Normal force"
-    ],
-    "answer": 1,
-    "explain": "Static friction between tyres and road acts inward, providing centripetal force on flat curves.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e8e35b45-ee60-4164-88ed-1e6236cd5435",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In vertical circle, point where normal force is maximum?",
-    "formula": "",
-    "options": [
-      "Top",
-      "Midpoint (side)",
-      "Bottom",
-      "Same everywhere"
-    ],
-    "answer": 2,
-    "explain": "At bottom, N = mg + mv²/r, so normal force is maximum at the bottom of the vertical circle.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d6cd9ec8-a0e1-4499-ac85-9c2f30ea117f",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Tension difference T_bottom − T_top in vertical circular motion?",
-    "formula": "T_b − T_t = 6mg",
-    "options": [
-      "6mg",
-      "2mg",
-      "4mg",
-      "3mg"
-    ],
-    "answer": 0,
-    "explain": "Using energy conservation and Newton's law at both points gives T_bottom − T_top = 6mg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7d9895cd-923e-4fa4-8c63-1e92118ec425",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In vertical circle, where is speed of particle minimum?",
-    "formula": "",
-    "options": [
-      "Top",
-      "Same everywhere",
-      "Midpoint",
-      "Bottom"
-    ],
-    "answer": 0,
-    "explain": "By energy conservation, maximum height is at top, so KE (and speed) is minimum at the top.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "38be9cee-2723-4809-9865-0dbc8abe8de0",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A stone tied to string, string breaks: stone moves in which direction?",
-    "formula": "",
-    "options": [
-      "Away from center",
-      "Radially outward curving",
-      "Toward center",
-      "Tangentially"
-    ],
-    "answer": 3,
-    "explain": "On breaking, centripetal force vanishes; stone flies off tangentially (Newton's first law).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f7150e7b-4af7-4f8f-b636-b3079376d722",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Conical pendulum: what is the semi-vertical angle θ related to?",
-    "formula": "tanθ = ω²r/g",
-    "options": [
-      "tanθ = g/ω²r",
-      "tanθ = ω²r/g",
-      "sinθ = ω²r/g",
-      "cosθ = ω²r/g"
-    ],
-    "answer": 1,
-    "explain": "Horizontal: T sinθ = mω²r; vertical: T cosθ = mg. Dividing gives tanθ = ω²r/g.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "01223cae-51e4-4f23-a54e-0f4fb644b890",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "If radius of circular motion doubles (same speed), centripetal acceleration?",
-    "formula": "a = v²/r",
-    "options": [
-      "Doubles",
-      "Halves",
-      "Quadruples",
-      "Remains same"
-    ],
-    "answer": 1,
-    "explain": "a = v²/r; doubling r at constant v halves the centripetal acceleration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6632bd5b-6806-46c8-8fa1-bfcd18011d39",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "If speed doubles (same radius), centripetal force changes by factor?",
-    "formula": "F = mv²/r",
-    "options": [
-      "1/2",
-      "2",
-      "4",
-      "8"
-    ],
-    "answer": 2,
-    "explain": "F ∝ v²; doubling speed quadruples the required centripetal force.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "bd3dcb42-57cb-4ce6-b0df-fa46c4423eda",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal acceleration in terms of T (time period) and r?",
-    "formula": "a = 4π²r/T²",
-    "options": [
-      "πr/T²",
-      "2π²r/T²",
-      "4π²r/T²",
-      "2πr/T²"
-    ],
-    "answer": 2,
-    "explain": "v = 2πr/T, so a = v²/r = 4π²r/T².",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7caac20e-fc3c-480a-ba86-37b40506b3fc",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For circular motion on banked road, what is the ideal (no-friction) banking speed?",
-    "formula": "v = √(rg tanθ)",
-    "options": [
-      "√(rg cosθ)",
-      "√(rg/tanθ)",
-      "√(rg tanθ)",
-      "√(rg sinθ)"
-    ],
-    "answer": 2,
-    "explain": "On frictionless banked road: tan θ = v²/rg, so ideal speed v = √(rg tanθ).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e0fc99fb-34bb-474a-8c70-764386a59b5f",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Cyclist bends inward while turning: angle with vertical θ satisfies?",
-    "formula": "tanθ = v²/rg",
-    "options": [
-      "tanθ = v²/rg",
-      "sinθ = v²/rg",
-      "tanθ = rg/v²",
-      "cosθ = v²/rg"
-    ],
-    "answer": 0,
-    "explain": "Cyclist leans so that tan θ = v²/rg to balance centripetal requirement with gravity.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ff383942-08cb-413d-b0e4-e9247ce5ab16",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In a vertical circle, normal force at the side (θ = 90° from bottom) is?",
-    "formula": "N = mv²/r",
-    "options": [
-      "mv²/r",
-      "mv²/r − mg",
-      "mv²/r + mg/2",
-      "mv²/r + mg"
-    ],
-    "answer": 0,
-    "explain": "At the side, gravity acts downward (tangential), so N = mv²/r only (no mg component along radius).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "286b6573-b3ff-4a4b-b92f-dc8bc7818de8",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Angular impulse equals change in?",
-    "formula": "τ·t = ΔL",
-    "options": [
-      "Kinetic energy",
-      "Angular speed",
-      "Linear momentum",
-      "Angular momentum"
-    ],
-    "answer": 3,
-    "explain": "Torque × time = angular impulse = change in angular momentum (ΔL).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "75e9385b-18e0-4cf9-8935-4785c0812477",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For uniform circular motion, which of these is zero?",
-    "formula": "",
-    "options": [
-      "Centripetal acceleration",
-      "Angular speed",
-      "Linear speed",
-      "Tangential acceleration"
-    ],
-    "answer": 3,
-    "explain": "Uniform circular motion means constant speed, so tangential acceleration = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "abfbf51c-6da8-4cbe-9f54-89c0b560002b",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a ball on string in vertical circle, at what point is tension least?",
-    "formula": "",
-    "options": [
-      "Depends on mass",
-      "Side (θ=90°)",
-      "Top",
-      "Bottom"
-    ],
-    "answer": 2,
-    "explain": "Tension T = mv²/r − mg cosα; at top (α=0 from top), gravity aids centripetal, so tension is minimum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "26b4f7ee-cfc5-4e14-b051-b8a92a77d129",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "If radius is halved keeping angular speed constant, centripetal acceleration?",
-    "formula": "a = ω²r",
-    "options": [
-      "Doubles",
-      "Quadruples",
-      "Remains same",
-      "Halves"
-    ],
-    "answer": 3,
-    "explain": "a = ω²r; halving r at constant ω halves centripetal acceleration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7ba50507-7539-4465-b9f4-1002abf9c5c4",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Skidding condition for car on flat road (mass m, speed v, radius r)?",
-    "formula": "mv²/r > μmg",
-    "options": [
-      "v > √(μg/r)",
-      "v > √(μrg)",
-      "v > μ²rg",
-      "v > μrg"
-    ],
-    "answer": 1,
-    "explain": "Skidding occurs when required centripetal force exceeds maximum static friction μmg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9dfb4f30-bfd7-404f-8513-1a4787b96e0b",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A particle moves in a circle. Its angular displacement θ in time t at constant α (initial ω₀)?",
-    "formula": "θ = ω₀t + ½αt²",
-    "options": [
-      "ω₀t + αt²",
-      "ω₀t − ½αt²",
-      "ω₀t + ½αt²",
-      "½αt²"
-    ],
-    "answer": 2,
-    "explain": "Rotational kinematics mirrors linear: θ = ω₀t + ½αt² for constant angular acceleration.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7e82d743-2ea2-4ac6-9171-474beaa106d0",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Maximum speed on banked road WITH friction (angle θ, coefficient μ)?",
-    "formula": "v_max=√[rg(tanθ+μ)/(1−μtanθ)]",
-    "options": [
-      "√(rg tanθ)",
-      "√[rg(tanθ−μ)/(1+μtanθ)]",
-      "√(rg·μ)",
-      "√[rg(tanθ+μ)/(1−μtanθ)]"
-    ],
-    "answer": 3,
-    "explain": "Friction acts up the slope at max speed; combining equations gives this expression.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77ef9c05-2e7b-479d-81f3-be11ec453947",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In a vertical circle, tension at the TOP when speed at top is v_t?",
-    "formula": "T = mv²_t/r − mg",
-    "options": [
-      "mv²_t/r + mg",
-      "mv²_t/r − mg",
-      "mv²_t/r",
-      "mg − mv²_t/r"
-    ],
-    "answer": 1,
-    "explain": "At top, both T and mg point toward centre: T + mg = mv²/r, so T = mv²/r − mg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "77ca3a70-a1dd-41bb-8963-d875f6f72481",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a particle in circular motion, the torque of centripetal force about the centre is?",
-    "formula": "τ = r × F",
-    "options": [
-      "mvr",
-      "mrω²",
-      "Zero",
-      "mv²/r"
-    ],
-    "answer": 2,
-    "explain": "Centripetal force is along the radius; r × F = 0 since they are anti-parallel (angle = 180°).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d17ef123-c4fa-40ff-a54b-cd9e5d23ee06",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A body moves in a circle of radius r. Its displacement after half revolution is?",
-    "formula": "",
-    "options": [
-      "πr",
-      "2πr",
-      "2r",
-      "r"
-    ],
-    "answer": 2,
-    "explain": "Displacement is the straight-line distance between start and end; after half circle it equals diameter 2r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "baad814e-2cff-4c95-82b2-0a9096f489bd",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For circular motion, power delivered by centripetal force is?",
-    "formula": "P = F·v cosθ",
-    "options": [
-      "Zero",
-      "mv²/r",
-      "mv²ω",
-      "mv³/r"
-    ],
-    "answer": 0,
-    "explain": "Centripetal force ⊥ velocity always, so P = F·v cos90° = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f54f9d03-35c4-456b-945c-4e9b3d421d0b",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A particle in UCM has speed v. Magnitude of change in velocity in half revolution?",
-    "formula": "|Δv| = 2v",
-    "options": [
-      "2v",
-      "√2 v",
-      "0",
-      "v"
-    ],
-    "answer": 0,
-    "explain": "After half revolution velocity reverses: |Δv| = |v − (−v)| = 2v.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "84276b3d-d4cc-4f08-b13d-74f30e527184",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Angle between velocity and acceleration in uniform circular motion?",
-    "formula": "",
-    "options": [
-      "90°",
-      "45°",
-      "180°",
-      "0°"
-    ],
-    "answer": 0,
-    "explain": "In UCM acceleration is centripetal (radial inward) while velocity is tangential; they are perpendicular.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "365a79f4-499c-4c93-b98b-5f0e48d1f086",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A motorcyclist rides inside a hollow sphere of radius R. Minimum speed at top to maintain contact?",
-    "formula": "v_min = √(gR)",
-    "options": [
-      "√(5gR)",
-      "√(2gR)",
-      "√(gR)",
-      "√(gR/2)"
-    ],
-    "answer": 2,
-    "explain": "At top of sphere, N + mg = mv²/R; for N ≥ 0, minimum v = √(gR).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "d8a5227a-54bf-48f3-a0c1-f5936a168421",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "String of length L, mass m whirled in horizontal circle: tension equals?",
-    "formula": "T = mω²L",
-    "options": [
-      "mg",
-      "mω²L + mg",
-      "mω²L",
-      "mω²L − mg"
-    ],
-    "answer": 2,
-    "explain": "For horizontal circle (string horizontal), tension provides centripetal force: T = mω²r = mω²L.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "3ca22cde-2910-42f6-a1e4-e14b5df881b3",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In vertical circular motion, the particle is most likely to lose contact at?",
-    "formula": "",
-    "options": [
-      "Side (θ=90°)",
-      "Any point equally",
-      "Bottom of the circle",
-      "Top of the circle"
-    ],
-    "answer": 3,
-    "explain": "At the top, both gravity and normal force point inward; speed is minimum here so contact is lost first.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bbfc9088-230b-4803-956f-102d15063ab5",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Centripetal force required for a car of mass m at speed v on circular road of radius r?",
-    "formula": "F = mv²/r",
-    "options": [
-      "mv²r",
-      "mv/r²",
-      "mv²/r",
-      "m²v/r"
-    ],
-    "answer": 2,
-    "explain": "Standard centripetal force formula F = mv²/r; provided by friction on flat road.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "f6f2a99c-4acf-4009-b921-a862bf182ed9",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In a vertical circle (string), at the bottom the net upward force on mass m (speed v_b)?",
-    "formula": "T − mg = mv²_b/r",
-    "options": [
-      "T = mg",
-      "T − mg = 0",
-      "T − mg = mv²_b/r",
-      "T + mg = mv²_b/r"
-    ],
-    "answer": 2,
-    "explain": "At bottom, T is upward and mg downward; net centripetal (upward) = T − mg = mv²/r.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "0fee9ef9-bb02-4749-b8b7-58710a923278",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "If angular speed doubles keeping radius same, centripetal force changes by factor?",
-    "formula": "F = mω²r",
-    "options": [
-      "4",
-      "1/2",
-      "8",
-      "2"
-    ],
-    "answer": 0,
-    "explain": "F ∝ ω²; doubling ω increases F by ω² factor = 4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9ccff4b3-e171-4e1f-b1da-241e1b8d70d7",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Dimension of angular momentum L?",
-    "formula": "L = mvr",
-    "options": [
-      "[M L² T⁻²]",
-      "[M² L T⁻¹]",
-      "[M L² T⁻¹]",
-      "[M L T⁻¹]"
-    ],
-    "answer": 2,
-    "explain": "L = mvr → kg·m/s·m = kg·m²·s⁻¹ = [M L² T⁻¹].",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "74252606-e7bd-414f-8ec3-477804d3b11f",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In uniform circular motion, the angle between centripetal acceleration and velocity is?",
-    "formula": "",
-    "options": [
-      "90°",
-      "180°",
-      "0°",
-      "45°"
-    ],
-    "answer": 0,
-    "explain": "Centripetal acceleration points radially inward; velocity is tangential — always perpendicular.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ca47e581-0993-43c1-8f1a-df8b45f85bcd",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a conical pendulum, what does cosθ equal (θ = semi-vertical angle, T = tension, mg = weight)?",
-    "formula": "cosθ = mg/T",
-    "options": [
-      "mg·sinθ/T",
-      "mg/T",
-      "T/mg",
-      "T·sinθ/mg"
-    ],
-    "answer": 1,
-    "explain": "Vertical equilibrium: T cosθ = mg, so cosθ = mg/T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7ad8fad4-bdbf-4774-b2bd-858aed6afe4b",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A particle moves in circle of radius r. After one full revolution, its displacement is?",
-    "formula": "",
-    "options": [
-      "2r",
-      "πr",
-      "Zero",
-      "2πr"
-    ],
-    "answer": 2,
-    "explain": "After one complete revolution, particle returns to start, so net displacement = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "83902517-cc3d-4304-ad40-6fb96ee102fc",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "If centripetal force on a body is F and radius becomes 3r (same speed), new centripetal force is?",
-    "formula": "F = mv²/r",
-    "options": [
-      "3F",
-      "F/9",
-      "F/3",
-      "9F"
-    ],
-    "answer": 2,
-    "explain": "F ∝ 1/r at constant speed; tripling r gives F/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "72fd1795-2dea-476b-8b14-15bd8aec094c",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a banked road (angle θ), the component of normal force providing centripetal force is?",
-    "formula": "N sinθ",
-    "options": [
-      "N/sinθ",
-      "N cosθ",
-      "N sinθ",
-      "N tanθ"
-    ],
-    "answer": 2,
-    "explain": "Horizontal component N sinθ acts centripetally on a banked frictionless road.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7bf78ca2-b9af-4263-9116-13eb6fdb93ad",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A stone is whirled in a vertical circle. The tension is maximum when the stone is at?",
-    "formula": "T = mv²/r + mg cosφ",
-    "options": [
-      "Top of circle",
-      "45° from bottom",
-      "Bottom of circle",
-      "Horizontal position"
-    ],
-    "answer": 2,
-    "explain": "At bottom, both mv²/r and mg contribute positively to tension, making it maximum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ceab1dac-cd15-46d2-aa7d-e85e50842867",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A body of mass m moves in horizontal circle of radius r on smooth table with string tension T. Speed v = ?",
-    "formula": "v = √(Tr/m)",
-    "options": [
-      "√(Tr/m)",
-      "√(T/mr)",
-      "√(Tmr)",
-      "T/mr"
-    ],
-    "answer": 0,
-    "explain": "Tension provides centripetal force: T = mv²/r ⟹ v = √(Tr/m).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "88256877-465d-4e59-afb0-3d7e84ca079f",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In vertical circular motion (string), minimum tension occurs at?",
-    "formula": "",
-    "options": [
-      "Top",
-      "45° from top",
-      "Horizontal position",
-      "Bottom"
-    ],
-    "answer": 0,
-    "explain": "At top, both gravity and tension act toward center but gravity reduces required tension contribution.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e689f273-3f80-4400-b460-9e8b0d264149",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "Skidding of a vehicle on flat road occurs when friction force required exceeds?",
-    "formula": "mv²/r > μmg",
-    "options": [
-      "mv²",
-      "mg",
-      "μmv",
-      "μmg"
-    ],
-    "answer": 3,
-    "explain": "Centripetal force needed mv²/r must not exceed max static friction μmg; skid if mv²/r > μmg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "620edc78-36f4-4922-826e-72d6ceda3293",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a cyclist taking a turn of radius r at speed v, lean angle from vertical θ satisfies?",
-    "formula": "tanθ = v²/rg",
-    "options": [
-      "tanθ = v²/rg",
-      "tanθ = rg/v²",
-      "sinθ = v²/rg",
-      "cosθ = v²/rg"
-    ],
-    "answer": 0,
-    "explain": "Leaning provides centripetal component; equilibrium gives tanθ = v²/rg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6e393c30-c6ba-4d24-bf50-9b1904e50d84",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In a death-well (vertical cylinder), minimum speed so rider doesn't fall: centripetal force from wall equals?",
-    "formula": "N = mv²/r",
-    "options": [
-      "μmg",
-      "mv/r",
-      "mg",
-      "mv²/r"
-    ],
-    "answer": 3,
-    "explain": "Normal force N from wall provides centripetal force: N = mv²/r (horizontal circle).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "54303ebb-5f13-419e-8239-e12a17d58f25",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "In death-well, minimum speed v_min at which μN ≥ mg (rider doesn't slide down) is?",
-    "formula": "v_min = √(rg/μ)",
-    "options": [
-      "√(μrg)",
-      "√(rg)",
-      "√(rg/μ)",
-      "√(g/μr)"
-    ],
-    "answer": 2,
-    "explain": "μN = μmv²/r ≥ mg ⟹ v ≥ √(rg/μ); this is the minimum speed.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "625d44f6-7816-4bf0-b333-2cb957b0c7bb",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A satellite orbits Earth in circular orbit of radius R. Its speed v is related to orbital radius by?",
-    "formula": "v ∝ 1/√R",
-    "options": [
-      "v ∝ 1/√R",
-      "v ∝ √R",
-      "v ∝ 1/R",
-      "v ∝ R"
-    ],
-    "answer": 0,
-    "explain": "GMm/R² = mv²/R ⟹ v = √(GM/R) ∝ 1/√R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "a9f3db9c-5893-4656-84fb-c9a460bcaab0",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "For a particle in vertical circle on OUTSIDE of track, it leaves when?",
-    "formula": "mg cosθ = mv²/r",
-    "options": [
-      "Speed is minimum",
-      "Normal force becomes zero",
-      "Normal force is maximum",
-      "Tension equals weight"
-    ],
-    "answer": 1,
-    "explain": "On outer surface, N = mg cosθ − mv²/r; contact lost when N = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "bf224155-173c-4341-a054-cf0d30171b47",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A coin on rotating turntable flies off when angular speed exceeds?",
-    "formula": "ω_max = √(μg/r)",
-    "options": [
-      "√(μg/r)",
-      "μg/r",
-      "√(g/μr)",
-      "√(μg·r)"
-    ],
-    "answer": 0,
-    "explain": "Static friction provides centripetal force: μmg = mω²r → ω = √(μg/r).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "11f64b91-2bbf-4220-a56c-3464831a9bf9",
-    "subject": "Physics",
-    "chapter": "Circular Motion",
-    "topic": "Circular Motion",
-    "prompt": "A particle moves in circle radius r with angular speed ω. Its linear speed v = ?",
-    "formula": "v = ωr",
-    "options": [
-      "ω/r",
-      "ω²r",
-      "r/ω",
-      "ωr"
-    ],
-    "answer": 3,
-    "explain": "Fundamental relation: linear speed v = ωr.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  }
+ {
+  "id": "9b506148-5c24-402e-83ed-e2098b3f0c41",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Centripetal acceleration formula",
+  "formula": "a = v²/r = ω²r",
+  "options": [
+   "v/r² toward center",
+   "v²/r toward center",
+   "v²/r away from center",
+   "vr toward center"
+  ],
+  "answer": 1,
+  "explain": "Centripetal acceleration always points toward the center; magnitude = v²/r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fc5cb983-0290-4117-9685-bd6794a7d267",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "Centripetal force on mass m in circular motion",
+  "formula": "F = mv²/r",
+  "options": [
+   "mvr",
+   "mv²/r",
+   "mv/r²",
+   "m²v/r"
+  ],
+  "answer": 1,
+  "explain": "Net inward force required for circular motion is mv²/r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "fba8b7d3-6f22-4c44-abe7-02b126b7db54",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "Relation between linear speed v and angular speed ω",
+  "formula": "v = ωr",
+  "options": [
+   "v = ωr",
+   "v = r/ω",
+   "v = ω/r",
+   "v = ω²r"
+  ],
+  "answer": 0,
+  "explain": "Linear speed equals angular speed times radius of the circular path.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "705a3414-c761-45a0-93a3-ec1d4e70338e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "Time period T in terms of angular frequency ω",
+  "formula": "T = 2π/ω",
+  "options": [
+   "π/ω",
+   "2π/ω",
+   "2ω/π",
+   "ω/2π"
+  ],
+  "answer": 1,
+  "explain": "One complete revolution corresponds to angle 2π, so T = 2π/ω.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a389ad19-1cf1-4d6f-a74d-9131f8f7733f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "Banking angle θ for frictionless road (speed v, radius r)",
+  "formula": "tan θ = v²/rg",
+  "options": [
+   "sin θ = v²/rg",
+   "cos θ = v²/rg",
+   "tan θ = rg/v²",
+   "tan θ = v²/rg"
+  ],
+  "answer": 3,
+  "explain": "On banked frictionless road, normal force components give tan θ = v²/rg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd152afb-7dda-4969-afc1-781c7458a481",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Minimum speed at top of vertical loop to maintain contact",
+  "formula": "v_min = √(rg)",
+  "options": [
+   "√(rg)",
+   "√(rg/2)",
+   "√(2rg)",
+   "√(5rg)"
+  ],
+  "answer": 0,
+  "explain": "At top, mg provides centripetal force minimally; mv²/r = mg gives v = √(rg).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "66526f55-f988-41ab-b8f3-5c828bf0868f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Minimum speed at bottom of vertical loop",
+  "formula": "v_bottom = √(5rg)",
+  "options": [
+   "√(rg)",
+   "√(2rg)",
+   "√(5rg)",
+   "√(3rg)"
+  ],
+  "answer": 2,
+  "explain": "Energy conservation from top (v=√rg) to bottom gives v_bottom = √(5rg).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dc67d86f-f4b9-4d9b-bb2c-8ffcfffe5490",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "Normal force at bottom of vertical circular loop",
+  "formula": "N = mg + mv²/r",
+  "options": [
+   "mg + mv²/r",
+   "mg",
+   "mg − mv²/r",
+   "mv²/r"
+  ],
+  "answer": 0,
+  "explain": "At bottom, N − mg = mv²/r (both N and centripetal force upward).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e34230a3-d03e-409a-8aed-a5fb52626657",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "Normal force at top of vertical circular loop",
+  "formula": "N = mv²/r − mg",
+  "options": [
+   "mv²/r − mg",
+   "mv²/r",
+   "mg − mv²/r",
+   "mg + mv²/r"
+  ],
+  "answer": 0,
+  "explain": "At top, N + mg = mv²/r; so N = mv²/r − mg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2595a4e9-8b94-4dea-b5f2-1cad83aa5ecb",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "Maximum safe speed on a flat road with friction μ",
+  "formula": "v_max = √(μrg)",
+  "options": [
+   "√(μrg)",
+   "√(rg/μ)",
+   "μrg",
+   "√(μg/r)"
+  ],
+  "answer": 0,
+  "explain": "Friction provides centripetal force: μmg = mv²/r → v = √(μrg).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e8ab817e-6aab-474d-b39c-447679204368",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Centripetal acceleration in terms of T (time period)",
+  "formula": "a = 4π²r/T²",
+  "options": [
+   "4π²r/T²",
+   "4π²r²/T",
+   "πr/T²",
+   "2πr/T²"
+  ],
+  "answer": 0,
+  "explain": "v = 2πr/T, so a = v²/r = 4π²r/T².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e7f651ea-e0c6-4a38-9cf2-e1c70ad8a24e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "Angle subtended in time t at angular speed ω",
+  "formula": "θ = ωt",
+  "options": [
+   "t/ω",
+   "ωt",
+   "ω²t",
+   "ω/t"
+  ],
+  "answer": 1,
+  "explain": "For uniform circular motion, angular displacement θ = ωt.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "40808028-427a-4d3d-ba2c-d3ef1f65de41",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Work done by centripetal force in uniform circular motion",
+  "formula": "W = 0",
+  "options": [
+   "mv²",
+   "mv²/r per second",
+   "2πmv²/r",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Centripetal force is perpendicular to velocity, so work done is always zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "018a5a76-6e0e-4860-8d6a-e740fdee1181",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "Tension at angle θ from bottom in vertical circle (speed v)",
+  "formula": "T = mv²/r + mg cosθ",
+  "options": [
+   "mv²/r − mg cosθ",
+   "mv²/r + mg cosθ",
+   "mv²/r",
+   "mv²/r + mg sinθ"
+  ],
+  "answer": 1,
+  "explain": "Radial equation: T − mg cosθ = mv²/r at angle θ from bottom of loop.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "05c68de4-3f12-45a0-bfc9-b9881ebbe62e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "For uniform circular motion, which quantity is constant?",
+  "formula": "",
+  "options": [
+   "Acceleration vector is constant",
+   "Speed (magnitude of velocity)",
+   "Kinetic energy changes",
+   "Velocity vector is constant"
+  ],
+  "answer": 1,
+  "explain": "In UCM, speed and KE are constant; velocity and acceleration directions change continuously.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0d29fac4-a473-449d-9560-0fa1447c387e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "Optimum speed on banked road (with friction μ, angle θ)",
+  "formula": "v_opt = √(rg tanθ)",
+  "options": [
+   "√(rg cosθ)",
+   "√(rg sinθ)",
+   "√(rg/tanθ)",
+   "√(rg tanθ)"
+  ],
+  "answer": 3,
+  "explain": "At optimum speed, friction is zero; only banking provides centripetal force.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "30ccdad2-fcdb-4fcf-8e98-0d8c7a82538e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "Conical pendulum: time period T depends on",
+  "formula": "T = 2π√(L cosθ/g)",
+  "options": [
+   "2π√(L cosθ/g)",
+   "2π√(L sinθ/g)",
+   "2π√(L/g)",
+   "2π√(g/L cosθ)"
+  ],
+  "answer": 0,
+  "explain": "For conical pendulum, vertical equilibrium gives T = 2π√(L cosθ/g).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d54ac1dc-38b7-4a9c-a56b-9d1b50ca14b9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "Tangential acceleration in circular motion",
+  "formula": "aₜ = r·α",
+  "options": [
+   "ω²r",
+   "r·α",
+   "v·ω",
+   "v²/r"
+  ],
+  "answer": 1,
+  "explain": "Tangential acceleration aₜ = r·α where α is angular acceleration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bf2e2618-8c50-44a9-819f-9cae43bd97ce",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "Relation between angular acceleration α and linear acceleration aₜ",
+  "formula": "aₜ = rα",
+  "options": [
+   "aₜ = r²α",
+   "aₜ = α/r",
+   "aₜ = rα",
+   "aₜ = r/α"
+  ],
+  "answer": 2,
+  "explain": "Just as v = rω, differentiating gives tangential acceleration aₜ = rα.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "85b021b7-f4dd-4f98-a68c-2f3d8cebcfe9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "Frequency f and angular speed ω relation",
+  "formula": "ω = 2πf",
+  "options": [
+   "ω = 2πf",
+   "ω = f²",
+   "ω = πf",
+   "ω = f/2π"
+  ],
+  "answer": 0,
+  "explain": "Each cycle covers 2π radians, so ω = 2πf.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8d58e751-745b-400e-84e1-edaee3b720cb",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "Net force on particle in uniform circular motion",
+  "formula": "F_net = mv²/r (centripetal)",
+  "options": [
+   "Constant magnitude, changing direction",
+   "Constant in magnitude and direction",
+   "Changing magnitude only",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "In UCM, |F_net| = mv²/r is constant but direction continuously changes toward center.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "83f4603f-c8a4-4ed1-a001-27c644288f7a",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Centripetal acceleration in terms of ω and r?",
+  "formula": "a = ω²r",
+  "options": [
+   "ωr²",
+   "ω²/r",
+   "ω²r",
+   "ωr"
+  ],
+  "answer": 2,
+  "explain": "Centripetal acceleration = ω²r, directed toward center.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6ac10308-4f4d-45ef-bcb3-5bb0e63615e4",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Circular Motion",
+  "prompt": "Radius of circular path of charge q in magnetic field B?",
+  "formula": "r = mv/(qB)",
+  "options": [
+   "qBv/m",
+   "mv/qB",
+   "mv²/qB",
+   "qB/mv"
+  ],
+  "answer": 1,
+  "explain": "Magnetic force provides centripetal force: qvB = mv²/r → r = mv/qB.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9684ef3e-01c4-4d8b-b7d7-975e58e3be49",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "In vertical circle, speed at top if speed at bottom is v₀?",
+  "formula": "v_top²= v₀²− 4gR",
+  "options": [
+   "v₀²−5gR",
+   "v₀²−2gR",
+   "v₀²−4gR",
+   "v₀²−gR"
+  ],
+  "answer": 2,
+  "explain": "Energy conservation: ½mv₀² = ½mv_top² + mg(2R) → v_top² = v₀²−4gR.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "121228f1-50a1-4bbe-ae77-dc72358db004",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "For a particle in uniform circular motion, acceleration is?",
+  "formula": "",
+  "options": [
+   "Perpendicular to velocity",
+   "Zero",
+   "Parallel to velocity",
+   "At 45° to velocity"
+  ],
+  "answer": 0,
+  "explain": "Centripetal acceleration is always directed toward center, perpendicular to velocity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "56a2c880-93b1-4cac-85de-ba3b7069f453",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "In a conical pendulum, tension T in the string equals?",
+  "formula": "T = mg/cosθ",
+  "options": [
+   "mg/sinθ",
+   "mg/cosθ",
+   "mg·cosθ",
+   "mg·tanθ"
+  ],
+  "answer": 1,
+  "explain": "Vertical equilibrium: T·cosθ = mg → T = mg/cosθ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d036d1ee-bdca-4b8c-a0fe-99010c9cd423",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Circular Motion",
+  "prompt": "Angular momentum L of particle in circular motion?",
+  "formula": "L = mvr",
+  "options": [
+   "mr²/v",
+   "mvr",
+   "mv²r",
+   "mv/r"
+  ],
+  "answer": 1,
+  "explain": "L = r × p; for circular motion, L = mvr (perpendicular r and v).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3c919580-7b49-4de3-b438-21eeec210891",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "Centripetal force in terms of angular speed ω?",
+  "formula": "F = mω²r",
+  "options": [
+   "mω²r",
+   "mω²/r",
+   "mωr²",
+   "mωr"
+  ],
+  "answer": 0,
+  "explain": "F = mv²/r and v = ωr → F = mω²r directed toward center.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "976a5f37-9472-4b0d-bbb5-23dd1ba99160",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Which physical quantity changes in uniform circular motion?",
+  "formula": "",
+  "options": [
+   "Velocity",
+   "Kinetic energy",
+   "Angular speed",
+   "Speed"
+  ],
+  "answer": 0,
+  "explain": "Velocity (a vector) changes direction continuously; speed and KE remain constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "af21dc34-23a5-4fc2-985f-e5f519bb1a98",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Radius of curvature of a trajectory",
+  "prompt": "Radius of curvature of projectile at highest point (initial speed u, angle θ)?",
+  "formula": "R = u²cos²θ/g",
+  "options": [
+   "u²cosθ/g",
+   "u²cos²θ/g",
+   "u²/g",
+   "u²sin²θ/g"
+  ],
+  "answer": 1,
+  "explain": "At top, speed = ucosθ; centripetal acc = g → R = v²/g = u²cos²θ/g.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "81147995-0b7b-4049-ac7e-8db8cd629c47",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Critical velocity at top of vertical loop to just maintain contact?",
+  "formula": "v = √(gR)",
+  "options": [
+   "√(gR)",
+   "√(5gR)",
+   "√(3gR)",
+   "√(2gR)"
+  ],
+  "answer": 0,
+  "explain": "At top, N=0 → mg = mv²/R → v = √(gR) is the minimum speed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bf2ce170-dad5-4a19-b8e2-17de69c50ae9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "If particle moves in circle of radius r with speed v, its acceleration magnitude?",
+  "formula": "a = v²/r",
+  "options": [
+   "v²/r",
+   "v/r²",
+   "v²r",
+   "vr"
+  ],
+  "answer": 0,
+  "explain": "Centripetal acceleration magnitude = v²/r, always pointing toward center.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "81428c3c-1c31-487a-8336-a4776a71d6a3",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "Net acceleration magnitude in non-uniform circular motion?",
+  "formula": "a = √(aₜ²+ac²)",
+  "options": [
+   "√(aₜ²−ac²)",
+   "aₜ + ac",
+   "aₜ − ac",
+   "√(aₜ²+ac²)"
+  ],
+  "answer": 3,
+  "explain": "Tangential and centripetal accelerations are perpendicular; net = √(aₜ²+ac²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b308c053-6c3d-4c86-a206-d184a07a7bd7",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "A particle completes n revolutions per second. Its angular speed ω is?",
+  "formula": "ω = 2πn",
+  "options": [
+   "πn",
+   "2πn",
+   "2π/n",
+   "n/2π"
+  ],
+  "answer": 1,
+  "explain": "Frequency f = n rev/s; ω = 2πf = 2πn rad/s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0dff6e42-a72c-4177-bea9-7cce7aba0e9c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "Centripetal force direction relative to velocity in UCM?",
+  "formula": "",
+  "options": [
+   "Opposite to velocity",
+   "Parallel to velocity",
+   "At 45° to velocity",
+   "Perpendicular to velocity"
+  ],
+  "answer": 3,
+  "explain": "Centripetal force always points toward center, hence perpendicular to instantaneous velocity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6e622286-bb39-4096-b5ea-a2751502628c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "For a car on flat road, which force provides centripetal force?",
+  "formula": "",
+  "options": [
+   "Gravity",
+   "Friction (static)",
+   "Friction (kinetic)",
+   "Normal force"
+  ],
+  "answer": 1,
+  "explain": "Static friction between tyres and road acts inward, providing centripetal force on flat curves.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e8e35b45-ee60-4164-88ed-1e6236cd5435",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "In vertical circle, point where normal force is maximum?",
+  "formula": "",
+  "options": [
+   "Top",
+   "Midpoint (side)",
+   "Bottom",
+   "Same everywhere"
+  ],
+  "answer": 2,
+  "explain": "At bottom, N = mg + mv²/r, so normal force is maximum at the bottom of the vertical circle.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d6cd9ec8-a0e1-4499-ac85-9c2f30ea117f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "Tension difference T_bottom − T_top in vertical circular motion?",
+  "formula": "T_b − T_t = 6mg",
+  "options": [
+   "6mg",
+   "2mg",
+   "4mg",
+   "3mg"
+  ],
+  "answer": 0,
+  "explain": "Using energy conservation and Newton's law at both points gives T_bottom − T_top = 6mg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7d9895cd-923e-4fa4-8c63-1e92118ec425",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "In vertical circle, where is speed of particle minimum?",
+  "formula": "",
+  "options": [
+   "Top",
+   "Same everywhere",
+   "Midpoint",
+   "Bottom"
+  ],
+  "answer": 0,
+  "explain": "By energy conservation, maximum height is at top, so KE (and speed) is minimum at the top.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "38be9cee-2723-4809-9865-0dbc8abe8de0",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "A stone tied to string, string breaks: stone moves in which direction?",
+  "formula": "",
+  "options": [
+   "Away from center",
+   "Radially outward curving",
+   "Toward center",
+   "Tangentially"
+  ],
+  "answer": 3,
+  "explain": "On breaking, centripetal force vanishes; stone flies off tangentially (Newton's first law).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7150e7b-4af7-4f8f-b636-b3079376d722",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "Conical pendulum: what is the semi-vertical angle θ related to?",
+  "formula": "tanθ = ω²r/g",
+  "options": [
+   "tanθ = g/ω²r",
+   "tanθ = ω²r/g",
+   "sinθ = ω²r/g",
+   "cosθ = ω²r/g"
+  ],
+  "answer": 1,
+  "explain": "Horizontal: T sinθ = mω²r; vertical: T cosθ = mg. Dividing gives tanθ = ω²r/g.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "01223cae-51e4-4f23-a54e-0f4fb644b890",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "If radius of circular motion doubles (same speed), centripetal acceleration?",
+  "formula": "a = v²/r",
+  "options": [
+   "Doubles",
+   "Halves",
+   "Quadruples",
+   "Remains same"
+  ],
+  "answer": 1,
+  "explain": "a = v²/r; doubling r at constant v halves the centripetal acceleration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6632bd5b-6806-46c8-8fa1-bfcd18011d39",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "If speed doubles (same radius), centripetal force changes by factor?",
+  "formula": "F = mv²/r",
+  "options": [
+   "1/2",
+   "2",
+   "4",
+   "8"
+  ],
+  "answer": 2,
+  "explain": "F ∝ v²; doubling speed quadruples the required centripetal force.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "bd3dcb42-57cb-4ce6-b0df-fa46c4423eda",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Centripetal acceleration in terms of T (time period) and r?",
+  "formula": "a = 4π²r/T²",
+  "options": [
+   "πr/T²",
+   "2π²r/T²",
+   "4π²r/T²",
+   "2πr/T²"
+  ],
+  "answer": 2,
+  "explain": "v = 2πr/T, so a = v²/r = 4π²r/T².",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7caac20e-fc3c-480a-ba86-37b40506b3fc",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "For circular motion on banked road, what is the ideal (no-friction) banking speed?",
+  "formula": "v = √(rg tanθ)",
+  "options": [
+   "√(rg cosθ)",
+   "√(rg/tanθ)",
+   "√(rg tanθ)",
+   "√(rg sinθ)"
+  ],
+  "answer": 2,
+  "explain": "On frictionless banked road: tan θ = v²/rg, so ideal speed v = √(rg tanθ).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e0fc99fb-34bb-474a-8c70-764386a59b5f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "Cyclist bends inward while turning: angle with vertical θ satisfies?",
+  "formula": "tanθ = v²/rg",
+  "options": [
+   "tanθ = v²/rg",
+   "sinθ = v²/rg",
+   "tanθ = rg/v²",
+   "cosθ = v²/rg"
+  ],
+  "answer": 0,
+  "explain": "Cyclist leans so that tan θ = v²/rg to balance centripetal requirement with gravity.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ff383942-08cb-413d-b0e4-e9247ce5ab16",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "In a vertical circle, normal force at the side (θ = 90° from bottom) is?",
+  "formula": "N = mv²/r",
+  "options": [
+   "mv²/r",
+   "mv²/r − mg",
+   "mv²/r + mg/2",
+   "mv²/r + mg"
+  ],
+  "answer": 0,
+  "explain": "At the side, gravity acts downward (tangential), so N = mv²/r only (no mg component along radius).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "286b6573-b3ff-4a4b-b92f-dc8bc7818de8",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Circular Motion",
+  "prompt": "Angular impulse equals change in?",
+  "formula": "τ·t = ΔL",
+  "options": [
+   "Kinetic energy",
+   "Angular speed",
+   "Linear momentum",
+   "Angular momentum"
+  ],
+  "answer": 3,
+  "explain": "Torque × time = angular impulse = change in angular momentum (ΔL).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "75e9385b-18e0-4cf9-8935-4785c0812477",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "For uniform circular motion, which of these is zero?",
+  "formula": "",
+  "options": [
+   "Centripetal acceleration",
+   "Angular speed",
+   "Linear speed",
+   "Tangential acceleration"
+  ],
+  "answer": 3,
+  "explain": "Uniform circular motion means constant speed, so tangential acceleration = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "abfbf51c-6da8-4cbe-9f54-89c0b560002b",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "For a ball on string in vertical circle, at what point is tension least?",
+  "formula": "",
+  "options": [
+   "Depends on mass",
+   "Side (θ=90°)",
+   "Top",
+   "Bottom"
+  ],
+  "answer": 2,
+  "explain": "Tension T = mv²/r − mg cosα; at top (α=0 from top), gravity aids centripetal, so tension is minimum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "26b4f7ee-cfc5-4e14-b051-b8a92a77d129",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "If radius is halved keeping angular speed constant, centripetal acceleration?",
+  "formula": "a = ω²r",
+  "options": [
+   "Doubles",
+   "Quadruples",
+   "Remains same",
+   "Halves"
+  ],
+  "answer": 3,
+  "explain": "a = ω²r; halving r at constant ω halves centripetal acceleration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7ba50507-7539-4465-b9f4-1002abf9c5c4",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "Skidding condition for car on flat road (mass m, speed v, radius r)?",
+  "formula": "mv²/r > μmg",
+  "options": [
+   "v > √(μg/r)",
+   "v > √(μrg)",
+   "v > μ²rg",
+   "v > μrg"
+  ],
+  "answer": 1,
+  "explain": "Skidding occurs when required centripetal force exceeds maximum static friction μmg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9dfb4f30-bfd7-404f-8513-1a4787b96e0b",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "A particle moves in a circle. Its angular displacement θ in time t at constant α (initial ω₀)?",
+  "formula": "θ = ω₀t + ½αt²",
+  "options": [
+   "ω₀t + αt²",
+   "ω₀t − ½αt²",
+   "ω₀t + ½αt²",
+   "½αt²"
+  ],
+  "answer": 2,
+  "explain": "Rotational kinematics mirrors linear: θ = ω₀t + ½αt² for constant angular acceleration.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7e82d743-2ea2-4ac6-9171-474beaa106d0",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "Maximum speed on banked road WITH friction (angle θ, coefficient μ)?",
+  "formula": "v_max=√[rg(tanθ+μ)/(1−μtanθ)]",
+  "options": [
+   "√(rg tanθ)",
+   "√[rg(tanθ−μ)/(1+μtanθ)]",
+   "√(rg·μ)",
+   "√[rg(tanθ+μ)/(1−μtanθ)]"
+  ],
+  "answer": 3,
+  "explain": "Friction acts up the slope at max speed; combining equations gives this expression.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77ef9c05-2e7b-479d-81f3-be11ec453947",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "In a vertical circle, tension at the TOP when speed at top is v_t?",
+  "formula": "T = mv²_t/r − mg",
+  "options": [
+   "mv²_t/r + mg",
+   "mv²_t/r − mg",
+   "mv²_t/r",
+   "mg − mv²_t/r"
+  ],
+  "answer": 1,
+  "explain": "At top, both T and mg point toward centre: T + mg = mv²/r, so T = mv²/r − mg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "77ca3a70-a1dd-41bb-8963-d875f6f72481",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "For a particle in circular motion, the torque of centripetal force about the centre is?",
+  "formula": "τ = r × F",
+  "options": [
+   "mvr",
+   "mrω²",
+   "Zero",
+   "mv²/r"
+  ],
+  "answer": 2,
+  "explain": "Centripetal force is along the radius; r × F = 0 since they are anti-parallel (angle = 180°).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d17ef123-c4fa-40ff-a54b-cd9e5d23ee06",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Circular Motion",
+  "prompt": "A body moves in a circle of radius r. Its displacement after half revolution is?",
+  "formula": "",
+  "options": [
+   "πr",
+   "2πr",
+   "2r",
+   "r"
+  ],
+  "answer": 2,
+  "explain": "Displacement is the straight-line distance between start and end; after half circle it equals diameter 2r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "baad814e-2cff-4c95-82b2-0a9096f489bd",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "For circular motion, power delivered by centripetal force is?",
+  "formula": "P = F·v cosθ",
+  "options": [
+   "Zero",
+   "mv²/r",
+   "mv²ω",
+   "mv³/r"
+  ],
+  "answer": 0,
+  "explain": "Centripetal force ⊥ velocity always, so P = F·v cos90° = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f54f9d03-35c4-456b-945c-4e9b3d421d0b",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "A particle in UCM has speed v. Magnitude of change in velocity in half revolution?",
+  "formula": "|Δv| = 2v",
+  "options": [
+   "2v",
+   "√2 v",
+   "0",
+   "v"
+  ],
+  "answer": 0,
+  "explain": "After half revolution velocity reverses: |Δv| = |v − (−v)| = 2v.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "84276b3d-d4cc-4f08-b13d-74f30e527184",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Angle between velocity and acceleration in uniform circular motion?",
+  "formula": "",
+  "options": [
+   "90°",
+   "45°",
+   "180°",
+   "0°"
+  ],
+  "answer": 0,
+  "explain": "In UCM acceleration is centripetal (radial inward) while velocity is tangential; they are perpendicular.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "365a79f4-499c-4c93-b98b-5f0e48d1f086",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "A motorcyclist rides inside a hollow sphere of radius R. Minimum speed at top to maintain contact?",
+  "formula": "v_min = √(gR)",
+  "options": [
+   "√(5gR)",
+   "√(2gR)",
+   "√(gR)",
+   "√(gR/2)"
+  ],
+  "answer": 2,
+  "explain": "At top of sphere, N + mg = mv²/R; for N ≥ 0, minimum v = √(gR).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "d8a5227a-54bf-48f3-a0c1-f5936a168421",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "String of length L, mass m whirled in horizontal circle: tension equals?",
+  "formula": "T = mω²L",
+  "options": [
+   "mg",
+   "mω²L + mg",
+   "mω²L",
+   "mω²L − mg"
+  ],
+  "answer": 2,
+  "explain": "For horizontal circle (string horizontal), tension provides centripetal force: T = mω²r = mω²L.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3ca22cde-2910-42f6-a1e4-e14b5df881b3",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "In vertical circular motion, the particle is most likely to lose contact at?",
+  "formula": "",
+  "options": [
+   "Side (θ=90°)",
+   "Any point equally",
+   "Bottom of the circle",
+   "Top of the circle"
+  ],
+  "answer": 3,
+  "explain": "At the top, both gravity and normal force point inward; speed is minimum here so contact is lost first.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bbfc9088-230b-4803-956f-102d15063ab5",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "Centripetal force required for a car of mass m at speed v on circular road of radius r?",
+  "formula": "F = mv²/r",
+  "options": [
+   "mv²r",
+   "mv/r²",
+   "mv²/r",
+   "m²v/r"
+  ],
+  "answer": 2,
+  "explain": "Standard centripetal force formula F = mv²/r; provided by friction on flat road.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "f6f2a99c-4acf-4009-b921-a862bf182ed9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "In a vertical circle (string), at the bottom the net upward force on mass m (speed v_b)?",
+  "formula": "T − mg = mv²_b/r",
+  "options": [
+   "T = mg",
+   "T − mg = 0",
+   "T − mg = mv²_b/r",
+   "T + mg = mv²_b/r"
+  ],
+  "answer": 2,
+  "explain": "At bottom, T is upward and mg downward; net centripetal (upward) = T − mg = mv²/r.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "0fee9ef9-bb02-4749-b8b7-58710a923278",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "If angular speed doubles keeping radius same, centripetal force changes by factor?",
+  "formula": "F = mω²r",
+  "options": [
+   "4",
+   "1/2",
+   "8",
+   "2"
+  ],
+  "answer": 0,
+  "explain": "F ∝ ω²; doubling ω increases F by ω² factor = 4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9ccff4b3-e171-4e1f-b1da-241e1b8d70d7",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Circular Motion",
+  "prompt": "Dimension of angular momentum L?",
+  "formula": "L = mvr",
+  "options": [
+   "[M L² T⁻²]",
+   "[M² L T⁻¹]",
+   "[M L² T⁻¹]",
+   "[M L T⁻¹]"
+  ],
+  "answer": 2,
+  "explain": "L = mvr → kg·m/s·m = kg·m²·s⁻¹ = [M L² T⁻¹].",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "74252606-e7bd-414f-8ec3-477804d3b11f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "In uniform circular motion, the angle between centripetal acceleration and velocity is?",
+  "formula": "",
+  "options": [
+   "90°",
+   "180°",
+   "0°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "Centripetal acceleration points radially inward; velocity is tangential — always perpendicular.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ca47e581-0993-43c1-8f1a-df8b45f85bcd",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "For a conical pendulum, what does cosθ equal (θ = semi-vertical angle, T = tension, mg = weight)?",
+  "formula": "cosθ = mg/T",
+  "options": [
+   "mg·sinθ/T",
+   "mg/T",
+   "T/mg",
+   "T·sinθ/mg"
+  ],
+  "answer": 1,
+  "explain": "Vertical equilibrium: T cosθ = mg, so cosθ = mg/T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7ad8fad4-bdbf-4774-b2bd-858aed6afe4b",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Circular Motion",
+  "prompt": "A particle moves in circle of radius r. After one full revolution, its displacement is?",
+  "formula": "",
+  "options": [
+   "2r",
+   "πr",
+   "Zero",
+   "2πr"
+  ],
+  "answer": 2,
+  "explain": "After one complete revolution, particle returns to start, so net displacement = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "83902517-cc3d-4304-ad40-6fb96ee102fc",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "If centripetal force on a body is F and radius becomes 3r (same speed), new centripetal force is?",
+  "formula": "F = mv²/r",
+  "options": [
+   "3F",
+   "F/9",
+   "F/3",
+   "9F"
+  ],
+  "answer": 2,
+  "explain": "F ∝ 1/r at constant speed; tripling r gives F/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "72fd1795-2dea-476b-8b14-15bd8aec094c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "For a banked road (angle θ), the component of normal force providing centripetal force is?",
+  "formula": "N sinθ",
+  "options": [
+   "N/sinθ",
+   "N cosθ",
+   "N sinθ",
+   "N tanθ"
+  ],
+  "answer": 2,
+  "explain": "Horizontal component N sinθ acts centripetally on a banked frictionless road.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7bf78ca2-b9af-4263-9116-13eb6fdb93ad",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "A stone is whirled in a vertical circle. The tension is maximum when the stone is at?",
+  "formula": "T = mv²/r + mg cosφ",
+  "options": [
+   "Top of circle",
+   "45° from bottom",
+   "Bottom of circle",
+   "Horizontal position"
+  ],
+  "answer": 2,
+  "explain": "At bottom, both mv²/r and mg contribute positively to tension, making it maximum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ceab1dac-cd15-46d2-aa7d-e85e50842867",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "A body of mass m moves in horizontal circle of radius r on smooth table with string tension T. Speed v = ?",
+  "formula": "v = √(Tr/m)",
+  "options": [
+   "√(Tr/m)",
+   "√(T/mr)",
+   "√(Tmr)",
+   "T/mr"
+  ],
+  "answer": 0,
+  "explain": "Tension provides centripetal force: T = mv²/r ⟹ v = √(Tr/m).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "88256877-465d-4e59-afb0-3d7e84ca079f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "In vertical circular motion (string), minimum tension occurs at?",
+  "formula": "",
+  "options": [
+   "Top",
+   "45° from top",
+   "Horizontal position",
+   "Bottom"
+  ],
+  "answer": 0,
+  "explain": "At top, both gravity and tension act toward center but gravity reduces required tension contribution.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e689f273-3f80-4400-b460-9e8b0d264149",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "Skidding of a vehicle on flat road occurs when friction force required exceeds?",
+  "formula": "mv²/r > μmg",
+  "options": [
+   "mv²",
+   "mg",
+   "μmv",
+   "μmg"
+  ],
+  "answer": 3,
+  "explain": "Centripetal force needed mv²/r must not exceed max static friction μmg; skid if mv²/r > μmg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "620edc78-36f4-4922-826e-72d6ceda3293",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "For a cyclist taking a turn of radius r at speed v, lean angle from vertical θ satisfies?",
+  "formula": "tanθ = v²/rg",
+  "options": [
+   "tanθ = v²/rg",
+   "tanθ = rg/v²",
+   "sinθ = v²/rg",
+   "cosθ = v²/rg"
+  ],
+  "answer": 0,
+  "explain": "Leaning provides centripetal component; equilibrium gives tanθ = v²/rg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6e393c30-c6ba-4d24-bf50-9b1904e50d84",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "In a death-well (vertical cylinder), minimum speed so rider doesn't fall: centripetal force from wall equals?",
+  "formula": "N = mv²/r",
+  "options": [
+   "μmg",
+   "mv/r",
+   "mg",
+   "mv²/r"
+  ],
+  "answer": 3,
+  "explain": "Normal force N from wall provides centripetal force: N = mv²/r (horizontal circle).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "54303ebb-5f13-419e-8239-e12a17d58f25",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "In death-well, minimum speed v_min at which μN ≥ mg (rider doesn't slide down) is?",
+  "formula": "v_min = √(rg/μ)",
+  "options": [
+   "√(μrg)",
+   "√(rg)",
+   "√(rg/μ)",
+   "√(g/μr)"
+  ],
+  "answer": 2,
+  "explain": "μN = μmv²/r ≥ mg ⟹ v ≥ √(rg/μ); this is the minimum speed.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "625d44f6-7816-4bf0-b333-2cb957b0c7bb",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "A satellite orbits Earth in circular orbit of radius R. Its speed v is related to orbital radius by?",
+  "formula": "v ∝ 1/√R",
+  "options": [
+   "v ∝ 1/√R",
+   "v ∝ √R",
+   "v ∝ 1/R",
+   "v ∝ R"
+  ],
+  "answer": 0,
+  "explain": "GMm/R² = mv²/R ⟹ v = √(GM/R) ∝ 1/√R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "a9f3db9c-5893-4656-84fb-c9a460bcaab0",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Tension/normal force variation in vertical circle",
+  "prompt": "For a particle in vertical circle on OUTSIDE of track, it leaves when?",
+  "formula": "mg cosθ = mv²/r",
+  "options": [
+   "Speed is minimum",
+   "Normal force becomes zero",
+   "Normal force is maximum",
+   "Tension equals weight"
+  ],
+  "answer": 1,
+  "explain": "On outer surface, N = mg cosθ − mv²/r; contact lost when N = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "bf224155-173c-4341-a054-cf0d30171b47",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Rotating platforms, rods and turntables",
+  "prompt": "A coin on rotating turntable flies off when angular speed exceeds?",
+  "formula": "ω_max = √(μg/r)",
+  "options": [
+   "√(μg/r)",
+   "μg/r",
+   "√(g/μr)",
+   "√(μg·r)"
+  ],
+  "answer": 0,
+  "explain": "Static friction provides centripetal force: μmg = mω²r → ω = √(μg/r).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "11f64b91-2bbf-4220-a56c-3464831a9bf9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "A particle moves in circle radius r with angular speed ω. Its linear speed v = ?",
+  "formula": "v = ωr",
+  "options": [
+   "ω/r",
+   "ω²r",
+   "r/ω",
+   "ωr"
+  ],
+  "answer": 3,
+  "explain": "Fundamental relation: linear speed v = ωr.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "2d360c9a-acc1-4cd9-a72c-0cac5de16799",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "For a rigid body rotating about a fixed axis, which quantity is the same for all its particles?",
+  "formula": "",
+  "options": [
+   "Radius of the path",
+   "Angular velocity",
+   "Centripetal acceleration",
+   "Linear speed"
+  ],
+  "answer": 1,
+  "explain": "All particles sweep equal angles in equal time, so ω is common. v = ωr differs with r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "16ba485b-6bad-4145-b2ae-4fdd5b352047",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "In circular motion, the direction of angular velocity vector ω is:",
+  "formula": "",
+  "options": [
+   "Along the radius, outward",
+   "Along the radius, inward",
+   "Along the tangent",
+   "Along the axis, by right-hand rule"
+  ],
+  "answer": 3,
+  "explain": "ω is an axial vector along the axis of rotation, given by the right-hand rule.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b61ea8b2-bf90-47e1-95ee-ec006ec55be9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "In uniform circular motion, the angular acceleration α of the particle is:",
+  "formula": "",
+  "options": [
+   "Constant and nonzero",
+   "Zero",
+   "ω²",
+   "v²/r"
+  ],
+  "answer": 1,
+  "explain": "ω is constant, so α = dω/dt = 0; only the centripetal acceleration exists.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ec734bdd-2092-470f-998b-9e3792bdeda7",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Angular displacement, velocity, acceleration",
+  "prompt": "The slope of the angular velocity–time graph of a rotating body gives its:",
+  "formula": "α = dω/dt",
+  "options": [
+   "Moment of inertia",
+   "Centripetal acceleration",
+   "Angular displacement",
+   "Angular acceleration"
+  ],
+  "answer": 3,
+  "explain": "Slope of the ω–t graph = dω/dt = α, the angular acceleration.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "98f49f71-d8a1-4e27-833d-288f92c8073f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "Two pulleys are joined by a non-slipping belt. Which quantity is equal for points on their rims?",
+  "formula": "",
+  "options": [
+   "Angular speed",
+   "Linear speed",
+   "Angular acceleration",
+   "Centripetal acceleration"
+  ],
+  "answer": 1,
+  "explain": "The belt moves at one speed, so v is equal and ω₁r₁ = ω₂r₂; the smaller pulley spins faster.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c3d53f31-8759-480c-bf9a-caa66cf33a37",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "In non-uniform circular motion, the angle between a_t and a_c vectors is:",
+  "formula": "",
+  "options": [
+   "Depends on α",
+   "180°",
+   "90°",
+   "0°"
+  ],
+  "answer": 2,
+  "explain": "a_t acts along the tangent and a_c along the radius, so they are always perpendicular.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f8a52a41-ade9-4110-8f56-3a659f745df6",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "Two gears in contact (no slipping) have radii r₁ and r₂. Their angular speeds satisfy:",
+  "formula": "v₁ = v₂ ⇒ ω₁r₁ = ω₂r₂",
+  "options": [
+   "ω₁/ω₂ = r₁²/r₂²",
+   "ω₁/ω₂ = r₂/r₁",
+   "ω₁ = ω₂",
+   "ω₁/ω₂ = r₁/r₂"
+  ],
+  "answer": 1,
+  "explain": "Rim speeds are equal, so ωr is the same; ω is inversely proportional to r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "efb7bac8-cef6-45b1-b285-4af813a811e7",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "Constant α, initial angular velocity ω₀. Angular velocity after time t is",
+  "formula": "ω = ω₀ + αt",
+  "options": [
+   "ω₀ + 2αt",
+   "ω₀ + ½αt²",
+   "ω₀t + αt",
+   "ω₀ + αt"
+  ],
+  "answer": 3,
+  "explain": "The rotational analogue of v = u + at.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fd1f7eba-5a4c-4179-a6e4-33029ec0bf2d",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "Time-independent rotational equation for constant α relating ω, ω₀, θ is",
+  "formula": "ω² = ω₀² + 2αθ",
+  "options": [
+   "ω² = ω₀² + 2αθ",
+   "ω² = ω₀² + αθ",
+   "ω² = ω₀ + 2αθ",
+   "ω = ω₀² + 2αθ"
+  ],
+  "answer": 0,
+  "explain": "Analogue of v² = u² + 2as.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5b6f2ecb-023f-4b71-a9c8-38040c1ec4a5",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "For constant α, angular displacement in time t in terms of ω₀ and final ω is",
+  "formula": "θ = ½(ω₀ + ω)t",
+  "options": [
+   "θ = ½(ω − ω₀)t",
+   "θ = (ω₀ + ω)t",
+   "θ = ½(ω₀ + ω)t",
+   "θ = ω₀ωt/2"
+  ],
+  "answer": 2,
+  "explain": "Mean angular velocity is (ω₀+ω)/2 only when α is constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a4bdb43-05c6-47cf-be2c-bd3e40c0790e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "Angular displacement in the nth second under constant α (initial ω₀) is",
+  "formula": "θₙ = ω₀ + α(n − ½)",
+  "options": [
+   "ω₀ + α(2n − 1)",
+   "ω₀ + α(n − ½)",
+   "ω₀ + ½αn²",
+   "ω₀ + αn"
+  ],
+  "answer": 1,
+  "explain": "θₙ = θ(n) − θ(n−1) = ω₀ + α(2n−1)/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ad675207-195d-4630-83d8-5d4b2e9bda98",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "From rest with constant α, the time is doubled. The angular displacement becomes",
+  "formula": "θ = ½αt²",
+  "options": [
+   "3 times",
+   "4 times",
+   "8 times",
+   "2 times"
+  ],
+  "answer": 1,
+  "explain": "θ ∝ t² when ω₀ = 0, so doubling t gives 4θ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "437deea2-3c41-4917-b1c1-0180d94446a8",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "For constant α starting from rest, the θ–t graph is",
+  "formula": "",
+  "options": [
+   "A straight line",
+   "An exponential curve",
+   "A parabola through the origin",
+   "A hyperbola"
+  ],
+  "answer": 2,
+  "explain": "θ = ½αt² is a parabola through the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1063cdd5-cf77-4e48-a312-068d874730f7",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "On an ω–t graph, the area under the curve gives",
+  "formula": "",
+  "options": [
+   "Tangential speed",
+   "Angular momentum",
+   "Angular acceleration",
+   "Angular displacement"
+  ],
+  "answer": 3,
+  "explain": "θ = ∫ω dt, the area under the ω–t graph.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "03159c41-e2ec-4834-a8d5-a920d34caa63",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "The dimensional formula of angular acceleration α is",
+  "formula": "",
+  "options": [
+   "[M⁰L¹T⁻²]",
+   "[M⁰L⁰T⁻¹]",
+   "[M¹L²T⁻²]",
+   "[M⁰L⁰T⁻²]"
+  ],
+  "answer": 3,
+  "explain": "α = Δω/Δt, so rad s⁻² gives [T⁻²], since the radian is dimensionless.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d61c2d49-5688-4e63-bd59-349fd56c5b69",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "Wheel decelerates uniformly to rest. Initial ω doubled, same α. Angle turned before stopping becomes",
+  "formula": "0 = ω₀² − 2αθ",
+  "options": [
+   "2 times",
+   "4 times",
+   "Remains same",
+   "8 times"
+  ],
+  "answer": 1,
+  "explain": "θ = ω₀²/2α, so θ ∝ ω₀²; doubling ω₀ gives 4 times.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "311fb32b-abbf-468f-933a-95e70fe8d67d",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "Area under an α–t graph between two instants gives",
+  "formula": "Δω = ∫α dt",
+  "options": [
+   "Angular displacement",
+   "Torque",
+   "Average angular velocity",
+   "Change in angular velocity"
+  ],
+  "answer": 3,
+  "explain": "Since α = dω/dt, integrating α over time gives the change in ω.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "39546f5f-3b6b-47b8-9d33-dc3a50348d3c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Kinematic equations for constant α",
+  "prompt": "Angular acceleration written in terms of angular position θ is",
+  "formula": "",
+  "options": [
+   "α = ω dω/dθ",
+   "α = dω/dθ",
+   "α = (1/ω) dω/dθ",
+   "α = ω² dθ/dω"
+  ],
+  "answer": 0,
+  "explain": "α = dω/dt = (dω/dθ)(dθ/dt) = ω dω/dθ, valid even for variable α.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e2240ae4-3b91-4abc-b374-f2853efe6841",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "In UCM, the average acceleration over one complete revolution is?",
+  "formula": "a_avg = Δv/Δt",
+  "options": [
+   "ω²r",
+   "2v/T",
+   "v²/r",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "After one revolution velocity returns to its initial value, so Δv = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "57956d4e-3b94-44eb-8ca1-9fba36d9c907",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "Radius is fixed and the frequency of UCM is doubled. Centripetal acceleration becomes?",
+  "formula": "a = 4π²f²r",
+  "options": [
+   "Double",
+   "Eight times",
+   "Half",
+   "Four times"
+  ],
+  "answer": 3,
+  "explain": "a ∝ f² at fixed r, so doubling f gives four times a.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c192bf39-5b4f-4367-ba8f-5fb19dd305b9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Uniform circular motion: centripetal accel",
+  "prompt": "In UCM, the acceleration vector is:",
+  "formula": "",
+  "options": [
+   "Changing in magnitude, constant direction",
+   "Constant in magnitude and direction",
+   "Zero throughout",
+   "Constant in magnitude, changing direction"
+  ],
+  "answer": 3,
+  "explain": "Magnitude v²/r is fixed but the direction always points to the centre and keeps rotating, so the vector is not constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8824e024-a9a3-4756-8b39-a4d6d2b16fef",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "Tangential acceleration of a particle in circular motion equals which quantity?",
+  "formula": "aₜ = d|v⃗|/dt",
+  "options": [
+   "v²/r",
+   "d|v⃗|/dt, rate of change of speed",
+   "|dv⃗/dt|, magnitude of velocity change rate",
+   "ω²r"
+  ],
+  "answer": 1,
+  "explain": "aₜ is the rate of change of speed, not the magnitude of the rate of change of velocity.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a4203b8c-aafa-40a2-863b-ee6c9867afbb",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "Speed is increasing in circular motion. The angle between net acceleration and velocity is:",
+  "formula": "",
+  "options": [
+   "Exactly 90°",
+   "Acute",
+   "Obtuse",
+   "180°"
+  ],
+  "answer": 1,
+  "explain": "aₜ is along v and ac is ⟂ to v, so the resultant makes an acute angle with v.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9cf4673e-a95b-4c09-903c-8968c82a3bd8",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "Speed is decreasing in circular motion. The angle between net acceleration and velocity is:",
+  "formula": "",
+  "options": [
+   "Acute",
+   "Obtuse",
+   "0°",
+   "Exactly 90°"
+  ],
+  "answer": 1,
+  "explain": "aₜ is opposite to v and ac is ⟂ to v, so the angle is obtuse.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "40e5ad4b-2a2f-4508-84c6-4fb41aa5b752",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "A particle moves in a vertical circle on a string. Its tangential acceleration at the lowest point is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "g",
+   "2g",
+   "g/2"
+  ],
+  "answer": 0,
+  "explain": "Gravity is along the radius at the lowest point, so there is no tangential component.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5826a597-4c6c-4d07-8466-1af48d1e83e5",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "A pendulum bob is at its extreme position (angle θ). Its net acceleration is:",
+  "formula": "",
+  "options": [
+   "g cosθ, along the string",
+   "g, vertically downward",
+   "g sinθ, perpendicular to the string",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "At the extreme, v = 0 so ac = 0; only aₜ = g sinθ remains, perpendicular to the string.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bb271bc6-4cba-4be9-a9b9-0901f2adee88",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "When aₜ = ac, the net acceleration makes what angle with the radius?",
+  "formula": "",
+  "options": [
+   "45°",
+   "90°",
+   "60°",
+   "30°"
+  ],
+  "answer": 0,
+  "explain": "tanθ = aₜ/ac = 1, so θ = 45°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e129633d-92fb-4754-9bd3-2c87b620e9e2",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "In non-uniform circular motion, the net acceleration vector:",
+  "formula": "",
+  "options": [
+   "Is always zero at the start",
+   "Is always tangential",
+   "Does not point to the centre",
+   "Always points to the centre"
+  ],
+  "answer": 2,
+  "explain": "The tangential component makes the resultant deviate from the radial direction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c34e3ff3-4290-4593-92fd-c25feb5da1e5",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "Speed is increasing in circular motion. Relative to ω⃗, the angular acceleration α⃗ is:",
+  "formula": "",
+  "options": [
+   "Parallel to ω⃗",
+   "Perpendicular to ω⃗ in the plane",
+   "Opposite to v⃗",
+   "Antiparallel to ω⃗"
+  ],
+  "answer": 0,
+  "explain": "ω is increasing, so dω⃗/dt is along ω⃗. For slowing down, α⃗ is opposite to ω⃗.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0d1492a1-3c82-4a02-a54e-7201b10e7623",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "At a point where the speed of a circling particle is maximum or minimum, aₜ is:",
+  "formula": "",
+  "options": [
+   "Equal to ac",
+   "Zero",
+   "Maximum",
+   "Equal to g"
+  ],
+  "answer": 1,
+  "explain": "aₜ = d|v|/dt = 0 at a speed extremum.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "250fdfeb-406e-4427-8488-8e00409611fb",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "Power delivered by the net force on a particle in circular motion (mass m, speed v) equals:",
+  "formula": "P = m aₜ v",
+  "options": [
+   "Zero always",
+   "m aₜ v",
+   "m ac v",
+   "m√(aₜ²+ac²) v"
+  ],
+  "answer": 1,
+  "explain": "Only the tangential force is along v, so P = F·v = m aₜ v.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3d229b3d-dd05-42c7-aa0b-e6beccfd677e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "Vector form of tangential acceleration in circular motion about the centre (r⃗ from the centre)?",
+  "formula": "a⃗ₜ = α⃗ × r⃗",
+  "options": [
+   "ω⃗ × r⃗",
+   "ω⃗ × v⃗",
+   "r⃗ × α⃗",
+   "α⃗ × r⃗"
+  ],
+  "answer": 3,
+  "explain": "a⃗ₜ = α⃗ × r⃗ gives rα along the tangent. ω⃗ × r⃗ is the velocity v⃗.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0326abac-69c0-461f-bc5a-4a62fb416aec",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "For a particle moving on a circle with non-zero speed, the net acceleration at any instant can be:",
+  "formula": "",
+  "options": [
+   "Zero if α is constant",
+   "Zero if aₜ = ac",
+   "Zero only at the maximum speed",
+   "Never zero"
+  ],
+  "answer": 3,
+  "explain": "ac = v²/r ≠ 0 whenever v ≠ 0, and ac ⟂ aₜ, so the vector sum cannot vanish.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c9d9da5-6196-44ef-b716-e1b1bbcef650",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "For a charged particle moving in a uniform magnetic field in a circle, centripetal force is provided by?",
+  "formula": "qvB = mv²/r",
+  "options": [
+   "Magnetic force",
+   "Electric force",
+   "Gravitational force",
+   "Friction"
+  ],
+  "answer": 0,
+  "explain": "Magnetic force qvB is perpendicular to velocity and supplies the centripetal force; r = mv/(qB).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77388a3d-63fa-419b-9c34-3c03c5e447aa",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "Electron orbits a nucleus in a circle. Which force provides the centripetal force in the Bohr model?",
+  "formula": "",
+  "options": [
+   "Coulomb electrostatic force",
+   "Gravitational attraction",
+   "Nuclear strong force",
+   "Magnetic force"
+  ],
+  "answer": 0,
+  "explain": "In the Bohr model, the Coulomb attraction between nucleus and electron supplies mv²/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bd1cd3e4-3d18-431c-b372-6bf038a17c50",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centrifugal pseudo force in rotating frame",
+  "prompt": "Who needs to introduce a centrifugal force to apply Newton's second law?",
+  "formula": "",
+  "options": [
+   "Only an observer at rest on the axis",
+   "An observer in the ground inertial frame",
+   "Any observer, whatever the frame",
+   "An observer co-rotating with the system"
+  ],
+  "answer": 3,
+  "explain": "Centrifugal force is a pseudo force needed only in the rotating non-inertial frame.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c713925-9564-4dca-8ee7-2cf2fb719510",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centrifugal pseudo force in rotating frame",
+  "prompt": "The reaction partner (Newton's third law) of the centrifugal pseudo force is:",
+  "formula": "",
+  "options": [
+   "None; a pseudo force has no reaction pair",
+   "The centripetal force",
+   "The tension in the string",
+   "Gravitational force"
+  ],
+  "answer": 0,
+  "explain": "A pseudo force arises from frame acceleration, not from interaction, so it has no reaction force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "444382fd-1bf8-4f4a-9e39-694fb6f01a4f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centrifugal pseudo force in rotating frame",
+  "prompt": "Block at rest on a rotating turntable. In the turntable frame, friction is:",
+  "formula": "f = mω²r",
+  "options": [
+   "mω²r outward, adding to centrifugal force",
+   "Zero, since the block is at rest",
+   "mω²r inward, balancing centrifugal force",
+   "Always equal to μmg"
+  ],
+  "answer": 2,
+  "explain": "In the rotating frame, the net force is zero: inward friction cancels outward mω²r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c584e33-ffb2-47cc-a817-4e06c62904e1",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centrifugal pseudo force in rotating frame",
+  "prompt": "Due to Earth's rotation, effective g at latitude λ is reduced by (R = Earth's radius):",
+  "formula": "g′ = g − ω²R cos²λ",
+  "options": [
+   "ω²R sin²λ",
+   "ω²R cosλ",
+   "ω²R sinλ",
+   "ω²R cos²λ"
+  ],
+  "answer": 3,
+  "explain": "Radius of the circle is R cosλ; its radial component along g gives another cosλ, so cos²λ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "86b2f51e-fd59-4626-bf05-dd331d8c651e",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centrifugal pseudo force in rotating frame",
+  "prompt": "A person is pinned to the wall of a rotating cylinder (radius R, speed ω). The normal reaction equals:",
+  "formula": "N = mω²R",
+  "options": [
+   "mω²R/μ",
+   "μmg",
+   "mg",
+   "mω²R"
+  ],
+  "answer": 3,
+  "explain": "The wall's normal force is the centripetal force mω²R, while friction balances mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "58d2fb18-e0a1-4032-ae6c-2cde5389c44a",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "In a conical pendulum, the net force on the bob equals which expression and points where?",
+  "formula": "F_net = T sinθ = mg tanθ",
+  "options": [
+   "mg sinθ, towards the centre of the circle",
+   "mg tanθ, along the string",
+   "mg tanθ, towards the centre of the circle",
+   "Zero, since the bob is in equilibrium"
+  ],
+  "answer": 2,
+  "explain": "T sinθ = mg tanθ is horizontal and directed to the centre of the circle, so the net force is not zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "60f14b15-4005-4ffe-b27c-a439d1304c1f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "In a conical pendulum, the work done by string tension during one full revolution is?",
+  "formula": "",
+  "options": [
+   "Zero",
+   "2πr T sinθ",
+   "mgL(1 − cosθ)",
+   "T·L"
+  ],
+  "answer": 0,
+  "explain": "Tension is perpendicular to the bob's velocity at every instant, so it does no work.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "af72feec-198b-4ee3-8e5b-289fd91ba4f8",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "Can a conical pendulum's string become horizontal (θ = 90°) at some finite ω?",
+  "formula": "T cosθ = mg",
+  "options": [
+   "Yes, when v = √(gL)",
+   "Yes, at ω = √(g/L)",
+   "Yes, at very high ω only if m is large",
+   "No, it needs infinite tension"
+  ],
+  "answer": 3,
+  "explain": "T = mg/cosθ → ∞ as θ → 90°; the string can approach but never reach horizontal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "56016644-3878-45fa-ab3f-c32fbbd07e14",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "As ω of a conical pendulum increases, the bob's vertical depth h below the suspension point does what?",
+  "formula": "h = g/ω²",
+  "options": [
+   "Stays constant",
+   "Decreases",
+   "Increases",
+   "First increases, then decreases"
+  ],
+  "answer": 1,
+  "explain": "h = L cosθ = g/ω², so a larger ω gives a smaller h and the bob rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5802ad32-8a2f-485b-b61f-0027f4002074",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "Conical pendulum: angular momentum of the bob about the suspension point is?",
+  "formula": "",
+  "options": [
+   "Fully constant vector",
+   "Constant in magnitude, direction changes",
+   "Constant direction, magnitude changes",
+   "Zero throughout"
+  ],
+  "answer": 1,
+  "explain": "Magnitude is mvL, which is constant. Gravity gives a horizontal torque about the support, so the direction rotates.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4378bc7-11cc-4bcf-8aac-69cee7c44e32",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "At the same speed, a car moves from a turn of radius r to one of radius r/2. The friction needed:",
+  "formula": "f = mv²/r",
+  "options": [
+   "Stays the same",
+   "Halves",
+   "Doubles",
+   "Quadruples"
+  ],
+  "answer": 2,
+  "explain": "f ∝ 1/r, so halving the radius doubles the required friction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f3c76df-8aee-45ef-998c-66b5a9ea26f5",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "A cyclist on a level road is just about to skid in a turn. Her lean angle θ from the vertical satisfies:",
+  "formula": "",
+  "options": [
+   "sinθ = μ",
+   "cosθ = μ",
+   "tanθ = 1/μ",
+   "tanθ = μ"
+  ],
+  "answer": 3,
+  "explain": "At the limit, v² = μrg, so tanθ = v²/(rg) = μ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a45d5a54-928b-4960-9c94-fad6a311b1d0",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "On a level curve, a car that also accelerates tangentially has a v_max, at that instant, that is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal to √(μrg)",
+   "Less than √(μrg)",
+   "Greater than √(μrg)"
+  ],
+  "answer": 2,
+  "explain": "Friction must also supply the tangential force, leaving less for the radial part, so v_max falls below √(μrg).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0d26954f-3921-49df-b392-165ef98e459f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "Friction on the tyres of a turning car is static because the tyre contact point is:",
+  "formula": "",
+  "options": [
+   "Moving backward relative to the car",
+   "Moving outward at speed v",
+   "Moving at 2v",
+   "At rest relative to the road"
+  ],
+  "answer": 3,
+  "explain": "In rolling without slipping the contact point is instantaneously at rest, so friction is static.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d320c32a-2751-41db-afc0-bf45b4a9311b",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "Frictionless banked road: which equation gives the vertical force balance?",
+  "formula": "N cosθ = mg",
+  "options": [
+   "N cosθ = mv²/r",
+   "N sinθ = mg",
+   "N cosθ = mg",
+   "N = mg sinθ"
+  ],
+  "answer": 2,
+  "explain": "No vertical acceleration, so N cosθ balances mg; N sinθ supplies the centripetal force.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "27613592-7c8a-4568-8454-1819ae49b935",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "On a frictionless banked road, a car at speed above the design speed tends to:",
+  "formula": "",
+  "options": [
+   "Skid down the slope, inward",
+   "Skid up the slope, outward",
+   "Stay on the track",
+   "Lift off the road"
+  ],
+  "answer": 1,
+  "explain": "The needed centripetal force exceeds N sinθ, so the car moves outward (up the incline).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d79e6968-fa94-4b12-8d4f-895d0ee71af3",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "On a frictionless banked road, a car at speed below the design speed tends to:",
+  "formula": "",
+  "options": [
+   "Move outward, up the slope",
+   "Move inward, down the slope",
+   "Move in a straight line",
+   "Stay in place"
+  ],
+  "answer": 1,
+  "explain": "N sinθ exceeds the required mv²/r, so the car slides down toward the inner edge.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f433e65a-4063-476e-b8dd-98c44e828b1d",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "In the ground frame, which real forces act on a car on a frictionless banked circular road?",
+  "formula": "",
+  "options": [
+   "Weight and normal reaction only",
+   "Weight, normal reaction and centripetal force",
+   "Weight, normal reaction and centrifugal force",
+   "Weight, normal reaction and static friction"
+  ],
+  "answer": 0,
+  "explain": "Centripetal force is the resultant of mg and N, not an extra force. Centrifugal force is pseudo, and friction is absent.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cec7049e-d95b-496e-8439-7276e6c1c6cf",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "At v_max on a banked road, limiting friction on the vehicle acts in which direction?",
+  "formula": "",
+  "options": [
+   "Up the incline",
+   "Horizontally outward",
+   "Down the incline",
+   "Zero"
+  ],
+  "answer": 2,
+  "explain": "Vehicle tends to slip outward/up, so friction acts down the incline, toward the centre.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4a511f89-cc34-4ec3-b643-e575e68797a4",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "At v_min on a banked road, limiting friction on the vehicle acts in which direction?",
+  "formula": "",
+  "options": [
+   "Perpendicular to the incline",
+   "Down the incline",
+   "Up the incline",
+   "Horizontally outward"
+  ],
+  "answer": 2,
+  "explain": "Vehicle tends to slide down the slope, so friction acts up the incline.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "517184e9-5f13-4885-94dd-e1e73a050b05",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "At v_max on a banked road, the vertical force balance is?",
+  "formula": "",
+  "options": [
+   "N cosθ + μN sinθ = mg",
+   "N cosθ = mg + μN sinθ",
+   "N cosθ = mg − μN cosθ",
+   "N sinθ = mg + μN cosθ"
+  ],
+  "answer": 1,
+  "explain": "Friction down the slope has a downward vertical part μN sinθ: N cosθ = mg + μN sinθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c5a99879-149d-46cc-b56d-ba4e5c482e68",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "A vehicle on a banked road moves slower than v_min. What happens?",
+  "formula": "",
+  "options": [
+   "Stays on the circle",
+   "Overturns outward",
+   "Skids outward, up the slope",
+   "Slides inward, down the slope"
+  ],
+  "answer": 3,
+  "explain": "Required centripetal force is too small, so the vehicle slips down the incline (inward).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b1e6932c-91a3-47e1-b279-06e1503bc688",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "On a banked road with μ ≥ tanθ, the minimum speed v_min is?",
+  "formula": "",
+  "options": [
+   "√[rg(μ−tanθ)/(1+μtanθ)]",
+   "Zero",
+   "√(rg tanθ)",
+   "√(rg μ)"
+  ],
+  "answer": 1,
+  "explain": "If μ ≥ tanθ, friction alone can hold the vehicle at rest on the slope, so v_min = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b9b70ccc-aef1-4ab9-aae4-81fbdb6e112a",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "For 0 < μ < tanθ on a banked road, the correct speed order is?",
+  "formula": "",
+  "options": [
+   "v_min < v_max < √(rg tanθ)",
+   "v_min < √(rg tanθ) < v_max",
+   "√(rg tanθ) < v_min < v_max",
+   "v_max < √(rg tanθ) < v_min"
+  ],
+  "answer": 1,
+  "explain": "The no-friction speed √(rg tanθ) lies between the two limits set by friction.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "01a72b0e-b76c-48d5-8062-53678dc01ed4",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Mass on a light rigid rod moves in a vertical circle. Minimum speed at the top to complete the circle?",
+  "formula": "",
+  "options": [
+   "√(2gR)",
+   "Zero",
+   "√(gR/2)",
+   "√(gR)"
+  ],
+  "answer": 1,
+  "explain": "A rod can push or pull, so it needs no tension. The mass only has to reach the top with v slightly above 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5fdd8979-84c5-4ac7-8091-de39abcdf870",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "String in a vertical circle, bottom speed √(5gr). Tension at the lowest point?",
+  "formula": "",
+  "options": [
+   "6mg",
+   "4mg",
+   "7mg",
+   "5mg"
+  ],
+  "answer": 0,
+  "explain": "T − mg = m(5gr)/r, so T = 6mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cd6aea31-9a59-4f57-a753-3d863c7822fa",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Bottom speed √(5gr). Tension when the string is horizontal?",
+  "formula": "",
+  "options": [
+   "5mg",
+   "3mg",
+   "2mg",
+   "4mg"
+  ],
+  "answer": 1,
+  "explain": "v² = 3gr at the horizontal. Gravity is tangential there, so T = mv²/r = 3mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ff631d4b-5a4a-4b92-ac5e-6ca5d8927444",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Bottom speed √(5gr). Speed of the mass when the string is horizontal?",
+  "formula": "",
+  "options": [
+   "√(2gr)",
+   "√(gr)",
+   "√(3gr)",
+   "√(4gr)"
+  ],
+  "answer": 2,
+  "explain": "v² = 5gr − 2gr = 3gr.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b46f34e4-baa4-4f45-84a9-5ceaa4e1ed51",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "A ball slides inside a smooth tube loop of radius R. Minimum release height above the bottom to complete the loop?",
+  "formula": "",
+  "options": [
+   "R",
+   "2R",
+   "3R",
+   "5R/2"
+  ],
+  "answer": 1,
+  "explain": "The tube can push, so v_top ≥ 0. Then mgh = mg(2R), so h = 2R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e81ecfa4-24ad-418f-9d05-79c5a9bb2764",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Radius of curvature of a trajectory",
+  "prompt": "Projectile launched with speed u at angle θ to horizontal: radius of curvature at the point of projection?",
+  "formula": "R = u²/(g cosθ)",
+  "options": [
+   "u² cos²θ/g",
+   "u²/(g cosθ)",
+   "u²/g",
+   "u²/(g sinθ)"
+  ],
+  "answer": 1,
+  "explain": "Normal component of g at launch is g cosθ, so R = u²/(g cosθ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2adb947f-826d-464e-b0d5-a9b2c6b855af",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Radius of curvature of a trajectory",
+  "prompt": "Velocity of a projectile makes angle φ with horizontal. Its normal acceleration is?",
+  "formula": "aₙ = g cosφ",
+  "options": [
+   "g",
+   "g sinφ",
+   "g tanφ",
+   "g cosφ"
+  ],
+  "answer": 3,
+  "explain": "g is resolved perpendicular to velocity: aₙ = g cosφ, tangential part = g sinφ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "434ee20e-c1ce-4d56-8f7e-378463ff601b",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Radius of curvature of a trajectory",
+  "prompt": "Along a projectile's flight (level ground), where is the radius of curvature minimum?",
+  "formula": "",
+  "options": [
+   "Point of landing",
+   "Same everywhere",
+   "Highest point",
+   "Point of projection"
+  ],
+  "answer": 2,
+  "explain": "R = v²/(g cosφ): at the top v is least and cosφ = 1, giving the smallest R.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a71dec9-0118-45f4-9ae8-d0e6094f072c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "Conical pendulum: which force provides the centripetal force on the bob?",
+  "formula": "",
+  "options": [
+   "Horizontal component of tension",
+   "Vertical component of tension",
+   "Weight of the bob",
+   "Full tension T"
+  ],
+  "answer": 0,
+  "explain": "T sinθ points toward the centre and supplies the centripetal force; T cosθ balances mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5124bfb-5da2-408b-93db-ca46422edf37",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "Car on a level turn skids before toppling if μ is less than (track width b, CG height h):",
+  "formula": "skid first if μ < b/(2h)",
+  "options": [
+   "b/h",
+   "2h/b",
+   "h/(2b)",
+   "b/(2h)"
+  ],
+  "answer": 3,
+  "explain": "Skid limit μrg falls below the topple limit grb/(2h) when μ < b/(2h).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b77fbc17-d2a8-4b30-a125-1bbc62569a80",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "An aeroplane turns in a horizontal circle with wings banked. The centripetal force is provided by:",
+  "formula": "",
+  "options": [
+   "Vertical component of lift",
+   "Weight",
+   "Horizontal component of lift",
+   "Engine thrust"
+  ],
+  "answer": 2,
+  "explain": "Lift is perpendicular to the wings. L cosθ = mg and L sinθ = mv²/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e7078326-8190-4585-b0dc-38f8289f5c5c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "In the car's frame at design speed, the resultant of mg and the centrifugal force on the car is directed:",
+  "formula": "",
+  "options": [
+   "Perpendicular to the road surface",
+   "Along the incline, downward",
+   "Horizontally outward",
+   "Vertically downward"
+  ],
+  "answer": 0,
+  "explain": "It balances N, which is perpendicular to the surface, so no force acts along the incline.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3d62b952-a24d-449a-9b9e-56f9effdcce5",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "For 0 < μ < tanθ on a banked road, increasing μ has what effect on v_min and v_max?",
+  "formula": "",
+  "options": [
+   "v_min decreases, v_max decreases",
+   "v_min decreases, v_max increases",
+   "v_min increases, v_max decreases",
+   "v_min increases, v_max increases"
+  ],
+  "answer": 1,
+  "explain": "Greater μ widens the safe range: the numerator of v_min falls while that of v_max rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6005e1cc-5697-417b-a142-83244a2c3d1c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road with friction: v_max, v_min",
+  "prompt": "At v_min on a banked road (friction up the slope), the vertical force balance is?",
+  "formula": "N cosθ + μN sinθ = mg",
+  "options": [
+   "N cosθ = mg",
+   "N sinθ + μN cosθ = mg",
+   "N cosθ + μN = mg",
+   "N cosθ + μN sinθ = mg"
+  ],
+  "answer": 3,
+  "explain": "Friction up the slope has a vertical component μN sinθ upward, adding to N cosθ to balance mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cb3a5382-77d8-420c-a73f-65615f5474a6",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "In non-uniform vertical circular motion, at which positions is the acceleration purely centripetal?",
+  "formula": "",
+  "options": [
+   "Horizontal diameter ends",
+   "Only at the top",
+   "Only at the bottom",
+   "Top and bottom"
+  ],
+  "answer": 3,
+  "explain": "Gravity is radial at top and bottom, so there is no tangential component there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8a140381-3707-4c2f-9032-176556ca3659",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "A mass on a string goes slack mid-way in a vertical circle. Its path afterwards is?",
+  "formula": "",
+  "options": [
+   "Continued circle",
+   "Parabola (projectile)",
+   "Spiral",
+   "Straight line"
+  ],
+  "answer": 1,
+  "explain": "With T = 0 only gravity acts, so it moves as a projectile.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "203b8e89-2a30-4969-bc58-d121fb0e9533",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Mass on a rod at the top with speed below √(gr). The rod force on the mass is?",
+  "formula": "",
+  "options": [
+   "Horizontal",
+   "Zero",
+   "Upward (compression)",
+   "Downward (tension)"
+  ],
+  "answer": 2,
+  "explain": "mg − N = mv²/r with v² < gr gives N > 0 upward, so the rod pushes up.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8fdc88fc-2860-48b0-96b7-f766ec312c68",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vertical circle: critical speeds at top/bottom",
+  "prompt": "Mass on a string in a vertical circle has speed √(3gr) at the top. Tension at the top is?",
+  "formula": "T + mg = mv²/r",
+  "options": [
+   "2mg",
+   "4mg",
+   "mg",
+   "3mg"
+  ],
+  "answer": 0,
+  "explain": "T = m(3gr)/r − mg = 3mg − mg = 2mg.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "85778b29-67c4-4eca-8df5-84d6ddee364f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "At speed v with friction μ, minimum level-turn radius ÷ minimum straight-braking stopping distance =",
+  "formula": "r = v²/(μg), s = v²/(2μg)",
+  "options": [
+   "1 : 1",
+   "1 : 2",
+   "4 : 1",
+   "2 : 1"
+  ],
+  "answer": 3,
+  "explain": "r_min = v²/(μg) but s_min = v²/(2μg), so the ratio is 2 : 1. Braking straight needs less room than turning.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8de7115e-f9b7-4307-932e-d635d460ad09",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "For a cyclist turning on a level road, the resultant of normal reaction and friction passes through the:",
+  "formula": "",
+  "options": [
+   "Centre of gravity of cyclist plus cycle",
+   "Centre of the circular path",
+   "Point of contact's midpoint with the rear wheel",
+   "Handlebar"
+  ],
+  "answer": 0,
+  "explain": "Net torque about the CG must vanish, so the contact force acts along the line to the CG, tilted θ from vertical.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "41a6e883-63f7-4e70-8829-85d113c58cce",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "A train takes a banked curve faster than the design speed. The lateral force on its wheels comes from:",
+  "formula": "",
+  "options": [
+   "No lateral force on the wheels",
+   "Outer rail pulling wheels outward",
+   "Outer rail pushing flange inward",
+   "Inner rail pushing flange outward"
+  ],
+  "answer": 2,
+  "explain": "The extra centripetal force needed is supplied by the outer rail's inward push on the flanges.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7da416f7-4368-450b-84fa-8643c7a51b67",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "At the design speed on a banked railway curve, the lateral thrust on the rails is:",
+  "formula": "",
+  "options": [
+   "Maximum on the outer rail",
+   "Equal to mg tanθ",
+   "Zero",
+   "Maximum on the inner rail"
+  ],
+  "answer": 2,
+  "explain": "N and mg alone give the centripetal force, so the flanges feel no sideways push.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c9d9703c-6f8a-4264-9743-b291877f1297",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "Kinetic energy of a car (mass m) at the design speed on a frictionless banked road is:",
+  "formula": "KE = ½mv²",
+  "options": [
+   "mrg tanθ",
+   "½ m r g sinθ",
+   "½ m g tanθ / r",
+   "½ m r g tanθ"
+  ],
+  "answer": 3,
+  "explain": "With v² = rg tanθ, KE = ½ m r g tanθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "23dcc7b1-fd08-4aa0-bb01-45a24b05e5d5",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "At the design speed, the effective gravity in the car's frame (g plus centrifugal) has magnitude:",
+  "formula": "",
+  "options": [
+   "g sinθ",
+   "g tanθ",
+   "g secθ",
+   "g cosθ"
+  ],
+  "answer": 2,
+  "explain": "It acts perpendicular to the road, with N = m·g_eff = mg/cosθ, so g_eff = g secθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "9d85307c-9d76-4c49-84a3-cbe7ccd831c6",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Banked road without friction",
+  "prompt": "On a frictionless road banked at θ with radius r, the time period of a car going round at design speed is:",
+  "formula": "T = 2π/ω, with ω = √(g tanθ / r)",
+  "options": [
+   "2π√(r / (g tanθ))",
+   "2π√(g tanθ / r)",
+   "2π√(r tanθ / g)",
+   "2π√(r / (g sinθ))"
+  ],
+  "answer": 0,
+  "explain": "v = √(rg tanθ), so T = 2πr/v = 2π√(r/(g tanθ)).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "19d35074-bf35-4378-93b7-9c567ee0ca31",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Relation v = ωr and a_t = αr",
+  "prompt": "Due to Earth's rotation (ω, radius R), speed of a ground point at latitude λ is:",
+  "formula": "v = ωR cosλ",
+  "options": [
+   "ωR cosλ",
+   "ωR sinλ",
+   "ωR",
+   "ωR tanλ"
+  ],
+  "answer": 0,
+  "explain": "The point moves in a circle of radius R cosλ about the Earth's axis, so v = ω(R cosλ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3f2317b3-2f01-4454-aaa6-e6f6deb5be82",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "A particle starts from rest on a circle with constant aₜ. Its centripetal acceleration ac is proportional to:",
+  "formula": "ac = v²/r = 2aₜs/r",
+  "options": [
+   "s²",
+   "Distance travelled s",
+   "√s",
+   "Independent of s"
+  ],
+  "answer": 1,
+  "explain": "v² = 2aₜs, so ac = 2aₜs/r ∝ s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "92a423fe-e21f-41e3-aff9-e38926665dc8",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "On a circle of radius r, ω = βt². Tangential acceleration at time t is:",
+  "formula": "aₜ = r dω/dt",
+  "options": [
+   "βr²t",
+   "2βrt",
+   "2βt/r",
+   "βrt²"
+  ],
+  "answer": 1,
+  "explain": "α = dω/dt = 2βt, so aₜ = rα = 2βrt.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6b5eb0f-885b-4d96-a11e-e47959228302",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Non-uniform motion: tangential & net accel",
+  "prompt": "On a circle of fixed radius r, speed v changes at rate aₜ. The rate of change of ac (= v²/r) is:",
+  "formula": "d(ac)/dt = 2v·aₜ / r",
+  "options": [
+   "2v·aₜ / r",
+   "2v² / r",
+   "v·aₜ / r",
+   "aₜ² / r"
+  ],
+  "answer": 0,
+  "explain": "Differentiate v²/r with r fixed: d(v²/r)/dt = 2v(dv/dt)/r = 2v·aₜ/r.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "388c5fae-b7f6-4e26-ac32-d04ae108e716",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Centripetal force and its sources",
+  "prompt": "Block moves in a circle under real forces. How is the centripetal force treated in its free-body diagram?",
+  "formula": "",
+  "options": [
+   "Drawn only if speed is constant",
+   "Drawn outward as a reaction",
+   "Drawn as an extra inward force",
+   "Not drawn; it is the net inward real force"
+  ],
+  "answer": 3,
+  "explain": "Centripetal force is the resultant of real forces along the radius, not a separate force. Adding it double-counts.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "420a31f5-757a-4680-a46d-e860d72ef88f",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Conical pendulum",
+  "prompt": "Conical pendulum, circle radius r: magnitude of net torque on the bob about the suspension point is?",
+  "formula": "τ = mg·r",
+  "options": [
+   "Zero",
+   "mg L",
+   "T r",
+   "mg r"
+  ],
+  "answer": 3,
+  "explain": "Tension passes through the point (zero torque); only gravity gives torque mg·r, which turns the horizontal part of L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b659b8b5-1fb9-4658-8c36-380c5debc044",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "Maximum kinetic energy of a car (mass m) that can safely turn on a level curve of radius r, friction μ:",
+  "formula": "KE_max = ½m·v_max²",
+  "options": [
+   "μmgr",
+   "2μmgr",
+   "½μmgr",
+   "μmgr²/2"
+  ],
+  "answer": 2,
+  "explain": "v_max² = μrg, so KE_max = ½m(μrg) = ½μmgr.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "800c0c5f-1657-4cd1-9b64-9e02a3ff7513",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "A car speeds up while turning on a level road. The friction on its tyres is directed:",
+  "formula": "",
+  "options": [
+   "Inward and tilted forward",
+   "Radially inward only",
+   "Inward and tilted backward",
+   "Tangentially forward only"
+  ],
+  "answer": 0,
+  "explain": "Radial part gives mv²/r, tangential forward part gives m·aₜ; resultant is inward-forward.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46df711b-333c-42ae-8b75-df72aaabee7c",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Vehicle on level road: max safe speed",
+  "prompt": "For a level turn, speed is doubled and μ is halved. The minimum safe radius becomes:",
+  "formula": "r_min = v²/(μg)",
+  "options": [
+   "8 times",
+   "2 times",
+   "16 times",
+   "4 times"
+  ],
+  "answer": 0,
+  "explain": "r_min ∝ v²/μ, so the factor is 4 ÷ ½ = 8.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d504ef49-c6d6-4ac3-a66f-557743ac95a9",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Radius of curvature of a trajectory",
+  "prompt": "Net acceleration a makes angle α with velocity v. Radius of curvature of the path at that instant is",
+  "formula": "R = v²/(a sinα)",
+  "options": [
+   "v²/(a sinα)",
+   "v²/(a cosα)",
+   "v²/a",
+   "a sinα/v²"
+  ],
+  "answer": 0,
+  "explain": "Normal component is aₙ = a sinα, so R = v²/aₙ = v²/(a sinα).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "32c8bf5d-cbae-435b-8d1d-a7b3a9c688bf",
+  "subject": "Physics",
+  "chapter": "Circular Motion",
+  "topic": "Radius of curvature of a trajectory",
+  "prompt": "Projectile has speed v and horizontal velocity component vₓ at a point. Radius of curvature there is?",
+  "formula": "R = v²/aₙ, aₙ = g·(vₓ/v)",
+  "options": [
+   "v²/(g vₓ)",
+   "vₓ³/(g v)",
+   "v²/g",
+   "v³/(g vₓ)"
+  ],
+  "answer": 3,
+  "explain": "aₙ = g cosφ = g vₓ/v, so R = v²/aₙ = v³/(g vₓ).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

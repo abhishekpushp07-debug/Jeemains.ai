@@ -13,6 +13,17 @@ export function pinFormError(phone: string, pin: string, confirm?: string) {
   return "";
 }
 
+/** Clear words for a failed sign-in / PIN step. The server's own words stay when they already guide the student. */
+export function authErrorText(e: unknown) {
+  if (!(e instanceof ApiError)) return e instanceof Error ? e.message : "Couldn't finish. Please try again.";
+  if (e.status === 422 && /operation.s contract/.test(e.message)) return "Mobile number ya PIN sahi format mein nahi hai. 10 digit ka mobile number aur 4 digit ka PIN daalo.";
+  if (e.status === 0 && !/server address/.test(e.message)) return "Internet nahi mil raha. Net check karke dobara try karo — aapka account aur saved kaam safe hai.";
+  if (e.status >= 500) return "Server abhi busy hai — bahut students ek saath aa rahe hain. Aapka account safe hai, kuch second baad dobara try karo.";
+  return e.message;
+}
+/** "45s" or "14 min" for the wait after too many tries. */
+export const waitText = (seconds: number) => seconds > 90 ? `${Math.ceil(seconds / 60)} min` : `${seconds}s`;
+
 /** No automatic PIN retries. Honor server Retry-After with a visible countdown. */
 export function useAuthSubmit() {
   const pending = useRef(false);
@@ -32,7 +43,7 @@ export function useAuthSubmit() {
     if (validation) return;
     pending.current = true; setBusy(true);
     try { await action(); } catch (e) {
-      setError(e instanceof Error ? e.message : "Couldn't finish. Please try again.");
+      setError(authErrorText(e));
       if (e instanceof ApiError && (e.retryAfterMs > 0 || e.status === 429)) {
         const time = Date.now(); setNow(time); setRetryAt(time + Math.max(e.retryAfterMs, e.status === 429 ? 30000 : 0));
       }

@@ -1,0 +1,3912 @@
+[
+ {
+  "prompt": "Who introduced the concept of displacement current to fix Ampère's circuital law?",
+  "formula": "",
+  "options": [
+   "Faraday",
+   "Maxwell",
+   "Hertz",
+   "Lenz"
+  ],
+  "answer": 1,
+  "explain": "Maxwell added the displacement current term to make Ampère's law consistent for time-varying fields.",
+  "kind": "fact",
+  "id": "8e638875-792e-445e-91d1-6fd84443f18a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Inside a dielectric of permittivity ε, displacement current is given by:",
+  "formula": "I_d = ε dΦ_E/dt",
+  "options": [
+   "ε₀ dΦ_E/dt only",
+   "ε dΦ_E/dt",
+   "dΦ_E/(ε dt)",
+   "ε₀ε dΦ_E/dt"
+  ],
+  "answer": 1,
+  "explain": "In a medium ε₀ is replaced by ε = Kε₀, so I_d = ε dΦ_E/dt.",
+  "kind": "formula",
+  "id": "04aaf3bc-b51d-43e7-ae59-ce86cc9731fa",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Displacement current is zero when the electric field in the region is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Uniform in space",
+   "Constant in time",
+   "Perpendicular to the area"
+  ],
+  "answer": 2,
+  "explain": "I_d ∝ dΦ_E/dt, so a time-independent E gives no displacement current, even if E is nonzero.",
+  "kind": "concept",
+  "id": "65b3829e-f486-40df-ab87-42774fecb6c8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Displacement current exists in the gap of a charging capacitor without:",
+  "formula": "",
+  "options": [
+   "Any electric field",
+   "Any changing flux",
+   "Actual flow of charges across the gap",
+   "Any magnetic field"
+  ],
+  "answer": 2,
+  "explain": "I_d comes from a changing electric field, not from the motion of charge carriers.",
+  "kind": "concept",
+  "id": "44fbe70f-155b-4c88-a6f7-0d6fbe70e632",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "For a circular parallel-plate capacitor of radius R, B between plates at distance r < R varies as:",
+  "formula": "B = μ₀ I_d r / (2πR²)",
+  "options": [
+   "B ∝ 1/r",
+   "B ∝ r",
+   "B ∝ r²",
+   "B is constant"
+  ],
+  "answer": 1,
+  "explain": "The enclosed I_d is proportional to πr², so 2πrB = μ₀I_d r²/R². Hence B ∝ r inside.",
+  "kind": "result",
+  "id": "4cdffc7a-063f-4afe-aea5-dbe4a233c21a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Maxwell's displacement current ensures that total current (I_c + I_d) is:",
+  "formula": "",
+  "options": [
+   "Always zero",
+   "Continuous across the circuit",
+   "Only in conductors",
+   "Always equal to I_d"
+  ],
+  "answer": 1,
+  "explain": "Conduction current in the wires continues as displacement current across the gap, so the total is continuous.",
+  "kind": "concept",
+  "id": "e65e3639-449d-4411-a8dc-5d296cc534da",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Ampère–Maxwell law: ∮B·dl around a closed loop equals:",
+  "formula": "∮B·dl = μ₀(I_c + ε₀ dΦ_E/dt)",
+  "options": [
+   "μ₀(I_c + ε₀ dΦ_E/dt)",
+   "μ₀ I_c + ε₀ dΦ_B/dt",
+   "μ₀(I_c + dΦ_E/dt)",
+   "μ₀ε₀(I_c + dΦ_B/dt)"
+  ],
+  "answer": 0,
+  "explain": "Maxwell added the displacement current term μ₀ε₀ dΦ_E/dt to Ampère's law.",
+  "kind": "formula",
+  "id": "2924c803-0779-410e-a751-8aa5c5fd13db",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Charging circular plate capacitor of radius R: B at distance r > R from the axis varies as:",
+  "formula": "B = μ₀I_d/(2πr)",
+  "options": [
+   "B ∝ r²",
+   "B ∝ 1/r",
+   "B ∝ 1/r²",
+   "B ∝ r"
+  ],
+  "answer": 1,
+  "explain": "Outside the plates the full I_d is enclosed, so B = μ₀I_d/2πr ∝ 1/r.",
+  "kind": "result",
+  "id": "1dc7c089-55c7-44ad-a200-5f48a8f39937",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Displacement current in the gap of a capacitor C with potential difference V across it is:",
+  "formula": "I_d = C dV/dt",
+  "options": [
+   "V dC/dt",
+   "C dV/dt",
+   "C V",
+   "ε₀ V/ dt"
+  ],
+  "answer": 1,
+  "explain": "I_d = dQ/dt with Q = CV, which equals C dV/dt for constant C.",
+  "kind": "formula",
+  "id": "1337f476-6fdb-49dc-945f-87cbbd93fe69",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "For a capacitor on an AC source, displacement current in the gap, relative to the field E, is:",
+  "formula": "I_d ∝ dE/dt",
+  "options": [
+   "In phase with E",
+   "Leads E by π/2",
+   "Lags E by π/2",
+   "Opposite in phase to E"
+  ],
+  "answer": 1,
+  "explain": "I_d ∝ dE/dt; if E ∝ sin ωt then I_d ∝ cos ωt, which leads by 90°.",
+  "kind": "concept",
+  "id": "259e43b4-c66d-4560-ab0b-18a38d0a3710",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Displacement current is defined as I_d =",
+  "formula": "I_d = ε₀ dΦ_E/dt",
+  "options": [
+   "ε₀ dΦ_E/dt",
+   "μ₀ dΦ_E/dt",
+   "ε₀ dΦ_B/dt",
+   "μ₀ ε₀ dΦ_B/dt"
+  ],
+  "answer": 0,
+  "explain": "Displacement current is ε₀ times the rate of change of electric flux.",
+  "kind": "formula",
+  "id": "9f8b3b24-88b6-4b2d-918a-18f761704abe",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "A capacitor is charging. Displacement current between the plates equals which current?",
+  "formula": "",
+  "options": [
+   "Zero, since no charge crosses the gap",
+   "Conduction current in the connecting wires",
+   "Twice the conduction current in the wires",
+   "Current set by the dielectric only"
+  ],
+  "answer": 1,
+  "explain": "Continuity: I_d = ε₀ dΦ_E/dt = dq/dt, equal to the wire current I_c.",
+  "kind": "concept",
+  "id": "3f5d9150-b2af-49c2-b22a-c3cbbbcca550",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "A capacitor is fully charged by a DC source and then held. Displacement current between plates is:",
+  "formula": "",
+  "options": [
+   "Maximum",
+   "Equal to the battery current",
+   "Zero, because E is constant",
+   "Equal to the charge on the plates"
+  ],
+  "answer": 2,
+  "explain": "I_d ∝ dE/dt, which is zero when E is steady.",
+  "kind": "concept",
+  "id": "a78d7c4f-ed9e-4a5d-93d4-bb26d7db311b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "In a vacuum parallel-plate capacitor being charged, the conduction current between the plates is:",
+  "formula": "",
+  "options": [
+   "Equal to I_d",
+   "Equal to I_d/2",
+   "Equal to the wire current",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "No charge carriers cross the vacuum gap, so only displacement current exists there.",
+  "kind": "fact",
+  "id": "610c21ae-eab9-4fe4-8adf-e217de0f80d3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Charging circular plates (radius R): inside the gap at r < R, B varies with r as:",
+  "formula": "B = μ₀ I r / (2πR²)",
+  "options": [
+   "B ∝ r",
+   "B ∝ 1/r",
+   "B ∝ r²",
+   "B is independent of r"
+  ],
+  "answer": 0,
+  "explain": "Enclosed I_d ∝ πr², so B(2πr) ∝ r² and B ∝ r.",
+  "kind": "result",
+  "id": "0129715c-4a52-44da-aa33-5d9d71917c1a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Charging circular plates (radius R): at r > R in the gap region, B varies with r as:",
+  "formula": "B = μ₀ I / (2πr)",
+  "options": [
+   "B ∝ r",
+   "B ∝ 1/r",
+   "B ∝ 1/r²",
+   "B is zero"
+  ],
+  "answer": 1,
+  "explain": "The full I_d is enclosed, so B = μ₀I/2πr, as for a long straight wire.",
+  "kind": "result",
+  "id": "87079b89-6165-432a-a79a-9ee3deab5e72",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "SI unit of the quantity ε₀ dΦ_E/dt is:",
+  "formula": "",
+  "options": [
+   "Volt",
+   "Weber",
+   "Ampere",
+   "Tesla"
+  ],
+  "answer": 2,
+  "explain": "It is a current, so its unit is the ampere.",
+  "kind": "unit",
+  "id": "73855620-c0b9-4a07-b823-491e7bb9a445",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Which statement about displacement current is correct?",
+  "formula": "",
+  "options": [
+   "It needs free charges moving in a conductor",
+   "It flows only in dielectrics",
+   "It produces no magnetic field",
+   "It exists even in vacuum"
+  ],
+  "answer": 3,
+  "explain": "It arises from a changing E-field, not from charge flow, so it exists in vacuum and produces B.",
+  "kind": "concept",
+  "id": "94683a44-f248-4717-86d0-599e95088cf1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "While a capacitor charges, the displacement current between plates is directed:",
+  "formula": "",
+  "options": [
+   "Opposite to the field E",
+   "Along E, in the same sense as wire current",
+   "Perpendicular to E",
+   "Radially outward"
+  ],
+  "answer": 1,
+  "explain": "I_d follows dE/dt. On charging, E grows, so I_d is along E and continues the wire current.",
+  "kind": "concept",
+  "id": "1570661b-b43b-4ad4-98fe-a56ad0f2d485",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Inside a charging capacitor gap, displacement current density J_d equals:",
+  "formula": "J_d = ε₀ ∂E/∂t",
+  "options": [
+   "ε₀ ∂E/∂t",
+   "μ₀ ∂E/∂t",
+   "ε₀ ∂B/∂t",
+   "μ₀ ∂B/∂t"
+  ],
+  "answer": 0,
+  "explain": "Id = ε₀ dΦ_E/dt, so per unit area J_d = ε₀ ∂E/∂t.",
+  "kind": "formula",
+  "id": "a0139ba2-bcbc-4f36-9a1b-2362db4cb72f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Dimensions of 1/(μ₀ε₀) are those of",
+  "formula": "",
+  "options": [
+   "(velocity)²",
+   "velocity",
+   "(time)²/(length)²",
+   "(length)/(time)"
+  ],
+  "answer": 0,
+  "explain": "1/(μ₀ε₀) = c², so its dimensions are [L²T⁻²].",
+  "kind": "unit",
+  "id": "b29efdf4-3bcb-4af6-ac23-4fea97d59b5f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "For a plane EM wave in vacuum, the ratio of amplitudes E₀/B₀ equals",
+  "formula": "E₀/B₀ = c",
+  "options": [
+   "c",
+   "1/c",
+   "c²",
+   "μ₀c"
+  ],
+  "answer": 0,
+  "explain": "E and B amplitudes are related by E₀ = cB₀ in vacuum.",
+  "kind": "result",
+  "id": "899b3484-9eb1-4340-b2a8-add422fb68f6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "When an EM wave passes from vacuum into glass, which quantity stays unchanged?",
+  "formula": "",
+  "options": [
+   "Frequency",
+   "Wavelength",
+   "Speed",
+   "Amplitude of E always"
+  ],
+  "answer": 0,
+  "explain": "Frequency is set by the source; speed and wavelength decrease in the medium.",
+  "kind": "concept",
+  "id": "611770b1-894e-4ce1-b9f0-1cc4e8b23eea",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "Maxwell identified light as an EM wave because 1/√(μ₀ε₀) was found to be",
+  "formula": "",
+  "options": [
+   "equal to the measured speed of light",
+   "equal to the speed of sound",
+   "less than the speed of light",
+   "infinite"
+  ],
+  "answer": 0,
+  "explain": "The value of 1/√(μ₀ε₀) from static measurements matched the measured speed of light.",
+  "kind": "fact",
+  "id": "1c6040e0-f8bd-4e46-9bce-535551d2ef72",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "On entering a denser medium, the speed of an EM wave becomes",
+  "formula": "v = c/n",
+  "options": [
+   "less than c",
+   "greater than c",
+   "equal to c",
+   "zero"
+  ],
+  "answer": 0,
+  "explain": "v = c/n with n > 1, so speed decreases below c.",
+  "kind": "concept",
+  "id": "49e7e790-4551-4c56-bf0e-43e1bbdca71c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "The SI unit of 1/√(μ₀ε₀) is",
+  "formula": "",
+  "options": [
+   "m s⁻¹",
+   "m² s⁻²",
+   "s m⁻¹",
+   "m s⁻²"
+  ],
+  "answer": 0,
+  "explain": "1/√(μ₀ε₀) = c, a speed, so its unit is m s⁻¹.",
+  "kind": "unit",
+  "id": "0a8d6eb5-0bea-46c9-b33b-c75f75556681",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "Does the speed of EM waves in vacuum depend on the frequency of the wave?",
+  "formula": "",
+  "options": [
+   "No, it is the same for all",
+   "Yes, increases with frequency",
+   "Yes, decreases with frequency",
+   "Only for visible light"
+  ],
+  "answer": 0,
+  "explain": "c = 1/√(μ₀ε₀) involves only constants, so independent of frequency.",
+  "kind": "concept",
+  "id": "40a8e887-ee34-4f7b-8359-722fce9ab2f9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "In an EM wave, the direction of propagation is along the direction of:",
+  "formula": "",
+  "options": [
+   "E × B",
+   "B × E",
+   "E only",
+   "B only"
+  ],
+  "answer": 0,
+  "explain": "Propagation is along E × B (the Poynting vector direction).",
+  "kind": "fact",
+  "id": "91a9d256-de8b-4047-b85f-61cff37db0c3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "In free space, the phase relation between E and B of an EM wave is:",
+  "formula": "",
+  "options": [
+   "In phase",
+   "π/2 out of phase",
+   "π out of phase",
+   "Phase differs by π/4"
+  ],
+  "answer": 0,
+  "explain": "E and B reach maxima and zeros together in a free-space EM wave.",
+  "kind": "fact",
+  "id": "7b4e423c-99d4-4313-9981-5275a40b5e70",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "The angle between E and B vectors in a plane EM wave in free space is:",
+  "formula": "",
+  "options": [
+   "90°",
+   "0°",
+   "180°",
+   "45°"
+  ],
+  "answer": 0,
+  "explain": "E ⟂ B, and both are ⟂ the direction of propagation.",
+  "kind": "fact",
+  "id": "8e18bc13-afc6-4369-ab77-f5f0d935e11f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "The ratio of the amplitudes E₀/B₀ in vacuum equals:",
+  "formula": "E₀/B₀ = c",
+  "options": [
+   "c",
+   "1/c",
+   "c²",
+   "μ₀ε₀"
+  ],
+  "answer": 0,
+  "explain": "E₀ = cB₀; the ratio has the units of velocity.",
+  "kind": "formula",
+  "id": "816fb0be-c2dc-4455-a6f8-b1403230ef84",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "In a medium, the ratio E₀/B₀ of an EM wave equals:",
+  "formula": "E₀/B₀ = v = 1/√(με)",
+  "options": [
+   "Speed of wave in the medium",
+   "c always",
+   "√(με)",
+   "1/v"
+  ],
+  "answer": 0,
+  "explain": "The ratio E/B always equals the phase speed in that medium.",
+  "kind": "formula",
+  "id": "2a173802-1601-4122-8012-8fc6bf445952",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "As E and B alternate in sign, the Poynting vector direction of the wave:",
+  "formula": "",
+  "options": [
+   "Stays along propagation",
+   "Reverses every half cycle",
+   "Rotates about k",
+   "Becomes zero on average"
+  ],
+  "answer": 0,
+  "explain": "Reversing both E and B leaves E × B unchanged.",
+  "kind": "concept",
+  "id": "b3bd4e5b-1737-42f6-9b8d-ff8be4217ec7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For an EM wave in free space, which statement about E is correct?",
+  "formula": "",
+  "options": [
+   "E has no component along k",
+   "E is parallel to k",
+   "E has a component along k",
+   "E is parallel to B"
+  ],
+  "answer": 0,
+  "explain": "The wave is transverse: both E and B are perpendicular to k (∇·E = 0 in free space).",
+  "kind": "concept",
+  "id": "b3989ddb-031a-4a3e-91e4-03246a4e2bff",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Plane-polarised EM wave: the plane of polarisation is fixed by the direction of:",
+  "formula": "",
+  "options": [
+   "E oscillation",
+   "k only",
+   "Wavelength",
+   "Amplitude of B only"
+  ],
+  "answer": 0,
+  "explain": "Polarisation direction is defined by the direction of the electric field vector.",
+  "kind": "concept",
+  "id": "08e1cdf4-c23f-42f6-b671-4bf427bee489",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Unpolarised light has E vectors that are:",
+  "formula": "",
+  "options": [
+   "In all directions ⟂ to k",
+   "Along k",
+   "In one fixed plane",
+   "Rotating along k"
+  ],
+  "answer": 0,
+  "explain": "Unpolarised light has E in all random transverse directions, not one plane.",
+  "kind": "concept",
+  "id": "c7079cea-e5ee-4b1e-8f3a-03be68a5f55c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "EM waves are not deflected by electric or magnetic fields because they:",
+  "formula": "",
+  "options": [
+   "Carry no net charge",
+   "Are longitudinal",
+   "Are very fast",
+   "Have no energy"
+  ],
+  "answer": 0,
+  "explain": "Photons/EM waves are uncharged, so external fields cannot deflect them.",
+  "kind": "concept",
+  "id": "98aecf69-fd10-44a9-99ef-ef2b44b60aa6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "In a plane EM wave, the energy density of the electric part compared with the magnetic part is:",
+  "formula": "½ε₀E² = B²/(2μ₀)",
+  "options": [
+   "Equal",
+   "Twice the magnetic",
+   "Half the magnetic",
+   "c times the magnetic"
+  ],
+  "answer": 0,
+  "explain": "Energy is shared equally between E and B in free space.",
+  "kind": "fact",
+  "id": "e7ee3856-352d-4ccd-84af-2dd587f72021",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For E₀ = 3 V/m in vacuum, the magnetic field amplitude B₀ is:",
+  "formula": "B₀ = E₀/c",
+  "options": [
+   "10⁻⁸ T",
+   "9×10⁸ T",
+   "3×10⁻⁸ T",
+   "10⁻⁶ T"
+  ],
+  "answer": 0,
+  "explain": "B₀ = 3/(3×10⁸) = 10⁻⁸ T.",
+  "kind": "result",
+  "id": "ab18ded4-d600-416b-934e-f2fa65e1fcd0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Which of these waves cannot be polarised?",
+  "formula": "",
+  "options": [
+   "Radio waves",
+   "Sound waves in air",
+   "X-rays",
+   "Microwaves"
+  ],
+  "answer": 1,
+  "explain": "Sound in air is longitudinal; only transverse waves can be polarised.",
+  "kind": "concept",
+  "id": "1adb4bbe-d559-402e-9d95-c67b8e2897fb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "A transverse EM wave along a given k has how many independent polarisation states?",
+  "formula": "",
+  "options": [
+   "One",
+   "Two",
+   "Three",
+   "Infinite"
+  ],
+  "answer": 1,
+  "explain": "E can have two independent components ⟂ k; any polarisation is their combination.",
+  "kind": "fact",
+  "id": "26c09e2b-04c5-42a1-8003-55b3088dffea",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "The result k·B = 0 (B transverse to propagation) follows from:",
+  "formula": "",
+  "options": [
+   "Faraday's law",
+   "Ampère–Maxwell law",
+   "Gauss's law for magnetism",
+   "Gauss's law for electricity"
+  ],
+  "answer": 2,
+  "explain": "∇·B = 0 gives k·B = 0, so B has no component along k.",
+  "kind": "concept",
+  "id": "a69d404d-9561-4d19-8751-656fbf5065c1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For a plane EM wave, which Maxwell equation shows E is perpendicular to the propagation direction?",
+  "formula": "∇·E = 0 → k·E = 0",
+  "options": [
+   "Gauss's law for electricity (free space)",
+   "Faraday's law",
+   "Ampere–Maxwell law",
+   "Gauss's law for magnetism"
+  ],
+  "answer": 0,
+  "explain": "In free space ∇·E = 0 gives k·E = 0, so E is transverse.",
+  "kind": "concept",
+  "id": "15057d7c-5277-42f2-90e3-ed3c9b370ad6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For a plane EM wave along unit vector k̂ in vacuum, the magnetic field is given by B =",
+  "formula": "B = (k̂ × E)/c",
+  "options": [
+   "(k̂ × E)/c",
+   "(E × k̂)/c",
+   "c(k̂ · E)",
+   "c(E × k̂)"
+  ],
+  "answer": 0,
+  "explain": "B is along k̂ × E with magnitude E/c, so E, B, k̂ form a right-handed set.",
+  "kind": "formula",
+  "id": "21623686-fbf5-4e31-aa67-5269963ee35f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "In a circularly polarised EM wave, the tip of the E vector at a fixed point traces:",
+  "formula": "",
+  "options": [
+   "A circle in the plane ⟂ k",
+   "A straight line along k",
+   "A straight line ⟂ k",
+   "A circle in a plane containing k"
+  ],
+  "answer": 0,
+  "explain": "E has constant magnitude and rotates uniformly in the plane perpendicular to k.",
+  "kind": "concept",
+  "id": "c69a6f0b-b0fe-42fe-8bdf-27b3a123c1f4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For an EM wave E = E₀ sin(kx − ωt) ĵ travelling in vacuum, B is directed along:",
+  "formula": "B ∥ k̂ × E",
+  "options": [
+   "+k̂ (z-axis)",
+   "−ĵ",
+   "+î",
+   "+k̂ direction (z) with sign set by k̂ × ĵ"
+  ],
+  "answer": 3,
+  "explain": "k̂ × Ê = î × ĵ = k̂, so B is along +z when E is along y and wave travels along +x.",
+  "kind": "result",
+  "id": "132ffbf7-eb0c-421a-a27f-d1e19f7b91ee",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "In an EM wave, the direction of propagation is along the direction of:",
+  "formula": "",
+  "options": [
+   "E × B",
+   "B × E",
+   "E only",
+   "B only"
+  ],
+  "answer": 0,
+  "explain": "Wave travels along E × B (the Poynting vector direction); E and B are both perpendicular to it.",
+  "kind": "fact",
+  "id": "666696fc-115c-4ddd-9ff2-3e11757b941a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "In a plane EM wave, ratio of electric to magnetic energy density is:",
+  "formula": "u_E : u_B = 1 : 1",
+  "options": [
+   "c : 1",
+   "1 : c",
+   "1 : 1",
+   "1 : c²"
+  ],
+  "answer": 2,
+  "explain": "½ε₀E² = B²/(2μ₀) follows from E = cB, so the energy is shared equally.",
+  "kind": "concept",
+  "id": "8dfa7337-a7dc-429d-9e06-0e06823b3954",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Average total energy density of a plane EM wave of peak field E₀ is:",
+  "formula": "u = ½ε₀E₀²",
+  "options": [
+   "¼ε₀E₀²",
+   "½ε₀E₀²",
+   "ε₀E₀²",
+   "2ε₀E₀²"
+  ],
+  "answer": 1,
+  "explain": "Average u_E = ¼ε₀E₀² and u_B equals it, so the total is ½ε₀E₀².",
+  "kind": "formula",
+  "id": "fef0c219-3e91-4800-8158-594071f00379",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Intensity of a plane EM wave in terms of E₀ is:",
+  "formula": "I = ½ε₀cE₀²",
+  "options": [
+   "½ε₀cE₀²",
+   "ε₀cE₀²",
+   "½ε₀E₀²/c",
+   "½ε₀c²E₀²"
+  ],
+  "answer": 0,
+  "explain": "I = u·c = ½ε₀E₀²·c.",
+  "kind": "formula",
+  "id": "c8696f37-78c7-439f-adce-7430b1e1dac9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Poynting vector of an EM wave is defined as:",
+  "formula": "S = (1/μ₀)(E × B)",
+  "options": [
+   "μ₀(E × B)",
+   "(1/μ₀)(E × B)",
+   "ε₀(E × B)",
+   "(1/ε₀)(E × B)"
+  ],
+  "answer": 1,
+  "explain": "S = E × B/μ₀ gives energy flow per unit area per unit time, in W/m².",
+  "kind": "formula",
+  "id": "17207c70-127f-4bb2-8e13-cd0b993bc64e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "For an EM wave in vacuum with E₀ = 3 V/m, the value of B₀ is:",
+  "formula": "B₀ = E₀/c",
+  "options": [
+   "10⁻⁸ T",
+   "9×10⁸ T",
+   "3×10⁻⁸ T",
+   "10⁻⁷ T"
+  ],
+  "answer": 0,
+  "explain": "B₀ = 3/(3×10⁸) = 10⁻⁸ T.",
+  "kind": "result",
+  "id": "a2cb2e32-695c-4b21-8dc4-df0a0eb8ca0b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Maxwell's added term ε₀ dΦ_E/dt in Ampere's law is called:",
+  "formula": "I_d = ε₀ dΦ_E/dt",
+  "options": [
+   "Eddy current",
+   "Displacement current",
+   "Conduction current",
+   "Induced emf"
+  ],
+  "answer": 1,
+  "explain": "A changing electric flux acts as displacement current, which makes EM wave propagation possible.",
+  "kind": "fact",
+  "id": "abd503b9-4378-4950-a42a-924b22ed5b6b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Average magnetic energy density in an EM wave of peak field B₀ is:",
+  "formula": "u_B = B₀²/(4μ₀)",
+  "options": [
+   "B₀²/(2μ₀)",
+   "B₀²/(4μ₀)",
+   "B₀²/μ₀",
+   "μ₀B₀²/4"
+  ],
+  "answer": 1,
+  "explain": "Instantaneous u_B = B²/(2μ₀); averaging sin² gives ½, so u_B = B₀²/(4μ₀).",
+  "kind": "formula",
+  "id": "6a05924a-2360-4907-b983-dc4d51c9dfc7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Intensity of a plane EM wave in terms of B₀ is:",
+  "formula": "I = cB₀²/(2μ₀)",
+  "options": [
+   "B₀²/(2μ₀c)",
+   "cB₀²/μ₀",
+   "cB₀²/(2μ₀)",
+   "c²B₀²/(2μ₀)"
+  ],
+  "answer": 2,
+  "explain": "I = ½ε₀cE₀² with E₀ = cB₀ and ε₀c² = 1/μ₀ gives cB₀²/(2μ₀).",
+  "kind": "formula",
+  "id": "50341795-47af-4567-930b-3ced04e4a74b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Time-averaged magnitude of the Poynting vector for a plane EM wave is:",
+  "formula": "⟨S⟩ = E₀B₀/(2μ₀)",
+  "options": [
+   "E₀B₀/μ₀",
+   "E₀B₀/(2μ₀)",
+   "μ₀E₀B₀/2",
+   "E₀B₀/(4μ₀)"
+  ],
+  "answer": 1,
+  "explain": "S = EB/μ₀ and the average of sin² is ½, so ⟨S⟩ = E₀B₀/(2μ₀).",
+  "kind": "formula",
+  "id": "e8ee6484-587a-4527-a636-935db0f795f0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "In vacuum an EM wave has B₀ = 2×10⁻⁸ T. Its E₀ is:",
+  "formula": "E₀ = cB₀",
+  "options": [
+   "6 V/m",
+   "0.6 V/m",
+   "60 V/m",
+   "2 V/m"
+  ],
+  "answer": 0,
+  "explain": "E₀ = cB₀ = 3×10⁸ × 2×10⁻⁸ = 6 V/m.",
+  "kind": "result",
+  "id": "0a20c419-623c-42af-830d-8e0337163be5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "A plane EM wave travels along +x with E along +y. The magnetic field oscillates along:",
+  "formula": "direction of propagation ∥ E × B",
+  "options": [
+   "+z only, always",
+   "±z axis",
+   "±y axis",
+   "±x axis"
+  ],
+  "answer": 1,
+  "explain": "B ⊥ E and ⊥ propagation, so B is along z. Since ŷ × ẑ = x̂, B is along +z when E is along +y, and the oscillation is along the z axis.",
+  "kind": "concept",
+  "id": "8ca110fa-9dc2-44e4-939f-97e08b820c43",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Maxwell's equation ∮B·dA = 0 over a closed surface implies:",
+  "formula": "∮B·dA = 0",
+  "options": [
+   "Changing E produces B",
+   "Changing B produces E",
+   "Isolated magnetic poles do not exist",
+   "Net charge inside is zero"
+  ],
+  "answer": 2,
+  "explain": "Gauss's law for magnetism: magnetic field lines are closed, so there are no magnetic monopoles.",
+  "kind": "concept",
+  "id": "a011182f-a564-4763-9ff5-7b6c99d3e2d0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Time-averaged total energy density of a plane EM wave in vacuum (peak field E₀) is:",
+  "formula": "u_avg = ½ε₀E₀²",
+  "options": [
+   "¼ε₀E₀²",
+   "½ε₀E₀²",
+   "ε₀E₀²",
+   "2ε₀E₀²"
+  ],
+  "answer": 1,
+  "explain": "Average u_E + average u_B = ε₀E₀²/4 + ε₀E₀²/4 = ½ε₀E₀².",
+  "kind": "formula",
+  "id": "1f997fbb-f491-43ff-a400-46951e3d42b6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Time-averaged total energy density of an EM wave in terms of peak magnetic field B₀ is:",
+  "formula": "u_avg = B₀²/2μ₀",
+  "options": [
+   "B₀²/4μ₀",
+   "B₀²/μ₀",
+   "B₀²/2μ₀",
+   "μ₀B₀²/2"
+  ],
+  "answer": 2,
+  "explain": "Both fields share equally, so total is twice the magnetic part B₀²/4μ₀, giving B₀²/2μ₀.",
+  "kind": "formula",
+  "id": "5e53c56a-2169-4d7f-85af-3a1c79e021cb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Intensity of a plane EM wave of peak electric field E₀ in vacuum is:",
+  "formula": "I = ½ε₀cE₀²",
+  "options": [
+   "½ε₀cE₀²",
+   "¼ε₀cE₀²",
+   "ε₀cE₀²",
+   "½ε₀E₀²/c"
+  ],
+  "answer": 0,
+  "explain": "I = u_avg·c = ½ε₀E₀²·c.",
+  "kind": "formula",
+  "id": "1fb7e3c9-6ae3-41db-a40d-5b1c40719110",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Instantaneous electric energy density in vacuum at a point where the field is E is:",
+  "formula": "u_E = ½ε₀E²",
+  "options": [
+   "ε₀E²",
+   "½ε₀E²",
+   "E²/2μ₀",
+   "½ε₀E"
+  ],
+  "answer": 1,
+  "explain": "The energy density of an electric field is ½ε₀E², as in a capacitor.",
+  "kind": "formula",
+  "id": "f7d604f1-9746-428c-8420-fc31af02e09e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Instantaneous magnetic energy density in vacuum for field B is:",
+  "formula": "u_B = B²/2μ₀",
+  "options": [
+   "μ₀B²/2",
+   "B²/μ₀",
+   "B²/2μ₀",
+   "½ε₀B²"
+  ],
+  "answer": 2,
+  "explain": "The energy density of a magnetic field is B²/(2μ₀).",
+  "kind": "formula",
+  "id": "290c1a43-3d60-4f14-a8f6-78ead48acef5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "In a plane EM wave in vacuum, the electric and magnetic energy densities are:",
+  "formula": "",
+  "options": [
+   "Equal at every instant",
+   "Equal only on time average",
+   "Max for u_E when u_B is zero",
+   "u_E = 2u_B at the peaks"
+  ],
+  "answer": 0,
+  "explain": "E and B are in phase with E = cB, so u_E = u_B at every point and instant.",
+  "kind": "concept",
+  "id": "91c5c52b-8813-4acb-83fa-29fb0cf704c9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "If the electric field oscillates with frequency ν, the energy density at a point oscillates with frequency:",
+  "formula": "u ∝ cos²(kx − ωt)",
+  "options": [
+   "ν/2",
+   "ν",
+   "2ν",
+   "It stays constant"
+  ],
+  "answer": 2,
+  "explain": "u ∝ cos² of the phase, so it oscillates at twice the frequency of the field.",
+  "kind": "concept",
+  "id": "595aa7b5-5c7b-47a3-bff5-f0556b05324e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Average u_E = ε₀E₀²/4. The factor ¼ comes from:",
+  "formula": "",
+  "options": [
+   "⟨cos²⟩ = ½ only",
+   "⟨cos²⟩ = ½ and the ½ in ½ε₀E²",
+   "⟨cos⟩ = ½ and the ½ in ½ε₀E²",
+   "Equal sharing with B only"
+  ],
+  "answer": 1,
+  "explain": "u_E = ½ε₀E₀²cos²θ and ⟨cos²θ⟩ = ½, so ½ × ½ = ¼.",
+  "kind": "concept",
+  "id": "b132f94b-73bb-440f-a97b-468f86e363c9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "For the same E₀, the wave frequency is doubled. The average energy density of the wave becomes:",
+  "formula": "",
+  "options": [
+   "Doubled",
+   "Four times",
+   "Halved",
+   "Unchanged"
+  ],
+  "answer": 3,
+  "explain": "u_avg = ½ε₀E₀² does not depend on frequency.",
+  "kind": "concept",
+  "id": "fb24f9ff-12a4-46f7-9ba4-4a4ad46910c2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Average total energy density of an EM wave in terms of E_rms is:",
+  "formula": "u_avg = ε₀E_rms²",
+  "options": [
+   "½ε₀E_rms²",
+   "ε₀E_rms²",
+   "2ε₀E_rms²",
+   "¼ε₀E_rms²"
+  ],
+  "answer": 1,
+  "explain": "E_rms² = E₀²/2, so ½ε₀E₀² = ε₀E_rms².",
+  "kind": "formula",
+  "id": "e4e7174a-753f-4716-9434-15279db7ac05",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Energy density of an EM wave in vacuum can also be written in terms of E and B as:",
+  "formula": "u = ε₀E² = ε₀cEB",
+  "options": [
+   "ε₀cEB",
+   "EB/c",
+   "ε₀EB/c",
+   "½ε₀cEB"
+  ],
+  "answer": 0,
+  "explain": "u = ε₀E·E = ε₀E·(cB) = ε₀cEB, using E = cB.",
+  "kind": "formula",
+  "id": "c8b9e971-5799-493f-9a8e-4901963b5741",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "The dimensional formula of energy density ε₀E² (energy per unit volume) is:",
+  "formula": "[ML⁻¹T⁻²]",
+  "options": [
+   "[ML²T⁻²]",
+   "[ML⁻¹T⁻²]",
+   "[ML⁻³T⁻²]",
+   "[MLT⁻²]"
+  ],
+  "answer": 1,
+  "explain": "Energy per volume: [ML²T⁻²]/[L³] = [ML⁻¹T⁻²], the same as pressure.",
+  "kind": "unit",
+  "id": "2c514fde-bc76-4c61-a825-5723c7442778",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "At a point in a vacuum plane EM wave where E = 0 at some instant, the energy density there is:",
+  "formula": "u = ε₀E² (E and B in phase)",
+  "options": [
+   "Zero",
+   "Maximum, all stored in B",
+   "Half of its maximum value",
+   "B₀²/2μ₀"
+  ],
+  "answer": 0,
+  "explain": "E and B are in phase, so both vanish together and u = ε₀E² = 0 at that instant.",
+  "kind": "concept",
+  "id": "153d0cad-c516-4d42-ba06-b8b0e9903bcd",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Intensity of a plane EM wave in vacuum equals the average energy density multiplied by:",
+  "formula": "I = ⟨u⟩ c",
+  "options": [
+   "c",
+   "1/c",
+   "c²",
+   "√(μ₀ε₀)"
+  ],
+  "answer": 0,
+  "explain": "Energy flows at speed c, so energy crossing unit area per second is I = ⟨u⟩c.",
+  "kind": "formula",
+  "id": "1b4f19aa-7972-404f-bb1f-81f721f211b5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Intensity of an EM wave in terms of E_rms (vacuum) is:",
+  "formula": "I = ε₀cE_rms²",
+  "options": [
+   "½ε₀cE_rms²",
+   "ε₀cE_rms²",
+   "2ε₀cE_rms²",
+   "ε₀E_rms²/c"
+  ],
+  "answer": 1,
+  "explain": "E_rms² = E₀²/2, so ½ε₀cE₀² becomes ε₀cE_rms².",
+  "kind": "formula",
+  "id": "56436ecd-d469-4422-a348-2a937fac616c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Intensity of an EM wave in terms of B_rms (vacuum) is:",
+  "formula": "I = cB_rms²/μ₀",
+  "options": [
+   "cB_rms²/2μ₀",
+   "cB_rms²/μ₀",
+   "μ₀cB_rms²",
+   "B_rms²/μ₀c"
+  ],
+  "answer": 1,
+  "explain": "B_rms² = B₀²/2, so cB₀²/2μ₀ becomes cB_rms²/μ₀.",
+  "kind": "formula",
+  "id": "95e09168-9838-4296-8981-bcbef4cf18e0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Time-averaged total (electric + magnetic) energy density of a plane EM wave in vacuum:",
+  "formula": "u_avg = ½ε₀E₀²",
+  "options": [
+   "¼ε₀E₀²",
+   "½ε₀E₀²",
+   "ε₀E₀²",
+   "2ε₀E₀²"
+  ],
+  "answer": 1,
+  "explain": "Each field contributes ¼ε₀E₀² on average, so the total is ½ε₀E₀².",
+  "kind": "formula",
+  "id": "88427906-b0fc-408f-b3ee-25fdeb346c1e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "In a plane EM wave in vacuum, the ratio u_E / u_B of electric to magnetic energy density is:",
+  "formula": "",
+  "options": [
+   "c²",
+   "1",
+   "1/c²",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "The two energy densities are equal at every instant, since E = cB.",
+  "kind": "fact",
+  "id": "d9c15e7b-1f22-4d0d-9297-2216f5c08268",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "If the EM wave has angular frequency ω, the instantaneous Poynting vector oscillates with angular frequency:",
+  "formula": "",
+  "options": [
+   "ω/2",
+   "ω",
+   "2ω",
+   "zero (constant)"
+  ],
+  "answer": 2,
+  "explain": "S ∝ sin²(kx−ωt), which has frequency 2ω and is never negative.",
+  "kind": "concept",
+  "id": "5cc5af66-366d-4fc2-aeed-29c2683fe91a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "The factor ½ in I = ½ε₀cE₀² comes from:",
+  "formula": "",
+  "options": [
+   "Equal E and B energy shares",
+   "Cycle average of sin² being ½",
+   "Half the energy being reflected",
+   "The speed c being halved"
+  ],
+  "answer": 1,
+  "explain": "Averaging sin²(kx−ωt) over a cycle gives ½.",
+  "kind": "concept",
+  "id": "551001ef-b0d8-42e0-9b4a-8abeba27a90d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Dimensional formula of the Poynting vector S:",
+  "formula": "",
+  "options": [
+   "[MLT⁻³]",
+   "[MT⁻³]",
+   "[ML²T⁻³]",
+   "[MT⁻²]"
+  ],
+  "answer": 1,
+  "explain": "S is power per area: ML²T⁻³ / L² = MT⁻³.",
+  "kind": "unit",
+  "id": "350cece1-576a-4efe-8a4c-4f65fb1873be",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "For a plane EM wave in vacuum, the instantaneous ratio E/B equals:",
+  "formula": "",
+  "options": [
+   "1/c",
+   "c",
+   "c²",
+   "√(μ₀/ε₀)·c"
+  ],
+  "answer": 1,
+  "explain": "E and B are in phase and E₀/B₀ = c, so E/B = c at every instant.",
+  "kind": "fact",
+  "id": "fdf6a823-9d1f-4286-ac76-f512dea49f03",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "For a point source radiating isotropically, the amplitude E₀ at distance r varies as:",
+  "formula": "I ∝ 1/r² and I ∝ E₀²",
+  "options": [
+   "1/r",
+   "1/r²",
+   "1/r³",
+   "independent of r"
+  ],
+  "answer": 0,
+  "explain": "I ∝ 1/r² and I ∝ E₀², so E₀ ∝ 1/r.",
+  "kind": "result",
+  "id": "d5a2b224-4db0-4779-844a-8e81cc6c33fb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Time-averaged magnetic energy density in a plane EM wave of amplitude B₀ is:",
+  "formula": "u_B = B₀²/4μ₀",
+  "options": [
+   "B₀²/2μ₀",
+   "B₀²/4μ₀",
+   "B₀²/μ₀",
+   "B₀²/8μ₀"
+  ],
+  "answer": 1,
+  "explain": "Instantaneous B²/2μ₀ is halved by the sin² average, giving B₀²/4μ₀.",
+  "kind": "formula",
+  "id": "5e58f79e-614b-4be2-aa97-cc144cf6a172",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Magnitude of the instantaneous Poynting vector in terms of E and B in vacuum:",
+  "formula": "S = (E × B)/μ₀",
+  "options": [
+   "EB/μ₀",
+   "μ₀EB",
+   "EB/2μ₀",
+   "ε₀EB"
+  ],
+  "answer": 0,
+  "explain": "S = (1/μ₀)(E × B). With E ⊥ B the magnitude is EB/μ₀.",
+  "kind": "formula",
+  "id": "dc2c5726-f6f6-4f30-828b-4eb0b2b7bfe3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Average intensity I of a plane EM wave in vacuum equals the average energy density u_av times:",
+  "formula": "I = u_av · c",
+  "options": [
+   "c",
+   "c²",
+   "1/c",
+   "c/2"
+  ],
+  "answer": 0,
+  "explain": "Energy in a column of length c per second crosses unit area: I = u_av c.",
+  "kind": "formula",
+  "id": "338e42db-270f-4556-be47-0f36011a66ed",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Light of intensity I falls on a perfect absorber at incidence angle θ (from normal). Radiation pressure is:",
+  "formula": "P = (I/c) cos²θ",
+  "options": [
+   "(I/c) cos θ",
+   "(I/c) cos²θ",
+   "(I/c) sin²θ",
+   "(2I/c) cos θ"
+  ],
+  "answer": 1,
+  "explain": "One cosθ comes from the normal momentum component, the other from the beam spread over a larger area.",
+  "kind": "formula",
+  "id": "a1e7b83b-3626-4fd1-8d21-db9492aef0cf",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Momentum & radiation pressure"
+ },
+ {
+  "prompt": "At normal incidence, radiation pressure on a perfectly absorbing surface equals the wave's:",
+  "formula": "P = u (energy density)",
+  "options": [
+   "Energy density",
+   "Half the energy density",
+   "Twice the energy density",
+   "Energy density × c"
+  ],
+  "answer": 0,
+  "explain": "I = uc, so P = I/c = u. A perfect reflector gets 2u.",
+  "kind": "result",
+  "id": "0a4c062c-4ea5-454b-a4e0-fe9d0923f1bc",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Momentum & radiation pressure"
+ },
+ {
+  "prompt": "Momentum carried by an EM wave points along:",
+  "formula": "",
+  "options": [
+   "E",
+   "B",
+   "E × B",
+   "B × E reversed to the E direction"
+  ],
+  "answer": 2,
+  "explain": "The Poynting vector S ∝ E × B gives the propagation direction, which is also the momentum direction.",
+  "kind": "fact",
+  "id": "2b0290e7-ac39-40cb-8e61-68ec383e6487",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Momentum & radiation pressure"
+ },
+ {
+  "prompt": "The amplitude E₀ of a wave falling on an absorber is doubled. Radiation pressure becomes:",
+  "formula": "P ∝ I ∝ E₀²",
+  "options": [
+   "2 times",
+   "4 times",
+   "8 times",
+   "Unchanged"
+  ],
+  "answer": 1,
+  "explain": "Intensity ∝ E₀², and pressure is proportional to intensity, so it becomes 4 times.",
+  "kind": "concept",
+  "id": "193d77c4-6c96-4ea8-91ca-8575eb6bb22e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Momentum & radiation pressure"
+ },
+ {
+  "prompt": "Order of magnitude of solar radiation pressure on an absorber near Earth (I ≈ 1.4 kW/m²):",
+  "formula": "P = I/c",
+  "options": [
+   "~10⁻⁶ Pa",
+   "~10⁻³ Pa",
+   "~1 Pa",
+   "~10⁻¹² Pa"
+  ],
+  "answer": 0,
+  "explain": "1.4×10³ / 3×10⁸ ≈ 5×10⁻⁶ Pa, so it is tiny but measurable.",
+  "kind": "fact",
+  "id": "5ff54973-3838-420f-9578-b3e11d2d9e6f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Momentum & radiation pressure"
+ },
+ {
+  "prompt": "Which colour in the visible spectrum has the highest frequency?",
+  "formula": "",
+  "options": [
+   "Red",
+   "Yellow",
+   "Green",
+   "Violet"
+  ],
+  "answer": 3,
+  "explain": "Violet has the shortest wavelength (~400 nm) in the visible range, hence the highest frequency.",
+  "kind": "fact",
+  "id": "7335156d-225e-4661-bbd6-20aa6f88424f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Wavelength range of infrared radiation is about:",
+  "formula": "",
+  "options": [
+   "1 nm – 400 nm",
+   "700 nm – 1 mm",
+   "1 mm – 0.1 m",
+   "0.1 m – 10⁴ m"
+  ],
+  "answer": 1,
+  "explain": "Infrared lies between the red end of visible light (~700 nm) and microwaves (~1 mm).",
+  "kind": "fact",
+  "id": "11404bf2-68b5-481d-ac0e-6a74abb9e7b3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Approximate wavelength range of X-rays is:",
+  "formula": "",
+  "options": [
+   "10⁻³ nm to 1 nm",
+   "1 nm to 400 nm",
+   "400 nm to 700 nm",
+   "10⁻⁶ nm to 10⁻⁴ nm"
+  ],
+  "answer": 0,
+  "explain": "X-rays span about 10⁻¹² m to 10⁻⁹ m (10⁻³ nm to 1 nm).",
+  "kind": "fact",
+  "id": "69af046a-2a00-4bab-b267-2a569c7cad70",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Radio waves have wavelengths:",
+  "formula": "",
+  "options": [
+   "Less than 1 mm",
+   "Between 1 mm and 1 cm",
+   "Greater than 0.1 m",
+   "Between 400 nm and 700 nm"
+  ],
+  "answer": 2,
+  "explain": "Radio waves are the longest-wavelength EM waves, above ~0.1 m.",
+  "kind": "fact",
+  "id": "5154f892-a6c9-41e7-a5f1-7db8ef3e565d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "The radiation lying just beyond the red end of the visible spectrum is:",
+  "formula": "",
+  "options": [
+   "Ultraviolet",
+   "Microwave",
+   "Infrared",
+   "X-ray"
+  ],
+  "answer": 2,
+  "explain": "Infrared lies next to red, at wavelengths longer than 700 nm.",
+  "kind": "fact",
+  "id": "2a5aee33-674e-4bb8-839c-0e36426c8d67",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Which lists EM waves in decreasing order of wavelength?",
+  "formula": "",
+  "options": [
+   "Radio, IR, UV, X-ray",
+   "IR, Radio, UV, X-ray",
+   "X-ray, UV, IR, Radio",
+   "Radio, UV, IR, X-ray"
+  ],
+  "answer": 0,
+  "explain": "Wavelength falls as Radio > Microwave > IR > Visible > UV > X-ray > γ.",
+  "kind": "concept",
+  "id": "f637198b-5c2a-4499-8ea0-6e8b46298688",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Which two regions of the EM spectrum overlap in wavelength?",
+  "formula": "",
+  "options": [
+   "Radio and microwaves only",
+   "UV and infrared",
+   "X-rays and γ-rays",
+   "Visible and radio waves"
+  ],
+  "answer": 2,
+  "explain": "X-rays and γ-rays overlap in wavelength; they differ in origin.",
+  "kind": "fact",
+  "id": "009a68e9-b2fd-4de6-a46b-e7bad8dca28f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Which EM radiation has the least photon energy?",
+  "formula": "E = hν",
+  "options": [
+   "Microwaves",
+   "Infrared",
+   "Radio waves",
+   "Visible light"
+  ],
+  "answer": 2,
+  "explain": "Radio waves have the lowest frequency, so the least photon energy.",
+  "kind": "concept",
+  "id": "c0f2acf4-299d-4b99-8b91-065d7ead34c0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "The frequency range of visible light is about:",
+  "formula": "",
+  "options": [
+   "4×10¹⁴ Hz – 7.5×10¹⁴ Hz",
+   "4×10⁹ Hz – 7.5×10⁹ Hz",
+   "4×10¹⁸ Hz – 7.5×10¹⁸ Hz",
+   "4×10¹¹ Hz – 7.5×10¹¹ Hz"
+  ],
+  "answer": 0,
+  "explain": "ν = c/λ gives about 7.5×10¹⁴ Hz (400 nm) down to 4×10¹⁴ Hz (700 nm).",
+  "kind": "fact",
+  "id": "98a9a1d3-28b9-416f-803f-316e5c24c954",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "In vacuum, all EM waves of different wavelengths have the same:",
+  "formula": "c = νλ",
+  "options": [
+   "Frequency",
+   "Photon energy",
+   "Speed",
+   "Wavelength"
+  ],
+  "answer": 2,
+  "explain": "Every EM wave travels at c ≈ 3×10⁸ m/s in vacuum.",
+  "kind": "concept",
+  "id": "56ee016b-60ce-423f-b85b-d4a0c08f8762",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Human eye is most sensitive to wavelength near:",
+  "formula": "",
+  "options": [
+   "400 nm (violet)",
+   "555 nm (yellow-green)",
+   "700 nm (red)",
+   "1000 nm (IR)"
+  ],
+  "answer": 1,
+  "explain": "Eye sensitivity peaks near 555 nm, in the yellow-green region.",
+  "kind": "fact",
+  "id": "ca9b854c-1de5-42bb-a064-8e7082a454fc",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "γ-rays differ from X-rays mainly in their:",
+  "formula": "",
+  "options": [
+   "Speed in vacuum",
+   "Origin",
+   "Transverse nature",
+   "Absence of charge"
+  ],
+  "answer": 1,
+  "explain": "γ-rays come from nuclei; X-rays come from inner-shell transitions or electron deceleration.",
+  "kind": "concept",
+  "id": "36716556-dfc9-4e22-8d87-a5546802b625",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "In vacuum, moving across the EM spectrum, wavelength is ___ to frequency.",
+  "formula": "λ = c/ν",
+  "options": [
+   "Directly proportional",
+   "Inversely proportional",
+   "Proportional to its square",
+   "Independent"
+  ],
+  "answer": 1,
+  "explain": "Since c is constant, λ ∝ 1/ν, so higher frequency means shorter wavelength.",
+  "kind": "concept",
+  "id": "3594a706-7372-4186-987f-4bc41c67b3f9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Radio waves used in communication are produced by which source?",
+  "formula": "",
+  "options": [
+   "Oscillating electric circuits (LC oscillator)",
+   "Inner-shell electron transitions",
+   "Nuclear decay",
+   "Hot filament only"
+  ],
+  "answer": 0,
+  "explain": "Radio waves arise from rapid acceleration/oscillation of charges in conducting wires and circuits.",
+  "kind": "fact",
+  "id": "f7f81804-80f8-4a43-9f8b-64924f9a9283",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Microwaves for radar are generated using which device?",
+  "formula": "",
+  "options": [
+   "Klystron / magnetron",
+   "X-ray tube",
+   "Geiger tube",
+   "Sodium lamp"
+  ],
+  "answer": 0,
+  "explain": "Microwaves are produced by special vacuum tubes: klystron, magnetron, Gunn diode.",
+  "kind": "fact",
+  "id": "28c676e5-4002-4b17-ba5c-828e39887df9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Ultraviolet rays are produced mainly by which source?",
+  "formula": "",
+  "options": [
+   "Sun, UV lamps, arc and mercury vapour lamps",
+   "Magnetron",
+   "LC circuit",
+   "Radioactive nuclei"
+  ],
+  "answer": 0,
+  "explain": "Atoms/molecules excited in very hot bodies, arcs and mercury lamps emit UV.",
+  "kind": "fact",
+  "id": "7fdbaa1a-53fa-4420-82ab-485b502d394b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Visible light is emitted by atoms due to which process?",
+  "formula": "",
+  "options": [
+   "Outer-electron transitions",
+   "Nuclear transitions",
+   "Inner-shell transitions",
+   "Molecular rotation"
+  ],
+  "answer": 0,
+  "explain": "Valence/outer electrons in atoms changing energy levels emit visible light.",
+  "kind": "concept",
+  "id": "6d3a63bb-46ee-46a9-b6eb-65d0772c0408",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Infrared waves originate from which atomic-level motion?",
+  "formula": "",
+  "options": [
+   "Vibrations of atoms and molecules",
+   "Nuclear spin flips",
+   "Inner-shell electron jumps",
+   "Free-electron deceleration only"
+  ],
+  "answer": 0,
+  "explain": "Molecular vibrations and rotations give infrared (thermal) radiation.",
+  "kind": "concept",
+  "id": "bb634348-6c14-45e9-a277-501ff9f62709",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Which pair correctly matches the wave and its source?",
+  "formula": "",
+  "options": [
+   "Microwave – klystron valve",
+   "Gamma – LC circuit",
+   "Radio – nuclei",
+   "UV – magnetron"
+  ],
+  "answer": 0,
+  "explain": "Klystron and magnetron valves produce microwaves; the others are mismatched.",
+  "kind": "fact",
+  "id": "a1e17ff5-146a-40ef-a598-70d2bc90304f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Which EM wave is produced by the sudden deceleration of high-speed electrons on a metal target?",
+  "formula": "",
+  "options": [
+   "X-rays",
+   "Radio waves",
+   "Ultraviolet",
+   "Microwaves"
+  ],
+  "answer": 0,
+  "explain": "Bremsstrahlung (braking radiation) plus characteristic lines give X-rays.",
+  "kind": "concept",
+  "id": "ff5bb35e-3f83-4328-bc38-560ecd52a9a4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Characteristic X-rays are emitted due to transitions of:",
+  "formula": "",
+  "options": [
+   "Inner-shell electrons",
+   "Outermost electrons",
+   "Nucleons",
+   "Free electrons"
+  ],
+  "answer": 0,
+  "explain": "Electron falling to a vacancy in an inner shell (K, L) emits characteristic X-ray lines.",
+  "kind": "concept",
+  "id": "23ddf6cd-3214-47f2-ba32-f8b3ac7adefd",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Which of these is NOT an EM wave?",
+  "formula": "",
+  "options": [
+   "Cathode rays",
+   "Gamma rays",
+   "X-rays",
+   "Microwaves"
+  ],
+  "answer": 0,
+  "explain": "Cathode rays are a beam of electrons (particles), not EM radiation.",
+  "kind": "exception",
+  "id": "218ed31e-4ead-44d2-aa65-36761f62dcd9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Which radiation is emitted by a radioactive nucleus de-exciting after α or β decay?",
+  "formula": "",
+  "options": [
+   "Gamma rays",
+   "Ultraviolet",
+   "Infrared",
+   "Radio waves"
+  ],
+  "answer": 0,
+  "explain": "The daughter nucleus in an excited state drops to a lower level, emitting γ photons.",
+  "kind": "concept",
+  "id": "23f5b746-5e8b-4fff-ba42-e4e4cea753af",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Which EM wave has the same origin as the heat felt from a hot iron?",
+  "formula": "",
+  "options": [
+   "Infrared",
+   "Ultraviolet",
+   "Gamma rays",
+   "Radio waves"
+  ],
+  "answer": 0,
+  "explain": "Heat waves are infrared, from thermal vibrations of atoms and molecules.",
+  "kind": "fact",
+  "id": "9a239d81-cffa-416e-9b7b-09e6c8383ce4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Which of these EM waves has the longest wavelength and is produced by a charge oscillating in an antenna?",
+  "formula": "",
+  "options": [
+   "Radio waves",
+   "Microwaves",
+   "Infrared",
+   "X-rays"
+  ],
+  "answer": 0,
+  "explain": "Radio waves have the longest wavelength (>0.1 m) and are produced by antenna charge oscillations.",
+  "kind": "fact",
+  "id": "5440009d-4023-4c12-8270-576093228031",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used in LASIK eye surgery?",
+  "formula": "",
+  "options": [
+   "Ultraviolet",
+   "Infrared",
+   "Microwaves",
+   "Gamma rays"
+  ],
+  "answer": 0,
+  "explain": "Ultraviolet (excimer laser) is used for LASIK eye surgery.",
+  "kind": "fact",
+  "id": "0f4f22c0-dae2-4f6d-8924-5fe976f182ff",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used for sterilising surgical instruments and water purifiers?",
+  "formula": "",
+  "options": [
+   "Ultraviolet",
+   "Infrared",
+   "Radio waves",
+   "Visible light"
+  ],
+  "answer": 0,
+  "explain": "UV kills germs; used in water purifiers and sterilisation.",
+  "kind": "fact",
+  "id": "bf8ffa81-9ada-46da-afc3-5ccf1f13d47b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used in remote controls of TV and in night-vision devices?",
+  "formula": "",
+  "options": [
+   "Infrared",
+   "Ultraviolet",
+   "X-rays",
+   "Microwaves"
+  ],
+  "answer": 0,
+  "explain": "Infrared is used in remote switches, night vision and physiotherapy.",
+  "kind": "fact",
+  "id": "e720ce27-2f0e-4fe0-a4b7-b924f26cfef2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used to destroy cancer cells in radiotherapy?",
+  "formula": "",
+  "options": [
+   "Gamma rays",
+   "Microwaves",
+   "Infrared",
+   "Ultraviolet"
+  ],
+  "answer": 0,
+  "explain": "High-energy gamma rays kill cancerous cells and also sterilise.",
+  "kind": "fact",
+  "id": "edd1335f-8e77-4313-b518-016efef79f07",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used in long-distance satellite communication and mobile phones?",
+  "formula": "",
+  "options": [
+   "Microwaves",
+   "Infrared",
+   "Gamma rays",
+   "Ultraviolet"
+  ],
+  "answer": 0,
+  "explain": "Microwaves pass through the ionosphere, so they suit satellite links.",
+  "kind": "fact",
+  "id": "bff0c2a8-a32b-4801-bb88-5af38b064855",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used in detecting fractures and in airport baggage checks?",
+  "formula": "",
+  "options": [
+   "X-rays",
+   "Gamma rays",
+   "Microwaves",
+   "Ultraviolet"
+  ],
+  "answer": 0,
+  "explain": "X-rays penetrate soft matter but are absorbed by bone and metal.",
+  "kind": "fact",
+  "id": "ef4a8134-0ea8-41f9-b515-75d25f85bd15",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used in AM/FM radio and TV broadcasting?",
+  "formula": "",
+  "options": [
+   "Radio waves",
+   "Microwaves",
+   "Infrared",
+   "X-rays"
+  ],
+  "answer": 0,
+  "explain": "Radio waves (about 500 kHz to 1000 MHz) are used for broadcasting.",
+  "kind": "fact",
+  "id": "1afbc0c3-3b7b-4a51-8c62-44900d6d77b1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves from the Sun are mainly responsible for heating the Earth's surface, the greenhouse effect?",
+  "formula": "",
+  "options": [
+   "Infrared",
+   "Ultraviolet",
+   "X-rays",
+   "Radio waves"
+  ],
+  "answer": 0,
+  "explain": "Infrared is the heat radiation; the greenhouse gases trap the Earth's IR.",
+  "kind": "concept",
+  "id": "ef42678f-e418-4825-9238-d5c5a6998289",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used to check the purity of gems and detect forged documents or banknotes?",
+  "formula": "",
+  "options": [
+   "Ultraviolet",
+   "Infrared",
+   "Microwaves",
+   "Radio waves"
+  ],
+  "answer": 0,
+  "explain": "Fluorescence under UV reveals fake notes and gem impurities.",
+  "kind": "fact",
+  "id": "ecec0e25-1f43-43fb-8ae4-0365aef000f9",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "Which EM waves are used to take photographs in the dark or in fog and for treating muscular strain?",
+  "formula": "",
+  "options": [
+   "Infrared",
+   "Gamma rays",
+   "Ultraviolet",
+   "X-rays"
+  ],
+  "answer": 0,
+  "explain": "Infrared is used in haze or dark photography and physiotherapy.",
+  "kind": "fact",
+  "id": "704206a0-4868-453c-bf18-6ebaedeb6154",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Uses/applications of EM wave bands"
+ },
+ {
+  "prompt": "In a charging parallel-plate capacitor, the displacement current between plates equals which current in the wire?",
+  "formula": "I_d = I_c",
+  "options": [
+   "Conduction current in the connecting wire",
+   "Half the conduction current in the wire",
+   "Zero, since no charge crosses the gap",
+   "Conduction current times the dielectric constant"
+  ],
+  "answer": 0,
+  "explain": "Continuity of current: I_d in the gap equals I_c in the wires, so Ampère–Maxwell law is consistent for any surface.",
+  "kind": "concept",
+  "id": "5c3444b0-f28c-4991-8f6b-231b2d543791",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Displacement current in a capacitor of plate area A with E between plates: I_d equals?",
+  "formula": "I_d = ε₀ A dE/dt",
+  "options": [
+   "ε₀ A dE/dt",
+   "ε₀ E dA/dt",
+   "μ₀ A dE/dt",
+   "A dE/(ε₀ dt)"
+  ],
+  "answer": 0,
+  "explain": "Φ_E = EA for uniform field normal to plates, so I_d = ε₀ d(EA)/dt = ε₀ A dE/dt.",
+  "kind": "formula",
+  "id": "0fd4f247-5a20-4476-9346-f789f8c596ed",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Vacuum speed of light measured by observers in relative motion with the source is",
+  "formula": "",
+  "options": [
+   "Larger if observer moves toward source",
+   "Smaller if source moves away",
+   "Same c for all observers",
+   "Depends on the source's frequency"
+  ],
+  "answer": 2,
+  "explain": "c = 1/√(μ₀ε₀) is a constant of nature, independent of source and observer motion.",
+  "kind": "concept",
+  "id": "f933f60c-7409-4884-bae0-bfa1bac64747",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "If ε₀ became 4 times with μ₀ unchanged, the speed of EM waves in vacuum would be",
+  "formula": "c = 1/√(μ₀ε₀)",
+  "options": [
+   "4c",
+   "2c",
+   "c/4",
+   "c/2"
+  ],
+  "answer": 3,
+  "explain": "c ∝ 1/√ε₀, so quadrupling ε₀ halves the speed to c/2.",
+  "kind": "concept",
+  "id": "8db3440a-355d-438c-9cfd-2ccc251b2494",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "The quantity √(μ₀/ε₀) has the same unit as",
+  "formula": "",
+  "options": [
+   "Resistance (ohm)",
+   "Conductance (siemens)",
+   "Inductance (henry)",
+   "Capacitance (farad)"
+  ],
+  "answer": 0,
+  "explain": "√(μ₀/ε₀) ≈ 377 Ω is the impedance of free space; its unit is ohm.",
+  "kind": "unit",
+  "id": "19881313-313a-4939-ae81-92ef984709c3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "Value of √(μ₀/ε₀), the impedance of free space, is approximately",
+  "formula": "Z₀ = √(μ₀/ε₀) = μ₀c",
+  "options": [
+   "377 Ω",
+   "120 Ω",
+   "3×10⁸ Ω",
+   "9×10⁹ Ω"
+  ],
+  "answer": 0,
+  "explain": "Z₀ = μ₀c = 4π×10⁻⁷ × 3×10⁸ ≈ 377 Ω (=120π Ω).",
+  "kind": "fact",
+  "id": "e7b52078-77af-442d-8bf6-7c7595bf9f07",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "E-field direction is unchanged but the wave direction is reversed. The B-field direction then:",
+  "formula": "k̂ ∥ E × B",
+  "options": [
+   "Remains unchanged",
+   "Reverses",
+   "Becomes parallel to E",
+   "Becomes parallel to k"
+  ],
+  "answer": 1,
+  "explain": "E × B must point along the new k, so with E fixed, B must flip sign.",
+  "kind": "concept",
+  "id": "e692d9e4-cb8d-4132-87f9-dadf2dd13165",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Two in-phase, equal-amplitude, linearly polarised waves with ⟂ E-planes travel together. The resultant is:",
+  "formula": "",
+  "options": [
+   "Circularly polarised",
+   "Elliptically polarised",
+   "Linear, E at 45° to each",
+   "Unpolarised"
+  ],
+  "answer": 2,
+  "explain": "Zero phase difference gives a fixed resultant E at 45°, so the wave is linearly polarised.",
+  "kind": "result",
+  "id": "d7e5c50c-742e-46ed-af4d-f6820d2bd182",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Which vector of an EM wave is called the 'light vector', causing optical and photographic effects?",
+  "formula": "",
+  "options": [
+   "Electric field E",
+   "Magnetic field B",
+   "Wave vector k",
+   "Poynting vector S"
+  ],
+  "answer": 0,
+  "explain": "The electric vector E acts on charges and detectors, so it is the light vector; the B force is weaker by v/c.",
+  "kind": "fact",
+  "id": "3604fb09-9952-489a-b7d2-6397bb1cf15b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Plane EM wave in vacuum, peak field E₀. The maximum instantaneous total energy density at a point is:",
+  "formula": "u = ε₀E₀²cos²(kx − ωt)",
+  "options": [
+   "ε₀E₀²",
+   "½ε₀E₀²",
+   "¼ε₀E₀²",
+   "2ε₀E₀²"
+  ],
+  "answer": 0,
+  "explain": "u = ε₀E² reaches ε₀E₀² when cos² = 1; the average is half of this, ½ε₀E₀².",
+  "kind": "result",
+  "id": "67d50ff4-7995-4895-8c17-554580cdbcfc",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Average total energy density of a vacuum EM wave in terms of rms magnetic field B_rms is:",
+  "formula": "u_avg = B_rms²/μ₀",
+  "options": [
+   "B_rms²/μ₀",
+   "B_rms²/2μ₀",
+   "B_rms²/4μ₀",
+   "2B_rms²/μ₀"
+  ],
+  "answer": 0,
+  "explain": "B_rms² = B₀²/2, so u_avg = B₀²/2μ₀ = B_rms²/μ₀ (magnetic and electric parts equal).",
+  "kind": "formula",
+  "id": "9c20f6c6-2c2c-4b3d-8023-d0f3a2647453",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "A perfectly absorbing sphere of radius R is in a beam of intensity I. The force on it is:",
+  "formula": "F = I·πR²/c",
+  "options": [
+   "4πR²I/c",
+   "πR²I/c",
+   "2πR²I/c",
+   "πR²I/(2c)"
+  ],
+  "answer": 1,
+  "explain": "Only the projected cross-section πR² intercepts the beam, so F = (I/c)·πR².",
+  "kind": "result",
+  "id": "aef67f69-2c91-4030-9632-3dfba28838f5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Momentum & radiation pressure"
+ },
+ {
+  "prompt": "Arrange in increasing wavelength: microwaves, X-rays, visible, radio waves.",
+  "formula": "",
+  "options": [
+   "X-rays < visible < microwaves < radio",
+   "Visible < X-rays < microwaves < radio",
+   "X-rays < microwaves < visible < radio",
+   "Radio < microwaves < visible < X-rays"
+  ],
+  "answer": 0,
+  "explain": "Wavelength order: X-ray < visible < microwave < radio (frequency order is reverse).",
+  "kind": "pattern",
+  "id": "0898a648-2432-428e-a3cf-efe752a71ed7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Which radiation has frequency just higher than microwaves but lower than visible light?",
+  "formula": "",
+  "options": [
+   "Infrared",
+   "Ultraviolet",
+   "Radio waves",
+   "X-rays"
+  ],
+  "answer": 0,
+  "explain": "Frequency order: radio < microwave < infrared < visible < UV < X-ray < γ.",
+  "kind": "fact",
+  "id": "b44ac6e7-c053-4550-be1d-a70b3529e42f",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "In a Coolidge tube, the intensity of X-rays is mainly controlled by:",
+  "formula": "",
+  "options": [
+   "Filament current",
+   "Anode–cathode voltage",
+   "Atomic number of target",
+   "Length of the tube"
+  ],
+  "answer": 0,
+  "explain": "The filament current sets the number of electrons emitted. The voltage sets the penetrating power (hardness).",
+  "kind": "concept",
+  "id": "bb4149c3-da4b-4ba7-acc5-cf429bb9daa7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "The continuous X-ray spectrum is called bremsstrahlung because it arises from:",
+  "formula": "",
+  "options": [
+   "Braking of fast electrons",
+   "Inner-shell transitions",
+   "Nuclear de-excitation",
+   "Molecular vibrations"
+  ],
+  "answer": 0,
+  "explain": "Bremsstrahlung means 'braking radiation', produced when electrons decelerate in the target.",
+  "kind": "fact",
+  "id": "f93db365-16ab-494d-ab9b-b082ecf696a5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "The wavelengths of characteristic X-ray lines depend on:",
+  "formula": "",
+  "options": [
+   "Target element (atomic number)",
+   "Accelerating voltage",
+   "Filament temperature",
+   "Tube current"
+  ],
+  "answer": 0,
+  "explain": "The lines are fixed by the inner-shell energy gaps of the target atom (Moseley's law).",
+  "kind": "fact",
+  "id": "83df3533-f825-4824-9a17-cb0e8db24409",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "X-rays and γ-rays of the same wavelength differ only in their:",
+  "formula": "",
+  "options": [
+   "Origin",
+   "Speed in vacuum",
+   "Photon energy",
+   "Nature of wave"
+  ],
+  "answer": 0,
+  "explain": "Their wavelength ranges overlap. X-rays come from electrons or atoms, γ-rays from the nucleus.",
+  "kind": "concept",
+  "id": "d98f69f6-e597-43a4-8e47-f4f3561895db",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "An oscillating charge of frequency f emits an EM wave of frequency:",
+  "formula": "",
+  "options": [
+   "f",
+   "2f",
+   "f/2",
+   "Depends on the medium"
+  ],
+  "answer": 0,
+  "explain": "The radiated wave has the same frequency as the source charge's oscillation.",
+  "kind": "concept",
+  "id": "e7becac5-064a-4c9e-8883-6f4b2111a677",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "Hertz first produced EM waves in the laboratory using:",
+  "formula": "",
+  "options": [
+   "Spark discharge in an oscillating circuit",
+   "A magnetron",
+   "A klystron",
+   "An X-ray tube"
+  ],
+  "answer": 0,
+  "explain": "Hertz's induction-coil spark gap with an LC-type oscillation gave waves of about 6 m wavelength.",
+  "kind": "fact",
+  "id": "b1b82e69-e432-4477-a363-be809a8c17f6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "In a fluorescent tube, the visible light is mainly produced by:",
+  "formula": "",
+  "options": [
+   "Phosphor coating absorbing mercury UV",
+   "Heated tungsten filament",
+   "Direct visible lines of argon only",
+   "X-rays from the electrodes"
+  ],
+  "answer": 0,
+  "explain": "Mercury vapour emits UV, and the phosphor coating re-emits it as visible light.",
+  "kind": "fact",
+  "id": "95ec3322-7b29-4818-a075-6ebfc3f9ea8d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "The Sun's radiation has its maximum intensity in which region?",
+  "formula": "",
+  "options": [
+   "Visible",
+   "Ultraviolet",
+   "Infrared",
+   "X-ray"
+  ],
+  "answer": 0,
+  "explain": "The Sun's surface is at about 5800 K, so the peak is near 500 nm (visible).",
+  "kind": "fact",
+  "id": "e7707d72-0655-4ad2-8431-c4807a6b9588",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "On heating a body to a higher temperature, the peak of its emitted radiation shifts to:",
+  "formula": "λ_max·T = constant",
+  "options": [
+   "Shorter wavelength",
+   "Longer wavelength",
+   "Remains unchanged",
+   "Radio region"
+  ],
+  "answer": 0,
+  "explain": "Wien's displacement law: λ_max ∝ 1/T.",
+  "kind": "trend",
+  "id": "185137a3-5b90-459a-a564-14dad3898ab1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "The Earth's surface at ~300 K radiates mainly in the:",
+  "formula": "",
+  "options": [
+   "Infrared region",
+   "Ultraviolet region",
+   "Visible region",
+   "Microwave region"
+  ],
+  "answer": 0,
+  "explain": "Wien's law gives a peak near 10 μm, which is infrared (terrestrial radiation).",
+  "kind": "fact",
+  "id": "623d7973-bfc9-42a2-8065-c5ab2f8ded8d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Sources/production of EM wave bands"
+ },
+ {
+  "prompt": "In glass, which colour of visible light has the lowest speed?",
+  "formula": "",
+  "options": [
+   "Red",
+   "Green",
+   "Yellow",
+   "Violet"
+  ],
+  "answer": 3,
+  "explain": "Speed depends on frequency in a medium; n is largest for violet, so v = c/n is smallest.",
+  "kind": "fact",
+  "id": "48490b8c-bf8d-46bb-b217-3f224ed30a0a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "Which Maxwell term made the prediction c = 1/√(μ₀ε₀) of EM waves possible?",
+  "formula": "",
+  "options": [
+   "Conduction current",
+   "Displacement current",
+   "Eddy current",
+   "Induced charge"
+  ],
+  "answer": 1,
+  "explain": "Displacement current (ε₀ dΦ_E/dt) in Ampère's law couples changing E and B, giving wave speed 1/√(μ₀ε₀).",
+  "kind": "concept",
+  "id": "a9998378-ba27-4727-8d0b-499d08968160",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "A medium has μᵣ = 4 and εᵣ = 9. Speed of EM waves in it is",
+  "formula": "v = c/√(μᵣεᵣ)",
+  "options": [
+   "c/36",
+   "c/6",
+   "c/13",
+   "6c"
+  ],
+  "answer": 1,
+  "explain": "n = √(4×9) = 6, so v = c/6.",
+  "kind": "formula",
+  "id": "441fc16b-3b3d-44a2-9b57-a10ed6a9b258",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "Plane EM wave in a medium (permittivity ε, permeability μ), peak field E₀. Average total energy density is:",
+  "formula": "u = ½εE₀²",
+  "options": [
+   "½ε₀E₀²",
+   "½εE₀²",
+   "εE₀²",
+   "¼εE₀²"
+  ],
+  "answer": 1,
+  "explain": "Average u_E = u_B = ¼εE₀², so the total is ½εE₀². Equal sharing holds in a medium too.",
+  "kind": "formula",
+  "id": "81928c20-2fb6-499e-93b7-dff70ffd20e2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "In a non-conducting medium where the wave speed is v, intensity equals average energy density multiplied by:",
+  "formula": "I = u·v",
+  "options": [
+   "c",
+   "v",
+   "v²",
+   "1/v"
+  ],
+  "answer": 1,
+  "explain": "Energy flows at the wave speed in the medium, so I = u·v, which reduces to u·c in vacuum.",
+  "kind": "concept",
+  "id": "efd22574-16a1-4fdb-910d-05401b17724d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Light of intensity I hits a perfect mirror of area A at incidence angle θ from the normal. Normal force on it:",
+  "formula": "F = (2IA/c) cos²θ",
+  "options": [
+   "(2IA/c) cosθ",
+   "(2IA/c) cos²θ",
+   "(2IA/c) sin²θ",
+   "(IA/c) cos²θ"
+  ],
+  "answer": 1,
+  "explain": "The normal momentum change is 2(U/c)cosθ, and the beam's cross-section projects onto the surface with another cosθ, giving cos²θ.",
+  "kind": "result",
+  "id": "e05f2eca-177a-4284-8cfb-83e1a6e5f46e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Momentum & radiation pressure"
+ },
+ {
+  "prompt": "EM radiation of frequency about 10¹⁰ Hz (λ ≈ 3 cm) belongs to which region?",
+  "formula": "λ = c/ν",
+  "options": [
+   "Radio waves",
+   "Microwaves",
+   "Infrared",
+   "Visible light"
+  ],
+  "answer": 1,
+  "explain": "λ = 3×10⁸/10¹⁰ = 3 cm, which lies in the microwave range (1 mm–0.1 m), as used in radar.",
+  "kind": "fact",
+  "id": "a716257f-450d-4423-b4bc-9a3a0c01f6f1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Which lists these colours in decreasing order of wavelength?",
+  "formula": "",
+  "options": [
+   "Red > Yellow > Green > Blue",
+   "Blue > Green > Yellow > Red",
+   "Green > Red > Blue > Yellow",
+   "Yellow > Red > Green > Blue"
+  ],
+  "answer": 0,
+  "explain": "Red has the longest and violet the shortest wavelength: R > O > Y > G > B > I > V.",
+  "kind": "trend",
+  "id": "0fe6eceb-067e-42be-bb1f-c8f5d1fb8beb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Charging circular parallel-plate capacitor (radius R): B in the gap is maximum at distance r =",
+  "formula": "",
+  "options": [
+   "0 (on the axis)",
+   "R/2",
+   "R (plate edge)",
+   "Infinity"
+  ],
+  "answer": 2,
+  "explain": "B ∝ r inside and ∝ 1/r outside, so it peaks at r = R.",
+  "kind": "result",
+  "id": "fd9ab5a0-104f-4296-be84-b5c4a8759099",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Which effect is absent for displacement current in vacuum, unlike conduction current?",
+  "formula": "",
+  "options": [
+   "Production of magnetic field",
+   "Joule heating",
+   "Contribution to Ampère–Maxwell law",
+   "Link with a changing electric field"
+  ],
+  "answer": 1,
+  "explain": "No charges move in vacuum, so there is no dissipation. It still produces a B field.",
+  "kind": "concept",
+  "id": "032d5bba-ca1c-4d4a-905d-25008875fcd7",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "SI unit of displacement current density J_d = ε₀ ∂E/∂t is:",
+  "formula": "J_d = ε₀ ∂E/∂t",
+  "options": [
+   "A",
+   "A/m²",
+   "C/m²",
+   "V/m"
+  ],
+  "answer": 1,
+  "explain": "Current density is current per unit area, so J_d is in A/m².",
+  "kind": "unit",
+  "id": "05a49830-9516-433b-a85a-284b3748170e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "In a conductor (conductivity σ) with E = E₀ sin ωt, the peak ratio J_d / J_c is:",
+  "formula": "",
+  "options": [
+   "σ/(ωε₀)",
+   "ωε₀/σ",
+   "ωσ/ε₀",
+   "ε₀/(ωσ)"
+  ],
+  "answer": 1,
+  "explain": "J_c = σE and J_d = ε₀ωE₀cos ωt, so the ratio is ωε₀/σ, which is tiny for metals.",
+  "kind": "formula",
+  "id": "d87668bf-cd4a-4e67-b328-864146f57aa6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Between charging capacitor plates, B-field lines due to displacement current are:",
+  "formula": "",
+  "options": [
+   "Parallel to E",
+   "Radial from the axis",
+   "Concentric circles about the axis",
+   "Straight lines parallel to the plates"
+  ],
+  "answer": 2,
+  "explain": "B circulates around the axis, perpendicular to E, as for a conduction current along the axis.",
+  "kind": "concept",
+  "id": "bb457bcd-74b1-457d-b129-0a7870457479",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Circular plate capacitor, r < R, E changing at rate dE/dt. The magnetic field B at distance r is:",
+  "formula": "B = (μ₀ε₀ r/2) dE/dt",
+  "options": [
+   "μ₀ε₀ r dE/dt",
+   "(μ₀ε₀ r/2) dE/dt",
+   "(μ₀ε₀ R²/2r) dE/dt",
+   "(ε₀ r/2) dE/dt"
+  ],
+  "answer": 1,
+  "explain": "B·2πr = μ₀ε₀ πr² dE/dt, which gives B = μ₀ε₀ r/2 · dE/dt.",
+  "kind": "formula",
+  "id": "b16dc37a-a23c-4ea7-9b86-ec63cc980f2d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Displacement current & its formula"
+ },
+ {
+  "prompt": "Ampere's law alone fails for a charging capacitor because the enclosed current depends on:",
+  "formula": "",
+  "options": [
+   "Choice of surface bounded by the loop",
+   "Radius of the connecting wire only",
+   "Dielectric between the plates",
+   "Frequency of the source"
+  ],
+  "answer": 0,
+  "explain": "A surface through the wire gives I, one through the gap gives 0; Id removes this ambiguity.",
+  "kind": "concept",
+  "id": "af91bfb4-b5e4-4ef1-9542-b9ab3518b6b5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "After Maxwell's modification, the total current Ic + Id across a circuit with a capacitor is:",
+  "formula": "",
+  "options": [
+   "Continuous, with no break at the gap",
+   "Zero in the connecting wires",
+   "Discontinuous at the plates",
+   "Equal to Id everywhere"
+  ],
+  "answer": 0,
+  "explain": "Ic in the wires becomes Id in the gap, so the total current is continuous.",
+  "kind": "concept",
+  "id": "7cf4944a-2801-458b-918c-c557f2c9722a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Compared with conduction current, displacement current:",
+  "formula": "",
+  "options": [
+   "Produces no Joule heating",
+   "Needs free charges to flow",
+   "Produces no magnetic field",
+   "Is absent in dielectrics"
+  ],
+  "answer": 0,
+  "explain": "No charge carriers move, so there is no Joule heating, yet it still produces B.",
+  "kind": "fact",
+  "id": "e64a464c-39bd-4d0c-8055-f3bc3d15d81a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Charging circular plates (radius R), wire current I: B at the gap edge r = R is:",
+  "formula": "B = μ₀I/(2πR)",
+  "options": [
+   "μ₀I/(2πR)",
+   "μ₀I/(4πR)",
+   "μ₀IR/2",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "The enclosed Id equals I, so B matches that of a long wire at distance R.",
+  "kind": "result",
+  "id": "3d1a7d43-e3d8-4cba-ae56-87a3607f5e67",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "In the gap of a charging circular-plate capacitor, the magnetic field lines are:",
+  "formula": "",
+  "options": [
+   "Circles coaxial with the plate axis",
+   "Straight lines parallel to E",
+   "Radial lines from the axis",
+   "Zero everywhere"
+  ],
+  "answer": 0,
+  "explain": "Id is along the axis, so B circulates around it, as for a straight current.",
+  "kind": "concept",
+  "id": "7ffe3d89-df17-443c-8dc4-80cef27dac00",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "In a region with no conduction current, ∮B·dl equals:",
+  "formula": "∮B·dl = μ₀ε₀ dΦ_E/dt",
+  "options": [
+   "μ₀ε₀ dΦ_E/dt",
+   "μ₀ dΦ_E/dt",
+   "ε₀ dΦ_B/dt",
+   "−dΦ_B/dt"
+  ],
+  "answer": 0,
+  "explain": "Only the displacement-current term survives when Ic = 0.",
+  "kind": "formula",
+  "id": "138761ac-865f-4294-9994-6f4c2160c3d0",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Ampere's law alone implies ∇·J = 0, which contradicts:",
+  "formula": "",
+  "options": [
+   "Charge conservation, ∇·J = −∂ρ/∂t",
+   "Gauss's law for magnetism",
+   "Faraday's law",
+   "Lorentz force law"
+  ],
+  "answer": 0,
+  "explain": "∇·(∇×B) = 0 forces ∇·J = 0; the Id term restores the continuity equation.",
+  "kind": "concept",
+  "id": "856856b7-36bb-4718-8850-26dee073d095",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "The product μ₀ε₀ in SI units is approximately",
+  "formula": "μ₀ε₀ = 1/c²",
+  "options": [
+   "1.1×10⁻¹⁷ s² m⁻²",
+   "9×10¹⁶ s² m⁻²",
+   "3.3×10⁻⁹ s m⁻¹",
+   "8.85×10⁻¹² s² m⁻²"
+  ],
+  "answer": 0,
+  "explain": "1/c² = 1/(9×10¹⁶) ≈ 1.1×10⁻¹⁷ s² m⁻².",
+  "kind": "fact",
+  "id": "b8806cb4-d54a-4313-b1f7-7e5443bb421e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "The permittivity of free space ε₀ has the value",
+  "formula": "",
+  "options": [
+   "8.85×10⁻¹² C² N⁻¹ m⁻²",
+   "8.85×10⁻⁹ C² N⁻¹ m⁻²",
+   "9×10⁹ C² N⁻¹ m⁻²",
+   "1.26×10⁻⁶ C² N⁻¹ m⁻²"
+  ],
+  "answer": 0,
+  "explain": "ε₀ ≈ 8.85×10⁻¹² C²N⁻¹m⁻²; 9×10⁹ is 1/(4πε₀) in N m² C⁻².",
+  "kind": "fact",
+  "id": "669b9da0-27a5-4c2e-9b08-8739d5f639f3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "In vacuum, light travels approximately what distance in 1 nanosecond?",
+  "formula": "d = ct",
+  "options": [
+   "3 cm",
+   "30 cm",
+   "3 m",
+   "30 m"
+  ],
+  "answer": 1,
+  "explain": "3×10⁸ m/s × 10⁻⁹ s = 0.3 m = 30 cm.",
+  "kind": "fact",
+  "id": "202d389a-7567-4f8a-a6a1-3275b5d660b6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "The SI unit of the permeability of free space μ₀ is",
+  "formula": "μ₀ = 4π×10⁻⁷",
+  "options": [
+   "H m⁻¹",
+   "F m⁻¹",
+   "H m",
+   "Ω m"
+  ],
+  "answer": 0,
+  "explain": "μ₀ = 4π×10⁻⁷ H/m (equivalently T m A⁻¹).",
+  "kind": "unit",
+  "id": "946f2e62-fe07-47ee-a56b-d7d6c9c8d7ce",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "Two ⟂ linearly polarised waves, unequal amplitudes, 90° phase difference, travel together. Resultant is:",
+  "formula": "",
+  "options": [
+   "Circularly polarised",
+   "Elliptically polarised",
+   "Linearly polarised",
+   "Unpolarised"
+  ],
+  "answer": 1,
+  "explain": "Equal amplitudes at 90° give a circle; unequal amplitudes at 90° give an ellipse.",
+  "kind": "concept",
+  "id": "bbf050d5-da62-4c83-af4a-eb2b195b2f36",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For a plane EM wave along z, at a fixed instant the fields E and B across any plane z = constant are:",
+  "formula": "",
+  "options": [
+   "Uniform over that plane",
+   "Linear in x and y",
+   "Zero on the axis only",
+   "Radial from the axis"
+  ],
+  "answer": 0,
+  "explain": "For a plane wave, E and B depend only on z and t, so they are uniform on each wavefront.",
+  "kind": "concept",
+  "id": "974e702e-e6bd-42a1-b953-719ab3fefd3b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Which (E, B, k) direction set is possible for a plane EM wave in vacuum?",
+  "formula": "",
+  "options": [
+   "(x̂, ẑ, ŷ)",
+   "(ŷ, x̂, ẑ)",
+   "(ẑ, ŷ, x̂)",
+   "(x̂, ŷ, ẑ)"
+  ],
+  "answer": 3,
+  "explain": "E × B must give k: only x̂ × ŷ = ẑ works; the other triples give −k.",
+  "kind": "concept",
+  "id": "bdaa7e4d-86c6-4e0d-b286-ae3e700d09db",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Far-field radiation from a straight dipole antenna is linearly polarised with E:",
+  "formula": "",
+  "options": [
+   "In the plane containing the antenna axis",
+   "Perpendicular to that plane (azimuthal)",
+   "Rotating in a circle about the axis",
+   "Randomly oriented (unpolarised)"
+  ],
+  "answer": 0,
+  "explain": "E lies along θ̂, in the plane of the axis and the propagation direction. B is azimuthal.",
+  "kind": "fact",
+  "id": "74d70661-0db1-45b2-892e-5e0ef4fc81f4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For E_y(x,t) and B_z(x,t) in vacuum, Faraday's law in differential form reads",
+  "formula": "∂E_y/∂x = −∂B_z/∂t",
+  "options": [
+   "∂E_y/∂x = −∂B_z/∂t",
+   "∂E_y/∂x = μ₀ε₀ ∂B_z/∂t",
+   "∂B_z/∂x = −∂E_y/∂t",
+   "∂E_y/∂t = −∂B_z/∂x"
+  ],
+  "answer": 0,
+  "explain": "The curl of E has a z-component ∂E_y/∂x, which equals −∂B_z/∂t.",
+  "kind": "formula",
+  "id": "c2130c86-ffcd-4072-a93e-a574b046ae3d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "For E_y(x,t) and B_z(x,t) in vacuum, the Ampere–Maxwell law reads",
+  "formula": "∂B_z/∂x = −μ₀ε₀ ∂E_y/∂t",
+  "options": [
+   "∂B_z/∂x = −μ₀ε₀ ∂E_y/∂t",
+   "∂B_z/∂x = −∂E_y/∂t",
+   "∂B_z/∂t = −μ₀ε₀ ∂E_y/∂x",
+   "∂B_z/∂x = −(1/μ₀ε₀) ∂E_y/∂t"
+  ],
+  "answer": 0,
+  "explain": "No free current in vacuum; the curl of B equals μ₀ε₀ ∂E/∂t (with sign from the geometry).",
+  "kind": "formula",
+  "id": "3a471767-2b1d-4aff-924d-70c1ac7ab897",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "A wave travels along +x with E = E₀sin(kx−ωt) ĵ. Its magnetic field is",
+  "formula": "",
+  "options": [
+   "(E₀/c) sin(kx−ωt) k̂",
+   "(E₀/c) sin(kx−ωt) î",
+   "cE₀ sin(kx−ωt) k̂",
+   "(E₀/c) cos(kx−ωt) k̂"
+  ],
+  "answer": 0,
+  "explain": "B is along k̂ (so ĵ × k̂ = î), in phase with E, with B₀ = E₀/c.",
+  "kind": "result",
+  "id": "963dbe3a-3f62-4ca5-b6b2-5b2bc3b78436",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "In a vacuum EM wave, the ratio of instantaneous values E/B at any point and time is",
+  "formula": "E/B = c",
+  "options": [
+   "c at every instant",
+   "c only at the peaks",
+   "Zero at the nodes",
+   "Varies as sin(kx−ωt)"
+  ],
+  "answer": 0,
+  "explain": "E and B are in phase, so E(x,t) = cB(x,t) holds at every instant, not only for the amplitudes.",
+  "kind": "concept",
+  "id": "67575bb3-d82f-49ee-858d-4410fdfbfa0e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "In SI units, the magnitude of E (V/m) in a vacuum EM wave compared with that of B (T) is",
+  "formula": "",
+  "options": [
+   "3×10⁸ times larger",
+   "3×10⁸ times smaller",
+   "Equal",
+   "9×10¹⁶ times larger"
+  ],
+  "answer": 0,
+  "explain": "E = cB, so the numerical value of E is about 3×10⁸ times that of B.",
+  "kind": "fact",
+  "id": "9e9934d0-26d3-4df9-b3d4-b6fe879de3c1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "In vacuum, E₀/B₀ for a radio wave compared with that for a γ-ray is",
+  "formula": "",
+  "options": [
+   "Equal",
+   "Larger for radio wave",
+   "Larger for γ-ray",
+   "Proportional to wavelength"
+  ],
+  "answer": 0,
+  "explain": "E₀/B₀ = c for all EM waves in vacuum, independent of frequency.",
+  "kind": "concept",
+  "id": "abb0f123-1b42-40bc-aa62-74d90bcd39ba",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "The equality u_E = u_B in an EM wave follows from E = cB together with",
+  "formula": "c² = 1/(μ₀ε₀)",
+  "options": [
+   "c² = 1/(μ₀ε₀)",
+   "c = μ₀ε₀",
+   "c² = μ₀/ε₀",
+   "c = 1/(μ₀ε₀)"
+  ],
+  "answer": 0,
+  "explain": "½ε₀E² = ½ε₀c²B² = B²/(2μ₀) since ε₀c² = 1/μ₀.",
+  "kind": "result",
+  "id": "977268aa-d9f5-4053-ab3c-192926a76241",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Instantaneous magnitude of the Poynting vector of a plane vacuum EM wave in terms of E and c is",
+  "formula": "S = ε₀cE²",
+  "options": [
+   "ε₀cE²",
+   "½ε₀cE²",
+   "ε₀E²/c",
+   "ε₀c²E²"
+  ],
+  "answer": 0,
+  "explain": "S = EB/μ₀ = E²/(μ₀c) = ε₀cE², as 1/μ₀ = ε₀c².",
+  "kind": "formula",
+  "id": "bd46fc9d-dd31-47f4-b806-265afd6653ca",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "In free space, the differential form of the Ampere–Maxwell law is",
+  "formula": "∇×B = μ₀ε₀ ∂E/∂t",
+  "options": [
+   "∇×B = μ₀ε₀ ∂E/∂t",
+   "∇×B = μ₀ ∂E/∂t",
+   "∇×B = −∂E/∂t",
+   "∇×E = μ₀ε₀ ∂B/∂t"
+  ],
+  "answer": 0,
+  "explain": "With J = 0, only the displacement-current term μ₀ε₀ ∂E/∂t sources B.",
+  "kind": "formula",
+  "id": "92cdf879-9fff-4d8e-b127-74b1f09bb647",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Eliminating B from Faraday and Ampere–Maxwell laws gives, for E_y(x,t), the wave equation:",
+  "formula": "∂²E/∂x² = μ₀ε₀ ∂²E/∂t²",
+  "options": [
+   "∂²E/∂x² = μ₀ε₀ ∂²E/∂t²",
+   "∂²E/∂x² = ∂²E/∂t²/(μ₀ε₀)²",
+   "∂²E/∂x² = −μ₀ε₀ ∂E/∂t",
+   "∂E/∂x = μ₀ε₀ ∂²E/∂t²"
+  ],
+  "answer": 0,
+  "explain": "Combining the two curl equations gives the wave equation with 1/c² = μ₀ε₀.",
+  "kind": "formula",
+  "id": "87c681ce-53b2-417b-9cfd-5dc3ed04085a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "A charge q moves with speed v in a vacuum EM wave. Ratio of max magnetic to electric force is:",
+  "formula": "F_B/F_E = vB/E = v/c",
+  "options": [
+   "c/v",
+   "v/c",
+   "v²/c²",
+   "1"
+  ],
+  "answer": 1,
+  "explain": "F_B = qvB, F_E = qE and E = cB, so F_B/F_E = v/c (small for v ≪ c).",
+  "kind": "result",
+  "id": "76d37776-dde6-44c4-a2b4-b143a6a03bc3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Average electric energy density of a vacuum EM wave in terms of the rms electric field E_rms is:",
+  "formula": "",
+  "options": [
+   "½ε₀E_rms²",
+   "ε₀E_rms²",
+   "¼ε₀E_rms²",
+   "2ε₀E_rms²"
+  ],
+  "answer": 0,
+  "explain": "⟨u_E⟩ = ½ε₀⟨E²⟩ = ½ε₀E_rms², which is half of the total ε₀E_rms².",
+  "kind": "formula",
+  "id": "08e9884f-bb1c-49cd-b643-33ab9ca5adfa",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "At an instant when E = E₀/2 in a vacuum EM wave, the energy density is what fraction of its maximum value?",
+  "formula": "u = ε₀E²",
+  "options": [
+   "1/4",
+   "1/2",
+   "1/8",
+   "3/4"
+  ],
+  "answer": 0,
+  "explain": "u = ε₀E² ∝ E², so E = E₀/2 gives (1/2)² = 1/4 of ε₀E₀².",
+  "kind": "concept",
+  "id": "19ec6d42-35ad-4d2f-aa93-2aff360ce8c8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Same E₀ in a non-magnetic medium of refractive index n: average energy density is ___ times that in vacuum.",
+  "formula": "⟨u⟩ = ½εE₀²",
+  "options": [
+   "n²",
+   "n",
+   "1/n²",
+   "1/n"
+  ],
+  "answer": 0,
+  "explain": "For μᵣ = 1, ε = n²ε₀, so ⟨u⟩ = ½ε₀n²E₀², which is n² times the vacuum value.",
+  "kind": "result",
+  "id": "baed78c9-f210-4f74-aedf-b51409d6de27",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "For an isotropic point source in vacuum, the average energy density of its EM wave at distance r varies as:",
+  "formula": "",
+  "options": [
+   "1/r²",
+   "1/r",
+   "1/r³",
+   "r⁰ (constant)"
+  ],
+  "answer": 0,
+  "explain": "⟨u⟩ = I/c and I ∝ 1/r², so ⟨u⟩ ∝ 1/r².",
+  "kind": "trend",
+  "id": "3503db6c-85fe-41fd-8213-d02920fc5ea1",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Sunlight intensity ≈ 1.4 kW/m². Order of its average energy density in J/m³ is:",
+  "formula": "⟨u⟩ = I/c",
+  "options": [
+   "~5×10⁻⁶",
+   "~5×10⁻³",
+   "~5×10⁻⁹",
+   "~5×10⁻¹²"
+  ],
+  "answer": 0,
+  "explain": "⟨u⟩ = I/c = 1400/(3×10⁸) ≈ 4.7×10⁻⁶ J/m³.",
+  "kind": "result",
+  "id": "bd20e3f0-51a2-421b-bf36-a9cd5470852c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "In a vacuum EM wave the average magnetic energy density is u. The average total energy density is:",
+  "formula": "⟨u_E⟩ = ⟨u_B⟩",
+  "options": [
+   "u",
+   "2u",
+   "u/2",
+   "4u"
+  ],
+  "answer": 1,
+  "explain": "Electric and magnetic parts are equal on average, so total = u_E + u_B = 2u.",
+  "kind": "concept",
+  "id": "c7ee28da-defc-4a2e-bcda-c7c0ec24d852",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "An isotropic point source of power P: intensity at distance r is:",
+  "formula": "I = P/(4πr²)",
+  "options": [
+   "P/(4πr²)",
+   "P/(2πr²)",
+   "P/(4πr)",
+   "P/(πr²)"
+  ],
+  "answer": 0,
+  "explain": "Power spreads over a sphere of area 4πr², so I ∝ 1/r².",
+  "kind": "formula",
+  "id": "35b0e7e0-0488-4400-ae20-5cf3092a618b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "The impedance of free space √(μ₀/ε₀) = E/H for an EM wave is about:",
+  "formula": "Z₀ = √(μ₀/ε₀) ≈ 377 Ω",
+  "options": [
+   "377 Ω",
+   "120 Ω",
+   "3×10⁸ Ω",
+   "60 Ω"
+  ],
+  "answer": 0,
+  "explain": "Z₀ = μ₀c = 120π Ω ≈ 377 Ω.",
+  "kind": "fact",
+  "id": "c4c58aa5-b635-430c-a8df-60b4b57154b2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "A non-magnetic medium (μᵣ=1) of index n carries a wave of the same E₀ as in vacuum. Its intensity is:",
+  "formula": "I = ½ n ε₀ c E₀²",
+  "options": [
+   "n times vacuum value",
+   "n² times vacuum value",
+   "1/n times vacuum value",
+   "Same as vacuum value"
+  ],
+  "answer": 0,
+  "explain": "I = ½εvE₀² with ε = n²ε₀ and v = c/n gives I = ½nε₀cE₀².",
+  "kind": "result",
+  "id": "398f63cc-ed72-4046-b928-885318481659",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "A parallel-plate capacitor is charging. The Poynting vector in the gap points:",
+  "formula": "",
+  "options": [
+   "Radially inward",
+   "Radially outward",
+   "Along the axis, + to − plate",
+   "Zero everywhere"
+  ],
+  "answer": 0,
+  "explain": "E is axial and increasing, B is azimuthal, so E×B points inward and energy flows into the gap.",
+  "kind": "concept",
+  "id": "3268e822-b007-4c3c-8824-25ff888acdf5",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "For a straight resistive wire carrying steady current, the Poynting vector at its surface points:",
+  "formula": "S = E × B / μ₀",
+  "options": [
+   "Radially inward",
+   "Radially outward",
+   "Along the current",
+   "Opposite to the current"
+  ],
+  "answer": 0,
+  "explain": "Energy flows from the surrounding field into the wire, where it appears as Joule heat.",
+  "kind": "concept",
+  "id": "f322dd2f-c8b7-4740-8912-903ac475c76e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Gamma rays have wavelengths typically shorter than about:",
+  "formula": "",
+  "options": [
+   "10⁻³ nm (10⁻¹² m)",
+   "1 nm",
+   "10⁻⁶ nm",
+   "0.1 nm"
+  ],
+  "answer": 0,
+  "explain": "The γ-ray region is the shortest-wavelength end of the spectrum, below about 10⁻¹² m (10⁻³ nm).",
+  "kind": "fact",
+  "id": "703d3c71-7575-4f0d-8b40-492879a347ae",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "Radio waves (NCERT) span frequencies from about:",
+  "formula": "",
+  "options": [
+   "500 kHz to 1000 MHz",
+   "1 GHz to 100 GHz",
+   "1 Hz to 1 kHz",
+   "10 GHz to 10¹² Hz"
+  ],
+  "answer": 0,
+  "explain": "Radio waves cover ~500 kHz to ~1000 MHz; the GHz range above this is microwaves.",
+  "kind": "fact",
+  "id": "6e7ac507-ce3b-49f0-b887-fd261a758dc4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "EM spectrum order of wavelength/frequency"
+ },
+ {
+  "prompt": "A capacitor is discharging. The displacement current between its plates is directed:",
+  "formula": "J_d = ε₀ ∂E/∂t",
+  "options": [
+   "Along E",
+   "Opposite to E",
+   "Perpendicular to E",
+   "Zero, since charge is leaving"
+  ],
+  "answer": 1,
+  "explain": "On discharge E decreases, so ∂E/∂t is opposite to E; Id is opposite to E but equals the wire current.",
+  "kind": "concept",
+  "id": "561f6804-7b0b-480f-84ab-e0638bad0df2",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Ampere-Maxwell law, continuity of current"
+ },
+ {
+  "prompt": "Since 1983 the SI value of the speed of light in vacuum is defined exactly as",
+  "formula": "",
+  "options": [
+   "299 792 458 m/s",
+   "299 792 000 m/s",
+   "299 800 458 m/s",
+   "300 000 000 m/s"
+  ],
+  "answer": 0,
+  "explain": "The metre is defined from c, which is fixed at exactly 299 792 458 m/s.",
+  "kind": "fact",
+  "id": "d7d71260-63a5-46d1-a882-94418cf590de",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "Sunlight (distance 1.5×10¹¹ m) takes about how long to reach the Earth?",
+  "formula": "t = d/c",
+  "options": [
+   "8 s",
+   "8 min",
+   "80 min",
+   "0.8 s"
+  ],
+  "answer": 1,
+  "explain": "t = 1.5×10¹¹/3×10⁸ = 500 s ≈ 8 min.",
+  "kind": "fact",
+  "id": "cdbef700-f5a4-4e28-bd18-ff2fb38492c8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "ε₀ expressed in terms of μ₀ and the speed of light c is",
+  "formula": "c² = 1/(μ₀ε₀)",
+  "options": [
+   "μ₀c²",
+   "1/(μ₀c)",
+   "c²/μ₀",
+   "1/(μ₀c²)"
+  ],
+  "answer": 3,
+  "explain": "From c² = 1/(μ₀ε₀), ε₀ = 1/(μ₀c²).",
+  "kind": "formula",
+  "id": "b30630b0-a19a-4a2d-b249-79faae280e2a",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "The ratio (1/4πε₀) ÷ (μ₀/4π) in SI units equals",
+  "formula": "c² = 1/(μ₀ε₀)",
+  "options": [
+   "c",
+   "c²",
+   "1/c²",
+   "1/c"
+  ],
+  "answer": 1,
+  "explain": "(1/4πε₀)/(μ₀/4π) = 1/(μ₀ε₀) = c² (≈ 9×10⁹ / 10⁻⁷ = 9×10¹⁶).",
+  "kind": "result",
+  "id": "469ad61a-83d6-4da5-bf43-b73df823ddbb",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Speed of EM waves c = 1/sqrt(mu0 eps0)"
+ },
+ {
+  "prompt": "If the directions of both E and B in a plane EM wave are reversed, the direction of propagation:",
+  "formula": "E × B",
+  "options": [
+   "Is reversed",
+   "Is unchanged",
+   "Rotates by 90°",
+   "Becomes undefined"
+  ],
+  "answer": 1,
+  "explain": "(−E) × (−B) = E × B, so the direction of propagation stays the same.",
+  "kind": "concept",
+  "id": "919c3621-b836-41db-9d45-82baa0e1fe73",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "Far from an accelerating charge, its radiated E field is directed:",
+  "formula": "",
+  "options": [
+   "Along the line to the observer",
+   "Perpendicular to the line to the observer",
+   "Always along the charge's velocity",
+   "Always along the charge's acceleration"
+  ],
+  "answer": 1,
+  "explain": "Radiation field is transverse: E ⟂ the line from the charge to the observer (along k).",
+  "kind": "concept",
+  "id": "eb06601c-ce70-4152-8bba-a67085fad9ba",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Transverse nature, E, B, k directions"
+ },
+ {
+  "prompt": "For a vacuum EM wave, the field B_z(x,t) satisfies which wave equation?",
+  "formula": "",
+  "options": [
+   "∂²B/∂x² = μ₀ε₀ ∂²B/∂t²",
+   "∂²B/∂x² = ∂²B/∂t²/(μ₀ε₀)",
+   "∂B/∂x = μ₀ε₀ ∂B/∂t",
+   "∂²B/∂x² = −μ₀ε₀ ∂B/∂t"
+  ],
+  "answer": 0,
+  "explain": "Eliminating E from the two curl equations gives the same wave equation for B, with speed 1/√(μ₀ε₀).",
+  "kind": "formula",
+  "id": "567c0df2-ee09-4a78-9db2-3b5da2223bd8",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "For a plane EM wave in vacuum, the scalar product E·B at any point and time equals:",
+  "formula": "E ⟂ B",
+  "options": [
+   "0",
+   "E₀B₀",
+   "E₀B₀/c",
+   "cE₀B₀"
+  ],
+  "answer": 0,
+  "explain": "E and B are mutually perpendicular (both ⟂ k), so E·B = 0 always.",
+  "kind": "fact",
+  "id": "1b1b9afc-d49c-4a17-939f-6a5009aea7ba",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Instantaneous magnitude of the Poynting vector in a vacuum EM wave, in terms of B and c, is:",
+  "formula": "S = EB/μ₀ with E = cB",
+  "options": [
+   "cB²/(2μ₀)",
+   "B²/(μ₀c)",
+   "cB²/μ₀",
+   "μ₀cB²"
+  ],
+  "answer": 2,
+  "explain": "S = EB/μ₀, and E = cB gives S = cB²/μ₀. The factor ½ appears only in the time average.",
+  "kind": "formula",
+  "id": "f63f308a-27fa-4ef8-af28-a19a9d2267aa",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "A charge at rest in a vacuum EM wave experiences a force due to:",
+  "formula": "",
+  "options": [
+   "Only the E field",
+   "Only the B field",
+   "E and B equally",
+   "Zero force always"
+  ],
+  "answer": 0,
+  "explain": "F = qE. The magnetic force q(v×B) vanishes when v = 0.",
+  "kind": "concept",
+  "id": "b7630d3c-55e6-44c0-b470-89f19355612b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "For E_y = E₀sin(kx−ωt), the Ampere–Maxwell law gives the amplitude of B_z as:",
+  "formula": "B₀ = μ₀ε₀(ω/k)E₀",
+  "options": [
+   "μ₀ε₀(k/ω)E₀",
+   "μ₀ε₀(ω/k)E₀",
+   "(ω/k)E₀/(μ₀ε₀)",
+   "μ₀(ω/k)E₀"
+  ],
+  "answer": 1,
+  "explain": "From ∂B/∂x = −μ₀ε₀ ∂E/∂t: kB₀ = μ₀ε₀ωE₀. With ω/k = c this gives B₀ = E₀/c.",
+  "kind": "formula",
+  "id": "3e538a48-2ed6-4447-8c09-b6adf3a58990",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "With charges and currents present, the differential Ampere–Maxwell law reads:",
+  "formula": "",
+  "options": [
+   "∇×B = μ₀J",
+   "∇×B = μ₀(J + ε₀ ∂E/∂t)",
+   "∇×B = J + ε₀ ∂E/∂t",
+   "∇×B = μ₀J − μ₀ε₀ ∂E/∂t"
+  ],
+  "answer": 1,
+  "explain": "Maxwell added the displacement term ε₀∂E/∂t to J: ∇×B = μ₀(J + ε₀∂E/∂t).",
+  "kind": "formula",
+  "id": "4c7e567f-a81d-47ce-8324-f6b7c09d2b10",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "In a vacuum EM wave, E_rms = 30 V/m. The value of B_rms is:",
+  "formula": "B = E/c",
+  "options": [
+   "10⁻⁶ T",
+   "10⁻⁸ T",
+   "10⁻⁷ T",
+   "9×10⁹ T"
+  ],
+  "answer": 2,
+  "explain": "B_rms = E_rms/c = 30/(3×10⁸) = 10⁻⁷ T.",
+  "kind": "result",
+  "id": "60ec7803-82c8-4b0a-a06e-fa5d8d548751",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Which of these is NOT one of the four Maxwell equations?",
+  "formula": "",
+  "options": [
+   "Gauss's law for electricity",
+   "Gauss's law for magnetism",
+   "Faraday's law",
+   "Lorentz force law"
+  ],
+  "answer": 3,
+  "explain": "F = q(E + v×B) is the Lorentz force law, separate from the four Maxwell equations.",
+  "kind": "fact",
+  "id": "aa65aa69-535f-4190-92cf-33e60349e9c4",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "The relation E₀ = cB₀ for a plane wave follows from combining:",
+  "formula": "",
+  "options": [
+   "Gauss's electric and magnetic laws",
+   "Faraday's and Ampere–Maxwell laws",
+   "Gauss's electric law and Faraday's law",
+   "Lorentz force and Ampere–Maxwell law"
+  ],
+  "answer": 1,
+  "explain": "Faraday gives E₀/B₀ = ω/k; the Ampere–Maxwell law fixes ω/k = 1/√(μ₀ε₀) = c.",
+  "kind": "concept",
+  "id": "35d6d77b-a56f-4ee9-998a-cf204794d578",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "For E_y = E₀sin(kx−ωt), Faraday's law ∂E_y/∂x = −∂B_z/∂t gives the amplitude B₀ equal to:",
+  "formula": "kE₀ = ωB₀",
+  "options": [
+   "kE₀/ω",
+   "ωE₀/k",
+   "E₀/(kω)",
+   "μ₀ε₀kE₀/ω"
+  ],
+  "answer": 0,
+  "explain": "Differentiating gives kE₀cos(kx−ωt) = ωB₀cos(kx−ωt), so B₀ = kE₀/ω = E₀/c.",
+  "kind": "formula",
+  "id": "e772f59c-fa67-410e-a739-4d6a5954dd9c",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Relation E0 = cB0 and field equations"
+ },
+ {
+  "prompt": "Equal sharing of energy between E and B in vacuum follows directly from:",
+  "formula": "ε₀E²/(B²/μ₀) = ε₀μ₀c² = 1",
+  "options": [
+   "E = cB with c = 1/√(μ₀ε₀)",
+   "E and B being 90° out of phase",
+   "Transverse nature of the wave",
+   "Conservation of charge"
+  ],
+  "answer": 0,
+  "explain": "E = cB and c² = 1/(μ₀ε₀) make ε₀E² = B²/μ₀, so u_E = u_B.",
+  "kind": "concept",
+  "id": "a44223ec-bf35-46e1-8911-8b2f545a1871",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Amplitude of a vacuum EM wave is halved, frequency unchanged. Average energy density becomes:",
+  "formula": "u ∝ E₀²",
+  "options": [
+   "Half",
+   "One-fourth",
+   "Double",
+   "One-eighth"
+  ],
+  "answer": 1,
+  "explain": "Average energy density ∝ (amplitude)², so halving E₀ gives ¼.",
+  "kind": "result",
+  "id": "5fb66117-a532-4fbf-be36-afdfd6bdc57e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "SI unit of EM energy density (J m⁻³) is equivalent to:",
+  "formula": "J m⁻³ = N m⁻²",
+  "options": [
+   "N m⁻²",
+   "N m⁻¹",
+   "W m⁻²",
+   "J m⁻²"
+  ],
+  "answer": 0,
+  "explain": "Energy per unit volume has the dimensions of pressure, N m⁻².",
+  "kind": "unit",
+  "id": "e86604e9-fde5-4d34-810d-34f1f9e39d06",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Average magnetic energy density of a wave in a medium (permeability μ, peak field B₀) is:",
+  "formula": "",
+  "options": [
+   "B₀²/2μ",
+   "B₀²/4μ",
+   "B₀²/4μ₀",
+   "μB₀²/4"
+  ],
+  "answer": 1,
+  "explain": "u_B = B²/2μ, and ⟨sin²⟩ = ½ gives B₀²/4μ.",
+  "kind": "formula",
+  "id": "31fa96e6-8f93-4113-afc6-277f20a30ad3",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "At a point in a vacuum EM wave, B is at its peak value. The electric energy density there is:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Half the magnetic energy density",
+   "Equal to the magnetic energy density",
+   "Twice the magnetic energy density"
+  ],
+  "answer": 2,
+  "explain": "E and B are in phase, so E is also peak and u_E = u_B = B₀²/2μ₀.",
+  "kind": "concept",
+  "id": "257252b3-30f7-4954-82ca-29cc4223dde6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "In a non-magnetic dielectric of refractive index n, the ratio u_E : u_B for an EM wave is:",
+  "formula": "εE² = B²/μ, since E = vB and v = 1/√(με)",
+  "options": [
+   "1 : 1",
+   "n² : 1",
+   "1 : n²",
+   "n : 1"
+  ],
+  "answer": 0,
+  "explain": "E = vB with v = 1/√(με) gives ½εE² = B²/2μ, so the energies are equal in any medium.",
+  "kind": "concept",
+  "id": "48b62615-0d84-4828-8ace-bf9ee7a55894",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Energy density: equal E and B sharing"
+ },
+ {
+  "prompt": "Two plane EM waves have the same E₀ in vacuum but one has double the frequency. Their intensities are:",
+  "formula": "I = ½ε₀cE₀²",
+  "options": [
+   "Equal",
+   "Higher one is 2× larger",
+   "Higher one is 4× larger",
+   "Higher one is ½ as large"
+  ],
+  "answer": 0,
+  "explain": "I = ½ε₀cE₀² has no frequency dependence at fixed E₀.",
+  "kind": "concept",
+  "id": "e1f87bb6-173b-4d1d-bc6e-05afbee59130",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Poynting's theorem is essentially a statement of conservation of:",
+  "formula": "",
+  "options": [
+   "Energy",
+   "Linear momentum",
+   "Electric charge",
+   "Angular momentum"
+  ],
+  "answer": 0,
+  "explain": "It balances the EM energy flow through a surface against the change in stored field energy and work done on charges.",
+  "kind": "concept",
+  "id": "afbb454f-e9eb-4e9a-b31c-682e65f1ce4d",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Peak instantaneous Poynting vector of a plane EM wave compared with its time-averaged value is:",
+  "formula": "S = (E₀B₀/μ₀) sin²(kx − ωt)",
+  "options": [
+   "Equal to it",
+   "Twice it",
+   "Half of it",
+   "√2 times it"
+  ],
+  "answer": 1,
+  "explain": "S varies as sin², so its peak E₀B₀/μ₀ is twice the average E₀B₀/2μ₀.",
+  "kind": "result",
+  "id": "d2bcdd3c-9980-4e0d-b49d-fd6e0b1fb46b",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "Poynting flux entering a steady-current wire of resistance R through its surface equals:",
+  "formula": "",
+  "options": [
+   "Zero, since current is steady",
+   "½I²R",
+   "I²R",
+   "I²R times wire length"
+  ],
+  "answer": 2,
+  "explain": "Energy flows in radially through the surface and equals the Joule heating rate I²R.",
+  "kind": "concept",
+  "id": "ec2c4511-aa1a-4af0-9d67-3f08193867e6",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ },
+ {
+  "prompt": "While a parallel-plate capacitor discharges, the Poynting vector in the gap points:",
+  "formula": "",
+  "options": [
+   "Radially inward",
+   "Radially outward",
+   "Along the plate axis",
+   "Zero everywhere"
+  ],
+  "answer": 1,
+  "explain": "Field energy decreases, so energy flows radially outward (S = E×B/μ₀ reverses compared with charging).",
+  "kind": "concept",
+  "id": "3d494863-1c76-4806-aeed-c00126daa36e",
+  "subject": "Physics",
+  "chapter": "Electromagnetic Waves",
+  "topic": "Intensity, rms fields & Poynting vector"
+ }
+]

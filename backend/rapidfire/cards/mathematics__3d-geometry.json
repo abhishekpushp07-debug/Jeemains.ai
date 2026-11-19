@@ -1,1541 +1,3281 @@
 [
-  {
-    "id": "86cd5828-bdb6-42b3-a5b5-af05060e5d5c",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Direction Cosines",
-    "prompt": "Direction cosines l,m,n satisfy:",
-    "formula": "l²+m²+n²=1",
-    "options": [
-      "l²+m²+n²=1",
-      "l+m+n=1",
-      "l²+m²+n²=0",
-      "l+m+n=0"
-    ],
-    "answer": 0,
-    "explain": "Sum of squares of direction cosines of any line always equals 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "02cd7d54-bee5-4fbc-9617-33628b17ee20",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Angle Between Lines",
-    "prompt": "Angle θ between lines with d.c.s (l₁,m₁,n₁) and (l₂,m₂,n₂):",
-    "formula": "cosθ = l₁l₂+m₁m₂+n₁n₂",
-    "options": [
-      "tanθ=l₁l₂+m₁m₂+n₁n₂",
-      "sinθ=l₁l₂+m₁m₂+n₁n₂",
-      "cosθ=l₁l₂+m₁m₂+n₁n₂",
-      "cosθ=l₁m₂+m₁n₂+n₁l₂"
-    ],
-    "answer": 2,
-    "explain": "Dot product of unit direction vectors gives cosine of angle between lines.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3b698f5e-d587-49a4-9cd7-8180bc3bd05a",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Perpendicular Lines",
-    "prompt": "Lines are perpendicular iff direction ratios satisfy:",
-    "formula": "a₁a₂+b₁b₂+c₁c₂=0",
-    "options": [
-      "a₁a₂+b₁b₂+c₁c₂=1",
-      "a₁+b₁+c₁=0",
-      "a₁a₂+b₁b₂+c₁c₂=0",
-      "a₁/a₂=b₁/b₂=c₁/c₂"
-    ],
-    "answer": 2,
-    "explain": "Two lines are perpendicular when dot product of their direction ratios is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a7972c06-f6fe-4359-ba1c-7cfa2c8dda97",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Parallel Lines",
-    "prompt": "Lines are parallel iff direction ratios satisfy:",
-    "formula": "a₁/a₂ = b₁/b₂ = c₁/c₂",
-    "options": [
-      "a₁/a₂=b₁/b₂=c₁/c₂",
-      "a₁²+b₁²=a₂²+b₂²",
-      "a₁+a₂=b₁+b₂=c₁+c₂",
-      "a₁a₂+b₁b₂+c₁c₂=0"
-    ],
-    "answer": 0,
-    "explain": "Parallel lines have proportional direction ratios.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a3e1da10-d29d-4347-a613-ab161dd5c860",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Equation of a Line",
-    "prompt": "Equation of line through (x₁,y₁,z₁) with d.r.s a,b,c (symmetric form):",
-    "formula": "(x−x₁)/a=(y−y₁)/b=(z−z₁)/c",
-    "options": [
-      "(x−x₁)/a=(y−y₁)/b=(z−z₁)/c",
-      "x/a+y/b+z/c=1",
-      "x·a=y·b=z·c",
-      "ax+by+cz=0"
-    ],
-    "answer": 0,
-    "explain": "Symmetric form of line equation through a point with given direction ratios.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "47e8ed3b-ba22-4e5b-83ea-92a6eb70ac0f",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Vector Equation of Line",
-    "prompt": "Vector equation of a line through point a⃗ with direction b⃗:",
-    "formula": "r⃗ = a⃗ + λb⃗",
-    "options": [
-      "r⃗=a⃗+λb⃗",
-      "r⃗·b⃗=0",
-      "r⃗=λa⃗·b⃗",
-      "r⃗=a⃗·b⃗"
-    ],
-    "answer": 0,
-    "explain": "Vector form: position vector equals fixed point plus scalar multiple of direction vector.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "aa3bc66a-f7b1-4f05-869c-4b9d64ff40b0",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Equation of Plane",
-    "prompt": "General equation of a plane in Cartesian form:",
-    "formula": "ax+by+cz+d=0",
-    "options": [
-      "ax²+by²+cz²=d",
-      "ax+by=cz",
-      "a/x+b/y+c/z=1",
-      "ax+by+cz+d=0"
-    ],
-    "answer": 3,
-    "explain": "Every plane in 3D has a linear equation ax+by+cz+d=0 where (a,b,c) is normal.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4c8e9158-12d7-405f-9b56-e0ba3c902fc9",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Normal to a Plane",
-    "prompt": "Normal vector to plane ax+by+cz+d=0 is:",
-    "formula": "n⃗ = (a,b,c)",
-    "options": [
-      "n⃗=(a,b,c)",
-      "n⃗=(a²,b²,c²)",
-      "n⃗=(1/a,1/b,1/c)",
-      "n⃗=(d,d,d)"
-    ],
-    "answer": 0,
-    "explain": "Coefficients of x,y,z in the plane equation form the normal vector.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "38ab7dd0-82c0-4d4d-afce-96d049122b55",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Distance: Point to Plane",
-    "prompt": "Distance from point (x₁,y₁,z₁) to plane ax+by+cz+d=0:",
-    "formula": "|ax₁+by₁+cz₁+d|/√(a²+b²+c²)",
-    "options": [
-      "√(ax₁²+by₁²+cz₁²)",
-      "(ax₁+by₁+cz₁)/d",
-      "|ax₁+by₁+cz₁+d|/√(a²+b²+c²)",
-      "|ax₁+by₁+cz₁+d|/(a+b+c)"
-    ],
-    "answer": 2,
-    "explain": "Perpendicular distance formula from a point to a plane.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6f2cd115-f155-46e9-a25e-af7e3c4832e7",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Angle Between Planes",
-    "prompt": "Angle θ between planes a₁x+b₁y+c₁z=d₁ and a₂x+b₂y+c₂z=d₂:",
-    "formula": "cosθ=|a₁a₂+b₁b₂+c₁c₂|/(√Σa₁²·√Σa₂²)",
-    "options": [
-      "cosθ=|a₁a₂+b₁b₂+c₁c₂|/(√Σa₁²·√Σa₂²)",
-      "tanθ=a₁/a₂+b₁/b₂+c₁/c₂",
-      "sinθ=|a₁a₂+b₁b₂+c₁c₂|",
-      "cosθ=a₁a₂+b₁b₂+c₁c₂"
-    ],
-    "answer": 0,
-    "explain": "Angle between planes equals angle between their normal vectors.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9a6277f3-5d52-4fbb-9f89-f51365115a36",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Perpendicular Planes",
-    "prompt": "Two planes are perpendicular iff:",
-    "formula": "a₁a₂+b₁b₂+c₁c₂=0",
-    "options": [
-      "a₁/a₂=b₁/b₂=c₁/c₂",
-      "a₁a₂+b₁b₂+c₁c₂=1",
-      "a₁+b₁+c₁=a₂+b₂+c₂",
-      "a₁a₂+b₁b₂+c₁c₂=0"
-    ],
-    "answer": 3,
-    "explain": "Planes are perpendicular when their normals are perpendicular (dot product = 0).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b35d955e-fd51-4fb5-815f-c192fe1a521a",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Parallel Planes",
-    "prompt": "Two planes are parallel iff:",
-    "formula": "a₁/a₂=b₁/b₂=c₁/c₂",
-    "options": [
-      "a₁=a₂, b₁=b₂, c₁=c₂",
-      "a₁a₂+b₁b₂+c₁c₂=0",
-      "a₁+b₁+c₁=0",
-      "a₁/a₂=b₁/b₂=c₁/c₂"
-    ],
-    "answer": 3,
-    "explain": "Parallel planes have proportional normal vectors (same direction).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4da02208-3794-4a2a-9cc9-45dae828e610",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Intercept Form of Plane",
-    "prompt": "Intercept form of plane with intercepts a,b,c on axes:",
-    "formula": "x/a+y/b+z/c=1",
-    "options": [
-      "x²/a+y²/b+z²/c=1",
-      "x·a+y·b+z·c=0",
-      "x/a+y/b+z/c=1",
-      "ax+by+cz=1"
-    ],
-    "answer": 2,
-    "explain": "Intercept form: plane cuts x,y,z axes at a,b,c respectively.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ca126370-d9ec-4c07-ad10-d893ad8fac39",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Skew Lines Distance",
-    "prompt": "Shortest distance between two skew lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μd⃗:",
-    "formula": "|(c⃗−a⃗)·(b⃗×d⃗)|/|b⃗×d⃗|",
-    "options": [
-      "|(c⃗−a⃗)·(b⃗×d⃗)|/|b⃗×d⃗|",
-      "|(c⃗−a⃗)×(b⃗+d⃗)|",
-      "|(a⃗−c⃗)|/|b⃗·d⃗|",
-      "|b⃗×d⃗|/|(c⃗−a⃗)|"
-    ],
-    "answer": 0,
-    "explain": "SD between skew lines uses scalar triple product divided by cross product magnitude.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6772a4e8-07aa-4105-8997-730a5f4d7fc4",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Coplanar Lines",
-    "prompt": "Condition for two lines to be coplanar (vector form):",
-    "formula": "(c⃗−a⃗)·(b⃗×d⃗)=0",
-    "options": [
-      "(c⃗−a⃗)·b⃗=0",
-      "b⃗×d⃗=0",
-      "b⃗·d⃗=1",
-      "(c⃗−a⃗)·(b⃗×d⃗)=0"
-    ],
-    "answer": 3,
-    "explain": "Lines are coplanar iff scalar triple product of (c⃗−a⃗), b⃗, d⃗ is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a0d6f99a-7aa0-466a-ab93-d43ba3aae30f",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Line Parallel to Plane",
-    "prompt": "Line is parallel to plane ax+by+cz+d=0 iff (line d.r.s l,m,n):",
-    "formula": "al+bm+cn=0",
-    "options": [
-      "a/l=b/m=c/n",
-      "al+bm+cn=0",
-      "al+bm+cn=1",
-      "al·bm·cn=0"
-    ],
-    "answer": 1,
-    "explain": "Line parallel to plane: direction of line perpendicular to plane's normal.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1ac9687c-8879-4a02-bb77-cc50a827e274",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Distance Between Parallel Planes",
-    "prompt": "Distance between parallel planes ax+by+cz+d₁=0 and ax+by+cz+d₂=0:",
-    "formula": "|d₁−d₂|/√(a²+b²+c²)",
-    "options": [
-      "√(d₁²+d₂²)/√(a²+b²+c²)",
-      "|d₁−d₂|/(a²+b²+c²)",
-      "|d₁−d₂|/√(a²+b²+c²)",
-      "|d₁+d₂|/(a+b+c)"
-    ],
-    "answer": 2,
-    "explain": "Distance between parallel planes uses difference of constants divided by normal magnitude.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5a60487e-fa6c-432e-bfab-84e07998950a",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Direction Cosines of Axes",
-    "prompt": "Direction cosines of x-axis are:",
-    "formula": "(1,0,0)",
-    "options": [
-      "(0,0,1)",
-      "(1,1,0)",
-      "(0,1,0)",
-      "(1,0,0)"
-    ],
-    "answer": 3,
-    "explain": "x-axis has direction along x only, so d.c.s = (1,0,0).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d4b29b85-56fd-46ee-9395-7c134684ce10",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Direction Cosines Identity",
-    "prompt": "If a line makes angles α,β,γ with axes, then cos²α+cos²β+cos²γ=?",
-    "formula": "1",
-    "options": [
-      "2",
-      "3",
-      "0",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "Fundamental identity of direction cosines: sum of squared cosines equals 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "93beb473-708d-4b36-be69-dbab6ca746e1",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Vector Equation of Plane",
-    "prompt": "Vector equation of plane through a⃗ with normal n⃗:",
-    "formula": "(r⃗−a⃗)·n⃗=0",
-    "options": [
-      "r⃗·a⃗=n⃗",
-      "r⃗+a⃗=n⃗",
-      "r⃗×n⃗=a⃗",
-      "(r⃗−a⃗)·n⃗=0"
-    ],
-    "answer": 3,
-    "explain": "Every point r⃗ on the plane: vector (r⃗−a⃗) lies in plane, so perpendicular to normal n⃗.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7eac08db-c293-465b-97d4-9a36e97a48d3",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "Family of Planes",
-    "prompt": "Equation of plane through line of intersection of planes P₁=0, P₂=0 is:",
-    "formula": "P₁+λP₂=0",
-    "options": [
-      "P₁+λP₂=0",
-      "λP₁=P₂",
-      "P₁·P₂=0",
-      "P₁−P₂=λ"
-    ],
-    "answer": 0,
-    "explain": "Family of planes through intersection of P₁=0 and P₂=0 is P₁+λP₂=0 for any λ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f9237a60-e235-41bc-928b-059421e5e04a",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "d.c.s of a line with d.r.s (a,b,c): l =?",
-    "formula": "l = a/√(a²+b²+c²)",
-    "options": [
-      "a/√(a²+b²+c²)",
-      "√(a²+b²+c²)/a",
-      "a/(a+b+c)",
-      "a²/(a²+b²+c²)"
-    ],
-    "answer": 0,
-    "explain": "Direction cosines are direction ratios divided by the magnitude of the direction vector.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "95fca987-3911-4f02-b0eb-01788d398731",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Parametric form of line through (x₁,y₁,z₁) with d.r.s a,b,c: x=?",
-    "formula": "x = x₁+at, y=y₁+bt, z=z₁+ct",
-    "options": [
-      "x₁+at, y=y₁+bt, z=z₁+ct",
-      "x₁−at, y=y₁−bt, z=z₁−ct",
-      "x₁·at, y=y₁·bt, z=z₁·ct",
-      "x₁+a/t, y=y₁+b/t, z=z₁+c/t"
-    ],
-    "answer": 0,
-    "explain": "Parametric form uses the point plus parameter t times each direction ratio component.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "92334d16-09d9-49d5-9dcc-1dfd8ff7cce5",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Direction cosines of the y-axis are:",
-    "formula": "",
-    "options": [
-      "(0, 1, 0)",
-      "(0, 0, 1)",
-      "(1, 1, 0)",
-      "(1, 0, 0)"
-    ],
-    "answer": 0,
-    "explain": "The y-axis has direction vector (0,1,0), so its direction cosines are (0,1,0).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8a962def-93c8-45f3-aa2a-e88214b7c384",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Direction cosines of the z-axis are:",
-    "formula": "",
-    "options": [
-      "(0, 1, 0)",
-      "(0, 1, 1)",
-      "(1, 0, 0)",
-      "(0, 0, 1)"
-    ],
-    "answer": 3,
-    "explain": "The z-axis has direction vector (0,0,1), so its direction cosines are (0,0,1).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "65bf655f-a91f-452d-9062-1d2b955fd972",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Midpoint of segment joining (x₁,y₁,z₁) and (x₂,y₂,z₂):",
-    "formula": "((x₁+x₂)/2,(y₁+y₂)/2,(z₁+z₂)/2)",
-    "options": [
-      "((x₂−x₁)/2,(y₂−y₁)/2,(z₂−z₁)/2)",
-      "((x₁+x₂),(y₁+y₂),(z₁+z₂))",
-      "(x₁x₂,y₁y₂,z₁z₂)",
-      "((x₁+x₂)/2,(y₁+y₂)/2,(z₁+z₂)/2)"
-    ],
-    "answer": 3,
-    "explain": "Midpoint formula in 3D is the average of corresponding coordinates.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "407c1931-56a2-4c24-8a4e-df800e6f5d20",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Distance between points (x₁,y₁,z₁) and (x₂,y₂,z₂):",
-    "formula": "√[(x₂−x₁)²+(y₂−y₁)²+(z₂−z₁)²]",
-    "options": [
-      "√[(x₂+x₁)²+(y₂+y₁)²+(z₂+z₁)²]",
-      "(x₂−x₁)²+(y₂−y₁)²+(z₂−z₁)²",
-      "|x₂−x₁|+|y₂−y₁|+|z₂−z₁|",
-      "√[(x₂−x₁)²+(y₂−y₁)²+(z₂−z₁)²]"
-    ],
-    "answer": 3,
-    "explain": "3D distance is the square root of the sum of squares of coordinate differences.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "61c3f98e-34e1-411d-afb5-2bad37be136c",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Point dividing segment P₁P₂ internally in ratio m:n has x-coord:",
-    "formula": "(mx₂+nx₁)/(m+n)",
-    "options": [
-      "(x₁+x₂)/(m+n)",
-      "(mx₂+nx₁)/(m+n)",
-      "(mx₁+nx₂)/(m+n)",
-      "(mx₂−nx₁)/(m−n)"
-    ],
-    "answer": 1,
-    "explain": "Section formula: internal division gives (mx₂+nx₁)/(m+n) for x-coordinate.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "62fdf47e-efdb-4c99-b2f4-b9403d932eb6",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Angle between line r⃗=a⃗+λb⃗ and plane r⃗·n⃗=d is φ where sinφ =?",
-    "formula": "sinφ = |b⃗·n⃗|/(|b⃗||n⃗|)",
-    "options": [
-      "b⃗·n⃗/(|b⃗||n⃗|)",
-      "|b⃗×n⃗|/(|b⃗||n⃗|)",
-      "(b⃗·n⃗)²/(|b⃗||n⃗|)",
-      "|b⃗·n⃗|/(|b⃗||n⃗|)"
-    ],
-    "answer": 3,
-    "explain": "Angle between line and plane uses sine = |dot product of direction & normal|/products of magnitudes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ebcac58c-8845-41ee-9b5b-d06521aa5978",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Two lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μd⃗ are coplanar iff (c⃗−a⃗)·(b⃗×d⃗)=?",
-    "formula": "(c⃗−a⃗)·(b⃗×d⃗) = 0",
-    "options": [
-      "|c⃗−a⃗|",
-      "1",
-      "0",
-      "|b⃗×d⃗|"
-    ],
-    "answer": 2,
-    "explain": "Lines are coplanar iff the scalar triple product of (c⃗−a⃗), b⃗, d⃗ equals zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cbf45fe5-7b14-42cc-9bff-6c2ebbd20c20",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Vector equation of plane through three points a⃗,b⃗,c⃗: normal is?",
-    "formula": "n⃗=(b⃗−a⃗)×(c⃗−a⃗)",
-    "options": [
-      "(b⃗−a⃗)×(c⃗−a⃗)",
-      "(b⃗+c⃗)×a⃗",
-      "(a⃗×b⃗)+(b⃗×c⃗)",
-      "(b⃗−a⃗)·(c⃗−a⃗)"
-    ],
-    "answer": 0,
-    "explain": "Normal to plane through three points is cross product of two edge vectors from one point.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "19d3dbb5-b8f6-43ae-a3d6-d2be7ad7bc44",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The angle a line with d.r.s (a,b,c) makes with xy-plane is φ where sinφ=?",
-    "formula": "sinφ = c/√(a²+b²+c²)",
-    "options": [
-      "c/√(a²+b²+c²)",
-      "c/√(a²+b²)",
-      "c²/(a²+b²+c²)",
-      "√(a²+b²)/√(a²+b²+c²)"
-    ],
-    "answer": 0,
-    "explain": "Angle with xy-plane: sinφ = |c|/magnitude; complement of angle with z-axis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0dea6f38-11d7-4cb1-9daa-1ad20598164f",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The equation of yz-plane is:",
-    "formula": "x = 0",
-    "options": [
-      "y = 0",
-      "x + y = 0",
-      "z = 0",
-      "x = 0"
-    ],
-    "answer": 3,
-    "explain": "The yz-plane consists of all points where x-coordinate is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d3742b83-b3f7-4b1c-81a5-340ec02a1075",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The equation of xz-plane is:",
-    "formula": "y = 0",
-    "options": [
-      "y = 0",
-      "x = 0",
-      "y + z = 0",
-      "z = 0"
-    ],
-    "answer": 0,
-    "explain": "The xz-plane consists of all points where y-coordinate is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e355cfb8-c94f-43e6-8b61-c0886464c325",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Image of P(x₁,y₁,z₁) in plane ax+by+cz+d=0: coordinates use k=?",
-    "formula": "k = −2(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
-    "options": [
-      "2(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
-      "(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
-      "−2(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
-      "−(ax₁+by₁+cz₁+d)/(a²+b²+c²)"
-    ],
-    "answer": 2,
-    "explain": "Image = P + k·(a,b,c); k = −2(ax₁+by₁+cz₁+d)/(a²+b²+c²) gives reflection.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a043fa7c-827c-4b34-986e-2eecedd1074b",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Sum of squares of all three direction cosines of any line equals:",
-    "formula": "l²+m²+n²=1",
-    "options": [
-      "0",
-      "3",
-      "1",
-      "Depends on the line"
-    ],
-    "answer": 2,
-    "explain": "By definition, l²+m²+n²=1 always holds for direction cosines.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f9a624d4-bdc4-4fb7-b1d9-e0f0e84be70d",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Perpendicular distance from origin to plane ax+by+cz+d=0 is:",
-    "formula": "|d|/√(a²+b²+c²)",
-    "options": [
-      "√(a²+b²+c²)/|d|",
-      "d/(a+b+c)",
-      "|d|/(a²+b²+c²)",
-      "|d|/√(a²+b²+c²)"
-    ],
-    "answer": 3,
-    "explain": "Setting x₁=y₁=z₁=0 in point-to-plane formula gives |d|/√(a²+b²+c²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "38a51cec-cfab-40ee-864a-100e2a0d8153",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If planes a₁x+b₁y+c₁z=d₁ and a₂x+b₂y+c₂z=d₂ are parallel, then:",
-    "formula": "a₁/a₂ = b₁/b₂ = c₁/c₂ ≠ d₁/d₂",
-    "options": [
-      "a₁/a₂ ≠ b₁/b₂ = c₁/c₂",
-      "a₁a₂+b₁b₂+c₁c₂=0",
-      "a₁/a₂=b₁/b₂=c₁/c₂=d₁/d₂",
-      "a₁/a₂=b₁/b₂=c₁/c₂ ≠ d₁/d₂"
-    ],
-    "answer": 3,
-    "explain": "Parallel planes have proportional normals but unequal ratio with RHS (else identical planes).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7cbed771-6782-48ee-ad1a-d0539fb0af5a",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Line r⃗=a⃗+λb⃗ is parallel to plane r⃗·n⃗=d iff:",
-    "formula": "b⃗·n⃗ = 0",
-    "options": [
-      "a⃗·n⃗ = d",
-      "b⃗·n⃗ = 1",
-      "b⃗×n⃗ = 0",
-      "b⃗·n⃗ = 0"
-    ],
-    "answer": 3,
-    "explain": "Line parallel to plane means direction vector is perpendicular to plane's normal: b⃗·n⃗=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dc102565-30dd-4a88-a15d-139eb84c3967",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If α,β,γ are angles a line makes with coordinate axes, cos2α+cos2β+cos2γ=?",
-    "formula": "cos2α+cos2β+cos2γ = −1",
-    "options": [
-      "−1",
-      "1",
-      "3",
-      "0"
-    ],
-    "answer": 0,
-    "explain": "Using l²+m²+n²=1 and cos2θ=2cos²θ−1: sum = 2(1)−3 = −1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d2756962-32d3-4f43-b861-065b1dd9faed",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Plane through point (x₁,y₁,z₁) with normal (a,b,c): equation?",
-    "formula": "a(x−x₁)+b(y−y₁)+c(z−z₁)=0",
-    "options": [
-      "ax+by+cz=0",
-      "a/x₁+b/y₁+c/z₁=1",
-      "ax₁+by₁+cz₁+d=0",
-      "a(x−x₁)+b(y−y₁)+c(z−z₁)=0"
-    ],
-    "answer": 3,
-    "explain": "Plane with given normal through a specific point uses point-normal form.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1dbf58fe-1cf1-43ee-8345-3a507979e7e1",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Volume of tetrahedron with edges a⃗,b⃗,c⃗ from one vertex:",
-    "formula": "V = (1/6)|a⃗·(b⃗×c⃗)|",
-    "options": [
-      "|a⃗·(b⃗×c⃗)|",
-      "(1/6)|a⃗·(b⃗×c⃗)|",
-      "(1/3)|a⃗·(b⃗×c⃗)|",
-      "(1/2)|a⃗·(b⃗×c⃗)|"
-    ],
-    "answer": 1,
-    "explain": "Tetrahedron volume is 1/6 of the scalar triple product of three co-terminal edges.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e21415c5-757e-4ddb-8666-b58220cec7f7",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The xy-plane has equation:",
-    "formula": "",
-    "options": [
-      "y = 0",
-      "x + y = 0",
-      "x = 0",
-      "z = 0"
-    ],
-    "answer": 3,
-    "explain": "The xy-plane contains all points where the z-coordinate is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9136d00e-db42-46c6-af5c-be5fec61a304",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Angle between line with d.r.s (a,b,c) and plane with normal (p,q,r): sinθ=?",
-    "formula": "sinθ = |ap+bq+cr|/√(a²+b²+c²)·√(p²+q²+r²)",
-    "options": [
-      "(ap+bq+cr)/√(a²+b²+c²)√(p²+q²+r²)",
-      "|ap+bq+cr|/√(a²+b²+c²)√(p²+q²+r²)",
-      "|(a⃗×p⃗)|/(|a⃗||p⃗|)",
-      "cosθ=|ap+bq+cr|/√(a²+b²+c²)√(p²+q²+r²)"
-    ],
-    "answer": 1,
-    "explain": "Angle with plane is complement of angle with normal; sinθ = |d.r·normal|/(product of magnitudes).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "494cec72-737b-4cf9-b33c-223b973a5194",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Shortest distance between two parallel lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μb⃗ is:",
-    "formula": "SD = |(c⃗−a⃗)×b⃗|/|b⃗|",
-    "options": [
-      "|(c⃗−a⃗)×b⃗|/|b⃗|²",
-      "|(c⃗−a⃗)×b⃗|/|b⃗|",
-      "|(c⃗−a⃗)·b⃗|/|b⃗|",
-      "|c⃗−a⃗|"
-    ],
-    "answer": 1,
-    "explain": "For parallel lines with same direction b⃗, SD = magnitude of cross product of (c⃗−a⃗) and b̂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "006ad13f-a937-4493-8498-9af1bcba719e",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "A line with d.r.s (1,1,1) makes equal angles with all axes. Each angle α satisfies cosα=?",
-    "formula": "cosα = 1/√3",
-    "options": [
-      "1/√2",
-      "1/√3",
-      "1/3",
-      "1/2"
-    ],
-    "answer": 1,
-    "explain": "Equal d.r.s (1,1,1) give d.c. l=m=n=1/√3, so each axis-angle has cosine 1/√3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c04d5f28-5541-4ab5-80a3-a659db52cc80",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Lines (x−1)/2=(y+1)/3=(z−2)/4 and (x−1)/4=(y+1)/6=(z−2)/8 are:",
-    "formula": "",
-    "options": [
-      "Intersecting but not parallel",
-      "Parallel (same direction)",
-      "Skew lines",
-      "Perpendicular"
-    ],
-    "answer": 1,
-    "explain": "D.r.s (4,6,8)=2(2,3,4) → proportional, so lines are parallel.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2786da64-6e6e-455b-825e-9d59461989cd",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If two planes are perpendicular, angle between their normals is:",
-    "formula": "n⃗₁·n⃗₂ = 0",
-    "options": [
-      "60°",
-      "0°",
-      "45°",
-      "90°"
-    ],
-    "answer": 3,
-    "explain": "Perpendicular planes ↔ perpendicular normals, i.e. dot product of normals = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c2fad540-96b7-4aea-818b-f3a83015b107",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The d.r.s of the line of intersection of planes a₁x+b₁y+c₁z=0 and a₂x+b₂y+c₂z=0 are proportional to:",
-    "formula": "n⃗₁×n⃗₂",
-    "options": [
-      "n⃗₁−n⃗₂",
-      "n⃗₁+n⃗₂",
-      "n⃗₁×n⃗₂ (cross product of normals)",
-      "n⃗₁·n⃗₂"
-    ],
-    "answer": 2,
-    "explain": "The line of intersection is perpendicular to both normals, so its direction is n⃗₁×n⃗₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b1dce576-d361-44af-9a1a-8ac90ffa262d",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The locus of a point equidistant from two fixed points A and B in 3D is:",
-    "formula": "",
-    "options": [
-      "Perpendicular bisector plane of AB",
-      "A sphere centred at midpoint",
-      "A circle",
-      "A line through midpoint"
-    ],
-    "answer": 0,
-    "explain": "All points equidistant from A and B lie on the plane perpendicular to AB at its midpoint.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e8010dee-16b5-4686-b970-ca391a6790c8",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If line (x−a)/l=(y−b)/m=(z−c)/n=t, the point at parameter t is:",
-    "formula": "(a+lt, b+mt, c+nt)",
-    "options": [
-      "(a/l·t, b/m·t, c/n·t)",
-      "(a−lt, b−mt, c−nt)",
-      "(lt, mt, nt)",
-      "(a+lt, b+mt, c+nt)"
-    ],
-    "answer": 3,
-    "explain": "Parametric line coordinates add the direction cosine multiples to the base point.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "94861ceb-9eda-46a5-8440-a2c9aa6d1727",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If the scalar triple product [a⃗ b⃗ c⃗]=0, the vectors are:",
-    "formula": "[a⃗ b⃗ c⃗]=0",
-    "options": [
-      "Coplanar",
-      "Mutually perpendicular",
-      "Collinear",
-      "Parallel"
-    ],
-    "answer": 0,
-    "explain": "Zero scalar triple product means vectors lie in same plane, i.e., they are coplanar.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a85d0ffd-f4ee-4f7b-b2f6-d23b2dad896b",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Area of triangle with vertices A,B,C in 3D is:",
-    "formula": "(1/2)|AB⃗×AC⃗|",
-    "options": [
-      "|AB⃗×AC⃗|",
-      "(1/3)|AB⃗×AC⃗|",
-      "(1/2)|AB⃗×AC⃗|",
-      "(1/2)|AB⃗·AC⃗|"
-    ],
-    "answer": 2,
-    "explain": "Area of triangle = half the magnitude of cross product of two side vectors.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "128750c2-010e-4834-87da-e0480e15fb5b",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The plane x/a+y/b+z/c=1 meets axes at A,B,C. Centroid of △ABC is:",
-    "formula": "(a/3, b/3, c/3)",
-    "options": [
-      "(a/2, b/2, c/2)",
-      "(a/3, b/3, c/3)",
-      "(1/a, 1/b, 1/c)",
-      "(a, b, c)"
-    ],
-    "answer": 1,
-    "explain": "Intercepts are (a,0,0),(0,b,0),(0,0,c); centroid averages coordinates → (a/3,b/3,c/3).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c586e7f8-1765-495f-8bca-ebe5aa4dfdd3",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The angle between a line and a plane is complement of angle between line and:",
-    "formula": "",
-    "options": [
-      "Another line in the plane",
-      "The projection of line on plane",
-      "The plane's x-intercept",
-      "Normal to the plane"
-    ],
-    "answer": 3,
-    "explain": "Angle with plane + angle with normal = 90°; they are complementary angles.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "122f785b-7894-4d9e-9592-8301977ea3b6",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The d.r.s of the normal to plane passing through origin with equation 2x−3y+5z=0 are:",
-    "formula": "",
-    "options": [
-      "(−2, 3, −5)",
-      "(3, 2, 5)",
-      "(5, 3, 2)",
-      "(2, −3, 5)"
-    ],
-    "answer": 3,
-    "explain": "Coefficients of x,y,z in ax+by+cz=0 directly give the normal direction ratios.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0dc66fb4-65bd-49d7-8256-c7116dde6328",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Condition for lines (x−a₁)/l₁=(y−b₁)/m₁=(z−c₁)/n₁ and (x−a₂)/l₂=(y−b₂)/m₂=(z−c₂)/n₂ to intersect:",
-    "formula": "|a₂−a₁  b₂−b₁  c₂−c₁; l₁ m₁ n₁; l₂ m₂ n₂|=0",
-    "options": [
-      "l₁l₂+m₁m₂+n₁n₂=0",
-      "l₁/l₂=m₁/m₂=n₁/n₂",
-      "The 3×3 determinant of differences and d.r.s equals 0",
-      "The lines share a common d.r."
-    ],
-    "answer": 2,
-    "explain": "Lines intersect (coplanar) iff scalar triple product of (a⃗₂−a⃗₁), b⃗₁, b⃗₂ is zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d4ee887f-38bc-4524-9327-1e25d9945417",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Foot of perpendicular from origin to plane lx+my+nz=d (l²+m²+n²=1) is:",
-    "formula": "(ld, md, nd)",
-    "options": [
-      "(l/d, m/d, n/d)",
-      "(d/l, d/m, d/n)",
-      "(l²d, m²d, n²d)",
-      "(ld, md, nd)"
-    ],
-    "answer": 3,
-    "explain": "For unit normal (l,m,n), foot from origin = d·(l,m,n) = (ld,md,nd).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "951ea5dd-4abf-47db-ac64-dbc0c01e1f9d",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The equation x=a represents which surface in 3D?",
-    "formula": "",
-    "options": [
-      "A plane parallel to the xz-plane",
-      "A plane parallel to the xy-plane",
-      "A line along x-axis",
-      "A plane parallel to the yz-plane"
-    ],
-    "answer": 3,
-    "explain": "x=a is a plane with normal along x-axis, hence parallel to yz-plane.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d9eab072-4241-47a0-b8f7-10d28b5d799f",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Projection of vector r⃗=(x,y,z) on a line with d.c.s (l,m,n) is:",
-    "formula": "lx+my+nz",
-    "options": [
-      "√(l²x²+m²y²+n²z²)",
-      "lx+my+nz",
-      "(x+y+z)/√3",
-      "l²x+m²y+n²z"
-    ],
-    "answer": 1,
-    "explain": "Projection = r⃗·n̂ = lx+my+nz where (l,m,n) are direction cosines (unit vector).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9eb176a7-d114-44e2-95d8-a43203495d6b",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Distance from point (x₁,y₁,z₁) to the y-axis is:",
-    "formula": "√(x₁²+z₁²)",
-    "options": [
-      "|y₁|",
-      "√(x₁²+z₁²)",
-      "√(x₁²+y₁²)",
-      "√(y₁²+z₁²)"
-    ],
-    "answer": 1,
-    "explain": "Distance to y-axis ignores y-coordinate; it equals √(x²+z²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f7fb8e11-3054-4287-b9ea-94f59e30561e",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If a line makes equal angles with all coordinate axes, each d.c. equals:",
-    "formula": "1/√3",
-    "options": [
-      "±1/2",
-      "±1/√2",
-      "±1/√3",
-      "±1"
-    ],
-    "answer": 2,
-    "explain": "l=m=n and l²+m²+n²=1 gives 3l²=1, so l=±1/√3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cb11625c-3e7b-44fe-a2a6-1aa91f767f76",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Angle between line r⃗=a⃗+λb⃗ and plane r⃗·n⃗=d: sinφ=|b⃗·n⃗|/(|b⃗||n⃗|). If φ=90°, the line is:",
-    "formula": "",
-    "options": [
-      "Lying in the plane",
-      "Making 45° with normal",
-      "Parallel to the plane",
-      "Perpendicular to the plane (along normal)"
-    ],
-    "answer": 3,
-    "explain": "φ=90° means sinφ=1, so b⃗∥n⃗; the line is perpendicular to the plane.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "54054f05-65cc-44a6-9be1-a896ca498500",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If direction ratios of two lines are (a,b,c) and (b,c,a), they are perpendicular iff:",
-    "formula": "ab+bc+ca=0",
-    "options": [
-      "ab+bc+ca=1",
-      "a=b=c",
-      "ab+bc+ca=0",
-      "a²+b²+c²=0"
-    ],
-    "answer": 2,
-    "explain": "Perpendicularity condition: a·b+b·c+c·a=0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "babad94b-3540-4bcc-8f44-d8b557295335",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "For skew lines, the shortest distance vector is along:",
-    "formula": "b⃗₁×b⃗₂",
-    "options": [
-      "b⃗₁+b⃗₂",
-      "b⃗₁−b⃗₂",
-      "b⃗₁×b⃗₂ (cross product of directions)",
-      "b⃗₁·b⃗₂"
-    ],
-    "answer": 2,
-    "explain": "The common perpendicular to two skew lines is along b⃗₁×b⃗₂.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "568aa7e4-c803-4b0b-be46-3aafdde98da4",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The line x/l=y/m=z/n is perpendicular to plane ax+by+cz=d iff:",
-    "formula": "a/l=b/m=c/n",
-    "options": [
-      "al+bm+cn=0",
-      "al+bm+cn=1",
-      "a/l=b/m=c/n",
-      "a=l, b=m, c=n"
-    ],
-    "answer": 2,
-    "explain": "Line perpendicular to plane means direction (l,m,n) is parallel to normal (a,b,c): a/l=b/m=c/n.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c241c63e-6587-42a2-9484-85907aef3f0a",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The distance from point (a,b,c) to the z-axis is:",
-    "formula": "√(a²+b²)",
-    "options": [
-      "|c|",
-      "√(b²+c²)",
-      "√(a²+c²)",
-      "√(a²+b²)"
-    ],
-    "answer": 3,
-    "explain": "z-axis has x=0,y=0; distance ignores z-coordinate, equals √(a²+b²).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c33ad341-6814-4f3d-a70f-ab9749f9c608",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If cos α=l, cos β=m, cos γ=n for a line, then sin²α+sin²β+sin²γ=?",
-    "formula": "2",
-    "options": [
-      "0",
-      "1",
-      "3",
-      "2"
-    ],
-    "answer": 3,
-    "explain": "sin²α+sin²β+sin²γ=(1−l²)+(1−m²)+(1−n²)=3−(l²+m²+n²)=3−1=2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "cce74c9b-0602-4172-8d71-9df8bbd66c23",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Two planes are parallel iff their normals are:",
-    "formula": "n⃗₁ ∥ n⃗₂",
-    "options": [
-      "Equal in magnitude",
-      "Coplanar",
-      "Parallel (proportional)",
-      "Perpendicular"
-    ],
-    "answer": 2,
-    "explain": "Parallel planes have the same normal direction: n⃗₁×n⃗₂=0⃗.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "0ca5df0e-7626-4b61-a14c-e30e9be1ee35",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The angle α that a line with d.r.s (a,b,c) makes with x-axis satisfies:",
-    "formula": "cosα=a/√(a²+b²+c²)",
-    "options": [
-      "cosα=√(b²+c²)/√(a²+b²+c²)",
-      "cosα=a²/(a²+b²+c²)",
-      "cosα=a/(a+b+c)",
-      "cosα=a/√(a²+b²+c²)"
-    ],
-    "answer": 3,
-    "explain": "Direction cosine l=a/√(a²+b²+c²) gives angle with x-axis.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ccc01d89-6216-43dc-8bed-b7b2ecd1d4a0",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If a line has direction cosines (l,m,n), the direction cosines of a parallel line are:",
-    "formula": "",
-    "options": [
-      "Only (l,m,n)",
-      "(l,m,n) or (−l,−m,−n)",
-      "(m,n,l)",
-      "(1/l,1/m,1/n)"
-    ],
-    "answer": 1,
-    "explain": "A parallel line has same or opposite direction; both (l,m,n) and (−l,−m,−n) are valid d.c.s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "44de00a9-717b-4256-bfa4-3c07f90879e4",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The section formula: if P divides A(x₁)B(x₂) internally in 2:3, x-coordinate of P is:",
-    "formula": "(2x₂+3x₁)/5",
-    "options": [
-      "(2x₁−3x₂)/5",
-      "(2x₂+3x₁)/5",
-      "(x₁+x₂)/2",
-      "(3x₂+2x₁)/5"
-    ],
-    "answer": 1,
-    "explain": "Internal division in m:n gives x=(mx₂+nx₁)/(m+n)=(2x₂+3x₁)/5.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7923fc7c-5ade-4b41-afdd-5174c588dbc1",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If a plane has normal n⃗ and line has direction b⃗, line ⊥ plane iff:",
-    "formula": "b⃗ ∥ n⃗",
-    "options": [
-      "b⃗ × n⃗ = 0⃗",
-      "b⃗ · n⃗ = 0",
-      "|b⃗| = |n⃗|",
-      "b⃗ + n⃗ = 0⃗"
-    ],
-    "answer": 0,
-    "explain": "A line is perpendicular to a plane iff its direction is parallel to the plane's normal.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1bad354a-e248-47ab-8f35-523c2429821c",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "If four points are coplanar, the scalar triple product of three edge vectors is:",
-    "formula": "[a⃗ b⃗ c⃗] = 0",
-    "options": [
-      "Zero",
-      "Undefined",
-      "One",
-      "Negative"
-    ],
-    "answer": 0,
-    "explain": "Four points are coplanar iff scalar triple product of vectors from one point to the others = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "411585e4-71d3-45cf-b897-3d3b9bf47e93",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "The equation y=b in 3D represents:",
-    "formula": "",
-    "options": [
-      "A line parallel to y-axis",
-      "A plane parallel to xz-plane",
-      "A point on y-axis",
-      "A plane parallel to xy-plane"
-    ],
-    "answer": 1,
-    "explain": "y=b (constant) in 3D is a plane parallel to the xz-plane at distance b from it.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1c0a81ee-a623-4146-bcd0-10df80f4e0c7",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Angle between two lines with d.r.s (a₁,b₁,c₁),(a₂,b₂,c₂): cosθ=?",
-    "formula": "cosθ = |a₁a₂+b₁b₂+c₁c₂| / (√Σa₁²·√Σa₂²)",
-    "options": [
-      "√(a₁a₂+b₁b₂+c₁c₂)/(√Σa₁²)",
-      "|a₁b₂−a₂b₁|/(√Σa₁²·√Σa₂²)",
-      "(a₁a₂+b₁b₂+c₁c₂)/(Σa₁²·Σa₂²)",
-      "|a₁a₂+b₁b₂+c₁c₂|/(√Σa₁²·√Σa₂²)"
-    ],
-    "answer": 3,
-    "explain": "Angle between two lines uses absolute dot product of d.r.s divided by product of magnitudes.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "229b4bb7-54ea-4eb9-a9ec-57f4d1ff719c",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Two lines with d.r.s (a₁,b₁,c₁),(a₂,b₂,c₂) are perpendicular iff:",
-    "formula": "a₁a₂+b₁b₂+c₁c₂ = 0",
-    "options": [
-      "a₁a₂−b₁b₂+c₁c₂ = 0",
-      "a₁²+b₁²+c₁² = a₂²+b₂²+c₂²",
-      "a₁a₂+b₁b₂+c₁c₂ = 0",
-      "a₁/a₂ = b₁/b₂ = c₁/c₂"
-    ],
-    "answer": 2,
-    "explain": "Perpendicularity condition: dot product of direction vectors equals zero.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9b473f5f-b72d-4bcf-ad78-944748ef93fc",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Two lines with d.r.s (a₁,b₁,c₁),(a₂,b₂,c₂) are parallel iff:",
-    "formula": "a₁/a₂ = b₁/b₂ = c₁/c₂",
-    "options": [
-      "a₁a₂+b₁b₂+c₁c₂ = 0",
-      "a₁²+b₁²+c₁² = 1",
-      "a₁/a₂ = b₁/b₂ = c₁/c₂",
-      "a₁+b₁+c₁ = a₂+b₂+c₂"
-    ],
-    "answer": 2,
-    "explain": "Lines are parallel iff their d.r.s are proportional.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "6630a00b-3147-4ff4-9f05-76fd9df3ccd5",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Cartesian symmetric form of line through (x₁,y₁,z₁) with d.r.s (a,b,c):",
-    "formula": "(x−x₁)/a = (y−y₁)/b = (z−z₁)/c",
-    "options": [
-      "ax+by+cz = ax₁+by₁+cz₁",
-      "(x−x₁)/a = (y−y₁)/b = (z−z₁)/c",
-      "(x+x₁)/a = (y+y₁)/b = (z+z₁)/c",
-      "x/a−x₁ = y/b−y₁ = z/c−z₁"
-    ],
-    "answer": 1,
-    "explain": "Symmetric form uses differences from given point divided by respective d.r.s.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dd412662-6111-47ab-a7dc-4224d6f81306",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "For a line with d.c.s (l,m,n), the value of l²+m²+n² is:",
-    "formula": "l²+m²+n² = 1",
-    "options": [
-      "depends on direction",
-      "1",
-      "0",
-      "√3"
-    ],
-    "answer": 1,
-    "explain": "By definition, direction cosines always satisfy l²+m²+n²=1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e0e47343-fa00-4971-b4de-069582197544",
-    "subject": "Mathematics",
-    "chapter": "3D Geometry",
-    "topic": "3D Geometry",
-    "prompt": "Shortest distance between skew lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μd⃗ is:",
-    "formula": "SD = |(c⃗−a⃗)·(b⃗×d⃗)| / |b⃗×d⃗|",
-    "options": [
-      "|(a⃗−c⃗)·(b⃗+d⃗)| / |b⃗·d⃗|",
-      "|(c⃗−a⃗)·(b⃗+d⃗)| / |b⃗×d⃗|",
-      "|(c⃗−a⃗)·(b⃗×d⃗)| / |b⃗×d⃗|",
-      "|(c⃗−a⃗)×(b⃗×d⃗)| / |b⃗+d⃗|"
-    ],
-    "answer": 2,
-    "explain": "SD between skew lines uses scalar triple product of (c⃗−a⃗) with cross product b⃗×d⃗, divided by |b⃗×d⃗|.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "86cd5828-bdb6-42b3-a5b5-af05060e5d5c",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction Cosines",
+  "prompt": "Direction cosines l,m,n satisfy:",
+  "formula": "l²+m²+n²=1",
+  "options": [
+   "l²+m²+n²=1",
+   "l+m+n=1",
+   "l²+m²+n²=0",
+   "l+m+n=0"
+  ],
+  "answer": 0,
+  "explain": "Sum of squares of direction cosines of any line always equals 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "02cd7d54-bee5-4fbc-9617-33628b17ee20",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle Between Lines",
+  "prompt": "Angle θ between lines with d.c.s (l₁,m₁,n₁) and (l₂,m₂,n₂):",
+  "formula": "cosθ = l₁l₂+m₁m₂+n₁n₂",
+  "options": [
+   "tanθ=l₁l₂+m₁m₂+n₁n₂",
+   "sinθ=l₁l₂+m₁m₂+n₁n₂",
+   "cosθ=l₁l₂+m₁m₂+n₁n₂",
+   "cosθ=l₁m₂+m₁n₂+n₁l₂"
+  ],
+  "answer": 2,
+  "explain": "Dot product of unit direction vectors gives cosine of angle between lines.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3b698f5e-d587-49a4-9cd7-8180bc3bd05a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Perpendicular Lines",
+  "prompt": "Lines are perpendicular iff direction ratios satisfy:",
+  "formula": "a₁a₂+b₁b₂+c₁c₂=0",
+  "options": [
+   "a₁a₂+b₁b₂+c₁c₂=1",
+   "a₁+b₁+c₁=0",
+   "a₁a₂+b₁b₂+c₁c₂=0",
+   "a₁/a₂=b₁/b₂=c₁/c₂"
+  ],
+  "answer": 2,
+  "explain": "Two lines are perpendicular when dot product of their direction ratios is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a7972c06-f6fe-4359-ba1c-7cfa2c8dda97",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel Lines",
+  "prompt": "Lines are parallel iff direction ratios satisfy:",
+  "formula": "a₁/a₂ = b₁/b₂ = c₁/c₂",
+  "options": [
+   "a₁/a₂=b₁/b₂=c₁/c₂",
+   "a₁²+b₁²=a₂²+b₂²",
+   "a₁+a₂=b₁+b₂=c₁+c₂",
+   "a₁a₂+b₁b₂+c₁c₂=0"
+  ],
+  "answer": 0,
+  "explain": "Parallel lines have proportional direction ratios.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a3e1da10-d29d-4347-a613-ab161dd5c860",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Equation of a Line",
+  "prompt": "Equation of line through (x₁,y₁,z₁) with d.r.s a,b,c (symmetric form):",
+  "formula": "(x−x₁)/a=(y−y₁)/b=(z−z₁)/c",
+  "options": [
+   "(x−x₁)/a=(y−y₁)/b=(z−z₁)/c",
+   "x/a+y/b+z/c=1",
+   "x·a=y·b=z·c",
+   "ax+by+cz=0"
+  ],
+  "answer": 0,
+  "explain": "Symmetric form of line equation through a point with given direction ratios.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "47e8ed3b-ba22-4e5b-83ea-92a6eb70ac0f",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector Equation of Line",
+  "prompt": "Vector equation of a line through point a⃗ with direction b⃗:",
+  "formula": "r⃗ = a⃗ + λb⃗",
+  "options": [
+   "r⃗=a⃗+λb⃗",
+   "r⃗·b⃗=0",
+   "r⃗=λa⃗·b⃗",
+   "r⃗=a⃗·b⃗"
+  ],
+  "answer": 0,
+  "explain": "Vector form: position vector equals fixed point plus scalar multiple of direction vector.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "aa3bc66a-f7b1-4f05-869c-4b9d64ff40b0",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Equation of Plane",
+  "prompt": "General equation of a plane in Cartesian form:",
+  "formula": "ax+by+cz+d=0",
+  "options": [
+   "ax²+by²+cz²=d",
+   "ax+by=cz",
+   "a/x+b/y+c/z=1",
+   "ax+by+cz+d=0"
+  ],
+  "answer": 3,
+  "explain": "Every plane in 3D has a linear equation ax+by+cz+d=0 where (a,b,c) is normal.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4c8e9158-12d7-405f-9b56-e0ba3c902fc9",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Normal to a Plane",
+  "prompt": "Normal vector to plane ax+by+cz+d=0 is:",
+  "formula": "n⃗ = (a,b,c)",
+  "options": [
+   "n⃗=(a,b,c)",
+   "n⃗=(a²,b²,c²)",
+   "n⃗=(1/a,1/b,1/c)",
+   "n⃗=(d,d,d)"
+  ],
+  "answer": 0,
+  "explain": "Coefficients of x,y,z in the plane equation form the normal vector.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "38ab7dd0-82c0-4d4d-afce-96d049122b55",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance: Point to Plane",
+  "prompt": "Distance from point (x₁,y₁,z₁) to plane ax+by+cz+d=0:",
+  "formula": "|ax₁+by₁+cz₁+d|/√(a²+b²+c²)",
+  "options": [
+   "√(ax₁²+by₁²+cz₁²)",
+   "(ax₁+by₁+cz₁)/d",
+   "|ax₁+by₁+cz₁+d|/√(a²+b²+c²)",
+   "|ax₁+by₁+cz₁+d|/(a+b+c)"
+  ],
+  "answer": 2,
+  "explain": "Perpendicular distance formula from a point to a plane.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6f2cd115-f155-46e9-a25e-af7e3c4832e7",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle Between Planes",
+  "prompt": "Angle θ between planes a₁x+b₁y+c₁z=d₁ and a₂x+b₂y+c₂z=d₂:",
+  "formula": "cosθ=|a₁a₂+b₁b₂+c₁c₂|/(√Σa₁²·√Σa₂²)",
+  "options": [
+   "cosθ=|a₁a₂+b₁b₂+c₁c₂|/(√Σa₁²·√Σa₂²)",
+   "tanθ=a₁/a₂+b₁/b₂+c₁/c₂",
+   "sinθ=|a₁a₂+b₁b₂+c₁c₂|",
+   "cosθ=a₁a₂+b₁b₂+c₁c₂"
+  ],
+  "answer": 0,
+  "explain": "Angle between planes equals angle between their normal vectors.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9a6277f3-5d52-4fbb-9f89-f51365115a36",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Perpendicular Planes",
+  "prompt": "Two planes are perpendicular iff:",
+  "formula": "a₁a₂+b₁b₂+c₁c₂=0",
+  "options": [
+   "a₁/a₂=b₁/b₂=c₁/c₂",
+   "a₁a₂+b₁b₂+c₁c₂=1",
+   "a₁+b₁+c₁=a₂+b₂+c₂",
+   "a₁a₂+b₁b₂+c₁c₂=0"
+  ],
+  "answer": 3,
+  "explain": "Planes are perpendicular when their normals are perpendicular (dot product = 0).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b35d955e-fd51-4fb5-815f-c192fe1a521a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel Planes",
+  "prompt": "Two planes are parallel iff:",
+  "formula": "a₁/a₂=b₁/b₂=c₁/c₂",
+  "options": [
+   "a₁=a₂, b₁=b₂, c₁=c₂",
+   "a₁a₂+b₁b₂+c₁c₂=0",
+   "a₁+b₁+c₁=0",
+   "a₁/a₂=b₁/b₂=c₁/c₂"
+  ],
+  "answer": 3,
+  "explain": "Parallel planes have proportional normal vectors (same direction).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4da02208-3794-4a2a-9cc9-45dae828e610",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Intercept Form of Plane",
+  "prompt": "Intercept form of plane with intercepts a,b,c on axes:",
+  "formula": "x/a+y/b+z/c=1",
+  "options": [
+   "x²/a+y²/b+z²/c=1",
+   "x·a+y·b+z·c=0",
+   "x/a+y/b+z/c=1",
+   "ax+by+cz=1"
+  ],
+  "answer": 2,
+  "explain": "Intercept form: plane cuts x,y,z axes at a,b,c respectively.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ca126370-d9ec-4c07-ad10-d893ad8fac39",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Skew Lines Distance",
+  "prompt": "Shortest distance between two skew lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μd⃗:",
+  "formula": "|(c⃗−a⃗)·(b⃗×d⃗)|/|b⃗×d⃗|",
+  "options": [
+   "|(c⃗−a⃗)·(b⃗×d⃗)|/|b⃗×d⃗|",
+   "|(c⃗−a⃗)×(b⃗+d⃗)|",
+   "|(a⃗−c⃗)|/|b⃗·d⃗|",
+   "|b⃗×d⃗|/|(c⃗−a⃗)|"
+  ],
+  "answer": 0,
+  "explain": "SD between skew lines uses scalar triple product divided by cross product magnitude.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6772a4e8-07aa-4105-8997-730a5f4d7fc4",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Coplanar Lines",
+  "prompt": "Condition for two lines to be coplanar (vector form):",
+  "formula": "(c⃗−a⃗)·(b⃗×d⃗)=0",
+  "options": [
+   "(c⃗−a⃗)·b⃗=0",
+   "b⃗×d⃗=0",
+   "b⃗·d⃗=1",
+   "(c⃗−a⃗)·(b⃗×d⃗)=0"
+  ],
+  "answer": 3,
+  "explain": "Lines are coplanar iff scalar triple product of (c⃗−a⃗), b⃗, d⃗ is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a0d6f99a-7aa0-466a-ab93-d43ba3aae30f",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line Parallel to Plane",
+  "prompt": "Line is parallel to plane ax+by+cz+d=0 iff (line d.r.s l,m,n):",
+  "formula": "al+bm+cn=0",
+  "options": [
+   "a/l=b/m=c/n",
+   "al+bm+cn=0",
+   "al+bm+cn=1",
+   "al·bm·cn=0"
+  ],
+  "answer": 1,
+  "explain": "Line parallel to plane: direction of line perpendicular to plane's normal.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1ac9687c-8879-4a02-bb77-cc50a827e274",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance Between Parallel Planes",
+  "prompt": "Distance between parallel planes ax+by+cz+d₁=0 and ax+by+cz+d₂=0:",
+  "formula": "|d₁−d₂|/√(a²+b²+c²)",
+  "options": [
+   "√(d₁²+d₂²)/√(a²+b²+c²)",
+   "|d₁−d₂|/(a²+b²+c²)",
+   "|d₁−d₂|/√(a²+b²+c²)",
+   "|d₁+d₂|/(a+b+c)"
+  ],
+  "answer": 2,
+  "explain": "Distance between parallel planes uses difference of constants divided by normal magnitude.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5a60487e-fa6c-432e-bfab-84e07998950a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction Cosines of Axes",
+  "prompt": "Direction cosines of x-axis are:",
+  "formula": "(1,0,0)",
+  "options": [
+   "(0,0,1)",
+   "(1,1,0)",
+   "(0,1,0)",
+   "(1,0,0)"
+  ],
+  "answer": 3,
+  "explain": "x-axis has direction along x only, so d.c.s = (1,0,0).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d4b29b85-56fd-46ee-9395-7c134684ce10",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction Cosines Identity",
+  "prompt": "If a line makes angles α,β,γ with axes, then cos²α+cos²β+cos²γ=?",
+  "formula": "1",
+  "options": [
+   "2",
+   "3",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "Fundamental identity of direction cosines: sum of squared cosines equals 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "93beb473-708d-4b36-be69-dbab6ca746e1",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector Equation of Plane",
+  "prompt": "Vector equation of plane through a⃗ with normal n⃗:",
+  "formula": "(r⃗−a⃗)·n⃗=0",
+  "options": [
+   "r⃗·a⃗=n⃗",
+   "r⃗+a⃗=n⃗",
+   "r⃗×n⃗=a⃗",
+   "(r⃗−a⃗)·n⃗=0"
+  ],
+  "answer": 3,
+  "explain": "Every point r⃗ on the plane: vector (r⃗−a⃗) lies in plane, so perpendicular to normal n⃗.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7eac08db-c293-465b-97d4-9a36e97a48d3",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Family of Planes",
+  "prompt": "Equation of plane through line of intersection of planes P₁=0, P₂=0 is:",
+  "formula": "P₁+λP₂=0",
+  "options": [
+   "P₁+λP₂=0",
+   "λP₁=P₂",
+   "P₁·P₂=0",
+   "P₁−P₂=λ"
+  ],
+  "answer": 0,
+  "explain": "Family of planes through intersection of P₁=0 and P₂=0 is P₁+λP₂=0 for any λ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f9237a60-e235-41bc-928b-059421e5e04a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "d.c.s of a line with d.r.s (a,b,c): l =?",
+  "formula": "l = a/√(a²+b²+c²)",
+  "options": [
+   "a/√(a²+b²+c²)",
+   "√(a²+b²+c²)/a",
+   "a/(a+b+c)",
+   "a²/(a²+b²+c²)"
+  ],
+  "answer": 0,
+  "explain": "Direction cosines are direction ratios divided by the magnitude of the direction vector.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "95fca987-3911-4f02-b0eb-01788d398731",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "Parametric form of line through (x₁,y₁,z₁) with d.r.s a,b,c: x=?",
+  "formula": "x = x₁+at, y=y₁+bt, z=z₁+ct",
+  "options": [
+   "x₁+at, y=y₁+bt, z=z₁+ct",
+   "x₁−at, y=y₁−bt, z=z₁−ct",
+   "x₁·at, y=y₁·bt, z=z₁·ct",
+   "x₁+a/t, y=y₁+b/t, z=z₁+c/t"
+  ],
+  "answer": 0,
+  "explain": "Parametric form uses the point plus parameter t times each direction ratio component.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "92334d16-09d9-49d5-9dcc-1dfd8ff7cce5",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "Direction cosines of the y-axis are:",
+  "formula": "",
+  "options": [
+   "(0, 1, 0)",
+   "(0, 0, 1)",
+   "(1, 1, 0)",
+   "(1, 0, 0)"
+  ],
+  "answer": 0,
+  "explain": "The y-axis has direction vector (0,1,0), so its direction cosines are (0,1,0).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8a962def-93c8-45f3-aa2a-e88214b7c384",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "Direction cosines of the z-axis are:",
+  "formula": "",
+  "options": [
+   "(0, 1, 0)",
+   "(0, 1, 1)",
+   "(1, 0, 0)",
+   "(0, 0, 1)"
+  ],
+  "answer": 3,
+  "explain": "The z-axis has direction vector (0,0,1), so its direction cosines are (0,0,1).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "65bf655f-a91f-452d-9062-1d2b955fd972",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "Midpoint of segment joining (x₁,y₁,z₁) and (x₂,y₂,z₂):",
+  "formula": "((x₁+x₂)/2,(y₁+y₂)/2,(z₁+z₂)/2)",
+  "options": [
+   "((x₂−x₁)/2,(y₂−y₁)/2,(z₂−z₁)/2)",
+   "((x₁+x₂),(y₁+y₂),(z₁+z₂))",
+   "(x₁x₂,y₁y₂,z₁z₂)",
+   "((x₁+x₂)/2,(y₁+y₂)/2,(z₁+z₂)/2)"
+  ],
+  "answer": 3,
+  "explain": "Midpoint formula in 3D is the average of corresponding coordinates.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "407c1931-56a2-4c24-8a4e-df800e6f5d20",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between two points",
+  "prompt": "Distance between points (x₁,y₁,z₁) and (x₂,y₂,z₂):",
+  "formula": "√[(x₂−x₁)²+(y₂−y₁)²+(z₂−z₁)²]",
+  "options": [
+   "√[(x₂+x₁)²+(y₂+y₁)²+(z₂+z₁)²]",
+   "(x₂−x₁)²+(y₂−y₁)²+(z₂−z₁)²",
+   "|x₂−x₁|+|y₂−y₁|+|z₂−z₁|",
+   "√[(x₂−x₁)²+(y₂−y₁)²+(z₂−z₁)²]"
+  ],
+  "answer": 3,
+  "explain": "3D distance is the square root of the sum of squares of coordinate differences.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "61c3f98e-34e1-411d-afb5-2bad37be136c",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "Point dividing segment P₁P₂ internally in ratio m:n has x-coord:",
+  "formula": "(mx₂+nx₁)/(m+n)",
+  "options": [
+   "(x₁+x₂)/(m+n)",
+   "(mx₂+nx₁)/(m+n)",
+   "(mx₁+nx₂)/(m+n)",
+   "(mx₂−nx₁)/(m−n)"
+  ],
+  "answer": 1,
+  "explain": "Section formula: internal division gives (mx₂+nx₁)/(m+n) for x-coordinate.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "62fdf47e-efdb-4c99-b2f4-b9403d932eb6",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Angle between line r⃗=a⃗+λb⃗ and plane r⃗·n⃗=d is φ where sinφ =?",
+  "formula": "sinφ = |b⃗·n⃗|/(|b⃗||n⃗|)",
+  "options": [
+   "b⃗·n⃗/(|b⃗||n⃗|)",
+   "|b⃗×n⃗|/(|b⃗||n⃗|)",
+   "(b⃗·n⃗)²/(|b⃗||n⃗|)",
+   "|b⃗·n⃗|/(|b⃗||n⃗|)"
+  ],
+  "answer": 3,
+  "explain": "Angle between line and plane uses sine = |dot product of direction & normal|/products of magnitudes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ebcac58c-8845-41ee-9b5b-d06521aa5978",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Intersection of two lines, coplanarity",
+  "prompt": "Two lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μd⃗ are coplanar iff (c⃗−a⃗)·(b⃗×d⃗)=?",
+  "formula": "(c⃗−a⃗)·(b⃗×d⃗) = 0",
+  "options": [
+   "|c⃗−a⃗|",
+   "1",
+   "0",
+   "|b⃗×d⃗|"
+  ],
+  "answer": 2,
+  "explain": "Lines are coplanar iff the scalar triple product of (c⃗−a⃗), b⃗, d⃗ equals zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cbf45fe5-7b14-42cc-9bff-6c2ebbd20c20",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Vector equation of plane through three points a⃗,b⃗,c⃗: normal is?",
+  "formula": "n⃗=(b⃗−a⃗)×(c⃗−a⃗)",
+  "options": [
+   "(b⃗−a⃗)×(c⃗−a⃗)",
+   "(b⃗+c⃗)×a⃗",
+   "(a⃗×b⃗)+(b⃗×c⃗)",
+   "(b⃗−a⃗)·(c⃗−a⃗)"
+  ],
+  "answer": 0,
+  "explain": "Normal to plane through three points is cross product of two edge vectors from one point.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "19d3dbb5-b8f6-43ae-a3d6-d2be7ad7bc44",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The angle a line with d.r.s (a,b,c) makes with xy-plane is φ where sinφ=?",
+  "formula": "sinφ = c/√(a²+b²+c²)",
+  "options": [
+   "c/√(a²+b²+c²)",
+   "c/√(a²+b²)",
+   "c²/(a²+b²+c²)",
+   "√(a²+b²)/√(a²+b²+c²)"
+  ],
+  "answer": 0,
+  "explain": "Angle with xy-plane: sinφ = |c|/magnitude; complement of angle with z-axis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0dea6f38-11d7-4cb1-9daa-1ad20598164f",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The equation of yz-plane is:",
+  "formula": "x = 0",
+  "options": [
+   "y = 0",
+   "x + y = 0",
+   "z = 0",
+   "x = 0"
+  ],
+  "answer": 3,
+  "explain": "The yz-plane consists of all points where x-coordinate is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d3742b83-b3f7-4b1c-81a5-340ec02a1075",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The equation of xz-plane is:",
+  "formula": "y = 0",
+  "options": [
+   "y = 0",
+   "x = 0",
+   "y + z = 0",
+   "z = 0"
+  ],
+  "answer": 0,
+  "explain": "The xz-plane consists of all points where y-coordinate is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e355cfb8-c94f-43e6-8b61-c0886464c325",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "Image of P(x₁,y₁,z₁) in plane ax+by+cz+d=0: coordinates use k=?",
+  "formula": "k = −2(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
+  "options": [
+   "2(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
+   "(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
+   "−2(ax₁+by₁+cz₁+d)/(a²+b²+c²)",
+   "−(ax₁+by₁+cz₁+d)/(a²+b²+c²)"
+  ],
+  "answer": 2,
+  "explain": "Image = P + k·(a,b,c); k = −2(ax₁+by₁+cz₁+d)/(a²+b²+c²) gives reflection.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a043fa7c-827c-4b34-986e-2eecedd1074b",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Sum of squares of all three direction cosines of any line equals:",
+  "formula": "l²+m²+n²=1",
+  "options": [
+   "0",
+   "3",
+   "1",
+   "Depends on the line"
+  ],
+  "answer": 2,
+  "explain": "By definition, l²+m²+n²=1 always holds for direction cosines.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f9a624d4-bdc4-4fb7-b1d9-e0f0e84be70d",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Perpendicular distance from origin to plane ax+by+cz+d=0 is:",
+  "formula": "|d|/√(a²+b²+c²)",
+  "options": [
+   "√(a²+b²+c²)/|d|",
+   "d/(a+b+c)",
+   "|d|/(a²+b²+c²)",
+   "|d|/√(a²+b²+c²)"
+  ],
+  "answer": 3,
+  "explain": "Setting x₁=y₁=z₁=0 in point-to-plane formula gives |d|/√(a²+b²+c²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "38a51cec-cfab-40ee-864a-100e2a0d8153",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "If planes a₁x+b₁y+c₁z=d₁ and a₂x+b₂y+c₂z=d₂ are parallel, then:",
+  "formula": "a₁/a₂ = b₁/b₂ = c₁/c₂ ≠ d₁/d₂",
+  "options": [
+   "a₁/a₂ ≠ b₁/b₂ = c₁/c₂",
+   "a₁a₂+b₁b₂+c₁c₂=0",
+   "a₁/a₂=b₁/b₂=c₁/c₂=d₁/d₂",
+   "a₁/a₂=b₁/b₂=c₁/c₂ ≠ d₁/d₂"
+  ],
+  "answer": 3,
+  "explain": "Parallel planes have proportional normals but unequal ratio with RHS (else identical planes).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7cbed771-6782-48ee-ad1a-d0539fb0af5a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "Line r⃗=a⃗+λb⃗ is parallel to plane r⃗·n⃗=d iff:",
+  "formula": "b⃗·n⃗ = 0",
+  "options": [
+   "a⃗·n⃗ = d",
+   "b⃗·n⃗ = 1",
+   "b⃗×n⃗ = 0",
+   "b⃗·n⃗ = 0"
+  ],
+  "answer": 3,
+  "explain": "Line parallel to plane means direction vector is perpendicular to plane's normal: b⃗·n⃗=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dc102565-30dd-4a88-a15d-139eb84c3967",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "If α,β,γ are angles a line makes with coordinate axes, cos2α+cos2β+cos2γ=?",
+  "formula": "cos2α+cos2β+cos2γ = −1",
+  "options": [
+   "−1",
+   "1",
+   "3",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "Using l²+m²+n²=1 and cos2θ=2cos²θ−1: sum = 2(1)−3 = −1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d2756962-32d3-4f43-b861-065b1dd9faed",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Plane through point (x₁,y₁,z₁) with normal (a,b,c): equation?",
+  "formula": "a(x−x₁)+b(y−y₁)+c(z−z₁)=0",
+  "options": [
+   "ax+by+cz=0",
+   "a/x₁+b/y₁+c/z₁=1",
+   "ax₁+by₁+cz₁+d=0",
+   "a(x−x₁)+b(y−y₁)+c(z−z₁)=0"
+  ],
+  "answer": 3,
+  "explain": "Plane with given normal through a specific point uses point-normal form.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1dbf58fe-1cf1-43ee-8345-3a507979e7e1",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Volume of tetrahedron with edges a⃗,b⃗,c⃗ from one vertex:",
+  "formula": "V = (1/6)|a⃗·(b⃗×c⃗)|",
+  "options": [
+   "|a⃗·(b⃗×c⃗)|",
+   "(1/6)|a⃗·(b⃗×c⃗)|",
+   "(1/3)|a⃗·(b⃗×c⃗)|",
+   "(1/2)|a⃗·(b⃗×c⃗)|"
+  ],
+  "answer": 1,
+  "explain": "Tetrahedron volume is 1/6 of the scalar triple product of three co-terminal edges.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e21415c5-757e-4ddb-8666-b58220cec7f7",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The xy-plane has equation:",
+  "formula": "",
+  "options": [
+   "y = 0",
+   "x + y = 0",
+   "x = 0",
+   "z = 0"
+  ],
+  "answer": 3,
+  "explain": "The xy-plane contains all points where the z-coordinate is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9136d00e-db42-46c6-af5c-be5fec61a304",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Angle between line with d.r.s (a,b,c) and plane with normal (p,q,r): sinθ=?",
+  "formula": "sinθ = |ap+bq+cr|/√(a²+b²+c²)·√(p²+q²+r²)",
+  "options": [
+   "(ap+bq+cr)/√(a²+b²+c²)√(p²+q²+r²)",
+   "|ap+bq+cr|/√(a²+b²+c²)√(p²+q²+r²)",
+   "|(a⃗×p⃗)|/(|a⃗||p⃗|)",
+   "cosθ=|ap+bq+cr|/√(a²+b²+c²)√(p²+q²+r²)"
+  ],
+  "answer": 1,
+  "explain": "Angle with plane is complement of angle with normal; sinθ = |d.r·normal|/(product of magnitudes).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "494cec72-737b-4cf9-b33c-223b973a5194",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "Shortest distance between two parallel lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μb⃗ is:",
+  "formula": "SD = |(c⃗−a⃗)×b⃗|/|b⃗|",
+  "options": [
+   "|(c⃗−a⃗)×b⃗|/|b⃗|²",
+   "|(c⃗−a⃗)×b⃗|/|b⃗|",
+   "|(c⃗−a⃗)·b⃗|/|b⃗|",
+   "|c⃗−a⃗|"
+  ],
+  "answer": 1,
+  "explain": "For parallel lines with same direction b⃗, SD = magnitude of cross product of (c⃗−a⃗) and b̂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "006ad13f-a937-4493-8498-9af1bcba719e",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "A line with d.r.s (1,1,1) makes equal angles with all axes. Each angle α satisfies cosα=?",
+  "formula": "cosα = 1/√3",
+  "options": [
+   "1/√2",
+   "1/√3",
+   "1/3",
+   "1/2"
+  ],
+  "answer": 1,
+  "explain": "Equal d.r.s (1,1,1) give d.c. l=m=n=1/√3, so each axis-angle has cosine 1/√3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c04d5f28-5541-4ab5-80a3-a659db52cc80",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Lines (x−1)/2=(y+1)/3=(z−2)/4 and (x−1)/4=(y+1)/6=(z−2)/8 are:",
+  "formula": "",
+  "options": [
+   "Intersecting but not parallel",
+   "Parallel (same direction)",
+   "Skew lines",
+   "Perpendicular"
+  ],
+  "answer": 1,
+  "explain": "D.r.s (4,6,8)=2(2,3,4) → proportional, so lines are parallel.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2786da64-6e6e-455b-825e-9d59461989cd",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "If two planes are perpendicular, angle between their normals is:",
+  "formula": "n⃗₁·n⃗₂ = 0",
+  "options": [
+   "60°",
+   "0°",
+   "45°",
+   "90°"
+  ],
+  "answer": 3,
+  "explain": "Perpendicular planes ↔ perpendicular normals, i.e. dot product of normals = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c2fad540-96b7-4aea-818b-f3a83015b107",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The d.r.s of the line of intersection of planes a₁x+b₁y+c₁z=0 and a₂x+b₂y+c₂z=0 are proportional to:",
+  "formula": "n⃗₁×n⃗₂",
+  "options": [
+   "n⃗₁−n⃗₂",
+   "n⃗₁+n⃗₂",
+   "n⃗₁×n⃗₂ (cross product of normals)",
+   "n⃗₁·n⃗₂"
+  ],
+  "answer": 2,
+  "explain": "The line of intersection is perpendicular to both normals, so its direction is n⃗₁×n⃗₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b1dce576-d361-44af-9a1a-8ac90ffa262d",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The locus of a point equidistant from two fixed points A and B in 3D is:",
+  "formula": "",
+  "options": [
+   "Perpendicular bisector plane of AB",
+   "A sphere centred at midpoint",
+   "A circle",
+   "A line through midpoint"
+  ],
+  "answer": 0,
+  "explain": "All points equidistant from A and B lie on the plane perpendicular to AB at its midpoint.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e8010dee-16b5-4686-b970-ca391a6790c8",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "If line (x−a)/l=(y−b)/m=(z−c)/n=t, the point at parameter t is:",
+  "formula": "(a+lt, b+mt, c+nt)",
+  "options": [
+   "(a/l·t, b/m·t, c/n·t)",
+   "(a−lt, b−mt, c−nt)",
+   "(lt, mt, nt)",
+   "(a+lt, b+mt, c+nt)"
+  ],
+  "answer": 3,
+  "explain": "Parametric line coordinates add the direction cosine multiples to the base point.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "94861ceb-9eda-46a5-8440-a2c9aa6d1727",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Intersection of two lines, coplanarity",
+  "prompt": "If the scalar triple product [a⃗ b⃗ c⃗]=0, the vectors are:",
+  "formula": "[a⃗ b⃗ c⃗]=0",
+  "options": [
+   "Coplanar",
+   "Mutually perpendicular",
+   "Collinear",
+   "Parallel"
+  ],
+  "answer": 0,
+  "explain": "Zero scalar triple product means vectors lie in same plane, i.e., they are coplanar.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a85d0ffd-f4ee-4f7b-b2f6-d23b2dad896b",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Area of triangle with vertices A,B,C in 3D is:",
+  "formula": "(1/2)|AB⃗×AC⃗|",
+  "options": [
+   "|AB⃗×AC⃗|",
+   "(1/3)|AB⃗×AC⃗|",
+   "(1/2)|AB⃗×AC⃗|",
+   "(1/2)|AB⃗·AC⃗|"
+  ],
+  "answer": 2,
+  "explain": "Area of triangle = half the magnitude of cross product of two side vectors.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "128750c2-010e-4834-87da-e0480e15fb5b",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "The plane x/a+y/b+z/c=1 meets axes at A,B,C. Centroid of △ABC is:",
+  "formula": "(a/3, b/3, c/3)",
+  "options": [
+   "(a/2, b/2, c/2)",
+   "(a/3, b/3, c/3)",
+   "(1/a, 1/b, 1/c)",
+   "(a, b, c)"
+  ],
+  "answer": 1,
+  "explain": "Intercepts are (a,0,0),(0,b,0),(0,0,c); centroid averages coordinates → (a/3,b/3,c/3).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c586e7f8-1765-495f-8bca-ebe5aa4dfdd3",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The angle between a line and a plane is complement of angle between line and:",
+  "formula": "",
+  "options": [
+   "Another line in the plane",
+   "The projection of line on plane",
+   "The plane's x-intercept",
+   "Normal to the plane"
+  ],
+  "answer": 3,
+  "explain": "Angle with plane + angle with normal = 90°; they are complementary angles.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "122f785b-7894-4d9e-9592-8301977ea3b6",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "The d.r.s of the normal to plane passing through origin with equation 2x−3y+5z=0 are:",
+  "formula": "",
+  "options": [
+   "(−2, 3, −5)",
+   "(3, 2, 5)",
+   "(5, 3, 2)",
+   "(2, −3, 5)"
+  ],
+  "answer": 3,
+  "explain": "Coefficients of x,y,z in ax+by+cz=0 directly give the normal direction ratios.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0dc66fb4-65bd-49d7-8256-c7116dde6328",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Intersection of two lines, coplanarity",
+  "prompt": "Condition for lines (x−a₁)/l₁=(y−b₁)/m₁=(z−c₁)/n₁ and (x−a₂)/l₂=(y−b₂)/m₂=(z−c₂)/n₂ to intersect:",
+  "formula": "|a₂−a₁  b₂−b₁  c₂−c₁; l₁ m₁ n₁; l₂ m₂ n₂|=0",
+  "options": [
+   "l₁l₂+m₁m₂+n₁n₂=0",
+   "l₁/l₂=m₁/m₂=n₁/n₂",
+   "The 3×3 determinant of differences and d.r.s equals 0",
+   "The lines share a common d.r."
+  ],
+  "answer": 2,
+  "explain": "Lines intersect (coplanar) iff scalar triple product of (a⃗₂−a⃗₁), b⃗₁, b⃗₂ is zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d4ee887f-38bc-4524-9327-1e25d9945417",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Foot of perpendicular from origin to plane lx+my+nz=d (l²+m²+n²=1) is:",
+  "formula": "(ld, md, nd)",
+  "options": [
+   "(l/d, m/d, n/d)",
+   "(d/l, d/m, d/n)",
+   "(l²d, m²d, n²d)",
+   "(ld, md, nd)"
+  ],
+  "answer": 3,
+  "explain": "For unit normal (l,m,n), foot from origin = d·(l,m,n) = (ld,md,nd).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "951ea5dd-4abf-47db-ac64-dbc0c01e1f9d",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The equation x=a represents which surface in 3D?",
+  "formula": "",
+  "options": [
+   "A plane parallel to the xz-plane",
+   "A plane parallel to the xy-plane",
+   "A line along x-axis",
+   "A plane parallel to the yz-plane"
+  ],
+  "answer": 3,
+  "explain": "x=a is a plane with normal along x-axis, hence parallel to yz-plane.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d9eab072-4241-47a0-b8f7-10d28b5d799f",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "Projection of vector r⃗=(x,y,z) on a line with d.c.s (l,m,n) is:",
+  "formula": "lx+my+nz",
+  "options": [
+   "√(l²x²+m²y²+n²z²)",
+   "lx+my+nz",
+   "(x+y+z)/√3",
+   "l²x+m²y+n²z"
+  ],
+  "answer": 1,
+  "explain": "Projection = r⃗·n̂ = lx+my+nz where (l,m,n) are direction cosines (unit vector).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9eb176a7-d114-44e2-95d8-a43203495d6b",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Perpendicular distance of point from line",
+  "prompt": "Distance from point (x₁,y₁,z₁) to the y-axis is:",
+  "formula": "√(x₁²+z₁²)",
+  "options": [
+   "|y₁|",
+   "√(x₁²+z₁²)",
+   "√(x₁²+y₁²)",
+   "√(y₁²+z₁²)"
+  ],
+  "answer": 1,
+  "explain": "Distance to y-axis ignores y-coordinate; it equals √(x²+z²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7fb8e11-3054-4287-b9ea-94f59e30561e",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "If a line makes equal angles with all coordinate axes, each d.c. equals:",
+  "formula": "1/√3",
+  "options": [
+   "±1/2",
+   "±1/√2",
+   "±1/√3",
+   "±1"
+  ],
+  "answer": 2,
+  "explain": "l=m=n and l²+m²+n²=1 gives 3l²=1, so l=±1/√3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cb11625c-3e7b-44fe-a2a6-1aa91f767f76",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Angle between line r⃗=a⃗+λb⃗ and plane r⃗·n⃗=d: sinφ=|b⃗·n⃗|/(|b⃗||n⃗|). If φ=90°, the line is:",
+  "formula": "",
+  "options": [
+   "Lying in the plane",
+   "Making 45° with normal",
+   "Parallel to the plane",
+   "Perpendicular to the plane (along normal)"
+  ],
+  "answer": 3,
+  "explain": "φ=90° means sinφ=1, so b⃗∥n⃗; the line is perpendicular to the plane.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "54054f05-65cc-44a6-9be1-a896ca498500",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "If direction ratios of two lines are (a,b,c) and (b,c,a), they are perpendicular iff:",
+  "formula": "ab+bc+ca=0",
+  "options": [
+   "ab+bc+ca=1",
+   "a=b=c",
+   "ab+bc+ca=0",
+   "a²+b²+c²=0"
+  ],
+  "answer": 2,
+  "explain": "Perpendicularity condition: a·b+b·c+c·a=0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "babad94b-3540-4bcc-8f44-d8b557295335",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "For skew lines, the shortest distance vector is along:",
+  "formula": "b⃗₁×b⃗₂",
+  "options": [
+   "b⃗₁+b⃗₂",
+   "b⃗₁−b⃗₂",
+   "b⃗₁×b⃗₂ (cross product of directions)",
+   "b⃗₁·b⃗₂"
+  ],
+  "answer": 2,
+  "explain": "The common perpendicular to two skew lines is along b⃗₁×b⃗₂.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "568aa7e4-c803-4b0b-be46-3aafdde98da4",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The line x/l=y/m=z/n is perpendicular to plane ax+by+cz=d iff:",
+  "formula": "a/l=b/m=c/n",
+  "options": [
+   "al+bm+cn=0",
+   "al+bm+cn=1",
+   "a/l=b/m=c/n",
+   "a=l, b=m, c=n"
+  ],
+  "answer": 2,
+  "explain": "Line perpendicular to plane means direction (l,m,n) is parallel to normal (a,b,c): a/l=b/m=c/n.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c241c63e-6587-42a2-9484-85907aef3f0a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Perpendicular distance of point from line",
+  "prompt": "The distance from point (a,b,c) to the z-axis is:",
+  "formula": "√(a²+b²)",
+  "options": [
+   "|c|",
+   "√(b²+c²)",
+   "√(a²+c²)",
+   "√(a²+b²)"
+  ],
+  "answer": 3,
+  "explain": "z-axis has x=0,y=0; distance ignores z-coordinate, equals √(a²+b²).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c33ad341-6814-4f3d-a70f-ab9749f9c608",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "If cos α=l, cos β=m, cos γ=n for a line, then sin²α+sin²β+sin²γ=?",
+  "formula": "2",
+  "options": [
+   "0",
+   "1",
+   "3",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "sin²α+sin²β+sin²γ=(1−l²)+(1−m²)+(1−n²)=3−(l²+m²+n²)=3−1=2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "cce74c9b-0602-4172-8d71-9df8bbd66c23",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "Two planes are parallel iff their normals are:",
+  "formula": "n⃗₁ ∥ n⃗₂",
+  "options": [
+   "Equal in magnitude",
+   "Coplanar",
+   "Parallel (proportional)",
+   "Perpendicular"
+  ],
+  "answer": 2,
+  "explain": "Parallel planes have the same normal direction: n⃗₁×n⃗₂=0⃗.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "0ca5df0e-7626-4b61-a14c-e30e9be1ee35",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "The angle α that a line with d.r.s (a,b,c) makes with x-axis satisfies:",
+  "formula": "cosα=a/√(a²+b²+c²)",
+  "options": [
+   "cosα=√(b²+c²)/√(a²+b²+c²)",
+   "cosα=a²/(a²+b²+c²)",
+   "cosα=a/(a+b+c)",
+   "cosα=a/√(a²+b²+c²)"
+  ],
+  "answer": 3,
+  "explain": "Direction cosine l=a/√(a²+b²+c²) gives angle with x-axis.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ccc01d89-6216-43dc-8bed-b7b2ecd1d4a0",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "If a line has direction cosines (l,m,n), the direction cosines of a parallel line are:",
+  "formula": "",
+  "options": [
+   "Only (l,m,n)",
+   "(l,m,n) or (−l,−m,−n)",
+   "(m,n,l)",
+   "(1/l,1/m,1/n)"
+  ],
+  "answer": 1,
+  "explain": "A parallel line has same or opposite direction; both (l,m,n) and (−l,−m,−n) are valid d.c.s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "44de00a9-717b-4256-bfa4-3c07f90879e4",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "The section formula: if P divides A(x₁)B(x₂) internally in 2:3, x-coordinate of P is:",
+  "formula": "(2x₂+3x₁)/5",
+  "options": [
+   "(2x₁−3x₂)/5",
+   "(2x₂+3x₁)/5",
+   "(x₁+x₂)/2",
+   "(3x₂+2x₁)/5"
+  ],
+  "answer": 1,
+  "explain": "Internal division in m:n gives x=(mx₂+nx₁)/(m+n)=(2x₂+3x₁)/5.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7923fc7c-5ade-4b41-afdd-5174c588dbc1",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "If a plane has normal n⃗ and line has direction b⃗, line ⊥ plane iff:",
+  "formula": "b⃗ ∥ n⃗",
+  "options": [
+   "b⃗ × n⃗ = 0⃗",
+   "b⃗ · n⃗ = 0",
+   "|b⃗| = |n⃗|",
+   "b⃗ + n⃗ = 0⃗"
+  ],
+  "answer": 0,
+  "explain": "A line is perpendicular to a plane iff its direction is parallel to the plane's normal.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1bad354a-e248-47ab-8f35-523c2429821c",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Intersection of two lines, coplanarity",
+  "prompt": "If four points are coplanar, the scalar triple product of three edge vectors is:",
+  "formula": "[a⃗ b⃗ c⃗] = 0",
+  "options": [
+   "Zero",
+   "Undefined",
+   "One",
+   "Negative"
+  ],
+  "answer": 0,
+  "explain": "Four points are coplanar iff scalar triple product of vectors from one point to the others = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "411585e4-71d3-45cf-b897-3d3b9bf47e93",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "3D Geometry",
+  "prompt": "The equation y=b in 3D represents:",
+  "formula": "",
+  "options": [
+   "A line parallel to y-axis",
+   "A plane parallel to xz-plane",
+   "A point on y-axis",
+   "A plane parallel to xy-plane"
+  ],
+  "answer": 1,
+  "explain": "y=b (constant) in 3D is a plane parallel to the xz-plane at distance b from it.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1c0a81ee-a623-4146-bcd0-10df80f4e0c7",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "Angle between two lines with d.r.s (a₁,b₁,c₁),(a₂,b₂,c₂): cosθ=?",
+  "formula": "cosθ = |a₁a₂+b₁b₂+c₁c₂| / (√Σa₁²·√Σa₂²)",
+  "options": [
+   "√(a₁a₂+b₁b₂+c₁c₂)/(√Σa₁²)",
+   "|a₁b₂−a₂b₁|/(√Σa₁²·√Σa₂²)",
+   "(a₁a₂+b₁b₂+c₁c₂)/(Σa₁²·Σa₂²)",
+   "|a₁a₂+b₁b₂+c₁c₂|/(√Σa₁²·√Σa₂²)"
+  ],
+  "answer": 3,
+  "explain": "Angle between two lines uses absolute dot product of d.r.s divided by product of magnitudes.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "229b4bb7-54ea-4eb9-a9ec-57f4d1ff719c",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "Two lines with d.r.s (a₁,b₁,c₁),(a₂,b₂,c₂) are perpendicular iff:",
+  "formula": "a₁a₂+b₁b₂+c₁c₂ = 0",
+  "options": [
+   "a₁a₂−b₁b₂+c₁c₂ = 0",
+   "a₁²+b₁²+c₁² = a₂²+b₂²+c₂²",
+   "a₁a₂+b₁b₂+c₁c₂ = 0",
+   "a₁/a₂ = b₁/b₂ = c₁/c₂"
+  ],
+  "answer": 2,
+  "explain": "Perpendicularity condition: dot product of direction vectors equals zero.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9b473f5f-b72d-4bcf-ad78-944748ef93fc",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "Two lines with d.r.s (a₁,b₁,c₁),(a₂,b₂,c₂) are parallel iff:",
+  "formula": "a₁/a₂ = b₁/b₂ = c₁/c₂",
+  "options": [
+   "a₁a₂+b₁b₂+c₁c₂ = 0",
+   "a₁²+b₁²+c₁² = 1",
+   "a₁/a₂ = b₁/b₂ = c₁/c₂",
+   "a₁+b₁+c₁ = a₂+b₂+c₂"
+  ],
+  "answer": 2,
+  "explain": "Lines are parallel iff their d.r.s are proportional.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "6630a00b-3147-4ff4-9f05-76fd9df3ccd5",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "Cartesian symmetric form of line through (x₁,y₁,z₁) with d.r.s (a,b,c):",
+  "formula": "(x−x₁)/a = (y−y₁)/b = (z−z₁)/c",
+  "options": [
+   "ax+by+cz = ax₁+by₁+cz₁",
+   "(x−x₁)/a = (y−y₁)/b = (z−z₁)/c",
+   "(x+x₁)/a = (y+y₁)/b = (z+z₁)/c",
+   "x/a−x₁ = y/b−y₁ = z/c−z₁"
+  ],
+  "answer": 1,
+  "explain": "Symmetric form uses differences from given point divided by respective d.r.s.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dd412662-6111-47ab-a7dc-4224d6f81306",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "For a line with d.c.s (l,m,n), the value of l²+m²+n² is:",
+  "formula": "l²+m²+n² = 1",
+  "options": [
+   "depends on direction",
+   "1",
+   "0",
+   "√3"
+  ],
+  "answer": 1,
+  "explain": "By definition, direction cosines always satisfy l²+m²+n²=1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e0e47343-fa00-4971-b4de-069582197544",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "Shortest distance between skew lines r⃗=a⃗+λb⃗ and r⃗=c⃗+μd⃗ is:",
+  "formula": "SD = |(c⃗−a⃗)·(b⃗×d⃗)| / |b⃗×d⃗|",
+  "options": [
+   "|(a⃗−c⃗)·(b⃗+d⃗)| / |b⃗·d⃗|",
+   "|(c⃗−a⃗)·(b⃗+d⃗)| / |b⃗×d⃗|",
+   "|(c⃗−a⃗)·(b⃗×d⃗)| / |b⃗×d⃗|",
+   "|(c⃗−a⃗)×(b⃗×d⃗)| / |b⃗+d⃗|"
+  ],
+  "answer": 2,
+  "explain": "SD between skew lines uses scalar triple product of (c⃗−a⃗) with cross product b⃗×d⃗, divided by |b⃗×d⃗|.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f7929a74-a961-49e8-a03a-96cc70473c1a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between two points",
+  "prompt": "Distance between P(a, b, c) and its image in the xy-plane is:",
+  "formula": "",
+  "options": [
+   "|c|",
+   "2√(a²+b²)",
+   "2|c|",
+   "2√(a²+b²+c²)"
+  ],
+  "answer": 2,
+  "explain": "Image is (a,b,−c), so only the z-coordinate differs, giving 2|c|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7f0263d8-2cf0-4e8d-b907-2d64b863b391",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between two points",
+  "prompt": "Locus of a point at a constant distance r from a fixed point in 3D is:",
+  "formula": "(x−a)²+(y−b)²+(z−c)² = r²",
+  "options": [
+   "A circle",
+   "A plane",
+   "A sphere",
+   "A cylinder"
+  ],
+  "answer": 2,
+  "explain": "Fixed distance from a fixed point in space gives a sphere.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "25535873-eb8a-4ae9-97ff-e4847878ceab",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between two points",
+  "prompt": "Points A, B, C are collinear if and only if:",
+  "formula": "",
+  "options": [
+   "AB + BC = CA for some ordering",
+   "AB² + BC² = CA²",
+   "AB = BC = CA",
+   "AB = BC only"
+  ],
+  "answer": 0,
+  "explain": "Collinear points: the sum of two distances equals the third, e.g. AB + BC = AC.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77758dfb-6e06-4da9-8335-491525b142cb",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "Centroid of a tetrahedron with vertices (xᵢ,yᵢ,zᵢ), i=1..4, has x-coordinate:",
+  "formula": "x = (x₁+x₂+x₃+x₄)/4",
+  "options": [
+   "(x₁+x₂+x₃+x₄)/2",
+   "(x₁+x₂+x₃+x₄)/4",
+   "(x₁+x₂+x₃+x₄)/3",
+   "(x₁+x₂+x₃+x₄)/6"
+  ],
+  "answer": 1,
+  "explain": "The tetrahedron's centroid is the mean of its four vertices.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4c790d11-02e6-4669-b733-23f1b8fb93fa",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "The centroid G of △ABC divides each median, measured from the vertex, in the ratio:",
+  "formula": "",
+  "options": [
+   "2 : 1",
+   "1 : 2",
+   "1 : 1",
+   "3 : 1"
+  ],
+  "answer": 0,
+  "explain": "The centroid is 2/3 of the way along each median from the vertex, so the ratio is 2:1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8f20f078-a396-4f6b-b67d-314e5ff11b84",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "P divides AB externally in ratio 1:2. Then P equals:",
+  "formula": "",
+  "options": [
+   "2A − B",
+   "(2A + B)/3",
+   "(A + 2B)/3",
+   "2B − A"
+  ],
+  "answer": 0,
+  "explain": "P = (1·B − 2·A)/(1 − 2) = 2A − B, so A is the midpoint of PB.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47b22eb6-1276-4ff2-a275-aa16e3b145de",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "For centroid G of △ABC, the vector sum GA + GB + GC equals:",
+  "formula": "",
+  "options": [
+   "3·GA",
+   "Unit vector",
+   "Zero vector",
+   "GA + GB"
+  ],
+  "answer": 2,
+  "explain": "G = (A+B+C)/3 gives (A−G)+(B−G)+(C−G) = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c0455921-8e6d-4001-afe9-9b8f6349717c",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "A line makes 45° and 60° with the x-axis and y-axis. Its angle with the z-axis is:",
+  "formula": "cos²45° + cos²60° + cos²γ = 1",
+  "options": [
+   "45° or 135°",
+   "60° or 120°",
+   "30° or 150°",
+   "90° only"
+  ],
+  "answer": 1,
+  "explain": "cos²γ = 1 − 1/2 − 1/4 = 1/4, so cosγ = ±1/2 and γ = 60° or 120°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "95d1c3bd-b788-4d1c-a4a9-f753f6ec3aed",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "D.r.s of the line (x−1)/2 = (2y+1)/6 = z/3 are:",
+  "formula": "",
+  "options": [
+   "(1, 3, 3)",
+   "(2, 3, 3)",
+   "(2, 3, 1)",
+   "(2, 6, 3)"
+  ],
+  "answer": 1,
+  "explain": "Write 2y+1 = 2(y+½), so the y-denominator becomes 6/2 = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d5196fa3-d6e3-49c8-8b21-98ef06200ced",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "In the vector form, the angle between the lines r = a₁+λb₁, r = a₂+μb₂ does NOT depend on:",
+  "formula": "",
+  "options": [
+   "b₁",
+   "b₂",
+   "the angle between b₁ and b₂",
+   "a₁ and a₂"
+  ],
+  "answer": 3,
+  "explain": "Angle depends only on direction vectors; a₁, a₂ are just points on the lines.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7e22bf6c-caef-4e35-b13a-9bd818e4e7c6",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "For two skew lines, the angle between them is defined as the angle between:",
+  "formula": "",
+  "options": [
+   "their points of closest approach",
+   "the planes containing them",
+   "their shortest-distance line and one line",
+   "lines through a point parallel to each"
+  ],
+  "answer": 3,
+  "explain": "Draw lines through any point parallel to the two skew lines; their angle is the required angle.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "69e92e2e-af3a-45c5-91c8-e9e9ea29df2d",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "Besides al+bm+cn=0, what makes a line lie in the plane ax+by+cz+d=0?",
+  "formula": "",
+  "options": [
+   "A point of the line lies on the plane",
+   "The plane passes through the origin",
+   "The line passes through the origin",
+   "Its direction is along the normal"
+  ],
+  "answer": 0,
+  "explain": "Parallel to the plane plus one common point means the whole line lies in the plane.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6a9d485b-b2d7-4878-aba3-154979149aaa",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "If lines have d.c.s (l₁,m₁,n₁), (l₂,m₂,n₂) and |l₁l₂+m₁m₂+n₁n₂| = 1, the lines are:",
+  "formula": "cosθ = |l₁l₂+m₁m₂+n₁n₂|",
+  "options": [
+   "parallel",
+   "perpendicular",
+   "intersecting at 45°",
+   "skew at 60°"
+  ],
+  "answer": 0,
+  "explain": "cosθ = 1 gives θ = 0, so the lines are parallel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c24c4d01-0ca4-4ab0-937a-4972be3bf6d9",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "Two lines in space with a₁a₂+b₁b₂+c₁c₂ = 0 must be:",
+  "formula": "",
+  "options": [
+   "Parallel to each other",
+   "Intersecting at a point",
+   "Possibly skew (non-intersecting)",
+   "Coplanar"
+  ],
+  "answer": 2,
+  "explain": "Perpendicularity depends only on direction vectors; the lines may be skew and need not meet.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5480635b-72d1-438b-8c37-7c4369a0bfa2",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "A line with direction ratios (a, b, c) is parallel to the z-axis iff:",
+  "formula": "",
+  "options": [
+   "a = b = 0",
+   "a = c = 0",
+   "b = c = 0",
+   "c = 0"
+  ],
+  "answer": 0,
+  "explain": "The z-axis has d.r.s (0,0,1), so (a,b,c) must be proportional to it, giving a = b = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d43724a6-218b-4925-af3d-f1b0ef7369bf",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "The equation (x−1)/0 = (y−2)/3 = (z−3)/4 means:",
+  "formula": "",
+  "options": [
+   "x = 0 and y = 2, z = 3",
+   "x = 1 and (y−2)/3 = (z−3)/4",
+   "The line is undefined",
+   "y = 2 and z = 3"
+  ],
+  "answer": 1,
+  "explain": "A zero denominator means that numerator is zero, so x−1 = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4490c96-4ca5-4fcb-ac3c-553c6a05a129",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "Line through (a, b, c) parallel to the x-axis has equations:",
+  "formula": "",
+  "options": [
+   "y = b, z = c",
+   "x = a, z = c",
+   "x = a, y = b",
+   "y = 0, z = 0"
+  ],
+  "answer": 0,
+  "explain": "d.r.s (1,0,0): y and z stay constant at b and c.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbb67960-3a69-486a-8214-7d287f05ccaa",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "Skew lines are lines that are:",
+  "formula": "",
+  "options": [
+   "Parallel and non-coplanar",
+   "Non-parallel and non-intersecting",
+   "Perpendicular and intersecting",
+   "Intersecting and non-coplanar"
+  ],
+  "answer": 1,
+  "explain": "Skew lines are non-coplanar: neither parallel nor intersecting.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d33fa22e-9cd6-4adf-bf6c-83b908091bd3",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "In (x−x₁)/l = (y−y₁)/m = (z−z₁)/n = t, where l,m,n are direction COSINES, |t| equals:",
+  "formula": "",
+  "options": [
+   "Distance from (x₁,y₁,z₁) to the point",
+   "Distance of the point from the origin",
+   "Angle with the x-axis",
+   "Square of the distance from (x₁,y₁,z₁)"
+  ],
+  "answer": 0,
+  "explain": "Since l²+m²+n²=1, the distance from (x₁,y₁,z₁) to the point is √(t²)=|t|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cafe7f8a-a10c-4f89-b6c4-be25d5b7698e",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "Direction ratios of the line (2x−1)/4 = (3y+1)/6 = (1−z)/3 are proportional to:",
+  "formula": "",
+  "options": [
+   "4, 6, 3",
+   "1/2, 1/3, 1",
+   "2, 2, −3",
+   "2, 3, 1"
+  ],
+  "answer": 2,
+  "explain": "Make coefficients of x, y, z unity: (x−½)/2 = (y+⅓)/2 = (z−1)/(−3).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "4b811c12-6214-4f04-9620-3b38d0bb7c52",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The line through A and B is parallel to the z-axis exactly when:",
+  "formula": "",
+  "options": [
+   "y₁ = y₂ and z₁ = z₂",
+   "z₁ = z₂ only",
+   "x₁ = x₂ and z₁ = z₂",
+   "x₁ = x₂ and y₁ = y₂"
+  ],
+  "answer": 3,
+  "explain": "The direction ratios must be (0, 0, c), so the x and y differences are zero.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8e014d00-893e-4978-9f8c-a5f0fd71fe56",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The line through (1,2,3) and (3,4,5) meets the xy-plane at:",
+  "formula": "",
+  "options": [
+   "(2, 3, 0)",
+   "(−1, 0, 0)",
+   "(0, 1, 0)",
+   "(−2, −1, 0)"
+  ],
+  "answer": 3,
+  "explain": "DR (1,1,1); a drop of 3 in z means moving back 3 in x and y: (−2,−1,0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "44bf5c01-d965-4da1-9b6f-f77940c8e406",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "Three points A, B, C are collinear iff:",
+  "formula": "",
+  "options": [
+   "DRs of AB and BC sum to zero",
+   "|AB| = |BC|",
+   "DRs of AB and BC are proportional",
+   "AB · BC = 0"
+  ],
+  "answer": 2,
+  "explain": "Collinear points give parallel segments AB and BC, so their DRs are proportional.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "88bf7305-a103-498b-a156-5b3d4ea269a1",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The line through (2,3,4) and (2,5,7) lies in the plane:",
+  "formula": "",
+  "options": [
+   "x = 2",
+   "y = 3",
+   "z = 4",
+   "x + y = 5"
+  ],
+  "answer": 0,
+  "explain": "The x-difference is zero, so x stays constant at 2 along the line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f336169f-9cc6-42ed-9f2b-1f89e1c27f34",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "In r = a + λ(b − a), points beyond B on the ray from A correspond to:",
+  "formula": "",
+  "options": [
+   "λ > 1",
+   "0 < λ < 1",
+   "λ < 0",
+   "λ = 1/2"
+  ],
+  "answer": 0,
+  "explain": "0 < λ < 1 lies inside segment AB, λ > 1 lies beyond B, and λ < 0 lies beyond A.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a8ec64cc-2977-46a0-8799-08b300a6cb25",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The line through (1,2,3) and (2,4,6) passes through:",
+  "formula": "",
+  "options": [
+   "(0, 0, 1)",
+   "(0, 1, 2)",
+   "the origin",
+   "(−1, 0, 1)"
+  ],
+  "answer": 2,
+  "explain": "The second point is twice the first, so the origin, A and B are collinear.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77ec04f0-bd6b-4fa9-a28b-178303eaea17",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "Which point lies on the line through (1,1,1) and (2,3,5)?",
+  "formula": "",
+  "options": [
+   "(4, 5, 9)",
+   "(3, 4, 7)",
+   "(3, 5, 8)",
+   "(3, 5, 9)"
+  ],
+  "answer": 3,
+  "explain": "DRs are (1,2,4). Adding 2(1,2,4) to (1,1,1) gives (3,5,9).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7b60634c-c81b-4365-9809-bebd1dc338fc",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The xy-plane divides the join of (1,2,3) and (4,5,−6) in the ratio:",
+  "formula": "ratio = −z₁ : z₂ ... i.e. |z₁| : |z₂|",
+  "options": [
+   "1:2 externally",
+   "1:2 internally",
+   "2:1 internally",
+   "1:3 internally"
+  ],
+  "answer": 1,
+  "explain": "z-coordinates 3 and −6 have opposite signs, so the division is internal, in ratio 3:6 = 1:2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "09864a7b-1de3-45de-97d2-db4d5db60e29",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The line through (1,2,3) and (3,4,5) meets the yz-plane at:",
+  "formula": "",
+  "options": [
+   "(0, 1, 3)",
+   "(0, 2, 3)",
+   "(0, −1, 0)",
+   "(0, 1, 2)"
+  ],
+  "answer": 3,
+  "explain": "The DRs are (1,1,1). Setting x = 0 gives λ = −1 from (1,2,3), so the point is (0,1,2).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b94fda94-ede2-48c8-ad4d-34d191a37298",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The acute angle between line AB with DRs (1,1,0) and line CD with DRs (0,1,1) is:",
+  "formula": "cosθ = |a₁a₂+b₁b₂+c₁c₂| / (√Σa₁² · √Σa₂²)",
+  "options": [
+   "90°",
+   "60°",
+   "30°",
+   "45°"
+  ],
+  "answer": 1,
+  "explain": "cosθ = 1/(√2·√2) = 1/2, so θ = 60°.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1239cc2e-11d7-44b9-a0bf-962c064ff7fe",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Skew lines: definition and identification",
+  "prompt": "Which pair of lines can never be skew?",
+  "formula": "",
+  "options": [
+   "Two lines that never meet in space",
+   "Two lines lying in the same plane",
+   "Two lines with non-parallel directions",
+   "Two lines in different planes"
+  ],
+  "answer": 1,
+  "explain": "Skew lines are non-coplanar, so any two coplanar lines are parallel or intersecting.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e7944fe2-2e68-4d01-ae9f-1f6095b80d73",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Skew lines: definition and identification",
+  "prompt": "In a cube, how many edges are skew to a given edge?",
+  "formula": "",
+  "options": [
+   "6",
+   "2",
+   "4",
+   "3"
+  ],
+  "answer": 2,
+  "explain": "12 − 1 (itself) − 3 parallel − 4 intersecting = 4 skew edges.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5f17d583-393a-44eb-8aa2-0759e3931955",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "SD between line through O along x-axis and line through (1,2,3) along y-axis is:",
+  "formula": "",
+  "options": [
+   "2",
+   "3",
+   "1",
+   "√14"
+  ],
+  "answer": 1,
+  "explain": "b×d is along z, so SD is the z-separation of the lines: 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b750de08-9fd4-41ec-ad28-46bcfd02ce96",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "The common perpendicular to skew lines L₁ and L₂ is the line of intersection of which two planes?",
+  "formula": "",
+  "options": [
+   "Planes perpendicular to b and to d",
+   "L₁ with direction b×d, and L₂ with b×d",
+   "L₁ with L₂'s point, and L₂ with L₁'s point",
+   "Two planes parallel to b×d through the origin"
+  ],
+  "answer": 1,
+  "explain": "Plane (L₁, b×d) and plane (L₂, b×d) both contain the common perpendicular. Their intersection is that line.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "dbe67ce7-d9c1-4526-b5d9-34944aeae1ef",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "SD between the z-axis and the line through (3,4,5) parallel to the x-axis is:",
+  "formula": "",
+  "options": [
+   "4",
+   "5",
+   "3",
+   "√34"
+  ],
+  "answer": 0,
+  "explain": "Common perpendicular is along k×i = j, so SD = |y-coordinate| = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "52bb397a-2bd9-4781-b1d5-6afbc02e8bd2",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "In SD = |(c−a)·(b×d)|/|b×d|, replacing the point a by a + kb (k real) changes the SD to:",
+  "formula": "",
+  "options": [
+   "Value multiplied by k",
+   "Zero",
+   "Value increased by |k||b|",
+   "The same value"
+  ],
+  "answer": 3,
+  "explain": "a+kb is still on line 1, and (b×d)·b = 0, so the numerator is unchanged.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8747f971-050a-4ad8-8be1-6bba43710c12",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "For parallel lines with direction b, d = |a₂−a₁|·sinθ. What is θ?",
+  "formula": "d = |a₂−a₁| sinθ",
+  "options": [
+   "Angle between b and the normal plane",
+   "Angle between a₁ and a₂",
+   "Angle between a₂−a₁ and b",
+   "Angle between a₂−a₁ and b×a₁"
+  ],
+  "answer": 2,
+  "explain": "|b×(a₂−a₁)|/|b| = |a₂−a₁| sinθ, with θ the angle between a₂−a₁ and b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d8f455d9-4e75-41c6-b7de-53cbaaf40282",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "|b×(a₂−a₁)| represents which geometric quantity for two parallel lines?",
+  "formula": "",
+  "options": [
+   "Length of the projection of a₂−a₁ on b",
+   "Volume of a parallelepiped",
+   "Angle between the lines",
+   "Area of parallelogram on b and a₂−a₁"
+  ],
+  "answer": 3,
+  "explain": "The magnitude of a cross product is the parallelogram area; area ÷ base |b| = distance.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "47410c15-e14d-4f8c-8c5b-446b3c0ac488",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Distance between two lines both parallel to the z-axis, through (0,0,0) and (3,4,5)?",
+  "formula": "",
+  "options": [
+   "3",
+   "7",
+   "5",
+   "5√2"
+  ],
+  "answer": 2,
+  "explain": "Only the x and y offsets matter: √(3²+4²) = 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ab618617-7a36-46d6-83f8-f504ad78e4a9",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Distance between the x-axis and the line y=5, z=12?",
+  "formula": "",
+  "options": [
+   "12",
+   "13",
+   "7",
+   "17"
+  ],
+  "answer": 1,
+  "explain": "The line is parallel to the x-axis; the distance is √(5²+12²) = 13.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d10fc315-09ec-42e7-9830-b24d7cb78afe",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Which line is parallel to (x−1)/2 = (y−2)/3 = (z−3)/6?",
+  "formula": "",
+  "options": [
+   "x/3 = y/2 = z/6",
+   "x/6 = y/3 = z/2",
+   "x/2 = y/3 = z/(−6)",
+   "x/4 = y/6 = z/12"
+  ],
+  "answer": 3,
+  "explain": "Parallel lines have proportional d.r.s: (4,6,12) = 2(2,3,6).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "94d41dfb-a8a1-4f23-a23e-0c56d8a7b066",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "The shortest segment joining two parallel lines is?",
+  "formula": "",
+  "options": [
+   "Along b×b",
+   "Perpendicular to their common direction",
+   "Parallel to their common direction",
+   "Along the vector a₁+a₂"
+  ],
+  "answer": 1,
+  "explain": "The minimum distance is the common perpendicular, perpendicular to the shared direction b.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "53e31fc7-bea7-4bfa-a205-c3bdb16f65da",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "For parallel lines, if (a₂−a₁)·b = 0, the distance d equals?",
+  "formula": "",
+  "options": [
+   "|a₂−a₁|",
+   "|a₂−a₁|/2",
+   "|a₂−a₁|·|b|",
+   "0"
+  ],
+  "answer": 0,
+  "explain": "a₂−a₁ ⟂ b gives θ=90°, so sinθ=1 and d=|a₂−a₁|.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3b254964-0f5a-4b75-afe4-b44927cde76d",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "For two distinct parallel lines at distance d, the distance between a point on each line is always?",
+  "formula": "",
+  "options": [
+   "At most d",
+   "At least d",
+   "Exactly d",
+   "Between d and 2d"
+  ],
+  "answer": 1,
+  "explain": "The perpendicular segment is the shortest, so any other joining segment has length ≥ d and can be arbitrarily large.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c41a4fe1-caeb-4085-b6da-959e3417c1e5",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Coordinates of a point in space, octants",
+  "prompt": "A point on the z-axis has coordinates of the form:",
+  "formula": "",
+  "options": [
+   "(0, 0, c)",
+   "(a, b, 0)",
+   "(a, 0, 0)",
+   "(0, b, c)"
+  ],
+  "answer": 0,
+  "explain": "On the z-axis, x = 0 and y = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0c2b20e0-ebb4-4b90-a421-9672dfb705f6",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "If P divides AB in ratio λ:1 with λ < 0 and λ ≠ −1, then P lies:",
+  "formula": "",
+  "options": [
+   "At the midpoint of AB",
+   "Off the line AB",
+   "Outside segment AB, on line AB",
+   "Inside segment AB"
+  ],
+  "answer": 2,
+  "explain": "A negative ratio means external division, so P lies on line AB outside the segment.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c4df200a-d9cb-4900-96b1-fa961f31afe7",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Section formula and centroid in 3D",
+  "prompt": "Plane ax+by+cz+d=0 divides A and B in ratio AP:PB = −f(A) : f(B), where f(X) is:",
+  "formula": "f(x,y,z) = ax+by+cz+d",
+  "options": [
+   "the direction cosine sum at X",
+   "the distance of X from the origin",
+   "the value of ax+by+cz at X without d",
+   "the value of the plane expression at X"
+  ],
+  "answer": 3,
+  "explain": "Putting P in the plane gives λ = −(ax₁+by₁+cz₁+d)/(ax₂+by₂+cz₂+d).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a123a440-af06-4d20-bdbf-2808674935fe",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "The number of lines through the origin that make equal angles with all three coordinate axes is:",
+  "formula": "",
+  "options": [
+   "1",
+   "4",
+   "8",
+   "2"
+  ],
+  "answer": 1,
+  "explain": "(±1,±1,±1) gives 8 directions, i.e. 4 distinct lines; these are the cube's body diagonals.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "67880623-52fe-485b-927e-eafa1d1e7e59",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "A line in the xy-plane makes 30° with the x-axis. Its d.c.s can be:",
+  "formula": "",
+  "options": [
+   "(1/2, √3/2, 0)",
+   "(√3/2, 1/2, 0)",
+   "(1/2, 0, √3/2)",
+   "(√3/2, 0, 1/2)"
+  ],
+  "answer": 1,
+  "explain": "In xy-plane n=0, m = cos60° = 1/2, l = cos30° = √3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2fe348bf-8596-4e91-80bc-83f5aae49197",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "A line perpendicular to the x-axis has d.c.s (l,m,n) satisfying:",
+  "formula": "",
+  "options": [
+   "l² = m² + n²",
+   "l = 0, m² + n² = 1",
+   "l = 1, m = n",
+   "m = n = 0"
+  ],
+  "answer": 1,
+  "explain": "cos90° = 0 gives l = 0, so m² + n² = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "7baa1346-805a-4838-b368-607c8eaacb6a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "Lines with d.r.s (2, −1, k) and (6, −3, 9) are parallel. Then k =",
+  "formula": "a₁/a₂ = b₁/b₂ = c₁/c₂",
+  "options": [
+   "1/3",
+   "9/2",
+   "3",
+   "6"
+  ],
+  "answer": 2,
+  "explain": "Ratios are 2/6 = 1/3, so k/9 = 1/3 and k = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ab186c94-add0-4646-b49a-e6fe61a4d508",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "Lines with d.r.s (a, b, c) and (b−c, c−a, a−b) make an angle of:",
+  "formula": "a(b−c) + b(c−a) + c(a−b) = 0",
+  "options": [
+   "π/2",
+   "π/3",
+   "0",
+   "π/6"
+  ],
+  "answer": 0,
+  "explain": "The dot product of the d.r.s is identically 0, so the lines are perpendicular.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "defedb7a-cfc6-4626-92f8-8fd3d7c27205",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "A line perpendicular to the xz-plane has direction ratios proportional to:",
+  "formula": "",
+  "options": [
+   "0, 1, 0",
+   "0, 0, 1",
+   "1, 0, 0",
+   "1, 0, 1"
+  ],
+  "answer": 0,
+  "explain": "The normal to the xz-plane is the y-axis direction, so d.r.s are 0, 1, 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "388ff9b2-8b7d-4289-a019-758c96f44bbc",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "SD between lines {y=1, z=0} and {x=0, z=2} (each parallel to a coordinate axis)?",
+  "formula": "",
+  "options": [
+   "1",
+   "3",
+   "√5",
+   "2"
+  ],
+  "answer": 3,
+  "explain": "Directions i and j; both lines lie in the planes z=0 and z=2, which are 2 apart.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "889ad3c4-7211-4ec5-b8e8-c22f579946bb",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "Two non-parallel lines have shortest distance 0 if and only if they:",
+  "formula": "",
+  "options": [
+   "Are perpendicular",
+   "Are coincident",
+   "Intersect (are coplanar)",
+   "Are skew"
+  ],
+  "answer": 2,
+  "explain": "For non-parallel lines, SD = 0 means (c−a)·(b×d) = 0, so the lines are coplanar and hence meet.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "96aa25d2-fdd8-475f-a1c0-e1b6da9c5038",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "SD between lines {z=0, x=y} and {z=1, x+y=0}?",
+  "formula": "",
+  "options": [
+   "1",
+   "1/√2",
+   "0",
+   "√2"
+  ],
+  "answer": 0,
+  "explain": "Directions (1,1,0) and (1,−1,0) are both horizontal, so b×d is along z. The lines lie in z=0 and z=1, so SD = 1.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da9a4e9b-3d3e-4114-af63-a1cfe48b0eb8",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "The direction cosines of the line joining the origin to the point (2, −1, 2) are:",
+  "formula": "l = a/√(a²+b²+c²)",
+  "options": [
+   "(2/√5, −1/√5, 2/√5)",
+   "(2/3, −1/3, 2/3)",
+   "(2/9, −1/9, 2/9)",
+   "(1/3, 1/3, 1/3)"
+  ],
+  "answer": 1,
+  "explain": "Divide the d.r.s (2,−1,2) by √(4+1+4) = 3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c260d20d-0d6a-44af-8162-f368d07d945f",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "Cuboid with edges a, b, c along x, y, z: SD between a skew x-parallel edge and a y-parallel edge is:",
+  "formula": "",
+  "options": [
+   "√(a²+b²)",
+   "a",
+   "c",
+   "ab/√(a²+b²)"
+  ],
+  "answer": 2,
+  "explain": "The edges lie in the planes z=0 and z=c, which are perpendicular to the z-axis, so SD = c.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6e6ec04-42d8-4dd6-9a4f-cc6cfe113506",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Lines (x−1)/2=(y−2)/3=(z−3)/4 and (x−3)/2=(y−5)/3=(z−7)/4 are at distance?",
+  "formula": "",
+  "options": [
+   "√29",
+   "2",
+   "0",
+   "√(29/3)"
+  ],
+  "answer": 2,
+  "explain": "a₂−a₁=(2,3,4) is parallel to b, so the lines coincide and d = 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6ff47f2-517a-473f-881b-089e571bab72",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Locus of points equidistant from two distinct parallel lines in space is?",
+  "formula": "",
+  "options": [
+   "A right circular cylinder",
+   "A pair of planes",
+   "A plane",
+   "A line"
+  ],
+  "answer": 2,
+  "explain": "It is the perpendicular bisector plane of the common perpendicular segment.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "882d3ad9-f966-4bb0-ab71-f58ca7b6ac5e",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Parallel lines: |a₂−a₁| = 8 and a₂−a₁ makes 30° with the common direction. Distance between lines?",
+  "formula": "",
+  "options": [
+   "4√3",
+   "8",
+   "8√3",
+   "4"
+  ],
+  "answer": 3,
+  "explain": "d = |a₂−a₁| sin30° = 8 × ½ = 4.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5c208f7-1b7e-4028-bbe3-d0d9de5fefac",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between parallel lines",
+  "prompt": "Two parallel lines are projected onto a plane perpendicular to their common direction. Their distance equals?",
+  "formula": "",
+  "options": [
+   "Distance between the two original foot points",
+   "Angle between the projected lines",
+   "Distance between the two projected points",
+   "Length of either projected line"
+  ],
+  "answer": 2,
+  "explain": "Each line projects to a single point on that plane. The distance between those points is the perpendicular distance d.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2eb156d-4b06-424e-8ba5-2e5c86f8f668",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Coordinates of a point in space, octants",
+  "prompt": "Distance between (a, b, c) and its reflection in the origin is:",
+  "formula": "2√(a² + b² + c²)",
+  "options": [
+   "4√(a² + b² + c²)",
+   "2√(a² + b² + c²)",
+   "√(a² + b² + c²)",
+   "2(|a| + |b| + |c|)"
+  ],
+  "answer": 1,
+  "explain": "Image is (−a,−b,−c); the distance is twice the distance from the origin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bbbfb1ad-63ac-455c-96d9-9e07e8490480",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between two points",
+  "prompt": "Length of a space diagonal of a cube of edge a is:",
+  "formula": "√(a²+a²+a²)",
+  "options": [
+   "a√3",
+   "a√2",
+   "3a",
+   "a√3/2"
+  ],
+  "answer": 0,
+  "explain": "The space diagonal joins (0,0,0) and (a,a,a), so its length is √(3a²) = a√3.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "68b733d3-fb6c-43db-a5d8-2caf05f02e00",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between two points",
+  "prompt": "Distance between P(a, b, c) and its image in the x-axis is:",
+  "formula": "",
+  "options": [
+   "2√(b²+c²)",
+   "2√(a²+b²)",
+   "2|a|",
+   "√(b²+c²)"
+  ],
+  "answer": 0,
+  "explain": "The image is (a,−b,−c). Distance = √(4b²+4c²) = 2√(b²+c²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cca64748-8af0-4b1b-a0d7-1c8eb62c6348",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Distance between two points",
+  "prompt": "Points (1,0,0), (0,1,0), (0,0,1) form which type of triangle?",
+  "formula": "",
+  "options": [
+   "Equilateral",
+   "Scalene",
+   "Right-angled isosceles",
+   "Isosceles, not equilateral"
+  ],
+  "answer": 0,
+  "explain": "Each pair is at distance √2, so all three sides are equal.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e146c40e-0672-471e-92e9-fa751ef7eac9",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "For a line making angles α, β, γ with the axes, cos²α + cos²β equals:",
+  "formula": "",
+  "options": [
+   "1 − 2cos²γ",
+   "cos²γ",
+   "sin²γ",
+   "1 + sin²γ"
+  ],
+  "answer": 2,
+  "explain": "cos²α + cos²β = 1 − cos²γ = sin²γ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5d1f42ff-ebb0-4904-8f36-292d2293c100",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "For any direction cosines (l, m, n), the least possible value of lm + mn + nl is:",
+  "formula": "(l+m+n)² = 1 + 2(lm+mn+nl)",
+  "options": [
+   "−1",
+   "0",
+   "−1/2",
+   "−1/3"
+  ],
+  "answer": 2,
+  "explain": "(l+m+n)² ≥ 0 gives 1 + 2Σlm ≥ 0, so Σlm ≥ −1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "310ba72a-db4d-4f70-ad1b-43d59909937a",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "A line in the yz-plane makes angle θ with the y-axis. Its d.c.s can be:",
+  "formula": "",
+  "options": [
+   "(cosθ, sinθ, 0)",
+   "(cosθ, 0, sinθ)",
+   "(0, cosθ, sinθ)",
+   "(0, sinθ, cosθ)"
+  ],
+  "answer": 2,
+  "explain": "It lies in the yz-plane so l = 0. Then m = cosθ, and n = cos(90°−θ) = sinθ.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f648b278-88dc-4ce9-9bec-0e94609aacf5",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Direction cosines and direction ratios",
+  "prompt": "Which triple can be the direction angles (α, β, γ) of a line?",
+  "formula": "cos²α + cos²β + cos²γ = 1",
+  "options": [
+   "45°, 60°, 60°",
+   "30°, 45°, 60°",
+   "45°, 45°, 45°",
+   "60°, 60°, 60°"
+  ],
+  "answer": 0,
+  "explain": "1/2 + 1/4 + 1/4 = 1. The other triples give 3/2, 3/4 and 3/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "136a8ba3-3ec7-471a-ba94-481ca7d58a8c",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "l²+m²+n²=1 and DCs from DRs",
+  "prompt": "The d.c.s of a line perpendicular to the plane 2x + 3y + 6z = 5 are:",
+  "formula": "",
+  "options": [
+   "±(2/5, 3/5, 6/5)",
+   "±(2/11, 3/11, 6/11)",
+   "±(1/3, 1/2, 1)",
+   "±(2/7, 3/7, 6/7)"
+  ],
+  "answer": 3,
+  "explain": "The normal has d.r.s (2,3,6) and √(4+9+36) = 7, so the d.c.s are ±(2/7, 3/7, 6/7).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "38e608a8-ea29-4019-a766-c3cbc7793cd6",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "Three mutually perpendicular lines have d.c.s (lᵢ,mᵢ,nᵢ), i=1,2,3. Then l₁²+l₂²+l₃² =",
+  "formula": "",
+  "options": [
+   "0",
+   "3",
+   "2",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "The d.c. matrix is orthogonal, so every column also has unit sum of squares.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5cf7c4d8-6dc2-4695-89b0-7689f20a97de",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Angle between two lines",
+  "prompt": "Two lines in space, each perpendicular to a third line, are:",
+  "formula": "",
+  "options": [
+   "necessarily perpendicular",
+   "not necessarily parallel",
+   "necessarily intersecting",
+   "necessarily parallel"
+  ],
+  "answer": 1,
+  "explain": "In 3D, lines ⊥ a given line may point in many directions (e.g. x- and y-axes ⊥ z-axis).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ce9a7ab1-c53c-43fd-8307-0e9606727df9",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "If a line is parallel to a plane (and not in it), its points are at what distance from the plane?",
+  "formula": "",
+  "options": [
+   "Zero for exactly one point",
+   "Alternating, depending on the sign of the d.r.s",
+   "Increasing along the line",
+   "Equal, a constant distance"
+  ],
+  "answer": 3,
+  "explain": "The direction is perpendicular to the normal, so there is no motion along the normal and the distance is constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "794105d6-fca5-4d57-8ce2-940680204610",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Parallel and perpendicular line conditions",
+  "prompt": "Two distinct lines in space are both perpendicular to the same plane. They must be:",
+  "formula": "",
+  "options": [
+   "Perpendicular to each other",
+   "Parallel",
+   "Skew",
+   "Intersecting at a point"
+  ],
+  "answer": 1,
+  "explain": "Both are along the plane's normal (a,b,c), so their direction ratios are proportional.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6cbb494f-0b77-4e04-82f5-5401f83ff2ac",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "The line x = 2y + 3, z = 3y − 1 has direction ratios proportional to:",
+  "formula": "",
+  "options": [
+   "2, 1, 3",
+   "3, −1, 1",
+   "1, 2, 3",
+   "2, 3, 3"
+  ],
+  "answer": 0,
+  "explain": "Put y = t: x = 2t+3, y = t, z = 3t−1, so d.r.s = (2, 1, 3).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d2cba28d-d15c-47db-ae1c-0bddab8e5cdf",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "Lines through the origin perpendicular to the line with d.r.s (a, b, c) all lie in the plane:",
+  "formula": "",
+  "options": [
+   "x/a + y/b + z/c = 1",
+   "bx + cy + az = 0",
+   "ax + by + cz = 0",
+   "x/a + y/b + z/c = 0"
+  ],
+  "answer": 2,
+  "explain": "Perpendicularity to (a,b,c) gives al+bm+cn = 0 for the other line's d.r.s.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46e0ade8-556b-4355-b95f-edd8d4d46104",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "A line parallel to both the xy-plane and the yz-plane is parallel to the:",
+  "formula": "",
+  "options": [
+   "line x = y = z",
+   "z-axis",
+   "x-axis",
+   "y-axis"
+  ],
+  "answer": 3,
+  "explain": "Parallel to xy ⇒ c = 0; parallel to yz ⇒ a = 0; so d.r.s (0, b, 0).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e52bf59e-fb7c-49ea-a727-fa6d78333c02",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Vector and Cartesian equation of a line",
+  "prompt": "A line in 3D is generally represented in Cartesian form by:",
+  "formula": "",
+  "options": [
+   "Two linear equations of non-parallel planes",
+   "One linear equation in x, y, z",
+   "Two linear equations of parallel planes",
+   "One quadratic equation in x, y, z"
+  ],
+  "answer": 0,
+  "explain": "A line is the intersection of two non-parallel planes, so it needs two simultaneous linear equations.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2f72a0a-f0ac-4229-9108-975f83569685",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "Points (1,2,3), (2,3,4), (4,k,6) are collinear. Then k =",
+  "formula": "",
+  "options": [
+   "6",
+   "3",
+   "5",
+   "4"
+  ],
+  "answer": 2,
+  "explain": "AB = (1,1,1) and AC = (3, k−2, 3) must be proportional, so k−2 = 3 and k = 5.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "32e568d7-abb3-4192-8eee-53bf8846d5b2",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "In r = a + λ(b − a), the value λ = −1 gives which point?",
+  "formula": "r = a + λ(b − a)",
+  "options": [
+   "Point B itself",
+   "Reflection of B in A",
+   "Reflection of A in B",
+   "Midpoint of AB"
+  ],
+  "answer": 1,
+  "explain": "At λ=−1, r = 2a − b, so A is the midpoint of the join of B and this point.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1d650206-d35c-4cbc-9c2d-b0e76f0315d6",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Line through two given points",
+  "prompt": "The line through (1,2,3) and (3,4,5) meets the xz-plane at:",
+  "formula": "",
+  "options": [
+   "(1, 0, 3)",
+   "(−2, 0, 0)",
+   "(0, −1, 2)",
+   "(−1, 0, 1)"
+  ],
+  "answer": 3,
+  "explain": "DRs (1,1,1); the points are (1+t, 2+t, 3+t). y = 0 gives t = −2, so the point is (−1, 0, 1).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "22787123-c9d9-4d51-a843-c71eec78634b",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Skew lines: definition and identification",
+  "prompt": "Lines AB and CD (A,B,C,D distinct) are skew iff the four points A,B,C,D are:",
+  "formula": "",
+  "options": [
+   "Vertices of a parallelogram",
+   "Collinear",
+   "Non-coplanar",
+   "Coplanar"
+  ],
+  "answer": 2,
+  "explain": "Skew lines lie in no common plane, so their four defining points are non-coplanar: [AB, AC, AD] ≠ 0.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2a3e0df7-8f9d-4fe9-a451-36aa4cbb2c95",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "L₁: a+λb. L₂ passes through c with direction d+kb instead of d. The SD between them:",
+  "formula": "b×(d+kb) = b×d",
+  "options": [
+   "Is multiplied by k",
+   "Remains the same",
+   "Is divided by (1+k)",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "The cross product b×d is unchanged, so the formula gives the same value.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f9466a38-aa7a-4239-beed-d9fc2549a885",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "OA=a, OB=b, OC=c along the x, y, z axes. SD between OA and BC is:",
+  "formula": "",
+  "options": [
+   "ab/√(a²+b²)",
+   "bc/√(b²+c²)",
+   "a",
+   "bc/(b+c)"
+  ],
+  "answer": 1,
+  "explain": "Project on the yz-plane (⟂ OA): it is the distance from O to line BC, bc/√(b²+c²).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f613ee4a-1ebc-49b3-b967-7a5c26f323ea",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "SD between the z-axis and any line L equals the distance from O to:",
+  "formula": "",
+  "options": [
+   "The projection of L on the xy-plane",
+   "The point where L meets the xy-plane",
+   "The projection of L on the yz-plane",
+   "The projection of L on the xz-plane"
+  ],
+  "answer": 0,
+  "explain": "Projecting along the z-axis turns it into the point O and L into its xy-projection.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "344bb836-4d31-4f77-bb6f-f7822bae5e8f",
+  "subject": "Mathematics",
+  "chapter": "3D Geometry",
+  "topic": "Shortest distance between skew lines",
+  "prompt": "Acute angle between two skew diagonals of adjacent faces of a cube is:",
+  "formula": "",
+  "options": [
+   "30°",
+   "45°",
+   "90°",
+   "60°"
+  ],
+  "answer": 3,
+  "explain": "Directions like (1,1,0) and (0,1,1) give cosθ = 1/2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]

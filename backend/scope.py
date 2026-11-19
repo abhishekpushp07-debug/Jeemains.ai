@@ -4,15 +4,18 @@ from typing import Literal, Optional
 from fastapi import HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
-ORDER = ("Physics", "Chemistry", "Mathematics")
-SHORT = {"Physics": "Physics", "Chemistry": "Chemistry", "Mathematics": "Maths"}
+ORDER = ("Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning")
+SHORT = {"Physics": "Physics", "Chemistry": "Chemistry", "Mathematics": "Maths", "English": "English", "Logical Reasoning": "Reasoning"}
 MAX_PICKS = 5
-PCM = [{"subject": s, "chapter": None} for s in ORDER]
+PCM = [{"subject": s, "chapter": None} for s in ORDER[:3]]
+Subject = Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning"]
+CARD_COUNTS = (30, 50, 100)  # what a student can choose for one round
+CARD_SECONDS = 20  # rule R1: 20 seconds per card in every mode
 
 
 class Pick(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    subject: Literal["Physics", "Chemistry", "Mathematics"]
+    subject: Subject
     chapter: Optional[str] = Field(default=None, max_length=80)
 
 
@@ -35,7 +38,7 @@ def label_of(picks: list) -> str:
     whole = [SHORT.get(p["subject"], p["subject"]) for p in picks if not p["chapter"]]
     chapters = [p["chapter"] for p in picks if p["chapter"]]
     if not chapters:
-        return "PCM Mixed" if len(whole) == 3 else "Mixed " + " + ".join(whole)
+        return "PCM Mixed" if whole == ["Physics", "Chemistry", "Maths"] else "Mixed " + " + ".join(whole)
     if not whole:
         return chapters[0] if len(chapters) == 1 else f"{chapters[0]} +{len(chapters) - 1} more"
     return f"Mixed {whole[0]} +{len(picks) - 1} more"

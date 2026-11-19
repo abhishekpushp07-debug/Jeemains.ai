@@ -1,1643 +1,3783 @@
 [
-  {
-    "id": "e9a124de-02f2-4c19-8563-0a5be868266b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Conduction",
-    "prompt": "SI unit of thermal conductivity K",
-    "formula": "Q/t = KA(ΔT/L)",
-    "options": [
-      "W m⁻¹ K⁻¹",
-      "J m⁻¹ K⁻¹",
-      "W m K⁻¹",
-      "W m⁻² K⁻¹"
-    ],
-    "answer": 0,
-    "explain": "Thermal conductivity K has SI unit W m⁻¹ K⁻¹ from Fourier's law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7c25cc86-bc40-4f86-aa59-014aff186d18",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "Specific heat capacity: unit in SI",
-    "formula": "Q = mcΔT",
-    "options": [
-      "J kg⁻¹ K⁻¹",
-      "J mol⁻¹ K⁻¹",
-      "cal g⁻¹ K⁻¹",
-      "J K⁻¹"
-    ],
-    "answer": 0,
-    "explain": "Specific heat c = Q/(mΔT), so SI unit is J kg⁻¹ K⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2a5e67a2-722b-4ed3-9145-558e867fb7a9",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "Stefan–Boltzmann law: power radiated by black body",
-    "formula": "P = σAT⁴",
-    "options": [
-      "P ∝ T⁴",
-      "P ∝ T³",
-      "P ∝ T",
-      "P ∝ T²"
-    ],
-    "answer": 0,
-    "explain": "Stefan's law: power radiated per unit area ∝ T⁴, where σ = 5.67×10⁻⁸ W m⁻²K⁻⁴.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a82c9ed4-b60f-4fdf-8d84-62bfb9dde1c7",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "Wien's displacement law relates λ_max and T as",
-    "formula": "λ_max·T = b",
-    "options": [
-      "λ_max ∝ T",
-      "λ_max ∝ 1/T²",
-      "λ_max ∝ 1/T",
-      "λ_max ∝ T²"
-    ],
-    "answer": 2,
-    "explain": "Wien's law: λ_max T = 2.898×10⁻³ m·K, so peak wavelength decreases as T rises.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "1030c8e1-be19-49cc-bcb9-3b69af2cc117",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "Emissivity of a perfect black body",
-    "formula": "e = 1",
-    "options": [
-      "0",
-      "1",
-      "0.5",
-      "∞"
-    ],
-    "answer": 1,
-    "explain": "A perfect black body absorbs all radiation; its emissivity e = 1 by definition.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f8a09bd9-9d51-4eb8-9a2f-06b35e389e36",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "Newton's law of cooling: rate of heat loss depends on",
-    "formula": "dQ/dt ∝ (T−T₀)",
-    "options": [
-      "Excess temp over surroundings",
-      "Absolute temp of body",
-      "T² difference",
-      "T⁴ of body only"
-    ],
-    "answer": 0,
-    "explain": "Newton's cooling: dT/dt ∝ (T − T₀) for small temperature excess.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "8c7dd032-61fa-4e1d-a3fa-26206b7d8554",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion",
-    "prompt": "Linear thermal expansion: change in length",
-    "formula": "ΔL = αLΔT",
-    "options": [
-      "ΔL = βLΔT",
-      "ΔL = γLΔT",
-      "ΔL = αLΔT",
-      "ΔL = αL²ΔT"
-    ],
-    "answer": 2,
-    "explain": "α is coefficient of linear expansion; ΔL is proportional to original length and ΔT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c105b67c-5505-4c9d-b764-38fe1bf8f67f",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion",
-    "prompt": "Relation between α, β (area), γ (volume) expansions",
-    "formula": "α : β : γ = 1:2:3",
-    "options": [
-      "2 : 3 : 4",
-      "1 : 2 : 4",
-      "1 : 2 : 3",
-      "1 : 3 : 6"
-    ],
-    "answer": 2,
-    "explain": "For isotropic solids β = 2α and γ = 3α, giving ratio 1:2:3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d013d90d-dc24-405c-b442-7823e3f51a64",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion",
-    "prompt": "Anomalous expansion of water: density is maximum at",
-    "formula": "",
-    "options": [
-      "−4 °C",
-      "100 °C",
-      "4 °C",
-      "0 °C"
-    ],
-    "answer": 2,
-    "explain": "Water has maximum density at 4 °C due to anomalous expansion between 0–4 °C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef426ffc-a56d-4a41-97ec-ace42d723538",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "Latent heat of vaporisation of water (approx.)",
-    "formula": "Q = mL",
-    "options": [
-      "336 kJ/kg",
-      "540 kJ/kg",
-      "4186 J/kg·K",
-      "2260 kJ/kg"
-    ],
-    "answer": 3,
-    "explain": "L_v of water ≈ 2260 kJ/kg (540 cal/g); 336 kJ/kg is L_f (fusion).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a66fbfc3-7bc4-460a-ab2a-ffc9c3889b8d",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "Latent heat of fusion of ice (approx.)",
-    "formula": "Q = mL_f",
-    "options": [
-      "336 kJ/kg",
-      "100 kJ/kg",
-      "2260 kJ/kg",
-      "540 kJ/kg"
-    ],
-    "answer": 0,
-    "explain": "L_f of ice ≈ 336 kJ/kg (80 cal/g); heat absorbed/released at constant 0 °C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7f37f174-deb8-41d2-9eb5-6ffb57c233df",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "In radiation, net power lost by body at T to surroundings at T₀",
-    "formula": "P_net = σeA(T⁴−T₀⁴)",
-    "options": [
-      "σeA·T⁴",
-      "σeA(T−T₀)",
-      "σeA(T²−T₀²)",
-      "σeA(T⁴−T₀⁴)"
-    ],
-    "answer": 3,
-    "explain": "Net radiated power = σeA(T⁴ − T₀⁴) by Stefan–Boltzmann law.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "99f43d85-e181-4479-8d12-20d2fd502fe9",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Conduction",
-    "prompt": "Thermal resistance of a rod of length L, area A, conductivity K",
-    "formula": "R_th = L/(KA)",
-    "options": [
-      "KL/A",
-      "KA/L",
-      "A/(KL)",
-      "L/(KA)"
-    ],
-    "answer": 3,
-    "explain": "Thermal resistance R = L/(KA); analogous to electrical resistance R = ρL/A.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7336a25a-952a-4cdb-96f4-9002c6afaef9",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Conduction",
-    "prompt": "For rods in series (same cross-section), equivalent thermal resistance",
-    "formula": "R_eq = R₁ + R₂",
-    "options": [
-      "R₁ + R₂",
-      "R₁R₂/(R₁+R₂)",
-      "(R₁+R₂)/2",
-      "√(R₁R₂)"
-    ],
-    "answer": 0,
-    "explain": "Series thermal resistances add, just like electrical resistances in series.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "2f0ad08c-31bc-4b89-af04-9f353752ea05",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Conduction",
-    "prompt": "For rods in parallel, equivalent thermal resistance",
-    "formula": "1/R_eq = 1/R₁+1/R₂",
-    "options": [
-      "R₁R₂/(R₁+R₂)",
-      "R₁+R₂",
-      "(R₁+R₂)/2",
-      "R₁−R₂"
-    ],
-    "answer": 0,
-    "explain": "Parallel thermal conductors: 1/R_eq = 1/R₁ + 1/R₂, same as parallel electrical.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3e0c8303-ba22-478a-8ba5-1fe3cc924e36",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Temperature Scales",
-    "prompt": "Relation between Celsius (C) and Fahrenheit (F)",
-    "formula": "F = (9/5)C + 32",
-    "options": [
-      "F = (5/9)C + 32",
-      "F = (9/5)C − 32",
-      "F = (9/5)C + 32",
-      "F = (5/9)(C+32)"
-    ],
-    "answer": 2,
-    "explain": "Standard conversion: F = (9/5)C + 32; at C = 100, F = 212.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "46765d83-4602-4b33-9277-77fda5c1b741",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "Specific heat of water (approximate SI value)",
-    "formula": "",
-    "options": [
-      "900 J kg⁻¹ K⁻¹",
-      "4186 J kg⁻¹ K⁻¹",
-      "386 J kg⁻¹ K⁻¹",
-      "2090 J kg⁻¹ K⁻¹"
-    ],
-    "answer": 1,
-    "explain": "c_water ≈ 4186 J kg⁻¹ K⁻¹ (1 cal g⁻¹ °C⁻¹); highest among common substances.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "51be3ddf-e40d-475c-a8a5-eed9d0379d9a",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "Molar heat capacity at constant volume for monatomic ideal gas",
-    "formula": "Cᵥ = (3/2)R",
-    "options": [
-      "(5/2)R",
-      "(3/2)R",
-      "3R",
-      "(7/2)R"
-    ],
-    "answer": 1,
-    "explain": "Monatomic gas has 3 translational DOF; Cᵥ = (f/2)R = (3/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "253f9cc4-1474-4b77-81f7-90c1e20b76b3",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion",
-    "prompt": "Coefficient of volumetric expansion γ of an ideal gas at const P",
-    "formula": "γ = 1/T",
-    "options": [
-      "1/T",
-      "P/T",
-      "T/P",
-      "1/P"
-    ],
-    "answer": 0,
-    "explain": "For ideal gas at const P: V ∝ T, so γ = (1/V)(dV/dT)_P = 1/T.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ed4872ad-dc80-4bba-84b7-3ae0b1120f36",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "A good absorber of radiation is also",
-    "formula": "a = e (Kirchhoff's law)",
-    "options": [
-      "Transparent",
-      "A perfect reflector",
-      "A good emitter",
-      "A poor emitter"
-    ],
-    "answer": 2,
-    "explain": "Kirchhoff's law: at thermal equilibrium, absorptivity = emissivity; good absorber = good emitter.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3c829994-8c21-4497-bac5-419d69a1c14c",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Temperature Scales",
-    "prompt": "Temperature at which Celsius and Fahrenheit scales read the same",
-    "formula": "C = F → T = −40",
-    "options": [
-      "−40°",
-      "−273°",
-      "40°",
-      "0°"
-    ],
-    "answer": 0,
-    "explain": "Setting F = C in F=(9/5)C+32 gives C = F = −40°.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9b11e527-51b1-4c54-9d45-52ddf7b82d6b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "During a phase change (e.g., melting), temperature of the substance",
-    "formula": "Q = mL",
-    "options": [
-      "Decreases",
-      "Increases",
-      "Remains constant",
-      "Changes randomly"
-    ],
-    "answer": 2,
-    "explain": "During phase transition, heat supplied goes into latent heat; temperature stays constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "21c3acea-b9a7-4f25-afa6-014f8298e684",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Heat current (rate of heat flow) through a rod is:",
-    "formula": "H = KA(ΔT/L)",
-    "options": [
-      "ΔT/(KAL)",
-      "KA·L·ΔT",
-      "KL(ΔT/A)",
-      "KA(ΔT/L)"
-    ],
-    "answer": 3,
-    "explain": "Fourier's law: H = KA ΔT/L, directly proportional to area and temp gradient.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ade5868e-d8bf-4367-bed8-e5844670c5b1",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Stefan–Boltzmann constant σ has SI units:",
-    "formula": "P = σAT⁴",
-    "options": [
-      "W m⁻² K⁻⁴",
-      "W m⁻¹ K⁻¹",
-      "J K⁻¹ m⁻²",
-      "W K⁻⁴"
-    ],
-    "answer": 0,
-    "explain": "σ = P/(AT⁴) gives units W m⁻² K⁻⁴.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "05dc869d-6e09-4106-b0c0-f2e00e184434",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Wien's constant b in λ_max·T = b has SI value ≈",
-    "formula": "λ_max T = b",
-    "options": [
-      "2.9×10⁻³ m·K",
-      "1.38×10⁻²³ m·K",
-      "2.9×10⁻⁸ m·K",
-      "5.67×10⁻⁸ m·K"
-    ],
-    "answer": 0,
-    "explain": "Wien's displacement constant b ≈ 2.9×10⁻³ m·K.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9747448f-cec6-4dfe-a7a4-a8a737e6a5e4",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "If temperature of a black body doubles, power radiated becomes:",
-    "formula": "P ∝ T⁴",
-    "options": [
-      "8 times",
-      "2 times",
-      "16 times",
-      "4 times"
-    ],
-    "answer": 2,
-    "explain": "P ∝ T⁴, so doubling T gives 2⁴ = 16 times more power.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9f70675f-1361-47e0-8b88-0c7e9d1f7a76",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "λ_max of sun (~6000 K) lies in which region?",
-    "formula": "λ_max = b/T",
-    "options": [
-      "Infrared region",
-      "Visible region",
-      "Ultraviolet region",
-      "Microwave region"
-    ],
-    "answer": 1,
-    "explain": "λ_max ≈ 2.9×10⁻³/6000 ≈ 483 nm, which is visible (yellow-green).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c2b9cc7d-1085-4229-b7e6-44902b11942b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Change in area due to temperature rise ΔT for a 2D object:",
-    "formula": "ΔA = A₀·β·ΔT",
-    "options": [
-      "A₀·α·ΔT",
-      "A₀·2α·ΔT",
-      "A₀·3α·ΔT",
-      "A₀·α²·ΔT"
-    ],
-    "answer": 1,
-    "explain": "β = 2α, so ΔA = A₀·2α·ΔT for small expansions.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d86404b6-06c5-4a4a-8601-59bb9210b32c",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Molar heat capacity C and specific heat c are related by (M = molar mass):",
-    "formula": "C = Mc",
-    "options": [
-      "C = Mc",
-      "C = c/M",
-      "C = c·R",
-      "C = c + R"
-    ],
-    "answer": 0,
-    "explain": "Molar heat capacity = specific heat × molar mass: C = M·c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3a0687c1-8867-4c35-8abe-39efa47c2452",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "During Newton's law of cooling, the body cools exponentially. Rate of cooling ∝",
-    "formula": "dT/dt ∝ (T−T₀)",
-    "options": [
-      "T − T₀²",
-      "T⁴ − T₀⁴",
-      "(T − T₀)",
-      "√(T − T₀)"
-    ],
-    "answer": 2,
-    "explain": "Newton's cooling is valid for small temp differences: dT/dt ∝ (T − T₀).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eecfd865-d3bb-4f2d-9beb-48b3b1fcdd21",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "A body at temperature T has peak emission at λ_max. If T is halved, λ_max:",
-    "formula": "λ_max ∝ 1/T",
-    "options": [
-      "Halves",
-      "Doubles",
-      "Remains same",
-      "Quadruples"
-    ],
-    "answer": 1,
-    "explain": "By Wien's law λ_max = b/T; halving T doubles λ_max.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "81c56eb9-28fb-44f4-8a5a-db0f39d9d57a",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Two rods (K₁, K₂) in series carry same heat. Equivalent K_eq for equal lengths & area:",
-    "formula": "K_eq = 2K₁K₂/(K₁+K₂)",
-    "options": [
-      "(K₁+K₂)/2",
-      "2K₁K₂/(K₁+K₂)",
-      "√(K₁K₂)",
-      "K₁K₂/(K₁+K₂)"
-    ],
-    "answer": 1,
-    "explain": "Series combination (equal lengths): K_eq = 2K₁K₂/(K₁+K₂) (harmonic mean × 2/2).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "16d81999-e8cb-4ea7-95b5-ace6154a290f",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Two rods (K₁, K₂) in parallel (same L, A each). Equivalent K_eq:",
-    "formula": "K_eq = (K₁+K₂)/2",
-    "options": [
-      "(K₁+K₂)/2",
-      "K₁K₂",
-      "2K₁K₂/(K₁+K₂)",
-      "√(K₁K₂)"
-    ],
-    "answer": 0,
-    "explain": "Parallel (same L, equal A): K_eq = (K₁+K₂)/2 (arithmetic mean).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "9c47da1f-1277-4ff0-a4c2-288cce2232fc",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Thermal expansion of a bimetallic strip occurs because two metals have:",
-    "formula": "",
-    "options": [
-      "Different densities",
-      "Different conductivities",
-      "Different α values",
-      "Different specific heats"
-    ],
-    "answer": 2,
-    "explain": "Bimetallic strip bends on heating because the two metals have different linear expansion coefficients.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "019d6f0f-ca27-4994-be63-cbf347c6f97f",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "For ideal gas at constant volume, if T doubles, pressure P:",
-    "formula": "P/T = const (V fixed)",
-    "options": [
-      "Halves",
-      "Stays same",
-      "Quadruples",
-      "Doubles"
-    ],
-    "answer": 3,
-    "explain": "Gay-Lussac's law: P ∝ T at constant V, so doubling T doubles P.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "94faabf0-526d-4b1b-b98f-0a274d830eb3",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Calorimetry principle: heat lost by hot body = heat gained by cold body assumes:",
-    "formula": "m₁c₁ΔT₁ = m₂c₂ΔT₂",
-    "options": [
-      "Both bodies are black bodies",
-      "Bodies are at same initial temp",
-      "Bodies have equal mass",
-      "No heat exchange with surroundings"
-    ],
-    "answer": 3,
-    "explain": "Calorimetry assumes an isolated system with no heat loss to surroundings.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "ced52ecf-e21a-4cac-8667-cba11f1d5fa0",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Thermal stress in a clamped rod of Young's modulus Y, expansion coeff α, ΔT is:",
-    "formula": "σ = YαΔT",
-    "options": [
-      "Y/(αΔT)",
-      "αΔT/Y",
-      "YΔT/α",
-      "YαΔT"
-    ],
-    "answer": 3,
-    "explain": "Prevented expansion creates strain αΔT; stress = Y × strain = YαΔT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "e0a776c9-e4c1-4717-840f-fda4b7524d55",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "Emissive power E of a black body ∝ which power of T?",
-    "formula": "E ∝ T⁴",
-    "options": [
-      "T²",
-      "T⁴",
-      "T³",
-      "T¹"
-    ],
-    "answer": 1,
-    "explain": "Stefan–Boltzmann law: E = σT⁴, so power is 4th power of absolute temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "83acbc9e-74c7-4a39-98cb-9c4f1d5b4a5f",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Heat Transfer",
-    "prompt": "Which process of heat transfer does NOT need a material medium?",
-    "formula": "",
-    "options": [
-      "Radiation",
-      "Both conduction & convection",
-      "Conduction only",
-      "Convection only"
-    ],
-    "answer": 0,
-    "explain": "Radiation travels as EM waves and requires no medium; conduction/convection need matter.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "dcef0581-6342-4bc2-9cc1-68659f453a67",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion",
-    "prompt": "Coefficient of linear expansion α has SI unit:",
-    "formula": "ΔL = αL₀ΔT",
-    "options": [
-      "m·K⁻¹",
-      "dimensionless",
-      "K⁻¹",
-      "K"
-    ],
-    "answer": 2,
-    "explain": "α = ΔL/(L₀ΔT); unit is per kelvin, i.e., K⁻¹.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "3f97a4fe-77cb-49a5-954d-85acf62b2e50",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion",
-    "prompt": "For a hollow sphere of metal, on heating, the cavity volume:",
-    "formula": "",
-    "options": [
-      "Depends on material",
-      "Remains same",
-      "Increases",
-      "Decreases"
-    ],
-    "answer": 2,
-    "explain": "Cavities expand same as if filled with same material; cavity volume increases with γ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "dc7a38ea-7af7-460c-b95a-df830a458eb6",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion",
-    "prompt": "For water between 0°C and 4°C, on heating, density:",
-    "formula": "",
-    "options": [
-      "Stays constant",
-      "Decreases",
-      "First increases then decreases",
-      "Increases"
-    ],
-    "answer": 3,
-    "explain": "Anomalous expansion: water contracts (density rises) from 0 to 4°C; max density at 4°C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "7858a479-90b7-4742-932b-d99e4d4cee12",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Conduction",
-    "prompt": "In steady-state conduction, temperature distribution along rod is:",
-    "formula": "dQ/dt = KA(dT/dx)",
-    "options": [
-      "Exponential",
-      "Linear",
-      "Parabolic",
-      "Sinusoidal"
-    ],
-    "answer": 1,
-    "explain": "In steady state with uniform rod, dT/dx = constant → linear temperature profile.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "58997ed0-ccb7-434d-9f4e-ed97d95bc8aa",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "Dimension of specific heat capacity c is:",
-    "formula": "c = Q/(mΔT)",
-    "options": [
-      "[ML²T⁻³K⁻¹]",
-      "[ML²T⁻²K⁻¹]",
-      "[MT⁻²K⁻¹]",
-      "[L²T⁻²K⁻¹]"
-    ],
-    "answer": 3,
-    "explain": "c = J/(kg·K) = m²s⁻²K⁻¹ → [L²T⁻²K⁻¹] (per unit mass, so no M).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main"
-  },
-  {
-    "id": "6f948793-d062-46bc-a327-d9e8a7ac83cd",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Temperature Measurement",
-    "prompt": "Which thermometric property is used in a resistance thermometer?",
-    "formula": "",
-    "options": [
-      "Electrical resistance",
-      "Pressure of gas",
-      "Length of liquid column",
-      "EMF"
-    ],
-    "answer": 0,
-    "explain": "Resistance thermometers (RTDs) use change in electrical resistance with temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ef61a589-c06d-4fef-8b7e-30a88083ff55",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Temperature Scales",
-    "prompt": "Absolute temperature scale (Kelvin) zero corresponds to:",
-    "formula": "T(K) = T(°C) + 273.15",
-    "options": [
-      "–100°C",
-      "–273.15°C",
-      "–373.15°C",
-      "0°C"
-    ],
-    "answer": 1,
-    "explain": "Absolute zero = –273.15°C; the lowest possible temperature theoretically.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "312a083c-5421-4896-babc-8f54477d1256",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Calorimetry",
-    "prompt": "In calorimetry, water equivalent of a calorimeter has unit:",
-    "formula": "",
-    "options": [
-      "Joule",
-      "Kelvin",
-      "Joule/kg",
-      "kg"
-    ],
-    "answer": 3,
-    "explain": "Water equivalent = mass of water that has same heat capacity as calorimeter; unit is kg.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "649a2521-43e9-4e96-ae56-68a6e0dbb32b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "Stefan's law: if radius of a black-body sphere doubles (T same), power radiated:",
-    "formula": "P = σT⁴·A",
-    "options": [
-      "16 times",
-      "Quadruples",
-      "8 times",
-      "Doubles"
-    ],
-    "answer": 1,
-    "explain": "A = 4πr²; doubling r → A×4, so P quadruples (factor 4).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e672a4ab-d516-40b1-9a4d-c3cfb16cc6ab",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation/Cooling",
-    "prompt": "Newton's law of cooling is valid when temperature excess over surroundings is:",
-    "formula": "dθ/dt = –k(θ – θ₀)",
-    "options": [
-      "Any value",
-      "Very large",
-      "Small",
-      "Equal to surroundings"
-    ],
-    "answer": 2,
-    "explain": "Newton's cooling is an approximation of Stefan's law valid only for small ΔT.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "afef8cb4-c406-4e12-9b78-ce505d01550f",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "For a perfect blackbody, absorptivity a equals:",
-    "formula": "",
-    "options": [
-      "Between 0 and 1",
-      "0.5",
-      "0",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "A perfect black body absorbs all incident radiation; absorptivity = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "58a0e20e-eff1-4023-b619-9449bf11aca7",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Phase Change",
-    "prompt": "Cooking in a pressure cooker is faster because:",
-    "formula": "",
-    "options": [
-      "More convection occurs",
-      "Heat is reflected back",
-      "Higher pressure raises boiling point",
-      "Metal conducts better"
-    ],
-    "answer": 2,
-    "explain": "Increased pressure raises boiling point of water above 100°C, cooking food faster.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "3d99c6f6-ceb2-409c-8f5b-b0c33688a03d",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Kelvin & Celsius relation:",
-    "formula": "T(K) = T(°C) + 273.15",
-    "options": [
-      "T = °C − 273.15",
-      "T = °C × 1.8",
-      "T = °C + 273.15",
-      "T = °C + 255"
-    ],
-    "answer": 2,
-    "explain": "Absolute temperature T in kelvin equals Celsius temperature plus 273.15.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5dc8f677-0d26-45e3-9054-c6be4b011577",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "For a perfect blackbody, reflectivity r equals:",
-    "formula": "",
-    "options": [
-      "0",
-      "Depends on colour",
-      "1",
-      "0.5"
-    ],
-    "answer": 0,
-    "explain": "A perfect blackbody absorbs all radiation, so reflectivity = 0 and absorptivity = 1.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "27b99e75-b40d-4c56-a074-cf541f1364f5",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Change in volume on heating a solid of volume V, coeff γ, by ΔT:",
-    "formula": "ΔV = γ V ΔT",
-    "options": [
-      "2α V ΔT",
-      "γ V ΔT",
-      "α V ΔT",
-      "γ V / ΔT"
-    ],
-    "answer": 1,
-    "explain": "Volumetric expansion: ΔV = γ V ΔT where γ ≈ 3α for isotropic solids.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "f1027fae-4dd6-4f07-b507-f3430389fe77",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "A blackbody absorbs 100% of incident radiation. Its absorptance a =",
-    "formula": "a = 1",
-    "options": [
-      "Depends on temperature",
-      "0",
-      "0.5",
-      "1"
-    ],
-    "answer": 3,
-    "explain": "By definition, a perfect blackbody has absorptance a = 1 at all wavelengths.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "80a2d3d0-3cbc-4054-b770-949957cd1ff6",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Specific heat of ice (approximate) in SI:",
-    "formula": "",
-    "options": [
-      "500 J kg⁻¹K⁻¹",
-      "840 J kg⁻¹K⁻¹",
-      "2100 J kg⁻¹K⁻¹",
-      "4200 J kg⁻¹K⁻¹"
-    ],
-    "answer": 2,
-    "explain": "Specific heat of ice ≈ 2100 J kg⁻¹K⁻¹, half that of liquid water.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a47349a5-71bb-4d8e-bb2f-5bc110d6afd3",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Molar heat capacity at const pressure for monatomic ideal gas:",
-    "formula": "Cₚ = (5/2)R",
-    "options": [
-      "(5/2)R",
-      "(3/2)R",
-      "(7/2)R",
-      "3R"
-    ],
-    "answer": 0,
-    "explain": "For monatomic gas, Cₚ = Cᵥ + R = (3/2)R + R = (5/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ae4d33b8-9e0f-45cd-9480-f3069467ace0",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "For diatomic ideal gas (rigid), Cᵥ =",
-    "formula": "Cᵥ = (5/2)R",
-    "options": [
-      "(3/2)R",
-      "(7/2)R",
-      "(5/2)R",
-      "2R"
-    ],
-    "answer": 2,
-    "explain": "Diatomic rigid gas has 5 degrees of freedom, so Cᵥ = (5/2)R.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5cff9566-1301-488b-b2c5-5cf50eaf0641",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Ratio γ = Cₚ/Cᵥ for monatomic ideal gas:",
-    "formula": "γ = 5/3",
-    "options": [
-      "5/3",
-      "7/5",
-      "6/5",
-      "4/3"
-    ],
-    "answer": 0,
-    "explain": "For monatomic gas, γ = Cₚ/Cᵥ = (5/2)R / (3/2)R = 5/3 ≈ 1.67.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "4ece0a82-76f9-4b15-9fd1-d04d14471aae",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Heat required Q to raise mass m by ΔT with specific heat c:",
-    "formula": "Q = mcΔT",
-    "options": [
-      "mc/ΔT",
-      "mcΔT",
-      "mγΔT",
-      "mc²ΔT"
-    ],
-    "answer": 1,
-    "explain": "Fundamental calorimetry relation: Q = mcΔT defines specific heat c.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "925a2467-392e-469e-acdd-04a85515be40",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "The SI unit of heat capacity (of a body) is:",
-    "formula": "",
-    "options": [
-      "cal K⁻¹",
-      "J mol⁻¹K⁻¹",
-      "J kg⁻¹K⁻¹",
-      "J K⁻¹"
-    ],
-    "answer": 3,
-    "explain": "Heat capacity = Q/ΔT; its SI unit is joule per kelvin (J K⁻¹).",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "86d260e1-ddc4-4490-8687-1cfc67c7f79c",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "For conduction through composite wall (2 slabs), interface condition is:",
-    "formula": "H₁ = H₂ (steady state)",
-    "options": [
-      "Area differs",
-      "Temperature gradient is equal",
-      "Heat current is equal",
-      "K values are equal"
-    ],
-    "answer": 2,
-    "explain": "In steady-state series conduction, heat current H = KA(ΔT/L) is same through both slabs.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7051b116-006d-4d79-9a9c-f91cc9afb402",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Dimensional formula of thermal conductivity K:",
-    "formula": "",
-    "options": [
-      "M L T⁻² θ⁻¹",
-      "M L T⁻³ θ⁻¹",
-      "M L² T⁻³ θ⁻¹",
-      "M L² T⁻² θ⁻¹"
-    ],
-    "answer": 1,
-    "explain": "K = Q·L/(A·ΔT·t) → [M·L·T⁻³·θ⁻¹]; θ represents temperature dimension.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "13c8d544-0bbd-4b17-ba0a-1d93c34f1c84",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "At what temperature does water have minimum volume (maximum density)?",
-    "formula": "",
-    "options": [
-      "0°C",
-      "−4°C",
-      "4°C",
-      "100°C"
-    ],
-    "answer": 2,
-    "explain": "Water shows anomalous expansion; density is maximum (volume minimum) at 4°C.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "81dfaa8a-d347-434a-aebb-7a063ce462bc",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Which quantity is conserved in calorimetry (no heat loss to surroundings)?",
-    "formula": "ΣQ = 0",
-    "options": [
-      "Total entropy",
-      "Total mass",
-      "Total temperature",
-      "Total heat (ΣQ = 0)"
-    ],
-    "answer": 3,
-    "explain": "Calorimetry principle: heat gained by cold body equals heat lost by hot body, ΣQ = 0.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "10e01005-3cb3-4700-8330-9117c29c5849",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Peak wavelength from a human body (T ≈ 310 K) lies in which region?",
-    "formula": "λ_max = b/T",
-    "options": [
-      "Visible (~0.5 μm)",
-      "Infrared (~9.3 μm)",
-      "UV (~0.3 μm)",
-      "Microwave (~1 mm)"
-    ],
-    "answer": 1,
-    "explain": "Using Wien's law: λ_max = 2.9×10⁻³/310 ≈ 9.3 μm, which is infrared.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "eb94757d-0a99-4146-9e2c-f9bd3517753b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Emissive power of a real body vs blackbody at same T:",
-    "formula": "E_real = e·E_black",
-    "options": [
-      "E_real > E_black",
-      "No fixed relation",
-      "E_real = E_black",
-      "E_real < E_black (e < 1)"
-    ],
-    "answer": 3,
-    "explain": "Real body emissivity e < 1, so it emits less than a blackbody at the same temperature.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9a2799f1-77ac-4ef4-a7c7-2ca575f4b9bb",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "During boiling at constant pressure, temperature of water:",
-    "formula": "",
-    "options": [
-      "Decreases",
-      "Increases steadily",
-      "Remains constant",
-      "Fluctuates"
-    ],
-    "answer": 2,
-    "explain": "During phase change (boiling), supplied heat goes as latent heat; temperature stays constant.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a9e291b8-e438-4fec-9bab-e8f71ebcb8c7",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Conduction",
-    "prompt": "Heat Q flows in time t through rod: Q/t = KA(ΔT)/L. If L doubles, Q/t becomes?",
-    "formula": "Q/t = KAΔt/L",
-    "options": [
-      "Double",
-      "Half",
-      "Quarter",
-      "Same"
-    ],
-    "answer": 1,
-    "explain": "Heat current inversely proportional to length; doubling L halves Q/t.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "dd193bf9-6200-4127-822f-03f069ff72a2",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Expansion of Liquids",
-    "prompt": "Coefficient of real (absolute) expansion of liquid γ_real relates to apparent γ_app as:",
-    "formula": "γ_real = γ_app + γ_glass",
-    "options": [
-      "γ_real = γ_app + γ_vessel",
-      "γ_real = γ_app × γ_vessel",
-      "γ_real = γ_app − γ_vessel",
-      "γ_real = γ_app / γ_vessel"
-    ],
-    "answer": 0,
-    "explain": "Apparent expansion = real expansion of liquid − expansion of vessel material.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "a37af507-6f48-4d8f-ad92-10e1d0334829",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Stefan–Boltzmann Law",
-    "prompt": "If a black body is at temperature T, the total energy emitted per unit area per second is:",
-    "formula": "E = σT⁴",
-    "options": [
-      "σT²",
-      "σT⁴",
-      "σT³",
-      "4σT⁴"
-    ],
-    "answer": 1,
-    "explain": "Stefan–Boltzmann law: emissive power per unit area = σT⁴ for a perfect blackbody.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d55eda55-9cfe-4d50-bba2-d54e7594c88b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Molar Heat Capacity",
-    "prompt": "For a diatomic gas (non-rigid, includes vibrational), Cᵥ = ?",
-    "formula": "Cᵥ = (7/2)R",
-    "options": [
-      "(9/2)R",
-      "(5/2)R",
-      "(3/2)R",
-      "(7/2)R"
-    ],
-    "answer": 3,
-    "explain": "Non-rigid diatomic: 5 translational+rotational + 2 vibrational DOF → Cᵥ = 7R/2.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b33da935-302b-434a-a581-12cea4e4e4e2",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Molar Heat Capacity",
-    "prompt": "γ = Cₚ/Cᵥ for a diatomic ideal gas (rigid) is:",
-    "formula": "γ = 7/5",
-    "options": [
-      "5/3 ≈ 1.67",
-      "4/3 ≈ 1.33",
-      "8/5 = 1.6",
-      "7/5 = 1.4"
-    ],
-    "answer": 3,
-    "explain": "Rigid diatomic: Cᵥ = 5R/2, Cₚ = 7R/2, so γ = 7/5 = 1.4.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "01be069a-b80e-442e-af50-c3157163e025",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Molar Heat Capacity",
-    "prompt": "Cₚ − Cᵥ for one mole of any ideal gas equals:",
-    "formula": "Cₚ − Cᵥ = R",
-    "options": [
-      "R/2",
-      "3R/2",
-      "2R",
-      "R"
-    ],
-    "answer": 3,
-    "explain": "Meyer's relation: Cₚ − Cᵥ = R for one mole of ideal gas.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "ab3e4ccf-24a3-4b1f-8198-93eb1f2efece",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Stress",
-    "prompt": "Thermal stress in a clamped rod is σ_stress = YαΔT. If ΔT doubles, stress:",
-    "formula": "σ = YαΔT",
-    "options": [
-      "Quadruples",
-      "Halves",
-      "Unchanged",
-      "Doubles"
-    ],
-    "answer": 3,
-    "explain": "Thermal stress is directly proportional to ΔT; doubling ΔT doubles the stress.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "e35348ed-f332-440f-9d4e-29ce0008fcbf",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Radiation",
-    "prompt": "Emissive power E of a surface vs that of a blackbody E_b at same T: for real body,",
-    "formula": "E = eE_b",
-    "options": [
-      "E = e·E_b, e > 1",
-      "E = e·E_b, e < 1",
-      "E > E_b",
-      "E = E_b"
-    ],
-    "answer": 1,
-    "explain": "Emissivity e ∈ (0,1) for real bodies, so E = eE_b < E_b.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "9ef6a952-fb82-4ecc-9e1a-3ea66985e741",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Wien's Displacement Law",
-    "prompt": "If a black body radiates maximum at λ_max, and temperature is tripled, new λ_max is:",
-    "formula": "λ_max ∝ 1/T",
-    "options": [
-      "3λ_max",
-      "λ_max/3",
-      "λ_max/9",
-      "9λ_max"
-    ],
-    "answer": 1,
-    "explain": "Wien's law: λ_max ∝ 1/T; tripling T reduces λ_max by factor 3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "90288461-565f-4bda-8065-f6b71d29b7ae",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Stefan–Boltzmann Law",
-    "prompt": "Rate of cooling of a body depends on surface area A. If A doubles (same T, ε), rate:",
-    "formula": "P = εσAT⁴",
-    "options": [
-      "Unchanged",
-      "Doubles",
-      "Quadruples",
-      "Halves"
-    ],
-    "answer": 1,
-    "explain": "Stefan's law: P ∝ A; doubling surface area doubles the rate of radiation heat loss.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5519cb97-6ac7-41e6-bbfa-74373f863fdc",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Molar Heat Capacity",
-    "prompt": "Specific heat of a gas at constant pressure Cₚ is always ________ Cᵥ.",
-    "formula": "Cₚ = Cᵥ + R",
-    "options": [
-      "Less than",
-      "Greater than",
-      "Equal to",
-      "Half of"
-    ],
-    "answer": 1,
-    "explain": "At constant pressure, extra work R per mole is done, so Cₚ = Cᵥ + R > Cᵥ.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "b46618a3-d15f-4fd5-b08d-45961c5f9a2d",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Conduction (Series)",
-    "prompt": "If two identical rods of K₁ and K₂ are joined in series, heat current is same. Then:",
-    "formula": "",
-    "options": [
-      "Temperature drop ∝ 1/K",
-      "Depends on area",
-      "Temperature drop is equal",
-      "Temperature drop ∝ K"
-    ],
-    "answer": 0,
-    "explain": "Same Q/t through series rods: ΔT = (Q/t)(L/KA) ∝ 1/K for identical rods.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "c2851aad-7382-4b40-b712-d41d65932b6b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Temperature Scales",
-    "prompt": "On the Kelvin scale, the lowest possible temperature is 0 K. On Celsius scale this is:",
-    "formula": "T(K) = T(°C) + 273.15",
-    "options": [
-      "−100°C",
-      "0°C",
-      "−32°C",
-      "−273.15°C"
-    ],
-    "answer": 3,
-    "explain": "Absolute zero (0 K) corresponds to −273.15°C by the relation T(K) = T(°C) + 273.15.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "7f7d4bcf-5adf-4c3e-adb0-7b3814666bda",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Emissivity e of a real body is defined as ratio of its emissive power to:",
-    "formula": "e = E/E_b",
-    "options": [
-      "Reflected radiation power",
-      "Emissive power of blackbody at same T",
-      "Emissive power at 0 K",
-      "Absorbed radiation power"
-    ],
-    "answer": 1,
-    "explain": "Emissivity = E_body / E_blackbody at same temperature; 0 < e ≤ 1 for real bodies.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "af8b29fb-8d82-4a34-a41f-3fbf09bc1e80",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Temperature of sun's surface ≈ 6000 K. Using Wien's law, λ_max ≈",
-    "formula": "λ_max = b/T",
-    "options": [
-      "483 nm (visible range)",
-      "4.83 mm (microwave)",
-      "9.6 μm (infrared)",
-      "96 nm (ultraviolet)"
-    ],
-    "answer": 0,
-    "explain": "b ≈ 2.9×10⁻³ m·K; λ_max = 2.9×10⁻³/6000 ≈ 483 nm, in visible spectrum.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "d39fbb32-ca97-4606-a256-fa7cb56c458d",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "A rod is heated but its ends are free. Thermal stress developed is:",
-    "formula": "",
-    "options": [
-      "YαΔT",
-      "αΔT/Y",
-      "YαΔT/L",
-      "Zero"
-    ],
-    "answer": 3,
-    "explain": "Thermal stress arises only when expansion is prevented (clamped). Free ends → no stress.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "acde1aa7-6be8-4f81-86eb-50f1857c1fa1",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "Newton's law of cooling: if θ₀ is excess temp, then dθ/dt ∝",
-    "formula": "dθ/dt = −bθ",
-    "options": [
-      "θ² (square of excess temp)",
-      "√θ",
-      "1/θ",
-      "θ (excess temperature)"
-    ],
-    "answer": 3,
-    "explain": "Newton's law: rate of cooling proportional to temperature excess θ over surroundings.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "5764811f-f5ad-4c56-a228-02e44edf9755",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "For a monatomic ideal gas, ratio of Cₚ/Cᵥ = γ =",
-    "formula": "γ = 5/3",
-    "options": [
-      "5/3",
-      "7/5",
-      "4/3",
-      "3/2"
-    ],
-    "answer": 0,
-    "explain": "Monatomic gas: Cᵥ = 3R/2, Cₚ = 5R/2, so γ = Cₚ/Cᵥ = 5/3.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  },
-  {
-    "id": "577ec95b-abc1-46bf-b5c9-4639e38f165b",
-    "subject": "Physics",
-    "chapter": "Thermal Properties",
-    "topic": "Thermal Properties",
-    "prompt": "The process by which heat is transferred through vacuum is:",
-    "formula": "",
-    "options": [
-      "Advection",
-      "Conduction",
-      "Convection",
-      "Radiation"
-    ],
-    "answer": 3,
-    "explain": "Radiation (electromagnetic waves) needs no medium; conduction and convection need matter.",
-    "review_status": "quick_recall_reviewed_v1",
-    "syllabus": "JEE Main",
-    "verified": 1
-  }
+ {
+  "id": "e9a124de-02f2-4c19-8563-0a5be868266b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Conduction",
+  "prompt": "SI unit of thermal conductivity K",
+  "formula": "Q/t = KA(ΔT/L)",
+  "options": [
+   "W m⁻¹ K⁻¹",
+   "J m⁻¹ K⁻¹",
+   "W m K⁻¹",
+   "W m⁻² K⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Thermal conductivity K has SI unit W m⁻¹ K⁻¹ from Fourier's law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7c25cc86-bc40-4f86-aa59-014aff186d18",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "Specific heat capacity: unit in SI",
+  "formula": "Q = mcΔT",
+  "options": [
+   "J kg⁻¹ K⁻¹",
+   "J mol⁻¹ K⁻¹",
+   "cal g⁻¹ K⁻¹",
+   "J K⁻¹"
+  ],
+  "answer": 0,
+  "explain": "Specific heat c = Q/(mΔT), so SI unit is J kg⁻¹ K⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2a5e67a2-722b-4ed3-9145-558e867fb7a9",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "Stefan–Boltzmann law: power radiated by black body",
+  "formula": "P = σAT⁴",
+  "options": [
+   "P ∝ T⁴",
+   "P ∝ T³",
+   "P ∝ T",
+   "P ∝ T²"
+  ],
+  "answer": 0,
+  "explain": "Stefan's law: power radiated per unit area ∝ T⁴, where σ = 5.67×10⁻⁸ W m⁻²K⁻⁴.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a82c9ed4-b60f-4fdf-8d84-62bfb9dde1c7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "Wien's displacement law relates λ_max and T as",
+  "formula": "λ_max·T = b",
+  "options": [
+   "λ_max ∝ T",
+   "λ_max ∝ 1/T²",
+   "λ_max ∝ 1/T",
+   "λ_max ∝ T²"
+  ],
+  "answer": 2,
+  "explain": "Wien's law: λ_max T = 2.898×10⁻³ m·K, so peak wavelength decreases as T rises.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "1030c8e1-be19-49cc-bcb9-3b69af2cc117",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "Emissivity of a perfect black body",
+  "formula": "e = 1",
+  "options": [
+   "0",
+   "1",
+   "0.5",
+   "∞"
+  ],
+  "answer": 1,
+  "explain": "A perfect black body absorbs all radiation; its emissivity e = 1 by definition.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f8a09bd9-9d51-4eb8-9a2f-06b35e389e36",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "Newton's law of cooling: rate of heat loss depends on",
+  "formula": "dQ/dt ∝ (T−T₀)",
+  "options": [
+   "Excess temp over surroundings",
+   "Absolute temp of body",
+   "T² difference",
+   "T⁴ of body only"
+  ],
+  "answer": 0,
+  "explain": "Newton's cooling: dT/dt ∝ (T − T₀) for small temperature excess.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "8c7dd032-61fa-4e1d-a3fa-26206b7d8554",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion",
+  "prompt": "Linear thermal expansion: change in length",
+  "formula": "ΔL = αLΔT",
+  "options": [
+   "ΔL = βLΔT",
+   "ΔL = γLΔT",
+   "ΔL = αLΔT",
+   "ΔL = αL²ΔT"
+  ],
+  "answer": 2,
+  "explain": "α is coefficient of linear expansion; ΔL is proportional to original length and ΔT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c105b67c-5505-4c9d-b764-38fe1bf8f67f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion",
+  "prompt": "Relation between α, β (area), γ (volume) expansions",
+  "formula": "α : β : γ = 1:2:3",
+  "options": [
+   "2 : 3 : 4",
+   "1 : 2 : 4",
+   "1 : 2 : 3",
+   "1 : 3 : 6"
+  ],
+  "answer": 2,
+  "explain": "For isotropic solids β = 2α and γ = 3α, giving ratio 1:2:3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d013d90d-dc24-405c-b442-7823e3f51a64",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion",
+  "prompt": "Anomalous expansion of water: density is maximum at",
+  "formula": "",
+  "options": [
+   "−4 °C",
+   "100 °C",
+   "4 °C",
+   "0 °C"
+  ],
+  "answer": 2,
+  "explain": "Water has maximum density at 4 °C due to anomalous expansion between 0–4 °C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef426ffc-a56d-4a41-97ec-ace42d723538",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "Latent heat of vaporisation of water (approx.)",
+  "formula": "Q = mL",
+  "options": [
+   "336 kJ/kg",
+   "540 kJ/kg",
+   "4186 J/kg·K",
+   "2260 kJ/kg"
+  ],
+  "answer": 3,
+  "explain": "L_v of water ≈ 2260 kJ/kg (540 cal/g); 336 kJ/kg is L_f (fusion).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a66fbfc3-7bc4-460a-ab2a-ffc9c3889b8d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "Latent heat of fusion of ice (approx.)",
+  "formula": "Q = mL_f",
+  "options": [
+   "336 kJ/kg",
+   "100 kJ/kg",
+   "2260 kJ/kg",
+   "540 kJ/kg"
+  ],
+  "answer": 0,
+  "explain": "L_f of ice ≈ 336 kJ/kg (80 cal/g); heat absorbed/released at constant 0 °C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7f37f174-deb8-41d2-9eb5-6ffb57c233df",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "In radiation, net power lost by body at T to surroundings at T₀",
+  "formula": "P_net = σeA(T⁴−T₀⁴)",
+  "options": [
+   "σeA·T⁴",
+   "σeA(T−T₀)",
+   "σeA(T²−T₀²)",
+   "σeA(T⁴−T₀⁴)"
+  ],
+  "answer": 3,
+  "explain": "Net radiated power = σeA(T⁴ − T₀⁴) by Stefan–Boltzmann law.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "99f43d85-e181-4479-8d12-20d2fd502fe9",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Conduction",
+  "prompt": "Thermal resistance of a rod of length L, area A, conductivity K",
+  "formula": "R_th = L/(KA)",
+  "options": [
+   "KL/A",
+   "KA/L",
+   "A/(KL)",
+   "L/(KA)"
+  ],
+  "answer": 3,
+  "explain": "Thermal resistance R = L/(KA); analogous to electrical resistance R = ρL/A.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7336a25a-952a-4cdb-96f4-9002c6afaef9",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Conduction",
+  "prompt": "For rods in series (same cross-section), equivalent thermal resistance",
+  "formula": "R_eq = R₁ + R₂",
+  "options": [
+   "R₁ + R₂",
+   "R₁R₂/(R₁+R₂)",
+   "(R₁+R₂)/2",
+   "√(R₁R₂)"
+  ],
+  "answer": 0,
+  "explain": "Series thermal resistances add, just like electrical resistances in series.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "2f0ad08c-31bc-4b89-af04-9f353752ea05",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Conduction",
+  "prompt": "For rods in parallel, equivalent thermal resistance",
+  "formula": "1/R_eq = 1/R₁+1/R₂",
+  "options": [
+   "R₁R₂/(R₁+R₂)",
+   "R₁+R₂",
+   "(R₁+R₂)/2",
+   "R₁−R₂"
+  ],
+  "answer": 0,
+  "explain": "Parallel thermal conductors: 1/R_eq = 1/R₁ + 1/R₂, same as parallel electrical.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3e0c8303-ba22-478a-8ba5-1fe3cc924e36",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Temperature Scales",
+  "prompt": "Relation between Celsius (C) and Fahrenheit (F)",
+  "formula": "F = (9/5)C + 32",
+  "options": [
+   "F = (5/9)C + 32",
+   "F = (9/5)C − 32",
+   "F = (9/5)C + 32",
+   "F = (5/9)(C+32)"
+  ],
+  "answer": 2,
+  "explain": "Standard conversion: F = (9/5)C + 32; at C = 100, F = 212.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "46765d83-4602-4b33-9277-77fda5c1b741",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "Specific heat of water (approximate SI value)",
+  "formula": "",
+  "options": [
+   "900 J kg⁻¹ K⁻¹",
+   "4186 J kg⁻¹ K⁻¹",
+   "386 J kg⁻¹ K⁻¹",
+   "2090 J kg⁻¹ K⁻¹"
+  ],
+  "answer": 1,
+  "explain": "c_water ≈ 4186 J kg⁻¹ K⁻¹ (1 cal g⁻¹ °C⁻¹); highest among common substances.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "51be3ddf-e40d-475c-a8a5-eed9d0379d9a",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "Molar heat capacity at constant volume for monatomic ideal gas",
+  "formula": "Cᵥ = (3/2)R",
+  "options": [
+   "(5/2)R",
+   "(3/2)R",
+   "3R",
+   "(7/2)R"
+  ],
+  "answer": 1,
+  "explain": "Monatomic gas has 3 translational DOF; Cᵥ = (f/2)R = (3/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "253f9cc4-1474-4b77-81f7-90c1e20b76b3",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion",
+  "prompt": "Coefficient of volumetric expansion γ of an ideal gas at const P",
+  "formula": "γ = 1/T",
+  "options": [
+   "1/T",
+   "P/T",
+   "T/P",
+   "1/P"
+  ],
+  "answer": 0,
+  "explain": "For ideal gas at const P: V ∝ T, so γ = (1/V)(dV/dT)_P = 1/T.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ed4872ad-dc80-4bba-84b7-3ae0b1120f36",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "A good absorber of radiation is also",
+  "formula": "a = e (Kirchhoff's law)",
+  "options": [
+   "Transparent",
+   "A perfect reflector",
+   "A good emitter",
+   "A poor emitter"
+  ],
+  "answer": 2,
+  "explain": "Kirchhoff's law: at thermal equilibrium, absorptivity = emissivity; good absorber = good emitter.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3c829994-8c21-4497-bac5-419d69a1c14c",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Temperature Scales",
+  "prompt": "Temperature at which Celsius and Fahrenheit scales read the same",
+  "formula": "C = F → T = −40",
+  "options": [
+   "−40°",
+   "−273°",
+   "40°",
+   "0°"
+  ],
+  "answer": 0,
+  "explain": "Setting F = C in F=(9/5)C+32 gives C = F = −40°.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9b11e527-51b1-4c54-9d45-52ddf7b82d6b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "During a phase change (e.g., melting), temperature of the substance",
+  "formula": "Q = mL",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Remains constant",
+   "Changes randomly"
+  ],
+  "answer": 2,
+  "explain": "During phase transition, heat supplied goes into latent heat; temperature stays constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "21c3acea-b9a7-4f25-afa6-014f8298e684",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Heat current (rate of heat flow) through a rod is:",
+  "formula": "H = KA(ΔT/L)",
+  "options": [
+   "ΔT/(KAL)",
+   "KA·L·ΔT",
+   "KL(ΔT/A)",
+   "KA(ΔT/L)"
+  ],
+  "answer": 3,
+  "explain": "Fourier's law: H = KA ΔT/L, directly proportional to area and temp gradient.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ade5868e-d8bf-4367-bed8-e5844670c5b1",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan-Boltzmann law and emissivity",
+  "prompt": "Stefan–Boltzmann constant σ has SI units:",
+  "formula": "P = σAT⁴",
+  "options": [
+   "W m⁻² K⁻⁴",
+   "W m⁻¹ K⁻¹",
+   "J K⁻¹ m⁻²",
+   "W K⁻⁴"
+  ],
+  "answer": 0,
+  "explain": "σ = P/(AT⁴) gives units W m⁻² K⁻⁴.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "05dc869d-6e09-4106-b0c0-f2e00e184434",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "Wien's constant b in λ_max·T = b has SI value ≈",
+  "formula": "λ_max T = b",
+  "options": [
+   "2.9×10⁻³ m·K",
+   "1.38×10⁻²³ m·K",
+   "2.9×10⁻⁸ m·K",
+   "5.67×10⁻⁸ m·K"
+  ],
+  "answer": 0,
+  "explain": "Wien's displacement constant b ≈ 2.9×10⁻³ m·K.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9747448f-cec6-4dfe-a7a4-a8a737e6a5e4",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan-Boltzmann law and emissivity",
+  "prompt": "If temperature of a black body doubles, power radiated becomes:",
+  "formula": "P ∝ T⁴",
+  "options": [
+   "8 times",
+   "2 times",
+   "16 times",
+   "4 times"
+  ],
+  "answer": 2,
+  "explain": "P ∝ T⁴, so doubling T gives 2⁴ = 16 times more power.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9f70675f-1361-47e0-8b88-0c7e9d1f7a76",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "λ_max of sun (~6000 K) lies in which region?",
+  "formula": "λ_max = b/T",
+  "options": [
+   "Infrared region",
+   "Visible region",
+   "Ultraviolet region",
+   "Microwave region"
+  ],
+  "answer": 1,
+  "explain": "λ_max ≈ 2.9×10⁻³/6000 ≈ 483 nm, which is visible (yellow-green).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c2b9cc7d-1085-4229-b7e6-44902b11942b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Change in area due to temperature rise ΔT for a 2D object:",
+  "formula": "ΔA = A₀·β·ΔT",
+  "options": [
+   "A₀·α·ΔT",
+   "A₀·2α·ΔT",
+   "A₀·3α·ΔT",
+   "A₀·α²·ΔT"
+  ],
+  "answer": 1,
+  "explain": "β = 2α, so ΔA = A₀·2α·ΔT for small expansions.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d86404b6-06c5-4a4a-8601-59bb9210b32c",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "Molar heat capacity C and specific heat c are related by (M = molar mass):",
+  "formula": "C = Mc",
+  "options": [
+   "C = Mc",
+   "C = c/M",
+   "C = c·R",
+   "C = c + R"
+  ],
+  "answer": 0,
+  "explain": "Molar heat capacity = specific heat × molar mass: C = M·c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3a0687c1-8867-4c35-8abe-39efa47c2452",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "During Newton's law of cooling, the body cools exponentially. Rate of cooling ∝",
+  "formula": "dT/dt ∝ (T−T₀)",
+  "options": [
+   "T − T₀²",
+   "T⁴ − T₀⁴",
+   "(T − T₀)",
+   "√(T − T₀)"
+  ],
+  "answer": 2,
+  "explain": "Newton's cooling is valid for small temp differences: dT/dt ∝ (T − T₀).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eecfd865-d3bb-4f2d-9beb-48b3b1fcdd21",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "A body at temperature T has peak emission at λ_max. If T is halved, λ_max:",
+  "formula": "λ_max ∝ 1/T",
+  "options": [
+   "Halves",
+   "Doubles",
+   "Remains same",
+   "Quadruples"
+  ],
+  "answer": 1,
+  "explain": "By Wien's law λ_max = b/T; halving T doubles λ_max.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "81c56eb9-28fb-44f4-8a5a-db0f39d9d57a",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal resistance: series/parallel rods",
+  "prompt": "Two rods (K₁, K₂) in series carry same heat. Equivalent K_eq for equal lengths & area:",
+  "formula": "K_eq = 2K₁K₂/(K₁+K₂)",
+  "options": [
+   "(K₁+K₂)/2",
+   "2K₁K₂/(K₁+K₂)",
+   "√(K₁K₂)",
+   "K₁K₂/(K₁+K₂)"
+  ],
+  "answer": 1,
+  "explain": "Series combination (equal lengths): K_eq = 2K₁K₂/(K₁+K₂) (harmonic mean × 2/2).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "16d81999-e8cb-4ea7-95b5-ace6154a290f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal resistance: series/parallel rods",
+  "prompt": "Two rods (K₁, K₂) in parallel (same L, A each). Equivalent K_eq:",
+  "formula": "K_eq = (K₁+K₂)/2",
+  "options": [
+   "(K₁+K₂)/2",
+   "K₁K₂",
+   "2K₁K₂/(K₁+K₂)",
+   "√(K₁K₂)"
+  ],
+  "answer": 0,
+  "explain": "Parallel (same L, equal A): K_eq = (K₁+K₂)/2 (arithmetic mean).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "9c47da1f-1277-4ff0-a4c2-288cce2232fc",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal stress and expansion applications",
+  "prompt": "Thermal expansion of a bimetallic strip occurs because two metals have:",
+  "formula": "",
+  "options": [
+   "Different densities",
+   "Different conductivities",
+   "Different α values",
+   "Different specific heats"
+  ],
+  "answer": 2,
+  "explain": "Bimetallic strip bends on heating because the two metals have different linear expansion coefficients.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "019d6f0f-ca27-4994-be63-cbf347c6f97f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Heat, temperature and temperature scales",
+  "prompt": "For ideal gas at constant volume, if T doubles, pressure P:",
+  "formula": "P/T = const (V fixed)",
+  "options": [
+   "Halves",
+   "Stays same",
+   "Quadruples",
+   "Doubles"
+  ],
+  "answer": 3,
+  "explain": "Gay-Lussac's law: P ∝ T at constant V, so doubling T doubles P.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "94faabf0-526d-4b1b-b98f-0a274d830eb3",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry and principle of mixtures",
+  "prompt": "Calorimetry principle: heat lost by hot body = heat gained by cold body assumes:",
+  "formula": "m₁c₁ΔT₁ = m₂c₂ΔT₂",
+  "options": [
+   "Both bodies are black bodies",
+   "Bodies are at same initial temp",
+   "Bodies have equal mass",
+   "No heat exchange with surroundings"
+  ],
+  "answer": 3,
+  "explain": "Calorimetry assumes an isolated system with no heat loss to surroundings.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "ced52ecf-e21a-4cac-8667-cba11f1d5fa0",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal stress and expansion applications",
+  "prompt": "Thermal stress in a clamped rod of Young's modulus Y, expansion coeff α, ΔT is:",
+  "formula": "σ = YαΔT",
+  "options": [
+   "Y/(αΔT)",
+   "αΔT/Y",
+   "YΔT/α",
+   "YαΔT"
+  ],
+  "answer": 3,
+  "explain": "Prevented expansion creates strain αΔT; stress = Y × strain = YαΔT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "e0a776c9-e4c1-4717-840f-fda4b7524d55",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "Emissive power E of a black body ∝ which power of T?",
+  "formula": "E ∝ T⁴",
+  "options": [
+   "T²",
+   "T⁴",
+   "T³",
+   "T¹"
+  ],
+  "answer": 1,
+  "explain": "Stefan–Boltzmann law: E = σT⁴, so power is 4th power of absolute temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "83acbc9e-74c7-4a39-98cb-9c4f1d5b4a5f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Heat Transfer",
+  "prompt": "Which process of heat transfer does NOT need a material medium?",
+  "formula": "",
+  "options": [
+   "Radiation",
+   "Both conduction & convection",
+   "Conduction only",
+   "Convection only"
+  ],
+  "answer": 0,
+  "explain": "Radiation travels as EM waves and requires no medium; conduction/convection need matter.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dcef0581-6342-4bc2-9cc1-68659f453a67",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion",
+  "prompt": "Coefficient of linear expansion α has SI unit:",
+  "formula": "ΔL = αL₀ΔT",
+  "options": [
+   "m·K⁻¹",
+   "dimensionless",
+   "K⁻¹",
+   "K"
+  ],
+  "answer": 2,
+  "explain": "α = ΔL/(L₀ΔT); unit is per kelvin, i.e., K⁻¹.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "3f97a4fe-77cb-49a5-954d-85acf62b2e50",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion",
+  "prompt": "For a hollow sphere of metal, on heating, the cavity volume:",
+  "formula": "",
+  "options": [
+   "Depends on material",
+   "Remains same",
+   "Increases",
+   "Decreases"
+  ],
+  "answer": 2,
+  "explain": "Cavities expand same as if filled with same material; cavity volume increases with γ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "dc7a38ea-7af7-460c-b95a-df830a458eb6",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion",
+  "prompt": "For water between 0°C and 4°C, on heating, density:",
+  "formula": "",
+  "options": [
+   "Stays constant",
+   "Decreases",
+   "First increases then decreases",
+   "Increases"
+  ],
+  "answer": 3,
+  "explain": "Anomalous expansion: water contracts (density rises) from 0 to 4°C; max density at 4°C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "7858a479-90b7-4742-932b-d99e4d4cee12",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction",
+  "prompt": "In steady-state conduction, temperature distribution along rod is:",
+  "formula": "dQ/dt = KA(dT/dx)",
+  "options": [
+   "Exponential",
+   "Linear",
+   "Parabolic",
+   "Sinusoidal"
+  ],
+  "answer": 1,
+  "explain": "In steady state with uniform rod, dT/dx = constant → linear temperature profile.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "58997ed0-ccb7-434d-9f4e-ed97d95bc8aa",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "Dimension of specific heat capacity c is:",
+  "formula": "c = Q/(mΔT)",
+  "options": [
+   "[ML²T⁻³K⁻¹]",
+   "[ML²T⁻²K⁻¹]",
+   "[MT⁻²K⁻¹]",
+   "[L²T⁻²K⁻¹]"
+  ],
+  "answer": 3,
+  "explain": "c = J/(kg·K) = m²s⁻²K⁻¹ → [L²T⁻²K⁻¹] (per unit mass, so no M).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main"
+ },
+ {
+  "id": "6f948793-d062-46bc-a327-d9e8a7ac83cd",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Temperature Measurement",
+  "prompt": "Which thermometric property is used in a resistance thermometer?",
+  "formula": "",
+  "options": [
+   "Electrical resistance",
+   "Pressure of gas",
+   "Length of liquid column",
+   "EMF"
+  ],
+  "answer": 0,
+  "explain": "Resistance thermometers (RTDs) use change in electrical resistance with temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ef61a589-c06d-4fef-8b7e-30a88083ff55",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Temperature Scales",
+  "prompt": "Absolute temperature scale (Kelvin) zero corresponds to:",
+  "formula": "T(K) = T(°C) + 273.15",
+  "options": [
+   "–100°C",
+   "–273.15°C",
+   "–373.15°C",
+   "0°C"
+  ],
+  "answer": 1,
+  "explain": "Absolute zero = –273.15°C; the lowest possible temperature theoretically.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "312a083c-5421-4896-babc-8f54477d1256",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry",
+  "prompt": "In calorimetry, water equivalent of a calorimeter has unit:",
+  "formula": "",
+  "options": [
+   "Joule",
+   "Kelvin",
+   "Joule/kg",
+   "kg"
+  ],
+  "answer": 3,
+  "explain": "Water equivalent = mass of water that has same heat capacity as calorimeter; unit is kg.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "649a2521-43e9-4e96-ae56-68a6e0dbb32b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "Stefan's law: if radius of a black-body sphere doubles (T same), power radiated:",
+  "formula": "P = σT⁴·A",
+  "options": [
+   "16 times",
+   "Quadruples",
+   "8 times",
+   "Doubles"
+  ],
+  "answer": 1,
+  "explain": "A = 4πr²; doubling r → A×4, so P quadruples (factor 4).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e672a4ab-d516-40b1-9a4d-c3cfb16cc6ab",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation/Cooling",
+  "prompt": "Newton's law of cooling is valid when temperature excess over surroundings is:",
+  "formula": "dθ/dt = –k(θ – θ₀)",
+  "options": [
+   "Any value",
+   "Very large",
+   "Small",
+   "Equal to surroundings"
+  ],
+  "answer": 2,
+  "explain": "Newton's cooling is an approximation of Stefan's law valid only for small ΔT.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "afef8cb4-c406-4e12-9b78-ce505d01550f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "For a perfect blackbody, absorptivity a equals:",
+  "formula": "",
+  "options": [
+   "Between 0 and 1",
+   "0.5",
+   "0",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "A perfect black body absorbs all incident radiation; absorptivity = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "58a0e20e-eff1-4023-b619-9449bf11aca7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase Change",
+  "prompt": "Cooking in a pressure cooker is faster because:",
+  "formula": "",
+  "options": [
+   "More convection occurs",
+   "Heat is reflected back",
+   "Higher pressure raises boiling point",
+   "Metal conducts better"
+  ],
+  "answer": 2,
+  "explain": "Increased pressure raises boiling point of water above 100°C, cooking food faster.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "3d99c6f6-ceb2-409c-8f5b-b0c33688a03d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Heat, temperature and temperature scales",
+  "prompt": "Kelvin & Celsius relation:",
+  "formula": "T(K) = T(°C) + 273.15",
+  "options": [
+   "T = °C − 273.15",
+   "T = °C × 1.8",
+   "T = °C + 273.15",
+   "T = °C + 255"
+  ],
+  "answer": 2,
+  "explain": "Absolute temperature T in kelvin equals Celsius temperature plus 273.15.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5dc8f677-0d26-45e3-9054-c6be4b011577",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Kirchhoff's law of radiation",
+  "prompt": "For a perfect blackbody, reflectivity r equals:",
+  "formula": "",
+  "options": [
+   "0",
+   "Depends on colour",
+   "1",
+   "0.5"
+  ],
+  "answer": 0,
+  "explain": "A perfect blackbody absorbs all radiation, so reflectivity = 0 and absorptivity = 1.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "27b99e75-b40d-4c56-a074-cf541f1364f5",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Change in volume on heating a solid of volume V, coeff γ, by ΔT:",
+  "formula": "ΔV = γ V ΔT",
+  "options": [
+   "2α V ΔT",
+   "γ V ΔT",
+   "α V ΔT",
+   "γ V / ΔT"
+  ],
+  "answer": 1,
+  "explain": "Volumetric expansion: ΔV = γ V ΔT where γ ≈ 3α for isotropic solids.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "f1027fae-4dd6-4f07-b507-f3430389fe77",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Kirchhoff's law of radiation",
+  "prompt": "A blackbody absorbs 100% of incident radiation. Its absorptance a =",
+  "formula": "a = 1",
+  "options": [
+   "Depends on temperature",
+   "0",
+   "0.5",
+   "1"
+  ],
+  "answer": 3,
+  "explain": "By definition, a perfect blackbody has absorptance a = 1 at all wavelengths.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "80a2d3d0-3cbc-4054-b770-949957cd1ff6",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "Specific heat of ice (approximate) in SI:",
+  "formula": "",
+  "options": [
+   "500 J kg⁻¹K⁻¹",
+   "840 J kg⁻¹K⁻¹",
+   "2100 J kg⁻¹K⁻¹",
+   "4200 J kg⁻¹K⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Specific heat of ice ≈ 2100 J kg⁻¹K⁻¹, half that of liquid water.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a47349a5-71bb-4d8e-bb2f-5bc110d6afd3",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "Molar heat capacity at const pressure for monatomic ideal gas:",
+  "formula": "Cₚ = (5/2)R",
+  "options": [
+   "(5/2)R",
+   "(3/2)R",
+   "(7/2)R",
+   "3R"
+  ],
+  "answer": 0,
+  "explain": "For monatomic gas, Cₚ = Cᵥ + R = (3/2)R + R = (5/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ae4d33b8-9e0f-45cd-9480-f3069467ace0",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "For diatomic ideal gas (rigid), Cᵥ =",
+  "formula": "Cᵥ = (5/2)R",
+  "options": [
+   "(3/2)R",
+   "(7/2)R",
+   "(5/2)R",
+   "2R"
+  ],
+  "answer": 2,
+  "explain": "Diatomic rigid gas has 5 degrees of freedom, so Cᵥ = (5/2)R.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5cff9566-1301-488b-b2c5-5cf50eaf0641",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "Ratio γ = Cₚ/Cᵥ for monatomic ideal gas:",
+  "formula": "γ = 5/3",
+  "options": [
+   "5/3",
+   "7/5",
+   "6/5",
+   "4/3"
+  ],
+  "answer": 0,
+  "explain": "For monatomic gas, γ = Cₚ/Cᵥ = (5/2)R / (3/2)R = 5/3 ≈ 1.67.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "4ece0a82-76f9-4b15-9fd1-d04d14471aae",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "Heat required Q to raise mass m by ΔT with specific heat c:",
+  "formula": "Q = mcΔT",
+  "options": [
+   "mc/ΔT",
+   "mcΔT",
+   "mγΔT",
+   "mc²ΔT"
+  ],
+  "answer": 1,
+  "explain": "Fundamental calorimetry relation: Q = mcΔT defines specific heat c.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "925a2467-392e-469e-acdd-04a85515be40",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "The SI unit of heat capacity (of a body) is:",
+  "formula": "",
+  "options": [
+   "cal K⁻¹",
+   "J mol⁻¹K⁻¹",
+   "J kg⁻¹K⁻¹",
+   "J K⁻¹"
+  ],
+  "answer": 3,
+  "explain": "Heat capacity = Q/ΔT; its SI unit is joule per kelvin (J K⁻¹).",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "86d260e1-ddc4-4490-8687-1cfc67c7f79c",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal resistance: series/parallel rods",
+  "prompt": "For conduction through composite wall (2 slabs), interface condition is:",
+  "formula": "H₁ = H₂ (steady state)",
+  "options": [
+   "Area differs",
+   "Temperature gradient is equal",
+   "Heat current is equal",
+   "K values are equal"
+  ],
+  "answer": 2,
+  "explain": "In steady-state series conduction, heat current H = KA(ΔT/L) is same through both slabs.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7051b116-006d-4d79-9a9c-f91cc9afb402",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Dimensional formula of thermal conductivity K:",
+  "formula": "",
+  "options": [
+   "M L T⁻² θ⁻¹",
+   "M L T⁻³ θ⁻¹",
+   "M L² T⁻³ θ⁻¹",
+   "M L² T⁻² θ⁻¹"
+  ],
+  "answer": 1,
+  "explain": "K = Q·L/(A·ΔT·t) → [M·L·T⁻³·θ⁻¹]; θ represents temperature dimension.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "13c8d544-0bbd-4b17-ba0a-1d93c34f1c84",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Anomalous expansion of water",
+  "prompt": "At what temperature does water have minimum volume (maximum density)?",
+  "formula": "",
+  "options": [
+   "0°C",
+   "−4°C",
+   "4°C",
+   "100°C"
+  ],
+  "answer": 2,
+  "explain": "Water shows anomalous expansion; density is maximum (volume minimum) at 4°C.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "81dfaa8a-d347-434a-aebb-7a063ce462bc",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Calorimetry and principle of mixtures",
+  "prompt": "Which quantity is conserved in calorimetry (no heat loss to surroundings)?",
+  "formula": "ΣQ = 0",
+  "options": [
+   "Total entropy",
+   "Total mass",
+   "Total temperature",
+   "Total heat (ΣQ = 0)"
+  ],
+  "answer": 3,
+  "explain": "Calorimetry principle: heat gained by cold body equals heat lost by hot body, ΣQ = 0.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "10e01005-3cb3-4700-8330-9117c29c5849",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "Peak wavelength from a human body (T ≈ 310 K) lies in which region?",
+  "formula": "λ_max = b/T",
+  "options": [
+   "Visible (~0.5 μm)",
+   "Infrared (~9.3 μm)",
+   "UV (~0.3 μm)",
+   "Microwave (~1 mm)"
+  ],
+  "answer": 1,
+  "explain": "Using Wien's law: λ_max = 2.9×10⁻³/310 ≈ 9.3 μm, which is infrared.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "eb94757d-0a99-4146-9e2c-f9bd3517753b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan-Boltzmann law and emissivity",
+  "prompt": "Emissive power of a real body vs blackbody at same T:",
+  "formula": "E_real = e·E_black",
+  "options": [
+   "E_real > E_black",
+   "No fixed relation",
+   "E_real = E_black",
+   "E_real < E_black (e < 1)"
+  ],
+  "answer": 3,
+  "explain": "Real body emissivity e < 1, so it emits less than a blackbody at the same temperature.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9a2799f1-77ac-4ef4-a7c7-2ca575f4b9bb",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "During boiling at constant pressure, temperature of water:",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases steadily",
+   "Remains constant",
+   "Fluctuates"
+  ],
+  "answer": 2,
+  "explain": "During phase change (boiling), supplied heat goes as latent heat; temperature stays constant.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a9e291b8-e438-4fec-9bab-e8f71ebcb8c7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Conduction",
+  "prompt": "Heat Q flows in time t through rod: Q/t = KA(ΔT)/L. If L doubles, Q/t becomes?",
+  "formula": "Q/t = KAΔt/L",
+  "options": [
+   "Double",
+   "Half",
+   "Quarter",
+   "Same"
+  ],
+  "answer": 1,
+  "explain": "Heat current inversely proportional to length; doubling L halves Q/t.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "dd193bf9-6200-4127-822f-03f069ff72a2",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Expansion of Liquids",
+  "prompt": "Coefficient of real (absolute) expansion of liquid γ_real relates to apparent γ_app as:",
+  "formula": "γ_real = γ_app + γ_glass",
+  "options": [
+   "γ_real = γ_app + γ_vessel",
+   "γ_real = γ_app × γ_vessel",
+   "γ_real = γ_app − γ_vessel",
+   "γ_real = γ_app / γ_vessel"
+  ],
+  "answer": 0,
+  "explain": "Apparent expansion = real expansion of liquid − expansion of vessel material.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "a37af507-6f48-4d8f-ad92-10e1d0334829",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan–Boltzmann Law",
+  "prompt": "If a black body is at temperature T, the total energy emitted per unit area per second is:",
+  "formula": "E = σT⁴",
+  "options": [
+   "σT²",
+   "σT⁴",
+   "σT³",
+   "4σT⁴"
+  ],
+  "answer": 1,
+  "explain": "Stefan–Boltzmann law: emissive power per unit area = σT⁴ for a perfect blackbody.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d55eda55-9cfe-4d50-bba2-d54e7594c88b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Molar Heat Capacity",
+  "prompt": "For a diatomic gas (non-rigid, includes vibrational), Cᵥ = ?",
+  "formula": "Cᵥ = (7/2)R",
+  "options": [
+   "(9/2)R",
+   "(5/2)R",
+   "(3/2)R",
+   "(7/2)R"
+  ],
+  "answer": 3,
+  "explain": "Non-rigid diatomic: 5 translational+rotational + 2 vibrational DOF → Cᵥ = 7R/2.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b33da935-302b-434a-a581-12cea4e4e4e2",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Molar Heat Capacity",
+  "prompt": "γ = Cₚ/Cᵥ for a diatomic ideal gas (rigid) is:",
+  "formula": "γ = 7/5",
+  "options": [
+   "5/3 ≈ 1.67",
+   "4/3 ≈ 1.33",
+   "8/5 = 1.6",
+   "7/5 = 1.4"
+  ],
+  "answer": 3,
+  "explain": "Rigid diatomic: Cᵥ = 5R/2, Cₚ = 7R/2, so γ = 7/5 = 1.4.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "01be069a-b80e-442e-af50-c3157163e025",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Molar Heat Capacity",
+  "prompt": "Cₚ − Cᵥ for one mole of any ideal gas equals:",
+  "formula": "Cₚ − Cᵥ = R",
+  "options": [
+   "R/2",
+   "3R/2",
+   "2R",
+   "R"
+  ],
+  "answer": 3,
+  "explain": "Meyer's relation: Cₚ − Cᵥ = R for one mole of ideal gas.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ab3e4ccf-24a3-4b1f-8198-93eb1f2efece",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Stress",
+  "prompt": "Thermal stress in a clamped rod is σ_stress = YαΔT. If ΔT doubles, stress:",
+  "formula": "σ = YαΔT",
+  "options": [
+   "Quadruples",
+   "Halves",
+   "Unchanged",
+   "Doubles"
+  ],
+  "answer": 3,
+  "explain": "Thermal stress is directly proportional to ΔT; doubling ΔT doubles the stress.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "e35348ed-f332-440f-9d4e-29ce0008fcbf",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Radiation",
+  "prompt": "Emissive power E of a surface vs that of a blackbody E_b at same T: for real body,",
+  "formula": "E = eE_b",
+  "options": [
+   "E = e·E_b, e > 1",
+   "E = e·E_b, e < 1",
+   "E > E_b",
+   "E = E_b"
+  ],
+  "answer": 1,
+  "explain": "Emissivity e ∈ (0,1) for real bodies, so E = eE_b < E_b.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "9ef6a952-fb82-4ecc-9e1a-3ea66985e741",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's Displacement Law",
+  "prompt": "If a black body radiates maximum at λ_max, and temperature is tripled, new λ_max is:",
+  "formula": "λ_max ∝ 1/T",
+  "options": [
+   "3λ_max",
+   "λ_max/3",
+   "λ_max/9",
+   "9λ_max"
+  ],
+  "answer": 1,
+  "explain": "Wien's law: λ_max ∝ 1/T; tripling T reduces λ_max by factor 3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "90288461-565f-4bda-8065-f6b71d29b7ae",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan–Boltzmann Law",
+  "prompt": "Rate of cooling of a body depends on surface area A. If A doubles (same T, ε), rate:",
+  "formula": "P = εσAT⁴",
+  "options": [
+   "Unchanged",
+   "Doubles",
+   "Quadruples",
+   "Halves"
+  ],
+  "answer": 1,
+  "explain": "Stefan's law: P ∝ A; doubling surface area doubles the rate of radiation heat loss.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5519cb97-6ac7-41e6-bbfa-74373f863fdc",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Molar Heat Capacity",
+  "prompt": "Specific heat of a gas at constant pressure Cₚ is always ________ Cᵥ.",
+  "formula": "Cₚ = Cᵥ + R",
+  "options": [
+   "Less than",
+   "Greater than",
+   "Equal to",
+   "Half of"
+  ],
+  "answer": 1,
+  "explain": "At constant pressure, extra work R per mole is done, so Cₚ = Cᵥ + R > Cᵥ.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "b46618a3-d15f-4fd5-b08d-45961c5f9a2d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal Conduction (Series)",
+  "prompt": "If two identical rods of K₁ and K₂ are joined in series, heat current is same. Then:",
+  "formula": "",
+  "options": [
+   "Temperature drop ∝ 1/K",
+   "Depends on area",
+   "Temperature drop is equal",
+   "Temperature drop ∝ K"
+  ],
+  "answer": 0,
+  "explain": "Same Q/t through series rods: ΔT = (Q/t)(L/KA) ∝ 1/K for identical rods.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "c2851aad-7382-4b40-b712-d41d65932b6b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Temperature Scales",
+  "prompt": "On the Kelvin scale, the lowest possible temperature is 0 K. On Celsius scale this is:",
+  "formula": "T(K) = T(°C) + 273.15",
+  "options": [
+   "−100°C",
+   "0°C",
+   "−32°C",
+   "−273.15°C"
+  ],
+  "answer": 3,
+  "explain": "Absolute zero (0 K) corresponds to −273.15°C by the relation T(K) = T(°C) + 273.15.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "7f7d4bcf-5adf-4c3e-adb0-7b3814666bda",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan-Boltzmann law and emissivity",
+  "prompt": "Emissivity e of a real body is defined as ratio of its emissive power to:",
+  "formula": "e = E/E_b",
+  "options": [
+   "Reflected radiation power",
+   "Emissive power of blackbody at same T",
+   "Emissive power at 0 K",
+   "Absorbed radiation power"
+  ],
+  "answer": 1,
+  "explain": "Emissivity = E_body / E_blackbody at same temperature; 0 < e ≤ 1 for real bodies.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "af8b29fb-8d82-4a34-a41f-3fbf09bc1e80",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "Temperature of sun's surface ≈ 6000 K. Using Wien's law, λ_max ≈",
+  "formula": "λ_max = b/T",
+  "options": [
+   "483 nm (visible range)",
+   "4.83 mm (microwave)",
+   "9.6 μm (infrared)",
+   "96 nm (ultraviolet)"
+  ],
+  "answer": 0,
+  "explain": "b ≈ 2.9×10⁻³ m·K; λ_max = 2.9×10⁻³/6000 ≈ 483 nm, in visible spectrum.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "d39fbb32-ca97-4606-a256-fa7cb56c458d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Thermal stress and expansion applications",
+  "prompt": "A rod is heated but its ends are free. Thermal stress developed is:",
+  "formula": "",
+  "options": [
+   "YαΔT",
+   "αΔT/Y",
+   "YαΔT/L",
+   "Zero"
+  ],
+  "answer": 3,
+  "explain": "Thermal stress arises only when expansion is prevented (clamped). Free ends → no stress.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "acde1aa7-6be8-4f81-86eb-50f1857c1fa1",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Newton's law of cooling: if θ₀ is excess temp, then dθ/dt ∝",
+  "formula": "dθ/dt = −bθ",
+  "options": [
+   "θ² (square of excess temp)",
+   "√θ",
+   "1/θ",
+   "θ (excess temperature)"
+  ],
+  "answer": 3,
+  "explain": "Newton's law: rate of cooling proportional to temperature excess θ over surroundings.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "5764811f-f5ad-4c56-a228-02e44edf9755",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Specific heat and molar heat capacity",
+  "prompt": "For a monatomic ideal gas, ratio of Cₚ/Cᵥ = γ =",
+  "formula": "γ = 5/3",
+  "options": [
+   "5/3",
+   "7/5",
+   "4/3",
+   "3/2"
+  ],
+  "answer": 0,
+  "explain": "Monatomic gas: Cᵥ = 3R/2, Cₚ = 5R/2, so γ = Cₚ/Cᵥ = 5/3.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "577ec95b-abc1-46bf-b5c9-4639e38f165b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan-Boltzmann law and emissivity",
+  "prompt": "The process by which heat is transferred through vacuum is:",
+  "formula": "",
+  "options": [
+   "Advection",
+   "Conduction",
+   "Convection",
+   "Radiation"
+  ],
+  "answer": 3,
+  "explain": "Radiation (electromagnetic waves) needs no medium; conduction and convection need matter.",
+  "review_status": "quick_recall_reviewed_v1",
+  "syllabus": "JEE Main",
+  "verified": 1
+ },
+ {
+  "id": "ab6a882b-9797-49f3-b487-ec2a1a3f28af",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Heat, temperature and temperature scales",
+  "prompt": "Heat and temperature differ: heat is a measure of ___, temperature of ___.",
+  "formula": "",
+  "options": [
+   "energy transferred; hotness of a body",
+   "molecular size; molecular speed",
+   "energy content; thermal conductivity",
+   "hotness; energy transferred"
+  ],
+  "answer": 0,
+  "explain": "Heat is energy in transit due to a temperature difference; temperature indicates the thermal state (hotness) of a body.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3410fead-b76e-4d53-a449-b2c83517f54f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "A bimetallic strip is heated. It bends with the metal of higher α on the",
+  "formula": "",
+  "options": [
+   "convex (outer) side",
+   "concave (inner) side",
+   "side of lower conductivity",
+   "neutral axis, no bending"
+  ],
+  "answer": 0,
+  "explain": "The metal with larger α expands more, so it lies on the outer, convex side.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "10fb963e-6d82-4c85-bf38-995a1baf5120",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "A pendulum clock with a metallic rod runs in summer (temperature rises). The clock:",
+  "formula": "",
+  "options": [
+   "Stops",
+   "Keeps correct time",
+   "Gains time",
+   "Loses time"
+  ],
+  "answer": 3,
+  "explain": "L increases, so T = 2π√(L/g) increases and the clock runs slow.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e4e5e5ba-8ab1-4c12-a003-07fa8f8d4b9d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Thermal stress in a clamped rod, for the same material and ΔT, depends on its length L as",
+  "formula": "",
+  "options": [
+   "Independent of L",
+   "Proportional to L²",
+   "Directly proportional to L",
+   "Inversely proportional to L"
+  ],
+  "answer": 0,
+  "explain": "Stress = YαΔT contains no L.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "669ce371-d733-481d-be7c-550eb19c1f6e",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Invar, used in precision clocks and tapes, is notable for having",
+  "formula": "",
+  "options": [
+   "Very low α",
+   "Negative Young's modulus",
+   "Very high α",
+   "Zero density"
+  ],
+  "answer": 0,
+  "explain": "Invar (Fe–Ni alloy) has a very small α, so it expands very little.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d79314f-1b7f-4dad-9669-619c43f4a937",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Thermal expansion of solids arises due to the",
+  "formula": "",
+  "options": [
+   "Symmetric parabolic potential well",
+   "Increase in atomic mass",
+   "Asymmetric interatomic potential energy curve",
+   "Decrease in number of bonds"
+  ],
+  "answer": 2,
+  "explain": "Anharmonic (asymmetric) PE curve shifts the mean atomic separation with T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5a2435fc-9a1a-4a6f-af65-77f8b7b420aa",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "A solid floats in a liquid with γ_liquid > γ_solid. On heating both, the immersed fraction",
+  "formula": "",
+  "options": [
+   "Decreases",
+   "Increases",
+   "Unchanged",
+   "Becomes zero"
+  ],
+  "answer": 1,
+  "explain": "Fraction = ρ_s/ρ_l; ρ_l falls faster, so the fraction rises.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "85936e29-42e3-4d48-85cd-7add8cc29ff3",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Order of typical volume expansion coefficients:",
+  "formula": "",
+  "options": [
+   "Liquid > gas > solid",
+   "Solid > liquid > gas",
+   "Gas > solid > liquid",
+   "Gas > liquid > solid"
+  ],
+  "answer": 3,
+  "explain": "Gases expand the most and solids the least for the same ΔT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "11fbe602-d4e0-420c-b2af-d23b1f319748",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "A freely rotating metal disc is uniformly heated. Its angular speed",
+  "formula": "",
+  "options": [
+   "Becomes zero",
+   "Unchanged",
+   "Decreases",
+   "Increases"
+  ],
+  "answer": 2,
+  "explain": "I increases as R² grows; angular momentum is conserved, so ω falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "675c1341-0d85-4c11-8db8-a8bfe41e78fd",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "To fit a metal ring of slightly smaller diameter onto a wheel, the ring should be",
+  "formula": "",
+  "options": [
+   "Cooled",
+   "Hammered cold",
+   "Heated",
+   "Kept at 4 °C"
+  ],
+  "answer": 2,
+  "explain": "Heating expands the ring's diameter, letting it slip on; it grips on cooling.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "72293057-995d-47a0-a71c-527355014076",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Among Al, Cu, Fe and glass, the largest linear expansion coefficient belongs to",
+  "formula": "",
+  "options": [
+   "Iron",
+   "Aluminium",
+   "Glass",
+   "Copper"
+  ],
+  "answer": 1,
+  "explain": "α order: Al (~23×10⁻⁶) > Cu (~17×10⁻⁶) > Fe (~12×10⁻⁶) > glass.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3cb5ab6b-0c37-4606-94ea-828c8576ac6b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Fractional change in time period of a simple pendulum when its rod's temperature rises by ΔT:",
+  "formula": "T = 2π√(L/g)",
+  "options": [
+   "αΔT/√2",
+   "αΔT",
+   "½ αΔT",
+   "2αΔT"
+  ],
+  "answer": 2,
+  "explain": "T ∝ √L, so ΔT/T = ½ ΔL/L = ½ αΔT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b047ad1c-fcce-4a8a-8901-404ac1739f96",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "Two rods (L₁, α₁) and (L₂, α₂) keep a constant length difference at all temperatures if",
+  "formula": "ΔL₁ = ΔL₂",
+  "options": [
+   "L₁α₂ = L₂α₁",
+   "L₁α₁ = L₂α₂",
+   "L₁/α₁ = L₂/α₂ ... with α₁ = α₂",
+   "L₁ + L₂ = constant"
+  ],
+  "answer": 1,
+  "explain": "Equal expansions need L₁α₁ΔT = L₂α₂ΔT, so L₁α₁ = L₂α₂.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6fd1b03e-dde0-4c54-ae40-3704e01b94e3",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "A metal plate with a circular hole is heated. The hole's diameter:",
+  "formula": "",
+  "options": [
+   "Increases, as if made of the plate's material",
+   "Decreases, as the plate expands inward",
+   "Stays unchanged",
+   "Increases only if the hole is large"
+  ],
+  "answer": 0,
+  "explain": "A hole expands exactly like a disc of the same material, so its diameter grows with α.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fa0c403b-9a2e-4224-bac5-885b19bcae91",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "On heating a hollow sphere, its cavity volume expands with coefficient:",
+  "formula": "",
+  "options": [
+   "Zero, as the cavity is empty",
+   "3α of the shell material",
+   "γ of the liquid filling it",
+   "α of the shell material"
+  ],
+  "answer": 1,
+  "explain": "A cavity expands as if it were solid material: γ = 3α of the shell.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "77129270-9397-49ab-b86e-ed39aabdac13",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "Apparent expansion of a liquid in a vessel is zero when:",
+  "formula": "",
+  "options": [
+   "γ_liquid = α_vessel",
+   "γ_liquid = 3α_vessel",
+   "γ_liquid = 0",
+   "γ_liquid = 2α_vessel"
+  ],
+  "answer": 1,
+  "explain": "γ_app = γ_real − 3α_vessel, which vanishes when γ_liquid = γ_vessel = 3α.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "97a883ee-2173-4552-80c8-caaf54d4450d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "If γ_liquid < 3α_vessel on heating, the liquid level in the vessel:",
+  "formula": "",
+  "options": [
+   "Remains the same",
+   "First rises then falls",
+   "Falls",
+   "Rises"
+  ],
+  "answer": 2,
+  "explain": "γ_app = γ_real − 3α is negative, so the vessel expands more than the liquid and the level falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "299a86f4-7f14-4a68-b1a3-dc8d3f6f2805",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "For an ideal gas at constant pressure, γ at 0 °C is:",
+  "formula": "",
+  "options": [
+   "1/373 K⁻¹",
+   "3/273 K⁻¹",
+   "273 K⁻¹",
+   "1/273 K⁻¹"
+  ],
+  "answer": 3,
+  "explain": "V ∝ T at constant P, so γ = (1/V)(dV/dT) = 1/T = 1/273 K⁻¹ at 0 °C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0643aeae-91a9-42d8-afd5-cfedbaab61ab",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "For an ideal gas, how do the volume coefficient γ_V and pressure coefficient γ_P (at 0 °C) compare?",
+  "formula": "",
+  "options": [
+   "γ_V = 3γ_P",
+   "γ_V = γ_P = 1/273 K⁻¹",
+   "γ_V = 2γ_P",
+   "γ_V = γ_P/3"
+  ],
+  "answer": 1,
+  "explain": "Both V ∝ T (const P) and P ∝ T (const V) give 1/273 K⁻¹ at 0 °C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6107c45d-6851-4930-85e1-bf4ec981d96b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "Between 0 °C and 4 °C, the volume coefficient γ of water is:",
+  "formula": "",
+  "options": [
+   "Negative",
+   "Positive but small",
+   "Zero throughout",
+   "Equal to 3α of ice"
+  ],
+  "answer": 0,
+  "explain": "Water contracts on heating from 0 to 4 °C (anomalous expansion), so γ < 0 there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1fb1985c-4faa-4361-94bf-2a4efcdbf761",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "Fully constrained cube (bulk modulus B, coefficient α) is heated by ΔT. Pressure developed:",
+  "formula": "",
+  "options": [
+   "3BαΔT",
+   "BαΔT/3",
+   "B/(3αΔT)",
+   "BαΔT"
+  ],
+  "answer": 0,
+  "explain": "ΔP = BγΔT with γ = 3α, since the volume strain αV-type change is 3αΔT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1a7a057b-5a15-4da1-bf45-a9bb29e9b8d7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "Volume coefficient of expansion γ is defined as:",
+  "formula": "",
+  "options": [
+   "(dV/dT)/V²",
+   "dV/dT",
+   "(1/V)(dV/dT) at constant pressure",
+   "V·(dV/dT)"
+  ],
+  "answer": 2,
+  "explain": "γ = ΔV/(V·ΔT): fractional volume change per unit temperature rise, at constant pressure.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e8236537-d088-4aa0-8a0c-65b5384dd53b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "Which expansion coefficient of a liquid is independent of the container material?",
+  "formula": "",
+  "options": [
+   "Real (absolute) γ",
+   "Apparent γ",
+   "γ_real − γ_vessel",
+   "Apparent γ measured in glass"
+  ],
+  "answer": 0,
+  "explain": "Real γ is a property of the liquid alone; apparent γ = γ_real − γ_vessel depends on the vessel.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be07a798-85de-491e-b0ed-ce0e449f878f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "For common substances, the volume coefficient γ of liquids compared with that of solids is typically:",
+  "formula": "",
+  "options": [
+   "Much larger",
+   "About equal",
+   "Much smaller",
+   "Exactly 3 times"
+  ],
+  "answer": 0,
+  "explain": "Solids have γ ~ 10⁻⁵ K⁻¹ while liquids have γ ~ 10⁻³–10⁻⁴ K⁻¹, so liquids expand far more.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "021c3438-951c-4718-a1f8-ce18c1855611",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Relation between alpha, beta and gamma",
+  "prompt": "A crystal has linear coefficients α₁, α₂, α₃ along three perpendicular axes. Its volume coefficient γ is:",
+  "formula": "γ ≈ α₁ + α₂ + α₃",
+  "options": [
+   "(α₁α₂α₃)^(1/3)",
+   "(α₁ + α₂ + α₃)/3",
+   "3α₁α₂α₃",
+   "α₁ + α₂ + α₃"
+  ],
+  "answer": 3,
+  "explain": "V = lₓlᵧl_z, so fractional changes add: γ = α₁ + α₂ + α₃. It reduces to 3α when isotropic.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2bc5d9fe-39cf-4aa5-a9fb-865b91c8a0b1",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Anomalous expansion of water",
+  "prompt": "The anomalous expansion of water between 0 °C and 4 °C is due to:",
+  "formula": "",
+  "options": [
+   "Increase in molecular kinetic energy only",
+   "Decrease in surface tension",
+   "Breaking of ice-like open H-bonded clusters",
+   "Dissociation into H⁺ and OH⁻"
+  ],
+  "answer": 2,
+  "explain": "Heating collapses the open hydrogen-bonded clusters, so molecules pack closer and volume falls.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be07b832-dd60-437e-8dec-7218c036ecf9",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Anomalous expansion of water",
+  "prompt": "On freezing, the volume of water increases by about:",
+  "formula": "",
+  "options": [
+   "25%",
+   "9%",
+   "1%",
+   "50%"
+  ],
+  "answer": 1,
+  "explain": "Ice has density about 917 kg/m³, so water expands about 9% on freezing and ice floats.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "485b020f-090d-47b1-8ffe-f41241c9a683",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "Steam at 100°C scalds worse than water at 100°C because steam:",
+  "formula": "",
+  "options": [
+   "Is at higher temperature",
+   "Releases latent heat on condensing",
+   "Has higher specific heat",
+   "Has higher thermal conductivity"
+  ],
+  "answer": 1,
+  "explain": "Steam gives out 2260 kJ/kg latent heat on condensing, in addition to cooling as water.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b7ca5b75-4de3-43ec-95fb-9e4937450341",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "Increasing pressure on ice at 0°C changes its melting point to:",
+  "formula": "",
+  "options": [
+   "A higher value",
+   "Melting point becomes undefined",
+   "No change",
+   "A lower value"
+  ],
+  "answer": 3,
+  "explain": "Ice contracts on melting, so higher pressure favours water and lowers the melting point (regelation).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d538abc7-5f3c-4065-a1f2-43e5c91e843f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "In the heating curve of ice to steam at constant power, the longest flat portion is for:",
+  "formula": "",
+  "options": [
+   "Heating of water",
+   "Melting of ice",
+   "Boiling of water",
+   "Heating of steam"
+  ],
+  "answer": 2,
+  "explain": "L_v (2260 kJ/kg) is much greater than L_f (336 kJ/kg), so the boiling plateau is the longest.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f29866fb-6199-496a-a128-9063abc34c57",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "During melting at constant temperature, the heat supplied increases mainly the molecules':",
+  "formula": "",
+  "options": [
+   "Rms speed",
+   "Average kinetic energy",
+   "Potential energy",
+   "Translational speed"
+  ],
+  "answer": 2,
+  "explain": "Temperature, and so the average KE, stays fixed. The heat goes into the intermolecular potential energy.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "593d56f8-9864-4905-97fc-04e8ae531f02",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "A liquid boils when its saturated vapour pressure becomes equal to:",
+  "formula": "",
+  "options": [
+   "External pressure",
+   "Triple point pressure",
+   "Critical pressure",
+   "Zero"
+  ],
+  "answer": 0,
+  "explain": "Bubbles can grow only when the vapour pressure inside equals the external pressure.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cdb6cd26-2973-4cc7-b1f9-36f126cbd0fe",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "Above the critical temperature, a gas:",
+  "formula": "",
+  "options": [
+   "Condenses at high pressure",
+   "Solidifies directly",
+   "Cannot be liquefied by pressure alone",
+   "Has zero vapour pressure"
+  ],
+  "answer": 2,
+  "explain": "Above T_c no amount of pressure alone can liquefy the gas.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "871d177e-0a5a-4c5a-ad90-ad8b6899890b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "At constant heating power, the T–t slope for ice compared with water (c_ice ≈ ½c_water) is:",
+  "formula": "",
+  "options": [
+   "Half",
+   "Equal",
+   "Four times",
+   "Twice"
+  ],
+  "answer": 3,
+  "explain": "dT/dt = P/mc, so the slope is inversely proportional to c. Ice has half the c, so its slope is double.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8c808f2d-f071-41cb-90c3-21b7159030dc",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "On the P–T phase diagram of water, the fusion (solid–liquid) curve has:",
+  "formula": "",
+  "options": [
+   "Zero slope",
+   "Negative slope",
+   "Infinite slope",
+   "Positive slope"
+  ],
+  "answer": 1,
+  "explain": "Ice is less dense than water, so the melting point falls with pressure and dP/dT is negative.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f4146821-b3f4-4c4e-9a03-1cd42262329a",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "Triple point temperature of water on the Kelvin scale is:",
+  "formula": "T_tp = 273.16 K",
+  "options": [
+   "273.16 K",
+   "273.15 K",
+   "273.00 K",
+   "272.16 K"
+  ],
+  "answer": 0,
+  "explain": "The triple point of water is 273.16 K (0.01 °C). The Kelvin scale is fixed using this point.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "314f177a-a250-4cec-9cd8-03b2149ff6c0",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "At the triple point of a pure substance, which phases coexist in equilibrium?",
+  "formula": "",
+  "options": [
+   "Solid and vapour only",
+   "Solid and liquid only",
+   "Solid, liquid and vapour",
+   "Liquid and vapour only"
+  ],
+  "answer": 2,
+  "explain": "Triple point: solid, liquid and vapour coexist in equilibrium at one fixed P and T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8b5fe6b3-1497-4441-8419-d23a5cfab84c",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "Solid CO₂ (dry ice) sublimes at 1 atm because its triple point pressure is:",
+  "formula": "",
+  "options": [
+   "Greater than 1 atm",
+   "Equal to 1 atm",
+   "Equal to its critical pressure",
+   "Less than 1 atm"
+  ],
+  "answer": 0,
+  "explain": "CO₂ triple point pressure is about 5.1 atm, above 1 atm, so no liquid forms at 1 atm.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2e3f48d3-5fe0-4219-a92a-bf834da6a6e7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "The vaporisation (liquid–vapour) curve on a P–T diagram terminates at the:",
+  "formula": "",
+  "options": [
+   "Sublimation point",
+   "Critical point",
+   "Triple point",
+   "Normal boiling point"
+  ],
+  "answer": 1,
+  "explain": "Beyond the critical point, liquid and gas cannot be distinguished, so the curve ends there.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3c9c8722-37dd-4b14-b03a-5c88ab13ff15",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "If pressure is below the triple point pressure, heating a solid at constant pressure leads to:",
+  "formula": "",
+  "options": [
+   "Melting only",
+   "No phase change",
+   "Direct sublimation to vapour",
+   "Melting, then boiling"
+  ],
+  "answer": 2,
+  "explain": "Below the triple point pressure, no liquid phase exists. The solid changes directly to vapour.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "46aa9ffc-4d2e-4458-ae51-b7f66747701a",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "Approximate pressure at the triple point of water is:",
+  "formula": "",
+  "options": [
+   "1 atm",
+   "218 atm",
+   "0.006 atm (≈ 611 Pa)",
+   "6 atm"
+  ],
+  "answer": 2,
+  "explain": "Water's triple point is at about 611 Pa (≈ 0.006 atm). 218 atm is its critical pressure.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fff29356-5d0c-4427-80b9-0a3163efc3e4",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "For a pure substance, solid–liquid–vapour equilibrium occurs at how many (P, T) values?",
+  "formula": "",
+  "options": [
+   "Along a line",
+   "Any P at a suitable T",
+   "Two",
+   "Exactly one"
+  ],
+  "answer": 3,
+  "explain": "The triple point is a unique point on the P–T diagram, so P and T are both fixed.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "53339c13-82d4-48d1-a075-c96a15c1b2e7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Phase diagram, triple point, sublimation",
+  "prompt": "On a P–T phase diagram, the sublimation curve separates which two phases?",
+  "formula": "",
+  "options": [
+   "Liquid and supercritical fluid",
+   "Liquid and vapour",
+   "Solid and liquid",
+   "Solid and vapour"
+  ],
+  "answer": 3,
+  "explain": "The sublimation curve runs from the origin to the triple point and separates the solid and vapour phases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "daf1a42b-0eb8-4beb-86d9-213ccab421b7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "SI unit of thermal resistance R = L/(KA) of a rod is:",
+  "formula": "R = L/(KA)",
+  "options": [
+   "J K⁻¹",
+   "W m⁻¹ K⁻¹",
+   "K W⁻¹",
+   "W K⁻¹"
+  ],
+  "answer": 2,
+  "explain": "R = ΔT / (heat current), so the unit is kelvin per watt (K W⁻¹).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d184776e-e01e-41af-8bfc-21334b4acae3",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "For metals, the Wiedemann–Franz law states that K/σ is proportional to:",
+  "formula": "K/σ ∝ T",
+  "options": [
+   "T²",
+   "1/T",
+   "T",
+   "T⁰ (constant)"
+  ],
+  "answer": 2,
+  "explain": "K/(σT) is a constant (the Lorenz number) for metals, so K/σ ∝ absolute temperature T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "17f51501-2c17-4b36-a338-7e9ad93cb23f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "“Steady state” in conduction along a rod means:",
+  "formula": "",
+  "options": [
+   "Rod absorbs no heat; T at each point is constant",
+   "Heat current is zero",
+   "Temperature changes uniformly",
+   "Temperature is the same everywhere"
+  ],
+  "answer": 0,
+  "explain": "At steady state each section's temperature is constant in time, so the rod absorbs no heat and the current is uniform.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c62a87bf-8847-4302-b7cd-d39e0e0a051b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Heat current through a cylindrical shell (radii r₁ < r₂, length l) has which factor in the denominator?",
+  "formula": "",
+  "options": [
+   "(r₂ − r₁)",
+   "ln(r₂/r₁)",
+   "r₁r₂",
+   "(r₂² − r₁²)"
+  ],
+  "answer": 1,
+  "explain": "H = 2πKl(T₁ − T₂)/ln(r₂/r₁).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8fefec04-9944-452d-9c0f-6fd5ed1e66d8",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "SI unit of thermal diffusivity K/(ρs) is:",
+  "formula": "K/(ρs)",
+  "options": [
+   "W m⁻¹ K⁻¹",
+   "m s⁻¹",
+   "m² s⁻¹",
+   "J kg⁻¹ K⁻¹"
+  ],
+  "answer": 2,
+  "explain": "Thermal diffusivity has the dimensions of length²/time, so its unit is m² s⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84b7e44b-0e6c-49a3-bf44-d79e8c28a1b2",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Ice on a lake grows from 0 to x in time t₁, then from x to 2x in time t₂. t₁ : t₂ = ?",
+  "formula": "",
+  "options": [
+   "1 : 3",
+   "1 : 2",
+   "1 : 1",
+   "1 : 4"
+  ],
+  "answer": 0,
+  "explain": "Since t ∝ x², the time to reach 2x is 4t₁, so t₂ = 3t₁.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5dbaaa11-cb9e-4e01-bda0-f85b183d01a2",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "In Fourier's law dQ/dt = −KA(dT/dx), the negative sign shows that:",
+  "formula": "",
+  "options": [
+   "Heat flows from higher to lower temperature",
+   "Heat flow is opposite to area",
+   "K is negative",
+   "Temperature falls with time"
+  ],
+  "answer": 0,
+  "explain": "Heat flows down the temperature gradient, opposite to the direction of increasing T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "be13ae93-89d5-4f42-adf8-a415b7b22f80",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Two rods of different K, same A, in series show T vs x. The rod with lower K has a:",
+  "formula": "",
+  "options": [
+   "Steeper slope",
+   "Zero slope",
+   "Gentler slope",
+   "Curved profile"
+  ],
+  "answer": 0,
+  "explain": "Heat current is the same, so K·|dT/dx| is constant, and lower K means a larger gradient.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "feeca9ad-63e1-4a6d-8c35-cd0133e9ab1d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "In metals, heat conduction is mainly due to:",
+  "formula": "",
+  "options": [
+   "Photons",
+   "Convection currents",
+   "Lattice vibrations only",
+   "Free electrons"
+  ],
+  "answer": 3,
+  "explain": "Free electrons carry most of the heat in metals, which is why good electrical conductors are also good heat conductors.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d4607d3a-5dd6-476c-95d5-70ca8f694d20",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Conduction of heat cannot take place through:",
+  "formula": "",
+  "options": [
+   "Gases",
+   "Vacuum",
+   "Liquids",
+   "Solids"
+  ],
+  "answer": 1,
+  "explain": "Conduction needs a material medium for particle-to-particle energy transfer.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f6d941cf-8f03-4e14-86d4-de1d8d1d9e0d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Order of typical thermal conductivity K for solid metals, liquids and gases:",
+  "formula": "",
+  "options": [
+   "Gases > liquids > metals",
+   "Metals > liquids > gases",
+   "Metals > gases > liquids",
+   "Liquids > metals > gases"
+  ],
+  "answer": 1,
+  "explain": "Free electrons make metals best; gases have widely spaced molecules, so the lowest K.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a5e1b611-3c99-4977-8066-f33303c7c789",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "With rise in temperature, the thermal conductivity of a gas:",
+  "formula": "",
+  "options": [
+   "Increases",
+   "Falls to zero",
+   "Decreases",
+   "Stays constant"
+  ],
+  "answer": 0,
+  "explain": "From kinetic theory K ∝ √T for gases, so K increases with T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f3e9ee2b-0bfd-4a3d-bd6d-8c5dc9d9dfe5",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "The curved surface of a rod is lagged (insulated) in a conduction experiment so that:",
+  "formula": "",
+  "options": [
+   "K becomes zero",
+   "Heat flows only radially",
+   "Heat flows only along the length",
+   "Temperature becomes uniform"
+  ],
+  "answer": 2,
+  "explain": "Lagging prevents lateral heat loss, so the heat current is the same along the rod.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b0dc1569-1a50-40ce-ba9a-72ebf9697fe5",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Thermal conductivity of a pure metal at ordinary temperatures, with rise in temperature, generally:",
+  "formula": "",
+  "options": [
+   "Stays exactly constant",
+   "Decreases slightly",
+   "Increases linearly",
+   "Increases exponentially"
+  ],
+  "answer": 1,
+  "explain": "In pure metals, more electron scattering at higher T lowers K slightly.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc59ed97-a74b-4e10-98eb-7e184a06c22f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Convection: natural and forced",
+  "prompt": "In natural convection, the fluid motion is caused by:",
+  "formula": "",
+  "options": [
+   "Viscous drag at walls",
+   "A pump or fan",
+   "Density difference due to temperature",
+   "Surface tension gradient"
+  ],
+  "answer": 2,
+  "explain": "Heated fluid expands, becomes less dense and rises under gravity (buoyancy), giving natural convection.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "3f226ea2-2401-43ae-b07f-ea748d33e488",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Convection: natural and forced",
+  "prompt": "Forced convection differs from natural convection because the fluid is moved by:",
+  "formula": "",
+  "options": [
+   "Radiation pressure",
+   "An external agency like a fan or pump",
+   "Latent heat",
+   "Gravity only"
+  ],
+  "answer": 1,
+  "explain": "In forced convection an external device (fan, pump, blower) drives the fluid flow.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8794035d-0c8c-4b7c-8d42-c13b08ef93aa",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Convection: natural and forced",
+  "prompt": "During the day, a sea breeze blows from sea to land because land:",
+  "formula": "",
+  "options": [
+   "Heats slower, so air above it rises",
+   "Cools faster, so air sinks",
+   "Has higher specific heat than water",
+   "Heats faster, so air above it rises"
+  ],
+  "answer": 3,
+  "explain": "Land has lower specific heat, so it warms faster; hot air rises and cooler sea air flows in.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5e3d103b-630c-483a-80a4-c59ac4c05124",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Convection: natural and forced",
+  "prompt": "Which is correct for a land breeze at night?",
+  "formula": "",
+  "options": [
+   "Wind blows from land to sea",
+   "Wind blows only upward over land",
+   "No wind blows",
+   "Wind blows from sea to land"
+  ],
+  "answer": 0,
+  "explain": "Land cools faster at night; air over the warmer sea rises, and air flows from land to sea.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c006229c-b8ab-498c-ae74-2e91df411538",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Convection: natural and forced",
+  "prompt": "To heat a liquid in a container efficiently by convection, the heater is placed:",
+  "formula": "",
+  "options": [
+   "At the middle only",
+   "At the top",
+   "Outside, touching the lid",
+   "At the bottom"
+  ],
+  "answer": 3,
+  "explain": "Heated bottom liquid rises and cooler liquid sinks, setting up convection currents that heat the whole liquid.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "b48f4ec3-e2fe-4267-927b-ff339993bae5",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Convection: natural and forced",
+  "prompt": "Water in a test tube heated at the top boils there while the bottom stays cool because:",
+  "formula": "",
+  "options": [
+   "Hot water cannot rise; convection is absent",
+   "Water radiates downward strongly",
+   "Water has high conductivity",
+   "Convection is strongest at the top"
+  ],
+  "answer": 0,
+  "explain": "Hot light water stays on top, so no convection occurs; water is a poor conductor.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "089a8392-adc0-4d47-96ea-beff4aa4d7ee",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Convection: natural and forced",
+  "prompt": "A refrigerator's freezer is kept at the top mainly because the cold air around it:",
+  "formula": "",
+  "options": [
+   "Sinks, setting up convection currents",
+   "Rises and spreads through the interior",
+   "Conducts heat well to the lower shelves",
+   "Radiates heat strongly to the food"
+  ],
+  "answer": 0,
+  "explain": "Cold air is denser and sinks while warm air rises, so natural convection cools the whole interior.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bef7739b-d0a5-4030-ac93-f92c861f3191",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan-Boltzmann law and emissivity",
+  "prompt": "In Stefan's law, the temperature T must be expressed in:",
+  "formula": "",
+  "options": [
+   "Kelvin",
+   "Celsius",
+   "Any scale",
+   "Fahrenheit"
+  ],
+  "answer": 0,
+  "explain": "P ∝ T⁴ uses absolute temperature in kelvin.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "75fc6e9d-e2df-4e8b-a228-7d0dfddaf34f",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "On heating a blackbody, its peak of the spectral curve shifts toward:",
+  "formula": "",
+  "options": [
+   "Shorter wavelength, with lower peak height",
+   "Longer wavelength, with lower peak height",
+   "Shorter wavelength, with higher peak height",
+   "Longer wavelength, with higher peak height"
+  ],
+  "answer": 2,
+  "explain": "By Wien's law the peak moves to shorter λ, and Eλ at the peak rises (∝ T⁵).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "5861d14a-66b6-48f5-823c-75ab8bac458d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "Kirchhoff's law states that, at a given T and λ, the ratio of emissive to absorptive power:",
+  "formula": "e_λ / a_λ = E_λ(blackbody)",
+  "options": [
+   "Is the same for all bodies",
+   "Is proportional to the body's mass",
+   "Is zero for good reflectors",
+   "Is proportional to the body's area"
+  ],
+  "answer": 0,
+  "explain": "The ratio is universal and equals the blackbody's emissive power, so good absorbers are good emitters.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "79eb9c8a-0cf4-4444-8296-d88c9d0e1513",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "Which arrangement best approximates a practical blackbody?",
+  "formula": "",
+  "options": [
+   "Polished silver sphere",
+   "White-painted metal plate",
+   "Thin glass sheet",
+   "Small hole in a blackened cavity"
+  ],
+  "answer": 3,
+  "explain": "Radiation entering a small hole is trapped by repeated absorption, as in Ferry's blackbody.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "80ee279a-4b03-475a-9ca8-fdb92aa666de",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "Radiation emitted by a blackbody at a given temperature depends on:",
+  "formula": "",
+  "options": [
+   "Its temperature only",
+   "Its material only",
+   "Its colour and temperature",
+   "Its material and temperature"
+  ],
+  "answer": 0,
+  "explain": "Blackbody radiation is universal and depends only on temperature, not on the material.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e08967c1-bfe0-4017-93d1-aacda40f6248",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Kirchhoff's law of radiation",
+  "prompt": "Emissivity of a body at a given temperature and wavelength numerically equals its",
+  "formula": "ε = e/E_b = a",
+  "options": [
+   "Reflectivity",
+   "Specific heat",
+   "Absorptivity",
+   "Transmittance"
+  ],
+  "answer": 2,
+  "explain": "From Kirchhoff's law e/E_b = a, so emissivity equals absorptivity at the same λ and T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "8612e9e9-838f-460b-923e-417fc69fc6eb",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Kirchhoff's law of radiation",
+  "prompt": "Dark lines in the solar spectrum (Fraunhofer lines) are explained by which law?",
+  "formula": "",
+  "options": [
+   "Kirchhoff's law of radiation",
+   "Stefan's law",
+   "Wien's displacement law",
+   "Newton's law of cooling"
+  ],
+  "answer": 0,
+  "explain": "Cooler gases in the solar atmosphere absorb the same wavelengths they would emit.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2c0fb4d6-3084-4773-a676-e0f2be468483",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "The unit of the cooling constant k in dT/dt = −k(T − T₀) is:",
+  "formula": "",
+  "options": [
+   "s⁻¹",
+   "s",
+   "K s⁻¹",
+   "J s⁻¹"
+  ],
+  "answer": 0,
+  "explain": "dT/dt and (T − T₀) are both in K-based units, so k has unit s⁻¹.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea12e428-ef61-4ade-8e8a-addd46685421",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "In the average-temperature form of Newton's law, body temperature is replaced by:",
+  "formula": "(T₁−T₂)/t = K[(T₁+T₂)/2 − T₀]",
+  "options": [
+   "Geometric mean √(T₁T₂)",
+   "Mean of T₁ and T₂",
+   "T₁ only",
+   "T₂ only"
+  ],
+  "answer": 1,
+  "explain": "For a small fall, the mean temperature (T₁+T₂)/2 is used.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f36d6adb-cc07-48be-adfa-4bc65af31321",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Effect of larger exposed surface area on the cooling constant k (other factors same):",
+  "formula": "k = hA/(mc)",
+  "options": [
+   "k increases",
+   "k unchanged",
+   "k becomes zero",
+   "k decreases"
+  ],
+  "answer": 0,
+  "explain": "k ∝ A, so greater area means faster cooling.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a2d6ea2b-9955-4831-bed7-2b3384126ede",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Two solid spheres of same material and surface, radii r and 2r, are at same temperature. Initial cooling rates ratio:",
+  "formula": "dT/dt ∝ A/m ∝ 1/r",
+  "options": [
+   "2 : 1",
+   "4 : 1",
+   "1 : 4",
+   "1 : 2"
+  ],
+  "answer": 0,
+  "explain": "Rate of fall of temperature ∝ 1/r, so the smaller sphere cools twice as fast.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "805ad196-72a6-406e-ba91-0ce302fcfad0",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Newton's law of cooling is strictly valid for heat loss mainly by:",
+  "formula": "",
+  "options": [
+   "Latent heat transfer",
+   "Free space radiation only",
+   "Conduction in solids",
+   "Forced convection"
+  ],
+  "answer": 3,
+  "explain": "Newton's law is exact for forced convection (wind) and approximate for small excess.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a8c122ab-53d5-4764-8511-45bea262be20",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "A body colder than its surroundings (T < T₀) in Newton's law will:",
+  "formula": "",
+  "options": [
+   "Keep cooling",
+   "Stay at constant temperature",
+   "Warm exponentially toward T₀",
+   "Warm linearly with time"
+  ],
+  "answer": 2,
+  "explain": "dT/dt = −k(T − T₀) is positive, giving exponential approach to T₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "c7dcbdc9-5f59-43fc-8438-a72529cb330d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "For a given liquid in the same container, doubling its mass changes the cooling constant k to:",
+  "formula": "k = hA/(mc)",
+  "options": [
+   "2k",
+   "k/2",
+   "k",
+   "4k"
+  ],
+  "answer": 1,
+  "explain": "k ∝ 1/m, so doubling the mass halves k (if h and A are same).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0189f8ee-05e5-457a-820d-480c1f9aca4b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Two liquids of equal mass in identical containers differ in specific heat. The one with larger c has:",
+  "formula": "k = hA/(mc)",
+  "options": [
+   "k independent of mass",
+   "Same k",
+   "Larger k",
+   "Smaller k"
+  ],
+  "answer": 3,
+  "explain": "k ∝ 1/(mc), so higher specific heat gives smaller k and slower cooling.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0eab5297-311a-46fc-8240-0c176984a946",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "A blackened surface compared with a polished one (same area) has cooling constant k:",
+  "formula": "",
+  "options": [
+   "Zero",
+   "Equal",
+   "Smaller",
+   "Larger"
+  ],
+  "answer": 3,
+  "explain": "Blackened surface has higher emissivity, so it loses heat faster and k is larger.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "228d8087-8f18-4794-8423-bfb5f3d08282",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Increasing the wind speed over a hot body has what effect on k in Newton's cooling?",
+  "formula": "",
+  "options": [
+   "k unchanged",
+   "k decreases",
+   "k increases",
+   "k becomes zero"
+  ],
+  "answer": 2,
+  "explain": "Faster air flow raises the heat transfer coefficient h, hence k = hA/(mc) increases.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "95c74c9b-9f9b-4bd8-acda-7daa07b857c6",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "In a calorimetry experiment, heat loss to the surroundings is corrected using:",
+  "formula": "",
+  "options": [
+   "Newton's law of cooling",
+   "Wien's displacement law",
+   "Dulong–Petit law",
+   "Kirchhoff's law"
+  ],
+  "answer": 0,
+  "explain": "The cooling correction in calorimetry is based on Newton's law of cooling.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "f11c70ad-3504-42af-9e21-d174383afb89",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "On the T–t cooling curve for a hot body, the horizontal asymptote is at:",
+  "formula": "",
+  "options": [
+   "T = 0 K",
+   "T = T₀",
+   "T = Tᵢ/2",
+   "T = Tᵢ/e"
+  ],
+  "answer": 1,
+  "explain": "The temperature decays exponentially toward the surroundings temperature T₀.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "0f5ac800-3950-460b-a34a-7cc2200f41d3",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "For Newton's cooling, which plot against t is a straight line with slope −k?",
+  "formula": "T − T₀ = (Tᵢ − T₀)e^(−kt)",
+  "options": [
+   "1/(T − T₀) versus t",
+   "T versus t",
+   "(T − T₀) versus t",
+   "ln(T − T₀) versus t"
+  ],
+  "answer": 3,
+  "explain": "Taking ln of the solution gives ln(T−T₀) = ln(Tᵢ−T₀) − kt, a straight line of slope −k.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "bc478316-5cb5-4226-9ee5-43a86ca16c63",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "In Newton's cooling, the graph of rate of cooling (−dT/dt) against time t is:",
+  "formula": "−dT/dt = kθ₀e^(−kt)",
+  "options": [
+   "Parabola opening upward",
+   "Straight line parallel to the t-axis",
+   "Straight line of negative slope",
+   "Exponentially decaying curve"
+  ],
+  "answer": 3,
+  "explain": "The rate is proportional to the excess temperature, which decays exponentially, so the rate also decays exponentially.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "adef6d05-7df1-4c66-9a43-a948cdbcdf65",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Newton's law of cooling assumes the temperature of the surroundings stays:",
+  "formula": "",
+  "options": [
+   "Equal to the body's temperature",
+   "Constant",
+   "Rising with the body's temperature",
+   "Falling exponentially"
+  ],
+  "answer": 1,
+  "explain": "T₀ is taken as fixed (a large surroundings), so the excess temperature depends only on the body's temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "da473580-0db8-4a9f-8fa6-e793adcf0156",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Anomalous expansion of water",
+  "prompt": "Above 4 °C, water's behaviour on heating is that its volume:",
+  "formula": "",
+  "options": [
+   "Increases like normal liquids",
+   "Remains constant",
+   "First increases, then decreases",
+   "Decreases like in 0–4 °C"
+  ],
+  "answer": 0,
+  "explain": "Above 4 °C normal thermal expansion dominates, so the volume increases with temperature.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "886631bf-534d-49dc-812d-efc8507ba40b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Anomalous expansion of water",
+  "prompt": "Why does ice float on water?",
+  "formula": "ρ_ice < ρ_water",
+  "options": [
+   "Ice has a higher specific heat",
+   "Ice is colder than water",
+   "Ice has a lower density than water",
+   "Ice has a higher surface tension"
+  ],
+  "answer": 2,
+  "explain": "Open hexagonal H-bonded structure makes ice about 9% less dense than water at 0 °C.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e5384c40-55ba-43bc-9f1f-ee217d0617f8",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "Evaporation differs from boiling because evaporation takes place:",
+  "formula": "",
+  "options": [
+   "Only at boiling point, from the surface",
+   "Only at boiling point, throughout the liquid",
+   "At any temperature, throughout the liquid",
+   "At any temperature, from the surface only"
+  ],
+  "answer": 3,
+  "explain": "Evaporation is a surface phenomenon at all temperatures; boiling occurs throughout the liquid at the boiling point.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d32bfd9a-ef60-4698-adbe-66fcca402a9d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Latent heat and change of state",
+  "prompt": "Near the triple point, latent heat of sublimation L_s equals:",
+  "formula": "L_s = L_f + L_v",
+  "options": [
+   "L_v only",
+   "L_f + L_v",
+   "L_f only",
+   "L_v − L_f"
+  ],
+  "answer": 1,
+  "explain": "Solid → vapour is equivalent to melting then vaporising, so L_s = L_f + L_v (larger than L_v).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d1d61989-f53a-4bea-b052-4c58a12fcad1",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Rods in series carry the same steady heat current. The temperature drop across each rod is proportional to its:",
+  "formula": "ΔT = H·R",
+  "options": [
+   "Specific heat capacity",
+   "Thermal conductivity K",
+   "Cross-sectional area A",
+   "Thermal resistance L/(KA)"
+  ],
+  "answer": 3,
+  "explain": "H is the same in every rod, so ΔT = H·R and the drop is proportional to R = L/(KA).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "1bbd16ea-eb3d-4d7d-a359-50305d080cc7",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Two rods of equal A and K, lengths L and 2L, are joined in series. Equal heat current means ΔT across them is in ratio?",
+  "formula": "ΔT = H·L/(KA)",
+  "options": [
+   "1 : 2",
+   "1 : 4",
+   "2 : 1",
+   "1 : 1"
+  ],
+  "answer": 0,
+  "explain": "Same H, K, A, so ΔT ∝ L; the ratio is L : 2L = 1 : 2.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "d76c5072-50a5-4001-8b5c-33a61831e752",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Time for a body to cool from T₁ to T₂ in surroundings T₀ (Newton's law) is:",
+  "formula": "t = (1/k) ln[(T₁ − T₀)/(T₂ − T₀)]",
+  "options": [
+   "(1/k) ln[T₁/T₂]",
+   "k ln[(T₁ − T₀)/(T₂ − T₀)]",
+   "(1/k) ln[(T₁ − T₀)/(T₂ − T₀)]",
+   "(1/k) ln[(T₁ − T₂)/T₀]"
+  ],
+  "answer": 2,
+  "explain": "From θ₂ = θ₁e^(−kt), t = (1/k) ln(θ₁/θ₂) with excess temperatures.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2b17f002-0fd2-435c-86a2-f97a5150c1df",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Linearising Stefan's law for small excess temperature, the effective heat-transfer coefficient h is proportional to:",
+  "formula": "h ≈ 4εσT₀³",
+  "options": [
+   "T₀⁴",
+   "T₀",
+   "T₀³",
+   "T₀²"
+  ],
+  "answer": 2,
+  "explain": "σ(T⁴ − T₀⁴) ≈ 4σT₀³(T − T₀), so h = 4εσT₀³.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "6bbbef83-a05c-452f-9500-82ebceba1280",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "Newton's cooling of a body is mathematically analogous to which electrical process?",
+  "formula": "",
+  "options": [
+   "Growth of current in a pure resistor",
+   "Free oscillations in an LC circuit",
+   "Charging of a capacitor by a constant current",
+   "Discharge of a capacitor through a resistor"
+  ],
+  "answer": 3,
+  "explain": "Excess temperature decays as e^(−kt), like q = q₀e^(−t/RC), with heat capacity mc as the capacitance analog.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2d83d2fc-6956-446b-84e2-270c37d0dd66",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "A thin ring of material with coefficient α is heated by ΔT. Fractional increase in its moment of inertia is:",
+  "formula": "I = MR²",
+  "options": [
+   "αΔT",
+   "½ αΔT",
+   "3αΔT",
+   "2αΔT"
+  ],
+  "answer": 3,
+  "explain": "Mass is constant and R grows by αΔT, so I ∝ R² grows by 2αΔT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "371bbf5e-7fc5-4487-8cb8-4788cc395d2b",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "A metal scale calibrated at 0 °C is used at a higher temperature. Lengths measured by it read:",
+  "formula": "",
+  "options": [
+   "Equal to the true length",
+   "Less than the true length",
+   "More than the true length",
+   "Unchanged only for α < 10⁻⁶"
+  ],
+  "answer": 1,
+  "explain": "The scale divisions expand and become longer, so fewer divisions cover the object and the reading is too small.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cb8b973c-f275-4eb4-92e5-97a51b39d3c8",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Linear, areal and volume expansion",
+  "prompt": "For a bimetallic strip heated by ΔT, the radius of curvature R varies with ΔT as:",
+  "formula": "R ≈ t/[(α₁ − α₂)ΔT]",
+  "options": [
+   "R ∝ ΔT²",
+   "R ∝ 1/ΔT",
+   "R is independent of ΔT",
+   "R ∝ ΔT"
+  ],
+  "answer": 1,
+  "explain": "Curvature 1/R is proportional to (α₁ − α₂)ΔT, so R ∝ 1/ΔT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "83c9d83f-4299-4f14-b46a-d3cad8ba3d85",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Conduction and thermal conductivity",
+  "prompt": "Thermal conductivity K of a rod is a property that depends on:",
+  "formula": "",
+  "options": [
+   "Material and temperature only",
+   "Length and material only",
+   "Area of cross-section and ΔT",
+   "Heat current and length"
+  ],
+  "answer": 0,
+  "explain": "K is a material constant (weakly temperature dependent); it does not depend on L, A or ΔT.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "2fe00ea4-2fac-4f75-9280-9329a43eb817",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Stefan-Boltzmann law and emissivity",
+  "prompt": "The numerical value of the Stefan–Boltzmann constant σ in SI units is approximately:",
+  "formula": "σ ≈ 5.67 × 10⁻⁸ W m⁻² K⁻⁴",
+  "options": [
+   "5.67 × 10⁻⁵",
+   "5.67 × 10⁻⁸",
+   "6.63 × 10⁻³⁴",
+   "2.90 × 10⁻³"
+  ],
+  "answer": 1,
+  "explain": "σ = 5.67×10⁻⁸ W m⁻² K⁻⁴. 6.63×10⁻³⁴ is Planck's constant and 2.90×10⁻³ m·K is Wien's constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "fa3a9aeb-c913-4f97-b76f-cd75549d4722",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "For a blackbody, the peak value of spectral emissive power (E_λ)max varies with T as:",
+  "formula": "(E_λ)max ∝ T⁵",
+  "options": [
+   "1/T",
+   "T",
+   "T⁵",
+   "T⁴"
+  ],
+  "answer": 2,
+  "explain": "Putting λ_max ∝ 1/T into Planck's law gives the peak height of E_λ ∝ T⁵.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "a3fd3136-3c9d-4be7-b30a-1364118a875a",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "A bulb filament at about 3000 K emits its peak radiation in which region?",
+  "formula": "λ_max = b/T ≈ 970 nm",
+  "options": [
+   "Visible violet",
+   "Visible green",
+   "Infrared",
+   "Ultraviolet"
+  ],
+  "answer": 2,
+  "explain": "λ_max ≈ 2.9×10⁻³/3000 ≈ 970 nm is infrared, so most of the energy is wasted as heat.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "e8cc6008-00ef-4775-891a-c1eef0dd1d15",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Wien's displacement law, blackbody",
+  "prompt": "The cosmic microwave background at about 2.7 K has its Wien peak in the:",
+  "formula": "",
+  "options": [
+   "X-ray region",
+   "Visible region",
+   "Infrared region",
+   "Microwave region"
+  ],
+  "answer": 3,
+  "explain": "λ_max = 2.9×10⁻³/2.7 ≈ 1 mm, which lies in the microwave region.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "cb81024f-d869-4c25-869d-a2ed85f8a945",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Kirchhoff's law of radiation",
+  "prompt": "A china dish with dark patterns on white is heated strongly and viewed in the dark. The pattern looks:",
+  "formula": "",
+  "options": [
+   "Coloured complementary, but dim",
+   "Dimmer than the background",
+   "Brighter than the background",
+   "Same as the background"
+  ],
+  "answer": 2,
+  "explain": "Dark parts absorb more, so they emit more (e = a) and glow brighter than the white parts at the same T.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "ea71c264-8342-4fee-a65a-73eca5519421",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Kirchhoff's law of radiation",
+  "prompt": "By Kirchhoff's law, a good reflector (r ≈ 1, polished silver) is a:",
+  "formula": "",
+  "options": [
+   "Perfect blackbody emitter",
+   "Poor emitter",
+   "Emitter of only infrared",
+   "Good emitter"
+  ],
+  "answer": 1,
+  "explain": "A good reflector has small absorptivity a = 1 − r, so its emissivity e = a is also small.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "06339358-27e5-4836-86c4-4ae881d5b87d",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "The tangent to the T–t cooling curve at t = 0 meets the asymptote T = T₀ at time t equal to:",
+  "formula": "slope at t = 0 is −kθ₀",
+  "options": [
+   "2/k",
+   "(ln 2)/k",
+   "1/(2k)",
+   "1/k"
+  ],
+  "answer": 3,
+  "explain": "The initial slope is −kθ₀, so the excess θ₀ would vanish at t = θ₀/(kθ₀) = 1/k, the time constant.",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ },
+ {
+  "id": "84fb2a2d-ba8c-4d34-afda-0a55bc827f54",
+  "subject": "Physics",
+  "chapter": "Thermal Properties",
+  "topic": "Newton's law of cooling",
+  "prompt": "A body is heated by constant power P and loses heat by Newton's law. Its temperature with time:",
+  "formula": "T_max = T₀ + P/(hA)",
+  "options": [
+   "Jumps at once to T₀ + P/(hA)",
+   "Rises linearly without limit",
+   "Rises exponentially to a saturation value",
+   "Rises, then falls back to T₀"
+  ],
+  "answer": 2,
+  "explain": "mc dT/dt = P − hA(T − T₀) gives T = T₀ + (P/hA)(1 − e^(−kt)), which saturates at T₀ + P/(hA).",
+  "review_status": "quick_recall_reviewed_v2",
+  "syllabus": "JEE Main",
+  "verified": 1,
+  "gate": "rf-gate-v2"
+ }
 ]
