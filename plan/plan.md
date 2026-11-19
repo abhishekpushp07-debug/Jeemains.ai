@@ -1,291 +1,174 @@
-# JEELIVE.AI Analysis 2.0: jo baaki hai, uska poora plan
+# Super Admin PDF Engine 2.0: the question and each option, cut cleanly from the book
 
-Har mock ke baad student ek hi jagah dekhega ki marks kahan bane, kahan gaye, time kahan gaya aur agle mock mein kya badalna hai.
-Har number student ke apne jawab aur time se banta hai (koi AI nahi), aur website aur app dono ek hi server se lete hain.
+Super Admin's PDF reader learns to cut every question into five clean pieces: the question, and options A, B, C and D, each exactly as printed in the book.
+Students then see only the question in the question area, and the real content of each option on its own button. No AI reads the PDF, at upload or later.
 
-## Kiske liye
+## Who it's for
 
-- **Student:** mock ke turant baad saaf hisaab, phone par bhi. Har number ke peeche ke sawaal aur unka solution ek tap par.
-- **Owner:** Quizrr ke har screen ke barabar ka analysis, uske aage ki cheezein, aur ek PDF report jo student WhatsApp par bhej sake.
-- **App agent:** ek taiyaar packet, jisse app wahi screens usi server se bana sake.
+- **Owner (super admin):** uploads PYQ, All India Series, chapter-wise and plain mock PDFs and gets mocks at the new level without typing anything.
+- **Reviewer:** fixes the few questions the engine refuses to guess.
+- **Students:** read each option right where they tap it, which matters most on a phone.
+- **App team:** gets a short guide so the app can show the same look.
 
-## Core features aur experience
+## Core features and experience
 
-### Abhi ki haalat
+### 1. What students see
 
-Jo material dekha gaya:
-
-- Purana plan (17 Nov, 6 hisson wala).
-- Quizrr ki 14-page analysis PDF.
-- Quizrr ke 12 screenshots: Overview (2), Leaderboard, Performance, Attempt Analysis, Time Analysis, Difficulty, Question Journey, Qs by Qs (2), Solutions (2).
-- "Results: 60 analyses" guide, aur site ka apna purana analysis (25 insights, charts, 60-metric ledger).
-- Embibe, Aakash, Allen aur PW ke public feature pages (naye ideas ke liye).
-- Quizrr ke Comparative mode aur Compare screen ka koi screenshot nahi mila. Woh hissa apne design se banega.
-
-Code padhne par jo mila (chalakar ya test karke nahi dekha gaya):
-
-- Pichhle note mein likha tha ki screens sirf dhaancha hain. Yeh sahi nahi nikla. 8 sections, Personal/Comparative switch, Compare screen, Solutions ki ek line, time record, class ka data, PDF report aur share image, sab ka code likha hua hai aur Results page se juda hai.
-- Is poore kaam ki ek bhi test report nahi hai. App packet abhi bana hi nahi.
-- Record ke hisaab se yeh live par nahi gaya. Is baar live par check nahi kiya gaya.
-
-Isliye baaki kaam do tarah ka hai: (1) jo likha hai use chalakar, test karke pakka karna, (2) neeche har section mein likhi "Baaki" cheezein banana.
-
-### Ek baat jo pehle jaan leni chahiye
-
-Rank, Percentile, class ka % sahi, students se bana Par time, Difficulty level aur Compare, yeh sab tabhi bharte hain jab usi paper ko doosre students ne bhi diya ho. 15 Nov ki report mein live par 14 student profiles the. Jab tak students kam hain, in jagahon par saaf message dikhega ("Abhi 3 students ne diya hai, 10 par khulega"), koi andaaza nahi. Student ka apna hisaab (Score, Time, Attempt Quality, Journey) pehle attempt se poora dikhega.
-
-### Quizrr ke saamne
-
-| Cheez | Quizrr (diye gaye screens mein) | JEELIVE, is plan ke baad |
+| Part of the screen | Today | After |
 | --- | --- | --- |
-| 8 sections aur neeche ka bar | Hai | Hai |
-| Attempt ke tags | 4 (Perfect, Wasted, Overtime, Confused) | 8, jisme Careless galti aur Concept gap alag hain |
-| Score Potential | Sirf "galti kam hoti to Score" | 3 step, har step ke sawaal, aur us Score par Rank |
-| Par time kahan se aaya | Nahi dikha | Har jagah likha hoga |
-| Agle mock ke liye 3 kaam | Nahi dikha | Hai |
-| Har sawaal ki journey Solutions mein | Hai | Banega |
-| Painful questions | Hai | Banega |
-| "Note down your learnings" | Hai | Banega ("Is test se 3 seekh") |
-| Leaderboard par naam aur Compare | Hai | Banega, naam student khud likhega |
-| Jawab badalne ka hisaab | Nahi dikha | Banega |
-| Pehli nazar vs wapas aakar | Nahi dikha | Banega |
-| Speed–Accuracy map | Nahi dikha | Banega |
-| Har number par "yeh kaise bana" | Chhota (i) | Poora hisaab aur ginti |
-| Bhasha | English | Roman Hinglish |
+| Question area | One picture holding the question and all four options | Only the question, with its own diagram if it has one |
+| Option buttons | "A", "B", "C", "D" with the words "as shown above" | Each button shows what that option says, exactly as printed |
+| Hint "Read options A–D in the picture above" | Shown | Gone |
+| Result and Solutions screens | Whole picture, then "your answer B, correct C" in words | Same split; the correct option and the student's pick are marked on the option itself |
+| Numerical questions | Question picture and a number box | No change |
 
-### 1. Overview
+### 2. How the engine cuts a question
 
-Likha hua hai: Score ring, Rank, Percentile, Accuracy, Time, Attempted / Sahi / Galat / Chhode (tap par sawaal), har subject ka card, "Agle mock ke liye 3 kaam".
+1. It finds where each question starts and ends, as it does today.
+2. Inside the question it finds the option labels: the last full set of four, such as (A) (B) (C) (D) or (1) (2) (3) (4). Labels used for statements inside the question are not mistaken for options.
+3. From where the labels sit, it works out the arrangement: one option per line, two per line, or all four in one line.
+4. Each option gets its own box, from its label to the next label, with whatever is printed there: text, formula, diagram or graph. The printed label is left out of the picture, because the button already shows the letter.
+5. Everything above the first option is the question picture, diagrams included.
+6. Every piece is trimmed to the printed ink with the same small margin, and all five pieces of a question use the same zoom, so the text is the same size in the question and in every option.
 
-Baaki:
+This uses only the positions of the text and the white space in the PDF. The spaced format with bracketed labels is what makes a clean cut possible every time.
 
-- Sabse upar ek line ka nateeja, data se bana. Jaise: "Accuracy 100% thi, lekin 16 sawaal chhoot gaye. Sabse zyada marks yahin gaye."
-- "Marks ka hisaab": Positive Score, negative mein kate marks, aur galat ya chhode sawaalon mein reh gaye marks.
-- "Aap kahan khade ho": sab students ke Score ka chart, student ka hissa alag rang mein. Rank par tap karne se Leaderboard khulega.
-- "Is test se 3 seekh": student 3 tak chhoti baatein likhega. Yeh agle mock ke Overview par aur PDF mein dikhengi.
-- Har number par (i): number ka matlab aur woh kaise gina gaya.
-- Akela student ho ya khud topper ho, to saaf message.
+### 3. Checks before a cut is trusted
 
-### 2. Performance
+A question is accepted only when all of these hold:
 
-Likha hua hai: subject tabs; Score, Accuracy, Attempt rate, Negative marks; MCQ vs Numerical; chapter table (Mazboot / Theek / Kamzor).
+- Four labels were found, in order, lined up as rows or columns.
+- Every option has something printed in it.
+- Nothing is lost: every printed mark of the question lies in the question picture or in exactly one option picture.
+- Nothing is shared: no two pieces touch or overlap, and the gap between them is blank.
+- All options sit on the same page as each other.
 
-Baaki:
+If any check fails, the engine does not guess. The question is marked with the reason in plain words, for example "Something is printed between option B and option C that belongs to neither".
 
-- Sab subjects ki ek table: Score, Sahi, Galat, Chhode, Dekha hi nahi.
-- Chapter par tap karne se uske sawaal.
-- "Kamzor chapter" ki list, gaye hue marks ke hisaab se.
-- BITSAT ke sections aur bonus section ka Score yahin.
-- Jis paper mein chapter ka tag nahi, wahan saaf likha hoga.
+### 4. Held questions and the fix tool
 
-### 3. Score Potential
+- A mock with even one such question stays a Draft and cannot go Live. This is the rule chosen by the owner.
+- The Fix screen shows one card per held question: the piece of the page with five boxes drawn on it (Question, A, B, C, D), and beside it a preview of exactly what the student will see.
+- Three ways to fix a question:
+  1. Move or resize a box, then save. The checks run again by themselves.
+  2. Type an option's text (this exists today and stays).
+  3. Choose "Show this question as one whole picture", which gives that one question the old look by the owner's own decision.
+- Answer type, answer buttons and the correct answer are fixed on the same card, as today.
 
-Likha hua hai: step chart (abhi, + Careless galti theek, + mushkil par risk nahi, + atka time wapas, Realistic target, Maximum), har step ke sawaal, "itne marks par Rank lagbhag".
+### 5. What the owner sees after an upload
 
-Baaki:
+- A summary line on every mock: "75 questions · 73 cut cleanly · 2 need your eye".
+- A proof view: every question of the mock as the student will see it, question and four options, so a whole paper can be checked by eye in a few minutes.
+- "Try as student" opens the mock in the real test screen, as today.
 
-- "Marks kis chapter se gaye": galat sawaal chapter ke hisaab se.
-- "Bina galat jawab ke Score": har galat jawab chhoda hota to kitna banta.
-- Guess ka niyam: is paper ki marking par kitna pakka hone par hi guess faydemand hai (+4 / −1 par 20%).
-- Time record na ho to kaun se step 0 hain, yeh saaf likha hoga.
+### 6. One engine for every kind of upload
 
-### 4. Attempt Quality
+- PYQ, All India Series, chapter-wise tests and plain mocks all go through the same "Upload PDF" button. The mock type the PDF is uploaded into decides what it becomes.
+- Answer key and solutions are read from the end of each chapter, from the end of the mock, or from separate PDFs, as today.
+- Days, schedules, replacing an older mock and the Library work as today.
 
-Likha hua hai: 5 bade cards (Perfect, Careless galti, Overtime, Confused, Concept gap), baaki tags, subject × tag table, bars, tap par sawaal.
+### 7. Mocks already on the site
 
-Baaki:
+- JEE Main PYQ stay exactly as they are, in the old look.
+- Other PDF mocks in the old look: Super Admin shows a list of any that are still Live, with a "Move to Library" button. Nothing is moved without that button. Students keep their scores.
+- An old mock gets the new look only by uploading its PDF again in the spaced format, with Replace.
 
-- Speed–Accuracy map: har sawaal ek dot (kitna time laga vs Par, sahi ya galat). Dot par tap se solution.
-- "Jaldi-sahi" note: jo sahi jawab Par ke 25% se kam time mein aaye. Tukka tha to concept ek baar dekh lene ki salah. Yeh alag tag nahi hai.
-- "Painful sawaal": galat bhi aur Par se zyada time bhi, chapter ke hisaab se.
-- Chart par har tag on/off.
+### 8. Mobile app
 
-### 5. Time kahan gaya
+- Nothing breaks in the app. App students keep seeing the old look until the app team adopts the new one.
+- A short guide for the app team is written with the feature.
 
-Likha hua hai: paper mein laga time, screen par time, sahi / galat / bina jawab par time ki patti, subject chart (Time / Questions / Accuracy), time journey blocks, pace curve, sabse dheeme 5 sawaal.
+### 9. PDF format guide
 
-Baaki:
+One page inside the upload screen: how to make a PDF the engine reads correctly the first time (label style, spacing, the three arrangements, where diagrams go, headings for chapters, answer key and solutions).
 
-- Screen se bahar gaya time alag dikhega.
-- "Pehli nazar vs wapas aakar": pehli baar mein diye jawab aur laut kar diye jawab, dono ki ginti, Accuracy aur time.
-- "Aakhri 20% time": aakhir mein Accuracy giri ya nahi.
-- Har subject ka time ka hissa vs marks ka hissa ("Physics par 45% time, 30% marks").
-- Line chart par Sahi / Galat / Sab on/off.
+### 10. Quality bar
 
-### 6. Difficulty
+The owner's instruction, recorded as given: the most elegant, the most beautiful, the most aesthetic and, more importantly, the most capable and the most powerful platform. For this work it is taken to mean:
 
-Likha hua hai: subject tabs, Easy / Moderate / Tough / Not rated ki table (har khana tap hota hai), bars, "Leak: Easy sawaal".
-
-Baaki:
-
-- Har level ke saath likha hoga ki woh kahan se aaya (students ke result, paper ka tag, ya Not rated) aur kitne students par.
-- "Tough jo aapne nikale": class mein 35% se kam sahi, student ka sahi.
-- Not rated zyada ho to: "itne aur students ke baad level khulega".
-
-### 7. Question Journey
-
-Likha hua hai: har visit ka chip, time block ke hisaab se; kaun si baar dekha, kitna time, mark for review, jawab badla; tag ka rang on/off; ek line ka saar; subject order.
-
-Baaki:
-
-- Chip par result aur tag ka icon (sirf rang nahi), aur ek legend.
-- Jawab badalne ka hisaab: galat se sahi, sahi se galat, galat se galat, aur isse kitne marks bane ya gaye.
-- Sabse lambi sahi aur galat streak, asli solving order mein.
-- Lambi journey mein time block fold ho sakenge.
-
-### 8. Qs by Qs
-
-Likha hua hai: desktop par table, phone par cards, 8 filters, row par tap se solution.
-
-Baaki:
-
-- Upar sawaalon ka grid: subject aur MCQ / Numerical ke hisaab se; har number par result ka icon, tag, aur class mein kitne % ne sahi kiya uska halka rang.
-- Sort (time, marks, sawaal number) aur subject / level filter.
-- "Dekha hi nahi" aur "Dekha, jawab nahi diya" alag.
-- Comparative mode mein class ka average time aur topper ka time.
-
-### 9. Solutions screen
-
-Likha hua hai: har sawaal ke upar ek line (subject, level, aapka time, Par, kitne % sahi, topper ka time, sabse zyada chuna galat option, kitni baar dekha, jawab badla, tag); Careless / Overtime / Confused filter.
-
-Baaki:
-
-- Chaar cards: aapka time vs Par; class ka average time aur topper ka time; attempt karne walon mein kitne % sahi aur galat; kitne % ne attempt kiya aur kitne ne chhoda.
-- Is sawaal ki journey: khola, chhoda, dobara khola, option diya, badla, har kadam ke saath time.
-- Number ki patti par result aur tag ka rang aur icon. Naye labels Hinglish mein.
-
-### 10. Comparative mode, Leaderboard, Compare screen
-
-Likha hua hai: Personal / Comparative switch; Topper, Top 10%, Class average aur top 10 students ki list; aap vs woh ke cards; "gap sabse bada kahan"; subject chart aur table; Attempt Quality table; dono pace curve; Difficulty par Accuracy; live exam ke leaderboard se Compare screen.
-
-Baaki:
-
-- Leaderboard har us paper par jahan class ka data hai: top 50, student ke aas-paas ke 5 upar aur 5 neeche, naam ya Rank se search, har row par Compare.
-- Chunne ki list mein "Aapse ek Rank upar".
-- "Gap ka hisaab": gap ke kitne marks kam attempt se hain aur kitne galat jawab se, subject ke hisaab se.
-- Har section mein compare ka apna hissa (Journey mein kul visits aur wapsi; Qs by Qs mein class ke columns).
-- Har subject par laga time, dono ka saath-saath.
-- Doosre student ke jawab kabhi nahi dikhenge. Sirf totals, averages aur time.
-
-### 11. Display naam (naya)
-
-- Student Profile mein ya Leaderboard par apna naam likhega. Phone number kabhi nahi dikhega.
-- Naam na likhe to pehle jaisa "Learner AB12CD34".
-- Naam Leaderboard, Compare, apni PDF ke cover aur apne scorecard par dikhega.
-- Owner Super Admin › Students se kisi ka naam hata sakega.
-
-### 12. Download aur Share
-
-Likha hua hai: Hinglish A4 PDF report (har section ki tables aur bars), WhatsApp ke liye scorecard image, file ka naam `JEELIVE_<paper>_<date>`.
-
-Baaki:
-
-- PDF mein cover, contents, charts (Score ring, marks ka hisaab, pace curve, time blocks, Speed–Accuracy map), Question Journey, "3 seekh" aur tags ke matlab.
-- PDF phone par khulti hai ya nahi, yeh check.
-- Results page par do alag download, saaf naam ke saath: "Analysis report" aur "Solutions PDF" (purani, solutions wali).
-
-### 13. Purana analysis
-
-- Naye analysis ke neeche jo purana English fold hai, woh hatega.
-- Uski kaam ki cheezein naye sections mein Hinglish mein jayengi: Score ka chart, subject par aap vs average vs top, sawaalon ka heat map, negative se gaye marks, bina galat ke Score, streak, aakhri hisse ki Accuracy, guess ka niyam, Easy chhoote aur Tough nikale.
-- 60-metric ledger aur offline drafts wali screen ek chhoti "Advanced" link ke peeche rahegi, jaisi hai.
-- Analysis tab par upar ke purane Score tiles nahi dikhenge, kyunki wahi cheez Overview mein hai.
-- Progress, Confidence, Real-exam rank / Branch matches aur Solutions tabs jaise hain waise rahenge.
-
-### 14. Har section par laagu
-
-- Har comparison ke saath class ka size ("23 students mein").
-- Khaali ya band haalat mein wajah aur kab khulega: live exam chal raha hai, result ban raha hai, class ka data ban raha hai, purana attempt, staff ka attempt, corrected Score.
-- Purane attempts: Time, Attempt Quality aur Journey "Agle mock se shuru hoga" dikhayenge. Baaki sab chalega.
-- Ek hi request mein poora analysis. Pichhla khula analysis bina internet ke bhi dikhega.
-
-### 15. Time record aur app packet
-
-Likha hua hai: website ka player har sawaal ka screen time, jawab badalna aur mark for review record karta hai. Refresh ya crash par record nahi jaata, aur jawab save ke saath hi server par jaata hai.
-
-Baaki:
-
-- Ise bheed mein chalakar pakka karna (answer save dheema na ho).
-- App packet: server calls ki guide, analysis ka format, rulebook, har screen ka spec aur uski haalatein, app ke player ke liye time record ka spec, rang aur font, sample data, test checklist. Display naam, Leaderboard aur "3 seekh" ke calls bhi isi mein.
-
-### Rulebook (pehle se tay, yahan ek jagah)
-
-- **Par time:** 30 ya zyada students ne sahi kiya ho to unka beech ka time. Warna paper standard (paper ke 90% time ka hissa; Numerical ko MCQ se zyada).
-- **Tags:** Perfect (sahi, Par ke 1.25 guna tak). Slow-correct (sahi, usse zyada). Careless galti (galat, Par ke aadhe se kam mein). Concept gap (galat, Par ke 0.5 se 1.5 guna). Mehnga overtime (galat, 1.5 guna se zyada). Confused (jawab nahi, par Par ke aadhe se zyada time). Smart skip. Dekha hi nahi. Har sawaal ko ek hi tag.
-- **Difficulty:** 50 ya zyada students ne attempt kiya ho to: 65% ya zyada sahi = Easy, 35% se kam = Tough, beech mein Moderate. Warna paper ka apna tag. Warna Not rated.
-- **Class aur Top 10% average:** kam se kam 10 students. **Topper:** kam se kam 2 students.
-- **Realistic target:** abhi ka Score + Careless + mushkil par risk + time wale step ka aadha.
-- **Time:** sirf screen par khula time. Tab chhupa ho to nahi ginta. Ek baar mein zyada se zyada 15 minute.
-- **Naye:** Jaldi-sahi = Par ke 25% se kam. Painful = galat aur Par se zyada time. Aakhri hissa = paper ke aakhri 20% time, tabhi jab dono taraf 5 ya zyada jawab hon.
+- **No guessing.** A question either passes every check or is held with its reason. The proof view is the owner's final check by eye.
+- **Nothing clipped.** Cuts are placed only in blank space, so fractions, integrals, matrices, superscripts and diagrams are whole in every piece.
+- **No typing for a well-made book.** A PDF in the spaced, bracketed format goes from upload to a checked Draft with no manual work on its cleanly cut questions.
+- **One upload, any size.** A PDF can hold one mock or a whole book of chapters, up to the current 100 MB limit. It is read in the background and each mock arrives by itself.
+- **Fast to fix.** A held question is fixed on one card, without leaving the screen.
+- **Honest counts.** The summary line counts held questions exactly. Nothing is hidden to make a mock look ready.
+- **Student screens at the Analysis 2.0 standard.** The same fonts, spacing, motion and care, on phone and desktop, in light and dark theme.
+- **Accepted when** the five sample questions from the owner's book come out cleanly cut with no manual fix, or the exact reason they do not is reported.
 
 ## User flow
 
-1. Student mock submit karta hai. Result khulta hai, Analysis ka Overview saamne hota hai.
-2. Upar ek line ka nateeja, phir Score, Rank aur "3 kaam".
-3. Kisi number par tap: uske sawaalon ki list. Sawaal par tap: uska solution, upar time, class ka data aur us sawaal ki journey. Back: wahi chart, wahi jagah.
-4. Neeche ke bar se ya swipe se agla section.
-5. "Comparative" par switch: Topper, Top 10%, Class average ya Leaderboard ka koi student.
-6. Rank par tap: Leaderboard. Kisi student par Compare: aap vs woh.
-7. "Is test se 3 seekh" likhta hai.
-8. "Analysis report" download karta hai ya scorecard WhatsApp par bhejta hai.
-9. Agle mock ke Overview par pichhli 3 seekh dikhti hain.
+**Owner**
+1. Super Admin › Master › exam › mock type (PYQ, All India Series, chapter-wise or mocks) › Upload PDF. Same dialog as today.
+2. The PDF is read in the background. Each mock arrives as a Draft with its summary line.
+3. A mock with held questions is opened in Fix. Each card is fixed by moving a box, typing an option, or choosing the whole-picture look. It is rechecked by itself.
+4. The proof view is scanned once. "Try as student" shows the real screen.
+5. The mock is made Live, or given its series day, as today.
+
+**Student**
+1. Opens the mock. The question area shows only the question.
+2. Reads the four options on their buttons and taps one.
+3. After submitting, sees the same question and options with the correct one and their own pick marked.
 
 ## UI/UX feel
 
-- Wahi dark theme (kaala aur blood red) aur wahi fonts.
-- Ek card, ek baat: bada number, neeche ek seedhi line.
-- Sahi, galat aur chhoda: rang ke saath icon bhi.
-- Har chart ke saath wahi data table mein.
-- Neeche chipka hua bar: Personal / Comparative aur 8 sections. Phone par swipe.
-- 360 se 390 px ke phone par poora chalega. Chaudi table apne dabbe ke andar scroll hogi.
-- Halka motion: section badalne par aur bars bharne par.
-- Copy Roman Hinglish mein ("Time kahan gaya", "Careless galti", "Yahan se marks bach sakte the"). Score, Rank, Accuracy, Time, Percentile, Par English mein.
+- Each option is a wide, tappable card: a letter chip on the left, the option's picture beside it.
+- The selected option gets the blood-red outline and a tick. On result screens, correct and wrong are shown with an icon as well as colour.
+- Phone (360 to 390 px): one option per row, full width. Desktop: two per row when all four options are short, otherwise one per row.
+- Text is the same size in the question and in all four options. No stretched or blurry pictures.
+- Book pictures stay on white "paper" cards in both light and dark theme.
+- All pictures of a paper, option pictures included, start loading on the get-ready screen before the test begins, as question pictures do today, so nothing pops in during the test.
+- Super Admin keeps its current look. The fix tool shows the boxes directly on the page picture, with the student preview next to it.
 
 ## Implementation phases
 
-**Phase 1 (abhi banega):** upar likha poora Analysis.
-- Jo likha hua hai use chalakar aur test karke pakka karna.
-- Har section ki "Baaki" cheezein.
-- Solutions screen ke cards aur sawaal ki journey.
-- Har paper par Leaderboard, "koi bhi student" se Compare, display naam.
-- Naya PDF, scorecard, purane analysis ka naye mein milna.
-- App packet.
-- Sirf preview mein. Live par tabhi jab "deploy" kaha jaye.
+**Phase 1 (built now): everything in "Core features and experience" above.**
+- The cutter, its checks and the hold rule.
+- Fix tool with movable boxes and live preview, summary line, proof view.
+- New look on the test screen, the result screen and the Solutions screen.
+- All four kinds of upload.
+- List of old-look mocks with "Move to Library".
+- App guide and PDF format guide.
+- Tuned on the first five questions of the owner's book, with their answer key and solutions.
+- Preview only. It goes to jeelive.ai when the owner says "deploy".
 
-**Phase 2 (alag approval):**
-- Sign-in rate limiter fix: student ka asli IP padhna aur sirf galat PIN ginna. Analysis dikhane ke turant baad.
-- Mock se mock ka trend: pichhle 5 mocks mein Careless, Overtime aur galat par gaya time.
-- Owner Master mein har sawaal ka Difficulty aur chapter tag set kar sake, taaki kam students par bhi Difficulty bhari rahe.
-- Subject ke hisaab se Rank aur Percentile.
-- Galti notebook: sab mocks ke galat aur chhode sawaal ek jagah, dobara practice ke liye.
+**Phase 2 (separate approval):**
+- Harder layouts cut automatically: a diagram beside the options, an option that runs onto the next page, four graphs drawn inside one picture, two-column pages.
+- Scanned (photo) PDFs, with text found on the site's own server, still no AI credits.
+- Options that are plain words shown as real text (sharper on phones, lighter to load).
+- A "read again" button for Drafts uploaded before this engine.
+- Solution pictures trimmed and cleaned the same way.
+- JEE Main PYQ moved to the new look.
 
-**Phase 3 (alag approval):**
-- 1 se 2 lakh students ek saath ka load test.
-- Owner ke liye paper report: kaun sa sawaal sabse zyada galat hua, kaun sa galat option sabse zyada chuna gaya.
-- Agle mock ka target Score aur uska follow-up.
+**Phase 3 (separate approval):**
+- Question bank: every cut question saved with its chapter, so a new mock can be assembled from chosen chapters without a new PDF.
+- Owner paper report with option pictures: which wrong option was picked most on each question.
+- Faster checking of big books: approve a whole proof sheet from the keyboard.
+
+**After Phase 1 is accepted:** the owner is reminded of the three parked student features (Galti Notebook, Subject Rank, Seekh Reminder). Their notes and decisions are saved in `parked_student_features.md` next to this plan and are moved into the project memory as the first step of the build.
 
 ## Assumptions
 
-1. Naya Analysis, Solutions ke naye hisse aur PDF Roman Hinglish mein. Results page ke baaki purane labels English mein rahenge.
-2. Section ke naam: Overview, Performance, Score Potential, Attempt Quality, Time kahan gaya, Difficulty, Question Journey, Qs by Qs.
-3. Compare: Topper, Top 10%, Class average, aur Leaderboard ka koi bhi student.
-4. Quizrr ke Comparative screens nahi mile, isliye woh hissa apne design se.
-5. Revision PDF nahi banega, kisi phase mein nahi.
-6. Display naam: 2 se 20 akshar; akshar, ank aur space. Phone number jaisa naam (6 ya zyada ank ek saath) nahi chalega. Gaaliyon ki ek list block hogi. Din mein 3 baar se zyada nahi badlega. Do students ek hi naam rakh sakte hain; naam ke saath Rank dikhta hai.
-7. Koi student kisi aur ka naam likh sakta hai. Rok sirf owner ka "naam hatao" hai.
-8. Leaderboard ya Compare se bahar rehne ka option Phase 1 mein nahi hai. Naam na likhne par student Learner ID ke peeche rehta hai.
-9. Compare mein doosre student ka har sawaal par time aur uske totals dikhte hain, jawab nahi.
-10. Rulebook ke number (30, 50, 10) nahi badle. Is wajah se abhi ke kam students par Difficulty aksar "Not rated" aur Compare aksar band dikhega.
-11. Sawaal ki journey mein time "paper shuru hone ke kitne minute baad" likha hoga, ghadi ka time nahi.
-12. "3 seekh" sirf usi student ko dikhengi. Har seekh 140 akshar tak.
-13. PDF 8 se 12 page ki hogi (75 sawaal ke paper par). Naam cover par tabhi, jab student ne likha ho.
-14. Scorecard par Score, Rank, Percentile, Accuracy aur naam (agar likha ho). Phone number kabhi nahi.
-15. Purana English fold hatega; 60-metric ledger "Advanced" link ke peeche rahega.
-16. Purane download button ka naam "Solutions PDF" hoga.
-17. Class mein har student ka usi paper par pehla attempt ginta hai. Owner aur reviewer ke attempts nahi ginte. Live paper ka class data window band hone ke baad banta hai.
-18. Purane attempts mein time record nahi hai, isliye unke teen time wale sections khaali rahenge.
-19. App ke attempts mein time record tabhi aayega jab app agent packet ke hisaab se player badle. Tab tak app se diye mocks mein bhi wahi teen sections khaali.
-20. Koi AI nahi, koi AI credit nahi.
-21. Rate limiter fix Analysis ke baad alag se hoga. Yeh pehle ki "dono saath mein dikhao" wali baat ki jagah leta hai.
-22. Phase 1 lagataar banega, har hissa test hoga, aur sab ek saath dikhaya jayega. Deploy sirf "deploy" kehne par.
-23. Quizrr ke screenshots ek image reader se padhe gaye. Chhoti detail mein fark ho sakta hai.
+1. The uploaded book has not been opened yet. Planning mode offers only a reader that sends the whole book through an AI model, which the owner ruled out. The first step of the build opens only the first five questions, their answer key and their solutions with the site's own page reader (no AI). If they show a layout this plan did not expect, that is reported before the build goes further.
+2. The book is not uploaded or run as a whole by the builder. The owner uploads it in Super Admin once the engine is ready. Reading a PDF on the site uses no AI and no AI credits.
+3. "Question screen" and "option screen" are read as the two areas of the same test screen, not two separate pages.
+4. Options are shown as pictures cut from the book, not retyped as text, so formulas and diagrams stay exact.
+5. Label styles accepted: (A)–(D), A. or A), (a)–(d), (1)–(4), 1). Four options are expected; a question with a different count is held.
+6. Phase 1 cuts three arrangements automatically: one per line, two per line, four in one line. Anything else is held and fixed with the boxes.
+7. The third fix, "Show this question as one whole picture", is included as an owner's choice per question. It can be removed if the old look should never be possible in a new mock.
+8. Because held papers never go Live by themselves, an All India Series paper with a held question does not open on its day. Series PDFs need to be uploaded early enough to fix.
+9. All four kinds of upload already use the same "Upload PDF" button and the same reader, so one engine covers them. The code also holds older upload routes (a two-PDF importer, an Excel importer, an AI-based automatic importer and a fixed-format chapter-book importer). Whether any screen still reaches them was not checked while planning. They are not changed by this work.
+10. The owner's answer about existing mocks is read as: JEE Main PYQ stay as they are; the other old mocks have already been removed by the owner; any left over go to the Library. The move is a button with a list, not automatic, because the builder cannot see or change the live site.
+11. Mocks that are Live or Draft before this change are not read again in Phase 1.
+12. The Solutions PDF and the Analysis report keep printing the whole question as in the book.
+13. The printed question number stays inside the question picture.
+14. Only searchable PDFs are cut automatically. A scanned page is held and its boxes are drawn by hand. The site's code already has two AI options that run only on the owner's explicit approval: AI reading of scanned pages, and AI explanations for questions that have only an answer key. Their screens were not opened while planning. Both are left as they are and are not removed; this work adds no AI call anywhere.
+15. Answer key and solution reading is changed only as far as the five-question check shows is needed.
+16. The fix tool is open to the owner and the reviewer, like the Fix screen today.
+17. Super Admin text stays in English. Any new student-facing text is in Roman Hinglish, like the Analysis screens.
+18. The app shows the old look until the app team changes it.
+19. Galti Notebook, Subject Rank and Seekh Reminder are parked with no code written. Work on them resumes only after the owner is reminded and says so.
+20. This plan replaces the Analysis 2.0 plan in this file. A full copy of that plan is saved next to it as `analysis2_plan.md`, and its pending Phase 2 and Phase 3 lists are also listed in `parked_student_features.md`.
+21. The result screen and the Solutions screen were not opened while planning. Their "Today" row in the table is inferred from how the test screen works, and is confirmed at the start of the build.
+22. The technical notes saved for the three parked features were not re-checked against the code in this planning session. They are labelled as unchecked in `parked_student_features.md`.
+23. "Most powerful" and "perfect" are taken as the quality bar in section 10. They are not a promise that every possible PDF layout is cut automatically: in Phase 1 a layout outside the three arrangements is held and fixed by hand, and the harder layouts are Phase 2.
+24. The new option cards and the fix tool follow the existing JEELIVE look. No new visual style is introduced.
