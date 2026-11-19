@@ -9,7 +9,7 @@ from typing import Annotated, Literal, Optional, List
 from pathlib import Path
 from datetime import datetime, timezone
 from bson import ObjectId
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, OperationFailure
 from exam_groups import ACTIVE_EXAMS, Exam, SUBJECTS, require_active_exam, resolve_exam
 from revision import record_learning, weak_chapters, weak_topic_deck, make_router as make_revision
 from owner_downloads import make_router as make_owner_downloads
@@ -613,7 +613,7 @@ async def startup():
         if await take_turn("setup:" + SETUP_VERSION, 600):
             await setup_database()
             await db.rf_meta.update_one({"_id": done["_id"]}, {"$set": {"done": True, "ts": time.time()}}, upsert=True)
-            await db.rf_meta.delete_many({"_id": {"$regex": "^(turn:)?setup:", "$nin": [done["_id"], "turn:" + done["_id"]]}})
+            # Old version markers stay (a few bytes each); nothing is deleted at startup.
         else:
             for _ in range(30):
                 if await db.rf_meta.find_one(done, {"_id": 1}):
@@ -668,7 +668,10 @@ async def setup_database():
     await db.rf_challenges.create_index([("invites.uid", 1), ("status", 1), ("expires_ts", 1)])
     await db.rf_challenges.create_index([("from_uid", 1), ("status", 1)])
     await db.rf_link_visits.create_index([("cid", 1), ("key", 1)], unique=True)
-    await db.rf_link_visits.create_index("ts", expireAfterSeconds=30 * 86400)
+    # Link visits are kept (one row per phone per link); retire the old 30-day auto-delete index if present.
+    if (await db.rf_link_visits.index_information()).get("ts_1", {}).get("expireAfterSeconds") is not None:
+        await db.rf_link_visits.drop_index("ts_1")
+    await db.rf_link_visits.create_index("ts")
     await db.rf_gangs.create_index("id", unique=True)
     await db.rf_gangs.create_index([("members.uid", 1), ("closed", 1)])
     await db.rf_duels.create_index([("gang_id", 1), ("finished_ts", -1)], sparse=True)
@@ -716,11 +719,12 @@ async def setup_database():
     await db.rf_sessions.create_index([("status", 1), ("created_at", 1)])
     await daily_indexes(db)
     await db.rf_dreams.create_index("uid", unique=True)
-    # One report per player per gang: remove duplicates left by simultaneous reports, then let the index enforce it.
-    dupes = await db.rf_gang_reports.aggregate([{"$group": {"_id": {"g": "$gang_id", "u": "$uid"}, "ids": {"$push": "$_id"}, "n": {"$sum": 1}}}, {"$match": {"n": {"$gt": 1}}}])
-    async for row in dupes:
-        await db.rf_gang_reports.delete_many({"_id": {"$in": row["ids"][1:]}})
-    await db.rf_gang_reports.create_index([("gang_id", 1), ("uid", 1)], unique=True)
+    # One report per player per gang (reports are upserted on gang + player). Reports are never deleted at startup: if old
+    # duplicate rows block the unique index, they are kept and the index waits (logged) until someone resolves them.
+    try:
+        await db.rf_gang_reports.create_index([("gang_id", 1), ("uid", 1)], unique=True)
+    except OperationFailure as e:
+        logger.warning("rf_gang_reports unique index not created (duplicate reports kept): %s", e)
 
 
 @app.on_event("shutdown")

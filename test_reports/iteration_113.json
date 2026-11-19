@@ -1,0 +1,42 @@
+{
+  "summary": "Checked the 3 DESTRUCTIVE_DB_STARTUP fixes plus the package-lock warning fix. All PASS. (1) Startup keeps old rf_meta 'setup:*' markers: 2 are kept (8bcd22173d06c4e4 = current SETUP_VERSION, done:true; 8d4df7b67b28f7f4, done:true). After 2 more backend restarts and 2 direct setup_database() re-runs there are still 2 markers. (2) rf_link_visits indexes are ts_1 with no expireAfterSeconds and cid_1_key_1 unique. The retire-TTL code ran twice without error on a scratch TEST collection that had the old 30-day TTL index: the TTL was dropped and the row was kept. Match-link counting works on GET /api/rf/c/<cid>: one count per device, and the bot user agent is not counted. (3) The rf_gang_reports gang_id_1_uid_1 unique index exists. A scratch test with duplicate rows confirms the error raised is DuplicateKeyError, a subclass of OperationFailure, so it is caught and both rows are kept. Reading setup_database and every helper it calls (mission_links/daily ensure_indexes, login_guard.setup, migrate_nights, migrate_exam_data, backfill_cup_crowns, sync_cards) found no delete_many/delete_one. The only drops are drop_index on old TTL indexes (rf_link_visits ts_1, rf_feed at_1). sync_cards only sets retired:true, which is a soft retire. (4) frontend/package-lock.json is gone, yarn.lock is kept, packageManager is yarn@1.22.22, localhost:3000 returns 200 and the web preview bundles and loads /entry. Regression: 11/11 pytest pass (new iter113 file 7/7, test_rf_daily.py, test_rf_weak_topics.py). Frontend smoke at 390x844 passes: QA login, /rapid, All India popup closed with Exit, lobby (Subjects picker, rf-all-india card, Weak Topic Sprint), Trophy tab, Gang tab. The QA learner's All India try for today is still unplayed (no rf_daily_plays rows).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "review request", "issue": "The match-link page is GET /api/rf/c/<cid> (rooms.py router prefix /rf). /api/arena/rapid/... is the browser arena SPA and does not count opens. Only the review text was wrong; the code is fine."},
+      {"endpoint": "/health", "issue": "The health probe is GET /health on the backend (root), not /api/health. /api/health returns 404 through ingress; /api/health/load returns 200. Make sure the deployment health check targets /health on port 8001."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Trophy > Ranks > All India", "issues": ["Leftover QA profiles 'qa30-rank-a' / 'qa30-rank-b' (8 rows in rf_profiles, uid ^qa30) show in ranks 2-6 of the All India leaderboard. This existed before this change, but users can see the test data."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter113_deploy_startup_fixes.py",
+    "/app/backend/tests/iter113_db_state_check.py",
+    "/app/backend/tests/iter113_setup_rerun.py",
+    "/app/backend/tests/iter113_gang_dup_index.py",
+    "/app/backend/tests/iter113_post_checks.py",
+    "/app/test_reports/pytest/iter113.xml",
+    "/app/test_reports/pytest/iter113_startup.xml"
+  ],
+  "action_items": [
+    "Optional: remove the 8 leftover qa30-* RF profiles, by exact uid, from the All India leaderboard if the user approves.",
+    "Optional: make sure the deployment health probe uses /health (backend root), not /api/health."
+  ],
+  "critical_code_review_comments": [
+    "Startup is no longer destructive. rf_meta setup markers now grow by one tiny doc per code version (SETUP_VERSION hashes all backend *.py files). This is harmless.",
+    "rf_link_visits now has no expiry, so it grows by one row per device per match link. ts_1 stays as a plain index for any later manual or admin cleanup.",
+    "If the rf_gang_reports unique index cannot be built because of duplicates, only a warning is logged and the upsert path keeps working. The marker is still written, so the index is not retried until the next code version."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter113_deploy_startup_fixes.py", "/app/backend/tests/iter113_db_state_check.py", "/app/backend/tests/iter113_setup_rerun.py", "/app/backend/tests/iter113_gang_dup_index.py", "/app/backend/tests/iter113_post_checks.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "Only short-lived TEST data, removed by exact id/uid: TEST-iter113-* RF users and sessions, 1 TEST challenge with its link visit, and 2 TEST_iter113_* scratch collections (dropped). Post-check shows 0 leftovers. setup_database() was re-run twice directly; it is idempotent, the same as a startup.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "On web, fill() on the entry inputs before hydration is lost. Wait about 4 s after entry-screen, click entry-phone-input and entry-pin-input, then keyboard.type. Match-link route: /api/rf/c/<cid>. RF backend tests still accept the X-RF-User TEST-* header. QA learner's All India try for 2026-11-20 is unplayed; keep it that way."
+}
