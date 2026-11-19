@@ -13,10 +13,12 @@ const FACETS = [['2,30 30,8 18,30', .5], ['30,8 34,30 18,30', .9], ['30,8 43.3,8
   ['56.7,8 66,30 50,30', .4, 1], ['56.7,8 70,8 66,30', .8], ['70,8 82,30 66,30', .3], ['70,8 98,30 82,30', .6, 1], ['2,30 18,30 50,78', .3], ['18,30 34,30 50,78', .7, 1],
   ['34,30 50,30 50,78', .95], ['50,30 66,30 50,78', .5], ['66,30 82,30 50,78', .85, 1], ['82,30 98,30 50,78', .4]];
 const star = (x, y, r) => `M${x} ${y - r}Q${x} ${y} ${x + r} ${y}Q${x} ${y} ${x} ${y + r}Q${x} ${y} ${x - r} ${y}Q${x} ${y} ${x} ${y - r}Z`;
-export const Gem = ({ size = 46, className = '', sparkle }) => <svg className={'rk-gem ' + className} width={size} height={size * 0.8} viewBox="-8 -8 116 96" aria-hidden="true">
-  {FACETS.map(([p, o, t]) => <polygon key={p} points={p} fill={t ? 'currentColor' : '#FFFFFF'} fillOpacity={o} stroke="#FFFFFF" strokeOpacity=".75" strokeWidth=".7" strokeLinejoin="round" />)}
-  {sparkle ? <><path d={star(2, 30, 10)} fill="#FFFFFF" className="rk-twinkle" /><path d={star(86, 11, 6)} fill="#FFFFFF" className="rk-twinkle b" /></> : null}
-</svg>;
+// Drawn from fixed markup: the preview editor wraps dynamic JSX children in <span>, which an SVG would not draw.
+const gemMarkup = sparkle => FACETS.map(([p, o, t]) => `<polygon points="${p}" fill="${t ? 'currentColor' : '#FFFFFF'}" fill-opacity="${o}" stroke="#FFFFFF" stroke-opacity=".75" stroke-width=".7" stroke-linejoin="round"/>`).join('')
+  + (sparkle ? `<path d="${star(2, 30, 10)}" fill="#FFFFFF" class="rk-twinkle"/><path d="${star(86, 11, 6)}" fill="#FFFFFF" class="rk-twinkle b"/>` : '');
+const GEM = { plain: { __html: gemMarkup(false) }, sparkle: { __html: gemMarkup(true) } };
+export const Gem = ({ size = 46, className = '', sparkle }) => <svg className={'rk-gem ' + className} width={size} height={size * 0.8} viewBox="-8 -8 116 96" aria-hidden="true"
+  dangerouslySetInnerHTML={sparkle ? GEM.sparkle : GEM.plain} />;
 
 /** The same stone seen from above in hairlines: the quiet watermark of the black metal Rank Card. */
 const at = (r, deg) => { const a = ((deg - 90) * Math.PI) / 180; return `${(100 + r * Math.cos(a)).toFixed(1)},${(100 + r * Math.sin(a)).toFixed(1)}`; };
@@ -75,19 +77,21 @@ export const Tag = ({ tag }) => tag ? <span className={'rk-tag tag-' + tag}>{TAG
 export const Kind = ({ kind }) => <span className={'rk-tag kind-' + kind}>{KIND[kind] || kind}</span>;
 
 /** The dark metal Rank Card: brand + badge, the big number, a hairline rule, small ranks and the summary with its № serial. */
-export function RankCard({ testId, badge, eyebrow, big, rule, smalls = [], summary, serial, of }) {
+export function RankCard({ testId, badge, eyebrow, big, caps, gem, rule, smalls = [], note, summary, serial, of, foot }) {
   return <article className="rk-card" data-testid={testId}>
     <DiamondLine />
     <i className="rk-card-sheen" aria-hidden="true" /><i className="rk-card-edge" aria-hidden="true" />
     <div className="rk-card-top"><span className="rk-card-brand"><DiamondMark />JEELIVE.AI</span><span className="rk-card-badge">{badge}</span></div>
     <small className="rk-eyebrow">{eyebrow}</small>
-    <div className="rk-big-row"><strong className="rk-big" data-testid={testId + '-big'}>{big}</strong><Stars /></div>
+    <div className="rk-big-row"><strong className="rk-big" data-testid={testId + '-big'}>{big}</strong>{gem ? <Gem size={62} className="rk-card-gem" sparkle /> : <Stars />}</div>
+    {caps ? <span className="rk-card-caps" data-testid={testId + '-caps'}>{caps}</span> : null}
     {rule ? <div className="rk-rule" data-testid={testId + '-rule'}><i /><span>{rule}</span></div> : null}
     {smalls.length ? <div className="rk-smalls">{smalls.map(s => <span key={s.label} className="rk-small" data-testid={s.testId}><small>{s.label.toUpperCase()}</small><b>{s.value}</b></span>)}</div> : null}
-    <footer className="rk-card-foot">
+    {note ? <small className="rk-card-note">{note}</small> : null}
+    <footer className="rk-card-foot">{foot || <>
       <div><small className="rk-eyebrow">YOUR SCORE</small><b data-testid={testId + '-summary'}>{summary.toUpperCase()}</b></div>
       {serial ? <div className="rk-serial" data-testid={testId + '-serial'}><small>№ </small><b>{serial}</b>{of ? <i> / {of}</i> : null}</div> : null}
-    </footer>
+    </>}</footer>
   </article>;
 }
 
@@ -102,7 +106,7 @@ export const WaButton = ({ text, testId, label = 'WhatsApp par bhejo' }) => <but
   <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.6-.1 1.2Z" /></svg>{label}</button>;
 
 /** One college as a card that reads like a button; "Add to Compare" and "Dream college" sit under it. */
-export function CollegeCard({ testId, rank, edge, title, tags, sub, line, stats, teaser, viewed, pulse, open, onOpen, compared, onCompare, dream, children }) {
+export function CollegeCard({ testId, rank, edge, title, tags, sub, line, stats, note, teaser, viewed, pulse, open, onOpen, compared, onCompare, dream, children }) {
   return <div className={'rk-college' + (rank && rank <= 3 ? ` is-top wash-${rank}` : '')} data-testid={testId + '-wrap'}>
     <i className={'rk-college-edge edge-' + edge} />
     <button type="button" className="rk-college-main" onClick={onOpen} aria-expanded={open} data-testid={testId}>
@@ -111,6 +115,7 @@ export function CollegeCard({ testId, rank, edge, title, tags, sub, line, stats,
         <span className="rk-college-text"><strong>{title}</strong>{tags ? <span className="rk-tags">{tags}</span> : null}<span className="rk-college-sub">{sub}</span>{line ? <small>{line}</small> : null}</span>
       </span>
       <span className="rk-stats">{stats.map(s => <span key={s.label} className="rk-stat" data-testid={s.testId}><small>{s.label}</small><b className={s.tone ? 'tone-' + s.tone : ''}>{s.value}</b>{s.sub ? <i>{s.sub}</i> : null}</span>)}</span>
+      {note ? <span className="rk-college-gap" data-testid={testId + '-gap'}>{note}</span> : null}
       {children}
       <span className="rk-college-foot">
         <span className={'rk-teaser' + (viewed ? ' is-seen' : '')}>{viewed ? <Check size={15} /> : <BarChart3 size={15} />}{viewed ? `Dekha · ${teaser}` : teaser}</span>
@@ -119,6 +124,13 @@ export function CollegeCard({ testId, rank, edge, title, tags, sub, line, stats,
     </button>
     <CardActions testId={testId} compared={compared} onCompare={onCompare} dream={dream} />
   </div>;
+}
+
+/** The app's 2025 → 2026 box (final round, same seat; a higher closing rank this year = easier); "Naya" when 2025 had no such seat. */
+export function trendStat(y25, y26, testId) {
+  if (!y25 || !y26) return { label: '2025 SE', value: 'Naya', sub: '2025 mein nahi tha', tone: 'soft', testId };
+  const d = y26 - y25, same = Math.abs(d) < y25 * 0.03;
+  return { label: '2025 SE', value: same ? '≈ Same' : d > 0 ? '▼ Aasaan' : '▲ Tough', sub: `${fmt(y25)} → ${fmt(y26)}`, tone: same ? 'soft' : d > 0 ? 'good' : 'bad', testId };
 }
 
 /** "Add to Compare" and "Dream college" under a card, with a one-line confirmation. */

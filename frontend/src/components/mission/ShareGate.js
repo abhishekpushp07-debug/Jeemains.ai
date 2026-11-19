@@ -31,7 +31,6 @@ export function ShareGate({ onOpen }) {
         <span className="ms-lock"><Lock size={14} />Score, rank aur solutions ek share ke baad khulenge</span></header>
       <div className="ms-gate-action">{action('top')}{noteView('top')}</div>
       <div className="ms-card-wrap"><MissionCard ref={card} helped={mission.stats?.helped} name={mission.name} /></div>
-      {mission.stats?.helped ? <p className="ms-impact-note" data-testid="share-gate-impact-note">Aapka impact card par dikhega</p> : null}
       <div className="ms-gate-action">{action('bottom')}
         <button type="button" className="ms-more" onClick={() => { setFrom('bottom'); share(false); }} disabled={busy || thanks} data-testid="share-gate-more"><Share2 size={16} />Doosre app se share karo</button>
         {noteView('bottom')}</div>

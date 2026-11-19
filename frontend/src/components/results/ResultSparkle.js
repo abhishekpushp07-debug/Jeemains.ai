@@ -1,12 +1,12 @@
 // A light sparkle when a released result beats the student's own best or reaches 40%, plus the Dream College Meter
 // for full mocks (and a cheer when a dream seat is crossed for the first time). Shown once per attempt in this browser.
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Sparkles, Trophy, X } from 'lucide-react';
 import { api } from '../../lib/api';
 import { useAuth } from '../../lib/auth';
-import { claimCheer, dreamsOf, reloadDreams, useDreams } from '../rank/rankStore';
-import { DreamMeter } from '../rank/DreamPanel';
+import { claimCheer, reloadDreams, useDreams } from '../rank/rankStore';
+import { DreamMeter } from '../rank/DreamMeter';
 import '../../celebrate.css';
 
 const COLORS = ['#D90F23', '#F2C14E', '#FFFFFF', '#8A1538', '#FF8E98', '#FFE6A3'];
@@ -19,7 +19,8 @@ function Burst() {
 
 export function ResultSparkle({ id, enabled }) {
   const { user } = useAuth();
-  const dreams = useDreams();
+  const navigate = useNavigate();
+  useDreams();
   const [c, setC] = useState(null), [won, setWon] = useState(null), [burst, setBurst] = useState(false), [hidden, setHidden] = useState(false);
   useEffect(() => {
     if (!enabled) return undefined;
@@ -45,7 +46,6 @@ export function ResultSparkle({ id, enabled }) {
     return () => clearTimeout(t);
   }, [party, id]);
   if (!c) return null;
-  const mine = c.full && c.dream_exam ? dreamsOf(dreams, c.dream_exam) : [];
   const title = won ? `Dream college cross! ${won.dreams[0].college}` : c.beat_best ? 'Naya personal best! 🎉' : 'Shabaash! 40%+ score ✨';
   const sub = won ? `${won.dreams[0].branch}: chahiye the ${Math.round(won.dreams[0].need)}, aapke ${won.mock.score} / ${won.mock.max}.${won.dreams.length > 1 ? ` Aur ${won.dreams.length - 1} dream bhi paar!` : ''}`
     : c.beat_best ? `${c.pct}% · pichhla best ${c.best_before.pct}% (${c.best_before.score} / ${c.best_before.maximum}). Isi raftaar se aage badho.`
@@ -57,10 +57,8 @@ export function ResultSparkle({ id, enabled }) {
       <div><b data-testid="result-sparkle-title">{title}</b><small data-testid="result-sparkle-sub">{sub}</small></div>
       <button type="button" onClick={() => setHidden(true)} aria-label="Band karo" data-testid="result-sparkle-close"><X size={16} /></button>
     </div> : null}
-    {c.full && user ? <section className="cb-dreams" data-testid="result-dreams">
-      <header><b>Dream College Meter</b><small>Ye full mock {c.scaled} / {c.dream_exam === 'jee' ? 300 : c.dream_exam === 'bitsat' ? 390 : 180} ke barabar hai</small></header>
-      {mine.length ? mine.map((d, i) => <DreamMeter key={d.id} dream={d} score={c.scaled} max={c.dream_exam === 'jee' ? 300 : c.dream_exam === 'bitsat' ? 390 : 180} testId={`result-dream-${i}`} />)
-        : <p>Apne dream college chuno aur har mock ke baad dekho kitne marks door ho. <Link to="/rank?tool=target" data-testid="result-dreams-add">Dream college chuno</Link></p>}
-    </section> : null}
+    {c.full && c.dream_exam && user ? <div className="cb-meter" data-testid="result-dreams">
+      <DreamMeter exam={c.dream_exam} testId="result-dream-meter" mockId={id} chart="full" onAdd={() => navigate('/rank?tool=college')} />
+    </div> : null}
   </>;
 }

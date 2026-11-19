@@ -32,7 +32,7 @@ function useCountUp(n) {
     if (n <= from || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { shown.current = n; setV(n); return undefined; }
     const t0 = performance.now();
     let raf = 0;
-    const step = t => { const p = Math.min(1, (t - t0) / 1200); const x = Math.round(from + (n - from) * (1 - Math.pow(1 - p, 3))); shown.current = x; setV(x); if (p < 1) raf = requestAnimationFrame(step); };
+    const step = t => { const p = Math.min(1, (t - t0) / 900); const x = Math.round(from + (n - from) * (1 - Math.pow(1 - p, 3))); shown.current = x; setV(x); if (p < 1) raf = requestAnimationFrame(step); };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
   }, [n]);
@@ -75,7 +75,7 @@ function watchReturn() {
 const download = file => { const url = URL.createObjectURL(file); const a = document.createElement('a'); a.href = url; a.download = file.name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000); };
 const aborted = e => e?.name === 'AbortError';
 
-async function sendCard(file, toWhatsApp, caption) {
+export async function sendCard(file, toWhatsApp, caption) {
   if (file && navigator.canShare?.({ files: [file] })) {
     try { await navigator.share({ files: [file], text: caption }); return { shared: true, away: false, note: 'Shukriya! 🙏' }; } catch (e) { if (aborted(e)) return { shared: false }; }
   }

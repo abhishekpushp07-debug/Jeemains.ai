@@ -1,7 +1,7 @@
 // COMEDK college predictor: marks or rank (+ course groups) -> expected rank and every Karnataka seat in reach, Bengaluru or not.
 import React, { useEffect, useState } from 'react';
-import { ESTIMATE, fmt, fmtRange, getMeta, invite, rank, rupees } from './rankApi';
-import { BranchPicker, CollegeCard, Err, Field, Go, Heading, Notes, Pager, Panel, PdfButton, Problem, RankCard, Summary, Switch, Tag, TapHint, useCardViews, WaButton } from './RankUi';
+import { ESTIMATE, fmt, fmtRange, getMeta, invite, rank } from './rankApi';
+import { BranchPicker, CollegeCard, Err, Field, Go, Heading, Notes, Pager, Panel, PdfButton, Problem, RankCard, Summary, Switch, Tag, TapHint, trendStat, useCardViews, WaButton } from './RankUi';
 import { comedkDream, comedkSaved, shortlist, useDreamToggle, useRankData } from './rankStore';
 import { ComedkCollegeSheet } from './CollegeSheets';
 import { useShareLink } from '../mission/missionApi';
@@ -79,14 +79,17 @@ export function ComedkPanel({ handover }) {
   </>;
 }
 
+/** ₹2,85,000 → "₹2.85 L" so the fee fits its stat box. */
+const lakh = fee => (fee >= 100000 ? `₹${(fee / 100000).toFixed(2)} L` : `₹${fmt(fee)}`);
+
 function ComedkCard({ c, n, first, testId, views, onOpen }) {
   const list = shortlist.useList();
   const saved = comedkSaved(c);
   const dream = useDreamToggle(`comedk-${c.code}|${c.cc}`, () => comedkDream(c));
-  return <CollegeCard testId={testId} rank={n} edge={c.blr ? 'NIT' : 'GFTI'} title={c.college} tags={<>{c.blr ? <span className="rk-tag kind-NIT">Bengaluru</span> : null}<Tag tag={c.tag} /></>}
-    sub={c.course} line={`${c.city}${c.gap ? ` · ${c.gap}` : ''}`}
-    stats={[{ label: 'Closing 2026', value: fmt(c.close), sub: c.round, testId: testId + '-close' }, c.y25 ? { label: '2025 final', value: fmt(c.y25) } : null,
-      c.fee ? { label: 'Fee / saal', value: rupees(c.fee) } : null, c.seats ? { label: 'Seats', value: String(c.seats) } : null].filter(Boolean)}
-    teaser="Har round ka cutoff" viewed={views.viewed.has(c.id)} pulse={views.pulse && first} open={false} onOpen={() => { views.mark(c.id); onOpen(); }}
+  return <CollegeCard testId={testId} rank={n} edge={c.tag || (c.gap ? 'near' : 'none')} title={c.college} tags={<Tag tag={c.tag} />}
+    sub={c.course} line={`${c.city ? `${c.city} · ` : ''}GM (All India)`} note={c.gap}
+    stats={[{ label: 'CLOSING', value: fmt(c.close), sub: `${c.round} · 2026`, testId: testId + '-close' }, trendStat(c.y25, c.close, testId + '-trend'),
+      { label: 'FEE / SAAL', value: c.fee ? lakh(c.fee) : '—', sub: c.seats ? `${c.seats} GM seats` : 'seats —' }]}
+    teaser="Har round ka cutoff · fee · seats" viewed={views.viewed.has(c.id)} pulse={views.pulse && first} open={false} onOpen={() => { views.mark(c.id); onOpen(); }}
     compared={list.some(x => x.id === saved.id)} onCompare={() => shortlist.toggle(saved)} dream={dream} />;
 }

@@ -2,7 +2,7 @@
 // by NIT / IIIT / GFTI / Delhi, near misses, and a college sheet with every round's closing rank.
 import React, { useEffect, useState } from 'react';
 import { CATEGORY_LABEL, CATS, ESTIMATE, fmt, fmtPct, fmtRange, getMeta, invite, LEVEL, LEVELS, rank, SEGMENTS } from './rankApi';
-import { BranchPicker, Chip, CollegeCard, Err, Field, Go, Heading, Kind, Notes, Pager, Panel, PdfButton, Problem, RankCard, StateSelect, Summary, Switch, Tag, TapHint, useCardViews, WaButton } from './RankUi';
+import { BranchPicker, Chip, CollegeCard, Err, Field, Go, Heading, Kind, Notes, Pager, Panel, PdfButton, Problem, RankCard, StateSelect, Summary, Switch, Tag, TapHint, trendStat, useCardViews, WaButton } from './RankUi';
 import { jeeDream, jeeSaved, setJeeProfile, shortlist, useDreamToggle, useRankData } from './rankStore';
 import { JeeCollegeSheet } from './CollegeSheets';
 import { BitsatPanel } from './BitsatPanel';
@@ -116,15 +116,16 @@ function JeeColleges({ handover }) {
   </>;
 }
 
-function SeatCard({ s, n, y25, testId, views, first, onOpen }) {
+function SeatCard({ s, n, testId, views, first, onOpen }) {
   const list = shortlist.useList();
   const saved = jeeSaved(s);
   const dream = useDreamToggle(`jee-${s.prog}`, () => jeeDream(s));
   const key = `jee-${s.prog}-${s.path}`;
-  return <CollegeCard testId={testId} rank={n} edge={s.type} title={s.college} tags={<><Kind kind={s.type} /><Tag tag={s.tag} /></>}
-    sub={`${s.branch}${s.degree ? ` (${s.degree})` : ''}`} line={`${s.path}${s.gap ? ` · ${s.gap}` : ''}`}
-    stats={[{ label: `Closing 2026 · ${s.rank_type}`, value: fmt(s.close), sub: s.round, testId: testId + '-close' }, s.y25 ? { label: y25 || '2025 final', value: fmt(s.y25) } : null].filter(Boolean)}
-    teaser="Har round ka cutoff" viewed={views.viewed.has(key)} pulse={views.pulse && first} open={false} onOpen={() => { views.mark(key); onOpen(); }}
+  return <CollegeCard testId={testId} rank={n} edge={s.tag || (s.gap ? 'near' : 'none')} title={s.college} tags={<><Kind kind={s.type} /><Tag tag={s.tag} /></>}
+    sub={`${s.branch}${s.degree ? ` (${s.degree})` : ''}`} line={s.path} note={s.gap}
+    stats={[{ label: 'CLOSING', value: fmt(s.close), sub: `${s.rank_type} · 2026`, testId: testId + '-close' }, { label: 'ROUND', value: s.round, sub: 'jahan seat mili' },
+      trendStat(s.y25, s.y26, testId + '-trend')]}
+    teaser="Har round ka cutoff + sab branches" viewed={views.viewed.has(key)} pulse={views.pulse && first} open={false} onOpen={() => { views.mark(key); onOpen(); }}
     compared={list.some(x => x.id === saved.id)} onCompare={() => shortlist.toggle(saved)} dream={dream} />;
 }
 

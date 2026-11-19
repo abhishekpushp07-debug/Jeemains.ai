@@ -36,7 +36,7 @@ export function BitsatPanel() {
   const res = data?.result;
   const share = res ? ['🎓 Mera JEELIVE.AI BITSAT Predictor · 2026', `${res.score} / ${res.max} score · ${res.cleared} / ${res.total} programs clear`,
     ...data.items.slice(0, 5).map((b, i) => `${i + 1}. ${b.college} · ${b.program} (cutoff ${b.cutoff})`), '', ESTIMATE, '', invite(link)].join('\n') : '';
-  const card = (b, i, prefix, first) => <BitsatCard key={prefix + b.id} b={b} n={prefix === 'bt-item' ? i + 1 : null} years={data.years} testId={`${prefix}-${i}`} views={views} first={first}
+  const card = (b, i, prefix, first) => <BitsatCard key={prefix + b.id} b={b} n={prefix === 'bt-item' ? i + 1 : null} score={res.score} years={data.years} testId={`${prefix}-${i}`} views={views} first={first}
     open={openId === b.id} onOpen={() => { views.mark(b.id); setOpenId(o => (o === b.id ? null : b.id)); }} />;
   return <>
     {open || !query ? <Panel form title="Your BITSAT score" testId="bt-input">
@@ -66,15 +66,22 @@ export function BitsatPanel() {
   </>;
 }
 
-function BitsatCard({ b, n, years, testId, views, first, open, onOpen }) {
+const CAMPUS_KIND = { Pilani: 'NIT', Goa: 'IIIT', Hyderabad: 'GFTI' };
+
+function BitsatCard({ b, n, score, years, testId, views, first, open, onOpen }) {
   const list = shortlist.useList();
   const saved = bitsatSaved(b);
   const dream = useDreamToggle(`bitsat-${b.id}`, () => bitsatDream(b));
   const top = Math.max(...b.history.filter(Boolean), b.cutoff, 1);
-  return <CollegeCard testId={testId} rank={n} edge={b.campus === 'Pilani' ? 'NIT' : b.campus === 'Goa' ? 'IIIT' : 'GFTI'} title={b.college} tags={<Tag tag={b.tag} />} sub={b.program}
-    line={b.gap >= 0 ? `Cutoff se ${b.gap} marks upar` : `${-b.gap} marks aur chahiye`}
-    stats={[{ label: 'Cutoff 2026', value: `${b.cutoff}`, sub: '/ 390', testId: testId + '-cutoff' }, b.last ? { label: 'Pichhla saal', value: String(b.last) } : null].filter(Boolean)}
-    teaser="Saalon ka cutoff" viewed={views.viewed.has(b.id)} pulse={views.pulse && first} open={open} onOpen={onOpen}
+  const d = b.last == null ? null : b.cutoff - b.last, same = d !== null && Math.abs(d) <= 2;
+  return <CollegeCard testId={testId} rank={n} edge={b.tag || (b.gap > 0 ? 'near' : 'none')} title={b.college} sub={b.program}
+    tags={<><span className={'rk-tag kind-' + CAMPUS_KIND[b.campus]}>{b.campus}</span><Tag tag={b.tag} /></>}
+    stats={[{ label: 'CUTOFF', value: String(b.cutoff), sub: '2026 · / 390', testId: testId + '-cutoff' },
+      d === null ? { label: '2025 SE', value: 'Naya', sub: 'naya program', tone: 'soft', testId: testId + '-trend' }
+        : { label: '2025 SE', value: same ? '≈ Same' : d > 0 ? `▲ ${d} tough` : `▼ ${-d} aasaan`, sub: `2025: ${b.last}`, tone: same ? 'soft' : d > 0 ? 'bad' : 'good', testId: testId + '-trend' },
+      b.gap > 0 ? { label: 'AAPKA', value: `+${b.gap} chahiye`, sub: `score ${score}`, tone: 'flame', testId: testId + '-you' }
+        : { label: 'AAPKA', value: `${score - b.cutoff} upar`, sub: `score ${score}`, tone: 'good', testId: testId + '-you' }]}
+    teaser="2022 se 2026 tak, 5 saal ke cutoff" viewed={views.viewed.has(b.id)} pulse={views.pulse && first} open={open} onOpen={onOpen}
     compared={list.some(x => x.id === saved.id)} onCompare={() => shortlist.toggle(saved)} dream={dream}>
     {open ? <span className="rk-history" data-testid={testId + '-history'}>{years.map((y, i) => <span key={y}><i style={{ height: `${Math.max(6, ((b.history[i] || 0) / top) * 100)}%` }} />
       <b>{b.history[i] ?? '—'}</b><small>{y}</small></span>)}</span> : null}

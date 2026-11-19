@@ -57,9 +57,8 @@ from tejas import (
     analysis_api,
     names,
     media,
-    rank_predictor,
+    app_connect,
     dreams,
-    mission,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -82,6 +81,7 @@ async def lifespan(app):
     await solutions.create_index([('state', 1), ('order', 1)])
     await solutions.create_index('set_id')
     yield
+    await app_connect.close()
     client.close()
 
 
@@ -273,9 +273,8 @@ for module in [
     analysis_api,
     names,
     media,
-    rank_predictor,
+    app_connect,
     dreams,
-    mission,
 ]:
     app.include_router(module.router)
 

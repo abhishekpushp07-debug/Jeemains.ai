@@ -32,7 +32,7 @@ export const caption = link => [
 const STEPS = [1, 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000];
 export const nextStep = n => STEPS.find(x => x > n) ?? Math.ceil((n + 1) / 10000) * 10000;
 export const shortCount = n => (n < 10000 ? n.toLocaleString('en-IN') : `${Math.floor(n / 1000)}k+`);
-export const linkOf = s => (s?.code ? `${process.env.REACT_APP_BACKEND_URL}/api/j/${s.code}` : window.location.origin);
+export const linkOf = s => s?.link || 'https://jeelive.ai';
 const firstName = name => { const w = (name || '').trim().split(/\s+/)[0] || ''; return /\d/.test(w) ? '' : w.slice(0, 14); };
 
 let cache = null;

@@ -176,12 +176,17 @@
 .tag-likely { background: var(--rk-likely-soft); color: var(--rk-likely); }
 .tag-borderline { background: var(--rk-border-soft); color: var(--rk-border); }
 .rk-tag { border: 1px solid currentColor; }
-.tag-borderline { --rk-border: #C2410C; --rk-border-soft: #FFF0E6; }
-.kind-NIT { background: #FBEFF2; color: #7A1F35; }
-.kind-IIIT { background: #E6F6F4; color: #0F766E; }
-.kind-GFTI { background: #FFF6DB; color: #8A5A0B; }
-.kind-DELHI { background: #EAF7EF; color: #15803D; }
-.dark .kind-NIT, .dark .kind-IIIT, .dark .kind-GFTI, .dark .kind-DELHI { background: rgb(255 255 255 / .08); color: #FFF; }
+.tag-borderline { --rk-border: #A16207; --rk-border-soft: #FEF6D8; }
+.kind-NIT { background: #FDEEF3; color: #9D174D; }
+.kind-IIIT { background: #E6F8F5; color: #0F766E; }
+.kind-GFTI { background: #FBF3DC; color: #8A6514; }
+.kind-DELHI { background: #F1EEFE; color: #5B3FC4; }
+/* Dark mode: the app's own tag colours (docs/06 §9) */
+.dark .tag-safe { background: #0E3A2D; color: #6EE7B7; }
+.dark .tag-likely { background: #14213F; color: #93C5FD; }
+.dark .tag-borderline { background: #33270C; color: #FCD34D; }
+.dark .kind-NIT, .dark .kind-IIIT, .dark .kind-GFTI, .dark .kind-DELHI { background: #1A1A23; }
+.dark .kind-NIT { color: #F9A8C0; } .dark .kind-IIIT { color: #5EEAD4; } .dark .kind-GFTI { color: #E9C46A; } .dark .kind-DELHI { color: #C4B5FD; }
 .lvl-tough { background: #FFF0F2; color: #A10C22; }
 .lvl-normal { background: #EEF2FF; color: #1E43C0; }
 .lvl-easy { background: #EAF7EF; color: #0E7C45; }
@@ -213,6 +218,9 @@
 .dark .rk-card { border-color: rgba(255,255,255,.16); box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 14px 30px -10px rgb(0 0 0 / .8); }
 .rk-card-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; padding-top: 14px; border-top: 1px solid rgba(148,163,184,.2); }
 .rk-card-foot b { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 700; line-height: 1.5; letter-spacing: .12em; color: #EEF2F7; }
+.rk-card-gem { flex: none; margin-left: auto; color: #BFE3FF; }
+.rk-card-caps { margin-top: -8px; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #EEF2F7; }
+.rk-card-note { font-size: 11px; color: #94A3B8; }
 .rk-serial { flex: none; display: flex; align-items: baseline; }
 .rk-serial small { font-family: var(--rk-serif); color: #F4A3AE; font-size: 13px; }
 .rk-serial b { font-family: var(--rk-serif); font-weight: 400; font-size: 24px; line-height: 28px; color: #EEF2F7; text-shadow: 0 0 8px rgba(255,255,255,.26); }
@@ -262,8 +270,11 @@
 /* College card */
 .rk-college { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 22px; border: 1px solid var(--rk-line); background: var(--rk-card); overflow: hidden; animation: rk-rise .4s cubic-bezier(.2,.8,.2,1) both; }
 .rk-college.is-top { border-color: var(--acc-line); }
-.rk-college-edge { position: absolute; left: 0; top: 14px; bottom: 14px; width: 4px; border-radius: 0 4px 4px 0; background: #7A1F35; }
-.edge-IIIT { background: #0D9488; } .edge-GFTI { background: #B7791F; } .edge-DELHI { background: #15803D; }
+.rk-college-edge { position: absolute; left: 0; top: 14px; bottom: 14px; width: 4px; border-radius: 0 4px 4px 0; background: var(--rk-line); }
+.edge-safe { background: #15A06B; } .edge-likely { background: #2F6FE0; } .edge-borderline { background: #D9A400; } .edge-near { background: #EA580C; }
+.dark .edge-safe { background: #6EE7B7; } .dark .edge-likely { background: #93C5FD; } .dark .edge-borderline { background: #FCD34D; }
+.rk-college-gap { font-size: 12.5px; font-weight: 700; color: #C2410C; line-height: 1.45; }
+.dark .rk-college-gap { color: #FDBA74; }
 .rk-college.wash-1 { background: linear-gradient(90deg, rgba(231,194,107,.16), var(--rk-card) 55%); }
 .rk-college.wash-2 { background: linear-gradient(90deg, rgba(160,172,190,.16), var(--rk-card) 55%); }
 .rk-college.wash-3 { background: linear-gradient(90deg, rgba(208,141,85,.14), var(--rk-card) 55%); }
@@ -285,11 +296,15 @@
 .rk-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .rk-college-sub { font-size: 14px; font-weight: 600; color: var(--rk-text); line-height: 1.4; }
 .rk-college-text small { font-size: 12px; color: var(--rk-muted); line-height: 1.45; }
-.rk-stats { display: flex; flex-wrap: wrap; gap: 8px; }
-.rk-stat { flex: 1 1 120px; display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 14px; background: var(--rk-alt); }
-.rk-stats small { font-size: 11px; font-weight: 700; color: var(--rk-muted); }
-.rk-stats b { font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
-.rk-stats i { font-style: normal; font-size: 11.5px; color: var(--rk-muted); }
+.rk-stats { display: flex; border: 1px solid var(--rk-line); border-radius: 14px; background: var(--rk-alt); overflow: hidden; }
+.rk-stat { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 2px; padding: 9px 10px; }
+.rk-stat + .rk-stat { border-left: 1px solid var(--rk-line); }
+.rk-stats small { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--rk-muted); }
+.rk-stats b { font-size: 15px; font-weight: 800; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.rk-stats i { font-style: normal; font-size: 11px; color: var(--rk-muted); overflow-wrap: anywhere; }
+.rk-stats b.tone-good { color: #15803D; } .rk-stats b.tone-bad { color: #C2102C; } .rk-stats b.tone-soft { color: var(--rk-muted); } .rk-stats b.tone-flame { color: #C2410C; }
+.dark .rk-stats b.tone-good { color: #6EE7B7; } .dark .rk-stats b.tone-bad { color: #FCA5A5; } .dark .rk-stats b.tone-flame { color: #FDBA74; }
+@media (max-width: 359px) { .rk-stats { flex-direction: column; } .rk-stat + .rk-stat { border-left: 0; border-top: 1px solid var(--rk-line); } }
 .rk-college-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .rk-teaser { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--rk-muted); }
 .rk-teaser.is-seen { color: var(--rk-safe); }
