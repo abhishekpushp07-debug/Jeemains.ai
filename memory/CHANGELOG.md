@@ -246,3 +246,10 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Preview quirk found: the preview editor wraps dynamic children in display:contents spans, so CSS '>' selectors were replaced by classes/descendants.
 - Tested: iteration_199 (backend 23/23 in tests/test_rank_mission_dream199.py; frontend fixes: real reachable counts, word-wise college search + aliases, compare auto-tick, pager scroll, result gate keyed by id) and iteration_200 retest passed; then fixed DOST medal contrast and BMS/PES aliases (checked).
 
+
+## 2026-11-19 — Rank and Mission matched to the app's design notes
+- User: match Rank (design_guidelines_rank_royal.md + _v2) and Mission (design_guidelines_mission_stats.md) to the app, "most powerful, elegant, and perfect"; Rapid Fire stays a Play Store entry only (no link supplied yet, still non-clickable).
+- Rank (frontend only): app hero (red dash eyebrow, serif title, cutoff line, 'Free · bina login ke'); six black-metal jewel tiles with brilliant-cut diamond, NEW badges, live value lines (compare/dream counts), solid blood College tile, selected glow in the tool colour; form panels with the tool's colour band (Rank yellow, Percentile teal, Target lime, College red, Compare sky, Dream violet); summary row with 'Doosra number dekhna hai?' + Edit pill (College: purple shining bar); metal Rank Card (diamond watermark, chrome serif number, twinkling stars, red rule, № serial); medal coins on every row (4+ dark coin), top-3 wash; app tag colours. Mobile footer stacks; dark card edge.
+- Mission: impact count-up 1.2 s; quiet 'Aapka impact card par dikhega' under the gate card when friends were helped.
+- Tested iteration_201 (frontend, signed out, desktop + 390 px, light + dark): all passed, no console errors; then fixed 2 cosmetic notes (mobile card footer wrap, dark card edge) and checked by screenshot.
+

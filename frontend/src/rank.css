@@ -210,6 +210,7 @@
 .rk-small { flex: 1 1 40%; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .rk-small small { font-size: 10.5px; font-weight: 800; letter-spacing: .2em; color: #94A3B8; }
 .rk-small b { font-family: var(--rk-serif); font-weight: 400; font-size: 19px; line-height: 1.25; color: #EEF2F7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dark .rk-card { border-color: rgba(255,255,255,.16); box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 14px 30px -10px rgb(0 0 0 / .8); }
 .rk-card-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; padding-top: 14px; border-top: 1px solid rgba(148,163,184,.2); }
 .rk-card-foot b { display: block; margin-top: 4px; font-size: 12.5px; font-weight: 700; line-height: 1.5; letter-spacing: .12em; color: #EEF2F7; }
 .rk-serial { flex: none; display: flex; align-items: baseline; }
@@ -435,6 +436,10 @@
 @media (max-width: 639px) {
   .rk-page { padding: 18px 14px 120px; }
   .rk-hero { padding-bottom: 16px; }
+  .rk-card { padding: 20px 18px; }
+  .rk-card-foot { flex-direction: column; align-items: stretch; gap: 8px; }
+  .rk-card-foot b { font-size: 11.5px; letter-spacing: .1em; }
+  .rk-serial { align-self: flex-end; }
   .rk-tile { min-height: 64px; gap: 10px; padding: 10px 11px; }
   .rk-tile-text b { font-size: 10.5px; letter-spacing: .1em; }
   .rk-tile-text small { font-size: 11px; padding-right: 10px; }

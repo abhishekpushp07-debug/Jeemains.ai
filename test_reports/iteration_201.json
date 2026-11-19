@@ -1,0 +1,30 @@
+{
+  "summary": "Iteration 201: frontend-only test of the restyled Rank page and a check of /mission while signed out. Tested on desktop 1920 and mobile 390, light and dark, without logging in. Passed: (1) Hero: red 24x2 dash eyebrow 'JEELIVE.AI · RANK', Georgia serif h1 'Rank & college predictor', subline with 2026 cutoffs and a green 'Free · bina login ke' pill. (2) Six tiles: dark metal rgb(21,22,25) with jewel gradients, uppercase titles, value lines (marks se rank / NTA percentile / college ke liye / colleges + cutoffs / side by side / kitne marks door), NEW badges on pct/target/compare/dream only, College predictor solid #D10F2A. Clicking a tile sets aria-selected, gives a glow border in the tool colour (rank #FFD60A, pct #2DE1C2, target #B5F23D, college #FF6B78, compare #4CC3FF, dream #B983FF) and sets ?tool=; the ?tool=dream deep link works; ?tool=bogus falls back to Rank. (3) Form bands: Rank yellow, Pct teal, Target lime, Compare sky, all with #0B0B0F text; College red with white text. Dream has no band for visitors because it shows the sign-in panel. (4) Rank predictor at 180: collapsed row with the 'Doosra number dekhna hai?' hint and an Edit pill; black metal rp-card shows 99.08–99.15, a red 'RANK (CRL) 13,029 – 14,029' rule, 'YOUR SCORE 180 MARKS · NORMAL · GENERAL' and '№ 13,529 / 15,38,468'. Edit reopens the form with 180 kept. (5) College JEE at 200: purple gradient summary (#B43CFF to #6A16E8) with a red Edit pill; 25 medals on page 1 (1/2/3 gold, silver, bronze; 4 and up dark m4); tags NIT/IIIT plus Borderline; 'Cutoff dekho' opens the sheet with round-wise data; Add to Compare changes to 'In Compare' with a message and the compare tile value updates to '1 branch'; Dream college shows a sign-in message when signed out; page 2 starts at medal 26. (6) BITSAT at 280: medals 1–4 and 'Band karo' after opening a card. COMEDK at 110: medals 1–25, page 2 starts at 26. (7) Regression: Pct 97.5 gives CRL 37,439–38,195; Target 'nit trichy' search gives rows (CSE R5 1,373, marks 226/235/247); Compare NIT Trichy + NITK gives a table and the tile value '2 college'; Dream shows the sign-in panel linking to /login?next=/rank?tool=dream. (8) Dark mode: a contrast check of every text node in the stage, across all 6 tools, found nothing below 3:1. (9) Mobile 390: tiles 2 per row (176px each), no horizontal overflow (scrollWidth 390) before or after results, no title truncation. (10) /mission signed out redirects to /login?next=%2Fmission with no errors. No page or console errors in any run.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Rank mobile 390 - Rank Card footer", "issues": ["'YOUR SCORE' text wraps to 3 lines ('180 MARKS · / NORMAL · / GENERAL') because the № serial takes the right side; consider a smaller font or stacking the serial under the score on narrow widths."]},
+      {"screen": "Rank dark mode - Rank Card", "issues": ["The black metal card sits on a near-black panel with very little edge separation; a faint border or outer glow would help it stand out (cosmetic)."]},
+      {"screen": "Dream college tool (signed out)", "issues": ["The violet form header band never shows for visitors because the panel is the sign-in lock (Panel without form). Expected by code, but the 'Dream violet band' spec item cannot be seen without logging in."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional: on mobile, fix the 3-line wrap of the 'YOUR SCORE' line in the Rank Card footer.",
+    "Optional: add a subtle border or glow to rk-card in dark mode.",
+    "Note: bottom tabs (and so the Rapid Fire mark) show only for signed-in users (App.js tabs = !!user && !player), and the header-rapid-fire mark is also missing for visitors. On mobile, signed-out /rank shows no bottom tabs. If visitors should see the tab bar, change the condition. By code, RapidFireMark is a div with role=img and no handlers, so it is not clickable."
+  ],
+  "critical_code_review_comments": [
+    "rank.css line 10 '.dark .rk-page .rk-stage { --acc-ink: var(--acc) }' outranks '.rk-page .acc-rank' (0,3,0 vs 0,2,0), so in dark mode every tool's ink becomes its bright accent. This is fine on a dark background, and the college/dream overrides on lines 19-20 come later. Line 18 repeats line 9's --acc-soft for the stage.",
+    "Ink colour #7A5E00 is used for the Rank hint text on white, which passes contrast. Form band text is #0B0B0F on yellow, teal, lime and sky, and white on red, all readable.",
+    "Medal numbering, (page-1)*25+i+1, is consistent across cp, ck and bt. bt near items pass n=null, so they show no medal (intended)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100% of testable items (signed-in Rapid Fire tab and Mission share gate not testable without login)"},
+  "seed_data_creation": "None. No login, no accounts created. Compare additions went to localStorage only, in a throwaway browser context.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Rank is public. Key testids: rank-tool-<key>(-value|-badge|-title), rank-stage-title, rank-pane-<key>, <prefix>-input-head for the form band, rp-marks-input/rp-show/rp-card/rp-input-collapsed(-edit|-hint), cp-marks-input/cp-show/cp-seat-N(-medal|-compare|-dream|-cta)/cp-page-2, bt-score-input/bt-show/bt-item-N-medal, ck-marks-input/ck-show/ck-seat-N-medal, pr-percentile-input/pr-show/pr-card, tm-jee-search-input/-hit-0/tm-jee-rows, cmp-col-search-input/-hit-0/cmp-col-run/cmp-col-table, dream-signin. Bottom tabs and header-rapid-fire render only when signed in. /mission signed out redirects to /login."
+}
