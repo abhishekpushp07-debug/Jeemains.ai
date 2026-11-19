@@ -32,7 +32,7 @@ function useCountUp(n) {
     if (n <= from || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { shown.current = n; setV(n); return undefined; }
     const t0 = performance.now();
     let raf = 0;
-    const step = t => { const p = Math.min(1, (t - t0) / 900); const x = Math.round(from + (n - from) * (1 - Math.pow(1 - p, 3))); shown.current = x; setV(x); if (p < 1) raf = requestAnimationFrame(step); };
+    const step = t => { const p = Math.min(1, (t - t0) / 1200); const x = Math.round(from + (n - from) * (1 - Math.pow(1 - p, 3))); shown.current = x; setV(x); if (p < 1) raf = requestAnimationFrame(step); };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
   }, [n]);

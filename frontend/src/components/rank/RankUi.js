@@ -1,21 +1,34 @@
 // Shared pieces of the Rank page: jewel tool tiles, form panels in each tool's colour, chips, the dark metal Rank Card,
 // college cards, round ladders, sheets, PDF and WhatsApp buttons.
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { ArrowRight, Check, ChevronRight, ChevronUp, Download, Hand, Loader2, Pencil, Plus, Target, CheckCheck, BarChart3 } from 'lucide-react';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../ui/sheet';
 import { downloadPdf, fmt, TAG, KIND, shareWhatsApp } from './rankApi';
 
-/** A faceted diamond, drawn in currentColor. */
-export const Gem = ({ size = 46, className = '' }) => <svg className={'rk-gem ' + className} width={size} height={size * 0.86} viewBox="0 0 46 40" aria-hidden="true">
-  <polygon points="10,2 36,2 45,13 23,39 1,13" fill="currentColor" opacity=".16" />
-  <polygon points="10,2 17,13 1,13" fill="currentColor" opacity=".55" />
-  <polygon points="36,2 29,13 45,13" fill="currentColor" opacity=".38" />
-  <polygon points="10,2 36,2 29,13 17,13" fill="currentColor" opacity=".8" />
-  <polygon points="17,13 29,13 23,39" fill="currentColor" opacity=".62" />
-  <polygon points="1,13 17,13 23,39" fill="currentColor" opacity=".32" />
-  <polygon points="29,13 45,13 23,39" fill="currentColor" opacity=".48" />
-  <path d="M10 2h26l9 11-22 26L1 13z" fill="none" stroke="currentColor" strokeWidth=".9" opacity=".9" />
+/** The open tool (name, icon): its form panel wears the tool's colour band. */
+export const ToolCtx = createContext(null);
+
+// The app's brilliant-cut diamond in side view: white facets, a few in the tile's own colour (currentColor), sparkles at the tips.
+const FACETS = [['2,30 30,8 18,30', .5], ['30,8 34,30 18,30', .9], ['30,8 43.3,8 34,30', .35, 1], ['43.3,8 50,30 34,30', .75], ['43.3,8 56.7,8 50,30', .95],
+  ['56.7,8 66,30 50,30', .4, 1], ['56.7,8 70,8 66,30', .8], ['70,8 82,30 66,30', .3], ['70,8 98,30 82,30', .6, 1], ['2,30 18,30 50,78', .3], ['18,30 34,30 50,78', .7, 1],
+  ['34,30 50,30 50,78', .95], ['50,30 66,30 50,78', .5], ['66,30 82,30 50,78', .85, 1], ['82,30 98,30 50,78', .4]];
+const star = (x, y, r) => `M${x} ${y - r}Q${x} ${y} ${x + r} ${y}Q${x} ${y} ${x} ${y + r}Q${x} ${y} ${x - r} ${y}Q${x} ${y} ${x} ${y - r}Z`;
+export const Gem = ({ size = 46, className = '', sparkle }) => <svg className={'rk-gem ' + className} width={size} height={size * 0.8} viewBox="-8 -8 116 96" aria-hidden="true">
+  {FACETS.map(([p, o, t]) => <polygon key={p} points={p} fill={t ? 'currentColor' : '#FFFFFF'} fillOpacity={o} stroke="#FFFFFF" strokeOpacity=".75" strokeWidth=".7" strokeLinejoin="round" />)}
+  {sparkle ? <><path d={star(2, 30, 10)} fill="#FFFFFF" className="rk-twinkle" /><path d={star(86, 11, 6)} fill="#FFFFFF" className="rk-twinkle b" /></> : null}
 </svg>;
+
+/** The same stone seen from above in hairlines: the quiet watermark of the black metal Rank Card. */
+const at = (r, deg) => { const a = ((deg - 90) * Math.PI) / 180; return `${(100 + r * Math.cos(a)).toFixed(1)},${(100 + r * Math.sin(a)).toFixed(1)}`; };
+const TABLE = Array.from({ length: 8 }, (_, k) => at(46, 22.5 + 45 * k)).join(' ');
+const STAR = Array.from({ length: 16 }, (_, k) => at(k % 2 ? 46 : 72, 22.5 * k)).join(' ');
+const RAYS = [...Array.from({ length: 8 }, (_, k) => `M${at(46, 22.5 + 45 * k)}L${at(96, 22.5 + 45 * k)}`),
+  ...Array.from({ length: 8 }, (_, k) => `M${at(72, 45 * k)}L${at(96, 45 * k - 14)}M${at(72, 45 * k)}L${at(96, 45 * k + 14)}`)].join('');
+const DiamondLine = () => <svg className="rk-card-watermark" viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="#FFFFFF" strokeOpacity=".09" strokeWidth=".8">
+  <circle cx="100" cy="100" r="96" /><polygon points={STAR} /><polygon points={TABLE} /><path d={RAYS} /></g></svg>;
+const DiamondMark = () => <svg width="20" height="16" viewBox="-6 -6 112 92" aria-hidden="true"><g fill="none" stroke="#EEF2F7" strokeOpacity=".85" strokeWidth="4" strokeLinejoin="round">
+  <polygon points="30,8 70,8 98,30 50,78 2,30" /><path d="M2 30H98M30 8L18 30L50 78L34 30L43.3 8M70 8L82 30L50 78L66 30L56.7 8M34 30L50 8L66 30" /></g></svg>;
+const Stars = () => <span className="rk-stars" aria-hidden="true"><svg width="15" height="15"><path d={star(7.5, 7.5, 7.5)} fill="#FFFFFF" /></svg><svg width="8" height="8"><path d={star(4, 4, 4)} fill="#FFFFFF" /></svg></span>;
 
 export function Switch({ items, value, onChange, prefix }) {
   return <div className="rk-switch" role="tablist" data-testid={prefix}>
@@ -27,9 +40,14 @@ export function Switch({ items, value, onChange, prefix }) {
 export const Chip = ({ on, onClick, children, testId, tone }) => <button type="button" aria-pressed={!!on} onClick={onClick}
   className={'rk-chip' + (on ? ' is-on' : '') + (tone ? ' tone-' + tone : '')} data-testid={testId}>{on && !tone ? <Check size={14} /> : null}{children}</button>;
 
+/** A white panel; with `form` it is the open tool's form: framed in the tool's colour with a solid header band (tool icon, tool name, title). */
 export function Panel({ title, form, right, testId, children }) {
+  const tool = useContext(ToolCtx);
+  const band = form && tool;
   return <section className={'rk-panel' + (form ? ' is-form' : '')} data-testid={testId}>
-    {title ? <header className="rk-panel-head"><h3>{title}</h3>{right}</header> : null}
+    {band ? <header className="rk-form-head" data-testid={testId ? testId + '-head' : undefined}><span className="rk-form-icon"><tool.Icon size={16} /></span>
+      <span className="rk-form-title"><small>{tool.title.toUpperCase()}</small>{title ? <b>{title}</b> : null}</span>{right}</header>
+      : title ? <header className="rk-panel-head"><h3><i aria-hidden="true" />{title}</h3>{right}</header> : null}
     <div className="rk-panel-body">{children}</div>
   </section>;
 }
@@ -39,9 +57,16 @@ export const Field = ({ label, testId, ...p }) => <label className="rk-field"><s
 export const Go = ({ label, busy, onClick, testId }) => <button type="button" className="rk-go" onClick={onClick} disabled={busy} data-testid={testId}>
   {busy ? <Loader2 className="spin" size={18} /> : null}{label}<ArrowRight size={18} /></button>;
 
-export const Summary = ({ text, onEdit, testId }) => <div className="rk-summary" data-testid={testId}>
-  <span>{text}</span><button type="button" onClick={onEdit} data-testid={testId + '-edit'}><Pencil size={14} />Edit</button>
-</div>;
+/** The score line after Show with a bright Edit pill in the tool's colour; the whole row reopens the form. */
+export function Summary({ text, onEdit, testId }) {
+  const tool = useContext(ToolCtx);
+  return <button type="button" className="rk-summary" onClick={onEdit} aria-label={`${text}. Edit karke doosra number dekho`} data-testid={testId}>
+    <i className="rk-summary-shine" aria-hidden="true" />
+    {tool ? <span className="rk-summary-icon"><tool.Icon size={15} /></span> : null}
+    <span className="rk-summary-text"><b>{text.replace(/-/g, '\u2011')}</b><small data-testid={testId + '-hint'}>Doosra number dekhna hai?</small></span>
+    <span className="rk-summary-edit" data-testid={testId + '-edit'}><Pencil size={15} />Edit</span>
+  </button>;
+}
 
 export const Problem = ({ text, testId }) => text ? <p className="rk-problem" role="alert" data-testid={testId}>{text}</p> : null;
 export const Err = ({ error, retry, testId }) => error ? <div className="rk-error" role="alert" data-testid={testId}><span>{error}</span>{retry ? <button type="button" onClick={retry}>Retry</button> : null}</div> : null;
@@ -52,16 +77,16 @@ export const Kind = ({ kind }) => <span className={'rk-tag kind-' + kind}>{KIND[
 /** The dark metal Rank Card: brand + badge, the big number, a hairline rule, small ranks and the summary with its № serial. */
 export function RankCard({ testId, badge, eyebrow, big, rule, smalls = [], summary, serial, of }) {
   return <article className="rk-card" data-testid={testId}>
-    <i className="rk-card-sheen" aria-hidden="true" />
-    <Gem size={120} className="rk-card-watermark" />
-    <div className="rk-card-top"><span className="rk-card-brand"><Gem size={16} />JEELIVE.AI</span><span className="rk-card-badge">{badge}</span></div>
+    <DiamondLine />
+    <i className="rk-card-sheen" aria-hidden="true" /><i className="rk-card-edge" aria-hidden="true" />
+    <div className="rk-card-top"><span className="rk-card-brand"><DiamondMark />JEELIVE.AI</span><span className="rk-card-badge">{badge}</span></div>
     <small className="rk-eyebrow">{eyebrow}</small>
-    <strong className="rk-big" data-testid={testId + '-big'}>{big}</strong>
-    {rule ? <div className="rk-rule" data-testid={testId + '-rule'}><i /><span>{rule}</span><i /></div> : null}
-    {smalls.length ? <div className="rk-smalls">{smalls.map(s => <span key={s.label} data-testid={s.testId}><small>{s.label}</small><b>{s.value}</b></span>)}</div> : null}
+    <div className="rk-big-row"><strong className="rk-big" data-testid={testId + '-big'}>{big}</strong><Stars /></div>
+    {rule ? <div className="rk-rule" data-testid={testId + '-rule'}><i /><span>{rule}</span></div> : null}
+    {smalls.length ? <div className="rk-smalls">{smalls.map(s => <span key={s.label} className="rk-small" data-testid={s.testId}><small>{s.label.toUpperCase()}</small><b>{s.value}</b></span>)}</div> : null}
     <footer className="rk-card-foot">
-      <div><small className="rk-eyebrow">YOUR SCORE</small><b data-testid={testId + '-summary'}>{summary}</b></div>
-      {serial ? <div className="rk-serial" data-testid={testId + '-serial'}><small>№</small><b>{serial}</b>{of ? <i>of {of}</i> : null}</div> : null}
+      <div><small className="rk-eyebrow">YOUR SCORE</small><b data-testid={testId + '-summary'}>{summary.toUpperCase()}</b></div>
+      {serial ? <div className="rk-serial" data-testid={testId + '-serial'}><small>№ </small><b>{serial}</b>{of ? <i> / {of}</i> : null}</div> : null}
     </footer>
   </article>;
 }
@@ -78,7 +103,7 @@ export const WaButton = ({ text, testId, label = 'WhatsApp par bhejo' }) => <but
 
 /** One college as a card that reads like a button; "Add to Compare" and "Dream college" sit under it. */
 export function CollegeCard({ testId, rank, edge, title, tags, sub, line, stats, teaser, viewed, pulse, open, onOpen, compared, onCompare, dream, children }) {
-  return <div className={'rk-college' + (rank && rank <= 3 ? ' is-top' : '')} data-testid={testId + '-wrap'}>
+  return <div className={'rk-college' + (rank && rank <= 3 ? ` is-top wash-${rank}` : '')} data-testid={testId + '-wrap'}>
     <i className={'rk-college-edge edge-' + edge} />
     <button type="button" className="rk-college-main" onClick={onOpen} aria-expanded={open} data-testid={testId}>
       <span className="rk-college-head">

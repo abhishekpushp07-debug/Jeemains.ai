@@ -103,7 +103,7 @@ function JeeColleges({ handover }) {
       <Heading title={data.total ? `${fmt(data.reach?.[segment] ?? data.total)} seats aapki pahunch mein` : 'Is filter mein koi seat pahunch mein nahi'}
         sub={[data.total && (data.reach?.[segment] ?? 0) > data.total ? `Sabse achhi ${data.total} yahan, best pehle.` : null, data.note].filter(Boolean).join(' ')} />
       {data.items.length ? <TapHint testId="cp-hint" viewed={views.viewed.size} /> : null}
-      <div className="rk-list" data-testid="cp-list">{data.items.map((s, i) => <SeatCard key={`${s.prog}-${s.path}`} s={s} n={page === 1 && i < 3 ? i + 1 : null} y25={meta?.y25_label}
+      <div className="rk-list" data-testid="cp-list">{data.items.map((s, i) => <SeatCard key={`${s.prog}-${s.path}`} s={s} n={(page - 1) * 25 + i + 1} y25={meta?.y25_label}
         testId={`cp-seat-${(page - 1) * 25 + i}`} views={views} first={i === 0} onOpen={() => setSheet({ ...query, inst: s.inst, prog: s.prog, quota: s.quota, gender: s.gender, seat: s.seat })} />)}</div>
       <Pager page={page} pages={data.pages} onPage={p => { setPage(p); requestAnimationFrame(() => document.querySelector('[data-testid="cp-list"]')?.scrollIntoView({ behavior: 'smooth', block: 'start' })); }} prefix="cp" />
       {data.near?.length ? <><Heading title="Thoda aur mehnat, aur ye bhi" sub="Ye seats aapki rank se thoda pehle band hui. Kuch marks aur, aur ye aapki." />

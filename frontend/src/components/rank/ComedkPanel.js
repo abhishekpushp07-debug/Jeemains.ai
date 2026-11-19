@@ -67,7 +67,7 @@ export function ComedkPanel({ handover }) {
       <Heading title={data.total ? `${fmt(data.reach?.[area] ?? data.total)} seats aapki pahunch mein` : 'Is filter mein koi seat pahunch mein nahi'}
         sub={[data.total && (data.reach?.[area] ?? 0) > data.total ? `Sabse achhi ${data.total} yahan, best pehle.` : null, 'Closing rank = 2026 ke aakhri round tak, GM seats.'].filter(Boolean).join(' ')} />
       {data.items.length ? <TapHint testId="ck-hint" viewed={views.viewed.size} /> : null}
-      <div className="rk-list" data-testid="ck-list">{data.items.map((c, i) => <ComedkCard key={c.id} c={c} n={page === 1 && i < 3 ? i + 1 : null} first={i === 0} testId={`ck-seat-${(page - 1) * 25 + i}`} views={views}
+      <div className="rk-list" data-testid="ck-list">{data.items.map((c, i) => <ComedkCard key={c.id} c={c} n={(page - 1) * 25 + i + 1} first={i === 0} testId={`ck-seat-${(page - 1) * 25 + i}`} views={views}
         onOpen={() => setSheet({ ...query, code: c.code, course: c.cc })} />)}</div>
       <Pager page={page} pages={data.pages} onPage={p => { setPage(p); requestAnimationFrame(() => document.querySelector('[data-testid="ck-list"]')?.scrollIntoView({ behavior: 'smooth', block: 'start' })); }} prefix="ck" />
       {data.near?.length ? <><Heading title="Thoda aur mehnat, aur ye bhi" sub="Ye seats aapki rank se thoda pehle band hui." />
