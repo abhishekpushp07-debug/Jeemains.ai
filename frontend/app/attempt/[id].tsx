@@ -53,7 +53,7 @@ export default function Player() {
   const nav = useSubjectNavigation<any>(questions);
   const q = nav.question;
   const warmPaths = usePaperAssets(id!, questions, q?.id, false);
-  useEffect(() => { if (q) A.visit(q.id); }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (q) { A.visit(q.id); A.watch(q.id); } }, [q?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     reading.current?.scrollTo({ y: 0, animated: false });
   }, [q?.id]);

@@ -1,0 +1,952 @@
+{
+  "note": "Frozen sample captured when this pack was built. Shows the shape only: never use these numbers on a page; call the server.",
+  "request": {
+    "method": "POST",
+    "url": "/api/rank/bitsat",
+    "body": {
+      "score": 280,
+      "campus": "all",
+      "degree": "all"
+    }
+  },
+  "response": {
+    "result": {
+      "score": 280,
+      "max": 390,
+      "cleared": 47,
+      "total": 50,
+      "cleared_all": 47,
+      "total_all": 50,
+      "best": {
+        "college": "BITS Goa",
+        "program": "B.E. Computer Science",
+        "cutoff": 274
+      },
+      "target": {
+        "college": "BITS Pilani",
+        "program": "B.E. Electronics & Communication",
+        "cutoff": 289,
+        "gap": 9
+      }
+    },
+    "items": [
+      {
+        "id": "Goa-cs",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Computer Science",
+        "degree": "BE",
+        "history": [
+          286,
+          295,
+          301,
+          274,
+          274
+        ],
+        "cutoff": 274,
+        "last": 274,
+        "tag": "likely",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-cs",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Computer Science",
+        "degree": "BE",
+        "history": [
+          279,
+          284,
+          298,
+          270,
+          272
+        ],
+        "cutoff": 272,
+        "last": 270,
+        "tag": "likely",
+        "gap": 0
+      },
+      {
+        "id": "Goa-mnc",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Mathematics and Computing",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          295,
+          268,
+          270
+        ],
+        "cutoff": 270,
+        "last": 268,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-mnc",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Mathematics and Computing",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          293,
+          266,
+          268
+        ],
+        "cutoff": 268,
+        "last": 266,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-elc",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Electronics and Computer",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          null,
+          262,
+          266
+        ],
+        "cutoff": 266,
+        "last": 262,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-eee",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Electrical & Electronics",
+        "degree": "BE",
+        "history": [
+          258,
+          272,
+          292,
+          260,
+          266
+        ],
+        "cutoff": 266,
+        "last": 260,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-ece",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Electronics & Communication",
+        "degree": "BE",
+        "history": [
+          256,
+          267,
+          287,
+          255,
+          261
+        ],
+        "cutoff": 261,
+        "last": 255,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-ece",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Electronics & Communication",
+        "degree": "BE",
+        "history": [
+          252,
+          265,
+          284,
+          256,
+          261
+        ],
+        "cutoff": 261,
+        "last": 256,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-eni",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Electronics & Instrumentation",
+        "degree": "BE",
+        "history": [
+          249,
+          266,
+          282,
+          250,
+          261
+        ],
+        "cutoff": 261,
+        "last": 250,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-eco",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "M.Sc. Economics",
+        "degree": "MSc",
+        "history": [
+          247,
+          257,
+          271,
+          251,
+          256
+        ],
+        "cutoff": 256,
+        "last": 251,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-eee",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Electrical & Electronics",
+        "degree": "BE",
+        "history": [
+          237,
+          252,
+          278,
+          243,
+          253
+        ],
+        "cutoff": 253,
+        "last": 243,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-eee",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Electrical & Electronics",
+        "degree": "BE",
+        "history": [
+          230,
+          251,
+          275,
+          239,
+          251
+        ],
+        "cutoff": 251,
+        "last": 239,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-eni",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Electronics & Instrumentation",
+        "degree": "BE",
+        "history": [
+          224,
+          244,
+          270,
+          234,
+          250
+        ],
+        "cutoff": 250,
+        "last": 234,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-eni",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Electronics & Instrumentation",
+        "degree": "BE",
+        "history": [
+          222,
+          244,
+          270,
+          232,
+          249
+        ],
+        "cutoff": 249,
+        "last": 232,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-eco",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "M.Sc. Economics",
+        "degree": "MSc",
+        "history": [
+          230,
+          239,
+          263,
+          237,
+          246
+        ],
+        "cutoff": 246,
+        "last": 237,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-semi",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "M.Sc. Semiconductor and Nanoscience",
+        "degree": "MSc",
+        "history": [
+          null,
+          null,
+          null,
+          239,
+          246
+        ],
+        "cutoff": 246,
+        "last": 239,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-eco",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "M.Sc. Economics",
+        "degree": "MSc",
+        "history": [
+          220,
+          236,
+          261,
+          231,
+          244
+        ],
+        "cutoff": 244,
+        "last": 231,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-semi",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "M.Sc. Semiconductor and Nanoscience",
+        "degree": "MSc",
+        "history": [
+          null,
+          null,
+          null,
+          225,
+          241
+        ],
+        "cutoff": 241,
+        "last": 225,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-semi",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "M.Sc. Semiconductor and Nanoscience",
+        "degree": "MSc",
+        "history": [
+          null,
+          null,
+          null,
+          225,
+          241
+        ],
+        "cutoff": 241,
+        "last": 225,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-math",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "M.Sc. Mathematics",
+        "degree": "MSc",
+        "history": [
+          214,
+          236,
+          256,
+          229,
+          241
+        ],
+        "cutoff": 241,
+        "last": 229,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-mech",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Mechanical",
+        "degree": "BE",
+        "history": [
+          223,
+          244,
+          266,
+          235,
+          239
+        ],
+        "cutoff": 239,
+        "last": 235,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-phy",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "M.Sc. Physics",
+        "degree": "MSc",
+        "history": [
+          214,
+          235,
+          254,
+          223,
+          235
+        ],
+        "cutoff": 235,
+        "last": 223,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-math",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "M.Sc. Mathematics",
+        "degree": "MSc",
+        "history": [
+          187,
+          221,
+          249,
+          216,
+          233
+        ],
+        "cutoff": 233,
+        "last": 216,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-mech",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Mechanical",
+        "degree": "BE",
+        "history": [
+          191,
+          223,
+          254,
+          223,
+          233
+        ],
+        "cutoff": 233,
+        "last": 223,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-phy",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "M.Sc. Physics",
+        "degree": "MSc",
+        "history": [
+          188,
+          222,
+          248,
+          212,
+          231
+        ],
+        "cutoff": 231,
+        "last": 212,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-math",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "M.Sc. Mathematics",
+        "degree": "MSc",
+        "history": [
+          177,
+          219,
+          247,
+          212,
+          230
+        ],
+        "cutoff": 230,
+        "last": 212,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-phy",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "M.Sc. Physics",
+        "degree": "MSc",
+        "history": [
+          173,
+          219,
+          245,
+          209,
+          229
+        ],
+        "cutoff": 229,
+        "last": 209,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-mech",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Mechanical",
+        "degree": "BE",
+        "history": [
+          182,
+          218,
+          251,
+          214,
+          228
+        ],
+        "cutoff": 228,
+        "last": 214,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-msc_chem",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "M.Sc. Chemistry",
+        "degree": "MSc",
+        "history": [
+          168,
+          213,
+          241,
+          212,
+          227
+        ],
+        "cutoff": 227,
+        "last": 212,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-chem",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Chemical",
+        "degree": "BE",
+        "history": [
+          191,
+          224,
+          247,
+          210,
+          226
+        ],
+        "cutoff": 226,
+        "last": 210,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-manuf",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Manufacturing",
+        "degree": "BE",
+        "history": [
+          184,
+          220,
+          243,
+          211,
+          226
+        ],
+        "cutoff": 226,
+        "last": 211,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-chem",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Chemical",
+        "degree": "BE",
+        "history": [
+          165,
+          209,
+          239,
+          206,
+          223
+        ],
+        "cutoff": 223,
+        "last": 206,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-msc_chem",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "M.Sc. Chemistry",
+        "degree": "MSc",
+        "history": [
+          163,
+          205,
+          236,
+          205,
+          223
+        ],
+        "cutoff": 223,
+        "last": 205,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-chem",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Chemical",
+        "degree": "BE",
+        "history": [
+          162,
+          207,
+          238,
+          205,
+          223
+        ],
+        "cutoff": 223,
+        "last": 205,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-msc_chem",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "M.Sc. Chemistry",
+        "degree": "MSc",
+        "history": [
+          160,
+          205,
+          235,
+          203,
+          223
+        ],
+        "cutoff": 223,
+        "last": 203,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-civil",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Civil",
+        "degree": "BE",
+        "history": [
+          167,
+          213,
+          238,
+          206,
+          222
+        ],
+        "cutoff": 222,
+        "last": 206,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-civil",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Civil",
+        "degree": "BE",
+        "history": [
+          158,
+          204,
+          235,
+          203,
+          220
+        ],
+        "cutoff": 220,
+        "last": 203,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-bio",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "M.Sc. Biological Sciences",
+        "degree": "MSc",
+        "history": [
+          171,
+          212,
+          236,
+          208,
+          218
+        ],
+        "cutoff": 218,
+        "last": 208,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-bio",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "M.Sc. Biological Sciences",
+        "degree": "MSc",
+        "history": [
+          164,
+          204,
+          234,
+          203,
+          217
+        ],
+        "cutoff": 217,
+        "last": 203,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-bio",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "M.Sc. Biological Sciences",
+        "degree": "MSc",
+        "history": [
+          158,
+          204,
+          234,
+          203,
+          217
+        ],
+        "cutoff": 217,
+        "last": 203,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-env",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Environmental and Sustainability",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          null,
+          203,
+          213
+        ],
+        "cutoff": 213,
+        "last": 203,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-phe",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Pharmaceutical Engg.",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          null,
+          null,
+          211
+        ],
+        "cutoff": 211,
+        "last": null,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Goa-env",
+        "campus": "Goa",
+        "college": "BITS Goa",
+        "program": "B.E. Environmental and Sustainability",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          null,
+          189,
+          210
+        ],
+        "cutoff": 210,
+        "last": 189,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-env",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Environmental and Sustainability",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          null,
+          181,
+          208
+        ],
+        "cutoff": 208,
+        "last": 181,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-phe",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B.E. Pharmaceutical Engg.",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          null,
+          null,
+          205
+        ],
+        "cutoff": 205,
+        "last": null,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Hyderabad-pharm",
+        "campus": "Hyderabad",
+        "college": "BITS Hyderabad",
+        "program": "B. Pharm",
+        "degree": "BPharm",
+        "history": [
+          109,
+          135,
+          161,
+          151,
+          200
+        ],
+        "cutoff": 200,
+        "last": 151,
+        "tag": "safe",
+        "gap": 0
+      },
+      {
+        "id": "Pilani-pharm",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B. Pharm",
+        "degree": "BPharm",
+        "history": [
+          125,
+          153,
+          165,
+          168,
+          200
+        ],
+        "cutoff": 200,
+        "last": 168,
+        "tag": "safe",
+        "gap": 0
+      }
+    ],
+    "near": [
+      {
+        "id": "Pilani-mnc",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Mathematics and Computing",
+        "degree": "BE",
+        "history": [
+          null,
+          null,
+          318,
+          295,
+          299
+        ],
+        "cutoff": 299,
+        "last": 295,
+        "tag": null,
+        "gap": 19
+      },
+      {
+        "id": "Pilani-ece",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Electronics & Communication",
+        "degree": "BE",
+        "history": [
+          279,
+          296,
+          314,
+          285,
+          289
+        ],
+        "cutoff": 289,
+        "last": 285,
+        "tag": null,
+        "gap": 9
+      }
+    ],
+    "rest": [
+      {
+        "id": "Pilani-cs",
+        "campus": "Pilani",
+        "college": "BITS Pilani",
+        "program": "B.E. Computer Science",
+        "degree": "BE",
+        "history": [
+          320,
+          331,
+          327,
+          304,
+          308
+        ],
+        "cutoff": 308,
+        "last": 304,
+        "tag": null,
+        "gap": 28
+      }
+    ],
+    "years": [
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "notes": [
+      "BITSAT mein category reservation nahi hai, sabke liye ek hi cutoff.",
+      "Cutoff har saal 10-20 marks upar-neeche hota hai (2024 se 2025 mein lagbhag 20 gira, 2026 mein phir chadha).",
+      "Same score par seats kam padein to PCM marks se tie todi jaati hai."
+    ],
+    "source": "https://admissions.bits-pilani.ac.in/FD/BITSAT_cutOffs.html"
+  }
+}

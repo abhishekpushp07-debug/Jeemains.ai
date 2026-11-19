@@ -1,0 +1,18 @@
+{
+  "note": "Shape of a real answer; the code and counts are masked (made up), never a real student's.",
+  "request": {
+    "method": "GET",
+    "url": "/api/rf/mission/me (app server, called by the connector)",
+    "headers": {
+      "Authorization": "Bearer <15-minute pass from POST /api/rf/access>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "code": "AB2CDEF",
+      "helped": 12,
+      "week": 3
+    }
+  }
+}

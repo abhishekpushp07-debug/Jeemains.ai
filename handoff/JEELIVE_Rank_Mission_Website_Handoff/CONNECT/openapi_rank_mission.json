@@ -1,0 +1,2276 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "JEELIVE.AI app server: Rank, Mission, Dream college",
+    "version": "2026.11",
+    "description": "Paths as served by the app server. Through the website connector the browser calls /api/rank/*, /api/mission/me and /api/dream* instead (docs/02_CONNECT_GUIDE.md). GET /api/j/{code} is a plain 302 redirect."
+  },
+  "servers": [
+    {
+      "url": "https://jeelive-mobile.emergent.host"
+    }
+  ],
+  "paths": {
+    "/api/rank/meta": {
+      "get": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Meta",
+        "operationId": "meta_api_rank_meta_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/estimate": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Estimate",
+        "description": "Rank predictor: marks -> percentile and rank only (no colleges), with all three paper types side by side.",
+        "operationId": "estimate_api_rank_estimate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstimateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/predict": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Predict",
+        "operationId": "predict_api_rank_predict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/college": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "College",
+        "operationId": "college_api_rank_college_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollegeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/bitsat": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Predict",
+        "operationId": "predict_api_rank_bitsat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BitsatIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/comedk": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Predict",
+        "operationId": "predict_api_rank_comedk_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComedkIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/comedk/college": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "College",
+        "operationId": "college_api_rank_comedk_college_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComedkCollegeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/percentile": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Percentile",
+        "operationId": "percentile_api_rank_percentile_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PercentileIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/target/jee": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Target Jee",
+        "operationId": "target_jee_api_rank_target_jee_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TargetJeeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/target/comedk": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Target Comedk",
+        "operationId": "target_comedk_api_rank_target_comedk_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TargetComedkIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/target/bitsat": {
+      "get": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Target Bitsat",
+        "operationId": "target_bitsat_api_rank_target_bitsat_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/colleges": {
+      "get": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Colleges",
+        "operationId": "colleges_api_rank_colleges_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/compare": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Compare",
+        "operationId": "compare_api_rank_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompareIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/compare/colleges": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Compare Colleges",
+        "operationId": "compare_colleges_api_rank_compare_colleges_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollegeCompareIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/pdf/jee": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Jee",
+        "operationId": "jee_api_rank_pdf_jee_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JeePdfIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/pdf/comedk": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Comedk",
+        "operationId": "comedk_api_rank_pdf_comedk_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComedkPdfIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/pdf/bitsat": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Bitsat",
+        "operationId": "bitsat_api_rank_pdf_bitsat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BitsatIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/pdf/target/jee": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Target Jee",
+        "operationId": "target_jee_api_rank_pdf_target_jee_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TargetJeeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/pdf/target/comedk": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Target Comedk",
+        "operationId": "target_comedk_api_rank_pdf_target_comedk_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TargetComedkIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/pdf/target/bitsat": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Target Bitsat",
+        "operationId": "target_bitsat_api_rank_pdf_target_bitsat_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TargetBitsatPdfIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/pdf/saved": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Saved",
+        "operationId": "saved_api_rank_pdf_saved_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavedPdfIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rf/mission/me": {
+      "get": {
+        "summary": "Mine",
+        "operationId": "mine_api_rf_mission_me_get",
+        "parameters": [
+          {
+            "name": "x-rf-user",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rf-User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rf/dream": {
+      "get": {
+        "summary": "Read",
+        "operationId": "read_api_rf_dream_get",
+        "parameters": [
+          {
+            "name": "x-rf-user",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rf-User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rf/dream/dreams": {
+      "put": {
+        "summary": "Save Dreams",
+        "description": "The phone's list after its changes, merged into the account's current list; returns the account's list.",
+        "operationId": "save_dreams_api_rf_dream_dreams_put",
+        "parameters": [
+          {
+            "name": "x-rf-user",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rf-User"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DreamsIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rf/dream/mocks": {
+      "post": {
+        "summary": "Add Mocks",
+        "description": "Released full mocks seen on any device; the same mock again replaces its older copy. Newest 30 are kept.",
+        "operationId": "add_mocks_api_rf_dream_mocks_post",
+        "parameters": [
+          {
+            "name": "x-rf-user",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rf-User"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MocksIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rf/dream/cheered": {
+      "post": {
+        "summary": "Cheered",
+        "description": "Dreams whose \"Dream Unlocked\" celebration has played, so no device plays it again.",
+        "operationId": "cheered_api_rf_dream_cheered_post",
+        "parameters": [
+          {
+            "name": "x-rf-user",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Rf-User"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheeredIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rf/access": {
+      "post": {
+        "summary": "Access",
+        "operationId": "access_api_rf_access_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rf/access/revoke": {
+      "post": {
+        "summary": "Revoke",
+        "operationId": "revoke_api_rf_access_revoke_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccessRequest": {
+        "properties": {
+          "access_cookie": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 8192
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Cookie"
+          }
+        },
+        "type": "object",
+        "title": "AccessRequest"
+      },
+      "BitsatIn": {
+        "properties": {
+          "score": {
+            "type": "integer",
+            "maximum": 390.0,
+            "minimum": -130.0,
+            "title": "Score"
+          },
+          "campus": {
+            "type": "string",
+            "enum": [
+              "all",
+              "Pilani",
+              "Goa",
+              "Hyderabad"
+            ],
+            "title": "Campus",
+            "default": "all"
+          },
+          "degree": {
+            "type": "string",
+            "enum": [
+              "all",
+              "BE",
+              "MSc",
+              "BPharm"
+            ],
+            "title": "Degree",
+            "default": "all"
+          }
+        },
+        "type": "object",
+        "required": [
+          "score"
+        ],
+        "title": "BitsatIn"
+      },
+      "CheeredIn": {
+        "properties": {
+          "ids": {
+            "items": {
+              "type": "string",
+              "maxLength": 80,
+              "minLength": 1
+            },
+            "type": "array",
+            "maxItems": 15,
+            "minItems": 1,
+            "title": "Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ids"
+        ],
+        "title": "CheeredIn"
+      },
+      "CollegeCompareIn": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "female": {
+            "type": "boolean",
+            "title": "Female",
+            "default": false
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CollegeRef"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 1,
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "CollegeCompareIn"
+      },
+      "CollegeIn": {
+        "properties": {
+          "marks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 300.0,
+                "minimum": -75.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Marks"
+          },
+          "percentile": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentile"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "tough",
+              "normal",
+              "easy"
+            ],
+            "title": "Level",
+            "default": "normal"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "female": {
+            "type": "boolean",
+            "title": "Female",
+            "default": false
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "branches": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Branches",
+            "default": []
+          },
+          "inst": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inst"
+          },
+          "prog": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prog"
+          },
+          "quota": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quota"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "N",
+                  "F"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "seat": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "open",
+                  "cat"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seat"
+          },
+          "all": {
+            "type": "boolean",
+            "title": "All",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "inst"
+        ],
+        "title": "CollegeIn"
+      },
+      "CollegeRef": {
+        "properties": {
+          "exam": {
+            "type": "string",
+            "enum": [
+              "jee",
+              "bitsat",
+              "comedk"
+            ],
+            "title": "Exam"
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "exam",
+          "id"
+        ],
+        "title": "CollegeRef"
+      },
+      "ComedkCollegeIn": {
+        "properties": {
+          "marks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 180.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Marks"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 200000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "branches": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Branches",
+            "default": []
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "course": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Course"
+          },
+          "all": {
+            "type": "boolean",
+            "title": "All",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "title": "ComedkCollegeIn"
+      },
+      "ComedkIn": {
+        "properties": {
+          "marks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 180.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Marks"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 200000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "branches": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Branches",
+            "default": []
+          },
+          "area": {
+            "type": "string",
+            "enum": [
+              "all",
+              "blr",
+              "other"
+            ],
+            "title": "Area",
+            "default": "all"
+          },
+          "page": {
+            "type": "integer",
+            "maximum": 2.0,
+            "minimum": 1.0,
+            "title": "Page",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "title": "ComedkIn"
+      },
+      "ComedkPdfIn": {
+        "properties": {
+          "marks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 180.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Marks"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 200000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "branches": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Branches",
+            "default": []
+          },
+          "area": {
+            "type": "string",
+            "enum": [
+              "all",
+              "blr",
+              "other"
+            ],
+            "title": "Area",
+            "default": "all"
+          }
+        },
+        "type": "object",
+        "title": "ComedkPdfIn"
+      },
+      "CompareIn": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CompareItem"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 1,
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "CompareIn"
+      },
+      "CompareItem": {
+        "properties": {
+          "exam": {
+            "type": "string",
+            "enum": [
+              "jee",
+              "bitsat",
+              "comedk"
+            ],
+            "title": "Exam"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "prog": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prog"
+          },
+          "quota": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quota"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "N",
+                  "F"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          }
+        },
+        "type": "object",
+        "required": [
+          "exam",
+          "id"
+        ],
+        "title": "CompareItem"
+      },
+      "Dream": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "exam": {
+            "type": "string",
+            "enum": [
+              "jee",
+              "bitsat",
+              "comedk"
+            ],
+            "title": "Exam"
+          },
+          "college": {
+            "type": "string",
+            "maxLength": 160,
+            "title": "College"
+          },
+          "branch": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Branch"
+          },
+          "need": {
+            "type": "number",
+            "maximum": 400.0,
+            "minimum": -100.0,
+            "title": "Need"
+          },
+          "range": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array",
+                "maxItems": 2,
+                "minItems": 2
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Range"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Note",
+            "default": ""
+          },
+          "at": {
+            "type": "number",
+            "title": "At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "exam",
+          "college",
+          "branch",
+          "need",
+          "at"
+        ],
+        "title": "Dream"
+      },
+      "DreamsIn": {
+        "properties": {
+          "dreams": {
+            "items": {
+              "$ref": "#/components/schemas/Dream"
+            },
+            "type": "array",
+            "maxItems": 15,
+            "title": "Dreams"
+          },
+          "base": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 15,
+            "title": "Base"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dreams"
+        ],
+        "title": "DreamsIn"
+      },
+      "EstimateIn": {
+        "properties": {
+          "exam": {
+            "type": "string",
+            "enum": [
+              "jee",
+              "comedk"
+            ],
+            "title": "Exam",
+            "default": "jee"
+          },
+          "marks": {
+            "type": "integer",
+            "maximum": 300.0,
+            "minimum": -75.0,
+            "title": "Marks"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "tough",
+              "normal",
+              "easy"
+            ],
+            "title": "Level",
+            "default": "normal"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "marks"
+        ],
+        "title": "EstimateIn"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "JeePdfIn": {
+        "properties": {
+          "marks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 300.0,
+                "minimum": -75.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Marks"
+          },
+          "percentile": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentile"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "tough",
+              "normal",
+              "easy"
+            ],
+            "title": "Level",
+            "default": "normal"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "female": {
+            "type": "boolean",
+            "title": "Female",
+            "default": false
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "branches": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Branches",
+            "default": []
+          },
+          "segment": {
+            "type": "string",
+            "enum": [
+              "all",
+              "NIT",
+              "IIIT",
+              "GFTI",
+              "DELHI"
+            ],
+            "title": "Segment",
+            "default": "all"
+          }
+        },
+        "type": "object",
+        "title": "JeePdfIn"
+      },
+      "Mock": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "exam": {
+            "type": "string",
+            "enum": [
+              "jee",
+              "bitsat",
+              "comedk"
+            ],
+            "title": "Exam"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          },
+          "max": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Max"
+          },
+          "raw": {
+            "type": "number",
+            "title": "Raw"
+          },
+          "rawMax": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Rawmax"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "title": "Title",
+            "default": "Mock"
+          },
+          "at": {
+            "type": "number",
+            "title": "At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "exam",
+          "score",
+          "max",
+          "raw",
+          "rawMax",
+          "at"
+        ],
+        "title": "Mock"
+      },
+      "MocksIn": {
+        "properties": {
+          "mocks": {
+            "items": {
+              "$ref": "#/components/schemas/Mock"
+            },
+            "type": "array",
+            "maxItems": 30,
+            "minItems": 1,
+            "title": "Mocks"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "mocks"
+        ],
+        "title": "MocksIn"
+      },
+      "PercentileIn": {
+        "properties": {
+          "percentile": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Percentile"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "percentile"
+        ],
+        "title": "PercentileIn"
+      },
+      "PredictIn": {
+        "properties": {
+          "marks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 300.0,
+                "minimum": -75.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Marks"
+          },
+          "percentile": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentile"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "tough",
+              "normal",
+              "easy"
+            ],
+            "title": "Level",
+            "default": "normal"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "female": {
+            "type": "boolean",
+            "title": "Female",
+            "default": false
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "branches": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Branches",
+            "default": []
+          },
+          "segment": {
+            "type": "string",
+            "enum": [
+              "all",
+              "NIT",
+              "IIIT",
+              "GFTI",
+              "DELHI"
+            ],
+            "title": "Segment",
+            "default": "all"
+          },
+          "page": {
+            "type": "integer",
+            "maximum": 2.0,
+            "minimum": 1.0,
+            "title": "Page",
+            "default": 1
+          },
+          "page_size": {
+            "type": "integer",
+            "enum": [
+              20,
+              25
+            ],
+            "title": "Page Size",
+            "default": 25
+          }
+        },
+        "type": "object",
+        "title": "PredictIn"
+      },
+      "SavedPdfIn": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CompareItem"
+            },
+            "type": "array",
+            "maxItems": 50,
+            "minItems": 1,
+            "title": "Items"
+          },
+          "tags": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "safe",
+                    "likely",
+                    "borderline"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Tags",
+            "default": []
+          },
+          "pick": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Pick",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "SavedPdfIn"
+      },
+      "TargetBitsatPdfIn": {
+        "properties": {
+          "campus": {
+            "type": "string",
+            "enum": [
+              "all",
+              "Pilani",
+              "Goa",
+              "Hyderabad"
+            ],
+            "title": "Campus",
+            "default": "all"
+          }
+        },
+        "type": "object",
+        "title": "TargetBitsatPdfIn"
+      },
+      "TargetComedkIn": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code"
+        ],
+        "title": "TargetComedkIn"
+      },
+      "TargetJeeIn": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "female": {
+            "type": "boolean",
+            "title": "Female",
+            "default": false
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "inst": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Inst"
+          }
+        },
+        "type": "object",
+        "required": [
+          "inst"
+        ],
+        "title": "TargetJeeIn"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

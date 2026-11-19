@@ -1,0 +1,46 @@
+{
+  "note": "Frozen sample captured when this pack was built. Shows the shape only: never use these numbers on a page; call the server.",
+  "request": {
+    "method": "POST",
+    "url": "/api/rank/percentile",
+    "body": {
+      "percentile": 97.4567,
+      "category": "GEN",
+      "pwd": false
+    }
+  },
+  "response": {
+    "result": {
+      "percentile": [
+        97.46,
+        97.46
+      ],
+      "crl": [
+        38077,
+        38846
+      ],
+      "from_marks": false,
+      "summary": "97.4567 percentile · General"
+    },
+    "candidates": 1538468,
+    "marks": [
+      {
+        "level": "tough",
+        "marks": 128
+      },
+      {
+        "level": "normal",
+        "marks": 142
+      },
+      {
+        "level": "easy",
+        "marks": 153
+      }
+    ],
+    "notes": [
+      "Rank NTA JEE Main 2026 ke 15.38 lakh candidates ke percentile data se; same percentile par rank ki chhoti si range banti hai.",
+      "Category aur PwD rank estimate hain; NTA inki table nahi deta.",
+      "Marks = is percentile ke liye us type ki shift mein lagbhag kitne marks lage."
+    ]
+  }
+}

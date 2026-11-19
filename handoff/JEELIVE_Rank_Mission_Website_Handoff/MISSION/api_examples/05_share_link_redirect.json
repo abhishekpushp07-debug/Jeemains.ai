@@ -1,0 +1,19 @@
+{
+  "note": "Live answer for an unknown code (not counted). A real code answers the same way; the friend is counted once.",
+  "request": {
+    "method": "GET",
+    "url": "/api/j/AAAAAAA",
+    "headers": {
+      "User-Agent": "<a real browser>"
+    }
+  },
+  "response": {
+    "status": 302,
+    "headers": {
+      "Location": "https://jeelive.ai",
+      "Cache-Control": "no-store",
+      "Set-Cookie": "jlv=<random visitor id>; HttpOnly; Max-Age=31536000; Path=/api/j; SameSite=lax; Secure",
+      "referrer-policy": "no-referrer"
+    }
+  }
+}

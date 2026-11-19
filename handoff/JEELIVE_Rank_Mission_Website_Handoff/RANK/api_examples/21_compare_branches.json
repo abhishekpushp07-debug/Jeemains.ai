@@ -1,0 +1,179 @@
+{
+  "note": "Frozen sample captured when this pack was built. Shows the shape only: never use these numbers on a page; call the server.",
+  "request": {
+    "method": "POST",
+    "url": "/api/rank/compare",
+    "body": {
+      "items": [
+        {
+          "exam": "jee",
+          "id": "jee-230",
+          "prog": 230,
+          "quota": "OS",
+          "gender": "N",
+          "path": "Other state · Open"
+        },
+        {
+          "exam": "comedk",
+          "id": "E095|CY"
+        },
+        {
+          "exam": "bitsat",
+          "id": "Pilani-cs"
+        }
+      ]
+    }
+  },
+  "response": {
+    "items": [
+      {
+        "exam": "jee",
+        "id": "jee-230",
+        "title": "NIT Rourkela",
+        "name": "National Institute of Technology, Rourkela",
+        "place": "Rourkela, Odisha",
+        "sub": "Electrical Engineering",
+        "path": "Other state · Open",
+        "rank_label": "CRL",
+        "rounds": [
+          {
+            "label": "R1",
+            "close": 8956,
+            "crl": false
+          },
+          {
+            "label": "R2",
+            "close": 8956,
+            "crl": false
+          },
+          {
+            "label": "R3",
+            "close": 8956,
+            "crl": false
+          },
+          {
+            "label": "R4",
+            "close": 8977,
+            "crl": false
+          },
+          {
+            "label": "R5",
+            "close": 10108,
+            "crl": false
+          },
+          {
+            "label": "CSAB 1",
+            "close": 13522,
+            "crl": false
+          },
+          {
+            "label": "CSAB 2",
+            "close": 13994,
+            "crl": false
+          }
+        ],
+        "final": {
+          "label": "R5",
+          "close": 10108
+        },
+        "prev": {
+          "label": "2025 R6",
+          "close": 10623
+        },
+        "seats": 113,
+        "seats_label": "JoSAA seats (sab quota)",
+        "fee": null,
+        "fee_note": "JoSAA college-wise fee publish nahi karta; JEE colleges ki fee college ki website par dekho.",
+        "higher_is_harder": false
+      },
+      {
+        "exam": "comedk",
+        "id": "E095|CY",
+        "title": "R V College of Engineering",
+        "name": "R V College of Engineering-Mysore Road, Bengaluru",
+        "place": "Bengaluru",
+        "sub": "Computer Science & Engineering (Cyber Security)",
+        "path": "GM · All India",
+        "rank_label": "COMEDK rank",
+        "rounds": [
+          {
+            "label": "R1",
+            "close": 412
+          },
+          {
+            "label": "R2",
+            "close": null
+          },
+          {
+            "label": "R3",
+            "close": 657
+          },
+          {
+            "label": "R4",
+            "close": 852
+          }
+        ],
+        "final": {
+          "label": "R4",
+          "close": 852
+        },
+        "prev": {
+          "label": "2025 final",
+          "close": 1091
+        },
+        "seats": 16,
+        "seats_label": "GM seats",
+        "fee": 322000,
+        "higher_is_harder": false
+      },
+      {
+        "exam": "bitsat",
+        "id": "Pilani-cs",
+        "title": "BITS Pilani",
+        "name": "BITS Pilani",
+        "place": "Pilani",
+        "sub": "B.E. Computer Science",
+        "path": "Sab categories, ek cutoff",
+        "rank_label": "score / 390",
+        "rounds": [
+          {
+            "label": "2022",
+            "close": 320
+          },
+          {
+            "label": "2023",
+            "close": 331
+          },
+          {
+            "label": "2024",
+            "close": 327
+          },
+          {
+            "label": "2025",
+            "close": 304
+          },
+          {
+            "label": "2026",
+            "close": 308
+          }
+        ],
+        "final": {
+          "label": "2026",
+          "close": 308
+        },
+        "prev": {
+          "label": "2025",
+          "close": 304
+        },
+        "seats": null,
+        "fee": null,
+        "fee_note": "BITS program-wise fee aur seats bits-pilani.ac.in par.",
+        "higher_is_harder": true
+      }
+    ],
+    "notes": [
+      "Closing rank: chhota number = mushkil seat. BITSAT mein ulta: zyada cutoff score = mushkil.",
+      "JEE seats = JoSAA 2026 seat matrix (us branch ki saari quota-category seats). COMEDK seats = sirf GM."
+    ]
+  }
+}

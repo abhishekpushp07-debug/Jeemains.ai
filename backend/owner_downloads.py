@@ -1,4 +1,4 @@
-"""Owner-issued, expiring grants for one fixed content ZIP; no public mint endpoint."""
+"""Owner-issued, expiring grants for the fixed owner ZIPs (ARTIFACTS); no public mint endpoint."""
 from datetime import datetime, timezone
 from hashlib import sha256
 import hmac
@@ -10,8 +10,15 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
 from starlette.concurrency import run_in_threadpool
 
-ARTIFACT = Path(__file__).resolve().parents[1] / "neetlive" / "exports" / "neetlive-content.zip"
+ROOT = Path(__file__).resolve().parents[1]
+ARTIFACT = ROOT / "neetlive" / "exports" / "neetlive-content.zip"
 ARTIFACT_TYPE = "neetlive-content-zip"
+HANDOFF_TYPE = "rank-mission-handoff-zip"
+# type -> (file, download name, longest grant in hours)
+ARTIFACTS = {
+    ARTIFACT_TYPE: (ARTIFACT, "neetlive-content.zip", 24),
+    HANDOFF_TYPE: (ROOT / "handoff" / "JEELIVE_Rank_Mission_Website_Handoff.zip", "JEELIVE_Rank_Mission_Website_Handoff.zip", 168),
+}
 DOWNLOAD_HEADERS = {"Cache-Control": "private, no-store", "Pragma": "no-cache",
                     "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"}
 
@@ -38,20 +45,21 @@ def make_router(db):
             raise missing
         digest = sha256(bytes.fromhex(token)).hexdigest()
         grant = await db.owner_download_grants.find_one({
-            "token_sha256": digest, "artifact_type": ARTIFACT_TYPE,
+            "token_sha256": digest, "artifact_type": {"$in": list(ARTIFACTS)},
             "revoked_at": None, "expires_at": {"$gt": datetime.now(timezone.utc)},
-        }, {"_id": 0, "artifact_sha256": 1})
+        }, {"_id": 0, "artifact_sha256": 1, "artifact_type": 1})
         if not grant:
             raise missing
+        path, name, _ = ARTIFACTS[grant["artifact_type"]]
         try:
             # Read once, verify once, return those EXACT bytes (no replacement race).
-            payload = await run_in_threadpool(ARTIFACT.read_bytes)
+            payload = await run_in_threadpool(path.read_bytes)
         except OSError:
             raise missing
         if not hmac.compare_digest(sha256(payload).hexdigest(), grant["artifact_sha256"]):
             raise missing
         return Response(payload, media_type="application/zip", headers={
-            **DOWNLOAD_HEADERS, "Content-Disposition": 'attachment; filename="neetlive-content.zip"',
+            **DOWNLOAD_HEADERS, "Content-Disposition": f'attachment; filename="{name}"',
         })
 
     return router

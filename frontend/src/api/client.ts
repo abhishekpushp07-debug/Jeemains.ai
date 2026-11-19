@@ -241,6 +241,26 @@ export const post = <T = any>(path: string, body: unknown = {}) => api<T>(path, 
 export const put = <T = any>(path: string, body: unknown) => api<T>(path, { method: "PUT", body });
 export const del = <T = any>(path: string) => api<T>(path, { method: "DELETE", body: {} });
 
+/** A signed-in file made by the website (the analysis report PDF, the scorecard photo). */
+export async function apiBytes(path: string, retry = true, epoch = authEpoch): Promise<Uint8Array> {
+  requireEpoch(epoch);
+  const revision = tokenRevision;
+  const h = await headers(false);
+  h.Accept = "*/*";
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 60000);
+  try {
+    const res = await fetch(BASE + path, { credentials: "include", headers: h, signal: ctl.signal });
+    requireEpoch(epoch);
+    if (res.status === 401 && await recoverUnauthorized(epoch, revision, retry)) return apiBytes(path, false, epoch);
+    if (!res.ok) throw new ApiError("File abhi nahi ban paayi. Thodi der mein dobara try karo.", res.status, retryAfter(res));
+    return new Uint8Array(await res.arrayBuffer());
+  } catch (e: any) {
+    if (e instanceof ApiError || (e?.name === "AbortError" && !ctl.signal.aborted)) throw e;
+    throw offline(ctl.signal.aborted ? "Network kamzor hai. Dobara try karo." : "Connection interrupted. Please try again.");
+  } finally { clearTimeout(timer); }
+}
+
 // Protected original bytes: bounded memory-only cache + priority/dedup queue.
 // On web use Blob URLs to avoid base64 conversion/copies; native stays in RAM.
 async function fetchPrivateAsset(path: string, signal: AbortSignal, extraHeaders: Record<string, string> = {}, retry = true, epoch = authEpoch): Promise<ImageResponse> {

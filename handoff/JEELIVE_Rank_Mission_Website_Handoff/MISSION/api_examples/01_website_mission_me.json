@@ -1,0 +1,22 @@
+{
+  "note": "Shape of a real answer; the code and counts are masked (made up), never a real student's.",
+  "request": {
+    "method": "GET",
+    "url": "/api/mission/me (website, through the connector)",
+    "headers": {
+      "Cookie": "access_token=<the student's website session>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Cache-Control": "no-store"
+    },
+    "body": {
+      "code": "AB2CDEF",
+      "helped": 12,
+      "week": 3,
+      "link": "https://jeelive-mobile.emergent.host/api/j/AB2CDEF"
+    }
+  }
+}

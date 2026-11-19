@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { FlatList, Modal, ScrollView, StyleSheet, TextInput, View, useWindowDimensions } from "react-native";
+import { BackHandler, FlatList, Modal, ScrollView, StyleSheet, TextInput, View, useWindowDimensions } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, post, put, uuid } from "@/src/api/client";
@@ -12,7 +13,7 @@ import { MathText } from "@/src/components/MathText";
 import { useCached } from "@/src/useCached";
 import { LinearGradient } from "expo-linear-gradient";
 import { Button, Chip, Empty, ErrorBox, Icon, IconName, Notice, Press, Sheet, Skeleton, T } from "@/src/components/ui";
-import { DCard as Card, ScreenHeader } from "@/src/components/design";
+import { DCard as Card, DSheet, Pill, ScreenHeader } from "@/src/components/design";
 import { LearningStat, LearningTab } from "@/src/components/LearningTheme";
 import { colors, fonts, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
 import { fmtSpent, unixDate } from "@/src/navigation";
@@ -23,15 +24,23 @@ import { ShareGate } from "@/src/mission/ShareGate";
 import { DreamMeter } from "@/src/dream/DreamMeter";
 import { DreamCheerHost } from "@/src/dream/DreamCheer";
 import { examOf, isFullMock, recordMock } from "@/src/dream/store";
+import { useAnalysis } from "@/src/analysis/useAnalysis";
+import { AnalysisBar, AnalysisBody, useAnalysisNav } from "@/src/analysis/Workspace";
+import { SolutionInsight } from "@/src/analysis/SolutionInsight";
+import { An, index } from "@/src/analysis/format";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
 const TAB_TONE: Record<Tab, LearningTone> = { analysis: "maroon", progress: "active", confidence: "completed", rank: "saved", solutions: "error" };
-const FILTERS = [["all", "All"], ["incorrect", "Incorrect"], ["correct", "Correct"], ["skipped", "Skipped"], ["marked", "Marked"]] as const;
+const FILTERS: [string, string][] = [["all", "All"], ["incorrect", "Incorrect"], ["correct", "Correct"], ["skipped", "Skipped"], ["marked", "Marked"]];
+// Analysis 2.0 tags (only when this attempt has a time record).
+const TAG_FILTERS: [string, string][] = [["careless", "Careless"], ["overtime", "Overtime"], ["confused", "Confused"]];
+const TAGGED: Record<string, string[]> = { careless: ["wasted"], overtime: ["slow_correct", "costly_overtime"], confused: ["confused"] };
 const OUT: Record<string, [string, IconName]> = { correct: [colors.success, "check"], incorrect: [colors.error, "close"], skipped: [colors.muted, "minus"], dropped: [colors.muted, "cancel"], bonus: [colors.custom_amber, "star"] };
 const CATS = [["concept_gap", "Concept gap"], ["calculation", "Calculation"], ["silly_mistake", "Silly mistake"], ["time_pressure", "Time pressure"], ["misread", "Misread"], ["guess", "Guess"], ["other", "Other"]];
-const matches = (q: any, f: string) => f === "all" || (f === "marked" ? q.marked : q.outcome === f);
-const view = { tab: "analysis" as Tab, filter: "all", subject: "", qid: "" };
+const matches = (q: any, f: string) => f === "all" || (f === "marked" ? q.marked : TAGGED[f] ? TAGGED[f].includes(q.tag) : q.outcome === f);
+// What the student was looking at in this result; a different result starts on its Analysis.
+const view = { id: "", tab: "analysis" as Tab, filter: "all", subject: "", qid: "", from: false };
 
 function Pending({ r, id, reload }: { r: any; id: string; reload: () => void }) {
   const [job, setJob] = useState<any>(null);
@@ -57,22 +66,16 @@ function Pending({ r, id, reload }: { r: any; id: string; reload: () => void }) 
   );
 }
 
-function Analysis({ r, id }: { r: any; id: string }) {
+// The short result (Score, counts, subjects): shown only when the full analysis could not be opened.
+function Summary({ r }: { r: any }) {
   const s = r.summary;
-  const router = useRouter();
-  const exam = examOf(r.exam);
-  // Full mocks only (the same rule recordMock uses): the Dream meter says how far each dream college is after this mock.
-  const dream = exam && isFullMock({ exam: r.exam, maximum: s.maximum, questions: r.count ?? r.questions?.length }) ? exam : null;
   return (
-    <View style={{ gap: space.md }}>
+    <View testID="result-summary" style={{ gap: space.md }}>
       <LinearGradient testID="result-score-card" colors={[colors.brandSecondary, colors.custom_series]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={learningStyles.score}>
         <T testID="result-score-version-label" w="bold" size={11} color={colors.custom_whiteA70} style={{ letterSpacing: 1 }}>YOUR SCORE · {r.score_version === "original" ? "ORIGINAL" : "REVISED"}</T>
         <T w="heavy" size={40} color={colors.onSurfaceInverse} testID="result-score">{s.score}<T w="semibold" size={20} color={colors.custom_whiteA70}> / {s.maximum}</T></T>
         <T testID="result-marking-and-time" size={12} color={colors.custom_whiteA70}>{r.rules ? `+${r.rules.correct} / ${r.rules.wrong} / 0 marking` : ""}{s.total_seconds ? ` · ${fmtSpent(s.total_seconds)} used` : ""}</T>
       </LinearGradient>
-      {dream ? <DreamMeter exam={dream} testID="result-dream" mockId={id} chart="full"
-        onAdd={() => router.push({ pathname: "/(tabs)/rank", params: { tool: "college", at: String(Date.now()) } })} /> : null}
-      {dream ? <DreamCheerHost exam={dream} mockId={id} /> : null}
       <View style={{ flexDirection: "row", gap: space.sm }}>
         <LearningStat testID="result-correct" label="Correct" value={s.correct} tone="completed" />
         <LearningStat testID="result-incorrect" label="Incorrect" value={s.incorrect} tone="error" />
@@ -127,9 +130,12 @@ function Unavailable({ title, reason, testID }: { title: string; reason?: string
   return <Card testID={testID}><Empty icon="information-outline" title={title} body={reason} /></Card>;
 }
 
-function Solutions({ r, id, version }: { r: any; id: string; version: string }) {
+function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; version: string; an: An | null; onAnalysis?: () => void }) {
   const { width } = useWindowDimensions();
-  const rows: any[] = useMemo(() => r.questions || [], [r.questions]);
+  // Each question carries its Analysis 2.0 tag, so Careless / Overtime / Confused can be filtered here too.
+  const insight = useMemo<Record<string, any>>(() => (an ? index(an) : {}), [an]);
+  const rows: any[] = useMemo(() => (r.questions || []).map((x: any) => ({ ...x, tag: insight[x.id]?.tag })), [r.questions, insight]);
+  const filters = an?.quality?.available ? [...FILTERS, ...TAG_FILTERS] : FILTERS;
   const subjects = useMemo(() => [...new Set(rows.map(subjectOf))], [rows]);
   const [filter, setFilter] = useState(view.filter);
   const initial = rows.find((q) => q.id === view.qid);
@@ -161,8 +167,11 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
   return (
     <View style={{ gap: space.md }} testID="solution-navigator">
       <ImageWarmup paths={warmPaths} width={Math.max(1, width - 4 * space.lg - 2)} />
+      {onAnalysis ? <Press testID="solution-back-to-analysis" onPress={onAnalysis} accessibilityLabel="Analysis par wapas" style={learningStyles.backLink}>
+        <Icon name="arrow-left" size={16} color={colors.brandText} /><T size={13} w="heavy" color={colors.brandText}>Analysis par wapas</T>
+      </Press> : null}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm }}>
-        {FILTERS.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => matches(x, v)).length} onPress={() => setFilter(v)} color={colors.onSurface} />)}
+        {filters.map(([v, l]) => <Chip key={v} testID={"solution-filter-" + v} label={l} active={filter === v} count={rows.filter((x) => matches(x, v)).length} onPress={() => setFilter(v)} color={colors.onSurface} />)}
       </ScrollView>
       <SubjectTabs prefix="solution-subject" questions={rows} subject={subject} onSelect={chooseSubject} />
       <View style={learningStyles.solutionTools}>
@@ -195,6 +204,7 @@ function Solutions({ r, id, version }: { r: any; id: string; version: string }) 
             </View>
             {q.marked ? <Icon name="flag" size={16} color={colors.custom_neonAmber} /> : null}
           </View>
+          {an ? <SolutionInsight q={insight[q.id]} copy={an.copy} /> : null}
           {q.render_mode !== "source" && q.text ? <MathText testID="solution-question-text" text={q.text} /> : null}
           {imagePaths(id, q, "question", version).map((path, i) => <AssetImage key={path} testID={`solution-qimage-${q.number}-${i}`} path={path} label={`Question ${q.number}`} />)}
           <View style={{ flexDirection: "row", gap: space.sm }}>
@@ -300,10 +310,31 @@ export default function Result() {
   const r = receivedKey === `${user?.id}|${id}|${version}` ? received : null;
   const [status, setStatus] = useState(0);
   const [err, setErr] = useState("");
-  const [tab, setTab] = useState<Tab>(view.tab);
+  const [tab, setTab] = useState<Tab>(() => {
+    if (view.id !== id) Object.assign(view, { id, tab: "analysis", filter: "all", subject: "", qid: "", from: false });
+    return view.tab;
+  });
+  const [from, setFrom] = useState(view.from); // Solutions was opened from a number or a chart in the analysis
   const [n, setN] = useState(0);
   const polls = useRef(0);
-  useEffect(() => { view.tab = tab; }, [tab]);
+  // The page remembers where the analysis was scrolled, so coming back from a solution lands on the same chart.
+  const page = useRef<React.ElementRef<typeof ScrollView>>(null);
+  const kept = useRef(0), tracking = useRef(false);
+  const show = useCallback((next: Tab, fromAnalysis = false) => {
+    tracking.current = false;
+    view.tab = next; view.from = fromAnalysis;
+    setFrom(fromAnalysis);
+    setTab(next);
+  }, []);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      page.current?.scrollTo({ y: tab === "analysis" ? kept.current : 0, animated: false });
+      tracking.current = tab === "analysis";
+    }, 40);
+    return () => clearTimeout(t);
+  }, [tab]);
+  const toTop = useCallback(() => { kept.current = 0; page.current?.scrollTo({ y: 0, animated: false }); }, []);
+  const nav = useAnalysisNav(id!, toTop);
   const reload = useCallback(() => { polls.current = 0; setN((x) => x + 1); }, []);
 
   useEffect(() => {
@@ -332,24 +363,58 @@ export default function Result() {
   }, [ready, r, id, version]);
   const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
   usePaperAssets(id!, releasedQuestions, undefined, true, version, !!ready && tab !== "solutions");
+  const analysis = useAnalysis(id!, user?.id, version, !!ready, nav.compare, nav.vs);
+  // A number, a bar or a chip in the analysis opens that question's solution.
+  const openQuestion = useCallback((qid: string) => {
+    const q = releasedQuestions.find((x: any) => x.id === qid);
+    if (!q) return;
+    const tagged = { ...q, tag: analysis.data ? index(analysis.data)[qid]?.tag : undefined };
+    Object.assign(view, { qid, subject: subjectOf(q), filter: matches(tagged, view.filter) ? view.filter : "all" });
+    show("solutions", true);
+  }, [releasedQuestions, analysis.data, show]);
+  // "Galtiyan dobara": a separate untimed attempt with only the wrong and skipped questions. The original result stays.
+  const [retry, setRetry] = useState<"" | "ask" | "busy">("");
+  const [retryErr, setRetryErr] = useState("");
+  async function startRetry() {
+    setRetry("busy"); setRetryErr("");
+    try {
+      const next = await post(`/attempts/${id}/retry`, { start_key: uuid(), score_version: version });
+      setRetry("");
+      router.push(`/attempt/${next.id}`);
+    } catch (e: any) { setRetryErr(e.message); setRetry("ask"); }
+  }
   // A fresh submission shows the Mission card first ("Share to view results"); the result keeps loading behind it.
   const [gate, setGate] = useState<"checking" | "locked" | "open">("checking");
   useEffect(() => { let live = true; isResultLocked(id!).then(l => { if (live) setGate(l ? "locked" : "open"); }); return () => { live = false; }; }, [id]);
-  const back = () => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"));
+  const leave = () => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"));
+  const returning = tab === "solutions" && from && gate === "open";
+  const back = () => (returning ? show("analysis") : leave());
+  useEffect(() => {
+    if (!returning) return;
+    const sub = BackHandler.addEventListener("hardwareBackPress", () => { show("analysis"); return true; });
+    return () => sub.remove();
+  }, [returning, show]);
   if (gate === "checking") return <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface }} />;
   if (gate === "locked") return <ShareGate title={r?.title} stage={ready || !r ? "ready" : r.status === "embargoed" ? "sealed" : status === 202 ? "grading" : "ready"}
-    onBack={back} onOpen={() => { void unlockResult(id!); setGate("open"); }} />;
+    onBack={leave} onOpen={() => { void unlockResult(id!); setGate("open"); }} />;
+  const s = ready ? r.summary : null;
+  const exam = ready ? examOf(r.exam) : null;
+  // Full mocks only (the same rule recordMock uses): the Dream meter says how far each dream college is after this mock.
+  const dream = exam && isFullMock({ exam: r.exam, maximum: s.maximum, questions: r.count ?? r.questions?.length }) ? exam : null;
+  const bar = !!ready && tab === "analysis" && !!analysis.data;
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <ScreenHeader testID="result-header" backTestID="result-back-button" title={r?.title || "Result"} eyebrow={r?.exam ? `${r.exam} · Result` : "Result"} onBack={back} />
       {ready ? (
         <View style={learningStyles.navigation}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: space.sm, paddingHorizontal: space.lg, alignItems: "center" }}>
-            {TABS.map(([v, l, ic]) => <LearningTab key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => setTab(v)} tone={TAB_TONE[v]} />)}
+            {TABS.map(([v, l, ic]) => <LearningTab key={v} testID={"result-tab-" + v} label={l} icon={ic} active={tab === v} onPress={() => show(v)} tone={TAB_TONE[v]} />)}
           </ScrollView>
         </View>
       ) : null}
-      <ScrollView contentContainerStyle={{ padding: space.lg, paddingTop: space.sm, paddingBottom: insets.bottom + space.xl, gap: space.md }}>
+      <KeyboardAwareScrollView ref={page as any} bottomOffset={24} keyboardShouldPersistTaps="handled" scrollEventThrottle={64}
+        onScroll={e => { if (tracking.current) kept.current = e.nativeEvent.contentOffset.y; }}
+        contentContainerStyle={{ padding: space.lg, paddingTop: space.sm, paddingBottom: (bar ? 0 : insets.bottom) + space.xl, gap: space.md }}>
         <ErrorBox error={err} retry={reload} testID="result-error" />
         {!r && !err ? <><Skeleton h={160} /><Skeleton h={120} /></> : null}
         {status === 202 && r ? <Pending r={r} id={id!} reload={reload} /> : null}
@@ -361,7 +426,16 @@ export default function Result() {
           </ScrollView>
         ) : null}
         {ready && version !== "original" ? <Notice tone="warning" testID="score-version-note">{r.change_note || "Revised scoring version. The original result is preserved."}</Notice> : null}
-        {ready && tab === "analysis" ? <Analysis r={r} id={id!} /> : null}
+        {/* Kept in place while another tab is open, so its filters and open lists are still there on return. */}
+        {ready ? <View testID="result-analysis-panel" style={tab === "analysis" ? learningStyles.panel : learningStyles.hidden}>
+          <AnalysisBody id={id!} state={analysis} nav={nav} onOpen={openQuestion} onSolutions={() => show("solutions")}
+            onRetry={s.incorrect || s.skipped ? () => { setRetryErr(""); setRetry("ask"); } : undefined}
+            slot={dream ? <>
+              <DreamMeter exam={dream} testID="result-dream" mockId={id} chart="full" onAdd={() => router.push({ pathname: "/(tabs)/rank", params: { tool: "college", at: String(Date.now()) } })} />
+              <DreamCheerHost exam={dream} mockId={id} />
+            </> : null} />
+          {analysis.error && !analysis.data ? <Summary r={r} /> : null}
+        </View> : null}
         {ready && tab === "progress" ? <Remote path={`/attempts/${id}/journey`} render={(d) => d.state !== "available" ? <Unavailable testID="progress-unavailable" title="Progress journey unavailable" reason={d.reason} /> : (
           <Card testID="progress-journey" style={[learningStyles.section, { borderTopColor: learningTones.active.line }]}>
             <T w="heavy" size={16}>Your full-mock journey</T>
@@ -388,8 +462,15 @@ export default function Result() {
             <T size={12}>{d.reason}</T>
             <T size={11} color={colors.muted}>{d.limitation}</T>
           </Card>)} /> : null}
-        {ready && tab === "solutions" ? <Solutions r={r} id={id!} version={version} /> : null}
-      </ScrollView>
+        {ready && tab === "solutions" ? <Solutions r={r} id={id!} version={version} an={analysis.data} onAnalysis={from ? () => show("analysis") : undefined} /> : null}
+      </KeyboardAwareScrollView>
+      {bar ? <AnalysisBar nav={nav} inset={insets.bottom} /> : null}
+      <DSheet visible={!!retry} onClose={() => { if (retry !== "busy") setRetry(""); }} testID="retry-sheet" title="Galtiyon ko revision banao">
+        <T size={13.5} color={colors.custom_softText}>Ek alag attempt banega jisme sirf {(s?.incorrect || 0) + (s?.skipped || 0)} galat ya chhode hue sawaal honge. Koi timer nahi. Aapka original Score aur report nahi badlega.</T>
+        <ErrorBox error={retryErr} testID="retry-error" />
+        <Pill testID="retry-confirm" kind="brand" size="lg" icon="restart" label="Untimed retry shuru karo" busy={retry === "busy"} onPress={startRetry} />
+        <Pill testID="retry-cancel" kind="outline" label="Abhi nahi" disabled={retry === "busy"} onPress={() => setRetry("")} />
+      </DSheet>
     </View>
   );
 }
@@ -397,6 +478,9 @@ export default function Result() {
 const learningStyles = StyleSheet.create({
   score: { gap: space.md, borderRadius: 24, padding: 20, borderWidth: 1, borderColor: colors.brandLine },
   navigation: { minHeight: 60, paddingVertical: space.sm, justifyContent: "center" },
+  panel: { gap: space.md },
+  hidden: { display: "none" },
+  backLink: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6, alignSelf: "flex-start" },
   section: { gap: space.sm, borderTopWidth: 3, borderRadius: 20, paddingVertical: 20 },
   solutionTools: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: space.sm, justifyContent: "space-between" },
   solutionPosition: { flexShrink: 1 }, gridButton: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: space.sm },

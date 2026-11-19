@@ -15,14 +15,15 @@ from pymongo import MongoClient
 
 BACKEND = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND))
-from owner_downloads import ARTIFACT, ARTIFACT_TYPE  # noqa: E402
+from owner_downloads import ARTIFACT_TYPE, ARTIFACTS  # noqa: E402
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["issue", "revoke"])
     parser.add_argument("--grant-id", help="Public grant identifier to revoke, never the bearer token")
-    parser.add_argument("--hours", type=int, default=24, choices=range(1, 25))
+    parser.add_argument("--artifact", default=ARTIFACT_TYPE, choices=list(ARTIFACTS))
+    parser.add_argument("--hours", type=int, default=24)
     parser.add_argument("--base-url", help="HTTPS backend base URL; defaults to this workspace's configured URL")
     args = parser.parse_args()
     load_dotenv(BACKEND / ".env")
@@ -41,12 +42,15 @@ def main():
     parsed = urlparse(base)
     if parsed.scheme != "https" or not parsed.netloc or parsed.query or parsed.fragment:
         parser.error("A valid HTTPS backend URL is required")
-    payload = ARTIFACT.read_bytes()
+    artifact, _, longest = ARTIFACTS[args.artifact]
+    if not 1 <= args.hours <= longest:
+        parser.error(f"--hours must be 1 to {longest} for {args.artifact}")
+    payload = artifact.read_bytes()
     raw = secrets.token_bytes(32)
     now = datetime.now(timezone.utc)
     expires = now + timedelta(hours=args.hours)
     grant_id = str(uuid.uuid4())
-    grants.insert_one({"id": grant_id, "token_sha256": sha256(raw).hexdigest(), "artifact_type": ARTIFACT_TYPE,
+    grants.insert_one({"id": grant_id, "token_sha256": sha256(raw).hexdigest(), "artifact_type": args.artifact,
                        "artifact_sha256": sha256(payload).hexdigest(), "created_at": now, "expires_at": expires,
                        "revoked_at": None, "issued_for": "workspace-owner"})
     # Emit only on explicit operator request. Do not copy this bearer URL into source, app UI or memory files.

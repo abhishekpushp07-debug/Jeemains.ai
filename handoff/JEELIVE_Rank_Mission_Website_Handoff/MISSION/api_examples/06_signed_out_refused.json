@@ -1,0 +1,16 @@
+{
+  "note": "Live status without a pass. The app server's own sentence is worded for the app; the connector replaces it.",
+  "request": {
+    "method": "GET",
+    "url": "/api/mission/me (website, no session)"
+  },
+  "response": {
+    "app_server_status": 401,
+    "website_sees": {
+      "status": 401,
+      "body": {
+        "detail": "Please sign in again."
+      }
+    }
+  }
+}

@@ -1,0 +1,801 @@
+{
+  "built_at": "2026-11-19T10:02:49+00:00",
+  "live_api": "https://jeelive-mobile.emergent.host/api",
+  "rule": "No Rank data is copied into this pack: the website reads it from the app server.",
+  "checks": {
+    "rapid_fire_files": 0,
+    "rapid_fire_imports": 0,
+    "data_files": 0,
+    "rapid_fire_words_only_in": {
+      "START_HERE_FOR_WEBSITE_AGENT.md": 1,
+      "README.md": 4,
+      "docs/07_MISSION.md": 3,
+      "CONNECT/frontend_web/jeeliveApp.ts": 1,
+      "MISSION/code/app_reference_ui/src_mission/copy.ts": 3
+    }
+  },
+  "openapi_paths": 28,
+  "rank_api_examples": 22,
+  "files": [
+    {
+      "path": "CONNECT/.env.example",
+      "bytes": 1030,
+      "sha256": "94fc4dc355a73bd881f1c45e11a9df47b514f783c47ff2f92911b0391e673e3e"
+    },
+    {
+      "path": "CONNECT/backend_fastapi/jeelive_app_connect.py",
+      "bytes": 11705,
+      "sha256": "16efe79f6902402c8ecdef4ab3157f768290991977c2beefcb213323a28c0906"
+    },
+    {
+      "path": "CONNECT/connect_check.py",
+      "bytes": 14446,
+      "sha256": "ef4bd2c6c3885441b224f691a5c881f012340b113bb5a7c95a2f54a277b721df"
+    },
+    {
+      "path": "CONNECT/curl_examples.sh",
+      "bytes": 4447,
+      "sha256": "5e59c787ed4088c343117022b7ebec1ad7ff024f085e0015362c6973689e19b4"
+    },
+    {
+      "path": "CONNECT/frontend_web/jeeliveApp.ts",
+      "bytes": 21254,
+      "sha256": "d1231b1b10feac5d09149403df1d161c423c59a19418db13822b518f60caed50"
+    },
+    {
+      "path": "CONNECT/openapi_rank_mission.json",
+      "bytes": 54126,
+      "sha256": "f1be97a28b0567738b11ea98b93a45feeead06bdf45a97a99bc9bf8aa17965bf"
+    },
+    {
+      "path": "MISSION/api_examples/01_website_mission_me.json",
+      "bytes": 542,
+      "sha256": "4f2ddcffd0079a7e75baaa138b067b5e66b355cf023eb487273fc504e44251c1"
+    },
+    {
+      "path": "MISSION/api_examples/02_app_server_mission_me.json",
+      "bytes": 435,
+      "sha256": "61fca896bc06be58dd697522b5aaa3159ce107dbad29c27b62c0c509770bff3c"
+    },
+    {
+      "path": "MISSION/api_examples/03_new_student_zero_state.json",
+      "bytes": 334,
+      "sha256": "8a6b65cf6c7494a0b69bc9ac5af2d48957fcc5b43cff35fb5ad474f01019a746"
+    },
+    {
+      "path": "MISSION/api_examples/04_access_pass.json",
+      "bytes": 601,
+      "sha256": "31403deaf14a96b10ae6330ba81ee865bb5e94b561bbd14bcf9ddd621c18d110"
+    },
+    {
+      "path": "MISSION/api_examples/05_share_link_redirect.json",
+      "bytes": 543,
+      "sha256": "677882b56d03ef6f405d8e7bb4ebe62297c3bbe5a55e51d7e2715d785e209152"
+    },
+    {
+      "path": "MISSION/api_examples/06_signed_out_refused.json",
+      "bytes": 381,
+      "sha256": "dca20388d0812f10b61ed1003c1dedcc9b0b6ea8307cd312b69992f4a9a2b564"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/app_tabs_mission.tsx",
+      "bytes": 4586,
+      "sha256": "2fea37213617d54d0872a65100102015355bb13309ec473362ce90cd230dc06d"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/shared/shareCard.ts",
+      "bytes": 4256,
+      "sha256": "d08a3506079fd45287d5588262291f0dc15b8de1ec20d1e7560fca756613b4c5"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/shared/theme.ts",
+      "bytes": 22157,
+      "sha256": "28873723de248ad14e0c766446a1b3be5651e3823792ccd4abd785c0f410b38f"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/shared/whatsapp.ts",
+      "bytes": 712,
+      "sha256": "0d7fb9a23c56637dc9b33c1e7de70c5707f1bb1642b7f6692b1b545e3783801d"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/shared/whatsappFile.ts",
+      "bytes": 1861,
+      "sha256": "1efcec7d6bc941aba0cd0ea805dd222239b031edad5ac12a9e34356229e925ff"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/ImpactPanel.tsx",
+      "bytes": 6062,
+      "sha256": "38d4417ae2807c379b1e61e622d6f416ffde314d64d51da6a33fc88107f0c4cb"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/MissionCard.tsx",
+      "bytes": 7551,
+      "sha256": "4c162cd33a5fd5b089ab74c06a86a2fa8c4e63c21490088ee2f1f877c04d8d5f"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/ShareButton.tsx",
+      "bytes": 3006,
+      "sha256": "607e3b5b9834a840250c8e79bf7ca2149ab15ba606b4b7373daa7c38c3a062e9"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/ShareGate.tsx",
+      "bytes": 7206,
+      "sha256": "e39df0d523db92112fd7427a136f00bf7f461dc323319bb34f8164631389ec7f"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/copy.ts",
+      "bytes": 2574,
+      "sha256": "4c9373b9673bae19e00ed33e2970ec8fcd93637f39513b5b1895ef7b807686b7"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/gate.ts",
+      "bytes": 631,
+      "sha256": "ad912d1239d6bf92caa62d8ad4b8855016a730d46925176b77f3d734283a9560"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/parts.tsx",
+      "bytes": 1460,
+      "sha256": "8b5663e34e887fa396040bce0a2b55c4e05940b826185be11e8821895736f7fe"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/share.ts",
+      "bytes": 1497,
+      "sha256": "9f3b11d6f543961b22b5dc076e89c037a77a2d97980073b29ae2173ac04fe2bc"
+    },
+    {
+      "path": "MISSION/code/app_reference_ui/src_mission/stats.ts",
+      "bytes": 2211,
+      "sha256": "84d859e1d4923751705feae7bd207578e301174336a7cc0859b2fe88972363c6"
+    },
+    {
+      "path": "MISSION/code/server_reference/client_ip.py",
+      "bytes": 1099,
+      "sha256": "c4389e3e6722b8440ba167e1749dafafbcdf111f7b55e3b9f4f296c92d4ce612"
+    },
+    {
+      "path": "MISSION/code/server_reference/mission_links.py",
+      "bytes": 4284,
+      "sha256": "3d733b6a4b866e155e725a2fd6e3d9275a635b7d98b7fa389711df7a85abeff8"
+    },
+    {
+      "path": "MISSION/screenshots/01_mission_tab_impact_panel_and_share_button.jpg",
+      "bytes": 55965,
+      "sha256": "db3b60f01a3fdc310dde019a3e048b4068b075367d018eaabf49306ec3b37f77"
+    },
+    {
+      "path": "MISSION/screenshots/02_mission_share_card_letter_from_the_maker.jpg",
+      "bytes": 61195,
+      "sha256": "231df2213a254563c1f91b0a7cdcf2c0c267f8d102510b3a2df0280d10c9a4b4"
+    },
+    {
+      "path": "MISSION/screenshots/03_mission_full_story_points_and_fine_print.jpg",
+      "bytes": 51431,
+      "sha256": "11da6561aac71c2a288eacb5d47b8ad156fa139b2d38ca89725f160dba1af0fc"
+    },
+    {
+      "path": "MISSION/screenshots/04_share_gate_after_test_submit.jpg",
+      "bytes": 51208,
+      "sha256": "2b2eb23481e36fca0348c12d0562a8fc68e08b01a16bc0bff75a92cdea8a0c57"
+    },
+    {
+      "path": "RANK/api_examples/01_meta.json",
+      "bytes": 9796,
+      "sha256": "d772abcc66ca0ddf110c9314f17a899bde5da3462bea27fc8a8e38b3aac0a997"
+    },
+    {
+      "path": "RANK/api_examples/02_estimate_jee.json",
+      "bytes": 2118,
+      "sha256": "11e4ef07c2a963044685344062be426d19b1d6c0954cab85d59c9c3af6e28e4d"
+    },
+    {
+      "path": "RANK/api_examples/03_estimate_comedk.json",
+      "bytes": 1513,
+      "sha256": "3758f3f7a0442563a7f82f27cfd377c100f21375d4959ae3ca0e03c37d6caa29"
+    },
+    {
+      "path": "RANK/api_examples/04_percentile.json",
+      "bytes": 1095,
+      "sha256": "85bd00966669a345cf2f60ab8547f826189edf8dcfd87cefc86423ee37d2aa80"
+    },
+    {
+      "path": "RANK/api_examples/05_predict_marks_all_page1.json",
+      "bytes": 14836,
+      "sha256": "8d1321a045f8431cbe50b2dd400384a473d8a778cb924834e60e45369c758260"
+    },
+    {
+      "path": "RANK/api_examples/06_predict_marks_all_page2.json",
+      "bytes": 14656,
+      "sha256": "07e66c4b67c6cab2ed350fc66e676a3a1baa9e60525b549b372ce1e4ac08be57"
+    },
+    {
+      "path": "RANK/api_examples/07_predict_percentile_obc_female_delhi_cs_NIT.json",
+      "bytes": 9963,
+      "sha256": "445816a5bbdfb9df6c0061911522b8e7d6d619026ab48b595a609d29de634d40"
+    },
+    {
+      "path": "RANK/api_examples/08_predict_percentile_obc_female_delhi_cs_DELHI.json",
+      "bytes": 11193,
+      "sha256": "684f5470aa1da3f463cbd38f49c78e10fff28456b4caada959a9e1c702b5de8c"
+    },
+    {
+      "path": "RANK/api_examples/09_predict_chart_line_page_size_20.json",
+      "bytes": 10134,
+      "sha256": "e08c7b95cb7e0dbaecdcb0ad49ab99d403e612a282126bbb5a02c7f53f302f7d"
+    },
+    {
+      "path": "RANK/api_examples/10_college_sheet_josaa.json",
+      "bytes": 16841,
+      "sha256": "0a264d86000e1ed7162dc2f026779d0c024ad94f950a60f8aaf971e9193eaa25"
+    },
+    {
+      "path": "RANK/api_examples/11_college_sheet_jac_delhi.json",
+      "bytes": 13537,
+      "sha256": "134695acd5907ce8013d73b7f556f753fff6a95b76de637416466621a800d4de"
+    },
+    {
+      "path": "RANK/api_examples/12_college_sheet_blocked_path.json",
+      "bytes": 16789,
+      "sha256": "24b5204418b9c8a7600c1e770589171e1407208aa23acbb6d3e7632cf6608c39"
+    },
+    {
+      "path": "RANK/api_examples/13_bitsat.json",
+      "bytes": 19695,
+      "sha256": "818a7eb29709cad6642fc3dd84827d47370ae09643a4c99986abbadd7940925f"
+    },
+    {
+      "path": "RANK/api_examples/14_comedk_marks.json",
+      "bytes": 15129,
+      "sha256": "ee26ec8d41006e2d80e72e957ec5a4807a49ac84464768818181e9308ea6c4bc"
+    },
+    {
+      "path": "RANK/api_examples/15_comedk_rank_blr_cs.json",
+      "bytes": 14666,
+      "sha256": "34905576eea28e8c1ea6f9c5a94fb288e8d75f45033da994946e1c2ac4e7370c"
+    },
+    {
+      "path": "RANK/api_examples/16_comedk_college_sheet.json",
+      "bytes": 9189,
+      "sha256": "75ab527dd2fa1c370cb67b19a2b6b5fbff2ff721cf95e7c44ba4862c91b301ee"
+    },
+    {
+      "path": "RANK/api_examples/17_target_jee.json",
+      "bytes": 53363,
+      "sha256": "efbee17193f47d07159fd00f1b304e87d78b16c95dbc35936cad22dcfa67516a"
+    },
+    {
+      "path": "RANK/api_examples/18_target_comedk.json",
+      "bytes": 13851,
+      "sha256": "0728ae8a4f4f42dc036eb64a82f415f1150cb24e7b531bbf0ede0f843dcfcac0"
+    },
+    {
+      "path": "RANK/api_examples/19_target_bitsat.json",
+      "bytes": 17055,
+      "sha256": "b513f252dcde8aa62faf360d673aafc8522785c4138a3d50bd19f5dc3863a132"
+    },
+    {
+      "path": "RANK/api_examples/20_colleges_search_lists.json",
+      "bytes": 57736,
+      "sha256": "2050017fc2955a5fca0adede39098689f34c129629c4b0a68cf6ab6d4dd8e586"
+    },
+    {
+      "path": "RANK/api_examples/21_compare_branches.json",
+      "bytes": 4339,
+      "sha256": "be2cfef0539f7b0119296d1eca7e3ebe4ef7dd24131376c8b7d4defbacf447aa"
+    },
+    {
+      "path": "RANK/api_examples/22_compare_colleges.json",
+      "bytes": 4136,
+      "sha256": "608d09431735e1280cb543bb905e3ab0356d251ef9c01f982a9465cd22caa94d"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/app_tabs_rank.tsx",
+      "bytes": 14610,
+      "sha256": "4d4c8f4870010f9e4a5ff7aba8316c4da42b9f965965f473e826af20a78718b0"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/shared/shareCard.ts",
+      "bytes": 4256,
+      "sha256": "d08a3506079fd45287d5588262291f0dc15b8de1ec20d1e7560fca756613b4c5"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/shared/theme.ts",
+      "bytes": 22157,
+      "sha256": "28873723de248ad14e0c766446a1b3be5651e3823792ccd4abd785c0f410b38f"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/shared/whatsapp.ts",
+      "bytes": 712,
+      "sha256": "0d7fb9a23c56637dc9b33c1e7de70c5707f1bb1642b7f6692b1b545e3783801d"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/shared/whatsappFile.ts",
+      "bytes": 1861,
+      "sha256": "1efcec7d6bc941aba0cd0ea805dd222239b031edad5ac12a9e34356229e925ff"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_dream/DreamMeter.tsx",
+      "bytes": 14262,
+      "sha256": "8ea241210b5a121323bb3182c9269adf193cd95a4f53ba5c7bf8ca52a90c1ec6"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_dream/DreamPanel.tsx",
+      "bytes": 1393,
+      "sha256": "279d1bda95b4b9b4804705c324a546e52ed6a209ea3d79411074a5cbbcd3a31c"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_dream/DreamShare.tsx",
+      "bytes": 5035,
+      "sha256": "cebb49e1e0867ac17d050a63e60382d330d2050ba346eddb2c96ed1ff585bfac"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_dream/ProgressChart.tsx",
+      "bytes": 10913,
+      "sha256": "54276984d35e72162860fb4117051c7304ea64b2a65e6761ccdc40d143300041"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_dream/need.ts",
+      "bytes": 2500,
+      "sha256": "1430a760fa8b802c2d87fc5a09655797d0a55371eeb96cc30a43751d1ec5229c"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_dream/store.ts",
+      "bytes": 16234,
+      "sha256": "10794cdf4d9d2b1d744328b94238ef42e13753dd89ebbd6abdc71a104a9b64eb"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_dream/useDreamToggle.ts",
+      "bytes": 1691,
+      "sha256": "d446ac281ae7045993f0bf90da6dd4502ca1524df98be027b86b00dbe427000f"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/Bitsat.tsx",
+      "bytes": 12236,
+      "sha256": "fb9a33c675067aa8335c8e0c30b88385eae129899a421a9e3d2c5106ee7ec0ec"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/CollegeBranches.tsx",
+      "bytes": 6380,
+      "sha256": "a910ae838f88e91b76eff09d20bfdf98b512a92f691c7308502f90e07f630214"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/CollegeCard.tsx",
+      "bytes": 12342,
+      "sha256": "c6c5fc503cbd9a203568308f74e155d7a5ef8e0220582c7d78711d0bb64f291c"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/CollegeSearch.tsx",
+      "bytes": 3342,
+      "sha256": "ae77e3886c0a22151c10d4f62db7e9628a627d08407ffa4e2b65e7ddb98d7bd3"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/CollegeSheet.tsx",
+      "bytes": 5966,
+      "sha256": "1c2c5bd97b0e904a6925d8417ea62ffada9bf7ca50d90a0bfd6c0be26be33603"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/Comedk.tsx",
+      "bytes": 15147,
+      "sha256": "56e77b4bde8253d41e51709e8fc3e7387750dfee27a86c1161ff7af30b426a2f"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/ComedkSheet.tsx",
+      "bytes": 4318,
+      "sha256": "0066971bc2696b21fab99eea762d50a83b47af3cf2ae4c875a2d45209d7a5596"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/Compare.tsx",
+      "bytes": 11477,
+      "sha256": "4f67bb85a15605fe2f1af30fe0c00e325a213dafe3b12afdd080462e7d2b416b"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/CompareColleges.tsx",
+      "bytes": 15336,
+      "sha256": "268e637cf344b10cc5d3743f496e60b3fab42fa0e3cec43106c00e6d739bb79d"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/Diamond.tsx",
+      "bytes": 4467,
+      "sha256": "03a989a75437a4cbf0fe4da1d5130a20e1b1791c8027cda75e849ba3218e4fe9"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/InputCard.tsx",
+      "bytes": 6182,
+      "sha256": "ad1d421ed0257d9b7ceff765a8186ad5d361746e53b390370f6b7afdd852b947"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/Medal.tsx",
+      "bytes": 3247,
+      "sha256": "e55b40b1477e8c9c9b776a10b86079ba6f681e1b1d51bb11d1c9a05e4b8b7310"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/Metal.tsx",
+      "bytes": 6239,
+      "sha256": "6c3fb1d0775368b7116cea4ff2c4e07d43cc57830abb9abe4cf851ee92051477"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/MetalCard.tsx",
+      "bytes": 9968,
+      "sha256": "85f0069e84e3dde6b1baf476d37b4eb96319d3af07751ff5320c3e76829f664d"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/PdfButton.tsx",
+      "bytes": 3579,
+      "sha256": "d4ee0fa3fa74a4c53a7a1ea3a5a33d43834a526924da669563329f39493068d6"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/PercentileChart.tsx",
+      "bytes": 4404,
+      "sha256": "c4a32e22c5c92093e4d3aeaa5d344891b2d4fd25ce88cf9050dad49adbe26990"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/PercentileRank.tsx",
+      "bytes": 7887,
+      "sha256": "bd671ed877fc865e287600bd8ca736aba00e86050da68ca94a4cbed09bd737f5"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/RankPredictor.tsx",
+      "bytes": 13803,
+      "sha256": "6a5f2e3804fb7cf3156a9582656715c8c1b30390a2a335273982ae629b2330b6"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/ResultCard.tsx",
+      "bytes": 2622,
+      "sha256": "a35fe4165de62c1d8235ad1fb71f2ec05f7f619b6a7a840a9beafed214dbe31e"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/Rounds.tsx",
+      "bytes": 11121,
+      "sha256": "115294d44fa657fd05591525badf2b1d9b6162dc805130cc82070fe3d0574694"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/SeatList.tsx",
+      "bytes": 6579,
+      "sha256": "950d3e3e9771fef11427772314eb0a9b6e9463587b6f3e19b90ab9d092edd1d9"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/ShortlistSheet.tsx",
+      "bytes": 5915,
+      "sha256": "7e9824592412a50f7b907ea7852bf4abd0bcb1b8a6093a0d97d96d300dbd264c"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/TargetMarks.tsx",
+      "bytes": 18848,
+      "sha256": "6dc298b383f2b0c3ada68ff2529986742d197fad713375508223faed26471db2"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/ToolGrid.tsx",
+      "bytes": 5680,
+      "sha256": "ede37dd5e5c0a1ef506d236f35cf05f205acdcc594de31b7420710028d22cc3b"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/accent.tsx",
+      "bytes": 3542,
+      "sha256": "c5d0b0aa956aab2df9a36c84b2628c22204e142c767d3d201dffcd2524dd094b"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/api.ts",
+      "bytes": 12357,
+      "sha256": "e1806d7787555b0212cfe1187d6f671ee0697d0caad1fda50ad260beaad56491"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/colleges.ts",
+      "bytes": 1524,
+      "sha256": "33e0e5fc318b15d24b9c8db4feace2a926b7a3c0a8bad9a36f91592e3a3b0d8f"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/compareKit.tsx",
+      "bytes": 2200,
+      "sha256": "0be947b755e285b7fa5a6c691474216d6ca86028c61a7d96831cadb9b2803997"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/controls.tsx",
+      "bytes": 13531,
+      "sha256": "c94231f0036c69ab88776b5a471baf21cf33e506070afe1a72ebbb5eafcf88f4"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/pdf.ts",
+      "bytes": 4806,
+      "sha256": "132d1ef3fda2e651d7fa77ff32d3cc3e649ce78b3663a69a872ca0ff4fde4d55"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/share.ts",
+      "bytes": 4856,
+      "sha256": "31f685666b744c0317bf47e7c3ce1bc972aa75ae154c117e5bbfef4fa32e5230"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/shortlist.ts",
+      "bytes": 4085,
+      "sha256": "cbc6162974baa7e56303be0baca22a3d5906dd396552deb4d797bb400e23d12f"
+    },
+    {
+      "path": "RANK/code/app_reference_ui/src_rank/tones.ts",
+      "bytes": 2523,
+      "sha256": "e6921016667e2fe588ad5fa447cbcbb28d3bb5a55653b01e73f1c14e1e6d0d3d"
+    },
+    {
+      "path": "RANK/code/server_reference/dream.py",
+      "bytes": 5983,
+      "sha256": "daa198dbca6d153402a5c2bd2bf63d686a4ddc9435795f2963718da9461a29b5"
+    },
+    {
+      "path": "RANK/code/server_reference/rank_bitsat.py",
+      "bytes": 2902,
+      "sha256": "bb6ca70278e178488a09a77a2f9304212bb43391b15c7a466e2ba44588974b39"
+    },
+    {
+      "path": "RANK/code/server_reference/rank_comedk.py",
+      "bytes": 12213,
+      "sha256": "2ec4954b66d3c2e02be5cc265be6b5d2cdc38f71618f98de58148e5f7acf0cfa"
+    },
+    {
+      "path": "RANK/code/server_reference/rank_pdf.py",
+      "bytes": 31801,
+      "sha256": "ab435b30ec8565edc809a875ec991e9caa4f3ee5119673bba46011c73d8a9fc9"
+    },
+    {
+      "path": "RANK/code/server_reference/rank_predictor.py",
+      "bytes": 25855,
+      "sha256": "4b4b50e01b9aaa2551165651bdc0c2f24c375bfb6cbcba23b54de72bf779f137"
+    },
+    {
+      "path": "RANK/code/server_reference/rank_tools.py",
+      "bytes": 16289,
+      "sha256": "6dba85de0cfea4c4bfae874df42a61dfe1cba825b4e2710a8b96ca7f029a2c5f"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_bitsat_programs.pdf",
+      "bytes": 32832,
+      "sha256": "04f1fa847818b0173872e25b7dfeb60c9637c140bd1e41aa2e70a4877255367a"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_bitsat_programs.request.json",
+      "bytes": 131,
+      "sha256": "2b1d971ceeccaea34036d32a43a9e7e22cba111eecd3c4e0f742f2805a74bc24"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_comedk_top50.pdf",
+      "bytes": 35235,
+      "sha256": "33e7a7e1db0352304b574fcc03302b4a605ce0fc9206394398f716426fd28dfb"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_comedk_top50.request.json",
+      "bytes": 128,
+      "sha256": "54a30eb66b86c7307242ba9a86966d8cf5dde61801b49a7d94a3d1cee0bcd3fa"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_jee_top50.pdf",
+      "bytes": 39168,
+      "sha256": "bd495e6c2e5499bd083ed0d906ee0203a9024fd74d9732b21fd3e59aa33dad41"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_jee_top50.request.json",
+      "bytes": 235,
+      "sha256": "55435d374418ff34638cabc809dc41894ef498f3ac495c09de9447f2166ed2f8"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_saved_and_compare.pdf",
+      "bytes": 27054,
+      "sha256": "e84f0c8f86c7d4ed95ec834aec58b53aa8ee3e4623dc810056ec567350dfee53"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_saved_and_compare.request.json",
+      "bytes": 512,
+      "sha256": "7b390b56f26b753239f37138eb4809f316e67d80a6f692d0c384d96833088da1"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_target_bitsat.pdf",
+      "bytes": 30271,
+      "sha256": "89c321b433099f46bae8e124ffdef4f9a9ecffa2893fa1d4fc9abe988fa96afd"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_target_bitsat.request.json",
+      "bytes": 99,
+      "sha256": "e9929d90c4bb7fd1e20ab96c58e6defb10537745fc93afd7913cf7f72e5863ba"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_target_comedk_college.pdf",
+      "bytes": 26549,
+      "sha256": "a8e643e7e4a43e6d35c43941f465cfda5adba0099a4391c6c7e6dc292626b6a3"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_target_comedk_college.request.json",
+      "bytes": 98,
+      "sha256": "eb940559be4c60db020738357b7b182e4187fea7f932d746639ded50f0b37132"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_target_jee_college.pdf",
+      "bytes": 35434,
+      "sha256": "cadee06b3315f19e9c64c9e5e34654bcee896df1c50f16221c4c0b1edf878049"
+    },
+    {
+      "path": "RANK/sample_pdfs/sample_target_jee_college.request.json",
+      "bytes": 175,
+      "sha256": "d78e5370e10392a567f4bfd32c9fe72fb0c9b4d58372322496abe303b6ed099e"
+    },
+    {
+      "path": "RANK/screenshots/01_rank_tab_six_tools_and_rank_predictor_form.jpg",
+      "bytes": 49736,
+      "sha256": "cf8e9b65b739bf80f7c59a18066a64509e4b7c0f776d69232f4bca66734029ff"
+    },
+    {
+      "path": "RANK/screenshots/02_rank_predictor_jee_result_card.jpg",
+      "bytes": 44350,
+      "sha256": "7eacf99533d4ea519165c235d6dd8f0ec418f84ba303876bca1c1bcfc32c206f"
+    },
+    {
+      "path": "RANK/screenshots/03_rank_predictor_jee_paper_types_and_share.jpg",
+      "bytes": 40743,
+      "sha256": "30ef502f37c1f47dabdcf1bf3ec0198cb999c1a8ee547f4ca2d9e2dd2f41a2c7"
+    },
+    {
+      "path": "RANK/screenshots/04_rank_predictor_comedk_result.jpg",
+      "bytes": 49465,
+      "sha256": "3bcda747c265a24a140a02665956c1e9f5190e52f7c71502713b4c0cfd47ff70"
+    },
+    {
+      "path": "RANK/screenshots/05_percentile_se_rank_result.jpg",
+      "bytes": 50644,
+      "sha256": "7ca10de0c3339d2dd1e2e14834b3acfa736679bcf975b999f16186373810917c"
+    },
+    {
+      "path": "RANK/screenshots/06_percentile_se_rank_marks_per_paper.jpg",
+      "bytes": 50637,
+      "sha256": "b873e92d00ff1d0d38f15536f9eb524d296d00194cdf2ae5c6816da4fd96b48f"
+    },
+    {
+      "path": "RANK/screenshots/07_target_marks_college_search_sheet.jpg",
+      "bytes": 28035,
+      "sha256": "332ab6cd660418b5e0b0c3dc71a4455b9506fb2a3c5bd376c69fbea70532eaeb"
+    },
+    {
+      "path": "RANK/screenshots/08_target_marks_jee_profile_and_college.jpg",
+      "bytes": 40197,
+      "sha256": "c71b4539bc059eac2297774d9b72710ea8104e2d2e682fa7ed0559cb3159809f"
+    },
+    {
+      "path": "RANK/screenshots/09_target_marks_jee_branch_rounds_table.jpg",
+      "bytes": 41603,
+      "sha256": "d6b52baa4e86198bc7f120f8234b9d01a686a5fd4fa06a62b08e702af9b4d395"
+    },
+    {
+      "path": "RANK/screenshots/10_college_predictor_home_state_picker.jpg",
+      "bytes": 19910,
+      "sha256": "5d1ab5719d3e2f0769b08b9fc0809ace6a5ef642b8f0824b7c565de24f38a9c1"
+    },
+    {
+      "path": "RANK/screenshots/11_college_predictor_jee_form.jpg",
+      "bytes": 40835,
+      "sha256": "362f2ce2404564c5dd9d697896f52559426f08b51a06f5e58f80ba5f4ffea9e0"
+    },
+    {
+      "path": "RANK/screenshots/12_college_predictor_jee_rank_card.jpg",
+      "bytes": 43752,
+      "sha256": "78eff28ec21915e3bbf4db97f1ee9f08c9c297b059e4c8432658a7af67a12eba"
+    },
+    {
+      "path": "RANK/screenshots/13_college_predictor_jee_filters_and_first_card.jpg",
+      "bytes": 40805,
+      "sha256": "87240226e2e2d4566442925bc18cb38553d8cc47f9e2285f6b9fd7935928e59d"
+    },
+    {
+      "path": "RANK/screenshots/14_college_predictor_jee_college_cards.jpg",
+      "bytes": 44660,
+      "sha256": "5aed74502bcfed74234817ee10475c89936f7110d1fce109ebb3e48aa0daadd7"
+    },
+    {
+      "path": "RANK/screenshots/15_college_predictor_jee_near_misses.jpg",
+      "bytes": 45563,
+      "sha256": "862398294aaec3acaab39229118464281f75ac27db9e9bee6b68951d3f4b11ac"
+    },
+    {
+      "path": "RANK/screenshots/16_college_sheet_round_ladder.jpg",
+      "bytes": 35182,
+      "sha256": "15161d3d509a6eb776474f83b5ada5c0f3293a5fdc130120cabc719278207490"
+    },
+    {
+      "path": "RANK/screenshots/17_college_sheet_branches_x_rounds_grid.jpg",
+      "bytes": 35103,
+      "sha256": "aeab409017a8ecde7a216405eeabc654d0a956bde09e8a11573b4d05d839bd1d"
+    },
+    {
+      "path": "RANK/screenshots/18_percentile_chart.jpg",
+      "bytes": 22035,
+      "sha256": "04fe0072be148fb62ccb1634a1ae368d674c356c0c00bbdddfb5fb518e11855d"
+    },
+    {
+      "path": "RANK/screenshots/19_college_predictor_bitsat_rank_card.jpg",
+      "bytes": 52950,
+      "sha256": "cdb461be178fcf35708395e8555159eb088d222e53e6dd6bdc86d6fcf4fa33f2"
+    },
+    {
+      "path": "RANK/screenshots/20_college_predictor_bitsat_program_cards.jpg",
+      "bytes": 44392,
+      "sha256": "46d09ec566c0ec2b163e1778df531238c6e345624858803edc61599d9c4038cf"
+    },
+    {
+      "path": "RANK/screenshots/21_college_predictor_comedk_rank_card.jpg",
+      "bytes": 52685,
+      "sha256": "3b262dc8c5e68b398f0831a5a28bc7f38f8f0ef23f19f1ebc847001af171b759"
+    },
+    {
+      "path": "RANK/screenshots/22_college_predictor_comedk_college_cards.jpg",
+      "bytes": 44146,
+      "sha256": "f6f68314f3a87ca4f9f241d55c45d5c47842dd9f0342e69b8e563109a4d3e7d5"
+    },
+    {
+      "path": "RANK/screenshots/23_college_compare_pick_colleges.jpg",
+      "bytes": 55619,
+      "sha256": "507f8b81e66466f86e885e0fdcbe78cae22d033d3104ccad0bc6f6bee2cddd11"
+    },
+    {
+      "path": "RANK/screenshots/24_college_compare_college_vs_college_table.jpg",
+      "bytes": 45427,
+      "sha256": "b9a7d2a12b0d40bb6786b10738c13b127d404978b30184b4b5e1cd72e2e1bad3"
+    },
+    {
+      "path": "RANK/screenshots/25_dream_college_meter.jpg",
+      "bytes": 49224,
+      "sha256": "009752d4470e719d20746f8e21106a80254a02c3846f22c31f2bd70e9f1091f8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6950,
+      "sha256": "158f868326422867e28f1318b9e5edb24fb332c5014fd79b079ada5400c01f93"
+    },
+    {
+      "path": "START_HERE_FOR_WEBSITE_AGENT.md",
+      "bytes": 5949,
+      "sha256": "5d2bb8f622f60b5a8ae17ad34b5ff975517e8104796448d30fbdcdf34a60fc87"
+    },
+    {
+      "path": "docs/01_OVERVIEW.md",
+      "bytes": 7858,
+      "sha256": "3e341f1ff39a6822e527487b496d66687974d92c98e44d9c800d62f4b27b8523"
+    },
+    {
+      "path": "docs/02_CONNECT_GUIDE.md",
+      "bytes": 12471,
+      "sha256": "7b8fb197837c8f591e56573f2b21f42561e152bdd05917d5ba28707a1bcd9f7b"
+    },
+    {
+      "path": "docs/03_RANK_API_REFERENCE.md",
+      "bytes": 16308,
+      "sha256": "51f97ccc1b147430bcd3307af2d511f481115b1be0563ce40a7a178be41908ac"
+    },
+    {
+      "path": "docs/04_RANK_ALGORITHMS.md",
+      "bytes": 8310,
+      "sha256": "6468cab53788fcd0f42925317664f16c8a161a1f4b706f6db961d63db03d6603"
+    },
+    {
+      "path": "docs/05_RANK_DATA.md",
+      "bytes": 4743,
+      "sha256": "48fd89787f2b9d77de55c4ae96e62683367a71ed5e6f6e8a805814ebdc9ba78b"
+    },
+    {
+      "path": "docs/06_RANK_UI_SPEC.md",
+      "bytes": 7894,
+      "sha256": "7075457912b0def63f84497a06647b7629120162ef4592c5c972e836dabd03a9"
+    },
+    {
+      "path": "docs/07_MISSION.md",
+      "bytes": 8293,
+      "sha256": "1cda2a81cdae4787c37e46a092094ed25316e669a51c1c69f57ff54407caee9b"
+    },
+    {
+      "path": "docs/08_DREAM_COLLEGE.md",
+      "bytes": 4671,
+      "sha256": "63f6b11147b8e4abe5816023176ee792de7942c0bb2f0b9c300977cc0fe708b7"
+    },
+    {
+      "path": "docs/09_TESTING_AND_ACCEPTANCE.md",
+      "bytes": 3879,
+      "sha256": "8be282818783b84c1ff42656e1ca6d4ff9a11ff7dabc0c45e86e82fe436c9300"
+    },
+    {
+      "path": "docs/10_FAQ_GOTCHAS_GLOSSARY.md",
+      "bytes": 4493,
+      "sha256": "9021013ad54a61600ba619f7442b86e6b796bca0a3d713221feca37527dd4acb"
+    }
+  ]
+}

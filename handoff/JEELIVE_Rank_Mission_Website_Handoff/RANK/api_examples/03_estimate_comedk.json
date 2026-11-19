@@ -1,0 +1,50 @@
+{
+  "note": "Frozen sample captured when this pack was built. Shows the shape only: never use these numbers on a page; call the server.",
+  "request": {
+    "method": "POST",
+    "url": "/api/rank/estimate",
+    "body": {
+      "exam": "comedk",
+      "marks": 110,
+      "level": "normal",
+      "category": "GEN",
+      "pwd": false
+    }
+  },
+  "response": {
+    "exam": "comedk",
+    "rank": [
+      850,
+      3200
+    ],
+    "mid": 2300,
+    "percentile": [
+      97.52,
+      99.34
+    ],
+    "candidates": 129000,
+    "summary": "110 / 180 marks · COMEDK 2026",
+    "sources": [
+      {
+        "label": "CollegeDekho, COMEDK 2026 result analysis",
+        "url": "https://www.collegedekho.com/news/comedk-result-2026-live-updates-link-toppers-college-wise-cutoffs-78958/",
+        "rank": 850
+      },
+      {
+        "label": "Shiksha, COMEDK 2026 marks vs rank",
+        "url": "https://www.shiksha.com/engineering/articles/comedk-2026-marks-vs-rank-blogId-230113",
+        "rank": 2300
+      },
+      {
+        "label": "COMEDK 2024-2025 marks vs rank trend (PW, Careers360)",
+        "url": "https://www.pw.live/kseab/exams/comedk-uget-marks-vs-rank-2025",
+        "rank": 3200
+      }
+    ],
+    "notes": [
+      "COMEDK mein sabki ek hi merit list hai, isliye category aur paper type se rank nahi badalta.",
+      "COMEDK marks-rank table publish nahi karta; ye 3 public analyses ki range hai.",
+      "Percentile = lagbhag kitne % students aapse peeche rahe (1,29,000 ne paper diya)."
+    ]
+  }
+}

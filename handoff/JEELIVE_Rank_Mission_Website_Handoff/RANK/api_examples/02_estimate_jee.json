@@ -1,0 +1,102 @@
+{
+  "note": "Frozen sample captured when this pack was built. Shows the shape only: never use these numbers on a page; call the server.",
+  "request": {
+    "method": "POST",
+    "url": "/api/rank/estimate",
+    "body": {
+      "exam": "jee",
+      "marks": 180,
+      "level": "normal",
+      "category": "OBC-NCL",
+      "pwd": false
+    }
+  },
+  "response": {
+    "exam": "jee",
+    "result": {
+      "percentile": [
+        99.08,
+        99.15
+      ],
+      "crl": [
+        13029,
+        14029
+      ],
+      "from_marks": true,
+      "summary": "180 marks · Normal · OBC-NCL",
+      "cat_rank": {
+        "label": "OBC-NCL rank",
+        "range": [
+          3518,
+          3788
+        ]
+      },
+      "spread": "Tough paper hota to rank lagbhag 9,702, Easy paper hota to lagbhag 18,779."
+    },
+    "levels": [
+      {
+        "level": "tough",
+        "percentile": [
+          99.35,
+          99.38
+        ],
+        "crl": [
+          9452,
+          9952
+        ],
+        "cat_rank": {
+          "label": "OBC-NCL rank",
+          "range": [
+            2552,
+            2687
+          ]
+        },
+        "pwd_rank": null
+      },
+      {
+        "level": "normal",
+        "percentile": [
+          99.08,
+          99.15
+        ],
+        "crl": [
+          13029,
+          14029
+        ],
+        "cat_rank": {
+          "label": "OBC-NCL rank",
+          "range": [
+            3518,
+            3788
+          ]
+        },
+        "pwd_rank": null
+      },
+      {
+        "level": "easy",
+        "percentile": [
+          98.74,
+          98.8
+        ],
+        "crl": [
+          18279,
+          19279
+        ],
+        "cat_rank": {
+          "label": "OBC-NCL rank",
+          "range": [
+            4935,
+            5205
+          ]
+        },
+        "pwd_rank": null
+      }
+    ],
+    "candidates": 1538468,
+    "notes": [
+      "Tough / Normal / Easy = aapki shift ka paper kaisa tha; NTA 2026 ke shift-wise percentile data se.",
+      "Category aur PwD rank estimate hain; NTA inki table nahi deta.",
+      "Ye 2026 ke data par andaaza hai, guarantee nahi."
+    ]
+  }
+}

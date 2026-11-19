@@ -1,0 +1,153 @@
+{
+  "note": "Frozen sample captured when this pack was built. Shows the shape only: never use these numbers on a page; call the server.",
+  "request": {
+    "method": "POST",
+    "url": "/api/rank/compare/colleges",
+    "body": {
+      "items": [
+        {
+          "exam": "jee",
+          "id": "22"
+        },
+        {
+          "exam": "comedk",
+          "id": "E095"
+        },
+        {
+          "exam": "bitsat",
+          "id": "Pilani"
+        }
+      ],
+      "category": "GEN",
+      "female": false,
+      "pwd": false,
+      "state": "Bihar"
+    }
+  },
+  "response": {
+    "items": [
+      {
+        "exam": "jee",
+        "id": "22",
+        "title": "NIT Rourkela",
+        "name": "National Institute of Technology, Rourkela",
+        "place": "Rourkela, Odisha",
+        "kind": "NIT",
+        "branches": 23,
+        "seats": 1043,
+        "seats_label": "JoSAA seats (sab quota)",
+        "fee": null,
+        "fee_note": "JoSAA college-wise fee publish nahi karta; JEE colleges ki fee college ki website par dekho.",
+        "easiest": {
+          "branch": "Life Science (5-yr integrated)",
+          "close": 55092,
+          "label": "R5",
+          "rank_label": "CRL",
+          "marks": 131,
+          "cs": false
+        },
+        "toughest": {
+          "branch": "Computer Science and Engineering",
+          "close": 4266,
+          "label": "R5",
+          "rank_label": "CRL",
+          "marks": 217,
+          "cs": true
+        },
+        "cs": {
+          "branch": "Computer Science and Engineering",
+          "close": 4266,
+          "label": "R5",
+          "rank_label": "CRL",
+          "marks": 217,
+          "cs": true
+        },
+        "cs_count": 1
+      },
+      {
+        "exam": "comedk",
+        "id": "E095",
+        "title": "R V College of Engineering",
+        "name": "R V College of Engineering-Mysore Road, Bengaluru",
+        "place": "Bengaluru",
+        "kind": "COMEDK",
+        "branches": 13,
+        "seats": 386,
+        "seats_label": "GM seats",
+        "fee": [
+          322000,
+          322000
+        ],
+        "fee_note": null,
+        "easiest": {
+          "branch": "Biotechnology",
+          "close": 14873,
+          "label": "R4",
+          "rank_label": "COMEDK rank",
+          "marks": 79,
+          "cs": false
+        },
+        "toughest": {
+          "branch": "Computer Science & Engineering",
+          "close": 510,
+          "label": "R4",
+          "rank_label": "COMEDK rank",
+          "marks": 130,
+          "cs": true
+        },
+        "cs": {
+          "branch": "Computer Science & Engineering",
+          "close": 510,
+          "label": "R4",
+          "rank_label": "COMEDK rank",
+          "marks": 130,
+          "cs": true
+        },
+        "cs_count": 1
+      },
+      {
+        "exam": "bitsat",
+        "id": "Pilani",
+        "title": "BITS Pilani",
+        "name": "BITS Pilani",
+        "place": "Pilani",
+        "kind": "BITS",
+        "branches": 18,
+        "seats": null,
+        "seats_label": null,
+        "fee": null,
+        "fee_note": "BITS program-wise fee aur seats bits-pilani.ac.in par.",
+        "easiest": {
+          "branch": "B. Pharm",
+          "close": 200,
+          "label": "2026",
+          "rank_label": "score / 390",
+          "marks": 200,
+          "cs": false
+        },
+        "toughest": {
+          "branch": "B.E. Computer Science",
+          "close": 308,
+          "label": "2026",
+          "rank_label": "score / 390",
+          "marks": 308,
+          "cs": true
+        },
+        "cs": {
+          "branch": "B.E. Computer Science",
+          "close": 308,
+          "label": "2026",
+          "rank_label": "score / 390",
+          "marks": 308,
+          "cs": true
+        },
+        "cs_count": 1
+      }
+    ],
+    "notes": [
+      "Marks = normal paper par 2026 ki final closing tak pahunchne ke liye lagbhag kitne marks. JEE: aapki category, state aur gender ka sabse aasaan seat raasta.",
+      "Sabse aasaan branch = jisme sabse kam marks chahiye; sabse mushkil = sabse zyada.",
+      "Cutoff har saal badalta hai; 10-15 marks extra ka target rakho."
+    ]
+  }
+}

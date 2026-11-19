@@ -112,7 +112,7 @@ async def run_test(page, output_dir, page_url):
         if '/(tabs)/tests' in page.url or await page.locator('[data-testid="my-tests-screen"]').count() > 0:
             await page.click('[data-testid="tabs-home"]', force=True)
             await page.wait_for_timeout(1000)
-        await page.goto('https://share-card-stats--1s9i9qdg.preview.emergentagent.com/pyq')
+        await page.goto('https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com/pyq')
         await page.wait_for_selector('[data-testid="pyq-screen"]', timeout=20000)
         reattempt_btn = page.locator(f'[data-testid="pyq-reattempt-button-{paper_id}"]')
         if await reattempt_btn.count() > 0:

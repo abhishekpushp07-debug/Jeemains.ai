@@ -3,6 +3,7 @@ import { AppState } from "react-native";
 import { api, ApiError, post, put, uuid } from "@/src/api/client";
 import { Draft, DraftMap, loadDrafts, saveDrafts } from "@/src/drafts";
 import { loadAttempt, receivedAt, warmResult, prepareImages } from "@/src/api/paperOpening";
+import { createRecorder, Recorder } from "@/src/analysis/timeCapture";
 
 export type Attempt = any;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
@@ -37,6 +38,11 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
   const conflictRef = useRef(false);
   const done = useRef(onCompleted);
   useEffect(() => { done.current = onCompleted; }, [onCompleted]);
+  // Time capture (Analysis 2.0): how long each question stays on screen, answer changes and mark toggles, on the server's clock.
+  const recorder = useRef<Recorder | null>(null);
+  const shown = useRef<string | null>(null); // the question the student is looking at
+  const making = useRef(false), alive = useRef(true);
+  const visible = () => alive.current && AppState.currentState === "active";
 
   const syncClock = (server: number, at = mono()) => (anchor.current = { server: server * 1000, mono: at });
   const secondsLeft = () => data.current?.deadline ? (data.current.deadline * 1000 - (anchor.current.server + mono() - anchor.current.mono)) / 1000 : null;
@@ -56,6 +62,12 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
       data.current = d;
       setAttempt(d);
       setOnline(true);
+      if (d.status === "active" && uid !== "anon" && !recorder.current && !making.current) {
+        making.current = true;
+        void createRecorder(uid, id, () => (anchor.current.server + mono() - anchor.current.mono) / 1000)
+          .then(rec => { recorder.current = rec; if (visible()) rec.show(shown.current); })
+          .finally(() => { making.current = false; });
+      }
       const stored = await loadDrafts(uid, id);
       if (stored === "corrupt") {
         conflictRef.current = true;
@@ -94,7 +106,10 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
         }
         setInflight(qid);
         try {
-          const res = await put(`/attempts/${id}/answers/${qid}`, draft);
+          // Time events ride on the answer save: no extra request during the rush.
+          const batch = recorder.current?.take();
+          const res = await put(`/attempts/${id}/answers/${qid}`, batch ? { ...draft, timeline: batch } : draft);
+          recorder.current?.ack(res.timeline_cursor);
           setOnline(true);
           saveOffline.current = false;
           retryState.current = { failures: 0, after: 0 };
@@ -170,6 +185,8 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     const recover = async () => {
       if (!data.current) await load();
       await flush();
+      // A student who reads for long without answering: the time record goes up on its own before it grows too big.
+      if ((recorder.current?.pending() || 0) >= 100) await recorder.current!.flush().catch(() => {});
     };
     const loop = () => {
       t = setTimeout(async () => {
@@ -179,6 +196,8 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     };
     loop();
     const sub = AppState.addEventListener("change", (s) => {
+      // App in the background, phone locked, another app on top: the question is not on screen, its clock stops.
+      recorder.current?.show(s === "active" ? shown.current : null);
       if (s === "active") {
         retryState.current.after = 0;
         load().then(flush);
@@ -191,6 +210,30 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
       sub.remove();
     };
   }, [flush, load]);
+
+  // Every 5 s the open stretch notes it is still alive, so a killed app loses at most 5 s of it.
+  useEffect(() => {
+    alive.current = true;
+    const beat = setInterval(() => recorder.current?.beat(), 5000);
+    return () => { alive.current = false; clearInterval(beat); recorder.current?.show(null); };
+  }, []);
+  const watch = useCallback((qid: string) => {
+    shown.current = qid;
+    if (visible()) recorder.current?.show(qid);
+  }, []);
+  // The submit carries the last time events; a failed submit puts the question back on the clock.
+  const sendSubmit = useCallback(async () => {
+    const rec = recorder.current;
+    rec?.show(null);
+    if ((rec?.pending() || 0) > 200) await rec!.flush().catch(() => {});
+    const batch = rec?.take();
+    let receipt: any;
+    try { receipt = await post(`/attempts/${id}/submit`, batch ? { timeline: batch } : {}); }
+    catch (e) { if (visible()) rec?.show(shown.current); throw e; }
+    rec?.ack(receipt?.timeline_cursor);
+    if (rec && !rec.pending()) rec.clear();
+    return receipt;
+  }, [id]);
 
   // Timer: deadline − anchored server time (monotonic), never the device wall clock.
   // At 00:00 the paper is sealed. Each phone waits a random 0-10 s (a crowd must not reach the server in the same
@@ -207,7 +250,7 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
         await drain();
         if (round < 3 && saveOffline.current && Object.keys(drafts.current).length)
           throw new ApiError("Kuch answers abhi save nahi hue. Internet check karo, hum dobara bhej rahe hain.", 0);
-        await post(`/attempts/${id}/submit`, {});
+        await sendSubmit();
         void warmResult(id).catch(() => {});
         await saveDrafts(uid, id, "", {});
         if (!stopped) done.current();
@@ -234,7 +277,7 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     tick();
     const iv = setInterval(tick, 1000);
     return () => { stopped = true; clearInterval(iv); clearTimeout(timer); };
-  }, [attempt?.deadline, id, uid, drain]);
+  }, [attempt?.deadline, id, uid, drain, sendSubmit]);
 
   const edit = (qid: string, change: Partial<Draft>) => {
     if (seconds === 0 || conflictRef.current || !data.current) return;
@@ -248,6 +291,9 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
       request_id: uuid(),
     };
     drafts.current[qid] = next;
+    // Only real changes are recorded (saving confidence with the same answer is not an answer change).
+    if ("value" in change && (change.value ?? "") !== (old.value ?? "")) recorder.current?.answer(qid, change.value ?? "");
+    if ("marked" in change && !!change.marked !== !!old.marked) recorder.current?.mark(qid, !!change.marked);
     persist();
     clearTimeout(debounce.current);
     debounce.current = setTimeout(flush, 350);
@@ -285,7 +331,7 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
   const submit = async () => {
     setError("");
     await settle();
-    const receipt = await post(`/attempts/${id}/submit`, {});
+    const receipt = await sendSubmit();
     // Grading/embargo rules stay authoritative. Warm only a released result.
     void warmResult(id).catch(() => {});
     await saveDrafts(uid, id, "", {});
@@ -301,5 +347,5 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
     setAttempt(data.current);
   };
 
-  return { attempt, pending, inflight, error, setError, online, seconds, conflict, load, edit, visit, discard, submit, enterBonus };
+  return { attempt, pending, inflight, error, setError, online, seconds, conflict, load, edit, visit, watch, discard, submit, enterBonus };
 }
