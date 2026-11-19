@@ -1,0 +1,39 @@
+{
+  "summary": "Iteration 202: tested the switch to the app-server connector, the app-exact college card stat boxes, the BITSAT AAPKA fix, and the new Dream College Meter and Mission (signed-in screens tested with Playwright page.route mocks only; no DB writes, no login). BACKEND: 18/18 pytest pass and the hand-off pack's connect_check.py --website --pdf printed 'ALL 22 CHECKS PASSED' (signed-in checks skipped). Local rank/mission files and rank_data/ are gone and the backend starts cleanly. FRONTEND: all 6 Rank tools work signed out against live data. JEE 200: 30 cards, each with 3 joined stat boxes (CLOSING/CRL · 2026, ROUND/jahan seat mili, 2025 SE ▲ Tough/▼ Aasaan/≈ Same/Naya). Left edge colours: safe #15A06B, likely #2F6FE0, borderline #D9A400, near #EA580C. Near-miss cards show 'lagbhag +N marks aur'. BITSAT 280: campus + chance tags, CUTOFF '2026 · / 390', 2025 SE, AAPKA '+N chahiye' (flame) / 'N upar' (green); no '0 upar' bug; the 5-year history opens. COMEDK 110: '<city> · GM (All India)', CLOSING 'R4 · 2026', FEE / SAAL '₹3.22 L' + 'N GM seats', correct teaser. Errors: a mocked 503 shows the server sentence with Retry, and Retry recovers. A blocked PDF request shows 'PDF nahi bani. Network check karke dobara try karo.' The real PDF downloads with the server filename JEELIVE-JEE-colleges-200-marks.pdf. Dream meter (mocked): 'JEE Main 3/5', header, 3/5, 168 / 300, '▲ 27 pichhle mock se', BEST 168 / AVG 143 / RAFTAAR +24, SVG line, dots and target labels visible. Tapping point-0 moves the tip bar to Full Mock 1. Rows are sorted by need: row-0 '✓ Pahunch mein +18 upar' with a green 'Dost ko dikhao' button whose share caption ends with the student's link; the other rows show yellow 'N MARKS DOOR' + eta sentence. Remove buttons and the foot sentence are present. A remove whose PUT gets a 503 rolls back, shows a notice and keeps the student signed in. Empty state + red 'Dream college chuno' opens the College predictor. Home (/home) compact meter shows 2 rows + 'Sab 3 dream dekho', which opens /rank?tool=dream. Mission: 12 DOST, '+3 is hafte', 12/25 goal; the WhatsApp text ends with 'Abhi kholo 👉 https://jeelive-mobile.emergent.host/api/j/AB2CDEF'. Mission 503: no Impact panel, stays on /mission. Mobile 390/320: no page overflow, stat boxes stack at 320, dark mode tags readable. Rapid Fire is a plain DIV (not clickable).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/mission/me (app_connect.mission_me)", "issue": "data['code'] is read without a check. If the app server answers 200 without 'code', this becomes an unhandled KeyError -> 500, not the 503 'Abhi load nahi hua' sentence. _grant() has the same risk with data['token'] / data['expires_at']."},
+      {"endpoint": "GET /api/dream (dream_read)", "issue": "Every read runs website_mocks() (Mongo query of up to 200 attempts). The _sent_mocks digest only skips the POST, not the query. _sent_mocks is in-process only, so a mock list lost on the app server is not re-sent until the backend restarts."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "BitsatCard 5-year history (rank.css .rk-history)", "issue": "All 5 history bars draw at the same height (53.2px) even though the inline heights differ (91%-100%). Cause: each bar <i> is a shrinkable flex item in a 96px column next to its <b> and <small> labels, so flex-shrink cuts every bar to the same leftover height. Fix: give the bar its own fixed-height track, or set flex-shrink:0 and size against the space left over. Also '.rk-history span' targets bare span, which the preview-quirk note says to avoid.", "selector": "[data-testid='bt-item-0-history'] i", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/rank?tool=dream at 320px", "issues": ["The exam switch (dream-exam) is wider than its box (scrollWidth 306 vs 260), so the 'COMEDK 0/5' label is cut off and the switch scrolls sideways. Shrink the labels or allow wrapping under 360px."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_app_connect_iter202.py", "/app/test_reports/pytest/iter202.xml", "/app/tests/dream_mocks_iter202.py"],
+  "action_items": [
+    "Fix the BITSAT history bars so their heights match the cutoff values (flex-shrink issue in .rk-history)",
+    "Make the Dream exam switch fit at 320px",
+    "Optional: guard missing keys in mission_me/_grant so a strange app-server answer gives 503, not 500"
+  ],
+  "critical_code_review_comments": [
+    "app_connect.py: the connector follows the pack. Paths are whitelisted, the 16 KB rank body limit returns 413, and app-server 5xx or refused sessions become 503 (never 401), so the student is never signed out. The share link checks the code format and only redirects.",
+    "app_connect.mission_me/_grant: KeyError risk on missing keys in a 200 answer (see backend minor).",
+    "dreams.website_mocks runs on every GET /api/dream; consider caching per user for a short time.",
+    "rank.css .rk-history: equal bar heights plus a bare-span selector (see ui_bugs)."
+  ],
+  "updated_files": ["/app/backend/tests/test_app_connect_iter202.py", "/app/tests/dream_mocks_iter202.py"],
+  "success_rate": {"backend": "100% (18/18 pytest + 22/22 pack connect_check)", "frontend": "~96% (all listed flows pass; 1 low-priority visual bug + 1 small-screen design issue)"},
+  "test_credentials": "None used. Signed-in screens were tested only with page.route mocks of /api/auth/session, /api/dream and /api/mission/me. All non-GET requests were intercepted, so no customer data was written.",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Mock data for the Dream meter is in /app/tests/dream_mocks_iter202.py (dream needs 150/176/235; mocks 168/141/120 newest first). Home is at /home (Protected); '/' is a different page. Rank tool keys: rank, pct, target, college, compare, dream (/rank?tool=KEY). Inside CollegeCard the .rk-stats children are wrapped in display:contents spans (preview quirk), so measure .rk-stat elements, not .rk-stats children. The Mission impact count animates up: wait about 3 s before reading mission-impact-count.",
+  "rca of the issue": "BITSAT history bars: the .rk-history span column is 96px tall and holds <i> (height %), <b> and <small> plus 4px gaps. The labels cannot shrink, so the overflow is taken from the <i>, leaving every bar at about 96 - (label heights + gaps), the same for all bars whatever its percentage."
+}

@@ -1,7 +1,9 @@
 # Rank 6 tools + Mission share gate + result sparkle + Dream college (2026-11-18)
 - DONE (preview, iteration_199/200): public /rank with 6 jewel tools (Rank predictor, Percentile se rank, Target marks, College predictor JEE/BITSAT/COMEDK, College compare, Dream college), PDFs, WhatsApp share; Mission page + share gate after every fresh submission; result sparkle (40%+ or own best); Dream College Meter on Rank, Results (full mocks) and Home.
 - DONE 2026-11-19 (preview, iteration_201): Rank restyled to the app's look and design notes (black-metal jewel tiles, tool-colour form bands, purple College summary, metal Rank Card, numbered medal coins); Mission count-up 1.2 s + 'Aapka impact card par dikhega' note.
-- P1: deploy when the owner asks. P1: 'Dream college crossed!' gold WhatsApp card (app-team ask) not built yet. P2: signed-out visitors see no bottom tabs/Rapid Fire mark (tabs show only when signed in). P2: share gate is per browser (localStorage) like the app's per-phone lock; BITS seat cell in compare shows a dash (no seat data).
+- DONE 2026-11-19 (preview, iteration_202/203): app hand-off pack applied. Rank/Mission/Dream come live from the app server via backend/tejas/app_connect.py (local data deleted, pack connect_check 22/22). App Dream College Meter + chart, app card stat boxes, the app's 'Dream unlocked' WhatsApp picture card for a crossed dream (Dost ko dikhao).
+- P0 after deploy: on live jeelive.ai, sign in as a student and check Mission (/api/mission/me) and Dream (/api/dream) load from the app server (cannot be checked in preview).
+- P1: deploy when the owner asks. P2: signed-out visitors see no bottom tabs/Rapid Fire mark (tabs show only when signed in). P2: share gate is per browser (localStorage) like the app's per-phone lock; BITS seat cell in compare shows a dash (no seat data).
 - WAITING on owner: Rapid Fire Play Store link (then make the gem/tab/card open it). Rapid Fire stays a non-clickable picture until then.
 
 # App theme + navigation (2026-11-18)

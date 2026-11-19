@@ -83,7 +83,7 @@ function BitsatCard({ b, n, score, years, testId, views, first, open, onOpen }) 
         : { label: 'AAPKA', value: `${score - b.cutoff} upar`, sub: `score ${score}`, tone: 'good', testId: testId + '-you' }]}
     teaser="2022 se 2026 tak, 5 saal ke cutoff" viewed={views.viewed.has(b.id)} pulse={views.pulse && first} open={open} onOpen={onOpen}
     compared={list.some(x => x.id === saved.id)} onCompare={() => shortlist.toggle(saved)} dream={dream}>
-    {open ? <span className="rk-history" data-testid={testId + '-history'}>{years.map((y, i) => <span key={y}><i style={{ height: `${Math.max(6, ((b.history[i] || 0) / top) * 100)}%` }} />
+    {open ? <span className="rk-history" data-testid={testId + '-history'}>{years.map((y, i) => <span key={y} className="rk-hcol"><em className="rk-htrack"><i style={{ height: `${Math.max(6, ((b.history[i] || 0) / top) * 100)}%` }} /></em>
       <b>{b.history[i] ?? '—'}</b><small>{y}</small></span>)}</span> : null}
   </CollegeCard>;
 }

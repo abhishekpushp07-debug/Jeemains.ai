@@ -45,6 +45,7 @@ _http: Optional[httpx.AsyncClient] = None
 _static: dict = {}
 _grants: OrderedDict = OrderedDict()
 _sent_mocks: OrderedDict = OrderedDict()
+MOCK_RECHECK, MOCK_RESEND = 30, 600
 
 
 class PassThrough(BaseModel):
@@ -134,12 +135,16 @@ async def _grant(cookie: str, fresh: bool = False) -> str:
     if res.status_code != 200:
         _grants.pop(key, None)
         raise HTTPException(503, BUSY_ACCOUNT, headers={"Retry-After": "5", **NO_STORE})
-    data = res.json()
-    _grants[key] = (data["token"], datetime.fromisoformat(data["expires_at"].replace("Z", "+00:00")).timestamp())
+    try:
+        data = res.json()
+        token, until = data["token"], datetime.fromisoformat(data["expires_at"].replace("Z", "+00:00")).timestamp()
+    except (ValueError, KeyError, TypeError, AttributeError):
+        raise HTTPException(503, BUSY_ACCOUNT, headers={"Retry-After": "5", **NO_STORE})
+    _grants[key] = (token, until)
     _grants.move_to_end(key)
     while len(_grants) > GRANT_MEMORY:
         _grants.popitem(last=False)
-    return data["token"]
+    return token
 
 
 async def _as_student(request: Request, method: str, path: str, content: Optional[bytes] = None) -> httpx.Response:
@@ -161,19 +166,25 @@ async def _json_body(request: Request) -> bytes:
 
 async def _send_website_mocks(request: Request, uid: str):
     """Released full mocks taken on this website join the account's list on the app server (same id = replaced)."""
-    mocks = await website_mocks(uid)
-    if not mocks:
+    now, hit = time.time(), _sent_mocks.get(uid)
+    if hit and now - hit[1] < MOCK_RECHECK:
         return
+    mocks = await website_mocks(uid)
     digest = hashlib.sha256(repr([(m["id"], m["score"]) for m in mocks]).encode()).hexdigest()
-    if _sent_mocks.get(uid) == digest:
+    if not mocks or (hit and hit[0] == digest and now - hit[2] < MOCK_RESEND):
+        _remember_mocks(uid, (digest, now, hit[2] if hit and hit[0] == digest else now))
         return
     import json
     res = await _as_student(request, "POST", "/rf/dream/mocks", json.dumps({"mocks": mocks}).encode())
     if res.status_code == 200:
-        _sent_mocks[uid] = digest
-        _sent_mocks.move_to_end(uid)
-        while len(_sent_mocks) > GRANT_MEMORY:
-            _sent_mocks.popitem(last=False)
+        _remember_mocks(uid, (digest, now, now))
+
+
+def _remember_mocks(uid: str, entry: tuple):
+    _sent_mocks[uid] = entry
+    _sent_mocks.move_to_end(uid)
+    while len(_sent_mocks) > GRANT_MEMORY:
+        _sent_mocks.popitem(last=False)
 
 
 @router.get("/mission/me")
@@ -181,8 +192,12 @@ async def mission_me(request: Request, u=Depends(current)):
     res = await _as_student(request, "GET", "/rf/mission/me")
     if res.status_code != 200:
         return _relay(res, private=True)
-    data = res.json()
-    return JSONResponse({**data, "link": f"{SHARE_LINK_BASE}/{data['code']}"}, headers=NO_STORE)
+    try:
+        data = res.json()
+        code = data["code"]
+    except (ValueError, KeyError, TypeError):
+        raise HTTPException(503, BUSY_ACCOUNT, headers=NO_STORE)
+    return JSONResponse({**data, "link": f"{SHARE_LINK_BASE}/{code}"}, headers=NO_STORE)
 
 
 @router.get("/dream")

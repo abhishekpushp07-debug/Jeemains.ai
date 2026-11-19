@@ -321,7 +321,8 @@
 .rk-act-msg.cmp { color: #8A5A00; } .rk-act-msg.dream { color: #6421A3; }
 .dark .rk-act-msg.cmp, .dark .rk-act-msg.dream { color: #FFE6A3; }
 .rk-history { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; align-items: end; height: 120px; padding: 12px; border-radius: 14px; background: var(--rk-alt); }
-.rk-history span { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%; }
+.rk-hcol { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; min-width: 0; }
+.rk-htrack { display: flex; align-items: flex-end; justify-content: center; width: 100%; height: 58px; flex-shrink: 0; }
 .rk-history i { width: 70%; max-width: 36px; border-radius: 8px 8px 3px 3px; background: linear-gradient(180deg, var(--acc), color-mix(in srgb, var(--acc) 50%, #000)); animation: rk-grow .6s cubic-bezier(.2,.8,.2,1) both; transform-origin: bottom; }
 .rk-history b { font-size: 12px; } .rk-history small { font-size: 10.5px; color: var(--rk-muted); }
 
@@ -461,6 +462,9 @@
   .rk-tile-icon { width: 30px; height: 30px; }
   .rk-stage { margin-top: 18px; padding: 16px 14px; border-radius: 22px; }
   .rk-switch { width: 100%; } .rk-switch button { flex: 1; padding: 0 10px; font-size: 13px; }
+}
+@media (max-width: 360px) {
+  .rk-switch button { min-width: 0; padding: 0 6px; font-size: 12px; line-height: 1.15; white-space: normal; }
   .rk-card { padding: 18px; }
   .rk-marks3 b { font-size: 22px; }
   .rk-rung { grid-template-columns: 58px 1fr 70px; }
