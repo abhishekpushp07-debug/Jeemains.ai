@@ -1,4 +1,5 @@
-"""All India Rapid: the same 30 cards for every student each day (IST), with one All India board.
+"""All India Rapid: the same 45 PCM cards (15 Physics, 15 Chemistry, 15 Maths, 20 s each) for every student each day (IST),
+with one All India board.
 
 The server deals one card at a time and keeps the clock, so the board is fair: the answer key never reaches the phone
 before a card is answered, a card can never be read before its turn, and the time on the board is the server's time.
@@ -24,7 +25,7 @@ from scope import CARD_SECONDS
 from shop import equipped_of, safe_avatar
 
 SUBJECTS = ("Physics", "Chemistry", "Mathematics")
-PER_SUBJECT = 10
+PER_SUBJECT = 15  # 45 cards a day
 TOTAL = PER_SUBJECT * len(SUBJECTS)
 GRACE = 2.5  # seconds for the network, both ways
 START_IN = 3.0  # the 3-2-1 before the first card
@@ -60,12 +61,13 @@ def make_router(db, rf_user, award):
     locks: dict = {}
 
     async def deck(exam: str, day: str) -> list:
-        """Today's 30 card ids: 10 per subject, 10 different chapters each, never a card from an earlier day."""
+        """Today's 45 card ids: 15 per subject, 15 different chapters each, never a card from an earlier day.
+        A day keeps the deck it was first played with; a shorter deck from before the 45-card rule that nobody has played yet is dealt again."""
         key = f"{exam}:{day}"
         have = await db.rf_daily.find_one({"_id": key})
-        if have:
+        if have and (len(have["card_ids"]) >= TOTAL or await db.rf_daily_plays.find_one({"exam": exam, "day": day}, {"_id": 1})):
             return have["card_ids"]
-        used = set(await db.rf_daily.distinct("card_ids", {"exam": exam}))
+        used = set(await db.rf_daily.distinct("card_ids", {"exam": exam, "_id": {"$ne": key}}))
         rng = random.Random(hashlib.sha256(key.encode()).hexdigest())
         lanes, prompts = [], set()
         for subject in SUBJECTS:
@@ -90,14 +92,18 @@ def make_router(db, rf_user, award):
                             break
             lanes.append(picked)
         ids = [lane[k] for k in range(PER_SUBJECT) for lane in lanes if k < len(lane)]  # Physics, Chemistry, Maths, ...
+        doc = {"_id": key, "exam": exam, "day": day, "card_ids": ids, "ts": time.time()}
+        if have:  # the unplayed short deck: replaced in place (the same seed gives every server the same new deck)
+            await db.rf_daily.replace_one({"_id": key}, doc)
+            return ids
         try:
-            await db.rf_daily.insert_one({"_id": key, "exam": exam, "day": day, "card_ids": ids, "ts": time.time()})
+            await db.rf_daily.insert_one(doc)
         except DuplicateKeyError:  # another server made today's deck at the same moment: everyone plays that one
             return (await db.rf_daily.find_one({"_id": key}))["card_ids"]
         return ids
 
     async def cards_of(ids: list) -> list:
-        docs = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": ids}}, {"_id": 0}).to_list(TOTAL)}
+        docs = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": ids}}, {"_id": 0}).to_list(len(ids))}
         return [docs[i] for i in ids if i in docs]
 
     def rank_query(p: dict) -> dict:
@@ -140,7 +146,7 @@ def make_router(db, rf_user, award):
     async def result(p: dict, uid: str) -> dict:
         players, _ = await board(p["exam"], p["day"], p.get("test", False))
         award_row = await db.rf_awards.find_one({"uid": uid, "ref": ref_of(p)}, {"_id": 0, "reward": 1}) or {}
-        return {"correct": p["correct"], "total": TOTAL, "ms": p["ms"], "rank": await rank_of(p), "players": max(players, 1),
+        return {"correct": p["correct"], "total": len(p.get("rows") or []) or TOTAL, "ms": p["ms"], "rank": await rank_of(p), "players": max(players, 1),
                 "reward": award_row.get("reward"), "day": p["day"]}
 
     def ref_of(p: dict) -> str:
@@ -153,7 +159,7 @@ def make_router(db, rf_user, award):
         await record_learning(db, uid, ref_of(p), p["exam"], p["rows"], cards, datetime.fromtimestamp(p["finished_ts"], IST).isoformat())
         answered = sum(x["outcome"] in ("correct", "incorrect") for x in p["rows"])
         gems, best = phoenix([x["outcome"] for x in p["rows"]])
-        await award(uid, ref_of(p), "solo", p["correct"], TOTAL, answered, exam=p["exam"], diamonds=gems, phoenix_streak=best)
+        await award(uid, ref_of(p), "solo", p["correct"], len(p["rows"]), answered, exam=p["exam"], diamonds=gems, phoenix_streak=best)
         return await result(p, uid)
 
     async def current(p: dict, uid: str) -> dict:
@@ -167,7 +173,7 @@ def make_router(db, rf_user, award):
                 continue
             if now <= p["served_ts"] + CARD_SECONDS + GRACE:
                 card = (await cards_of([ids[p["i"]]]))[0]
-                return {"status": "playing", "i": p["i"], "total": TOTAL, "seconds": CARD_SECONDS, "correct": p["correct"], "card": public(card, p["i"]),
+                return {"status": "playing", "i": p["i"], "total": len(ids), "seconds": CARD_SECONDS, "correct": p["correct"], "card": public(card, p["i"]),
                         "show_in_ms": max(0, round((p["served_ts"] - now) * 1000)), "left_ms": round(min(CARD_SECONDS, p["served_ts"] + CARD_SECONDS - now) * 1000)}
             p = await move(p, uid, ids, None, "timed_out", CARD_SECONDS * 1000, now) or await play_of(uid, p["exam"], p["day"])
         return {"status": "done", "result": await result(p, uid)}
@@ -197,7 +203,7 @@ def make_router(db, rf_user, award):
         you = {"status": "new"}
         if p:
             you = {"status": p["status"], "i": p["i"], "correct": p["correct"], "ms": p["ms"], "rank": await rank_of(p)}
-        return {"exam": exam, "day": day, "total": TOTAL, "seconds": CARD_SECONDS, "ends_in": max(0, round(day_ends(day) - time.time())),
+        return {"exam": exam, "day": day, "total": len(await deck(exam, day)) or TOTAL, "seconds": CARD_SECONDS, "ends_in": max(0, round(day_ends(day) - time.time())),
                 "players": players, "top": shown(rows, uid, 3), "yesterday": shown(yrows, uid, 3), "you": you}
 
     @r.post("/start", dependencies=[Depends(arena_gate)])
@@ -207,7 +213,7 @@ def make_router(db, rf_user, award):
         exam = require_active_exam(data.exam or "JEE")
         day = ist_day()
         ids = await deck(exam, day)
-        if len(ids) < TOTAL:
+        if not ids:
             raise HTTPException(404, "Today's All India Rapid is not ready yet. Please try again in a minute.")
         try:
             await db.rf_daily_plays.insert_one({"exam": exam, "day": day, "uid": uid, "test": uid.startswith("TEST"), "status": "playing", "i": 0, "served_ts": None,
@@ -229,8 +235,10 @@ def make_router(db, rf_user, award):
         if data.i != p["i"] or p.get("served_ts") is None:
             return await current(p, uid)  # a retry of a card already counted: show where the run really is
         ids = (await db.rf_daily.find_one({"_id": f"{p['exam']}:{p['day']}"}))["card_ids"]
-        card = (await cards_of([ids[p["i"]]]))[0]
         now = time.time()
+        if now < p["served_ts"]:  # an answer before the card is even on screen does not count: show where the run really is
+            return await current(p, uid)
+        card = (await cards_of([ids[p["i"]]]))[0]
         took = max(0.0, now - p["served_ts"])
         if took > CARD_SECONDS + GRACE or (data.choice is None and not data.skip):
             outcome, ms = "timed_out", CARD_SECONDS * 1000
@@ -245,7 +253,7 @@ def make_router(db, rf_user, award):
         if after["status"] == "done":
             return {**out, "status": "done", "result": await result(after, uid)}
         nxt = (await cards_of([ids[after["i"]]]))[0]
-        return {**out, "status": "playing", "i": after["i"], "total": TOTAL, "seconds": CARD_SECONDS, "card": public(nxt, after["i"]),
+        return {**out, "status": "playing", "i": after["i"], "total": len(ids), "seconds": CARD_SECONDS, "card": public(nxt, after["i"]),
                 "show_in_ms": round(REVEAL[outcome] * 1000), "left_ms": CARD_SECONDS * 1000}
 
     @r.post("/finish")
@@ -276,7 +284,8 @@ def make_router(db, rf_user, award):
         players, rows = await board(exam, day, uid.startswith("TEST"))
         p = await play_of(uid, exam, day)
         you = {"status": p["status"], "correct": p["correct"], "ms": p["ms"], "rank": await rank_of(p)} if p else {"status": "new"}
-        return {"exam": exam, "day": day, "total": TOTAL, "players": players, "items": shown(rows, uid, 100), "you": you}
+        d = await db.rf_daily.find_one({"_id": f"{exam}:{day}"}, {"card_ids": 1})
+        return {"exam": exam, "day": day, "total": len(d["card_ids"]) if d else TOTAL, "players": players, "items": shown(rows, uid, 100), "you": you}
 
     return r
 

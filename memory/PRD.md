@@ -1,5 +1,10 @@
 # JEELIVE.AI Native App — PRD
 
+## No default subject + All India = 45 PCM cards + Subjects-only lobby + victory/share/sound settings (20 Nov 2026)
+- Lobby: only the "Subjects" ribbon (subject chips + 30/50/100 removed; all inside the Subjects sheet). No subject is picked by default (every app session); mode tiles / challenge / gang war ask for subjects first. Sheet's card count is saved only on SAVE/PLAY.
+- All India Rapid: 45 PCM cards a day (15 P + 15 C + 15 M, 15 chapters each, 20 s); old played decks keep their size; totals come from the deck.
+- Battleground Victory (top 100 with ≥1 right): `src/rapid/BattleVictory.tsx` on the result screen. Champion share card: `src/rapid/DailyShare.tsx` (WhatsApp). Rapid Fire settings gear (`src/rapid/SoundSettings.tsx`): Card sounds / Game sounds switches (`rf.sound.v1`).
+
 ## All India card: 5 living scenes in the student's fire world + flicker fix + Weak Topic Sprint (20 Nov 2026)
 - User (Hinglish): "5 screens: spaceship, World Cup, Lions fight, horse racing, archery", then sent a reference picture (black rider silhouettes on a dark ridge against blazing red smoke): "use this as the theme and background of the All India Rapid Fire cards — beautiful, perfect, elegant, powerful".
 - `src/rapid/DailyScenes.tsx`: one fire world (th_fire_bg drifting, breathing glow, rising embers) + 5 scenes on a 360 stage scaled to the card: 1 Space Race (rocket silhouette + flame flies across, star streaks), 2 World Cup (default; golden trophy over silhouette army, gold rays), 3 Lion Clash (lions lunge, white-hot burst, VS), 4 Cavalry Race (3 riders swap the lead, dust, wind embers), 5 Bullseye (archer, arrow into glowing target, +10). Art: `backend/rapidfire/make_theme_art.py` (Gemini Nano Banana; fire bg made from the student's picture `rapidfire/ref_battle.jpeg`; silhouettes keyed from white). Style key `rf.dailyStyle.v2`.

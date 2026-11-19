@@ -9,7 +9,7 @@ import { Glitter } from "./Glitter";
 import { Jelly, LiveDot } from "./juice";
 import { playSfx } from "@/src/sfx";
 import { DailyScene, SCENE_SOUND } from "./DailyScenes";
-import { DailyLook, DailyStatus, grouped, hms, useEndsIn } from "./daily";
+import { DAILY_CARDS, DailyLook, DailyStatus, grouped, hms, useEndsIn } from "./daily";
 
 /** The All India Rapid trophy (original artwork: a golden globe with India lit up, held by two flames). */
 export const TROPHY = require("../../assets/arena/daily_trophy.webp");
@@ -21,11 +21,11 @@ let heard = false; // the card's sound plays once per app session: the first tim
 export const playScene = (look: DailyLook) => playSfx(SCENE_SOUND[look], 0.85);
 
 function copy(d?: DailyStatus | null) {
-  const you = d?.you, total = d?.total || 30;
-  if (!d) return { title: "All India Rapid", line: "Today’s 30 cards are ready", cta: "PLAY NOW" };
+  const you = d?.you, total = d?.total || DAILY_CARDS;
+  if (!d) return { title: "All India Rapid", line: `Today’s ${DAILY_CARDS} PCM cards are ready`, cta: "PLAY NOW" };
   if (you?.status === "done") return { title: you.rank ? `#${grouped(you.rank)} in India` : "Done for today", line: `${you.correct}/${total} · ${grouped(d.players)} played today`, cta: "SEE ALL INDIA BOARD" };
   if (you?.status === "playing") return { title: "Your round is on", line: `Card ${(you.i || 0) + 1} of ${total} · the clock is running`, cta: "CONTINUE" };
-  return { title: "Play for #1 in India", line: `${d.players ? `${grouped(d.players)} played today` : "Be the first today!"} · ${d.seconds} s each`, cta: "PLAY NOW" };
+  return { title: "Play for #1 in India", line: `${total} PCM cards · ${d.seconds} s each · ${d.players ? `${grouped(d.players)} played` : "be the first!"}`, cta: "PLAY NOW" };
 }
 
 /**
@@ -41,7 +41,7 @@ export function AllIndiaCard({ d, look = 2, size, onPress, onLongPress, paused, 
   }, [sound, look]);
   const left = useEndsIn(d?.ends_in), c = copy(d);
   const champ = d?.top?.[0] && d.you.status !== "done" ? `Today’s #1: ${d.top[0].you ? "You" : d.top[0].name} · ${d.top[0].correct}/${d.total}`
-    : d?.yesterday?.[0] ? `Yesterday’s champion: ${d.yesterday[0].you ? "You" : d.yesterday[0].name} · ${d.yesterday[0].correct}/${d.total}` : "Same 30 cards for every JEE student";
+    : d?.yesterday?.[0] ? `Yesterday’s champion: ${d.yesterday[0].you ? "You" : d.yesterday[0].name} · ${d.yesterday[0].correct}/${d.total}` : `Physics · Chemistry · Maths · same ${d?.total || DAILY_CARDS} for all India`;
   const inner = size - 5, done = d?.you.status === "done";
   return <Jelly testID={testID} onPress={onPress} onLongPress={onLongPress} accessibilityLabel={`All India Rapid. ${c.title}. ${c.line}. ${c.cta}`} style={{ width: size, alignSelf: "center" }}>
     <Glitter radius={28} ring={2.5} sparkles={4} inner={{ width: inner, height: inner, backgroundColor: allIndia.ink }}>

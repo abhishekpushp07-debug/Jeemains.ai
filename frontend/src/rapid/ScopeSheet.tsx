@@ -8,7 +8,7 @@ import { arena, fonts, rapidSubjectColor as subjectColor } from "@/src/theme";
 import { GoldTitle, RaisedButton } from "./arena";
 import { Check } from "./parts";
 import { CardCountPicker } from "./CardCount";
-import { CatalogSubject, MAX_PICKS, PCM, Pick, SHORT, SUBJECTS, cardCount, fitCount, isBitsat, isPCM, isWhole, normalise, pickKey, scopeLabel, useCardCount } from "./scope";
+import { CardCount, CatalogSubject, MAX_PICKS, PCM, Pick, SHORT, SUBJECTS, cardCount, fitCount, getCardCount, isBitsat, isPCM, isWhole, normalise, pickKey, scopeLabel, setCardCount } from "./scope";
 
 const ICON: Record<string, IconName> = { Physics: "atom", Chemistry: "flask-outline", Mathematics: "function-variant", English: "alphabetical-variant", "Logical Reasoning": "puzzle-outline" };
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -65,11 +65,12 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
   const insets = useSafeAreaInsets(), reduced = useReducedMotion();
   const [draft, setDraft] = useState<Pick[]>(value), [tab, setTab] = useState(value[0]?.subject || "Physics");
   const [q, setQ] = useState(""), [warn, setWarn] = useState("");
-  const [was, setWas] = useState(false);
-  if (visible !== was) { setWas(visible); if (visible) { setDraft(value); setTab(value[0]?.subject || "Physics"); setQ(""); setWarn(""); } }
+  const [was, setWas] = useState(false), [count, setCount] = useState<CardCount>(getCardCount()); // the 30/50/100 choice is kept on SAVE / PLAY only
+  if (visible !== was) { setWas(visible); if (visible) { setDraft(value); setTab(value[0]?.subject || "Physics"); setQ(""); setWarn(""); setCount(getCardCount()); } }
   const query = q.trim().toLowerCase();
   const hits = useMemo(() => (query ? subjects.flatMap((s) => s.chapters.filter((c) => c.name.toLowerCase().includes(query)).map((c) => ({ ...c, subject: s.name }))) : []), [query, subjects]);
-  const cards = cardCount(draft, subjects), full = draft.length >= MAX_PICKS, size = fitCount(useCardCount(), cards);
+  const cards = cardCount(draft, subjects), full = draft.length >= MAX_PICKS, size = fitCount(count, cards);
+  const save = () => { setCardCount(count); onDone(draft); onClose(); };
   const cur = subjects.find((s) => s.name === tab);
 
   const toggle = (pick: Pick) => {
@@ -141,7 +142,7 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
                 </Pressable>;
               })}
             </ScrollView>
-            <CardCountPicker available={draft.length ? cards : undefined} testID="rf-scope-count" />
+            <CardCountPicker available={draft.length ? cards : undefined} value={count} onChange={setCount} testID="rf-scope-count" />
             <T w="heavy" size={11} color={arena.muted} style={styles.label}>{(cur?.chapters.length ?? 0) + " CHAPTERS" + (isBitsat(tab) ? " · BITSAT 2026" : "")}</T>
             {(cur?.chapters || []).map((c) => row(tab, c))}
           </>}
@@ -159,12 +160,12 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
           {warn ? <T testID="rf-scope-warn" w="bold" size={12} color={arena.danger} style={styles.center}>{warn}</T>
             : draft.length && cards < min ? <T testID="rf-scope-short" w="bold" size={12} color={arena.danger} style={styles.center}>{cards} cards. Add a chapter for a full {min}-card round.</T> : null}
           {onPlay ? <View style={styles.playRow}>
-            <RaisedButton testID="rf-scope-done" height={58} tone="wine" label="SAVE" sub={`${draft.length}/${MAX_PICKS} picked`} disabled={!draft.length || cards < min} onPress={() => { onDone(draft); onClose(); }} style={styles.save} />
+            <RaisedButton testID="rf-scope-done" height={58} tone="wine" label="SAVE" sub={`${draft.length}/${MAX_PICKS} picked`} disabled={!draft.length || cards < min} onPress={save} style={styles.save} />
             <RaisedButton testID="rf-scope-play" height={58} streak icon="swords" label="PLAY" sub={!draft.length ? "Pick a subject" : `Quick Match · ${size} cards`}
-              disabled={!draft.length || cards < min || !size} onPress={() => { onDone(draft); onClose(); onPlay(draft); }} style={styles.play} />
+              disabled={!draft.length || cards < min || !size} onPress={() => { save(); onPlay(draft); }} style={styles.play} />
           </View> : <RaisedButton testID="rf-scope-done" height={58} streak icon={action ? "flame" : undefined} label={!draft.length ? "PICK A SUBJECT" : action || scopeLabel(draft).toUpperCase()}
             sub={`${action && draft.length ? scopeLabel(draft) + " · " : ""}${draft.length}/${MAX_PICKS} picked · ${cards} cards`}
-            disabled={!draft.length || cards < min} onPress={() => { onDone(draft); onClose(); }} />}
+            disabled={!draft.length || cards < min} onPress={save} />}
         </View>
       </View>
     </KeyboardAvoidingView>

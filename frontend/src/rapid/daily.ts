@@ -4,7 +4,8 @@ import { useCached } from "@/src/useCached";
 import { storage } from "@/src/utils/storage";
 import type { Crown } from "./social";
 
-// All India Rapid: the same 30 cards for every JEE student each day, one try, one All India board.
+// All India Rapid: the same 45 PCM cards (15 each, 20 s a card) for every JEE student each day, one try, one All India board.
+export const DAILY_CARDS = 45;
 export type DailyRow = { rank: number; name: string; pid?: string | null; avatar?: string | null; frame?: string | null; level: number; crown?: Crown | null; correct: number; ms: number; you: boolean };
 export type DailyYou = { status: "new" | "playing" | "done"; i?: number; correct?: number; ms?: number; rank?: number | null };
 export type DailyStatus = { exam: string; day: string; total: number; seconds: number; ends_in: number; players: number; top: DailyRow[]; yesterday: DailyRow[]; you: DailyYou };

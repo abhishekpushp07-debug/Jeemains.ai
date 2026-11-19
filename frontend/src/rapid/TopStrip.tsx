@@ -10,6 +10,7 @@ import { GameIcon, Gem } from "./Art";
 import { Jelly } from "./juice";
 import { Bar } from "./parts";
 import { go, setArenaTab } from "./social";
+import { SettingsButton } from "./SoundSettings";
 
 /** Top of every arena tab: you (opens your profile), your diamonds (opens the Vault) and your coins (opens the Store). */
 export function TopStrip() {
@@ -28,6 +29,7 @@ export function TopStrip() {
         <Bar value={progress} color={arena.gold} />
       </View>
     </Jelly>
+    <SettingsButton />
     <Jelly testID="arena-top-diamonds" accessibilityLabel={`${diamonds} diamonds. Open Diamond Vault`} onPress={() => router.push("/rapid/vault" as any)} style={styles.pill}>
       <Gem color="red" size={26} /><T testID="arena-top-diamond-count" w="heavy" size={14} color={arena.text}>{diamonds}</T>
     </Jelly>

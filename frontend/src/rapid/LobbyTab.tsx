@@ -17,9 +17,8 @@ import { LiveStrip } from "./LiveStrip";
 import { BadlaStrip } from "./BadlaStrip";
 import { CupNightBanner } from "./CupNight";
 import { ChampionsWall } from "./ChampionsWall";
-import { ScopeSheet, SubjectChips } from "./ScopeSheet";
-import { CardCountPicker } from "./CardCount";
-import { CARD_SECONDS, MAX_PICKS, cardCount, encodePicks, fitCount, scopeLabel, scopeSubjects, setScope, useCardCount, useScope } from "./scope";
+import { ScopeSheet } from "./ScopeSheet";
+import { CARD_SECONDS, Pick, cardCount, encodePicks, fitCount, getCardCount, scopeLabel, setScope, useCardCount, useScope } from "./scope";
 import { ErrorBox, Sheet } from "./ui";
 import { Friend, GangRow, go, seenText, sendChallenge, setArenaTab, useFriends, useGangs, useInbox } from "./social";
 import { Glitter } from "./Glitter";
@@ -52,7 +51,7 @@ export function LobbyTab() {
   const router = useRouter(), { user } = useAuth(), uid = user?.id || "";
   const { width } = useWindowDimensions(), narrow = width < 360;
   const picks = useScope(), inbox = useInbox();
-  const [sheet, setSheet] = useState<"" | "chapters" | "weak">("");
+  const [sheet, setSheet] = useState<"" | "chapters" | "weak">(""), [pending, setPending] = useState<"" | "ai" | "solo">("");
   const [quick, setQuick] = useState<{ gang?: GangRow; friend?: Friend } | null>(null);
   const [busy, setBusy] = useState(false), [error, setError] = useState("");
   const cat = useCached<any>("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", uid));
@@ -64,10 +63,15 @@ export function LobbyTab() {
 
   const available = cardCount(picks, cat.data?.subjects);
   const chosen = useCardCount(), size = cat.data ? fitCount(chosen, available) : 0;
-  const can = size > 0 && !!uid;
-  const play = (mode: "random" | "ai" | "solo") => router.push(mode === "solo" ? { pathname: "/rapid/session", params: { exam: "JEE", picks: encodePicks(picks), n: String(size), r: uuid() } } : go.duel({ mode, exam: "JEE", picks: encodePicks(picks), n: String(size), r: uuid() }));
-  // Quick Match now starts from the battleground sheet, right where the subject or chapter is chosen.
-  const quickMatch = (next: typeof picks) => router.push(go.duel({ mode: "random", exam: "JEE", picks: encodePicks(next), n: String(fitCount(chosen, cardCount(next, cat.data?.subjects))), r: uuid() }));
+  const can = !!uid && (!picks.length || size > 0);
+  const play = (mode: "random" | "ai" | "solo", on: Pick[] = picks) => {
+    const p = encodePicks(on), n = String(fitCount(getCardCount(), cardCount(on, cat.data?.subjects)));
+    router.push(mode === "solo" ? { pathname: "/rapid/session", params: { exam: "JEE", picks: p, n, r: uuid() } } : go.duel({ mode, exam: "JEE", picks: p, n, r: uuid() }));
+  };
+  // No subject is picked until the student picks: a mode tile then opens Subjects first, and the round starts right after.
+  const start = (mode: "ai" | "solo") => { if (picks.length) play(mode); else { setPending(mode); setSheet("chapters"); } };
+  // Quick Match starts from the Subjects sheet, right where the subject or chapter is chosen.
+  const quickMatch = (next: Pick[]) => play("random", next);
   const challenge = async (body: { pids?: string[]; gang_id?: string }) => {
     setBusy(true); setError("");
     try { const room = await sendChallenge(uid, { ...body, picks, count: size || 30 }); setQuick(null); router.push(go.room(room)); }
@@ -94,19 +98,18 @@ export function LobbyTab() {
           </View>
           <Sticker testID="rf-weak-cards" icon="target" label="Weak cards" badge={weakCards} delay={1900} narrow={narrow} onPress={() => setSheet("weak")} />
         </View>
-        <Ribbon testID="rf-chapter-picker" label={label} sub={cat.loading && !cat.data ? "Loading your cards…" : `${scopeSubjects(picks)} · ${picks.length}/${MAX_PICKS} · ${available} cards`} onPress={() => setSheet("chapters")} />
-        <View style={styles.chipRow}><SubjectChips picks={picks} onChange={setScope} onLimit={() => setSheet("chapters")} /></View>
-        <View style={styles.chipRow}><CardCountPicker available={cat.data ? available : undefined} /></View>
+        {/* One word on the lobby; subjects, chapters and the 30/50/100 cards are all chosen on the next screen. */}
+        <Ribbon testID="rf-chapter-picker" label="Subjects" onPress={() => setSheet("chapters")} />
       </View>
       <ErrorBox testID="rf-catalog-error" error={cat.error || prof.error} retry={() => { cat.reload(); prof.reload(); }} />
 
       <View style={styles.tiles}>
         <Tile testID="rf-play-friends" icon="friends" label="Play Friends" sub={online ? `${online} online` : "Gang or friends"} badge={online} delay={300} narrow={narrow} onPress={() => router.push(go.challenge())} />
-        <Tile testID="rf-duel-ai" icon="rival" label="Practice Rival" sub="No waiting" delay={1300} narrow={narrow} disabled={!can} onPress={() => play("ai")} />
-        <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub={`${size || chosen} cards · ${CARD_SECONDS} s`} delay={2300} narrow={narrow} disabled={!can} onPress={() => play("solo")} />
+        <Tile testID="rf-duel-ai" icon="rival" label="Practice Rival" sub="No waiting" delay={1300} narrow={narrow} disabled={!can} onPress={() => start("ai")} />
+        <Tile testID="rf-start-button" icon="bolt" label="Solo Sprint" sub={`${size || chosen} cards · ${CARD_SECONDS} s`} delay={2300} narrow={narrow} disabled={!can} onPress={() => start("solo")} />
       </View>
 
-      {/* All India Rapid: the big square right below the three mode tiles. The whole card opens today's 30 cards. */}
+      {/* All India Rapid: the big square right below the three mode tiles. The whole card opens today’s 45 PCM cards. */}
       <View style={styles.daily}>
         <AllIndiaCard d={daily.data} look={look} size={cardSize} sound onPress={() => router.push(go.daily())} onLongPress={() => router.push(go.dailyStyles())} />
         <Jelly testID="rf-all-india-style" accessibilityLabel={`Card style ${dailyStyleName(look)}. Change style`} onPress={() => router.push(go.dailyStyles())} style={styles.stylePill}>
@@ -164,7 +167,9 @@ export function LobbyTab() {
       <T testID="rf-practice-note" size={10} color={arena.faint} style={styles.center}>Practice, not exam marks. Coins and diamonds are earned only by playing.</T>
     </ScrollView>
 
-    <ScopeSheet visible={sheet === "chapters"} onClose={() => setSheet("")} subjects={cat.data?.subjects || []} value={picks} onDone={setScope} onPlay={uid ? quickMatch : undefined} />
+    <ScopeSheet visible={sheet === "chapters"} onClose={() => { setSheet(""); setPending(""); }} subjects={cat.data?.subjects || []} value={picks}
+      onDone={(next) => { setScope(next); if (pending) play(pending, next); }} onPlay={uid && !pending ? quickMatch : undefined}
+      action={pending === "solo" ? "START SOLO SPRINT" : pending === "ai" ? "PLAY PRACTICE RIVAL" : undefined} hint={pending ? "Pick your subjects or chapters first" : undefined} />
     <Sheet visible={sheet === "weak"} onClose={() => setSheet("")} testID="rf-weak-sheet">{uid ? <><WeakSprintPanel uid={uid} /><WeakRevision uid={uid} exam="JEE" /></> : null}</Sheet>
     <Sheet visible={!!quick} onClose={() => setQuick(null)} testID="rf-quick-sheet">
       {quick?.gang ? <View style={styles.quick}>
@@ -189,7 +194,7 @@ const styles = StyleSheet.create({
   flex: { flex: 1 }, center: { textAlign: "center" }, stretch: { alignSelf: "stretch" },
   // Room at the bottom for the Phoenix Diamond rising out of the arena bar.
   content: { paddingHorizontal: 16, paddingTop: 6, paddingBottom: 36, gap: 14 },
-  stage: { alignItems: "center", gap: 2 }, tagline: { letterSpacing: 3, textTransform: "uppercase" }, chipRow: { alignSelf: "stretch", marginTop: 8 }, kicker: { letterSpacing: 1.5 },
+  stage: { alignItems: "center", gap: 2 }, tagline: { letterSpacing: 3, textTransform: "uppercase" }, kicker: { letterSpacing: 1.5 },
   cupInner: { borderBottomWidth: 4, borderBottomColor: arena.goldDeep },
   cup: { flexDirection: "row", alignItems: "center", gap: 12, minHeight: 92, paddingHorizontal: 14, paddingVertical: 10, overflow: "hidden" },
   cupGo: { height: 44, paddingHorizontal: 14, borderRadius: 14, alignItems: "center", justifyContent: "center", backgroundColor: arena.teal, borderWidth: 1.5, borderColor: arena.tealOutline, borderBottomWidth: 4, borderBottomColor: arena.tealDeep },

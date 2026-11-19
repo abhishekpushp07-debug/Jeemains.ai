@@ -43,8 +43,9 @@ function WarSheet({ uid, gid, onClose, visible }: { uid: string; gid: string; on
         <T w="heavy" size={14} color={arena.text} numberOfLines={1}>{g.name}</T>
         <T w="bold" size={11} color={arena.muted}>{g.members} members · {g.wins}W {g.losses}L {g.ties}T</T>
       </View>
-      <RaisedButton testID={`gang-war-send-${g.id}`} label="Battle" height={42} busy={busy === g.id} disabled={!!busy} onPress={() => war(g)} style={styles.small} />
+      <RaisedButton testID={`gang-war-send-${g.id}`} label="Battle" height={42} busy={busy === g.id} disabled={!!busy || !picks.length} onPress={() => war(g)} style={styles.small} />
     </View>)}
+    {!picks.length ? <Note testID="gang-war-no-subject">Pick your subjects first: tap Subjects on the Rapid Fire lobby.</Note> : null}
     {rows && !rows.length ? <Note testID="gang-war-empty">No gang found. Ask the rival leader for their gang code.</Note> : null}
     <ErrorBox testID="gang-war-error" error={error} />
   </Sheet>;

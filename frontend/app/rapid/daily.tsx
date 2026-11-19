@@ -11,7 +11,7 @@ import { RapidText } from "@/src/rapid/RapidText";
 import { playSfx } from "@/src/sfx";
 import { ArenaBg, GoldTitle } from "@/src/rapid/arena";
 import { DailyResultView } from "@/src/rapid/DailyParts";
-import { DailyResult } from "@/src/rapid/daily";
+import { DAILY_CARDS, DailyResult } from "@/src/rapid/daily";
 import { rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
 
 // All India Rapid: the server deals one card at a time and keeps the clock (the phone never holds the answer key).
@@ -25,7 +25,7 @@ function DailyRound() {
   const uid = useAuth().user?.id || "";
   const router = useRouter(), insets = useSafeAreaInsets(), reduced = useReducedMotion();
   const [card, setCard] = useState<PCard | null>(null);
-  const [total, setTotal] = useState(30), [correct, setCorrect] = useState(0);
+  const [total, setTotal] = useState(DAILY_CARDS), [correct, setCorrect] = useState(0);
   const [limit, setLimit] = useState(20000), [left, setLeft] = useState(20000);
   const [choice, setChoice] = useState<number | null>(null); // -1: timed out or skipped
   const [reveal, setReveal] = useState<Reveal | null>(null);
@@ -134,7 +134,7 @@ function DailyRound() {
     {result ? <DailyResultView result={result} uid={uid} onBack={back} /> : null}
     {!result && !card && !error && !count ? <View style={styles.pad}><Skeleton h={380} /></View> : null}
     {!result && count ? <Animated.View key={count} entering={reduced ? undefined : ZoomIn.duration(260)} style={styles.count} testID="rf-daily-countdown">
-      <T w="heavy" size={14} color={colors.custom_neonCyan} style={styles.spaced}>SAME 30 CARDS · ALL OF INDIA</T>
+      <T w="heavy" size={14} color={colors.custom_neonCyan} style={styles.spaced}>SAME {total} PCM CARDS · ALL OF INDIA</T>
       <GoldTitle size={110} center>{count}</GoldTitle>
       <T w="bold" size={13} color={colors.onSurfaceInverse}>20 seconds a card. Pen down. Go!</T>
     </Animated.View> : null}

@@ -21,11 +21,11 @@ const ART = {
 };
 
 type Ease = "linear" | "ease-in-out" | "ease-out" | "ease-in";
-const run = (still: boolean, name: any, ms: number, o: { delay?: number; ease?: Ease; alt?: boolean } = {}) => (still ? null : {
+export const run = (still: boolean, name: any, ms: number, o: { delay?: number; ease?: Ease; alt?: boolean } = {}) => (still ? null : {
   animationName: name, animationDuration: ms, animationDelay: o.delay || 0, animationIterationCount: "infinite" as const,
   animationTimingFunction: o.ease || "linear", animationDirection: o.alt ? ("alternate" as const) : ("normal" as const),
 });
-const at = (x: number, y: number, r = 0, s = 1) => ({ transform: [{ translateX: x }, { translateY: y }, { rotate: `${r}deg` }, { scale: s }] });
+export const at = (x: number, y: number, r = 0, s = 1) => ({ transform: [{ translateX: x }, { translateY: y }, { rotate: `${r}deg` }, { scale: s }] });
 
 // ---- The fire world: smoke slowly drifting, the glow breathing, embers rising off the ridge (or blown sideways by the race).
 const DRIFT = css.keyframes({ from: { transform: [{ scale: 1 }, { translateX: 0 }] }, to: { transform: [{ scale: 1.07 }, { translateX: -8 }] } });
@@ -37,7 +37,7 @@ const RISE = css.keyframes({
 const WIND = css.keyframes({ "0%": { opacity: 0, ...at(0, 0) }, "15%": { opacity: 0.9, ...at(-60, -3) }, "100%": { opacity: 0, ...at(-440, -22) } });
 const EMBERS = Array.from({ length: 14 }, (_, i) => ({ x: 10 + rnd(i, 1) * 340, y: 182 + rnd(i, 2) * 30, s: 3 + rnd(i, 3) * 3.5, ms: 2600 + rnd(i, 4) * 2400, delay: rnd(i, 5) * 3000, c: [allIndia.ember, allIndia.flame, arena.gold][i % 3] }));
 
-function Fire({ still, wind }: { still: boolean; wind?: boolean }) {
+export function Fire({ still, wind }: { still: boolean; wind?: boolean }) {
   return <>
     <Animated.View style={[styles.bg, run(still, DRIFT, 9000, { ease: "ease-in-out", alt: true })]}><Image source={ART.fire} style={styles.full} contentFit="cover" /></Animated.View>
     <Animated.View style={[styles.flare, run(still, FLARE, 2600, { ease: "ease-in-out", alt: true })]}>
@@ -84,7 +84,7 @@ function Space({ still }: { still: boolean }) {
 }
 
 // ---- 2 · World Cup: the golden cup blazing over the student's battleground, gold light turning behind it.
-const SPIN = css.keyframes({ from: { transform: [{ rotate: "0deg" }] }, to: { transform: [{ rotate: "360deg" }] } });
+export const SPIN = css.keyframes({ from: { transform: [{ rotate: "0deg" }] }, to: { transform: [{ rotate: "360deg" }] } });
 
 function Rays({ still }: { still: boolean }) {
   const c = 200, n = 16;
@@ -143,8 +143,8 @@ function Lions({ still }: { still: boolean }) {
 
 // ---- 4 · Cavalry Race: three riders thunder along the burning ridge, swapping the lead, dust flying, embers blown back.
 const JOSTLE = css.keyframes({ from: { transform: [{ translateX: -22 }] }, to: { transform: [{ translateX: 26 }] } });
-const GALLOP = css.keyframes({ "0%": at(0, 0), "50%": at(0, -8, -3), "100%": at(0, 0) });
-const DUST = css.keyframes({ from: { opacity: 0.8, ...at(0, 0, 0, 0.5) }, to: { opacity: 0, ...at(-64, -12, 0, 1.8) } });
+export const GALLOP = css.keyframes({ "0%": at(0, 0), "50%": at(0, -8, -3), "100%": at(0, 0) });
+export const DUST = css.keyframes({ from: { opacity: 0.8, ...at(0, 0, 0, 0.5) }, to: { opacity: 0, ...at(-64, -12, 0, 1.8) } });
 const RIDERS = [
   { src: ART.riders[1], size: 118, left: 204, top: 121, jostle: 3100, delay: 0 },
   { src: ART.riders[2], size: 138, left: 106, top: 88, jostle: 2500, delay: 140 },

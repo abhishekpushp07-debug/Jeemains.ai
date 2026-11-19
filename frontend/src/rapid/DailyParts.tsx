@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
@@ -10,6 +10,9 @@ import { GoldTitle, Panel, RaisedButton } from "./arena";
 import { Confetti, Twinkles } from "./juice";
 import { Face, NameLine, Note } from "./parts";
 import { TROPHY } from "./AllIndiaCard";
+import { BattleVictory } from "./BattleVictory";
+import { DailyShare } from "./DailyShare";
+import { Sheet } from "./ui";
 import { DailyResult, DailyRow, grouped, secs, useDailyBoard } from "./daily";
 import { go } from "./social";
 
@@ -34,15 +37,18 @@ export function DailyBoardList({ items, total, testID = "rf-daily-board" }: { it
 /** After the 30th card: your All India rank, the score, the reward and today's board. */
 export function DailyResultView({ result, uid, onBack }: { result: DailyResult; uid: string; onBack: () => void }) {
   const board = useDailyBoard(uid), reload = board.reload;
-  const art = Math.min(useWindowDimensions().width * 0.46, 200);
+  const width = Math.min(useWindowDimensions().width, 560), art = Math.min(width * 0.46, 200);
+  const [sharing, setSharing] = useState(false);
   useEffect(() => { reload(); }, [reload, result.rank]);
-  const top = (result.rank || 999) <= 10;
+  // The charge and the confetti need at least one card right (a lone 0/30 player is "#1" by default).
+  const won = result.correct > 0, top = won && (result.rank || 999) <= 10, battle = won && !!result.rank && result.rank <= 100;
   return <ScrollView testID="rf-daily-result" contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
     {top ? <Confetti /> : null}
-    <View style={styles.hero}>
+    {/* Top 100 in India: the battleground victory charge. Everyone else: the trophy. */}
+    {battle ? <BattleVictory width={width - 32} rank={result.rank!} day={result.day} /> : <View style={styles.hero}>
       <Alive kind="breathe"><Image source={TROPHY} contentFit="contain" style={{ width: art, height: art }} accessible={false} /></Alive>
       <Twinkles spots={[[20, 22, 16], [80, 18, 14], [50, 4, 12], [16, 74, 12], [84, 70, 14]]} />
-    </View>
+    </View>}
     <T w="heavy" size={11} color={arena.aqua} style={styles.kicker}>ALL INDIA RAPID FIRE · {result.day}</T>
     <GoldTitle size={34} center testID="rf-daily-rank">{result.rank ? `#${grouped(result.rank)} in India` : "Round complete"}</GoldTitle>
     <T testID="rf-daily-players" w="bold" size={13} color={arena.text} style={styles.center}>of {grouped(result.players)} player{result.players === 1 ? "" : "s"} today</T>
@@ -50,10 +56,12 @@ export function DailyResultView({ result, uid, onBack }: { result: DailyResult; 
       <Panel style={styles.stat}><T w="heavy" size={28} color={arena.gold} testID="rf-daily-score">{result.correct}/{result.total}</T><T w="bold" size={11} color={arena.muted}>cards right</T></Panel>
       <Panel style={styles.stat}><T w="heavy" size={28} color={arena.text} testID="rf-daily-time">{secs(result.ms)}</T><T w="bold" size={11} color={arena.muted}>total time</T></Panel>
     </View>
-    {result.reward ? <RewardPanel reward={result.reward} title={top ? "Top 10 in India!" : "All India round done"} /> : null}
+    <RaisedButton testID="rf-daily-share-open" glyph="whatsapp" height={58} streak label="SHARE MY RANK" sub="Champion card for WhatsApp" onPress={() => setSharing(true)} />
+    {result.reward ? <RewardPanel reward={result.reward} title={top ? "Top 10 in India!" : battle ? "Top 100 in India!" : "All India round done"} /> : null}
     {board.data ? <DailyBoardList items={board.data.items} total={board.data.total} /> : null}
-    <T w="bold" size={12} color={arena.muted} style={styles.center}>30 new cards at midnight. Same cards for everyone, one try.</T>
+    <T w="bold" size={12} color={arena.muted} style={styles.center}>{result.total} new PCM cards at midnight. Same cards for everyone, one try.</T>
     <RaisedButton testID="rf-daily-back" label="BACK TO RAPID FIRE" height={56} onPress={onBack} />
+    <Sheet visible={sharing} onClose={() => setSharing(false)} testID="rf-daily-share-sheet"><DailyShare result={result} onBack={() => setSharing(false)} /></Sheet>
   </ScrollView>;
 }
 

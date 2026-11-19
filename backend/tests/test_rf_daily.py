@@ -1,4 +1,4 @@
-"""All India Rapid (daily challenge): same 30 cards for everyone, server-paced cards (no key before answering),
+"""All India Rapid (daily challenge): same 45 PCM cards for everyone, server-paced cards (no key before answering),
 one try a day, fair board. TEST-* players only; they see a board of TEST players and never the real one."""
 import os
 import time
@@ -35,7 +35,7 @@ def key_of(c):
     return db.rf_cards.find_one({"prompt": c["prompt"], "chapter": c["chapter"], "subject": c["subject"], "retired": {"$ne": True}})["answer"]
 
 
-def run(h, wrong_from=30):
+def run(h, wrong_from=45):
     """Plays the whole round, answering right until card `wrong_from`, then wrong. Waits out the server's reveal pause."""
     st = start(h)
     seen = []
@@ -56,27 +56,27 @@ def test_same_thirty_cards_paced_and_ranked():
     a, b = user(), user()
     try:
         seen_a, done_a = run(a)
-        assert len(seen_a) == 30 and [c["i"] for c in seen_a] == list(range(30))
+        assert len(seen_a) == 45 and [c["i"] for c in seen_a] == list(range(45))
         assert [c["subject"] for c in seen_a[:3]] == ["Physics", "Chemistry", "Mathematics"]
-        assert len({c["prompt"] for c in seen_a}) == 30
+        assert len({c["prompt"] for c in seen_a}) == 45
         for subject in ("Physics", "Chemistry", "Mathematics"):
-            assert len({c["chapter"] for c in seen_a if c["subject"] == subject}) == 10
-        assert done_a["status"] == "done" and done_a["result"]["correct"] == 30 and done_a["result"]["rank"] == 1
+            assert len({c["chapter"] for c in seen_a if c["subject"] == subject}) == 15
+        assert done_a["status"] == "done" and done_a["result"]["correct"] == 45 and done_a["result"]["rank"] == 1
         assert done_a["result"]["reward"]["xp"] > 0
 
         seen_b, done_b = run(b, wrong_from=25)
-        assert [c["prompt"] for c in seen_b] == [c["prompt"] for c in seen_a]  # everyone gets the same 30
+        assert [c["prompt"] for c in seen_b] == [c["prompt"] for c in seen_a]  # everyone gets the same 45
         assert done_b["result"]["correct"] == 25 and done_b["result"]["rank"] == 2
 
         # One try a day: starting again shows the result, never a new round.
         again = start(a)
-        assert again["status"] == "done" and again["result"]["correct"] == 30
+        assert again["status"] == "done" and again["result"]["correct"] == 45
 
         st = s.get(f"{BASE}/rf/daily?exam=JEE", headers=b, timeout=30).json()
-        assert st["you"]["status"] == "done" and st["you"]["rank"] == 2 and st["total"] == 30 and st["seconds"] == 20
+        assert st["you"]["status"] == "done" and st["you"]["rank"] == 2 and st["total"] == 45 and st["seconds"] == 20
         board = s.get(f"{BASE}/rf/daily/board?exam=JEE", headers=a, timeout=30).json()
         mine = [row for row in board["items"] if row["you"]]
-        assert mine and mine[0]["rank"] == 1 and mine[0]["correct"] == 30 and "uid" not in mine[0]
+        assert mine and mine[0]["rank"] == 1 and mine[0]["correct"] == 45 and "uid" not in mine[0]
         # Misses feed Weak cards.
         assert db.rf_learning_events.find_one({"uid": b["X-RF-User"]})
     finally:
@@ -107,6 +107,6 @@ def test_server_clock_and_retries():
         fin = s.post(f"{BASE}/rf/daily/finish", headers=h, json={"exam": "JEE"}, timeout=30).json()
         assert fin["status"] == "done" and fin["result"]["correct"] == 1
         play = db.rf_daily_plays.find_one({"uid": h["X-RF-User"]})
-        assert len(play["rows"]) == 30 and sum(r["outcome"] == "skipped" for r in play["rows"]) == 28
+        assert len(play["rows"]) == 45 and sum(r["outcome"] == "skipped" for r in play["rows"]) == 43
     finally:
         cleanup(h)

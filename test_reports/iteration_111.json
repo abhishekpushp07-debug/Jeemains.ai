@@ -1,0 +1,32 @@
+{
+  "summary": "Frontend-only test of the 4 new Rapid Fire items (QA learner 7004186276, mobile web at 390 px and 360 px). Everything requested passed and there were no page errors. (1) Lobby: rf-chapter-picker shows only 'Subjects'. There are 0 rf-subject-chips* and 0 rf-card-count* on the lobby. The order is correct: Subjects y=284 → tiles y=348 → rf-all-india y=485 (directly below the tiles) → style pill y=851 → rf-weak-sprint y=909 → rf-cup-night → rf-knockout y=1132. (2) The scope sheet has quick mixes, subject tabs, rf-scope-count-30/50/100 and 30 chapters. Choosing 50 + Mixed Chemistry and tapping SAVE gives a Solo Sprint sub of '50 cards · 20 s', and this stayed after reload. It was put back to 30 cards and Mixed Physics. (3) Settings: the gear shows on Arena, Trophy, Gang and Store and opens rf-settings-sheet. Both switches are ON by default. Tapping the row and tapping the switch each toggle exactly once (no double toggle). rf.sound.v1 saves {card,game}, and the choice is kept after reload. When both are off, the gear becomes volume-off and its aria-label ends in '. Sounds off'. Both were left ON. (4) /rapid/daily (opened from the lobby card) shows rf-battle-victory with all 6 images loaded, badge 'TOP 100 · ALL INDIA' and rf-daily-rank '#1 in India'. (5) The share sheet card shows '#1 IN INDIA', 'of 1 player · 2026-11-20', 0/30, 20.0 s, avatar + 'Learner' and 'FRIEND CODE HSF8 MVYU'. At 390 px the card is 320x400 and at 360 px it is 312x390, with no text cut off or spilling over. rf-daily-share-send opens an api.whatsapp.com/send?text=... tab without crashing, and rf-daily-share-back closes the sheet. (6) Regression: Trophy and Gang open in one go (all rows at once, one quick fade 0.42→1). /rapid/daily-styles lists 5 styles. Tapping card 3 goes back to /rapid with the pill reading 'Lion Clash'. The style was put back to World Cup (card 2). No new All India round was started.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Daily result – Battleground Victory", "issues": ["The cup is hard to see: a 69 px gold trophy sits on the gold radial glow and gold rays in front of bright fire, so it looks washed out. It also floats above the lead rider instead of being clearly held high. Consider a dark outline or drop shadow on the cup, lower ray opacity behind it, or a slightly bigger cup. Reference: src/rapid/BattleVictory.tsx:48-58"]},
+      {"screen": "Daily result", "issues": ["With 0/30 correct, the QA learner (#1 of 1 player) still gets the full 'TOP 100' victory charge, a 'Top 10 in India!' reward title and confetti. Consider requiring correct > 0 for the victory and celebration. Reference: src/rapid/DailyParts.tsx:43"]},
+      {"screen": "Scope sheet", "issues": ["Tapping 30/50/100 in rf-scope-count saves the count straight away (setCardCount), even if the sheet is then closed with X instead of SAVE. The subjects/chapters, by contrast, are only saved on SAVE.", "The chosen subjects/chapters (scope) are kept only in memory and reset to Mixed Physics after a reload or app restart, while the card count is kept in AsyncStorage. Reference: src/rapid/scope.ts:70 vs :82"]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional polish: make the cup in BattleVictory easier to see against the gold glow and rays (BattleVictory.tsx:48-58).",
+    "Optional: decide whether a 0-correct round should still show the top-100 victory and 'Top 10 in India!' (DailyParts.tsx:43).",
+    "Optional: keep the scope's card-count choice as a draft until SAVE, and/or save the subject choice so it survives a restart, so the two behave the same."
+  ],
+  "critical_code_review_comments": [
+    "sfx.ts: the prefs are loaded asynchronously, so a playSfx call before storage resolves will use the defaults (ON). This is a very small window.",
+    "BattleVictory plays scene_race + scene_cup every time the result screen mounts, not once per session like the lobby card scenes. It is still gated by the card-sound switch.",
+    "The DreamCheer music (src/dream/DreamCheer.tsx:142 loadTrack) ignores the new sound switches. That is outside Rapid Fire, so mention it only if the user expects a global mute.",
+    "SoundSettings Row: the outer Pressable with role switch renders no aria-checked on web (the inner Switch input does). This is a minor accessibility point."
+  ],
+  "updated_files": ["/app/test_reports/iteration_111.json"],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100% of requested checks"},
+  "seed_data_creation": "None. Only local prefs were changed and then restored: card count 30, scope Mixed Physics, sounds both ON, All India style World Cup (2).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: on /entry wait about 4 s, then type with keyboard.type(delay=40) into entry-phone-input and entry-pin-input, tap entry-continue-button, wait about 7 s, then tap the 'RAPID FIRE' bottom-nav text (or goto /rapid/daily directly). The session does not carry over between browser_automation calls. The QA account's All India round for 2026-11-20 is DONE (#1 of 1, 0/30), so rf-all-india opens /rapid/daily with the result. The scope (subjects) is in memory only and resets to Mixed Physics on reload; the card count is kept in rf.cardCount.v1."
+}

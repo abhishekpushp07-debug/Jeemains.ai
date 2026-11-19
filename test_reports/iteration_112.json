@@ -1,0 +1,34 @@
+{
+  "summary": "Tested the 45-card PCM All India Rapid and the change to start with no subject picked. Backend: a new pytest file with 4 tests, 3 passed. One fairness test failed: an answer sent before the card's show time counts with ms=0. A full TEST-user run gave exactly 45 cards: 15 Physics, 15 Chemistry and 15 Maths, each subject from 15 different chapters, no repeated prompt, 20 s, total 45. Finishing early stores 45 rows, all skipped. Frontend (390x844, QA learner) passed all requested flows: the popup and lobby card show '45 PCM cards · 20 s each · be the first!' and 'Physics · Chemistry · Maths · same 45 for all India'. The popup closes with EXIT. Subjects opens empty ('Nothing picked yet', SAVE 0/5 and PLAY disabled, no tick). Solo with nothing picked opens the sheet with the hint, PCM starts /rapid/session with PCM picks and n=30, and the pick is kept for the session. After a reload the pick is gone. Practice Rival opens with 'PLAY PRACTICE RIVAL' and X starts nothing. The card count is a draft: X keeps 30, SAVE sets 50, put back to 30. Play Friends and Cup ribbons say 'Tap to pick subjects', and SHARE MATCH LINK with no pick opens the sheet. Settings sheet (2 switches), Trophy and Gang tabs and the 5 daily styles all work. The QA learner's All India try today is still unplayed (DB: 0 plays).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/rf/daily/answer", "issue": "Answers sent before served_ts (during the 3-2-1 or the reveal pause) are accepted with took clamped to 0, so ms=0. The next card's prompt and options come back in the previous answer response (show_in_ms 1-3 s early). A scripted client can read ahead and answer at 0 ms, which wins the tie-break on the board. Reproduced: start, then answer i=0 at once, gives outcome=correct, ms=0. Reference: /app/backend/daily.py:240"}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ScopeSheet (Solo or Rival pending mode)", "issue": "With nothing picked, the single button reads 'PICK A SUBJECT' (sub '0/5 picked · 0 cards'), not the 'START SOLO SPRINT' / 'PLAY PRACTICE RIVAL' label the request expects. The label changes once something is picked. Probably intended. Reference: /app/frontend/src/rapid/ScopeSheet.tsx:166", "testID": "rf-scope-done", "priority": "low"},
+      {"component": "Knockout Cup with no pick", "issue": "cup-scope-short shows the red text 'Pick more chapters: a cup match needs 15 cards.' when nothing is picked, and FIND A CUP is disabled instead of opening the Subjects sheet as Play Friends does. Use a 'Pick your subjects' message or open the sheet. Reference: /app/frontend/app/rapid/cup/index.tsx:58,112", "testID": "cup-scope-short", "priority": "low"}
+    ],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_rf_daily_pcm45.py", "/app/test_reports/pytest/pytest_rf_daily_pcm45.xml"],
+  "action_items": [
+    "daily.py answer(): if now < served_ts, ignore the answer and return current(p). Or measure from served_ts with a minimum human time, so read-ahead answers cannot score 0 ms. Then update test_answer_before_shown_is_not_instant to match the chosen behaviour.",
+    "Optional: Cup hub with no picks. Make FIND A CUP open the Subjects sheet, or reword cup-scope-short for the empty case.",
+    "Optional: stale comments and names. LobbyTab.tsx:112 says 'today's 30 cards', and test_rf_daily.py has test_same_thirty_cards_paced_and_ranked."
+  ],
+  "critical_code_review_comments": [
+    "scope.ts setScope() ignores an empty list, so picks cannot be cleared within a session. This is harmless because SAVE is disabled with 0 picks.",
+    "SEND CHALLENGE with no picks opening the sheet was checked in code only (challenge.tsx:47). The QA learner has no friends, so the button stays disabled in the UI."
+  ],
+  "updated_files": ["/app/backend/tests/test_rf_daily_pcm45.py (new)"],
+  "success_rate": {"backend": "75% (3/4; the one failure is the fairness probe)", "frontend": "100% of requested flows"},
+  "seed_data_creation": "Short-lived TEST-pcm45-* daily plays, removed by exact uid in each test's teardown (0 left). As the QA learner I started 3 Solo PCM sprints and left each with 'Leave without saving'. No All India start for the QA learner.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on /entry: click each input and use keyboard.type (page.fill does not register). Leave a session with rf-exit-button, then rf-exit-discard. The daily popup closes with rf-daily-popup-exit. Never start the daily for the QA learner. Run backend tests with EXPO_BACKEND_URL=$EXPO_PUBLIC_BACKEND_URL from frontend/.env."
+}

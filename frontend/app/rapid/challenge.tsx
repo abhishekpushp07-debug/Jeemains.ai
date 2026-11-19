@@ -44,8 +44,8 @@ function Challenge() {
   return <InnerScreen testID="challenge-screen" title="Play Friends" sub="A WhatsApp link, one gang, or up to 4 friends"
     footer={<><ErrorBox testID="challenge-error" error={error} />
       <RaisedButton testID="challenge-send" icon="swords" height={62} streak busy={busy === "send"} disabled={(!gang && !picked.length) || !!busy}
-        label={gang ? "CHALLENGE GANG" : picked.length > 1 ? `CHALLENGE ${picked.length} FRIENDS` : "SEND CHALLENGE"} sub={label} onPress={() => send(false)} /></>}>
-    <Ribbon testID="challenge-chapter" label={label} sub={`${scopeSubjects(picks)} · ${count} cards · tap to change`} onPress={() => setSheet(true)} />
+        label={gang ? "CHALLENGE GANG" : picked.length > 1 ? `CHALLENGE ${picked.length} FRIENDS` : "SEND CHALLENGE"} sub={label} onPress={() => (picks.length ? send(false) : setSheet(true))} /></>}>
+    <Ribbon testID="challenge-chapter" label={label} sub={picks.length ? `${scopeSubjects(picks)} · ${count} cards · tap to change` : "Tap to pick subjects"} onPress={() => setSheet(true)} />
 
     <Panel gold testID="challenge-link" style={styles.link}>
       <View style={styles.linkTop}>
@@ -56,7 +56,7 @@ function Challenge() {
         </View>
       </View>
       <RaisedButton testID="challenge-share-link" glyph="whatsapp" height={54} label="SHARE MATCH LINK" busy={busy === "link"} disabled={!!busy}
-        sub={invites ? `Up to 4 players · ${invites} invited too` : "Up to 4 players join you"} onPress={() => send(true)} />
+        sub={invites ? `Up to 4 players · ${invites} invited too` : "Up to 4 players join you"} onPress={() => (picks.length ? send(true) : setSheet(true))} />
     </Panel>
 
     {myGangs.length ? <SectionTitle title="Your gangs" /> : null}

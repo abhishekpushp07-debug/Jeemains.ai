@@ -2,14 +2,14 @@ import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { T, tap } from "@/src/components/ui";
 import { arena } from "@/src/theme";
-import { CARD_COUNTS, fitCount, roundLength, setCardCount, useCardCount } from "./scope";
+import { CARD_COUNTS, CardCount, fitCount, roundLength, setCardCount, useCardCount } from "./scope";
 
 /**
  * Rule R2: 30, 50 or 100 cards a round, one shared choice (lobby + battleground sheet).
  * With `available`, a pill the picks cannot fill is dimmed and a note says what will really be dealt.
  */
-export function CardCountPicker({ available, testID = "rf-card-count" }: { available?: number; testID?: string }) {
-  const chosen = useCardCount();
+export function CardCountPicker({ available, value, onChange, testID = "rf-card-count" }: { available?: number; value?: CardCount; onChange?: (n: CardCount) => void; testID?: string }) {
+  const stored = useCardCount(), chosen = value ?? stored; // a sheet can hold its own choice until SAVE
   const fit = available === undefined ? chosen : fitCount(chosen, available);
   return <View testID={testID} style={styles.wrap}>
     <View style={styles.row} accessibilityRole="radiogroup" accessibilityLabel="Cards in a round">
@@ -19,7 +19,7 @@ export function CardCountPicker({ available, testID = "rf-card-count" }: { avail
         const on = (fit || chosen) === n, short = available !== undefined && available < n;
         return <Pressable key={n} testID={`${testID}-${n}`} accessibilityRole="radio" accessibilityState={{ checked: on }}
           accessibilityLabel={`${n} cards, about ${roundLength(n)}${short ? ", this pick needs more cards" : ""}`}
-          onPress={() => { tap(); setCardCount(n); }} style={[styles.pill, on && styles.pillOn, short && !on && styles.short]}>
+          onPress={() => { tap(); if (onChange) onChange(n); else setCardCount(n); }} style={[styles.pill, on && styles.pillOn, short && !on && styles.short]}>
           <T w="heavy" size={16} color={on ? arena.badgeInk : arena.text}>{n}</T>
           <T w="bold" size={10} color={on ? arena.badgeInk : arena.muted} numberOfLines={1}>{short ? "need more" : roundLength(n)}</T>
         </Pressable>;

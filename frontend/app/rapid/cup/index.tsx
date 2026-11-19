@@ -108,8 +108,8 @@ function CupHub() {
     </View>
 
     <SectionTitle title="3 · Battleground" />
-    <Ribbon testID="cup-scope" label={label} sub={`${scopeSubjects(picks)} · ${cards} cards · tap to change`} onPress={() => setSheet(true)} />
-    {!enough && cat.data ? <T testID="cup-scope-short" w="bold" size={12} color={arena.danger} style={styles.center}>Pick more chapters: a cup match needs {CUP_CARDS} cards.</T> : null}
+    <Ribbon testID="cup-scope" label={label} sub={picks.length ? `${scopeSubjects(picks)} · ${cards} cards · tap to change` : "Tap to pick subjects"} onPress={() => setSheet(true)} />
+    {!enough && cat.data ? <T testID="cup-scope-short" w="bold" size={12} color={arena.danger} style={styles.center}>{picks.length ? `Pick more chapters: a cup match needs ${CUP_CARDS} cards.` : "Pick your subjects first: tap the ribbon above."}</T> : null}
 
     {kind === "private" ? <>
       <SectionTitle title={gang ? "Gang" : `Invite friends${picked.length ? ` (${picked.length}/${size - 1})` : ""}`} />

@@ -65,7 +65,8 @@ export const picksFrom = (p: { picks?: string; subject?: string; chapter?: strin
   decodePicks(p.picks) || [{ subject: p.subject || "Physics", chapter: p.chapter || null }];
 
 // The lobby's choice, shared by every screen that starts a round (Play, Play Friends, Knockout Cup, Gang War).
-let current: Pick[] = [{ subject: "Physics", chapter: null }];
+// Nothing is picked until the student picks: every new app session starts with no subject.
+let current: Pick[] = [];
 const listeners = new Set<() => void>();
 export function setScope(picks: Pick[]) { const next = normalise(picks); if (next.length) { current = next; listeners.forEach((f) => f()); } }
 export const getScope = () => current;

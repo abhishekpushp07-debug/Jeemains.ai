@@ -1,4 +1,6 @@
+import { useSyncExternalStore } from "react";
 import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from "expo-audio";
+import { storage } from "@/src/utils/storage";
 
 // Short arena sound effects (synthesised offline, see backend/rapidfire/make_sfx.py; stored as 96 kbps AAC .m4a, a third of the WAV size).
 const FILES: Record<string, number> = {
@@ -31,6 +33,19 @@ const FILES: Record<string, number> = {
   scene_arrow: require("../assets/sfx/scene_arrow.m4a"),
 };
 
+// Rapid Fire settings: card sounds (the All India card scenes) and game sounds (answers, clock, wins), each on or off, kept on this phone.
+export type SoundPrefs = { card: boolean; game: boolean };
+const PREFS = "rf.sound.v1";
+let prefs: SoundPrefs = { card: true, game: true };
+const subs = new Set<() => void>();
+storage.getItem<string | null>(PREFS, null).then((v) => { if (!v) return; try { prefs = { ...prefs, ...JSON.parse(v) }; subs.forEach((f) => f()); } catch { /* keep the defaults */ } }).catch(() => {});
+export function setSoundPrefs(p: Partial<SoundPrefs>) {
+  prefs = { ...prefs, ...p };
+  subs.forEach((f) => f());
+  void Promise.resolve(storage.setItem(PREFS, JSON.stringify(prefs))).catch(() => {});
+}
+export const useSoundPrefs = () => useSyncExternalStore((f) => { subs.add(f); return () => { subs.delete(f); }; }, () => prefs, () => prefs);
+
 const players: Record<string, AudioPlayer> = {};
 let ready = false;
 
@@ -47,7 +62,7 @@ export function loadTrack(uri: string): AudioPlayer | null {
 }
 
 export function playSfx(name?: string | null, volume = 1) {
-  if (!name || !FILES[name]) return;
+  if (!name || !FILES[name] || !(name.startsWith("scene_") ? prefs.card : prefs.game)) return;
   try {
     audioMode();
     const p = players[name] || (players[name] = createAudioPlayer(FILES[name]));
