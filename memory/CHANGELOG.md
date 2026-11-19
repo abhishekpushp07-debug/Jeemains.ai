@@ -253,3 +253,11 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Mission: impact count-up 1.2 s; quiet 'Aapka impact card par dikhega' under the gate card when friends were helped.
 - Tested iteration_201 (frontend, signed out, desktop + 390 px, light + dark): all passed, no console errors; then fixed 2 cosmetic notes (mobile card footer wrap, dark card edge) and checked by screenshot.
 
+
+
+## 2026-11-19 — App hand-off pack (JEELIVE_Rank_Mission_Website_Handoff.zip) applied
+- User uploaded the app team's Rank/Mission pack ("See"). Pack rule: the website keeps no college data or algorithms; all answers come from the app server word for word.
+- Backend: new tejas/app_connect.py (allow-listed /api/rank/* proxy with a 16 KB body limit, /api/mission/me, /api/dream read/save/mocks/cheered as the signed-in student via /rf/access grants, /api/j/{code} redirect); app-server errors and refused sessions → 503 'Abhi load nahi hua…' (never 401). Released website full mocks are sent to the app server (checked at most every 30 s, re-sent after 10 min). Deleted rank_predictor/rank_tools/rank_bitsat/rank_comedk/rank_pdf/mission.py and rank_data/. dreams.py keeps only /api/dream/celebration/{id}. Env: JEELIVE_APP_API, JEELIVE_SITE_URL.
+- Frontend: app DreamMeter + ProgressChart ported (Rank Dream tool, Home compact meter, Results); app college/COMEDK/BITSAT card stat boxes (CLOSING/ROUND/2025 SE, CUTOFF/AAPKA, FEE / SAAL), BITSAT AAPKA bug fixed, 5-year history bars scale to cutoffs; server filenames on PDFs; Mission share link from the server.
+- Preview quirk: dynamic SVG children are hidden by the editor's wrapper spans, so the Gem and the chart are drawn from fixed markup; no bare 'span' selectors in these components.
+- Tested iteration_202 (backend 18/18 + pack connect_check 22/22; frontend all flows with route mocks, no DB writes). Then fixed BITSAT history bar heights, the Dream exam switch at 320 px and missing-key guards in mission_me/_grant (iteration_203).

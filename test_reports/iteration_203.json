@@ -1,0 +1,20 @@
+{
+  "summary": "Iteration 203: short retest of the 3 fixes from iteration 202. All pass. BACKEND: new unit and live suite test_app_connect_iter203.py passes 22/22. It monkeypatches _call/_as_student/website_mocks/time, so it uses no real accounts and writes nothing to the DB. _grant returns 503 with BUSY_ACCOUNT for 200 answers shaped {}, token only, expires_at only, expires_at None, expires_at garbage, a list, or a string. mission_me returns 503 for {}, no code, a list, a string or an int. The valid answers still work (the link ends with /j/AB2CDEF). _send_website_mocks: the first call queries and sends; within 30 s there is no DB query; an unchanged list within 10 min is not re-sent and sent_at is kept across rechecks; it re-sends after more than 600 s; a changed list is sent at once; an empty list is never sent but is still throttled. Live, signed out: GET /api/mission/me 401, GET /api/dream 401, /api/j/AB2CDEF 302 to https://jeelive-mobile.emergent.host/api/j/AB2CDEF, POST /api/rank/bitsat {score:280} 200. FRONTEND: BITSAT 280 history bars follow their inline % of a 58px track. Card 0: 95%=55.1px, 98%=56.8, 100%=58.0, 91%=52.8. Cards 1 and 2 were also correct, and missing years show a 6% stub with '—'. At 320px, dream-exam (empty and 3-JEE mocks), cp-exam and tm-exam: scrollWidth 260 == clientWidth 260, document width 320, no button overflows, all buttons 44px tall, font 12px; 'JEE Main 3/5' and 'COMEDK 0/5' wrap to 2 lines and stay readable. At 390px all are unchanged: 13px font, 44px tall, no overflow.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "_send_website_mocks", "issue": "When the send to the app server fails (non-200, e.g. 422), nothing is remembered. Every GET /api/dream then runs the Mongo query and POSTs again with no 30 s throttle. Only matters if the app server keeps rejecting."},
+    {"endpoint": "_send_website_mocks", "issue": "When a student's website mock list becomes empty after having mocks, nothing is sent, so the app server keeps the old mocks. Probably by design (the POST replaces by same id); noted only."},
+    {"endpoint": "_grant / mission_me", "issue": "Type checking is shallow: token=None or '' and code=None are accepted. This gives an Authorization header with no token, or a link ending in '/None'. Only if the app server sends nulls."}
+  ]},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": [
+    {"screen": "BITSAT 5-year history", "issues": ["Bars are scaled from 0, so cutoffs in the 268-301 range all look 90-100% tall and the year-to-year differences are hard to see. Optional: scale from a baseline such as min-10."]}
+  ]},
+  "test_report_links": ["/app/backend/tests/test_app_connect_iter203.py", "/app/test_reports/pytest/iter203.xml"],
+  "action_items": ["Optional: in _send_website_mocks, remember checked_at even when the send fails, so it backs off.", "Optional: check that token/code are non-empty strings."],
+  "critical_code_review_comments": ["app_connect.py: `import json` inside _send_website_mocks should be a top-level import.", "Logic of MOCK_RECHECK/MOCK_RESEND is correct for first call, empty list, unchanged within 10 min, and changed list (verified by unit tests)."],
+  "updated_files": ["/app/backend/tests/test_app_connect_iter203.py"],
+  "success_rate": {"backend": "100% (22/22)", "frontend": "100%"},
+  "seed_data_creation": "None. Signed-in screens used page.route mocks only.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run test_app_connect_iter203.py with -n 0 (it uses asyncio.run with monkeypatching; the app_connect import loads backend/.env). Route mocks for Dream are inline in the iteration 203 script and match /app/tests/dream_mocks_iter202.py."
+}

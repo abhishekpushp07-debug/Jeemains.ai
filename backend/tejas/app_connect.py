@@ -138,6 +138,8 @@ async def _grant(cookie: str, fresh: bool = False) -> str:
     try:
         data = res.json()
         token, until = data["token"], datetime.fromisoformat(data["expires_at"].replace("Z", "+00:00")).timestamp()
+        if not isinstance(token, str) or not token:
+            raise ValueError("empty token")
     except (ValueError, KeyError, TypeError, AttributeError):
         raise HTTPException(503, BUSY_ACCOUNT, headers={"Retry-After": "5", **NO_STORE})
     _grants[key] = (token, until)
@@ -175,6 +177,7 @@ async def _send_website_mocks(request: Request, uid: str):
         _remember_mocks(uid, (digest, now, hit[2] if hit and hit[0] == digest else now))
         return
     import json
+    _remember_mocks(uid, (digest, now, 0))
     res = await _as_student(request, "POST", "/rf/dream/mocks", json.dumps({"mocks": mocks}).encode())
     if res.status_code == 200:
         _remember_mocks(uid, (digest, now, now))
@@ -195,6 +198,8 @@ async def mission_me(request: Request, u=Depends(current)):
     try:
         data = res.json()
         code = data["code"]
+        if not isinstance(code, str) or not code:
+            raise ValueError("empty code")
     except (ValueError, KeyError, TypeError):
         raise HTTPException(503, BUSY_ACCOUNT, headers=NO_STORE)
     return JSONResponse({**data, "link": f"{SHARE_LINK_BASE}/{code}"}, headers=NO_STORE)
