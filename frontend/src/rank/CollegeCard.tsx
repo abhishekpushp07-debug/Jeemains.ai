@@ -90,7 +90,7 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
 /** "Cutoff dekho ›" in the tool's colour; breathes gently while `pulse` (never with Reduce Motion). */
 function Cta({ testID, open, pulse }: { testID: string; open?: boolean; pulse?: boolean }) {
   const a = useAccent();
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const s = useSharedValue(1);
   const live = !!pulse && !reduced;
   useEffect(() => {

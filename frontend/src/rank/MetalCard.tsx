@@ -48,10 +48,11 @@ const Star = ({ size, x, y }: { size: number; x: number; y: number }) => {
 
 /** Two silver glints beside the big number that slowly trade brightness (still under Reduce Motion). */
 function Sparkle() {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const glow = useSharedValue(1);
   useEffect(() => {
     if (reduced) return;
+    glow.value = 1;
     glow.value = withRepeat(withSequence(withTiming(0.25, { duration: 1700 }), withTiming(1, { duration: 1700 })), -1);
     return () => cancelAnimation(glow);
   }, [reduced, glow]);

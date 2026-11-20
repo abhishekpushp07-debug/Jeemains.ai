@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Image, Platform, StyleProp, StyleSheet, View, ViewStyle, useWindowDimensions } from "react-native";
-import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { Easing, cancelAnimation, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import { ScreenMotion, useStill } from "@/src/motion";
 import { Tabs, useSegments } from "expo-router";
 import { NativeTabs } from "expo-router/native-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -25,11 +26,12 @@ const GEM = require("../../assets/images/rapid-gem.webp");
 const GEM_FLICKER = require("../../assets/images/rapid-gem-flicker.webp");
 
 function RapidGem({ style }: { style: StyleProp<ViewStyle> }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const flame = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
     const step = (to: number, ms: number) => withTiming(to, { duration: ms, easing: Easing.inOut(Easing.quad) });
+    flame.value = 0;
     flame.value = withRepeat(withSequence(step(0.9, 420), step(0.3, 300), step(0.75, 380), step(0, 520)), -1, false);
     return () => cancelAnimation(flame);
   }, [reduced, flame]);
@@ -83,6 +85,11 @@ function JeeTabBar({ state, emitter, navigateToTab }: any) {
 }
 
 export default function TabsLayout() {
+  // While a match, a test or any other screen covers the tabs, their endless decoration rests.
+  return <ScreenMotion><TabsBody /></ScreenMotion>;
+}
+
+function TabsBody() {
   // A challenge can arrive while the student is on Home.
   const onHome = (useSegments() as string[]).length === 1;
   if (usesNativeTabs) {

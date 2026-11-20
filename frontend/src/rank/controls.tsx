@@ -117,7 +117,7 @@ export function Summary({ text, onEdit, testID }: { text: string; onEdit: () => 
 
 /** A soft band of light that sweeps across its parent every few seconds (still under Reduce Motion). */
 export function Shine() {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const [w, setW] = useState(0);
   const x = useSharedValue(-1);
   useEffect(() => {

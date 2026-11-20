@@ -4,6 +4,7 @@ import Animated, { Easing, ZoomIn, cancelAnimation, interpolate, useAnimatedStyl
 import Svg, { Path } from "react-native-svg";
 import { T, tap } from "@/src/components/ui";
 import { arena, fx } from "@/src/theme";
+import { useStill } from "@/src/motion";
 
 // The playful layer of the arena: squashy presses, twinkles, confetti and counting numbers.
 // Everything here is transform/opacity only and goes still when Reduce Motion is on.
@@ -42,7 +43,7 @@ function Twinkle({ x, y, size, i, color }: { x: number; y: number; size: number;
 }
 /** Little stars that blink around a piece of artwork. `spots` are [x %, y %, size]. */
 export function Twinkles({ spots, color = arena.gold }: { spots: [number, number, number][]; color?: string }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   if (reduced) return null;
   return <View pointerEvents="none" style={StyleSheet.absoluteFill}>{spots.map(([x, y, size], i) => <Twinkle key={i} i={i} x={x} y={y} size={size} color={i % 3 === 2 ? fx.white : color} />)}</View>;
 }
@@ -93,7 +94,7 @@ function Wave({ i, size }: { i: number; size: number }) {
 }
 /** Radar rings spreading out from whatever sits in the middle (searching for a rival). */
 export function Radar({ size = 240, children }: { size?: number; children: React.ReactNode }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   return <View style={{ width: size, height: size, alignItems: "center", justifyContent: "center" }}>
     {reduced ? <View style={[styles.abs, { width: size * 0.8, height: size * 0.8, borderRadius: size, borderWidth: 3, borderColor: arena.tealDeep }]} /> : [0, 1, 2].map((i) => <Wave key={i} i={i} size={size} />)}
     {children}
@@ -102,10 +103,11 @@ export function Radar({ size = 240, children }: { size?: number; children: React
 
 /** A red "live" dot that pulses (still under Reduce Motion). */
 export function LiveDot({ size = 10, color = fx.crimson }: { size?: number; color?: string }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const t = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
+    t.value = 0;
     t.value = withRepeat(withTiming(1, { duration: 1100, easing: Easing.out(Easing.quad) }), -1, false);
     return () => cancelAnimation(t);
   }, [t, reduced]);

@@ -3,6 +3,7 @@ import { ImageStyle, StyleProp, View } from "react-native";
 import { Image } from "expo-image";
 import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSequence, withSpring, withTiming } from "react-native-reanimated";
 import { arena } from "@/src/theme";
+import { useStill } from "@/src/motion";
 
 // Original arena artwork, bundled with the app (made once with tools/make_arena_art.py). Each picture carries its own glow.
 const ICONS = {
@@ -45,10 +46,11 @@ const EMBLEMS: Record<string, number> = {
 
 /** Gentle life for artwork: a slow float, or a breathing pulse. Still when Reduce Motion is on. */
 export function Alive({ children, kind = "float", delay = 0, style, once }: { children: React.ReactNode; kind?: "float" | "breathe" | "wiggle" | "hop"; delay?: number; style?: StyleProp<ImageStyle>; once?: boolean }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const t = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
+    t.value = 0; // a loop always starts from rest, also when it resumes after the screen was covered
     const calm = Easing.inOut(Easing.sin), rest = withDelay(2600, withTiming(0, { duration: 0 }));
     // float and breathe never stop; wiggle and hop are a quick burst of fun, then a rest. `once`: one burst, then still.
     const loop = kind === "wiggle" ? withSequence(withTiming(1, { duration: 110 }), withTiming(-1, { duration: 170 }), withTiming(0.6, { duration: 140 }), withTiming(0, { duration: 120 }), rest)
@@ -83,17 +85,18 @@ export function Emblem({ id, size = 48, testID }: { id?: string | null; size?: n
  * so the two sides always match. `breathe` lets the wings beat slowly and the diamond pulse; `burst` throws the wings open once.
  */
 export function PhoenixDiamond({ width = 220, color = "red", breathe, burst, wingsOnly, testID }: { width?: number; color?: GemColor; breathe?: boolean; burst?: boolean; wingsOnly?: boolean; testID?: string }) {
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotion(), still = useStill();
   const beat = useSharedValue(0.5), open = useSharedValue(burst && !reduced ? 0 : 1);
   useEffect(() => {
-    if (reduced) return;
+    if (still) return;
     if (burst) open.value = withDelay(120, withSpring(1, { damping: 8, stiffness: 110 }));
     if (breathe) {
       const calm = Easing.inOut(Easing.sin);
+      beat.value = 0.5;
       beat.value = withRepeat(withSequence(withTiming(1, { duration: 1300, easing: calm }), withTiming(0, { duration: 1300, easing: calm })), -1, false);
     }
     return () => { cancelAnimation(beat); cancelAnimation(open); };
-  }, [reduced, breathe, burst, beat, open]);
+  }, [still, breathe, burst, beat, open]);
   const half = width / 2, height = half * WING_RATIO, centre = width * 0.44;
   // Folded wings point straight up behind the diamond; open wings beat a few degrees around their root.
   const leftWing = useAnimatedStyle(() => ({ opacity: Math.min(1, open.value * 1.6), transform: [{ rotate: `${58 * (1 - open.value) + (beat.value - 0.5) * 7}deg` }, { scale: 0.55 + 0.45 * open.value }] }));

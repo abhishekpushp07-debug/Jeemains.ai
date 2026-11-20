@@ -2,7 +2,8 @@ import React, { useEffect, useId, useMemo } from "react";
 import { ActivityIndicator, Pressable, StyleProp, StyleSheet, View, ViewStyle, useWindowDimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Circle, Defs, Ellipse, G, Path, RadialGradient, Rect, Stop, Text as SvgText } from "react-native-svg";
-import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { Easing, cancelAnimation, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import { useStill } from "@/src/motion";
 import { Icon, IconName, T, tap } from "@/src/components/ui";
 import { arena, fonts } from "@/src/theme";
 import { GameIcon, GameIconName } from "./Art";
@@ -31,7 +32,7 @@ const Marks = React.memo(function Marks({ w, h, dim }: { w: number; h: number; d
 
 /** A slow band of light that crosses the stage every few seconds, like light sliding over polished red glass. */
 function Shine({ w, h }: { w: number; h: number }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const x = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
@@ -91,13 +92,14 @@ export function RaisedButton({ label, sub, icon, glyph, onPress, disabled, busy,
   label?: string; sub?: string; icon?: GameIconName; glyph?: IconName; onPress?: () => void; disabled?: boolean; busy?: boolean; testID?: string; height?: number; tone?: Tone;
   streak?: boolean; style?: StyleProp<ViewStyle>; accessibilityLabel?: string; children?: React.ReactNode;
 }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const c = TONES[tone], lip = height >= 60 ? 7 : 5, radius = Math.min(22, height / 2.6);
   const down = useSharedValue(0), x = useSharedValue(0);
   const off = disabled || busy;
   useEffect(() => {
     if (!streak || reduced || off) return;
     x.value = withRepeat(withSequence(withTiming(1, { duration: 1300, easing: Easing.inOut(Easing.quad) }), withDelay(1900, withTiming(0, { duration: 0 }))), -1, false);
+    return () => { cancelAnimation(x); x.value = 0; };
   }, [streak, reduced, off, x]);
   const face = useAnimatedStyle(() => ({ transform: [{ translateY: down.value * (lip - 1) }] }));
   const light = useAnimatedStyle(() => ({ transform: [{ translateX: -120 + x.value * 560 }, { rotate: "18deg" }] }));

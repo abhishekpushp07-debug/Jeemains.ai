@@ -10,6 +10,7 @@ import { GoldTitle } from "./arena";
 import { Jelly, LiveDot } from "./juice";
 import { CupNight, countdown, go, useCupNight } from "./social";
 import { Glitter } from "./Glitter";
+import { useScreenInFront } from "@/src/motion";
 
 /** The Colosseum stands, packed and roaring: the backdrop of Cup Night. */
 export const STANDS = require("../../assets/arena/bg_colosseum_stands.webp");
@@ -17,10 +18,13 @@ export const STANDS = require("../../assets/arena/bg_colosseum_stands.webp");
 /** The server's clock, ticking every second (the phone's clock may be off). */
 export function useServerNow(n?: CupNight | null) {
   const [phone, setPhone] = useState(() => Date.now() / 1000);
+  const front = useScreenInFront();
   useEffect(() => {
+    if (!front) return; // a covered screen needs no ticking clock; it is right again the moment it is back in front
+    setPhone(Date.now() / 1000);
     const iv = setInterval(() => setPhone(Date.now() / 1000), 1000);
     return () => clearInterval(iv);
-  }, []);
+  }, [front]);
   return n ? phone + (n.now - n.local) : phone;
 }
 

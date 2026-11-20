@@ -25,7 +25,7 @@ const CROWNED = ["frame_diamond", "frame_kohinoor"];
 
 // Avatar: 3D hero portrait with an optional purchased frame (animated pulse for neon/fire/diamond frames).
 export function Avatar({ icon, frame, size = 56, testID }: { icon?: string | null; frame?: string | null; size?: number; testID?: string }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const pulse = useSharedValue(1);
   useEffect(() => {
     cancelAnimation(pulse);

@@ -2,7 +2,8 @@ import React, { useCallback, useEffect } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
-import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
+import Animated, { Easing, cancelAnimation, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
+import { useStill } from "@/src/motion";
 import Svg, { Path } from "react-native-svg";
 import { T } from "@/src/components/ui";
 import { arena, fx } from "@/src/theme";
@@ -29,10 +30,11 @@ function ChampCard({ c, i, onCheer }: { c: Champion; i: number; onCheer: () => v
 
 /** Golden light turning slowly behind the top champion. */
 function SpotRays({ size }: { size: number }) {
-  const reduced = !!useReducedMotion();
+  const reduced = useStill();
   const t = useSharedValue(0);
   useEffect(() => {
     if (reduced) return;
+    t.value = 0;
     t.value = withRepeat(withTiming(1, { duration: 14000, easing: Easing.linear }), -1, false);
     return () => cancelAnimation(t);
   }, [reduced]); // eslint-disable-line react-hooks/exhaustive-deps

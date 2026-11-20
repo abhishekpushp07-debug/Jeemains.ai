@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { rf } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { storage } from "@/src/utils/storage";
+import { useScreenInFront } from "@/src/motion";
 import type { Crown } from "./social";
 
 // All India Rapid: the same 45 PCM cards (15 each, 20 s a card) for every JEE student each day, one try, one All India board.
@@ -23,10 +24,13 @@ export const grouped = (n: number) => n.toLocaleString("en-IN");
 export function useEndsIn(endsIn?: number) {
   const base = useMemo(() => ({ at: Date.now(), left: endsIn ?? 0 }), [endsIn]);
   const [now, setNow] = useState(Date.now());
+  const front = useScreenInFront();
   useEffect(() => {
+    if (!front) return; // a covered screen needs no ticking clock; it is right again the moment it is back in front
+    setNow(Date.now());
     const iv = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(iv);
-  }, []);
+  }, [front]);
   return Math.max(0, Math.round(base.left - (now - base.at) / 1000));
 }
 

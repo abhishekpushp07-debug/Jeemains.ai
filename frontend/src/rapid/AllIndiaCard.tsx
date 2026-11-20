@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import Animated, { css, useReducedMotion } from "react-native-reanimated";
+import Animated, { css } from "react-native-reanimated";
+import { useStill } from "@/src/motion";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, T } from "@/src/components/ui";
 import { allIndia, arena } from "@/src/theme";
@@ -33,7 +34,7 @@ function copy(d?: DailyStatus | null) {
  * Five living scenes in one fire world; the story on it (players today, your rank, today's #1, the countdown) is the same in each.
  */
 export function AllIndiaCard({ d, look = 2, size, onPress, onLongPress, paused, sound, testID = "rf-all-india" }: { d?: DailyStatus | null; look?: DailyLook; size: number; onPress?: () => void; onLongPress?: () => void; paused?: boolean; sound?: boolean; testID?: string }) {
-  const still = !!useReducedMotion() || !!paused;
+  const still = useStill() || !!paused;
   useEffect(() => {
     if (!sound || heard) return;
     const t = setTimeout(() => { if (!heard) { heard = true; playScene(look); } }, 450);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LayoutChangeEvent, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import Animated, { css, useReducedMotion } from "react-native-reanimated";
+import Animated, { css } from "react-native-reanimated";
+import { useStill } from "@/src/motion";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Path } from "react-native-svg";
 import { arena, fx, glitterColors } from "@/src/theme";
@@ -46,7 +47,7 @@ export function Glitter({ children, radius = 20, ring = 2, style, inner, sparkle
   children: React.ReactNode; radius?: number; ring?: number; style?: StyleProp<ViewStyle>; inner?: StyleProp<ViewStyle>; sparkles?: number; testID?: string;
   pointerEvents?: "box-none" | "none" | "auto" | "box-only";
 }) {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const [box, setBox] = useState({ w: 0, h: 0 });
   const onLayout = (e: LayoutChangeEvent) => {
     const { width: w, height: h } = e.nativeEvent.layout;

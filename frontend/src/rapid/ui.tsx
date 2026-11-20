@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useReducedMotion } from "react-native-reanimated";
 import * as Base from "@/src/components/ui";
 import { PaletteContext, rapidColors as colors } from "@/src/theme";
+import { ScreenMotion } from "@/src/motion";
 import { RaisedButton } from "./arena";
 import { ChallengeBanner } from "./ChallengeBanner";
 
@@ -22,7 +23,7 @@ export function withRapid<P extends object>(Screen: React.ComponentType<P>, opts
       return () => { rapidFocus = Math.max(0, rapidFocus - 1); if (!rapidFocus) setStatusBarStyle("dark"); };
     }, []));
     // A challenge can arrive on any arena screen, except in a match or Match Room (banner: false there).
-    return <PaletteContext.Provider value={colors}><View style={styles.screen}><Screen {...props} />{opts.banner === false ? null : <ChallengeBanner floating />}</View></PaletteContext.Provider>;
+    return <ScreenMotion><PaletteContext.Provider value={colors}><View style={styles.screen}><Screen {...props} />{opts.banner === false ? null : <ChallengeBanner floating />}</View></PaletteContext.Provider></ScreenMotion>;
   }
   return RapidScreen;
 }
