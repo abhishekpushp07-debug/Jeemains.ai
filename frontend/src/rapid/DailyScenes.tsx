@@ -212,6 +212,7 @@ export const SCENE_SOUND: Record<DailyLook, string> = { 1: "scene_space", 2: "sc
 /** The living picture behind the All India card: the fire world plus the chosen look's story. `size` = the card's inner side. */
 export function DailyScene({ look, size, still }: { look: DailyLook; size: number; still: boolean }) {
   const Scene = SCENES[look];
+  (globalThis as any).__sceneRenders = ((globalThis as any).__sceneRenders || 0) + 1; // AUDIT-TEMP
   return <View pointerEvents="none" style={[styles.stage, { left: (size - B) / 2, top: (size - B) / 2, transform: [{ scale: size / B }] }]}>
     <Fire still={still} wind={look === 4} />
     <Scene still={still} />
