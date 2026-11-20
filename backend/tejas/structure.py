@@ -736,7 +736,7 @@ async def waiting_items(sid=''):
     info = {b['_id']: b['payload'] for b in books}
     rows = await db.tejas_book_mocks.find({'book_id': {'$in': list(rank)}, 'state': {'$in': ['ready', 'held']}, 'set_id': None, 'archived': {'$ne': True}},
         {'_id': 1, 'book_id': 1, 'label': 1, 'chapter': 1, 'order': 1, 'state': 1, 'publish_requested': 1, 'release_at': 1,
-         'issue': {'$arrayElemAt': ['$issues', 0]}, 'issue_count': {'$size': {'$ifNull': ['$issues', []]}},
+         'issue': {'$arrayElemAt': ['$issues', 0]}, 'issue_count': {'$size': {'$ifNull': ['$issues', []]}}, 'cut_summary': 1,
          'key_only': {'$size': {'$filter': {'input': {'$ifNull': ['$questions', []]}, 'cond': {'$eq': ['$$this.solution_kind', 'answer_key_only']}}}},
          'count': {'$size': {'$ifNull': ['$questions', []]}}}).to_list(5000)
     rows.sort(key=lambda m: (rank[m['book_id']], m['order']))
@@ -746,7 +746,7 @@ async def waiting_items(sid=''):
         release = m.get('release_at') or p.get('release_at')
         out.append({'kind': 'book_mock', 'id': m['_id'], 'book_id': m['book_id'], 'title': (m.get('chapter') or {}).get('title') or m['label'], 'book': p['title'], 'chapter': m.get('chapter') or {},
                     'state': waiting_state(m, release, t), 'count': m.get('count', 0), 'key_only': m.get('key_only', 0), 'unit': 'questions', 'issue': m.get('issue') or '',
-                    'issue_count': m.get('issue_count', 0), 'start_at': release if m.get('publish_requested') else None, 'destination': p['destination']})
+                    'issue_count': m.get('issue_count', 0), 'start_at': release if m.get('publish_requested') else None, 'destination': p['destination'], 'cut': m.get('cut_summary') or None})
     dq = {'destination.section_id': sid} if sid else {'destination.section_id': {'$exists': True}}
     recs = await db.tejas_imports.find({**dq, 'status': 'ready', 'archived': {'$ne': True}, 'destination.series': {'$ne': True}, 'qa_only': {'$ne': True}},
         {'_id': 0, 'id': 1, 'title': 1, 'destination': 1, 'issue_count': {'$size': {'$ifNull': ['$issues', []]}},

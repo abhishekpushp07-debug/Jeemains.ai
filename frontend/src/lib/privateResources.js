@@ -58,25 +58,26 @@ const PACK=12, pause=ms=>new Promise(resolve=>setTimeout(resolve,ms)), BACKEND=p
 // Loads every question picture of an active attempt in a few requests and keeps them in memory until stop().
 // Parts come first from public CDN links (same for every student, no cookies), then the private pack, then picture by picture.
 // A part that fails is retried until it loads; loading never gives up while the test is open.
-export function preloadPaper(attemptId,paths,onProgress){
+// cut: the paper has questions cut into pieces (question + each option), so the server sends those pieces instead of whole pictures.
+export function preloadPaper(attemptId,paths,onProgress,{cut=false}={}){
  const generation=epoch, held=new Map(), controller=new AbortController();
  controllers.add(controller);
  let stopped=false, next=0;
  const live=()=>!stopped&&generation===epoch&&!!userId;
  const missing=list=>list.filter(path=>!held.has(path));
  const report=()=>{if(live())onProgress(held.size,paths.length);};
- const linked=!paths.length?Promise.resolve(null):fetchWithSession(`/attempts/${attemptId}/assets/links`,{cache:'no-store',signal:controller.signal})
+ const linked=!paths.length?Promise.resolve(null):fetchWithSession(`/attempts/${attemptId}/assets/links${cut?'?look=cut':''}`,{cache:'no-store',signal:controller.signal})
   .then(res=>res.ok?res.json():null).then(body=>{const d=body?.data??body;return d&&d.limit===PACK&&d.total===paths.length&&Array.isArray(d.parts)?d.parts:null;})
   .catch(()=>null);
  async function pack(offset,link){
   const res=link?await fetch(link.startsWith('/')?BACKEND+link:link,{credentials:'omit',signal:controller.signal})
-   :await fetchWithSession(`/attempts/${attemptId}/assets/pack?offset=${offset}&limit=${PACK}`,{cache:'no-store',signal:controller.signal});
+   :await fetchWithSession(`/attempts/${attemptId}/assets/pack?offset=${offset}&limit=${PACK}${cut?'&look=cut':''}`,{cache:'no-store',signal:controller.signal});
   if(!res.ok)throw new Error('Paper part '+res.status);
   const buffer=await res.arrayBuffer(), size=new DataView(buffer).getUint32(0);
   const head=JSON.parse(new TextDecoder().decode(new Uint8Array(buffer,4,size)));
   let at=4+size;
   for(const item of head.items){
-   const path=`/attempts/${attemptId}/questions/${item.question_id}/asset/question/${item.index}`;
+   const path=`/attempts/${attemptId}/questions/${item.question_id}/asset/${item.kind||'question'}/${item.index}`;
    if(live()&&!held.has(path))held.set(path,keep(path,new Blob([new Uint8Array(buffer,at,item.size)],{type:'image/png'})));
    at+=item.size;
   }

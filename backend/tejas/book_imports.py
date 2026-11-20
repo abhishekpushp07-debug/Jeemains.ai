@@ -5,9 +5,10 @@ from starlette.concurrency import run_in_threadpool
 from .auth import owner, current, staff
 from .db import db, sets, now, audit
 from .canonical import database_now
-from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, MockConfirm, Book, BookPage, BookMock, UploadPart, BookAllowance
+from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, MockConfirm, CutFix, Book, BookPage, BookMock, UploadPart, BookAllowance
 from .book_store import CHUNK, normalized, identity, digest, load_book, book_view, lock_book, save_book, unlock, fence, original, enqueue_book, mocks_for, save_mock
 from .book_pdf import inspect, inspect_many
+from .book_cuts import slot
 
 router=APIRouter(prefix='/api',tags=['Source-first book publishing'])
 
@@ -54,7 +55,7 @@ async def create(body:UploadInput,u=Depends(owner)):
         extra={'chapters':True,'subject':match_subject(body.subject,allowed)}
         if body.subject and not extra['subject']:raise HTTPException(422,'Choose one of this exam’s subjects, or Read from the PDF.')
     elif body.subject:raise HTTPException(422,'A subject is chosen only for chapter-wise PDFs.')
-    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all','year','subject'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id']}|extra)
+    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all','year','subject'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id'],'cut_engine':True}|extra)
     try:await db.tejas_books.insert_one(book.to_mongo())
     except DuplicateKeyError:return await book_view(await load_book(id,u))
     await mark_replacing(dest,body.title)
@@ -298,6 +299,15 @@ async def request_publication(bid,wanted,release_at,bg,u):
     return len(picked)
 
 
+def cut_view(q, mock):
+    """What the fix tool shows for one question's cut: its page region, the pieces students get, or why it is held."""
+    cut=q.get('cut')
+    if not cut:return None
+    own=mock.cuts.get(slot(q.get('coverage_key',''))) or {}
+    return {'status':cut['status'],'reason':cut.get('reason',''),'arrangement':cut.get('arrangement',''),'mode':cut.get('mode','auto'),'accept_outside':bool(cut.get('accept_outside')),
+            'region':cut['region'],'labels':cut.get('labels',[]),'parts':cut.get('parts',[]),'draft':own.get('boxes') or cut.get('draft') or {}}
+
+
 def question_problems(mock, everything=False):
     """Group a held mock's blocking issues by the question they concern; everything=True lists clean questions too."""
     out,used=[],set()
@@ -315,7 +325,7 @@ def question_problems(mock, everything=False):
             out.append({'id':q['id'],'subject':q['subject'],'section':q['section'],'number':n,'type':q['type'],'options':list(q.get('options',{})),'typed_options':q.get('typed_options',{}),
                 'answer':q.get('answer',''),'issues':mine,'pages':pages,'solution_pages':spages,'next_page':pages[-1]+1 if pages else None,
                 'question_images':len(q['source_regions']['question']),'solution_images':len(q['source_regions']['solution']),
-                'has_key':bool(q['source_regions']['solution']),'confirmed':q.get('coverage_key') in mock.confirmed,'key_only_allowed':f"{q['subject']}|{q['section']}|{n}" not in mock.original_solution_identities})
+                'cut':cut_view(q,mock),'has_key':bool(q['source_regions']['solution']),'confirmed':q.get('coverage_key') in mock.confirmed,'key_only_allowed':f"{q['subject']}|{q['section']}|{n}" not in mock.original_solution_identities})
     return out,[x for i,x in enumerate(mock.issues) if i not in used]
 
 
@@ -325,7 +335,69 @@ async def mock_problems(id:str,mid:str,every:bool=Query(False,alias='all'),u=Dep
     if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
     mock=BookMock.from_mongo(row);questions,general=question_problems(mock,every and u['role']=='owner')
     return {'id':mock.id,'label':(mock.chapter or {}).get('title') or mock.label,'state':mock.state,'revision':mock.revision,'questions':questions,'general':general,
-            'total':len(mock.questions),'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages}
+            'total':len(mock.questions),'rules_missing':not mock.rules,'frozen':mock.published_generation==mock.generation,'pages':mock.pages,'cut_summary':mock.cut_summary or None}
+
+
+@router.get('/admin/books/{id}/mocks/{mid}/page/{number}')
+async def mock_page(id:str,mid:str,number:int,u=Depends(staff)):
+    """One page that holds this mock's questions, for the fix tool's boxes and the proof view."""
+    book=await load_book(id)
+    row=await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id},{'state':1,'pages':1,'questions.cut.region.page':1,'questions.cut.parts.page':1})
+    if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
+    cuts=[q.get('cut') or {} for q in row.get('questions',[])]
+    allowed=set((row.get('pages') or {}).get('question',[]))|{c['region']['page'] for c in cuts if c.get('region')}|{p['page'] for c in cuts for p in c.get('parts',[])}
+    if number not in allowed:raise HTTPException(404,'This page holds no question of this mock.')
+    try:data=await run_in_threadpool(inspect,await original(book),'page',number)
+    except ValueError as exc:raise HTTPException(422,str(exc)) from None
+    return Response(data['image_bytes'],media_type='image/png',headers={'Cache-Control':'private, no-store'})
+
+
+@router.post('/admin/books/{id}/mocks/{mid}/cut')
+async def cut_question(id:str,mid:str,body:CutFix,bg:BackgroundTasks,u=Depends(staff)):
+    """Fix tool: check boxes drawn by hand (save=false is the live preview), keep them, choose the whole-picture look, or go back to the engine's own cut."""
+    book=await load_book(id)
+    def target(row):
+        if not row or (u['role']!='owner' and row['state']!='held'):raise HTTPException(404,'Mock not found.')
+        mock=BookMock.from_mongo(row)
+        if mock.published_generation==mock.generation:raise HTTPException(409,'Published mocks are frozen. Create a corrected version first.')
+        q=next((x for x in mock.questions if x['id']==body.question_id),None)
+        if not q:raise HTTPException(404,'This question is no longer in the mock. Reload.')
+        if not q.get('cut'):raise HTTPException(409,'Yeh mock naye cutter se pehle padha gaya tha. Iske sawaal kaatne ke liye PDF dobara upload karo.')
+        return mock,q
+    mock,q=target(await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id}))
+    if u['role']!='owner' and (body.mode=='whole' or body.accept_outside):raise HTTPException(403,'Poori picture wala look ya override sirf owner chun sakta hai.')
+    region=q['cut']['region'];over={'mode':'whole'}
+    # An option the owner typed needs no picture, so it needs no box.
+    labels=[x for x in q.get('options',{}) if x not in q.get('typed_options',{})] if q['type']=='mcq' else []
+    if body.mode=='boxes':
+        need=['q',*labels]
+        if set(body.boxes)!=set(need) or any(len(b)!=4 or not (0<=b[0]<b[2]<=1 and 0<=b[1]<b[3]<=1) for b in body.boxes.values()):
+            raise HTTPException(422,'Sawaal ka ek box banao'+(' aur options '+', '.join(labels)+' me har ek ka ek box' if labels else '')+'.')
+        boxes={k:[round(float(x),5) for x in body.boxes[k]] for k in need}
+        try:result=(await run_in_threadpool(inspect_many,await original(book),[{'action':'boxes','page':region['page'],'rect':region['rect'],'labels':labels,'boxes':boxes}],1))[0]
+        except ValueError as exc:raise HTTPException(422,str(exc)) from None
+        if result.get('error'):raise HTTPException(422,result['error'])
+        c=result['cut'];outside=bool(c.get('outside'))
+        reason=c.get('reason') or ('Is sawaal ka kuch chhapa hua hissa kisi bhi box me nahi aaya.' if outside and not body.accept_outside else '')
+        checked={'ok':c['status']=='manual' and not reason,'reason':reason,'outside':outside,'page':region['page'],'size':c.get('size'),'pieces':c.get('pieces',{})}
+        if not body.save:return checked
+        if not checked['ok']:raise HTTPException(422,reason)
+        over={'mode':'boxes','page':region['page'],'boxes':boxes,'accept_outside':bool(body.accept_outside and outside)}
+    elif not body.save:return {'ok':True,'reason':'','outside':False,'page':region['page'],'pieces':{}}
+    await load_book(id);book,token=await lock_book(id)
+    try:
+        mock,q=target(await db.tejas_book_mocks.find_one({'_id':mid,'book_id':id}))
+        if mock.revision!=body.revision:raise HTTPException(409,'This mock was rechecked a moment ago. Reload and try again.')
+        key=slot(q['coverage_key'])
+        if body.mode=='auto':mock.cuts.pop(key,None)
+        else:mock.cuts[key]=over
+        mock.revision+=1;await save_mock(mock)
+        book.state='matching';await save_book(book,token)
+        note={'boxes':'boxes drawn by hand','whole':'shown as one whole picture','auto':'back to the automatic cut'}[body.mode]
+        await audit(u['id'],'Book question cut',mid,f"{mock.label} {q['subject']} Q{q['original_number']}: {note}"+(' · owner override: marks outside the boxes accepted' if over.get('accept_outside') else ''))
+    finally:await unlock(book,token)
+    if not book.paused:await dispatch(book,bg)
+    return {'ok':True,'saved':True,'message':f"{q['subject']} Q{q['original_number']} save ho gaya. {mock.label} dobara check ho raha hai…"}
 
 
 @router.post('/admin/books/{id}/mocks/{mid}/fix')

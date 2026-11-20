@@ -17,6 +17,7 @@ import {
 import { useAuth } from "../lib/auth";
 import { Logo, Loading, ErrorBox, Badge, Confirm } from "../components/Shared";
 import { QuestionContent, MathText } from "../components/QuestionContent";
+import { PieceScaleProvider, PieceStem, PieceOptions, PieceImage } from "../components/QuestionPieces";
 import { useAttempt } from "./practice/useAttempt";
 import { PlayerConfidencePanel } from '../components/player/PlayerConfidencePanel';
 import { BonusGate, BonusConfirm } from '../components/player/BonusGate';
@@ -70,9 +71,10 @@ export default function Player() {
   const questionId = q?.id;
   useEffect(()=>{
     if(!a||a.status!=='active')return;
-    const paths=a.questions.filter(x=>!(x.bonus&&!a.bonus_unlocked_at)).flatMap(x=>Array.from({length:x.asset_count||0},(_,i)=>`/attempts/${id}/questions/${x.id}/asset/question/${i}`));
+    // A cut question loads its pieces (the question and each option); every other question loads its whole picture.
+    const paths=a.questions.filter(x=>!(x.bonus&&!a.bonus_unlocked_at)).flatMap(x=>Array.from({length:x.pieces?.length||x.asset_count||0},(_,i)=>`/attempts/${id}/questions/${x.id}/asset/${x.pieces?.length?'piece':'question'}/${i}`));
     setLoaded({done:0,total:paths.length});
-    return preloadPaper(id,paths,(done,total)=>setLoaded({done,total}));
+    return preloadPaper(id,paths,(done,total)=>setLoaded({done,total}),{cut:a.questions.some(x=>x.pieces?.length)});
   },[id,a?.id,a?.status,a?.bonus_unlocked_at]);
   useEffect(() => {
     if(!a)return;
@@ -160,6 +162,12 @@ export default function Player() {
       return b;
     });
   }
+  // New look: the question area shows only the question; each option's own picture sits on its button.
+  const cut = q.pieces?.length ? q.pieces : null;
+  const drawPiece = (i, p, width) => (
+    <PieceImage key={i} path={`/attempts/${id}/questions/${q.id}/asset/piece/${i}`} alt={p.part === "q" ? `Question ${q.number}` : `Option ${p.part}`}
+      width={width} ratio={p.w / p.h} testId={`player-piece-${i}`} onError={() => assetState(i, true)} onLoad={() => assetState(i, false)} />
+  );
   return (
     <QuestionReportsProvider attemptId={id}><div className="player-layout">
       <header className="player-header feature-dark" data-testid="player-header">
@@ -353,14 +361,15 @@ export default function Player() {
                 {current.marked ? "Marked for review" : "Mark for review"}
               </Button>
             </div>
+            <PieceScaleProvider key={"pieces-" + q.id} pieces={cut || NO_PIECES}>
             <div data-testid="player-question-stem">
-              <QuestionContent
+              {cut ? <PieceStem pieces={cut} draw={drawPiece} testId="player-piece-stem" /> : <QuestionContent
                 question={q}
                 readable
                 base={`/attempts/${id}/questions/${q.id}`}
                 onAssetError={(i) => assetState(i, true)}
                 onAssetLoad={(i) => assetState(i, false)}
-              />
+              />}
             </div>
             {assetBlocked && (
               <div className="notice amber">
@@ -368,14 +377,17 @@ export default function Player() {
                 answering; do not guess missing content.
               </div>
             )}
-            {q.type==='mcq'&&q.render_mode==='source'&&<p className="source-options-hint" data-testid="player-source-options-hint">{Object.keys(q.typed_options||{}).length ? 'Read the options in the picture above. Options the picture does not show are typed below.' : q.source_option_labels ? 'Read options 1–4 in the original image above, then select the matching number.' : 'Read options A–D in the original image above, then select the matching letter.'}</p>}
-            <fieldset disabled={locked} className="answer-fieldset">
+            {!cut&&q.type==='mcq'&&q.render_mode==='source'&&<p className="source-options-hint" data-testid="player-source-options-hint">{Object.keys(q.typed_options||{}).length ? 'Read the options in the picture above. Options the picture does not show are typed below.' : q.source_option_labels ? 'Read options 1–4 in the original image above, then select the matching number.' : 'Read options A–D in the original image above, then select the matching letter.'}</p>}
+            <fieldset disabled={cut && q.type === "mcq" ? seconds === 0 || conflict : locked} className="answer-fieldset">
               <legend>
                 {q.type === "mcq"
                   ? "Select one answer"
                   : "Enter your integer answer"}
               </legend>
-              {q.type === "mcq" ? (
+              {q.type === "mcq" && cut ? (
+                <PieceOptions pieces={cut} options={Object.keys(q.options || {})} labels={q.source_option_labels || {}} typed={q.typed_options || {}}
+                  draw={drawPiece} name={q.id} value={current.value} disabled={locked} onPick={(key) => edit(q.id, { value: key })} />
+              ) : q.type === "mcq" ? (
                 <div className={'answer-options ' + (q.render_mode==='source'?'answer-options-source'+(Object.keys(q.typed_options||{}).length?' has-typed':''):'')}>
                   {Object.entries(q.options || {}).map(([key, value]) => (
                     <label
@@ -428,6 +440,7 @@ export default function Player() {
                 </>
               )}
             </fieldset>
+            </PieceScaleProvider>
             <Button variant="ghost"
               className="text-button clear-answer"
               data-testid="player-clear-response-button"
@@ -532,6 +545,7 @@ export default function Player() {
   );
 }
 
+const NO_PIECES = [];
 const nPendingCount = (pending) => Object.keys(pending).length;
 const clock = (n) => [Math.floor(n / 3600), Math.floor((n % 3600) / 60), n % 60].map((v) => String(v).padStart(2, "0")).join(":");
 const committedOrDraft = (a, all) => a.questions.filter((x) => String(all[x.id]?.value || "").trim()).length;

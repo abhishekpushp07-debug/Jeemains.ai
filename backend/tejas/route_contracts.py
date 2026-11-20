@@ -37,6 +37,8 @@ SPEC = {
     'structure.publish_ready_items': ('owner_only_publish_ready_items','control','per_mock_request_flag_audited'),
     'book_imports.mock_problems': ('owner_any_reviewer_held_mocks_only','normal','read'),
     'book_imports.fix_question': ('owner_any_reviewer_held_mocks_only','control','lease_mock_revision'),
+    'book_imports.cut_question': ('owner_any_reviewer_held_mocks_only','control','lease_mock_revision'),
+    'book_imports.mock_page': ('owner_any_reviewer_held_mocks_only','batch','read'),
     'library.library': ('owner_only_library_metadata','normal','read'),
     'master.summary': ('owner_only_publishing_counts','normal','read'),
     'master.fix_list': ('staff_mocks_to_fix_metadata','normal','read'),

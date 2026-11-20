@@ -18,7 +18,7 @@ def run(source, items):
         (root/'request.json').write_text(json.dumps({'items':items}))
         try:
             result=subprocess.run([sys.executable,str(Path(__file__).with_name('book_pdf_worker.py')),tmp],capture_output=True,timeout=90,
-                env={'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','PYTHONIOENCODING':'utf-8','PYTHONDONTWRITEBYTECODE':'1'},close_fds=True,start_new_session=True)
+                env={'PATH':'/usr/bin:/bin','LANG':'C.UTF-8','PYTHONIOENCODING':'utf-8','PYTHONDONTWRITEBYTECODE':'1','OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1'},close_fds=True,start_new_session=True)
         except subprocess.TimeoutExpired:
             raise ValueError('This page exceeded its safe processing time. Re-export it or repair its ranges.') from None
         if len(result.stdout)>160*1024*1024: raise ValueError('PDF output exceeded its safe budget.')

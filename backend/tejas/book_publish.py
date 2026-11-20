@@ -1,4 +1,4 @@
-import copy, json, re
+import asyncio, copy, json, re, time
 from starlette.concurrency import run_in_threadpool
 from .db import db, sets, files, now, audit
 from .canonical import database_now
@@ -6,6 +6,7 @@ from .book_models import BookMock, MockRules
 from .book_store import identity, normalized, save_mock, pages_for, mocks_for, fence, renew, digest, principal
 from .book_reader import infer_rules
 from .book_pdf import inspect_many
+from .book_cuts import cut_mock, cut_summary, SECONDS, SHOWN
 from .content import valid_rules, question_issues, publish_validated
 from .chapter_reader import book_subjects, match_subject, syllabus_subject, resolve_subject, bookmark_title
 from tejas_storage import put_object
@@ -45,7 +46,9 @@ def chapter_record(book, mock, label, relevant, ctx, order):
     return {'number':record.get('number') or order,'title':title[:120],'subject':subject,'subject_from':source,'start_page':pages[0] if pages else None}
 
 
-async def rebuild(book, token):
+async def rebuild(book, token, source=None):
+    """Rebuilds every unpublished mock from its pages. True while questions are still being cut: the caller runs again."""
+    engine=bool(source and book.payload.get('cut_engine'));cutting=False;deadline=time.monotonic()+SECONDS
     pages=await pages_for(book); known={normalized(m.label):m for m in await mocks_for(book)}
     chapters=await chapter_context(book,pages) if book.payload.get('chapters') else None
     labels=list(dict.fromkeys(normalized(r.mock) for p in pages for r in p.regions if r.mock and r.role not in ('ignore','instructions')))
@@ -72,7 +75,7 @@ async def rebuild(book, token):
         relevant=by_label[label]
         mock=known.get(label) or BookMock(id=identity(book.id,label),book_id=book.id,label=relevant[0][1].mock,order=order)
         if mock.published_generation==mock.generation:continue
-        mock.order=order;issues=[];question_groups={};key_groups={};solution_groups={}
+        mock.order=order;issues=[];question_groups={};key_groups={};solution_groups={};targets={}
         local_unknown=[number for number,affected_labels in affected.items() if label in affected_labels]
         if local_unknown:issues.append('Unmapped pages in or beside this mock’s source ranges need review: '+', '.join(map(str,local_unknown[:30])))
         printed=[]
@@ -176,6 +179,7 @@ async def rebuild(book, token):
             if not solutions and not keys:issues.append(f'{first.subject} Q{first.number}: original key region required.')
             shared=[(p,r) for p,r in relevant if r.role=='shared' and normalized(r.subject)==key[0] and normalized(r.section or r.subject)==key[1] and key[2] in r.shared_for]
             qid=identity(mock.id,mock.generation,*key)
+            targets[qid]=[(p.number,r.rect,bool(r.option_labels)) for p,r in shared+entries]
             questions.append({'id':qid,'number':position,'original_number':first.number,'subject':first.subject,'section':first.section or first.subject,
                 'type':kind,'answer':answer,'options':{x:'Original option '+x for x in labels_for_options},**({'typed_options':typed} if typed and kind=='mcq' else {}),
                 'text':'\n'.join(r.text for _,r in entries) or f'Original question {first.number}; image transcription unavailable.',
@@ -186,6 +190,11 @@ async def rebuild(book, token):
                                   'key':[{'page':p.number,'rect':r.rect,'printed_answer':r.answer} for p,r in keys+solutions if r.answer]},
                 'coverage_key':coverage_key})
         for orphan in (set(solution_groups)|set(key_groups))-set(question_groups):issues.append('Key/solution has no matching question: '+str(orphan))
+        if engine:
+            # Every question is cut into its question and its options. A mock arrives once all of its questions are cut.
+            if not await cut_mock(book,mock,questions,targets,source,deadline,lambda:renew(book,token)):
+                cutting=True;continue
+            issues.extend(f"{q['subject']} Q{q['original_number']}: options saaf nahi kate. {q['cut']['reason']}" for q in questions if q['cut']['status']=='held')
         # Holds placed at publication time must survive the next rebuild; only an owner action clears them.
         if mock.missed_release and not mock.release_override:issues.append('Missed scheduled release. Choose a new release decision; it will not launch late automatically.')
         if mock.publish_hold:issues.append(mock.publish_hold)
@@ -204,6 +213,7 @@ async def rebuild(book, token):
             if not mock.chapter['subject']:issues.append('Choose the subject for this chapter.')
         mock.pages={role:sorted({p.number for p,r in relevant if r.role==role}) for role in ('question','key','solution','instructions')}
         mock.questions=questions;mock.issues=list(dict.fromkeys(issues))[:500]
+        mock.cut_summary=cut_summary(questions,set(mock.confirmed)) if engine else {}
         if not questions:mock.issues.append('No complete questions found.')
         mock.state='held' if mock.issues else 'ready';mock.revision+=1
         if mock.state=='held':mock.publish_requested=False
@@ -212,6 +222,7 @@ async def rebuild(book, token):
     for label,mock in known.items():
         if label not in labels and mock.published_generation!=mock.generation:
             mock.state='held';mock.questions=[];mock.issues=['All mapped regions were removed. Restore the mock boundaries.'];await save_mock(mock)
+    return cutting
 
 
 async def crop_ref(book,mock,crop,region,role):
@@ -232,10 +243,15 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
     rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10)
     crops={}
     for (qid,role,_),crop in zip(wanted,rendered):crops.setdefault((qid,role),[]).append(crop)
+    # New look: the question picture and one picture per option, all at the same zoom.
+    parts=[(q['id'],part) for q in mock.questions if (q.get('cut') or {}).get('status') in SHOWN for part in q['cut']['parts']]
+    painted=await run_in_threadpool(inspect_many,raw,[{'action':'piece','page':p['page'],'rect':p['rect'],'scale':2,'erase':p.get('erase',[])} for _,p in parts],20) if parts else []
+    pieces={}
+    for (qid,part),crop in zip(parts,painted):pieces.setdefault(qid,[]).append((part,crop))
     if guard:await guard('renew')
     questions,left=[],[]
     for original_q in mock.questions:
-        q=copy.deepcopy(original_q);source=q.pop('source_regions');q.pop('coverage_key',None)
+        q=copy.deepcopy(original_q);source=q.pop('source_regions');q.pop('coverage_key',None);q.pop('cut',None)
         q.update(render_mode='source',solution_number=q['number'],approved=True,issues=[],q_refs=[],s_refs=[],
             accessible_text=q['text'],solution_accessible_text=q['solution'],review_note='Source-mapping checks passed; supplied key preserved, not independently academically certified.',
             source_evidence={'book_sha256':book.payload['sha256'],'edition':book.payload.get('edition',''),'mock':mock.label,'regions':source},
@@ -254,6 +270,10 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
                 for region,crop in zip(source[role],crops.get((q['id'],role),[])):
                     if guard:await guard('fence')
                     q[key].append(await crop_ref(book,mock,crop,region,role))
+            if q['id'] in pieces:
+                if guard:await guard('fence')
+                refs=await asyncio.gather(*(crop_ref(book,mock,crop,part,'piece') for part,crop in pieces[q['id']]))
+                q['c_refs']=[{**ref,'part':part['part'],'w':round(crop['width']/2,1),'h':round(crop['height']/2,1)} for ref,(part,crop) in zip(refs,pieces[q['id']])]
             errors=question_issues(q,rules['exam'])
         except ValueError as exc:
             if strict:raise
@@ -272,7 +292,7 @@ def base_set(book, mock, questions, dest, suffix=''):
     title=chapter.get('title') or mock.label if chapter else mock.label if dest else book.payload['title']+' · '+mock.label
     data={'book_series_title':book.payload['title'],'mock_number':mock.order,'title':title+suffix,
         'exam':dest['exam_key'] if dest else rules['exam'],'test_kind':'mock','full_length':True,'profile_mode':'practice','rules':valid_rules({'minutes':rules['minutes'],'correct':rules['correct'],'wrong':rules['wrong'],'skipped':0}),
-        'questions':questions,'file_ids':sorted({r['file_id'] for q in questions for k in ('q_refs','s_refs') for r in q[k]}),
+        'questions':questions,'file_ids':sorted({r['file_id'] for q in questions for k in ('q_refs','s_refs','c_refs') for r in q.get(k,[])}),
         'status':'draft','version':0,'revision':1,'source':'Owner-uploaded '+book.payload['filename'],'attribution':'Original book source; owner-confirmed content-use rights.',
         'rights_upload':True,'rights_publish':True,'rights_report':True,'audience':'all','allowed_emails':[],'allowed_phones':[],'expires':'','created_at':now(),'created_by':book.owner_id}
     if chapter:

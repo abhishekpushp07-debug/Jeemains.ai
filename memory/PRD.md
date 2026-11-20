@@ -1,3 +1,11 @@
+## Status — 2026-11-20 (night): PDF Engine 2.0 Phase 1 PAUSED by the owner. NOT complete. Read memory/PAUSE_2026-11-20.md first.
+- Owner: "Save and pause your work, I will ask you to resume." Wait for "resume".
+- Code is at its session-start state (same as what the owner deployed to jeelive.ai at the start of this session). An unfinished, unverified cutter rewrite is parked in memory/pause_2026-11-20/ and is not live.
+- Reversal check: after restoring, the three chapter books (physics, chemistry, mathematics; 4650 questions) were scanned again and every question's cut is identical to the session-start scan. Same 5 questions held as before. No browser check after the reversal.
+- Not done: student screen check, fix tool check, testing agent run, sign-off.
+- New owner requirements to do first on resume: (1) find the printed rectangles first: one big question box, four small option boxes; (2) fix tool on the full page: draw a rectangle and assign it to Sawaal/A/B/C/D; (3) stop mixing the a,b,c,d inside the question with the A,B,C,D of the options. Owner's screenshots: production, mock "02 Kinematics", page 156, Q16.
+
+
 ## Status — 2026-11-19 (evening): Analysis 2.0 Phase 1 finished in preview (NOT deployed)
 User (Hinglish): "Mat poocho, poora banakar ek saath dikhao." Plan = plan/plan.md. Do not ask questions during Phase 1; deploy only when the user says "deploy".
 - Website: 8 sections + Comparative + Leaderboard + Solutions cards/journey + (i) "yeh kaise bana" on every number are styled (frontend/src/analysis2.css) and were walked in a browser at 1920x800 and 390x844, light and dark, with no horizontal overflow and no page errors. Display-name dialog copy is now Hinglish; the name box on the leaderboard saves and refreshes the board.

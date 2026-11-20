@@ -286,7 +286,7 @@ from .smart_models import Clarification, QuestionRepair, WorkBudget, DailyBudget
 
 from .live_series import Assignment, Fill, Clear
 
-from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, MockConfirm
+from .book_models import UploadInput, PageRepair, RuleRepair, Control, Allowance, RangeMap, QuestionFix, MockConfirm, CutFix
 from .structure import ExamInput, ExamPatch, SectionInput, SectionPatch, OrderInput, TestPatch, PublishInput
 from .library import ArchiveInput, RestoreInput, DeleteInput
 from .master import StatusInput
@@ -310,6 +310,7 @@ MODELS = {
     'structure.publish_ready_items': PublishInput,
     'book_imports.fix_question': QuestionFix,
     'book_imports.confirm_all': MockConfirm,
+    'book_imports.cut_question': CutFix,
     'library.archive': ArchiveInput, 'library.restore': RestoreInput, 'library.delete': DeleteInput,
     'master.change_status': StatusInput,
     'written.create_written': WrittenInput, 'written.update_written': WrittenPatch,

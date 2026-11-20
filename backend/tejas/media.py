@@ -14,19 +14,27 @@ PART, DAY = 12, 86400
 CDN = os.environ.get("MEDIA_CDN_URL", "").rstrip("/")
 _KEY = hashlib.sha256(b"tejas-media-v1:" + os.environ["JWT_SECRET"].encode()).digest()
 _PACK = re.compile(r"[0-9a-f]{64}")
-_NAME = re.compile(r"(\d{1,4})-(\d{1,2})-([01])-(\d{10})-([A-Za-z0-9_-]{22})\.bin")
+_NAME = re.compile(r"(\d{1,4})-(\d{1,2})-([0-3])-(\d{10})-([A-Za-z0-9_-]{22})\.bin")
 _parts = ByteCache(64 * 1024 * 1024)
 _flights = {}
 stats = {"links": 0, "served": 0, "built": 0, "coalesced": 0, "rejected": 0}
 
 
-def picture_refs(questions, bonus_open):
-    return [(q["id"], i, r) for q in questions if not (q.get("bonus") and not bonus_open) for i, r in enumerate(q.get("q_refs", []))]
+def picture_refs(questions, bonus_open, cut=False):
+    """Pictures of a paper in order: (question id, index, ref, kind). cut=True gives a cut question's pieces instead of its whole picture."""
+    out = []
+    for q in questions:
+        if q.get("bonus") and not bonus_open:
+            continue
+        pieces = q.get("c_refs") if cut else None
+        out += [(q["id"], i, r, "piece" if pieces else "question") for i, r in enumerate(pieces or q.get("q_refs", []))]
+    return out
 
 
 def assemble(total, found):
-    head = json.dumps({"total": total, "items": [{"question_id": qid, "index": i, "size": len(b)} for qid, i, b in found]}).encode()
-    return len(head).to_bytes(4, "big") + head + b"".join(b for _, _, b in found)
+    items = [{"question_id": qid, "index": i, "size": len(b), **({"kind": kind} if kind != "question" else {})} for qid, i, b, kind in found]
+    head = json.dumps({"total": total, "items": items}).encode()
+    return len(head).to_bytes(4, "big") + head + b"".join(b for _, _, b, _ in found)
 
 
 def sign(pack_id, offset, limit, bonus, exp):
@@ -34,10 +42,10 @@ def sign(pack_id, offset, limit, bonus, exp):
     return base64.urlsafe_b64encode(raw[:16]).decode().rstrip("=")
 
 
-async def pack_links(a):
+async def pack_links(a, cut=False):
     """Every student of one paper on one day gets the same links, so the CDN fetches each part from the server only once."""
-    bonus = int(bool(a.get("bonus_unlocked_at")))
-    total = len(picture_refs((await entry_for(a["pack_id"])).questions, bonus))
+    bonus = int(bool(a.get("bonus_unlocked_at"))) | (2 if cut else 0)
+    total = len(picture_refs((await entry_for(a["pack_id"])).questions, bonus & 1, cut))
     exp = (int(a["_database_now"] // DAY) + 2) * DAY
     base = f"{CDN}/api/media/pack/{a['pack_id']}"
     stats["links"] += 1
@@ -47,20 +55,20 @@ async def pack_links(a):
 
 def _render(sources, part):
     found = []
-    for qid, i, r in part:
+    for qid, i, r, kind in part:
         try:
-            found.append((qid, i, render_crop(sources[r["file_id"]], r)))
+            found.append((qid, i, render_crop(sources[r["file_id"]], r), kind))
         except Exception:
             pass
     return found
 
 
 async def _build(pack_id, offset, limit, bonus):
-    refs = picture_refs((await entry_for(pack_id)).questions, bonus)
+    refs = picture_refs((await entry_for(pack_id)).questions, bonus & 1, bool(bonus & 2))
     part = refs[offset:offset + limit]
     if not part:
         return None, False
-    ids = list({r["file_id"] for _, _, r in part})
+    ids = list({r["file_id"] for _, _, r, _ in part})
     sources = {f["id"]: f async for f in files.find({"id": {"$in": ids}, "is_deleted": {"$ne": True}}, {"_id": 0})}
     found = await run_in_threadpool(_render, sources, [p for p in part if p[2]["file_id"] in sources])
     body, complete = assemble(len(refs), found), len(found) == len(part)

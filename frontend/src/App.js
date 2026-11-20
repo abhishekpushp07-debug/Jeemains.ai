@@ -33,6 +33,7 @@ import './vibrant-ui.css';
 import './pyq.css';
 import './admin.css';
 import './master.css';
+import './cut-tool.css';
 import './analysis2.css';
 import './app-theme.css';
 const Rank = lazy(() => import('./features/Rank'));

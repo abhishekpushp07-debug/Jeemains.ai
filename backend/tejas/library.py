@@ -55,7 +55,9 @@ class DeleteInput(RestoreInput):
 
 UPLOADS = {'book': ('tejas_books', '_id'), 'chapter_book': ('tejas_chapter_books', 'id'), 'import': ('tejas_imports', 'id')}
 FIELD = {'book': 'book_import_id', 'chapter_book': 'chapter_book_id', 'import': 'import_id'}
-BOOK_PARTS = ('tejas_book_pages', 'tejas_book_page_history', 'tejas_book_parts', 'tejas_book_mocks', 'tejas_book_allowances', 'tejas_book_supplements')
+BOOK_PARTS = ('tejas_book_pages', 'tejas_book_page_history', 'tejas_book_parts', 'tejas_book_mocks', 'tejas_book_allowances', 'tejas_book_supplements', 'tejas_book_cuts')
+ENGINE_ID = 'library-2026-11-engine2-old-look-pdf-mocks'
+ENGINE_REASON = 'Moved to the Library: a PDF mock in the old look, made before questions were cut into the question and its options. Students keep their old scores.'
 
 
 async def archive_sets(ids, actor, reason, guard=GUARD):
@@ -398,25 +400,28 @@ async def cleanup_once():
     return await run_once(CLEANUP_ID, cleanup_job, 'One-time Library cleanup')
 
 
-async def clear_series(actor, reason):
-    """Every series paper goes to the Library with its day noted; every series keeps its dates for new papers."""
+async def clear_series(actor, reason, only=None):
+    """Every series paper (or just the ones named) goes to the Library with its day noted; every series keeps its dates for new papers."""
     t, n = now(), 0
-    async for s in sets.find({'series_id': {'$nin': [None, '']}, 'archived': {'$ne': True}}, {'_id': 0, 'id': 1, **{k: 1 for k in SERIES_FIELDS}}):
+    named = {} if only is None else {'id': {'$in': only}}
+    async for s in sets.find({'series_id': {'$nin': [None, '']}, 'archived': {'$ne': True}, **named}, {'_id': 0, 'id': 1, **{k: 1 for k in SERIES_FIELDS}}):
         day = {k: s[k] for k in SERIES_FIELDS if s.get(k) is not None}
         n += (await sets.update_one({'id': s['id'], 'archived': {'$ne': True}}, {
             '$set': {'archived': True, 'archived_at': t, 'archived_by': actor, 'archived_reason': reason, 'library_series': day},
             '$unset': {k: '' for k in SERIES_FIELDS}, '$inc': {'revision': 1}})).modified_count
+    if only is not None:
+        return {'papers': n, 'waiting_days_freed': 0}
     waiting = await db.tejas_book_mocks.update_many({'set_id': None, 'series_date': {'$nin': [None, '']}},
         {'$set': {'series_date': None, 'series_id': None, 'publish_requested': False, 'release_at': None}, '$inc': {'revision': 1}})
     return {'papers': n, 'waiting_days_freed': waiting.modified_count}
 
 
-async def clear_uploads(kept):
-    """Every upload goes to the Library, except the ones the kept JEE Main PYQ papers came from. Waiting go-Live times are cancelled."""
+async def clear_uploads(kept, only=None):
+    """Every upload goes to the Library, except the ones the kept papers came from. Waiting go-Live times are cancelled. `only` narrows which PDFs go."""
     t = now()
     stamp, spare = {'archived': True, 'archived_at': t}, {f: list({r[f] for r in kept if r.get(f)}) for f, _, _ in SOURCES}
     n = (await db.tejas_books.update_many({'removed': False, 'archived': {'$ne': True}, '_id': {'$nin': spare['book_import_id']},
-        'payload.destination.section_id': {'$ne': KEEP_SECTION}}, [{'$set': {**stamp, 'paused_before_archive': '$paused', 'paused': True}}])).modified_count
+        'payload.destination.section_id': {'$ne': KEEP_SECTION}, **(only or {})}, [{'$set': {**stamp, 'paused_before_archive': '$paused', 'paused': True}}])).modified_count
     books = await db.tejas_books.distinct('_id', {'archived': True, 'archived_at': t})
     await db.tejas_book_mocks.update_many({'book_id': {'$in': books}, 'set_id': None}, {'$set': {'publish_requested': False, 'release_at': None}})
     for name, field in (('tejas_chapter_books', 'chapter_book_id'), ('tejas_imports', 'import_id')):
@@ -443,9 +448,31 @@ async def fresh_start_once():
     return await run_once(FRESH_ID, fresh_start, 'Fresh start: only JEE Main PYQ kept for students')
 
 
+async def old_look(actor='system'):
+    """PDF Engine 2.0: every PDF mock still in the old look goes to the Library, restorable like anything else there.
+    JEE Main PYQ, Rapid Fire, written mocks and mocks already cut into question + options stay where they are."""
+    live = {'archived': {'$ne': True}, 'qa_only': {'$ne': True}}
+    rows = await sets.find(live, {'_id': 0, 'id': 1, 'exam': 1, 'test_kind': 1, 'catalog_section_id': 1, 'chapter_book_id': 1, 'full_length': 1,
+                                  'series_id': 1, 'written': 1, **{f: 1 for f, _, _ in SOURCES}}).to_list(None)
+    # Old look = a question shown as one picture from the PDF, with its options inside that picture.
+    from_pdf = set(await sets.distinct('id', {**live, 'questions.render_mode': 'source'}))
+    new_look = set(await sets.distinct('id', {**live, 'questions.c_refs.0': {'$exists': True}}))
+    where = await placed(rows)
+    go = [r['id'] in from_pdf and r['id'] not in new_look and sid != KEEP_SECTION and not r.get('written')
+          and not RAPID.search(f"{r.get('exam') or ''} {r.get('test_kind') or ''}") for r, (sid, _, _) in zip(rows, where)]
+    series = [r['id'] for r, g in zip(rows, go) if g and r.get('series_id')]
+    counts = {'series_papers': (await clear_series(actor, ENGINE_REASON, series))['papers'] if series else 0}
+    counts['tests'] = await archive_sets([r['id'] for r, g in zip(rows, go) if g and not r.get('series_id')], actor, ENGINE_REASON, guard={})
+    counts['kept'] = len(rows) - sum(go)
+    # PDFs read before the cutter only hold old-look Drafts; PDFs uploaded with it stay.
+    counts['uploads'] = await clear_uploads([r for r, g in zip(rows, go) if not g], {'payload.cut_engine': {'$ne': True}})
+    return counts
+
+
 async def run_cleanups():
     await cleanup_once()
     await fresh_start_once()
+    await run_once(ENGINE_ID, old_look, 'PDF Engine 2.0: old-look PDF mocks moved to the Library')
     from .cohorts import remove_staff_entries
     await run_once('staff-out-of-peer-stats-2026-11', remove_staff_entries, 'Staff practice runs removed from student statistics')
     from .series_admin import jee_dates_once

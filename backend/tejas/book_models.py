@@ -139,6 +139,16 @@ class QuestionFix(Input):
     confirmed: bool = False
 
 
+class CutFix(Input):
+    """Boxes drawn by hand for one question (0..1 of the page), the whole-picture look, or back to the engine's own cut."""
+    revision: int = Field(ge=0)
+    question_id: str = Field(min_length=1, max_length=120)
+    mode: Literal['boxes', 'whole', 'auto']
+    boxes: dict[Literal['q', 'A', 'B', 'C', 'D', 'E', '1', '2', '3', '4'], list[float]] = Field(default_factory=dict, max_length=6)
+    save: bool = False
+    accept_outside: bool = False
+
+
 class MockConfirm(Input):
     revision: int = Field(ge=0)
     confirm: Literal['CHECKED']
@@ -205,6 +215,9 @@ class BookMock(BaseDocument):
     live_exam: bool = False
     chapter: dict = Field(default_factory=dict)
     confirmed: list[str] = Field(default_factory=list)
+    # Owner's own cut per question (boxes drawn by hand, or the whole-picture look), and the counts shown on the mock's row.
+    cuts: dict = Field(default_factory=dict)
+    cut_summary: dict = Field(default_factory=dict)
 
 
 class UploadPart(BaseDocument):

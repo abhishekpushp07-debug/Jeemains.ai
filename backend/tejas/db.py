@@ -111,6 +111,7 @@ async def indexes():
     await db.tejas_book_parts.create_index([('book_id', 1), ('number', 1)], unique=True)
     await db.tejas_book_pages.create_index([('book_id', 1), ('number', 1)], unique=True)
     await db.tejas_book_mocks.create_index([('book_id', 1), ('order', 1)])
+    await db.tejas_book_cuts.create_index('book_id')
     await db.tejas_book_allowances.create_index([('book_id', 1), ('state', 1), ('created_at', 1)])
     await sets.create_index([('book_import_id', 1), ('mock_number', 1)])
     # One paper per day in each series; several series may share a calendar date.

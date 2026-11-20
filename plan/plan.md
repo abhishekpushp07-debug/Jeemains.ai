@@ -84,7 +84,14 @@ One page inside the upload screen: how to make a PDF the engine reads correctly 
 
 ### 10. Quality bar
 
-The owner's instruction, recorded as given: the most elegant, the most beautiful, the most aesthetic and, more importantly, the most capable and the most powerful platform. For this work it is taken to mean:
+The owner's instruction, recorded as given: the most elegant, the most beautiful, the most aesthetic and, more importantly, the most capable and the most powerful platform.
+
+The owner's condition of approval, recorded as given: the platform should be completely perfect, the best, with the world's best capability, and the world's most powerful.
+
+For this work both are taken to mean:
+
+- **Engine mistakes are fixed in the engine.** If a question in one of the three arrangements is cut wrongly or held wrongly, the engine itself is corrected, so the same mistake does not come back in the next PDF. It is not left as a hand fix.
+- **Nothing known is left unsaid.** Every limit or defect found during the build is reported to the owner in plain words. Nothing is called done until it has been run and checked.
 
 - **No guessing.** A question either passes every check or is held with its reason. The proof view is the owner's final check by eye.
 - **Nothing clipped.** Cuts are placed only in blank space, so fractions, integrals, matrices, superscripts and diagrams are whole in every piece.
@@ -170,5 +177,5 @@ The owner's instruction, recorded as given: the most elegant, the most beautiful
 20. This plan replaces the Analysis 2.0 plan in this file. A full copy of that plan is saved next to it as `analysis2_plan.md`, and its pending Phase 2 and Phase 3 lists are also listed in `parked_student_features.md`.
 21. The result screen and the Solutions screen were not opened while planning. Their "Today" row in the table is inferred from how the test screen works, and is confirmed at the start of the build.
 22. The technical notes saved for the three parked features were not re-checked against the code in this planning session. They are labelled as unchecked in `parked_student_features.md`.
-23. "Most powerful" and "perfect" are taken as the quality bar in section 10. They are not a promise that every possible PDF layout is cut automatically: in Phase 1 a layout outside the three arrangements is held and fixed by hand, and the harder layouts are Phase 2.
+23. The owner approved this plan on one condition: the platform must be completely perfect and the world's best and most powerful. "World's best" cannot be measured or proved by the builder, and no comparison with other platforms was made for this plan. The condition is therefore taken as the quality bar in section 10, which is what the build is held to and reported against. "Most powerful" and "perfect" are not a promise that every possible PDF layout is cut automatically: in Phase 1 a layout outside the three arrangements is held and fixed by hand, and the harder layouts are Phase 2.
 24. The new option cards and the fix tool follow the existing JEELIVE look. No new visual style is introduced.

@@ -37,6 +37,11 @@ class Start(BaseModel):
     get_ready: bool = False
 
 
+def pieces_of(q):
+    """New look: the question picture(s) and one picture per option, in asset order (width and height in PDF points)."""
+    return [{'part': r['part'], 'w': r['w'], 'h': r['h']} for r in q['c_refs']]
+
+
 def delivered(q):
     p = public_question(q)
     if q.get('source_option_labels'):
@@ -44,6 +49,8 @@ def delivered(q):
     p["asset_count"] = len(q.get("q_refs", []))
     if q.get('render_mode') == 'written':
         p['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
+    if q.get('c_refs'):
+        p['pieces'] = pieces_of(q)
     p.pop("q_refs", None)
     # Picture questions: the picture is the question. Machine text is never sent; accessible_text is only the screen-reader label.
     if q.get("render_mode") == "source":
@@ -363,7 +370,7 @@ async def begin(id: str, u=Depends(current)):
 
 
 @router.get("/attempts/{id}/assets/pack")
-async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int = Query(12, ge=1, le=16), u=Depends(current)):
+async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int = Query(12, ge=1, le=16), look: str = Query('', pattern='^(cut)?$'), u=Depends(current)):
     """Question pictures of an active attempt in paper order, many per response, so the whole paper loads in a few requests.
     Body: 4-byte big-endian header length, JSON header {total, items:[{question_id, index, size}]}, then the PNG bytes in order."""
     from .attempt_status import owned_header
@@ -376,17 +383,17 @@ async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int 
         questions = (await entry_for(a["pack_id"])).questions
     else:
         questions = (await attempts.find_one({"id": id, "user_id": u["id"]}, {"_id": 0, "questions": 1}))["questions"]
-    refs = picture_refs(questions, a.get("bonus_unlocked_at"))
+    refs = picture_refs(questions, a.get("bonus_unlocked_at"), look == 'cut')
     part = refs[offset:offset + limit]
-    sources = {f["id"]: f async for f in files.find({"id": {"$in": list({r["file_id"] for _, _, r in part})}}, {"_id": 0})}
-    rendered = await asyncio.gather(*(run_in_threadpool(render_crop, sources[r["file_id"]], r) for _, _, r in part if r["file_id"] in sources), return_exceptions=True)
+    sources = {f["id"]: f async for f in files.find({"id": {"$in": list({r["file_id"] for _, _, r, _ in part})}}, {"_id": 0})}
+    rendered = await asyncio.gather(*(run_in_threadpool(render_crop, sources[r["file_id"]], r) for _, _, r, _ in part if r["file_id"] in sources), return_exceptions=True)
     # A picture that cannot render is left out; the app then loads it on its own, so one bad crop never blocks the rest.
-    found = [(qid, i, b) for (qid, i, _), b in zip([p for p in part if p[2]["file_id"] in sources], rendered) if isinstance(b, bytes)]
+    found = [(qid, i, b, kind) for (qid, i, _, kind), b in zip([p for p in part if p[2]["file_id"] in sources], rendered) if isinstance(b, bytes)]
     return Response(assemble(len(refs), found), media_type="application/octet-stream", headers={"Cache-Control": "private, no-store"})
 
 
 @router.get("/attempts/{id}/assets/links")
-async def asset_links(id: str, u=Depends(current)):
+async def asset_links(id: str, look: str = Query('', pattern='^(cut)?$'), u=Depends(current)):
     """The same pictures as /assets/pack, as public links a CDN can cache: {total, limit, cdn, expires_at, parts:[url]}.
     Fetch part k without cookies; it covers pictures k*limit .. k*limit+limit-1 in the /assets/pack format."""
     from .attempt_status import owned_header
@@ -396,7 +403,7 @@ async def asset_links(id: str, u=Depends(current)):
         raise HTTPException(409, "This attempt is no longer active.")
     if not a.get("pack_id"):
         raise HTTPException(404, "This paper loads its pictures through /assets/pack.")
-    return await pack_links(a)
+    return await pack_links(a, look == 'cut')
 
 
 class Visit(BaseModel):
@@ -550,6 +557,8 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
             q['asset_labels'] = [r.get('label', '') for r in q.get('q_refs', [])]
         if q.get('render_mode') == 'source':
             q['text'] = '' if q['asset_count'] else q.get('accessible_text', '')
+        if q.get('c_refs'):
+            q['pieces'] = pieces_of(q)
     from .insights import insights
     from .reviews import states_for, review_summary
     a['review_states'] = await states_for(a)
@@ -588,7 +597,7 @@ async def asset(
     from .attempt_status import owned_header
     from .packs import question
     a = await owned_header(id, u)
-    if kind not in ['question', 'solution'] or kind == 'solution' and (a['status'] != 'completed' or answers_sealed(a, a['_database_now'])):
+    if kind not in ['question', 'solution', 'piece'] or kind == 'solution' and (a['status'] != 'completed' or answers_sealed(a, a['_database_now'])):
         raise HTTPException(403, 'Solution assets remain private until submission.')
     pack_id = a.get('pack_id')
     if a['status'] == 'completed' and score_version and score_version != 'original':
@@ -603,7 +612,7 @@ async def asset(
         q = next(iter((legacy or {}).get('questions', [])), None)
     if not q or (a['status'] == 'active' and q.get('bonus') and not a.get('bonus_unlocked_at')):
         raise HTTPException(404, 'Question not found.')
-    refs = q.get("q_refs" if kind == "question" else "s_refs", [])
+    refs = q.get({"question": "q_refs", "piece": "c_refs"}.get(kind, "s_refs"), [])
     if not 0 <= index < len(refs):
         raise HTTPException(404, "Asset not found.")
     f = await get(files, refs[index]["file_id"])

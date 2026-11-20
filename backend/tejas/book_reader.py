@@ -17,6 +17,10 @@ CELL_NUMBER=re.compile(r'\d{1,3}')
 CELL_KEY=re.compile(r'\(?[A-D]\)?|[+\-\u2212]?\d{1,20}')
 # A printed key needs 'is', ':' or a bracket after the cue, so prose such as 'could then answer a different' is not a key.
 ANSWER_NEAR=re.compile(r'\b(?:[Aa]nswer|ANSWER|Ans\.?|[Cc]orrect[ \t]+(?:option|answer))[ \t]*(?:(?:is[ \t]+|[:=\-][ \t]*)[\[(]?|[\[(])[ \t]*([A-D](?![A-Za-z])|[+\-]?\d+(?![\d.]))')
+# An answer-entry line printed under a numerical question ('Numerical response ____'); it is not a section heading.
+ENTRY=re.compile(r'^(?:numerical|numeric|integer)\s+(?:response|answer|value|entry)\s*[:\-]?[\s_.]*$',re.I)
+# A group label printed between questions, ending with the questions it announces: 'Two chapters (Q31–Q50)'.
+GROUP=re.compile(r'\(\s*Q\.?\s*(\d{1,3})\s*[\u2013\u2014\-]\s*Q?\.?\s*\d{1,3}\s*\)\s*$',re.I)
 TOP,BOTTOM=.06,.94
 # Big bracket pieces (⎛ ⎜ ⎝, private-use TeX extension glyphs, or fonts mapping them to '"' and '#') printed as their own spans.
 DELIMITER=re.compile(r'[\uf8e0-\uf8ff\u239b-\u23ad()\[\]{}|"#]+')
@@ -44,8 +48,8 @@ def anchor_of(line):
     return found if found and 1<=found[0]<=600 else None
 
 
-def key_cells(body):
-    """Answer-key tables printed as Q | Key cell pairs, read row by row."""
+def key_cells(body,least=10):
+    """Answer-key tables printed as Q | Key cell pairs (a source column may sit between them), read row by row."""
     cells=sorted((x for x in body if CELL_NUMBER.fullmatch(x['text'].strip()) or CELL_KEY.fullmatch(x['text'].strip())),key=lambda x:(x['rect'][1]+x['rect'][3])/2)
     rows=[]
     for c in cells:
@@ -57,10 +61,13 @@ def key_cells(body):
         row.sort(key=lambda x:x['rect'][0]);i=0
         while i+1<len(row):
             q,k=row[i],row[i+1]
-            if CELL_NUMBER.fullmatch(q['text'].strip()) and CELL_KEY.fullmatch(k['text'].strip()) and 0<k['rect'][0]-q['rect'][2]<.15 and 1<=int(q['text'])<=600:
+            gap=k['rect'][0]-q['rect'][2]
+            # A wider gap is one table row only when another cell (such as the question's source) is printed inside it.
+            between=.15<=gap<.32 and any(x is not q and x is not k and q['rect'][2]<=x['rect'][0] and x['rect'][2]<=k['rect'][0] and abs((x['rect'][1]+x['rect'][3])/2-(q['rect'][1]+q['rect'][3])/2)<.006 for x in body)
+            if CELL_NUMBER.fullmatch(q['text'].strip()) and CELL_KEY.fullmatch(k['text'].strip()) and (0<gap<.15 or between) and 1<=int(q['text'])<=600:
                 pairs.append((int(q['text']),k['text'].strip().strip('()').replace('\u2212','-').upper(),[q['rect'][0],min(q['rect'][1],k['rect'][1]),k['rect'][2],max(q['rect'][3],k['rect'][3])]));i+=2
             else:i+=1
-    return pairs if len(pairs)>=10 and len({p[0] for p in pairs})==len(pairs) else []
+    return pairs if len(pairs)>=least and len({p[0] for p in pairs})==len(pairs) else []
 
 
 def pad(rect):
@@ -174,7 +181,7 @@ def scan_headers(lines, text, context, issues):
         if chapters and exercise(value):headers.append((line['rect'][1],'subject',exercise(value)))
         section=SECTION.match(value)
         if section and len(value)<90:headers.append((line['rect'][1],'numeric',section[1].lower()=='b' or bool(NUMERIC.search(value))))
-        elif NUMERIC_HEAD.match(value):headers.append((line['rect'][1],'numeric',True))
+        elif NUMERIC_HEAD.match(value) and not ENTRY.match(value):headers.append((line['rect'][1],'numeric',True))
         passage=PASSAGE.match(value)
         if passage:headers.append((line['rect'][1],'shared',(int(passage[1]),int(passage[2] or passage[1]))))
         a=anchor_of(line)
@@ -230,6 +237,10 @@ def read_page(lines, previous, geometry=(), images=()):
             keys,context=read_keys(margin+upper,upper,pairs,context)
             rest,context=read_page(margin+[x for x in body if x['rect'][1]>=split-.002],context,[g for g in geometry if g[1]>=split-.004],[b for b in images if b[1]>=split-.004])
             return page_map('mixed',keys.regions+rest.regions,keys.issues+rest.issues),context
+    if context.get('plan') and context.get('role')=='key' and not any(anchor_of(x) for x in body):
+        # The book's own bookmarks say this page is an answer key: a table of bare numbers is read as one.
+        pairs=key_cells(body,3)
+        if pairs:return read_keys(lines,body,pairs,context)
     headers,anchors=scan_headers(lines,text,context,issues)
     page_role=next((v for y,k,v in headers if k=='role' and y<0),context.get('role'))
     if any(k=='mock' and v!=context.get('mock') for _,k,v in headers):page_role='question'
@@ -323,6 +334,19 @@ def read_page(lines, previous, geometry=(), images=()):
         if breaks:end=min(breaks)
         if end<=top:continue
         rect=[.02 if col==0 else .5,top,.49 if two and col==0 else .98,min(end,.999)]
+        entry=[x for x in body if ENTRY.match(x['text'].strip()) and y<x['rect'][1]<end and rect[0]-.01<=x['rect'][0]<rect[2]]
+        if entry:
+            # The answer-entry box is not part of the question: the picture ends above it (above its ruled box when it has one).
+            e=entry[0]['rect'];inside=[g[1] for g in geometry if g[0]<=e[0]+.002 and g[2]>=e[2]-.002 and y+.02<g[1]<=e[1]+.002 and g[3]>=e[3]-.002 and g[3]-g[1]<.2]
+            end=max(top+.01,(max(inside) if inside else e[1])-.004);rect[3]=min(rect[3],end)
+        group=[x for x in body if kind=='anchor' and y+.01<x['rect'][1]<end and rect[0]-.01<=x['rect'][0]<rect[2] and (m:=GROUP.search(x['text'].strip())) and int(m[1])==item[1][0]+1]
+        if group:
+            # A group label such as 'Two chapters (Q31–Q50)' announces the questions after this one: this question's picture ends above it (above its banner when it has one).
+            g0=min(group,key=lambda x:x['rect'][1])['rect']
+            row=[x['rect'] for x in body if abs((x['rect'][1]+x['rect'][3])-(g0[1]+g0[3]))<.012 and rect[0]-.01<=x['rect'][0]<rect[2]]
+            label_top=min(r[1] for r in row);label_left=min(r[0] for r in row)
+            banner=[g[1] for g in geometry if g[0]<=label_left+.002 and g[2]>=g0[2]-.002 and y+.02<g[1]<=label_top+.002 and g[3]>=g0[3]-.002 and g[3]-g[1]<.2]
+            end=max(top+.01,min(banner+[label_top])-.004);rect[3]=min(rect[3],end)
         printed=[b for b in [x['rect'] for x in body]+[g for g in geometry if ceiling<g[3] and g[1]<BOTTOM] if top-.004<=b[1]<end and min(rect[2],b[2])-max(rect[0],b[0])>.002]
         if printed:rect[3]=min(rect[3],max(b[3] for b in printed)+.012)  # no blank page tail under the last line or figure
         value='\n'.join(x['text'] for x in body if rect[0]-.01<=x['rect'][0]<rect[2] and top<=x['rect'][1]<end)
@@ -358,7 +382,7 @@ def read_page(lines, previous, geometry=(), images=()):
         if not local.get('mock'):issues.append('Mock identity needs an explicit heading or owner mapping.')
         if not local.get('subject') and role=='question':issues.append('Subject/section identity needs confirmation.')
         consecutive=number in (1,last.get(role,0)+1);last[role]=number
-        kind_of='mcq' if family else 'integer' if role=='question' and (local.get('numeric') or NUMERIC.search(footer_text)) else 'unresolved'
+        kind_of='mcq' if family else 'integer' if role=='question' and (entry or local.get('numeric') or NUMERIC.search(footer_text)) else 'unresolved'
         if role=='question' and kind_of=='unresolved':
             if not any(s[0]==col for s in starts[i+1:]) and end>=foot-.001:carry={'mock':local.get('mock',''),'subject':local.get('subject',''),'number':number}
             else:issues.append(f'Q{number}: confirm response type, options and continuation.')

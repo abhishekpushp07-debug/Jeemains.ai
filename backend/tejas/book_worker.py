@@ -180,13 +180,14 @@ async def step(job):
                 await db.tejas_book_allowances.replace_one({'_id':a.id},a.to_mongo())
                 more=a.state=='queued'
             book.state='matching';await save_book(book,token)
-            await rebuild(book,token)
+            cutting=await rebuild(book,token,source)
             await renew(book,token)
-            more=await publish_batch(book,token,source) or more
+            more=cutting or await publish_batch(book,token,source) or more
             mocks=await mocks_for(book)
             book.state='matching' if more else 'attention_needed' if not mocks or any(m.state=='held' for m in mocks) else 'published' if all(m.state in ('published','scheduled') for m in mocks) else 'ready'
             published=sum(m.state in ('published','scheduled') for m in mocks)
-            p['message']=(f'Publishing clean mocks in batches: {published} of {len(mocks)} released so far.' if more else
+            p['message']=('Cutting every question into its question and its options. Mocks arrive one by one.' if cutting else
+                f'Publishing clean mocks in batches: {published} of {len(mocks)} released so far.' if more else
                 'Clean mocks are isolated from held content. Review the book map and Attention Needed queue.')
             p['metrics']={'native_pages':await db.tejas_book_pages.count_documents({'book_id':id,'provenance.kind':'native'}),
                 'manually_repaired_pages':await db.tejas_book_pages.count_documents({'book_id':id,'provenance.kind':'owner_repair'}),

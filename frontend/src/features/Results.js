@@ -26,6 +26,7 @@ import {
   Confirm,
 } from "../components/Shared";
 import { QuestionContent, MathText } from "../components/QuestionContent";
+import { PieceReview } from "../components/QuestionPieces";
 import { ResultsAnalyticsWorkspace } from '../components/results/ResultsAnalyticsWorkspace';
 import { ResultsReflectionStrip } from '../components/results/ResultsReflectionStrip';
 import { EmbargoedResult, DeletedResult } from '../components/results/EmbargoedResult';
@@ -425,11 +426,11 @@ function ResultsView() {
             </div>
               <div className="review-expanded" data-testid="selected-question-solution-panel" aria-label={'Question ' + q.number + ' and solution'}>
                 {analysis.data && <SolutionInsight q={insight[q.id]} an={analysis.data} />}
-                <QuestionContent
+                {q.pieces?.length ? <PieceReview key={q.id} q={q} attemptId={id} gradeVersion={scoreVersion} /> : <QuestionContent
                   question={q}
                   base={`/attempts/${id}/questions/${q.id}`}
                   gradeVersion={scoreVersion}
-                />
+                />}
                 {q.render_mode !== "source" && q.type === "mcq" && (
                   <div className="review-options">
                     {Object.entries(q.options).map(([k, v]) => (
@@ -439,7 +440,7 @@ function ResultsView() {
                     ))}
                   </div>
                 )}
-                {q.render_mode === "source" && q.type === "mcq" && Object.keys(q.typed_options || {}).length > 0 && (
+                {!q.pieces?.length && q.render_mode === "source" && q.type === "mcq" && Object.keys(q.typed_options || {}).length > 0 && (
                   <div className="review-options" data-testid={'review-typed-options-' + q.number}>
                     {Object.entries(q.typed_options).map(([k, v]) => (
                         <div key={k} className="review-option-math"><strong>{k}.</strong> <MathText text={v} /></div>
