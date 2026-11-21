@@ -2,6 +2,9 @@
 import math
 import time
 import asyncio
+import logging
+from bisect import bisect_right
+from itertools import accumulate
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
@@ -16,6 +19,9 @@ from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, GEM_SHOP, QUESTS, SHOP, SH
 from exam_groups import ACTIVE_EXAMS, Exam, require_active_exam
 
 IST = timezone(timedelta(hours=5, minutes=30))
+logger = logging.getLogger("jeelive")
+LADDER_SECONDS = 30  # the least time between two passes over the XP index (see build_ladder)
+LADDER_QUICK = 0.05  # a pass this fast (seconds) is waited for; a slower one runs in the background
 BADGES = {
     "first_sprint": ("First Sprint", "Finished your first Rapid Fire session"),
     "first_win": ("First Blood", "Won your first duel"),
@@ -153,6 +159,54 @@ def make_router(db, rf_user):
     board_cache = {}
     rank_cache = {}  # (exam, uid) -> (when, xp, rank)
     board_locks = {exam: asyncio.Lock() for exam in ACTIVE_EXAMS}
+    ladders = {}  # exam -> (XP values in rising order, players at or above each value, QA players as (xp, uid))
+    ladder_due = {}  # exam -> when the next pass over the XP index may start (monotonic clock)
+    ladder_wait = {}  # exam -> from when a rank waits for the pass in progress instead of reading the ladder already there
+    ladder_tasks = {}  # exam -> the pass running now
+
+    async def build_ladder(exam: str):
+        """How many players stand at each XP: one pass over the XP index answers "how many are above me?" for everybody.
+        Before, each student's own rank made the database walk every player above them (half of all players on
+        average) whenever their lobby opened. QA players (TEST…) are a handful, read through their own indexes and left out."""
+        began, field = time.monotonic(), f"exam_stats.{exam}.xp"
+        try:
+            # Two lists come back (XP values in rising order, players on each) instead of one small document per value.
+            doc = await (await db.rf_profiles.aggregate([{"$match": {field: {"$gt": 0}}}, {"$group": {"_id": "$" + field, "n": {"$sum": 1}}}, {"$sort": {"_id": 1}},
+                                                         {"$group": {"_id": None, "xp": {"$push": "$_id"}, "n": {"$push": "$n"}}}])).to_list(1)
+            values, counts = (doc[0]["xp"], doc[0]["n"]) if doc else ([], [])
+            qa = [(p.get("exam_stats", {}).get(exam, {}).get("xp", 0), p["uid"]) for p in await db.rf_profiles.find(
+                {"$or": [{"uid": {"$regex": "^TEST"}}, {"name": {"$regex": "^TEST"}}], field: {"$gt": 0}}, {"_id": 0, "uid": 1, field: 1}).to_list(None)]
+            if qa:
+                where = {xp: i for i, xp in enumerate(values)}
+                for xp, _ in qa:
+                    if xp in where:
+                        counts[where[xp]] -= 1
+            ladders[exam] = (values, list(accumulate(reversed(counts)))[::-1] + [0], qa)
+            # A pass starts only when somebody asks for a rank, so after a quiet spell the ladder can be hours old.
+            # A quick pass (a small crowd) is therefore simply waited for whenever it is due. A long pass (a huge crowd,
+            # where somebody is always asking) runs in the background; its ladder answers until it is two gaps old.
+            took = time.monotonic() - began
+            gap = max(LADDER_SECONDS, 100 * took)
+            ladder_wait[exam] = time.monotonic() + (gap if took < LADDER_QUICK else 2 * gap)
+        except Exception:  # noqa: BLE001 - a failed pass keeps the ladder already there; ranks never fail because of it
+            logger.exception("XP ladder pass failed")
+        finally:
+            # The pass reads the whole XP index, so it runs at most every 30 s and never takes more than about 1% of
+            # the time (with a million players it comes every few minutes; a rank that deep does not move faster).
+            ladder_due[exam] = time.monotonic() + max(LADDER_SECONDS, 100 * (time.monotonic() - began))
+            ladder_tasks.pop(exam, None)
+
+    async def ladder(exam: str) -> Optional[tuple]:
+        """The ladder this server has now. A new pass starts when one is due. While players keep asking, nobody waits for
+        a long pass (the ladder there is at most two gaps old); a quick pass, the very first one and a pass after a quiet
+        spell are waited for (2 s at most), so a rank is never read from a ladder older than that. None only when the
+        first pass of a huge crowd is still running."""
+        task = ladder_tasks.get(exam)
+        if not task and time.monotonic() >= ladder_due.get(exam, 0):
+            task = ladder_tasks[exam] = asyncio.create_task(build_ladder(exam))
+        if task and time.monotonic() >= ladder_wait.get(exam, 0):
+            await asyncio.wait([task], timeout=2)
+        return ladders.get(exam)
 
     async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE",
                     diamonds: Optional[dict] = None, phoenix_streak: int = 0, meta: Optional[dict] = None) -> dict:
@@ -291,13 +345,24 @@ def make_router(db, rf_user):
                           "xp": stats.get("xp", 0), "level": level_of(stats.get("xp", 0)), "wins": stats.get("wins", 0), "crown": crown_of(row)})
         mine = await db.rf_profiles.find_one({"uid": uid}, {"_id": 0, "exam_stats": 1, "name": 1}) or {}
         xp = mine.get("exam_stats", {}).get(exam, {}).get("xp", 0)
-        rank = None
-        if xp > 0 and not uid.startswith("TEST") and not mine.get("name", "").startswith("TEST"):
+        rank = next((item["rank"] for item in items if item["you"]), None)  # on the list: the place shown there, so both always agree
+        if not rank and xp > 0 and not uid.startswith("TEST") and not mine.get("name", "").startswith("TEST"):
             hit = rank_cache.get((exam, uid))
-            if hit and hit[1] == xp and time.time() - hit[0] < 30:  # counting everyone above you is the costly part
+            if hit and hit[1] == xp and time.time() - hit[0] < 30:
                 rank = hit[2]
             else:
-                rank = 1 + await db.rf_profiles.count_documents({**query, "$or": [{field: {"$gt": xp}}, {field: xp, "uid": {"$lt": uid}}]})
+                # Above you: everyone with more XP (read off the shared ladder), then the players level with you whose
+                # id sorts first (a short read of the index: only the players on exactly your XP, never everyone above).
+                steps = await ladder(exam)
+                if steps:
+                    values, at_or_above, qa = steps
+                    level = await db.rf_profiles.count_documents({field: xp, "uid": {"$lt": uid}})
+                    rank = 1 + at_or_above[bisect_right(values, xp)] + max(0, level - sum(1 for x, u in qa if x == xp and u < uid))
+                else:  # this server's first moments, before its ladder is ready: the full count (QA players taken off)
+                    above = {"$or": [{field: {"$gt": xp}}, {field: xp, "uid": {"$lt": uid}}]}
+                    everyone, qa_above = await asyncio.gather(db.rf_profiles.count_documents(above), db.rf_profiles.count_documents(
+                        {"$and": [above, {"$or": [{"uid": {"$regex": "^TEST"}}, {"name": {"$regex": "^TEST"}}]}]}))
+                    rank = 1 + everyone - qa_above
                 if len(rank_cache) > 100_000:
                     rank_cache.clear()
                 rank_cache[(exam, uid)] = (time.time(), xp, rank)

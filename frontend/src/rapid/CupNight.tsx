@@ -66,11 +66,12 @@ export function CupNightBanner({ uid, testID = "rf-cup-night" }: { uid: string; 
   }, [reload]));
   const s = n ? nightState(n, now) : null, key = s?.key;
   useEffect(() => { if (key) reload(); }, [key]); // eslint-disable-line react-hooks/exhaustive-deps
+  const front = useScreenInFront();
   useEffect(() => {
-    if (key !== "drawing") return;
+    if (key !== "drawing" || !front) return;
     const iv = setInterval(reload, 3000 + Math.random() * 2000);
     return () => clearInterval(iv);
-  }, [key, reload]);
+  }, [key, front, reload]);
   if (!n || !s) return null;
   const [kicker, line, cta] = LINES[s.key](n, s.left);
   const mine = n.cups.find((c) => c.mine), hot = s.key === "mine" || s.key === "live" || s.key === "drawing";

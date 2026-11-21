@@ -224,7 +224,8 @@ def make_router(db, rf_user):
         uid = rf_user(x_rf_user)
         await member_gang(gid, uid, leader=True)
         await db.rf_gangs.update_one({"id": gid}, {"$set": {"closed": True}})
-        await db.rf_challenges.update_many({"gang_id": gid, "status": "open"}, {"$set": {"status": "cancelled"}})
+        # "$type" names the gang index on challenges (it only holds challenges made inside a gang); without it Mongo read every challenge ever made.
+        await db.rf_challenges.update_many({"gang_id": {"$eq": gid, "$type": "string"}, "status": "open"}, {"$set": {"status": "cancelled"}})
         return {"ok": True}
 
     @r.post("/{gid}/members")

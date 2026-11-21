@@ -132,9 +132,11 @@ def test_answer_validation_and_counters(db):
             before = (await c.get("/../health/load")).json() if False else httpx.get("http://127.0.0.1:8001/api/health/load", timeout=10).json()
             d = await rival_match(c)
             await asyncio.sleep(max(0, d["start_at"] - d["server_now"]) + 0.2)
-            for bad in ({"index": 30, "outcome": "answer", "choice": 1}, {"index": -1, "outcome": "answer", "choice": 1},
+            for bad in ({"index": 100, "outcome": "answer", "choice": 1}, {"index": -1, "outcome": "answer", "choice": 1},  # a round has at most 100 cards
                         {"index": 0, "outcome": "answer", "choice": 5}, {"index": 0, "outcome": "cheat"}, {"index": 0, "outcome": "answer", "choice": 1, "score": 99}):
                 assert (await c.post(f"/duels/{d['id']}/answer", json=bad)).status_code == 422, bad
+            beyond = await c.post(f"/duels/{d['id']}/answer", json={"index": 30, "outcome": "answer", "choice": 1})  # this match has 30 cards
+            assert beyond.status_code == 400 and beyond.json()["detail"] == "Unknown card."
             r0 = (await c.post(f"/duels/{d['id']}/answer", json={"index": 0, "outcome": "timed_out"})).json()
             assert r0["outcome"] == "timed_out" and r0["score"] == 0
             r1 = (await c.post(f"/duels/{d['id']}/answer", json={"index": 1, "outcome": "answer", "choice": 0})).json()

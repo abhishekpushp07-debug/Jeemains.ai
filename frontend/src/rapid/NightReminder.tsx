@@ -6,6 +6,7 @@ import Animated, { FadeInUp, useReducedMotion } from "react-native-reanimated";
 import { useAuth } from "@/src/auth";
 import { T, buzz } from "@/src/components/ui";
 import { arena } from "@/src/theme";
+import { useScreenInFront } from "@/src/motion";
 import { Alive, GameIcon } from "./Art";
 import { Panel, RaisedButton } from "./arena";
 import { LiveDot } from "./juice";
@@ -18,13 +19,14 @@ export function NightReminder({ floating }: { floating?: boolean }) {
   const n = inbox?.notices.find((x) => x.kind === "cup_night" && x.night);
   const [closed, setClosed] = useState(""); // gone at once on this phone, before the server answers
   const [, tick] = useState(0);
-  const id = n?.id;
+  const id = n?.id, front = useScreenInFront();
+  // Every open arena screen holds a reminder: only the one in front buzzes and counts down.
+  useEffect(() => { if (id && front && Platform.OS !== "web") buzz("warning"); }, [id]); // eslint-disable-line react-hooks/exhaustive-deps -- browsers block vibration until the page is tapped
   useEffect(() => {
-    if (!id) return;
-    if (Platform.OS !== "web") buzz("warning"); // browsers block vibration until the page is tapped
+    if (!id || !front) return;
     const iv = setInterval(() => tick((k) => k + 1), 1000);
     return () => clearInterval(iv);
-  }, [id]);
+  }, [id, front]);
   if (!n?.night || !user || closed === n.id) return null;
   const left = Math.max(0, Math.round(n.night.starts_in - inboxAge()));
   if (!left) return null;

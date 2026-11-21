@@ -8,7 +8,9 @@ from collections import Counter, OrderedDict
 import json
 import time
 
-BUDGET_BYTES, MAX_ENTRY_BYTES, MAX_ENTRIES, MAX_FLIGHTS = 6 * 1024 * 1024, 1024 * 1024, 64, 64
+# The budget must hold every subject's card pool at once: when it was smaller than the pools of a PCM Mixed round, each
+# new round pushed one pool out and read thousands of cards from the database again (tools/db_audit.py shows it).
+BUDGET_BYTES, MAX_ENTRY_BYTES, MAX_ENTRIES, MAX_FLIGHTS = 24 * 1024 * 1024, 2 * 1024 * 1024, 64, 64
 
 
 class MetadataCache:

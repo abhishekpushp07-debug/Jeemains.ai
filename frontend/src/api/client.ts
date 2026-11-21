@@ -266,7 +266,7 @@ export async function apiBytes(path: string, retry = true, epoch = authEpoch): P
 async function fetchPrivateAsset(path: string, signal: AbortSignal, extraHeaders: Record<string, string> = {}, retry = true, epoch = authEpoch): Promise<ImageResponse> {
   requireEpoch(epoch);
   const revision = tokenRevision;
-  if (!/^\/attempts\/[^/]+\/questions\/[^/]+\/asset\/(question|solution)\/\d+(\?score_version=[^&]+)?$/.test(path)) throw new ApiError("Unsupported private image path.");
+  if (!/^\/attempts\/[^/]+\/questions\/[^/]+\/asset\/(question|solution|piece)\/\d+(\?score_version=[^&]+)?$/.test(path)) throw new ApiError("Unsupported private image path.");
   const h = await headers(false);
   h.Accept = "image/png,image/*";
   Object.assign(h, extraHeaders);

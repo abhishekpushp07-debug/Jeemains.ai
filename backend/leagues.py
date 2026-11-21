@@ -3,7 +3,9 @@
 Friends League: you and your friends ranked by the week's XP (Monday to Sunday, IST); last week's top 3 collect coins.
 Gang War board: the top 100 scorers of every Gang vs Gang battle ever played (no weekly table).
 """
+import asyncio
 import time
+from bisect import bisect_left
 from typing import Optional
 
 from fastapi import APIRouter, Header, HTTPException
@@ -41,8 +43,8 @@ def make_router(db, rf_user):
     async def circle(uid):
         """Me and my friends."""
         hidden = await blocked_uids(db, uid)
-        fids = [e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500) if e["fid"] not in hidden]
-        profs = await db.rf_profiles.find({"uid": {"$in": [uid, *fids]}}).to_list(len(fids) + 1)
+        fids = [e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).batch_size(500).to_list(500) if e["fid"] not in hidden]
+        profs = await db.rf_profiles.find({"uid": {"$in": [uid, *fids]}}).batch_size(len(fids) + 1).to_list(len(fids) + 1)
         return profs if any(p["uid"] == uid for p in profs) else [*profs, {"uid": uid}]
 
     def table(profs, uid, value):
@@ -87,31 +89,35 @@ def make_router(db, rf_user):
               {"$group": {"_id": "$players.uid", "score": {"$sum": "$players.score"}, "matches": {"$sum": 1},
                           "wins": {"$sum": {"$cond": [{"$in": ["$players.uid", {"$ifNull": ["$winners", []]}]}, 1, 0]}}}}]
     order = {"$sort": {"score": -1, "wins": -1, "_id": 1}}
-    top_cache: dict = {}
+    standings_cache: dict = {}
+    standings_lock = asyncio.Lock()
 
-    async def top():
-        hit = top_cache.get("t")
-        if hit and time.time() - hit[0] < 20:
-            return hit[1]
-        rows = await (await db.rf_duels.aggregate([*totals, order, {"$limit": BOARD_SIZE}])).to_list(BOARD_SIZE)
-        top_cache["t"] = (time.time(), rows)
-        return rows
+    async def standings():
+        """Every Gang War player's total, in board order: (top rows, everyone's (-score, -wins) in order, totals by player).
+        One pass over the battles every 20 s serves everybody, whatever their rank. Before, each player outside the top
+        100 made the database add up every battle again, twice, on every look."""
+        async with standings_lock:
+            hit = standings_cache.get("t")
+            if hit and time.time() - hit[0] < 20:
+                return hit[1]
+            rows = await (await db.rf_duels.aggregate([*totals, order], allowDiskUse=True)).to_list(None)
+            value = (rows[:BOARD_SIZE], [(-x["score"], -x["wins"]) for x in rows], {x["_id"]: x for x in rows})
+            standings_cache["t"] = (time.time(), value)
+            return value
 
     @r.get("/gangwar")
     async def gang_war_board(x_rf_user: Optional[str] = Header(None)):
         """Everyone who played Gang vs Gang, ranked by the points they scored for their gang. Top 100, all time."""
         uid = rf_user(x_rf_user)
-        rows = await top()
+        rows, keys, mine_of = await standings()
         profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [x["_id"] for x in rows] + [uid]}}).to_list(len(rows) + 1)}
         items = [{"rank": i + 1, "pid": (profs.get(x["_id"]) or {}).get("pid"), "name": public_name(profs.get(x["_id"]) or {}), "avatar": safe_avatar((profs.get(x["_id"]) or {}).get("avatar")),
                   "frame": equipped_of(profs.get(x["_id"]) or {}).get("frame"), "level": level_of((profs.get(x["_id"]) or {}).get("xp", 0)),
                   "score": x["score"], "matches": x["matches"], "wins": x["wins"], "you": x["_id"] == uid, "crown": crown_of(profs.get(x["_id"]) or {})} for i, x in enumerate(rows)]
         me = next((x for x in items if x["you"]), None)
-        if not me:
-            mine = await (await db.rf_duels.aggregate([{"$match": {"team_mode": True, "status": "finished", "players.uid": uid}}, *totals[1:], {"$match": {"_id": uid}}])).to_list(1)
-            if mine:
-                ahead = await (await db.rf_duels.aggregate([*totals, {"$match": {"$or": [{"score": {"$gt": mine[0]["score"]}}, {"score": mine[0]["score"], "wins": {"$gt": mine[0]["wins"]}}]}}, {"$count": "n"}])).to_list(1)
-                me = {"rank": (ahead[0]["n"] if ahead else 0) + 1, "score": mine[0]["score"], "matches": mine[0]["matches"], "wins": mine[0]["wins"]}
+        if not me and uid in mine_of:  # outside the top 100: everyone with a higher score, or the same score and more wins, is ahead
+            mine = mine_of[uid]
+            me = {"rank": bisect_left(keys, (-mine["score"], -mine["wins"])) + 1, "score": mine["score"], "matches": mine["matches"], "wins": mine["wins"]}
         return {"items": items, "you": {k: me[k] for k in ("rank", "score", "matches", "wins")} if me else None, "size": BOARD_SIZE}
 
     return r

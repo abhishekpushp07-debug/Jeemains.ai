@@ -10,6 +10,7 @@ import { AVATAR_IMAGES } from "@/src/avatars";
 import { Emblem, PhoenixDiamond } from "@/src/rapid/Art";
 import { rnd } from "@/src/rapid/juice";
 import { playSfx } from "@/src/sfx";
+import { useStill } from "@/src/motion";
 import { arena, fx, gemColors } from "@/src/theme";
 
 /** The original Colosseum of Rome, packed and roaring: every entry show happens on its sand. */

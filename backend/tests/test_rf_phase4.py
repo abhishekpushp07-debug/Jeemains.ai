@@ -110,6 +110,8 @@ async def _night(db, api, u, tag):
         assert (await api.get("/cups/night", a)).json()["cups"][0]["status"] in ("live", "finished")
     finally:
         await db.rf_cups.delete_many({"night": day, "players.uid": {"$in": [x["uid"] for x in u.values()]}})
+        # These players' seats are kept but moved off tonight (seats are counted and drawn by `day`), so the next run starts from an empty night.
+        await db.rf_night_seats.update_many({"day": day, "uid": {"$in": [x["uid"] for x in u.values()]}}, {"$set": {"day": "left:" + day}})
         if before and any(not x.startswith("TEST") for x in before.get("uids", [])):
             await db.rf_cup_nights.replace_one({"_id": day}, before)
         else:

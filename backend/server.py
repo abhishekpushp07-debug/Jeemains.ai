@@ -438,14 +438,19 @@ async def rf_complete(sid: str, data: SessionComplete, x_rf_user: Optional[str] 
                "timed_out": count("timed_out"), "answered": answered, "score": correct,
                "accuracy": round(100 * correct / answered, 1) if answered else None,
                "revise_topics": [k for k, _ in sorted(weak.items(), key=lambda x: -x[1])][:5]}
-    await db.rf_sessions.update_one({"id": sid, "status": "active"}, {"$set": {"status": "completed", "results": rows,
-                                    "summary": summary, "completed_at": now_iso()}})
-    s = RfSession.from_mongo(await db.rf_sessions.find_one({"id": sid}))
+    done = await db.rf_sessions.find_one_and_update({"id": sid, "status": "active"}, {"$set": {"status": "completed", "results": rows, "summary": summary, "completed_at": now_iso()}},
+                                                    return_document=ReturnDocument.AFTER)  # the write hands back the finished sprint: no second read
+    s = RfSession.from_mongo(done or await db.rf_sessions.find_one({"id": sid}))  # not ours to finish: a twin request did it, or it ran out
+    if s.status != "completed":  # left open for over a day and closed by the server: it has no score to pay (this used to answer 500)
+        raise HTTPException(409, "This sprint ran out of time. Start a new one.")
     await record_learning(db, uid, "solo:" + sid, s.exam, s.results, list(cards.values()), s.completed_at)
     # Diamonds come from fresh sprints only: replays of the same missed cards never earn them.
     gems, best = phoenix([r["outcome"] for r in s.results]) if s.mode == "fresh" else ({}, 0)
     reward = await award(uid, "solo:" + sid, "solo", s.summary["correct"], s.summary["total"], s.summary["answered"], exam=s.exam, diamonds=gems, phoenix_streak=best)
     return {**s.model_dump(exclude={"mongo_id", "user_id"}), "reward": reward}
+
+
+history_totals: dict = {}  # (player, exam) -> (newest finished sprint, read_at, all-time totals)
 
 
 @api.get("/rf/history")
@@ -459,11 +464,19 @@ async def rf_history(exam: Optional[Exam] = None, x_rf_user: Optional[str] = Hea
            await db.rf_awards.find({"uid": uid, "ref": {"$in": ["solo:" + d["id"] for d in docs]}}, {"_id": 0, "ref": 1, "reward.diamonds": 1}).to_list(20)}
     for d in docs:
         d["diamonds"] = won.get("solo:" + d["id"], {})
+    # All-time totals change only when another sprint is finished, so they are added up again only then (a look at the
+    # newest finished sprint tells), and at least every 5 minutes. Before, every look added up every sprint ever played.
+    newest, hit = docs[0]["completed_at"] if docs else None, history_totals.get((uid, exam))
+    if hit and hit[0] == newest and time.monotonic() - hit[1] < 300:
+        return {"items": docs, "totals": dict(hit[2])}
     agg = await (await db.rf_sessions.aggregate([{"$match": query},
                                           {"$group": {"_id": None, "sessions": {"$sum": 1}, "correct": {"$sum": "$summary.correct"},
                                                       "cards": {"$sum": "$summary.total"}}}])).to_list(1)
     totals = agg[0] if agg else {"sessions": 0, "correct": 0, "cards": 0}
     totals.pop("_id", None)
+    if len(history_totals) > 20_000:
+        history_totals.clear()
+    history_totals[(uid, exam)] = (newest, time.monotonic(), dict(totals))
     return {"items": docs, "totals": totals}
 
 
@@ -717,6 +730,17 @@ async def setup_database():
     elif not (await db.rf_events.options()).get("capped"):
         await db.command("convertToCapped", "rf_events", size=EVENTS_BYTES)
     await db.rf_sessions.create_index([("status", 1), ("created_at", 1)])
+    # Database audit at crowd scale (tools/db_audit.py): each index below turns a read of a player's whole history, or
+    # of every waiting match, into a read of only the rows that are needed.
+    await db.rf_sessions.create_index([("user_id", 1), ("exam", 1), ("created_at", -1)])  # the last 40 sprints (cards already seen), on every new round
+    await db.rf_duels.create_index([("players.uid", 1), ("status", 1), ("finished_ts", -1)])  # a player's matches, newest first (profile, Badla, head-to-head)
+    await db.rf_duels.create_index("request_id")  # a repeated "new match" request finds its match directly
+    # Quick match: the oldest waiting seat on exactly this battleground. Only waiting quick matches are in this index, so it stays tiny.
+    await db.rf_duels.create_index([("exam", 1), ("scope_key", 1), ("cards_n", 1), ("created_ts", 1)], name="quick_match_waiting",
+                                   partialFilterExpression={"status": "waiting", "mode": "random"})
+    await db.rf_profiles.create_index("name")  # a rank counts QA players (TEST…) out without reading every profile above
+    # Closing a gang cancels its open challenges; only challenges made inside a gang are in this index, so it stays small.
+    await db.rf_challenges.create_index([("gang_id", 1), ("status", 1)], name="gang_challenges", partialFilterExpression={"gang_id": {"$type": "string"}})
     await daily_indexes(db)
     await db.rf_dreams.create_index("uid", unique=True)
     # One report per player per gang (reports are upserted on gang + player). Reports are never deleted at startup: if old

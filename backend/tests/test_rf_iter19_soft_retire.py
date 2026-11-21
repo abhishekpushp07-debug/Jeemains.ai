@@ -68,12 +68,12 @@ def test_httpx_pinned_and_importable():
     assert httpx.__version__ == re.search(r"httpx==([\d.]+)", req).group(1)
 
 
-# Catalog counts equal non-retired DB counts (~11k)
+# Catalog counts equal non-retired DB counts (16,158 since the June 2026 expansion; the bank only grows)
 def test_catalog_matches_non_retired():
     cat = requests.get(f"{BASE_URL}/api/rf/catalog").json()
     total = sum(s["total"] for s in cat["subjects"])
     assert total == mdb.rf_cards.count_documents({"exam": "JEE", "retired": {"$ne": True}})  # the catalogue is JEE only (NEET is archived)
-    assert 5000 <= total <= 12000
+    assert total >= 5000
 
 
 # Solo sprint returns 30 non-retired cards

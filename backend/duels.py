@@ -29,6 +29,7 @@ MAX_CARDS = max(CARD_COUNTS)
 WAIT_SECONDS = 120
 MAX_PLAYERS = 5
 MAX_WATCHERS = 100  # people watching one live match at the same time
+CIRCLE_SECONDS = 20  # how long a player's circle (friends + gang mates) is kept for the lobby's live strip
 EVENTS_BYTES, EVENTS_MAX = 128 * 1024 * 1024, 500000  # the live channel between servers (capped: oldest changes roll off)
 
 
@@ -89,6 +90,7 @@ def make_router(db, rf_user, public_card, award):
     hooks: list = []  # called once with every match that just finished (knockout cups move on from here)
     watching: dict = {}  # did -> {uid: when this process last recorded that look in rf_watch}
     wcount: dict = {}  # did -> (read_at, watchers on every server), only for matches someone is watching
+    circles: dict = {}  # uid -> (read_at, friends and gang mates whose live matches the lobby strip may show)
     fixed: dict = {}  # did -> (card_ids, start_at, ends_at, uids): never change once a match is ready, so answers skip a read
     bot_runs: dict = {}  # did -> which cards the practice rival gets right (fixed per match)
     node = uuid.uuid4().hex  # this server process
@@ -645,17 +647,33 @@ def make_router(db, rf_user, public_card, award):
         notify(d["id"], d)
         return await view(d, uid)
 
+    async def circle_of(uid: str) -> list:
+        """The players whose live matches this player may see on the lobby strip: friends and gang mates, without anyone
+        blocked either way. Every open lobby asks for the strip every 8 s, and each time it read the block list, the
+        friend list and the gangs again; they change rarely, so one read (the three side by side) now serves 20 s.
+        Opening a match to watch is still checked against the database at that moment (can_watch)."""
+        hit = circles.get(uid)
+        if hit and time.time() - hit[0] < CIRCLE_SECONDS:
+            return hit[1]
+        blocks, friends, gangs = await asyncio.gather(
+            db.rf_blocks.find({"$or": [{"uid": uid}, {"bid": uid}]}, {"_id": 0}).to_list(500),
+            db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).batch_size(500).to_list(500),
+            db.rf_gangs.find({"members.uid": uid, "closed": {"$ne": True}}, {"_id": 0, "members.uid": 1}).to_list(10))
+        hidden = {uid} | {b["bid"] for b in blocks} | {b["uid"] for b in blocks}
+        seen = {f["fid"] for f in friends} | {m["uid"] for g in gangs for m in g["members"][:200]}
+        if len(circles) > 10_000:
+            circles.clear()
+        circles[uid] = (time.time(), list(seen - hidden))
+        return circles[uid][1]
+
     @r.get("/live")
     async def live_now(x_rf_user: Optional[str] = Header(None)):
         """Matches being played right now by your friends and gang mates, to watch."""
         uid = rf_user(x_rf_user)
-        blocks = await db.rf_blocks.find({"$or": [{"uid": uid}, {"bid": uid}]}, {"_id": 0}).to_list(500)
-        hidden = {uid} | {b["bid"] for b in blocks} | {b["uid"] for b in blocks}
-        uids = {f["fid"] for f in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500)}
-        for g in await db.rf_gangs.find({"members.uid": uid, "closed": {"$ne": True}}, {"_id": 0, "members.uid": 1}).to_list(10):
-            uids |= {m["uid"] for m in g["members"][:200]}
-        now = time.time()
-        docs = await db.rf_duels.find({"status": "ready", "ends_at": {"$gt": now}, "players.uid": {"$in": list(uids - hidden), "$ne": uid}},
+        uids, now = await circle_of(uid), time.time()
+        if not uids:
+            return {"items": []}
+        docs = await db.rf_duels.find({"status": "ready", "ends_at": {"$gt": now}, "players.uid": {"$in": uids, "$ne": uid}},
                                       {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "label": 1, "picks": 1, "start_at": 1, "cup_id": 1, "card_ids": 1, "teams": 1, "players.name": 1, "players.avatar": 1,
                                        "players.frame": 1, "players.score": 1, "players.answers.i": 1}).sort("start_at", -1).limit(8).to_list(8)
         return {"items": [{"id": d["id"], "label": label_for(d), "cup": bool(d.get("cup_id")), "started": d["start_at"] <= now, "total": len(d["card_ids"]),

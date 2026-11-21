@@ -74,10 +74,11 @@ async def _remind(db, api, u):
     try:
         await db.rf_notices.insert_one({"id": str(uuid.uuid4()), "uid": u[1]["uid"], "from_uid": u[1]["uid"], "kind": "cup_night", "ts": time.time() - 900, "done": False,
                                         "expires_ts": time.time() - 60, "night": {"day": day, "start_ts": time.time() - 180, "time_label": "8:00 pm"}})
-        await db.rf_cup_nights.insert_one({"_id": day, "status": "open", "start_ts": start})
+        # the seat first: the server's loop reminds whoever holds a seat the moment it sees tonight's document
         await db.rf_night_seats.insert_one({"_id": f"{day}:{u[0]['uid']}", "day": day, "uid": u[0]["uid"], "ts": time.time()})
+        await db.rf_cup_nights.insert_one({"_id": day, "status": "open", "start_ts": start})
         note = None
-        for _ in range(16):  # the server's night loop ticks every 10 s
+        for _ in range(16):  # the server's night loop ticks every 3 s
             got = [n for n in (await api.get("/inbox", u[0])).json()["notices"] if n["kind"] == "cup_night"]
             if got:
                 note = got[0]

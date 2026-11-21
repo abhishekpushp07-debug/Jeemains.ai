@@ -5,7 +5,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { useAuth } from "@/src/auth";
 import { useAttempt } from "@/src/useAttempt";
-import { availableQuestions, imagePaths, subjectId, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
+import { availableQuestions, imagePaths, pieceWarmSizes, subjectId, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
+import { PIECE_ZOOM, piecesOf } from "@/src/assets/pieces";
+import { setPieceZoom, usePieceZoom } from "@/src/assets/pieceZoom";
+import { PieceQuestion } from "@/src/components/Pieces";
 import { useSubjectNavigation } from "@/src/components/player/SubjectNavigation";
 import { Legend, PaletteGrid, PaletteState, SubjectSegment, shortSubject } from "@/src/components/player/PlayerParts";
 import { invalidate } from "@/src/useCached";
@@ -32,6 +35,9 @@ export default function Player() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
+  const wide = width >= WIDE;
+  const readWidth = wide ? Math.min(width - SIDE, COLUMN) : Math.min(width, COLUMN);
+  const column = Math.max(1, readWidth - 2 * space.lg);
   // Only a submission made here (the attempt was open on this screen) locks its result behind the share card;
   // opening an attempt that was already finished goes straight to its result.
   const wasActive = useRef(false);
@@ -47,6 +53,7 @@ export default function Player() {
   const [busy, setBusy] = useState(false);
   const [conf, setConf] = useState<Record<string, number | undefined>>({});
   const [zoom, setZoom] = useState(0);
+  const pieceStep = usePieceZoom(); // cut questions: the size is kept on the phone, shared with the solutions screen
   const reading = useRef<React.ElementRef<typeof ScrollView>>(null);
 
   const bonusRule = a?.rules?.bonus_rule;
@@ -58,6 +65,7 @@ export default function Player() {
   const getReady = A.ready > 0;
   const pack = usePaperPack(id!, questions, getReady);
   const warmPaths = usePaperAssets(id!, questions, q?.id, false, "original", !getReady);
+  const warmSizes = useMemo(() => pieceWarmSizes(id!, questions, q?.id, column, PIECE_ZOOM[pieceStep]), [id, questions, q?.id, column, pieceStep]);
   useEffect(() => { if (q && !getReady) { A.visit(q.id); A.watch(q.id); } }, [q?.id, getReady]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     reading.current?.scrollTo({ y: 0, animated: false });
@@ -100,13 +108,17 @@ export default function Player() {
   const marking = rule.correct != null ? `+${rule.correct} · ${Number(rule.wrong) < 0 ? "−" + Math.abs(rule.wrong) : rule.wrong ?? 0}` : "";
   const seconds = A.seconds ?? 99999;
   const timerTone = seconds <= 120 ? colors.custom_qNotAnswered : seconds <= 600 ? colors.custom_timerAmber : colors.onSurface;
-  const scale = ZOOM[zoom];
+  // A question the website supplies in cut pieces is drawn from them: the question on its paper, every option with its own content.
+  const pieces = piecesOf(q);
+  const scale = pieces ? PIECE_ZOOM[pieceStep] : ZOOM[zoom];
+  const largest = pieces ? pieceStep === PIECE_ZOOM.length - 1 : zoom === ZOOM.length - 1;
+  const nextZoom = () => (pieces ? setPieceZoom((pieceStep + 1) % PIECE_ZOOM.length) : setZoom(z => (z + 1) % ZOOM.length));
   const subjectCounts = nav.rows.reduce((c, x: any) => { c[stateOf(x)]++; return c; }, { answered: 0, answered_marked: 0, marked: 0, not_answered: 0, fresh: 0 } as Record<PaletteState, number>);
   const subjectPending = nav.rows.filter((x: any) => A.pending[x.id]).length;
-  const wide = width >= WIDE;
   const frame = width >= TABLET ? styles.frame : null;
   const topFrame = wide ? null : frame;
-  const readWidth = wide ? Math.min(width - SIDE, COLUMN) : Math.min(width, COLUMN);
+  // Exam mode: the student moves on with Save & Next (review, confidence and changes stay possible).
+  const pick = (k: string) => A.edit(q.id, { value: cur.value === k ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) });
 
   async function doSubmit() {
     setBusy(true);
@@ -154,7 +166,7 @@ export default function Player() {
 
   return (
     <View testID="player-screen" style={{ flex: 1, backgroundColor: colors.surface }}>
-      <ImageWarmup paths={warmPaths} width={Math.max(1, readWidth - 2 * space.lg - 2 * 18 - 2)} />
+      <ImageWarmup paths={warmPaths} width={Math.max(1, column - 2 * 18 - 2)} sizes={warmSizes} />
       <View style={[styles.top, { paddingTop: insets.top + space.sm }]}>
         <View style={[styles.topRow, topFrame]}>
           <RoundButton testID="player-exit-button" icon="close" label="Leave attempt" color={colors.onSurface} onPress={() => setSheet("exit")} />
@@ -207,30 +219,32 @@ export default function Player() {
           </View>
           <RoundButton testID="player-prev-button" icon="chevron-left" label="Previous question" onPress={() => go(-1)} style={idx <= 0 ? { opacity: 0.4 } : undefined} />
           <RoundButton testID="player-star-button" icon={cur.marked ? "star" : "star-outline"} color={cur.marked ? colors.custom_qMarkedInk : colors.custom_gold} label={cur.marked ? "Unmark review" : "Mark for review"} active={!!cur.marked} onPress={() => { if (!disabled) A.edit(q.id, { marked: !cur.marked }); }} />
-          <RoundButton testID="player-zoom-button" icon={zoom === ZOOM.length - 1 ? "magnify-minus-outline" : "magnify-plus-outline"} label={`Text size ${Math.round(scale * 100)}%`} onPress={() => setZoom(z => (z + 1) % ZOOM.length)} />
+          <RoundButton testID="player-zoom-button" icon={largest ? "magnify-minus-outline" : "magnify-plus-outline"} label={`Text size ${Math.round(scale * 100)}%`} onPress={nextZoom} />
         </View>
 
-        <View testID="question-reading-surface" style={styles.question}>
-          {!source && q.text ? <MathText testID="player-question-text" size={Math.round(16 * scale)} text={q.text} /> : null}
-          {imagePaths(id!, q, "question").map((path, i) => <View key={path} style={{ gap: 6 }}>
-            {!source && q.asset_labels?.[i] ? <T size={11.5} w="bold" color={colors.custom_eyebrow}>{q.asset_labels[i]}</T> : null}
-            <AssetImage testID={`question-image-${q.number}-${i}`} path={path} label={(source && q.accessible_text) || q.asset_labels?.[i] || `Question ${q.number} original image`} />
-          </View>)}
-        </View>
+        {pieces ? <PieceQuestion id={id!} q={q} width={column} value={cur.value} onPick={pick} disabled={disabled} /> : (
+          <View testID="question-reading-surface" style={styles.question}>
+            {!source && q.text ? <MathText testID="player-question-text" size={Math.round(16 * scale)} text={q.text} /> : null}
+            {imagePaths(id!, q, "question").map((path, i) => <View key={path} style={{ gap: 6 }}>
+              {!source && q.asset_labels?.[i] ? <T size={11.5} w="bold" color={colors.custom_eyebrow}>{q.asset_labels[i]}</T> : null}
+              <AssetImage testID={`question-image-${q.number}-${i}`} path={path} label={(source && q.accessible_text) || q.asset_labels?.[i] || `Question ${q.number} original image`} />
+            </View>)}
+          </View>
+        )}
 
-        {q.type !== "integer" && source ? <T testID="player-source-options-hint" size={12.5} color={colors.muted}>{sourceHint}</T> : null}
+        {q.type !== "integer" && source && !pieces ? <T testID="player-source-options-hint" size={12.5} color={colors.muted}>{sourceHint}</T> : null}
         {q.type === "integer" ? (
           <View style={{ gap: 6 }}>
             <T w="heavy" size={10} color={colors.custom_eyebrow} style={{ letterSpacing: 1.8 }}>YOUR ANSWER</T>
             <TextInput testID="player-integer-input" editable={!disabled} value={cur.value} onChangeText={(v) => A.edit(q.id, { value: v.slice(0, 30) })} keyboardType="numbers-and-punctuation" placeholder="Type an exact integer"
               placeholderTextColor={colors.custom_dim} style={[styles.numeric, has(cur) && { borderColor: colors.onSurface }]} />
           </View>
-        ) : optionTiles ? (
+        ) : pieces ? null : optionTiles ? (
           <View testID="player-option-tiles" style={styles.tiles}>
             {optionKeys.map(k => {
               const sel = cur.value === k;
               return (
-                <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => A.edit(q.id, { value: sel ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) })}
+                <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => pick(k)}
                   accessibilityLabel={`Option ${labelOf(k)}, as shown in the picture${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.96} style={[styles.tile, sel && styles.tileOn]}>
                   <T testID={`player-option-label-${k}`} w="mono" size={Math.round(24 * scale)} color={sel ? colors.onSurfaceInverse : colors.onSurface}>{labelOf(k)}</T>
                   {sel ? <View style={styles.tileCheck}><Icon name="check" size={11} color={colors.onSurface} /></View> : null}
@@ -244,10 +258,7 @@ export default function Player() {
               const sel = cur.value === k;
               const text = source ? typed[k] || `Option ${labelOf(k)} (as shown above)` : String(label).startsWith("See original") ? `Option ${k} (see image)` : String(label);
               return (
-                <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => {
-                    // Exam mode: the student moves on with Save & Next (review, confidence and changes stay possible).
-                    A.edit(q.id, { value: sel ? "" : k, ...(conf[q.id] != null ? { confidence: conf[q.id] } : {}) });
-                  }} accessibilityLabel={`Option ${labelOf(k)}${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.985}
+                <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => pick(k)} accessibilityLabel={`Option ${labelOf(k)}${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.985}
                   style={[styles.option, sel && styles.optionOn]}>
                   <View style={[styles.letter, sel && styles.letterOn]}>
                     <T w="heavy" size={13} color={sel ? colors.onSurfaceInverse : colors.custom_softText}>{labelOf(k)}</T>

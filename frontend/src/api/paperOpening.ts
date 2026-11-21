@@ -1,4 +1,6 @@
 import { api, apiRaw, getAssetAccount, getAssetEpoch, onAssetScopeReset, privateAssets, registerAssetManifest, RawResult } from "./client";
+import { imagePaths, questionPaths } from "@/src/assets/paperAssets";
+import { originalLook } from "@/src/assets/pieces";
 
 type Stage = { until: number; promise: Promise<any>; ctl: AbortController; timer?: ReturnType<typeof setTimeout> };
 const attempts = new Map<string, Stage>(), results = new Map<string, Stage>();
@@ -13,9 +15,7 @@ export function prepareImages(data: any, solutions = false, version = "original"
   const rows = data.questions.filter((q: any) => solutions || !q.bonus || !!data.bonus_unlocked_at);
   registerAssetManifest(data.id, rows, solutions, version, true);
   privateAssets.selectGroup(data.id);
-  const paths = rows.flatMap((q: any) => (solutions ? ["question", "solution"] : ["question"]).flatMap(kind =>
-    Array.from({ length: Number(kind === "question" ? q.asset_count : q.solution_asset_count) || 0 }, (_, i) =>
-      `/attempts/${encodeURIComponent(data.id)}/questions/${encodeURIComponent(q.id)}/asset/${kind}/${i}${version === "original" ? "" : `?score_version=${encodeURIComponent(version)}`}`)));
+  const paths = rows.flatMap((q: any) => [...questionPaths(data.id, q, version), ...(solutions ? imagePaths(data.id, q, "solution", version) : [])]);
   // During the get-ready minute the paper pack brings every picture in a few requests (src/assets/paperPack.ts).
   if (!solutions && Number(data.ready_until) > Number(data.server_now)) return;
   privateAssets.preload(paths);
@@ -36,7 +36,7 @@ export function warmAttempt(id: string, initial?: any): Promise<any> {
   const owner = getAssetAccount(), epoch = getAssetEpoch();
   if (!owner) return Promise.resolve(null);
   return stage(attempts, `${epoch}|${owner}|${id}`, async signal => {
-    const data = Array.isArray(initial?.questions) ? initial : await api(`/attempts/${encodeURIComponent(id)}`, { signal });
+    const data = originalLook(Array.isArray(initial?.questions) ? initial : await api(`/attempts/${encodeURIComponent(id)}`, { signal }));
     if (getAssetAccount() !== owner || getAssetEpoch() !== epoch) throw cancelled();
     received.set(data, mono()); prepareImages(data); return data;
   });
@@ -51,6 +51,7 @@ export function warmResult(id: string, version = "original"): Promise<RawResult<
   return stage(results, `${epoch}|${owner}|${id}|${version}`, async signal => {
     const response = await apiRaw(`/attempts/${encodeURIComponent(id)}/results?score_version=${encodeURIComponent(version)}`, { signal });
     if (getAssetAccount() !== owner || getAssetEpoch() !== epoch) throw cancelled();
+    originalLook(response.data);
     if (response.status === 200 && response.data?.summary && response.data.status !== "embargoed") prepareImages(response.data, true, version);
     return response;
   });

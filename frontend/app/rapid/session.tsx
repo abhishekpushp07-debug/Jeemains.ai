@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { AppState, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
+import { ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, { FadeIn, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
-import { Ring } from "@/src/components/Ring";
+import { CardClock } from "@/src/rapid/CardClock";
 import { RapidDiagram as BiologyDiagram, RapidDiagramSpec as Diagram } from "@/src/rapid/Diagram";
 import { RewardPanel } from "@/src/components/game";
 import { useAuth } from "@/src/auth";
@@ -97,9 +97,9 @@ function RapidSessionRound() {
   const [error, setError] = useState(() => (p.exam && p.exam !== "JEE") || p.subject === "Biology" || p.diagrams === "1" ? "This practice is archived. Return to JEE Main Rapid Fire." : "");
   const [empty, setEmpty] = useState(false);
   const [i, setI] = useState(0);
-  const [choice, setChoice] = useState<number | null>(null);
-  const [timedOut, setTimedOut] = useState(false);
-  const [left, setLeft] = useState(LIMIT);
+  // The answer and the time-out belong to one card, so a new card can never show the last card's lock, not even for a frame.
+  const [picked, setPicked] = useState<{ id: string; k: number } | null>(null);
+  const [expired, setExpired] = useState("");
   const [done, setDone] = useState<any>(null);
   const [exit, setExit] = useState(false);
   const [n, setN] = useState(0);
@@ -107,13 +107,14 @@ function RapidSessionRound() {
   const [combo, setCombo] = useState(0);
   const [flare, setFlare] = useState<GemColor | null>(null);
   const startedAt = useRef(0);
-  const lastTick = useRef(0);
   const reqId = useRef(uuid());
   const seat = useArenaWait(() => setN((v) => v + 1));
   const scrollRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const x = useSharedValue(0);
   const uid = user?.id || "";
   const card = cards[i];
+  const choice = picked && picked.id === card?.id ? picked.k : null;
+  const timedOut = !!card && expired === card.id;
   const locked = choice !== null || timedOut;
   const fresh = session?.mode === "fresh";
 
@@ -132,14 +133,10 @@ function RapidSessionRound() {
     return () => { alive = false; };
   }, [p.review, p.subject, p.chapter, p.picks, p.ids, p.exam, p.diagrams, p.revision, p.weak, uid, n]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Timer starts only when the card is visible; resets per card.
+  // The clock starts only when the card is visible. One light reset per card keeps native maths views mounted between cards.
   useEffect(() => {
     if (!card || done) return;
     startedAt.current = mono();
-    // One reset per card keeps native maths views mounted between cards.
-    setLeft(LIMIT);
-    setChoice(null);
-    setTimedOut(false);
     scrollRef.current?.scrollTo({ y: 0, animated: false });
     x.set(0);
   }, [card?.id, done]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -168,24 +165,14 @@ function RapidSessionRound() {
 
   const record = (r: Res) => { results.current = [...results.current.filter((y) => y.card_id !== r.card_id), r]; };
 
-  useEffect(() => {
-    if (!card || locked || done) return;
-    const iv = setInterval(() => {
-      const l = LIMIT - (mono() - startedAt.current);
-      // Expiry still checked every 100ms; only the displayed second rerenders.
-      setLeft(previous => Math.ceil(previous / 1000) === Math.ceil(Math.max(0, l) / 1000) ? previous : Math.max(0, l));
-      const sec = Math.ceil(l / 1000);
-      if (l > 0 && sec <= 5 && sec !== lastTick.current) { lastTick.current = sec; playSfx("tick", 0.6); }
-      if (l <= 0) {
-        // Only the current visible card expires; future cards are never consumed in background.
-        record({ card_id: card.id, outcome: "timed_out", choice: null, ms: LIMIT });
-        setCombo(0);
-        setTimedOut(true);
-      }
-    }, 100);
-    const sub = AppState.addEventListener("change", () => {});
-    return () => { clearInterval(iv); sub.remove(); };
-  }, [card?.id, locked, done]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Time is up on the card in view. The ring keeps its own seconds (CardClock), so a tick never redraws the card.
+  const expire = () => {
+    if (!card) return;
+    // Only the current visible card expires; future cards are never consumed in background.
+    record({ card_id: card.id, outcome: "timed_out", choice: null, ms: LIMIT });
+    setCombo(0);
+    setExpired(card.id);
+  };
 
   // Auto-advance shortly after an answer locks (Next / swipe stay available).
   useEffect(() => {
@@ -212,7 +199,7 @@ function RapidSessionRound() {
 
   function answer(k: number) {
     if (locked || !card) return;
-    setChoice(k);
+    setPicked({ id: card.id, k });
     const ok = k === card.answer;
     const streak = ok ? combo + 1 : 0;
     setCombo(streak);
@@ -261,7 +248,7 @@ function RapidSessionRound() {
             </View>
           ) : <T w="heavy" size={16} color={colors.onSurfaceInverse}>{done ? "Session complete" : "Loading cards…"}</T>}
         </View>
-        {card && !done ? <Ring light left={locked ? (timedOut ? 0 : left) : left} color={tint} limit={LIMIT} /> : null}
+        {card && !done ? <CardClock key={card.id} startedAt={startedAt} limit={LIMIT} running={!locked} expired={timedOut} color={tint} onExpire={expire} /> : null}
       </View>
       {card && !done ? (cards.length > 30
         // 50 or 100 cards: one smooth bar (thin segments would blur into each other).

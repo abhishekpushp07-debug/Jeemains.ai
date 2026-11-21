@@ -13,11 +13,15 @@ def fingerprint(prompt):
 
 
 async def selection_pool(db, exam, subject):
+    """One subject's playable cards, by chapter: {chapter: [[card id, short prompt fingerprint], ...]}.
+    Kept small on purpose (a third of the size of one row per card with a full fingerprint) so every subject stays in memory."""
     async def load():
-        rows = await db.rf_cards.find({'exam': exam, 'subject': subject, 'retired': {'$ne': True}},
-                                     {'_id': 0, 'id': 1, 'chapter': 1, 'prompt': 1, 'diagram.kind': 1}).to_list(12000)
-        return [{'id': c['id'], 'chapter': c['chapter'], 'fingerprint': fingerprint(c['prompt'])}
-                for c in rows if not c.get('diagram') or c['diagram'].get('kind') in KINDS]
+        groups = {}
+        async for c in db.rf_cards.find({'exam': exam, 'subject': subject, 'retired': {'$ne': True}},
+                                        {'_id': 0, 'id': 1, 'chapter': 1, 'prompt': 1, 'diagram.kind': 1}).batch_size(2000):
+            if not c.get('diagram') or c['diagram'].get('kind') in KINDS:
+                groups.setdefault(c['chapter'], []).append([c['id'], fingerprint(c['prompt'])[:16]])
+        return groups
     return (await metadata_cache.get_or_load(f'{db.name}:pool:{exam}:{subject}', load, ttl=120))[0]
 
 
@@ -33,30 +37,39 @@ async def seen_cards(db, uid, exam):
 
 def choose(pools, picks, count, avoid=frozenset()):
     """Every pick (a whole subject or one chapter) gets an even share; inside a whole subject every chapter does. No prompt twice.
-    Inside each chapter the cards in `avoid` (already seen by this student) come last."""
+    Inside each chapter the cards in `avoid` (already seen by this student) come last.
+    Only the chapters a round really draws from are touched: a 30-card round never shuffles a 5,000-card subject."""
     seen, lanes = set(), []
     for p in picks:
-        groups = {}
-        rows = random.sample(pools[p['subject']], len(pools[p['subject']]))
-        rows.sort(key=lambda row: row['id'] not in avoid)  # take() pops from the end: unseen cards first
-        for row in rows:
-            if not p['chapter'] or row['chapter'] == p['chapter']:
-                groups.setdefault(row['chapter'], []).append(row)
-        keys = list(groups)
+        groups = pools[p['subject']]
+        keys = [k for k in ([p['chapter']] if p['chapter'] else groups) if groups.get(k)]
         random.shuffle(keys)
-        lanes.append({'groups': groups, 'keys': keys, 'turn': 0})
+        lanes.append({'groups': groups, 'keys': keys, 'turn': 0, 'left': {}})
+
+    def draw(lane, key):
+        """One more card of this chapter, in random order, unseen cards first. None once the chapter is used up."""
+        left = lane['left'].get(key)
+        if left is None:  # first card wanted from this chapter: split it once (the shared pool itself is never changed)
+            rows = lane['groups'][key]
+            left = lane['left'][key] = ([r for r in rows if r[0] not in avoid], [r for r in rows if r[0] in avoid])
+        for rows in left:
+            if rows:
+                i = random.randrange(len(rows))
+                rows[i], rows[-1] = rows[-1], rows[i]
+                return rows.pop()
+        return None
 
     def take(lane):
         while lane['keys']:
             key = lane['keys'][lane['turn'] % len(lane['keys'])]
-            if not lane['groups'][key]:
+            row = draw(lane, key)
+            if row is None:
                 lane['keys'].remove(key)
                 continue
             lane['turn'] += 1
-            row = lane['groups'][key].pop()
-            if row['fingerprint'] not in seen:
-                seen.add(row['fingerprint'])
-                return row['id']
+            if row[1] not in seen:
+                seen.add(row[1])
+                return row[0]
         return None
 
     picked = []

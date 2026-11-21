@@ -5,26 +5,7 @@ from revision import record_learning
 
 
 async def migrate_exam_data(db):
-    for collection in (db.rf_sessions, db.rf_duels):
-        await collection.update_many({"exam": {"$exists": False}, "subject": "Biology"}, {"$set": {"exam": "NEET"}})
-        await collection.update_many({"exam": {"$exists": False}, "subject": {"$ne": "Biology"}}, {"$set": {"exam": "JEE"}})
-    # Legacy XP is rebuilt from persisted rewards, not guessed from the combined wallet.
-    async for award in db.rf_awards.find({"exam": {"$exists": False}}, {"_id": 0}):
-        kind, _, sid = award["ref"].partition(":")
-        source = db.rf_sessions if kind == "solo" else db.rf_duels
-        doc = await source.find_one({"id": sid}, {"_id": 0, "exam": 1, "winner": 1})
-        if doc:
-            await db.rf_awards.update_one({"uid": award["uid"], "ref": award["ref"]}, {"$set": {
-                "exam": doc["exam"], "legacy_exam_split": True,
-                "exam_win": bool(doc.get("winner") == award["uid"] and award.get("reward", {}).get("coins", 0) >= 50)}})
-    async for profile in db.rf_profiles.find({"legacy_exam_split_v1": {"$ne": True}}, {"_id": 0, "uid": 1}):
-        rows = await (await db.rf_awards.aggregate([
-            {"$match": {"uid": profile["uid"], "legacy_exam_split": True}},
-            {"$group": {"_id": "$exam", "xp": {"$sum": "$reward.xp"}, "wins": {"$sum": {"$cond": ["$exam_win", 1, 0]}}}},
-        ])).to_list(2)
-        inc = {f"exam_stats.{r['_id']}.{key}": r[key] for r in rows for key in ("xp", "wins") if r["_id"] in ("JEE", "NEET")}
-        await db.rf_profiles.update_one({"uid": profile["uid"], "legacy_exam_split_v1": {"$ne": True}},
-                                        {"$set": {"legacy_exam_split_v1": True}, **({"$inc": inc} if inc else {})})
+    await split_exams_once(db)
     if await db.rf_migrations.find_one({"id": "learning_events_v1"}):
         return
     async for session in db.rf_sessions.find({"status": "completed"}, {"_id": 0}):
@@ -40,3 +21,33 @@ async def migrate_exam_data(db):
             await record_learning(db, player["uid"], "duel:" + duel["id"], duel["exam"], rows, cards,
                                   datetime.fromtimestamp(duel["finished_ts"], timezone.utc).isoformat())
     await db.rf_migrations.update_one({"id": "learning_events_v1"}, {"$set": {"done": True}}, upsert=True)
+
+
+async def split_exams_once(db):
+    """Sprints, matches, rewards and XP saved before JEE and NEET were kept apart get their exam. One time only: before,
+    every new server version read every sprint, match and reward again and then visited every profile one by one at
+    start-up, so each start took longer as the students grew (over 20 seconds with 60,000 profiles in the scale audit)."""
+    if await db.rf_migrations.find_one({"id": "exam_split_v1"}):
+        return
+    for collection in (db.rf_sessions, db.rf_duels):
+        await collection.update_many({"exam": {"$exists": False}, "subject": "Biology"}, {"$set": {"exam": "NEET"}})
+        await collection.update_many({"exam": {"$exists": False}, "subject": {"$ne": "Biology"}}, {"$set": {"exam": "JEE"}})
+    # Legacy XP is rebuilt from persisted rewards, not guessed from the combined wallet.
+    async for award in db.rf_awards.find({"exam": {"$exists": False}}, {"_id": 0}):
+        kind, _, sid = award["ref"].partition(":")
+        source = db.rf_sessions if kind == "solo" else db.rf_duels
+        doc = await source.find_one({"id": sid}, {"_id": 0, "exam": 1, "winner": 1})
+        if doc:
+            await db.rf_awards.update_one({"uid": award["uid"], "ref": award["ref"]}, {"$set": {
+                "exam": doc["exam"], "legacy_exam_split": True,
+                "exam_win": bool(doc.get("winner") == award["uid"] and award.get("reward", {}).get("coins", 0) >= 50)}})
+    # Only players who have such old rewards have anything to rebuild (the per-profile mark keeps it from counting twice).
+    for uid in await db.rf_awards.distinct("uid", {"legacy_exam_split": True}):
+        rows = await (await db.rf_awards.aggregate([
+            {"$match": {"uid": uid, "legacy_exam_split": True}},
+            {"$group": {"_id": "$exam", "xp": {"$sum": "$reward.xp"}, "wins": {"$sum": {"$cond": ["$exam_win", 1, 0]}}}},
+        ])).to_list(2)
+        inc = {f"exam_stats.{r['_id']}.{key}": r[key] for r in rows for key in ("xp", "wins") if r["_id"] in ("JEE", "NEET")}
+        await db.rf_profiles.update_one({"uid": uid, "legacy_exam_split_v1": {"$ne": True}},
+                                        {"$set": {"legacy_exam_split_v1": True}, **({"$inc": inc} if inc else {})})
+    await db.rf_migrations.update_one({"id": "exam_split_v1"}, {"$set": {"done": True}}, upsert=True)

@@ -296,9 +296,14 @@ def test_cleanup_report_and_migration_marker_present(mongo):
 
 
 def test_source_sync_not_resurrecting_deleted_jee_artifacts(mongo):
-    """Sync module: the 890 rejected JEE cards never come back (history grows normally with real play since the cleanup)."""
+    """Sync module: rejected JEE cards never come back, and the live bank is exactly the card files
+    (6155 after the cleanup; it grows only when new card files are published, e.g. the June 2026 expansion)."""
+    bank = Path("/app/backend/rapidfire")
+    jee = lambda folder: [c for f in (bank / folder).glob("*.json") if not f.name.startswith("biology") for c in json.loads(f.read_text())]  # noqa: E731
+    rejected = [c["id"] for c in jee("rejected")]
+    assert rejected and mongo.rf_cards.count_documents({"id": {"$in": rejected}, "retired": {"$ne": True}}) == 0
     active_jee_cards = mongo.rf_cards.count_documents({"exam": "JEE", "retired": {"$ne": True}})
-    assert active_jee_cards == 6155
+    assert active_jee_cards == len(jee("cards")) >= 6155
 
 
 def test_shop_purchase_deducts_once_and_repeat_denied(mongo, scoped_ids):

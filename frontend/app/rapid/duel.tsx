@@ -6,7 +6,7 @@ import Animated, { FadeIn, ZoomIn, useReducedMotion } from "react-native-reanima
 import { RF_BASE, rapidAccess, rf, uuid } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { invalidate } from "@/src/useCached";
-import { Ring } from "@/src/components/Ring";
+import { CardClock } from "@/src/rapid/CardClock";
 import { Avatar, EntryShow } from "@/src/components/Entry";
 import { playSfx } from "@/src/sfx";
 import { arena, rapidColors as colors, radius, space, rapidSubjectColor as subjectColor } from "@/src/theme";
@@ -57,7 +57,6 @@ function Match() {
   const [idx, setIdx] = useState(0);
   const [choice, setChoice] = useState<number | null>(null);
   const [fb, setFb] = useState<any>(null);
-  const [left, setLeft] = useState(CARD_SECONDS * 1000);
   const [clock, setClock] = useState(0);
   const [streak, setStreak] = useState(0);
   const [flare, setFlare] = useState<GemColor | null>(null);
@@ -65,7 +64,7 @@ function Match() {
   const reqId = useRef(uuid());
   const scroll = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const anchor = useRef({ server: 0, mono: 0 });
-  const startedAt = useRef(0), lastTick = useRef(0), hold = useRef(0), sending = useRef(false), outcomes = useRef<string[]>([]);
+  const startedAt = useRef(0), hold = useRef(0), sending = useRef(false), outcomes = useRef<string[]>([]);
   const serverNow = () => anchor.current.server + (mono() - anchor.current.mono) / 1000;
   // Live pushes leave out the cards once this phone has them ("lite"): keep the ones we already hold.
   const apply = useCallback((v: any) => { anchor.current = { server: v.server_now, mono: mono() }; setD((prev: any) => (v.cards === undefined && prev?.id === v.id ? { ...v, cards: prev.cards } : v)); }, []);
@@ -142,10 +141,8 @@ function Match() {
   useEffect(() => {
     if (!card) return;
     startedAt.current = mono();
-    lastTick.current = 0;
     setChoice(null);
     setFb(null);
-    setLeft(limit);
     scroll.current?.scrollTo({ y: 0, animated: false });
   }, [card?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -174,18 +171,13 @@ function Match() {
     } finally { sending.current = false; }
   }, [d, card, idx, uid, limit]);
 
-  useEffect(() => {
-    if (!card || choice !== null || fb) return;
-    const iv = setInterval(() => {
-      const l = limit - (mono() - startedAt.current);
-      // Checked every 100 ms; the screen only redraws when the shown second changes.
-      setLeft((prev) => (Math.ceil(prev / 1000) === Math.ceil(Math.max(0, l) / 1000) ? prev : Math.max(0, l)));
-      const sec = Math.ceil(l / 1000);
-      if (l > 0 && sec <= 5 && sec !== lastTick.current) { lastTick.current = sec; playSfx("tick", 0.6); }
-      if (l <= 0 && mono() >= hold.current) { setChoice(-1); send("timed_out", null); }
-    }, 100);
-    return () => clearInterval(iv);
-  }, [card?.id, choice, fb, send]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Time is up on the card in view. The ring keeps its own seconds (CardClock), so a tick never redraws the card.
+  // After a failed send the time-out waits a moment before it is sent again (the clock asks again every 100 ms).
+  const expire = () => {
+    if (mono() < hold.current) return false;
+    setChoice(-1);
+    send("timed_out", null);
+  };
 
   const won = d?.winner === d?.you;
   useEffect(() => {
@@ -313,7 +305,7 @@ function Match() {
           <T testID="duel-card-counter" w="heavy" size={17} color={arena.text} numberOfLines={1}>{playing ? `Card ${idx + 1} / ${total}` : d?.status === "finished" ? (p.review ? "Match review" : "Match result") : d?.team_mode ? "Gang vs Gang" : players.length > 2 ? `${players.length}-player match` : "1 v 1 match"}</T>
         </View>
         {d?.watchers && d.status === "ready" ? <View testID="duel-watchers" style={styles.watchers}><Icon name="eye" size={14} color={arena.aqua} /><T w="heavy" size={11} color={arena.aqua}>{d.watchers}</T></View> : null}
-        {playing ? <Ring light left={left} color={tint} limit={limit} /> : <GameIcon name="swords" size={42} />}
+        {playing ? <CardClock key={card.id} startedAt={startedAt} limit={limit} running={choice === null && !fb} color={tint} onExpire={expire} /> : <GameIcon name="swords" size={42} />}
       </View>
       {body}
     </View>

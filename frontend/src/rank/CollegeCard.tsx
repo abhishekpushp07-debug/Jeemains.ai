@@ -6,8 +6,9 @@
 // hint above the list says to tap.
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, useWindowDimensions, View } from "react-native";
-import Animated, { cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { cancelAnimation, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { buzz, Press, T } from "@/src/components/ui";
+import { useStill } from "@/src/motion";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
 import { storage } from "@/src/utils/storage";

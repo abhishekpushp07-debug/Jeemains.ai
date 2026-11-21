@@ -11,6 +11,7 @@ import time
 
 from fastapi import Request
 from fastapi.responses import JSONResponse
+from starlette.requests import ClientDisconnect
 
 LAG_LIMIT = float(os.environ.get("RF_BUSY_LAG_MS", "200")) / 1000
 INFLIGHT_LIMIT = int(os.environ.get("RF_BUSY_INFLIGHT", "500"))
@@ -72,6 +73,10 @@ class InflightCounter:
         load.inflight += 1
         try:
             await self.app(scope, receive, send)
+        except ClientDisconnect:
+            # The phone went away while it was still sending (app closed, network dropped): nobody is left to answer,
+            # so this is not a server error and must not be logged or answered as one.
+            pass
         finally:
             load.inflight -= 1
 

@@ -17,7 +17,10 @@ import { DCard as Card, DSheet, Pill, ScreenHeader } from "@/src/components/desi
 import { LearningStat, LearningTab } from "@/src/components/LearningTheme";
 import { colors, fonts, LearningTone, learningTones, radius, space, subjectColor } from "@/src/theme";
 import { fmtSpent, unixDate } from "@/src/navigation";
-import { imagePaths, resultIsReleased, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
+import { imagePaths, pieceWarmSizes, resultIsReleased, subjectOf, usePaperAssets } from "@/src/assets/paperAssets";
+import { PIECE_ZOOM, piecesOf } from "@/src/assets/pieces";
+import { usePieceZoom } from "@/src/assets/pieceZoom";
+import { PieceQuestion } from "@/src/components/Pieces";
 import { SubjectTabs, QuestionGrid } from "@/src/components/player/SubjectNavigation";
 import { isResultLocked, unlockResult } from "@/src/mission/gate";
 import { ShareGate } from "@/src/mission/ShareGate";
@@ -147,6 +150,9 @@ function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; ver
   const [remembered, setRemembered] = useState<Record<string, string>>({});
   const [grid, setGrid] = useState(false);
   const warmPaths = usePaperAssets(id, rows, q?.id, true, version);
+  const reading = Math.max(1, width - 4 * space.lg - 2);
+  const pieceStep = usePieceZoom();
+  const warmSizes = useMemo(() => pieceWarmSizes(id, rows, q?.id, reading, PIECE_ZOOM[pieceStep], version), [id, rows, q?.id, reading, pieceStep, version]);
   function chooseSubject(s: string) { if (q) setRemembered(old => ({ ...old, [subject]: q.id })); setSubject(s); setQid(remembered[s] || ""); }
   useEffect(() => { Object.assign(view, { filter, subject, qid: q?.id || "" }); }, [filter, subject, q?.id]);
   const rail = useRef<FlatList>(null);
@@ -167,7 +173,7 @@ function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; ver
 
   return (
     <View style={{ gap: space.md }} testID="solution-navigator">
-      <ImageWarmup paths={warmPaths} width={Math.max(1, width - 4 * space.lg - 2)} />
+      <ImageWarmup paths={warmPaths} width={reading} sizes={warmSizes} />
       {onAnalysis ? <Press testID="solution-back-to-analysis" onPress={onAnalysis} accessibilityLabel="Analysis par wapas" style={learningStyles.backLink}>
         <Icon name="arrow-left" size={16} color={colors.brandText} /><T size={13} w="heavy" color={colors.brandText}>Analysis par wapas</T>
       </Press> : null}
@@ -231,7 +237,10 @@ function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; ver
           </View>
           {an ? <SolutionInsight q={insight[q.id]} copy={an.copy} /> : null}
           {q.render_mode !== "source" && q.text ? <MathText testID="solution-question-text" text={q.text} /> : null}
-          {imagePaths(id, q, "question", version).map((path, i) => <AssetImage key={path} testID={`solution-qimage-${q.number}-${i}`} path={path} label={`Question ${q.number}`} />)}
+          {/* Cut questions (website pieces): the key and the student's pick are marked on the options themselves. */}
+          {piecesOf(q) ? <PieceQuestion id={id} q={q} width={reading} version={version} testPrefix={`review-${q.number}`}
+            review={{ correct: q.disposition === "bonus_all" || q.disposition === "dropped" ? [] : q.accepted_answers || [q.answer], response: q.response }} />
+            : imagePaths(id, q, "question", version).map((path, i) => <AssetImage key={path} testID={`solution-qimage-${q.number}-${i}`} path={path} label={`Question ${q.number}`} />)}
           <View style={{ flexDirection: "row", gap: space.sm }}>
             <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_bar, borderWidth: 1, borderColor: colors.custom_barLine }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response ? q.source_option_labels?.[q.response] || q.response : "—"}</T></View>
             <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).map((v: string) => q.source_option_labels?.[v] || v).join(" / ")}</T></View>

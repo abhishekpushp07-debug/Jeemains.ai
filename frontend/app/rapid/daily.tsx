@@ -3,7 +3,7 @@ import { BackHandler, ScrollView, StyleSheet, View } from "react-native";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, { FadeIn, ZoomIn, useReducedMotion } from "react-native-reanimated";
-import { Ring } from "@/src/components/Ring";
+import { CardClock } from "@/src/rapid/CardClock";
 import { useAuth } from "@/src/auth";
 import { rf } from "@/src/api/client";
 import { Button, ErrorBox, Icon, Press, Sheet, Skeleton, T, buzz, tap, withRapid } from "@/src/rapid/ui";
@@ -26,13 +26,13 @@ function DailyRound() {
   const router = useRouter(), insets = useSafeAreaInsets(), reduced = useReducedMotion();
   const [card, setCard] = useState<PCard | null>(null);
   const [total, setTotal] = useState(DAILY_CARDS), [correct, setCorrect] = useState(0);
-  const [limit, setLimit] = useState(20000), [left, setLeft] = useState(20000);
+  const [limit, setLimit] = useState(20000), [startLeft, setStartLeft] = useState(20000); // the server's time left when the card came on screen
   const [choice, setChoice] = useState<number | null>(null); // -1: timed out or skipped
   const [reveal, setReveal] = useState<Reveal | null>(null);
   const [count, setCount] = useState(0); // 3-2-1 before the first card
   const [result, setResult] = useState<DailyResult | null>(null);
   const [error, setError] = useState(""), [exit, setExit] = useState(false), [n, setN] = useState(0);
-  const shownAt = useRef(0), lastTick = useRef(0), timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const shownAt = useRef(0), timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const retry = useRef<{ i: number; choice: number | null; skip: boolean } | null>(null);
   const scrollRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const later = (fn: () => void, ms: number) => { timers.current.push(setTimeout(fn, ms)); };
@@ -48,7 +48,7 @@ function DailyRound() {
     }
     later(() => {
       setCount(0); setCard(s.card); setChoice(null); setReveal(null);
-      setLeft(s.left_ms); shownAt.current = mono() - (s.seconds * 1000 - s.left_ms); lastTick.current = 0;
+      setStartLeft(s.left_ms); shownAt.current = mono() - (s.seconds * 1000 - s.left_ms);
       scrollRef.current?.scrollTo({ y: 0, animated: false });
     }, wait);
   }, []);
@@ -88,18 +88,8 @@ function DailyRound() {
     send({ i: card.i, choice: k, skip });
   };
 
-  // The clock: the server's time left on this card, shown second by second. At zero the card goes to the server as timed out.
-  useEffect(() => {
-    if (!card || choice !== null || result) return;
-    const iv = setInterval(() => {
-      const l = limit - (mono() - shownAt.current);
-      setLeft((prev) => (Math.ceil(prev / 1000) === Math.ceil(Math.max(0, l) / 1000) ? prev : Math.max(0, l)));
-      const sec = Math.ceil(l / 1000);
-      if (l > 0 && sec <= 5 && sec !== lastTick.current) { lastTick.current = sec; playSfx("tick", 0.6); }
-      if (l <= 0) { clearInterval(iv); submit(null); }
-    }, 100);
-    return () => clearInterval(iv);
-  }, [card?.i, choice, result, limit]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The clock: the server's time left on this card, shown second by second by the ring itself (CardClock), so a tick
+  // never redraws the card. At zero the card goes to the server as timed out.
 
   useFocusEffect(useCallback(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => { if (result) return false; setExit(true); return true; });
@@ -124,7 +114,7 @@ function DailyRound() {
         <T w="heavy" size={12} color={colors.custom_neonAmber} numberOfLines={1}>ALL INDIA RAPID{card && !result ? ` · ${card.subject} · ${card.chapter}` : ""}</T>
         <T w="heavy" size={16} color={colors.onSurfaceInverse} testID="rf-daily-counter" numberOfLines={1}>{result ? "Round complete" : card ? `Card ${card.i + 1} of ${total} · ${correct} right` : "Getting today’s cards…"}</T>
       </View>
-      {card && !result ? <Ring light left={locked ? (reveal?.outcome === "timed_out" ? 0 : left) : left} color={tint} limit={limit} /> : null}
+      {card && !result ? <CardClock key={card.i} startedAt={shownAt} limit={limit} initial={startLeft} running={!locked} expired={reveal?.outcome === "timed_out"} color={tint} onExpire={() => submit(null)} /> : null}
     </View>
     {card && !result ? <View testID="rf-daily-progress" style={styles.bars}>
       {Array.from({ length: total }, (_, k) => <View key={k} style={[styles.seg, { backgroundColor: k < card.i ? tint : k === card.i ? colors.onSurfaceInverse : colors.custom_gameLine }]} />)}

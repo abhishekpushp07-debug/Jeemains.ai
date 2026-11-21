@@ -129,7 +129,8 @@ class FriendCode(BaseModel):
 
 
 async def find_player(db, pid: str) -> dict:
-    p = await db.rf_profiles.find_one({"pid": str(pid).upper()}) if PID_RE.match(str(pid).upper()) else None
+    # "$type" names the pid index (it only holds text ids); without it Mongo read every profile to find one player.
+    p = await db.rf_profiles.find_one({"pid": {"$eq": str(pid).upper(), "$type": "string"}}) if PID_RE.match(str(pid).upper()) else None
     if not p:
         raise HTTPException(404, "Player not found.")
     return p
@@ -180,7 +181,7 @@ def make_router(db, rf_user):
         if len(recent) >= 20:
             raise HTTPException(429, "Too many wrong codes. Try again in a few minutes.")
         code = re.sub(r"[^A-Za-z0-9]", "", str(raw or "")).upper()
-        p = await db.rf_profiles.find_one({"friend_code": code}) if CODE_RE.match(code) else None
+        p = await db.rf_profiles.find_one({"friend_code": {"$eq": code, "$type": "string"}}) if CODE_RE.match(code) else None  # "$type": see find_player
         if not p or (p["uid"] != uid and await blocked_between(db, uid, p["uid"])):
             recent.append(now)
             raise HTTPException(404, "No player has this Friend Code. Check it and try again.")
@@ -264,9 +265,13 @@ def make_router(db, rf_user):
         if them != uid:
             out["relation"] = await relation(uid, them)
             both = {"players.uid": {"$all": [uid, them]}, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}}  # head-to-head counts 1 v 1 matches only
-            last = await db.rf_duels.find_one(both, {"_id": 0, "id": 1, "winner": 1, "subject": 1, "chapter": 1, "picks": 1}, sort=[("finished_ts", -1)])
-            out["head_to_head"] = {"you": await db.rf_duels.count_documents({**both, "winner": uid}), "them": await db.rf_duels.count_documents({**both, "winner": them}),
-                                   "played": await db.rf_duels.count_documents(both),
+            won_by = lambda u: {"$sum": {"$cond": [{"$eq": ["$winner", u]}, 1, 0]}}  # noqa: E731
+            h2h = await (await db.rf_duels.aggregate([{"$match": both}, {"$sort": {"finished_ts": -1}}, {"$group": {  # one pass, newest first
+                "_id": None, "played": {"$sum": 1}, "you": won_by(uid), "them": won_by(them),
+                "last": {"$first": {"id": "$id", "winner": "$winner", "subject": "$subject", "chapter": "$chapter", "picks": "$picks"}}}}])).to_list(1)
+            h2h = h2h[0] if h2h else {"played": 0, "you": 0, "them": 0, "last": None}
+            last = h2h["last"]
+            out["head_to_head"] = {"you": h2h["you"], "them": h2h["them"], "played": h2h["played"],
                                    "last": {"id": last["id"], "won": last.get("winner") == uid, "tie": last.get("winner") == "tie", "picks": scope_of(last)} if last else None}
         else:
             out["friend_count"] = await db.rf_friends.count_documents({"uid": uid})
@@ -292,11 +297,11 @@ def make_router(db, rf_user):
         back, or after BADLA_MAX losses in a row; the next loss after a win starts a new one."""
         uid = rf_user(x_rf_user)
         hidden = await blocked_uids(db, uid)
-        fids = {e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500)} - hidden
+        fids = {e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).batch_size(MAX_FRIENDS).to_list(MAX_FRIENDS)} - hidden
         if not fids:
             return {"items": [], "max": BADLA_MAX}
         docs = await db.rf_duels.find({"players.uid": uid, "players": {"$size": 2}, "status": "finished", "team_mode": {"$ne": True}},
-                                      {"_id": 0, "id": 1, "players.uid": 1, "winner": 1, "finished_ts": 1, "subject": 1, "chapter": 1, "picks": 1}).sort("finished_ts", -1).limit(300).to_list(300)
+                                      {"_id": 0, "id": 1, "players.uid": 1, "winner": 1, "finished_ts": 1, "subject": 1, "chapter": 1, "picks": 1}).sort("finished_ts", -1).limit(300).batch_size(300).to_list(300)
         runs: dict = {}
         for d in docs:  # newest first: count the losses in a row against each friend
             them = next((p["uid"] for p in d["players"] if p["uid"] != uid), None)
@@ -319,7 +324,7 @@ def make_router(db, rf_user):
         """What your friends did in the arena over the last 7 days: wins, win runs, rare diamonds, level-ups and trophies."""
         uid = rf_user(x_rf_user)
         hidden = await blocked_uids(db, uid)
-        fids = [e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500) if e["fid"] not in hidden]
+        fids = [e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).batch_size(MAX_FRIENDS).to_list(MAX_FRIENDS) if e["fid"] not in hidden]
         rows = await db.rf_feed.find({"uid": {"$in": fids}, "ts": {"$gt": time.time() - 7 * 86400}}, {"_id": 0, "at": 0}).sort("ts", -1).limit(30).to_list(30)
         profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": list({e["uid"] for e in rows})}}).to_list(len(rows) or 1)}
         return {"items": [{"id": e["id"], "kind": e["kind"], "data": e.get("data") or {}, "ts": e["ts"], "from": card(profs[e["uid"]])} for e in rows if e["uid"] in profs]}
@@ -328,9 +333,10 @@ def make_router(db, rf_user):
     @r.get("/friends")
     async def friends(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        edges = await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500)
-        rows = await db.rf_profiles.find({"uid": {"$in": [e["fid"] for e in edges]}}).to_list(500)
-        back = {f["uid"] for f in await db.rf_friends.find({"fid": uid, "uid": {"$in": [p["uid"] for p in rows]}}, {"_id": 0, "uid": 1}).to_list(500)}
+        # batch_size: a full friend list comes back in one trip to the database (the default sends the first 101, then asks again)
+        edges = await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).batch_size(MAX_FRIENDS).to_list(MAX_FRIENDS)
+        rows = await db.rf_profiles.find({"uid": {"$in": [e["fid"] for e in edges]}}).batch_size(MAX_FRIENDS).to_list(MAX_FRIENDS)
+        back = {f["uid"] for f in await db.rf_friends.find({"fid": uid, "uid": {"$in": [p["uid"] for p in rows]}}, {"_id": 0, "uid": 1}).batch_size(MAX_FRIENDS).to_list(MAX_FRIENDS)}
         items = [{**card(p), "follows_you": p["uid"] in back} for p in rows]
         items.sort(key=lambda x: (not x["online"], -(x.get("seen_ts") or 0)))
         return {"items": items}

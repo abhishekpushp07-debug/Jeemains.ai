@@ -451,9 +451,10 @@ def make_router(db, rf_user, duels):
         """Tonight's Cup Night: the countdown, who has joined (your friends first), and after 8 pm the cups with their champions."""
         uid = rf_user(x_rf_user)
         n, now, day, start = await night_now()
-        mine_seat = await db.rf_night_seats.find_one({"_id": seat_key(day, uid)}, {"_id": 0, "cup": 1, "missed": 1})
-        fids = [e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).to_list(500)]
-        seated = {s["uid"] for s in await db.rf_night_seats.find({"_id": {"$in": [seat_key(day, f) for f in fids]}}, {"_id": 0, "uid": 1}).to_list(500)} if fids else set()
+        # "_id" stays in the answer: a seat taken before the draw has no cup yet, and an empty answer would read as "no seat".
+        mine_seat = await db.rf_night_seats.find_one({"_id": seat_key(day, uid)}, {"cup": 1, "missed": 1})
+        fids = [e["fid"] for e in await db.rf_friends.find({"uid": uid}, {"_id": 0, "fid": 1}).batch_size(500).to_list(500)]
+        seated = {s["uid"] for s in await db.rf_night_seats.find({"_id": {"$in": [seat_key(day, f) for f in fids]}}, {"_id": 0, "uid": 1}).batch_size(500).to_list(500)} if fids else set()
         seated -= await blocked_uids(db, uid) if seated else set()
         friends = [{k: card(p)[k] for k in SHOWN} for p in await db.rf_profiles.find({"uid": {"$in": list(seated)[:12]}}).to_list(12)]
         cups, my_cup = [], (mine_seat or {}).get("cup")
@@ -547,7 +548,8 @@ def make_router(db, rf_user, duels):
         """Follow a cup with its watch code: its bracket and every live match. Up to 100 people per cup."""
         uid = rf_user(x_rf_user)
         code = "".join(ch for ch in data.code.upper() if ch.isalnum())
-        c = await db.rf_cups.find_one({"code": code, "status": {"$in": ["open", "live", "finished"]}})
+        # "$type" names the code index (it only holds text codes); without it Mongo read every cup to find one.
+        c = await db.rf_cups.find_one({"code": {"$eq": code, "$type": "string"}, "status": {"$in": ["open", "live", "finished"]}})
         if not c:
             raise HTTPException(404, "No cup has this code. Check it and try again.")
         if uid in [p["uid"] for p in c["players"]] or uid in c.get("invites", []) or uid in (c.get("spectators") or []):

@@ -8,6 +8,7 @@ import { useAuth } from "@/src/auth";
 import { T, buzz } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
 import { arena } from "@/src/theme";
+import { useScreenInFront } from "@/src/motion";
 import { Emblem } from "./Art";
 import { Panel, RaisedButton } from "./arena";
 import { NightReminder } from "./NightReminder";
@@ -20,13 +21,14 @@ export function ChallengeBanner({ floating }: { floating?: boolean }) {
   const c = inbox?.challenges[0];
   const [busy, setBusy] = useState("");
   const [, tick] = useState(0);
-  const id = c?.id;
+  const id = c?.id, front = useScreenInFront();
+  // Every open arena screen holds a banner: only the one in front buzzes and counts down.
+  useEffect(() => { if (id && front) buzz("warning"); }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (!id) return;
-    buzz("warning");
+    if (!id || !front) return;
     const iv = setInterval(() => tick((n) => n + 1), 1000);
     return () => clearInterval(iv);
-  }, [id]);
+  }, [id, front]);
   if (!c || !user) return <NightReminder floating={floating} />;
   const left = Math.max(0, Math.round(c.expires_in - inboxAge()));
   if (!left) return null;

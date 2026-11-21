@@ -1,5 +1,8 @@
 """Immutable, idempotent learning events. Queries are scoped to one learner + exam."""
 import random
+import sys
+import time
+from collections import OrderedDict, namedtuple
 from typing import Optional
 
 from fastapi import APIRouter, Header
@@ -21,25 +24,72 @@ async def record_learning(db, uid, ref, exam, rows, cards, completed_at):
             "exam": exam, "results": results, "completed_at": completed_at}}, upsert=True)
 
 
-async def weak_chapters(db, uid, exam):
+MEMO_SECONDS, MEMO_SIZE = 60, 5000
+_memo: OrderedDict = OrderedDict()  # (what, uid, exam) -> (learning events, read_at, value)
+
+
+async def remembered(db, what, uid, exam, load, empty):
+    """A student's weak lists change only when they finish another round (one more learning event) or the bank changes.
+    So the pass over their whole history runs once per finished round (and at most a minute later for a bank change);
+    every other look - each time the lobby opens - costs one count read from the index. No finished round: no pass at all."""
+    events = await db.rf_learning_events.count_documents({"uid": uid, "exam": exam})
+    if not events:
+        return empty
+    key = (what, uid, exam)
+    hit = _memo.get(key)
+    if hit and hit[0] == events and time.monotonic() - hit[1] < MEMO_SECONDS:
+        _memo.move_to_end(key)
+        return hit[2]
+    value = await load()
+    _memo[key] = (events, time.monotonic(), value)
+    _memo.move_to_end(key)
+    while len(_memo) > MEMO_SIZE:
+        _memo.popitem(last=False)
+    return value
+
+
+Mark = namedtuple("Mark", "card subject chapter latest tries misses")
+MARKS_SIZE = 300
+_marks: OrderedDict = OrderedDict()  # (uid, exam) -> (learning events, every card the student has answered)
+
+
+async def card_marks(db, uid, exam) -> list:
+    """Every card this student has answered: where it belongs, the latest outcome, tries and misses.
+    Learning events are never changed once written, so this pass over the student's whole history is made once per
+    finished round and then serves both weak lists (the lobby asks for both, and again a minute later for bank changes).
+    Before, each list made its own pass every time, and one of them looked every missed card up one at a time."""
+    events = await db.rf_learning_events.count_documents({"uid": uid, "exam": exam})
+    hit = _marks.get((uid, exam))
+    if hit and hit[0] == events:
+        _marks.move_to_end((uid, exam))
+        return hit[1]
     rows = await (await db.rf_learning_events.aggregate([
         {"$match": {"uid": uid, "exam": exam}},
         {"$sort": {"completed_at": 1, "ref": 1}},
         {"$unwind": "$results"},
-        {"$group": {"_id": "$results.card_id", "subject": {"$last": "$results.subject"},
-                    "chapter": {"$last": "$results.chapter"}, "latest": {"$last": "$results.outcome"},
+        {"$group": {"_id": "$results.card_id", "subject": {"$last": "$results.subject"}, "chapter": {"$last": "$results.chapter"},
+                    "latest": {"$last": "$results.outcome"}, "tries": {"$sum": 1},
                     "misses": {"$sum": {"$cond": [{"$in": ["$results.outcome", ["incorrect", "timed_out"]]}, 1, 0]}}}},
-        {"$match": {"latest": {"$ne": "correct"}, "misses": {"$gt": 0}}},
-        {"$lookup": {"from": "rf_cards", "localField": "_id", "foreignField": "id", "as": "card"}},
-        {"$match": {"card": {"$elemMatch": {"exam": exam, "retired": {"$ne": True}}}}},
-        {"$sort": {"misses": -1, "_id": 1}},
-        {"$group": {"_id": {"subject": "$subject", "chapter": "$chapter"},
-                    "misses": {"$sum": "$misses"}, "card_ids": {"$push": "$_id"}}},
-        {"$sort": {"misses": -1, "_id.subject": 1, "_id.chapter": 1}},
-        {"$project": {"_id": 0, "subject": "$_id.subject", "chapter": "$_id.chapter", "misses": 1,
-                      "remaining": {"$size": "$card_ids"}, "card_ids": {"$slice": ["$card_ids", 30]}}},
-    ])).to_list(150)
-    return rows
+    ])).to_list(None)
+    marks = [Mark(r["_id"], sys.intern(r["subject"]), sys.intern(r["chapter"]), sys.intern(r["latest"]), r["tries"], r["misses"]) for r in rows]
+    _marks[(uid, exam)] = (events, marks)
+    _marks.move_to_end((uid, exam))
+    while len(_marks) > MARKS_SIZE:
+        _marks.popitem(last=False)
+    return marks
+
+
+async def weak_chapters(db, uid, exam):
+    """Chapters with cards still missed (wrong or timed out, and not answered right since), most missed first."""
+    missed = [m for m in await card_marks(db, uid, exam) if m.latest != "correct" and m.misses > 0]
+    live = {c["id"] async for c in db.rf_cards.find({"id": {"$in": [m.card for m in missed]}, "exam": exam, "retired": {"$ne": True}}, {"_id": 0, "id": 1})} if missed else set()
+    chapters = {}
+    for m in sorted((m for m in missed if m.card in live), key=lambda m: (-m.misses, m.card)):
+        row = chapters.setdefault((m.subject, m.chapter), {"subject": m.subject, "chapter": m.chapter, "misses": 0, "card_ids": []})
+        row["misses"] += m.misses
+        row["card_ids"].append(m.card)
+    rows = sorted(chapters.values(), key=lambda row: (-row["misses"], row["subject"], row["chapter"]))[:150]
+    return [{**row, "remaining": len(row["card_ids"]), "card_ids": row["card_ids"][:30]} for row in rows]
 
 
 # Weak Topic Sprint: the subtopics a student keeps missing (wrong or timed out), and a sprint dealt only from them.
@@ -49,21 +99,14 @@ MIN_MISSES, MAX_TOPICS = 2, 8
 async def weak_topics(db, uid, exam):
     """Subtopics ranked by misses (then miss rate). "Frequently missed" = missed at least twice; when fewer than three
     subtopics reach that, the next most-missed ones fill in so a new student still gets a sprint."""
-    rows = await (await db.rf_learning_events.aggregate([
-        {"$match": {"uid": uid, "exam": exam}},
-        {"$sort": {"completed_at": 1, "ref": 1}},
-        {"$unwind": "$results"},
-        {"$group": {"_id": "$results.card_id", "latest": {"$last": "$results.outcome"}, "tries": {"$sum": 1},
-                    "misses": {"$sum": {"$cond": [{"$in": ["$results.outcome", ["incorrect", "timed_out"]]}, 1, 0]}}}},
-    ])).to_list(20000)
-    by_card = {r["_id"]: r for r in rows}
+    by_card = {m.card: m for m in await card_marks(db, uid, exam)}
     topics = {}
     async for c in db.rf_cards.find({"id": {"$in": list(by_card)}, "exam": exam, "retired": {"$ne": True}}, {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "topic": 1}):
-        r, key = by_card[c["id"]], (c["subject"], c["chapter"], c.get("topic") or c["chapter"])
+        m, key = by_card[c["id"]], (c["subject"], c["chapter"], c.get("topic") or c["chapter"])
         t = topics.setdefault(key, {"subject": key[0], "chapter": key[1], "topic": key[2], "misses": 0, "tries": 0, "weak_ids": []})
-        t["misses"] += r["misses"]
-        t["tries"] += r["tries"]
-        if r["misses"] and r["latest"] != "correct":
+        t["misses"] += m.misses
+        t["tries"] += m.tries
+        if m.misses and m.latest != "correct":
             t["weak_ids"].append(c["id"])
     # A subtopic stays weak while at least one of its missed cards has not been answered right since.
     ranked = sorted((t for t in topics.values() if t["weak_ids"]), key=lambda t: (-t["misses"], -t["misses"] / t["tries"], t["topic"]))
@@ -112,18 +155,25 @@ def make_router(db, rf_user):
 
     @router.get("/revision")
     async def revision(exam: Exam = "JEE", x_rf_user: Optional[str] = Header(None)):
-        exam = require_active_exam(exam)
-        rows = await weak_chapters(db, rf_user(x_rf_user), exam)
-        return {"exam": exam, "items": [{k: v for k, v in row.items() if k != "card_ids"} for row in rows],
-                "remaining": sum(row["remaining"] for row in rows),
+        exam, uid = require_active_exam(exam), rf_user(x_rf_user)
+
+        async def load():
+            rows = await weak_chapters(db, uid, exam)
+            return {"items": [{k: v for k, v in row.items() if k != "card_ids"} for row in rows], "remaining": sum(row["remaining"] for row in rows)}
+
+        return {"exam": exam, **await remembered(db, "chapters", uid, exam, load, {"items": [], "remaining": 0}),
                 "rule": "Wrong and timed-out cards from completed sprints and duels. Correct replays clear a card; skipped cards do not count."}
 
     @router.get("/weak-topics")
     async def weak_topic_list(exam: Exam = "JEE", x_rf_user: Optional[str] = Header(None)):
-        exam = require_active_exam(exam)
-        deck, topics = await weak_topic_deck(db, rf_user(x_rf_user), exam, 100, set())  # what a round can really deal (max 100)
-        return {"exam": exam, "cards": len(deck), "seconds": CARD_SECONDS,
-                "topics": [{k: v for k, v in t.items() if k != "weak_ids"} | {"missed": len(t["weak_ids"])} for t in topics],
+        exam, uid = require_active_exam(exam), rf_user(x_rf_user)
+
+        async def load():
+            deck, topics = await weak_topic_deck(db, uid, exam, 100, set())  # what a round can really deal (max 100)
+            return {"cards": len(deck), "topics": [{k: v for k, v in t.items() if k != "weak_ids"} | {"missed": len(t["weak_ids"])} for t in topics]}
+
+        body = await remembered(db, "topics", uid, exam, load, {"cards": 0, "topics": []})
+        return {"exam": exam, "cards": body["cards"], "seconds": CARD_SECONDS, "topics": body["topics"],
                 "rule": f"Subtopics you got wrong or ran out of time on at least {MIN_MISSES} times, most missed first. Only these subtopics are dealt."}
 
     return router

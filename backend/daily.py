@@ -29,6 +29,8 @@ PER_SUBJECT = 15  # 45 cards a day
 TOTAL = PER_SUBJECT * len(SUBJECTS)
 GRACE = 2.5  # seconds for the network, both ways
 START_IN = 3.0  # the 3-2-1 before the first card
+DECK_SECONDS = 60  # how long a server process keeps the day's cards before reading them again
+SLOT_MS = 10_000  # the board counts finished runs by score and by 10 s of time taken (see board())
 REVEAL = {"correct": 1.0, "incorrect": 2.4, "timed_out": 2.4, "skipped": 0.3}  # the next card shows after this
 
 
@@ -57,16 +59,38 @@ def public(card: dict, i: int) -> dict:
 
 def make_router(db, rf_user, award):
     r = APIRouter(prefix="/rf/daily")
-    boards: dict = {}  # (exam, day, test) -> (ts, players, rows)
+    boards: dict = {}  # (exam, day, test) -> (ts, players, rows, when the read began, finished runs by (score, 10 s of time))
     locks: dict = {}
+    decks: dict = {}  # "exam:day" -> (read_at, card ids, cards by id) of a deck that can no longer change
+    ranks: dict = {}  # (exam, day, uid) -> (ts, rank) of a finished run outside the top 100
+    profile_fields = {"_id": 0, "uid": 1, "name": 1, "pid": 1, "avatar": 1, "equipped": 1, "xp": 1, "cups_won": 1, "cups_real": 1}
+
+    async def remember(key: str, ids: list) -> tuple:
+        cards = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": ids}}, {"_id": 0}).to_list(len(ids))}
+        if len(decks) > 32:
+            decks.clear()
+        decks[key] = (time.monotonic(), ids, cards)
+        return ids, cards
+
+    async def dealt(exam: str, day: str) -> tuple:
+        """(card ids, cards by id) of a day that is being played. Every student plays the same cards, so each server
+        process reads them once a minute instead of two or three times on every answer of every student."""
+        key = f"{exam}:{day}"
+        hit = decks.get(key)
+        if hit and time.monotonic() - hit[0] < DECK_SECONDS:
+            return hit[1], hit[2]
+        return await remember(key, (await db.rf_daily.find_one({"_id": key}))["card_ids"])
 
     async def deck(exam: str, day: str) -> list:
         """Today's 45 card ids: 15 per subject, 15 different chapters each, never a card from an earlier day.
         A day keeps the deck it was first played with; a shorter deck from before the 45-card rule that nobody has played yet is dealt again."""
         key = f"{exam}:{day}"
+        hit = decks.get(key)
+        if hit and time.monotonic() - hit[0] < DECK_SECONDS:
+            return hit[1]
         have = await db.rf_daily.find_one({"_id": key})
         if have and (len(have["card_ids"]) >= TOTAL or await db.rf_daily_plays.find_one({"exam": exam, "day": day}, {"_id": 1})):
-            return have["card_ids"]
+            return (await remember(key, have["card_ids"]))[0]
         used = set(await db.rf_daily.distinct("card_ids", {"exam": exam, "_id": {"$ne": key}}))
         rng = random.Random(hashlib.sha256(key.encode()).hexdigest())
         lanes, prompts = [], set()
@@ -102,40 +126,87 @@ def make_router(db, rf_user, award):
             return (await db.rf_daily.find_one({"_id": key}))["card_ids"]
         return ids
 
-    async def cards_of(ids: list) -> list:
-        docs = {c["id"]: c for c in await db.rf_cards.find({"id": {"$in": ids}}, {"_id": 0}).to_list(len(ids))}
-        return [docs[i] for i in ids if i in docs]
-
     def rank_query(p: dict) -> dict:
         return {"exam": p["exam"], "day": p["day"], "test": p.get("test", False), "status": "done",
                 "$or": [{"correct": {"$gt": p["correct"]}}, {"correct": p["correct"], "ms": {"$lt": p["ms"]}},
                         {"correct": p["correct"], "ms": p["ms"], "finished_ts": {"$lt": p["finished_ts"]}}]}
 
-    async def rank_of(p: dict) -> Optional[int]:
-        return 1 + await db.rf_daily_plays.count_documents(rank_query(p)) if p and p.get("status") == "done" else None
+    async def rank_of(p: dict, rows: list = ()) -> Optional[int]:
+        """A finished run's place. In the top 100 it is the place on the board the student is looking at; below that,
+        counting everyone ahead is the costly part, so the count is kept for 15 s (as long as the board itself)."""
+        if not p or p.get("status") != "done":
+            return None
+        on_board = next((row["rank"] for row in rows if row["uid"] == p["uid"]), None)
+        if on_board:
+            return on_board
+        k = (p["exam"], p["day"], p["uid"])
+        hit = ranks.get(k)
+        if hit and time.time() - hit[0] < 15:
+            return hit[1]
+        copy = boards.get((p["exam"], p["day"], p.get("test", False)))
+        if copy:
+            # Runs with more right answers, or as many in an earlier 10 s of time, are added up from the board's small
+            # table. Only the runs inside this run's own 10 s are counted from the index: a handful, where the count
+            # used to walk past everyone ahead (half of the day's players on average, for every student who looked).
+            slot = p["ms"] // SLOT_MS
+            ahead = sum(n for (correct, s), n in copy[4].items() if correct > p["correct"] or (correct == p["correct"] and s < slot))
+            rank = 1 + ahead + await db.rf_daily_plays.count_documents({
+                "exam": p["exam"], "day": p["day"], "test": p.get("test", False), "status": "done", "correct": p["correct"],
+                "$or": [{"ms": {"$gte": slot * SLOT_MS, "$lt": p["ms"]}}, {"ms": p["ms"], "finished_ts": {"$lt": p["finished_ts"]}}]})
+        else:  # this server has no copy of the board right now: the full count
+            rank = 1 + await db.rf_daily_plays.count_documents(rank_query(p))
+        if len(ranks) > 200_000:
+            ranks.clear()
+        ranks[k] = (time.time(), rank)
+        return rank
+
+    def row_of(x: dict, pr: dict, rank: int) -> dict:
+        return {"rank": rank, "uid": x["uid"], "name": pr.get("name") or "JEE Aspirant", "pid": pr.get("pid"), "avatar": safe_avatar(pr.get("avatar")),
+                "frame": equipped_of(pr).get("frame"), "level": level_of(pr.get("xp", 0)), "crown": crown_of(pr), "correct": x["correct"], "ms": x["ms"]}
 
     async def board(exam: str, day: str, test: bool, limit: int = 100) -> tuple:
-        """(players, top rows) for a day, kept 15 s: the lobby of every student asks for it."""
+        """(players, top rows) for a day: the lobby of every student asks for it. Today's is kept 15 s; a day that is over
+        cannot change any more (only a run that began just before midnight may still end), so it is kept 5 minutes."""
         k = (exam, day, test)
         lock = locks.setdefault(k, asyncio.Lock())
         async with lock:
             hit = boards.get(k)
-            if hit and time.time() - hit[0] < 15:
+            if hit and time.time() - hit[0] < (15 if day >= ist_day() else 300):
                 return hit[1], hit[2]
-            q = {"exam": exam, "day": day, "test": test, "status": "done"}
-            players = await db.rf_daily_plays.count_documents(q)
+            q, began = {"exam": exam, "day": day, "test": test, "status": "done"}, time.time()
+            # One pass over the day's index (the same walk the plain count made) also says how many runs ended on each
+            # score in each 10 s of time taken: the number of players is their sum, and rank_of() reads places from it.
+            spread = {(g["_id"]["c"] or 0, int(g["_id"]["s"] or 0)): g["n"] for g in await (await db.rf_daily_plays.aggregate(
+                [{"$match": q}, {"$group": {"_id": {"c": "$correct", "s": {"$floor": {"$divide": ["$ms", SLOT_MS]}}}, "n": {"$sum": 1}}}])).to_list(None)}
+            players = sum(spread.values())
             plays = await db.rf_daily_plays.find(q, {"_id": 0, "uid": 1, "correct": 1, "ms": 1}).sort([("correct", -1), ("ms", 1), ("finished_ts", 1)]).limit(100).to_list(100)
-            profs = {x["uid"]: x for x in await db.rf_profiles.find({"uid": {"$in": [x["uid"] for x in plays]}},
-                     {"_id": 0, "uid": 1, "name": 1, "pid": 1, "avatar": 1, "equipped": 1, "xp": 1, "cups_won": 1, "cups_real": 1}).to_list(100)}
-            rows = []
-            for n, x in enumerate(plays):
-                pr = profs.get(x["uid"], {})
-                rows.append({"rank": n + 1, "uid": x["uid"], "name": pr.get("name") or "JEE Aspirant", "pid": pr.get("pid"), "avatar": safe_avatar(pr.get("avatar")),
-                             "frame": equipped_of(pr).get("frame"), "level": level_of(pr.get("xp", 0)), "crown": crown_of(pr), "correct": x["correct"], "ms": x["ms"]})
+            profs = {x["uid"]: x for x in await db.rf_profiles.find({"uid": {"$in": [x["uid"] for x in plays]}}, profile_fields).to_list(100)}
+            rows = [row_of(x, profs.get(x["uid"], {}), n + 1) for n, x in enumerate(plays)]
             if len(boards) > 64:
                 boards.clear()
-            boards[k] = (time.time(), players, rows)
+            boards[k] = (time.time(), players, rows, began, spread)
             return players, rows
+
+    async def add_to_board(p: dict, uid: str):
+        """A run just finished: the player takes their place on this server's copy of the board, and the count goes up by one.
+        The copy used to be thrown away on every finish instead; with a crowd finishing every second it was then never
+        kept, and every lobby that opened counted the whole day's runs again."""
+        k = (p["exam"], p["day"], p.get("test", False))
+        async with locks.setdefault(k, asyncio.Lock()):
+            hit = boards.get(k)
+            if not hit or any(row["uid"] == uid for row in hit[2]):
+                return  # no copy here (the next look reads a fresh one), or the copy already shows this run
+            ts, players, rows, began, spread = hit
+            # Same order as the board: more correct first, then less time; a run that ends later stays below its equals.
+            at = next((n for n, row in enumerate(rows) if (row["correct"], -row["ms"]) < (p["correct"], -p["ms"])), len(rows))
+            if at < 100:
+                pr = await db.rf_profiles.find_one({"uid": uid}, profile_fields) or {}
+                rows = [{**row, "rank": n + 1} for n, row in enumerate([*rows[:at], row_of(p, pr, 0), *rows[at:]][:100])]
+            elif began >= p["finished_ts"]:
+                return  # below the top 100, and the copy was read after this run ended: it is already counted
+            where = (p["correct"], p["ms"] // SLOT_MS)
+            spread[where] = spread.get(where, 0) + 1
+            boards[k] = (ts, players + 1, rows, began, spread)
 
     def shown(rows: list, uid: str, limit: int) -> list:
         return [{k: v for k, v in row.items() if k != "uid"} | {"you": row["uid"] == uid} for row in rows[:limit]]
@@ -144,9 +215,10 @@ def make_router(db, rf_user, award):
         return await db.rf_daily_plays.find_one({"exam": exam, "day": day, "uid": uid}, {"_id": 0})
 
     async def result(p: dict, uid: str) -> dict:
-        players, _ = await board(p["exam"], p["day"], p.get("test", False))
+        players, rows = await board(p["exam"], p["day"], p.get("test", False))
         award_row = await db.rf_awards.find_one({"uid": uid, "ref": ref_of(p)}, {"_id": 0, "reward": 1}) or {}
-        return {"correct": p["correct"], "total": len(p.get("rows") or []) or TOTAL, "ms": p["ms"], "rank": await rank_of(p), "players": max(players, 1),
+        rank = await rank_of(p, rows)
+        return {"correct": p["correct"], "total": len(p.get("rows") or []) or TOTAL, "ms": p["ms"], "rank": rank, "players": max(players, rank or 1),
                 "reward": award_row.get("reward"), "day": p["day"]}
 
     def ref_of(p: dict) -> str:
@@ -154,9 +226,9 @@ def make_router(db, rf_user, award):
 
     async def settle(p: dict, uid: str) -> dict:
         """Last card done: pay the reward once and record the misses for Weak cards."""
-        boards.pop((p["exam"], p["day"], p.get("test", False)), None)
-        cards = await cards_of([x["card_id"] for x in p["rows"]])
-        await record_learning(db, uid, ref_of(p), p["exam"], p["rows"], cards, datetime.fromtimestamp(p["finished_ts"], IST).isoformat())
+        await add_to_board(p, uid)
+        _, cards = await dealt(p["exam"], p["day"])
+        await record_learning(db, uid, ref_of(p), p["exam"], p["rows"], list(cards.values()), datetime.fromtimestamp(p["finished_ts"], IST).isoformat())
         answered = sum(x["outcome"] in ("correct", "incorrect") for x in p["rows"])
         gems, best = phoenix([x["outcome"] for x in p["rows"]])
         await award(uid, ref_of(p), "solo", p["correct"], len(p["rows"]), answered, exam=p["exam"], diamonds=gems, phoenix_streak=best)
@@ -166,13 +238,13 @@ def make_router(db, rf_user, award):
         """The card on screen now. A card left past its time (the app was closed) counts as timed out, then the next is dealt."""
         while p["status"] == "playing":
             now = time.time()
-            ids = (await db.rf_daily.find_one({"_id": f"{p['exam']}:{p['day']}"}))["card_ids"]
+            ids, cards = await dealt(p["exam"], p["day"])
             if p.get("served_ts") is None:
                 p = await db.rf_daily_plays.find_one_and_update({"exam": p["exam"], "day": p["day"], "uid": uid, "i": p["i"], "served_ts": None},
                                                                 {"$set": {"served_ts": now + START_IN}}, projection={"_id": 0}, return_document=ReturnDocument.AFTER) or await play_of(uid, p["exam"], p["day"])
                 continue
             if now <= p["served_ts"] + CARD_SECONDS + GRACE:
-                card = (await cards_of([ids[p["i"]]]))[0]
+                card = cards[ids[p["i"]]]
                 return {"status": "playing", "i": p["i"], "total": len(ids), "seconds": CARD_SECONDS, "correct": p["correct"], "card": public(card, p["i"]),
                         "show_in_ms": max(0, round((p["served_ts"] - now) * 1000)), "left_ms": round(min(CARD_SECONDS, p["served_ts"] + CARD_SECONDS - now) * 1000)}
             p = await move(p, uid, ids, None, "timed_out", CARD_SECONDS * 1000, now) or await play_of(uid, p["exam"], p["day"])
@@ -202,7 +274,7 @@ def make_router(db, rf_user, award):
         _, yrows = await board(exam, yday, test)
         you = {"status": "new"}
         if p:
-            you = {"status": p["status"], "i": p["i"], "correct": p["correct"], "ms": p["ms"], "rank": await rank_of(p)}
+            you = {"status": p["status"], "i": p["i"], "correct": p["correct"], "ms": p["ms"], "rank": await rank_of(p, rows)}
         return {"exam": exam, "day": day, "total": len(await deck(exam, day)) or TOTAL, "seconds": CARD_SECONDS, "ends_in": max(0, round(day_ends(day) - time.time())),
                 "players": players, "top": shown(rows, uid, 3), "yesterday": shown(yrows, uid, 3), "you": you}
 
@@ -234,11 +306,11 @@ def make_router(db, rf_user, award):
             return {"status": "done", "result": await result(p, uid)}
         if data.i != p["i"] or p.get("served_ts") is None:
             return await current(p, uid)  # a retry of a card already counted: show where the run really is
-        ids = (await db.rf_daily.find_one({"_id": f"{p['exam']}:{p['day']}"}))["card_ids"]
+        ids, cards = await dealt(p["exam"], p["day"])
         now = time.time()
         if now < p["served_ts"]:  # an answer before the card is even on screen does not count: show where the run really is
             return await current(p, uid)
-        card = (await cards_of([ids[p["i"]]]))[0]
+        card = cards[ids[p["i"]]]
         took = max(0.0, now - p["served_ts"])
         if took > CARD_SECONDS + GRACE or (data.choice is None and not data.skip):
             outcome, ms = "timed_out", CARD_SECONDS * 1000
@@ -252,7 +324,7 @@ def make_router(db, rf_user, award):
         out = {"outcome": outcome, "answer": card["answer"], "explain": card.get("explain", ""), "formula": card.get("formula", ""), "ms": ms, "correct": after["correct"]}
         if after["status"] == "done":
             return {**out, "status": "done", "result": await result(after, uid)}
-        nxt = (await cards_of([ids[after["i"]]]))[0]
+        nxt = cards[ids[after["i"]]]
         return {**out, "status": "playing", "i": after["i"], "total": len(ids), "seconds": CARD_SECONDS, "card": public(nxt, after["i"]),
                 "show_in_ms": round(REVEAL[outcome] * 1000), "left_ms": CARD_SECONDS * 1000}
 
@@ -265,7 +337,7 @@ def make_router(db, rf_user, award):
         if not p:
             raise HTTPException(404, "Start today's All India Rapid first.")
         if p["status"] == "playing":
-            ids = (await db.rf_daily.find_one({"_id": f"{p['exam']}:{p['day']}"}))["card_ids"]
+            ids, _ = await dealt(exam, p["day"])
             now = time.time()
             rows = [{"card_id": ids[k], "outcome": "skipped", "choice": None, "ms": 0} for k in range(p["i"], len(ids))]
             after = await db.rf_daily_plays.find_one_and_update({"exam": exam, "day": p["day"], "uid": uid, "status": "playing"},
@@ -283,8 +355,9 @@ def make_router(db, rf_user, award):
         day = day or ist_day()
         players, rows = await board(exam, day, uid.startswith("TEST"))
         p = await play_of(uid, exam, day)
-        you = {"status": p["status"], "correct": p["correct"], "ms": p["ms"], "rank": await rank_of(p)} if p else {"status": "new"}
-        d = await db.rf_daily.find_one({"_id": f"{exam}:{day}"}, {"card_ids": 1})
+        you = {"status": p["status"], "correct": p["correct"], "ms": p["ms"], "rank": await rank_of(p, rows)} if p else {"status": "new"}
+        d = decks.get(f"{exam}:{day}")  # a deck in memory can no longer change, so its size is right whatever its age
+        d = {"card_ids": d[1]} if d else await db.rf_daily.find_one({"_id": f"{exam}:{day}"}, {"card_ids": 1})
         return {"exam": exam, "day": day, "total": len(d["card_ids"]) if d else TOTAL, "players": players, "items": shown(rows, uid, 100), "you": you}
 
     return r

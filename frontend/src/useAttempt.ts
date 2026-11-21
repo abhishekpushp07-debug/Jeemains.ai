@@ -4,6 +4,7 @@ import { api, ApiError, post, put, uuid } from "@/src/api/client";
 import { Draft, DraftMap, loadDrafts, saveDrafts } from "@/src/drafts";
 import { loadAttempt, receivedAt, warmResult, prepareImages } from "@/src/api/paperOpening";
 import { createRecorder, Recorder } from "@/src/analysis/timeCapture";
+import { originalLook } from "@/src/assets/pieces";
 
 export type Attempt = any;
 const mono = () => (globalThis.performance?.now ? globalThis.performance.now() : Date.now());
@@ -137,7 +138,7 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
           if (e.status === 409) {
             const left = secondsLeft();
             if (left != null && left <= 0) break; // time is up: the paper is sealed, the submit step takes over (no full re-download)
-            const latest = await api("/attempts/" + id).catch(() => null);
+            const latest = originalLook(await api("/attempts/" + id).catch(() => null));
             if (!latest) break;
             if (latest.status === "completed") {
               done.current();

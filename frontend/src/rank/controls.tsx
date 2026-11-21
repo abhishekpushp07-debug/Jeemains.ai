@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Animated, { cancelAnimation, Easing, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { cancelAnimation, Easing, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Press, T } from "@/src/components/ui";
+import { useStill } from "@/src/motion";
 import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";

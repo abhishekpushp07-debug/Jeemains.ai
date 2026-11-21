@@ -95,13 +95,15 @@ function Cup() {
   }, [cid, uid]);
   const status: string = cup?.status || "";
   const moving = !cup || status === "open" || status === "live";
+  const [isFocused, setFocused] = useState(true);
+  // Only the bracket in front keeps asking and ticking. Under a match (or under the next round's bracket) it rests,
+  // so it never takes frames or network away from the cards being played; it loads again the moment it is back in front.
   useEffect(() => {
-    if (!uid || !moving) return;
+    if (!uid || !moving || !isFocused) return;
     load();
     const poll = setInterval(load, 2000), second = setInterval(() => tick((n) => n + 1), 1000);
     return () => { clearInterval(poll); clearInterval(second); };
-  }, [uid, moving, load]);
-  const [isFocused, setFocused] = useState(true);
+  }, [uid, moving, isFocused, load]);
   useFocusEffect(useCallback(() => { focused.current = true; setFocused(true); load(); return () => { focused.current = false; setFocused(false); }; }, [load]));
   // Your next match is seated: go straight in, so the entry show starts with your rival's.
   useEffect(() => {
