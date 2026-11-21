@@ -1,0 +1,30 @@
+{
+  "summary": "Independent browser verification (own script tests/ui_verify211.py, not ui_cut210.py) of PDF Engine 2.0 Phase 1 after the rollback, via the preview frontend with /api routed to the disposable bridge (127.0.0.1:8772), at 1920x800 and 390x844. Covered: student test (11 MCQ + 1 numerical, per question: one grid column, all 4 cards at the same x, full width = stem width, top-to-bottom order, picture aspect ratio not squashed, stem and options at the same scale; selecting C then D leaves only D selected with red border rgb(217,15,35) and tick; zoom-in x2 / zoom-out x2 back to the original size, stack kept; number box accepts typing; no page overflow), Results/Solutions (stacked, exactly 1 is-correct card, 'Sahi jawab' badge inside its card horizontally and not over the card above), Super Admin proof (2/2 'Saaf kata', proof options stacked), boxed held fix tool (full page + draw mode by default, 5 cut-printed + 5 cut-box q/A/B/C/D; tapping printed box #4 gives 'Yeh hissa kiska hai?'; choosing A puts A exactly on that printed box; use-printed reports 'kisi bhi box me nahi'; Save disabled; preview stacked; Override makes it pass; 'Save ho gaya'; after reload 0 held cards, summary '16 sawaal · 16 saaf kate (1 aapke boxes se)'), plain held fix tool (draw → kiska hai → Sawaal; A armed then A/B/C/D drawn with B/C/D picked by itself; switches to Box hilao; all checks pass; preview 5 pieces stacked; D drawn over C refused with 'chadh', Save disabled; rectangle and assign bar on screen together on phone), and the .answer-options CSS computes to 1 column. Result: 113/113 checks pass in the final runs (one desktop page.goto timeout from the preview was temporary and passed on retry). boxed_held and boxed_held_mob are now SAVED in this bridge run. Bridge left running.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Student test / Results / Fix-tool preview on phone (390)", "issues": ["At the default zoom, the question picture is scaled to about 330px wide, so its printed text is roughly 4-5px tall. Option text drawn at the same scale is also tiny ('24', '4', '1/3' are barely readable). Zoom-in fixes it, but the starting state is hard to read on a phone. Consider a larger default zoom on phones, or a short 'zoom badhao' hint. (Screenshots: student_mob_first.jpg, results_mob.jpg, boxfix_mob_preview.jpg.)"]},
+      {"screen": "Fix tool on phone (Poora page)", "issues": ["The whole page is about 270px wide, so the pending rectangle, label chips (Sawaal/A/B) and the print overlap and are very small (plain_mob_ask.jpg). It works, but precise drawing needs the zoom buttons."]},
+      {"screen": "Results desktop", "issues": ["When a question is scrolled into view, the sticky Analysis/Solutions tab bar covers the top of the question picture. Add scroll-margin-top to the cards. Cosmetic."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/ui_verify211.py"],
+  "action_items": [
+    "Optional: raise the default piece zoom on phones (or add a hint) so the question and option text is readable without tapping zoom",
+    "Optional: add scroll-margin-top under the sticky tabs on the Results/Solutions view",
+    "Confirm with the owner: Player.js render_mode 'source' uses .answer-options-source with grid repeat(4) (exam-refinement.css:59). This is an A|B|C|D letter pad in one row for old whole-picture questions. It is not option cards, but the owner said 'no two-per-line anywhere'. Not reached with the bridge fixtures."
+  ],
+  "critical_code_review_comments": [
+    "exam-refinement.css:59 '.player-layout .answer-options-source { grid-template-columns:repeat(4,...) }' is the only remaining multi-column option rule; everything else (.piece-options, .answer-options at App.css 2636/4001/5104) is a single column",
+    "QuestionPieces.PieceOptions hard-codes data-layout='stack' and is-stack, which matches the requirement; the review cards are wrapped in a 0-height span (likely display:contents), so tests must query [data-testid*='-option-card-'] instead of children"
+  ],
+  "updated_files": ["/app/backend/tests/ui_verify211.py"],
+  "success_rate": {"backend": "not tested (frontend only)", "frontend": "100% (113/113)"},
+  "seed_data_creation": "None; only the bridge's disposable DB was used. The fix-tool saves changed bridge fixtures boxed_held and boxed_held_mob (bridge DB only).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && python tests/ui_verify211.py [student results proof typed plain boxfix] [desk mob]. Needs bridge tests/cut_bridge210.py on :8772 and /tmp/uibridge210/bridge.json. boxfix mutates boxed_held/boxed_held_mob (one save per bridge run); that is already done in the current run, so boxfix will fail until the bridge is restarted. plain/student/results/proof are repeatable.",
+  "rca of the issue": ""
+}

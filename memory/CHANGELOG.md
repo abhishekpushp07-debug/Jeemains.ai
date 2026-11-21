@@ -1,3 +1,9 @@
+## 2026-11-21 — PDF Engine 2.0 Phase 1 recovered after the rollback + options always stacked (preview only)
+- Recovered exact lost code: tejas/book_cutter.py (printed boxes first, a/A separation, cut_boxes checks), book_cuts.py (frames), book_imports.cut_view (frames), book_pdf_worker (off-page pictures), book_reader (READER_VERSION 5: top-margin "Question N", chapter called Solutions, bookmark key tables), chapter_reader (bare flag); CutTool.js + cut-tool.css (full-page fix tool). Sources listed in memory/RECOVERY_2026-11-21.md; copies in memory/recovered/.
+- QuestionPieces PieceOptions always `is-stack` / data-layout="stack"; App.css .answer-options one column; .piece-stem scroll-margin-top under sticky tabs.
+- Tests: cut_cases210 41/41, scan compare (tests/cut_compare_restore211.py) 0 differences on 5,900 questions, chapters_iso182 58/58, typed_delete_iso185 54/54, ui_cut210 (updated for stacked options) 232/232, testing agent iteration_205 113/113 (tests/ui_verify211.py).
+
+
 ## 2026-11-18 — Picture questions send no machine text; CDN probe
 - User: "on app i see that pic of question is also there and aaai written words also. Is that problem there on website too jeelive.ai bitsat chapter wise probably or pyq jee mains". Website (preview and live bundle checked) shows only the pictures + a closed "Read accessible text"; the app showed `text`. The player sent the accessible-text sentence as `text`, and results sent the raw machine/OCR text (BITSAT and JEE Main chapter-wise).
 - attempts.delivered + results: `render_mode: source` with pictures → `text: ""` (accessible_text kept as the screen-reader label); source without pictures → accessible_text in both (never raw machine text). APP_INTEGRATION.md step 4 rule for the app. Testing agent iteration_197: backend 16/16 bridge + 33/33 iso, frontend player/results 1920 + 390 pass (tests/picture_text_bridge200.py).

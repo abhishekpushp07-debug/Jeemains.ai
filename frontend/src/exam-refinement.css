@@ -108,7 +108,7 @@
 }
 
 /* PDF Engine 2.0: only the question in the question area, and each option's own content on its own button. */
-.piece-stem { display:grid; gap:var(--space-2); margin-block:var(--space-3) var(--space-2); min-width:0; }
+.piece-stem { display:grid; gap:var(--space-2); margin-block:var(--space-3) var(--space-2); min-width:0; scroll-margin-top:7rem; }
 .piece-paper { min-width:0; padding:var(--space-3) var(--space-4); border:1px solid var(--line); border-radius:14px; background:#fff; color:#111; }
 .piece-fit { display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-2); width:100%; min-width:0; overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:thin; }
 .piece-img { display:block; flex:none; max-width:none; height:auto; user-select:none; -webkit-user-drag:none; }

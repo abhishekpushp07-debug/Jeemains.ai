@@ -1,3 +1,13 @@
+## Status — 2026-11-21: PDF Engine 2.0 Phase 1 DONE in preview after the rollback (NOT deployed). Details: memory/RECOVERY_2026-11-21.md
+- Owner's rollback (~09:29 UTC) had no git checkpoint after 20 Nov 22:46, so the code went back to the pause state and the whole overnight work was lost.
+- Recovered EXACT copies (not rewritten) from platform-saved file views, a saved git diff, the leftover compiled book_pdf_worker and the dev-server caches: printed boxes first, a/A separation, full-page fix tool (draw → "kiska hai", or pick → draw with auto-next, tap printed box, "5 chhape boxes laga do", live preview, override), boxed-book reader fixes (READER_VERSION 5, CUT_VERSION 2). The 2x2 option grid was NOT restored.
+- Options: always one below another, full width (QuestionPieces data-layout="stack"; .answer-options single column). Old-look PYQ letter row (.answer-options-source, A|B|C|D buttons under a whole-page picture) left unchanged on purpose (plan: JEE Main PYQ stays in the old look).
+- Proof: tests/cut_cases210 41/41; scans identical to the lost engine's own 09:20 scan (physics 1500, chemistry 1550, maths 1600: 0 differ; owner's boxed chemistry 1250/1250, 1000 options + 250 numerical, 0 held, every key, 0 differ); chapters_iso182 58/58; typed_delete_iso185 54/54; master_iso181 121/124 and structure_iso173 132/133 (same 4 stale expectations as the 20 Nov record: JEE series now 50 days and AITS shown to students); production build OK; ui_cut210 desk+mob 232/232; testing agent iteration_205 frontend 113/113, no bugs.
+- AITS maths book 1250: 0 held, identical to the lost engine's scan. Speed (scan script, alone): boxed chemistry 412 s (lost engine 420 s; pre-boxes engine 332 s, which also held 34) — slower than the old engine, NOT measured inside the app upload path.
+- Same 5 held questions in the unboxed books ("chipke hue" options) — Phase 2.
+- Leftover disposable DBs tejas_isolated_book170_436fa878 / _50fcbf47 (0 books, 0 users) dropped.
+
+
 ## Status — 2026-11-20 (night): PDF Engine 2.0 Phase 1 PAUSED by the owner. NOT complete. Read memory/PAUSE_2026-11-20.md first.
 - Owner: "Save and pause your work, I will ask you to resume." Wait for "resume".
 - Code is at its session-start state (same as what the owner deployed to jeelive.ai at the start of this session). An unfinished, unverified cutter rewrite is parked in memory/pause_2026-11-20/ and is not live.

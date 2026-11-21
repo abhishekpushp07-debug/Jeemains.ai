@@ -1,3 +1,10 @@
+## PDF Engine 2.0 — next (2026-11-21)
+- P1 Phase 2 (needs owner approval): "chipke hue" options (5 held questions in the unboxed books), app guide + PDF format guide, diagram beside options / option on next page / two-column pages, scanned PDFs without AI, plain-word options as real text, "dobara padho" for old Drafts, solution pictures trimmed the same way, JEE Main PYQ in the new look.
+- P1 Readability on phones: wide question pictures start small at 390 px (zoom button fixes it); consider a bigger starting zoom or a hint.
+- P2 Speed: boxed 2,527-page book scan ~7 min (old engine without boxes ~5.5 min); measure upload → Draft time inside the app on preview.
+- Stale suite expectations to refresh: master_iso181 (JEE series 50 days, AITS type on the exam page), structure_iso173 (AITS student section).
+
+
 # Analysis 2.0 Phase 1 (2026-11-19)
 - DONE (preview): website 8 sections + Comparative + Leaderboard + Solutions cards + (i) texts styled and browser-checked; PDF report with cover/contents/charts/journey; app packet addendum /downloads/jeelive-app-update-2026-11-19.zip.
 - P0: deploy when the owner says "deploy". After deploy, tell the app team the 19 Nov addendum is live (it says "preview only").
