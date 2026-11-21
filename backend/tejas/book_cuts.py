@@ -4,11 +4,11 @@ import asyncio, time
 from starlette.concurrency import run_in_threadpool
 from .db import db, now
 from .book_store import identity
-from .book_pdf import run
+from .book_pdf import run, LANES as CPUS
 from .book_cutter import CUT_VERSION
 
 cuts = db.tejas_book_cuts
-BATCH, LANES, SECONDS = 12, 3, 50
+BATCH, LANES, SECONDS = 12, max(3, CPUS), 50
 SHOWN = ('ok', 'manual', 'trim')
 
 

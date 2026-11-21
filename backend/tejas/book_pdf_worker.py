@@ -3,7 +3,7 @@ from pathlib import Path
 import fitz
 import numpy as np
 from pdf_organiser_worker import seal
-from book_cutter import cut_region, trim_region, cut_boxes
+from book_cutter import cut_region, trim_region, cut_boxes, textpage, pixmap
 
 LIMIT=100*1024*1024
 
@@ -28,7 +28,7 @@ def visible_images(page, images, lines, drawn):
     """Image boxes that really show on the page: a PDF may place pictures that its clip paths hide completely."""
     if not images:
         return []
-    pix = page.get_pixmap(colorspace=fitz.csGRAY, alpha=False)
+    pix = pixmap(page, colorspace=fitz.csGRAY, alpha=False)
     gray = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.stride)[:, :pix.width]
     ink = np.abs(gray.astype(np.int16) - int(np.bincount(gray.ravel(), minlength=256).argmax())) > 24
     H, W = ink.shape
@@ -58,7 +58,7 @@ def visible_images(page, images, lines, drawn):
 def paint(page, clip, scale, erase):
     """One piece of a question; ruled borders and the printed option label inside it are painted white."""
     w, h = page.rect.width, page.rect.height
-    pix = page.get_pixmap(matrix=fitz.Matrix(scale, scale), clip=clip, alpha=False)
+    pix = pixmap(page, matrix=fitz.Matrix(scale, scale), clip=clip, alpha=False)
     for e in erase[:40]:
         if len(e) != 4 or not all(isinstance(x, (int, float)) for x in e):
             raise ValueError('Invalid crop.')
@@ -83,7 +83,7 @@ def handle(doc, item):
     if not 1<=w<=4000 or not 1<=h<=4000: raise ValueError('Unsupported page dimensions; export standard pages.')
     if action=='text':
         lines=[]
-        for block in page.get_text('dict')['blocks']:
+        for block in page.get_text('dict',textpage=textpage(page,page.rect,fitz.TEXTFLAGS_DICT&~fitz.TEXT_PRESERVE_IMAGES))['blocks']:
             for line in block.get('lines',[]):
                 text=''.join(s['text'] for s in line['spans']).strip()
                 if text:
@@ -91,7 +91,7 @@ def handle(doc, item):
                     lines.append({'text':text,'rect':[max(0,x0/w),max(0,y0/h),min(1,x1/w),min(1,y1/h)]})
         if sum(len(x['text']) for x in lines)>150000: raise ValueError('Page text exceeds safe processing budget.')
         drawn=visible_drawings(page)
-        images=visible_images(page,[list(i['bbox']) for i in page.get_image_info()],[[x['rect'][0]*w,x['rect'][1]*h,x['rect'][2]*w,x['rect'][3]*h] for x in lines],drawn)
+        images=visible_images(page,[list(i['bbox']) for i in textpage(page,page.rect,fitz.TEXT_PRESERVE_IMAGES).extractIMGINFO()],[[x['rect'][0]*w,x['rect'][1]*h,x['rect'][2]*w,x['rect'][3]*h] for x in lines],drawn)
         geometry=images+drawn
         scale=lambda rows:[[max(0,r[0]/w),max(0,r[1]/h),min(1,r[2]/w),min(1,r[3]/h)] for r in rows]
         return {'lines':lines,'width':w,'height':h,'geometry':scale(geometry),'images':scale(images)}
@@ -114,7 +114,7 @@ def handle(doc, item):
     if action=='clip_text': return {'text':page.get_text(clip=clip)[:30000]}
     if action not in ('crop','page','thumb'): raise ValueError('Unsupported PDF action.')
     scale=min(1,820/clip.width) if action=='thumb' else min(2,1800/clip.width,2400/clip.height)
-    pix=page.get_pixmap(matrix=fitz.Matrix(scale,scale),clip=clip,alpha=False)
+    pix=pixmap(page,matrix=fitz.Matrix(scale,scale),clip=clip,alpha=False)
     data=pix.tobytes('png')
     if len(data)>8*1024*1024: raise ValueError('Page image exceeds safe budget.')
     return {'image':base64.b64encode(data).decode(),'width':pix.width,'height':pix.height,'text':page.get_text(clip=clip)[:30000]}

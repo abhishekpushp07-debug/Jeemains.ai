@@ -9,7 +9,7 @@ from .book_publish import rebuild, publish_ready
 from .chapter_reader import plan_start, bookmark_plan
 from tejas_storage import put_object
 
-PAGES_PER_STEP=20
+PAGES_PER_STEP=100
 MOCKS_PER_STEP=5
 
 

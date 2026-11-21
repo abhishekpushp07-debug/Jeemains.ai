@@ -1,7 +1,20 @@
 import base64, json, os, shutil, subprocess, sys, tempfile
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 LIMIT=100*1024*1024
+
+
+def cpus():
+    """The CPUs this server may really use (its container limit), not the machine's count."""
+    try:
+        quota,period=open('/sys/fs/cgroup/cpu.max').read().split()
+        if quota!='max':return max(1,int(quota)//int(period))
+    except (OSError,ValueError):pass
+    return max(1,len(os.sched_getaffinity(0)))
+
+
+LANES=min(8,max(2,cpus()))
 
 
 def run(source, items):
@@ -40,7 +53,9 @@ def inspect(source, action='info', page=None, rect=None):
 
 
 def inspect_many(source, items, size=10):
-    results=[]
-    for start in range(0,len(items),size):
-        results.extend(run(source,items[start:start+size]))
-    return results
+    """Items in groups of `size`; the groups run side by side, one PDF worker per CPU, and come back in order."""
+    groups=[items[start:start+size] for start in range(0,len(items),size)]
+    if len(groups)<2:
+        return [r for g in groups for r in run(source,g)]
+    with ThreadPoolExecutor(max_workers=min(LANES,len(groups))) as pool:
+        return [r for done in pool.map(lambda g:run(source,g),groups) for r in done]

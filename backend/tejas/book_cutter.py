@@ -4,6 +4,7 @@ import itertools
 import re
 import fitz
 import numpy as np
+from pymupdf import mupdf
 
 CUT_VERSION = 2
 SCALE = 2.0      # pixels per PDF point used to look at the ink
@@ -12,10 +13,39 @@ HEAD = 60.0      # points above a question's printed box in which its heading (n
 ANCHOR = re.compile(r'^\s*(?:Q(?:uestion|ues)?\.?\s*\d{1,3}\b|\d{1,3}\s*[.)])', re.I)
 STYLES = (('paren', r'\(\s?([A-Da-d1-4])\s?\)'), ('close', r'([A-Da-d1-4])\)'), ('dot', r'([A-Da-d])\.'))
 KNOWN = 'ABCDabcd1234'
+TEXT_ONLY = fitz.TEXTFLAGS_RAWDICT & ~fitz.TEXT_PRESERVE_IMAGES
 
 
 class Held(Exception):
     pass
+
+
+_LISTS = {}
+
+
+def listing(page):
+    """The page read from the PDF once; every later look at it (letters, ink, pictures) replays this instead of reading the PDF again."""
+    key = (id(page.parent), page.number)
+    if key not in _LISTS:
+        if len(_LISTS) >= 6:
+            _LISTS.pop(next(iter(_LISTS)))
+        _LISTS[key] = (page.parent, page.get_displaylist())
+    return _LISTS[key][1]
+
+
+def textpage(page, clip, flags):
+    """Exactly what page.get_textpage(clip, flags) gives, made from the page's display list."""
+    tpage = mupdf.FzStextPage(mupdf.FzRect(clip[0], clip[1], clip[2], clip[3]))
+    dev = mupdf.fz_new_stext_device(tpage, mupdf.FzStextOptions(flags))
+    mupdf.fz_run_display_list(listing(page).this, dev, mupdf.FzMatrix(), mupdf.FzRect(mupdf.FzRect.Fixed_INFINITE), mupdf.FzCookie())
+    mupdf.fz_close_device(dev)
+    tp = fitz.TextPage(tpage)
+    tp.parent = page
+    return tp
+
+
+def pixmap(page, **kw):
+    return listing(page).get_pixmap(**kw)
 
 
 def kind_of(ch):
@@ -32,7 +62,8 @@ def cap(text):
 
 def text_lines(page, clip):
     out = []
-    for block in page.get_text('rawdict', clip=clip).get('blocks', []):
+    # Only the letters are read: decoding the page's pictures as well made this ten times slower.
+    for block in page.get_text('rawdict', textpage=textpage(page, clip, TEXT_ONLY)).get('blocks', []):
         for line in block.get('lines', []):
             chars = [(c['c'], fitz.Rect(c['bbox']), s['size']) for s in line['spans'] for c in s['chars']]
             if chars:
@@ -201,7 +232,7 @@ class Sheet:
     def __init__(self, page, clip):
         self.page, self.clip = page, clip
         self.pw, self.ph = page.rect.width, page.rect.height
-        pix = page.get_pixmap(matrix=fitz.Matrix(SCALE, SCALE), clip=clip, colorspace=fitz.csGRAY, alpha=False)
+        pix = pixmap(page, matrix=fitz.Matrix(SCALE, SCALE), clip=clip, colorspace=fitz.csGRAY, alpha=False)
         gray = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.stride)[:, :pix.width]
         self.H, self.W = gray.shape
         back = int(np.bincount(gray.ravel(), minlength=256).argmax())

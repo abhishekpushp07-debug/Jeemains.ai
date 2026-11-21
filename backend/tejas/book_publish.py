@@ -13,6 +13,12 @@ from tejas_storage import put_object
 
 
 HARD=('missing or conflicting supplied key','incomplete options or key','unsupported exact-integer key','response type is unresolved','original key region required')
+SOURCE=re.compile(r'(?im)^[ \t]*Source[ \t]*:[ \t]*(\S[^\n]{0,80}?)[ \t]*$')
+
+
+def printed_sources(rows):
+    """'Source: AITS Mock 04 / Q68' lines printed in these regions, spacing and case ignored."""
+    return {re.sub(r'\s+',' ',m).strip().upper() for _,r in rows for m in SOURCE.findall(r.text)}
 
 
 def overlap(a,b):
@@ -161,6 +167,10 @@ async def rebuild(book, token, source=None):
             first=entries[0][1];keys=key_groups.get(key,[]);solutions=solution_groups.get(key,[])
             if sum(not r.continuation for _,r in entries)!=1:issues.append(f'{first.subject} Q{first.number}: duplicate question or missing starting region.')
             if solutions and sum(not r.continuation for _,r in solutions)!=1:issues.append(f'{first.subject} Q{first.number}: ambiguous worked-solution start/continuations.')
+            asked,solved=printed_sources(entries),printed_sources(solutions)
+            if asked and solved and not asked&solved:
+                # The question and its worked solution both print where they come from: they must say the same, or the solution is someone else's.
+                issues.append(f'{first.subject} Q{first.number}: solution kisi aur sawaal ka lagta hai. Sawaal par "Source: {sorted(asked)[0]}" chhapa hai, solution par "Source: {sorted(solved)[0]}".')
             answers={r.answer.strip() for _,r in keys+solutions if r.answer.strip()}
             answer=next(iter(answers)) if len(answers)==1 else ''
             if not answer:issues.append(f'{first.subject} Q{first.number}: missing or conflicting supplied key.')
