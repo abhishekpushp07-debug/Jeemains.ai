@@ -8,15 +8,18 @@ import { Press, T } from "./ui";
 
 // Public bundled fonts load once per mounted typesetter, not once per question.
 // Question/solution content is injected only in RAM; no files or network requests.
-const SOURCE = { html: `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; font-src data:; script-src 'unsafe-inline'"><style>${KATEX_CSS}</style><style id="theme"></style></head><body><div id="content"></div><script>
+const page = (fonts: string) => ({ html: `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; font-src data:; script-src 'unsafe-inline'">${fonts}<style id="theme"></style></head><body><div id="content"></div><script>
 let revision=0, frame=0, last='';
 const report=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{const h=document.getElementById('content').scrollHeight+8;const key=revision+':'+h;if(key!==last){last=key;window.ReactNativeWebView.postMessage(JSON.stringify({revision,height:h}));}});};
 window.updateMath=(payload)=>{revision=payload.revision;document.getElementById('theme').textContent=payload.css;document.getElementById('content').innerHTML=payload.body;report();if(document.fonts)document.fonts.ready.then(report);};
 new ResizeObserver(report).observe(document.getElementById('content'));
 window.ReactNativeWebView.postMessage(JSON.stringify({ready:true}));
-</script></body></html>` };
-type Props = { body: string; css: string; testID: string; backgroundColor?: string; initialHeight?: number };
-export const OfflineMath = memo(function OfflineMath({ body, css, testID, backgroundColor = colors.custom_reading, initialHeight = 60 }: Props) {
+</script></body></html>` });
+const SOURCE = page(`<style>${KATEX_CSS}</style>`);
+// Text with plain superscripts and subscripts only: the same page without the maths fonts, so it opens much lighter.
+const LIGHT = page("");
+type Props = { body: string; css: string; testID: string; backgroundColor?: string; initialHeight?: number; katex?: boolean };
+export const OfflineMath = memo(function OfflineMath({ body, css, testID, backgroundColor = colors.custom_reading, initialHeight = 60, katex = true }: Props) {
   const web = useRef<WebView<object>>(null);
   const document = useMemo(() => ({ body, css }), [body, css]);
   const current = useRef(document), ready = useRef(false), sequence = useRef(0), sent = useRef(0);
@@ -39,7 +42,7 @@ export const OfflineMath = memo(function OfflineMath({ body, css, testID, backgr
     } catch { /* Ignore non-protocol WebView messages. */ }
   };
   return <View testID={testID} style={styles.container}>
-    <WebView<object> ref={web} testID={`${testID}-typeset`} source={SOURCE} originWhitelist={["about:blank"]} scrollEnabled={false} cacheEnabled={false} incognito
+    <WebView<object> ref={web} testID={`${testID}-typeset`} source={katex ? SOURCE : LIGHT} originWhitelist={["about:blank"]} scrollEnabled={false} cacheEnabled={false} incognito
       style={[styles.web, { height, backgroundColor, opacity: painted === document && !error ? 1 : 0 }]} setSupportMultipleWindows={false}
       onShouldStartLoadWithRequest={request => request.url === "about:blank" || request.url.startsWith("data:text/html")}
       onMessage={receive} onError={() => setError(true)} onContentProcessDidTerminate={() => { ready.current = false; setPainted(null); web.current?.reload(); }} />

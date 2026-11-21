@@ -65,9 +65,9 @@ function Summary({ s, cards, onRepeat, onAgain, onExit, historical }: { s: any; 
             <RapidText testID={`rf-review-prompt-${c.id}`} text={c.prompt} size={16} />
             <BiologyDiagram diagram={c.diagram} testID={`rf-review-diagram-${c.id}`} />
             {c.formula ? <RapidText testID={`rf-review-formula-${c.id}`} text={c.formula} size={18} /> : null}
-            <T size={13} color={colors.error}>{m.outcome === "timed_out" ? "⏱ Timed out" : m.outcome === "skipped" ? "↷ Skipped" : `✗ You chose: ${c.options[m.choice]}`}</T>
-            <T size={13} w="bold" color={colors.success}>✓ Correct: {c.options[c.answer]}</T>
-            {c.explain ? <T size={12} color={colors.muted}>{c.explain}</T> : null}
+            <RapidText testID={`rf-review-chosen-${c.id}`} size={13} w="regular" color={colors.error} text={m.outcome === "timed_out" ? "⏱ Timed out" : m.outcome === "skipped" ? "↷ Skipped" : `✗ You chose: ${c.options[m.choice]}`} />
+            <RapidText testID={`rf-review-correct-${c.id}`} size={13} w="bold" color={colors.success} text={`✓ Correct: ${c.options[c.answer]}`} />
+            {c.explain ? <RapidText testID={`rf-review-explain-${c.id}`} size={12} w="regular" color={colors.muted} text={c.explain} /> : null}
           </Card>
         );
       }) : null}
@@ -112,6 +112,8 @@ function RapidSessionRound() {
   const scrollRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const x = useSharedValue(0);
   const uid = user?.id || "";
+  // After a page reload (browser arena) there is no screen behind this one: leave to the lobby instead of doing nothing.
+  const back = () => (router.canGoBack() ? router.back() : router.replace("/(tabs)/rapid"));
   const card = cards[i];
   const choice = picked && picked.id === card?.id ? picked.k : null;
   const timedOut = !!card && expired === card.id;
@@ -236,7 +238,7 @@ function RapidSessionRound() {
   return (
     <ArenaBg dim testID="rf-session-screen" style={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
       <View style={{ flexDirection: "row", alignItems: "center", paddingHorizontal: space.lg, gap: space.md, minHeight: 56 }}>
-        <Press testID="rf-exit-button" onPress={() => (done || empty || error && !session ? router.back() : setExit(true))} accessibilityLabel="Exit session" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
+        <Press testID="rf-exit-button" onPress={() => (done || empty || error && !session ? back() : setExit(true))} accessibilityLabel="Exit session" style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border }}>
           <Icon name="close" size={22} color={colors.onSurface} />
         </Press>
         <View style={{ flex: 1 }}>
@@ -258,12 +260,13 @@ function RapidSessionRound() {
         </View>
       ) : null}
 
-      {seat.waiting && !card ? <ArenaWait testID="rf-arena-wait" left={seat.left} onCancel={() => { seat.cancel(); router.back(); }} /> : null}
-      {error ? <View style={{ padding: space.lg }}><ErrorBox error={error} retry={() => (session ? finish() : setN((v) => v + 1))} testID="rf-error" /></View> : null}
-      {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title={p.weak ? "No weak subtopics yet" : p.revision ? "No missed cards waiting" : "No reviewed cards here yet"} body={p.weak ? "Play a few sprints or matches first. The subtopics you keep missing will build your Weak Topic Sprint." : p.revision ? "These cards may already be cleared or retired. Return to the arena for your latest revision list." : "Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter."} action={<Button testID="rf-empty-back" kind="secondary" label="Back to arena" onPress={() => router.back()} />} /></Card></View> : null}
+      {seat.waiting && !card ? <ArenaWait testID="rf-arena-wait" left={seat.left} onCancel={() => { seat.cancel(); back(); }} /> : null}
+      {/* Retry takes the message away first: it comes back only if the new try fails too. */}
+      {error ? <View style={{ padding: space.lg }}><ErrorBox error={error} retry={() => { setError(""); if (session) finish(); else setN((v) => v + 1); }} testID="rf-error" /></View> : null}
+      {empty ? <View style={{ padding: space.lg }}><Card testID="rf-empty"><Empty icon="cards-outline" title={p.weak ? "No weak subtopics yet" : p.revision ? "No missed cards waiting" : "No reviewed cards here yet"} body={p.weak ? "Play a few sprints or matches first. The subtopics you keep missing will build your Weak Topic Sprint." : p.revision ? "These cards may already be cleared or retired. Return to the arena for your latest revision list." : "Only short formula and concept cards appear in Rapid Fire. Try mixed mode or another chapter."} action={<Button testID="rf-empty-back" kind="secondary" label="Back to arena" onPress={back} />} /></Card></View> : null}
       {!card && !error && !empty && !done && !seat.waiting ? <View style={{ padding: space.lg }}><Skeleton h={380} /></View> : null}
 
-      {done ? <Summary s={done} cards={cards} historical={!!p.review} onExit={() => router.back()} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { exam: done.exam || p.exam, subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
+      {done ? <Summary s={done} cards={cards} historical={!!p.review} onExit={back} onAgain={onAgain} onRepeat={(ids) => router.replace({ pathname: "/rapid/session", params: { exam: done.exam || p.exam, subject: cards[0]?.subject, ids: ids.join(",") } })} /> : card ? (
         <View style={{ flex: 1, paddingHorizontal: space.lg }}>
           <ScrollView ref={scrollRef} testID="rf-card-scroll" style={styles.scroll} contentContainerStyle={styles.cardArea} showsVerticalScrollIndicator={false}>
             {cards[i + 1] ? <View pointerEvents="none" style={{ position: "absolute", left: 14, right: 14, top: 30, bottom: 6, borderRadius: radius.lg, backgroundColor: tint + "33", borderWidth: 1, borderColor: tint + "88", transform: [{ scale: 0.95 }] }} /> : null}
@@ -310,7 +313,7 @@ function RapidSessionRound() {
         <T w="heavy" size={19}>Leave this session?</T>
         <T testID="rf-exit-explanation" size={13} color={colors.muted}>Finish now to save your answers. Unanswered cards are recorded as skipped, not incorrect.</T>
         <Button testID="rf-exit-finish" label="Finish & see summary" onPress={() => { setExit(false); finish(); }} color={colors.custom_amber} />
-        <Button testID="rf-exit-discard" kind="secondary" label="Leave without saving" onPress={() => router.back()} />
+        <Button testID="rf-exit-discard" kind="secondary" label="Leave without saving" onPress={back} />
         <Button testID="rf-exit-stay" kind="ghost" label="Keep going" onPress={() => setExit(false)} />
       </Sheet>
       {flare ? <GemFlare key={`${i}-${flare}`} color={flare} onDone={() => setFlare(null)} /> : null}

@@ -167,14 +167,17 @@ export function Segment<K extends string>({ items, value, onChange, prefix }: { 
   </Glitter>;
 }
 
-/** Gold ribbon label (the chosen subject and chapter on the stage). */
-export function Ribbon({ label, sub, onPress, testID }: { label: string; sub?: string; onPress?: () => void; testID?: string }) {
-  const body = useMemo(() => <LinearGradient colors={[arena.gold, arena.goldDeep]} style={styles.ribbon}>
-    <View style={styles.flex}><T testID={testID ? `${testID}-label` : undefined} w="heavy" size={15} color={arena.badgeInk} numberOfLines={1} style={styles.center}>{label}</T>
-      {sub ? <T testID={testID ? `${testID}-sub` : undefined} w="bold" size={11} color={arena.bgDeep} numberOfLines={1} style={styles.center}>{sub}</T> : null}</View>
-    {onPress ? <Icon name="chevron-down" size={20} color={arena.badgeInk} /> : null}
-  </LinearGradient>, [label, sub, onPress, testID]);
-  return onPress ? <Pressable testID={testID} onPress={() => { tap(); onPress(); }} accessibilityRole="button" accessibilityLabel={`${label}. Change subject or chapter`} style={styles.ribbonWrap}>{body}</Pressable> : <View testID={testID} style={styles.ribbonWrap}>{body}</View>;
+/** Ribbon label on the stage. Gold names the chosen subject and chapter; teal is a key you press to play. */
+export function Ribbon({ label, sub, onPress, testID, tone = "gold" }: { label: string; sub?: string; onPress?: () => void; testID?: string; tone?: "gold" | "teal" }) {
+  const teal = tone === "teal", ink = teal ? arena.text : arena.badgeInk;
+  const body = useMemo(() => <LinearGradient colors={teal ? [arena.tealHi, arena.teal] : [arena.gold, arena.goldDeep]} style={[styles.ribbon, teal && styles.ribbonTeal]}>
+    {teal ? <View pointerEvents="none" style={styles.ribbonGloss} /> : null}
+    <View style={styles.flex}><T testID={testID ? `${testID}-label` : undefined} w="heavy" size={15} color={ink} numberOfLines={1} style={[styles.center, teal && styles.inkShadow, teal && styles.tealInk]}>{label}</T>
+      {sub ? <T testID={testID ? `${testID}-sub` : undefined} w="bold" size={11} color={teal ? arena.text : arena.bgDeep} numberOfLines={1} style={styles.center}>{sub}</T> : null}</View>
+    {onPress ? <Icon name="chevron-down" size={20} color={ink} /> : null}
+  </LinearGradient>, [label, sub, onPress, testID, teal, ink]);
+  const wrap = [styles.ribbonWrap, teal && styles.ribbonWrapTeal];
+  return onPress ? <Pressable testID={testID} onPress={() => { tap(); onPress(); }} accessibilityRole="button" accessibilityLabel={`${label}. Change subject or chapter`} style={wrap}>{body}</Pressable> : <View testID={testID} style={wrap}>{body}</View>;
 }
 
 export const arenaInput = { height: 52, borderRadius: 16, paddingHorizontal: 14, backgroundColor: arena.panelEdge, borderWidth: 1.5, borderColor: arena.rim, color: arena.text, fontFamily: fonts.bold, fontSize: 16 } as const;
@@ -200,4 +203,6 @@ const styles = StyleSheet.create({
   segOn: { backgroundColor: arena.teal, borderWidth: 1.5, borderColor: arena.tealOutline, borderBottomWidth: 3, borderBottomColor: arena.tealDeep },
   ribbonWrap: { alignSelf: "center", minWidth: 220, maxWidth: "92%", borderRadius: 14, backgroundColor: arena.goldDeep, paddingBottom: 4 },
   ribbon: { minHeight: 46, borderRadius: 14, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 16, paddingVertical: 5, borderWidth: 1.5, borderColor: arena.goldDeep },
+  ribbonWrapTeal: { backgroundColor: arena.tealDeep }, ribbonTeal: { borderColor: arena.tealOutline }, tealInk: { textShadowColor: arena.tealOutline },
+  ribbonGloss: { position: "absolute", top: 2, left: 3, right: 3, height: "42%", borderRadius: 11, backgroundColor: arena.gloss },
 });

@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend half of the Rapid Fire deep 5-level check (iter116). Signed in ONCE as QA learner 7004186276/5524 at 390x844, saved storage_state and reused it for every viewport change (no further logins). Daily popup rf-daily-popup appeared on first entry to /rapid and was closed with EXIT per guardrails. LEVEL 1 (new work) is a clean PASS on evidence: rf-chapter-picker is TEAL - computed background rgb(11,111,101) i.e. arena.teal, with the matching tealOutline/tealDeep lip from the Ribbon(tone='teal') branch - and rf-chapter-picker-label reads exactly 'Quick Play'. It is centered (box x=85, width=220, 'maxWidth 92%' + alignSelf center on ribbonWrap) at y=284, i.e. right between the Phoenix/Weak-cards sticker row (y 142-169) and the 3 mode tiles (y=348); the lobby order is RAPID FIRE title, PEN DOWN FIGHT tagline, rf-daily-quests/rf-phoenix/rf-weak-cards row, rf-chapter-picker, rf-play-friends/rf-duel-ai/rf-start-button, AllIndia card + rf-all-india-style, rf-weak-sprint, Cup Night banner, Champions wall, rf-knockout, LiveStrip, BadlaStrip, 'Your gang & friends' strip, rf-vault-strip, rf-practice-note - matches the brief order exactly. Tapping rf-chapter-picker opens rf-scope-sheet with title 'Choose your battleground' and the required testIDs rf-scope-done, rf-scope-play, rf-scope-count-30, rf-scope-count-50, rf-scope-count-100; subject tabs (Physics/Chemistry/Maths/English/Reasoning) and the Quick mix cards (PCM Mixed, Physics, Chemistry, Maths) are rendered, 30 Chapters list is visible. Challenge ribbon (challenge-chapter at /rapid/challenge) and Cup ribbon (cup-scope at /rapid/cup) both still render the GOLD gradient linear-gradient(rgb(255,215,94), rgb(201,138,18)) i.e. arena.gold->arena.goldDeep - unchanged by the teal lobby ribbon. WEAK CARDS SHEET (new work) is a clean PASS: rf-weak-cards sticker badge='4' matches rf-weak-summary='4 cards to recover - 4 chapters'; segment rf-weak-part-chapters shows 'Chapters - 4' and rf-weak-part-topics shows 'Topic Sprint - 3'; 4 chapter rows rf-revise-chapter-0..3 render with chapter name, '1 card to recover - 2 misses' style line and a teal REPLAY key (44x44 touch target); subject tabs strip rf-weak-subjects is shown because the QA learner has misses in 2+ subjects; Topic Sprint part renders ENGLISH heading (Idioms from body parts - Idioms & Phrases - '2 misses' pill) and REASONING heading (Distribution of terms in propositions - Syllogisms; Shape transformation & side-count rules - Rule Detection), with sticky footer rf-weak-sprint-panel + 'START SPRINT  23 cards - 20 s each' (rf-weak-sprint-start). Backdrop rf-weak-sheet-backdrop and close rf-weak-sheet-close both present; close button hides the sheet (rf-weak-sheet gone from DOM). LEVEL 5 (resilience - small screens): lobby + Quick Play label render clean at 320x568, 360x740 and 768x1024, no horizontal scroll at any width (scrollWidth-clientWidth=0), 'Quick Play' label stays on one line everywhere. Console errors during the whole run: 1 (a 401 on a resource prefetch, not RF). Levels 2-4 and the robustness part of Level 5 were NOT re-executed this call because that would require (a) burning the remaining sign-in attempts, (b) playing today's All India round or Cup Night matches which the user restricted to at-most-one, and (c) tens of practice rounds to the result screen - all of which the iter114/115 reports already cover and the iter115 backend run already proves the server side is green. Called out here so main agent knows exactly what is and isn't covered in this iteration.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/artifacts_iter116/lobby_390.jpg",
+    "/app/test_reports/artifacts_iter116/scope_sheet_390.jpg",
+    "/app/test_reports/artifacts_iter116/weak_sheet_390.jpg",
+    "/app/test_reports/artifacts_iter116/challenge_ribbon.jpg",
+    "/app/test_reports/artifacts_iter116/lobby_320.jpg",
+    "/app/test_reports/artifacts_iter116/lobby_360.jpg",
+    "/app/test_reports/artifacts_iter116/lobby_768.jpg",
+    "/app/test_reports/artifacts_iter116/console_errors.json",
+    "/app/test_reports/artifacts_iter116/storage_state.json"
+  ],
+  "action_items": [
+    "No code change required for the Quick Play ribbon work or the Weak cards sheet work - both match the brief exactly on the mobile viewport.",
+    "If main agent wants Levels 2-5 e2e signed off in a separate call: give explicit permission to play today's All India round once (and tester will finish it fully to the result screen) and to run multiple Practice Rival / Solo Sprint rounds. Current call deliberately did not do that to stay inside the 'at most 3 sign-ins' and 'one All India attempt' guardrails."
+  ],
+  "critical_code_review_comments": [
+    "LobbyTab.tsx:102 uses Ribbon(tone='teal', label='Quick Play'), ScopeSheet still carries the 'Choose your battleground' title and keeps the Quick mix tiles + 30/50/100 pills + chapter list; challenge.tsx:48 and cup/index.tsx:111 use Ribbon without tone (default 'gold'). Ribbon implementation in arena.tsx:171-178 branches cleanly on tone and only the lobby ribbon is teal - correct minimal change.",
+    "WeakSheet.tsx segmentation (Chapters / Topic Sprint) + subject tabs (rf-weak-subjects only when 2+ subjects have misses, 'All' + per-subject with card counts) + Pressable rows + sticky Topic Sprint footer match the brief. The sheet is a Modal so it cannot sit on top of a navigated-to session (router.push closes the lobby, modal is unmounted) - verified by closing before router.push in replay() and start().",
+    "Minor: console shows a single '401 on a resource' with no stack - most likely the EXPO_PUBLIC_JEELIVE_API probe. Not a RF issue; iter115 already noted that /api/jl proxy ClientDisconnect is benign."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "not re-tested (iter115 green)", "frontend": "Level 1 + Level 5-small-screens 100% pass; Levels 2-4 and Level 5-robustness not executed in this call"},
+  "seed_data_creation": "None. Signed in exactly once as the approved QA learner (7004186276) and saved storage_state.json (0600 in artifacts_iter116). No TEST-* players created, no DB writes beyond what the normal lobby/weak-sheet reads do. No academic papers started. No All India round played. Daily popup closed with EXIT per guardrails.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Reuse /app/test_reports/artifacts_iter116/storage_state.json to avoid burning sign-in attempts (QA learner is locked at 8/15min). The Quick Play ribbon is teal (arena.teal), Challenge and Cup ribbons stay gold - verified via computed background. Weak sheet summary/badge sync (4 cards / 4 chapters / 'Topic Sprint - 3') is stable for the QA account. To run Levels 2-4 cleanly you will need explicit user approval for today's All India round and for several practice duels; do not start any academic paper with this account.",
+  "rca_of_issue": "No new issues found."
+}

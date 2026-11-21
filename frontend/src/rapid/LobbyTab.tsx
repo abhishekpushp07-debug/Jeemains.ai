@@ -6,7 +6,6 @@ import { rf, uuid } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { useCached } from "@/src/useCached";
 import { Icon, T } from "@/src/components/ui";
-import { WeakRevision } from "@/src/components/ArenaLearning";
 import { rewardsReady, useGameProfile } from "@/src/components/game";
 import { arena } from "@/src/theme";
 import { Alive, Emblem, GameIcon, GameIconName, PhoenixDiamond, topGem } from "./Art";
@@ -24,7 +23,8 @@ import { Friend, GangRow, go, seenText, sendChallenge, setArenaTab, useFriends, 
 import { Glitter } from "./Glitter";
 import { AllIndiaCard } from "./AllIndiaCard";
 import { dailyStyleName, useDaily, useDailyLook } from "./daily";
-import { WeakSprintPanel, WeakSprintStrip, useWeakTopics } from "./WeakSprint";
+import { WeakSprintStrip, useWeakTopics } from "./WeakSprint";
+import { WeakChapters, WeakSheet } from "./WeakSheet";
 
 function Sticker({ icon, label, badge, onPress, testID, delay, narrow }: { icon: GameIconName; label: string; badge: number; onPress: () => void; testID: string; delay: number; narrow?: boolean }) {
   return <Jelly testID={testID} onPress={onPress} accessibilityLabel={badge ? `${label}, ${badge}` : label} style={[styles.sticker, narrow && styles.stickerNarrow]}>
@@ -56,7 +56,7 @@ export function LobbyTab() {
   const [busy, setBusy] = useState(false), [error, setError] = useState("");
   const cat = useCached<any>("rf.catalog.JEE.portrait", () => rf("/catalog?exam=JEE", uid));
   const prof = useGameProfile(uid), friends = useFriends(uid), gangs = useGangs(uid);
-  const weak = useCached<any>(uid ? `u.${uid}.revision.JEE` : null, () => rf("/revision?exam=JEE", uid), false);
+  const weak = useCached<WeakChapters>(uid ? `u.${uid}.revision.JEE` : null, () => rf("/revision?exam=JEE", uid), false);
   const daily = useDaily(uid), look = useDailyLook(), cardSize = Math.min(width, 560) - 32, weakTopics = useWeakTopics(uid);
   const { revalidate } = prof, { reload: reloadFriends } = friends, { reload: reloadGangs } = gangs, { reload: reloadWeak } = weak, { reload: reloadDaily } = daily, { reload: reloadTopics } = weakTopics;
   useFocusEffect(useCallback(() => { revalidate(); reloadFriends(); reloadGangs(); reloadWeak(); reloadDaily(); reloadTopics(); }, [revalidate, reloadFriends, reloadGangs, reloadWeak, reloadDaily, reloadTopics]));
@@ -79,7 +79,7 @@ export function LobbyTab() {
     finally { setBusy(false); }
   };
   const ready = rewardsReady(prof.data);
-  const weakCards = (weak.data?.items || []).reduce((n: number, row: any) => n + (row.remaining || 0), 0);
+  const weakCards = (weak.data?.items || []).reduce((n, row) => n + (row.remaining || 0), 0);
   const online = (friends.data?.items || []).filter((f) => f.online).length;
   const label = scopeLabel(picks);
   const cupLive = !!inbox?.cup, cupInvites = inbox?.cups?.length || 0;
@@ -98,8 +98,8 @@ export function LobbyTab() {
           </View>
           <Sticker testID="rf-weak-cards" icon="target" label="Weak cards" badge={weakCards} delay={1900} narrow={narrow} onPress={() => setSheet("weak")} />
         </View>
-        {/* One word on the lobby; subjects, chapters and the 30/50/100 cards are all chosen on the next screen. */}
-        <Ribbon testID="rf-chapter-picker" label="Subjects" onPress={() => setSheet("chapters")} />
+        {/* Quick Play: a teal key like the first PLAY button. Subjects, chapters and the 30/50/100 cards are chosen on the next screen, and PLAY starts there. */}
+        <Ribbon testID="rf-chapter-picker" label="Quick Play" tone="teal" onPress={() => setSheet("chapters")} />
       </View>
       <ErrorBox testID="rf-catalog-error" error={cat.error || prof.error} retry={() => { cat.reload(); prof.reload(); }} />
 
@@ -170,7 +170,7 @@ export function LobbyTab() {
     <ScopeSheet visible={sheet === "chapters"} onClose={() => { setSheet(""); setPending(""); }} subjects={cat.data?.subjects || []} value={picks}
       onDone={(next) => { setScope(next); if (pending) play(pending, next); }} onPlay={uid && !pending ? quickMatch : undefined}
       action={pending === "solo" ? "START SOLO SPRINT" : pending === "ai" ? "PLAY PRACTICE RIVAL" : undefined} hint={pending ? "Pick your subjects or chapters first" : undefined} />
-    <Sheet visible={sheet === "weak"} onClose={() => setSheet("")} testID="rf-weak-sheet">{uid ? <><WeakSprintPanel uid={uid} /><WeakRevision uid={uid} exam="JEE" /></> : null}</Sheet>
+    <WeakSheet visible={sheet === "weak"} onClose={() => setSheet("")} chapters={weak} topics={weakTopics} />
     <Sheet visible={!!quick} onClose={() => setQuick(null)} testID="rf-quick-sheet">
       {quick?.gang ? <View style={styles.quick}>
         <Emblem id={quick.gang.emblem} size={92} />

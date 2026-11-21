@@ -109,9 +109,9 @@ export function MatchResult({ d, uid, historical, onDone }: { d: any; uid: strin
         <RapidText text={c.prompt} size={15} testID={`duel-review-prompt-${k}`} />
         <RapidDiagram diagram={c.diagram} testID={`duel-review-diagram-${k}`} />
         {c.formula ? <RapidText text={c.formula} size={17} testID={`duel-review-formula-${k}`} /> : null}
-        <T size={12} color={colors.error}>{!a ? "Not reached" : a.outcome === "incorrect" ? `You chose: ${c.options[a.choice ?? 0]}` : MISS[a.outcome] || "Missed"}</T>
-        <T size={12} w="bold" color={colors.success}>Correct: {c.options[c.answer]}</T>
-        {c.explain ? <T size={11} color={arena.muted}>{c.explain}</T> : null}
+        <RapidText testID={`duel-review-chosen-${k}`} size={12} w="regular" color={colors.error} text={!a ? "Not reached" : a.outcome === "incorrect" ? `You chose: ${c.options[a.choice ?? 0]}` : MISS[a.outcome] || "Missed"} />
+        <RapidText testID={`duel-review-correct-${k}`} size={12} w="bold" color={colors.success} text={`Correct: ${c.options[c.answer]}`} />
+        {c.explain ? <RapidText testID={`duel-review-explain-${k}`} size={11} w="regular" color={arena.muted} text={c.explain} /> : null}
       </View>) : null}
       <Note testID="duel-practice-note">Practice match. It never changes exam marks, ranks or your series streak.</Note>
     </ScrollView>

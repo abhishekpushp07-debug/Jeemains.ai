@@ -1,0 +1,35 @@
+{
+  "summary": "Iteration 123 tested the two fixes picked by the user: (1) Rapid Fire notation engine (real powers/subscripts) and (2) load_guard crowd-vs-hiccup fix. BACKEND: `pytest tests/test_load_guard_sustained.py tests/test_client_disconnect_guard.py tests/test_iter73_scale.py -q -n 0` = 11 passed, 1 skipped (unchanged). Ran test_load_guard_sustained.py 3 more times: 3/3/3 pass every run, zero flakiness. Live `/api/health/load` returns the new `lag_sustained_ms` plus the existing fields (busy=false, inflight=1, sockets=0, open_files_limit=1,048,576). Load probe --users 100 against the public preview: 0 arena_busy (503) and 0 errors across all 7 endpoints. Load probe --users 200: still 0 arena_busy; the non-arena_busy 429/TimeoutError counts come from the preview ingress throttling at that concurrency (upstream, not the app) and busy=false right after. Code review of load_guard.py confirmed busy() uses load.sustained (middle of last 3 samples), INFLIGHT_LIMIT=500, SOCKET_LIMIT=6000, 503 body {detail, code:'arena_busy'} with Retry-After:5 and Cache-Control:no-store unchanged. FRONTEND notation unit test: `node tests/notation_bank_tests.cjs` = all 6 passed over the full bank (19,038 cards / 120,834 texts: 3,005 typeset, 1,310 flat-glyph, 116,519 untouched; 587 different indices; 0 code-like runs). Playwright UI runs on the public preview at 390x844 (plus 320 and 768 for N3) for N1 Math/Definite Integration, N2 Physics/Alternating Current + Chemistry/Chemical Thermodynamics, N3 layout, N4 review, N5 English blanks + plain-text card + font, N6 Practice Rival: every text pulled from rf-card-prompt / rf-option-text-0..3 / rf-card-formula / rf-feedback-explanation / rf-review-* / duel-* passed the three regex checks (no '^' not preceded by space, no '^{' or '_{', no letter_letter code). Index spans and stacked vertical-align spans observed on Math integrals (101 index spans + 29 stacked spans across 15 Math cards; screenshots show ∫₁ᵉ, ∫₀²π, ∫₀¹, ∫ₐᵇ with limits visibly stacked). Physics shows I₀, ω₀, I_avg rendered with subscripts as glyphs or typeset index (no X_L / I_rms as typed). English: 10/10 cards keep '___' blanks as underscores with 0 index spans created, 10/10 render as plain text nodes with no child spans; font = 20px Figtree-600 for prompt and 16px Figtree-600 for options; no rf-error, no page errors. Layout: at 320x568 scrollWidth==viewport=320; at 768x1024 scrollWidth==viewport=768; 2 tie whiteSpace spans measured at 320, 0 overflowing >1.7x line-height. N4 finish-early: rf-sum-correct+rf-sum-incorrect+rf-sum-skipped+rf-sum-timeout = 0+0+30+0 = 30 ✓; Review listed 30 rows with 0 code-like leaks across chosen/correct/explain/formula. N6 Practice Rival: duel started after the entry show, 5 cards read, 0 code leaks in duel prompt/options/explanations; duel-exit-confirm (forfeit) returned to rapid-fire-home. No application code changed. No arena (/api/arena) touched. No TEST_ data created.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/*", "issue": "Public preview ingress throttles ~200 concurrent requests with 429 and TimeoutError (not arena_busy; upstream K8s/CDN). Not a load_guard defect - 0 arena_busy throughout. Safe to ignore."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_load_guard_sustained.py",
+    "/app/backend/tests/test_client_disconnect_guard.py",
+    "/app/backend/tests/test_iter73_scale.py",
+    "/app/backend/tests/iter115_load_probe.py",
+    "/app/frontend/tests/notation_bank_tests.cjs",
+    "/app/test_reports/artifacts_iter123/"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "load_guard.py: busy() correctly reads load.sustained (middle of last 3 samples via monitor()), INFLIGHT_LIMIT=500, SOCKET_LIMIT=6000, 503 body + Retry-After:5 + Cache-Control:no-store unchanged - spec matches.",
+    "notation.ts + RapidText.tsx: whole 19,038-card bank passes - no false positives for English blanks, no false subscripts from ___, caret-after-space left alone."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "None. No DB writes other than the load probe's own TEST_ profiles that it retires in place (verified).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Fixes from Iteration 123 verified end-to-end on the public preview. Any future round that touches rf-card-* or duel-* text should rerun `node /app/frontend/tests/notation_bank_tests.cjs` + the three load_guard pytest files, and spot-check Definite Integration / Alternating Current / Chemical Thermodynamics rounds. Storage state at /tmp/qa_storage_state.json reused; no extra sign-ins required.",
+  "rca_of_issue": "Not applicable - this was a verification pass for the Iteration 123 fixes (notation engine + load_guard.sustained). Both fixes work as described: no typed math code reaches the UI, and no false arena_busy under sustained load."
+}

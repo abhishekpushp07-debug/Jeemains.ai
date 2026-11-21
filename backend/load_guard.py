@@ -3,6 +3,9 @@
 Matches already being played always go first. When this process is overloaded (slow event loop, too many requests in
 flight, too many live sockets), NEW matches and sprints are asked to wait a few seconds (503 + `arena_busy`), and the app
 retries by itself. Thresholds are per process and can be tuned with env vars without a code change.
+
+A crowd is a loop that STAYS late. One late wake-up (a long report being built, the container paused for a moment) is a
+hiccup: it is measured and reported, but it never closes the doors, so no student waits 5-7 seconds for nothing.
 """
 import asyncio
 import os
@@ -16,12 +19,15 @@ from starlette.requests import ClientDisconnect
 LAG_LIMIT = float(os.environ.get("RF_BUSY_LAG_MS", "200")) / 1000
 INFLIGHT_LIMIT = int(os.environ.get("RF_BUSY_INFLIGHT", "500"))
 SOCKET_LIMIT = int(os.environ.get("RF_BUSY_SOCKETS", "6000"))
+SAMPLE_SECONDS = 0.2
+WINDOW = 3  # the doors follow the middle one of the last 3 samples: late twice in 0.6 s closes them, on time twice reopens them
 RETRY_SECONDS = 5
 BUSY_TEXT = "The arena is packed right now. Getting you a seat in a few seconds…"
 
 
 class Load:
-    lag = 0.0  # smoothed event-loop delay, seconds
+    lag = 0.0  # smoothed event-loop delay, seconds: jumps up at once on a stall (what /api/health/load reports)
+    sustained = 0.0  # delay the loop has kept up over the last WINDOW samples: the one the doors listen to
     inflight = 0  # HTTP requests being served right now
     sockets = 0  # live match sockets open on this process
     turned_away = 0
@@ -37,7 +43,7 @@ class ArenaBusy(Exception):
 
 
 def busy() -> bool:
-    return load.lag > LAG_LIMIT or load.inflight > INFLIGHT_LIMIT or load.sockets > SOCKET_LIMIT
+    return load.sustained > LAG_LIMIT or load.inflight > INFLIGHT_LIMIT or load.sockets > SOCKET_LIMIT
 
 
 def arena_gate():
@@ -55,11 +61,14 @@ async def busy_response(_: Request, __: ArenaBusy):
 async def monitor():
     """Measures how late the event loop wakes up (the best single signal that this process is saturated)."""
     loop = asyncio.get_running_loop()
+    recent = [0.0] * WINDOW
     while True:
         t = loop.time()
-        await asyncio.sleep(0.2)
-        late = max(0.0, loop.time() - t - 0.2)
+        await asyncio.sleep(SAMPLE_SECONDS)
+        late = max(0.0, loop.time() - t - SAMPLE_SECONDS)
         load.lag = late if late > load.lag else load.lag * 0.7 + late * 0.3
+        recent = recent[1:] + [late]
+        load.sustained = sorted(recent)[WINDOW // 2]
 
 
 class InflightCounter:
@@ -94,6 +103,6 @@ def raise_fd_limit():
 
 
 def snapshot() -> dict:
-    return {"pid": os.getpid(), "lag_ms": round(load.lag * 1000, 1), "inflight": load.inflight, "sockets": load.sockets, "busy": busy(),
+    return {"pid": os.getpid(), "lag_ms": round(load.lag * 1000, 1), "lag_sustained_ms": round(load.sustained * 1000, 1), "inflight": load.inflight, "sockets": load.sockets, "busy": busy(),
             "turned_away": load.turned_away, "answers_quick": load.answers_quick, "answers_full": load.answers_full,
             "open_files_limit": resource.getrlimit(resource.RLIMIT_NOFILE)[0], "ts": time.time()}

@@ -1,5 +1,12 @@
 # JEELIVE.AI Native App — PRD
 
+## Lobby ribbon "Quick Play" (teal) + Weak cards sheet reorganised (21 Nov 2026)
+- User: "rename the Subjects to Quick Play ... change the colour to teal. The initial Play, what it was"; "properly segment and make weak cards better organised, easily navigated. Do not change the UI on rapid fire dashboard"; "check the whole rapid fire e2e in deep on 5 level".
+- Lobby: the ribbon `rf-chapter-picker` is teal (`Ribbon tone="teal"` in `src/rapid/arena.tsx`) and reads "Quick Play". Same place and size; still opens the Subjects sheet (SAVE + PLAY = Quick Match). Nothing else on the lobby changed.
+- Weak cards sheet: `src/rapid/WeakSheet.tsx` (old `src/components/ArenaLearning.tsx` deleted, `WeakSprintPanel` removed). Two parts on a segment: **Chapters** (subject tabs All / Physics / …, every weak chapter under its subject, teal REPLAY key; before only the top 3 chapters were listed) and **Topic Sprint** (subtopics under their subject, sticky START SPRINT). The sheet closes before a round opens. TestIDs in test_result.md (Iteration115).
+- Browser arena must be rebuilt after screen changes: `/app/scripts/build_arena_web.sh`, then Publish.
+
+
 ## No default subject + All India = 45 PCM cards + Subjects-only lobby + victory/share/sound settings (20 Nov 2026)
 - Lobby: only the "Subjects" ribbon (subject chips + 30/50/100 removed; all inside the Subjects sheet). No subject is picked by default (every app session); mode tiles / challenge / gang war ask for subjects first. Sheet's card count is saved only on SAVE/PLAY.
 - All India Rapid: 45 PCM cards a day (15 P + 15 C + 15 M, 15 chapters each, 20 s); old played decks keep their size; totals come from the deck.
