@@ -15,6 +15,7 @@ BACKEND = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND))
 from dotenv import load_dotenv
 load_dotenv(BACKEND / '.env')
+os.environ.pop('SUPABASE_URL', None)  # tests stay offline: every file goes to the in-memory store below
 REAL_DB = os.environ['DB_NAME']
 TEST_DB = 'tejas_isolated_perf163_' + secrets.token_hex(4)
 assert TEST_DB != REAL_DB

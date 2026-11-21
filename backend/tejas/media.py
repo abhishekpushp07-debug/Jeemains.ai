@@ -2,6 +2,7 @@
 A link is handed out only to a student whose paper is open; it carries no answers and expires within two days."""
 
 import asyncio, base64, hashlib, hmac, json, os, re, time
+from concurrent.futures import ThreadPoolExecutor
 from fastapi import APIRouter, HTTPException, Response
 from starlette.concurrency import run_in_threadpool
 from .cache import ByteCache
@@ -53,14 +54,18 @@ async def pack_links(a, cut=False):
             "parts": [f"{base}/{o}-{PART}-{bonus}-{exp}-{sign(a['pack_id'], o, PART, bonus, exp)}.bin" for o in range(0, total, PART)]}
 
 
+def _one(sources, item):
+    qid, i, r, kind = item
+    try:
+        return qid, i, render_crop(sources[r["file_id"]], r), kind
+    except Exception:
+        return None
+
+
 def _render(sources, part):
-    found = []
-    for qid, i, r, kind in part:
-        try:
-            found.append((qid, i, render_crop(sources[r["file_id"]], r), kind))
-        except Exception:
-            pass
-    return found
+    """A part's pictures are fetched 8 at a time, so a far-away store costs about one round trip per part, not one per picture."""
+    with ThreadPoolExecutor(8) as pool:
+        return [x for x in pool.map(lambda item: _one(sources, item), part) if x]
 
 
 async def _build(pack_id, offset, limit, bonus):

@@ -32,11 +32,15 @@ def storage_unit():
         def go(*a, **k):
             calls['n'] += 1; return R(codes[min(calls['n'] - 1, len(codes) - 1)])
         return go
+
+    def session(codes):
+        # The Emergent client keeps one session per thread; the fake session answers with these codes in turn.
+        return lambda: type('FakeSession', (), {'request': staticmethod(fake(codes))})()
     with mock.patch.object(S, 'init_storage', lambda force=False: 'k'), mock.patch.object(S.time, 'sleep', lambda s: None):
-        with mock.patch.object(S.requests, 'request', fake([500, 502, 200])):
+        with mock.patch.object(S, '_session', session([500, 502, 200])):
             calls['n'] = 0; r = S.request('PUT', 'a/b', b'x')
             check('storage: two 5xx then OK succeeds (retried)', r.ok and calls['n'] == 3, calls)
-        with mock.patch.object(S.requests, 'request', fake([500])):
+        with mock.patch.object(S, '_session', session([500])):
             calls['n'] = 0
             try:
                 S.request('PUT', 'a/b', b'x'); ok = False

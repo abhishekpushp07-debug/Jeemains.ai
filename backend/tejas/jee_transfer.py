@@ -13,7 +13,7 @@ from pymongo.errors import DuplicateKeyError
 from .auth import owner
 from .db import db, now, uid
 from .documents import BaseDocument
-from tejas_storage import request as storage_request
+from tejas_storage import get_object
 
 router = APIRouter(prefix='/api/studio/jee-transfer', tags=['Verified JEE transfer'])
 BUNDLE_SHA = '3551e344ef2d33f765bfd0015836ebdaec83c918d32830ca9521f62d688191b2'
@@ -138,7 +138,7 @@ async def verify_baseline(baseline):
 
 
 def verify_pdf(f):
-    raw = storage_request('GET', f['path']).content
+    raw = get_object(f['path'])
     if len(raw) != f['size'] or not raw.startswith(b'%PDF-') or hashlib.sha256(raw).hexdigest() != f['sha256']:
         raise HTTPException(409, 'A private source PDF failed its size or hash check. No chapter will be imported until all sources pass.')
 

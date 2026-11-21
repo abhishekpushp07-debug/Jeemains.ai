@@ -5,6 +5,7 @@ import {Button} from '../ui/button';
 import {Input} from '../ui/input';
 import {Field,plural} from './MasterShared';
 import {mergePdfs,sendBook} from './uploadBook';
+import {StorageNotice} from './StorageBadge';
 import {Select,SelectTrigger,SelectValue,SelectContent,SelectItem} from '../ui/select';
 import {toast} from 'sonner';
 
@@ -34,6 +35,7 @@ export function UploadDialog({open,onClose,section,exam,replace,onStarted}){
   <DialogTitle>Upload PDF to {section.name}</DialogTitle>
   <DialogDescription>{chapters?'Each chapter in the PDF becomes its own test, whatever its layout. If the chapter starts cannot be found, you mark them on the pages.':'The PDF can hold one mock or many; each printed mock becomes its own test.'} Every mock arrives as a Draft. No AI is used.</DialogDescription>
   {count&&<p className="admin-note warn" data-testid="upload-replace-note">Replacing {count}. The old ones stay Live until the new ones go Live, then move to your Library. Students keep their scores.</p>}
+  {open&&<StorageNotice/>}
   <form className="admin-form" onSubmit={e=>{e.preventDefault();if(ok&&!busy)send();}}>
    <PdfBox label="Main PDF" hint="Questions. If the answer key and solutions are inside it too, that is all you need. Up to 100 MB." file={main} onPick={f=>{setMain(f);if(f&&!title)setTitle(f.name.replace(/\.pdf$/i,''));}} disabled={busy} testId="upload-main" required/>
    <div className="master-field-row">

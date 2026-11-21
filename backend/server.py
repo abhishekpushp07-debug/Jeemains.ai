@@ -59,6 +59,7 @@ from tejas import (
     media,
     app_connect,
     dreams,
+    storage_health,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -275,6 +276,7 @@ for module in [
     media,
     app_connect,
     dreams,
+    storage_health,
 ]:
     app.include_router(module.router)
 

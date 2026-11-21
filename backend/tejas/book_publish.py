@@ -1,4 +1,5 @@
 import asyncio, copy, json, re, time
+from pymongo.errors import DuplicateKeyError
 from starlette.concurrency import run_in_threadpool
 from .db import db, sets, files, now, audit
 from .canonical import database_now
@@ -240,9 +241,12 @@ async def crop_ref(book,mock,crop,region,role):
     png=crop['image_bytes'];fid=identity(book.id,digest(png),role)
     if not await files.find_one({'id':fid},{'_id':1}):
         path=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/crops/{fid}.png',png,'image/png')
-        await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
-            'path':path,'kind':'rendered_png','sha256':digest(png),'source_sha256':book.payload['sha256'],
-            'original_page':region['page'],'original_rect':region['rect'],'book_import_id':book.id,'created_at':now()}},upsert=True)
+        try:
+            await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
+                'path':path,'kind':'rendered_png','sha256':digest(png),'source_sha256':book.payload['sha256'],
+                'original_page':region['page'],'original_rect':region['rect'],'book_import_id':book.id,'created_at':now()}},upsert=True)
+        except DuplicateKeyError:
+            pass  # the same picture saved at the same moment by a sibling crop: one record is enough
     return {'file_id':fid,'page':region['page'],'rect':region['rect'],'prerendered':True}
 
 
@@ -259,6 +263,24 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
     pieces={}
     for (qid,part),crop in zip(parts,painted):pieces.setdefault(qid,[]).append((part,crop))
     if guard:await guard('renew')
+    # Every picture of the mock is saved first, 8 at a time, so publishing waits for the slowest picture, not for all of them one by one.
+    gate=asyncio.Semaphore(8)
+    async def save(key,crop,region,role):
+        async with gate:
+            try:return key,await crop_ref(book,mock,crop,region,role)
+            except ValueError as exc:return key,exc
+    jobs=[]
+    for q in mock.questions:
+        for role in ('question','solution'):
+            jobs+=[save((q['id'],role,n),crop,region,role) for n,(region,crop) in enumerate(zip(q['source_regions'][role],crops.get((q['id'],role),[])))]
+        jobs+=[save((q['id'],'piece',n),crop,part,'piece') for n,(part,crop) in enumerate(pieces.get(q['id'],[]))]
+    if guard:await guard('fence')
+    saved=dict(await asyncio.gather(*jobs))
+    if guard:await guard('fence')
+    def ref(key):
+        r=saved[key]
+        if isinstance(r,Exception):raise r
+        return r
     questions,left=[],[]
     for original_q in mock.questions:
         q=copy.deepcopy(original_q);source=q.pop('source_regions');q.pop('coverage_key',None);q.pop('cut',None)
@@ -277,13 +299,10 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
             q['subject']=subject
         try:
             for role,key in (('question','q_refs'),('solution','s_refs')):
-                for region,crop in zip(source[role],crops.get((q['id'],role),[])):
-                    if guard:await guard('fence')
-                    q[key].append(await crop_ref(book,mock,crop,region,role))
+                q[key]+=[ref((q['id'],role,n)) for n in range(len(list(zip(source[role],crops.get((q['id'],role),[])))))]
             if q['id'] in pieces:
-                if guard:await guard('fence')
-                refs=await asyncio.gather(*(crop_ref(book,mock,crop,part,'piece') for part,crop in pieces[q['id']]))
-                q['c_refs']=[{**ref,'part':part['part'],'w':round(crop['width']/2,1),'h':round(crop['height']/2,1)} for ref,(part,crop) in zip(refs,pieces[q['id']])]
+                refs=[ref((q['id'],'piece',n)) for n in range(len(pieces[q['id']]))]
+                q['c_refs']=[{**r,'part':part['part'],'w':round(crop['width']/2,1),'h':round(crop['height']/2,1)} for r,(part,crop) in zip(refs,pieces[q['id']])]
             errors=question_issues(q,rules['exam'])
         except ValueError as exc:
             if strict:raise
