@@ -7,7 +7,7 @@ import tejas_storage as store
 from .auth import staff
 
 router = APIRouter(prefix="/api/admin/storage", tags=["Storage health"])
-FRESH, SLOW_MS = 60, 2500
+FRESH, SLOW_MS, ALERT_AFTER = 60, 2500, 600
 _last = {'at': 0.0, 'result': None}
 _running = {'task': None}
 
@@ -29,7 +29,13 @@ def summary(result):
         mode = 'down'
     return {'mode': mode, 'checked_at': _last['at'], 'supabase': {**sb, 'configured': store.configured(), 'bucket': store.bucket_name() if store.configured() else '',
             'resting_until': st['down_until'] if resting else 0}, 'emergent': em,
-            'writes': dict(st['writes']), 'failovers': st['failovers'], 'last_failover': st['last_failover']}
+            'writes': dict(st['writes']), 'failovers': st['failovers'], 'last_failover': st['last_failover'], 'backup': backup(st)}
+
+
+def backup(st):
+    """Alert once Supabase has been missing for 10 minutes while new files kept going to Emergent."""
+    since, n = st['backup_since'], st['backup_writes']
+    return {'since': since, 'writes': n, 'alert': bool(store.configured() and since and n and time.time() - since >= ALERT_AFTER)}
 
 
 @router.get("/health")

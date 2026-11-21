@@ -265,16 +265,25 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
     if guard:await guard('renew')
     # Every picture of the mock is saved first, 8 at a time, so publishing waits for the slowest picture, not for all of them one by one.
     gate=asyncio.Semaphore(8)
+    progress={'done':0,'total':0,'at':0.0}
+    async def tell():
+        # Super Admin sees "180/300 pictures saved" while a mock goes Live (its own small record, never the mock itself).
+        progress['at']=time.time()
+        await db.tejas_publish_progress.update_one({'_id':mock.id},{'$set':{'done':progress['done'],'total':progress['total'],'at':now()}},upsert=True)
     async def save(key,crop,region,role):
         async with gate:
-            try:return key,await crop_ref(book,mock,crop,region,role)
-            except ValueError as exc:return key,exc
+            try:out=key,await crop_ref(book,mock,crop,region,role)
+            except ValueError as exc:out=key,exc
+        progress['done']+=1
+        if progress['done']==progress['total'] or time.time()-progress['at']>=1.5:await tell()
+        return out
     jobs=[]
     for q in mock.questions:
         for role in ('question','solution'):
             jobs+=[save((q['id'],role,n),crop,region,role) for n,(region,crop) in enumerate(zip(q['source_regions'][role],crops.get((q['id'],role),[])))]
         jobs+=[save((q['id'],'piece',n),crop,part,'piece') for n,(part,crop) in enumerate(pieces.get(q['id'],[]))]
     if guard:await guard('fence')
+    progress['total']=len(jobs);await tell()
     saved=dict(await asyncio.gather(*jobs))
     if guard:await guard('fence')
     def ref(key):
@@ -391,3 +400,9 @@ async def publish_ready(book,token,raw,only_mid=None):
             await apply_replacement(dest,book.owner_id,book.payload['title'])
         book.payload.setdefault('metrics',{}).setdefault('first_ready_seconds',max(0,now()-book.created_at))
         await audit(book.owner_id,'Book mock published',sid,'Original keys and source evidence retained; previous attempts unchanged.')
+        await db.tejas_publish_progress.delete_one({'_id':mock.id})
+        if start<=stamp:
+            from .media import warm_soon
+            from .papers import HEADER
+            head=await sets.find_one({'id':sid},HEADER)
+            if head and head.get('status')=='published':warm_soon(head)  # pictures ready before the first student opens it

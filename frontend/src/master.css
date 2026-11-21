@@ -14,6 +14,24 @@
 /* Storage health: a small light in the top bar; details on tap. */
 .storage-badge{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface-card);color:var(--ink);font-size:12.5px;font-weight:700;cursor:pointer;transition:background-color var(--motion-fast),border-color var(--motion-fast)}
 .storage-badge:hover{background:var(--surface-alt)}
+.storage-alert,.dup-alert{display:flex;gap:12px;align-items:flex-start;margin:0 0 16px;padding:14px 16px;border-radius:16px;border:1px solid var(--danger-line);background:var(--danger-soft);color:var(--danger)}
+.storage-alert div,.dup-alert div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.storage-alert strong,.dup-alert strong{font-size:14.5px}
+.storage-alert small,.dup-alert small{color:var(--ink);font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+.dup-alert ul,.dup-note ul{margin:6px 0 0;padding-left:18px;color:var(--ink);font-size:13px;line-height:1.5}
+.dup-alert li,.dup-note li{overflow-wrap:anywhere}
+.dup-note{margin-top:6px;color:var(--danger);font-size:12.5px}
+.dup-note summary{display:inline-flex;align-items:center;gap:5px;font-weight:800;cursor:pointer;list-style:none}
+.dup-note summary::-webkit-details-marker{display:none}
+.batch-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:280px;overflow:auto}
+.batch-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface-card)}
+.batch-row.is-done{border-color:var(--success-line);color:var(--success)}
+.batch-row.is-failed{border-color:var(--danger-line);color:var(--danger)}
+.batch-main{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.batch-main strong{font-size:13.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.batch-main small{font-size:12px;color:var(--text-muted);overflow-wrap:anywhere}
+.batch-main progress{width:100%;height:6px}
+.batch-year{width:72px;min-height:36px;padding:0 8px;border-radius:10px;border:1px solid var(--line);background:var(--page);color:var(--ink);font-size:14px}
 .storage-badge small{color:var(--text-muted);font-weight:600}
 .storage-badge.warn{border-color:#e7b453;background:#fff8e8}
 .storage-badge.bad{border-color:#e0646c;background:#fff0f1;color:#a3141d}

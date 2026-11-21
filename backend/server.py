@@ -60,6 +60,8 @@ from tejas import (
     app_connect,
     dreams,
     storage_health,
+    misfire,
+    duplicates,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -277,6 +279,8 @@ for module in [
     app_connect,
     dreams,
     storage_health,
+    misfire,
+    duplicates,
 ]:
     app.include_router(module.router)
 

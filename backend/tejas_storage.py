@@ -84,7 +84,7 @@ def request(method, path, data=None, content_type=None):
 
 # ---------- Supabase ----------
 STATE = {'down_until': 0.0, 'strikes': 0, 'last_error': '', 'last_ok': 0.0, 'auth': None, 'bucket': None,
-         'writes': {'supabase': 0, 'emergent': 0}, 'failovers': 0, 'last_failover': None}
+         'writes': {'supabase': 0, 'emergent': 0}, 'failovers': 0, 'last_failover': None, 'backup_since': None, 'backup_writes': 0}
 _sb_lock = threading.Lock()
 
 
@@ -224,7 +224,7 @@ def sb_get(bucket, path, tries=4):
 
 
 def _ok():
-    STATE.update(strikes=0, down_until=0.0, last_ok=time.time())
+    STATE.update(strikes=0, down_until=0.0, last_ok=time.time(), backup_since=None, backup_writes=0)
 
 
 _count_lock = threading.Lock()
@@ -233,6 +233,8 @@ _count_lock = threading.Lock()
 def _count(store):
     with _count_lock:
         STATE['writes'][store] += 1
+        if store == 'emergent' and configured():  # a file Supabase should have taken
+            STATE['backup_writes'] += 1
 
 
 def _strike(exc, handed=True):
@@ -241,6 +243,7 @@ def _strike(exc, handed=True):
         STATE['strikes'] += 1
         STATE['down_until'] = time.time() + min(300, 15 * 2 ** (STATE['strikes'] - 1))
         STATE['last_error'] = str(exc)[:240]
+        STATE['backup_since'] = STATE['backup_since'] or time.time()
         if handed:  # a file really went to Emergent (a failed health check alone does not count)
             STATE['failovers'] += 1
             STATE['last_failover'] = {'at': time.time(), 'reason': STATE['last_error']}

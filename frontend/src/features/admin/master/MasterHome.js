@@ -10,6 +10,7 @@ import {AdminHeading,StatusChip,ExamDialog} from '../../../components/admin/Admi
 import {plural,KIND_LABEL} from '../../../components/master/MasterShared';
 import {FixItems} from './FixList';
 import {QuestionReportsPanel} from '../../../components/studio/QuestionReportsPanel';
+import {StorageAlert} from '../../../components/master/StorageBadge';
 
 export function AttentionLine(){
  const [s,setS]=useState(null);
@@ -36,6 +37,7 @@ function OwnerHome(){
  useEffect(()=>{api('/admin/catalog').then(d=>{setData(d);setError('');}).catch(e=>setError(e.message));},[reload]);
  return <div className="admin-page master-page" data-testid="master-home">
   <AttentionLine/>
+  <StorageAlert/>
   <AdminHeading testId="super-admin-title" title="Master" text="Exam › mock type › mock. Everything students see on the website and the app starts here." action={<Button onClick={()=>setOpen(true)} data-testid="master-new-exam"><Plus size={16}/>New exam</Button>}/>
   <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>
   {!data&&!error?<div className="master-exam-grid">{[1,2,3].map(n=><Skeleton key={n} className="h-44"/>)}</div>:data&&<div className="master-exam-grid" data-testid="master-exam-grid">{data.items.map(e=><ExamCard key={e.slug} e={e}/>)}</div>}

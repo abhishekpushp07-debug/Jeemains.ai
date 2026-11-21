@@ -31,8 +31,14 @@ async def main():
     await H.tdbmod.indexes(); await structure.seed()
     os.makedirs(OUT, exist_ok=True)
     qonly, konly = split_pdfs()
+    long = [(1, 'DUPLICATE CHECK: a block of mass 2 kg slides down a rough incline of angle 30 degrees. Find its acceleration.', ['1 m/s2', '2 m/s2', '3 m/s2', '4 m/s2']),
+            (2, 'DUPLICATE CHECK: two identical charges repel with force F at distance r. Find the force at distance 2r.', ['F', 'F/2', 'F/4', '4F']),
+            (3, 'UNIQUE TO A: the escape velocity from the surface of the earth is about how many kilometres per second', ['7.9', '11.2', '15', '42'])]
+    other = long[:2] + [(3, 'UNIQUE TO B: the work done by a centripetal force on a body in uniform circular motion is always', ['zero', 'positive', 'negative', 'infinite'])]
+    keys = [(1, 'B'), (2, 'C'), (3, 'B')]
     files = {'single_paper.pdf': single_pdf(), 'questions_only.pdf': qonly, 'answer_key_only.pdf': konly,
-             'two_mocks.pdf': build_pdf([{'n': 1, 'qs': q3('B1'), 'keys': [(1, 'B'), (2, 'B'), (3, 'C')]}, {'n': 2, 'qs': q3('B2'), 'keys': [(1, 'A'), (2, 'B'), (3, 'C')]}])}
+             'two_mocks.pdf': build_pdf([{'n': 1, 'qs': q3('B1'), 'keys': [(1, 'B'), (2, 'B'), (3, 'C')]}, {'n': 2, 'qs': q3('B2'), 'keys': [(1, 'A'), (2, 'B'), (3, 'C')]}]),
+             'dup_a.pdf': build_pdf([{'n': 1, 'qs': long, 'keys': keys}]), 'dup_b.pdf': build_pdf([{'n': 1, 'qs': other, 'keys': keys}], contents=False)}
     for name, raw in files.items():
         Path(OUT, name).write_bytes(raw)
     own, _ = await mkstaff('owner', 'ui'); rev, _ = await mkstaff('reviewer', 'ui')

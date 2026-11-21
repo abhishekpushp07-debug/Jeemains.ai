@@ -10,6 +10,7 @@ import {TextDialog,ConfirmDialog} from '../admin/AdminShared';
 import {ScheduleDialog} from './ScheduleDialog';
 import {StatusLabel,SOURCE,fixLink,fmtIST,plural} from './MasterShared';
 import {TryAsStudent} from './TryAsStudent';
+import {DuplicateNote} from './Duplicates';
 import {toast} from 'sonner';
 
 const key=m=>m.kind+':'+m.id;
@@ -41,7 +42,8 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
  if(m.kind==='import')return <li className="admin-test-row master-mock-row" data-testid={'mock-row-'+m.id}><span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><div className="admin-row-main"><strong>{m.title}</strong><small>{plural(m.count,'question')} · Older paper upload</small></div><span className="admin-chip tone-hidden"><i aria-hidden="true"/>Draft</span><div className="admin-test-actions"><Button asChild size="sm" variant="outline"><Link to={'/studio/imports/'+m.id} data-testid={'mock-open-import-'+m.id}>Open</Link></Button></div></li>;
  const cut=m.cut?.total?[`${m.cut.clean} cut cleanly`,m.cut.held?`${m.cut.held} need your eye`:null,m.cut.whole?`${m.cut.whole} as whole picture`:null].filter(Boolean).join(' · '):null;
  const facts=[m.subject,m.year,plural(m.count,'question'),cut,m.minutes?`${m.minutes} min`:null,m.written?'Written':m.book?`From PDF · ${m.book}`:SOURCE[m.source],m.key_only>0?(m.key_only===m.count?'Answer key only, no solutions':`${m.key_only} without a solution`):null,
-  m.status==='scheduled'&&m.start_at?`Opens ${fmtIST(m.start_at)}`:null,m.live_exam?'Live exam':null].filter(Boolean).join(' · ');
+  m.status==='scheduled'&&m.start_at?`Opens ${fmtIST(m.start_at)}`:null,m.live_exam?'Live exam':null,
+  m.status==='publishing'&&m.publish_progress?.total?`Pictures ${m.publish_progress.done}/${m.publish_progress.total} saved`:null].filter(Boolean).join(' · ');
  const main=m.to_fix>0?<Button asChild size="sm"><Link to={fixLink(m)} data-testid={'mock-fix-'+m.id}><Wrench size={15}/>Fix</Link></Button>
   :m.written?<Button asChild size="sm" variant="outline"><Link to={'/super-admin/write/'+m.id} data-testid={'mock-edit-'+m.id}><PencilLine size={15}/>Edit</Link></Button>
   :m.kind==='book_mock'&&m.status==='draft'?<Button asChild size="sm" variant="outline"><Link to={`/super-admin/fix/${m.book_id}/${m.id}?all=1`} data-testid={'mock-edit-questions-'+m.id}><PencilLine size={15}/>Edit</Link></Button>
@@ -49,7 +51,7 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
  return <li className="admin-test-row master-mock-row" data-testid={'mock-row-'+m.id}>
   <input type="checkbox" className="admin-row-check" checked={checked} onChange={e=>onCheck(m,e.target.checked)} aria-label={'Select '+m.title} data-testid={'mock-select-'+m.id}/>
   <span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
-  <div className="admin-row-main"><strong data-testid={'mock-title-'+m.id}>{m.locked&&<Lock size={13} className="master-lock" aria-label="Locked"/>}{m.title}</strong><small>{facts}</small>{m.replace_pending&&<small className="admin-replacing">Being replaced by “{m.replace_pending}”. It moves to the Library when that goes Live.</small>}</div>
+  <div className="admin-row-main"><strong data-testid={'mock-title-'+m.id}>{m.locked&&<Lock size={13} className="master-lock" aria-label="Locked"/>}{m.title}</strong><small>{facts}</small>{m.replace_pending&&<small className="admin-replacing">Being replaced by “{m.replace_pending}”. It moves to the Library when that goes Live.</small>}<DuplicateNote m={m}/></div>
   <div className="master-row-status"><LiveSwitch m={m} busy={busy} onPick={onPick}/><StatusMenu m={m} busy={busy} onPick={onPick}/></div>
   <div className="admin-test-actions">{m.status==='draft'&&m.count>0&&<TryAsStudent m={m}/>}{main}{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Rename '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>
  </li>;

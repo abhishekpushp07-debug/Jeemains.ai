@@ -89,7 +89,10 @@ async def type_mocks(sid: str, u=Depends(owner)):
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
     t = await database_now()
     items = [set_item(test_view(x, t)) for x in await section_tests(s, e['key'])]
-    for w in await waiting_items(sid):
+    waiting = await waiting_items(sid)
+    busy = [w['id'] for w in waiting if w['kind'] == 'book_mock' and w['state'] == 'publishing']
+    progress = {p['_id']: {'done': p['done'], 'total': p['total']} for p in await db.tejas_publish_progress.find({'_id': {'$in': busy}}).to_list(len(busy))} if busy else {}
+    for w in waiting:
         if w['kind'] == 'import':
             items.append({'kind': 'import', 'id': w['id'], 'title': w['title'], 'status': 'draft', 'to_fix': w['issue_count'], 'count': w['count'],
                           'source': 'import', 'locked': False})
@@ -105,7 +108,8 @@ async def type_mocks(sid: str, u=Depends(owner)):
             to_fix = max(1, len(qs) + len(general))
         items.append({'kind': 'book_mock', 'id': w['id'], 'title': w['title'], 'status': status, 'to_fix': to_fix, 'key_only': w.get('key_only', 0),
                       'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False, 'cut': w.get('cut'),
-                      'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject')})
+                      'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject'),
+                      'publish_progress': progress.get(w['id'])})
     uploads = []
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [
             {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'},
@@ -130,6 +134,14 @@ async def type_mocks(sid: str, u=Depends(owner)):
                                                {'_id': 0, 'id': 1, 'title': 1, 'status': 1, 'message': 1}):
         uploads.append({'id': c['id'], 'kind': 'chapter_book', 'title': c['title'], 'state': c['status'], 'pages': 0, 'read_pages': 0,
                         'message': c.get('message', ''), 'active': c['status'] != 'failed'})
+    from .duplicates import section_duplicates
+    try:
+        dupes = await section_duplicates(sid)
+    except Exception:  # noqa: BLE001  a failed check never hides the mocks
+        dupes = {}
+    for it in items:
+        if dupes.get(it['id']):
+            it['duplicates'] = dupes[it['id']]
     return {'section': section_view(s), 'exam': exam_view(e), 'items': items, 'uploads': uploads, 'server_now': t}
 
 

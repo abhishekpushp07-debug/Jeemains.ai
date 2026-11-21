@@ -198,6 +198,10 @@ async def indexes():
         [("status", 1), ("audience", 1), ("exam", 1), ("created_at", -1)]
     )
     await db.tejas_preflight.create_index([("user_id", 1), ("set_id", 1)], unique=True)
+    await db.tejas_misfires.create_index([('user_id', 1), ('status', 1), ('at', -1), ('number', 1)])
+    await db.tejas_misfires.create_index([('user_id', 1), ('subject', 1), ('status', 1)])
+    await db.tejas_chapter_stats.create_index([('user_id', 1), ('at', 1)])
+    await db.tejas_misfire_sync.create_index([('user_id', 1)])
 
     await jobs.create_index([("status", 1), ("lease_until", 1)])
     await audits.create_index([("resource", 1), ("at", -1)])

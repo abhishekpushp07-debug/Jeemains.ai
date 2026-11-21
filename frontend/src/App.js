@@ -38,6 +38,7 @@ import './analysis2.css';
 import './app-theme.css';
 const Rank = lazy(() => import('./features/Rank'));
 const Mission = lazy(() => import('./features/Mission'));
+const Misfire = lazy(() => import('./features/Misfire'));
 const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
 const Home = lazy(() => import("./features/Home"));
@@ -163,6 +164,7 @@ function Shell() {
             <Route path="/profile" element={<Protected><Profile /></Protected>} />
             <Route path="/rank" element={<Rank />} />
             <Route path="/mission" element={<Protected><Mission /></Protected>} />
+            <Route path="/misfire" element={<Protected><Misfire /></Protected>} />
             <Route path="/my-tests" element={<Navigate to="/profile" replace />} />
             <Route path="/saved-drafts" element={<Protected><SavedDrafts /></Protected>} />
             <Route path="/login" element={<Auth />} />

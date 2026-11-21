@@ -167,6 +167,8 @@ async def set_detail(id: str):
         raise HTTPException(
             404, "This practice set is not available for public practice yet."
         )
+    from .media import warm_soon
+    warm_soon(s)  # the student reads the instructions while the paper's pictures get ready
     return {**summary(s), 'catalog_path': await path_for(s)}
 
 

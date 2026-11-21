@@ -18,7 +18,8 @@ _PACK = re.compile(r"[0-9a-f]{64}")
 _NAME = re.compile(r"(\d{1,4})-(\d{1,2})-([0-3])-(\d{10})-([A-Za-z0-9_-]{22})\.bin")
 _parts = ByteCache(64 * 1024 * 1024)
 _flights = {}
-stats = {"links": 0, "served": 0, "built": 0, "coalesced": 0, "rejected": 0}
+stats = {"links": 0, "served": 0, "built": 0, "coalesced": 0, "rejected": 0, "warmed": 0}
+_warm_at = {}
 
 
 def picture_refs(questions, bonus_open, cut=False):
@@ -95,6 +96,42 @@ async def part_bytes(pack_id, offset, limit, bonus):
     else:
         stats["coalesced"] += 1
     return await asyncio.shield(flight)
+
+
+async def warm(pack_id):
+    """Builds every picture part of a paper before its first student asks for it, two parts at a time."""
+    questions = (await entry_for(pack_id)).questions
+    cut = any(q.get("c_refs") for q in questions)
+    look, total = 2 if cut else 0, len(picture_refs(questions, False, cut))
+    for first in range(0, total, PART * 2):
+        await asyncio.gather(*(part_bytes(pack_id, o, PART, look) for o in range(first, min(total, first + PART * 2), PART)))
+    stats["warmed"] += 1
+
+
+async def warm_set(s):
+    from .packs import seal
+    from .papers import paper
+    entry = await paper(s)
+    if entry.count:
+        await warm(entry.pack_id or await seal(entry.questions))
+
+
+def warm_soon(s):
+    """Fire and forget, at most once per paper in 10 minutes. A failed warm-up only means the first student builds the parts, as before."""
+    key, t = (s["id"], s.get("revision")), time.time()
+    if t - _warm_at.get(key, 0) < 600:
+        return
+    _warm_at[key] = t
+    if len(_warm_at) > 2000:
+        for k in [k for k, v in _warm_at.items() if t - v > 600]:
+            _warm_at.pop(k, None)
+
+    async def go():
+        try:
+            await warm_set(s)
+        except Exception:  # noqa: BLE001
+            pass
+    asyncio.ensure_future(go())
 
 
 @router.get("/media/probe.bin")

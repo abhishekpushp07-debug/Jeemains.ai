@@ -29,6 +29,10 @@ class CompareAttemptsPayload(Payload):
     right: Identity
 
 
+class MisfireTry(Payload):
+    value: str = Field(min_length=1, max_length=60)
+
+
 class SolvePayload(Payload):
     request_id: RequestKey
 
@@ -336,6 +340,7 @@ MODELS = {
     'chapter_books.publish_book': ChapterAction, 'chapter_books.chapter_live': ChapterLive,
     'reviews.save_review': ReviewWrite, 'reviews.expected_value': ProbabilityInput,
     'attempts.solution_consulted': EmptyPayload,
+    'misfire.try_answer': MisfireTry, 'misfire.done': EmptyPayload, 'misfire.reopen': EmptyPayload,
     'attempts.submit': SubmitPayload, 'timeline.flush_timeline': TimeBatch,
     'names.set_display_name': NamePayload, 'analysis_api.save_learnings': LearningsPayload,
     'imports.schedule_import': ScheduleInput, 'imports.toggle_live': LiveInput,

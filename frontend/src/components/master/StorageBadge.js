@@ -1,5 +1,5 @@
 import React,{useCallback,useEffect,useState} from 'react';
-import {HardDrive,RefreshCw,Loader2} from 'lucide-react';
+import {HardDrive,RefreshCw,Loader2,AlertTriangle} from 'lucide-react';
 import {Popover,PopoverTrigger,PopoverContent} from '../ui/popover';
 import {api} from '../../lib/api';
 
@@ -37,6 +37,18 @@ export function StorageBadge(){
   {data?.last_failover&&<p className="storage-meta" data-testid="storage-last-failover">Aakhri baar Emergent ne file li: {ago(data.last_failover.at)}. Wajah: {data.last_failover.reason}</p>}
   <div className="storage-foot"><small>{data?.checked_at?'Jaancha: '+ago(data.checked_at):''}</small><button type="button" onClick={()=>load(true)} disabled={busy} data-testid="storage-check-now">{busy?<Loader2 size={13} className="spin"/>:<RefreshCw size={13}/>}Abhi check karo</button></div>
  </PopoverContent></Popover>;
+}
+
+// Super Admin home: a loud line once Supabase has been missing for 10 minutes and new files keep going to Emergent.
+export function StorageAlert(){
+ const {data}=useStorageHealth();
+ const b=data?.backup;
+ if(!b?.alert)return null;
+ const min=Math.max(10,Math.round((Date.now()/1000-b.since)/60));
+ return <div className="storage-alert" role="alert" data-testid="storage-alert"><AlertTriangle size={18} aria-hidden="true"/><div>
+  <strong data-testid="storage-alert-title">{min} minute se nayi files Emergent backup mein ja rahi hain</strong>
+  <small data-testid="storage-alert-text">Supabase jawab nahi de raha ({b.writes} file backup mein gayi). Data surakshit hai; Supabase lautte hi files wahin jayengi.{data.supabase?.error?' Wajah: '+data.supabase.error:''}</small>
+ </div></div>;
 }
 
 // The upload dialog says where the PDF will be kept, so the owner knows before sending a big file.
