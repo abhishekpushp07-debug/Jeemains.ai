@@ -7,7 +7,7 @@ How the website calls the app server. Everything here was run against the live s
 | Server | API root | Use |
 |---|---|---|
 | Live | `https://jeelive-mobile.emergent.host/api` | Always, unless you are testing unreleased app-server work |
-| Development | `https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com/api` | Unreleased work only. It sleeps when idle and its address changes when the workspace is recreated |
+| Development | `https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/api` | Unreleased work only. It sleeps when idle and its address changes when the workspace is recreated |
 
 Both serve the same code and data today and return identical numbers. All paths below are relative to the API root.
 

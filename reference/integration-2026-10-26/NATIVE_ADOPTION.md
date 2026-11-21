@@ -1,7 +1,7 @@
 # Native adoption — iteration 36
 
 ## Source and boundary
-- Owner ZIP downloaded only from `https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com/downloads/JEELIVE_App_Integration_2026-10-26.zip`.
+- Owner ZIP downloaded only from `https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/downloads/JEELIVE_App_Integration_2026-10-26.zip`.
 - Archive SHA256: `96653542287351d77909fc6052530431f04b160489c4fcc4a7e0ece153c8c2b0`.
 - Safely extracted without running contained code; no traversal/symlinks; original export/docs/evidence preserved.
 - Canonical academic API remains `https://jeelive.ai/api`. Preview download host is NOT an API/content fallback. Existing authentication and Rapid Fire endpoints/DB/identity integration were not changed.

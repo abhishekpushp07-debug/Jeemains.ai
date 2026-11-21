@@ -5,7 +5,7 @@ import uuid
 import requests
 import pytest
 
-BASE = os.environ.get("EXPO_PUBLIC_BACKEND_URL", "https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com").rstrip("/")
+BASE = os.environ.get("EXPO_PUBLIC_BACKEND_URL", "https://rapid-fire-208--04cp9c5d.preview.emergentagent.com").rstrip("/")
 
 
 class TestLegalBrand:

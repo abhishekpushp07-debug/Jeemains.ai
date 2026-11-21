@@ -17,6 +17,6 @@ export default function Privacy() {
       <T testID={`privacy-heading-${section.id}`} w="heavy" size={11} color={colors.custom_eyebrow} style={{ letterSpacing: 2.2 }}>{section.title.toUpperCase()}</T>
       <T testID={`privacy-body-${section.id}`} size={15} color={colors.muted} style={legalStyles.body}>{section.body}</T>
     </View>)}
-    <Pill testID="privacy-account-deletion" label="Account deletion information" kind="outline" icon="account-remove-outline" onPress={() => router.push("/delete-account")} />
+    <Pill testID="privacy-account-deletion" label="Delete account" kind="outline" icon="account-remove-outline" onPress={() => router.push("/delete-account")} />
   </LegalLayout>;
 }

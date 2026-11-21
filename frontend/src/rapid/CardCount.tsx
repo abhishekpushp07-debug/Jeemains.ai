@@ -17,7 +17,7 @@ export function CardCountPicker({ available, value, onChange, testID = "rf-card-
       {CARD_COUNTS.map((n) => {
         // The pill that lights up is the round that will really be dealt (a too-big choice falls back to the largest that fits).
         const on = (fit || chosen) === n, short = available !== undefined && available < n;
-        return <Pressable key={n} testID={`${testID}-${n}`} accessibilityRole="radio" accessibilityState={{ checked: on }}
+        return <Pressable key={n} testID={`${testID}-${n}`} accessibilityRole="radio" accessibilityState={{ checked: on }} aria-checked={on}
           accessibilityLabel={`${n} cards, about ${roundLength(n)}${short ? ", this pick needs more cards" : ""}`}
           onPress={() => { tap(); if (onChange) onChange(n); else setCardCount(n); }} style={[styles.pill, on && styles.pillOn, short && !on && styles.short]}>
           <T w="heavy" size={16} color={on ? arena.badgeInk : arena.text}>{n}</T>

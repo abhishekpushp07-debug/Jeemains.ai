@@ -15,7 +15,7 @@ Rapid Fire is deliberately not part of this pack.
 | | |
 |---|---|
 | Live app server | `https://jeelive-mobile.emergent.host/api` |
-| Development server | `https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com/api` (may sleep or change; use it only to test unreleased work) |
+| Development server | `https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/api` (may sleep or change; use it only to test unreleased work) |
 | Data (served live) | JEE Main 2026 (JoSAA, CSAB, JAC Delhi), COMEDK UGET 2026, BITSAT 2022–2026 |
 | Verified | all 21 public checks pass on the live server (`CONNECT/connect_check.py`) on the day of this build |
 | Build facts | `MANIFEST.json` (build time, every file with its size and SHA-256) |

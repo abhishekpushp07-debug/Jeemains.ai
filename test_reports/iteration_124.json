@@ -1,0 +1,47 @@
+{
+  "summary": "Iteration124 account-deletion feature tested end to end (backend + Expo web preview at 390px/320px + public web page + owner panel closed doors + Rapid Fire Quick Play aria-checked). Every requested check passed. Backend: the main agent's suite (test_account_deletion.py + test_iter50_legal_public_authgate.py) passed 24/24, and a new public-URL suite (test_iter124_deletion_public_api.py) passed 13/13. Validation returns 422 with a friendly message and never echoes the PIN, the status of an unknown request is 404, the owner list without a session is 401, completing without the X-Owner-Panel header is 403 and with the header but no session is 401, a wrong owner login is 401, and the CSP has a script-src nonce and connect-src 'self'. Frontend: the 4 steps, the retained note and the form render. The submit button stays disabled until a valid number, a 4-digit PIN and DELETE (any case) are all entered. The confirm sheet opens; Keep closes it; Confirm with 1000000001/0000 shows the server error in delete-account-error, the form stays and no receipt appears. Signed-in flow: the Account row shows 'Erase your account and game data' and opens /delete-account with 'number ending 6276'. With POST /api/account/delete-request intercepted (PIN 1234 sent, never 5524; Bearer attached), the receipt shows DEL-TEST-2345, 'By 21 December 2026' (now+30d), Rapid Fire 'Deleted' and device 'Signed out'. The app was signed out locally (/ goes to /entry) and Done goes to /entry. The QA learner was signed in again afterwards. The privacy page's 'Delete account' button opens /delete-account and the deletion section describes the new flow. The public page shows the right messages for an empty or bad number, a 3-digit PIN, a missing DELETE and an unticked box (no request sent), then shows the server's error and keeps the form. Owner panel: owner-login renders and a wrong login shows 'Email or password is wrong.' in owner-login-error. Accessibility: rf-scope-pcm, rf-scope-mixed-* and rf-scope-count-30/50/100 expose aria-checked, which flips when tapped (role checkbox/radio). No 500s and no PIN in the backend logs. No deprecated Expo packages were checked or flagged in this iteration's files.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/account/delete-request (combined with POST /api/account/forgot-pin)", "issue": "Abuse risk by design: forgot-pin lets anyone who knows a number set its PIN with no OTP (pin_reset.py:3, the owner's product decision). Deletion then uses only number + PIN, and the Rapid Fire data is erased AT ONCE and can't be restored. Anyone who knows a student's number can therefore reset the PIN and permanently wipe that student's coins, friends and history, and lock the account out. The owner's 'cancel' only restores sign-in, not the data.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/account/delete-request", "issue": "When the website returns 422 for a number it rejects (for example 1000000001), check_pin (account_deletion.py:151) returns the Hinglish message 'Mobile number ya PIN sahi format mein nahi hai. 10 digit ka mobile number aur 4 digit ka PIN daalo.' The rest of the deletion UI is English, the message is misleading (the number already was 10 digits and the PIN 4 digits), and unlike the other errors it doesn't say 'Nothing was deleted.'"},
+      {"endpoint": "POST /api/account/delete-request", "issue": "If rapidAccess() fails in the app (client.ts:159 swallows it into an empty token), the request goes out with no Bearer token. The server then skips the 'number belongs to a different account than the one signed in' check and records the source as 'web'."},
+      {"endpoint": "POST /api/owner/deletion-requests/{rid}/{action}", "issue": "The rid regex is DEL-[A-Z0-9]{4}-[A-Z0-9]{4} (owner_panel.py:143), while RID_RE in account_deletion.py:40 excludes I, O, 0 and 1. The two don't match (harmless, but it should be the same constant)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/delete-account and the public deletion page", "issues": ["The server error for a rejected number appears in Hinglish in an otherwise English screen (see backend minor #1)."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter124_deletion_public_api.py",
+    "/app/backend/tests/test_account_deletion.py",
+    "/app/backend/tests/test_iter50_legal_public_authgate.py",
+    "/app/test_reports/pytest/iter124_deletion.xml",
+    "/app/test_reports/pytest/iter124_public.xml"
+  ],
+  "action_items": [
+    "HIGH: Reduce the abuse risk of forgot-pin (no OTP) + immediate erase. Options: refuse deletion within 24-72 h after a forgot-pin reset on that number; or keep the Rapid Fire data for a cooling-off period (for example 7 days, cancelled automatically if the real owner signs in or the owner panel cancels) before erasing it; or require deletion from an app session that is older than the last PIN reset. At least surface the reset-then-delete case in the owner panel.",
+    "Minor: in check_pin, replace the Hinglish 422 message with an English message that matches the rest of the flow and ends with 'Nothing was deleted.', for example 'This number or PIN was not accepted. Check your registered number and 4-digit PIN. Nothing was deleted.'",
+    "Minor: in requestAccountDeletion, when the user is signed in and rapidAccess fails, retry or fail instead of sending the request without a token, so the different-account check always runs.",
+    "Minor: share one RID regex between owner_panel.py and account_deletion.py."
+  ],
+  "critical_code_review_comments": [
+    "account_deletion.py: the PIN is never stored or logged (no 5524 found in the backend logs), the 422 hides input, deletion is idempotent through the partial unique index, and settle_late re-erases rows from late payouts. Solid.",
+    "The sign-in gate covers only the auth/phone and auth/phone/signup proxy paths (server.py:190) and rf/access. A website session on another device that this server never tagged in jl_jars (old untagged jars that never used RF) keeps working through /api/jl/* until it expires. That's acceptable, but worth knowing.",
+    "delete-account.tsx: signOut runs before setReceipt. If signOut throws, the user sees an error although the deletion succeeded; a retry is safe because the request is idempotent.",
+    "Owner panel: httponly/secure/samesite=strict cookie scoped to /api/owner, nonce CSP, X-Owner-Panel header required for writes, IP-based fail limit. Good."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter124_deletion_public_api.py"],
+  "success_rate": {"backend": "100% (37/37)", "frontend": "100% of the requested flows"},
+  "seed_data_creation": "None. No deletion requests created; the signed-in deletion was intercepted in the browser (fake 200). Wrong-PIN checks used only 1000000001/0000; no wrong PIN was sent for 7004186276. The QA learner was left signed in.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use test_iter124_deletion_public_api.py (set EXPO_PUBLIC_BACKEND_URL from frontend/.env; run with -p no:xdist -o addopts=''). On /entry, wait ~3 s after load before filling and clicking entry-continue-button: a force-click right after load did nothing (no auth request sent; probably not ready yet). The delete-account sheet needs ~1.5 s of animation before its buttons can be clicked. Always intercept **/api/account/delete-request when signed in as the QA learner.",
+  "rca_of_issue": ""
+}

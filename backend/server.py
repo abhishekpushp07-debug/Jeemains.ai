@@ -20,6 +20,8 @@ from arena_web import router as arena_web_router
 from jl_transport import UpstreamError, canonical_request, make_client
 from session_coordination import session_rotation
 import login_guard
+import account_deletion
+import owner_panel
 from client_ip import client_ip
 from rf_access import make_access_router, install_access_guard, maintenance_on
 from load_guard import ArenaBusy, InflightCounter, arena_gate, busy_response, monitor as load_monitor, raise_fd_limit, snapshot as load_snapshot
@@ -140,9 +142,11 @@ def cookie_changes(cookies: dict, headers) -> tuple[dict, list]:
     return sets, gone
 
 
-async def save_cookie_changes(sid: str, sets: dict, gone: list):
+async def save_cookie_changes(sid: str, sets: dict, gone: list, uid: str = ""):
     # One field per cookie, never the whole set: two servers renewing different cookies at the same moment both keep theirs.
     update = {"$set": {**{f"cookies.{jar_field(k)}": v for k, v in sets.items()}, "updated_at": now_iso(), "seen_at": datetime.now(timezone.utc)}}
+    if uid:  # whose jar this is, so deleting that account can sign this device out
+        update["$set"]["uid"] = uid
     if gone:
         update["$unset"] = {f"cookies.{jar_field(k)}": "" for k in gone}
     await db.jl_jars.update_one({"sid": sid}, update, upsert=True)
@@ -183,10 +187,14 @@ async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
     if guard:
         await login_guard.record(db, guard, r.status_code)
     sets, gone = cookie_changes(cookies, r.headers)
+    uid = account_deletion.signed_in_uid(r) if path in account_deletion.SIGN_INS and r.is_success else ""
+    if uid and await account_deletion.pending(db, uid):  # asked to be deleted: this app does not sign that account in again
+        await account_deletion.end_session(http, "; ".join(f"{k}={v}" for k, v in sets.items()))
+        return account_deletion.pending_response()
     if path == "auth/logout" and 200 <= r.status_code < 300:
         await db.jl_jars.delete_one({"sid": x_jl_sid})  # signed out: this session handle carries nothing any more
     elif sets or gone:
-        await save_cookie_changes(x_jl_sid, sets, gone)
+        await save_cookie_changes(x_jl_sid, sets, gone, uid)
     out = {k: r.headers[k] for k in PASS_HEADERS if k in r.headers}
     out['Vary'] = 'X-JL-Sid'
     if path.startswith('auth/'):
@@ -528,6 +536,8 @@ api.include_router(make_rank())
 api.include_router(make_mission_links(db, rf_user))
 api.include_router(make_dream(db, rf_user))
 api.include_router(make_access_router(db, lambda: http))
+api.include_router(account_deletion.make_router(db, lambda: http))
+api.include_router(owner_panel.make_router(db, lambda: http))
 app.include_router(api)
 install_access_guard(app, db)
 app.add_middleware(AssetAwareCompression, minimum_size=1024, compresslevel=4)
@@ -597,6 +607,7 @@ async def sweep():
     old = datetime.fromtimestamp(now - 86400, timezone.utc).isoformat()
     await db.rf_sessions.update_many({"status": "active", "created_at": {"$lt": old}}, {"$set": {"status": "expired"}})
     await cups_router.resume_payouts()
+    await account_deletion.settle_late(db)
 
 
 async def sweep_loop():
@@ -656,6 +667,8 @@ async def setup_database():
     await db.pin_resets.create_index([("phone", 1), ("at", -1)])
     await db.pin_resets.create_index([("ip", 1), ("at", -1)])
     await login_guard.setup(db)
+    await account_deletion.ensure_indexes(db)
+    await owner_panel.ensure_indexes(db)
     await db.rf_duels.create_index("id", unique=True)
     await db.rf_duels.create_index("code")
     await db.rf_duels.create_index([("status", 1), ("mode", 1), ("subject", 1), ("created_ts", 1)])

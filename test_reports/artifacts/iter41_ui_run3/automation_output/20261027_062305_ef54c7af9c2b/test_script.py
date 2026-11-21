@@ -145,7 +145,7 @@ async def run_test(page, output_dir, page_url):
             await page.click('[data-testid="account-signout-button"]', force=True)
             await page.wait_for_timeout(1000)
 
-        await page.goto('https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com/(tabs)/tests')
+        await page.goto('https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/(tabs)/tests')
         await page.wait_for_timeout(1300)
         print(f'Private route blocked after logout={await page.locator("[data-testid=\"entry-screen\"]").count() > 0}')
 

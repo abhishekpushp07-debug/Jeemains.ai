@@ -52,7 +52,7 @@ export default function Account() {
           {ARENA ? null : <ListRow testID="account-loading-performance" icon="speedometer" label="Loading performance" sub="Check how fast papers and images load" onPress={() => router.push("/performance")} />}
         </GroupList>
         <GroupList title="Account" testID="account-group-account">
-          <ListRow testID="account-deletion" icon="account-remove-outline" label="Delete account" sub="How account deletion works" onPress={() => router.push("/delete-account")} />
+          <ListRow testID="account-deletion" icon="account-remove-outline" label="Delete account" sub="Erase your account and game data" onPress={() => router.push("/delete-account")} />
           <ListRow testID="account-signout-button" icon="logout" label="Sign out" danger busy={busy} onPress={begin} />
         </GroupList>
         <T testID="account-signout-note" size={12} color={colors.custom_eyebrow}>Signing out clears this device’s session and cached question images. Saved answers and results stay with your existing JEELIVE account.</T>

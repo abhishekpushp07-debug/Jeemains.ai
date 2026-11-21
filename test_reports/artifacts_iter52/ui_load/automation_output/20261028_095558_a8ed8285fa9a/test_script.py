@@ -2,7 +2,7 @@ async def run_test(page, output_dir, page_url):
     try:
         await page.set_viewport_size({"width": 390, "height": 844})
         print("Step 1: Open app URL")
-        await page.goto("https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com", wait_until="domcontentloaded", timeout=30000)
+        await page.goto("https://rapid-fire-208--04cp9c5d.preview.emergentagent.com", wait_until="domcontentloaded", timeout=30000)
         await page.wait_for_timeout(3000)
         await page.screenshot(path="/app/test_reports/artifacts_iter52/ui_load/automation_output/20261028_095558_a8ed8285fa9a/jeelive-series-opacity390.jpeg", type="jpeg", quality=40, full_page=False)
         print("Step 1 PASS: App loaded at 390 viewport")

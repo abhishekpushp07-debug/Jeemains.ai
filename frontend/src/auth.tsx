@@ -21,7 +21,7 @@ type Ctx = {
   signIn: (phone: string, pin: string) => Promise<User>;
   signUp: (phone: string, pin: string, confirm: string) => Promise<User>;
   changePin: (phone: string, pin: string, confirm: string) => Promise<void>;
-  signOut: (drafts: "keep" | "discard") => Promise<void>;
+  signOut: (drafts: "keep" | "discard", serverEnded?: boolean) => Promise<void>;
   checkSession: () => Promise<void>;
   pendingDraftCount: () => Promise<number>;
 };
@@ -148,15 +148,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await acceptUser(current);
   }, [user, acceptUser]);
 
-  const signOut = useCallback(async (drafts: "keep" | "discard") => {
+  const signOut = useCallback(async (drafts: "keep" | "discard", serverEnded = false) => {
     await flushDreams(); // the last dream changes go up while the session still works
     generation.current++; advanceAuthEpoch();
     if (user && drafts === "discard") await discardAllDrafts(user.id);
     // Prevent native cookies left after an offline logout from silently signing
     // this installation back in. A successful explicit login removes this guard.
     await storage.setItem("jl_signed_out", true);
-    try { await post("/auth/logout", {}); setSignOutWarning(""); }
-    catch { setSignOutWarning("Signed out on this device. Server sign-out couldn't be confirmed while offline."); }
+    // An account deletion already ended this device's session on the server.
+    if (!serverEnded) {
+      try { await post("/auth/logout", {}); setSignOutWarning(""); }
+      catch { setSignOutWarning("Signed out on this device. Server sign-out couldn't be confirmed while offline."); }
+    } else setSignOutWarning("");
     await forgetPrivateProfile(true); await resetSessionHandle(); setExpired(false);
     // Signing out on purpose leaves no number behind (a shared phone stays private).
     ended.current = false; setLastPhone("");

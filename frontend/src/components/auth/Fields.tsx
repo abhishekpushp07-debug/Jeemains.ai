@@ -38,6 +38,20 @@ export function PinField({ value, onChange, label = "4-digit PIN", testID, disab
   </View>;
 }
 
+export function WordField({ value, onChange, label, placeholder, testID, disabled, onSubmit }: {
+  value: string; onChange: (value: string) => void; label: string; placeholder: string; testID: string; disabled?: boolean; onSubmit?: () => void;
+}) {
+  return <View style={styles.group}>
+    <T testID={`${testID}-label`} size={13} w="bold">{label}</T>
+    <View style={styles.field}>
+      <Icon name="keyboard-outline" size={20} color={colors.muted} />
+      <TextInput testID={testID} accessibilityLabel={label} value={value} onChangeText={onChange} editable={!disabled} placeholder={placeholder}
+        placeholderTextColor={colors.muted} autoCapitalize="characters" autoComplete="off" autoCorrect={false} maxLength={12}
+        returnKeyType="done" onSubmitEditing={onSubmit} style={[styles.input, styles.pin]} />
+    </View>
+  </View>;
+}
+
 const styles = StyleSheet.create({
   group: { gap: space.sm },
   field: { flexDirection: "row", alignItems: "center", minHeight: 56, borderRadius: 16, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, paddingLeft: space.md, paddingRight: 4 },

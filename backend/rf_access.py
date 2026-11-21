@@ -54,6 +54,12 @@ async def verified_grant(db, token):
     return grant
 
 
+def forget_grants(uid):
+    """Account deleted: this process stops honouring the player's grants at once (others within GRANT_RECHECK)."""
+    for digest in [d for d, (grant, _) in _grants.items() if grant.get('uid') == uid]:
+        _grants.pop(digest, None)
+
+
 async def maintenance_on(db) -> bool:
     """The question-bank refresh switch, read from Mongo at most every 5 seconds per process."""
     if time.monotonic() - _maintenance["at"] > 5:
@@ -95,8 +101,13 @@ def make_access_router(db, client):
                 raise HTTPException(401, 'Canonical identity could not be verified.')
         except (*UpstreamError, ValueError) as exc:
             raise HTTPException(503, 'Could not verify your session. Please retry.') from exc
+        from account_deletion import PENDING_MESSAGE, pending
+        if await pending(db, uid):
+            raise HTTPException(403, PENDING_MESSAGE)
         from social import remember_identity
         await remember_identity(db, uid, user)
+        if sid:  # the jar knows whose it is, so deleting the account can sign this device out
+            await db.jl_jars.update_one({'sid': sid, 'uid': {'$ne': uid}}, {'$set': {'uid': uid}})
         token = secrets.token_urlsafe(32)
         expiry = datetime.now(timezone.utc) + timedelta(minutes=15)
         await db.rf_access.insert_one({'digest': token_digest(token), 'uid': uid, 'sid': sid, 'expires_at': expiry})

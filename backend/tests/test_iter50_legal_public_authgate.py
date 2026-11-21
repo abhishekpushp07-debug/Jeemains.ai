@@ -67,16 +67,14 @@ def test_iter50_legal_privacy_html_headers_and_content(api_client: requests.Sess
     assert "<form" not in html.lower()
 
 
-def test_iter50_legal_delete_account_unavailable_without_pin_ui(api_client: requests.Session):
-    """Legal module: deletion page does not claim working deletion flow."""
+def test_iter50_legal_delete_account_page_works_without_the_app(api_client: requests.Session):
+    """Legal module: since Nov 2026 the public deletion page takes number + PIN + DELETE (Google Play web resource)."""
     response = api_client.get(f"{BASE_URL}/api/legal/delete-account", timeout=20)
     assert response.status_code == 200
     html = response.text
-    assert "Direct deletion is not available yet" in html
-    assert "No PIN is collected here" in html
-    assert "Delete button" in html
-    assert "input" not in html.lower()
     assert "data-testid=\"public-account-deletion-page\"" in html
+    assert "data-testid=\"public-deletion-form\"" in html and "data-testid=\"public-deletion-pin\"" in html
+    assert "within 30 days" in html and "Deleted player" in html
 
 
 def test_iter50_legal_information_json_shape(api_client: requests.Session):
@@ -84,13 +82,13 @@ def test_iter50_legal_information_json_shape(api_client: requests.Session):
     response = api_client.get(f"{BASE_URL}/api/legal/information", timeout=20)
     assert response.status_code == 200
     payload = response.json()
-    assert payload.get("version") == "2026-10-27"
+    assert payload.get("version") == "2026-11-21"
     assert payload.get("supportEmail") == "Abhishek@billpe.com"
     assert isinstance(payload.get("sections"), list) and len(payload["sections"]) == 8
     deletion = payload.get("deletion") or {}
-    assert deletion.get("enabled") is False
-    assert deletion.get("mode") == "pin_confirmed_direct"
-    assert deletion.get("status") == "Direct deletion is not available yet"
+    assert deletion.get("enabled") is True
+    assert deletion.get("mode") == "pin_confirmed_request"
+    assert [s["id"] for s in deletion.get("steps", [])] == ["rapid", "matches", "website", "signout"]
 
 
 @pytest.mark.parametrize("method,path", [("post", "privacy"), ("delete", "privacy"), ("post", "delete-account"), ("delete", "delete-account"), ("post", "information"), ("delete", "information")])

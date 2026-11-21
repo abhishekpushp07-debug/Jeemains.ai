@@ -29,7 +29,7 @@ export function SubjectChips({ picks, onChange, onLimit, testID = "rf-subject-ch
   const chip = (s: string) => {
     const whole = isWhole(picks, s), chapters = picks.filter((p) => p.subject === s && p.chapter).length;
     const on = whole || chapters > 0, tint = subjectColor(s);
-    return <Pressable key={s} testID={`${testID}-${slug(s)}`} accessibilityRole="checkbox" accessibilityState={{ checked: on }} accessibilityLabel={`${isBitsat(s) ? "BITSAT " : ""}${SHORT[s]}${chapters ? `, ${chapters} chapters` : ""}`}
+    return <Pressable key={s} testID={`${testID}-${slug(s)}`} accessibilityRole="checkbox" accessibilityState={{ checked: on }} aria-checked={on} accessibilityLabel={`${isBitsat(s) ? "BITSAT " : ""}${SHORT[s]}${chapters ? `, ${chapters} chapters` : ""}`}
       onPress={() => { tap(); const next = whole ? picks.filter((p) => p.subject !== s) : togglePick(picks, { subject: s, chapter: null }); if (!next) onLimit?.(); else if (next.length) onChange(next); }}
       style={[styles.chip, styles.chipFlex, on && { borderColor: tint, backgroundColor: arena.panelHi }]}>
       {roomy || isBitsat(s) ? <Icon name={ICON[s]} size={14} color={on ? tint : arena.faint} /> : null}
@@ -41,7 +41,7 @@ export function SubjectChips({ picks, onChange, onLimit, testID = "rf-subject-ch
   return <View testID={testID} style={styles.chipRows}>
     <View style={styles.chips}>
       {PCM_SUBJECTS.map(chip)}
-      <Pressable testID={`${testID}-pcm`} accessibilityRole="checkbox" accessibilityState={{ checked: pcm }} accessibilityLabel="PCM Mixed, all three subjects" onPress={() => { tap(); onChange(PCM); }} style={[styles.chip, styles.pcm, !roomy && styles.pcmNarrow, pcm && styles.pcmOn]}>
+      <Pressable testID={`${testID}-pcm`} accessibilityRole="checkbox" accessibilityState={{ checked: pcm }} aria-checked={pcm} accessibilityLabel="PCM Mixed, all three subjects" onPress={() => { tap(); onChange(PCM); }} style={[styles.chip, styles.pcm, !roomy && styles.pcmNarrow, pcm && styles.pcmOn]}>
         {roomy ? <Icon name="shuffle-variant" size={14} color={pcm ? arena.badgeInk : arena.gold} /> : null}
         <T w="heavy" size={12} color={pcm ? arena.badgeInk : arena.gold}>PCM</T>
       </Pressable>
@@ -80,7 +80,7 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
   };
 
   const mix = (label: string, sub: string, on: boolean, onPress: () => void, testId: string, colors: [string, string], icon: IconName) =>
-    <Pressable key={testId} testID={testId} accessibilityRole="checkbox" accessibilityState={{ checked: on }} accessibilityLabel={label} onPress={() => { tap(); onPress(); }} style={[styles.mix, on && styles.mixOn]}>
+    <Pressable key={testId} testID={testId} accessibilityRole="checkbox" accessibilityState={{ checked: on }} aria-checked={on} accessibilityLabel={label} onPress={() => { tap(); onPress(); }} style={[styles.mix, on && styles.mixOn]}>
       <LinearGradient colors={colors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.mixFace}>
         <View style={styles.mixGloss} />
         <Icon name={icon} size={22} color={arena.text} />
@@ -95,7 +95,7 @@ export function ScopeSheet({ visible, onClose, subjects, value, onDone, onPlay, 
   const row = (s: string, c: { name: string; count: number }) => {
     const whole = isWhole(draft, s), on = whole || draft.some((p) => p.subject === s && p.chapter === c.name);
     const tint = subjectColor(s);
-    return <Pressable key={s + c.name} testID={`rf-scope-chapter-${slug(c.name)}`} disabled={whole || !c.count} accessibilityRole="checkbox" accessibilityState={{ checked: on, disabled: whole }}
+    return <Pressable key={s + c.name} testID={`rf-scope-chapter-${slug(c.name)}`} disabled={whole || !c.count} accessibilityRole="checkbox" accessibilityState={{ checked: on, disabled: whole }} aria-checked={on}
       onPress={() => { tap(); toggle({ subject: s, chapter: c.name }); }} style={[styles.row, on && { borderColor: tint, backgroundColor: arena.panelHi }, (!c.count || (!on && full)) && styles.off]}>
       <View style={[styles.bar, { backgroundColor: tint }]} />
       <View style={styles.flex}>

@@ -11,7 +11,7 @@ async def run_test(page, output_dir, page_url):
 
         await page.wait_for_timeout(2000)
         if '/rapid' not in page.url:
-            await page.goto('https://handoff-zip-hub--8kn8pvyh.preview.emergentagent.com/rapid')
+            await page.goto('https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/rapid')
             await page.wait_for_timeout(2000)
 
         await page.wait_for_selector('[data-testid="rapid-fire-home"]', timeout=25000)

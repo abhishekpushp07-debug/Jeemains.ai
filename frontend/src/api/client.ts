@@ -152,6 +152,25 @@ export async function resetForgottenPin(phone: string, pin: string, confirm: str
   throw new ApiError(typeof data?.detail === "string" ? data.detail : "Couldn't set your new PIN. Please try again.", res.status, retryAfter(res));
 }
 
+export type DeletionReceipt = { request_id: string; state: string; requested_at: string; due_at: string; completed_at: string | null; rapid_fire_erased: boolean; website_account: "pending" | "deleted" | "kept"; signed_out: boolean };
+/** Delete my account: the website checks the number + PIN; when signed in here, the number must be this account's. */
+export async function requestAccountDeletion(phone: string, pin: string, userId?: string): Promise<DeletionReceipt> {
+  let token = "";
+  // Signed in here: the server must be able to check that the number is this account's. Only an account that is
+  // already being deleted (403) goes ahead without it, so a retry after a lost answer still gets its receipt.
+  if (userId) token = await rapidAccess(userId).catch(error => {
+    if (error instanceof ApiError && error.status === 403) return "";
+    throw new ApiError("Couldn't confirm the account signed in here. Nothing was deleted. Please try again.", error instanceof ApiError ? error.status : 0);
+  });
+  const res = await boundedAuthFetch(`${BACKEND}/api/account/delete-request`, {
+    method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+    body: JSON.stringify({ phone, pin, confirm: "DELETE" }),
+  }, 45000, "Deletion is taking longer than usual. Try again: it is safe, nothing is deleted twice.").catch(error => { throw error instanceof ApiError ? error : offline("Connection interrupted. Nothing was deleted. Please try again."); });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new ApiError(typeof data?.detail === "string" ? data.detail : "Couldn't finish. Nothing was deleted. Please try again.", res.status, retryAfter(res));
+  return data as DeletionReceipt;
+}
+
 export type RawResult<T> = { status: number; data: T; retryAfterMs: number };
 
 let validation: { epoch: number; promise: Promise<boolean> } | null = null;
