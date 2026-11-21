@@ -259,16 +259,16 @@ async def boxfix(pw, size):
         r2 = pr[2]; px = .006 if size == 'desk' else .003
         await v.pull(page, [r2[0] - px, r2[1] - .001, r2[2] + px, r2[3] + .001])
         t3 = await page.inner_text(f'[data-testid="{t}-assign-title"]')
-        ok(f'{tag}: mouse-drawn rectangle asks kiska hai', 'kiska hai' in t3, t3)
-        if 'kiska hai' in t3:
-            await page.click(f'[data-testid="{t}-assign-B"]'); await page.wait_for_timeout(300)
+        ok(f'{tag}: drawn rectangle goes straight to pre-chosen B, next C armed', 'kiska hai' not in t3 and 'C ka box' in t3, t3)
         gotB = await v.rect_of(page, '[data-testid="cut-box-B"]')
         print('   after drawing B:', t3, [round(x, 3) for x in gotB], [round(x, 3) for x in r2])
         ok(f'{tag}: mouse-drawn rectangle becomes B where drawn', abs(gotB[0] - (r2[0] - px)) < .004 and abs(gotB[2] - (r2[2] + px)) < .004, (gotB, r2))
         # overlap: draw C over A's printed ink
         if await page.locator(f'[data-testid="{t}-mode-draw"]').get_attribute('aria-pressed') != 'true':
             await page.click(f'[data-testid="{t}-mode-draw"]')
-        await page.click(f'[data-testid="{t}-assign-C"]'); await page.wait_for_timeout(200)
+        if await page.locator(f'[data-testid="{t}-assign-C"]').get_attribute('aria-pressed') != 'true':
+            await page.click(f'[data-testid="{t}-assign-C"]')
+        await page.wait_for_timeout(200)
         await v.pull(page, [pr[1][0], pr[1][1], pr[1][2], pr[1][3]])
         await page.wait_for_timeout(2500)
         reasons = ' | '.join(await page.locator(f'[data-testid="{t}-reason"]').all_inner_texts())
@@ -317,8 +317,8 @@ async def main():
         await tryst(pw, s, 'boxed', proof=True)
     walks = {'master': master, 'proofbox': proofbox, 'tryst': tryst_all, 'live': live, 'solutions': solutions, 'boxfix': boxfix}
     async with async_playwright() as pw:
-        for s in sizes:
-            for w in want:
+        for w in want:
+            for s in sizes:
                 await walks[w](pw, s)
     print('TOTAL', len(v.R), 'PASS', sum(o for _, o in v.R), 'FAIL', sum(not o for _, o in v.R))
 

@@ -220,8 +220,10 @@ export function CutTool({q,bookId,mockId,revision,frozen,onSaved}){
  // The rectangle just drawn (or the printed box just tapped) becomes this piece's box.
  function place(key,rect){const mine=[...new Set([...placed,key])];change({...boxes,[key]:rect},mine);setPending(null);setActive(key);return mine;}
  // Two ways, both work: draw first and then say whose it is, or pick Sawaal / A / B / C / D first and then draw (the next one is picked by itself).
- function drawn(rect){if(!target){setPending(rect);return;}const mine=place(target,rect);setTarget(keys.find(k=>!mine.includes(k))||null);}
- function choose(key){if(pending)place(key,pending);else setTarget(t=>t===key?null:key);}
+ // Next piece to draw: the first one after this key (wrapping round) that has no box yet.
+ const after=(key,mine)=>{const i=keys.indexOf(key);return [...keys.slice(i+1),...keys.slice(0,i)].find(k=>!mine.includes(k))||null;};
+ function drawn(rect){if(!target){setPending(rect);return;}setTarget(after(target,place(target,rect)));}
+ function choose(key){if(!pending)return setTarget(key);setTarget(after(key,place(key,pending)));}
  function takePrinted(){change(Object.fromEntries(keys.map((k,i)=>[k,[...frames[i]]])),keys);setPending(null);setTarget(null);}
  function resize(d){const b=boxes[active];if(b[2]-b[0]+2*d<MIN||b[3]-b[1]+2*d<MIN)return;setBoxes({...boxes,[active]:[Math.max(0,b[0]-d),Math.max(0,b[1]-d),Math.min(1,b[2]+d),Math.min(1,b[3]+d)]});setDirty(true);}
  function reset(){setBoxes(starting(cut,keys));setCheck(null);setDirty(held);setAccept(!!cut.accept_outside);setPending(null);setPlaced([]);setTarget(null);}
@@ -276,7 +278,7 @@ export function CutTool({q,bookId,mockId,revision,frozen,onSaved}){
     <div className="cut-pane">
      <div className="cut-pane-head"><h4>Student ko aise dikhega</h4>{checking&&<span className="cut-checking" data-testid={tag+'-checking'}><Loader2 size={14} className="spin"/>Check ho raha hai…</span>}</div>
      {check&&!check.ok&&<p className="cut-reason" role="alert" data-testid={tag+'-reason'}><AlertTriangle size={15} aria-hidden="true"/>{check.reason}</p>}
-     {check?.ok&&dirty&&<p className="cut-good" data-testid={tag+'-good'}><CheckCircle2 size={15} aria-hidden="true"/>Saare check paas. Ab save kar sakte ho.</p>}
+     {check?.ok&&dirty&&!checking&&<p className="cut-good" data-testid={tag+'-good'}><CheckCircle2 size={15} aria-hidden="true"/>Saare check paas. Ab save kar sakte ho.</p>}
      <div className="cut-student" data-testid={tag+'-preview'}><PiecesPreview bookId={bookId} mockId={mockId} parts={parts} q={q} empty={empty}/></div>
     </div>
    </div>

@@ -28,7 +28,7 @@ export function SolutionInsight({ q, an }) {
   const visits = (an.journey?.visits || []).filter(v => v.q === q.id);
   const least = an.class?.min_finishers || 10;
   const wrong = c?.right_of_attempted != null ? r1(100 - c.right_of_attempted) : null;
-  const wait = <small data-testid="solution-class-wait">Class ka data kam se kam {least} students ke baad dikhta hai{an.class?.n ? `. Abhi ${an.class.n} students ne diya hai.` : '.'}</small>;
+  const wait = <small data-testid="solution-class-wait">Class ka data kam se kam {least} students ke baad dikhta hai{an.class?.n ? `. Abhi ${an.class.n} ${an.class.n===1?'student':'students'} ne diya hai.` : '.'}</small>;
   return (
     <div className="a2-sol" data-testid="solution-insight">
       <div className="a2-solution-line" data-testid="solution-insight-line">

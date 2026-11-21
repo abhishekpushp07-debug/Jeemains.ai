@@ -1,0 +1,35 @@
+{
+  "summary": "Re-verified Try as student fix + full Phase 1 regression on desktop 1920x800 and mobile 390x844 through bridge :8772 (disposable DB; no preview/customer DB writes). Try as student: PASS everywhere (Fix page draft boxed_small, Proof view of Live boxed mock, MockList Draft rows) - opens NEW TAB with /sets/<id>?preview=true&back=<fix path>, Fix page stays in first tab, toast 'Student paper naye tab me khul gaya', private-preview-notice, set-back 'Back to Master' with href to Fix page and click-back works, tampered back param (//evil.com) ignored, popup-blocked fallback = same-tab nav with Back to Master, player A-D stacked. Backend: chapters_iso182.py 58/58; new bridge pytest 6/6 (owner Live mock -> ready + live_set id; reviewer -> 404 POST+GET; student 401/403; draft mock owner+reviewer building->ready <1s; unknown id 404); owner preview start on Live set gives attempt mode 'preview'. UI: ui_verify212 (all walks incl. boxfix) 126/129, ui_verify211 (student/results/proof/typed/plain) 79/80 (plain-desk flaky 1/3, passed 2 reruns), ui_tryst_extra213 30/30.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "CutTool (boxed fix tool) - tap printed box then choose letter", "issue": "After tapping a printed box and assigning A, the next letter (B) is NOT pre-armed; title goes back to 'Box kheencho, phir batao kiska hai...'. choose() with pending calls place() but never setTarget(next) (only drawn() does). ui_verify212 boxfix expects 'B ka box' -> FAIL desk+mob. Note the very next assertion in the same test expects a drawn rectangle to ask 'kiska hai', so the test itself is contradictory - main agent must decide intended UX and align code (CutTool.js line 224) or test.", "selector": "[data-testid$='-assign-title']", "priority": "MEDIUM"},
+      {"component": "CutTool Save button", "issue": "Flaky (1 of 3 runs, plain-desk): '-good' ('Saare check paas') is visible from the PREVIOUS check while a new check is in flight (checking=true), so Save is disabled while UI says it can save. Hide -good while checking (line 279) or test should wait for save enabled.", "selector": "[data-testid$='-save']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Results mobile", "issues": ["'Abhi 1 students ne diya hai' - plural not handled"]},
+      {"screen": "Fix page mobile", "issues": ["Intro paragraph under chapter title is light gray on white - low contrast", "Student bottom nav (Home/Rank/Rapid fire) shows on Super Admin pages and covers lower content"]},
+      {"screen": "Player mobile 390px", "issues": ["Question stem/option images render very small (text hard to read without zoom)"]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_draft_preview_bridge213.py", "/app/backend/tests/ui_tryst_extra213.py", "/app/backend/tests/ui_verify212.py", "/app/backend/tests/ui_verify211.py", "/app/backend/tests/chapters_iso182.py", "/app/test_reports/pytest/pytest_results_213.xml"],
+  "action_items": [
+    "Decide CutTool UX after tap-printed-box + letter: either arm next letter in choose() when pending (const mine=place(key,pending);setTarget(keys.find(k=>!mine.includes(k))||null)) and update the following 'drawn rectangle asks kiska hai' assertion, or drop the 'B is pre-chosen' assertion in ui_verify212 boxfix",
+    "Optional: hide 'Saare check paas' while a re-check is running (avoid Save-disabled race)",
+    "ui_verify212 live-mob 'held mock boxed_held cannot be set Live' FAIL is a test-order artefact (boxfix-desk already fixed boxed_held earlier in same run); run live before boxfix or skip already-fixed mocks"
+  ],
+  "critical_code_review_comments": [
+    "TryAsStudent: window.open('', '_blank') without noopener - fine for same-origin, but blank tab flashes while building; on error the tab is closed correctly",
+    "SetDetail back param only accepted when starting with /super-admin - verified //evil.com is ignored",
+    "draft_preview.live_copy: if a published mock's Live set was deleted, owner falls through to target() and gets 404 'not available to try' - acceptable but message could say the Live paper is missing",
+    "CutTool.js choose() vs drawn() inconsistent next-letter arming (see ui_bugs)"
+  ],
+  "updated_files": ["/app/backend/tests/test_draft_preview_bridge213.py", "/app/backend/tests/ui_tryst_extra213.py"],
+  "success_rate": {"backend": "100% (58/58 iso + 6/6 bridge)", "frontend": "98% (235/239; 2 real UX/test mismatch, 1 order artefact, 1 flaky)"},
+  "seed_data_creation": "None beyond the disposable bridge DB; boxfix walk mutated boxed_held/boxed_held_mob in this bridge run; a few owner preview attempts created in bridge DB.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bridge :8772 run has now done boxfix (boxed_held/_mob fixed) - restart bridge before rerunning boxfix/live checks. Extra Try-as-student checks in tests/ui_tryst_extra213.py; API checks in tests/test_draft_preview_bridge213.py (run with -n 0). Busy label 'Taiyaar ho raha hai…' not asserted (build too fast).",
+  "rca of the issue": "Original bug: published boxed mock has set_id so target() 404'd. Fix live_copy() returns ready+live set for owner; verified via API and UI on both viewports."
+}
