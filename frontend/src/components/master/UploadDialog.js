@@ -30,8 +30,9 @@ export function UploadDialog({open,onClose,section,exam,replace,onStarted}){
   setBatch([]);setMain(files[0]||null);if(files[0]&&!title)setTitle(files[0].name.replace(/\.pdf$/i,''));
  }
  async function sendMany(){
+  toast.dismiss('batch-paused');
   const r=await runBatch(batch,setBatch,{sectionId:section.id,subject:chapters?subject:'',pyq,stopped});
-  if(r.failed||r.ok<batch.length){const n=batch.length,s=n===1?'':'s';if((r.paused||stopped.current)&&!r.failed)toast.info(`Paused: ${r.ok} of ${n} PDF${s} sent. Press Upload to send the rest.`);else toast.error(`${r.ok} of ${n} PDF${s} sent. Press Upload again to send the rest.`);onStarted();return;}
+  if(r.failed||r.ok<batch.length){const n=batch.length,s=n===1?'':'s';if((r.paused||stopped.current)&&!r.failed)toast.info(`Paused: ${r.ok} of ${n} PDF${s} sent. Press Upload to send the rest.`,{id:'batch-paused'});else toast.error(`${r.ok} of ${n} PDF${s} sent. Press Upload again to send the rest.`);onStarted();return;}
   toast.success(`${r.ok} PDF${r.ok===1?'':'s'} uploaded. Each is read in the background, one after another.`);onStarted();onClose();
  }
  async function send(){setBusy(true);stopped.current=false;try{

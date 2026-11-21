@@ -69,8 +69,21 @@ class TestDupCache:
         assert nums == [2], f'stale cache after editing a Live question: mock still flagged on {nums}'
 
 
-def test_signature_projection_has_revision():
-    """section_items keys sets on (id, revision, version) but structure.FIELDS must project them, else edits never refresh."""
-    src = open('/app/backend/tejas/structure.py').read()
-    block = src[src.index('\nFIELDS = {'):]; block = block[:block.index('}') + 1]
-    assert "'revision'" in block and "'version'" in block, 'structure.FIELDS lacks revision/version -> t.get("revision") is always None in duplicates.section_items'
+def test_signature_projection_has_revision(owner, ids):
+    """iteration 212: section_items reads revision/version from sets in its own query, so an in-place edit that bumps
+    revision (no add/remove) must refresh the cached duplicates. Edits Q1 text of the Live set in the disposable DB, then restores."""
+    sid = ids['set']
+    old = json.loads(mongo("JSON.stringify(db.tejas_sets.findOne({id:'%s'},{_id:0,revision:1,questions:{$slice:1}}))" % sid))
+    q1 = old['questions'][0]; rev = old.get('revision') or 0
+    assert 1 in sorted(x['number'] for x in flagged(owner).get(ids['mock'], []))  # warm the cache
+    new = 'TEST_ totally different optics lens question about focal length of convex mirrors'
+    mongo("db.tejas_sets.updateOne({id:'%s','questions.id':'%s'},{$set:{'questions.$.accessible_text':'%s','questions.$.text':'%s'}})" % (sid, q1['id'], new, new))
+    try:
+        assert 1 in sorted(x['number'] for x in flagged(owner).get(ids['mock'], [])), 'no revision bump: cache is expected to hold'
+        mongo("db.tejas_sets.updateOne({id:'%s'},{$set:{revision:%d}})" % (sid, rev + 1))
+        nums = sorted(x['number'] for x in flagged(owner).get(ids['mock'], []))
+        assert nums == [2], f'revision bump did not refresh duplicates: {nums}'
+    finally:
+        mongo("db.tejas_sets.updateOne({id:'%s','questions.id':'%s'},{$set:{'questions.$.accessible_text':%s,'questions.$.text':%s}})" % (sid, q1['id'], json.dumps(q1.get('accessible_text')), json.dumps(q1.get('text'))))
+        mongo("db.tejas_sets.updateOne({id:'%s'},{$set:{revision:%d}})" % (sid, rev + 2))
+    assert sorted(x['number'] for x in flagged(owner).get(ids['mock'], [])) == [1, 2]

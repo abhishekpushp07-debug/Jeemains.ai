@@ -1,0 +1,42 @@
+{
+  "summary": "Retest of iteration_211 items plus a regression run on fresh bridges. The bridges the main agent started had no lifetime argument, so they would stop after the default 900 s. I restarted both with 3600 s (master 8770 DB tejas_isolated_book170_806e3238, student 8773). Then I seeded TEST_dup_a/b and TEST_pyq_2021 through ui_batch_dups217 (STAMP=it212a) and made dup_a's mock Live with ui_dup_live217. BATCH PAUSE: FIXED. New script ui_upload_pause212.py, 21/21. S1: Pause while PDF 1 of 2 is in flight. The row goes back to waiting with 'Paused. Press Upload to carry on from the parts already sent.' The info toast 'Paused: 0 of 2 PDFs sent' appears, with no error toast and no red row. The button reads 'Upload 2 PDFs' and the 2nd PDF is not posted. Pressing Upload again re-posts both, all finish and the dialog closes with the success toast. S2: Pause during PDF 2 gives 'Paused: 1 of 2' and row 0 stays done. Resume posts only PDF 2. On the server all 4 books reached attention_needed and none was left in 'uploading'. DUP CACHE: test_signature_projection_has_revision is now a behaviour test. Editing the Live set's Q1 text without a revision bump keeps the cache; bumping revision in place refreshes it to [2]; restoring gives [1,2]. It passes. test_dup_cache211: 4 passed, 1 skipped (book sets are frozen, as before). LIVE MATCH LINES: the waiting dup_b mock now shows 'TEST_dup_a · Mock 1 Q1/Q2' for the Live set, and waiting mocks keep 'TEST_dup_b_2023 · Mock 1'. MISFIRE SYNC: test_misfire_dups217 13/13. New misfire_sync212.py 11/11 clones hero's paper as newer ungraded attempts. With 15 of them, the older real paper is still taken, the clones are not marked synced, waiting is 0 and the open count is unchanged. With 40 (more than BATCH*3=36), see the minor issue. Regressions: ui_batch_dups217 31/32 (expected: a held mock cannot go Live), ui_dup_live217 4/5 (known script artifact: it looks for status 'live'), ui_storage_alert217 16/16, ui_admin_regress217 12/12, ui_gate_share217 2/2, ui_misfire_empty217 5/5, ui_student211 34/34, storage_dual216 27/27, publish_fail_iso211 4/5, media_warm_iso217 36/36, ui_dup_new_upload211 1/2. The two non-full results are explained under context_for_next_testing_agent. Single-PDF upload unchanged: the PYQ single upload in ui_batch_dups passes.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/my/misfire/summary, /api/my/misfire, /api/my/chapters (misfire.sync)", "issue": "Suppose a student has more than BATCH*3 (36) newer completed papers with no ledger, for example ones whose grading failed for good (grading_status 'failed' never gets a ledger). Then the 36-paper window only ever looks at those, so older graded papers are never taken. 'waiting' stays above 0 for ever (measured: 5 with 40 stuck papers), and Misfire.js and ChapterReport.js poll every 2.5 s without end. This is unlikely in practice. Fix: first keep only the todo ids that have a tejas_ledgers doc (one $in query), or skip and stop counting papers whose grading_status is 'failed'."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Upload dialog after Pause then resume", "issues": ["The 'Paused: x of n' info toast is not dismissed when Upload is pressed again, so it shows beside the '2 PDFs uploaded' success toast for a few seconds. Cosmetic: call toast.dismiss on the paused toast id when sendMany starts."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/ui_upload_pause212.py",
+    "/app/backend/tests/misfire_sync212.py",
+    "/app/backend/tests/test_dup_cache211.py",
+    "/app/backend/tests/test_misfire_dups217.py",
+    "/app/test_reports/pytest/iter212_misfire_dups.xml"
+  ],
+  "action_items": [
+    "Optional (minor): in misfire.sync, keep only todo papers that have a ledger (or skip grading_status 'failed') so that more than 36 stuck papers can neither starve older ones nor keep the frontend polling for ever.",
+    "Optional (cosmetic): dismiss the 'Paused' info toast when the batch upload resumes."
+  ],
+  "critical_code_review_comments": [
+    "BatchUpload.runBatch: any error while stopped.current is set counts as a pause. A real failure such as a 4xx that happens after the user pressed Pause is shown as 'Paused' rather than failed. Acceptable, because resume will show the real error.",
+    "duplicates.section_items: the extra sets query for revision/version runs on every type-page GET. It is cheap (id-indexed projection) and fine.",
+    "load_items: the 'book not in name' check is a substring test. A set title that happens to contain the book title elsewhere would drop the prefix. Harmless."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_dup_cache211.py (test_signature_projection_has_revision rewritten as a behaviour test for the new separate heads query)",
+    "/app/backend/tests/ui_upload_pause212.py (new)",
+    "/app/backend/tests/misfire_sync212.py (new)"
+  ],
+  "success_rate": {"backend": "100% of the retest items (one minor edge case)", "frontend": "100% of the retest items; regressions pass apart from the known script artifacts"},
+  "seed_data_creation": "Master bridge (disposable DB, dropped when the bridge stops at 3600 s): TEST_dup_a (mock published as set 2d4d3308-6e53-55ef-bfb7-e17baaf7d59e), TEST_dup_b_2023 (held mock 00269f4a-e67e-518c-a18f-34454f2dd6ab) and TEST_pyq_2021 (held mock 7381e1ca-8d29-54df-b592-550cdccc197b), plus a Try-as-student preview set 73942776-2217-5def-b836-d29c83ae7bb8. I deleted the 4 TEST_pause212 books and the TEST_dup_c book by id, and the misfire clone attempts and their sync rows by id. I removed the TEST_*.pdf temp copies from /tmp/uibridge. /tmp/iter217_ids.json was updated.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Start bridges with an explicit lifetime: cd /app/backend && setsid nohup python tests/master_bridge181.py 3600 > /tmp/bridge181.log 2>&1 & and the same for analysis_bridge196.py (> /tmp/bridge196.log). Without the argument they stop after 900 s. Order on a fresh master DB: STAMP=<unique> python tests/ui_batch_dups217.py, then ui_dup_live217.py <dup_a book> <dup_a mock>, then write /tmp/iter217_ids.json (dup_b = the waiting dup_b mock, pyq, live_set = the published set id), then pytest tests/test_misfire_dups217.py tests/test_dup_cache211.py -p no:xdist -o addopts=''. ui_admin_regress217 needs a DRAFT mock id (for example the dup_b mock): a Live row has no Try-as-student button. Known script artifacts: ui_dup_live217 'a set became live' (status is 'published'); publish_fail_iso211 'mock not published after failure' (the job retries and publishes, as noted in 211); ui_dup_new_upload211 expects '2 sawaal' but TEST_dup_c is a byte-copy of dup_b, so 3 matching questions is correct while dup_b is still in the section. Uploads that copy dup_a/dup_b add duplicates and change the flagged counts: delete them by id afterwards. misfire_sync212 clones attempts with a unique start_key, start_request_keys and mode, because of the unique indexes (user_id,start_key), (user_id,start_request_keys) and (user_id,set_id,mode)."
+}

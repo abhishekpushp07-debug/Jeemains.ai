@@ -64,6 +64,10 @@ async def sync(u):
     t = await database_now()
     # A live paper still inside its window is passed over (cheaply) until its answers are released.
     todo = [r['id'] for r in recent if r['id'] not in done and not answers_sealed(r, t)]
+    # Only graded papers (a ledger here or on the paper): ungraded or failed ones never take a slot or count as waiting.
+    graded = {x['id'] for x in await db.tejas_ledgers.find({'id': {'$in': todo}}, {'_id': 0, 'id': 1}).to_list(len(todo))}
+    graded |= {x['id'] for x in await attempts.find({'id': {'$in': todo}, 'ledger': {'$exists': True}}, {'_id': 0, 'id': 1}).to_list(len(todo))}
+    todo = [i for i in todo if i in graded]
     took = pending = 0
     # Papers still being graded return False and are passed over, so they never hold up newer papers.
     for aid in todo[:BATCH * 3]:
