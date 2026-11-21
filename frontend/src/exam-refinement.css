@@ -145,6 +145,14 @@
  .piece-options .piece-option .piece-chip { width:2rem; height:2rem; }
  .piece-options .piece-option .piece-paper { padding:var(--space-2); }
  .piece-tick { width:1.5rem; height:1.5rem; }
+ /* Phone: the question and its options take the whole screen width; only a hair of white stays around the print. */
+ .piece-stem, .piece-options { margin-inline:calc(-1 * var(--piece-bleed, 0px)); }
+ .piece-stem .piece-paper { padding-inline:4px; }
+ .piece-options .piece-option { padding-inline:6px; }
+ .piece-options .piece-option .piece-paper { padding-inline:4px; }
+ .player-layout .player-question-area { padding-inline:4px; }
+ .player-question-area .question-card { --piece-bleed:12px; }
+ .review-question { --piece-bleed:36px; }
 }
 @media (prefers-reduced-motion:reduce) {
  .piece-wait { animation:none; }

@@ -6,9 +6,12 @@ import fitz
 import numpy as np
 from pymupdf import mupdf
 
-CUT_VERSION = 2
+CUT_VERSION = 3
 SCALE = 2.0      # pixels per PDF point used to look at the ink
+FINE = 4         # where no blank pixel row parts two lines, that strip is looked at this many times closer
+HAIR = .125      # points a mark may reach past a cut line that the closer look shows blank
 MARGIN = 4.0     # points of blank kept around every piece
+EDGE = .1        # points a piece stays inside its pixel lines, so its picture always rounds to exactly those pixels
 HEAD = 60.0      # points above a question's printed box in which its heading (number, source, chapter) may sit
 ANCHOR = re.compile(r'^\s*(?:Q(?:uestion|ues)?\.?\s*\d{1,3}\b|\d{1,3}\s*[.)])', re.I)
 STYLES = (('paren', r'\(\s?([A-Da-d1-4])\s?\)'), ('close', r'([A-Da-d1-4])\)'), ('dot', r'([A-Da-d])\.'))
@@ -46,6 +49,84 @@ def textpage(page, clip, flags):
 
 def pixmap(page, **kw):
     return listing(page).get_pixmap(**kw)
+
+
+class Ledger(mupdf.FzDevice2):
+    """Every mark a page prints, in the order the PDF prints it: (kind, x0, y0, x1, y1) in page points; 't' a letter, 'p' a line or shape, 'i' a picture."""
+
+    def __init__(self):
+        super().__init__()
+        self.rows, self.bad = [], False
+        for name in ('fill_path', 'stroke_path', 'fill_text', 'stroke_text', 'fill_shade', 'fill_image', 'fill_image_mask'):
+            getattr(self, 'use_virtual_' + name)()
+
+    def add(self, kind, make):
+        try:
+            r = make()
+            self.rows.append((kind, r.x0, r.y0, r.x1, r.y1))
+        except Exception:  # noqa: BLE001  an unreadable mark only switches the closer look off
+            self.bad = True
+
+    def letters(self, text, ctm):
+        try:
+            ctm, span = mupdf.FzMatrix(ctm), text.head
+            while span:
+                s = mupdf.FzTextSpan(span)
+                font, t = s.font(), s.trm()
+                for i in range(s.m_internal.len):
+                    it = s.items(i)
+                    if it.gid >= 0:
+                        r = mupdf.fz_bound_glyph(font, it.gid, mupdf.fz_concat(mupdf.FzMatrix(t.a, t.b, t.c, t.d, it.x, it.y), ctm))
+                        self.rows.append(('t', r.x0, r.y0, r.x1, r.y1))
+                span = span.next
+        except Exception:  # noqa: BLE001
+            self.bad = True
+
+    def fill_text(self, ctx, text, ctm, *rest):
+        self.letters(text, ctm)
+
+    def stroke_text(self, ctx, text, stroke, ctm, *rest):
+        self.letters(text, ctm)
+
+    def fill_path(self, ctx, path, even_odd, ctm, *rest):
+        self.add('p', lambda: mupdf.FzRect(mupdf.ll_fz_bound_path(path, None, ctm)))
+
+    def stroke_path(self, ctx, path, stroke, ctm, *rest):
+        self.add('p', lambda: mupdf.FzRect(mupdf.ll_fz_bound_path(path, stroke, ctm)))
+
+    def fill_shade(self, ctx, shade, ctm, *rest):
+        self.add('i', lambda: mupdf.FzRect(mupdf.ll_fz_bound_shade(shade, ctm)))
+
+    def fill_image(self, ctx, image, ctm, *rest):
+        self.add('i', lambda: mupdf.FzRect(mupdf.ll_fz_transform_rect(mupdf.FzRect(mupdf.FzRect.Fixed_UNIT).internal(), ctm)))
+
+    def fill_image_mask(self, ctx, image, ctm, *rest):
+        self.add('i', lambda: mupdf.FzRect(mupdf.ll_fz_transform_rect(mupdf.FzRect(mupdf.FzRect.Fixed_UNIT).internal(), ctm)))
+
+
+_ORDERS = {}
+
+
+def print_order(page, clip):
+    """The marks printed inside a region, in print order: [(position, kind, x0, y0, x1, y1)]. None when the order cannot be read."""
+    if page.rotation:
+        return None
+    key = (id(page.parent), page.number)
+    if key not in _ORDERS:
+        if len(_ORDERS) >= 6:
+            _ORDERS.pop(next(iter(_ORDERS)))
+        try:
+            dev = Ledger()
+            mupdf.fz_run_display_list(listing(page).this, dev, mupdf.FzMatrix(), mupdf.FzRect(mupdf.FzRect.Fixed_INFINITE), mupdf.FzCookie())
+            mupdf.fz_close_device(dev)
+            _ORDERS[key] = (page.parent, None if dev.bad else dev.rows)
+        except Exception:  # noqa: BLE001
+            _ORDERS[key] = (page.parent, None)
+    rows = _ORDERS[key][1]
+    if rows is None:
+        return None
+    return [(n, k, x0, y0, x1, y1) for n, (k, x0, y0, x1, y1) in enumerate(rows)
+            if x1 > x0 and y1 > y0 and x0 < clip.x1 and x1 > clip.x0 and y0 < clip.y1 and y1 > clip.y0]
 
 
 def kind_of(ch):
@@ -230,13 +311,15 @@ class Sheet:
     """The ink of one region of a page, with the borders of ruled boxes taken out."""
 
     def __init__(self, page, clip):
+        # The picture always starts on a whole pixel; the clip is moved to that pixel so every pixel here sits exactly where the page prints it.
+        clip = fitz.Rect(np.floor(clip.x0 * SCALE + 1e-3) / SCALE, np.floor(clip.y0 * SCALE + 1e-3) / SCALE, clip.x1, clip.y1)
         self.page, self.clip = page, clip
         self.pw, self.ph = page.rect.width, page.rect.height
         pix = pixmap(page, matrix=fitz.Matrix(SCALE, SCALE), clip=clip, colorspace=fitz.csGRAY, alpha=False)
         gray = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.stride)[:, :pix.width]
         self.H, self.W = gray.shape
-        back = int(np.bincount(gray.ravel(), minlength=256).argmax())
-        self.mask = np.abs(gray.astype(np.int16) - back) > 24
+        self.back = int(np.bincount(gray.ravel(), minlength=256).argmax())
+        self.mask = np.abs(gray.astype(np.int16) - self.back) > 24
         self.rings, self.boxes, self.small = [], [], []
         self.frames()
 
@@ -322,6 +405,19 @@ class Sheet:
             return []
         return [top, *rest]
 
+    def fine(self, x0, y0, x1, y1):
+        """Columns x0..x1 of pixel rows y0..y1 looked at FINE times closer: for each finer row, whether it holds ink."""
+        k = SCALE * FINE
+        pix = pixmap(self.page, matrix=fitz.Matrix(k, k), clip=self.pt((x0, y0, x1, y1)), colorspace=fitz.csGRAY, alpha=False)
+        gray = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.stride)[:, :pix.width]
+        if gray.shape[0] != (y1 - y0) * FINE:
+            return np.ones((y1 - y0) * FINE, dtype=bool)
+        ink = np.abs(gray.astype(np.int16) - self.back) > 24
+        for r in self.rings:
+            a, b, c, e = (int(round(v * k)) for v in r)
+            ink[max(0, b - pix.y):max(0, e - pix.y), max(0, a - pix.x):max(0, c - pix.x)] = False
+        return ink.any(axis=1)
+
     def inner(self, box):
         """The pixels inside a printed box, clear of its border line."""
         x0, y0, x1, y1 = self.px(box[0])
@@ -331,7 +427,8 @@ class Sheet:
         m = int(MARGIN * SCALE)
         b = (max(cell[0], ink[0] - m), max(cell[1], ink[1] - m), min(cell[2], ink[2] + m), min(cell[3], ink[3] + m))
         area = self.pt(b)
-        return b, {'rect': self.norm(area), 'erase': [self.norm(r & area) for r in self.rings if r.intersects(area)]}
+        inside = fitz.Rect(area.x0 + EDGE, area.y0 + EDGE, area.x1 - EDGE, area.y1 - EDGE)
+        return b, {'rect': self.norm(inside), 'erase': [self.norm(r & area) for r in self.rings if r.intersects(area)]}
 
 
 def region_clip(page, rect):
@@ -450,12 +547,32 @@ def trim_region(page, rect):
     return {**out, 'pieces': {'q': sheet.piece((0, 0, sheet.W, sheet.H), ink)[1]}}
 
 
+def label_ink(mask, x0, y0, x1, y1):
+    """The ink of a printed label: inside its letters' box, plus ink that touches it just past that box (the edge of a bracket spills a pixel)."""
+    core = box_of(mask, x0, y0, x1, y1)
+    if not core:
+        return None
+    H, W = mask.shape
+    a, b, c, d = max(0, core[0] - 1), max(0, core[1] - 2), min(W, core[2] + 1), min(H, core[3] + 2)
+    rows, cols = mask[b:d, core[0]:core[2]].any(axis=1), mask[core[1]:core[3], a:c].any(axis=0)
+    top, bot, left, right = core[1] - b, core[3] - b, core[0] - a, core[2] - a
+    while top > 0 and rows[top - 1]:
+        top -= 1
+    while bot < len(rows) and rows[bot]:
+        bot += 1
+    while left > 0 and cols[left - 1]:
+        left -= 1
+    while right < len(cols) and cols[right]:
+        right += 1
+    return a + left, b + top, a + right, b + bot
+
+
 def label_boxes(sheet, chosen, lines):
     """The ink of each chosen label, and whether the label stands alone (so it can be left out of the option picture)."""
     other = [c[1] for line in lines for c in line if not c[0].isspace()]
     out = []
     for c in chosen:
-        b = box_of(sheet.mask, *sheet.px(c['rect']))
+        b = label_ink(sheet.mask, *sheet.px(c['rect']))
         if not b:
             raise Held('Ek option ka label page par kisi aur cheez ke neeche chhupa hai.')
         alone = sum(1 for r in other if (r & c['rect']).get_area() > 1) <= len(c['ch'])
@@ -567,14 +684,67 @@ def cut_region(page, rect, labels, typed=()):
         least = max(6, int(.3 * size))
         wide = max(3 * size, 28 * SCALE)
         name = lambda row: 'option ' + ', '.join(names[i] for i in row) if len(row) < 3 else 'options'
+        tight, order = {'on': False}, []
 
-        def cut_above(row, floor, who, x0=0, x1=W):
+        def owners():
+            """Which option every printed mark was printed for: the last option label the PDF printed before it."""
+            if not order:
+                marks_, at = print_order(page, sheet.clip), []
+                for c in chosen if marks_ is not None else []:
+                    r = c['rect']
+                    hits = [m[0] for m in marks_ if m[1] == 't' and r.x0 - .5 <= (m[2] + m[4]) / 2 <= r.x1 + .5 and r.y0 - .5 <= (m[3] + m[5]) / 2 <= r.y1 + .5]
+                    at.append(min(hits) if hits else None)
+                order.append(None if marks_ is None or None in at else (marks_, at))
+            return order[0]
+
+        def agrees(y, x0, x1, lo, hi, above, below):
+            """A cut on pixel line y found only by the closer look stands only if the print order says the same: every mark beside the line was printed for the side it lies on."""
+            known = owners()
+            if not known:
+                return False
+            hair, ox, oy = HAIR * SCALE, sheet.clip.x0, sheet.clip.y0
+            for n, kind, *box in known[0]:
+                bx0, by0, bx1, by1 = (box[0] - ox) * SCALE, (box[1] - oy) * SCALE, (box[2] - ox) * SCALE, (box[3] - oy) * SCALE
+                if bx1 <= x0 or bx0 >= x1 or by1 <= lo or by0 >= hi:
+                    continue
+                if not mask[max(0, int(by0)):max(0, int(np.ceil(by1))), max(0, int(bx0)):max(0, int(np.ceil(bx1)))].any():
+                    continue
+                over, under = by0 < y - hair, by1 > y + hair
+                if over and under:
+                    if kind == 't':
+                        return False
+                    # A shape or picture drawn across a line that the page shows blank prints nothing on that line.
+                    continue
+                owner = max((i for i, p in enumerate(known[1]) if p <= n), key=lambda i: known[1][i], default=None)
+                if owner not in (above if over else below):
+                    return False
+            return True
+
+        def hairline(row, floor, top, x0, x1, above):
+            """No blank pixel row above these labels. The strip is looked at FINE times closer:
+            a blank there that holds a pixel line is a clean cut on that line, if the print order agrees."""
+            lo, hi = max(floor, top - int(3 * size)), min(H, top + 1)
+            if hi <= lo or x1 <= x0:
+                return None
+            for s, e in reversed(bands(sheet.fine(x0, lo, x1, hi), 2)):
+                first, last = -(-s // FINE), min(e // FINE, top - lo)
+                if first > last:
+                    continue
+                y = lo + min(last, max(first, int(round((s + e) / 2 / FINE))))
+                if agrees(y, x0, x1, lo, hi, above, set(row)):
+                    return y
+            return None
+
+        def cut_above(row, floor, who, x0=0, x1=W, above=(None,)):
             """The blank line above these labels, within columns x0..x1: where one piece ends and the next begins."""
             blank = bands(mask[:, x0:x1].any(axis=1), 2)
             top = min(inked[i][1] for i in row)
             under = [b for b in blank if b[1] <= top + 1 and b[0] >= floor]
             if not under:
-                raise Held(f'{who} aur {name(row)} ke beech khaali jagah nahi hai, isliye saaf nahi kat sakta.')
+                y = hairline(row, floor, top, x0, x1, set(above)) if tight['on'] else None
+                if y is None:
+                    raise Held(f'{who} aur {name(row)} ke beech khaali jagah nahi hai, isliye saaf nahi kat sakta.')
+                return y
             pick = len(under) - 1
             if pick:
                 # A small mark alone between two blank lines (a limit, a power) goes with the side it sits against; if that is not clear, no guess is made.
@@ -634,7 +804,7 @@ def cut_region(page, rect, labels, typed=()):
             x, stop = gutter(top, H, [a, c], [b, d])
             out = {}
             for upper, lower, x0, x1 in ((a, c, 0, x), (b, d, x, W)):
-                y = cut_above([lower], inked[upper][3], 'Option ' + names[upper], x0, x1)
+                y = cut_above([lower], inked[upper][3], 'Option ' + names[upper], x0, x1, (upper,))
                 out[upper], out[lower] = (x0, top, x1, y), (x0, y, x1, H)
             own_line(b, top, stop, a)
             own_line(d, out[d][1], stop, c)
@@ -645,16 +815,28 @@ def cut_region(page, rect, labels, typed=()):
                         raise Held(f'Option {names[i]} ke neeche badi khaali jagah ke baad kuch chhapa hai; ho sakta hai woh kisi option ka na ho.')
             return out
 
-        top0 = cut_above(rows[0], 0, 'Sawaal')
+        def layout():
+            top = cut_above(rows[0], 0, 'Sawaal')
+            try:
+                tops = [top]
+                for n in range(1, len(rows)):
+                    tops.append(cut_above(rows[n], max(inked[i][3] for i in rows[n - 1]), cap(name(rows[n - 1])), above=rows[n - 1]))
+                return top, lines_of(tops + [H])
+            except Held:
+                if shape != 'grid':
+                    raise
+                return top, columns_of(top)
+
         try:
-            tops = [top0]
-            for n in range(1, len(rows)):
-                tops.append(cut_above(rows[n], max(inked[i][3] for i in rows[n - 1]), cap(name(rows[n - 1]))))
-            cells = lines_of(tops + [H])
-        except Held:
-            if shape != 'grid':
-                raise
-            cells = columns_of(top0)
+            top0, cells = layout()
+        except Held as first:
+            # Lines printed with less than two blank pixel rows between them (options that look stuck together) get one closer look.
+            # Every cut that has a clear blank line stays exactly where it was; the reason shown stays the first one.
+            tight['on'] = True
+            try:
+                top0, cells = layout()
+            except Held:
+                raise first from None
         pieces, boxes, skipped = {}, {}, []
         stem = box_of(mask, 0, 0, W, top0)
         if stem:
