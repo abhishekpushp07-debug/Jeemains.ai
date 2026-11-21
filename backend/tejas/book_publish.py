@@ -284,7 +284,8 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
         jobs+=[save((q['id'],'piece',n),crop,part,'piece') for n,(part,crop) in enumerate(pieces.get(q['id'],[]))]
     if guard:await guard('fence')
     progress['total']=len(jobs);await tell()
-    saved=dict(await asyncio.gather(*jobs))
+    try:saved=dict(await asyncio.gather(*jobs))
+    finally:await db.tejas_publish_progress.delete_one({'_id':mock.id})  # done or failed: never a stale count
     if guard:await guard('fence')
     def ref(key):
         r=saved[key]
@@ -400,7 +401,6 @@ async def publish_ready(book,token,raw,only_mid=None):
             await apply_replacement(dest,book.owner_id,book.payload['title'])
         book.payload.setdefault('metrics',{}).setdefault('first_ready_seconds',max(0,now()-book.created_at))
         await audit(book.owner_id,'Book mock published',sid,'Original keys and source evidence retained; previous attempts unchanged.')
-        await db.tejas_publish_progress.delete_one({'_id':mock.id})
         if start<=stamp:
             from .media import warm_soon
             from .papers import HEADER

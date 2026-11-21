@@ -42,6 +42,7 @@
 .mf-option span { font-weight:500; overflow-wrap:anywhere; }
 .mf-option:hover:not(:disabled) { border-color:var(--brand-line); }
 .mf-option.is-on { background:var(--brand-soft); border-color:var(--brand-text); color:var(--brand-text); }
+.mf-option.is-right, .mf-option.is-right:disabled { background:color-mix(in srgb, var(--success) 14%, transparent); border-color:var(--success); color:var(--success); opacity:1; }
 .mf-input { width:100%; max-width:280px; min-height:48px; margin:12px 0; padding:0 14px; border-radius:14px; border:1px solid var(--line); background:var(--page); color:var(--ink); font-size:16px; }
 .mf-actions { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
 .mf-btn { display:inline-flex; align-items:center; gap:7px; min-height:42px; padding:0 18px; border-radius:999px; background:var(--ink); color:var(--page); font-weight:700; font-size:14px; transition:transform .15s,opacity .15s; }

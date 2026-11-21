@@ -19,7 +19,7 @@ _NAME = re.compile(r"(\d{1,4})-(\d{1,2})-([0-3])-(\d{10})-([A-Za-z0-9_-]{22})\.b
 _parts = ByteCache(64 * 1024 * 1024)
 _flights = {}
 stats = {"links": 0, "served": 0, "built": 0, "coalesced": 0, "rejected": 0, "warmed": 0}
-_warm_at = {}
+_warm_at, _warming = {}, set()
 
 
 def picture_refs(questions, bonus_open, cut=False):
@@ -131,7 +131,9 @@ def warm_soon(s):
             await warm_set(s)
         except Exception:  # noqa: BLE001
             pass
-    asyncio.ensure_future(go())
+    task = asyncio.ensure_future(go())
+    _warming.add(task)  # a reference until it ends, so it is never collected half way
+    task.add_done_callback(_warming.discard)
 
 
 @router.get("/media/probe.bin")

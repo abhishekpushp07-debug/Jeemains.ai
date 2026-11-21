@@ -56,16 +56,21 @@ async def take(a, delivered):
 async def sync(u):
     """Takes in up to BATCH new graded papers; returns how many are still waiting."""
     from .attempts import owned, delivered
+    from .canonical import database_now
     recent = await attempts.find({'user_id': u['id'], 'status': 'completed', 'mode': {'$nin': ['preview', 'retry']}, 'set_deleted': {'$ne': True}},
-                                 {'_id': 0, 'id': 1}).sort('submitted_at', -1).limit(300).to_list(300)
+                                 {'_id': 0, 'id': 1, 'series_id': 1, 'competition_end': 1}).sort('submitted_at', -1).limit(300).to_list(300)
     ids = [r['id'] for r in recent]
     done = {r['_id'] for r in await synced.find({'_id': {'$in': ids}}, {'_id': 1}).to_list(len(ids))}
-    todo = [i for i in ids if i not in done]
+    t = await database_now()
+    # A live paper still inside its window is passed over (cheaply) until its answers are released.
+    todo = [r['id'] for r in recent if r['id'] not in done and not answers_sealed(r, t)]
     for aid in todo[:BATCH]:
         try:
             taken = await take(await owned(aid, u), delivered)
-        except Exception:  # noqa: BLE001  a paper that cannot be read is skipped for good, never retried on every visit
+        except (HTTPException, ValueError):  # gone or unreadable for good: never retried on every visit
             taken = True
+        except Exception:  # noqa: BLE001  a passing database hiccup: tried again on the next visit
+            taken = False
         if taken:
             await synced.update_one({'_id': aid}, {'$set': {'user_id': u['id'], 'at': now()}}, upsert=True)
     return max(0, len(todo) - BATCH)
@@ -139,7 +144,7 @@ async def done(mid: str, u=Depends(current)):
 @router.post('/misfire/{mid}/reopen')
 async def reopen(mid: str, u=Depends(current)):
     await mine(mid, u)
-    await misfires.update_one({'_id': mid}, {'$set': {'status': 'open', 'last_correct': False}, '$unset': {'fixed_at': ''}})
+    await misfires.update_one({'_id': mid}, {'$set': {'status': 'open', 'last_correct': False, 'tries': 0}, '$unset': {'fixed_at': '', 'last_value': ''}})
     return {'id': mid, 'status': 'open'}
 
 

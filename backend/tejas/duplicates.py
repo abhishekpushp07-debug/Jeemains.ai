@@ -42,41 +42,47 @@ def matches(items):
 
 
 async def section_items(sid):
-    """Every test of the section a student can or will see, and every uploaded mock waiting to go Live."""
+    """Every test of the section a student can or will see, and every uploaded mock waiting to go Live, with a cheap signature
+    (ids and revisions) so the questions are read again only when something in the section changed."""
     from .structure import section_doc, exams, section_tests, waiting_items
     s = await section_doc(sid)
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0, 'key': 1})
     # A test being replaced by a new upload is left out: the new copy is meant to repeat it.
-    ids = [t['id'] for t in await section_tests(s, e['key']) if not t.get('replace_pending') and t.get('status') != 'withdrawn']
-    waiting = [w['id'] for w in await waiting_items(sid) if w['kind'] == 'book_mock']
+    tests = [t for t in await section_tests(s, e['key']) if not t.get('replace_pending') and t.get('status') != 'withdrawn']
+    waiting = {w['id']: w for w in await waiting_items(sid) if w['kind'] == 'book_mock'}
+    revs = {m['_id']: m.get('revision', 0) async for m in db.tejas_book_mocks.find({'_id': {'$in': list(waiting)}}, {'_id': 1, 'revision': 1})}
+    sig = (tuple(sorted((t['id'], t.get('revision'), t.get('version')) for t in tests)), tuple(sorted(revs.items())))
+    return sig, [t['id'] for t in tests], waiting
+
+
+async def load_items(ids, waiting):
     items = []
     async for x in sets.find({'id': {'$in': ids}}, {'_id': 0, 'id': 1, 'title': 1, 'display_title': 1, 'questions.id': 1, 'questions.number': 1,
                                                     'questions.subject': 1, 'questions.accessible_text': 1, 'questions.text': 1}):
         items.append({'id': x['id'], 'title': x.get('display_title') or x['title'],
                       'questions': [{'id': q['id'], 'number': q.get('number'), 'subject': q.get('subject'), 'text': q.get('accessible_text') or q.get('text') or ''} for q in x.get('questions', [])]})
-    async for m in db.tejas_book_mocks.find({'_id': {'$in': waiting}}, {'_id': 1, 'label': 1, 'chapter': 1, 'questions.id': 1, 'questions.number': 1,
-                                                                          'questions.subject': 1, 'questions.text': 1}):
-        chapter = m.get('chapter') or {}
-        items.append({'id': m['_id'], 'title': chapter.get('title') or m['label'],
+    async for m in db.tejas_book_mocks.find({'_id': {'$in': list(waiting)}}, {'_id': 1, 'label': 1, 'chapter': 1, 'questions.id': 1, 'questions.number': 1,
+                                                                                'questions.subject': 1, 'questions.text': 1}):
+        chapter, book = m.get('chapter') or {}, waiting[m['_id']].get('book') or ''
+        # Every upload's first mock is called "Mock 1": the upload's name tells them apart.
+        name = chapter.get('title') or m['label']
+        items.append({'id': m['_id'], 'title': f'{book} · {name}' if book else name,
                       'questions': [{'id': q['id'], 'number': q.get('number'), 'subject': chapter.get('subject') or q.get('subject'), 'text': q.get('text') or ''}
                                     for q in m.get('questions', [])]})
     return items
 
 
 async def section_duplicates(sid):
-    """Cached for a minute per section: the Master page and the Fix page ask often, papers change rarely."""
+    """Read again only when a test or a waiting mock of the section was added, removed or edited."""
+    sig, ids, waiting = await section_items(sid)
     hit = _cache.get(sid)
-    if hit and time.time() - hit[0] < 60:
-        return hit[1]
-    out = matches(await section_items(sid))
-    _cache[sid] = (time.time(), out)
+    if hit and hit[1] == sig:
+        return hit[2]
+    out = matches(await load_items(ids, waiting))
+    _cache[sid] = (time.time(), sig, out)
     if len(_cache) > 50:
         _cache.pop(min(_cache, key=lambda k: _cache[k][0]))
     return out
-
-
-def forget(sid):
-    _cache.pop(sid, None)
 
 
 @router.get('/duplicates/mock/{mock_id}')
@@ -88,5 +94,4 @@ async def mock_duplicates(mock_id: str, u=Depends(staff)):
     dest = (b.get('payload') or {}).get('destination') or {}
     if not dest.get('section_id') or dest.get('series'):
         return {'items': [], 'checked': False}
-    forget(dest['section_id'])
     return {'items': (await section_duplicates(dest['section_id'])).get(mock_id, []), 'checked': True}

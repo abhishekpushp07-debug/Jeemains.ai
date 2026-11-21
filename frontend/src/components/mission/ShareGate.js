@@ -32,14 +32,15 @@ export function ShareGate({ onOpen }) {
   const nav = useNavigate();
   const card = useRef(null);
   const [thanks, setThanks] = useState(false), [from, setFrom] = useState('top'), [desktop] = useState(isDesktop);
-  const opening = useRef(null), open = useRef(onOpen);
+  const opening = useRef(null), open = useRef(onOpen), fired = useRef(false);
   open.current = onOpen;
-  useEffect(() => () => { if (opening.current) { clearTimeout(opening.current); open.current(); } }, []);
-  const left = useCountdown(desktop, () => open.current());
+  const fire = () => { if (!fired.current) { fired.current = true; open.current(); } };
+  useEffect(() => () => { if (opening.current) { clearTimeout(opening.current); fire(); } }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const left = useCountdown(desktop, fire);
   const mission = useMissionStats();
   const { busy, note, share } = useMissionShare(card, mission.caption, () => {
     setThanks(true);
-    opening.current = setTimeout(() => { opening.current = null; open.current(); }, 900);
+    opening.current = setTimeout(() => { opening.current = null; fire(); }, 900);
   }, !mission.loading);
   const action = where => (thanks
     ? <div className="ms-thanks-btn" role="status" data-testid={`share-gate-thanks${where === 'top' ? '' : '-bottom'}`}><Heart size={22} />Shukriya! Result khul raha hai…</div>

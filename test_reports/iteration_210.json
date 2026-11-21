@@ -1,0 +1,69 @@
+{
+  "summary": "Tested all 10 items against the isolated bridges only (master 8770, student 8773, plus cut bridge 8772 that I restarted for the ui_upload215 and ui_verify211 regressions). I never touched the preview DB or production. 9 of the 10 features work end to end. Storage alert: 16/16. Picture pre-warm and the publish progress doc: isolated harnesses 36/36 and 5/5. Multi-PDF upload: failure keeps the dialog open and the resend posts only the unsent PDF. Duplicate red alert: same section flagged, other section and other subject not, Fix page alert works, and a duplicate mock still went Live. Desktop share gate opens on its own after about 4.8 s, mobile is unchanged. Misfire card, page and chapter report work on desktop and 390 mobile, empty states included. Misfire API 13/13 and storage_dual216 27/27. One real bug: the duplicate cache does not refresh for up to 60 s.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/admin/master/types/{sid}/mocks (duplicates)", "issue": "STALE DUPLICATE CACHE (reproduced). duplicates.section_duplicates caches each section for 60 s and only the Fix-page endpoint calls forget(). Reproduction: GET type mocks (2 flagged) -> move the matching Live set to the Library -> GET right away: the draft mock still shows 2 duplicates; only after opening the Fix page does it drop to 0. The other direction: in the UI run, both new mocks showed NO red note right after reading because the list had cached an empty result just before the upload. It showed up only after the cache was cleared."},
+      {"endpoint": "tejas/book_publish.py publish_ready", "issue": "tejas_publish_progress is deleted only on the success path. If publishing fails after source_questions has started, an orphan doc stays (there is no TTL index). It does no harm because it is only read for status 'publishing', but it should go in a finally block or get a TTL index."},
+      {"endpoint": "tejas/misfire.py sync()", "issue": "Any exception in take() marks that attempt as synced for good (taken=True), so a temporary DB error or timeout leaves that paper out of Misfire and the chapter report forever. Sealed live papers are re-checked on every visit and take up the 12-paper BATCH slots ahead of newer papers."},
+      {"endpoint": "tejas/media.py warm_soon", "issue": "asyncio.ensure_future(go()) keeps no reference to the task. Python may garbage-collect a pending task, so the warm-up could be cancelled at random. Keep the tasks in a set and discard each one when done."},
+      {"endpoint": "POST /api/my/misfire/{id}/reopen", "issue": "Behaviour note: after Reopen, tries stays >0, so the list immediately shows the correct answer and solution_text again. If reopen is meant to mean 'solve again blind', reset tries or hide the answer until a new try."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Duplicate red alert on MockList after upload", "issue": "Because of the 60 s backend cache, the red note can be missing right after reading finishes, or still showing after the matching paper is moved to the Library or archived.", "affected_selectors": ["[data-testid^=mock-duplicates-]"]}
+    ],
+    "design_issues": [
+      {"screen": "MockList / Fix page duplicate list", "issues": ["Match lines read 'Physics Q1 = Mock 1 Q1'. Book mocks are all labelled 'Mock 1', so the admin cannot tell which paper is meant. Add the book or upload title (e.g. 'TEST_dup_a · Mock 1 Q1')."]},
+      {"screen": "Upload dialog batch mode", "issues": ["Button reads 'Upload 1 PDFs' when one row is left; it should say 'Upload 1 PDF'.", "Batch mode has no remove (X) button for the chosen list; the only way to clear it is to pick files again."]},
+      {"screen": "/misfire", "issues": ["The chapter filter is a native <select> ('Saare chapter') and does not match the shadcn Select used elsewhere.", "After a correct second try, the chosen correct option card keeps the pink/red selected style. A green 'correct' style would read better next to 'Sahi!'."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_misfire_dups217.py",
+    "/app/backend/tests/test_duplicates_unit217.py",
+    "/app/backend/tests/media_warm_iso217.py",
+    "/app/backend/tests/publish_progress_iso217.py",
+    "/app/backend/tests/ui_storage_alert217.py",
+    "/app/backend/tests/ui_batch_dups217.py",
+    "/app/backend/tests/ui_dup_live217.py",
+    "/app/backend/tests/ui_student217.py",
+    "/app/backend/tests/ui_misfire_empty217.py",
+    "/app/backend/tests/ui_gate_share217.py",
+    "/app/backend/tests/ui_admin_regress217.py",
+    "/app/backend/tests/ui_master217_lib.py",
+    "/app/backend/tests/bridge_refresh217.py",
+    "/app/test_reports/pytest/iter217_misfire_dups.xml"
+  ],
+  "action_items": [
+    "Fix the stale duplicate cache: call duplicates.forget(section_id) whenever a section's contents change (book reading finished or mock saved, master status change to live/off/library, publish_ready, withdraw or replace), or key the cache on a section revision/updated_at, or cut the TTL to a few seconds.",
+    "Show the source/book title in duplicate match lines (all book mocks are called 'Mock 1').",
+    "Delete tejas_publish_progress in a finally block (or add a TTL index) so a failed publish leaves no orphan doc.",
+    "misfire.sync: do not mark an attempt as synced when take() fails for a temporary reason; retry later (e.g. count failures).",
+    "media.warm_soon: keep a reference to the task so it cannot be garbage-collected.",
+    "Small copy fix: 'Upload 1 PDFs' -> 'Upload 1 PDF'."
+  ],
+  "critical_code_review_comments": [
+    "duplicates.py: the 60 s per-section cache is only cleared by GET /admin/duplicates/mock/{id}; type_mocks never clears it, so the list is stale after any change (confirmed above).",
+    "duplicates.py _LEAD strips only the printed number ('Q5.' / '12)'), so a question starting with '100 g ...' still differs from '200 g ...' (unit tested, OK).",
+    "misfire.try_answer takes body: dict in the signature. MisfireTry validation does apply through request_contracts: empty, missing or 61-character values return 422 (verified).",
+    "misfire.view never exposes accepted/answer/solution_text before the first try, and the question payload has no answer or solution keys (verified for all 12 fresh items).",
+    "ShareGate desktop: if the student clicks 'Share karo' during the countdown, both the share-thanks timeout and the countdown call onOpen. That is harmless only if onOpen is idempotent; consider guarding it.",
+    "UploadDialog sendMany calls onStarted() on partial failure as well. Fine, but the toast says 'Press Upload again' even when the batch was paused on purpose."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_misfire_dups217.py", "/app/backend/tests/test_duplicates_unit217.py", "/app/backend/tests/media_warm_iso217.py", "/app/backend/tests/publish_progress_iso217.py",
+    "/app/backend/tests/ui_storage_alert217.py", "/app/backend/tests/ui_batch_dups217.py", "/app/backend/tests/ui_dup_live217.py", "/app/backend/tests/ui_student217.py", "/app/backend/tests/ui_student217_lib.py",
+    "/app/backend/tests/ui_misfire_empty217.py", "/app/backend/tests/ui_gate_share217.py", "/app/backend/tests/ui_admin_regress217.py", "/app/backend/tests/ui_master217_lib.py", "/app/backend/tests/bridge_refresh217.py"
+  ],
+  "success_rate": {"backend": "98% (all functional checks pass: misfire API 13/13, duplicates unit 6/6, warm+links 36/36, publish progress 5/5, storage_dual216 27/27; 1 stale-cache bug)", "frontend": "96% (storage alert 16/16, batch/duplicates 23/27 where 3 failures were my own test bugs and 1 is the cache bug, gate 15/15, misfire 37/39 where the 2 failures are only bridge /dream 503s, empty states 5/5, admin regression 12/12, ui_upload215 20/21 with a timing flake, ui_verify211 student/results 26/26, boxfix 14/14)"},
+  "flaky_tests": ["ui_upload215: the check 'progress showed Sending… N of 3 parts' failed once (1 run). All 3 part PUTs returned 200 and the message is still sent in uploadBook.js:56/65; the 100 ms sampler missed the short-lived text on the fast localhost bridge. Not a regression."],
+  "test_credentials": "No real accounts. Bridge cookies only: /tmp/uibridge/bridge.json (owner, reviewer) and /tmp/uibridge196/bridge.json (hero, old, friend). Tokens expire after about 15–20 min; run python tests/bridge_refresh217.py <bridge.json> <port> <roles...> to refresh them in place.",
+  "seed_data_creation": "Only in the disposable master bridge DB (8770): books TEST_dup_a, TEST_dup_b_2023 (Mock Tests) and TEST_pyq_2021 (PYQ). TEST_dup_a's mock was overridden, made Live and then moved to the Library. Misfire item 924c…:f0ee… on student bridge 8773 was tried, done and reopened (it is back to open). I deleted the temporary PDF copies in /tmp/uibridge. The isolated harnesses drop their own DBs. Cut bridge 8772 was stopped with SIGINT and its DB dropped.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use the bridges (8770 master_bridge181, 8773 analysis_bridge196; 8772 cut_bridge210 for ui_upload215/ui_verify211). Type page URL: /super-admin/exam/jee-main/jee-main:mocks. The dup_a/dup_b fixture mocks come out 'held' (crop boundary on Q1); use held-mock-override-open -> held-mock-override-confirm to make them Live-able. Publish progress is too quick to see on tiny fixtures; publish_progress_iso217.py slows crop_ref to observe it. media_cdn_iso198's 'paper built' failure is the old 2-option fixture; media_warm_iso217.py reruns the same links/pack flow with 4 options (36/36). /api/dream and /api/mission/me return 503 on the student bridge (environment, not related to this change).",
+  "rca of the issue": "Stale duplicate alert: tejas/duplicates.py section_duplicates() keeps _cache[sid] for 60 s, and only mock_duplicates() (Fix page) calls forget(sid). master.type_mocks reads the cache after uploads finish reading and after status changes (live/off/library) without clearing it. Steps: open the Master type page (cache filled), change the section (upload a duplicate PDF, or move a matching paper to the Library), reload within 60 s, and the alert is missing or outdated. Fix: clear the cache when the section changes, or key it by section content version."
+}

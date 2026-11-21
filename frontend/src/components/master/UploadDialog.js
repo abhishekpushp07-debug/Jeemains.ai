@@ -31,8 +31,8 @@ export function UploadDialog({open,onClose,section,exam,replace,onStarted}){
  }
  async function sendMany(){
   const r=await runBatch(batch,setBatch,{sectionId:section.id,subject:chapters?subject:'',pyq,stopped});
-  if(r.failed||r.ok<batch.length){toast.error(`${r.ok} of ${batch.length} PDFs sent. Press Upload again to send the rest.`);onStarted();return;}
-  toast.success(`${r.ok} PDFs uploaded. Each is read in the background, one after another.`);onStarted();onClose();
+  if(r.failed||r.ok<batch.length){const n=batch.length,s=n===1?'':'s';if(!r.failed&&stopped.current)toast.info(`Paused: ${r.ok} of ${n} PDF${s} sent. Press Upload to send the rest.`);else toast.error(`${r.ok} of ${n} PDF${s} sent. Press Upload again to send the rest.`);onStarted();return;}
+  toast.success(`${r.ok} PDF${r.ok===1?'':'s'} uploaded. Each is read in the background, one after another.`);onStarted();onClose();
  }
  async function send(){setBusy(true);stopped.current=false;try{
   if(many){await sendMany();return;}
@@ -49,9 +49,9 @@ export function UploadDialog({open,onClose,section,exam,replace,onStarted}){
   {count&&<p className="admin-note warn" data-testid="upload-replace-note">Replacing {count}. The old ones stay Live until the new ones go Live, then move to your Library. Students keep their scores.</p>}
   {open&&<StorageNotice/>}
   <form className="admin-form" onSubmit={e=>{e.preventDefault();if(ok&&!busy)send();}}>
-   <PdfBox label={many?`${batch.length} PDFs chosen`:'Main PDF'} hint={replace?'Questions. If the answer key and solutions are inside it too, that is all you need. Up to 100 MB.':'Questions, up to 100 MB each. Choose several PDFs at once to send them one after another.'}
+   <PdfBox label={many?`${batch.length} PDF${batch.length===1?'':'s'} chosen`:'Main PDF'} hint={replace?'Questions. If the answer key and solutions are inside it too, that is all you need. Up to 100 MB.':'Questions, up to 100 MB each. Choose several PDFs at once to send them one after another.'}
     file={main} onPick={pickMain} disabled={busy} testId="upload-main" required multiple={!replace}/>
-   {many?<BatchRows rows={batch} setRows={setBatch} pyq={pyq} busy={busy}/>:<>
+   {many?<><BatchRows rows={batch} setRows={setBatch} pyq={pyq} busy={busy}/>{!busy&&<Button type="button" variant="ghost" size="sm" onClick={()=>setBatch([])} data-testid="upload-batch-clear">Clear all</Button>}</>:<>
     <div className="master-field-row">
      <PdfBox label="Answer key PDF" hint="Only if the key is a separate file." file={key} onPick={setKey} disabled={busy} testId="upload-key"/>
      <PdfBox label="Solutions PDF" hint="Only if solutions are a separate file." file={sols} onPick={setSols} disabled={busy} testId="upload-solutions"/>
@@ -67,7 +67,7 @@ export function UploadDialog({open,onClose,section,exam,replace,onStarted}){
    <label className="book-check"><input type="checkbox" checked={rights} disabled={busy} onChange={e=>setRights(e.target.checked)} data-testid="upload-rights"/><span>I have permission to show this content to students.</span></label>
    <p className="master-hint">A mock without an answer key cannot go Live. Solutions are optional: without them students see the answer key.</p>
    {msg&&!many&&<div className="admin-progress" role="status" data-testid="upload-progress"><progress value={progress} max={1}/><small>{msg}</small></div>}
-   <div className="button-row">{busy?<Button type="button" variant="outline" onClick={()=>{stopped.current=true;}} data-testid="upload-pause">Pause</Button>:<Button type="button" variant="outline" onClick={onClose} disabled={busy} data-testid="upload-cancel">Cancel</Button>}<Button type="submit" disabled={!ok||busy} data-testid="upload-send">{busy?<Loader2 size={16} className="spin"/>:<UploadCloud size={16}/>}{many?`Upload ${batch.filter(r=>r.state!=='done').length} PDFs`:'Upload'}</Button></div>
+   <div className="button-row">{busy?<Button type="button" variant="outline" onClick={()=>{stopped.current=true;}} data-testid="upload-pause">Pause</Button>:<Button type="button" variant="outline" onClick={onClose} disabled={busy} data-testid="upload-cancel">Cancel</Button>}<Button type="submit" disabled={!ok||busy} data-testid="upload-send">{busy?<Loader2 size={16} className="spin"/>:<UploadCloud size={16}/>}{many?(n=>`Upload ${n} PDF${n===1?'':'s'}`)(batch.filter(r=>r.state!=='done').length):'Upload'}</Button></div>
   </form>
  </DialogContent></Dialog>;
 }

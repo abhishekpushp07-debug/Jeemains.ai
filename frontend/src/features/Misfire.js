@@ -4,6 +4,7 @@ import {Crosshair,Loader2} from 'lucide-react';
 import {api} from '../lib/api';
 import {MisfireItem} from '../components/misfire/MisfireItem';
 import {ChapterReport} from '../components/misfire/ChapterReport';
+import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from '../components/ui/select';
 import '../misfire.css';
 
 const TABS=[['open','Galtiyan'],['fixed','Samajh gaya'],['chapters','Chapter report']];
@@ -22,8 +23,9 @@ function Filters({subjects,subject,setSubject,chapters,chapter,setChapter}){
  return <div className="mf-filters">
   <div className="mf-chips" role="group" aria-label="Subject">{[{name:'',label:'Sab'},...subjects.map(s=>({name:s.name,label:s.name}))].map(s=>
    <button type="button" key={s.name||'all'} className={'mf-chip'+(subject===s.name?' is-on':'')} onClick={()=>{setSubject(s.name);setChapter('');}} data-testid={'misfire-subject-'+(s.name||'all').toLowerCase()}>{s.label}</button>)}</div>
-  {chapters.length>0&&<select className="mf-select" value={chapter} onChange={e=>setChapter(e.target.value)} aria-label="Chapter" data-testid="misfire-chapter-filter">
-   <option value="">Saare chapter</option>{chapters.map(c=><option key={c.name} value={c.name}>{c.name} ({c.count})</option>)}</select>}
+  {chapters.length>0&&<Select value={chapter||'all'} onValueChange={v=>setChapter(v==='all'?'':v)}>
+   <SelectTrigger className="mf-select" aria-label="Chapter" data-testid="misfire-chapter-filter"><SelectValue placeholder="Saare chapter"/></SelectTrigger>
+   <SelectContent><SelectItem value="all" data-testid="misfire-chapter-all">Saare chapter</SelectItem>{chapters.map((c,i)=><SelectItem key={c.name} value={c.name} data-testid={'misfire-chapter-'+i}>{c.name} ({c.count})</SelectItem>)}</SelectContent></Select>}
  </div>;
 }
 

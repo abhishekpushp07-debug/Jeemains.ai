@@ -17,10 +17,10 @@ function Question({m}){
  </div>;
 }
 
-function Answer({m,value,setValue,busy}){
+function Answer({m,value,setValue,busy,result}){
  const q=m.question||{},keys=Object.keys(q.options||{});
  if(m.type==='mcq'&&keys.length)return <div className="mf-options" role="radiogroup" aria-label="Apna jawab chuno">{keys.map((k,i)=><button type="button" key={k} role="radio" aria-checked={value===k}
-  className={'mf-option'+(value===k?' is-on':'')} disabled={busy} onClick={()=>setValue(k)} data-testid={`misfire-option-${m.id}-${k}`}><b>{label(q,k,i)}</b>{q.options[k]?<span>{q.options[k]}</span>:null}</button>)}</div>;
+  className={'mf-option'+(value===k?(result==='right'?' is-right':' is-on'):'')} disabled={busy} onClick={()=>setValue(k)} data-testid={`misfire-option-${m.id}-${k}`}><b>{label(q,k,i)}</b>{q.options[k]?<span>{q.options[k]}</span>:null}</button>)}</div>;
  return <input className="mf-input" inputMode={m.type==='integer'?'numeric':'decimal'} value={value} maxLength={40} disabled={busy} placeholder="Apna jawab likho" onChange={e=>setValue(e.target.value)} data-testid={'misfire-input-'+m.id}/>;
 }
 
@@ -47,7 +47,7 @@ export function MisfireItem({m:start,onChanged}){
   {m.status==='fixed'?<div className="mf-actions"><span className="mf-good"><CheckCircle2 size={16}/>Samajh gaya</span>
    <button type="button" className="mf-btn ghost" disabled={busy} onClick={reopen} data-testid={'misfire-reopen-'+m.id}><RotateCcw size={15}/>Wapas list mein</button></div>
   :<>
-   <Answer m={m} value={value} setValue={v=>{setValue(v);setResult(null);}} busy={busy||result==='right'}/>
+   <Answer m={m} value={value} setValue={v=>{setValue(v);setResult(null);}} busy={busy||result==='right'} result={result}/>
    <div className="mf-actions">
     {result!=='right'&&<button type="button" className="mf-btn" disabled={busy||!String(value).trim()} onClick={check} data-testid={'misfire-check-'+m.id}>{busy?<Loader2 size={15} className="spin"/>:null}Check karo</button>}
     {result==='right'&&<><span className="mf-good" role="status" data-testid={'misfire-right-'+m.id}><CheckCircle2 size={16}/>Sahi!</span>
