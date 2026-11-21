@@ -16,6 +16,12 @@ function postpone(s: { failures: number; after: number }, e?: any, left?: number
   s.after = Date.now() + Math.min(Math.max(e?.retryAfterMs || 0, Math.min(cap, 1000 * 2 ** s.failures)), left != null && left < 60 ? 2000 : Infinity) + Math.random() * (cap < 30000 ? 500 : 1500);
 }
 const transient = (e: any) => !(e instanceof ApiError) || e.status === 0 || e.status === 408 || e.status === 429 || e.status >= 500;
+// What a student reads when an answer could not reach the website yet (it is kept on the phone and sent again).
+const SAFE_OFFLINE = "No internet right now. Your answer is safe on this phone and is sent as soon as the line is back.";
+const SAFE_BUSY = "The website is not answering right now. Your answer is safe on this phone. We are trying again.";
+const saveTrouble = (e: any) => (e instanceof ApiError && e.status === 0 ? SAFE_OFFLINE : transient(e) ? SAFE_BUSY : e.message);
+// Submit first sends what is still on the phone, trying a few more times (~10 s) before it asks the student to wait.
+const SUBMIT_WAITS = [1500, 3000, 5000];
 
 // Native port of the web useAttempt contract: acknowledged autosave, immutable request IDs,
 // revision conflicts surfaced (never auto-bumped), monotonic server-anchored timer.
@@ -134,7 +140,7 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
           net(e);
           saveOffline.current = transient(e);
           postpone(retryState.current, e, secondsLeft());
-          setError(e.message);
+          setError(saveTrouble(e));
           if (e.status === 409) {
             const left = secondsLeft();
             if (left != null && left <= 0) break; // time is up: the paper is sealed, the submit step takes over (no full re-download)
@@ -326,8 +332,13 @@ export function useAttempt(id: string, uid: string, onCompleted: () => void) {
   };
 
   const settle = async () => {
-    await drain();
-    if (running.current || Object.keys(drafts.current).length) throw new Error("Wait until every answer shows Saved. Pending answers are not submitted.");
+    for (let round = 0; ; round++) {
+      await drain();
+      if (!running.current && !Object.keys(drafts.current).length) return;
+      if (conflictRef.current || round >= SUBMIT_WAITS.length) break;
+      await new Promise(resolve => setTimeout(resolve, SUBMIT_WAITS[round]));
+    }
+    throw new Error("Some answers are still on this phone and not on the website yet. They are safe. Submit again in a moment — it goes through as soon as they are sent.");
   };
 
   const submit = async () => {

@@ -144,6 +144,8 @@ const dark = {
   custom_softText: "#D6D6E0",
   custom_pastelInk: "#1A1A22",
   custom_selectedOption: "#1C0D11",
+  // The student's choice during any test (never right/wrong): green circles, light green line, faint green wash.
+  custom_pick: "#22C55E", custom_pickLine: "#4ADE80", custom_pickWash: "#0F2A1B", custom_pickInk: "#6EE7A0",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
   custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
@@ -272,6 +274,7 @@ const light: ThemeColors = {
   custom_bar: "#F6F6F8", custom_barLine: "#ECECF0",
   custom_eyebrow: "#74747E", custom_dim: "#A6A6AE", custom_softText: "#3C3C44", custom_pastelInk: "#111114",
   custom_selectedOption: "#FFF4F5",
+  custom_pick: "#16A34A", custom_pickLine: "#4ADE80", custom_pickWash: "#F2FBF5", custom_pickInk: "#15803D",
   custom_qAnswered: "#16A34A", custom_qNotAnswered: "#DC2626", custom_qMarked: "#0D9488", custom_qMarkedInk: "#0F766E",
   custom_qMarkedSoft: "#E6F6F4", custom_qFresh: "#F1F1F4", custom_qFreshLine: "#D9D9DF", custom_qInk: "#FFFFFF",
   custom_gold: "#B7791F", custom_goldDeep: "#7A4E00", custom_flame: "#EA580C", custom_flameSoft: "#FFF0E6",

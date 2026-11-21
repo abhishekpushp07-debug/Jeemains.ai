@@ -1,5 +1,14 @@
 # JEELIVE.AI Native App — PRD
 
+## Phase 1 of the approved plan: live PYQ fix + green selected option (21 Nov 2026) — DONE on preview, needs Publish
+- Production RCA (deployer): jeelive.ai's origin answered 520 for ~51 s (15:24:22–15:25:13 UTC, 65 calls: ~49 pictures, ~9 answer saves, ~6 PYQ lists); our K8s pods healthy, not deploy-related. Our proxy passed Cloudflare's technical text to the app.
+- Backend `server.py` `website_trouble()` + `WEBSITE_BUSY`: upstream 502/504/52x/530 and technical 500/503 bodies → 503 JSON `website_unavailable` + Retry-After (default 5). Tests: `tests/test_website_trouble.py`, `tests/test_iter126_website_trouble_live_proxy.py`.
+- App: `plainMessage()` in api/client.ts; useAttempt answer-save messages ("Your answer is safe on this phone…"), manual Submit drains pending answers with 3 more tries (1.5/3/5 s); header shows "N pending" + second line `player-save-note` "Safe on phone · sending" (offline: "N safe on phone"); pictures auto-retry passing failures after 2/5/10/20/30 s (`useImageRetry` in AssetImage.tsx, also Pieces), "Picture is taking longer · trying again".
+- Green selected option in the test player (all three styles: cut-picture cards in Pieces.tsx answer mode, typed options, number tiles): border #4ADE80, wash #F2FBF5, circles #16A34A with white tick; theme tokens custom_pick / custom_pickLine / custom_pickWash / custom_pickInk. Review/solutions colours, palette and Rapid Fire unchanged.
+- iteration_126 all pass; follow-ups fixed (save note on its own line, retry counter resets after a load, "trying again…" in piece boxes). Browser arena rebuilt.
+- QA account: tester started PYQ attempt 8d2bae3d-600f-4466-a90f-5d209b1749b8 (21 Jan 2026 S2), active, NOT submitted.
+- Next: Phase 2 (Levels 1–4) then Phase 3 (Levels 5–8) of the approved 8-level backend plan, one Publish at the end.
+
 ## In-app account deletion + owner panel (21 Nov 2026)
 - NOTE FOR FUTURE AGENTS: Rapid Fire has NO exam switcher. It has 5 subjects (Physics, Chemistry, Mathematics + English and Logical Reasoning on a "BITSAT" row). The old handoff item "ScopeSheet Exam Switcher Bug" was wrong and is closed. Never suggest it again.
 - User chose: "App se delete request, Rapid Fire data turant delete"; requests listed "sirf app ke owner panel mein" (no email); shared matches keep the record but drop name/photo. The website (jeelive.ai, 222 live API paths) still has NO account-delete operation, so the website account is deleted by the owner (target 30 days).

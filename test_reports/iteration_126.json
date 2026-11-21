@@ -1,0 +1,31 @@
+{
+  "summary": "Phase 1 (website-down guard + green selected option) verified end-to-end. Backend: test_website_trouble.py 3/3 + new live proxy suite 6/6 pass (QA login 200, /pyq/jee-main 200 with 30 papers, plain 401/404/400 unchanged). Frontend (390x844): login -> /pyq list loads (30 papers, no error) -> attempt opens, pictures load, saves show 'Saved'. Number tiles turn green when selected (border rgb(74,222,128) 2px, wash rgb(242,251,245), tick circle rgb(22,163,74) with white tick, label #15803D; no red). PUT answers 520 simulation: player-error shows the plain SAFE_BUSY line, label '1 pending · Safe on phone · sending', no 'Cloudflare' anywhere; after unroute it returned to 'Saved' in 3-4 s and the error cleared; a pending answer survived a page reload and was re-sent automatically. GET /pyq/jee-main 520: plain WEBSITE_BUSY line + Retry, no Cloudflare text; Retry after unroute loaded 30 papers. Asset 520 x2 per picture: spinner + 'Picture is taking longer · trying again' (question-image-1-0-retrying) at ~9.6 s, picture loaded by itself at ~15.7 s, no Retry/error box, no 'original image could not load'. Submit sheet with a pending answer shows submit-pending-warning; Submit was NEVER pressed (a route also blocked any **/submit*; 0 requests). Cut-picture option cards and typed options cannot appear in PYQ papers (originalLook() drops pieces; QA paper had only tiles + integer), so they were verified by code review: Pieces cardOn = #4ADE80 border + #F2FBF5 wash, chip/tick fill #16A34A with onSuccess #FFFFFF; typed optionOn/letterOn/check use the same tokens. App always uses the light palette (theme.ts:290). Review/solutions cardRight/cardWrong unchanged; no Rapid Fire files changed. No deprecated Expo packages found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "attempt/[id] header", "issues": ["At 390 px the save label is truncated to '1 pending · Safe on …' (numberOfLines=1 beside the long paper title), so the 'Safe on phone · sending' part the plan wants students to read is cut off. Consider a shorter label (e.g. '1 safe on phone · sending') or a second line. Reference: app/attempt/[id].tsx:102,179"]},
+      {"screen": "attempt/[id] question picture", "issues": ["During the first automatic picture retry (~2 s + fetch) only a bare spinner shows; the 'trying again' line appears only from the 2nd request on (attempt > 0). Acceptable, just noting. PieceImage (cut pieces) shows no retrying hint at all, only the empty wait box. Reference: src/components/AssetImage.tsx:76, src/components/Pieces.tsx:32"]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_website_trouble.py", "/app/backend/tests/test_iter126_website_trouble_live_proxy.py", "/app/backend/tests/iter126_probe_attempt.py", "/app/test_reports/pytest/iter126.xml"],
+  "action_items": [
+    "Optional: shorten/allow wrap of the pending save label in the player header so the full 'Safe on phone · sending' text is visible at 390 px (app/attempt/[id].tsx:102/179).",
+    "Optional: useImageRetry never resets tries.current after a successful load, so a later failure of the same path gets fewer automatic retries; reset tries on success/display (src/components/AssetImage.tsx:24-38)."
+  ],
+  "critical_code_review_comments": [
+    "server.py website_trouble(): correct scope (502/504/52x/530 always; 500/503 only with technical/empty/non-JSON message); 401/404/409 and plain 500/503 messages pass through; Retry-After exposed via CORS expose_headers.",
+    "client.ts plainMessage(): any non-503 5xx -> WEBSITE_BUSY, plus TECHNICAL regex on every message — double guard OK.",
+    "useAttempt.settle(): drain + up to 3 extra rounds (1.5/3/5 s) then throws the 'Some answers are still on this phone…' message before sendSubmit — read and confirmed; not executed (no submit pressed by instruction).",
+    "Time-up seal path still submits after 3 rounds even with unsent answers (by design, documented at useAttempt.ts:247-251)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter126_website_trouble_live_proxy.py (new)", "/app/backend/tests/iter126_probe_attempt.py (new, read-only probe)"],
+  "success_rate": {"backend": "100% (9/9)", "frontend": "100% of in-scope live checks (pieces/typed options verified by code only)"},
+  "seed_data_creation": "Started ONE new PYQ attempt on the QA learner (allowed by request): 8d2bae3d-600f-4466-a90f-5d209b1749b8 (JEE Main PYQ 21 Jan 2026 S2, active, NOT submitted). Q1 answer was set/changed and finally cleared (empty). The older active attempt 68f30606-74b4-4ca2-9acb-d67f4de03f21 (21 Jan 2026 S1) showed only ~4:38 left at 18:32 UTC; only navigated through Q1-Q6, no answers changed, browser closed long before its deadline.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login on /entry needs keyboard typing (page.fill does not update the RN state). PYQ papers never render cut-piece cards (pieces dropped by originalLook) – only number tiles + integer input. Use attempt 8d2bae3d-600f-4466-a90f-5d209b1749b8 for further player checks (3 h window from ~18:33 UTC 21 Nov 2026). Always add page.route('**/submit*', abort) as a safety net.",
+  "rca_of_issue": "Original incident (520 Cloudflare text surfaced) fixed at both proxy (website_trouble -> 503 website_unavailable) and client (plainMessage/saveTrouble/IMAGE_DOWN) layers; verified by browser-level 520 interception which bypasses the proxy, proving the client guard alone also hides technical text."
+}

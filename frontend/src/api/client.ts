@@ -173,6 +173,14 @@ export async function requestAccountDeletion(phone: string, pin: string, userId?
 
 export type RawResult<T> = { status: number; data: T; retryAfterMs: number };
 
+/** A student never sees a server's own trouble text (for example the website's Cloudflare "520" page). */
+export const WEBSITE_BUSY = "The website is not answering right now. Your saved work is safe. Please try again in a moment.";
+const TECHNICAL = /cloudflare|origin (web )?server|malformed|bad gateway|gateway time|upstream|traceback|exception|internal server error|<html/i;
+export function plainMessage(status: number, message: string) {
+  if (status >= 500 && status !== 503) return WEBSITE_BUSY;
+  return TECHNICAL.test(message) ? WEBSITE_BUSY : message;
+}
+
 let validation: { epoch: number; promise: Promise<boolean> } | null = null;
 async function confirmSessionEnded(epoch: number): Promise<boolean> {
   requireEpoch(epoch);
@@ -250,7 +258,7 @@ export async function apiRaw<T = any>(path: string, opts: { method?: string; bod
   if (!res.ok) {
     const d = payload?.error?.message || payload?.detail;
     const msg = typeof d === "string" ? d : Array.isArray(d) ? d.map((x: any) => x.msg).join(". ") : "This request could not finish. Please try again.";
-    throw new ApiError(msg, res.status, retryAfter(res), payload?.error?.code);
+    throw new ApiError(plainMessage(res.status, msg), res.status, retryAfter(res), payload?.error?.code);
   }
   return { status: res.status, data, retryAfterMs: retryAfter(res) };
 }

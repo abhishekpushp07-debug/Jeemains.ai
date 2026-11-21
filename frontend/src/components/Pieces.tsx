@@ -1,12 +1,12 @@
 import React, { memo, useEffect, useMemo, useState } from "react";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import { assetDataUri, privateAssets } from "@/src/api/client";
+import { assetDataUri } from "@/src/api/client";
 import { imagePaths } from "@/src/assets/paperAssets";
 import { FRAME, PIECE_ZOOM, pieceLayout, piecesOf } from "@/src/assets/pieces";
 import { setPieceZoom, usePieceZoom } from "@/src/assets/pieceZoom";
 import { colors, space } from "@/src/theme";
-import { useImageValue } from "./AssetImage";
+import { useImageRetry, useImageValue } from "./AssetImage";
 import { MathText } from "./MathText";
 import { Icon, Press, T } from "./ui";
 
@@ -14,24 +14,26 @@ import { Icon, Press, T } from "./ui";
 const PieceImage = memo(function PieceImage({ path, width, height, label, testID }: { path: string; width: number; height: number; label: string; testID: string }) {
   const value = useImageValue(path);
   const source = useMemo(() => ({ uri: value?.uri, cacheKey: value?.cacheKey }), [value?.uri, value?.cacheKey]);
-  const [failed, setFailed] = useState(false);
+  const { attempt, error, failed, retry } = useImageRetry(path, value);
   useEffect(() => {
-    if (value || failed) return;
+    if (value || error) return;
     let alive = true;
-    assetDataUri(path).catch(e => { if (alive && e?.name !== "AbortError") setFailed(true); });
+    assetDataUri(path).catch(e => { if (alive) failed(e); });
     return () => { alive = false; };
-  }, [path, value, failed]);
+  }, [path, value, error, attempt, failed]);
   // Inside an option card this sits in another button: fine on a phone, not allowed in a web page.
-  if (failed) return (
-    <Press testID={`${testID}-retry`} onPress={() => { privateAssets.invalidate(path); setFailed(false); }} accessibilityRole={Platform.OS === "web" ? "none" : "button"}
+  if (error) return (
+    <Press testID={`${testID}-retry`} onPress={retry} accessibilityRole={Platform.OS === "web" ? "none" : "button"}
       accessibilityLabel={`${label}. Picture load nahi hui. Dobara try karo`} style={styles.retry}>
       <Icon name="refresh" size={15} color={colors.brandText} />
       <T w="bold" size={12} color={colors.brandText}>Dobara load karo</T>
     </Press>
   );
-  if (!value) return <View testID={`${testID}-loading`} accessibilityLabel="Loading picture" style={[styles.wait, { width, height }]} />;
+  if (!value) return <View testID={`${testID}-loading`} accessibilityLabel={attempt > 0 ? "Picture is taking longer, trying again" : "Loading picture"} style={[styles.wait, { width, height }]}>
+    {attempt > 0 && height >= 16 ? <T testID={`${testID}-retrying`} size={10.5} color={colors.muted} numberOfLines={1}>trying again…</T> : null}
+  </View>;
   return <Image testID={testID} source={source} recyclingKey={value.cacheKey || path} cachePolicy="memory" priority="high" transition={0} contentFit="contain"
-    accessibilityLabel={label} style={{ width, height }} onError={() => setFailed(true)} />;
+    accessibilityLabel={label} style={{ width, height }} onError={() => failed(new Error("display"))} />;
 });
 
 type Review = { correct: string[]; response?: string };
@@ -115,10 +117,10 @@ export function PieceQuestion({ id, q, width, version = "original", testPrefix =
             const on = value === key;
             const chip = (
               <View style={[styles.chip, on && styles.fill]}>
-                <T testID={`${testPrefix}-option-label-${key}`} w="mono" size={14} color={on ? colors.onBrandPrimary : colors.onSurface}>{label}</T>
+                <T testID={`${testPrefix}-option-label-${key}`} w="mono" size={14} color={on ? colors.onSuccess : colors.onSurface}>{label}</T>
               </View>
             );
-            const tick = <View style={[styles.tick, on && styles.fill]}>{on ? <Icon name="check" size={15} color={colors.onBrandPrimary} /> : null}</View>;
+            const tick = <View style={[styles.tick, on && styles.fill]}>{on ? <Icon name="check" size={15} color={colors.onSuccess} /> : null}</View>;
             return (
               <Press key={key} testID={`${testPrefix}-option-${key}`} disabled={disabled} onPress={() => onPick?.(key)} scaleTo={0.985}
                 accessibilityLabel={`Option ${label}${on ? ", selected" : ""}`} accessibilityState={{ selected: on }} style={[styles.card, scale.stack && styles.cardStack, on && styles.cardOn]}>
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
   options: { gap: 10 },
   optionsReview: { gap: 18, marginTop: 6 },
   card: { flexDirection: "row", alignItems: "center", gap: FRAME.gap, minHeight: 64, padding: FRAME.cardPad, borderRadius: 16, borderWidth: FRAME.cardLine, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card },
-  cardOn: { borderColor: colors.brandPrimary, backgroundColor: colors.surfaceTertiary, shadowColor: colors.brandPrimary, shadowOpacity: 0.22, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 3 },
+  cardOn: { borderColor: colors.custom_pickLine, backgroundColor: colors.custom_pickWash, shadowColor: colors.custom_pick, shadowOpacity: 0.18, shadowRadius: 12, shadowOffset: { width: 0, height: 6 }, elevation: 3 },
   cardRight: { borderColor: colors.success, backgroundColor: colors.custom_successSoft },
   cardWrong: { borderColor: colors.error, backgroundColor: colors.custom_errorSoft },
   // Long options: the letter and the tick sit above the paper, which takes the whole card width.
@@ -151,13 +153,14 @@ const styles = StyleSheet.create({
   chipStack: { alignSelf: "flex-start" },
   chip: { width: FRAME.chip, height: FRAME.chip, borderRadius: FRAME.chip / 2, borderWidth: 1.5, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, alignItems: "center", justifyContent: "center" },
   tick: { width: FRAME.tick, height: FRAME.tick, borderRadius: FRAME.tick / 2, borderWidth: 1.5, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" },
-  fill: { backgroundColor: colors.brandPrimary, borderColor: colors.brandPrimary },
+  // The student's choice during a test: green (the palette's "Answered"), never the brand red.
+  fill: { backgroundColor: colors.custom_pick, borderColor: colors.custom_pick },
   paper: { minHeight: 42, justifyContent: "center", alignItems: "flex-start", overflow: "hidden", paddingHorizontal: FRAME.paperPad, paddingVertical: space.sm, borderRadius: 10, borderWidth: FRAME.paperLine, borderColor: colors.custom_cardLine, backgroundColor: WHITE },
   paperBeside: { flex: 1, minWidth: 0 },
   paperStack: { alignSelf: "stretch" },
   typed: { alignSelf: "stretch" },
   mark: { position: "absolute", top: -11, right: 14, height: 20, flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 9, borderRadius: 10 },
-  wait: { borderRadius: 4, backgroundColor: colors.custom_cardRaised },
+  wait: { borderRadius: 4, backgroundColor: colors.custom_cardRaised, justifyContent: "center", paddingHorizontal: 6 },
   retry: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: 6 },
   zoomRow: { flexDirection: "row", alignItems: "center", gap: space.sm },
   zoomLabel: { flex: 1, letterSpacing: 0.3 },

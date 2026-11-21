@@ -160,6 +160,26 @@ async def jeelive_proxy(path: str, request: Request, x_jl_sid: str = Header(...)
         return await forward_jeelive(path, request, x_jl_sid)
 
 
+WEBSITE_BUSY = "The website is not answering right now. Your saved work is safe. Please try again in a moment."
+TECHNICAL_TEXT = re.compile(r"cloudflare|origin (web )?server|malformed|bad gateway|gateway time|upstream|traceback|exception|internal server error|<html", re.I)
+
+
+def website_trouble(r) -> bool:
+    """The website's own server trouble (21 Nov 2026: its origin answered 520 for ~1 minute and the app showed
+    Cloudflare's technical text). Its own plain 500/503 messages still pass; everything else 5xx is replaced."""
+    if r.status_code < 500:
+        return False
+    if r.status_code not in (500, 503):
+        return True
+    try:
+        body = r.json()
+    except ValueError:
+        return True
+    error = body.get("error") if isinstance(body, dict) else None
+    message = error.get("message") if isinstance(error, dict) else body.get("detail") if isinstance(body, dict) else None
+    return not isinstance(message, str) or not message.strip() or bool(TECHNICAL_TEXT.search(message))
+
+
 async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
     cookies = dict(await load_jar(x_jl_sid))
     headers = {"Accept": request.headers.get("accept", "application/json")}
@@ -195,6 +215,10 @@ async def forward_jeelive(path: str, request: Request, x_jl_sid: str):
         await db.jl_jars.delete_one({"sid": x_jl_sid})  # signed out: this session handle carries nothing any more
     elif sets or gone:
         await save_cookie_changes(x_jl_sid, sets, gone, uid)
+    if website_trouble(r):  # e.g. its Cloudflare "520" page: a plain line instead, and the app tries again
+        return Response(json.dumps({"data": None, "error": {"code": "website_unavailable", "message": WEBSITE_BUSY}, "meta": {"api_version": "1"}}),
+                        status_code=503, media_type="application/json",
+                        headers={"Cache-Control": "no-store", "Vary": "X-JL-Sid", "Retry-After": r.headers.get("retry-after") or "5"})
     out = {k: r.headers[k] for k in PASS_HEADERS if k in r.headers}
     out['Vary'] = 'X-JL-Sid'
     if path.startswith('auth/'):

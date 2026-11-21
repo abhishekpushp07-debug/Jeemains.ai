@@ -97,7 +97,10 @@ export default function Player() {
   // Options stay open while a question image is still loading: a slow image must never stop a student from answering.
   const disabled = timeUp || A.conflict || lockedMain;
   const pendingCount = Object.keys(A.pending).length;
-  const saveState = A.conflict ? ["Conflict", colors.error] : !A.online ? ["Offline", colors.error] : A.inflight ? ["Saving…", colors.info] : pendingCount ? [`${pendingCount} pending`, colors.warning] : ["Saved", colors.custom_mint];
+  // Unsent answers live on this phone until the website takes them: said in a second line under the count.
+  const saveState = A.conflict ? ["Conflict", colors.error] : !A.online ? ["Offline", colors.error]
+    : A.inflight ? ["Saving…", colors.info] : pendingCount ? [`${pendingCount} pending`, colors.warning] : ["Saved", colors.custom_mint];
+  const saveNote = A.conflict || !pendingCount ? "" : !A.online ? `${pendingCount} safe on phone` : "Safe on phone · sending";
   const idx = nav.index;
   const go = (d: number) => { const n = nav.rows[idx + d]; if (n) { tap(); nav.select(n.id); } };
   const nextSubject = nav.subjects[nav.subjects.indexOf(nav.subject) + 1];
@@ -174,8 +177,9 @@ export default function Player() {
             <T w="heavy" size={13.5} numberOfLines={1}>{a.title}</T>
             <View testID="player-save-status" style={styles.saveRow} accessibilityLiveRegion="polite">
               <View style={[styles.saveDot, { backgroundColor: saveState[1] }]} />
-              <T w="bold" size={10.5} color={saveState[1]}>{saveState[0]}</T>
+              <T testID="player-save-label" w="bold" size={10.5} color={saveState[1]} numberOfLines={1} style={{ flexShrink: 1 }}>{saveState[0]}</T>
             </View>
+            {saveNote ? <T testID="player-save-note" w="semibold" size={10} color={colors.custom_softText} numberOfLines={1}>{saveNote}</T> : null}
           </View>
           {a.deadline ? (
             <View testID="player-timer" accessibilityLabel={`Time left ${fmtClock(A.seconds ?? 0)}`} style={[styles.timer, seconds <= 600 && { borderColor: timerTone }]}>
@@ -246,8 +250,8 @@ export default function Player() {
               return (
                 <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => pick(k)}
                   accessibilityLabel={`Option ${labelOf(k)}, as shown in the picture${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.96} style={[styles.tile, sel && styles.tileOn]}>
-                  <T testID={`player-option-label-${k}`} w="mono" size={Math.round(24 * scale)} color={sel ? colors.onSurfaceInverse : colors.onSurface}>{labelOf(k)}</T>
-                  {sel ? <View style={styles.tileCheck}><Icon name="check" size={11} color={colors.onSurface} /></View> : null}
+                  <T testID={`player-option-label-${k}`} w="mono" size={Math.round(24 * scale)} color={sel ? colors.custom_pickInk : colors.onSurface}>{labelOf(k)}</T>
+                  {sel ? <View style={styles.tileCheck}><Icon name="check" size={11} color={colors.onSuccess} /></View> : null}
                 </Press>
               );
             })}
@@ -261,11 +265,11 @@ export default function Player() {
                 <Press key={k} testID={`player-option-${k}`} disabled={disabled} onPress={() => pick(k)} accessibilityLabel={`Option ${labelOf(k)}${sel ? ", selected" : ""}`} accessibilityState={{ selected: sel }} scaleTo={0.985}
                   style={[styles.option, sel && styles.optionOn]}>
                   <View style={[styles.letter, sel && styles.letterOn]}>
-                    <T w="heavy" size={13} color={sel ? colors.onSurfaceInverse : colors.custom_softText}>{labelOf(k)}</T>
+                    <T w="heavy" size={13} color={sel ? colors.onSuccess : colors.custom_softText}>{labelOf(k)}</T>
                   </View>
                   {source && typed[k] ? <View style={{ flex: 1 }}><MathText testID={`player-option-math-${k}`} size={Math.round(15 * scale)} text={typed[k]} /></View>
                     : <T size={Math.round(15 * scale)} w={sel ? "heavy" : "medium"} style={{ flex: 1 }} color={sel ? colors.onSurface : colors.custom_softText}>{text}</T>}
-                  {sel ? <View style={styles.check}><Icon name="check" size={14} color={colors.onSurfaceInverse} /></View> : null}
+                  {sel ? <View style={styles.check}><Icon name="check" size={14} color={colors.onSuccess} /></View> : null}
                 </Press>
               );
             })}
@@ -366,7 +370,7 @@ export default function Player() {
             <T w="heavy" size={14} style={styles.tableNum}>{questions.length - counts.answered}</T>
           </View>
         </View>
-        {counts.pending ? <Notice tone="warning" testID="submit-pending-warning">Some answers aren’t saved on the server yet. Submit waits until they are — pending answers are never hidden.</Notice> : null}
+        {counts.pending ? <Notice tone="warning" testID="submit-pending-warning">Some answers are safe on this phone but not on the website yet. Submit sends them first and waits for them — pending answers are never left out.</Notice> : null}
         <T size={12} color={colors.custom_eyebrow}>Submitting is final. Grading may take a moment; your receipt is kept safely.</T>
         <ErrorBox error={A.error} />
         <Pill testID="player-confirm-submit" kind="brand" size="lg" label="Submit now" busy={busy} onPress={doSubmit} />
@@ -408,14 +412,15 @@ const styles = StyleSheet.create({
   question: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine, padding: 18, gap: space.md },
   numeric: { height: 64, borderRadius: 16, borderWidth: 1.5, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, paddingHorizontal: space.lg, fontFamily: fonts.heavy, fontSize: 24, color: colors.onSurface },
   option: { flexDirection: "row", alignItems: "center", gap: 14, minHeight: 60, paddingHorizontal: space.lg, paddingVertical: space.md, borderRadius: 16, borderWidth: 1.5, borderColor: colors.custom_cardLine, backgroundColor: colors.custom_card },
-  optionOn: { borderColor: colors.onSurface, backgroundColor: colors.custom_cardRaised },
+  // The student's choice: green, as the palette's "Answered" (no right/wrong is shown during a test).
+  optionOn: { borderWidth: 2, borderColor: colors.custom_pickLine, backgroundColor: colors.custom_pickWash, paddingHorizontal: space.lg - 0.5 },
   letter: { width: 30, height: 30, borderRadius: 15, borderWidth: 1.5, borderColor: colors.custom_qFreshLine, alignItems: "center", justifyContent: "center" },
-  letterOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },
-  check: { width: 22, height: 22, borderRadius: 11, backgroundColor: colors.onSurface, alignItems: "center", justifyContent: "center" },
+  letterOn: { backgroundColor: colors.custom_pick, borderColor: colors.custom_pick },
+  check: { width: 22, height: 22, borderRadius: 11, backgroundColor: colors.custom_pick, alignItems: "center", justifyContent: "center" },
   tiles: { flexDirection: "row", gap: space.sm },
   tile: { flex: 1, minWidth: 0, height: 68, borderRadius: 18, borderWidth: 1.5, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, alignItems: "center", justifyContent: "center" },
-  tileOn: { backgroundColor: colors.onSurface, borderColor: colors.onSurface },
-  tileCheck: { position: "absolute", top: 6, right: 6, width: 16, height: 16, borderRadius: 8, backgroundColor: colors.onSurfaceInverse, alignItems: "center", justifyContent: "center" },
+  tileOn: { borderWidth: 2, backgroundColor: colors.custom_pickWash, borderColor: colors.custom_pickLine },
+  tileCheck: { position: "absolute", top: 6, right: 6, width: 16, height: 16, borderRadius: 8, backgroundColor: colors.custom_pick, alignItems: "center", justifyContent: "center" },
   conf: { flexDirection: "row", alignItems: "center", gap: space.sm, flexWrap: "wrap" },
   confChip: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, justifyContent: "center" },
   confOn: { borderColor: colors.custom_mint, backgroundColor: colors.custom_mintSoft },
