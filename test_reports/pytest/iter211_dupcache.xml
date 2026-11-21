@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="4" time="1.155" timestamp="2026-11-21T21:54:50.471492+00:00" hostname="agent-env-63740bf5-94fd-4228-a791-ead3b2648f2a"><testcase classname="tests.test_dup_cache211.TestDupCache" name="test_01_baseline_two_flagged" time="0.968" /><testcase classname="tests.test_dup_cache211.TestDupCache" name="test_02_library_clears_immediately" time="0.048" /><testcase classname="tests.test_dup_cache211.TestDupCache" name="test_03_restore_flags_again" time="0.030" /><testcase classname="tests.test_dup_cache211.TestDupCache" name="test_04_edit_live_question_text_invalidates" time="0.027"><failure message="AssertionError: {&quot;data&quot;:null,&quot;error&quot;:{&quot;code&quot;:&quot;immutable_import&quot;,&quot;message&quot;:&quot;Imported test content is frozen. Use its organiser to schedule or pause it; upload corrected sources as a new test.&quot;},&quot;meta&quot;:{&quot;api_version&quot;:&quot;1&quot;,&quot;request_id&quot;:&quot;5f949ff5-14ff-4d84-a3a0-8805a7527daf&quot;}}&#10;assert 409 == 200&#10; +  where 409 = &lt;Response [409]&gt;.status_code">self = &lt;test_dup_cache211.TestDupCache object at 0xfc08847ef950&gt;
+owner = &lt;requests.sessions.Session object at 0xfc08847f4550&gt;
+ids = {'set': 'f7edeacb-d038-5bd2-9dfc-218986af6c71', 'mock': '566bd416-4a6c-5d92-b748-b8c028328dae'}
+
+    def test_04_edit_live_question_text_invalidates(self, owner, ids):
+        """Edit Q1 text of the Live set so it is no longer the same: Q1 must drop out of the alert."""
+        flagged(owner)  # cache filled
+        s = data(owner.get(f'{M}/api/studio/sets/{ids["set"]}'))
+        q1 = next(q for q in s['questions'] if q['number'] == 1)
+        new = 'TEST_ edited so it is a totally different question about optics and lenses now'
+        r = owner.put(f'{M}/api/studio/sets/{ids["set"]}/questions/{q1["id"]}', json={'accessible_text': new, 'text': new, 'review_note': 'TEST_ edit'})
+&gt;       assert r.status_code == 200, r.text
+E       AssertionError: {"data":null,"error":{"code":"immutable_import","message":"Imported test content is frozen. Use its organiser to schedule or pause it; upload corrected sources as a new test."},"meta":{"api_version":"1","request_id":"5f949ff5-14ff-4d84-a3a0-8805a7527daf"}}
+E       assert 409 == 200
+E        +  where 409 = &lt;Response [409]&gt;.status_code
+
+tests/test_dup_cache211.py:64: AssertionError</failure></testcase></testsuite></testsuites>

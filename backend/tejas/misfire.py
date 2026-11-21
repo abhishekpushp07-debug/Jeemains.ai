@@ -64,7 +64,11 @@ async def sync(u):
     t = await database_now()
     # A live paper still inside its window is passed over (cheaply) until its answers are released.
     todo = [r['id'] for r in recent if r['id'] not in done and not answers_sealed(r, t)]
-    for aid in todo[:BATCH]:
+    took = pending = 0
+    # Papers still being graded return False and are passed over, so they never hold up newer papers.
+    for aid in todo[:BATCH * 3]:
+        if took >= BATCH:
+            break
         try:
             taken = await take(await owned(aid, u), delivered)
         except (HTTPException, ValueError):  # gone or unreadable for good: never retried on every visit
@@ -72,8 +76,11 @@ async def sync(u):
         except Exception:  # noqa: BLE001  a passing database hiccup: tried again on the next visit
             taken = False
         if taken:
+            took += 1
             await synced.update_one({'_id': aid}, {'$set': {'user_id': u['id'], 'at': now()}}, upsert=True)
-    return max(0, len(todo) - BATCH)
+        else:
+            pending += 1
+    return max(0, len(todo) - took - pending)
 
 
 def view(m):

@@ -1,0 +1,61 @@
+{
+  "summary": "Retest of the iteration_210 fixes and a regression run on the bridges (master bridge 8770, student bridge 8773). Both bridges stopped by themselves at 22:00 when their lifetime ran out, which dropped their DBs. I restarted both with a 2400 s lifetime and seeded the data again through the UI. STALE DUPLICATE CACHE: FIXED. The type list showed 2 flagged; moving the matching Live set to the Library made the next GET show 0 straight away, and the Fix-page endpoint also returned 0. Restoring the set flagged both again. A new upload that finished reading showed the red note on the first reload. Match lines now carry the upload title (e.g. 'TEST_dup_b_2023 · Mock 1 Q1'). Scope rules still hold: PYQ is never flagged against mocks, Q3 is not flagged. Publish progress: success path 5/5. New failure-path test (one picture fails): no orphan tejas_publish_progress doc and no stale publish_progress on the row (the job retries and then publishes). media_warm_iso217 36/36. Misfire API 15/15, now also asserting that a reopened item is blind again (tries 0, no answer). UI: chapter shadcn Select (filter, then 'Saare chapter' reset), typed MCQ option text, and the green is-right after a correct second try all pass on desktop and mobile. ShareGate on desktop: pressing Share at 1 s and at 3.9 s (the thanks timer overlaps the countdown end) opens the result and calls onOpen exactly once. Mobile share gate unchanged. Upload dialog: 'Upload 2 PDFs' / 'Upload 1 PDF' and 'Clear all' work, and single-PDF upload is unchanged. ONE NEW BUG: Pause in batch mode shows an error toast instead of the 'Paused' info toast. Regressions: ui_storage_alert 16/16, ui_admin_regress 12/12, ui_batch_dups 31/32 (the only failure is expected: a held mock cannot go Live before its override), ui_dup_live (Live works), ui_gate_share 2/2, ui_misfire_empty 5/5, ui_student217 49/52 (the 3 failures are the known /api/dream 503 plus a timing race in the test), storage_dual216 27/27.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "duplicates.section_items signature", "issue": "The signature reads t.get('revision') and t.get('version') from structure.section_tests(), but structure.FIELDS (structure.py line 334) does not project revision or version, so both are always None. The cache key is in effect just the set ids. If a test keeps its id but its question text changes (a studio-made set edited, or any other in-place question update), the alert stays stale until the backend restarts. Book-imported sets are frozen (immutable_import 409), so the reported flows are not affected. Fix: add 'revision': 1, 'version': 1 to FIELDS, or project them in section_items with a separate query. Shown by test_dup_cache211::test_signature_projection_has_revision."},
+      {"endpoint": "misfire.sync", "issue": "take() returns False when an attempt has no ledger, and that attempt is never marked synced. Up to 12 such attempts at the top of the newest-first list would fill every batch and starve newer papers. This is an edge case and was not reproduced."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "UploadDialog batch Pause", "issue": "Pressing Pause while a PDF is being sent sets stopped.current. That same flag goes to sendBook, which then throws 'Paused...' before its next part. runBatch counts this as failed, so the toast is the error '0 of 2 PDFs sent. Press Upload again...' instead of the info 'Paused: x of n PDFs sent'. The row turns red as failed and the button stays 'Upload 2 PDFs'. The info toast only appears if Pause lands on the last part of a file, so in practice users never see it. The half-sent book stays in 'uploading' state on the server. Fix: in runBatch, let the current file finish (don't pass the batch stop flag into sendBook, or check it only between files), or treat the paused error as state 'waiting' rather than 'failed' and still show the info toast.", "selector": "[data-testid=upload-pause]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "MockList duplicate lines", "issues": ["Waiting book mocks now show their upload name, but Live sets made from books still show only their set title, e.g. 'Physics Q1 = Mock 1 Q1, TEST_dup_b_2023 · Mock 1 Q1'. When several Live sets are all called 'Mock 1' they cannot be told apart."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_dup_cache211.py",
+    "/app/backend/tests/test_misfire_dups217.py",
+    "/app/backend/tests/test_duplicates_unit217.py",
+    "/app/backend/tests/publish_fail_iso211.py",
+    "/app/backend/tests/publish_progress_iso217.py",
+    "/app/backend/tests/media_warm_iso217.py",
+    "/app/backend/tests/ui_student211.py",
+    "/app/backend/tests/ui_upload_pause211.py",
+    "/app/backend/tests/ui_dup_new_upload211.py",
+    "/app/backend/tests/ui_batch_dups217.py",
+    "/app/backend/tests/ui_admin_regress217.py",
+    "/app/test_reports/pytest/iter211_api.xml"
+  ],
+  "action_items": [
+    "Batch Pause: let the in-flight PDF finish, or mark it 'waiting' rather than 'failed', so the info toast 'Paused: x of n PDFs sent' really shows (ui_upload_pause211.py reproduces this).",
+    "duplicates.section_items: project 'revision' and 'version' (structure.FIELDS lacks them) so in-place question edits refresh the duplicate cache.",
+    "Optional: use the book/upload title in duplicate match lines for Live sets too, not only for waiting mocks.",
+    "Optional: misfire.sync should not let ledger-less completed attempts take BATCH slots forever."
+  ],
+  "critical_code_review_comments": [
+    "duplicates.py: the signature-keyed cache works for add, remove, Library, restore and new uploads. Set revision/version are not projected, so the signature is ids-only for sets.",
+    "misfire.sync: an HTTPException or ValueError marks the attempt synced; other exceptions leave it for a retry. Sealed live papers are filtered from the projection before the slice. Checked by code review only (no fault injection).",
+    "ShareGate: the fired ref guard is correct. The unmount cleanup also calls fire() if the thanks timer is pending, which is intended.",
+    "UploadDialog line 34: the 'Paused' info branch needs r.failed === 0, but a pause during a send always produces a failure (see the UI bug)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/ui_batch_dups217.py (singular button text, book-title match check, async-generator bug fixed, year read from payload.destination, STAMP env for fresh file bytes)",
+    "/app/backend/tests/ui_admin_regress217.py (mock id from argv)",
+    "/app/backend/tests/test_misfire_dups217.py (reopen-blind assertion)",
+    "/app/backend/tests/test_dup_cache211.py (new)",
+    "/app/backend/tests/publish_fail_iso211.py (new)",
+    "/app/backend/tests/ui_student211.py (new)",
+    "/app/backend/tests/ui_upload_pause211.py (new)",
+    "/app/backend/tests/ui_dup_new_upload211.py (new)"
+  ],
+  "success_rate": {"backend": "96% (all retested fixes pass; 1 minor code finding)", "frontend": "95% (1 medium bug: batch Pause toast)"},
+  "seed_data_creation": "Master bridge: I uploaded TEST_dup_a / TEST_dup_b_2023 / TEST_pyq_2021 / TEST_dup_c through the UI, overrode TEST_dup_a and made it Live. Afterwards I deleted those 4 books by id, with their mocks, pages, cuts, jobs and the Live set. A Try-as-student preview copy may remain in the disposable bridge DB. Student bridge: misfire items were marked done and then reopened (back to open). Temp PDF copies in /tmp/uibridge were removed. No preview or production DB was touched.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The bridges expire by themselves. Restart with: cd /app/backend && setsid nohup python tests/master_bridge181.py 2400 > /tmp/bridge181.log 2>&1 & and the same for analysis_bridge196.py (> /tmp/bridge196.log); wait for READY. Fresh master DB: run STAMP=<unique> python tests/ui_batch_dups217.py first. Re-uploading the same bytes gives the same book id and a deduped job, so STAMP appends bytes. Then run python tests/ui_dup_live217.py <dup_a book> <dup_a mock>, write /tmp/iter217_ids.json (dup_b, pyq, live_set), then pytest tests/test_misfire_dups217.py tests/test_dup_cache211.py -p no:xdist -o addopts=''. ui_admin_regress217.py takes the mock id as argv[1]. ui_dup_live217's 'a set became live' check looks for status 'live', but published sets have status 'published', so that FAIL is a script artifact. ui_student217's home card text check races the summary fetch.",
+  "rca of the issue": "Batch Pause: UploadDialog passes the same `stopped` ref to runBatch and to every sendBook. sendBook checks stopped.current before each part and throws a paused error, so the current file lands in runBatch's catch as failed. As a result r.failed is greater than 0 and the error toast branch runs. Repro: choose 2 PDFs, Upload, press Pause right away. You get the toast 'error: 0 of 2 PDFs sent'; the row shows failed 'Paused. Choose the same PDF again...'; the button reads 'Upload 2 PDFs'."
+}

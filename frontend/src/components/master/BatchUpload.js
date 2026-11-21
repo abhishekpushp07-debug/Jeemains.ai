@@ -8,7 +8,7 @@ export const newRows=files=>files.map((file,i)=>({key:i+':'+file.name,file,year:
 // Many PDFs, one after another: each becomes its own upload, and one failing never stops the rest.
 export async function runBatch(rows,setRows,{sectionId,subject,pyq,stopped}){
  const update=(key,change)=>setRows(list=>list.map(r=>r.key===key?{...r,...change}:r));
- let ok=0,failed=0;
+ let ok=0,failed=0,paused=false;
  for(const r of rows){
   if(r.state==='done'){ok+=1;continue;}
   if(stopped.current)break;
@@ -17,9 +17,12 @@ export async function runBatch(rows,setRows,{sectionId,subject,pyq,stopped}){
    await sendBook({file:r.file,title:r.file.name.replace(/\.pdf$/i,'').slice(0,160),sectionId,replace:'',year:pyq?Number(r.year):null,subject,stopped,
     onProgress:(msg,progress)=>update(r.key,{msg,progress})});
    update(r.key,{state:'done',msg:'Sent. Reading in the background.',progress:1});ok+=1;
-  }catch(e){update(r.key,{state:'failed',msg:e.message});failed+=1;}
+  }catch(e){
+   // A pause is not a failure: the parts already sent are kept and the next Upload carries on from them.
+   if(stopped.current){update(r.key,{state:'waiting',msg:'Paused. Press Upload to carry on from the parts already sent.'});paused=true;break;}
+   update(r.key,{state:'failed',msg:e.message});failed+=1;}
  }
- return {ok,failed};
+ return {ok,failed,paused};
 }
 
 const ICON={waiting:Clock3,sending:Loader2,done:CheckCircle2,failed:XCircle};

@@ -68,6 +68,8 @@ class TestMisfire:
         assert hero.post(f'{S}/api/my/misfire/{it["id"]}/reopen', json={}).status_code == 200
         opened = data(hero.get(f'{S}/api/my/misfire?status=open'))
         assert it['id'] in [i['id'] for i in opened['items']]
+        back = next(i for i in opened['items'] if i['id'] == it['id'])
+        assert back['tries'] == 0 and 'answer' not in back and 'solution_text' not in back and not back.get('last_correct')  # blind again
         # done right after reopen must be blocked again
         assert hero.post(f'{S}/api/my/misfire/{it["id"]}/done', json={}).status_code == 409
 

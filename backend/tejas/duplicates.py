@@ -50,16 +50,19 @@ async def section_items(sid):
     # A test being replaced by a new upload is left out: the new copy is meant to repeat it.
     tests = [t for t in await section_tests(s, e['key']) if not t.get('replace_pending') and t.get('status') != 'withdrawn']
     waiting = {w['id']: w for w in await waiting_items(sid) if w['kind'] == 'book_mock'}
+    ids = [t['id'] for t in tests]
+    heads = {x['id']: (x.get('revision'), x.get('version')) async for x in sets.find({'id': {'$in': ids}}, {'_id': 0, 'id': 1, 'revision': 1, 'version': 1})}
     revs = {m['_id']: m.get('revision', 0) async for m in db.tejas_book_mocks.find({'_id': {'$in': list(waiting)}}, {'_id': 1, 'revision': 1})}
-    sig = (tuple(sorted((t['id'], t.get('revision'), t.get('version')) for t in tests)), tuple(sorted(revs.items())))
-    return sig, [t['id'] for t in tests], waiting
+    sig = (tuple(sorted(heads.items())), tuple(sorted(revs.items())))
+    return sig, ids, waiting
 
 
 async def load_items(ids, waiting):
     items = []
-    async for x in sets.find({'id': {'$in': ids}}, {'_id': 0, 'id': 1, 'title': 1, 'display_title': 1, 'questions.id': 1, 'questions.number': 1,
+    async for x in sets.find({'id': {'$in': ids}}, {'_id': 0, 'id': 1, 'title': 1, 'display_title': 1, 'book_series_title': 1, 'questions.id': 1, 'questions.number': 1,
                                                     'questions.subject': 1, 'questions.accessible_text': 1, 'questions.text': 1}):
-        items.append({'id': x['id'], 'title': x.get('display_title') or x['title'],
+        name, book = x.get('display_title') or x['title'], x.get('book_series_title') or ''
+        items.append({'id': x['id'], 'title': f'{book} · {name}' if book and book not in name else name,
                       'questions': [{'id': q['id'], 'number': q.get('number'), 'subject': q.get('subject'), 'text': q.get('accessible_text') or q.get('text') or ''} for q in x.get('questions', [])]})
     async for m in db.tejas_book_mocks.find({'_id': {'$in': list(waiting)}}, {'_id': 1, 'label': 1, 'chapter': 1, 'questions.id': 1, 'questions.number': 1,
                                                                                 'questions.subject': 1, 'questions.text': 1}):

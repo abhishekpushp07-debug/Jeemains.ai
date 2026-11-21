@@ -5,7 +5,7 @@ sys.path.insert(0, '/app/backend/tests')
 from playwright.async_api import async_playwright
 from ui_master217_lib import open_as, ok, R, BASE, SS
 
-MID = 'd1f8da2c-aeeb-56c7-91bd-a35f9959fcbb'
+MID = sys.argv[1] if len(sys.argv) > 1 else 'd1f8da2c-aeeb-56c7-91bd-a35f9959fcbb'
 
 
 async def main():

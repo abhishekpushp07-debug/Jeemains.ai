@@ -7,13 +7,19 @@ from ui_master217_lib import open_as, ok, R, BASE, SS, mongo
 
 MOCKS, PYQ = 'jee-main:mocks', 'jee-main:pyq'
 A, Bp = '/tmp/uibridge/TEST_dup_a.pdf', '/tmp/uibridge/TEST_dup_b_2023.pdf'
-shutil.copy('/tmp/uibridge/dup_a.pdf', A); shutil.copy('/tmp/uibridge/dup_b.pdf', Bp)
+import os
+STAMP = os.environ.get('STAMP', '').encode()
+def cp(src, dst):
+    shutil.copy(src, dst)
+    if STAMP:
+        open(dst, 'ab').write(b'\n%' + STAMP + b'\n')
+cp('/tmp/uibridge/dup_a.pdf', A); cp('/tmp/uibridge/dup_b.pdf', Bp)
 C1, C2 = '/tmp/uibridge/TEST_pyq_2021.pdf', '/tmp/uibridge/TEST_pyq_x.pdf'
-shutil.copy('/tmp/uibridge/dup_a.pdf', C1); shutil.copy('/tmp/uibridge/dup_b.pdf', C2)
+cp('/tmp/uibridge/dup_a.pdf', C1); cp('/tmp/uibridge/dup_b.pdf', C2)
 
 
 def books(sec):
-    return json.loads(mongo("JSON.stringify(db.tejas_books.find({'payload.section_id':'%s'},{state:1,'payload.filename':1,'payload.title':1,'payload.year':1}).toArray())" % sec) or '[]')
+    return json.loads(mongo("JSON.stringify(db.tejas_books.find({'payload.section_id':'%s'},{state:1,'payload.filename':1,'payload.title':1,'payload.year':1,'payload.destination.year':1}).toArray())" % sec) or '[]')
 
 
 def mocks_of(bid):
@@ -82,7 +88,10 @@ async def run(pw):
         print('toasts', toasts)
         ok('batch failure: error toast "1 of 2 PDFs sent"', any('1 of 2 PDFs sent' in t for t in toasts), toasts)
         bt = (await page.text_content('[data-testid="upload-send"]')).strip() if still else ''
-        ok('batch failure: button now "Upload 1 PDFs"', bt.startswith('Upload 1'), bt)
+        ok('batch failure: button now "Upload 1 PDF" (singular)', bt == 'Upload 1 PDF', bt)
+        lbl = await page.evaluate("() => document.querySelector('[data-testid=\"upload-dialog\"]').innerText")
+        ok('batch failure: label "1 PDF chosen" or "2 PDFs chosen" (no "1 PDFs")', '1 PDFs' not in lbl, lbl[:300])
+        print('dialog text', lbl[:400])
         await page.screenshot(path=f'{SS}/batch-failed.jpg', quality=40)
         n_posts = len(posts)
         if still:
@@ -112,9 +121,11 @@ async def run(pw):
                 await page.click(sel + ' summary')
                 items = await page.locator(f'[data-testid^="mock-duplicate-{mid}-"]').all_text_contents()
                 print('  items', items)
+                ok(f'dups: mock {mid[:8]} match lines show book title', all(('TEST_dup_a' in t or 'TEST_dup_b_2023' in t) for t in items), items)
                 q3 = [q['id'] for q in m['questions'] if q.get('number') == 3]
+                q3_vis = [await page.is_visible(f'[data-testid="mock-duplicate-{mid}-{q}"]') for q in q3]
                 ok(f'dups: mock {mid[:8]} 2 items, Q3 not flagged', len(items) == 2 and all('Q3' not in t.split('=')[0] for t in items)
-                   and not any(await page.is_visible(f'[data-testid="mock-duplicate-{mid}-{q}"]') for q in q3), items)
+                   and not any(q3_vis), items)
                 color = await page.evaluate(f"() => getComputedStyle(document.querySelector('{sel} summary')).color")
                 print('  summary color', color)
         await page.screenshot(path=f'{SS}/dups-list.jpg', quality=40)
@@ -158,7 +169,7 @@ async def run(pw):
         ok('pyq single: dialog closed after upload', not await page.is_visible('[data-testid="upload-dialog"]'))
         pb = await settle(PYQ, 1)
         print('pyq books', pb)
-        ok('pyq single: year saved', pb and pb[0]['payload'].get('year') in (2021, '2021'), pb)
+        ok('pyq single: year saved', pb and (pb[0]['payload'].get('year') or (pb[0]['payload'].get('destination') or {}).get('year')) in (2021, '2021'), pb)
         await open_type(page, PYQ); await page.wait_for_timeout(1500)
         nd = await page.locator('[data-testid^="mock-duplicates-"]').count()
         ok('cross-section: no duplicate alert in PYQ', nd == 0, nd)
