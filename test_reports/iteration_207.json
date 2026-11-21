@@ -1,0 +1,20 @@
+{
+  "summary": "Frontend-only retest of the iteration_206 fixes plus a full regression on desktop 1920x800 and mobile 390x844 against the freshly restarted disposable bridge (:8772); /api was routed at the browser context level and the preview DB was never touched. ui_verify212 (all walks: master proofbox tryst live solutions boxfix) passed 129/129. boxfix was run once, so the bridge's boxed_held/_mob fixtures are now mutated. ui_verify211 (student results proof typed plain) passed 80/80. ui_tryst_extra213 (Try as student new tab, toast, back link, popup-blocked fallback, MockList rows) passed 30/30. New ui_cut_autoadvance214 passed 24/24. It covers the draw-first flow: draw -> 'Yeh hissa kiska hai?' -> Sawaal -> A armed; tapping the armed A again keeps it armed; drawing A, B, C and D each arms the next letter; after D the tool switches to Box hilao; next-letter order wraps to Sawaal after D. A MutationObserver race watcher found no moment where 'Saare check paas' showed while 'Check ho raha hai…' was showing or Save was disabled. New ui_class_wait214 passed 4/4: 'Abhi 1 student ne diya hai.' on desk and mob. Fresh results_mob screenshot confirms the singular. Options were stacked everywhere, with no horizontal overflow and no API or page errors in any walk. Total 267/267.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Analysis Overview / explain.js / charts.js", "issues": ["Possible '1 students' plural slips that were not reproduced: Overview.js rank sub '${o.of} students mein' and the topper line, explain.js 'Is paper ke ${n} students mein', charts.js aria-label '${dist.n} students'. These could read '1 students' when the class size is 1. Low priority."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/ui_verify212.py", "/app/backend/tests/ui_verify211.py", "/app/backend/tests/ui_tryst_extra213.py", "/app/backend/tests/ui_cut_autoadvance214.py", "/app/backend/tests/ui_class_wait214.py"],
+  "action_items": ["Optional: apply the same n===1 singular rule in Overview.js (o.of), explain.js (klass n) and charts.js (dist.n)."],
+  "critical_code_review_comments": ["CutTool after()/drawn()/choose() is correct: choose(key) with nothing pending now only sets the target (no toggle-off), and after() wraps round and skips keys that already have boxes.", "-good is gated on !checking, which removes the Save race.", "CutTool.js is still a long, dense file written as one-liners, which makes it hard to maintain. Consider splitting it."],
+  "updated_files": ["/app/backend/tests/ui_cut_autoadvance214.py", "/app/backend/tests/ui_class_wait214.py"],
+  "success_rate": {"backend": "skipped (frontend only)", "frontend": "100% (267/267)"},
+  "seed_data_creation": "None. Only the bridge's disposable DB was used. The boxfix walk saved boxed_held/_mob there once (expected). ui_cut_autoadvance214 does not save.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Bridge on 127.0.0.1:8772 has already run boxfix. Restart it before re-running ui_verify212 boxfix (command in /app/memory/test_credentials.md). ui_cut_autoadvance214 and ui_class_wait214 are non-mutating and can be re-run at any time."
+}

@@ -1,3 +1,12 @@
+## Status — 2026-11-21 (later): Phase 1 verified 100% in preview (NOT deployed)
+- Owner request this turn: "Pehle bug theek karo, phir poora test"; "Try as student dabane par naye tab mein student wala paper khule"; "Remember, we are building the world's fastest, best, perfect, highly capable, and highly powerful machine."
+- Try as student bug: the Fix/Proof page of an already-Live mock got 404 "This Draft is not available to try". Now (draft_preview.live_copy) the owner gets the real Live paper in preview mode (preview attempt, never scored); reviewers still only unpublished Drafts. Drafts build in ~0.5 s.
+- Try as student now opens a NEW TAB (/sets/<id>?preview=true&back=<fix page>); Fix page stays in the first tab; 'Back to Master' link (back param only accepted if it starts with /super-admin); popup blocked → same tab.
+- Fix tool: after tapping a printed box / drawing and choosing a letter, the next letter after it is armed (wraps round); tapping an armed letter keeps it armed; 'Saare check paas' hidden while a check runs (no Save race). '1 student' singular in Solutions class text.
+- Tests: testing agent iteration_206 (backend 58/58 + 6/6) and iteration_207 frontend 267/267 desk 1920 + mobile 390. Test harness now routes /api at browser-context level (new tabs). Bridge DB dropped.
+- Open (cosmetic, not fixed): possible '1 students' wording in Overview.js/explain.js/charts.js when class size is 1; phone default zoom of pictures is small.
+
+
 ## Status — 2026-11-21: PDF Engine 2.0 Phase 1 DONE in preview after the rollback (NOT deployed). Details: memory/RECOVERY_2026-11-21.md
 - Owner's rollback (~09:29 UTC) had no git checkpoint after 20 Nov 22:46, so the code went back to the pause state and the whole overnight work was lost.
 - Recovered EXACT copies (not rewritten) from platform-saved file views, a saved git diff, the leftover compiled book_pdf_worker and the dev-server caches: printed boxes first, a/A separation, full-page fix tool (draw → "kiska hai", or pick → draw with auto-next, tap printed box, "5 chhape boxes laga do", live preview, override), boxed-book reader fixes (READER_VERSION 5, CUT_VERSION 2). The 2x2 option grid was NOT restored.
