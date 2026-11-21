@@ -33,7 +33,7 @@ export async function sendBook({file,title,sectionId,replace,year,subject,onProg
  onProgress('Checking the file…',0);
  const book=await post('/admin/books',{filename:file.name,title,sha256:await sha(await file.arrayBuffer()),size:file.size,rights_confirmed:true,section_id:sectionId,
   ...(year?{year}:{}),...(subject?{subject}:{}),...(replace==='all'?{replace_all:true}:replace?{replace_ids:replace.split(',')}:{})});
- if(book.state!=='uploading'){onProgress(book.state==='failed'?'Same PDF again: carrying on from the saved pages.':'This PDF is already here. Opening its progress.',1);return book.id;}
+ if(book.state!=='uploading'){onProgress((book.message||'').startsWith('Same PDF chosen again')?'Same PDF again: carrying on from the saved pages.':'This PDF is already here. Opening its progress.',1);return book.id;}
  const total=Math.ceil(file.size/book.chunk_size),have=new Set(book.received_parts),size=i=>Math.min(book.chunk_size,file.size-i*book.chunk_size);
  const todo=[];let sent=0,done=have.size,failure=null;
  for(let i=0;i<total;i++){if(have.has(i))sent+=size(i);else todo.push(i);}
