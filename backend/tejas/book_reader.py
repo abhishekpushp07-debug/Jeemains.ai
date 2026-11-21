@@ -1,9 +1,9 @@
 import re
 from .book_models import Region, PageMap
 from .pdf_organiser_worker import ANCHOR, SUBJECT, choose_options
-from .chapter_reader import find as chapter_marks, exercise
+from .chapter_reader import find as chapter_marks, exercise, norm
 
-READER_VERSION=4
+READER_VERSION=5
 MOCK=re.compile(r'^(?:(?:jee\s*main|jee|bitsat|comedk)\s+)?(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,3})\b',re.I)
 ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,3}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
 BARE=re.compile(r'^(?:(Q)(?:uestion)?\.?\s*)?(\d{1,3})\s*[.):]$',re.I)
@@ -34,6 +34,7 @@ def mock_title(value):
 
 def band(line):
     """Running header/footer: short lines in the top or bottom page margin."""
+    if line.get('body'):return False
     _,y0,_,y1=line['rect'];text=line['text'].strip()
     return (y1<=TOP and len(text)<60) or (y0>=BOTTOM and len(text)<90)
 
@@ -132,7 +133,9 @@ def chapter_headings(lines, context):
         return [],set()
     marks,used=chapter_marks(lines,context.get('chapter_info') or {},band)
     if context.get('plan'):
-        return [m for m in marks if m['role'] and m['label']==context.get('mock')],set()
+        # A chapter that is itself called 'Solutions' prints 'CH 09 / Solutions' on every page: that is its name, not the start of worked solutions.
+        own=re.sub(r'^\d+\s*','',norm(((context.get('chapter_info') or {}).get(context.get('mock')) or {}).get('title')))
+        return [m for m in marks if m['role'] and m['label']==context.get('mock') and not (m.get('bare') and own in ('solution','solutions'))],set()
     return marks,used
 
 
@@ -215,6 +218,10 @@ def printed_keys(value, role):
 
 def read_page(lines, previous, geometry=(), images=()):
     context=dict(previous); regions=[]; issues=[]
+    # A tall page prints its first 'Question N' heading inside the top margin: that heading, and what is printed beside or under it, is the page's body and not a running header.
+    high=[x['rect'][1] for x in lines if x['rect'][3]<=TOP+.02 and (anchor_of(x) or (0,False))[1]]
+    for x in lines:
+        if high and x['rect'][3]<=TOP+.03 and x['rect'][1]>=min(high)-.004:x['body']=True
     text='\n'.join(x['text'] for x in lines)
     if not lines:
         return PageMap(issues=['Scanned or empty page: approve AI reading or map the original page manually.']),context
@@ -239,7 +246,7 @@ def read_page(lines, previous, geometry=(), images=()):
             return page_map('mixed',keys.regions+rest.regions,keys.issues+rest.issues),context
     if context.get('plan') and context.get('role')=='key' and not any(anchor_of(x) for x in body):
         # The book's own bookmarks say this page is an answer key: a table of bare numbers is read as one.
-        pairs=key_cells(body,3)
+        pairs=key_cells(body,1)
         if pairs:return read_keys(lines,body,pairs,context)
     headers,anchors=scan_headers(lines,text,context,issues)
     page_role=next((v for y,k,v in headers if k=='role' and y<0),context.get('role'))

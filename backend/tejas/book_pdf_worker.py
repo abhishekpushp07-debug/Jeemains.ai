@@ -45,7 +45,12 @@ def visible_images(page, images, lines, drawn):
     out = []
     for b in images:
         x0, y0, x1, y1 = max(0, int(b[0])), max(0, int(b[1])), min(W, int(b[2]) + 1), min(H, int(b[3]) + 1)
-        if x1 > x0 and y1 > y0 and int(ink[y0:y1, x0:x1].sum()) > max(12, .002 * (x1 - x0) * (y1 - y0)):
+        part = ink[y0:y1, x0:x1] if x1 > x0 and y1 > y0 else None
+        if part is not None and int(part.sum()) > max(12, .002 * (x1 - x0) * (y1 - y0)):
+            if b[0] < -2 or b[1] < -2 or b[2] > W + 2 or b[3] > H + 2:
+                # A picture placed partly off the page is cut down by a clip path: its box is where its ink really is.
+                ys, xs = np.flatnonzero(part.any(axis=1)), np.flatnonzero(part.any(axis=0))
+                b = [x0 + int(xs[0]), y0 + int(ys[0]), x0 + int(xs[-1]) + 1, y0 + int(ys[-1]) + 1]
             out.append(b)
     return out
 

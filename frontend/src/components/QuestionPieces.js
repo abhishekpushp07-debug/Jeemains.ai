@@ -71,7 +71,8 @@ const WORDS={right:'Sahi jawab',mine:'Aapka jawab',both:'Aapka jawab · Sahi'};
 export function PieceOptions({pieces,options,labels={},typed={},draw,mode='answer',name,value,onPick,disabled=false,correct=[],response,words=WORDS,testPrefix='player'}){
  const s=useContext(Scale);
  const firstPicture=options.find(key=>!typed[key]&&pieces.some(p=>p.part===key));
- return <div className={'piece-options is-'+mode} data-testid={testPrefix+'-piece-options'}>{options.map(key=>{
+ // Options always sit one below another, each card as wide as the question, however the book printed them.
+ return <div className={'piece-options is-stack is-'+mode} data-layout="stack" data-testid={testPrefix+'-piece-options'}>{options.map(key=>{
   const i=pieces.findIndex(p=>p.part===key),label=labels[key]||key;
   // An option the owner typed is shown as text; every other option shows its own picture from the book.
   const body=typed[key]?<div className="piece-typed" data-testid={`${testPrefix}-option-math-${key}`}><MathText text={typed[key]}/></div>

@@ -305,7 +305,7 @@ def cut_view(q, mock):
     if not cut:return None
     own=mock.cuts.get(slot(q.get('coverage_key',''))) or {}
     return {'status':cut['status'],'reason':cut.get('reason',''),'arrangement':cut.get('arrangement',''),'mode':cut.get('mode','auto'),'accept_outside':bool(cut.get('accept_outside')),
-            'region':cut['region'],'labels':cut.get('labels',[]),'parts':cut.get('parts',[]),'draft':own.get('boxes') or cut.get('draft') or {}}
+            'region':cut['region'],'labels':cut.get('labels',[]),'parts':cut.get('parts',[]),'frames':cut.get('frames',[]),'draft':own.get('boxes') or cut.get('draft') or {}}
 
 
 def question_problems(mock, everything=False):

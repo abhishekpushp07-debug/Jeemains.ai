@@ -6,7 +6,7 @@ Test phone +12025550184 access to fixture qa75-ed384de5-896c-4d2a-abd6-ffb9cbde9
 import requests
 import sys
 
-BASE_URL = "https://tejas-analysis--2bbp29h1.preview.emergentagent.com"
+BASE_URL = "https://pdf-engine-v2--49kthst3.preview.emergentagent.com"
 PHONE = "+12025550184"
 FIXTURE_ID = "qa75-ed384de5-896c-4d2a-abd6-ffb9cbde94d0"
 

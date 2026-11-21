@@ -1,6 +1,6 @@
 # Browser-only read-only API fixtures for Home visual QA (iteration 149). Paste into browser_automation.
 import json
-BASE='https://tejas-analysis--2bbp29h1.preview.emergentagent.com'
+BASE='https://pdf-engine-v2--49kthst3.preview.emergentagent.com'
 writes=[]
 GUEST={'v':False}
 async def handler(route):

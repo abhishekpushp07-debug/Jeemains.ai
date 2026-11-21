@@ -1,0 +1,163 @@
+<analysis>**original_problem_statement**: 
+The user is building **Super Admin PDF Engine 2.0 (Phase 1)**. The system recently underwent a rollback. The user has provided a comprehensive recovery and implementation plan. 
+Core Product Requirements:
+- **Rollback Verification:** Run full system checks to ensure the engine state is stable post-rollback.
+- **Rebuild Lost Features:** Re-implement printed boxes priority, a/A separation, and the full-page Admin Fix tool.
+- **UI Layout (Ek ke neeche ek):** Options A, B, C, and D MUST be stacked vertically (one below the other, full width) on ALL screens (Test, Result, Proof view, Fix tool preview) for both mobile and desktop.
+- **Strictly NO AI:** The PDF reader must use strictly spatial data (PyMuPDF). No AI is allowed to read the PDF.
+- Once Phase 1 is verified via testing, update PRD and finish the task.
+
+**User's preferred language**: (INSTRUCT NEXT AGENT: You MUST respond to the user and write UI copy strictly in **Roman Hinglish / Hindi**).
+
+**what currently exists?** 
+The application underwent a rollback. The core PDF cutting logic (, ) uses strictly spatial PyMuPDF logic. The user has provided a detailed Phase 1 execution plan in Roman Hinglish to verify the system, rebuild lost features, and enforce a vertical options layout. The agent is currently waiting for the user's response to an  call before beginning execution.
+
+**Last working item**:
+    - Last item agent was working: The agent received the user's detailed rollback recovery plan and initiated an  call to confirm the start of execution.
+    - Status: USER VERIFICATION PENDING (Waiting for user response to )
+    - Agent Testing Done: N
+    - Which testing method agent to use? both (Backend for PDF parsing verification, Frontend/Screenshot for UI layout, then  for E2E).
+    - User Testing Done: N
+
+**All Pending/In progress Issue list**:  
+  Issue 1: Rollback Verification & Rebuilding Lost Features (P0)
+     - Attempted fixes: None yet. Plan just received.
+     - Next debug checklist: Run tests to verify engine state post-rollback. Re-implement printed boxes priority, a/A separation, and full-page fix tool as per the user's detailed plan.
+     - Why fix this issue and what will be achieved with the fix? Restores the system to the desired state before the rollback and ensures core PDF parsing works correctly.
+     - Status: NOT STARTED
+     - Is recurring issue? N
+     - Should Test frontend/backend/both after fix? both
+     - Blocked on other issue: NA
+
+  Issue 2: Options Layout - Ek ke neeche ek & UI Test Failures (P0)
+     - Attempted fixes: None yet.
+     - Next debug checklist: Update , , and  so options A, B, C, D stack vertically full-width on all screens for both mobile and desktop. Fix the 8 failing UI tests in  that were failing prior to the rollback plan discussion.
+     - Why fix this issue and what will be achieved with the fix? Fulfills strict user requirements for the UI and ensures E2E tests pass.
+     - Status: NOT STARTED
+     - Is recurring issue? N
+     - Should Test frontend/backend/both after fix? frontend
+     - Blocked on other issue: NA
+
+**In progress Task List**:
+  Task 1: Execute Phase 1 PDF Engine 2.0 (Post-Rollback)
+     - Where to resume: Review the user's response to the pending  call. Execute Phase 1: 1) System check, 2) Rebuild lost features (boxes, a/A, fix tool), 3) Implement vertical options layout, 4) Run E2E testing. Finally, update PRD and finish.
+     - What will be achieved with this? Stable completion of Phase 1.
+     - Status: BLOCKED (Waiting for user response)
+     - Should Test frontend/backend/both after fix? both
+     - Blocked on something: User response to .
+
+**Upcoming and Future Tasks**
+  Task 1: Chipke hue (Touching/Overlapping) Options Fallback (P1)
+  - Deferred explicitly by the user until Phase 1 is 100% complete and passed.
+  
+  Task 2: Phase 2 PDF Engine (P2)
+  - App guide and PDF format guide page creation.
+  - Harder layouts cut automatically (diagram beside options, option running onto next page, two-column pages).
+  - Scanned (photo) PDFs with text found via server (No AI credits).
+  - Options that are plain words shown as real text.
+  - Read again button for Drafts.
+  - Solution pictures trimmed the same way.
+
+  Task 3: Phase 3 & Parked Tasks (P2)
+  - Question bank, Owner paper report, Faster checking of big books, Galti Notebook, Subject Rank & Percentile calculations, Seekh Reminder.
+
+**Completed work in this session**
+- Received and processed the user's detailed rollback recovery plan.
+- Initiated plan confirmation via .
+
+**Earlier issues found/mentioned but not fixed**
+   Issue 1: Heavy Test Script Timeouts
+   - Debug checklist: Isolated backend python testing scripts sometimes time out or hit resource limits when processing thousands of pages concurrently.
+   - Why to solve this issue and what will be achieved with this? Prevents false negatives and system hangs.
+   - Should Test frontend/backend/both after fix: backend
+   - Is recurring issue? Y
+
+**Known issue recurrence from previous fork**
+  - Issue recurrence in previous fork: None significant.
+  - Recurrence count: 0
+  - Status: RESOLVED
+  
+**Code Architecture**
+- Frontend: React ()
+- Backend: FastAPI (), Python test scripts ()
+- Database: MongoDB
+
+**Key Technical Concepts**
+- PyMuPDF () for explicit spatial bounding box extraction and printed shape detection. STRICTLY NO AI.
+- Custom Shadcn-style React components for Admin Tool and Student View.
+
+**key DB schema**
+  - , , , , 
+
+**changes in tech stack**
+  - None
+
+**All files of reference** 
+  -  (Core spatial logic)
+  -  (PDF reader parsing logic)
+  -  (Admin Fix tool UI)
+  -  (Admin Fix tool styling)
+  -  (Student screen rendering)
+  -  (Student view styling, needs update for vertical layout)
+  -  (E2E testing script)
+  - 
+
+**Areas that need refactoring**
+- CSS structures in  for  and  are getting complicated and causing headless test assertion failures. They need to be simplified to support the vertical layout requirement.
+
+**key api endpoints**
+  - 
+  - 
+
+**Critical Info for New Agent** 
+- **LANGUAGE REQUIREMENT**: You **MUST** communicate with the user and write all UI copy strictly in **Roman Hinglish / Hindi**.
+- **NO AI:** Continue to use strict PyMuPDF spatial logic for the engine. Do not attempt to use LLMs or OCR for reading the PDF.
+- **ROLLBACK CONTEXT:** The user provided a detailed plan in Roman Hinglish to recover from a rollback. Follow their Phase 1 plan strictly: verify the system, rebuild lost features, and enforce the ek ke neeche ek layout on all screens.
+- **DATABASE SAFETY:** The script () *only* drops dynamically created disposable test databases (). DO NOT drop or mutate the production application database. 
+- **DEFERRED TASK:** The user explicitly commanded to defer the overlapping text issue (chipke hue) to Phase 2. Do NOT work on it now.
+
+**documents and test reports created in this job**
+  - 
+  - 
+
+**Last 10 User Messages and any pending HUMAN messages** 
+ - (User) Provided previous handoff summary.
+ - (User) Please use ask_human tool and confirm your plan now.
+ - (Agent) Called , ERROR: Please provide a comma-separated list of file or directory paths, and .
+ - (User) Provided detailed rollback recovery plan in Roman Hinglish (PDF Engine 2.0: rollback ke baad jaanch...).
+ - (Agent) Called . **(Pending human response to )**.
+
+**Project Health Check:**
+- Broken: Frontend UI tests () were failing assertions on the student/proof views prior to the rollback discussion. System needs verification post-rollback.
+
+**3rd Party Integrations** 
+None required. (Strictly NO AI).
+
+**Testing status**
+  - Testing agent used after significant changes: NO 
+  - Troubleshoot agent used after agent stuck in loop: NO
+  - Test files created: , .
+  - Known regressions: N/A (Needs post-rollback verification).
+
+**Credentials to test flow:**
+Check 
+
+**What agent forgot to execute**
+The agent is waiting for the user's response to . Once received, the agent must execute the Phase 1 rollback recovery plan.
+
+**Debugging checklist for current issue**
+    Issue: Execute Phase 1 Rollback Recovery & Vertical Layout Update
+    Frontend files to check: 
+    - 
+    - 
+    Backend files to check:
+    - 
+    Steps:
+    1. Read the user's response to the pending  call.
+    2. Run system checks (tests) to verify the current state post-rollback.
+    3. Re-implement the lost features: printed boxes logic, a/A differentiation, and full-page fix tool UI.
+    4. Adjust  and  so the 4 options stack vertically, taking full width (Ek ke neeche ek, poori chaudai me) on all screens (mobile and desktop).
+    5. Take screenshots of the student view and Fix Tool to visually verify.
+    6. Call the  requesting a full E2E flow test.
+    7. Update  to mark Phase 1 as complete.
+    8.  the task.</analysis>

@@ -1,0 +1,157 @@
+diff --git a/backend/tejas/book_cuts.py b/backend/tejas/book_cuts.py
+index 07c0f84..10ea9e1 100644
+--- a/backend/tejas/book_cuts.py
++++ b/backend/tejas/book_cuts.py
+@@ -49,6 +49,9 @@ def assemble(sha, regions, items, at, drawn, over, found):
+     for i, item in enumerate(items):
+         cut = found[cut_key(sha, item)]
+         own = i == at and bool(item['labels'] or item['action'] == 'boxes')
++        if i == at:
++            # The printed boxes of the page, so the fix tool can pick a whole box with one tap.
++            out['frames'] = cut.get('frames', [])
+         if cut['status'] == 'held' or (own and cut['status'] not in ('ok', 'manual')):
+             return held(cut.get('reason') or 'Page ka yeh hissa kat nahi paya.', cut if own else None)
+         if own:
+diff --git a/backend/tejas/book_imports.py b/backend/tejas/book_imports.py
+index 3ce3fe2..4d0b4a7 100644
+--- a/backend/tejas/book_imports.py
++++ b/backend/tejas/book_imports.py
+@@ -305,7 +305,7 @@ def cut_view(q, mock):
+     if not cut:return None
+     own=mock.cuts.get(slot(q.get('coverage_key',''))) or {}
+     return {'status':cut['status'],'reason':cut.get('reason',''),'arrangement':cut.get('arrangement',''),'mode':cut.get('mode','auto'),'accept_outside':bool(cut.get('accept_outside')),
+-            'region':cut['region'],'labels':cut.get('labels',[]),'parts':cut.get('parts',[]),'draft':own.get('boxes') or cut.get('draft') or {}}
++            'region':cut['region'],'labels':cut.get('labels',[]),'parts':cut.get('parts',[]),'frames':cut.get('frames',[]),'draft':own.get('boxes') or cut.get('draft') or {}}
+ 
+ 
+ def question_problems(mock, everything=False):
+diff --git a/backend/tejas/book_pdf_worker.py b/backend/tejas/book_pdf_worker.py
+index c4a5fd6..34b7355 100644
+--- a/backend/tejas/book_pdf_worker.py
++++ b/backend/tejas/book_pdf_worker.py
+@@ -45,7 +45,12 @@ def visible_images(page, images, lines, drawn):
+     out = []
+     for b in images:
+         x0, y0, x1, y1 = max(0, int(b[0])), max(0, int(b[1])), min(W, int(b[2]) + 1), min(H, int(b[3]) + 1)
+-        if x1 > x0 and y1 > y0 and int(ink[y0:y1, x0:x1].sum()) > max(12, .002 * (x1 - x0) * (y1 - y0)):
++        part = ink[y0:y1, x0:x1] if x1 > x0 and y1 > y0 else None
++        if part is not None and int(part.sum()) > max(12, .002 * (x1 - x0) * (y1 - y0)):
++            if b[0] < -2 or b[1] < -2 or b[2] > W + 2 or b[3] > H + 2:
++                # A picture placed partly off the page is cut down by a clip path: its box is where its ink really is.
++                ys, xs = np.flatnonzero(part.any(axis=1)), np.flatnonzero(part.any(axis=0))
++                b = [x0 + int(xs[0]), y0 + int(ys[0]), x0 + int(xs[-1]) + 1, y0 + int(ys[-1]) + 1]
+             out.append(b)
+     return out
+ 
+diff --git a/backend/tejas/book_reader.py b/backend/tejas/book_reader.py
+index 9f2ccc5..9a4d23f 100644
+--- a/backend/tejas/book_reader.py
++++ b/backend/tejas/book_reader.py
+@@ -1,9 +1,9 @@
+ import re
+ from .book_models import Region, PageMap
+ from .pdf_organiser_worker import ANCHOR, SUBJECT, choose_options
+-from .chapter_reader import find as chapter_marks, exercise
++from .chapter_reader import find as chapter_marks, exercise, norm
+ 
+-READER_VERSION=4
++READER_VERSION=5
+ MOCK=re.compile(r'^(?:(?:jee\s*main|jee|bitsat|comedk)\s+)?(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,3})\b',re.I)
+ ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,3}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
+ BARE=re.compile(r'^(?:(Q)(?:uestion)?\.?\s*)?(\d{1,3})\s*[.):]$',re.I)
+@@ -34,6 +34,7 @@ def mock_title(value):
+ 
+ def band(line):
+     """Running header/footer: short lines in the top or bottom page margin."""
++    if line.get('body'):return False
+     _,y0,_,y1=line['rect'];text=line['text'].strip()
+     return (y1<=TOP and len(text)<60) or (y0>=BOTTOM and len(text)<90)
+ 
+@@ -132,7 +133,9 @@ def chapter_headings(lines, context):
+         return [],set()
+     marks,used=chapter_marks(lines,context.get('chapter_info') or {},band)
+     if context.get('plan'):
+-        return [m for m in marks if m['role'] and m['label']==context.get('mock')],set()
++        # A chapter that is itself called 'Solutions' prints 'CH 09 / Solutions' on every page: that is its name, not the start of worked solutions.
++        own=re.sub(r'^\d+\s*','',norm(((context.get('chapter_info') or {}).get(context.get('mock')) or {}).get('title')))
++        return [m for m in marks if m['role'] and m['label']==context.get('mock') and not (m.get('bare') and own in ('solution','solutions'))],set()
+     return marks,used
+ 
+ 
+@@ -215,6 +218,10 @@ def printed_keys(value, role):
+ 
+ def read_page(lines, previous, geometry=(), images=()):
+     context=dict(previous); regions=[]; issues=[]
++    # A tall page prints its first 'Question N' heading inside the top margin: that heading, and what is printed beside or under it, is the page's body and not a running header.
++    high=[x['rect'][1] for x in lines if x['rect'][3]<=TOP+.02 and (anchor_of(x) or (0,False))[1]]
++    for x in lines:
++        if high and x['rect'][3]<=TOP+.03 and x['rect'][1]>=min(high)-.004:x['body']=True
+     text='\n'.join(x['text'] for x in lines)
+     if not lines:
+         return PageMap(issues=['Scanned or empty page: approve AI reading or map the original page manually.']),context
+@@ -239,7 +246,7 @@ def read_page(lines, previous, geometry=(), images=()):
+             return page_map('mixed',keys.regions+rest.regions,keys.issues+rest.issues),context
+     if context.get('plan') and context.get('role')=='key' and not any(anchor_of(x) for x in body):
+         # The book's own bookmarks say this page is an answer key: a table of bare numbers is read as one.
+-        pairs=key_cells(body,3)
++        pairs=key_cells(body,1)
+         if pairs:return read_keys(lines,body,pairs,context)
+     headers,anchors=scan_headers(lines,text,context,issues)
+     page_role=next((v for y,k,v in headers if k=='role' and y<0),context.get('role'))
+diff --git a/backend/tejas/chapter_reader.py b/backend/tejas/chapter_reader.py
+index a7d766e..281dcd1 100644
+--- a/backend/tejas/chapter_reader.py
++++ b/backend/tejas/chapter_reader.py
+@@ -240,7 +240,7 @@ def find(lines, known, band):
+         for k in ('number', 'title', 'subject'):
+             if h.get(k) and not rec.get(k):
+                 rec[k] = h[k]
+-        out.append({'y': line['rect'][1], 'label': label, 'role': h['role'], 'record': dict(rec), 'rows': [line['rect'][1]] + [lines[j]['rect'][1] for j in mine]})
++        out.append({'y': line['rect'][1], 'label': label, 'role': h['role'], 'bare': h['bare_role'], 'record': dict(rec), 'rows': [line['rect'][1]] + [lines[j]['rect'][1] for j in mine]})
+     return out, used
+ 
+ 
+diff --git a/backend/tests/chapters_iso182.py b/backend/tests/chapters_iso182.py
+index 1365c71..409a25a 100644
+--- a/backend/tests/chapters_iso182.py
++++ b/backend/tests/chapters_iso182.py
+@@ -88,7 +88,11 @@ async def main():
+         pid = await send(own, Path(SRC).read_bytes(), 'Physics chapters')
+         ms = await mocks(pid)
+         check('real PDF: 30 chapter tests', len(ms) == 30, len(ms))
+-        check('real PDF: every chapter ready with 50 questions', all(m['state'] == 'ready' and len(m['questions']) == 50 for m in ms), [(m['label'], m['state'], len(m['questions']), m['issues'][:1]) for m in ms if m['state'] != 'ready' or len(m['questions']) != 50][:3])
++        # PDF Engine 2.0 holds a question whose options touch (no blank line between A and C) instead of guessing: physics ch15 Q33 and ch21 Q38.
++        waits = {m['label']: m['issues'] for m in ms if m['state'] != 'ready'}
++        check('real PDF: every chapter has 50 questions; only the two questions whose options touch are held', all(len(m['questions']) == 50 for m in ms) and set(waits) == {'Chapter 15', 'Chapter 21'}
++              and all(len(v) == 1 and 'khaali jagah nahi' in v[0] for v in waits.values()) and 'Q33' in waits['Chapter 15'][0] and 'Q38' in waits['Chapter 21'][0],
++              [(m['label'], m['state'], len(m['questions']), m['issues'][:2]) for m in ms if m['state'] != 'ready' or len(m['questions']) != 50][:4])
+         check('real PDF: chapter names read', [m['chapter']['title'] for m in ms[:3]] == ['Units & Measurements', 'Kinematics', 'Laws of Motion'], [m.get('chapter') for m in ms[:3]])
+         check('real PDF: subject read from the PDF', all(m['chapter']['subject'] == 'Physics' for m in ms), {m['chapter'].get('subject_from') for m in ms})
+         r = await own.get(f'/api/admin/master/chapters/{pid}')
+diff --git a/backend/tests/typed_delete_iso185.py b/backend/tests/typed_delete_iso185.py
+index b515d61..fc1efe7 100644
+--- a/backend/tests/typed_delete_iso185.py
++++ b/backend/tests/typed_delete_iso185.py
+@@ -68,7 +68,8 @@ async def typed_tests(own, rev, stu, sec, slug):
+     q0 = next((x for x in p.get('questions', []) if x['number'] == 2), {})
+     if m.get('state') == 'held':  # parser holds a 2-option question: confirm it as a 2-option MCQ first so the mock is READY
+         r = await own.post(base + '/fix', json={'revision': p['revision'], 'question_id': q0.get('id'), 'response_type': 'mcq', 'option_labels': ['A', 'B'], 'answer': 'B', 'complete': True}); await drain()
+-        m = await BM.find_one({'_id': mid}); check('2-option confirm makes mock ready', r.status_code == 200 and m['state'] == 'ready', (r.status_code, m['state'], m.get('issues')))
++        # PDF Engine 2.0: the confirm is saved, but a question with fewer than four options stays held until the missing ones are typed or boxed.
++        m = await BM.find_one({'_id': mid}); check('2-option confirm is saved; the cutter keeps the mock held only for the two missing options', r.status_code == 200 and m['state'] == 'held' and len(m['issues']) == 1 and 'Chaar option hone chahiye' in m['issues'][0], (r.status_code, m['state'], m.get('issues')))
+         p = J(await own.get(base + '/problems', params={'all': 'true'}))
+     qs = p.get('questions', [])
+     check('owner all=true lists every question', len(qs) == len(m.get('questions', [])) == 3, (len(qs), p.get('state')))
+diff --git a/frontend/src/App.css b/frontend/src/App.css
+index 7683143..78b7ed6 100644
+--- a/frontend/src/App.css
++++ b/frontend/src/App.css
+@@ -1801,7 +1801,7 @@ code {
+   border: 1px solid var(--line);
+   border-radius: 14px;
+   background: var(--surface-card);
+-  overflow: hidden;
++  overflow: clip;
+   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+ }
+ .all-q-row.is-open { border-color: var(--brand-line); box-shadow: 0 10px 30px var(--shadow-tint); }

@@ -16,7 +16,7 @@ load_dotenv(Path(__file__).parent / '.env')
 import requests
 
 # Use HTTPS preview URL
-BASE_URL = os.environ.get('FRONTEND_URL', 'https://tejas-analysis--2bbp29h1.preview.emergentagent.com')
+BASE_URL = os.environ.get('FRONTEND_URL', 'https://pdf-engine-v2--49kthst3.preview.emergentagent.com')
 OWNER_EMAIL = os.environ.get('ADMIN_EMAIL', 'owner@tejas-platform.com')
 OWNER_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'L3eAGpSD0nQjrK80hMcIcZ1V')
 

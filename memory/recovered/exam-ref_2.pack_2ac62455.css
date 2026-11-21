@@ -1,0 +1,686 @@
+/* Premium exam addendum: existing #5C0025 primary + semantic surfaces. */\
+:root { --source-fit-min-height:4rem; --source-fit-max-height:22rem; }\
+.source-inline-viewer .source-canvas-frame[data-view-mode='fit'] { height:clamp(var(--source-fit-min-height),calc(var(--source-ratio,.2) * var(--source-fit-width,var(--source-readable-size))),var(--source-fit-max-height)); }\
+\
+.player-layout .number-grid { grid-template-columns:repeat(5,minmax(0,1fr)); }\
+.player-layout .number-grid button { min-width:0; width:100%; padding:0; }\
+\
+:root { --exam-header-offset: 5.375rem; --exam-row-number-size: 3rem; --source-readable-width: 760; --source-readable-size: 47.5rem; --source-inline-height: clamp(8rem, calc(var(--source-ratio, .2) * var(--source-readable-size)), 22rem); --z-exam-filters: 20; --exam-reading-line: 1.55; }\
+.logo, .header-actions .btn, .login-link, .desktop-nav a { min-height:var(--touch-target); }\
+.login-link, .desktop-nav a { display:inline-flex; align-items:center; }\
+.exam-library-heading { display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:var(--space-6); margin-bottom:var(--space-8); }\
+.exam-library-heading .eyebrow { margin-bottom:var(--space-3); }\
+.exam-library-heading h1 { font-size:var(--text-title); letter-spacing:var(--tracking-tight); line-height:var(--leading-tight); margin-bottom:var(--space-3); }\
+.exam-library-heading p { font-size:var(--text-sm); }\
+.exam-library-rules { display:flex; flex-wrap:wrap; gap:var(--space-4); padding:var(--space-4); border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface-card); color:var(--text-muted); font-size:var(--text-sm); }\
+.exam-library-rules span { display:flex; align-items:center; gap:var(--space-2); }\
+.exam-library-filters { position:sticky; top:var(--exam-header-offset); z-index:var(--z-exam-filters); background:var(--page); padding-block:var(--space-3); margin-block:var(--space-4) var(--space-2); border-bottom:1px solid var(--line); }\
+.exam-library-filters .chapter-search { background:var(--surface-card); border:1px solid var(--line); border-radius:var(--radius-sm); padding-left:var(--space-3); }\
+.exam-library-filters .chapter-search input { border:0; box-shadow:none; background:transparent; }\
+.exam-library-disclosure { font-size:var(--text-sm); color:var(--text-muted); }\
+.exam-library-disclosure summary { display:flex; align-items:center; gap:var(--space-2); cursor:pointer; min-height:var(--touch-target); }\
+.exam-library-disclosure summary svg { color:var(--brand-text); }\
+.exam-about-label { margin-left:auto; font-size:var(--text-xs); text-decoration:underline; text-underline-offset:var(--space-1); }\
+.exam-library-disclosure p { padding:var(--space-4); background:var(--surface-alt); border-radius:var(--radius-sm); }\
+.exam-library-count { display:flex; align-items:center; justify-content:space-between; min-height:var(--space-12); font-size:var(--text-sm); margin-block:var(--space-2); }\
+.exam-library-list { display:grid; gap:var(--space-3); }\
+.exam-row { display:grid; grid-template-columns:var(--exam-row-number-size) minmax(0,1fr) auto auto; gap:var(--space-6); align-items:center; background:var(--surface-card); border:1px solid var(--line); border-radius:var(--radius-card); padding:var(--space-5) var(--space-6); }\
+.exam-row:hover { border-color:var(--brand-line); box-shadow:0 var(--space-1) var(--space-4) var(--shadow-tint); }\
+.exam-row-number { display:grid; place-items:center; height:var(--exam-row-number-size); border:1px solid var(--brand-line); background:var(--brand-soft); color:var(--brand-text); font-family:var(--font-mono); font-size:var(--text-base); border-radius:var(--radius-sm); }\
+.exam-row-main { min-width:0; }\
+.exam-row-overline { display:flex; gap:var(--space-3); font-size:var(--text-xs); color:var(--text-muted); margin-bottom:var(--space-1); }\
+.exam-row-overline > span:last-child { border-left:1px solid var(--line); padding-left:var(--space-3); }\
+.exam-row-overline .exam-state-active { color:var(--brand-text); font-weight:600; }\
+.exam-row h3 { font-size:var(--text-lg); font-weight:600; letter-spacing:var(--tracking-tight); line-height:var(--exam-reading-line); overflow-wrap:anywhere; }\
+.exam-row-main p { font-size:var(--text-xs); margin-top:var(--space-1); }\
+.exam-row-main p span { padding-inline:var(--space-1); }\
+.exam-row-validity { display:grid; gap:var(--space-1); padding-inline:var(--space-6); border-left:1px solid var(--line); font-size:var(--text-xs); color:var(--text-muted); }\
+.exam-row-validity strong { color:var(--ink); font-weight:500; }\
+.exam-row-actions { display:flex; align-items:center; gap:var(--space-2); }\
+.chapter-exams button, .chapter-exams [role='tablist'] { height:auto; min-height:var(--touch-target); }\
+.results-review-shortcuts { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); flex-wrap:wrap; margin-bottom:var(--space-5); }\
+.results-review-shortcuts p { display:flex; align-items:center; gap:var(--space-2); font-size:var(--text-sm); }\
+.results-review-shortcuts button { min-height:var(--touch-target); }\
+.results-key-notice { margin-bottom:var(--space-5); padding:var(--space-4); background:var(--surface-alt); border-left:var(--space-1) solid var(--brand-text); font-size:var(--text-sm); }\
+#results-review-heading { scroll-margin-top:var(--space-24); }\
+.source-inline-viewer { padding:var(--space-3); border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface-alt); }\
+.source-inline-viewer .source-zoom-controls { justify-content:flex-start; gap:var(--space-2); }\
+.source-zoom-controls button[aria-pressed='true'] { background:var(--brand-soft); color:var(--brand-text); border-color:var(--brand-text); }\
+.source-inline-viewer .source-canvas-frame { height:var(--source-inline-height); }\
+.source-reader-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-2); }\
+.source-reader-bottom .source-pan-controls { gap:var(--space-2); }\
+.source-reader-bottom p { font-size:var(--text-xs); }\
+.source-original-check { display:none; }\
+.player-shortcuts { display:flex; flex-wrap:wrap; gap:var(--space-3); font-size:var(--text-xs); color:var(--text-muted); margin-top:var(--space-4); }\
+.player-shortcuts kbd { font-family:var(--font-mono); border:1px solid var(--line); border-radius:var(--radius-sm); padding-inline:var(--space-1); background:var(--surface-card); }\
+.player-question-area .math-text { font-size:var(--text-base); line-height:1.8; }\
+.player-question-area .question-topline, .player-question-area .question-heading .btn, .answer-fieldset legend, .clear-answer { font-size:var(--text-sm); }\
+.player-layout .btn, .player-layout .clear-answer, .navigator-heading { min-height:var(--touch-target); }\
+.player-layout .answer-options-source { grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3); }\
+.answer-options-source .answer-option { justify-content:center; min-height:var(--touch-target); padding:var(--space-3); gap:var(--space-2); }\
+.answer-options-source .option-index { border:0; background:none; font-size:var(--text-base); }\
+.answer-options-source .option-copy { display:none; }\
+.player-layout .answer-options-source.has-typed { grid-template-columns:1fr; }\
+.answer-options-source.has-typed .answer-option { justify-content:flex-start; }\
+.answer-options-source.has-typed .option-copy { display:block; }\
+.answer-options-source .selected .option-index { background:none; color:var(--brand-text); }\
+.source-options-hint { font-size:var(--text-xs); margin-bottom:var(--space-3); }\
+.studio-validation-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-3); margin-block:var(--space-5); }\
+.studio-validation-item { display:flex; flex-direction:column; gap:var(--space-2); padding:var(--space-4); border:1px solid var(--line); background:var(--surface-alt); border-radius:var(--radius-sm); font-size:var(--text-sm); }\
+.studio-validation-item strong { color:var(--brand-text); font-size:var(--text-xl); }\
+.studio-validation-issues { display:grid; gap:var(--space-3); margin-block:var(--space-5); }\
+.studio-validation-issue { padding:var(--space-4); border:1px solid var(--warning-line); border-left:var(--space-1) solid var(--warning); border-radius:var(--radius-sm); background:var(--warning-soft); }\
+.studio-validation-issue p { font-size:var(--text-sm); margin-block:var(--space-2); }\
+.studio-validation-issue button { min-height:var(--touch-target); }\
+@media (max-width:768px) {\
+ :root { --exam-header-offset:4.5rem; }\
+ .chapter-exams.page { padding-top:var(--space-6); }\
+ .exam-library-heading { gap:var(--space-4); margin-bottom:var(--space-5); }\
+ .exam-library-rules { padding:var(--space-3); gap:var(--space-3); font-size:var(--text-xs); width:100%; }\
+ .exam-library-filters { gap:var(--space-2); }\
+ .exam-library-filters [role='tablist'] { flex-wrap:nowrap; gap:0; }\
+ .exam-library-filters [role='tab'] { flex:1; padding-inline:var(--space-2); font-size:var(--text-xs); }\
+ .exam-library-filters [role='tab'] span { display:none; }\
+ .exam-about-label { display:none; }\
+ .exam-row { grid-template-columns:var(--exam-row-number-size) minmax(0,1fr); padding:var(--space-4); gap:var(--space-3); }\
+ .exam-row h3 { font-size:var(--text-base); }\
+ .exam-row-actions { grid-column:2; }\
+ .exam-row-actions .btn { min-height:var(--touch-target); padding:var(--space-2) var(--space-4); }\
+ .exam-row-validity { display:none; }\
+ .studio-validation-grid { grid-template-columns:minmax(0,1fr); }\
+}\
+@media (max-width:640px) {\
+ .preflight-start-ready { position:sticky; bottom:0; background:var(--surface-card); padding-block:var(--space-3); padding-bottom:max(var(--space-3),env(safe-area-inset-bottom)); z-index:var(--z-exam-filters); }\
+ .player-layout .compact-practice-note { display:none; }\
+ .player-layout .question-card { padding:var(--space-4); }\
+ .player-layout .question-heading { gap:var(--space-2); margin-block:var(--space-3); }\
+ .player-layout .question-heading h2 { font-size:var(--text-lg); letter-spacing:var(--tracking-tight); }\
+ .player-layout .question-heading .btn { font-size:var(--text-xs); }\
+ .player-layout .question-topline { padding-bottom:var(--space-3); font-size:var(--text-xs); }\
+ .player-layout .question-navigation { position:sticky; bottom:0; background:var(--surface-card); padding:var(--space-3) 0 max(var(--space-3),env(safe-area-inset-bottom)); z-index:var(--z-exam-filters); gap:var(--space-2); }\
+ .player-layout .question-navigation .btn { padding-inline:var(--space-3); }\
+ .player-shortcuts { display:none; }\
+ .source-inline-viewer { padding:var(--space-2); }\
+ .source-inline-viewer .source-zoom-controls { gap:var(--space-1); }\
+ .source-inline-viewer .source-zoom-controls button { padding-inline:var(--space-2); }\
+ .source-reader-bottom { justify-content:flex-start; }\
+ .results-review-shortcuts p { align-items:flex-start; }\
+}\
+\
+/* PDF Engine 2.0: only the question in the question area, and each option's own content on its own button. */\
+.piece-stem { display:grid; gap:var(--space-2); margin-block:var(--space-3) var(--space-2); min-width:0; }\
+.piece-paper { min-width:0; padding:var(--space-3) var(--space-4); border:1px solid var(--line); border-radius:14px; background:#fff; color:#111; }\
+.piece-fit { display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-2); width:100%; min-width:0; overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:thin; }\
+.piece-img { display:block; flex:none; max-width:none; height:auto; user-select:none; -webkit-user-drag:none; }\
+.piece-wait { border-radius:6px; background:linear-gradient(90deg,#f0f0f3 0%,#fafafb 50%,#f0f0f3 100%); background-size:200% 100%; animation:piece-shimmer 1.2s linear infinite; }\
+@keyframes piece-shimmer { from { background-position:200% 0; } to { background-position:-200% 0; } }\
+.piece-retry { display:inline-flex; align-items:center; gap:var(--space-2); min-height:var(--touch-target); padding:0 var(--space-3); border:1px solid #f1cdd4; border-radius:999px; background:#fff5f6; color:#9c0a19; font-size:var(--text-sm); font-weight:600; }\
+.piece-zoom { display:flex; justify-content:flex-end; gap:var(--space-2); }\
+.piece-zoom button { display:grid; place-items:center; width:var(--touch-target); height:var(--touch-target); border:1px solid var(--line); border-radius:999px; background:var(--surface-card); color:var(--text-muted); transition:color .16s ease,border-color .16s ease,background-color .16s ease,transform .16s ease; }\
+.piece-zoom button:hover:not(:disabled) { color:var(--brand-text); border-color:var(--brand-line); background:var(--brand-soft); transform:translateY(-1px); }\
+.piece-zoom button:disabled { opacity:.35; }\
+.piece-options { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-3); }\
+.piece-options.is-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }\
+.piece-options.is-review { gap:var(--space-5) var(--space-3); margin-block:var(--space-5) var(--space-4); }\
+.piece-options.piece-ruler { height:0; margin:0; overflow:hidden; visibility:hidden; pointer-events:none; }\
+.piece-options.piece-ruler .piece-option { min-height:0; padding-block:0; border-block-width:0; }\
+.piece-options .piece-option { display:flex; align-items:center; gap:var(--space-3); position:relative; min-width:0; min-height:4rem; padding:var(--space-3); border:1.5px solid var(--line); border-radius:16px; background:var(--surface-card); color:var(--ink); font-size:var(--text-base); cursor:pointer; transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease,transform .16s ease; }\
+.piece-options.is-answer .piece-option:hover { border-color:var(--brand-line); background:var(--surface-card); transform:translateY(-1px); box-shadow:0 12px 26px -20px rgb(0 0 0 / .45); }\
+.piece-options.is-answer .piece-option.selected { border-color:var(--blue); background:var(--brand-soft); color:var(--ink); transform:none; box-shadow:0 0 0 1.5px var(--blue),0 16px 30px -22px var(--blue); }\
+.piece-options .piece-option.is-disabled { cursor:not-allowed; opacity:.65; }\
+.answer-fieldset:disabled .piece-option { cursor:not-allowed; opacity:.65; }\
+.piece-options .piece-option .piece-chip { flex:none; width:2.25rem; height:2.25rem; border:1.5px solid var(--line); border-radius:999px; background:var(--surface-alt); color:var(--ink); font-family:var(--font-mono,'Roboto Mono',monospace); font-size:var(--text-sm); font-weight:700; transition:background-color .16s ease,border-color .16s ease,color .16s ease; }\
+.piece-options .piece-option.selected .piece-chip { background:var(--blue); border-color:var(--blue); color:var(--on-brand); }\
+.piece-options .piece-option .piece-paper { flex:1; padding:var(--space-2) var(--space-3); border-radius:10px; }\
+.piece-typed { flex:1; min-width:0; line-height:1.6; overflow-wrap:anywhere; }\
+.piece-tick { display:grid; place-items:center; flex:none; width:1.75rem; height:1.75rem; border:1.5px solid var(--line); border-radius:999px; color:transparent; transition:background-color .16s ease,border-color .16s ease,color .16s ease,transform .2s cubic-bezier(.16,1,.3,1); }\
+.piece-option.selected .piece-tick { background:var(--blue); border-color:var(--blue); color:var(--on-brand); transform:scale(1.08); }\
+.piece-options.is-review .piece-option { cursor:default; }\
+.piece-options .piece-option.is-correct { border-color:#0E7C45; background:var(--success-soft); }\
+.piece-options .piece-option.is-correct .piece-chip { background:#0E7C45; border-color:#0E7C45; color:#fff; }\
+.piece-options .piece-option.is-wrong { border-color:#C2102C; background:var(--danger-soft); }\
+.piece-options .piece-option.is-wrong .piece-chip { background:#C2102C; border-color:#C2102C; color:#fff; }\
+.piece-mark { position:absolute; top:-.7rem; right:var(--space-4); display:inline-flex; align-items:center; gap:4px; padding:2px 10px; border-radius:999px; background:#0E7C45; color:#fff; font-size:var(--text-xs); font-weight:700; line-height:1.5; white-space:nowrap; }\
+.piece-option.is-wrong .piece-mark { background:#C2102C; }\
+@media (max-width:640px) {\
+ .piece-paper { padding:var(--space-2) var(--space-3); border-radius:12px; }\
+ .piece-options .piece-option { gap:var(--space-2); padding:var(--space-2); border-radius:14px; }\
+ .piece-options .piece-option .piece-chip { width:2rem; height:2rem; }\
+ .piece-options .piece-option .piece-paper { padding:var(--space-2); }\
+ .piece-tick { width:1.5rem; height:1.5rem; }\
+}\
+@media (prefers-reduced-motion:reduce) {\
+ .piece-wait { animation:none; }\
+ .piece-options .piece-option, .piece-tick, .piece-zoom button { transition:none; }\
+}\
+\"],\"sourceRoot\":\"\"}]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+export default ___CSS_LOADER_EXPORT___;
+","__webpack_require__.h = () => (\"26be9212376181a0bffa\")"],"names":[],"sourceRoot":""}���related�sourceMap��development��src_components_QuestionPieces_js.cae7e670860366dfa2c9.hot-update.js�src_components_QuestionPieces_js.cae7e670860366dfa2c9.hot-update.js.map�  "use strict";
+globalThis["webpackHotUpdatefrontend"]("src_components_QuestionPieces_js",{
+
+/***/ "./src/components/QuestionPieces.js"
+/*!******************************************!*\
+  !*** ./src/components/QuestionPieces.js ***!
+  \******************************************/
+(module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PieceImage: () => (/* binding */ PieceImage),
+/* harmony export */   PieceOptions: () => (/* binding */ PieceOptions),
+/* harmony export */   PieceReview: () => (/* binding */ PieceReview),
+/* harmony export */   PieceScaleProvider: () => (/* binding */ PieceScaleProvider),
+/* harmony export */   PieceStem: () => (/* binding */ PieceStem),
+/* harmony export */   PieceZoom: () => (/* binding */ PieceZoom)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/rotate-cw.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/zoom-in.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/zoom-out.js");
+/* harmony import */ var _lib_privateResources__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../lib/privateResources */ "./src/lib/privateResources.js");
+/* harmony import */ var _lib_auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/auth */ "./src/lib/auth.js");
+/* harmony import */ var _QuestionContent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./QuestionContent */ "./src/components/QuestionContent.js");
+/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-dev-runtime */ "./node_modules/react/jsx-dev-runtime.js");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _jsxFileName = "/app/frontend/src/components/QuestionPieces.js",
+  _s = __webpack_require__.$Refresh$.signature(),
+  _s2 = __webpack_require__.$Refresh$.signature(),
+  _s3 = __webpack_require__.$Refresh$.signature(),
+  _s4 = __webpack_require__.$Refresh$.signature(),
+  _s5 = __webpack_require__.$Refresh$.signature();
+
+
+
+
+
+
+// PDF Engine 2.0: a question cut into its question picture and one picture per option, all drawn at one zoom.
+
+const ZOOMS = [1, 1.35, 1.8],
+  KEY = 'jeelive-piece-zoom',
+  FLOOR = .8;
+const remembered = () => {
+  try {
+    return Math.max(0, Math.min(ZOOMS.length - 1, Number(localStorage.getItem(KEY)) || 0));
+  } catch {
+    return 0;
+  }
+};
+const Scale = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  k: 1,
+  zoom: 0,
+  grid: true,
+  setZoom: () => {},
+  stem: null,
+  opt: null,
+  cell: null
+});
+function PieceScaleProvider({
+  pieces,
+  max = 1.5,
+  children
+}) {
+  _s();
+  const stem = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),
+    opt = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),
+    cell = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const [fit, setFit] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+    [grid, setGrid] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    [zoom, setZoomState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(remembered);
+  const widest = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    q: Math.max(1, ...pieces.filter(p => p.part === 'q').map(p => p.w)),
+    o: Math.max(0, ...pieces.filter(p => p.part !== 'q').map(p => p.w))
+  }), [pieces]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(() => {
+    // One zoom for the whole question: the widest piece decides, so text is the same size in the question and in every option.
+    const measure = () => {
+      var _stem$current, _opt$current, _cell$current;
+      const sw = ((_stem$current = stem.current) === null || _stem$current === void 0 ? void 0 : _stem$current.clientWidth) || 0,
+        ow = ((_opt$current = opt.current) === null || _opt$current === void 0 ? void 0 : _opt$current.clientWidth) || 0,
+        cw = ((_cell$current = cell.current) === null || _cell$current === void 0 ? void 0 : _cell$current.clientWidth) || 0;
+      const own = Math.min(max, sw ? sw / widest.q : max);
+      // Options sit two by two (A B, then C D below) whenever every option can be read in half the width; a long option gets the whole width instead.
+      const two = !widest.o || !cw || cw / widest.o >= own * (zoom ? ZOOMS[zoom] : FLOOR);
+      const room = two ? cw : ow;
+      const next = Math.min(own, room && widest.o ? room / widest.o : own);
+      setGrid(two);
+      setFit(old => Math.abs(old - next) > .003 ? next : old);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    [stem, opt, cell].forEach(r => {
+      if (r.current) observer.observe(r.current);
+    });
+    return () => observer.disconnect();
+  }, [widest, max, zoom, grid]);
+  const value = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    k: fit * ZOOMS[zoom],
+    zoom,
+    grid,
+    stem,
+    opt,
+    cell,
+    setZoom: n => {
+      setZoomState(n);
+      try {
+        localStorage.setItem(KEY, String(n));
+      } catch {/* zoom still works for this visit */}
+    }
+  }), [fit, zoom, grid]);
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)(Scale.Provider, {
+    value: value,
+    children: children
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 33,
+    columnNumber: 9
+  }, this);
+}
+_s(PieceScaleProvider, "wYOOXMHIQx/I5Nmvbb8m6wV6Kw4=");
+_c = PieceScaleProvider;
+function PieceZoom() {
+  _s2();
+  const s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(Scale);
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+    className: "piece-zoom",
+    role: "group",
+    "aria-label": "Likhai ka size",
+    "x-file-name": "QuestionPieces",
+    "x-line-number": "38",
+    "x-component": "div",
+    "x-id": "QuestionPieces_38",
+    "x-dynamic": "false",
+    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("button", {
+      type: "button",
+      disabled: s.zoom === 0,
+      onClick: () => s.setZoom(s.zoom - 1),
+      "aria-label": "Likhai chhoti karo",
+      "data-testid": "piece-zoom-out",
+      "x-file-name": "QuestionPieces",
+      "x-line-number": "39",
+      "x-component": "button",
+      "x-id": "QuestionPieces_39",
+      "x-dynamic": "false",
+      children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        size: 16,
+        "x-file-name": "QuestionPieces",
+        "x-line-number": "39",
+        "x-component": "ZoomOut",
+        "x-id": "QuestionPieces_39",
+        "x-dynamic": "false"
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 39,
+        columnNumber: 142
+      }, this)
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 39,
+      columnNumber: 3
+    }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("button", {
+      type: "button",
+      disabled: s.zoom === ZOOMS.length - 1,
+      onClick: () => s.setZoom(s.zoom + 1),
+      "aria-label": "Likhai badi karo",
+      "data-testid": "piece-zoom-in",
+      "x-file-name": "QuestionPieces",
+      "x-line-number": "40",
+      "x-component": "button",
+      "x-id": "QuestionPieces_40",
+      "x-dynamic": "false",
+      children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        size: 16,
+        "x-file-name": "QuestionPieces",
+        "x-line-number": "40",
+        "x-component": "ZoomIn",
+        "x-id": "QuestionPieces_40",
+        "x-dynamic": "false"
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 40,
+        columnNumber: 152
+      }, this)
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 40,
+      columnNumber: 3
+    }, this)]
+  }, void 0, true, {
+    fileName: _jsxFileName,
+    lineNumber: 38,
+    columnNumber: 9
+  }, this);
+}
+_s2(PieceZoom, "NcaH+8mKJ+9JAQWtl1EQlqI+Ikk=");
+_c2 = PieceZoom;
+function PieceImage({
+  path,
+  alt,
+  width,
+  ratio,
+  testId,
+  onLoad,
+  onError
+}) {
+  _s3();
+  const {
+    user
+  } = (0,_lib_auth__WEBPACK_IMPORTED_MODULE_7__.useAuth)();
+  const hooks = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)({
+    onLoad,
+    onError
+  });
+  hooks.current = {
+    onLoad,
+    onError
+  };
+  const [src, setSrc] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    [failed, setFailed] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    [tries, setTries] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    setSrc(null);
+    setFailed(false);
+    if (!(user !== null && user !== void 0 && user.id)) return undefined;
+    let stopped = false,
+      asset;
+    (0,_lib_privateResources__WEBPACK_IMPORTED_MODULE_6__.acquireSourceAsset)(path, {
+      reload: tries > 0
+    }).then(value => {
+      asset = value;
+      if (stopped) value.release();else setSrc(value.url);
+    }).catch(error => {
+      if (!stopped && error.name !== 'AbortError') {
+        var _hooks$current$onErro, _hooks$current;
+        setFailed(true);
+        (_hooks$current$onErro = (_hooks$current = hooks.current).onError) === null || _hooks$current$onErro === void 0 ? void 0 : _hooks$current$onErro.call(_hooks$current);
+      }
+    });
+    return () => {
+      var _asset;
+      stopped = true;
+      (_asset = asset) === null || _asset === void 0 ? void 0 : _asset.release();
+    };
+  }, [path, user === null || user === void 0 ? void 0 : user.id, tries]);
+  const fail = () => {
+    var _hooks$current$onErro2, _hooks$current2;
+    setFailed(true);
+    (_hooks$current$onErro2 = (_hooks$current2 = hooks.current).onError) === null || _hooks$current$onErro2 === void 0 ? void 0 : _hooks$current$onErro2.call(_hooks$current2);
+  };
+  if (failed) return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("button", {
+    type: "button",
+    className: "piece-retry",
+    onClick: e => {
+      e.preventDefault();
+      e.stopPropagation();
+      setTries(n => n + 1);
+    },
+    "data-testid": testId + '-retry',
+    "x-file-name": "QuestionPieces",
+    "x-line-number": "57",
+    "x-component": "button",
+    "x-id": "QuestionPieces_57",
+    "x-dynamic": "false",
+    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      size: 14,
+      "x-file-name": "QuestionPieces",
+      "x-line-number": "57",
+      "x-component": "RotateCw",
+      "x-id": "QuestionPieces_57",
+      "x-dynamic": "false"
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 57,
+      columnNumber: 167
+    }, this), "Picture load nahi hui. Dobara try karo"]
+  }, void 0, true, {
+    fileName: _jsxFileName,
+    lineNumber: 57,
+    columnNumber: 19
+  }, this);
+  const style = {
+    width,
+    aspectRatio: String(ratio)
+  };
+  return src ? /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("img", {
+    className: "piece-img",
+    src: src,
+    alt: alt,
+    style: style,
+    draggable: false,
+    onLoad: () => {
+      var _hooks$current$onLoad, _hooks$current3;
+      return (_hooks$current$onLoad = (_hooks$current3 = hooks.current).onLoad) === null || _hooks$current$onLoad === void 0 ? void 0 : _hooks$current$onLoad.call(_hooks$current3);
+    },
+    onError: fail,
+    "data-testid": testId,
+    "x-file-name": "QuestionPieces",
+    "x-line-number": "59",
+    "x-component": "img",
+    "x-id": "QuestionPieces_59",
+    "x-dynamic": "false"
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 59,
+    columnNumber: 13
+  }, this) : /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("span", {
+    className: "piece-img piece-wait",
+    style: style,
+    "data-testid": testId + '-loading',
+    "x-file-name": "QuestionPieces",
+    "x-line-number": "60",
+    "x-component": "span",
+    "x-id": "QuestionPieces_60",
+    "x-dynamic": "false"
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 60,
+    columnNumber: 4
+  }, this);
+}
+
+// draw(index, piece, width) returns the picture of one piece; index is its place in `pieces`.
+_s3(PieceImage, "/cUDVsGgpjsUNLKoWParsThXI14=", false, function () {
+  return [_lib_auth__WEBPACK_IMPORTED_MODULE_7__.useAuth];
+});
+_c3 = PieceImage;
+function PieceStem({
+  pieces,
+  draw,
+  zoom = true,
+  testId = 'piece-stem'
+}) {
+  _s4();
+  const s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(Scale);
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+    className: "piece-stem",
+    "data-testid": testId,
+    "x-file-name": "QuestionPieces",
+    "x-line-number": "66",
+    "x-component": "div",
+    "x-id": "QuestionPieces_66",
+    "x-dynamic": "false",
+    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("span", {
+      "data-ve-dynamic": "true",
+      "x-excluded": "true",
+      style: {
+        display: "contents"
+      },
+      children: zoom && /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)(PieceZoom, {
+        "x-file-name": "QuestionPieces",
+        "x-line-number": "67",
+        "x-component": "PieceZoom",
+        "x-id": "QuestionPieces_67",
+        "x-dynamic": "false"
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 67,
+        columnNumber: 10
+      }, this)
+    }, void 0, false), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+      className: "piece-paper",
+      "x-file-name": "QuestionPieces",
+      "x-line-number": "68",
+      "x-component": "div",
+      "x-id": "QuestionPieces_68",
+      "x-dynamic": "false",
+      children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+        className: "piece-fit",
+        ref: s.stem,
+        "x-file-name": "QuestionPieces",
+        "x-line-number": "68",
+        "x-component": "div",
+        "x-id": "QuestionPieces_68",
+        "x-dynamic": "false",
+        children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("span", {
+          "data-ve-dynamic": "true",
+          "x-excluded": "true",
+          style: {
+            display: "contents"
+          },
+          children: pieces.map((p, i) => p.part === 'q' ? draw(i, p, p.w * s.k) : null)
+        }, void 0, false)
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 68,
+        columnNumber: 32
+      }, this)
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 68,
+      columnNumber: 3
+    }, this)]
+  }, void 0, true, {
+    fileName: _jsxFileName,
+    lineNumber: 66,
+    columnNumber: 9
+  }, this);
+}
+_s4(PieceStem, "NcaH+8mKJ+9JAQWtl1EQlqI+Ikk=");
+_c4 = PieceStem;
+const WORDS = {
+  right: 'Sahi jawab',
+  mine: 'Aapka jawab',
+  both: 'Aapka jawab · Sahi'
+};
+function PieceOptions({
+  pieces,
+  options,
+  labels = {},
+  typed = {},
+  draw,
+  mode = 'answer',
+  name,
+  value,
+  onPick,
+  disabled = false,
+  correct = [],
+  response,
+  words = WORDS,
+  testPrefix = 'player'
+}) {
+  _s5();
+  const s = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(Scale);
+  const firstPicture = options.find(key => !typed[key] && pieces.some(p => p.part === key));
+  // A hidden two-column row with the real card paddings: its cell is exactly the room an option picture gets in the 2 x 2 layout.
+  const ruler = /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+    className: 'piece-options piece-ruler is-grid is-' + mode,
+    "aria-hidden": "true",
+    "x-file-name": "QuestionPieces",
+    "x-line-number": "78",
+    "x-component": "div",
+    "x-id": "QuestionPieces_78",
+    "x-dynamic": "false",
+    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+      className: "piece-option",
+      "x-file-name": "QuestionPieces",
+      "x-line-number": "78",
+      "x-component": "div",
+      "x-id": "QuestionPieces_78",
+      "x-dynamic": "false",
+      children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("span", {
+        className: "option-index piece-chip",
+        "x-file-name": "QuestionPieces",
+        "x-line-number": "78",
+        "x-component": "span",
+        "x-id": "QuestionPieces_78",
+        "x-dynamic": "false"
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 78,
+        columnNumber: 125
+      }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+        className: "piece-paper",
+        "x-file-name": "QuestionPieces",
+        "x-line-number": "78",
+        "x-component": "div",
+        "x-id": "QuestionPieces_78",
+        "x-dynamic": "false",
+        children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+          className: "piece-fit",
+          ref: s.cell,
+          "x-file-name": "QuestionPieces",
+          "x-line-number": "78",
+          "x-component": "div",
+          "x-id": "QuestionPieces_78",
+          "x-dynamic": "false"
+        }, void 0, false, {
+          fileName: _jsxFileName,
+          lineNumber: 78,
+          columnNumber: 197
+        }, this)
+      }, void 0, false, {
+        fileName: _jsxFileName,
+        lineNumber: 78,
+        columnNumber: 168
+      }, this)]
+    }, void 0, true, {
+      fileName: _jsxFileName,
+      lineNumber: 78,
+      columnNumber: 95
+    }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+      className: "piece-option",
+      "x-file-name": "QuestionPieces",
+      "x-line-number": "78",
+      "x-component": "div",
+      "x-id": "QuestionPieces_78",
+      "x-dynamic": "false"
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 78,
+      columnNumber: 250
+    }, this)]
+  }, void 0, true, {
+    fileName: _jsxFileName,
+    lineNumber: 78,
+    columnNumber: 14
+  }, this);
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+    children: [ruler, /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+      className: 'piece-options is-' + mode + (s.grid ? ' is-grid' : ' is-stack'),
+      "data-layout": s.grid ? 'grid' : 'stack',
+      "data-testid": testPrefix + '-piece-options',
+      "x-file-name": "QuestionPieces",
+      "x-line-number": "79",
+      "x-component": "div",
+      "x-id": "QuestionPieces_79",
+      "x-dynamic": "false",
+      children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("span", {
+        "data-ve-dynamic": "true",
+        "x-excluded": "true",
+        style: {
+          display: "contents"
+        },
+        children: options.map(key => {
+          const i = pieces.findIndex(p => p.part === key),
+            label = labels[key] || key;
+          // An option the owner typed is shown as text; every other option shows its own picture from the book.
+          const body = typed[key] ? /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxDEV)("div", {
+            className: "piece-typed",
+            "data-testid": `${testPrefix}-option-math-${key}

@@ -18,7 +18,7 @@ from tejas.scoring import score, canonical
 from tejas_core import build_questions, RULES
 
 # Use HTTPS preview URL
-BASE_URL = os.environ.get('FRONTEND_URL', 'https://tejas-analysis--2bbp29h1.preview.emergentagent.com')
+BASE_URL = os.environ.get('FRONTEND_URL', 'https://pdf-engine-v2--49kthst3.preview.emergentagent.com')
 
 class TejasPhoneScoringTester:
     def __init__(self):

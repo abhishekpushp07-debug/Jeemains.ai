@@ -50,6 +50,8 @@ def chapter(job):
                 row.update(status='held', reason=cut.get('reason') or 'Page ka yeh hissa kat nahi paya.', parts=[], draft=cut.get('draft') or {}); break
             if own:
                 row.update(status=cut['status'], arrangement=cut.get('arrangement', ''))
+            elif cut.get('arrangement') and not row['arrangement']:
+                row['arrangement'] = 'trim:' + cut['arrangement']
             row['parts'] += [{'part': k, 'page': n, 'size': cut['size'], **cut['pieces'][k]} for k in ['q', *labels] if k in cut['pieces']]
         if row['status'] != 'held' and not any(p['part'] == 'q' for p in row['parts']):
             row.update(status='held', reason='Options ke upar kuch chhapa nahi hai, isliye sawaal ki picture nahi bani.', parts=[])

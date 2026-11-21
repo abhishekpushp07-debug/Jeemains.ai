@@ -1,181 +1,186 @@
-# Super Admin PDF Engine 2.0: the question and each option, cut cleanly from the book
+# PDF Engine 2.0: rollback ke baad jaanch, phir khoya kaam dobara, options ek ke neeche ek
 
-Super Admin's PDF reader learns to cut every question into five clean pieces: the question, and options A, B, C and D, each exactly as printed in the book.
-Students then see only the question in the question area, and the real content of each option on its own button. No AI reads the PDF, at upload or later.
+Rollback ke baad sabse pehle poori machine ki jaanch hoti hai aur uski likhit report milti hai. Uske baad rollback me gaya kaam dobara banta hai: chhape hue boxes pehle, a/A alag, poore page wala fix tool.
+Is baar options A, B, C, D har screen par ek ke neeche ek, poori chaudai me dikhte hain. PDF padhne me kahin AI nahi lagta.
 
-## Who it's for
+## Kiske liye
 
-- **Owner (super admin):** uploads PYQ, All India Series, chapter-wise and plain mock PDFs and gets mocks at the new level without typing anything.
-- **Reviewer:** fixes the few questions the engine refuses to guess.
-- **Students:** read each option right where they tap it, which matters most on a phone.
-- **App team:** gets a short guide so the app can show the same look.
+- **Owner (super admin):** jaanna chahta hai ki rollback se kuch toota ya nahi, aur chahta hai ki boxed PDF bina haath lagaye sahi kate.
+- **Reviewer:** engine ne jo sawaal roke, unhe ek hi page par theek karta hai.
+- **Students:** har option apne button par padhte hain, ek ke neeche ek, phone aur desktop dono par.
 
-## Core features and experience
+## Kya banega aur kaise chalega
 
-### 1. What students see
+### 1. Rollback ke baad ki haalat: abhi tak kya pata hai
 
-| Part of the screen | Today | After |
+Planning me kuch chalaya nahi ja sakta. Neeche ki baatein sirf files padh kar aur preview site ko bina login ke khol kar dekhi gayi hain. Koi test abhi nahi chala.
+
+| Baat | Abhi ki jaankari | Kaise pata chala |
 | --- | --- | --- |
-| Question area | One picture holding the question and all four options | Only the question, with its own diagram if it has one |
-| Option buttons | "A", "B", "C", "D" with the words "as shown above" | Each button shows what that option says, exactly as printed |
-| Hint "Read options A–D in the picture above" | Shown | Gone |
-| Result and Solutions screens | Whole picture, then "your answer B, correct C" in words | Same split; the correct option and the student's pick are marked on the option itself |
-| Numerical questions | Question picture and a number box | No change |
+| Site chal rahi hai? | Haan. Server ne "ok" aur "ready" jawab diya. Opening page aur owner login page khule. | Bina login ke khol kar |
+| Code kis haalat me hai? | Us haalat me jo owner ke chune hue message (21 Nov, din me) ke samay thi. Us message tak boxes ka kaam shuru nahi hua tha, isliye yeh wahi code hai jo pause ke samay tha (notes me 20 Nov 22:35 UTC, yaani India ke samay me 21 Nov subah 4:05). Notes ke mutabik yahi code jeelive.ai par live hai. Checkpoint ka samay khud nahi dekha gaya; yeh notes ke kram se nikala gaya hai. | Cutter, fix tool aur student option ki files padh kar |
+| Rollback me kya gaya? | Us message ke baad bana poora kaam, sirf 2x2 nahi: (1) chhape boxes pehle, (2) a/A alag, (3) poore page wala fix tool, (4) boxed kitaab ke chhoote sawaal padhne ka sudhaar. | In files me yeh cheezein ab nahi hain |
+| Kya bacha hai? | Owner ki boxed chemistry PDF, purane scan ke record aur test ke log. Yeh app folder ke bahar hain. | Folder ki list aur log padh kar |
+| Padhi hui files | Saat files poori padhi gayi (cutter, cut ka hisaab, fix tool aur uska style, student options, ruke sawaal ka card, saare sawaal ki list). Adhoori ya aapas me bemel nahi lagi. | Padh kar |
+| Peeche chhooti cheez | Khoye kaam ki 3 test scripts ab bhi folder me hain. Woh un features ko test karti hain jo ab code me nahi hain, isliye aaj chalane par fail hongi. App par iska asar nahi. | Files dekh kar |
+| Shayad chhoota hua | Beech me ruke test ka ek kaam-chalau (disposable) test database. | Ek chhooti file se andaza; check nahi hua |
+| Jo check nahi hua | Login ke peeche ka sab kuch: Super Admin ke screens, PDF upload, fix screen, student ka test, result. | Planning me mumkin nahi |
 
-### 2. How the engine cuts a question
+**Rollback ne theek kaam kiya ya nahi.** Rollback ne wahi kiya jiske liye woh bana hai: code aur chat ko chune hue message par wapas le gaya. Woh ek akela badlaav nahi chun sakta; us message ke baad ka sab kuch jata hai. Platform support ke mutabik rollback sirf app folder ka code wapas karta hai; database, app folder ke bahar ki files aur live site ko nahi chhoota; aur baad ka kaam wapas aage nahi laya ja sakta. Support ka jawab beech me kat gaya tha, isliye yeh pakka nahi hai. Jo dekha gaya woh isse milta hai: PDF aur record apni jagah hain.
 
-1. It finds where each question starts and ends, as it does today.
-2. Inside the question it finds the option labels: the last full set of four, such as (A) (B) (C) (D) or (1) (2) (3) (4). Labels used for statements inside the question are not mistaken for options.
-3. From where the labels sit, it works out the arrangement: one option per line, two per line, or all four in one line.
-4. Each option gets its own box, from its label to the next label, with whatever is printed there: text, formula, diagram or graph. The printed label is left out of the picture, because the button already shows the letter.
-5. Everything above the first option is the question picture, diagrams included.
-6. Every piece is trimmed to the printed ink with the same small margin, and all five pieces of a question use the same zoom, so the text is the same size in the question and in every option.
+**Aage ke liye.** Design ka ek faisla badalna ho toh rollback ki zaroorat nahi. Bata dene par sirf wahi hissa badla jata hai aur baaki kaam bacha rehta hai.
 
-This uses only the positions of the text and the white space in the PDF. The spaced format with bracketed labels is what makes a clean cut possible every time.
+### 2. Pehla kadam: poori jaanch (kuch bhi banane se pehle)
 
-### 3. Checks before a cut is trusted
+| Kya jaancha jayega | Kaise saabit hoga |
+| --- | --- |
+| Engine wahi hai jo rollback se pehle tha | Teen chapter kitaabein (physics, chemistry, maths: 4,650 sawaal) aur boxed chemistry kitaab dobara scan hoti hain. Har sawaal ka cut 20–21 Nov ke record se milaya jata hai. Farq 0 hona chahiye. |
+| Website ka code poora hai | Poori website naye sire se build hoti hai, 0 error ke saath. Build ko jeelive.ai par chal rahi files se milane ki koshish hoti hai (bina login, sirf padhna). Nateeja jo bhi ho, report me likha jata hai. |
+| Super Admin ka poora raasta | Test copy me: owner login, Master, PDF upload, Draft, fix screen, proof view, Live. |
+| Student ka poora raasta | Test copy me: test shuru, jawab, submit, result, Solutions. Phone (390) aur desktop (1920). |
+| Purane test | Master, Library, chapter reader, typed option aur get-ready ke test dobara chalte hain aur apne pichhle record se milaye jate hain. |
+| Safai | 3 bemel test scripts naye kaam ke hisaab se dobara likhi jati hain. Chhoota hua disposable test database naam dekh kar hataya jata hai. |
 
-A question is accepted only when all of these hold:
+- Report me har line par ek hi nateeja hota hai: theek / rollback se toota / pehle se toota / check nahi ho paya.
+- Rollback se tooti cheez sabse pehle theek hoti hai.
+- 20 Nov ke record me kuch purane test pehle se fail the (Master 124 me se 3, structure 133 me se 1, chapters ka 1, publishing wala test beech me ruka). Har ek ke liye bataya jata hai: asli galti hai ya test purana pad gaya hai. Asli galti isi phase me tabhi theek hoti hai jab woh upload → fix → Live → student test ke raaste ko rokti ho. Baaki report me rehti hain.
+- Jaanch saaf nikle toh aage ka kaam bina ruke shuru hota hai. Kuch toota mile toh pehle woh theek hota hai.
 
-- Four labels were found, in order, lined up as rows or columns.
-- Every option has something printed in it.
-- Nothing is lost: every printed mark of the question lies in the question picture or in exactly one option picture.
-- Nothing is shared: no two pieces touch or overlap, and the gap between them is blank.
-- All options sit on the same page as each other.
+### 3. Khoya hua kaam dobara (wahi faisle jo pehle ho chuke hain)
 
-If any check fails, the engine does not guess. The question is marked with the reason in plain words, for example "Something is printed between option B and option C that belongs to neither".
+**3a. Chhape hue boxes pehle**
 
-### 4. Held questions and the fix tool
+- Jab sawaal ke hisse me ek bada chhapa rectangle aur uske baad chaar chhote chhape rectangle hon, toh wahi paanch rectangle paanch tukde hain: Sawaal, A, B, C, D.
+- Kaun sa box kis option ka hai, yeh box ke andar chhape label (A) (B) (C) (D) se tay hota hai, box ki jagah se nahi.
+- Option ki picture me chhapa label nahi aata, kyunki button par letter pehle se hai. Sawaal ke box ke upar ki heading ("Question 16", chapter ki line) sawaal ki picture me nahi aati.
+- Boxes ek ke neeche ek chhape hon, do ek line me, ya chaaron ek line me; kone seedhe hon ya gol: sab chalte hain.
+- Check phir bhi hote hain: har option box me label ke alawa kuch chhapa ho; A se D chaaron label mile; sawaal ke hisse me boxes ke bahar kuch na chhapa ho.
+- Koi check fail ho toh engine andaza nahi lagata. Sawaal wajah ke saath ruk jata hai, aur fix tool me paanchon chhape boxes pehle se taiyaar milte hain.
+- Chhape boxes na hon toh engine pehle ki tarah label dhoondh kar kaatta hai.
 
-- A mock with even one such question stays a Draft and cannot go Live. This is the rule chosen by the owner.
-- The Fix screen shows one card per held question: the piece of the page with five boxes drawn on it (Question, A, B, C, D), and beside it a preview of exactly what the student will see.
-- Three ways to fix a question:
-  1. Move or resize a box, then save. The checks run again by themselves.
-  2. Type an option's text (this exists today and stays).
-  3. Choose "Show this question as one whole picture", which gives that one question the old look by the owner's own decision.
-- Answer type, answer buttons and the correct answer are fixed on the same card, as today.
+**3b. Chhote a,b,c,d aur bade A,B,C,D alag**
 
-### 5. What the owner sees after an upload
+- Option ke label ka set kabhi mila-jula nahi hota: chaaron bade, ya chaaron chhote, ya chaaron number.
+- Option ke apne text ke andar likhe letter, jaise "(a), (b) and (c) only", option ke label nahi maane jate.
+- Sawaal me (a) se (e) statements aur neeche (A) se (D) options hon toh bade wale options hain. Ulta ho (statements bade, options chhote) toh chhote wale options hain.
+- Saaf na ho toh sawaal ruk jata hai. Fix tool ke shuruaati boxes bhi isi niyam se bante hain.
 
-- A summary line on every mock: "75 questions · 73 cut cleanly · 2 need your eye".
-- A proof view: every question of the mock as the student will see it, question and four options, so a whole paper can be checked by eye in a few minutes.
-- "Try as student" opens the mock in the real test screen, as today.
+**3c. Boxed kitaab ke saare sawaal milna**
 
-### 6. One engine for every kind of upload
+- 21 Nov ke record ke mutabik aaj ka engine owner ki boxed chemistry kitaab (2,527 page, 1,250 sawaal) me 1,198 sawaal dhoondh pata hai aur unme se 34 rok deta hai. Chapter 9 me 47 ki jagah 1 hi sawaal milta hai.
+- Khoye hue kaam ke record me isi kitaab par 1,250 sawaal mile the (1,000 options wale, 250 numerical), 0 ruke, aur har sawaal ki answer key mili thi. Dobara banne wala engine isi nateeje par parkha jata hai.
 
-- PYQ, All India Series, chapter-wise tests and plain mocks all go through the same "Upload PDF" button. The mock type the PDF is uploaded into decides what it becomes.
-- Answer key and solutions are read from the end of each chapter, from the end of the mock, or from separate PDFs, as today.
-- Days, schedules, replacing an older mock and the Library work as today.
+**3d. Fix tool poore page par**
 
-### 7. Mocks already on the site
+- Poora page dikhta hai, sirf sawaal ki patti nahi.
+- Rectangle dene ke do tareeke hain. Ek: pehle rectangle kheencho, phir batao kiska hai (Sawaal / A / B / C / D). Do: pehle Sawaal / A / B / C / D chuno, phir kheencho.
+- Ek box bante hi agla apne aap chun liya jata hai: A ke baad B, phir C, phir D.
+- Chhape boxes page par outline me dikhte hain. Kisi chhape box par tap karne se poora wahi box chun liya jata hai. Ek button paanchon chhape boxes ek saath le leta hai.
+- Bane hue box ko hilana aur chhota-bada karna pehle jaisa rehta hai.
+- Bagal me (phone par neeche) wahi dikhta hai jo student ko milega. Har badlaav apne aap check hota hai. Check paas hue bina save nahi hota.
+- Do box kisi chhapi cheez ko share karein toh wajah ke saath mana ho jata hai. Sirf khaali kagaz par ek doosre par chadhna chalta hai.
+- Boxes ke bahar kuch chhapa reh jaye toh bataya jata hai. Owner tick karke keh sakta hai ki woh is sawaal ka hissa nahi hai.
+- Kuch type nahi karna padta. Option khud type karne ka purana raasta bana rehta hai.
 
-- JEE Main PYQ stay exactly as they are, in the old look.
-- Other PDF mocks in the old look: Super Admin shows a list of any that are still Live, with a "Move to Library" button. Nothing is moved without that button. Students keep their scores.
-- An old mock gets the new look only by uploading its PDF again in the spaced format, with Replace.
+### 4. Options ek ke neeche ek, har jagah (naya faisla)
 
-### 8. Mobile app
+| Screen | Options kaise dikhte hain |
+| --- | --- |
+| Test screen | A, B, C, D ek ke neeche ek; har card sawaal wale hisse jitna chauda |
+| Result aur Solutions screen | Wahi; sahi option aur student ka chuna option usi card par nishaan ke saath |
+| Proof view (Super Admin) | Wahi |
+| Fix tool ka preview | Wahi |
 
-- Nothing breaks in the app. App students keep seeing the old look until the app team adopts the new one.
-- A short guide for the app team is written with the feature.
+- Phone aur desktop dono par. 2x2 ya ek line me do option kahin nahi.
+- Kitaab me options jaise bhi chhape hon (ek line me chaar, do-do, ya boxes me), screen par hamesha A, B, C, D upar se neeche.
+- Sawaal aur chaaron options me likhai ka size ek hi rehta hai.
+- Yeh pehle ke plan ka woh niyam hata deta hai jisme desktop par chhote options do-do dikhte the.
 
-### 9. PDF format guide
+### 5. Kasauti: capable, powerful, tez (naap kar)
 
-One page inside the upload screen: how to make a PDF the engine reads correctly the first time (label style, spacing, the three arrangements, where diagrams go, headings for chapters, answer key and solutions).
+- **Boxed chemistry kitaab:** 1,250 me se 1,250 sawaal mile, 0 ruke, har sawaal ki key. Na ho paye toh har ruke sawaal ki wajah report me aati hai.
+- **Bina boxes wali teen kitaabein (4,650 sawaal):** jo sawaal aaj saaf katta hai woh saaf hi kate aur uska cut na hile. Aaj ke 5 ruke sawaal ruke rehte hain; woh "chipke hue" wale hain aur Phase 2 me hain.
+- **AITS maths kitaab (1,250 sawaal):** aaj 0 ruke; 0 hi rahe.
+- **Speed:** record me aaj ka engine boxed chemistry kitaab ko scan script se 332 second me padhta hai; khoya hua kaam 420 second leta tha. Target: naya engine aaj se dheema na ho. Upload se Draft tak ka asli samay app ke andar naapa jata hai aur report hota hai.
+- **Andaza nahi:** galat cut se behtar ruka hua sawaal.
+- **Screens:** phone (390) aur desktop (1920) par koi screen side me nahi khisakti aur koi picture kati nahi hoti.
+- **Poora kab maana jayega:** jab builder se alag ek poora test run paas ho. Jo check na ho paye woh "check nahi hua" likha jata hai, "ho gaya" nahi.
 
-### 10. Quality bar
+### 6. Jo nahi badalta
 
-The owner's instruction, recorded as given: the most elegant, the most beautiful, the most aesthetic and, more importantly, the most capable and the most powerful platform.
-
-The owner's condition of approval, recorded as given: the platform should be completely perfect, the best, with the world's best capability, and the world's most powerful.
-
-For this work both are taken to mean:
-
-- **Engine mistakes are fixed in the engine.** If a question in one of the three arrangements is cut wrongly or held wrongly, the engine itself is corrected, so the same mistake does not come back in the next PDF. It is not left as a hand fix.
-- **Nothing known is left unsaid.** Every limit or defect found during the build is reported to the owner in plain words. Nothing is called done until it has been run and checked.
-
-- **No guessing.** A question either passes every check or is held with its reason. The proof view is the owner's final check by eye.
-- **Nothing clipped.** Cuts are placed only in blank space, so fractions, integrals, matrices, superscripts and diagrams are whole in every piece.
-- **No typing for a well-made book.** A PDF in the spaced, bracketed format goes from upload to a checked Draft with no manual work on its cleanly cut questions.
-- **One upload, any size.** A PDF can hold one mock or a whole book of chapters, up to the current 100 MB limit. It is read in the background and each mock arrives by itself.
-- **Fast to fix.** A held question is fixed on one card, without leaving the screen.
-- **Honest counts.** The summary line counts held questions exactly. Nothing is hidden to make a mock look ready.
-- **Student screens at the Analysis 2.0 standard.** The same fonts, spacing, motion and care, on phone and desktop, in light and dark theme.
-- **Accepted when** the five sample questions from the owner's book come out cleanly cut with no manual fix, or the exact reason they do not is reported.
+- Rok ka niyam: ek bhi ruka sawaal ho toh mock Draft rehta hai, Live nahi hota.
+- Summary line ("75 sawaal · 73 saaf kate · 2 aapko dekhne hain"), proof view, "Try as student", option type karna, "Poori picture hi dikhao".
+- JEE Main PYQ purane look me rehte hain.
+- Mobile app me koi badlaav nahi.
+- PDF padhne me AI nahi.
+- Sab kuch preview me banta hai. jeelive.ai par tabhi jata hai jab owner "deploy" kahe.
 
 ## User flow
 
 **Owner**
-1. Super Admin › Master › exam › mock type (PYQ, All India Series, chapter-wise or mocks) › Upload PDF. Same dialog as today.
-2. The PDF is read in the background. Each mock arrives as a Draft with its summary line.
-3. A mock with held questions is opened in Fix. Each card is fixed by moving a box, typing an option, or choosing the whole-picture look. It is rechecked by itself.
-4. The proof view is scanned once. "Try as student" shows the real screen.
-5. The mock is made Live, or given its series day, as today.
+1. Jaanch ki report chat me milti hai.
+2. Super Admin › Master › exam › mock type › Upload PDF, pehle jaisa.
+3. Boxed PDF ke mock Draft ban kar aate hain, summary line ke saath.
+4. Ruka sawaal Fix me khulta hai: poora page, chhape boxes outline me. "Paanchon chhape boxes lo" dabao, ya rectangle kheench kar Sawaal / A / B / C / D do. Preview dekho, save karo.
+5. Proof view me poora paper ek baar dekho. "Try as student" se asli screen dekho.
+6. Mock Live karo ya series ka din do.
 
 **Student**
-1. Opens the mock. The question area shows only the question.
-2. Reads the four options on their buttons and taps one.
-3. After submitting, sees the same question and options with the correct one and their own pick marked.
+1. Sawaal upar, uske neeche A, B, C, D ek ke neeche ek.
+2. Option par tap.
+3. Submit ke baad wahi sawaal aur options, sahi option aur apna chuna option nishaan ke saath.
 
 ## UI/UX feel
 
-- Each option is a wide, tappable card: a letter chip on the left, the option's picture beside it.
-- The selected option gets the blood-red outline and a tick. On result screens, correct and wrong are shown with an icon as well as colour.
-- Phone (360 to 390 px): one option per row, full width. Desktop: two per row when all four options are short, otherwise one per row.
-- Text is the same size in the question and in all four options. No stretched or blurry pictures.
-- Book pictures stay on white "paper" cards in both light and dark theme.
-- All pictures of a paper, option pictures included, start loading on the get-ready screen before the test begins, as question pictures do today, so nothing pops in during the test.
-- Super Admin keeps its current look. The fix tool shows the boxes directly on the page picture, with the student preview next to it.
+- Har option ek chauda card hai: baayin taraf letter, uske bagal option ki picture. Card poori chaudai ka.
+- Chuna hua option laal outline aur tick ke saath. Result par sahi aur galat, rang aur icon dono se dikhte hain.
+- Kitaab ki pictures safed "kagaz" card par rehti hain, light aur dark dono theme me.
+- Fix tool: poora page; Sawaal, A, B, C, D ke box alag rang me; "Yeh hissa kiska hai?" ke button.
+- Phone par kheencha hua rectangle aur "kiska hai" ke button ek saath screen par rehte hain; scroll nahi karna padta.
+- Fix tool ki likhai Roman Hinglish me. JEELIVE ka maujooda look; koi naya style nahi.
 
-## Implementation phases
+## Phases
 
-**Phase 1 (built now): everything in "Core features and experience" above.**
-- The cutter, its checks and the hold rule.
-- Fix tool with movable boxes and live preview, summary line, proof view.
-- New look on the test screen, the result screen and the Solutions screen.
-- All four kinds of upload.
-- List of old-look mocks with "Move to Library".
-- App guide and PDF format guide.
-- Tuned on the first five questions of the owner's book, with their answer key and solutions.
-- Preview only. It goes to jeelive.ai when the owner says "deploy".
+**Phase 1 (abhi banta hai)**
+- Poori jaanch aur report (section 2), rollback se tooti cheez ka sudhaar, safai.
+- Chhape boxes pehle, a/A alag, boxed kitaab ke saare sawaal, poore page wala fix tool (section 3).
+- Options ek ke neeche ek, har screen par (section 4).
+- Section 5 ki kasauti par poora test, phone aur desktop dono.
+- Sirf preview me.
 
-**Phase 2 (separate approval):**
-- Harder layouts cut automatically: a diagram beside the options, an option that runs onto the next page, four graphs drawn inside one picture, two-column pages.
-- Scanned (photo) PDFs, with text found on the site's own server, still no AI credits.
-- Options that are plain words shown as real text (sharper on phones, lighter to load).
-- A "read again" button for Drafts uploaded before this engine.
-- Solution pictures trimmed and cleaned the same way.
-- JEE Main PYQ moved to the new look.
+**Phase 2 (alag manzoori)**
+- "Chipke hue" options: jahan do options ke beech khaali line nahi hai (aaj ke 5 ruke sawaal). Owner ne ise baad ke liye kaha hai.
+- App team ki guide aur PDF format guide.
+- Mushkil layout apne aap: options ke bagal diagram, agle page tak jata option, ek picture me chaar graph, do-column page.
+- Scan (photo) PDF, site ke apne server par text dhoondh kar, bina AI.
+- Saade shabdon wale options asli text me.
+- Purane Draft ke liye "dobara padho" button.
+- Solution ki pictures bhi isi tarah saaf kati hui.
+- JEE Main PYQ naye look me.
 
-**Phase 3 (separate approval):**
-- Question bank: every cut question saved with its chapter, so a new mock can be assembled from chosen chapters without a new PDF.
-- Owner paper report with option pictures: which wrong option was picked most on each question.
-- Faster checking of big books: approve a whole proof sheet from the keyboard.
+**Phase 3 (alag manzoori)**
+- Question bank: chune hue chapters se naya mock, bina nayi PDF.
+- Owner ki paper report: kis sawaal me kaun sa galat option sabse zyada chuna gaya.
+- Badi kitaab ki tez jaanch: keyboard se poori proof sheet approve.
+- Ruke hue student features: Galti Notebook, Subject Rank aur Percentile, Seekh Reminder.
 
-**After Phase 1 is accepted:** the owner is reminded of the three parked student features (Galti Notebook, Subject Rank, Seekh Reminder). Their notes and decisions are saved in `parked_student_features.md` next to this plan and are moved into the project memory as the first step of the build.
+## Assumptions (jo faisle bina pooche liye gaye)
 
-## Assumptions
-
-1. The uploaded book has not been opened yet. Planning mode offers only a reader that sends the whole book through an AI model, which the owner ruled out. The first step of the build opens only the first five questions, their answer key and their solutions with the site's own page reader (no AI). If they show a layout this plan did not expect, that is reported before the build goes further.
-2. The book is not uploaded or run as a whole by the builder. The owner uploads it in Super Admin once the engine is ready. Reading a PDF on the site uses no AI and no AI credits.
-3. "Question screen" and "option screen" are read as the two areas of the same test screen, not two separate pages.
-4. Options are shown as pictures cut from the book, not retyped as text, so formulas and diagrams stay exact.
-5. Label styles accepted: (A)–(D), A. or A), (a)–(d), (1)–(4), 1). Four options are expected; a question with a different count is held.
-6. Phase 1 cuts three arrangements automatically: one per line, two per line, four in one line. Anything else is held and fixed with the boxes.
-7. The third fix, "Show this question as one whole picture", is included as an owner's choice per question. It can be removed if the old look should never be possible in a new mock.
-8. Because held papers never go Live by themselves, an All India Series paper with a held question does not open on its day. Series PDFs need to be uploaded early enough to fix.
-9. All four kinds of upload already use the same "Upload PDF" button and the same reader, so one engine covers them. The code also holds older upload routes (a two-PDF importer, an Excel importer, an AI-based automatic importer and a fixed-format chapter-book importer). Whether any screen still reaches them was not checked while planning. They are not changed by this work.
-10. The owner's answer about existing mocks is read as: JEE Main PYQ stay as they are; the other old mocks have already been removed by the owner; any left over go to the Library. The move is a button with a list, not automatic, because the builder cannot see or change the live site.
-11. Mocks that are Live or Draft before this change are not read again in Phase 1.
-12. The Solutions PDF and the Analysis report keep printing the whole question as in the book.
-13. The printed question number stays inside the question picture.
-14. Only searchable PDFs are cut automatically. A scanned page is held and its boxes are drawn by hand. The site's code already has two AI options that run only on the owner's explicit approval: AI reading of scanned pages, and AI explanations for questions that have only an answer key. Their screens were not opened while planning. Both are left as they are and are not removed; this work adds no AI call anywhere.
-15. Answer key and solution reading is changed only as far as the five-question check shows is needed.
-16. The fix tool is open to the owner and the reviewer, like the Fix screen today.
-17. Super Admin text stays in English. Any new student-facing text is in Roman Hinglish, like the Analysis screens.
-18. The app shows the old look until the app team changes it.
-19. Galti Notebook, Subject Rank and Seekh Reminder are parked with no code written. Work on them resumes only after the owner is reminded and says so.
-20. This plan replaces the Analysis 2.0 plan in this file. A full copy of that plan is saved next to it as `analysis2_plan.md`, and its pending Phase 2 and Phase 3 lists are also listed in `parked_student_features.md`.
-21. The result screen and the Solutions screen were not opened while planning. Their "Today" row in the table is inferred from how the test screen works, and is confirmed at the start of the build.
-22. The technical notes saved for the three parked features were not re-checked against the code in this planning session. They are labelled as unchecked in `parked_student_features.md`.
-23. The owner approved this plan on one condition: the platform must be completely perfect and the world's best and most powerful. "World's best" cannot be measured or proved by the builder, and no comparison with other platforms was made for this plan. The condition is therefore taken as the quality bar in section 10, which is what the build is held to and reported against. "Most powerful" and "perfect" are not a promise that every possible PDF layout is cut automatically: in Phase 1 a layout outside the three arrangements is held and fixed by hand, and the harder layouts are Phase 2.
-24. The new option cards and the fix tool follow the existing JEELIVE look. No new visual style is introduced.
+1. Owner ne teen raaston me se koi nahi chuna. Jawab ko "pehle batao aur test karo, phir sab theek karke best banao" padha gaya. Isliye Phase 1 me jaanch aur dobara banana dono hain.
+2. Jaanch ki report ke baad dobara banane ka kaam owner ke jawab ka intezaar nahi karta, agar kuch toota na mile.
+3. Baad wale checkpoint par wapas jaana mumkin nahi maana gaya. Yeh platform support ke adhoore jawab par tika hai.
+4. Khoye code ki koi copy un folders me nahi mili jo dekhe gaye. Dhoondh poori nahi thi. Kaam pehle ke faislon aur purane test record se dobara banta hai. Copy mil bhi jaye toh sab kuch dobara parkha jata hai.
+5. "Ek ke neeche ek" tab bhi lagta hai jab option bahut chhota ho (jaise ek number). Desktop par aise card me khaali jagah dikhegi.
+6. Boxed page par sawaal ke box ke upar ki heading picture me nahi aati; test screen sawaal ka number khud dikhati hai. Bina boxes wale page par chhapa number pehle ki tarah picture me rehta hai.
+7. Label ke bina option box, ya boxes ke bahar chhapi cheez: sawaal rukta hai, andaza nahi lagta.
+8. Pehle se tooti cheezein (rollback se nahi) sirf report hoti hain, jab tak woh upload se student test tak ka raasta na rokein.
+9. Test sirf disposable test copy me chalte hain. Asli preview database aur live site ko test nahi chhoote. Hataya sirf woh database jata hai jo test ne khud banaya tha, naam aur andar ka data dekh kar.
+10. Section 1, 3c aur 5 ke number 20–21 Nov ke log se liye gaye hain. Planning me unhe dobara chalaya nahi gaya. "Aaj ka engine" wale number us log se hain jo naam aur andar ke nateeje se purane engine ka lagta hai; jaanch me yeh dobara chalta hai.
+11. Speed ke number scan script ke hain, upload ke raaste ke nahi.
+12. "Perfect", "most powerful", "lightning fast" ko section 5 ki naapi ja sakne wali kasauti maana gaya hai. Yeh vaada nahi hai ki har layout apne aap katega; baaki layout Phase 2 me hain.
+13. Fix tool reviewer bhi chala sakta hai. "Boxes ke bahar wala hissa chhod do" wala tick sirf owner ka hai, jaise aaj hai.
+14. jeelive.ai par pehle se pade Draft par naye engine ka kya asar hoga, yeh build me dekha jata hai aur deploy se pehle bataya jata hai.
+15. Aaj ke code me options ka layout (phone aur desktop par) planning me nahi dekha gaya. Jaisa bhi ho, section 4 ke hisaab se kiya aur parkha jata hai.
+16. Purane plan ki "purane look wale mock ki list" bani hai ya nahi, yeh nahi dekha gaya. Jaanch ki report me aata hai; is phase me nahi banti.
+17. Pehle manzoor hua PDF Engine 2.0 plan `pdf_engine2_plan.md` me saath rakha gaya hai. Uske niyam lagoo rehte hain, sirf desktop par do-do option wala niyam hata hai.
+18. Owner ke message me "solutions" ko options A, B, C, D padha gaya; owner ne "har jagah" chuna.

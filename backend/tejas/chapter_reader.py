@@ -240,7 +240,7 @@ def find(lines, known, band):
         for k in ('number', 'title', 'subject'):
             if h.get(k) and not rec.get(k):
                 rec[k] = h[k]
-        out.append({'y': line['rect'][1], 'label': label, 'role': h['role'], 'record': dict(rec), 'rows': [line['rect'][1]] + [lines[j]['rect'][1] for j in mine]})
+        out.append({'y': line['rect'][1], 'label': label, 'role': h['role'], 'bare': h['bare_role'], 'record': dict(rec), 'rows': [line['rect'][1]] + [lines[j]['rect'][1] for j in mine]})
     return out, used
 
 

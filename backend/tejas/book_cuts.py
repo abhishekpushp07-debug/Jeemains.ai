@@ -49,6 +49,9 @@ def assemble(sha, regions, items, at, drawn, over, found):
     for i, item in enumerate(items):
         cut = found[cut_key(sha, item)]
         own = i == at and bool(item['labels'] or item['action'] == 'boxes')
+        if i == at:
+            # The printed boxes of the page, so the fix tool can pick a whole box with one tap.
+            out['frames'] = cut.get('frames', [])
         if cut['status'] == 'held' or (own and cut['status'] not in ('ok', 'manual')):
             return held(cut.get('reason') or 'Page ka yeh hissa kat nahi paya.', cut if own else None)
         if own:

@@ -5,9 +5,11 @@ import re
 import fitz
 import numpy as np
 
-CUT_VERSION = 1
+CUT_VERSION = 2
 SCALE = 2.0      # pixels per PDF point used to look at the ink
 MARGIN = 4.0     # points of blank kept around every piece
+HEAD = 60.0      # points above a question's printed box in which its heading (number, source, chapter) may sit
+ANCHOR = re.compile(r'^\s*(?:Q(?:uestion|ues)?\.?\s*\d{1,3}\b|\d{1,3}\s*[.)])', re.I)
 STYLES = (('paren', r'\(\s?([A-Da-d1-4])\s?\)'), ('close', r'([A-Da-d1-4])\)'), ('dot', r'([A-Da-d])\.'))
 KNOWN = 'ABCDabcd1234'
 
@@ -49,19 +51,26 @@ def candidates(lines):
                 size = chars[a][2]
                 gap = chars[a][1].x0 - chars[a - 1][1].x1 if a else 99
                 lead = not text[:a].strip()
+                wide = chars[a][1].x0 - next((c[1].x1 for c in reversed(chars[:a]) if not c[0].isspace()), -999)
                 if style == 'paren':
                     if not (lead or text[a - 1].isspace() or gap > .25 * size):
                         continue
                 else:
                     # 'A.' and 'A)' count only at the start of a line or after a clear gap, and need a space after them.
-                    wide = chars[a][1].x0 - next((c[1].x1 for c in reversed(chars[:a]) if not c[0].isspace()), -999)
                     if (a and text[a - 1] == '(') or not (lead or wide > 1.2 * size) or (b < len(text) and not text[b].isspace()):
                         continue
                 rect = fitz.Rect()
                 for c in chars[a:b]:
                     if not c[0].isspace():
                         rect |= c[1]
-                found.append({'i': index_of(m[1]), 'family': (style, kind_of(m[1])), 'rect': rect, 'size': size, 'ch': m[0].strip()})
+                # 'apart': it starts its line or stands clear of the text before it, as an option label does; a letter inside a sentence does not.
+                found.append({'i': index_of(m[1]), 'family': (style, kind_of(m[1])), 'rect': rect, 'size': size, 'ch': m[0].strip(), 'lead': lead, 'apart': lead or wide > 1.2 * size})
+    mid = lambda c: (c['rect'].y0 + c['rect'].y1) / 2
+    for c in found:
+        # An option label starts its printed row. A letter in brackets inside an option's own text, like "(a), (b) and (c) only", does not:
+        # it follows text on its line, or the label of another family (capital vs small) printed before it on the same row.
+        c['first'] = c['lead'] and not any(d['family'] != c['family'] and (d['family'][1] == 'd') == (c['family'][1] == 'd') and d['rect'].x1 <= c['rect'].x0
+                                           and abs(mid(d) - mid(c)) < .6 * c['size'] for d in found)
     return found
 
 
@@ -88,8 +97,10 @@ def arrangement(s):
 
 
 def choose(found, kinds, want=(0, 1, 2, 3)):
-    """The last full set of the wanted labels that is lined up; statement labels higher in the question lose to it."""
-    best = None
+    """The last full set of the wanted labels that is lined up; statement labels higher in the question lose to it.
+    Letters of the other case printed inside the options themselves, like the (a), (b) of "(a) and (b) only", are never the options:
+    a set that begins inside another set's own lines loses to that set."""
+    best = {}
     for family in {c['family'] for c in found if c['family'][1] in kinds}:
         per = [[c for c in found if c['family'] == family and c['i'] == i][-8:] for i in want]
         if not per or not all(per):
@@ -97,12 +108,60 @@ def choose(found, kinds, want=(0, 1, 2, 3)):
         for s in itertools.product(*per):
             s = list(s)
             shape = arrangement(s)
-            if not shape:
+            # Every row of options begins with a real option label (see candidates): statement letters inside an option never start a row.
+            if not shape or not all(s[row[0]]['first'] for row in shape[1]):
                 continue
             key = (min(x['rect'].y0 for x in s), family[0] == 'paren', -max(x['rect'].y1 for x in s))
-            if not best or key > best[0]:
-                best = (key, s, shape)
-    return best and (best[1], best[2])
+            if family not in best or key > best[family][0]:
+                best[family] = (key, s, shape)
+    sets = list(best.values())
+    span = lambda b: (min(x['rect'].y0 for x in b[1]), max(x['rect'].y1 for x in b[1]))
+    outer = [a for a in sets if not any(b is not a and span(b)[0] < span(a)[0] - 1 and span(a)[0] < span(b)[1] for b in sets)]
+    pick = max(outer or sets, key=lambda b: b[0], default=None)
+    if not pick:
+        return None
+    # Capital and small letters are never mixed up: when a full set of the other case is printed below the lined-up set,
+    # that lower set is the options (it is only not lined up), and the set above it is the question's own statements.
+    mid = lambda c: (c['rect'].y0 + c['rect'].y1) / 2
+    case = pick[1][0]['family'][1]
+    low = max(mid(x) for x in pick[1]) + .6 * max(x['size'] for x in pick[1])
+    under = {}
+    for c in found:
+        if c['family'][1] in kinds and c['family'][1] != case and c['apart'] and mid(c) > low:
+            under.setdefault(c['family'], set()).add(c['i'])
+    if any(all(i in seen for i in want) for seen in under.values()):
+        return None
+    return pick[1], pick[2]
+
+
+def ruled(d):
+    """The rectangle a stroked path draws and its corner radius: a plain rectangle, or straight sides joined by square or rounded corners. None for anything else."""
+    items = d.get('items') or []
+    if d.get('type') not in ('s', 'fs') or not d.get('color') or not items:
+        return None
+    r = fitz.Rect(d['rect'])
+    if len(items) == 1 and items[0][0] == 're':
+        return r, 0.0
+    if len(items) == 1 and items[0][0] == 'qu':
+        return (r, 0.0) if items[0][1].is_rectangular else None
+    if not 3 <= len(items) <= 12:
+        return None
+    edge = lambda p: min(abs(p.x - r.x0), abs(p.x - r.x1)) < .5 or min(abs(p.y - r.y0), abs(p.y - r.y1)) < .5
+    radius, sides = 0.0, 0
+    for it in items:
+        a, b = it[1], it[-1]
+        if it[0] not in ('l', 'c') or not (edge(a) and edge(b)):
+            return None
+        if it[0] == 'l':
+            if abs(a.x - b.x) > .5 and abs(a.y - b.y) > .5:
+                return None
+            sides += 1
+        else:
+            w, h = abs(a.x - b.x), abs(a.y - b.y)
+            if not (.5 < w <= 14 and .5 < h <= 14):
+                return None
+            radius = max(radius, w, h)
+    return (r, radius) if sides >= 3 else None
 
 
 def bands(flags, least):
@@ -147,7 +206,7 @@ class Sheet:
         self.H, self.W = gray.shape
         back = int(np.bincount(gray.ravel(), minlength=256).argmax())
         self.mask = np.abs(gray.astype(np.int16) - back) > 24
-        self.rings = []
+        self.rings, self.boxes, self.small = [], [], []
         self.frames()
 
     def px(self, r):
@@ -161,24 +220,40 @@ class Sheet:
     def norm(self, r):
         return [round(max(0, r[0] / self.pw), 5), round(max(0, r[1] / self.ph), 5), round(min(1, r[2] / self.pw), 5), round(min(1, r[3] / self.ph), 5)]
 
+    def strips(self, r, t, radius=0.0):
+        """The pixel strips a ruled box's border is printed in, and its rounded corners when it has them."""
+        W, H = self.W, self.H
+        x0, y0, x1, y1 = self.px(r)
+        out = [(x0 - t, y0 - t, x1 + t, y0 + t), (x0 - t, y1 - t, x1 + t, y1 + t), (x0 - t, y0 - t, x0 + t, y1 + t), (x1 - t, y0 - t, x1 + t, y1 + t)]
+        if radius:
+            k = int(np.ceil(radius * SCALE)) + t
+            out += [(x0 - t, y0 - t, x0 + k, y0 + k), (x1 - k, y0 - t, x1 + t, y0 + k), (x0 - t, y1 - k, x0 + k, y1 + t), (x1 - k, y1 - k, x1 + t, y1 + t)]
+        out = [(max(0, a), max(0, b), min(W, c), min(H, e)) for a, b, c, e in out]
+        return [s for s in out if s[2] > s[0] and s[3] > s[1]]
+
     def frames(self):
-        """A ruled box that is really printed and that nothing touches only holds content: its border belongs to no piece."""
+        """A wide ruled box that is really printed and that nothing touches only holds content: its border belongs to no piece.
+        Narrower ruled boxes are only remembered: they count when a question prints its options in boxes side by side."""
         W, H = self.W, self.H
         for d in self.page.get_drawings():
-            if d.get('type') not in ('s', 'fs') or not d.get('color') or len(d['items']) != 1 or d['items'][0][0] != 're':
+            shape = ruled(d)
+            if not shape:
                 continue
-            r = fitz.Rect(d['rect'])
-            if r.width < .45 * self.clip.width or r.height < 18 or not r.intersects(self.clip) or not self.page.rect.contains(r):
+            r, radius = shape
+            wide = r.width >= .45 * self.clip.width and r.height >= 18
+            if not (wide or (r.width >= 30 and r.height >= 14 and len(self.small) < 60)) or not r.intersects(self.clip) or not self.page.rect.contains(r):
                 continue
             t = int(np.ceil(float(d.get('width') or 1) * SCALE / 2)) + 2
-            x0, y0, x1, y1 = self.px(r)
-            sides = [(x0 - t, y0 - t, x1 + t, y0 + t), (x0 - t, y1 - t, x1 + t, y1 + t), (x0 - t, y0 - t, x0 + t, y1 + t), (x1 - t, y0 - t, x1 + t, y1 + t)]
-            sides = [(max(0, a), max(0, b), min(W, c), min(H, e)) for a, b, c, e in sides]
-            sides = [s for s in sides if s[2] > s[0] and s[3] > s[1]]
+            sides = self.strips(r, t)
             # Clipped-away boxes of the PDF leave no ink: only a border that is really printed counts.
             printed = sum(int(self.mask[b:e, a:c].any(axis=0 if c - a > e - b else 1).sum()) for a, b, c, e in sides)
             if printed < .6 * sum(max(c - a, e - b) for a, b, c, e in sides):
                 continue
+            if not wide:
+                self.small.append((r, t))
+                continue
+            self.boxes.append((r, t))
+            sides = self.strips(r, t, radius)
             trial = self.mask.copy()
             for a, b, c, e in sides:
                 trial[b:e, a:c] = False
@@ -188,6 +263,38 @@ class Sheet:
             self.rings += [self.pt(s) for s in sides]
             if len(self.rings) > 160:
                 break
+
+    def outermost(self, boxes):
+        """Of these ruled boxes, the ones that lie wholly inside the region and inside no other box, in reading order."""
+        c = self.clip
+        outer = []
+        for r, t in sorted(boxes, key=lambda b: -b[0].get_area()):
+            if c.x0 - 1 <= r.x0 and r.x1 <= c.x1 + 1 and c.y0 - 1 <= r.y0 and r.y1 <= c.y1 + 1 and not any(o.x0 - 1 <= r.x0 and o.y0 - 1 <= r.y0 and r.x1 <= o.x1 + 1 and r.y1 <= o.y1 + 1 for o, _ in outer):
+                outer.append((r, t))
+        return sorted(outer, key=lambda b: (b[0].y0, b[0].x0))
+
+    def stack(self):
+        """The printed boxes of a boxed layout, top to bottom: the outermost wide ruled boxes of the region. Empty unless they sit one below another."""
+        outer = self.outermost(self.boxes)
+        return [] if any(b[0].y0 < a[0].y1 for a, b in zip(outer, outer[1:])) else outer
+
+    def layout(self):
+        """A boxed layout whose option boxes may sit side by side: the question's wide box, then every outermost box printed below it.
+        Empty unless no box overlaps another and all of them lie below the question's box."""
+        every = self.outermost(self.boxes + self.small)
+        top = next((b for b in every if b in self.boxes), None)
+        if not top:
+            return []
+        # A small box printed above the question's box (a number badge) is part of the heading.
+        rest = [b for b in every if b is not top and b[0].y1 > top[0].y0 + 1]
+        if any(b[0].y0 < top[0].y1 - 1 for b in rest) or any((a[0] & b[0]).get_area() > 1 for a, b in itertools.combinations(rest, 2)):
+            return []
+        return [top, *rest]
+
+    def inner(self, box):
+        """The pixels inside a printed box, clear of its border line."""
+        x0, y0, x1, y1 = self.px(box[0])
+        return x0 + box[1], y0 + box[1], x1 - box[1], y1 - box[1]
 
     def piece(self, cell, ink):
         m = int(MARGIN * SCALE)
@@ -201,14 +308,115 @@ def region_clip(page, rect):
     return fitz.Rect(rect[0] * w, rect[1] * h, rect[2] * w, rect[3] * h) & page.rect
 
 
+def heading(sheet, box):
+    """What is printed above a question's box is its heading (number, source, chapter) and belongs to no piece.
+    Returns the pixel row where the heading ends. Anything else printed up there is not guessed about."""
+    top = max(0, sheet.inner(box)[1] - 2 * box[1])
+    rows = np.flatnonzero(sheet.mask[:top].any(axis=1))
+    if not len(rows):
+        return top
+    # The 'Question N' line is looked for on the page itself: the region may begin just under it.
+    above = text_lines(sheet.page, fitz.Rect(sheet.clip.x0, max(0, box[0].y0 - HEAD), sheet.clip.x1, box[0].y0))
+    if (top - int(rows[0])) / SCALE > HEAD or not any(ANCHOR.match(''.join(c[0] for c in l)) for l in above):
+        raise Held('Sawaal ke box ke upar kuch chhapa hai jo heading jaisa nahi hai; yeh saaf nahi ki woh sawaal ka hissa hai ya nahi.')
+    return top
+
+
+def outside(sheet, cells, head):
+    """True when something is printed in the region that is neither the heading nor inside a printed box."""
+    left = sheet.mask.copy()
+    left[:head] = False
+    for box in cells:
+        c, t = sheet.inner(box), 2 * box[1]
+        left[max(0, c[1] - t):c[3] + t, max(0, c[0] - t):c[2] + t] = False
+    return bool(left.any())
+
+
+def inside(sheet, key, cell, own):
+    """The piece printed inside one box (a box whose border something touches is never taken as a printed box, see Sheet.frames)."""
+    ink = box_of(own, *cell)
+    if not ink:
+        raise Held('Sawaal ke box me kuch chhapa nahi hai.' if key == 'q' else f'Option {key} ke label ke baad kuch chhapa nahi hai.')
+    return sheet.piece(cell, ink)
+
+
+def assign(cells, found, lines, labels, typed, kinds):
+    """Which printed box is whose: every box below the question's box is named by the option label printed first inside it,
+    so boxes one below another, two in a line or four in a line are all read the same way. Capital labels are looked for first.
+    Returns (the label found for each option that needs a picture, [the question's box, one box per label], boxes that hold neither) or None."""
+    drawn = [i for i, x in enumerate(labels) if x not in typed]
+    centre = lambda r: fitz.Point((r.x0 + r.x1) / 2, (r.y0 + r.y1) / 2)
+    mid = lambda c: centre(c['rect'])
+    marks = [(r, centre(r)) for line in lines for ch, r, _ in line if not ch.isspace()]
+
+    def leads(c, box):
+        # A label is the first thing printed on its row inside its own box; a letter inside an option's text, like the (b) of "(a) and (b) only", is not.
+        y = mid(c).y
+        return not any(r.x1 <= c['rect'].x0 + .5 and abs(p.y - y) < .6 * c['size'] and box.contains(p) for r, p in marks)
+
+    for family in sorted({c['family'] for c in found if c['family'][1] in kinds}, key=lambda f: (f[0] != 'paren', f[1] != 'U')):
+        where = {}
+        for n in range(1, len(cells)):
+            own = [c for c in found if c['family'] == family and c['i'] < len(labels) and cells[n][0].contains(mid(c)) and leads(c, cells[n][0])]
+            if own:
+                c = min(own, key=lambda c: (round(c['rect'].y0), c['rect'].x0))
+                if c['i'] in where:
+                    where = None
+                    break
+                where[c['i']] = (n, c)
+        if not where or not all(i in where for i in drawn):
+            continue
+        spare = [n for n in range(1, len(cells)) if n not in {w[0] for w in where.values()}]
+        order = [where[i][0] if i in where else spare.pop(0) if spare else None for i in range(len(labels))]
+        if None not in order:
+            return [where[i][1] for i in drawn], [cells[0], *(cells[n] for n in order)], [cells[n] for n in spare]
+    return None
+
+
+def cut_printed(sheet, cells, chosen, lines, labels, typed):
+    """A boxed layout: the first printed box holds the question and every other box holds one option, its own label printed first.
+    The printed boxes are the pieces. cells: the question's box, then one box per label. Returns {q, <label>...: {rect, erase}}."""
+    head = heading(sheet, cells[0])
+    drawn = [i for i, x in enumerate(labels) if x not in typed]
+    pieces = {'q': inside(sheet, 'q', sheet.inner(cells[0]), sheet.mask)[1]}
+    for (mark, alone), i in zip(label_boxes(sheet, chosen, lines), drawn):
+        own = sheet.mask
+        if alone:
+            own = sheet.mask.copy()
+            own[mark[1]:mark[3], mark[0]:mark[2]] = False
+        box, pieces[labels[i]] = inside(sheet, labels[i], sheet.inner(cells[i + 1]), own)
+        if alone:
+            gone = sheet.pt((mark[0] - 2, mark[1] - 2, mark[2] + 2, mark[3] + 2)) & sheet.pt(box)
+            if not gone.is_empty:
+                pieces[labels[i]]['erase'].append(sheet.norm(gone))
+    if outside(sheet, cells, head):
+        raise Held('Chhape hue boxes ke bahar bhi kuch chhapa hai jo kisi box me nahi aaya.')
+    return pieces
+
+
+def printed_boxes(sheet, cells=None):
+    """The printed boxes of the region for the fix tool (0..1 of the page), in reading order."""
+    return [sheet.norm(sheet.pt(sheet.inner(b))) for b in (sheet.stack() if cells is None else cells)[:12]]
+
+
 def trim_region(page, rect):
     """A region with no options (a numerical question, or the part of a question printed on another page): trimmed to its ink."""
     sheet = Sheet(page, region_clip(page, rect))
+    size, cells = [sheet.pw, sheet.ph], sheet.stack()
+    out = {'v': CUT_VERSION, 'status': 'trim', 'reason': '', 'arrangement': '', 'size': size, 'frames': printed_boxes(sheet), 'pieces': {}}
+    if len(cells) == 1:
+        # Boxes first: a question printed in its own box is that box, without the heading above it.
+        try:
+            head = heading(sheet, cells[0])
+            piece = inside(sheet, 'q', sheet.inner(cells[0]), sheet.mask)[1]
+            if not outside(sheet, cells, head):
+                return {**out, 'arrangement': 'boxes', 'pieces': {'q': piece}}
+        except Held:
+            pass
     ink = box_of(sheet.mask, 0, 0, sheet.W, sheet.H)
-    size = [sheet.pw, sheet.ph]
     if not ink:
-        return {'v': CUT_VERSION, 'status': 'none', 'reason': '', 'size': size, 'pieces': {}}
-    return {'v': CUT_VERSION, 'status': 'trim', 'reason': '', 'size': size, 'pieces': {'q': sheet.piece((0, 0, sheet.W, sheet.H), ink)[1]}}
+        return {**out, 'status': 'none'}
+    return {**out, 'pieces': {'q': sheet.piece((0, 0, sheet.W, sheet.H), ink)[1]}}
 
 
 def label_boxes(sheet, chosen, lines):
@@ -227,14 +435,18 @@ def label_boxes(sheet, chosen, lines):
 def proposal(page, clip, found, kinds, labels):
     """Boxes for the fix tool to start from when a cut is held, drawn around whichever option labels were found.
     Only a starting point: nothing here reaches a student until the owner saves boxes that pass every check."""
-    last = {}
-    for c in found:
-        if c['family'][1] in kinds and c['i'] < len(labels):
-            old = last.get(c['i'])
-            if not old or (c['rect'].y0, c['rect'].x0) >= (old['rect'].y0, old['rect'].x0):
-                last[c['i']] = c
-    if not last:
+    pool = [c for c in found if c['family'][1] in kinds and c['i'] < len(labels)]
+    if not pool:
         return {}
+    centre = lambda c: (c['rect'].y0 + c['rect'].y1) / 2
+    # One kind of label only: capitals and small letters are never mixed. The options are the last thing printed in a question,
+    # so the kind whose first label starts a line lowest on the page is taken, and every other label is the first one printed after it.
+    heads = [c for c in pool if c['i'] == 0 and c['first']] or [c for c in pool if c['i'] == 0] or pool
+    head = max(heads, key=lambda c: (c['rect'].y0, c['family'][0] == 'paren'))
+    last = {head['i']: head}
+    for c in sorted(pool, key=lambda c: (not c['apart'], round(c['rect'].y0), c['rect'].x0)):
+        if c['family'] == head['family'] and c['i'] not in last and centre(c) > centre(head) - .6 * head['size']:
+            last[c['i']] = c
     sheet = Sheet(page, clip)
     rows = []
     for i, c in sorted(last.items(), key=lambda kv: ((kv[1]['rect'].y0 + kv[1]['rect'].y1) / 2, kv[1]['rect'].x0)):
@@ -271,8 +483,8 @@ def proposal(page, clip, found, kinds, labels):
 def cut_region(page, rect, labels, typed=()):
     """rect: the question's region on the page (0..1). labels: the four answer keys in order. typed: keys the owner typed, which need no picture.
     Returns {v, status, reason, arrangement, pieces:{q, <label>...: {rect, erase}}} with every rect in 0..1 of the page."""
-    out = {'v': CUT_VERSION, 'status': 'held', 'reason': '', 'arrangement': '', 'size': [page.rect.width, page.rect.height], 'pieces': {}}
-    clip, found, kinds = None, [], ()
+    out = {'v': CUT_VERSION, 'status': 'held', 'reason': '', 'arrangement': '', 'size': [page.rect.width, page.rect.height], 'frames': [], 'pieces': {}}
+    clip, found, kinds, boxed, printed = None, [], (), '', {}
     try:
         if len(labels) != 4:
             raise Held(f'Chaar option hone chahiye; is sawaal me {len(labels)} hi answer button {"hai" if len(labels) == 1 else "hain"}. Jo option chhapa nahi hai use type karo, ya boxes khud banao.')
@@ -282,6 +494,24 @@ def cut_region(page, rect, labels, typed=()):
             raise Held('Page ke is hisse me padhne layak text nahi hai (shayad scan hai), isliye option ke label nahi mile.')
         found = candidates(lines)
         kinds = ('d',) if labels[0].isdigit() else ('U', 'l')
+        sheet = Sheet(page, clip)
+        wide = sheet.stack()
+        out['frames'] = printed_boxes(sheet, sheet.layout() or wide)
+        # Boxes first: a page that prints the question in one box and every option in its own box is cut along those boxes.
+        for cells in (wide, sheet.layout()):
+            placed = assign(cells, found, lines, list(labels), typed, kinds) if len(cells) > len(labels) else None
+            if placed:
+                chosen, cells, spare = placed
+                out['frames'] = printed_boxes(sheet, cells + spare)
+                printed = dict(zip(['q', *labels], out['frames']))
+                if spare:
+                    raise Held('Is sawaal me ek aur chhapa hua box hai jo na sawaal ka hai, na kisi option ka.')
+                # Once the boxes are known, anything wrong with them is shown to the owner; nothing is guessed from white space instead.
+                out.update(pieces=cut_printed(sheet, cells, chosen, lines, list(labels), typed), arrangement='boxes', status='ok')
+                return out
+        if len(wide) == len(labels) + 1:
+            printed = dict(zip(['q', *labels], printed_boxes(sheet, wide)))
+            boxed = 'Har option ke box me uska apna label (A, B, C, D) sabse pehle chhapa hona chahiye; aisa nahi mila.'
         names = list(labels)
         picked = choose(found, kinds)
         if not picked and typed:
@@ -299,7 +529,6 @@ def cut_region(page, rect, labels, typed=()):
         chosen, (shape, rows) = picked
         count = len(names)
         out['arrangement'] = shape
-        sheet = Sheet(page, clip)
         mask, W, H = sheet.mask, sheet.W, sheet.H
         size = max(c['size'] for c in chosen) * SCALE
         marks = label_boxes(sheet, chosen, lines)
@@ -439,8 +668,11 @@ def cut_region(page, rect, labels, typed=()):
                     raise Held(f'{cap(said(keys[a]))} aur {said(keys[b])} ki picture ek doosre par chadh rahi hain.')
         out['status'] = 'ok'
     except Held as exc:
-        out['reason'] = str(exc)
-        if not out['pieces'] and clip is not None and labels:
+        out['reason'] = boxed or str(exc)
+        if printed:
+            # The printed boxes themselves are the best place for the fix tool to start from.
+            out['pieces'], out['draft'] = {}, printed
+        elif not out['pieces'] and clip is not None and labels:
             try:
                 out['draft'] = proposal(page, clip, found, kinds or (('d',) if labels[0].isdigit() else ('U', 'l')), list(labels))
             except Exception:  # noqa: BLE001  a starting suggestion must never fail the cut itself
@@ -452,7 +684,7 @@ def cut_boxes(page, rect, boxes, labels):
     """Boxes drawn by hand (0..1 of the page) -> pieces, after the same checks.
     Returns {status:'manual'|'held', reason, pieces, outside}: `outside` is true when printed marks of the region lie in no box."""
     said = lambda k: 'Sawaal ka box' if k == 'q' else f'Option {k} ka box'
-    out = {'v': CUT_VERSION, 'status': 'held', 'reason': '', 'arrangement': 'by hand', 'size': [page.rect.width, page.rect.height], 'pieces': {}, 'outside': False}
+    out = {'v': CUT_VERSION, 'status': 'held', 'reason': '', 'arrangement': 'by hand', 'size': [page.rect.width, page.rect.height], 'frames': [], 'pieces': {}, 'outside': False}
     try:
         clip = region_clip(page, rect)
         areas = {}
@@ -476,8 +708,13 @@ def cut_boxes(page, rect, boxes, labels):
         keys = list(areas)
         for a in range(len(keys)):
             for b in range(a + 1, len(keys)):
-                if (areas[keys[a]] & areas[keys[b]]).get_area() > .5:
-                    raise Held(f'{said(keys[a])} aur {said(keys[b])[:1].lower() + said(keys[b])[1:]} ek doosre par chadh rahe hain. Do hisse page ka koi bhi hissa share nahi kar sakte.')
+                both = areas[keys[a]] & areas[keys[b]]
+                if both.get_area() <= .5:
+                    continue
+                # A box drawn by hand may run over its neighbour on blank paper; nothing printed may lie in two boxes.
+                x0, y0, x1, y1 = sheet.px(both)
+                if sheet.mask[y0:y1, x0:x1].any():
+                    raise Held(f'{said(keys[a])} aur {said(keys[b])[:1].lower() + said(keys[b])[1:]} ek doosre par chadh rahe hain. Jo chhapa hai woh ek hi box me aa sakta hai.')
         left = sheet.mask.copy()
         for key in keys:
             cell = sheet.px(areas[key])
@@ -498,6 +735,19 @@ def cut_boxes(page, rect, boxes, labels):
             left[cell[1]:cell[3], cell[0]:cell[2]] = False
         for b, _ in marks.values():
             left[b[1]:b[3], b[0]:b[2]] = False
+        for r, t in sheet.small:
+            # The printed border of a small box that one of these boxes was drawn in is not content of the question.
+            if any((a & r).get_area() > .6 * a.get_area() for a in areas.values()):
+                for a, b, c, e in sheet.strips(r, t):
+                    left[b:e, a:c] = False
+        cells = sheet.layout() or sheet.stack()
+        out['frames'] = printed_boxes(sheet, cells)
+        if cells:
+            # The heading printed above a boxed question (number, source, chapter) belongs to no piece.
+            try:
+                left[:heading(sheet, cells[0])] = False
+            except Held:
+                pass
         x0, y0, x1, y1 = sheet.px(region_clip(page, rect))
         out['outside'] = bool(left[y0:y1, x0:x1].sum() > 12)
         out['status'] = 'manual'
@@ -505,3 +755,4 @@ def cut_boxes(page, rect, boxes, labels):
         out['reason'] = str(exc)
         out['pieces'] = {}
     return out
+

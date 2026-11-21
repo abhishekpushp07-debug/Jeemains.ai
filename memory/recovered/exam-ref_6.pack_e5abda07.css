@@ -1,0 +1,609 @@
+/* Premium exam addendum: existing #5C0025 primary + semantic surfaces. */\
+:root { --source-fit-min-height:4rem; --source-fit-max-height:22rem; }\
+.source-inline-viewer .source-canvas-frame[data-view-mode='fit'] { height:clamp(var(--source-fit-min-height),calc(var(--source-ratio,.2) * var(--source-fit-width,var(--source-readable-size))),var(--source-fit-max-height)); }\
+\
+.player-layout .number-grid { grid-template-columns:repeat(5,minmax(0,1fr)); }\
+.player-layout .number-grid button { min-width:0; width:100%; padding:0; }\
+\
+:root { --exam-header-offset: 5.375rem; --exam-row-number-size: 3rem; --source-readable-width: 760; --source-readable-size: 47.5rem; --source-inline-height: clamp(8rem, calc(var(--source-ratio, .2) * var(--source-readable-size)), 22rem); --z-exam-filters: 20; --exam-reading-line: 1.55; }\
+.logo, .header-actions .btn, .login-link, .desktop-nav a { min-height:var(--touch-target); }\
+.login-link, .desktop-nav a { display:inline-flex; align-items:center; }\
+.exam-library-heading { display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:var(--space-6); margin-bottom:var(--space-8); }\
+.exam-library-heading .eyebrow { margin-bottom:var(--space-3); }\
+.exam-library-heading h1 { font-size:var(--text-title); letter-spacing:var(--tracking-tight); line-height:var(--leading-tight); margin-bottom:var(--space-3); }\
+.exam-library-heading p { font-size:var(--text-sm); }\
+.exam-library-rules { display:flex; flex-wrap:wrap; gap:var(--space-4); padding:var(--space-4); border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface-card); color:var(--text-muted); font-size:var(--text-sm); }\
+.exam-library-rules span { display:flex; align-items:center; gap:var(--space-2); }\
+.exam-library-filters { position:sticky; top:var(--exam-header-offset); z-index:var(--z-exam-filters); background:var(--page); padding-block:var(--space-3); margin-block:var(--space-4) var(--space-2); border-bottom:1px solid var(--line); }\
+.exam-library-filters .chapter-search { background:var(--surface-card); border:1px solid var(--line); border-radius:var(--radius-sm); padding-left:var(--space-3); }\
+.exam-library-filters .chapter-search input { border:0; box-shadow:none; background:transparent; }\
+.exam-library-disclosure { font-size:var(--text-sm); color:var(--text-muted); }\
+.exam-library-disclosure summary { display:flex; align-items:center; gap:var(--space-2); cursor:pointer; min-height:var(--touch-target); }\
+.exam-library-disclosure summary svg { color:var(--brand-text); }\
+.exam-about-label { margin-left:auto; font-size:var(--text-xs); text-decoration:underline; text-underline-offset:var(--space-1); }\
+.exam-library-disclosure p { padding:var(--space-4); background:var(--surface-alt); border-radius:var(--radius-sm); }\
+.exam-library-count { display:flex; align-items:center; justify-content:space-between; min-height:var(--space-12); font-size:var(--text-sm); margin-block:var(--space-2); }\
+.exam-library-list { display:grid; gap:var(--space-3); }\
+.exam-row { display:grid; grid-template-columns:var(--exam-row-number-size) minmax(0,1fr) auto auto; gap:var(--space-6); align-items:center; background:var(--surface-card); border:1px solid var(--line); border-radius:var(--radius-card); padding:var(--space-5) var(--space-6); }\
+.exam-row:hover { border-color:var(--brand-line); box-shadow:0 var(--space-1) var(--space-4) var(--shadow-tint); }\
+.exam-row-number { display:grid; place-items:center; height:var(--exam-row-number-size); border:1px solid var(--brand-line); background:var(--brand-soft); color:var(--brand-text); font-family:var(--font-mono); font-size:var(--text-base); border-radius:var(--radius-sm); }\
+.exam-row-main { min-width:0; }\
+.exam-row-overline { display:flex; gap:var(--space-3); font-size:var(--text-xs); color:var(--text-muted); margin-bottom:var(--space-1); }\
+.exam-row-overline > span:last-child { border-left:1px solid var(--line); padding-left:var(--space-3); }\
+.exam-row-overline .exam-state-active { color:var(--brand-text); font-weight:600; }\
+.exam-row h3 { font-size:var(--text-lg); font-weight:600; letter-spacing:var(--tracking-tight); line-height:var(--exam-reading-line); overflow-wrap:anywhere; }\
+.exam-row-main p { font-size:var(--text-xs); margin-top:var(--space-1); }\
+.exam-row-main p span { padding-inline:var(--space-1); }\
+.exam-row-validity { display:grid; gap:var(--space-1); padding-inline:var(--space-6); border-left:1px solid var(--line); font-size:var(--text-xs); color:var(--text-muted); }\
+.exam-row-validity strong { color:var(--ink); font-weight:500; }\
+.exam-row-actions { display:flex; align-items:center; gap:var(--space-2); }\
+.chapter-exams button, .chapter-exams [role='tablist'] { height:auto; min-height:var(--touch-target); }\
+.results-review-shortcuts { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); flex-wrap:wrap; margin-bottom:var(--space-5); }\
+.results-review-shortcuts p { display:flex; align-items:center; gap:var(--space-2); font-size:var(--text-sm); }\
+.results-review-shortcuts button { min-height:var(--touch-target); }\
+.results-key-notice { margin-bottom:var(--space-5); padding:var(--space-4); background:var(--surface-alt); border-left:var(--space-1) solid var(--brand-text); font-size:var(--text-sm); }\
+#results-review-heading { scroll-margin-top:var(--space-24); }\
+.source-inline-viewer { padding:var(--space-3); border:1px solid var(--line); border-radius:var(--radius-sm); background:var(--surface-alt); }\
+.source-inline-viewer .source-zoom-controls { justify-content:flex-start; gap:var(--space-2); }\
+.source-zoom-controls button[aria-pressed='true'] { background:var(--brand-soft); color:var(--brand-text); border-color:var(--brand-text); }\
+.source-inline-viewer .source-canvas-frame { height:var(--source-inline-height); }\
+.source-reader-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:var(--space-2); }\
+.source-reader-bottom .source-pan-controls { gap:var(--space-2); }\
+.source-reader-bottom p { font-size:var(--text-xs); }\
+.source-original-check { display:none; }\
+.player-shortcuts { display:flex; flex-wrap:wrap; gap:var(--space-3); font-size:var(--text-xs); color:var(--text-muted); margin-top:var(--space-4); }\
+.player-shortcuts kbd { font-family:var(--font-mono); border:1px solid var(--line); border-radius:var(--radius-sm); padding-inline:var(--space-1); background:var(--surface-card); }\
+.player-question-area .math-text { font-size:var(--text-base); line-height:1.8; }\
+.player-question-area .question-topline, .player-question-area .question-heading .btn, .answer-fieldset legend, .clear-answer { font-size:var(--text-sm); }\
+.player-layout .btn, .player-layout .clear-answer, .navigator-heading { min-height:var(--touch-target); }\
+.player-layout .answer-options-source { grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3); }\
+.answer-options-source .answer-option { justify-content:center; min-height:var(--touch-target); padding:var(--space-3); gap:var(--space-2); }\
+.answer-options-source .option-index { border:0; background:none; font-size:var(--text-base); }\
+.answer-options-source .option-copy { display:none; }\
+.player-layout .answer-options-source.has-typed { grid-template-columns:1fr; }\
+.answer-options-source.has-typed .answer-option { justify-content:flex-start; }\
+.answer-options-source.has-typed .option-copy { display:block; }\
+.answer-options-source .selected .option-index { background:none; color:var(--brand-text); }\
+.source-options-hint { font-size:var(--text-xs); margin-bottom:var(--space-3); }\
+.studio-validation-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-3); margin-block:var(--space-5); }\
+.studio-validation-item { display:flex; flex-direction:column; gap:var(--space-2); padding:var(--space-4); border:1px solid var(--line); background:var(--surface-alt); border-radius:var(--radius-sm); font-size:var(--text-sm); }\
+.studio-validation-item strong { color:var(--brand-text); font-size:var(--text-xl); }\
+.studio-validation-issues { display:grid; gap:var(--space-3); margin-block:var(--space-5); }\
+.studio-validation-issue { padding:var(--space-4); border:1px solid var(--warning-line); border-left:var(--space-1) solid var(--warning); border-radius:var(--radius-sm); background:var(--warning-soft); }\
+.studio-validation-issue p { font-size:var(--text-sm); margin-block:var(--space-2); }\
+.studio-validation-issue button { min-height:var(--touch-target); }\
+@media (max-width:768px) {\
+ :root { --exam-header-offset:4.5rem; }\
+ .chapter-exams.page { padding-top:var(--space-6); }\
+ .exam-library-heading { gap:var(--space-4); margin-bottom:var(--space-5); }\
+ .exam-library-rules { padding:var(--space-3); gap:var(--space-3); font-size:var(--text-xs); width:100%; }\
+ .exam-library-filters { gap:var(--space-2); }\
+ .exam-library-filters [role='tablist'] { flex-wrap:nowrap; gap:0; }\
+ .exam-library-filters [role='tab'] { flex:1; padding-inline:var(--space-2); font-size:var(--text-xs); }\
+ .exam-library-filters [role='tab'] span { display:none; }\
+ .exam-about-label { display:none; }\
+ .exam-row { grid-template-columns:var(--exam-row-number-size) minmax(0,1fr); padding:var(--space-4); gap:var(--space-3); }\
+ .exam-row h3 { font-size:var(--text-base); }\
+ .exam-row-actions { grid-column:2; }\
+ .exam-row-actions .btn { min-height:var(--touch-target); padding:var(--space-2) var(--space-4); }\
+ .exam-row-validity { display:none; }\
+ .studio-validation-grid { grid-template-columns:minmax(0,1fr); }\
+}\
+@media (max-width:640px) {\
+ .preflight-start-ready { position:sticky; bottom:0; background:var(--surface-card); padding-block:var(--space-3); padding-bottom:max(var(--space-3),env(safe-area-inset-bottom)); z-index:var(--z-exam-filters); }\
+ .player-layout .compact-practice-note { display:none; }\
+ .player-layout .question-card { padding:var(--space-4); }\
+ .player-layout .question-heading { gap:var(--space-2); margin-block:var(--space-3); }\
+ .player-layout .question-heading h2 { font-size:var(--text-lg); letter-spacing:var(--tracking-tight); }\
+ .player-layout .question-heading .btn { font-size:var(--text-xs); }\
+ .player-layout .question-topline { padding-bottom:var(--space-3); font-size:var(--text-xs); }\
+ .player-layout .question-navigation { position:sticky; bottom:0; background:var(--surface-card); padding:var(--space-3) 0 max(var(--space-3),env(safe-area-inset-bottom)); z-index:var(--z-exam-filters); gap:var(--space-2); }\
+ .player-layout .question-navigation .btn { padding-inline:var(--space-3); }\
+ .player-shortcuts { display:none; }\
+ .source-inline-viewer { padding:var(--space-2); }\
+ .source-inline-viewer .source-zoom-controls { gap:var(--space-1); }\
+ .source-inline-viewer .source-zoom-controls button { padding-inline:var(--space-2); }\
+ .source-reader-bottom { justify-content:flex-start; }\
+ .results-review-shortcuts p { align-items:flex-start; }\
+}\
+\
+/* PDF Engine 2.0: only the question in the question area, and each option's own content on its own button. */\
+.piece-stem { display:grid; gap:var(--space-2); margin-block:var(--space-3) var(--space-2); min-width:0; }\
+.piece-paper { min-width:0; padding:var(--space-3) var(--space-4); border:1px solid var(--line); border-radius:14px; background:#fff; color:#111; }\
+.piece-fit { display:flex; flex-direction:column; align-items:flex-start; gap:var(--space-2); width:100%; min-width:0; overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:thin; }\
+.piece-img { display:block; flex:none; max-width:none; height:auto; user-select:none; -webkit-user-drag:none; }\
+.piece-wait { border-radius:6px; background:linear-gradient(90deg,#f0f0f3 0%,#fafafb 50%,#f0f0f3 100%); background-size:200% 100%; animation:piece-shimmer 1.2s linear infinite; }\
+@keyframes piece-shimmer { from { background-position:200% 0; } to { background-position:-200% 0; } }\
+.piece-retry { display:inline-flex; align-items:center; gap:var(--space-2); min-height:var(--touch-target); padding:0 var(--space-3); border:1px solid #f1cdd4; border-radius:999px; background:#fff5f6; color:#9c0a19; font-size:var(--text-sm); font-weight:600; }\
+.piece-zoom { display:flex; justify-content:flex-end; gap:var(--space-2); }\
+.piece-zoom button { display:grid; place-items:center; width:var(--touch-target); height:var(--touch-target); border:1px solid var(--line); border-radius:999px; background:var(--surface-card); color:var(--text-muted); transition:color .16s ease,border-color .16s ease,background-color .16s ease,transform .16s ease; }\
+.piece-zoom button:hover:not(:disabled) { color:var(--brand-text); border-color:var(--brand-line); background:var(--brand-soft); transform:translateY(-1px); }\
+.piece-zoom button:disabled { opacity:.35; }\
+.piece-options { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--space-3); }\
+.piece-options.is-review { gap:var(--space-5); margin-block:var(--space-5) var(--space-4); }\
+.piece-options .piece-option { display:flex; align-items:center; gap:var(--space-3); position:relative; min-width:0; min-height:4rem; padding:var(--space-3); border:1.5px solid var(--line); border-radius:16px; background:var(--surface-card); color:var(--ink); font-size:var(--text-base); cursor:pointer; transition:border-color .16s ease,box-shadow .16s ease,background-color .16s ease,transform .16s ease; }\
+.piece-options.is-answer .piece-option:hover { border-color:var(--brand-line); background:var(--surface-card); transform:translateY(-1px); box-shadow:0 12px 26px -20px rgb(0 0 0 / .45); }\
+.piece-options.is-answer .piece-option.selected { border-color:var(--blue); background:var(--brand-soft); color:var(--ink); transform:none; box-shadow:0 0 0 1.5px var(--blue),0 16px 30px -22px var(--blue); }\
+.piece-options .piece-option.is-disabled { cursor:not-allowed; opacity:.65; }\
+.answer-fieldset:disabled .piece-option { cursor:not-allowed; opacity:.65; }\
+.piece-options .piece-option .piece-chip { flex:none; width:2.25rem; height:2.25rem; border:1.5px solid var(--line); border-radius:999px; background:var(--surface-alt); color:var(--ink); font-family:var(--font-mono,'Roboto Mono',monospace); font-size:var(--text-sm); font-weight:700; transition:background-color .16s ease,border-color .16s ease,color .16s ease; }\
+.piece-options .piece-option.selected .piece-chip { background:var(--blue); border-color:var(--blue); color:var(--on-brand); }\
+.piece-options .piece-option .piece-paper { flex:1; padding:var(--space-2) var(--space-3); border-radius:10px; }\
+.piece-typed { flex:1; min-width:0; line-height:1.6; overflow-wrap:anywhere; }\
+.piece-tick { display:grid; place-items:center; flex:none; width:1.75rem; height:1.75rem; border:1.5px solid var(--line); border-radius:999px; color:transparent; transition:background-color .16s ease,border-color .16s ease,color .16s ease,transform .2s cubic-bezier(.16,1,.3,1); }\
+.piece-option.selected .piece-tick { background:var(--blue); border-color:var(--blue); color:var(--on-brand); transform:scale(1.08); }\
+.piece-options.is-review .piece-option { cursor:default; }\
+.piece-options .piece-option.is-correct { border-color:#0E7C45; background:var(--success-soft); }\
+.piece-options .piece-option.is-correct .piece-chip { background:#0E7C45; border-color:#0E7C45; color:#fff; }\
+.piece-options .piece-option.is-wrong { border-color:#C2102C; background:var(--danger-soft); }\
+.piece-options .piece-option.is-wrong .piece-chip { background:#C2102C; border-color:#C2102C; color:#fff; }\
+.piece-mark { position:absolute; top:-.7rem; right:var(--space-4); display:inline-flex; align-items:center; gap:4px; padding:2px 10px; border-radius:999px; background:#0E7C45; color:#fff; font-size:var(--text-xs); font-weight:700; line-height:1.5; white-space:nowrap; }\
+.piece-option.is-wrong .piece-mark { background:#C2102C; }\
+@media (max-width:640px) {\
+ .piece-paper { padding:var(--space-2) var(--space-3); border-radius:12px; }\
+ .piece-options .piece-option { gap:var(--space-2); padding:var(--space-2); border-radius:14px; }\
+ .piece-options .piece-option .piece-chip { width:2rem; height:2rem; }\
+ .piece-options .piece-option .piece-paper { padding:var(--space-2); }\
+ .piece-tick { width:1.5rem; height:1.5rem; }\
+}\
+@media (prefers-reduced-motion:reduce) {\
+ .piece-wait { animation:none; }\
+ .piece-options .piece-option, .piece-tick, .piece-zoom button { transition:none; }\
+}\
+\"],\"sourceRoot\":\"\"}]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+export default ___CSS_LOADER_EXPORT___;
+","__webpack_require__.h = () => (\"3366670ec4020b458366\")"],"names":[],"sourceRoot":""}��������src_features_admin_AdminWorkspace_js.63522f7e0e4a3cd1ae60.hot-update.js�src_features_admin_AdminWorkspace_js.63522f7e0e4a3cd1ae60.hot-update.js.map��  "use strict";
+globalThis["webpackHotUpdatefrontend"]("src_features_admin_AdminWorkspace_js",{
+
+/***/ "./src/components/books/CutTool.js"
+/*!*****************************************!*\
+  !*** ./src/components/books/CutTool.js ***!
+  \*****************************************/
+(module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CutTool: () => (/* binding */ CutTool),
+/* harmony export */   PiecesPreview: () => (/* binding */ PiecesPreview)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-check.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/loader-circle.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/triangle-alert.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/maximize-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/minimize-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/rotate-ccw.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/scissors.js");
+/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ui/button */ "./src/components/ui/button.jsx");
+/* harmony import */ var _lib_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../lib/api */ "./src/lib/api.js");
+/* harmony import */ var _lib_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../lib/auth */ "./src/lib/auth.js");
+/* harmony import */ var _QuestionPieces__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../QuestionPieces */ "./src/components/QuestionPieces.js");
+/* harmony import */ var _BookShared__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./BookShared */ "./src/components/books/BookShared.js");
+/* harmony import */ var sonner__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! sonner */ "./node_modules/sonner/dist/index.mjs");
+/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react/jsx-dev-runtime */ "./node_modules/react/jsx-dev-runtime.js");
+/* provided dependency */ var __react_refresh_utils__ = __webpack_require__(/*! ./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js */ "./node_modules/@pmmmwh/react-refresh-webpack-plugin/lib/runtime/RefreshUtils.js");
+__webpack_require__.$Refresh$.runtime = __webpack_require__(/*! ./node_modules/react-refresh/runtime.js */ "./node_modules/react-refresh/runtime.js");
+
+var _jsxFileName = "/app/frontend/src/components/books/CutTool.js",
+  _s = __webpack_require__.$Refresh$.signature(),
+  _s2 = __webpack_require__.$Refresh$.signature(),
+  _s3 = __webpack_require__.$Refresh$.signature(),
+  _s4 = __webpack_require__.$Refresh$.signature(),
+  _s5 = __webpack_require__.$Refresh$.signature(),
+  _s6 = __webpack_require__.$Refresh$.signature();
+
+
+
+
+
+
+
+
+
+// PDF Engine 2.0 fix tool: the page with one box per piece (question, A, B, C, D) and, beside it, exactly what the student gets.
+
+const TONES = ['#2563EB', '#D97706', '#059669', '#7C3AED', '#DB2777', '#0891B2'];
+const NAME = k => k === 'q' ? 'Sawaal' : k;
+_c = NAME;
+const MIN = .006,
+  STEP = .002;
+const round = b => b.map(x => Math.round(x * 1e5) / 1e5);
+const cache = new Map();
+function pageImage(path) {
+  if (!cache.has(path)) {
+    const job = (0,_lib_api__WEBPACK_IMPORTED_MODULE_9__.fetchWithSession)(path).then(async res => {
+      if (!res.ok) throw new Error('Page ki picture nahi khuli. Refresh dabao aur dobara dekho.');
+      const url = URL.createObjectURL(await res.blob());
+      return new Promise((done, fail) => {
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          done(img);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          fail(new Error('Page ki picture nahi khuli. Refresh dabao aur dobara dekho.'));
+        };
+        img.src = url;
+      });
+    });
+    job.catch(() => cache.delete(path));
+    cache.set(path, job);
+    if (cache.size > 24) cache.delete(cache.keys().next().value);
+  }
+  return cache.get(path);
+}
+function usePages(bookId, mockId, list) {
+  _s();
+  const key = list.join(',');
+  const [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    images: {},
+    error: ''
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    let on = true;
+    const wanted = key ? key.split(',').map(Number) : [];
+    Promise.all(wanted.map(n => pageImage(`/admin/books/${bookId}/mocks/${mockId}/page/${n}`).then(img => [n, img]))).then(rows => {
+      if (on) setState({
+        images: Object.fromEntries(rows),
+        error: ''
+      });
+    }).catch(e => {
+      if (on) setState({
+        images: {},
+        error: e.message
+      });
+    });
+    return () => {
+      on = false;
+    };
+  }, [bookId, mockId, key]);
+  return state;
+}
+_s(usePages, "ggUEHTGAu5vGfEywLQLAhL1eGJY=");
+function CanvasPiece({
+  image,
+  part,
+  width
+}) {
+  _s2();
+  const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const c = ref.current;
+    if (!c || !image) return;
+    const W = image.naturalWidth,
+      H = image.naturalHeight,
+      [x0, y0, x1, y1] = part.rect;
+    const sx = Math.round(x0 * W),
+      sy = Math.round(y0 * H),
+      sw = Math.max(1, Math.round((x1 - x0) * W)),
+      sh = Math.max(1, Math.round((y1 - y0) * H));
+    c.width = sw;
+    c.height = sh;
+    const g = c.getContext('2d');
+    g.fillStyle = '#fff';
+    g.fillRect(0, 0, sw, sh);
+    g.drawImage(image, sx, sy, sw, sh, 0, 0, sw, sh);
+    // Ruled borders and the printed option label are painted white, as in the picture students get.
+    for (const e of part.erase || []) g.fillRect(Math.floor(e[0] * W) - sx - 1, Math.floor(e[1] * H) - sy - 1, Math.ceil((e[2] - e[0]) * W) + 2, Math.ceil((e[3] - e[1]) * H) + 2);
+  }, [image, part]);
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("canvas", {
+    ref: ref,
+    className: "piece-img",
+    style: {
+      width,
+      aspectRatio: `${part.w} / ${part.h}`
+    },
+    role: "img",
+    "aria-label": part.part === 'q' ? 'Sawaal ki picture' : 'Option ' + part.part,
+    "x-file-name": "CutTool",
+    "x-line-number": "55",
+    "x-component": "canvas",
+    "x-id": "CutTool_55",
+    "x-dynamic": "false"
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 55,
+    columnNumber: 9
+  }, this);
+}
+
+// parts: [{part, page, rect, erase, size}] as saved on the question's cut.
+_s2(CanvasPiece, "8uVE59eA/r6b92xF80p7sH8rXLk=");
+_c2 = CanvasPiece;
+function PiecesPreview({
+  bookId,
+  mockId,
+  parts,
+  q,
+  empty
+}) {
+  _s3();
+  const pages = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => [...new Set(parts.map(p => p.page))], [parts]);
+  const {
+    images,
+    error
+  } = usePages(bookId, mockId, pages);
+  const pieces = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => parts.map(p => ({
+    ...p,
+    w: (p.rect[2] - p.rect[0]) * p.size[0],
+    h: (p.rect[3] - p.rect[1]) * p.size[1]
+  })), [parts]);
+  if (!parts.length) return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("p", {
+    className: "cut-empty",
+    "x-file-name": "CutTool",
+    "x-line-number": "63",
+    "x-component": "p",
+    "x-id": "CutTool_63",
+    "x-dynamic": "false",
+    children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("span", {
+      "data-ve-dynamic": "true",
+      "x-excluded": "true",
+      style: {
+        display: "contents"
+      },
+      children: empty
+    }, void 0, false)
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 63,
+    columnNumber: 26
+  }, this);
+  if (error) return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("p", {
+    className: "cut-reason",
+    role: "alert",
+    "x-file-name": "CutTool",
+    "x-line-number": "64",
+    "x-component": "p",
+    "x-id": "CutTool_64",
+    "x-dynamic": "false",
+    children: /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("span", {
+      "data-ve-dynamic": "true",
+      "x-excluded": "true",
+      style: {
+        display: "contents"
+      },
+      children: error
+    }, void 0, false)
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 64,
+    columnNumber: 18
+  }, this);
+  const draw = (i, p, width) => /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)(CanvasPiece, {
+    image: images[p.page],
+    part: p,
+    width: width,
+    "x-file-name": "CutTool",
+    "x-line-number": "65",
+    "x-component": "CanvasPiece",
+    "x-id": "CutTool_65",
+    "x-dynamic": "false"
+  }, i, false, {
+    fileName: _jsxFileName,
+    lineNumber: 65,
+    columnNumber: 26
+  }, this);
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)(_QuestionPieces__WEBPACK_IMPORTED_MODULE_11__.PieceScaleProvider, {
+    pieces: pieces,
+    max: 1.25,
+    "x-file-name": "CutTool",
+    "x-line-number": "66",
+    "x-component": "PieceScaleProvider",
+    "x-id": "CutTool_66",
+    "x-dynamic": "true",
+    "x-source-type": "computed",
+    "x-source-editable": "false",
+    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)(_QuestionPieces__WEBPACK_IMPORTED_MODULE_11__.PieceStem, {
+      pieces: pieces,
+      draw: draw,
+      zoom: false,
+      testId: 'cut-preview-stem-' + q.number,
+      "x-file-name": "CutTool",
+      "x-line-number": "67",
+      "x-component": "PieceStem",
+      "x-id": "CutTool_67",
+      "x-dynamic": "true"
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 67,
+      columnNumber: 3
+    }, this), q.type === 'mcq' && /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)(_QuestionPieces__WEBPACK_IMPORTED_MODULE_11__.PieceOptions, {
+      mode: "review",
+      pieces: pieces,
+      options: q.options,
+      typed: q.typed_options || {},
+      draw: draw,
+      correct: q.answer ? [q.answer] : [],
+      words: {
+        right: 'Answer key'
+      },
+      testPrefix: 'cut-preview-' + q.number,
+      "x-file-name": "CutTool",
+      "x-line-number": "68",
+      "x-component": "PieceOptions",
+      "x-id": "CutTool_68",
+      "x-dynamic": "true"
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 68,
+      columnNumber: 20
+    }, this)]
+  }, void 0, true, {
+    fileName: _jsxFileName,
+    lineNumber: 66,
+    columnNumber: 9
+  }, this);
+}
+_s3(PiecesPreview, "GLDsVMIyyCOuuxUNDHDA3OczuF0=", false, function () {
+  return [usePages];
+});
+_c3 = PiecesPreview;
+function shift(b, handle, dx, dy, v) {
+  let [x0, y0, x1, y1] = b;
+  if (handle === 'move') {
+    dx = Math.max(v[0] - x0, Math.min(v[2] - x1, dx));
+    dy = Math.max(v[1] - y0, Math.min(v[3] - y1, dy));
+    return [x0 + dx, y0 + dy, x1 + dx, y1 + dy];
+  }
+  if (handle.includes('w')) x0 = Math.max(v[0], Math.min(x1 - MIN, x0 + dx));
+  if (handle.includes('e')) x1 = Math.min(v[2], Math.max(x0 + MIN, x1 + dx));
+  if (handle.includes('n')) y0 = Math.max(v[1], Math.min(y1 - MIN, y0 + dy));
+  if (handle.includes('s')) y1 = Math.min(v[3], Math.max(y0 + MIN, y1 + dy));
+  return [x0, y0, x1, y1];
+}
+
+// Boxes to start from: the owner's saved boxes, else the engine's own cut, else plain slices of the region to drag into place.
+function starting(cut, keys) {
+  const r = cut.region.rect,
+    page = cut.region.page,
+    out = {};
+  const inside = p => {
+    const x = (p.rect[0] + p.rect[2]) / 2,
+      y = (p.rect[1] + p.rect[3]) / 2;
+    return p.page === page && x >= r[0] && x <= r[2] && y >= r[1] && y <= r[3];
+  };
+  const own = cut.parts.filter(inside);
+  const shares = keys.map(k => k === 'q' ? 2 : 1),
+    total = shares.reduce((a, b) => a + b, 0);
+  const x0 = r[0] + (r[2] - r[0]) * .04,
+    x1 = r[2] - (r[2] - r[0]) * .04,
+    top = r[1] + (r[3] - r[1]) * .02,
+    height = (r[3] - r[1]) * .96;
+  let used = 0;
+  keys.forEach((k, i) => {
+    var _cut$draft, _own$find;
+    const slice = [x0, top + height * used / total + .003, x1, top + height * (used + shares[i]) / total - .003];
+    used += shares[i];
+    out[k] = [...(((_cut$draft = cut.draft) === null || _cut$draft === void 0 ? void 0 : _cut$draft[k]) || ((_own$find = own.find(p => p.part === k)) === null || _own$find === void 0 ? void 0 : _own$find.rect) || slice)];
+  });
+  return out;
+}
+function PageView({
+  image,
+  view
+}) {
+  _s4();
+  const ref = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const c = ref.current;
+    if (!c || !image) return;
+    const W = image.naturalWidth,
+      H = image.naturalHeight;
+    const sx = Math.round(view[0] * W),
+      sy = Math.round(view[1] * H),
+      sw = Math.max(1, Math.round((view[2] - view[0]) * W)),
+      sh = Math.max(1, Math.round((view[3] - view[1]) * H));
+    c.width = sw;
+    c.height = sh;
+    c.getContext('2d').drawImage(image, sx, sy, sw, sh, 0, 0, sw, sh);
+  }, [image, view]);
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("canvas", {
+    ref: ref,
+    role: "img",
+    "aria-label": "Kitaab ka page",
+    "x-file-name": "CutTool",
+    "x-line-number": "108",
+    "x-component": "canvas",
+    "x-id": "CutTool_108",
+    "x-dynamic": "false"
+  }, void 0, false, {
+    fileName: _jsxFileName,
+    lineNumber: 108,
+    columnNumber: 9
+  }, this);
+}
+_s4(PageView, "8uVE59eA/r6b92xF80p7sH8rXLk=");
+_c4 = PageView;
+function BoxEditor({
+  image,
+  view,
+  keys,
+  boxes,
+  active,
+  onActive,
+  onChange,
+  disabled
+}) {
+  _s5();
+  const frame = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null),
+    drag = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  const vw = view[2] - view[0],
+    vh = view[3] - view[1];
+  const place = b => ({
+    left: (b[0] - view[0]) / vw * 100 + '%',
+    top: (b[1] - view[1]) / vh * 100 + '%',
+    width: (b[2] - b[0]) / vw * 100 + '%',
+    height: (b[3] - b[1]) / vh * 100 + '%'
+  });
+  function down(e, key, handle) {
+    var _e$currentTarget$setP, _e$currentTarget;
+    if (disabled) return;
+    e.preventDefault();
+    e.stopPropagation();
+    (_e$currentTarget$setP = (_e$currentTarget = e.currentTarget).setPointerCapture) === null || _e$currentTarget$setP === void 0 ? void 0 : _e$currentTarget$setP.call(_e$currentTarget, e.pointerId);
+    const r = frame.current.getBoundingClientRect();
+    drag.current = {
+      key,
+      handle,
+      x: e.clientX,
+      y: e.clientY,
+      box: boxes[key],
+      w: r.width,
+      h: r.height
+    };
+    onActive(key);
+  }
+  function move(e) {
+    const d = drag.current;
+    if (!d) return;
+    onChange(d.key, shift(d.box, d.handle, (e.clientX - d.x) / d.w * vw, (e.clientY - d.y) / d.h * vh, view));
+  }
+  const up = () => {
+    drag.current = null;
+  };
+  function nudge(e, key) {
+    const step = {
+      ArrowLeft: [-1, 0],
+      ArrowRight: [1, 0],
+      ArrowUp: [0, -1],
+      ArrowDown: [0, 1]
+    }[e.key];
+    if (!step || disabled) return;
+    e.preventDefault();
+    onChange(key, shift(boxes[key], e.shiftKey ? 'se' : 'move', step[0] * STEP, step[1] * STEP, view));
+  }
+  return /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("div", {
+    className: "cut-frame",
+    ref: frame,
+    "data-testid": "cut-frame",
+    "x-file-name": "CutTool",
+    "x-line-number": "134",
+    "x-component": "div",
+    "x-id": "CutTool_134",
+    "x-dynamic": "false",
+    children: [/*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)(PageView, {
+      image: image,
+      view: view,
+      "x-file-name": "CutTool",
+      "x-line-number": "135",
+      "x-component": "PageView",
+      "x-id": "CutTool_135",
+      "x-dynamic": "false"
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 135,
+      columnNumber: 3
+    }, this), /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("span", {
+      "data-ve-dynamic": "true",
+      "x-excluded": "true",
+      style: {
+        display: "contents"
+      },
+      children: keys.map((key, i) => /*#__PURE__*/(0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_14__.jsxDEV)("div", {
+        role: "button",
+        tabIndex: 0,
+        "aria-label": `${NAME(key)} ka box. Arrow keys se hilao, Shift ke saath size badlo.

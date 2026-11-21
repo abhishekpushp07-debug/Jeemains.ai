@@ -68,7 +68,8 @@ async def typed_tests(own, rev, stu, sec, slug):
     q0 = next((x for x in p.get('questions', []) if x['number'] == 2), {})
     if m.get('state') == 'held':  # parser holds a 2-option question: confirm it as a 2-option MCQ first so the mock is READY
         r = await own.post(base + '/fix', json={'revision': p['revision'], 'question_id': q0.get('id'), 'response_type': 'mcq', 'option_labels': ['A', 'B'], 'answer': 'B', 'complete': True}); await drain()
-        m = await BM.find_one({'_id': mid}); check('2-option confirm makes mock ready', r.status_code == 200 and m['state'] == 'ready', (r.status_code, m['state'], m.get('issues')))
+        # PDF Engine 2.0: the confirm is saved, but a question with fewer than four options stays held until the missing ones are typed or boxed.
+        m = await BM.find_one({'_id': mid}); check('2-option confirm is saved; the cutter keeps the mock held only for the two missing options', r.status_code == 200 and m['state'] == 'held' and len(m['issues']) == 1 and 'Chaar option hone chahiye' in m['issues'][0], (r.status_code, m['state'], m.get('issues')))
         p = J(await own.get(base + '/problems', params={'all': 'true'}))
     qs = p.get('questions', [])
     check('owner all=true lists every question', len(qs) == len(m.get('questions', [])) == 3, (len(qs), p.get('state')))

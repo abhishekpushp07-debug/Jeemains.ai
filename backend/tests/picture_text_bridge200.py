@@ -6,7 +6,7 @@ import json, time, uuid, pytest, requests
 B = 'http://127.0.0.1:8770'
 CFG = json.load(open('/tmp/uibridge/bridge.json'))
 F = CFG['f']
-ORIGIN = 'https://tejas-analysis--2bbp29h1.preview.emergentagent.com'
+ORIGIN = 'https://pdf-engine-v2--49kthst3.preview.emergentagent.com'
 
 
 def data(r):

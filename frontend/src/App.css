@@ -1801,7 +1801,7 @@ code {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: var(--surface-card);
-  overflow: hidden;
+  overflow: clip;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .all-q-row.is-open { border-color: var(--brand-line); box-shadow: 0 10px 30px var(--shadow-tint); }
@@ -2635,7 +2635,7 @@ code {
 }
 .answer-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 .answer-option {

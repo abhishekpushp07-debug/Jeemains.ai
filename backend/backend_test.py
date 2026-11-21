@@ -9,7 +9,7 @@ import hashlib
 from datetime import datetime
 
 # Use HTTPS preview URL as per requirements
-BASE_URL = "https://tejas-analysis--2bbp29h1.preview.emergentagent.com"
+BASE_URL = "https://pdf-engine-v2--49kthst3.preview.emergentagent.com"
 
 class TejasAPITester:
     def __init__(self):
