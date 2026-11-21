@@ -44,6 +44,8 @@ export default function SetDetail() {
   const userId = user?.id;
   const nav = useNavigate();
   const location = useLocation();
+  const backParam = params.get('back');
+  const previewBack = location.state?.previewBack || (backParam && backParam.startsWith('/super-admin') ? backParam : null);
   const [s, setS] = useState(null);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
@@ -75,7 +77,7 @@ export default function SetDetail() {
   if (!s) return <div className="container page"><ErrorBox error={error} retry={() => setRetry(v => v + 1)} />{!error && <Loading />}</div>;
   return (
     <div className="container page set-detail set-simple" data-testid="set-detail-page">
-      <Link className="breadcrumb" data-testid="set-back" to={preview ? location.state?.previewBack || '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? (location.state?.previewBack ? 'Back to Master' : 'Back to Content Studio') : s.series_id ? 'Back to All India series' : 'Back to '+s.exam+' tests'}</Link>
+      <Link className="breadcrumb" data-testid="set-back" to={preview ? previewBack || '/studio/' + id : returnTo}><ArrowLeft size={15} /> {preview ? (previewBack ? 'Back to Master' : 'Back to Content Studio') : s.series_id ? 'Back to All India series' : 'Back to '+s.exam+' tests'}</Link>
       <PageTitle eyebrow={preview ? 'PRIVATE REVIEW · NOT APPROVED CONTENT' : s.series_id ? `${s.exam.toUpperCase()} · ALL INDIA TEST SERIES` : `${s.exam.toUpperCase()} · INDEPENDENT PRACTICE`} title={s.title} description={s.test_kind === 'pyq' ? 'A complete dated JEE Main paper. Original supplied solutions unlock after you submit.' : s.source} action={!preview&&user?<SavePaperButton setId={id}/>:null} />
       {preview && <div className="notice amber" data-testid="private-preview-notice">Private draft preview. Questions and solutions still require review. Starting does not approve or publish this paper.</div>}
       <SeriesNote s={s} />

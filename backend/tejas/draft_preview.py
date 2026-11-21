@@ -16,6 +16,13 @@ def fingerprint(m):
     return hashlib.sha256(json.dumps([m.label, m.questions, m.rules, m.chapter], sort_keys=True, default=str).encode()).hexdigest()[:32]
 
 
+async def live_copy(mid, u):
+    # Already published: the owner tries the real student paper (preview attempt, never scored).
+    row = await db.tejas_book_mocks.find_one({'_id': mid, 'archived': {'$ne': True}, 'set_id': {'$ne': None}}, {'set_id': 1})
+    if row and u['role'] == 'owner' and await sets.find_one({'id': row['set_id']}, {'_id': 1}):
+        return {'state': 'ready', 'set_id': row['set_id'], 'left_out': [], 'message': ''}
+
+
 async def target(mid, u):
     row = await db.tejas_book_mocks.find_one({'_id': mid, 'archived': {'$ne': True}, 'set_id': None})
     if not row or row.get('published_generation'):
@@ -37,6 +44,8 @@ def view(r):
 
 @router.post('/{mid}')
 async def open_preview(mid: str, bg: BackgroundTasks, u=Depends(staff)):
+    if live := await live_copy(mid, u):
+        return live
     book, m = await target(mid, u)
     pid = identity('draft-preview', m.id, fingerprint(m))
     r = await previews.find_one({'_id': pid})
@@ -50,6 +59,8 @@ async def open_preview(mid: str, bg: BackgroundTasks, u=Depends(staff)):
 
 @router.get('/{mid}')
 async def preview_status(mid: str, u=Depends(staff)):
+    if live := await live_copy(mid, u):
+        return live
     book, m = await target(mid, u)
     r = await previews.find_one({'_id': identity('draft-preview', m.id, fingerprint(m))})
     if not r:

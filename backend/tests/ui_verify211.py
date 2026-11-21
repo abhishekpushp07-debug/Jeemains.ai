@@ -7,7 +7,7 @@ from playwright.async_api import async_playwright
 B = json.load(open('/tmp/uibridge210/bridge.json'))
 BASE = [l.split('=', 1)[1].strip() for l in open('/app/frontend/.env') if l.startswith('REACT_APP_BACKEND_URL')][0].rstrip('/')
 API = 'http://127.0.0.1:8772'
-SS = '/app/.screenshots/ui211'; os.makedirs(SS, exist_ok=True)
+SS = os.environ.get('SS_DIR', '/app/.screenshots/ui211'); os.makedirs(SS, exist_ok=True)
 F = B['f']
 SIZES = {'desk': (1920, 800), 'mob': (390, 844)}
 R = []
