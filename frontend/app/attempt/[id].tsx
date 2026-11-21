@@ -175,11 +175,11 @@ export default function Player() {
           <RoundButton testID="player-exit-button" icon="close" label="Leave attempt" color={colors.onSurface} onPress={() => setSheet("exit")} />
           <View style={{ flex: 1, minWidth: 0 }}>
             <T w="heavy" size={13.5} numberOfLines={1}>{a.title}</T>
-            <View testID="player-save-status" style={styles.saveRow} accessibilityLiveRegion="polite">
+            <View testID="player-save-status" style={[styles.saveRow, saveNote ? styles.saveRowTight : null]} accessibilityLiveRegion="polite">
               <View style={[styles.saveDot, { backgroundColor: saveState[1] }]} />
               <T testID="player-save-label" w="bold" size={10.5} color={saveState[1]} numberOfLines={1} style={{ flexShrink: 1 }}>{saveState[0]}</T>
             </View>
-            {saveNote ? <T testID="player-save-note" w="semibold" size={10} color={colors.custom_softText} numberOfLines={1}>{saveNote}</T> : null}
+            {saveNote ? <T testID="player-save-note" w="semibold" size={10} color={colors.custom_softText} numberOfLines={1} style={styles.saveNote}>{saveNote}</T> : null}
           </View>
           {a.deadline ? (
             <View testID="player-timer" accessibilityLabel={`Time left ${fmtClock(A.seconds ?? 0)}`} style={[styles.timer, seconds <= 600 && { borderColor: timerTone }]}>
@@ -402,6 +402,9 @@ const styles = StyleSheet.create({
   side: { width: SIDE, backgroundColor: colors.custom_bar, borderLeftWidth: 1, borderLeftColor: colors.custom_barLine },
   topRow: { flexDirection: "row", alignItems: "center", gap: space.sm },
   saveRow: { flexDirection: "row", alignItems: "center", gap: 5, marginTop: 2 },
+  // Title 18 + save row 14 + note 12 = the 44 px of the close button: the header never jumps when the note shows.
+  saveRowTight: { marginTop: 0 },
+  saveNote: { lineHeight: 12 },
   saveDot: { width: 7, height: 7, borderRadius: 4 },
   timer: { flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 12, height: 40, borderRadius: radius.pill, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLineStrong },
   submitTop: { height: 40, minWidth: 44, paddingHorizontal: 14, borderRadius: radius.pill, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center" },

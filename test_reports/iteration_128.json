@@ -1,0 +1,24 @@
+{
+  "summary": "Frontend-only check at 390x844 on QA attempt 8d2bae3d (JEE Main PYQ 21 Jan 2026 S2, not submitted). FIX A PASS: the header row is 44px both before and while player-save-note shows (title column 34px -> 44px, exit button 44px, row y 8 and bottom 52 unchanged). player-progress stays at y=64 and player-option-tiles stays at y=505.28 when the note appears (measured every 40ms: the note arrived at t=9120ms with nothing moving). The note 'Safe on phone · sending' is fully readable: scrollWidth 118 = clientWidth 118, right edge 186px, timer starts at 194px, and the crop screenshot shows the descenders intact. Label '1 pending' -> 'Saved' after unroute; the note and player-error then go away. Tapping the tile again cleared the answer. Side note: about 370ms after the note, the separate player-error banner ('The website is not answering right now...') appears in the body and pushes the tiles down 72px (505 -> 577). It was there before this change too. The header is not the cause. FIX B PASS: with every **/asset/** GET failing 520 twice, question-image-1-0-retrying ('Picture is taking longer · trying again') showed from 8.4s to 15.7s, the bitmap loaded on its own at 15.8s, the retrying text then went away, and no error box appeared. A fresh load with no failure (222 samples every 50ms) never showed any -retrying element. Q2 opened without failure and also never showed it. Pieces.tsx:17/32-33 uses `retrying` (code reading). REGRESSION PASS: /pyq lists papers; the attempt opens; the picture loads; the selected tile is green (border rgb(74,222,128) 2px, bg rgb(242,251,245), tick rgb(22,163,74), aria '..., selected'); saves end on 'Saved'; no 'Cloudflare' text anywhere. All test answers were cleared (progress '0 of 75 answered'). Submit was route-aborted and never called.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "attempt/[id] (save failure)", "issues": ["Optional: the player-error banner that shows about 0.4s after a failed save pushes the question card and the option tiles down 72px (tiles y 505 -> 577), so a student's next tap can land in the wrong place. The header itself no longer moves. If no movement at all is wanted, keep space for the banner or show it as an overlay or toast."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/test_reports/tmp_ui_smoke/i128_note.jpeg", "/app/test_reports/tmp_ui_smoke/i128_header_note.png", "/app/test_reports/tmp_ui_smoke/i128_retrying.jpeg"],
+  "action_items": ["Optional: stop the player-error banner from shifting the content (72px) when a save fails, e.g. reserve its space or use an overlay. Fix A and Fix B need no further changes."],
+  "critical_code_review_comments": [
+    "AssetImage.tsx:25-45 `retrying` is set only when an automatic retry is scheduled. It is cleared on path change, on value arrival, on manual Retry and on the final error. Correct.",
+    "attempt/[id].tsx:404-407 saveRowTight marginTop 1 + saveNote lineHeight 11 add up to exactly 44px. Measured note scrollHeight 12 vs clientHeight 11 (font 10, lineHeight 11). The glyphs look whole in the screenshot, but with a larger system font scale the note could clip by 1px. This is minor."
+  ],
+  "updated_files": ["/app/test_reports/iteration_128.json"],
+  "success_rate": {"backend": "not tested (frontend-only request)", "frontend": "100%"},
+  "seed_data_creation": "None. Two tiles on Q1 were picked and then cleared; footer/progress '0 of 75 answered'. Q2 was visited via Save & Next with no answer.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Option tile testIDs are player-option-A/B/C/D (labels 1-4); select them via '[data-testid=player-option-tiles] > [data-testid^=player-option-]'. Login on /entry: wait 3s, then keyboard.type with delay=60. Attempt 8d2bae3d had ~1h09m left at 20:25 UTC 21 Nov 2026 (ends ~21:34 UTC). Always route-abort **/submit*. The header row is the grandparent of player-save-status."
+}

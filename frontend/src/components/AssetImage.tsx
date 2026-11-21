@@ -22,24 +22,27 @@ const passing = (e: any) => !(e instanceof ApiError) || e.status === 0 || e.stat
 export function useImageRetry(path: string, value: unknown) {
   const [attempt, setAttempt] = useState(0); // a bump asks for the picture again
   const [error, setError] = useState("");
+  const [retrying, setRetrying] = useState(false); // only while an automatic try is waiting or running
   const tries = useRef(0), timer = useRef<any>(null);
-  useEffect(() => { tries.current = 0; return () => clearTimeout(timer.current); }, [path]);
-  useEffect(() => { if (value) tries.current = 0; }, [value]); // loaded: a later failure gets the full set of tries again
+  useEffect(() => { tries.current = 0; setRetrying(false); return () => clearTimeout(timer.current); }, [path]);
+  useEffect(() => { if (value) { tries.current = 0; setRetrying(false); } }, [value]); // loaded: a later failure gets the full set of tries again
   const failed = useCallback((e: any) => {
     if (e?.name === "AbortError") return;
     if (passing(e) && tries.current < RETRY_DELAYS.length) {
       const wait = Math.max(RETRY_DELAYS[tries.current++], e?.retryAfterMs || 0);
       clearTimeout(timer.current);
+      setRetrying(true);
       timer.current = setTimeout(() => { privateAssets.invalidate(path); setAttempt(n => n + 1); }, wait);
       return;
     }
+    setRetrying(false);
     setError(passing(e) ? IMAGE_DOWN : e?.message || IMAGE_DOWN);
   }, [path]);
   const retry = useCallback(() => {
     tries.current = 0; clearTimeout(timer.current);
-    privateAssets.invalidate(path); setError(""); setAttempt(n => n + 1);
+    privateAssets.invalidate(path); setRetrying(false); setError(""); setAttempt(n => n + 1);
   }, [path]);
-  return { attempt, error, failed, retry };
+  return { attempt, error, retrying, failed, retry };
 }
 function OriginalImage({ path, label, testID = "source-image", onLoaded, onFailed }: Props) {
   const value = useImageValue(path);
@@ -47,7 +50,7 @@ function OriginalImage({ path, label, testID = "source-image", onLoaded, onFaile
   const source = useMemo(() => ({ uri: displayed, cacheKey: value?.cacheKey }), [displayed, value?.cacheKey]);
   const started = useRef(0);
   const measured = useRef(false);
-  const { attempt, error: err, failed, retry } = useImageRetry(path, value);
+  const { attempt, error: err, retrying, failed, retry } = useImageRetry(path, value);
   const [ratio, setRatio] = useState(2.2);
   const [zoom, setZoom] = useState(false);
   const insets = useSafeAreaInsets();
@@ -71,7 +74,7 @@ function OriginalImage({ path, label, testID = "source-image", onLoaded, onFaile
   </View>;
   if (!displayed) return <View testID={`${testID}-loading`} accessibilityLabel="Preparing question image" style={styles.loading}>
     <ActivityIndicator color={colors.brandText} />
-    {attempt > 0 ? <T testID={`${testID}-retrying`} size={12} color={colors.muted}>Picture is taking longer · trying again</T> : null}
+    {retrying ? <T testID={`${testID}-retrying`} size={12} color={colors.muted}>Picture is taking longer · trying again</T> : null}
   </View>;
   return <>
     <Pressable testID={testID} onPress={() => setZoom(true)} accessibilityRole="imagebutton" accessibilityLabel={`${label}. Tap to zoom`}>

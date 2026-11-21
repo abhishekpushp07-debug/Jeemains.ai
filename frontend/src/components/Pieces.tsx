@@ -14,7 +14,7 @@ import { Icon, Press, T } from "./ui";
 const PieceImage = memo(function PieceImage({ path, width, height, label, testID }: { path: string; width: number; height: number; label: string; testID: string }) {
   const value = useImageValue(path);
   const source = useMemo(() => ({ uri: value?.uri, cacheKey: value?.cacheKey }), [value?.uri, value?.cacheKey]);
-  const { attempt, error, failed, retry } = useImageRetry(path, value);
+  const { attempt, error, retrying, failed, retry } = useImageRetry(path, value);
   useEffect(() => {
     if (value || error) return;
     let alive = true;
@@ -29,8 +29,8 @@ const PieceImage = memo(function PieceImage({ path, width, height, label, testID
       <T w="bold" size={12} color={colors.brandText}>Dobara load karo</T>
     </Press>
   );
-  if (!value) return <View testID={`${testID}-loading`} accessibilityLabel={attempt > 0 ? "Picture is taking longer, trying again" : "Loading picture"} style={[styles.wait, { width, height }]}>
-    {attempt > 0 && height >= 16 ? <T testID={`${testID}-retrying`} size={10.5} color={colors.muted} numberOfLines={1}>trying again…</T> : null}
+  if (!value) return <View testID={`${testID}-loading`} accessibilityLabel={retrying ? "Picture is taking longer, trying again" : "Loading picture"} style={[styles.wait, { width, height }]}>
+    {retrying && height >= 16 ? <T testID={`${testID}-retrying`} size={10.5} color={colors.muted} numberOfLines={1}>trying again…</T> : null}
   </View>;
   return <Image testID={testID} source={source} recyclingKey={value.cacheKey || path} cachePolicy="memory" priority="high" transition={0} contentFit="contain"
     accessibilityLabel={label} style={{ width, height }} onError={() => failed(new Error("display"))} />;

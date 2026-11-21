@@ -1,0 +1,28 @@
+{
+  "summary": "Frontend-only check of the 3 follow-up fixes from iteration_126, plus a regression run of the Phase 1 path, at 390x844 on QA attempt 8d2bae3d (JEE Main PYQ 21 Jan 2026 S2, not submitted). FU1 PASS: when the answer PUT returns 520, player-save-label shows '1 pending' and player-save-note shows 'Safe on phone · sending' in full (scrollWidth 118 = clientWidth 118, right edge 186px, timer starts at 194px). player-error shows the exact safe text and the page has no 'Cloudflare' text. After unroute the label shows 'Saved' in about 5 s and the note and error go away. Offline (context.set_offline) shows 'Offline' with the note '1 safe on phone', which also fits, then 'Saved' about 7 s after coming back online. FU2 PASS: making each asset GET fail with 520 twice gave requests at 7.2 s, 9.2 s (+2 s) and 14.2 s (+5 s). question-image-1-0-retrying ('Picture is taking longer · trying again') showed at 9.4 s, the bitmap loaded at 15.2 s, no error box appeared, and the number tiles stayed tappable while loading. The try counter reset (AssetImage.tsx:27) is correct by code reading. FU3 PASS by code reading only (Pieces.tsx:32-33): PYQ papers have no cut-piece options and no mock with pieces can be reached. REGRESSION PASS: /pyq shows '30 PAPERS AVAILABLE', the attempt opens, the question picture loads, and the selected tile is green (border rgb(74,222,128) 2px, background rgb(242,251,245), tick circle rgb(22,163,74) with white tick, aria-label ends with ', selected'). Saves end on 'Saved'. Every test answer was cleared afterwards (footer '0 answered'). Submit was blocked by a route abort and was never called.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "attempt player header", "issues": ["Minor: the player-save-note line only shows while saves are pending, so the header grows by about 12px and the content below moves down a little when a save fails or the phone goes offline. Optional fix: keep the space for the line reserved."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/iter127_login_probe.py", ".screenshots/f1_520.jpg", ".screenshots/f1_saved.jpg", ".screenshots/f1_offline.jpg", ".screenshots/f2_retrying.jpg"],
+  "action_items": [
+    "Optional (cosmetic): in useImageRetry the `attempt` value is never reset after a successful load. If the same picture is invalidated later (for example after a grant renewal), its loading box shows 'trying again' at once, before any failure. A `retrying` flag that clears on success would fix this (src/components/AssetImage.tsx:23-27,74; src/components/Pieces.tsx:32-33).",
+    "Optional: on very narrow cut-piece boxes, 'trying again…' (10.5px, one line) will be cut off with an ellipsis. This is acceptable as it is."
+  ],
+  "critical_code_review_comments": [
+    "AssetImage.tsx:27 resets tries.current when the value arrives, so a later failure gets the full 2/5/10/20/30 s schedule again. Confirmed by code reading. At runtime the first two delays (2 s, 5 s) were observed.",
+    "Pieces.tsx:32-33 shows '<id>-retrying' only when attempt > 0 and the box height is at least 16px. The text first appears when the first automatic retry starts (about 2 s after the first failure), not at the moment of the failure. The same is true of AssetImage."
+  ],
+  "updated_files": ["/app/tests/iter127_login_probe.py (new test helper only; no app code changed)"],
+  "success_rate": {"backend": "not tested (out of scope)", "frontend": "100% (FU1, FU1 offline, FU2, regression run in the browser; FU3 checked by code reading)"},
+  "seed_data_creation": "None. Answers on Q1 (options A and B) were set briefly on the existing QA attempt and then cleared; the paper shows 0 answered.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Login on /entry: wait about 3 s after entry-phone-input appears, then click each field and use keyboard.type with delay=60. Typing straight away loses the input. The question image testID is question-image-1-0 (not source-image): -loading, -retrying, -bitmap, -error. Attempt 8d2bae3d had about 1h17m left at 20:17 UTC on 21 Nov 2026 and ends around 21:33 UTC. Always route-abort **/submit*.",
+  "rca_of_issue": ""
+}
