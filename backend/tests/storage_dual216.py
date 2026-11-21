@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT))
 os.environ.update(SUPABASE_URL='https://supabase.com/dashboard/project/abcdefghijklmnopqrst', SUPABASE_SECRET_KEY='sb_secret_test', FRONTEND_URL='https://preview-x.example.com')
 spec = importlib.util.spec_from_file_location('dual216', str(ROOT / 'tejas_storage.py'))
 S = importlib.util.module_from_spec(spec); spec.loader.exec_module(S)
+REAL_CLIENT = S._client
 RESULTS = []
 
 
@@ -174,7 +175,19 @@ def main():
         check('health: both stores write+read ok with times', h['supabase']['ok'] and h['emergent']['ok'] and 'write_ms' in h['supabase'], h)
         sb.down = True; h = S.probe()
         check('health: Supabase down shows its reason and rests it', not h['supabase']['ok'] and h['emergent']['ok'] and not S.supabase_on(), h)
+        check('health: a failed check alone is not counted as a file handed to Emergent', S.STATE['failovers'] == 0 and S.STATE['last_failover'] is None, S.STATE['failovers'])
         sb.down = False
+        # 12. Supabase accepts the connection then hangs: no retry of the write, Emergent takes the file at once.
+        reset(sb, em); S.STATE['bucket'] = S.bucket_name(); hangs = {'n': 0}
+
+        def hang(req):
+            hangs['n'] += 1
+            raise httpx.ReadTimeout('silent', request=req)
+        hung = httpx.Client(transport=httpx.MockTransport(hang)); S._client = lambda: hung
+        t = time.time(); ref = S.put_object('jeelive/books/b9/crops/h.png', png, 'image/png'); took = time.time() - t
+        check('hanging Supabase: one try only, file in Emergent, counted as handed over', not ref.startswith('sb://') and hangs['n'] == 1 and took < 1 and S.STATE['failovers'] == 1, (ref, hangs, took))
+        S._local.sb = None
+        check('20 s read limit on real Supabase calls', REAL_CLIENT().timeout.read == 20.0, REAL_CLIENT().timeout)
     print(f'TOTAL {len(RESULTS)} PASS {sum(RESULTS)} FAIL {len(RESULTS) - sum(RESULTS)}')
 
 

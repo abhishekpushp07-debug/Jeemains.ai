@@ -7,7 +7,7 @@ import tejas_storage as store
 from .auth import staff
 
 router = APIRouter(prefix="/api/admin/storage", tags=["Storage health"])
-FRESH, SLOW_MS = 60, 1500
+FRESH, SLOW_MS = 60, 2500
 _last = {'at': 0.0, 'result': None}
 _running = {'task': None}
 

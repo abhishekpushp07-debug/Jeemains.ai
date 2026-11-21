@@ -1,3 +1,15 @@
+## Status — 2026-11-21 (night 3): Supabase + Emergent two-store pipeline and Storage Health Badge (preview only, NOT deployed)
+Owner's ask: "both Supabase and Emergent storage are active. If Supabase is not working, Emergent storage will take over... a mock will first try Supabase... the data must always be perfect." Choice: only NEW files go to Supabase; old Emergent files stay (no migration).
+- tejas_storage.py: put_object -> Supabase first (private bucket auto-created, named from FRONTEND_URL host unless SUPABASE_BUCKET; preview = jeelive-pdf-engine-v2-49kthst3-preview-emergentagent-com), Emergent takes the file the moment Supabase fails/hangs (20 s read limit, writes not retried on timeout). Ref "sb://bucket/path" = Supabase, plain path = Emergent; get_object reads from the store the ref names. Files > 6 MB use resumable (TUS) pieces with resume. Breaker rests Supabase 15 s → 5 min after misses. SUPABASE_URL may be the dashboard link (project URL derived). Keys: SUPABASE_URL, SUPABASE_SECRET_KEY (sb_secret_, backend only).
+- tejas/storage_health.py: GET /api/admin/storage/health (staff), cached 60 s, fresh=true at most every 10 s; mode supabase/slow(>2500 ms)/emergent/down.
+- UI: StorageBadge in Super Admin top bar + StorageNotice in Upload dialog (components/master/StorageBadge.js).
+- Speed: book publish saves crops 8 at a time; student media packs fetch pictures 8 at a time.
+- Measured (preview → Supabase, far region): tiny write+read 1.6–2.1 s warm, 40 crops 3.2 s, 20 MB up 5.1 s / down 3.5 s; Emergent ~0.15 s.
+- Tests: storage_dual216 27/27, storage_fail215 13/13, iteration_209 (real Supabase 14/14, endpoint 26/26, 4-option publish+media 33/33, ui_upload215 21/21); copy/notice/timeout/counter findings fixed and re-checked.
+- Known, unrelated: tests/media_cdn_iso198.py uses a 2-option fixture that the Phase 1 4-option rule holds.
+- iso harnesses (book169/170/perf163) drop SUPABASE_URL so tests stay offline.
+
+
 ## Status — 2026-11-21 (night 2): production "upload slow / file not accepted" — RCA + fixes (preview only, NOT deployed yet)
 - Owner: "upload pdf ka superadmin me link too slow hai and file accept hi nahi krta ... Kal tk toh boht bdhiya chal rha tha" then "I give you full authority ... Build my machine to be very efficient, lightning fast".
 - Production RCA (deployer, /app/deployer-agent-docs/RCA_bc239ca9-*.MD): live build = run bc239ca9 (15:24 UTC, CUT_VERSION 2). Book eed94a04 was read (2527 pages, 1250 cuts, 24 mocks) but publishing failed: Emergent object storage PUT returns HTTP 500 ('Private storage unavailable (500)') from book_publish.crop_ref; the whole book went to state=failed. Same 500 on the previous run (books 3a704ed9, 4e23420a). Pods healthy, no OOM/413/504. Preview storage works (25 parallel PNG PUTs, 0 fails) -> production storage binding/quota is a PLATFORM issue (needs Emergent support).

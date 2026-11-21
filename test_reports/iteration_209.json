@@ -1,0 +1,58 @@
+{
+  "summary": "Storage Health Badge + Supabase-first/Emergent-failover pipeline. Backend: storage_dual216 24/24, storage_fail215 13/13, NEW real-Supabase script 14/14 (sb:// refs, small + 15MB round-trip byte-exact, bucket private, public URL refuses, probe ok, in-process outage -> plain Emergent path read back exact, failovers++ and breaker rests, TEST_qa216 objects deleted and verified 0 left), NEW /api/admin/storage/health bridge test 26/26 (shape, 60s cache, fresh throttle 10s, 10 concurrent calls share one check, owner+reviewer 200, anon/bogus 401, no secrets), NEW 4-option publish+media pack test 33/33 (book processed, fixed, set Live, media pack parts 200, PNGs). Frontend (bridge + faked health JSON): badge 4 modes, popover rows/writes/last-failover/check-now(fresh=true), no tight polling, desktop 1920x800 + mobile 390x844 no overflow, popover within viewport: 39/41 (2 copy mismatches). Upload dialog notice: 4/6 (no notice in green/slow mode). ui_upload215 re-run on cut bridge: 21/21. Three deviations from the brief found (below); no functional failure in the storage path itself.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "tejas/storage_health.py SLOW_MS", "issue": "SLOW_MS=1500 but the brief says 2500. Real preview Supabase probe sum (write+read) measured 1722, 2317, 2069, 1607, 1239, 1265 ms, so with real Supabase the badge shows amber 'Storage slow' about 60% of the time even when everything is healthy (it is just network distance, as noted in the brief). Set SLOW_MS=2500 as specified."},
+      {"endpoint": "tejas_storage._client / _call", "issue": "Read timeout is 120 s with 3 tries. If Supabase accepts the connection and then hangs (does not refuse it), put_object waits up to about 6 min before Emergent takes over (_bucket GET alone can use 3x120 s). The module docstring says 'slow to answer' goes to Emergent. Consider a shorter read timeout for small writes (e.g. 15-20 s) and/or 1 try for the first write while not warm. The fake-5xx test passes because 5xx comes back fast; a hang is not covered."},
+      {"endpoint": "tejas_storage.probe", "issue": "A failed health probe calls _strike(), which increments STATE['failovers'] and sets last_failover even though no file went to Emergent. The badge then says 'Aakhri baar Emergent ne file li' (the last time Emergent took a file) when no file was actually handed over. Count probe failures separately."},
+      {"endpoint": "tejas_storage.STATE writes counters", "issue": "STATE['writes'][x] += 1 and failovers += 1 run from many threadpool threads without a lock, so counts can be slightly off under concurrency. This is cosmetic, for the badge only."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "StorageNotice (UploadDialog)", "issue": "The brief says the notice shows in every mode, including green ('upload aaram se'). The code returns null for supabase and slow, so in a healthy state no data-testid='upload-storage-notice' is rendered. The amber and red text are correct (amber: '...Emergent storage mein save ho rahi hain. Upload aaram se kar sakte hain.'; red: '...Thodi der baad upload kijiye.').", "selector": "[data-testid='upload-storage-notice']", "priority": "MEDIUM"},
+      {"component": "StorageBadge labels", "issue": "The brief expects green 'Storage: Supabase' and amber 'Emergent backup'. The code shows 'Storage theek' (green) and 'Backup storage' (amber). 'Storage slow' and 'Storage band' are fine. The aria-label becomes 'Storage: Storage theek' (redundant).", "selector": "[data-testid='storage-badge-label']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Super Admin top bar, mobile 390", "issues": ["The popover's left edge sits at x≈0 (touches the screen edge). Give it a small side offset or collisionPadding.", "In the bridge, the mode is 'emergent' only because Supabase is not set up, yet the text says 'Supabase abhi file nahi le raha' (Supabase is not taking files right now). When supabase.configured is false, consider a separate line such as 'Supabase set nahi hai' (Supabase is not set up)."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/storage_dual216.py",
+    "/app/backend/tests/storage_fail215.py",
+    "/app/backend/tests/storage_real_qa216.py",
+    "/app/backend/tests/storage_health_api_qa216.py",
+    "/app/backend/tests/media_four_qa216.py",
+    "/app/backend/tests/ui_storage_badge_qa216.py",
+    "/app/backend/tests/ui_storage_notice_qa216.py",
+    "/app/backend/tests/ui_upload215.py"
+  ],
+  "action_items": [
+    "Set SLOW_MS to 2500 in tejas/storage_health.py (with 1500 the real preview Supabase shows 'slow' most of the time)",
+    "StorageNotice: also render a green line for supabase/slow mode ('upload aaram se') as specified",
+    "Badge labels: green 'Storage: Supabase', amber 'Emergent backup' (or confirm the current copy with the user)",
+    "Shorten the Supabase read timeout and/or retries for writes so a hanging Supabase fails over in seconds, not minutes",
+    "Do not count failed health probes as failovers / last_failover"
+  ],
+  "critical_code_review_comments": [
+    "tejas_storage._call: read timeout 120 s x 3 tries means a hanging Supabase blocks each write (and holds the source_lock for that path) for minutes before failover",
+    "probe(): _strike() on a probe failure inflates failovers and last_failover",
+    "storage_health.summary: mode 'emergent' is shown for 'not configured' as well as 'down'. The front end could tell them apart using supabase.configured",
+    "media._render creates a new ThreadPoolExecutor(8) for every part build. This is acceptable because parts are cached, but a module-level pool would avoid creating threads repeatedly",
+    "book_publish.source_questions: StorageError from crop_ref is not caught by save(), so gather raises. This matches the storage_fail215 behaviour (mock waits), so it is OK"
+  ],
+  "updated_files": [
+    "/app/backend/tests/storage_real_qa216.py (new)",
+    "/app/backend/tests/storage_health_api_qa216.py (new)",
+    "/app/backend/tests/media_four_qa216.py (new, 4-option copy of media_cdn_iso198)",
+    "/app/backend/tests/ui_storage_badge_qa216.py (new)",
+    "/app/backend/tests/ui_storage_notice_qa216.py (new)"
+  ],
+  "success_rate": {"backend": "100% (110/110 functional checks); 1 spec deviation (SLOW_MS)", "frontend": "92% (85/89 checks incl. ui_upload215 21/21); 4 failures are copy/visibility deviations from the brief"},
+  "seed_data_creation": "Real Supabase: TEST_qa216/x.png and TEST_qa216/big.pdf were created, then deleted (list prefix TEST_qa216/ returns []). Emergent: TEST_qa216/outage.png (2 KB) is left as allowed. Bridges (master_bridge181, cut_bridge210) were stopped, and their disposable DBs were dropped. No preview or production DB was touched.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The health endpoint wraps its body in {data, meta}. The front-end api() only unwraps it when meta.api_version is present, so fake JSON in Playwright must be the raw object. The class 'storage-badge' contains the substring 'bad': check tone with classList. Upload dialog path: /super-admin -> master-exam-jee-main -> master-type-open-mocks -> type-upload-pdf. ui_upload215 needs cut_bridge210 (/tmp/bridge210.log, :8772), not master_bridge181. The student role was not tested on the health endpoint (the bridge has no student cookie); the staff dependency rejects non-owner/reviewer roles by code review."
+}

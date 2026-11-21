@@ -110,7 +110,8 @@ def bucket_name():
 
 def _client():
     if getattr(_local, 'sb', None) is None:
-        _local.sb = httpx.Client(timeout=httpx.Timeout(120.0, connect=5.0), limits=httpx.Limits(max_connections=16, max_keepalive_connections=8))
+        # A Supabase that accepts the connection and then hangs costs at most 20 s of silence before Emergent takes the file.
+        _local.sb = httpx.Client(timeout=httpx.Timeout(connect=5.0, read=20.0, write=60.0, pool=10.0), limits=httpx.Limits(max_connections=16, max_keepalive_connections=8, keepalive_expiry=90.0))
     return _local.sb
 
 
@@ -131,7 +132,7 @@ def _call(method, url, headers=None, tries=3, **kw):
             r = _client().request(method, url, headers=_headers(headers), **kw)
         except httpx.HTTPError as exc:
             attempt += 1
-            if attempt >= tries:
+            if attempt >= tries or (isinstance(exc, httpx.TimeoutException) and method not in ('GET', 'HEAD')):
                 raise StorageError(f'Supabase connection failed: {type(exc).__name__}')
             time.sleep(.2 * 3 ** (attempt - 1) + random.random() * .1)
             continue
@@ -226,13 +227,23 @@ def _ok():
     STATE.update(strikes=0, down_until=0.0, last_ok=time.time())
 
 
-def _strike(exc):
+_count_lock = threading.Lock()
+
+
+def _count(store):
+    with _count_lock:
+        STATE['writes'][store] += 1
+
+
+def _strike(exc, handed=True):
     # Supabase rests a little longer after every miss in a row (15 s, 30 s, ... 5 min) and writes go straight to Emergent meanwhile.
-    STATE['strikes'] += 1
-    STATE['down_until'] = time.time() + min(300, 15 * 2 ** (STATE['strikes'] - 1))
-    STATE['last_error'] = str(exc)[:240]
-    STATE['failovers'] += 1
-    STATE['last_failover'] = {'at': time.time(), 'reason': STATE['last_error']}
+    with _count_lock:
+        STATE['strikes'] += 1
+        STATE['down_until'] = time.time() + min(300, 15 * 2 ** (STATE['strikes'] - 1))
+        STATE['last_error'] = str(exc)[:240]
+        if handed:  # a file really went to Emergent (a failed health check alone does not count)
+            STATE['failovers'] += 1
+            STATE['last_failover'] = {'at': time.time(), 'reason': STATE['last_error']}
 
 
 def supabase_on():
@@ -247,12 +258,12 @@ def put_object(path, data, content_type="application/pdf"):
             try:
                 ref = sb_put(path, data, content_type)
                 _ok()
-                STATE['writes']['supabase'] += 1
+                _count('supabase')
             except Exception as exc:  # noqa: BLE001  any Supabase trouble hands the file to Emergent storage
                 _strike(exc)
         if ref is None:
             ref = request('PUT', path, data, content_type).json()['path']
-            STATE['writes']['emergent'] += 1
+            _count('emergent')
         _source_cache.remove(ref)
         return ref
 
@@ -288,7 +299,7 @@ def probe():
         except Exception as exc:  # noqa: BLE001
             out['supabase'] = {'ok': False, 'error': str(exc)[:240], 'took_ms': round((time.time() - t) * 1000)}
             if supabase_on():
-                _strike(exc)
+                _strike(exc, handed=False)
     else:
         out['supabase'] = {'ok': False, 'configured': False, 'error': 'Supabase is not set up (project URL or secret key missing).'}
     t = time.time()
