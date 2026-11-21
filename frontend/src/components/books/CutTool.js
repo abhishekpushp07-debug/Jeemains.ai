@@ -16,7 +16,9 @@ const cache=new Map();
 
 function pageImage(path){
  if(!cache.has(path)){
-  const job=fetchWithSession(path).then(async res=>{
+  // One quiet retry: the server may be fetching the book's PDF again at that moment.
+  const get=()=>fetchWithSession(path);
+  const job=get().then(res=>res.ok?res:new Promise(done=>setTimeout(done,700)).then(get)).then(async res=>{
    if(!res.ok)throw new Error('Page ki picture nahi khuli. Refresh dabao aur dobara dekho.');
    const url=URL.createObjectURL(await res.blob());
    return new Promise((done,fail)=>{const img=new Image();img.onload=()=>{URL.revokeObjectURL(url);done(img);};img.onerror=()=>{URL.revokeObjectURL(url);fail(new Error('Page ki picture nahi khuli. Refresh dabao aur dobara dekho.'));};img.src=url;});

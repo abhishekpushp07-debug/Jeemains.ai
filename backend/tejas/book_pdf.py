@@ -19,7 +19,8 @@ LANES=min(8,max(2,cpus()))
 
 def run(source, items):
     source=Path(source)
-    try: size=source.stat().st_size
+    # Every use marks the cached original as in use, so the cache never removes it while work on it is still going on.
+    try: os.utime(source);size=source.stat().st_size
     except FileNotFoundError: raise ValueError('The cached original was refreshed. Retry; saved progress is kept.') from None
     if not 0<size<=LIMIT:
         raise ValueError('Use a PDF within 100 MB.')

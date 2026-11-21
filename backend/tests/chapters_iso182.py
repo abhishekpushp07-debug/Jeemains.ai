@@ -88,10 +88,11 @@ async def main():
         pid = await send(own, Path(SRC).read_bytes(), 'Physics chapters')
         ms = await mocks(pid)
         check('real PDF: 30 chapter tests', len(ms) == 30, len(ms))
-        # PDF Engine 2.0 holds a question whose options touch (no blank line between A and C) instead of guessing: physics ch15 Q33 and ch21 Q38.
+        # PDF Engine holds a question whose options touch (no blank line between A and C) instead of guessing: physics ch15 Q33.
+        # Cutter v3 (iteration 216) cuts ch21 Q38 cleanly on its hairline, so only ch15 Q33 stays held.
         waits = {m['label']: m['issues'] for m in ms if m['state'] != 'ready'}
-        check('real PDF: every chapter has 50 questions; only the two questions whose options touch are held', all(len(m['questions']) == 50 for m in ms) and set(waits) == {'Chapter 15', 'Chapter 21'}
-              and all(len(v) == 1 and 'khaali jagah nahi' in v[0] for v in waits.values()) and 'Q33' in waits['Chapter 15'][0] and 'Q38' in waits['Chapter 21'][0],
+        check('real PDF: every chapter has 50 questions; only the question whose options touch is held', all(len(m['questions']) == 50 for m in ms) and set(waits) == {'Chapter 15'}
+              and all(len(v) == 1 and 'khaali jagah nahi' in v[0] for v in waits.values()) and 'Q33' in waits['Chapter 15'][0],
               [(m['label'], m['state'], len(m['questions']), m['issues'][:2]) for m in ms if m['state'] != 'ready' or len(m['questions']) != 50][:4])
         check('real PDF: chapter names read', [m['chapter']['title'] for m in ms[:3]] == ['Units & Measurements', 'Kinematics', 'Laws of Motion'], [m.get('chapter') for m in ms[:3]])
         check('real PDF: subject read from the PDF', all(m['chapter']['subject'] == 'Physics' for m in ms), {m['chapter'].get('subject_from') for m in ms})

@@ -1,0 +1,53 @@
+{
+  "summary": "Full regression of Engine v3 (CUT_VERSION 3) + phone full-width pictures, against the disposable bridge :8772 (restarted once mid-run when its owner token gave a 401 after about 15 minutes). Backend: cut_cases210 41/41; typed_delete_iso185 54/54; chapters_iso182 failed 57/58 at first because the test still expected physics ch21 Q38 to be held. Engine v3 now cuts Q38 cleanly (I checked the cut picture offline against the page), so I changed that expectation to only ch15 Q33 held, and it then passed 58/58. Frontend: ui_verify212 (all walks incl. boxfix once) 125/126. The one failure is proofbox-desk: 'Page ki picture nahi khuli' on Q1. It came back on a lone rerun of the walk while chapters_iso182 was still running, and passed 5/5 when nothing else was running. Cause: a race in the shared originals cache (see RCA). Other runs: ui_verify211 (student results proof typed plain) 75/76, where the one failure was caused by my own phone script using the same active attempt at the same time; the student desk walk rerun alone passed 21/21. ui_tryst_extra213 30/30 and ui_cut_autoadvance214 24/24. New ui_phone_width216 passed 30/30 on phone (390) and 26/26 on desktop. Player stem box 372px with a 362px picture inside 390, Results 342px box with a 332px picture. No page overflow; A-D stacked, same x and width as the stem box. Cards are inside the screen and not clipped; the selected border and tick are visible. Zoom-in grows the picture 362->489 and it scrolls inside .piece-fit (no page overflow). The 'Sahi jawab' badge sits on the card's top edge, inside the screen, not clipped. Also checked at 360 and 412: no overflow, same 9px/24px side gaps. On 1920 the new CSS sits only inside the max-width:640px media query, so desktop is unchanged; the stem box is 902px with the picture at 760. Option pictures in the proof view (draft, held and boxed_small fixtures, plus the boxed chemistry chapter) start at the option content: no '(A)' leftovers and no clipping.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/admin/books/{id}/mocks/{mid}/page/{n} (and every inspect() caller via book_store.original())", "issue": "Can return 422 'The cached original was refreshed. Retry; saved progress is kept.' The shared cache $TMP/jeelive-book-originals keeps only the 6 newest PDFs. When other books are being uploaded or processed, remember() can delete this book's cached file after cached() has returned its path but before book_pdf.run() links it. The proof view / fix tool then shows 'Page ki picture nahi khuli' and does not retry. Seen 2 times in 3 desktop proof runs while another book test ran; 0 times in 3 runs with nothing else running."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Proof view / fix tool page picture", "issue": "CutTool.pageImage() turns one failed fetch into a permanent error card. There is no automatic retry, even though the backend's own message says 'Retry'.", "affected_selectors": ["[data-testid=\"proof-list\"] .proof-row"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/ui_phone_width216.py",
+    "/app/backend/tests/ui_proof_labels216.py",
+    "/app/backend/tests/held_render216.py",
+    "/app/backend/tests/proof_page_probe216.py",
+    "/app/backend/tests/proof_422_probe216.py",
+    "/app/backend/tests/ui_verify212.py",
+    "/app/backend/tests/ui_verify211.py",
+    "/app/backend/tests/ui_tryst_extra213.py",
+    "/app/backend/tests/ui_cut_autoadvance214.py",
+    "/app/backend/tests/cut_cases210.py",
+    "/app/backend/tests/chapters_iso182.py",
+    "/app/backend/tests/typed_delete_iso185.py"
+  ],
+  "action_items": [
+    "Make original() / mock_page robust to the cache-eviction race. Options: retry once on 'cached original was refreshed'; pin the file (hard-link or open it) before eviction can run; never evict a file used in the last N seconds; or raise the 6-file cap.",
+    "Optionally let CutTool.pageImage retry a failed page fetch once (the cache entry is already dropped on failure, so only the error card needs a retry path)."
+  ],
+  "critical_code_review_comments": [
+    "book_store.remember(): eviction by mtime with [:-6] runs while other requests may hold a path returned by cached(). That is a TOCTOU race between cached() and book_pdf.run() os.link (FileNotFoundError -> ValueError -> 422). It gets more likely as more books are worked on at once.",
+    "exam-refinement.css: --piece-bleed 12px (player) and 36px (review) are hard-coded to match the current padding of the containers. If .question-card or .review-question padding changes on phones, the stem and options will overflow or stop lining up. Worth a comment, or deriving the value from a shared custom property."
+  ],
+  "updated_files": [
+    "/app/backend/tests/chapters_iso182.py (expectation: only physics ch15 Q33 held; ch21 Q38 now cut by v3)",
+    "/app/backend/tests/ui_verify211_lib.py (API error URLs kept to 200 chars instead of 80, for diagnosis)",
+    "/app/backend/tests/ui_phone_width216.py (new)",
+    "/app/backend/tests/ui_proof_labels216.py (new)",
+    "/app/backend/tests/held_render216.py (new)",
+    "/app/backend/tests/proof_page_probe216.py (new)",
+    "/app/backend/tests/proof_422_probe216.py (new)"
+  ],
+  "success_rate": {"backend": "100% (41/41 + 58/58 after the stale expectation was updated + 54/54)", "frontend": "99.6% (ui212 125/126 with 1 race-related flake, ui211 76/76 counting the rerun, 213 30/30, 214 24/24, phone 216 56/56)"},
+  "seed_data_creation": "None in the preview DB. Everything ran in the disposable bridge DB (tejas_isolated_book170_*, dropped when the bridge stops) and in the isolated DBs of the iso tests. The bridge was restarted once and is still running on :8772 (7200 s timeout).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bridge owner/student tokens stop working (401) about 15 minutes after READY, so restart the bridge before long walks. Never run iso tests (chapters_iso182 etc.) at the same time as the bridge proof walks: they share $TMP/jeelive-book-originals, and that causes the 422 race. Never run two scripts that use the same active_attempt as student at once. Fixture summaries now: draft '4 sawaal · 4 saaf kate', held '4 sawaal · 3 saaf kate · 1 aapko dekhne hain', boxed_small '2 sawaal · 2 saaf kate', boxed '16 sawaal · 16 saaf kate'. The rects in held_cases.json for the 3 mathematics cases do not match the real question regions (they cut through neighbouring questions), so held_render216 cannot judge those; only phy21 Q38 (now ok, clean) and phy15 Q33 (still held) render meaningfully.",
+  "rca of the issue": "Proofbox-desk flake. Repro: run tests/chapters_iso182.py (it uploads and processes several PDFs) and, at the same time, run tests/ui_verify212.py proofbox desk. Q1's page request returns 422 and the card shows 'Page ki picture nahi khuli'. Root cause: tejas/book_store.py remember() deletes all but the 6 newest cached PDFs. A request whose cached() call has already returned the target path can then fail in book_pdf.run() at os.link (FileNotFoundError), which mock_page turns into 422. Mitigation: retry inside original()/run() when the file is gone, pin the file before use, or protect recently-used files from eviction; plus a one-time retry on the client."
+}

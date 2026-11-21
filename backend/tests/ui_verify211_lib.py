@@ -58,7 +58,7 @@ async def open_as(pw, role, size):
         except Exception:
             await route.abort()
     await ctx.route('**/api/**', handler)
-    page.on('response', lambda r: bad.append((r.status, r.url.split('/api')[-1][:80])) if '/api/' in r.url and r.status >= 400 and '/dream' not in r.url else None)
+    page.on('response', lambda r: bad.append((r.status, r.url.split('/api')[-1][:200])) if '/api/' in r.url and r.status >= 400 and '/dream' not in r.url else None)
     page.on('pageerror', lambda e: logs.append(str(e)[:200]))
     return br, page, bad, logs
 

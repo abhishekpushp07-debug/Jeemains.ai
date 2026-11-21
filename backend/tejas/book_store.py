@@ -1,4 +1,4 @@
-import asyncio, hashlib, os, tempfile, uuid
+import asyncio, hashlib, os, tempfile, time, uuid
 from pathlib import Path
 from fastapi import HTTPException
 from pymongo import ReturnDocument
@@ -20,8 +20,10 @@ def remember(raw, sha):
     with os.fdopen(fd,'wb') as f:f.write(raw)
     os.replace(tmp,target)
     try:
+        # Only the 6 newest stay, but a PDF used in the last 15 minutes is never removed: another request may be reading it right now.
+        fresh=time.time()-900
         for old in sorted(CACHE.glob('*.pdf'),key=lambda p:p.stat().st_mtime)[:-6]:
-            if old!=target:old.unlink(missing_ok=True)
+            if old!=target and old.stat().st_mtime<fresh:old.unlink(missing_ok=True)
     except OSError:pass
     return target
 
