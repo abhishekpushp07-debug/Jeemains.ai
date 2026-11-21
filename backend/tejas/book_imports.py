@@ -28,7 +28,7 @@ async def listing(u=Depends(owner)):
 
 
 @router.post('/admin/books')
-async def create(body:UploadInput,u=Depends(owner)):
+async def create(body:UploadInput,bg:BackgroundTasks,u=Depends(owner)):
     if not body.filename.lower().endswith('.pdf'):raise HTTPException(422,'Choose a PDF book.')
     if body.release_at and body.release_at<=await database_now():raise HTTPException(422,'Choose a future schedule or immediate publication.')
     id=identity('book',u['id'],body.sha256,body.edition.strip())
@@ -37,7 +37,17 @@ async def create(body:UploadInput,u=Depends(owner)):
         book=Book.from_mongo(existing)
         if book.removed:raise HTTPException(409,'This PDF was uploaded before and its access was removed, so it cannot be imported again.')
         same=(book.payload.get('destination') or {}).get('section_id')==body.section_id
-        if not existing.get('archived') and same:return await book_view(book)
+        if not existing.get('archived') and same:
+            if book.state=='failed':
+                # The same PDF chosen again after a failure carries on from its saved pages instead of doing nothing.
+                book,token=await lock_book(id)
+                try:
+                    book.paused=False;book.state='received' if not book.payload.get('source_path') else 'reading' if book.payload.get('read_pages',0)<book.payload.get('pages',0) else 'matching'
+                    book.payload['message']='Same PDF chosen again. Carrying on from the saved pages.';await save_book(book,token)
+                finally:await unlock(book,token)
+                await audit(u['id'],'Book retry',id,'Same PDF uploaded again after a failure')
+                await dispatch(book,bg)
+            return await book_view(book)
         # A half-sent copy moved to the Library carries on from the parts it already has.
         if same and book.state=='uploading':
             await db.tejas_books.update_one({'_id':id,'archived':True},[{'$set':{'paused':{'$ifNull':['$paused_before_archive',False]}}},{'$unset':['archived','archived_at','paused_before_archive']}])

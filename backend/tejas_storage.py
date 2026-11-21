@@ -42,7 +42,8 @@ def init_storage(force=False):
 
 
 def request(method, path, data=None, content_type=None):
-    for attempt in range(3):
+    # A storage hiccup (5xx) is retried with growing waits instead of failing a whole book on the first try.
+    for attempt in range(4):
         try:
             r = requests.request(
                 method,
@@ -55,7 +56,7 @@ def request(method, path, data=None, content_type=None):
                 timeout=120,
             )
         except requests.RequestException:
-            if attempt == 2:
+            if attempt == 3:
                 raise StorageError(
                     "Private storage connection interrupted. Retry this operation."
                 )
@@ -63,11 +64,11 @@ def request(method, path, data=None, content_type=None):
             continue
         if r.ok:
             return r
-        if r.status_code == 404 and attempt == 0:
+        if r.status_code in (401, 403, 404) and attempt == 0:
             init_storage(force=True)
             continue
-        if r.status_code == 503 and attempt < 2:
-            time.sleep(attempt + 1)
+        if r.status_code in (500, 502, 503, 504) and attempt < 3:
+            time.sleep(2 ** attempt)
             continue
         raise StorageError(
             f"Private storage unavailable ({r.status_code}). Retry later or check account storage permissions and quota."

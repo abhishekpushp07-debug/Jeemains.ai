@@ -4,6 +4,7 @@ import {api,post,fetchWithSession} from '../../lib/api';
 const sha=async data=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',data)),v=>v.toString(16).padStart(2,'0')).join('');
 const LIMIT=100*1024*1024;
 const TRIES=8;
+const LANES=4;
 const wait=ms=>new Promise(done=>setTimeout(done,ms));
 
 // One part, with a time limit so a part lost on the way is sent again instead of waiting for ever.
@@ -32,18 +33,18 @@ export async function sendBook({file,title,sectionId,replace,year,subject,onProg
  onProgress('Checking the file…',0);
  const book=await post('/admin/books',{filename:file.name,title,sha256:await sha(await file.arrayBuffer()),size:file.size,rights_confirmed:true,section_id:sectionId,
   ...(year?{year}:{}),...(subject?{subject}:{}),...(replace==='all'?{replace_all:true}:replace?{replace_ids:replace.split(',')}:{})});
- if(book.state!=='uploading')return book.id;
- const have=new Set(book.received_parts),total=Math.ceil(file.size/book.chunk_size);let sent=0;
- for(let i=0;i<total;i++){
-  if(stopped?.current)throw new Error('Paused. Choose the same PDF again to continue from where it stopped.');
-  const size=Math.min(book.chunk_size,file.size-i*book.chunk_size);
-  if(have.has(i)){sent+=size;continue;}
-  onProgress(`Sending part ${i+1} of ${total}…`,sent/file.size);
+ if(book.state!=='uploading'){onProgress(book.state==='failed'?'Same PDF again: carrying on from the saved pages.':'This PDF is already here. Opening its progress.',1);return book.id;}
+ const total=Math.ceil(file.size/book.chunk_size),have=new Set(book.received_parts),size=i=>Math.min(book.chunk_size,file.size-i*book.chunk_size);
+ const todo=[];let sent=0,done=have.size,failure=null;
+ for(let i=0;i<total;i++){if(have.has(i))sent+=size(i);else todo.push(i);}
+ const paused=()=>new Error('Paused. Choose the same PDF again to continue from where it stopped.');
+ // Up to LANES parts travel at once (the server keeps each part on its own), so a long distance to the server costs far less time.
+ async function sendOne(i){
   const chunk=file.slice(i*book.chunk_size,(i+1)*book.chunk_size),hash=await sha(await chunk.arrayBuffer());
   let r=null;
   for(let tries=1;tries<=TRIES;tries++){
-   while(navigator.onLine===false&&!stopped?.current){onProgress(`Internet is off. Waiting for it to come back (part ${i+1} of ${total})…`,sent/file.size);await wait(1500);}
-   if(stopped?.current)throw new Error('Paused. Choose the same PDF again to continue from where it stopped.');
+   while(navigator.onLine===false&&!stopped?.current){onProgress(`Internet is off. Waiting for it to come back (${done} of ${total} parts sent)…`,sent/file.size);await wait(1500);}
+   if(stopped?.current||failure)throw failure||paused();
    r=await putPart(`/admin/books/${book.id}/parts/${i}?sha256=${hash}`,chunk);
    if(r&&(r.ok||(r.status<500&&r.status!==408&&r.status!==429)))break;
    if(tries===TRIES)break;
@@ -51,9 +52,19 @@ export async function sendBook({file,title,sectionId,replace,year,subject,onProg
    onProgress(`Connection dropped on part ${i+1} of ${total}. Trying again in ${Math.round(delay/1000)} s (${tries} of ${TRIES-1})…`,sent/file.size);
    await wait(delay);
   }
-  if(!r||!r.ok){const d=r?await r.json().catch(()=>({})):{};throw new Error(d.error?.message||d.detail||`Sending stopped at part ${i+1} of ${total}. Press Upload again with the same PDF: the ${i} parts already sent are kept.`);}
-  sent+=size;
+  if(!r||!r.ok){const d=r?await r.json().catch(()=>({})):{};throw new Error(d.error?.message||d.detail||`Sending stopped at part ${i+1} of ${total}. Press Upload again with the same PDF: the ${done} parts already sent are kept.`);}
+  sent+=size(i);done+=1;onProgress(`Sending… ${done} of ${total} parts`,sent/file.size);
  }
+ async function lane(){
+  while(todo.length&&!failure){
+   if(stopped?.current){failure=failure||paused();break;}
+   const i=todo.shift();
+   try{await sendOne(i);}catch(e){failure=failure||e;}
+  }
+ }
+ onProgress(`Sending… ${done} of ${total} parts`,sent/file.size);
+ await Promise.all(Array.from({length:Math.min(LANES,todo.length)},lane));
+ if(failure)throw failure;
  onProgress('Sent. Reading starts now.',1);
  await post(`/admin/books/${book.id}/complete`);
  return book.id;

@@ -11,7 +11,8 @@ LIMIT=100*1024*1024
 def visible_drawings(page):
     """Drawing boxes trimmed to their clip paths, so clipped-away strokes do not count as printed content."""
     out=[];clips={}
-    for d in page.get_drawings(extended=True)[:4000]:
+    # The C-level list is the same drawings as get_drawings(extended=True), several times cheaper to read.
+    for d in page.get_cdrawings(extended=True)[:4000]:
         level=d.get('level',0)
         for k in [k for k in clips if k>=level]:del clips[k]
         if d.get('type')=='clip':
@@ -28,12 +29,23 @@ def visible_images(page, images, lines, drawn):
     """Image boxes that really show on the page: a PDF may place pictures that its clip paths hide completely."""
     if not images:
         return []
-    pix = pixmap(page, colorspace=fitz.csGRAY, alpha=False)
+    # Only the part of the page the pictures cover is drawn; the page's paper colour comes from a small picture of the whole page.
+    pr = page.rect
+    u = fitz.Rect(images[0])
+    for b in images[1:]:
+        u |= fitz.Rect(b)
+    u = fitz.IRect(int(np.floor(max(pr.x0, u.x0 - 3))), int(np.floor(max(pr.y0, u.y0 - 3))), int(np.ceil(min(pr.x1, u.x1 + 3))), int(np.ceil(min(pr.y1, u.y1 + 3))))
+    if u.is_empty:
+        return []
+    small = pixmap(page, matrix=fitz.Matrix(.25, .25), colorspace=fitz.csGRAY, alpha=False)
+    back = int(np.bincount(np.frombuffer(small.samples, dtype=np.uint8).reshape(small.height, small.stride)[:, :small.width].ravel(), minlength=256).argmax())
+    pix = pixmap(page, colorspace=fitz.csGRAY, alpha=False, clip=fitz.Rect(u))
     gray = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.stride)[:, :pix.width]
-    ink = np.abs(gray.astype(np.int16) - int(np.bincount(gray.ravel(), minlength=256).argmax())) > 24
+    ox, oy = pix.x, pix.y
+    ink = np.abs(gray.astype(np.int16) - back) > 24
     H, W = ink.shape
     def wipe(x0, y0, x1, y1, pad):
-        ink[max(0, int(y0 - pad)):min(H, int(y1 + pad) + 1), max(0, int(x0 - pad)):min(W, int(x1 + pad) + 1)] = False
+        ink[max(0, int(y0 - pad) - oy):max(0, min(H + oy, int(y1 + pad) + 1) - oy), max(0, int(x0 - pad) - ox):max(0, min(W + ox, int(x1 + pad) + 1) - ox)] = False
     for x0, y0, x1, y1 in lines:
         wipe(x0, y0, x1, y1, 2)
     for x0, y0, x1, y1 in drawn:
@@ -43,14 +55,15 @@ def visible_images(page, images, lines, drawn):
             for side in ((x0, y0, x1, y0), (x0, y1, x1, y1), (x0, y0, x0, y1), (x1, y0, x1, y1)):
                 wipe(*side, 2)
     out = []
+    PW, PH = int(np.ceil(pr.width)), int(np.ceil(pr.height))
     for b in images:
-        x0, y0, x1, y1 = max(0, int(b[0])), max(0, int(b[1])), min(W, int(b[2]) + 1), min(H, int(b[3]) + 1)
-        part = ink[y0:y1, x0:x1] if x1 > x0 and y1 > y0 else None
+        x0, y0, x1, y1 = max(0, int(b[0])), max(0, int(b[1])), min(PW, int(b[2]) + 1), min(PH, int(b[3]) + 1)
+        part = ink[max(0, y0 - oy):max(0, y1 - oy), max(0, x0 - ox):max(0, x1 - ox)] if x1 > x0 and y1 > y0 else None
         if part is not None and int(part.sum()) > max(12, .002 * (x1 - x0) * (y1 - y0)):
-            if b[0] < -2 or b[1] < -2 or b[2] > W + 2 or b[3] > H + 2:
+            if b[0] < -2 or b[1] < -2 or b[2] > PW + 2 or b[3] > PH + 2:
                 # A picture placed partly off the page is cut down by a clip path: its box is where its ink really is.
                 ys, xs = np.flatnonzero(part.any(axis=1)), np.flatnonzero(part.any(axis=0))
-                b = [x0 + int(xs[0]), y0 + int(ys[0]), x0 + int(xs[-1]) + 1, y0 + int(ys[-1]) + 1]
+                b = [max(x0, ox) + int(xs[0]), max(y0, oy) + int(ys[0]), max(x0, ox) + int(xs[-1]) + 1, max(y0, oy) + int(ys[-1]) + 1]
             out.append(b)
     return out
 
@@ -91,7 +104,7 @@ def handle(doc, item):
                     lines.append({'text':text,'rect':[max(0,x0/w),max(0,y0/h),min(1,x1/w),min(1,y1/h)]})
         if sum(len(x['text']) for x in lines)>150000: raise ValueError('Page text exceeds safe processing budget.')
         drawn=visible_drawings(page)
-        images=visible_images(page,[list(i['bbox']) for i in textpage(page,page.rect,fitz.TEXT_PRESERVE_IMAGES).extractIMGINFO()],[[x['rect'][0]*w,x['rect'][1]*h,x['rect'][2]*w,x['rect'][3]*h] for x in lines],drawn)
+        images=visible_images(page,[list(i['bbox']) for i in page.get_image_info()],[[x['rect'][0]*w,x['rect'][1]*h,x['rect'][2]*w,x['rect'][3]*h] for x in lines],drawn)
         geometry=images+drawn
         scale=lambda rows:[[max(0,r[0]/w),max(0,r[1]/h),min(1,r[2]/w),min(1,r[3]/h)] for r in rows]
         return {'lines':lines,'width':w,'height':h,'geometry':scale(geometry),'images':scale(images)}

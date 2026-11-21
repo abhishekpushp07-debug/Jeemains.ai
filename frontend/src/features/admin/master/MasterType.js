@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import {Link,useNavigate,useParams} from 'react-router-dom';
-import {UploadCloud,PencilLine,Loader2} from 'lucide-react';
+import {UploadCloud,PencilLine,Loader2,RotateCw} from 'lucide-react';
 import {api,post} from '../../../lib/api';
 import {toast} from 'sonner';
 import {Button} from '../../../components/ui/button';
@@ -18,9 +18,10 @@ import {SeriesDays} from '../../../components/master/SeriesDays';
 function Uploads({items,onChanged}){
  if(!items.length)return null;
  const dismiss=b=>post(`/admin/master/uploads/${b.kind}/${b.id}/dismiss`).then(r=>{toast.success(r.message);onChanged();}).catch(e=>toast.error(e.message));
+ const retry=b=>post(`/admin/books/${b.id}/control`,{revision:b.revision,action:'retry'}).then(()=>{toast.success('Phir se shuru. Jo pages padhe ja chuke hain woh rakhe gaye hain.');onChanged();}).catch(e=>toast.error(e.message));
  return <section className="admin-panel master-uploads" data-testid="type-uploads"><h2>Uploads</h2><ul className="admin-list">{items.map(b=><li key={b.id} className="admin-row" data-testid={'type-upload-'+b.id}>
   <div className="admin-row-main"><strong>{b.title}</strong>{b.pages>0?<div className="admin-progress"><progress value={b.read_pages} max={b.pages}/><small>{b.read_pages} / {b.pages} pages read{b.message?` · ${b.message}`:''}</small></div>:<small>{b.message||'Waiting to start…'}</small>}</div>
-  <StatusChip state={b.state} testId={'type-upload-state-'+b.id}/>{b.kind==='book'&&b.chapters&&b.state!=='uploading'&&<Button asChild size="sm" variant={b.state==='chapters_needed'?'default':'outline'}><Link to={'/super-admin/chapters/'+b.id} data-testid={'type-upload-chapters-'+b.id}>{b.state==='chapters_needed'?'Mark chapter starts':'Chapters'}</Link></Button>}{b.kind==='book'&&!b.chapters&&b.state!=='uploading'&&<Button asChild size="sm" variant="ghost"><Link to={'/super-admin/upload?book='+b.id} data-testid={'type-upload-open-'+b.id}>Pages</Link></Button>}{!b.active&&<Button size="sm" variant="outline" onClick={()=>dismiss(b)} data-testid={'type-upload-dismiss-'+b.id}>Move to Library</Button>}
+  <StatusChip state={b.state} testId={'type-upload-state-'+b.id}/>{b.can_retry&&<Button size="sm" onClick={()=>retry(b)} data-testid={'type-upload-retry-'+b.id}><RotateCw size={15}/>Dobara chalao</Button>}{b.kind==='book'&&b.chapters&&b.state!=='uploading'&&<Button asChild size="sm" variant={b.state==='chapters_needed'?'default':'outline'}><Link to={'/super-admin/chapters/'+b.id} data-testid={'type-upload-chapters-'+b.id}>{b.state==='chapters_needed'?'Mark chapter starts':'Chapters'}</Link></Button>}{b.kind==='book'&&!b.chapters&&b.state!=='uploading'&&<Button asChild size="sm" variant="ghost"><Link to={'/super-admin/upload?book='+b.id} data-testid={'type-upload-open-'+b.id}>Pages</Link></Button>}{!b.active&&<Button size="sm" variant="outline" onClick={()=>dismiss(b)} data-testid={'type-upload-dismiss-'+b.id}>Move to Library</Button>}
  </li>)}</ul></section>;
 }
 

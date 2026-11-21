@@ -129,9 +129,27 @@ async def enqueue_book(book):
     return await enqueue('book_step',book.owner_id,book.id,{'key':book.id+':'+str(book.revision),'book_id':book.id})
 
 
+async def mock_rows(book, kinds=False):
+    """The book's mocks for a screen: everything but the questions themselves, whose counts the database works out.
+    kinds=True keeps each question's subject and type only (an All India paper is checked on those)."""
+    kind=lambda k:{'$size':{'$filter':{'input':{'$ifNull':['$questions',[]]},'cond':{'$eq':['$$this.solution_kind',k]}}}}
+    lite={'q_lite':{'$map':{'input':{'$ifNull':['$questions',[]]},'in':{'subject':'$$this.subject','type':'$$this.type'}}}} if kinds else {}
+    rows=db.tejas_book_mocks.aggregate([{'$match':{'book_id':book.id}},{'$sort':{'order':1}},
+        {'$addFields':{'n_all':{'$size':{'$ifNull':['$questions',[]]}},'n_original':kind('supplied_worked'),'n_key':kind('answer_key_only'),**lite}},
+        {'$project':{'questions':0,'cuts':0,'original_solution_identities':0}}])
+    out=[]
+    async for r in rows:
+        n=(r.pop('n_all'),r.pop('n_original'),r.pop('n_key'))
+        if kinds:r['questions']=r.pop('q_lite')
+        out.append((BookMock.from_mongo(r),n))
+    return out
+
+
 async def book_view(book, detail=True):
     p=book.payload
-    items=await mocks_for(book) if detail else []
+    series=bool((p.get('destination') or {}).get('series')) and (p['destination'].get('series_id') or 'all-india-jee-2026-27')=='all-india-jee-2026-27'
+    rows=await mock_rows(book,series) if detail else []
+    items=[m for m,_ in rows]
     from .canonical import database_now
     stamp=await database_now()
     for m in items:
@@ -141,7 +159,6 @@ async def book_view(book, detail=True):
     parts=await db.tejas_book_parts.find({'book_id':book.id},{'_id':0,'number':1}).to_list(None) if book.state=='uploading' else []
     allowances=[BookAllowance.from_mongo(r).model_dump(exclude={'owner_id','book_id'}) async for r in db.tejas_book_allowances.find({'book_id':book.id}).sort('created_at',-1).limit(20)] if detail else []
     linked={s['id']:s for s in await db.tejas_sets.find({'book_import_id':book.id},{'_id':0,'id':1,'archived':1,'series_date':1}).to_list(None)} if detail else {}
-    series=bool((p.get('destination') or {}).get('series')) and (p['destination'].get('series_id') or 'all-india-jee-2026-27')=='all-india-jee-2026-27'
     if series:from .live_series import series_problem
     return {'id':book.id,'title':p['title'],'filename':p['filename'],'state':book.state,'revision':book.revision,
         'size':p['size'],'sha256':p['sha256'],'edition':p.get('edition',''),'chunk_size':CHUNK,'received_parts':sorted(r['number'] for r in parts),
@@ -150,12 +167,12 @@ async def book_view(book, detail=True):
         'release_at':p.get('release_at'),'competitive':p.get('competitive',False),'closes_at':p.get('closes_at'),
         'counts':{'detected':len(items),**counts,'complete':counts['ready']+counts['published']+counts['scheduled'],
                   'awaiting_budget':sum(a['state']=='budget_required' for a in allowances)},
-        'mocks':[m.model_dump(exclude={'book_id','questions'}) | {'count':len(m.questions),
-            'original_solutions':sum(q.get('solution_kind')=='supplied_worked' for q in m.questions),
-            'key_only':sum(q.get('solution_kind')=='answer_key_only' for q in m.questions),
+        'mocks':[m.model_dump(exclude={'book_id','questions','cuts','original_solution_identities'}) | {'count':n[0],
+            'original_solutions':n[1],
+            'key_only':n[2],
             'archived':bool(linked.get(m.set_id,{}).get('archived')),
             'series_date':linked[m.set_id].get('series_date') if m.set_id in linked else m.series_date,
-            'series_problem':series_problem(m) if series and m.state=='ready' else None} for m in items],
+            'series_problem':series_problem(m) if series and m.state=='ready' else None} for m,n in rows],
         'allowances':allowances,'created_at':book.created_at,'metrics':p.get('metrics',{}),
         'pricing_notice':'A credible per-page currency price is not available. Only the explicitly approved request allowance is used.',
         'retention_notice':'Remove import removes access; it does not permanently erase stored objects. Historical result assets are retained.'}

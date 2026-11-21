@@ -7,7 +7,7 @@ from .book_pdf import inspect, inspect_many
 from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
 from .chapter_reader import plan_start, bookmark_plan
-from tejas_storage import put_object
+from tejas_storage import put_object, StorageError
 
 PAGES_PER_STEP=100
 MOCKS_PER_STEP=5
@@ -71,7 +71,8 @@ async def publish_batch(book, token, source):
         except HTTPException as exc:
             if exc.status_code==409:raise
             await hold(book,token,mock,exc.detail)
-        except ValueError as exc:
+        except (ValueError,StorageError) as exc:
+            # One mock that cannot be saved waits for the owner's next Publish; the book and its other mocks carry on.
             await hold(book,token,mock,exc)
         published+=1
     return False

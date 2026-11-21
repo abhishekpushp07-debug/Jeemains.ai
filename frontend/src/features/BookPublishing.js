@@ -41,7 +41,9 @@ export default function BookPublishing(){
  const fixRef=useRef(null);const [filter,setFilter]=useState(null);
  const refresh=useCallback(async()=>{if(user?.role!=='owner')return;try{setError('');const b=await api(`/admin/books/${id}`);setBook(b);if(b.read_pages){const p=await api(`/admin/books/${id}/pages?page=${pageList}`);setPageRows(p.items);}if(b.destination&&!b.destination.series)setSection(await api(`/admin/catalog/sections/${b.destination.section_id}/tests`));}catch(e){setError(e.message);}},[id,user?.role,pageList]);
  useEffect(()=>{refresh();},[refresh]);
- useEffect(()=>{const timer=setInterval(refresh,8000);return()=>clearInterval(timer);},[refresh]);
+ // Asks again by itself only while the book is still being worked on; a finished book is not fetched every few seconds.
+ const working=book&&(['uploading','received','reading','matching'].includes(book.state)||book.mocks?.some(m=>m.publish_requested&&m.state==='ready'));
+ useEffect(()=>{if(!working)return;const timer=setInterval(refresh,8000);return()=>clearInterval(timer);},[refresh,working]);
  async function control(kind,mid='',note='',release=null,message=''){setBusy(true);setError('');try{await post(`/admin/books/${id}/control`,{revision:book.revision,action:kind,mock_id:mid,reason:note,...(release?{release_at:release}:{})});setAction(null);setReason('');invalidateCatalog();if(message)toast.success(message);if(kind==='remove')setParams({});else await refresh();}catch(e){setError(e.message);toast.error(e.message);}finally{setBusy(false);}}
  async function toggle(set,live){setBusy(true);try{const r=await patch('/admin/catalog/tests/'+set.id,{live});invalidateCatalog();toast.success(live?`${set.title} is live for students.`:`${set.title} is Unlive. Attempts and scores are kept.`);if(r.note)toast.message(r.note);await refresh();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  function fix(mid){setPage(null);setMock(null);setFixing(mid);setTimeout(()=>fixRef.current?.scrollIntoView({behavior:'smooth',block:'start'}),50);}
