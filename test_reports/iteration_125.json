@@ -1,0 +1,37 @@
+{
+  "summary": "Verified deployment-blocker fix and the related changes. Static: no `settle_late` anywhere in backend source. erase_companion is called only from request_deletion (POST /api/account/delete-request) and owner_panel.decide(). sweep(), sweep_loop() and startup() never touch account deletions. Behaviour, run on the scratch DB: server.sweep() leaves the Rapid Fire profile of a pending request alone. Owner 'complete' accepts a request stuck in 'erasing', erases again and saves history [requested, rapid_fire_erased_again, website_account_deleted]; the full flow gives [requested, rapid_fire_erased, rapid_fire_erased_again, website_account_deleted]. 'cancel' erases nothing and a later complete returns 409. Requested suites: 38/38 passed. New iter125 suite: 6/6 passed. Live regression passed: 422 never echoes the PIN, DEL-AAAA-AAAA returns 404, owner API returns 401 with no session and 403 with no X-Owner-Panel header, both pages render. Backend log shows no tracebacks and no sweep errors. `expo config` shows a single expo-build-properties entry with manifestQueries [com.whatsapp, com.whatsapp.w4b] AND enableMinifyInReleaseBuilds=false; extra.backendUrl is set. package-lock.json is gone and yarn.lock remains. UI at 390px: /delete-account shows 4 steps plus the form; submit stays disabled for every invalid combination and is enabled only with a valid number + 4-digit PIN + DELETE; the confirm sheet opens and 'Keep' closes it. No delete request was sent, and the route was blocked as a safeguard. QA learner sign-in goes to Home, and the Rapid Fire tab loads with the learner's data intact (Lv 3, 106 coins). No deprecated Expo packages found.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/owner/deletion-requests/{id}/complete", "issue": "Small race: erase_companion runs after a non-atomic find_one and before the atomic find_one_and_update. If an owner 'cancel' lands in between, the Rapid Fire data is erased but the request is saved as 'cancelled'. Owner-only and unlikely; it could be closed by first flipping state to a 'completing' marker atomically."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter125_no_background_erase.py",
+    "/app/backend/tests/test_account_deletion.py",
+    "/app/backend/tests/test_iter124_deletion_public_api.py",
+    "/app/backend/tests/test_iter50_legal_public_authgate.py",
+    "/app/test_reports/pytest/iter125_deletion.xml",
+    "/app/test_reports/pytest/iter125_no_bg_erase.xml"
+  ],
+  "action_items": [
+    "Optional: make owner 'complete' atomic. Claim the request first (e.g. set state 'completing' via find_one_and_update), then erase, then finish, so a concurrent cancel can never end up with erased data on a cancelled request."
+  ],
+  "critical_code_review_comments": [
+    "owner_panel.decide: erase happens before the conditional update, so a 409 response can follow an erase in a race (see minor issue).",
+    "app.config.js only merges into an existing expo-build-properties entry. If app.json ever drops that plugin, the minify/shrink overrides go silently with it. Fine today: there is exactly one entry."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter125_no_background_erase.py (new test file)"],
+  "success_rate": {"backend": "100% (44/44)", "frontend": "100%"},
+  "seed_data_creation": "Scratch DB <DB_NAME>_deletion_selftest only: TEST-del-* rf_profiles/rf_feed rows, account_deletions docs (name TEST_iter125) and owner_sessions (which expire after 1 h). Nothing was written to the main DB or the canonical website.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "pytest.ini adds xdist (-n). Run single files with -n0. On RN-web /entry, use click + keyboard.type rather than page.fill + force click: the fill+force approach did not submit. Always route-block /api/account/delete-request when signed in as the QA learner.",
+  "rca_of_issue": "BLOCKER DESTRUCTIVE_DB_STARTUP: resolved. The background sweep no longer calls any erase path. The late-row clean-up has moved to the owner's 'complete' press."
+}

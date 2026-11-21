@@ -205,10 +205,9 @@ def test_full_deletion_flow(stub_website):
             status = await http.get(f"/api/account/delete-request/{receipt['request_id']}")
             assert status.status_code == 200 and status.json()["state"] == "owner_pending"
 
-            # A late match payout brings a profile row back: the sweep erases it again.
+            # A late match payout brings a bare profile row back: nothing erases in the background,
+            # the owner's "Website account deleted" press erases it (checked below).
             await db.rf_profiles.insert_one({"uid": uid, "coins": 5})
-            await account_deletion.settle_late(db)
-            assert await db.rf_profiles.count_documents({"uid": uid}) == 0
 
             # Owner panel: list shows number + name, completing removes them and allows nothing twice.
             token = secrets.token_urlsafe(32)
@@ -221,10 +220,11 @@ def test_full_deletion_flow(stub_website):
             assert (await http.post(path, json={})).status_code == 403  # no X-Owner-Panel header
             done = await http.post(path, json={"note": "deleted on website"}, headers={"X-Owner-Panel": "1"})
             assert done.status_code == 200 and done.json()["state"] == "owner_completed"
+            assert await db.rf_profiles.count_documents({"uid": uid}) == 0  # the late row went with the owner's press
             assert (await http.post(path, json={}, headers={"X-Owner-Panel": "1"})).status_code == 409
             stored = await db.account_deletions.find_one({"id": receipt["request_id"]})
             assert "phone" not in stored and "name" not in stored and "active" not in stored and stored["phone_last4"] == phone[-4:]
-            assert [h["event"] for h in stored["history"]] == ["requested", "rapid_fire_erased", "website_account_deleted"]
+            assert [h["event"] for h in stored["history"]] == ["requested", "rapid_fire_erased", "rapid_fire_erased_again", "website_account_deleted"]
             assert not await account_deletion.pending(db, uid)
             assert (await http.get(f"/api/account/delete-request/{receipt['request_id']}")).json()["website_account"] == "deleted"
         finally:
@@ -249,6 +249,29 @@ def test_pin_reset_cooldown_blocks_deletion(stub_website):
             await db.pin_resets.update_one({"phone": hashlib.sha256(phone.encode()).hexdigest()}, {"$set": {"at": datetime.now(timezone.utc) - timedelta(hours=73)}})
             r = await http.post("/api/account/delete-request", json={"phone": phone, "pin": "2580", "confirm": "DELETE"})
             assert r.status_code == 200 and await db.rf_profiles.count_documents({"uid": uid}) == 0
+        finally:
+            await http.aclose()
+            await client.close()
+    run(main())
+
+
+def test_owner_complete_claims_first(stub_website):
+    """While a complete is in progress ("completing"), a cancel is refused; pressing complete again finishes it."""
+    async def main():
+        client, db, http = await scratch()
+        uid = f"TEST-del-{uuid.uuid4().hex[:10]}"
+        now = datetime.now(timezone.utc)
+        rid = account_deletion.new_id()
+        await db.account_deletions.insert_one({"id": rid, "uid": uid, "phone": "917000000001", "phone_last4": "0001", "name": "", "source": "web",
+                                               "state": "completing", "active": True, "requested_at": now, "due_at": now + timedelta(days=30),
+                                               "history": [{"at": now, "event": "requested", "by": "web page"}]})
+        token = secrets.token_urlsafe(32)
+        await db.owner_sessions.insert_one({"digest": hashlib.sha256(token.encode()).hexdigest(), "who": "ow***@test", "expires_at": now + timedelta(hours=1)})
+        http.cookies.set("jl_owner", token)
+        try:
+            assert (await http.post(f"/api/owner/deletion-requests/{rid}/cancel", json={}, headers={"X-Owner-Panel": "1"})).status_code == 409
+            done = await http.post(f"/api/owner/deletion-requests/{rid}/complete", json={}, headers={"X-Owner-Panel": "1"})
+            assert done.status_code == 200 and done.json()["state"] == "owner_completed"
         finally:
             await http.aclose()
             await client.close()

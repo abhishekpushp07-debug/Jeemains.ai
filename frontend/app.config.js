@@ -14,7 +14,10 @@ module.exports = ({ config }) => {
     plugins: (config.plugins || []).map(plugin => {
       const name = Array.isArray(plugin) ? plugin[0] : plugin;
       if (name !== "expo-build-properties") return plugin;
-      return [name, { android: {
+      // Merge, never replace: app.json's options (e.g. Android <queries> for WhatsApp sharing) must survive.
+      const base = (Array.isArray(plugin) && plugin[1]) || {};
+      return [name, { ...base, android: {
+        ...(base.android || {}),
         // R8 minify + resource shrinking off: the release build must always produce an APK/AAB.
         enableMinifyInReleaseBuilds: false,
         enableShrinkResourcesInReleaseBuilds: false,

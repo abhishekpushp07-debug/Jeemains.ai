@@ -20,7 +20,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
 
-from account_deletion import RID_RE, end_session, new_cookies
+from account_deletion import RID_RE, end_session, erase_companion, new_cookies
 from client_ip import client_ip
 from jl_transport import UpstreamError, canonical_request
 
@@ -142,14 +142,24 @@ def make_router(db, client):
         if not RID_RE.match(rid):
             raise HTTPException(404, "No request has this number.")
         state, event = ("owner_completed", "website_account_deleted") if action == "complete" else ("cancelled", "cancelled")
-        now = _now()
-        doc = await db.account_deletions.find_one_and_update(
-            {"id": rid, "active": True, "state": "owner_pending"},
-            {"$set": {"state": state, "completed_at": now, "note": data.note.strip()}, "$unset": {"active": "", "phone": "", "name": ""},
-             "$push": {"history": {"at": now, "event": event, "by": s["who"]}}},
-            projection={"_id": 0}, return_document=ReturnDocument.AFTER)
+        waiting = {"id": rid, "active": True, "state": {"$in": ["owner_pending", "erasing"]}}
+        update = {"$set": {"state": state, "completed_at": _now(), "note": data.note.strip()}, "$unset": {"active": "", "phone": "", "name": ""}, "$push": {"history": []}}
+        if action == "complete":
+            # Claim it first, so a cancel pressed meanwhile cannot land between the erase and the close.
+            # A press that stopped half-way ("completing") can simply be pressed again: erasing twice is safe.
+            found = await db.account_deletions.find_one_and_update({**waiting, "state": {"$in": ["owner_pending", "erasing", "completing"]}},
+                                                                   {"$set": {"state": "completing"}}, projection={"_id": 0, "uid": 1, "erased_at": 1})
+            if found:  # the owner's press erases once more: a match that paid out after the request may have left a bare row
+                erased = await erase_companion(db, found["uid"])
+                update["$set"]["erased_at"] = found.get("erased_at") or _now()
+                update["$set"]["erased_again"] = erased
+                update["$push"]["history"].append({"at": _now(), "event": "rapid_fire_erased_again", "by": s["who"]})
+            waiting = {"id": rid, "active": True, "state": "completing"}
+        update["$push"]["history"].append({"at": _now(), "event": event, "by": s["who"]})
+        update["$push"]["history"] = {"$each": update["$push"]["history"]}
+        doc = await db.account_deletions.find_one_and_update(waiting, update, projection={"_id": 0}, return_document=ReturnDocument.AFTER)
         if not doc:
-            raise HTTPException(409, "This request is not waiting any more (already done, cancelled or still being erased).")
+            raise HTTPException(409, "This request is not waiting any more (already done or cancelled).")
         return JSONResponse(row(doc), headers=NO_STORE)
 
     return router
@@ -205,7 +215,7 @@ function kv(rows){const g=el("div",{class:"kv"});rows.forEach(([k,v,mono])=>{g.a
 function card(it){const erased=Object.entries(it.erased||{}).filter(([,n])=>n).map(([k,n])=>k.replace(/_/g," ")+" "+n).join(" · ");
 const c=el("article",{class:"card","data-testid":"owner-request-"+it.id},el("div",{class:"row spread"},el("b",{class:"mono",text:it.id}),chip(it)),
 kv([["Name",it.name],["Phone",it.phone||(it.phone_last4?"ending "+it.phone_last4:""),true],["Website user id",it.website_user_id,true],["Asked from",it.source==="web"?"Public web page":"App"],["Asked on",day(it.requested_at)],["Finish by",day(it.due_at)],["Finished",it.completed_at?day(it.completed_at):""],["Rapid Fire erased",erased||"nothing stored"],["Devices signed out",String(it.sessions_ended||0)],["Note",it.note]]));
-if(it.state==="owner_pending"){const err=el("p",{class:"err",role:"alert"});const act=(a,q)=>async e=>{if(!confirm(q))return;e.target.disabled=true;err.textContent="";try{await call("deletion-requests/"+it.id+"/"+a,{method:"POST",body:"{}"});await load()}catch(x){err.textContent=x.message;e.target.disabled=false;if(x.status===401)show(false)}};
+if(it.state==="owner_pending"||it.state==="erasing"||it.state==="completing"){const err=el("p",{class:"err",role:"alert"});const act=(a,q)=>async e=>{if(!confirm(q))return;e.target.disabled=true;err.textContent="";try{await call("deletion-requests/"+it.id+"/"+a,{method:"POST",body:"{}"});await load()}catch(x){err.textContent=x.message;e.target.disabled=false;if(x.status===401)show(false)}};
 c.append(el("div",{class:"row"},el("button",{class:"ok","data-testid":"owner-complete-"+it.id,text:"Website account deleted",on:act("complete","Have you deleted this account on the website? This removes the stored number and name here.")}),el("button",{class:"ghost","data-testid":"owner-cancel-"+it.id,text:"Cancel request",on:act("cancel","Cancel this request? The student can sign in again.")})),err)}
 const h=el("details",{},el("summary",{text:"History"}));(it.history||[]).forEach(x=>h.append(el("div",{text:day(x.at)+" · "+x.event.replace(/_/g," ")+(x.by?" · "+x.by:"")})));c.append(h);return c}
 async function load(){$("panel-error").textContent="";try{const b=await call("deletion-requests?view="+view,{method:"GET",headers:{}});show(true);$("who").textContent="Signed in as "+b.who;

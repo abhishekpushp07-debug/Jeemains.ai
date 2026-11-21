@@ -607,7 +607,6 @@ async def sweep():
     old = datetime.fromtimestamp(now - 86400, timezone.utc).isoformat()
     await db.rf_sessions.update_many({"status": "active", "created_at": {"$lt": old}}, {"$set": {"status": "expired"}})
     await cups_router.resume_payouts()
-    await account_deletion.settle_late(db)
 
 
 async def sweep_loop():

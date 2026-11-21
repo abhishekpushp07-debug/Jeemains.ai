@@ -11,6 +11,8 @@ three parts:
 3. The website account waits in the owner panel (/api/owner/deletions) until the owner deletes it on the website and
    marks it done (target: 30 days). Until then this app does not let that account sign in again.
 A repeated request (double tap, a retry after a timeout) returns the same request and erases again; erasing twice is safe.
+Nothing erases in the background: a match still running at that moment may pay out a little later and bring a bare
+profile row back, so the owner's "Website account deleted" press (owner_panel.py) erases once more before closing it.
 """
 import hashlib
 import json
@@ -245,19 +247,6 @@ def receipt(doc: dict) -> dict:
     return {"request_id": doc["id"], "state": state, "requested_at": _iso(doc["requested_at"]), "due_at": _iso(doc["due_at"]),
             "completed_at": _iso(doc.get("completed_at")), "rapid_fire_erased": bool(doc.get("erased_at")),
             "website_account": {"owner_completed": "deleted", "cancelled": "kept"}.get(state, "pending"), "signed_out": True}
-
-
-async def settle_late(db):
-    """A match or cup that was still running when the player was erased pays out a little later and may bring a profile
-    row back; the sweep erases again for an hour after each request (cheap: only a handful of requests)."""
-    since = _now() - timedelta(hours=1)
-    # "erasing" for more than a minute = the server stopped half-way through a request: finish it here.
-    query = {"active": True, "$or": [{"state": "owner_pending", "requested_at": {"$gt": since}}, {"state": "erasing", "requested_at": {"$lt": _now() - timedelta(minutes=1)}}]}
-    async for doc in db.account_deletions.find(query, {"_id": 0, "id": 1, "uid": 1, "state": 1, "erased_at": 1}):
-        erased = await erase_companion(db, doc["uid"])
-        if doc["state"] == "erasing":
-            await db.account_deletions.update_one({"id": doc["id"], "state": "erasing"}, {"$set": {"state": "owner_pending", "erased_at": doc.get("erased_at") or _now(), "erased": erased},
-                                                                                          "$push": {"history": {"at": _now(), "event": "rapid_fire_erased", "by": "server"}}})
 
 
 async def ensure_indexes(db):
