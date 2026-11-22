@@ -22,6 +22,7 @@ from starlette.middleware.cors import CORSMiddleware
 import account_deletion
 import card_bank
 import db_setup
+import health_alerts
 import health_panel
 import health_stats
 import jl_proxy
@@ -106,6 +107,7 @@ api.include_router(make_access_router(db, jl_proxy.client))
 api.include_router(account_deletion.make_router(db, jl_proxy.client))
 api.include_router(owner_panel.make_router(db, jl_proxy.client))
 api.include_router(health_panel.make_router(db))
+api.include_router(health_alerts.make_router(db))
 app.include_router(api)
 install_access_guard(app, db)
 app.add_middleware(AssetAwareCompression, minimum_size=1024, compresslevel=4)
@@ -138,6 +140,7 @@ async def startup():
     asyncio.create_task(card_bank.card_sync_loop(db))
     asyncio.create_task(jobs.sweep_loop(db, duel_api["settle"], cups_router))
     app.state.health_beat = asyncio.create_task(health_stats.beat(db, load_snapshot, shield.snapshot, later.pending))
+    asyncio.create_task(health_alerts.watch(db))
     asyncio.create_task(warm_up())
 
 

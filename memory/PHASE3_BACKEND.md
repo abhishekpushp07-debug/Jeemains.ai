@@ -84,3 +84,17 @@ Rapid Fire, Practice Rival matches, 30 cards, 3 s per card, live socket + inbox 
 - Full backend suite on the preview: 654 passed, 70 skipped, 1 failed = the route-count check (144 → 146, the two new App
   Health routes; updated).
 - Tools: `tools/restart_drill.py` (new), `tools/loadtest_mock.py` now also reports failed-call latency.
+
+## Owner email alerts (health_alerts.py + owner_mail.py, June 2026)
+- Emergent managed email (EMERGENT_EMAIL_KEY, EMAIL_FROM_NAME="JEELIVE.AI", OWNER_ALERT_EMAIL=Abhishek@billpe.com in backend/.env).
+- One copy at a time (take_turn "health_alerts") checks every 30 s: website (GET {JEELIVE_API}/health fails / 5xx / >10 s, or shield open),
+  errors (own calls = all − website − sign_in; ≥50 calls, ≥5 errors, ≥5%), packed (a copy busy, lag >200 ms, answers p95 ≥500 ms with ≥20),
+  jobs (failed, or late_s > 5×every_s once the oldest copy is up > 2×every_s+60 s).
+- Raised after 2 checks in a row, "Fixed" after 4 quiet checks (2 min); problem email at most once per kind per 10 min; 40 emails/day cap.
+  A problem still on and not yet emailed (held by the gap, or a failed send) is emailed on a later check (retry every 5 min);
+  only sent emails count toward the cap. Website check: /health answering >= 400, an error or >10 s = down.
+  State in rf_meta alert:<kind>, day counter alert:day:<IST date>, link host alert:host (X-Forwarded-Host, stored only from
+  owner-signed-in calls; "[Preview] " prefix on preview hosts).
+- Owner routes: GET /api/owner/health/alerts (status), POST /api/owner/health/alerts/test (X-Owner-Panel, 1 per minute → 429).
+  App Health page: "Email alerts" card (recipient masked, 4 rows OK/Problem, last email, Send a test email).
+- Tests: tests/test_health_alerts.py (6, fake sender, scratch DBs).

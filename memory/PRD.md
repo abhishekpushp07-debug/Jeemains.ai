@@ -928,3 +928,8 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Page fits a 390 px phone: no wrapped numbers, Refresh + Sign out on one line, empty-table rows, tile values on one line.
 - Verified: iteration_131 (6/6 pass, phase3 engine 16/16, live regression 24/24, app smoke OK).
 - Next: App Store / Play Store readiness review; optional teacher review list for AI-checked cards.
+
+## Iteration132 — Owner email alerts + store readiness reviews (June 2026)
+- Email alerts to Abhishek@billpe.com (Emergent managed email): website down, app errors jump, server packed/slow, background job stopped; problem + "Fixed" emails, 10-min gap per kind, 40/day cap, test button on App Health page. Verified iteration_132 + fixes (link host via X-Forwarded-Host, repeat outage emailed, failed send retried, cap counts only sent).
+- Play Store + App Store readiness reviews (read-only): no code blockers found; warnings: no "Report player" (only Block), iPad support on (supportsTablet true) needs iPad check or iPhone-only; manual: reviewer demo account, Data safety / App Privacy forms, closed test 12 testers × 14 days (new personal Play accounts), TestFlight on a real iPhone.
+- Next: Report player button, iPhone-only setting, reviewer demo account, teacher review list.

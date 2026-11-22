@@ -1,0 +1,43 @@
+{
+  "summary": "Health Alerts (owner email alerts) tested. Results: unit tests 6/6 pass. Live watcher is running: all 4 alert rows update about every 30 s, all are inactive, the turn:health_alerts lease is present and the log has no 'health alert check failed'. Owner routes: 401/401/403 checks, masked recipient Ab***@billpe.com, every_s 30, kinds in the right order. I sent ONE real test email, with a body that tried to change the recipient (to x@evil.com) and add a <form>: it returned 200 to the owner's masked address and the body was ignored. A second send right after gave 429 with Retry-After 60. The App Health 'Email alerts' card works at 390 and 1280 px: OK shows in green, '—' for no email, a 44px button, no sideways scroll. With intercepted responses, the 'Problem since 2 min' row, the 200 note (green) and the 429 note (red) all render. Regression passes: engine 16/16, live regression 24/24, App Health tables render, and the QA learner signed in and reached the Rapid Fire lobby at 390x844. Problems found: (1) HIGH: the link in every email points at the internal cluster host, which answers 403 from outside, and the [Preview] subject prefix never appears. (2) HIGH: a second outage inside the 10-min cooldown is never emailed, however long it lasts. (3) MEDIUM: a failed send is never retried. No deprecated Expo packages are involved (backend-only feature).",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "health_alerts.remember_host / page_link (email link)", "issue": "The Host header the backend receives on preview is the internal ingress host 'scale-engine-50k--0gu36hlx.cluster-11.preview.emergentcf.cloud', not the public '...preview.emergentagent.com'. The stored rf_meta alert:host is that cluster host, so the 'Open App Health' button in every email (including the test emails already sent) goes to https://<cluster host>/api/owner/health, which returns 403 from Google's load balancer from outside. Also, because the host doesn't end in '.preview.emergentagent.com', the '[Preview] ' subject prefix is never added. Production may have the same mismatch.", "priority": "HIGH"},
+      {"endpoint": "health_alerts.step (cooldown)", "issue": "The problem email is only checked for at the moment a problem turns on. Say a problem is emailed, gets 'Fixed', then comes back within 10 min: it is held back by the cooldown and marked mailed=False. If it then stays down for hours, no email ever goes, because the cooldown is never checked again while the problem is still on. So the owner's last email says 'Fixed' while the site is down. Reproduced in /app/tests/iter132_alert_edge_cases.py::test_long_reoutage_inside_cooldown_is_eventually_emailed (1 h re-outage: only 2 emails, alert + fixed).", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "health_alerts.mail/step (send failure)", "issue": "If the problem email fails (provider 5xx/timeout), mailed stays False and the email is never tried again while the problem is still on. The docstring says 'the next change of state tries again', but no change of state happens during the outage. Reproduced: test_failed_problem_email_is_retried (provider failed once, then 29 good checks, 0 emails). The failed attempt also counts toward the daily cap."},
+      {"endpoint": "POST /api/owner/health/alerts/test", "issue": "Once the daily cap of 40 is reached, mail() returns False and the route answers 502 'could not be sent. Please try again in a few minutes', which is misleading. It should say the daily limit was reached. Test emails also count toward the same cap as real alerts."},
+      {"endpoint": "health_alerts.own_calls", "issue": "Calls in the sign_in group are left out of app errors. That group includes /api/rf/access, which is the app's own route, not a website call, so its 5xx failures never count as 'errors jump'."},
+      {"endpoint": "health_alerts.website_check", "issue": "Only status >= 500 or a network error counts as down. If the website's /health returns 4xx (for example 404 or 403 from a WAF), it is treated as healthy."},
+      {"endpoint": "App Health page load()", "issue": "health/data and health/alerts are loaded with one Promise.all, so if the alerts call fails, the whole panel shows an error instead of the main tables."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_health_alerts.py", "/app/tests/iter132_alert_edge_cases.py", "/app/tests/iter132_alert_watch_check.py", "/app/backend/tests/test_phase3_engine.py", "/app/backend/tests/test_phase3_live_regression.py"],
+  "action_items": [
+    "Fix the email link host: don't rely on request.headers['host'] (on preview it is the internal cluster-11.preview.emergentcf.cloud host, which gives 403). Use X-Forwarded-Host or Origin when it is present and passes the HOST regex, or set the public base URL in a backend env var. Then re-check the '[Preview] ' prefix logic and clear the stale rf_meta alert:host row (it can be overwritten on the owner's next page load).",
+    "In step(): when a kind is active, mailed is False, and now - problem_mailed_at >= COOLDOWN, send the problem email then. This covers both a long outage that started inside the cooldown and an earlier failed send.",
+    "Optionally give the test route a clear 429/503 when the daily cap is reached, and only count the daily cap for sends that actually went out.",
+    "Consider keeping /api/rf/access in app errors (only leave out /api/jl/* website routes).",
+    "Make /app/tests/iter132_alert_edge_cases.py pass (2 tests fail now, on purpose, to show the gaps)."
+  ],
+  "critical_code_review_comments": [
+    "Email safety looks good: from_name comes from EMAIL_FROM_NAME ('JEELIVE.AI'); _assert_safe_email runs at the top of send_email on every real send; every title, line, snapshot value and the link go through html.escape; the only link is https://<stored host>/api/owner/health; no forms; the snapshot has counts and timings only (no student names, phones or ids); the recipient comes from env only, the test route reads no request body, and the subject and HTML are fixed server templates.",
+    "Host is stored only after owner_session passes (GET alerts / POST test), so a visitor can't plant a host. That part is correct; the trouble is which header the host is taken from.",
+    "Rate limit on the test route (upsert plus DuplicateKeyError means 429) works and holds under a race.",
+    "seen_host is kept per process, so each uvicorn worker writes the host once. Fine."
+  ],
+  "updated_files": ["/app/tests/iter132_alert_edge_cases.py (new)", "/app/tests/iter132_alert_watch_check.py (new, read-only)"],
+  "success_rate": {"backend": "93% (unit 6/6, engine 16/16, live 24/24, route checks 7/7, edge cases 5/7 – 2 failures are real logic gaps)", "frontend": "100% (alerts card, intercepted problem/200/429 states, 390/1280 layout, RF smoke)"},
+  "seed_data_creation": "None in the live DB. Scratch DBs test_database_it132_* were dropped. The temporary owner session was created and deleted (deleted 1). One real test email was sent (body-injection check); the day counter is now 2. No rf_health_nodes or alert:* rows were written to the live DB.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Read-only watcher check: python /app/tests/iter132_alert_watch_check.py (35 s). Edge cases with a fake sender on scratch DBs: cd /app/tests && PYTHONDONTWRITEBYTECODE=1 python -m pytest iter132_alert_edge_cases.py -q -p no:randomly -p no:cacheprovider. A real test email was sent at about 11:27 IST-host time on 22 Nov; don't send more without need. To test UI states, intercept GET /api/owner/health/alerts and POST /api/owner/health/alerts/test with page.route (no real send). The owner cookie must be added with domain = public preview host and path /api/owner. RF lobby smoke: entry-phone-input, entry-pin-input, entry-continue-button, tab-rapid, rf-daily-popup-exit, rf-start-button.",
+  "rca_of_issue": "Email link: behind the Emergent ingress, the backend gets Host=<app>.cluster-11.preview.emergentcf.cloud (seen in rf_meta alert:host after the owner's public-URL calls), and that host returns 403 from outside. Re-outage gap: in step(), the 'send problem email' branch only runs when 'not s.active and hits >= OPEN_AFTER', so it fires once per episode; an email held back by the cooldown or a failed send is never tried again."
+}
