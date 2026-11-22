@@ -3,7 +3,7 @@ from .book_models import Region, PageMap
 from .pdf_organiser_worker import ANCHOR, SUBJECT, choose_options
 from .chapter_reader import find as chapter_marks, exercise, norm
 
-READER_VERSION=5
+READER_VERSION=6
 MOCK=re.compile(r'^(?:(?:jee\s*main|jee|bitsat|comedk)\s+)?(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,3})\b',re.I)
 ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,3}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
 BARE=re.compile(r'^(?:(Q)(?:uestion)?\.?\s*)?(\d{1,3})\s*[.):]$',re.I)
@@ -32,6 +32,42 @@ def mock_title(value):
     return m if m and value[:1].isupper() and len(value)<60 and int(m[1])>=1 else None
 
 
+CRUMB=re.compile(r'\s+[/|\u2022\u00b7]\s+')
+CORRECT=re.compile(r'(?:single|multiple)[- ]correct(?:\s+(?:mcqs?|questions?|options?))?|mcqs?',re.I)
+
+
+def subject_of(part):
+    m=SUBJECT.match(part)
+    return m[1].title().replace('Maths','Mathematics') if m and m.end()==len(part) else None
+
+
+def crumbs(value):
+    """A running label made only of parts such as 'MOCK 01 / Mathematics / Single-correct MCQ' or 'MATHEMATICS / DETAILED SOLUTION':
+    (mock, subject, role match, numeric), or None when any part is something else."""
+    parts=[p.strip() for p in CRUMB.split(value) if p.strip()]
+    if len(parts)<2 or len(value)>120:return None
+    mock=subject=role=numeric=None
+    for p in parts:
+        m=mock_title(p)
+        if m and m.end()==len(p):mock='Mock '+str(int(m[1]))
+        elif subject_of(p):subject=subject_of(p)
+        elif p[:1].isupper() and ROLE.fullmatch(p):role=ROLE.fullmatch(p)
+        elif CORRECT.fullmatch(p):numeric=False
+        elif NUMERIC.search(p):numeric=True
+        else:return None
+    return mock,subject,role,numeric
+
+
+def role_of(value):
+    """'Answer key', 'Mock 01 answer key', or the role part of a running label."""
+    if not value[:1].isupper():return None
+    if r:=ROLE.fullmatch(value):return r
+    m=mock_title(value)
+    if m and (rest:=value[m.end():].strip(' :-\u2013\u2014')) and (r:=ROLE.fullmatch(rest)):return r
+    c=crumbs(value)
+    return c[2] if c else None
+
+
 def band(line):
     """Running header/footer: short lines in the top or bottom page margin."""
     if line.get('body'):return False
@@ -49,7 +85,11 @@ def anchor_of(line):
     return found if found and 1<=found[0]<=600 else None
 
 
-def key_cells(body,least=10):
+def cell_pair(q, k):
+    return (int(q['text']),k['text'].strip().strip('()').replace('\u2212','-').upper(),[q['rect'][0],min(q['rect'][1],k['rect'][1]),k['rect'][2],max(q['rect'][3],k['rect'][3])])
+
+
+def key_cells(body,least=10,ruled=False):
     """Answer-key tables printed as Q | Key cell pairs (a source column may sit between them), read row by row."""
     cells=sorted((x for x in body if CELL_NUMBER.fullmatch(x['text'].strip()) or CELL_KEY.fullmatch(x['text'].strip())),key=lambda x:(x['rect'][1]+x['rect'][3])/2)
     rows=[]
@@ -57,16 +97,28 @@ def key_cells(body,least=10):
         mid=(c['rect'][1]+c['rect'][3])/2
         if rows and abs(mid-rows[-1][0])<.006:rows[-1][1].append(c)
         else:rows.append((mid,[c]))
+    wide={}
+    for _,row in rows:row.sort(key=lambda x:x['rect'][0])
+    for _,row in rows if ruled else []:
+        for q,k in zip(row,row[1:]):
+            if CELL_NUMBER.fullmatch(q['text'].strip()) and CELL_KEY.fullmatch(k['text'].strip()) and .15<=k['rect'][0]-q['rect'][2]<.32 and 1<=int(q['text'])<=600:
+                wide.setdefault((round(q['rect'][0],2),round(k['rect'][2],2)),[]).append((q,k))
+    found=[]
+    for column in wide.values():
+        # A ruled key table prints its numbers and keys far apart: a whole column of consecutive numbers at the same two edges is one.
+        numbers=[int(q['text']) for q,_ in sorted(column,key=lambda c:c[0]['rect'][1])]
+        if len(column)>=10 and numbers==list(range(numbers[0],numbers[0]+len(numbers))):found+=[cell_pair(q,k) for q,k in column]
+    if len(found)>=least and len({p[0] for p in found})==len(found):return found
     pairs=[]
     for _,row in rows:
-        row.sort(key=lambda x:x['rect'][0]);i=0
+        i=0
         while i+1<len(row):
             q,k=row[i],row[i+1]
             gap=k['rect'][0]-q['rect'][2]
             # A wider gap is one table row only when another cell (such as the question's source) is printed inside it.
             between=.15<=gap<.32 and any(x is not q and x is not k and q['rect'][2]<=x['rect'][0] and x['rect'][2]<=k['rect'][0] and abs((x['rect'][1]+x['rect'][3])/2-(q['rect'][1]+q['rect'][3])/2)<.006 for x in body)
             if CELL_NUMBER.fullmatch(q['text'].strip()) and CELL_KEY.fullmatch(k['text'].strip()) and (0<gap<.15 or between) and 1<=int(q['text'])<=600:
-                pairs.append((int(q['text']),k['text'].strip().strip('()').replace('\u2212','-').upper(),[q['rect'][0],min(q['rect'][1],k['rect'][1]),k['rect'][2],max(q['rect'][3],k['rect'][3])]));i+=2
+                pairs.append(cell_pair(q,k));i+=2
             else:i+=1
     return pairs if len(pairs)>=least and len({p[0] for p in pairs})==len(pairs) else []
 
@@ -168,14 +220,25 @@ def scan_headers(lines, text, context, issues):
     for c in marks:
         headers+=[(c['y'],'mock',c['label']),(c['y'],'chapter',(c['label'],c['record']))]+([(c['y'],'role',c['role'])] if c['role'] else [])+[(y,'title',None) for y in c['rows'][1:]]
     for i,line in enumerate(lines):
-        value=line['text'].strip();m=None if chapters else mock_title(value);role=ROLE.fullmatch(value) if value[:1].isupper() else None;margin=band(line)
+        value=line['text'].strip();margin=band(line)
+        crumb=None if chapters or i in used else crumbs(value)
+        if crumb:
+            # A running label names the page's mock, subject, section type or role wherever it is printed; it never splits a question.
+            mock,subject,found,numeric=crumb
+            if mock and mock!=context.get('mock'):headers.append((-1,'mock',mock))
+            if found and (not margin or line['rect'][0]<.2 or line['rect'][2]>.85):headers.append((-1,'role','solution' if 'solution' in found[1].lower() else 'key'))
+            if subject:headers.append((-1,'subject',subject))
+            if numeric is not None:headers.append((-1,'numeric',numeric))
+            continue
+        m=None if chapters else mock_title(value)
+        role=(ROLE.fullmatch(value) if chapters else role_of(value)) if value[:1].isupper() else None
         if m:
             headers.append((line['rect'][1],'mock','Mock '+str(int(m[1]))))
             starts_questions=bool(re.search(r'\b(?:instructions|duration|total questions|time\s*:)\b',text,re.I) or choose_options(text)[0])
             if context.get('role') in ('key','solution') and not starts_questions and not margin and context.get('mock')=='Mock '+str(int(m[1])):
                 issues.append('Mock heading follows keys/solutions without question instructions: confirm the section type.')
-        if role and i not in used and len(value)<140 and (not margin or line['rect'][0]<.2):
-            # A running section label at the left margin names the whole page; centred navigation links do not.
+        if role and i not in used and len(value)<140 and (not margin or line['rect'][0]<.2 or (not chapters and line['rect'][3]<=TOP and line['rect'][2]>.85)):
+            # A running section label at the left margin (or right-aligned at the top) names the whole page; centred navigation links do not.
             headers.append((-1 if margin else line['rect'][1],'role','solution' if 'solution' in role[1].lower() else 'key'))
         if margin or i in used:continue
         subject=SUBJECT.match(value) if value[:1].isupper() and len(value.split())<=7 and not value.endswith(('.',',',';')) else None
@@ -232,13 +295,14 @@ def read_page(lines, previous, geometry=(), images=()):
     footer_text=' '.join(x['text'] for x in margin if x['rect'][1]>=BOTTOM)
     titles={m['label'] for m in chapter_headings(body,context)[0]} if context.get('chapters') else {int(m[1]) for x in lines for m in [mock_title(x['text'].strip())] if m}
     margin_anchor=any(anchor_of(x) for x in body if x['rect'][0]<.27)
-    if (re.search(r'^\s*(contents|index)\b',body_text,re.I|re.M) and not margin_anchor) or (len(titles)>=3 and not any(ROLE.fullmatch(x['text'].strip()) for x in body)):
+    is_role=ROLE.fullmatch if context.get('chapters') else role_of
+    if (re.search(r'^\s*(contents|index)\b',body_text,re.I|re.M) and not margin_anchor) or (len(titles)>=3 and not any(is_role(x['text'].strip()) for x in body)):
         return page_map('contents',[Region(role='ignore',rect=[.01,.01,.99,.99],text=text[:30000],checked=True)],[]),context
-    if any(ROLE.fullmatch(x['text'].strip()) and 'solution' not in x['text'].lower() for x in body) or (context.get('chapters') and any(c['role']=='key' for c in chapter_headings(body,context)[0])):
+    if any(is_role(x['text'].strip()) and 'solution' not in x['text'].lower() for x in body) or (context.get('chapters') and any(c['role']=='key' for c in chapter_headings(body,context)[0])):
         # A key table and the start of the worked solutions may share a page: the table above, the solutions from their heading down.
-        split=min([c['y'] for c in chapter_headings(body,context)[0] if c['role']=='solution']+[x['rect'][1] for x in body if ROLE.fullmatch(x['text'].strip()) and 'solution' in x['text'].lower()]+[2])
+        split=min([c['y'] for c in chapter_headings(body,context)[0] if c['role']=='solution']+[x['rect'][1] for x in body if is_role(x['text'].strip()) and 'solution' in x['text'].lower()]+[2])
         upper=[x for x in body if x['rect'][1]<split-.002]
-        pairs=key_cells(upper)
+        pairs=key_cells(upper,ruled=not context.get('chapters'))
         if pairs and split>1:return read_keys(lines,body,pairs,context)
         if pairs:
             keys,context=read_keys(margin+upper,upper,pairs,context)

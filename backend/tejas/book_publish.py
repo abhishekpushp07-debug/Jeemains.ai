@@ -145,7 +145,8 @@ async def rebuild(book, token, source=None):
             raw_instructions='\n'.join(r.text for _,r in instructions)
             if re.search(r'\b(?:worked|detailed)\s+solutions?\s+(?:follow|provided|included|for\s+(?:all|every))',raw_instructions,re.I) and rules.get('solution_policy')!='original_expected':
                 issues.append('Printed instructions promise original worked solutions. Failed capture cannot be relabelled key-only.')
-            declared_counts={int(n) for n in re.findall(r'(?:total\s+(?:number\s+of\s+)?questions|questions)\s*[:=]\s*(\d+)',raw_instructions,re.I)}
+            # '75 questions: 25 Mathematics, 25 Physics…' prints a per-subject count after the colon, not the paper's total.
+            declared_counts={int(n) for n in re.findall(r'(?:total\s+(?:number\s+of\s+)?questions|questions)\s*[:=]\s*(\d+)\b(?!\s*(?:physics|chemistry|math\w*|biology|english|logical|single|multiple|numerical|integer|mcqs?)\b)',raw_instructions,re.I)}
             if declared_counts and declared_counts!={rules['expected_questions']}:
                 issues.append('Printed question count conflicts with the proposed count; a missing source question cannot be waived.')
             section_ids=[(normalized(s['subject']),normalized(s['section'])) for s in rules.get('section_scoring',[])]

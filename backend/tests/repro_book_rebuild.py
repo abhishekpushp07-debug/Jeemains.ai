@@ -40,7 +40,7 @@ P.pages_for, P.mocks_for, P.save_mock, P.fence, P.database_now = pages_for, mock
 
 
 async def main():
-    await P.rebuild(SimpleNamespace(id='TEST', payload={}), 'token')
+    await P.rebuild(SimpleNamespace(id='TEST', payload=json.loads(os.environ.get('PAYLOAD', '{}'))), 'token')
     mocks = sorted(saved.values(), key=lambda m: m.order)
     print('MOCKS', len(mocks), Counter(m.state for m in mocks), 'total issues', sum(len(m.issues) for m in mocks))
     print('rules set', sum(bool(m.rules) for m in mocks), 'questions per mock', Counter(len(m.questions) for m in mocks).most_common(4))
@@ -60,7 +60,7 @@ async def main():
                 other = [int(x) for x in re.findall(r'(?m)^(?:Question\s+)?(\d{1,3})[.)]\s', text) if int(x) != q['number']]
                 if q['type'] == 'mcq' and len(q['options']) != 4: flags['mcq without 4 options'] += 1
                 if not q['answer']: flags['no key'] += 1
-                if other: flags['crop contains another question number'] += 1
+                if other: flags['crop contains another question number'] += 1; print('   OTHER', m.label, q['number'], other, regs)
                 if any(g['rect'][3] - g['rect'][1] > .6 for g in regs): flags['question crop taller than 60% page'] += 1
                 if m.rules.get('solution_policy') == 'original_expected' and not q['source_regions']['solution']: flags['solution missing'] += 1
                 rows.append({'mock': m.label, 'state': m.state, 'n': q['number'], 'type': q['type'], 'answer': q['answer'], 'q': regs, 's': q['source_regions']['solution']})
