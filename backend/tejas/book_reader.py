@@ -86,7 +86,7 @@ def anchor_of(line):
 
 
 QCELL=re.compile(r'Q\.?\s*\d{1,3}')
-ANSWERED=re.compile(r'^\s*\d{1,3}[.)]\s*(?:answer|ans\.?|solution|sol\.?)\s*[:(\-]?\s*\(?[A-D0-9\-]',re.I)
+ANSWERED=re.compile(r'^\s*\d{1,3}[.)]\s*(?:Answer|ANSWER|Ans\.?|ANS\.?|Solution|SOLUTION)\s*[:\-]?\s*\((?:[A-D]|[+\-\u2212]?\d{1,9}(?:\.\d+)?)\)')
 
 
 def cell_no(text):
@@ -117,7 +117,7 @@ def key_cells(body,least=10,ruled=False):
     for column in wide.values():
         # A ruled key table prints its numbers and keys far apart: a whole column of consecutive numbers at the same two edges is one.
         numbers=[cell_no(q['text']) for q,_ in sorted(column,key=lambda c:c[0]['rect'][1])]
-        if len(column)>=10 and numbers==list(range(numbers[0],numbers[0]+len(numbers))):found+=[cell_pair(q,k) for q,k in column]
+        if len(column)>=(5 if ruled=='only' else 10) and numbers==list(range(numbers[0],numbers[0]+len(numbers))):found+=[cell_pair(q,k) for q,k in column]
     if len(found)>=least and len({p[0] for p in found})==len(found):return found
     if ruled=='only':return []
     pairs=[]
@@ -326,7 +326,7 @@ def read_page(lines, previous, geometry=(), images=()):
     if context.get('plan') and context.get('role')=='key':
         # The book's own bookmarks say this page is an answer key: a ruled column of 'Q01 … A' rows is one even though 'Q01' looks like a
         # question number; otherwise a table of bare numbers is read as one only when nothing on the page starts a question.
-        pairs=key_cells(body,10,ruled='only') or (key_cells(body,1) if not any(anchor_of(x) for x in body) else [])
+        pairs=key_cells(body,5,ruled='only') or (key_cells(body,1) if not any(anchor_of(x) for x in body) else [])
         if pairs:return read_keys(lines,body,pairs,context)
     headers,anchors=scan_headers(lines,text,context,issues)
     page_role=next((v for y,k,v in headers if k=='role' and y<0),context.get('role'))

@@ -256,6 +256,7 @@ def plan_start(context, entry):
     c.update(mock=entry['label'], role=entry['role'], last={}, subject='Questions', numeric=False)
     c.pop('open_q', None)
     c.pop('open_s', None)
+    c.pop('solution_style', None)  # each chapter shows again how its own solutions are headed
     info = {k: dict(v) for k, v in (c.get('chapter_info') or {}).items()}
     rec = info.setdefault(entry['label'], {})
     for k in ('number', 'title', 'subject'):
