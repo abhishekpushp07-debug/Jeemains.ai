@@ -21,7 +21,20 @@ for start in range(1, n + 1, 50):
     data.extend(zip(nums, inspect_many(src, [{'action': 'text', 'page': k} for k in nums], 10)))
 print('extracted', len(data), 'pages', round(time.time() - t, 1), 's', flush=True)
 context, pages, page_issues = {}, [], Counter()
+payload = json.loads(os.environ.get('PAYLOAD', '{}'))
+plan_at = {}
+if payload.get('chapters'):
+    # As the live worker does: the PDF's bookmarks become the chapter plan, and each plan entry starts its part.
+    import fitz  # noqa: E402
+    from tejas.book_worker import use_bookmark_parts  # noqa: E402
+    from tejas.chapter_reader import plan_start  # noqa: E402
+    payload.update(pages=pages_n, bookmarks=fitz.open(src).get_toc()[:1000])
+    use_bookmark_parts(payload)
+    context = {'chapters': True, 'plan': bool(payload.get('chapter_plan'))}
+    for e in payload.get('chapter_plan') or []: plan_at.setdefault(e['page'], []).append(e)
+    print('plan entries', len(payload.get('chapter_plan') or []))
 for number, d in data:
+    for e in plan_at.get(number, []): context = plan_start(context, e)
     mapped, context = read_page(d['lines'], context, d.get('geometry', []), d.get('images', []))
     pages.append(BookPage(id=identity('TEST', 'page', number), book_id='TEST', number=number, **mapped.model_dump(),
                           text='\n'.join(x['text'] for x in d['lines']), context=context, provenance={'kind': 'native'}))
@@ -40,7 +53,7 @@ P.pages_for, P.mocks_for, P.save_mock, P.fence, P.database_now = pages_for, mock
 
 
 async def main():
-    await P.rebuild(SimpleNamespace(id='TEST', payload=json.loads(os.environ.get('PAYLOAD', '{}'))), 'token')
+    await P.rebuild(SimpleNamespace(id='TEST', payload=payload), 'token')
     mocks = sorted(saved.values(), key=lambda m: m.order)
     print('MOCKS', len(mocks), Counter(m.state for m in mocks), 'total issues', sum(len(m.issues) for m in mocks))
     print('rules set', sum(bool(m.rules) for m in mocks), 'questions per mock', Counter(len(m.questions) for m in mocks).most_common(4))

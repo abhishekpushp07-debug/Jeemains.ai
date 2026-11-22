@@ -3,7 +3,7 @@ from .book_models import Region, PageMap
 from .pdf_organiser_worker import ANCHOR, SUBJECT, choose_options
 from .chapter_reader import find as chapter_marks, exercise, norm
 
-READER_VERSION=6
+READER_VERSION=7
 MOCK=re.compile(r'^(?:(?:jee\s*main|jee|bitsat|comedk)\s+)?(?:(?:full[ -]length|practice|mock|model|sample)\s+)*(?:test|mock|paper)\s*(?:no\.?\s*)?[#:\-]?\s*(\d{1,3})\b',re.I)
 ROLE=re.compile(r'(?:(?:detailed|worked|hints?\s*(?:&|and))\s+)?(solutions?|answers?\s*keys?|answers?)(?:\s*(?:[:\-\u2013\u2014]|for|to|of)?\s*(?:(?:mock|practice|model|sample)?\s*(?:test|mock|paper)\s*(?:no\.?\s*)?\d{1,3}|physics|chemistry|math(?:ematic)?s|biology|english|logical\s+reasoning))?\s*[:.]?',re.I)
 BARE=re.compile(r'^(?:(Q)(?:uestion)?\.?\s*)?(\d{1,3})\s*[.):]$',re.I)
@@ -85,13 +85,23 @@ def anchor_of(line):
     return found if found and 1<=found[0]<=600 else None
 
 
+QCELL=re.compile(r'Q\.?\s*\d{1,3}')
+ANSWERED=re.compile(r'^\s*\d{1,3}[.)]\s*(?:answer|ans\.?|solution|sol\.?)\s*[:(\-]?\s*\(?[A-D0-9\-]',re.I)
+
+
+def cell_no(text):
+    return int(re.sub(r'\D','',text))
+
+
 def cell_pair(q, k):
-    return (int(q['text']),k['text'].strip().strip('()').replace('\u2212','-').upper(),[q['rect'][0],min(q['rect'][1],k['rect'][1]),k['rect'][2],max(q['rect'][3],k['rect'][3])])
+    return (cell_no(q['text']),k['text'].strip().strip('()').replace('\u2212','-').upper(),[q['rect'][0],min(q['rect'][1],k['rect'][1]),k['rect'][2],max(q['rect'][3],k['rect'][3])])
 
 
 def key_cells(body,least=10,ruled=False):
-    """Answer-key tables printed as Q | Key cell pairs (a source column may sit between them), read row by row."""
-    cells=sorted((x for x in body if CELL_NUMBER.fullmatch(x['text'].strip()) or CELL_KEY.fullmatch(x['text'].strip())),key=lambda x:(x['rect'][1]+x['rect'][3])/2)
+    """Answer-key tables printed as Q | Key cell pairs (a source column may sit between them), read row by row.
+    ruled=True also reads ruled tables whose numbers ('12' or 'Q12') sit far from their keys; ruled='only' reads nothing else."""
+    number=lambda t:CELL_NUMBER.fullmatch(t) or (ruled and QCELL.fullmatch(t))
+    cells=sorted((x for x in body if number(x['text'].strip()) or CELL_KEY.fullmatch(x['text'].strip())),key=lambda x:(x['rect'][1]+x['rect'][3])/2)
     rows=[]
     for c in cells:
         mid=(c['rect'][1]+c['rect'][3])/2
@@ -101,14 +111,15 @@ def key_cells(body,least=10,ruled=False):
     for _,row in rows:row.sort(key=lambda x:x['rect'][0])
     for _,row in rows if ruled else []:
         for q,k in zip(row,row[1:]):
-            if CELL_NUMBER.fullmatch(q['text'].strip()) and CELL_KEY.fullmatch(k['text'].strip()) and .15<=k['rect'][0]-q['rect'][2]<.32 and 1<=int(q['text'])<=600:
+            if number(q['text'].strip()) and CELL_KEY.fullmatch(k['text'].strip()) and .15<=k['rect'][0]-q['rect'][2]<(.45 if ruled=='only' else .32) and 1<=cell_no(q['text'])<=600:
                 wide.setdefault((round(q['rect'][0],2),round(k['rect'][2],2)),[]).append((q,k))
     found=[]
     for column in wide.values():
         # A ruled key table prints its numbers and keys far apart: a whole column of consecutive numbers at the same two edges is one.
-        numbers=[int(q['text']) for q,_ in sorted(column,key=lambda c:c[0]['rect'][1])]
+        numbers=[cell_no(q['text']) for q,_ in sorted(column,key=lambda c:c[0]['rect'][1])]
         if len(column)>=10 and numbers==list(range(numbers[0],numbers[0]+len(numbers))):found+=[cell_pair(q,k) for q,k in column]
     if len(found)>=least and len({p[0] for p in found})==len(found):return found
+    if ruled=='only':return []
     pairs=[]
     for _,row in rows:
         i=0
@@ -217,10 +228,14 @@ def scan_headers(lines, text, context, issues):
     starts=[round(x['rect'][0],2) for x in lines if x['rect'][0]<.3 and not band(x)]
     left=max(set(starts),key=starts.count) if starts else .3
     marks,used=chapter_headings(lines,context)
+    # The bookmarks name the chapter: its title printed on a question page ('Solutions', 'Chemistry in Everyday Life') is not a heading.
+    title=((context.get('chapter_info') or {}).get(context.get('mock')) or {}).get('title','') if context.get('plan') else ''
+    title=re.sub(r'^\s*\d{1,3}[.)]?\s+','',title).strip().lower()
     for c in marks:
         headers+=[(c['y'],'mock',c['label']),(c['y'],'chapter',(c['label'],c['record']))]+([(c['y'],'role',c['role'])] if c['role'] else [])+[(y,'title',None) for y in c['rows'][1:]]
     for i,line in enumerate(lines):
         value=line['text'].strip();margin=band(line)
+        if title and value.lower()==title and i not in used:continue
         crumb=None if chapters or i in used else crumbs(value)
         if crumb:
             # A running label names the page's mock, subject, section type or role wherever it is printed; it never splits a question.
@@ -308,9 +323,10 @@ def read_page(lines, previous, geometry=(), images=()):
             keys,context=read_keys(margin+upper,upper,pairs,context)
             rest,context=read_page(margin+[x for x in body if x['rect'][1]>=split-.002],context,[g for g in geometry if g[1]>=split-.004],[b for b in images if b[1]>=split-.004])
             return page_map('mixed',keys.regions+rest.regions,keys.issues+rest.issues),context
-    if context.get('plan') and context.get('role')=='key' and not any(anchor_of(x) for x in body):
-        # The book's own bookmarks say this page is an answer key: a table of bare numbers is read as one.
-        pairs=key_cells(body,1)
+    if context.get('plan') and context.get('role')=='key':
+        # The book's own bookmarks say this page is an answer key: a ruled column of 'Q01 … A' rows is one even though 'Q01' looks like a
+        # question number; otherwise a table of bare numbers is read as one only when nothing on the page starts a question.
+        pairs=key_cells(body,10,ruled='only') or (key_cells(body,1) if not any(anchor_of(x) for x in body) else [])
         if pairs:return read_keys(lines,body,pairs,context)
     headers,anchors=scan_headers(lines,text,context,issues)
     page_role=next((v for y,k,v in headers if k=='role' and y<0),context.get('role'))
@@ -318,6 +334,11 @@ def read_page(lines, previous, geometry=(), images=()):
     if page_role=='solution' and context.get('solution_style')=='q':
         # Books that head every solution 'Question N' number their working steps 1., 2., … too.
         anchors=[a for a in anchors if a[1][1]]
+    elif page_role=='solution':
+        # '1. Answer (A)' heads each solution; the '1.', '2.' steps inside it are not new solutions.
+        marked=[a for a in anchors if ANSWERED.match(a[0]['text'])]
+        if marked:context['solution_style']='answer'
+        if marked or context.get('solution_style')=='answer':anchors=marked
     if sum(x['rect'][0]<.45 and x['rect'][2]>.55 for x in body)>3:
         # Lines running across the gutter mean one column; a '5. …' fragment mid-row is not a second column.
         anchors=[a for a in anchors if a[0]['rect'][0]<=.46]
