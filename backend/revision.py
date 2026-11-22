@@ -7,7 +7,8 @@ from typing import Optional
 
 from fastapi import APIRouter, Header
 
-from exam_groups import Exam, require_active_exam
+from exam_groups import SUBJECTS, Exam, require_active_exam
+from metadata_cache import metadata_cache
 from scope import CARD_SECONDS
 
 
@@ -50,39 +51,84 @@ async def remembered(db, what, uid, exam, load, empty):
 
 Mark = namedtuple("Mark", "card subject chapter latest tries misses")
 MARKS_SIZE = 300
-_marks: OrderedDict = OrderedDict()  # (uid, exam) -> (learning events, every card the student has answered)
+_marks: OrderedDict = OrderedDict()  # (uid, exam) -> (learning events, newest (completed_at, ref) read, {card: Mark})
+
+
+def _apply(marks: dict, results: list):
+    """One more round, in play order: the same sums the full pass makes ($last subject/chapter/outcome, tries, misses)."""
+    for r in results:
+        m = marks.get(r["card_id"])
+        marks[r["card_id"]] = Mark(r["card_id"], sys.intern(r["subject"]), sys.intern(r["chapter"]), sys.intern(r["outcome"]),
+                                   (m.tries if m else 0) + 1, (m.misses if m else 0) + (r["outcome"] in ("incorrect", "timed_out")))
 
 
 async def card_marks(db, uid, exam) -> list:
     """Every card this student has answered: where it belongs, the latest outcome, tries and misses.
-    Learning events are never changed once written, so this pass over the student's whole history is made once per
-    finished round and then serves both weak lists (the lobby asks for both, and again a minute later for bank changes).
-    Before, each list made its own pass every time, and one of them looked every missed card up one at a time."""
+    Learning events are never changed once written, so the pass over the student's whole history is made once; after
+    each finished round only the rounds that came after it are read and added (one or two rows instead of thousands).
+    A round recorded late (it sorts before rounds already read) makes a full pass again, so the answer is always the same."""
     events = await db.rf_learning_events.count_documents({"uid": uid, "exam": exam})
-    hit = _marks.get((uid, exam))
+    key = (uid, exam)
+    hit = _marks.get(key)
     if hit and hit[0] == events:
-        _marks.move_to_end((uid, exam))
-        return hit[1]
-    rows = await (await db.rf_learning_events.aggregate([
-        {"$match": {"uid": uid, "exam": exam}},
-        {"$sort": {"completed_at": 1, "ref": 1}},
-        {"$unwind": "$results"},
-        {"$group": {"_id": "$results.card_id", "subject": {"$last": "$results.subject"}, "chapter": {"$last": "$results.chapter"},
-                    "latest": {"$last": "$results.outcome"}, "tries": {"$sum": 1},
-                    "misses": {"$sum": {"$cond": [{"$in": ["$results.outcome", ["incorrect", "timed_out"]]}, 1, 0]}}}},
-    ])).to_list(None)
-    marks = [Mark(r["_id"], sys.intern(r["subject"]), sys.intern(r["chapter"]), sys.intern(r["latest"]), r["tries"], r["misses"]) for r in rows]
-    _marks[(uid, exam)] = (events, marks)
-    _marks.move_to_end((uid, exam))
+        _marks.move_to_end(key)
+        return list(hit[2].values())
+    marks = last = None
+    if hit and hit[1] and events > hit[0]:
+        newer = await db.rf_learning_events.find({"uid": uid, "exam": exam, "completed_at": {"$gte": hit[1][0]}},
+                                                 {"_id": 0, "completed_at": 1, "ref": 1, "results": 1}).sort([("completed_at", 1), ("ref", 1)]).to_list(None)
+        fresh = [e for e in newer if (e["completed_at"], e["ref"]) > hit[1]]
+        if len(fresh) == events - hit[0]:
+            marks = dict(hit[2])
+            for e in fresh:
+                _apply(marks, e.get("results") or [])
+            last = (fresh[-1]["completed_at"], fresh[-1]["ref"])
+    if marks is None:
+        rows = await (await db.rf_learning_events.aggregate([
+            {"$match": {"uid": uid, "exam": exam}},
+            {"$sort": {"completed_at": 1, "ref": 1}},
+            {"$unwind": "$results"},
+            {"$group": {"_id": "$results.card_id", "subject": {"$last": "$results.subject"}, "chapter": {"$last": "$results.chapter"},
+                        "latest": {"$last": "$results.outcome"}, "tries": {"$sum": 1},
+                        "misses": {"$sum": {"$cond": [{"$in": ["$results.outcome", ["incorrect", "timed_out"]]}, 1, 0]}}}},
+        ])).to_list(None)
+        marks = {r["_id"]: Mark(r["_id"], sys.intern(r["subject"]), sys.intern(r["chapter"]), sys.intern(r["latest"]), r["tries"], r["misses"]) for r in rows}
+        newest = await db.rf_learning_events.find_one({"uid": uid, "exam": exam}, {"_id": 0, "completed_at": 1, "ref": 1}, sort=[("completed_at", -1), ("ref", -1)])
+        last = (newest["completed_at"], newest["ref"]) if newest and isinstance(newest.get("completed_at"), str) else None
+    _marks[key] = (events, last, marks)
+    _marks.move_to_end(key)
     while len(_marks) > MARKS_SIZE:
         _marks.popitem(last=False)
-    return marks
+    return list(marks.values())
+
+
+_live: dict = {}  # exam -> (the subject maps it was made from, one map of them all)
+
+
+async def live_cards(db, exam) -> dict:
+    """card id -> [subject, chapter, subtopic] of every card that can be dealt now, kept like the deal pools (one map per
+    subject, 2 minutes, then reloaded behind the scenes). Weak lists look their cards up here instead of in the database:
+    a long history used to read thousands of cards on every lobby open."""
+    maps = []
+    for subject in SUBJECTS[exam]:
+        async def load(subject=subject):
+            return {c["id"]: [c["subject"], c["chapter"], c.get("topic") or ""] async for c in db.rf_cards.find(
+                {"exam": exam, "subject": subject, "retired": {"$ne": True}}, {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "topic": 1}).batch_size(2000)}
+        maps.append((await metadata_cache.get_or_load(f"{db.name}:live:{exam}:{subject}", load, ttl=120))[0])
+    hit = _live.get(exam)
+    if hit and len(hit[0]) == len(maps) and all(a is b for a, b in zip(hit[0], maps)):
+        return hit[1]
+    merged = {}
+    for m in maps:
+        merged.update(m)
+    _live[exam] = (maps, merged)
+    return merged
 
 
 async def weak_chapters(db, uid, exam):
     """Chapters with cards still missed (wrong or timed out, and not answered right since), most missed first."""
     missed = [m for m in await card_marks(db, uid, exam) if m.latest != "correct" and m.misses > 0]
-    live = {c["id"] async for c in db.rf_cards.find({"id": {"$in": [m.card for m in missed]}, "exam": exam, "retired": {"$ne": True}}, {"_id": 0, "id": 1})} if missed else set()
+    live = await live_cards(db, exam) if missed else {}
     chapters = {}
     for m in sorted((m for m in missed if m.card in live), key=lambda m: (-m.misses, m.card)):
         row = chapters.setdefault((m.subject, m.chapter), {"subject": m.subject, "chapter": m.chapter, "misses": 0, "card_ids": []})
@@ -100,14 +146,18 @@ async def weak_topics(db, uid, exam):
     """Subtopics ranked by misses (then miss rate). "Frequently missed" = missed at least twice; when fewer than three
     subtopics reach that, the next most-missed ones fill in so a new student still gets a sprint."""
     by_card = {m.card: m for m in await card_marks(db, uid, exam)}
+    live = await live_cards(db, exam) if by_card else {}
     topics = {}
-    async for c in db.rf_cards.find({"id": {"$in": list(by_card)}, "exam": exam, "retired": {"$ne": True}}, {"_id": 0, "id": 1, "subject": 1, "chapter": 1, "topic": 1}):
-        m, key = by_card[c["id"]], (c["subject"], c["chapter"], c.get("topic") or c["chapter"])
+    for cid, m in by_card.items():
+        card = live.get(cid)
+        if not card:
+            continue
+        key = (card[0], card[1], card[2] or card[1])
         t = topics.setdefault(key, {"subject": key[0], "chapter": key[1], "topic": key[2], "misses": 0, "tries": 0, "weak_ids": []})
         t["misses"] += m.misses
         t["tries"] += m.tries
         if m.misses and m.latest != "correct":
-            t["weak_ids"].append(c["id"])
+            t["weak_ids"].append(cid)
     # A subtopic stays weak while at least one of its missed cards has not been answered right since.
     ranked = sorted((t for t in topics.values() if t["weak_ids"]), key=lambda t: (-t["misses"], -t["misses"] / t["tries"], t["topic"]))
     often = [t for t in ranked if t["misses"] >= MIN_MISSES]

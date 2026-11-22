@@ -54,7 +54,7 @@ def wait_catalog(expected, timeout=80):
 
 # Static: no delete_many on rf_cards anywhere in backend code
 def test_no_delete_many_on_cards():
-    for f in ["server.py", "duels.py", "gamify.py", "shop.py"]:
+    for f in ["server.py", "card_bank.py", "sprints.py", "db_setup.py", "jobs.py", "duels.py", "gamify.py", "shop.py"]:
         src = pathlib.Path("/app/backend", f).read_text()
         assert not re.search(r"rf_cards\.(delete_many|delete_one|drop)", src), f
 
@@ -150,23 +150,24 @@ def test_catalog_excludes_retired(retired_card):
 @pytest.mark.skip(reason="Unsafe on a shared database: the sync now retires every card whose source file is missing, so pointing it at a one-file folder hides the whole JEE bank until the server restarts.")
 def test_sync_cards_soft_retire_roundtrip():
     sys.path.insert(0, "/app/backend")
-    import server
-    src = next(f for f in server.CARDS_DIR.glob("*.json") if json.loads(f.read_text())[0]["chapter"] == CHAP)
+    import card_bank
+    from database import db
+    src = next(f for f in card_bank.CARDS_DIR.glob("*.json") if json.loads(f.read_text())[0]["chapter"] == CHAP)
     cards = json.loads(src.read_text())
     x = cards[-1]["id"]
     total_before = mdb.rf_cards.count_documents({})
     tmp = pathlib.Path(tempfile.mkdtemp())
     try:
         (tmp / src.name).write_text(json.dumps(cards[:-1]))
-        server.CARDS_DIR = tmp; server.CARD_HASHES.clear(); server.CARD_KEYS.clear()
+        card_bank.CARDS_DIR = tmp; card_bank.CARD_HASHES.clear(); card_bank.CARD_KEYS.clear()
         loop = asyncio.new_event_loop()
-        loop.run_until_complete(server.sync_cards())
+        loop.run_until_complete(card_bank.sync_cards(db))
         assert mdb.rf_cards.count_documents({}) == total_before  # nothing deleted
         assert mdb.rf_cards.find_one({"id": x})["retired"] is True
         assert mdb.rf_cards.count_documents({"chapter": CHAP, "retired": True}) == 1
         shutil.copy(src, tmp / src.name)
-        server.CARD_HASHES.clear()
-        loop.run_until_complete(server.sync_cards())
+        card_bank.CARD_HASHES.clear()
+        loop.run_until_complete(card_bank.sync_cards(db))
         assert mdb.rf_cards.find_one({"id": x})["retired"] is False
         loop.close()
     finally:

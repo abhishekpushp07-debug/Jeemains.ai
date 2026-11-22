@@ -17,6 +17,7 @@ from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from shop import AVATAR_BY_ID, AVATAR_ITEMS, BUYABLE, GEM_SHOP, QUESTS, SHOP, SHOP_BY_ID, equipped_of, owned_of, safe_avatar
 from exam_groups import ACTIVE_EXAMS, Exam, require_active_exam
+from later import later
 
 IST = timezone(timedelta(hours=5, minutes=30))
 logger = logging.getLogger("jeelive")
@@ -208,6 +209,8 @@ def make_router(db, rf_user):
             await asyncio.wait([task], timeout=2)
         return ladders.get(exam)
 
+    r.warm_ladder = ladder  # the first pass runs right after a server starts, so no student waits for it
+
     async def award(uid: str, ref: str, kind: str, correct: int, total: int, answered: int, won: Optional[bool] = None, exam: str = "JEE",
                     diamonds: Optional[dict] = None, phoenix_streak: int = 0, meta: Optional[dict] = None) -> dict:
         """Idempotent per (uid, ref): replays return the original reward. `meta` describes the match for the friend feed.
@@ -315,7 +318,8 @@ def make_router(db, rf_user):
         events += [("badge", {"title": BADGES[b][0]}) for b in new]
         if events and fresh and not uid.startswith("TEST"):  # only the call that paid tells friends (never twice)
             now = datetime.now(timezone.utc)
-            await db.rf_feed.insert_many([{"id": f"{ref}:{k}", "uid": uid, "kind": kind_, "data": data, "ts": time.time(), "at": now} for k, (kind_, data) in enumerate(events)])
+            # The reward above is already written; the friends' feed rows are written right after this answer goes out.
+            await later(db.rf_feed.insert_many([{"id": f"{ref}:{k}", "uid": uid, "kind": kind_, "data": data, "ts": time.time(), "at": now} for k, (kind_, data) in enumerate(events)]))
         # The leaderboard is NOT reset here: with thousands of matches ending every second it would never stay cached.
         # It refreshes every 15 seconds, and each player's own row is always read fresh.
         return reward

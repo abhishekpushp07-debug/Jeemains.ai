@@ -1,5 +1,18 @@
 # JEELIVE.AI Native App — PRD
 
+## Phase 2 of the approved 8-level backend plan: Levels 1–4 (22 Nov 2026) — DONE on preview, needs Publish
+- User (Hinglish): "Haan, poora Phase 2 ek saath", Level 3 "Chhote-chhote hisson mein", extra small tasks: "abhi bas purane karo".
+- Full notes + numbers: `/app/memory/PHASE2_BACKEND.md`. server.py 795 → 146 lines (wiring only); new database.py, jl_proxy.py, card_bank.py,
+  sprints.py, db_setup.py, jobs.py, shared_pass.py; rf_user() moved to rf_access.py; 144 routes identical before/after.
+- Speed: metadata_cache stale-while-revalidate, startup warm_up() (pools, weak-list card map, catalog, XP ladder, Gang War standings),
+  incremental weak-list marks + live_cards map, All India + Gang War boards on SharedPass, daily deck lock, index rf_cards {source_file, retired}.
+  New sprint 32.7 → 5.7 ms, new match 42.9 → 4.0 ms (server time, preview).
+- Regression: full backend suite on a copy of the old code vs the new code (local port, same DB): 607/7 → 611/7, same 6 environment-only
+  failures (local server ≠ ingress: CORS origin, mission-link visitor IP, iter43 public URL) + one known flake each run; iter55 test fake fixed.
+  All India Daily suites + touched suites on the real preview: 27/27. db_audit check: ALL THE SAME.
+- New test: `backend/tests/test_phase2_speed.py` (scratch DB `<DB_NAME>_phase2_selftest`, nothing deleted).
+- Next: Phase 3 (Levels 5–8), then one Publish.
+
 ## Phase 1 of the approved plan: live PYQ fix + green selected option (21 Nov 2026) — DONE on preview, needs Publish
 - Production RCA (deployer): jeelive.ai's origin answered 520 for ~51 s (15:24:22–15:25:13 UTC, 65 calls: ~49 pictures, ~9 answer saves, ~6 PYQ lists); our K8s pods healthy, not deploy-related. Our proxy passed Cloudflare's technical text to the app.
 - Backend `server.py` `website_trouble()` + `WEBSITE_BUSY`: upstream 502/504/52x/530 and technical 500/503 bodies → 503 JSON `website_unavailable` + Retry-After (default 5). Tests: `tests/test_website_trouble.py`, `tests/test_iter126_website_trouble_live_proxy.py`.
@@ -273,7 +286,7 @@
 - OriginalfrontendUI/theme/artwork/nativegradientfix/auth/game/data/dependenciesunchanged. Sources/renderedassetsalloutsidefrontendsoNOAPKbundlebloat. Backendonlynewread-onlymarketingrouterinclude/module+publicmanifest; no learner writes, no publicuploador arbitraryfileproxy.
 - REALMP4masters: `vertical.mp4`1080x1920/7,724,316bytes; `landscape.mp4`1920x1080/7,373,179bytes. Both EXACT45.000s,30fps1350frames,H264yuv420p/AACstereo48k,faststart. IdenticalVP9/OpusWebMpreviews4,486,542/4,517,644bytes(~45.008s codec-tolerance),2JPEGposters. All8managedobjects(including2sourcebackdrops)uploadednewUUID+SHAreadbackverified; no secrets inlinks.
 - Publicdelivery uses currentfrontend.envEXPO_PUBLIC_BACKEND_URL + `/api/marketing/launch/{vertical.mp4,landscape.mp4,vertical.webm,landscape.webm,poster-vertical.jpg,poster-landscape.jpg}`. `?download=1`forcesattachment;defaultinline. All6fixedallowlistedassetsGET/HEADonly; explicitbyte-rangesbecauseStarlette0.37.2. Lazydiskcache, SHAcheck, sanitized503, noAPIstudentauthneededbecauseONLYpublicowneradvertising.
-- Currentworkinglinks base:`https://rapid-fire-208--04cp9c5d.preview.emergentagent.com` (useCURRENTpublicenvafterfork, notoldhardcodedhost). MP4downloadsplusWebMpreviewlinks delivered; objectpaths/metadata in`backend/marketing_manifest.json` and`marketing/launch45/published.json`. MP4/previewfiles/sourcecomposer in`marketing/launch45/output`andparentPythonmodules.
+- Currentworkinglinks base:`https://scale-engine-50k--0gu36hlx.preview.emergentagent.com` (useCURRENTpublicenvafterfork, notoldhardcodedhost). MP4downloadsplusWebMpreviewlinks delivered; objectpaths/metadata in`backend/marketing_manifest.json` and`marketing/launch45/published.json`. MP4/previewfiles/sourcecomposer in`marketing/launch45/output`andparentPythonmodules.
 - **Verification:**67/67publicdelivery/mediaregressionsPASS(`backend/tests/test_iter53_marketing_media_public.py`,report`test_reports/iteration_53.json`). All6SHA/bytes/MIME/HEAD/GET/download/404allowlist, Rangeclosed/open/suffix/clamp/invalid/reversed/huge/multiple416,IfRange/ETag304/HEADnobody;ALL4videosfullyFFmpegdecodedwithout errors,1350frames/dimensions/codecs/durations/audio/faststart/postersvalid. RealbrowserWebMmobile390+wide playsandseekspass; maincapturedactualdecodedNewton11.9s/AllIndia31.5s frames. Independentvideo/audioqualityreviewpositive;27–29transitionpolished. Pythonlint/compilePASS. NoAPI/game/authwritesbytests.
 - **Codecdiagnostic:**testbrowser`canPlayType(H264/AAC)`empty,MP4mediaerror4`DEMUXER_ERROR_NO_SUPPORTED_STREAMS`whileHTTP206/bodySHA/fullFFmpegdecodevalid. This isNOTcorruptMP4/failedAPI. WebMpreviewsplayunderSAMEproxyheaders. FirstRCAclaim“no-storeuniversallypreventsbuffering”wasfalse; NOCDN/env/supervisor/headerworkaroundapplied. UseWebMlinksforbrowserpreview,MP4fornormalplayers/socialuploads;physicalphoneMP4notclaimedtested.
 - **P0 for thisrequest:**nonefoundinscope; completedfilmdelivery. OptionalP2:15steasercutandphysical-deviceMP4compatibilitycheck. ExistingAPPsignedAPK<20MB/nativeperformance/canonical503/520/deferredaccountdeletionremainseparateunchangedbacklog—notcertifiedbyfilmdelivery. NoEAS/cloudappbuild/socialpostingperformed.
@@ -600,7 +613,7 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 ## Iteration33 — real PYQs found, code bug fixed, source alignment awaits owner
 - User supplied freshly pushed publicrepo`abhishekpushp07-debug/Jeemains.ai` and then authorizedGo. Inspectedcommit`2e0c883da0c5c6ddfe7b008bfbfdeb7f5dbbc442`; bundlecontains30published/audienceall papers,2250questions andsource-backedsolutionmapping. Sourcecode/frontendroute matchtheapp'sroute.
 - **Real local bug corrected:** `live_enabled:false` is normal for ordinaryPYQ practice; upstream onlyusesthisflag togateimport/chaptereventcontent. Removedbothblanketrejections in`frontend/src/api/pyq.ts`. Availabilitystillenforcedbyactualstudentcatalogue/detail/preflight/start. Empty state nowstates no papersreturnedforthisaccount, notglobalunpublished/dataabsentassumption.
-- **Two verified separate identity/data sources:** currentappacademicAPI`https://jeelive.ai/api` returns0 forapprovedpilot; knownpackagepaperIDs404. Officialsourceproject`https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/api` returns30/[2026,2025]. SamephonehasdifferentlearnerUIDs (memory/test_credentials.md). No remoteimport/reset, noappbackendbasechange, no duplicated bank inappMongoDB.
+- **Two verified separate identity/data sources:** currentappacademicAPI`https://jeelive.ai/api` returns0 forapprovedpilot; knownpackagepaperIDs404. Officialsourceproject`https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/api` returns30/[2026,2025]. SamephonehasdifferentlearnerUIDs (memory/test_credentials.md). No remoteimport/reset, noappbackendbasechange, no duplicated bank inappMongoDB.
 - Real API E2E3/3passed:75questions,sourcequestionimage200,solutionslockedbeforefinish,save/resume,submit/results,idempotentsamekey,newreattempt.
 - Main REAL frontend E2E passedusingisolatedbrowserHTTP forwarding tosourceproject withdedicatedcookiejar (NO fabricatedpaper/solutionresponses):30paperlist; actualStartwithfalseflag;Save/Continue sameattempt;submit;75questionresult;providedsource-solutionimages200/render/zoom;Result+Re-attempt;newattemptIDandolderresultstillavailable. Screenschecked390and320. Testsignedoutandforwardingremoved; appstillusesoriginalconfiguredsource.
 - Real UI resultID`167f8257-971f-41dc-a875-b8e57623188f`, reattempt`2d68b2bb-5ab7-4505-a2d6-6fb6027db43a`. These are approvedsourcepilotrecords, notproductionlearnerrecords.
@@ -907,3 +920,11 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Result: full backend suite 577 passed, 70 skipped, 0 failed (12 m 47 s). `python tools/db_audit.py check` at 60,000 players: ALL THE SAME. `queries`: every player-facing read uses an index. Speed probe: hot Rapid Fire calls about 1 ms on the server. Frontend: tsc clean, pieces tests 16/16.
 - Rule from now on: no hard deletes or drops in new code or by hand; retire rows with an update instead. (Earlier in this session 8 leftover TEST Cup Night seats and 2 leftover TEST All India runs with one profile, one reward and one learning row were removed by exact id before this rule was applied; older suites still clean up their own TEST rows.)
 - Backlog (unchanged): split server.py into route files (only when the user asks), in-app account deletion, fresh Android build via Publish.
+
+## Iteration131 — App Health page polish (June 2026, backend only)
+- Rows named by the matched route pattern (no raw codes such as letter-only friend codes); unrouted calls keep plain lower-case words only.
+- Restarted server copy leaves the page at once (shutdown deletes its row; beat every 5 s; crashed copy gone after 16 s).
+- Cup Night clock judged by `late_s` (stays green); sign-out also removes that session's Rapid Fire "website down" trust.
+- Page fits a 390 px phone: no wrapped numbers, Refresh + Sign out on one line, empty-table rows, tile values on one line.
+- Verified: iteration_131 (6/6 pass, phase3 engine 16/16, live regression 24/24, app smoke OK).
+- Next: App Store / Play Store readiness review; optional teacher review list for AI-checked cards.

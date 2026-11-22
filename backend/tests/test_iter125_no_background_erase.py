@@ -12,6 +12,7 @@ import secrets
 import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 
 from test_account_deletion import scratch  # noqa: F401  (loads .env too)
 
@@ -41,9 +42,9 @@ def test_erase_companion_callers():
 
 
 def test_sweep_and_startup_do_not_touch_deletions():
-    src = (ROOT / "server.py").read_text()
-    for name in ("sweep", "sweep_loop", "startup"):
-        m = re.search(rf"async def {name}\(\):\n(.*?)(?=\n(?:async )?def |\n@)", src, re.S)
+    for file, name in (("jobs.py", "sweep"), ("jobs.py", "sweep_loop"), ("server.py", "startup"), ("db_setup.py", "run_once")):
+        src = (ROOT / file).read_text() + "\n@"
+        m = re.search(rf"async def {name}\(.*?\):\n(.*?)(?=\n(?:async )?def |\n@)", src, re.S)
         assert m, name
         body = m.group(1)
         assert "erase_companion" not in body and "account_deletion." not in body.replace("account_deletion.ensure_indexes", "")
@@ -114,7 +115,8 @@ def test_owner_cancel_does_not_erase():
 
 
 def test_sweep_leaves_pending_request_data_alone(monkeypatch):
-    """Run server.sweep() against the scratch DB: a pending request's RF rows must survive."""
+    """Run jobs.sweep() against the scratch DB: a pending request's RF rows must survive."""
+    import jobs
     import server
 
     async def main():
@@ -123,12 +125,9 @@ def test_sweep_leaves_pending_request_data_alone(monkeypatch):
         try:
             await db.rf_profiles.insert_one({"uid": uid, "name": "TEST_iter125", "coins": 3})
             await _request(db, uid, "owner_pending")
-            monkeypatch.setattr(server, "db", db)
-
             async def noop():
                 return None
-            monkeypatch.setattr(server.cups_router, "resume_payouts", noop)
-            await server.sweep()
+            await jobs.sweep(db, server.duel_api["settle"], SimpleNamespace(resume_payouts=noop))
             assert await db.rf_profiles.count_documents({"uid": uid}) == 1
         finally:
             await http.aclose()

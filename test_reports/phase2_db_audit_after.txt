@@ -1,0 +1,225 @@
+--- screens, as a player with a long history (audit-heavy-0001) ---
+GET /profile                                    200      3.9 ms  db trips   3
+GET /catalog                                    200      0.6 ms  db trips   0
+GET /inbox                                      200      4.0 ms  db trips   6
+GET /daily                                      200      6.3 ms  db trips   9
+GET /daily/board                                200      1.1 ms  db trips   1
+GET /daily/board                                200      1.4 ms  db trips   2
+GET /cups                                       200      1.7 ms  db trips   1
+GET /cups/night                                 200      3.3 ms  db trips   6
+GET /cups/champions                             200      1.7 ms  db trips   3
+GET /duels                                      200      9.1 ms  db trips   2
+GET /duels                                      200     10.5 ms  db trips   2
+GET /duels/live                                 200      2.5 ms  db trips   4
+GET /feed                                       200      6.5 ms  db trips   4  FLAGGED 1
+      !! rf_feed: find {uid:$in, ts:$gt} sort={ts} limit=30  [IXSCAN { uid: 1, ts: -1 }] keys 2989 rows 30 out 30 2 ms  <- walks 2989 index keys for 30
+GET /friends                                    200     10.9 ms  db trips   3
+GET /friends/code                               200      1.0 ms  db trips   1
+GET /gangs                                      200      2.1 ms  db trips   2
+GET /gangs/search                               200      1.9 ms  db trips   1
+GET /history                                    200     10.0 ms  db trips   3  FLAGGED 1
+      !! rf_sessions: aggregate {user_id, status, exam} $match>$group  [IXSCAN { user_id: 1, exam: 1, status: 1, completed_at: -1 }] keys 1510 rows 1510 out 1 4 ms  <- reads 1510 rows for 1
+GET /leaderboard                                200      2.6 ms  db trips   3
+GET /league/friends                             200     10.5 ms  db trips   3
+GET /league/gangwar                             200     28.9 ms  db trips   3  FLAGGED 1
+      !! rf_duels: aggregate {team_mode, status} $match>$unwind>$match>$group>$sort  [IXSCAN { team_mode: 1, status: 1 }] keys 2000 rows 2000 out 101 22 ms  <- reads 2000 rows for 101; sorts 2000 rows in memory; 22 ms
+GET /mission/me                                 200      1.6 ms  db trips   2
+GET /badla                                      200      5.6 ms  db trips   4
+GET /revision                                   200     99.2 ms  db trips   5  FLAGGED 3
+      !! rf_learning_events: aggregate {uid, exam} $match>$group  [COUNT_SCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }] keys 2320 rows 0 out 1 0 ms  <- walks 2320 index keys for 1
+      !! rf_learning_events: aggregate {uid, exam} $match>$group  [COUNT_SCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }] keys 2320 rows 0 out 1 0 ms  <- walks 2320 index keys for 1
+      !! rf_learning_events: aggregate {uid, exam} $match>$sort>$unwind>$group  [IXSCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }] keys 2319 rows 2319 out 101 72 ms  <- reads 2319 rows for 101; walks 2319 index keys for 101; 72 ms
+GET /weak-topics                                200     23.9 ms  db trips   4  FLAGGED 2
+      !! rf_learning_events: aggregate {uid, exam} $match>$group  [COUNT_SCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }] keys 2320 rows 0 out 1 0 ms  <- walks 2320 index keys for 1
+      !! rf_learning_events: aggregate {uid, exam} $match>$group  [COUNT_SCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }] keys 2320 rows 0 out 1 0 ms  <- walks 2320 index keys for 1
+GET /shop                                       200      1.9 ms  db trips   1
+GET /squads                                     200      1.2 ms  db trips   1
+GET /dream                                      200      1.1 ms  db trips   1
+GET /players/P59CBF709                          200      8.2 ms  db trips  11
+GET /players/P59CBF709/h2h                      200      3.1 ms  db trips   3
+GET /players/P1CC13046                          200     52.5 ms  db trips   9  FLAGGED 1
+      !! rf_duels: aggregate {players.uid, status, $or[{winner} | {winners}]} $match>$group  [IXSCAN { status: 1, players.uid: 1 }] keys 861 rows 861 out 1 1 ms  <- reads 861 rows for 1
+GET /cards                                      200      6.1 ms  db trips   2  FLAGGED 1
+      !! rf_cards: aggregate {exam, subject, retired:$ne} $match>$group  [IXSCAN { exam: 1, subject: 1, chapter: 1, retired: 1 }] keys 5292 rows 0 out 1 3 ms  <- walks 5292 index keys for 1
+GET /duels/a1b9cd0e-47f3-44e9-b512-6e0a2e0      200      3.9 ms  db trips   3
+GET /cups/d69de8b6-2b15-4f88-bd40-bbeee528      200      2.2 ms  db trips   3
+
+--- the same screens as an ordinary player (audit-p-000000) ---
+GET /profile                                    200      1.7 ms  db trips   2
+GET /inbox                                      200      3.6 ms  db trips   5
+GET /daily                                      200      1.1 ms  db trips   1
+GET /daily/board                                200      1.4 ms  db trips   2
+GET /cups                                       200      1.0 ms  db trips   1
+GET /cups/night                                 200      2.0 ms  db trips   4
+GET /duels                                      200      5.0 ms  db trips   2
+GET /duels/live                                 200      1.8 ms  db trips   4
+GET /feed                                       200      2.8 ms  db trips   4
+GET /friends                                    200      1.6 ms  db trips   3
+GET /gangs                                      200      1.5 ms  db trips   2
+GET /gangs/GB2E5750722                          200      6.8 ms  db trips   3
+GET /history                                    200      2.4 ms  db trips   3
+GET /leaderboard                                200      1.9 ms  db trips   2
+GET /league/friends                             200      1.8 ms  db trips   3
+GET /league/gangwar                             200      3.9 ms  db trips   1
+GET /badla                                      200      2.3 ms  db trips   4
+GET /revision                                   200      1.0 ms  db trips   1
+GET /weak-topics                                200      0.9 ms  db trips   1
+GET /players/P1CC13046                          200      5.4 ms  db trips   8
+GET /players/P1CC13046/h2h                      200      3.1 ms  db trips   3
+GET /cups/d69de8b6-2b15-4f88-bd40-bbeee528      200      1.6 ms  db trips   2
+
+--- a brand-new player opens the app ---
+GET /profile                                    200      1.8 ms  db trips   2
+GET /inbox                                      200      2.3 ms  db trips   5
+GET /daily                                      200      1.1 ms  db trips   1
+GET /cups                                       200      1.0 ms  db trips   1
+GET /cups/night                                 200      1.6 ms  db trips   3
+GET /leaderboard                                200      1.4 ms  db trips   1
+GET /league/gangwar                             200      3.9 ms  db trips   1
+GET /friends                                    200      1.7 ms  db trips   3
+GET /gangs                                      200      1.3 ms  db trips   2
+GET /history                                    200      1.7 ms  db trips   3
+GET /weak-topics                                200      1.0 ms  db trips   1
+
+--- solo sprint ---
+POST /sessions                                  200     17.0 ms  db trips   4
+GET /sessions/507e5b8a-7475-4eff-a07b-01b2      200      3.1 ms  db trips   2
+POST /sessions/507e5b8a-7475-4eff-a07b-01b2     200      5.5 ms  db trips   7
+POST /sessions/{sid}/complete (repeat)          200      4.0 ms  db trips   4
+POST /sessions                                  200      5.8 ms  db trips   4
+GET /sessions/f9c92315-e6a5-4c07-9dcb-d60c      200      3.1 ms  db trips   2
+POST /sessions/f9c92315-e6a5-4c07-9dcb-d60c     200      7.0 ms  db trips  10
+POST /sessions/{sid}/complete (repeat)          200      3.6 ms  db trips   4
+POST /sessions (weak topics)                    200     28.0 ms  db trips   7  FLAGGED 1
+      !! rf_learning_events: aggregate {uid, exam} $match>$group  [COUNT_SCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }] keys 2321 rows 0 out 1 0 ms  <- walks 2321 index keys for 1
+POST /sessions (revision)                       200      8.7 ms  db trips   3  FLAGGED 1
+      !! rf_learning_events: aggregate {uid, exam} $match>$group  [COUNT_SCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }] keys 2321 rows 0 out 1 0 ms  <- walks 2321 index keys for 1
+GET /history                                    200     10.1 ms  db trips   3  FLAGGED 1
+      !! rf_sessions: aggregate {user_id, status, exam} $match>$group  [IXSCAN { user_id: 1, exam: 1, status: 1, completed_at: -1 }] keys 1511 rows 1511 out 1 4 ms  <- reads 1511 rows for 1
+
+--- match against a Practice Rival (30 cards) ---
+POST /duels                                     200      7.5 ms  db trips   6
+POST /duels/4229c854-7378-42b8-b672-c739ce0     200      3.6 ms  db trips   3
+GET /duels/4229c854-7378-42b8-b672-c739ce0      200      1.9 ms  db trips   2
+GET /duels/4229c854-7378-42b8-b672-c739ce0      200      3.0 ms  db trips   7
+POST /duels/{did}/answer (first)                200      2.7 ms  db trips   3
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.8 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.6 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.3 ms  db trips   1
+POST /duels/{did}/answer                        200      1.3 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.6 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.6 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.4 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer                        200      1.6 ms  db trips   1
+POST /duels/{did}/answer                        200      1.5 ms  db trips   1
+POST /duels/{did}/answer (last)                 200      5.9 ms  db trips   8
+GET /duels/{did} (finished)                     200      3.5 ms  db trips   2
+
+--- quick match: two students meet ---
+POST /duels (quick, waits)                      200      7.3 ms  db trips   9
+POST /duels (quick, pairs)                      200      4.8 ms  db trips   6
+GET /duels/41e703e5-8fd8-40b0-8887-8c1675e      200      2.0 ms  db trips   1
+GET /duels/live                                 200      1.2 ms  db trips   3
+POST /duels/41e703e5-8fd8-40b0-8887-8c1675e     200      1.4 ms  db trips   3
+POST /duels/41e703e5-8fd8-40b0-8887-8c1675e     200      5.9 ms  db trips  11
+POST /duels (invite)                            200      5.0 ms  db trips   6
+POST /duels/join                                403      1.9 ms  db trips   3
+POST /duels/a40e7f2f-85fc-4778-8f3f-d8355e0     200      1.7 ms  db trips   3
+POST /duels/a40e7f2f-85fc-4778-8f3f-d8355e0     404      1.0 ms  db trips   1
+POST /duels (invite, then cancel)               200      5.0 ms  db trips   6
+
+--- All India Rapid (today's round) ---
+POST /daily/start                               200      2.0 ms  db trips   2
+POST /daily/answer                              200      2.5 ms  db trips   3
+POST /daily/answer                              200      2.1 ms  db trips   2
+POST /daily/answer                              200      2.6 ms  db trips   3
+POST /daily/finish                              200      6.9 ms  db trips  11
+GET /daily (after playing)                      200      1.2 ms  db trips   1
+GET /daily/board (after playing)                200      1.0 ms  db trips   1
+
+--- Knockout Cup, Cup Night, challenges, friends, gangs, rewards ---
+POST /cups                                      200      3.0 ms  db trips   4
+GET /cups/a71bb3c3-61c5-4f10-b213-b358bf88      200      1.1 ms  db trips   1
+POST /cups/a71bb3c3-61c5-4f10-b213-b358bf88     200      2.6 ms  db trips   4
+GET /cups (in a cup)                            200      1.1 ms  db trips   1
+GET /inbox (in a cup)                           200      2.9 ms  db trips   5
+POST /cups/a71bb3c3-61c5-4f10-b213-b358bf88     200      1.4 ms  db trips   3
+POST /cups/a71bb3c3-61c5-4f10-b213-b358bf88     200      1.6 ms  db trips   2
+POST /cups/watch                                404      1.1 ms  db trips   1
+POST /cups/night/join                           409      0.6 ms  db trips   0
+GET /cups/night (seated)                        200      2.0 ms  db trips   4
+POST /cups/night/leave                          200      2.3 ms  db trips   5
+GET /friends/code                               200      1.6 ms  db trips   2
+GET /friends/code/9VX5XZ3M                      200      2.4 ms  db trips   5
+POST /friends                                   200      4.7 ms  db trips  10
+POST /challenges                                200      3.7 ms  db trips   6
+GET /inbox (challenged)                         200      3.0 ms  db trips   7
+GET /challenges/3e0065f3-0917-4c65-89db-a9      200      1.5 ms  db trips   2
+POST /challenges/3e0065f3-0917-4c65-89db-a9     200      2.8 ms  db trips   5
+POST /challenges/3e0065f3-0917-4c65-89db-a9     200      2.2 ms  db trips   4
+POST /gangs                                     200      1.5 ms  db trips   1
+GET /gangs/G176DC9730A                          200      3.3 ms  db trips   5
+DELETE /gangs/G176DC9730A                       200      2.0 ms  db trips   3
+POST /blocks                                    200      4.1 ms  db trips   9
+DELETE /blocks/PF1FA4C72                        200      2.3 ms  db trips   5
+DELETE /friends/P45FE1968                       200      2.9 ms  db trips   6
+POST /quests/claim                              409      1.0 ms  db trips   1
+POST /rush/claim                                404      0.5 ms  db trips   0
+POST /league/friends/claim                      409      5.2 ms  db trips   3
+POST /profile/name                              200      1.1 ms  db trips   1
+
+--- work the server does by itself ---
+cup night tick (every 3 s)                               0.4 ms  db trips   1
+sweep (every 5 min)                                      2.1 ms  db trips   4
+card sync (every 60 s)                                  27.0 ms  db trips   2  FLAGGED 1
+      !! rf_cards: update {source_file:$regex$nin, retired:$ne} multi  [COLLSCAN] keys 0 rows 16158 out 0 14 ms  <- COLLSCAN; reads 16158 rows for 1
+
+====================================================================================================
+163 calls, 491 database trips, 8 flagged query shapes
+
+- rf_cards (16158 rows): update {source_file:$regex$nin, retired:$ne} multi
+    plan COLLSCAN, keys 0, rows 16158, out 0, 14 ms  <- COLLSCAN; reads 16158 rows for 1
+    seen 1x in: card sync (every 60 s)
+- rf_cards (16158 rows): aggregate {exam, subject, retired:$ne} $match>$group
+    plan IXSCAN { exam: 1, subject: 1, chapter: 1, retired: 1 }, keys 5292, rows 0, out 1, 3 ms  <- walks 5292 index keys for 1
+    seen 1x in: GET /cards
+- rf_learning_events (2334 rows): aggregate {uid, exam} $match>$sort>$unwind>$group
+    plan IXSCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }, keys 2319, rows 2319, out 101, 72 ms  <- reads 2319 rows for 101; walks 2319 index keys for 101; 72 ms
+    seen 1x in: GET /revision
+- rf_duels (17830 rows): aggregate {team_mode, status} $match>$unwind>$match>$group>$sort
+    plan IXSCAN { team_mode: 1, status: 1 }, keys 2000, rows 2000, out 101, 22 ms  <- reads 2000 rows for 101; sorts 2000 rows in memory; 22 ms
+    seen 1x in: GET /league/gangwar
+- rf_sessions (1531 rows): aggregate {user_id, status, exam} $match>$group
+    plan IXSCAN { user_id: 1, exam: 1, status: 1, completed_at: -1 }, keys 1511, rows 1511, out 1, 4 ms  <- reads 1511 rows for 1
+    seen 2x in: GET /history
+- rf_feed (3026 rows): find {uid:$in, ts:$gt} sort={ts} limit=30
+    plan IXSCAN { uid: 1, ts: -1 }, keys 2989, rows 30, out 30, 2 ms  <- walks 2989 index keys for 30
+    seen 1x in: GET /feed
+- rf_learning_events (2334 rows): aggregate {uid, exam} $match>$group
+    plan COUNT_SCAN { uid: 1, exam: 1, completed_at: 1, ref: 1 }, keys 2321, rows 0, out 1, 0 ms  <- walks 2321 index keys for 1
+    seen 6x in: GET /revision, GET /weak-topics, POST /sessions (revision), POST /sessions (weak topics)
+- rf_duels (17830 rows): aggregate {players.uid, status, $or[{winner} | {winners}]} $match>$group
+    plan IXSCAN { status: 1, players.uid: 1 }, keys 861, rows 861, out 1, 1 ms  <- reads 861 rows for 1
+    seen 1x in: GET /players/P1CC13046
+
+Most database trips per call: GET /players/P59CBF709 (11), POST /duels/41e703e5-8fd8-40b0-8887-8c1675e (11), POST /daily/finish (11), POST /sessions/f9c92315-e6a5-4c07-9dcb-d60c (10), POST /friends (10), GET /daily (9), GET /players/P1CC13046 (9), POST /duels (quick, waits) (9), POST /blocks (9), GET /players/P1CC13046 (8), POST /duels/{did}/answer (last) (8), POST /sessions/507e5b8a-7475-4eff-a07b-01b2 (7)
+Slowest calls (in-process, ms): GET /revision (99), GET /players/P1CC13046 (53), GET /league/gangwar (29), POST /sessions (weak topics) (28), card sync (every 60 s) (27), GET /weak-topics (24), POST /sessions (17), GET /friends (11), GET /duels (11), GET /league/friends (10), GET /history (10), GET /history (10)

@@ -3,7 +3,6 @@
 Friends League: you and your friends ranked by the week's XP (Monday to Sunday, IST); last week's top 3 collect coins.
 Gang War board: the top 100 scorers of every Gang vs Gang battle ever played (no weekly table).
 """
-import asyncio
 import time
 from bisect import bisect_left
 from typing import Optional
@@ -11,6 +10,7 @@ from typing import Optional
 from fastapi import APIRouter, Header, HTTPException
 
 from gamify import crown_of, ist_week, level_of, week_ends_in
+from shared_pass import SharedPass
 from shop import equipped_of, safe_avatar
 from social import blocked_uids, public_name
 
@@ -89,27 +89,21 @@ def make_router(db, rf_user):
               {"$group": {"_id": "$players.uid", "score": {"$sum": "$players.score"}, "matches": {"$sum": 1},
                           "wins": {"$sum": {"$cond": [{"$in": ["$players.uid", {"$ifNull": ["$winners", []]}]}, 1, 0]}}}}]
     order = {"$sort": {"score": -1, "wins": -1, "_id": 1}}
-    standings_cache: dict = {}
-    standings_lock = asyncio.Lock()
 
-    async def standings():
+    async def read_standings(_):
         """Every Gang War player's total, in board order: (top rows, everyone's (-score, -wins) in order, totals by player).
-        One pass over the battles every 20 s serves everybody, whatever their rank. Before, each player outside the top
-        100 made the database add up every battle again, twice, on every look."""
-        async with standings_lock:
-            hit = standings_cache.get("t")
-            if hit and time.time() - hit[0] < 20:
-                return hit[1]
-            rows = await (await db.rf_duels.aggregate([*totals, order], allowDiskUse=True)).to_list(None)
-            value = (rows[:BOARD_SIZE], [(-x["score"], -x["wins"]) for x in rows], {x["_id"]: x for x in rows})
-            standings_cache["t"] = (time.time(), value)
-            return value
+        One pass over the battles every 20 s serves everybody, whatever their rank (with a big crowd it runs in the background)."""
+        rows = await (await db.rf_duels.aggregate([*totals, order], allowDiskUse=True)).to_list(None)
+        return rows[:BOARD_SIZE], [(-x["score"], -x["wins"]) for x in rows], {x["_id"]: x for x in rows}
+
+    standings = SharedPass(read_standings, keep=20, size=1)
+    r.warm_standings = lambda: standings.get("all")  # the first pass runs right after a server starts
 
     @r.get("/gangwar")
     async def gang_war_board(x_rf_user: Optional[str] = Header(None)):
         """Everyone who played Gang vs Gang, ranked by the points they scored for their gang. Top 100, all time."""
         uid = rf_user(x_rf_user)
-        rows, keys, mine_of = await standings()
+        rows, keys, mine_of = await standings.get("all")
         profs = {p["uid"]: p for p in await db.rf_profiles.find({"uid": {"$in": [x["_id"] for x in rows] + [uid]}}).to_list(len(rows) + 1)}
         items = [{"rank": i + 1, "pid": (profs.get(x["_id"]) or {}).get("pid"), "name": public_name(profs.get(x["_id"]) or {}), "avatar": safe_avatar((profs.get(x["_id"]) or {}).get("avatar")),
                   "frame": equipped_of(profs.get(x["_id"]) or {}).get("frame"), "level": level_of((profs.get(x["_id"]) or {}).get("xp", 0)),

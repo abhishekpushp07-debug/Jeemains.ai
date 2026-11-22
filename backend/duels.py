@@ -493,8 +493,9 @@ def make_router(db, rf_user, public_card, award):
             if flipped and d.get("team_mode"):  # the gangs' battle record and league points, counted once
                 await record_battle(db, d, win)
             d = flipped or await db.rf_duels.find_one({"id": d["id"]})
-            for p in [x for x in d["players"] if not x.get("bot")]:  # reward both players at settle time, even if one never returns
-                await reward_for(d, p["uid"])
+            # Every player is paid at settle time, even one who never returns; the players' rewards are independent of
+            # each other, so they are written side by side (the last answer of a 5-player room waited for 5 in a row).
+            await asyncio.gather(*(reward_for(d, p["uid"]) for p in d["players"] if not p.get("bot")))
             for hook in hooks if flipped else ():
                 try:
                     await hook(d)
@@ -854,7 +855,7 @@ def make_router(db, rf_user, public_card, award):
             load.sockets -= 1
             conns = sockets.get(did, {})
             conns.pop(ws, None)
-            if not conns:
+            if not conns and not stopping:
                 for live in (sockets, docs, due, dirty):
                     live.pop(did, None)
                 try:  # no socket of this match left here: other servers stop telling this one about it
@@ -863,6 +864,22 @@ def make_router(db, rf_user, public_card, award):
                         await db.rf_duels.update_one({"id": did}, {"$addToSet": {"ws_nodes": node}})
                 except Exception as e:  # noqa: BLE001
                     log.warning("socket list update failed: %s", e)
+
+    stopping: list = []  # one item once this server copy is shutting down
+
+    async def close_all():
+        """This copy is stopping (a new release, a restart): every phone here is told at once (1012 = "service restart")
+        and reconnects within a second or two to another copy, which picks the match up from the database; meanwhile the
+        app keeps the match going by polling. This copy leaves every match's socket list in one write."""
+        stopping.append(True)
+        dids = list(sockets)
+        await asyncio.gather(*(ws.close(code=1012) for did in dids for ws in list(sockets.get(did, {}))), return_exceptions=True)
+        if dids:
+            try:
+                await db.rf_duels.update_many({"id": {"$in": dids}}, {"$pull": {"ws_nodes": node}})
+            except Exception as e:  # noqa: BLE001
+                log.warning("socket list cleanup at shutdown failed: %s", e)
+        return len(dids)
 
     @r.get("")
     async def mine(exam: Optional[Exam] = None, friends_only: bool = False, x_rf_user: Optional[str] = Header(None)):
@@ -880,4 +897,4 @@ def make_router(db, rf_user, public_card, award):
                            "scores": [{"name": p["name"], "you": p["uid"] == uid, "score": p["score"], "bot": bool(p.get("bot")), "pid": None if p.get("bot") else p.get("pid") or make_pid(p["uid"]),
                                        "avatar": p.get("avatar"), "frame": p.get("frame")} for p in ranking(d)]} for d in docs]}
 
-    return r, {"seat": seat_duel, "settle": settle, "hooks": hooks}
+    return r, {"seat": seat_duel, "settle": settle, "hooks": hooks, "close_all": close_all}

@@ -117,7 +117,7 @@ async def run_test(page, output_dir, page_url):
         await page.route('**/*', route_handler)
 
         print("Fixture Step 2: open /pyq with mocked catalogue")
-        await page.goto('https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/pyq')
+        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/pyq')
         await page.wait_for_selector('[data-testid="pyq-screen"]', timeout=12000)
         await page.wait_for_selector('[data-testid="pyq-paper-fixture-new"]', timeout=10000)
 

@@ -81,7 +81,7 @@ async def run_test(page, output_dir, page_url):
             await route.continue_()
 
         await page.route('**/*', route_handler)
-        await page.goto('https://rapid-fire-208--04cp9c5d.preview.emergentagent.com/pyq')
+        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/pyq')
         await page.wait_for_selector('[data-testid="pyq-paper-fixture-new"]', timeout=12000)
 
         assert await page.locator('[data-testid="pyq-start-button-fixture-new"]').count() > 0

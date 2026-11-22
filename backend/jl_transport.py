@@ -12,9 +12,12 @@ import time
 
 import aiohttp
 
+from website_shield import DOWN_STATUS, SLOW, WebsiteDown, shield
+
 logger = logging.getLogger("canonical_transport")
 TRANSIENT_READ_STATUS = {408, 500, 502, 503, 504, 520, 522, 524}
-UpstreamError = (aiohttp.ClientError, asyncio.TimeoutError)
+UpstreamError = (aiohttp.ClientError, asyncio.TimeoutError)  # includes WebsiteDown (the shield is shut)
+__all__ = ["UpstreamError", "WebsiteDown", "canonical_request", "make_client"]
 
 
 class Upstream:
@@ -40,6 +43,22 @@ def make_client() -> aiohttp.ClientSession:
 
 
 async def canonical_request(client, method, url, *, path, params, body, headers):
+    """One call to the website, through this process's shield (website_shield.py): while the website is down the call
+    is not sent at all and WebsiteDown (an UpstreamError) is raised at once."""
+    probe = shield.allow()
+    began, ok = time.monotonic(), None
+    try:
+        response = await _send(client, method, url, path=path, params=params, body=body, headers=headers)
+        ok = response.status_code not in DOWN_STATUS and time.monotonic() - began < SLOW
+        return response
+    except UpstreamError:
+        ok = False
+        raise
+    finally:
+        shield.record(ok, probe, time.monotonic() - began)
+
+
+async def _send(client, method, url, *, path, params, body, headers):
     category = "asset" if "/asset/" in path else "auth" if path.startswith("auth/") else "academic"
     readonly = method in {"GET", "HEAD"} and (category != "auth" or path == "auth/me")
     deadline = time.monotonic() + (22 if category == "asset" else 28)

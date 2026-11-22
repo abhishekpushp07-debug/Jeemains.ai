@@ -159,4 +159,5 @@ if __name__ == "__main__":
                       "ok_req_per_server_cpu_s": round(len(ok) / own, 1) if own else None,
                       "mongod_cores_busy": round(db / wall, 2), "fake_website_cores_busy": round(fake / wall, 2),
                       "latency_ms": {"p50": pct(ok, .5), "p95": pct(ok, .95), "p99": pct(ok, .99), "max": pct(ok, 1)},
+                      "failed_latency_ms": {"p50": pct(bad, .5), "p95": pct(bad, .95), "max": pct(bad, 1)},
                       "errors": codes}, indent=1))

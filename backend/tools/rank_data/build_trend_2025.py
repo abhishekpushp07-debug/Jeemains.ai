@@ -7,7 +7,7 @@ Writes backend/rank_data/jee_main_2025_close.json.gz : [[prog, quota, cat, pwd, 
 Usage:  python build_trend_2025.py fetch <raw_dir>   # about 2 minutes
         python build_trend_2025.py build <raw_dir>
 """
-import gzip, html, json, re, sys
+import gzip, json, re, sys
 from pathlib import Path
 
 from build_rank_data import P, QUOTA, SEAT, _hidden, _rows, norm, rank_value, split_program

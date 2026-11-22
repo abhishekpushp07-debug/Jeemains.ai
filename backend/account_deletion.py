@@ -230,7 +230,8 @@ async def erase_companion(db, uid: str) -> dict:
             ("cup_night_seats", db.rf_night_seats, {"uid": uid}),
             ("mission_links", db.mission_links, {"uid": uid}),
             ("gang_reports", db.rf_gang_reports, {"uid": uid}),
-            ("access", db.rf_access, {"uid": uid})):
+            ("access", db.rf_access, {"uid": uid}),
+            ("trusted_sessions", db.rf_trust, {"uid": uid})):
         done[key] = (await collection.delete_many(query)).deleted_count
     forget_grants(uid)
     return done

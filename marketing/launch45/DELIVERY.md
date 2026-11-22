@@ -2,7 +2,7 @@
 
 Two independently composed45s/1080p/30fps films with originalinstrumentalmusic andHinglishcopy.27sRapidFire +12sAllIndia +6sbrand. Sourceandbriefeditablehere; mobileUIunchanged.
 
-Currentbase:https://rapid-fire-208--04cp9c5d.preview.emergentagent.com (futureforks: usecurrentEXPO_PUBLIC_BACKEND_URL).
+Currentbase:https://scale-engine-50k--0gu36hlx.preview.emergentagent.com (futureforks: usecurrentEXPO_PUBLIC_BACKEND_URL).
 
 **Preferred single-file download:** `/api/marketing/launch/launch-pack.zip` (15.1MB). Alwaysdownloadsasanattachment;extracttoobtainBOTHoriginalMP4s,nore-encoding. Noappinstallorloginneeded. ExplicitMP4`?download=1`nowreturnsbinaryattachmenttoavoidinvoluntaryinlineplayback. Defaultpreviewlinksunchanged.
 

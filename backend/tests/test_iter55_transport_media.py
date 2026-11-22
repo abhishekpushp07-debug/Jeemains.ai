@@ -19,14 +19,14 @@ CANONICAL = os.environ['EXPO_PUBLIC_JEELIVE_API'].rstrip('/')
 
 def test_actual_proxy_serializes_cookie_rotating_endpoints(monkeypatch):
     # Actual server function, all IO replaced in-memory; no MongoDB/canonical writes or app startup.
-    import server
+    import jl_proxy
     active=0
     maximum=0
     started=asyncio.Event()
     release=asyncio.Event()
     jar={'refresh_token':'TEST_INITIAL'}
     async def load(_): return dict(jar)
-    async def save(_, sets, gone): jar.update(sets); [jar.pop(k, None) for k in gone]
+    async def save(_, sets, gone, uid=""): jar.update(sets); [jar.pop(k, None) for k in gone]
     async def canonical(*args, **kwargs):
         nonlocal active, maximum
         active+=1; maximum=max(maximum,active)
@@ -37,9 +37,9 @@ def test_actual_proxy_serializes_cookie_rotating_endpoints(monkeypatch):
             release.set()
         active-=1
         return Upstream(200, CIMultiDictProxy(CIMultiDict({'set-cookie':'refresh_token=TEST_ROTATED; Path=/','content-type':'application/json'})), json.dumps({'user':{'id':'TEST_A'}}).encode())
-    monkeypatch.setattr(server,'load_jar',load)
-    monkeypatch.setattr(server,'save_cookie_changes',save)
-    monkeypatch.setattr(server,'canonical_request',canonical)
+    monkeypatch.setattr(jl_proxy,'load_jar',load)
+    monkeypatch.setattr(jl_proxy,'save_cookie_changes',save)
+    monkeypatch.setattr(jl_proxy,'canonical_request',canonical)
     class Request:
         headers={}
         query_params={}
@@ -47,10 +47,10 @@ def test_actual_proxy_serializes_cookie_rotating_endpoints(monkeypatch):
         method='GET'
         async def body(self): return b''
     async def run():
-        a=asyncio.create_task(server.jeelive_proxy('auth/session',Request(),'TEST-OWN-PROXY-HANDLE-55'))
+        a=asyncio.create_task(jl_proxy.jeelive_proxy('auth/session',Request(),'TEST-OWN-PROXY-HANDLE-55'))
         await started.wait()
         req=Request();req.method='POST'
-        b=asyncio.create_task(server.jeelive_proxy('auth/refresh',req,'TEST-OWN-PROXY-HANDLE-55'))
+        b=asyncio.create_task(jl_proxy.jeelive_proxy('auth/refresh',req,'TEST-OWN-PROXY-HANDLE-55'))
         await asyncio.sleep(.02)
         release.set()
         responses=await asyncio.gather(a,b)

@@ -157,7 +157,6 @@ SEATS = [Seat(r) for r in DATA["seats"]]
 BY_INST = {}
 for _s in SEATS:
     BY_INST.setdefault(_s.inst, []).append(_s)
-INF = float("inf")
 
 
 def round_label(seat, i):

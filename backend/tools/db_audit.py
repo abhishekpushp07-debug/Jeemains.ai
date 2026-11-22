@@ -15,7 +15,6 @@ import argparse
 import asyncio
 import hashlib
 import os
-import re
 import secrets
 import sys
 import time
@@ -33,6 +32,9 @@ from pymongo import MongoClient  # noqa: E402
 
 import logging  # noqa: E402
 
+import card_bank  # noqa: E402
+import db_setup  # noqa: E402
+import jobs  # noqa: E402
 import server  # noqa: E402
 
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -157,6 +159,7 @@ def grant(uid: str) -> dict:
 
 async def run_queries(show_all: bool):
     audit = Audit(show_all)
+    await server.warm_up()  # what a real server start reads first (deal pools, catalog, XP ladder): not part of any student's call
     await server.db.command("profile", 2)
     client = httpx.AsyncClient(transport=httpx.ASGITransport(app=server.app), base_url="http://audit/api/rf", timeout=120)
     heavy, plain, friend = "audit-heavy-0001", "audit-p-000000", "audit-p-000001"
@@ -296,8 +299,8 @@ async def run_queries(show_all: bool):
 
     print("\n--- work the server does by itself ---")
     await background("cup night tick (every 3 s)", server.cups_router.night_tick)
-    await background("sweep (every 5 min)", server.sweep)
-    await background("card sync (every 60 s)", server.sync_cards)
+    await background("sweep (every 5 min)", lambda: jobs.sweep(server.db, server.duel_api["settle"], server.cups_router))
+    await background("card sync (every 60 s)", lambda: card_bank.sync_cards(server.db))
     await server.db.command("profile", 0)
     audit.summary()
     await client.aclose()
@@ -310,9 +313,9 @@ async def run_startup():
     mark = list(profile.find({}, {"ts": 1}).sort("$natural", -1).limit(1))
     mark = mark[0]["ts"] if mark else datetime(2000, 1, 1)
     t = time.perf_counter()
-    await server.setup_database()
+    await db_setup.setup_database(server.db, server.cups_router)
     full = time.perf_counter() - t
-    await server.db.rf_meta.update_one({"_id": "setup:" + server.SETUP_VERSION}, {"$set": {"done": True, "ts": time.time()}}, upsert=True)
+    await server.db.rf_meta.update_one({"_id": "setup:" + db_setup.SETUP_VERSION}, {"$set": {"done": True, "ts": time.time()}}, upsert=True)
     t = time.perf_counter()
     await server.startup()
     again = time.perf_counter() - t

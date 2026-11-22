@@ -1,0 +1,39 @@
+{
+  "summary": "Phase 2 (Levels 1-4) regression on the live preview API + light Expo web smoke. The route list is the same: I imported OLD server.py (git HEAD, 795 lines) and NEW server.py (146 lines) in-process and diffed (method, path) for all 144 routes; the lists match exactly. New live suite tests/test_phase2_split_regression_live.py: 19/19 pass. It covers health, the /api/jl proxy sign-in (phone+PIN with X-JL-Sid, auth/me, catalog/exams, bad sid 400, missing sid 422, 15- and 65-char sids 400), the /api/rf/access grant, the catalog X-Cache header, and a 30-card Physics solo sprint (30 unique cards, 20 s; the same request_id gives back the same session; complete gives the summary and reward; completing again returns the same reward, so no double pay; history; GET session). It also covers PCM picks at 50 and 100 cards, diagram_only giving 410, revision/weak_topics giving 200 or a 404 with a plain sentence, weak lists (QA learner revision count 87->92 and 94->92+ right after rounds with 5 wrong answers; on a fresh TEST player revision goes 0 -> 5, a repeat_missed replay with 2 right answers takes it to 3, a revision sprint deals only the 3 still-missed cards, and the weak-topics missed count is 5), All India daily on a TEST player only (total 45, 20 s, PCM cards, start/answer/finish, you.rank), boards (leaderboard you.rank, gangwar, friends), a Practice Rival bot match (create, bot, 3 answers, GET, forfeit) and error handling (404s, 422s, another player's sprint gives 404, bad bearer 401). Speed: no warm Rapid Fire call went over 20 ms. Probe (6 calls each, TEST player) warm max: catalog 0.5, daily 1.0, daily/board 1.0, leaderboard 1.2, gangwar 0.9, friends 2.0, history 1.1, revision 0.9, weak-topics 0.9, profile 1.4 ms; new sprint 7.1 ms. Frontend smoke (375x667) passed: QA sign-in, Rapid Fire lobby, Solo Sprint -> subject sheet (Mixed Physics, 30) -> START SOLO SPRINT -> 30 cards, answered 3, exit sheet -> Leave without saving -> back to /rapid. No page errors and no 5xx. The smoke first needed an environment fix: a stale Metro cache held the old preview backend URL. TESTER INCIDENT: one forced click went through the All India popup's ENTER and started today's (2026-11-22) daily for the QA learner. I deleted exactly that one rf_daily_plays row by its _id (status playing, i 0, no answers) to put the account back. The QA learner now has 0 plays today, as before.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/health", "issue": "Returns 404. Not a regression: the old server.py had no /api/health either (only /health and /api/health/load). The public /health goes through the ingress to the Expo app (HTML); the backend /health on :8001 returns {status: ok}. If the review list expects /api/health, add it."},
+      {"endpoint": "POST /api/rf/sessions (solo)", "issue": "Public solo cards include the 'answer' key. This was already true before the split (old public_card had the same body). The server re-checks correctness at /complete, but a client that can read the response can still score itself 100% and farm XP and coins. Not part of Phase 2; noting it for later."},
+      {"endpoint": "POST /api/rf/access", "issue": "Needs a JSON body (an empty {} works). Calling it with no body gives 422. Same contract as before; noted only because the review request did not mention it."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Expo web preview boot", "issue": "After the fork, the Metro cache (/app/frontend/.metro-cache) still had the OLD backend URL (rapid-fire-208--04cp9c5d) built into the bundle. Every /api/jl/auth/session call failed CORS and the app stayed on the session-verifying spinner forever. I fixed it by clearing .metro-cache/cache and restarting expo. Environment issue, not code.", "affected_testIDs": ["session-verifying"]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_phase2_split_regression_live.py", "/app/backend/tests/phase2_warm_timing_probe.py", "/app/test_reports/pytest/phase2_split_live.xml"],
+  "action_items": [
+    "Optional: add GET /api/health, or confirm it is not needed (it never existed).",
+    "The backend arena_web bundle (backend/arena_web/_expo/static/js/web/*.js) has a hardcoded fallback backend URL (now scale-engine-50k...). It goes stale on every fork or deploy; consider reading it from config.",
+    "Backend uvicorn --reload also watches backend/tests/, so writing any test file restarts the preview backend and clears the warm caches. Consider --reload-exclude tests/* (preview only).",
+    "On the Rapid Fire tab the All India popup (rf-daily-popup-enter) sits over the lobby. Automated testers must dismiss it with rf-daily-popup-exit first; a forced click on rf-chapter-picker lands on ENTER."
+  ],
+  "critical_code_review_comments": [
+    "server.py now only wires things up (146 lines); the split modules are small and clear. Route list identical (144).",
+    "sprints.rf_create retries itself on DuplicateKeyError; it is bounded because the twin row then exists. Same as before.",
+    "sprints.rf_create card_ids path ignores 'count' (bounded by MAX_ROUND). Pre-existing.",
+    "revision.card_marks incremental path checked live: replays and new rounds update the counts at once (0->5->3)."
+  ],
+  "updated_files": ["/app/backend/tests/test_phase2_split_regression_live.py (new)", "/app/backend/tests/phase2_warm_timing_probe.py (new)", "/app/frontend/.metro-cache/cache cleared + expo restarted (environment only)"],
+  "success_rate": {"backend": "100% (19/19 live tests; route list identical 144/144)", "frontend": "100% smoke (sign-in, lobby, solo sprint 30 cards, answer 3, leave)"},
+  "seed_data_creation": "TEST players TEST-p2qa-* (rf_access grants, sprints, daily plays on the TEST board) left in place as instructed; they are hidden from boards. QA learner got practice sprints (about 4 completed via API and 2 left in the UI), PCM 50/100 sessions, about 2 Practice Rival matches (one forfeited, one random Quick Play match left to time out) and one revision/weak-topics sprint. Accidental QA learner All India play for 2026-11-22 removed by its exact _id (6b022abb4a5013ae80d93d36).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run tests/test_phase2_split_regression_live.py with -n0 (pytest.ini adds xdist). It signs in the QA learner once per run. /api/rf/access needs json={}. Daily answers must wait show_in_ms (about START_IN) before posting, or the server just returns the current card. In browser tests, route-block **/api/rf/daily/start and click rf-daily-popup-exit before touching the lobby. Quick Play PLAY (rf-scope-play) starts a random match (falls back to a Practice Rival bot); the solo sprint comes from rf-start-button -> sheet -> rf-scope-done ('START SOLO SPRINT').",
+  "rca_of_issue": "Spinner stuck on boot: the Metro transform cache kept the old EXPO_PUBLIC_BACKEND_URL from the source environment, so the fetch went to another host and failed the CORS preflight. Clearing the cache fixed it."
+}

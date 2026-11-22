@@ -1,5 +1,4 @@
 """Exam boundaries shared by the arena, content sync and portable NEET bank."""
-from pathlib import Path
 from typing import Literal
 
 from fastapi import HTTPException
@@ -7,7 +6,6 @@ from fastapi import HTTPException
 Exam = Literal["JEE", "NEET"]
 # The JEE arena also carries BITSAT's two extra sections (English, Logical Reasoning); their cards say syllabus "BITSAT".
 SUBJECTS = {"JEE": ["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning"], "NEET": ["Physics", "Chemistry", "Biology"]}
-NEET_ROOT = Path(__file__).resolve().parents[1] / "neetlive"
 ACTIVE_EXAMS = ("JEE",)
 
 

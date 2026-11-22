@@ -22,6 +22,7 @@ from load_guard import arena_gate
 from rapid_deck import fingerprint
 from revision import record_learning
 from scope import CARD_SECONDS
+from shared_pass import SharedPass
 from shop import equipped_of, safe_avatar
 
 SUBJECTS = ("Physics", "Chemistry", "Mathematics")
@@ -59,9 +60,8 @@ def public(card: dict, i: int) -> dict:
 
 def make_router(db, rf_user, award):
     r = APIRouter(prefix="/rf/daily")
-    boards: dict = {}  # (exam, day, test) -> (ts, players, rows, when the read began, finished runs by (score, 10 s of time))
-    locks: dict = {}
     decks: dict = {}  # "exam:day" -> (read_at, card ids, cards by id) of a deck that can no longer change
+    deck_locks: dict = {}  # "exam:day" -> one deal at a time per process (the first minutes of a day: everyone opens the lobby)
     ranks: dict = {}  # (exam, day, uid) -> (ts, rank) of a finished run outside the top 100
     profile_fields = {"_id": 0, "uid": 1, "name": 1, "pid": 1, "avatar": 1, "equipped": 1, "xp": 1, "cups_won": 1, "cups_real": 1}
 
@@ -88,6 +88,13 @@ def make_router(db, rf_user, award):
         hit = decks.get(key)
         if hit and time.monotonic() - hit[0] < DECK_SECONDS:
             return hit[1]
+        async with deck_locks.setdefault(key, asyncio.Lock()):  # the others wait for this one deal, then read it
+            hit = decks.get(key)
+            if hit and time.monotonic() - hit[0] < DECK_SECONDS:
+                return hit[1]
+            return await deal(exam, day, key)
+
+    async def deal(exam: str, day: str, key: str) -> list:
         have = await db.rf_daily.find_one({"_id": key})
         if have and (len(have["card_ids"]) >= TOTAL or await db.rf_daily_plays.find_one({"exam": exam, "day": day}, {"_id": 1})):
             return (await remember(key, have["card_ids"]))[0]
@@ -143,13 +150,15 @@ def make_router(db, rf_user, award):
         hit = ranks.get(k)
         if hit and time.time() - hit[0] < 15:
             return hit[1]
-        copy = boards.get((p["exam"], p["day"], p.get("test", False)))
+        k = (p["exam"], p["day"], p.get("test", False))
+        hit = boards.copies.get(k)
+        copy = hit[1] if hit else None
         if copy:
             # Runs with more right answers, or as many in an earlier 10 s of time, are added up from the board's small
             # table. Only the runs inside this run's own 10 s are counted from the index: a handful, where the count
             # used to walk past everyone ahead (half of the day's players on average, for every student who looked).
             slot = p["ms"] // SLOT_MS
-            ahead = sum(n for (correct, s), n in copy[4].items() if correct > p["correct"] or (correct == p["correct"] and s < slot))
+            ahead = sum(n for (correct, s), n in copy[3].items() if correct > p["correct"] or (correct == p["correct"] and s < slot))
             rank = 1 + ahead + await db.rf_daily_plays.count_documents({
                 "exam": p["exam"], "day": p["day"], "test": p.get("test", False), "status": "done", "correct": p["correct"],
                 "$or": [{"ms": {"$gte": slot * SLOT_MS, "$lt": p["ms"]}}, {"ms": p["ms"], "finished_ts": {"$lt": p["finished_ts"]}}]})
@@ -164,39 +173,37 @@ def make_router(db, rf_user, award):
         return {"rank": rank, "uid": x["uid"], "name": pr.get("name") or "JEE Aspirant", "pid": pr.get("pid"), "avatar": safe_avatar(pr.get("avatar")),
                 "frame": equipped_of(pr).get("frame"), "level": level_of(pr.get("xp", 0)), "crown": crown_of(pr), "correct": x["correct"], "ms": x["ms"]}
 
-    async def board(exam: str, day: str, test: bool, limit: int = 100) -> tuple:
-        """(players, top rows) for a day: the lobby of every student asks for it. Today's is kept 15 s; a day that is over
-        cannot change any more (only a run that began just before midnight may still end), so it is kept 5 minutes."""
-        k = (exam, day, test)
-        lock = locks.setdefault(k, asyncio.Lock())
-        async with lock:
-            hit = boards.get(k)
-            if hit and time.time() - hit[0] < (15 if day >= ist_day() else 300):
-                return hit[1], hit[2]
-            q, began = {"exam": exam, "day": day, "test": test, "status": "done"}, time.time()
-            # One pass over the day's index (the same walk the plain count made) also says how many runs ended on each
-            # score in each 10 s of time taken: the number of players is their sum, and rank_of() reads places from it.
-            spread = {(g["_id"]["c"] or 0, int(g["_id"]["s"] or 0)): g["n"] for g in await (await db.rf_daily_plays.aggregate(
-                [{"$match": q}, {"$group": {"_id": {"c": "$correct", "s": {"$floor": {"$divide": ["$ms", SLOT_MS]}}}, "n": {"$sum": 1}}}])).to_list(None)}
-            players = sum(spread.values())
-            plays = await db.rf_daily_plays.find(q, {"_id": 0, "uid": 1, "correct": 1, "ms": 1}).sort([("correct", -1), ("ms", 1), ("finished_ts", 1)]).limit(100).to_list(100)
-            profs = {x["uid"]: x for x in await db.rf_profiles.find({"uid": {"$in": [x["uid"] for x in plays]}}, profile_fields).to_list(100)}
-            rows = [row_of(x, profs.get(x["uid"], {}), n + 1) for n, x in enumerate(plays)]
-            if len(boards) > 64:
-                boards.clear()
-            boards[k] = (time.time(), players, rows, began, spread)
-            return players, rows
+    async def read_board(k: tuple) -> tuple:
+        """(players, top rows, when the read began, finished runs by (score, 10 s of time)) for a day: the lobby of every
+        student asks for it. Today's is kept 15 s; a day that is over cannot change any more (only a run that began just
+        before midnight may still end), so it is kept 5 minutes."""
+        exam, day, test = k
+        q, began = {"exam": exam, "day": day, "test": test, "status": "done"}, time.time()
+        # One pass over the day's index (the same walk the plain count made) also says how many runs ended on each
+        # score in each 10 s of time taken: the number of players is their sum, and rank_of() reads places from it.
+        spread = {(g["_id"]["c"] or 0, int(g["_id"]["s"] or 0)): g["n"] for g in await (await db.rf_daily_plays.aggregate(
+            [{"$match": q}, {"$group": {"_id": {"c": "$correct", "s": {"$floor": {"$divide": ["$ms", SLOT_MS]}}}, "n": {"$sum": 1}}}])).to_list(None)}
+        plays = await db.rf_daily_plays.find(q, {"_id": 0, "uid": 1, "correct": 1, "ms": 1}).sort([("correct", -1), ("ms", 1), ("finished_ts", 1)]).limit(100).to_list(100)
+        profs = {x["uid"]: x for x in await db.rf_profiles.find({"uid": {"$in": [x["uid"] for x in plays]}}, profile_fields).to_list(100)}
+        return sum(spread.values()), [row_of(x, profs.get(x["uid"], {}), n + 1) for n, x in enumerate(plays)], began, spread
+
+    boards = SharedPass(read_board, keep=lambda k: 15 if k[1] >= ist_day() else 300)
+
+    async def board(exam: str, day: str, test: bool) -> tuple:
+        """(players, top rows). With a big crowd the 15 s pass runs in the background while this copy answers."""
+        players, rows, _, _ = await boards.get((exam, day, test))
+        return players, rows
 
     async def add_to_board(p: dict, uid: str):
         """A run just finished: the player takes their place on this server's copy of the board, and the count goes up by one.
         The copy used to be thrown away on every finish instead; with a crowd finishing every second it was then never
         kept, and every lobby that opened counted the whole day's runs again."""
         k = (p["exam"], p["day"], p.get("test", False))
-        async with locks.setdefault(k, asyncio.Lock()):
-            hit = boards.get(k)
-            if not hit or any(row["uid"] == uid for row in hit[2]):
+        async with boards.lock(k):
+            hit = boards.copies.get(k)
+            if not hit or any(row["uid"] == uid for row in hit[1][1]):
                 return  # no copy here (the next look reads a fresh one), or the copy already shows this run
-            ts, players, rows, began, spread = hit
+            ts, (players, rows, began, spread) = hit
             # Same order as the board: more correct first, then less time; a run that ends later stays below its equals.
             at = next((n for n, row in enumerate(rows) if (row["correct"], -row["ms"]) < (p["correct"], -p["ms"])), len(rows))
             if at < 100:
@@ -206,7 +213,7 @@ def make_router(db, rf_user, award):
                 return  # below the top 100, and the copy was read after this run ended: it is already counted
             where = (p["correct"], p["ms"] // SLOT_MS)
             spread[where] = spread.get(where, 0) + 1
-            boards[k] = (ts, players + 1, rows, began, spread)
+            boards.copies[k] = (ts, (players + 1, rows, began, spread))
 
     def shown(rows: list, uid: str, limit: int) -> list:
         return [{k: v for k, v in row.items() if k != "uid"} | {"you": row["uid"] == uid} for row in rows[:limit]]

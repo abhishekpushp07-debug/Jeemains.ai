@@ -1,6 +1,6 @@
 # Iteration 94 — Rank tab tool colours + College Predictor cards (run via browser_automation; body of async fn with `page`).
 # Login: type phone/PIN with keyboard (page.fill on entry fields does not enable submit reliably).
-BASE = "https://rapid-fire-208--04cp9c5d.preview.emergentagent.com"
+BASE = "https://scale-engine-50k--0gu36hlx.preview.emergentagent.com"
 EXPECT = {"rank": ("rp-input", "rp-show", "rgb(255, 214, 10)"), "pct": ("pr-input", "pr-show", "rgb(45, 225, 194)"),
           "target": ("tm-profile", None, "rgb(181, 242, 61)"), "college": ("rank-input", "rank-show", "rgb(255, 79, 174)"),
           "compare": ("cmp-empty", "cmp-go-college", "rgb(76, 195, 255)")}

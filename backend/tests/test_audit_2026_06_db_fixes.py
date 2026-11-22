@@ -106,16 +106,16 @@ def test_cup_payout_resumes_after_a_crash_and_pays_once():
 
 def test_two_servers_renewing_different_cookies_keep_both():
     """DB4: two answers with different Set-Cookie headers saved at the same moment: neither cookie is lost."""
-    import server
+    import jl_proxy
     sid = f"TEST-audit-{RUN}-jar"
 
     async def go(db):
-        server.db = db
-        await asyncio.gather(server.save_cookie_changes(sid, {"access_token": "A2"}, []), server.save_cookie_changes(sid, {"refresh.token": "R2"}, []))
-        jar = await server.load_jar(sid)
+        jl_proxy.db = db
+        await asyncio.gather(jl_proxy.save_cookie_changes(sid, {"access_token": "A2"}, []), jl_proxy.save_cookie_changes(sid, {"refresh.token": "R2"}, []))
+        jar = await jl_proxy.load_jar(sid)
         assert jar == {"access_token": "A2", "refresh.token": "R2"}
-        await server.save_cookie_changes(sid, {}, ["access_token"])
-        assert await server.load_jar(sid) == {"refresh.token": "R2"}
+        await jl_proxy.save_cookie_changes(sid, {}, ["access_token"])
+        assert await jl_proxy.load_jar(sid) == {"refresh.token": "R2"}
         row = await db.jl_jars.find_one({"sid": sid})
         assert isinstance(row["seen_at"], datetime)
     run(go)

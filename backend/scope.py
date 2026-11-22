@@ -7,7 +7,6 @@ from pydantic import BaseModel, ConfigDict, Field
 ORDER = ("Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning")
 SHORT = {"Physics": "Physics", "Chemistry": "Chemistry", "Mathematics": "Maths", "English": "English", "Logical Reasoning": "Reasoning"}
 MAX_PICKS = 5
-PCM = [{"subject": s, "chapter": None} for s in ORDER[:3]]
 Subject = Literal["Physics", "Chemistry", "Mathematics", "English", "Logical Reasoning"]
 CARD_COUNTS = (30, 50, 100)  # what a student can choose for one round
 CARD_SECONDS = 20  # rule R1: 20 seconds per card in every mode

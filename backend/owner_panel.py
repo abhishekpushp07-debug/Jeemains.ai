@@ -67,17 +67,22 @@ def row(doc: dict) -> dict:
             "history": [{"at": _iso(h["at"]), "event": h["event"], "by": h.get("by", "")} for h in doc.get("history", [])]}
 
 
+async def owner_session(db, request: Request, write: bool = False) -> dict:
+    """The signed-in owner (deletion panel and App Health page share the same 8-hour cookie), or 401/403."""
+    if write and request.headers.get("x-owner-panel") != "1":
+        raise HTTPException(403, "Open the owner panel page to make changes.")
+    token = request.cookies.get(COOKIE, "")
+    s = await db.owner_sessions.find_one({"digest": _hash(token), "expires_at": {"$gt": _now()}}, {"_id": 0}) if 20 <= len(token) <= 128 else None
+    if not s:
+        raise HTTPException(401, "Please sign in to the owner panel.")
+    return s
+
+
 def make_router(db, client):
     router = APIRouter(prefix="/owner")
 
     async def owner(request: Request, write: bool = False) -> dict:
-        if write and request.headers.get("x-owner-panel") != "1":
-            raise HTTPException(403, "Open the owner panel page to make changes.")
-        token = request.cookies.get(COOKIE, "")
-        s = await db.owner_sessions.find_one({"digest": _hash(token), "expires_at": {"$gt": _now()}}, {"_id": 0}) if 20 <= len(token) <= 128 else None
-        if not s:
-            raise HTTPException(401, "Please sign in to the owner panel.")
-        return s
+        return await owner_session(db, request, write)
 
     @router.get("/deletions", response_class=HTMLResponse, include_in_schema=False)
     async def panel():

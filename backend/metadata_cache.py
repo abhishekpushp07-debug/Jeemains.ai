@@ -14,6 +14,8 @@ BUDGET_BYTES, MAX_ENTRY_BYTES, MAX_ENTRIES, MAX_FLIGHTS = 24 * 1024 * 1024, 2 * 
 
 
 class MetadataCache:
+    """A copy past its time keeps answering for one more `ttl` while a single reload runs in the background, so after the
+    first load no request waits for the database (a PCM round used to wait ~100 ms for three pools every 2 minutes)."""
     def __init__(self, *, disabled=False):
         self.disabled = disabled
         self.stats = Counter()
@@ -26,7 +28,7 @@ class MetadataCache:
         if key in self._l1:
             self._bytes -= self._l1.pop(key)[2]
         weight = len(raw) * 3  # conservative JSON-to-object memory estimate
-        self._l1[key] = (time.monotonic() + ttl, value, weight)
+        self._l1[key] = (time.monotonic() + ttl, value, weight, ttl)
         self._bytes += weight
         while self._bytes > BUDGET_BYTES or len(self._l1) > MAX_ENTRIES:
             self._bytes -= self._l1.popitem(last=False)[1][2]
@@ -37,8 +39,6 @@ class MetadataCache:
             self._l1.move_to_end(key)
             self.stats['memory_hits'] += 1
             return entry[1], 'HIT-MEMORY'
-        if entry:
-            self._bytes -= self._l1.pop(key)[2]
         return None
 
     async def get_or_load(self, key, loader, ttl=60):
@@ -47,12 +47,24 @@ class MetadataCache:
         hit = await self.get(key)
         if hit is not None:
             return hit
+        entry = self._l1.get(key)
+        if entry and entry[0] + entry[3] > time.monotonic():  # past its time, still within the grace: answer, reload once behind
+            self._l1.move_to_end(key)
+            if key not in self._flights and len(self._flights) < MAX_FLIGHTS:
+                self._start(key, loader, ttl)
+            self.stats['stale_hits'] += 1
+            return entry[1], 'HIT-STALE'
+        if entry:
+            self._bytes -= self._l1.pop(key)[2]
         pending = self._flights.get(key)
         if pending:
             self.stats['coalesced'] += 1
             return (await asyncio.shield(pending))[0], 'COALESCED'
         if len(self._flights) >= MAX_FLIGHTS:
             return await loader(), 'BYPASS'
+        return await asyncio.shield(self._start(key, loader, ttl))
+
+    def _start(self, key, loader, ttl):
         task = asyncio.create_task(self._load(key, loader, ttl, self._epoch))
         self._flights[key] = task
 
@@ -62,7 +74,7 @@ class MetadataCache:
             if not done.cancelled():
                 done.exception()  # also consume a failed loader if all callers disconnected
         task.add_done_callback(release)
-        return await asyncio.shield(task)
+        return task
 
     async def _load(self, key, loader, ttl, epoch):
         value = await loader()  # never catch/cache source exceptions
