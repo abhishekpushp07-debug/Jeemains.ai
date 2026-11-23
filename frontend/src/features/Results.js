@@ -228,7 +228,7 @@ function ResultsView() {
   return (
     <QuestionReportsProvider attemptId={id}><div className="container page results-page">
       <Link className="breadcrumb" to={safeExamReturn(location.state?.returnTo,r.series_id?seriesPath(r.series_id)+(r.series_id===JEE_SERIES?'?tab=results':''):examPath(r.exam)+'/results')} data-testid="results-home">
-        <ArrowLeft size={14} /> {r.series_id?'Back to All India series':location.state?.returnTo?.startsWith('/profile')?'Back to My Tests':`Back to ${r.exam} ${location.state?.returnTo?.includes('/results')?'results':'tests & results'}`}
+        <ArrowLeft size={14} /> {r.series_id?(location.state?.returnTo?.includes('/analysis')?'Back to analysis':'Back to All India series'):location.state?.returnTo?.startsWith('/profile')?'Back to My Tests':`Back to ${r.exam} ${location.state?.returnTo?.includes('/results')?'results':'tests & results'}`}
       </Link>
       <PageTitle
         eyebrow={`${r.exam} · ${r.mode === "preview" ? "UNAPPROVED PRIVATE PREVIEW" : r.mode === 'series_live' ? 'ALL INDIA SERIES · LIVE ATTEMPT' : r.mode === 'series_practice' ? 'ALL INDIA SERIES · ARCHIVE PRACTICE' : "COMPLETED PRACTICE"}`}

@@ -36,11 +36,13 @@ import './master.css';
 import './cut-tool.css';
 import './analysis2.css';
 import './app-theme.css';
+import './series-app.css';
 const Rank = lazy(() => import('./features/Rank'));
 const Mission = lazy(() => import('./features/Mission'));
 const Misfire = lazy(() => import('./features/Misfire'));
 const PyqCatalogue = lazy(() => import('./features/PyqCatalogue'));
 const LiveSeries = lazy(() => import('./features/LiveSeries'));
+const SeriesAnalysis = lazy(() => import('./features/SeriesAnalysis'));
 const Home = lazy(() => import("./features/Home"));
 const ExamHub = lazy(() => import("./features/ExamHub"));
 const ExamSection = lazy(() => import("./features/ExamSection"));
@@ -148,6 +150,8 @@ function Shell() {
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/series/all-india-jee" element={<LiveSeries />} />
+            <Route path="/series/all-india-jee/analysis" element={<Protected><SeriesAnalysis /></Protected>} />
+            <Route path="/series/all-india-jee/analysis/:attemptId" element={<Protected><SeriesAnalysis /></Protected>} />
             <Route path="/series/:seriesId" element={<SeriesPage />} />
             <Route path="/exams" element={<Exams />} />
             <Route path="/preview/s/:token" element={<SectionPreview />} />

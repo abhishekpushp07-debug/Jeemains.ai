@@ -51,6 +51,7 @@ export default function SetDetail() {
   const [busy, setBusy] = useState(false);
   const [retry, setRetry] = useState(0);
   const key = useRef(null);
+  const autoStarted = useRef(false);
   const returnTo = safeExamReturn(location.state?.returnTo, s ? s.series_id ? seriesPath(s.series_id) : s.catalog_path ? s.catalog_path+((s.chapter_book_id||s.test_kind==='chapter')&&s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):'') : examPath(s.exam)+(s.chapter_book_id||s.test_kind==='chapter'?'/chapters'+(s.chapter_subject?'?subject='+encodeURIComponent(s.chapter_subject):''):s.test_kind==='pyq'?'/pyq':'/mocks') : '/home');
   useEffect(() => {
     const controller = new AbortController();
@@ -74,6 +75,14 @@ export default function SetDetail() {
       nav(a.status === 'completed' ? '/results/' + a.id : '/attempts/' + a.id, { state: { returnTo } });
     } catch (e) { setError(e.message); setBusy(false); }
   }
+  // A tap on a finished, unattempted series day starts its paper straight away (once).
+  useEffect(() => {
+    if (!s || !userId || preview || autoStarted.current || !location.state?.autoStart) return;
+    autoStarted.current = true;
+    nav(location.pathname + location.search, { replace: true, state: { ...location.state, autoStart: false } });
+    start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [s, userId]);
   if (!s) return <div className="container page"><ErrorBox error={error} retry={() => setRetry(v => v + 1)} />{!error && <Loading />}</div>;
   return (
     <div className="container page set-detail set-simple" data-testid="set-detail-page">
