@@ -12,7 +12,7 @@ export function trendSummary(days){
   return p.length?{best:Math.max(...p.map(x=>x.score)),avg:Math.round(p.reduce((a,x)=>a+x.score,0)/p.length)}:null;
 }
 
-function useWidth(on){
+export function useWidth(on){
   const ref=useRef(null),[w,setW]=useState(0);
   useEffect(()=>{
     const el=ref.current;if(!el)return undefined;

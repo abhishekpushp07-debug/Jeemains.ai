@@ -96,6 +96,7 @@ SPEC = {
     'series_streak.progress': ('own_live_series_streak_only', 'normal', 'read'),
     'live_series.catalogue': ('public_schedule_metadata_only', 'normal', 'read'),
     'live_series.history': ('own_series_attempts_only', 'normal', 'read'),
+    'series_insights.insights': ('own_series_attempts_plus_closed_day_class_totals', 'normal', 'read'),
     'live_series.series_rank': ('attempt_owner_rank_after_day_close', 'normal', 'read'),
     'live_series.studio_schedule': ('owner_schedule_only', 'normal', 'read'),
     'live_series.assign': ('owner_published_fresh_paper_future_day', 'control', 'revision_CAS_unique_date'),

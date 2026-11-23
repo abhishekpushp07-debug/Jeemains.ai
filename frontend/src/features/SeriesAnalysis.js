@@ -10,6 +10,11 @@ import {AnalysisWorkspace} from '../components/analysis/AnalysisWorkspace';
 import {useAnalysis} from '../components/analysis/useAnalysis';
 import {ShareGate} from '../components/mission/ShareGate';
 import {isResultLocked,unlockResult} from '../components/mission/gate';
+import {SeriesRankCard} from '../components/results/SeriesRankCard';
+import {SeriesInsights} from '../components/series/insights/SeriesInsights';
+import {useInsights} from '../components/series/insights/useInsights';
+import {DayVsClass} from '../components/series/insights/VsClass';
+import {DayDestinations,useDayRetry} from '../components/series/DayTools';
 
 const kicker=(a,day)=>`${day?`DAY ${day} · `:''}${a.mode==='series_live'?'LIVE':'PRACTICE'}${a.series_date?` · ${shortDate(a.series_date).toUpperCase()}`:''}`;
 const when=a=>a.submitted_at||a.started_at;
@@ -26,7 +31,7 @@ function Row({a,day}){
 }
 
 function AnalysisList(){
-  const nav=useNavigate(),loc=useLocation(),{days,history,error,retry}=useSeriesHub();
+  const nav=useNavigate(),loc=useLocation(),{user,days,history,error,retry}=useSeriesHub();
   const back=()=>loc.state?.fromHub?nav(-1):nav(SERIES_PATH,{replace:true});
   const rows=(history?.items||[]).filter(a=>!a.resumable).sort((a,b)=>when(b)-when(a));
   const dayOf=date=>days.find(d=>d.date===date)?.day;
@@ -35,6 +40,8 @@ function AnalysisList(){
     <p className="sh-dates">Har attempt kiya hua din, sabse naya sabse upar.</p>
     <ErrorBox error={error} retry={retry}/>{!history&&!error&&<Loading text="Aapke din khul rahe hain…"/>}
     {history&&!rows.length&&<div className="sh-card sh-empty" data-testid="series-analysis-empty"><span><BarChart3 size={26}/></span><h3>Abhi koi din attempt nahi hua.</h3><p>Live test do. Submit karte hi uska analysis yahan sabse upar aa jayega.</p></div>}
+    {rows.length>0&&<SeriesInsights uid={user?.id}/>}
+    {rows.length>0&&<div className="sh-label si-days-label"><h2>Har din ka analysis</h2><span>Sabse naya sabse upar</span></div>}
     <div className="sh-arows">{rows.map(a=><Row key={a.id} a={a} day={dayOf(a.series_date)}/>)}</div>
   </div>;
 }
@@ -44,15 +51,22 @@ function AnalysisDetail({id}){
   const [locked,setLocked]=useState(()=>isResultLocked(id));
   const compare=params.get('mode')==='compare',vs=/^(topper|top10|average|user:[0-9a-f]{16})$/.test(params.get('vs')||'')?params.get('vs'):'topper';
   const analysis=useAnalysis(id,user.id,'original',!locked,compare,vs);
-  if(locked)return <ShareGate onOpen={()=>{unlockResult(id);setLocked(false);}}/>;
   const item=history?.items.find(a=>a.id===id),day=item&&days.find(d=>d.date===item.series_date)?.day;
+  const insight=useInsights(user.id),dayRow=insight.data?.days.find(d=>d.attempt_id===id);
+  const again=useDayRetry(id,item?.summary);
+  if(locked)return <ShareGate onOpen={()=>{unlockResult(id);setLocked(false);}}/>;
   const back=()=>loc.state?.fromList?nav(-1):nav(LIST_PATH,{replace:true});
   const solutions=q=>nav('/results/'+id+'?view=solutions'+(typeof q==='string'?'&question='+q:''),{state:{returnTo:detailPath(id)}});
   return <div className="container page sh-page sh-analysis-page" data-testid="series-analysis-detail">
     <SeriesHeader eyebrow={item?kicker(item,day):'ALL INDIA SERIES'} title={day?`Day ${day} · Analysis`:'Analysis'} onBack={back} backTestId="series-analysis-detail-back" titleTestId="series-analysis-detail-title"/>
     {item&&<p className="sh-dates">{item.title}</p>}
     {item?.summary&&<div className="sh-card sh-detail-stats" data-testid="series-analysis-stats"><Stats s={item.summary}/></div>}
-    <AnalysisWorkspace id={id} state={analysis} onOpen={solutions} onSolutions={()=>solutions()} onRetry={null} extra={null}/>
+    {item?.mode==='series_live'&&<SeriesRankCard id={id}/>}
+    <DayVsClass day={dayRow}/>
+    <DayDestinations id={id}/>
+    <ErrorBox error={again.error}/>
+    <AnalysisWorkspace id={id} state={analysis} onOpen={solutions} onSolutions={()=>solutions()} onRetry={again.onRetry} extra={null}/>
+    {again.dialog}
   </div>;
 }
 

@@ -24,7 +24,7 @@ export default function LiveSeries(){
   const tab=['today','archive','results','analytics','solutions'].includes(params.get('tab'))?params.get('tab'):'today';
   const [open,setOpen]=useState(false),[history,setHistory]=useState(null),[historyError,setHistoryError]=useState(''),[page,setPage]=useState(1),[refresh,setRefresh]=useState(0);
   useEffect(()=>{
-    setHistory(null);setHistoryError('');if(!user)return;
+    setHistory(null);setHistoryError('');if(!user?.id)return;
     const c=new AbortController();api(SERIES_PATH+'/history?page='+page,{signal:c.signal}).then(setHistory).catch(e=>{if(!c.signal.aborted)setHistoryError(e.message);});return()=>c.abort();
   },[user?.id,page,refresh,data?.server_now]);
   const meters=useLearningMeters(history?.latest_result_id,'original',!!history?.latest_result_id&&tab==='analytics');
