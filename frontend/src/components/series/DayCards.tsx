@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FlatList, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Empty, Icon, Press, T } from "@/src/components/ui";
 import { PastelSurface, Pill } from "@/src/components/design";
 import { Shine } from "@/src/analysis/Shine";
-import { colors, pastel, pastelEdges, SeriesTone, space } from "@/src/theme";
+import { chipEdges, colors, pastel, pastelEdges, SeriesTone, space } from "@/src/theme";
 import { istDate } from "@/src/navigation";
 import { countdown, dayAction, DayInfo, dayNote, Series, seriesDays } from "@/src/series";
 
@@ -12,7 +13,7 @@ const FACE = Object.fromEntries((Object.keys(pastel) as SeriesTone[]).map(t => [
 
 /**
  * A big day card in its status colours (the two change places slowly), under a gloss and a glass glint that crosses from
- * corner to corner, inside a running edge of its own colour family. The small day chips and map cells stay plain.
+ * corner to corner, inside a running edge of its own colour family.
  */
 function ShineCard({ tone, testID, radius, face, children }: { tone: SeriesTone; testID: string; radius: number; face: StyleProp<ViewStyle>; children: React.ReactNode }) {
   return <View testID={testID}>
@@ -54,24 +55,40 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
 }
 
 const CHIP = 52, GAP = 8;
+// A chip's own colours, drawn once: blood red for a day still to come, its status colours once the day is today, done or missed.
+const chipFace = (from: string, to: string) => <LinearGradient pointerEvents="none" colors={[from, to]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />;
+const BLOOD = chipFace(colors.custom_chipBlood, colors.custom_chipBloodDeep);
+const CHIP_FACE = Object.fromEntries((Object.keys(pastel) as SeriesTone[]).map(t => [t, chipFace(pastel[t].from, pastel[t].to)])) as Record<SeriesTone, React.ReactElement>;
+const SEEN = { itemVisiblePercentThreshold: 10 };
 /** One chip per series day; opens on today. */
 export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (day: number) => void }) {
   const list = useRef<FlatList<DayInfo>>(null);
   const index = Math.max(0, days.findIndex(d => d.day === selected));
+  // Only the chips on screen shine; the rest stay still, so 50 days cost no more than the handful in view.
+  const [seen, setSeen] = useState<[number, number]>(() => [Math.max(0, index - 2), Math.max(0, index - 2) + 8]);
+  const onSeen = useRef(({ viewableItems }: { viewableItems: { index?: number | null }[] }) => {
+    const at = viewableItems.map(v => v.index).filter((n): n is number => n != null);
+    if (at.length) setSeen(old => { const lo = Math.min(...at), hi = Math.max(...at); return old[0] === lo && old[1] === hi ? old : [lo, hi]; });
+  }).current;
   useEffect(() => {
     if (days.length) list.current?.scrollToIndex({ index: Math.max(0, index - 2), animated: true, viewPosition: 0 });
   }, [index, days.length]);
   return <FlatList ref={list} testID="series-day-strip" horizontal showsHorizontalScrollIndicator={false} data={days} keyExtractor={d => String(d.day)}
     getItemLayout={(_, i) => ({ length: CHIP + GAP, offset: (CHIP + GAP) * i, index: i })} initialScrollIndex={Math.max(0, index - 2)}
     onScrollToIndexFailed={() => {}} style={{ marginHorizontal: -space.lg, flexGrow: 0 }} contentContainerStyle={{ paddingHorizontal: space.lg }}
-    initialNumToRender={12} windowSize={5}
-    renderItem={({ item: d }) => {
-      const on = d.day === selected, p = pastel[d.tone];
+    initialNumToRender={12} windowSize={5} extraData={seen} onViewableItemsChanged={onSeen} viewabilityConfig={SEEN}
+    renderItem={({ item: d, index: i }) => {
+      const on = d.day === selected, p = pastel[d.tone], red = d.tone === "upcoming";
       return <Press testID={"series-chip-" + d.day} onPress={() => onSelect(d.day)} accessibilityState={{ selected: on }} accessibilityLabel={`Day ${d.day}, ${istDate(d.date)}, ${d.label}`} style={styles.chipWrap}>
-        <PastelSurface tone={d.tone} style={[styles.chip, on && styles.chipOn]}>
-          <T w="heavy" size={8.5} color={p.ink} style={{ letterSpacing: 1.2 }}>{d.isToday ? "TODAY" : "DAY"}</T>
-          <T w="heavy" size={19} color={colors.custom_pastelInk}>{d.day}</T>
-        </PastelSurface>
+        <View style={styles.chipBox}>
+          {/* Gloss, a corner-to-corner glint and a running edge; the glint reaches each chip a little after the one before it. */}
+          <Shine radius={16} ring={on ? 3 : 2} backdrop={red ? BLOOD : CHIP_FACE[d.tone]} edge={on ? chipEdges.chosen : red ? chipEdges.blood : pastelEdges[d.tone]}
+            gloss={red ? colors.custom_chipBloodGloss : colors.custom_seriesPastelGloss} glint={red ? colors.custom_chipBloodGlint : colors.custom_seriesPastelGlint}
+            band={18} part={38} corner delay={(i % 8) * 140} rest={i < seen[0] || i > seen[1]} face={on ? styles.chipOn : styles.chip}>
+            <T w="heavy" size={8.5} color={red ? colors.custom_chipBloodSoft : p.ink} style={{ letterSpacing: 1.2 }}>{d.isToday ? "TODAY" : "DAY"}</T>
+            <T w="heavy" size={19} color={red ? colors.custom_chipBloodInk : colors.custom_pastelInk}>{d.day}</T>
+          </Shine>
+        </View>
         <View style={[styles.chipDot, on && { backgroundColor: colors.onSurface }]} />
       </Press>;
     }} />;
@@ -132,8 +149,10 @@ const styles = StyleSheet.create({
   today: { padding: 18, gap: space.sm },
   clock: { flexDirection: "row", alignItems: "center", gap: 6, alignSelf: "flex-start", backgroundColor: colors.custom_whiteA70, borderRadius: 999, paddingHorizontal: 12, height: 28, marginVertical: 2 },
   chipWrap: { width: CHIP, marginRight: GAP, alignItems: "center", gap: 6, paddingTop: 2 },
-  chip: { width: CHIP, height: 68, borderRadius: 16, alignItems: "center", justifyContent: "center", gap: 2, borderWidth: 2, borderColor: "transparent" },
-  chipOn: { borderColor: colors.onSurface },
+  chipBox: { width: CHIP },
+  // A chip is 68 high as before: 64 inside its 2-point edge, or 62 inside the chosen day's 3-point edge.
+  chip: { height: 64, alignItems: "center", justifyContent: "center", gap: 2 },
+  chipOn: { height: 62, alignItems: "center", justifyContent: "center", gap: 2 },
   chipDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: "transparent" },
   detail: { padding: 18, gap: space.sm },
   result: { borderRadius: 18, paddingHorizontal: space.lg, paddingVertical: 12, minHeight: 60, flexDirection: "row", alignItems: "center", gap: space.sm },

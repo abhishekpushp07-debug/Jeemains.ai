@@ -185,6 +185,9 @@ const dark = {
   // cards wear their status colours. All share the same white gloss and white corner-to-corner glint.
   custom_seriesPink: "#FFDCE8", custom_seriesPinkDeep: "#FFB5CE", custom_seriesPinkInk: "#5B3A46",
   custom_seriesPastelGloss: "rgba(255,255,255,0.55)", custom_seriesPastelGlint: "rgba(255,255,255,0.92)",
+  // The series page's day chips: a day still to come is blood red with white words (6 : 1 or more), under a lighter gloss and glint.
+  custom_chipBlood: "#C1121F", custom_chipBloodDeep: "#8A0B15", custom_chipBloodInk: "#FFFFFF", custom_chipBloodSoft: "#FFE9EC",
+  custom_chipBloodGloss: "rgba(255,255,255,0.26)", custom_chipBloodGlint: "rgba(255,255,255,0.58)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
   custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8FA8FF",
   // Rank Card: brushed graphite with a soft blood-red glow, sparkle-silver serif and blood-red hairlines (same in both palettes).
@@ -430,6 +433,11 @@ export const pastel: Record<SeriesTone, { from: string; to: string; ink: string;
   upcoming: { from: light.custom_upFrom, to: light.custom_upSky, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
   missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, label: "Missed" },
 };
+// Day chips: gold, rose and pearl run round a blood-red chip; the chosen day wears a black edge with one gold light running round it.
+export const chipEdges = {
+  blood: ["#FFC857", "#FF5C7A", "#FFD9E0", "#FFC857"],
+  chosen: ["#0F0F12", "#0F0F12", "#FFC857", "#0F0F12", "#0F0F12"],
+} as const;
 // The three colours that run round a big series day card, from its status colour's own family (the first comes back at
 // the end): today = coral, rose, gold; done = emerald, lime, teal; upcoming = teal, azure, lavender; missed = bronze, dusty rose, sand.
 export const pastelEdges: Record<SeriesTone, readonly [string, string, string, string]> = {
