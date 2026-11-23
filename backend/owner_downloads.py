@@ -15,11 +15,13 @@ ARTIFACT = ROOT / "neetlive" / "exports" / "neetlive-content.zip"
 ARTIFACT_TYPE = "neetlive-content-zip"
 HANDOFF_TYPE = "rank-mission-handoff-zip"
 THEME_GUIDE_TYPE = "glossy-theme-guide-pdf"
+SHINE_CODE_TYPE = "shine-web-code-zip"
 # type -> (file, download name, longest grant in hours)
 ARTIFACTS = {
     ARTIFACT_TYPE: (ARTIFACT, "neetlive-content.zip", 24),
     HANDOFF_TYPE: (ROOT / "handoff" / "JEELIVE_Rank_Mission_Website_Handoff.zip", "JEELIVE_Rank_Mission_Website_Handoff.zip", 168),
     THEME_GUIDE_TYPE: (ROOT / "handoff" / "theme_guide" / "JEELIVE_App_Glossy_Theme_Guide.pdf", "JEELIVE_App_Glossy_Theme_Guide.pdf", 168),
+    SHINE_CODE_TYPE: (ROOT / "handoff" / "theme_guide" / "JEELIVE_Shine_Web_Code.zip", "JEELIVE_Shine_Web_Code.zip", 168),
 }
 DOWNLOAD_HEADERS = {"Cache-Control": "private, no-store", "Pragma": "no-cache",
                     "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"}
