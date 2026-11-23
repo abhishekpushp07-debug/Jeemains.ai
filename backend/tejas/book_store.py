@@ -160,7 +160,7 @@ async def book_view(book, detail=True):
     allowances=[BookAllowance.from_mongo(r).model_dump(exclude={'owner_id','book_id'}) async for r in db.tejas_book_allowances.find({'book_id':book.id}).sort('created_at',-1).limit(20)] if detail else []
     linked={s['id']:s for s in await db.tejas_sets.find({'book_import_id':book.id},{'_id':0,'id':1,'archived':1,'series_date':1}).to_list(None)} if detail else {}
     if series:from .live_series import series_problem
-    return {'id':book.id,'title':p['title'],'filename':p['filename'],'state':book.state,'revision':book.revision,
+    return {'id':book.id,'title':p['title'],'filename':p.get('filename',''),'state':book.state,'revision':book.revision,
         'size':p['size'],'sha256':p['sha256'],'edition':p.get('edition',''),'chunk_size':CHUNK,'received_parts':sorted(r['number'] for r in parts),
         'pages':p.get('pages',0),'read_pages':p.get('read_pages',0),'scanned_pages':p.get('scanned_pages',0),
         'message':p.get('message',''),'auto_publish':p['auto_publish'],'paused':book.paused,'destination':p.get('destination'),

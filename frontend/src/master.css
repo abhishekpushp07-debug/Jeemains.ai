@@ -39,7 +39,7 @@
 .storage-dot.ok{background:#1f9d55;box-shadow:0 0 0 3px rgba(31,157,85,.16)}
 .storage-dot.warn{background:#d98c00;box-shadow:0 0 0 3px rgba(217,140,0,.16)}
 .storage-dot.bad{background:#d90f23;box-shadow:0 0 0 3px rgba(217,15,35,.16)}
-.storage-pop{width:min(360px,calc(100vw - 24px));display:flex;flex-direction:column;gap:10px}
+.storage-pop{width:min(360px,calc(100vw - 24px));max-height:var(--radix-popover-content-available-height);overflow-y:auto;display:flex;flex-direction:column;gap:10px}
 .storage-lead{margin:0;font-weight:700;font-size:13.5px}
 .storage-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:4px 8px;font-size:13px}
 .storage-row small{grid-column:2 / -1;color:var(--text-muted)}

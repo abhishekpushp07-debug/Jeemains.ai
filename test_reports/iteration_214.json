@@ -1,0 +1,40 @@
+{
+  "summary": "Phase 1 Super Admin frontend re-audit, run only against the isolated bridge (preview frontend, /api routed to 127.0.0.1:8772, DB tejas_isolated_book170_20254863). No preview DB, no preview owner login, no direct preview /api calls. Main walk ui_phase1_iso222.py: 95/98. Recheck ui_phase1_iso222_recheck.py: 16/16. The 3 fails in the main walk were mistakes in my test, not app bugs. Two tap-size readings were taken while the popover/dialog was still in its zoom-in-95 open animation (44*0.95 gives about 42px); after 1.2 s every target measured 44px. The PIN-dialog check used the wrong selector (it picked the '-open' button testid). Everything requested works: Students list, Block/Unblock with confirm/cancel/toasts, search, PIN reset dialog, machine panel (dot, rows, values, retry POST action=retry, busy disabled + spinner + dimmed, check-now reload), re-read progress on the upload row, mock rows, master chip and fix note, Live switch and menu Live/Schedule disabled, no Fix/Edit/Try on re-reading rows, Hinglish copy, 390px no overflow, 44px targets, noindex on /super-admin, /login, /owner-login and /signup but not on /, titles, robots.txt, and the reviewer view.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/admin/books/qa-failed-book/control (and qa-stuck-book) action=retry", "issue": "Returned 500 on the bridge: KeyError 'filename' in book_store.book_view (book_store.py:163), called from book_imports.control (line 295). The retry was saved and sent to the worker first; only the response serialization failed. Cause: the fake fixture books have no payload.filename, so real books probably won't hit this. book_view could still use p.get('filename') to be safe. The UI then showed the generic English error toast."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Machine panel popover on mobile 390x844", "issues": ["Popover is about 701px tall and opens at y=256, so its bottom (2nd 'Dobara chalao' and 'Kul save hui file') is below the fold and behind the fixed bottom nav. The page can scroll to reveal it, so it is usable. Suggest max-height: calc(var(--radix-popover-content-available-height)) with overflow-y:auto on .storage-pop."]},
+      {"screen": "Leftover English sentences (Roman Hinglish audit)", "issues": [
+        "Chapter-wise type page Uploads rows: '2 chapters read. Open Chapters to rename them or change where they start.'",
+        "Library page help block is fully English: 'How the Library works', 'Like a recycle bin: nothing leaves unless you press Delete', 'Students cannot see or start anything in here.', 'Every student keeps their old score and result in their history.', 'Restore puts a test back exactly where it was...', 'An All India paper goes back on its day...', 'Adding new tests', 'JEE Main chapter-wise PYQ', 'Upload PDF in Chapter-wise Tes...'",
+        "Machine panel failed-book line shows the server message 'Processing interrupted. Retry resumes the saved pages without uploading again.'",
+        "Storage popover: 'Supabase is not set up (project URL or secret key missing).'",
+        "Generic error toast 'Something went wrong on our side. Saved answers are unchanged; please try again.' (English, and 'Saved answers' does not fit an admin retry)"
+      ]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/ui_phase1_iso222.py", "/app/backend/tests/ui_phase1_iso222_recheck.py"],
+  "action_items": [
+    "Translate the leftover English strings listed in design_issues into Roman Hinglish (type-page upload rows, Library help block, server book messages shown in the machine panel, Supabase error line, generic 500 toast).",
+    "Optional: give .storage-pop a max-height (radix available height) and overflow-y:auto so the machine panel fits on a 390x844 phone.",
+    "Optional hardening: book_store.book_view should use p.get('filename','') so control/retry never returns 500 for books missing payload fields."
+  ],
+  "critical_code_review_comments": [
+    "MockList: 'Sab chuno' (select all) also selects re-reading mocks, and bulk Live/Schedule stays enabled for them. The server refuses them (they show as skipped), but the UI could filter them out of the pickable list.",
+    "MockRow: the rename pencil still shows on kind=set rows that are re-reading (book mocks are not affected). Low risk.",
+    "MachinePanel retry: the busy state is per book and the panel reloads in finally. Good. Error toasts show raw server English."
+  ],
+  "updated_files": ["/app/backend/tests/ui_phase1_iso222.py", "/app/backend/tests/ui_phase1_iso222_recheck.py"],
+  "success_rate": {"backend": "skipped (frontend-only request)", "frontend": "100% of features (111/114 checks; the 3 fails were test-timing/selector mistakes, re-verified as passing)"},
+  "seed_data_creation": "None. In the bridge DB I blocked and then unblocked +919000000001 (it ends unblocked, chip gone as verified in the UI). I clicked retry on qa-failed-book and qa-stuck-book; qa-stuck-book then went to failed (machine panel now shows stuck 0 / failed 2). Both are fixture books, as the brief expected.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run python tests/ui_phase1_iso222.py then tests/ui_phase1_iso222_recheck.py from /app/backend while the bridge is up (bridge.json at /tmp/uibridge210). Screenshots are in /app/.screenshots/ui222 (students_desk/mob, machine_desk/mob, machine_mob_busy, chapters_desk/mob, home, library, team, upload_dialog, schedule_dialog, reviewer_home). Wait about 1 s after opening a popover or dialog before measuring sizes (open animation). Fixture state changed: qa-stuck-book is now in the failed list, so the stuck count is 0 and the failed count is 2 (the first walk's checks for stuck=1 / failed=1 will fail on a rerun)."
+}

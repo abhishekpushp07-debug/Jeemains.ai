@@ -1,3 +1,8 @@
+## 2026-11-23 — Super Admin Phase 1 finished: Block/Unblock, machine panel, re-read progress, Hinglish, 44 px / 390 px, noindex, 409 lock (preview only)
+- Screens: AdminStudents (Band karo / Chalu karo), MachinePanel in StorageBadge, MockList/MasterType/MasterHome/FixList re-read lines, Hinglish copy, master.css touch + mobile rules, useNoIndex in AdminWorkspace + Auth, robots.txt.
+- Server: master.mock_status refuses Live/Schedule while re-reading; book_worker.step 409 -> job waits (jobs.BUSY_WAITS=90); Hinglish upload messages; book_view filename guard; Supabase not-set message Hinglish.
+- Tests: tests/phase1_iso221.py 17/17; stale 50-day series expectations fixed in master_iso181, structure_iso173, library_aits_iso180, fresh_start_iso183; forgot_pin_iso184 updated; testing agent iteration_214.
+
 ## 2026-11-21 — PDF Engine 2.0 Phase 1 recovered after the rollback + options always stacked (preview only)
 - Recovered exact lost code: tejas/book_cutter.py (printed boxes first, a/A separation, cut_boxes checks), book_cuts.py (frames), book_imports.cut_view (frames), book_pdf_worker (off-page pictures), book_reader (READER_VERSION 5: top-margin "Question N", chapter called Solutions, bookmark key tables), chapter_reader (bare flag); CutTool.js + cut-tool.css (full-page fix tool). Sources listed in memory/RECOVERY_2026-11-21.md; copies in memory/recovered/.
 - QuestionPieces PieceOptions always `is-stack` / data-layout="stack"; App.css .answer-options one column; .piece-stem scroll-margin-top under sticky tabs.

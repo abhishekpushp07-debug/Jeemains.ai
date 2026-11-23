@@ -59,7 +59,7 @@ function MainAction({m}){
 function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
  if(m.kind==='import')return <li className="admin-test-row master-mock-row" data-testid={'mock-row-'+m.id}><span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><div className="admin-row-main"><strong>{m.title}</strong><small>{m.count} sawaal · Purane paper ka upload</small></div><span className="admin-chip tone-hidden"><i aria-hidden="true"/>Draft</span><div className="admin-test-actions"><Button asChild size="sm" variant="outline"><Link to={'/studio/imports/'+m.id} data-testid={'mock-open-import-'+m.id}>Kholo</Link></Button></div></li>;
  return <li className="admin-test-row master-mock-row" data-testid={'mock-row-'+m.id}>
-  <label className="master-check-hit"><input type="checkbox" className="admin-row-check" checked={checked} onChange={e=>onCheck(m,e.target.checked)} aria-label={'Chuno: '+m.title} data-testid={'mock-select-'+m.id}/></label>
+  <label className="master-check-hit"><input type="checkbox" className="admin-row-check" checked={checked} disabled={!!m.rereading} onChange={e=>onCheck(m,e.target.checked)} aria-label={'Chuno: '+m.title} data-testid={'mock-select-'+m.id}/></label>
   <span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
   <div className="admin-row-main"><strong data-testid={'mock-title-'+m.id}>{m.locked&&<Lock size={13} className="master-lock" aria-label="Locked"/>}{m.title}</strong><small>{facts(m)}</small>
    {m.rereading&&<small className="master-reread" data-testid={'mock-rereading-'+m.id}><Loader2 size={13} className="spin" aria-hidden="true"/>dobara padhi ja rahi hai · {m.rereading.read_pages}/{m.rereading.pages} page</small>}
@@ -79,7 +79,7 @@ export function MockList({items,onChanged,onReplace}){
   setPicked(new Map());onChanged();
  }catch(e){toast.error(e.message);}finally{setBusy(false);}}
  function pick(to,list){if(to==='scheduled')setSchedule(list);else if(to==='library')setLibrary(list);else run(to,list);}
- const pickable=items.filter(m=>m.kind!=='import');
+ const pickable=items.filter(m=>m.kind!=='import'&&!m.rereading);
  const chosen=[...picked.values()];
  const replaceable=chosen.filter(m=>m.kind==='set'&&!m.locked);
  if(!items.length)return <div className="admin-empty" data-testid="mock-list-empty"><p>Yahan abhi koi mock nahi hai. Pehla mock banane ke liye Upload PDF ya Write dabaiye.</p></div>;

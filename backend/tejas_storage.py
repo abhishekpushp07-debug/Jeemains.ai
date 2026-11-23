@@ -304,7 +304,7 @@ def probe():
             if supabase_on():
                 _strike(exc, handed=False)
     else:
-        out['supabase'] = {'ok': False, 'configured': False, 'error': 'Supabase is not set up (project URL or secret key missing).'}
+        out['supabase'] = {'ok': False, 'configured': False, 'error': 'Supabase set nahi hai (project URL ya secret key nahi mili).'}
     t = time.time()
     _quick.on = True
     try:

@@ -4,10 +4,10 @@ import {ChevronDown,LifeBuoy,ShieldCheck,Upload} from 'lucide-react';
 
 const when=t=>t?new Date(t*1000).toLocaleDateString('en-IN',{dateStyle:'medium'}):'';
 const NEXT=[
- ['JEE Main chapter-wise PYQ','/super-admin/exam/jee-main/jee-main:chapters','Upload PDF in Chapter-wise Tests. Each chapter becomes its own test by itself.'],
- ['JEE Main All India Test Series','/super-admin/exam/jee-main/jee-main:aits','Your 50 dates (9 Dec – 27 Jan) are kept. Upload the papers, then press Fill days in order.'],
- ['BITSAT chapter-wise PYQ','/super-admin/exam/bitsat/bitsat:chapters','Same as JEE Main: one PDF, one test per chapter.'],
- ['BITSAT All India Test Series','/super-admin/exam/bitsat','Open BITSAT, add the type All India Test Series, choose its dates, then upload.'],
+ ['JEE Main chapter-wise PYQ','/super-admin/exam/jee-main/jee-main:chapters','Chapter-wise Tests mein Upload PDF kijiye. Har chapter apne aap apna alag test ban jata hai.'],
+ ['JEE Main All India Test Series','/super-admin/exam/jee-main/jee-main:aits','Aapki 50 dates (9 Dec – 27 Jan) rakhi gayi hain. Paper upload kijiye, phir Din order se bharo dabaiye.'],
+ ['BITSAT chapter-wise PYQ','/super-admin/exam/bitsat/bitsat:chapters','JEE Main jaisa hi: ek PDF, har chapter ka ek test.'],
+ ['BITSAT All India Test Series','/super-admin/exam/bitsat','BITSAT kholiye, All India Test Series type jodiye, uski dates chuniye, phir upload kijiye.'],
 ];
 
 // Plain rules of the Library and, after the fresh start, what to upload next.
@@ -17,17 +17,17 @@ export function LibraryGuide({fresh}){
  const c=fresh?.counts||{};
  return <section className="library-guide" data-testid="library-guide-panel">
   <button type="button" className="library-guide-head" onClick={toggle} aria-expanded={open} data-testid="library-guide-toggle">
-   <LifeBuoy size={18} aria-hidden="true"/><strong>How the Library works{fresh?' · what to do next':''}</strong><ChevronDown size={18} className={open?'is-open':''} aria-hidden="true"/>
+   <LifeBuoy size={18} aria-hidden="true"/><strong>Library kaise kaam karti hai{fresh?' · aage kya karna hai':''}</strong><ChevronDown size={18} className={open?'is-open':''} aria-hidden="true"/>
   </button>
   {open&&<div className="library-guide-grid">
-   <div className="library-guide-card"><h3><ShieldCheck size={16}/>Like a recycle bin: nothing leaves unless you press Delete</h3><ul>
-    <li><strong>Students cannot see or start</strong> anything in here.</li>
-    <li><strong>Every student keeps their old score</strong> and result in their history.</li>
-    <li><strong>Restore</strong> puts a test back exactly where it was: a Live test comes back Live, a Draft comes back as a Draft.</li>
-    <li>An All India paper goes back on its day if the day is still free; otherwise it comes back without a day.</li>
+   <div className="library-guide-card"><h3><ShieldCheck size={16}/>Recycle bin jaisa: jab tak aap Delete na dabayein, kuch nahi jata</h3><ul>
+    <li><strong>Students yahan ka kuch bhi</strong> na dekh sakte hain, na shuru kar sakte hain.</li>
+    <li><strong>Har student ka purana score</strong> aur result uski history mein rehta hai.</li>
+    <li><strong>Restore</strong> test ko bilkul wahin wapas rakhta hai jahan woh tha: Live test Live wapas aata hai, Draft, Draft ki tarah.</li>
+    <li>All India paper apne din par wapas jata hai agar woh din abhi khali hai; warna bina din ke wapas aata hai.</li>
    </ul></div>
-   <div className="library-guide-card" data-testid="library-next-steps"><h3><Upload size={16}/>{fresh?`Fresh start done ${when(fresh.finished_at)}`:'Adding new tests'}</h3>
-    {fresh&&<p data-testid="library-fresh-summary">{(c.tests||0)+((c.series||{}).papers||0)} tests moved here. Students now see only the {c.kept||0} JEE Main PYQ papers. Rapid Fire was not touched.</p>}
+   <div className="library-guide-card" data-testid="library-next-steps"><h3><Upload size={16}/>{fresh?`Fresh start ho gaya ${when(fresh.finished_at)}`:'Naye tests jodna'}</h3>
+    {fresh&&<p data-testid="library-fresh-summary">{(c.tests||0)+((c.series||{}).papers||0)} test yahan aaye. Students ko ab sirf {c.kept||0} JEE Main PYQ paper dikhte hain. Rapid Fire ko chhua nahi gaya.</p>}
     <ol>{NEXT.map(([t,to,h],i)=><li key={to}><Link to={to} data-testid={'library-next-'+i}>{t}</Link><small>{h}</small></li>)}</ol>
    </div>
   </div>}

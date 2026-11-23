@@ -7,6 +7,8 @@ const GB=1024*1024*1024;
 const gb=b=>`${(b/GB).toFixed(1)} GB`;
 const KIND={book_step:'PDF padhna',ai_solution:'AI solution',grade:'grading',regrade:'regrade',report:'report',extract:'extract',smart_prepare:'import',smart_page:'import',cohort:'rank',class_stats:'class ginti'};
 export const lowDisk=d=>!!d&&d.disk.total>0&&d.disk.free<d.disk.total*0.05;
+const SAYS=[[/^Processing interrupted/i,'Kaam beech mein ruk gaya. Dobara chalao dabane par save hue page se aage chalega; dobara upload nahi karna.'],[/^Book processing lease expired|^This book changed/i,'Ek aur kaam isi PDF par chal raha tha. Dobara chalao dabaiye; save hua kaam rakha gaya hai.']];
+const said=t=>(SAYS.find(([re])=>re.test(t||''))||[])[1]||t;
 
 // Asks the server once a minute while the tab is visible, so the top bar can light up when something needs the owner.
 export function useMachineStatus(){
@@ -22,7 +24,7 @@ function Line({ok,label,value,testId}){
 
 function BookLine({b,stuck,busy,onRetry}){
  return <li className="machine-book" data-testid={(stuck?'machine-stuck-':'machine-failed-')+b.id}>
-  <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>{stuck?`${b.read_pages} / ${b.pages} page · ${b.minutes} min se ruki hai`:(b.message||'Kaam beech mein ruk gaya.')}</small></div>
+  <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>{stuck?`${b.read_pages} / ${b.pages} page · ${b.minutes} min se ruki hai`:(said(b.message)||'Kaam beech mein ruk gaya.')}</small></div>
   <button type="button" className="machine-retry" disabled={busy} onClick={()=>onRetry(b)} data-testid={'machine-retry-'+b.id}>{busy?<Loader2 size={14} className="spin" aria-hidden="true"/>:<RotateCw size={14} aria-hidden="true"/>}Dobara chalao</button>
  </li>;
 }
