@@ -6,6 +6,7 @@ import { Empty, Icon, Press, T } from "@/src/components/ui";
 import { PastelSurface, Pill } from "@/src/components/design";
 import { Shine } from "@/src/analysis/Shine";
 import { chipEdges, colors, pastel, pastelEdges, SeriesTone, space } from "@/src/theme";
+import { DAY_LOOK_ORDER, DAY_LOOKS, DayLook, dayLook } from "./dayLook";
 import { istDate } from "@/src/navigation";
 import { countdown, dayAction, DayInfo, dayNote, Series, seriesDays } from "@/src/series";
 
@@ -55,10 +56,8 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
 }
 
 const CHIP = 52, GAP = 8;
-// A chip's own colours, drawn once: blood red for a day still to come, its status colours once the day is today, done or missed.
-const chipFace = (from: string, to: string) => <LinearGradient pointerEvents="none" colors={[from, to]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />;
-const BLOOD = chipFace(colors.custom_chipBlood, colors.custom_chipBloodDeep);
-const CHIP_FACE = Object.fromEntries((Object.keys(pastel) as SeriesTone[]).map(t => [t, chipFace(pastel[t].from, pastel[t].to)])) as Record<SeriesTone, React.ReactElement>;
+// A chip's own colours, drawn once: blood red for a day still to come, parrot green for a day that is over, today's own colours for today.
+const CHIP_FACE = Object.fromEntries(DAY_LOOK_ORDER.map(k => [k, <LinearGradient key={k} pointerEvents="none" colors={[DAY_LOOKS[k].from, DAY_LOOKS[k].to]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />])) as Record<DayLook, React.ReactElement>;
 const SEEN = { itemVisiblePercentThreshold: 10 };
 /** One chip per series day; opens on today. */
 export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (day: number) => void }) {
@@ -78,15 +77,14 @@ export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; select
     onScrollToIndexFailed={() => {}} style={{ marginHorizontal: -space.lg, flexGrow: 0 }} contentContainerStyle={{ paddingHorizontal: space.lg }}
     initialNumToRender={12} windowSize={5} extraData={seen} onViewableItemsChanged={onSeen} viewabilityConfig={SEEN}
     renderItem={({ item: d, index: i }) => {
-      const on = d.day === selected, p = pastel[d.tone], red = d.tone === "upcoming";
+      const on = d.day === selected, kind = dayLook(d.tone), look = DAY_LOOKS[kind];
       return <Press testID={"series-chip-" + d.day} onPress={() => onSelect(d.day)} accessibilityState={{ selected: on }} accessibilityLabel={`Day ${d.day}, ${istDate(d.date)}, ${d.label}`} style={styles.chipWrap}>
         <View style={styles.chipBox}>
           {/* Gloss, a corner-to-corner glint and a running edge; the glint reaches each chip a little after the one before it. */}
-          <Shine radius={16} ring={on ? 3 : 2} backdrop={red ? BLOOD : CHIP_FACE[d.tone]} edge={on ? chipEdges.chosen : red ? chipEdges.blood : pastelEdges[d.tone]}
-            gloss={red ? colors.custom_chipBloodGloss : colors.custom_seriesPastelGloss} glint={red ? colors.custom_chipBloodGlint : colors.custom_seriesPastelGlint}
+          <Shine radius={16} ring={on ? 3 : 2} backdrop={CHIP_FACE[kind]} edge={on ? chipEdges.chosen : look.edge} gloss={look.gloss} glint={look.glint}
             band={18} part={38} corner delay={(i % 8) * 140} rest={i < seen[0] || i > seen[1]} face={on ? styles.chipOn : styles.chip}>
-            <T w="heavy" size={8.5} color={red ? colors.custom_chipBloodSoft : p.ink} style={{ letterSpacing: 1.2 }}>{d.isToday ? "TODAY" : "DAY"}</T>
-            <T w="heavy" size={19} color={red ? colors.custom_chipBloodInk : colors.custom_pastelInk}>{d.day}</T>
+            <T w="heavy" size={8.5} color={look.soft} style={{ letterSpacing: 1.2 }}>{d.isToday ? "TODAY" : "DAY"}</T>
+            <T w="heavy" size={19} color={look.ink}>{d.day}</T>
           </Shine>
         </View>
         <View style={[styles.chipDot, on && { backgroundColor: colors.onSurface }]} />

@@ -1014,3 +1014,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Light on purpose: faces are drawn once (Shine `backdrop`, no colour change-over), 2 animations per chip, and only chips on screen animate (FlatList onViewableItemsChanged -> `rest`). Measured: 7 of 20 mounted chips animate, 23 animations on the whole page, 61 fps; after swiping, the 7 new chips animate and the old ones stop.
 - The 50-day map and its legend still show upcoming days in teal + sky blue (not asked).
 - Checked on the preview (web, 390 + 320): selection moves (aria-selected), day card follows, no page errors; tsc + eslint clean. NOT checked on a real phone build; testing agent not run.
+
+## Series page: 50-day map in blood red, and every past day parrot green in strip + map (23 Nov 2026)
+- Owner: upcoming days in the map blood red like the tiles; in both places a day that is over is parrot green whether or not the student attempted it.
+- New src/components/series/dayLook.ts: dayLook(tone) -> "over" (done + missed) | "today" | "upcoming", and DAY_LOOKS (face colours, inks, edge, gloss, glint, legend label). Used by DayStrip (DayCards.tsx) and DayMap.tsx. `tone` itself is untouched, so the big day cards, labels ("Completed" / "Missed") and accessibility labels still tell done from missed.
+- Tokens: custom_chipParrot #96EA3A -> custom_chipParrotDeep #46BE1B, black number (7.9 : 1 or more), chipEdges.parrot (sun yellow / emerald / lime).
+- DayMap: cells drawn with the look's colours; the old 35 % fade of far-off upcoming days was removed (faded blood red looked pink); legend is now Completed / Today / Upcoming (testIDs series-map-legend-*). Map cells have no animation (50 cells).
+- Checked on the preview (web, 390): real data = all 50 cells and chips blood red; with the series answer altered in the test browser only (today = day 7 / day 4, nothing sent or saved) = past cells and chips parrot green, today peach, later days blood red; chosen past day's card still says "MISSED". 23 animations, 61 fps, no page errors; tsc + eslint clean. NOT checked on a real phone build; testing agent not run.
