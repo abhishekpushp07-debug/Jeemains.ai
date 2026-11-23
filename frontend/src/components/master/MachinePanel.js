@@ -2,7 +2,7 @@ import React,{useCallback,useEffect,useState} from 'react';
 import {RotateCw,Loader2} from 'lucide-react';
 import {toast} from 'sonner';
 import {api,post} from '../../lib/api';
-import {RetryStorageButton} from './UploadProgress';
+import {RetryStorageButton,STORAGE_EVENT} from './UploadProgress';
 
 const GB=1024*1024*1024;
 const gb=b=>`${(b/GB).toFixed(1)} GB`;
@@ -15,7 +15,7 @@ const said=t=>(SAYS.find(([re])=>re.test(t||''))||[])[1]||t;
 export function useMachineStatus(){
  const [data,setData]=useState(null);
  const load=useCallback(()=>api('/admin/machine/status').then(setData).catch(()=>{}),[]);
- useEffect(()=>{load();const t=setInterval(()=>{if(document.visibilityState==='visible')load();},60000);return()=>clearInterval(t);},[load]);
+ useEffect(()=>{load();const t=setInterval(()=>{if(document.visibilityState==='visible')load();},60000);window.addEventListener(STORAGE_EVENT,load);return()=>{clearInterval(t);window.removeEventListener(STORAGE_EVENT,load);};},[load]);
  return {data,load};
 }
 

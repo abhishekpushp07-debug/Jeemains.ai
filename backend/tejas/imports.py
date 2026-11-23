@@ -141,7 +141,7 @@ async def process_import(id):
     async with SLOTS:
         token=uid()
         r=await imports.find_one_and_update({'id':id,'$or':[{'status':{'$in':['queued','failed']}},{'status':'organising','lease_until':{'$lt':now()}}]},
-            {'$set':{'status':'organising','lease_token':token,'lease_until':now()+900,'message':'Reading sources, pairing questions, and checking explicit answer keys…'}},return_document=ReturnDocument.AFTER)
+            {'$set':{'status':'organising','lease_token':token,'lease_until':now()+900,'message':'Reading sources, pairing questions, and checking explicit answer keys…'},'$unset':{'storage_wait':''}},return_document=ReturnDocument.AFTER)
         if not r: return
         fence={'id':id,'lease_token':token,'status':'organising'}
         try:
@@ -168,8 +168,9 @@ async def process_import(id):
                         for n,encoded in enumerate(assets.get(role,[])):
                             png=next(small)
                             fid=str(uuid.uuid5(uuid.UUID(q['id']),role+':'+str(n)))
-                            path=await run_in_threadpool(put_object,f'tejas/imports/{id}/renders/{token}/{fid}.png',png,'image/png')
-                            await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':id,'path':path,'kind':'rendered_png','sha256':hashlib.sha256(png).hexdigest(),'source_sha256':original['sha256'],'created_at':now(),'is_deleted':False}},upsert=True)
+                            if not await files.find_one({'id':fid},{'_id':1}):  # saved before a Supabase wait: not sent again
+                                path=await run_in_threadpool(put_object,f'tejas/imports/{id}/renders/{token}/{fid}.png',png,'image/png')
+                                await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':id,'path':path,'kind':'rendered_png','sha256':hashlib.sha256(png).hexdigest(),'source_sha256':original['sha256'],'created_at':now(),'is_deleted':False}},upsert=True)
                             refs[n]['file_id']=fid; refs[n]['prerendered']=True
                 for message in question_issues(q,result['exam']):
                     issues.append({'question':q['number'],'row':q.get('source_row'),'message':message})
@@ -184,10 +185,10 @@ async def process_import(id):
         except Exception as exc:
             from tejas_storage import StorageError, StorageWaiting
             if isinstance(exc,StorageWaiting):
-                # Supabase is away: the saved sources wait and this import runs again by itself in a minute.
+                # Supabase is away: the saved sources wait and this import runs again by itself (1, 2, 4, then every 5 min).
                 from .jobs import run_later
-                await imports.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:350]}})
-                run_later(process_import,id,seconds=60)
+                await imports.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:350],'storage_wait':now()},'$inc':{'storage_waits':1}})
+                run_later(process_import,id,seconds=min(300,60*2**min(r.get('storage_waits',0),3)))
                 return
             message=str(exc)[:350] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry with the same saved sources.'
             await imports.update_one(fence,{'$set':{'status':'failed','message':message}})

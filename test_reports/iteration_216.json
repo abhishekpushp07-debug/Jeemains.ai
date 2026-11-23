@@ -1,0 +1,40 @@
+{
+  "summary": "Iteration 224 Supabase-wait redesign. Backend iso suites all pass: storage_dual216 35/35, storage_wait224 24/24, storage_fail215 13/13, pictures_iso220 66/66 (one flaky run with Mongo AutoReconnect, but only when run in parallel with the other suites; it passed when run on its own), phase1_iso221 17/17. New bridge API QA 10/10: health mode=waiting, machine storage_waiting list with waiting_minutes, storage_waiting_jobs, waiting book not in stuck, retry is owner-only (reviewer 403, anon 401/403), owner retry returns mode+woke. Bridge log confirms the job backoff grows 30s, 60s, 120s, 240s. UI QA (desktop 1920 + mobile 390x844) on the bridge. Supabase-down checks 40/41 (1 was my own test bug, now fixed): % bar text, wait note, row retry while down shows the still-down toast and the note stays, badge label 'Storage: Supabase ka intezaar', popover storage-retry-now, machine-storage-waiting line, machine-waiting-<id> item, machine-storage-retry button. No 'backup' wording. Upload dialog notice, Select PDF opens the file chooser (regression from iter 215 still OK), and upload-progress shows 'N% · ...'. A new PDF uploaded while down becomes its own waiting row. No overflow on mobile and no 5xx. Recovery: flag removed, then 'Abhi phir try karo' showed the toast 'Supabase wapas aa gaya. N ruka hua kaam phir chal pada'. The wait notes cleared and both waiting PDFs became mocks within about 5s. Writes were Supabase 3 / Emergent 0. Machine shows no waiting, stuck or failed books. The flag file was re-created afterwards. One real UI issue: the storage badge goes stale.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "tejas_storage.put_object", "issue": "Any exception from sb_put becomes StorageWaiting, including permanent ones: 400 bucket missing, 401/403 bad key, 413 file larger than the Supabase limit. Such a file waits forever (backoff capped at 300s, attempts never used up) and is never shown as failed. Suggest: treat non-transient 4xx as StorageError (fail with a clear message), or raise an owner alert after N hours of waiting."},
+      {"endpoint": "tejas/imports.py process_import + tejas/chapter_books.py process_book (code review only)", "issue": "The re-run after a wait depends only on the in-process run_later(60s). After a server restart the record stays 'queued' with no sweeper until the owner clicks retry. wake_storage() / POST /api/admin/storage/retry does not wake these. They also have no backoff (every 60s forever). In process_import the render paths use a fresh token=uid() on every run, so each re-run after a wait can leave orphaned render PNGs in Supabase."},
+      {"endpoint": "GET /api/admin/machine/status", "issue": "Waiting book entry has message 'Transfer complete. Validating the original PDF.' even though the original has not reached Supabase. This is misleading next to waiting_minutes."},
+      {"endpoint": "GET /api/admin/storage/health", "issue": "After Supabase goes down again, mode stays 'supabase' until the next check or a failed write, which can take up to about 1 min because of the cache. This is by design, but it adds to the badge staleness below."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "StorageBadge (useStorageHealth)", "issue": "The badge only refreshes every 60s. The row button type-upload-wait-retry-<id> and machine-storage-retry call onChanged/onReload but do not reload the badge. Seen in testing: after a successful row retry, the badge still said 'Storage: Supabase ka intezaar' about 5s after recovery. In the other direction, it said 'Storage: Supabase' while a just-uploaded PDF row already showed the Supabase wait note. Fix: share the health state through a context or window event, and reload it with fresh=true after retryStorage() and when an upload row has storage_wait.", "selector": "[data-testid=storage-badge-label]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/storage_wait_api_qa224.py", "/app/backend/tests/ui_storage_wait_qa224.py", "/app/backend/tests/storage_wait224.py", "/app/backend/tests/storage_dual216.py"],
+  "action_items": [
+    "StorageBadge: refresh health (fresh=true) after any RetryStorageButton success and when upload rows show storage_wait, so the badge does not lag up to 60s behind the rows.",
+    "put_object: do not wait forever on permanent Supabase errors (401/403/404 bucket/413). Surface them as a failure or an owner alert.",
+    "imports/chapter_books: make the StorageWaiting re-run survive restarts (cron or sweeper picks up queued records with a storage wait message), and include them in wake_storage().",
+    "machine status: show a waiting-specific message for storage_waiting books."
+  ],
+  "critical_code_review_comments": [
+    "put_object's broad `except Exception` around sb_put turns permanent config errors into endless waiting.",
+    "imports/chapter_books wait path is in-memory only (asyncio task). Restarts lose the re-run, and there is no backoff.",
+    "process_import uses a new render token on each run, which leaves orphan render files after storage waits.",
+    "jobs.run_job StorageWaiting branch looks correct: attempts preserved, backoff capped at STORAGE_WAIT_MAX, kick_later scheduled. wake_storage resets next_run_at and drains the active lanes.",
+    "server.py StorageWaiting handler is correct: admin/studio paths get 503 storage_waiting with Retry-After 30; students get vault_unavailable."
+  ],
+  "updated_files": ["/app/backend/tests/storage_wait_api_qa224.py (new)", "/app/backend/tests/ui_storage_wait_qa224.py (new)"],
+  "success_rate": {"backend": "100% (165/165 iso + 10/10 bridge API)", "frontend": "97% (47/48 UI checks; the 1 failure is the badge staleness)"},
+  "seed_data_creation": "None in the preview DB. Only the disposable bridge DB was used: uploaded /tmp/uibridge224/qa_variant.pdf and qa_variant2.pdf (one_mock.pdf plus trailing comment, to avoid sha dedupe). Both became mocks after recovery.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The bridge is on 127.0.0.1:8774 (log /tmp/bridge224.log). The seeded book 50a88846... is now DONE (a mock was made), so it no longer waits. To re-test the waiting UI, upload a byte-variant PDF while /tmp/uibridge224/supabase_down exists. one_mock.pdf itself is deduped ('pehle se yahan hai'). Run: BRIDGE_OUT=/tmp/uibridge224 BRIDGE_PORT=8774 python tests/ui_storage_wait_qa224.py [down|recover]. The recover phase expects a waiting row with the seeded id. API wrapper responses are {data,error,meta}. The flag file was re-created at the end. Run the iso suites one after another (pictures_iso220 flakes with Mongo AutoReconnect when run in parallel).",
+  "rca of the issue": "Badge staleness: useStorageHealth is local state inside StorageBadge with a 60s interval. RetryStorageButton in UploadProgress/MachinePanel only calls onChanged/onReload of its own parent; only the popover's own button calls the badge load(). The server health is also cached (up to about 1 min) and only flips on a failed write or check."
+}

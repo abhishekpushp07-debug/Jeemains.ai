@@ -32,6 +32,18 @@ class StorageWaiting(StorageError):
     """Supabase cannot take or give a file right now. Nothing went to Emergent: the work waits and carries on by itself."""
 
 
+class SupabaseRefused(StorageError):
+    """Supabase answers but will never take this file (too big for its limit): waiting would not help, so the work stops with this reason."""
+
+
+TOO_BIG = 'Yeh file Supabase ki size limit se badi hai, isliye save nahi hui (Emergent mein bhi nahi gayi). Supabase dashboard mein bucket ki file size limit badhaiye ya chhoti PDF chuniye.'
+
+
+def _refused(r):
+    if r.status_code == 413 or (r.status_code == 400 and 'maximum allowed size' in r.text.lower()):
+        raise SupabaseRefused(TOO_BIG)
+
+
 WAIT_TEXT = 'Supabase abhi file nahi le raha. Kaam ruka hai, file surakshit hai; Supabase lautte hi apne aap aage chalega.'
 RESUME_SECONDS = 20 * 3600   # Supabase keeps a half-sent big file for 24 hours
 
@@ -212,6 +224,7 @@ def _tus(bucket, path, data, content_type, resume=None, on_progress=None):
     else:
         meta = ','.join(f"{k} {base64.b64encode(v.encode()).decode()}" for k, v in (('bucketName', bucket), ('objectName', path), ('contentType', content_type), ('cacheControl', '3600')))
         r = _call('POST', _tus_endpoint(), {**tus, 'Upload-Length': str(len(data)), 'Upload-Metadata': meta, 'x-upsert': 'true'})
+        _refused(r)
         if r.status_code != 201 or not r.headers.get('Location'):
             raise StorageError(f'Supabase big-file upload could not start ({r.status_code}): {r.text[:160]}')
         where = r.headers['Location']
@@ -244,6 +257,7 @@ def sb_put(path, data, content_type, resume=None, on_progress=None):
         _tus(bucket, path, data, content_type, resume, on_progress)
     else:
         r = _call('POST', _object_url(bucket, path), {'Content-Type': content_type, 'x-upsert': 'true', 'Cache-Control': '3600'}, content=data)
+        _refused(r)
         if r.status_code not in (200, 201):
             raise StorageError(f'Supabase did not save the file ({r.status_code}): {r.text[:160]}')
     return SB + bucket + '/' + path
@@ -301,6 +315,8 @@ def put_object(path, data, content_type="application/pdf", resume=None, on_progr
                 raise StorageWaiting(f"{WAIT_TEXT} Wajah: {STATE['last_error'] or 'Supabase thodi der aaram par hai.'}")
             try:
                 ref = sb_put(path, data, content_type, resume, on_progress)
+            except SupabaseRefused:
+                raise  # Supabase is fine, this one file is not allowed there: no rest, no wait
             except Exception as exc:  # noqa: BLE001  any Supabase trouble: the file waits for Supabase
                 _strike(exc)
                 raise StorageWaiting(f'{WAIT_TEXT} Wajah: {str(exc)[:200]}') from None

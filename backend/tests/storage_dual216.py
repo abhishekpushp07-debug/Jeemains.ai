@@ -25,7 +25,7 @@ def check(name, ok, detail=''):
 class FakeSupabase:
     def __init__(self):
         self.objects, self.buckets, self.uploads, self.calls = {}, {}, {}, []
-        self.down = False; self.fail_next = 0; self.patch_fail = 0; self.need_bearer = False; self.cut_after = None; self.lock = threading.Lock()
+        self.down = False; self.fail_next = 0; self.patch_fail = 0; self.need_bearer = False; self.cut_after = None; self.too_big = False; self.lock = threading.Lock()
 
     def __call__(self, req):
         with self.lock:
@@ -47,6 +47,8 @@ class FakeSupabase:
             key = p[len('/storage/v1/object/authenticated/'):]
             return httpx.Response(200, content=self.objects[key]) if key in self.objects else httpx.Response(400, json={'error': 'not_found'})
         if p.startswith('/storage/v1/object/') and req.method == 'POST':
+            if self.too_big:
+                return httpx.Response(413, json={'statusCode': '413', 'error': 'Payload too large', 'message': 'The object exceeded the maximum allowed size'})
             if self.fail_next:
                 self.fail_next -= 1; return httpx.Response(500, text='boom')
             key = p[len('/storage/v1/object/'):]
@@ -239,6 +241,14 @@ def main():
         S.put_object(key, big, 'application/pdf', old, None)
         check('a saved place older than 20 h is not trusted: a fresh upload starts', sum(1 for m, _, p in sb.calls if m == 'POST' and p.endswith('/upload/resumable')) == n0 + 1)
         S.STATE.update(down_until=0.0, strikes=0)
+        # 14. A file Supabase will never take (over its size limit): stops with a clear reason, no endless wait, Supabase not rested, no Emergent.
+        reset(sb, em); sb.too_big = True; e0 = em.calls
+        try:
+            S.put_object('jeelive/books/b8/crops/big.png', png, 'image/png'); kind = None
+        except S.StorageError as exc:
+            kind = type(exc).__name__
+        check('over Supabase size limit: SupabaseRefused (not a wait), Supabase not rested, Emergent untouched', kind == 'SupabaseRefused' and S.supabase_on() and S.STATE['failovers'] == 0 and em.calls == e0, (kind, S.STATE['failovers']))
+        sb.too_big = False
         with mock.patch.dict(os.environ, {'SUPABASE_SECRET_KEY': ''}):
             check('Supabase not set up at all: Emergent still takes new files (unchanged)', not S.configured() and not S.put_object('jeelive/x/z.png', png, 'image/png').startswith('sb://'))
     print(f'TOTAL {len(RESULTS)} PASS {sum(RESULTS)} FAIL {len(RESULTS) - sum(RESULTS)}')

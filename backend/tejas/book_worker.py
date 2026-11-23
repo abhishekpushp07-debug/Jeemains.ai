@@ -8,7 +8,7 @@ from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
 from .chapter_reader import plan_start, bookmark_plan
 from anyio import from_thread
-from tejas_storage import put_object, StorageError, StorageWaiting
+from tejas_storage import put_object, StorageError, StorageWaiting, SupabaseRefused
 
 PAGES_PER_STEP=100
 MOCKS_PER_STEP=5
@@ -209,10 +209,11 @@ async def step(job):
         if isinstance(exc,HTTPException) and exc.status_code==409:raise  # another batch took this PDF: the job waits its turn, the book is not marked failed
         if isinstance(exc,StorageWaiting):
             # Supabase is away: the book keeps its state and saved work, shows that it waits, and the job runs again by itself.
-            await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':(waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300]}}})
+            await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':(waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300]},
+                'payload.message':'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.'}})
             raise
         import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
-        book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'
+        book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException,SupabaseRefused)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'
         try:await save_book(book,token)
         except HTTPException:pass
         more=False

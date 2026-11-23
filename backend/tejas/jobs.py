@@ -266,6 +266,18 @@ def kick_later(kind, seconds):
     run_later(drain_lane, kind, seconds=seconds)
 
 
+async def wake_uploads():
+    """Studio imports and chapter books that waited for Supabase run again now (also after a server restart)."""
+    from .imports import imports, process_import
+    from .chapter_books import books, process_book
+    n = 0
+    for col, fn in ((imports, process_import), (books, process_book)):
+        for r in await col.find({'status': 'queued', 'storage_wait': {'$exists': True}}, {'id': 1}).limit(20).to_list(20):
+            run_later(fn, r['id'], seconds=0)
+            n += 1
+    return n
+
+
 async def wake_storage():
     """Supabase answers again: every job waiting for it runs now instead of at its next try."""
     waiting = {'status': 'queued', 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}}
@@ -273,7 +285,7 @@ async def wake_storage():
     woke = (await jobs.update_many(waiting, {'$set': {'next_run_at': 0}})).modified_count
     for kind in kinds:
         kick_later(kind, 0)
-    return woke
+    return woke + await wake_uploads()
 
 
 @router.get('/jobs/{id}')
@@ -384,6 +396,7 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
     await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
     from .book_worker import recover
     await recover()
+    await wake_uploads()
     selected = []
     for kind, capacity in LANE_LIMITS.items():
         if kind == 'ai_solution':

@@ -3,7 +3,7 @@ import {HardDrive,RefreshCw,Loader2,AlertTriangle} from 'lucide-react';
 import {Popover,PopoverTrigger,PopoverContent} from '../ui/popover';
 import {api} from '../../lib/api';
 import {useMachineStatus,MachinePanel,lowDisk} from './MachinePanel';
-import {RetryStorageButton} from './UploadProgress';
+import {RetryStorageButton,STORAGE_EVENT} from './UploadProgress';
 
 const LOOK={supabase:['ok','Storage: Supabase','Nayi files Supabase mein ja rahi hain.'],slow:['warn','Storage: Supabase (slow)','Supabase dheere jawab de raha hai; files phir bhi Supabase mein ja rahi hain.'],
  waiting:['bad','Storage: Supabase ka intezaar','Supabase abhi file nahi le raha. Naya kaam ruka hai aur surakshit hai; Emergent mein kuch nahi ja raha. Supabase lautte hi kaam wahin se apne aap aage chalega.'],
@@ -19,7 +19,7 @@ const ago=t=>{if(!t)return '';const s=Math.max(0,Math.round(Date.now()/1000-t));
 export function useStorageHealth(){
  const [data,setData]=useState(null),[busy,setBusy]=useState(false);
  const load=useCallback((fresh=false)=>{setBusy(true);return api('/admin/storage/health'+(fresh?'?fresh=true':'')).then(setData).catch(()=>setData(d=>d||{mode:'unknown'})).finally(()=>setBusy(false));},[]);
- useEffect(()=>{load();const t=setInterval(()=>{if(document.visibilityState==='visible')load();},60000);return()=>clearInterval(t);},[load]);
+ useEffect(()=>{load();const t=setInterval(()=>{if(document.visibilityState==='visible')load();},60000);const now=()=>load(true);window.addEventListener(STORAGE_EVENT,now);return()=>{clearInterval(t);window.removeEventListener(STORAGE_EVENT,now);};},[load]);
  return {data,busy,load};
 }
 

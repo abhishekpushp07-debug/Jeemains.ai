@@ -168,7 +168,7 @@ async def process_book(identity):
     async with SLOTS:
         token=uid()
         r=await books.find_one_and_update({'id':identity,'$or':[{'status':{'$in':['queued','failed']}},{'status':'organising','lease_until':{'$lt':now()}}]},
-            {'$set':{'status':'organising','lease_token':token,'lease_until':now()+600,'message':'Reading chapters, verifying two key extractions and preserving original notation…'}},return_document=ReturnDocument.AFTER)
+            {'$set':{'status':'organising','lease_token':token,'lease_until':now()+600,'message':'Reading chapters, verifying two key extractions and preserving original notation…'},'$unset':{'storage_wait':''}},return_document=ReturnDocument.AFTER)
         if not r:return
         fence={'id':identity,'status':'organising','lease_token':token}
         try:
@@ -214,10 +214,10 @@ async def process_book(identity):
                 'message':f'{len(result["chapters"])} chapter tests organised. Original PDF images preserve notation. '+('Original worked solutions supplied; no AI generation.' if result.get('solution_kind')=='supplied_worked' else 'Worked solutions are not supplied.')},'$inc':{'revision':1}})
         except Exception as exc:
             if isinstance(exc,StorageWaiting):
-                # Supabase is away: the saved PDF waits and this book runs again by itself in a minute.
+                # Supabase is away: the saved PDF waits and this book runs again by itself (1, 2, 4, then every 5 min).
                 from .jobs import run_later
-                await books.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:450]}})
-                run_later(process_book,identity,seconds=60)
+                await books.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:450],'storage_wait':now()},'$inc':{'storage_waits':1}})
+                run_later(process_book,identity,seconds=min(300,60*2**min(r.get('storage_waits',0),3)))
                 return
             message=str(exc)[:450] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry the saved source.'
             await books.update_one(fence,{'$set':{'status':'failed','message':message}})

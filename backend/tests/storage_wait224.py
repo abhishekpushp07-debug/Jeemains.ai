@@ -139,6 +139,22 @@ async def main():
         check('in the end: zero new Emergent files', emergent_keys() == before, emergent_keys() - before)
         j = J(await own.get(f'/api/admin/master/types/{sec}/mocks'))
         check('type list still opens after all this', 'uploads' in j and 'items' in j)
+        # 6. A Studio import whose saved source cannot be read: queued + waiting (not failed); a Supabase wake runs it again.
+        from tejas import imports as IMP
+        iid = '00000000-0000-4000-8000-0000000002a4'; src = cut_pdf('IMP')
+        sb.objects['tejas/imports/src.pdf'] = src
+        import hashlib
+        await DB.tejas_imports.insert_one({'id': iid, 'title': 'TEST_IMP', 'format': 'pdf', 'fingerprint': 'x', 'status': 'queued', 'created_at': time.time(), 'created_by': 'owner',
+                                           'questions': [], 'issues': [], 'sources': [{'id': 's1', 'kind': 'questions', 'name': 'q.pdf', 'sha256': hashlib.sha256(src).hexdigest(), 'size': len(src), 'path': 'sb://test-bucket/tejas/imports/src.pdf'}]})
+        sb.down = True; cancel_kicks(); S._source_cache = S.ByteCache(64 * 1024 * 1024)
+        await IMP.process_import(iid)
+        rec = await DB.tejas_imports.find_one({'id': iid})
+        check('import: Supabase away -> queued and waiting (not failed), one wait counted', rec['status'] == 'queued' and rec.get('storage_wait') and rec.get('storage_waits') == 1, (rec['status'], rec.get('message')))
+        check('import: a re-run is scheduled by itself', any(not t.done() for t in JOBS._later))
+        sb.down = False; cancel_kicks()
+        woke = await JOBS.wake_storage(); await kicks_done()
+        rec = await DB.tejas_imports.find_one({'id': iid})
+        check('import: Supabase back -> the wake runs it again (no longer waiting)', woke >= 1 and rec['status'] != 'queued' and 'storage_wait' not in rec, (woke, rec['status'], rec.get('message')))
     finally:
         cancel_kicks()
         for p in patches:

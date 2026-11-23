@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect,useState} from 'react';
 import {RotateCw,Loader2} from 'lucide-react';
 import {toast} from 'sonner';
 import {post} from '../../lib/api';
@@ -7,6 +7,9 @@ import {Button} from '../ui/button';
 const pct=(a,b)=>b>0?Math.min(100,Math.round(a*100/b)):0;
 const mb=n=>n<1048576?`${Math.max(0,Math.round(n/1024))} KB`:`${(n/1048576).toFixed(1)} MB`;
 const since=t=>Math.max(0,Math.round((Date.now()/1000-t)/60));
+// The storage badge and machine panel listen for this and check again at once.
+export const STORAGE_EVENT='jeelive-storage-changed';
+const tell=()=>window.dispatchEvent(new Event(STORAGE_EVENT));
 
 // "Abhi phir try karo": the server checks Supabase now; if it answers, every waiting job runs at once.
 export async function retryStorage(){
@@ -14,6 +17,7 @@ export async function retryStorage(){
   const r=await post('/admin/storage/retry');
   if(r.mode==='waiting')toast.error('Supabase abhi bhi jawab nahi de raha. Kaam surakshit hai; apne aap phir koshish hoti rahegi.');
   else toast.success(r.woke?`Supabase wapas aa gaya. ${r.woke} ruka hua kaam phir chal pada.`:'Supabase theek hai.');
+  tell();
   return r;
  }catch(e){toast.error(e.message);return null;}
 }
@@ -39,6 +43,8 @@ function Stage({b,readLine}){
 
 // Where an uploaded PDF stands: parts on the server, the original into Supabase, pages read, and any wait for Supabase.
 export function UploadProgress({b,readLine,onChanged}){
+ const waitSince=b.storage_wait?.since;
+ useEffect(()=>{if(waitSince)tell();},[waitSince]);
  return <>
   <Stage b={b} readLine={readLine}/>
   {b.storage_wait&&<div className="admin-note warn upload-wait" role="status" data-testid={'type-upload-wait-'+b.id}>
