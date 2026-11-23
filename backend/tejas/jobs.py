@@ -285,6 +285,8 @@ async def wake_storage():
     woke = (await jobs.update_many(waiting, {'$set': {'next_run_at': 0}})).modified_count
     for kind in kinds:
         kick_later(kind, 0)
+    from .storage_move import resume
+    await resume()
     return woke + await wake_uploads()
 
 
@@ -399,6 +401,8 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
     import tejas_storage
     if tejas_storage.supabase_on():
         await wake_uploads()
+        from .storage_move import resume
+        await resume()
     selected = []
     for kind, capacity in LANE_LIMITS.items():
         if kind == 'ai_solution':

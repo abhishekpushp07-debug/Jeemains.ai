@@ -4,6 +4,7 @@ import {Popover,PopoverTrigger,PopoverContent} from '../ui/popover';
 import {api} from '../../lib/api';
 import {useMachineStatus,MachinePanel,lowDisk} from './MachinePanel';
 import {RetryStorageButton,STORAGE_EVENT} from './UploadProgress';
+import {LegacyMove} from './LegacyMove';
 
 const LOOK={supabase:['ok','Storage: Supabase','Nayi files Supabase mein ja rahi hain.'],slow:['warn','Storage: Supabase (slow)','Supabase dheere jawab de raha hai; files phir bhi Supabase mein ja rahi hain.'],
  waiting:['bad','Storage: Supabase ka intezaar','Supabase abhi file nahi le raha. Naya kaam ruka hai aur surakshit hai; Emergent mein kuch nahi ja raha. Supabase lautte hi kaam wahin se apne aap aage chalega.'],
@@ -44,6 +45,7 @@ export function StorageBadge(){
   {data?.writes&&<p className="storage-meta" data-testid="storage-writes">Server shuru hone ke baad save hui files: Supabase {data.writes.supabase} · Emergent {data.writes.emergent}</p>}
   {data?.last_failover&&<p className="storage-meta" data-testid="storage-last-failover">Aakhri baar file ko Supabase ka intezaar karna pada: {ago(data.last_failover.at)}. Wajah: {data.last_failover.reason}</p>}
   <div className="storage-foot"><small>{data?.checked_at?'Jaancha: '+ago(data.checked_at):''}</small><button type="button" onClick={()=>{load(true);machine.load();}} disabled={busy} data-testid="storage-check-now">{busy?<Loader2 size={13} className="spin"/>:<RefreshCw size={13}/>}Abhi check karo</button></div>
+  {data?.supabase?.configured!==false&&<LegacyMove/>}
   <MachinePanel data={machine.data} onReload={machine.load}/>
  </PopoverContent></Popover>;
 }

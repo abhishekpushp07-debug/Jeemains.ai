@@ -117,7 +117,8 @@ async def answer(request, source, ref, webp):
 
 
 async def revisions(questions, pack_id=None):
-    """asset_revision per question: changes only when one of its pictures (question, piece or solution) is replaced."""
+    """asset_revision per question: changes only when one of its pictures (question, piece or solution) is replaced.
+    A file copied to another store keeps its revision (same hash, or the path it was first saved under)."""
     hit = _revisions.get(pack_id) if pack_id else None
     if hit is not None:
         _revisions.move_to_end(pack_id)
@@ -126,8 +127,8 @@ async def revisions(questions, pack_id=None):
     ids = list({r['file_id'] for q in questions for k in kinds for r in q.get(k, []) if r.get('file_id')})
     saved = {}
     if ids:
-        async for f in files.find({'id': {'$in': ids}}, {'_id': 0, 'id': 1, 'sha256': 1, 'path': 1}):
-            saved[f['id']] = f.get('sha256') or f.get('path', '')
+        async for f in files.find({'id': {'$in': ids}}, {'_id': 0, 'id': 1, 'sha256': 1, 'path': 1, 'moved_from': 1}):
+            saved[f['id']] = f.get('sha256') or f.get('moved_from') or f.get('path', '')
     out = {}
     for q in questions:
         identity = [RENDER, [[k, [[saved.get(r.get('file_id'), ''), r] for r in q.get(k, [])]] for k in kinds]]

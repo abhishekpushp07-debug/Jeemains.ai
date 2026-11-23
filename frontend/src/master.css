@@ -311,6 +311,12 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .machine-book-main strong{font-size:13px;overflow-wrap:anywhere}
 .machine-book-main small{font-size:12px;color:var(--text-muted);overflow-wrap:anywhere}
 .machine-book.is-waiting{border-color:#e7b453;background:#fff8e8}
+.legacy-move{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-alt)}
+.legacy-move strong{font-size:13px}
+.legacy-move small{font-size:12px;color:var(--text-muted);line-height:1.45;overflow-wrap:anywhere}
+.legacy-move-actions{display:flex;flex-wrap:wrap;gap:8px}
+.move-failures{display:flex;flex-direction:column;gap:4px;margin:0;padding:0;list-style:none;max-height:160px;overflow-y:auto}
+.move-failures li{display:flex;flex-direction:column;gap:2px;padding:6px 8px;border-radius:8px;background:var(--danger-soft)}
 .machine-waiting{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .upload-wait{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
 .upload-wait p{margin:0;flex:1 1 220px;min-width:0;overflow-wrap:anywhere}

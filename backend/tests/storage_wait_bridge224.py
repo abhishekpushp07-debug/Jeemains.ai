@@ -1,6 +1,5 @@
 """TEST-ONLY iteration 224 browser bridge: the real app on 127.0.0.1:8774 bound to a disposable isolated DB, Supabase faked in memory.
-Supabase is DOWN while /tmp/uibridge224/supabase_down exists (delete the file = Supabase back). Seeds one PDF waiting for Supabase
-half way through its original, in BITSAT > Mock Tests. Writes /tmp/uibridge224/bridge.json (owner + reviewer cookies, 0600, key 'book').
+Supabase is DOWN while /tmp/uibridge224/supabase_down exists (delete the file = Supabase back). Seeds one PDF waiting for Supabase half way through its original, in BITSAT > Mock Tests, and 3 old Emergent files (1 lost) for 'Purani files'. Writes /tmp/uibridge224/bridge.json (owner + reviewer cookies, 0600, key 'book').
 Run: cd /app/backend && python tests/storage_wait_bridge224.py 2400 &   (stops by itself; drops its own DB)
 """
 import asyncio, json, os, sys
@@ -41,6 +40,13 @@ async def main():
     Path(FLAG).touch(); sb.cut = len(raw) // 2
     b = await upload(own, raw, 'TEST_SUPABASE_WAIT', section_id='bitsat:mocks')
     await complete(own, b['id']); sb.cut = None
+    # Old files still on Emergent for the 'Purani files' copy: one picture, one PDF, and one already lost from Emergent.
+    import hashlib, time as _t
+    for i, (name, data) in enumerate((('old_q1.png', raw[:0] + b'\x89PNG-test-' + bytes(range(64))), ('old_paper.pdf', raw), ('old_lost.png', None))):
+        if data is not None:
+            H.STORE['tejas/ui224/' + name] = data
+        await H.TDB.tejas_files.insert_one({'id': f'ui224-old-{i}', 'kind': 'combined', 'path': 'tejas/ui224/' + name, 'filename': name, 'created_at': _t.time(),
+                                            **({'sha256': hashlib.sha256(data).hexdigest()} if data else {'sha256': 'ab' * 32})})
     path = OUT + '/bridge.json'
     with open(path, 'w') as f:
         json.dump({'owner': dict(own.cookies), 'reviewer': dict(rev.cookies), 'book': b['id'], 'type': '/super-admin/exam/bitsat/bitsat:mocks'}, f)
