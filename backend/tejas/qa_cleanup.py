@@ -9,7 +9,7 @@ from .db import db, attempts, audit
 router = APIRouter(prefix='/api/admin/qa', tags=['QA test accounts'])
 BY_USER = ('tejas_ledgers', 'tejas_saved_tests', 'tejas_question_reports', 'tejas_reviews', 'tejas_score_versions',
            'tejas_preflight', 'tejas_sessions', 'tejas_jobs', 'tejas_solution_requests',
-           'tejas_attempt_timeline', 'tejas_analysis', 'tejas_learnings')
+           'tejas_attempt_timeline', 'tejas_analysis', 'tejas_learnings', 'tejas_events', 'tejas_invite_contacts')
 LIMIT = 20000
 
 

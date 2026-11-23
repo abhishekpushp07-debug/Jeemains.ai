@@ -58,8 +58,21 @@ class PhonePayload(Payload):
     pin: str = Field(pattern=r'^[0-9]{4}$')
 
 
+SourceWord = Annotated[str, Field(max_length=80, pattern=r'^[A-Za-z0-9 ._+-]+$')]
+
+
+class SignupSource(Payload):
+    """Where a new student came from (campaign words in the link they opened, and the site that sent them). Optional."""
+    utm_source: SourceWord | None = None
+    utm_medium: SourceWord | None = None
+    utm_campaign: SourceWord | None = None
+    referrer: str | None = Field(default=None, max_length=120, pattern=r'^[A-Za-z0-9.-]+$')
+    landing: str | None = Field(default=None, max_length=80, pattern=r'^/[A-Za-z0-9/_-]*$')
+
+
 class PhoneSignupPayload(PhonePayload):
     confirm_pin: str = Field(pattern=r'^[0-9]{4}$')
+    source: SignupSource | None = None
 
     @model_validator(mode='after')
     def matching_pins(self):
@@ -355,6 +368,30 @@ MODELS = {
     'attempts.retry': RetryPayload, 'attempts.report': ReportPayload,
     'reviewers.update_access': ReviewerPayload, 'corrections.regrade': RegradePayload,
 }
+
+
+class ContactIn(Payload):
+    name: str = Field(default='', max_length=120)
+    tel: list[Annotated[str, Field(max_length=40)]] = Field(min_length=1, max_length=6)
+
+
+class ContactsPayload(Payload):
+    contacts: list[ContactIn] = Field(min_length=1, max_length=100)
+
+
+class EventProps(Payload):
+    page: str | None = Field(default=None, pattern=r'^[a-z_]{1,24}$')
+    tool: str | None = Field(default=None, pattern=r'^[a-z_]{1,24}$')
+    ref: str | None = Field(default=None, pattern=r'^[A-Za-z0-9_-]{1,64}$')
+
+
+class EventPayload(Payload):
+    name: Literal['page_open', 'rank_tool_open', 'mission_share', 'contacts_pick', 'pdf_download']
+    vid: str | None = Field(default=None, pattern=r'^[A-Za-z0-9-]{8,40}$')
+    props: EventProps | None = None
+
+
+MODELS.update({'activity.record_event': EventPayload, 'contacts.save_contacts': ContactsPayload})
 
 
 def rank_models():

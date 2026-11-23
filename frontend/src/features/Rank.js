@@ -10,6 +10,7 @@ import { TargetMarks } from '../components/rank/TargetMarks';
 import { CollegePredictor } from '../components/rank/CollegePredictor';
 import { Compare } from '../components/rank/Compare';
 import { DreamPanel } from '../components/rank/DreamPanel';
+import { track } from '../lib/track';
 import '../rank.css';
 
 // Order, colours and words as the app's Rank tab: black-metal tiles in each tool's jewel; College predictor is pure blood red.
@@ -44,6 +45,7 @@ export default function Rank() {
   const [handover, setHandover] = useState(null);
   const stage = useRef(null);
   useEffect(() => { setSeen(s => (s.has(tool) ? s : new Set(s).add(tool))); }, [tool]);
+  useEffect(() => { track('rank_tool_open', { tool }); }, [tool]);
   const pick = (key, scroll = true) => {
     const next = new URLSearchParams(params);
     if (key === 'rank') next.delete('tool'); else next.set('tool', key);

@@ -4,13 +4,15 @@ import React, { useRef } from 'react';
 import { Share2 } from 'lucide-react';
 import { ICONS, ImpactPanel, MissionCard, ShareCta, useMissionShare } from '../components/mission/MissionCard';
 import { POINTS, useMissionStats } from '../components/mission/missionApi';
+import { ContactInvite } from '../components/mission/ContactInvite';
+import { track } from '../lib/track';
 import '../mission.css';
 
 export default function Mission() {
   const card = useRef(null);
   const mission = useMissionStats();
   const { busy, note, share } = useMissionShare(card, mission.caption, undefined, !mission.loading);
-  const button = where => <ShareCta testId={`mission-share-${where}`} title="Please share karo" busy={busy} onClick={() => share(true)} />;
+  const button = where => <ShareCta testId={`mission-share-${where}`} title="Please share karo" busy={busy} onClick={() => { track('mission_share'); share(true); }} />;
   return <div className="ms-page" data-testid="mission-page">
     <header className="ms-page-head"><small>JEELIVE.AI · OUR MISSION</small><h1>Ek share, kisi ki free taiyari</h1></header>
     <div className="ms-layout">
@@ -21,6 +23,7 @@ export default function Mission() {
         {button('bottom')}
         <button type="button" className="ms-more light" onClick={() => share(false)} disabled={busy} data-testid="mission-share-more"><Share2 size={16} />Doosre app mein share karo</button>
         {note ? <p className="ms-note light" role="status" data-testid="mission-share-note">{note}</p> : null}
+        <ContactInvite text={mission.caption} />
       </div>
       <div className="ms-col">
         <h2 className="ms-section">Poori baat</h2>

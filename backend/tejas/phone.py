@@ -29,6 +29,22 @@ class PhoneProfile(BaseDocument):
     created_at: float
     consent_at: float
     last_seen_at: float
+    signup_channel: str | None = None
+    signup_device: str | None = None
+    signup_source: dict | None = None
+
+
+def signup_origin(request, source):
+    """web = a browser on the website (it sends Sec-Fetch / Origin); app = the JEELIVE app's server; other = anything else."""
+    h = request.headers
+    ua = (h.get('user-agent') or '').lower()
+    web = bool(h.get('sec-fetch-site') or h.get('origin'))
+    channel = 'web' if web else 'app' if any(w in ua for w in ('httpx', 'okhttp', 'expo')) else 'other'
+    device = ('android' if 'android' in ua else 'ios' if ('iphone' in ua or 'ipad' in ua) else 'desktop') if web else channel
+    out = {'signup_channel': channel, 'signup_device': device}
+    if source:
+        out['signup_source'] = source.model_dump(exclude_none=True) or None
+    return out
 
 
 def normalize_phone(raw):
@@ -149,7 +165,7 @@ async def signup(data: PhoneSignupPayload, request: Request, response: Response)
     pid = uid()
     profile = PhoneProfile.from_mongo({'_id': pid, 'id': pid, 'phone': phone,
         'pin_hash': await run_in_threadpool(hash_pin, data.pin), 'created_at': stamp,
-        'consent_at': stamp, 'last_seen_at': stamp})
+        'consent_at': stamp, 'last_seen_at': stamp, **signup_origin(request, data.source)})
     try:
         await db.tejas_phone_profiles.insert_one(profile.to_mongo())
     except DuplicateKeyError:

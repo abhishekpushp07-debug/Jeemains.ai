@@ -257,6 +257,12 @@ SPEC = {
     'app_connect.dream_mocks': ('own_session_app_server_dream_relay', 'normal', 'replace_by_id'),
     'app_connect.dream_cheered': ('own_session_app_server_dream_relay', 'normal', 'add_to_set'),
     'app_connect.share_link': ('public_redirect_to_app_server_counter', 'normal', 'redirect_only'),
+    **{f'ceo.{name}': ('ceo_dashboard_key_owner_metrics', 'normal', 'read') for name in (
+        'summary', 'daily', 'funnel', 'retention', 'aits', 'content', 'health', 'alerts', 'students', 'student', 'contact_list', 'event_counts')},
+    'activity.record_event': ('own_or_visitor_usage_event_ids_only', 'normal', 'append_only_rate_limited'),
+    'contacts.list_contacts': ('own_student_picked_contacts', 'normal', 'read'),
+    'contacts.save_contacts': ('own_student_picked_contacts_consented', 'normal', 'upsert_by_phone'),
+    'contacts.remove_contact': ('own_student_picked_contacts', 'normal', 'idempotent_delete'),
     'dreams.celebration': ('own_released_attempt_scores_only', 'normal', 'read'),
 }
 
@@ -314,6 +320,8 @@ def install_contracts(app):
             limit = 16 * 1024
         elif key in ('app_connect.dream_save', 'app_connect.dream_mocks', 'app_connect.dream_cheered'):
             limit = 64 * 1024
+        elif key == 'contacts.save_contacts':
+            limit = 48 * 1024
         if key == 'book_imports.repair_page':
             limit = 512 * 1024
         elif key in ('book_imports.rules', 'book_imports.allowance'):

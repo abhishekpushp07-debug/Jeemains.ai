@@ -10,6 +10,7 @@ import {
 import { Toaster } from "./components/ui/sonner";
 import { Button } from './components/ui/button';
 import { AuthProvider, useAuth } from "./lib/auth";
+import { captureSource, pageOf, track } from "./lib/track";
 import "./lib/theme";
 import { BottomTabs } from './components/BottomTabs';
 import { Header, Footer, Loading, Empty } from "./components/Shared";
@@ -139,6 +140,11 @@ function Shell() {
   useEffect(() => {
     if (!loc.hash) window.scrollTo(0, 0);
   }, [loc.pathname, loc.hash]);
+  useEffect(() => { captureSource(); }, []);
+  useEffect(() => {
+    const page = pageOf(loc.pathname);
+    if (page) track('page_open', { page });
+  }, [loc.pathname]);
   return (
     <>
       <a className="skip-link" href="#main" data-testid="skip-content">

@@ -1,6 +1,7 @@
 # JEELIVE CEO Dashboard: full brief from the WEBSITE project
 
-Written 2026-11-23 from the website repo's code (this project). Give this whole file to the new agent together with:
+Written 2026-11-23, updated 2026-11-23: the website's CEO API is NOW BUILT (section 9 is the exact contract; it replaces the
+plans in 5.2 and 7). Give this whole file to the new agent together with:
 1. the website GitHub repo (this project, React + FastAPI + MongoDB),
 2. the app GitHub repo (branch `App`, Expo app + its own FastAPI server),
 3. the app team's own version of this brief.
@@ -19,8 +20,10 @@ website does not record something today, it says "NOT RECORDED TODAY".
    The website stores time as Unix seconds (float, UTC) in most fields. Convert with +19800 seconds before bucketing by day.
 3. One student = one website user id (`tejas_phone_profiles.id`, a UUID). The app stores the same id as
    `website_user_id`. Use this id to join the two products. Never use the phone number as a join key in the dashboard.
-4. Phone numbers are personal data. Show them masked (`+91 98•••••210`) and only on a drill-down page that only the CEO can open.
-   Never send phone numbers, PINs, session ids, cookies, signed picture links or answers to the dashboard.
+4. Phone numbers: the OWNER decided (2026-11-23) that the dashboard gets FULL student numbers and the full numbers of friends a
+   student picked in Mission. They come only from the key-protected API in section 9. Show them only on CEO-only pages behind the
+   allow-list sign-in, never in logs, alerts, URLs or exported files you do not need. PINs, session ids, cookies, signed picture
+   links and answers are never sent.
 5. Exclude from every student metric:
    - staff accounts (`tejas_users`, roles `owner` / `reviewer`). They are a different collection, so they never appear in
      `tejas_phone_profiles`, but staff attempts exist in `tejas_attempts` (filter by `user_id` not in staff ids),
@@ -47,7 +50,7 @@ Connection details that matter for the dashboard:
 - `GET /api/dream` on the website first sends the student's released full mocks to the app server, so the app's Dream
   meter also counts website mocks. Do not add website mocks to the app's Dream numbers again (double count).
 - A student who signs up on the website and later opens the app is ONE person (same website user id).
-  "Signed up on app vs website" is NOT RECORDED TODAY on the website (see section 7).
+  "Signed up on app vs website" is recorded from 2026-11-23 (`signup_channel`, section 9). Older students have no value.
 
 ---------------------------------------------------------------------------------------------------------------------
 
@@ -91,6 +94,10 @@ There are NO payments, plans or subscriptions on the website. Revenue is NOT REC
 | `last_seen_at` | Last SIGN-IN time (set at sign-up and sign-in). It is NOT "last active". |
 | `pin_version` | Goes up on every PIN change / reset. |
 | `blocked_at` | Set when the owner blocked the student. |
+| `signup_channel` | NEW 2026-11-23: `web` (website browser), `app` (the JEELIVE app's server signed them up), `other`. Missing on older rows. |
+| `signup_device` | NEW: `android` / `ios` / `desktop` for web sign-ups, else same as channel. |
+| `signup_source` | NEW: `{utm_source, utm_medium, utm_campaign, referrer (site name only), landing (first page path)}` from the student's first visit. |
+| `last_active_at` | NEW: last signed-in request, written at most once per 10 minutes. This is the real "last active". |
 
 ### 3.2 `tejas_attempts` (one row per test attempt)
 | Field | Meaning |
@@ -131,7 +138,8 @@ Every metric: name, exact definition, source, and a trap to avoid. "Student" = n
 | A2 | Total students | count of profiles (show blocked separately) | profiles |
 | A3 | Sign-ups by hour of day (IST) | histogram of `created_at` | profiles |
 | A4 | Sign-ups by exam | group by `exam` | profiles |
-| A5 | Sign-up source (web / app / campaign) | NOT RECORDED TODAY, needs section 7 | - |
+| A5 | Sign-up source (web / app / campaign) | `signup_channel`, `signup_source.utm_*` (from 2026-11-23) | profiles |
+| A6 | Friends invited from contacts | rows in `tejas_invite_contacts`; "joined after invite" = a profile with that phone created after the pick | contacts |
 
 ### B. Activation (did the new student actually start?)
 | # | Metric | Definition |
@@ -224,7 +232,7 @@ Money per AI call is NOT RECORDED on the website. If the CEO wants Rs per day, s
 The production database of jeelive.ai is managed by Emergent. Whether an outside project can even reach it is NOT CHECKED, and a
 direct connection would expose every phone number. So the recommended way is a small, read-only metrics API inside each product.
 
-### 5.2 Metrics API in each product (to be added; see section 7)
+### 5.2 Metrics API in each product (website side BUILT, see section 9 for the exact contract; this was the plan)
 - Prefix: `GET /api/ceo/v1/...` on jeelive.ai (and the same idea on the app server).
 - Auth: header `X-CEO-Key: <long random secret>`, stored as a secret on both sides. The website checks it with a constant-time
   compare. No cookie, no student session. Wrong key -> 401. Optional: allow-list the dashboard server's IP.
@@ -291,9 +299,11 @@ Endpoints the website should offer:
 
 ---------------------------------------------------------------------------------------------------------------------
 
-## 7. What the WEBSITE still has to add (NOT BUILT, ask the website project when ready)
+## 7. What the WEBSITE still has to add
 
-These are small, read-only additions. Until they exist, the dashboard shows "not recorded" for the matching metrics.
+UPDATE 2026-11-23: items 1, 2, 3 and a smaller version of 4 are BUILT (see section 9). Still not built: the full event list in
+item 4 (today only `page_open`, `rank_tool_open`, `mission_share`, `contacts_pick`, `pdf_download` exist) and item 5 (the
+endpoints compute live with a 1-10 minute cache instead). Original list kept for reference:
 
 1. The `/api/ceo/v1/*` endpoints from section 5.2, protected by `CEO_DASHBOARD_KEY`.
 2. Sign-up source on `tejas_phone_profiles`: `signup_channel` (`web` / `app`), `signup_referrer`, `utm_source`, `utm_medium`,
@@ -311,10 +321,67 @@ These are small, read-only additions. Until they exist, the dashboard shows "not
 ## 8. Build plan for the new dashboard agent
 
 1. Read this file, the app brief and both repos. Write down any field the app brief names differently.
-2. Build the dashboard backend with a FAKE data source first (fixtures shaped exactly like section 5.2), and all screens on it.
+2. Build the dashboard backend with a FAKE data source first (fixtures shaped exactly like section 9), and all screens on it.
 3. Add the CEO allow-list sign-in.
 4. When the website and app endpoints exist, switch the data source per product with a setting; keep the fake one for tests.
 5. Check every number against a hand count for one IST day (pick a quiet day, count in the product's owner screens).
 6. Add alerts last.
-Acceptance: every tile has a definition tooltip, no phone number is unmasked anywhere, a product outage shows amber "as of" values,
+Acceptance: every tile has a definition tooltip, phone numbers appear only on CEO-only pages, a product outage shows amber "as of" values,
 IST day totals match the hand count.
+
+---------------------------------------------------------------------------------------------------------------------
+
+## 9. BUILT: the website CEO API (exact contract, 2026-11-23)
+
+Code: `backend/tejas/ceo.py` (read-only), `backend/tejas/contacts.py`, `backend/tejas/activity.py`. Tested on a throw-away
+database with hand-counted numbers (`backend/tests/ceo_bridge228.py`). Preview only until the website is published.
+
+### 9.1 Connecting
+- Base: `https://jeelive.ai/api/ceo/v1` (after publish). Every call is `GET` with header `X-CEO-Key: <key>`.
+- The key is the website secret `CEO_DASHBOARD_KEY` (at least 24 characters). The owner types the same value into the website
+  secrets and into the dashboard's own secrets. Never put it in browser code; only the dashboard's SERVER calls this API.
+- Optional website secret `CEO_EXCLUDE_PHONES` = comma list of the owner's own test numbers (`9876543210,9123456780`).
+- Answers: `{"data": {...}, "error": null, "meta": {"api_version": "1", "request_id": "..."}}`. Read `data`.
+- Errors: no key set on the website -> 503; wrong key -> 401; 20 wrong keys from one IP in 10 minutes -> 429 for that window;
+  bad date -> 422. `Cache-Control: no-store` on every answer.
+- The website keeps each answer for 1 to 10 minutes, so polling more often gives the same numbers. Suggested polling: summary,
+  alerts, health every 5 min; daily, events every 30 min; funnel, retention, aits, content every hour; students/contacts on demand.
+- Days are India time. Times are ISO with `+05:30`. `from`/`to` are `YYYY-MM-DD`, at most 400 days, default the last 30 days.
+- Left out of every count: staff accounts, students whose name starts with `TEST_`, and `CEO_EXCLUDE_PHONES`.
+
+### 9.2 Endpoints
+| Endpoint | Returns |
+| --- | --- |
+| `/summary` | `students {total, blocked, by_signup_channel {web, app, other}}`, `signups`, `active_test_takers`, `active_on_site` (from `last_active_at`), `signed_in` (from `last_seen_at`), each as `{today, last_7_days, last_30_days}`; `attempts_today {started, completed}`; `aits_today {date, day, live_started, live_completed}` or null outside the 50 days; `contacts {students_who_shared, total, today}`; `ai_calls_today_utc` |
+| `/daily?from&to` | `rows[]`: `date, signups, signups_web, signups_app, active_test_takers, attempts_started, attempts_completed, mocks_completed, avg_mock_score_pct, aits_live_completed, contacts_shared, reports_new, ai_calls_utc` |
+| `/funnel?from&to` | for sign-ups in the range: `signed_up, started_in_24h, completed_in_24h, completed_in_7d, second_test_in_7d, never_started, median_minutes_to_first_test` |
+| `/retention?weeks=12` (2-26) | `cohorts[]`: `week_start` (Monday), `size`, `active_pct[]` (week 0..n, % who started a test that week; null when size 0) |
+| `/aits` | `stage` (prelaunch / live / finished), `papers_ready`, `next_day_without_paper`, `streak_now_at_least {1,7,15,30,45,50}`, `best_streak_at_least {...}`, `days[]` (50): `day, date, paper {id,title,status}, paper_ready`, and for days up to today `live_started, live_completed, practice_completed, max_marks, avg_marks, median_marks, top_marks, day1_people_still_here_pct` |
+| `/content` | `published[] {exam, test_kind, papers, questions}`, `papers_total`, `questions_total`, `published_last_7_days`, `aits_days_ready`, `jobs_waiting[]`, `question_reports {status: count}` |
+| `/health` | `server_time, grading_failed, grading_waiting_over_5_min, jobs_failed[] {kind, count, last_at, last_error}, storage {mode, checked_at, alert} or null, index_problems` |
+| `/alerts` | `level` (green / amber / red) and `alerts[] {code, level, title (Hinglish, ready to send), value}`. Codes: `aits_tomorrow_no_paper` (red after 6 PM IST), `grading_failed`, `grading_waiting` (over 15 min), `storage`, `jobs_failed_24h`, `ai_near_limit` (80%+ of the daily limit), `signups_low` (after 9 PM IST, today under half the 7-day average, only once there are 14+ sign-ups a week) |
+| `/students?page&q&sort` | 100 per page, `sort=new` (sign-up) or `active`; `q` = part of a number or a name. Items: `id, phone (full), name, exam, signed_up_at, signup_channel, signup_device, signup_source, last_signin_at, last_active_at, blocked, attempts, completed, last_attempt_at, contacts_shared` |
+| `/students/{id}` | the same fields plus `aits {live_days_done, current_streak, best_streak}`, `tests[]` (latest 300: `id, title, exam, mode, test_kind, status, started_at, submitted_at, series_date, retake, score, maximum, accuracy`), `contacts[] {name, phone, shared_at}`, `usage_last_90_days[] {name, page, tool, count}`. Unknown id -> 404 |
+| `/contacts?page&q` | friends students picked, newest first, 100 per page, `q` = part of a number. Items: `name, phone (full), shared_at, shared_by {id, phone, name}, already_student, joined_after_share, student_id` |
+| `/events?from&to` | `daily[] {date, name, count, people}` and `top[] {name, page, tool, count}` (people = signed-in students plus anonymous visitors by a random browser id) |
+
+### 9.3 Mission "Contacts se dost chuno" (where `/contacts` numbers come from)
+- On the Mission page, a phone browser that supports the Contact Picker (Android Chrome) shows "Contacts se dost chuno". The
+  student taps it, the phone's own contact list opens, and ONLY the people the student ticks are sent. Nothing is read silently;
+  other browsers (iPhone, laptop) simply do not show the button.
+- The consent line is shown right under the button. Saved per student: `{id, user_id, phone (E.164), name, at, consent}` in
+  `tejas_invite_contacts`, one row per student + number, at most 500 per student. Invalid numbers and the student's own number are skipped.
+- Each saved friend gets a WhatsApp "Bhejo" button with the student's own Mission link, and a remove button (removing deletes that row).
+- Student API (signed-in student only, their own rows only): `GET /api/mission/contacts`, `POST /api/mission/contacts`
+  `{contacts: [{name, tel: [..]}]}` (max 100 per call), `DELETE /api/mission/contacts/{id}`.
+
+### 9.4 Usage events and sign-up source
+- `POST /api/events` `{name, vid?, props? {page, tool, ref}}` from the website's own pages: `page_open` (page names such as
+  home, rank, mission, aits, aits_analysis, result, test, paper, my_tests, misfire, pyq, exams, profile, landing, login, signup),
+  `rank_tool_open` (tool), `mission_share`, `contacts_pick`. Staff visits are not kept, 120 events per person per 10 min, kept 400 days.
+- The first visit stores campaign words (`utm_source/medium/campaign`), the sending site and the first page in the browser; the
+  sign-up sends them once and they land in `signup_source`.
+
+### 9.5 Still on the app side
+Rank (Cut off, Meri details, six tools), Mission counts, Dream, Rapid Fire: read them from the APP server's own CEO API (app
+brief). The website only counts how often a Rank tool tab is opened (`rank_tool_open`).

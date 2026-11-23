@@ -64,6 +64,9 @@ from tejas import (
     misfire,
     duplicates,
     machine,
+    ceo,
+    activity,
+    contacts,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -305,6 +308,9 @@ for module in [
     misfire,
     duplicates,
     machine,
+    ceo,
+    activity,
+    contacts,
 ]:
     app.include_router(module.router)
 

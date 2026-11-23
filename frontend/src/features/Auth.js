@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { postWhenFree } from "../lib/api";
+import { withSource } from "../lib/track";
 import { useAuth } from "../lib/auth";
 import { Field, ErrorBox } from "../components/Shared";
 import { useNoIndex, usePageTitle } from "../lib/pageMeta";
@@ -41,7 +42,7 @@ export default function Auth({ staff = false }) {
     setError("");
     try {
       const [path, body] = staff ? ['/auth/login', { email, password }]
-        : signup ? ['/auth/phone/signup', { phone, pin, confirm_pin: confirmPin }]
+        : signup ? ['/auth/phone/signup', { phone, pin, confirm_pin: confirmPin, ...withSource() }]
         : reset ? ['/auth/pin/reset', { phone, new_pin: pin, confirm_pin: confirmPin }]
         : ['/auth/phone', { phone, pin }];
       const u = await postWhenFree(path, body);

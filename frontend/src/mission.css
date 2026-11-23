@@ -1,3 +1,19 @@
+/* Mission contacts: pick friends from the phone (Android Chrome), each with a WhatsApp button. */
+.ms-contacts { display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 18px; border: 1px solid var(--line, #E6E6EB); background: var(--surface-card, #FFF); }
+.ms-contacts-pick { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 10px 16px; border: 0; border-radius: 14px; text-align: left; cursor: pointer;
+  color: #FFF; background: linear-gradient(135deg, #1A36B8, #0B1C6B); box-shadow: inset 0 1px 0 rgb(255 255 255 / .25); transition: transform .15s, filter .15s; }
+.ms-contacts-pick:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.ms-contacts-pick:disabled { opacity: .8; cursor: progress; }
+.ms-contacts-pick b { display: block; font-size: 15.5px; font-weight: 850; } .ms-contacts-pick small { display: block; font-size: 12.5px; color: rgb(255 255 255 / .85); }
+.ms-contacts-consent, .ms-contacts-note { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--text-muted, #5E5E69); }
+.ms-contacts-note { font-weight: 700; color: var(--text, #0B0B0F); }
+.ms-contacts-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 320px; overflow: auto; }
+.ms-contacts-list li { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 12px; background: var(--surface-muted, #F4F4F7); }
+.ms-contacts-list li > span { flex: 1; min-width: 0; } .ms-contacts-list b { display: block; font-size: 14px; overflow-wrap: anywhere; } .ms-contacts-list small { font-size: 12px; color: var(--text-muted, #5E5E69); }
+.ms-contacts-wa { display: inline-flex; align-items: center; gap: 5px; min-height: 36px; padding: 6px 12px; border-radius: 999px; background: #128C4A; color: #FFF; font-size: 13px; font-weight: 800; text-decoration: none; }
+.ms-contacts-del { display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--text-muted, #5E5E69); cursor: pointer; }
+.ms-contacts-del:hover { background: rgb(217 15 35 / .1); color: #D90F23; }
+
 /* Mission: the maker's letter card on royal night blue with gold, the impact panel, the big red share button, and the share gate. */
 .ms-page, .ms-gate { --m-blue: #1A36B8; --m-blue-to: #0B1C6B; --m-night: #071241; --m-gold: #F2C14E; --m-gold-l: #FFE6A3; --m-gold-d: #A8761C; --m-ink: #DCE5FF; --m-ink-soft: rgb(220 229 255 / .74);
   --m-glass: rgb(255 255 255 / .09); --m-line: rgb(255 255 255 / .18); --m-gold-wash: rgb(242 193 78 / .13); --m-gold-line: rgb(242 193 78 / .45); --m-serif: Georgia, 'Times New Roman', serif; --m-red: #D90F23; }

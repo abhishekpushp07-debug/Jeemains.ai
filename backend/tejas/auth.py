@@ -5,7 +5,7 @@ import bcrypt, jwt
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from pydantic import BaseModel, Field, EmailStr, field_validator
 from starlette.concurrency import run_in_threadpool
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, PyMongoError
 from pymongo import ReturnDocument
 from .db import db, users, sessions, uid, now
 
@@ -142,6 +142,7 @@ async def identity(p):
 # Student session checks are reused for at most STUDENT_SESSION_SECONDS per process; JWT signature and expiry
 # are still verified on every request. Staff sessions are never cached. Logout/PIN changes clear this process at once.
 STUDENT_SESSION_SECONDS = 10
+ACTIVE_EVERY = 600  # last_active_at is written at most once per 10 minutes per student
 _STUDENT_MAX = 20000
 _students = OrderedDict()
 
@@ -190,6 +191,13 @@ async def current(request: Request):
         from .staff_credentials import check_session_generation
         check_session_generation(record, u, p.get('access_type'))
         if key:
+            stamp = time.time()
+            if stamp - (u.get('last_active_at') or 0) > ACTIVE_EVERY:
+                try:
+                    await db.tejas_phone_profiles.update_one({'id': u['id']}, {'$set': {'last_active_at': stamp}})
+                    u['last_active_at'] = stamp
+                except PyMongoError:
+                    pass  # "last active" is only for the CEO dashboard; it never blocks a student
             remember_student(key, u)
         return u
     except (jwt.PyJWTError, ValueError, KeyError, TypeError, AttributeError):
