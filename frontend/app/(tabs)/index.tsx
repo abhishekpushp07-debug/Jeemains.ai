@@ -20,6 +20,7 @@ import { seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/ser
 import { examIcon, useExams } from "@/src/api/examCatalog";
 import { useListFocus } from "@/src/useListFocus";
 import { HomeDream } from "@/src/dream/HomeDream";
+import { ScreenMotion } from "@/src/motion";
 
 const greeting = () => { const h = new Date().getHours(); return h < 5 ? "good night" : h < 12 ? "good morning" : h < 17 ? "good afternoon" : "good evening"; };
 // The three exams keep their own tile look; the names come from the website.
@@ -100,7 +101,8 @@ export default function Home() {
 
       <View style={{ gap: space.md }}>
         <SectionLabel title="All India series" onAction={() => router.push("/live")} actionTestID="home-series-view-all" />
-        <HomeSeriesCard series={s} streak={streak.data} days={days} error={series.error} />
+        {/* The card's shine rests while another tab or screen is in front. */}
+        <ScreenMotion><HomeSeriesCard series={s} streak={streak.data} days={days} error={series.error} /></ScreenMotion>
       </View>
 
       {current ? <View style={{ gap: space.md }}>

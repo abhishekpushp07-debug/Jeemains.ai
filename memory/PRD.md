@@ -987,3 +987,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Tokens: custom_tabPink* / custom_tabSun* / custom_tabSky* (+Soft, +Glow), custom_tabChip; steel / blood tokens deleted. Word contrast 6.8 : 1 or more (computed).
 - First tab on opening is now Completed (memo.tab). Within a session the screen still stays on the tab the student last chose.
 - Checked on the preview (web, 390 + 320): Completed selected on first open with its 5 papers, each tab opens, 9 animations, 61 fps, 0 on Home, "In progress" fits at 320 when open, no page errors; tsc + eslint clean. NOT checked on a real phone build; testing agent not run.
+
+## Home: All India series card got the shine (23 Nov 2026)
+- Only src/components/series/HomeSeriesCard.tsx (the onyx → ruby card, "Starts 9 Dec"). Its colours, text, size and taps are unchanged (358 wide at 390, inside width 316: the old 1 pt line + 20 padding became a 2 pt running edge + 19 padding).
+- Added: soft gloss on the upper half (custom_seriesGloss), a glass glint that travels from the top-left corner to the bottom-right corner as a band lying edge to edge at right angles to the diagonal (custom_seriesGlint, every 3.6 s), and a running edge of ruby / gold / rose (theme `seriesEdge`).
+- Shine (src/analysis/Shine.tsx) got two additive props: `backdrop` (a face that keeps its own picture; `tones` is optional now, no colour change-over without it) and `corner` (corner-to-corner glint). Analysis and My Tests use the old paths.
+- Home wraps the card in ScreenMotion: the shine rests when another tab or screen is in front.
+- Checked on the preview (web, 390 + 320): 2 animations in the card, 61 fps, glint seeked to start / middle / end (outside, centre, outside), 0 animations on My Tests, CTA opens /live, no page errors. Regression: My Tests tab row still 9 animations; Analysis still 8 edge + 8 glint + 8 colour change + 3 stars. tsc + eslint clean. NOT checked on a real phone build; testing agent not run.

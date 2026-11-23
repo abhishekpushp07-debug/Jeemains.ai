@@ -179,6 +179,8 @@ const dark = {
   // All India card: onyx → deep ruby with a soft red glow and a hairline sheen.
   custom_seriesFrom: "#0B0B0D", custom_seriesMid: "#17090D", custom_seriesTo: "#3A0912", custom_seriesGlow: "#E11D2E",
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
+  // Home's All India card: the soft light on its upper half and the glass band that crosses it corner to corner.
+  custom_seriesGloss: "rgba(255,255,255,0.11)", custom_seriesGlint: "rgba(255,255,255,0.26)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
   custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8FA8FF",
   // Rank Card: brushed graphite with a soft blood-red glow, sparkle-silver serif and blood-red hairlines (same in both palettes).
@@ -348,6 +350,8 @@ export const tabEdges = {
   sun: ["#FF7A00", "#FF4F3A", "#FFB300", "#FF7A00"],
   sky: ["#0A84FF", "#4F46E5", "#8E7BFF", "#0A84FF"],
 } as const;
+// The three colours that run round Home's onyx-and-ruby All India card: ruby, gold, rose.
+export const seriesEdge = ["#FF2D4A", "#FFC857", "#FF7A93", "#FF2D4A"] as const;
 // All India Rapid: one fire world (blazing smoke behind a dark ridge, black silhouettes on it) for all five card scenes.
 export const allIndia = {
   hot: "#FFE9C2", flame: "#FF6A1A", ember: "#FFB347", ink: "#080204", dust: "rgba(255,138,61,0.35)", star: "#FFF4E0",

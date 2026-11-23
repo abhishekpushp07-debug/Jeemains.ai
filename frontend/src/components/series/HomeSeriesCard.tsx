@@ -6,7 +6,8 @@ import Svg, { Defs, RadialGradient, Rect, Stop } from "react-native-svg";
 import { Press, T } from "@/src/components/ui";
 import { Pill, ProgressRing } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
-import { colors, pastel, SeriesTone, space } from "@/src/theme";
+import { colors, pastel, seriesEdge, SeriesTone, space } from "@/src/theme";
+import { Shine } from "@/src/analysis/Shine";
 import { istDate } from "@/src/navigation";
 import { DayInfo, Series, Streak, dayAction, seriesDays, skippedCount } from "@/src/series";
 
@@ -31,7 +32,11 @@ function cardState(s: Series | null, days: DayInfo[]): CardState {
 
 const FACTS: [string, string][] = [["75", "questions"], ["180", "minutes"], ["+4 / −1", "marking"]];
 
-/** The one dark object on a light home: onyx → ruby card with a red glow (All India identity). */
+/**
+ * The one dark object on a light home: onyx → ruby card with a red glow (All India identity). Its own colours are drawn
+ * as they are; over them sit a soft gloss and a glass glint that crosses from corner to corner, and ruby, gold and rose
+ * run round its edge.
+ */
 export function HomeSeriesCard({ series, streak, days, error }: { series: Series | null; streak: Streak | null; days: DayInfo[]; error?: string }) {
   const router = useRouter();
   const narrow = useWindowDimensions().width < 360;
@@ -40,20 +45,23 @@ export function HomeSeriesCard({ series, streak, days, error }: { series: Series
   const done = streak?.completed_count ?? 0;
   const total = seriesDays(series);
   const started = !!series && series.today >= series.first_date;
+  const backdrop = <>
+    <LinearGradient colors={[colors.custom_seriesFrom, colors.custom_seriesMid, colors.custom_seriesTo]} locations={[0, 0.55, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+    {/* Explicit stopOpacity: native SVG ignores alpha inside stopColor. */}
+    <Svg style={StyleSheet.absoluteFill} width="100%" height="100%" pointerEvents="none">
+      <Defs>
+        <RadialGradient id={glow} cx="96%" cy="0%" rx="75%" ry="65%" fx="96%" fy="0%">
+          <Stop offset="0" stopColor={colors.custom_seriesGlow} stopOpacity={0.45} />
+          <Stop offset="1" stopColor={colors.custom_seriesGlow} stopOpacity={0} />
+        </RadialGradient>
+      </Defs>
+      <Rect x="0" y="0" width="100%" height="100%" fill={`url(#${glow})`} />
+    </Svg>
+    <LinearGradient colors={[colors.custom_clear, colors.custom_seriesSheen, colors.custom_clear]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.sheen} pointerEvents="none" />
+  </>;
   return (
-    <View testID="all-india-series-banner" style={styles.card}>
-      <LinearGradient colors={[colors.custom_seriesFrom, colors.custom_seriesMid, colors.custom_seriesTo]} locations={[0, 0.55, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-      {/* Explicit stopOpacity: native SVG ignores alpha inside stopColor. */}
-      <Svg style={StyleSheet.absoluteFill} width="100%" height="100%" pointerEvents="none">
-        <Defs>
-          <RadialGradient id={glow} cx="96%" cy="0%" rx="75%" ry="65%" fx="96%" fy="0%">
-            <Stop offset="0" stopColor={colors.custom_seriesGlow} stopOpacity={0.45} />
-            <Stop offset="1" stopColor={colors.custom_seriesGlow} stopOpacity={0} />
-          </RadialGradient>
-        </Defs>
-        <Rect x="0" y="0" width="100%" height="100%" fill={`url(#${glow})`} />
-      </Svg>
-      <LinearGradient colors={[colors.custom_clear, colors.custom_seriesSheen, colors.custom_clear]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.sheen} pointerEvents="none" />
+    <View testID="all-india-series-banner">
+      <Shine radius={28} ring={2} backdrop={backdrop} edge={seriesEdge} gloss={colors.custom_seriesGloss} glint={colors.custom_seriesGlint} band={96} part={46} corner face={styles.card}>
       <Press testID="series-open-hub-button" onPress={() => router.push("/live")} accessibilityLabel={`All India series. ${st.status}. ${st.title}. Open series hub`} scaleTo={0.985} style={{ gap: space.lg }}>
         <View style={styles.top}>
           <View style={styles.liveChip}>
@@ -92,12 +100,14 @@ export function HomeSeriesCard({ series, streak, days, error }: { series: Series
         <View testID="series-100ai-ribbon" style={styles.ai}><T w="bold" size={10} color={colors.onSurfaceInverse} style={{ letterSpacing: 1 }} accessibilityLabel="100% AI — series design branding">100% AI</T></View>
       </View>
       <Pill testID="home-series-cta" label={st.action.label} iconRight={st.action.icon} bg={colors.brandPrimary} ink={colors.onBrandPrimary} style={styles.cta} onPress={() => router.push(st.action.to as any)} />
+      </Shine>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card: { borderRadius: 28, padding: 20, gap: space.lg, backgroundColor: colors.custom_series, overflow: "hidden", borderWidth: 1, borderColor: colors.custom_webGlassLine },
+  // 19 inside the 2-point running edge: the card is the size it was with its old 1-point line and 20 of padding.
+  card: { padding: 19, gap: space.lg, backgroundColor: colors.custom_series },
   sheen: { position: "absolute", top: 0, left: 28, right: 28, height: 1 },
   top: { flexDirection: "row", alignItems: "center", gap: space.sm },
   liveChip: { flexDirection: "row", alignItems: "center", gap: 7, height: 28, paddingHorizontal: 11, borderRadius: 999, borderWidth: 1, borderColor: colors.custom_webGlassLine, backgroundColor: colors.custom_webGlass, flexShrink: 1 },
