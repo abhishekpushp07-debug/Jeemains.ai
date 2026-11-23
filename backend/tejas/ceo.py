@@ -23,12 +23,13 @@ async def ceo_key(request: Request, response: Response):
     want = os.environ.get('CEO_DASHBOARD_KEY', '')
     if len(want) < 24:
         raise HTTPException(503, 'CEO dashboard ki key abhi set nahi hai. Secrets mein CEO_DASHBOARD_KEY (kam se kam 24 akshar) daalo.')
-    ip, slot = client_ip(request) or 'unknown', int(time.time() // 600)
-    tries = _wrong.get(ip)
+    ip, slot = client_ip(request), int(time.time() // 600)
+    tries = _wrong.get(ip) if ip else None
     if tries and tries[0] == slot and tries[1] >= 20:
         raise HTTPException(429, 'Bahut baar galat key aayi. 10 minute baad dobara try karo.')
     if not hmac.compare_digest(request.headers.get('x-ceo-key', '').encode(), want.encode()):
-        _wrong[ip] = (slot, (tries[1] if tries and tries[0] == slot else 0) + 1)
+        if ip:  # an unknown caller IP is never locked out, so one bad client cannot block the real dashboard
+            _wrong[ip] = (slot, (tries[1] if tries and tries[0] == slot else 0) + 1)
         if len(_wrong) > 10000:
             _wrong.clear()
         raise HTTPException(401, 'CEO key galat hai.')
@@ -424,7 +425,7 @@ async def students(page: int = Query(1, ge=1, le=100000), q: str = Query('', max
 @router.get('/students/{id}')
 async def student(id: str, _=Depends(ceo_key)):
     p = await profiles.find_one({'id': id}, PROFILE)
-    if not p:
+    if not p or id in (await left_out())['students']:
         raise HTTPException(404, 'Yeh student nahi mila.')
     tests = await attempts.find({'user_id': id}, {'_id': 0, 'id': 1, 'title': 1, 'exam': 1, 'mode': 1, 'test_kind': 1, 'status': 1, 'started_at': 1,
                                                   'submitted_at': 1, 'series_date': 1, 'parent_attempt': 1, 'summary.score': 1, 'summary.maximum': 1,
@@ -458,7 +459,8 @@ async def contact_list(page: int = Query(1, ge=1, le=100000), q: str = Query('',
     total = await contacts.count_documents(match)
     rows = await contacts.find(match, {'_id': 0}).sort('at', -1).skip((page - 1) * PAGE).limit(PAGE).to_list(PAGE)
     people = {p['id']: p async for p in profiles.find({'id': {'$in': list({r['user_id'] for r in rows})}}, {'_id': 0, 'id': 1, 'phone': 1, 'name': 1, 'display_name': 1})}
-    joined = {p['phone']: p async for p in profiles.find({'phone': {'$in': [r['phone'] for r in rows]}}, {'_id': 0, 'id': 1, 'phone': 1, 'created_at': 1})}
+    joined = {p['phone']: p async for p in profiles.find({'phone': {'$in': [r['phone'] for r in rows]}, 'id': {'$nin': out['students']}},
+                                                       {'_id': 0, 'id': 1, 'phone': 1, 'created_at': 1})}
     items = []
     for r in rows:
         by, friend = people.get(r['user_id'], {}), joined.get(r['phone'])

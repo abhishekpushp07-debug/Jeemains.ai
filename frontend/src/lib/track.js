@@ -10,6 +10,15 @@ const PAGES = [[/^\/$/, 'landing'], [/^\/home/, 'home'], [/^\/rank/, 'rank'], [/
 
 export const pageOf = path => PAGES.find(([re]) => re.test(path))?.[1];
 
+let lastPage = ['', 0];
+/** One page_open per page visit (the dev build runs effects twice). */
+export function trackPage(path) {
+  const page = pageOf(path), t = Date.now();
+  if (!page || (lastPage[0] === path && t - lastPage[1] < 2000)) return;
+  lastPage = [path, t];
+  track('page_open', { page });
+}
+
 function visitor() {
   try {
     let v = localStorage.getItem(VID);

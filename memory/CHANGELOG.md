@@ -322,3 +322,11 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - New files: components/series/{seriesData,SeriesHeader,TodayMarks,JourneyCard,DayCards,DayStrip,ScoreTrend,ResultsList,HubToday}.js, features/SeriesAnalysis.js, series-app.css. Tests: tests/series_hub_bridge227.py + tests/ui_series_hub227.py (24/24, desktop + mobile, throw-away DB). Testing agent iteration 220 (36/38; its 2 map-number notes handled: missed days now numbered, upcoming stays blank like the app).
 - Notes written: memory/APP_TEAM_NOTE_asset_revision_etag_retry.md (for the app team) and memory/CEO_DASHBOARD_HANDOFF_WEBSITE.md (brief for the separate CEO dashboard project; nothing built here).
 
+
+## 2026-11-23 — CEO dashboard API, Mission contacts, usage log (preview only)
+- New tejas/ceo.py (12 read-only /api/ceo/v1 endpoints incl. /alerts), tejas/contacts.py (/api/mission/contacts GET/POST/DELETE), tejas/activity.py (POST /api/events).
+- request_contracts: SignupSource (optional `source` on phone signup), ContactIn/ContactsPayload, EventProps/EventPayload. route_contracts: entries + 48 KB contacts body limit. db.py: indexes for tejas_events (TTL expires_at) and tejas_invite_contacts (unique user_id+phone). qa_cleanup BY_USER includes both.
+- phone.py signup_origin(): signup_channel / signup_device / signup_source. auth.py: last_active_at every 10 min max (never blocks a request).
+- Frontend: lib/track.js (trackPage, track, captureSource, withSource), App.js Shell effects, Rank.js rank_tool_open, Auth.js signup source, Mission.js mission_share + ContactInvite, mission.css .ms-contacts*.
+- Tests: tests/ceo_bridge228.py, tests/test_ceo_dashboard228.py, tests/ui_ceo228.py; iteration_221.
+

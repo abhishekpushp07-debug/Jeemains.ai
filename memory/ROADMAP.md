@@ -161,5 +161,6 @@
 
 ## Added 2026-11-23
 - P1: AITS hub redesign is in preview only. Owner to check it, then publish.
-- P2 (only when the owner asks): the website side of the CEO dashboard (memory/CEO_DASHBOARD_HANDOFF_WEBSITE.md section 7): /api/ceo/v1/* read-only endpoints, sign-up source fields, last_active_at, the small tejas_events log.
+- DONE in preview: website side of the CEO dashboard (brief section 9). P0: keys are saved; publish, then check /api/ceo/v1/summary on jeelive.ai with the key and the page_open counts once on live.
+- P1: owner to name the CEO "enhancer" if it is not the /alerts endpoint. P2: more events (test_start, analysis_open, solution_open…) and nightly daily facts only if the dashboard needs them.
 

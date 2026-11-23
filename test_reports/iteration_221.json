@@ -1,0 +1,36 @@
+{
+  "summary": "Tested CEO dashboard API, student contacts API, usage events and signup source against the isolated bridge (127.0.0.1:8776, clock frozen to 2026-12-14). Also tested the Mission contacts UI, usage tracking and login/signup/AITS regression on a 390px phone viewport, with the preview's /api routed to the bridge. Backend: 27 of 28 checks pass. The one failure is minor: the excluded TEST_hidden228 student still opens through /students/{id}. All 12 CEO endpoints return 200 with the {data,error,meta} wrapper and Cache-Control no-store, and every number matches bridge.json 'expect'. Error codes behave as specified: 401 with no key or a wrong key, 429 after 20 wrong keys (the right key is also refused in that window), 422 for bad dates, 404 for an unknown student. TEST_hidden228, its phone and the staff id never appear in lists or counts, and the staff 299 marks are not the day-6 top marks. No pin_hash, pin_version or token data appears in any answer. Full +91 numbers are returned. Contacts: numbers are normalised to +91, and invalid numbers, duplicates and the student's own number are skipped. One student cannot see or delete another's rows. No session gives 401, a foreign Origin gives 403, and >100 contacts or >6 tel give 422. Events: valid ones return 204 and show up in /ceo/v1/events; a bad name or bad props gives 422. Signup source: a browser signup is saved as channel web, device android, with its source; a signup without source is saved as app with source null; a bad landing gives 422. UI: 27 of 27 checks pass.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/ceo/v1/students/{id}", "issue": "Opening an excluded student by id (TEST_hidden228 id 5b5145d9..., or a CEO_EXCLUDE_PHONES student) returns 200 with the full profile. Lists and counts do exclude them. The handler should check left_out()['students'] and return 404, so it is consistent with 'never appear'."},
+      {"endpoint": "POST/DELETE /api/mission/contacts", "issue": "A write with no Origin header at all (non-browser client with cookies) is accepted with 200. Only a wrong Origin gets 403 origin_denied. This looks like the existing global CSRF design (browsers always send Origin on POST), so it is just a note."},
+      {"endpoint": "ceo_key rate limit", "issue": "When client_ip() can't tell the caller's IP (no Cloudflare hop or a private peer), every caller shares the 'unknown' bucket. 20 wrong keys from anyone in that case then lock the real CEO dashboard out for 10 minutes. Check that production always gives a resolvable IP for the dashboard's server calls, or key the bucket differently."},
+      {"endpoint": "GET /api/ceo/v1/contacts", "issue": "The joined/already_student lookup does not skip excluded profiles. If a student shares the number of a TEST_ or excluded student, the answer would expose that student_id. Low impact."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "page_open tracking", "issue": "In the preview, every page visit sends page_open twice (mission, aits, home). The cause is React.StrictMode running effects twice in the dev build (index.js). Production builds should send it once; worth a quick check after deploy.", "affected_selectors": []}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/test_ceo_dashboard228.py", "/app/backend/tests/ui_ceo228.py", "/app/test_reports/pytest/ceo228.xml"],
+  "action_items": [
+    "Optional: make /api/ceo/v1/students/{id} return 404 for ids in left_out()['students'] (TEST_ names and CEO_EXCLUDE_PHONES)",
+    "Optional: drop excluded profiles from the 'joined' lookup in /api/ceo/v1/contacts",
+    "Optional: confirm the CEO 429 lockout bucket can't be shared ('unknown' IP) in production"
+  ],
+  "critical_code_review_comments": [
+    "ceo.py students/{id} skips the exclusion filter (see minor issue)",
+    "contacts.py 'saved' counts re-picked existing contacts too, so the note '<n> dost jude' can count friends who were already saved. Cosmetic.",
+    "activity.py: anonymous rate limiting falls back to the vid the client sends when the IP can't be told, so it can be bypassed by changing vid. Writes are tiny and expire after 400 days, so the risk is low."
+  ],
+  "updated_files": ["/app/backend/tests/test_ceo_dashboard228.py", "/app/backend/tests/ui_ceo228.py"],
+  "success_rate": {"backend": "96% (27/28)", "frontend": "100% (27/27)"},
+  "seed_data_creation": "Bridge DB only (throw-away): 2 or 3 signups with random +9197XXXXXXXX numbers from TestSignupSource (students.total went from 4 to 6+), plus test contacts and events. Test contacts were deleted afterwards. Nothing was written to the preview DB. The bridge IP 'unknown' bucket is locked out of the CEO API for 10 minutes after the 429 test.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run the backend tests with: BRIDGE_OUT=/tmp/ceobridge228 python -m pytest tests/test_ceo_dashboard228.py -p no:xdist -o addopts=''. The lockout test only runs with CEO_LOCKOUT=1; run it last. Signup tests add students to the bridge DB, so run the number checks on a fresh bridge (summary is cached for 60s). Run the UI tests with: python tests/ui_ceo228.py (mocks navigator.contacts through an init script, 390x844). /mission/me returning 503 on the bridge is expected and was there before this work."
+}
