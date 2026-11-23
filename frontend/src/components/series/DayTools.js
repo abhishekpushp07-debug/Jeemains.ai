@@ -12,7 +12,7 @@ const VIEWS=[['analysis','Analysis',BarChart3,'maroon'],['progress','Progress',T
 export function DayDestinations({id}){
   const nav=useNavigate();
   const go=v=>{if(v!=='analysis')nav('/results/'+id+'?view='+v,{state:{returnTo:detailPath(id)}});};
-  return <Tabs value="analysis" onValueChange={go} className="result-destinations sh-destinations" data-testid="series-day-destinations">
+  return <Tabs value="analysis" onValueChange={go} activationMode="manual" className="result-destinations sh-destinations" data-testid="series-day-destinations">
     <TabsList aria-label="Result sections">{VIEWS.map(([v,label,Icon,tone])=><TabsTrigger key={v} value={v} className={'tone-'+tone} data-testid={'series-day-view-'+v}><Icon size={16}/>{label}</TabsTrigger>)}</TabsList>
   </Tabs>;
 }

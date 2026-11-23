@@ -330,3 +330,9 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Frontend: lib/track.js (trackPage, track, captureSource, withSource), App.js Shell effects, Rank.js rank_tool_open, Auth.js signup source, Mission.js mission_share + ContactInvite, mission.css .ms-contacts*.
 - Tests: tests/ceo_bridge228.py, tests/test_ceo_dashboard228.py, tests/ui_ceo228.py; iteration_221.
 
+## 2026-11-23 — AITS all-days analysis + day result buttons (preview only)
+- New tejas/series_insights.py (GET /api/series/all-india-jee/insights) + route contract + server router.
+- New frontend/src/components/series/insights/{useInsights,Lines,parts,Overall,SubjectTrend,VsClass,AccuracyTime,WeakSpots,SeriesInsights}.js and components/series/DayTools.js (DayDestinations, useDayRetry); SeriesAnalysis.js wires them; ScoreTrend.js exports useWidth; series-app.css .si-* block.
+- Results.js + DayTools Tabs activationMode="manual" (one history entry per tab tap). LiveSeries.js uses user?.id in the history effect.
+- Tests: tests/series_insights_bridge228.py, tests/test_series_insights228.py, tests/ui_series_insights228.py; iteration_222.
+

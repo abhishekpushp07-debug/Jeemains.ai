@@ -1,0 +1,33 @@
+{
+  "summary": "AITS 'Saare din ek saath' insights tested on the isolated bridge (127.0.0.1:8777, frozen day 6). Backend: 7/7 pytest pass. Insights numbers match expect for hero and peer, no session gives 401, and each student sees only their own days. Frontend: 108/119 Playwright checks pass on desktop 1920 and mobile 390 for hero and peer. Every listed feature renders with correct data. One functional bug: each of the four non-analysis day-page buttons (Progress, Confidence, Rank, Solutions) adds TWO history entries, so one browser Back stays on /results and you need two. Merely focusing a tab (keyboard Tab key) also navigates away. Remaining failures are cosmetic or testability issues.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "DayDestinations (frontend/src/components/series/DayTools.js)", "issue": "Clicking series-day-view-progress/accuracy/rank/solutions pushes /results/{id}?view=X twice (history.length 3->5). One browser Back stays on the results page; a second Back is needed to return to the day page. Focusing a tab without clicking (keyboard Tab) also opens /results (history 5->6). RCA: Radix Tabs default activationMode='automatic' calls onValueChange on mousedown AND on focus. Because value is fixed at 'analysis', the trigger never becomes selected, so both calls navigate. Fix: <Tabs activationMode=\"manual\" ...> or guard go() with a ref. The normal Results page tabs (Results.js result-view-*) have the same pre-existing double push (history 2->4 on one tab click). Consider activationMode='manual' there too.", "selector": "[data-testid^=series-day-view-]", "priority": "HIGH"},
+      {"component": "Overall (insights/Overall.js) and DayVsClass (VsClass.js)", "issue": "Duplicate data-testids: 'Average marks' and 'Average se upar' both produce si-overall-average. On the day card, 'Average' and 'Average se' both produce si-day-vs-average. Cause: testid built from l.split(' ')[0]. Use explicit keys, e.g. si-overall-above / si-day-vs-gap.", "selector": "[data-testid=si-overall-average], [data-testid=si-day-vs-average]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Analysis list, mobile 390", "issues": ["Cosmetic: .si-label-note is grey (rgb 94,94,105) but the same 12px as the h2 on mobile, so it is not visibly smaller. Section titles like 'SUBJECT-WISE TREND' and 'BAR-BAR GALAT HONE WALE CHAPTER' wrap to two lines beside a two-line note."]},
+      {"screen": "Day page si-day-vs", "issues": ["Cosmetic: the label 'Average se' with value '-15' reads incomplete. Consider 'Average se farak' or 'vs Average'."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_series_insights228.py", "/app/backend/tests/ui_series_insights228.py", "/app/test_reports/pytest/pytest_iter222.xml"],
+  "action_items": [
+    "Fix the double navigation in DayDestinations: add activationMode=\"manual\" to <Tabs> in DayTools.js (or a once-guard) so one Back from /results?view=X returns to the day page and keyboard focus does not navigate. Consider the same for the result-view tabs in Results.js.",
+    "Make the duplicate testids si-overall-average and si-day-vs-average unique (cosmetic/testability)."
+  ],
+  "critical_code_review_comments": [
+    "DayTools.js: a controlled Radix Tabs used as a navigator must use activationMode='manual'. Otherwise onValueChange fires on focus and on mousedown (root cause of the HIGH bug).",
+    "Overall.js / VsClass.js: testids derived from the first word of the label collide.",
+    "Overall.js: the max shown for Average and Best is data.days[0].maximum. If papers ever differ in maximum this is wrong (minor).",
+    "series_insights.py: the class cache (_class) is per process and lasts 5 min, so a day's average/topper can lag by up to 5 min after release. Acceptable but worth noting. Read-only queries, no _id leaks, auth via current."
+  ],
+  "updated_files": ["/app/backend/tests/test_series_insights228.py (new)", "/app/backend/tests/ui_series_insights228.py (new)"],
+  "success_rate": {"backend": "100% (7/7)", "frontend": "91% (108/119; 8 failures = the one double-Back bug x4 destinations x2 sizes, plus 2 duplicate-testid and 1 cosmetic note-size)"},
+  "seed_data_creation": "None. Only the bridge's throw-away DB was used; the preview DB was never written to.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && BRIDGE_OUT=/tmp/uibridge228s BRIDGE_PORT=8777 python tests/ui_series_insights228.py, and pytest tests/test_series_insights228.py -o addopts=''. Both need the bridge (tests/series_insights_bridge228.py) running. Passing checks: hub chips and trend; insights block above day rows; overall 6/50, best 210, 1/5 din, up/up; subject chart 3 lines, Physics up, Chemistry down, Maths up; vs rows 5..1 with average/topper matching expect; accuracy and time charts plus tip; Rotational Motion first; misfire link; peer untagged note with 3 si-lost rows and no practice day 5 in vs rows; no hero ids on the peer page; day 3 stats, rank card, si-day-vs 170/185/255; five buttons; a2-top-bar; Solutions dekho -> solutions and Back; retry confirm dialog; Back chain list -> hub; day 6 sealed card; 409 'Result abhi ban raha hai' on copies (expected); no side scroll desktop/mobile and after resize; chart redraws (svg width shrinks); /results five tabs; ?tab=results. Known noise: /dream 503 and 409 analysis on copy attempts are expected in the bridge.",
+  "rca of the issue": "Repro: open /series/all-india-jee/analysis/{hero day3}, click series-day-view-progress, press browser Back. The URL is still /results/{id}?view=progress (history.length went 3->5). A second Back returns to the day page. Root cause: Radix TabsTrigger fires onValueChange on onMouseDown and again on onFocus (automatic activation, trigger not selected because value is pinned to 'analysis'). DayDestinations.go navigates on each call. Mitigation: activationMode='manual' on the Tabs."
+}

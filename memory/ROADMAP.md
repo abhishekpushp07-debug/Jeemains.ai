@@ -162,5 +162,6 @@
 ## Added 2026-11-23
 - P1: AITS hub redesign is in preview only. Owner to check it, then publish.
 - DONE in preview: website side of the CEO dashboard (brief section 9). P0: keys are saved; publish, then check /api/ceo/v1/summary on jeelive.ai with the key and the page_open counts once on live.
+- DONE in preview: AITS all-days analysis (subject trend, you vs average vs topper, accuracy/time, weak list) + normal result buttons on the day page. P1: chapter tags for AITS questions (owner's choice how) so "bar-bar galat chapter" shows real chapters; check the analysis once with real students after 9 Dec.
 - P1: owner to name the CEO "enhancer" if it is not the /alerts endpoint. P2: more events (test_start, analysis_open, solution_open…) and nightly daily facts only if the dashboard needs them.
 

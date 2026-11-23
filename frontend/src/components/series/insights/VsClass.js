@@ -25,9 +25,9 @@ export function DayVsClass({day}){
   if(!day?.class)return null;
   if(day.class.state==='sealed')return <div className="sh-card si-vs-day" data-testid="si-day-vs-sealed"><p className="si-note">Is din ka average aur topper {istTime(day.class.release_at)} ke baad, rank ke saath aayega.</p></div>;
   const {average,topper,students}=day.class,gap=average==null?null:Math.round((day.score-average)*10)/10;
-  const items=[['Aap',day.score],['Average',average??'—'],['Topper',topper??'—'],['Average se',gap==null?'—':(gap>=0?'+':'')+gap]];
+  const items=[['Aap',day.score,'you'],['Average',average??'—','average'],['Topper',topper??'—','topper'],['Average se farak',gap==null?'—':(gap>=0?'+':'')+gap,'gap']];
   return <div className="sh-card si-vs-day" data-testid="si-day-vs">
     <div className="sh-label"><h2>Aap vs average vs topper</h2><span>{students} students</span></div>
-    <div className="sh-stats">{items.map(([l,v])=><div key={l} data-testid={'si-day-vs-'+l.split(' ')[0].toLowerCase()}><small>{l}</small><strong>{v}</strong></div>)}</div>
+    <div className="sh-stats">{items.map(([l,v,k])=><div key={k} data-testid={'si-day-vs-'+k}><small>{l}</small><strong>{v}</strong></div>)}</div>
   </div>;
 }
