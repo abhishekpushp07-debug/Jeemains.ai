@@ -293,7 +293,7 @@ export async function apiBytes(path: string, retry = true, epoch = authEpoch): P
 async function fetchPrivateAsset(path: string, signal: AbortSignal, extraHeaders: Record<string, string> = {}, retry = true, epoch = authEpoch): Promise<ImageResponse> {
   requireEpoch(epoch);
   const revision = tokenRevision;
-  if (!/^\/attempts\/[^/]+\/questions\/[^/]+\/asset\/(question|solution|piece)\/\d+(\?score_version=[^&]+)?$/.test(path)) throw new ApiError("Unsupported private image path.");
+  if (!/^\/attempts\/[^/]+\/questions\/[^/]+\/asset\/(question|solution|piece)\/\d+(\?(score_version=[^&]+(&format=webp)?|format=webp))?$/.test(path)) throw new ApiError("Unsupported private image path.");
   const h = await headers(false);
   h.Accept = "image/png,image/*";
   Object.assign(h, extraHeaders);
@@ -327,12 +327,23 @@ export const onAssetScopeReset = (listener: () => void) => { scopeListeners.add(
 function resetImageMemory() { assetEpoch++; privateAssets.pause(); clearImageGrants(); scopeListeners.forEach(fn => fn()); void ExpoImage.clearMemoryCache().catch(() => {}); }
 privateAssets.pause();
 export const clearAssetCache = (purgeDisk = false) => { assetOwner = null; resources.clear(); resetImageMemory(); if (purgeDisk) purgeImageDisk(); };
+// How much of the website's new picture way is used (0 = none; steps 2 to 5, see backend/app_switches.py) is said by
+// our own server: the owner's switch, changed without a new app build. Until its answer arrives, and whenever it
+// cannot be read, pictures load exactly as they always have.
+let pictureStep = 0, switchesAsked = false;
+function askSwitches() {
+  if (switchesAsked || !BACKEND) return;
+  switchesAsked = true;
+  fetch(`${BACKEND}/api/app/switches`).then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then(s => { const step = Number(s?.pictures); pictureStep = Number.isInteger(step) && step >= 2 ? step : 0; }, () => { switchesAsked = false; }); // not answered: asked again with the next paper
+}
 export const setAssetAccount = (uid: string) => {
   if (assetOwner !== uid) { resources.clear(); resetImageMemory(); configureImageDisk(uid, CANONICAL_API); }
-  assetOwner = uid; privateAssets.resume();
+  assetOwner = uid; privateAssets.resume(); askSwitches();
 };
 export const registerAssetManifest = (id: string, rows: any[], solutions: boolean, version = "original", renew = false) => {
-  if (assetOwner) registerImageGrants(id, rows, solutions, version, path => privateAssets.invalidate(path), renew);
+  askSwitches();
+  if (assetOwner) registerImageGrants(id, rows, solutions, version, path => privateAssets.invalidate(path), renew, pictureStep);
 };
 export const assetDataUri = (path: string) => privateAssets.get(path, 100);
 

@@ -34,6 +34,15 @@ export async function readSavedImage(contentKey: string): Promise<SavedImage | n
     try { return unpackImage(data); } catch { await deviceStore.remove(owner, id); return null; }
   } catch { return null; } // Quota/private mode falls back to memory, never plaintext.
 }
+/** Which of these pictures already have a copy on this phone. Null: the phone keeps no copies (no storage). */
+export async function savedImages(contentKeys: string[]): Promise<boolean[] | null> {
+  try {
+    const epoch = generation; await ready;
+    if (!scope || epoch !== generation) return null;
+    const kept = await deviceStore.keys(scope), ids = await Promise.all(contentKeys.map(imageId));
+    return epoch === generation ? contentKeys.map((key, i) => writing.has(key) || kept.has(ids[i])) : null;
+  } catch { return null; }
+}
 async function persistImage(contentKey: string, image: SavedImage) {
   const epoch = generation; await ready;
   if (!scope || epoch !== generation) return;

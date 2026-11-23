@@ -72,5 +72,6 @@ export const deviceStore: DeviceStore = {
     await commit(id, { id, iv, cipher, used: Date.now(), size: cipher.byteLength });
   }),
   remove: (owner, id) => serial(async () => { if (owner === scope) await commit(id); }),
+  keys: owner => serial(async () => new Set(owner === scope ? await transaction<IDBValidKey[]>("catalog", "readonly", s => s.getAllKeys()) as string[] : []), 100),
   clear: () => serial(reset, 0, true),
 };

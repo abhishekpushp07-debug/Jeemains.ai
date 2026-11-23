@@ -1,5 +1,6 @@
 import { api, apiRaw, getAssetAccount, getAssetEpoch, onAssetScopeReset, privateAssets, registerAssetManifest, RawResult } from "./client";
 import { imagePaths, questionPaths } from "@/src/assets/paperAssets";
+import { loadResultPictures } from "@/src/assets/paperPack";
 import { originalLook } from "@/src/assets/pieces";
 
 type Stage = { until: number; promise: Promise<any>; ctl: AbortController; timer?: ReturnType<typeof setTimeout> };
@@ -18,6 +19,9 @@ export function prepareImages(data: any, solutions = false, version = "original"
   const paths = rows.flatMap((q: any) => [...questionPaths(data.id, q, version), ...(solutions ? imagePaths(data.id, q, "solution", version) : [])]);
   // During the get-ready minute the paper pack brings every picture in a few requests (src/assets/paperPack.ts).
   if (!solutions && Number(data.ready_until) > Number(data.server_now)) return;
+  // The website's new picture answers: the pictures of a result that are not on this phone yet come in parts
+  // (src/assets/paperPack.ts), which hand whatever they did not bring to the queue.
+  if (solutions && loadResultPictures(data.id, rows, version)) return;
   privateAssets.preload(paths);
 }
 

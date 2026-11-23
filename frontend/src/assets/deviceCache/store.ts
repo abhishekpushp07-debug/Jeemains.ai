@@ -67,5 +67,6 @@ export const deviceStore: DeviceStore = {
     index[id] = { size: encrypted.length, used: Date.now() }; await saveIndex();
   }),
   remove: (owner, id) => serial(async () => { if (owner === scope) { await remove(id); await saveIndex(); } }),
+  keys: owner => serial(async () => new Set(owner === scope ? Object.keys(index) : []), 100),
   clear: () => serial(reset, 0, true),
 };

@@ -10,6 +10,7 @@ import { StatusBar } from "expo-status-bar";
 import { ErrorBoundary } from "@/src/components/error-boundary";
 import { AuthProvider, useAuth } from "@/src/auth";
 import { InboxPoller, isRoomPath } from "@/src/rapid/social";
+import { SmoothMode } from "@/src/analysis/smooth";
 import { colors } from "@/src/theme";
 
 const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account"];
@@ -39,6 +40,7 @@ export default function RootLayout() {
             <StatusBar style="dark" />
             <AuthGate />
             <InboxPoller />
+            <SmoothMode />
             <SessionBoundary><Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface }, animation: "slide_from_right" }}>
               <Stack.Screen name="attempt/[id]" options={{ gestureEnabled: false }} />
               <Stack.Screen name="rapid/session" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />

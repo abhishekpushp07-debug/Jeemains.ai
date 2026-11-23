@@ -41,25 +41,32 @@ export async function loadOriginalImage(path: string, signal: AbortSignal, trans
   const grant = imageGrant(path);
   if (!grant) throw stopped();
   const ensureCurrent = () => { if (signal.aborted || imageGrant(path) !== grant) throw stopped(); };
-  const saved = await timed("disk_read", () => readSavedImage(grant.contentKey));
+  // A picture the screen could not draw (grant.plain) is downloaded afresh: its kept copy is not looked at.
+  const saved = grant.plain ? null : await timed("disk_read", () => readSavedImage(grant.contentKey));
   loadingMetrics.count(saved ? "disk_hit" : "disk_miss");
   ensureCurrent();
-  if (saved && (grant.validated || (!!saved.at && Date.now() - saved.at < REUSE_MS))) { grant.validated = true; return originalImageValue(saved, signal); }
+  // Step 2: a revised row's key changes with its picture, so its saved copy needs no second look, however old it is.
+  if (saved && (grant.validated || grant.step >= 2 || (!!saved.at && Date.now() - saved.at < REUSE_MS))) { grant.validated = true; return originalImageValue(saved, signal); }
+  // Step 5, format=webp: the website's lighter copy (same pixels). It answers the PNG when it has none; the type is read from the answer.
+  const wire = grant.step >= 5 && !grant.plain ? `${path}${path.includes("?") ? "&" : "?"}format=webp` : path;
   let response: ImageResponse | null = null;
   if (saved && (saved.etag || saved.modified)) {
     const headers: Record<string, string> = { Range: "bytes=0-0" };
     if (saved.etag) headers["If-None-Match"] = saved.etag;
     if (saved.etag && !saved.etag.startsWith("W/")) headers["If-Range"] = saved.etag;
     else if (saved.modified) headers["If-Range"] = saved.modified;
-    response = await timed("image_network", () => transport(path, signal, headers)); ensureCurrent();
+    response = await timed("image_network", () => transport(wire, signal, headers)); ensureCurrent();
     if (unchangedImage(saved, response)) { grant.validated = true; return originalImageValue(saved, signal); }
   }
-  if (!response || response.status !== 200) response = await timed("image_network", () => transport(path, signal));
+  if (!response || response.status !== 200) response = await timed("image_network", () => transport(wire, signal));
   ensureCurrent();
-  const mime = (response.headers.get("content-type") || "").split(";")[0];
+  // The type is read from the first bytes (a format=webp call can answer the PNG); the header names it only when they do not.
+  const b = response.bytes;
+  const mime = b[0] === 0x89 && b[1] === 0x50 ? "image/png" : b[0] === 0xff && b[1] === 0xd8 ? "image/jpeg" : b[0] === 0x52 && b[1] === 0x49 && b[8] === 0x57 && b[9] === 0x45 ? "image/webp"
+    : (response.headers.get("content-type") || "").split(";")[0];
   if (!mime.startsWith("image/") || response.status !== 200 || !response.bytes.length) throw new Error("The original image could not be read. Please retry.");
   const image: SavedImage = { bytes: response.bytes, mime, etag: response.headers.get("etag") || "", modified: response.headers.get("last-modified") || "", at: Date.now() };
-  grant.validated = true;
+  grant.validated = true; grant.plain = false;
   const value = await originalImageValue(image, signal);
   try { ensureCurrent(); } catch (e) { value.dispose?.(); throw e; }
   void saveImage(grant.contentKey, image); // Pack/encrypt AFTER display conversion.

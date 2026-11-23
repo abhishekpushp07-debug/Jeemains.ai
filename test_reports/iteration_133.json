@@ -1,0 +1,31 @@
+{
+  "summary": "Independent regression + fallback check for 'Pictures (new website way, switch=5)' and 'Smooth Mode / Shine'. ALL PASS. (1) Backend: GET /api/app/switches -> 200 {\"pictures\": 5} without sign-in. (2) Isolated tests: pictures_new_answers_tests.cjs ALL 32 PASSED, smooth_mode_tests.cjs 11/11, pieces_isolated_tests.cjs ALL 16 PASSED. (3) Main flow step 5 against the live site on the real preview, fresh browser, IDB wiped: /result/1ea510f2 Solutions tab -> 2 /assets/links calls (plain + ?kind=solution, both with format=webp, 200), 17 part fetches to jeelive.ai/api/media/pack (all 200), only 8 one-by-one /asset/... calls (all format=webp, all image/webp 200), 0 /assets/pack calls, 0 error boxes. Q1 drew 554x444 in ~2.3 s, Q7 drew in <1 s from the kept copy, zoom modal opened on tapping a picture (testID solution-qimage-7-0-zoom, asset-zoom-close present and closes). Reopening the same result in the same context: 0 one-by-one calls and 0 part fetches (served from the encrypted IndexedDB copy). (4) Fallbacks, each in a fresh context, IDB wiped: FB1 (part links aborted) -> 2 links, 17 /assets/pack hits with offset/limit=12 and format=webp (sample redacted), 0 errors, pictures still draw. FB2 (links -> 409 for both kinds) -> exactly 2 links calls (both 409), 0 /assets/pack, 163 one-by-one WebP (image/webp), 0 errors. FB3 (switches -> 500, old way) -> 0 links, 0 pack, 0 parts, 144 one-by-one calls all image/png, no 'format=webp' anywhere, 0 errors. FB4a (switches 200 {pictures:0}) -> same as FB3, 138 PNG ones, no webp. FB4b (switches 200 {pictures:3}) -> 1 plain /assets/links (no kind=solution, no format word), 7 parts (PNG), 113 one-by-one solutions, no webp, 0 errors. FB4c (switches 200 {pictures:4}) -> 2 links (/assets/links and /assets/links?kind=solution, no format=webp), 17 parts, 8 PNG one-by-one, no webp, 0 errors. FB5 (part bodies replaced with 10 random bytes + /assets/pack aborted) -> no crash, no error boxes, 174 one-by-one calls, Q1 drew with naturalWidth>0, no page errors. (5) Smooth Mode / Shine regression (390x844, after sign-in): Home 2 running animations, My Tests 9 steady across 12 s on a fast browser (expected ~9 of 3 kinds), Rank 7; under CDP CPU throttling rate 40 on /tests the count drops from 9 -> 3 within ~5 s (the lone glint), does NOT climb back after throttle is removed (still 3), tabs 'my-tests-tab-completed/progress/saved' render and are tappable, no red screen, screens still carry their glossy coloured tiles (visual check). (6) General regression: sign-in OK, Home/Rank/Rapid Fire/My Tests/Mission all navigate, every route returns text content, only one console 'error' seen: a 401 on a background XHR which is normal pre-login background noise and unrelated to this build. READ-ONLY throughout: no test was started, resumed, answered, or submitted; no PIN/profile changes; no accounts created; no cookies, PIN, tokens or part link paths printed. No deprecated Expo packages touched by this work. No regression seen on the Shine screens.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/frontend/tests/pictures_new_answers_tests.cjs",
+    "/app/frontend/tests/smooth_mode_tests.cjs",
+    "/app/frontend/tests/pieces_isolated_tests.cjs",
+    "/app/tests/pictures_step_ui.py",
+    "/app/tests/iter127_login_probe.py"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "backend/app_switches.py is tiny and clean; no PII, no auth required, idempotent constant, correct APIRouter wiring. Flipping back is a one-line change.",
+    "The live step-5 behaviour matches the documented plan in /app/memory/PICTURES_APP.md section 'How a result loads now': part fetches (17) + screen-first one-by-one WebP calls (8), then quiescence, then zero on reopen.",
+    "Every fallback path observed on the real preview matches the written contract: links 409 -> one-by-one, parts aborted -> /assets/pack, switches dead or 0 -> fully old way (no webp, no links, no pack), 10-byte part bodies -> graceful one-by-one recovery.",
+    "No React Native red screen, no uncaught page errors on Home, My Tests, Rank, Rapid Fire, Mission, Result/Solutions during ~4 minutes of exercise."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (1/1 switch endpoint)", "frontend": "100% (main step-5 flow + FB1..FB5 + Smooth Mode + general regression)"},
+  "seed_data_creation": "None. The QA learner was only signed in; no attempt was started, resumed, answered or submitted; no profile/PIN/account changes; no writes to the live website. IndexedDB 'jeelive-private-images-v1' was deleted inside each test browser context before opening the result (local-only).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "For the same scope, reuse the main flow of /app/tests/pictures_step_ui.py and the fallback bodies pasted in this run (switches overrides + page.route for /assets/links, /api/media/pack/**, /assets/pack*). Note that subject chips on the Solutions tab have two layers of testIDs: use the exact ids solution-subject-mathematics / -physics / -chemistry (NOT a 'contains' selector, because 'a2-subject-*' also matches). Reopen-test should always come after a wait for quiescence (no /api/ response for ~12 s) so the IDB write finishes before navigating away.",
+  "rca_of_issue": "Not applicable (regression + fallback run, no bug reproduced). Everything the request asked to verify behaved as documented."
+}

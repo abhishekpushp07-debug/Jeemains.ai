@@ -5,13 +5,13 @@ from starlette.middleware.gzip import GZipMiddleware
 
 
 class AssetAwareCompression:
-    """Don't spend CPU recompressing original PNG/WebP/JPEG image bytes."""
+    """Don't spend CPU recompressing original PNG/WebP/JPEG image bytes (one picture, or a paper part of 12)."""
     def __init__(self, app, **kwargs):
         self.app, self.compressed = app, GZipMiddleware(app, **kwargs)
 
     async def __call__(self, scope, receive, send):
         path = scope.get('path', '')
-        original_image = '/asset/' in path or path.startswith(('/api/brand/', '/api/avatars/'))
+        original_image = '/asset/' in path or path.endswith('/assets/pack') or path.startswith(('/api/brand/', '/api/avatars/'))
         await (self.app if original_image else self.compressed)(scope, receive, send)
 
 

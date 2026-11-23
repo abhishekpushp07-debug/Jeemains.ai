@@ -8,6 +8,8 @@ export const subjectOf = (q?: PaperQuestion) => q?.subject?.trim() || "Uncategor
 export const subjectId = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 export const availableQuestions = <T extends PaperQuestion>(rows: T[], bonusUnlocked: boolean) => rows.filter(q => !q.bonus || bonusUnlocked);
 export const resultIsReleased = (status: number, result?: { summary?: unknown; status?: string } | null) => status === 200 && !!result?.summary && result.status !== "embargoed";
+/** Results whose pictures are arriving in parts (paperPack.ts), as "attempt|version": the queue leaves their background loading to the parts. */
+export const partLoads = new Set<string>();
 export function imagePaths(id: string, q: PaperQuestion, kind: "question" | "solution" | "piece", version = "original") {
   const count = kind === "piece" ? piecesOf(q)?.length : kind === "question" ? q.asset_count : q.solution_asset_count;
   return Array.from({ length: Math.max(0, Number(count) || 0) }, (_, i) =>
@@ -62,7 +64,7 @@ export function usePaperAssets(id: string, rows: PaperQuestion[], selected?: str
     privateAssets.pin(focus, window);
     focus.forEach(path => { void privateAssets.get(path, 100).catch(() => {}); });
     window.forEach(path => { void privateAssets.get(path, 80).catch(() => {}); });
-    privateAssets.preload(paths);
+    if (!partLoads.has(`${id}|${version}`)) privateAssets.preload(paths);
   }, [id, rows, selected, solutions, version, enabled, paths, window]));
   // No global progress subscription: downloading Q75 must not render Q1 again.
   return enabled ? window : [];

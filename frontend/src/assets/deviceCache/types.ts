@@ -5,6 +5,8 @@ export type DeviceStore = {
   read: (scope: string, key: string) => Promise<Uint8Array | null>;
   write: (scope: string, key: string, bytes: Uint8Array) => Promise<void>;
   remove: (scope: string, key: string) => Promise<void>;
+  /** The keys of every copy kept for this account (no picture is read). */
+  keys: (scope: string) => Promise<Set<string>>;
   clear: () => Promise<void>;
 };
 /** `at`: when this copy was downloaded (ms). The website sends no validator for paper images, so a recent copy is reused. */

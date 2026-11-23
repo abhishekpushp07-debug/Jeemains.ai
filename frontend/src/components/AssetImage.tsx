@@ -3,6 +3,7 @@ import { ActivityIndicator, Modal, Pressable, ScrollView, StyleSheet, View, useW
 import { Image } from "expo-image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ApiError, assetDataUri, privateAssets } from "@/src/api/client";
+import { drawAsPlain } from "@/src/assets/assetGrants";
 import { Icon, Press, T } from "@/src/components/ui";
 import { colors, radius, space } from "@/src/theme";
 import { clock, loadingMetrics } from "@/src/assets/loadingMetrics";
@@ -28,6 +29,8 @@ export function useImageRetry(path: string, value: unknown) {
   useEffect(() => { if (value) { tries.current = 0; setRetrying(false); } }, [value]); // loaded: a later failure gets the full set of tries again
   const failed = useCallback((e: any) => {
     if (e?.name === "AbortError") return;
+    // The picture arrived but the phone could not draw it: the next try fetches the plain picture afresh.
+    if (e?.message === "display") drawAsPlain(path);
     if (passing(e) && tries.current < RETRY_DELAYS.length) {
       const wait = Math.max(RETRY_DELAYS[tries.current++], e?.retryAfterMs || 0);
       clearTimeout(timer.current);

@@ -4,13 +4,15 @@
 // recoloured. Same engine as Rapid Fire's glitter ring: CSS animations on the UI thread (plain CSS on the web), moving
 // and fading only, so the screen stays light.
 // Under Reduce Motion, or while the screen is covered or hidden, everything rests and the edge is a still coloured slope.
-import React, { useMemo, useState } from "react";
+// On a phone that cannot keep up it calms by itself (./smooth.ts): only the glint crosses, or nothing moves.
+import React, { useEffect, useMemo, useState } from "react";
 import { LayoutChangeEvent, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import Animated, { css } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Path } from "react-native-svg";
 import { useStill } from "@/src/motion";
 import { colors, shineColors } from "@/src/theme";
+import { CALM, STILL, shineMoves, useShineLevel } from "./smooth";
 
 const TURN = 4200, CYCLE = 3600, TWINKLE = 5200, CHANGE = 5600;
 const SPIN = css.keyframes({ from: { transform: [{ rotate: "0deg" }] }, to: { transform: [{ rotate: "360deg" }] } });
@@ -77,7 +79,10 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
   children: React.ReactNode; radius: number; ring: number; tones?: readonly [string, string, ...string[]]; backdrop?: React.ReactNode; edge?: readonly [string, string, ...string[]];
   gloss?: string; glint?: string; band?: number; part?: number; corner?: boolean; fill?: boolean; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
 }) {
-  const still = useStill() || !!rest;
+  const level = useShineLevel();
+  const still = useStill() || !!rest || level === STILL;
+  const calm = level === CALM; // a phone that cannot keep up: only the glint still crosses
+  useEffect(() => still ? undefined : shineMoves(), [still]);
   const turned = useMemo(() => tones ? [...tones].reverse() as unknown as typeof tones : null, [tones]);
   const [box, setBox] = useState({ w: 0, h: 0 });
   const onLayout = (e: LayoutChangeEvent) => {
@@ -90,13 +95,13 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
     <View onLayout={onLayout} style={[styles.ring, { borderRadius: radius, padding: ring }]}>
       {/* A square as wide as the face's diagonal turns behind it, so the five colours keep running round all four sides. */}
       {!ring ? null : box.w ? <Animated.View pointerEvents="none" style={[{ position: "absolute", width: d, height: d, left: (box.w - d) / 2, top: (box.h - d) / 2 },
-        still ? null : { animationName: SPIN, animationDuration: TURN, animationDelay: delay, animationIterationCount: "infinite", animationTimingFunction: "linear" }]}>
+        still || calm ? null : { animationName: SPIN, animationDuration: TURN, animationDelay: delay, animationIterationCount: "infinite", animationTimingFunction: "linear" }]}>
         <LinearGradient colors={edge} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
       </Animated.View> : <LinearGradient pointerEvents="none" colors={edge} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />}
       <View style={[styles.face, { borderRadius: Math.max(0, radius - ring) }, face]}>
         {tones ? <LinearGradient pointerEvents="none" colors={tones} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} /> : backdrop}
         {/* Neighbours start a little apart, so the change travels along a row of pills like a slow wave. */}
-        {still || !turned ? null : <Animated.View pointerEvents="none" style={[styles.swap,
+        {still || calm || !turned ? null : <Animated.View pointerEvents="none" style={[styles.swap,
           { animationName: SWAP, animationDuration: CHANGE, animationDelay: delay * 3, animationIterationCount: "infinite", animationTimingFunction: "ease-in-out" }]}>
           <LinearGradient colors={turned} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
         </Animated.View>}
@@ -108,7 +113,7 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
         {children}
       </View>
     </View>
-    {still || !sparkles ? null : <Sparkles count={sparkles} />}
+    {still || calm || !sparkles ? null : <Sparkles count={sparkles} />}
   </View>;
 }
 
