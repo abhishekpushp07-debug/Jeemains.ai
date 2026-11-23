@@ -9,13 +9,15 @@ How the website calls the app server. Everything here was run against the live s
 | Live | `https://jeelive-mobile.emergent.host/api` | Always, unless you are testing unreleased app-server work |
 | Development | `https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/api` | Unreleased work only. It sleeps when idle and its address changes when the workspace is recreated |
 
-Both serve the same code and data today and return identical numbers. All paths below are relative to the API root.
+Both hold the same data and return identical numbers. The development server is ahead by the new work of this pack
+(Cut off and the scorecard rank, `WHATS_NEW.md`) until the app project's next publish; `connect_check.py` says `WAIT`
+for those checks on a server that does not have them yet. All paths below are relative to the API root.
 
 ## 2. What needs sign-in
 
 | Area | Paths | Sign-in |
 |---|---|---|
-| Rank | `/rank/*` (14 endpoints + 7 PDFs) | none: no account, no key, no cookie |
+| Rank | `/rank/*` (16 JSON endpoints, Cut off's two included, + 7 PDFs) | none: no account, no key, no cookie |
 | Share link | `/j/{code}` | none: opened by a friend's browser |
 | Mission stats | `/rf/mission/me` | a 15-minute pass |
 | Dream college | `/rf/dream`, `/rf/dream/dreams`, `/rf/dream/mocks`, `/rf/dream/cheered` | a 15-minute pass |
@@ -53,8 +55,8 @@ It needs `fastapi` and `httpx`. It adds these routes to the website's own origin
 
 | Website route | Forwards to (app server) | Notes |
 |---|---|---|
-| `GET /api/rank/meta`, `/colleges`, `/target/bitsat` | same path | kept in memory for 10 minutes; `Cache-Control: public, max-age=300` |
-| `POST /api/rank/…` (11 JSON endpoints) | same path | status and JSON passed through word for word |
+| `GET /api/rank/meta`, `/colleges`, `/target/bitsat`, `/cutoff/options` (new) | same path | kept in memory for 10 minutes; `Cache-Control: public, max-age=300` |
+| `POST /api/rank/…` (12 JSON endpoints; `cutoff` is new) | same path | status and JSON passed through word for word |
 | `POST /api/rank/pdf/…` (7) | same path | `application/pdf` with the server's file name; 30 s limit |
 | `GET /api/mission/me` | `/rf/mission/me` | adds `link`; `Cache-Control: no-store` |
 | `GET /api/dream`, `PUT /api/dream/dreams`, `POST /api/dream/mocks`, `POST /api/dream/cheered` | `/rf/dream…` | signed-in |
@@ -131,7 +133,7 @@ Every error is JSON with one key, `detail`.
 
 | Status | `detail` | Meaning | Show |
 |---|---|---|---|
-| 422 | a **sentence**, e.g. `"Marks ya percentile mein se koi ek daalo."` | a rule of the tool was broken | the sentence, under the form |
+| 422 | a **sentence**, e.g. `"Marks, percentile ya rank mein se koi ek daalo."` | a rule of the tool was broken | the sentence, under the form |
 | 422 | a **list** `[{"loc": ["body","marks"], "msg": "Input should be less than or equal to 300", …}]` | a field has the wrong type or range | your own field message; validate before sending so this never appears |
 | 404 | `"College nahi mila."` | unknown institute number or college code | the sentence, with Retry |
 | 401 | `"Please sign in again."` (connector) | no valid website session | your sign-in prompt |
@@ -145,7 +147,7 @@ Client-side timeouts the app uses, and the client in this pack copies: 15 s for 
 
 ## 7. Caching and load
 
-- `GET /rank/meta`, `GET /rank/colleges`, `GET /rank/target/bitsat` change only when the app server is redeployed with
+- `GET /rank/meta`, `GET /rank/colleges`, `GET /rank/target/bitsat`, `GET /rank/cutoff/options` change only when the app server is redeployed with
   new data. Fetch once per visit; the connector also keeps them for 10 minutes.
 - `POST` answers depend only on the request body. You may memoise them in the page for the session. The server itself
   remembers the last 512 different forms.
@@ -170,7 +172,7 @@ Links already shared from the app keep working either way.
 ## 9. Prove the connection
 
 ```bash
-python CONNECT/connect_check.py                                   # live app server, 21 checks
+python CONNECT/connect_check.py                                   # live app server, 29 checks (8 say WAIT until Cut off is published there)
 python CONNECT/connect_check.py --pdf                             # + the 7 PDFs
 python CONNECT/connect_check.py https://<website>/api --website   # through the mounted connector
 

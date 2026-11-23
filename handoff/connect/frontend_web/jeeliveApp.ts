@@ -26,12 +26,15 @@ export type Range = [number, number];
 export type Source = { label: string; url: string };
 
 // ------------------------------------------------------------------ types: JEE Main
+/** Send at least one of marks, percentile, rank (the scorecard's All India Rank). With several, the most exact wins:
+ *  rank, then percentile, then marks. */
 export type FormBody = {
-  marks?: number; percentile?: number; level: Level; category: Category;
+  marks?: number; percentile?: number; rank?: number; level: Level; category: Category;
   female: boolean; pwd: boolean; state: string | null; branches: string[];
 };
+export type ScoreKind = "marks" | "percentile" | "rank";
 export type RankResult = {
-  percentile: Range; crl: Range; from_marks: boolean; summary: string; spread?: string; paper?: string; check?: string;
+  percentile: Range; crl: Range; from_marks: boolean; source?: ScoreKind; summary: string; spread?: string; paper?: string; check?: string;
   cat_rank?: { label: string; range: Range }; pwd_rank?: { label: string; range: Range }; delhi_note?: string;
 };
 export type Seat = {
@@ -152,6 +155,43 @@ export type CollegeCol = {
   easiest?: CollegeSide | null; toughest?: CollegeSide | null; cs?: CollegeSide | null; cs_count?: number;
 };
 
+// ------------------------------------------------------------------ types: Cut off (NEW)
+/** One college's branches, or one branch's 100 most wanted college-branches, with every round's 2026 cut-off.
+ *  With a score only the rows the student can reach come back, each tagged Safe, Likely or Borderline. docs/11. */
+export type CutoffExam = "jee" | "comedk" | "bitsat";
+export type CutoffBy = "college" | "branch";
+export type CutoffScore = { marks?: number; percentile?: number; rank?: number };
+/** One line of a picker. Send `key` back exactly as received. Search over title + sub + find. */
+export type CutoffOption = { key: string; title: string; sub: string; find?: string; kind?: string };
+/** score = the kinds of score this exam accepts, in the order of the chips; marks = [lowest, highest] marks;
+ *  levels = the Tough / Normal / Easy question applies; profile = category, gender, PwD and home state apply. */
+export type CutoffOptions = { limit: number } & Record<CutoffExam, {
+  name: string; score: ScoreKind[]; marks: [number, number]; levels: boolean; profile: boolean; colleges: CutoffOption[]; branches: CutoffOption[];
+}>;
+/** One round (BITSAT: one year) of one row. state is present only with a score: "in" = the student's whole range is
+ *  inside (green), "edge" = only part of it, or a CSAB round (amber), "out" = not reached. na = the college has no such
+ *  round (leave the box out). crl = this CSAB box is on CRL although the seat's own rank type is a category / PwD rank. */
+export type CutoffCell = { label: string; close: number | null; state?: "in" | "edge" | "out"; na?: boolean; crl?: boolean };
+export type CutoffRow = {
+  id: string; college: string; place: string; kind: string; branch: string; path: string; rank_type: string; cells: CutoffCell[];
+  final: { label: string; close: number }; prev: { label: string; close: number | null } | null; seats: number | null; fee: number | null;
+  need: { marks: number; pct?: number; level?: Level }; tag: Tag | null; gap?: string;
+};
+export type CutoffYou = {
+  source: ScoreKind; summary: string; line: string; percentile: Range | null; rank: { label: string; range: Range } | null;
+  cat_rank?: { label: string; range: Range } | null; pwd_rank?: { label: string; range: Range } | null; check?: string | null;
+  counts: Record<Tag, number>;
+};
+/** total = rows open to this student before the score filter; eligible = rows that passed it (null without a score);
+ *  limit = 100 for a branch list, null for a college; metric "score" (BITSAT) = a bigger number is harder. */
+export type CutoffOut = {
+  exam: CutoffExam; by: CutoffBy; key: string; title: string; name: string; sub: string; kind: string | null; metric: "rank" | "score";
+  columns: string[]; prev_label: string | null; rows: CutoffRow[]; total: number; eligible: number | null; limit: number | null;
+  you: CutoffYou | null; near: CutoffRow[]; notes: string[]; official: string;
+};
+/** level, category, female, pwd and state are used by JEE Main only; leave them out for COMEDK and BITSAT. */
+export type CutoffIn = { exam: CutoffExam; by: CutoffBy; key: string; level?: Level } & CutoffScore & Partial<JeeProfile>;
+
 // ------------------------------------------------------------------ types: PDFs
 export type PdfRequests = {
   "jee": FormBody & { segment: Segment };
@@ -222,7 +262,8 @@ export function createJeeliveApp(options: ClientOptions = {}) {
     meta: () => call<Meta>("/rank/meta"),
     /** Rank predictor: marks -> percentile and rank (JEE: all three paper types; COMEDK: three public analyses). */
     estimate: (body: EstimateIn) => call<EstimateOut>("/rank/estimate", body),
-    /** Percentile se rank: NTA percentile -> CRL, category / PwD rank, and the marks it took on each paper type. */
+    /** NTA percentile -> CRL, category / PwD rank, and the marks it took on each paper type. Still served, but the app
+     *  no longer has a screen for it: its tile became Cut off, and every JEE form now takes a percentile or a rank. */
     percentile: (body: PercentileIn) => call<PercentileOut>("/rank/percentile", body),
     /** College predictor, JEE Main: the Rank Card + up to 50 college-branches (25 a page) + 5 near misses. */
     predict: (body: PredictIn) => call<PredictOut>("/rank/predict", body),
@@ -241,7 +282,12 @@ export function createJeeliveApp(options: ClientOptions = {}) {
     /** College vs college: 1-3 whole colleges side by side, for the student's JEE profile. */
     compareColleges: (items: CollegeRef[], profile: JeeProfile) =>
       call<{ items: CollegeCol[]; notes: string[] }>("/rank/compare/colleges", { items, ...profile }),
-    /** A white A4 PDF drawn by the server (allow 30 s). `name` comes from the server, e.g. "JEELIVE-JEE-Main-180-marks.pdf". */
+    /** Cut off (NEW): the two pickers of every exam (colleges and branches). About 62 KB (11 KB compressed). Fetch once per visit. */
+    cutoffOptions: () => call<CutoffOptions>("/rank/cutoff/options"),
+    /** Cut off (NEW): every round's cut-off for one college's branches or one branch's top 100 colleges.
+     *  Without a score: every row. With one: only Safe, Likely and Borderline rows, plus up to 3 nearest misses. */
+    cutoff: (body: CutoffIn) => call<CutoffOut>("/rank/cutoff", body),
+    /** A white A4 PDF drawn by the server (allow 30 s). `name` comes from the server, e.g. "JEELIVE-JEE-colleges-180-marks.pdf". */
     async pdf<K extends keyof PdfRequests>(kind: K, body: PdfRequests[K]): Promise<Pdf> {
       const fail = "PDF nahi bani. Network check karke dobara try karo.";
       const res = await send(`/rank/pdf/${kind}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }, 30000);

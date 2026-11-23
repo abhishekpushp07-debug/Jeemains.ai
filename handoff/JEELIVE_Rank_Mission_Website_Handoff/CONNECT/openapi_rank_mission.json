@@ -498,6 +498,64 @@
         }
       }
     },
+    "/api/rank/cutoff/options": {
+      "get": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Options",
+        "operationId": "options_api_rank_cutoff_options_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rank/cutoff": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Cutoff",
+        "operationId": "cutoff_api_rank_cutoff_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CutoffIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rank/pdf/jee": {
       "post": {
         "tags": [
@@ -1234,6 +1292,19 @@
             ],
             "title": "Percentile"
           },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
           "level": {
             "type": "string",
             "enum": [
@@ -1638,6 +1709,123 @@
         ],
         "title": "CompareItem"
       },
+      "CutoffIn": {
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "GEN",
+              "EWS",
+              "OBC-NCL",
+              "SC",
+              "ST"
+            ],
+            "title": "Category",
+            "default": "GEN"
+          },
+          "female": {
+            "type": "boolean",
+            "title": "Female",
+            "default": false
+          },
+          "pwd": {
+            "type": "boolean",
+            "title": "Pwd",
+            "default": false
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          },
+          "exam": {
+            "type": "string",
+            "enum": [
+              "jee",
+              "comedk",
+              "bitsat"
+            ],
+            "title": "Exam"
+          },
+          "by": {
+            "type": "string",
+            "enum": [
+              "college",
+              "branch"
+            ],
+            "title": "By"
+          },
+          "key": {
+            "type": "string",
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Key"
+          },
+          "marks": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 390.0,
+                "minimum": -130.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Marks"
+          },
+          "percentile": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentile"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "tough",
+              "normal",
+              "easy"
+            ],
+            "title": "Level",
+            "default": "normal"
+          }
+        },
+        "type": "object",
+        "required": [
+          "exam",
+          "by",
+          "key"
+        ],
+        "title": "CutoffIn",
+        "description": "category, female, pwd and state (rank_tools.Profile) are used by JEE Main only."
+      },
       "Dream": {
         "properties": {
           "id": {
@@ -1826,6 +2014,19 @@
               }
             ],
             "title": "Percentile"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
           },
           "level": {
             "type": "string",
@@ -2030,6 +2231,19 @@
               }
             ],
             "title": "Percentile"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 2000000.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
           },
           "level": {
             "type": "string",

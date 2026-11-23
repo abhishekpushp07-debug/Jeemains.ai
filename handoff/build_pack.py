@@ -109,8 +109,10 @@ def shared(ui: Path):
 
 def copy_code():
     rank = PACK / "RANK" / "code"
-    for f in ("rank_predictor.py", "rank_comedk.py", "rank_bitsat.py", "rank_tools.py", "rank_pdf.py", "dream.py"):
+    for f in ("rank_predictor.py", "rank_comedk.py", "rank_bitsat.py", "rank_tools.py", "rank_cutoff.py", "rank_pdf.py", "dream.py"):
         copy(BACK / f, rank / "server_reference" / f)
+    # The server's own checks that Cut off agrees with Target marks and the College predictor (docs/11 section 9).
+    copy(BACK / "tests" / "test_rank_cutoff.py", rank / "server_reference" / "tests" / "test_rank_cutoff.py")
     ui = rank / "app_reference_ui"
     copy(FRONT / "app" / "(tabs)" / "rank.tsx", ui / "app_tabs_rank.tsx")
     for f in sorted((FRONT / "src" / "rank").iterdir()):
@@ -195,6 +197,7 @@ def api_examples():
     save("21_compare_branches", "POST", "/rank/compare", {"items": items})
     save("22_compare_colleges", "POST", "/rank/compare/colleges", {"items": [{"exam": "jee", "id": str(s["inst"])}, {"exam": "comedk", "id": k["code"]}, {"exam": "bitsat", "id": "Pilani"}],
                                                                   "category": "GEN", "female": False, "pwd": False, "state": "Bihar"})
+    cutoff_examples(save, out, note)
     for name, path, body in (("jee_top50", "/rank/pdf/jee", {**form, "segment": "all"}), ("comedk_top50", "/rank/pdf/comedk", {"marks": 110, "branches": [], "area": "all"}),
                              ("bitsat_programs", "/rank/pdf/bitsat", {"score": 280, "campus": "all", "degree": "all"}),
                              ("target_jee_college", "/rank/pdf/target/jee", {"inst": s["inst"], "category": "GEN", "female": False, "pwd": False, "state": "Bihar"}),
@@ -206,6 +209,48 @@ def api_examples():
         (pdfs / f"sample_{name}.pdf").write_bytes(data)
         dump(pdfs / f"sample_{name}.request.json", {"method": "POST", "url": f"/api{path}", "body": body})
     return done
+
+
+def cutoff_examples(save, out, note):
+    """Cut off (new): the pickers, a college and a branch of every exam with and without a score, and what the server refuses."""
+    opts = save("23_cutoff_options_pickers", "GET", "/rank/cutoff/options")
+    key = lambda exam, title: next(c["key"] for c in opts[exam]["colleges"] if c["title"] == title)  # noqa: E731
+    me = {"level": "normal", "category": "GEN", "female": False, "pwd": False, "state": None}
+    trichy, dtu, first_comedk = key("jee", "NIT Trichy"), key("jee", "DTU Delhi"), opts["comedk"]["colleges"][0]["key"]
+    cs = {"exam": "jee", "by": "branch", "key": "Computer Science"}
+    save("24_cutoff_jee_college_every_branch_every_round", "POST", "/rank/cutoff", {"exam": "jee", "by": "college", "key": trichy, **me})
+    save("25_cutoff_jee_college_eligible_at_200_marks", "POST", "/rank/cutoff", {"exam": "jee", "by": "college", "key": trichy, "marks": 200, **me})
+    save("26_cutoff_jee_branch_top_100", "POST", "/rank/cutoff", {**cs, **me})
+    save("27_cutoff_jee_branch_eligible_scorecard_rank_obc_ncl_home_state", "POST", "/rank/cutoff", {**cs, "rank": 7500, **me, "category": "OBC-NCL", "state": "Tamil Nadu"})
+    save("28_cutoff_jee_jac_delhi_college_percentile", "POST", "/rank/cutoff", {"exam": "jee", "by": "college", "key": dtu, "percentile": 99.2, **me, "state": "Delhi"})
+    save("29_cutoff_comedk_college_every_course", "POST", "/rank/cutoff", {"exam": "comedk", "by": "college", "key": first_comedk})
+    save("30_cutoff_comedk_branch_eligible_rank_30000", "POST", "/rank/cutoff", {"exam": "comedk", "by": "branch", "key": "Computer Science", "rank": 30000})
+    save("31_cutoff_bitsat_campus_five_years_no_rounds", "POST", "/rank/cutoff", {"exam": "bitsat", "by": "college", "key": "Pilani"})
+    save("32_cutoff_bitsat_program_eligible_score_280", "POST", "/rank/cutoff", {"exam": "bitsat", "by": "branch", "key": "cs", "marks": 280})
+    save("33_predict_scorecard_rank", "POST", "/rank/predict", {"rank": 7500, **me, "branches": [], "segment": "all", "page": 1})
+    refused = []
+    for body in ({"exam": "jee", "by": "college", "key": "9999"}, {"exam": "jee", "by": "branch", "key": "Nope"}, {"exam": "bitsat", "by": "college", "key": "Mumbai"},
+                 {"exam": "bitsat", "by": "branch", "key": "nope"}, {"exam": "jee", "by": "college", "key": trichy, "marks": 350},
+                 {"exam": "comedk", "by": "branch", "key": "Computer Science", "percentile": 90}, {"exam": "comedk", "by": "branch", "key": "Computer Science", "marks": 181},
+                 {"exam": "comedk", "by": "branch", "key": "Computer Science", "rank": 250000}, {"exam": "bitsat", "by": "college", "key": "Pilani", "rank": 5},
+                 {"exam": "neet", "by": "college", "key": "1"}):
+        try:
+            call("/rank/cutoff", body)
+            raise RuntimeError(f"not refused: {body}")
+        except urllib.error.HTTPError as e:
+            refused.append({"request": {"method": "POST", "url": "/api/rank/cutoff", "body": body}, "status": e.code, "response": json.loads(e.read())})
+    dump(out / "34_cutoff_what_the_server_refuses.json", {"note": note + " A sentence is ready to show; a list means a wrong field (validate in the form).", "answers": refused})
+
+
+def live_has_cutoff():
+    """True / False: whether the live app server already answers Cut off. None when the live server could not be asked."""
+    try:
+        call("/rank/cutoff/options", base=LIVE)
+        return True
+    except urllib.error.HTTPError:
+        return False
+    except OSError:
+        return None
 
 
 def mission_examples():
@@ -302,7 +347,9 @@ if __name__ == "__main__":
     n_paths = openapi()
     done = api_examples()
     mission_examples()
-    summary = {"checks": checks(), "openapi_paths": n_paths, "rank_api_examples": len(done)}
+    summary = {"checks": checks(), "openapi_paths": n_paths, "rank_api_examples": len(done) + 1,  # + the refusals file
+               "new_in_this_pack": ["Cut off tool (docs/11)", "Meri details (docs/12)", "scorecard rank in every JEE form"],
+               "cut_off_on_live": live_has_cutoff()}
     n = manifest(summary)
     size = make_zip()
     print(json.dumps(summary, indent=1))

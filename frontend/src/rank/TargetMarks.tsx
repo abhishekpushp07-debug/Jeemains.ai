@@ -16,15 +16,15 @@ import { CollegeSearch } from "./CollegeSearch";
 import { feeLine } from "./ComedkSheet";
 import { PdfButton } from "./PdfButton";
 import { useAccent } from "./accent";
+import { SAVED, useProfileSaves } from "./profile";
 
-const SAVED = "rank.target.v1";
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
 type Exam = "jee" | "bitsat" | "comedk";
 type Profile = { exam: Exam; category: Category; female: boolean; pwd: boolean; state: string | null; inst: number | null; code: string | null; campus: "all" | "Pilani" | "Goa" | "Hyderabad" };
 const DEFAULT: Profile = { exam: "jee", category: "GEN", female: false, pwd: false, state: null, inst: null, code: null, campus: "all" };
 
 /** Loads once per screen and caches through re-renders. */
-function useOnce<T>(load: (() => Promise<T>) | null) {
+export function useOnce<T>(load: (() => Promise<T>) | null) {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [tries, setTries] = useState(0);
@@ -41,13 +41,15 @@ function useOnce<T>(load: (() => Promise<T>) | null) {
 
 export function TargetMarks({ states }: { states: string[] }) {
   const [p, setP] = useState<Profile>(DEFAULT);
+  // Read when the tool opens and again after "Meri details" is saved (that fills every tool's form).
+  const saves = useProfileSaves();
   useEffect(() => {
-    storage.getItem<string | null>(SAVED, null).then(raw => {
+    storage.getItem<string | null>(SAVED.target, null).then(raw => {
       if (!raw) return;
       try { setP({ ...DEFAULT, ...JSON.parse(raw) }); } catch { /* keep defaults */ }
     });
-  }, []);
-  const patch = (x: Partial<Profile>) => setP(prev => { const next = { ...prev, ...x }; storage.setItem(SAVED, JSON.stringify(next)); return next; });
+  }, [saves]);
+  const patch = (x: Partial<Profile>) => setP(prev => { const next = { ...prev, ...x }; storage.setItem(SAVED.target, JSON.stringify(next)); return next; });
   const lists = useOnce(p.exam === "bitsat" ? null : getColleges);
   return <>
     <Switch prefix="tm-exam" value={p.exam} onChange={exam => patch({ exam })} items={[{ key: "jee", label: "JEE Main" }, { key: "bitsat", label: "BITSAT" }, { key: "comedk", label: "COMEDK" }]} />
@@ -58,17 +60,17 @@ export function TargetMarks({ states }: { states: string[] }) {
   </>;
 }
 
-function Chooser({ label, onPress, testID }: { label: string | null; onPress: () => void; testID: string }) {
+export function Chooser({ label, onPress, testID, empty = "College chuno" }: { label: string | null; onPress: () => void; testID: string; empty?: string }) {
   const a = useAccent();
-  return <Press testID={testID} onPress={onPress} scaleTo={0.99} style={[styles.chooser, a && { borderColor: a.line }]} accessibilityLabel={label ?? "College chuno"}>
+  return <Press testID={testID} onPress={onPress} scaleTo={0.99} style={[styles.chooser, a && { borderColor: a.line }]} accessibilityLabel={label ?? empty}>
     <Glyph name="school-outline" size={20} color={a ? a.text : colors.custom_rankSilver} stroke={1.5} />
-    <T w="bold" size={15} color={label ? colors.onSurface : colors.custom_softText} numberOfLines={1} style={{ flex: 1 }}>{label ?? "College chuno"}</T>
+    <T w="bold" size={15} color={label ? colors.onSurface : colors.custom_softText} numberOfLines={1} style={{ flex: 1 }}>{label ?? empty}</T>
     <Glyph name="chevron-down" size={16} color={a ? a.text : colors.muted} />
   </Press>;
 }
 
 /** Fetches one target answer whenever its request changes. */
-function useTarget<Q, R>(q: Q | null, load: (q: Q) => Promise<R>) {
+export function useTarget<Q, R>(q: Q | null, load: (q: Q) => Promise<R>) {
   const [data, setData] = useState<R | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);

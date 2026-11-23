@@ -8,15 +8,15 @@ import { CATEGORY_LABEL, LEVEL } from "./tones";
 import { Picker, Strip, Summary, Toggle } from "./controls";
 import { FormButton, useField } from "./accent";
 
-export type FormState = { marks: string; pct: string; level: Level; category: Category; female: boolean; pwd: boolean; state: string | null; branches: string[] };
-export const DEFAULT_FORM: FormState = { marks: "", pct: "", level: "normal", category: "GEN", female: false, pwd: false, state: null, branches: [] };
+export type FormState = { marks: string; pct: string; rank: string; level: Level; category: Category; female: boolean; pwd: boolean; state: string | null; branches: string[] };
+export const DEFAULT_FORM: FormState = { marks: "", pct: "", rank: "", level: "normal", category: "GEN", female: false, pwd: false, state: null, branches: [] };
 const LEVELS: Level[] = ["tough", "normal", "easy"];
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
 
 /** Form -> request body, or a short message saying what to fix. */
 export function toBody(f: FormState): FormBody | string {
-  const m = f.marks.trim(), p = f.pct.trim();
-  if (!m && !p) return "Marks ya percentile mein se koi ek daalo.";
+  const m = f.marks.trim(), p = f.pct.trim(), r = f.rank.trim();
+  if (!m && !p && !r) return "Marks, percentile ya rank mein se koi ek daalo.";
   const body: FormBody = { level: f.level, category: f.category, female: f.female, pwd: f.pwd, state: f.state, branches: f.branches };
   if (m) {
     const n = Number(m);
@@ -27,6 +27,11 @@ export function toBody(f: FormState): FormBody | string {
     const n = Number(p);
     if (!Number.isFinite(n) || n < 0 || n > 100) return "Percentile 0 se 100 ke beech daalo.";
     body.percentile = n;
+  }
+  if (r) {
+    const n = Number(r);
+    if (!Number.isInteger(n) || n < 1 || n > 2000000) return "Rank 1 se 20,00,000 ke beech poore ank mein daalo.";
+    body.rank = n;
   }
   return body;
 }
@@ -63,6 +68,14 @@ export function InputCard({ form, onChange, states, branches, open, summary, onS
           placeholder="e.g. 97.4" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor} returnKeyType="done" maxLength={10} accessibilityLabel="Percentile" />
       </View>
     </View>
+    <View style={{ gap: 4 }}>
+      <T w="semibold" size={12} color={colors.muted}>Rank (CRL), scorecard se</T>
+      <TextInput testID="rank-rank-input" value={form.rank} onChangeText={v => onChange({ rank: v.replace(/[^0-9]/g, "").slice(0, 7) })} keyboardType="number-pad"
+        placeholder="e.g. 12000" placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor} returnKeyType="done" maxLength={7} accessibilityLabel="All India Rank, CRL" />
+    </View>
+    <T testID="rank-score-note" size={11.5} color={colors.custom_dim}>
+      {[form.marks, form.pct, form.rank].filter(v => v.trim()).length > 1 ? "Ek se zyada bhare hain: sabse pakka number chalega. Pehle Rank, phir Percentile, phir Marks." : "Koi ek kaafi hai: marks, percentile ya rank."}
+    </T>
     <View style={styles.row}>
       <T w="semibold" size={12} color={colors.muted} style={styles.rowLabel}>Paper</T>
       {LEVELS.map(l => <Toggle key={l} testID={`rank-level-${l}`} label={LEVEL[l].label} on={form.level === l} ink={LEVEL[l].ink} soft={LEVEL[l].soft} onPress={() => onChange({ level: l })} />)}

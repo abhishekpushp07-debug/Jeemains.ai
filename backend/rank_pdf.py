@@ -254,7 +254,7 @@ def jee(body: JeePdfIn):
                      "Closing: JoSAA rounds mein seat ke apne rank type par (CRL / category rank / PwD rank), CSAB rounds hamesha CRL par.",
                      "Data: NTA JEE Main 2026, JoSAA 2026 Round 1–5, CSAB Special 2026 Round 1–2, JAC Delhi 2026 Round 1–4. Trend: JoSAA 2025 final round.",
                      *rp.MISSING, f"Official: {rp.OFFICIAL['josaa']}  ·  {rp.OFFICIAL['jac']}"])
-    score = f"{body.marks}-marks" if body.marks is not None and body.percentile is None else f"{body.percentile}-percentile"
+    score = f"rank-{body.rank}" if body.rank is not None else f"{body.marks}-marks" if body.percentile is None else f"{body.percentile}-percentile"
     tail = "" if body.segment == "all" else f"-{body.segment}"
     return _pdf(story, "College predictor · JEE Main 2026", f"JEELIVE-JEE-colleges-{score}{tail}.pdf")
 

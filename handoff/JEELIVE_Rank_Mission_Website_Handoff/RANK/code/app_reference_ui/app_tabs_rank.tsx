@@ -7,7 +7,7 @@ import { ErrorBox, Press, T } from "@/src/components/ui";
 import { PaletteContext, rankColors as colors, space } from "@/src/theme";
 import { usesNativeTabs } from "@/src/navigation";
 import { storage } from "@/src/utils/storage";
-import { CollegeReq, FormBody, getMeta, Handover, Meta, predict, PredictOut, Seat, Segment } from "@/src/rank/api";
+import { CollegeReq, fmt, FormBody, getMeta, Handover, Meta, predict, PredictOut, Seat, Segment } from "@/src/rank/api";
 import { CATEGORY_LABEL, LEVEL, SERIF } from "@/src/rank/tones";
 import { branchLabel, DEFAULT_FORM, FormState, InputCard, toBody } from "@/src/rank/InputCard";
 import { ResultCard } from "@/src/rank/ResultCard";
@@ -19,7 +19,9 @@ import { BitsatPanel } from "@/src/rank/Bitsat";
 import { ComedkPanel } from "@/src/rank/Comedk";
 import { ToolGrid, Tool } from "@/src/rank/ToolGrid";
 import { RankPredictor } from "@/src/rank/RankPredictor";
-import { PercentileRank } from "@/src/rank/PercentileRank";
+import { Cutoff } from "@/src/rank/Cutoff";
+import { ProfileBar } from "@/src/rank/ProfileBar";
+import { SAVED, useProfileSaves } from "@/src/rank/profile";
 import { TargetMarks } from "@/src/rank/TargetMarks";
 import { Compare } from "@/src/rank/Compare";
 import { ShortlistSheet } from "@/src/rank/ShortlistSheet";
@@ -33,12 +35,13 @@ import { useDreams } from "@/src/dream/store";
 import { useShortlist } from "@/src/rank/shortlist";
 import { useCompareColleges } from "@/src/rank/colleges";
 import { ACCENTS, AccentContext } from "@/src/rank/accent";
+import { MotionWhile, ScreenMotion } from "@/src/motion";
 
-const SAVED = "rank.form.v1";
 type Exam = "jee" | "bitsat" | "comedk";
 
 function summaryOf(b: FormBody) {
-  return [b.percentile !== undefined ? `${b.percentile} percentile` : `${b.marks} marks`, b.percentile === undefined ? LEVEL[b.level].label : null,
+  const marks = b.rank === undefined && b.percentile === undefined;
+  return [b.rank !== undefined ? `Rank ${fmt(b.rank)}` : marks ? `${b.marks} marks` : `${b.percentile} percentile`, marks ? LEVEL[b.level].label : null,
     CATEGORY_LABEL[b.category], b.female ? "Female" : null, b.pwd ? "PwD" : null, b.state].filter(Boolean).join(" · ");
 }
 
@@ -97,13 +100,15 @@ export default function RankTab() {
     setMetaError(null);
     getMeta().then(setMeta).catch(e => setMetaError(e.message));
   }, []);
+  useEffect(() => { loadMeta(); }, [loadMeta]);
+  // The saved form is read when the tab opens and again after "Meri details" is saved (that fills every tool's form).
+  const saves = useProfileSaves();
   useEffect(() => {
-    loadMeta();
-    storage.getItem<string | null>(SAVED, null).then(raw => {
-      if (!raw) return;
-      try { setForm({ ...DEFAULT_FORM, ...JSON.parse(raw) }); } catch { /* keep defaults */ }
+    storage.getItem<string | null>(SAVED.college, null).then(raw => {
+      if (raw) try { setForm({ ...DEFAULT_FORM, ...JSON.parse(raw) }); } catch { /* keep defaults */ }
+      if (saves) setOpen(true);
     });
-  }, [loadMeta]);
+  }, [saves]);
 
   const run = useCallback((q: FormBody, seg: Segment, pg: number) => {
     const mine = ++ticket.current;
@@ -117,7 +122,7 @@ export default function RankTab() {
 
   const patch = (p: Partial<FormState>) => setForm(f => ({ ...f, ...p }));
   const show = (body: FormBody) => {
-    storage.setItem(SAVED, JSON.stringify(form));
+    storage.setItem(SAVED.college, JSON.stringify(form));
     setPage(1); setQuery(body); setOpen(false);
     scroll.current?.scrollTo({ y: 0, animated: false });
   };
@@ -132,11 +137,11 @@ export default function RankTab() {
   // Any Rank tool -> College predictor with the same score already filled in and shown.
   const goColleges = (q: Handover) => {
     if (q.exam === "jee") {
-      const nf: FormState = { ...form, marks: q.marks !== undefined ? String(q.marks) : "", pct: q.percentile !== undefined ? String(q.percentile) : "",
+      const nf: FormState = { ...form, marks: q.marks !== undefined ? String(q.marks) : "", pct: q.percentile !== undefined ? String(q.percentile) : "", rank: "",
         level: q.level ?? form.level, category: q.category ?? form.category, pwd: q.pwd ?? form.pwd };
       const body = toBody(nf);
       setForm(nf); setExam("jee"); setMode("marks");
-      if (typeof body !== "string") { storage.setItem(SAVED, JSON.stringify(nf)); setSegment("all"); setPage(1); setQuery(body); setOpen(false); }
+      if (typeof body !== "string") { storage.setItem(SAVED.college, JSON.stringify(nf)); setSegment("all"); setPage(1); setQuery(body); setOpen(false); }
     } else if (q.marks !== undefined) {
       setComedkSeed({ marks: q.marks, at: Date.now() }); setExam("comedk");
     }
@@ -144,13 +149,18 @@ export default function RankTab() {
     scroll.current?.scrollTo({ y: 0, animated: false });
   };
   // Each tool pane carries its form colour (yellow, teal, lime, blood red, sky blue) for the form, chips, fields and buttons inside.
+  // A pane that is not the open one stays mounted but hidden, so its shine rests.
   const pane = (t: Tool, node: React.ReactNode) => seen.includes(t) ? <View key={t} style={[styles.tool, tool !== t && styles.hidden]}>
-    <AccentContext.Provider value={ACCENTS[t]}>{node}</AccentContext.Provider>
+    <MotionWhile on={tool === t}><AccentContext.Provider value={ACCENTS[t]}>{node}</AccentContext.Provider></MotionWhile>
   </View> : null;
-  const examPane = (e: Exam, node: React.ReactNode) => seenExam.includes(e) ? <View key={e} style={[styles.tool, exam !== e && styles.hidden]}>{node}</View> : null;
+  const examPane = (e: Exam, node: React.ReactNode) => seenExam.includes(e) ? <View key={e} style={[styles.tool, exam !== e && styles.hidden]}>
+    <MotionWhile on={exam === e}>{node}</MotionWhile>
+  </View> : null;
 
   return (
     <PaletteContext.Provider value={colors}>
+    {/* The shine of the tiles and forms rests while another tab or screen is in front. */}
+    <ScreenMotion>
     <View style={{ flex: 1, backgroundColor: colors.custom_rankBg }}>
       <ScrollView ref={scroll} testID="rank-screen" keyboardShouldPersistTaps="handled" indicatorStyle="white"
         onScroll={e => { scrollY.current = e.nativeEvent.contentOffset.y; }} scrollEventThrottle={64}
@@ -160,12 +170,13 @@ export default function RankTab() {
           <T testID="rank-title" style={styles.title}>Rank & college predictor</T>
           <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
+        <ProfileBar states={meta?.states ?? []} />
         <View onLayout={e => { formTop.current = e.nativeEvent.layout.y + e.nativeEvent.layout.height + space.lg; }}>
           <ToolGrid value={tool} onChange={tapTool} saved={saved.length} colleges={colleges.length} dreams={dreams.dreams.length} />
         </View>
 
         {pane("rank", <RankPredictor onColleges={goColleges} />)}
-        {pane("pct", <PercentileRank onColleges={goColleges} />)}
+        {pane("cutoff", <Cutoff states={meta?.states ?? []} />)}
         {pane("target", <TargetMarks states={meta?.states ?? []} />)}
         {pane("compare", <Compare onGoCollege={() => openTool("college")}
           profile={{ category: form.category, female: form.female, pwd: form.pwd, state: form.state }} />)}
@@ -216,8 +227,9 @@ export default function RankTab() {
       <Picker visible={branchPicker} title="Branch" options={meta?.branches ?? []} value={form.branches} multi allLabel="All branches"
         onChange={setBranches} onClose={() => setBranchPicker(false)} testID="rank-list-branch-picker" />
       <ShortlistSheet visible={shortOpen} onClose={() => setShortOpen(false)} onOpen={query ? s => openSeat(s) : undefined} />
-      {detail ? <CollegeSheet key={`${detail.inst}-${detail.prog}-${detail.percentile}-${detail.marks}`} req={detail} onClose={() => setDetail(null)} /> : null}
+      {detail ? <CollegeSheet key={`${detail.inst}-${detail.prog}-${detail.rank}-${detail.percentile}-${detail.marks}`} req={detail} onClose={() => setDetail(null)} /> : null}
     </View>
+    </ScreenMotion>
     </PaletteContext.Provider>
   );
 }

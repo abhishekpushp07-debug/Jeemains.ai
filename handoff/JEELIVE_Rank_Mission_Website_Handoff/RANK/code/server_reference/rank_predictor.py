@@ -157,7 +157,6 @@ SEATS = [Seat(r) for r in DATA["seats"]]
 BY_INST = {}
 for _s in SEATS:
     BY_INST.setdefault(_s.inst, []).append(_s)
-INF = float("inf")
 
 
 def round_label(seat, i):
@@ -183,6 +182,7 @@ def fmt(n):
 class Form(BaseModel):
     marks: Optional[int] = Field(default=None, ge=-75, le=300)
     percentile: Optional[float] = Field(default=None, ge=0, le=100)
+    rank: Optional[int] = Field(default=None, ge=1, le=2_000_000)  # the scorecard's All India Rank (CRL)
     level: Literal["tough", "normal", "easy"] = "normal"
     category: Literal["GEN", "EWS", "OBC-NCL", "SC", "ST"] = "GEN"
     female: bool = False
@@ -206,7 +206,7 @@ class Form(BaseModel):
         return tuple(tuple(self.branches) if k == "branches" else getattr(self, k) for k in FORM_FIELDS)
 
 
-FORM_FIELDS = ("marks", "percentile", "level", "category", "female", "pwd", "state", "branches")
+FORM_FIELDS = ("marks", "percentile", "rank", "level", "category", "female", "pwd", "state", "branches")
 
 
 class PredictIn(Form):
@@ -228,10 +228,20 @@ class Student:
     """Everything the seat check needs, worked out once per form."""
 
     def __init__(self, f: Form):
-        if f.percentile is None and f.marks is None:
-            raise HTTPException(422, "Marks ya percentile mein se koi ek daalo.")
+        if f.rank is None and f.percentile is None and f.marks is None:
+            raise HTTPException(422, "Marks, percentile ya rank mein se koi ek daalo.")
         self.f = f
-        self.from_marks = f.percentile is None
+        # The most exact number the student gave wins: scorecard rank, then NTA percentile, then marks.
+        self.source = "rank" if f.rank is not None else "percentile" if f.percentile is not None else "marks"
+        self.from_marks = self.source == "marks"
+        self.cat = None if f.category == "GEN" else f.category
+        if self.source == "rank":
+            # A scorecard rank is exact; the small band only marks seats that close just behind it as Borderline.
+            r = min(N, f.rank)
+            self.pct = pct_from_rank(r)
+            self.lo = self.mid = r
+            self.hi = min(N, r + min(cap(r), max(4, round(r * 0.02))))
+            return
         p = pct_from_marks(f.marks, f.level) if self.from_marks else f.percentile
         self.pct = p
         r = rank_from_pct(p)
@@ -239,7 +249,6 @@ class Student:
         self.hi = min(N, max(1, r - w // 2) + w)
         self.lo = max(1, self.hi - w)
         self.mid = r
-        self.cat = None if f.category == "GEN" else f.category
 
     def crl_range(self):
         return self.lo, self.mid, self.hi
@@ -294,11 +303,12 @@ def path_label(s: Seat):
     return " · ".join(parts)
 
 
-def best_paths(st: Student):
-    """Per program: the easiest seat this student can get, or the nearest miss."""
+def best_paths(st: Student, seats=None, every_miss=False):
+    """Per program: the easiest seat this student can get, or the nearest miss.
+    `seats`: look only at these (Cut off: one college); `every_miss`: keep each program's nearest miss however far it is."""
     best, near = {}, {}
     groups = set(st.f.branches)
-    for s in SEATS:
+    for s in SEATS if seats is None else seats:
         if groups and PROGS[s.prog]["group"] not in groups:
             continue
         if not st.eligible(s):
@@ -317,7 +327,7 @@ def best_paths(st: Student):
                 cand = (STATUS_ORDER[status], ease, status, close, rnd, label, s)
                 if s.prog not in best or cand[:2] > best[s.prog][:2]:
                     best[s.prog] = cand
-            elif close >= lo / 1.10:
+            elif every_miss or close >= lo / 1.10:
                 cand = (ease, close, rnd, label, s)
                 if s.prog not in near or cand[0] > near[s.prog][0]:
                     near[s.prog] = cand
@@ -344,16 +354,18 @@ def item(prog, close, rnd, label, s, status=None):
 def result_block(st: Student):
     f = st.f
     lo, mid, hi = st.crl_range()
+    if st.source == "rank":  # the card shows the scorecard rank itself, not the Borderline band behind it
+        hi = lo
     p_hi, p_lo = pct_from_rank(lo), pct_from_rank(hi)
     if p_hi - p_lo > 0.5:
         mid_p = (p_hi + p_lo) / 2
         p_hi, p_lo = mid_p + 0.25, mid_p - 0.25
-    res = {"percentile": [round(p_lo, 2), round(min(100, p_hi), 2)], "crl": [lo, hi], "from_marks": st.from_marks,
-           "summary": " · ".join(x for x in [f"{f.marks} marks" if st.from_marks else f"{f.percentile:g} percentile",
-                                              f.level.capitalize() if st.from_marks else None,
+    score = f"Rank {fmt(f.rank)}" if st.source == "rank" else f"{f.marks} marks" if st.from_marks else f"{f.percentile:g} percentile"
+    res = {"percentile": [round(p_lo, 2), round(min(100, p_hi), 2)], "crl": [lo, hi], "from_marks": st.from_marks, "source": st.source,
+           "summary": " · ".join(x for x in [score, f.level.capitalize() if st.from_marks else None,
                                               {"GEN": "General"}.get(f.category, f.category),
                                               "Female" if f.female else None, "PwD" if f.pwd else None] if x)}
-    if not st.from_marks:
+    if st.source == "percentile":
         res["percentile"] = [round(f.percentile, 2), round(f.percentile, 2)]
     if st.cat:
         res["cat_rank"] = {"label": f"{st.cat} rank", "range": [cat_rank(lo, st.cat), cat_rank(hi, st.cat)]}
@@ -366,22 +378,26 @@ def result_block(st: Student):
         easy = rank_from_pct(pct_from_marks(f.marks, "easy"))
         res["spread"] = f"Tough paper hota to rank lagbhag {fmt(tough)}, Easy paper hota to lagbhag {fmt(easy)}."
     elif f.marks is not None:
-        fits = {lvl: abs(marks_at(f.percentile, lvl) - f.marks) for lvl in CURVES}
+        fits = {lvl: abs(marks_at(st.pct, lvl) - f.marks) for lvl in CURVES}
         paper = min(fits, key=fits.get)
         res["paper"] = f"Aapke marks ke hisaab se paper {paper.capitalize()} jaisa tha."
-        if f.marks < marks_at(f.percentile, "tough") - 12 or f.marks > marks_at(f.percentile, "easy") + 12:
-            res["check"] = "Marks aur percentile aapas mein mel nahi kha rahe, ek baar check kar lo."
+        if f.marks < marks_at(st.pct, "tough") - 12 or f.marks > marks_at(st.pct, "easy") + 12:
+            res["check"] = f"Marks aur {st.source} aapas mein mel nahi kha rahe, ek baar check kar lo."
+    if st.source == "rank" and f.percentile is not None and abs(rank_from_pct(f.percentile) - st.mid) > max(500, 0.25 * st.mid):
+        res["check"] = "Rank aur percentile aapas mein mel nahi kha rahe, ek baar check kar lo."
     if f.state == "Delhi":
         res["delhi_note"] = "Delhi region cutoff ke liye 11th-12th Delhi ke school se hona zaroori hai."
     return res
 
 
 def marks_gap(st: Student, close, label, s):
-    """How much more the student needs for this closing rank: marks if they typed marks, else percentile."""
+    """How much more the student needs for this closing rank: marks if they typed marks, ranks for a rank, else percentile."""
     crl_needed = close
     if label not in ("CRL",):
         base = close / PWD_SHARE if s.pwd else close
         crl_needed = crl_from_cat(base, s.cat) if s.cat != "OPEN" else base
+    if st.source == "rank":
+        return f"rank lagbhag {fmt(max(1, round(st.mid - crl_needed)))} aur upar chahiye"
     p_need = pct_from_rank(crl_needed)
     if st.from_marks:
         gap = math.ceil(marks_at(p_need, st.f.level) - st.f.marks)
@@ -515,7 +531,7 @@ def college(body: CollegeIn):
         line = "Is raaste se aapki rank in branches ke kisi round mein andar nahi aayi."
     return {
         "college": {"id": body.inst, "name": inst["name"], "short": inst["short"], "type": inst["type"], "city": inst["city"], "state": inst["state"]},
-        "your_rank": {"label": label, "range": [lo, hi]}, "rounds": rounds, "rows": out_rows, "total": len(progs), "line": line,
+        "your_rank": {"label": label, "range": [lo, lo if st.source == "rank" else hi]}, "rounds": rounds, "rows": out_rows, "total": len(progs), "line": line,
         "blocked": block, "y25_label": None if inst["body"] == "jac" else Y25_LABEL,
         "path": {"quota": quota, "gender": gender, "seat": "cat" if cat != "OPEN" else "open"},
         "options": {"quota": [{"key": q, "label": QUOTA_LABEL[q]} for q in quotas],
@@ -582,6 +598,8 @@ def make_router():
     router.post("/comedk/college")(rank_comedk.college)
     import rank_tools  # percentile -> rank, target marks, compare (it imports this module, so it loads last)
     rank_tools.register(router)
+    import rank_cutoff  # Cut off: one college's branches, or one branch's top 100 colleges, round by round
+    rank_cutoff.register(router)
     import rank_pdf  # white A4 PDFs of the same lists (uses rank_tools, so it loads after it)
     rank_pdf.register(router)
     return router

@@ -1,0 +1,169 @@
+{
+  "note": "Frozen sample captured when this pack was built. Shows the shape only: never use these numbers on a page; call the server. A sentence is ready to show; a list means a wrong field (validate in the form).",
+  "answers": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "jee",
+          "by": "college",
+          "key": "9999"
+        }
+      },
+      "status": 404,
+      "response": {
+        "detail": "College nahi mila."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "jee",
+          "by": "branch",
+          "key": "Nope"
+        }
+      },
+      "status": 404,
+      "response": {
+        "detail": "Branch nahi mili."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "bitsat",
+          "by": "college",
+          "key": "Mumbai"
+        }
+      },
+      "status": 404,
+      "response": {
+        "detail": "Campus nahi mila."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "bitsat",
+          "by": "branch",
+          "key": "nope"
+        }
+      },
+      "status": 404,
+      "response": {
+        "detail": "Program nahi mila."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "jee",
+          "by": "college",
+          "key": "25",
+          "marks": 350
+        }
+      },
+      "status": 422,
+      "response": {
+        "detail": "JEE Main marks −75 se 300 ke beech daalo."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "comedk",
+          "by": "branch",
+          "key": "Computer Science",
+          "percentile": 90
+        }
+      },
+      "status": 422,
+      "response": {
+        "detail": "COMEDK mein percentile nahi chalta. Marks ya rank daalo."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "comedk",
+          "by": "branch",
+          "key": "Computer Science",
+          "marks": 181
+        }
+      },
+      "status": 422,
+      "response": {
+        "detail": "COMEDK marks 0 se 180 ke beech daalo."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "comedk",
+          "by": "branch",
+          "key": "Computer Science",
+          "rank": 250000
+        }
+      },
+      "status": 422,
+      "response": {
+        "detail": "COMEDK rank 1 se 2,00,000 ke beech daalo."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "bitsat",
+          "by": "college",
+          "key": "Pilani",
+          "rank": 5
+        }
+      },
+      "status": 422,
+      "response": {
+        "detail": "BITSAT mein sirf score chalta hai (390 mein se)."
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/rank/cutoff",
+        "body": {
+          "exam": "neet",
+          "by": "college",
+          "key": "1"
+        }
+      },
+      "status": 422,
+      "response": {
+        "detail": [
+          {
+            "type": "literal_error",
+            "loc": [
+              "body",
+              "exam"
+            ],
+            "msg": "Input should be 'jee', 'comedk' or 'bitsat'"
+          }
+        ]
+      }
+    }
+  ]
+}

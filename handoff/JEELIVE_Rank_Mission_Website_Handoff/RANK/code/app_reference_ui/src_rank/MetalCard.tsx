@@ -5,8 +5,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Path } from "react-native-svg";
-import Animated, { cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { cancelAnimation, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Pill } from "@/src/components/design";
+import { useStill } from "@/src/motion";
 import { T } from "@/src/components/ui";
 import { rankColors as colors, space } from "@/src/theme";
 import type { CardRef } from "@/src/shareCard";
@@ -48,10 +49,11 @@ const Star = ({ size, x, y }: { size: number; x: number; y: number }) => {
 
 /** Two silver glints beside the big number that slowly trade brightness (still under Reduce Motion). */
 function Sparkle() {
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const glow = useSharedValue(1);
   useEffect(() => {
     if (reduced) return;
+    glow.value = 1;
     glow.value = withRepeat(withSequence(withTiming(0.25, { duration: 1700 }), withTiming(1, { duration: 1700 })), -1);
     return () => cancelAnimation(glow);
   }, [reduced, glow]);

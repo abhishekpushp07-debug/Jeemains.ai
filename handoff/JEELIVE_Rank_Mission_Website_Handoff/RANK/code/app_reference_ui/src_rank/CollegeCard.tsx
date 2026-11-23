@@ -6,8 +6,9 @@
 // hint above the list says to tap.
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, useWindowDimensions, View } from "react-native";
-import Animated, { cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
+import Animated, { cancelAnimation, useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { buzz, Press, T } from "@/src/components/ui";
+import { useStill } from "@/src/motion";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
 import { storage } from "@/src/utils/storage";
@@ -90,7 +91,7 @@ export function CollegeCard({ testID, rank, edge, title, tags, sub, line, stats,
 /** "Cutoff dekho ›" in the tool's colour; breathes gently while `pulse` (never with Reduce Motion). */
 function Cta({ testID, open, pulse }: { testID: string; open?: boolean; pulse?: boolean }) {
   const a = useAccent();
-  const reduced = useReducedMotion();
+  const reduced = useStill();
   const s = useSharedValue(1);
   const live = !!pulse && !reduced;
   useEffect(() => {

@@ -446,11 +446,11 @@ export const toolEdges = {
   violet: ["#C9A0FF", "#FF8AD8", "#7FE7FF", "#C9A0FF"],
 } as const;
 // The three colours that run round each Rank form, from the form's own colour family (the first comes back at the end):
-// rank = yellow, tangerine, cream; pct = aqua, sky blue, mint; target = lime, sun yellow, emerald; college = ruby, gold,
+// rank = yellow, tangerine, cream; cutoff = aqua, sky blue, mint; target = lime, sun yellow, emerald; college = ruby, gold,
 // rose; compare = sky blue, azure, lavender; dream = lilac, pink, cyan.
 export const formEdges = {
   rank: ["#FFD60A", "#FF8A00", "#FFF3B0", "#FFD60A"],
-  pct: ["#2DE1C2", "#5CC8FF", "#D5FFF7", "#2DE1C2"],
+  cutoff: ["#2DE1C2", "#5CC8FF", "#D5FFF7", "#2DE1C2"],
   target: ["#B5F23D", "#FFE14D", "#22C55E", "#B5F23D"],
   college: ["#FF3B4E", "#FFC857", "#FF8FA0", "#FF3B4E"],
   compare: ["#4CC3FF", "#2F80FF", "#B9B0FF", "#4CC3FF"],

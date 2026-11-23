@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="10" time="1.178" timestamp="2026-11-23T20:41:36.047227+00:00" hostname="agent-env-cb81584f-d05d-4141-859a-6f5cb0a7b3f6"><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_options_shape_core" time="0.257" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_jee_college_25_without_score" time="0.074" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_jee_college_with_marks_tag_and_near" time="0.075" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_precedence_rank_over_percentile_over_marks" time="0.176" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_bitsat_percentile_rejected" time="0.072" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_comedk_percentile_rejected" time="0.082" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_unknown_exam_422" time="0.072" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_predict_rank_input" time="0.078"><failure message="KeyError: 'summary'">s = &lt;requests.sessions.Session object at 0xf81ac8f56290&gt;
+
+    def test_predict_rank_input(s):
+        r = s.post(f"{R}/predict", json={"rank": 7500, "level": "normal", "category": "GEN", "female": False, "pwd": False, "state": None, "branches": [], "segment": "all", "page": 1}, timeout=30)
+        assert r.status_code == 200
+        d = r.json()
+        assert d["result"]["source"] == "rank"
+        assert d["result"]["crl"] == [7500, 7500]
+&gt;       assert "7,500" in d["summary"] or "7500" in d["summary"]
+                          ^^^^^^^^^^^^
+E       KeyError: 'summary'
+
+tests/test_iter134_cutoff_spotcheck.py:70: KeyError</failure></testcase><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_predict_empty_422" time="0.078" /><testcase classname="tests.test_iter134_cutoff_spotcheck" name="test_pdf_jee_with_rank" time="0.159" /></testsuite></testsuites>

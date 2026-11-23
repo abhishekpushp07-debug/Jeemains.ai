@@ -9,9 +9,9 @@ One file. Drop it into the website's FastAPI backend and mount it under the exis
 
 The browser then talks ONLY to the website's own origin (no CORS, no app-server address in the page):
 
-    GET  /api/rank/meta | /api/rank/colleges | /api/rank/target/bitsat        public
+    GET  /api/rank/meta | /api/rank/colleges | /api/rank/target/bitsat | /api/rank/cutoff/options   public
     POST /api/rank/estimate | percentile | predict | college | bitsat | comedk | comedk/college
-         /api/rank/target/jee | target/comedk | compare | compare/colleges     public
+         /api/rank/target/jee | target/comedk | compare | compare/colleges | cutoff                 public
     POST /api/rank/pdf/jee | pdf/comedk | pdf/bitsat | pdf/target/jee | pdf/target/comedk
          /api/rank/pdf/target/bitsat | pdf/saved                               public, application/pdf
     GET  /api/mission/me                                                       signed-in student
@@ -51,12 +51,12 @@ SHARE_LINK_BASE = os.environ.get("JEELIVE_SHARE_LINK_BASE", f"{APP_API}/j").rstr
 SITE = os.environ.get("JEELIVE_SITE_URL", "https://jeelive.ai")
 
 # Only these paths are forwarded; anything else is a 404 here and never reaches the app server.
-RANK_GET = {"meta", "colleges", "target/bitsat"}
+RANK_GET = {"meta", "colleges", "target/bitsat", "cutoff/options"}
 RANK_POST = {"estimate", "percentile", "predict", "college", "bitsat", "comedk", "comedk/college",
-             "target/jee", "target/comedk", "compare", "compare/colleges"}
+             "target/jee", "target/comedk", "compare", "compare/colleges", "cutoff"}
 RANK_PDF = {"pdf/jee", "pdf/comedk", "pdf/bitsat", "pdf/target/jee", "pdf/target/comedk", "pdf/target/bitsat", "pdf/saved"}
 
-STATIC_TTL = 600          # /rank/meta, /rank/colleges and /rank/target/bitsat only change when the app server is redeployed
+STATIC_TTL = 600          # the four GET lists (meta, colleges, target/bitsat, cutoff/options) only change when the app server is redeployed
 MAX_BODY = 16 * 1024      # the largest real request (saved-list PDF) is under 8 KB
 GRANT_MEMORY = 50_000     # signed-in students remembered per process
 BUSY = "Rank abhi load nahi hua. Retry dabao."

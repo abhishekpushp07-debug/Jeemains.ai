@@ -6,6 +6,14 @@ Everything the website needs to offer the app's **Rank** tools and **Mission** p
 connector to the live app server, the server's algorithm code to read, the app's screen code, real API answers,
 sample PDFs and fresh screenshots.
 
+> ### NEW in this pack
+> - **Cut off**: a new Rank tool (it replaces the "Percentile se rank" tile). Pick a college or a branch, see every
+>   round's cut-off, filter by your own score. → `docs/11_CUT_OFF_NEW.md`
+> - **Meri details**: score and category typed once, used by all six tools. → `docs/12_MERI_DETAILS_NEW.md`
+> - **Scorecard rank** in every JEE Main form.
+>
+> The full list of changes, and what to do if the website was built from the earlier pack: **`WHATS_NEW.md`**.
+
 **The data is not in this box, on purpose.** Every college, branch, cut-off, seat and fee lives on the app server and
 reaches the website through its API when a student asks. The website never writes the data separately. When new
 cut-offs are published, the app server is updated once and the website shows them the same minute.
@@ -15,9 +23,10 @@ Rapid Fire is deliberately not part of this pack.
 | | |
 |---|---|
 | Live app server | `https://jeelive-mobile.emergent.host/api` |
-| Development server | `https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/api` (may sleep or change; use it only to test unreleased work) |
+| Development server | `https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/api` (may sleep or change; use it only to test unreleased work, such as Cut off before it is published) |
 | Data (served live) | JEE Main 2026 (JoSAA, CSAB, JAC Delhi), COMEDK UGET 2026, BITSAT 2022–2026 |
-| Verified | all 21 public checks pass on the live server (`CONNECT/connect_check.py`) on the day of this build |
+| Verified on the day of this build | development server: all 29 public checks pass (`CONNECT/connect_check.py`). Live server: the 21 earlier checks pass; the 8 new ones (Cut off, scorecard rank) say `WAIT` until the app project's next publish |
+| Is Cut off on the live server yet? | `MANIFEST.json` → `cut_off_on_live` (the day of this build); run `connect_check.py` for today |
 | Build facts | `MANIFEST.json` (build time, every file with its size and SHA-256) |
 
 ---
@@ -37,8 +46,8 @@ curl -s -X POST https://jeelive-mobile.emergent.host/api/rank/estimate \
 Then:
 
 3. Copy `CONNECT/backend_fastapi/jeelive_app_connect.py` into the website backend and mount it (3 lines, shown at the top of the file).
-4. Copy `CONNECT/frontend_web/jeeliveApp.ts` into the website frontend and call `createJeeliveApp()`.
-5. Build the screens from `docs/06_RANK_UI_SPEC.md` and `docs/07_MISSION.md`.
+4. Copy `CONNECT/frontend_web/jeeliveApp.ts` and `rankProfile.ts` into the website frontend and call `createJeeliveApp()`.
+5. Build the screens from `docs/06_RANK_UI_SPEC.md`, `docs/11_CUT_OFF_NEW.md`, `docs/12_MERI_DETAILS_NEW.md` and `docs/07_MISSION.md`.
 
 If the website is being built by an AI agent, hand it `START_HERE_FOR_WEBSITE_AGENT.md` first.
 
@@ -49,18 +58,19 @@ If the website is being built by an AI agent, hand it `START_HERE_FOR_WEBSITE_AG
 | Folder | What it holds | Open it when |
 |---|---|---|
 | `START_HERE_FOR_WEBSITE_AGENT.md` | A complete brief for the website project: the job, the order of work, the rules, the finish line | you start |
-| `docs/` | Ten documents, listed below | you want to understand or decide |
-| `CONNECT/` | The system that calls the app server: backend connector, typed browser client, one-command check, curl lines, OpenAPI file | you wire the website |
+| `WHATS_NEW.md` | What changed since the earlier pack: Cut off, Meri details, the scorecard rank | you built from the earlier pack |
+| `docs/` | Twelve documents, listed below | you want to understand or decide |
+| `CONNECT/` | The system that calls the app server: backend connector, typed browser client, Meri details for the browser, one-command check, curl lines, OpenAPI file | you wire the website |
 | `RANK/code/server_reference/` | The app server's Rank and Dream college code (read-only: it runs on the app server, never on the website) | you want to see exactly how an answer is made |
 | `RANK/code/app_reference_ui/` | The app's real Rank and Dream college screens (React Native, TypeScript) | you build a screen and want the exact behaviour |
-| `RANK/api_examples/` | 22 real request + answer pairs captured from the server (frozen samples, never a data source) | you design a screen or a type |
+| `RANK/api_examples/` | 34 real request + answer files captured from the server; `23`–`34` are Cut off and the scorecard rank (frozen samples, never a data source) | you design a screen or a type |
 | `RANK/sample_pdfs/` | The 7 PDFs the server draws, with the request that made each | you add the PDF buttons |
-| `RANK/screenshots/` | 25 fresh screens of the app's Rank tab | you design |
+| `RANK/screenshots/` | 45 screens of the app's Rank tab; the 21 named `NEW_…` and `01_…` are fresh and show Cut off and Meri details | you design |
 | `MISSION/code/` | The Mission server code (read-only) and the app's Mission screens | you build Mission |
 | `MISSION/api_examples/` | Mission answers (personal values masked) and the share-link redirect | you design or type |
 | `MISSION/screenshots/` | 4 fresh screens: the tab top to bottom, and the share gate | you design |
 
-## The ten documents
+## The twelve documents
 
 | # | Document | Answers |
 |---|---|---|
@@ -74,6 +84,8 @@ If the website is being built by an AI agent, hand it `START_HERE_FOR_WEBSITE_AG
 | 08 | `docs/08_DREAM_COLLEGE.md` | The Dream college tool: API, the multi-device merge rule, the meter |
 | 09 | `docs/09_TESTING_AND_ACCEPTANCE.md` | How to prove it works: checks, vectors, the acceptance list |
 | 10 | `docs/10_FAQ_GOTCHAS_GLOSSARY.md` | The questions that will come up, the traps, and every term explained |
+| **11** | **`docs/11_CUT_OFF_NEW.md`** | **NEW · Cut off end to end: the journey, the two calls, the rules per exam, the screen word by word, states, worked answers, its acceptance list** |
+| **12** | **`docs/12_MERI_DETAILS_NEW.md`** | **NEW · Meri details: the one rule (starting values, not a live link), what Save writes into each tool, storage keys, the screen, its acceptance list** |
 
 ---
 

@@ -7,7 +7,7 @@ export type Segment = "all" | "NIT" | "IIIT" | "GFTI" | "DELHI";
 export type Tag = "safe" | "likely" | "borderline";
 
 export type FormBody = {
-  marks?: number; percentile?: number; level: Level; category: Category;
+  marks?: number; percentile?: number; rank?: number; level: Level; category: Category;
   female: boolean; pwd: boolean; state: string | null; branches: string[];
 };
 export type Range = [number, number];
@@ -121,8 +121,34 @@ export const fmtPct = (r: Range) => r[0] === r[1] ? r[0].toFixed(2) : `${r[0].to
 /** A score handed from a Rank tool to the College predictor. */
 export type Handover = { exam: "jee" | "comedk"; marks?: number; percentile?: number; level?: Level; category?: Category; pwd?: boolean };
 
-export type PercentileOut = { result: RankResult; candidates: number; marks: { level: Level; marks: number }[]; notes: string[] };
-export const percentileRank = (body: { percentile: number; category: Category; pwd: boolean }) => call<PercentileOut>("/percentile", body);
+/** Cut off (Rank tab tile): one college's branches, or one branch's 100 most wanted college-branches, round by round.
+ *  With a score only the rows the student can reach come back, each with its chance tag. */
+export type CutoffExam = "jee" | "comedk" | "bitsat";
+export type CutoffBy = "college" | "branch";
+export type ScoreKind = "marks" | "percentile" | "rank";
+export type CutoffScore = { marks?: number; percentile?: number; rank?: number };
+export type CutoffOption = { key: string; title: string; sub: string; find?: string; kind?: string };
+export type CutoffOptions = { limit: number } & Record<CutoffExam, {
+  name: string; score: ScoreKind[]; marks: [number, number]; levels: boolean; profile: boolean; colleges: CutoffOption[]; branches: CutoffOption[];
+}>;
+/** state: "in" = the student's whole rank range is inside this round, "edge" = only part of it. na = the college has no such round. */
+export type CutoffCell = { label: string; close: number | null; state?: "in" | "edge" | "out"; na?: boolean; crl?: boolean };
+export type CutoffRow = {
+  id: string; college: string; place: string; kind: string; branch: string; path: string; rank_type: string; cells: CutoffCell[];
+  final: { label: string; close: number }; prev: { label: string; close: number | null } | null; seats: number | null; fee: number | null;
+  need: { marks: number; pct?: number; level?: Level }; tag: Tag | null; gap?: string;
+};
+export type CutoffOut = {
+  exam: CutoffExam; by: CutoffBy; key: string; title: string; name: string; sub: string; kind: string | null; metric: "rank" | "score";
+  columns: string[]; prev_label: string | null; rows: CutoffRow[]; total: number; eligible: number | null; limit: number | null;
+  you: { source: ScoreKind; summary: string; line: string; percentile: Range | null; rank: { label: string; range: Range } | null;
+    cat_rank?: { label: string; range: Range } | null; pwd_rank?: { label: string; range: Range } | null; check?: string | null;
+    counts: Record<Tag, number> } | null;
+  near: CutoffRow[]; notes: string[]; official: string;
+};
+export type CutoffIn = { exam: CutoffExam; by: CutoffBy; key: string; level?: Level } & CutoffScore & Partial<JeeProfileIn>;
+export const cutoffOptions = () => call<CutoffOptions>("/cutoff/options");
+export const cutoff = (body: CutoffIn) => call<CutoffOut>("/cutoff", body);
 
 export type JeeCollege = { inst: number; short: string; name: string; type: Exclude<Segment, "all">; state: string; city: string };
 export type ComedkCollege = { code: string; short: string; name: string; city: string };

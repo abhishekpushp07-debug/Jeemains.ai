@@ -15,12 +15,12 @@ import { edgeOf } from "./SeatList";
 import { PdfButton } from "./PdfButton";
 import { bitsatSaved, toggleSaved, useShortlist } from "./shortlist";
 import { FormButton, useField } from "./accent";
+import { SAVED, useProfileSaves } from "./profile";
 import { CardRef, shareCard } from "@/src/shareCard";
 import { useShareLink } from "@/src/mission/stats";
 import { useDreamToggle } from "@/src/dream/useDreamToggle";
 import { bitsatDream } from "@/src/dream/need";
 
-const SAVED = "rank.bitsat.v1";
 const CAMPUSES: Campus[] = ["all", "Pilani", "Goa", "Hyderabad"];
 const DEGREES: { key: Degree; label: string }[] = [{ key: "all", label: "All degrees" }, { key: "BE", label: "B.E." }, { key: "MSc", label: "M.Sc." }, { key: "BPharm", label: "B.Pharm" }];
 
@@ -39,7 +39,9 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
   const field = useField();
   const card = useRef<React.ComponentRef<typeof View>>(null); // the BITSAT card: shared as a photo, and with the PDF
 
-  useEffect(() => { storage.getItem<string | null>(SAVED, null).then(v => { if (v) setText(v); }); }, []);
+  // Read when the panel opens and again after "Meri details" is saved (that fills every tool's form).
+  const saves = useProfileSaves();
+  useEffect(() => { storage.getItem<string | null>(SAVED.bitsat, null).then(v => { if (v) setText(v); if (saves) setOpen(true); }); }, [saves]);
   useEffect(() => {
     if (score === null) return;
     let live = true;
@@ -52,7 +54,7 @@ export function BitsatPanel({ onShortlist }: { onShortlist: () => void }) {
   const show = () => {
     const v = text.trim(), n = Number(v);
     if (!v || !Number.isInteger(n) || n < -130 || n > 390) { setProblem("BITSAT score −130 se 390 ke beech poore ank mein daalo."); return; }
-    setProblem(null); storage.setItem(SAVED, v); setScore(n); setOpen(false);
+    setProblem(null); storage.setItem(SAVED.bitsat, v); setScore(n); setOpen(false);
   };
 
   return <>

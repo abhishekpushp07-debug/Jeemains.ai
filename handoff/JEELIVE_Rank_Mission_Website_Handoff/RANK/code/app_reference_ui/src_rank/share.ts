@@ -1,7 +1,7 @@
 // What goes out when a Rank card is shared: the card's photo (see src/shareCard.ts) with a short caption and the student's
 // own link. `fallback` is the full text, used where a photo cannot be made (an older app build, a browser without sharing).
 import type { CardShare } from "@/src/shareCard";
-import { BitsatOut, ComedkOut, EstimateOut, fmt, fmtPct, fmtRange, PercentileOut, RankResult, Seat } from "./api";
+import { BitsatOut, ComedkOut, EstimateOut, fmt, fmtPct, fmtRange, RankResult, Seat } from "./api";
 import { LEVEL, TAG } from "./tones";
 import type { Saved } from "./shortlist";
 
@@ -58,16 +58,6 @@ export function shareEstimate(d: EstimateOut, link: string): CardShare {
     ...(r.pwd_rank ? [`${r.pwd_rank.label}: ${fmtRange(r.pwd_rank.range)}`] : []),
     "", "Paper type ke hisaab se:",
     ...d.levels.map(l => `${LEVEL[l.level].label}: ${fmtPct(l.percentile)} percentile · rank ${fmtRange(l.crl)}`),
-    "", ESTIMATE,
-  ], link);
-}
-
-export function sharePercentile(d: PercentileOut, link: string): CardShare {
-  const r = d.result;
-  return pack("JEELIVE-Percentile-Rank.png", ["🎯 Mera JEELIVE.AI Rank · JEE Main 2026", r.summary, `Rank (CRL): ${fmtRange(r.crl)}`], [
-    ...(r.cat_rank ? [`${r.cat_rank.label}: ${fmtRange(r.cat_rank.range)}`] : []),
-    ...(r.pwd_rank ? [`${r.pwd_rank.label}: ${fmtRange(r.pwd_rank.range)}`] : []),
-    "", "Is percentile ke liye marks (lagbhag):", ...d.marks.map(m => `${LEVEL[m.level].label} paper: ${m.marks} / 300`),
     "", ESTIMATE,
   ], link);
 }

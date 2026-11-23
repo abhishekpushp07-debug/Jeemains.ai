@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""One command that proves the website can talk to the JEELIVE.AI app server (Rank, Mission, Dream college).
+"""One command that proves the website can talk to the JEELIVE.AI app server (Rank with the new Cut off, Mission,
+Dream college).
 
     python connect_check.py                                   # the live app server
     python connect_check.py https://<host>/api                # any other address (preview, staging)
@@ -12,7 +13,7 @@ Signed-in checks (Mission, Dream college) run only when a real website session i
 
 The cookie is never printed. Only read requests are made, except one "Mission link" row that the app server creates the
 first time any student asks for their link (that is the feature itself). Python 3.8+, no packages needed.
-Exit code 0 = everything passed.
+Exit code 0 = everything passed. WAIT = the server is fine but does not have the new Cut off part yet.
 """
 import json
 import os
@@ -59,18 +60,24 @@ def call(method, path, body=None, headers=None, timeout=40):
         return status, head, raw
 
 
+class Waiting(Exception):
+    """The server is fine but does not have this (new) part yet."""
+
+
 def check(name, fn):
     t0 = time.time()
     try:
         note = fn() or ""
         ok = True
+    except Waiting as e:
+        ok, note = None, str(e)
     except AssertionError as e:
         ok, note = False, f"unexpected answer: {e}"
     except Exception as e:  # noqa: BLE001 - a network error is a failed check, not a crash
         ok, note = False, f"{type(e).__name__}: {e}"
     ms = round((time.time() - t0) * 1000)
     results.append(ok)
-    print(f"  {'PASS' if ok else 'FAIL'}  {name:<46} {ms:>5} ms  {note}")
+    print(f"  {'PASS' if ok else 'WAIT' if ok is None else 'FAIL'}  {name:<46} {ms:>5} ms  {note}")
 
 
 def expect(status, want, data):
@@ -225,6 +232,96 @@ def not_found():
     return f"404 sentence: \"{d['detail']}\""
 
 
+# ------------------------------------------------------------------ Cut off (NEW) and the scorecard rank
+TAGS = ("safe", "likely", "borderline")
+NOT_YET = "this server does not have Cut off yet: the app project has to publish it. Until then test the development address"
+
+
+def opts():
+    if seen.get("no_cutoff"):
+        raise Waiting("needs Cut off on this server (see the line above)")
+    assert "cut" in seen, "GET /rank/cutoff/options did not answer (see above)"
+    return seen["cut"]
+
+
+def cut(body, want=200):
+    opts()
+    s, _, d = call("POST", "/rank/cutoff", body)
+    expect(s, want, d)
+    return d
+
+
+def cutoff_options():
+    s, _, d = call("GET", "/rank/cutoff/options")
+    if s == 404:
+        seen["no_cutoff"] = True
+        raise Waiting(NOT_YET)
+    expect(s, 200, d)
+    assert d["limit"] == 100 and all(d[e]["colleges"] and d[e]["branches"] for e in ("jee", "comedk", "bitsat")), "three exams, two lists each"
+    assert d["jee"]["score"] == ["marks", "percentile", "rank"] and d["comedk"]["score"] == ["marks", "rank"] and d["bitsat"]["score"] == ["marks"]
+    seen["cut"] = d
+    return " · ".join(f"{d[e]['name']} {len(d[e]['colleges'])} colleges + {len(d[e]['branches'])} branches" for e in ("jee", "comedk", "bitsat"))
+
+
+def cutoff_college():
+    d = cut({"exam": "jee", "by": "college", "key": opts()["jee"]["colleges"][0]["key"]})
+    assert d["rows"] and d["you"] is None and d["eligible"] is None and d["near"] == [] and d["limit"] is None
+    assert all(r["tag"] is None and len(r["cells"]) == len(d["columns"]) for r in d["rows"]), "every row has one cell per column and no tag"
+    return f"{d['title']}: {d['total']} branches, {', '.join(d['columns'])}"
+
+
+def cutoff_branch():
+    a = cut({"exam": "jee", "by": "branch", "key": "Computer Science"})
+    assert a["limit"] == 100 and len(a["rows"]) == min(100, a["total"]) and a["you"] is None, "a branch list is the first 100"
+    b = cut({"exam": "jee", "by": "branch", "key": "Computer Science", "marks": 200, "level": "normal"})
+    you = b["you"]
+    assert you["source"] == "marks" and sum(you["counts"].values()) == b["eligible"] <= b["total"] == a["total"], "counts add up to eligible"
+    assert len(b["rows"]) == min(100, b["eligible"]) and all(r["tag"] in TAGS for r in b["rows"]), "with a score every row has a tag"
+    assert len(b["near"]) <= 3 and all(n["tag"] is None and n["gap"] for n in b["near"]), "near misses carry a gap sentence and no tag"
+    return f"Computer Science: top {len(a['rows'])} of {a['total']}; at 200 marks {b['eligible']} eligible ({you['counts']['safe']} Safe, {you['counts']['likely']} Likely, {you['counts']['borderline']} Borderline)"
+
+
+def cutoff_score_order():
+    key = opts()["jee"]["colleges"][0]["key"]
+    d = cut({"exam": "jee", "by": "college", "key": key, "rank": 7500, "percentile": 90, "marks": 100})
+    assert d["you"]["source"] == "rank" and d["you"]["rank"]["range"] == [7500, 7500], "a scorecard rank wins"
+    d = cut({"exam": "jee", "by": "college", "key": key, "percentile": 99.5, "marks": 100})
+    assert d["you"]["source"] == "percentile", "a percentile wins over marks"
+    return "rank, then percentile, then marks"
+
+
+def cutoff_comedk():
+    d = cut({"exam": "comedk", "by": "branch", "key": "Computer Science", "rank": 30000})
+    assert d["columns"] == ["R1", "R2", "R3", "R4"] and d["metric"] == "rank" and d["eligible"] == sum(d["you"]["counts"].values())
+    return f"rank 30,000: {d['eligible']} of {d['total']} Computer Science college-courses eligible"
+
+
+def cutoff_bitsat():
+    d = cut({"exam": "bitsat", "by": "college", "key": "Pilani", "marks": 280})
+    assert len(d["columns"]) == 5 and d["metric"] == "score" and d["you"]["rank"] is None and d["you"]["percentile"] is None
+    assert all(c.get("state") is None for r in d["rows"] for c in r["cells"][:-1]), "only the newest year is green or amber"
+    return f"280 / 390: {d['eligible']} of {d['total']} Pilani programs eligible; years {d['columns'][0]}-{d['columns'][-1]}, no rounds"
+
+
+def cutoff_refusals():
+    d = cut({"exam": "comedk", "by": "branch", "key": "Computer Science", "percentile": 90}, 422)
+    assert isinstance(d["detail"], str), "a rule error is a short sentence"
+    cut({"exam": "bitsat", "by": "college", "key": "Pilani", "rank": 5}, 422)
+    n = cut({"exam": "jee", "by": "college", "key": "99999"}, 404)
+    return f"422 \"{d['detail']}\" · 404 \"{n['detail']}\""
+
+
+def predict_rank():
+    s, _, d = call("POST", "/rank/predict", {"rank": 7500, "level": "normal", "category": "OBC-NCL", "female": False, "pwd": False,
+                                             "state": None, "branches": [], "segment": "all", "page": 1})
+    if s == 422 and seen.get("no_cutoff"):
+        raise Waiting("the scorecard rank arrives with the same publish")
+    expect(s, 200, d)
+    r = d["result"]
+    assert r["crl"] == [7500, 7500] and r.get("source") == "rank" and not r["from_marks"] and d["items"], "the card shows the rank itself"
+    return f"{r['summary']} -> {d['reach']['all']} college-branches in reach"
+
+
 def pdfs():
     x, k = seen["seat"], seen["comedk"]
     jobs = (("/rank/pdf/jee", {**FORM, "segment": "all"}), ("/rank/pdf/comedk", {"marks": 110, "branches": [], "area": "all"}),
@@ -300,7 +397,14 @@ for name, fn in (("GET  /rank/meta", meta), ("POST /rank/estimate  (JEE Main)", 
                  ("POST /rank/compare", compare), ("POST /rank/compare/colleges", compare_colleges),
                  ("422 on a wrong form", validation), ("404 on an unknown college", not_found)):
     check(name, fn)
+print("\nCut off (NEW) and the scorecard rank (public)")
+for name, fn in (("GET  /rank/cutoff/options", cutoff_options), ("POST /rank/cutoff  (college, every round)", cutoff_college),
+                 ("POST /rank/cutoff  (branch, top 100, score)", cutoff_branch), ("POST /rank/cutoff  (which score wins)", cutoff_score_order),
+                 ("POST /rank/cutoff  (COMEDK)", cutoff_comedk), ("POST /rank/cutoff  (BITSAT)", cutoff_bitsat),
+                 ("422 / 404 on a wrong Cut off request", cutoff_refusals), ("POST /rank/predict  (scorecard rank)", predict_rank)):
+    check(name, fn)
 if "--pdf" in flags:
+    print("\nPDFs")
     check("POST /rank/pdf/*  (7 files)", pdfs)
 print("\nMission")
 check("GET  /j/{code}  (share link)", share_link)
@@ -311,6 +415,11 @@ if COOKIE:
     check("pass handed back", revoke)
 else:
     print("  SKIP  signed-in checks: set JEELIVE_ACCESS_COOKIE to run them")
-bad = results.count(False)
-print(f"\n{'ALL ' + str(len(results)) + ' CHECKS PASSED' if not bad else str(bad) + ' OF ' + str(len(results)) + ' CHECKS FAILED'}\n")
-sys.exit(1 if bad else 0)
+bad, waiting = results.count(False), results.count(None)
+if bad:
+    print(f"\n{bad} OF {len(results)} CHECKS FAILED\n")
+elif waiting:
+    print(f"\n{results.count(True)} CHECKS PASSED, {waiting} WAIT: this server does not have Cut off yet (new). It will after the app project's next publish.\n")
+else:
+    print(f"\nALL {len(results)} CHECKS PASSED\n")
+sys.exit(1 if bad or waiting else 0)

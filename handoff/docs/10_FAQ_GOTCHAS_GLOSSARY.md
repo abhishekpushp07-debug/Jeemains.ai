@@ -36,13 +36,39 @@ JoSAA publishes no college fee; the compare screen says where to look.
 **Will field names change?**
 Only by adding fields. The released Android app reads the same names.
 
+**Where did "Percentile se rank" go?**
+Its tile became **Cut off** (new, `docs/11`). A percentile is now typed into Cut off's score box or the College
+predictor's form, and both show the rank it stands for. `POST /rank/percentile` still answers for older app versions;
+do not build a page for it.
+
+**Is Cut off on the live server?**
+It reaches the live server with the app project's next publish. Until then it answers on the development server
+(`README.md`). `python CONNECT/connect_check.py` tells you today: `WAIT` = not yet, `PASS` = yes.
+
+**BITSAT has no round-wise cut-offs in Cut off. Is something missing?**
+No. BITS publishes only one final cut-off score per program per year. The boxes are the five years 2022 … 2026; never
+label them R1, R2 … (`docs/11` §4.3).
+
+**A student typed marks, a percentile and a rank. Which one counts?**
+The most exact: rank, then percentile, then marks. The result's `source` says which. The form says so as soon as two
+boxes are filled.
+
+**If the student changes their category inside one tool, does "Meri details" change?**
+No. Meri details gives starting values; each tool is then edited on its own (`docs/12` §1).
+
 ## Gotchas
 
 - `state` must match `meta.states` exactly (`"Jammu & Kashmir"`, `"Dadra & Nagar Haveli and Daman & Diu"`); an unknown
   state is a 422.
 - Unknown `branches` names are dropped silently; take them from `meta.branches` / `meta.comedk.groups`.
 - `page` is only 1 or 2; `page_size` only 20 or 25.
-- Send `marks` **or** `percentile` (COMEDK: `marks` **or** `rank`). With both (JEE), the percentile decides.
+- JEE Main: send at least one of `marks`, `percentile`, `rank`. With several, the rank decides, then the percentile,
+  then the marks. COMEDK: `marks` **or** `rank` (the rank decides); never a percentile. BITSAT: the score only.
+- Cut off: send `key` back exactly as `GET /rank/cutoff/options` gave it (a JEE college key is a number **as text**).
+- Cut off: skip a cell with `na: true` (JAC Delhi has four rounds); a `null` closing is a dash, not a zero.
+- Cut off: a CSAB box is never green, and a branch list is at most 100 rows while `eligible` counts the whole list.
+- Cut off: show an answer only while its `exam`, `by` and `key` equal the student's current choice.
+- Meri details and every tool's saved form live in the browser only; never send them to a server or to analytics.
 - `inst` and `prog` are numbers; in `compare/colleges` the JEE `id` is the institute number **as a string**.
 - A JEE compare item needs the card's `path` sentence exactly as received.
 - Ranges are `[better, worse]`: the smaller rank first.
@@ -75,6 +101,10 @@ Only by adding fields. The released Android app reads the same names.
 | Paper type | Tough / Normal / Easy: how hard the student's shift was |
 | Safe / Likely / Borderline | the three chance tags (`docs/04` §6) |
 | Near miss | a seat just out of reach, with what it would take |
+| Cut off | (new) the tool that shows every round's cut-off of one college or one branch; also the closing rank or score itself |
+| Eligible | (Cut off) a row with a tag for the student's score: Safe + Likely + Borderline |
+| Meri details | (new) the student's score and category typed once above the tiles; starting values for all six tools |
+| Scorecard rank | the All India Rank (CRL) printed on the NTA scorecard; the `rank` field of the JEE Main form |
 | Path | the quota + category + gender + PwD combination a seat belongs to |
 | Pass | the app server's 15-minute token for signed-in calls |
 | Connector | `CONNECT/backend_fastapi/jeelive_app_connect.py`, the website's bridge to the app server |

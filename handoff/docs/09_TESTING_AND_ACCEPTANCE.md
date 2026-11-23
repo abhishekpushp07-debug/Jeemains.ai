@@ -5,14 +5,25 @@ How to prove the website is connected and behaves like the app.
 ## 1. The connection check
 
 ```bash
-python CONNECT/connect_check.py                                   # the live app server: 21 checks (Rank + Mission)
-python CONNECT/connect_check.py --pdf                             # + the 7 PDFs
+python CONNECT/connect_check.py                                   # the live app server: 29 checks (Rank 19 + Cut off 8 + Mission 2)
+python CONNECT/connect_check.py --pdf                             # + the 7 PDFs (one more check)
 python CONNECT/connect_check.py https://<website>/api --website   # through the mounted connector
+python CONNECT/connect_check.py https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/api   # the development server
 JEELIVE_ACCESS_COOKIE='<access_token cookie>' python CONNECT/connect_check.py https://<website>/api --website --pdf
 ```
 
-Expected on the day this pack was built (live server): `ALL 21 CHECKS PASSED`, with the signed-in checks skipped.
-With a real signed-in session the Mission and Dream college checks run too. Exit code 0 = pass. Python 3.8+, no packages.
+Expected on the day this pack was built, with the signed-in checks skipped:
+
+| Server | Last line |
+|---|---|
+| development (has Cut off) | `ALL 29 CHECKS PASSED` |
+| live, before the app project's next publish | `21 CHECKS PASSED, 8 WAIT: this server does not have Cut off yet (new). …` |
+| live, after that publish | `ALL 29 CHECKS PASSED` |
+
+`WAIT` is not a failure of your connection: the server is fine and simply does not have the new part yet. The 8 are the
+Cut off checks (the pickers, a college, a branch with a score, which score wins, COMEDK, BITSAT, the refusals) and the
+scorecard rank in `POST /rank/predict`. With a real signed-in session the Mission and Dream college checks run too.
+Exit code 0 = everything passed (1 while anything fails or waits). Python 3.8+, no packages.
 
 ## 2. Numbers: compare with the server, not with files
 
@@ -36,7 +47,11 @@ until the app project renews the data; after that only the live answer counts.
 **Rank**
 
 - [ ] All six tools work; each form remembers its last values after a reload.
+- [ ] The second tile is **CUT OFF**; there is no "Percentile se rank" tile or page.
+- [ ] **Cut off (new):** every line of its own list passes (`docs/11_CUT_OFF_NEW.md` §11).
+- [ ] **Meri details (new):** every line of its own list passes (`docs/12_MERI_DETAILS_NEW.md` §6).
 - [ ] JEE 180 marks, Normal, General, Bihar: the card shows the same CRL range and percentile as `POST /rank/predict` for that body.
+- [ ] The College predictor's JEE form has three boxes (marks, percentile, Rank (CRL)). With rank 7500 the card reads "Rank 7,500 · General" and shows the rank as one number, not a range.
 - [ ] The list shows 25 cards, page 2 the rest; the chips show the server's `counts` and the "in reach" line `reach.all`.
 - [ ] Tags read exactly Safe / Likely / Borderline in the colours of `docs/06` §9.
 - [ ] Near misses show the server's `gap` sentence.
@@ -69,5 +84,5 @@ until the app project renews the data; after that only the live answer counts.
 ## 4. Load
 
 The app server answered 1,000 simulated students using the app at the same time with no errors (p95 46 ms on the
-server). The connector pools connections and caches the three GET lists for 10 minutes. Call on **Show**, never on
-every key press.
+server). The connector pools connections and caches the four GET lists for 10 minutes. Call on **Show** (Cut off: on
+a pick, a chip or **Eligible dikhao**), never on every key press.

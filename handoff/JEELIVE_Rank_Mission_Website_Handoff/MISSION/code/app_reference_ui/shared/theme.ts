@@ -142,9 +142,26 @@ const dark = {
   custom_softText: "#D6D6E0",
   custom_pastelInk: "#1A1A22",
   custom_selectedOption: "#1C0D11",
+  // The student's choice during any test (never right/wrong): green circles, light green line, faint green wash.
+  custom_pick: "#22C55E", custom_pickLine: "#4ADE80", custom_pickWash: "#0F2A1B", custom_pickInk: "#6EE7A0",
+  // Analysis: the 8 section pills and the report card are glossy light sky blue and light teal that keep changing places
+  // (same in both palettes). Words on them are near-black: 11 : 1 or more on every tone; the card's second line is 5.7 : 1.
+  // Gloss = the soft light on the upper half, glint = the glass band that crosses on the diagonal.
+  custom_sectionSky: "#A8DCFF", custom_sectionAqua: "#8CEBD6", custom_sectionPillInk: "#0F0F12",
+  custom_sectionGloss: "rgba(255,255,255,0.78)", custom_sectionGlint: "rgba(255,255,255,0.95)",
+  custom_reportGloss: "rgba(255,255,255,0.46)", custom_reportGlint: "rgba(255,255,255,0.92)",
+  custom_reportSky: "#86CFFB", custom_reportAqua: "#66E0CC", custom_reportHalo: "#38BDF8",
+  custom_reportInk: "#0F0F12", custom_reportInkSoft: "#0B4A5C", custom_reportOnInk: "#FFFFFF", custom_reportGlass: "rgba(255,255,255,0.55)", custom_reportLine: "rgba(255,255,255,0.9)", custom_reportGlow: "rgba(255,255,255,0.22)",
+  // My Tests tabs (glossy, same in both palettes): Completed is baby pink, In progress yellow, Saved sky blue. The open tab
+  // wears its full colour; the other two rest in a softer wash of their own colour. Words are 6.5 : 1 or more on every tone.
+  custom_tabPink: "#FFAFC9", custom_tabPinkDeep: "#FF82AB", custom_tabPinkSoft: "#FFD3E1", custom_tabPinkSoftDeep: "#FFBDD2", custom_tabPinkGlow: "#FF4D8F",
+  custom_tabSun: "#FFEE5C", custom_tabSunDeep: "#FFD60A", custom_tabSunSoft: "#FFF29A", custom_tabSunSoftDeep: "#FFE455", custom_tabSunGlow: "#FFA200",
+  custom_tabSky: "#9BDCFF", custom_tabSkyDeep: "#52BDFF", custom_tabSkySoft: "#C4E8FF", custom_tabSkySoftDeep: "#96D5FF", custom_tabSkyGlow: "#1E90FF",
+  custom_tabInk: "#0F0F12", custom_tabInkSoft: "#3D3D47", custom_tabChip: "rgba(255,255,255,0.92)",
+  custom_tabGloss: "rgba(255,255,255,0.62)", custom_tabGlint: "rgba(255,255,255,0.95)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
-  custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
+  custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upSky: "#96D2FF", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
   custom_missFrom: "#F3E7D8", custom_missTo: "#ECD6DC", custom_missInk: "#7A4A3C", custom_missBody: "#5E4A44", custom_missCta: "#F3E7D8",
   custom_qAnswered: "#22C55E", custom_qNotAnswered: "#EF4444", custom_qMarked: "#0D9488", custom_qMarkedInk: "#5EEAD4",
   custom_qMarkedSoft: "#0B2A27", custom_qFresh: "#2A2A33", custom_qFreshLine: "#3A3A46", custom_qInk: "#FFFFFF",
@@ -160,6 +177,18 @@ const dark = {
   // All India card: onyx → deep ruby with a soft red glow and a hairline sheen.
   custom_seriesFrom: "#0B0B0D", custom_seriesMid: "#17090D", custom_seriesTo: "#3A0912", custom_seriesGlow: "#E11D2E",
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
+  // Home's All India card: the soft light on its upper half and the glass band that crosses it corner to corner.
+  custom_seriesGloss: "rgba(255,255,255,0.11)", custom_seriesGlint: "rgba(255,255,255,0.26)",
+  // The series page's cards: the streak card is baby pink (small words on it use the rose ink, 6 : 1 or more); the day
+  // cards wear their status colours. All share the same white gloss and white corner-to-corner glint.
+  custom_seriesPink: "#FFDCE8", custom_seriesPinkDeep: "#FFB5CE", custom_seriesPinkInk: "#5B3A46",
+  custom_seriesPastelGloss: "rgba(255,255,255,0.55)", custom_seriesPastelGlint: "rgba(255,255,255,0.92)",
+  // The series page's day chips and 50-day map: a day still to come is blood red with white words (6 : 1 or more); a day
+  // that is over is parrot green with black words (7 : 1 or more), whether or not its paper was taken.
+  custom_chipBlood: "#C1121F", custom_chipBloodDeep: "#8A0B15", custom_chipBloodInk: "#FFFFFF", custom_chipBloodSoft: "#FFE9EC",
+  custom_chipBloodGloss: "rgba(255,255,255,0.26)", custom_chipBloodGlint: "rgba(255,255,255,0.58)",
+  custom_chipParrot: "#96EA3A", custom_chipParrotDeep: "#46BE1B", custom_chipParrotInk: "#0F0F12", custom_chipParrotSoft: "#123F08",
+  custom_chipParrotGloss: "rgba(255,255,255,0.42)", custom_chipParrotGlint: "rgba(255,255,255,0.85)",
   custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8FA8FF",
   // Rank Card: brushed graphite with a soft blood-red glow, sparkle-silver serif and blood-red hairlines (same in both palettes).
   custom_rankFrom: "#1C1D22", custom_rankMid: "#0E0F12", custom_rankTo: "#150A0E", custom_rankGlow: "rgba(153,27,27,0.30)",
@@ -182,28 +211,26 @@ const dark = {
   custom_royalTint: "#EEF2FF", custom_royalTintLine: "#D6DEFF",
   // Rank page stays pure black; only the cards carry colour.
   custom_rankBg: "#000000", custom_rankPanelSheen: "rgba(255,255,255,0.035)",
-  // Rank tool tiles: brushed graphite metal, a broad diagonal sheen, a bevelled top edge, a soft shade at the foot.
-  custom_metalMid: "#151619", custom_metalEdge: "rgba(255,255,255,0.10)",
-  custom_metalSheen: "rgba(255,255,255,0.14)", custom_metalSheenSoft: "rgba(255,255,255,0.05)", custom_metalBevel: "rgba(255,255,255,0.34)", custom_metalShade: "rgba(0,0,0,0.38)",
+  // The Rank Card's one faint diagonal sheen.
+  custom_metalSheenSoft: "rgba(255,255,255,0.05)",
   // Rank Card: a quiet black metal card (soft graphite corner → black) with a hairline diamond watermark.
   custom_eliteFrom: "#1F1F23", custom_eliteMid: "#121215", custom_eliteTo: "#0B0B0D", custom_eliteLine: "rgba(255,255,255,0.09)",
-  // Rank tool jewels: each tile is graphite mixed into its own colour. from/mid/to = the tile's diagonal, glow (+glow2) = the light
-  // behind its diamond, line = accent, ink = light text on it, soft = chosen icon fill (same in both palettes).
-  custom_maroonFrom: "#25252A", custom_maroonMid: "#170B10", custom_maroonTo: "#4A1122", custom_maroonGlow: "#C0244F", custom_maroonLine: "#E0557B",
-  custom_maroonInk: "#F7AFC2", custom_maroonSoft: "rgba(224,85,123,0.20)",
-  custom_indigoFrom: "#24242C", custom_indigoMid: "#100E1F", custom_indigoTo: "#271C6E", custom_indigoGlow: "#7A52FF", custom_indigoGlow2: "#2F6BFF", custom_indigoLine: "#8E80FF",
-  custom_indigoInk: "#C9C2FF", custom_indigoSoft: "rgba(142,128,255,0.20)",
-  custom_tealFrom: "#232629", custom_tealMid: "#0A1516", custom_tealTo: "#0B4A45", custom_tealGlow: "#14B8A6", custom_tealLine: "#2DD4BF",
-  custom_tealInk: "#9CF2E3", custom_tealSoft: "rgba(45,212,191,0.18)",
-  custom_champFrom: "#28282C", custom_champMid: "#141315", custom_champTo: "#47330F", custom_champGlow: "#D9A54A", custom_champLine: "#E8C273",
-  custom_champInk: "#F5DCA0", custom_champSoft: "rgba(232,194,115,0.18)",
-  // Dream college tile: graphite into dark violet, like the other metal tiles.
-  custom_violetFrom: "#26232C", custom_violetMid: "#120A1C", custom_violetTo: "#3D0F63", custom_violetGlow: "#8B2FD9", custom_violetLine: "#B57BEA",
-  custom_violetInk: "#E2CCFF", custom_violetSoft: "rgba(181,123,234,0.20)",
-  custom_bloodFrom: "#D10F2A", custom_bloodMid: "#D10F2A", custom_bloodTo: "#D10F2A", custom_bloodGlow: "#FF6B78", custom_bloodLine: "#FF6B78",
-  custom_bloodInk: "#FFFFFF", custom_bloodSoft: "rgba(255,255,255,0.18)",
-  // College predictor tile is pure flat blood red, the same red as its form: its small line, icon circle and icon ring on the red.
-  custom_bloodValue: "#FFE1E5", custom_bloodChip: "#A80B21", custom_bloodChipLine: "#FF6B78",
+  // Rank tool tiles: each tile is its tool's own colour, corner to corner, with no black in it (the page behind stays black).
+  // X = the colour, XDeep = its far corner, XChip = the icon circle, XLine = the circle's ring, XSoft = the small line under
+  // the title. Words are white (5 : 1 or more) except on gold, where they are near-black (6 : 1 or more). Same in both palettes.
+  custom_tileMaroon: "#BC1F55", custom_tileMaroonDeep: "#7C1038", custom_tileMaroonChip: "#93143F", custom_tileMaroonLine: "#FF9DBA", custom_tileMaroonSoft: "#FFE1EA",
+  custom_tileIndigo: "#5B4BE0", custom_tileIndigoDeep: "#3323A6", custom_tileIndigoChip: "#4132BC", custom_tileIndigoLine: "#B9B0FF", custom_tileIndigoSoft: "#E6E2FF",
+  custom_tileTeal: "#0A7B70", custom_tileTealDeep: "#06574F", custom_tileTealChip: "#07665D", custom_tileTealLine: "#6FE9D7", custom_tileTealSoft: "#DFFBF6",
+  custom_tileBlood: "#D10F2A", custom_tileBloodDeep: "#B00C22", custom_tileBloodChip: "#A80B21", custom_tileBloodLine: "#FF6B78", custom_tileBloodSoft: "#FFE1E5",
+  custom_tileGold: "#F2C14E", custom_tileGoldDeep: "#C98C16", custom_tileGoldChip: "#FFE08A", custom_tileGoldLine: "#8A5D00", custom_tileGoldSoft: "#3A2700",
+  custom_tileViolet: "#8E3BD9", custom_tileVioletDeep: "#58169A", custom_tileVioletChip: "#6C22B5", custom_tileVioletLine: "#D2A8FF", custom_tileVioletSoft: "#F0E2FF",
+  custom_tileInk: "#FFFFFF", custom_tileGoldInk: "#1C1300", custom_tileBadge: "#FFFFFF",
+  custom_tileGloss: "rgba(255,255,255,0.22)", custom_tileGlint: "rgba(255,255,255,0.5)", custom_tileGoldGloss: "rgba(255,255,255,0.5)", custom_tileGoldGlint: "rgba(255,255,255,0.9)",
+  // Rank forms: the gloss and the glass glint on a form's header band. A light band (yellow, teal, lime, sky blue) takes the
+  // strong pair; a deep band (blood red) the soft pair, so its white words stay 4.5 : 1 or more.
+  custom_formGloss: "rgba(255,255,255,0.46)", custom_formGlint: "rgba(255,255,255,0.9)", custom_formDeepGloss: "rgba(255,255,255,0.18)", custom_formDeepGlint: "rgba(255,255,255,0.5)",
+  // Used by the dream meter.
+  custom_tealInk: "#9CF2E3",
   // College predictor's score bar after Show: bright shining purple, with the blood red Edit button on it.
   custom_fPurpleFrom: "#B43CFF", custom_fPurpleTo: "#6A16E8", custom_fPurpleGlow: "#A855F7", custom_fPurpleHint: "#F3E8FF",
   custom_fPurpleChip: "rgba(255,255,255,0.2)", custom_fShine: "rgba(255,255,255,0.55)",
@@ -269,6 +296,7 @@ const light: ThemeColors = {
   custom_bar: "#F6F6F8", custom_barLine: "#ECECF0",
   custom_eyebrow: "#74747E", custom_dim: "#A6A6AE", custom_softText: "#3C3C44", custom_pastelInk: "#111114",
   custom_selectedOption: "#FFF4F5",
+  custom_pick: "#16A34A", custom_pickLine: "#4ADE80", custom_pickWash: "#F2FBF5", custom_pickInk: "#15803D",
   custom_qAnswered: "#16A34A", custom_qNotAnswered: "#DC2626", custom_qMarked: "#0D9488", custom_qMarkedInk: "#0F766E",
   custom_qMarkedSoft: "#E6F6F4", custom_qFresh: "#F1F1F4", custom_qFreshLine: "#D9D9DF", custom_qInk: "#FFFFFF",
   custom_gold: "#B7791F", custom_goldDeep: "#7A4E00", custom_flame: "#EA580C", custom_flameSoft: "#FFF0E6",
@@ -304,6 +332,8 @@ export const fonts = {
   semibold: "Figtree-600",
   bold: "Figtree-700",
   heavy: "Figtree-800",
+  mono: "RobotoMono-700",
+  monoRegular: "RobotoMono-400",
 };
 
 export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32, xxxl: 48 };
@@ -326,8 +356,45 @@ export type SeriesTone = "today" | "done" | "upcoming" | "missed";
 export const pastel: Record<SeriesTone, { from: string; to: string; ink: string; body: string; cta: string; label: string }> = {
   today: { from: light.custom_todayFrom, to: light.custom_todayTo, ink: light.custom_todayInk, body: light.custom_todayBody, cta: light.custom_todayCta, label: "Today" },
   done: { from: light.custom_doneFrom, to: light.custom_doneTo, ink: light.custom_doneInk, body: light.custom_doneBody, cta: light.custom_doneCta, label: "Done" },
-  upcoming: { from: light.custom_upFrom, to: light.custom_upTo, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
+  upcoming: { from: light.custom_upFrom, to: light.custom_upSky, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
   missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, label: "Missed" },
+};
+// The three colours that run round each Rank tool tile, chosen to sit well on the tile's own colour and on the black page
+// (the first comes back at the end): maroon = rose, gold, blush; indigo = lavender, sky, pale lilac; teal = aqua, lime, mint;
+// blood = gold, rose, pearl; gold = cream, tangerine, sun yellow; violet = lilac, pink, cyan.
+export const toolEdges = {
+  maroon: ["#FF7AA2", "#FFC857", "#FFD9E4", "#FF7AA2"],
+  indigo: ["#9D8CFF", "#5CC8FF", "#E0DBFF", "#9D8CFF"],
+  teal: ["#3DE0C8", "#B5F23D", "#D5FFF7", "#3DE0C8"],
+  blood: ["#FFC857", "#FF8FA0", "#FFE1E5", "#FFC857"],
+  champ: ["#FFF3C4", "#FF8A3D", "#FFD60A", "#FFF3C4"],
+  violet: ["#C9A0FF", "#FF8AD8", "#7FE7FF", "#C9A0FF"],
+} as const;
+// The three colours that run round each Rank form, from the form's own colour family (the first comes back at the end):
+// rank = yellow, tangerine, cream; cutoff = aqua, sky blue, mint; target = lime, sun yellow, emerald; college = ruby, gold,
+// rose; compare = sky blue, azure, lavender; dream = lilac, pink, cyan.
+export const formEdges = {
+  rank: ["#FFD60A", "#FF8A00", "#FFF3B0", "#FFD60A"],
+  cutoff: ["#2DE1C2", "#5CC8FF", "#D5FFF7", "#2DE1C2"],
+  target: ["#B5F23D", "#FFE14D", "#22C55E", "#B5F23D"],
+  college: ["#FF3B4E", "#FFC857", "#FF8FA0", "#FF3B4E"],
+  compare: ["#4CC3FF", "#2F80FF", "#B9B0FF", "#4CC3FF"],
+  dream: ["#B983FF", "#FF8AD8", "#7FE7FF", "#B983FF"],
+} as const;
+// Day chips: gold, rose and pearl run round a blood-red chip; sun yellow, emerald and lime round a parrot-green one; the
+// chosen day wears a black edge with one gold light running round it.
+export const chipEdges = {
+  blood: ["#FFC857", "#FF5C7A", "#FFD9E0", "#FFC857"],
+  parrot: ["#FFE14D", "#0B8A43", "#DFFF94", "#FFE14D"],
+  chosen: ["#0F0F12", "#0F0F12", "#FFC857", "#0F0F12", "#0F0F12"],
+} as const;
+// The three colours that run round a big series day card, from its status colour's own family (the first comes back at
+// the end): today = coral, rose, gold; done = emerald, lime, teal; upcoming = teal, azure, lavender; missed = bronze, dusty rose, sand.
+export const pastelEdges: Record<SeriesTone, readonly [string, string, string, string]> = {
+  today: ["#FF6B4A", "#FF2D7A", "#FFB300", "#FF6B4A"],
+  done: ["#22A45D", "#9BD22F", "#10B5A0", "#22A45D"],
+  upcoming: ["#10B5A0", "#1E90FF", "#8E7BFF", "#10B5A0"],
+  missed: ["#C08552", "#D4728C", "#E0B15C", "#C08552"],
 };
 export const subjectColor = (s?: string) =>
   s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;

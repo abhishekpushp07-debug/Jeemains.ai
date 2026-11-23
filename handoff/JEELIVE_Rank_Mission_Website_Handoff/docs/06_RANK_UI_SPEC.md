@@ -1,34 +1,44 @@
 # 06 · Rank UI spec
 
-The six Rank tools screen by screen, as the app shows them. Screenshots are in `RANK/screenshots/` (390 × 844 at 2×,
-taken fresh from the app for this pack). The React Native files named here are in `RANK/code/app_reference_ui/` and
+The six Rank tools screen by screen, as the app shows them. Screenshots are in `RANK/screenshots/` (390 × 844, taken
+from the app). The React Native files named here are in `RANK/code/app_reference_ui/` and
 are the behaviour reference. The website may adapt layout to a wider screen, but keeps the words, the order of
 information, the tags and the colours.
+
+> **New in this pack:** the **Meri details** bar above the tiles (§1, `docs/12`), the **Cut off** tool in the second
+> tile (§4, `docs/11`), and a third score box, **Rank (CRL)**, in the College predictor's JEE form (§6).
+> The "Percentile se rank" tool is gone.
 
 ## 1. The page
 
 - **Pure black page** (`#000000`), text-only, no photos. Cards carry the colour.
 - Header: a small rule title `JEELIVE.AI · Rank`, the serif title **"Rank & college predictor"** and the line
   `JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs`.
-- **Six tool tiles**, three rows of two (`ToolGrid.tsx`), brushed graphite metal, each with its own jewel colour and a
-  `NEW` badge where shown:
+- **Meri details** (new, `ProfileBar.tsx`): one card between the header and the tiles. Never saved: "Apni details ek
+  baar daalo" with a **+ Bharo** pill. Saved: "Meri details", the profile in one line and an **Edit** pill. It opens
+  into a small form; Save fills every tool's form. Everything about it: `docs/12_MERI_DETAILS_NEW.md`.
+- **Six tool tiles**, three rows of two (`ToolGrid.tsx`, `JewelFace.tsx`). Each tile is its tool's own colour from
+  corner to corner, with a faceted diamond in its corner, a soft gloss, a glint that crosses it and three matching
+  colours running round its edge; a white `NEW` badge where shown:
 
-| Tile | Subtitle | Form colour (`accent.tsx`) |
-|---|---|---|
-| RANK PREDICTOR | marks se rank | bright yellow `#FFD60A` |
-| PERCENTILE SE RANK | NTA percentile | teal `#2DE1C2` |
-| TARGET MARKS | college ke liye | lime `#B5F23D` |
-| COLLEGE PREDICTOR | colleges + cutoffs | blood red `#D10F2A` (white text) |
-| COLLEGE COMPARE | side by side | sky blue `#4CC3FF` |
-| DREAM COLLEGE | kitne marks door | violet `#7B2CBF` |
+| Tile | Subtitle | Tile colour | Form colour (`accent.tsx`) |
+|---|---|---|---|
+| RANK PREDICTOR | marks se rank | maroon | bright yellow `#FFD60A` |
+| **CUT OFF** — new | college / branch | indigo | teal `#2DE1C2` |
+| TARGET MARKS | college ke liye | teal | lime `#B5F23D` |
+| COLLEGE PREDICTOR | colleges + cutoffs | blood red | blood red `#D10F2A` (white text) |
+| COLLEGE COMPARE | side by side | gold (near-black words) | sky blue `#4CC3FF` |
+| DREAM COLLEGE | kitne marks door | violet | violet `#7B2CBF` |
 
-- The chosen tile glows in its colour; the form below wears the same colour (frame, header band, chosen chips, fields,
-  main button). Text on yellow/teal/lime/sky is near-black `#0B0B0F`.
+- The chosen tile glows in its form's colour; the form below wears the same colour (frame, header band, chosen chips, fields,
+  main button). Text on yellow/teal/lime/sky is near-black `#0B0B0F`. Exact tile colours and the moving shine: `theme.ts`
+  (`custom_tile…`, `toolEdges`, `formEdges`) in `RANK/code/app_reference_ui/shared/`.
 - A tool opens below the tiles. A tool keeps its answer when the student switches away and back.
 - Every form remembers its last values in the browser (the app uses phone storage), so a returning student sees their score.
+  Keys and shapes: `docs/12` §4.
 - After **Show**, the form collapses into a summary bar with a glowing **Edit** pill and the hint "Doosra number dekhna hai?".
 - At the foot: the estimate note, the data line, `meta.missing`, and links to the All India series and results.
-- Screenshot: `01_rank_tab_six_tools_and_rank_predictor_form.jpg`.
+- Screenshot: `01_rank_tab_meri_details_bar_and_six_tools.jpg`.
 
 ## 2. The Rank Card (shared look)
 
@@ -50,11 +60,23 @@ blood red `#B3172F`, blood ink `#F4A3AE`.
 - COMEDK answer: rank range, middle estimate, percentile, the three analyses with their own rank and link.
 - Screenshots `02`, `03`, `04`.
 
-## 4. Percentile se rank (`PercentileRank.tsx`)
+## 4. Cut off (`Cutoff.tsx`, `CutoffList.tsx`) — NEW
 
-Percentile field, category chips, PwD switch → the Rank Card (CRL range, category/PwD rank) and the marks that
-percentile took on a tough, normal and easy paper. "Is percentile se colleges dekho" hands over to the College
-predictor. Screenshots `05`, `06`.
+The second tile. It took the place of "Percentile se rank" (that tool and its screen no longer exist; screenshots
+`05` and `06` of the earlier pack were removed with it).
+
+- Exam switch **JEE Main · BITSAT · COMEDK**; then **College se · Branch se** (BITSAT: **Campus se · Program se**); a
+  chooser that opens a search sheet over `GET /rank/cutoff/options`; for JEE Main the category chips (General at the
+  start), Female, PwD and Home state.
+- Answer (`POST /rank/cutoff`): a heading with a count line, an **optional score box** ("Sirf wahi dekhna hai jahan aap
+  eligible ho?"), then one card per branch (or per college) with **a small box for every round's cut-off**, 25 cards at
+  a time. A college shows all its branches; a branch shows its top 100 colleges.
+- With a score (marks, percentile or rank): only Safe / Likely / Borderline rows stay, the boxes turn green (inside)
+  or amber (on the edge), and the nearest misses follow under "BAS THODA SA DOOR".
+- BITSAT has no rounds: its boxes are the five years 2022 … 2026.
+
+This tool has its own document with every word, state, rule and its acceptance list: **`docs/11_CUT_OFF_NEW.md`**.
+Screenshots `NEW_cutoff_01` to `NEW_cutoff_18`.
 
 ## 5. Target marks (`TargetMarks.tsx`)
 
@@ -72,7 +94,13 @@ Exam switch **JEE Main · BITSAT · COMEDK**; each keeps its own score and list.
 **JEE Main** (`InputCard.tsx`, `ResultCard.tsx`, `SeatList.tsx`, `CollegeCard.tsx`, `CollegeSheet.tsx`):
 
 - Mode switch **My marks · Percentile chart**.
-- Form: marks or percentile, paper type, category, female, PwD, home state (searchable picker sheet), branch filter.
+- Form: three score boxes, **Marks (out of 300)**, **Percentile** and (new) **Rank (CRL), scorecard se** (whole number,
+  1 … 20,00,000, placeholder "e.g. 12000"). Under them one small line: "Koi ek kaafi hai: marks, percentile ya rank." and,
+  as soon as two boxes are filled, "Ek se zyada bhare hain: sabse pakka number chalega. Pehle Rank, phir Percentile,
+  phir Marks." Nothing filled → "Marks, percentile ya rank mein se koi ek daalo." Then paper type, category, female,
+  PwD, home state (searchable picker sheet), branch filter.
+- With a rank the Rank Card shows that rank as **one number** (not a range), the percentile it stands for, and the
+  summary "Rank 7,500 · General"; the collapsed summary bar reads the same.
 - Answer: the Rank Card with a shining purple score bar (`#B43CFF → #6A16E8`), "655 college-branches in reach", filter
   chips **All · NIT · IIIT · GFTI · Delhi** with counts, a branch filter, "Top 50 ki PDF".
 - **College cards**: a coloured chance edge, a medal, tags (type, chance), the branch, three stat boxes (closing rank +

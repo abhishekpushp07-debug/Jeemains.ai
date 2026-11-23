@@ -1,6 +1,6 @@
 // Small text-only building blocks of the dark Rank tab: section panel, switch, colour tag, toggle chip, remove button and a list picker.
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated, { cancelAnimation, Easing, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Press, T } from "@/src/components/ui";
@@ -8,8 +8,8 @@ import { useStill } from "@/src/motion";
 import { Shine as EdgeShine } from "@/src/analysis/Shine";
 import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
-import { rankColors as colors, radius, space } from "@/src/theme";
-import { InForm, useAccent, useFormAccent } from "./accent";
+import { rankColors as colors, fonts, noOutline, radius, space } from "@/src/theme";
+import { InForm, useAccent, useField, useFormAccent } from "./accent";
 
 /** Section title in the Rank Card's voice: a blood-red hairline, then widely tracked silver caps. */
 export function RuleTitle({ children }: { children: string }) {
@@ -85,6 +85,20 @@ export function Toggle({ label, on, onPress, ink = colors.onSurface, soft, testI
     <T w="bold" size={13} color={on ? onInk : colors.custom_softText} numberOfLines={1}>{label}</T>
     {caret ? <Glyph name="chevron-down" size={14} color={on ? onInk : colors.custom_dim} /> : null}
   </Press>;
+}
+
+/** A labelled number box in the tool's colour. `decimal` lets a point through (percentile), `signed` a minus (negative marks). */
+export function NumberField({ label, value, onChange, placeholder, testID, max, decimal, signed, onSubmit }: {
+  label: string; value: string; onChange: (v: string) => void; placeholder: string; testID: string; max: number; decimal?: boolean; signed?: boolean; onSubmit?: () => void;
+}) {
+  const field = useField();
+  const clean = (v: string) => v.replace(decimal ? /[^0-9.]/g : signed ? /[^0-9-]/g : /[^0-9]/g, "").slice(0, max);
+  return <View style={styles.field}>
+    <T w="semibold" size={12} color={colors.muted} numberOfLines={1}>{label}</T>
+    <TextInput testID={testID} value={value} onChangeText={v => onChange(clean(v))} keyboardType={decimal ? "decimal-pad" : signed ? "numbers-and-punctuation" : "number-pad"}
+      placeholder={placeholder} placeholderTextColor={colors.custom_dim} style={[styles.input, field.style]} keyboardAppearance="dark" selectionColor={field.selectionColor}
+      returnKeyType="done" maxLength={max} accessibilityLabel={label} onSubmitEditing={onSubmit} />
+  </View>;
 }
 
 /** A 44×44 "×" that takes a row off a list. */
@@ -198,6 +212,8 @@ const styles = StyleSheet.create({
   tag: { borderRadius: radius.pill, borderWidth: 1, paddingHorizontal: 8, paddingVertical: 2, alignSelf: "flex-start" },
   toggle: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, flexDirection: "row", alignItems: "center", gap: 4 },
   remove: { width: 44, height: 44, alignItems: "center", justifyContent: "center" },
+  field: { flexGrow: 1, flexBasis: 130, minWidth: 130, gap: 4 },
+  input: { height: 52, borderRadius: 14, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, paddingHorizontal: space.md, fontFamily: fonts.bold, fontSize: 18, color: colors.onSurface, ...noOutline },
   summary: { minHeight: 52, borderRadius: 26, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, paddingHorizontal: space.lg, paddingVertical: space.sm, flexDirection: "row", alignItems: "center", gap: space.md },
   row: { minHeight: 48, flexDirection: "row", alignItems: "center", borderBottomWidth: 1, borderBottomColor: colors.custom_barLine },
   done: { minHeight: 50, borderRadius: radius.pill, backgroundColor: colors.brandPrimary, alignItems: "center", justifyContent: "center", marginTop: space.sm },

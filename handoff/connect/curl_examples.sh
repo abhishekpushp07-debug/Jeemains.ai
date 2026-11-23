@@ -23,6 +23,20 @@ show "GET /rank/target/bitsat"     curl -s "$APP/rank/target/bitsat"
 show "POST /rank/compare"          curl -s -X POST "$APP/rank/compare"    -H "$J" -d '{"items":[{"exam":"jee","id":"jee-230","prog":230,"quota":"OS","gender":"N","path":"Other state · Open"},{"exam":"comedk","id":"E095|CY"},{"exam":"bitsat","id":"Pilani-cs"}]}'
 show "POST /rank/compare/colleges" curl -s -X POST "$APP/rank/compare/colleges" -H "$J" -d '{"items":[{"exam":"jee","id":"22"},{"exam":"comedk","id":"E095"},{"exam":"bitsat","id":"Pilani"}],"category":"GEN","female":false,"pwd":false,"state":"Bihar"}'
 
+# ---------------------------------------------------------------- Cut off (NEW) and the scorecard rank (public)
+# key = exactly what GET /rank/cutoff/options gave: JEE college = institute number as text, branch = group name;
+# COMEDK college = code; BITSAT college = campus, branch = program key. A score is optional.
+show "GET /rank/cutoff/options (the pickers)"         curl -s "$APP/rank/cutoff/options"
+show "POST /rank/cutoff (JEE college, every round)"   curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"jee","by":"college","key":"25"}'
+show "POST /rank/cutoff (JEE college, 200 marks)"     curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"jee","by":"college","key":"25","marks":200,"level":"normal","category":"GEN","female":false,"pwd":false,"state":null}'
+show "POST /rank/cutoff (JEE branch, top 100)"        curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"jee","by":"branch","key":"Computer Science"}'
+show "POST /rank/cutoff (JEE branch, rank, OBC-NCL)"  curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"jee","by":"branch","key":"Computer Science","rank":7500,"category":"OBC-NCL","female":false,"pwd":false,"state":"Tamil Nadu"}'
+show "POST /rank/cutoff (COMEDK branch, rank)"        curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"comedk","by":"branch","key":"Computer Science","rank":30000}'
+show "POST /rank/cutoff (COMEDK college, marks)"      curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"comedk","by":"college","key":"E095","marks":150}'
+show "POST /rank/cutoff (BITSAT campus, score)"       curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"bitsat","by":"college","key":"Pilani","marks":280}'
+show "POST /rank/cutoff (BITSAT program)"             curl -s -X POST "$APP/rank/cutoff" -H "$J" -d '{"exam":"bitsat","by":"branch","key":"cs"}'
+show "POST /rank/predict (scorecard rank)"            curl -s -X POST "$APP/rank/predict" -H "$J" -d '{"rank":7500,"level":"normal","category":"GEN","female":false,"pwd":false,"state":null,"branches":[],"segment":"all","page":1}'
+
 # ---------------------------------------------------------------- Rank PDFs (public, application/pdf)
 echo; echo "### POST /rank/pdf/jee  ->  jee_top50.pdf"
 curl -s -X POST "$APP/rank/pdf/jee" -H "$J" -o jee_top50.pdf -w "HTTP %{http_code}, %{size_download} bytes\n" \

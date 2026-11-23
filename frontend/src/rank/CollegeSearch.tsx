@@ -9,9 +9,9 @@ import { rankColors as colors, fonts, noOutline, radius, space } from "@/src/the
 
 export type Option = { key: string; title: string; sub: string; find?: string };
 
-export function CollegeSearch({ visible, title, options, onPick, onClose, testID, header, picked }: {
+export function CollegeSearch({ visible, title, options, onPick, onClose, testID, header, picked, hint = "College ka naam ya shehar likho", none = "Koi college nahi mila. Naam thoda chhota likh kar dekho." }: {
   visible: boolean; title: string; options: Option[]; onPick: (key: string) => void; onClose: () => void; testID: string;
-  header?: React.ReactNode; picked?: Set<string>;
+  header?: React.ReactNode; picked?: Set<string>; hint?: string; none?: string;
 }) {
   const [q, setQ] = useState("");
   const shown = useMemo(() => {
@@ -20,8 +20,8 @@ export function CollegeSearch({ visible, title, options, onPick, onClose, testID
   }, [q, options]);
   return <DSheet visible={visible} onClose={onClose} title={title} testID={testID}>
     {header}
-    <TextInput testID={`${testID}-search`} value={q} onChangeText={setQ} placeholder="College ka naam ya shehar likho" placeholderTextColor={colors.custom_dim}
-      style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} autoCorrect={false} returnKeyType="search" accessibilityLabel="College search" />
+    <TextInput testID={`${testID}-search`} value={q} onChangeText={setQ} placeholder={hint} placeholderTextColor={colors.custom_dim}
+      style={styles.input} keyboardAppearance="dark" selectionColor={colors.custom_rankBloodInk} autoCorrect={false} returnKeyType="search" accessibilityLabel={hint} />
     <View>
       {shown.map(o => {
         const on = !!picked?.has(o.key);
@@ -37,7 +37,7 @@ export function CollegeSearch({ visible, title, options, onPick, onClose, testID
           </View> : null}
         </Press>;
       })}
-      {shown.length === 0 ? <T size={13} color={colors.muted} style={{ paddingVertical: space.md }}>Koi college nahi mila. Naam thoda chhota likh kar dekho.</T> : null}
+      {shown.length === 0 ? <T size={13} color={colors.muted} style={{ paddingVertical: space.md }}>{none}</T> : null}
     </View>
   </DSheet>;
 }

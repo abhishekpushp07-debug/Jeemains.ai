@@ -18,12 +18,12 @@ import { CardsHeading, CollegeCard, TapHint, cardStyles, useCardViews } from "./
 import { PdfButton } from "./PdfButton";
 import { comedkSaved, toggleSaved, useShortlist } from "./shortlist";
 import { FormButton, useField } from "./accent";
+import { SAVED, useProfileSaves } from "./profile";
 import { CardRef, shareCard } from "@/src/shareCard";
 import { useShareLink } from "@/src/mission/stats";
 import { useDreamToggle } from "@/src/dream/useDreamToggle";
 import { comedkDream } from "@/src/dream/need";
 
-const SAVED = "rank.comedk.v1";
 const AREAS: { key: ComedkArea; label: string }[] = [{ key: "all", label: "All" }, { key: "blr", label: "Bengaluru" }, { key: "other", label: "Other cities" }];
 
 /** Typed values -> request, or what to fix. A rank card rank wins over marks when both are filled. */
@@ -59,26 +59,28 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
   const field = useField();
   const card = useRef<React.ComponentRef<typeof View>>(null); // the COMEDK card: shared as a photo, and with the PDF
 
+  // Read when the panel opens and again after "Meri details" is saved (that fills every tool's form).
+  const saves = useProfileSaves();
   useEffect(() => {
     if (seed) return; // a score handed over from the Rank predictor wins over the last saved one
-    storage.getItem<string | null>(SAVED, null).then(raw => {
-      if (!raw) return;
-      try {
+    storage.getItem<string | null>(SAVED.comedk, null).then(raw => {
+      if (raw) try {
         const v = JSON.parse(raw);
         setMarks(v.marks ?? ""); setRank(v.rank ?? ""); setBranches(Array.isArray(v.branches) ? v.branches : []);
       } catch { /* keep empty */ }
+      if (saves) setOpen(true);
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [saves]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!seed) return;
     setMarks(String(seed.marks)); setRank(""); setProblem(null);
     setPage(1); setQuery({ marks: seed.marks }); setOpen(false);
     // Save the handed-over score (keeping saved branches) so a later visit opens with it, then let the parent forget it.
-    storage.getItem<string | null>(SAVED, null).then(raw => {
+    storage.getItem<string | null>(SAVED.comedk, null).then(raw => {
       let kept: string[] = [];
       try { const v = raw ? JSON.parse(raw) : null; kept = Array.isArray(v?.branches) ? v.branches : []; } catch { /* none */ }
       setBranches(kept);
-      storage.setItem(SAVED, JSON.stringify({ marks: String(seed.marks), rank: "", branches: kept }));
+      storage.setItem(SAVED.comedk, JSON.stringify({ marks: String(seed.marks), rank: "", branches: kept }));
     });
     onSeedUsed?.();
   }, [seed]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -95,7 +97,7 @@ export function ComedkPanel({ groups, onShortlist, seed, onSeedUsed }: {
     const q = toQuery(marks, rank);
     if (typeof q === "string") { setProblem(q); return; }
     setProblem(null);
-    storage.setItem(SAVED, JSON.stringify({ marks, rank, branches }));
+    storage.setItem(SAVED.comedk, JSON.stringify({ marks, rank, branches }));
     setPage(1); setQuery(q); setOpen(false);
   };
   const pickBranches = (b: string[]) => { setBranches(b); setPage(1); };

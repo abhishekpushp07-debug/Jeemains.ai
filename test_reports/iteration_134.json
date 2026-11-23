@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 134 — Rank tab Cut off tool + 'Meri details' profile. Backend: 194/194 rank tests pass on the preview backend (25 in test_rank_cutoff.py + 169 regression across comedk, estimate, iter83, pdf_iter88, phase2, predictor, tools_iter86/87). A short spotcheck file re-asserts options shape (115/148/3 colleges, limit=100), NIT Trichy by-college without score (9 rows, columns R1..CSAB 2, you/eligible/near null), marks=200 branch tagging (counts sum to eligible=6), score precedence (rank>percentile>marks), BITSAT percentile → 422, COMEDK percentile → 422, unknown exam → 422, /predict rank-only (result.source='rank', crl=[7500,7500]) and /pdf/jee with rank (filename contains 'rank-7500'). Frontend (390x844, signed in as QA learner 7004186276/5524): Rank tab shows the six expected tiles rank-tool-rank/cutoff/target/college/compare/dream with CUT OFF ('college / branch') replacing the removed 'Percentile se rank' tile (0 occurrences). Cut off JEE by college (search 'trichy' → cut-pick-sheet-25) gives '9 branches · har round ki closing rank', 9 cards with R1..CSAB 2 + '2025 R6'. Applying Marks=200 Normal shows cut-you-line '200 marks (Normal paper) ≈ 99.48 – 99.52 percentile ≈ rank 7,417 – 7,917 (CRL)', cut-count '6 / 9 branches eligible', every row has a tag, near list present, Marks=500 shows the Hinglish cut-score-error. Cut off JEE by branch (CSE) shows 'Top 100 of 123 college-branch', 25 rows initially, cut-more loads 25 more (50). BITSAT: no category chips, 'Campus se'/'Program se' labels, hint about BITS round-wise cutoff, picking Pilani gives '18 programs · 5 saal ke cutoff score' with 2026 cutoff shown in final cell. COMEDK: no category chips, kinds only Marks/Rank. Meri details: tap rank-profile → rank-profile-form opens, rpf-jee-note warns 'Pehle Rank, phir Percentile, phir Marks', saving JEE marks 200 / rank 7,500 / OBC-NCL + BITSAT 280 + COMEDK 30,000 produces rank-profile-summary 'JEE Main: 200 marks, rank 7,500 · OBC-NCL  |  COMEDK: rank 30,000  |  BITSAT: 280' and rank-profile-saved line. Rank predictor opens with rp-marks-input='200' and rp-cat-OBC-NCL aria-selected='true'. Cut off opens with cut-cat-OBC-NCL aria-selected='true'. No red screen, no pageerrors; only non-blocking warnings: Metro disconnect warning and expected /api/jl/* 401 for anonymous probes.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rank_cutoff.py",
+    "/app/backend/tests/test_iter134_cutoff_spotcheck.py",
+    "/app/test_reports/pytest/iter134_cutoff.xml",
+    "/app/test_reports/pytest/iter134_rank_regression.xml",
+    "/app/test_reports/pytest/iter134_spotcheck.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [],
+  "updated_files": [
+    "/app/backend/tests/test_iter134_cutoff_spotcheck.py (new, additive)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "None. Read-only. localStorage keys rank.cutoff.v1/rank.profile.v1 were cleared only inside the test browser to re-check the 'fresh' state; the QA learner's canonical data was not touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "All six Rank tiles + 'Meri details' profile bar + Cut off tool (JEE by college/branch, BITSAT, COMEDK) are working on the preview URL. The spotcheck file test_iter134_cutoff_spotcheck.py has a minor non-bug: /predict returns 'summary' nested under result (result.summary) rather than top-level — the detailed assertion in test_rank_cutoff.py's test_predict_rank_input already validates the correct shape; skip or fix that single line if the file is re-run.",
+  "rca_of_issue": "N/A — no defects found this iteration."
+}

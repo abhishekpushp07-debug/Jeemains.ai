@@ -9,13 +9,14 @@ Every Rank endpoint of the app server, field by field. All paths are relative to
 - **Sentences are server-made.** Every `note`, `notes`, `summary`, `spread`, `check`, `gap`, `line`, `blocked` and error `detail` is ready to show.
 - A real request and answer for every endpoint sits in `RANK/api_examples/` (frozen samples, see the warning in §0).
 
-There are 14 JSON endpoints and 7 PDF endpoints:
+There are 16 JSON endpoints and 7 PDF endpoints. Two are **new in this pack** (Cut off, §13), and the JEE Main form
+gained one optional field, the scorecard `rank` (§0):
 
 | # | Method · path | Tool | Section |
 |---|---|---|---|
 | 1 | `GET /rank/meta` | every tool (lists, chart, notes, sources) | §1 |
 | 2 | `POST /rank/estimate` | Rank predictor | §2 |
-| 3 | `POST /rank/percentile` | Percentile se rank | §3 |
+| 3 | `POST /rank/percentile` | no screen any more (was "Percentile se rank"); still served | §3 |
 | 4 | `POST /rank/predict` | College predictor · JEE Main list | §4 |
 | 5 | `POST /rank/college` | College predictor · JEE college sheet | §5 |
 | 6 | `POST /rank/bitsat` | College predictor · BITSAT | §6 |
@@ -28,6 +29,8 @@ There are 14 JSON endpoints and 7 PDF endpoints:
 | 13 | `POST /rank/compare` | College compare · branch vs branch | §11 |
 | 14 | `POST /rank/compare/colleges` | College compare · college vs college | §11 |
 | 15–21 | `POST /rank/pdf/…` | PDF buttons | §12 |
+| **22** | **`GET /rank/cutoff/options`** | **Cut off · the college and branch pickers — NEW** | §13.1 |
+| **23** | **`POST /rank/cutoff`** | **Cut off · the cut-off table, with or without a score — NEW** | §13.2 |
 
 ## 0. Conventions
 
@@ -39,16 +42,23 @@ data is renewed when new cut-offs are published; the website must always show wh
 
 | Field | Type | Default | Rule |
 |---|---|---|---|
-| `marks` | integer | none | −75 … 300. Send `marks` **or** `percentile` |
-| `percentile` | number | none | 0 … 100. When both are sent, the percentile is used and `marks` only checks it |
-| `level` | `"tough"` · `"normal"` · `"easy"` | `"normal"` | how hard the student's shift was (marks only) |
+| `marks` | integer | none | −75 … 300 |
+| `percentile` | number | none | 0 … 100 (the NTA percentile) |
+| `rank` | integer | none | **new** · 1 … 20,00,000: the All India Rank (CRL) printed on the scorecard |
+| `level` | `"tough"` · `"normal"` · `"easy"` | `"normal"` | how hard the student's shift was (used with marks only) |
 | `category` | `"GEN"` · `"EWS"` · `"OBC-NCL"` · `"SC"` · `"ST"` | `"GEN"` | |
 | `female` | boolean | `false` | opens Female-only seats |
 | `pwd` | boolean | `false` | opens PwD seats |
 | `state` | string or `null` | `null` | must be one of `meta.states` exactly; decides Home state / Other state / Delhi seats |
 | `branches` | string[] | `[]` | names from `meta.branches`; unknown names are dropped silently; `[]` = all branches |
 
-Neither `marks` nor `percentile` → `422 {"detail": "Marks ya percentile mein se koi ek daalo."}`.
+**Which score is used.** Send at least one of `marks`, `percentile`, `rank`. With more than one, the most exact wins:
+**rank, then percentile, then marks**. The result block's `source` says which one was used. The others are only used
+to check it: when they disagree the answer carries a `check` sentence. Forms written for the earlier pack (marks or
+percentile only) work unchanged.
+
+None of the three → `422 {"detail": "Marks, percentile ya rank mein se koi ek daalo."}`
+(a server without this pack's work still says "Marks ya percentile mein se koi ek daalo.").
 
 **Ranges.** A pair `[a, b]` is always `[better, worse]` for ranks (smaller number first) and `[lower, higher]` for
 percentiles. When both ends are equal, show one number.
@@ -118,18 +128,23 @@ Answer, COMEDK (`exam: "comedk"`):
 
 | Field | Present | Meaning |
 |---|---|---|
-| `percentile` | always | `[low, high]` (equal when the student typed a percentile) |
-| `crl` | always | `[best, worst]` Common Rank List range |
+| `percentile` | always | `[low, high]` (equal when the student typed a percentile or a rank) |
+| `crl` | always | `[best, worst]` Common Rank List range; both ends equal for a scorecard rank (`[7500, 7500]`): show one number |
 | `from_marks` | always | `true` when worked out from marks |
-| `summary` | always | `"180 marks · Normal · General"` — the line under the card title |
+| `source` | always (new) | `"marks"` · `"percentile"` · `"rank"`: the score that was used |
+| `summary` | always | `"180 marks · Normal · General"`, `"97.4 percentile · General"` or `"Rank 7,500 · General"` — the line under the card title |
 | `spread` | from marks | `"Tough paper hota to rank lagbhag 9,702, Easy paper hota to lagbhag 18,779."` |
 | `cat_rank` | category ≠ GEN | `{label: "OBC-NCL rank", range}` |
 | `pwd_rank` | `pwd: true` | `{label: "PwD rank" or "OBC-NCL-PwD rank", range}` |
-| `paper` | percentile **and** marks sent | which paper type the pair fits |
-| `check` | percentile and marks disagree | a sentence asking the student to check |
+| `paper` | marks sent together with a percentile or a rank | which paper type the pair fits |
+| `check` | the numbers sent disagree | `"Marks aur percentile aapas mein mel nahi kha rahe, ek baar check kar lo."`, `"Marks aur rank …"` or `"Rank aur percentile aapas mein mel nahi kha rahe, ek baar check kar lo."` |
 | `delhi_note` | `state: "Delhi"` | Delhi region eligibility sentence |
 
-## 3. `POST /rank/percentile` — Percentile se rank
+## 3. `POST /rank/percentile` — no screen any more
+
+> The app's "Percentile se rank" tile was replaced by **Cut off** (§13). This endpoint still answers, because older
+> app versions call it, but no current screen uses it: **do not build a page for it**. A student with a percentile types
+> it into the College predictor (§4) or Cut off's score box; both show the rank it stands for.
 
 Request `{percentile: 0…100, category, pwd}`.
 
@@ -171,7 +186,7 @@ A seat (`items[]`, `near[]`):
 | `path` | the seat path used: `"Home state · OBC-NCL · Female-only"` |
 | `quota`, `gender`, `seat` | the same path as codes (`"HS"`, `"F"`, `"cat"`): send them back to `/rank/college` |
 | `tag` | items only: `safe` · `likely` · `borderline` |
-| `gap` | near only: `"lagbhag +5 marks aur"` or `"lagbhag +0.42 percentile aur"` |
+| `gap` | near only, in the kind of score the student gave: `"lagbhag +5 marks aur"`, `"lagbhag +0.42 percentile aur"` or (new) `"rank lagbhag 626 aur upar chahiye"` |
 | `y26` | the 2026 JoSAA final closing on this path (trend arrow, against `y25`) |
 | `y25` | the 2025 final closing on this path, or `null` |
 
@@ -304,4 +319,154 @@ White A4 PDFs drawn by the server (25–70 KB, about 50 ms each). The answer has
 | `/rank/pdf/target/bitsat` | `{campus}` |
 | `/rank/pdf/saved` | `{items: CompareItem[1..50], tags: (tag or null)[], pick: [up to 3 indexes]}` |
 
-Samples with their request bodies: `RANK/sample_pdfs/`.
+Samples with their request bodies: `RANK/sample_pdfs/`. The JEE list PDF is named after the score that was used:
+`JEELIVE-JEE-colleges-180-marks.pdf`, `…-97.4-percentile.pdf` or (new) `…-rank-7500.pdf`.
+
+Cut off has no PDF.
+
+---
+
+## 13. Cut off — NEW
+
+Two endpoints, both public. What the tool is, its rules per exam, the screen word by word and its acceptance list are
+in `docs/11_CUT_OFF_NEW.md`; this section is the field reference. Real answers: `RANK/api_examples/23_…` to `34_…`.
+
+### 13.1 `GET /rank/cutoff/options`
+
+The pickers of the three exams in one answer. About 62 KB (11 KB compressed). Fetch once per visit; it changes only
+when the app server is redeployed (the connector keeps it 10 minutes).
+
+```json
+{ "limit": 100,
+  "jee":    { "name": "JEE Main", "score": ["marks", "percentile", "rank"], "marks": [-75, 300],  "levels": true,  "profile": true,
+              "colleges": [ …115 ], "branches": [ …20 ] },
+  "comedk": { "name": "COMEDK",   "score": ["marks", "rank"],               "marks": [0, 180],    "levels": false, "profile": false,
+              "colleges": [ …148 ], "branches": [ …11 ] },
+  "bitsat": { "name": "BITSAT",   "score": ["marks"],                       "marks": [-130, 390], "levels": false, "profile": false,
+              "colleges": [ …3 ],   "branches": [ …19 ] } }
+```
+
+| Field | Meaning |
+|---|---|
+| `limit` | the most rows a branch list returns (100) |
+| `score` | the kinds of score this exam accepts, in the order of the chips |
+| `marks` | `[lowest, highest]` marks of the exam |
+| `levels` | `true` = the Tough / Normal / Easy question applies (JEE Main marks) |
+| `profile` | `true` = category, Female, PwD and home state apply (JEE Main only) |
+| `colleges[]`, `branches[]` | the two pickers; one option = `{key, title, sub, find?, kind?}` |
+
+One option:
+
+| Field | Meaning |
+|---|---|
+| `key` | send it back to `POST /rank/cutoff` **exactly as received** |
+| `title` | the bold line (`"NIT Trichy"`, `"Computer Science"`, `"BITS Pilani"`, `"B.E. Computer Science"`) |
+| `sub` | the small line (`"NIT · Tiruchirappalli, Tamil Nadu"`, `"125 college-branch · 93 colleges"`, `"18 programs"`, `"Pilani · Goa · Hyderabad"`) |
+| `find` | extra words for the search only, never shown (a college's full name; a branch's short forms and course names: `"CSE CS …"`) |
+| `kind` | colleges only: `"NIT"` · `"IIIT"` · `"GFTI"` · `"DELHI"` · `"COMEDK"` · `"BITS"` (the type chip) |
+
+What a `key` is:
+
+| Exam | College | Branch |
+|---|---|---|
+| JEE Main | the institute number as text (`"25"` = NIT Trichy; the same number as `inst` elsewhere) | the branch group name (`"Computer Science"`; the same 20 names as `meta.branches`) |
+| COMEDK | the college code (`"E095"`) | the course group name (`"Computer Science"`; 11 groups that have GM seats) |
+| BITSAT | the campus (`"Pilani"`, `"Goa"`, `"Hyderabad"`) | the program key (`"cs"`, `"mnc"`, …) |
+
+Order as served: JEE colleges NITs first, then by short name; COMEDK colleges most wanted first; BITSAT programs
+highest cut-off first. Keep the order.
+
+### 13.2 `POST /rank/cutoff` — request
+
+| Field | Type | Default | Rule |
+|---|---|---|---|
+| `exam` | `"jee"` · `"comedk"` · `"bitsat"` | required | |
+| `by` | `"college"` · `"branch"` | required | BITSAT: college = campus, branch = program |
+| `key` | string, 1–60 characters | required | from §13.1, exact. Unknown → a 404 sentence (§13.4) |
+| `marks` | integer | none | optional. JEE −75 … 300 · COMEDK 0 … 180 · BITSAT −130 … 390 (the score out of 390) |
+| `percentile` | number 0 … 100 | none | optional. JEE Main only |
+| `rank` | integer | none | optional. JEE 1 … 20,00,000 (scorecard CRL) · COMEDK 1 … 2,00,000 (rank card) |
+| `level` | `"tough"` · `"normal"` · `"easy"` | `"normal"` | JEE Main only: the paper type for a marks score, and for the "≈ marks" on every row |
+| `category`, `female`, `pwd`, `state` | as the shared form (§0) | `"GEN"`, `false`, `false`, `null` | JEE Main only; leave them out for COMEDK and BITSAT |
+
+- **No score** → the full table: every row open to the student.
+- **A score** → only the rows the student can reach, each with a tag, plus up to 3 nearest misses.
+- JEE Main with several scores: rank, then percentile, then marks (§0). COMEDK with both: the rank.
+
+### 13.3 `POST /rank/cutoff` — answer
+
+| Field | Meaning |
+|---|---|
+| `exam`, `by`, `key` | the request, echoed. Show an answer only while these equal the student's current choice |
+| `title`, `name`, `sub` | the heading: short name, full name, and the line under it |
+| `kind` | the type chip of a college (`"NIT"`, `"IIIT"`, `"GFTI"`, `"DELHI"`, `"COMEDK"`, `"BITS"`); `null` for a branch list |
+| `metric` | `"rank"`: a smaller number is harder · `"score"` (BITSAT): a bigger number is harder |
+| `columns` | the labels of the round boxes: JoSAA `["R1","R2","R3","R4","R5","CSAB 1","CSAB 2"]` · JAC Delhi `["R1","R2","R3","R4"]` · COMEDK `["R1","R2","R3","R4"]` · BITSAT `["2022","2023","2024","2025","2026"]` (years, not rounds) |
+| `prev_label` | label of the last-year box (`"2025 R6"`, `"2025 final"`) or `null` |
+| `rows` | the cards, most wanted first. A college: all of them. A branch: the first `limit` |
+| `total` | rows open to this student before the score filter |
+| `eligible` | rows that passed the score filter, counted over the whole list (can be more than `rows.length` on a branch); `null` without a score |
+| `limit` | `100` for a branch list, `null` for a college |
+| `you` | `null` without a score; else the student's own line (below) |
+| `near` | up to 3 nearest misses, nearest first, each a row with `gap` and no tag; `[]` without a score |
+| `notes` | sentences to show under the list, in order |
+| `official` | the official results page for the "Official" link |
+
+A row (`rows[]`, `near[]`):
+
+| Field | Meaning |
+|---|---|
+| `id` | stable key of the row (`"jee-230"`, `"E095|CY"`, `"Pilani-cs"`) |
+| `college`, `place` | short college name; city and state (BITSAT: the campus) |
+| `kind` | the college's type chip |
+| `branch` | full branch / course / program name |
+| `path` | the seat path used: `"Other state · Open"`, `"Home state · OBC-NCL"`, `"GM · All India"`, `"Sab categories, ek cutoff"` |
+| `rank_type` | what the closing numbers are: `"CRL"`, `"OBC-NCL rank"`, `"COMEDK rank"`, `"score / 390"` |
+| `cells[]` | one per column, in the order of `columns` (below) |
+| `final` | `{label, close}`: without a score the last JoSAA / JAC round's closing (COMEDK: the largest over R1–R4; BITSAT: 2026); with a score the closing that decided the tag (it can be a CSAB round; `rank_type` is then `"CRL"`) |
+| `prev` | `{label, close}` last year's final closing on the same path (`close` can be `null`), or `null` (JAC Delhi, BITSAT) |
+| `seats` | JEE: JoSAA seat matrix for the program (`null` for JAC) · COMEDK: GM seats · BITSAT `null` |
+| `fee` | COMEDK: 2026 yearly total in rupees; else `null` |
+| `need` | `{marks, pct?, level?}`: marks needed to reach `final` (JEE: on the paper type `level`, with the percentile `pct`; COMEDK: out of 180; BITSAT: the cut-off itself) |
+| `tag` | `"safe"` · `"likely"` · `"borderline"` with a score, else `null` |
+| `gap` | near misses only: `"lagbhag +3 marks aur"`, `"lagbhag +0.42 percentile aur"`, `"rank lagbhag 323 aur upar chahiye"`; COMEDK and BITSAT have their own (`"+28 marks aur"`) |
+
+A cell (`cells[]`):
+
+| Field | Meaning |
+|---|---|
+| `label` | the column's label |
+| `close` | the closing rank (BITSAT: the cut-off score) of that round / year; `null` = no allotment, or not published |
+| `state` | only with a score: `"in"` = the student's whole range is inside (green) · `"edge"` = only part of it, **or any reachable CSAB round** (amber) · `"out"`. BITSAT: only the 2026 cell has it |
+| `na` | `true` = this college has no such round (a JAC Delhi row inside a JoSAA-column branch list). Leave the box out |
+| `crl` | `true` = this CSAB closing is on CRL although the row's `rank_type` is a category or PwD rank. Print "CSAB 1 · CRL" |
+
+`you` (with a score):
+
+| Field | Meaning |
+|---|---|
+| `source` | `"marks"` · `"percentile"` · `"rank"`: the score that was used |
+| `summary` | the short form (`"200 marks · Normal · General"`, `"280 / 390"`) |
+| `line` | the sentence to show in bold: `"200 marks (Normal paper) ≈ 99.48 – 99.52 percentile ≈ rank 7,417 – 7,917 (CRL)"` |
+| `percentile` | `[low, high]` or `null` (BITSAT; COMEDK from a rank) |
+| `rank` | `{label, range}` (`"CRL"`, `"COMEDK rank"`) or `null` (BITSAT) |
+| `cat_rank`, `pwd_rank` | `{label, range}` or `null` (JEE Main only) |
+| `check` | a sentence to show in the warning colour, or `null` |
+| `counts` | `{safe, likely, borderline}` over the whole list; they add up to `eligible` |
+
+### 13.4 What the server refuses
+
+| Request | Answer |
+|---|---|
+| unknown college `key` (JEE Main, COMEDK) | `404 "College nahi mila."` |
+| unknown branch `key` (JEE Main, COMEDK) | `404 "Branch nahi mili."` |
+| unknown BITSAT campus | `404 "Campus nahi mila."` |
+| unknown BITSAT program | `404 "Program nahi mila."` |
+| JEE Main `marks` outside −75 … 300 | `422 "JEE Main marks −75 se 300 ke beech daalo."` |
+| COMEDK with a `percentile` | `422 "COMEDK mein percentile nahi chalta. Marks ya rank daalo."` |
+| COMEDK `marks` outside 0 … 180 | `422 "COMEDK marks 0 se 180 ke beech daalo."` |
+| COMEDK `rank` above 2,00,000 | `422 "COMEDK rank 1 se 2,00,000 ke beech daalo."` |
+| BITSAT with a `percentile` or a `rank` | `422 "BITSAT mein sirf score chalta hai (390 mein se)."` |
+| another `exam` or `by`, an empty `key`, an unknown `state`, a number outside the field's own limit | `422` with a **list** (validate in the form so the student never sees it) |
+
+All of them, as answered by the server: `RANK/api_examples/34_cutoff_what_the_server_refuses.json`.

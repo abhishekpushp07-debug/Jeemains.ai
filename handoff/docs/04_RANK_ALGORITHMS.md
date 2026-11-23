@@ -59,6 +59,21 @@ best = max(1, r − w/2)      worst = best + w
 180 marks, normal → r 13,529, w 1,000 → CRL **13,029 – 14,029**, percentile 99.08 – 99.15 (the percentile range is kept
 at most 0.5 wide). The `spread` sentence adds the tough and easy ranks for the same marks (9,702 and 18,779).
 
+**From a scorecard rank (new).** The All India Rank on the scorecard is exact, so nothing is estimated:
+
+```
+best = mid = r        worst = r + min(cap(r), max(4, round(r × 2 %)))
+```
+
+The card shows `r` itself as one number (`crl: [7500, 7500]`) and the percentile it stands for (99.51). The small band
+behind it (7,500 → 7,650; 20,000 → 20,400) is never shown: it only marks seats that close just behind the rank as
+Borderline instead of Likely.
+
+**Which number is used.** A student may give marks, a percentile and a rank together. The most exact one wins:
+**rank, then percentile, then marks**. The others only check it: marks more than 12 away from what that percentile or
+rank took on the tough and easy papers, or a percentile whose rank is far from the scorecard rank (more than 25 %, and
+more than 500), add the `check` sentence "… aapas mein mel nahi kha rahe, ek baar check kar lo."
+
 ## 4. Category and PwD rank
 
 NTA publishes each category's total and how many of it passed its own cut-off, but no table of category ranks. The
@@ -109,7 +124,8 @@ With best 9,000, mid 10,000, worst 10,500: 8,999 none · 9,000 Borderline · 10,
   Borderline, 15 Likely and 15 Safe are taken, so every student sees dream, fair and safe picks together; free places are
   filled in demand order. Each filter chip makes its own 50.
 - **Near misses:** seats closing within 10 % above the student's best rank. The 5 most wanted are shown with what it would
-  take: marks needed for that closing rank − the student's marks (at least +1), or the percentile difference.
+  take, in the kind of score the student gave: marks needed for that closing rank − the student's marks (at least +1),
+  the percentile difference, or for a scorecard rank how many ranks higher ("rank lagbhag 626 aur upar chahiye").
 
 ## 7. Round ladder (college sheet)
 
@@ -154,3 +170,20 @@ Computer Science branch needing the most marks, seats (JoSAA seat matrix, all qu
 
 All data is held in memory; a JEE list touches about 10,700 seat rows in a few milliseconds. The last 512 different
 forms are remembered, so a page change or a filter tap is almost free.
+
+## 13. Cut off (new)
+
+Cut off adds no rule of its own. It turns the list round: the student names a college or a branch, and the server
+shows that whole table with the rules above. Exam by exam, with worked answers: `docs/11_CUT_OFF_NEW.md` §4 and §10.
+
+- **Without a score.** For every program of the chosen college (or branch group): the easiest seat path open to the
+  student's category, gender, PwD and home state (§5), exactly the path Target marks uses (§8). Rows are ordered by
+  demand. A branch list keeps the first 100.
+- **With a score.** The same per-program pick and the same tags as the College predictor (§6; COMEDK §9; BITSAT §10).
+  Rows without a tag are dropped; `eligible` counts all that remain; the three nearest misses are kept however far
+  they are (the predictor keeps only those within 10 %).
+- **Round boxes.** For each round's closing `c` against the student's range on that round's rank type:
+  `c ≥ worst` → `in` · `best ≤ c < worst` → `edge` · else `out`. A CSAB round is `edge` at best, because a CSAB-only
+  seat is never more than Borderline (§6). BITSAT has no rounds: only the newest year's box gets a state, from the tag.
+- **"≈ marks".** The marks needed for the row's final closing: §8 for JEE Main (on the paper type the student chose),
+  the fewest marks whose middle estimate reaches it for COMEDK (§9), the cut-off itself for BITSAT.

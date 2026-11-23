@@ -14,10 +14,10 @@ import { Strip, Summary, Switch, Tag, Toggle } from "./controls";
 import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
 import { shareEstimate } from "./share";
 import { FormButton, useField } from "./accent";
+import { SAVED, useProfileSaves } from "./profile";
 import { shareCard } from "@/src/shareCard";
 import { useShareLink } from "@/src/mission/stats";
 
-const SAVED = "rank.estimate.v1";
 const LEVELS: Level[] = ["tough", "normal", "easy"];
 const CATS: Category[] = ["GEN", "EWS", "OBC-NCL", "SC", "ST"];
 type Exam = "jee" | "comedk";
@@ -51,12 +51,15 @@ export function RankPredictor({ onColleges }: { onColleges: (q: EstimateIn) => v
   const query = queries[form.exam] ?? null;
   const field = useField();
 
+  // Read when the tool opens and again after "Meri details" is saved (that fills every tool's form).
+  const saves = useProfileSaves();
   useEffect(() => {
-    storage.getItem<string | null>(SAVED, null).then(raw => {
-      if (!raw) return;
-      try { setForm({ ...DEFAULT, ...JSON.parse(raw) }); } catch { /* keep defaults */ }
+    storage.getItem<string | null>(SAVED.estimate, null).then(raw => {
+      // After a profile save the student stays on the exam they were looking at.
+      if (raw) try { const v = JSON.parse(raw); setForm(f => ({ ...DEFAULT, ...v, ...(saves ? { exam: f.exam } : {}) })); } catch { /* keep defaults */ }
+      if (saves) setOpen(true);
     });
-  }, []);
+  }, [saves]);
   useEffect(() => {
     if (!query) return;
     let live = true;
@@ -71,7 +74,7 @@ export function RankPredictor({ onColleges }: { onColleges: (q: EstimateIn) => v
     const q = toQuery(f);
     if (typeof q === "string") { setProblem(q); return; }
     setProblem(null);
-    storage.setItem(SAVED, JSON.stringify(f));
+    storage.setItem(SAVED.estimate, JSON.stringify(f));
     setQueries(m => ({ ...m, [q.exam]: q })); setOpen(false);
   };
   // Tapping a paper type in the comparison re-reads the card for that paper.

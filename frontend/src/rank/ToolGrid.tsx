@@ -12,18 +12,18 @@ import { rankColors as colors, space } from "@/src/theme";
 import { Jewel, JEWELS, JewelFace } from "./JewelFace";
 import { ACCENTS } from "./accent";
 
-export type Tool = "rank" | "pct" | "target" | "college" | "compare" | "dream";
+export type Tool = "rank" | "cutoff" | "target" | "college" | "compare" | "dream";
 type Tile = { key: Tool; icon: IconName; title: string; value: string; badge?: string };
 const ROWS: Tile[][] = [
   [{ key: "rank", icon: "podium", title: "RANK PREDICTOR", value: "marks se rank" },
-   { key: "pct", icon: "chart-line-variant", title: "PERCENTILE SE RANK", value: "NTA percentile", badge: "NEW" }],
+   { key: "cutoff", icon: "format-list-checks", title: "CUT OFF", value: "college / branch", badge: "NEW" }],
   [{ key: "target", icon: "bullseye-arrow", title: "TARGET MARKS", value: "college ke liye", badge: "NEW" },
    { key: "college", icon: "school-outline", title: "COLLEGE PREDICTOR", value: "colleges + cutoffs" }],
   [{ key: "compare", icon: "compare-horizontal", title: "COLLEGE COMPARE", value: "side by side", badge: "NEW" },
    { key: "dream", icon: "star-shooting-outline", title: "DREAM COLLEGE", value: "kitne marks door", badge: "NEW" }],
 ];
 /** Each tool's own colour. */
-const TOOL_JEWEL: Record<Tool, Jewel> = { rank: "maroon", pct: "indigo", target: "teal", college: "blood", compare: "champ", dream: "violet" };
+const TOOL_JEWEL: Record<Tool, Jewel> = { rank: "maroon", cutoff: "indigo", target: "teal", college: "blood", compare: "champ", dream: "violet" };
 
 /** The chosen tile's edge: its form's colour and white, chasing each other. */
 const CHOSEN_EDGE = Object.fromEntries((Object.keys(TOOL_JEWEL) as Tool[]).map(k => [k, [ACCENTS[k].text, colors.custom_tileInk, ACCENTS[k].text, colors.custom_tileInk, ACCENTS[k].text]])) as unknown as Record<Tool, readonly [string, string, ...string[]]>;
