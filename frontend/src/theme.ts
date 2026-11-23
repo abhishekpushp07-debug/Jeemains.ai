@@ -154,6 +154,12 @@ const dark = {
   custom_reportGloss: "rgba(255,255,255,0.46)", custom_reportGlint: "rgba(255,255,255,0.92)",
   custom_reportSky: "#86CFFB", custom_reportAqua: "#66E0CC", custom_reportHalo: "#38BDF8",
   custom_reportInk: "#0F0F12", custom_reportInkSoft: "#0B4A5C", custom_reportOnInk: "#FFFFFF", custom_reportGlass: "rgba(255,255,255,0.55)", custom_reportLine: "rgba(255,255,255,0.9)", custom_reportGlow: "rgba(255,255,255,0.22)",
+  // My Tests tabs (glossy, same in both palettes): Completed rests in steel, In progress in yellow, Saved in sky blue; the
+  // open tab is blood red. Black words on the resting tones are 9 : 1 or more; white on blood red is 6 : 1 or more.
+  custom_tabSteel: "#DCE3EA", custom_tabSteelDeep: "#A9B6C4", custom_tabSun: "#FFE680", custom_tabSunDeep: "#FFC629",
+  custom_tabSky: "#B9E3FF", custom_tabSkyDeep: "#74C2FA", custom_tabBlood: "#C1121F", custom_tabBloodDeep: "#7D0A12",
+  custom_tabInk: "#0F0F12", custom_tabInkSoft: "#33404D", custom_tabOnBlood: "#FFFFFF", custom_tabOnBloodSoft: "rgba(255,255,255,0.86)",
+  custom_tabGloss: "rgba(255,255,255,0.62)", custom_tabGlint: "rgba(255,255,255,0.95)", custom_tabBloodGloss: "rgba(255,255,255,0.24)", custom_tabBloodGlint: "rgba(255,255,255,0.5)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
   custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",

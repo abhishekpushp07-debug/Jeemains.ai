@@ -973,3 +973,9 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 ## Offline Solutions: parked by the owner (23 Nov 2026). No code.
 - Plan + facts + owner's decisions: memory/OFFLINE_SOLUTIONS_PLAN.md. Gate: only after the website's light pictures and finished-attempt packs are live and the app side of them is built. Button name: "Offline save". Offline opens saved papers only, 7 days after the last confirmed sign-in.
 - Order of work now: 1) wait for the website's go-live note (pilot on the test number), 2) app side of light pictures / packs, 3) Offline Solutions.
+
+## My Tests tabs: new order + glossy shine (23 Nov 2026)
+- Order is now Completed, In progress, Saved (TABS in app/(tabs)/tests.tsx). The tab that opens first is unchanged (In progress, memo.tab); labels and testIDs unchanged (my-tests-tab-{completed|progress|saved}, my-tests-tab-label-*, my-tests-count-*).
+- New src/components/GlossTabs.tsx (uses src/analysis/Shine.tsx): each tab has the running five-colour edge, the gloss and the diagonal glint, always. Resting colours: Completed steel, In progress yellow, Saved sky blue (black words); the open tab is blood red (white words). Tokens custom_tab* in src/theme.ts. Row height 52 as before. Wrapped in ScreenMotion, so the shine rests when another tab or screen is in front.
+- The old Segmented in src/components/design.tsx had no other user and was deleted with its 3 styles.
+- Checked on the preview (web, 390 + 320): order, each tab opens its list, 9 animations, 61 fps, 0 animations on Home, labels fit at 320, no page errors; tsc + eslint clean. Two packets (order, then look). NOT checked on a real phone build; testing agent not run.

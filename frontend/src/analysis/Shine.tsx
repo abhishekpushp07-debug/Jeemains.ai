@@ -1,5 +1,5 @@
-// The shine of the Analysis screen's section pills and report card: a face whose two colours (light sky blue and light
-// teal) keep changing places, five colours running round the edge, a soft gloss on the upper half and a glass glint
+// The shine of the Analysis screen's section pills and report card, and of My Tests' tabs: a face whose two colours
+// keep changing places, five colours running round the edge, a soft gloss on the upper half and a glass glint
 // that crosses on the diagonal. Same engine as Rapid Fire's
 // glitter ring: CSS animations on the UI thread (plain CSS on the web), moving and fading only, so the screen stays light.
 // Under Reduce Motion, or while the screen is covered or hidden, everything rests and the edge is a still five-colour slope.

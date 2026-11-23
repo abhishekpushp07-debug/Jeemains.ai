@@ -7,7 +7,9 @@ import { api, del, post } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
 import { Chip, Empty, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
-import { DCard, DSheet, Pill, Segmented, StatusLine } from "@/src/components/design";
+import { DCard, DSheet, Pill, StatusLine } from "@/src/components/design";
+import { GlossTabs, TabTones } from "@/src/components/GlossTabs";
+import { ScreenMotion } from "@/src/motion";
 import { toneInk } from "@/src/components/PyqPaperCard";
 import { colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { learningStatusTone } from "@/src/components/LearningTheme";
@@ -17,7 +19,11 @@ import { useExams } from "@/src/api/examCatalog";
 const EXAM_FILTERS = EXAMS.map(e => ({ key: e.name, name: e.name }));
 
 type Tab = "progress" | "saved" | "completed";
-const TABS: Tab[] = ["progress", "saved", "completed"];
+const TABS: Tab[] = ["completed", "progress", "saved"];
+// Resting colour of each tab: steel, yellow, sky blue. The open tab is blood red.
+const TAB_TONES: Record<Tab, TabTones> = {
+  completed: [colors.custom_tabSteel, colors.custom_tabSteelDeep], progress: [colors.custom_tabSun, colors.custom_tabSunDeep], saved: [colors.custom_tabSky, colors.custom_tabSkyDeep],
+};
 const STATUS: Record<Tab, [string, string][]> = {
   progress: [["all", "All ongoing"]],
   saved: [["all", "All"], ["available", "Available"], ["unavailable", "Unavailable"]],
@@ -132,9 +138,10 @@ export default function MyTests() {
       <View style={{ paddingHorizontal: space.lg, gap: space.md }}>
         <T testID="my-tests-title" w="heavy" size={28}>My Tests</T>
         {user?.access_type === "unverified_phone" ? <T size={11} color={colors.custom_eyebrow} testID="my-tests-identity-notice">This number’s profile is not a verified identity.</T> : null}
-        <Segmented prefix="my-tests-tab" value={tab} onChange={(t) => { if (t !== tab) setSelected([]); setTab(t); setStatus("all"); }}
-          items={TABS.map(t => ({ key: t, label: t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed", labelTestID: `my-tests-tab-label-${t}`,
-            sub: list.data?.counts ? String(list.data.counts[t]) : undefined, subTestID: `my-tests-count-${t}` }))} />
+        {/* The tabs' shine rests while another tab or screen is in front. */}
+        <ScreenMotion><GlossTabs prefix="my-tests-tab" value={tab} onChange={(t) => { if (t !== tab) setSelected([]); setTab(t); setStatus("all"); }}
+          items={TABS.map(t => ({ key: t, label: t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed", tones: TAB_TONES[t], labelTestID: `my-tests-tab-label-${t}`,
+            sub: list.data?.counts ? String(list.data.counts[t]) : undefined, subTestID: `my-tests-count-${t}` }))} /></ScreenMotion>
         <View style={styles.search}>
           <Icon name="magnify" size={20} color={colors.custom_eyebrow} />
           <TextInput testID="my-tests-search" value={q} onChangeText={setQ} placeholder="Search test names…" placeholderTextColor={colors.custom_dim} maxLength={100} style={[{ flex: 1, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm }, noOutline]} />

@@ -57,22 +57,6 @@ export function Pill({ label, onPress, kind = "light", icon, iconRight, busy, di
 }
 
 /** Rounded segmented control: the selected segment turns black. */
-export function Segmented<K extends string>({ items, value, onChange, prefix, testID, compact }: {
-  items: { key: K; label: string; sub?: string; testID?: string; subTestID?: string; labelTestID?: string; a11y?: string }[];
-  value: K; onChange: (key: K) => void; prefix: string; testID?: string; compact?: boolean;
-}) {
-  return <View testID={testID} accessibilityRole="tablist" style={styles.segment}>
-    {items.map(item => {
-      const on = item.key === value;
-      return <Press key={item.key} testID={item.testID ?? `${prefix}-${item.key}`} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={item.a11y ?? item.label}
-        onPress={() => onChange(item.key)} scaleTo={0.98} style={[styles.segmentItem, compact && { minHeight: 44 }, on && styles.segmentOn]}>
-        <T testID={item.labelTestID} w={on ? "bold" : "semibold"} size={13} numberOfLines={1} color={on ? colors.onSurfaceInverse : colors.custom_softText}>{item.label}</T>
-        {item.sub !== undefined ? <T testID={item.subTestID} w="bold" size={10.5} color={on ? colors.custom_dim : colors.custom_eyebrow}>{item.sub}</T> : null}
-      </Press>;
-    })}
-  </View>;
-}
-
 export function ScreenHeader({ title, eyebrow, onBack, right, testID, backTestID, eyebrowColor, titleColor }: {
   title: string; eyebrow?: string; onBack?: () => void; right?: React.ReactNode; testID?: string; backTestID?: string; eyebrowColor?: string; titleColor?: string;
 }) {
@@ -191,9 +175,6 @@ const styles = StyleSheet.create({
   sectionAction: { minHeight: 44, minWidth: 44, flexDirection: "row", alignItems: "center", justifyContent: "flex-end", gap: 2, paddingLeft: space.sm },
   card: { backgroundColor: colors.custom_card, borderRadius: 22, borderWidth: 1, borderColor: colors.custom_cardLine, padding: space.lg },
   pill: { borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingHorizontal: 20 },
-  segment: { flexDirection: "row", padding: 4, gap: 2, borderRadius: radius.pill, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine },
-  segmentItem: { flex: 1, minWidth: 0, minHeight: 42, borderRadius: radius.pill, alignItems: "center", justifyContent: "center", paddingHorizontal: 6, paddingVertical: 3 },
-  segmentOn: { backgroundColor: colors.onSurface },
   header: { flexDirection: "row", alignItems: "center", gap: space.md, paddingHorizontal: space.lg, paddingBottom: space.md },
   round: { width: 44, height: 44, borderRadius: 22, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" },
   statusLine: { flexDirection: "row", alignItems: "center", gap: 6, flexShrink: 1 },
