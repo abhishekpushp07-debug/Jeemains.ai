@@ -1,3 +1,8 @@
+## 2026-11-23 (night) — Upload PDF dialog: visible "PDF chuniye" button (preview only, needs deploy)
+- Owner on jeelive.ai: picker often did not open. UploadDialog PdfBox now has a real button (data-testid upload-main-pick / upload-key-pick / upload-solutions-pick) that clicks a visually hidden input (.master-pdf-input); label tap also opens it; button says "Badlo" after a pick. Dialog close X is 44x44 in admin dialogs.
+- Tests: tests/ui_upload_repro223.py 12/12 (bridge 181); testing agent iteration_215: all requested flows pass.
+- Production facts (deployer, 23 Nov): upload backend healthy (82-part upload 200 at 17:45 UTC, book eed94a04 reading). Owner deleted ~222 tests + 7 uploads incl. Rapid Fire from Library at 17:38 UTC (permanent Mongo delete). Supabase files untouched (no storage delete exists in code). 30 verified JEE Main PYQ intact. Emergent support says production Mongo has 7-day point-in-time recovery via support@emergent.sh (unverified).
+
 ## 2026-11-23 — Super Admin Phase 1 finished: Block/Unblock, machine panel, re-read progress, Hinglish, 44 px / 390 px, noindex, 409 lock (preview only)
 - Screens: AdminStudents (Band karo / Chalu karo), MachinePanel in StorageBadge, MockList/MasterType/MasterHome/FixList re-read lines, Hinglish copy, master.css touch + mobile rules, useNoIndex in AdminWorkspace + Auth, robots.txt.
 - Server: master.mock_status refuses Live/Schedule while re-reading; book_worker.step 409 -> job waits (jobs.BUSY_WAITS=90); Hinglish upload messages; book_view filename guard; Supabase not-set message Hinglish.

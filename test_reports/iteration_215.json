@@ -1,0 +1,29 @@
+{
+  "summary": "Frontend-only check of the Upload PDF dialog file-picker fix (Super Admin > BITSAT > Mock Tests > Upload PDF). Ran in local Playwright against the preview frontend, with /api sent to the isolated bridge (127.0.0.1:8770, disposable DB) and the owner cookies. Tested desktop 1920x800 and mobile 390x844 with touch. 87 checks ran, 80 passed. The 7 failures are 2 mistakes in my own test script, 4 hits on the shared dialog close X (16x16 px), and 1 check that looked in the wrong place. Everything the owner asked for works: the dialog opens in 0.11 s on desktop and 0.51 s on mobile; each of the 3 PDF boxes shows a red 'PDF chuniye' button; every button and the Main box text open the native file chooser by click and by tap; a chosen file shows its name and size, the box turns green (has-file), the button changes to 'Badlo' and an X appears that clears the file; choosing 2 files shows the batch list and 'Sab hatao' clears it; Cancel closes the dialog; 'Roko' shows while uploading. Desktop full upload of two_mocks.pdf took 0.29 s: the dialog closed, the success toast showed and Mock 1 and Mock 2 (two_mocks) appeared in the Mocks list. Questions + answer key merge upload took 0.45 s and closed with the success toast. No 4xx/5xx and no console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Shared Dialog close X (top-right of Upload dialog)", "issue": "The tap target is only 16x16 px, below the 44 px rule. It is easy to miss on a phone. This is not part of this fix and probably comes from the shared ui/dialog.", "selector": "[data-testid=dialog-close]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Upload dialog at 390 px", "issues": ["The Main PDF hint wraps to 4 lines in a narrow column next to the button. It is readable and nothing overlaps, but it is dense."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/ui_upload_picker224.py"],
+  "action_items": [
+    "Optional: make the shared dialog close X at least 44x44 px (padding or min-size on [data-testid=dialog-close])."
+  ],
+  "critical_code_review_comments": [
+    "PdfBox: the label htmlFor plus the hidden input (pointer-events:none, clip) plus the button calling ref.click() is a sound pattern. On Android/iOS, input.click() runs inside the user's tap, so the picker opens.",
+    "The onChange handler clears e.target.value, so picking the same file again after removing it still fires the change event. Good.",
+    "The 'PDF chuniye' button's background is a gradient (computed background-color is transparent and the text is white). It looks red in the screenshots. If the gradient fails to load, white text would sit on a transparent background; a solid fallback colour would cover this. Low risk."
+  ],
+  "updated_files": ["/app/backend/tests/ui_upload_picker224.py"],
+  "success_rate": {"backend": "N/A (frontend only)", "frontend": "100% of requested flows (80/87 raw checks; the 7 failures are 2 script mistakes, 4 hits on the shared close-X size issue and 1 check of the wrong panel)"},
+  "seed_data_creation": "Only in the disposable bridge DB tejas_isolated_book170_55398359: 1 upload of two_mocks.pdf (Mock 1, Mock 2 drafts) and 1 merged upload of questions_only + answer_key_only. No preview or production data was touched.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: cd /app/backend && BRIDGE_OUT=/tmp/uibridge BRIDGE_PORT=8770 python tests/ui_upload_picker224.py (the bridge must be running). Script failures to ignore: 'picked: ... PDF chuniye' fails because the button correctly reads 'Badlo' after a pick; 'uploads panel shows new row' fails because [data-testid=type-uploads] was empty, though the new mocks show in the Mocks list. A mobile full upload was not run in this script; ui_upload_repro223.py covers it. Production jeelive.ai could not be reached, so only the preview was checked.",
+  "rca of the issue": "Before the fix, a full-box invisible <input type=file> overlay was the only way to pick a file. On some phones and browsers the tap did not reliably reach the overlay, and there was no visible button to use instead. Fix: a visible 'PDF chuniye' button and the label text both open a visually hidden input. This was confirmed with page.expect_file_chooser on desktop click and mobile tap for all 3 boxes."
+}

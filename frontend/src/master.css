@@ -334,3 +334,6 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
  .student-row-actions{width:100%}
  .storage-pop{width:calc(100vw - 24px)}
 }
+/* Dialog close X in Super Admin: a 44 px target, the X itself stays the same size and place */
+.admin-dialog [data-testid=dialog-close],.owner-pin-reset-dialog [data-testid=dialog-close]{display:inline-flex;align-items:center;justify-content:center;min-width:var(--touch-target);min-height:var(--touch-target);right:2px;top:2px;border-radius:999px}
+.admin-dialog [data-testid=dialog-close]:hover,.owner-pin-reset-dialog [data-testid=dialog-close]:hover{background:var(--surface-alt)}

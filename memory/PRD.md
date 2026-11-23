@@ -1,3 +1,7 @@
+## Status — 2026-11-23 (night): Upload PDF picker fix in PREVIEW (not deployed)
+- Visible "PDF chuniye" button in every PDF box of the Upload PDF dialog; testing agent iteration_215 pass. Needs owner deploy.
+- Owner permanently deleted ~222 Library tests + 7 uploads incl. Rapid Fire on production (17:38 UTC). Supabase bytes kept. Recovery option: Emergent support point-in-time restore (support@emergent.sh, deployment 04241398-cdb1-4ca5-8232-874011d24cc3) — owner's decision.
+
 ## Status — 2026-11-23 (later): Super Admin re-audit Phase 1 BUILT and TESTED (preview only, NOT deployed). Report: memory/AUDIT_2026-11-22.md (Roman Hinglish)
 - All 8 Phase 1 items now have server + screen: 100 MB on every upload screen; student Block/Unblock (Students page, confirm dialog); machine status panel inside the storage badge popover (red dot, cron, failed jobs, stuck/failed PDFs with "Dobara chalao", disk); "dobara padhi ja rahi hai · X/Y page" on mock rows, upload rows, Master attention line and Fix list, with Live/Schedule blocked in UI and refused by POST /api/admin/master/status while a PDF is being re-read.
 - Roman Hinglish on Master/exam/type/mock list/Fix/Students/Team/Library/dialogs. Still English: HeldFixer, AllQuestions, ChapterSplit, WriteEditor, Library inner lists, book repair screen, most server toasts.
