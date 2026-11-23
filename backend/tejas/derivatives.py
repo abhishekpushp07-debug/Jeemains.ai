@@ -10,6 +10,7 @@ from .canonical import CanonicalIntegrityError
 
 _cache = ByteCache(48 * 1024 * 1024)
 _locks = [Lock() for _ in range(32)]
+RENDER = 5
 
 
 def render_crop(source, ref, scale=2):
@@ -21,7 +22,7 @@ def render_crop(source, ref, scale=2):
             raise CanonicalIntegrityError('Frozen image integrity check failed')
         return raw
     reviewed = source.get('source_collection') == 'jee-pyq-written' and bool(source.get('sha256'))
-    identity = json.dumps({'source': source.get('sha256') or source['path'], 'ref': ref, 'scale': scale, 'reviewed_large_pages': reviewed, 'render': 5}, sort_keys=True, separators=(',', ':'))
+    identity = json.dumps({'source': source.get('sha256') or source['path'], 'ref': ref, 'scale': scale, 'reviewed_large_pages': reviewed, 'render': RENDER}, sort_keys=True, separators=(',', ':'))
     key = sha256(identity.encode()).hexdigest()
     found = _cache.get(key)
     if found is not None:

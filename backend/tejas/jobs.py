@@ -167,7 +167,14 @@ async def run_job(id, drain=True):
             completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', **{k: {'$literal': v} for k, v in output.items()}}}])
             if completed.modified_count:
                 await audit(j['user_id'], kind.title() + ' completed', j['set_id'], message)
-        except Exception:
+        except Exception as exc:
+            if kind == 'book_step' and isinstance(exc, HTTPException) and exc.status_code == 409:
+                # Another worker is on this PDF's batch: the job waits its turn and keeps its tries (not a failure).
+                logging.getLogger(__name__).info('Book busy with another batch; job %s waits', id)
+                await jobs.update_one({'id': id, 'lease': lease, 'status': 'running'}, [{'$set': {
+                    'status': 'queued', 'progress': 0, 'error': '', 'next_run_at': {'$add': [EPOCH_NOW, 20]},
+                    'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}])
+                return True
             logging.getLogger(__name__).exception('Background job failed (kind=%s)', kind)
             retryable = j.get('attempts', 1) < JOB_ATTEMPTS
             await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {

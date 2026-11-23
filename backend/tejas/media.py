@@ -9,32 +9,40 @@ from .cache import ByteCache
 from .db import files
 from .derivatives import render_crop
 from .packs import entry_for
+from .pictures import etag_of, webp_of
 
 router = APIRouter(prefix="/api")
 PART, DAY = 12, 86400
+# What a part link holds. 0-3 are the links every app build knows; the rest are handed out only with the new picture answers.
+TAGGED, SOLUTION, WEBP = 4, 8, 16
 CDN = os.environ.get("MEDIA_CDN_URL", "").rstrip("/")
 _KEY = hashlib.sha256(b"tejas-media-v1:" + os.environ["JWT_SECRET"].encode()).digest()
 _PACK = re.compile(r"[0-9a-f]{64}")
-_NAME = re.compile(r"(\d{1,4})-(\d{1,2})-([0-3])-(\d{10})-([A-Za-z0-9_-]{22})\.bin")
+_NAME = re.compile(r"(\d{1,4})-(\d{1,2})-(\d{1,2})-(\d{10})-([A-Za-z0-9_-]{22})\.bin")
 _parts = ByteCache(64 * 1024 * 1024)
 _flights = {}
 stats = {"links": 0, "served": 0, "built": 0, "coalesced": 0, "rejected": 0, "warmed": 0}
 _warm_at, _warming = {}, set()
 
 
-def picture_refs(questions, bonus_open, cut=False):
-    """Pictures of a paper in order: (question id, index, ref, kind). cut=True gives a cut question's pieces instead of its whole picture."""
+def picture_refs(questions, bonus_open, cut=False, solution=False):
+    """Pictures of a paper in order: (question id, index, ref, kind). cut=True gives a cut question's pieces instead of its whole picture;
+    solution=True gives the solution pictures instead of the question pictures."""
     out = []
     for q in questions:
         if q.get("bonus") and not bonus_open:
+            continue
+        if solution:
+            out += [(q["id"], i, r, "solution") for i, r in enumerate(q.get("s_refs", []))]
             continue
         pieces = q.get("c_refs") if cut else None
         out += [(q["id"], i, r, "piece" if pieces else "question") for i, r in enumerate(pieces or q.get("q_refs", []))]
     return out
 
 
-def assemble(total, found):
-    items = [{"question_id": qid, "index": i, "size": len(b), **({"kind": kind} if kind != "question" else {})} for qid, i, b, kind in found]
+def assemble(total, found, tagged=False):
+    items = [{"question_id": qid, "index": i, "size": len(b), **({"kind": kind} if kind != "question" else {}),
+              **({"etag": etag_of(b)} if tagged else {})} for qid, i, b, kind in found]
     head = json.dumps({"total": total, "items": items}).encode()
     return len(head).to_bytes(4, "big") + head + b"".join(b for _, _, b, _ in found)
 
@@ -44,40 +52,43 @@ def sign(pack_id, offset, limit, bonus, exp):
     return base64.urlsafe_b64encode(raw[:16]).decode().rstrip("=")
 
 
-async def pack_links(a, cut=False):
-    """Every student of one paper on one day gets the same links, so the CDN fetches each part from the server only once."""
-    bonus = int(bool(a.get("bonus_unlocked_at"))) | (2 if cut else 0)
-    total = len(picture_refs((await entry_for(a["pack_id"])).questions, bonus & 1, cut))
+async def pack_links(a, cut=False, pack_id=None, extra=0):
+    """Every student of one paper on one day gets the same links, so the CDN fetches each part from the server only once.
+    extra (TAGGED, SOLUTION, WEBP) is for students on the new picture answers; a finished attempt lists every question."""
+    pack_id = pack_id or a["pack_id"]
+    bonus = int(bool(a.get("bonus_unlocked_at")) or a["status"] != "active") | (2 if cut else 0) | extra
+    total = len(picture_refs((await entry_for(pack_id)).questions, bonus & 1, cut, bool(bonus & SOLUTION)))
     exp = (int(a["_database_now"] // DAY) + 2) * DAY
-    base = f"{CDN}/api/media/pack/{a['pack_id']}"
+    base = f"{CDN}/api/media/pack/{pack_id}"
     stats["links"] += 1
     return {"total": total, "limit": PART, "cdn": bool(CDN), "expires_at": exp,
-            "parts": [f"{base}/{o}-{PART}-{bonus}-{exp}-{sign(a['pack_id'], o, PART, bonus, exp)}.bin" for o in range(0, total, PART)]}
+            "parts": [f"{base}/{o}-{PART}-{bonus}-{exp}-{sign(pack_id, o, PART, bonus, exp)}.bin" for o in range(0, total, PART)]}
 
 
-def _one(sources, item):
+def _one(sources, item, webp=False):
     qid, i, r, kind = item
     try:
-        return qid, i, render_crop(sources[r["file_id"]], r), kind
+        raw = render_crop(sources[r["file_id"]], r)
+        return qid, i, (webp_of(raw) or raw) if webp else raw, kind
     except Exception:
         return None
 
 
-def _render(sources, part):
+def _render(sources, part, webp=False):
     """A part's pictures are fetched 8 at a time, so a far-away store costs about one round trip per part, not one per picture."""
     with ThreadPoolExecutor(8) as pool:
-        return [x for x in pool.map(lambda item: _one(sources, item), part) if x]
+        return [x for x in pool.map(lambda item: _one(sources, item, webp), part) if x]
 
 
 async def _build(pack_id, offset, limit, bonus):
-    refs = picture_refs((await entry_for(pack_id)).questions, bonus & 1, bool(bonus & 2))
+    refs = picture_refs((await entry_for(pack_id)).questions, bonus & 1, bool(bonus & 2), bool(bonus & SOLUTION))
     part = refs[offset:offset + limit]
     if not part:
         return None, False
     ids = list({r["file_id"] for _, _, r, _ in part})
     sources = {f["id"]: f async for f in files.find({"id": {"$in": ids}, "is_deleted": {"$ne": True}}, {"_id": 0})}
-    found = await run_in_threadpool(_render, sources, [p for p in part if p[2]["file_id"] in sources])
-    body, complete = assemble(len(refs), found), len(found) == len(part)
+    found = await run_in_threadpool(_render, sources, [p for p in part if p[2]["file_id"] in sources], bool(bonus & WEBP))
+    body, complete = await run_in_threadpool(assemble, len(refs), found, bool(bonus & TAGGED)), len(found) == len(part)
     if complete:
         _parts.put(f"{pack_id}.{offset}.{limit}.{bonus}", body)
     stats["built"] += 1
@@ -152,7 +163,7 @@ async def media_pack(pack_id: str, name: str):
         stats["rejected"] += 1
         raise HTTPException(404, "Picture not found.")
     offset, limit, bonus, exp, sig = int(m[1]), int(m[2]), int(m[3]), int(m[4]), m[5]
-    if not hmac.compare_digest(sig, sign(pack_id, offset, limit, bonus, exp)) or not 1 <= limit <= 16 or not t < exp <= t + 3 * DAY:
+    if not hmac.compare_digest(sig, sign(pack_id, offset, limit, bonus, exp)) or not 1 <= limit <= 16 or bonus > 31 or not t < exp <= t + 3 * DAY:
         stats["rejected"] += 1
         raise HTTPException(404, "This picture link is not valid. Reload the paper to get fresh links.")
     body, complete = await part_bytes(pack_id, offset, limit, bonus)

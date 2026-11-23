@@ -112,7 +112,8 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allow_headers=["Content-Type"],
+    allow_headers=["Content-Type", "If-None-Match", "If-Range", "Range"],
+    expose_headers=["ETag", "Content-Range", "Accept-Ranges"],
 )
 
 

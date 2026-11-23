@@ -1,6 +1,6 @@
 import copy
 import uuid
-from fastapi import APIRouter, Depends, HTTPException, Response, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, Response, BackgroundTasks, Request
 from pydantic import BaseModel, Field
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
@@ -17,6 +17,7 @@ from tejas_storage import get_object
 from .idempotency import fingerprint, verify_start, bind_start_alias
 from .contracts import EnvelopeResponse
 from .derivatives import render_crop
+from .pictures import pilot, stamp, answer as picture_answer
 from .canonical import EPOCH_NOW, clocked_one, verify_ledger, database_now
 from .live_window import guard as guard_live_start, answers_sealed
 import asyncio
@@ -349,7 +350,11 @@ async def history(page: int = 1, u=Depends(current)):
 
 @router.get("/attempts/{id}")
 async def read_attempt(id: str, u=Depends(current)):
-    return attempt_view(await expire(await owned(id, u)))
+    a = await expire(await owned(id, u))
+    view = attempt_view(a)
+    if pilot(u):
+        await stamp(view["questions"], a)
+    return view
 
 
 @router.post("/attempts/{id}/begin")
@@ -369,14 +374,40 @@ async def begin(id: str, u=Depends(current)):
     return {"ready_until": a.get("ready_until"), "deadline": a["deadline"], "server_now": t}
 
 
+async def picture_scope(a, u, kind, score_version):
+    """New picture answers: a finished attempt loads its pictures in bulk too; solutions under the rule of the one-picture route."""
+    done, solution = a["status"] == "completed", kind == "solution"
+    if solution and (not done or answers_sealed(a, a["_database_now"])):
+        raise HTTPException(403, "Solution assets remain private until submission.")
+    if a.get("set_deleted"):
+        raise HTTPException(404, "This test is no longer available.")
+    pack_id = a.get("pack_id")
+    if done and score_version and score_version != "original":
+        grade = await db.tejas_score_versions.find_one({"id": score_version, "attempt_id": a["id"], "user_id": u["id"]}, {"_id": 0, "pack_id": 1})
+        if not grade:
+            raise HTTPException(404, "This score version is not available for this attempt.")
+        pack_id = grade["pack_id"]
+    return pack_id, done, solution
+
+
 @router.get("/attempts/{id}/assets/pack")
-async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int = Query(12, ge=1, le=16), look: str = Query('', pattern='^(cut)?$'), u=Depends(current)):
+async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int = Query(12, ge=1, le=16), look: str = Query('', pattern='^(cut)?$'),
+                     kind: str = '', picture_format: str = Query('', alias='format'), score_version: str = 'original', u=Depends(current)):
     """Question pictures of an active attempt in paper order, many per response, so the whole paper loads in a few requests.
     Body: 4-byte big-endian header length, JSON header {total, items:[{question_id, index, size}]}, then the PNG bytes in order."""
     from .attempt_status import owned_header
     from .packs import entry_for
     from .media import picture_refs, assemble
     a = await owned_header(id, u)
+    if pilot(u):
+        from .media import _render
+        pack_id, done, solution = await picture_scope(a, u, kind, score_version)
+        questions = (await entry_for(pack_id)).questions if pack_id else (await attempts.find_one({"id": id, "user_id": u["id"]}, {"_id": 0, "questions": 1}))["questions"]
+        refs = picture_refs(questions, done or a.get("bonus_unlocked_at"), look == 'cut', solution)
+        part = refs[offset:offset + limit]
+        sources = {f["id"]: f async for f in files.find({"id": {"$in": list({r["file_id"] for _, _, r, _ in part})}}, {"_id": 0})}
+        found = await run_in_threadpool(_render, sources, [p for p in part if p[2]["file_id"] in sources], picture_format == "webp")
+        return Response(await run_in_threadpool(assemble, len(refs), found, True), media_type="application/octet-stream", headers={"Cache-Control": "private, no-store"})
     if a["status"] != "active":
         raise HTTPException(409, "This attempt is no longer active.")
     if a.get("pack_id"):
@@ -393,12 +424,19 @@ async def asset_pack(id: str, offset: int = Query(0, ge=0, le=5000), limit: int 
 
 
 @router.get("/attempts/{id}/assets/links")
-async def asset_links(id: str, look: str = Query('', pattern='^(cut)?$'), u=Depends(current)):
+async def asset_links(id: str, look: str = Query('', pattern='^(cut)?$'), kind: str = '', picture_format: str = Query('', alias='format'),
+                      score_version: str = 'original', u=Depends(current)):
     """The same pictures as /assets/pack, as public links a CDN can cache: {total, limit, cdn, expires_at, parts:[url]}.
     Fetch part k without cookies; it covers pictures k*limit .. k*limit+limit-1 in the /assets/pack format."""
     from .attempt_status import owned_header
     from .media import pack_links
     a = await owned_header(id, u)
+    if pilot(u):
+        from .media import TAGGED, SOLUTION, WEBP
+        pack_id, done, solution = await picture_scope(a, u, kind, score_version)
+        if not pack_id:
+            raise HTTPException(404, "This paper loads its pictures through /assets/pack.")
+        return await pack_links(a, look == 'cut', pack_id, TAGGED | (SOLUTION if solution else 0) | (WEBP if picture_format == 'webp' else 0))
     if a["status"] != "active":
         raise HTTPException(409, "This attempt is no longer active.")
     if not a.get("pack_id"):
@@ -559,6 +597,8 @@ async def results(id: str, bg: BackgroundTasks, score_version: str = "original",
             q['text'] = '' if q['asset_count'] else q.get('accessible_text', '')
         if q.get('c_refs'):
             q['pieces'] = pieces_of(q)
+    if pilot(u):
+        await stamp(result["questions"], a, a.get("score_version", "original") != "original")
     from .insights import insights
     from .reviews import states_for, review_summary
     a['review_states'] = await states_for(a)
@@ -591,7 +631,9 @@ async def asset(
     qid: str,
     kind: str,
     index: int,
+    request: Request,
     score_version: str = "original",
+    picture_format: str = Query('', alias='format'),
     u=Depends(current),
 ):
     from .attempt_status import owned_header
@@ -616,6 +658,8 @@ async def asset(
     if not 0 <= index < len(refs):
         raise HTTPException(404, "Asset not found.")
     f = await get(files, refs[index]["file_id"])
+    if pilot(u):
+        return await picture_answer(request, f, refs[index], picture_format == "webp")
     return Response(
         await run_in_threadpool(render_crop, f, refs[index]), media_type="image/png",
         headers={"Cache-Control": "private, no-store"},

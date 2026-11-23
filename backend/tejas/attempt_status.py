@@ -8,7 +8,7 @@ from .attempts import finalize
 router = APIRouter(prefix='/api/attempts', tags=['Attempt status'])
 HEADER = {key: 1 for key in ('id', 'user_id', 'set_id', 'status', 'deadline', 'pack_id', 'rules',
                              'competition_end', 'bonus_unlocked_at', 'solution_events_version',
-                             'submitted_at', 'receipt', 'grading_status', 'sealed_seq', 'summary')}
+                             'submitted_at', 'receipt', 'grading_status', 'sealed_seq', 'summary', 'series_id', 'set_deleted')}
 HEADER['_id'] = 0
 
 
