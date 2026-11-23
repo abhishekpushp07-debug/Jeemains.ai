@@ -1,5 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {UploadCloud,Loader2,FileText,X} from 'lucide-react';
+import {UploadCloud,Loader2,FileText,FolderOpen,X} from 'lucide-react';
 import {Dialog,DialogContent,DialogTitle,DialogDescription} from '../ui/dialog';
 import {Button} from '../ui/button';
 import {Input} from '../ui/input';
@@ -10,10 +10,13 @@ import {BatchRows,newRows,runBatch} from './BatchUpload';
 import {Select,SelectTrigger,SelectValue,SelectContent,SelectItem} from '../ui/select';
 import {toast} from 'sonner';
 
+// A plain "PDF chuniye" button opens the phone's or computer's file picker; tapping the text does the same.
 function PdfBox({label,hint,file,onPick,disabled,testId,required,multiple}){
+ const input=useRef(null);
  return <div className={'master-pdf-box'+(file?' has-file':'')} data-testid={testId}>
   <label htmlFor={testId+'-input'}><FileText size={20} aria-hidden="true"/><span><strong>{label}{required?'':' (zaroori nahi)'}</strong><small>{file?`${file.name} · ${(file.size/1024/1024).toFixed(1)} MB`:hint}</small></span></label>
-  <input id={testId+'-input'} type="file" accept="application/pdf,.pdf" multiple={multiple} disabled={disabled} onChange={e=>{const list=[...e.target.files];e.target.value='';onPick(multiple?list:list[0]||null);}} data-testid={testId+'-input'}/>
+  <input ref={input} id={testId+'-input'} className="master-pdf-input" type="file" accept="application/pdf,.pdf" multiple={multiple} disabled={disabled} onChange={e=>{const list=[...e.target.files];e.target.value='';onPick(multiple?list:list[0]||null);}} data-testid={testId+'-input'}/>
+  <Button type="button" size="sm" variant={file?'outline':'default'} disabled={disabled} onClick={()=>input.current?.click()} data-testid={testId+'-pick'}><FolderOpen size={15}/>{file?'Badlo':'PDF chuniye'}</Button>
   {file&&!disabled&&<Button type="button" size="icon" variant="ghost" aria-label={label+' hatao'} onClick={()=>onPick(multiple?[]:null)} data-testid={testId+'-remove'}><X size={15}/></Button>}
  </div>;
 }

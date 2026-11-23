@@ -101,8 +101,8 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .master-pdf-box label{display:flex;gap:10px;align-items:flex-start;flex:1;cursor:pointer;min-width:0}
 .master-pdf-box label span{display:flex;flex-direction:column;gap:2px;min-width:0}
 .master-pdf-box small{color:var(--text-muted);overflow-wrap:anywhere}
-.master-pdf-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
-.master-pdf-box button{position:relative;z-index:1}
+.master-pdf-input{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;opacity:0;overflow:hidden;clip:rect(0 0 0 0);pointer-events:none}
+.master-pdf-box button{position:relative;z-index:1;flex:0 0 auto}
 .master-excel{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:4px 0 0;font-size:13px;color:var(--text-muted)}
 
 .master-write{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:start}

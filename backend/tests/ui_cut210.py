@@ -9,7 +9,7 @@ B = json.load(open(os.environ.get('BRIDGE_OUT', '/tmp/uibridge210') + '/bridge.j
 BASE = [l.split('=', 1)[1].strip() for l in open('/app/frontend/.env') if l.startswith('REACT_APP_BACKEND_URL')][0].rstrip('/')
 API = 'http://127.0.0.1:' + os.environ.get('BRIDGE_PORT', '8772')
 SS = '/app/.screenshots/ui210'; os.makedirs(SS, exist_ok=True)
-F = B['f']
+F = B.get('f', {})
 SIZES = {'desk': (1920, 800), 'mob': (390, 844)}
 # Things inside a strip that slides sideways by design (a zoomed picture, the question-number rail) are not page overflow.
 OVERFLOW = "() => { const slides = e => { for (let p = e.parentElement; p; p = p.parentElement) { const o = getComputedStyle(p).overflowX; if (o === 'auto' || o === 'scroll') return true; } return false; }; return [...document.querySelectorAll('*')].filter(e => e.getBoundingClientRect().right > innerWidth + 1 && !slides(e)).slice(0,5).map(e => (e.className && e.className.toString()) || e.tagName); }"
@@ -342,4 +342,5 @@ async def main():
                     await walk(pw, size)
     print('TOTAL', len(RESULT), 'PASS', sum(ok for _, ok in RESULT), 'FAIL', sum(not ok for _, ok in RESULT))
 
-asyncio.run(main())
+if __name__ == '__main__':
+    asyncio.run(main())
