@@ -962,3 +962,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Eye check on 3 real PYQ pictures (diagram, graph, chemistry structure): WebP lossless 60–64 % of the PNG bytes (pixels same), quality 90 11–12 % (PSNR 44.7–46 dB, looked the same at 200 % zoom; one sample each, on screen).
 - To do with the app-side build (not done): AssetAwareCompression (performance.py) skips paths with "/asset/" but not "/assets/pack", so the pack fallback through our server is gzipped for nothing.
 - Next: wait for the website's go-live note (pilot for the test number), then build + test the app side, then one Publish.
+
+## Analysis shine: teal replaced by light sky blue + light teal that change places (23 Nov 2026)
+- Owner: "teal is not working"; wanted light sky blue mixed with light teal, interchanging, on the pills and the card; gloss, diagonal glint and running five-colour edge kept as they were.
+- src/analysis/Shine.tsx: every face is now a corner-to-corner slope of its two tones, and the same tones reversed fade in and out over it (SWAP keyframes, opacity only, 5.6 s, staggered pill to pill). `slope` prop removed. Edge stars are gold / pink / blue.
+- Tokens (src/theme.ts): pills custom_sectionSky #A8DCFF + custom_sectionAqua #8CEBD6 (black words); card custom_reportSky #86CFFB + custom_reportAqua #66E0CC, custom_reportHalo for its glow. Old teal tokens deleted.
+- Card words changed from white to near-black (custom_reportInk #0F0F12, second line custom_reportInkSoft #0B4A5C) because white cannot be read on light colours; the round download button is black with a white arrow (custom_reportOnInk). Sizes unchanged (pills 44, card 152).
+- Checked on the preview (web, 390 + 320): 27 animations, 61 fps, 0 animations with Solutions open, PDF download, section change, no page errors; tsc + eslint clean. Two packets (pills, then card). NOT checked on a real phone build; testing agent not run.

@@ -1,8 +1,9 @@
-// The shine of the Analysis screen's teal pieces (the section pills and the report card): five colours running round
-// the edge, a soft gloss on the upper half and a glass glint that crosses on the diagonal. Same engine as Rapid Fire's
+// The shine of the Analysis screen's section pills and report card: a face whose two colours (light sky blue and light
+// teal) keep changing places, five colours running round the edge, a soft gloss on the upper half and a glass glint
+// that crosses on the diagonal. Same engine as Rapid Fire's
 // glitter ring: CSS animations on the UI thread (plain CSS on the web), moving and fading only, so the screen stays light.
 // Under Reduce Motion, or while the screen is covered or hidden, everything rests and the edge is a still five-colour slope.
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { LayoutChangeEvent, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import Animated, { css } from "react-native-reanimated";
 import { LinearGradient } from "expo-linear-gradient";
@@ -10,8 +11,11 @@ import Svg, { Path } from "react-native-svg";
 import { useStill } from "@/src/motion";
 import { colors, shineColors } from "@/src/theme";
 
-const TURN = 4200, CYCLE = 3600, TWINKLE = 5200;
+const TURN = 4200, CYCLE = 3600, TWINKLE = 5200, CHANGE = 5600;
 const SPIN = css.keyframes({ from: { transform: [{ rotate: "0deg" }] }, to: { transform: [{ rotate: "360deg" }] } });
+// The same two colours the other way round fade in over the face and out again, so they keep changing places.
+const SWAP = css.keyframes({ "0%": { opacity: 0 }, "50%": { opacity: 1 }, "100%": { opacity: 0 } });
+const STARS = [shineColors[1], shineColors[0], shineColors[3]];
 const SPARK = css.keyframes({
   "0%": { opacity: 0, transform: [{ scale: 0.2 }, { rotate: "0deg" }] },
   "9%": { opacity: 1, transform: [{ scale: 1 }, { rotate: "45deg" }] },
@@ -40,21 +44,22 @@ function Sparkles({ count }: { count: number }) {
   return <View pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={StyleSheet.absoluteFill}>
     {SPOTS.slice(0, count).map(([x, y], i) => <Animated.View key={i} style={[styles.spark, { left: `${x}%`, top: `${y}%` },
       { animationName: SPARK, animationDuration: TWINKLE, animationDelay: 500 + i * (TWINKLE / SPOTS.length), animationIterationCount: "infinite", animationTimingFunction: "ease-out" }]}>
-      <Svg width={16} height={16} viewBox="0 0 24 24"><Path d={STAR} fill={i % 2 ? shineColors[1] : colors.custom_reportInk} /></Svg>
+      <Svg width={16} height={16} viewBox="0 0 24 24"><Path d={STAR} fill={STARS[i % STARS.length]} /></Svg>
     </Animated.View>)}
   </View>;
 }
 
 /**
  * Wraps a face in the running five-colour edge and gives it the gloss and the glint.
- * `tones` = the face's own colours (top to bottom, or corner to corner with `slope`); `face` = how the face lays out
- * what is inside it; `band` = how wide the glint is; `delay` staggers neighbours; `rest` holds everything still.
+ * `tones` = the face's own colours, corner to corner (they change places as time passes); `face` = how the face lays
+ * out what is inside it; `band` = how wide the glint is; `delay` staggers neighbours; `rest` holds everything still.
  */
-export function Shine({ children, radius, ring, tones, slope, gloss, glint, band, part = 40, delay = 0, sparkles = 0, rest, face }: {
-  children: React.ReactNode; radius: number; ring: number; tones: readonly [string, string, ...string[]]; slope?: boolean;
+export function Shine({ children, radius, ring, tones, gloss, glint, band, part = 40, delay = 0, sparkles = 0, rest, face }: {
+  children: React.ReactNode; radius: number; ring: number; tones: readonly [string, string, ...string[]];
   gloss: string; glint: string; band: number; part?: number; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
 }) {
   const still = useStill() || !!rest;
+  const turned = useMemo(() => [...tones].reverse() as unknown as typeof tones, [tones]);
   const [box, setBox] = useState({ w: 0, h: 0 });
   const onLayout = (e: LayoutChangeEvent) => {
     const { width: w, height: h } = e.nativeEvent.layout;
@@ -70,7 +75,12 @@ export function Shine({ children, radius, ring, tones, slope, gloss, glint, band
         <LinearGradient colors={shineColors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
       </Animated.View> : <LinearGradient pointerEvents="none" colors={shineColors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />}
       <View style={[styles.face, { borderRadius: Math.max(0, radius - ring) }, face]}>
-        <LinearGradient pointerEvents="none" colors={tones} start={{ x: 0, y: 0 }} end={slope ? { x: 1, y: 1 } : { x: 0, y: 1 }} style={StyleSheet.absoluteFill} />
+        <LinearGradient pointerEvents="none" colors={tones} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+        {/* Neighbours start a little apart, so the change travels along a row of pills like a slow wave. */}
+        {still ? null : <Animated.View pointerEvents="none" style={[styles.swap,
+          { animationName: SWAP, animationDuration: CHANGE, animationDelay: delay * 3, animationIterationCount: "infinite", animationTimingFunction: "ease-in-out" }]}>
+          <LinearGradient colors={turned} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+        </Animated.View>}
         <LinearGradient pointerEvents="none" colors={[gloss, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.gloss} />
         {path ? <Animated.View pointerEvents="none" style={[styles.glint, { width: band }, path.hidden,
           { animationName: path.frames, animationDuration: CYCLE, animationDelay: delay, animationIterationCount: "infinite", animationTimingFunction: "ease-in-out" }]}>
@@ -87,6 +97,7 @@ const styles = StyleSheet.create({
   outer: { position: "relative" },
   ring: { overflow: "hidden", flexGrow: 1 },
   face: { flexGrow: 1, overflow: "hidden" },
+  swap: { position: "absolute", left: 0, right: 0, top: 0, bottom: 0, opacity: 0 },
   gloss: { position: "absolute", left: 0, right: 0, top: 0, height: "56%" },
   glint: { position: "absolute", left: 0, top: -30, bottom: -30 },
   spark: { position: "absolute", width: 16, height: 16, marginLeft: -8, marginTop: -8, opacity: 0 },

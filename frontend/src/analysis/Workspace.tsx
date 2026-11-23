@@ -219,7 +219,7 @@ export function AnalysisBar({ nav, inset }: { nav: AnalysisNav; inset: number })
     </ScrollView></ScreenMotion>
   </View>;
 }
-const PILL = [colors.custom_sectionPillTop, colors.custom_sectionPill, colors.custom_sectionPillFoot] as const;
+const PILL = [colors.custom_sectionSky, colors.custom_sectionAqua] as const;
 
 const styles = StyleSheet.create({
   root: { gap: space.md },

@@ -146,14 +146,14 @@ const dark = {
   custom_selectedOption: "#1C0D11",
   // The student's choice during any test (never right/wrong): green circles, light green line, faint green wash.
   custom_pick: "#22C55E", custom_pickLine: "#4ADE80", custom_pickWash: "#0F2A1B", custom_pickInk: "#6EE7A0",
-  // Analysis: the 8 section pills rest in glossy light teal with black words; the report card is a deep teal slope with white words
-  // (same in both palettes; white on the lightest point of the slope is 5.4 : 1). Gloss = the soft light on the upper half,
-  // glint = the glass band that crosses on the diagonal.
-  custom_sectionPill: "#CDF5EE", custom_sectionPillInk: "#0F0F12", custom_sectionPillTop: "#E6FBF7", custom_sectionPillFoot: "#A3E7DA",
+  // Analysis: the 8 section pills and the report card are glossy light sky blue and light teal that keep changing places
+  // (same in both palettes). Words on them are near-black: 11 : 1 or more on every tone; the card's second line is 5.7 : 1.
+  // Gloss = the soft light on the upper half, glint = the glass band that crosses on the diagonal.
+  custom_sectionSky: "#A8DCFF", custom_sectionAqua: "#8CEBD6", custom_sectionPillInk: "#0F0F12",
   custom_sectionGloss: "rgba(255,255,255,0.78)", custom_sectionGlint: "rgba(255,255,255,0.95)",
-  custom_reportGloss: "rgba(255,255,255,0.20)", custom_reportGlint: "rgba(255,255,255,0.36)",
-  custom_reportFrom: "#0F766E", custom_reportMid: "#0B5C56", custom_reportTo: "#084840",
-  custom_reportInk: "#FFFFFF", custom_reportInkSoft: "#E3F4F1", custom_reportGlass: "rgba(255,255,255,0.16)", custom_reportLine: "rgba(255,255,255,0.28)", custom_reportGlow: "rgba(255,255,255,0.06)",
+  custom_reportGloss: "rgba(255,255,255,0.46)", custom_reportGlint: "rgba(255,255,255,0.92)",
+  custom_reportSky: "#86CFFB", custom_reportAqua: "#66E0CC", custom_reportHalo: "#38BDF8",
+  custom_reportInk: "#0F0F12", custom_reportInkSoft: "#0B4A5C", custom_reportOnInk: "#FFFFFF", custom_reportGlass: "rgba(255,255,255,0.55)", custom_reportLine: "rgba(255,255,255,0.9)", custom_reportGlow: "rgba(255,255,255,0.22)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
   custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
