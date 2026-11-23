@@ -8,10 +8,10 @@ import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
 import { Chip, Empty, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
 import { DCard, DSheet, Pill, StatusLine } from "@/src/components/design";
-import { GlossTabs, TabTones } from "@/src/components/GlossTabs";
+import { GlossTabs, TabLook } from "@/src/components/GlossTabs";
 import { ScreenMotion } from "@/src/motion";
 import { toneInk } from "@/src/components/PyqPaperCard";
-import { colors, fonts, noOutline, radius, space } from "@/src/theme";
+import { colors, fonts, noOutline, radius, space, tabEdges } from "@/src/theme";
 import { learningStatusTone } from "@/src/components/LearningTheme";
 import { EXAMS, fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
 import { useExams } from "@/src/api/examCatalog";
@@ -20,9 +20,11 @@ const EXAM_FILTERS = EXAMS.map(e => ({ key: e.name, name: e.name }));
 
 type Tab = "progress" | "saved" | "completed";
 const TABS: Tab[] = ["completed", "progress", "saved"];
-// Resting colour of each tab: steel, yellow, sky blue. The open tab is blood red.
-const TAB_TONES: Record<Tab, TabTones> = {
-  completed: [colors.custom_tabSteel, colors.custom_tabSteelDeep], progress: [colors.custom_tabSun, colors.custom_tabSunDeep], saved: [colors.custom_tabSky, colors.custom_tabSkyDeep],
+// Each tab keeps its own colour (baby pink, yellow, sky blue): full when open, a softer wash when not, with an edge from its own family.
+const TAB_LOOK: Record<Tab, TabLook> = {
+  completed: { on: [colors.custom_tabPink, colors.custom_tabPinkDeep], rest: [colors.custom_tabPinkSoft, colors.custom_tabPinkSoftDeep], edge: tabEdges.pink, glow: colors.custom_tabPinkGlow },
+  progress: { on: [colors.custom_tabSun, colors.custom_tabSunDeep], rest: [colors.custom_tabSunSoft, colors.custom_tabSunSoftDeep], edge: tabEdges.sun, glow: colors.custom_tabSunGlow },
+  saved: { on: [colors.custom_tabSky, colors.custom_tabSkyDeep], rest: [colors.custom_tabSkySoft, colors.custom_tabSkySoftDeep], edge: tabEdges.sky, glow: colors.custom_tabSkyGlow },
 };
 const STATUS: Record<Tab, [string, string][]> = {
   progress: [["all", "All ongoing"]],
@@ -33,7 +35,7 @@ const STATUS_LABEL: Record<string, string> = {
   active: "In progress", expired: "Time expired · finish grading", embargoed: "Result sealed", completed: "Scored", grading: "Preparing result",
 };
 // Kept at module level so returning to this tab restores the same view.
-const memo = { tab: "progress" as Tab, q: "", status: "all", exam: "" };
+const memo = { tab: "completed" as Tab, q: "", status: "all", exam: "" };
 
 export default function MyTests() {
   const insets = useSafeAreaInsets();
@@ -140,7 +142,7 @@ export default function MyTests() {
         {user?.access_type === "unverified_phone" ? <T size={11} color={colors.custom_eyebrow} testID="my-tests-identity-notice">This number’s profile is not a verified identity.</T> : null}
         {/* The tabs' shine rests while another tab or screen is in front. */}
         <ScreenMotion><GlossTabs prefix="my-tests-tab" value={tab} onChange={(t) => { if (t !== tab) setSelected([]); setTab(t); setStatus("all"); }}
-          items={TABS.map(t => ({ key: t, label: t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed", tones: TAB_TONES[t], labelTestID: `my-tests-tab-label-${t}`,
+          items={TABS.map(t => ({ key: t, label: t === "progress" ? "In progress" : t === "saved" ? "Saved" : "Completed", look: TAB_LOOK[t], labelTestID: `my-tests-tab-label-${t}`,
             sub: list.data?.counts ? String(list.data.counts[t]) : undefined, subTestID: `my-tests-count-${t}` }))} /></ScreenMotion>
         <View style={styles.search}>
           <Icon name="magnify" size={20} color={colors.custom_eyebrow} />

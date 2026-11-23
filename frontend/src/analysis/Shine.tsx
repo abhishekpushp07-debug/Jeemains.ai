@@ -51,11 +51,12 @@ function Sparkles({ count }: { count: number }) {
 
 /**
  * Wraps a face in the running five-colour edge and gives it the gloss and the glint.
- * `tones` = the face's own colours, corner to corner (they change places as time passes); `face` = how the face lays
- * out what is inside it; `band` = how wide the glint is; `delay` staggers neighbours; `rest` holds everything still.
+ * `tones` = the face's own colours, corner to corner (they change places as time passes); `edge` = the colours that run
+ * round it (the five by default); `face` = how the face lays out what is inside it; `band` = how wide the glint is;
+ * `delay` staggers neighbours; `rest` holds everything still.
  */
-export function Shine({ children, radius, ring, tones, gloss, glint, band, part = 40, delay = 0, sparkles = 0, rest, face }: {
-  children: React.ReactNode; radius: number; ring: number; tones: readonly [string, string, ...string[]];
+export function Shine({ children, radius, ring, tones, edge = shineColors, gloss, glint, band, part = 40, delay = 0, sparkles = 0, rest, face }: {
+  children: React.ReactNode; radius: number; ring: number; tones: readonly [string, string, ...string[]]; edge?: readonly [string, string, ...string[]];
   gloss: string; glint: string; band: number; part?: number; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
 }) {
   const still = useStill() || !!rest;
@@ -72,8 +73,8 @@ export function Shine({ children, radius, ring, tones, gloss, glint, band, part 
       {/* A square as wide as the face's diagonal turns behind it, so the five colours keep running round all four sides. */}
       {box.w ? <Animated.View pointerEvents="none" style={[{ position: "absolute", width: d, height: d, left: (box.w - d) / 2, top: (box.h - d) / 2 },
         still ? null : { animationName: SPIN, animationDuration: TURN, animationDelay: delay, animationIterationCount: "infinite", animationTimingFunction: "linear" }]}>
-        <LinearGradient colors={shineColors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
-      </Animated.View> : <LinearGradient pointerEvents="none" colors={shineColors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />}
+        <LinearGradient colors={edge} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
+      </Animated.View> : <LinearGradient pointerEvents="none" colors={edge} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />}
       <View style={[styles.face, { borderRadius: Math.max(0, radius - ring) }, face]}>
         <LinearGradient pointerEvents="none" colors={tones} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
         {/* Neighbours start a little apart, so the change travels along a row of pills like a slow wave. */}

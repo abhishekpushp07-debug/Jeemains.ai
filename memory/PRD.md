@@ -979,3 +979,11 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - New src/components/GlossTabs.tsx (uses src/analysis/Shine.tsx): each tab has the running five-colour edge, the gloss and the diagonal glint, always. Resting colours: Completed steel, In progress yellow, Saved sky blue (black words); the open tab is blood red (white words). Tokens custom_tab* in src/theme.ts. Row height 52 as before. Wrapped in ScreenMotion, so the shine rests when another tab or screen is in front.
 - The old Segmented in src/components/design.tsx had no other user and was deleted with its 3 styles.
 - Checked on the preview (web, 390 + 320): order, each tab opens its list, 9 animations, 61 fps, 0 animations on Home, labels fit at 320, no page errors; tsc + eslint clean. Two packets (order, then look). NOT checked on a real phone build; testing agent not run.
+
+## My Tests tabs, second pass: happy colours, own-family edges, Completed first (23 Nov 2026)
+- Owner disliked blood red / steel and the five-colour edge on the tabs. Now every tab keeps its own colour: Completed baby pink, In progress yellow, Saved sky blue. No red, no steel.
+- Open tab = full colour + soft glow + 3 pt edge + heavy black label + count on a white chip; the other two = a softer wash of their own colour, 2 pt edge, semibold soft-ink label. Gloss, diagonal glint and running edge are on all three, always. Row height still 52.
+- Edge = three colours of the tab's own family (theme `tabEdges`): pink = rose / orchid / coral; yellow = tangerine / vermilion / gold; sky = azure / indigo / periwinkle. Shine got an optional `edge` prop (default = the five colours, so Analysis is unchanged).
+- Tokens: custom_tabPink* / custom_tabSun* / custom_tabSky* (+Soft, +Glow), custom_tabChip; steel / blood tokens deleted. Word contrast 6.8 : 1 or more (computed).
+- First tab on opening is now Completed (memo.tab). Within a session the screen still stays on the tab the student last chose.
+- Checked on the preview (web, 390 + 320): Completed selected on first open with its 5 papers, each tab opens, 9 animations, 61 fps, 0 on Home, "In progress" fits at 320 when open, no page errors; tsc + eslint clean. NOT checked on a real phone build; testing agent not run.

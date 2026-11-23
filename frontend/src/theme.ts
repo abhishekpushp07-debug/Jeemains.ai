@@ -154,12 +154,13 @@ const dark = {
   custom_reportGloss: "rgba(255,255,255,0.46)", custom_reportGlint: "rgba(255,255,255,0.92)",
   custom_reportSky: "#86CFFB", custom_reportAqua: "#66E0CC", custom_reportHalo: "#38BDF8",
   custom_reportInk: "#0F0F12", custom_reportInkSoft: "#0B4A5C", custom_reportOnInk: "#FFFFFF", custom_reportGlass: "rgba(255,255,255,0.55)", custom_reportLine: "rgba(255,255,255,0.9)", custom_reportGlow: "rgba(255,255,255,0.22)",
-  // My Tests tabs (glossy, same in both palettes): Completed rests in steel, In progress in yellow, Saved in sky blue; the
-  // open tab is blood red. Black words on the resting tones are 9 : 1 or more; white on blood red is 6 : 1 or more.
-  custom_tabSteel: "#DCE3EA", custom_tabSteelDeep: "#A9B6C4", custom_tabSun: "#FFE680", custom_tabSunDeep: "#FFC629",
-  custom_tabSky: "#B9E3FF", custom_tabSkyDeep: "#74C2FA", custom_tabBlood: "#C1121F", custom_tabBloodDeep: "#7D0A12",
-  custom_tabInk: "#0F0F12", custom_tabInkSoft: "#33404D", custom_tabOnBlood: "#FFFFFF", custom_tabOnBloodSoft: "rgba(255,255,255,0.86)",
-  custom_tabGloss: "rgba(255,255,255,0.62)", custom_tabGlint: "rgba(255,255,255,0.95)", custom_tabBloodGloss: "rgba(255,255,255,0.24)", custom_tabBloodGlint: "rgba(255,255,255,0.5)",
+  // My Tests tabs (glossy, same in both palettes): Completed is baby pink, In progress yellow, Saved sky blue. The open tab
+  // wears its full colour; the other two rest in a softer wash of their own colour. Words are 6.5 : 1 or more on every tone.
+  custom_tabPink: "#FFAFC9", custom_tabPinkDeep: "#FF82AB", custom_tabPinkSoft: "#FFD3E1", custom_tabPinkSoftDeep: "#FFBDD2", custom_tabPinkGlow: "#FF4D8F",
+  custom_tabSun: "#FFEE5C", custom_tabSunDeep: "#FFD60A", custom_tabSunSoft: "#FFF29A", custom_tabSunSoftDeep: "#FFE455", custom_tabSunGlow: "#FFA200",
+  custom_tabSky: "#9BDCFF", custom_tabSkyDeep: "#52BDFF", custom_tabSkySoft: "#C4E8FF", custom_tabSkySoftDeep: "#96D5FF", custom_tabSkyGlow: "#1E90FF",
+  custom_tabInk: "#0F0F12", custom_tabInkSoft: "#3D3D47", custom_tabChip: "rgba(255,255,255,0.92)",
+  custom_tabGloss: "rgba(255,255,255,0.62)", custom_tabGlint: "rgba(255,255,255,0.95)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
   custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
@@ -340,6 +341,13 @@ export const glitterColors = ["#FF5EDB", "#FFD75E", "#3EE6D0", "#7DB4FF", "#B57B
 // The five colours that run round the Analysis pills and report card (pink, gold, aqua, blue, violet; deeper than the
 // arena's so they read on a white page too). The first comes back at the end so the ring has no seam.
 export const shineColors = ["#FF3D9A", "#FFB020", "#10C7A8", "#3B82F6", "#9B5CFF", "#FF3D9A"] as const;
+// The three colours that run round each My Tests tab, taken from that tab's own family (the first comes back at the end):
+// pink = rose, orchid, coral; yellow = tangerine, vermilion, gold; sky blue = azure, indigo, periwinkle.
+export const tabEdges = {
+  pink: ["#FF2D7A", "#B45CFF", "#FF8A6B", "#FF2D7A"],
+  sun: ["#FF7A00", "#FF4F3A", "#FFB300", "#FF7A00"],
+  sky: ["#0A84FF", "#4F46E5", "#8E7BFF", "#0A84FF"],
+} as const;
 // All India Rapid: one fire world (blazing smoke behind a dark ridge, black silhouettes on it) for all five card scenes.
 export const allIndia = {
   hot: "#FFE9C2", flame: "#FF6A1A", ember: "#FFB347", ink: "#080204", dust: "rgba(255,138,61,0.35)", star: "#FFF4E0",
