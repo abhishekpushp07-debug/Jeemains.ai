@@ -2,8 +2,9 @@
 packs, solutions in packs, WebP), the old answers for everyone else, and the Phase 1 owner routes (block, machine status, staff sign-in limit).
 Isolated disposable DB (storage + AI mocked). Run: cd /app/backend && timeout 280 python tests/pictures_iso220.py
 """
-import asyncio, hashlib, io, sys, time, uuid
+import asyncio, hashlib, io, os, subprocess, sys, time, uuid
 from pathlib import Path
+os.environ['PICTURE_PILOT_PHONES'] = '7004186276'  # narrowed for this run, so the old answers can be compared with the new ones
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import get_ready_iso188 as G  # noqa: E402,F401
 from get_ready_iso188 import H, mkstaff, client, check, RESULTS, J, go, result, unpack, structure, ATT  # noqa: E402
@@ -188,7 +189,15 @@ async def owner_routes():
     check('busy PDF: the job waits its turn and keeps its tries', row['status'] == 'queued' and row.get('attempts') == 0 and row.get('next_run_at', 0) > time.time() + 5, {k: row.get(k) for k in ('status', 'attempts', 'next_run_at', 'error')})
 
 
+def default_everyone():
+    env = {k: v for k, v in os.environ.items() if k != 'PICTURE_PILOT_PHONES'}
+    code = "from tejas import pictures as p; print(p.EVERYONE, p.pilot({'phone': '+919812345678'}), p.pilot({}))"
+    r = subprocess.run([sys.executable, '-c', code], cwd=str(Path(__file__).resolve().parents[1]), env=env, capture_output=True, text=True, timeout=120)
+    check('default (no setting): new answers for every student', r.stdout.strip().endswith('True True True'), (r.stdout[-200:], r.stderr[-300:]))
+
+
 async def main():
+    default_everyone()
     await structure.exams.update_one({'_id': 'jee-main'}, {'$set': {'shown': True}})
     sid = await paper()
     for step in (lambda: old_answers(sid), ):

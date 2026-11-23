@@ -1,5 +1,5 @@
 """Lighter, faster pictures for the app: "has it changed?" answers (ETag, 304, 206), asset_revision and a lossless WebP copy.
-Switched on per student: PICTURE_PILOT_PHONES holds the mobile numbers ('*' = every student). Everyone else gets the old answers, byte for byte."""
+On for every student by default. PICTURE_PILOT_PHONES can narrow it to some mobile numbers (comma list); students outside that list then get the old answers, byte for byte."""
 import hashlib, io, json, os, re
 from collections import OrderedDict
 from threading import Lock
@@ -9,7 +9,7 @@ from .cache import ByteCache
 from .db import files
 from .derivatives import RENDER, render_crop
 
-_setting = os.environ.get('PICTURE_PILOT_PHONES', '7004186276').strip()
+_setting = os.environ.get('PICTURE_PILOT_PHONES', '*').strip()
 EVERYONE = _setting == '*'
 PHONES = {d[-10:] for d in (re.sub(r'\D', '', part) for part in _setting.split(',')) if len(d) >= 10}
 PRIVATE = {'Cache-Control': 'private, no-store', 'Accept-Ranges': 'bytes'}

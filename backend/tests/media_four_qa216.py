@@ -113,7 +113,7 @@ async def links_and_parts(own, stu, other):
     # private pack unchanged
     r = await stu.get(f'/api/attempts/{aid}/assets/pack'); check('private pack still private no-store', r.status_code == 200 and 'no-store' in r.headers.get('cache-control', ''), r.headers.get('cache-control'))
     await stu.post(f'/api/attempts/{aid}/submit')
-    r = await stu.get(f'/api/attempts/{aid}/assets/links'); check('links after submit 409', r.status_code == 409, r.status_code)
+    r = await stu.get(f'/api/attempts/{aid}/assets/links'); check('links after submit 200 (a finished paper loads its pictures in bulk too)', r.status_code == 200, r.status_code)
     for _ in range(30):
         r = await stu.get(f'/api/attempts/{aid}/results')
         if r.status_code == 200: break
