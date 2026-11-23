@@ -3,7 +3,7 @@
 - Roman Hinglish on Master/exam/type/mock list/Fix/Students/Team/Library/dialogs. Still English: HeldFixer, AllQuestions, ChapterSplit, WriteEditor, Library inner lists, book repair screen, most server toasts.
 - 44 px targets, disabled states, 390 px no side-scroll (rules at end of master.css). noindex meta on Super Admin + login/signup/forgot-pin; robots.txt disallows those paths; titles on every Super Admin screen.
 - 409 book-lock: book_worker.step re-raises 409 (book not marked failed); jobs.py waits (busy_waits, max BUSY_WAITS=90) then normal failure.
-- Picture Route 2 (tejas/pictures.py): ON FOR EVERY STUDENT since 2026-11-23 evening (PICTURE_PILOT_PHONES default `*`, owner decision; a comma list of numbers narrows it). Lossless WebP only. Reaches production with the next deploy. App note: memory/WEBSITE_PICTURES_REPLY_2.md.
+- Picture Route 2 (tejas/pictures.py): ON FOR EVERY STUDENT since 2026-11-23 evening (PICTURE_PILOT_PHONES default `*`, owner decision; a comma list of numbers narrows it). Lossless WebP only. LIVE on jeelive.ai since redeploy 2026-11-23 17:24 UTC (deployer confirmed live file, no override secret, no errors). App note: memory/WEBSITE_PICTURES_REPLY_2.md.
 - Tests: testing agent iteration_214 (frontend 111/114, 3 test-side mistakes, recheck 16/16, no app bugs); isolated suites all pass incl. pictures_iso220 65/65, phase1_iso221 17/17, master_iso181 124/124, structure_iso173 133/133, library_aits_iso180 125/125, fresh_start_iso183 38/38 (old 16 FAILs fixed: test expectations moved to the 50-day series from 9 Dec), forgot_pin_iso184 53/53.
 
 ## Status — 2026-11-21 (night 3): Supabase + Emergent two-store pipeline and Storage Health Badge (preview only, NOT deployed)

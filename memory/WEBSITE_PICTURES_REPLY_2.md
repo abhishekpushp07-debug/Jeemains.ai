@@ -4,10 +4,10 @@ Written 2026-11-23 from the website project's code and its isolated tests. Paste
 
 ## 0. Status in one look
 
-- Built and tested in the website's preview. It reaches jeelive.ai with the NEXT deploy; the owner will tell you the day it is live.
+- LIVE on jeelive.ai since 2026-11-23 17:24 UTC (10:54 PM IST) for every student. Any check made before that time saw the old answers.
 - After that deploy it is ON FOR EVERY STUDENT (server setting `PICTURE_PILOT_PHONES`, default `*` = everyone).
   The owner can narrow it to some numbers for a while (comma list); students outside such a list then get today's answers, byte for byte.
-- Until the owner says it is live, jeelive.ai answers as today. Keep every new switch off until then, and keep today's fallbacks forever.
+- Keep today's fallbacks forever.
 - Website test: `tests/pictures_iso220.py` 66/66 (isolated throw-away database, 2026-11-23): old answers byte for byte when narrowed,
   new answers, and "no setting = every student". `tests/media_four_qa216.py` 33/33 with every student on.
 
