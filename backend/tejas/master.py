@@ -29,26 +29,42 @@ class StatusInput(Payload):
     live_exam: bool = False
 
 
+async def rereading_books(where=None):
+    """PDFs being read again (or waiting for it after a reader update). Their old 'to fix' counts are not shown until the new reading is in."""
+    from .book_reader import READER_VERSION
+    out = {}
+    async for b in db.tejas_books.find({**(where or {}), 'removed': False, 'archived': {'$ne': True}, 'paused': {'$ne': True}, '$or': [
+            {'payload.rereading': True, 'state': {'$in': ['received', 'reading', 'matching']}},
+            {'state': {'$in': ['attention_needed', 'ready']}, 'payload.reader_version': {'$ne': READER_VERSION}}]},
+            {'state': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.reader_version': 1}).limit(100):
+        p = b['payload']
+        waiting = p.get('reader_version') != READER_VERSION
+        out[b['_id']] = {'book_id': b['_id'], 'title': p.get('title', ''), 'read_pages': 0 if waiting else p.get('read_pages', 0), 'pages': p.get('pages', 0)}
+    return out
+
+
 @router.get('/summary')
 async def summary(u=Depends(owner)):
     from .structure import waiting_items
     lists = await fix_list(u)
     report = (await db.tejas_operations.find_one({'id': 'integrity'}, {'_id': 0, 'report.needs_attention': 1}) or {}).get('report') or {}
     waiting = {}
+    reread = {r['book_id'] for r in lists['rereading']}
     for w in await waiting_items():
-        if w['kind'] == 'book_mock':
+        if w['kind'] == 'book_mock' and w['book_id'] not in reread:
             waiting.setdefault(w['destination']['section_id'], {'ready': 0, 'held': 0})['held' if w['state'] == 'held' else 'ready'] += 1
     return {'to_fix': len(lists['items']), 'ready': len(lists['ready']), 'reports': await db.tejas_question_reports.count_documents({'status': 'open'}),
-            'health': report.get('needs_attention') or 0, 'waiting': waiting}
+            'health': report.get('needs_attention') or 0, 'waiting': waiting, 'rereading': lists['rereading']}
 
 
 @router.get('/fix')
 async def fix_list(u=Depends(staff)):
     from .structure import held_mocks, sections, exams
+    reread = await rereading_books()
     out = [{'kind': 'book_mock', 'id': m['id'], 'book_id': m['book_id'], 'title': m['label'], 'source': m['book_title'],
             'place': ' › '.join(x for x in ((m.get('destination') or {}).get('exam_name'), (m.get('destination') or {}).get('section_name')) if x),
             'section_id': (m.get('destination') or {}).get('section_id'), 'exam_slug': (m.get('destination') or {}).get('exam_slug'),
-            'count': len(m['issues']), 'more': len(m['issues']) >= 8, 'reason': (m['issues'] or [''])[0]} for m in (await held_mocks(u))['items']]
+            'count': len(m['issues']), 'more': len(m['issues']) >= 8, 'reason': (m['issues'] or [''])[0]} for m in (await held_mocks(u))['items'] if m['book_id'] not in reread]
     names = {s['id']: s for s in await sections.find({}, {'_id': 0, 'id': 1, 'name': 1, 'exam_slug': 1}).to_list(2000)}
     exam_names = {e['slug']: e['name'] for e in await exams.find({}, {'_id': 0, 'slug': 1, 'name': 1}).to_list(200)}
     written = {'written': True, 'status': 'draft', 'archived': {'$ne': True}}
@@ -59,16 +75,16 @@ async def fix_list(u=Depends(staff)):
                     'section_id': sec.get('id'), 'exam_slug': sec.get('exam_slug'),
                     'count': n, 'reason': f"{n} question{'s' if n != 1 else ''} marked when the paper was pasted."})
     if u['role'] != 'owner':
-        return {'items': out, 'ready': []}
+        return {'items': out, 'ready': [], 'rereading': list(reread.values())}
     from .structure import waiting_items
     ready = [{'kind': 'book_mock', 'id': w['id'], 'book_id': w['book_id'], 'title': w['title'], 'source': w['book'],
               'place': f"{w['destination']['exam_name']} › {w['destination']['section_name']}", 'section_id': w['destination']['section_id'],
-              'exam_slug': w['destination']['exam_slug'], 'count': w['count']} for w in await waiting_items() if w['kind'] == 'book_mock' and w['state'] == 'ready']
+              'exam_slug': w['destination']['exam_slug'], 'count': w['count']} for w in await waiting_items() if w['kind'] == 'book_mock' and w['state'] == 'ready' and w['book_id'] not in reread]
     async for s in sets.find({**written, 'questions.0': {'$exists': True}, 'questions': {'$not': FLAGGED}}, {'_id': 0, 'id': 1, 'title': 1, 'catalog_section_id': 1, 'count': {'$size': '$questions'}}).limit(300):
         sec = names.get(s.get('catalog_section_id'), {})
         ready.append({'kind': 'written', 'id': s['id'], 'title': s['title'], 'source': 'Written', 'place': ' › '.join(x for x in (exam_names.get(sec.get('exam_slug')), sec.get('name')) if x),
                       'section_id': sec.get('id'), 'exam_slug': sec.get('exam_slug'), 'count': s['count']})
-    return {'items': out, 'ready': ready}
+    return {'items': out, 'ready': ready, 'rereading': list(reread.values())}
 
 
 def set_item(v):
@@ -90,6 +106,7 @@ async def type_mocks(sid: str, u=Depends(owner)):
     t = await database_now()
     items = [set_item(test_view(x, t)) for x in await section_tests(s, e['key'])]
     waiting = await waiting_items(sid)
+    reread = await rereading_books({'payload.destination.section_id': sid})
     busy = [w['id'] for w in waiting if w['kind'] == 'book_mock' and w['state'] == 'publishing']
     progress = {p['_id']: {'done': p['done'], 'total': p['total']} for p in await db.tejas_publish_progress.find({'_id': {'$in': busy}}).to_list(len(busy))} if busy else {}
     for w in waiting:
@@ -99,8 +116,8 @@ async def type_mocks(sid: str, u=Depends(owner)):
         if w['kind'] != 'book_mock':
             continue
         status = {'ready': 'draft', 'held': 'draft', 'publishing': 'publishing', 'scheduled': 'scheduled'}[w['state']]
-        to_fix = 0
-        if w['state'] == 'held':
+        to_fix, again = 0, reread.get(w['book_id'])
+        if w['state'] == 'held' and not again:
             from .book_imports import question_problems
             from .book_models import BookMock
             row = await db.tejas_book_mocks.find_one({'_id': w['id']})
@@ -109,12 +126,12 @@ async def type_mocks(sid: str, u=Depends(owner)):
         items.append({'kind': 'book_mock', 'id': w['id'], 'title': w['title'], 'status': status, 'to_fix': to_fix, 'key_only': w.get('key_only', 0),
                       'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False, 'cut': w.get('cut'),
                       'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject'),
-                      'publish_progress': progress.get(w['id'])})
+                      'publish_progress': progress.get(w['id']), **({'rereading': {'read_pages': again['read_pages'], 'pages': again['pages']}} if again else {})})
     uploads = []
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [
             {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'},
             {'state': 'ready', 'restored_at': {'$exists': True}}]},
-                                       {'state': 1, 'paused': 1, 'restored_at': 1, 'revision': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1, 'payload.chapters': 1}):
+                                       {'state': 1, 'paused': 1, 'restored_at': 1, 'revision': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1, 'payload.chapters': 1, 'payload.rereading': 1}):
         unread, chapters = b['state'] == 'attention_needed', bool(b['payload'].get('chapters'))
         done = b['state'] == 'ready' or bool(unread and await db.tejas_book_mocks.find_one({'book_id': b['_id']}, {'_id': 1}))
         # A read PDF is listed only if it is chapter-wise (rename/split again) or came back from the Library.
@@ -129,7 +146,8 @@ async def type_mocks(sid: str, u=Depends(owner)):
         uploads.append({'id': b['_id'], 'kind': 'book', 'title': b['payload']['title'], 'state': 'done' if done else 'failed' if unread else 'paused' if paused else b['state'],
                         'revision': b.get('revision', 0), 'can_retry': b['state'] == 'failed' and not unread,
                         'pages': 0 if done else b['payload'].get('pages', 0), 'read_pages': b['payload'].get('read_pages', 0), 'chapters': chapters, 'message': message,
-                        'active': b['state'] in ('received', 'reading', 'matching') and not paused})
+                        'active': b['state'] in ('received', 'reading', 'matching') and not paused,
+                        'rereading': bool(b['payload'].get('rereading')) and b['state'] in ('received', 'reading', 'matching') and not paused})
     async for c in db.tejas_chapter_books.find({'destination.section_id': sid, 'archived': {'$ne': True}, 'status': {'$in': ['queued', 'organising', 'failed']}},
                                                {'_id': 0, 'id': 1, 'title': 1, 'status': 1, 'message': 1}):
         uploads.append({'id': c['id'], 'kind': 'chapter_book', 'title': c['title'], 'state': c['status'], 'pages': 0, 'read_pages': 0,

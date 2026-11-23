@@ -8,6 +8,7 @@ from .book_store import identity, normalized, save_mock, pages_for, mocks_for, f
 from .book_reader import infer_rules
 from .book_pdf import inspect_many
 from .book_cuts import cut_mock, cut_summary, SECONDS, SHOWN
+from .png_small import shrink_many
 from .content import valid_rules, question_issues, publish_validated
 from .chapter_reader import book_subjects, match_subject, syllabus_subject, resolve_subject, bookmark_title
 from tejas_storage import put_object
@@ -53,11 +54,21 @@ def chapter_record(book, mock, label, relevant, ctx, order):
     return {'number':record.get('number') or order,'title':title[:120],'subject':subject,'subject_from':source,'start_page':pages[0] if pages else None}
 
 
+async def type_defaults(book):
+    """Time and marks of the mock type this PDF was uploaded to. An older upload that did not carry them reads its mock type."""
+    dest=book.payload.get('destination') or {}
+    if dest.get('defaults') or not dest.get('section_id'):return dest.get('defaults')
+    from .structure import sections, default_rules
+    s=await sections.find_one({'_id':dest['section_id']},{'_id':0,'defaults':1,'kind':1}) or {}
+    return s.get('defaults') or default_rules(dest.get('exam_key'),s.get('kind') or ('chapters' if dest.get('layout')=='chapters' else 'mocks'))
+
+
 async def rebuild(book, token, source=None):
     """Rebuilds every unpublished mock from its pages. True while questions are still being cut: the caller runs again."""
     engine=bool(source and book.payload.get('cut_engine'));cutting=False;deadline=time.monotonic()+SECONDS
     pages=await pages_for(book); known={normalized(m.label):m for m in await mocks_for(book)}
     chapters=await chapter_context(book,pages) if book.payload.get('chapters') else None
+    defaults=await type_defaults(book)
     labels=list(dict.fromkeys(normalized(r.mock) for p in pages for r in p.regions if r.mock and r.role not in ('ignore','instructions')))
     by_label={}
     for p in pages:
@@ -123,16 +134,17 @@ async def rebuild(book, token, source=None):
                 inferred['source_pages']=sorted({p.number for p,_ in instructions})[:30]
                 if not solution_groups and any(re.search(r'\bquestions\s+only\b',p.text,re.I) for p,_ in relevant):inferred['solution_policy']='key_only'
                 mock.rules=MockRules.model_validate(inferred).model_dump()
-            elif question_groups and (book.payload.get('destination') or {}).get('defaults'):
+            elif question_groups and defaults:
                 # Nothing printed: the mock type's own time and marks apply, as the owner set them.
-                d=book.payload['destination']['defaults'];nums=[k[2] for k in question_groups]
+                d=defaults;nums=[k[2] for k in question_groups]
                 mock.rules=MockRules.model_validate({'exam':'Custom','minutes':d['minutes'],'expected_questions':len(question_groups),'correct':d['correct'],'wrong':d['wrong'],
                     'mechanic':'all_compulsory','numbering':'per_section' if len(set(nums))<len(nums) else 'continuous','first_number':max(1,min(nums)),
                     'solution_policy':'mixed','source_pages':[relevant[0][0].number],'note':'Default time and marks of this mock type; the PDF prints none.'}).model_dump()
         if mock.rules and mock.rules.get('note','').startswith('Default time and marks') and question_groups:
             nums=[k[2] for k in question_groups]
             mock.rules.update(expected_questions=len(nums),numbering='per_section' if len(set(nums))<len(nums) else 'continuous',first_number=max(1,min(nums)))
-        if not mock.rules:issues.append('Confirm printed examination rules, count, duration, marking and solution coverage.')
+        # Asked only when the paper has questions and neither the PDF nor its mock type gives the time and marks.
+        if not mock.rules and question_groups:issues.append('Confirm printed examination rules, count, duration, marking and solution coverage.')
         if mock.rules and book.payload.get('destination'):
             from .structure import rule_exam
             mock.rules['exam']=rule_exam(book.payload['destination'])
@@ -237,9 +249,22 @@ async def rebuild(book, token, source=None):
     return cutting
 
 
+async def shrink_new(book, pairs):
+    """Pictures not saved yet are made smaller without changing a pixel. Each keeps the fingerprint of its original,
+    so a picture that is already saved is neither shrunk nor sent again."""
+    todo=[]
+    for crop,role in pairs:
+        if crop.get('error') or not crop.get('image_bytes'):continue
+        crop['raw_sha']=digest(crop['image_bytes']);todo.append((identity(book.id,crop['raw_sha'],role),crop))
+    if not todo:return
+    have=set(await files.distinct('id',{'id':{'$in':[fid for fid,_ in todo]}}))
+    new=[crop for fid,crop in todo if fid not in have]
+    for crop,small in zip(new,await run_in_threadpool(shrink_many,[crop['image_bytes'] for crop in new])):crop['image_bytes']=small
+
+
 async def crop_ref(book,mock,crop,region,role):
     if crop.get('error'):raise ValueError(f"Page {region['page']}: {crop['error']}")
-    png=crop['image_bytes'];fid=identity(book.id,digest(png),role)
+    png=crop['image_bytes'];fid=identity(book.id,crop.get('raw_sha') or digest(png),role)
     if not await files.find_one({'id':fid},{'_id':1}):
         path=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/crops/{fid}.png',png,'image/png')
         try:
@@ -263,6 +288,8 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
     painted=await run_in_threadpool(inspect_many,raw,[{'action':'piece','page':p['page'],'rect':p['rect'],'scale':2,'erase':p.get('erase',[])} for _,p in parts],20) if parts else []
     pieces={}
     for (qid,part),crop in zip(parts,painted):pieces.setdefault(qid,[]).append((part,crop))
+    if guard:await guard('renew')
+    await shrink_new(book,[(crop,role) for (_,role,_),crop in zip(wanted,rendered)]+[(crop,'piece') for crop in painted])
     if guard:await guard('renew')
     # Every picture of the mock is saved first, 8 at a time, so publishing waits for the slowest picture, not for all of them one by one.
     gate=asyncio.Semaphore(8)

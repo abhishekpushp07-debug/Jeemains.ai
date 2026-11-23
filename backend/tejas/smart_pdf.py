@@ -3,7 +3,7 @@ import base64,json,os,subprocess,sys,tempfile
 from pathlib import Path
 
 def inspect(raw,action='info',page=None,rect=None):
-    if not raw.startswith(b'%PDF-') or len(raw)>50*1024*1024:raise ValueError('Use a PDF under50MB.')
+    if not raw.startswith(b'%PDF-') or len(raw)>100*1024*1024:raise ValueError('100 MB tak ki PDF chuniye.')
     with tempfile.TemporaryDirectory(prefix='jeemains-pdf-') as tmp:
         root=Path(tmp);(root/'input.pdf').write_bytes(raw)
         (root/'request.json').write_text(json.dumps({'action':action,'page':page,'rect':rect}))

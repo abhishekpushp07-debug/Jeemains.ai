@@ -173,7 +173,7 @@ async def set_detail(id: str):
 
 
 @router.get("/studio/sets")
-async def studio_sets(u=Depends(staff)):
+async def studio_sets(u=Depends(owner)):
     from .catalog import page
     from .structure import visibility
     await visibility()
@@ -183,7 +183,7 @@ async def studio_sets(u=Depends(staff)):
 
 
 @router.post("/studio/sets")
-async def create_set(data: SetInput, u=Depends(staff)):
+async def create_set(data: SetInput, u=Depends(owner)):
     if data.audience not in ('all', 'restricted'):
         raise HTTPException(400, 'Select a supported audience.')
     if data.exam not in ["JEE Main", "BITSAT"]:
@@ -238,7 +238,7 @@ async def studio_set(id: str, u=Depends(staff)):
 
 
 @router.put("/studio/sets/{id}")
-async def update_set(id: str, data: SetInput, u=Depends(staff)):
+async def update_set(id: str, data: SetInput, u=Depends(owner)):
     s = await get(sets, id)
     if data.exam not in ["JEE Main", "BITSAT"] or data.audience not in [
         "all",
@@ -280,7 +280,7 @@ async def update_set(id: str, data: SetInput, u=Depends(staff)):
 
 @router.post("/studio/sets/{id}/files")
 async def upload(
-    id: str, kind: str = Form(...), file: UploadFile = File(...), u=Depends(staff)
+    id: str, kind: str = Form(...), file: UploadFile = File(...), u=Depends(owner)
 ):
     require_capability(Capability.SOURCE_UPLOAD)
     s = await get(sets, id)
@@ -288,7 +288,7 @@ async def upload(
         raise HTTPException(400, "Confirm permission to upload in set settings first.")
     if kind not in ["questions", "solutions", "key", "combined"]:
         raise HTTPException(400, "Choose a source document type.")
-    data = await file.read(50 * 1024 * 1024 + 1)
+    data = await file.read(100 * 1024 * 1024 + 1)
     try:
         doc = await run_in_threadpool(validate_pdf, data)
     except ValueError as e:
@@ -320,7 +320,7 @@ async def upload(
 
 
 @router.get("/studio/files/{id}/page/{page}")
-async def source_page(id: str, page: int, u=Depends(staff)):
+async def source_page(id: str, page: int, u=Depends(owner)):
     require_capability(Capability.SOURCE_PARSE)
     f = await get(files, id)
     if f.get('book_import_id'):
@@ -342,7 +342,7 @@ async def source_page(id: str, page: int, u=Depends(staff)):
 
 
 @router.get("/studio/files/{id}/text/{page}")
-async def source_text(id: str, page: int, u=Depends(staff)):
+async def source_text(id: str, page: int, u=Depends(owner)):
     require_capability(Capability.SOURCE_PARSE)
     f = await get(files, id)
     if f.get('book_import_id'):
@@ -362,7 +362,7 @@ async def source_text(id: str, page: int, u=Depends(staff)):
 
 
 @router.get("/studio/files/{id}/download")
-async def source_download(id: str, u=Depends(staff)):
+async def source_download(id: str, u=Depends(owner)):
     f = await get(files, id)
     if f.get('book_import_id'):
         from .book_store import load_book
@@ -376,7 +376,7 @@ async def source_download(id: str, u=Depends(staff)):
 
 
 @router.post("/studio/sets/{id}/extract")
-async def extract(id: str, data: dict, bg: BackgroundTasks, u=Depends(staff)):
+async def extract(id: str, data: dict, bg: BackgroundTasks, u=Depends(owner)):
     require_capability(Capability.EXTRACTION)
     s = await get(sets, id)
     if s.get("questions") and not data.get("replace_drafts"):
@@ -489,7 +489,7 @@ async def validate_refs(s, q, source_map=None):
 
 
 @router.post("/studio/sets/{id}/questions")
-async def add_question(id: str, u=Depends(staff)):
+async def add_question(id: str, u=Depends(owner)):
     s = await get(sets, id)
     q = {
         "id": uid(),
@@ -528,7 +528,7 @@ async def add_question(id: str, u=Depends(staff)):
 
 
 @router.put("/studio/sets/{id}/questions/{qid}")
-async def edit_question(id: str, qid: str, data: dict, u=Depends(staff)):
+async def edit_question(id: str, qid: str, data: dict, u=Depends(owner)):
     s = await get(sets, id)
     old = next((q for q in s["questions"] if q["id"] == qid), None)
     if not old:
@@ -586,7 +586,7 @@ async def edit_question(id: str, qid: str, data: dict, u=Depends(staff)):
 
 
 @router.post("/studio/sets/{id}/questions/{qid}/approve")
-async def approve_question(id: str, qid: str, u=Depends(staff)):
+async def approve_question(id: str, qid: str, u=Depends(owner)):
     s = await get(sets, id)
     q = next((q for q in s["questions"] if q["id"] == qid), None)
     if not q:
@@ -730,7 +730,7 @@ async def withdraw(id: str, data: dict, u=Depends(owner)):
 
 
 @router.post("/studio/sets/{id}/subset")
-async def subset(id: str, data: dict, u=Depends(staff)):
+async def subset(id: str, data: dict, u=Depends(owner)):
     s = await get(sets, id)
     selected = set(data.get("question_ids", []))
     qs = [q for q in s["questions"] if q["id"] in selected]

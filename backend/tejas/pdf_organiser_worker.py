@@ -17,7 +17,7 @@ import sys
 import unicodedata
 import fitz
 
-LIMIT = 50 * 1024 * 1024
+LIMIT = 100 * 1024 * 1024
 OUTPUT_LIMIT = 48 * 1024 * 1024
 ANCHOR = re.compile(r'^(?:(?:Q(?:uestion)?\.?\s*)(\d{1,3})\s*[.:)\-]?\s*|(\d{1,3})\s*[.)]\s+)(.*)$', re.I)
 SUBJECT = re.compile(r'^(Physics|Chemistry|Mathematics|Maths|English|Logical Reasoning|Biology)\b', re.I)
@@ -57,7 +57,7 @@ def seal(directory):
 
 def open_pdf(data):
     if not data.startswith(b'%PDF-') or not 0 < len(data) <= LIMIT:
-        raise ValueError('Use valid PDFs of at most50MB each')
+        raise ValueError('Use valid PDFs of at most 100 MB each')
     doc=fitz.open(stream=data,filetype='pdf')
     if doc.is_encrypted or not 1 <= len(doc) <= 300:
         raise ValueError('Use unlocked PDFs of1–300pages')

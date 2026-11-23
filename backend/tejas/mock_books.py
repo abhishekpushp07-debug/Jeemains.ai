@@ -1,7 +1,7 @@
 """BITSAT full mocks imported from the owner-supplied combined PDF; Studio sees live and held-back status."""
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
-from .auth import staff
+from .auth import owner
 from .db import db, now
 
 router = APIRouter(prefix='/api', tags=['Full mocks'])
@@ -40,7 +40,7 @@ class MockBookList(BaseModel):
 
 
 @router.get('/studio/mock-books', response_model=MockBookList)
-async def list_mock_books(u=Depends(staff)):
+async def list_mock_books(u=Depends(owner)):
     from .mock_solutions import progress
     rows = await mock_books.find({}, {'_id': 0}).sort('created_at', -1).limit(20).to_list(20)
     return MockBookList(items=[MockBookView(**{k: r.get(k) for k in MockBookView.model_fields if k not in ('server_now', 'ai_solutions')},

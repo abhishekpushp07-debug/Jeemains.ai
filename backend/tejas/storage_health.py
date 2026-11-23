@@ -4,7 +4,7 @@ import asyncio, time
 from fastapi import APIRouter, Depends, Query
 from starlette.concurrency import run_in_threadpool
 import tejas_storage as store
-from .auth import staff
+from .auth import owner
 
 router = APIRouter(prefix="/api/admin/storage", tags=["Storage health"])
 FRESH, SLOW_MS, ALERT_AFTER = 60, 2500, 600
@@ -39,7 +39,7 @@ def backup(st):
 
 
 @router.get("/health")
-async def health(fresh: bool = Query(False), u=Depends(staff)):
+async def health(fresh: bool = Query(False), u=Depends(owner)):
     """Checked at most once a minute (on asking with fresh=true, at most every 10 s), so the badge never loads the stores."""
     age = time.time() - _last['at']
     if _last['result'] is None or age > FRESH or (fresh and age > 10):

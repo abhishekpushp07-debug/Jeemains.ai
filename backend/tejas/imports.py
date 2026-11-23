@@ -16,7 +16,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request, BackgroundTasks,
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from starlette.concurrency import run_in_threadpool
-from .auth import owner, staff
+from .auth import owner
 from .db import db, sets, files, uid, now, get
 from .import_models import ImportView, ImportList, ScheduleInput, LiveInput
 from .sandbox import organise_pdfs
@@ -54,7 +54,7 @@ async def read_record(id):
 
 
 @router.get('/template')
-async def template(variant: str = 'combined', u=Depends(staff)):
+async def template(variant: str = 'combined', u=Depends(owner)):
     from openpyxl import Workbook
     from openpyxl.styles import Font, PatternFill, Alignment
     if variant not in ('combined', 'sheets', 'questions', 'solutions'): raise HTTPException(400, 'Unknown template layout.')
@@ -79,7 +79,7 @@ async def template(variant: str = 'combined', u=Depends(staff)):
 
 
 @router.get('', response_model=ImportList)
-async def list_imports(u=Depends(staff)):
+async def list_imports(u=Depends(owner)):
     records=await imports.find({'qa_only': {'$ne': True}, 'archived': {'$ne': True}}, {'_id':0}).sort('created_at',-1).limit(50).to_list(50)
     linked=await sets.find({'id':{'$in':[r['id'] for r in records]}}, {'_id':0,'id':1,'start_at':1,'end_at':1,'revision':1,'live_enabled':1,'series_date':1,'series_import':1}).to_list(50)
     by_id={s['id']:s for s in linked}
@@ -104,7 +104,7 @@ async def create_import(request: Request, bg: BackgroundTasks, u=Depends(owner))
                 if role=='questions' or format=='pdf': raise HTTPException(422,'Upload both Questions and Solutions PDFs, or an Excel workbook.')
                 continue
             if not hasattr(f,'read') or not (f.filename or '').lower().endswith('.'+format): raise HTTPException(422,'File extension must match the selected format.')
-            limit=(50 if format=='pdf' else 5)*1024*1024
+            limit=(100 if format=='pdf' else 5)*1024*1024
             raw=await f.read(limit+1)
             if not raw: raise HTTPException(422,f'The {role} file is empty. Choose the original file again.')
             if len(raw)>limit: raise HTTPException(413,f'Use {format.upper()} files within the displayed size limit.')
@@ -153,6 +153,9 @@ async def process_import(id):
                     p=Path(directory)/(s['kind']+'.'+r['format']); p.write_bytes(raw); paths[s['kind']]=p
                 result=await organise_pdfs(paths['questions'],paths.get('solutions'),r['format'])
             qs=result['questions']; issues=result['issues']
+            # Every rendered picture is made smaller without changing a pixel before it is saved (same order as the loop below).
+            from .png_small import shrink_many
+            small=iter(await run_in_threadpool(shrink_many,[base64.b64decode(e,validate=True) for q in qs for role in ('question','solution') for e in q.get('assets',{}).get(role,[])]) if r['format']=='pdf' else [])
             for q in qs:
                 q['id']=str(uuid.uuid5(uuid.UUID(id),str(q['number'])))
                 q['approved']=False  # Structural validation is not academic reviewer approval.
@@ -163,7 +166,7 @@ async def process_import(id):
                         original=next(s for s in r['sources'] if s['kind']==('questions' if role=='question' else 'solutions'))
                         refs=q[key]
                         for n,encoded in enumerate(assets.get(role,[])):
-                            png=base64.b64decode(encoded,validate=True)
+                            png=next(small)
                             fid=str(uuid.uuid5(uuid.UUID(q['id']),role+':'+str(n)))
                             path=await run_in_threadpool(put_object,f'tejas/imports/{id}/renders/{token}/{fid}.png',png,'image/png')
                             await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':id,'path':path,'kind':'rendered_png','sha256':hashlib.sha256(png).hexdigest(),'source_sha256':original['sha256'],'created_at':now(),'is_deleted':False}},upsert=True)
@@ -185,7 +188,7 @@ async def process_import(id):
 
 
 @router.get('/{id}',response_model=ImportView)
-async def read_import(id:str,u=Depends(staff)):
+async def read_import(id:str,u=Depends(owner)):
     r=await read_record(id)
     return view(r,await sets.find_one({'id':id},{'_id':0}))
 
@@ -200,7 +203,7 @@ async def retry_import(id:str,bg:BackgroundTasks,u=Depends(owner)):
 
 
 @router.get('/{id}/errors')
-async def error_report(id:str,u=Depends(staff)):
+async def error_report(id:str,u=Depends(owner)):
     r=await read_record(id); stream=io.StringIO(); writer=csv.writer(stream)
     writer.writerow(['Sheet','Row','Question','Field','Issue'])
     for e in r.get('issues',[]):
@@ -210,7 +213,7 @@ async def error_report(id:str,u=Depends(staff)):
 
 
 @router.get('/{id}/questions/{qid}/asset/{kind}/{index}')
-async def import_asset(id:str,qid:str,kind:str,index:int,u=Depends(staff)):
+async def import_asset(id:str,qid:str,kind:str,index:int,u=Depends(owner)):
     r=await read_record(id)
     q=next((q for q in r.get('questions',[]) if q['id']==qid),None)
     refs=(q or {}).get('q_refs' if kind=='question' else 's_refs',[])

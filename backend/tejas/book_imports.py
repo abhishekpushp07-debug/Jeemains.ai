@@ -97,6 +97,9 @@ async def part(id:str,number:int,request:Request,sha256:str=Query(...,pattern=r'
     raw=bytes(data)
     if digest(raw)!=sha256:raise HTTPException(422,'Upload part checksum mismatch. Retry this part; no bytes were saved.')
     pid=identity(id,'part',number)
+    # A PDF must be a PDF inside too, not only by its name. A part that is already saved keeps its own check below.
+    if number==0 and not raw.startswith(b'%PDF-') and not await db.tejas_book_parts.find_one({'_id':pid},{'_id':1}):
+        raise HTTPException(422,'Yeh file PDF nahi hai. Asli PDF chuniye; sirf naam badalne se kaam nahi chalega.')
     value=UploadPart(id=pid,book_id=id,number=number,sha256=digest(raw),data=raw)
     try:await db.tejas_book_parts.insert_one(value.to_mongo())
     except DuplicateKeyError:

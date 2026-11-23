@@ -5,7 +5,7 @@ load_dotenv(Path(__file__).parent / ".env")
 import os, uuid, time
 import tejas.reports  # noqa: F401  fail fast on report syntax errors (it is otherwise imported lazily)
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from starlette.datastructures import MutableHeaders
 from fastapi.exceptions import RequestValidationError
 from tejas.origins import ExplicitOriginCORS, configured_origins, origin_allowed
@@ -62,6 +62,7 @@ from tejas import (
     storage_health,
     misfire,
     duplicates,
+    machine,
 )
 from tejas.db import indexes, client
 from tejas.contracts import EnvelopeResponse, error_response, request_id
@@ -93,8 +94,9 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
     default_response_class=EnvelopeResponse,
-    docs_url="/api/docs",
-    openapi_url="/api/openapi.json",
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None,
 )
 from tejas.http_limits import JsonBodyLimits
 from tejas.safety import ContentSafetyHold
@@ -121,6 +123,7 @@ class Protections:
         "X-Content-Type-Options": "nosniff",
         "Referrer-Policy": "same-origin",
         "Cache-Control": "private, no-store",
+        "X-Robots-Tag": "noindex, nofollow",
         "X-Frame-Options": "DENY",
         "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
     }
@@ -228,6 +231,13 @@ async def health():
     return {"status": "ok", "service": "jeemains.ai", "version": "1.0.0"}
 
 
+@app.get('/api/openapi.json', include_in_schema=False)
+async def openapi_spec(u=Depends(auth.owner)):
+    # The list of every route is for the owner only; visitors get no map of the server.
+    from fastapi.responses import JSONResponse
+    return JSONResponse(app.openapi())
+
+
 for module in [
     auth,
     phone,
@@ -281,6 +291,7 @@ for module in [
     storage_health,
     misfire,
     duplicates,
+    machine,
 ]:
     app.include_router(module.router)
 

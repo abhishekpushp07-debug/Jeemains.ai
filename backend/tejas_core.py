@@ -17,8 +17,8 @@ RULES = {
 
 
 def validate_pdf(data, *, reviewed_large_pages=False):
-    if len(data) > 50 * 1024 * 1024:
-        raise ValueError("PDF exceeds 50 MB. Split it into smaller documents.")
+    if len(data) > 100 * 1024 * 1024:
+        raise ValueError("PDF exceeds 100 MB. Split it into smaller documents.")
     if not data.startswith(b"%PDF-"):
         raise ValueError("Upload a valid PDF file, not a renamed document.")
     try:

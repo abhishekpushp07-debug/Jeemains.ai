@@ -10,7 +10,7 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request,
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo import ReturnDocument
 from starlette.concurrency import run_in_threadpool
-from .auth import owner, staff, current
+from .auth import owner, current
 from .db import db, sets, files, attempts, uid, now, get, audit
 from .sandbox import organise_pdfs
 from .content import valid_rules, summary
@@ -120,7 +120,7 @@ def independent_evidence(sha, parsed_sha, chapter, subject):
 
 
 @router.get('/studio/chapter-books',response_model=BookList)
-async def list_books(u=Depends(staff)):
+async def list_books(u=Depends(owner)):
     records=await books.find({'qa_only':{'$ne':True},'archived':{'$ne':True}},{'_id':0}).sort('created_at',-1).limit(30).to_list(30)
     return BookList(items=[await book_view(r) for r in records])
 
@@ -133,8 +133,8 @@ async def upload_book(request:Request,bg:BackgroundTasks,u=Depends(owner)):
         except ValueError: raise HTTPException(422,'A UUID upload identifier is required.')
         f=form['file']
         if not hasattr(f,'read') or not (f.filename or '').lower().endswith('.pdf'):raise HTTPException(422,'Choose a searchable PDF chapter book.')
-        raw=await f.read(50*1024*1024+1)
-        if not raw.startswith(b'%PDF-') or len(raw)>50*1024*1024:raise HTTPException(422,'Use a valid PDF under50MB.')
+        raw=await f.read(100*1024*1024+1)
+        if not raw.startswith(b'%PDF-') or len(raw)>100*1024*1024:raise HTTPException(422,'100 MB tak ki sahi PDF chuniye.')
         sha=hashlib.sha256(raw).hexdigest(); identity=str(uuid.uuid5(uuid.NAMESPACE_URL,u['id']+':chapter:'+sha))
         receipt=str(uuid.uuid5(uuid.NAMESPACE_URL,u['id']+':chapter-request:'+request_id))
         await db.tejas_chapter_uploads.update_one({'id':receipt},{'$setOnInsert':{'id':receipt,'sha256':sha}},upsert=True)
@@ -218,7 +218,7 @@ async def process_book(identity):
 
 
 @router.get('/studio/chapter-books/{id}',response_model=BookView)
-async def read_book(id:str,u=Depends(staff)):
+async def read_book(id:str,u=Depends(owner)):
     return await book_view(await get(books,id))
 
 
@@ -231,14 +231,14 @@ async def retry_book(id:str,bg:BackgroundTasks,u=Depends(owner)):
 
 
 @router.get('/studio/chapter-books/{id}/chapters/{sid}',response_model=ChapterPreview)
-async def preview_chapter(id:str,sid:str,u=Depends(staff)):
+async def preview_chapter(id:str,sid:str,u=Depends(owner)):
     s=await sets.find_one({'id':sid,'chapter_book_id':id},{'_id':0})
     if not s:raise HTTPException(404,'Chapter not found.')
     return ChapterPreview(chapter=chapter_view(s),questions=s['questions'])
 
 
 @router.get('/studio/chapter-books/{id}/chapters/{sid}/questions/{qid}/asset/{kind}/{index}')
-async def chapter_asset(id:str,sid:str,qid:str,kind:str,index:int,u=Depends(staff)):
+async def chapter_asset(id:str,sid:str,qid:str,kind:str,index:int,u=Depends(owner)):
     s=await sets.find_one({'id':sid,'chapter_book_id':id},{'_id':0})
     q=next((q for q in (s or {}).get('questions',[]) if q['id']==qid),None)
     refs=(q or {}).get('q_refs' if kind=='question' else 's_refs',[])

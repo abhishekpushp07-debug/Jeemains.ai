@@ -10,6 +10,7 @@ from pymongo import ReturnDocument
 from .db import db, users, sessions, uid, now
 
 router = APIRouter(prefix="/api/auth", tags=["Staff accounts and sessions"])
+BLOCKED = "Yeh account band kar diya gaya hai. Madad ke liye JEELIVE.AI se sampark kijiye."
 
 
 class Credentials(BaseModel):
@@ -83,6 +84,8 @@ def cookies(response, u, sid):
 
 async def new_session(u, response):
     from .staff_credentials import generation, check_session_generation
+    if u.get('blocked_at'):
+        raise HTTPException(403, BLOCKED)
     sid = uid()
     record = {
         'id': sid, 'user_id': u['id'],
@@ -128,8 +131,8 @@ async def identity(p):
         db.tejas_phone_profiles if p.get("access_type") == "unverified_phone" else users
     )
     u = await coll.find_one({"id": p["sub"]}, {"_id": 0, "password_hash": 0, "pin_hash": 0})
-    if not u:
-        raise ValueError()
+    if not u or (coll is not users and u.get("blocked_at")):
+        raise ValueError()  # a blocked student is signed out everywhere, even if a session record survived
     if p.get("access_type") == "unverified_phone":
         u["role"] = "student"
         u["access_type"] = "unverified_phone"
@@ -178,6 +181,7 @@ async def current(request: Request):
                 "id": p["sid"],
                 "user_id": p["sub"],
                 "expires_at": {"$gt": datetime.now(timezone.utc)},
+                "revoked_at": None,
             }
         )
         if not record:
@@ -227,26 +231,36 @@ async def register():
     )
 
 
+STAFF_WRONG_LIMIT, STAFF_IP_WRONG_LIMIT, STAFF_WAIT = 10, 100, 900
+
+
 @router.post("/login")
-async def login(data: Credentials, response: Response):
+async def login(data: Credentials, request: Request, response: Response):
+    """10 wrong passwords for one email (100 from one address) start a 15-minute wait. A correct password is never counted."""
+    from .rate_limits import wrong_gate, count_wrong
+    from .phone import client_ip
     email = str(data.email).lower()
-    window = int(now() // 900)
-    key = hashlib.sha256(f"staff:{email}:{window}".encode()).hexdigest()
-    from .rate_limits import increment
-    count = await increment(db.tejas_login_limits, key, datetime.now(timezone.utc) + timedelta(minutes=30))
-    if count > 5:
-        raise HTTPException(429, "Too many sign-in attempts. Please wait before trying again.", headers={"Retry-After": str(max(1, int((window + 1) * 900 - now()) + 1))})
+    keys = [(hashlib.sha256(f"staff-wrong:email:{email}".encode()).hexdigest(), STAFF_WRONG_LIMIT)]
+    ip = client_ip(request)
+    if ip:
+        keys.append((hashlib.sha256(f"staff-wrong:ip:{ip}".encode()).hexdigest(), STAFF_IP_WRONG_LIMIT))
+    t = datetime.fromtimestamp(now(), timezone.utc)
+    await wrong_gate(db.tejas_login_limits, keys, t, lambda minutes: f"Bahut baar galat password dala gaya. {minutes} minute baad dobara koshish kijiye.")
     u = await users.find_one({"email": email})
     if (
         not u
         or u.get("role") not in ["owner", "reviewer"]
         or not await run_in_threadpool(verify, data.password, u["password_hash"])
     ):
+        left = await count_wrong(db.tejas_login_limits, keys, t, STAFF_WAIT)
+        if not left:
+            raise HTTPException(429, f"{STAFF_WRONG_LIMIT} baar galat password dala gaya. {STAFF_WAIT // 60} minute baad dobara koshish kijiye.",
+                                headers={"Retry-After": str(STAFF_WAIT)})
         raise HTTPException(
             401,
-            "Staff email or password is incorrect. Students sign in with a mobile number and PIN.",
+            f"Staff email ya password galat hai. {left} koshish baaki, phir {STAFF_WAIT // 60} minute ki rok. Students mobile number aur PIN se sign in karte hain.",
         )
-    await db.tejas_login_limits.delete_one({"_id": key})
+    await db.tejas_login_limits.delete_one({"_id": keys[0][0]})
     return await new_session(u, response)
 
 
@@ -289,6 +303,7 @@ async def refresh(request: Request, response: Response):
                 "id": p["sid"],
                 "user_id": p["sub"],
                 "expires_at": {"$gt": datetime.now(timezone.utc)},
+                "revoked_at": None,
             }
         )
         if not record:

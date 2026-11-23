@@ -7,6 +7,7 @@ import {Input} from '../ui/input';
 import {Label} from '../ui/label';
 import {post} from '../../lib/api';
 import {invalidateCatalog} from '../../lib/catalog';
+import {usePageTitle} from '../../lib/pageMeta';
 import {toast} from 'sonner';
 
 const TONES={uploading:'processing',received:'processing',reading:'processing',matching:'processing',publishing:'processing',queued:'processing',organising:'processing',
@@ -19,7 +20,7 @@ export const DestinationChip=({exam,section,large,testId='destination-chip'})=><
 
 export const AdminCrumbs=({items})=><nav className="admin-crumbs" aria-label="Breadcrumb" data-testid="admin-breadcrumb">{items.map((item,i)=><React.Fragment key={i}>{i>0&&<ChevronRight size={14} aria-hidden="true"/>}{item.to&&i<items.length-1?<Link to={item.to} data-testid={'admin-crumb-'+i}>{item.label}</Link>:<span aria-current={i===items.length-1?'page':undefined} data-testid={'admin-crumb-'+i}>{item.label}</span>}</React.Fragment>)}</nav>;
 
-export const AdminHeading=({title,text,action,testId})=><header className="admin-heading"><div><h1 data-testid={testId}>{title}</h1>{text&&<p>{text}</p>}</div>{action}</header>;
+export const AdminHeading=({title,text,action,testId})=>{usePageTitle(title);return <header className="admin-heading"><div><h1 data-testid={testId}>{title}</h1>{text&&<p>{text}</p>}</div>{action}</header>;};
 
 const STEPS=['Where it goes','File type','Details','Upload & reading','Student preview'];
 export const StepBar=({step})=><ol className="admin-steps" data-testid="upload-step-bar">{STEPS.map((label,i)=><li key={label} className={i+1===step?'is-current':i+1<step?'is-done':''} data-testid={'upload-step-'+(i+1)} aria-current={i+1===step?'step':undefined}><span>{i+1}</span><em>{label}</em></li>)}</ol>;

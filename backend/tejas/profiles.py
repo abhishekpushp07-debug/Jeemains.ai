@@ -3,7 +3,7 @@
 import hashlib, json
 from fastapi import APIRouter, Depends, HTTPException
 from .db import db, now
-from .auth import staff
+from .auth import owner
 
 router = APIRouter(
     prefix="/api/studio/profiles", tags=["Immutable exam profile catalogue"]
@@ -95,7 +95,7 @@ async def seal_profile(s):
 
 
 @router.get("")
-async def profiles(u=Depends(staff)):
+async def profiles(u=Depends(owner)):
     return (
         await db.tejas_profiles.find({}, {"_id": 0})
         .sort("created_at", -1)

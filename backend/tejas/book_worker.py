@@ -145,7 +145,7 @@ async def step(job):
             # Books read by an older page reader are re-read automatically; owner repairs, AI-approved pages and pages of published mocks are kept.
             published=sorted({n for m in await mocks_for(book) if m.published_generation for numbers in m.pages.values() for n in numbers})
             await db.tejas_book_pages.delete_many({'book_id':id,'number':{'$nin':published},'provenance.kind':{'$nin':['owner_repair','ai_proposal']},'provenance.reader':{'$ne':READER_VERSION}})
-            p.update(read_pages=0,reader_version=READER_VERSION,message='Re-reading pages with the improved reader. Owner repairs are kept.')
+            p.update(read_pages=0,reader_version=READER_VERSION,rereading=True,message='Re-reading pages with the improved reader. Owner repairs are kept.')
             if use_bookmark_parts(p):
                 # The chapters are now named by the PDF's bookmarks: copies under the old names that never reached students are rebuilt, not left held.
                 await db.tejas_book_mocks.delete_many({'book_id':id,'published_generation':0,'set_id':None,'series_date':None,'release_at':None,'live_exam':False})
@@ -182,6 +182,7 @@ async def step(job):
                 more=a.state=='queued'
             book.state='matching';await save_book(book,token)
             cutting=await rebuild(book,token,source)
+            if not cutting:p.pop('rereading',None)  # fresh counts are in: Master shows them again
             await renew(book,token)
             more=cutting or await publish_batch(book,token,source) or more
             mocks=await mocks_for(book)

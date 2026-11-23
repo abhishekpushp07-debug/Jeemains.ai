@@ -11,9 +11,10 @@ from .auth import owner
 from .astra import ask,MODEL,quota_status
 from .smart_models import PaperRules,ExtractedPage,RuleCheck,Clarification,QuestionRepair,WorkBudget,DailyBudget
 from tejas_storage import put_object,get_object
+from .png_small import shrink_many
 
 router=APIRouter(prefix='/api/studio/auto-imports',tags=['Automatic test publishing'])
-MAX_BYTES=40*1024*1024
+MAX_BYTES=100*1024*1024
 
 class ImportView(BaseModel):
     id:str
@@ -96,7 +97,7 @@ async def upload(bg:BackgroundTasks,file:UploadFile=File(...),rights_confirmed:b
         block=await file.read(512*1024)
         if not block:break
         size+=len(block)
-        if size>MAX_BYTES:raise HTTPException(413,'Use a document under40MB.')
+        if size>MAX_BYTES:raise HTTPException(413,'Yeh file 100 MB se badi hai. 100 MB tak ki file chuniye.')
         chunks.append(block)
     raw=b''.join(chunks)
     if not raw:raise HTTPException(400,'The document is empty.')
@@ -290,9 +291,10 @@ async def extract_page(job):
             continue
         crop=await run_in_threadpool(inspect,raw,'crop',page,detected['rect'])
         fid=str(uuid.uuid5(uuid.NAMESPACE_URL,qid+':source:'+str(page)))
-        path=await run_in_threadpool(put_object,f"jeemains/smart/{record['id']}/questions/{fid}.png",crop['image_bytes'],'image/png')
+        png=(await run_in_threadpool(shrink_many,[crop['image_bytes']]))[0]
+        path=await run_in_threadpool(put_object,f"jeemains/smart/{record['id']}/questions/{fid}.png",png,'image/png')
         await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'owner_id':record['owner_id'],'filename':f'question-{detected["number"]}-page-{page}.png','kind':'rendered_png',
-            'path':path,'sha256':hashlib.sha256(crop['image_bytes']).hexdigest(),'pages':1,'source_import_id':record['id'],'original_page':page,'original_rect':detected['rect'],'created_at':now()}},upsert=True)
+            'path':path,'sha256':hashlib.sha256(png).hexdigest(),'pages':1,'source_import_id':record['id'],'original_page':page,'original_rect':detected['rect'],'created_at':now()}},upsert=True)
         ref={'file_id':fid,'page':1,'rect':[0,0,crop['width'],crop['height']], 'prerendered':True}
         q={'id':qid,'number':detected['number'],'solution_number':detected['number'],'subject':detected['subject'],'section':detected['section'],
             'type':detected['type'],'text':detected['text'],'options':detected['options'],'answer':detected['supplied_answer'],

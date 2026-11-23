@@ -1,7 +1,7 @@
 """Authenticated read-only baseline; no runtime readiness or capacity claims."""
 from typing import Literal
 from fastapi import APIRouter, Depends, Request
-from .auth import staff
+from .auth import owner
 from .capacity import CapacityProfile, calculate
 from .command_contracts import StrictContract
 from .safety import Capability, held
@@ -24,12 +24,12 @@ class SafetyStatus(StrictContract):
 
 
 @router.get('/capacity/profile', response_model=CapacityProfile, operation_id='internal_capacity_profile_v1')
-async def capacity_profile(u=Depends(staff)):
+async def capacity_profile(u=Depends(owner)):
     return calculate()
 
 
 @router.get('/runtime/status')
-async def runtime_status(request: Request, u=Depends(staff)):
+async def runtime_status(request: Request, u=Depends(owner)):
     from .packs import cache_stats
     from .jobs import _active, _draining
     from .runtime import DB_POOL, DB_WAIT_MS, LANE_LIMITS, JOB_DRAIN_QUANTUM
@@ -41,6 +41,6 @@ async def runtime_status(request: Request, u=Depends(staff)):
 
 
 @router.get('/safety/status', response_model=SafetyStatus, operation_id='internal_safety_status_v1')
-async def safety_status(u=Depends(staff)):
+async def safety_status(u=Depends(owner)):
     return SafetyStatus(capabilities=[CapabilityState(capability=c.value, held=held(c)) for c in Capability],
         note='Containment only. Historical correctness defects remain open; atomic source review, full contracts, approvals and credential rotation still block Packet 1 exit.')

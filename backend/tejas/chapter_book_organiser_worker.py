@@ -114,7 +114,7 @@ def main():
         with open(os.path.join(directory,'questions.pdf'),'rb') as f: raw=f.read(LIMIT+1)
         codecs.lookup('raw_unicode_escape');codecs.lookup('unicode_escape');json.dumps({'x':'अ'}).encode()
         seal(directory)
-        if not raw.startswith(b'%PDF-') or len(raw)>LIMIT: raise ValueError('Use a valid chapter PDF under50MB.')
+        if not raw.startswith(b'%PDF-') or len(raw)>LIMIT: raise ValueError('Use a valid chapter PDF within 100 MB.')
         doc=fitz.open(stream=raw,filetype='pdf')
         if doc.is_encrypted or not 1<=len(doc)<=1000 or any(p.rect.width>2000 or p.rect.height>2000 for p in doc):
             raise ValueError('Use an unlocked chapter book of at most1000standard-size pages.')

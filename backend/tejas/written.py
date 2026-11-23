@@ -277,10 +277,12 @@ async def upload_image(id: str, file: UploadFile = File(...), u=Depends(staff)):
     await written_doc(id, u)
     raw = await file.read(6 * 1024 * 1024 + 1)
     if len(raw) > 6 * 1024 * 1024:
-        raise HTTPException(413, 'Choose a photo within 6 MB.')
+        raise HTTPException(413, 'Photo 6 MB ke andar chuniye.')
     def to_png(data):
         from PIL import Image
         img = Image.open(io.BytesIO(data))
+        if img.format not in ('PNG', 'JPEG', 'MPO', 'WEBP'):  # MPO is what many phone cameras call their JPG
+            raise ValueError('format')
         img.load()
         if img.width * img.height > 40_000_000:
             raise ValueError('too large')
@@ -291,8 +293,10 @@ async def upload_image(id: str, file: UploadFile = File(...), u=Depends(staff)):
     try:
         png, w, h = await run_in_threadpool(to_png, raw)
     except Exception:
-        raise HTTPException(422, 'Choose a PNG, JPG or WebP photo.') from None
+        raise HTTPException(422, 'PNG, JPG ya WebP photo chuniye.') from None
     import hashlib
+    from .png_small import shrink_many
+    png = (await run_in_threadpool(shrink_many, [png]))[0]
     digest = hashlib.sha256(png).hexdigest()
     fid = uid()
     path = await run_in_threadpool(put_object, f'jeelive/written/{id}/{fid}.png', png, 'image/png')
@@ -465,8 +469,15 @@ async def excel(id: str, file: UploadFile = File(...), u=Depends(owner)):
         raise HTTPException(409, 'Import into a draft. A live mock changes one complete question at a time.')
     await guard_series(s)
     raw = await file.read(10 * 1024 * 1024 + 1)
-    if len(raw) > 10 * 1024 * 1024 or not raw.startswith(b'PK'):
-        raise HTTPException(422, 'Choose the .xlsx template file, within 10 MB.')
+    def is_xlsx(data):
+        import zipfile
+        try:
+            names = set(zipfile.ZipFile(io.BytesIO(data)).namelist())
+        except zipfile.BadZipFile:
+            return False
+        return {'[Content_Types].xml', 'xl/workbook.xml'} <= names
+    if len(raw) > 10 * 1024 * 1024 or not (file.filename or '').lower().endswith('.xlsx') or not is_xlsx(raw):
+        raise HTTPException(422, '10 MB tak ki .xlsx template file chuniye.')
     with tempfile.TemporaryDirectory(prefix='written-xlsx-') as directory:
         path = Path(directory) / 'questions.xlsx'
         path.write_bytes(raw)

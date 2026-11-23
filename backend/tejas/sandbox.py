@@ -8,7 +8,7 @@ import shutil
 import sys
 
 BASE=Path('/app/backend/.processing-private')
-MAX_PDF=50*1024*1024
+MAX_PDF=100*1024*1024
 MAX_OUTPUT=48*1024*1024
 
 
@@ -20,7 +20,7 @@ async def organise_pdfs(questions_path,solutions_path=None,format='pdf',chapter_
     try:
         for source,name in [(questions_path,'questions.'+format),(solutions_path,'solutions.'+format)]:
             if source is None: continue
-            if Path(source).stat().st_size>MAX_PDF: raise ValueError('File exceeds 50 MB')
+            if Path(source).stat().st_size>MAX_PDF: raise ValueError('File exceeds 100 MB')
             shutil.copyfile(source,directory/name)
         env={'PATH':os.environ.get('PATH','/usr/bin:/bin'),'LANG':'C.UTF-8','PYTHONIOENCODING':'utf-8',
              'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','PYTHONDONTWRITEBYTECODE':'1'}

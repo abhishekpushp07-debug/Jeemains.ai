@@ -9,10 +9,10 @@ from starlette.concurrency import run_in_threadpool
 from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError, PyMongoError
 from .db import audit, db, uid, now
-from .auth import current, forget_student, hash_pin, new_session, owner, pin_hash_heavy, verify
+from .auth import BLOCKED, current, forget_student, hash_pin, new_session, owner, pin_hash_heavy, verify
 from .documents import BaseDocument
 from .request_contracts import PhonePayload, PhoneSignupPayload, PinChangePayload, OwnerPinResetPayload
-from .rate_limits import increment
+from .rate_limits import increment, wrong_gate, count_wrong
 
 router = APIRouter(prefix="/api/auth", tags=["Student phone and PIN access"])
 
@@ -89,37 +89,14 @@ def _wrong_pin_keys(phone, request):
 
 async def wrong_pin_gate(keys):
     """429 while this number (or this address) is in its 15-minute wait. Correct PINs are never counted."""
-    t = datetime.fromtimestamp(now(), timezone.utc)
-    try:
-        blocked = await db.tejas_phone_limits.find({'_id': {'$in': [k for k, _ in keys]}, 'blocked_until': {'$gt': t}},
-                                                   {'blocked_until': 1}).to_list(len(keys))
-    except PyMongoError:
-        raise HTTPException(503, 'Sign-in protection is temporarily unavailable. Retry shortly.', headers={'Retry-After': '3'})
-    if blocked:
-        wait = max(1, int((max(d['blocked_until'] for d in blocked) - t).total_seconds()) + 1)
-        raise HTTPException(429, f'Too many incorrect PINs. Try again in {max(1, round(wait / 60))} min, or use Forgot PIN.',
-                            headers={'Retry-After': str(wait)})
+    await wrong_gate(db.tejas_phone_limits, keys, datetime.fromtimestamp(now(), timezone.utc),
+                     lambda minutes: f'Too many incorrect PINs. Try again in {minutes} min, or use Forgot PIN.')
 
 
 async def count_wrong_pin(keys):
     """One wrong PIN. 10 wrong for a number (100 for one address) within 15 minutes of the first starts a 15-minute wait.
     Returns how many tries this number has left before the wait."""
-    t = datetime.fromtimestamp(now(), timezone.utc)
-    fresh = {'$lt': [{'$ifNull': ['$started', datetime.fromtimestamp(0, timezone.utc)]}, t - timedelta(seconds=WRONG_PIN_WAIT)]}
-    left = None
-    try:
-        for key, limit in keys:
-            doc = await db.tejas_phone_limits.find_one_and_update({'_id': key}, [{'$set': {
-                'count': {'$cond': [fresh, 1, {'$add': ['$count', 1]}]}, 'started': {'$cond': [fresh, t, '$started']},
-                'expires_at': t + timedelta(seconds=2 * WRONG_PIN_WAIT)}}], upsert=True, return_document=ReturnDocument.AFTER)
-            if doc['count'] >= limit:
-                await db.tejas_phone_limits.update_one({'_id': key}, {'$set': {'blocked_until': t + timedelta(seconds=WRONG_PIN_WAIT), 'count': 0},
-                                                                     '$unset': {'started': ''}})
-            if left is None:
-                left = max(0, limit - doc['count'])
-    except PyMongoError:
-        raise HTTPException(503, 'Sign-in protection is temporarily unavailable. Retry shortly.', headers={'Retry-After': '3'})
-    return left
+    return await count_wrong(db.tejas_phone_limits, keys, datetime.fromtimestamp(now(), timezone.utc), WRONG_PIN_WAIT)
 
 
 async def limit_pin(phone, request, action):
@@ -225,9 +202,11 @@ async def reset_pin(data: PinChangePayload, request: Request, response: Response
     """Forgot PIN: number + new PIN, no OTP and no old PIN (owner's choice). Signs the student in like sign-in does."""
     phone = normalize_phone(data.phone)
     await limit_pin(phone, request, 'reset')
-    u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0, 'id': 1, 'pin_version': 1})
+    u = await db.tejas_phone_profiles.find_one({'phone': phone}, {'_id': 0, 'id': 1, 'pin_version': 1, 'blocked_at': 1})
     if not u:
         raise HTTPException(404, 'No account with this number. Create one instead.')
+    if u.get('blocked_at'):
+        raise HTTPException(403, BLOCKED)
     await live_paper_guard(u['id'], 'Forgot PIN')
     return await replace_pin(u, phone, data.new_pin, response, 'student_pin_reset_forgot',
                              {'pin_reset_at': now(), 'pin_reset_via': 'forgot_pin'})

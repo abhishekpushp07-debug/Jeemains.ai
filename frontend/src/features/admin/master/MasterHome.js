@@ -38,7 +38,7 @@ function OwnerHome(){
  return <div className="admin-page master-page" data-testid="master-home">
   <AttentionLine/>
   <StorageAlert/>
-  <AdminHeading testId="super-admin-title" title="Master" text="Exam › mock type › mock. Everything students see on the website and the app starts here." action={<Button onClick={()=>setOpen(true)} data-testid="master-new-exam"><Plus size={16}/>New exam</Button>}/>
+  <AdminHeading testId="super-admin-title" title="Master" text="Exam › mock type › mock. Students website aur app par jo bhi dekhte hain, sab yahin se shuru hota hai." action={<Button onClick={()=>setOpen(true)} data-testid="master-new-exam"><Plus size={16}/>New exam</Button>}/>
   <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>
   {!data&&!error?<div className="master-exam-grid">{[1,2,3].map(n=><Skeleton key={n} className="h-44"/>)}</div>:data&&<div className="master-exam-grid" data-testid="master-exam-grid">{data.items.map(e=><ExamCard key={e.slug} e={e}/>)}</div>}
   <p className="admin-note" data-testid="master-kinds-note">Every exam holds its own mock types: {Object.values(KIND_LABEL).join(', ')}.</p>

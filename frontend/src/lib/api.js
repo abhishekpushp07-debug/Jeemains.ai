@@ -52,7 +52,7 @@ export async function api(path, options = {}, retry = true) {
     } catch {}
     if (res.status === 413 && options.body instanceof FormData)
       throw new Error(
-        "The upload exceeds the allowed size. Keep PDFs under 50 MB; split larger files and retry.",
+        "Yeh file bahut badi hai. PDF 100 MB tak rakhiye; badi file ko hisson me baant kar dobara bhejiye.",
       );
     const d = data?.error?.message || data?.detail;
     const err = new Error(
