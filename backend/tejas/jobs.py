@@ -16,6 +16,7 @@ from tejas_storage import get_object, put_object
 
 router = APIRouter(prefix='/api', tags=['Processing'])
 _active = {kind: set() for kind in LANE_LIMITS}
+BUSY_WAITS = 90  # 90 waits of 20 s: a PDF's lock (15 min) has surely expired by then
 
 
 def public_job(j):
@@ -168,11 +169,12 @@ async def run_job(id, drain=True):
             if completed.modified_count:
                 await audit(j['user_id'], kind.title() + ' completed', j['set_id'], message)
         except Exception as exc:
-            if kind == 'book_step' and isinstance(exc, HTTPException) and exc.status_code == 409:
-                # Another worker is on this PDF's batch: the job waits its turn and keeps its tries (not a failure).
+            if kind == 'book_step' and isinstance(exc, HTTPException) and exc.status_code == 409 and j.get('busy_waits', 0) < BUSY_WAITS:
+                # Another worker is on this PDF's batch: the job waits its turn and keeps its tries (not a failure), at most ~30 minutes.
                 logging.getLogger(__name__).info('Book busy with another batch; job %s waits', id)
                 await jobs.update_one({'id': id, 'lease': lease, 'status': 'running'}, [{'$set': {
                     'status': 'queued', 'progress': 0, 'error': '', 'next_run_at': {'$add': [EPOCH_NOW, 20]},
+                    'busy_waits': {'$add': [{'$ifNull': ['$busy_waits', 0]}, 1]},
                     'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}])
                 return True
             logging.getLogger(__name__).exception('Background job failed (kind=%s)', kind)

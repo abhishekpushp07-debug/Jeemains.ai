@@ -17,7 +17,7 @@ ENV_PATH = Path(__file__).parent.parent / 'backend' / '.env'
 env_values = dotenv_values(ENV_PATH)
 OWNER_EMAIL = env_values.get('ADMIN_EMAIL')
 OWNER_PASSWORD = env_values.get('ADMIN_PASSWORD')
-BASE_URL = 'https://pdf-engine-v2--49kthst3.preview.emergentagent.com/api'
+BASE_URL = 'https://tejas-route2--1yaz6hh9.preview.emergentagent.com/api'
 
 class QABackendTester:
     def __init__(self):

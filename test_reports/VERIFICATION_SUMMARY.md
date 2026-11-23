@@ -1,7 +1,7 @@
 # Post-Cleanup Verification Summary
 
 ## Test Date: 2026-10-12
-## Base URL: https://pdf-engine-v2--49kthst3.preview.emergentagent.com
+## Base URL: https://tejas-route2--1yaz6hh9.preview.emergentagent.com
 
 ---
 
@@ -153,7 +153,7 @@ async def qa_set_and_user():
 - Backend: FastAPI on port 8001
 - Frontend: React on port 3000
 - Database: MongoDB on localhost:27017
-- Public URL: https://pdf-engine-v2--49kthst3.preview.emergentagent.com
+- Public URL: https://tejas-route2--1yaz6hh9.preview.emergentagent.com
 
 ---
 

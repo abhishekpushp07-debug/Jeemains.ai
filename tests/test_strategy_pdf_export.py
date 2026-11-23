@@ -31,7 +31,7 @@ except ImportError as e:
 
 ROOT = Path(__file__).resolve().parents[1]
 PDF_PATH = ROOT / 'frontend/public/downloads/Tejas_10_Packet_Strategy_v1.0.pdf'
-PREVIEW_URL = 'https://pdf-engine-v2--49kthst3.preview.emergentagent.com/downloads/Tejas_10_Packet_Strategy_v1.0.pdf'
+PREVIEW_URL = 'https://tejas-route2--1yaz6hh9.preview.emergentagent.com/downloads/Tejas_10_Packet_Strategy_v1.0.pdf'
 MANIFEST_PATH = ROOT / 'docs/strategy/PDF_EXPORT_MANIFEST.json'
 
 # Expected values from manifest

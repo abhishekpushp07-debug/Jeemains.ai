@@ -152,8 +152,8 @@ async def uploads_tests():
     r = await up(); ups = {u['id']: u for u in env(r).get('uploads', [])}
     for bid in ('bk184-arch', 'bk184-viaset'):
         u = ups.get(bid, {})
-        check(f'{bid} listed as done with Library message', u.get('state') == 'done' and u.get('message', '').startswith('Back from the Library.') and 'listed in this type' in u.get('message', ''), u or list(ups))
-    check('bk184-arch message counts 1 mock (singular)', ups.get('bk184-arch', {}).get('message') == 'Back from the Library. 1 mock read from it, listed in this type.', ups.get('bk184-arch', {}).get('message'))
+        check(f'{bid} listed as done with Library message', u.get('state') == 'done' and u.get('message', '').startswith('Library se wapas aayi.') and 'isi type mein dikh' in u.get('message', ''), u or list(ups))
+    check('bk184-arch message counts 1 mock (singular)', ups.get('bk184-arch', {}).get('message') == 'Library se wapas aayi. Isse 1 mock padha gaya, isi type mein dikh raha hai.', ups.get('bk184-arch', {}).get('message'))
     check('never-archived ready PDF still hidden', 'bk184-never' not in ups, list(ups))
 
 

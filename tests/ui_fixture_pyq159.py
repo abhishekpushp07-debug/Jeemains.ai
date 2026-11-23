@@ -1,7 +1,7 @@
 # Browser-only read-only fixtures for JEE PYQ catalogue UI QA (iteration 159). Paste into browser_automation.
 # Uses the actual exported 30-paper metadata (public evidence) + minutes 180 / maximum 300. Blocks all writes.
 import json
-BASE = 'https://pdf-engine-v2--49kthst3.preview.emergentagent.com'
+BASE = 'https://tejas-route2--1yaz6hh9.preview.emergentagent.com'
 EVID = BASE + '/downloads/app-pin-integration/evidence/canonical-pyq.json'
 writes, pyq_calls = [], []
 MODE = {'v': 'normal'}  # normal | empty | error | slow

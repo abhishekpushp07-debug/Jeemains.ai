@@ -3,7 +3,7 @@
 Status: PDF export delivered; no implementation packet completed.
 
 - File: `/app/frontend/public/downloads/Tejas_10_Packet_Strategy_v1.0.pdf`
-- Download: https://pdf-engine-v2--49kthst3.preview.emergentagent.com/downloads/Tejas_10_Packet_Strategy_v1.0.pdf
+- Download: https://tejas-route2--1yaz6hh9.preview.emergentagent.com/downloads/Tejas_10_Packet_Strategy_v1.0.pdf
 - Pages: 60. Bytes: 296394.
 - SHA-256: `1868e35fe881051c9436ce530b2a236c253a501bb1f9af3bcc7aaf08dc6fd26f`
 - Contents: complete three strategy documents, context restore, audit, errata, all 62 audit requirement records, all 60 analysis status records, source identities/hashes, and honest implementation status.

@@ -25,8 +25,9 @@ export const SourcePicker = ({ role, title, format, file, onChange, disabled }) 
   const [error, setError] = useState('');
   function choose(next) {
     setError('');
-    if (next && (!next.name.toLowerCase().endsWith('.' + format) || next.size > (format === 'pdf' ? 50 : 5) * 1024 * 1024)) {
-      setError(`Choose a .${format} file under ${format === 'pdf' ? 50 : 5} MB.`); return;
+    const limit = format === 'pdf' ? 100 : 5;
+    if (next && (!next.name.toLowerCase().endsWith('.' + format) || next.size > limit * 1024 * 1024)) {
+      setError(`.${format} file chuniye, ${limit} MB tak ki. Isse badi file server nahi lega.`); return;
     }
     onChange(next);
   }

@@ -73,7 +73,7 @@ async def main():
     r = await own.get(f'/api/catalog/exams/{slug}'); check('hidden exam detail owner 200', r.status_code == 200, r.status_code)
     # ---- built-in sections
     r = await stu.get('/api/catalog/exams/jee-main'); secs = [s['slug'] for s in r.json()['sections']]
-    check('jee-main student sections pyq,chapters (no live mocks)', secs == ['pyq', 'chapters'], secs)
+    check('jee-main student sections pyq,chapters + its All India series (no live mocks)', secs == ['pyq', 'chapters', 'aits'], secs)
     r = await stu.get('/api/catalog/exams/bitsat'); secs = [s['slug'] for s in r.json()['sections']]
     check('bitsat sections mocks only (no chapters live)', secs == ['mocks'], r.json()['sections'])
     r = await stu.get('/api/catalog/exams/comedk'); check('comedk no sections', r.status_code == 200 and r.json()['sections'] == [], r.text[:200])

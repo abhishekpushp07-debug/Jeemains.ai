@@ -78,7 +78,7 @@ async def setup_pending_grading_simple():
     print(f"\n=== Setup complete ===")
     print(f"Attempt ID: {attempt_id}")
     print(f"Job ID: {job_id}")
-    print(f"Results URL: https://pdf-engine-v2--49kthst3.preview.emergentagent.com/results/{attempt_id}")
+    print(f"Results URL: https://tejas-route2--1yaz6hh9.preview.emergentagent.com/results/{attempt_id}")
     print(f"\nNext: Open browser to results page")
     print(f"Expected: GET /api/attempts/{attempt_id}/results returns 202")
     print(f"Expected: UI shows results-grading-pending page with receipt")

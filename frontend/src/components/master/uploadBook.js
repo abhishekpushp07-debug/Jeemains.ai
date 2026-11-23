@@ -29,31 +29,31 @@ export async function mergePdfs(files,name){
 }
 
 export async function sendBook({file,title,sectionId,replace,year,subject,onProgress,stopped}){
- if(file.size>LIMIT)throw new Error('Choose a PDF within 100 MB.');
- onProgress('Checking the file…',0);
+ if(file.size>LIMIT)throw new Error('PDF 100 MB tak ki chuniye. Isse badi file server nahi lega.');
+ onProgress('File check ho rahi hai…',0);
  const book=await post('/admin/books',{filename:file.name,title,sha256:await sha(await file.arrayBuffer()),size:file.size,rights_confirmed:true,section_id:sectionId,
   ...(year?{year}:{}),...(subject?{subject}:{}),...(replace==='all'?{replace_all:true}:replace?{replace_ids:replace.split(',')}:{})});
- if(book.state!=='uploading'){onProgress((book.message||'').startsWith('Same PDF chosen again')?'Same PDF again: carrying on from the saved pages.':'This PDF is already here. Opening its progress.',1);return book.id;}
+ if(book.state!=='uploading'){onProgress((book.message||'').startsWith('Same PDF chosen again')?'Wahi PDF dobara: save hue pages se aage chal rahe hain.':'Yeh PDF pehle se yahan hai. Uski progress khul rahi hai.',1);return book.id;}
  const total=Math.ceil(file.size/book.chunk_size),have=new Set(book.received_parts),size=i=>Math.min(book.chunk_size,file.size-i*book.chunk_size);
  const todo=[];let sent=0,done=have.size,failure=null;
  for(let i=0;i<total;i++){if(have.has(i))sent+=size(i);else todo.push(i);}
- const paused=()=>new Error('Paused. Choose the same PDF again to continue from where it stopped.');
+ const paused=()=>new Error('Ruka. Jahan ruka tha wahan se chalane ke liye wahi PDF dobara chuniye.');
  // Up to LANES parts travel at once (the server keeps each part on its own), so a long distance to the server costs far less time.
  async function sendOne(i){
   const chunk=file.slice(i*book.chunk_size,(i+1)*book.chunk_size),hash=await sha(await chunk.arrayBuffer());
   let r=null;
   for(let tries=1;tries<=TRIES;tries++){
-   while(navigator.onLine===false&&!stopped?.current){onProgress(`Internet is off. Waiting for it to come back (${done} of ${total} parts sent)…`,sent/file.size);await wait(1500);}
+   while(navigator.onLine===false&&!stopped?.current){onProgress(`Internet band hai. Wapas aane ka intezaar (${total} mein se ${done} hisse gaye)…`,sent/file.size);await wait(1500);}
    if(stopped?.current||failure)throw failure||paused();
    r=await putPart(`/admin/books/${book.id}/parts/${i}?sha256=${hash}`,chunk);
    if(r&&(r.ok||(r.status<500&&r.status!==408&&r.status!==429)))break;
    if(tries===TRIES)break;
    const delay=Math.min(30000,2000*2**(tries-1));
-   onProgress(`Connection dropped on part ${i+1} of ${total}. Trying again in ${Math.round(delay/1000)} s (${tries} of ${TRIES-1})…`,sent/file.size);
+   onProgress(`${total} mein se hissa ${i+1} par connection toota. ${Math.round(delay/1000)} s mein phir koshish (${TRIES-1} mein se ${tries})…`,sent/file.size);
    await wait(delay);
   }
-  if(!r||!r.ok){const d=r?await r.json().catch(()=>({})):{};throw new Error(d.error?.message||d.detail||`Sending stopped at part ${i+1} of ${total}. Press Upload again with the same PDF: the ${done} parts already sent are kept.`);}
-  sent+=size(i);done+=1;onProgress(`Sending… ${done} of ${total} parts`,sent/file.size);
+  if(!r||!r.ok){const d=r?await r.json().catch(()=>({})):{};throw new Error(d.error?.message||d.detail||`${total} mein se hisse ${i+1} par bhejna ruk gaya. Wahi PDF ke saath Upload phir dabaiye: jo ${done} hisse ja chuke hain woh rakhe gaye hain.`);}
+  sent+=size(i);done+=1;onProgress(`Bhej rahe hain… ${total} mein se ${done} hisse`,sent/file.size);
  }
  async function lane(){
   while(todo.length&&!failure){
@@ -62,10 +62,10 @@ export async function sendBook({file,title,sectionId,replace,year,subject,onProg
    try{await sendOne(i);}catch(e){failure=failure||e;}
   }
  }
- onProgress(`Sending… ${done} of ${total} parts`,sent/file.size);
+ onProgress(`Bhej rahe hain… ${total} mein se ${done} hisse`,sent/file.size);
  await Promise.all(Array.from({length:Math.min(LANES,todo.length)},lane));
  if(failure)throw failure;
- onProgress('Sent. Reading starts now.',1);
+ onProgress('Chali gayi. Ab padhai shuru.',1);
  await post(`/admin/books/${book.id}/complete`);
  return book.id;
 }

@@ -38,9 +38,9 @@ export default function AdminLibrary(){
  const {data,error,refresh}=useLibrary();
  const [exam,setExam]=useState('all'),[kind,setKind]=useState('all'),[q,setQ]=useState(''),[picked,setPicked]=useState(new Set()),[asking,setAsking]=useState(null),[removing,setRemoving]=useState(null),[busy,setBusy]=useState(false),[zipping,setZipping]=useState(false);
  const items=useMemo(()=>data?.items||[],[data]),uploads=useMemo(()=>data?.uploads||[],[data]);
- const exams=useMemo(()=>{const n={};items.forEach(t=>{n[t.exam_slug||'other']=(n[t.exam_slug||'other']||0)+1;});return [['all','All exams',items.length],...(data?.exams||[]).filter(e=>n[e.slug]).map(e=>[e.slug,e.name,n[e.slug]]),...(n.other?[['other','Other',n.other]]:[]),...(uploads.length?[['uploads','Uploads never Live',uploads.length]]:[])];},[items,uploads,data]);
+ const exams=useMemo(()=>{const n={};items.forEach(t=>{n[t.exam_slug||'other']=(n[t.exam_slug||'other']||0)+1;});return [['all','Saare exam',items.length],...(data?.exams||[]).filter(e=>n[e.slug]).map(e=>[e.slug,e.name,n[e.slug]]),...(n.other?[['other','Other',n.other]]:[]),...(uploads.length?[['uploads','Kabhi Live nahi hue',uploads.length]]:[])];},[items,uploads,data]);
  const inExam=useMemo(()=>items.filter(t=>exam==='all'||(t.exam_slug||'other')===exam),[items,exam]);
- const kinds=useMemo(()=>{const n={};inExam.forEach(t=>{n[t.section_kind]=(n[t.section_kind]||0)+1;});return [['all','All types',inExam.length],...ORDER.filter(k=>n[k]).map(k=>[k,KINDS[k],n[k]])];},[inExam]);
+ const kinds=useMemo(()=>{const n={};inExam.forEach(t=>{n[t.section_kind]=(n[t.section_kind]||0)+1;});return [['all','Saare type',inExam.length],...ORDER.filter(k=>n[k]).map(k=>[k,KINDS[k],n[k]])];},[inExam]);
  const shown=useMemo(()=>{const s=q.trim().toLowerCase();return inExam.filter(t=>(kind==='all'||t.section_kind===kind)&&(!s||`${t.title} ${t.subject||''} ${t.section_name}`.toLowerCase().includes(s)));},[inExam,kind,q]);
  const groups=useMemo(()=>groupsOf(shown),[shown]);
  useEffect(()=>{setKind('all');},[exam]);
@@ -51,24 +51,24 @@ export default function AdminLibrary(){
  const chosen=items.filter(t=>picked.has(t.id));
  return <div className="admin-page library-page" data-testid="admin-library-page">
   <AdminCrumbs items={[{label:'Master',to:'/super-admin'},{label:'Library'}]}/>
-  <AdminHeading testId="admin-library-title" title="Library" text="Your recycle bin for tests. Students cannot see anything here, their old scores are kept, and one click puts a test back where it was, or deletes it for good." action={<Button variant="outline" onClick={zipAll} disabled={zipping||!items.length} data-testid="library-zip-all"><Download size={17}/>{zipping?'Preparing ZIP…':'Download all as ZIP'}</Button>}/>
+  <AdminHeading testId="admin-library-title" title="Library" text="Tests ka recycle bin. Students ko yahan kuch nahi dikhta, unke purane score rehte hain, aur ek click se test wapas apni jagah jata hai, ya hamesha ke liye delete hota hai." action={<Button variant="outline" onClick={zipAll} disabled={zipping||!items.length} data-testid="library-zip-all"><Download size={17}/>{zipping?'ZIP ban raha hai…':'Sab ZIP mein download karo'}</Button>}/>
   <ErrorBox error={error} retry={refresh}/>
   {!data&&!error&&<Skeleton className="h-64"/>}
   {data&&<>
-   <div className="library-stats" data-testid="library-stats"><div><strong data-testid="library-stat-tests">{items.length}</strong><span>tests in the Library</span></div><div><strong data-testid="library-stat-attempts">{data.attempts_kept||0}</strong><span>student attempts kept</span></div><div><strong data-testid="library-stat-uploads">{uploads.length}</strong><span>uploads never Live</span></div></div>
+   <div className="library-stats" data-testid="library-stats"><div><strong data-testid="library-stat-tests">{items.length}</strong><span>test Library mein</span></div><div><strong data-testid="library-stat-attempts">{data.attempts_kept||0}</strong><span>student attempt rakhe gaye</span></div><div><strong data-testid="library-stat-uploads">{uploads.length}</strong><span>upload kabhi Live nahi hue</span></div></div>
    <LibraryGuide fresh={data.fresh_start}/>
-   {!items.length&&!uploads.length?<div className="admin-empty" data-testid="library-empty"><Archive size={22}/><p>The Library is empty. Tests you move here from Master, or replace with a new PDF, appear here.</p></div>:<>
+   {!items.length&&!uploads.length?<div className="admin-empty" data-testid="library-empty"><Archive size={22}/><p>Library khali hai. Master se bheje gaye, ya naye PDF se badle gaye tests yahan aate hain.</p></div>:<>
     <Segments items={exams} value={exam} onChange={setExam} testId="library-exam-tabs" label="Exam"/>
     {exam!=='uploads'&&<>
      {kinds.length>2&&<Segments items={kinds} value={kind} onChange={setKind} testId="library-type-filters" label="Mock type"/>}
-     <div className="library-search"><Search size={16} aria-hidden="true"/><Input value={q} onChange={e=>setQ(e.target.value)} placeholder="Find a test, chapter or subject" aria-label="Find a test" data-testid="library-search"/>{q&&<Button size="icon" variant="ghost" onClick={()=>setQ('')} aria-label="Clear search" data-testid="library-search-clear"><X size={15}/></Button>}</div>
-     {!groups.length?<p className="admin-empty" data-testid="library-no-match">Nothing matches. Try another word or choose All exams.</p>:
+     <div className="library-search"><Search size={16} aria-hidden="true"/><Input value={q} onChange={e=>setQ(e.target.value)} placeholder="Test, chapter ya subject dhoondhein" aria-label="Test dhoondhein" data-testid="library-search"/>{q&&<Button size="icon" variant="ghost" onClick={()=>setQ('')} aria-label="Search saaf karo" data-testid="library-search-clear"><X size={15}/></Button>}</div>
+     {!groups.length?<p className="admin-empty" data-testid="library-no-match">Kuch nahi mila. Doosra shabd likhiye ya Saare exam chuniye.</p>:
       groups.map(g=><LibraryGroup key={(g.sid||g.exam)+exam+kind} g={g} startOpen={groups.length<=2||!!q} picked={picked} onCheck={check} onRestore={setAsking} onDelete={setRemoving} busy={busy}/>)}
     </>}
     {(exam==='uploads'||(exam==='all'&&kind==='all'&&!q))&&uploads.length>0&&<LibraryUploads items={uploads} busy={busy} onRestore={restore} onDelete={setRemoving}/>}
    </>}
   </>}
-  {picked.size>0&&<div className="library-sticky-bar" data-testid="library-sticky-batch-bar"><span data-testid="library-selected-count">{picked.size} selected</span><div className="button-row"><Button variant="ghost" onClick={()=>setPicked(new Set())} data-testid="library-clear-selection">Clear</Button><Button variant="outline" className="library-delete" onClick={()=>setRemoving({tests:chosen,uploads:[]})} disabled={busy} data-testid="library-delete-selected"><Trash2 size={16}/>Delete selected</Button><Button onClick={()=>setAsking(chosen)} disabled={busy} data-testid="library-restore-selected"><RotateCcw size={16}/>Restore selected</Button></div></div>}
+  {picked.size>0&&<div className="library-sticky-bar" data-testid="library-sticky-batch-bar"><span data-testid="library-selected-count">{picked.size} chune</span><div className="button-row"><Button variant="ghost" onClick={()=>setPicked(new Set())} data-testid="library-clear-selection">Hatao</Button><Button variant="outline" className="library-delete" onClick={()=>setRemoving({tests:chosen,uploads:[]})} disabled={busy} data-testid="library-delete-selected"><Trash2 size={16}/>Chune hue delete karo</Button><Button onClick={()=>setAsking(chosen)} disabled={busy} data-testid="library-restore-selected"><RotateCcw size={16}/>Chune hue wapas lao</Button></div></div>}
   <RestoreDialog tests={asking} busy={busy} onClose={()=>setAsking(null)} onConfirm={()=>restore(asking.map(t=>t.id))}/>
   <DeleteDialog target={removing} busy={busy} onClose={()=>setRemoving(null)} onConfirm={remove}/>
  </div>;

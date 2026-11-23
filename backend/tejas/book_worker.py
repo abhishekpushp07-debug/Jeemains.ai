@@ -198,6 +198,7 @@ async def step(job):
             more=more or bool(await db.tejas_book_allowances.find_one({'book_id':id,'state':'queued'}))
         await save_book(book,token)
     except Exception as exc:
+        if isinstance(exc,HTTPException) and exc.status_code==409:raise  # another batch took this PDF: the job waits its turn, the book is not marked failed
         import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
         book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'
         try:await save_book(book,token)

@@ -139,9 +139,10 @@ async def type_mocks(sid: str, u=Depends(owner)):
             continue
         unread = unread and not done
         made = await db.tejas_book_mocks.count_documents({'book_id': b['_id'], 'archived': {'$ne': True}}) if done else 0
-        message = (f"{made} chapters read. Open Chapters to rename them or change where they start." if done and chapters else
-                   f"Back from the Library. {made} mock{'s' if made != 1 else ''} read from it, listed in this type." if done else
-                   'No questions could be read from this PDF. A scanned (photo) PDF cannot be read by itself: use Write instead.' if unread else b['payload'].get('message', ''))
+        one = made == 1
+        message = (f"{made} chapter padhe gaye. Naam ya shuru ka page badalne ke liye Chapters kholiye." if done and chapters else
+                   f"Library se wapas aayi. Isse {made} mock {'padha gaya' if one else 'padhe gaye'}, isi type mein dikh {'raha hai' if one else 'rahe hain'}." if done else
+                   'Is PDF se ek bhi sawaal padha nahi ja saka. Scan (photo) wali PDF apne aap nahi padhi jaati: uske liye Write use kijiye.' if unread else b['payload'].get('message', ''))
         paused = bool(b.get('paused')) and b['state'] != 'failed'
         uploads.append({'id': b['_id'], 'kind': 'book', 'title': b['payload']['title'], 'state': 'done' if done else 'failed' if unread else 'paused' if paused else b['state'],
                         'revision': b.get('revision', 0), 'can_retry': b['state'] == 'failed' and not unread,
@@ -307,13 +308,16 @@ async def mock_status(ids, body, bg, u):
     from .book_imports import request_publication
     rows = await db.tejas_book_mocks.find({'_id': {'$in': ids}, 'archived': {'$ne': True}}, {'_id': 1, 'book_id': 1, 'label': 1, 'state': 1, 'set_id': 1, 'series_date': 1}).to_list(len(ids))
     books = {b['_id']: b for b in await db.tejas_books.find({'_id': {'$in': list({r['book_id'] for r in rows})}, 'removed': False, 'archived': {'$ne': True}},
-                                                           {'payload.destination': 1}).to_list(500)}
+                                                           {'payload.destination': 1, 'payload.rereading': 1, 'state': 1}).to_list(500)}
     done, skipped, wanted = 0, [], {}
     for r in rows:
         why = None
-        dest = (books.get(r['book_id']) or {}).get('payload', {}).get('destination') or {}
+        book = books.get(r['book_id']) or {}
+        dest = book.get('payload', {}).get('destination') or {}
         if r['book_id'] not in books:
             why = 'Its upload is in the Library.'
+        elif body.to in ('live', 'scheduled') and book['payload'].get('rereading') and book.get('state') in ('received', 'reading', 'matching'):
+            why = 'PDF dobara padhi ja rahi hai. Padhai poori hone ke baad Live kijiye.'
         elif dest.get('series') and (body.to != 'library' or r.get('series_date')):
             why = 'All India papers go live on their day. Give it a day instead.' if body.to != 'library' else 'Free its day first.'
         elif r.get('set_id'):

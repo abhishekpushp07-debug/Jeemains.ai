@@ -15,7 +15,10 @@ import { toast } from "sonner";
 import { postWhenFree } from "../lib/api";
 import { useAuth } from "../lib/auth";
 import { Field, ErrorBox } from "../components/Shared";
+import { useNoIndex, usePageTitle } from "../lib/pageMeta";
 export default function Auth({ staff = false }) {
+  useNoIndex();
+  usePageTitle(staff ? "Sign in" : null);
   const { setUser } = useAuth();
   const location = useLocation();
   const signup = !staff && location.pathname === '/signup';

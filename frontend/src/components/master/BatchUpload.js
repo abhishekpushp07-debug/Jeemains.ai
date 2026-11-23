@@ -12,14 +12,14 @@ export async function runBatch(rows,setRows,{sectionId,subject,pyq,stopped}){
  for(const r of rows){
   if(r.state==='done'){ok+=1;continue;}
   if(stopped.current)break;
-  update(r.key,{state:'sending',msg:'Starting…',progress:0});
+  update(r.key,{state:'sending',msg:'Shuru ho raha hai…',progress:0});
   try{
    await sendBook({file:r.file,title:r.file.name.replace(/\.pdf$/i,'').slice(0,160),sectionId,replace:'',year:pyq?Number(r.year):null,subject,stopped,
     onProgress:(msg,progress)=>update(r.key,{msg,progress})});
-   update(r.key,{state:'done',msg:'Sent. Reading in the background.',progress:1});ok+=1;
+   update(r.key,{state:'done',msg:'Chali gayi. Background mein padhi ja rahi hai.',progress:1});ok+=1;
   }catch(e){
    // A pause is not a failure: the parts already sent are kept and the next Upload carries on from them.
-   if(stopped.current){update(r.key,{state:'waiting',msg:'Paused. Press Upload to carry on from the parts already sent.'});paused=true;break;}
+   if(stopped.current){update(r.key,{state:'waiting',msg:'Ruka. Jo hisse ja chuke hain unke aage se chalane ke liye Upload dabaiye.'});paused=true;break;}
    update(r.key,{state:'failed',msg:e.message});failed+=1;}
  }
  return {ok,failed,paused};
@@ -29,8 +29,8 @@ const ICON={waiting:Clock3,sending:Loader2,done:CheckCircle2,failed:XCircle};
 export function BatchRows({rows,setRows,pyq,busy}){
  return <ol className="batch-list" data-testid="upload-batch-list">{rows.map((r,i)=>{const I=ICON[r.state];return <li key={r.key} className={'batch-row is-'+r.state} data-testid={'upload-batch-row-'+i}>
   <I size={16} className={r.state==='sending'?'spin':''} aria-hidden="true"/>
-  <div className="batch-main"><strong>{r.file.name}</strong><small data-testid={'upload-batch-status-'+i}>{r.msg||`${(r.file.size/1024/1024).toFixed(1)} MB · waiting`}</small>{r.state==='sending'&&<progress value={r.progress} max={1}/>}</div>
-  {pyq&&<input className="batch-year" inputMode="numeric" maxLength={4} value={r.year} placeholder="Year" disabled={busy||r.state==='done'} aria-label={'Year of '+r.file.name}
+  <div className="batch-main"><strong>{r.file.name}</strong><small data-testid={'upload-batch-status-'+i}>{r.msg||`${(r.file.size/1024/1024).toFixed(1)} MB · intezaar`}</small>{r.state==='sending'&&<progress value={r.progress} max={1}/>}</div>
+  {pyq&&<input className="batch-year" inputMode="numeric" maxLength={4} value={r.year} placeholder="Saal" disabled={busy||r.state==='done'} aria-label={r.file.name+' ka saal'}
    onChange={e=>{const year=e.target.value.replace(/\D/g,'');setRows(list=>list.map(x=>x.key===r.key?{...x,year}:x));}} data-testid={'upload-batch-year-'+i}/>}
  </li>;})}</ol>;
 }

@@ -2,6 +2,7 @@ import React,{useCallback,useEffect,useState} from 'react';
 import {HardDrive,RefreshCw,Loader2,AlertTriangle} from 'lucide-react';
 import {Popover,PopoverTrigger,PopoverContent} from '../ui/popover';
 import {api} from '../../lib/api';
+import {useMachineStatus,MachinePanel,lowDisk} from './MachinePanel';
 
 const LOOK={supabase:['ok','Storage: Supabase','Nayi files Supabase mein ja rahi hain.'],slow:['warn','Storage: Supabase (slow)','Supabase dheere jawab de raha hai; files phir bhi Supabase mein ja rahi hain.'],
  emergent:['warn','Storage: Emergent backup','Supabase abhi file nahi le raha. Nayi files Emergent storage mein save ho rahi hain.'],down:['bad','Storage band','Dono storage abhi jawab nahi de rahe. Upload ke baad book save nahi ho payegi.']};
@@ -25,9 +26,12 @@ function Row({name,s,extra,testId}){
 
 export function StorageBadge(){
  const {data,busy,load}=useStorageHealth();
+ const machine=useMachineStatus();
+ const alert=!!machine.data&&(machine.data.attention||lowDisk(machine.data));
  const [tone,label,text]=LOOK[data?.mode]||['wait','Storage…','Check ho raha hai.'];
- return <Popover><PopoverTrigger asChild><button type="button" className={'storage-badge '+tone} data-testid="storage-badge" aria-label={label}>
+ return <Popover><PopoverTrigger asChild><button type="button" className={'storage-badge '+tone} data-testid="storage-badge" aria-label={label+(alert?' · Machine par dhyan dijiye':'')}>
   <span className={'storage-dot '+tone}/><HardDrive size={14} aria-hidden="true"/><span data-testid="storage-badge-label">{label}</span>{data?.mode==='supabase'&&<small>{ms(data.supabase)}</small>}
+  {alert&&<i className="machine-alert-dot" data-testid="machine-attention-dot" aria-hidden="true"/>}
  </button></PopoverTrigger>
  <PopoverContent align="end" collisionPadding={12} className="storage-pop" data-testid="storage-details">
   <p className="storage-lead" data-testid="storage-mode-text">{leadText(data)||text}</p>
@@ -35,7 +39,8 @@ export function StorageBadge(){
   <Row name="Emergent (backup)" s={data?.emergent} testId="storage-row-emergent"/>
   {data?.writes&&<p className="storage-meta" data-testid="storage-writes">Server shuru hone ke baad save hui files: Supabase {data.writes.supabase} · Emergent {data.writes.emergent}</p>}
   {data?.last_failover&&<p className="storage-meta" data-testid="storage-last-failover">Aakhri baar Emergent ne file li: {ago(data.last_failover.at)}. Wajah: {data.last_failover.reason}</p>}
-  <div className="storage-foot"><small>{data?.checked_at?'Jaancha: '+ago(data.checked_at):''}</small><button type="button" onClick={()=>load(true)} disabled={busy} data-testid="storage-check-now">{busy?<Loader2 size={13} className="spin"/>:<RefreshCw size={13}/>}Abhi check karo</button></div>
+  <div className="storage-foot"><small>{data?.checked_at?'Jaancha: '+ago(data.checked_at):''}</small><button type="button" onClick={()=>{load(true);machine.load();}} disabled={busy} data-testid="storage-check-now">{busy?<Loader2 size={13} className="spin"/>:<RefreshCw size={13}/>}Abhi check karo</button></div>
+  <MachinePanel data={machine.data} onReload={machine.load}/>
  </PopoverContent></Popover>;
 }
 

@@ -75,8 +75,8 @@ async def mkstaff(role, tag):
 
 
 def client():
-    return httpx.AsyncClient(transport=httpx.ASGITransport(app=H.app), base_url='https://pdf-engine-v2--49kthst3.preview.emergentagent.com', timeout=120,
-                             headers={'Origin': 'https://pdf-engine-v2--49kthst3.preview.emergentagent.com'})
+    return httpx.AsyncClient(transport=httpx.ASGITransport(app=H.app), base_url='https://tejas-route2--1yaz6hh9.preview.emergentagent.com', timeout=120,
+                             headers={'Origin': 'https://tejas-route2--1yaz6hh9.preview.emergentagent.com'})
 
 
 async def upload(c, raw, title, edition='', parts=None, **extra):

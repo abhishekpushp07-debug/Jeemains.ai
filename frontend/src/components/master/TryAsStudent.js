@@ -3,7 +3,6 @@ import {useLocation,useNavigate} from 'react-router-dom';
 import {Eye,Loader2} from 'lucide-react';
 import {api,post} from '../../lib/api';
 import {Button} from '../ui/button';
-import {plural} from './MasterShared';
 import {toast} from 'sonner';
 
 const wait=ms=>new Promise(done=>setTimeout(done,ms));
@@ -23,10 +22,10 @@ export function TryAsStudent({m,size='sm'}){
    let r=await post('/admin/master/preview/'+m.id);
    for(let i=0;r.state==='building'&&i<200;i++){await wait(i<10?300:1000);r=await api('/admin/master/preview/'+m.id);}
    if(r.state!=='ready')throw new Error(r.message||'Abhi taiyaar ho raha hai. Ek minute baad phir dabaiye.');
-   if(r.left_out?.length)toast.message(`${plural(r.left_out.length,'question')} left out until fixed`,{description:'Questions marked to fix are not in this try. Everything else is exactly what students get.'});
+   if(r.left_out?.length)toast.message(`${r.left_out.length} sawaal fix hone tak bahar rakhe gaye`,{description:'Fix ke liye marked sawaal is try mein nahi hain. Baaki sab bilkul waisa hai jaisa students ko milega.'});
    show(tab,r.set_id);
    if(tab&&!tab.closed)toast.success('Student paper naye tab me khul gaya',{description:'Yeh Fix page yahin khula hai.'});
   }catch(e){if(tab&&!tab.closed)tab.close();toast.error(e.message);}finally{setBusy(false);}
  }
- return <Button size={size} variant="outline" disabled={busy} onClick={open} data-testid={'mock-try-'+m.id}>{busy?<Loader2 size={15} className="spin"/>:<Eye size={15}/>}{busy?'Taiyaar ho raha hai…':'Try as student'}</Button>;
+ return <Button size={size} variant="outline" disabled={busy} onClick={open} data-testid={'mock-try-'+m.id}>{busy?<Loader2 size={15} className="spin"/>:<Eye size={15}/>}{busy?'Taiyaar ho raha hai…':'Student ki tarah try karo'}</Button>;
 }

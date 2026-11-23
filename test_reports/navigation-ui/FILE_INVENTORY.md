@@ -245,7 +245,7 @@ Directory structure:
 
 **Screenshot Format:** JPEG (quality=20)  
 **Test Phone:** +12025550341  
-**Base URL:** https://pdf-engine-v2--49kthst3.preview.emergentagent.com
+**Base URL:** https://tejas-route2--1yaz6hh9.preview.emergentagent.com
 
 ---
 

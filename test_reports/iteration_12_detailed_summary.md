@@ -14,7 +14,7 @@ Comprehensive end-to-end testing of JEE/BITSAT practice platform focusing on:
 - Score accuracy
 
 ## Test Environment
-- **URL**: https://pdf-engine-v2--49kthst3.preview.emergentagent.com
+- **URL**: https://tejas-route2--1yaz6hh9.preview.emergentagent.com
 - **Phone**: +12025550184
 - **Fixture**: qa75-ed384de5-896c-4d2a-abd6-ffb9cbde94d0
 - **Expected**: 75 questions, 300 maximum score

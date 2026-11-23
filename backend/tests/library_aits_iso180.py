@@ -287,7 +287,7 @@ def aits_mock(n):
 
 async def aits_tests(own, stu):
     r = await own.get('/api/studio/all-india-jee'); d = env(r)
-    check('studio AITS 200 with 62 slots + papers/books/book_mocks', r.status_code == 200 and len(d.get('slots', [])) == 62 and {'papers', 'books', 'book_mocks'} <= set(d), (r.status_code, sorted(d)))
+    check('studio AITS 200 with 50 slots + papers/books/book_mocks', r.status_code == 200 and len(d.get('slots', [])) == 50 and {'papers', 'books', 'book_mocks'} <= set(d), (r.status_code, sorted(d)))
     # small non-conforming book -> rule problem
     bad = await upload(own, build_pdf([{'n': 1, 'qs': q3('AB1'), 'keys': K3}]), 'TEST_QA180 AitsSmall', section_id='jee-main:aits')
     _, vb = await complete(own, bad['id'])
@@ -298,7 +298,7 @@ async def aits_tests(own, stu):
     check('AITS small book listed in books', any(b['id'] == bad['id'] for b in d.get('books', [])), d.get('books'))
     if row.get('state') == 'ready':
         check('non-conforming ready mock shows rule problem', bool(row.get('problem')), row)
-        r = await own.post('/api/studio/all-india-jee/assign', json={'set_id': bm['id'], 'date': '2026-12-05', 'expected_revision': 0, 'kind': 'book_mock'})
+        r = await own.post('/api/studio/all-india-jee/assign', json={'set_id': bm['id'], 'date': '2026-12-13', 'expected_revision': 0, 'kind': 'book_mock'})
         check('assign non-conforming mock refused 409 with reason', r.status_code == 409 and ('180' in r.text or '75' in r.text), (r.status_code, r.text[:200]))
     v = env(await own.get(f"/api/admin/books/{bad['id']}"))
     r = await own.post(f"/api/admin/books/{bad['id']}/control", json={'revision': v.get('revision', 0), 'action': 'publish_ready'})
@@ -337,36 +337,36 @@ async def aits_tests(own, stu):
     if not ready:
         await H.TDB.tejas_book_mocks.update_many({'book_id': good['id']}, {'$set': {}}); return
     # existing paper on a day for replace tests
-    pid = await mkset('APAPER', exam='JEE Main', series_id=live_series.SERIES_ID, series_date='2026-12-03', test_kind='mock', series_import=True)
-    r = await own.post('/api/studio/all-india-jee/assign', json={'set_id': ready[0]['id'], 'date': '2026-12-03', 'expected_revision': 0, 'kind': 'book_mock'})
+    pid = await mkset('APAPER', exam='JEE Main', series_id=live_series.SERIES_ID, series_date='2026-12-11', test_kind='mock', series_import=True)
+    r = await own.post('/api/studio/all-india-jee/assign', json={'set_id': ready[0]['id'], 'date': '2026-12-11', 'expected_revision': 0, 'kind': 'book_mock'})
     check('assign to day with paper refused 409', r.status_code == 409, (r.status_code, r.text[:150]))
     r = await own.post('/api/studio/all-india-jee/assign', json={'set_id': ready[0]['id'], 'date': '2026-11-01', 'expected_revision': 0, 'kind': 'book_mock'})
     check('assign outside series range 422', r.status_code == 422, r.status_code)
-    r = await own.post('/api/studio/all-india-jee/assign', json={'set_id': ready[0]['id'], 'date': '2026-12-03', 'expected_revision': 0, 'kind': 'book_mock', 'replace': True}); await drain()
+    r = await own.post('/api/studio/all-india-jee/assign', json={'set_id': ready[0]['id'], 'date': '2026-12-11', 'expected_revision': 0, 'kind': 'book_mock', 'replace': True}); await drain()
     check('assign with replace 200', r.status_code == 200, r.text[:200])
     p = await SETS.find_one({'id': pid}); check('replaced old paper unassigned not deleted', p and not p.get('series_date'), p and p.get('series_date'))
     m = await BM.find_one({'_id': ready[0]['id']}); s = await SETS.find_one({'id': m.get('set_id')}) if m.get('set_id') else None
     print('assigned mock', m.get('state'), m.get('series_date'), m.get('set_id'))
-    check('worker built series set for day with start_at = day 00:01 IST', s and s.get('series_date') == '2026-12-03' and s.get('start_at') == live_series.window('2026-12-03')['opens_at'], s and (s.get('series_date'), s.get('start_at')))
+    check('worker built series set for day with start_at = day 00:01 IST', s and s.get('series_date') == '2026-12-11' and s.get('start_at') == live_series.window('2026-12-11')['opens_at'], s and (s.get('series_date'), s.get('start_at')))
     if s:
-        sd = env(await stu.get('/api/series/all-india-jee')); sl = next(x for x in sd['slots'] if x['date'] == '2026-12-03')
+        sd = env(await stu.get('/api/series/all-india-jee')); sl = next(x for x in sd['slots'] if x['date'] == '2026-12-11')
         check('student cannot see/open the paper before its day', sl['set_id'] is None and not sl['can_start'], sl)
         r = await start(stu, s['id']); check('student start before day refused', r.status_code in (403, 404, 409), r.status_code)
         ids, _ = await nav_ids(stu, 'jee-main', 'mocks'); check('series paper not in jee mocks list', s['id'] not in ids)
     # fill
-    r = await own.post('/api/studio/all-india-jee/fill', json={'book_id': good['id'], 'start_date': '2026-12-01', 'replace': False}); await drain()
+    r = await own.post('/api/studio/all-india-jee/fill', json={'book_id': good['id'], 'start_date': '2026-12-09', 'replace': False}); await drain()
     f = env(r); print('fill', r.status_code, f)
-    check('fill assigns 2 remaining in order to 12-01, 12-02', r.status_code == 200 and [x['date'] for x in f.get('assigned', [])] == ['2026-12-01', '2026-12-02'], f)
-    r = await own.post('/api/studio/all-india-jee/fill', json={'book_id': good['id'], 'start_date': '2026-12-01', 'replace': False})
+    check('fill assigns 2 remaining in order to 12-09, 12-10', r.status_code == 200 and [x['date'] for x in f.get('assigned', [])] == ['2026-12-09', '2026-12-10'], f)
+    r = await own.post('/api/studio/all-india-jee/fill', json={'book_id': good['id'], 'start_date': '2026-12-09', 'replace': False})
     check('second fill 409 every mock has a day', r.status_code == 409, (r.status_code, r.text[:150]))
-    r = await own.post('/api/studio/all-india-jee/fill', json={'book_id': 'nope', 'start_date': '2026-12-01'}); check('fill non-AITS book 409', r.status_code == 409, r.status_code)
+    r = await own.post('/api/studio/all-india-jee/fill', json={'book_id': 'nope', 'start_date': '2026-12-09'}); check('fill non-AITS book 409', r.status_code == 409, r.status_code)
     # fill skipping taken day
     o = await mkset('ATAKEN', exam='JEE Main', series_id=live_series.SERIES_ID, series_date='2026-12-10', test_kind='mock', series_import=True)
     # opened day guard (patch clock)
     orig = live_series.now
-    live_series.now = lambda: live_series.window('2026-12-01')['opens_at'] + 60
+    live_series.now = lambda: live_series.window('2026-12-09')['opens_at'] + 60
     r = await own.delete(f"/api/studio/all-india-jee/{(await BM.find_one({'_id': ready[0]['id']}))['set_id'] or 'x'}")
-    r2 = await own.post('/api/studio/all-india-jee/assign', json={'set_id': o, 'date': '2026-12-01', 'expected_revision': 1, 'kind': 'paper', 'replace': True})
+    r2 = await own.post('/api/studio/all-india-jee/assign', json={'set_id': o, 'date': '2026-12-09', 'expected_revision': 1, 'kind': 'paper', 'replace': True})
     live_series.now = orig
     check('opened day: assign/replace refused 409', r2.status_code == 409, (r2.status_code, r2.text[:150]))
     # clear all
