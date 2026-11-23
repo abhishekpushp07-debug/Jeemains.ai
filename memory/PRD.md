@@ -941,3 +941,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - QA learner's finished papers on the website changed: 5 listed now; old attempt ids 4ff8dce7…, 0a7b71fc…, 6b260c71… are gone (404). Use the list from GET /my/tests?tab=completed.
 - Note for the website project: /app/memory/WEBSITE_PICTURES_NOTE.md (light WebP copies with format=webp, ETag/304 + asset_revision, signed storage links for finished attempts and solutions). App-side switch-on is NOT built; do it only after the website confirms, with fallbacks.
 
+
+## Analysis screen: teal section pills + Report download card (fork after iteration 132)
+- Frontend only, Analysis screen only (src/analysis/Workspace.tsx, new src/analysis/ReportCard.tsx, tokens custom_sectionPill*/custom_report* in src/theme.ts).
+- Bottom bar: the 8 section pills rest in light teal with black words; the open one stays red with white words. Personal / Comparative, result tabs and inner filter pills unchanged.
+- "Report download" is now a full-width deep-teal card (152 pt, about an inch), first thing in every section (above the section name), white words, new line "Poora analysis ek PDF mein", no animation. Same testID a2-download-report, same downloadReport(). Its note (a2-actions-note) shows right under the card; Share's note stays under the buttons.
+- Share, Galat + chhode dobara and red Solutions dekho keep their form below the section heading.
+- Checked on the preview (web, 390 and 320 px, QA learner's finished PYQ): all 8 sections, PDF download, no sideways scroll; tsc + eslint clean. Not checked on a real phone build. Needs a Publish to reach the live app.

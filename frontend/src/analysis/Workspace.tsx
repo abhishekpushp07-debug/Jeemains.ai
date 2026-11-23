@@ -21,6 +21,7 @@ import { QsByQs } from "./QsByQs";
 import { CompareBody, ComparePicker } from "./Compare";
 import { Leaderboard } from "./Leaderboard";
 import { downloadReport, shareScorecard } from "./report";
+import { ReportCard } from "./ReportCard";
 
 export const SECTIONS: [string, string, React.ComponentType<SectionProps>, string][] = [
   ["overview", "Overview", Overview, "Ek nazar mein poora paper: Score, Rank, marks ka hisaab aur agle mock ke 3 kaam."],
@@ -107,7 +108,7 @@ export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slo
   const narrow = useWindowDimensions().width < 360;
   const [drill, setDrill] = useState<{ title: string; ids: string[] } | null>(null);
   const [busy, setBusy] = useState<"" | "pdf" | "png">("");
-  const [note, setNote] = useState<{ ok: boolean; text: string } | null>(null);
+  const [note, setNote] = useState<{ ok: boolean; text: string; kind: "pdf" | "png" } | null>(null);
   // A sideways swipe moves to the next or the previous section; a tap that was really a swipe opens nothing.
   const touch = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   if (!an) return <View testID="analysis2" style={styles.root}>
@@ -137,23 +138,26 @@ export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slo
   };
   const run = async (kind: "pdf" | "png", work: (id: string, an: An) => Promise<string>) => {
     setBusy(kind); setNote(null);
-    try { const text = await work(id, an); if (text) setNote({ ok: true, text }); }
-    catch (e: any) { if (e?.name !== "AbortError") setNote({ ok: false, text: e?.message || "File abhi nahi ban paayi. Thodi der mein dobara try karo." }); }
+    try { const text = await work(id, an); if (text) setNote({ ok: true, text, kind }); }
+    catch (e: any) { if (e?.name !== "AbortError") setNote({ ok: false, text: e?.message || "File abhi nahi ban paayi. Thodi der mein dobara try karo.", kind }); }
     setBusy("");
   };
+  // What the last file did, shown right under the thing that was tapped (the report card or the buttons).
+  const told = (kind: "pdf" | "png") => note?.kind === kind ? <T testID="a2-actions-note" size={12.5} w="bold" color={note.ok ? colors.success : colors.error}>{note.text}</T> : null;
 
   return <View testID="analysis2" style={styles.root}>
+    <ReportCard busy={busy === "pdf"} disabled={!!busy} narrow={narrow} onPress={() => run("pdf", downloadReport)} />
+    {told("pdf")}
     <View testID="a2-top-bar" style={styles.top}>
       <T w="heavy" size={10.5} color={colors.brandText} style={styles.kicker}>ANALYSIS · {at + 1} / {SECTIONS.length}{nav.compare ? " · COMPARATIVE" : ""}</T>
       <T testID="a2-section-title" w="heavy" size={26} style={styles.title}>{label}</T>
       <T size={13} color={colors.muted}>{about}</T>
       <View style={styles.acts}>
-        <Act testID="a2-download-report" icon="tray-arrow-down" label="Report download" stacked={narrow} busy={busy === "pdf"} disabled={!!busy} onPress={() => run("pdf", downloadReport)} />
         <Act testID="a2-share-scorecard" icon="share-variant-outline" label="Share" stacked={narrow} busy={busy === "png"} disabled={!!busy} onPress={() => run("png", shareScorecard)} />
         {onRetry ? <Act testID="a2-retry-mistakes" icon="restart" label="Galat + chhode dobara" stacked={narrow} onPress={onRetry} /> : null}
         <Act testID="a2-view-solutions" icon="book-open-variant" label="Solutions dekho" stacked={narrow} primary onPress={onSolutions} />
       </View>
-      {note ? <T testID="a2-actions-note" size={12.5} w="bold" color={note.ok ? colors.success : colors.error}>{note.text}</T> : null}
+      {told("png")}
     </View>
     {offline ? <View testID="a2-offline" accessibilityRole="alert" style={styles.offline}>
       <Icon name="wifi-off" size={16} color={TONE.warn.ink} />
@@ -200,8 +204,8 @@ export function AnalysisBar({ nav, inset }: { nav: AnalysisNav; inset: number })
         return <View key={k} onLayout={e => { xs.current[k] = e.nativeEvent.layout.x; }}>
           <Press testID={"a2-nav-" + k} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={`${i + 1}. ${name}`} onPress={() => nav.open(k)} scaleTo={0.97}
             style={[styles.navItem, on && styles.navOn]}>
-            <T size={10.5} w="mono" color={on ? colors.custom_whiteA70 : colors.custom_eyebrow}>{i + 1}</T>
-            <T size={12.5} w={on ? "heavy" : "bold"} color={on ? colors.onBrandPrimary : colors.custom_softText}>{NAV_NAME[k] || name}</T>
+            <T size={10.5} w="mono" color={on ? colors.custom_whiteA70 : colors.custom_sectionPillInk}>{i + 1}</T>
+            <T size={12.5} w={on ? "heavy" : "bold"} color={on ? colors.onBrandPrimary : colors.custom_sectionPillInk}>{NAV_NAME[k] || name}</T>
           </Press>
         </View>;
       })}
@@ -229,6 +233,7 @@ const styles = StyleSheet.create({
   modeItem: { flex: 1, minHeight: 38, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6 },
   modeOn: { backgroundColor: colors.onSurface },
   nav: { gap: 6, paddingRight: space.md },
-  navItem: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6 },
+  // Resting pills are light teal with black words; the open section stays red with white words.
+  navItem: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: colors.custom_sectionPill },
   navOn: { backgroundColor: colors.brandPrimary },
 });

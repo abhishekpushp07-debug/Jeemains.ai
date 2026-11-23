@@ -146,6 +146,11 @@ const dark = {
   custom_selectedOption: "#1C0D11",
   // The student's choice during any test (never right/wrong): green circles, light green line, faint green wash.
   custom_pick: "#22C55E", custom_pickLine: "#4ADE80", custom_pickWash: "#0F2A1B", custom_pickInk: "#6EE7A0",
+  // Analysis: the 8 section pills rest in light teal with black words; the report card is a deep teal slope with white words
+  // (same in both palettes; white on the lightest point of the slope is 5.4 : 1).
+  custom_sectionPill: "#CDF5EE", custom_sectionPillInk: "#0F0F12",
+  custom_reportFrom: "#0F766E", custom_reportMid: "#0B5C56", custom_reportTo: "#084840",
+  custom_reportInk: "#FFFFFF", custom_reportInkSoft: "#E3F4F1", custom_reportGlass: "rgba(255,255,255,0.16)", custom_reportLine: "rgba(255,255,255,0.28)", custom_reportGlow: "rgba(255,255,255,0.06)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
   custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
