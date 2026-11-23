@@ -69,7 +69,7 @@ async def main():
     async with async_playwright() as pw:
         for size in ('desk', 'mob'):
             await walk(pw, size)
-    ok = sum(1 for r in RESULT if (r[0] if isinstance(r, tuple) else r))
+    ok = sum(1 for r in RESULT if (r[1] if isinstance(r, tuple) else r))
     print('TOTAL', len(RESULT), 'PASS', ok, 'FAIL', len(RESULT) - ok)
 
 asyncio.run(main())

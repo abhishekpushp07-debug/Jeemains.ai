@@ -312,3 +312,13 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Tests: storage_move225.py, storage_move_edge225.py, storage_move_fix226.py, ui_legacy_move226.py; storage_dual216 now 37/37. Testing agent iterations 218/219.
 
 - Tests: storage_dual216.py rewritten for the new policy (36/36); new storage_wait224.py (27/27), storage_wait_bridge224.py and ui_storage_wait224.py. Testing agent iterations 216 and 217 found no open functional issues after the fixes.
+
+## 2026-11-23 — All India Series hub in the app look + marks/analysis buttons (preview only, NOT deployed)
+- /series/all-india-jee now follows the app screenshots: header + brand row, pink journey card (ring, streak/best/skipped, cups), TODAY sky card, ALL DAYS strip, SCORE TREND, MY RESULTS, 50-DAY MAP. No tab bar on the hub; the old tabs open from the small "More" links (?tab=archive/analytics/solutions).
+- Pink card: blood-red "Today's marks" + "Analysis" buttons with a moving five-colour border and a diagonal gloss sweep (sweep sits behind the text).
+- Marks are shown inside the strip chips and map cells of attempted days. Tapping an attempted day opens its analysis in-page; Back -> list of all attempted days (newest first) -> Back -> hub. Tapping a past unattempted day opens that paper and starts it by itself.
+- Fixes: red chips with white text, sky card for a picked upcoming day, no duplicate card when today is picked, strip centres the picked day, missed map cells show their number, stronger picked-chip ring, guest pink card says "Day N is live today" once the series has started.
+- Score trend: the chart is drawn with React.createElement because the preview editor wraps JSX list children in <span>, which SVG does not draw (points, grid and labels were invisible in preview).
+- New files: components/series/{seriesData,SeriesHeader,TodayMarks,JourneyCard,DayCards,DayStrip,ScoreTrend,ResultsList,HubToday}.js, features/SeriesAnalysis.js, series-app.css. Tests: tests/series_hub_bridge227.py + tests/ui_series_hub227.py (24/24, desktop + mobile, throw-away DB). Testing agent iteration 220 (36/38; its 2 map-number notes handled: missed days now numbered, upcoming stays blank like the app).
+- Notes written: memory/APP_TEAM_NOTE_asset_revision_etag_retry.md (for the app team) and memory/CEO_DASHBOARD_HANDOFF_WEBSITE.md (brief for the separate CEO dashboard project; nothing built here).
+

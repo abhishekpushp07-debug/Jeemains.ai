@@ -17,7 +17,7 @@ export function HubToday({data,days,user,history,early}){
   return <div className="sh-sections">
     <section><SectionLabel title="Today" right={<span data-testid="series-timing-note">{today?`Live ${istTime(today.slot.opens_at)} – ${istTime(today.slot.closes_at)} IST`:'Live 12:01 AM – 11:59 PM IST'}</span>}/><TodayCard series={data} day={today}/></section>
     {early}
-    <section ref={strip} className="sh-scroll-target"><SectionLabel title="All days" right={<span>swipe ›</span>}/><DayStrip days={days} selected={selected} onSelect={setPicked}/>{sel&&<DayCard d={sel}/>}</section>
+    <section ref={strip} className="sh-scroll-target"><SectionLabel title="All days" right={<span>swipe ›</span>}/><DayStrip days={days} selected={selected} onSelect={setPicked}/>{sel&&!sel.isToday&&<DayCard d={sel}/>}</section>
     <section><SectionLabel title="Score trend" right={trend&&<span data-testid="series-trend-summary">Best {trend.best} · Avg {trend.avg}</span>}/><ScoreTrend days={days}/></section>
     {user&&<section><SectionLabel title="My results" right={<span className="sh-label-actions">{items.length>3&&<button type="button" data-testid="series-results-toggle" onClick={()=>setAll(v=>!v)}>{all?'show less':'view all'}</button>}<Link to={LIST_PATH} state={{fromHub:true}} data-testid="series-all-analysis-link">Analysis<ArrowUpRight size={14}/></Link></span>}/>{history?<ResultsList items={items} dayOf={dayOf} limit={all?items.length:3}/>:<div className="sh-load sh-skeleton">Loading your results…</div>}</section>}
     <section><SectionLabel title={`${data.total}-day map`}/><DayMap days={days} selected={selected} onSelect={d=>{setPicked(d);strip.current?.scrollIntoView({behavior:'smooth',block:'start'});}}/></section>

@@ -28,7 +28,7 @@ function note(s){
   return 'Complete today’s live test to add one more day.';
 }
 
-export function GuestJourney(){
+export function GuestJourney({today}){
   return <section className="sh-glow sh-glow-pink sh-journey" data-testid="streak-signin-card"><div className="sh-journey-body">
     <div className="sh-journey-top"><Ring done={0} total={JEE_SERIES_DAYS}/>
       <div className="sh-facts">
@@ -36,7 +36,7 @@ export function GuestJourney(){
         <Fact testid="streak-best" icon={Star} tone="gold" value="Best 0" label="longest run"/>
         <Fact testid="streak-skipped" icon={Ban} tone="miss" value="0 skipped" label="days missed"/>
       </div></div>
-    <p className="sh-journey-note">Starts {JEE_SERIES_START_SHORT}. Sign in to save your streak, marks and analysis.</p>
+    <p className="sh-journey-note" data-testid="streak-guest-note">{today?`Day ${today.day} is live today.`:`Starts ${JEE_SERIES_START_SHORT}.`} Sign in to save your streak, marks and analysis.</p>
     <div className="sh-marks-row is-single"><Link className="sh-red is-action" to={'/login?next='+encodeURIComponent(SERIES_PATH)} data-testid="streak-signin-link"><span className="sh-red-body"><strong>Track my journey</strong><ArrowUpRight size={18}/></span></Link></div>
   </div></section>;
 }

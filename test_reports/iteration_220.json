@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend-only QA of the All India Series hub (/series/all-india-jee) on the isolated bridge 127.0.0.1:8775 (tejas_isolated_book170_d0ed4e77, clock frozen at day 6). Main agent's tests/ui_series_hub227.py: 24/24 PASS on desktop 1920 and mobile 390. My own tests/ui_series_hub227_t1.py: 36/38 PASS. The 2 failures are the same design gap on both sizes: upcoming and missed 50-day map cells show no day number. All core flows work: header and brand row, no tab bar on the default hub, cups 7/15/30/45/50, marks shown on strip chips and map cells for days 1-3, no marks on days 4-5, today's-marks button shows 'Start' and opens today's paper, the Analysis button opens the list (newest first: 3, 2, 1), and in-page back returns to the hub. Tapping chip 3 or map cell 2 opens that day's analysis, and browser back goes to the list and then the hub. Tapping finished unattempted day 4 (desktop) or 5 (mobile) opens /sets/<id> and sends POST /start by itself (404 here, which is expected on the bridge). The More links (archive/analytics/solutions) open ?tab= views with tabs, and the Live & schedule tab goes back to the hub without tabs. Tapping upcoming chip 8 stays on the hub; the chip is red with white text and the selected card is sky blue with dark text (#16161D). Guest view shows the pink streak-signin-card, and its link opens /login. No side scroll, no page errors, no 5xx. Pink card gloss: 6 frames captured on each size. The sweep stays behind the text (z-index 0) and all text stays readable. Dark mode also checked: the cards keep their light look and stay readable.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "DayMap (components/series/DayStrip.js line 25)", "issue": "Upcoming (red) and missed map cells show no text at all. A number is drawn only for today, the selected day, or a scored day. The request asks for red cells with WHITE text, and the CSS rule .sh-cell.tone-upcoming b {color:#fff} exists, but no <b> is ever drawn. Users cannot tell which cell is which day, including missed days 4 and 5.", "selector": "[data-testid=series-calendar-day-7]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "50-DAY MAP", "issues": ["The grid is .sh-map-grid {grid-auto-flow:column; grid-template-rows:repeat(7,auto)}. Days run down the columns, so 50 cells make 7 full columns plus an 8th column holding only day 50, which sticks out alone at the top right. It looks lopsided and 'random', which is what the user complained about. Use 7 or 10 columns flowing by row, or confirm this matches the app screenshot."]},
+      {"screen": "ALL DAYS strip (desktop 1920)", "issues": ["The strip auto-scrolls to 120px before the selected day, so on load it shows days 4-21. Attempted days 1-3, the ones that carry marks (requirement 1), are hidden off the left edge even though there is plenty of width, and the only hint is 'swipe ›' to the right. Consider not auto-scrolling when the selected day fits, or starting the scroll a few chips earlier."]},
+      {"screen": "Hub TODAY + ALL DAYS", "issues": ["With today selected, the sky-blue TODAY card and the pink selected-day card under the strip both show Day 6 · Test 06 with their own 'Start test' button, so the same content appears twice."]},
+      {"screen": "Red buttons (Today's marks / Analysis)", "issues": ["In .sh-red-body::after the gloss sweep sits at z-index 2, above the white text (z-index 1). On mobile the white streak briefly passes over 'Start' and 'Analysis'. They are still readable, but the pink card moved its sweep behind the text and these buttons did not."]},
+      {"screen": "Guest pink card", "issues": ["The note always says 'Starts 9 Dec.' (JEE_SERIES_START_SHORT), even when the series is already on day 6. It should change to something like 'Day N is live' once the series has started."]},
+      {"screen": "Selected upcoming chip", "issues": ["The selected state on a red chip (.on with a #16161D border) is hard to tell apart from the other red chips."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/ui_series_hub227.py", "/app/backend/tests/ui_series_hub227_t1.py"],
+  "action_items": [
+    "Draw the day number (white <b>) in upcoming and missed map cells, as the request requires",
+    "Fix the 50-day map layout so day 50 is not alone in an 8th column (row flow with fixed columns, or check against the app screenshot)",
+    "Desktop strip: keep attempted days with marks in view on load",
+    "Optional: remove the duplicate Day 6 card shown under the strip when today is selected; move the red-button gloss behind the text; make the guest 'Starts 9 Dec' note change once the series starts; make the selected red chip easier to see"
+  ],
+  "critical_code_review_comments": [
+    "tests/ui_series_hub227.py had a counting bug: ok = sum(... r[0] ...) counted the test NAME (always truthy), so the TOTAL line always reported 0 FAIL. Fixed to r[1]. The 24 individual lines all printed PASS, so the earlier result still holds.",
+    "On the bridge, the analysis of copied attempts for days 1/2 returns 409 'Result abhi ban raha hai'; only day 3 is a real graded attempt. This comes from the bridge's test data, not the app, but tapping day 1 or 2 shows a 'result being prepared' state rather than the real analysis. Day 3 is the only full detail check.",
+    "Day 3 shows 61/120 while days 1 and 2 show /300 (test data copies use maximum 300), so the score trend mixes different maximums. This is a test-data artifact only.",
+    "LiveSeries.js uses data-testid series-tab-{archive,analytics,solutions} for both the More links and the Tabs triggers. They never render at the same time, so this works, but distinct ids (series-more-*) would be cleaner."
+  ],
+  "updated_files": ["/app/backend/tests/ui_series_hub227.py (pass counter fix only)", "/app/backend/tests/ui_series_hub227_t1.py (new)"],
+  "success_rate": {"backend": "not tested (frontend only)", "frontend": "95% (60/62 checks; the 2 failures are the map day-number gap on desktop and mobile)"},
+  "seed_data_creation": "None. Only the main agent's isolated bridge DB tejas_isolated_book170_d0ed4e77 was used; it is dropped by the bridge when it stops (timeout 2400s). No preview or customer data was touched.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bridge: tests/series_hub_bridge227.py on 8775 (BRIDGE_OUT=/tmp/uibridge227). Run tests/ui_series_hub227.py and tests/ui_series_hub227_t1.py. Screenshots are in /app/.screenshots/ui227 and /app/.screenshots/ui227t1. After the map fix, update the t1 check 'upcoming map cell 7 shows a day number'."
+}

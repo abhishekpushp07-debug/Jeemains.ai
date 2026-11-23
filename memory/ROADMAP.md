@@ -158,3 +158,8 @@
 - Original30verifiedPYQ2250Qs preserved. Baseline163notedQ2headerfragment onJan24S1; inspectALLitsrefs beforedeclaringcontentmissing; do not alteracademicmappingforperformance.
 - PrivateingressclientIPlimitneedsoperatortrustedproxyconfiguration. Four-digitPINtemporarylockouttrade-off documented. Owner/studentcredentials alreadyrequestedreset completed; never repeat.
 - No500kconcurrency claim. Horizontalfleet, MongoHA, externalcache, recovery/workerfleet qualification needseparateproduction-scaleevidence/approval.
+
+## Added 2026-11-23
+- P1: AITS hub redesign is in preview only. Owner to check it, then publish.
+- P2 (only when the owner asks): the website side of the CEO dashboard (memory/CEO_DASHBOARD_HANDOFF_WEBSITE.md section 7): /api/ceo/v1/* read-only endpoints, sign-up source fields, last_active_at, the small tejas_events log.
+
