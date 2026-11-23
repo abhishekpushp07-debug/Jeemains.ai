@@ -181,6 +181,9 @@ const dark = {
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
   // Home's All India card: the soft light on its upper half and the glass band that crosses it corner to corner.
   custom_seriesGloss: "rgba(255,255,255,0.11)", custom_seriesGlint: "rgba(255,255,255,0.26)",
+  // The series page's white streak card: white light cannot show on white, so its gloss is a faint rose pearl and its
+  // corner-to-corner glint a soft rose-gold light.
+  custom_seriesPearl: "rgba(255,90,120,0.08)", custom_seriesPearlGlint: "rgba(255,150,120,0.26)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
   custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8FA8FF",
   // Rank Card: brushed graphite with a soft blood-red glow, sparkle-silver serif and blood-red hairlines (same in both palettes).

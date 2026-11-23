@@ -11,6 +11,7 @@ import { DayCard, DayStrip, ResultsList, TodayCard } from "@/src/components/seri
 import { ScoreTrend, trendSummary } from "@/src/components/series/ScoreTrend";
 import { DayMap } from "@/src/components/series/DayMap";
 import { colors, space } from "@/src/theme";
+import { ScreenMotion } from "@/src/motion";
 import { istTime, seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
 
 export default function Live() {
@@ -51,7 +52,8 @@ export default function Live() {
       </View>
 
       <ErrorBox error={series.error && !d ? series.error : ""} retry={series.reload} />
-      {user ? <JourneyCard streak={streak.data} days={days} error={streak.error} retry={streak.reload} /> : null}
+      {/* The card's shine rests while another screen (a paper, a result) is in front. */}
+      {user ? <ScreenMotion><JourneyCard streak={streak.data} days={days} error={streak.error} retry={streak.reload} /></ScreenMotion> : null}
 
       {!d && !series.error ? <Skeleton h={190} style={{ borderRadius: 24 }} /> : null}
       {d ? <>

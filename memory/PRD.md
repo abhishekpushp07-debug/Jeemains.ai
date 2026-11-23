@@ -994,3 +994,8 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Shine (src/analysis/Shine.tsx) got two additive props: `backdrop` (a face that keeps its own picture; `tones` is optional now, no colour change-over without it) and `corner` (corner-to-corner glint). Analysis and My Tests use the old paths.
 - Home wraps the card in ScreenMotion: the shine rests when another tab or screen is in front.
 - Checked on the preview (web, 390 + 320): 2 animations in the card, 61 fps, glint seeked to start / middle / end (outside, centre, outside), 0 animations on My Tests, CTA opens /live, no page errors. Regression: My Tests tab row still 9 animations; Analysis still 8 edge + 8 glint + 8 colour change + 3 stars. tsc + eslint clean. NOT checked on a real phone build; testing agent not run.
+
+## Series page (/live): top streak card got the shine (23 Nov 2026)
+- Only src/components/series/JourneyCard.tsx (testID streak-card, the first card on the All India Series page) + a ScreenMotion wrap in app/live.tsx. The card stays white; text, ring, cups and size unchanged (358 x 261 at 390; old 1 pt line + 20 padding became a 2 pt running edge + 19 padding).
+- Edge = theme `seriesEdge` (ruby / gold / rose, same as Home's All India card). White light cannot show on white, so gloss = faint rose pearl (custom_seriesPearl) and the corner-to-corner glint = soft rose-gold light (custom_seriesPearlGlint), drawn under the card's content.
+- Checked on the preview (web, 390 + 320): 2 animations, 61 fps, glint seeked start / middle / near end, facts + 5 cups present, back to Home still fine (Home card 2 animations), no page errors; tsc + eslint clean. NOT checked on a real phone build; testing agent not run. The teal "Today" card below it was not changed.
