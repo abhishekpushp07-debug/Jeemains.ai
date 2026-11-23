@@ -1,0 +1,85 @@
+/* ==========================================================================
+   JEELIVE.AI  -  Shine for the web  (same look as the app's Shine.tsx)
+   Layers, bottom to top:
+     running edge -> face colours -> colour swap -> gloss -> glint -> YOUR CONTENT   (+ stars, outside the edge)
+   Only `transform` and `opacity` move, so the browser animates it on the GPU.
+   Needs shine.js once per page (it measures each piece for the edge and the glint).
+   ========================================================================== */
+
+.jl-shine { position: relative; display: flex; flex-direction: column; border-radius: var(--r, 20px); }
+.jl-ring  { position: relative; display: flex; flex-direction: column; flex: 1 1 auto;
+            overflow: hidden; isolation: isolate;             /* isolation: Safari clips the turning edge correctly */
+            border-radius: var(--r, 20px); padding: var(--ring, 2px); }
+.jl-face  { position: relative; flex: 1 1 auto; overflow: hidden;
+            border-radius: max(0px, calc(var(--r, 20px) - var(--ring, 2px))); }
+
+/* every light layer is an <i>; everything else inside the face is your content and stays above the light */
+.jl-edge, .jl-face > i { position: absolute; display: block; pointer-events: none; }
+.jl-face > :not(i)     { position: relative; z-index: 1; }
+
+/* 1. RUNNING EDGE: a square as wide as the piece's diagonal, filled corner to corner, turning behind the face */
+.jl-edge { left: 50%; top: 50%; width: var(--d, 200%); height: var(--d, auto); aspect-ratio: 1 / 1; translate: -50% -50%;
+           background: linear-gradient(135deg, var(--edge, #FF3D9A, #FFB020, #10C7A8, #3B82F6, #9B5CFF, #FF3D9A));
+           animation: jl-spin 4200ms linear var(--delay, 0ms) infinite; }
+
+/* 2. FACE COLOURS, corner to corner (top-left -> bottom-right) */
+.jl-face > i.jl-tones { inset: 0; background: linear-gradient(var(--ta, 135deg), var(--tone-a), var(--tone-b)); }
+
+/* 3. COLOUR SWAP: the same two colours the other way round fade in and out, so they keep changing places */
+.jl-face > i.jl-swap  { inset: 0; opacity: 0; background: linear-gradient(var(--ta, 135deg), var(--tone-b), var(--tone-a));
+                        animation: jl-swap 5600ms ease-in-out calc(var(--delay, 0ms) * 3) infinite; }
+
+/* 4. GLOSS: soft white light on the upper 56 % of the face */
+.jl-face > i.jl-gloss { left: 0; right: 0; top: 0; height: 56%;
+                        background: linear-gradient(180deg, var(--gloss), rgba(255, 255, 255, 0)); }
+
+/* 5. GLINT: a band of glass light that crosses the face, then waits outside it */
+.jl-face > i.jl-glint { left: 0; top: -30px; bottom: -30px; width: var(--band, 24px); visibility: hidden;
+                        background: linear-gradient(90deg, rgba(255, 255, 255, 0), var(--glint), rgba(255, 255, 255, 0));
+                        transform: translate(var(--gx0, 0), var(--gy0, 0)) rotate(var(--ga, 20deg));
+                        animation: jl-glint-40 3600ms ease-in-out var(--delay, 0ms) infinite; }
+.jl-shine[data-ready] > .jl-ring > .jl-face > i.jl-glint { visibility: visible; }
+/* corner path: the band lies across the card and travels from the top-left corner to the bottom-right corner */
+.jl-shine[data-corner] > .jl-ring > .jl-face > i.jl-glint {
+  left: calc(50% - var(--band, 24px) / 2); top: calc(50% - var(--gl, 0px) / 2); bottom: auto; height: var(--gl, 0px); }
+/* `data-part` = the share of the 3.6 s cycle in which the glint crosses (it waits for the rest) */
+.jl-shine[data-part="32"] > .jl-ring > .jl-face > i.jl-glint { animation-name: jl-glint-32; }
+.jl-shine[data-part="34"] > .jl-ring > .jl-face > i.jl-glint { animation-name: jl-glint-34; }
+.jl-shine[data-part="36"] > .jl-ring > .jl-face > i.jl-glint { animation-name: jl-glint-36; }
+.jl-shine[data-part="38"] > .jl-ring > .jl-face > i.jl-glint { animation-name: jl-glint-38; }
+.jl-shine[data-part="46"] > .jl-ring > .jl-face > i.jl-glint { animation-name: jl-glint-46; }
+
+/* 6. STARS (report card only): three 16 px stars twinkle on the edge, one after another */
+.jl-spark { position: absolute; z-index: 2; width: 16px; height: 16px; margin: -8px 0 0 -8px; opacity: 0;
+            pointer-events: none; animation: jl-spark 5200ms ease-out infinite; }
+
+@keyframes jl-spin { to { transform: rotate(360deg); } }
+@keyframes jl-swap { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+@keyframes jl-spark {
+  0%        { opacity: 0; transform: scale(0.2) rotate(0deg); }
+  9%        { opacity: 1; transform: scale(1) rotate(45deg); }
+  18%, 100% { opacity: 0; transform: scale(0.2) rotate(90deg); }
+}
+@keyframes jl-glint-32 { 0% { transform: translate(var(--gx0), var(--gy0)) rotate(var(--ga)); }
+                         32%, 100% { transform: translate(var(--gx1), var(--gy1)) rotate(var(--ga)); } }
+@keyframes jl-glint-34 { 0% { transform: translate(var(--gx0), var(--gy0)) rotate(var(--ga)); }
+                         34%, 100% { transform: translate(var(--gx1), var(--gy1)) rotate(var(--ga)); } }
+@keyframes jl-glint-36 { 0% { transform: translate(var(--gx0), var(--gy0)) rotate(var(--ga)); }
+                         36%, 100% { transform: translate(var(--gx1), var(--gy1)) rotate(var(--ga)); } }
+@keyframes jl-glint-38 { 0% { transform: translate(var(--gx0), var(--gy0)) rotate(var(--ga)); }
+                         38%, 100% { transform: translate(var(--gx1), var(--gy1)) rotate(var(--ga)); } }
+@keyframes jl-glint-40 { 0% { transform: translate(var(--gx0), var(--gy0)) rotate(var(--ga)); }
+                         40%, 100% { transform: translate(var(--gx1), var(--gy1)) rotate(var(--ga)); } }
+@keyframes jl-glint-46 { 0% { transform: translate(var(--gx0), var(--gy0)) rotate(var(--ga)); }
+                         46%, 100% { transform: translate(var(--gx1), var(--gy1)) rotate(var(--ga)); } }
+
+/* REST: the piece is off screen (data-off, set by shine.js), told to rest (data-rest), or the user asked for less motion.
+   The edge stands still as a coloured slope, the gloss stays, the swap, the glint and the stars are not drawn. */
+.jl-shine[data-off] > .jl-ring > .jl-edge, .jl-shine[data-rest] > .jl-ring > .jl-edge { animation: none; }
+.jl-shine[data-off] > .jl-ring > .jl-face > i.jl-swap,  .jl-shine[data-rest] > .jl-ring > .jl-face > i.jl-swap,
+.jl-shine[data-off] > .jl-ring > .jl-face > i.jl-glint, .jl-shine[data-rest] > .jl-ring > .jl-face > i.jl-glint,
+.jl-shine[data-off] > .jl-spark, .jl-shine[data-rest] > .jl-spark { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .jl-edge { animation: none; }
+  .jl-face > i.jl-swap, .jl-face > i.jl-glint, .jl-spark { display: none; }
+}

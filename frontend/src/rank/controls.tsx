@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Animated, { cancelAnimation, Easing, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
 import { Press, T } from "@/src/components/ui";
 import { useStill } from "@/src/motion";
+import { Shine as EdgeShine } from "@/src/analysis/Shine";
 import { DSheet } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { rankColors as colors, radius, space } from "@/src/theme";
@@ -18,25 +19,35 @@ export function RuleTitle({ children }: { children: string }) {
   </View>;
 }
 
-/** A dark panel with a faint top-left sheen, like the back of the card. With `form` it is the open tool's form: framed in the
- *  tool's bright colour, a solid header band in that colour (tool icon, tool name, `title`) and chosen chips in it too. */
+/** A dark panel with a faint top-left sheen, like the back of the card. With `form` it is the open tool's form: the tool's own
+ *  colours run round its edge, its header band is that colour under a gloss and a glass glint (tool icon, tool name, `title`),
+ *  and chosen chips wear the colour too. The body stays dark: the fields and words inside are made for a dark panel. */
 export function Strip({ title, right, children, testID, form }: { title?: string; right?: React.ReactNode; children: React.ReactNode; testID?: string; form?: boolean }) {
   const tool = useAccent();
   const a = form ? tool : null;
-  return <View testID={testID} style={[styles.strip, a && { ...formGlow, borderColor: a.line, shadowColor: a.text }]}>
-    <LinearGradient colors={[a ? a.soft : colors.custom_rankPanelSheen, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0.7, y: 0.6 }} style={StyleSheet.absoluteFill} />
-    {a ? <View testID={testID ? `${testID}-head` : undefined} style={[styles.formHead, { backgroundColor: a.ink }]}>
-      <View style={[styles.formIcon, { backgroundColor: a.on }]}><Glyph name={a.icon} size={16} color={a.ink} stroke={1.6} /></View>
-      <View style={{ flex: 1, minWidth: 0 }}>
-        <T w="bold" size={10} color={a.on} style={styles.formName} numberOfLines={1}>{a.name.toUpperCase()}</T>
-        {title ? <T w="heavy" size={15.5} color={a.on} numberOfLines={1}>{title}</T> : null}
+  if (a) return <View testID={testID} style={[styles.formWrap, formGlow, { shadowColor: a.text }]}>
+    <EdgeShine radius={22} ring={2} edge={a.edge} face={styles.formFace}
+      backdrop={<LinearGradient pointerEvents="none" colors={[a.soft, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0.7, y: 0.6 }} style={StyleSheet.absoluteFill} />}>
+      <View testID={testID ? `${testID}-head` : undefined} style={[styles.formHeadBleed, { backgroundColor: a.ink }]}>
+        <EdgeShine radius={0} ring={0} gloss={a.gloss} glint={a.glint} band={34} part={36} face={styles.formHead}>
+          <View style={[styles.formIcon, { backgroundColor: a.on }]}><Glyph name={a.icon} size={16} color={a.ink} stroke={1.6} /></View>
+          <View style={{ flex: 1, minWidth: 0 }}>
+            <T w="bold" size={10} color={a.on} style={styles.formName} numberOfLines={1}>{a.name.toUpperCase()}</T>
+            {title ? <T w="heavy" size={15.5} color={a.on} numberOfLines={1}>{title}</T> : null}
+          </View>
+          {right}
+        </EdgeShine>
       </View>
-      {right}
-    </View> : title ? <View style={styles.stripHead}>
+      <InForm.Provider value>{children}</InForm.Provider>
+    </EdgeShine>
+  </View>;
+  return <View testID={testID} style={styles.strip}>
+    <LinearGradient colors={[colors.custom_rankPanelSheen, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0.7, y: 0.6 }} style={StyleSheet.absoluteFill} />
+    {title ? <View style={styles.stripHead}>
       <View style={{ flexShrink: 1 }}><RuleTitle>{title}</RuleTitle></View>
       {right}
     </View> : null}
-    <InForm.Provider value={!!a}>{children}</InForm.Provider>
+    <InForm.Provider value={false}>{children}</InForm.Provider>
   </View>;
 }
 
@@ -160,12 +171,16 @@ export function Picker({ visible, title, options, value, multi, allLabel, onChan
 }
 
 // Glows kept as plain objects and spread into one inline style with their colour (web draws the blur, Android gets elevation).
-const formGlow = { borderWidth: 1.5, shadowOpacity: 0.45, shadowRadius: 18, shadowOffset: { width: 0, height: 0 }, elevation: 8 };
+const formGlow = { shadowOpacity: 0.45, shadowRadius: 18, shadowOffset: { width: 0, height: 0 }, elevation: 8 };
 const editGlow = { shadowOpacity: 0.55, shadowRadius: 10, shadowOffset: { width: 0, height: 2 }, elevation: 5 };
 
 const styles = StyleSheet.create({
   strip: { borderRadius: 22, padding: space.lg, gap: space.md, overflow: "hidden", backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine },
-  formHead: { flexDirection: "row", alignItems: "center", gap: 10, marginTop: -space.lg, marginHorizontal: -space.lg, paddingHorizontal: space.lg, paddingVertical: 10 },
+  // The form is the size it was with its old 1.5-point line and 16 of padding: a 2-point running edge and 15.5 of padding.
+  formWrap: { borderRadius: 22, backgroundColor: colors.custom_card },
+  formFace: { padding: 15.5, gap: space.md, backgroundColor: colors.custom_card },
+  formHeadBleed: { marginTop: -15.5, marginHorizontal: -15.5 },
+  formHead: { flexDirection: "row", alignItems: "center", gap: 10, paddingHorizontal: 15.5, paddingVertical: 10 },
   formIcon: { width: 32, height: 32, borderRadius: 16, alignItems: "center", justifyContent: "center" },
   formName: { letterSpacing: 1.6, opacity: 0.72 },
   summaryIcon: { width: 30, height: 30, borderRadius: 15, borderWidth: 1, alignItems: "center", justifyContent: "center" },

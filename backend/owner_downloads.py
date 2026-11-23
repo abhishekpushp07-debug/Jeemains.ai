@@ -1,4 +1,4 @@
-"""Owner-issued, expiring grants for the fixed owner ZIPs (ARTIFACTS); no public mint endpoint."""
+"""Owner-issued, expiring grants for the fixed owner files (ARTIFACTS: ZIPs and one PDF); no public mint endpoint."""
 from datetime import datetime, timezone
 from hashlib import sha256
 import hmac
@@ -14,10 +14,12 @@ ROOT = Path(__file__).resolve().parents[1]
 ARTIFACT = ROOT / "neetlive" / "exports" / "neetlive-content.zip"
 ARTIFACT_TYPE = "neetlive-content-zip"
 HANDOFF_TYPE = "rank-mission-handoff-zip"
+THEME_GUIDE_TYPE = "glossy-theme-guide-pdf"
 # type -> (file, download name, longest grant in hours)
 ARTIFACTS = {
     ARTIFACT_TYPE: (ARTIFACT, "neetlive-content.zip", 24),
     HANDOFF_TYPE: (ROOT / "handoff" / "JEELIVE_Rank_Mission_Website_Handoff.zip", "JEELIVE_Rank_Mission_Website_Handoff.zip", 168),
+    THEME_GUIDE_TYPE: (ROOT / "handoff" / "theme_guide" / "JEELIVE_App_Glossy_Theme_Guide.pdf", "JEELIVE_App_Glossy_Theme_Guide.pdf", 168),
 }
 DOWNLOAD_HEADERS = {"Cache-Control": "private, no-store", "Pragma": "no-cache",
                     "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"}
@@ -58,7 +60,7 @@ def make_router(db):
             raise missing
         if not hmac.compare_digest(sha256(payload).hexdigest(), grant["artifact_sha256"]):
             raise missing
-        return Response(payload, media_type="application/zip", headers={
+        return Response(payload, media_type="application/pdf" if name.endswith(".pdf") else "application/zip", headers={
             **DOWNLOAD_HEADERS, "Content-Disposition": f'attachment; filename="{name}"',
         })
 

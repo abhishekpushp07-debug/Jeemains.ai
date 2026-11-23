@@ -229,6 +229,9 @@ const dark = {
   custom_tileViolet: "#8E3BD9", custom_tileVioletDeep: "#58169A", custom_tileVioletChip: "#6C22B5", custom_tileVioletLine: "#D2A8FF", custom_tileVioletSoft: "#F0E2FF",
   custom_tileInk: "#FFFFFF", custom_tileGoldInk: "#1C1300", custom_tileBadge: "#FFFFFF",
   custom_tileGloss: "rgba(255,255,255,0.22)", custom_tileGlint: "rgba(255,255,255,0.5)", custom_tileGoldGloss: "rgba(255,255,255,0.5)", custom_tileGoldGlint: "rgba(255,255,255,0.9)",
+  // Rank forms: the gloss and the glass glint on a form's header band. A light band (yellow, teal, lime, sky blue) takes the
+  // strong pair; a deep band (blood red) the soft pair, so its white words stay 4.5 : 1 or more.
+  custom_formGloss: "rgba(255,255,255,0.46)", custom_formGlint: "rgba(255,255,255,0.9)", custom_formDeepGloss: "rgba(255,255,255,0.18)", custom_formDeepGlint: "rgba(255,255,255,0.5)",
   // Used by the dream meter.
   custom_tealInk: "#9CF2E3",
   // College predictor's score bar after Show: bright shining purple, with the blood red Edit button on it.
@@ -441,6 +444,17 @@ export const toolEdges = {
   blood: ["#FFC857", "#FF8FA0", "#FFE1E5", "#FFC857"],
   champ: ["#FFF3C4", "#FF8A3D", "#FFD60A", "#FFF3C4"],
   violet: ["#C9A0FF", "#FF8AD8", "#7FE7FF", "#C9A0FF"],
+} as const;
+// The three colours that run round each Rank form, from the form's own colour family (the first comes back at the end):
+// rank = yellow, tangerine, cream; pct = aqua, sky blue, mint; target = lime, sun yellow, emerald; college = ruby, gold,
+// rose; compare = sky blue, azure, lavender; dream = lilac, pink, cyan.
+export const formEdges = {
+  rank: ["#FFD60A", "#FF8A00", "#FFF3B0", "#FFD60A"],
+  pct: ["#2DE1C2", "#5CC8FF", "#D5FFF7", "#2DE1C2"],
+  target: ["#B5F23D", "#FFE14D", "#22C55E", "#B5F23D"],
+  college: ["#FF3B4E", "#FFC857", "#FF8FA0", "#FF3B4E"],
+  compare: ["#4CC3FF", "#2F80FF", "#B9B0FF", "#4CC3FF"],
+  dream: ["#B983FF", "#FF8AD8", "#7FE7FF", "#B983FF"],
 } as const;
 // Day chips: gold, rose and pearl run round a blood-red chip; sun yellow, emerald and lime round a parrot-green one; the
 // chosen day wears a black edge with one gold light running round it.

@@ -33,7 +33,7 @@ import { useDreams } from "@/src/dream/store";
 import { useShortlist } from "@/src/rank/shortlist";
 import { useCompareColleges } from "@/src/rank/colleges";
 import { ACCENTS, AccentContext } from "@/src/rank/accent";
-import { ScreenMotion } from "@/src/motion";
+import { MotionWhile, ScreenMotion } from "@/src/motion";
 
 const SAVED = "rank.form.v1";
 type Exam = "jee" | "bitsat" | "comedk";
@@ -145,13 +145,18 @@ export default function RankTab() {
     scroll.current?.scrollTo({ y: 0, animated: false });
   };
   // Each tool pane carries its form colour (yellow, teal, lime, blood red, sky blue) for the form, chips, fields and buttons inside.
+  // A pane that is not the open one stays mounted but hidden, so its shine rests.
   const pane = (t: Tool, node: React.ReactNode) => seen.includes(t) ? <View key={t} style={[styles.tool, tool !== t && styles.hidden]}>
-    <AccentContext.Provider value={ACCENTS[t]}>{node}</AccentContext.Provider>
+    <MotionWhile on={tool === t}><AccentContext.Provider value={ACCENTS[t]}>{node}</AccentContext.Provider></MotionWhile>
   </View> : null;
-  const examPane = (e: Exam, node: React.ReactNode) => seenExam.includes(e) ? <View key={e} style={[styles.tool, exam !== e && styles.hidden]}>{node}</View> : null;
+  const examPane = (e: Exam, node: React.ReactNode) => seenExam.includes(e) ? <View key={e} style={[styles.tool, exam !== e && styles.hidden]}>
+    <MotionWhile on={exam === e}>{node}</MotionWhile>
+  </View> : null;
 
   return (
     <PaletteContext.Provider value={colors}>
+    {/* The shine of the tiles and forms rests while another tab or screen is in front. */}
+    <ScreenMotion>
     <View style={{ flex: 1, backgroundColor: colors.custom_rankBg }}>
       <ScrollView ref={scroll} testID="rank-screen" keyboardShouldPersistTaps="handled" indicatorStyle="white"
         onScroll={e => { scrollY.current = e.nativeEvent.contentOffset.y; }} scrollEventThrottle={64}
@@ -162,8 +167,7 @@ export default function RankTab() {
           <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
         <View onLayout={e => { formTop.current = e.nativeEvent.layout.y + e.nativeEvent.layout.height + space.lg; }}>
-          {/* The tiles' shine rests while another tab or screen is in front. */}
-          <ScreenMotion><ToolGrid value={tool} onChange={tapTool} saved={saved.length} colleges={colleges.length} dreams={dreams.dreams.length} /></ScreenMotion>
+          <ToolGrid value={tool} onChange={tapTool} saved={saved.length} colleges={colleges.length} dreams={dreams.dreams.length} />
         </View>
 
         {pane("rank", <RankPredictor onColleges={goColleges} />)}
@@ -220,6 +224,7 @@ export default function RankTab() {
       <ShortlistSheet visible={shortOpen} onClose={() => setShortOpen(false)} onOpen={query ? s => openSeat(s) : undefined} />
       {detail ? <CollegeSheet key={`${detail.inst}-${detail.prog}-${detail.percentile}-${detail.marks}`} req={detail} onClose={() => setDetail(null)} /> : null}
     </View>
+    </ScreenMotion>
     </PaletteContext.Provider>
   );
 }

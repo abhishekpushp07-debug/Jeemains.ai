@@ -1,26 +1,30 @@
 // Each Rank tool's form colour: Rank predictor bright yellow, Percentile se rank teal, Target marks lime, College predictor
-// blood red, College compare sky blue. The chosen tile glows in it and the form below wears it (frame, header band, chosen chips,
-// fields and the main button), so the student sees at once which form belongs to the tile they tapped.
+// blood red, College compare sky blue. The chosen tile glows in it and the form below wears it (running edge, glossy header band,
+// chosen chips, fields and the main button), so the student sees at once which form belongs to the tile they tapped.
 import React, { createContext, useContext } from "react";
 import type { IconName } from "@/src/components/ui";
 import { Pill } from "@/src/components/design";
-import { rankColors as colors } from "@/src/theme";
+import { formEdges, rankColors as colors } from "@/src/theme";
 import type { Tool } from "./ToolGrid";
 
 /** ink = the colour (fills), on = text on it, text = the colour for words, icons and tile glow on black.
+ *  edge = the colours that run round the form; gloss / glint = the shine on its header band.
  *  bar = the score bar after Show in its own look (College predictor: shining purple), with the Edit button in `ink`. */
 export type Accent = { ink: string; soft: string; line: string; on: string; text: string; name: string; icon: IconName;
+  edge: readonly [string, string, ...string[]]; gloss: string; glint: string;
   bar?: { from: string; to: string; glow: string; hint: string; chip: string } };
-const on = colors.custom_fOn;
+// A light header band carries dark words and the strong shine; a deep one white words and the soft shine.
+const light = { on: colors.custom_fOn, gloss: colors.custom_formGloss, glint: colors.custom_formGlint };
+const deep = { on: colors.onBrandPrimary, gloss: colors.custom_formDeepGloss, glint: colors.custom_formDeepGlint };
 export const ACCENTS: Record<Tool, Accent> = {
-  rank: { ink: colors.custom_fYellow, soft: colors.custom_fYellowSoft, line: colors.custom_fYellowLine, on, text: colors.custom_fYellow, name: "Rank predictor", icon: "podium" },
-  pct: { ink: colors.custom_fTeal, soft: colors.custom_fTealSoft, line: colors.custom_fTealLine, on, text: colors.custom_fTeal, name: "Percentile se rank", icon: "chart-line-variant" },
-  target: { ink: colors.custom_fLime, soft: colors.custom_fLimeSoft, line: colors.custom_fLimeLine, on, text: colors.custom_fLime, name: "Target marks", icon: "bullseye-arrow" },
-  college: { ink: colors.custom_fBlood, soft: colors.custom_fBloodSoft, line: colors.custom_fBloodLine, on: colors.onBrandPrimary, text: colors.custom_fBloodText,
+  rank: { ink: colors.custom_fYellow, soft: colors.custom_fYellowSoft, line: colors.custom_fYellowLine, ...light, edge: formEdges.rank, text: colors.custom_fYellow, name: "Rank predictor", icon: "podium" },
+  pct: { ink: colors.custom_fTeal, soft: colors.custom_fTealSoft, line: colors.custom_fTealLine, ...light, edge: formEdges.pct, text: colors.custom_fTeal, name: "Percentile se rank", icon: "chart-line-variant" },
+  target: { ink: colors.custom_fLime, soft: colors.custom_fLimeSoft, line: colors.custom_fLimeLine, ...light, edge: formEdges.target, text: colors.custom_fLime, name: "Target marks", icon: "bullseye-arrow" },
+  college: { ink: colors.custom_fBlood, soft: colors.custom_fBloodSoft, line: colors.custom_fBloodLine, ...deep, edge: formEdges.college, text: colors.custom_fBloodText,
     name: "College predictor", icon: "school-outline",
     bar: { from: colors.custom_fPurpleFrom, to: colors.custom_fPurpleTo, glow: colors.custom_fPurpleGlow, hint: colors.custom_fPurpleHint, chip: colors.custom_fPurpleChip } },
-  compare: { ink: colors.custom_fSky, soft: colors.custom_fSkySoft, line: colors.custom_fSkyLine, on, text: colors.custom_fSky, name: "College compare", icon: "compare-horizontal" },
-  dream: { ink: colors.custom_fViolet, soft: colors.custom_fVioletSoft, line: colors.custom_fVioletLine, on: colors.onBrandPrimary, text: colors.custom_fVioletText,
+  compare: { ink: colors.custom_fSky, soft: colors.custom_fSkySoft, line: colors.custom_fSkyLine, ...light, edge: formEdges.compare, text: colors.custom_fSky, name: "College compare", icon: "compare-horizontal" },
+  dream: { ink: colors.custom_fViolet, soft: colors.custom_fVioletSoft, line: colors.custom_fVioletLine, ...deep, edge: formEdges.dream, text: colors.custom_fVioletText,
     name: "Dream college", icon: "bullseye-arrow" },
 };
 

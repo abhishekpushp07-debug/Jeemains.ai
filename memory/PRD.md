@@ -1,5 +1,13 @@
 # JEELIVE.AI Native App — PRD
 
+## Glossy Theme Guide PDF for the website team (23 Nov 2026) — DONE, link given to user
+- User (Hindi): "एक PDF दो कि अभी तुमने कहाँ-कहाँ क्या रंग change किया है, ताकि मैं website को दे सकूँ… सारा कुछ same ही रखना चाहिए". Route 2 picture fast-load: "Abhi nahi, ruko" — do NOT start until the user says the website side is live.
+- Files in `/app/handoff/theme_guide/`: `JEELIVE_App_Glossy_Theme_Guide.pdf` (22 pages, 3,163,019 bytes; colours, Shine build, 10 screen sections, rules, checklist, appendix A = full `shine.css`, appendix B = full `shine.js`), `shine.css`, `shine.js`, builder `build_guide.py` (+ `guide.html`, `guide.css`, `shots/`).
+- Link: `python tools/owner_download.py issue --artifact glossy-theme-guide-pdf --hours 168` (grant cd78fc87-1c30-4453-bef3-3de0a6de2d89, expires 2026-11-30 15:13 UTC, download checked: same bytes as the file). Only the PDF has a link; the separate `shine.css` / `shine.js` files have none (their full text is inside the PDF). **Rebuilding the PDF kills the link (SHA check) and a fork changes the preview address — re-issue then.** Never write the bearer URL into files.
+- After the link the user chose "सिर्फ PDF link दो, फिर रुको": nothing else was changed in the app in this fork.
+- Still open (not started): two small labels (`aria-checked` on count pills, `rf-history-empty`), Offline Solutions (`/app/memory/OFFLINE_SOLUTIONS_PLAN.md`), store readiness review, Rapid Fire teacher review list.
+
+
 ## Phase 2 of the approved 8-level backend plan: Levels 1–4 (22 Nov 2026) — DONE on preview, needs Publish
 - User (Hinglish): "Haan, poora Phase 2 ek saath", Level 3 "Chhote-chhote hisson mein", extra small tasks: "abhi bas purane karo".
 - Full notes + numbers: `/app/memory/PHASE2_BACKEND.md`. server.py 795 → 146 lines (wiring only); new database.py, jl_proxy.py, card_bank.py,
@@ -1029,3 +1037,10 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - Colours (theme custom_tile*): maroon #BC1F55, indigo #5B4BE0, teal #0A7B70, blood #D10F2A (unchanged), gold #F2C14E (College compare: near-black words, stronger gloss), violet #8E3BD9. White words 4.5 : 1 or more (computed). Old custom_maroon*/indigo*/teal*/champ*/violet*/blood* and custom_metal* tokens deleted except custom_tealInk (DreamMeter) and custom_metalSheenSoft (MetalCard).
 - Shine got an additive `fill` prop (stretch to the row's height). app/(tabs)/rank.tsx wraps ToolGrid in ScreenMotion.
 - Checked on the preview (web, 390 + 320): tiles 175 x 67 / 140 x 64 all equal, 12 animations, 61 fps, 0 while Home is in front, each tile selects and opens its tool, no sideways scroll, no page errors; tsc + eslint clean. NOT checked on a real phone build; testing agent not run.
+
+## Rank tab: the open tool's form got the shine (23 Nov 2026)
+- Tapped next step "Rank Form Gloss". src/rank/controls.tsx `Strip form` (the form of Rank predictor, Percentile se rank, Target marks, College predictor incl. BITSAT / COMEDK, College compare): the old 1.5 pt coloured line became a 2 pt running edge in the form's own colour family (theme `formEdges`, via Accent.edge), and the coloured header band got a gloss and a glass glint crossing it every 3.6 s (Accent.gloss / glint; tokens custom_form*). Glow, header text, fields, chips and buttons unchanged. Plain (non-form) Strips unchanged.
+- The form's BODY stays dark on purpose: every field, chip and label inside is made for a dark panel. A fully coloured body would mean restyling each control (not done, offered).
+- Dream college tool: its panel is the Dream meter (src/dream/DreamMeter.tsx, also shown on Home), not a Strip; it already has a purple gradient header with a sweep. Not changed.
+- Engine (additive): Shine `gloss`, `glint`, `band` are optional and `ring={0}` draws no edge; new `MotionWhile` in src/motion.tsx. app/(tabs)/rank.tsx: ScreenMotion now wraps the whole Rank screen (was only the tiles) and each tool pane / exam pane is wrapped in MotionWhile, so a hidden pane's shine rests. Side effect (intended): the Rank tab's older decorative sweeps (score bar, Rank Card, college card) now also rest while another tab is in front.
+- Checked on the preview (web, 390 + 320): each of the 5 forms shows 2 animations (edge + header glint), 14 with the tiles, 61 fps; 0 on Home, 14 again on return; BITSAT form inside College predictor fine; Rank predictor end to end (180 marks -> result card 99.08–99.15, form collapses, Edit reopens with 180 kept); no sideways scroll, no page errors; tsc + eslint clean. Form is 2 px taller in the desktop browser (1.5 pt line snapped to 1 px there); by arithmetic it is the same on a phone (2 + 15.5 = 1.5 + 16). NOT checked on a real phone build; testing agent not run.

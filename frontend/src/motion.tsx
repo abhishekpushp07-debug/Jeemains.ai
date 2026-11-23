@@ -17,6 +17,12 @@ export function ScreenMotion({ children }: { children: React.ReactNode }) {
   return <InFront.Provider value={front}>{children}</InFront.Provider>;
 }
 
+/** Put around a part of a screen that stays mounted while it is hidden (a pane of a tab): its endless motion rests while `on` is false. */
+export function MotionWhile({ on, children }: { on: boolean; children: React.ReactNode }) {
+  const front = useContext(InFront);
+  return <InFront.Provider value={front && on}>{children}</InFront.Provider>;
+}
+
 /** False while this screen is covered by another screen. */
 export const useScreenInFront = () => useContext(InFront);
 

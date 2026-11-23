@@ -1,8 +1,8 @@
 // The shine of the Analysis screen's section pills and report card, of My Tests' tabs, of the All India cards and of the
-// Rank tab's tool tiles: a running coloured edge, a soft gloss on the upper half and a glass glint that crosses on the
-// diagonal. A face given
-// two `tones` also keeps changing them over; a face with its own `backdrop` is never recoloured. Same engine as Rapid Fire's
-// glitter ring: CSS animations on the UI thread (plain CSS on the web), moving and fading only, so the screen stays light.
+// Rank tab's tool tiles and forms: a running coloured edge, a soft gloss on the upper half and a glass glint that crosses
+// on the diagonal. A face given two `tones` also keeps changing them over; a face with its own `backdrop` is never
+// recoloured. Same engine as Rapid Fire's glitter ring: CSS animations on the UI thread (plain CSS on the web), moving
+// and fading only, so the screen stays light.
 // Under Reduce Motion, or while the screen is covered or hidden, everything rests and the edge is a still coloured slope.
 import React, { useMemo, useState } from "react";
 import { LayoutChangeEvent, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
@@ -68,13 +68,14 @@ function Sparkles({ count }: { count: number }) {
  * Wraps a face in the running coloured edge and gives it the gloss and the glint.
  * `tones` = the face's own colours, corner to corner (they change places as time passes); a face that already has its own
  * picture passes it as `backdrop` and is left exactly as it is. `edge` = the colours that run round it (the five by
- * default); `face` = how the face lays out what is inside it; `band` = how wide the glint is; `corner` = the glint goes
+ * default; a face with `ring` 0 has no edge); `gloss` and `glint` are each drawn only when given; `face` = how the face
+ * lays out what is inside it; `band` = how wide the glint is; `corner` = the glint goes
  * from one corner to the opposite one (for a big card); `fill` = stretch to the height of the row it sits in; `delay`
  * staggers neighbours; `rest` holds everything still.
  */
-export function Shine({ children, radius, ring, tones, backdrop, edge = shineColors, gloss, glint, band, part = 40, corner, fill, delay = 0, sparkles = 0, rest, face }: {
+export function Shine({ children, radius, ring, tones, backdrop, edge = shineColors, gloss, glint, band = 0, part = 40, corner, fill, delay = 0, sparkles = 0, rest, face }: {
   children: React.ReactNode; radius: number; ring: number; tones?: readonly [string, string, ...string[]]; backdrop?: React.ReactNode; edge?: readonly [string, string, ...string[]];
-  gloss: string; glint: string; band: number; part?: number; corner?: boolean; fill?: boolean; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
+  gloss?: string; glint?: string; band?: number; part?: number; corner?: boolean; fill?: boolean; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
 }) {
   const still = useStill() || !!rest;
   const turned = useMemo(() => tones ? [...tones].reverse() as unknown as typeof tones : null, [tones]);
@@ -84,11 +85,11 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
     if (Math.abs(w - box.w) > 1 || Math.abs(h - box.h) > 1) setBox({ w, h });
   };
   const d = Math.ceil(Math.hypot(box.w, box.h)) + 4;
-  const path = still || !box.w ? null : corner ? cornerPath(box.w - ring * 2, box.h - ring * 2, band, part) : { ...glintPath(box.w, box.h, band, part), box: { width: band } };
+  const path = still || !box.w || !glint ? null : corner ? cornerPath(box.w - ring * 2, box.h - ring * 2, band, part) : { ...glintPath(box.w, box.h, band, part), box: { width: band } };
   return <View style={fill ? styles.outerFill : styles.outer}>
     <View onLayout={onLayout} style={[styles.ring, { borderRadius: radius, padding: ring }]}>
       {/* A square as wide as the face's diagonal turns behind it, so the five colours keep running round all four sides. */}
-      {box.w ? <Animated.View pointerEvents="none" style={[{ position: "absolute", width: d, height: d, left: (box.w - d) / 2, top: (box.h - d) / 2 },
+      {!ring ? null : box.w ? <Animated.View pointerEvents="none" style={[{ position: "absolute", width: d, height: d, left: (box.w - d) / 2, top: (box.h - d) / 2 },
         still ? null : { animationName: SPIN, animationDuration: TURN, animationDelay: delay, animationIterationCount: "infinite", animationTimingFunction: "linear" }]}>
         <LinearGradient colors={edge} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
       </Animated.View> : <LinearGradient pointerEvents="none" colors={edge} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />}
@@ -99,8 +100,8 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
           { animationName: SWAP, animationDuration: CHANGE, animationDelay: delay * 3, animationIterationCount: "infinite", animationTimingFunction: "ease-in-out" }]}>
           <LinearGradient colors={turned} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />
         </Animated.View>}
-        <LinearGradient pointerEvents="none" colors={[gloss, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.gloss} />
-        {path ? <Animated.View pointerEvents="none" style={[corner ? styles.cornerGlint : styles.glint, path.box, path.hidden,
+        {gloss ? <LinearGradient pointerEvents="none" colors={[gloss, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.gloss} /> : null}
+        {path && glint ? <Animated.View pointerEvents="none" style={[corner ? styles.cornerGlint : styles.glint, path.box, path.hidden,
           { animationName: path.frames, animationDuration: CYCLE, animationDelay: delay, animationIterationCount: "infinite", animationTimingFunction: "ease-in-out" }]}>
           <LinearGradient colors={[colors.custom_clear, glint, colors.custom_clear]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={StyleSheet.absoluteFill} />
         </Animated.View> : null}
