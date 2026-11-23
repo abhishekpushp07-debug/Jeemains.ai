@@ -33,6 +33,7 @@ import { useDreams } from "@/src/dream/store";
 import { useShortlist } from "@/src/rank/shortlist";
 import { useCompareColleges } from "@/src/rank/colleges";
 import { ACCENTS, AccentContext } from "@/src/rank/accent";
+import { ScreenMotion } from "@/src/motion";
 
 const SAVED = "rank.form.v1";
 type Exam = "jee" | "bitsat" | "comedk";
@@ -161,7 +162,8 @@ export default function RankTab() {
           <T size={12.5} color={colors.muted}>JoSAA · CSAB · JAC Delhi · BITSAT · COMEDK, 2026 cutoffs</T>
         </View>
         <View onLayout={e => { formTop.current = e.nativeEvent.layout.y + e.nativeEvent.layout.height + space.lg; }}>
-          <ToolGrid value={tool} onChange={tapTool} saved={saved.length} colleges={colleges.length} dreams={dreams.dreams.length} />
+          {/* The tiles' shine rests while another tab or screen is in front. */}
+          <ScreenMotion><ToolGrid value={tool} onChange={tapTool} saved={saved.length} colleges={colleges.length} dreams={dreams.dreams.length} /></ScreenMotion>
         </View>
 
         {pane("rank", <RankPredictor onColleges={goColleges} />)}

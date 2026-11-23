@@ -1,5 +1,6 @@
-// The shine of the Analysis screen's section pills and report card, of My Tests' tabs and of Home's All India card: a
-// running coloured edge, a soft gloss on the upper half and a glass glint that crosses on the diagonal. A face given
+// The shine of the Analysis screen's section pills and report card, of My Tests' tabs, of the All India cards and of the
+// Rank tab's tool tiles: a running coloured edge, a soft gloss on the upper half and a glass glint that crosses on the
+// diagonal. A face given
 // two `tones` also keeps changing them over; a face with its own `backdrop` is never recoloured. Same engine as Rapid Fire's
 // glitter ring: CSS animations on the UI thread (plain CSS on the web), moving and fading only, so the screen stays light.
 // Under Reduce Motion, or while the screen is covered or hidden, everything rests and the edge is a still coloured slope.
@@ -68,11 +69,12 @@ function Sparkles({ count }: { count: number }) {
  * `tones` = the face's own colours, corner to corner (they change places as time passes); a face that already has its own
  * picture passes it as `backdrop` and is left exactly as it is. `edge` = the colours that run round it (the five by
  * default); `face` = how the face lays out what is inside it; `band` = how wide the glint is; `corner` = the glint goes
- * from one corner to the opposite one (for a big card); `delay` staggers neighbours; `rest` holds everything still.
+ * from one corner to the opposite one (for a big card); `fill` = stretch to the height of the row it sits in; `delay`
+ * staggers neighbours; `rest` holds everything still.
  */
-export function Shine({ children, radius, ring, tones, backdrop, edge = shineColors, gloss, glint, band, part = 40, corner, delay = 0, sparkles = 0, rest, face }: {
+export function Shine({ children, radius, ring, tones, backdrop, edge = shineColors, gloss, glint, band, part = 40, corner, fill, delay = 0, sparkles = 0, rest, face }: {
   children: React.ReactNode; radius: number; ring: number; tones?: readonly [string, string, ...string[]]; backdrop?: React.ReactNode; edge?: readonly [string, string, ...string[]];
-  gloss: string; glint: string; band: number; part?: number; corner?: boolean; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
+  gloss: string; glint: string; band: number; part?: number; corner?: boolean; fill?: boolean; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
 }) {
   const still = useStill() || !!rest;
   const turned = useMemo(() => tones ? [...tones].reverse() as unknown as typeof tones : null, [tones]);
@@ -83,7 +85,7 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
   };
   const d = Math.ceil(Math.hypot(box.w, box.h)) + 4;
   const path = still || !box.w ? null : corner ? cornerPath(box.w - ring * 2, box.h - ring * 2, band, part) : { ...glintPath(box.w, box.h, band, part), box: { width: band } };
-  return <View style={styles.outer}>
+  return <View style={fill ? styles.outerFill : styles.outer}>
     <View onLayout={onLayout} style={[styles.ring, { borderRadius: radius, padding: ring }]}>
       {/* A square as wide as the face's diagonal turns behind it, so the five colours keep running round all four sides. */}
       {box.w ? <Animated.View pointerEvents="none" style={[{ position: "absolute", width: d, height: d, left: (box.w - d) / 2, top: (box.h - d) / 2 },
@@ -111,6 +113,7 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
 
 const styles = StyleSheet.create({
   outer: { position: "relative" },
+  outerFill: { position: "relative", flexGrow: 1 },
   ring: { overflow: "hidden", flexGrow: 1 },
   face: { flexGrow: 1, overflow: "hidden" },
   swap: { position: "absolute", left: 0, right: 0, top: 0, bottom: 0, opacity: 0 },

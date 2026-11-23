@@ -214,28 +214,23 @@ const dark = {
   custom_royalTint: "#EEF2FF", custom_royalTintLine: "#D6DEFF",
   // Rank page stays pure black; only the cards carry colour.
   custom_rankBg: "#000000", custom_rankPanelSheen: "rgba(255,255,255,0.035)",
-  // Rank tool tiles: brushed graphite metal, a broad diagonal sheen, a bevelled top edge, a soft shade at the foot.
-  custom_metalMid: "#151619", custom_metalEdge: "rgba(255,255,255,0.10)",
-  custom_metalSheen: "rgba(255,255,255,0.14)", custom_metalSheenSoft: "rgba(255,255,255,0.05)", custom_metalBevel: "rgba(255,255,255,0.34)", custom_metalShade: "rgba(0,0,0,0.38)",
+  // The Rank Card's one faint diagonal sheen.
+  custom_metalSheenSoft: "rgba(255,255,255,0.05)",
   // Rank Card: a quiet black metal card (soft graphite corner → black) with a hairline diamond watermark.
   custom_eliteFrom: "#1F1F23", custom_eliteMid: "#121215", custom_eliteTo: "#0B0B0D", custom_eliteLine: "rgba(255,255,255,0.09)",
-  // Rank tool jewels: each tile is graphite mixed into its own colour. from/mid/to = the tile's diagonal, glow (+glow2) = the light
-  // behind its diamond, line = accent, ink = light text on it, soft = chosen icon fill (same in both palettes).
-  custom_maroonFrom: "#25252A", custom_maroonMid: "#170B10", custom_maroonTo: "#4A1122", custom_maroonGlow: "#C0244F", custom_maroonLine: "#E0557B",
-  custom_maroonInk: "#F7AFC2", custom_maroonSoft: "rgba(224,85,123,0.20)",
-  custom_indigoFrom: "#24242C", custom_indigoMid: "#100E1F", custom_indigoTo: "#271C6E", custom_indigoGlow: "#7A52FF", custom_indigoGlow2: "#2F6BFF", custom_indigoLine: "#8E80FF",
-  custom_indigoInk: "#C9C2FF", custom_indigoSoft: "rgba(142,128,255,0.20)",
-  custom_tealFrom: "#232629", custom_tealMid: "#0A1516", custom_tealTo: "#0B4A45", custom_tealGlow: "#14B8A6", custom_tealLine: "#2DD4BF",
-  custom_tealInk: "#9CF2E3", custom_tealSoft: "rgba(45,212,191,0.18)",
-  custom_champFrom: "#28282C", custom_champMid: "#141315", custom_champTo: "#47330F", custom_champGlow: "#D9A54A", custom_champLine: "#E8C273",
-  custom_champInk: "#F5DCA0", custom_champSoft: "rgba(232,194,115,0.18)",
-  // Dream college tile: graphite into dark violet, like the other metal tiles.
-  custom_violetFrom: "#26232C", custom_violetMid: "#120A1C", custom_violetTo: "#3D0F63", custom_violetGlow: "#8B2FD9", custom_violetLine: "#B57BEA",
-  custom_violetInk: "#E2CCFF", custom_violetSoft: "rgba(181,123,234,0.20)",
-  custom_bloodFrom: "#D10F2A", custom_bloodMid: "#D10F2A", custom_bloodTo: "#D10F2A", custom_bloodGlow: "#FF6B78", custom_bloodLine: "#FF6B78",
-  custom_bloodInk: "#FFFFFF", custom_bloodSoft: "rgba(255,255,255,0.18)",
-  // College predictor tile is pure flat blood red, the same red as its form: its small line, icon circle and icon ring on the red.
-  custom_bloodValue: "#FFE1E5", custom_bloodChip: "#A80B21", custom_bloodChipLine: "#FF6B78",
+  // Rank tool tiles: each tile is its tool's own colour, corner to corner, with no black in it (the page behind stays black).
+  // X = the colour, XDeep = its far corner, XChip = the icon circle, XLine = the circle's ring, XSoft = the small line under
+  // the title. Words are white (5 : 1 or more) except on gold, where they are near-black (6 : 1 or more). Same in both palettes.
+  custom_tileMaroon: "#BC1F55", custom_tileMaroonDeep: "#7C1038", custom_tileMaroonChip: "#93143F", custom_tileMaroonLine: "#FF9DBA", custom_tileMaroonSoft: "#FFE1EA",
+  custom_tileIndigo: "#5B4BE0", custom_tileIndigoDeep: "#3323A6", custom_tileIndigoChip: "#4132BC", custom_tileIndigoLine: "#B9B0FF", custom_tileIndigoSoft: "#E6E2FF",
+  custom_tileTeal: "#0A7B70", custom_tileTealDeep: "#06574F", custom_tileTealChip: "#07665D", custom_tileTealLine: "#6FE9D7", custom_tileTealSoft: "#DFFBF6",
+  custom_tileBlood: "#D10F2A", custom_tileBloodDeep: "#B00C22", custom_tileBloodChip: "#A80B21", custom_tileBloodLine: "#FF6B78", custom_tileBloodSoft: "#FFE1E5",
+  custom_tileGold: "#F2C14E", custom_tileGoldDeep: "#C98C16", custom_tileGoldChip: "#FFE08A", custom_tileGoldLine: "#8A5D00", custom_tileGoldSoft: "#3A2700",
+  custom_tileViolet: "#8E3BD9", custom_tileVioletDeep: "#58169A", custom_tileVioletChip: "#6C22B5", custom_tileVioletLine: "#D2A8FF", custom_tileVioletSoft: "#F0E2FF",
+  custom_tileInk: "#FFFFFF", custom_tileGoldInk: "#1C1300", custom_tileBadge: "#FFFFFF",
+  custom_tileGloss: "rgba(255,255,255,0.22)", custom_tileGlint: "rgba(255,255,255,0.5)", custom_tileGoldGloss: "rgba(255,255,255,0.5)", custom_tileGoldGlint: "rgba(255,255,255,0.9)",
+  // Used by the dream meter.
+  custom_tealInk: "#9CF2E3",
   // College predictor's score bar after Show: bright shining purple, with the blood red Edit button on it.
   custom_fPurpleFrom: "#B43CFF", custom_fPurpleTo: "#6A16E8", custom_fPurpleGlow: "#A855F7", custom_fPurpleHint: "#F3E8FF",
   custom_fPurpleChip: "rgba(255,255,255,0.2)", custom_fShine: "rgba(255,255,255,0.55)",
@@ -436,6 +431,17 @@ export const pastel: Record<SeriesTone, { from: string; to: string; ink: string;
   upcoming: { from: light.custom_upFrom, to: light.custom_upSky, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
   missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, label: "Missed" },
 };
+// The three colours that run round each Rank tool tile, chosen to sit well on the tile's own colour and on the black page
+// (the first comes back at the end): maroon = rose, gold, blush; indigo = lavender, sky, pale lilac; teal = aqua, lime, mint;
+// blood = gold, rose, pearl; gold = cream, tangerine, sun yellow; violet = lilac, pink, cyan.
+export const toolEdges = {
+  maroon: ["#FF7AA2", "#FFC857", "#FFD9E4", "#FF7AA2"],
+  indigo: ["#9D8CFF", "#5CC8FF", "#E0DBFF", "#9D8CFF"],
+  teal: ["#3DE0C8", "#B5F23D", "#D5FFF7", "#3DE0C8"],
+  blood: ["#FFC857", "#FF8FA0", "#FFE1E5", "#FFC857"],
+  champ: ["#FFF3C4", "#FF8A3D", "#FFD60A", "#FFF3C4"],
+  violet: ["#C9A0FF", "#FF8AD8", "#7FE7FF", "#C9A0FF"],
+} as const;
 // Day chips: gold, rose and pearl run round a blood-red chip; sun yellow, emerald and lime round a parrot-green one; the
 // chosen day wears a black edge with one gold light running round it.
 export const chipEdges = {
