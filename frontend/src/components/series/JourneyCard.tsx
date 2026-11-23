@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { ErrorBox, Icon, IconName, Skeleton, T } from "@/src/components/ui";
 import { ProgressRing } from "@/src/components/design";
 import { Shine } from "@/src/analysis/Shine";
-import { colors, seriesEdge, space } from "@/src/theme";
+import { colors, space, tabEdges } from "@/src/theme";
 import { DayInfo, Streak, skippedCount } from "@/src/series";
 import { istDate } from "@/src/navigation";
 
@@ -12,14 +12,15 @@ function Fact({ icon, color, bg, value, label, testID }: { icon: IconName; color
     <View style={[styles.factIcon, { backgroundColor: bg }]}><Icon name={icon} size={15} color={color} /></View>
     <View style={{ flex: 1 }}>
       <T w="heavy" size={14} numberOfLines={1}>{value}</T>
-      <T size={10.5} color={colors.custom_eyebrow}>{label}</T>
+      <T size={10.5} color={colors.custom_seriesPinkInk}>{label}</T>
     </View>
   </View>;
 }
 
+const PINK = [colors.custom_seriesPink, colors.custom_seriesPinkDeep] as const;
 /**
- * The streak card at the top of the series page. It stays white; ruby, gold and rose run round its edge (the same edge as
- * Home's All India card), a faint pearl gloss sits on its upper half and a soft light crosses it from corner to corner.
+ * The streak card at the top of the series page: glossy baby pink (its two pinks change places slowly), with rose, orchid
+ * and coral running round its edge and a glass glint that crosses it from corner to corner.
  */
 export function JourneyCard({ streak, days, error, retry }: { streak: Streak | null; days: DayInfo[]; error?: string; retry: () => void }) {
   if (error && !streak) return <ErrorBox error="Your streak couldn’t load. Your submissions are safe." retry={retry} testID="streak-error" />;
@@ -28,11 +29,11 @@ export function JourneyCard({ streak, days, error, retry }: { streak: Streak | n
   const cups = streak.milestones || [];
   const total = streak.total_days || Math.max(1, ...cups.map(c => c.days)); // the website's day count
   return <View testID="streak-card">
-    <Shine radius={24} ring={2} edge={seriesEdge} gloss={colors.custom_seriesPearl} glint={colors.custom_seriesPearlGlint} band={84} part={46} corner face={styles.card}>
+    <Shine radius={24} ring={2} tones={PINK} edge={tabEdges.pink} gloss={colors.custom_seriesPastelGloss} glint={colors.custom_seriesPastelGlint} band={84} part={46} corner face={styles.card}>
     <View style={styles.row}>
       <ProgressRing testID="streak-done" size={108} stroke={9} value={done / total} track={colors.custom_qFresh} gradient={[colors.custom_qMarked, colors.custom_doneInk]} label={`${done} of ${total} days`}>
         <T w="heavy" size={24}>{done}</T>
-        <T w="bold" size={10} color={colors.custom_eyebrow}>/{total} days</T>
+        <T w="bold" size={10} color={colors.custom_seriesPinkInk}>/{total} days</T>
       </ProgressRing>
       <View style={{ flex: 1, gap: space.md }}>
         <Fact testID="streak-current" icon="fire" color={colors.custom_flame} bg={colors.custom_flameSoft} value={`${streak.current_streak}-day streak`} label="current" />
@@ -40,7 +41,7 @@ export function JourneyCard({ streak, days, error, retry }: { streak: Streak | n
         <Fact testID="streak-skipped" icon="cancel" color={colors.custom_missInk} bg={colors.custom_missSoft} value={`${skippedCount(days)} skipped`} label="days missed" />
       </View>
     </View>
-    {streak.stage === "prelaunch" ? <T size={11.5} color={colors.custom_eyebrow}>{streak.first_date ? `Starts ${istDate(streak.first_date)}. ` : ""}No early points, no pretend progress.</T> : null}
+    {streak.stage === "prelaunch" ? <T size={11.5} color={colors.custom_seriesPinkInk}>{streak.first_date ? `Starts ${istDate(streak.first_date)}. ` : ""}No early points, no pretend progress.</T> : null}
     <View style={styles.track} accessibilityLabel={`Cups: ${cups.filter(c => c.earned).length} of ${cups.length} earned`}>
       <View style={styles.line} />
       <View style={[styles.lineFill, { width: `${Math.min(100, (streak.best_streak / total) * 100)}%` }]} />
@@ -49,7 +50,7 @@ export function JourneyCard({ streak, days, error, retry }: { streak: Streak | n
         <View style={[styles.cupDot, c.earned ? styles.cupOn : styles.cupOff]}>
           <Icon name={c.earned ? "trophy" : "lock"} size={11} color={c.earned ? colors.onSurfaceInverse : colors.muted} />
         </View>
-        <T w="bold" size={9.5} color={c.earned ? colors.custom_gold : colors.custom_eyebrow}>{c.days}d</T>
+        <T w="bold" size={9.5} color={c.earned ? colors.custom_pastelInk : colors.custom_seriesPinkInk}>{c.days}d</T>
       </View>)}
     </View>
     </Shine>
@@ -58,7 +59,7 @@ export function JourneyCard({ streak, days, error, retry }: { streak: Streak | n
 
 const styles = StyleSheet.create({
   // 19 inside the 2-point running edge: the card is the size it was with its old 1-point line and 20 of padding.
-  card: { gap: space.lg, padding: 19, backgroundColor: colors.custom_card },
+  card: { gap: space.lg, padding: 19 },
   row: { flexDirection: "row", alignItems: "center", gap: space.lg },
   fact: { flexDirection: "row", alignItems: "center", gap: space.sm },
   factIcon: { width: 28, height: 28, borderRadius: 14, alignItems: "center", justifyContent: "center" },

@@ -1,11 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { useRouter } from "expo-router";
 import { Empty, Icon, Press, T } from "@/src/components/ui";
 import { PastelSurface, Pill } from "@/src/components/design";
-import { colors, pastel, space } from "@/src/theme";
+import { Shine } from "@/src/analysis/Shine";
+import { colors, pastel, pastelEdges, SeriesTone, space } from "@/src/theme";
 import { istDate } from "@/src/navigation";
 import { countdown, dayAction, DayInfo, dayNote, Series, seriesDays } from "@/src/series";
+
+const FACE = Object.fromEntries((Object.keys(pastel) as SeriesTone[]).map(t => [t, [pastel[t].from, pastel[t].to]])) as unknown as Record<SeriesTone, readonly [string, string]>;
+
+/**
+ * A big day card in its status colours (the two change places slowly), under a gloss and a glass glint that crosses from
+ * corner to corner, inside a running edge of its own colour family. The small day chips and map cells stay plain.
+ */
+function ShineCard({ tone, testID, radius, face, children }: { tone: SeriesTone; testID: string; radius: number; face: StyleProp<ViewStyle>; children: React.ReactNode }) {
+  return <View testID={testID}>
+    <Shine radius={radius} ring={2} tones={FACE[tone]} edge={pastelEdges[tone]} gloss={colors.custom_seriesPastelGloss} glint={colors.custom_seriesPastelGlint} band={72} part={46} corner face={face}>{children}</Shine>
+  </View>;
+}
 
 /** TODAY: the live paper with its state-driven primary action. */
 export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
@@ -15,16 +28,16 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
   if (!day) {
     const before = series.today < series.first_date;
     const p = pastel[before ? "upcoming" : "done"];
-    return <PastelSurface testID="series-prelaunch" tone={before ? "upcoming" : "done"} style={styles.today}>
+    return <ShineCard testID="series-prelaunch" tone={before ? "upcoming" : "done"} radius={24} face={styles.today}>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>{before ? `STARTS ${istDate(series.first_date).toUpperCase()}` : "SERIES COMPLETE"}</T>
       <T w="heavy" size={20} color={colors.custom_pastelInk}>{before ? `The first challenge opens ${istDate(series.first_date)}.` : "The live series has ended."}</T>
       <T size={12.5} color={p.body}>{before ? `Your ${seriesDays(series)}-day schedule is below. Papers unlock only after publication and their opening time.` : "Continue in the practice archive. Live results stay separate."}</T>
-    </PastelSurface>;
+    </ShineCard>;
   }
   const p = pastel[day.tone];
   const act = dayAction(day);
   const showClock = day.slot.state === "live" && !day.live && day.slot.last_start_at * 1000 > Date.now();
-  return <PastelSurface testID={"series-day-" + day.day} tone={day.tone} style={styles.today}>
+  return <ShineCard testID={"series-day-" + day.day} tone={day.tone} radius={24} face={styles.today}>
     <View style={styles.between}>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>DAY {day.day} · {day.label.toUpperCase()}</T>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>{istDate(day.date).toUpperCase()}</T>
@@ -37,7 +50,7 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
     </View> : null}
     {act ? <Pill testID={act.testID} label={act.label} iconRight={act.icon} bg={colors.custom_pastelInk} ink={p.cta} onPress={() => router.push(act.to as any)} />
       : <T testID="series-today-note" w="bold" size={12.5} color={p.body}>{dayNote(day)}</T>}
-  </PastelSurface>;
+  </ShineCard>;
 }
 
 const CHIP = 52, GAP = 8;
@@ -70,7 +83,7 @@ export function DayCard({ day }: { day: DayInfo }) {
   const p = pastel[day.tone];
   const act = dayAction(day);
   const s = day.live?.summary;
-  return <PastelSurface testID={"series-day-card-" + day.day} tone={day.tone} style={styles.detail}>
+  return <ShineCard testID={"series-day-card-" + day.day} tone={day.tone} radius={22} face={styles.detail}>
     <View style={styles.between}>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>DAY {day.day} · {day.label.toUpperCase()}</T>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>{istDate(day.date).toUpperCase()}</T>
@@ -86,7 +99,7 @@ export function DayCard({ day }: { day: DayInfo }) {
         <T w="heavy" size={28} color={colors.custom_pastelInk}>{s.score}<T w="bold" size={12} color={p.body}>/{s.maximum}</T></T>
       </View> : null}
     </View>
-  </PastelSurface>;
+  </ShineCard>;
 }
 
 /** Series attempts (live + archive practice), newest first. */
@@ -115,13 +128,14 @@ export function ResultsList({ items, dayOf, limit }: { items: any[]; dayOf: (dat
 const styles = StyleSheet.create({
   caps: { letterSpacing: 1.8 },
   between: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: space.sm },
-  today: { borderRadius: 24, padding: 20, gap: space.sm },
+  // 18 inside the 2-point running edge: the big cards are the size they were with 20 of padding.
+  today: { padding: 18, gap: space.sm },
   clock: { flexDirection: "row", alignItems: "center", gap: 6, alignSelf: "flex-start", backgroundColor: colors.custom_whiteA70, borderRadius: 999, paddingHorizontal: 12, height: 28, marginVertical: 2 },
   chipWrap: { width: CHIP, marginRight: GAP, alignItems: "center", gap: 6, paddingTop: 2 },
   chip: { width: CHIP, height: 68, borderRadius: 16, alignItems: "center", justifyContent: "center", gap: 2, borderWidth: 2, borderColor: "transparent" },
   chipOn: { borderColor: colors.onSurface },
   chipDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: "transparent" },
-  detail: { borderRadius: 22, padding: 20, gap: space.sm },
+  detail: { padding: 18, gap: space.sm },
   result: { borderRadius: 18, paddingHorizontal: space.lg, paddingVertical: 12, minHeight: 60, flexDirection: "row", alignItems: "center", gap: space.sm },
   empty: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine },
 });

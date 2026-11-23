@@ -163,7 +163,7 @@ const dark = {
   custom_tabGloss: "rgba(255,255,255,0.62)", custom_tabGlint: "rgba(255,255,255,0.95)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
-  custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
+  custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upSky: "#96D2FF", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
   custom_missFrom: "#F3E7D8", custom_missTo: "#ECD6DC", custom_missInk: "#7A4A3C", custom_missBody: "#5E4A44", custom_missCta: "#F3E7D8",
   custom_qAnswered: "#22C55E", custom_qNotAnswered: "#EF4444", custom_qMarked: "#0D9488", custom_qMarkedInk: "#5EEAD4",
   custom_qMarkedSoft: "#0B2A27", custom_qFresh: "#2A2A33", custom_qFreshLine: "#3A3A46", custom_qInk: "#FFFFFF",
@@ -181,9 +181,10 @@ const dark = {
   custom_seriesSheen: "rgba(255,255,255,0.24)", custom_clear: "rgba(255,255,255,0)",
   // Home's All India card: the soft light on its upper half and the glass band that crosses it corner to corner.
   custom_seriesGloss: "rgba(255,255,255,0.11)", custom_seriesGlint: "rgba(255,255,255,0.26)",
-  // The series page's white streak card: white light cannot show on white, so its gloss is a faint rose pearl and its
-  // corner-to-corner glint a soft rose-gold light.
-  custom_seriesPearl: "rgba(255,90,120,0.08)", custom_seriesPearlGlint: "rgba(255,150,120,0.26)",
+  // The series page's cards: the streak card is baby pink (small words on it use the rose ink, 6 : 1 or more); the day
+  // cards wear their status colours. All share the same white gloss and white corner-to-corner glint.
+  custom_seriesPink: "#FFDCE8", custom_seriesPinkDeep: "#FFB5CE", custom_seriesPinkInk: "#5B3A46",
+  custom_seriesPastelGloss: "rgba(255,255,255,0.55)", custom_seriesPastelGlint: "rgba(255,255,255,0.92)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
   custom_royalMaroon: "#7A1F35", custom_gemBlue: "#8FA8FF",
   // Rank Card: brushed graphite with a soft blood-red glow, sparkle-silver serif and blood-red hairlines (same in both palettes).
@@ -426,8 +427,16 @@ export type SeriesTone = "today" | "done" | "upcoming" | "missed";
 export const pastel: Record<SeriesTone, { from: string; to: string; ink: string; body: string; cta: string; label: string }> = {
   today: { from: light.custom_todayFrom, to: light.custom_todayTo, ink: light.custom_todayInk, body: light.custom_todayBody, cta: light.custom_todayCta, label: "Today" },
   done: { from: light.custom_doneFrom, to: light.custom_doneTo, ink: light.custom_doneInk, body: light.custom_doneBody, cta: light.custom_doneCta, label: "Done" },
-  upcoming: { from: light.custom_upFrom, to: light.custom_upTo, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
+  upcoming: { from: light.custom_upFrom, to: light.custom_upSky, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
   missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, label: "Missed" },
+};
+// The three colours that run round a big series day card, from its status colour's own family (the first comes back at
+// the end): today = coral, rose, gold; done = emerald, lime, teal; upcoming = teal, azure, lavender; missed = bronze, dusty rose, sand.
+export const pastelEdges: Record<SeriesTone, readonly [string, string, string, string]> = {
+  today: ["#FF6B4A", "#FF2D7A", "#FFB300", "#FF6B4A"],
+  done: ["#22A45D", "#9BD22F", "#10B5A0", "#22A45D"],
+  upcoming: ["#10B5A0", "#1E90FF", "#8E7BFF", "#10B5A0"],
+  missed: ["#C08552", "#D4728C", "#E0B15C", "#C08552"],
 };
 export const subjectColor = (s?: string) =>
   s === "Physics" ? light.custom_subjectPhysics : s === "Chemistry" ? light.custom_subjectChemistry : s === "Mathematics" ? light.custom_subjectMaths : s === "Biology" ? light.custom_subjectBiology : light.custom_burgundy;

@@ -35,6 +35,8 @@ export default function Live() {
   const dayOf = (date?: string) => days.find(x => x.date === date)?.day;
 
   return (
+    // The cards' shine rests while another screen (a paper, a result) is in front.
+    <ScreenMotion>
     <View style={{ flex: 1, backgroundColor: colors.surface }}>
     <ScrollView ref={scroll} testID="series-hub" style={{ flex: 1, backgroundColor: colors.surface }} contentContainerStyle={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom + space.xxl, paddingHorizontal: space.lg, gap: space.lg }}
       refreshControl={<RefreshControl refreshing={false} onRefresh={reload} />}>
@@ -52,8 +54,7 @@ export default function Live() {
       </View>
 
       <ErrorBox error={series.error && !d ? series.error : ""} retry={series.reload} />
-      {/* The card's shine rests while another screen (a paper, a result) is in front. */}
-      {user ? <ScreenMotion><JourneyCard streak={streak.data} days={days} error={streak.error} retry={streak.reload} /></ScreenMotion> : null}
+      {user ? <JourneyCard streak={streak.data} days={days} error={streak.error} retry={streak.reload} /> : null}
 
       {!d && !series.error ? <Skeleton h={190} style={{ borderRadius: 24 }} /> : null}
       {d ? <>
@@ -88,6 +89,7 @@ export default function Live() {
     </ScrollView>
     <SeriesExplainer open={open} onClose={() => setOpen(false)} days={total} />
     </View>
+    </ScreenMotion>
   );
 }
 
