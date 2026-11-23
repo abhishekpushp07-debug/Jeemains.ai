@@ -462,7 +462,7 @@ export default function Result() {
         {ready && version !== "original" ? <Notice tone="warning" testID="score-version-note">{r.change_note || "Revised scoring version. The original result is preserved."}</Notice> : null}
         {/* Kept in place while another tab is open, so its filters and open lists are still there on return. */}
         {ready ? <View testID="result-analysis-panel" style={tab === "analysis" ? learningStyles.panel : learningStyles.hidden}>
-          <AnalysisBody id={id!} state={analysis} nav={nav} onOpen={openQuestion} onSolutions={() => show("solutions")}
+          <AnalysisBody id={id!} state={analysis} nav={nav} shown={tab === "analysis"} onOpen={openQuestion} onSolutions={() => show("solutions")}
             onRetry={s.incorrect || s.skipped ? () => { setRetryErr(""); setRetry("ask"); } : undefined}
             slot={dream ? <>
               <DreamMeter exam={dream} testID="result-dream" mockId={id} chart="full" onAdd={() => router.push({ pathname: "/(tabs)/rank", params: { tool: "college", at: String(Date.now()) } })} />

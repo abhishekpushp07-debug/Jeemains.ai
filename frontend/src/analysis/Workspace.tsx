@@ -22,6 +22,8 @@ import { CompareBody, ComparePicker } from "./Compare";
 import { Leaderboard } from "./Leaderboard";
 import { downloadReport, shareScorecard } from "./report";
 import { ReportCard } from "./ReportCard";
+import { Shine } from "./Shine";
+import { ScreenMotion } from "@/src/motion";
 
 export const SECTIONS: [string, string, React.ComponentType<SectionProps>, string][] = [
   ["overview", "Overview", Overview, "Ek nazar mein poora paper: Score, Rank, marks ka hisaab aur agle mock ke 3 kaam."],
@@ -100,8 +102,9 @@ function Pager({ at, open }: { at: number; open: (key: string) => void }) {
   </View>;
 }
 
-export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slot }: {
-  id: string; state: AnalysisState; nav: AnalysisNav; onOpen: Open; onSolutions: () => void; onRetry?: () => void; slot?: React.ReactNode;
+/** `shown` = the Analysis tab is the one open (the body stays mounted, hidden, under the other tabs: its shine rests then). */
+export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slot, shown = true }: {
+  id: string; state: AnalysisState; nav: AnalysisNav; onOpen: Open; onSolutions: () => void; onRetry?: () => void; slot?: React.ReactNode; shown?: boolean;
 }) {
   const { data: an, error, offline, loading, reload } = state;
   const reduced = useReducedMotion();
@@ -146,7 +149,7 @@ export function AnalysisBody({ id, state, nav, onOpen, onSolutions, onRetry, slo
   const told = (kind: "pdf" | "png") => note?.kind === kind ? <T testID="a2-actions-note" size={12.5} w="bold" color={note.ok ? colors.success : colors.error}>{note.text}</T> : null;
 
   return <View testID="analysis2" style={styles.root}>
-    <ReportCard busy={busy === "pdf"} disabled={!!busy} narrow={narrow} onPress={() => run("pdf", downloadReport)} />
+    <ScreenMotion><ReportCard busy={busy === "pdf"} disabled={!!busy} narrow={narrow} rest={!shown} onPress={() => run("pdf", downloadReport)} /></ScreenMotion>
     {told("pdf")}
     <View testID="a2-top-bar" style={styles.top}>
       <T w="heavy" size={10.5} color={colors.brandText} style={styles.kicker}>ANALYSIS · {at + 1} / {SECTIONS.length}{nav.compare ? " · COMPARATIVE" : ""}</T>
@@ -198,20 +201,25 @@ export function AnalysisBar({ nav, inset }: { nav: AnalysisNav; inset: number })
         </Press>;
       })}
     </View>
-    <ScrollView ref={scroller} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.nav} accessibilityLabel="Analysis sections">
+    <ScreenMotion><ScrollView ref={scroller} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.nav} accessibilityLabel="Analysis sections">
       {SECTIONS.map(([k, name], i) => {
         const on = k === nav.key;
+        const words = <>
+          <T size={10.5} w="mono" color={on ? colors.custom_whiteA70 : colors.custom_sectionPillInk}>{i + 1}</T>
+          <T size={12.5} w={on ? "heavy" : "bold"} color={on ? colors.onBrandPrimary : colors.custom_sectionPillInk}>{NAV_NAME[k] || name}</T>
+        </>;
         return <View key={k} onLayout={e => { xs.current[k] = e.nativeEvent.layout.x; }}>
           <Press testID={"a2-nav-" + k} accessibilityRole="tab" accessibilityState={{ selected: on }} accessibilityLabel={`${i + 1}. ${name}`} onPress={() => nav.open(k)} scaleTo={0.97}
-            style={[styles.navItem, on && styles.navOn]}>
-            <T size={10.5} w="mono" color={on ? colors.custom_whiteA70 : colors.custom_sectionPillInk}>{i + 1}</T>
-            <T size={12.5} w={on ? "heavy" : "bold"} color={on ? colors.onBrandPrimary : colors.custom_sectionPillInk}>{NAV_NAME[k] || name}</T>
+            style={on ? [styles.navItem, styles.navOn] : styles.navShine}>
+            {/* The glint reaches each resting pill a little after the one before it, like a wave along the bar. */}
+            {on ? words : <Shine radius={radius.pill} ring={2} tones={PILL} gloss={colors.custom_sectionGloss} glint={colors.custom_sectionGlint} band={22} part={32} delay={i * 160} face={styles.navFace}>{words}</Shine>}
           </Press>
         </View>;
       })}
-    </ScrollView>
+    </ScrollView></ScreenMotion>
   </View>;
 }
+const PILL = [colors.custom_sectionPillTop, colors.custom_sectionPill, colors.custom_sectionPillFoot] as const;
 
 const styles = StyleSheet.create({
   root: { gap: space.md },
@@ -233,7 +241,10 @@ const styles = StyleSheet.create({
   modeItem: { flex: 1, minHeight: 38, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6 },
   modeOn: { backgroundColor: colors.onSurface },
   nav: { gap: 6, paddingRight: space.md },
-  // Resting pills are light teal with black words; the open section stays red with white words.
-  navItem: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: colors.custom_sectionPill },
+  // The open section is red with white words. Resting pills are glossy light teal with black words inside a running
+  // five-colour edge: 40 for the face and 2 for the edge on each side, so both kinds are the same size.
+  navItem: { minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, flexDirection: "row", alignItems: "center", gap: 6 },
   navOn: { backgroundColor: colors.brandPrimary },
+  navShine: { borderRadius: radius.pill },
+  navFace: { minHeight: 40, paddingHorizontal: 12, flexDirection: "row", alignItems: "center", gap: 6 },
 });

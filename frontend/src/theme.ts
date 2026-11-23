@@ -146,9 +146,12 @@ const dark = {
   custom_selectedOption: "#1C0D11",
   // The student's choice during any test (never right/wrong): green circles, light green line, faint green wash.
   custom_pick: "#22C55E", custom_pickLine: "#4ADE80", custom_pickWash: "#0F2A1B", custom_pickInk: "#6EE7A0",
-  // Analysis: the 8 section pills rest in light teal with black words; the report card is a deep teal slope with white words
-  // (same in both palettes; white on the lightest point of the slope is 5.4 : 1).
-  custom_sectionPill: "#CDF5EE", custom_sectionPillInk: "#0F0F12",
+  // Analysis: the 8 section pills rest in glossy light teal with black words; the report card is a deep teal slope with white words
+  // (same in both palettes; white on the lightest point of the slope is 5.4 : 1). Gloss = the soft light on the upper half,
+  // glint = the glass band that crosses on the diagonal.
+  custom_sectionPill: "#CDF5EE", custom_sectionPillInk: "#0F0F12", custom_sectionPillTop: "#E6FBF7", custom_sectionPillFoot: "#A3E7DA",
+  custom_sectionGloss: "rgba(255,255,255,0.78)", custom_sectionGlint: "rgba(255,255,255,0.95)",
+  custom_reportGloss: "rgba(255,255,255,0.20)", custom_reportGlint: "rgba(255,255,255,0.36)",
   custom_reportFrom: "#0F766E", custom_reportMid: "#0B5C56", custom_reportTo: "#084840",
   custom_reportInk: "#FFFFFF", custom_reportInkSoft: "#E3F4F1", custom_reportGlass: "rgba(255,255,255,0.16)", custom_reportLine: "rgba(255,255,255,0.28)", custom_reportGlow: "rgba(255,255,255,0.06)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
@@ -328,6 +331,9 @@ export const gemColors = { red: "#FF4D5E", blue: "#4D7CFF", emerald: "#2FD27A", 
 export const fx = { fire: "#FF7A2F", ember: "#FFC24D", bolt: "#7DF9FF", white: "#FFFFFF", smoke: "#C9CED6", gold: "#FFD75E", crimson: "#FF4D5E", sky: "#4D7CFF", ice: "#9EF3E6", night: "#0B1026" };
 // The glittering border that runs round every Rapid Fire card: pink → gold → teal → sky → violet, and back to pink.
 export const glitterColors = ["#FF5EDB", "#FFD75E", "#3EE6D0", "#7DB4FF", "#B57BFF", "#FF5EDB"] as const;
+// The five colours that run round the Analysis pills and report card (pink, gold, aqua, blue, violet; deeper than the
+// arena's so they read on a white page too). The first comes back at the end so the ring has no seam.
+export const shineColors = ["#FF3D9A", "#FFB020", "#10C7A8", "#3B82F6", "#9B5CFF", "#FF3D9A"] as const;
 // All India Rapid: one fire world (blazing smoke behind a dark ridge, black silhouettes on it) for all five card scenes.
 export const allIndia = {
   hot: "#FFE9C2", flame: "#FF6A1A", ember: "#FFB347", ink: "#080204", dust: "rgba(255,138,61,0.35)", star: "#FFF4E0",

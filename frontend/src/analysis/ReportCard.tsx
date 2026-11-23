@@ -1,14 +1,17 @@
 // The analysis report as one deep-teal card at the top of every section, about an inch high.
-// One tap gives the same PDF, the same way, as the old "Report download" button. Nothing on it moves.
+// One tap gives the same PDF, the same way, as the old "Report download" button.
+// Glossy glass: five colours run round its edge, a glint crosses it on the diagonal and three stars twinkle on the edge.
 import React from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { Icon, Press, T } from "@/src/components/ui";
 import { colors } from "@/src/theme";
+import { Shine } from "./Shine";
 
-export function ReportCard({ busy, disabled, narrow, onPress }: { busy: boolean; disabled: boolean; narrow: boolean; onPress: () => void }) {
-  return <Press testID="a2-download-report" onPress={onPress} disabled={disabled} scaleTo={0.985} accessibilityLabel="Report download. Poora analysis ek PDF mein" accessibilityState={{ busy }} style={styles.wrap}>
-    <LinearGradient colors={[colors.custom_reportFrom, colors.custom_reportMid, colors.custom_reportTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[styles.card, narrow && styles.cardNarrow]}>
+const TONES = [colors.custom_reportFrom, colors.custom_reportMid, colors.custom_reportTo] as const;
+
+export function ReportCard({ busy, disabled, narrow, rest, onPress }: { busy: boolean; disabled: boolean; narrow: boolean; rest: boolean; onPress: () => void }) {
+  return <Press testID="a2-download-report" onPress={onPress} disabled={disabled} scaleTo={0.985} accessibilityLabel="Report download. Poora analysis ek PDF mein" accessibilityState={{ busy }} style={[styles.wrap, disabled && styles.flat]}>
+    <Shine radius={22} ring={3} tones={TONES} slope gloss={colors.custom_reportGloss} glint={colors.custom_reportGlint} band={72} part={46} sparkles={3} rest={rest} face={[styles.card, narrow && styles.cardNarrow]}>
       <View pointerEvents="none" style={styles.ringTop} />
       <View pointerEvents="none" style={styles.ringFoot} />
       <View style={[styles.badge, narrow && styles.badgeNarrow]}><Icon name="file-pdf-box" size={narrow ? 26 : 32} color={colors.custom_reportInk} /></View>
@@ -19,15 +22,18 @@ export function ReportCard({ busy, disabled, narrow, onPress }: { busy: boolean;
       <View style={styles.go}>
         {busy ? <ActivityIndicator size="small" color={colors.custom_reportTo} /> : <Icon name="tray-arrow-down" size={22} color={colors.custom_reportTo} />}
       </View>
-    </LinearGradient>
+    </Shine>
   </Press>;
 }
 
 const styles = StyleSheet.create({
-  wrap: { borderRadius: 22, overflow: "hidden" },
-  // 152 points is about one inch on a phone (an inch is 153 to 160 points).
-  card: { minHeight: 152, flexDirection: "row", alignItems: "center", gap: 14, paddingHorizontal: 20, paddingVertical: 20, borderRadius: 22, overflow: "hidden" },
-  cardNarrow: { gap: 10, paddingHorizontal: 14 },
+  // The soft teal glow under the card; the solid colour behind the edge lets Android draw it too.
+  wrap: { borderRadius: 22, backgroundColor: colors.custom_reportMid, shadowColor: colors.custom_reportFrom, shadowOpacity: 0.34, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 8 },
+  // While the file is being made the card is half faded; Android would show its own shadow through it.
+  flat: { elevation: 0 },
+  // 152 points is about one inch on a phone (an inch is 153 to 160 points): 146 for the face and 3 for the edge on each side.
+  card: { minHeight: 146, flexDirection: "row", alignItems: "center", gap: 14, paddingHorizontal: 17, paddingVertical: 17 },
+  cardNarrow: { gap: 10, paddingHorizontal: 11 },
   ringTop: { position: "absolute", width: 190, height: 190, borderRadius: 95, right: -60, top: -84, backgroundColor: colors.custom_reportGlow },
   ringFoot: { position: "absolute", width: 130, height: 130, borderRadius: 65, right: 54, bottom: -84, backgroundColor: colors.custom_reportGlow },
   badge: { width: 60, height: 60, borderRadius: 18, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_reportGlass, borderWidth: 1, borderColor: colors.custom_reportLine },
