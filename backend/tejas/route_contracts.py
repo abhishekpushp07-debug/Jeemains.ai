@@ -223,6 +223,7 @@ SPEC = {
     'media.media_pack': ('public_signed_expiring_question_pictures_no_answers', 'batch', 'read_immutable_cdn_cacheable'),
     'media.media_probe': ('public_fixed_bytes_cdn_check', 'batch', 'read_immutable_cdn_cacheable'),
     'storage_health.health': ('staff_storage_status_no_paths_no_keys', 'normal', 'read_cached_60s'),
+    'storage_health.retry': ('owner_only_storage_recheck_wakes_waiting_jobs', 'normal', 'recheck_idempotent'),
     'misfire.summary': ('own_graded_released_attempts_only', 'normal', 'read_lazy_index_own_attempts'),
     'misfire.listing': ('own_graded_released_attempts_only', 'normal', 'read_lazy_index_own_attempts'),
     'misfire.chapters': ('own_graded_released_attempts_only', 'normal', 'read_lazy_index_own_attempts'),

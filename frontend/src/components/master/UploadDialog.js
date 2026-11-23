@@ -71,7 +71,7 @@ export function UploadDialog({open,onClose,section,exam,replace,onStarted}){
    {pyq&&!many&&<Field label="Paper ka saal" id="upload-year"><Input id="upload-year" inputMode="numeric" maxLength={4} value={year} disabled={busy} onChange={e=>setYear(e.target.value.replace(/\D/g,''))} placeholder="jaise 2025" data-testid="upload-year"/></Field>}
    <label className="book-check"><input type="checkbox" checked={rights} disabled={busy} onChange={e=>setRights(e.target.checked)} data-testid="upload-rights"/><span>Mere paas yeh content students ko dikhane ki permission hai.</span></label>
    <p className="master-hint">Bina answer key wala mock Live nahi ho sakta. Solutions zaroori nahi: unke bina students ko answer key dikhti hai.</p>
-   {msg&&!many&&<div className="admin-progress" role="status" data-testid="upload-progress"><progress value={progress} max={1}/><small>{msg}</small></div>}
+   {msg&&!many&&<div className="admin-progress" role="status" data-testid="upload-progress"><progress value={progress} max={1}/><small>{Math.round(progress*100)}% · {msg}</small></div>}
    <div className="button-row">{busy?<Button type="button" variant="outline" onClick={()=>{stopped.current=true;}} data-testid="upload-pause">Roko</Button>:<Button type="button" variant="outline" onClick={onClose} disabled={busy} data-testid="upload-cancel">Cancel</Button>}<Button type="submit" disabled={!ok||busy} data-testid="upload-send">{busy?<Loader2 size={16} className="spin"/>:<UploadCloud size={16}/>}{many?`${left} PDF upload karo`:'Upload'}</Button></div>
   </form>
  </DialogContent></Dialog>;

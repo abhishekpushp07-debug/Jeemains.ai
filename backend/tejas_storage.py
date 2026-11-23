@@ -1,12 +1,13 @@
 """Private object storage on two stores. All authorization is performed by API callers.
 
-Every new file goes to Supabase first. When Supabase cannot take it (not set up, down, slow to answer, any error), Emergent
-storage takes it at once, so a file is always saved in one of the two. The reference a write returns names its store:
+With Supabase set up, every new file goes only to Supabase. When Supabase cannot take it (down, slow to answer, any error),
+StorageWaiting is raised and the work waits and carries on by itself: files of one paper are never split between stores.
+Without Supabase set up, Emergent storage takes new files. The reference a write returns names its store:
 "sb://<bucket>/<path>" lives in Supabase, a plain path lives in Emergent storage (every file saved before Supabase too).
 A read therefore goes straight to the one store that holds the file, never searching both.
 """
 
-import base64, hashlib, os, random, re, threading, time
+import base64, hashlib, logging, os, random, re, threading, time
 from urllib.parse import quote, urlparse
 import httpx
 import requests
@@ -25,6 +26,14 @@ def source_lock(path):
 
 class StorageError(Exception):
     pass
+
+
+class StorageWaiting(StorageError):
+    """Supabase cannot take or give a file right now. Nothing went to Emergent: the work waits and carries on by itself."""
+
+
+WAIT_TEXT = 'Supabase abhi file nahi le raha. Kaam ruka hai, file surakshit hai; Supabase lautte hi apne aap aage chalega.'
+RESUME_SECONDS = 20 * 3600   # Supabase keeps a half-sent big file for 24 hours
 
 
 # ---------- Emergent storage ----------
@@ -180,14 +189,36 @@ def _tus_endpoint():
     return base + '/storage/v1/upload/resumable'
 
 
-def _tus(bucket, path, data, content_type):
-    """A big file in 6 MB pieces. A piece that does not arrive is sent again from where Supabase says it stands."""
-    meta = ','.join(f"{k} {base64.b64encode(v.encode()).decode()}" for k, v in (('bucketName', bucket), ('objectName', path), ('contentType', content_type), ('cacheControl', '3600')))
+def _carry_on(resume, path, size, tus):
+    """The address of an earlier, half-sent copy of this same file, and how much of it Supabase already has."""
+    if not resume or resume.get('path') != path or resume.get('size') != size or not resume.get('url') or time.time() - resume.get('started', 0) > RESUME_SECONDS:
+        return None, 0
+    try:
+        h = _call('HEAD', resume['url'], tus)
+    except StorageError:
+        return None, 0
+    if h.status_code == 200 and h.headers.get('Upload-Offset') is not None:
+        return resume['url'], int(h.headers['Upload-Offset'])
+    return None, 0
+
+
+def _tus(bucket, path, data, content_type, resume=None, on_progress=None):
+    """A big file in 6 MB pieces. A piece that does not arrive is sent again from where Supabase says it stands;
+    a later try carries on from the saved upload address (resume) instead of starting at 0. on_progress hears every piece."""
     tus = {'Tus-Resumable': '1.0.0'}
-    r = _call('POST', _tus_endpoint(), {**tus, 'Upload-Length': str(len(data)), 'Upload-Metadata': meta, 'x-upsert': 'true'})
-    if r.status_code != 201 or not r.headers.get('Location'):
-        raise StorageError(f'Supabase big-file upload could not start ({r.status_code}): {r.text[:160]}')
-    where, offset, misses = r.headers['Location'], 0, 0
+    where, offset = _carry_on(resume, path, len(data), tus)
+    if where:
+        info = {**resume}
+    else:
+        meta = ','.join(f"{k} {base64.b64encode(v.encode()).decode()}" for k, v in (('bucketName', bucket), ('objectName', path), ('contentType', content_type), ('cacheControl', '3600')))
+        r = _call('POST', _tus_endpoint(), {**tus, 'Upload-Length': str(len(data)), 'Upload-Metadata': meta, 'x-upsert': 'true'})
+        if r.status_code != 201 or not r.headers.get('Location'):
+            raise StorageError(f'Supabase big-file upload could not start ({r.status_code}): {r.text[:160]}')
+        where = r.headers['Location']
+        info = {'url': where, 'path': path, 'size': len(data), 'started': time.time()}
+    misses = 0
+    if on_progress:
+        on_progress({**info, 'sent': offset})
     while offset < len(data):
         try:
             r = _call('PATCH', where, {**tus, 'Upload-Offset': str(offset), 'Content-Type': 'application/offset+octet-stream'}, tries=1, content=data[offset:offset + TUS_CHUNK])
@@ -195,6 +226,8 @@ def _tus(bucket, path, data, content_type):
             r = None
         if r is not None and r.status_code == 204:
             offset, misses = int(r.headers.get('Upload-Offset', offset + TUS_CHUNK)), 0
+            if on_progress:
+                on_progress({**info, 'sent': offset})
             continue
         misses += 1
         if misses > 5 or (r is not None and r.status_code not in TRANSIENT + (409,)):
@@ -205,10 +238,10 @@ def _tus(bucket, path, data, content_type):
             offset = int(h.headers['Upload-Offset'])
 
 
-def sb_put(path, data, content_type):
+def sb_put(path, data, content_type, resume=None, on_progress=None):
     bucket = _bucket()
     if len(data) > TUS_CHUNK:
-        _tus(bucket, path, data, content_type)
+        _tus(bucket, path, data, content_type, resume, on_progress)
     else:
         r = _call('POST', _object_url(bucket, path), {'Content-Type': content_type, 'x-upsert': 'true', 'Cache-Control': '3600'}, content=data)
         if r.status_code not in (200, 201):
@@ -217,7 +250,12 @@ def sb_put(path, data, content_type):
 
 
 def sb_get(bucket, path, tries=4):
-    r = _call('GET', _object_url(bucket, path, 'authenticated'), tries=tries)
+    try:
+        r = _call('GET', _object_url(bucket, path, 'authenticated'), tries=tries)
+    except StorageError as exc:
+        raise StorageWaiting(f'Supabase abhi file nahi de raha ({exc}). Thodi der mein apne aap phir koshish hogi.') from None
+    if r.status_code in TRANSIENT:
+        raise StorageWaiting(f'Supabase abhi file nahi de raha ({r.status_code}). Thodi der mein apne aap phir koshish hogi.')
     if r.status_code != 200:
         raise StorageError(f'Supabase file unavailable ({r.status_code}). Retry later.')
     return r.content
@@ -238,13 +276,14 @@ def _count(store):
 
 
 def _strike(exc, handed=True):
-    # Supabase rests a little longer after every miss in a row (15 s, 30 s, ... 5 min) and writes go straight to Emergent meanwhile.
+    # Supabase rests a little longer after every miss in a row (15 s, 30 s, ... 5 min); new files wait meanwhile (never Emergent).
+    logging.getLogger(__name__).warning('Supabase miss (%s): %s', 'file waits' if handed else 'health check', str(exc)[:240])
     with _count_lock:
         STATE['strikes'] += 1
         STATE['down_until'] = time.time() + min(300, 15 * 2 ** (STATE['strikes'] - 1))
         STATE['last_error'] = str(exc)[:240]
         STATE['backup_since'] = STATE['backup_since'] or time.time()
-        if handed:  # a file really went to Emergent (a failed health check alone does not count)
+        if handed:  # a real file had to wait (a failed health check alone does not count)
             STATE['failovers'] += 1
             STATE['last_failover'] = {'at': time.time(), 'reason': STATE['last_error']}
 
@@ -253,18 +292,21 @@ def supabase_on():
     return configured() and time.time() >= STATE['down_until']
 
 
-def put_object(path, data, content_type="application/pdf"):
-    """Saves a file and returns its reference: Supabase first, Emergent the moment Supabase cannot."""
+def put_object(path, data, content_type="application/pdf", resume=None, on_progress=None):
+    """Saves a new file and returns its reference. With Supabase set up, new files go only to Supabase: when it cannot take one,
+    StorageWaiting is raised and the caller waits for it (nothing is split into Emergent). Without Supabase, Emergent takes them."""
     with source_lock(path):
-        ref = None
-        if supabase_on():
+        if configured():
+            if not supabase_on():
+                raise StorageWaiting(f"{WAIT_TEXT} Wajah: {STATE['last_error'] or 'Supabase thodi der aaram par hai.'}")
             try:
-                ref = sb_put(path, data, content_type)
-                _ok()
-                _count('supabase')
-            except Exception as exc:  # noqa: BLE001  any Supabase trouble hands the file to Emergent storage
+                ref = sb_put(path, data, content_type, resume, on_progress)
+            except Exception as exc:  # noqa: BLE001  any Supabase trouble: the file waits for Supabase
                 _strike(exc)
-        if ref is None:
+                raise StorageWaiting(f'{WAIT_TEXT} Wajah: {str(exc)[:200]}') from None
+            _ok()
+            _count('supabase')
+        else:
             ref = request('PUT', path, data, content_type).json()['path']
             _count('emergent')
         _source_cache.remove(ref)

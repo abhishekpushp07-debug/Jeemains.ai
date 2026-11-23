@@ -12,11 +12,12 @@ from .safety import JOB_CAPABILITIES, HOLD_MESSAGE, job_held, require_capability
 from .runtime import LANE_LIMITS, JOB_ATTEMPTS, JOB_LEASE_SECONDS, INLINE_JOBS, JOB_DRAIN_QUANTUM
 from .canonical import EPOCH_NOW, clocked_one
 from tejas_core import build_questions, generate_report
-from tejas_storage import get_object, put_object
+from tejas_storage import get_object, put_object, StorageWaiting
 
 router = APIRouter(prefix='/api', tags=['Processing'])
 _active = {kind: set() for kind in LANE_LIMITS}
 BUSY_WAITS = 90  # 90 waits of 20 s: a PDF's lock (15 min) has surely expired by then
+STORAGE_WAIT_MAX = 300
 
 
 def public_job(j):
@@ -165,10 +166,20 @@ async def run_job(id, drain=True):
             else:
                 raise ValueError('Unknown job type')
             await require_lease(j)
-            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', **{k: {'$literal': v} for k, v in output.items()}}}])
+            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', 'storage_waits': 0, **{k: {'$literal': v} for k, v in output.items()}}}])
             if completed.modified_count:
                 await audit(j['user_id'], kind.title() + ' completed', j['set_id'], message)
         except Exception as exc:
+            if isinstance(exc, StorageWaiting):
+                # Supabase cannot take or give a file now: the job keeps its tries and runs again by itself (30 s, 1, 2, 4, then every 5 min).
+                delay = min(STORAGE_WAIT_MAX, 30 * 2 ** min(j.get('storage_waits', 0), 4))
+                logging.getLogger(__name__).warning('Waiting for Supabase (kind=%s, job=%s, next in %ss): %s', kind, id, delay, str(exc)[:200])
+                await jobs.update_one({'id': id, 'lease': lease, 'status': 'running'}, [{'$set': {
+                    'status': 'queued', 'progress': 0, 'error': 'Waiting for file storage; it carries on by itself.', 'next_run_at': {'$add': [EPOCH_NOW, delay]},
+                    'storage_waits': {'$add': [{'$ifNull': ['$storage_waits', 0]}, 1]},
+                    'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}])
+                kick_later(kind, delay + 1)
+                return True
             if kind == 'book_step' and isinstance(exc, HTTPException) and exc.status_code == 409 and j.get('busy_waits', 0) < BUSY_WAITS:
                 # Another worker is on this PDF's batch: the job waits its turn and keeps its tries (not a failure), at most ~30 minutes.
                 logging.getLogger(__name__).info('Book busy with another batch; job %s waits', id)
@@ -176,6 +187,7 @@ async def run_job(id, drain=True):
                     'status': 'queued', 'progress': 0, 'error': '', 'next_run_at': {'$add': [EPOCH_NOW, 20]},
                     'busy_waits': {'$add': [{'$ifNull': ['$busy_waits', 0]}, 1]},
                     'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}])
+                kick_later(kind, 21)
                 return True
             logging.getLogger(__name__).exception('Background job failed (kind=%s)', kind)
             retryable = j.get('attempts', 1) < JOB_ATTEMPTS
@@ -237,6 +249,31 @@ async def drain_lane(kind):
 
 
 _continuing = set()
+_later = set()
+
+
+def run_later(fn, *args, seconds=60):
+    """Runs fn(*args) on this server after a wait (busy PDF, Supabase away), not only at the 15-minute check."""
+    async def go():
+        await asyncio.sleep(seconds)
+        await fn(*args)
+    task = asyncio.create_task(go())
+    _later.add(task)
+    task.add_done_callback(_later.discard)
+
+
+def kick_later(kind, seconds):
+    run_later(drain_lane, kind, seconds=seconds)
+
+
+async def wake_storage():
+    """Supabase answers again: every job waiting for it runs now instead of at its next try."""
+    waiting = {'status': 'queued', 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}}
+    kinds = [k for k in await jobs.distinct('kind', waiting) if k in _active]
+    woke = (await jobs.update_many(waiting, {'$set': {'next_run_at': 0}})).modified_count
+    for kind in kinds:
+        kick_later(kind, 0)
+    return woke
 
 
 @router.get('/jobs/{id}')

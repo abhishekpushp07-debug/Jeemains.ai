@@ -17,7 +17,7 @@ from .content import valid_rules, summary
 from .catalog import available, PROJECT
 from .derivatives import render_crop
 from .canonical import EPOCH_NOW
-from tejas_storage import put_object, get_object, StorageError
+from tejas_storage import put_object, get_object, StorageError, StorageWaiting
 
 router=APIRouter(prefix='/api',tags=['Chapter exams'])
 books=db.tejas_chapter_books
@@ -213,6 +213,12 @@ async def process_book(identity):
                 'exam':result.get('exam','BITSAT'),'minutes':result.get('minutes',60),'solution_kind':result.get('solution_kind','answer_key_only'),
                 'message':f'{len(result["chapters"])} chapter tests organised. Original PDF images preserve notation. '+('Original worked solutions supplied; no AI generation.' if result.get('solution_kind')=='supplied_worked' else 'Worked solutions are not supplied.')},'$inc':{'revision':1}})
         except Exception as exc:
+            if isinstance(exc,StorageWaiting):
+                # Supabase is away: the saved PDF waits and this book runs again by itself in a minute.
+                from .jobs import run_later
+                await books.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:450]}})
+                run_later(process_book,identity,seconds=60)
+                return
             message=str(exc)[:450] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry the saved source.'
             await books.update_one(fence,{'$set':{'status':'failed','message':message}})
 

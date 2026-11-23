@@ -182,7 +182,13 @@ async def process_import(id):
                 'status':'blocked' if issues else 'ready','sandbox':result['sandbox'],
                 'message':'Resolve the listed source issues and upload again.' if issues else 'All source entries paired. Supplied answer keys retained; no answers were generated.'}})
         except Exception as exc:
-            from tejas_storage import StorageError
+            from tejas_storage import StorageError, StorageWaiting
+            if isinstance(exc,StorageWaiting):
+                # Supabase is away: the saved sources wait and this import runs again by itself in a minute.
+                from .jobs import run_later
+                await imports.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:350]}})
+                run_later(process_import,id,seconds=60)
+                return
             message=str(exc)[:350] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry with the same saved sources.'
             await imports.update_one(fence,{'$set':{'status':'failed','message':message}})
 

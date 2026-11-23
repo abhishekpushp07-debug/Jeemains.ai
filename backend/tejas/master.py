@@ -1,4 +1,5 @@
 """Master: exam › mock type › mock. One list per type with five states (Draft, Live, Scheduled, Off, Library)."""
+import math
 from typing import Annotated, Literal
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
@@ -10,6 +11,19 @@ router = APIRouter(prefix='/api/admin/master', tags=['Master'])
 Identity = Annotated[str, Field(min_length=1, max_length=100)]
 STATUS = {'draft': 'draft', 'live': 'live', 'scheduled': 'scheduled', 'unlive': 'off', 'paused': 'off', 'ended': 'ended'}
 PROCESSING = ('uploading', 'received', 'reading', 'matching', 'paused', 'failed')
+
+
+async def upload_progress(b):
+    """How far a PDF has gone: parts on this server, the original into Supabase, and whether it waits for Supabase."""
+    from .book_store import CHUNK
+    p, out = b['payload'], {}
+    if b['state'] == 'uploading' and p.get('size'):
+        out['parts'] = {'got': await db.tejas_book_parts.count_documents({'book_id': b['_id']}), 'total': math.ceil(p['size'] / CHUNK)}
+    if b['state'] == 'received' and p.get('transfer'):
+        out['transfer'] = {'sent': p['transfer'].get('sent', 0), 'size': p['transfer'].get('size') or p.get('size', 0)}
+    if p.get('storage_wait'):
+        out['storage_wait'] = {'since': p['storage_wait']['since'], 'error': p['storage_wait'].get('error', '')[:200]}
+    return out
 FLAGGED = {'$elemMatch': {'flag': {'$nin': ['', None]}}}
 
 
@@ -131,7 +145,8 @@ async def type_mocks(sid: str, u=Depends(owner)):
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [
             {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'},
             {'state': 'ready', 'restored_at': {'$exists': True}}]},
-                                       {'state': 1, 'paused': 1, 'restored_at': 1, 'revision': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1, 'payload.chapters': 1, 'payload.rereading': 1}):
+                                       {'state': 1, 'paused': 1, 'restored_at': 1, 'revision': 1, 'payload.title': 1, 'payload.pages': 1, 'payload.read_pages': 1, 'payload.message': 1, 'payload.chapters': 1, 'payload.rereading': 1,
+                                        'payload.size': 1, 'payload.transfer': 1, 'payload.storage_wait': 1}):
         unread, chapters = b['state'] == 'attention_needed', bool(b['payload'].get('chapters'))
         done = b['state'] == 'ready' or bool(unread and await db.tejas_book_mocks.find_one({'book_id': b['_id']}, {'_id': 1}))
         # A read PDF is listed only if it is chapter-wise (rename/split again) or came back from the Library.
@@ -148,7 +163,8 @@ async def type_mocks(sid: str, u=Depends(owner)):
                         'revision': b.get('revision', 0), 'can_retry': b['state'] == 'failed' and not unread,
                         'pages': 0 if done else b['payload'].get('pages', 0), 'read_pages': b['payload'].get('read_pages', 0), 'chapters': chapters, 'message': message,
                         'active': b['state'] in ('received', 'reading', 'matching') and not paused,
-                        'rereading': bool(b['payload'].get('rereading')) and b['state'] in ('received', 'reading', 'matching') and not paused})
+                        'rereading': bool(b['payload'].get('rereading')) and b['state'] in ('received', 'reading', 'matching') and not paused,
+                        **(await upload_progress(b))})
     async for c in db.tejas_chapter_books.find({'destination.section_id': sid, 'archived': {'$ne': True}, 'status': {'$in': ['queued', 'organising', 'failed']}},
                                                {'_id': 0, 'id': 1, 'title': 1, 'status': 1, 'message': 1}):
         uploads.append({'id': c['id'], 'kind': 'chapter_book', 'title': c['title'], 'state': c['status'], 'pages': 0, 'read_pages': 0,

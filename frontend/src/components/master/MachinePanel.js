@@ -2,6 +2,7 @@ import React,{useCallback,useEffect,useState} from 'react';
 import {RotateCw,Loader2} from 'lucide-react';
 import {toast} from 'sonner';
 import {api,post} from '../../lib/api';
+import {RetryStorageButton} from './UploadProgress';
 
 const GB=1024*1024*1024;
 const gb=b=>`${(b/GB).toFixed(1)} GB`;
@@ -29,6 +30,17 @@ function BookLine({b,stuck,busy,onRetry}){
  </li>;
 }
 
+function Waiting({data,onReload}){
+ const books=data.storage_waiting||[];
+ if(!books.length&&!data.storage_waiting_jobs)return null;
+ return <div className="machine-waiting" data-testid="machine-waiting-list">
+  <ul className="machine-books">{books.map(b=><li key={b.id} className="machine-book is-waiting" data-testid={'machine-waiting-'+b.id}>
+   <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>{b.pages?`${b.read_pages} / ${b.pages} page · `:''}{b.waiting_minutes} min se Supabase ka intezaar. File surakshit hai, apne aap aage chalegi.</small></div>
+  </li>)}</ul>
+  <RetryStorageButton onDone={onReload} testId="machine-storage-retry"/>
+ </div>;
+}
+
 export function MachinePanel({data,onReload}){
  const [busy,setBusy]=useState('');
  if(!data)return <p className="storage-meta" data-testid="machine-loading">Machine ki haalat check ho rahi hai…</p>;
@@ -46,9 +58,11 @@ export function MachinePanel({data,onReload}){
   <h3 className={alert?'is-alert':''} data-testid="machine-title">{alert?'Machine: dhyan dijiye':'Machine: sab theek hai'}</h3>
   <Line ok={!c.late} label="Scheduled jaanch" value={cron} testId="machine-cron"/>
   <Line ok={!data.failed_total} label="Fail kaam (24 ghante)" value={data.failed_total?`${data.failed_total} · ${kinds}`:'0'} testId="machine-failed-jobs"/>
+  <Line ok={!(data.storage_waiting||[]).length&&!data.storage_waiting_jobs} label="Supabase ka intezaar" value={`${(data.storage_waiting||[]).length} PDF · ${data.storage_waiting_jobs||0} kaam`} testId="machine-storage-waiting"/>
   <Line ok={!data.stuck.length} label="15 min se atki PDF" value={String(data.stuck.length)} testId="machine-stuck"/>
   <Line ok={!data.failed_books.length} label="Fail PDF" value={String(data.failed_books.length)} testId="machine-failed"/>
   <Line ok={!lowDisk(data)} label="Disk khali" value={`${gb(data.disk.free)} / ${gb(data.disk.total)}`} testId="machine-disk"/>
+  <Waiting data={data} onReload={onReload}/>
   {books.length>0&&<ul className="machine-books" data-testid="machine-book-list">{books.map(([b,stuck])=><BookLine key={b.id} b={b} stuck={stuck} busy={busy===b.id} onRetry={retry}/>)}</ul>}
   <p className="storage-meta" data-testid="machine-files">Kul save hui file: {data.files_saved.toLocaleString('en-IN')}</p>
  </section>;

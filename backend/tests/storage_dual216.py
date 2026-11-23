@@ -1,4 +1,5 @@
-"""TEST-ONLY iteration 216: the two-store pipeline (Supabase first, Emergent the moment Supabase cannot) against a fake Supabase.
+"""TEST-ONLY iteration 216 (policy updated in 224): Supabase only for new files. When Supabase cannot take a file the write
+waits (StorageWaiting) and NOTHING goes to Emergent; old Emergent files still read. Big files carry on from Supabase's own offset.
 No network, no real keys, no database. Run: cd /app/backend && python tests/storage_dual216.py
 """
 import base64, importlib.util, json, os, sys, threading, time, uuid
@@ -24,7 +25,7 @@ def check(name, ok, detail=''):
 class FakeSupabase:
     def __init__(self):
         self.objects, self.buckets, self.uploads, self.calls = {}, {}, {}, []
-        self.down = False; self.fail_next = 0; self.patch_fail = 0; self.need_bearer = False; self.lock = threading.Lock()
+        self.down = False; self.fail_next = 0; self.patch_fail = 0; self.need_bearer = False; self.cut_after = None; self.lock = threading.Lock()
 
     def __call__(self, req):
         with self.lock:
@@ -72,6 +73,9 @@ class FakeSupabase:
             if len(req.content) != min(S.TUS_CHUNK, u['len'] - len(u['data'])):
                 return httpx.Response(400, text='wrong piece size')
             u['data'] += req.content
+            if self.cut_after is not None:
+                self.cut_after -= 1
+                self.down = self.cut_after <= 0   # Supabase goes away after this many pieces
             if len(u['data']) == u['len']:
                 self.objects[u['key']] = u['data']
             return httpx.Response(204, headers={'Upload-Offset': str(len(u['data']))})
@@ -127,28 +131,45 @@ def main():
         sb.fail_next = 1
         ref3 = S.put_object('jeelive/books/b1/crops/f2.png', png, 'image/png')
         check('one 500 from Supabase: retried, file still in Supabase', ref3.startswith('sb://'), ref3)
-        # 4. Supabase down: Emergent takes over at once; next writes skip Supabase while it rests.
-        sb.down = True; n0 = len(sb.calls)
-        t = time.time(); ref4 = S.put_object('jeelive/books/b1/crops/f3.png', png, 'image/png'); took = time.time() - t
-        check('Supabase down: Emergent takes the file (plain path ref)', ref4 == 'jeelive/books/b1/crops/f3.png' and em.objects.get(ref4) == png, ref4)
-        check('switch to Emergent within 1.5 s', took < 1.5, took)
-        n1 = len(sb.calls)
-        t = time.time(); refs = [S.put_object(f'jeelive/books/b1/crops/g{i}.png', png, 'image/png') for i in range(20)]; took = time.time() - t
-        check('while Supabase rests, 20 files go straight to Emergent (no waiting on Supabase)', all(not r.startswith('sb://') for r in refs) and len(sb.calls) == n1 and took < 0.5, (len(sb.calls) - n1, took))
-        check('switch recorded for the badge', S.STATE['failovers'] >= 1 and S.STATE['last_failover'] and 'Supabase' in S.STATE['last_failover']['reason'], S.STATE['last_failover'])
+        # 4. Supabase down: the file WAITS (StorageWaiting), Emergent is never written; next writes skip Supabase while it rests.
+        sb.down = True; e0 = em.calls
+        t = time.time()
+        try:
+            S.put_object('jeelive/books/b1/crops/f3.png', png, 'image/png'); waited = False
+        except S.StorageWaiting as exc:
+            waited = 'Supabase' in str(exc)
+        took = time.time() - t
+        check('Supabase down: the file waits (StorageWaiting), clear Hinglish reason', waited)
+        check('Supabase down: NOTHING written to Emergent', em.calls == e0 and not em.objects, (em.calls, list(em.objects)))
+        check('wait decided within 1.5 s', took < 1.5, took)
+        n1 = len(sb.calls); waits = 0
+        t = time.time()
+        for i in range(20):
+            try:
+                S.put_object(f'jeelive/books/b1/crops/g{i}.png', png, 'image/png')
+            except S.StorageWaiting:
+                waits += 1
+        took = time.time() - t
+        check('while Supabase rests, 20 files wait at once (no Supabase call, no Emergent)', waits == 20 and len(sb.calls) == n1 and em.calls == e0 and took < 0.5, (waits, len(sb.calls) - n1, em.calls - e0, took))
+        check('wait recorded for the badge', S.STATE['failovers'] >= 1 and S.STATE['last_failover'] and 'Supabase' in S.STATE['last_failover']['reason'], S.STATE['last_failover'])
+        check('a wait is still a StorageError (old callers keep working)', issubclass(S.StorageWaiting, S.StorageError))
         S._source_cache = S.ByteCache(64 * 1024 * 1024)
-        check('file saved in Emergent reads from Emergent', S.get_object(ref4) == png)
+        try:
+            S.get_object(ref); read_wait = False
+        except S.StorageWaiting:
+            read_wait = True
+        check('Supabase down: reading a Supabase file also waits (never searches Emergent)', read_wait and em.calls == e0)
         # 5. Supabase back: after its rest, new files go to Supabase again.
         sb.down = False; S.STATE['down_until'] = 0.0
         ref5 = S.put_object('jeelive/books/b1/crops/f4.png', png, 'image/png')
         check('Supabase back: new files go to Supabase again', ref5.startswith('sb://'), ref5)
-        # 6. Both down: a clear error (the caller holds the mock, nothing half-saved).
-        sb.down = True; em.down = True; S.STATE['down_until'] = 0.0
+        # 6. Both down: still a wait for Supabase (Emergent is not even asked).
+        sb.down = True; em.down = True; S.STATE['down_until'] = 0.0; e0 = em.calls
         try:
             S.put_object('jeelive/books/b1/crops/f5.png', png, 'image/png'); ok = False
-        except S.StorageError as exc:
-            ok = 'storage' in str(exc).lower()
-        check('both stores down: clear StorageError', ok)
+        except S.StorageWaiting as exc:
+            ok = 'supabase' in str(exc).lower()
+        check('both stores down: the file waits for Supabase, Emergent not asked', ok and em.calls == e0)
         sb.down = False; em.down = False; S.STATE['down_until'] = 0.0
         # 7. Old files (saved before Supabase) read from Emergent only.
         em.objects['tejas/sources/old/x.pdf'] = b'%PDF-old'; n = len(sb.calls)
@@ -177,17 +198,49 @@ def main():
         check('health: Supabase down shows its reason and rests it', not h['supabase']['ok'] and h['emergent']['ok'] and not S.supabase_on(), h)
         check('health: a failed check alone is not counted as a file handed to Emergent', S.STATE['failovers'] == 0 and S.STATE['last_failover'] is None, S.STATE['failovers'])
         sb.down = False
-        # 12. Supabase accepts the connection then hangs: no retry of the write, Emergent takes the file at once.
-        reset(sb, em); S.STATE['bucket'] = S.bucket_name(); hangs = {'n': 0}
+        # 12. Supabase accepts the connection then hangs: no retry of the write, the file waits at once (nothing in Emergent).
+        reset(sb, em); S.STATE['bucket'] = S.bucket_name(); hangs = {'n': 0}; e0 = em.calls
 
         def hang(req):
             hangs['n'] += 1
             raise httpx.ReadTimeout('silent', request=req)
         hung = httpx.Client(transport=httpx.MockTransport(hang)); S._client = lambda: hung
-        t = time.time(); ref = S.put_object('jeelive/books/b9/crops/h.png', png, 'image/png'); took = time.time() - t
-        check('hanging Supabase: one try only, file in Emergent, counted as handed over', not ref.startswith('sb://') and hangs['n'] == 1 and took < 1 and S.STATE['failovers'] == 1, (ref, hangs, took))
+        t = time.time()
+        try:
+            S.put_object('jeelive/books/b9/crops/h.png', png, 'image/png'); waited = False
+        except S.StorageWaiting:
+            waited = True
+        took = time.time() - t
+        check('hanging Supabase: one try only, the file waits, counted, Emergent untouched', waited and hangs['n'] == 1 and took < 1 and S.STATE['failovers'] == 1 and em.calls == e0, (waited, hangs, took))
         S._local.sb = None
         check('20 s read limit on real Supabase calls', REAL_CLIENT().timeout.read == 20.0, REAL_CLIENT().timeout)
+        # 13. A big PDF cut off part way by Supabase carries on from Supabase's own offset when it is back (no restart from 0).
+        reset(sb, em); big = os.urandom(20 * 1024 * 1024 + 12345); key = 'jeelive/books/b7/original.pdf'; seen = []
+        sb.cut_after = 2; e0, k0 = em.calls, set(em.objects)
+        with mock.patch.object(S.time, 'sleep', lambda s: None):
+            try:
+                S.put_object(key, big, 'application/pdf', None, seen.append); waited = False
+            except S.StorageWaiting:
+                waited = True
+        saved = seen[-1] if seen else {}
+        check('Supabase gone after 2 pieces: the PDF waits, its place is reported for saving', waited and saved.get('sent') == 2 * S.TUS_CHUNK and saved.get('url'), saved)
+        check('cut-off PDF: nothing written to Emergent', em.calls == e0 and set(em.objects) == k0, em.calls - e0)
+        sb.down = False; sb.cut_after = None; S.STATE['down_until'] = 0.0
+        starts = sum(1 for m, _, p in sb.calls if m == 'POST' and p.endswith('/upload/resumable')); patches = sum(1 for m, _, _ in sb.calls if m == 'PATCH')
+        again = []
+        ref13 = S.put_object(key, big, 'application/pdf', saved, again.append)
+        S._source_cache = S.ByteCache(64 * 1024 * 1024)
+        new_starts = sum(1 for m, _, p in sb.calls if m == 'POST' and p.endswith('/upload/resumable')) - starts
+        new_patches = sum(1 for m, _, _ in sb.calls if m == 'PATCH') - patches
+        check('Supabase back: the PDF carries on from piece 3 (same upload, only the 2 missing pieces sent)', again and again[0]['sent'] == 2 * S.TUS_CHUNK and new_starts == 0 and new_patches == 2, (again[:1], new_starts, new_patches))
+        check('carried-on PDF is byte-exact in Supabase', ref13.startswith('sb://') and S.get_object(ref13) == big)
+        old = {**saved, 'started': time.time() - 21 * 3600}
+        n0 = sum(1 for m, _, p in sb.calls if m == 'POST' and p.endswith('/upload/resumable'))
+        S.put_object(key, big, 'application/pdf', old, None)
+        check('a saved place older than 20 h is not trusted: a fresh upload starts', sum(1 for m, _, p in sb.calls if m == 'POST' and p.endswith('/upload/resumable')) == n0 + 1)
+        S.STATE.update(down_until=0.0, strikes=0)
+        with mock.patch.dict(os.environ, {'SUPABASE_SECRET_KEY': ''}):
+            check('Supabase not set up at all: Emergent still takes new files (unchanged)', not S.configured() and not S.put_object('jeelive/x/z.png', png, 'image/png').startswith('sb://'))
     print(f'TOTAL {len(RESULTS)} PASS {sum(RESULTS)} FAIL {len(RESULTS) - sum(RESULTS)}')
 
 

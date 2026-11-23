@@ -1,13 +1,14 @@
 from fastapi import HTTPException
 from starlette.concurrency import run_in_threadpool
-from .db import db
+from .db import db, now
 from .book_models import BookPage, UploadPart, BookAllowance
 from .book_store import lock_book, unlock, save_book, fence, renew, original, remember, digest, identity, enqueue_book, mocks_for, save_mock
 from .book_pdf import inspect, inspect_many
 from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
 from .chapter_reader import plan_start, bookmark_plan
-from tejas_storage import put_object, StorageError
+from anyio import from_thread
+from tejas_storage import put_object, StorageError, StorageWaiting
 
 PAGES_PER_STEP=100
 MOCKS_PER_STEP=5
@@ -71,6 +72,8 @@ async def publish_batch(book, token, source):
         except HTTPException as exc:
             if exc.status_code==409:raise
             await hold(book,token,mock,exc.detail)
+        except StorageWaiting:
+            raise  # Supabase is away: the whole book waits for it and carries on; the mock is not held
         except (ValueError,StorageError) as exc:
             # One mock that cannot be saved waits for the owner's next Publish; the book and its other mocks carry on.
             await hold(book,token,mock,exc)
@@ -119,7 +122,12 @@ async def receive(book, token):
     if p.get('chapters'):
         try:p['bookmarks']=(await run_in_threadpool(inspect,source,'toc'))['toc'][:1000]
         except ValueError:p['bookmarks']=[]
-    p['source_path']=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/original.pdf',raw,'application/pdf')
+    async def keep(info):
+        await db.tejas_books.update_one({'_id':book.id},{'$set':{'payload.transfer':info}})
+    def progress(info):  # every 6 MB piece: the owner sees the %, and a later try carries on from Supabase's own offset
+        p['transfer']=info;from_thread.run(keep,info)
+    p['source_path']=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/original.pdf',raw,'application/pdf',p.get('transfer'),progress)
+    p.pop('transfer',None)
     p.update(pages=info['pages'],read_pages=0,scanned_pages=0,reader_version=READER_VERSION,message='Original received privately. Reading pages in recoverable batches.')
     use_bookmark_parts(p)
     book.state='reading';await save_book(book,token)
@@ -133,12 +141,12 @@ async def step(job):
     except HTTPException as exc:
         if exc.status_code==404:return 'Book access removed.'
         raise
-    more=False
+    more=False;waited=None
     try:
         await fence(book,token)
         if book.paused:return 'Book paused by owner.'
         if await db.tejas_books.find_one({'_id':id,'archived':True},{'_id':1}):return 'Book is in the Library.'
-        p=book.payload
+        p=book.payload;waited=p.pop('storage_wait',None)
         if book.state=='uploading':return 'Waiting for upload completion.'
         source=await receive(book,token) if not p.get('source_path') else await original(book)
         if p.get('reader_version')!=READER_VERSION:
@@ -199,6 +207,10 @@ async def step(job):
         await save_book(book,token)
     except Exception as exc:
         if isinstance(exc,HTTPException) and exc.status_code==409:raise  # another batch took this PDF: the job waits its turn, the book is not marked failed
+        if isinstance(exc,StorageWaiting):
+            # Supabase is away: the book keeps its state and saved work, shows that it waits, and the job runs again by itself.
+            await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':(waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300]}}})
+            raise
         import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
         book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'
         try:await save_book(book,token)
