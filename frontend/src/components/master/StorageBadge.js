@@ -32,7 +32,7 @@ export function StorageBadge(){
  const machine=useMachineStatus();
  const alert=!!machine.data&&(machine.data.attention||lowDisk(machine.data));
  const [tone,label,text]=LOOK[data?.mode]||['wait','Storage…','Check ho raha hai.'];
- return <Popover><PopoverTrigger asChild><button type="button" className={'storage-badge '+tone} data-testid="storage-badge" aria-label={label+(alert?' · Machine par dhyan dijiye':'')}>
+ return <Popover onOpenChange={open=>{if(open)machine.load();}}><PopoverTrigger asChild><button type="button" className={'storage-badge '+tone} data-testid="storage-badge" aria-label={label+(alert?' · Machine par dhyan dijiye':'')}>
   <span className={'storage-dot '+tone}/><HardDrive size={14} aria-hidden="true"/><span data-testid="storage-badge-label">{label}</span>{data?.mode==='supabase'&&<small>{ms(data.supabase)}</small>}
   {alert&&<i className="machine-alert-dot" data-testid="machine-attention-dot" aria-hidden="true"/>}
  </button></PopoverTrigger>

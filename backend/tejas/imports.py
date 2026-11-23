@@ -181,7 +181,7 @@ async def process_import(id):
             if len(json.dumps(qs,ensure_ascii=False).encode())>6*1024*1024: raise ValueError('Test content exceeds 6 MB. Split the source.')
             await imports.update_one(fence,{'$set':{'questions':qs,'issues':issues,'exam':result['exam'],'duration_minutes':result['duration_minutes'],
                 'status':'blocked' if issues else 'ready','sandbox':result['sandbox'],
-                'message':'Resolve the listed source issues and upload again.' if issues else 'All source entries paired. Supplied answer keys retained; no answers were generated.'}})
+                'message':'Resolve the listed source issues and upload again.' if issues else 'All source entries paired. Supplied answer keys retained; no answers were generated.'},'$unset':{'storage_waits':''}})
         except Exception as exc:
             from tejas_storage import StorageError, StorageWaiting
             if isinstance(exc,StorageWaiting):

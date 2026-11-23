@@ -1,0 +1,36 @@
+{
+  "summary": "Retest of iteration 216 fixes on the isolated bridge 127.0.0.1:8774 (the preview DB was never used). Backend regressions, run one at a time: storage_dual216 36/36, storage_wait224 27/27, storage_fail215 13/13, pictures_iso220 66/66, phase1_iso221 17/17. UI suite ui_storage_wait_qa224.py: 48/48 (desktop and 390x844 mobile wait flow, % bar, upload dialog percent, Select PDF chooser, recovery in about 5 s, badge back to Supabase). New test ui_storage_badge_event224.py: 9/10. FIX 1(a) passes: with Supabase up the badge said 'Storage: Supabase'; after the flag was set and a new upload waited, the badge changed to 'Storage: Supabase ka intezaar' as soon as the wait row appeared (0 s lag, 1 fresh health call). FIX 1(b) badge part passes: the badge says 'Storage: Supabase' within 5 s of the row retry, with no page reload. FIX 1(b) machine-panel part FAILS: the panel keeps showing the book as waiting ('1 PDF') for about 50 s after recovery and only clears at the 60 s poll. FIX 4 passes: the machine status message is 'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.' and the row never says 'Transfer complete'. FIX 2 and FIX 3 are covered by the passing suites and were code-reviewed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "tejas/imports.py + tejas/chapter_books.py (storage wait)", "issue": "storage_waits only ever goes up and is never reset after a successful run. After 3 waits, every later Supabase outage for the same import or book starts straight at the 300 s backoff. (Jobs do reset it: run_job sets storage_waits to 0 when done.)"},
+      {"endpoint": "jobs.wake_uploads", "issue": "Picks only 20 imports or books per collection, with no sort order. Every 15-minute maintenance run also calls process_import/process_book even while Supabase is still down, so each one fails and sets up another run_later timer. This is harmless because the claim is atomic, but it adds noise."},
+      {"endpoint": "tejas/imports.py render PNG skip", "issue": "The file id is uuid5(question id, role:n), so if a file record already exists the new PNG is skipped. If the source pictures change while the question id stays the same, the old picture is reused. The old code had the same behaviour through $setOnInsert, so this is not a regression; noted only."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Supabase recovery -> machine panel (FIX 1b)", "issue": "Timing problem: retryStorage() calls tell() as soon as POST /admin/storage/retry returns, so useMachineStatus reloads /admin/machine/status at that moment. The woken book_step has not run yet, and payload.storage_wait is only cleared when step() saves the book. The panel therefore still lists machine-waiting-<id> and 'Supabase ka intezaar 1 PDF'. Nothing else triggers a reload: when the row's wait note disappears no event is sent, and opening the popover does not reload. The panel cleared about 50 s later, at the 60 s interval. Measured: the wait row was gone at about 5 s, the panel cleared at about 52 s.", "affected_selectors": ["machine-waiting-<id>", "machine-storage-waiting", "type-upload-wait-retry-<id>", "storage-retry-now", "machine-storage-retry"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/ui_storage_badge_event224.py", "/app/backend/tests/ui_storage_wait_qa224.py", "/app/backend/tests/storage_dual216.py", "/app/backend/tests/storage_wait224.py", "/app/backend/tests/storage_fail215.py", "/app/backend/tests/pictures_iso220.py", "/app/backend/tests/phase1_iso221.py"],
+  "action_items": [
+    "FIX 1(b) machine panel: also call tell() when a row's storage_wait goes away. In UploadProgress, keep the previous waitSince in a ref and call tell() when it changes from set to unset. Or reload the machine status a few seconds after a retry that returns woke>0, and/or reload it when the storage popover opens.",
+    "Optional: reset storage_waits to 0 when an import or chapter book finishes successfully (for example $set storage_waits 0 in the success update)."
+  ],
+  "critical_code_review_comments": [
+    "UploadProgress.retryStorage: the catch branch (network or 5xx) does not call tell(), so the badge is not refreshed after a failed retry call. Minor.",
+    "UploadProgress useEffect fires tell() once per waiting row, so N waiting rows on first paint cause N fresh health probes (and N machine status loads). Consider debouncing tell().",
+    "MachinePanel RetryStorageButton onDone=onReload plus the tell() listener load /admin/machine/status twice per click. Harmless.",
+    "book_worker.receive: progress() calls from_thread.run(keep) for every 6 MB piece, which is fine. The resume info (payload.transfer) is saved to the DB before StorageWaiting is raised, and _carry_on checks path, size and age before resuming. Looks correct.",
+    "SupabaseRefused is treated as a final StorageError in book_worker (book failed with the TOO_BIG Hinglish message), in imports and in chapter_books. Correct, and it is not a wait."
+  ],
+  "updated_files": ["/app/backend/tests/ui_storage_badge_event224.py"],
+  "success_rate": {"backend": "100% (159/159 across 5 suites)", "frontend": "57/58 (98%)"},
+  "seed_data_creation": "Only inside the disposable bridge DB: uploaded qa_variant3.pdf and qa_variant4.pdf (copies of qa_variant2 with a different byte at the end, in /tmp/uibridge224). The bridge drops its DB when it stops. The flag /tmp/uibridge224/supabase_down was re-created at the end, as it was at the start.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Bridge on 127.0.0.1:8774 (log /tmp/bridge224.log). Run BRIDGE_OUT=/tmp/uibridge224 BRIDGE_PORT=8774 python tests/ui_storage_badge_event224.py <fresh pdf in /tmp/uibridge224>. Each run needs a PDF that has not been uploaded yet (copy one and append '%x' bytes). The machine status API returns an envelope {data: ...}. ui_storage_wait_qa224.py needs the seeded TEST_SUPABASE_WAIT book to still be waiting; that book was already recovered in this run, so the recovery phase of that suite will not find a waiting row again unless the bridge is restarted."
+}

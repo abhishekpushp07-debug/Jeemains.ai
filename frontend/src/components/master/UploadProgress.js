@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useRef,useState} from 'react';
 import {RotateCw,Loader2} from 'lucide-react';
 import {toast} from 'sonner';
 import {post} from '../../lib/api';
@@ -43,8 +43,10 @@ function Stage({b,readLine}){
 
 // Where an uploaded PDF stands: parts on the server, the original into Supabase, pages read, and any wait for Supabase.
 export function UploadProgress({b,readLine,onChanged}){
- const waitSince=b.storage_wait?.since;
- useEffect(()=>{if(waitSince)tell();},[waitSince]);
+ const waitSince=b.storage_wait?.since,was=useRef(waitSince);
+ // A wait that starts or ends: the badge and machine panel check again at once.
+ useEffect(()=>{if(waitSince||was.current)tell();was.current=waitSince;},[waitSince]);
+ useEffect(()=>()=>{if(was.current)tell();},[]);
  return <>
   <Stage b={b} readLine={readLine}/>
   {b.storage_wait&&<div className="admin-note warn upload-wait" role="status" data-testid={'type-upload-wait-'+b.id}>

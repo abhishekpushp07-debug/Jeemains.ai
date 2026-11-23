@@ -272,7 +272,7 @@ async def wake_uploads():
     from .chapter_books import books, process_book
     n = 0
     for col, fn in ((imports, process_import), (books, process_book)):
-        for r in await col.find({'status': 'queued', 'storage_wait': {'$exists': True}}, {'id': 1}).limit(20).to_list(20):
+        for r in await col.find({'status': 'queued', 'storage_wait': {'$exists': True}}, {'id': 1}).sort('storage_wait', 1).limit(20).to_list(20):
             run_later(fn, r['id'], seconds=0)
             n += 1
     return n
@@ -396,7 +396,9 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
     await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
     from .book_worker import recover
     await recover()
-    await wake_uploads()
+    import tejas_storage
+    if tejas_storage.supabase_on():
+        await wake_uploads()
     selected = []
     for kind, capacity in LANE_LIMITS.items():
         if kind == 'ai_solution':

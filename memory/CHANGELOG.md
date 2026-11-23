@@ -293,3 +293,13 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - Left alone: isolated test database tejas_isolated_book170_436fa878 from an earlier session (see ROADMAP).
 - tests/ui_analysis2_flows206.py now imports its helpers from ui_analysis2_walk204.py (which only runs its walk when started directly). Re-run after the change: 18/18, 390 px dark walk clean.
 - Seen in the test setup only: the Results page's Dream meter call (/api/dream, relayed to the app server) answers 503 for the synthetic test students, because they do not exist on the app side. Signed out on the preview it answers 401. Not checked with a real signed-in student (already pending as "Live Authenticated Validation").
+
+
+## 2026-11-23 — Supabase only, wait + resume, upload % bars (preview only, NOT deployed)
+- backend/tejas_storage.py: Emergent is no longer used as a fallback for new writes. StorageWaiting is raised when Supabase cannot take a file; SupabaseRefused is raised for files over Supabase's size limit. Each Supabase miss is now logged.
+- backend/tejas/jobs.py: on StorageWaiting a job requeues with backoff and does not use up its tries. Added run_later, wake_storage and wake_uploads; maintenance now wakes waiting imports.
+- backend/tejas/book_worker.py: payload.transfer (the resume point) and payload.storage_wait. A picture save that has to wait no longer holds the mock.
+- backend/tejas/imports.py, chapter_books.py: when storage is waiting they go back to queued with backoff, and a re-run does not upload render PNGs again.
+- backend/tejas/storage_health.py: 'waiting' mode and POST /retry. machine.py: storage_waiting list. master.py: upload_progress (parts / transfer / storage_wait). server.py: StorageWaiting gives a 503 with a Hinglish message to admins.
+- frontend: components/master/UploadProgress.js (new) has the % bars, the wait note and the retry button. StorageBadge.js: 'Supabase ka intezaar' mode and an instant refresh event. MachinePanel.js: waiting line and list. UploadDialog.js: shows a %. master.css: styles for the new parts.
+- Tests: storage_dual216.py rewritten for the new policy (36/36); new storage_wait224.py (27/27), storage_wait_bridge224.py and ui_storage_wait224.py. Testing agent iterations 216 and 217 found no open functional issues after the fixes.
