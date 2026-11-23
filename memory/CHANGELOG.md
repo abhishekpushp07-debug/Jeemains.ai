@@ -302,4 +302,13 @@ Earlier project history is preserved, unchanged, in PRD.md; new detailed entries
 - backend/tejas/imports.py, chapter_books.py: when storage is waiting they go back to queued with backoff, and a re-run does not upload render PNGs again.
 - backend/tejas/storage_health.py: 'waiting' mode and POST /retry. machine.py: storage_waiting list. master.py: upload_progress (parts / transfer / storage_wait). server.py: StorageWaiting gives a 503 with a Hinglish message to admins.
 - frontend: components/master/UploadProgress.js (new) has the % bars, the wait note and the retry button. StorageBadge.js: 'Supabase ka intezaar' mode and an instant refresh event. MachinePanel.js: waiting line and list. UploadDialog.js: shows a %. master.css: styles for the new parts.
+
+## 2026-11-23 — "Purani files" copy (Emergent -> Supabase) with the app team's picture rules (preview only, NOT deployed)
+- New backend/tejas/storage_move.py: an owner-only status/start/stop. It copies with the same bytes: read, check the hash, put, read back, compare, and only then switch with moved_from. It never deletes. Failures are listed in Hinglish, a Supabase outage makes it wait and then resume, and only one run happens at a time under a lease. Books held by a worker are skipped.
+- backend/tejas/pictures.py: asset_revision identity is now sha256 or moved_from or path, so a moved file keeps its revision.
+- backend/tejas/storage_health.py: check_now(), used by Retry and by Copy start. backend/tejas/jobs.py: wake_storage and maintenance resume a waiting copy.
+- backend/tejas_storage.py: SupabaseRefused also covers a refused file type or name (415, mime type, invalid key).
+- frontend: components/master/LegacyMove.js (new), shown in the Storage badge popover; styles in master.css.
+- Tests: storage_move225.py, storage_move_edge225.py, storage_move_fix226.py, ui_legacy_move226.py; storage_dual216 now 37/37. Testing agent iterations 218/219.
+
 - Tests: storage_dual216.py rewritten for the new policy (36/36); new storage_wait224.py (27/27), storage_wait_bridge224.py and ui_storage_wait224.py. Testing agent iterations 216 and 217 found no open functional issues after the fixes.

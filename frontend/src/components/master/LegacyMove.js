@@ -2,6 +2,7 @@ import React,{useCallback,useEffect,useState} from 'react';
 import {Loader2,ArrowRightLeft,Square} from 'lucide-react';
 import {toast} from 'sonner';
 import {api,post} from '../../lib/api';
+import {STORAGE_EVENT} from './UploadProgress';
 
 const ACTIVE=['running','waiting'];
 const SAYS={running:'Copy chal rahi hai…',waiting:'Supabase ka intezaar. Lautte hi copy wahin se aage chalegi.',stopped:'Roki gayi. Copy dabane par wahin se aage chalegi.',
@@ -12,7 +13,7 @@ function useMove(){
  const load=useCallback(()=>api('/admin/storage/move/status').then(setData).catch(()=>{}),[]);
  useEffect(()=>{load();},[load]);
  useEffect(()=>{if(!ACTIVE.includes(data?.state))return;const t=setInterval(load,3000);return()=>clearInterval(t);},[data?.state,load]);
- return {data,setData};
+ return {data,setData,load};
 }
 
 function Failures({items}){
@@ -22,10 +23,11 @@ function Failures({items}){
 
 // Super Admin: copies the old Emergent files into Supabase. Same bytes, so the app re-downloads nothing; Emergent copies are kept.
 export function LegacyMove(){
- const {data,setData}=useMove();
+ const {data,setData,load}=useMove();
  const [busy,setBusy]=useState(false);
  if(!data)return null;
- const act=async path=>{setBusy(true);try{setData(await post('/admin/storage/move/'+path));}catch(e){toast.error(e.message);}finally{setBusy(false);}};
+ // A refusal (Supabase just went down) refreshes this section and the badge at once.
+ const act=async path=>{setBusy(true);try{setData(await post('/admin/storage/move/'+path));}catch(e){toast.error(e.message);load();window.dispatchEvent(new Event(STORAGE_EVENT));}finally{setBusy(false);}};
  const left=data.remaining_total,active=ACTIVE.includes(data.state),done=data.moved+data.failed+data.skipped;
  // Files that failed or were skipped this run are still on Emergent, so they are in "left" too: count them once.
  const total=done+Math.max(0,left-data.failed-data.skipped);

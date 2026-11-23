@@ -49,6 +49,8 @@ class FakeSupabase:
         if p.startswith('/storage/v1/object/') and req.method == 'POST':
             if self.too_big:
                 return httpx.Response(413, json={'statusCode': '413', 'error': 'Payload too large', 'message': 'The object exceeded the maximum allowed size'})
+            if getattr(self, 'bad_type', False):
+                return httpx.Response(400, json={'statusCode': '415', 'error': 'invalid_mime_type', 'message': 'mime type image/x-test is not supported'})
             if self.fail_next:
                 self.fail_next -= 1; return httpx.Response(500, text='boom')
             key = p[len('/storage/v1/object/'):]
@@ -249,6 +251,13 @@ def main():
             kind = type(exc).__name__
         check('over Supabase size limit: SupabaseRefused (not a wait), Supabase not rested, Emergent untouched', kind == 'SupabaseRefused' and S.supabase_on() and S.STATE['failovers'] == 0 and em.calls == e0, (kind, S.STATE['failovers']))
         sb.too_big = False
+        sb.bad_type = True; e0 = em.calls
+        try:
+            S.put_object('jeelive/books/b8/crops/odd.png', png, 'image/png'); kind = None
+        except S.StorageError as exc:
+            kind = type(exc).__name__
+        check('a file type Supabase refuses: SupabaseRefused (not a wait), Supabase not rested, Emergent untouched', kind == 'SupabaseRefused' and S.supabase_on() and S.STATE['failovers'] == 0 and em.calls == e0, (kind, S.STATE['failovers']))
+        sb.bad_type = False
         with mock.patch.dict(os.environ, {'SUPABASE_SECRET_KEY': ''}):
             check('Supabase not set up at all: Emergent still takes new files (unchanged)', not S.configured() and not S.put_object('jeelive/x/z.png', png, 'image/png').startswith('sb://'))
     print(f'TOTAL {len(RESULTS)} PASS {sum(RESULTS)} FAIL {len(RESULTS) - sum(RESULTS)}')

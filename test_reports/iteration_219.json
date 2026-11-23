@@ -1,0 +1,38 @@
+{
+  "summary": "Retest of the iteration_218 storage_move fixes (A-G). Every fix is verified. All regression suites were run one at a time and all pass: edge225 6/6, move225 24/24, pictures_iso220 66/66, storage_wait224 27/27, storage_dual216 36/36, phase1_iso221 17/17. The Traceback in phase1 is logged on purpose by the BUSY test. New backend suite storage_move_fix226.py (17/17) covers FIX C (lease renewed before each file), D (sha changed mid-copy -> not switched, counted as skipped), E (fixed Hinglish reasons for missing-on-Emergent and Supabase read-back; no path, '404' or raw text) and F (409 when down; Start while running returns status with one task; Start on a waiting run after Supabase is back resumes it). UI on bridge 8774: ui_storage_wait_qa224 'down' phase 41/41 at desktop and 390x844. New ui_legacy_move226.py passes 17/17 at desktop: down -> 3 listed, Copy disabled, wait note; up -> Copy -> '3 / 3 · 2 copy hui · 1 nahi ho payi', bar 3/3, 1 failure with the Hinglish reason and no path; flag re-created -> immediate click -> 409 toast in ~1.2 s. Mobile run: one expected fail (pre-state already 1 left). Its progress check passed on the old screen text, but the screenshot shows the correct '1 / 1 · 0 copy hui · 1 nahi ho payi', and the API agrees (total 1, failed 1). Edge225 case 3 was reviewed: the lock_book/save_book flow is realistic.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "tejas/storage_move.copy -> tejas_storage.put_object", "issue": "A non-transient Supabase refusal for ONE file is turned into StorageWaiting and a Supabase strike. Examples: 400/415 for a mime type the bucket does not allow (_kind sends application/octet-stream for JPEG/WebP), or an invalid key. Only 413/max-size is a SupabaseRefused. So one bad old file would make the whole move wait forever and mark Supabase down for the site, instead of listing that file as failed. Not reachable with the fake; this is a code-review risk."},
+      {"endpoint": "GET /api/admin/storage/move/status", "issue": "remaining counts import DOCUMENTS ({'sources': {$elemMatch}}), but the run tries per SOURCE, so the progress total is wrong for imports with 2+ old sources. A book locked by a worker is in remaining but is never tried, so the run ends 'done' with progress below total (e.g. '2 / 3 · Copy poori hui.'). A skipped item whose path already moved by other means is subtracted from left anyway (the max(0, ...) floor hides it). All of this is cosmetic."},
+      {"endpoint": "storage_health.check_now", "issue": "If a health check task is already running (started before Supabase changed), check_now awaits that old result instead of a truly fresh probe. Edge case only."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "LegacyMove Copy -> 409", "issue": "After the 409 toast, the popover does not reload: the badge still shows 'Storage: Supabase' (green) and the Copy button stays enabled until the popover is reopened. Suggest: on a 409 from start, reload move status and storage health.", "affected_selectors": ["[data-testid=move-start]", "[data-testid=storage-badge-label]"]}
+    ],
+    "design_issues": [
+      {"screen": "Storage popover", "issues": ["The 'Aakhri baar ... Wajah:' line shows raw English text ('Supabase big-file upload stopped at 0 of 5609 bytes (no answer).') inside Roman Hinglish copy. This was already there before."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/storage_move_fix226.py", "/app/backend/tests/ui_legacy_move226.py", "/app/backend/tests/storage_move_edge225.py", "/app/backend/tests/ui_storage_wait_qa224.py"],
+  "action_items": [
+    "(Optional, robustness) In storage_move, treat a 4xx Supabase refusal of a single object (not 408/429/5xx/connection) as a per-file failure with a Hinglish reason, not StorageWaiting. Also consider sending the real content type for JPEG/WebP.",
+    "(Optional) LegacyMove: after a 409 from /move/start, re-fetch move status and storage health so the button and badge match reality.",
+    "(Optional) Make remaining()/total count import sources, not import documents; consider skipping locked books in remaining or saying 'X baad mein'."
+  ],
+  "critical_code_review_comments": [
+    "FIX A-G are all implemented correctly and verified by tests.",
+    "The op doc's skip list ($push skip per tried item, used in $nin) grows without limit within a run. That is fine for thousands of files but stores every key in one document.",
+    "op.last_error stores raw English Supabase text (r.text[:160]) and status returns it. LegacyMove does not show it, so it is not visible today."
+  ],
+  "updated_files": ["/app/backend/tests/storage_move_fix226.py", "/app/backend/tests/ui_legacy_move226.py"],
+  "success_rate": {"backend": "100% (193/193 across 7 suites)", "frontend": "100% (desktop 17/17 + qa224 41/41; the mobile pre-state mismatch is a test artifact)"},
+  "seed_data_creation": "None in any real DB. The backend suites use disposable iso DBs, which are dropped. The UI ran on bridge 8774, whose DB is disposable: its 2 old files were copied, the lost one stays listed, and qa224 added an upload 'qa_variant' that waited and then recovered. Flag /tmp/uibridge224/supabase_down is re-created (Supabase DOWN).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run the suites one at a time from /app/backend. ui_legacy_move226.py expects a fresh bridge (3 old files, flag present) for phase A. On a reused bridge only phases B and C apply. Its progress loop can read the old 'done' text right after the click; check move-progress after the POST returns. The bridge started at 19:30 with 3000 s.",
+  "test_credentials": "No permanent credentials. Bridge cookies are in /tmp/uibridge224/bridge.json. The preview DB was not used."
+}

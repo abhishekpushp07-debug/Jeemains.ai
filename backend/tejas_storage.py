@@ -37,11 +37,16 @@ class SupabaseRefused(StorageError):
 
 
 TOO_BIG = 'Yeh file Supabase ki size limit se badi hai, isliye save nahi hui (Emergent mein bhi nahi gayi). Supabase dashboard mein bucket ki file size limit badhaiye ya chhoti PDF chuniye.'
+NOT_ALLOWED = 'Supabase ne yeh file lene se mana kiya (file ka type ya naam allowed nahi). Isliye save nahi hui (Emergent mein bhi nahi gayi).'
 
 
 def _refused(r):
-    if r.status_code == 413 or (r.status_code == 400 and 'maximum allowed size' in r.text.lower()):
+    """Supabase is up but will never take THIS file: stop with the reason instead of waiting (and do not mark Supabase down)."""
+    text = r.text.lower() if r.status_code in (400, 413, 415, 422) else ''
+    if r.status_code == 413 or 'maximum allowed size' in text:
         raise SupabaseRefused(TOO_BIG)
+    if r.status_code == 415 or any(s in text for s in ('mime type', 'invalid key', 'invalidkey')):
+        raise SupabaseRefused(NOT_ALLOWED)
 
 
 WAIT_TEXT = 'Supabase abhi file nahi le raha. Kaam ruka hai, file surakshit hai; Supabase lautte hi apne aap aage chalega.'

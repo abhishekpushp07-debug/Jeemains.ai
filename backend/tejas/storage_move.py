@@ -67,12 +67,21 @@ async def next_items(skip):
 
 async def remaining():
     counts = {name: await col.count_documents({field: PLAIN}) for name, col, _, field, _, _ in places()}
-    counts['imports'] = await db.tejas_imports.count_documents({'sources': {'$elemMatch': {'path': PLAIN}}})
+    plain = {'$and': [{'$eq': [{'$type': '$$s.path'}, 'string']}, {'$ne': ['$$s.path', '']}, {'$ne': [{'$substrCP': ['$$s.path', 0, 5]}, store.SB]}]}
+    rows = await db.tejas_imports.aggregate([{'$match': {'sources': {'$elemMatch': {'path': PLAIN}}}},
+                                              {'$group': {'_id': None, 'n': {'$sum': {'$size': {'$filter': {'input': '$sources', 'as': 's', 'cond': plain}}}}}}]).to_list(1)
+    counts['imports'] = rows[0]['n'] if rows else 0  # every old source file, not every import
     return counts
 
 
 def _kind(raw):
-    return 'image/png' if raw[:4] == b'\x89PNG' else 'application/pdf' if raw[:5] == b'%PDF-' else 'application/octet-stream'
+    if raw[:4] == b'\x89PNG':
+        return 'image/png'
+    if raw[:3] == b'\xff\xd8\xff':
+        return 'image/jpeg'
+    if raw[:4] == b'RIFF' and raw[8:12] == b'WEBP':
+        return 'image/webp'
+    return 'application/pdf' if raw[:5] == b'%PDF-' else 'application/octet-stream'
 
 
 def copy(old, sha, resume, progress):
@@ -118,7 +127,8 @@ async def one(token, item, op):
         await _note(token, {'$set': {'state': 'waiting', 'lease': '', 'last_error': str(exc)[:300], 'waiting_since': now()}})
         return False
     except Exception as exc:  # noqa: BLE001  this one file stays on Emergent and is listed; the rest carry on
-        reason = str(exc)[:240] if isinstance(exc, (ValueError, store.SupabaseRefused)) else 'Copy beech mein ruk gayi. File Emergent se hi chalti rahegi.'
+        reason = ('Supabase ne yeh file nahi li (size ya type ki rok). File Emergent se hi chalti rahegi.' if isinstance(exc, store.SupabaseRefused) else
+                  str(exc)[:240] if isinstance(exc, ValueError) else 'Copy beech mein ruk gayi. File Emergent se hi chalti rahegi.')
         await _note(token, {'$inc': {'failed': 1}, '$set': {'current': None},
                             '$push': {'skip': item['key'], 'failures': {'$each': [{'label': item['label'], 'reason': reason, 'at': now()}], '$slice': -50}}})
         return True
