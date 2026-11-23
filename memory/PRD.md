@@ -1,5 +1,11 @@
 # JEELIVE.AI Native App — PRD
 
+## Pictures fast-load: owner asked what the app needs from the website (23 Nov 2026). No app code changed.
+- User (Hinglish): "Picture Fast Load … ye ho gya hai tumko kya chiye ?? website se also website pr live nhi hua hai". Read as: the website's half is built, not live on jeelive.ai. This reading was told to the user; jeelive.ai was NOT re-checked in this fork.
+- Answer given + copy-paste note for the website: `/app/memory/APP_PICTURES_NEEDS.md` (1: what is built + differences + 3 open answers; 2: one place to test real answers — pilot on jeelive.ai for 7004186276, or the website's preview /api address + a throw-away student; 3: publish hour; 4: four-line go-live note).
+- App side is still NOT built. Start only when the owner says so AND route 2A or 2B exists. Details of what to build: "Pictures: website answered, app replied" section below + `APP_PICTURES_REPLY.md`.
+
+
 ## Glossy Theme Guide PDF for the website team (23 Nov 2026) — DONE, link given to user
 - User (Hindi): "एक PDF दो कि अभी तुमने कहाँ-कहाँ क्या रंग change किया है, ताकि मैं website को दे सकूँ… सारा कुछ same ही रखना चाहिए". Route 2 picture fast-load: "Abhi nahi, ruko" — do NOT start until the user says the website side is live.
 - Files in `/app/handoff/theme_guide/`: `JEELIVE_App_Glossy_Theme_Guide.pdf` (22 pages, 3,163,019 bytes; colours, Shine build, 10 screen sections, rules, checklist, appendix A = full `shine.css`, appendix B = full `shine.js`), `shine.css`, `shine.js`, builder `build_guide.py` (+ `guide.html`, `guide.css`, `shots/`).
