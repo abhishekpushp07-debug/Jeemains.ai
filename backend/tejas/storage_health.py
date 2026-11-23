@@ -41,12 +41,17 @@ def backup(st):
     return {'since': since, 'writes': st['failovers'], 'alert': bool(store.configured() and since and time.time() - since >= ALERT_AFTER)}
 
 
+async def check_now():
+    """Checks Supabase now, not from the last minute's answer (an owner pressed a button)."""
+    _last['at'] = 0.0
+    return await health(fresh=True, u=None)
+
+
 @router.post("/retry")
 async def retry(u=Depends(owner)):
     """'Abhi phir try karo': checks Supabase now; if it answers, every job waiting for it runs at once."""
     _last['woke'] = 0
-    _last['at'] = 0.0  # the owner asked: check Supabase now, not from the last minute's answer
-    out = await health(fresh=True, u=u)
+    out = await check_now()
     return {**out, 'woke': _last.get('woke', 0)}
 
 

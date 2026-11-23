@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration 225 feature (copying old Emergent files to Supabase + phone rules). BACKEND: all 6 requested suites pass, run one at a time: storage_move225 24/24, pictures_iso220 66/66, storage_wait224 27/27, storage_dual216 36/36, phase1_iso221 17/17, storage_fail215 13/13 (183/183). A new edge-case suite tests/storage_move_edge225.py found 2 real defects: (1) import sources beyond the first 20 import documents are never copied once 20 import docs have failed, and the run wrongly reports 'done'; (2) a race where a stale book-worker save puts back the Emergent source_path. Neither one loses data, because Emergent copies are never deleted. Code review found no path that deletes an Emergent file and no path that switches a reference without checking the copy's hash. FRONTEND (bridge 8774, owner): LegacyMove works. Supabase down: title 'Purani files Emergent mein: 3', start disabled, wait note, no paths. Supabase up: Copy gives 2 copied and 1 failed (old_lost.png listed with its reason), state 'Copy poori hui.', title 1 left, Stop button gone, Start offered again. Flag back with a fresh health check: start disabled and the API returns 409. Mobile 390x844: popover scrolls (overflow-y auto), no overflow. UI defects: the progress counter double-counts failed files ('3 / 4' when it should be '3 / 3'). Right after the flag is re-created, Copy is accepted (200) until a health check marks Supabase down, because the health state is cached. REGRESSION: ui_storage_wait_qa224 48/48, ui_storage_badge_event224 (qa_variant8.pdf) 10/10.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "storage_move.next_items (imports)", "issue": "The imports query uses .limit(BATCH) and not BATCH+len(skip), unlike the other places. When 20 or more import docs have a failed or skipped source, the same 20 docs come back every time, the remaining imports are never tried, and the state goes to 'done'. Repro: storage_move_edge225.py has 25 imports with a missing source plus 1 good one. Result: failed=20, good import still on Emergent, state=done, remaining.imports=26. Fix: .limit(BATCH + len(skip)), or exclude skipped ids / page by _id."},
+      {"endpoint": "storage_move.one vs book_store.save", "issue": "Race: book_store.save does $set: book.model_dump() (whole payload) under lock_token. If the move switches payload.source_path while a worker holds the book, the worker's stale save puts back the Emergent path and drops moved_from. The move has already counted it as 'moved'. No data loss (Emergent is kept, and a later run copies it again), but the counter is wrong and the file goes back to Emergent. Confirmed in storage_move_edge225.py. Fix: skip books where lock_until > now (and maybe running states) in next_items, or have save() keep payload.source_path/moved_from when they changed."},
+      {"endpoint": "storage_move lease", "issue": "The lease (180 s) is only renewed once per batch of 20 files, in run(). It is not renewed per file or in the progress callback. A batch of slow or big PDFs taking more than 180 s makes status show 'interrupted', and resume()/maintain() or Start can claim a second run while the first is still copying the current file (with a resumable transfer, to the same Supabase key). The old task exits at the next item, so there is no wrong switch, but the work is duplicated and the UI is misleading. Fix: extend lease_until in _note/keep and before each item."},
+      {"endpoint": "storage_move.one switch match", "issue": "The switch filter matches only the old path, not the sha. If the same key is rewritten on Emergent with new bytes and a new sha between copy() and update_one, Supabase gets the old bytes while the doc has the new sha. Unlikely if keys are unique per upload. Safer: add the sha field to the match when it is present."},
+      {"endpoint": "storage_move.one failure reason", "issue": "The reason for a StorageError is str(exc). For a file missing on Emergent, the real message is English ('Private storage unavailable (404)... quota') and not Hinglish, and it is misleading. On the bridge the harness message even shows a path ('TEST: missing tejas/ui224/old_lost.png'); that comes from the harness, but nothing filters paths out. Map Emergent read errors to a Hinglish reason, e.g. 'Emergent mein yeh file nahi mili'."},
+      {"endpoint": "POST /api/admin/storage/move/start", "issue": "Start relies on the cached supabase_on(). Right after Supabase goes down, and before a health check or a failure, Start returns 200 and runs. Harmless (the copy then waits), but it does not match the 'disabled/409 when down' expectation until the next health check. A fresh Start on a 'done' state also clears the previous moved/failures history."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "LegacyMove progress", "issue": "total=Math.max(data.total, done+left) counts failed files twice: they are in both 'failed' (done) and remaining_total (left). After a run with 1 failure the text shows '3 / 4 · 2 copy hui · 1 nahi ho payi' and the bar never fills. A later run shows '1 / 2'. Use done + left - failed (or left minus what is still in failures).", "selector": "[data-testid=move-progress]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [
+      {"flow": "Copy right after Supabase goes down", "issue": "The button stays enabled and Start returns 200 until a health check refreshes the state (cached supabase_ready). After 'Abhi check karo' / a fresh health check it is disabled with the wait note, and the API returns 409 as expected.", "affected_selectors": ["[data-testid=move-start]", "[data-testid=move-wait-note]"]}
+    ],
+    "design_issues": []
+  },
+  "test_report_links": ["/app/backend/tests/storage_move225.py", "/app/backend/tests/storage_move_edge225.py", "/app/backend/tests/ui_legacy_move225.py", "/app/backend/tests/ui_storage_wait_qa224.py", "/app/backend/tests/ui_storage_badge_event224.py"],
+  "action_items": [
+    "storage_move.next_items: page the imports query past skipped keys (limit BATCH+len(skip) or $nin), so later imports are copied and the run does not end 'done' early",
+    "Prevent the stale-save revert: skip locked books (lock_until > now) in next_items, or keep payload.source_path/moved_from in book_store.save",
+    "Renew the storage-move lease per file and in the progress callback",
+    "LegacyMove: fix total so failed files are not counted twice (expected '3 / 3' after 2 copied + 1 failed)",
+    "Give a Hinglish reason for Emergent read failures (missing file) and never pass raw exception text that could contain a path",
+    "Optional: add the sha to the switch match; do a quick live probe in start() before accepting; keep history when restarting from 'done'"
+  ],
+  "critical_code_review_comments": [
+    "No delete of Emergent objects anywhere in storage_move.py. Every switch happens after copy() checks the read-back hash, and the switch is a conditional update on the old path (good).",
+    "begin(): the atomic upsert with DuplicateKeyError makes it single-flight. Confirmed with concurrent begin() (only one token).",
+    "remaining() counts import documents, not import sources, so the title count can differ from the number of files.",
+    "stop() while running: the switch for the file in hand still happens, but its _note is ignored because the lease is cleared, so the moved counter is short by one."
+  ],
+  "updated_files": ["/app/backend/tests/storage_move_edge225.py (new)", "/app/backend/tests/ui_legacy_move225.py (new)"],
+  "success_rate": {"backend": "100% of requested suites (183/183); edge suite 2/5 (3 fails = 2 real defects)", "frontend": "LegacyMove 19/21 (failures: progress double-count; Copy accepted before the health check notices Supabase is down); regression 58/58"},
+  "seed_data_creation": "None in the preview DB. The bridge's own seeded files were copied (2 to the fake Supabase). PDFs /tmp/uibridge224/qa_variant.pdf and qa_variant8.pdf were generated and uploaded on the bridge.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "The bridge (127.0.0.1:8774, /tmp/uibridge224) was restarted at 19:18 with 3000 s. The flag supabase_down is present at the end. The bridge move state is now 'done', with 1 failure (old_lost.png) and 1 file still on Emergent. Run ui_legacy_move225.py with the modes down|copy|after|mobile ('down' expects 3 files, so it only passes on a fresh bridge). badge_event224 needs a new pdf name each run (qa_variant8 is used). storage_move_edge225.py repeats the imports-pagination and stale-save race failures."
+}

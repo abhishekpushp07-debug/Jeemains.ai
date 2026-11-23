@@ -4,7 +4,6 @@ The Emergent copy is never deleted. A file that cannot be copied keeps working f
 import asyncio, hashlib
 from anyio import from_thread
 from fastapi import APIRouter, Depends, HTTPException
-from pymongo import ReturnDocument
 from pymongo.errors import DuplicateKeyError
 from starlette.concurrency import run_in_threadpool
 import tejas_storage as store
@@ -15,11 +14,17 @@ router = APIRouter(prefix='/api/admin/storage/move', tags=['Storage move'])
 OP, LEASE, BATCH = 'storage-move', 180, 20
 PLAIN = {'$type': 'string', '$ne': '', '$not': {'$regex': '^sb://'}}
 NAMES = {'files': 'Picture/PDF', 'books': 'Book ki original PDF', 'chapter_books': 'Chapter book PDF', 'imports': 'Import source'}
+NOT_ON_EMERGENT = 'Emergent mein yeh file nahi mili ya padhi nahi ja saki. Reference jaisa tha waisa hai; Copy dobara dabane par phir koshish hogi.'
 _tasks = set()
 
 
 def ops():
     return db.tejas_operations
+
+
+def unlocked(t):
+    # A book a worker holds right now waits for a later run: the worker's save would put the old path back.
+    return {'lock_until': {'$not': {'$gt': t}}}
 
 
 # (name, collection, id field, path field, hash field, title field)
@@ -31,27 +36,32 @@ def places():
 
 def _get(doc, dotted):
     for part in dotted.split('.'):
-        doc = (doc or {}).get(part) if isinstance(doc, dict) else None
+        doc = doc.get(part) if isinstance(doc, dict) else None
     return doc
 
 
+def _moved(field):
+    return field.rsplit('.', 1)[0] + '.moved_from' if '.' in field else 'moved_from'
+
+
 async def next_items(skip):
-    """Up to BATCH files still on Emergent: (key, collection, filter, path field, moved field, old ref, hash, label)."""
-    out = []
+    """Up to BATCH files still on Emergent that this run has not tried yet."""
+    out, t = [], now()
     for name, col, key, field, sha, title in places():
-        async for d in col.find({field: PLAIN}, {key: 1, field: 1, sha: 1, title: 1}).limit(BATCH + len(skip)):
-            k = f'{name}:{d[key]}'
-            if k not in skip:
-                out.append((k, col, {key: d[key], field: _get(d, field)}, field, field.rsplit('.', 1)[0] + '.moved_from' if '.' in field else 'moved_from',
-                            _get(d, field), _get(d, sha), f"{NAMES[name]} · {(_get(d, title) or str(d[key])[:8])}"[:120]))
-            if len(out) >= BATCH:
-                return out
-    async for d in db.tejas_imports.find({'sources': {'$elemMatch': {'path': PLAIN}}}, {'id': 1, 'title': 1, 'sources': 1}).limit(BATCH):
+        tried = [k.split(':', 1)[1] for k in skip if k.startswith(name + ':')]
+        query = {field: PLAIN, **({key: {'$nin': tried}} if tried else {}), **(unlocked(t) if name == 'books' else {})}
+        async for d in col.find(query, {key: 1, field: 1, sha: 1, title: 1}).limit(BATCH - len(out)):
+            out.append({'key': f'{name}:{d[key]}', 'name': name, 'col': col, 'id': (key, d[key]), 'field': field, 'sha_field': sha, 'old': _get(d, field),
+                        'sha': _get(d, sha), 'label': f"{NAMES[name]} · {_get(d, title) or str(d[key])[:8]}"[:120]})
+        if len(out) >= BATCH:
+            return out
+    tried = sum(1 for k in skip if k.startswith('imports:'))
+    async for d in db.tejas_imports.find({'sources': {'$elemMatch': {'path': PLAIN}}}, {'id': 1, 'title': 1, 'sources': 1}).limit(BATCH + tried):
         for i, s in enumerate(d.get('sources') or []):
             k = f"imports:{d['id']}:{i}"
             if isinstance(s.get('path'), str) and s['path'] and not s['path'].startswith(store.SB) and k not in skip:
-                f = f'sources.{i}.path'
-                out.append((k, db.tejas_imports, {'id': d['id'], f: s['path']}, f, f'sources.{i}.moved_from', s['path'], s.get('sha256'), f"{NAMES['imports']} · {d.get('title', '')}"[:120]))
+                out.append({'key': k, 'name': 'imports', 'col': db.tejas_imports, 'id': ('id', d['id']), 'field': f'sources.{i}.path', 'sha_field': f'sources.{i}.sha256',
+                            'old': s['path'], 'sha': s.get('sha256'), 'label': f"{NAMES['imports']} · {d.get('title', '')}"[:120]})
     return out[:BATCH]
 
 
@@ -67,13 +77,22 @@ def _kind(raw):
 
 def copy(old, sha, resume, progress):
     """Emergent bytes -> Supabase -> read back. Returns the Supabase ref only when every byte came back the same."""
-    raw = store.request('GET', old).content
+    try:
+        raw = store.request('GET', old).content
+    except store.StorageError:
+        raise ValueError(NOT_ON_EMERGENT) from None
     got = hashlib.sha256(raw).hexdigest()
     if sha and got != sha:
         raise ValueError('Emergent wali file ke bytes uske save hash se match nahi karte. Isliye copy nahi ki; file Emergent se hi chalti rahegi.')
     ref = store.put_object(old, raw, _kind(raw), resume, progress)
     bucket, path = ref[len(store.SB):].split('/', 1)
-    if hashlib.sha256(store.sb_get(bucket, path)).hexdigest() != got:
+    try:
+        back = store.sb_get(bucket, path)
+    except store.StorageWaiting:
+        raise
+    except store.StorageError:
+        raise ValueError('Supabase se copy wapas padhi nahi ja saki. Isliye switch nahi kiya; file Emergent se hi chalti rahegi.') from None
+    if hashlib.sha256(back).hexdigest() != got:
         raise ValueError('Supabase ne alag bytes lautaye. Isliye switch nahi kiya; file Emergent se hi chalti rahegi.')
     return ref
 
@@ -83,35 +102,36 @@ async def _note(token, change):
 
 
 async def one(token, item, op):
-    key, col, match, field, moved, old, sha, label = item
+    """Copies one file. False = stop the run here (Supabase away)."""
     cur = op.get('current') or {}
-    resume = cur.get('transfer') if cur.get('key') == key else None
-    await _note(token, {'$set': {'current': {'key': key, 'label': label, 'transfer': resume}}})
+    resume = cur.get('transfer') if cur.get('key') == item['key'] else None
+    await _note(token, {'$set': {'current': {'key': item['key'], 'label': item['label'], 'transfer': resume}, 'lease_until': now() + LEASE}})
 
     async def keep(info):
-        await _note(token, {'$set': {'current.transfer': info}})
+        await _note(token, {'$set': {'current.transfer': info, 'lease_until': now() + LEASE}})
 
-    def progress(info):  # a big PDF saves its place every 6 MB, so a later try carries on
+    def progress(info):  # a big PDF saves its place every 6 MB (and keeps the run's lease), so a later try carries on
         from_thread.run(keep, info)
     try:
-        ref = await run_in_threadpool(copy, old, sha, resume, progress)
+        ref = await run_in_threadpool(copy, item['old'], item['sha'], resume, progress)
     except store.StorageWaiting as exc:
         await _note(token, {'$set': {'state': 'waiting', 'lease': '', 'last_error': str(exc)[:300], 'waiting_since': now()}})
         return False
     except Exception as exc:  # noqa: BLE001  this one file stays on Emergent and is listed; the rest carry on
-        reason = str(exc)[:240] if isinstance(exc, (ValueError, store.StorageError)) else 'Copy beech mein ruk gayi.'
+        reason = str(exc)[:240] if isinstance(exc, (ValueError, store.SupabaseRefused)) else 'Copy beech mein ruk gayi. File Emergent se hi chalti rahegi.'
         await _note(token, {'$inc': {'failed': 1}, '$set': {'current': None},
-                            '$push': {'skip': key, 'failures': {'$each': [{'label': label, 'reason': reason, 'at': now()}], '$slice': -50}}})
+                            '$push': {'skip': item['key'], 'failures': {'$each': [{'label': item['label'], 'reason': reason, 'at': now()}], '$slice': -50}}})
         return True
-    done = await col.update_one(match, {'$set': {field: ref, moved: old}})
-    await _note(token, {'$inc': {'moved' if done.modified_count else 'skipped': 1}, '$set': {'current': None}, **({} if done.modified_count else {'$push': {'skip': key}})})
+    key, value = item['id']
+    match = {key: value, item['field']: item['old'], **({item['sha_field']: item['sha']} if item['sha'] else {}), **(unlocked(now()) if item['name'] == 'books' else {})}
+    done = await item['col'].update_one(match, {'$set': {item['field']: ref, _moved(item['field']): item['old']}})
+    await _note(token, {'$inc': {'moved' if done.modified_count else 'skipped': 1}, '$set': {'current': None}, '$push': {'skip': item['key']}})
     return True
 
 
 async def run(token):
     while True:
-        op = await ops().find_one_and_update({'_id': OP, 'lease': token, 'state': 'running'}, {'$set': {'lease_until': now() + LEASE, 'updated_at': now()}},
-                                             return_document=ReturnDocument.AFTER)
+        op = await ops().find_one({'_id': OP, 'lease': token, 'state': 'running'})
         if not op:
             return
         items = await next_items(set(op.get('skip') or []))
@@ -119,11 +139,9 @@ async def run(token):
             await _note(token, {'$set': {'state': 'done', 'lease': '', 'current': None, 'finished_at': now()}})
             return
         for item in items:
-            if not await ops().find_one({'_id': OP, 'lease': token, 'state': 'running'}, {'_id': 1}):
+            op = await ops().find_one({'_id': OP, 'lease': token, 'state': 'running'})
+            if not op or not await one(token, item, op):
                 return
-            if not await one(token, item, op):
-                return
-            op = await ops().find_one({'_id': OP}) or {}
 
 
 async def begin(fresh):
@@ -144,14 +162,14 @@ async def begin(fresh):
 
 
 async def resume():
-    """Supabase is back, or the server restarted mid-copy: carry on where it stopped (nothing is copied twice)."""
+    """Supabase is back, or the server restarted mid-copy: carry on where it stopped (a copied file is never copied again)."""
     op = await ops().find_one({'_id': OP}, {'state': 1, 'lease_until': 1})
     if op and store.supabase_on() and (op['state'] == 'waiting' or (op['state'] == 'running' and op.get('lease_until', 0) < now())):
         await begin(False)
 
 
 def view(op, left):
-    cur = (op.get('current') or {})
+    cur = op.get('current') or {}
     transfer = cur.get('transfer') or {}
     state = op.get('state', 'idle')
     if state == 'running' and op.get('lease_until', 0) < now():
@@ -172,17 +190,18 @@ async def status(u=Depends(owner)):
 async def start(u=Depends(owner)):
     if not store.configured():
         raise HTTPException(409, 'Supabase set nahi hai, isliye purani files copy nahi ho sakti.')
-    if not store.supabase_on():
+    from .storage_health import check_now
+    if (await check_now())['mode'] not in ('supabase', 'slow'):
         raise HTTPException(409, 'Supabase abhi jawab nahi de raha. Thodi der baad Copy dabaiye.')
     op = await ops().find_one({'_id': OP}, {'state': 1, 'lease_until': 1}) or {}
     if op.get('state') == 'running' and op.get('lease_until', 0) >= now():
-        raise HTTPException(409, 'Copy pehle se chal rahi hai.')
-    await begin(op.get('state') not in ('waiting', 'interrupted', 'running', 'stopped'))
+        return await status(u)  # already copying (a healthy check may just have resumed it)
+    await begin(op.get('state') not in ('waiting', 'running', 'stopped'))
     return await status(u)
 
 
 @router.post('/stop')
 async def stop(u=Depends(owner)):
-    """Stops after the file in hand; Start carries on from there."""
+    """Stops after the file in hand; Copy carries on from there."""
     await ops().update_one({'_id': OP, 'state': {'$in': ['running', 'waiting']}}, {'$set': {'state': 'stopped', 'lease': '', 'updated_at': now()}})
     return await status(u)

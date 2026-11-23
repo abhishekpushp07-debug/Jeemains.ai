@@ -79,13 +79,14 @@ async def main():
         st = J(await own.get('/api/admin/storage/move/status'))
         check('status counts every old file (5 files, 1 book, 1 chapter book, 1 import source)', st['remaining'] == {'files': 5, 'books': 1, 'chapter_books': 1, 'imports': 1} and st['state'] == 'idle', st['remaining'])
         check('status shows no storage paths', 'tejas/test' not in str(st), st)
-        # 2. Supabase away during the copy: it waits, nothing switches, nothing in Emergent is touched.
+        # 2. Supabase away: Start says so at once (fresh check); a run Supabase drops in the middle waits, nothing switches.
         sb.down = True
-        r = await own.post('/api/admin/storage/move/start'); await settle()
-        st = J(await own.get('/api/admin/storage/move/status'))
-        check('Supabase away: the copy waits (not failed), nothing switched', r.status_code == 200 and st['state'] == 'waiting' and st['moved'] == 0 and st['failed'] == 0 and st['remaining_total'] == 8, (r.status_code, st['state'], st['moved'], st['failed']))
         r = await own.post('/api/admin/storage/move/start')
-        check('Start while Supabase rests: clear 409', r.status_code == 409, (r.status_code, r.text[:160]))
+        check('Start while Supabase is down: clear 409 from a fresh check', r.status_code == 409 and 'Supabase' in r.text, (r.status_code, r.text[:160]))
+        S.STATE.update(down_until=0.0, strikes=0)
+        await SM.begin(True); await settle()
+        st = J(await own.get('/api/admin/storage/move/status'))
+        check('Supabase drops mid-run: the copy waits (not failed), nothing switched', st['state'] == 'waiting' and st['moved'] == 0 and st['failed'] == 0 and st['remaining_total'] == 8, (st['state'], st['moved'], st['failed']))
         # 3. Supabase back: a healthy check carries the copy on by itself.
         sb.down = False
         r = J(await own.post('/api/admin/storage/retry')); await settle()
@@ -138,7 +139,7 @@ async def main():
         H.STORE['tejas/test/late.png'] = png
         await DB.tejas_files.insert_one({'id': 'late-1', 'kind': 'rendered_png', 'path': 'tejas/test/late.png', 'sha256': sha(png), 'filename': 'late.png', 'created_at': time.time()})
         sb.down = True; S.STATE.update(down_until=0.0, strikes=0)
-        await own.post('/api/admin/storage/move/start'); await settle()
+        await SM.begin(False); await settle()
         st = J(await own.post('/api/admin/storage/move/stop'))
         check('Roko: a waiting copy stops', st['state'] == 'stopped', st['state'])
         sb.down = False; S.STATE.update(down_until=0.0, strikes=0)

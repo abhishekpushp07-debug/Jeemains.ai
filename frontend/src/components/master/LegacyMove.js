@@ -26,7 +26,9 @@ export function LegacyMove(){
  const [busy,setBusy]=useState(false);
  if(!data)return null;
  const act=async path=>{setBusy(true);try{setData(await post('/admin/storage/move/'+path));}catch(e){toast.error(e.message);}finally{setBusy(false);}};
- const left=data.remaining_total,active=ACTIVE.includes(data.state),done=data.moved+data.failed+data.skipped,total=Math.max(data.total,done+left);
+ const left=data.remaining_total,active=ACTIVE.includes(data.state),done=data.moved+data.failed+data.skipped;
+ // Files that failed or were skipped this run are still on Emergent, so they are in "left" too: count them once.
+ const total=done+Math.max(0,left-data.failed-data.skipped);
  if(!left&&!active&&!data.failed)return <p className="storage-meta" data-testid="move-all-done">Purani files: sab Supabase mein hain.</p>;
  return <section className="legacy-move" data-testid="legacy-move">
   <strong data-testid="move-title">Purani files Emergent mein: {left}</strong>
