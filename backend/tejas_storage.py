@@ -287,7 +287,9 @@ def _carry_on(resume, path, size, tus):
     except StorageError:
         return None, 0
     if h.status_code == 200 and h.headers.get('Upload-Offset') is not None:
-        return resume['url'], int(h.headers['Upload-Offset'])
+        there = int(h.headers['Upload-Offset'])
+        if there < size:  # a finished upload has nothing left to carry on: the file is sent afresh
+            return resume['url'], there
     return None, 0
 
 
@@ -335,7 +337,11 @@ def _tus(bucket, path, data, content_type, resume=None, on_progress=None):
                 h = None
             there = int(h.headers['Upload-Offset']) if h is not None and h.status_code == 200 and h.headers.get('Upload-Offset') else None
             if there is not None and there != offset:
+                if there > offset:  # the piece did arrive, only its answer was lost: that is progress, not a miss
+                    misses, moved = 0, True
                 offset = there
+                if on_progress:
+                    on_progress({**info, 'sent': offset})
             elif code == 409:
                 stop = True  # Supabase agrees on the place and still returns the piece: sending it again cannot help
         if stop:
@@ -369,6 +375,14 @@ def _same_there(bucket, path, data):
     return got.hexdigest() == hashlib.sha256(data).hexdigest()
 
 
+def _sized(bucket, path, want):
+    """After every big save Supabase is asked how many bytes it holds; any other number is not accepted as saved."""
+    size = sb_size(bucket, path)
+    if size != want:
+        said = 'Supabase me file save hone ke baad nahi mili' if size is None else f'Supabase me file ka size alag nikla ({size} bytes; hone chahiye {want})'
+        raise _error(f'Supabase stored {size} bytes of {want}.', scope='file', said=said)
+
+
 STALL_LIMIT = 2   # tries in a row without one more piece across: then a fresh upload and the one-request route
 ONE_REQUEST = httpx.Timeout(connect=5.0, read=180.0, write=120.0, pool=10.0)
 
@@ -400,7 +414,8 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
         tries += 1
         try:
             _tus(bucket, path, data, content_type, None if stalls >= STALL_LIMIT else resume, heard)
-            break
+            _sized(bucket, path, len(data))  # a wrong size is a failed try like any other: next a fresh upload, then the one-request route
+            return
         except SupabaseRefused:
             raise
         except StorageError as exc:
@@ -418,19 +433,17 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
             if stalls >= STALL_LIMIT:
                 try:
                     _one_request(bucket, path, data, content_type)
+                    _sized(bucket, path, len(data))
                 except SupabaseRefused:
                     raise
                 except StorageError as second:
                     second.stalls = stalls
                     raise second from None
-                break
+                return
             if on_progress or tries >= 2:
                 exc.stalls = stalls
                 raise
             resume, last = (place if exc.moved else None), {}
-    size = sb_size(bucket, path)
-    if size != len(data):
-        raise _error(f'Supabase stored {size} bytes of {len(data)}.', scope='file', said=f'Supabase me file ka size alag nikla ({size} bytes; hone chahiye {len(data)})')
 
 
 def sb_put(path, data, content_type, resume=None, on_progress=None):

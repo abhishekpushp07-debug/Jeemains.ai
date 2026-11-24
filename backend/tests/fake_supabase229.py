@@ -22,6 +22,7 @@ class FakeSupabase:
         self.locked = 0              # the next N pieces answer 423
         self.lose_last_answer = False  # the last piece is saved, its answer never arrives
         self.short_save = False      # a finished upload is stored one byte short
+        self.short_one = False       # the one-request route stores one byte short too
         self.one_request_code = None  # the one-request route answers this code
         self.block = None            # (code, message): the whole project answers this (402, 540 ...)
         self.small_code = None       # every small upload answers (code, message)
@@ -77,7 +78,7 @@ class FakeSupabase:
                 return httpx.Response(400, json={'statusCode': str(self.small_code[0]), 'error': 'x', 'message': self.small_code[1]})
             if key in self.objects and req.headers.get('x-upsert') != 'true':
                 return httpx.Response(400, json={'statusCode': '409', 'error': 'Duplicate', 'message': EXISTS})
-            self.objects[key] = req.content
+            self.objects[key] = req.content[:-1] if big and self.short_one else req.content
             return httpx.Response(200, json={'Key': key})
         if p == '/storage/v1/upload/resumable' and req.method == 'POST':
             if self.tus_start_fail:

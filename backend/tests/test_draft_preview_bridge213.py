@@ -3,7 +3,7 @@ import json, os, time
 import pytest, requests
 
 BRIDGE = 'http://127.0.0.1:8772'
-ORIGIN = 'https://tejas-route2--1yaz6hh9.preview.emergentagent.com'
+ORIGIN = 'https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com'
 B = json.load(open('/tmp/uibridge210/bridge.json')) if os.path.exists('/tmp/uibridge210/bridge.json') else None
 pytestmark = pytest.mark.skipif(B is None, reason='bridge not running')
 

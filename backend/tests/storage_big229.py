@@ -2,7 +2,7 @@
 The fake answers the way real Supabase was seen to answer (tests/fake_supabase229.py). No network, no real keys, no database.
 Run: cd /app/backend && python tests/storage_big229.py
 """
-import importlib.util, os, sys, time
+import importlib.util, os, sys
 from pathlib import Path
 from unittest import mock
 import httpx
@@ -98,6 +98,22 @@ def main():
         n = sb.pieces()
         ref, err = put(big, seen[-1], seen)
         check('...and it carries on from piece 3 on the same upload', ref and sb.starts() == 1 and sb.pieces() - n == 2, (err, sb.starts(), sb.pieces() - n))
+        # 7b. A slow line: every piece arrives but its answer is lost. Supabase's own place is believed; nothing is sent twice, no stall.
+        S.TUS_CHUNK = 2 * 1024 * 1024
+        try:
+            sb = fresh(); seen = []; real = sb.__call__
+
+            def answers_lost(req):
+                r = real(req)
+                if req.method == 'PATCH' and r.status_code == 204:
+                    raise httpx.ReadTimeout('answer lost', request=req)
+                return r
+            client = httpx.Client(transport=httpx.MockTransport(answers_lost)); S._client = lambda: client
+            ref, err = put(big, None, seen)
+            check('11 pieces, every answer lost: saved in one try, each piece sent once, no stall', ref and not err and sb.objects[B + '/' + KEY] == big and sb.starts() == 1 and sb.pieces() == 11
+                  and seen[-1]['sent'] == len(big) and not any(x.get('stalls') for x in seen), (err, sb.starts(), sb.pieces(), seen[-1:]))
+        finally:
+            S.TUS_CHUNK = 6 * 1024 * 1024
         # 8. Supabase's lock (423) is waited out, not treated as a failure.
         sb = fresh(); sb.locked = 2
         ref, err = put(big)
@@ -111,10 +127,29 @@ def main():
         S.STATE['bucket'] = B
         ref, err = put(big, None, seen)
         check('Supabase away: StorageWaiting, no stall counted, nothing half-claimed', isinstance(err, S.StorageWaiting) and not any(x.get('stalls') for x in seen), (err, seen))
-        # 10. The size is checked after every big save.
+        # 10. The size is checked after every big save, on both routes.
         sb = fresh(); sb.short_save = True
         ref, err = put(big)
-        check('Supabase stored a different size: NOT accepted as saved, the reason names the size', ref is None and isinstance(err, S.StorageWaiting) and 'size' in err.reason and S.supabase_on(), (ref, err, getattr(err, 'reason', '')))
+        check('pieces stored one byte short: NOT accepted; the same PDF goes in one request and is saved exactly', ref and not err and sb.objects[B + '/' + KEY] == big and sb.count('POST', '/' + KEY) == 1, (ref, err, sb.count('POST', '/' + KEY)))
+        sb = fresh(); sb.short_save = sb.short_one = True
+        ref, err = put(big)
+        check('both routes store a different size: NOT accepted as saved, the reason names the size, Supabase is not rested', ref is None and isinstance(err, S.StorageWaiting) and 'size' in err.reason and S.supabase_on(), (ref, err, getattr(err, 'reason', '')))
+        sb = fresh(); sb.short_save = sb.short_one = True; seen = []
+        ref, err = put(big, None, seen)
+        check('wrong size with a place kept, try 1: waits as this file only, one stall remembered', isinstance(err, S.StorageWaiting) and err.scope == 'file' and seen[-1].get('stalls') == 1 and S.supabase_on(), (err, seen[-1:]))
+        ref, err = put(big, seen[-1], seen)
+        check('...try 2: the finished upload is NOT used again (a fresh one starts), then the one-request route', sb.starts() == 2 and sb.count('POST', '/' + KEY) == 1 and seen[-1].get('stalls') == 2, (sb.starts(), sb.count('POST', '/' + KEY), seen[-1:]))
+        ref, err = put(big, seen[-1], seen)
+        check('...try 3: still the wrong size, so only this file is stuck and it says why', isinstance(err, S.StorageStuck) and 'size' in err.reason and S.supabase_on() and ref is None, (err, getattr(err, 'reason', '')))
+        sb.short_save = sb.short_one = False
+        ref, err = put(big, seen[-1], seen)
+        check('...Supabase stores it right again: saved exactly', ref and not err and sb.objects[B + '/' + KEY] == big, err)
+        # 10b. A saved place whose upload is finished but whose file is not there: never carried on, never an endless wait.
+        sb = fresh(); seen = []
+        put(big, None, seen); done = dict(seen[-1]); sb.objects.pop(B + '/' + KEY)
+        n = sb.starts()
+        ref, err = put(big, done, seen)
+        check('finished upload whose file is gone: a fresh upload saves the PDF', ref and not err and sb.starts() == n + 1 and sb.objects[B + '/' + KEY] == big, (err, sb.starts() - n))
         # 11. A caller that cannot remember the place (a chapter book sent inside one request): both tries and the second route in one call.
         sb = fresh(); sb.tus_down = True
         ref = S.put_object('tejas/chapter-books/c1/s.pdf', big)
@@ -128,7 +163,7 @@ def main():
         ref = S.put_object('jeelive/books/b1/crops/p.png', png, 'image/png')
         check('a picture still goes in one small request', ref and sb.starts() == 0 and S.get_object(ref) == png and sb.count('GET', '/crops/p.png') == 1, sb.calls[-3:])
         # 14. A healthy big upload costs one check before and one after, nothing more.
-        sb = fresh(); t = time.time()
+        sb = fresh()
         ref, err = put(big)
         infos = sum(1 for m, _, p in sb.calls if '/object/info/' in p)
         check('healthy 20 MB upload: 1 start, 4 pieces, 2 size checks', ref and sb.starts() == 1 and sb.pieces() == 4 and infos == 2, (sb.starts(), sb.pieces(), infos))

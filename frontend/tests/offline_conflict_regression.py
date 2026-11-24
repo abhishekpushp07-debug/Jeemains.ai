@@ -17,7 +17,7 @@ Usage:
     Run via browser automation tool with:
     - Desktop viewport: 1920x800
     - Mobile viewport: 390x844
-    - Test URL: https://tejas-route2--1yaz6hh9.preview.emergentagent.com
+    - Test URL: https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com
     - Test credentials: +12025550184
     - Test fixture: qa75-ed384de5-896c-4d2a-abd6-ffb9cbde94d0
 """
@@ -367,7 +367,7 @@ async def run_offline_conflict_tests(page, base_url, phone_number, fixture_id):
 # Example usage:
 # await run_offline_conflict_tests(
 #     page,
-#     "https://tejas-route2--1yaz6hh9.preview.emergentagent.com",
+#     "https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com",
 #     "+12025550184",
 #     "qa75-ed384de5-896c-4d2a-abd6-ffb9cbde94d0"
 # )

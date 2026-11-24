@@ -9,7 +9,7 @@ import json
 from datetime import datetime
 
 # Use the public backend URL from frontend .env
-BASE_URL = "https://tejas-route2--1yaz6hh9.preview.emergentagent.com"
+BASE_URL = "https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com"
 API_PREFIX = "/api"
 ADMIN_PREFIX = "/api/admin/jea"
 

@@ -34,18 +34,23 @@ def stored():
     return S.sb_get(S.bucket_name(), P)
 
 
+MB = int(os.environ.get('SIZE_MB', '7'))   # SIZE_MB=50 repeats everything at the size of the PDF that stuck on live
+SIZE = MB * 1024 * 1024 + 181
+NEED = -(-SIZE // S.TUS_CHUNK)
+
 try:
-    a, b = os.urandom(7 * 1024 * 1024), os.urandom(7 * 1024 * 1024)
+    a, b = os.urandom(SIZE), os.urandom(SIZE)
     t = time.time(); ref = S.put_object(P, a)
-    check('1. new 7 MB file saved in pieces and read back exactly', ref.endswith(P) and stored() == a and pieces() == 2, (ref, pieces()))
+    check(f'1. new {MB} MB file saved in {NEED} pieces and read back exactly', ref.endswith(P) and stored() == a and pieces() == NEED, (ref, pieces()))
     print(f'   took {time.time() - t:.1f}s', flush=True)
     n = pieces(); t = time.time(); S.put_object(P, a)
     check('2. the SAME file to the same path again: recognised, not one piece sent', pieces() == n, pieces() - n)
     print(f'   took {time.time() - t:.1f}s', flush=True)
-    n = pieces(); S.put_object(P, b)
-    check('3. a DIFFERENT file to the same path (the live fault): replaced, byte for byte', stored() == b and pieces() - n == 2, [c for c in CALLS[-6:]])
+    n = pieces(); t = time.time(); S.put_object(P, b)
+    check('3. a DIFFERENT file to the same path (the live fault): replaced, byte for byte', stored() == b and pieces() - n == NEED, [c for c in CALLS[-6:]])
+    print(f'   took {time.time() - t:.1f}s', flush=True)
     # 4. The answer to the last piece is lost on the way back.
-    c = os.urandom(7 * 1024 * 1024); lost = {'n': 0}
+    c = os.urandom(SIZE); lost = {'n': 0}
 
     def lose_last(method, url, headers=None, tries=3, **kw):
         r = counted(method, url, headers, tries, **kw)
@@ -63,7 +68,7 @@ try:
     check('4. last piece saved, its answer lost: accepted as saved, no wait', lost['n'] == 1 and ref and err is None and stored() == c, (lost, err, seen[-1:]))
     # 5. The second route: the whole file in one request.
     t = time.time(); S._one_request(S.bucket_name(), P, a, 'application/pdf')
-    check('5. one-request route saves a 7 MB file over the old one', stored() == a and S.sb_size(S.bucket_name(), P) == len(a))
+    check(f'5. one-request route saves a {MB} MB file over the old one', stored() == a and S.sb_size(S.bucket_name(), P) == len(a))
     print(f'   took {time.time() - t:.1f}s', flush=True)
     check('6. a path with no file reads as "nothing there"', S.sb_size(S.bucket_name(), 'TEST_p229/none.pdf') is None)
 finally:

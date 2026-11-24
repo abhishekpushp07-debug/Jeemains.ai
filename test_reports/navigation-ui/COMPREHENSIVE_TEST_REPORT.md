@@ -1,7 +1,7 @@
 # Comprehensive Frontend Navigation & UI Test Report
 
 **Test Date:** 2026-10-17  
-**Base URL:** https://tejas-route2--1yaz6hh9.preview.emergentagent.com  
+**Base URL:** https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com  
 **Test Phone:** +12025550341  
 **Test Duration:** ~2 minutes  
 

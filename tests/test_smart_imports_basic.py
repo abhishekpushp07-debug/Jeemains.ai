@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent.parent / 'backend' / '.env')
 
-BASE_URL = "https://tejas-route2--1yaz6hh9.preview.emergentagent.com"
+BASE_URL = "https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com"
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD')
 

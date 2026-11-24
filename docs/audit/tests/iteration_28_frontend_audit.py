@@ -101,7 +101,7 @@ print("=" * 80)
 try:
     # Step 1: Phone login
     print("\n[STEP 1] Phone login with +12025550184")
-    await page.goto("https://tejas-route2--1yaz6hh9.preview.emergentagent.com/")
+    await page.goto("https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com/")
     await page.wait_for_timeout(1000)
     
     # Check if already logged in
@@ -199,7 +199,7 @@ try:
     
     # Step 3: Navigate to synthetic attempt
     print(f"\n[STEP 3] Navigate to /attempts/{SYNTHETIC_ATTEMPT_ID}")
-    await page.goto(f"https://tejas-route2--1yaz6hh9.preview.emergentagent.com/attempts/{SYNTHETIC_ATTEMPT_ID}")
+    await page.goto(f"https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com/attempts/{SYNTHETIC_ATTEMPT_ID}")
     await page.wait_for_timeout(2000)
     
     # Wait for player to load

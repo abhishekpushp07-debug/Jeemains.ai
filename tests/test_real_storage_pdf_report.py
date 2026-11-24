@@ -23,7 +23,7 @@ import fitz
 import openpyxl
 
 # Base URL for testing
-BASE_URL = "https://tejas-route2--1yaz6hh9.preview.emergentagent.com"
+BASE_URL = "https://book-pipeline-fix-1--7ttfegq6.preview.emergentagent.com"
 
 from dotenv import dotenv_values
 _env = dotenv_values("/app/backend/.env")
