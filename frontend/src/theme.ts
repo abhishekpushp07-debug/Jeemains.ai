@@ -171,6 +171,11 @@ const dark = {
   // words (4.7 : 1 or more under the gloss). Green is kept for one thing only: a completed day in the day strip and the day map.
   custom_seriesRoyal: "#2F56E0", custom_seriesRoyalInk: "#FFFFFF",
   custom_seriesRoyalGloss: "rgba(255,255,255,0.14)", custom_seriesRoyalGlint: "rgba(255,255,255,0.45)",
+  // The streak flame on the series page and the Streak share picture (same in both palettes): amber into hot orange into
+  // red into ember. Words on the flame bar are white (4.6 : 1 or more); the picture's top words use the ember-dark ink.
+  custom_fireAmber: "#FFB52E", custom_fireOrange: "#FF6F14", custom_fireRed: "#D81E1E", custom_fireEmber: "#6E0A0E", custom_fireInk: "#2A0705", custom_fireCream: "#FFF1D6",
+  custom_fireBarFrom: "#D43D0A", custom_fireBarTo: "#B3121A",
+  custom_fireGloss: "rgba(255,255,255,0.14)", custom_fireGlint: "rgba(255,255,255,0.45)", custom_fireGlass: "rgba(255,255,255,0.16)", custom_fireLine: "rgba(255,255,255,0.32)", custom_fireShade: "rgba(42,7,5,0.35)",
   custom_qAnswered: "#22C55E", custom_qNotAnswered: "#EF4444", custom_qMarked: "#0D9488", custom_qMarkedInk: "#5EEAD4",
   custom_qMarkedSoft: "#0B2A27", custom_qFresh: "#2A2A33", custom_qFreshLine: "#3A3A46", custom_qInk: "#FFFFFF",
   custom_gold: "#FFC94D", custom_goldDeep: "#5A3B00", custom_flame: "#FF8A3D", custom_flameSoft: "#2A160C",
@@ -368,6 +373,8 @@ export const tabEdges = {
 } as const;
 // The three colours that run round Home's onyx-and-ruby All India card: ruby, gold, rose.
 export const seriesEdge = ["#FF2D4A", "#FFC857", "#FF7A93", "#FF2D4A"] as const;
+// The three colours that run round the streak flame and frame the Streak share picture: amber, flame, cream.
+export const fireEdge = ["#FFC233", "#FF5A1F", "#FFF1D6", "#FFC233"] as const;
 // Five colours that run round the blood-red "Analysis" button on the series day cards: ruby, gold, white, rose, flame.
 export const bloodEdge = ["#FF2D4A", "#FFC857", "#FFFFFF", "#FF7A93", "#FF8A3D"] as const;
 // All India Rapid: one fire world (blazing smoke behind a dark ridge, black silhouettes on it) for all five card scenes.

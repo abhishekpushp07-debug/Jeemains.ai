@@ -8,8 +8,10 @@ import { Shine } from "@/src/analysis/Shine";
 import { colors, space } from "@/src/theme";
 import { DayInfo, scorePoints } from "@/src/series";
 import { SoftEmpty, skyShine } from "./looks";
+import { RankJourney } from "./RankJourney";
 
 const H = 168, TOP = 26, BOTTOM = 26, LEFT = 34, RIGHT = 18;
+const MODES = [["score", "Score", "Score trend dikhao"], ["rank", "Rank", "Rank journey dikhao"]] as const;
 
 export function trendSummary(days: DayInfo[]) {
   const pts = scorePoints(days);
@@ -17,11 +19,12 @@ export function trendSummary(days: DayInfo[]) {
   return { best: Math.max(...pts.map(p => p.score)), avg: Math.round(pts.reduce((a, p) => a + p.score, 0) / pts.length) };
 }
 
-/** Day-by-day live marks. Missed days stay visible as dashed gaps. */
+/** Day-by-day live marks; missed days stay visible as dashed gaps. The switch on the card shows the All India Rank of the same days instead. */
 export function ScoreTrend({ days }: { days: DayInfo[] }) {
   const router = useRouter();
   const reduced = useReducedMotion();
   const [w, setW] = useState(0);
+  const [mode, setMode] = useState<"score" | "rank">("score");
   const pts = scorePoints(days);
   if (!pts.length) return <View testID="series-trend-empty">
     <Shine radius={22} {...skyShine}><SoftEmpty icon="chart-timeline-variant" title="Your score trend begins here." body="Finish a live day. When its result releases at 11:59 PM, your first point appears — no sample scores." /></Shine>
@@ -49,8 +52,16 @@ export function ScoreTrend({ days }: { days: DayInfo[] }) {
 
   // A glossy sky-blue card; the marks line, its points and the newest mark are royal blue, the grid is white.
   return <View testID="series-trend"><Shine radius={22} {...skyShine} face={styles.card}>
-    <T size={10} color={colors.custom_tabInkSoft} style={{ paddingHorizontal: space.lg - 2 }}>Marks out of {pts[0].maximum}</T>
-    <View style={{ height: H }} onLayout={e => setW(e.nativeEvent.layout.width)}>
+    <View style={styles.head}>
+      <T testID="series-trend-caption" size={10} color={colors.custom_tabInkSoft} style={styles.caption}>{mode === "rank" ? "All India Rank · upar = behtar" : `Marks out of ${pts[0].maximum}`}</T>
+      <View testID="series-trend-mode" style={styles.modes}>
+        {MODES.map(([key, label, says]) => <Press key={key} testID={"series-trend-mode-" + key} haptic={false} hitSlop={8} onPress={() => setMode(key)}
+          accessibilityLabel={says} accessibilityState={{ selected: mode === key }} style={[styles.mode, mode === key && styles.modeOn]}>
+          <T w="heavy" size={11.5} color={mode === key ? colors.custom_seriesRoyalInk : colors.custom_tabInk}>{label}</T>
+        </Press>)}
+      </View>
+    </View>
+    {mode === "rank" ? <RankJourney days={days} /> : <View style={{ height: H }} onLayout={e => setW(e.nativeEvent.layout.width)}>
       {w ? <Animated.View entering={reduced ? undefined : FadeIn.duration(500)} style={StyleSheet.absoluteFill}>
         <Svg width={w} height={H}>
           <Defs><LinearGradient id="trendArea" x1="0" y1="0" x2="0" y2="1"><Stop offset="0" stopColor={colors.custom_royalMid} stopOpacity={0.3} /><Stop offset="1" stopColor={colors.custom_royalMid} stopOpacity={0} /></LinearGradient></Defs>
@@ -72,13 +83,19 @@ export function ScoreTrend({ days }: { days: DayInfo[] }) {
         {pts.map(p => <Press key={"p" + p.day} testID={"series-trend-point-" + p.day} haptic={false} onPress={() => router.push(`/result/${p.id}` as any)}
           accessibilityLabel={`Day ${p.day}: ${p.score} of ${p.maximum}. Open result`} style={[styles.hit, { left: x(p.day) - 22, top: y(p.score) - 22 }]}><View /></Press>)}
       </Animated.View> : null}
-    </View>
+    </View>}
   </Shine></View>;
 }
 
 const styles = StyleSheet.create({
   // 11 inside the 2-point running edge: the card is the size it was with its 1-point line and 12 of padding.
   card: { paddingVertical: space.md - 1 },
+  head: { flexDirection: "row", alignItems: "center", gap: space.sm, paddingHorizontal: space.lg - 2 },
+  caption: { flex: 1, minWidth: 0 },
+  // Score | Rank: two white chips, the open one royal blue. 30 high, 44 to the touch with their hit slop.
+  modes: { flexDirection: "row", gap: 4, padding: 3, borderRadius: 18, backgroundColor: colors.custom_tabChip },
+  mode: { minWidth: 56, height: 30, borderRadius: 15, alignItems: "center", justifyContent: "center", paddingHorizontal: 10 },
+  modeOn: { backgroundColor: colors.custom_royalMid },
   yLabel: { position: "absolute", left: 4, width: 26, textAlign: "right" },
   xLabel: { position: "absolute", bottom: 4, width: 40, textAlign: "center" },
   tag: { position: "absolute", width: 60, textAlign: "center" },

@@ -124,9 +124,10 @@ export function YouCard({ kicker, label, none, you, n, maximum, counted, name, o
   </View>;
 }
 
-function Step({ row, place, narrow }: { row?: BoardRow; place: 1 | 2 | 3; narrow: boolean }) {
+function Step({ row, place, narrow, onPick }: { row?: BoardRow; place: 1 | 2 | 3; narrow: boolean; onPick?: (r: BoardRow) => void }) {
   const [light, mid, deep, ink] = METAL[place - 1];
-  return <View testID={`aits-board-podium-${place}`} style={[styles.step, !row && styles.vacant]} accessibilityLabel={row ? `Rank ${row.rank}, ${nameOf(row)}, Score ${row.score}, Accuracy ${pc(row.accuracy)}` : `Rank ${place} abhi khaali hai`}>
+  const label = row ? `Rank ${row.rank}, ${nameOf(row)}, Score ${row.score}, Accuracy ${pc(row.accuracy)}` : `Rank ${place} abhi khaali hai`;
+  const body = <>
     {place === 1 ? <Icon name="crown" size={24} color={mid} /> : null}
     <Medal n={row?.rank ?? place} />
     <T w="heavy" size={12.5} color={colors.onSurfaceInverse} numberOfLines={2} style={styles.center}>{row ? nameOf(row) : "—"}</T>
@@ -134,11 +135,14 @@ function Step({ row, place, narrow }: { row?: BoardRow; place: 1 | 2 | 3; narrow
       <T color={ink} style={place === 1 ? styles.scoreBig : styles.score}>{row ? row.score : "—"}</T>
       {row ? <T w="bold" size={9.5} color={ink} numberOfLines={1}>{narrow ? "Acc." : "Accuracy"} {pc(row.accuracy)}</T> : null}
     </LinearGradient>
-  </View>;
+  </>;
+  return row && onPick && !row.is_you
+    ? <Press testID={`aits-board-podium-${place}`} onPress={() => onPick(row)} scaleTo={0.97} accessibilityLabel={`${label}. Apne saath compare karo`} style={styles.step}>{body}</Press>
+    : <View testID={`aits-board-podium-${place}`} style={[styles.step, !row && styles.vacant]} accessibilityLabel={label}>{body}</View>;
 }
 
-/** The first three of the day, second · first · third, standing on gold, silver and bronze on Home's All India card. An empty place waits, dimmed. */
-export function Podium({ rows, title }: { rows: BoardRow[]; title?: string }) {
+/** The first three of the day, second · first · third, standing on gold, silver and bronze on Home's All India card. An empty place waits, dimmed. With `onPick`, a tap on another student's step hands that row back. */
+export function Podium({ rows, title, onPick }: { rows: BoardRow[]; title?: string; onPick?: (r: BoardRow) => void }) {
   const narrow = useWindowDimensions().width < 360;
   return <View testID="aits-board-podium">
     <Shine radius={28} {...onyxShine} backdrop={<SeriesBackdrop />} face={styles.stage}>
@@ -147,9 +151,9 @@ export function Podium({ rows, title }: { rows: BoardRow[]; title?: string }) {
         {title ? <T size={11} color={colors.custom_whiteA70} numberOfLines={1} style={styles.stageTitle}>{title}</T> : null}
       </View>
       <View style={styles.podium}>
-        <Step row={rows[1]} place={2} narrow={narrow} />
-        <Step row={rows[0]} place={1} narrow={narrow} />
-        <Step row={rows[2]} place={3} narrow={narrow} />
+        <Step row={rows[1]} place={2} narrow={narrow} onPick={onPick} />
+        <Step row={rows[0]} place={1} narrow={narrow} onPick={onPick} />
+        <Step row={rows[2]} place={3} narrow={narrow} onPick={onPick} />
       </View>
     </Shine>
   </View>;
@@ -160,8 +164,9 @@ export function Podium({ rows, title }: { rows: BoardRow[]; title?: string }) {
  * each one; your own row is baby pink like your Rank card, with a thicker edge. A medal for the first three, "#rank"
  * after that. With `you`, every other row says how many marks it is ahead of or behind you.
  * Only the rows on screen move (see `pageSeen`); the glint reaches each row a little after the one above it.
+ * With `onPick`, a tap on another student's row hands that row back (the screen then shows "Aap vs" that student).
  */
-export function BoardRows({ rows, you, look, testID }: { rows: BoardRow[]; you?: BoardRow | null; look: TabLook; testID: string }) {
+export function BoardRows({ rows, you, look, testID, onPick }: { rows: BoardRow[]; you?: BoardRow | null; look: TabLook; testID: string; onPick?: (r: BoardRow) => void }) {
   const [box, setBox] = useState<{ y: number; h: number } | null>(null);
   const [from, to] = useSyncExternalStore(watch, seenNow, seenNow);
   const pitch = box && rows.length ? box.h / rows.length : 0;
@@ -171,8 +176,7 @@ export function BoardRows({ rows, you, look, testID }: { rows: BoardRow[]; you?:
       const ahead = you && !r.is_you ? r1(r.score - you.score) : null;
       // Until the list is measured only the first dozen move; after that, the rows on screen and one step around them.
       const rest = box ? box.y + (i + 1) * pitch < from - STEP || box.y + i * pitch > to + STEP : i > 11;
-      return <View key={r.handle} testID={`aits-board-row-${r.handle}`}>
-        <Shine radius={16} ring={r.is_you ? 3 : 2} tones={r.is_you ? pinkShine.tones : look.rest} edge={r.is_you ? pinkShine.edge : look.edge}
+      const card = <Shine radius={16} ring={r.is_you ? 3 : 2} tones={r.is_you ? pinkShine.tones : look.rest} edge={r.is_you ? pinkShine.edge : look.edge}
           gloss={colors.custom_tabGloss} glint={colors.custom_tabGlint} band={34} part={34} delay={(i % 8) * 140} rest={rest} face={r.is_you ? styles.mine : styles.row}>
           <MedalWash n={r.rank} />
           {r.rank <= 3 ? <View style={styles.markBox}><Medal n={r.rank} /></View>
@@ -186,8 +190,10 @@ export function BoardRows({ rows, you, look, testID }: { rows: BoardRow[]; you?:
             {r.is_you ? <View style={styles.youTag}><T size={10} w="heavy" color={colors.custom_tabInk}>AAP</T></View>
               : ahead != null ? <T w="bold" size={10.5} color={colors.custom_tabInkSoft}>{ahead > 0 ? `${ahead} aage` : ahead < 0 ? `${-ahead} peeche` : "barabar"}</T> : null}
           </View>
-        </Shine>
-      </View>;
+        </Shine>;
+      return onPick && !r.is_you
+        ? <Press key={r.handle} testID={`aits-board-row-${r.handle}`} onPress={() => onPick(r)} scaleTo={0.99} accessibilityLabel={`Rank ${r.rank}, ${r.name}, Score ${r.score}. Apne saath compare karo`} style={styles.rowPress}>{card}</Press>
+        : <View key={r.handle} testID={`aits-board-row-${r.handle}`}>{card}</View>;
     })}
   </View>;
 }
@@ -235,6 +241,7 @@ const styles = StyleSheet.create({
   score: { fontFamily: SERIF, fontSize: 22, lineHeight: 26 },
   scoreBig: { fontFamily: SERIF, fontSize: 28, lineHeight: 32 },
   rows: { gap: 8 },
+  rowPress: { borderRadius: 16 },
   // A row is 60 high as before: 56 inside its 2-point edge, or 54 inside your own row's 3-point edge.
   row: { flexDirection: "row", alignItems: "center", gap: space.sm, minHeight: 56, paddingVertical: 8, paddingLeft: 4, paddingRight: space.md - 2 },
   mine: { flexDirection: "row", alignItems: "center", gap: space.sm, minHeight: 54, paddingVertical: 7, paddingLeft: 3, paddingRight: space.md - 3 },

@@ -1,0 +1,84 @@
+{
+  "summary": "Iteration 141 — frontend-only check of the three new AITS additions on JEELIVE (Rank Journey, Friend Compare / Aap vs, Streak share + flame bar) plus the owner's regression list. 55/55-ish spot checks passed on mobile viewport 390x844 against the preview URL; all A-G requirements landed. No pageerror. Known stand-in oddity (current_streak 3 while 4 recent days look done) is NOT a bug, as the request flagged. One cosmetic issue observed only: the share header renders as two visual lines ('ALL INDIA SERIES' eyebrow + 'Streak share karo' title), which is the standard ScreenHeader layout (eyebrow+title), so this is correct, not a defect.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "A_streak_flame_bar": {
+    "streak_card": "visible",
+    "streak_current": "visible, tappable",
+    "streak_flame_count": "3 (matches stand-in)",
+    "streak_flame_line_done": "Aaj ka din pakka. Kal phir aana. (as expected for aits='done')",
+    "streak_hourglass_on_done": "absent (correct)",
+    "ring_streak_done": "ok", "streak_best": "ok", "streak_skipped": "ok",
+    "cups_7_15_30_45_62": "all visible"
+  },
+  "B_streak_share": {
+    "route": "/series-share?id=streak reachable from streak-current tap",
+    "header_title": "'Streak share karo' (with 'All India Series' eyebrow)",
+    "aits_share_card": "visible (fire amber/orange/red; big 3; DIN KI STREAK; 7-day dots D4..D10; stats 7/62, 5 din, 1/5; quoted message)",
+    "aits_share_message": "editable, maxLength=80",
+    "aits_share_count": "shows '· 75/80' (correct)",
+    "aits_share_whatsapp": "tap did not crash; note not triggered on web (acceptable — browser preview sends text only)",
+    "aits_share_more": "visible",
+    "aits_share_back": "returns to /live"
+  },
+  "C_rank_journey": {
+    "mode_switch": "series-trend-mode-score / series-trend-mode-rank both present; default Score",
+    "rank_caption": "'All India Rank · upar = behtar'",
+    "rank_points": "8 points for days 1,2,4,5,7,8,9,10 (exactly as required)",
+    "rank_status": "'Best #13 (Day 10) · Abhi #13 (Day 10)'",
+    "leaderboard_calls_first_open": 8,
+    "leaderboard_calls_on_second_open": 0,
+    "tap_point_10_opens_board_day_10": true,
+    "switch_back_to_score_restores_graph": "8 trend-point IDs visible"
+  },
+  "D_rank_journey_failures": {
+    "fail=True_status": "'Kuch din ka Rank nahi aa paaya.' with series-rank-retry 'Dobara' button visible",
+    "state=preparing_status": "'Rank abhi taiyaar nahi hai. Result khulne ke thodi der baad aata hai.'"
+  },
+  "E_aap_vs": {
+    "compare_hint": "'Kisi bhi student par tap karo: aap aur woh, side by side.' visible",
+    "topper_row_tap_opens_sheet": true,
+    "versus_sheet_fields": "when / gap / rank / score / accuracy / attempted / time / note / close all present",
+    "sheet_when_example": "'DAY 10 · 10 DEC'",
+    "sheet_gap_example": "'Learner 78DDE6C4 aapse 27 marks aage hai.' (matches Score 252 vs 279 shown)",
+    "sheet_close_X_testid": "aits-versus-sheet-close present",
+    "sheet_backdrop_testid": "aits-versus-sheet-backdrop present",
+    "Theek_hai_closes_sheet": true,
+    "podium_step_1_opens_sheet": true,
+    "zzzz_search_shows_aits_board_none": true
+  },
+  "F_regression": {
+    "aits_board_more_button": "present",
+    "back_to_live_works": true,
+    "score_graph_intact_after_rank_switch": "8 series-trend-point-* IDs visible"
+  },
+  "G_colours": {
+    "streak_card_and_fire_bar": "amber/orange/red (fire palette) — not green",
+    "rank_graph_line": "royal blue (colors.custom_royalMid); best point gold ring — verified in code (RankJourney.tsx L112-120) and in screenshot C_rank.jpg",
+    "no_new_green_on_live_or_leaderboard": "confirmed in screenshots"
+  },
+  "test_report_links": [
+    "/app/tests/shine_helpers.py (used as-is)",
+    "/app/tests/aits_board_fixture.py (fixture)",
+    "/app/tests/misfire_fixture.py (fixture)",
+    "/app/tests/iter141_rank_versus_streak.py (marker file)"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "RankJourney caching keyed on uid-scoped storage key 'aits_ranks_'+uid; worker guard 'live' and failed flag are correct; no leaks observed.",
+    "VersusSheet reuses leaderboard row data only — no extra network calls on open (verified: tapping around/topper rows produced no new /leaderboard requests).",
+    "StreakShare picture uses explicit stopOpacity attributes on RadialGradient stops — correct for native SVG (author's comment is accurate).",
+    "ScoreTrend passes 'days' to RankJourney — mode switch preserves state (ScoreTrend's useState mode)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (frontend-only per request)", "frontend": "100% of A-G spot checks"},
+  "seed_data_creation": "None. All stand-ins come from registered Playwright route handlers (fake_aits + fake_board/fail/state). No real website calls for leaderboard; QA learner signed in with phone 7004186276 / PIN 5524 (approved). No PUT /profile/display-name attempted; never started/answered/submitted any paper.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 141 verified NEW AITS additions (Rank Journey switch on Score trend, Aap vs sheet on /series-leaderboard, Streak flame bar on /live and /series-share?id=streak). All testIDs render as expected. Caching for ranks works (8 calls first, 0 on reopen). Failure and 'preparing' states on RankJourney work. No pageerrors on /live, /series-leaderboard, /series-share. Owner's green-only-for-done rule intact (day 8/9/10 green, fire bar orange/red, rank line royal blue). Stand-in oddity current_streak=3 with 4 days done is intentional. No action items for main agent."
+}

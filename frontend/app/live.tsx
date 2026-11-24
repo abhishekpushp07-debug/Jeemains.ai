@@ -68,7 +68,7 @@ export default function Live() {
       </View>
 
       <ErrorBox error={series.error && !d ? series.error : ""} retry={series.reload} />
-      {user ? <JourneyCard streak={streak.data} days={days} error={streak.error} retry={streak.reload} /> : null}
+      {user ? <JourneyCard streak={streak.data} days={days} error={streak.error} retry={streak.reload} onShare={() => router.push({ pathname: "/series-share", params: { id: "streak" } } as any)} /> : null}
 
       {!d && !series.error ? <Skeleton h={190} style={{ borderRadius: 24 }} /> : null}
       {d ? <>

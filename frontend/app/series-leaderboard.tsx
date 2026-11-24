@@ -4,9 +4,11 @@
 // how many marks a neighbour is ahead of or behind you. Reached from the series page; back returns there.
 // From the pink Rank card the student can write the name the leaderboards show ("Naam badlo") and share the Rank as a picture.
 // "Poori series" (every live day's Score added up) appears next to "Har din" only once the website sends that leaderboard.
+// A tap on any other student (a row or a podium step) puts that student's totals next to yours ("Aap vs").
+// ?day=<day number> opens it on that day (the Rank journey graph on the series page sends it).
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { StyleSheet, TextInput, View, useWindowDimensions } from "react-native";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
@@ -17,6 +19,7 @@ import { Shine } from "@/src/analysis/Shine";
 import { DayStrip } from "@/src/components/series/DayCards";
 import { Board, BoardRow, BoardRows, NoticeCard, Podium, YouCard, grouped, isSeriesBoard, pageSeen } from "@/src/components/series/Board";
 import { NameSheet } from "@/src/components/series/NameSheet";
+import { VersusSheet } from "@/src/components/series/VersusSheet";
 import { SERIES_BOARD, forgetBoard, forgetBoards, useBoard } from "@/src/analysis/Leaderboard";
 import { RANK_NOTE, r1 } from "@/src/analysis/format";
 import { ScreenMotion } from "@/src/motion";
@@ -48,8 +51,12 @@ export default function SeriesLeaderboard() {
   const { series, history, days, reload } = useSeriesData(user?.id);
   // A day is listed once its paper is handed in: scored, or sealed until that day's result opens.
   const done = days.filter(d => { const a = dayAttempt(d); return !!a && !a.resumable; });
-  const [picked, setPicked] = useState<number | null>(null);
+  const { day: dayParam } = useLocalSearchParams<{ day?: string }>();
+  const [picked, setPicked] = useState<number | null>(dayParam ? Number(dayParam) : null);
   const [part, setPart] = useState<Part>("top");
+  // What is typed in Dhoondo lives here, not in the day's own view, so it stays when the day is changed: the same name is
+  // then looked up in the new day ("Aap vs" sends a name here to follow it from day to day).
+  const [find, setFind] = useState("");
   const [asked, setAsked] = useState(0);
   // The whole-series leaderboard (every live day added up) shows by itself the day the website starts sending it; until
   // then the website answers 404 and nothing of it is drawn.
@@ -74,7 +81,7 @@ export default function SeriesLeaderboard() {
     setNote(kept ? `Naam save ho gaya. Leaderboard par ab “${kept}” dikhega.` : "Naam hat gaya. Leaderboard par aap phir se Learner dikhoge.");
   };
   const share = (params: { id: string; day?: string }) => router.push({ pathname: "/series-share", params } as any);
-  const board = { part, onPart: setPart, name, note, onHear: hear, onName: () => setNaming(true) };
+  const board = { part, onPart: setPart, find, onFind: setFind, name, note, onHear: hear, onName: () => setNaming(true) };
 
   return (
     // The shine rests while another screen is in front.
@@ -116,14 +123,15 @@ const WORDS = {
 };
 
 /** One leaderboard: a day's (`day`), or the whole series' (no `day`). Your Rank card, the three parts and the part that is open. */
-function BoardView({ day, part, onPart, onRetry, name, note, onHear, onName, onShare }: {
-  day?: DayInfo; part: Part; onPart: (p: Part) => void; onRetry: () => void; name?: string; note: string; onHear: (name: string) => void; onName: () => void; onShare: () => void;
+function BoardView({ day, part, onPart, find, onFind, onRetry, name, note, onHear, onName, onShare }: {
+  day?: DayInfo; part: Part; onPart: (p: Part) => void; find: string; onFind: (q: string) => void; onRetry: () => void; name?: string; note: string; onHear: (name: string) => void; onName: () => void; onShare: () => void;
 }) {
   const a = day ? dayAttempt(day)! : null;
   const id = a ? a.id : SERIES_BOARD;
   const words = a ? WORDS.day : WORDS.all;
   const d: Board | null = useBoard(id);
   const [all, setAll] = useState(false);
+  const [versus, setVersus] = useState<BoardRow | null>(null); // the student whose totals stand next to yours
   const you = d?.state === "ready" ? d.you || null : null;
   // Your own row says which name the leaderboards show for you; the screen remembers it for a day where you have no Rank.
   const mine = you ? (you.named ? you.name : "") : undefined;
@@ -143,6 +151,8 @@ function BoardView({ day, part, onPart, onRetry, name, note, onHear, onName, onS
   // The nearest student ahead of you that the website sent: how many marks to the next step up.
   const ahead = you ? [...around, ...rows].filter(r => r.rank < you.rank).sort((x, y) => y.rank - x.rank)[0] : undefined;
   const gap = you && ahead ? r1(ahead.score - you.score) : 0;
+  // With a Rank of your own, a tap on any other student compares the two of you.
+  const pick = you ? setVersus : undefined;
   const tabs: { key: Part; label: string; look: TabLook; sub: string }[] = [
     { key: "top", label: "Toppers", look: LOOK.top, sub: String(Math.min(10, rows.length)) },
     { key: "around", label: "Aas-paas", look: LOOK.around, sub: you ? `#${you.rank}` : "—" },
@@ -155,9 +165,10 @@ function BoardView({ day, part, onPart, onRetry, name, note, onHear, onName, onS
       you={you} n={d.n} maximum={a ? a.summary?.maximum : d.maximum} counted={d.days_counted} name={mine ?? name} onName={onName} onShare={onShare} />
     {note ? <T testID="aits-board-name-note" w="bold" size={12.5} color={colors.custom_royalMid}>{note}</T> : null}
     <GlossTabs prefix="aits-board-tab" value={part} onChange={onPart} items={tabs} />
+    {pick ? <T testID="aits-board-compare-hint" size={12} color={colors.custom_eyebrow}>Kisi bhi student par tap karo: aap aur woh, side by side.</T> : null}
     {part === "top" ? <>
-      <Podium rows={rows} title={d.title} />
-      {shown.length > 3 ? <BoardRows testID="aits-board-top" rows={shown.slice(3)} look={LOOK.top} /> : null}
+      <Podium rows={rows} title={d.title} onPick={pick} />
+      {shown.length > 3 ? <BoardRows testID="aits-board-top" rows={shown.slice(3)} look={LOOK.top} onPick={pick} /> : null}
       {rows.length > 10 ? <Pill testID="aits-board-more" kind="outline" size="sm" label={all ? "Sirf top 10 dikhao" : `Top ${rows.length} dikhao`} onPress={() => setAll(v => !v)} /> : null}
       {you && !shown.some(r => r.is_you) ? <>
         <T w="bold" size={11} color={colors.custom_eyebrow} style={styles.caps}>AAP YAHAN HO</T>
@@ -166,36 +177,42 @@ function BoardView({ day, part, onPart, onRetry, name, note, onHear, onName, onS
     </> : part === "around" ? <>
       {you && (you.rank === 1 || gap > 0) ? <T testID="aits-board-next" w="bold" size={13} color={colors.custom_softText}>
         {you.rank === 1 ? words.first : `Rank #${ahead!.rank} aapse ${gap} marks aage hai.`}</T> : null}
-      {around.length ? <BoardRows testID="aits-board-around" rows={around} you={you} look={LOOK.around} />
+      {around.length ? <BoardRows testID="aits-board-around" rows={around} you={you} look={LOOK.around} onPick={pick} />
         : <T testID="aits-board-around-none" size={13} color={colors.muted}>{words.around}</T>}
-    </> : <Find id={id} />}
+    </> : <Find id={id} q={find} onQ={onFind} you={you} daily={!!a} onPick={pick} />}
     <T testID="aits-board-foot" size={11.5} color={colors.custom_eyebrow}>{words.foot} Sirf naam, Score aur totals dikhte hain; kisi ke jawab ya phone number kabhi nahi.</T>
+    {/* "Har din mein yahi naam dhoondo": the name goes into Dhoondo and stays there while the day is changed. */}
+    <VersusSheet you={you} them={versus} when={day ? `Day ${day.day} · ${istDate(day.date)}` : "Poori series"} maximum={a ? a.summary?.maximum : d.maximum} onClose={() => setVersus(null)}
+      onFollow={() => { if (versus) { onFind(versus.name.slice(0, 20)); onPart("find"); } setVersus(null); }} />
   </>;
 }
 
-/** Find any student of the day by name or Rank. The website does the search. */
-function Find({ id }: { id: string }) {
-  const [q, setQ] = useState("");
+/**
+ * Find any student of the day by name or Rank. The website does the search. What is typed is kept by the screen, so it
+ * stays when the day is changed. With `you`, each student found says how many marks ahead of or behind you they are.
+ */
+function Find({ id, q, onQ, you, daily, onPick }: { id: string; q: string; onQ: (q: string) => void; you?: BoardRow | null; daily: boolean; onPick?: (r: BoardRow) => void }) {
   const term = q.trim();
   return <>
     {/* The search box wears the Dhoondo tab's sky blue, with the same gloss, glint and running edge. */}
     <Shine radius={radius.pill} ring={2} tones={LOOK.find.rest} edge={LOOK.find.edge} gloss={colors.custom_tabGloss} glint={colors.custom_tabGlint} band={26} part={34} face={styles.search}>
       <Icon name="magnify" size={18} color={colors.custom_tabInkSoft} />
-      <TextInput testID="aits-board-search" value={q} onChangeText={t => setQ(t.slice(0, 20))} placeholder="Naam ya Rank likho" placeholderTextColor={colors.custom_tabInkSoft}
+      <TextInput testID="aits-board-search" value={q} onChangeText={t => onQ(t.slice(0, 20))} placeholder="Naam ya Rank likho" placeholderTextColor={colors.custom_tabInkSoft}
         accessibilityLabel="Leaderboard mein dhoondo" autoCorrect={false} returnKeyType="search" style={[styles.input, noOutline]} />
     </Shine>
-    {term ? <Found key={term} id={id} term={term} />
+    {term && daily && !/^\d+$/.test(term) ? <T testID="aits-board-find-days" size={12} color={colors.custom_eyebrow}>Upar se din badlo: “{term}” us din mein bhi dhoonda jayega. Ek naam kai students ka ho sakta hai.</T> : null}
+    {term ? <Found key={term} id={id} term={term} you={you} onPick={onPick} />
       : <T testID="aits-board-find-hint" size={13} color={colors.muted}>Kisi bhi student ka naam ya Rank likho. Jaise: Arjun, ya 25.</T>}
   </>;
 }
 
 /** The answer for one search term. A new term starts a new look-up, so an older answer is never shown under it. */
-function Found({ id, term }: { id: string; term: string }) {
+function Found({ id, term, you, onPick }: { id: string; term: string; you?: BoardRow | null; onPick?: (r: BoardRow) => void }) {
   const d: Board | null = useBoard(id, term);
   if (!d) return <Skeleton h={60} style={styles.soft} />;
   if (d.state === "error") return <T testID="aits-board-find-error" size={13} color={colors.error}>Dhoondh nahi paaye. Internet dekh kar dobara likho.</T>;
   const found = d.found || [];
-  return found.length ? <BoardRows testID="aits-board-found" rows={found} look={LOOK.find} />
+  return found.length ? <BoardRows testID="aits-board-found" rows={found} you={you} look={LOOK.find} onPick={onPick} />
     : <T testID="aits-board-none" size={13} color={colors.muted}>Is naam ya Rank ka koi student nahi mila.</T>;
 }
 

@@ -28,7 +28,7 @@ The answer (same envelope and same row fields as GET /api/attempts/{id}/leaderbo
 }
 
 <row> = {
-  "rank": 9, "name": "Arjun Sharma", "named": true, "handle": "<16 hex, same handle as the day leaderboard>",
+  "rank": 9, "name": "Arjun Sharma", "named": true, "handle": "<16 hex; see part 3: please keep ONE handle per student for the whole series>",
   "score": 3075,               // the sum of the student's live-day Scores
   "days": 11,                  // NEW: how many of the counted live days this student handed in
   "attempted": 770, "accuracy": 92.3, "time": 104500,   // totals over those days (accuracy in %, time in seconds)
@@ -46,3 +46,45 @@ Rules the app assumes (please say if any is different)
 How the app checks the shape (so a half-built answer is never shown)
 - "state" and "n" present, "days_counted" a number, "rows" and "around" lists, and every row (and "you") has
   number "rank", "score", "days" and text "name", "handle".
+
+
+==========================================================================================
+PART 2 (added 24 Nov 2026) — the student's own Rank of every day, in one answer ("Rank journey")
+==========================================================================================
+What the app does today
+- The series page has a small graph of the student's All India Rank day by day. The app has no single place to ask for
+  it, so it asks GET /api/attempts/{id}/leaderboard once for every released live day (two at a time) and keeps only the
+  "you" row's rank and n. It keeps each day's Rank on the phone for a week (the two newest days: 10 minutes).
+  On day 40 a student who opens the graph for the first time costs the website 40 leaderboard answers.
+
+What would make it light (optional, the graph works without it)
+      GET /api/series/all-india-jee/my-days
+      -> { "days": [ { "day": 1, "attempt_id": "<id>", "rank": 412, "n": 5120, "score": 187, "maximum": 300 }, ... ] }
+- Only released live days. A day whose leaderboard is not ready is left out.
+- One answer instead of one per day. Tell the app project when it exists; the app then asks this first.
+
+==========================================================================================
+PART 3 (added 24 Nov 2026) — one student followed across days ("Friend compare, day by day")
+==========================================================================================
+What was seen for real (QA learner, read only, 24 Nov 2026)
+- The same student has a DIFFERENT "handle" on every paper's leaderboard (four papers, four handles).
+- A student without a display name is shown as "Learner XXXXXXXX", and XXXXXXXX is the first 8 letters of THAT paper's
+  handle, so the same student is "Learner B3417CFC" on one paper and "Learner B974D4F1" on the next. Such a student
+  cannot be followed from day to day at all, not even by name.
+- ?q= is not case-sensitive and finds a student by the name (whole or its beginning), by the handle's first letters
+  and by Rank. The single word "Learner" finds nobody.
+- So the app cannot tell that "Arjun Sharma" on Day 3 and "Arjun Sharma" on Day 7 are the same student: names are not
+  unique and can be changed. The app therefore compares two students on ONE day only, from the two rows it already has.
+  It does not match students by name across days (that could show another student's Scores as the friend's).
+
+What the owner asked for
+- Pick a friend on the leaderboard and see both students' Scores side by side for EVERY day of the series.
+
+What the website would need to send (either one is enough)
+  (a) a handle that stays the same for a student on every All India day and on the whole-series leaderboard
+      (still not the user id, still no phone number), or
+  (b)   GET /api/series/all-india-jee/compare?with=<handle from any series leaderboard row>
+        -> { "them": { "name": "...", "named": true },
+             "days": [ { "day": 1, "you": { "score": 187, "rank": 412 } or null, "them": { "score": 201, "rank": 288 } or null }, ... ] }
+        null = that student did not hand in that live day. Totals only, never answers, the same privacy as the leaderboard.
+- Until then the app shows "Aap vs <student>" for the open day (and for the whole series once PART 1 exists).
