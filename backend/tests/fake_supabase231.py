@@ -12,6 +12,7 @@ class Picky(FakeSupabase):
     def __init__(self, chunk):
         super().__init__(chunk)
         self.returned = []
+        self.only_first = None   # a number: only that many matching uploads are returned, the later ones are saved
 
     def marks(self):
         return self.returned
@@ -26,6 +27,11 @@ class Picky(FakeSupabase):
                 key = (self.uploads.get(p.rsplit('/', 1)[1]) or {}).get('key')
             if key and any(x in key for x in self.marks()):
                 with self.lock:
-                    self.calls.append((req.method, req.url.host, p))
-                return httpx.Response(400, json={'statusCode': '400', 'error': 'Bad Request', 'message': SAID})
+                    hit = self.only_first is None or self.only_first > 0
+                    if hit and self.only_first is not None:
+                        self.only_first -= 1
+                    if hit:
+                        self.calls.append((req.method, req.url.host, p))
+                if hit:
+                    return httpx.Response(400, json={'statusCode': '400', 'error': 'Bad Request', 'message': SAID})
         return super().__call__(req)

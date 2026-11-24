@@ -33,7 +33,7 @@ function BookLine({b,stuck,busy,onRetry}){
 // A file Supabase keeps returning ("Atki hai"): only it stopped; it says why and can be tried again at once.
 function StuckFile({b,busy,onRetry}){
  return <li className="machine-book" data-testid={'machine-storage-stuck-'+b.id}>
-  <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>Atki hai · {b.waiting_minutes} min se. {b.mock?`"${b.mock}" ki ek picture`:'Yeh PDF'} Supabase mein nahi ja rahi.{b.reason?` Wajah: ${b.reason}.`:''} Har 15 minute mein apne aap phir koshish hoti hai.</small></div>
+  <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>Atki hai · {b.waiting_minutes} min se. {b.mock?`"${b.mock}"${b.more?` aur ${b.more} doosre mock ki pictures`:' ki ek picture'}`:'Yeh PDF'} Supabase mein nahi ja rahi.{b.reason?` Wajah: ${b.reason}.`:''} Har 15 minute mein apne aap phir koshish hoti hai.</small></div>
   <button type="button" className="machine-retry" disabled={busy} onClick={()=>onRetry(b)} data-testid={'machine-retry-'+b.id}>{busy?<Loader2 size={14} className="spin" aria-hidden="true"/>:<RotateCw size={14} aria-hidden="true"/>}Dobara chalao</button>
  </li>;
 }

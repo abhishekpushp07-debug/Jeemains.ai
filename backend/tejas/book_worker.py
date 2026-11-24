@@ -8,7 +8,7 @@ from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
 from .chapter_reader import plan_start, bookmark_plan
 from anyio import from_thread
-from tejas_storage import put_object, StorageError, StorageWaiting, SupabaseRefused
+from tejas_storage import put_object, StorageError, StorageWaiting, StorageStuck, SupabaseRefused
 
 PAGES_PER_STEP=100
 MOCKS_PER_STEP=5
@@ -62,10 +62,11 @@ async def read_batch(book, token, source):
 
 async def publish_batch(book, token, source):
     if book.paused:return False
-    published=0;stuck=None
-    for mock in await mocks_for(book):
-        if not (book.payload.get('auto_publish') or mock.publish_requested):continue
-        if mock.state!='ready' or mock.issues or mock.published_generation==mock.generation:continue
+    # A mock whose picture Supabase returned is tried once in a round of batches: the book's other mocks go first, then the book waits its 15 minutes.
+    published=0;returned=(book.payload.get('stuck_round') or {}).get('mocks') or {}
+    wanted=[m for m in await mocks_for(book) if (book.payload.get('auto_publish') or m.publish_requested) and m.state=='ready' and not m.issues and m.published_generation!=m.generation]
+    for mock in wanted:
+        if mock.id in returned:continue
         if published>=MOCKS_PER_STEP:return True
         try:
             await publish_ready(book,token,source,mock.id)
@@ -75,14 +76,19 @@ async def publish_batch(book, token, source):
         except StorageWaiting as exc:
             if exc.scope!='stuck':raise  # Supabase is away: the whole book waits for it and carries on; the mock is not held
             # One picture that Supabase keeps returning: only this mock waits (it stays Draft, nothing to fix in it); the book's other mocks carry on.
-            if not stuck:
-                exc.mock,exc.mock_id=(mock.chapter or {}).get('title') or mock.label,mock.id;stuck=exc
+            returned[mock.id]={'mock':((mock.chapter or {}).get('title') or mock.label)[:120],'error':str(exc)[:300],'code':exc.code,'reason':exc.reason[:200],'next':exc.step[:240]}
+            book.payload.setdefault('stuck_round',{'since':None})['mocks']=returned
         except (ValueError,StorageError) as exc:
             # One mock that cannot be saved waits for the owner's next Publish; the book and its other mocks carry on.
             await hold(book,token,mock,exc)
         published+=1
-    if stuck:raise stuck  # the book says "Atki hai" with the reason; this mock is tried again every 15 minutes or on Dobara chalao
-    return False
+    left={m.id:returned[m.id] for m in wanted if m.id in returned}
+    since=(book.payload.pop('stuck_round',None) or {}).get('since')
+    if not left:return False
+    # The round is over: the book says "Atki hai" with each stuck mock and its reason; they are tried again every 15 minutes or on Dobara chalao.
+    first=next(iter(left.values()))
+    exc=StorageStuck(first['error']);exc.code,exc.reason,exc.step,exc.mocks,exc.since=first['code'],first['reason'],first['next'],left,since
+    raise exc
 
 
 async def hold(book, token, mock, reason):
@@ -151,6 +157,7 @@ async def step(job):
         if book.paused:return 'Book paused by owner.'
         if await db.tejas_books.find_one({'_id':id,'archived':True},{'_id':1}):return 'Book is in the Library.'
         p=book.payload;waited=p.pop('storage_wait',None)
+        if waited and waited.get('mocks'):p['stuck_round']={'since':waited['since'],'mocks':{}}  # a new round: every stuck mock is tried again; "since" is kept
         if book.state=='uploading':return 'Waiting for upload completion.'
         source=await receive(book,token) if not p.get('source_path') else await original(book)
         if p.get('reader_version')!=READER_VERSION:
@@ -214,16 +221,22 @@ async def step(job):
         if isinstance(exc,StorageWaiting):
             # Supabase is away: the book keeps its state and saved work, shows that it waits, and the job runs again by itself.
             # One file that Supabase keeps returning ("Atki hai") stops alone and says why; other books carry on.
-            stuck=exc.scope=='stuck';what=getattr(exc,'mock','');base=book.payload.get('catalog_base')
-            await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':(waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300],
+            stuck=exc.scope=='stuck';mocks=getattr(exc,'mocks',None) or {};what=next(iter(mocks.values()),{}).get('mock','');base=book.payload.get('catalog_base')
+            first=(book.payload.get('metrics') or {}).get('first_ready_seconds')
+            extra=f' aur {len(mocks)-1} doosre mock' if len(mocks)>1 else ''
+            await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':getattr(exc,'since',None) or (waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300],
                     'kind':exc.scope,'code':exc.code,'reason':exc.reason[:200],'next':exc.step[:240],**({'stuck':True} if stuck else {}),
-                    **({'mock':what[:120],'mock_id':exc.mock_id} if what else {})},
-                **({'payload.catalog_base':base} if base is not None else {}),  # mocks published in this batch keep their place in the list
-                'payload.message':(f'Atki hai: "{what[:120]}" ki ek picture Supabase mein nahi ja rahi. Baaki mock aur kitaabein chal rahi hain.' if what else
+                    **({'mock':what,'mock_id':next(iter(mocks)),'mocks':{i:{'mock':v['mock'],'reason':v['reason']} for i,v in mocks.items()}} if mocks else {})},
+                # what the mocks published in this batch changed in the book is kept: their place in the list, the time the first one was ready
+                **({'payload.catalog_base':base} if base is not None else {}),**({'payload.metrics.first_ready_seconds':first} if stuck and first is not None else {}),
+                'payload.message':(f'Atki hai: "{what}"{extra} ki picture Supabase mein nahi ja rahi. Baaki mock aur kitaabein chal rahi hain.' if what else
                     'Atki hai: yeh file Supabase mein nahi ja rahi. File surakshit hai; baaki kitaabein chal rahi hain.') if stuck else
-                    'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.'}})
+                    'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.'},
+                # the next round tries every stuck mock again; the re-read that finished before the stuck picture stays finished
+                **({'$unset':{'payload.stuck_round':'',**({} if 'rereading' in book.payload else {'payload.rereading':''})}} if stuck else {})})
             raise
         import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
+        book.payload.pop('stuck_round',None)
         book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException,SupabaseRefused)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'
         try:await save_book(book,token)
         except HTTPException:pass

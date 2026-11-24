@@ -4,6 +4,7 @@ takes it). Supabase is DOWN while /tmp/uibridge231/supabase_down exists. Seeds, 
   ok       a Live mock (made Live while the others were stuck)
   pic      a mock whose pictures are returned at Live: "Atki hai", 22 minutes old (the 15-minute alert shows)
   big      a 7 MB PDF returned on both big-file routes: "Atki hai", fresh (no alert yet)
+  two      a PDF with two mocks, a picture of each returned at Live: its row names the first mock and counts the other
   file / blocked   display-only rows: "this file only, machine retries" (423) and "project blocked" (402)
 Writes /tmp/uibridge231/bridge.json (owner + reviewer cookies, 0600). Run: cd /app/backend && python tests/storage_stuck_bridge231.py 2400 &
 """
@@ -12,6 +13,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from storage_book229 import H, J, BM, DB, S, mkstaff, upload, cut_pdf, big_pdf, finish, again, pump  # noqa: E402
 import httpx, uvicorn  # noqa: E402
+from book_publishing_iso170 import build_pdf, q3  # noqa: E402
 from tejas import structure  # noqa: E402
 from fake_supabase231 import Picky  # noqa: E402
 
@@ -63,8 +65,12 @@ async def main():
     pic = (await upload(own, cut_pdf('UIPIC', long=True), 'TEST_PICTURE_ATKI', section_id=sec))['id']; await finish(own, pic)
     raw = big_pdf('UIBIG')
     big = (await upload(own, raw, 'TEST_BADI_PDF_ATKI', section_id=sec))['id']
-    Path(MARKS).write_text(f'/books/{pic}/crops/\n/books/{big}/original.pdf\n')
+    K = [(1, 'B'), (2, 'B'), (3, 'C')]
+    two = (await upload(own, build_pdf([{'n': 1, 'qs': q3('UI1'), 'keys': K}, {'n': 2, 'qs': q3('UI2'), 'keys': K}]), 'TEST_DO_MOCK_ATKE', section_id=sec))['id']; await finish(own, two)
+    pair = [m async for m in BM.find({'book_id': two}).sort('order', 1)]
+    Path(MARKS).write_text(f'/books/{pic}/crops/\n/books/{big}/original.pdf\n/books/{two}/crops/\n')
     mk = await BM.find_one({'book_id': pic}); await live(mk['_id'])
+    await own.post('/api/admin/master/status', json={'items': [{'kind': 'book_mock', 'id': m['_id']} for m in pair], 'to': 'live'}); await pump()
     await finish(own, big); await again(own); await again(own)
     await DB.tejas_books.update_one({'_id': pic}, {'$set': {'payload.storage_wait.since': time.time() - 22 * 60}})
     ok = (await upload(own, cut_pdf('UIOK', long=True), 'TEST_THEEK_PDF', section_id=sec))['id']; await finish(own, ok)
@@ -72,13 +78,14 @@ async def main():
     small = cut_pdf('UIF', long=True)
     one = (await upload(own, small, 'TEST_SIRF_YEH_FILE', section_id=sec))['id']
     await shown(one, small, {'kind': 'file', 'code': 423, 'reason': 'Supabase me isi file ka ek aur upload abhi khula hai (423)', 'next': 'Kuch nahi karna: machine khud phir koshish kar rahi hai.'})
-    two = (await upload(own, cut_pdf('UIB', long=True), 'TEST_PROJECT_ROK', section_id=sec))['id']
-    await shown(two, small, {'kind': 'blocked', 'code': 402, 'reason': 'Supabase project par billing ya usage ki rok hai (402)', 'next': 'Supabase dashboard me Billing aur Usage dekhiye. Rok hatte hi kaam apne aap aage chalega.'})
+    rok = (await upload(own, cut_pdf('UIB', long=True), 'TEST_PROJECT_ROK', section_id=sec))['id']
+    await shown(rok, small, {'kind': 'blocked', 'code': 402, 'reason': 'Supabase project par billing ya usage ki rok hai (402)', 'next': 'Supabase dashboard me Billing aur Usage dekhiye. Rok hatte hi kaam apne aap aage chalega.'})
     state = {b['payload']['title']: (b['state'], (b['payload'].get('storage_wait') or {}).get('kind')) async for b in DB.tejas_books.find({}, {'state': 1, 'payload.title': 1, 'payload.storage_wait': 1})}
     path = OUT + '/bridge.json'
     with open(path, 'w') as f:
         json.dump({'owner': dict(own.cookies), 'reviewer': dict(rev.cookies), 'type': f'/super-admin/exam/{slug}/{sec}', 'pic': {'book': pic, 'mock': mk['_id'], 'label': mk['label']},
-                   'big': big, 'ok': {'book': ok, 'mock': mo['_id']}, 'file': one, 'blocked': two}, f)
+                   'big': big, 'ok': {'book': ok, 'mock': mo['_id']}, 'file': one, 'blocked': rok,
+                   'two': {'book': two, 'mocks': [m['_id'] for m in pair], 'first': pair[0]['label']}}, f)
     os.chmod(path, 0o600)
     print('READY', H.TEST_DB, json.dumps(state), flush=True)
     server = uvicorn.Server(uvicorn.Config(H.app, host='127.0.0.1', port=8775, log_level='warning', lifespan='off'))

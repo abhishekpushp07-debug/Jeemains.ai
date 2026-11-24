@@ -25,7 +25,7 @@ async def upload_progress(b):
         w = p['storage_wait']
         out['storage_wait'] = {'since': w['since'], 'error': w.get('error', '')[:200], 'kind': w.get('kind') or 'away', 'code': w.get('code'),
                                'reason': w.get('reason', ''), 'next': w.get('next', ''), 'stuck': bool(w.get('stuck')), 'retrying': bool(w.get('retrying')),
-                               'mock': w.get('mock', '')}
+                               'mock': w.get('mock', ''), 'more': max(0, len(w.get('mocks') or {}) - 1)}
     return out
 FLAGGED = {'$elemMatch': {'flag': {'$nin': ['', None]}}}
 
@@ -131,8 +131,8 @@ async def type_mocks(sid: str, u=Depends(owner)):
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, 'paused': {'$ne': True},
                                         'payload.storage_wait.stuck': True}, {'payload.storage_wait': 1}):
         sw = b['payload']['storage_wait']
-        if sw.get('mock_id'):
-            held_up[sw['mock_id']] = {'reason': sw.get('reason', ''), 'since': sw['since']}
+        for mid, v in (sw.get('mocks') or {}).items():
+            held_up[mid] = {'reason': v.get('reason', ''), 'since': sw['since']}
     for w in waiting:
         if w['kind'] == 'import':
             items.append({'kind': 'import', 'id': w['id'], 'title': w['title'], 'status': 'draft', 'to_fix': w['issue_count'], 'count': w['count'],
@@ -150,7 +150,7 @@ async def type_mocks(sid: str, u=Depends(owner)):
         items.append({'kind': 'book_mock', 'id': w['id'], 'title': w['title'], 'status': status, 'to_fix': to_fix, 'key_only': w.get('key_only', 0),
                       'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False, 'cut': w.get('cut'),
                       'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject'),
-                      'publish_progress': progress.get(w['id']), **({'rereading': {'read_pages': again['read_pages'], 'pages': again['pages']}} if again else {}),
+                      'publish_progress': None if w['id'] in held_up else progress.get(w['id']), **({'rereading': {'read_pages': again['read_pages'], 'pages': again['pages']}} if again else {}),
                       **({'stuck': held_up[w['id']]} if w['id'] in held_up and status in ('publishing', 'scheduled') else {})})
     uploads = []
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [

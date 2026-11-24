@@ -14,6 +14,7 @@ D = '/tmp/uibridge231/'
 INFO = json.load(open(D + 'bridge.json'))
 SS = '/app/.screenshots/ui231'; os.makedirs(SS, exist_ok=True)
 PIC, MID, BIG, ONE, TWO = INFO['pic']['book'], INFO['pic']['mock'], INFO['big'], INFO['file'], INFO['blocked']
+PAIR = INFO['two']
 
 
 async def walk(pw, size, fix):
@@ -32,6 +33,10 @@ async def walk(pw, size, fix):
         say(f'{size}: stuck row offers Dobara chalao, not "Abhi phir try karo"', await at(f'type-upload-retry-{PIC}').is_visible() and not await at(f'type-upload-wait-retry-{PIC}').count())
         note = await at(f'type-upload-wait-{BIG}').inner_text()
         say(f'{size}: big PDF row: Atki hai with the code, no alert before 15 minutes', 'Atki hai' in note and 'Yeh PDF' in note and '(400)' in note and not await at(f'type-upload-alert-{BIG}').count(), note)
+        note = await at(f"type-upload-wait-{PAIR['book']}").inner_text()
+        say(f'{size}: PDF with two stuck mocks: its row names the first mock and counts the other', 'Atki hai' in note and f"\"{PAIR['first']}\" aur 1 doosre mock ki pictures" in note and '(400)' in note, note)
+        both = [await at(f'mock-stuck-{m}').inner_text() if await at(f'mock-stuck-{m}').count() else '' for m in PAIR['mocks']]
+        say(f'{size}: ...and each of its two mocks says Atki hai with the reason', all('Atki hai' in t and '(400)' in t for t in both), both)
         note = await at(f'type-upload-wait-{ONE}').inner_text()
         say(f'{size}: "this file only" row says the machine retries, with the code', 'abhi Supabase mein nahi gayi' in note and '(423)' in note and await at(f'type-upload-wait-retry-{ONE}').is_visible(), note)
         note = await at(f'type-upload-wait-{TWO}').inner_text()
@@ -46,8 +51,9 @@ async def walk(pw, size, fix):
         await page.screenshot(path=f'{SS}/{size}_type.jpg', quality=40, type='jpeg')
         say(f'{size}: five waiting rows ask the machine once together, not once each', len(asked) <= 4, len(asked))
         await page.click('[data-testid=storage-badge]'); await page.wait_for_selector('[data-testid=machine-panel]', timeout=10000); await page.wait_for_timeout(800)
-        say(f'{size}: machine panel counts 2 stuck files and lists both with Dobara chalao', (await at('machine-storage-stuck-value').inner_text()).strip() == '2'
-            and await at(f'machine-storage-stuck-{PIC}').count() == 1 and await at(f'machine-storage-stuck-{BIG}').count() == 1 and await at(f'machine-retry-{PIC}').count() == 1,
+        say(f'{size}: machine panel counts 3 stuck files and lists them with Dobara chalao', (await at('machine-storage-stuck-value').inner_text()).strip() == '3'
+            and await at(f'machine-storage-stuck-{PIC}').count() == 1 and await at(f'machine-storage-stuck-{BIG}').count() == 1 and await at(f'machine-retry-{PIC}').count() == 1
+            and 'aur 1 doosre mock' in await at(f"machine-storage-stuck-{PAIR['book']}").inner_text(),
             await at('machine-storage-stuck-value').inner_text())
         say(f'{size}: machine panel gives the reason', '(400)' in await at(f'machine-storage-stuck-{PIC}').inner_text(), await at(f'machine-storage-stuck-{PIC}').inner_text())
         await at('machine-storage-stuck-list').scroll_into_view_if_needed()
@@ -61,7 +67,7 @@ async def walk(pw, size, fix):
                 words = [w.strip() for w in await page.locator('[data-testid^=mock-live-word-]').all_inner_texts()]
                 if words.count('Live') == 2 and not await at(f'type-upload-wait-{PIC}').count():
                     done = True; break
-            say(f'{size}: Dobara chalao after Supabase takes the picture: the mock is Live, the stuck note is gone, no page reload', done and not await page.locator('[data-testid^=mock-stuck-]').count(), words)
+            say(f'{size}: Dobara chalao after Supabase takes the picture: the mock is Live, the stuck note is gone, no page reload', done and not await at(f'mock-stuck-{MID}').count(), words)
             await page.screenshot(path=f'{SS}/{size}_fixed.jpg', quality=40, type='jpeg')
     finally:
         say(f'{size}: no failed API calls', not [b for b in bad if '/dream' not in b[1]], bad[:4])

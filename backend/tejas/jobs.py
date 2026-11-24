@@ -275,11 +275,13 @@ def kick_later(kind, seconds):
 
 async def wake_uploads(stuck=False):
     """Studio imports and chapter books that waited for Supabase run again now (also after a server restart).
-    One whose own file is stuck keeps its 15 minutes: it runs again only at the scheduled check (stuck=True) or on Retry."""
+    One whose own file is stuck keeps its 15 minutes: the scheduled check (stuck=True) runs it only once those are over (its own timer
+    was lost in a restart); Retry runs it at once."""
     from .imports import imports, process_import
     from .chapter_books import books, process_book
     n = 0
-    where = {'status': 'queued', 'storage_wait': {'$exists': True}, **({} if stuck else {'stuck': {'$ne': True}})}
+    due = [{'stuck': {'$ne': True}}] + ([{'storage_wait': {'$lte': now() - STUCK_RETRY + 120}}] if stuck else [])
+    where = {'status': 'queued', 'storage_wait': {'$exists': True}, '$or': due}
     for col, fn in ((imports, process_import), (books, process_book)):
         for r in await col.find(where, {'id': 1}).sort('storage_wait', 1).limit(20).to_list(20):
             run_later(fn, r['id'], seconds=0)

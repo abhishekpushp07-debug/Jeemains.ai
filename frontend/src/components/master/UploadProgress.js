@@ -46,7 +46,7 @@ function Stage({b,readLine}){
 const ALERT_MIN=15;
 // What the owner reads while a file is not in Supabase: Supabase away, the project blocked, only this file returned, or stuck ("Atki hai").
 function waitWords(w,min){
- const why=w.reason?` Wajah: ${w.reason}.`:'',what=w.mock?`"${w.mock}" ki ek picture`:'Yeh PDF';
+ const why=w.reason?` Wajah: ${w.reason}.`:'',what=w.mock?`"${w.mock}"${w.more?` aur ${w.more} doosre mock ki pictures`:' ki ek picture'}`:'Yeh PDF';
  if(w.retrying)return ['Dobara koshish chal rahi hai…','Nateeja kuch pal mein yahin dikhega.'];
  if(w.stuck)return [`Atki hai · ${min} min se.`,`${what} Supabase mein nahi ja rahi. File surakshit hai aur baaki kitaabein chal rahi hain; Emergent mein kuch nahi gaya.${why} ${w.next||'Har 15 minute mein apne aap phir koshish hogi.'}`];
  if(w.kind==='blocked')return [`Supabase project par rok · ${min} min se.`,`Naya kaam ruka hai, file surakshit hai; Emergent mein kuch nahi gaya.${why} ${w.next||''}`];

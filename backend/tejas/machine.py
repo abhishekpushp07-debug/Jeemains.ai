@@ -17,7 +17,7 @@ def book_row(b, t):
     return {'id': b['_id'], 'title': p.get('title', ''), 'state': b['state'], 'revision': b.get('revision', 0), 'read_pages': p.get('read_pages', 0),
             'pages': p.get('pages', 0), 'minutes': max(0, int((t - b.get('updated_at', t)) // 60)), 'message': (p.get('message') or '')[:200],
             **({'waiting_minutes': max(0, int((t - w['since']) // 60)), 'kind': w.get('kind') or 'away', 'reason': w.get('reason', ''), 'next': w.get('next', ''),
-                'stuck': bool(w.get('stuck')), 'mock': w.get('mock', '')} if w else {})}
+                'stuck': bool(w.get('stuck')), 'mock': w.get('mock', ''), 'more': max(0, len(w.get('mocks') or {}) - 1)} if w else {})}
 
 
 @router.get('/status')
@@ -27,12 +27,14 @@ async def status(response: Response, u=Depends(owner)):
     store = await storage_health.health(fresh=False, u=u)
     last = (await db.tejas_operations.find_one({'id': 'maintenance'}, {'_id': 0, 'last_run': 1}) or {}).get('last_run') or 0
     open_books = {'removed': False, 'archived': {'$ne': True}}
-    held = [book_row(b, t) async for b in db.tejas_books.find({**open_books, 'paused': {'$ne': True}, 'payload.storage_wait': {'$exists': True}}, FIELDS).limit(40)]
+    held = [book_row(b, t) async for b in db.tejas_books.find({**open_books, 'paused': {'$ne': True}, 'payload.storage_wait': {'$exists': True},
+                                                                       'payload.storage_wait.retrying': {'$ne': True}}, FIELDS).limit(40)]
     # Waiting for Supabase to come back is one list; a file Supabase keeps returning ("Atki hai") is another, with its own Dobara chalao.
     waiting, stuck_files = [b for b in held if not b['stuck']], [b for b in held if b['stuck']]
     waiting_jobs = await jobs.count_documents({'status': 'queued', 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}, 'stuck': {'$ne': True}})
+    # A Dobara chalao that has not finished in 15 minutes is listed here too, so a try that never ran cannot stay hidden.
     stuck = [book_row(b, t) async for b in db.tejas_books.find({**open_books, 'paused': {'$ne': True}, 'state': {'$in': WORKING}, 'updated_at': {'$lt': t - STUCK_SECONDS},
-                                                                'payload.storage_wait': {'$exists': False}},
+                                                                '$or': [{'payload.storage_wait': {'$exists': False}}, {'payload.storage_wait.retrying': True}]},
                                                               FIELDS).sort('updated_at', 1).limit(20)]
     failed_books = [book_row(b, t) async for b in db.tejas_books.find({**open_books, 'state': 'failed'}, FIELDS).sort('updated_at', -1).limit(20)]
     failed_jobs = {row['_id']: row['n'] async for row in jobs.aggregate([{'$match': {'status': 'failed', 'created_at': {'$gte': t - DAY}}},

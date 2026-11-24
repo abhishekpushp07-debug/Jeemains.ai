@@ -191,10 +191,16 @@ async def process_import(id):
                 stuck=exc.scope=='stuck'
                 note=f'Atki hai: is paper ki ek picture Supabase mein nahi ja rahi. Wajah: {exc.reason}. Har 15 minute mein apne aap phir koshish hogi; abhi ke liye Retry dabaiye.' if stuck else str(exc)
                 await imports.update_one(fence,{'$set':{'status':'queued','message':note[:350],'storage_wait':now(),'stuck':stuck},'$inc':{'storage_waits':1}})
-                run_later(process_import,id,seconds=STUCK_RETRY if stuck else min(300,60*2**min(r.get('storage_waits',0),3)))
+                # A stuck import keeps ONE 15-minute clock: its timer runs only if no newer try (the scheduled check, Retry) ran meanwhile.
+                if stuck:run_later(stuck_again,id,token,seconds=STUCK_RETRY)
+                else:run_later(process_import,id,seconds=min(300,60*2**min(r.get('storage_waits',0),3)))
                 return
             message=str(exc)[:350] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry with the same saved sources.'
             await imports.update_one(fence,{'$set':{'status':'failed','message':message},'$unset':{'stuck':''}})
+
+
+async def stuck_again(id, token):
+    if await imports.find_one({'id':id,'status':'queued','stuck':True,'lease_token':token},{'_id':1}):await process_import(id)
 
 
 @router.get('/{id}',response_model=ImportView)
