@@ -1,0 +1,37 @@
+{
+  "summary": "Pocket 1 (big-file upload hardening) independent edge-case review. I did NOT re-run the long regression suites or the real Supabase (the main agent already green-lit them). I wrote /app/backend/tests/storage_edge230.py, which extends FakeSupabase (tests/fake_supabase229.py) by thin subclassing + extra knobs — never changing its existing behaviour — and hunts for edge cases not covered by storage_big229 / storage_before229 / storage_book229. All three existing suites still pass unchanged (28/28, 9/9, 22/22). New suite: 18 PASS / 1 FAIL out of 19. The one failure is a real finding (see backend_issues.minor). New scenarios covered: (a) resume older than RESUME_SECONDS (20 h) is NOT reused; (b) resume whose path differs; (c) resume whose size differs; (d) HEAD of the saved upload answers 404; (e) HEAD answers 410; (f) PATCH 409 followed by HEAD showing Supabase ahead (progress, not a stall); (g) one-request route answers 413 — SupabaseRefused at once; (h) one-request 423 — StorageWaiting (no infinite loop); (i) one-request 409 despite x-upsert — bubbles up without a loop; (j) _same_there read-back cut mid-stream — NOT silently treated as same; (k) two concurrent put_object for same bytes/path — source_lock serialises, only one upload started; (l) 6 MB exactly uses one-request, 6 MB + 1 byte uses resumable with two pieces; (m) 'away' state clears once Supabase returns; (n) sb_size on missing object returns None (400+statusCode=404 wrapper parsed); (o) resume whose remote upload is done and whose file is gone triggers a fresh upload; (p) Supabase 402 blocked — scope='blocked', nothing goes to Emergent; (q) small-file 403 lifted into StorageWaiting. One real bug found: on_progress raising is swallowed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {
+        "endpoint": "tejas_storage.put_object() (line 537: `except Exception as exc: raise _waiting(exc, ...) from None`) + _tus on_progress calls (lines 314/324/344)",
+        "issue": "A caller-side bug inside on_progress (e.g. an unrelated RuntimeError raised by the listener) is caught by the broad `except Exception` in put_object and wrapped as a StorageWaiting. Side effects: STATE['strikes'] is bumped, STATE['down_until'] is set in the future, STATE['last_error']='listener boom', failovers++ — one buggy callback marks Supabase as sick for every other file in the same worker process. Also the raw exception type is lost, so the caller cannot tell a provider failure from a callback failure. Repro: /app/backend/tests/storage_edge230.py::`on_progress raising` -- put_object(KEY, big, 'application/pdf', None, lambda info: (_ for _ in ()).throw(RuntimeError('boom'))) returns a StorageWaiting whose .reason contains 'listener boom' instead of propagating the RuntimeError. Fix options: (1) wrap each on_progress(...) call inside _tus and _big's heard() with try/except Exception: logging.getLogger(__name__).exception('on_progress failed') (preferred, listener bugs don't affect state); or (2) narrow put_object's `except Exception` at line 537 to `except (StorageError, httpx.HTTPError)`."
+      }
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/storage_edge230.py",
+    "/app/backend/tests/storage_big229.py",
+    "/app/backend/tests/storage_before229.py",
+    "/app/backend/tests/storage_book229.py"
+  ],
+  "action_items": [
+    "Fix tejas_storage.put_object / _tus so an exception from the caller-supplied on_progress is NOT wrapped as a StorageWaiting and does NOT poison STATE (strikes/down_until/failovers). Minimal change: guard each on_progress(...) call with try/except Exception: log-and-continue. Keep the existing semantics for real Supabase errors."
+  ],
+  "critical_code_review_comments": [
+    "_tus line 331 stall rule is correct: if HEAD confirms Supabase stands exactly where the client stood and the code is 409, it stops (code-409). This single line is what keeps the 24 Nov live log line (stopped at 0 ... 409 for ever) from recurring. Verified by storage_before229 and storage_edge230 case (f).",
+    "_carry_on (line 283) correctly filters stale resumes by time, path and size — all three filters exercised by storage_edge230 cases (a)-(c).",
+    "_same_there (line 362) compares size first, then sha256 over the streamed body; its httpx.HTTPError handler converts to StorageError so _big's outer except re-raises it as 'Supabase away' rather than silently treating a torn stream as 'same'. Confirmed by case (j).",
+    "put_object's broad `except Exception` at line 537 is the single riskiest line in Pocket 1: any unexpected Python-level bug (caller callback bug, logger misconfig) marks Supabase down globally. This is the bug the failing test documents.",
+    "_one_request passes x-upsert=true and uses timeout read=180 s / write=120 s — correct for 100 MB PDFs. tries=1 means a flaky one-request falls into the stuck path rather than hanging.",
+    "sb_size correctly parses Supabase's 400+body.statusCode='404' shape (verified by case (n)), so a missing object does NOT raise and does NOT falsely say 'same'."
+  ],
+  "updated_files": ["/app/backend/tests/storage_edge230.py"],
+  "success_rate": {"backend": "95% (18/19 new edge checks; 28/28 + 9/9 + 22/22 existing suites unchanged)", "frontend": "not tested (backend only per brief)"},
+  "seed_data_creation": "None. No DB, no real Supabase, no network. All tests use httpx.MockTransport with FakeSupabase.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Pocket 1 is solid apart from the one on_progress-swallow bug. After the main agent fixes it, re-run: cd /app/backend && python tests/storage_edge230.py (expect 19/19) and confirm storage_big229 / before229 / book229 still pass. Do NOT re-run storage_real229.py >7 MB without authorisation. storage_edge230.py adds no network/DB paths and patches tejas_storage.time.sleep for speed. The FakeSupabase was NOT modified — the new suite subclasses it per-case, safe to ship.",
+  "rca of the issue": "on_progress-swallow: put_object wraps every non-StorageError into StorageWaiting (line 537). A caller-supplied progress callback that raises for any Python-level reason therefore (a) masquerades as a Supabase outage to the caller, (b) bumps strikes/down_until so the NEXT unrelated upload in the same worker is rejected with StorageWaiting without even trying Supabase, and (c) increments the global failovers counter. Reproduction: storage_edge230.py case 13. Mitigation: wrap each on_progress(...) invocation inside _tus/_big with try/except Exception: logging.getLogger(__name__).exception('on_progress failed'); the listener is informational only and must never affect provider state."
+}

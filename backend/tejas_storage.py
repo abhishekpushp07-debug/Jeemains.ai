@@ -404,11 +404,18 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
         return
     stalls, tries, last = int((resume or {}).get('stalls') or 0), 0, {}
 
+    def tell(info):
+        # The caller notes the place in its own database; a failure there is not Supabase's: the upload carries on, Supabase is not rested.
+        if on_progress:
+            try:
+                on_progress(info)
+            except Exception:  # noqa: BLE001
+                logging.getLogger(__name__).warning('The place of a big upload could not be noted (%s); the upload carries on.', path, exc_info=True)
+
     def heard(info):
         first = not last
         last.update(info)
-        if on_progress:
-            on_progress({**info, 'stalls': stalls} if first and stalls else info)
+        tell({**info, 'stalls': stalls} if first and stalls else info)
 
     while True:
         tries += 1
@@ -428,8 +435,7 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
                 raise  # another upload of this same file holds Supabase's lock: it waits
             stalls = 0 if exc.moved else stalls + 1
             place = {'url': '', 'path': path, 'size': len(data), 'started': time.time(), 'sent': 0, **last}
-            if on_progress:
-                on_progress({**place, 'stalls': stalls})
+            tell({**place, 'stalls': stalls})
             if stalls >= STALL_LIMIT:
                 try:
                     _one_request(bucket, path, data, content_type)
