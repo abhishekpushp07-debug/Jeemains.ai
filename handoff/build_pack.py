@@ -91,6 +91,8 @@ def copy_docs():
         copy(f, PACK / f.name)
     for f in sorted((HERE / "docs").glob("*.md")):
         copy(f, PACK / "docs" / f.name)
+    for src, name in (("WEBSITE_AGENT_BRIEF.md", "13_APP_UPDATE_AITS_AND_WHO_BUILDS_WHAT.md"), ("CEO_DASHBOARD.md", "14_CEO_DASHBOARD.md")):
+        copy(ROOT / "memory" / src, PACK / "docs" / name)
     for f in (HERE / "connect").rglob("*"):
         if f.is_file() and "__pycache__" not in f.parts:
             copy(f, PACK / "CONNECT" / f.relative_to(HERE / "connect"))
@@ -208,6 +210,16 @@ def api_examples():
         pdfs.mkdir(parents=True, exist_ok=True)
         (pdfs / f"sample_{name}.pdf").write_bytes(data)
         dump(pdfs / f"sample_{name}.request.json", {"method": "POST", "url": f"/api{path}", "body": body})
+    # Cut off PDF (new): the body is the one that drew the list on screen, with or without a score.
+    me = {"level": "normal", "category": "GEN", "female": False, "pwd": False, "state": None}
+    for name, body in (("cutoff_jee_college_eligible_200_marks", {"exam": "jee", "by": "college", "key": str(s["inst"]), "marks": 200, **me}),
+                       ("cutoff_jee_branch_top_100", {"exam": "jee", "by": "branch", "key": "Computer Science", **me}),
+                       ("cutoff_comedk_branch_eligible_rank_30000", {"exam": "comedk", "by": "branch", "key": "Computer Science", "rank": 30000}),
+                       ("cutoff_bitsat_campus_five_years", {"exam": "bitsat", "by": "college", "key": "Pilani"})):
+        data, _ = call("/rank/pdf/cutoff", body, raw=True)
+        assert data[:5] == b"%PDF-", name
+        (pdfs / f"sample_{name}.pdf").write_bytes(data)
+        dump(pdfs / f"sample_{name}.request.json", {"method": "POST", "url": "/api/rank/pdf/cutoff", "body": body})
     return done
 
 
@@ -348,7 +360,9 @@ if __name__ == "__main__":
     done = api_examples()
     mission_examples()
     summary = {"checks": checks(), "openapi_paths": n_paths, "rank_api_examples": len(done) + 1,  # + the refusals file
-               "new_in_this_pack": ["Cut off tool (docs/11)", "Meri details (docs/12)", "scorecard rank in every JEE form"],
+               "new_in_this_pack": ["Cut off tool (docs/11)", "Meri details (docs/12)", "scorecard rank in every JEE form",
+                                    "Cut off: last-year arrow, Compare, PDF + WhatsApp (docs/11 section 13)",
+                                    "All India series on the app + who builds what (docs/13)", "CEO dashboard hand-off (docs/14)"],
                "cut_off_on_live": live_has_cutoff()}
     n = manifest(summary)
     size = make_zip()

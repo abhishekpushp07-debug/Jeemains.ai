@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="15" time="2.892" timestamp="2026-11-23T22:16:25.271536+00:00" hostname="agent-env-cb81584f-d05d-4141-859a-6f5cb0a7b3f6"><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_jee_by_college_6_trend_and_save" time="0.359" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_jee_by_branch_cs_trend_and_save" time="0.097" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_comedk_by_college_trend_and_save" time="0.156" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_bitsat_by_college_pilani_trend_and_save" time="0.075" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_pdf_cutoff_jee_college" time="0.105" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_pdf_cutoff_jee_branch_cs" time="0.200" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_pdf_cutoff_comedk_branch" time="0.272" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_pdf_cutoff_bitsat_branch_cs" time="0.088" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_cutoff_without_score_returns_rows" time="0.083" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_cutoff_empty_score_422" time="0.080" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_openapi_has_ceo_and_pdf_routes" time="0.077"><failure message="requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)">/root/.venv/lib/python3.11/site-packages/requests/models.py:1116: in json
+    return complexjson.loads(self.text, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/__init__.py:346: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:337: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.11/json/decoder.py:355: in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+E   json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+tests/test_iter135_cutoff_trend_save_pdf_ceo.py:170: in test_openapi_has_ceo_and_pdf_routes
+    o = s.get(f"{BASE}/openapi.json", timeout=30).json()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/root/.venv/lib/python3.11/site-packages/requests/models.py:1120: in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+E   requests.exceptions.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</failure></testcase><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_ceo_overview_no_auth_401" time="0.190" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_ceo_overview_wrong_token_401" time="0.193" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_ceo_users_no_auth_401" time="0.131" /><testcase classname="tests.test_iter135_cutoff_trend_save_pdf_ceo" name="test_ceo_users_wrong_token_401" time="0.198" /></testsuite></testsuites>

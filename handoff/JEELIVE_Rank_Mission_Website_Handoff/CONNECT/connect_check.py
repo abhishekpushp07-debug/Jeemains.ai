@@ -5,7 +5,7 @@ Dream college).
     python connect_check.py                                   # the live app server
     python connect_check.py https://<host>/api                # any other address (preview, staging)
     python connect_check.py https://<website>/api --website   # the website's own backend, once the connector is mounted
-    python connect_check.py --pdf                             # also draws the seven PDFs (slower)
+    python connect_check.py --pdf                             # also draws the PDFs (slower)
 
 Signed-in checks (Mission, Dream college) run only when a real website session is supplied:
 
@@ -267,7 +267,9 @@ def cutoff_college():
     d = cut({"exam": "jee", "by": "college", "key": opts()["jee"]["colleges"][0]["key"]})
     assert d["rows"] and d["you"] is None and d["eligible"] is None and d["near"] == [] and d["limit"] is None
     assert all(r["tag"] is None and len(r["cells"]) == len(d["columns"]) for r in d["rows"]), "every row has one cell per column and no tag"
-    return f"{d['title']}: {d['total']} branches, {', '.join(d['columns'])}"
+    assert all(r["save"]["id"].startswith("jee-") and "trend" in r for r in d["rows"]), "every row carries save (shortlist item) and trend (last-year arrow or null)"
+    arrows = sum(1 for r in d["rows"] if r["trend"])
+    return f"{d['title']}: {d['total']} branches, {', '.join(d['columns'])}; {arrows} with a last-year arrow"
 
 
 def cutoff_branch():
@@ -339,6 +341,22 @@ def pdfs():
     return f"7 PDFs, {min(sizes)}-{max(sizes)} KB"
 
 
+def cutoff_pdf():
+    """The Cut off list as a PDF: the same body as POST /rank/cutoff, with and without a score."""
+    key = opts()["jee"]["colleges"][0]["key"]
+    sizes = []
+    for body, part in (({"exam": "jee", "by": "college", "key": key, "marks": 200, "level": "normal", "category": "GEN", "female": False, "pwd": False, "state": None}, "cutoff-jee-college-200-marks"),
+                       ({"exam": "bitsat", "by": "college", "key": "Pilani"}, "cutoff-bitsat-college-all")):
+        s, head, raw = call("POST", "/rank/pdf/cutoff", body, headers={"Accept": "application/pdf"}, timeout=60)
+        if s == 404:
+            raise Waiting("this server has Cut off but not its PDF yet: it comes with the app project's next publish")
+        expect(s, 200, raw)
+        assert isinstance(raw, bytes) and raw[:5] == b"%PDF-", "not a PDF"
+        assert part in {k2.lower(): v for k2, v in head.items()}.get("content-disposition", ""), f"file name should contain {part}"
+        sizes.append(len(raw) // 1024)
+    return f"2 PDFs, {min(sizes)}-{max(sizes)} KB"
+
+
 def share_link():
     if WEBSITE:
         s, head, _ = call("GET", "/j/AAAAAAA")
@@ -406,6 +424,7 @@ for name, fn in (("GET  /rank/cutoff/options", cutoff_options), ("POST /rank/cut
 if "--pdf" in flags:
     print("\nPDFs")
     check("POST /rank/pdf/*  (7 files)", pdfs)
+    check("POST /rank/pdf/cutoff  (NEW)", cutoff_pdf)
 print("\nMission")
 check("GET  /j/{code}  (share link)", share_link)
 check("signed-out request is refused", signed_out)

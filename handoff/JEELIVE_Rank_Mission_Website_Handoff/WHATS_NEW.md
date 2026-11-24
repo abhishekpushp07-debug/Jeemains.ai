@@ -60,7 +60,7 @@ them yet, and `PASS` once it does.
 |---|---|
 | `docs/` | two new documents (11, 12); 01, 02, 03, 04, 06, 09 and 10 updated |
 | `RANK/api_examples/` | 12 new files, `23_…` to `34_…` (Cut off for every exam, the scorecard rank, what the server refuses) |
-| `RANK/screenshots/` | new `01_…` (the page top with the Meri details bar and the CUT OFF tile); 18 `NEW_cutoff_…`; 3 `NEW_meri_details_…`; the two "Percentile se rank" screens removed |
+| `RANK/screenshots/` | new `01_…` (the page top with the Meri details bar and the CUT OFF tile); 20 `NEW_cutoff_…` (19 and 20 are the additions of §6); 3 `NEW_meri_details_…`; the two "Percentile se rank" screens removed |
 | `RANK/code/server_reference/` | `rank_cutoff.py` (new), `rank_predictor.py` (rank as a score), `tests/test_rank_cutoff.py` (the server's own proof) |
 | `RANK/code/app_reference_ui/src_rank/` | `Cutoff.tsx`, `CutoffList.tsx`, `ProfileBar.tsx`, `profile.ts` (new); `PercentileRank.tsx` removed; `ToolGrid.tsx`, `InputCard.tsx` and the tools that read the profile updated |
 
@@ -73,3 +73,33 @@ them yet, and `PASS` once it does.
 5. Add the **Rank (CRL)** field to the College predictor's JEE form, with the line under the three boxes (`docs/06` §6).
 6. Add the **Meri details** bar above the tiles (`docs/12`), and make every tool read its saved form again after a save.
 7. Work through the two new acceptance lists (`docs/11` §11, `docs/12` §6).
+
+## 6. Added after the first Cut off build (23 Nov 2026, second pass)
+
+Nothing was renamed or removed. If the website already took the first Cut off pack, these are the only differences.
+
+| | What | Read |
+|---|---|---|
+| **NEW** | **Last-year arrow** on every Cut off card: each row of `POST /rank/cutoff` carries `trend` = `{dir, prev, label}` or `null` | `docs/11` §13.1, `docs/03` §13.3 |
+| **NEW** | **Compare toggle** on every Cut off card: each row carries `save`, the row as one shortlist item (the same shortlist as the College predictor's bookmark) | `docs/11` §13.2 |
+| **NEW** | **Cut off PDF**: `POST /rank/pdf/cutoff`, body = the body of the list on screen; "PDF WhatsApp" and a PDF button under the heading | `docs/11` §13.3, `docs/03` §12 |
+| **NEW** | **Who builds what**, the app's All India series changes, and three facts to confirm | `docs/13_APP_UPDATE_AITS_AND_WHO_BUILDS_WHAT.md` |
+| **NEW** | **CEO dashboard hand-off**, including the one export the website has to add (`GET /api/ceo/signups`) | `docs/14_CEO_DASHBOARD.md` |
+
+In `CONNECT/`:
+
+| File | Change |
+|---|---|
+| `backend_fastapi/jeelive_app_connect.py` | forwards `pdf/cutoff`. **Replace your copy**, or add `"pdf/cutoff"` to `RANK_PDF` |
+| `frontend_web/jeeliveApp.ts` | `trend` and `save` on `CutoffRow`; types `CutoffTrend`, `SavedRow`; `toCompareItem(save)`; `rank.pdf("cutoff", body)` |
+| `connect_check.py` | the college check also proves `trend` and `save`; with `--pdf` one more check draws the Cut off PDF (31 checks in all with `--pdf`) |
+| `curl_examples.sh` | one more PDF line |
+
+Elsewhere: `RANK/sample_pdfs/sample_cutoff_*.pdf` (4 files with their request bodies); the answers `24_…` to `32_…` in
+`RANK/api_examples/` now show `trend` and `save`; screenshots `NEW_cutoff_19` and `NEW_cutoff_20`; all Cut off
+screenshots were retaken because every card has a new foot line; `tests/test_rank_cutoff.py` grew from 25 to 33 checks.
+
+One rule changed inside the server and is worth knowing: the JEE Main arrow compares the **last JoSAA round of 2026 with
+2025's final round on the same seat path**, never a CSAB closing.
+
+As before, all of this is on the development server today and reaches the live server with the app project's next publish.

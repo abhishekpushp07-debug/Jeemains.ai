@@ -86,6 +86,8 @@ If the website is being built by an AI agent, hand it `START_HERE_FOR_WEBSITE_AG
 | 10 | `docs/10_FAQ_GOTCHAS_GLOSSARY.md` | The questions that will come up, the traps, and every term explained |
 | **11** | **`docs/11_CUT_OFF_NEW.md`** | **NEW · Cut off end to end: the journey, the two calls, the rules per exam, the screen word by word, states, worked answers, its acceptance list** |
 | **12** | **`docs/12_MERI_DETAILS_NEW.md`** | **NEW · Meri details: the one rule (starting values, not a live link), what Save writes into each tool, storage keys, the screen, its acceptance list** |
+| **13** | **`docs/13_APP_UPDATE_AITS_AND_WHO_BUILDS_WHAT.md`** | **NEW · Who builds what (app, website, CEO dashboard), what the website has to do now, the app's All India series behaviour, three facts to confirm** |
+| **14** | **`docs/14_CEO_DASHBOARD.md`** | **NEW · CEO dashboard hand-off: the app's CEO API, what to track and from where, and the signups export the website has to add** |
 
 ---
 

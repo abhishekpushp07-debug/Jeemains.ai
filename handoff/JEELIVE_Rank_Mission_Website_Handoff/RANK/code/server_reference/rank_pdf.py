@@ -496,6 +496,64 @@ def saved(body: SavedPdfIn):
     return _pdf(story, "Meri colleges", f"JEELIVE-saved-colleges-{len(cols)}.pdf")
 
 
+import rank_cutoff as rc
+
+
+def _cutoff_table(data, rows, near=False):
+    columns = data["columns"]
+    prev_label = data.get("prev_label")
+    ncols = len(columns) + (1 if prev_label else 0)
+    colw = 28 if ncols > 5 else 34
+    numw = ncols * colw
+    name_w = W - 15 - 46 - numw
+    by = data["by"]
+    out, tags = [], []
+    for i, r in enumerate(rows, 1):
+        if by == "college":
+            name = f'<b>{e(r["branch"])}</b><br/><font size="6.1" color="#5F6368">{e(r["path"])}</font>'
+        else:
+            name = (f'<b>{e(r["college"])}</b> <font size="6" color="#5F6368">{e(r.get("kind") or "")}</font><br/>'
+                    f'{e(r["branch"])}<br/><font size="6.1" color="#5F6368">{e(r["place"])}</font>')
+        if r.get("trend"):
+            tcol = {"tough": "#C62828", "easy": "#1E7B34", "same": "#5F6368"}[r["trend"]["dir"]]
+            arrow = {"tough": "▲", "easy": "▼", "same": "≈"}[r["trend"]["dir"]]
+            name += f'<br/><font size="6" color="{tcol}">{arrow} {e(r["trend"]["label"])}</font>'
+        nums = [n(c["close"]) if not c.get("na") else "—" for c in r["cells"]]
+        if prev_label:
+            nums.append(n(r["prev"]["close"]) if r.get("prev") and r["prev"].get("close") else "—")
+        mark = r.get("gap") if near else r.get("tag")
+        out.append([str(i), p(name), *nums, gap_cell(mark) if near else tag_cell(mark)])
+        if not near and r.get("tag"):
+            tags.append((len(columns) + (1 if prev_label else 0) + 1, i, r["tag"]))
+    head = ["#", "Branch" if by == "college" else "College · Branch"] + list(columns) + ([prev_label] if prev_label else []) + ["Kitna door" if near else "Chance"]
+    return _table(head, out, [15, name_w] + [colw] * ncols + [46], 2, (), tags)
+
+
+def cutoff(body: rc.CutoffIn):
+    data = rc.cutoff(body)
+    you, metric = data.get("you"), data["metric"]
+    unit = "closing rank" if metric == "rank" else "cutoff score"
+    story = _head(f"Cut off · {EXAM[data['exam']]} 2026 · {e(data['title'])}",
+                  f"{e(data['sub'])} — har round ka 2026 {unit}" + (", aur aapka chance" if you else "."))
+    if you:
+        lines = [e(you["line"]),
+                 f'<font name="JLB" color="#1E7B34">Safe {you["counts"]["safe"]}</font>   ·   '
+                 f'<font name="JLB" color="#1F5FAD">Likely {you["counts"]["likely"]}</font>   ·   '
+                 f'<font name="JLB" color="#B8461B">Borderline {you["counts"]["borderline"]}</font>',
+                 e(you.get("check"))]
+        story += _box(f'{data["eligible"]} / {data["total"]} eligible', lines) + _legend()
+    else:
+        story += [p(e(data["sub"]), SUB)]
+    heading = "Eligible college-branch" if you else ("Top 100 college-branch" if data.get("limit") and data["total"] > data["limit"] else "Saare options")
+    story.append(p(f"{heading} ({len(data['rows'])})", H2))
+    story += [_cutoff_table(data, data["rows"])] if data["rows"] else [p("Is score par yahan 2026 mein koi option eligible nahi tha.", CELL)]
+    if data.get("near"):
+        story += [Spacer(1, 8), p("Bas thoda sa door", H2), _cutoff_table(data, data["near"], near=True)]
+    story += _notes([*data["notes"], f"Official: {data['official']}"])
+    score = f"rank-{body.rank}" if body.rank is not None else f"pct-{body.percentile}" if body.percentile is not None else f"{body.marks}-marks" if body.marks is not None else "all"
+    return _pdf(story, f"Cut off · {EXAM[data['exam']]}", f"JEELIVE-cutoff-{data['exam']}-{data['by']}-{score}.pdf")
+
+
 def register(router):
     router.post("/pdf/jee")(jee)
     router.post("/pdf/comedk")(comedk)
@@ -504,3 +562,4 @@ def register(router):
     router.post("/pdf/target/comedk")(target_comedk)
     router.post("/pdf/target/bitsat")(target_bitsat)
     router.post("/pdf/saved")(saved)
+    router.post("/pdf/cutoff")(cutoff)

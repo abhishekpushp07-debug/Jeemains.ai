@@ -1,0 +1,23 @@
+{
+  "note": "Shape of a real answer from the app server. Names, ids and codes are masked; never show these numbers, call the server.",
+  "request": {
+    "method": "GET",
+    "url": "/api/ceo/overview",
+    "headers": {
+      "Authorization": "Bearer <CEO_API_TOKEN>"
+    }
+  },
+  "response": {
+    "generated_at": "2026-11-23T22:47:24+00:00",
+    "app_users": 619,
+    "active": {
+      "today": 1,
+      "last_7_days": 138,
+      "last_30_days": 142
+    },
+    "on_streak": 249,
+    "rapid_fire_players": 141,
+    "best_streak_seen": 4,
+    "contacts": "Signup phone numbers are not on this app server. The app stores only an HMAC hash and the last four digits for friend-search. Read full contacts from the jeelive.ai website backend and join on `uid`."
+  }
+}

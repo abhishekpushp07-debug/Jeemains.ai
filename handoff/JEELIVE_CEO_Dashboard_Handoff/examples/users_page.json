@@ -1,0 +1,52 @@
+{
+  "note": "Shape of a real answer from the app server. Names, ids and codes are masked; never show these numbers, call the server.",
+  "request": {
+    "method": "GET",
+    "url": "/api/ceo/users?limit=3",
+    "headers": {
+      "Authorization": "Bearer <CEO_API_TOKEN>"
+    }
+  },
+  "response": {
+    "total": 619,
+    "page": 1,
+    "pages": 207,
+    "limit": 3,
+    "items": [
+      {
+        "uid": "<canonical user id 1>",
+        "name": "<student 1>",
+        "player_code": "P<code 1>",
+        "coins": 12,
+        "diamonds": 0,
+        "current_streak": 1,
+        "best_streak": 2,
+        "last_active": "2026-11-24",
+        "phone_last4": null
+      },
+      {
+        "uid": "<canonical user id 2>",
+        "name": "<student 2>",
+        "player_code": "P<code 2>",
+        "coins": 1632,
+        "diamonds": 149,
+        "current_streak": 3,
+        "best_streak": 3,
+        "last_active": "2026-11-22",
+        "phone_last4": null
+      },
+      {
+        "uid": "<canonical user id 3>",
+        "name": "<student 3>",
+        "player_code": "P<code 3>",
+        "coins": 134,
+        "diamonds": 14,
+        "current_streak": 4,
+        "best_streak": 4,
+        "last_active": "2026-11-22",
+        "phone_last4": null
+      }
+    ],
+    "contacts": "Signup phone numbers are not on this app server. The app stores only an HMAC hash and the last four digits for friend-search. Read full contacts from the jeelive.ai website backend and join on `uid`."
+  }
+}

@@ -365,6 +365,9 @@ Use them to recognise a right screen, never as data.
 - [ ] The form, both choices per exam and the score survive a reload.
 - [ ] `notes` are shown under the list, including the BITSAT "no rounds" line and the estimate line.
 - [ ] Works at 320 px wide (four round boxes still fit on a line), by keyboard, and with reduced motion.
+- [ ] (§13) Every card with a `trend` shows its arrow and `label` in the right colour; a card without one shows nothing there.
+- [ ] (§13) Every card has the **Compare** toggle; a saved row appears in College compare and in the saved-list PDF, for all three exams.
+- [ ] (§13) "PDF WhatsApp" and the PDF button send **the same body as the list on screen**; the file keeps the server's name.
 
 ## 12. Questions that will come up
 
@@ -387,3 +390,64 @@ number never empties the list.
 **Where did "Percentile se rank" go?** Its tile became Cut off. A percentile is now accepted by Cut off's score box and
 by the College predictor's form (which also takes a scorecard rank), and both show the rank it stands for.
 `POST /rank/percentile` still answers, for older app versions; no current screen uses it.
+
+---
+
+## 13. Added after the first build: last-year arrow, Compare, PDF and WhatsApp  —  NEW
+
+Four small things were added to the same tool on 23 Nov 2026. Nothing above changed; the answer only grew by two fields
+per row (`trend`, `save`) and the server got one more PDF. Field tables: `docs/03` §13.3 and §12.
+
+### 13.1 The last-year arrow (`trend`)
+
+At the foot of a card, on the left, one small line:
+
+| `trend.dir` | Draw | Colour |
+|---|---|---|
+| `"tough"` | an up arrow + `trend.label` ("is saal aur mushkil") | the error red |
+| `"easy"` | a down arrow + `trend.label` ("is saal thoda aasaan") | the success green |
+| `"same"` | no arrow, `trend.label` ("≈ pichhle saal jaisa") | soft / muted text |
+| `trend` is `null` | nothing (the Compare toggle stays on the right) | |
+
+- "Tough" means **harder to get in than last year**: for a closing rank the number went down, for a BITSAT score it
+  went up. The server has already decided this; print `label`, never work it out from the boxes.
+- JEE Main compares the last JoSAA round of 2026 with 2025's final round on the same seat path. It never uses a CSAB
+  closing, even on a row whose tag came from CSAB. JAC Delhi rows have no arrow (no last-year data).
+- Within 3 % either way reads "same".
+
+### 13.2 Compare (`save`)
+
+At the foot of every card, on the right, a pill toggle:
+
+| State | Label | Look |
+|---|---|---|
+| not saved | **＋ Compare** | outline pill |
+| saved | **✓ Compare mein** | green line and soft green fill |
+
+- A tap adds `row.save` to the student's shortlist, or removes it. It is the **same shortlist** the College predictor's
+  bookmark uses (the app's key `rank.shortlist.v1`, newest first, at most 50), so the row is at once available in
+  **College compare** and in the saved-list PDF. No server call.
+- The key is `save.id`. A row saved from Cut off and the same college-branch saved from the College predictor are one
+  item, not two.
+- `save.tag` is the tag at the moment of saving (`null` when no score was applied). It is not refreshed later.
+- Near-miss cards have the toggle too.
+
+### 13.3 The two PDF buttons
+
+Under the heading box, whenever the list has at least one row: **"PDF WhatsApp"** (green) and a second button reading
+**"Eligible list ki PDF"** when a score is applied, else **"Cut off list ki PDF"**.
+
+- Both call `POST /rank/pdf/cutoff` with **exactly the body that drew the list** (same `exam`, `by`, `key`, profile
+  chips, score and `level`). So the PDF is the Safe / Likely / Borderline list the student is looking at.
+- "PDF WhatsApp" then shares the file with the caption the other Rank PDFs use (`docs/06` §10); the other button saves
+  or prints it. Busy state, 30 s limit and the failure sentence are the same as every Rank PDF.
+- A change of score, college, branch or chip clears the "taiyaar" line under the buttons (it belonged to the old list).
+- File name from the server: `JEELIVE-cutoff-{exam}-{by}-{score}.pdf` (`docs/03` §12).
+
+### 13.4 Checked on the app
+
+- Server: `RANK/code/server_reference/tests/test_rank_cutoff.py` (33 checks; the last 8 are these additions: the trend
+  rule for all three exams including a CSAB-decided list, a saved row of each exam opening in compare, four PDFs and a
+  refused PDF).
+- Samples: `RANK/sample_pdfs/sample_cutoff_*.pdf`; every `RANK/api_examples/24_…` to `32_…` answer now carries `trend`
+  and `save` on each row.

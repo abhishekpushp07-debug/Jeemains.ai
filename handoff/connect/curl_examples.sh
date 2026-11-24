@@ -43,6 +43,9 @@ curl -s -X POST "$APP/rank/pdf/jee" -H "$J" -o jee_top50.pdf -w "HTTP %{http_cod
   -d '{"marks":180,"level":"normal","category":"GEN","female":false,"pwd":false,"state":"Bihar","branches":[],"segment":"all"}'
 # the other six:  /rank/pdf/comedk  /rank/pdf/bitsat  /rank/pdf/target/jee  /rank/pdf/target/comedk  /rank/pdf/target/bitsat  /rank/pdf/saved
 # (request bodies: RANK/sample_pdfs/*.request.json)
+echo; echo "### POST /rank/pdf/cutoff  ->  cutoff_list.pdf   (NEW: the same body as POST /rank/cutoff)"
+curl -s -X POST "$APP/rank/pdf/cutoff" -H "$J" -o cutoff_list.pdf -w "HTTP %{http_code}, %{size_download} bytes\n" \
+  -d '{"exam":"jee","by":"branch","key":"Computer Science","rank":7500,"level":"normal","category":"GEN","female":false,"pwd":false,"state":null}'
 
 # ---------------------------------------------------------------- Mission
 echo; echo "### GET /j/{code}  (a friend opens a student's link; an unknown code is simply not counted)"

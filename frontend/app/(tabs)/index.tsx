@@ -20,6 +20,7 @@ import { seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/ser
 import { examIcon, useExams } from "@/src/api/examCatalog";
 import { useListFocus } from "@/src/useListFocus";
 import { HomeDream } from "@/src/dream/HomeDream";
+import { HomeMisfire } from "@/src/misfire/HomeMisfire";
 import { ScreenMotion } from "@/src/motion";
 
 const greeting = () => { const h = new Date().getHours(); return h < 5 ? "good night" : h < 12 ? "good morning" : h < 17 ? "good afternoon" : "good evening"; };
@@ -113,6 +114,7 @@ export default function Home() {
       <View style={{ gap: space.md }}>
         <SectionLabel title="Practice" testID="home-exams-label" />
         <ExamGrid items={exams} />
+        <HomeMisfire />
       </View>
 
       <View style={{ gap: space.lg }}>

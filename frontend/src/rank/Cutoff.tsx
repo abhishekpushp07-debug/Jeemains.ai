@@ -86,7 +86,7 @@ export function Cutoff({ states }: { states: string[] }) {
     </Strip>
     <ErrorBox error={t.error ?? undefined} retry={t.retry} testID="cut-error" />
     {data && lists.data ? <CutoffList key={`${exam}-${p.by}-${data.key}`} data={data} busy={t.busy} pick={p} onPick={pick} kinds={lists.data[exam].score}
-        level={st.level} onLevel={level => patch({ level })} />
+        level={st.level} onLevel={level => patch({ level })} query={q!} />
       : q ? (t.error ? null : <ActivityIndicator testID="cut-loading" color={colors.muted} />)
       : <T testID="cut-hint" size={13} color={colors.muted}>
         {p.by === "college" ? `${w.college.pick}: uski har branch ka har round ka cut off dikhega.` : `${w.branch.pick}: us branch ke top 100 college, har round ke cut off ke saath dikhenge.`}

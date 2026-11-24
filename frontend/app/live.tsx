@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { ErrorBox, Skeleton, T } from "@/src/components/ui";
-import { RoundButton, ScreenHeader, SectionLabel } from "@/src/components/design";
+import { DSheet, Pill, RoundButton, ScreenHeader, SectionLabel } from "@/src/components/design";
 import { SeriesExplainer } from "@/src/components/SeriesBanner";
 import { JourneyCard } from "@/src/components/series/JourneyCard";
 import { DayCard, DayStrip, ResultsList, TodayCard } from "@/src/components/series/DayCards";
@@ -12,7 +12,7 @@ import { ScoreTrend, trendSummary } from "@/src/components/series/ScoreTrend";
 import { DayMap } from "@/src/components/series/DayMap";
 import { colors, space } from "@/src/theme";
 import { ScreenMotion } from "@/src/motion";
-import { istTime, seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
+import { DayInfo, dayAction, dayAttempt, istTime, seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
 
 export default function Live() {
   const insets = useSafeAreaInsets();
@@ -22,7 +22,7 @@ export default function Live() {
   useSeriesWatch(series.revalidate, days);
   const [open, setOpen] = useState(false);
   const [picked, setPicked] = useState<number | null>(null);
-  const [allResults, setAllResults] = useState(false);
+  const [confirm, setConfirm] = useState<DayInfo | null>(null);
   const scroll = useRef<React.ElementRef<typeof ScrollView>>(null);
   const stripY = useRef(0);
   const d = series.data;
@@ -33,6 +33,19 @@ export default function Live() {
   const trend = trendSummary(days);
   const results = history.data?.items ?? [];
   const dayOf = (date?: string) => days.find(x => x.date === date)?.day;
+  // The newest scored day before today: its marks sit on today's button until today's own result opens.
+  const lastScored = [...days].reverse().find(x => !x.isToday && !!dayAttempt(x)?.summary);
+  // A day chip / map cell: an attempted day opens its analysis (back lands on the AITS Analysis list, then here),
+  // a running attempt resumes, a past day that was missed asks "Shuru karein?" and then starts. Today's own paper and an
+  // upcoming day only show their card below (today's live paper starts from its full rules page). True = it did something.
+  const openAnalysis = (id: string) => router.push({ pathname: "/result/[id]", params: { id, from: "series-day" } });
+  const tapDay = (dd: DayInfo) => {
+    setPicked(dd.day);
+    const a = dayAttempt(dd);
+    if (a) { if (a.resumable) router.push(`/attempt/${a.id}` as any); else openAnalysis(a.id); return true; }
+    if (!dd.isToday && dayAction(dd)?.to.startsWith("/set/")) { setConfirm(dd); return true; }
+    return false;
+  };
 
   return (
     // The cards' shine rests while another screen (a paper, a result) is in front.
@@ -61,12 +74,12 @@ export default function Live() {
         <View style={{ gap: space.sm }}>
           <SectionLabel title="Today" right={<T testID="series-timing-note" size={11} color={colors.custom_eyebrow}>{today ? `Live ${istTime(today.slot.opens_at)} – ${istTime(today.slot.closes_at)} IST` : "Live 12:01 AM – 11:59 PM IST"}</T>} />
           {todayPaper(today) === "ready" ? <T testID="series-paper-ready" w="heavy" size={12} color={colors.success}>● Aaj ka paper ready hai — abhi shuru kar sakte ho</T> : null}
-          <TodayCard series={d} day={today} />
+          <TodayCard series={d} day={today} last={lastScored} />
         </View>
 
         <View style={{ gap: space.sm }} onLayout={e => { stripY.current = e.nativeEvent.layout.y; }}>
           <SectionLabel title="All days" right={<T size={12} color={colors.muted}>swipe ›</T>} />
-          <DayStrip days={days} selected={selected} onSelect={setPicked} />
+          <DayStrip days={days} selected={selected} onSelect={tapDay} />
           {selectedDay ? <DayCard day={selectedDay} /> : null}
         </View>
 
@@ -76,18 +89,30 @@ export default function Live() {
         </View>
 
         {user ? <View style={{ gap: space.sm }}>
-          <SectionLabel title="My results" action={allResults ? "show less" : "view all"} onAction={results.length > 3 ? () => setAllResults(v => !v) : undefined} actionTestID="series-results-toggle" />
+          <SectionLabel title="My results" action="AITS Analysis" onAction={() => router.push("/series-analysis")} actionTestID="series-open-analysis-list" />
           <ErrorBox error={history.error && !history.data ? history.error : ""} retry={history.reload} />
-          {history.data ? <ResultsList items={results} dayOf={dayOf} limit={allResults ? results.length : 3} /> : !history.error ? <Skeleton h={60} style={{ borderRadius: 18 }} /> : null}
+          {history.data ? <ResultsList items={results} dayOf={dayOf} limit={3} /> : !history.error ? <Skeleton h={60} style={{ borderRadius: 18 }} /> : null}
         </View> : null}
 
         <View style={{ gap: space.sm }}>
           <SectionLabel title={`${total}-day map`} />
-          <DayMap days={days} selected={selected} onSelect={day => { setPicked(day); scroll.current?.scrollTo({ y: Math.max(0, stripY.current - space.sm), animated: true }); }} />
+          <DayMap days={days} selected={selected} onSelect={day => {
+            const dd = days.find(x => x.day === day);
+            if (dd && !tapDay(dd)) scroll.current?.scrollTo({ y: Math.max(0, stripY.current - space.sm), animated: true });
+          }} />
         </View>
       </> : null}
     </ScrollView>
     <SeriesExplainer open={open} onClose={() => setOpen(false)} days={total} />
+    <DSheet visible={!!confirm} onClose={() => setConfirm(null)} testID="series-start-confirm" title="Is din ka test shuru karein?">
+      {confirm ? <>
+        <T size={13.5} color={colors.custom_softText}>Day {confirm.day} · {confirm.slot.title}. 75 sawaal · 180 minute · +4 / −1. Haan dabate hi 60-second get-ready khulega, phir aapka timer chalega. Submit final hota hai.</T>
+        {confirm.slot.state === "archive" ? <T testID="series-start-confirm-practice" size={12.5} color={colors.custom_eyebrow}>Yeh din nikal chuka hai, isliye yeh practice attempt hai — live streak aur live result mein nahi judega.</T> : null}
+        {/* start=1: the paper's own page runs its usual checked start by itself, so there is no second Start button to press. */}
+        <Pill testID="series-start-confirm-yes" size="lg" icon="play" label="Haan, shuru karo" onPress={() => { const sid = confirm.slot.set_id; setConfirm(null); if (sid) router.push({ pathname: "/set/[id]", params: { id: sid, start: "1" } }); }} />
+        <Pill testID="series-start-confirm-no" kind="outline" label="Abhi nahi" onPress={() => setConfirm(null)} />
+      </> : null}
+    </DSheet>
     </View>
     </ScreenMotion>
   );

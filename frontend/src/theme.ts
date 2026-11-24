@@ -360,6 +360,8 @@ export const tabEdges = {
 } as const;
 // The three colours that run round Home's onyx-and-ruby All India card: ruby, gold, rose.
 export const seriesEdge = ["#FF2D4A", "#FFC857", "#FF7A93", "#FF2D4A"] as const;
+// Five colours that run round the blood-red "Analysis" button on the series day cards: ruby, gold, white, rose, flame.
+export const bloodEdge = ["#FF2D4A", "#FFC857", "#FFFFFF", "#FF7A93", "#FF8A3D"] as const;
 // All India Rapid: one fire world (blazing smoke behind a dark ridge, black silhouettes on it) for all five card scenes.
 export const allIndia = {
   hot: "#FFE9C2", flame: "#FF6A1A", ember: "#FFB347", ink: "#080204", dust: "rgba(255,138,61,0.35)", star: "#FFF4E0",

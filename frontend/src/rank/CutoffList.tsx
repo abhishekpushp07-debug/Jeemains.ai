@@ -3,14 +3,16 @@
 // and the nearest misses under a filtered list.
 import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { Press, T } from "@/src/components/ui";
+import { Icon, Press, T } from "@/src/components/ui";
 import { rankColors as colors, radius, space } from "@/src/theme";
-import { CutoffBy, CutoffCell, CutoffOut, CutoffRow, fmt, fmtRange, Level, ScoreKind, Tag as Chance } from "./api";
+import { CutoffBy, CutoffCell, CutoffIn, CutoffOut, CutoffRow, fmt, fmtRange, Level, ScoreKind, Tag as Chance } from "./api";
 import { EXAM, KIND, LEVEL, TAG } from "./tones";
 import { NumberField, Strip, Tag, Toggle } from "./controls";
 import { CardsHeading, cardStyles } from "./CollegeCard";
 import { edgeOf } from "./SeatList";
 import { FormButton, InForm } from "./accent";
+import { PdfButton } from "./PdfButton";
+import { toggleSaved, useShortlist } from "./shortlist";
 import { readScore, SCORE } from "./profile";
 import type { Pick } from "./Cutoff";
 
@@ -19,8 +21,8 @@ const LEVELS: Level[] = ["tough", "normal", "easy"];
 const CHANCES: Chance[] = ["safe", "likely", "borderline"];
 const KIND_LABEL: Record<ScoreKind, string> = { marks: "Marks", percentile: "Percentile", rank: "Rank" };
 
-export function CutoffList({ data, busy, pick, onPick, kinds, level, onLevel }: {
-  data: CutoffOut; busy: boolean; pick: Pick; onPick: (x: Partial<Pick>) => void; kinds: ScoreKind[]; level: Level; onLevel: (l: Level) => void;
+export function CutoffList({ data, busy, pick, onPick, kinds, level, onLevel, query }: {
+  data: CutoffOut; busy: boolean; pick: Pick; onPick: (x: Partial<Pick>) => void; kinds: ScoreKind[]; level: Level; onLevel: (l: Level) => void; query: CutoffIn;
 }) {
   const [editing, setEditing] = useState(false);
   const [problem, setProblem] = useState<string | null>(null);
@@ -80,6 +82,8 @@ export function CutoffList({ data, busy, pick, onPick, kinds, level, onLevel }: 
           {pick.score ? <Press testID="cut-clear" onPress={showAll} style={styles.link} accessibilityRole="button"><T w="bold" size={13} color={colors.custom_softText}>Sab cutoffs dikhao</T></Press> : null}
         </View>}
       </InForm.Provider>
+      {data.rows.length ? <PdfButton testID="cut-pdf" path="/cutoff" body={query}
+        label={you ? "Eligible list ki PDF" : "Cut off list ki PDF"} /> : null}
     </Strip>
 
     {data.rows.length === 0 ? <T testID="cut-empty" size={13.5} color={colors.muted}>
@@ -101,6 +105,7 @@ type Box = CutoffCell & { past?: boolean };
 
 /** One college-branch: who and where, every round in boxes of 4 (5 when that is all there are), then the final line. */
 function Row({ r, by, metric, n, testID, near }: { r: CutoffRow; by: CutoffBy; metric: CutoffOut["metric"]; n?: number; testID: string; near?: boolean }) {
+  const saved = useShortlist().some(s => s.id === r.save.id);
   // A round the college does not have (JAC Delhi stops at R4) is left out; last year's final closes the set.
   const boxes: Box[] = [...r.cells.filter(c => !c.na), ...(r.prev ? [{ label: r.prev.label, close: r.prev.close, past: true }] : [])];
   const per = boxes.length <= 5 ? boxes.length : 4;
@@ -108,6 +113,7 @@ function Row({ r, by, metric, n, testID, near }: { r: CutoffRow; by: CutoffBy; m
   const need = r.need.level ? `≈ ${r.need.marks}+ marks (${LEVEL[r.need.level].label} paper)` : `≈ ${r.need.marks}+ marks / 180`;
   const final = metric === "score" ? `${r.final.label} cutoff: ${r.final.close} / 390`
     : [`Closing ${r.final.label}: ${fmt(r.final.close)} ${r.rank_type}`, need, r.seats ? `${r.seats} seats` : null, r.fee ? `₹${fmt(r.fee)} / saal` : null].filter(Boolean).join(" · ");
+  const tc = r.trend ? (r.trend.dir === "tough" ? colors.error : r.trend.dir === "easy" ? colors.success : colors.muted) : colors.muted;
   return <View testID={testID} style={styles.card}>
     <View style={[styles.edge, { backgroundColor: edgeOf(r.tag, near) }]} />
     <View style={styles.head}>
@@ -125,6 +131,17 @@ function Row({ r, by, metric, n, testID, near }: { r: CutoffRow; by: CutoffBy; m
     </View>)}
     <T testID={`${testID}-final`} size={12} color={colors.custom_softText}>{final}</T>
     {r.gap ? <T testID={`${testID}-gap`} w="semibold" size={12} color={colors.custom_flame}>{r.gap}</T> : null}
+    <View style={styles.foot}>
+      {r.trend ? <View style={styles.trend}>
+        {r.trend.dir !== "same" ? <Icon name={r.trend.dir === "tough" ? "arrow-up-bold" : "arrow-down-bold"} size={13} color={tc} /> : null}
+        <T testID={`${testID}-trend`} size={11.5} color={tc} numberOfLines={1} style={{ flexShrink: 1 }}>{r.trend.label}</T>
+      </View> : <View style={{ flex: 1 }} />}
+      <Press testID={`${testID}-save`} onPress={() => toggleSaved(r.save)} accessibilityRole="button" accessibilityState={{ selected: saved }}
+        accessibilityLabel={`${by === "college" ? r.branch : r.college} ${saved ? "Compare se hatao" : "Compare mein daalo"}`} scaleTo={0.96} style={[styles.save, saved && styles.saveOn]}>
+        <Icon name={saved ? "check" : "plus"} size={15} color={saved ? colors.success : colors.custom_softText} />
+        <T w="bold" size={12} color={saved ? colors.success : colors.custom_softText}>{saved ? "Compare mein" : "Compare"}</T>
+      </Press>
+    </View>
   </View>;
 }
 
@@ -155,4 +172,8 @@ const styles = StyleSheet.create({
   past: { borderStyle: "dashed" },
   in: { backgroundColor: colors.custom_successSoft, borderColor: colors.success },
   onEdge: { backgroundColor: colors.custom_flameSoft, borderColor: colors.custom_flame },
+  foot: { flexDirection: "row", alignItems: "center", gap: space.sm, marginTop: 2 },
+  trend: { flex: 1, flexDirection: "row", alignItems: "center", gap: 4 },
+  save: { flexDirection: "row", alignItems: "center", gap: 5, minHeight: 36, paddingHorizontal: 12, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised },
+  saveOn: { borderColor: colors.success, backgroundColor: colors.custom_successSoft },
 });

@@ -22,6 +22,7 @@ from starlette.middleware.cors import CORSMiddleware
 import account_deletion
 import app_switches
 import card_bank
+import ceo_api
 import db_setup
 import health_alerts
 import health_panel
@@ -109,6 +110,7 @@ api.include_router(account_deletion.make_router(db, jl_proxy.client))
 api.include_router(owner_panel.make_router(db, jl_proxy.client))
 api.include_router(health_panel.make_router(db))
 api.include_router(health_alerts.make_router(db))
+api.include_router(ceo_api.make_router(db))
 api.include_router(app_switches.router)
 app.include_router(api)
 install_access_guard(app, db)

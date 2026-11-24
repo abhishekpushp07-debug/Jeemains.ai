@@ -13,7 +13,7 @@ The browser then talks ONLY to the website's own origin (no CORS, no app-server 
     POST /api/rank/estimate | percentile | predict | college | bitsat | comedk | comedk/college
          /api/rank/target/jee | target/comedk | compare | compare/colleges | cutoff                 public
     POST /api/rank/pdf/jee | pdf/comedk | pdf/bitsat | pdf/target/jee | pdf/target/comedk
-         /api/rank/pdf/target/bitsat | pdf/saved                               public, application/pdf
+         /api/rank/pdf/target/bitsat | pdf/saved | pdf/cutoff                  public, application/pdf
     GET  /api/mission/me                                                       signed-in student
     GET  /api/dream     PUT /api/dream/dreams     POST /api/dream/mocks     POST /api/dream/cheered   signed-in student
     GET  /api/j/{code}                                                         optional pretty share link
@@ -54,7 +54,7 @@ SITE = os.environ.get("JEELIVE_SITE_URL", "https://jeelive.ai")
 RANK_GET = {"meta", "colleges", "target/bitsat", "cutoff/options"}
 RANK_POST = {"estimate", "percentile", "predict", "college", "bitsat", "comedk", "comedk/college",
              "target/jee", "target/comedk", "compare", "compare/colleges", "cutoff"}
-RANK_PDF = {"pdf/jee", "pdf/comedk", "pdf/bitsat", "pdf/target/jee", "pdf/target/comedk", "pdf/target/bitsat", "pdf/saved"}
+RANK_PDF = {"pdf/jee", "pdf/comedk", "pdf/bitsat", "pdf/target/jee", "pdf/target/comedk", "pdf/target/bitsat", "pdf/saved", "pdf/cutoff"}
 
 STATIC_TTL = 600          # the four GET lists (meta, colleges, target/bitsat, cutoff/options) only change when the app server is redeployed
 MAX_BODY = 16 * 1024      # the largest real request (saved-list PDF) is under 8 KB

@@ -205,3 +205,62 @@ def test_refusals_are_sentences(s, body, status, detail):
 def test_wrong_field_is_a_list(s):
     r = s.post(f"{R}/cutoff", json={"exam": "neet", "by": "college", "key": "1"})
     assert r.status_code == 422 and isinstance(r.json()["detail"], list)
+
+
+# ---------- last-year trend, save-to-compare, the Cut off PDF ----------
+def _want(prev, cur, higher_harder=False):
+    if not prev or not cur:
+        return None
+    if abs(cur - prev) < prev * 0.03:
+        return "same"
+    return "tough" if ((cur > prev) if higher_harder else (cur < prev)) else "easy"
+
+
+def test_jee_trend_is_josaa_final_against_last_year_never_csab(s):
+    # An OBC-NCL rank that reaches many seats only in CSAB: `final` is then a CSAB closing on CRL, the trend is still R5 against 2025.
+    d = cut(s, exam="jee", by="branch", key="Computer Science", rank=60000, level="normal", category="OBC-NCL", female=False, pwd=False, state=None)
+    assert any(r["final"]["label"].startswith("CSAB") for r in d["rows"]), "this case needs a CSAB-decided row"
+    for r in d["rows"] + d["near"]:
+        r5 = next((c["close"] for c in r["cells"] if c["label"] == "R5" and not c.get("na")), None)
+        prev = (r["prev"] or {}).get("close")
+        want = _want(prev, r5)
+        assert (r["trend"] or {}).get("dir") == want, (r["college"], r["final"], r5, prev, r["trend"])
+        if want:
+            assert r["trend"]["prev"] == prev and r["trend"]["label"]
+
+
+def test_comedk_and_bitsat_trend(s):
+    for r in cut(s, exam="comedk", by="branch", key="Computer Science")["rows"]:
+        assert (r["trend"] or {}).get("dir") == _want(r["prev"]["close"], r["final"]["close"])
+    for r in cut(s, exam="bitsat", by="college", key="Pilani")["rows"]:
+        years = [c["close"] for c in r["cells"]]
+        assert (r["trend"] or {}).get("dir") == _want(years[-2], years[-1], higher_harder=True)  # a bigger cut-off score is tougher
+
+
+def test_a_saved_cutoff_row_opens_in_compare(s):
+    rows = [cut(s, exam="jee", by="college", key="25", marks=200, level="normal", category="GEN", female=False, pwd=False, state=None)["rows"][0],
+            cut(s, exam="comedk", by="branch", key="Computer Science", rank=30000)["rows"][0], cut(s, exam="bitsat", by="college", key="Pilani")["rows"][0]]
+    items = []
+    for r in rows:
+        v = r["save"]
+        assert v["tag"] == r["tag"] and v["title"] == r["college"] and v["sub"] == r["branch"] and v["line"]
+        # exactly what the app's toCompareItem sends
+        items.append({"exam": "jee", "id": v["id"], **v["jee"]} if v["exam"] == "jee" else {"exam": v["exam"], "id": v["id"].split("-", 1)[1]})
+    out = s.post(f"{R}/compare", json={"items": items}, timeout=30)
+    assert out.status_code == 200 and len(out.json()["items"]) == 3 and not any(c.get("missing") for c in out.json()["items"])
+
+
+@pytest.mark.parametrize("body, name", [
+    ({"exam": "jee", "by": "college", "key": "25", "marks": 200, "level": "normal", "category": "GEN", "female": False, "pwd": False, "state": None}, "JEELIVE-cutoff-jee-college-200-marks.pdf"),
+    ({"exam": "jee", "by": "branch", "key": "Computer Science", "rank": 7500}, "JEELIVE-cutoff-jee-branch-rank-7500.pdf"),
+    ({"exam": "comedk", "by": "branch", "key": "Computer Science"}, "JEELIVE-cutoff-comedk-branch-all.pdf"),
+    ({"exam": "bitsat", "by": "college", "key": "Pilani", "marks": 300}, "JEELIVE-cutoff-bitsat-college-300-marks.pdf"),
+])
+def test_cutoff_pdf(s, body, name):
+    r = s.post(f"{R}/pdf/cutoff", json=body, timeout=60)
+    assert r.status_code == 200 and r.content[:5] == b"%PDF-" and name in r.headers["content-disposition"]
+
+
+def test_cutoff_pdf_refuses_like_the_list(s):
+    r = s.post(f"{R}/pdf/cutoff", json={"exam": "jee", "by": "college", "key": "9999"}, timeout=30)
+    assert r.status_code == 404 and r.json()["detail"] == "College nahi mila."

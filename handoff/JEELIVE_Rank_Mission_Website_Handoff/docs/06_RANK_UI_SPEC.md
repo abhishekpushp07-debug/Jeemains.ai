@@ -74,9 +74,13 @@ The second tile. It took the place of "Percentile se rank" (that tool and its sc
 - With a score (marks, percentile or rank): only Safe / Likely / Borderline rows stay, the boxes turn green (inside)
   or amber (on the edge), and the nearest misses follow under "BAS THODA SA DOOR".
 - BITSAT has no rounds: its boxes are the five years 2022 … 2026.
+- Added after the first build (`docs/11` §13): at the foot of every card a **last-year arrow** on the left ("is saal aur
+  mushkil" in red with an up arrow, "is saal thoda aasaan" in green with a down arrow, "≈ pichhle saal jaisa") and a
+  **＋ Compare / ✓ Compare mein** toggle on the right (the same shortlist as the College predictor's bookmark); under
+  the heading box the buttons **"PDF WhatsApp"** and **"Eligible list ki PDF" / "Cut off list ki PDF"**.
 
 This tool has its own document with every word, state, rule and its acceptance list: **`docs/11_CUT_OFF_NEW.md`**.
-Screenshots `NEW_cutoff_01` to `NEW_cutoff_18`.
+Screenshots `NEW_cutoff_01` to `NEW_cutoff_20`.
 
 ## 5. Target marks (`TargetMarks.tsx`)
 

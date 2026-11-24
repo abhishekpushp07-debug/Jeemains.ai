@@ -176,7 +176,19 @@ export type CutoffRow = {
   id: string; college: string; place: string; kind: string; branch: string; path: string; rank_type: string; cells: CutoffCell[];
   final: { label: string; close: number }; prev: { label: string; close: number | null } | null; seats: number | null; fee: number | null;
   need: { marks: number; pct?: number; level?: Level }; tag: Tag | null; gap?: string;
+  /** This year against last year, like for like (JEE: last JoSAA round, never CSAB). null = no last-year number. Print `label`. */
+  trend: CutoffTrend | null;
+  /** The row as one shortlist item: keep it as it is; `toCompareItem(save)` is what POST /rank/compare takes. */
+  save: SavedRow;
 };
+/** dir "tough" = harder than last year (up arrow, red), "easy" = easier (down arrow, green), "same" = within 3 % (no arrow). */
+export type CutoffTrend = { dir: "tough" | "easy" | "same"; prev: number; label: string };
+/** id = "jee-262" | "comedk-E015|CS" | "bitsat-Pilani-cs": the same keys the College predictor saves under. */
+export type SavedRow = { id: string; exam: Exam; title: string; sub: string; line: string; tag: Tag | null;
+  jee?: { prog: number; quota: string; gender: "N" | "F"; path: string } };
+/** A saved row as POST /rank/compare and the saved-list PDF take it. */
+export const toCompareItem = (s: SavedRow): CompareItem =>
+  s.exam === "jee" ? { exam: "jee", id: s.id, ...s.jee } : { exam: s.exam, id: s.id.replace(/^(comedk|bitsat)-/, "") };
 export type CutoffYou = {
   source: ScoreKind; summary: string; line: string; percentile: Range | null; rank: { label: string; range: Range } | null;
   cat_rank?: { label: string; range: Range } | null; pwd_rank?: { label: string; range: Range } | null; check?: string | null;
@@ -202,6 +214,8 @@ export type PdfRequests = {
   "target/bitsat": { campus: Campus };
   /** items = every saved college-branch, tags = its chance tag (or null), pick = indexes of the 2-3 shown side by side. */
   "saved": { items: CompareItem[]; tags: (Tag | null)[]; pick: number[] };
+  /** The body that drew the Cut off list on screen, score included: the PDF is that same list. */
+  "cutoff": CutoffIn;
 };
 export type Pdf = { name: string; blob: Blob };
 

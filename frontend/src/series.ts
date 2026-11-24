@@ -95,6 +95,9 @@ export function scorePoints(days: DayInfo[]) {
 
 export const skippedCount = (days: DayInfo[]) => days.filter(d => d.tone === "missed").length;
 
+/** The attempt a day's chip, card and analysis stand for: its live attempt, else the archive practice of a day that was missed. */
+export const dayAttempt = (d: DayInfo): SeriesAttempt | undefined => d.live ?? d.practice;
+
 export type SeriesAction = { label: string; to: string; testID: string; icon?: "arrow-right" | "play" | "chart-box-outline" | "calendar-clock" | "archive-outline" | "lock-clock" };
 
 /** One state-driven primary action for a series day (live day uses the live attempt). */

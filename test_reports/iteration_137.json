@@ -1,0 +1,41 @@
+{
+  "summary": "Iteration 137 Misfire frontend regression PASS. Verified Home card, Misfire 'Sab' tab, all 7 family tabs, JEE PYQ paper card, Paper page, Solve screen with MCQ + integer numpad, 'Aur dikhao' pagination, 'Poora analysis' and 'Paper ka result' links into /result/<id> with result-tab-solutions present, and the AITS regression (home-tile-live \u2192 /live \u2192 series-open-analysis-list \u2192 /series-analysis \u2192 series-analysis-misfire \u2192 /misfire?tab=aits with misfire-paper-fx-live-10). All writes were intercepted by fake_misfire_writes; the only POSTs that fired were 'try {\"value\":\"A\"}', 'try {\"value\":\"B\"}', 'done {}', 'reopen {}' and all were handled by the fake (no real write reached /api/jl/my/misfire/*). No page errors, no red screen, no horizontal overflow at 390 or 320 on Home or Misfire. Integer question Q21 showed numpad with keys 0-9, minus, back and no dot; typed 4,2 \u2192 '42', minus \u2192 '-42', back \u2192 '-4'. Chapter report showed '1 paper milakar' and chapter-report-no-chapters. Fixed mode showed misfire-empty. All family tabs (aits, jee-chapter, bitsat-mock, bitsat-chapter, comedk-mock) showed misfire-papers-empty; JEE PYQ showed exactly one paper (1ea510f2\u2026).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "verified_flows": [
+    "login via /entry with 7004186276 / 5524",
+    "Home card: home-misfire \u2192 '75 OPEN', '75 sawaal dobara solve karne hain', three subject chips",
+    "Misfire header 'Misfire', misfire-open-count '75 OPEN'",
+    "All 7 tabs present: misfire-tab-all/-aits/-jee-chapter/-jee-pyq/-bitsat-mock/-bitsat-chapter/-comedk-mock",
+    "Mode pills misfire-mode-open/-fixed/-chapters; subject pills (all/physics/chemistry/mathematics)",
+    "misfire-row-0 + misfire-paper-head-0 visible; misfire-more adds 20 rows (20\u219240)",
+    "Fixed mode shows misfire-empty",
+    "Chapter report shows 'chapter-report', 'chapter-report-papers'='1 paper milakar', 'chapter-report-no-chapters'",
+    "Family tabs (aits, jee-chapter, bitsat-mock, bitsat-chapter, comedk-mock) each show misfire-papers-empty",
+    "JEE PYQ shows one paper card misfire-paper-1ea510f2-...; opens /misfire/<id>",
+    "Paper page: counts '0 galat \u00b7 75 chhode \u00b7 0 samajh gaya', start/analysis buttons, subject + outcome pills, incorrect filter shows misfire-paper-empty, physics rendering",
+    "Solve screen MCQ: position 1/75, options A/B/C/D, Check disabled until option chosen, solution-hint, choose A \u2192 wrong + show-solution \u2192 misfire-solution; choose B \u2192 right + done; Samajh gaya advances to 2/75; Pichhla back shows misfire-fixed + misfire-reopen; reopen brings tiles back",
+    "Integer Q21: numpad with 0\u20139, minus, back; NO key-dot; typing '42' / minus / back works correctly",
+    "misfire-open-paper (Paper ka result) link visible on solve card",
+    "'Poora analysis' opens /result/<id> with result-tab-solutions present; result-back-button returns to misfire-paper-screen",
+    "AITS regression: home-tile-live \u2192 /live \u2192 series-open-analysis-list \u2192 /series-analysis (series-analysis-0 visible) \u2192 red series-analysis-0-analysis opens /result/<id> with result-tab-solutions; result-back returns to /series-analysis; series-analysis-misfire outline button opens /misfire?tab=aits and lists misfire-paper-fx-live-10",
+    "No real writes reached /api/jl/my/misfire/*; posts intercepted by fake handler only"
+  ],
+  "notes": [
+    "Error-box check: after routing **/api/jl/my/misfire** to 500 AFTER cached data was already loaded, misfire-error did not render because the cache served the stored summary. This is expected behavior of useCached (stale-while-revalidate) and not a regression. Not flagged as a bug.",
+    "In the first test the Check karo button was labeled aria-disabled='true' (not an HTML disabled attr). This is correct RN web behavior.",
+    "Only 'result-tab-solutions' was probed by explicit testID in this run; other result tabs exist on the screen (visually present in /result/<id>) and were not probed beyond solutions which was the main concern of this story."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "100%"},
+  "seed_data_creation": "None. fake_misfire_writes and fake_aits intercepted writes/series at the browser only; no data created on the live website.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Misfire feature (iter137) fully verified on preview with QA learner 7004186276. Use fake_misfire_writes(page, posts) before Misfire interactions and fake_aits(page) before AITS screens. The JEE PYQ paper has attempt id 1ea510f2-1d2a-41f7-9bb4-a8b28c16f98f with 75 skipped. Integer question is at Q21 (row-20) of Mathematics. All AITS family cards use fx-live-<n> IDs.",
+  "rca_of_issue": "N/A - no bugs found"
+}

@@ -86,6 +86,7 @@ export const LINES: Partial<Record<IconName, string[]>> = {
   "school-outline": ["m12 4 10 5-10 5L2 9z", "M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5", "M22 9v5"],
   "office-building-outline": ["M3 21h18", "M5 21V10", "M19 21V10", "M9.5 21V10", "M14.5 21V10", "m2.5 10 9.5-6.5 9.5 6.5"],
   "bullseye-arrow": [c(12, 12, 9.5), c(12, 12, 5.5), c(12, 12, 1.5)],
+  crosshairs: [c(12, 12, 8.5), "M22 12h-4.5", "M6.5 12H2", "M12 6.5V2", "M12 22v-4.5"],
   "format-list-checks": ["M10 6h10.5", "M10 12h10.5", "M10 18h10.5", "m3.5 6 1.5 1.5L7.5 5", "m3.5 12 1.5 1.5 2.5-2.5", "m3.5 18 1.5 1.5 2.5-2.5"],
   plus: ["M12 5v14", "M5 12h14"],
   minus: ["M5 12h14"],

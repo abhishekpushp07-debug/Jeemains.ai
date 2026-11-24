@@ -110,6 +110,8 @@ Do not:
 | Why is this seat "Borderline"? | `docs/04_RANK_ALGORITHMS.md` §6 |
 | How does Cut off work, exam by exam? | `docs/11_CUT_OFF_NEW.md` §4; fields in `docs/03` §13 |
 | What does "Meri details" write into each tool? | `docs/12_MERI_DETAILS_NEW.md` §3 |
+| What is the arrow / the Compare toggle / the PDF on a Cut off card? | `docs/11_CUT_OFF_NEW.md` §13 |
+| Who builds what? What must the website add for the CEO dashboard? | `docs/13_APP_UPDATE_AITS_AND_WHO_BUILDS_WHAT.md` §1–2, `docs/14_CEO_DASHBOARD.md` §4 |
 | Where does this number come from? | `docs/05_RANK_DATA.md`, then the live answer from the app server |
 | How exactly does the app behave here? | the component named in `docs/06_RANK_UI_SPEC.md`, in `RANK/code/app_reference_ui/` |
 | How is a friend counted? | `docs/07_MISSION.md` §4 |

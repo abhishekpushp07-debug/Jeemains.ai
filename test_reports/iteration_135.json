@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 135 — Cut off trend+save+PDF, AITS day cards + /series-analysis, CEO API 401 paths. Backend 15/15 PASS in new /app/backend/tests/test_iter135_cutoff_trend_save_pdf_ceo.py (JEE by college key '6' + CSE branch + COMEDK + BITSAT Pilani all expose per-row `trend{dir,prev,label}` and `save{exam,id,...}` with correct ids jee-<prog> / comedk-<code>|<cc> / bitsat-<id>; existing fields rows/eligible/you/near/columns/metric unchanged; /api/rank/pdf/cutoff returns application/pdf %PDF for all four exam/mode combos; /api/rank/cutoff without score returns rows + you=null; /api/rank/predict empty payload still 422 with Hinglish message; /openapi.json lists /api/ceo/overview, /api/ceo/users, /api/rank/pdf/cutoff; CEO overview/users with no Authorization header AND with 'Authorization: Bearer wrongtoken' both answer 401, confirming CEO_API_TOKEN is configured). Rank regression (/app/backend/tests/test_rank_cutoff.py + test_rank_pdf_iter88.py + test_rank_predictor.py) 81/81 PASS, no regression. Frontend (390x844, QA learner 7004186276/5524 signed in): Rank tab → CUT OFF tile → JEE → College se → open picker → search 'trichy' → pick NIT Trichy (cut-pick-sheet-25) renders '9 branches · har round ki closing rank'; cut-pdf-whatsapp + cut-pdf buttons present; cut-row-0-save toggles '+ Compare' → '✓ Compare mein' on tap and cut-row-0-trend shows 'is saal thoda aasaan'; after Marks=200 + Normal, all four (cut-pdf-whatsapp, cut-pdf, cut-row-0-save, cut-row-0-trend) still rendered. AITS /live: series-hub loads, JourneyCard shows 0/50 (starts 9 Dec 2026); 'My results' section has 'AITS Analysis' action (series-open-analysis-list) that opens /series-analysis; /series-analysis (testID series-analysis-screen) renders with empty state 'Abhi koi AITS attempt nahi.' as expected (no series_live attempts yet); back button (series-analysis-back) navigates back to /live. Back-stack: /result/<id>?from=series-day opens the result screen and tapping result-back-button navigates to /series-analysis (verified on PYQ attempt id 6b260c71-… which returns 'Attempt not found' as noted in memory/test_credentials.md, but the ?from=series-day routing is URL-based and confirmed). No red screen, no page errors; only the usual Metro disconnect warning and one 401 on an anonymous probe before sign-in.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iter135_cutoff_trend_save_pdf_ceo.py",
+    "/app/test_reports/pytest/iter135_backend.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ceo_api._auth: if CEO_API_TOKEN is blank the route 503s regardless of the bearer header; current preview env has the token set, so tests confirmed the 401 path. Leaving as-is per design (closed-by-default when secret is missing).",
+    "rank_cutoff._trend uses a 3% band for 'same'; works correctly for closing ranks (smaller=tougher) and BITSAT scores (bigger=tougher) via higher_harder flag — no issues found."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iter135_cutoff_trend_save_pdf_ceo.py (new, additive)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "None. Read-only. No writes to the QA learner's canonical data; no attempts started/submitted. Only localStorage within the test browser was touched by React state (cut.save toggle); the website was not called.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "AITS live series starts 9 Dec 2026 so the QA learner has 0 series_live attempts; /series-analysis empty state is expected. The attempted-day flows (series-chip-score-<day>, series-start-confirm sheet, series-today-analysis-<day>, series-daycard-analysis-<day>) are implemented in DayCards.tsx and the start-confirm sheet is wired in app/live.tsx (testIDs series-start-confirm, series-start-confirm-yes, series-start-confirm-no) — they will light up as soon as a real attempt exists. Response-mocking for /api/series/all-india-jee was not attempted here because the series data is memoized via SWR and route.use+service-worker interception in a headless Playwright context would require deep hooks; the task permits this. Approved-only PYQ attempt ids from memory/test_credentials.md are all 404 now; use GET /my/tests?tab=completed to get a fresh finished id if the main agent needs to verify the result screen's tabs/solutions/analysis end-to-end.",
+  "rca_of_issue": "N/A — no defects found."
+}

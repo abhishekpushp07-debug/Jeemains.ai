@@ -318,11 +318,15 @@ White A4 PDFs drawn by the server (25–70 KB, about 50 ms each). The answer has
 | `/rank/pdf/target/comedk` | `{code}` |
 | `/rank/pdf/target/bitsat` | `{campus}` |
 | `/rank/pdf/saved` | `{items: CompareItem[1..50], tags: (tag or null)[], pick: [up to 3 indexes]}` |
+| `/rank/pdf/cutoff` — NEW | **exactly the body of `POST /rank/cutoff`** that drew the list on screen (§13.2), score included |
 
 Samples with their request bodies: `RANK/sample_pdfs/`. The JEE list PDF is named after the score that was used:
 `JEELIVE-JEE-colleges-180-marks.pdf`, `…-97.4-percentile.pdf` or (new) `…-rank-7500.pdf`.
 
-Cut off has no PDF.
+The Cut off PDF is named `JEELIVE-cutoff-{exam}-{by}-{score}.pdf`, where `{score}` is `rank-7500`, `pct-99.2`,
+`200-marks`, or `all` when no score was sent (`JEELIVE-cutoff-jee-college-200-marks.pdf`). It carries the heading, the
+student's line and the three counts (with a score), every row with every round, the last-year arrow, the near misses
+and the notes. A request the list would refuse is refused the same way (the same 404 / 422 sentence, as JSON).
 
 ---
 
@@ -430,6 +434,34 @@ A row (`rows[]`, `near[]`):
 | `need` | `{marks, pct?, level?}`: marks needed to reach `final` (JEE: on the paper type `level`, with the percentile `pct`; COMEDK: out of 180; BITSAT: the cut-off itself) |
 | `tag` | `"safe"` · `"likely"` · `"borderline"` with a score, else `null` |
 | `gap` | near misses only: `"lagbhag +3 marks aur"`, `"lagbhag +0.42 percentile aur"`, `"rank lagbhag 323 aur upar chahiye"`; COMEDK and BITSAT have their own (`"+28 marks aur"`) |
+| `trend` — NEW | `{dir, prev, label}` or `null`: this year against last year (below) |
+| `save` — NEW | the row as one saved item for the shortlist / College compare (below). Always present |
+
+`trend` (the small arrow on a card; `docs/11` §13.1):
+
+| Field | Meaning |
+|---|---|
+| `dir` | `"tough"` = harder than last year (up arrow, red) · `"easy"` = easier (down arrow, green) · `"same"` = within 3 % (no arrow, soft text) |
+| `prev` | last year's number that was compared |
+| `label` | the sentence to print: `"is saal aur mushkil"` · `"is saal thoda aasaan"` · `"≈ pichhle saal jaisa"` |
+
+What is compared, always like for like: JEE Main = the **last JoSAA round of 2026 against 2025's final round on the
+same seat path** (never a CSAB closing, even when a CSAB round decided the tag) · COMEDK = 2026 final against 2025
+final · BITSAT = the 2026 cut-off score against 2025's (a bigger score is tougher). `null` when either number is
+missing, and for every JAC Delhi row (no last-year data). Never compute it in the browser.
+
+`save` (hand it to the shortlist unchanged; `docs/11` §13.2):
+
+| Field | Meaning |
+|---|---|
+| `id` | the shortlist key: `"jee-262"` · `"comedk-E015|CS"` · `"bitsat-Pilani-cs"` (the same keys the College predictor saves under, so a row saved in either place is one item) |
+| `exam` | `"jee"` · `"comedk"` · `"bitsat"` |
+| `title`, `sub`, `line` | what the saved card prints: college, branch, and one ready line (`"Closing 8,754 CRL · R5 · Other state · Open"`) |
+| `tag` | the row's tag at the moment it was saved, or `null` |
+| `jee` | JEE Main only: `{prog, quota, gender, path}`, the seat path to compare on |
+
+To compare a saved item send `{exam, id, ...jee}` for JEE Main, and `{exam, id without its "comedk-" / "bitsat-" prefix}`
+for the other two, to `POST /rank/compare` (§11). The app's `toCompareItem` in `shortlist.ts` does exactly this.
 
 A cell (`cells[]`):
 

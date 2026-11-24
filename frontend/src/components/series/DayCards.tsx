@@ -7,8 +7,9 @@ import { PastelSurface, Pill } from "@/src/components/design";
 import { Shine } from "@/src/analysis/Shine";
 import { chipEdges, colors, pastel, pastelEdges, SeriesTone, space } from "@/src/theme";
 import { DAY_LOOK_ORDER, DAY_LOOKS, DayLook, dayLook } from "./dayLook";
+import { AnalysisButton } from "./AnalysisButton";
 import { istDate } from "@/src/navigation";
-import { countdown, dayAction, DayInfo, dayNote, Series, seriesDays } from "@/src/series";
+import { countdown, dayAction, dayAttempt, DayInfo, dayNote, istTime, Series, seriesDays } from "@/src/series";
 
 const FACE = Object.fromEntries((Object.keys(pastel) as SeriesTone[]).map(t => [t, [pastel[t].from, pastel[t].to]])) as unknown as Record<SeriesTone, readonly [string, string]>;
 
@@ -22,8 +23,12 @@ function ShineCard({ tone, testID, radius, face, children }: { tone: SeriesTone;
   </View>;
 }
 
-/** TODAY: the live paper with its state-driven primary action. */
-export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
+/**
+ * TODAY: the live paper with its state-driven primary action. Once today's paper is submitted the blood-red button takes
+ * over: before the result opens it says when it opens and shows the previous attempt's marks (`last`); after that it
+ * shows today's marks and opens the analysis.
+ */
+export function TodayCard({ series, day, last }: { series: Series; day?: DayInfo; last?: DayInfo }) {
   const router = useRouter();
   const [, setTick] = useState(0);
   useEffect(() => { const t = setInterval(() => setTick(n => n + 1), 30000); return () => clearInterval(t); }, []);
@@ -38,6 +43,13 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
   }
   const p = pastel[day.tone];
   const act = dayAction(day);
+  const live = day.live;
+  const attempted = !!live && !live.resumable;
+  const openAnalysis = () => router.push({ pathname: "/result/[id]", params: { id: live!.id, from: "series-day" } });
+  const marks = attempted ? live!.summary : null;
+  const sealed = attempted && !marks && live!.status === "embargoed";
+  const opensAt = istTime(day.slot.closes_at);
+  const before = last ? dayAttempt(last)?.summary : null;
   const showClock = day.slot.state === "live" && !day.live && day.slot.last_start_at * 1000 > Date.now();
   return <ShineCard testID={"series-day-" + day.day} tone={day.tone} radius={24} face={styles.today}>
     <View style={styles.between}>
@@ -50,7 +62,10 @@ export function TodayCard({ series, day }: { series: Series; day?: DayInfo }) {
       <Icon name="clock-outline" size={14} color={colors.custom_pastelInk} />
       <T w="bold" size={11} color={colors.custom_pastelInk}>Last start in {countdown(day.slot.last_start_at)}</T>
     </View> : null}
-    {act ? <Pill testID={act.testID} label={act.label} iconRight={act.icon} bg={colors.custom_pastelInk} ink={p.cta} onPress={() => router.push(act.to as any)} />
+    {attempted ? <AnalysisButton big testID={"series-today-analysis-" + day.day} onPress={openAnalysis}
+        label={marks ? `Aaj ke marks ${marks.score}/${marks.maximum}` : sealed ? `Aaj ka result ${opensAt}` : "Result taiyaar ho raha hai"}
+        note={marks ? "Analysis dekho" : before ? `Pichhla attempt · Day ${last!.day}: ${before.score}/${before.maximum}` : sealed ? `Result ${opensAt} par khulega` : undefined} />
+      : act ? <Pill testID={act.testID} label={act.label} iconRight={act.icon} bg={colors.custom_pastelInk} ink={p.cta} onPress={() => router.push(act.to as any)} />
       : <T testID="series-today-note" w="bold" size={12.5} color={p.body}>{dayNote(day)}</T>}
   </ShineCard>;
 }
@@ -59,8 +74,8 @@ const CHIP = 52, GAP = 8;
 // A chip's own colours, drawn once: blood red for a day still to come, parrot green for a day that is over, today's own colours for today.
 const CHIP_FACE = Object.fromEntries(DAY_LOOK_ORDER.map(k => [k, <LinearGradient key={k} pointerEvents="none" colors={[DAY_LOOKS[k].from, DAY_LOOKS[k].to]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />])) as Record<DayLook, React.ReactElement>;
 const SEEN = { itemVisiblePercentThreshold: 10 };
-/** One chip per series day; opens on today. */
-export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (day: number) => void }) {
+/** One chip per series day; opens on today. A tap runs the day's action (open analysis, resume or start); upcoming days just preview. */
+export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (d: DayInfo) => void }) {
   const list = useRef<FlatList<DayInfo>>(null);
   const index = Math.max(0, days.findIndex(d => d.day === selected));
   // Only the chips on screen shine; the rest stay still, so 50 days cost no more than the handful in view.
@@ -78,13 +93,16 @@ export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; select
     initialNumToRender={12} windowSize={5} extraData={seen} onViewableItemsChanged={onSeen} viewabilityConfig={SEEN}
     renderItem={({ item: d, index: i }) => {
       const on = d.day === selected, kind = dayLook(d.tone), look = DAY_LOOKS[kind];
-      return <Press testID={"series-chip-" + d.day} onPress={() => onSelect(d.day)} accessibilityState={{ selected: on }} accessibilityLabel={`Day ${d.day}, ${istDate(d.date)}, ${d.label}`} style={styles.chipWrap}>
+      const score = dayAttempt(d)?.summary;
+      return <Press testID={"series-chip-" + d.day} onPress={() => onSelect(d)} accessibilityState={{ selected: on }}
+        accessibilityLabel={`Day ${d.day}, ${istDate(d.date)}, ${d.label}${score ? `, ${score.score} of ${score.maximum}` : ""}`} style={styles.chipWrap}>
         <View style={styles.chipBox}>
           {/* Gloss, a corner-to-corner glint and a running edge; the glint reaches each chip a little after the one before it. */}
           <Shine radius={16} ring={on ? 3 : 2} backdrop={CHIP_FACE[kind]} edge={on ? chipEdges.chosen : look.edge} gloss={look.gloss} glint={look.glint}
             band={18} part={38} corner delay={(i % 8) * 140} rest={i < seen[0] || i > seen[1]} face={on ? styles.chipOn : styles.chip}>
             <T w="heavy" size={8.5} color={look.soft} style={{ letterSpacing: 1.2 }}>{d.isToday ? "TODAY" : "DAY"}</T>
-            <T w="heavy" size={19} color={look.ink}>{d.day}</T>
+            <T w="heavy" size={score ? 16 : 19} color={look.ink}>{d.day}</T>
+            {score ? <T testID={"series-chip-score-" + d.day} w="heavy" size={9} color={look.ink} numberOfLines={1}>{score.score}/{score.maximum}</T> : null}
           </Shine>
         </View>
         <View style={[styles.chipDot, on && { backgroundColor: colors.onSurface }]} />
@@ -97,7 +115,10 @@ export function DayCard({ day }: { day: DayInfo }) {
   const router = useRouter();
   const p = pastel[day.tone];
   const act = dayAction(day);
-  const s = day.live?.summary;
+  const a = dayAttempt(day);
+  const attempted = !!a && !a.resumable;
+  const s = attempted ? a!.summary : null;
+  const practice = attempted && a!.mode !== "series_live"; // a missed day's paper, done later from the archive
   return <ShineCard testID={"series-day-card-" + day.day} tone={day.tone} radius={22} face={styles.detail}>
     <View style={styles.between}>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>DAY {day.day} · {day.label.toUpperCase()}</T>
@@ -105,12 +126,16 @@ export function DayCard({ day }: { day: DayInfo }) {
     </View>
     <T w="heavy" size={17} color={colors.custom_pastelInk} numberOfLines={2}>{day.slot.title}</T>
     <View style={[styles.between, { alignItems: "flex-end" }]}>
-      <View style={{ flex: 1, alignItems: "flex-start" }}>
-        {act ? <Pill testID={"series-daycard-action-" + day.day} size="sm" label={act.label} bg={colors.custom_pastelInk} ink={p.cta} onPress={() => router.push(act.to as any)} />
-          : <T testID={"series-daycard-note-" + day.day} w="bold" size={12} color={p.body}>{dayNote(day)}</T>}
+      <View style={{ flex: 1, alignItems: "flex-start", gap: space.sm }}>
+        {attempted ? <AnalysisButton testID={"series-daycard-analysis-" + day.day}
+            onPress={() => router.push({ pathname: "/result/[id]", params: { id: a!.id, from: "series-day" } })}
+            label={s ? "Analysis dekho" : a!.status === "embargoed" ? `Result ${istTime(day.slot.closes_at)}` : "Result dekho"} /> : null}
+        {/* A practised day can still be practised again; a live day's own action is the button above. */}
+        {act && (!attempted || practice) ? <Pill testID={"series-daycard-action-" + day.day} size="sm" label={act.label} bg={colors.custom_pastelInk} ink={p.cta} onPress={() => router.push(act.to as any)} />
+          : !attempted ? <T testID={"series-daycard-note-" + day.day} w="bold" size={12} color={p.body}>{dayNote(day)}</T> : null}
       </View>
       {s ? <View testID={"series-daycard-score-" + day.day} style={{ alignItems: "flex-end" }}>
-        <T w="heavy" size={9} color={p.ink} style={{ letterSpacing: 1.4 }}>MARKS</T>
+        <T w="heavy" size={9} color={p.ink} style={{ letterSpacing: 1.4 }}>{practice ? "PRACTICE MARKS" : "MARKS"}</T>
         <T w="heavy" size={28} color={colors.custom_pastelInk}>{s.score}<T w="bold" size={12} color={p.body}>/{s.maximum}</T></T>
       </View> : null}
     </View>

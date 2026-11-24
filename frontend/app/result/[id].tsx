@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BackHandler, FlatList, Modal, ScrollView, StyleSheet, TextInput, View, useWindowDimensions } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { api, post, put, uuid } from "@/src/api/client";
 import { loadResult } from "@/src/api/paperOpening";
@@ -335,7 +335,7 @@ function ReportSheet({ visible, onClose, id, q }: { visible: boolean; onClose: (
 
 export default function Result() {
   const { user } = useAuth();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, from: fromParam } = useLocalSearchParams<{ id: string; from?: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const [version, setVersion] = useState("original");
@@ -420,7 +420,8 @@ export default function Result() {
   // A fresh submission shows the Mission card first ("Share to view results"); the result keeps loading behind it.
   const [gate, setGate] = useState<"checking" | "locked" | "open">("checking");
   useEffect(() => { let live = true; isResultLocked(id!).then(l => { if (live) setGate(l ? "locked" : "open"); }); return () => { live = false; }; }, [id]);
-  const leave = () => (router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"));
+  // Opened straight from an All India day: back goes up to the AITS Analysis list (then that list's back reaches the series page).
+  const leave = () => (fromParam === "series-day" ? router.replace("/series-analysis") : router.canGoBack() ? router.back() : router.replace("/(tabs)/tests"));
   const returning = tab === "solutions" && from && gate === "open";
   const back = () => (returning ? show("analysis") : leave());
   useEffect(() => {
@@ -428,6 +429,12 @@ export default function Result() {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => { show("analysis"); return true; });
     return () => sub.remove();
   }, [returning, show]);
+  // The phone's own back button takes the same road as the header's: an All India day's analysis goes up to the AITS Analysis list.
+  useFocusEffect(useCallback(() => {
+    if (fromParam !== "series-day" || returning) return;
+    const sub = BackHandler.addEventListener("hardwareBackPress", () => { router.replace("/series-analysis"); return true; });
+    return () => sub.remove();
+  }, [fromParam, returning, router]));
   if (gate === "checking") return <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface }} />;
   if (gate === "locked") return <ShareGate title={r?.title} stage={ready || !r ? "ready" : r.status === "embargoed" ? "sealed" : status === 202 ? "grading" : "ready"}
     onBack={leave} onOpen={() => { void unlockResult(id!); setGate("open"); }} />;

@@ -52,6 +52,19 @@ def _counts(rows):
     return {tag: sum(1 for r in rows if r["tag"] == tag) for tag in ("safe", "likely", "borderline")}
 
 
+def _trend(prev, cur, higher_harder):
+    """Last year vs this year's closing. higher_harder: a bigger number is tougher (BITSAT score). For a closing rank a
+    smaller number is tougher. dir = "tough" / "easy" / "same" so the app can draw an up / down / level arrow."""
+    if not prev or not cur:
+        return None
+    d = cur - prev
+    if abs(d) < prev * 0.03:
+        return {"dir": "same", "prev": prev, "label": "≈ pichhle saal jaisa"}
+    harder = d > 0 if higher_harder else d < 0
+    return {"dir": "tough" if harder else "easy", "prev": prev,
+            "label": "is saal aur mushkil" if harder else "is saal thoda aasaan"}
+
+
 def _answer(body, head, columns, rows, total, you, near, notes, **more):
     """rows = every row that passed, most wanted first; a branch list keeps the first LIMIT of them."""
     shown = rows[:LIMIT] if body.by == "branch" else rows
@@ -82,11 +95,20 @@ def _jee_row(s, close, rnd, st, level, columns, tag=None):
                 state = "edge"  # CSAB only fills left-over seats: a seat from it is Borderline at best (best_paths)
         cells.append(_cell(label, value, state, **({"crl": True} if crl and rt._rank_type(s) != "CRL" else {})))
     pct, marks = rt._marks(rt._crl_needed(close, s, rnd))
+    branch = p["name"] + (f" ({p['degree']})" if p["degree"] else "")
+    path = rp.path_label(s)
+    rank_type = "CRL" if rnd >= 5 else rt._rank_type(s)
     return {"id": f"jee-{s.prog}", "college": inst["short"], "place": f"{inst['city']}, {inst['state']}", "kind": inst["type"],
-            "branch": p["name"] + (f" ({p['degree']})" if p["degree"] else ""), "path": rp.path_label(s),
-            "rank_type": "CRL" if rnd >= 5 else rt._rank_type(s), "cells": cells, "final": {"label": own[rnd], "close": close},
+            "branch": branch, "path": path,
+            "rank_type": rank_type, "cells": cells, "final": {"label": own[rnd], "close": close},
             "prev": None if s.jac else {"label": rp.Y25_LABEL, "close": s.y25}, "seats": rt.JEE_SEATS.get(s.prog), "fee": None,
-            "need": {"marks": marks[level], "pct": pct, "level": level}, "tag": tag}
+            "need": {"marks": marks[level], "pct": pct, "level": level}, "tag": tag,
+            # Like for like: this year's last JoSAA round against last year's, on the same seat path. Never the CSAB
+            # closing that may have decided the tag (a left-over round, on CRL): that would always look "easier".
+            "trend": None if s.jac else _trend(s.y25, s.jclose, False),
+            "save": {"id": f"jee-{s.prog}", "exam": "jee", "title": inst["short"], "sub": branch,
+                     "line": f"Closing {rp.fmt(close)} {rank_type} · {own[rnd]} · {path}", "tag": tag,
+                     "jee": {"prog": s.prog, "quota": s.quota, "gender": "F" if s.female else "N", "path": path}}}
 
 
 def _jee(body: CutoffIn):
@@ -166,10 +188,15 @@ def _pct(r):
 def _comedk_row(s, st=None):
     c = ck.INFO[s.code]
     cells = [_cell(label, close, _state(close, st.lo, st.hi) if st else None) for label, close in zip(ck.ROUNDS, s.rounds)]
-    return {"id": f"{s.code}|{s.cc}", "college": c["short"], "place": c["city"], "kind": "COMEDK", "branch": ck._D["courses"].get(s.cc, s.cc),
+    course = ck._D["courses"].get(s.cc, s.cc)
+    tag = st.judge(s.close) if st else None
+    return {"id": f"{s.code}|{s.cc}", "college": c["short"], "place": c["city"], "kind": "COMEDK", "branch": course,
             "path": "GM · All India", "rank_type": "COMEDK rank", "cells": cells, "final": {"label": ck.ROUNDS[s.rnd], "close": s.close},
             "prev": {"label": "2025 final", "close": s.y25}, "seats": s.gm, "fee": s.fee,
-            "need": {"marks": next((m for m, r in enumerate(COMEDK_MID) if r <= s.close), ck.MAX_MARKS)}, "tag": st.judge(s.close) if st else None}
+            "need": {"marks": next((m for m, r in enumerate(COMEDK_MID) if r <= s.close), ck.MAX_MARKS)}, "tag": tag,
+            "trend": _trend(s.y25, s.close, False),
+            "save": {"id": f"comedk-{s.code}|{s.cc}", "exam": "comedk", "title": c["short"], "sub": course,
+                     "line": f"COMEDK 2026 closing {ck.fmt(s.close)} · {ck.ROUNDS[s.rnd]} · GM", "tag": tag}}
 
 
 def _comedk(body: CutoffIn):
@@ -213,9 +240,13 @@ def _bitsat_row(r, score=None):
     last = len(rb.YEARS) - 1
     state = None if score is None else "in" if tag in ("safe", "likely") else "edge" if tag else "out"
     cells = [_cell(str(y), h, state if i == last else None) for i, (y, h) in enumerate(zip(rb.YEARS, r["history"]))]
+    prev = r["history"][-2] if len(r["history"]) >= 2 else None
     return {"id": r["id"], "college": r["college"], "place": r["campus"], "kind": "BITS", "branch": r["program"], "path": "Sab categories, ek cutoff",
             "rank_type": f"score / {rb.MAX}", "cells": cells, "final": {"label": str(rb.YEARS[-1]), "close": r["cutoff"]},
-            "prev": None, "seats": None, "fee": None, "need": {"marks": r["cutoff"]}, "tag": tag}
+            "prev": None, "seats": None, "fee": None, "need": {"marks": r["cutoff"]}, "tag": tag,
+            "trend": _trend(prev, r["cutoff"], True),
+            "save": {"id": f"bitsat-{r['id']}", "exam": "bitsat", "title": r["college"], "sub": r["program"],
+                     "line": f"BITSAT 2026 cutoff {r['cutoff']} / {rb.MAX}", "tag": tag}}
 
 
 def _bitsat(body: CutoffIn):

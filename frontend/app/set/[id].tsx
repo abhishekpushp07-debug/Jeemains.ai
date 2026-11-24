@@ -13,7 +13,7 @@ import { checkReadiness } from "@/src/api/readiness";
 import { warmAttempt } from "@/src/api/paperOpening";
 
 export default function SetDetail() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, start: auto } = useLocalSearchParams<{ id: string; start?: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
@@ -23,6 +23,8 @@ export default function SetDetail() {
   const [saved, setSaved] = useState(false);
   const [reload, setReload] = useState(0);
   const key = useRef<string | null>(null);
+  const [keyed, setKeyed] = useState(false); // this start's retry key has been read from the phone
+  const autoStarted = useRef(false);
   const startKeyName = `start.${user?.id}.${id}`;
 
   useEffect(() => {
@@ -31,9 +33,19 @@ export default function SetDetail() {
     storage.getItem<string | null>(startKeyName, null).then(async (k) => {
       key.current = k || uuid();
       if (!k) await storage.setItem(startKeyName, key.current);
+      if (alive) setKeyed(true);
     });
     return () => { alive = false; };
   }, [id, user, reload, startKeyName]);
+
+  // Opened with start=1 (the "Shuru karein?" sheet of a missed All India day, already confirmed there): the same checked
+  // start below runs once by itself. If it cannot start, this page stays with the reason and its usual Start button.
+  useEffect(() => {
+    if (auto !== "1" || autoStarted.current || !s || !user || !keyed) return;
+    autoStarted.current = true;
+    if (s.attempt?.status === "active") { void warmAttempt(s.attempt.id); router.replace(`/attempt/${s.attempt.id}`); }
+    else void start();
+  }, [auto, s, user, keyed]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // One tap: the device/connection check the server needs runs silently, then the attempt opens.
   async function start(checkedAt = 0) {

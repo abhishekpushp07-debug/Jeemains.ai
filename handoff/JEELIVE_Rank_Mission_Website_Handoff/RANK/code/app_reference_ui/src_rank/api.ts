@@ -133,10 +133,11 @@ export type CutoffOptions = { limit: number } & Record<CutoffExam, {
 }>;
 /** state: "in" = the student's whole rank range is inside this round, "edge" = only part of it. na = the college has no such round. */
 export type CutoffCell = { label: string; close: number | null; state?: "in" | "edge" | "out"; na?: boolean; crl?: boolean };
+export type CutoffTrend = { dir: "tough" | "easy" | "same"; prev: number; label: string };
 export type CutoffRow = {
   id: string; college: string; place: string; kind: string; branch: string; path: string; rank_type: string; cells: CutoffCell[];
   final: { label: string; close: number }; prev: { label: string; close: number | null } | null; seats: number | null; fee: number | null;
-  need: { marks: number; pct?: number; level?: Level }; tag: Tag | null; gap?: string;
+  need: { marks: number; pct?: number; level?: Level }; tag: Tag | null; gap?: string; trend: CutoffTrend | null; save: import("./shortlist").Saved;
 };
 export type CutoffOut = {
   exam: CutoffExam; by: CutoffBy; key: string; title: string; name: string; sub: string; kind: string | null; metric: "rank" | "score";

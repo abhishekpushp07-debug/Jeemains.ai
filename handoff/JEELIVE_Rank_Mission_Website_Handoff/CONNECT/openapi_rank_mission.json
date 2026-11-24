@@ -829,6 +829,45 @@
         }
       }
     },
+    "/api/rank/pdf/cutoff": {
+      "post": {
+        "tags": [
+          "Rank predictor"
+        ],
+        "summary": "Cutoff",
+        "operationId": "cutoff_api_rank_pdf_cutoff_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CutoffIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/rf/mission/me": {
       "get": {
         "summary": "Mine",
