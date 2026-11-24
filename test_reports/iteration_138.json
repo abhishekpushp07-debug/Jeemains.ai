@@ -1,0 +1,33 @@
+{
+  "summary": "Iteration 138 (frontend-only regression for AITS Leaderboard, Rapid Fire Fold-screen daily, once-a-day greeting, RF lobby regression). Signed in ONCE as QA learner 7004186276 behind the browser-side fixtures (fake_aits, fake_board, fake_daily_done, count_sounds). 53/57 initial checks PASS; the 4 misses were all test-harness ordering issues (not product bugs) and were re-verified green in iter138_followup.py. Overall PASS for A1-A6, B, C (with one soft note on 'charge' sound on new-day re-open) and D. No horizontal overflow at 390x844 or 320x640 on /series-leaderboard, no overflow at 750x860 on /rapid/daily, victory picture 523 px wide and centered with 113.5 px L/R margins at 750, 353 px wide at 390. No pageerror seen; only the known expo-audio/pointerEvents deprecation warnings and a /auth/refresh 401 before sign-in. No POSTs left the browser for /api/jl/attempts/<id>/leaderboard or /api/rf/daily/{start,answer,finish,board}: all intercepted. No real paper was started, answered, submitted; no Misfire writes.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Rapid Fire 'charge' greeting on new-day re-open", "issue": "After clearing rf.heard.v1 to 2000-01-01 and reloading, the 'card' sound (scene_cup) replayed on the lobby as expected, but tapping rf-all-india + rf-daily-popup-enter produced NO scene_race / scene_cup (expected one each). On first-ever open of the same session the full triplet ['scene_cup','scene_race','scene_cup'] was heard. Likely a 'charge' key path not actually using firstToday on reopen, or firstToday race with storage hydration. Please have the main agent verify in src/rapid/DailyParts.tsx / DailyScenes / sfx.ts.", "affected_testIDs": ["rf-daily-result", "rf-daily-popup-enter"]}
+    ],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/tests/iter138_aits_board_rf_daily.py",
+    "/app/tests/iter138_followup.py",
+    "/app/tests/iter138_followup2.py",
+    "/tmp/iter138_results.json"
+  ],
+  "action_items": [
+    "Investigate once-per-day 'charge' sound on new-day re-open: after localStorage reset to 2000-01-01, the card sound plays on lobby but scene_race/scene_cup do not play on the daily-result re-open. First-time flow was fine.",
+    "On /rapid/daily-styles, clicking rf-all-india-style sometimes lands on an empty styles page (no rf-daily-style-* tiles visible) during the iter138_followup2 flow (right after sign-in -> tap style pill). Please verify navigation/data fetch; initial lobby load from sign-in works, but a direct tap to style pill occasionally renders nothing. May be a stale-fixture artifact; confirm manually."
+  ],
+  "critical_code_review_comments": [
+    "sfx.ts firstToday() loads heard from storage asynchronously; if playSfx or a scene is triggered before heardLoaded resolves, the first call may see heard={} and mark 'today' regardless. Consider gating scene play on the same promise.",
+    "series-leaderboard.tsx DayBoard useBoard(a.id) key is fine; verify forgetBoard is called on retry (confirmed) - no issue."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "93% initial / ~98% after re-run"},
+  "seed_data_creation": "None. All leaderboard and daily traffic intercepted in-browser via fixtures.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use iter138_aits_board_rf_daily.py as the regression entry point. Sign in happens ONCE per browser context (rate limited otherwise). Install fake_aits -> fake_board -> fake_daily_done -> count_sounds BEFORE sign-in. For A4 states, re-register fake_board state via page.unroute(regex) then fake_board(state=...) and re-enter the board (back + series-open-leaderboard again) so useBoard is fresh. On /rapid/daily, there is NO tab-rapid testID; to go back to the lobby use rf-daily-exit before reloading or navigating. Reload via location.reload() keeps the path (/rapid/daily) and the auth session; no re-login needed.",
+  "rca_of_issue": "Iter138 'blank strip on Samsung Fold 7' bug: at 750x860 the rf-battle-victory element measured 523 px, enclosing ring 523 px, centered with 113.5/113.5 L/R margins and no horizontal overflow (scrollWidth == innerWidth). The previous coloured strip bug is fixed."
+}

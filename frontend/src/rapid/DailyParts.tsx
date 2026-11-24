@@ -34,8 +34,11 @@ export function DailyBoardList({ items, total, testID = "rf-daily-board" }: { it
   </Panel>;
 }
 
-/** After the 30th card: your All India rank, the score, the reward and today's board. */
-export function DailyResultView({ result, uid, onBack }: { result: DailyResult; uid: string; onBack: () => void }) {
+/**
+ * After the last card: your All India rank, the score, the reward and today's board.
+ * `fresh` = the round ended just now; a finished round opened again shows its reward quietly (no coin sound, no level-up show).
+ */
+export function DailyResultView({ result, uid, onBack, fresh }: { result: DailyResult; uid: string; onBack: () => void; fresh: boolean }) {
   const board = useDailyBoard(uid), reload = board.reload;
   const width = Math.min(useWindowDimensions().width, 560), art = Math.min(width * 0.46, 200);
   const [sharing, setSharing] = useState(false);
@@ -45,7 +48,7 @@ export function DailyResultView({ result, uid, onBack }: { result: DailyResult; 
   return <ScrollView testID="rf-daily-result" contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
     {top ? <Confetti /> : null}
     {/* Top 100 in India: the battleground victory charge. Everyone else: the trophy. */}
-    {battle ? <BattleVictory width={width - 32} rank={result.rank!} day={result.day} /> : <View style={styles.hero}>
+    {battle ? <BattleVictory width={width - 32} rank={result.rank!} /> : <View style={styles.hero}>
       <Alive kind="breathe"><Image source={TROPHY} contentFit="contain" style={{ width: art, height: art }} accessible={false} /></Alive>
       <Twinkles spots={[[20, 22, 16], [80, 18, 14], [50, 4, 12], [16, 74, 12], [84, 70, 14]]} />
     </View>}
@@ -57,7 +60,7 @@ export function DailyResultView({ result, uid, onBack }: { result: DailyResult; 
       <Panel style={styles.stat}><T w="heavy" size={28} color={arena.text} testID="rf-daily-time">{secs(result.ms)}</T><T w="bold" size={11} color={arena.muted}>total time</T></Panel>
     </View>
     <RaisedButton testID="rf-daily-share-open" glyph="whatsapp" height={58} streak label="SHARE MY RANK" sub="Champion card for WhatsApp" onPress={() => setSharing(true)} />
-    {result.reward ? <RewardPanel reward={result.reward} title={top ? "Top 10 in India!" : battle ? "Top 100 in India!" : "All India round done"} /> : null}
+    {result.reward ? <RewardPanel reward={result.reward} historical={!fresh} title={top ? "Top 10 in India!" : battle ? "Top 100 in India!" : "All India round done"} /> : null}
     {board.data ? <DailyBoardList items={board.data.items} total={board.data.total} /> : null}
     <T w="bold" size={12} color={arena.muted} style={styles.center}>{result.total} new PCM cards at midnight. Same cards for everyone, one try.</T>
     <RaisedButton testID="rf-daily-back" label="BACK TO RAPID FIRE" height={56} onPress={onBack} />

@@ -4,7 +4,7 @@ import Animated, { css, useReducedMotion } from "react-native-reanimated";
 import { Image } from "expo-image";
 import Svg, { Circle, Defs, Path, RadialGradient, Stop } from "react-native-svg";
 import { T } from "@/src/components/ui";
-import { playSfx } from "@/src/sfx";
+import { firstToday, playSfx } from "@/src/sfx";
 import { allIndia, arena } from "@/src/theme";
 import { Alive } from "./Art";
 import { Glitter } from "./Glitter";
@@ -35,18 +35,19 @@ function Rays() {
     d={`M${c} ${c} L${c + Math.cos(a - 0.1) * c} ${c + Math.sin(a - 0.1) * c} L${c + Math.cos(a + 0.1) * c} ${c + Math.sin(a + 0.1) * c} Z`} />)}</Svg>;
 }
 
-let cheered = ""; // the charge's sound plays once a day per app session
-
-export function BattleVictory({ width, rank, day }: { width: number; rank: number; day: string }) {
+export function BattleVictory({ width, rank }: { width: number; rank: number }) {
   const still = !!useReducedMotion(), inner = width - 5, k = inner / SW;
-  useEffect(() => { // the gallop as they charge in, then the war horn and the crowd
-    if (cheered === day) return;
-    cheered = day;
-    playSfx("scene_race", 0.8);
-    const t = setTimeout(() => playSfx("scene_cup", 0.9), 1100);
-    return () => clearTimeout(t);
-  }, [day]);
-  return <Glitter radius={24} ring={2.5} sparkles={4} inner={{ width: inner, height: inner * (SH / SW), backgroundColor: arena.bgDeep }}>
+  useEffect(() => { // the gallop as they charge in, then the war horn and the crowd: heard once a day, not each time the result is opened
+    let on = true, t: ReturnType<typeof setTimeout> | undefined;
+    void firstToday("charge", () => on).then((first) => {
+      if (!first) return;
+      playSfx("scene_race", 0.8);
+      t = setTimeout(() => playSfx("scene_cup", 0.9), 1100);
+    });
+    return () => { on = false; clearTimeout(t); };
+  }, []);
+  // The ring is exactly as wide as its picture (never stretched by a wide screen: an open Fold showed the ring's colours as a strip beside it).
+  return <Glitter radius={24} ring={2.5} sparkles={4} style={{ width, alignSelf: "center" }} inner={{ width: inner, height: inner * (SH / SW), backgroundColor: arena.bgDeep }}>
     <View testID="rf-battle-victory" accessibilityLabel={`Battleground victory. Top 100 in India, rank ${rank}`} style={[styles.stage, { left: (inner - SW) / 2, top: (inner * (SH / SW) - SH) / 2, transform: [{ scale: k }] }]}>
       <Fire still={still} wind />
       <Animated.View style={[styles.rays, once(still, SHOW, 700, 1300), run(still, SPIN, 22000)]}><Rays /></Animated.View>

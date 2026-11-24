@@ -46,6 +46,22 @@ export function setSoundPrefs(p: Partial<SoundPrefs>) {
 }
 export const useSoundPrefs = () => useSyncExternalStore((f) => { subs.add(f); return () => { subs.delete(f); }; }, () => prefs, () => prefs);
 
+// A greeting sound (the All India card's scene, the victory charge) plays once per Indian day on this phone, however
+// often the app is opened. The day each one last played is kept on the phone.
+const HEARD = "rf.heard.v1";
+let heard: Record<string, string> = {};
+const heardLoaded = storage.getItem<string | null>(HEARD, null).then((v) => { if (!v) return; try { heard = JSON.parse(v); } catch { /* start fresh */ } }).catch(() => {});
+/** True the first time it is asked on an Indian day, then false until midnight IST. An asker that has left the screen (`still` false) does not use the day up. */
+export async function firstToday(what: string, still: () => boolean = () => true) {
+  await heardLoaded;
+  if (!still()) return false;
+  const day = new Date(Date.now() + 19800000).toISOString().slice(0, 10);
+  if (heard[what] === day) return false;
+  heard = { ...heard, [what]: day };
+  void Promise.resolve(storage.setItem(HEARD, JSON.stringify(heard))).catch(() => {});
+  return true;
+}
+
 const players: Record<string, AudioPlayer> = {};
 let ready = false;
 

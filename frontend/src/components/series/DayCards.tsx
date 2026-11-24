@@ -75,7 +75,7 @@ const CHIP = 52, GAP = 8;
 const CHIP_FACE = Object.fromEntries(DAY_LOOK_ORDER.map(k => [k, <LinearGradient key={k} pointerEvents="none" colors={[DAY_LOOKS[k].from, DAY_LOOKS[k].to]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />])) as Record<DayLook, React.ReactElement>;
 const SEEN = { itemVisiblePercentThreshold: 10 };
 /** One chip per series day; opens on today. A tap runs the day's action (open analysis, resume or start); upcoming days just preview. */
-export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (d: DayInfo) => void }) {
+export function DayStrip({ days, selected, onSelect, prefix = "series" }: { days: DayInfo[]; selected: number; onSelect: (d: DayInfo) => void; prefix?: string }) {
   const list = useRef<FlatList<DayInfo>>(null);
   const index = Math.max(0, days.findIndex(d => d.day === selected));
   // Only the chips on screen shine; the rest stay still, so 50 days cost no more than the handful in view.
@@ -87,14 +87,14 @@ export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; select
   useEffect(() => {
     if (days.length) list.current?.scrollToIndex({ index: Math.max(0, index - 2), animated: true, viewPosition: 0 });
   }, [index, days.length]);
-  return <FlatList ref={list} testID="series-day-strip" horizontal showsHorizontalScrollIndicator={false} data={days} keyExtractor={d => String(d.day)}
+  return <FlatList ref={list} testID={prefix + "-day-strip"} horizontal showsHorizontalScrollIndicator={false} data={days} keyExtractor={d => String(d.day)}
     getItemLayout={(_, i) => ({ length: CHIP + GAP, offset: (CHIP + GAP) * i, index: i })} initialScrollIndex={Math.max(0, index - 2)}
     onScrollToIndexFailed={() => {}} style={{ marginHorizontal: -space.lg, flexGrow: 0 }} contentContainerStyle={{ paddingHorizontal: space.lg }}
     initialNumToRender={12} windowSize={5} extraData={seen} onViewableItemsChanged={onSeen} viewabilityConfig={SEEN}
     renderItem={({ item: d, index: i }) => {
       const on = d.day === selected, kind = dayLook(d.tone), look = DAY_LOOKS[kind];
       const score = dayAttempt(d)?.summary;
-      return <Press testID={"series-chip-" + d.day} onPress={() => onSelect(d)} accessibilityState={{ selected: on }}
+      return <Press testID={`${prefix}-chip-${d.day}`} onPress={() => onSelect(d)} accessibilityState={{ selected: on }}
         accessibilityLabel={`Day ${d.day}, ${istDate(d.date)}, ${d.label}${score ? `, ${score.score} of ${score.maximum}` : ""}`} style={styles.chipWrap}>
         <View style={styles.chipBox}>
           {/* Gloss, a corner-to-corner glint and a running edge; the glint reaches each chip a little after the one before it. */}
@@ -102,7 +102,7 @@ export function DayStrip({ days, selected, onSelect }: { days: DayInfo[]; select
             band={18} part={38} corner delay={(i % 8) * 140} rest={i < seen[0] || i > seen[1]} face={on ? styles.chipOn : styles.chip}>
             <T w="heavy" size={8.5} color={look.soft} style={{ letterSpacing: 1.2 }}>{d.isToday ? "TODAY" : "DAY"}</T>
             <T w="heavy" size={score ? 16 : 19} color={look.ink}>{d.day}</T>
-            {score ? <T testID={"series-chip-score-" + d.day} w="heavy" size={9} color={look.ink} numberOfLines={1}>{score.score}/{score.maximum}</T> : null}
+            {score ? <T testID={`${prefix}-chip-score-${d.day}`} w="heavy" size={9} color={look.ink} numberOfLines={1}>{score.score}/{score.maximum}</T> : null}
           </Shine>
         </View>
         <View style={[styles.chipDot, on && { backgroundColor: colors.onSurface }]} />

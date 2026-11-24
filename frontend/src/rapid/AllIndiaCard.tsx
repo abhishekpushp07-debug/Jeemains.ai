@@ -8,7 +8,7 @@ import { allIndia, arena } from "@/src/theme";
 import { GoldTitle } from "./arena";
 import { Glitter } from "./Glitter";
 import { Jelly, LiveDot } from "./juice";
-import { playSfx } from "@/src/sfx";
+import { firstToday, playSfx } from "@/src/sfx";
 import { DailyScene, SCENE_SOUND } from "./DailyScenes";
 import { DAILY_CARDS, DailyLook, DailyStatus, grouped, hms, useEndsIn } from "./daily";
 
@@ -17,7 +17,6 @@ export const TROPHY = require("../../assets/arena/daily_trophy.webp");
 
 const SHINE = css.keyframes({ "0%": { transform: [{ translateX: -140 }, { rotate: "18deg" }] }, "55%": { transform: [{ translateX: 560 }, { rotate: "18deg" }] }, "100%": { transform: [{ translateX: 560 }, { rotate: "18deg" }] } });
 
-let heard = false; // the card's sound plays once per app session: the first time it appears (popup or lobby)
 /** Play a scene's sound now (the styles page uses it as a preview). */
 export const playScene = (look: DailyLook) => playSfx(SCENE_SOUND[look], 0.85);
 
@@ -35,10 +34,11 @@ function copy(d?: DailyStatus | null) {
  */
 export function AllIndiaCard({ d, look = 2, size, onPress, onLongPress, paused, sound, testID = "rf-all-india" }: { d?: DailyStatus | null; look?: DailyLook; size: number; onPress?: () => void; onLongPress?: () => void; paused?: boolean; sound?: boolean; testID?: string }) {
   const still = useStill() || !!paused;
-  useEffect(() => {
-    if (!sound || heard) return;
-    const t = setTimeout(() => { if (!heard) { heard = true; playScene(look); } }, 450);
-    return () => clearTimeout(t);
+  useEffect(() => { // the card's sound greets the student once a day: the first time it appears (popup or lobby)
+    if (!sound) return;
+    let on = true;
+    const t = setTimeout(() => { void firstToday("card", () => on).then((first) => { if (first) playScene(look); }); }, 450);
+    return () => { on = false; clearTimeout(t); };
   }, [sound, look]);
   const left = useEndsIn(d?.ends_in), c = copy(d);
   const champ = d?.top?.[0] && d.you.status !== "done" ? `Today’s #1: ${d.top[0].you ? "You" : d.top[0].name} · ${d.top[0].correct}/${d.total}`

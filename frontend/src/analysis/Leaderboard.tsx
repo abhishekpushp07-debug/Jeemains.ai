@@ -7,6 +7,8 @@ import { TONE, mmss, pc } from "./format";
 import { Block, ChipButton, EmptyLine } from "./parts";
 
 const seen = new Map<string, { d: any; at: number }>();
+/** Forget a paper's leaderboard, so the next look asks the website again. */
+export const forgetBoard = (id: string) => { [...seen.keys()].forEach(k => { if (k.startsWith(id + "|")) seen.delete(k); }); };
 
 /** This paper's leaderboard, kept for a minute so the picker and the board share one request. */
 export function useBoard(id: string, q = "") {

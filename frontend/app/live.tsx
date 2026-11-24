@@ -10,6 +10,7 @@ import { JourneyCard } from "@/src/components/series/JourneyCard";
 import { DayCard, DayStrip, ResultsList, TodayCard } from "@/src/components/series/DayCards";
 import { ScoreTrend, trendSummary } from "@/src/components/series/ScoreTrend";
 import { DayMap } from "@/src/components/series/DayMap";
+import { BoardLink } from "@/src/components/series/Board";
 import { colors, space } from "@/src/theme";
 import { ScreenMotion } from "@/src/motion";
 import { DayInfo, dayAction, dayAttempt, istTime, seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
@@ -76,6 +77,8 @@ export default function Live() {
           {todayPaper(today) === "ready" ? <T testID="series-paper-ready" w="heavy" size={12} color={colors.success}>● Aaj ka paper ready hai — abhi shuru kar sakte ho</T> : null}
           <TodayCard series={d} day={today} last={lastScored} />
         </View>
+
+        {user ? <BoardLink onPress={() => router.push("/series-leaderboard" as any)} /> : null}
 
         <View style={{ gap: space.sm }} onLayout={e => { stripY.current = e.nativeEvent.layout.y; }}>
           <SectionLabel title="All days" right={<T size={12} color={colors.muted}>swipe ›</T>} />

@@ -31,6 +31,7 @@ function DailyRound() {
   const [reveal, setReveal] = useState<Reveal | null>(null);
   const [count, setCount] = useState(0); // 3-2-1 before the first card
   const [result, setResult] = useState<DailyResult | null>(null);
+  const [fresh, setFresh] = useState(false); // the round ended on this visit (not a finished round opened again)
   const [error, setError] = useState(""), [exit, setExit] = useState(false), [n, setN] = useState(0);
   const shownAt = useRef(0), timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const retry = useRef<{ i: number; choice: number | null; skip: boolean } | null>(null);
@@ -60,7 +61,7 @@ function DailyRound() {
       buzz(ok ? "success" : "error"); playSfx(ok ? "correct" : "wrong", ok ? 0.8 : 0.6);
       later(() => scrollRef.current?.scrollToEnd({ animated: !reduced }), 80);
     }
-    if (r.status === "done") { later(() => setResult(r.result), r.answer !== undefined ? 1800 : 0); return; }
+    if (r.status === "done") { const ended = r.answer !== undefined; later(() => { setFresh(ended); setResult(r.result); }, ended ? 1800 : 0); return; }
     setCorrect(r.correct);
     show(r, intro);
   }, [show, reduced]);
@@ -98,7 +99,7 @@ function DailyRound() {
 
   const finish = async () => {
     setExit(false);
-    try { const r = await rf<Reply>("/daily/finish", uid, { method: "POST", body: { exam: "JEE" } }); if (r.status === "done") setResult(r.result); }
+    try { const r = await rf<Reply>("/daily/finish", uid, { method: "POST", body: { exam: "JEE" } }); if (r.status === "done") { setFresh(true); setResult(r.result); } }
     catch (e: any) { setError(e.message); }
   };
   const back = () => (router.canGoBack() ? router.back() : router.replace("/(tabs)/rapid"));
@@ -106,6 +107,8 @@ function DailyRound() {
   const locked = choice !== null;
 
   return <ArenaBg dim testID="rf-daily-screen" style={{ paddingTop: insets.top + space.sm, paddingBottom: insets.bottom }}>
+    {/* The same 560 column as the rest of Rapid Fire, so on an open Fold or a tablet nothing is stretched past its picture. */}
+    <View style={styles.frame}>
     <View style={styles.top}>
       <Press testID="rf-daily-exit" onPress={() => (result || (!card && error) ? back() : setExit(true))} accessibilityLabel="Leave All India Rapid" style={styles.close}>
         <Icon name="close" size={22} color={colors.onSurface} />
@@ -121,7 +124,7 @@ function DailyRound() {
     </View> : null}
 
     {error ? <View style={styles.pad}><ErrorBox testID="rf-daily-error" error={error} retry={() => { setError(""); if (retry.current) send(retry.current); else setN((v) => v + 1); }} /></View> : null}
-    {result ? <DailyResultView result={result} uid={uid} onBack={back} /> : null}
+    {result ? <DailyResultView result={result} uid={uid} onBack={back} fresh={fresh} /> : null}
     {!result && !card && !error && !count ? <View style={styles.pad}><Skeleton h={380} /></View> : null}
     {!result && count ? <Animated.View key={count} entering={reduced ? undefined : ZoomIn.duration(260)} style={styles.count} testID="rf-daily-countdown">
       <T w="heavy" size={14} color={colors.custom_neonCyan} style={styles.spaced}>SAME {total} PCM CARDS · ALL OF INDIA</T>
@@ -161,6 +164,7 @@ function DailyRound() {
       </View>
       <T size={11} color={colors.muted} style={styles.hint}>One try a day · the clock is the server’s · next card comes by itself</T>
     </View> : null}
+    </View>
 
     <Sheet visible={exit} onClose={() => setExit(false)} testID="rf-daily-exit-sheet">
       <T w="heavy" size={19}>Leave the All India round?</T>
@@ -174,6 +178,7 @@ function DailyRound() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, pad: { padding: space.lg }, spaced: { letterSpacing: 1.5 },
+  frame: { flex: 1, width: "100%", maxWidth: 560, alignSelf: "center" },
   top: { flexDirection: "row", alignItems: "center", paddingHorizontal: space.lg, gap: space.md, minHeight: 56 },
   close: { width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.surfaceSecondary, borderWidth: 1, borderColor: colors.border },
   bars: { flexDirection: "row", gap: 2, paddingHorizontal: space.lg, marginBottom: space.md }, seg: { flex: 1, height: 4, borderRadius: 1 },
