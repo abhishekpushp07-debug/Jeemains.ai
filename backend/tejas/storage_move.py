@@ -111,24 +111,36 @@ async def _note(token, change):
 
 
 async def one(token, item, op):
-    """Copies one file. False = stop the run here (Supabase away)."""
+    """Copies one file. False = stop the run here (Supabase away, or the project blocked).
+    A file that Supabase alone returns is tried on both routes, then listed with the reason; it stays on Emergent and the rest carry on."""
     cur = op.get('current') or {}
-    resume = cur.get('transfer') if cur.get('key') == item['key'] else None
-    await _note(token, {'$set': {'current': {'key': item['key'], 'label': item['label'], 'transfer': resume}, 'lease_until': now() + LEASE}})
+    place = {'at': cur.get('transfer') if cur.get('key') == item['key'] else None}
+    await _note(token, {'$set': {'current': {'key': item['key'], 'label': item['label'], 'transfer': place['at']}, 'lease_until': now() + LEASE}})
 
     async def keep(info):
         await _note(token, {'$set': {'current.transfer': info, 'lease_until': now() + LEASE}})
 
     def progress(info):  # a big PDF saves its place every 6 MB (and keeps the run's lease), so a later try carries on
+        place['at'] = info
         from_thread.run(keep, info)
-    try:
-        ref = await run_in_threadpool(copy, item['old'], item['sha'], resume, progress)
-    except store.StorageWaiting as exc:
-        await _note(token, {'$set': {'state': 'waiting', 'lease': '', 'last_error': str(exc)[:300], 'waiting_since': now()}})
-        return False
-    except Exception as exc:  # noqa: BLE001  this one file stays on Emergent and is listed; the rest carry on
-        reason = ('Supabase ne yeh file nahi li (size ya type ki rok). File Emergent se hi chalti rahegi.' if isinstance(exc, store.SupabaseRefused) else
-                  str(exc)[:240] if isinstance(exc, ValueError) else 'Copy beech mein ruk gayi. File Emergent se hi chalti rahegi.')
+    reason = None
+    for _ in range(store.STALL_LIMIT + 1):
+        try:
+            ref = await run_in_threadpool(copy, item['old'], item['sha'], place['at'], progress)
+            reason = None
+            break
+        except store.StorageWaiting as exc:
+            if exc.scope not in ('file', 'stuck'):
+                await _note(token, {'$set': {'state': 'waiting', 'lease': '', 'last_error': str(exc)[:300], 'waiting_since': now()}})
+                return False
+            reason = f'Supabase ne yeh file nahi li. Wajah: {exc.reason}. File Emergent se hi chalti rahegi; Copy dobara dabane par phir koshish hogi.'[:240]
+            if exc.scope == 'stuck':
+                break
+        except Exception as exc:  # noqa: BLE001  this one file stays on Emergent and is listed; the rest carry on
+            reason = ('Supabase ne yeh file nahi li (size ya type ki rok). File Emergent se hi chalti rahegi.' if isinstance(exc, store.SupabaseRefused) else
+                      str(exc)[:240] if isinstance(exc, ValueError) else 'Copy beech mein ruk gayi. File Emergent se hi chalti rahegi.')
+            break
+    if reason:
         await _note(token, {'$inc': {'failed': 1}, '$set': {'current': None},
                             '$push': {'skip': item['key'], 'failures': {'$each': [{'label': item['label'], 'reason': reason, 'at': now()}], '$slice': -50}}})
         return True

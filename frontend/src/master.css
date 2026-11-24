@@ -320,6 +320,9 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .machine-waiting{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .upload-wait{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
 .upload-wait p{margin:0;flex:1 1 220px;min-width:0;overflow-wrap:anywhere}
+.upload-wait b{font-weight:800}
+.upload-wait.is-late{padding:10px 12px;border:1px solid var(--danger-line);border-radius:12px;background:var(--danger-soft)}
+.upload-late{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:14px}
 .machine-retry{display:inline-flex;align-items:center;gap:6px;min-height:var(--touch-target);padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface-alt);color:var(--ink);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:background-color var(--motion-fast),border-color var(--motion-fast)}
 /* Students: block / unblock */
 .student-search-bar{display:flex;gap:12px;margin-bottom:24px}

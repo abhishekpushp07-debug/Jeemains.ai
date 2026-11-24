@@ -13,6 +13,7 @@ export const marks=d=>d?`${d.minutes} min · +${d.correct} / ${d.wrong}`:'';
 export const fixLink=m=>m.kind==='book_mock'?`/super-admin/fix/${m.book_id}/${m.id}`:`/super-admin/write/${m.id}`;
 
 export const StatusLabel=({m})=>{
+ if(m.stuck)return ['Atki hai','attention'];
  if(m.status==='draft'&&m.rereading)return ['Draft · dobara padh rahe hain','processing'];
  if(m.status==='draft'&&m.to_fix)return ['Draft · '+m.to_fix+' fix karne hain','attention'];
  if(m.status==='draft'&&m.empty)return ['Draft · koi sawaal nahi','hidden'];

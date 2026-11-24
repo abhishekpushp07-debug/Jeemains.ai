@@ -62,7 +62,7 @@ async def read_batch(book, token, source):
 
 async def publish_batch(book, token, source):
     if book.paused:return False
-    published=0
+    published=0;stuck=None
     for mock in await mocks_for(book):
         if not (book.payload.get('auto_publish') or mock.publish_requested):continue
         if mock.state!='ready' or mock.issues or mock.published_generation==mock.generation:continue
@@ -74,12 +74,14 @@ async def publish_batch(book, token, source):
             await hold(book,token,mock,exc.detail)
         except StorageWaiting as exc:
             if exc.scope!='stuck':raise  # Supabase is away: the whole book waits for it and carries on; the mock is not held
-            # One picture that Supabase keeps returning: only this mock stays Draft with the reason; the book and its other mocks carry on.
-            await hold(book,token,mock,f'Is mock ki ek picture Supabase mein save nahi hui. Wajah: {exc.reason}. Dobara Live karne par phir koshish hogi.')
+            # One picture that Supabase keeps returning: only this mock waits (it stays Draft, nothing to fix in it); the book's other mocks carry on.
+            if not stuck:
+                exc.mock,exc.mock_id=(mock.chapter or {}).get('title') or mock.label,mock.id;stuck=exc
         except (ValueError,StorageError) as exc:
             # One mock that cannot be saved waits for the owner's next Publish; the book and its other mocks carry on.
             await hold(book,token,mock,exc)
         published+=1
+    if stuck:raise stuck  # the book says "Atki hai" with the reason; this mock is tried again every 15 minutes or on Dobara chalao
     return False
 
 
@@ -212,10 +214,13 @@ async def step(job):
         if isinstance(exc,StorageWaiting):
             # Supabase is away: the book keeps its state and saved work, shows that it waits, and the job runs again by itself.
             # One file that Supabase keeps returning ("Atki hai") stops alone and says why; other books carry on.
-            stuck=exc.scope=='stuck'
+            stuck=exc.scope=='stuck';what=getattr(exc,'mock','');base=book.payload.get('catalog_base')
             await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':(waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300],
-                    'kind':exc.scope,'code':exc.code,'reason':exc.reason[:200],'next':exc.step[:240],**({'stuck':True} if stuck else {})},
-                'payload.message':'Atki hai: yeh file Supabase mein nahi ja rahi. File surakshit hai; baaki kitaabein chal rahi hain.' if stuck else
+                    'kind':exc.scope,'code':exc.code,'reason':exc.reason[:200],'next':exc.step[:240],**({'stuck':True} if stuck else {}),
+                    **({'mock':what[:120],'mock_id':exc.mock_id} if what else {})},
+                **({'payload.catalog_base':base} if base is not None else {}),  # mocks published in this batch keep their place in the list
+                'payload.message':(f'Atki hai: "{what[:120]}" ki ek picture Supabase mein nahi ja rahi. Baaki mock aur kitaabein chal rahi hain.' if what else
+                    'Atki hai: yeh file Supabase mein nahi ja rahi. File surakshit hai; baaki kitaabein chal rahi hain.') if stuck else
                     'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.'}})
             raise
         import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
@@ -234,4 +239,6 @@ async def recover():
         {'state':{'$in':['attention_needed','ready']},'payload.reader_version':{'$ne':READER_VERSION}}]}).limit(20).to_list(20)
     from .book_models import Book
     for row in rows:
+        # A book that waits for Supabase, or whose file is stuck, already has its own waiting job: a second one would only try it more often.
+        if row['payload'].get('storage_wait') and await db.tejas_jobs.find_one({'kind':'book_step','payload.book_id':row['_id'],'status':{'$in':['queued','running']}},{'_id':1}):continue
         await enqueue_book(Book.from_mongo(row))

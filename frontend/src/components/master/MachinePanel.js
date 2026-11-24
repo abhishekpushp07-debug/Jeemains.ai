@@ -30,12 +30,20 @@ function BookLine({b,stuck,busy,onRetry}){
  </li>;
 }
 
+// A file Supabase keeps returning ("Atki hai"): only it stopped; it says why and can be tried again at once.
+function StuckFile({b,busy,onRetry}){
+ return <li className="machine-book" data-testid={'machine-storage-stuck-'+b.id}>
+  <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>Atki hai · {b.waiting_minutes} min se. {b.mock?`"${b.mock}" ki ek picture`:'Yeh PDF'} Supabase mein nahi ja rahi.{b.reason?` Wajah: ${b.reason}.`:''} Har 15 minute mein apne aap phir koshish hoti hai.</small></div>
+  <button type="button" className="machine-retry" disabled={busy} onClick={()=>onRetry(b)} data-testid={'machine-retry-'+b.id}>{busy?<Loader2 size={14} className="spin" aria-hidden="true"/>:<RotateCw size={14} aria-hidden="true"/>}Dobara chalao</button>
+ </li>;
+}
+
 function Waiting({data,onReload}){
  const books=data.storage_waiting||[];
  if(!books.length&&!data.storage_waiting_jobs)return null;
  return <div className="machine-waiting" data-testid="machine-waiting-list">
   <ul className="machine-books">{books.map(b=><li key={b.id} className="machine-book is-waiting" data-testid={'machine-waiting-'+b.id}>
-   <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>{b.pages?`${b.read_pages} / ${b.pages} page · `:''}{b.waiting_minutes} min se Supabase ka intezaar. File surakshit hai, apne aap aage chalegi.</small></div>
+   <div className="machine-book-main"><strong>{b.title||'Bina naam ki PDF'}</strong><small>{b.pages?`${b.read_pages} / ${b.pages} page · `:''}{b.waiting_minutes} min se Supabase ka intezaar. File surakshit hai, apne aap aage chalegi.{b.reason?` Wajah: ${b.reason}.`:''}</small></div>
   </li>)}</ul>
   <RetryStorageButton onDone={onReload} testId="machine-storage-retry"/>
  </div>;
@@ -50,7 +58,7 @@ export function MachinePanel({data,onReload}){
   catch(e){toast.error(e.message);}
   finally{setBusy('');onReload();}
  }
- const c=data.cron,books=[...data.stuck.map(b=>[b,true]),...data.failed_books.map(b=>[b,false])];
+ const c=data.cron,books=[...data.stuck.map(b=>[b,true]),...data.failed_books.map(b=>[b,false])],returned=data.storage_stuck||[];
  const cron=!c.configured?'set nahi hai':c.minutes_ago==null?'abhi tak nahi chali':`${c.minutes_ago} min pehle chali`;
  const kinds=Object.entries(data.failed_jobs||{}).map(([k,n])=>`${KIND[k]||k} ${n}`).join(' · ');
  const alert=data.attention||lowDisk(data);
@@ -59,10 +67,12 @@ export function MachinePanel({data,onReload}){
   <Line ok={!c.late} label="Scheduled jaanch" value={cron} testId="machine-cron"/>
   <Line ok={!data.failed_total} label="Fail kaam (24 ghante)" value={data.failed_total?`${data.failed_total} · ${kinds}`:'0'} testId="machine-failed-jobs"/>
   <Line ok={!(data.storage_waiting||[]).length&&!data.storage_waiting_jobs} label="Supabase ka intezaar" value={`${(data.storage_waiting||[]).length} PDF · ${data.storage_waiting_jobs||0} kaam`} testId="machine-storage-waiting"/>
+  <Line ok={!returned.length} label="Supabase mein atki file" value={String(returned.length)} testId="machine-storage-stuck"/>
   <Line ok={!data.stuck.length} label="15 min se atki PDF" value={String(data.stuck.length)} testId="machine-stuck"/>
   <Line ok={!data.failed_books.length} label="Fail PDF" value={String(data.failed_books.length)} testId="machine-failed"/>
   <Line ok={!lowDisk(data)} label="Disk khali" value={`${gb(data.disk.free)} / ${gb(data.disk.total)}`} testId="machine-disk"/>
   <Waiting data={data} onReload={onReload}/>
+  {returned.length>0&&<ul className="machine-books" data-testid="machine-storage-stuck-list">{returned.map(b=><StuckFile key={b.id} b={b} busy={busy===b.id} onRetry={retry}/>)}</ul>}
   {books.length>0&&<ul className="machine-books" data-testid="machine-book-list">{books.map(([b,stuck])=><BookLine key={b.id} b={b} stuck={stuck} busy={busy===b.id} onRetry={retry}/>)}</ul>}
   <p className="storage-meta" data-testid="machine-files">Kul save hui file: {data.files_saved.toLocaleString('en-IN')}</p>
  </section>;

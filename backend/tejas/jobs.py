@@ -181,6 +181,10 @@ async def run_job(id, drain=True):
                     'error': 'This file is stuck; it is tried again every 15 minutes.' if stuck else 'Waiting for file storage; it carries on by itself.',
                     'storage_waits': {'$add': [{'$ifNull': ['$storage_waits', 0]}, 1]},
                     'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}])
+                if stuck and kind == 'book_step':
+                    # One stuck file keeps one 15-minute clock: an older waiting job of the same book (left by an earlier Dobara chalao) steps aside.
+                    await jobs.update_many({'kind': kind, 'payload.book_id': j['payload']['book_id'], 'status': 'queued', 'stuck': True, 'id': {'$ne': id}},
+                                           {'$set': {'status': 'done', 'progress': 100, 'stuck': False, 'error': '', 'message': 'A newer try of this stuck file took over.'}})
                 kick_later(kind, delay + 1)
                 return True
             if kind == 'book_step' and isinstance(exc, HTTPException) and exc.status_code == 409 and j.get('busy_waits', 0) < BUSY_WAITS:
@@ -269,13 +273,15 @@ def kick_later(kind, seconds):
     run_later(drain_lane, kind, seconds=seconds)
 
 
-async def wake_uploads():
-    """Studio imports and chapter books that waited for Supabase run again now (also after a server restart)."""
+async def wake_uploads(stuck=False):
+    """Studio imports and chapter books that waited for Supabase run again now (also after a server restart).
+    One whose own file is stuck keeps its 15 minutes: it runs again only at the scheduled check (stuck=True) or on Retry."""
     from .imports import imports, process_import
     from .chapter_books import books, process_book
     n = 0
+    where = {'status': 'queued', 'storage_wait': {'$exists': True}, **({} if stuck else {'stuck': {'$ne': True}})}
     for col, fn in ((imports, process_import), (books, process_book)):
-        for r in await col.find({'status': 'queued', 'storage_wait': {'$exists': True}}, {'id': 1}).sort('storage_wait', 1).limit(20).to_list(20):
+        for r in await col.find(where, {'id': 1}).sort('storage_wait', 1).limit(20).to_list(20):
             run_later(fn, r['id'], seconds=0)
             n += 1
     return n
@@ -403,7 +409,7 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
     await recover()
     import tejas_storage
     if tejas_storage.supabase_on():
-        await wake_uploads()
+        await wake_uploads(stuck=True)
         from .storage_move import resume
         await resume()
     selected = []

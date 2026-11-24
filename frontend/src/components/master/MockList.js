@@ -19,7 +19,7 @@ const REREAD='PDF dobara padhi ja rahi hai. Padhai poori hone ke baad Live kar s
 function LiveSwitch({m,busy,onPick}){
  const on=['live','scheduled','publishing'].includes(m.status);
  const blocked=busy||m.status==='publishing'||m.status==='ended'||(!on&&(m.to_fix>0||m.empty||!!m.rereading));
- const word={scheduled:'Scheduled',publishing:'Live ho raha hai',ended:'Khatam'}[m.status]||(on?'Live':'Off');
+ const word=m.stuck?'Atki hai':{scheduled:'Scheduled',publishing:'Live ho raha hai',ended:'Khatam'}[m.status]||(on?'Live':'Off');
  const why=on?undefined:m.rereading?REREAD:m.to_fix>0?'Pehle iske marked sawaal fix kijiye':undefined;
  return <label className={'master-live-switch'+(on?' is-on':'')} title={why}>
   <Switch checked={on} disabled={blocked} onCheckedChange={v=>onPick(v?'live':'off',[m])} aria-label={(on?'Off karo: ':'Live karo: ')+m.title} data-testid={'mock-live-switch-'+m.id}/>
@@ -63,6 +63,7 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
   <span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
   <div className="admin-row-main"><strong data-testid={'mock-title-'+m.id}>{m.locked&&<Lock size={13} className="master-lock" aria-label="Locked"/>}{m.title}</strong><small>{facts(m)}</small>
    {m.rereading&&<small className="master-reread" data-testid={'mock-rereading-'+m.id}><Loader2 size={13} className="spin" aria-hidden="true"/>dobara padhi ja rahi hai · {m.rereading.read_pages}/{m.rereading.pages} page</small>}
+   {m.stuck&&<small className="admin-reason" data-testid={'mock-stuck-'+m.id}>Atki hai: iski ek picture Supabase mein nahi ja rahi, isliye yeh abhi Live nahi hua.{m.stuck.reason?` Wajah: ${m.stuck.reason}.`:''} Har 15 minute mein apne aap phir koshish hoti hai; abhi ke liye upar Uploads mein “Dobara chalao” dabaiye.</small>}
    {m.replace_pending&&<small className="admin-replacing">“{m.replace_pending}” isko replace karega. Woh Live hote hi yeh Library mein chala jayega.</small>}<DuplicateNote m={m}/></div>
   <div className="master-row-status"><LiveSwitch m={m} busy={busy} onPick={onPick}/><StatusMenu m={m} busy={busy} onPick={onPick}/></div>
   <div className="admin-test-actions">{m.status==='draft'&&m.count>0&&!m.rereading&&<TryAsStudent m={m}/>}<MainAction m={m}/>{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Naam badlo: '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>

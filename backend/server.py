@@ -200,10 +200,11 @@ async def validation_error(request, exc):
 
 @app.exception_handler(StorageWaiting)
 async def storage_waiting(request, exc):
-    # Super Admin hears plainly that Supabase is away and nothing was half-saved; students get the usual short message.
+    # Super Admin hears plainly whether Supabase is away or only this one file was returned, and that nothing was half-saved; students get the usual short message.
     admin = request.url.path.startswith(('/api/admin', '/api/studio'))
     why = f" Wajah: {exc.reason}." if getattr(exc, 'reason', '') else ""
-    message = "Supabase abhi file nahi le raha. Kuch aadha save nahi hua; thodi der mein phir try kijiye." + why if admin else "Private content is temporarily unavailable. Please retry shortly."
+    lead = "Yeh file Supabase mein save nahi hui (Supabase chal raha hai, sirf yahi file lauti)." if getattr(exc, 'scope', 'away') in ('file', 'stuck') else "Supabase abhi file nahi le raha."
+    message = lead + " Kuch aadha save nahi hua; thodi der mein phir try kijiye." + why if admin else "Private content is temporarily unavailable. Please retry shortly."
     response = error_response(message, 503, "storage_waiting" if admin else "vault_unavailable")
     response.headers["Retry-After"] = "30" if admin else "3"
     return response
