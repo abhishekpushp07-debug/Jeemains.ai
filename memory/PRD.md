@@ -1095,3 +1095,14 @@ This does NOT prove uploads failed or that no draft data exists. Admin/studio/da
 - NOT checked: a real phone build; a real AITS day (series opens 9 Dec); a paper with "galat" questions (the learner's only paper is 75 skipped); questions the website sends in cut pieces inside Misfire; BITSAT / COMEDK papers (the learner has none).
 - CEO dashboard kit link re-issued for the owner: grant 944cb43a-7d5a-462c-9c0b-7056af981f91, expires 2026-12-01 00:50 UTC (checked: 200, application/zip, 13,884 bytes). Never write the bearer URL into files.
 
+
+## Deployment health check (24 Nov 2026, after Misfire) — WARN, no blockers; nothing changed by this check
+- deployment_agent (read-only, by reading files): status WARN, no blocker. Stack, port 8001, supervisor command, DB name from env, no dotenv override, app.json identity + assets, no eas.json, no destructive DB work at startup: all fine.
+- Main agent's own checks: `/health` 200 on 8001; 182 backend Python files parse; lint clean on `frontend/app` and `frontend/src`; `yarn.lock` has an entry for all 43 `package.json` packages; no deprecated Expo packages; `/api/legal/privacy` public (200); preview 200. The 3 tracebacks in the backend log (`NameError: cutoff`, `ceo_api`) are old mid-edit reloads from the Rank / CEO work, not the running process (started 04:32 UTC, no backend file changed since; `/api/rank/pdf/cutoff` 422 and `/api/ceo/overview` 401 without sign-in, i.e. registered).
+- Warnings left as they are (owner asked for a check only):
+  1. Root `.gitignore` ignores `.env` files; `backend/.env` and `frontend/.env` are not in git. Same warning as the earlier checks, left on purpose (keys stay out of the repo). Fine if the deploy copies the workspace / injects env; not confirmed from here.
+  2. `frontend/package-lock.json` is back next to `yarn.lock` (yarn project; both untracked — the auto-commit skips lockfiles). NOT removed. Remove only on the owner's word.
+  3. Store review: no demo phone + PIN documented for Apple / Google reviewers (account deletion and privacy policy are present).
+- The report said `memory/test_credentials.md` does not exist: wrong, it exists and is git-ignored.
+- NOT checked: a real production deploy or store build; `yarn install --frozen-lockfile` was not run (entries matched only); the agent says its URL / DB scans were not exhaustive.
+
