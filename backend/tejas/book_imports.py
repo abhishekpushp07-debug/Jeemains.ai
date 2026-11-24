@@ -257,6 +257,8 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
         elif body.action in ('resume','retry','publish'):
             if book.state=='uploading':raise HTTPException(409,'Finish transferring the PDF first.')
             book.paused=False;book.state='received' if not book.payload.get('source_path') else 'reading' if book.payload.get('read_pages',0)<book.payload.get('pages',0) else 'matching'
+            wait=book.payload.get('storage_wait') or {}
+            if wait.get('stuck'):book.payload['storage_wait']={'since':wait['since'],'at':now(),'retrying':True}  # the row says "trying again" until this try ends
             run=True
         elif body.action=='publish_ready':
             if book.state=='uploading':raise HTTPException(409,'Finish transferring the PDF first.')

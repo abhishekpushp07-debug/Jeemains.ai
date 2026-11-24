@@ -1,234 +1,196 @@
-# Super Admin ka gehra re-audit: 11 charan me jaanch, ek hi daur me sudhaar, ant me ek report
+# Supabase pipeline ki marammat: PDF na atke, ek galti sabko na roke, badge sach bole
 
-Super Admin ke har hisse ki 11 charan me jaanch hoti hai: PDF machine, "fix required", upload, Master ke raaste, haq aur suraksha, bada data, design, phone, speed, aur jeelive.ai ki sirf-padhne wali jaanch.
-Jo galti milti hai woh isi daur me theek hoti hai. Ant me ek report milti hai: kya mila, kya badla, pehle aur baad ka saboot, aur owner ke karne ke kaam.
+Super Admin ki file-save machine (PDF aur pictures Supabase me) theek hoti hai: badi PDF ka 0% par atakna band, ek file ki galti se baaki kitaabon ka rukna band, aur storage badge wahi dikhata hai jo sach hai.
+Har ruki cheez apni asli wajah aur agla kadam khud batati hai, aur koi mock tabhi Live hota hai jab uski har picture Supabase me maujood saabit ho.
 
-Yeh plan likhte samay koi test nahi chala aur koi code nahi badla.
+Yeh plan likhte samay koi code nahi badla aur live par kuch nahi chheda gaya. Live ke logs is dauran nahi padhe ja sake, isliye neeche har baat ke saath likha hai ki woh saabit hai ya sirf sabse sambhav.
 
 ## Kiske liye
 
-- **Owner (Super Admin):** PDF upload karta hai, mock theek karta hai, Live karta hai. Chahta hai ki machine faltu blockage na dikhaye, tez chale, aur phone par bhi poori chale.
-- **Reviewer:** sirf ruke mock aur student reports theek karta hai. Usse zyada kuch nahi khulna chahiye.
-- **Students:** Super Admin nahi dekhte, par wahi paper pate hain jo yahan se nikalta hai. Galat cut ya galat answer key unhi tak pahunchti hai.
+- **Owner (Super Admin):** PDF upload karta hai aur mock Live karta hai. Use sach chahiye: file gayi ya nahi, kyun ruki, ab kya karna hai.
+- **Students:** Super Admin nahi dekhte, par wahi paper pate hain jo yahan se nikalta hai. Adhoori pictures wala paper un tak nahi pahunchna chahiye.
+- **App team:** unke liye kuch nahi badalta. App jo server call karta hai unka jawab waisa hi rehta hai.
 
 ## Kya hoga aur kaise
 
-### 1. Tareeka
+### 1. Yeh sab kyun ho raha hai
 
-| Kadam | Kya hota hai |
-| --- | --- |
-| 1. "Pehle" ka record | Har Super Admin screen ki picture (desktop 1920 aur phone 390), speed ke number, saari kitaabon ka scan record, aur haq ki table. Sudhaar se pehle. |
-| 2. Jaanch, bina kuch badle | 11 charan. Har charan ki jaanch alag hoti hai aur us dauran koi file nahi badalti. |
-| 3. Ek mili-juli list | Har galti ke saath: kahan hai, dobara kaise dikhegi, saboot, aur kitni gambhir hai. |
-| 4. Ek hi daur me sudhaar | Sabse gambhir pehle. Har file ek hi haath se badalti hai, taaki do sudhaar aapas me na takrayein. |
-| 5. Alag se dobara test | Sudhaar karne wale se alag ek poora test run. Kadam 1 ke wahi naap dobara. |
-| 6. Ek report | Section 7 me likha hai. |
+Screenshot (jeelive.ai, 24 Nov, 10:43): badge hara "Storage: Supabase 1698 ms" aur saath me laal bindi; "mathematics chapterwise" par "Original Supabase mein: 0% · 0 KB / 49.1 MB" aur "Supabase ka intezaar · 342 min se".
 
-Is daur me owner se koi sawaal nahi poocha jata. Jahan faisla lena pade, woh is plan ke niyam se liya jata hai aur report me likha jata hai.
+| # | Kadi | Kya hota hai | Kitna pakka |
+| --- | --- | --- | --- |
+| 1 | Badi file ka raasta alag hai | 6 MB tak ki file (saari pictures) ek hi request me jati hai. Usse badi file (original PDF) 6 MB ke tukdon me, doosre raaste aur Supabase ke doosre pate se jati hai. Badge sirf ek nanhi file bhej kar jaanchta hai. | Saabit (code) |
+| 2 | Is PDF ka pehla tukda hi manzoor nahi ho raha | "0 KB" ka matlab: Supabase ne upload shuru karne ki haan kahi, par ek bhi tukda manzoor nahi hua. | Saabit (screen + code) |
+| 3 | Kyun manzoor nahi ho raha | Tukdon me bhejte samay "purani file ke upar likhne ki ijazat" sirf pehli request me jati hai, har tukde ke saath nahi. Us pate par file pehle se ho toh Supabase har tukda lautata hai (409, "already exists"). Wahi PDF hamesha wahi pata pati hai. Aisa do tarah ho sakta hai: (a) wahi PDF pehle upload hui thi aur uska record Library se delete hua (Library delete Supabase ki file nahi hatata; record ke mutabik 23 Nov ko Library se 7 uploads delete hue the, yeh PDF unme thi ya nahi woh Pocket 0 me dekha jata hai); (b) pichhli koshish me aakhri tukda pahunch gaya par uska jawab raaste me kho gaya. | Sabse sambhav, abhi saabit nahi |
+| 4 | Har galti ko "Supabase chala gaya" maana jata hai | Kisi bhi ek file ki nakaami par machine us server par SAARI nayi files ke liye Supabase ko 15 second se 5 minute "aaram" de deti hai. Ek kharab PDF doosri kitaabon ki pictures ka save aur publish bhi rok deti hai. | Saabit (code) |
+| 5 | Hara badge, laal bindi aur ghoomta chakkar | Hari bindi = nanhi file wali jaanch paas. Laal bindi = machine panel ke mutabik ek PDF ruki hai. Dono apni jagah sach hain, par saath me uljhate hain. Jaanch paas hote hi aaram hat jata hai aur saara ruka kaam ek saath jagta hai. Har server par PDF ka kaam ek samay me ek hi chalta hai, sabse purana pehle. Isliye wahi kharab PDF baar-baar us jagah ko gher leti hai: har koshish me poori PDF dobara jodi jati hai aur pehla tukda 6 baar tak bheja jata hai. Phir woh fail hoti hai, aaram lagta hai, aur jis kitaab ko usi pal picture ya PDF save karni thi woh bhi ruk jati hai. Super Admin khula ho toh yeh lagbhag har minute dohrata hai. Isi se "active dikhta hai, phir apne aap ruk jata hai, books aage nahi badhti". | Code se nikla; live par yeh kram dekha nahi gaya |
+| 6 | Do server, do rai | Storage ki haalat har server apni yaad me rakhta hai. Pichhli report ke mutabik live par 2 server hain. Badge ek se poochta hai, kaam doosre par ho sakta hai. | Saabit (code) |
+| 7 | Wajah chhupi rehti hai | Row hamesha "apne aap aage chalega" kehti hai (342 minute se) aur Supabase ka asli jawab nahi dikhati. Koi had nahi jiske baad woh "atki hai" kahe. | Saabit (screen + code) |
 
-**Galti kitni gambhir hai**
+Kadi 3 ke doosre sambhav kaaran, jo pehle kadam me saath hi jaanche jate hain: adhe upload par Supabase ka lock (423), aur badi file wale pate par time-out.
 
-| Darja | Matlab |
-| --- | --- |
-| S1 Gambhir | Student ko galat paper ya galat answer; data ka nuksaan; bina haq ke access; koi secret bahar |
-| S2 Bada | Owner ka kaam rukta hai (upload, fix, Live); faltu blockage; galat ginti |
-| S3 Madhyam | Dheema, uljhane wala, phone par mushkil |
-| S4 Chhota | Dikhawat, shabd |
+**Jo nahi toota hai**
+- Pictures (chhoti files) ka save hona. Woh tabhi rukti hain jab kadi 4 ka "aaram" laga ho.
+- Picture chhoti karne ke dono raaste (save ke samay bina pixel badle chhoti PNG; student ko bhejte samay lossless WebP). Dikkat picture banne ke baad Supabase me jane ke raaste me hai, banne me nahi.
+- Students ka padhna "aaram" se nahi rukta.
+- Sign in, answer save, submit, score aur rank Supabase par nirbhar nahi hain.
 
-### 2. Jaanch ke 11 charan
+### 2. Kitne kon se socha gaya
 
-| # | Charan | Kya jaancha jata hai |
+| # | Kon | Aaj ki haalat | Kahan theek hota hai |
+| --- | --- | --- | --- |
+| 1 | Badi file ka raasta | Pehla tukda atakta hai; ek hi raasta hai | Pocket 1 |
+| 2 | Chhoti files (pictures) | Theek, par badi file ki galti se rukti hain | Pocket 2 |
+| 3 | Intezaar aur atakne ka farq | Koi farq nahi; sab "intezaar" | Pocket 2 |
+| 4 | Status ka sach | Sirf nanhi file ki jaanch | Pocket 3 |
+| 5 | Do server | Apni-apni yaad | Pocket 3 |
+| 6 | Wajah ka dikhna | Chhupi hui | Pocket 3 |
+| 7 | Picture sahi save hui ya nahi | Save ke samay fingerprint likha jata hai; Live se pehle Supabase me maujoodgi nahi jaanchi jati; kami tabhi dikhti hai jab student paper khole | Pocket 4 |
+| 8 | Atki PDF ki wapsi | Uske hisse server par surakshit hain | Deploy ke baad apne aap |
+| 9 | Wahi PDF dobara upload | Wahi pata; Library delete ke baad file Supabase me padi rehti hai | Pocket 1; safai Phase 3 |
+| 10 | Supabase account ki hadein | File size ki default had, spend cap, door ka region (nanhi file 1.7 second) | Owner ke kaam; Phase 3 |
+| 11 | Exam ke din students ka padhna | Doosri copy nahi (owner ka faisla). Jo picture server ki yaad me nahi, woh Supabase se hi aati hai; Supabase chup ho toh ek request lagbhag 80 second tak latak sakti hai | Phase 2 |
+| 12 | Purana kaam na toote | Section 5 ki rekha | Har pocket |
+
+### 3. Phase 1: paanch chhote pocket
+
+Har pocket alag se poora hota hai aur alag se deploy ho sakta hai. Pocket 1 jaan-boojh kar sabse chhota hai, taaki live ka atkaav sabse pehle hate.
+
+**Pocket 0: Asli wajah ka saboot (kuch badle bina)**
+- Live par sirf padhna: atki PDF ke saath save hua Supabase ka asli jawab, pichhle 24 ghante ki storage galtiyan wajah ke hisaab se gini hui, kitne server chal rahe hain, aur kaun si doosri kitaab ruki hai.
+- Preview par wahi haalat test file se dobara banti hai: ek badi file ek hi pate par do baar, aur aakhri tukde ka jawab kho jana.
+- Owner ko ek chhoti report milti hai, kisi sudhaar se pehle. Wajah kuch aur nikle toh Pocket 1 usi par lagta hai aur yeh report me likha jata hai. Bina deploy ka koi surakshit upaay ho toh woh bhi isi report me aata hai.
+
+**Pocket 1: Badi file ka raasta pakka**
+1. Upar likhne ki ijazat har tukde ke saath jati hai, sirf pehli request me nahi.
+2. "Pehle se hai?" jaanch: bhejne se pehle aur har nakaam koshish ke baad machine dekhti hai ki us pate par wahi file poori maujood hai ya nahi. Ho toh use poora padh kar fingerprint se milaya jata hai; mil jaye toh dobara nahi bheji jati.
+3. Atka hua adha upload: do koshish me ek bhi tukda aage na badhe toh purana adha upload chhod kar naya shuru hota hai. Aaj wahi adha upload 20 ghante tak dohraya ja sakta hai.
+4. Doosra raasta: tukdon wala raasta lagataar do baar nakaam ho aur chhoti file ja rahi ho, toh wahi PDF ek hi request me bheji jati hai (Supabase is tarah 5 GB tak leta hai).
+5. Supabase ka "lock" wala jawab (423) intezaar maana jata hai, nakaami nahi.
+6. Har badi file ke save hone ke baad Supabase me uska size milaya jata hai; tabhi kitaab aage padhi jati hai.
+
+**Pocket 2: Ek file ki galti us file tak**
+
+| Galti ka prakar | Pehchaan | Machine kya karti hai |
 | --- | --- | --- |
-| 1 | PDF machine | Reader, cutter, chapter split, answer key, solutions, aur naya version aane par kitaab ka apne aap dobara padha jana. Saari maujooda kitaabon ki local copy dobara scan hoti hai, sirf memory me. Nateeja pichhle record se milaya jata hai. |
-| 2 | "Fix required" ki sachchai | Har tarah ka blockage, ginti ke saath: asli hai ya faltu. Ginti Master, Fix list aur mock ke andar ek jaisi hai ya nahi. Dobara padhte samay purani ginti ka dikhna. "Confirm printed examination rules…" wala prompt. Override. |
-| 3 | Upload aur storage | Ek PDF, batch upload, alag answer key aur solution PDF, beech me ruk kar resume, wahi PDF dobara, duplicate ki chetavni, publish ka progress, Supabase band ho toh Emergent, 10 minute wali chetavni, net band, do upload ek saath, galat file, 50 MB ki photo. |
-| 4 | Master ke raaste | Exam › Type › Mock. Draft, Live, Scheduled, Off, Library. Schedule aur Live exam. AITS ke din. Write editor. Chapter split. Fix aur Proof. Try as student. Library (delete, restore, replace). Students, Team, Reports. Har button aur har link. Do baar dabane par do kaam toh nahi hote. Beech me refresh ya Back. Net band me "saved" toh nahi dikhta. Khaali form. Sirf keyboard se poora kaam. Doosre time zone ke browser me IST ka din aur samay. |
-| 5 | Haq aur taale | Ek table: owner, reviewer, student, bina login × Super Admin ka har kaam. Screen chhod kar seedha server ko call. Kisi aur ki ID se call. Request me role ya status badal kar bhejna. Reviewer hatate hi uska access band. Student ka PIN reset staff account ko na chhoo sake. Browser ki files aur git history me koi secret. Private file store aur khatm hone wale link. Login session ki settings. Logs me password ya token. Mock ke naam, option ke text, likhe hue sawaal, leaderboard naam ya photo (SVG) me chhupa script. |
-| 6 | Bill aur bheed se bachav | Login, sign-up, PIN reset aur owner login par had. Ek hi call 100 baar. Upload ka size aur file ka prakar. AI ka call kaun chala sakta hai. Ek click me account band karna. Libraries ki jaani-pehchaani kamzoriyan. Debug band. Test account aur test data. |
-| 7 | Bada data aur database | 10,000 students, 2,000 mocks, 50 kitaabein aur bhari Library ke saath har screen. 200 akshar aur emoji wala naam. Ek hi email alag capital me. Index. Baar-baar wahi query. Lambi list page-wise. Cache ke niyam. Bhaari kaam background me. Scheduled kaam aur uski nakaami ka dikhna. |
-| 8 | Design ek jaisa, har state | Pehle Super Admin ka DESIGN.md. Phir rang, font size, spacing, corner us par. Ek jaise button, card, input. Loading, khaali aur error ki apni screen. Button ka hover, pressed, disabled. Form ki galti wahin dikhna. Submitting, success, failure. Modal, dropdown, tab ka transition. Light aur dark dono me padhne layak. Shabd. Placeholder text. Har screen ka apna title aur ek main button. |
-| 9 | Phone aur CSS | 390 px par side scroll nahi. Mobile menu. Tap ki jagah 44 px. Text 200% bada karne par layout. good-css ki teen tarah ki galtiyan (section 6). Safari ka engine. |
-| 10 | Speed | Pehle aur baad ka naap. Sabse bhaari packages. Bhaari hisse (editor, fix tool, charts) zaroorat par load. Skeleton. Ek ke baad ek hone wale server call ek saath. Kamzor Android aur slow 4G par main raaste. |
-| 11 | jeelive.ai (sirf padhna) aur launch ki taiyari | Live par reader ka kaun sa version chal raha hai. AITS aur BITSAT ki kitaabein dobara padhi gayi ya nahi, aur unki ginti. Live storage ki 500 wali galti. Scheduled kaam. Live browser files me secret. Admin aur login page Google se bahar. Na-maujood page. Owner ke dashboard wale kaam. |
+| Supabase door ya dheema | Jawab nahi, ya Supabase ki apni galti (5xx, 429) | Jaisa aaj: saara naya kaam rukta hai, Supabase lautte hi apne aap chalta hai |
+| Supabase project par rok | Billing ya usage ki rok (402), project paused (540), key galat | Naya kaam rukta hai; saaf likha aata hai ki Supabase dashboard me kya dekhna hai |
+| Sirf yeh file nahi ja rahi | Supabase jawab de raha hai par isi file ko lauta raha hai, ya wahi file 3 baar bina ek tukda badhe ruki | Sirf yahi file "atki hai" hoti hai. Supabase ko aaram nahi diya jata. Baaki kitaabein chalti rehti hain. |
 
-Charan 1 me scan hone wali kitaabein: physics, chemistry, maths ki chapter kitaabein (4,650 sawaal), boxed chemistry (1,250), AITS maths (1,250), AITS JEE Main ki do kitaabein (25-25 mock), BITSAT Logical Reasoning (18 chapter, 900 sawaal), BITSAT Chemistry (32 chapter, 1,600 sawaal), aur jo bhi PDF workspace me maujood ho. Database aur storage me kuch nahi likha jata. AI ka koi credit nahi lagta.
+- "Atki hai" wali file har minute nahi, har 15 minute par ek baar apne aap dobara koshish karti hai, aur "Dobara chalao" button se turant. Uske hisse server par rehte hain; kuch delete nahi hota.
+- Badge ki jaanch paas hone par sirf wahi kaam jagta hai jo Supabase ke lautne ka intezaar kar raha tha, atki file nahi.
+- Size ya file ke prakar ki rok pehle ki tarah turant saaf message ke saath rukti hai.
 
-### 3. Jo pehle se pata hai (jaanch yahin se shuru hoti hai)
+**Pocket 3: Sach bolne wala badge**
+1. Storage ki haalat database me rakhi jati hai, har server ki apni yaad me nahi. Dono server ek hi baat dikhate hain.
+2. Badge do raaston ka haal alag dikhata hai: "Pictures (chhoti file)" aur "PDF (badi file)". Hara tabhi jab dono theek hon.
+3. Koi file 10 minute se ruki ho toh badge hara nahi rehta, chahe nanhi file wali jaanch paas ho.
+4. "Badi file ka test" button: lagbhag 7 MB ki test file asli tukdon wale raaste se jati hai, wapas padhi jati hai, phir hata di jati hai. Samay ya wajah dikhti hai. Jab koi PDF ruki ho tab yeh test apne aap bhi ek baar chalta hai, taaki machine jaan sake ki raasta kharab hai ya sirf woh file.
+5. Har ruki row par asli wajah saral shabdon me, Supabase ke code ke saath. Udaharan: "Wajah: Supabase ke mutabik yeh file us pate par pehle se hai (409)". Saath me agla kadam.
+6. Machine panel me aakhri 20 storage galtiyon ki list: kab, kaun si file, kya wajah.
 
-| Baat | Abhi ki jaankari |
-| --- | --- |
-| Dobara padhte samay purani ginti | Live par AITS ki kitaabein dobara padhi ja rahi thi, par Master purana "500 to fix" dikhata raha. Owner ko laga deploy ka asar nahi hua. |
-| "Confirm printed examination rules, count, duration, marking and solution coverage" | BITSAT chapter-wise me har chapter par ek baar aata hai (18 + 32). Asli zaroorat hai ya faltu, yeh tay nahi hua. |
-| AITS kitaab 2 | Local jaanch me 25 me se 24 mock saaf. Ek sawaal (Q46, graph wala) ka aakhiri nateeja record me nahi hai. |
-| BITSAT ka sudhaar (reader version 7) | Preview me test hua: 900 aur 1,600 answer key, 0 galat. Live par pahuncha ya nahi, yeh nahi dekha gaya. |
-| Live storage | Emergent storage par file likhte samay 500 aata tha. Platform ki dikkat hai; aaj ki haalat nahi pata. |
-| Super Admin ki bhasha | Kuch screens English me hain (Students, Library), kuch Hinglish me (Fix tool, storage). |
-| Super Admin ka light theme | Haath se kabhi nahi sudhara gaya. |
+**Pocket 4: Picture ka saboot**
+1. Mock ki pictures save hone ke baad aur Live hone se pehle machine Supabase se poochti hai ki us mock ki har picture wahan maujood hai. Nayi pictures ka size bhi milaya jata hai.
+2. Jo picture na mile woh dobara save hoti hai. Phir bhi na mile toh mock Draft rehta hai aur wajah likhi aati hai: "3 pictures Supabase me nahi mili". Adhoora mock Live nahi hota.
+3. Mock ki row par ek line: "Pictures: 312 / 312 Supabase me".
+4. "Poori jaanch" button (owner): us mock ki har picture Supabase se padhi jati hai aur fingerprint se milayi jati hai. Kisi zaroori exam se pehle ke liye.
 
-### 4. Sudhaar ke niyam
+### 4. Owner ke kaam (Supabase dashboard; yeh builder nahi kar sakta)
 
-**Isi daur me theek hota hai:** Super Admin aur uske server hisse ki har S1 se S4 galti.
+1. **Storage › Settings › Upload file size limit:** 100 MB ya zyada. Site 100 MB tak ki PDF leti hai. Supabase ki default had aksar 50 MB hoti hai (Pro par badhayi ja sakti hai); utni rahi toh 50 MB se badi PDF Supabase lauta dega.
+2. **Billing › Spend cap:** ON ho toh included usage paar hote hi Supabase project par rok laga deta hai (har request 402) jab tak billing cycle na badle. 9 Dec se pehle ek faisla: OFF (zyada usage ka bill aata hai, rok nahi lagti) ya ON (bill tay, rok ka jokhim).
+3. Supabase ke email jis inbox me aate hain woh roz dekha jata ho.
+4. Atki hui "mathematics chapterwise" ko abhi delete na karein. Uske hisse server par surakshit hain aur sudhaar ke baad wahin se aage badhte hain.
 
-**PDF machine ka niyam**
-- Galat cut se behtar ruka hua sawaal. Machine andaza nahi lagati.
-- Faltu blockage machine ke star par hatta hai, kisi ek kitaab ya ek sawaal ke liye nahi.
-- Asli blockage rehte hain: answer key nahi mili ya do alag mili, options aur key bemel, sawaal ka prakar saaf nahi.
-- Jo sawaal aaj saaf katta hai uska cut wahi rehta hai. Jo cut badalta hai woh report me ek-ek karke likha jata hai. Bina wajah ka badlaav ho toh woh sudhaar nahi jata.
-- PDF padhne me AI ya OCR nahi.
+### 5. Kya nahi chhua jata
 
-**Sirf report hota hai, badalta nahi**
+- PDF reader, cutter, chapter split, answer key, Fix tool.
+- Students ka player, results, analysis, AITS hub, Rank, Mission, CEO dashboard, contacts.
+- Students ko picture bhejne ka raasta (Phase 2 tak waisa hi).
+- Picture chhoti karne ke dono raaste.
+- Login, PIN, scoring, rank.
+- Purani Emergent files: jahan hain wahin se padhi jati rehti hain. Koi nayi file Emergent me nahi jati.
+- App ke liye server ke jawab. Storage health ke jawab me sirf naye khaane judte hain.
 
-| Kya | Kyun |
-| --- | --- |
-| Owner ke jaan-boojh kar liye faisle: PIN reset bina OTP, AITS ke solutions usi din khulna, submit ke turant baad score, 30 verified JEE Main PYQ locked | Faisle owner ke hain. Jokhim ek baar report me likha jata hai. |
-| Bahar ke dashboard ke kaam: 2-step login, backup, uptime monitor, kharch ki had, domain auto-renew, key badalna | Sirf owner kar sakta hai. Report me kadam-dar-kadam likhe hote hain. |
-| Platform ki dikkat (live storage 500) | Haalat aur support ko bhejne wala message report me. |
-| jeelive.ai ka data | Audit live par kuch nahi likhta. |
-| Jo paper students ke liye pehle se Live hai | Uska cut audit nahi badalta. |
-| Library ka bada version upgrade, koi library hatana, database ya server ki jagah badalna | Report me sujhav ke roop me. |
+### 6. Poora kab maana jayega
 
-### 5. Is daur me owner ko dikhne wale naye badlaav
-
-1. **Dobara padhne ka sach:** jab kitaab dobara padhi ja rahi ho, Master purani "to fix" ginti ki jagah "dobara padhi ja rahi hai · 1,200 / 3,000 page" dikhata hai. Ginti padhai poori hone par aati hai.
-2. **Rules wala prompt:** jab mock type me time aur marks pehle se tay hon, aur sawaalon ki ginti, answer key aur solutions machine ne khud saabit kar di hon, tab yeh prompt mock ko nahi rokta. Kuch sach me na pata ho tabhi rokta hai.
-3. **Account band karna:** Students screen par har student ke saamne "Block". Pakka karne ke baad woh number har jagah se sign out ho jata hai, dobara sign in ya PIN reset nahi kar pata. "Unblock" se wapas. Purane attempt aur rank rehte hain. Sirf owner ke liye.
-4. **Machine ki haalat:** upar ki patti ka storage badge ek chhota panel kholta hai: storage, aakhiri scheduled jaanch kab chali, kitne kaam fail hue, kaun si kitaab 15 minute se atki hai ("Dobara chalao" ke saath). Kuch dekhne layak ho toh laal bindi. Sirf owner ke liye.
-5. **Owner login par had:** 10 galat password ke baad 15 minute ki rok, students wale niyam jaisi.
-6. **File ke niyam:** PDF andar se bhi PDF ho, sirf naam se nahi. Photo sirf PNG, JPG, WebP (SVG nahi). Excel sirf .xlsx. Jahan size ki had pehle se hai woh rehti hai; jahan nahi hai wahan photo 5 MB aur Excel 10 MB.
-7. **Ek bhasha:** Super Admin ke vaakya, madad aur galti ke message saral Roman Hinglish me. Jame hue shabd wahi rehte hain: Master, Draft, Live, Scheduled, Off, Library, Upload PDF.
-8. **Har screen poori:** loading, khaali aur error ki apni screen; form ki galti usi box ke neeche; har button ka hover, pressed, disabled; har Super Admin screen ka apna browser title; admin aur login page Google ke liye band.
-
-### 6. Chipkayi gayi suchiyon ka hisaab
-
-Owner ki bheji suchiyon ke group in charan me aate hain: design (charan 8, 9), server ke peeche ki 25 cheezein (5, 6, 7, 11), todne wale 16 sawaal (4, 5, 6, 7, 9), speed (7, 10), good-css (9).
-
-**good-css:** uski list aur zaroori reference files padh kar teen tarah ki galtiyan dhoondhi jati hain: (1) phone par tootne wali: tap ke baad atka hover, 44 px se chhoti tap ki jagah; (2) jo CSS se ho sakta tha par script ya kai breakpoint se bana; (3) baareekiyan: sticky patti ke neeche chhupta link, khulte hi laal border wale form, hilte number, hataya gaya focus ring. Prakar 1 aur 3 theek hote hain. Prakar 2 tabhi badalta hai jab usse koi dikhne wali galti theek ho; baaki report me. Component library ke apne component nahi gine jate. Jo tareeka kisi browser me nahi chalta, woh report me likha jata hai.
-
-**Jo lagoo nahi**
-
-| Suchi ki cheez | Kyun nahi | Uski jagah |
-| --- | --- | --- |
-| Payment: webhook, refund, trial, test se live key | App me payment nahi hai | Kuch nahi |
-| Database ke RLS niyam | Browser database tak seedha nahi pahunchta; Supabase sirf private file store hai | File store private hai aur link khatm hote hain, yeh jaancha jata hai |
-| next/image, next/font, ISR, server ka region | Site us dhaanche par nahi bani | Wahi maqsad: picture ka size, font, zaroorat par load |
-| Email verify, free credits | App me nahi hain | Kuch nahi |
-| Sign-up par CAPTCHA | Mobile app wahi server chalata hai aur owner ne saada PIN chuna hai | Number aur address ke hisaab se had |
-| AI jawab stream karna | Super Admin me AI chat nahi | Kuch nahi |
-| Sign-up aur checkout ka raasta | Yahan lagoo nahi | Owner ka poora raasta: login se Live tak |
-| ~/.claude/agents ki files, model aur effort ki setting | Is workspace me woh vyavastha nahi hai | Wahi bantwara yahan ke read-only jaanch-karta se; suraksha wala group sabse gehra |
-| Public pages ka SEO, bina JS ke page, sitemap, free tool page | Super Admin ka hissa nahi | Phase 2 |
-
-### 7. Report me kya hoga
-
-- Upar ek chhoti table: kitni galtiyan mili (S1 se S4), kitni theek hui, kitni owner ya platform ke paas.
-- Poori list: har galti, kahan thi, kya kiya gaya, ab ki haalat. Haalat ek hi hoti hai: theek / galti nahi thi / owner ka kaam / platform ka kaam / check nahi hua (wajah ke saath).
-- Pehle aur baad: har Super Admin screen ki picture, speed ke number (3 baar naap kar beech wala), kitaabon ka scan (kitne sawaal, kitne ruke, kaun sa cut badla), haq ki table.
-- Jo faisle bina pooche liye gaye.
-- Owner ke kaam, kadam-dar-kadam.
-- Kya deploy ka intezaar kar raha hai, aur deploy ke baad live par kya hoga.
-- Koi secret mile toh sirf uski jagah likhi jati hai, uska maan kabhi nahi.
-
-### 8. Suraksha ki rekhayein
-
-- jeelive.ai par sirf padhna: bina login ke khule page aur platform ki read-only jaanch. Live par koi login, koi data badlaav, koi todne wala test nahi.
-- Todne wale test (100 call, 10,000 record, role badalna, script daalna) sirf ek kaam-chalau test copy me chalte hain, jo baad me hata di jati hai.
-- Test asli storage, asli Supabase ya AI ko nahi chhoote.
-- Git history dobara nahi likhi jati.
-- Speed ke liye koi feature nahi hatta.
-- Sab kuch preview me banta hai. jeelive.ai par tabhi jata hai jab owner "deploy" kahe.
-
-### 9. Poora kab maana jayega
-
-- Haq ki table me ek bhi galat khaana nahi.
-- AITS ke 50 mock aur BITSAT ke 50 chapter par sawaal ke star ka faltu blockage 0. Jo blockage bache, har ek ki wajah report me.
-- Jo sawaal pehle saaf katta tha uska cut wahi, ya badlaav wajah ke saath likha hua.
-- 390 aur 1920 par koi Super Admin screen side me nahi khisakti.
-- Har S1 aur S2 ya toh theek hai, ya wajah ke saath owner ya platform ke paas.
-- Sudhaar karne wale se alag ek poora test run paas.
-- Jo check na ho paye woh "check nahi hua" likha jata hai, "ho gaya" nahi.
+- Live ki atki PDF deploy ke baad bina dobara upload ke 0% se aage badhti hai, ya row par uski sateek wajah likhi aati hai.
+- Wahi badi PDF ek hi pate par do baar save ho jati hai.
+- Ek file jaan-boojh kar fail karayi jaye, tab bhi doosri kitaab bina ruke publish hoti hai.
+- Koi file 10 minute se ruki ho toh badge hara nahi dikhta, aur dono server ek hi haalat dikhate hain.
+- Har ruki row par wajah aur agla kadam likha hai.
+- Jis mock ki ek picture Supabase se gayab ho woh Live nahi hota.
+- Upload › Draft › Fix › Live ka purana raasta pehle jaisa chalta hai.
+- Jo cheez check na ho paye woh "check nahi hua" likhi jati hai, "ho gaya" nahi.
 
 ## User flow
 
 **Owner, is kaam ke dauran**
 1. Plan manzoor karta hai.
-2. Beech me koi sawaal nahi aata.
-3. Ant me ek report milti hai.
-4. Report padh kar "deploy" kehta hai, jab chahe.
-5. Deploy ke baad live ki jo kitaabein abhi publish nahi hui, apne aap dobara padhi jati hain. Us dauran Master "dobara padhi ja rahi hai" dikhata hai, purani ginti nahi.
-6. Padhai poori hone par live ki ginti ek baar read-only dekh kar bata di jati hai.
+2. Pehle Pocket 0 ki chhoti report milti hai: asli wajah, saboot ke saath.
+3. Pocket 1 se 4 ek-ek karke preview me bante hain. Har pocket ke baad ek line ka haal milta hai.
+4. Owner jab chahe "deploy" kehta hai. Pocket 1 akela bhi deploy ho sakta hai.
+5. Deploy ke baad atki PDF apne aap aage badhti hai. Dobara upload nahi karna.
+6. Live par uska nateeja ek baar sirf padh kar bata diya jata hai.
 
-**Owner ka woh raasta jo poora chal kar dekha jata hai**
-1. Owner login.
-2. Master › exam › mock type.
-3. Upload PDF (ek, phir batch), progress, Draft.
-4. Fix list › Fix › Proof › Try as student.
-5. Live, ya Schedule, ya AITS ka din.
-6. Library: bhejna, wapas lana, delete, replace.
-7. Students (PIN reset, naam hatana, Block), Team, Reports.
-8. Yahi sab phone par.
+**Roz ka upload (Phase 1 ke baad)**
+1. Upload PDF › "Server par pahunchi X%".
+2. "Original Supabase mein X%".
+3. "Padhi ja rahi hai · X / Y page" › Draft.
+4. Live dabane par: pictures save › "Pictures: N / N Supabase me" › Live.
 
-**Reviewer:** login › ruke mock › fix › student reports. Baaki sab band milta hai.
+**Jab kuch ruke**
+- Supabase door ho: row "Supabase ka intezaar" kehti hai, wajah ke saath. Lautte hi apne aap chalta hai.
+- Supabase project par rok ho: row aur badge batate hain ki dashboard me kya dekhna hai.
+- Sirf ek file atki ho: row "Atki hai" kehti hai, wajah aur "Dobara chalao" ke saath. Baaki kitaabein chalti rehti hain.
 
 ## UI/UX feel
 
-- JEELIVE ka maujooda look. Koi naya style nahi.
-- Super Admin ka DESIGN.md is look ko likh kar pakka karta hai: thode rang, ek font size ki seedhi, ek spacing ki seedhi, corner ke tay size.
-- Ek hi tarah ka har button, card aur input har screen par ek jaisa.
-- Har screen par ek hi main button saaf dikhta hai.
-- Phone par upar ki patti menu me simat jati hai; har tap ki jagah kam se kam 44 px.
-- Loading me skeleton, khaali list par agla kadam batane wali line, error par "Dobara koshish".
-- Transition chhote aur halke; jis phone me motion kam rakha gaya ho wahan nahi chalte.
-- Light aur dark dono me text saaf padha jata hai.
-- Likhai saral Roman Hinglish.
+- Koi nayi screen nahi. Wahi badge, wahi panel, wahi upload row; bas sach aur wajah judte hain.
+- Badge ke rang: hara = dono raaste theek; peela = dheema hai ya koi file atki hai; laal = Supabase jawab nahi de raha ya project par rok hai.
+- Wajah ki line chhoti aur saral Roman Hinglish me; Supabase ka code bracket me.
+- "Apne aap aage chalega" sirf tab likha aata hai jab woh sach ho. Atki file par nahi.
+- Phone (390 px) par row ki line aur button ek ke neeche ek; tap ki jagah kam se kam 44 px.
+- Maujooda JEELIVE look; koi naya style nahi.
 
 ## Phases
 
-**Phase 1 (abhi banta hai)**
-- Section 2 ke 11 charan ki jaanch, Super Admin aur uske server hisse par.
-- Section 4 ke niyam se saare sudhaar, ek hi daur me.
-- Section 5 ke aath dikhne wale badlaav.
-- Section 7 ki report, pehle aur baad ke saboot ke saath.
-- Sirf preview me; live par sirf padhna.
+**Phase 1 (abhi banta hai): pipeline ki marammat**
+- Pocket 0: asli wajah ka saboot.
+- Pocket 1: badi file ka raasta pakka.
+- Pocket 2: ek file ki galti us file tak.
+- Pocket 3: sach bolne wala badge.
+- Pocket 4: picture ka saboot.
+- Sab preview me; live par sirf padhna; deploy owner ke kehne par.
 
-**Phase 2 (alag manzoori)**
-- Wahi suchiyan student aur public hisse par: design, phone, speed, picture ke format.
-- Public pages ka SEO: har page ka apna title, description aur canonical; sitemap; robots; asli 404; bina JS ke padhe ja sakne wale page.
-- Free tool page: teen vikalp search term ke saath dikhaye jate hain, owner ek chunta hai.
-- Bahar ki monitoring aur uptime seva jodna (owner ka account aur key chahiye).
-- AITS ke numerical sawaal ek saath confirm karna.
-- PDF Engine ki ruki hui list: chipke options, do-column page, scan PDF bina AI, purane Draft ke liye "dobara padho".
+**Phase 2 (alag manzoori): exam ke din students ki dhaal**
+- Live paper ki pictures server ki disk par bhi rakhi jati hain, sirf yaad me nahi. Supabase ki chhoti rukavat un students tak nahi pahunchti jinka paper server par aa chuka hai.
+- Tay samay wale exam aur AITS ke din se pehle har server par us paper ki saari pictures pehle se taiyaar; Super Admin me ek line: "Aaj ka paper: pictures 100% taiyaar".
+- Supabase chup ho toh picture ki request kuch second me saaf jawab deti hai, latakti nahi; sign in, answer save aur submit tez rehte hain.
+- AITS paper ko din dete hi uski "Poori jaanch" apne aap.
+- Storage 10 minute se ruka ho toh CEO dashboard ke alerts me bhi dikhta hai.
 
-**Phase 3 (alag manzoori)**
-- "Read all mocks": pehle se upload hue sawaalon par AI tags, bina dobara upload, ek sawaal ek hi baar.
-- AI doubt solver aur uski library.
-- 1 se 2 lakh students ka load test.
-- Super Admin me kisne kya badla, uska itihaas; har exam ka alag reviewer.
+**Phase 3 (alag manzoori): bada paimana aur safai**
+- Pictures ke aage CDN, taaki 1 lakh students ka pehla load server aur Supabase par na pade (server ka hissa bana hua hai; CDN ka pata owner deta hai).
+- Supabase me padi bekaar files ki safai: delete ho chuki kitaabon ki files, adhe upload, test files. Pehle list, phir owner ki haan.
+- Owner chahe toh Live papers ki doosri swatantra copy, ya Supabase project server ke paas wale region me.
+- Purani Emergent files ko poori tarah Supabase me lana.
 
 ## Assumptions (jo faisle bina pooche liye gaye)
 
-1. Owner ne "audit + saare fix ek saath, ant me ek report" chuna aur kaha ki koi sawaal na poocha jaye. Bheji gayi suchiyon me likha hai "pehle list dikhao, confirm ke baad badlo". Owner ka aakhiri nirdesh maana gaya: list poori banti hai aur report me aati hai, par sudhaar uske liye rukta nahi.
-2. "Kam se kam 8 phase" ko jaanch ke 11 charan maana gaya. Yeh sab Phase 1 ke andar hain aur inke beech kaam nahi rukta.
-3. Phase 1 ka daayra Super Admin aur uska server hissa hai, kyunki maang "super admin section ka re-audit" thi. Public SEO, free tool page aur student screens ka design Phase 2 me rakhe gaye.
-4. Free tool page ke liye owner ka chunaav chahiye, isliye woh Phase 2 me hai. Site par /rank ke chhah free tool pehle se hain.
-5. Rules wala prompt (section 5.2) ab har baar nahi rokta. Yeh ek niyam ka badlaav hai.
-6. Account Block (5.3), machine ki haalat ka panel (5.4) aur owner login ki had (5.5) nayi cheezein hain, suchi ki in line se li gayi: "ek click me account band", "scheduled kaam fail ho toh pata chale", "login par had".
-7. Block hua number mobile app me bhi band hota hai, kyunki app wahi server chalata hai. App ka code nahi badalta; app apna aam error dikhata hai.
-8. Bahar ki error-monitoring seva Phase 1 me nahi judti, kyunki uske liye owner ka account aur key chahiye. Uski jagah 5.4 ka panel hai.
-9. Super Admin ki bhasha Roman Hinglish chuni gayi (5.7), kyunki fix tool aur storage ke message pehle se usi me hain.
-10. CAPTCHA nahi lagta. PIN reset bina OTP waisa hi rehta hai. Dono owner ke pehle ke faislon par tike hain; jokhim report me likha jata hai.
-11. AI ka call sirf owner chala sake, yeh server par pakka kiya jata hai. Owner par koi nayi daily had nahi lagti.
-12. Jahan had pehle se hai (10 galat PIN par 15 minute, 15 minute me 5 PIN reset, PDF 100 MB) woh nahi badalti. Nayi had ke number 5.5 aur 5.6 me hain.
-13. Library ki chhoti version badhat, jo kisi jaani kamzori ko band kare aur test paas kare, kar di jati hai. Bada version upgrade sirf report me.
-14. Haq ka model wahi rehta hai: owner, reviewer, student. Koi naya role ya permission system nahi banta; sirf chhooti hui jaanch judti hai.
-15. Test ke liye owner, reviewer aur do student account test copy me khud banaye jate hain. Owner se koi account nahi maanga jata.
-16. Live par builder login nahi karta. Live ki jaankari khule page aur platform ki read-only jaanch se aati hai.
-17. Koi secret browser files ya git history me mile toh code me uski jagah server wala raasta lagta hai, aur key badalne ke kadam owner ko diye jate hain. Git history nahi chhedi jati.
-18. Maana gaya hai ki kitaabon ki local copy workspace me ab bhi hain. Jo na mile woh "check nahi hua" likhi jati hai, PDF ke naam ke saath.
-19. PDF machine me badlaav hone par reader ka version badhta hai. Deploy ke baad live ki bina-publish kitaabein apne aap dobara padhi jati hain. Owner ke haath ke sudhaar aur publish ho chuke paper rehte hain.
-20. Speed ka naap Master home aur 2 se 3 sabse dheeme Super Admin screen par, phone mode me, 3 baar. Login ke peeche ka page us tool se na napa ja sake toh load ka samay doosre tareeke se napa jata hai aur yeh report me likha jata hai.
-21. Safari ki jaanch uske engine par automated browser me hoti hai, asli iPhone par nahi.
-22. Pehle-baad ki pictures sirf Super Admin screens ki hoti hain, default theme me. Dark ki picture wahan jahan dark me kuch badla ho.
-23. Purane test jinki ummeed ab purani pad gayi hai, naye niyam ke hisaab se badle jate hain. Unhe galti nahi gina jata.
-24. Report Roman Hinglish me ek document hoti hai, chat me uska chhota saar.
-25. Section 3 ke number pichhle record se liye gaye hain. Planning me unhe dobara nahi chalaya gaya.
-26. Yeh file pichhle plan (rollback ke baad wala PDF Engine plan) ki jagah leti hai. Woh kaam poora ho chuka hai; uski ruki hui list Phase 2 me likhi hai.
+1. Owner ka faisla maana gaya: sirf Supabase. Koi nayi file Emergent me nahi jati, na backup ke roop me.
+2. Kadi 3 ki wajah sabse sambhav hai, saabit nahi. Pocket 0 use live ke saboot se pakka karta hai. Wajah alag nikle tab bhi Pocket 1 se 4 lagoo rehte hain, kyunki woh kadi 4 se 7 ko theek karte hain jo code me saabit hain.
+3. Live par builder kuch nahi likhta aur login nahi karta. Live ki jaankari sirf padhne wali jaanch se aati hai.
+4. Asli Supabase par test sirf preview ke bucket me hota hai, "TEST_" naam ki files se, jo baad me hata di jati hain. Live ke bucket me test ki koi file nahi jati.
+5. Badi file ke liye doosra raasta (ek hi request) joda gaya, taaki tukdon wala raasta kharab ho tab bhi PDF pahunche.
+6. Hadein chuni gayi: 2 nakaam koshish par naya upload ya doosra raasta; 3 baar bina pragati par "Atki hai"; atki file ki apne aap koshish har 15 minute; badge 10 minute ke baad hara nahi; test file lagbhag 7 MB.
+7. Naya niyam: jis mock ki koi picture Supabase me na mile woh Live nahi hota, Draft rehta hai.
+8. Live se pehle ki apne aap jaanch maujoodgi (aur nayi pictures ka size) dekhti hai. Har picture ko padh kar fingerprint milana "Poori jaanch" button par hai, kyunki woh publish ka samay lagbhag doguna kar deta hai.
+9. Asli Supabase rukavat par "aaram" ke samay (15 second se 5 minute) wahi rehte hain.
+10. Students ki dhaal (kon 11) Phase 2 me rakhi gayi, kyunki aaj ka atkaav upload me hai aur owner chhote pocket chahta hai.
+11. Live par atki PDF ko haath se nahi chheda jata. Deploy ke baad woh apne hisson se aage badhti hai.
+12. Supabase dashboard ke kaam (section 4) owner karta hai.
+13. Site ki 100 MB wali had nahi badalti.
+14. Screen ki bhasha saral Roman Hinglish; jame hue shabd (Master, Draft, Live, Library, Upload PDF) wahi rehte hain.
+15. Deploy tabhi jab owner "deploy" kahe.
+16. Yeh file pichhle plan (Super Admin re-audit) ki jagah leti hai; woh kaam poora ho chuka hai.

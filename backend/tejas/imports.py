@@ -184,7 +184,7 @@ async def process_import(id):
                 'message':'Resolve the listed source issues and upload again.' if issues else 'All source entries paired. Supplied answer keys retained; no answers were generated.'},'$unset':{'storage_waits':''}})
         except Exception as exc:
             from tejas_storage import StorageError, StorageWaiting
-            if isinstance(exc,StorageWaiting):
+            if isinstance(exc,StorageWaiting) and exc.scope!='stuck':
                 # Supabase is away: the saved sources wait and this import runs again by itself (1, 2, 4, then every 5 min).
                 from .jobs import run_later
                 await imports.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:350],'storage_wait':now()},'$inc':{'storage_waits':1}})

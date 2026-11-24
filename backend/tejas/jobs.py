@@ -12,7 +12,7 @@ from .safety import JOB_CAPABILITIES, HOLD_MESSAGE, job_held, require_capability
 from .runtime import LANE_LIMITS, JOB_ATTEMPTS, JOB_LEASE_SECONDS, INLINE_JOBS, JOB_DRAIN_QUANTUM
 from .canonical import EPOCH_NOW, clocked_one
 from tejas_core import build_questions, generate_report
-from tejas_storage import get_object, put_object, StorageWaiting
+from tejas_storage import get_object, put_object, StorageWaiting, STUCK_RETRY
 
 router = APIRouter(prefix='/api', tags=['Processing'])
 _active = {kind: set() for kind in LANE_LIMITS}
@@ -166,16 +166,19 @@ async def run_job(id, drain=True):
             else:
                 raise ValueError('Unknown job type')
             await require_lease(j)
-            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', 'storage_waits': 0, **{k: {'$literal': v} for k, v in output.items()}}}])
+            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', 'storage_waits': 0, 'stuck': False, **{k: {'$literal': v} for k, v in output.items()}}}])
             if completed.modified_count:
                 await audit(j['user_id'], kind.title() + ' completed', j['set_id'], message)
         except Exception as exc:
             if isinstance(exc, StorageWaiting):
                 # Supabase cannot take or give a file now: the job keeps its tries and runs again by itself (30 s, 1, 2, 4, then every 5 min).
-                delay = min(STORAGE_WAIT_MAX, 30 * 2 ** min(j.get('storage_waits', 0), 4))
-                logging.getLogger(__name__).warning('Waiting for Supabase (kind=%s, job=%s, next in %ss): %s', kind, id, delay, str(exc)[:200])
+                # A file Supabase keeps returning is another matter: only it waits, 15 minutes at a time, and "Supabase is back" does not wake it.
+                stuck = exc.scope == 'stuck'
+                delay = STUCK_RETRY if stuck else min(STORAGE_WAIT_MAX, 30 * 2 ** min(j.get('storage_waits', 0), 4))
+                logging.getLogger(__name__).warning('%s (kind=%s, job=%s, next in %ss): %s', 'One file is stuck' if stuck else 'Waiting for Supabase', kind, id, delay, str(exc)[:200])
                 await jobs.update_one({'id': id, 'lease': lease, 'status': 'running'}, [{'$set': {
-                    'status': 'queued', 'progress': 0, 'error': 'Waiting for file storage; it carries on by itself.', 'next_run_at': {'$add': [EPOCH_NOW, delay]},
+                    'status': 'queued', 'progress': 0, 'stuck': stuck, 'next_run_at': {'$add': [EPOCH_NOW, delay]},
+                    'error': 'This file is stuck; it is tried again every 15 minutes.' if stuck else 'Waiting for file storage; it carries on by itself.',
                     'storage_waits': {'$add': [{'$ifNull': ['$storage_waits', 0]}, 1]},
                     'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}])
                 kick_later(kind, delay + 1)
@@ -280,7 +283,7 @@ async def wake_uploads():
 
 async def wake_storage():
     """Supabase answers again: every job waiting for it runs now instead of at its next try."""
-    waiting = {'status': 'queued', 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}}
+    waiting = {'status': 'queued', 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}, 'stuck': {'$ne': True}}
     kinds = [k for k in await jobs.distinct('kind', waiting) if k in _active]
     woke = (await jobs.update_many(waiting, {'$set': {'next_run_at': 0}})).modified_count
     for kind in kinds:

@@ -72,8 +72,10 @@ async def publish_batch(book, token, source):
         except HTTPException as exc:
             if exc.status_code==409:raise
             await hold(book,token,mock,exc.detail)
-        except StorageWaiting:
-            raise  # Supabase is away: the whole book waits for it and carries on; the mock is not held
+        except StorageWaiting as exc:
+            if exc.scope!='stuck':raise  # Supabase is away: the whole book waits for it and carries on; the mock is not held
+            # One picture that Supabase keeps returning: only this mock stays Draft with the reason; the book and its other mocks carry on.
+            await hold(book,token,mock,f'Is mock ki ek picture Supabase mein save nahi hui. Wajah: {exc.reason}. Dobara Live karne par phir koshish hogi.')
         except (ValueError,StorageError) as exc:
             # One mock that cannot be saved waits for the owner's next Publish; the book and its other mocks carry on.
             await hold(book,token,mock,exc)
@@ -209,8 +211,12 @@ async def step(job):
         if isinstance(exc,HTTPException) and exc.status_code==409:raise  # another batch took this PDF: the job waits its turn, the book is not marked failed
         if isinstance(exc,StorageWaiting):
             # Supabase is away: the book keeps its state and saved work, shows that it waits, and the job runs again by itself.
-            await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':(waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300]},
-                'payload.message':'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.'}})
+            # One file that Supabase keeps returning ("Atki hai") stops alone and says why; other books carry on.
+            stuck=exc.scope=='stuck'
+            await db.tejas_books.update_one({'_id':id},{'$set':{'payload.storage_wait':{'since':(waited or {}).get('since') or now(),'at':now(),'error':str(exc)[:300],
+                    'kind':exc.scope,'code':exc.code,'reason':exc.reason[:200],'next':exc.step[:240],**({'stuck':True} if stuck else {})},
+                'payload.message':'Atki hai: yeh file Supabase mein nahi ja rahi. File surakshit hai; baaki kitaabein chal rahi hain.' if stuck else
+                    'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.'}})
             raise
         import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
         book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException,SupabaseRefused)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'

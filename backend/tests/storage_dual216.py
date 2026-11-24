@@ -43,6 +43,9 @@ class FakeSupabase:
                 return httpx.Response(200, json=self.buckets[name]) if name in self.buckets else httpx.Response(400, json={'error': 'Bucket not found'})
             b = json.loads(req.content); self.buckets[b['id']] = b
             return httpx.Response(200, json={'name': b['id']})
+        if p.startswith('/storage/v1/object/info/'):
+            key = p[len('/storage/v1/object/info/'):]
+            return httpx.Response(200, json={'name': key, 'size': len(self.objects[key])}) if key in self.objects else httpx.Response(400, json={'statusCode': '404', 'error': 'not_found', 'message': 'Object not found'})
         if p.startswith('/storage/v1/object/authenticated/'):
             key = p[len('/storage/v1/object/authenticated/'):]
             return httpx.Response(200, content=self.objects[key]) if key in self.objects else httpx.Response(400, json={'error': 'not_found'})
@@ -239,6 +242,7 @@ def main():
         check('Supabase back: the PDF carries on from piece 3 (same upload, only the 2 missing pieces sent)', again and again[0]['sent'] == 2 * S.TUS_CHUNK and new_starts == 0 and new_patches == 2, (again[:1], new_starts, new_patches))
         check('carried-on PDF is byte-exact in Supabase', ref13.startswith('sb://') and S.get_object(ref13) == big)
         old = {**saved, 'started': time.time() - 21 * 3600}
+        sb.objects.pop('jeelive-preview-x-example-com/' + key)   # (229) the same PDF already in Supabase is no longer sent again, so it is taken away first
         n0 = sum(1 for m, _, p in sb.calls if m == 'POST' and p.endswith('/upload/resumable'))
         S.put_object(key, big, 'application/pdf', old, None)
         check('a saved place older than 20 h is not trusted: a fresh upload starts', sum(1 for m, _, p in sb.calls if m == 'POST' and p.endswith('/upload/resumable')) == n0 + 1)

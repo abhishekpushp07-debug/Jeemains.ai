@@ -22,7 +22,9 @@ async def upload_progress(b):
     if b['state'] == 'received' and p.get('transfer'):
         out['transfer'] = {'sent': p['transfer'].get('sent', 0), 'size': p['transfer'].get('size') or p.get('size', 0)}
     if p.get('storage_wait'):
-        out['storage_wait'] = {'since': p['storage_wait']['since'], 'error': p['storage_wait'].get('error', '')[:200]}
+        w = p['storage_wait']
+        out['storage_wait'] = {'since': w['since'], 'error': w.get('error', '')[:200], 'kind': w.get('kind') or 'away', 'code': w.get('code'),
+                               'reason': w.get('reason', ''), 'next': w.get('next', ''), 'stuck': bool(w.get('stuck')), 'retrying': bool(w.get('retrying'))}
     return out
 FLAGGED = {'$elemMatch': {'flag': {'$nin': ['', None]}}}
 
@@ -159,10 +161,12 @@ async def type_mocks(sid: str, u=Depends(owner)):
                    f"Library se wapas aayi. Isse {made} mock {'padha gaya' if one else 'padhe gaye'}, isi type mein dikh {'raha hai' if one else 'rahe hain'}." if done else
                    'Is PDF se ek bhi sawaal padha nahi ja saka. Scan (photo) wali PDF apne aap nahi padhi jaati: uske liye Write use kijiye.' if unread else b['payload'].get('message', ''))
         paused = bool(b.get('paused')) and b['state'] != 'failed'
-        uploads.append({'id': b['_id'], 'kind': 'book', 'title': b['payload']['title'], 'state': 'done' if done else 'failed' if unread else 'paused' if paused else b['state'],
-                        'revision': b.get('revision', 0), 'can_retry': b['state'] == 'failed' and not unread,
+        # "Atki hai": Supabase keeps returning this one file. It leaves the busy list and offers Dobara chalao.
+        stuck = bool((b['payload'].get('storage_wait') or {}).get('stuck')) and b['state'] in ('received', 'reading', 'matching') and not paused
+        uploads.append({'id': b['_id'], 'kind': 'book', 'title': b['payload']['title'], 'state': 'done' if done else 'failed' if unread else 'paused' if paused else 'stuck' if stuck else b['state'],
+                        'revision': b.get('revision', 0), 'can_retry': (b['state'] == 'failed' and not unread) or stuck,
                         'pages': 0 if done else b['payload'].get('pages', 0), 'read_pages': b['payload'].get('read_pages', 0), 'chapters': chapters, 'message': message,
-                        'active': b['state'] in ('received', 'reading', 'matching') and not paused,
+                        'active': b['state'] in ('received', 'reading', 'matching') and not paused and not stuck,
                         'rereading': bool(b['payload'].get('rereading')) and b['state'] in ('received', 'reading', 'matching') and not paused,
                         **(await upload_progress(b))})
     async for c in db.tejas_chapter_books.find({'destination.section_id': sid, 'archived': {'$ne': True}, 'status': {'$in': ['queued', 'organising', 'failed']}},

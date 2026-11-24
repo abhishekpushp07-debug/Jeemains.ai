@@ -213,7 +213,7 @@ async def process_book(identity):
                 'exam':result.get('exam','BITSAT'),'minutes':result.get('minutes',60),'solution_kind':result.get('solution_kind','answer_key_only'),
                 'message':f'{len(result["chapters"])} chapter tests organised. Original PDF images preserve notation. '+('Original worked solutions supplied; no AI generation.' if result.get('solution_kind')=='supplied_worked' else 'Worked solutions are not supplied.')},'$inc':{'revision':1},'$unset':{'storage_waits':''}})
         except Exception as exc:
-            if isinstance(exc,StorageWaiting):
+            if isinstance(exc,StorageWaiting) and exc.scope!='stuck':
                 # Supabase is away: the saved PDF waits and this book runs again by itself (1, 2, 4, then every 5 min).
                 from .jobs import run_later
                 await books.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:450],'storage_wait':now()},'$inc':{'storage_waits':1}})
