@@ -14,7 +14,7 @@ const pause = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 const LAST_PHONE = "jl_last_phone", ENDED = "jl_session_ended";
 const shownPhone = (p: unknown) => { const n = typeof p === "string" ? p.replace(/[^\d+]/g, "") : ""; return /^\+91\d{10}$/.test(n) ? n.slice(3) : n; };
 
-export type User = { id: string; name: string; phone?: string; role: string; exam?: string; access_type?: string; pin_set?: boolean };
+export type User = { id: string; name: string; phone?: string; role: string; exam?: string; access_type?: string; pin_set?: boolean; display_name?: string | null };
 type Ctx = {
   user: User | null; ready: boolean; expired: boolean; sessionError: string; signOutWarning: string;
   lastPhone: string; forgetPhone: () => void;

@@ -26,7 +26,7 @@ export function SeriesExplainer({ open, onClose, days }: { open: boolean; onClos
         "Your streak grows with each live day you finish. Archive practice doesn’t count.",
       ].map((x) => (
         <View key={x} style={{ flexDirection: "row", gap: space.sm, alignItems: "flex-start" }}>
-          <Glyph name="check-circle-outline" size={18} color={colors.success} />
+          <Glyph name="check-circle-outline" size={18} color={colors.custom_royalMid} />
           <T size={13.5} color={colors.custom_softText} style={{ flex: 1 }}>{x}</T>
         </View>
       ))}

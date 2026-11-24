@@ -167,6 +167,10 @@ const dark = {
   custom_doneFrom: "#DDF5C8", custom_doneTo: "#BCE8A2", custom_doneInk: "#3A6B1F", custom_doneBody: "#44603A", custom_doneCta: "#DDF5C8",
   custom_upFrom: "#C7F2EC", custom_upTo: "#8FDDD3", custom_upSky: "#96D2FF", custom_upInk: "#0F5F58", custom_upBody: "#2C5753", custom_upCta: "#D2F6F1",
   custom_missFrom: "#F3E7D8", custom_missTo: "#ECD6DC", custom_missInk: "#7A4A3C", custom_missBody: "#5E4A44", custom_missCta: "#F3E7D8",
+  // A finished series day's cards, result rows and score line are royal blue (the Home share card's family) with white
+  // words (4.7 : 1 or more under the gloss). Green is kept for one thing only: a completed day in the day strip and the day map.
+  custom_seriesRoyal: "#2F56E0", custom_seriesRoyalInk: "#FFFFFF",
+  custom_seriesRoyalGloss: "rgba(255,255,255,0.14)", custom_seriesRoyalGlint: "rgba(255,255,255,0.45)",
   custom_qAnswered: "#22C55E", custom_qNotAnswered: "#EF4444", custom_qMarked: "#0D9488", custom_qMarkedInk: "#5EEAD4",
   custom_qMarkedSoft: "#0B2A27", custom_qFresh: "#2A2A33", custom_qFreshLine: "#3A3A46", custom_qInk: "#FFFFFF",
   custom_gold: "#FFC94D", custom_goldDeep: "#5A3B00", custom_flame: "#FF8A3D", custom_flameSoft: "#2A160C",
@@ -434,11 +438,16 @@ export type LearningTone = keyof typeof learningTones;
 
 // All India status pastels, shared by every series surface (Home card, hub, chips, map, graph).
 export type SeriesTone = "today" | "done" | "upcoming" | "missed";
-export const pastel: Record<SeriesTone, { from: string; to: string; ink: string; body: string; cta: string; label: string }> = {
-  today: { from: light.custom_todayFrom, to: light.custom_todayTo, ink: light.custom_todayInk, body: light.custom_todayBody, cta: light.custom_todayCta, label: "Today" },
-  done: { from: light.custom_doneFrom, to: light.custom_doneTo, ink: light.custom_doneInk, body: light.custom_doneBody, cta: light.custom_doneCta, label: "Done" },
-  upcoming: { from: light.custom_upFrom, to: light.custom_upSky, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, label: "Upcoming" },
-  missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, label: "Missed" },
+// `from` / `to` = the face; `title` = its big words; `ink` = small caps; `body` = sentences; `cta` = words on its black
+// button; `tint` = the family's light colour for words on a dark card; `gloss` / `glint` = its shine.
+// A finished day ("done") is royal blue with white words; the other three are soft colours with dark words.
+const softShine = { title: light.custom_pastelInk, gloss: light.custom_seriesPastelGloss, glint: light.custom_seriesPastelGlint };
+export const pastel: Record<SeriesTone, { from: string; to: string; title: string; ink: string; body: string; cta: string; tint: string; gloss: string; glint: string; label: string }> = {
+  today: { from: light.custom_todayFrom, to: light.custom_todayTo, ink: light.custom_todayInk, body: light.custom_todayBody, cta: light.custom_todayCta, tint: light.custom_todayFrom, ...softShine, label: "Today" },
+  done: { from: light.custom_seriesRoyal, to: light.custom_royalMid, title: light.custom_seriesRoyalInk, ink: light.custom_seriesRoyalInk, body: light.custom_seriesRoyalInk, cta: light.custom_royalInk,
+    tint: light.custom_royalInk, gloss: light.custom_seriesRoyalGloss, glint: light.custom_seriesRoyalGlint, label: "Done" },
+  upcoming: { from: light.custom_upFrom, to: light.custom_upSky, ink: light.custom_upInk, body: light.custom_upBody, cta: light.custom_upCta, tint: light.custom_upFrom, ...softShine, label: "Upcoming" },
+  missed: { from: light.custom_missFrom, to: light.custom_missTo, ink: light.custom_missInk, body: light.custom_missBody, cta: light.custom_missCta, tint: light.custom_missFrom, ...softShine, label: "Missed" },
 };
 // The three colours that run round each Rank tool tile, chosen to sit well on the tile's own colour and on the black page
 // (the first comes back at the end): maroon = rose, gold, blush; indigo = lavender, sky, pale lilac; teal = aqua, lime, mint;
@@ -470,10 +479,10 @@ export const chipEdges = {
   chosen: ["#0F0F12", "#0F0F12", "#FFC857", "#0F0F12", "#0F0F12"],
 } as const;
 // The three colours that run round a big series day card, from its status colour's own family (the first comes back at
-// the end): today = coral, rose, gold; done = emerald, lime, teal; upcoming = teal, azure, lavender; missed = bronze, dusty rose, sand.
+// the end): today = coral, rose, gold; done (royal blue) = gold, sky blue, lavender; upcoming = teal, azure, lavender; missed = bronze, dusty rose, sand.
 export const pastelEdges: Record<SeriesTone, readonly [string, string, string, string]> = {
   today: ["#FF6B4A", "#FF2D7A", "#FFB300", "#FF6B4A"],
-  done: ["#22A45D", "#9BD22F", "#10B5A0", "#22A45D"],
+  done: ["#FFC857", "#4CC3FF", "#E0DBFF", "#FFC857"],
   upcoming: ["#10B5A0", "#1E90FF", "#8E7BFF", "#10B5A0"],
   missed: ["#C08552", "#D4728C", "#E0B15C", "#C08552"],
 };

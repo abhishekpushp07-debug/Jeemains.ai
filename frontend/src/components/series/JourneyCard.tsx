@@ -32,7 +32,7 @@ export function JourneyCard({ streak, days, error, retry }: { streak: Streak | n
   return <View testID="streak-card">
     <Shine radius={24} {...pinkShine} face={styles.card}>
     <View style={styles.row}>
-      <ProgressRing testID="streak-done" size={108} stroke={9} value={done / total} track={colors.custom_qFresh} gradient={[colors.custom_qMarked, colors.custom_doneInk]} label={`${done} of ${total} days`}>
+      <ProgressRing testID="streak-done" size={108} stroke={9} value={done / total} track={colors.custom_qFresh} gradient={[colors.custom_royalFrom, colors.custom_royalMid]} label={`${done} of ${total} days`}>
         <T w="heavy" size={24}>{done}</T>
         <T w="bold" size={10} color={colors.custom_seriesPinkInk}>/{total} days</T>
       </ProgressRing>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   factIcon: { width: 28, height: 28, borderRadius: 14, alignItems: "center", justifyContent: "center" },
   track: { height: 44, marginHorizontal: 11, marginTop: space.xs },
   line: { position: "absolute", left: 0, right: 0, top: 9, height: 4, borderRadius: 2, backgroundColor: colors.custom_qFresh },
-  lineFill: { position: "absolute", left: 0, top: 9, height: 4, borderRadius: 2, backgroundColor: colors.custom_doneInk },
+  lineFill: { position: "absolute", left: 0, top: 9, height: 4, borderRadius: 2, backgroundColor: colors.custom_royalMid },
   cup: { position: "absolute", top: 0, width: 30, marginLeft: -15, alignItems: "center", gap: 4 },
   cupDot: { width: 22, height: 22, borderRadius: 11, alignItems: "center", justifyContent: "center", borderWidth: 1 },
   cupOn: { backgroundColor: colors.custom_gold, borderColor: colors.custom_gold },

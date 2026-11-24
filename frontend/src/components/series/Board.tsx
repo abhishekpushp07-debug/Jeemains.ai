@@ -14,8 +14,17 @@ import { SERIF } from "@/src/rank/tones";
 import { colors, pastel, pastelEdges, space } from "@/src/theme";
 import { SeriesBackdrop, onyxShine, pinkShine } from "./looks";
 
-export type BoardRow = { rank: number; name: string; named: boolean; handle: string; score: number; attempted: number; accuracy: number | null; time: number; is_you: boolean };
-export type Board = { state: string; n: number; title?: string; rows: BoardRow[]; around: BoardRow[]; found: BoardRow[]; you?: BoardRow | null };
+// `days` (a row), `days_counted` and `maximum` come only with the whole-series leaderboard: how many live days the student
+// has handed in, how many released days are added up, and the most marks anyone could have over those days.
+export type BoardRow = { rank: number; name: string; named: boolean; handle: string; score: number; attempted: number; accuracy: number | null; time: number; is_you: boolean; days?: number };
+export type Board = { state: string; n: number; title?: string; rows: BoardRow[]; around: BoardRow[]; found: BoardRow[]; you?: BoardRow | null; days_counted?: number; maximum?: number };
+
+/** True only for a whole-series leaderboard in the agreed shape (memory/WEBSITE_SERIES_RANK_NOTE.md). Anything else stays hidden. */
+export function isSeriesBoard(d: any): d is Board {
+  const row = (r: any) => !!r && typeof r.rank === "number" && typeof r.name === "string" && typeof r.handle === "string" && typeof r.score === "number" && typeof r.days === "number";
+  return !!d && typeof d.state === "string" && d.state !== "absent" && d.state !== "error" && typeof d.n === "number" && typeof d.days_counted === "number"
+    && Array.isArray(d.rows) && d.rows.every(row) && Array.isArray(d.around) && d.around.every(row) && (d.you == null || row(d.you));
+}
 
 export const grouped = (n: number) => n.toLocaleString("en-IN");
 const nameOf = (r: BoardRow) => (r.is_you ? (r.named ? `Aap · ${r.name}` : "Aap") : r.name);
@@ -59,11 +68,22 @@ export function BoardLink({ onPress }: { onPress: () => void }) {
   </Press>;
 }
 
-/** Your own place on the chosen day, on the series page's baby pink streak card: the Rank in the Rank Card's serif, then Score, Attempted, Accuracy and time. */
-export function YouCard({ kicker, you, n, maximum, live }: { kicker: string; you?: BoardRow | null; n: number; maximum?: number; live: boolean }) {
+/**
+ * Your own place on the chosen day (or in the whole series), on the series page's baby pink streak card: the Rank in the
+ * Rank Card's serif, then four facts. Under them: write or change the name the leaderboards show for you, and share the Rank.
+ * `name` = that name when the website has not sent your row ("" = none yet); `counted` = the days a whole-series Rank adds up.
+ */
+export function YouCard({ kicker, label, none, you, n, maximum, counted, name, onName, onShare }: {
+  kicker: string; label: string; none: string; you?: BoardRow | null; n: number; maximum?: number; counted?: number; name?: string; onName?: () => void; onShare?: () => void;
+}) {
   const ink = colors.custom_seriesPinkInk; // the small words on baby pink
-  const narrow = useWindowDimensions().width < 360; // a small phone: the four facts sit two by two, so no number is cut
-  const facts: [string, string][] = you ? [["Score", maximum ? `${you.score}/${maximum}` : String(you.score)], ["Attempted", String(you.attempted)], ["Accuracy", pc(you.accuracy)], ["Time", mmss(you.time)]] : [];
+  const whole = you?.days != null;
+  // A small phone, or the whole series' long totals: the four facts sit two by two, so no number is cut.
+  const two = useWindowDimensions().width < 360 || whole;
+  const facts: [string, string][] = !you ? []
+    : whole ? [["Score", maximum ? `${grouped(you.score)}/${grouped(maximum)}` : grouped(you.score)], ["Din diye", counted ? `${you.days}/${counted}` : String(you.days)], ["Accuracy", pc(you.accuracy)], ["Attempted", grouped(you.attempted)]]
+    : [["Score", maximum ? `${you.score}/${maximum}` : String(you.score)], ["Attempted", String(you.attempted)], ["Accuracy", pc(you.accuracy)], ["Time", mmss(you.time)]];
+  const named = you ? you.named : !!name;
   return <View testID="aits-board-you">
     <Shine radius={24} {...pinkShine} face={styles.you}>
       <View style={styles.kickers}>
@@ -76,17 +96,30 @@ export function YouCard({ kicker, you, n, maximum, live }: { kicker: string; you
           <T testID="aits-board-you-rank" color={colors.custom_pastelInk} style={styles.rank}>#{grouped(you.rank)}</T>
           <View style={styles.grow}>
             {/* Only the live day is the All India race; a missed day done later from the archive is ranked on that paper's own board. */}
-            <T testID="aits-board-you-label" w="heavy" size={14} color={colors.custom_pastelInk}>{live ? "Aapka All India Rank" : "Is paper mein aapka Rank"}</T>
+            <T testID="aits-board-you-label" w="heavy" size={14} color={colors.custom_pastelInk}>{label}</T>
             <T testID="aits-board-you-name" size={12} color={ink} numberOfLines={2}>Leaderboard par naam: {you.name}</T>
           </View>
         </View>
         <View style={styles.facts}>
-          {facts.map(([label, value], i) => <View key={label} style={[styles.fact, narrow && styles.factHalf, (narrow ? i % 2 === 1 : i > 0) && styles.factLine]}>
+          {facts.map(([label, value], i) => <View key={label} style={[styles.fact, two && styles.factHalf, (two ? i % 2 === 1 : i > 0) && styles.factLine]}>
             <T w="heavy" size={15} color={colors.custom_pastelInk} numberOfLines={1}>{value}</T>
             <T size={10.5} color={ink} numberOfLines={1}>{label}</T>
           </View>)}
         </View>
-      </> : <T testID="aits-board-you-none" w="bold" size={13} color={ink}>Is din ke leaderboard mein aapka Rank nahi hai.</T>}
+      </> : <>
+        <T testID="aits-board-you-none" w="bold" size={13} color={ink}>{none}</T>
+        {name !== undefined ? <T testID="aits-board-you-name" size={12} color={ink} numberOfLines={2}>Leaderboard par naam: {name || "abhi nahi likha"}</T> : null}
+      </>}
+      {onName || (onShare && you) ? <View style={styles.actions}>
+        {onName ? <Press testID="aits-board-name-edit" onPress={onName} accessibilityLabel={named ? "Leaderboard ka naam badlo" : "Leaderboard par apna naam likho"} style={styles.act}>
+          <Icon name="pencil" size={16} color={colors.custom_pastelInk} />
+          <T testID="aits-board-name-edit-label" w="heavy" size={13} color={colors.custom_pastelInk} numberOfLines={1}>{named ? "Naam badlo" : "Naam likho"}</T>
+        </Press> : null}
+        {onShare && you ? <Press testID="aits-board-share" onPress={onShare} accessibilityLabel="Apna Rank share karo" style={[styles.act, styles.actDark]}>
+          <Icon name="share-variant" size={16} color={colors.onSurfaceInverse} />
+          <T w="heavy" size={13} color={colors.onSurfaceInverse} numberOfLines={1}>Share karo</T>
+        </Press> : null}
+      </View> : null}
     </Shine>
   </View>;
 }
@@ -146,10 +179,10 @@ export function BoardRows({ rows, you, look, testID }: { rows: BoardRow[]; you?:
             : <T w="heavy" size={r.rank > 999 ? 12 : 14} color={colors.custom_tabInk} numberOfLines={1} style={styles.markText}>#{r.rank}</T>}
           <View style={styles.grow}>
             <T w="heavy" size={14.5} color={colors.custom_tabInk} numberOfLines={1}>{nameOf(r)}</T>
-            <T size={11.5} color={colors.custom_tabInkSoft} numberOfLines={1}>Attempted {r.attempted} · Accuracy {pc(r.accuracy)} · {mmss(r.time)}</T>
+            <T size={11.5} color={colors.custom_tabInkSoft} numberOfLines={1}>{r.days != null ? `${r.days} din diye · Accuracy ${pc(r.accuracy)}` : `Attempted ${r.attempted} · Accuracy ${pc(r.accuracy)} · ${mmss(r.time)}`}</T>
           </View>
           <View style={styles.side}>
-            <T w="heavy" size={18} color={colors.custom_tabInk}>{r.score}</T>
+            <T w="heavy" size={18} color={colors.custom_tabInk}>{grouped(r.score)}</T>
             {r.is_you ? <View style={styles.youTag}><T size={10} w="heavy" color={colors.custom_tabInk}>AAP</T></View>
               : ahead != null ? <T w="bold" size={10.5} color={colors.custom_tabInkSoft}>{ahead > 0 ? `${ahead} aage` : ahead < 0 ? `${-ahead} peeche` : "barabar"}</T> : null}
           </View>
@@ -188,6 +221,10 @@ const styles = StyleSheet.create({
   fact: { flex: 1, minWidth: 0, alignItems: "center", gap: 1, paddingHorizontal: 4 },
   factHalf: { flexGrow: 0, flexShrink: 0, flexBasis: "50%" },
   factLine: { borderLeftWidth: 1, borderLeftColor: colors.custom_seriesPinkDeep },
+  // Two buttons side by side, each 44 high: the quiet one on white glass, the share one in the card's dark ink.
+  actions: { flexDirection: "row", gap: space.sm },
+  act: { flex: 1, minWidth: 0, minHeight: 44, borderRadius: 22, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, paddingHorizontal: 10, backgroundColor: colors.custom_whiteA70 },
+  actDark: { backgroundColor: colors.custom_pastelInk },
   // 19 inside the edge, as on Home's card. No padding under the steps: they stand on the card's own bottom edge.
   stage: { paddingTop: 19, paddingHorizontal: 19, gap: space.md, backgroundColor: colors.custom_series },
   stageTitle: { flexShrink: 1, textAlign: "right" },

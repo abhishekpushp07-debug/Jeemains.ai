@@ -1,10 +1,12 @@
 // The two card looks of the All India series, kept in one place so every card that wears one is exactly the same card:
 // Home's onyx-into-ruby All India card, and the series page's glossy baby pink streak card.
 import React, { useId } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Defs, RadialGradient, Rect, Stop } from "react-native-svg";
-import { colors, seriesEdge, tabEdges } from "@/src/theme";
+import { Glyph } from "@/src/components/Glyph";
+import { IconName, T } from "@/src/components/ui";
+import { colors, pastel, seriesEdge, space, tabEdges } from "@/src/theme";
 
 /** The face of Home's All India card: onyx into ruby, a red glow from the top right corner and a hairline sheen along the top. */
 export function SeriesBackdrop() {
@@ -34,6 +36,27 @@ export const pinkShine = {
   gloss: colors.custom_seriesPastelGloss, glint: colors.custom_seriesPastelGlint, band: 84, part: 46, corner: true,
 } as const;
 
+const softShine = { ring: 2, gloss: colors.custom_seriesPastelGloss, glint: colors.custom_seriesPastelGlint, band: 72, part: 46, corner: true } as const;
+
+/** The score trend card: two sky blues that change places slowly; azure, indigo and periwinkle run round its edge. Its line is royal blue. */
+export const skyShine = { ...softShine, tones: [colors.custom_tabSkySoft, colors.custom_tabSkySoftDeep], edge: tabEdges.sky } as const;
+
+/** The day map card: warm sand, so the green and red days stand out; Home's ruby, gold and rose run round its edge. */
+export const sandShine = { ...softShine, tones: [pastel.missed.from, pastel.missed.to], edge: seriesEdge } as const;
+
+/** "Nothing here yet" on a soft glossy card: the hairline icon on a white circle, a title and a sentence, in the dark inks that read on every soft colour. */
+export function SoftEmpty({ icon, title, body, action }: { icon: IconName; title: string; body: string; action?: React.ReactNode }) {
+  return <View style={styles.empty}>
+    <View style={styles.emptyIcon}><Glyph name={icon} size={28} color={colors.custom_tabInk} stroke={1.5} /></View>
+    <T w="bold" size={17} color={colors.custom_tabInk} style={styles.center}>{title}</T>
+    <T size={13} color={colors.custom_tabInkSoft} style={styles.center}>{body}</T>
+    {action}
+  </View>;
+}
+
 const styles = StyleSheet.create({
   sheen: { position: "absolute", top: 0, left: 28, right: 28, height: 1 },
+  center: { textAlign: "center" },
+  empty: { alignItems: "center", padding: space.xl - 2, gap: space.sm },
+  emptyIcon: { width: 64, height: 64, borderRadius: 32, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_tabChip },
 });

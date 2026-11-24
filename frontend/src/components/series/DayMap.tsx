@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Press, T } from "@/src/components/ui";
 import { LinearGradient } from "expo-linear-gradient";
-import { DCard } from "@/src/components/design";
+import { Shine } from "@/src/analysis/Shine";
 import { colors, space } from "@/src/theme";
 import { istDate } from "@/src/navigation";
 import { DayInfo } from "@/src/series";
 import { DAY_LOOK_ORDER, DAY_LOOKS, dayLook } from "./dayLook";
+import { sandShine } from "./looks";
 
 const ROWS = 7, GAP = 6;
 const SLOPE = { start: { x: 0, y: 0 }, end: { x: 1, y: 1 } };
 
-/** GitHub-style grid of every series day, in the day strip's colours; tap a day to see it in the day strip. */
+/** GitHub-style grid of every series day, in the day strip's colours, on a glossy sand card; tap a day to see it in the day strip. */
 export function DayMap({ days, selected, onSelect }: { days: DayInfo[]; selected: number; onSelect: (day: number) => void }) {
   const [w, setW] = useState(0);
   const cols = Math.ceil(days.length / ROWS) || 9;
   const size = w ? Math.min(34, Math.floor((w - GAP * (cols - 1)) / cols)) : 0;
   const columns = Array.from({ length: cols }, (_, c) => days.slice(c * ROWS, c * ROWS + ROWS));
-  return <DCard testID="series-calendar" style={{ gap: space.lg }}>
+  return <View testID="series-calendar"><Shine radius={22} {...sandShine} face={styles.card}>
     <View onLayout={e => setW(e.nativeEvent.layout.width)} style={{ flexDirection: "row", gap: GAP, justifyContent: "center" }}>
       {size ? columns.map((col, c) => <View key={c} style={{ gap: GAP }}>
         {col.map(d => {
@@ -33,13 +34,15 @@ export function DayMap({ days, selected, onSelect }: { days: DayInfo[]; selected
     <View style={styles.legend}>
       {DAY_LOOK_ORDER.map(k => <View key={k} testID={"series-map-legend-" + k} style={styles.legendItem}>
         <LinearGradient colors={[DAY_LOOKS[k].from, DAY_LOOKS[k].to]} {...SLOPE} style={styles.swatch} />
-        <T size={11} color={colors.muted}>{DAY_LOOKS[k].label}</T>
+        <T size={11} color={colors.custom_tabInkSoft}>{DAY_LOOKS[k].label}</T>
       </View>)}
     </View>
-  </DCard>;
+  </Shine></View>;
 }
 
 const styles = StyleSheet.create({
+  // 15 inside the 2-point running edge: the card is the size it was with its 1-point line and 16 of padding.
+  card: { padding: space.lg - 1, gap: space.lg },
   cell: { alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "transparent" },
   cellOn: { borderColor: colors.onSurface },
   legend: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: space.lg },

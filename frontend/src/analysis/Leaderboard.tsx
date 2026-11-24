@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-import { api } from "@/src/api/client";
+import { ApiError, api } from "@/src/api/client";
 import { Icon, T } from "@/src/components/ui";
 import { colors, fonts, noOutline, radius, space } from "@/src/theme";
 import { TONE, mmss, pc } from "./format";
@@ -9,8 +9,18 @@ import { Block, ChipButton, EmptyLine } from "./parts";
 const seen = new Map<string, { d: any; at: number }>();
 /** Forget a paper's leaderboard, so the next look asks the website again. */
 export const forgetBoard = (id: string) => { [...seen.keys()].forEach(k => { if (k.startsWith(id + "|")) seen.delete(k); }); };
+/** Forget every leaderboard: the student's name on them has just changed. */
+export const forgetBoards = () => seen.clear();
 
-/** This paper's leaderboard, kept for a minute so the picker and the board share one request. */
+/** The whole All India series' leaderboard (every live day's Score added up) is asked through the same hook under this name. */
+export const SERIES_BOARD = "series:all-india-jee";
+const whole = (id: string) => id.startsWith("series:");
+const boardPath = (id: string) => (whole(id) ? `/series/${id.slice(7)}/leaderboard` : `/attempts/${id}/leaderboard`);
+
+/**
+ * One leaderboard, kept for a minute so the picker and the board share one request. `state` "error" = it could not be
+ * asked; "absent" (series only) = the website has no such leaderboard (it answers 404 until it starts sending one).
+ */
 export function useBoard(id: string, q = "") {
   const key = id + "|" + q;
   const [d, setD] = useState<any>(() => seen.get(key)?.d || null);
@@ -21,9 +31,9 @@ export function useBoard(id: string, q = "") {
       Promise.resolve().then(() => { if (live) setD(hit.d); });
       return () => { live = false; };
     }
-    const t = setTimeout(() => api(`/attempts/${id}/leaderboard${q ? "?q=" + encodeURIComponent(q) : ""}`)
+    const t = setTimeout(() => api(`${boardPath(id)}${q ? "?q=" + encodeURIComponent(q) : ""}`)
       .then(x => { seen.set(key, { d: x, at: Date.now() }); if (live) setD(x); })
-      .catch(() => { if (live) setD({ state: "error", rows: [], around: [], found: [] }); }), q ? 350 : 0);
+      .catch(e => { if (live) setD({ state: whole(id) && e instanceof ApiError && e.status === 404 ? "absent" : "error", rows: [], around: [], found: [] }); }), q ? 350 : 0);
     return () => { live = false; clearTimeout(t); };
   }, [id, q, key]);
   return d;

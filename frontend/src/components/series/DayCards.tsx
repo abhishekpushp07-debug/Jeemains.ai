@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { FlatList, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { Empty, Icon, Press, T } from "@/src/components/ui";
-import { PastelSurface, Pill } from "@/src/components/design";
+import { Icon, Press, T } from "@/src/components/ui";
+import { Pill } from "@/src/components/design";
 import { Shine } from "@/src/analysis/Shine";
 import { chipEdges, colors, pastel, pastelEdges, SeriesTone, space } from "@/src/theme";
 import { DAY_LOOK_ORDER, DAY_LOOKS, DayLook, dayLook } from "./dayLook";
 import { AnalysisButton } from "./AnalysisButton";
+import { SoftEmpty, skyShine } from "./looks";
 import { istDate } from "@/src/navigation";
 import { countdown, dayAction, dayAttempt, DayInfo, dayNote, istTime, Series, seriesDays } from "@/src/series";
 
@@ -15,11 +16,11 @@ const FACE = Object.fromEntries((Object.keys(pastel) as SeriesTone[]).map(t => [
 
 /**
  * A big day card in its status colours (the two change places slowly), under a gloss and a glass glint that crosses from
- * corner to corner, inside a running edge of its own colour family.
+ * corner to corner, inside a running edge of its own colour family. A finished day is royal blue with white words.
  */
 function ShineCard({ tone, testID, radius, face, children }: { tone: SeriesTone; testID: string; radius: number; face: StyleProp<ViewStyle>; children: React.ReactNode }) {
   return <View testID={testID}>
-    <Shine radius={radius} ring={2} tones={FACE[tone]} edge={pastelEdges[tone]} gloss={colors.custom_seriesPastelGloss} glint={colors.custom_seriesPastelGlint} band={72} part={46} corner face={face}>{children}</Shine>
+    <Shine radius={radius} ring={2} tones={FACE[tone]} edge={pastelEdges[tone]} gloss={pastel[tone].gloss} glint={pastel[tone].glint} band={72} part={46} corner face={face}>{children}</Shine>
   </View>;
 }
 
@@ -37,7 +38,7 @@ export function TodayCard({ series, day, last }: { series: Series; day?: DayInfo
     const p = pastel[before ? "upcoming" : "done"];
     return <ShineCard testID="series-prelaunch" tone={before ? "upcoming" : "done"} radius={24} face={styles.today}>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>{before ? `STARTS ${istDate(series.first_date).toUpperCase()}` : "SERIES COMPLETE"}</T>
-      <T w="heavy" size={20} color={colors.custom_pastelInk}>{before ? `The first challenge opens ${istDate(series.first_date)}.` : "The live series has ended."}</T>
+      <T w="heavy" size={20} color={p.title}>{before ? `The first challenge opens ${istDate(series.first_date)}.` : "The live series has ended."}</T>
       <T size={12.5} color={p.body}>{before ? `Your ${seriesDays(series)}-day schedule is below. Papers unlock only after publication and their opening time.` : "Continue in the practice archive. Live results stay separate."}</T>
     </ShineCard>;
   }
@@ -56,7 +57,7 @@ export function TodayCard({ series, day, last }: { series: Series; day?: DayInfo
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>DAY {day.day} · {day.label.toUpperCase()}</T>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>{istDate(day.date).toUpperCase()}</T>
     </View>
-    <T testID="series-today-title" w="heavy" size={21} color={colors.custom_pastelInk}>{day.slot.title}</T>
+    <T testID="series-today-title" w="heavy" size={21} color={p.title}>{day.slot.title}</T>
     <T size={12.5} color={p.body}>75 Q · 180 min · +4 / −1</T>
     {showClock ? <View testID="series-last-start" style={styles.clock}>
       <Icon name="clock-outline" size={14} color={colors.custom_pastelInk} />
@@ -124,7 +125,7 @@ export function DayCard({ day }: { day: DayInfo }) {
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>DAY {day.day} · {day.label.toUpperCase()}</T>
       <T w="heavy" size={10} color={p.ink} style={styles.caps}>{istDate(day.date).toUpperCase()}</T>
     </View>
-    <T w="heavy" size={17} color={colors.custom_pastelInk} numberOfLines={2}>{day.slot.title}</T>
+    <T w="heavy" size={17} color={p.title} numberOfLines={2}>{day.slot.title}</T>
     <View style={[styles.between, { alignItems: "flex-end" }]}>
       <View style={{ flex: 1, alignItems: "flex-start", gap: space.sm }}>
         {attempted ? <AnalysisButton testID={"series-daycard-analysis-" + day.day}
@@ -136,30 +137,32 @@ export function DayCard({ day }: { day: DayInfo }) {
       </View>
       {s ? <View testID={"series-daycard-score-" + day.day} style={{ alignItems: "flex-end" }}>
         <T w="heavy" size={9} color={p.ink} style={{ letterSpacing: 1.4 }}>{practice ? "PRACTICE MARKS" : "MARKS"}</T>
-        <T w="heavy" size={28} color={colors.custom_pastelInk}>{s.score}<T w="bold" size={12} color={p.body}>/{s.maximum}</T></T>
+        <T w="heavy" size={28} color={p.title}>{s.score}<T w="bold" size={12} color={p.body}>/{s.maximum}</T></T>
       </View> : null}
     </View>
   </ShineCard>;
 }
 
-/** Series attempts (live + archive practice), newest first. */
+/** Series attempts (live + archive practice), newest first: glossy rows in their status colours (a scored one is royal blue), each with its own running edge. */
 export function ResultsList({ items, dayOf, limit }: { items: any[]; dayOf: (date?: string) => number | undefined; limit: number }) {
   const router = useRouter();
-  if (!items.length) return <View testID="series-history-empty" style={styles.empty}><Empty icon="chart-line-variant" title="Your first attempt starts your story." body="Series attempts and released results appear here. No sample scores are shown." /></View>;
+  if (!items.length) return <View testID="series-history-empty">
+    <Shine radius={20} {...skyShine}><SoftEmpty icon="chart-line-variant" title="Your first attempt starts your story." body="Series attempts and released results appear here. No sample scores are shown." /></Shine>
+  </View>;
   return <View style={{ gap: space.sm }}>
-    {items.slice(0, limit).map(a => {
-      const tone = a.summary ? "done" : a.resumable ? "today" : "upcoming";
+    {items.slice(0, limit).map((a, i) => {
+      const tone: SeriesTone = a.summary ? "done" : a.resumable ? "today" : "upcoming";
       const p = pastel[tone];
       const day = dayOf(a.series_date);
-      return <Press key={a.id} testID={"series-result-" + a.id} onPress={() => router.push(((a.resumable ? "/attempt/" : "/result/") + a.id) as any)} accessibilityLabel={`${a.title}. ${a.summary ? `${a.summary.score} of ${a.summary.maximum}` : a.resumable ? "In progress" : "Result pending"}`}>
-        <PastelSurface tone={tone} style={styles.result}>
+      return <Press key={a.id} testID={"series-result-" + a.id} onPress={() => router.push(((a.resumable ? "/attempt/" : "/result/") + a.id) as any)} accessibilityLabel={`${a.title}. ${a.summary ? `${a.summary.score} of ${a.summary.maximum}` : a.resumable ? "In progress" : "Result pending"}`} scaleTo={0.99} style={styles.resultWrap}>
+        <Shine radius={18} ring={2} tones={FACE[tone]} edge={pastelEdges[tone]} gloss={p.gloss} glint={p.glint} band={34} part={34} delay={i * 180} face={styles.result}>
           <View style={{ flex: 1, gap: 2 }}>
             <T w="heavy" size={9.5} color={p.ink} style={{ letterSpacing: 1.4 }}>{day ? `DAY ${day} · ` : ""}{a.mode === "series_live" ? "LIVE" : "PRACTICE"}{a.series_date ? ` · ${istDate(a.series_date).toUpperCase()}` : ""}</T>
-            <T w="heavy" size={14} color={colors.custom_pastelInk} numberOfLines={1}>{a.title}</T>
+            <T w="heavy" size={14} color={p.title} numberOfLines={1}>{a.title}</T>
           </View>
-          <T w="heavy" size={a.summary ? 15 : 12} color={colors.custom_pastelInk}>{a.summary ? `${a.summary.score}/${a.summary.maximum}` : a.resumable ? "Resume" : a.status === "embargoed" ? "11:59 PM" : "Preparing"}</T>
-          <Icon name="chevron-right" size={20} color={colors.custom_pastelInk} />
-        </PastelSurface>
+          <T w="heavy" size={a.summary ? 15 : 12} color={p.title}>{a.summary ? `${a.summary.score}/${a.summary.maximum}` : a.resumable ? "Resume" : a.status === "embargoed" ? "11:59 PM" : "Preparing"}</T>
+          <Icon name="chevron-right" size={20} color={p.title} />
+        </Shine>
       </Press>;
     })}
   </View>;
@@ -178,6 +181,7 @@ const styles = StyleSheet.create({
   chipOn: { height: 62, alignItems: "center", justifyContent: "center", gap: 2 },
   chipDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: "transparent" },
   detail: { padding: 18, gap: space.sm },
-  result: { borderRadius: 18, paddingHorizontal: space.lg, paddingVertical: 12, minHeight: 60, flexDirection: "row", alignItems: "center", gap: space.sm },
-  empty: { backgroundColor: colors.custom_card, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLine },
+  // A row is 60 high as before: 56 inside its 2-point running edge.
+  resultWrap: { borderRadius: 18 },
+  result: { paddingHorizontal: space.lg - 2, paddingVertical: 10, minHeight: 56, flexDirection: "row", alignItems: "center", gap: space.sm },
 });

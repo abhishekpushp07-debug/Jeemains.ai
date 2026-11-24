@@ -58,7 +58,7 @@ export function HomeSeriesCard({ series, streak, days, error }: { series: Series
         </View>
         <View style={styles.body}>
           <View style={{ flex: 1, gap: 6 }}>
-            <T testID="series-availability-badge" w="bold" size={10.5} color={pastel[st.tone].from} style={styles.caps} numberOfLines={1}>{st.status.toUpperCase()}</T>
+            <T testID="series-availability-badge" w="bold" size={10.5} color={pastel[st.tone].tint} style={styles.caps} numberOfLines={1}>{st.status.toUpperCase()}</T>
             <T testID="series-banner-title" w="heavy" size={narrow ? 20 : 23} color={colors.onSurfaceInverse} numberOfLines={2} style={{ letterSpacing: -0.3 }}>{st.title}</T>
           </View>
           <ProgressRing testID="series-home-ring" size={narrow ? 66 : 78} stroke={6} value={total ? done / total : 0} track={colors.custom_whiteA15} color={colors.brandPrimary} label={`${done} of ${total || "—"} days done`}>

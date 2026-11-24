@@ -1,10 +1,10 @@
 import React, { useEffect, useId } from "react";
-import { ActivityIndicator, Modal, Pressable, ScrollView, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { ActivityIndicator, Modal, Platform, Pressable, ScrollView, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import Svg, { Circle, Defs, LinearGradient as SvgGradient, Stop } from "react-native-svg";
 import Animated, { Easing, SlideInDown, FadeIn, useAnimatedProps, useReducedMotion, useSharedValue, withTiming } from "react-native-reanimated";
+import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { colors, pastel, radius, SeriesTone, space, useTheme } from "@/src/theme";
+import { colors, radius, space, useTheme } from "@/src/theme";
 import { IconName, Press, T } from "./ui";
 import { Glyph } from "./Glyph";
 
@@ -25,12 +25,6 @@ export function SectionLabel({ title, action, onAction, right, testID, actionTes
 /** White hairline card with soft round corners. */
 export function DCard({ children, style, testID }: { children: React.ReactNode; style?: StyleProp<ViewStyle>; testID?: string }) {
   return <View testID={testID} style={[styles.card, style]}>{children}</View>;
-}
-
-/** All India status pastel surface (peach-rose today, green done, teal upcoming, sand missed). */
-export function PastelSurface({ tone, style, children, testID }: { tone: SeriesTone; style?: StyleProp<ViewStyle>; children?: React.ReactNode; testID?: string }) {
-  const p = pastel[tone];
-  return <LinearGradient testID={testID} colors={[p.from, p.to]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={style}>{children}</LinearGradient>;
 }
 
 type PillKind = "light" | "dark" | "brand" | "outline" | "teal" | "danger";
@@ -78,10 +72,11 @@ export function RoundButton({ icon, onPress, testID, label, color, active, style
   </Press>;
 }
 
-export function StatusLine({ color, label, testID }: { color: string; label: string; testID?: string }) {
+/** `ink` = the label's colour where the dot's own colour would not read (a label on a soft coloured card). */
+export function StatusLine({ color, ink, label, testID }: { color: string; ink?: string; label: string; testID?: string }) {
   return <View testID={testID} style={styles.statusLine}>
     <View style={[styles.dot, { backgroundColor: color }]} />
-    <T testID={testID ? `${testID}-label` : undefined} w="bold" size={10.5} color={color} style={{ letterSpacing: 1.4 }} numberOfLines={1}>{label.toUpperCase()}</T>
+    <T testID={testID ? `${testID}-label` : undefined} w="bold" size={10.5} color={ink ?? color} style={{ letterSpacing: 1.4 }} numberOfLines={1}>{label.toUpperCase()}</T>
   </View>;
 }
 
@@ -140,17 +135,15 @@ export function ProgressRing({ size, stroke, value, track, color, gradient, chil
   </View>;
 }
 
-/** Bottom sheet: rises from the bottom, handle + title + close. */
-export function DSheet({ visible, onClose, title, children, testID, closeTestID, scroll = true }: {
-  visible: boolean; onClose: () => void; title?: string; children: React.ReactNode; testID?: string; closeTestID?: string; scroll?: boolean;
+/** Bottom sheet: rises from the bottom, handle + title + close. `keyboard` = it holds a text box, so it rises with the keyboard and the box is never under it. */
+export function DSheet({ visible, onClose, title, children, testID, closeTestID, scroll = true, keyboard }: {
+  visible: boolean; onClose: () => void; title?: string; children: React.ReactNode; testID?: string; closeTestID?: string; scroll?: boolean; keyboard?: boolean;
 }) {
   const insets = useSafeAreaInsets();
   const reduced = useReducedMotion();
   const { colors: c } = useTheme(); // follows the screen's palette (the dark Rank tab opens dark sheets)
   if (!visible) return null;
-  // A transparent Modal covers the whole window (tab bar included), wherever the sheet is declared.
-  return <Modal visible transparent animationType="none" statusBarTranslucent onRequestClose={onClose}>
-    <View style={styles.sheetLayer}>
+  const layer = <>
     <Animated.View entering={reduced ? undefined : FadeIn.duration(160)} style={StyleSheet.absoluteFill}>
       <Pressable testID={(testID ?? "sheet") + "-backdrop"} accessibilityLabel="Close" onPress={onClose} style={[StyleSheet.absoluteFill, { backgroundColor: c.custom_shade }]} />
     </Animated.View>
@@ -165,7 +158,11 @@ export function DSheet({ visible, onClose, title, children, testID, closeTestID,
       {scroll ? <ScrollView contentContainerStyle={{ gap: space.md, paddingBottom: space.xs }} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">{children}</ScrollView>
         : <View style={{ gap: space.md }}>{children}</View>}
     </Animated.View>
-    </View>
+  </>;
+  // A transparent Modal covers the whole window (tab bar included), wherever the sheet is declared.
+  return <Modal visible transparent animationType="none" statusBarTranslucent onRequestClose={onClose}>
+    {keyboard ? <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.sheetLayer}>{layer}</KeyboardAvoidingView>
+      : <View style={styles.sheetLayer}>{layer}</View>}
   </Modal>;
 }
 
