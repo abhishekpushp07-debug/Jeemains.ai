@@ -3,7 +3,8 @@ import { StyleSheet, View } from "react-native";
 import { ErrorBox, Icon, IconName, Skeleton, T } from "@/src/components/ui";
 import { ProgressRing } from "@/src/components/design";
 import { Shine } from "@/src/analysis/Shine";
-import { colors, space, tabEdges } from "@/src/theme";
+import { colors, space } from "@/src/theme";
+import { pinkShine } from "./looks";
 import { DayInfo, Streak, skippedCount } from "@/src/series";
 import { istDate } from "@/src/navigation";
 
@@ -17,10 +18,10 @@ function Fact({ icon, color, bg, value, label, testID }: { icon: IconName; color
   </View>;
 }
 
-const PINK = [colors.custom_seriesPink, colors.custom_seriesPinkDeep] as const;
 /**
  * The streak card at the top of the series page: glossy baby pink (its two pinks change places slowly), with rose, orchid
- * and coral running round its edge and a glass glint that crosses it from corner to corner.
+ * and coral running round its edge and a glass glint that crosses it from corner to corner. The look lives in ./looks,
+ * shared with the AITS Leaderboard's Rank card.
  */
 export function JourneyCard({ streak, days, error, retry }: { streak: Streak | null; days: DayInfo[]; error?: string; retry: () => void }) {
   if (error && !streak) return <ErrorBox error="Your streak couldn’t load. Your submissions are safe." retry={retry} testID="streak-error" />;
@@ -29,7 +30,7 @@ export function JourneyCard({ streak, days, error, retry }: { streak: Streak | n
   const cups = streak.milestones || [];
   const total = streak.total_days || Math.max(1, ...cups.map(c => c.days)); // the website's day count
   return <View testID="streak-card">
-    <Shine radius={24} ring={2} tones={PINK} edge={tabEdges.pink} gloss={colors.custom_seriesPastelGloss} glint={colors.custom_seriesPastelGlint} band={84} part={46} corner face={styles.card}>
+    <Shine radius={24} {...pinkShine} face={styles.card}>
     <View style={styles.row}>
       <ProgressRing testID="streak-done" size={108} stroke={9} value={done / total} track={colors.custom_qFresh} gradient={[colors.custom_qMarked, colors.custom_doneInk]} label={`${done} of ${total} days`}>
         <T w="heavy" size={24}>{done}</T>

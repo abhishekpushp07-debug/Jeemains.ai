@@ -2,29 +2,31 @@
 // parts: Toppers (the top three on a podium and the top ten), Aas-paas (the students next to you) and Dhoondo (find
 // anyone by name or Rank). Every number is the website's own leaderboard of that day's paper; the phone only works out
 // how many marks a neighbour is ahead of or behind you. Reached from the series page; back returns there.
-import React, { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { StyleSheet, TextInput, View, useWindowDimensions } from "react-native";
 import { useRouter } from "expo-router";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
-import { Empty, ErrorBox, Icon, Skeleton, T } from "@/src/components/ui";
-import { DCard, Pill, ScreenHeader, SectionLabel } from "@/src/components/design";
+import { ErrorBox, Icon, Skeleton, T } from "@/src/components/ui";
+import { Pill, ScreenHeader, SectionLabel } from "@/src/components/design";
 import { GlossTabs, TabLook } from "@/src/components/GlossTabs";
+import { Shine } from "@/src/analysis/Shine";
 import { DayStrip } from "@/src/components/series/DayCards";
-import { Board, BoardRow, BoardRows, Podium, YouCard, grouped } from "@/src/components/series/Board";
+import { Board, BoardRow, BoardRows, NoticeCard, Podium, YouCard, grouped, pageSeen } from "@/src/components/series/Board";
 import { forgetBoard, useBoard } from "@/src/analysis/Leaderboard";
 import { RANK_NOTE, r1 } from "@/src/analysis/format";
 import { ScreenMotion } from "@/src/motion";
 import { istDate } from "@/src/navigation";
-import { colors, fonts, noOutline, radius, space, tabEdges } from "@/src/theme";
+import { colors, fonts, noOutline, pastel, radius, space, tabEdges } from "@/src/theme";
 import { DayInfo, dayAttempt, istTime, useSeriesData } from "@/src/series";
 
 type Part = "top" | "around" | "find";
-// The three parts wear My Tests' glossy tab colours: yellow for the toppers, baby pink for your neighbours, sky blue for the search.
+// The three parts are glossy tabs, each in its own colour: yellow for the toppers, orange for your neighbours, sky blue
+// for the search. The rows under a tab wear that tab's own soft colours and running edge.
 const LOOK: Record<Part, TabLook> = {
   top: { on: [colors.custom_tabSun, colors.custom_tabSunDeep], rest: [colors.custom_tabSunSoft, colors.custom_tabSunSoftDeep], edge: tabEdges.sun, glow: colors.custom_tabSunGlow },
-  around: { on: [colors.custom_tabPink, colors.custom_tabPinkDeep], rest: [colors.custom_tabPinkSoft, colors.custom_tabPinkSoftDeep], edge: tabEdges.pink, glow: colors.custom_tabPinkGlow },
+  around: { on: [colors.custom_tabOrange, colors.custom_tabOrangeDeep], rest: [colors.custom_tabOrangeSoft, colors.custom_tabOrangeSoftDeep], edge: tabEdges.orange, glow: colors.custom_tabOrangeGlow },
   find: { on: [colors.custom_tabSky, colors.custom_tabSkyDeep], rest: [colors.custom_tabSkySoft, colors.custom_tabSkySoftDeep], edge: tabEdges.sky, glow: colors.custom_tabSkyGlow },
 };
 
@@ -32,6 +34,9 @@ export default function SeriesLeaderboard() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
+  const { height } = useWindowDimensions();
+  const top = useRef(0); // how far the page is scrolled
+  useEffect(() => { pageSeen(top.current, height); }, [height]);
   const { series, history, days, reload } = useSeriesData(user?.id);
   // A day is listed once its paper is handed in: scored, or sealed until that day's result opens.
   const done = days.filter(d => { const a = dayAttempt(d); return !!a && !a.resumable; });
@@ -50,19 +55,18 @@ export default function SeriesLeaderboard() {
     <ScreenMotion>
       <View testID="aits-board-screen" style={[styles.screen, { paddingTop: insets.top + space.sm }]}>
         <ScreenHeader testID="aits-board-header" title="AITS Leaderboard" eyebrow="All India Series · har din" backTestID="aits-board-back" onBack={back} />
-        <KeyboardAwareScrollView bottomOffset={24} keyboardShouldPersistTaps="handled" contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + space.xxl }]}>
+        {/* Every scroll says which slice of the page shows, so only the rows on screen keep their shine moving. */}
+        <KeyboardAwareScrollView bottomOffset={24} keyboardShouldPersistTaps="handled" onScroll={e => { top.current = e.nativeEvent.contentOffset.y; pageSeen(top.current, e.nativeEvent.layoutMeasurement.height); }}
+          contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + space.xxl }]}>
           <ErrorBox error={error} retry={reload} testID="aits-board-load-error" />
           {loading ? <><Skeleton h={76} style={styles.soft} /><Skeleton h={168} style={styles.soft} /><Skeleton h={52} style={styles.round} /><Skeleton h={240} style={styles.soft} /></>
             : error ? null
-            : !day || !attempt ? <DCard testID="aits-board-empty"><Empty icon="trophy" title="Abhi koi AITS paper submit nahi hua." body="Kisi live din ka paper do. Us din ka result khulte hi poore India ka leaderboard yahan aa jayega." /></DCard>
+            : !day || !attempt ? <NoticeCard testID="aits-board-empty" icon="trophy" title="Abhi koi AITS paper submit nahi hua." note="Kisi live din ka paper do. Us din ka result khulte hi poore India ka leaderboard yahan aa jayega." />
             : <>
               <SectionLabel title="Din chuno" right={<T testID="aits-board-days" size={12} color={colors.muted}>{done.length} din diye</T>} />
               <DayStrip prefix="aits-board" days={done} selected={day.day} onSelect={d => setPicked(d.day)} />
               {!attempt.summary && attempt.status === "embargoed"
-                ? <DCard testID="aits-board-sealed" style={styles.wait}>
-                  <T w="heavy" size={16}>Day {day.day} ka result {istTime(day.slot.closes_at)} par khulega.</T>
-                  <T size={13} color={colors.muted}>Leaderboard result ke saath hi aata hai, jab sabka time khatam ho jaata hai.</T>
-                </DCard>
+                ? <NoticeCard testID="aits-board-sealed" icon="lock-clock" title={`Day ${day.day} ka result ${istTime(day.slot.closes_at)} par khulega.`} note="Leaderboard result ke saath hi aata hai, jab sabka time khatam ho jaata hai." />
                 : <DayBoard key={`${attempt.id}:${asked}`} day={day} part={part} onPart={setPart} onRetry={() => { forgetBoard(attempt.id); setAsked(n => n + 1); }} />}
             </>}
         </KeyboardAwareScrollView>
@@ -77,11 +81,14 @@ function DayBoard({ day, part, onPart, onRetry }: { day: DayInfo; part: Part; on
   const d: Board | null = useBoard(a.id);
   const [all, setAll] = useState(false);
   if (!d) return <><Skeleton h={168} style={styles.soft} /><Skeleton h={52} style={styles.round} /><Skeleton h={240} style={styles.soft} /></>;
-  if (d.state !== "ready") return <DCard testID="aits-board-wait" style={styles.wait}>
-    <T w="heavy" size={16}>{d.state === "error" ? "Leaderboard nahi khul paaya." : "Is din ka leaderboard abhi taiyaar nahi hai."}</T>
-    <T testID="aits-board-wait-note" size={13} color={colors.muted}>{d.state === "error" ? "Internet dekh kar dobara try karo." : RANK_NOTE[d.state] || "Thodi der mein dobara dekho."}</T>
-    <Pill testID="aits-board-retry" kind="outline" size="sm" icon="refresh" label="Dobara dekho" onPress={onRetry} />
-  </DCard>;
+  if (d.state !== "ready") {
+    const failed = d.state === "error";
+    return <NoticeCard testID="aits-board-wait" noteTestID="aits-board-wait-note" icon={failed ? "wifi-off" : "timer-sand"}
+      title={failed ? "Leaderboard nahi khul paaya." : "Is din ka leaderboard abhi taiyaar nahi hai."}
+      note={failed ? "Internet dekh kar dobara try karo." : RANK_NOTE[d.state] || "Thodi der mein dobara dekho."}>
+      <Pill testID="aits-board-retry" size="sm" icon="refresh" label="Dobara dekho" bg={colors.custom_pastelInk} ink={pastel.upcoming.cta} onPress={onRetry} />
+    </NoticeCard>;
+  }
 
   const rows: BoardRow[] = d.rows || [], around: BoardRow[] = d.around || [], you = d.you || null;
   const shown = all ? rows : rows.slice(0, 10);
@@ -99,16 +106,16 @@ function DayBoard({ day, part, onPart, onRetry }: { day: DayInfo; part: Part; on
     <GlossTabs prefix="aits-board-tab" value={part} onChange={onPart} items={tabs} />
     {part === "top" ? <>
       <Podium rows={rows} title={d.title} />
-      {shown.length > 3 ? <BoardRows testID="aits-board-top" rows={shown.slice(3)} /> : null}
+      {shown.length > 3 ? <BoardRows testID="aits-board-top" rows={shown.slice(3)} look={LOOK.top} /> : null}
       {rows.length > 10 ? <Pill testID="aits-board-more" kind="outline" size="sm" label={all ? "Sirf top 10 dikhao" : `Top ${rows.length} dikhao`} onPress={() => setAll(v => !v)} /> : null}
       {you && !shown.some(r => r.is_you) ? <>
         <T w="bold" size={11} color={colors.custom_eyebrow} style={styles.caps}>AAP YAHAN HO</T>
-        <BoardRows testID="aits-board-top-you" rows={[you]} />
+        <BoardRows testID="aits-board-top-you" rows={[you]} look={LOOK.top} />
       </> : null}
     </> : part === "around" ? <>
       {you && (you.rank === 1 || gap > 0) ? <T testID="aits-board-next" w="bold" size={13} color={colors.custom_softText}>
         {you.rank === 1 ? "Is din aap sabse upar ho." : `Rank #${ahead!.rank} aapse ${gap} marks aage hai.`}</T> : null}
-      {around.length ? <BoardRows testID="aits-board-around" rows={around} you={you} />
+      {around.length ? <BoardRows testID="aits-board-around" rows={around} you={you} look={LOOK.around} />
         : <T testID="aits-board-around-none" size={13} color={colors.muted}>Aapke aas-paas ke students tab dikhte hain jab is din ka aapka Rank ban jaata hai.</T>}
     </> : <Find id={a.id} />}
     <T size={11.5} color={colors.custom_eyebrow}>Har student ka pehla attempt gina jaata hai. Sirf naam, Score aur totals dikhte hain; kisi ke jawab ya phone number kabhi nahi.</T>
@@ -120,11 +127,12 @@ function Find({ id }: { id: string }) {
   const [q, setQ] = useState("");
   const term = q.trim();
   return <>
-    <View style={styles.search}>
-      <Icon name="magnify" size={18} color={colors.custom_softText} />
-      <TextInput testID="aits-board-search" value={q} onChangeText={t => setQ(t.slice(0, 20))} placeholder="Naam ya Rank likho" placeholderTextColor={colors.custom_dim}
+    {/* The search box wears the Dhoondo tab's sky blue, with the same gloss, glint and running edge. */}
+    <Shine radius={radius.pill} ring={2} tones={LOOK.find.rest} edge={LOOK.find.edge} gloss={colors.custom_tabGloss} glint={colors.custom_tabGlint} band={26} part={34} face={styles.search}>
+      <Icon name="magnify" size={18} color={colors.custom_tabInkSoft} />
+      <TextInput testID="aits-board-search" value={q} onChangeText={t => setQ(t.slice(0, 20))} placeholder="Naam ya Rank likho" placeholderTextColor={colors.custom_tabInkSoft}
         accessibilityLabel="Leaderboard mein dhoondo" autoCorrect={false} returnKeyType="search" style={[styles.input, noOutline]} />
-    </View>
+    </Shine>
     {term ? <Found key={term} id={id} term={term} />
       : <T testID="aits-board-find-hint" size={13} color={colors.muted}>Kisi bhi student ka naam ya Rank likho. Jaise: Arjun, ya 25.</T>}
   </>;
@@ -136,7 +144,7 @@ function Found({ id, term }: { id: string; term: string }) {
   if (!d) return <Skeleton h={60} style={styles.soft} />;
   if (d.state === "error") return <T testID="aits-board-find-error" size={13} color={colors.error}>Dhoondh nahi paaye. Internet dekh kar dobara likho.</T>;
   const found = d.found || [];
-  return found.length ? <BoardRows testID="aits-board-found" rows={found} />
+  return found.length ? <BoardRows testID="aits-board-found" rows={found} look={LOOK.find} />
     : <T testID="aits-board-none" size={13} color={colors.muted}>Is naam ya Rank ka koi student nahi mila.</T>;
 }
 
@@ -144,8 +152,9 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.surface },
   content: { padding: space.lg, paddingTop: space.xs, gap: space.md },
   soft: { borderRadius: 22 }, round: { borderRadius: radius.pill },
-  wait: { gap: space.sm },
   caps: { letterSpacing: 1.6, marginTop: space.xs },
-  search: { flexDirection: "row", alignItems: "center", gap: 8, minHeight: 48, paddingHorizontal: space.md, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_bar },
-  input: { flex: 1, minHeight: 46, fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingVertical: 0 },
+  // 48 high as before: 44 inside the 2-point running edge.
+  search: { flexDirection: "row", alignItems: "center", gap: 8, minHeight: 44, paddingHorizontal: space.md },
+  // `position`: on the web a text box is the one piece that is not layered by itself, so the face's colours would be drawn over what is typed.
+  input: { position: "relative", flex: 1, minHeight: 42, fontFamily: fonts.medium, fontSize: 14, color: colors.custom_tabInk, paddingVertical: 0 },
 });

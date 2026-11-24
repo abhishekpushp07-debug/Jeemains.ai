@@ -159,6 +159,8 @@ const dark = {
   custom_tabPink: "#FFAFC9", custom_tabPinkDeep: "#FF82AB", custom_tabPinkSoft: "#FFD3E1", custom_tabPinkSoftDeep: "#FFBDD2", custom_tabPinkGlow: "#FF4D8F",
   custom_tabSun: "#FFEE5C", custom_tabSunDeep: "#FFD60A", custom_tabSunSoft: "#FFF29A", custom_tabSunSoftDeep: "#FFE455", custom_tabSunGlow: "#FFA200",
   custom_tabSky: "#9BDCFF", custom_tabSkyDeep: "#52BDFF", custom_tabSkySoft: "#C4E8FF", custom_tabSkySoftDeep: "#96D5FF", custom_tabSkyGlow: "#1E90FF",
+  // The AITS Leaderboard's "Aas-paas" tab is orange, built the same way (words are 6.5 : 1 or more on every tone).
+  custom_tabOrange: "#FFA94D", custom_tabOrangeDeep: "#FF7A1A", custom_tabOrangeSoft: "#FFD8B0", custom_tabOrangeSoftDeep: "#FFC088", custom_tabOrangeGlow: "#FF6A00",
   custom_tabInk: "#0F0F12", custom_tabInkSoft: "#3D3D47", custom_tabChip: "rgba(255,255,255,0.92)",
   custom_tabGloss: "rgba(255,255,255,0.62)", custom_tabGlint: "rgba(255,255,255,0.95)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
@@ -352,11 +354,13 @@ export const glitterColors = ["#FF5EDB", "#FFD75E", "#3EE6D0", "#7DB4FF", "#B57B
 // arena's so they read on a white page too). The first comes back at the end so the ring has no seam.
 export const shineColors = ["#FF3D9A", "#FFB020", "#10C7A8", "#3B82F6", "#9B5CFF", "#FF3D9A"] as const;
 // The three colours that run round each My Tests tab, taken from that tab's own family (the first comes back at the end):
-// pink = rose, orchid, coral; yellow = tangerine, vermilion, gold; sky blue = azure, indigo, periwinkle.
+// pink = rose, orchid, coral; yellow = tangerine, vermilion, gold; sky blue = azure, indigo, periwinkle;
+// orange (the AITS Leaderboard's "Aas-paas" tab) = flame, magenta, amber.
 export const tabEdges = {
   pink: ["#FF2D7A", "#B45CFF", "#FF8A6B", "#FF2D7A"],
   sun: ["#FF7A00", "#FF4F3A", "#FFB300", "#FF7A00"],
   sky: ["#0A84FF", "#4F46E5", "#8E7BFF", "#0A84FF"],
+  orange: ["#FF5A1F", "#E11D74", "#FFC233", "#FF5A1F"],
 } as const;
 // The three colours that run round Home's onyx-and-ruby All India card: ruby, gold, rose.
 export const seriesEdge = ["#FF2D4A", "#FFC857", "#FF7A93", "#FF2D4A"] as const;
