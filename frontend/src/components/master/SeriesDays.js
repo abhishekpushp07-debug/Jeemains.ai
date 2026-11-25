@@ -11,7 +11,7 @@ import {Select,SelectTrigger,SelectValue,SelectContent,SelectItem} from '../ui/s
 import {Dialog,DialogContent,DialogTitle,DialogDescription} from '../ui/dialog';
 import {ErrorBox} from '../Shared';
 import {StatusChip,ConfirmDialog} from '../admin/AdminShared';
-import {Field,dayIST,clock} from './MasterShared';
+import {Field,dayIST,clock,stuckLine} from './MasterShared';
 import {toast} from 'sonner';
 
 const STATE={upcoming:['Aane wala','scheduled'],live:['Aaj khula','live'],start_closed:['Start band','live'],ended:['Din khatam','ended'],archive:['Practice','hidden']};
@@ -70,7 +70,7 @@ export function SeriesDays({section,reloadKey,onChanged}){
    <div className="admin-panel-head"><div><h2>Din</h2><p>{data.total} mein se {assigned} din mein paper hai.</p></div><Button variant="outline" disabled={busy||!data.slots.some(s=>s.paper&&!s.opened)} onClick={()=>setDialog('clear')} data-testid="series-clear"><Eraser size={16}/>Aage ke saare din khali karo</Button></div>
    <ol className="master-days" data-testid="series-day-list">{data.slots.map(s=>{const [label,tone]=STATE[s.state]||STATE.upcoming;return <li key={s.date} className={'master-day'+(s.paper?' has-paper':'')+(s.opened?' is-opened':'')} data-testid={'series-day-'+s.day}>
     <span className="master-day-num">Din {s.day}</span><span className="master-day-date">{dayIST(s.date)}</span>
-    <strong className="master-day-title">{s.paper?s.paper.title:'Khali'}{s.paper?.pending&&<small> · taiyaar ho raha hai</small>}</strong>
+    <strong className="master-day-title">{s.paper?s.paper.title:'Khali'}{s.paper?.pending&&!s.paper.stuck&&<small> · taiyaar ho raha hai</small>}{s.paper?.stuck&&<small className="admin-reason" data-testid={'series-day-stuck-'+s.day}>{stuckLine(s.paper.stuck,'is din ka paper abhi taiyaar nahi hua')}</small>}</strong>
     {s.paper?.kind==='set'&&<label className={'master-live-switch'+(s.paper.off?'':' is-on')}><Switch checked={!s.paper.off} disabled={busy} onCheckedChange={v=>run(()=>post(`/admin/master/series/${data.id}/live`,{id:s.paper.id,live:v}))} aria-label={(s.paper.off?'Live karo: din ':'Off karo: din ')+s.day} data-testid={'series-day-live-'+s.day}/><span data-testid={'series-day-live-word-'+s.day}>{s.paper.off?'Off':'Live'}</span></label>}
     <StatusChip state={tone==='live'?'live':tone} label={label} testId={'series-day-state-'+s.day}/>
     {s.paper&&!s.opened&&<Button size="icon" variant="ghost" disabled={busy} aria-label={'Din '+s.day+' khali karo'} onClick={()=>run(()=>post(`/admin/master/series/${data.id}/unassign`,{kind:s.paper.kind,id:s.paper.id}))} data-testid={'series-day-free-'+s.day}><X size={15}/></Button>}

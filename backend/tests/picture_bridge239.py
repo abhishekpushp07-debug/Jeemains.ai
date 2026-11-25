@@ -58,6 +58,21 @@ async def main():
     Path(MARKS).write_text(f'/books/{proof}/crops/\n/books/{two}/crops/\n')
     mk = await BM.find_one({'book_id': proof}); await live(mk['_id'])
     await live(*[m['_id'] for m in pair])
+    # All India Test Series of the same exam: day 1 has its built paper; day 2's paper is not made because its pictures are not proven.
+    from datetime import datetime, timedelta
+    from tejas.live_series import IST
+    first = datetime.now(IST).date() + timedelta(days=2)
+    ser = J(await own.post(f'/api/admin/catalog/exams/{slug}/sections', json={'name': 'All India Test Series', 'description': '', 'layout': 'list', 'kind': 'aits',
+            'first_date': first.isoformat(), 'days': 5, 'open_time': '09:00', 'last_start': '11:00', 'minutes': 10, 'correct': 4, 'wrong': -1}))
+
+    async def day(mid, n):
+        await own.post(f"/api/admin/master/series/{ser['series_id']}/assign", json={'kind': 'book_mock', 'id': mid, 'date': (first + timedelta(days=n)).isoformat()}); await pump()
+    aok = (await upload(own, cut_pdf('UIAOK', long=True), 'TEST_SERIES_THEEK', section_id=ser['id']))['id']; await finish(own, aok)
+    abad = (await upload(own, cut_pdf('UIABAD', long=True), 'TEST_SERIES_SAABIT_NAHI', section_id=ser['id']))['id']; await finish(own, abad)
+    sok, sbad = await BM.find_one({'book_id': aok}), await BM.find_one({'book_id': abad})
+    await day(sok['_id'], 0)
+    Path(MARKS).write_text(Path(MARKS).read_text() + f'/books/{abad}/crops/\n')
+    await day(sbad['_id'], 1)
     await DB.tejas_books.update_one({'_id': proof}, {'$set': {'payload.storage_wait.since': time.time() - 22 * 60}})
     rows = {b['_id']: b async for b in DB.tejas_books.find({}, {'state': 1, 'payload.title': 1, 'payload.storage_wait': 1})}
     state = {b['payload']['title']: (b['state'], (b['payload'].get('storage_wait') or {}).get('what'), (b['payload'].get('storage_wait') or {}).get('reason')) for b in rows.values()}
@@ -65,7 +80,9 @@ async def main():
     with open(path, 'w') as f:
         json.dump({'owner': dict(own.cookies), 'type': f'/super-admin/exam/{slug}/{sec}', 'ok': {'book': ok, 'mock': mo['_id'], 'set': mo.get('set_id'), 'pictures': await DB.tejas_files.count_documents({'book_import_id': ok})},
                    'proof': {'book': proof, 'mock': mk['_id'], 'label': mk['label'], 'reason': (rows[proof]['payload'].get('storage_wait') or {}).get('reason', ''), 'pictures': await DB.tejas_files.count_documents({'book_import_id': proof})},
-                   'two': {'book': two, 'mocks': [m['_id'] for m in pair], 'first': pair[0]['label']}}, f)
+                   'two': {'book': two, 'mocks': [m['_id'] for m in pair], 'first': pair[0]['label']},
+                   'aits': {'type': f"/super-admin/exam/{slug}/{ser['id']}", 'book': abad, 'mock': sbad['_id'], 'label': sbad['label'], 'pictures': await DB.tejas_files.count_documents({'book_import_id': abad}),
+                            'state': [(await BM.find_one({'_id': x['_id']}) or {}).get('state') for x in (sok, sbad)]}}, f)
     os.chmod(path, 0o600)
     print('READY', H.TEST_DB, json.dumps(state), flush=True)
     server = uvicorn.Server(uvicorn.Config(H.app, host='127.0.0.1', port=8778, log_level='warning', lifespan='off'))

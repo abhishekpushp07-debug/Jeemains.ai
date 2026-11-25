@@ -40,4 +40,7 @@ const PLAIN=[[/response type is unresolved|confirm response type/i,'Pata nahi ch
 export const plain=text=>{const hit=PLAIN.find(([re])=>re.test(text||''));if(hit)return hit[1];
  return String(text||'').replace(/\bheld\b/gi,'ruka hua').replace(/source regions?/gi,'page ka hissa').replace(/regions?/gi,'hissa').replace(/publication/gi,'Live hona').replace(/allowances?/gi,'manzoori').replace(/matching/gi,'jaanch');};
 
+// Why a paper that was asked to go Live (or was given a series day) is not there yet: said the same way wherever its row is shown.
+export const stuckLine=(k,what='yeh abhi Live nahi hua')=>`Atki hai: ${k.kind==='hang'?'is PDF ka kaam baar-baar beech mein latak gaya':k.kind==='proof'?'iski pictures storage mein saabit nahi hui':'iski ek picture Supabase mein nahi ja rahi'}, isliye ${what}.${k.reason?` Wajah: ${k.reason}.`:''} ${k.kind==='hang'?'Har ghante':'Har 15 minute mein'} apne aap phir koshish hoti hai; abhi ke liye upar Uploads mein “Dobara chalao” dabaiye.`;
+
 export const Field=({label,id,children})=><div className="master-field"><label htmlFor={id}>{label}</label>{children}</div>;

@@ -60,6 +60,19 @@ async def rereading_books(where=None):
     return out
 
 
+async def stuck_marks(where):
+    """Why a mock that was asked to go Live is not there yet ("Atki hai"): by mock id, and by book id for a PDF whose own work hung."""
+    held_up, hung = {}, {}
+    async for b in db.tejas_books.find({**where, 'removed': False, 'archived': {'$ne': True}, 'paused': {'$ne': True},
+                                        'payload.storage_wait.stuck': True}, {'payload.storage_wait': 1}):
+        sw = b['payload']['storage_wait']
+        if sw.get('kind') == 'hang':  # the PDF's own work went silent three times: every mock of it that waits to go Live says so
+            hung[b['_id']] = {'reason': sw.get('reason', ''), 'since': sw['since'], 'kind': 'hang'}
+        for mid, v in (sw.get('mocks') or {}).items():
+            held_up[mid] = {'reason': v.get('reason', ''), 'since': sw['since'], **({'kind': v['kind']} if v.get('kind') else {})}
+    return held_up, hung
+
+
 @router.get('/summary')
 async def summary(u=Depends(owner)):
     from .structure import waiting_items
@@ -133,14 +146,7 @@ async def type_mocks(sid: str, u=Depends(owner)):
     busy = [w['id'] for w in waiting if w['kind'] == 'book_mock' and w['state'] == 'publishing']
     progress = {p['_id']: {'done': p['done'], 'total': p['total']} for p in await db.tejas_publish_progress.find({'_id': {'$in': busy}}).to_list(len(busy))} if busy else {}
     # A mock whose picture Supabase keeps returning: its book names it ("Atki hai"), so its row does not say "Live ho raha hai" for ever.
-    held_up, hung = {}, {}
-    async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, 'paused': {'$ne': True},
-                                        'payload.storage_wait.stuck': True}, {'payload.storage_wait': 1}):
-        sw = b['payload']['storage_wait']
-        if sw.get('kind') == 'hang':  # the PDF's own work went silent three times: every mock of it that waits to go Live says so
-            hung[b['_id']] = {'reason': sw.get('reason', ''), 'since': sw['since'], 'kind': 'hang'}
-        for mid, v in (sw.get('mocks') or {}).items():
-            held_up[mid] = {'reason': v.get('reason', ''), 'since': sw['since'], **({'kind': v['kind']} if v.get('kind') else {})}
+    held_up, hung = await stuck_marks({'payload.destination.section_id': sid})
     for w in waiting:
         if w['kind'] == 'import':
             items.append({'kind': 'import', 'id': w['id'], 'title': w['title'], 'status': 'draft', 'to_fix': w['issue_count'], 'count': w['count'],

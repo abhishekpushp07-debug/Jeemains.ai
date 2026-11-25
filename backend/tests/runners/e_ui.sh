@@ -3,7 +3,7 @@
 cd /app/backend || exit 1
 rm -rf /tmp/uibridge239; mkdir -p /tmp/uibridge239
 setsid nohup python tests/picture_bridge239.py 3000 > /root/p2/bridge239.log 2>&1 < /dev/null &
-for i in $(seq 1 150); do grep -q "^READY" /root/p2/bridge239.log && break; sleep 1; done
+for i in $(seq 1 300); do grep -q "^READY" /root/p2/bridge239.log && break; sleep 1; done
 python tests/ui_picture239.py desk mob fix > /root/p2/ui239.log 2>&1
 echo "UI exit $?" >> /root/p2/ui239.log
 pkill -INT -f "tests/picture_bridge239.py"

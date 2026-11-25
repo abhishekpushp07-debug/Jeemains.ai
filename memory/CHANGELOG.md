@@ -1,3 +1,9 @@
+## 2026-11-25 (later) — Packet E step 2 on the All India Test Series path + testing agent (preview only, NOT deployed)
+- Testing agent, test_reports/iteration_227.json: re-ran picture_proof238 26/26 and picture_gate239 40/40, added tests/picture_gate_edge240.py 14/14, no issues, no app code changed.
+- Owner's series page: a day whose PDF paper could not be made says why. series_admin.day_papers adds stuck {reason, since, kind} to the waiting paper; master.stuck_marks(where) is the shared reader (type_mocks uses it, same output). SeriesDays.js shows series-day-stuck-<day>; MockList.js and SeriesDays.js share MasterShared.stuckLine. Student schedule unchanged.
+- Tests: tests/picture_aits241.py 26/26 (no paper made, day kept, students see nothing, other PDF's day built, Dobara chalao, day opened while waiting → no late paper). ui_picture239 43/43 on picture_bridge239 (now seeds a series). Then 11 suites one at a time, 0 failures (logs in test_reports/packet_E_2026-11-25/).
+
+
 ## 2026-11-25 — Packet E steps 1+2: picture proof before a PDF mock goes Live/Scheduled (preview only, NOT deployed)
 - New tejas/picture_proof.py (read-only proof: Supabase list + size, Emergent read-back + sha256, one store only; verified PYQ skipped). tejas_storage.sb_list takes a bucket.
 - book_publish.publish_ready proves the pictures before the set is written; a bad picture is saved once more, then proven again; still unproven → the mock stays Draft, "Atki hai" (kind proof), 15-minute retry, Dobara chalao. New picture records carry size. Proof noted in tejas_picture_proofs.

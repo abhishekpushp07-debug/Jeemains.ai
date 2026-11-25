@@ -55,7 +55,7 @@ async def walk(pw, size, fix):
         await page.screenshot(path=f'{SS}/{size}_mocks.jpg', quality=40, type='jpeg')
         await page.click('[data-testid=storage-badge]'); await page.wait_for_selector('[data-testid=machine-panel]', timeout=10000); await page.wait_for_timeout(800)
         line = await text(f'machine-storage-stuck-{BOOK}')
-        say(f'{size}: machine panel counts 2 stuck files and lists them with Dobara chalao', await text('machine-storage-stuck-value') == '2' and await at(f'machine-retry-{BOOK}').count() == 1
+        say(f'{size}: machine panel counts 3 stuck files (two of this type, one of the test series) and lists them with Dobara chalao', await text('machine-storage-stuck-value') == '3' and await at(f"machine-storage-stuck-{INFO['aits']['book']}").count() == 1 and await at(f'machine-retry-{BOOK}').count() == 1
             and await at(f"machine-storage-stuck-{PAIR['book']}").count() == 1, await text('machine-storage-stuck-value'))
         say(f'{size}: machine panel says the pictures were not proven, with the count', f'"{PRF["label"]}" ki pictures storage mein saabit nahi hui' in line and WHY in line and 'Supabase mein nahi ja rahi' not in line, line)
         say(f'{size}: machine panel counts the other PDF\'s second mock', 'aur 1 doosre mock ki pictures storage mein saabit nahi hui' in await text(f"machine-storage-stuck-{PAIR['book']}"), await text(f"machine-storage-stuck-{PAIR['book']}"))
@@ -74,6 +74,32 @@ async def walk(pw, size, fix):
             say(f'{size}: Supabase keeps the pictures + Dobara chalao: the mock is Live, the stuck note is gone, no page reload', done and not await at(f'mock-stuck-{MID}').count(), words)
             say(f'{size}: ...and its row now says "{LINE(PRF["pictures"])}"', sorted(lines) == sorted([LINE(OK['pictures']), LINE(PRF['pictures'])]), lines)
             await page.screenshot(path=f'{SS}/{size}_fixed.jpg', quality=40, type='jpeg')
+        # The All India Test Series page of the same exam: day 1 has its paper, day 2's paper waits for its pictures.
+        A = INFO['aits']; why = f"{A['pictures']} pictures storage me nahi mili"
+        await page.goto(BASE + A['type']); await page.wait_for_selector('[data-testid=series-day-list]', timeout=25000)
+        await page.wait_for_selector(f"[data-testid=type-upload-{A['book']}]", timeout=25000)
+        note = await text(f"type-upload-wait-{A['book']}")
+        say(f'{size}: series page: the PDF above the days says Atki hai, pictures not proven, with the count', await text(f"type-upload-state-{A['book']}") == 'Atki hai'
+            and f'"{A["label"]}" ki pictures storage mein saabit nahi hui' in note and why in note and await at(f"type-upload-retry-{A['book']}").is_visible(), note)
+        line, day2 = await text('series-day-stuck-2'), await text('series-day-2')
+        say(f'{size}: series page: day 2 says why its paper is not ready and how to try again', 'Atki hai' in line and 'iski pictures storage mein saabit nahi hui' in line and 'is din ka paper abhi taiyaar nahi hua' in line
+            and why in line and '15 minute' in line and 'Dobara chalao' in line and 'Live nahi hua' not in line, line)
+        say(f'{size}: series page: day 2 names the paper and no longer says "taiyaar ho raha hai"', A['label'] in day2 and 'taiyaar ho raha hai' not in day2, day2)
+        say(f'{size}: series page: day 1 has its built paper with the Live switch and no stuck note', await at('series-day-live-1').count() == 1 and not await at('series-day-stuck-1').count()
+            and await page.locator('[data-testid^=series-day-stuck-]').count() == 1, await page.locator('[data-testid^=series-day-stuck-]').count())
+        if size == 'mob':
+            await overflow(page, size + ' series page')
+        await at('series-day-2').scroll_into_view_if_needed()
+        await page.screenshot(path=f'{SS}/{size}_series.jpg', quality=40, type='jpeg')
+        if fix:
+            await at(f"type-upload-retry-{A['book']}").click()
+            done = False
+            for _ in range(60):
+                await page.wait_for_timeout(1000)
+                if await at('series-day-live-2').count() and not await at('series-day-stuck-2').count():
+                    done = True; break
+            say(f'{size}: series page: Supabase keeps the pictures + Dobara chalao: day 2 has its paper, the stuck note is gone, no page reload', done and not await at(f"type-upload-wait-{A['book']}").count(), await text('series-day-2'))
+            await page.screenshot(path=f'{SS}/{size}_series_fixed.jpg', quality=40, type='jpeg')
     finally:
         say(f'{size}: no failed API calls', not [b for b in bad if '/dream' not in b[1]], bad[:4])
         await br.close()

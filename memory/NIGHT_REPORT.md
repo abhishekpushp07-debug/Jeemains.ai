@@ -131,11 +131,19 @@ Upar likha tha ki yeh list is file me hai, par woh likhi nahi gayi thi. Ab yeh h
   - tests/picture_proof238.py 26/26 (function akela).
   - tests/picture_gate239.py 40/40 (app ke apne route + asli worker, nakli Supabase).
   - tests/picture_proof_real239.py 12/12 asli Supabase par, sirf preview bucket, sirf TEST_ files (ant me hata di gayi, 0 bachi). 1,011 file wale folder me bhi list poori padhi gayi.
-  - Browser: tests/ui_picture239.py 33/33 (desktop + 390 px).
+  - Browser: tests/ui_picture239.py 43/43 (desktop + 390 px; pehle 33 thi, ab All India Test Series wala page bhi isi me hai).
+  - Testing agent (test_reports/iteration_227.json): meri do suite dobara chalayi (26/26, 40/40) aur apni nayi tests/picture_gate_edge240.py likhi, 14/14. Koi galti nahi mili. App ka code usne nahi badla.
+  - AITS (14:20 se 14:32 UTC): tests/picture_aits241.py 26/26. Uske baad 11 suite ek-ek karke dobara: picture_gate239 40/40, picture_gate_edge240 14/14, picture_proof238 26/26, storage_stuck231 49/49, master_iso181 124/124, library_aits_iso180 125/125, series_dates_iso187 47/47, storage_badge236 64/64, step_guard233 33/33, storage_wait224 27/27, structure_iso173 133/133. 0 fail.
   - Purani 32 suite dobara (13:27 se 13:35 UTC): 1,210 jaanch, 1 fail. Woh ek (media_cdn_iso198 "paper built") Packet E se pehle wale code par bhi waise hi fail hoti hai; maine pichhle commit ki copy par chala kar dekha.
   - Chaar aur purani suite jo E se pehle bhi isi tarah fail hoti hain (copy par dekha): publish_fail_iso211 4/5, media_warm_iso217 35/36, get_ready_iso188 35/36, get_ready_iso189 8/9.
   - Do purani suite me ek-ek line badalni padi kyunki unka apna nakli Supabase list nahi deta tha / unka wrapper naya argument nahi leta tha: storage_wait224 (27/27), step_guard233 (33/33). tests/storage_wait_bridge224.py me bhi wahi ek line badli; woh bridge dobara chalaya NAHI gaya.
 - Abhi NAHI bana (E ke baaki kadam): (3) chuna hua samay nikal jaye to der se na khule; (4) Likha hua mock, Off se Live, Library se wapas; (5) purani Emergent pictures ki Supabase me copy; (6) "Pictures ki poori jaanch" button.
-- Jaancha NAHI gaya: AITS ke din wale paper par fail hone ka raasta alag se (code wahi hai; theek chalne wala raasta library_aits_iso180 125/125 aur series_dates_iso187 47/47 se paas); AITS ki screen par wajah dikhti hai ya nahi; asli do server; live par kuch nahi.
+- AITS (All India Test Series) ka din wala paper, ab jaancha hua:
+  - PDF mock ko din diya aur Supabase ne uski pictures nahi rakhi: us din ka paper NAHI banta, mock ka din bana rehta hai, PDF "Atki hai" kehti hai, doosri PDF ka din ban jata hai.
+  - Naya (chhota badlav): Master me us din ki row par ab wajah dikhti hai: "Atki hai: iski pictures storage mein saabit nahi hui, isliye is din ka paper abhi taiyaar nahi hua. Wajah: 28 pictures storage me nahi mili ..." Pehle wahan hamesha "taiyaar ho raha hai" likha rehta tha. Students ko is bare me kuch nahi dikhta (jaancha: student aur bina login, dono).
+  - Supabase pictures rakhne lage + "Dobara chalao": paper usi din ke liye ban jata hai, bina page reload ke row badal jati hai.
+  - Intezaar ke dauran din khul jaye: paper der se NAHI banta; mock ka din hat jata hai aur woh "bina din wale paper" ki list me laut aata hai; kuch "Atki hai" nahi rehta.
+  - Badli hui files: backend/tejas/master.py (ek padhne wala function alag kiya, kaam wahi), backend/tejas/series_admin.py, frontend SeriesDays.js, MockList.js, MasterShared.js, master.css. LiveSeries.js nahi chhui.
+- Jaancha NAHI gaya: asli do server; live par kuch nahi; tests/storage_wait_bridge224.py dobara nahi chalaya.
 - **Deploy ki salaah: E poora hone se pehle deploy na karein.** Wajah: agar kisi purani kitaab ke Draft mock ki kuch pictures Emergent me aur kuch Supabase me hain, to woh mock ab Live nahi hoga aur use theek karne wala kadam (5) abhi bana nahi hai.
 

@@ -373,7 +373,9 @@ Done and tested: steps 1 and 2 of the order in section 8. Steps 3–6 are not st
 | `tests/picture_proof238.py` | 26/26 |
 | `tests/picture_gate239.py` (routes + real worker, `tests/fake_supabase239.py`) | 40/40 |
 | `tests/picture_proof_real239.py` (real Supabase, preview bucket, TEST_ files, removed) | 12/12 |
-| `tests/ui_picture239.py` on `tests/picture_bridge239.py` (:8778), `bash /root/p2/e_ui.sh` | 33/33 |
+| `tests/ui_picture239.py` on `tests/picture_bridge239.py` (:8778), `bash /root/p2/e_ui.sh` | 43/43 (was 33; the All India Test Series page was added) |
+| `tests/picture_gate_edge240.py` (testing agent, `test_reports/iteration_227.json`) | 14/14 |
+| `tests/picture_aits241.py` (a PDF mock given an All India Test Series day) | 26/26 |
 | 32 older suites, 13:27–13:35 UTC | 1,210 checks, 1 fail (`media_cdn_iso198` "paper built"; same on the code before E) |
 
 Suites that fail the same way on a copy of the commit before Packet E (`bash /root/p2/e_triage.sh` shows how it was checked): `publish_fail_iso211` 4/5, `media_warm_iso217` 35/36, `get_ready_iso188` 35/36, `get_ready_iso189` 8/9, `media_cdn_iso198` 2/3.
@@ -382,6 +384,6 @@ Adapted for the new code: `storage_wait224.py` (its in-memory Supabase got `list
 
 ### Known gaps to close in the next steps
 - A Draft mock whose pictures are split between the stores stays "Atki hai" with no way out until step 5 (copy of old Emergent pictures). So E should not be deployed before step 5.
-- The AITS failure path was not tested on its own, and the AITS day screen was not checked for the reason line.
+- AITS (closed 25 Nov, 14:30 UTC): `series_admin.day_papers` now adds `stuck {reason, since, kind}` to the day's waiting paper (`master.stuck_marks(where)` is the one shared reader of `payload.storage_wait`; `type_mocks` uses it too). `SeriesDays.js` shows it as `series-day-stuck-<day>` through `MasterShared.stuckLine`, which `MockList.js` also uses (same words as before). Owner view only: the student schedule gains nothing. If the day opens while the mock waits, `publish_ready` takes its day away, no late paper is made and nothing stays stuck (tested).
 - `tejas_picture_proofs` rows are not removed when a Library test is deleted for good (one small row per test).
 - Old records have no `size`: for them the quick proof is "is in the list" only.

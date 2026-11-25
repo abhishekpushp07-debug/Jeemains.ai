@@ -542,6 +542,7 @@ There are exactly 25 owner-approved checkpoints in three major phases; one check
 ## 2026-11-25 status — Super Admin storage machine (plan/plan.md)
 - Live on jeelive.ai since 25 Nov (owner deployed from the panel): Packets A–D (big PDF uploads, one stuck file stops alone, silent-step guard, narrow Delete, truthful storage badge).
 - Preview only, NOT deployed: Packet E steps 1+2. A PDF mock becomes a test (Live or Scheduled) only when every picture of it is proven in one storage; otherwise it stays Draft with the reason, a 15-minute retry and Dobara chalao. Proven rows say "Pictures: n / n · Storage: Supabase".
+- Same gate on the All India Test Series path (tested 25 Nov, tests/picture_aits241.py 26/26): an unproven PDF mock makes no day paper, keeps its day, and the owner's day row says why; students see nothing of it. Testing agent passed steps 1+2 (test_reports/iteration_227.json).
 - Packet E still to build: no late opening when the chosen time passed, Written mocks, Off → Live, Library restore, copy of old Emergent pictures, "Pictures ki poori jaanch" button. Then Packet F (per-mock fallback to Emergent) and Packet G (owner-controlled move to Supabase).
 - Rules that stand: no deploy without the owner's word "deploy"; LiveSeries.js is not touched; verified JEE Main PYQ is outside all of this; tests one at a time.
 - Full detail: memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md (section 15), memory/NIGHT_REPORT.md.

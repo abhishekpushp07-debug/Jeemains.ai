@@ -181,10 +181,13 @@ async def day_papers(cfg, studio):
     rows = await sets.find({'series_id': cfg['id']}, {'_id': 0, 'questions': 0, 'allowed_emails': 0, 'allowed_phones': 0}).to_list(cfg['days'] + 100)
     pending = {}
     if studio:
+        from .master import stuck_marks
         ids = [b['_id'] for b in await series_books(cfg)]
+        held_up, hung = await stuck_marks({'_id': {'$in': ids}})
         for m in await db.tejas_book_mocks.find({'book_id': {'$in': ids}, 'series_date': {'$nin': [None, '']}, 'set_id': None, **mock_scope(cfg)},
-                                                {'_id': 1, 'label': 1, 'series_date': 1}).to_list(5000):
-            pending[m['series_date']] = m
+                                                {'_id': 1, 'label': 1, 'series_date': 1, 'book_id': 1}).to_list(5000):
+            mark = held_up.get(m['_id']) or hung.get(m['book_id'])  # its paper could not be made for its day ("Atki hai"): the day says why
+            pending[m['series_date']] = {**m, **({'stuck': mark} if mark else {})}
     return {s['series_date']: s for s in rows}, pending
 
 
@@ -205,7 +208,7 @@ async def slots(cfg, t, studio=False, early=False):
         if studio:
             m = pending.get(day)
             slot.update(opened=t >= w['opens_at'], paper={'kind': 'set', 'id': s['id'], 'title': s.get('display_title') or s['title'], 'written': bool(s.get('written')), 'off': bool(s.get('owner_unlive'))} if s
-                        else {'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'pending': True} if m else None)
+                        else {'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'pending': True, **({'stuck': m['stuck']} if m.get('stuck') else {})} if m else None)
         out.append(slot)
     return out
 

@@ -1,0 +1,43 @@
+{
+  "summary": "Packet E (Super Admin picture-proof gate) verification. Re-ran the builder's two suites one-at-a-time (both pass 26/26 and 40/40). Wrote a new edge suite /app/backend/tests/picture_gate_edge240.py covering 8 edges end-to-end plus 1 reported as NOT TESTED (AITS end-to-end harness is out of scope). TOTAL 14 PASS 14 FAIL 0. No application code was modified. All isolation rules were obeyed: disposable DB tejas_isolated_* only, mongod nofile raised, Supabase faked, Emergent in memory.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/picture_gate_edge240.py",
+    "/app/backend/tests/picture_proof238.py",
+    "/app/backend/tests/picture_gate239.py"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "picture_proof._read_emergent sets store._quick.on in a try/finally - safe against exceptions, good. No thread-local leak observed.",
+    "book_publish.proven() performs exactly one re-save round: if the second checked() still has bad, it raises `unproven`. No infinite loop; verified by code reading and by edge E4b (one re-save then Live).",
+    "book_publish.crop_ref with `again`: updates sha256 and size to the freshly computed values. For a byte-identical re-render this is a no-op (verified by edge E3). Risk to ETag/asset_revision is bounded to cases where bytes genuinely differ (which is a legitimate correction, not a regression).",
+    "picture_proof.prove() returns None for locked PYQ via `from .structure import locked` at call time. Verified end-to-end (E5a direct and E5b at type_mocks route): a locked set with a tejas_picture_proofs row does NOT receive the `pictures` field because master.py line 126 filters proofs lookup by `not i['locked']` BEFORE the query.",
+    "book_worker.publish_batch counts a StorageStuck-caught mock toward MOCKS_PER_STEP (published+=1 runs after the except). This is fine with MOCKS_PER_STEP=5 for small batches but means a book with 5 consecutive stuck mocks will chain to a second step rather than process live-able mocks sooner. Not a bug, just a note.",
+    "No observable path where a locked (verified PYQ) item gets a `pictures` key or `stuck` marker in the type_mocks response (edge E5 passed).",
+    "Reviewer (non-owner) is correctly rejected (403) on POST /api/admin/master/status, GET /api/admin/master/types/{sid}/mocks and GET /api/admin/machine/status (edge E6).",
+    "Proof failure does not rest Supabase for everyone and never writes to Emergent (edge E7).",
+    "storage_health reflects proof failures with level=yellow, a Hinglish 'saabit nahi hui' reason, and held.stuck >= 1; clears after the mock goes Live (edge E8).",
+    "type_mocks response shape preserves every historical field; `pictures` is an optional extra (edge E9)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/picture_gate_edge240.py (new)"
+  ],
+  "success_rate": {
+    "backend": "100% (14/14 new edges; 26/26 picture_proof238; 40/40 picture_gate239)",
+    "frontend": "N/A (frontend not requested)"
+  },
+  "test_credentials": "N/A - each suite creates its own owner via mkstaff() in a disposable DB.",
+  "seed_data_creation": "None. All data is created and destroyed inside tejas_isolated_* databases that are dropped in finally.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Builder's Packet E suites confirmed healthy (238: 26/26, 239: 40/40). New edge suite picture_gate_edge240.py adds 14 checks covering two-mock PDF with selective vanish (E2), crop_ref re-save invariance (E3), missing-size record handling (E4), locked PYQ exclusion end-to-end (E5), reviewer auth on owner routes (E6), no-emergent-writes on proof failure (E7), storage_health reaction (E8), and response-shape safety (E9). Edge E1 (AITS series with proof failure) is NOT TESTED because it needs the end-to-end studio/all-india-jee/fill + series_admin.assign_mocks harness; the request explicitly allows this. One behavioural note recorded in E4a: when a record has no `size` and its object is present, the quick-proof passes and nothing is re-saved, so the `size` field remains unset - this matches the builder's own picture_proof238 section C observation and is by design.",
+  "rca of the issue": "N/A - no issues found."
+}
