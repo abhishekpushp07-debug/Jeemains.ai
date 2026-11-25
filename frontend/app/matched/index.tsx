@@ -1,5 +1,5 @@
-// Matched: the JEE Main questions that matched ours. Month, then day, then shift; a shift opens its questions and its
-// Matched paper.
+// Matched: the JEE Main questions that matched ours. Month, then day, then shift; a shift opens its questions and the
+// way into its paper.
 // Open to everyone, signed in or not (it is one of the public routes in app/_layout.tsx).
 import React, { useMemo, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
@@ -23,8 +23,8 @@ function ShiftRow({ s, onPress }: { s: ShiftSummary; onPress: () => void }) {
   return <Press testID={`matched-shift-${s.id}`} onPress={onPress} scaleTo={0.985} accessibilityLabel={`Shift ${s.shift}. ${countLine(s)}. Open`} style={styles.rowPress}>
     <LinearGradient colors={[colors.custom_card, colors.custom_goldSoft]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.row}>
       <LinearGradient colors={[colors.custom_matchedFrom, colors.custom_matchedTo]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.shift}>
-        <T w="bold" size={8.5} color={colors.custom_chipBloodInk} style={{ letterSpacing: 1.2 }}>SHIFT</T>
-        <GlossWord testID={`matched-shift-${s.id}-number`} size={19}>{String(s.shift)}</GlossWord>
+        <T w="bold" size={8.5} color={colors.custom_matchedInk} style={{ letterSpacing: 1.2 }}>SHIFT</T>
+        <GlossWord testID={`matched-shift-${s.id}-number`} size={19} look="ink">{String(s.shift)}</GlossWord>
       </LinearGradient>
       <View style={{ flex: 1, minWidth: 0, gap: 6 }}>
         <T testID={`matched-shift-${s.id}-count`} w="heavy" size={17}>{s.matched} <T w="semibold" size={13} color={colors.muted}>{s.asked ? `of ${s.asked} matched` : "matched"}</T></T>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 84, paddingVertical: 12, paddingHorizontal: 14, borderRadius: 20, borderWidth: 1, borderColor: colors.custom_cardLineStrong },
   shift: { width: 54, height: 54, borderRadius: 27, alignItems: "center", justifyContent: "center" },
   track: { height: 6, borderRadius: 3, overflow: "hidden", backgroundColor: colors.custom_cardLine },
-  fill: { height: 6, borderRadius: 3, backgroundColor: colors.custom_matchedFrom },
+  fill: { height: 6, borderRadius: 3, backgroundColor: colors.custom_matchedTo },
   go: { width: 34, height: 34, borderRadius: 17, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_glossYellow },
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
   chip: { flexDirection: "row", alignItems: "center", gap: 5, height: 24, paddingHorizontal: 9, borderRadius: 12, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine },

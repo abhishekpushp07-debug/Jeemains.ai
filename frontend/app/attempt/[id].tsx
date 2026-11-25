@@ -22,6 +22,7 @@ import { DSheet, Pill, RoundButton } from "@/src/components/design";
 import { colors, fonts, radius, space } from "@/src/theme";
 import { fmtClock } from "@/src/navigation";
 import { lockResult } from "@/src/mission/gate";
+import { MatchedWith } from "@/src/matched/MatchedWith";
 
 const CONF = [[0.25, "Guess"], [0.5, "Unsure"], [1, "Sure"]] as const;
 const ZOOM = [1, 1.2, 1.4];
@@ -275,6 +276,9 @@ export default function Player() {
             })}
           </View>
         )}
+
+        {/* A Matched paper (the JEE Main questions that matched ours): the JEE question this one matched, without options. Nothing for any other paper. */}
+        <MatchedWith paper={a.set_id} qid={q.id} width={column} />
 
         {!a.confidence_observations?.[q.id] ? (
           <View testID="player-confidence" style={styles.conf}>

@@ -30,7 +30,7 @@ async def sign_in(page, aits="done", board=True, width=390, height=844, **board_
     # The button rests until the app has finished checking for an old session.
     await page.wait_for_selector('[data-testid="entry-continue-button"]:not([aria-disabled="true"])', timeout=45000)
     await page.click('[data-testid="entry-continue-button"]')
-    await page.wait_for_selector('[data-testid="home-tile-live"]', timeout=45000)
+    await page.wait_for_selector('[data-testid="home-tile-choice"]', timeout=45000)
 
 
 async def fake_name(page, calls=None, fail=None, state=None):

@@ -1,9 +1,10 @@
 """Matched: the JEE Main questions that matched ours (GET /api/matched, GET /api/matched/<shift>), open to everyone.
 
-After a JEE Main shift, the owner's side (a matching machine and a super-admin page, built later) writes ONE document
-per shift into the `matched_shifts` collection: the questions of that shift that matched ours, each with the question(s)
-of ours it matched. This file only READS that collection; nothing here writes to it. The document is described in
-memory/MATCHED_CONTRACT.md.
+After a JEE Main shift, jeelive.ai's super admin publishes ONE document per shift: the questions of that shift that
+matched ours, each with the question(s) of ours it matched, and the id of the real paper made of ours. This server copies
+what the website publishes into its own `matched_shifts` collection every two minutes (`watch_site`, at the bottom), so
+the pages below answer from our own database and stay up while the website is busy. The document and the website's two
+doors are described in memory/WEBSITE_MATCHED_NOTE.md.
 
 The app in a student's hand cannot be changed without a new build, so this server is the adapter between whatever is
 written into the collection and what the app can draw: every document goes through `shape_shift`, and only the fields
@@ -29,6 +30,7 @@ from metadata_cache import MetadataCache
 logger = logging.getLogger("jeelive")
 IST = timezone(timedelta(hours=5, minutes=30))
 SHIFT_ID = r"^\d{4}-\d{2}-\d{2}-s[1-9]$"  # the exam day in India + the shift: 2027-01-25-s1
+ID = r"^[A-Za-z0-9_-]{6,80}$"  # a paper's or a question's id on the website
 DAY = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 SUBJECTS = ("Physics", "Chemistry", "Mathematics")
 LETTERS = "ABCDEF"
@@ -42,6 +44,10 @@ cache = MetadataCache()
 
 def _text(value, limit: int) -> str:
     return value.replace("\x00", "").strip()[:limit] if isinstance(value, str) else ""
+
+
+def _id(value) -> str:
+    return value if isinstance(value, str) and re.match(ID, value) else ""
 
 
 def _number(value, top: int):
@@ -90,8 +96,8 @@ def _side(value, ours: bool = False):
             "solution": _text(value.get("solution"), 6000), "solution_images": _images(value.get("solution_images"))}
     if not side["text"] and not side["images"]:
         return None
-    if ours:
-        side.update(source=_text(value.get("source"), 80), tag=_text(value.get("tag"), 40))
+    if ours:  # `qid` = this question's id inside the shift's real paper: the player finds the JEE question it matched by it
+        side.update(source=_text(value.get("source"), 80), tag=_text(value.get("tag"), 40), qid=_id(value.get("question_id")))
     return side
 
 
@@ -119,8 +125,11 @@ def shape_shift(doc):
     rows = doc.get("items") if isinstance(doc.get("items"), list) else []
     # In the paper's order; questions without a number keep the order they were written in, after the numbered ones.
     items = sorted((i for i in (shape_item(r) for r in rows[:MAX_ITEMS]) if i), key=lambda i: (i["n"] is None, i["n"] or 0))
-    asked, stamp = _number(doc.get("asked"), 300), doc.get("updated_at")
+    asked, stamp, paper = _number(doc.get("asked"), 300), doc.get("updated_at"), _id(doc.get("paper_id"))
+    # The real paper on the website ("Attempt all matched") and how many of ours are in it; "" and 0 until it is attached.
+    in_paper = len({o["qid"] for i in items for o in i["ours"] if o["qid"]}) if paper else 0
     return {"id": sid, "day": sid[:10], "shift": int(sid[-1]), "asked": asked if asked and asked >= len(items) else None, "matched": len(items),
+            "paper_id": paper if in_paper else "", "paper_questions": in_paper,
             "subjects": [{"name": s, "n": n} for s in SUBJECTS if (n := sum(1 for i in items if i["subject"] == s))],
             "updated_at": int(stamp) if isinstance(stamp, (int, float)) and not isinstance(stamp, bool) and stamp > 0 else 0, "items": items}
 
@@ -138,12 +147,27 @@ async def load_shift(db, shift_id: str):
     return shape_shift(doc) if doc else None
 
 
+async def load_paper(db, paper_id: str):
+    """The shift whose real paper this is (the newest, should two name the same paper)."""
+    doc = await db.matched_shifts.find_one({"paper_id": paper_id, "published": True}, sort=[("_id", -1)])
+    shift = shape_shift(doc) if doc else None
+    return shift if shift and shift["paper_id"] == paper_id else None
+
+
 def make_router(db):
     r = APIRouter()
 
     @r.get("/matched")
     async def index():
         data, _ = await cache.get_or_load("index", lambda: load_index(db), ttl=60)
+        return FastJSONResponse(data, headers=PUBLIC)
+
+    @r.get("/matched/paper/{paper_id}")
+    async def paper(paper_id: str = Path(..., pattern=ID)):
+        """For the test player and the result of a Matched paper: the JEE question each of its questions matched."""
+        data, _ = await cache.get_or_load("paper:" + paper_id, lambda: load_paper(db, paper_id), ttl=60)
+        if not data:
+            raise HTTPException(404, "This paper is not a Matched paper.")
         return FastJSONResponse(data, headers=PUBLIC)
 
     @r.get("/matched/{shift_id}")
@@ -240,3 +264,82 @@ async def watch_series(db, client):
         except Exception as e:  # noqa: BLE001 - the website or Mongo did not answer: the last known day stays in use
             logger.warning("matched: series schedule not read: %s", type(e).__name__)
         await asyncio.sleep(900 if ok else 120)
+
+
+# ---- The website's shifts, copied here ------------------------------------------------------------------------------
+SITE_PATH = "matched"
+SITE_FIELDS = ("asked", "updated_at", "paper_id", "items")
+SITE_EVERY, SITE_RECHECK, SITE_BATCH = 120, 600, 20
+
+
+def site_data(body):
+    """The website wraps its answers as {data, error, meta}; a plain answer is taken as it is."""
+    return body["data"] if isinstance(body, dict) and "data" in body and "meta" in body else body
+
+
+def site_rows(data) -> dict:
+    """The website's list of published shifts as {shift id: its updated_at, or None}. Anything that is not a shift is left out."""
+    out = {}
+    for row in (data.get("shifts") if isinstance(data, dict) else None) or []:
+        sid = row.get("id") if isinstance(row, dict) else row
+        stamp = row.get("updated_at") if isinstance(row, dict) else None
+        if isinstance(sid, str) and re.match(SHIFT_ID, sid) and len(out) < MAX_SHIFTS:
+            out[sid] = stamp if isinstance(stamp, (int, float)) and not isinstance(stamp, bool) else None
+    return out
+
+
+def stale(have, stamp, now: float) -> bool:
+    """Whether a shift must be read from the website again: we do not have it, it is hidden here, the website changed it,
+    or (a website that sends no updated_at) our copy is ten minutes old."""
+    if not have or not have.get("published"):
+        return True
+    if stamp is None:
+        return now - (have.get("synced_at") or 0) > SITE_RECHECK
+    return have.get("updated_at") != stamp
+
+
+async def _site(client, path: str):
+    base, http = os.environ.get("JEELIVE_API", "").rstrip("/"), client()
+    if not base or http is None:
+        return None
+    r = await canonical_request(http, "GET", f"{base}/{path}", path=path, params=None, body=None, headers={"Accept": "application/json"})
+    return site_data(r.json()) if r.is_success else None
+
+
+async def sync_site(db, client) -> bool:
+    """One pass: what the website publishes is written here (never deleted: a shift the website no longer lists is hidden
+    by `published: false`). Only documents marked `source: "website"` are touched. False = the website has no Matched
+    doors yet (or did not answer): nothing is changed."""
+    data = await _site(client, SITE_PATH)
+    if not isinstance(data, dict) or not isinstance(data.get("shifts"), list):
+        return False
+    live, now, read = site_rows(data), time.time(), 0
+    ours = {d["_id"]: d async for d in db.matched_shifts.find({"source": "website"}, {"updated_at": 1, "published": 1, "synced_at": 1})}
+    for sid, stamp in live.items():
+        if not stale(ours.get(sid), stamp, now) or read >= SITE_BATCH:
+            continue
+        read += 1
+        doc = await _site(client, f"{SITE_PATH}/{sid}")
+        if not isinstance(doc, dict) or shape_shift({**doc, "_id": sid}) is None:
+            continue
+        # A sample shift of the preview with the same id becomes the website's own shift.
+        await db.matched_shifts.update_one({"_id": sid}, {"$set": {**{k: doc.get(k) for k in SITE_FIELDS}, "published": True, "source": "website", "synced_at": now},
+                                                          "$unset": {"sample": ""}}, upsert=True)
+    gone = [sid for sid, d in ours.items() if sid not in live and d.get("published")]
+    if gone:
+        await db.matched_shifts.update_many({"_id": {"$in": gone}, "source": "website"}, {"$set": {"published": False, "synced_at": now}})
+    if data.get("card") in MODES:  # the super admin's switch for Home's card
+        await db.rf_meta.update_one({"_id": CARD_META}, {"$set": {"value": data["card"], "ts": now}}, upsert=True)
+    return True
+
+
+async def watch_site(db, client):
+    """Started once per server process: copies the website's shifts every two minutes."""
+    while True:
+        try:
+            await sync_site(db, client)
+        except asyncio.CancelledError:
+            raise
+        except Exception as e:  # noqa: BLE001 - the website or Mongo did not answer: what we have keeps being shown
+            logger.warning("matched: website shifts not read: %s", type(e).__name__)
+        await asyncio.sleep(SITE_EVERY)

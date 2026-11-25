@@ -7,6 +7,7 @@ Where things live:
   Phase 3: fast_json.py (orjson answers) · later.py (work nobody waits for) · website_shield.py (jeelive.ai down/slow)
            health_stats.py + health_panel.py (App Health page /api/owner/health) · log_redact.py (no PIN in any log)
   matched.py    - Matched: JEE Main questions that matched ours (public read) + when Home shows its card
+  choice.py     - Student Choice: the question bank a student builds a paper from (public read, from the website)
   everything else (duels, cups, daily, gangs, rank, ...) keeps its own module with a make_router() factory."""
 from database import client, db  # first: loads backend/.env for every module below
 
@@ -24,6 +25,7 @@ import account_deletion
 import app_switches
 import card_bank
 import ceo_api
+import choice
 import db_setup
 import health_alerts
 import health_panel
@@ -115,6 +117,7 @@ api.include_router(health_alerts.make_router(db))
 api.include_router(ceo_api.make_router(db))
 api.include_router(app_switches.router)
 api.include_router(matched.make_router(db))
+api.include_router(choice.make_router(db, jl_proxy.client))
 app.include_router(api)
 install_access_guard(app, db)
 app.add_middleware(AssetAwareCompression, minimum_size=1024, compresslevel=4)
@@ -149,6 +152,7 @@ async def startup():
     app.state.health_beat = asyncio.create_task(health_stats.beat(db, load_snapshot, shield.snapshot, later.pending))
     asyncio.create_task(health_alerts.watch(db))
     asyncio.create_task(matched.watch_series(db, jl_proxy.client))
+    asyncio.create_task(matched.watch_site(db, jl_proxy.client))
     asyncio.create_task(warm_up())
 
 

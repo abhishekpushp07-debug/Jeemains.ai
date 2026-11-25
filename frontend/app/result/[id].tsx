@@ -31,6 +31,7 @@ import { useAnalysis } from "@/src/analysis/useAnalysis";
 import { AnalysisBar, AnalysisBody, useAnalysisNav } from "@/src/analysis/Workspace";
 import { SolutionInsight } from "@/src/analysis/SolutionInsight";
 import { An, index } from "@/src/analysis/format";
+import { MatchedWith } from "@/src/matched/MatchedWith";
 
 type Tab = "analysis" | "progress" | "confidence" | "rank" | "solutions";
 const TABS: [Tab, string, IconName][] = [["analysis", "Analysis", "chart-donut"], ["progress", "Progress", "chart-line"], ["confidence", "Confidence", "gauge"], ["rank", "Rank", "podium"], ["solutions", "Solutions", "book-open-variant"]];
@@ -241,6 +242,8 @@ function Solutions({ r, id, version, an, onAnalysis }: { r: any; id: string; ver
           {piecesOf(q) ? <PieceQuestion id={id} q={q} width={reading} version={version} testPrefix={`review-${q.number}`}
             review={{ correct: q.disposition === "bonus_all" || q.disposition === "dropped" ? [] : q.accepted_answers || [q.answer], response: q.response }} />
             : imagePaths(id, q, "question", version).map((path, i) => <AssetImage key={path} testID={`solution-qimage-${q.number}-${i}`} path={path} label={`Question ${q.number}`} />)}
+          {/* A Matched paper: the JEE Main question this one matched, with its own answer and solution. Nothing for any other paper. */}
+          <MatchedWith paper={r.set_id} qid={q.id} width={reading} open />
           <View style={{ flexDirection: "row", gap: space.sm }}>
             <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_bar, borderWidth: 1, borderColor: colors.custom_barLine }}><T size={11} color={colors.muted}>Your answer</T><T w="heavy" size={16} testID="solution-your-answer">{q.response ? q.source_option_labels?.[q.response] || q.response : "—"}</T></View>
             <View style={{ flex: 1, padding: space.md, borderRadius: 14, backgroundColor: colors.custom_successSoft }}><T size={11} color={colors.success}>Answer key</T><T w="heavy" size={16} color={colors.success} testID="solution-answer-key">{(q.accepted_answers || [q.answer]).map((v: string) => q.source_option_labels?.[v] || v).join(" / ")}</T></View>

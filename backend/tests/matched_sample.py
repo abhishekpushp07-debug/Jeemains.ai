@@ -113,6 +113,17 @@ SHIFTS = {
 }
 
 
+# So that the owner can walk the whole way on the preview ("Attempt all matched" -> sign up -> the paper's page -> the
+# player and the result showing the JEE Main question under ours), ONE sample shift names a real paper of the website as
+# its stand-in: the chapter test "01 Sets and Relations", and its first questions as "ours". A real Matched shift names
+# the real paper the super admin made of the matched questions (memory/WEBSITE_MATCHED_NOTE.md).
+PAPER_SHIFT, PAPER = "2027-01-22-s1", "f6ad0ca5-b3c8-59dc-a814-e358c197dd7a"
+PAPER_QUESTIONS = ["9d8575c5-61fc-57a8-8457-cdddc8b28ebf", "8f97bb76-22ca-5f2b-9bad-fafad26b8f83", "2d75bc69-5116-5703-a8b8-5ae54eb64948", "e23b9eab-2c8d-5b0a-a740-f938cbbadab3",
+                   "d650a1ad-f6ed-53f6-8ea5-dcce95e55eb1", "21c73c60-9d2f-5219-8c3a-f01e80b3404f", "864bdf8c-a6ec-5a13-a29b-93f8dab313b1", "4f0c6381-bca6-538c-ae8e-019e2bbd5a44"]
+for _ours, _qid in zip((o for item in SHIFTS[PAPER_SHIFT] for o in item["ours"]), PAPER_QUESTIONS):
+    _ours["question_id"] = _qid
+
+
 def main(what):
     env = dotenv_values(Path(__file__).resolve().parents[1] / ".env")
     db = MongoClient(env["MONGO_URL"])[env["DB_NAME"]]
@@ -121,7 +132,8 @@ def main(what):
         db.rf_meta.update_one({"_id": "matched:card"}, {"$set": {"value": "on" if what == "show" else "auto", "ts": time.time()}}, upsert=True)
     if what == "show":
         for sid, items in SHIFTS.items():
-            shifts.replace_one({"_id": sid}, {"_id": sid, "published": True, "sample": True, "asked": 75, "updated_at": int(time.time()), "items": items}, upsert=True)
+            shifts.replace_one({"_id": sid}, {"_id": sid, "published": True, "sample": True, "asked": 75, "updated_at": int(time.time()), "items": items,
+                                              **({"paper_id": PAPER} if sid == PAPER_SHIFT else {})}, upsert=True)
     elif what == "hide":
         shifts.update_many({"_id": {"$in": list(SHIFTS)}, "sample": True}, {"$set": {"published": False, "updated_at": int(time.time())}})
     else:

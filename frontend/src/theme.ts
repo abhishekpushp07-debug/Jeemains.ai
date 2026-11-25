@@ -203,9 +203,15 @@ const dark = {
   // Home's Misfire card is that blood red with white words: a deeper rim carries its row of lights, and its name is in
   // glossy yellow (deep yellow letters, their upper half paler, a dark shade under them).
   custom_misfireRim: "#5C060D", custom_glossYellow: "#FFC61A", custom_glossYellowHi: "#FFF3A6", custom_glossYellowShade: "rgba(45,3,7,0.6)",
-  // "Matched" (the JEE Main questions that matched ours): glossy red into deep red, with that glossy yellow for its name,
-  // its numbers and its button; words on the yellow are a deep red (9 : 1).
-  custom_matchedFrom: "#E5172C", custom_matchedMid: "#B40F1E", custom_matchedTo: "#7A0914", custom_matchedInk: "#4A0509",
+  // "Matched" (the JEE Main questions that matched ours): sun yellow into amber into bright orange. Its words, numbers
+  // and button are a deep brown (5.4 : 1 on the orange, 11 : 1 on the yellow); its name is that brown, glossy (a lighter
+  // upper half, a pale shade under it). Chips and the facts row are white glass; fireworks are rose, violet, teal, red
+  // and white (yellow ones would not show).
+  custom_matchedFrom: "#FFD426", custom_matchedMid: "#FFA41C", custom_matchedTo: "#FF6A0D", custom_matchedInk: "#431407",
+  custom_matchedInkHi: "#7C2D12", custom_matchedInkShade: "rgba(255,255,255,0.55)",
+  custom_matchedGlass: "rgba(255,255,255,0.36)", custom_matchedLine: "rgba(255,255,255,0.72)", custom_matchedTrack: "rgba(67,20,7,0.18)",
+  custom_matchedGloss: "rgba(255,255,255,0.26)", custom_matchedGlint: "rgba(255,255,255,0.78)",
+  custom_matchedRose: "#FF2E7E", custom_matchedViolet: "#6D4BFF", custom_matchedTeal: "#00A38D", custom_matchedRed: "#E5172C",
   custom_chipParrot: "#96EA3A", custom_chipParrotDeep: "#46BE1B", custom_chipParrotInk: "#0F0F12", custom_chipParrotSoft: "#123F08",
   custom_chipParrotGloss: "rgba(255,255,255,0.42)", custom_chipParrotGlint: "rgba(255,255,255,0.85)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
@@ -499,8 +505,8 @@ export const dotEdges = {
   misfire: ["#FFD60A", "#FFFFFF", "#2DE1C2", "#FFD60A"],
   details: ["#FF2D7A", "#FFD60A", "#FFFFFF", "#B45CFF", "#FF2D7A"],
 } as const;
-// Round a Matched card: aqua (the opposite of its red), violet-blue (the opposite of its yellow) and white.
-export const matchedEdge = ["#2DE1C2", "#8C7BFF", "#FFFFFF", "#2DE1C2"] as const;
+// Round a Matched card: rose, violet (the opposite of its yellow) and white.
+export const matchedEdge = ["#FF2E7E", "#6D4BFF", "#FFFFFF", "#FF2E7E"] as const;
 // The three colours that run round a big series day card, from its status colour's own family (the first comes back at
 // the end): today = coral, rose, gold; done (royal blue) = gold, sky blue, lavender; upcoming = teal, azure, lavender; missed = bronze, dusty rose, sand.
 export const pastelEdges: Record<SeriesTone, readonly [string, string, string, string]> = {

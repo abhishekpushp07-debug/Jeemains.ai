@@ -33,7 +33,7 @@ def test_a_question_keeps_only_what_the_app_can_draw():
         {"url": "javascript:alert(1)"}, {"url": "https://cdn.example/half.png", "w": 800}]}})
     assert set(good) == {"n", "subject", "chapter", "jee", "ours"} and good["n"] == 12
     side = {"text", "options", "images", "correct", "answer", "solution", "solution_images"}
-    assert set(good["jee"]) == side and set(good["ours"][0]) == side | {"source", "tag"}
+    assert set(good["jee"]) == side and set(good["ours"][0]) == side | {"source", "tag", "qid"}
     # The right option is kept as its place from 0, whether it was written as a place from 1 or as a letter.
     assert good["jee"]["correct"] == 1 and good["ours"][0]["correct"] == 2
     assert good["jee"]["solution"].startswith("At the top") and good["ours"][0]["solution_images"] == [{"url": "https://cdn.example/s7.png", "w": None, "h": None}]
@@ -69,7 +69,7 @@ def test_a_shift_counts_only_good_questions_and_reads_day_and_shift_from_its_id(
     # "asked" smaller than what matched cannot be true: it is left out rather than shown.
     assert matched.shape_shift({**doc, "asked": 2})["asked"] is None and matched.shape_shift({**doc, "asked": "75"})["asked"] is None
     assert matched.shape_shift({"_id": "2027-01-25-s1"}) == {"id": "2027-01-25-s1", "day": "2027-01-25", "shift": 1, "asked": None, "matched": 0,
-                                                          "subjects": [], "updated_at": 0, "items": []}
+                                                          "paper_id": "", "paper_questions": 0, "subjects": [], "updated_at": 0, "items": []}
     for bad in ("2027-13-45-s1", "2027-01-25", "2027-01-25-s0", "x", 5, None):
         assert matched.shape_shift({"_id": bad, "items": [item(1)]}) is None
 
@@ -90,7 +90,7 @@ def test_public_routes_answer_without_sign_in():
     assert set(body) == {"total", "updated_at", "shifts"} and isinstance(body["shifts"], list)
     assert body["total"] == sum(s["matched"] for s in body["shifts"])
     for s in body["shifts"]:
-        assert set(s) == {"id", "day", "shift", "asked", "matched", "subjects", "updated_at"}
+        assert set(s) == {"id", "day", "shift", "asked", "matched", "paper_id", "paper_questions", "subjects", "updated_at"}
     assert requests.get(f"{BASE}/matched/1999-01-01-s1", timeout=30).status_code == 404
     assert requests.get(f"{BASE}/matched/today", timeout=30).status_code == 422
     switches = requests.get(f"{BASE}/app/switches", timeout=30).json()

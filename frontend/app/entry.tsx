@@ -11,6 +11,7 @@ import { AuthShell } from "@/src/components/auth/AuthShell";
 import { colors, radius, space } from "@/src/theme";
 import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
 import { isRoomPath } from "@/src/rapid/social";
+import { isMatchedPath } from "@/src/matched/api";
 import { useMatchedOn } from "@/src/matched/gate";
 import { MatchedBanner } from "@/src/matched/MatchedCard";
 
@@ -18,8 +19,10 @@ export default function Entry() {
   const { signIn, signUp, user, ready, sessionError, checkSession, expired, signOutWarning, lastPhone, forgetPhone } = useAuth();
   const router = useRouter();
   const params = useLocalSearchParams<{ mode?: string; next?: string }>();
-  // Opened from a match link: back to that Match Room after sign-in, otherwise home.
-  const target = (isRoomPath(params.next) ? params.next : HOME_ROUTE) as typeof HOME_ROUTE;
+  // Opened from a match link: back to that Match Room after sign-in. Opened from Matched's "Attempt all matched": back
+  // to that shift. Otherwise home.
+  const room = isRoomPath(params.next), toMatched = !ARENA && isMatchedPath(params.next);
+  const target = (room || toMatched ? params.next : HOME_ROUTE) as typeof HOME_ROUTE;
   const reduced = useReducedMotion();
   const [mode, setMode] = useState<"login" | "signup">(params.mode === "signup" ? "signup" : "login");
   const [typed, setTyped] = useState<string | null>(null); // null: the number kept from the last sign-in is shown
@@ -58,7 +61,8 @@ export default function Entry() {
       <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEELIVE.AI account. It works on the website and the app too." : "Sign in with the same mobile number and PIN you use on our website."}</T>
     </Animated.View>
     {matched ? <MatchedBanner /> : null}
-    {target !== HOME_ROUTE ? <Notice testID="entry-match-note" tone="info">Sign in or create an account to take your seat in the Rapid Fire match.</Notice> : null}
+    {room ? <Notice testID="entry-match-note" tone="info">Sign in or create an account to take your seat in the Rapid Fire match.</Notice> : null}
+    {toMatched ? <Notice testID="entry-matched-note" tone="info">Account banao ya sign in karo. Uske baad Matched paper attempt kar sakte ho.</Notice> : null}
     {expired ? <Notice testID="entry-session-expired" tone="info">{remembered
       ? "Aapka session khatam ho gaya. Number pehle se bhara hai — bas PIN daal kar wapas aao. Aapke results aur saved kaam safe hain."
       : "Aapka session khatam ho gaya. Number aur PIN daal kar wapas aao. Aapke results aur saved kaam safe hain."}</Notice> : null}

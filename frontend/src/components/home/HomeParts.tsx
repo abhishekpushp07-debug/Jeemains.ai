@@ -24,7 +24,9 @@ export function ExamGrid({ items }: { items: GridItem[] }) {
             </LinearGradient> : null}
           </View>
           <View style={{ flex: 1 }} />
-          <T testID={`home-tile-${it.id}-title`} w="heavy" size={narrow ? 15 : 17} color={colors.custom_royalMaroon} style={styles.examName} numberOfLines={1}>{it.label}</T>
+          {/* A long name ("STUDENT CHOICE") is set a little smaller, so it stays on one line in half a screen. */}
+          <T testID={`home-tile-${it.id}-title`} w="heavy" size={(narrow ? 15 : 17) - (it.label.length > 11 ? 3 : 0)} color={colors.custom_royalMaroon} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.8}
+            style={it.label.length > 11 ? styles.longName : styles.examName}>{it.label}</T>
           <View style={styles.valueRow}>
             <T testID={`home-tile-${it.id}-description`} w="semibold" size={narrow ? 12.5 : 13.5} color={colors.muted} numberOfLines={1} style={{ flexShrink: 1 }}>{it.value}</T>
             <Glyph name="chevron-right" size={15} color={colors.muted} />
@@ -96,6 +98,7 @@ const styles = StyleSheet.create({
   badge: { borderRadius: 6, paddingHorizontal: 8, paddingVertical: 3 },
   caps: { letterSpacing: 2 },
   examName: { letterSpacing: 1 },
+  longName: { letterSpacing: 0.3 },
   valueRow: { flexDirection: "row", alignItems: "center", gap: 2, marginTop: 2 },
   circles: { flexDirection: "row", justifyContent: "space-between" },
   circleItem: { flex: 1, alignItems: "center", gap: 10, minWidth: 0 },

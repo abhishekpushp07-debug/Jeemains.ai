@@ -100,25 +100,31 @@ export const Serial = ({ value, of, testID }: { value: string; of?: string; test
   {of ? <T color={muted} style={[styles.serif, { fontSize: 13 }]}> / {of}</T> : null}
 </View>;
 
-/** Light notes and the actions under the card (Shortlist only where the card leads to colleges).
+/** The light notes under a card. */
+export const CardNotes = ({ notes }: { notes: (string | undefined | false)[] }) => <View style={{ gap: 4 }}>
+  {notes.filter(Boolean).map(n => <T key={n as string} size={12.5} color={colors.custom_softText}>{n}</T>)}
+</View>;
+
+/** The actions under a card (Shortlist only where the card leads to colleges).
  *  `onShare` sends the card's photo; the button spins while the photo is made. */
-export function CardActions({ notes, onShare, saved, onShortlist, prefix }: {
-  notes: (string | undefined | false)[]; onShare: () => Promise<unknown>; saved?: number; onShortlist?: () => void; prefix: string;
-}) {
+export function CardButtons({ onShare, saved, onShortlist, prefix }: { onShare: () => Promise<unknown>; saved?: number; onShortlist?: () => void; prefix: string }) {
   const [busy, setBusy] = useState(false);
   const share = async () => {
     if (busy) return;
     setBusy(true);
     try { await onShare(); } catch { /* the share sheet closed or WhatsApp refused: nothing to undo */ } finally { setBusy(false); }
   };
+  return <View style={styles.actions}>
+    <Pill testID={`${prefix}-share`} size="sm" icon="whatsapp" label="WhatsApp" accessibilityLabel="Card WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onBrandPrimary} busy={busy} onPress={share} style={{ flex: 1 }} />
+    {onShortlist ? <Pill testID={`${prefix}-shortlist-open`} size="sm" icon="playlist-check" label={`Shortlist ${saved ?? 0}`} onPress={onShortlist} bg={colors.custom_cardRaised} ink={colors.onSurface} style={[{ flex: 1 }, styles.outline]} /> : null}
+  </View>;
+}
+
+/** Light notes, then the actions, under the card. */
+export function CardActions({ notes, ...buttons }: { notes: (string | undefined | false)[]; onShare: () => Promise<unknown>; saved?: number; onShortlist?: () => void; prefix: string }) {
   return <View style={{ gap: space.md }}>
-    <View style={{ gap: 4 }}>
-      {notes.filter(Boolean).map(n => <T key={n as string} size={12.5} color={colors.custom_softText}>{n}</T>)}
-    </View>
-    <View style={styles.actions}>
-      <Pill testID={`${prefix}-share`} size="sm" icon="whatsapp" label="WhatsApp" accessibilityLabel="Card WhatsApp par bhejo" bg={colors.custom_whatsapp} ink={colors.onBrandPrimary} busy={busy} onPress={share} style={{ flex: 1 }} />
-      {onShortlist ? <Pill testID={`${prefix}-shortlist-open`} size="sm" icon="playlist-check" label={`Shortlist ${saved ?? 0}`} onPress={onShortlist} bg={colors.custom_cardRaised} ink={colors.onSurface} style={[{ flex: 1 }, styles.outline]} /> : null}
-    </View>
+    <CardNotes notes={notes} />
+    <CardButtons {...buttons} />
   </View>;
 }
 

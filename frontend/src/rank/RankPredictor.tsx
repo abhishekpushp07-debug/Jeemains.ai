@@ -1,6 +1,6 @@
 // Rank predictor (Rank tab, first tile): pick JEE Main or COMEDK, type marks (JEE: category, PwD, paper type) and get the
 // expected rank and percentile only. JEE shows all three paper types side by side; COMEDK shows what each analysis says.
-// "Colleges dekho" carries the same score into the College predictor.
+// Right under the card: "Is score se colleges dekho" (carries the same score into the College predictor) and WhatsApp.
 import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, TextInput, useWindowDimensions, View } from "react-native";
 import Animated, { FadeIn, useReducedMotion } from "react-native-reanimated";
@@ -11,7 +11,7 @@ import { storage } from "@/src/utils/storage";
 import { Category, ComedkEstimate, estimate, EstimateIn, EstimateOut, fmt, fmtPct, fmtRange, JeeEstimate, Level } from "./api";
 import { CATEGORY_LABEL, LEVEL, SERIF } from "./tones";
 import { Strip, Summary, Switch, Tag, Toggle } from "./controls";
-import { CardActions, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
+import { CardButtons, CardNotes, Eyebrow, Hairline, MetalCard, Serial, SerifBig, SilverCaps, Small } from "./MetalCard";
 import { shareEstimate } from "./share";
 import { FormButton, useField } from "./accent";
 import { SAVED, useProfileSaves } from "./profile";
@@ -108,15 +108,21 @@ export function RankPredictor({ onColleges }: { onColleges: (q: EstimateIn) => v
       <FormButton testID="rp-show" label="Predict rank" busy={busy && !shown} onPress={() => run(form)} />
     </Strip> : <Summary testID="rp-input-collapsed" text={summaryOf(query)} onEdit={() => setOpen(true)} />}
     <ErrorBox error={error ?? undefined} retry={() => setTries(t => t + 1)} testID="rp-error" />
-    {shown && query ? <>
-      {shown.exam === "jee" ? <JeeCard data={shown} level={query.level} onLevel={pickLevel} busy={busy} /> : <ComedkCard data={shown} />}
-      <Pill testID="rp-colleges" size="lg" label="Is score se colleges dekho" iconRight="arrow-right" onPress={() => onColleges(query)}
-        bg={colors.custom_cardRaised} ink={colors.onSurface} style={styles.outline} />
-    </> : null}
+    {shown && query ? (shown.exam === "jee" ? <JeeCard data={shown} level={query.level} onLevel={pickLevel} busy={busy} onColleges={() => onColleges(query)} />
+      : <ComedkCard data={shown} onColleges={() => onColleges(query)} />) : null}
   </>;
 }
 
-function JeeCard({ data, level, onLevel, busy }: { data: JeeEstimate; level: Level; onLevel: (l: Level) => void; busy: boolean }) {
+/** Right under the card: the way to the colleges for this score, and the card on WhatsApp. */
+function UnderCard({ onColleges, onShare }: { onColleges: () => void; onShare: () => Promise<unknown> }) {
+  return <View testID="rp-under-card" style={{ gap: space.sm }}>
+    <Pill testID="rp-colleges" size="lg" label="Is score se colleges dekho" iconRight="arrow-right" onPress={onColleges}
+      bg={colors.custom_cardRaised} ink={colors.onSurface} style={styles.outline} />
+    <CardButtons prefix="rp" onShare={onShare} />
+  </View>;
+}
+
+function JeeCard({ data, level, onLevel, busy, onColleges }: { data: JeeEstimate; level: Level; onLevel: (l: Level) => void; busy: boolean; onColleges: () => void }) {
   const reduced = useReducedMotion();
   const narrow = useWindowDimensions().width < 360;
   const card = useRef<React.ComponentRef<typeof View>>(null);
@@ -140,6 +146,7 @@ function JeeCard({ data, level, onLevel, busy }: { data: JeeEstimate; level: Lev
         {r.pwd_rank ? <Small testID="rp-card-pwd" label={r.pwd_rank.label} value={fmtRange(r.pwd_rank.range)} /> : null}
       </View> : null}
     </MetalCard>
+    <UnderCard onColleges={onColleges} onShare={() => shareCard(card, shareEstimate(data, link))} />
     <Strip title="Paper type ke hisaab se" testID="rp-levels" right={busy ? <T size={12} color={colors.muted}>…</T> : undefined}>
       {data.levels.map(l => {
         const on = l.level === level;
@@ -167,11 +174,11 @@ function JeeCard({ data, level, onLevel, busy }: { data: JeeEstimate; level: Lev
       })}
       <T size={11.5} color={colors.custom_dim}>Same marks par shift ka paper tough tha to percentile zyada aata hai. Kisi bhi row par tap karo, card us paper ke hisaab se badal jayega.</T>
     </Strip>
-    <CardActions prefix="rp" onShare={() => shareCard(card, shareEstimate(data, link))} notes={[r.spread, ...data.notes]} />
+    <CardNotes notes={[r.spread, ...data.notes]} />
   </Animated.View>;
 }
 
-function ComedkCard({ data }: { data: ComedkEstimate }) {
+function ComedkCard({ data, onColleges }: { data: ComedkEstimate; onColleges: () => void }) {
   const reduced = useReducedMotion();
   const card = useRef<React.ComponentRef<typeof View>>(null);
   const link = useShareLink();
@@ -189,6 +196,7 @@ function ComedkCard({ data }: { data: ComedkEstimate }) {
       </View>
       <Hairline testID="rp-card-percentile" label={`PERCENTILE  ${fmtPct(data.percentile)}`} />
     </MetalCard>
+    <UnderCard onColleges={onColleges} onShare={() => shareCard(card, shareEstimate(data, link))} />
     <Strip title="3 analyses kya kehte hain" testID="rp-sources">
       {data.sources.map((s, i) => <View key={s.label} testID={`rp-sources-${i}`} style={styles.source}>
         <T size={12.5} color={colors.custom_softText} style={{ flex: 1 }} numberOfLines={2}>{s.label}</T>
@@ -196,7 +204,7 @@ function ComedkCard({ data }: { data: ComedkEstimate }) {
       </View>)}
       <T size={11.5} color={colors.custom_dim}>Beech wala andaaza (№ {fmt(data.mid)}) card par hai; range = sabse achha se sabse kharab andaaza.</T>
     </Strip>
-    <CardActions prefix="rp" onShare={() => shareCard(card, shareEstimate(data, link))} notes={data.notes} />
+    <CardNotes notes={data.notes} />
   </Animated.View>;
 }
 

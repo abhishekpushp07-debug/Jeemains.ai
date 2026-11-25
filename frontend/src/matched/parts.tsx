@@ -1,4 +1,5 @@
-// The small parts of a matched question's card, shared by the shift's list (Pair.tsx) and the Matched paper (PaperQuestion.tsx).
+// The small parts of a matched question's card: the shift's list (Pair.tsx) and the JEE question shown under ours in a
+// Matched paper's player and solutions (MatchedWith.tsx).
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,7 +10,7 @@ import type { TabLook } from "@/src/components/GlossTabs";
 import { colors, space, tabEdges } from "@/src/theme";
 import { MatchedItem, SHORT } from "./api";
 
-const WHITE = colors.custom_chipBloodInk, YELLOW = colors.custom_glossYellow, INK = colors.custom_matchedInk;
+const YELLOW = colors.custom_glossYellow, INK = colors.custom_matchedInk;
 export const PAD = 14, BOX = 12;
 
 // Matched's two tab colours, from My Tests' glossy tabs: flame for JEE Main, sun yellow for ours.
@@ -20,14 +21,14 @@ export const SUN: TabLook = { on: [colors.custom_tabSun, colors.custom_tabSunDee
 // comes back as the student left it.
 export const kept = new Map<number, "question" | "solution">();
 
-/** The card's glossy red top: a word in glossy yellow (the question's number), its subject and its chapter. */
+/** The card's glossy yellow-to-orange top: a glossy word (the question's number), its subject and its chapter. */
 export function Ribbon({ it, id, word }: { it: Pick<MatchedItem, "subject" | "chapter">; id: string; word?: string }) {
   return <LinearGradient colors={[colors.custom_matchedFrom, colors.custom_matchedMid, colors.custom_matchedTo]} locations={[0, 0.6, 1]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.ribbon}>
-    <LinearGradient pointerEvents="none" colors={[colors.custom_fireGloss, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.gloss} />
-    {word ? <GlossWord testID={`${id}-number`} size={19}>{word}</GlossWord> : null}
-    {it.subject ? <View style={styles.subject}><T w="heavy" size={10.5} color={WHITE} style={styles.caps} numberOfLines={1}>{(SHORT[it.subject] || it.subject).toUpperCase()}</T></View> : null}
-    <T w="semibold" size={12.5} color={WHITE} numberOfLines={1} style={styles.chapter}>{it.chapter}</T>
-    <View style={styles.seal}><Glyph name="check" size={15} color={INK} stroke={2.6} /></View>
+    <LinearGradient pointerEvents="none" colors={[colors.custom_matchedGloss, colors.custom_clear]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.gloss} />
+    {word ? <GlossWord testID={`${id}-number`} size={19} look="ink">{word}</GlossWord> : null}
+    {it.subject ? <View style={styles.subject}><T w="heavy" size={10.5} color={INK} style={styles.caps} numberOfLines={1}>{(SHORT[it.subject] || it.subject).toUpperCase()}</T></View> : null}
+    <T w="semibold" size={12.5} color={INK} numberOfLines={1} style={styles.chapter}>{it.chapter}</T>
+    <View style={styles.seal}><Glyph name="check" size={15} color={YELLOW} stroke={2.6} /></View>
   </LinearGradient>;
 }
 
@@ -58,18 +59,18 @@ export function Seal({ tag, testID }: { tag?: string; testID?: string }) {
 export const cardStyles = StyleSheet.create({
   card: { borderRadius: 22, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card, overflow: "hidden" },
   body: { gap: space.md, padding: PAD },
-  // Whose question it is can be told from its paper: the JEE Main one lies on soft red, ours on soft gold.
+  // Whose question it is can be told from its paper: the JEE Main one lies on soft orange, ours on soft gold.
   panel: { gap: 10, padding: BOX, borderRadius: 16 },
-  jee: { backgroundColor: colors.custom_chipBloodSoft },
+  jee: { backgroundColor: colors.custom_flameSoft },
   ours: { backgroundColor: colors.custom_goldSoft },
 });
 
 const styles = StyleSheet.create({
   ribbon: { flexDirection: "row", alignItems: "center", gap: space.sm, minHeight: 50, paddingVertical: 8, paddingLeft: PAD, paddingRight: 10 },
   gloss: { position: "absolute", left: 0, right: 0, top: 0, height: "56%" },
-  subject: { height: 24, paddingHorizontal: 9, borderRadius: 12, justifyContent: "center", borderWidth: 1, borderColor: colors.custom_fireLine, backgroundColor: colors.custom_fireGlass },
+  subject: { height: 24, paddingHorizontal: 9, borderRadius: 12, justifyContent: "center", borderWidth: 1, borderColor: colors.custom_matchedLine, backgroundColor: colors.custom_matchedGlass },
   chapter: { flex: 1, minWidth: 0 },
-  seal: { width: 30, height: 30, borderRadius: 15, alignItems: "center", justifyContent: "center", backgroundColor: YELLOW },
+  seal: { width: 30, height: 30, borderRadius: 15, alignItems: "center", justifyContent: "center", backgroundColor: INK },
   caps: { letterSpacing: 1.4 },
   head: { flexDirection: "row", alignItems: "center", flexWrap: "wrap", gap: 8 },
   label: { flexDirection: "row", alignItems: "center", gap: 6 },

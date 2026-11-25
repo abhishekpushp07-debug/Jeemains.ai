@@ -1,6 +1,6 @@
-// The Matched look, kept in one place for Home's card, the sign-in screen's bar and the top cards of Matched: glossy
-// red into deep red with a yellow glow in the top right corner; aqua, violet-blue and white (the opposites of red and
-// yellow) run round its edge; a soft gloss; a glass glint from corner to corner; fireworks; and the golden cup.
+// The Matched look, kept in one place for Home's card, the sign-in screen's bar and the top cards of Matched: sun yellow
+// into amber into bright orange, with a white glow in the top right corner (behind the cup); rose, violet and white run
+// round its edge; a soft gloss; a glass glint from corner to corner; fireworks; and the golden cup.
 import React, { useEffect, useId } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, { Easing, cancelAnimation, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withTiming } from "react-native-reanimated";
@@ -20,8 +20,8 @@ export function MatchedBackdrop() {
     <Svg style={StyleSheet.absoluteFill} width="100%" height="100%" pointerEvents="none">
       <Defs>
         <RadialGradient id={glow} cx="94%" cy="4%" rx="58%" ry="78%" fx="94%" fy="4%">
-          <Stop offset="0" stopColor={colors.custom_glossYellow} stopOpacity={0.6} />
-          <Stop offset="1" stopColor={colors.custom_glossYellow} stopOpacity={0} />
+          <Stop offset="0" stopColor={colors.custom_webWhite} stopOpacity={0.62} />
+          <Stop offset="1" stopColor={colors.custom_webWhite} stopOpacity={0} />
         </RadialGradient>
       </Defs>
       <Rect x="0" y="0" width="100%" height="100%" fill={`url(#${glow})`} />
@@ -30,26 +30,27 @@ export function MatchedBackdrop() {
 }
 
 /** What goes round and over that face (a plain running edge, no dots). */
-export const matchedShine = { ring: 3, edge: matchedEdge, gloss: colors.custom_fireGloss, glint: colors.custom_fireGlint, band: 96, part: 46, corner: true } as const;
+export const matchedShine = { ring: 3, edge: matchedEdge, gloss: colors.custom_matchedGloss, glint: colors.custom_matchedGlint, band: 96, part: 46, corner: true } as const;
 
 const RAYS = Array.from({ length: 14 }, (_, i) => (i / 14) * Math.PI * 2);
 /** Where a firework bursts (share of the card's width and height), how big it is, its colour, and how long after the first. */
 export type Sky = [number, number, number, string, number][];
 // The biggest one opens behind the cup (it stands on the right); the others go off along the top and the edges, clear of
-// the card's numbers.
+// the card's numbers. White ones only where the card is orange: on its yellow they would not show.
+const ROSE = colors.custom_matchedRose, VIOLET = colors.custom_matchedViolet, TEAL = colors.custom_matchedTeal, RED = colors.custom_matchedRed, WHITE = colors.custom_webWhite;
 const SKY: Sky = [
-  [0.84, 0.2, 128, colors.custom_glossYellowHi, 0], [0.56, 0.1, 64, colors.custom_webWhite, 420], [0.97, 0.62, 76, colors.custom_fTeal, 860],
-  [0.64, 0.3, 54, colors.custom_glossYellow, 1300], [0.3, 0.04, 56, colors.custom_tabPink, 1750], [0.02, 0.94, 66, colors.custom_gemBlue, 2200],
-  [0.45, 0.97, 52, colors.custom_glossYellowHi, 2650],
+  [0.84, 0.2, 128, ROSE, 0], [0.56, 0.1, 64, VIOLET, 420], [0.97, 0.62, 76, WHITE, 860],
+  [0.64, 0.3, 54, RED, 1300], [0.3, 0.04, 56, TEAL, 1750], [0.02, 0.94, 66, VIOLET, 2200],
+  [0.45, 0.97, 52, WHITE, 2650],
 ];
 // A firework that may not move is drawn part-open, so the card still has its sky.
 const HELD = 0.5;
 // Sprinkles that are always on the card, moving or not: [x, y (share of the card), size, colour, a star (1) or a bead (0)].
 // They keep to the top and to the cup's side, clear of the card's numbers and its button.
 const SPRINKLES: [number, number, number, string, number][] = [
-  [0.47, 0.05, 11, colors.custom_webWhite, 1], [0.6, 0.2, 5, colors.custom_glossYellowHi, 0], [0.7, 0.07, 4, colors.custom_fTeal, 0], [0.66, 0.36, 9, colors.custom_glossYellowHi, 1],
-  [0.94, 0.06, 10, colors.custom_webWhite, 1], [0.985, 0.34, 5, colors.custom_tabPink, 0], [0.56, 0.44, 4, colors.custom_webWhite, 0], [0.975, 0.93, 9, colors.custom_fTeal, 1],
-  [0.012, 0.52, 5, colors.custom_glossYellowHi, 0], [0.35, 0.03, 4, colors.custom_tabPink, 0],
+  [0.47, 0.05, 11, ROSE, 1], [0.6, 0.2, 5, VIOLET, 0], [0.7, 0.07, 4, RED, 0], [0.66, 0.36, 9, WHITE, 1],
+  [0.94, 0.06, 10, VIOLET, 1], [0.985, 0.34, 5, ROSE, 0], [0.56, 0.44, 4, WHITE, 0], [0.975, 0.93, 9, WHITE, 1],
+  [0.012, 0.52, 5, VIOLET, 0], [0.35, 0.03, 4, TEAL, 0],
 ];
 const STAR = "M12 0 C12.8 7 17 11.2 24 12 C17 12.8 12.8 17 12 24 C11.2 17 7 12.8 0 12 C7 11.2 11.2 7 12 0 Z";
 

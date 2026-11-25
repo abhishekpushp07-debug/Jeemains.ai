@@ -1,13 +1,16 @@
 // Matched: the JEE Main questions that matched ours, shift by shift. Read from our own server (backend/matched.py), which
 // is open to everyone: no sign-in, no account in the request.
 import { ApiError, BACKEND } from "@/src/api/client";
+import { storage } from "@/src/utils/storage";
 
 export type Picture = { url: string; w: number | null; h: number | null };
 /** One question as it was supplied: words (maths in $…$), options, pictures; and its solution when given: the place of the
- *  right option (from 0), the answer in words, the worked solution and its pictures. */
-export type Side = { text: string; options: string[]; images: Picture[]; correct: number | null; answer: string; solution: string; solution_images: Picture[]; source?: string; tag?: string };
+ *  right option (from 0), the answer in words, the worked solution and its pictures. On one of ours, `qid` = its id in the
+ *  shift's real paper. */
+export type Side = { text: string; options: string[]; images: Picture[]; correct: number | null; answer: string; solution: string; solution_images: Picture[]; source?: string; tag?: string; qid?: string };
 export type MatchedItem = { n: number | null; subject: string; chapter: string; jee: Side; ours: Side[] };
-export type ShiftSummary = { id: string; day: string; shift: number; asked: number | null; matched: number; subjects: { name: string; n: number }[]; updated_at?: number };
+/** `paper_id` = the shift's real paper on jeelive.ai ("Attempt all matched"), "" until one is attached; `paper_questions` = how many of ours are in it. */
+export type ShiftSummary = { id: string; day: string; shift: number; asked: number | null; matched: number; paper_id?: string; paper_questions?: number; subjects: { name: string; n: number }[]; updated_at?: number };
 export type MatchedIndex = { total: number; updated_at: number; shifts: ShiftSummary[] };
 export type MatchedShift = ShiftSummary & { items: MatchedItem[] };
 
@@ -22,8 +25,28 @@ async function get<T>(path: string, signal: AbortSignal): Promise<T> {
   if (!res.ok) throw new ApiError(res.status === 404 ? "Yeh shift ab yahan nahi hai." : "Matched abhi load nahi ho paaya. Dobara try karo.", res.status);
   return res.json();
 }
-export const getIndex = (signal: AbortSignal) => get<MatchedIndex>("", signal);
-export const getShift = (id: string) => (signal: AbortSignal) => get<MatchedShift>("/" + id, signal);
+export const getIndex = async (signal: AbortSignal) => { const d = await get<MatchedIndex>("", signal); void remember(d.shifts.map(s => s.paper_id)); return d; };
+export const getShift = (id: string) => async (signal: AbortSignal) => { const d = await get<MatchedShift>("/" + id, signal); void remember([d.paper_id]); return d; };
+/** The shift whose real paper this is: the test player and the solutions show the JEE question under each of ours. */
+export const getPaper = (paper: string) => (signal: AbortSignal) => get<MatchedShift>("/paper/" + paper, signal);
+
+// The papers this phone has seen named by a Matched shift. The test player and the solutions ask the server about a
+// paper only when its id is here, so an ordinary paper costs nothing.
+const PAPERS = "matched.papers";
+let papers: Set<string> | null = null;
+async function known() {
+  if (!papers) papers = new Set(String(await storage.getItem<string>(PAPERS, "")).split(",").filter(Boolean));
+  return papers;
+}
+async function remember(ids: (string | undefined)[]) {
+  const set = await known(), before = set.size;
+  for (const id of ids) if (id) set.add(id);
+  if (set.size !== before) void storage.setItem(PAPERS, [...set].slice(-300).join(","));
+}
+export const isMatchedPaper = async (paper: string) => (await known()).has(paper);
+
+/** A Matched page the sign-in screen may lead back to (a shift, or the list). */
+export const isMatchedPath = (path?: string) => !!path && /^\/matched(\/\d{4}-\d{2}-\d{2}-s[1-9])?$/.test(path);
 
 const at = (day: string) => new Date(day + "T12:00:00+05:30");
 /** "Jan 2027" */

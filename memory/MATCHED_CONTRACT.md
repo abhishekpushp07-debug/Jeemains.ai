@@ -1,21 +1,39 @@
 # Matched: what the app shows, and what the future machine / super admin must write
 
 Written 25 Nov 2026, when the app side was built ahead of time. **Read this before building the matching machine or the
-super-admin page.** The app in students' hands already knows how to show Matched; nothing below needs a new app build.
+super-admin page.** Students get Matched with the app release that contains it; after that release nothing below needs
+a new app build.
+
+**CHANGED ON 26 NOV 2026 (on the preview only; not published when this was written):**
+- The on-phone Matched paper (`/matched/paper/<shift id>`) is REMOVED. "Attempt all matched" now asks a person without
+  an account to sign up, and opens the shift's REAL paper on the website for a signed-in student (`paper_id` and
+  `question_id` below).
+- Shifts are meant to come from the website now: it publishes them through two public doors and our server copies them
+  into `matched_shifts` every two minutes (`watch_site` / `sync_site` in `backend/matched.py`; only documents marked
+  `source: "website"` are ever changed by the copy, and none is deleted). A document written by hand is still shown.
+  The website has neither door yet, so today the copy does nothing.
+- The look is yellow and orange, not red.
+- **The note to hand to the website project is `memory/WEBSITE_MATCHED_NOTE.md`. Where this file and that note differ,
+  the note is right.**
 
 ## What a student sees
 
 - **Home**: from the day after the All India series ends, the All India series card gives its place to the **Matched**
-  card ("JEE Mains questions matched with ours": glossy red and yellow, fireworks, running edge). The series and its
+  card ("JEE Mains questions matched with ours": sun yellow into amber into orange, golden cup, fireworks, running edge). The series and its
   practice archive stay on Home's ALL INDIA tile.
 - **Sign-in screen**: from the same day, a small Matched bar. People without an account can open Matched too.
 - **Matched page** (`/matched`): month pills (Jan 2027, Apr 2027) → days → shifts ("Shift 1 · 18 of 75 matched").
-- **Shift page** (`/matched/<shift id>`): a red card with the golden cup and fireworks: the count ("6 of 75 questions
+- **Shift page** (`/matched/<shift id>`): a yellow and orange card with the golden cup and fireworks: the count ("6 of 75 questions
   matched with ours"), the paper's facts (questions, marks, +4 / −1) and the button **"Attempt all matched"**; subject
-  pills; then one card per matched question: the JEE Main question (soft red) and our question(s) it matched (soft gold,
+  pills; then one card per matched question: the JEE Main question and our question(s) it matched (with
   where ours was asked, how close the match is), **without options**, with tabs "Question | Solution" (the Solution tab
   opens the right answer and the worked solution of both).
-- **Matched paper** (`/matched/paper/<shift id>`, the "Attempt all matched" button): OUR matched questions of that shift,
+- **"Attempt all matched" (since 26 Nov 2026)**: without an account, a sheet asks to sign up (free) and brings the person
+  back to the shift; signed in, the shift's real paper on the website opens (`/set/<paper_id>`: its usual page, Start,
+  the player, and afterwards the usual result, analysis and solutions). Under each of our questions the player and the
+  solutions show the JEE Main question it matched (`src/matched/MatchedWith.tsx`). A shift without a paper says the
+  paper will open there soon and has no button.
+- **HISTORY ONLY, REMOVED ON 26 NOV 2026.** The old on-phone Matched paper (`/matched/paper/<shift id>`): OUR matched questions of that shift,
   one at a time, with OUR options to tap (or a number to type), and under each the JEE Main question it matched (without
   options). Submit → result: marks (+4 right, −1 wrong, 0 left), right / wrong / left, time, and every question again with
   the right option green, a wrong choice red, and our solution. Everything is marked ON THE PHONE from the shift's own
@@ -34,13 +52,16 @@ super-admin page.** The app in students' hands already knows how to show Matched
   "published": true,              // students see the shift only while this is true. false = prepared, or taken back.
   "asked": 75,                    // how many questions the shift's paper had. Optional: without it "18 matched" is shown.
   "updated_at": 1800000000,       // unix seconds of the last change. Optional.
+  "paper_id": "<the website's id of this shift's real paper>",   // optional (26 Nov). "Attempt all matched" appears only with
+                                  // it AND a question_id on at least one of ours.
   "items": [                      // ONLY the questions that matched. The app counts them ("18 of 75").
     {
       "n": 12,                    // the question's number in the JEE paper. Optional (then it goes after the numbered ones).
       "subject": "Physics",       // exactly Physics, Chemistry or Mathematics. Anything else: shown without a subject.
       "chapter": "Kinematics",    // optional
       "jee":  { ...question },    // the JEE Main question
-      "ours": [ { ...question, "source": "AITS Day 12 · Q 7", "tag": "Same concept" } ]   // 1 to 4 of ours
+      "ours": [ { ...question, "source": "AITS Day 12 · Q 7", "tag": "Same concept",
+                  "question_id": "<this question's id inside the real paper>" } ]            // 1 to 4 of ours
     }
   ]
 }
@@ -65,8 +86,7 @@ does not fit is left out by the server and not counted, so it cannot break the a
 sent to phones.
 
 **Both the JEE question and ours should come with their solution** (`correct` or `answer`, and `solution` and/or
-`solution_images`): every question has a Solution tab on the app, and ours needs `correct` (or a number `answer`) to be
-in the Matched paper. A question without any of them says "Is question ka solution abhi nahi aaya"; one with only the
+`solution_images`): every question has a Solution tab on the app. A question without any of them says "Is question ka solution abhi nahi aaya"; one with only the
 right answer says the written solution is not there yet.
 
 Every option must have words: if one is empty, none of the options is shown (a missing one would move the letters), so
@@ -77,7 +97,9 @@ Up to 150 items per shift and 200 shifts are read.
 ## Rules to keep
 
 - **Never delete a shift.** To take one back, set `published` to false. To correct one, write the document again.
-- A change reaches students within about two minutes (the server keeps each answer for 60 seconds).
+- A change written into `matched_shifts` reaches students within about a minute (the server keeps each answer for 60
+  seconds). A change made on the website needs up to two minutes more (the copy runs every two minutes, and reads at
+  most 20 changed shifts in one pass).
 - The matching machine and the super-admin page are **server-side work only**: they write the document above. If their
   own data looks different, change it into this shape before writing (or add the change to `shape_shift` in
   `backend/matched.py`). The app must keep getting the answers below.
@@ -86,6 +108,9 @@ Up to 150 items per shift and 200 shifts are read.
 
 - `GET /api/matched` → `{ total, updated_at, shifts: [{ id, day, shift, asked, matched, subjects: [{ name, n }], updated_at }] }`, newest first.
 - `GET /api/matched/<shift id>` → the same shift row plus `items`. 404 when it is not published.
+- Since 26 Nov every shift row also has `paper_id` ("" until a paper is attached) and `paper_questions` (how many of
+  ours are in it), and each of ours has `qid`. `GET /api/matched/paper/<paper id>` → the published shift whose real
+  paper this is (404 otherwise); the player and the solutions ask it for a paper the phone knows to be a Matched paper.
 - `GET /api/app/switches` → now also `matched: true | false`: whether Home shows the Matched card.
 
 ## When the card is on
@@ -114,6 +139,6 @@ history across phones); one paper across several shifts; a time limit for the pa
 
 - Server: `backend/matched.py`, `backend/app_switches.py`, `backend/tests/test_matched.py`
 - Sample shifts for the owner's eyes on the preview only: `python3 backend/tests/matched_sample.py show | hide`
-- App: `frontend/src/matched/*` (a question's card in the list: `Pair.tsx`; the paper: `paper.ts`, `PaperQuestion.tsx`; shared: `QuestionBlock.tsx`, `html.ts`, `parts.tsx`; the red cards, cup and fireworks: `MatchedCard.tsx`, `looks.tsx`), `frontend/app/matched/index.tsx`, `frontend/app/matched/[id].tsx`, `frontend/app/matched/paper/[id].tsx`,
+- App: `frontend/src/matched/*` (a question's card in the list: `Pair.tsx`; the JEE question under ours in a real Matched paper: `MatchedWith.tsx`; shared: `QuestionBlock.tsx`, `html.ts`, `parts.tsx`; the yellow and orange cards, cup and fireworks: `MatchedCard.tsx`, `looks.tsx`; `paper.ts`, `PaperQuestion.tsx` and `app/matched/paper/[id].tsx` were deleted on 26 Nov), `frontend/app/matched/index.tsx`, `frontend/app/matched/[id].tsx`,
   `frontend/src/components/GlossWord.tsx`; Home `app/(tabs)/index.tsx`; sign-in `app/entry.tsx`; public route in `app/_layout.tsx`
 - UI test stand-in: `tests/matched_fixture.py`

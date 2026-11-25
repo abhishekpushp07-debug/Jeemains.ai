@@ -15,8 +15,8 @@ import { useShare } from "@/src/components/SeriesBanner";
 import { BrandMark } from "@/src/components/BrandMark";
 import { getPyqCatalogue } from "@/src/api/pyq";
 import { colors, space } from "@/src/theme";
-import { EXAMS, istDate, usesNativeTabs } from "@/src/navigation";
-import { seriesDays, todayPaper, useSeriesData, useSeriesWatch } from "@/src/series";
+import { EXAMS, usesNativeTabs } from "@/src/navigation";
+import { useSeriesData, useSeriesWatch } from "@/src/series";
 import { examIcon, useExams } from "@/src/api/examCatalog";
 import { useListFocus } from "@/src/useListFocus";
 import { HomeDream } from "@/src/dream/HomeDream";
@@ -61,9 +61,6 @@ export default function Home() {
   }, [uid]));
   const bottom = usesNativeTabs ? insets.bottom : 0;
   const s = series.data;
-  const today = days.find(d => d.isToday);
-  const total = seriesDays(s); // the website's schedule decides the day count
-  const liveSub = !s ? "daily full mocks" : s.today < s.first_date ? `opens ${istDate(s.first_date).toLowerCase()}` : s.today > s.last_date ? "practice archive" : todayPaper(today) === "ready" ? `day ${today!.day} · paper ready` : today ? `day ${today.day} · ${today.label.toLowerCase()}` : `${total}-day series`;
   const first = user?.name?.trim().split(/\s+/)[0];
   const openTests = (tab: string) => router.push({ pathname: "/(tabs)/tests", params: { tab, at: String(Date.now()) } });
   // Shortcuts to an exam disappear with it when the owner hides that exam on the website.
@@ -74,7 +71,9 @@ export default function Home() {
     // The website's own exam list, in its order: a new exam gets its own tile, a hidden one disappears.
     ...(catalog.exams ?? BUILT_IN_TILES).map((e, i) => TILE[e.slug] ? { ...TILE[e.slug], id: e.slug, label: e.name.toUpperCase(), to: `/exam/${e.slug}` }
       : { id: e.slug, icon: examIcon(e.slug, i), label: e.name.toUpperCase(), value: "practice tests", to: `/exam/${e.slug}` }),
-    { id: "live", icon: "calendar-check-outline", label: "ALL INDIA", value: liveSub, badge: "LIVE", to: "/live" },
+    // Student Choice: a paper the student makes of the chapters and questions they choose, or a random mock. (The All
+    // India series has its big card above, and "all india series" under Explore.)
+    { id: "choice", icon: "format-list-checks", label: "STUDENT CHOICE", value: "apna paper banao", badge: "NEW", to: "/choice" },
   ];
 
   return (
@@ -104,7 +103,7 @@ export default function Home() {
       ) : null}
 
       {/* Once the series is over (our server says when: src/matched/gate.tsx), its card gives its place to Matched. The
-          series and its practice archive stay one tap away on the ALL INDIA tile below. */}
+          series and its practice archive stay one tap away under Explore ("all india series"). */}
       {matched ? <View style={{ gap: space.md }}>
         <SectionLabel title="Matched with JEE Main" onAction={() => router.push("/matched" as any)} actionTestID="home-matched-view-all" />
         <ScreenMotion><HomeMatchedCard /></ScreenMotion>
