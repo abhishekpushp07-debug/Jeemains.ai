@@ -395,7 +395,7 @@ export default function Result() {
   // Every released full mock is remembered with the account for the Dream College Meter (original score only).
   useEffect(() => {
     if (!ready || version !== "original" || !r?.summary) return;
-    void recordMock({ id: id!, exam: r.exam, score: r.summary.score, maximum: r.summary.maximum, questions: r.count ?? r.questions?.length, title: r.title,
+    void recordMock({ id: id!, exam: r.exam, score: r.summary.score, maximum: r.summary.maximum, questions: r.count ?? r.questions?.length, title: r.title, kind: r.test_kind,
       at: typeof r.submitted_at === "number" ? r.submitted_at * 1000 : typeof r.submitted_at === "string" ? Date.parse(r.submitted_at) || undefined : undefined });
   }, [ready, r, id, version]);
   const releasedQuestions = useMemo(() => ready ? r.questions || [] : [], [ready, r]);
@@ -444,7 +444,7 @@ export default function Result() {
   const s = ready ? r.summary : null;
   const exam = ready ? examOf(r.exam) : null;
   // Full mocks only (the same rule recordMock uses): the Dream meter says how far each dream college is after this mock.
-  const dream = exam && isFullMock({ exam: r.exam, maximum: s.maximum, questions: r.count ?? r.questions?.length }) ? exam : null;
+  const dream = exam && isFullMock({ exam: r.exam, maximum: s.maximum, questions: r.count ?? r.questions?.length, kind: r.test_kind }) ? exam : null;
   const bar = !!ready && tab === "analysis" && !!analysis.data;
   return (
     <View testID="result-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>

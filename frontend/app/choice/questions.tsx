@@ -15,14 +15,14 @@ import { PillRow } from "@/src/misfire/parts";
 import { colors, space } from "@/src/theme";
 import { ChapterQuestions, Question, SHORT, Subject, getChapter, makePaper, minutesFor, timeLabel, totalOf } from "@/src/choice/api";
 import { Makeup, QuestionCard, StepBar, stemWidth, useBank } from "@/src/choice/parts";
-import { chosenChapters, clearChoice, counts, hasQuestion, orderedIds, pickedCount, pickedIn, toggleQuestion, useChoice } from "@/src/choice/store";
+import { choiceLoaded, chosenChapters, clearChoice, counts, hasQuestion, orderedIds, pickedCount, pickedIn, toggleQuestion, useChoice } from "@/src/choice/store";
 
 export default function ChooseQuestions() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
   const res = useBank(user?.id);
-  const version = useChoice();
+  const version = useChoice(user?.id);
   const bank = res.data?.ready ? res.data : null;
   const width = stemWidth(useWindowDimensions().width);
   // The ticked chapters, in the bank's own order, each with its subject.
@@ -36,8 +36,11 @@ export default function ChooseQuestions() {
   const inSubject = mine.filter(c => c.subject === (subjects.includes(subject as Subject) ? subject : subjects[0]));
   const chapter = inSubject.find(c => c.id === chapterId) || inSubject[0];
   // A chapter's questions are kept in memory while the app is open (their picture links do not live for ever).
-  const list = useCached<ChapterQuestions>(chapter && user ? `choice.chapter.${chapter.id}` : null, getChapter(user?.id || "", chapter?.id || ""), false);
-  const rows = list.data?.id === chapter?.id ? list.data!.items : null;
+  // (Asked only while questions can be chosen: otherwise this screen is about to hand over to the chapters' tests.)
+  const list = useCached<ChapterQuestions>(chapter && user && bank?.pick ? `choice.chapter.${chapter.id}` : null, getChapter(user?.id || "", chapter?.id || ""), false);
+  // No chapter yet (the ticks are still being read, or none is ticked): nothing to list. Without this check a page
+  // opened straight on this address broke ("cannot read items of null").
+  const rows = chapter && list.data?.id === chapter.id ? list.data.items : null;
   const top = useRef<React.ElementRef<typeof FlatList<Question>>>(null);
   useEffect(() => { top.current?.scrollToOffset({ offset: 0, animated: false }); }, [chapter?.id]);
 
@@ -74,8 +77,9 @@ export default function ChooseQuestions() {
     }
   }
 
-  // Opened without a ticked chapter (a refreshed page): back to step 1.
-  if (res.data && (!bank || !mine.length) && !busy) return <Redirect href={bank ? "/choice/pick" : "/choice"} />;
+  // Opened without a ticked chapter (a refreshed page): back to step 1. While the website cannot make a paper of chosen
+  // questions, step 2 is the chapters' own tests.
+  if (res.data && choiceLoaded() && (!bank || !mine.length || !bank.pick) && !busy) return <Redirect href={!bank ? "/choice" : mine.length && !bank.pick ? "/choice/tests" : "/choice/pick"} />;
   const next = chapter ? mine[mine.findIndex(c => c.id === chapter.id) + 1] : undefined;
   return <ScreenMotion>
     <View testID="choice-questions-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>

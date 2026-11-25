@@ -1,5 +1,6 @@
-// Student Choice, step 1 of 2: the chapters. A subject at a time (Physics, Chemistry, Maths); chapters can be ticked in
-// one, two or all three. The questions of the ticked chapters are chosen on the next screen.
+// Student Choice, step 1 of 2: the chapters (the JEE Main chapter-wise ones). A subject at a time (Physics, Chemistry,
+// Maths); chapters can be ticked in one, two or all three. Step 2 is the ticked chapters' whole tests, or, once the
+// website can make a paper of chosen questions (bank.pick), the questions of those chapters.
 import React, { useMemo, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
@@ -31,7 +32,7 @@ export default function ChooseChapters() {
   const router = useRouter();
   const { user } = useAuth();
   const res = useBank(user?.id);
-  useChoice();
+  useChoice(user?.id);
   const bank = res.data?.ready ? res.data : null;
   const [subject, setSubject] = useState<Subject | "">("");
   const current = bank?.subjects.find(s => s.name === subject) || bank?.subjects[0];
@@ -39,6 +40,7 @@ export default function ChooseChapters() {
   // Only chapters the bank still has count (one may have gone since it was ticked).
   const live = useMemo(() => new Set(bank?.subjects.flatMap(s => s.chapters.map(c => c.id))), [bank]);
   const ticked = chosen.filter(id => live.has(id)).length;
+  const sum = useMemo(() => (bank?.subjects || []).flatMap(s => s.chapters).filter(c => chosen.includes(c.id)).reduce((n, c) => n + c.count, 0), [bank, chosen]);
   return <ScreenMotion>
     <View testID="choice-pick-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <ScreenHeader testID="choice-pick-header" title="Chapters chuno" eyebrow="Student Choice · Step 1 of 2" backTestID="choice-pick-back"
@@ -52,12 +54,13 @@ export default function ChooseChapters() {
           {bank && current ? <>
             <PillRow prefix="choice-subject" value={current.name} onChange={k => setSubject(k as Subject)}
               items={bank.subjects.map(s => ({ key: s.name, label: SHORT[s.name], count: s.chapters.filter(c => hasChapter(c.id)).length }))} />
-            <T testID="choice-pick-hint" size={12.5} color={colors.muted}>Jitne chahiye utne chapter tick karo, kisi bhi subject se. Sawaal agle step mein chunoge.</T>
+            <T testID="choice-pick-hint" size={12.5} color={colors.muted}>Jitne chahiye utne chapter tick karo, kisi bhi subject se. {bank.pick ? "Sawaal agle step mein chunoge." : "Agle step mein har chune chapter ka poora test milega."}</T>
           </> : null}
-          {res.data && !bank ? <Empty testID="choice-pick-not-ready" icon="database-search-outline" title="Sawaalon ka bank jud raha hai" body="Thodi der mein dobara dekho." /> : null}
+          {res.data && !bank ? <Empty testID="choice-pick-not-ready" icon="database-search-outline" title="Chapters abhi nahi mile" body="Thodi der mein dobara dekho." /> : null}
         </View>} />
       {bank ? <StepBar testID="choice-pick-bar" big={ticked ? `${ticked} chapter${ticked === 1 ? "" : "s"} chune` : "Chapter chuno"}
-        small={questions ? `${questions} sawaal chune hue hain` : "Kam se kam ek chapter tick karo"} label="Sawaal chuno" disabled={!ticked} onPress={() => router.push("/choice/questions")} /> : null}
+        small={!ticked ? "Kam se kam ek chapter tick karo" : bank.pick ? (questions ? `${questions} sawaal chune hue hain` : "Ab inke sawaal chuno") : `${ticked} test${ticked === 1 ? "" : "s"} · ${sum} sawaal`}
+        label={bank.pick ? "Sawaal chuno" : "Tests dekho"} disabled={!ticked} onPress={() => router.push(bank.pick ? "/choice/questions" : "/choice/tests")} /> : null}
     </View>
   </ScreenMotion>;
 }

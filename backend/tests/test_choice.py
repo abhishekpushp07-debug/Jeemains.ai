@@ -1,5 +1,6 @@
-"""Student Choice: GET /api/choice/bank, GET /api/choice/chapters/<id>, and Matched's real paper (paper_id, qid, the
-website copy). The shaping is checked on plain dicts; the routes are only read. Nothing is written to any collection
+"""Student Choice: GET /api/choice/bank (the chapters = the website's JEE Main chapter-wise tests), GET
+/api/choice/chapters/<id>, and Matched's real paper (paper_id, qid, the website copy). The shaping is checked on plain
+dicts; the routes are only read. Nothing is written to any collection
 (the signed-in check uses conftest.py's throw-away grant, removed when the run ends)."""
 import os
 import sys
@@ -25,13 +26,13 @@ def test_the_bank_keeps_three_subjects_in_order_and_the_owners_rules():
         {"name": "Biology", "chapters": [chapter("b-000001")]},
         {"name": "Physics", "chapters": [chapter(), chapter(), chapter("p-000002", title="", count=5), chapter("p-000003", count=0), {"id": "x"}, "junk",
                                          chapter("p-000004", number="2", mcq=999)]}]})
-    assert set(bank) == {"ready", "sample", "exam", "max_questions", "max_per_subject", "minutes", "marks", "subjects"}
+    assert set(bank) == {"ready", "sample", "exam", "pick", "random", "max_questions", "max_per_subject", "minutes", "marks", "subjects"}
     assert bank["ready"] is True and bank["sample"] is False and bank["exam"] == "JEE Main"
     assert [s["name"] for s in bank["subjects"]] == ["Physics", "Mathematics"]  # no Chemistry chapter: not shown; Biology never
     physics = bank["subjects"][0]["chapters"]
     # A chapter twice, one without a name, one without questions and junk are left out.
-    assert [c["id"] for c in physics] == [CID, "p-000004"] and set(physics[0]) == {"id", "n", "title", "count", "mcq", "integer"}
-    assert physics[0] == {"id": CID, "n": 1, "title": "Units, Dimensions and Errors", "count": 68, "mcq": 64, "integer": 4}
+    assert [c["id"] for c in physics] == [CID, "p-000004"] and set(physics[0]) == {"id", "n", "title", "count", "mcq", "integer", "test"}
+    assert physics[0] == {"id": CID, "n": 1, "title": "Units, Dimensions and Errors", "count": 68, "mcq": 64, "integer": 4, "test": None}
     assert physics[1]["n"] is None and physics[1]["mcq"] == 0
     # The owner's rules when the website says nothing: 75 questions, +4 / -1, 60 + 40 + 80 minutes for 25 + 25 + 25.
     assert bank["max_questions"] == 75 and bank["max_per_subject"] is None and bank["marks"] == {"correct": 4, "wrong": -1}
@@ -48,6 +49,51 @@ def test_the_website_may_lower_the_top_but_never_raise_it():
         assert choice.shape_bank({**one, "max_questions": wrong})["max_questions"] == 75
     per = choice.shape_bank({**one, "minutes_per_question": {"Physics": 2, "Chemistry": "1.6", "Mathematics": 99}})["minutes"]
     assert per == {"Physics": 2.0, "Chemistry": 1.6, "Mathematics": 3.2}
+
+
+def row(n=1, **change):
+    """A chapter test as the website's chapter-wise list gives it (copied from the live list, 26 Nov 2026)."""
+    return {"id": CID, "exam": "JEE Main", "status": "published", "test_kind": "chapter", "live_enabled": True, "chapter_number": n, "chapter_subject": "Physics",
+            "title": f"{n:02d} Units, Dimensions and Errors", "count": 68, "approved_count": 68, "types": {"mcq": 64, "integer": 4}, "maximum": 272.0,
+            "rules": {"minutes": 60.0, "correct": 4.0, "wrong": -1.0, "skipped": 0}, "attempt": {"id": "someone's own attempt", "status": "completed"}, "saved": True, **change}
+
+
+def test_the_chapters_are_the_websites_chapter_wise_tests():
+    pages = [{"pages": 2, "items": [row(), row(2, id="p-000002", title="02 Kinematics", count=50, maximum=200.0, types={"mcq": 50}),
+                                    row(3, id="p-hidden1", status="draft"), row(4, id="p-hidden2", live_enabled=False), row(5, id="m-000001", chapter_subject="Mathematics"),
+                                    row(6, id="p-mock01", test_kind="mock"), "junk", None]},
+             {"pages": 2, "items": [row(13, id="p-000013", title="13 13 Reasons", rules={"correct": 4, "wrong": -1}), row(14, id="p-000014", title="Oscillations", maximum=None)]},
+             "junk"]
+    bank = choice.shape_bank({"subjects": [{"name": "Physics", "chapters": choice.chapter_tests("Physics", pages)}]}, own=False)
+    chapters = bank["subjects"][0]["chapters"]
+    # Hidden ones, another subject's, another kind of paper and junk are left out; the order is the website's.
+    assert [c["id"] for c in chapters] == [CID, "p-000002", "p-000013", "p-000014"]
+    # The chapter's id is the test's id; its title loses the number it starts with; nothing of any student comes along.
+    assert chapters[0] == {"id": CID, "n": 1, "title": "Units, Dimensions and Errors", "count": 68, "mcq": 64, "integer": 4,
+                           "test": {"page": 1, "minutes": 60, "correct": 4, "wrong": -1, "marks": 272}}
+    assert chapters[1]["title"] == "Kinematics" and chapters[1]["integer"] == 0 and chapters[1]["test"]["marks"] == 200
+    # The page the test is listed on is kept (the app reads the student's own attempt from it); no time = untimed.
+    assert chapters[2]["title"] == "13 Reasons" and chapters[2]["test"] == {"page": 2, "minutes": None, "correct": 4, "wrong": -1, "marks": 272}
+    assert chapters[3]["title"] == "Oscillations" and chapters[3]["test"] is None  # its marks are not known: listed, not offered as a test
+    # The website cannot make a paper yet: neither way is open, and the owner's rules stand.
+    assert bank["pick"] is False and bank["random"] is False and bank["sample"] is False and bank["max_questions"] == 75
+    assert choice.chapter_tests("Physics", []) == [] and choice.chapter_tests("Physics", [{"items": None}, {}]) == []
+    assert choice.shape_bank({"subjects": [{"name": "Physics", "chapters": []}]}, own=False) is None
+
+
+def test_making_a_paper_opens_only_when_the_website_says_so():
+    tests = {"subjects": [{"name": "Physics", "chapters": choice.chapter_tests("Physics", [{"items": [row()]}])}]}
+    # The chapter-wise tests as the chapters: a way opens when the website's Student Choice door says yes, each on its own.
+    for said, pick, random in (({}, False, False), ({"pick": True}, True, False), ({"random": True}, False, True), ({"pick": True, "random": True}, True, True),
+                               ({"pick": "yes", "random": 1}, False, False)):
+        bank = choice.shape_bank({**said, **tests}, own=False)
+        assert (bank["pick"], bank["random"]) == (pick, random)
+    # The website listing the chapters itself (the first note's door): both are open unless it says no.
+    own = {"subjects": [{"name": "Physics", "chapters": [chapter()]}]}
+    assert (choice.shape_bank(own)["pick"], choice.shape_bank(own)["random"]) == (True, True)
+    assert (choice.shape_bank({**own, "pick": False})["pick"], choice.shape_bank({**own, "random": False})["random"]) == (False, False)
+    assert choice.shape_test(None) is None and choice.shape_test({"page": 0, "maximum": 272, "correct": 4, "wrong": -1}) is None
+    assert choice.shape_test({"page": 1, "maximum": 272, "correct": 4, "wrong": 1}) is None and choice.shape_test({"page": 1, "maximum": 272.5, "correct": 4, "wrong": -1}) is None
 
 
 def test_time_is_given_by_subject_and_rounded_up():
@@ -113,24 +159,32 @@ def test_the_bank_is_for_signed_in_students_only():
 def test_routes_answer_a_signed_in_student():
     # conftest.py swaps this header for a real short-lived grant of a throw-away player (no website session behind it).
     me = {"X-RF-User": "TEST-choice"}
-    r = requests.get(f"{BASE}/choice/bank", headers=me, timeout=40)
-    # 401 + "website_session" = the website has its doors and wants a real session (the app then renews it and asks again).
+    r = requests.get(f"{BASE}/choice/bank", headers=me, timeout=60)
+    # 401 + "website_session" = the website wants a real session (the app then renews it and asks again). 200 = a real
+    # student's read is being kept (the bank is the same for everyone), or the website's lists are open.
     assert r.status_code in (200, 401) and "public" not in r.headers.get("cache-control", "")
     if r.status_code == 401:
         assert r.json()["code"] == "website_session"
         return
     bank = r.json()
     assert isinstance(bank["ready"], bool)
-    print("choice bank on this server: ready =", bank["ready"], "| sample =", bank.get("sample"))  # shown with `pytest -s`
+    print("choice bank on this server: ready =", bank["ready"], "| sample =", bank.get("sample"), "| pick =", bank.get("pick"), "| random =", bank.get("random"))  # `pytest -s`
     if not bank["ready"]:
-        assert bank == {"ready": False}  # not connected: nothing else is sent
+        assert bank == {"ready": False}  # no chapter to choose from: nothing else is sent
     if bank["ready"]:
         assert bank["max_questions"] <= 75 and bank["marks"] == {"correct": 4, "wrong": -1} and bank["subjects"]
+        assert isinstance(bank["pick"], bool) and isinstance(bank["random"], bool)
+        assert bank["minutes"] == {"Physics": 2.4, "Chemistry": 1.6, "Mathematics": 3.2} or bank["sample"] is False  # the owner's 60 / 40 / 80 for 25 each
         first = bank["subjects"][0]["chapters"][0]
+        assert set(first) == {"id", "n", "title", "count", "mcq", "integer", "test"}
+        if not bank["sample"] and not bank["pick"]:  # the chapters are the chapter-wise tests: each can be taken as it is
+            assert all(c["test"] and c["test"]["page"] >= 1 and c["test"]["marks"] == c["count"] * c["test"]["correct"] for s in bank["subjects"] for c in s["chapters"])
         c = requests.get(f"{BASE}/choice/chapters/{first['id']}", headers=me, timeout=40)
-        assert c.status_code == 200 and c.json()["total"] == len(c.json()["items"]) > 0
-        assert all(set(q) == {"id", "n", "type", "text", "stem"} for q in c.json()["items"])
-        assert requests.get(f"{BASE}/choice/chapters/no-such-chapter-000", headers=me, timeout=40).status_code == 404
+        # The questions of a chapter need the website's door: 404 until it has one (or 401 for this player without a session).
+        assert c.status_code in (200, 404, 401)
+        if c.status_code == 200:
+            assert c.json()["total"] == len(c.json()["items"]) > 0 and all(set(q) == {"id", "n", "type", "text", "stem"} for q in c.json()["items"])
+        assert requests.get(f"{BASE}/choice/chapters/no-such-chapter-000", headers=me, timeout=40).status_code in (404, 401)
     assert requests.get(f"{BASE}/choice/chapters/x", headers=me, timeout=40).status_code == 422
 
 

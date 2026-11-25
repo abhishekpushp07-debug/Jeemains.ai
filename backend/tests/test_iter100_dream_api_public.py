@@ -151,6 +151,40 @@ def test_mocks_max_30(ha):
     assert len(got) == 30 and got[0]["id"] == "x29" and "m1" not in [m["id"] for m in got]
 
 
+def test_a_paper_that_is_no_full_mock_is_taken_out(ha):
+    # The app found that a remembered paper is a chapter test (an older version counted long ones): it is removed, and
+    # its id is handed out with the list so that every phone takes it out of its own copy.
+    requests.post(f"{BASE}/rf/dream/mocks", headers=ha, json={"mocks": [dict(M, id="drop-me", at=9000), dict(M, id="keep-me", at=8000)]}, timeout=30)
+    first = requests.get(f"{BASE}/rf/dream", headers=ha, timeout=30).json()
+    before = [m["id"] for m in first["mocks"]]
+    assert "drop-me" in before and "keep-me" in before and "dropped" not in first
+    assert requests.delete(f"{BASE}/rf/dream/mocks/drop-me", headers=ha, timeout=30).json() == {"ok": True}
+    got = requests.get(f"{BASE}/rf/dream", headers=ha, timeout=30).json()
+    assert [m["id"] for m in got["mocks"]] == [i for i in before if i != "drop-me"] and got["dropped"] == ["drop-me"]
+    # Again, or a paper that was never there: the list does not change (the id is remembered once). Without a grant: refused.
+    assert requests.delete(f"{BASE}/rf/dream/mocks/drop-me", headers=ha, timeout=30).status_code == 200
+    assert requests.delete(f"{BASE}/rf/dream/mocks/never-there", headers=ha, timeout=30).status_code == 200
+    got = requests.get(f"{BASE}/rf/dream", headers=ha, timeout=30).json()
+    assert [m["id"] for m in got["mocks"]] == [i for i in before if i != "drop-me"] and got["dropped"] == ["drop-me", "never-there"]
+    # Sent again (an older app version, or a phone that still holds it): not taken back; a real mock beside it is.
+    assert requests.post(f"{BASE}/rf/dream/mocks", headers=ha, json={"mocks": [dict(M, id="drop-me", at=9000)]}, timeout=30).json() == {"ok": True}
+    assert requests.post(f"{BASE}/rf/dream/mocks", headers=ha, json={"mocks": [dict(M, id="drop-me", at=9000), dict(M, id="keep-me", at=8000, score=150)]}, timeout=30).status_code == 200
+    got = requests.get(f"{BASE}/rf/dream", headers=ha, timeout=30).json()["mocks"]
+    assert "drop-me" not in [m["id"] for m in got] and next(m["score"] for m in got if m["id"] == "keep-me") == 150
+    assert requests.delete(f"{BASE}/rf/dream/mocks/keep-me", timeout=30).status_code == 401
+    assert requests.delete(f"{BASE}/rf/dream/mocks/{'x' * 65}", headers=ha, timeout=30).status_code == 422
+    # An account that has nothing yet: the id is still remembered (another phone may hold the paper).
+    hc = grant(f"TEST-it100-{RUN}-c")
+    UIDS.append(f"TEST-it100-{RUN}-c")
+    assert requests.delete(f"{BASE}/rf/dream/mocks/first-thing", headers=hc, timeout=30).status_code == 200
+    assert requests.get(f"{BASE}/rf/dream", headers=hc, timeout=30).json() == {"dreams": [], "mocks": [], "cheered": [], "dropped": ["first-thing"]}
+    # At most 200 are remembered; the paper is still taken out after that.
+    mdb.rf_dreams.update_one({"uid": f"TEST-it100-{RUN}-c"}, {"$set": {"dropped": [f"d{i}" for i in range(200)], "mocks": [dict(M, id="late")]}})
+    assert requests.delete(f"{BASE}/rf/dream/mocks/late", headers=hc, timeout=30).status_code == 200
+    got = requests.get(f"{BASE}/rf/dream", headers=hc, timeout=30).json()
+    assert got["mocks"] == [] and len(got["dropped"]) == 200 and "late" not in got["dropped"]
+
+
 def test_mocks_empty_or_31_422(ha):
     assert requests.post(f"{BASE}/rf/dream/mocks", headers=ha, json={"mocks": []}, timeout=15).status_code == 422
     assert requests.post(f"{BASE}/rf/dream/mocks", headers=ha, json={"mocks": [{**M, "id": f"y{i}"} for i in range(31)]}, timeout=15).status_code == 422

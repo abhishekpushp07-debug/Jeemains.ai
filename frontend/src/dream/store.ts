@@ -22,8 +22,9 @@ export type Mock = { id: string; exam: DreamExam; score: number; max: number; ra
 /** cheered = dreams whose "Dream Unlocked" celebration has played (once per dream college, on any device). */
 type State = { dreams: Dream[]; mocks: Mock[]; cheered: string[] };
 /** The phone's copy. `dirty` = the dream list was changed here and the account does not have that change yet;
- *  `base` = ids of the account's list those changes were made on; `unsent` = mocks not uploaded yet; `cheerSend` = celebrations not uploaded yet. */
-type Saved = State & { dirty?: boolean; base?: string[]; unsent?: string[]; cheerSend?: string[] };
+ *  `base` = ids of the account's list those changes were made on; `unsent` = mocks not uploaded yet; `cheerSend` = celebrations not uploaded yet;
+ *  `dropSend` = papers found to be no full mock here that the account has not been told to take out yet. */
+type Saved = State & { dirty?: boolean; base?: string[]; unsent?: string[]; cheerSend?: string[]; dropSend?: string[] };
 
 const LEGACY = "dream.v1"; // before dreams moved to the account: one list per phone
 const key = (uid: string) => `dream.v2.${uid}`;
@@ -31,7 +32,7 @@ const EMPTY: State = { dreams: [], mocks: [], cheered: [] };
 const REFRESH_MS = 60000; // coming back to the app reads the account's list again at most once a minute
 let state: State = EMPTY;
 let owner: string | null = null;
-let dirty = false, base: string[] = [], unsent = new Set<string>(), cheerSend = new Set<string>();
+let dirty = false, base: string[] = [], unsent = new Set<string>(), cheerSend = new Set<string>(), dropSend = new Set<string>();
 let fetchedAt = 0; // when the account's list was last read (0 = not yet since sign-in)
 let notice = ""; // set when the account refused a change
 let ready: Promise<void> = Promise.resolve();
@@ -81,7 +82,7 @@ function noRoom(seen: string[], mine: Dream[], merged: Dream[]) {
 
 function persist() {
   if (!owner) return Promise.resolve();
-  const saved: Saved = { ...state, dirty, base, unsent: [...unsent], cheerSend: [...cheerSend] };
+  const saved: Saved = { ...state, dirty, base, unsent: [...unsent], cheerSend: [...cheerSend], dropSend: [...dropSend] };
   return Promise.resolve(storage.setItem(key(owner), JSON.stringify(saved))).catch(() => {});
 }
 
@@ -102,7 +103,7 @@ function sync(uid: string, fresh = false) {
 
 /** The account's list, with this phone's pending changes merged on top; mocks from every device are kept. */
 async function pull(uid: string) {
-  const server = await rf<State>("/dream", uid);
+  const server = await rf<State & { dropped?: string[] }>("/dream", uid);
   const filled = !fetchedAt && !server.mocks.length && !state.mocks.length ? await backfill(uid) : [];
   if (owner !== uid) return;
   fetchedAt = Date.now();
@@ -110,7 +111,9 @@ async function pull(uid: string) {
   if (dirty) notice = noRoom(base, state.dreams, dreams) || notice;
   base = ids(server.dreams);
   dirty = !sameIds(dreams, server.dreams);
-  const mocks = unionMocks(state.mocks, server.mocks, filled);
+  // A paper found to be no full mock (here, or on another phone: the account remembers it) stays out of every copy.
+  const gone = new Set([...dropSend, ...(server.dropped || [])]);
+  const mocks = unionMocks(state.mocks, server.mocks, filled).filter(m => !gone.has(m.id));
   const onServer = new Map(server.mocks.map(m => [m.id, m.score]));
   mocks.forEach(m => { if (onServer.get(m.id) !== m.score) unsent.add(m.id); });
   const cheeredThere = new Set(server.cheered || []);
@@ -147,6 +150,11 @@ async function send(uid: string) {
     catch (e) { if (!refused(e)) throw e; /* never accepted: stays on this phone only */ }
     if (owner === uid) mocks.forEach(m => unsent.delete(m.id));
   }
+  for (const id of [...dropSend]) {
+    try { await rf(`/dream/mocks/${encodeURIComponent(id)}`, uid, { method: "DELETE" }); }
+    catch (e) { if (!refused(e)) throw e; }
+    if (owner === uid) dropSend.delete(id);
+  }
   const cheers = [...cheerSend].slice(0, MAX_DREAMS * 3);
   if (cheers.length) {
     try { await rf("/dream/cheered", uid, { method: "POST", body: { ids: cheers } }); }
@@ -155,12 +163,20 @@ async function send(uid: string) {
   }
 }
 
-/** Full mocks from the student's completed tests list (newest page), for a phone that never opened those results. */
+/** Full mocks from the student's completed tests list (newest page), for a phone that never opened those results.
+ *  The list does not say what kind of paper a test was; the paper's own page does, so each candidate's paper is asked
+ *  once. A paper whose kind could not be read is left out (opening its result remembers it). */
 async function backfill(uid: string): Promise<Mock[]> {
   try {
     const d = await api<{ items: any[] }>("/my/tests?" + new URLSearchParams({ tab: "completed", page: "1", q: "", status: "all", exam: "" }).toString());
-    return (d?.items || []).flatMap(t => {
-      const m = t.result_available && t.summary ? mockOf({ id: t.id, exam: t.exam, score: t.summary.score, maximum: t.summary.maximum, questions: t.count, title: t.title,
+    const rows = (d?.items || []).filter(t => t.result_available && t.summary && isFullMock({ exam: t.exam, maximum: t.summary.maximum, questions: t.count, kind: t.test_kind }));
+    const kinds = new Map<string, string>();
+    await Promise.all([...new Set(rows.filter(t => !t.test_kind && typeof t.set_id === "string").map(t => t.set_id as string))].map(async id => {
+      try { kinds.set(id, (await api<{ test_kind?: string }>(`/my/sets/${encodeURIComponent(id)}`))?.test_kind || "mock"); } catch { /* not known: left out */ }
+    }));
+    return rows.flatMap(t => {
+      const kind = t.test_kind || kinds.get(t.set_id);
+      const m = kind ? mockOf({ id: t.id, exam: t.exam, score: t.summary.score, maximum: t.summary.maximum, questions: t.count, title: t.title, kind,
         at: typeof t.submitted_at === "number" ? t.submitted_at * 1000 : undefined }) : null;
       return m ? [m] : [];
     });
@@ -175,8 +191,8 @@ export function setDreamAccount(uid: string | null, forget = false) {
     if (uid && Date.now() - fetchedAt > REFRESH_MS) void ready.then(() => sync(uid, true));
     return;
   }
-  const gone = owner, pending = dirty || unsent.size > 0 || cheerSend.size > 0;
-  owner = uid; state = EMPTY; dirty = false; base = []; unsent = new Set(); cheerSend = new Set(); fetchedAt = 0; notice = ""; emit();
+  const gone = owner, pending = dirty || unsent.size > 0 || cheerSend.size > 0 || dropSend.size > 0;
+  owner = uid; state = EMPTY; dirty = false; base = []; unsent = new Set(); cheerSend = new Set(); dropSend = new Set(); fetchedAt = 0; notice = ""; emit();
   if (gone && forget && !pending) void storage.removeItem(key(gone));
   if (!uid) { ready = Promise.resolve(); return; }
   ready = (async () => {
@@ -190,6 +206,7 @@ export function setDreamAccount(uid: string | null, forget = false) {
     dirty = !!local?.dirty || !!legacy?.dreams.length;
     unsent = new Set([...(local?.unsent || []), ...(legacy?.mocks || []).map(m => m.id)]);
     cheerSend = new Set(local?.cheerSend || []);
+    dropSend = new Set(local?.dropSend || []);
     emit();
     await persist(); // saved under the account before the old key goes
     if (legacy) await storage.removeItem(LEGACY);
@@ -259,11 +276,18 @@ export function examOf(name?: string | null): DreamExam | null {
   return null;
 }
 
-type MockIn = { id: string; exam?: string | null; score: number; maximum: number; questions?: number | null; title?: string; at?: number };
-/** A full-length paper: the full paper's question count (90% or more) and at least half its marks. Chapter tests never count. */
-export function isFullMock(m: { exam?: string | null; maximum: number; questions?: number | null }) {
+type MockIn = { id: string; exam?: string | null; score: number; maximum: number; questions?: number | null; title?: string; at?: number; kind?: string | null };
+/** Papers that are never a full mock, however long: a chapter test and a Student Choice paper (the owner's rule, 26 Nov
+ *  2026: the Dream College meter runs on real full mocks only). `kind` = the paper's test_kind. */
+const NEVER_FULL = ["chapter", "choice"];
+/** As long as a full paper: the full paper's question count (90% or more) and at least half its marks. */
+function fullLength(m: { exam?: string | null; maximum: number; questions?: number | null }) {
   const exam = examOf(m.exam);
   return !!exam && !!m.maximum && m.maximum >= FULL[exam] / 2 && Number(m.questions) >= FULL_QUESTIONS[exam] * 0.9;
+}
+/** A full mock: as long as a full paper, and not a chapter test or a Student Choice paper (those never count). */
+export function isFullMock(m: { exam?: string | null; maximum: number; questions?: number | null; kind?: string | null }) {
+  return !NEVER_FULL.includes(m.kind || "") && fullLength(m);
 }
 function mockOf(m: MockIn): Mock | null {
   const exam = examOf(m.exam);
@@ -274,9 +298,21 @@ function mockOf(m: MockIn): Mock | null {
 /** Remembers a released full mock (see isFullMock), for this account on every device. */
 export async function recordMock(m: MockIn) {
   const mock = mockOf(m);
-  if (!mock) return;
+  // A long chapter test (or Student Choice paper): an older version of the app counted it as a full mock.
+  const never = !mock && NEVER_FULL.includes(m.kind || "") && fullLength(m);
+  if (!mock && !never) return;
   await ready;
   if (!owner) return;
+  if (!mock) {
+    const uid = owner;
+    if (!fetchedAt) await sync(uid); // the account's list first: another phone may have remembered this paper
+    if (owner !== uid || !state.mocks.some(x => x.id === m.id)) return;
+    // Taken out here at once; the account is told (and remembers it, so every other phone takes it out as well).
+    dropSend.add(m.id);
+    unsent.delete(m.id);
+    save({ ...state, mocks: state.mocks.filter(x => x.id !== m.id) }, false);
+    return;
+  }
   const old = state.mocks.find(x => x.id === m.id);
   if (old && old.score === mock.score && old.raw === mock.raw && old.rawMax === mock.rawMax) return;
   unsent.add(mock.id);

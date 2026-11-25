@@ -71,9 +71,10 @@ export default function Home() {
     // The website's own exam list, in its order: a new exam gets its own tile, a hidden one disappears.
     ...(catalog.exams ?? BUILT_IN_TILES).map((e, i) => TILE[e.slug] ? { ...TILE[e.slug], id: e.slug, label: e.name.toUpperCase(), to: `/exam/${e.slug}` }
       : { id: e.slug, icon: examIcon(e.slug, i), label: e.name.toUpperCase(), value: "practice tests", to: `/exam/${e.slug}` }),
-    // Student Choice: a paper the student makes of the chapters and questions they choose, or a random mock. (The All
-    // India series has its big card above, and "all india series" under Explore.)
-    { id: "choice", icon: "format-list-checks", label: "STUDENT CHOICE", value: "apna paper banao", badge: "NEW", to: "/choice" },
+    // Student Choice: the JEE Main chapter-wise questions by the chapters the student ticks (their tests today; a paper
+    // of chosen questions and a random mock once the website can make one). (The All India series has its big card
+    // above, and "all india series" under Explore.)
+    { id: "choice", icon: "format-list-checks", label: "STUDENT CHOICE", value: "apne chapters chuno", badge: "NEW", to: "/choice" },
   ];
 
   return (

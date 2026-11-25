@@ -4,12 +4,12 @@ change made on one device never wipes one made on another (or the account's own 
 import time
 from typing import Annotated, List, Literal, Optional
 
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, Path
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo.errors import DuplicateKeyError
 
 DreamExam = Literal["jee", "bitsat", "comedk"]
-MAX_DREAMS, MAX_MOCKS = 5, 30
+MAX_DREAMS, MAX_MOCKS, MAX_DROPPED = 5, 30, 200
 
 
 class Dream(BaseModel):
@@ -71,8 +71,11 @@ def make_router(db, rf_user):
     @r.get("")
     async def read(x_rf_user: Optional[str] = Header(None)):
         uid = rf_user(x_rf_user)
-        doc = await db.rf_dreams.find_one({"uid": uid}, {"_id": 0, "dreams": 1, "mocks": 1, "cheered": 1}) or {}
-        return {"dreams": doc.get("dreams", []), "mocks": doc.get("mocks", []), "cheered": doc.get("cheered", [])}
+        doc = await db.rf_dreams.find_one({"uid": uid}, {"_id": 0, "dreams": 1, "mocks": 1, "cheered": 1, "dropped": 1}) or {}
+        out = {"dreams": doc.get("dreams", []), "mocks": doc.get("mocks", []), "cheered": doc.get("cheered", [])}
+        if doc.get("dropped"):  # papers found to be no full mock (drop_mock): a phone still holding one takes it out too
+            out["dropped"] = doc["dropped"]
+        return out
 
     @r.put("/dreams")
     async def save_dreams(data: DreamsIn, x_rf_user: Optional[str] = Header(None)):
@@ -102,9 +105,26 @@ def make_router(db, rf_user):
     async def add_mocks(data: MocksIn, x_rf_user: Optional[str] = Header(None)):
         """Released full mocks seen on any device; the same mock again replaces its older copy. Newest 30 are kept."""
         uid = rf_user(x_rf_user)
-        mocks = list({m.id: m.model_dump() for m in data.mocks}.values())
+        # A paper found to be no full mock (drop_mock) is never taken back, whichever phone or app version sends it.
+        gone = set((await db.rf_dreams.find_one({"uid": uid}, {"_id": 0, "dropped": 1}) or {}).get("dropped") or [])
+        mocks = list({m.id: m.model_dump() for m in data.mocks if m.id not in gone}.values())
+        if not mocks:
+            return {"ok": True}
         await db.rf_dreams.update_one({"uid": uid}, {"$pull": {"mocks": {"id": {"$in": [m["id"] for m in mocks]}}}})
         await db.rf_dreams.update_one({"uid": uid}, {"$push": {"mocks": {"$each": mocks, "$sort": {"at": -1}, "$slice": MAX_MOCKS}}, "$set": {"ts": time.time()}}, upsert=True)
+        return {"ok": True}
+
+    @r.delete("/mocks/{mock_id}")
+    async def drop_mock(mock_id: str = Path(..., min_length=1, max_length=64), x_rf_user: Optional[str] = Header(None)):
+        """Takes one paper out of the account's mocks: the app found it is not a full mock (a long chapter test that an
+        older version of the app counted). Its id is remembered (up to 200 a student) and handed out with the list, so a
+        phone that still holds the paper takes it out of its own copy as well."""
+        uid = rf_user(x_rf_user)
+        out = {"$pull": {"mocks": {"id": mock_id}}, "$set": {"ts": time.time()}}
+        try:
+            await db.rf_dreams.update_one({"uid": uid, f"dropped.{MAX_DROPPED - 1}": {"$exists": False}}, {**out, "$addToSet": {"dropped": mock_id}}, upsert=True)
+        except DuplicateKeyError:  # 200 are remembered already (or the account's first document was being made): only taken out
+            await db.rf_dreams.update_one({"uid": uid}, out)
         return {"ok": True}
 
     @r.post("/cheered")

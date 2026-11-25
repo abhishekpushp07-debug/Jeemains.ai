@@ -1,0 +1,26 @@
+{
+  "summary": "Iteration 146: Student Choice (real chapters) + Dream meter rule verified on the QA learner (read-only, 390x844). Backend: pytest green (58/58) on test_choice.py, test_iter100_dream_api_public.py, test_iter101_dream_merge.py, test_iter104_dream_cheer_api.py, test_matched.py, test_matched_sync.py (includes the new throw-away-grant checks for GET /api/choice/bank 401-without-grant and DELETE /api/rf/dream/mocks/<id> 401/422/behaviour). Frontend F1-F5 all pass: Home tile `home-tile-choice` 'STUDENT CHOICE · apne chapters chuno', /choice shows title/facts (81 chapters · 3750 sawaal · +4/-1)/way-chapters/soon(+pick+random)/time (Physics=1 hr, Chemistry=40 min, Maths=1 hr 20 min)/time-note (25+25+25=3 hr, chapter test keeps own time 'abhi 1 hr'); choice-way-pick/random/not-ready/sample all absent. /choice/pick subject pills work, choice-pick-bar-go starts disabled with 'Tests dekho' label. Ticks on Physics1/Chem9/Maths10 enable go-bar which shows '3 chapters chune · 3 tests · 165 sawaal'. /choice/tests shows '3 chapter tests · 2 ho gaye' with rows in P/C/M order carrying title/facts/status/action; Chem & Maths show 'COMPLETED' + Result; Physics shows Start (not tapped). Reload persists ticks; /choice/questions redirects to /choice/tests when ticked, /choice/pick when empty; /choice shows choice-way-tests after a tick. F5 Dream meter rule confirmed: chapter result /result/3172081b-... has NO result-dream; full-mock /result/c0061f81-... HAS result-dream. Regression sweep: Home/catalogue(jee-main chapters)/matched load with no red screen. No code modified.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/pytest/iter146_choice_dream.xml",
+    "/app/backend/tests/test_choice.py",
+    "/app/backend/tests/test_iter100_dream_api_public.py"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Observation only (not a defect): on /choice/pick the selector querySelectorAll('[data-testid^=\"choice-chapter-\"]') returned 61/49/49 across the three subject tabs, not 30/24/27. Likely the FlatList/VirtualList keeps rows from previously-viewed subjects mounted (or nested elements carry overlapping testIDs). Behaviour is correct (ticks, bar counts, go-bar enable all work as specified) so no action needed; main agent may just want to confirm the per-subject testIDs are not duplicated when building a stricter later test."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (58/58)", "frontend": "100% (F1-F5 + regression)"},
+  "seed_data_creation": "None. Backend tests used only their own throw-away TEST-it100-<run>-{a,b,c} grants and cleaned themselves up via the module fixture. No writes to the QA learner's rf_dreams, no writes to matched_shifts/choice_sample/rf_meta. Ticks on /choice/pick were unticked at the end so the next run starts clean.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "QA learner 7004186276 / 5524 remains the owner's own account; the hard read-only rules (never press Start/Resume/Submit, never open an attempt, never open a result's Solutions tab) still apply. Chapter-questions screen stays intentionally unreachable (GET /api/choice/chapters/<id> still 404 while the website has no door). For dream-write backend checks use throw-away TEST- grants exactly as test_iter100_dream_api_public.py does; never write to the QA learner's rf_dreams. Backend run: `cd /app/backend && pytest tests/test_choice.py tests/test_iter100_dream_api_public.py tests/test_iter101_dream_merge.py tests/test_iter104_dream_cheer_api.py tests/test_matched.py tests/test_matched_sync.py`. UI helper: `sys.path.insert(0, '/app/tests'); from shine_helpers import sign_in; await sign_in(page)` from /entry at 390x844.",
+  "rca_of_issue": "N/A"
+}

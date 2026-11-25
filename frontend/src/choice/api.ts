@@ -1,16 +1,24 @@
-// Student Choice: a paper the student makes of the chapters and questions they choose, or a random mock.
-// The question bank (subjects, chapters, a chapter's questions WITHOUT options) is read from our own server
-// (backend/choice.py, for signed-in students); the paper itself is made by jeelive.ai (POST /choice/papers, the student's
-// own request) and is then an ordinary paper: started, solved, marked and analysed like every other one.
+// Student Choice: the student chooses chapters of the JEE Main chapter-wise questions jeelive.ai already has, and takes
+// them their own way. A chapter here IS a chapter-wise test of the website; its id is that test's id.
+// Today: each ticked chapter's whole test, one after another. When the website can make a paper of chosen questions
+// (bank.pick) or a random mock (bank.random), those ways open by themselves: the bank says which are open.
+// The bank (subjects, chapters, a chapter's questions WITHOUT options) is read from our own server (backend/choice.py,
+// for signed-in students); a paper is made by jeelive.ai (POST /choice/papers, the student's own request) and is then
+// an ordinary paper: started, solved, marked and analysed like every other one.
 import { ApiError, BACKEND, api, clearRapidAccess, post, rapidAccess } from "@/src/api/client";
+import { cataloguePath } from "@/src/api/examCatalog";
 
 export const SUBJECTS = ["Physics", "Chemistry", "Mathematics"] as const;
 export type Subject = typeof SUBJECTS[number];
 export const SHORT: Record<Subject, string> = { Physics: "Physics", Chemistry: "Chemistry", Mathematics: "Maths" };
-export type Chapter = { id: string; n: number | null; title: string; count: number; mcq: number; integer: number };
-/** `ready: false` = the bank is not connected yet (nothing else is sent then). */
+/** The chapter's whole test on the website (the chapter-wise test, under the chapter's own id): `page` = the page of
+ *  the subject's chapter-wise list it is on, where the student's own attempt of it is read. */
+export type ChapterTest = { page: number; minutes: number | null; correct: number; wrong: number; marks: number };
+export type Chapter = { id: string; n: number | null; title: string; count: number; mcq: number; integer: number; test?: ChapterTest | null };
+/** `ready: false` = there is no chapter to choose from (nothing else is sent then). `pick` = questions can be chosen
+ *  and one paper made of them; `random` = a random mock can be made. Both need the website: false until it can. */
 export type Bank = {
-  ready: boolean; sample?: boolean; exam?: string; max_questions: number; max_per_subject: number | null;
+  ready: boolean; sample?: boolean; pick?: boolean; random?: boolean; exam?: string; max_questions: number; max_per_subject: number | null;
   minutes: Record<Subject, number>; marks: { correct: number; wrong: number }; subjects: { name: Subject; chapters: Chapter[] }[];
 };
 /** A question's picture, sized in print points (the picture file holds more pixels). */
@@ -35,11 +43,23 @@ async function get<T>(path: string, uid: string, signal: AbortSignal, again = tr
     else clearRapidAccess();
     return get<T>(path, uid, signal, false);
   }
-  if (!res.ok) throw new ApiError(res.status === 404 ? "Is chapter mein chunne ke liye sawaal nahi hain." : res.status === 401 ? "Please sign in again." : "Sawaal abhi load nahi ho paaye. Dobara try karo.", res.status);
+  if (!res.ok) throw new ApiError(res.status === 404 ? "Is chapter ke sawaal abhi yahan nahi khul paaye. Doosra chapter chuno, ya thodi der mein dobara dekho." : res.status === 401 ? "Please sign in again." : "Sawaal abhi load nahi ho paaye. Dobara try karo.", res.status);
   return res.json();
 }
 export const getBank = (uid: string) => (signal: AbortSignal) => get<Bank>("/bank", uid, signal);
 export const getChapter = (uid: string, id: string) => (signal: AbortSignal) => get<ChapterQuestions>("/chapters/" + id, uid, signal);
+
+/** The student's own attempt of a chapter's test, as the chapter-wise list gives it (null = not started). */
+export type Attempt = { id: string; status?: string; resumable?: boolean; result_available?: boolean };
+export type TestPage = { subject: Subject; page: number };
+/** The student's attempts of the chapter tests on these pages of the chapter-wise list, by test id. Their own request,
+ *  the same one the chapter-wise screen makes. */
+export const getAttempts = (pages: TestPage[]) => async (signal: AbortSignal) => {
+  const lists = await Promise.all(pages.map(p => api<{ items?: { id?: string; attempt?: Attempt | null }[] }>(cataloguePath("jee-main", "chapters", "", p.subject, "", p.page), { signal })));
+  const out: Record<string, Attempt | null> = {};
+  for (const list of lists) for (const row of list?.items || []) if (row?.id) out[row.id] = row.attempt || null;
+  return out;
+};
 
 export type Counts = Record<Subject, number>;
 export const NONE: Counts = { Physics: 0, Chemistry: 0, Mathematics: 0 };

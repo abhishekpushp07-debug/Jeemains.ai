@@ -1,22 +1,28 @@
-"""Student Choice: the question bank a student builds a paper from (GET /api/choice/bank, GET /api/choice/chapters/<id>).
+"""Student Choice: the chapters a student chooses from (GET /api/choice/bank, GET /api/choice/chapters/<id>).
 
-A student picks chapters and then questions (shown without options), or asks for a random mock; jeelive.ai then makes a
-real paper of them, which is started, solved, marked and analysed like every other paper. The questions live on
-jeelive.ai. This file reads its two doors (the bank: subjects and their chapters; one chapter's questions without
-options and answers), keeps each answer for a few minutes, and hands the app only what it can draw, in the shape it
-knows: the app in a student's hand cannot be changed without a new build, this server can. Making the paper is the
-student's own request and goes through the website proxy (/api/jl/choice/papers), not through here.
+The questions are the JEE Main chapter-wise questions jeelive.ai already has: nothing new, only another way to reach
+them. A chapter here IS a chapter-wise test of the website (JEE Main -> Chapter-wise Tests); its id is that test's id.
+
+What a student can do with the chapters they tick depends on the website:
+  - today: take each ticked chapter's whole test, one after another (the test the website already has);
+  - "pick": see a chapter's questions without options, tick some, and have one paper made of them;
+  - "random": a random mock of as many questions as they ask for.
+"pick" and "random" need doors the website does not have yet (memory/WEBSITE_CHOICE_NOTE.md). The bank says which are
+open, so the day the website opens one, the app shows it without a new build.
+
+This file reads the website's chapter-wise catalogue (and, once they exist, its Student Choice doors), keeps each answer
+for a few minutes, and hands the app only what it can draw, in the shape it knows: the app in a student's hand cannot
+be changed without a new build, this server can. Making a paper is the student's own request and goes through the
+website proxy (/api/jl/choice/papers), not through here. Nothing is written anywhere.
 
 For signed-in students only: a request needs the same short-lived grant Rapid Fire uses (rf_access.py: made only from a
-session the website verified), and the website's doors are read with that student's own website session. The answer is
-the same for every student, so one student's read serves the others for a few minutes.
-
-The doors are described in memory/WEBSITE_CHOICE_NOTE.md. Until the website has them the bank answers {"ready": false}
-and the app says so.
+session the website verified), and the website is read with that student's own website session. The answer is the same
+for every student, so one student's read serves the others for a few minutes.
 
 For the owner's eyes on the preview only: with the row rf_meta {"_id": "choice:sample", "value": true}, and the website's
-doors still missing, the bank and the questions come from the `choice_sample` collection (made-up questions written by
-backend/tests/choice_sample.py). The production database has no such row."""
+Student Choice doors still missing, the bank and the questions come from the `choice_sample` collection (made-up
+questions written by backend/tests/choice_sample.py). The production database has no such row."""
+import asyncio
 import os
 import re
 import time
@@ -25,7 +31,7 @@ from fastapi import APIRouter, HTTPException, Path, Request
 from starlette.responses import JSONResponse
 
 from fast_json import FastJSONResponse
-from jl_transport import canonical_request
+from jl_transport import UpstreamError, canonical_request
 from matched import ID, _id, _text, site_data
 from metadata_cache import MetadataCache
 from rf_access import verified_grant
@@ -38,6 +44,8 @@ MAX_QUESTIONS = 75
 MARKS = {"correct": 4, "wrong": -1}
 MINUTES = {"Physics": 2.4, "Chemistry": 1.6, "Mathematics": 3.2}
 MAX_CHAPTERS, MAX_ITEMS, MAX_PAGES, MAX_STEM = 120, 300, 6, 4
+CATALOGUE = "exam-navigation/jee-main/catalogue"  # the chapter-wise tests the website already has
+CATALOGUE_PAGES = 12  # of one subject (a page holds 12 chapters today, a subject about 30)
 PRIVATE = {"Cache-Control": "private, max-age=60"}
 BUSY = "The website is not answering right now. Please try again in a moment."
 SAMPLE_META = "choice:sample"
@@ -47,6 +55,11 @@ _sample = {"value": False, "read": float("-inf")}
 
 def _count(value, top: int) -> int:
     return value if isinstance(value, int) and not isinstance(value, bool) and 0 <= value <= top else 0
+
+
+def _whole(value, low: int, top: int):
+    """A whole number the website may send as 60 or 60.0."""
+    return int(value) if isinstance(value, (int, float)) and not isinstance(value, bool) and value == int(value) and low <= value <= top else None
 
 
 def _size(value):
@@ -68,6 +81,37 @@ def _stem(value) -> list:
     return out
 
 
+def shape_test(value):
+    """A chapter's whole test on the website, which a student can take as it is: the page of the subject's chapter-wise
+    list it is on (the app reads the student's own attempt of it from that page), its time and its marks. None when
+    the chapter has no such test."""
+    if not isinstance(value, dict):
+        return None
+    page, marks = _whole(value.get("page"), 1, CATALOGUE_PAGES), _whole(value.get("maximum"), 1, 20000)
+    correct, wrong = _whole(value.get("correct"), 1, 20), _whole(value.get("wrong"), -20, 0)
+    if not page or not marks or correct is None or wrong is None:
+        return None
+    return {"page": page, "minutes": _whole(value.get("minutes"), 1, 1000), "correct": correct, "wrong": wrong, "marks": marks}
+
+
+def chapter_tests(subject: str, pages: list) -> list:
+    """A subject's chapters from the pages of the website's chapter-wise list (in its order): every published chapter
+    test of that subject is one chapter, under the test's own id. The title loses the chapter number it starts with."""
+    out = []
+    for number, page in enumerate(pages, 1):
+        for row in (page.get("items") if isinstance(page, dict) else None) or []:
+            if not isinstance(row, dict) or row.get("test_kind") != "chapter" or row.get("chapter_subject") != subject \
+                    or row.get("status") != "published" or row.get("live_enabled") is False:
+                continue
+            n, types = _whole(row.get("chapter_number"), 1, 999), row.get("types") if isinstance(row.get("types"), dict) else {}
+            rules = row.get("rules") if isinstance(row.get("rules"), dict) else {}
+            title = _text(row.get("title"), 160)
+            out.append({"id": row.get("id"), "number": n, "title": re.sub(rf"^0*{n}\s+(?=\S)", "", title) if n else title, "count": row.get("count"),
+                        "mcq": types.get("mcq"), "integer": types.get("integer"),
+                        "test": {"page": number, "minutes": rules.get("minutes"), "correct": rules.get("correct"), "wrong": rules.get("wrong"), "maximum": row.get("maximum")}})
+    return out
+
+
 def shape_chapters(rows) -> list:
     """A subject's chapters in the website's order: each needs an id, a name and at least one question."""
     out, seen = [], set()
@@ -79,12 +123,15 @@ def shape_chapters(rows) -> list:
             continue
         seen.add(cid)
         out.append({"id": cid, "n": _count(row.get("number"), 999) or None, "title": title, "count": count,
-                    "mcq": _count(row.get("mcq"), count), "integer": _count(row.get("integer"), count)})
+                    "mcq": _count(row.get("mcq"), count), "integer": _count(row.get("integer"), count), "test": shape_test(row.get("test"))})
     return out
 
 
-def shape_bank(data, sample: bool = False):
-    """The bank as the app shows it. None when it has no chapter at all (then there is nothing to choose from)."""
+def shape_bank(data, sample: bool = False, own: bool = True):
+    """The bank as the app shows it. None when it has no chapter at all (then there is nothing to choose from).
+    `own` = the website's Student Choice door (or the sample) lists the chapters itself: then choosing questions and
+    the random mock are open unless it says no. With the chapter-wise tests as the chapters (own=False) they are
+    open only when the website says yes ("pick": true, "random": true): it has to make the paper."""
     if not isinstance(data, dict):
         return None
     subjects = []
@@ -99,6 +146,7 @@ def shape_bank(data, sample: bool = False):
     minutes = {s: float(per[s]) if isinstance(per, dict) and isinstance(per.get(s), (int, float)) and not isinstance(per[s], bool) and 0.5 <= per[s] <= 10 else MINUTES[s]
                for s in SUBJECTS}
     return {"ready": True, "sample": sample, "exam": _text(data.get("exam"), 40) or "JEE Main",
+            "pick": data["pick"] if isinstance(data.get("pick"), bool) else own, "random": data["random"] if isinstance(data.get("random"), bool) else own,
             # The website may lower the top (never raise it past the owner's 75), and may add a top per subject.
             "max_questions": _count(top, MAX_QUESTIONS) or MAX_QUESTIONS, "max_per_subject": _count(each, MAX_QUESTIONS) or None,
             "minutes": minutes, "marks": MARKS, "subjects": subjects}
@@ -163,7 +211,10 @@ def make_router(db, client):
         headers = {"Accept": "application/json"}
         if isinstance(cookie, str) and cookie and not re.search(r"[\r\n;]", cookie):
             headers["Cookie"] = "access_token=" + cookie
-        res = await canonical_request(http, "GET", f"{base}/{path}", path=path, params=params, body=None, headers=headers)
+        try:
+            res = await canonical_request(http, "GET", f"{base}/{path}", path=path, params=params, body=None, headers=headers)
+        except UpstreamError:  # the website did not answer (or its shield is shut): said plainly, never kept
+            raise HTTPException(503, BUSY)
         if res.status_code in (401, 403):
             raise NeedsSession()
         try:
@@ -185,16 +236,32 @@ def make_router(db, client):
                                          for d in docs if d.get("subject") == s]} for s in SUBJECTS]
         return shape_bank({"exam": "JEE Main", "subjects": rows}, sample=True)
 
+    async def chapter_wise(sid: str, subject: str) -> list:
+        """Every page of a subject's chapter-wise tests. Half a list is never shown: a page that fails stops the read."""
+        pages = []
+        for number in range(1, CATALOGUE_PAGES + 1):
+            status, data = await site(sid, CATALOGUE, {"kind": "chapters", "subject": subject, "q": "", "page": str(number)})
+            if status == 404 and number == 1:  # the owner has hidden the chapter-wise tests
+                break
+            if status != 200 or not isinstance(data, dict):
+                raise HTTPException(503, BUSY)
+            pages.append(data)
+            if number >= _count(data.get("pages"), CATALOGUE_PAGES):
+                break
+        return pages
+
     async def load_bank(sid: str):
         status, data = await site(sid, "choice/bank", {"exam": "jee-main"})
-        bank = shape_bank(data) if status == 200 else None
-        if bank:
-            return bank
-        if status in (404, 405) and await sample_on():  # the website has no such door yet, and this is the owner's preview
-            return await sample_bank() or {"ready": False}
         if status >= 500:
             raise HTTPException(503, BUSY)
-        return {"ready": False}
+        said = data if status == 200 and isinstance(data, dict) else {}  # {} = the website has no Student Choice door yet
+        bank = shape_bank(said)  # the website lists the chapters itself
+        if not bank and status in (404, 405) and await sample_on():  # the owner's preview only
+            bank = await sample_bank()
+        if not bank:  # the usual way: the chapters are the chapter-wise tests the website already has
+            lists = await asyncio.gather(*(chapter_wise(sid, s) for s in SUBJECTS))
+            bank = shape_bank({**said, "subjects": [{"name": s, "chapters": chapter_tests(s, pages)} for s, pages in zip(SUBJECTS, lists)]}, own=False)
+        return bank or {"ready": False}
 
     async def load_chapter(sid: str, chapter_id: str):
         pages = []
@@ -222,7 +289,9 @@ def make_router(db, client):
 
     @r.get("/choice/bank")
     async def bank(request: Request):
-        data = await answer(request, "bank", load_bank, 60)
+        # Two minutes, and one more while a fresh copy is read behind: a new chapter (or a door the website opens) shows
+        # within a few minutes, and the website gets ten small reads for it however many students are browsing.
+        data = await answer(request, "bank", load_bank, 120)
         return data if isinstance(data, JSONResponse) else FastJSONResponse(data, headers=PRIVATE)
 
     @r.get("/choice/chapters/{chapter_id}")

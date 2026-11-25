@@ -1,7 +1,11 @@
-// Student Choice (Home's fourth tile): the student makes their own paper. Two ways in: choose chapters and then questions
-// (they are listed without options), or a random mock of as many questions as they ask for, mixed like a JEE Main paper.
-// At most 75 questions; +4 / −1; the time comes from the subjects (Maths 3.2, Physics 2.4, Chemistry 1.6 minutes a
-// question, so 25 + 25 + 25 get 180 minutes). jeelive.ai makes the paper, and from there it is an ordinary paper.
+// Student Choice (Home's fourth tile): the JEE Main chapter-wise questions, the student's own way. They tick chapters;
+// what they can do with them depends on what the website can make (the bank says so, see src/choice/api.ts):
+//   today        each ticked chapter's whole test, one after another (app/choice/tests.tsx);
+//   bank.pick    choose questions of those chapters (listed without options) and have one paper made of them;
+//   bank.random  a random mock of as many questions as they ask for, mixed like a JEE Main paper.
+// A made paper has at most 75 questions, +4 / −1, and its time comes from the subjects (Maths 3.2, Physics 2.4,
+// Chemistry 1.6 minutes a question, so 25 + 25 + 25 get 80 + 60 + 40 = 180 minutes). jeelive.ai makes the paper, and
+// from there it is an ordinary paper.
 import React, { useRef, useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { useRouter } from "expo-router";
@@ -10,13 +14,13 @@ import { useAuth } from "@/src/auth";
 import { uuid } from "@/src/api/client";
 import { useListFocus } from "@/src/useListFocus";
 import { Empty, ErrorBox, IconName, Notice, Press, Skeleton, T } from "@/src/components/ui";
-import { DCard, DSheet, IconCircle, Pill, ScreenHeader, SectionLabel } from "@/src/components/design";
+import { DCard, DSheet, IconCircle, Pill, ScreenHeader, SectionLabel, StatusLine } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { ScreenMotion } from "@/src/motion";
 import { colors, fonts, noOutline, space, subjectColor } from "@/src/theme";
 import { Bank, SHORT, makePaper, minutesFor, splitOf, timeLabel } from "@/src/choice/api";
 import { Makeup, useBank } from "@/src/choice/parts";
-import { pickedCount, useChoice } from "@/src/choice/store";
+import { chosenChapters, pickedCount, useChoice } from "@/src/choice/store";
 
 const QUICK = [15, 30, 45, 60, 75];
 
@@ -81,52 +85,74 @@ export default function StudentChoice() {
   const { user } = useAuth();
   const res = useBank(user?.id);
   useListFocus(res.revalidate);
-  useChoice();
+  useChoice(user?.id);
   const [random, setRandom] = useState(false);
-  const bank = res.data, chosen = pickedCount();
+  const bank = res.data, open = bank?.ready ? bank : null, chosen = pickedCount();
+  const all = open ? open.subjects.flatMap(s => s.chapters) : [];
+  // Only chapters the bank still has count (one may have gone since it was ticked).
+  const ticked = chosenChapters().filter(id => all.some(c => c.id === id)).length;
+  const making = !!open && (!!open.pick || !!open.random); // the website can make a paper
+  // A whole chapter test keeps the website's own time: said here when every test has the same.
+  const testTimes = [...new Set(all.map(c => c.test?.minutes).filter(Boolean))];
   return <ScreenMotion>
     <View testID="choice-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
-      <ScreenHeader testID="choice-header" title="Student Choice" eyebrow="Apna paper khud banao" backTestID="choice-back"
+      <ScreenHeader testID="choice-header" title="Student Choice" eyebrow={making ? "Apna paper khud banao" : "Apne chapters, apni marzi"} backTestID="choice-back"
         onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xxl, gap: space.lg }}
         refreshControl={<RefreshControl testID="choice-refresh" refreshing={res.refreshing} onRefresh={res.reload} />}>
         <View style={{ gap: space.sm }}>
-          <T testID="choice-title" w="heavy" size={24} style={{ letterSpacing: -0.4 }}>Apna paper, apni marzi.</T>
-          <T size={13.5} color={colors.muted} style={{ lineHeight: 20 }}>Chapters aur sawaal khud chuno, ya ek tap mein random mock lo. Result, analysis aur solutions har paper ki tarah milte hain.</T>
-          <View style={styles.facts}>
-            {[`${bank?.ready ? bank.max_questions : 75} sawaal tak`, "+4 / −1", "time subject ke hisaab se"].map(f => <View key={f} style={styles.fact}><T w="bold" size={11.5} color={colors.custom_softText}>{f}</T></View>)}
-          </View>
+          <T testID="choice-title" w="heavy" size={24} style={{ letterSpacing: -0.4 }}>{making ? "Apna paper, apni marzi." : "Apne chapters, apni marzi."}</T>
+          <T testID="choice-intro" size={13.5} color={colors.muted} style={{ lineHeight: 20 }}>{open?.pick ? "JEE Main ke chapter-wise sawaalon mein se chapters aur sawaal khud chuno. Result, analysis aur solutions har paper ki tarah milte hain."
+            : "JEE Main ke chapter-wise sawaal, aapke chune chapters ke hisaab se. Result, analysis aur solutions har paper ki tarah milte hain."}</T>
+          {open ? <View testID="choice-facts" style={styles.facts}>
+            {(making ? [`${open.max_questions} sawaal tak`, `+${open.marks.correct} / −${Math.abs(open.marks.wrong)}`, "time subject ke hisaab se"]
+              : [`${all.length} chapters`, `${all.reduce((n, c) => n + c.count, 0)} sawaal`, `+${open.marks.correct} / −${Math.abs(open.marks.wrong)}`]).map(f => <View key={f} style={styles.fact}><T w="bold" size={11.5} color={colors.custom_softText}>{f}</T></View>)}
+          </View> : null}
         </View>
         <ErrorBox testID="choice-error" error={res.error} retry={res.reload} />
         {!bank ? (res.error ? null : <View testID="choice-loading" style={{ gap: space.md }}><Skeleton h={92} /><Skeleton h={92} /></View>)
-          : !bank.ready ? <DCard testID="choice-not-ready"><Empty icon="database-search-outline" title="Sawaalon ka bank jud raha hai"
-            body="Student Choice ke sawaal jeelive.ai ke chapter-wise sawaalon se aate hain. Jaise hi woh yahan jud jayenge, chapters dikhne lagenge. Tab tak chapter-wise tests se practice karo."
+          : !open ? <DCard testID="choice-not-ready"><Empty icon="database-search-outline" title="Chapters abhi nahi mile"
+            body="Student Choice ke sawaal JEE Main ke chapter-wise sawaal hi hain. Abhi koi chapter khula nahi mila. Thodi der mein dobara dekho, ya chapter-wise tests kholo."
             action={<Pill testID="choice-open-chapters" label="Chapter-wise tests" iconRight="arrow-right" onPress={() => router.push("/catalogue?slug=jee-main&kind=chapters")} />} /></DCard>
             : <>
-              {bank.sample ? <Notice testID="choice-sample" tone="warning">SAMPLE: yeh chapters aur sawaal sirf dikhane ke liye bane hain. Asli sawaal jeelive.ai se judte hi yahan aayenge; tab paper bhi banega.</Notice> : null}
+              {open.sample ? <Notice testID="choice-sample" tone="warning">SAMPLE: yeh chapters aur sawaal sirf dikhane ke liye bane hain. Asli chapters ke saath paper jeelive.ai banayega.</Notice> : null}
               <View style={{ gap: space.md }}>
-                <Way testID="choice-way-pick" icon="format-list-checks" title="Sawaal khud chuno" onPress={() => router.push("/choice/pick")}
+                {open.pick ? <Way testID="choice-way-pick" icon="format-list-checks" title="Sawaal khud chuno" onPress={() => router.push("/choice/pick")}
                   body="Subject, phir chapters, phir sawaal. Sirf sawaal dikhte hain, options paper mein milte hain."
                   note={chosen ? `${chosen} sawaal chune hue hain · jaari rakho` : undefined} />
-                <Way testID="choice-way-random" icon="creation" title="Random mock" onPress={() => setRandom(true)}
-                  body="Bas sawaalon ki ginti batao. Physics, Chemistry aur Maths mile-jule aayenge, JEE Main ki tarah." />
+                  : <Way testID="choice-way-chapters" icon="format-list-checks" title="Chapters chuno" onPress={() => router.push("/choice/pick")}
+                    body="Physics, Chemistry aur Maths ke chapters tick karo. Har chune chapter ka poora test milega: ek-ek karke do."
+                    note={ticked ? `${ticked} chapter${ticked === 1 ? "" : "s"} chune hue hain` : undefined} />}
+                {!open.pick && ticked ? <Way testID="choice-way-tests" icon="clipboard-text-outline" title="Aapke chapter tests" onPress={() => router.push("/choice/tests")}
+                  body={`Chune hue ${ticked} chapter${ticked === 1 ? "" : "s"} ke test: shuru karo, jaari rakho ya result dekho.`} /> : null}
+                {open.random ? <Way testID="choice-way-random" icon="creation" title="Random mock" onPress={() => setRandom(true)}
+                  body="Bas sawaalon ki ginti batao. Physics, Chemistry aur Maths mile-jule aayenge, JEE Main ki tarah." /> : null}
               </View>
+              {!open.pick || !open.random ? <DCard testID="choice-soon" style={styles.soon}>
+                <StatusLine testID="choice-soon-label" color={colors.custom_timerAmber} label="Jald aa raha hai" />
+                {!open.pick ? <T testID="choice-soon-pick" size={13} color={colors.custom_softText} style={{ lineHeight: 19 }}><T w="heavy" size={13}>Sawaal khud chunna. </T>
+                  Chune chapters ke sawaal dekho (bina options), jo chahiye tick karo, aur un sab ka ek hi paper banao: {open.max_questions} sawaal tak.</T> : null}
+                {!open.random ? <T testID="choice-soon-random" size={13} color={colors.custom_softText} style={{ lineHeight: 19 }}><T w="heavy" size={13}>Random mock. </T>
+                  Bas ginti batao; Physics, Chemistry aur Maths ke sawaal mile-jule aayenge, JEE Main ki tarah.</T> : null}
+                <T size={12} color={colors.muted} style={{ lineHeight: 17 }}>Khulte hi yahin dikhega, app update kiye bina.</T>
+              </DCard> : null}
               <View style={{ gap: space.md }}>
-                <SectionLabel title="Time kaise milta hai" />
+                <SectionLabel title={making ? "Time kaise milta hai" : "Banaye hue paper ka time"} />
                 <DCard testID="choice-time" style={{ gap: 0, paddingVertical: space.xs }}>
-                  {bank.subjects.map(s => <View key={s.name} style={styles.time}>
+                  {open.subjects.map(s => <View key={s.name} testID={`choice-time-${s.name.toLowerCase()}`} style={styles.time}>
                     <View style={[styles.dot, { backgroundColor: subjectColor(s.name) }]} />
                     <T w="bold" size={14} style={{ flex: 1 }}>{SHORT[s.name]}</T>
                     <T size={12.5} color={colors.muted}>25 sawaal = </T>
-                    <T w="heavy" size={14}>{timeLabel(Math.ceil(25 * bank.minutes[s.name]))}</T>
+                    <T w="heavy" size={14}>{timeLabel(Math.ceil(25 * open.minutes[s.name]))}</T>
                   </View>)}
-                  <T size={12} color={colors.muted} style={styles.timeNote}>Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = {timeLabel(minutesFor({ Physics: 25, Chemistry: 25, Mathematics: 25 }, bank.minutes))}.</T>
+                  <T testID="choice-time-note" size={12} color={colors.muted} style={styles.timeNote}>Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = {timeLabel(minutesFor({ Physics: 25, Chemistry: 25, Mathematics: 25 }, open.minutes))}.{making ? ""
+                    : ` Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai${testTimes.length === 1 ? ` (abhi ${timeLabel(testTimes[0] as number)})` : ""}.`}</T>
                 </DCard>
               </View>
             </>}
       </ScrollView>
-      {bank?.ready ? <DSheet testID="choice-random-sheet" visible={random} onClose={() => setRandom(false)} title="Random mock" keyboard>
-        <RandomForm bank={bank} onMade={paper => { setRandom(false); router.push(`/set/${paper}`); }} />
+      {open?.random ? <DSheet testID="choice-random-sheet" visible={random} onClose={() => setRandom(false)} title="Random mock" keyboard>
+        <RandomForm bank={open} onMade={paper => { setRandom(false); router.push(`/set/${paper}`); }} />
       </DSheet> : null}
     </View>
   </ScreenMotion>;
@@ -134,6 +160,7 @@ export default function StudentChoice() {
 
 const styles = StyleSheet.create({
   way: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.lg },
+  soon: { gap: space.sm, padding: space.lg },
   facts: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 4 },
   fact: { height: 28, paddingHorizontal: 11, borderRadius: 14, justifyContent: "center", backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine },
   time: { flexDirection: "row", alignItems: "center", gap: space.sm, minHeight: 44 },

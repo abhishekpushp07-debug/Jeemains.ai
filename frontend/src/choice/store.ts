@@ -1,6 +1,8 @@
-// What the student has chosen for a Student Choice paper so far: chapters (step 1), then questions from them (step 2).
-// Kept while the app is open, so going back and forth between the two steps loses nothing.
-import { useSyncExternalStore } from "react";
+// What the student has chosen in Student Choice so far: chapters (step 1), then questions from them (step 2).
+// The ticked chapters are kept on the phone for each account, so the list is still there the next day; the ticked
+// questions are kept while the app is open, so going back and forth between the two steps loses nothing.
+import { useEffect, useSyncExternalStore } from "react";
+import { storage } from "@/src/utils/storage";
 import { Bank, Counts, NONE, SUBJECTS, Subject } from "./api";
 
 /** Where a chosen question is from: its chapter, its subject, and its number in the chapter. */
@@ -12,8 +14,35 @@ const listeners = new Set<() => void>();
 const changed = () => { version += 1; listeners.forEach(fn => fn()); };
 const subscribe = (fn: () => void) => { listeners.add(fn); return () => { listeners.delete(fn); }; };
 
-/** Redraws the screen whenever the choice changes. */
-export const useChoice = () => useSyncExternalStore(subscribe, () => version, () => version);
+let owner = ""; // the account these ticks belong to
+let loaded = false; // the phone's copy of that account's chapters has been read
+const key = (uid: string) => `choice.chapters.${uid}`;
+const keep = () => { if (owner && loaded) void storage.setItem(key(owner), JSON.stringify(chapters)); };
+function open(uid: string) {
+  if (owner === uid) return;
+  owner = uid; loaded = false; chapters = []; picked.clear(); changed();
+  void storage.getItem<string | null>(key(uid), null).then(raw => {
+    if (owner !== uid) return;
+    let saved: unknown = null;
+    try { saved = raw ? JSON.parse(raw) : null; } catch {}
+    // Chapters ticked while the copy was being read stay, after the saved ones.
+    const here = chapters.length;
+    const all = [...(Array.isArray(saved) ? saved.filter((id): id is string => typeof id === "string") : []), ...chapters];
+    chapters = [...new Set(all)].slice(0, 300);
+    loaded = true;
+    if (here) keep();
+    changed();
+  });
+}
+
+/** Redraws the screen whenever the choice changes. With the signed-in student's id it also brings back the chapters
+ *  that account ticked on this phone before. */
+export function useChoice(uid?: string) {
+  useEffect(() => { if (uid) open(uid); }, [uid]);
+  return useSyncExternalStore(subscribe, () => version, () => version);
+}
+/** False while the phone's copy is still being read: a screen must not decide "nothing is ticked" before it is true. */
+export const choiceLoaded = () => loaded;
 
 export const chosenChapters = () => chapters;
 export const hasChapter = (id: string) => chapters.includes(id);
@@ -22,6 +51,7 @@ export function toggleChapter(id: string) {
     chapters = chapters.filter(c => c !== id);
     for (const [qid, p] of picked) if (p.chapter === id) picked.delete(qid); // its questions go with it
   } else chapters = [...chapters, id];
+  keep();
   changed();
 }
 
@@ -53,5 +83,6 @@ export function orderedIds(bank: Bank): string[] {
 export function clearChoice() {
   chapters = [];
   picked.clear();
+  keep();
   changed();
 }
