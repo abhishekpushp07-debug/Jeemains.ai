@@ -1,3 +1,9 @@
+> **OUT OF DATE since 14 Nov 2026.** Redis was removed from the backend in commit `923c12c` (deploy health check):
+> `redis_runtime.py`, `redis_runtime.json`, the supervisor template, the `redis` / `hiredis` packages and their tests are
+> gone, and there is no `jeelive-redis` service. `backend/metadata_cache.py` now keeps the same public Rapid Fire lists in
+> the server's own memory. Everything below describes what was there between 27 Oct and 14 Nov; do not tell the owner
+> that Redis is in use.
+
 # API speed + private Redis — 27 October 2026
 
 ## User intent / scope

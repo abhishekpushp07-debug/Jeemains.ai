@@ -15,9 +15,12 @@ build can be made on this machine). Sizes are raw file sizes; the store compress
 - **Tonight the app got lighter, not heavier:** the code went from 5,255,333 to 5,179,835 bytes (−75 KB) although three
   AITS additions (+21 KB) were added, because a 95 KB website export that was carried inside the app for three colours
   is no longer carried.
-- **Redis** already exists where it helps: on the server, for public Rapid Fire lists (`memory/API_SPEED_REDIS.md`).
-  It adds nothing to the phone and cannot make the APK smaller. The phone has its own small cache (2 MB limit, 64
-  answers, cleared when the account changes). No change needed there.
+- **Redis is NOT in the app today** (corrected 24 Nov, late night: an earlier version of this report said it was). It
+  was added on the server on 27 Oct for public Rapid Fire lists and taken out again on 14 Nov during a deploy health
+  check (commit `923c12c`); the server now keeps those lists in its own memory for a short time
+  (`backend/metadata_cache.py`), which needs no extra service. Redis would add nothing to the phone and cannot make the
+  APK smaller, so it is not being put back. The phone has its own small cache (2 MB limit, 64 answers, cleared when
+  the account changes). No change needed there.
 
 ## 2. What the phone carries (measured)
 | Part | Size | Share |
