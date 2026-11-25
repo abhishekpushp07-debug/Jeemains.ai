@@ -15,6 +15,12 @@ export type DailyResult = { correct: number; total: number; ms: number; rank: nu
 
 export const useDaily = (uid?: string) => useCached<DailyStatus>(uid ? `u.${uid}.rfdaily.JEE` : null, () => rf("/daily?exam=JEE", uid!), false);
 export const useDailyBoard = (uid?: string) => useCached<DailyBoard>(uid ? `u.${uid}.rfdailyboard.JEE` : null, () => rf("/daily/board?exam=JEE", uid!), false);
+// The result's Misfires tab: the cards of a finished round that were not answered right (only cards that were shown;
+// `sealed` = how many were never reached). Asked only once the tab is opened (`on`), and kept in memory only.
+export type DailyMiss = { i: number; subject: string; chapter: string; prompt: string; options: string[]; outcome: "incorrect" | "timed_out" | "skipped"; choice: number | null; answer: number; explain: string; formula: string };
+export type DailyMisses = { day: string; total: number; correct: number; items: DailyMiss[]; sealed: number };
+export const useDailyMisses = (uid: string | undefined, day: string, on: boolean) =>
+  useCached<DailyMisses>(on && uid ? `u.${uid}.rfdailymisses.JEE.${day}` : null, () => rf(`/daily/misses?exam=JEE&day=${day}`, uid!), false);
 
 export const secs = (ms: number) => `${(ms / 1000).toFixed(1)} s`;
 export const hms = (s: number) => [Math.floor(s / 3600), Math.floor((s % 3600) / 60), Math.floor(s % 60)].map((n) => String(n).padStart(2, "0")).join(":");

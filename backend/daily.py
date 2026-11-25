@@ -367,6 +367,30 @@ def make_router(db, rf_user, award):
         d = {"card_ids": d[1]} if d else await db.rf_daily.find_one({"_id": f"{exam}:{day}"}, {"card_ids": 1})
         return {"exam": exam, "day": day, "total": len(d["card_ids"]) if d else TOTAL, "players": players, "items": shown(rows, uid, 100), "you": you}
 
+    @r.get("/misses")
+    async def misses(exam: Exam = "JEE", day: Optional[str] = Query(None, pattern=r"^\d{4}-\d{2}-\d{2}$"), x_rf_user: Optional[str] = Header(None)):
+        """The result screen's Misfires tab: the cards of the student's own finished run that were not answered right,
+        each with the answer they gave, the right answer and the explanation.
+        Only cards the student was shown. Cards never reached (the round was left early) stay sealed: all of India plays
+        the same cards today, so their answers must not leave the server through a student who quits at card 1."""
+        uid = rf_user(x_rf_user)
+        exam = require_active_exam(exam)
+        p = await play_of(uid, exam, day or ist_day())
+        if not p or p["status"] != "done":
+            raise HTTPException(404, "Finish this All India Rapid round first.")
+        _, cards = await dealt(exam, p["day"])
+        items, sealed = [], 0
+        for i, row in enumerate(p["rows"]):
+            if row["outcome"] == "correct":
+                continue
+            card = cards.get(row["card_id"])
+            if not card or (row["outcome"] == "skipped" and not row["ms"]):  # filled in by Finish: it was never on screen
+                sealed += 1
+                continue
+            items.append({**public(card, i), "outcome": row["outcome"], "choice": row["choice"], "answer": card["answer"],
+                          "explain": card.get("explain", ""), "formula": card.get("formula", "")})
+        return {"day": p["day"], "total": len(p["rows"]), "correct": p["correct"], "items": items, "sealed": sealed}
+
     return r
 
 

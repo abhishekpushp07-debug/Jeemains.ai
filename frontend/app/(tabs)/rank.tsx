@@ -148,7 +148,7 @@ export default function RankTab() {
     openTool("college");
     scroll.current?.scrollTo({ y: 0, animated: false });
   };
-  // Each tool pane carries its form colour (yellow, teal, lime, blood red, sky blue) for the form, chips, fields and buttons inside.
+  // Each tool pane carries its form colour (maroon, teal, lime, blood red, sky blue, violet) for the form, chips, fields and buttons inside.
   // A pane that is not the open one stays mounted but hidden, so its shine rests.
   const pane = (t: Tool, node: React.ReactNode) => seen.includes(t) ? <View key={t} style={[styles.tool, tool !== t && styles.hidden]}>
     <MotionWhile on={tool === t}><AccentContext.Provider value={ACCENTS[t]}>{node}</AccentContext.Provider></MotionWhile>

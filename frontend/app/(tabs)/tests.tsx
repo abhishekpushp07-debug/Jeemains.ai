@@ -1,19 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, RefreshControl, StyleSheet, TextInput, View } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
 import { useAuth } from "@/src/auth";
 import { api, del, post } from "@/src/api/client";
 import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
-import { Chip, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
+import { Chip, Empty, ErrorBox, Icon, Notice, Press, Skeleton, T } from "@/src/components/ui";
 import { DSheet, Pill, StatusLine } from "@/src/components/design";
 import { GlossTabs, TabLook } from "@/src/components/GlossTabs";
-import { Shine } from "@/src/analysis/Shine";
-import { SoftEmpty } from "@/src/components/series/looks";
 import { ScreenMotion } from "@/src/motion";
 import { toneInk } from "@/src/components/PyqPaperCard";
-import { chipEdges, colors, fonts, noOutline, radius, space, tabEdges } from "@/src/theme";
+import { colors, fonts, noOutline, radius, space, tabEdges } from "@/src/theme";
 import { learningStatusTone } from "@/src/components/LearningTheme";
 import { EXAMS, fmtClock, unixDate, usesNativeTabs } from "@/src/navigation";
 import { useExams } from "@/src/api/examCatalog";
@@ -38,16 +37,11 @@ const STATUS_LABEL: Record<string, string> = {
 };
 // Kept at module level so returning to this tab restores the same view.
 const memo = { tab: "completed" as Tab, q: "", status: "all", exam: "" };
-const SEEN = { itemVisiblePercentThreshold: 10 };
-// A test's card wears the open tab's own soft colours, glossy, with a glass glint that crosses it from corner to corner and
-// that tab's three colours running round its edge. Words on it use the tabs' dark inks (6 : 1 or more on every tone).
-const cardShine = (look: TabLook) => ({ tones: look.rest, edge: look.edge, gloss: colors.custom_seriesPastelGloss, glint: colors.custom_seriesPastelGlint, band: 72, part: 46, corner: true });
 
-/** `chosen` = picked for Compare: a thicker black edge with one gold light running round it. `rest` = off screen, so its shine is still. */
-function PaperCard({ testID, look, chosen, faded, rest, delay, children }: { testID: string; look: TabLook; chosen?: boolean; faded?: boolean; rest?: boolean; delay?: number; children: React.ReactNode }) {
-  return <View testID={testID} style={faded ? styles.faded : undefined}>
-    <Shine radius={22} ring={chosen ? 3 : 2} {...cardShine(look)} edge={chosen ? chipEdges.chosen : look.edge} delay={delay} rest={rest} face={chosen ? styles.paperOn : styles.paper}>{children}</Shine>
-  </View>;
+/** A test's card: white, as Home's four exam cards; only the tabs above carry colour. `chosen` = picked for Compare. */
+function PaperCard({ testID, chosen, faded, children }: { testID: string; chosen?: boolean; faded?: boolean; children: React.ReactNode }) {
+  return <LinearGradient testID={testID} colors={[colors.custom_chipFrom, colors.custom_chipTo]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
+    style={[styles.paper, chosen && styles.paperOn, faded && styles.faded]}>{children}</LinearGradient>;
 }
 
 export default function MyTests() {
@@ -62,12 +56,6 @@ export default function MyTests() {
   const [exam, setExam] = useState(memo.exam);
   const [selected, setSelected] = useState<any[]>([]);
   const [cmp, setCmp] = useState<{ open: boolean; data?: any; error?: string; busy?: boolean }>({ open: false });
-  // Only the cards on screen shine; the rest stay still, so a long list costs no more than the few in view.
-  const [seen, setSeen] = useState<[number, number]>([0, 5]);
-  const onSeen = useRef(({ viewableItems }: { viewableItems: { index?: number | null }[] }) => {
-    const at = viewableItems.map(v => v.index).filter((n): n is number => n != null);
-    if (at.length) setSeen(old => { const lo = Math.min(...at), hi = Math.max(...at); return old[0] === lo && old[1] === hi ? old : [lo, hi]; });
-  }).current;
   Object.assign(memo, { tab, q: query, status, exam });
   // Home stat cards open this screen on a chosen tab.
   useEffect(() => {
@@ -103,11 +91,10 @@ export default function MyTests() {
     } catch {}
   }
 
-  const renderItem = ({ item, index }: { item: any; index: number }) => {
-    const look = TAB_LOOK[tab], rest = index < seen[0] || index > seen[1], delay = (index % 6) * 160;
+  const renderItem = ({ item }: { item: any }) => {
     if (tab === "saved") {
       return (
-        <PaperCard testID={"saved-paper-" + item.set_id} look={look} faded={!item.available} rest={rest} delay={delay}>
+        <PaperCard testID={"saved-paper-" + item.set_id} faded={!item.available}>
           <View style={styles.statusRow}>
             <StatusLine testID={`saved-paper-status-${item.set_id}`} label="Saved" color={colors.custom_savedBlue} ink={colors.custom_tabInk} />
             <T testID={`saved-paper-meta-${item.set_id}`} size={11.5} color={colors.custom_tabInkSoft}>{item.exam} · saved {unixDate(item.saved_at)}</T>
@@ -127,7 +114,7 @@ export default function MyTests() {
     const dot = tone === "completed" ? colors.custom_royalMid : toneInk(tone);
     const picked = selected.some((x) => x.id === item.id);
     return (
-      <PaperCard testID={`attempt-container-${item.id}`} look={look} chosen={picked} rest={rest} delay={delay}>
+      <PaperCard testID={`attempt-container-${item.id}`} chosen={picked}>
         <Press testID={"attempt-card-" + item.id} onPress={() => router.push(((item.resumable ? "/attempt/" : "/result/") + item.id) as any)} scaleTo={0.99} style={styles.attemptContent}>
           <View style={styles.statusRow}>
             <StatusLine testID={`attempt-status-${item.id}`} label={label} color={dot} ink={colors.custom_tabInk} />
@@ -157,7 +144,7 @@ export default function MyTests() {
   };
 
   return (
-    // The tabs' and cards' shine rests while another tab or screen is in front.
+    // The tabs' shine rests while another tab or screen is in front.
     <ScreenMotion>
     <View testID="my-tests-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <View style={{ paddingHorizontal: space.lg, gap: space.md }}>
@@ -188,7 +175,6 @@ export default function MyTests() {
         data={list.data?.items ?? []}
         keyExtractor={(x) => x.id}
         renderItem={renderItem}
-        onViewableItemsChanged={onSeen} viewabilityConfig={SEEN}
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: (usesNativeTabs ? insets.bottom : 0) + space.xl, gap: space.md }}
         refreshControl={<RefreshControl testID="my-tests-refresh" refreshing={list.refreshing} onRefresh={list.reload} />}
         ListHeaderComponent={<>
@@ -196,7 +182,7 @@ export default function MyTests() {
           {tab === "completed" ? <T size={11} color={colors.custom_eyebrow} testID="my-tests-comparison-help">Select two attempts of the same paper and version to compare.</T> : null}
         </>}
         ListEmptyComponent={list.loading ? <View style={{ gap: space.md }}><Skeleton h={130} /><Skeleton h={130} /></View> : list.error ? <T testID="my-tests-unavailable" size={13} color={colors.muted}>Your tests could not be loaded. Your saved attempts have not been changed. Use Retry above.</T> : (
-          <View testID="my-tests-empty"><Shine radius={22} ring={2} {...cardShine(TAB_LOOK[tab])}><SoftEmpty icon="bookmark-outline" title={query || exam || status !== "all" ? "No tests match these filters." : tab === "saved" ? "Your next tests, kept here." : tab === "progress" ? "Ready for a fresh start?" : "Your journey starts with one attempt."} body={tab === "saved" ? "Tap Save on any paper. It won’t start an attempt." : "Existing attempts appear here automatically."} action={<Pill testID="my-tests-discover" label="Explore exams" iconRight="arrow-right" onPress={() => router.push("/(tabs)")} />} /></Shine></View>
+          <PaperCard testID="my-tests-empty"><Empty icon="bookmark-outline" title={query || exam || status !== "all" ? "No tests match these filters." : tab === "saved" ? "Your next tests, kept here." : tab === "progress" ? "Ready for a fresh start?" : "Your journey starts with one attempt."} body={tab === "saved" ? "Tap Save on any paper. It won’t start an attempt." : "Existing attempts appear here automatically."} action={<Pill testID="my-tests-discover" label="Explore exams" iconRight="arrow-right" onPress={() => router.push("/(tabs)")} />} /></PaperCard>
         )}
       />
       <DSheet visible={cmp.open} onClose={() => setCmp({ open: false })} testID="compare-sheet" title="Attempt comparison">
@@ -222,17 +208,18 @@ export default function MyTests() {
 }
 
 const styles = StyleSheet.create({
-  // 17 inside the 2-point running edge (16 inside a chosen card's 3-point edge): the card is the size it was with its 1-point line and 18 of padding.
-  paper: { padding: 17, gap: space.sm },
-  paperOn: { padding: 16, gap: space.sm },
+  // Home's exam card: white into the softest grey with a hairline round it. A card picked for Compare has a 2-point red
+  // line (and 1 less padding, so it keeps its size).
+  paper: { padding: 18, gap: space.sm, borderRadius: 24, borderWidth: 1, borderColor: colors.custom_cardLineStrong, overflow: "hidden" },
+  paperOn: { padding: 17, borderWidth: 2, borderColor: colors.brandPrimary },
   faded: { opacity: 0.75 },
   statusRow: { flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: space.sm },
   attemptContent: { gap: space.sm },
   actions: { flexDirection: "row", flexWrap: "wrap", justifyContent: "flex-end", gap: space.sm, alignItems: "center", marginTop: space.xs },
-  // White chips on the card's soft colour.
-  compare: { flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 14, minHeight: 44, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_tabChip, backgroundColor: colors.custom_tabChip },
+  // White chips with a hairline, as the icon circle on Home's exam cards.
+  compare: { flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 14, minHeight: 44, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },
   go: { flexDirection: "row", alignItems: "center", gap: 5, paddingHorizontal: 16, minHeight: 44, borderRadius: radius.pill },
-  goOutline: { borderWidth: 1, borderColor: colors.custom_tabChip, backgroundColor: colors.custom_tabChip },
+  goOutline: { borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },
   search: { flexDirection: "row", alignItems: "center", backgroundColor: colors.custom_cardRaised, borderRadius: radius.pill, borderWidth: 1, borderColor: colors.custom_cardLine, paddingHorizontal: space.lg, height: 48 },
   chipDivider: { width: 1, height: 24, marginHorizontal: 4, backgroundColor: colors.custom_cardLineStrong },
 });

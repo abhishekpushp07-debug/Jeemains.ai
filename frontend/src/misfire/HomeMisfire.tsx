@@ -1,6 +1,8 @@
 // Home's Misfire card, as on jeelive.ai: how many wrong or skipped questions wait to be solved again, by subject.
+// Blood red with white words and its name in glossy yellow; a soft gloss, a glass glint from corner to corner, and a row
+// of lights (sun yellow, white, aqua) running round its rim.
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { PixelRatio, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useAuth } from "@/src/auth";
@@ -8,9 +10,26 @@ import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
 import { Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
-import { colors, space } from "@/src/theme";
+import { Shine } from "@/src/analysis/Shine";
+import { ScreenMotion } from "@/src/motion";
+import { colors, dotEdges, space } from "@/src/theme";
 import { MisfireSummary, getSummary, misfireKey } from "./api";
 import { slugOf } from "./parts";
+
+const WORD = 19, LINE = 26, WHITE = colors.custom_chipBloodInk;
+
+/** The card's name in glossy yellow: deep yellow letters with a dark shade under them, and their upper half in a paler yellow (the light on them). */
+function GlossWord({ children, testID }: { children: string; testID: string }) {
+  const face = { lineHeight: LINE, letterSpacing: 1.5 };
+  // The paler copy is cut off at half the line's height; text grows with the phone's font size (T stops at 1.6), so the cut does too.
+  const half = LINE * 0.5 * Math.min(PixelRatio.getFontScale(), 1.6);
+  return <View>
+    <T testID={testID} w="heavy" size={WORD} color={colors.custom_glossYellow} numberOfLines={1} style={[face, styles.wordShade]}>{children}</T>
+    <View pointerEvents="none" aria-hidden accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[styles.wordLight, { height: half }]}>
+      <T w="heavy" size={WORD} color={colors.custom_glossYellowHi} numberOfLines={1} style={face}>{children}</T>
+    </View>
+  </View>;
+}
 
 export function HomeMisfire() {
   const router = useRouter();
@@ -21,30 +40,39 @@ export function HomeMisfire() {
   // Nothing is shown before a first graded paper: there is nothing to solve again yet.
   if (!d || !(d.open + d.fixed)) return null;
   const subjects = d.subjects.filter(s => s.open > 0);
-  return <Press testID="home-misfire" onPress={() => router.push("/misfire" as any)} scaleTo={0.985}
-    accessibilityLabel={d.open ? `Misfire. ${d.open} sawaal dobara solve karne hain` : "Misfire. Saari galtiyan samajh li"}>
-    <LinearGradient colors={[colors.custom_chipFrom, colors.custom_chipTo]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} style={styles.card}>
-      <View style={styles.icon}><Glyph name="crosshairs" size={26} color={colors.custom_royalMaroon} stroke={1.5} /></View>
-      <View style={{ flex: 1, minWidth: 0, gap: 4 }}>
-        <View style={styles.top}>
-          <T testID="home-misfire-title" w="heavy" size={17} color={colors.custom_royalMaroon} style={{ letterSpacing: 1 }}>MISFIRE</T>
-          {d.open ? <View style={styles.badge}><T testID="home-misfire-open" w="bold" size={10} color={colors.brandText} style={{ letterSpacing: 1.2 }}>{d.open} OPEN</T></View> : null}
+  // The card's shine rests while another tab or screen is in front.
+  return <ScreenMotion>
+    <Press testID="home-misfire" onPress={() => router.push("/misfire" as any)} scaleTo={0.985} style={styles.press}
+      accessibilityLabel={d.open ? `Misfire. ${d.open} sawaal dobara solve karne hain` : "Misfire. Saari galtiyan samajh li"}>
+      <Shine radius={24} ring={6} dots={colors.custom_misfireRim} edge={dotEdges.misfire} gloss={colors.custom_fireGloss} glint={colors.custom_fireGlint} band={84} part={46} corner face={styles.card}
+        backdrop={<LinearGradient pointerEvents="none" colors={[colors.custom_chipBlood, colors.custom_chipBloodDeep]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={StyleSheet.absoluteFill} />}>
+        <View style={styles.icon}><Glyph name="crosshairs" size={26} color={WHITE} stroke={1.5} /></View>
+        <View style={{ flex: 1, minWidth: 0, gap: 4 }}>
+          <View style={styles.top}>
+            <GlossWord testID="home-misfire-title">MISFIRE</GlossWord>
+            {d.open ? <View style={styles.badge}><T testID="home-misfire-open" w="bold" size={10} color={WHITE} style={{ letterSpacing: 1.2 }}>{d.open} OPEN</T></View> : null}
+          </View>
+          <T testID="home-misfire-line" size={13.5} w="semibold" color={WHITE} numberOfLines={2}>{d.open ? `${d.open} sawaal dobara solve karne hain` : "Saari galtiyan samajh li. Shabash!"}</T>
+          {subjects.length ? <View style={styles.chips}>
+            {subjects.map(s => <View key={s.name} testID={"home-misfire-subject-" + slugOf(s.name)} style={styles.chip}><T w="bold" size={11.5} color={WHITE}>{s.name} {s.open}</T></View>)}
+          </View> : null}
         </View>
-        <T testID="home-misfire-line" size={13.5} w="semibold" color={colors.muted} numberOfLines={2}>{d.open ? `${d.open} sawaal dobara solve karne hain` : "Saari galtiyan samajh li. Shabash!"}</T>
-        {subjects.length ? <View style={styles.chips}>
-          {subjects.map(s => <View key={s.name} testID={"home-misfire-subject-" + slugOf(s.name)} style={styles.chip}><T w="bold" size={11.5} color={colors.custom_royalMaroon}>{s.name} {s.open}</T></View>)}
-        </View> : null}
-      </View>
-      <Glyph name="chevron-right" size={18} color={colors.muted} />
-    </LinearGradient>
-  </Press>;
+        <Glyph name="chevron-right" size={18} color={WHITE} />
+      </Shine>
+    </Press>
+  </ScreenMotion>;
 }
 
 const styles = StyleSheet.create({
-  card: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.lg, borderRadius: 24, borderWidth: 1, borderColor: colors.custom_cardLineStrong },
-  icon: { width: 50, height: 50, borderRadius: 25, backgroundColor: colors.custom_card, borderWidth: 1, borderColor: colors.custom_cardLine, alignItems: "center", justifyContent: "center" },
+  press: { borderRadius: 24 },
+  // 11 inside the 6-point rim of lights: the card is the size it was with its 1-point line and 16 of padding.
+  card: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.lg - 5 },
+  // Clear glass on the red: the icon circle and the subject chips; the count sits on a darker shade.
+  icon: { width: 50, height: 50, borderRadius: 25, backgroundColor: colors.custom_fireGlass, borderWidth: 1, borderColor: colors.custom_fireLine, alignItems: "center", justifyContent: "center" },
   top: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: space.sm },
-  badge: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: colors.brandTertiary },
+  badge: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: colors.custom_fireShade },
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 6, marginTop: 2 },
-  chip: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: colors.brandTertiary },
+  chip: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3, backgroundColor: colors.custom_fireGlass, borderWidth: 1, borderColor: colors.custom_fireLine },
+  wordShade: { textShadowColor: colors.custom_glossYellowShade, textShadowOffset: { width: 0, height: 1.5 }, textShadowRadius: 2 },
+  wordLight: { position: "absolute", left: 0, right: 0, top: 0, overflow: "hidden" },
 });

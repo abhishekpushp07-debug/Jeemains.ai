@@ -5,13 +5,15 @@ import { useRouter } from "expo-router";
 import { T } from "@/src/components/ui";
 import { RewardPanel } from "@/src/components/game";
 import { arena } from "@/src/theme";
+import { MotionWhile } from "@/src/motion";
 import { Alive } from "./Art";
-import { GoldTitle, Panel, RaisedButton } from "./arena";
+import { GoldTitle, Panel, RaisedButton, Segment } from "./arena";
 import { Confetti, Twinkles } from "./juice";
 import { Face, NameLine, Note } from "./parts";
 import { TROPHY } from "./AllIndiaCard";
 import { BattleVictory } from "./BattleVictory";
 import { DailyShare } from "./DailyShare";
+import { DailyMisses } from "./DailyMisses";
 import { Sheet } from "./ui";
 import { DailyResult, DailyRow, grouped, secs, useDailyBoard } from "./daily";
 import { go } from "./social";
@@ -35,17 +37,27 @@ export function DailyBoardList({ items, total, testID = "rf-daily-board" }: { it
 }
 
 /**
- * After the last card: your All India rank, the score, the reward and today's board.
+ * After the last card, in two tabs. Result: your All India rank, the score, the reward and today's board. Misfires: the
+ * cards you did not get right, with the right answers (asked from the server the first time the tab is opened).
  * `fresh` = the round ended just now; a finished round opened again shows its reward quietly (no coin sound, no level-up show).
  */
 export function DailyResultView({ result, uid, onBack, fresh }: { result: DailyResult; uid: string; onBack: () => void; fresh: boolean }) {
   const board = useDailyBoard(uid), reload = board.reload;
   const width = Math.min(useWindowDimensions().width, 560), art = Math.min(width * 0.46, 200);
   const [sharing, setSharing] = useState(false);
+  const [tab, setTab] = useState<"result" | "misses">("result");
+  const [opened, setOpened] = useState(false); // the Misfires pane is made the first time it is opened, then only hidden
   useEffect(() => { reload(); }, [reload, result.rank]);
   // The charge and the confetti need at least one card right (a lone 0/30 player is "#1" by default).
   const won = result.correct > 0, top = won && (result.rank || 999) <= 10, battle = won && !!result.rank && result.rank <= 100;
-  return <ScrollView testID="rf-daily-result" contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+  return <View style={styles.flex}>
+    <View style={styles.tabs}>
+      <Segment prefix="rf-daily-tab" value={tab} onChange={(t) => { setTab(t); if (t === "misses") setOpened(true); }}
+        items={[["result", "Result"], ["misses", `Misfires · ${result.total - result.correct}`]]} />
+    </View>
+    {/* The result stays in place under the Misfires tab and only rests, so coming back never plays the celebration or the coins again. */}
+    <View style={[styles.flex, tab !== "result" && styles.hidden]}><MotionWhile on={tab === "result"}>
+    <ScrollView testID="rf-daily-result" contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
     {top ? <Confetti /> : null}
     {/* Top 100 in India: the battleground victory charge. Everyone else: the trophy. */}
     {battle ? <BattleVictory width={width - 32} rank={result.rank!} /> : <View style={styles.hero}>
@@ -65,12 +77,16 @@ export function DailyResultView({ result, uid, onBack, fresh }: { result: DailyR
     <T w="bold" size={12} color={arena.muted} style={styles.center}>{result.total} new PCM cards at midnight. Same cards for everyone, one try.</T>
     <RaisedButton testID="rf-daily-back" label="BACK TO RAPID FIRE" height={56} onPress={onBack} />
     <Sheet visible={sharing} onClose={() => setSharing(false)} testID="rf-daily-share-sheet"><DailyShare result={result} onBack={() => setSharing(false)} /></Sheet>
-  </ScrollView>;
+    </ScrollView>
+    </MotionWhile></View>
+    {opened ? <View style={[styles.flex, tab !== "misses" && styles.hidden]}><DailyMisses result={result} uid={uid} /></View> : null}
+  </View>;
 }
 
 const styles = StyleSheet.create({
   flex: { flex: 1, minWidth: 0 }, center: { textAlign: "center" }, kicker: { letterSpacing: 1.6, textAlign: "center" },
   content: { paddingHorizontal: 16, paddingTop: 4, paddingBottom: 32, gap: 12 },
+  tabs: { paddingHorizontal: 16, paddingBottom: 8 }, hidden: { display: "none" },
   hero: { alignSelf: "center" },
   stats: { flexDirection: "row", gap: 10 }, stat: { flex: 1, alignItems: "center", paddingVertical: 12 },
   board: { padding: 12, gap: 8 },

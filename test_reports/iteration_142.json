@@ -1,0 +1,92 @@
+{
+  "summary": "Iteration 142 — tested the five owner asks (Home Misfire card, My Tests plain-white cards, All India Rapid Misfires tab, Rank Add details bar, Rank Predictor maroon) + backend route GET /api/rf/daily/misses + regression of the two older daily pytest files. Backend: 7/7 pytests pass (the misses file PASSES clean; test_rf_daily.py initially saw rank=3 vs expected 2 due to two leftover TEST-daily-* rows on the TEST board from a pytest run that was killed by the shell timeout — removed exactly those two TEST-daily-* uids and the test is green). Frontend on web preview at 390x844 against the QA learner 7004186276/5524: all five surfaces behave as asked. No pageerror observed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "feature_verification": {
+    "home_misfire_card": {
+      "title_text": "MISFIRE",
+      "title_color_computed": "rgb(255, 198, 26)",
+      "dotted_rim_evenodd_path_found": true,
+      "home-misfire-open_badge": "present",
+      "home-misfire-line": "present",
+      "home-misfire-subject chips count": 3,
+      "tap_opens_/misfire": true,
+      "note": "Outer home-misfire container shows bg transparent/bgImage none because the blood-red gradient is painted on the SVG rim + inner layers (expo-linear-gradient on child); the visual check (screenshot) shows the red card with yellow MISFIRE."
+    },
+    "my_tests_cards_plain_white": {
+      "attempt_containers_backgroundImage": "linear-gradient(rgb(255, 255, 255), rgb(243, 243, 246))",
+      "border_top_color": "rgb(222, 222, 228)",
+      "border_top_width": "1px",
+      "tabs_colored": "my-tests-tab-completed bg rgb(255, 130, 171) (pink) when active; inactive tabs transparent — tabs keep colour, cards are plain white with thin grey line",
+      "verdict": "PASS"
+    },
+    "rank_profile_add_details": {
+      "title": "Add details",
+      "button": "Click",
+      "body_contains_'bharo'": false,
+      "dotted_rim_found": true,
+      "verdict": "PASS"
+    },
+    "rank_predictor_maroon": {
+      "rp-input-head backgroundColor": "rgb(176, 28, 79)",
+      "rp-show backgroundColor": "rgb(176, 28, 79)",
+      "readable_result_cards_visible": "rp-card / rp-card-percentile / rp-card-crl / rp-card-summary / rp-card-serial / rp-levels / rp-share / rp-colleges all rendered after submitting 180 marks",
+      "note": "Direct computed `color` on rp-show reported rgb(0,0,0), but that is the outer Pressable wrapper; the visible text ('Rank Predictor' header + CTA label) is white on screen — not flagged."
+    },
+    "rapid_daily_misfires_tab": {
+      "tabs_text": "'Result' + 'Misfires · 36'",
+      "asked_before_misfires_tap": 0,
+      "asked_after_first_misfires_tap": 1,
+      "asked_after_R_M_R_M_sequence": 1,
+      "sounds_no_replay_on_result_reopen": true,
+      "misses_summary": "'3 wrong · 2 timed out · 1 skipped'",
+      "miss_cards_rendered": ["rf-daily-miss-0","rf-daily-miss-1","rf-daily-miss-2","rf-daily-miss-4","rf-daily-miss-6","rf-daily-miss-8"],
+      "per_card_subfields": "outcome/prompt/correct/explain present on all; chosen only on Wrong (miss 0,1,6)",
+      "subject_pills": ["all","physics","chemistry","mathematics"],
+      "physics_filter_shows_2_cards": true,
+      "sealed_footer": "30 cards you did not reach are not shown. All of India plays the same cards today, so their answers stay sealed.",
+      "weak_footer": "Wrong and timed-out cards are also kept in Weak cards in the lobby. Get one right there to clear it.",
+      "error_state": "rf-daily-misses-error shows 'Could not load the cards. Try again.' with 'Retry' button; tapping Retry fires a second request (asked goes 1 -> 2)",
+      "flawless_state": "shows 'No misfires. Flawless!' + 'Every card right today.' with no misses request (route handler not hit)",
+      "maths_typeset": "SF₆, x², MLT⁻², 6.022 × 10²³, g = 10 m/s² all render as superscripts/subscripts",
+      "verdict": "PASS"
+    },
+    "regression_smoke": {
+      "/rapid lobby": "All India card + popup visible, Quick Play / Pen Down Fight / Weak cards / Solo Sprint all rendered",
+      "/live AITS": "62 days header, 100% AI chip, streak card with 3 din ki streak, Best 5 longest run, 2 skipped days missed, Day 10 result card with 222/300 marks, AITS Leaderboard tile, day chips 7d/15d/30d/45d/62d all visible",
+      "no_pageerror_captured": true
+    }
+  },
+  "backend_pytest": {
+    "tests/test_rf_daily_misses.py": "1 passed",
+    "tests/test_rf_daily_pcm45.py": "4 passed",
+    "tests/test_rf_daily.py": "initially 1 failed (test_same_thirty_cards_paced_and_ranked: assert done_b.rank == 2 got 3) because two leftover TEST-daily-* rows from earlier interrupted runs were sitting on the shared TEST board; after deleting ONLY those two exact uids (TEST-daily-f456e4e5bd finished 45/4041ms, TEST-daily-85855e7432 playing at i=41) the test passed on the next run (2/2 pass)",
+    "junit_xml": ["/app/test_reports/pytest/iter142_misses.xml", "/app/test_reports/pytest/iter142_daily_regression.xml"]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_rf_daily_misses.py (already covers 404 states, 422 bad day, another player's day, timed_out + skipped + correct + incorrect, sealed count — ran green as-is)",
+    "/app/tests/rf_daily_fixture.py (UI fixture used)",
+    "/app/tests/shine_helpers.py (sign-in)"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "backend/daily.py /misses route: correctly filters out `outcome == 'correct'`, only emits cards with an existing card lookup, and silences cards filled in by /finish via the heuristic `row['outcome'] == 'skipped' and not row['ms']` — those cards are counted in `sealed` instead. Matches the spec: a card never shown to this student can never leak its answer.",
+    "No write path: the route is read-only (verified by code inspection) and no DB writes happen when it 200s or 404s.",
+    "Frontend DailyMisses component: result and misses panes keep their own state (tab toggle does not re-fetch); the misses pane uses a local one-shot fetch guard — this is why asked stays 1 even on R→M→R→M; caching is in-memory for this screen only, which is desirable.",
+    "test_rf_daily.py is order-sensitive and relies on TEST board being empty for today; a flaky-killed run can leave leftover TEST-daily-* rows. Suggest the test be hardened to assert its own run's relative ranks (e.g., 'b is immediately below a') rather than absolute rank == 2, so a non-cleaned leftover does not cause false failures. Not a blocker for this iteration."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (7/7 after legitimate TEST-prefix leftover cleanup)", "frontend": "100% of owner asks + regression"},
+  "seed_data_creation": "None added. Removed two TEST-daily-* leftovers (TEST-daily-f456e4e5bd, TEST-daily-85855e7432) that were created by test_rf_daily.py itself on an earlier run that was killed by a shell timeout before `finally: cleanup(a, b)` could run. Deletion was by exact uid only (the exact prefix this test file uses); no real learner rows touched. The TEST board is otherwise empty for today. The QA learner's real daily round was never started, answered or finished — the UI used fake_daily_done() route handlers so /api/rf/daily/start|answer|finish|misses never reached the server during the browser checks. No real PUT /api/jl/profile/display-name sent. No paper started or submitted.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 142 PASS. Everything owner asked for landed correctly on the preview: Home Misfire blood-red/yellow with dotted rim and SVG fill-rule=evenodd path (verified in DOM); My Tests cards are plain white (linear-gradient #fff → #f3f3f6) with 1 px #DEDEE4 top border and NO moving edge (tabs retain pink/color); Rank 'Add details' + 'Click' with dotted rim and no 'Bharo' word anywhere; Rank Predictor rp-input-head + rp-show both rgb(176,28,79) maroon and result cards readable; All India Rapid /rapid/daily now has two tabs with 'Misfires · 36', every testID listed in the request renders, asked stays 1 across R↔M toggles, Error state shows rf-daily-misses-error + Retry that refetches, Flawless state shows 'No misfires. Flawless!' with no network call. Backend GET /api/rf/daily/misses passes spec (404 before done / wrong player / unplayed day; 422 bad day; items only for cards the student was shown; sealed counts cards never reached). test_rf_daily.py is slightly order-sensitive — if it fails with rank off by one, check db.rf_daily_plays for stray `test:true, status:done` TEST-daily-* rows for today and clean exactly those uids (they are only ever created by this file). No code changes made by the testing agent."
+}

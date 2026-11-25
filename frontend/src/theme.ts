@@ -200,6 +200,9 @@ const dark = {
   // that is over is parrot green with black words (7 : 1 or more), whether or not its paper was taken.
   custom_chipBlood: "#C1121F", custom_chipBloodDeep: "#8A0B15", custom_chipBloodInk: "#FFFFFF", custom_chipBloodSoft: "#FFE9EC",
   custom_chipBloodGloss: "rgba(255,255,255,0.26)", custom_chipBloodGlint: "rgba(255,255,255,0.58)",
+  // Home's Misfire card is that blood red with white words: a deeper rim carries its row of lights, and its name is in
+  // glossy yellow (deep yellow letters, their upper half paler, a dark shade under them).
+  custom_misfireRim: "#5C060D", custom_glossYellow: "#FFC61A", custom_glossYellowHi: "#FFF3A6", custom_glossYellowShade: "rgba(45,3,7,0.6)",
   custom_chipParrot: "#96EA3A", custom_chipParrotDeep: "#46BE1B", custom_chipParrotInk: "#0F0F12", custom_chipParrotSoft: "#123F08",
   custom_chipParrotGloss: "rgba(255,255,255,0.42)", custom_chipParrotGlint: "rgba(255,255,255,0.85)",
   // Matte royal maroon for exam names; light royal blue that matches the Rapid Fire diamond.
@@ -256,7 +259,9 @@ const dark = {
   custom_dreamTealFrom: "#12A594", custom_dreamTealMid: "#0B6E64", custom_dreamTealTo: "#084840", custom_dreamTrack: "rgba(0,0,0,0.32)",
   // Rank tool forms: each tool's form gets its own bright colour (main, soft wash, frame line); text on it is near-black,
   // except blood red (College predictor) which carries white text and a lighter red for words on black.
-  custom_fYellow: "#FFD60A", custom_fYellowSoft: "rgba(255,214,10,0.12)", custom_fYellowLine: "rgba(255,214,10,0.62)",
+  // Rank predictor's form is maroon, as its tile: white text on it, and a rose for words on black.
+  custom_fMaroon: "#B01C4F", custom_fMaroonText: "#FF8FB1", custom_fMaroonSoft: "rgba(188,31,85,0.18)", custom_fMaroonLine: "rgba(255,143,177,0.65)",
+  custom_fYellow: "#FFD60A",
   custom_fTeal: "#2DE1C2", custom_fTealSoft: "rgba(45,225,194,0.12)", custom_fTealLine: "rgba(45,225,194,0.62)",
   custom_fLime: "#B5F23D", custom_fLimeSoft: "rgba(181,242,61,0.12)", custom_fLimeLine: "rgba(181,242,61,0.62)",
   custom_fBlood: "#D10F2A", custom_fBloodText: "#FF4D5E", custom_fBloodSoft: "rgba(209,15,42,0.16)", custom_fBloodLine: "rgba(255,59,78,0.75)",
@@ -468,10 +473,10 @@ export const toolEdges = {
   violet: ["#C9A0FF", "#FF8AD8", "#7FE7FF", "#C9A0FF"],
 } as const;
 // The three colours that run round each Rank form, from the form's own colour family (the first comes back at the end):
-// rank = yellow, tangerine, cream; cutoff = aqua, sky blue, mint; target = lime, sun yellow, emerald; college = ruby, gold,
+// rank = rose, gold, blush; cutoff = aqua, sky blue, mint; target = lime, sun yellow, emerald; college = ruby, gold,
 // rose; compare = sky blue, azure, lavender; dream = lilac, pink, cyan.
 export const formEdges = {
-  rank: ["#FFD60A", "#FF8A00", "#FFF3B0", "#FFD60A"],
+  rank: ["#FF7AA2", "#FFC857", "#FFD9E4", "#FF7AA2"],
   cutoff: ["#2DE1C2", "#5CC8FF", "#D5FFF7", "#2DE1C2"],
   target: ["#B5F23D", "#FFE14D", "#22C55E", "#B5F23D"],
   college: ["#FF3B4E", "#FFC857", "#FF8FA0", "#FF3B4E"],
@@ -484,6 +489,12 @@ export const chipEdges = {
   blood: ["#FFC857", "#FF5C7A", "#FFD9E0", "#FFC857"],
   parrot: ["#FFE14D", "#0B8A43", "#DFFF94", "#FFE14D"],
   chosen: ["#0F0F12", "#0F0F12", "#FFC857", "#0F0F12", "#0F0F12"],
+} as const;
+// The lights that run through a dotted rim (the first comes back at the end): Home's Misfire card = sun yellow, white and
+// aqua (the opposite of its red); the Rank tab's details bar = rose, sun yellow, white and orchid.
+export const dotEdges = {
+  misfire: ["#FFD60A", "#FFFFFF", "#2DE1C2", "#FFD60A"],
+  details: ["#FF2D7A", "#FFD60A", "#FFFFFF", "#B45CFF", "#FF2D7A"],
 } as const;
 // The three colours that run round a big series day card, from its status colour's own family (the first comes back at
 // the end): today = coral, rose, gold; done (royal blue) = gold, sky blue, lavender; upcoming = teal, azure, lavender; missed = bronze, dusty rose, sand.

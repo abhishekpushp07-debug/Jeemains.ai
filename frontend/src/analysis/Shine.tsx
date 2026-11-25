@@ -13,6 +13,7 @@ import Svg, { Path } from "react-native-svg";
 import { useStill } from "@/src/motion";
 import { colors, shineColors } from "@/src/theme";
 import { CALM, STILL, shineMoves, useShineLevel } from "./smooth";
+import { DotRim } from "./DotRim";
 
 const TURN = 4200, CYCLE = 3600, TWINKLE = 5200, CHANGE = 5600;
 const SPIN = css.keyframes({ from: { transform: [{ rotate: "0deg" }] }, to: { transform: [{ rotate: "360deg" }] } });
@@ -73,11 +74,12 @@ function Sparkles({ count }: { count: number }) {
  * default; a face with `ring` 0 has no edge); `gloss` and `glint` are each drawn only when given; `face` = how the face
  * lays out what is inside it; `band` = how wide the glint is; `corner` = the glint goes
  * from one corner to the opposite one (for a big card); `fill` = stretch to the height of the row it sits in; `delay`
- * staggers neighbours; `rest` holds everything still.
+ * staggers neighbours; `rest` holds everything still; `dots` = a dotted edge: the rim is painted in this colour and the
+ * running colours show only through a row of round holes in it, like a string of lights.
  */
-export function Shine({ children, radius, ring, tones, backdrop, edge = shineColors, gloss, glint, band = 0, part = 40, corner, fill, delay = 0, sparkles = 0, rest, face }: {
+export function Shine({ children, radius, ring, tones, backdrop, edge = shineColors, gloss, glint, band = 0, part = 40, corner, fill, delay = 0, sparkles = 0, rest, face, dots }: {
   children: React.ReactNode; radius: number; ring: number; tones?: readonly [string, string, ...string[]]; backdrop?: React.ReactNode; edge?: readonly [string, string, ...string[]];
-  gloss?: string; glint?: string; band?: number; part?: number; corner?: boolean; fill?: boolean; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>;
+  gloss?: string; glint?: string; band?: number; part?: number; corner?: boolean; fill?: boolean; delay?: number; sparkles?: number; rest?: boolean; face?: StyleProp<ViewStyle>; dots?: string;
 }) {
   const level = useShineLevel();
   const still = useStill() || !!rest || level === STILL;
@@ -112,6 +114,7 @@ export function Shine({ children, radius, ring, tones, backdrop, edge = shineCol
         </Animated.View> : null}
         {children}
       </View>
+      {dots && ring && box.w ? <DotRim w={box.w} h={box.h} radius={radius} ring={ring} color={dots} /> : null}
     </View>
     {still || calm || !sparkles ? null : <Sparkles count={sparkles} />}
   </View>;

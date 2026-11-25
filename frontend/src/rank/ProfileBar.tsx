@@ -1,10 +1,13 @@
 // "Meri details" at the top of the Rank tab: marks, percentile, rank and category, typed once (all optional).
-// Closed it is one line with Edit; open it is a small form per exam. Save fills every Rank tool with these values.
+// Closed it is one baby pink bar ("Add details" + Click, or the saved line + Edit) with a row of lights running round it;
+// open it is a small form per exam. Save fills every Rank tool with these values.
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
-import { rankColors as colors, radius, space } from "@/src/theme";
+import { Shine } from "@/src/analysis/Shine";
+import { pinkShine } from "@/src/components/series/looks";
+import { dotEdges, rankColors as colors, radius, space } from "@/src/theme";
 import { Category, CutoffExam, fmt, Level, ScoreKind } from "./api";
 import { CATEGORY_LABEL, LEVEL } from "./tones";
 import { NumberField, Picker, RemoveButton, Strip, Switch, Toggle } from "./controls";
@@ -40,20 +43,23 @@ export function ProfileBar({ states }: { states: string[] }) {
   const [saved, setSaved] = useState(false);
   if (open) return <ProfileForm start={profile} states={states} onClose={done => { setOpen(false); setSaved(done); }} />;
   const filled = profile.at > 0;
-  return <Press testID="rank-profile" onPress={() => { setSaved(false); setOpen(true); }} scaleTo={0.99} style={styles.bar} accessibilityRole="button"
-    accessibilityLabel={filled ? `Meri details: ${profileLine(profile)}. Edit karo` : "Apni details ek baar daalo"}>
-    <View style={styles.icon}><Glyph name="account-outline" size={17} color={colors.custom_rankSilver} stroke={1.5} /></View>
-    <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
-      <T w="bold" size={14}>{filled ? "Meri details" : "Apni details ek baar daalo"}</T>
-      <T testID="rank-profile-summary" size={12} color={colors.muted} numberOfLines={3}>
-        {filled ? profileLine(profile) : "Marks, percentile, rank aur category. Har tool mein pehle se bhare milenge."}
-      </T>
-      {saved ? <T testID="rank-profile-saved" w="semibold" size={11.5} color={colors.success}>Save ho gaya. Har tool mein bhar diya; kisi bhi tool mein alag se badal sakte ho.</T> : null}
-    </View>
-    <View testID="rank-profile-edit" style={styles.edit}>
-      <Glyph name={filled ? "pencil" : "plus"} size={14} color={colors.onSurfaceInverse} stroke={2} />
-      <T w="heavy" size={13} color={colors.onSurfaceInverse}>{filled ? "Edit" : "Bharo"}</T>
-    </View>
+  return <Press testID="rank-profile" onPress={() => { setSaved(false); setOpen(true); }} scaleTo={0.99} style={styles.press} accessibilityRole="button"
+    accessibilityLabel={filled ? `Meri details: ${profileLine(profile)}. Edit karo` : "Add details"}>
+    {/* The series streak card's baby pink (gloss, a glint from corner to corner); its edge is a row of lights on the black page. */}
+    <Shine {...pinkShine} radius={20} ring={6} band={64} edge={dotEdges.details} dots={colors.custom_rankBg} face={styles.bar}>
+      <View style={styles.icon}><Glyph name="account-outline" size={17} color={colors.custom_tabInk} stroke={1.5} /></View>
+      <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
+        <T testID="rank-profile-title" w="bold" size={14} color={colors.custom_tabInk}>{filled ? "Meri details" : "Add details"}</T>
+        <T testID="rank-profile-summary" size={12} color={colors.custom_seriesPinkInk} numberOfLines={3}>
+          {filled ? profileLine(profile) : "Marks, percentile, rank aur category. Har tool mein pehle se bhare milenge."}
+        </T>
+        {saved ? <T testID="rank-profile-saved" w="semibold" size={11.5} color={colors.custom_tabInk}>Save ho gaya. Har tool mein bhar diya; kisi bhi tool mein alag se badal sakte ho.</T> : null}
+      </View>
+      <View testID="rank-profile-edit" style={styles.edit}>
+        <Glyph name={filled ? "pencil" : "plus"} size={14} color={colors.onBrandPrimary} stroke={2} />
+        <T w="heavy" size={13} color={colors.onBrandPrimary}>{filled ? "Edit" : "Click"}</T>
+      </View>
+    </Shine>
   </Press>;
 }
 
@@ -125,10 +131,11 @@ function ProfileForm({ start, states, onClose }: { start: RankProfile; states: s
 }
 
 const styles = StyleSheet.create({
-  bar: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 60, paddingVertical: space.sm, paddingHorizontal: space.md, borderRadius: 18,
-    borderWidth: 1, borderColor: colors.custom_rankSilverLine, backgroundColor: colors.custom_card },
-  icon: { width: 34, height: 34, borderRadius: 17, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_cardRaised, alignItems: "center", justifyContent: "center" },
-  edit: { flexDirection: "row", alignItems: "center", gap: 5, minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, backgroundColor: colors.onSurface },
+  press: { borderRadius: 20 },
+  bar: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 56, paddingVertical: space.sm, paddingHorizontal: 10 },
+  icon: { width: 34, height: 34, borderRadius: 17, backgroundColor: colors.custom_tabChip, alignItems: "center", justifyContent: "center" },
+  // Black on the pink, as the pink Rank card's Share button.
+  edit: { flexDirection: "row", alignItems: "center", gap: 5, minHeight: 44, paddingHorizontal: 14, borderRadius: radius.pill, backgroundColor: colors.custom_tabInk },
   wrap: { flexDirection: "row", flexWrap: "wrap", gap: space.sm },
   row: { flexDirection: "row", alignItems: "center", gap: space.sm, flexWrap: "wrap" },
   rowLabel: { width: 44 },
