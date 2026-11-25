@@ -1,0 +1,18 @@
+{
+  "summary": "Packet D (storage badge that tells the truth) edge testing for iteration 236. Re-ran the main suite storage_badge236.py (62/62 PASS) to confirm the baseline, then added /app/backend/tests/storage_badge_edge237.py (14/14 PASS) covering edges not already covered by the main agent: (1) three concurrent GET /api/admin/storage/health triggers only ONE probe (asyncio.shield), (2) a probe whose DELETE fails leaves one check file and the daily sweep later removes it, (3) a crashed check_lease in the past does NOT block the next probe, (4) a crashed big_lease in the past does NOT block the next /big-test, (5) summary() on an EMPTY record and on a PARTIALLY filled record returns a valid shape with level=yellow 'Storage ki jaanch chal rahi hai.' and safe defaults for every sub-block, (6) 50 flooded failure notes at once still cap the errors list at 20 newest-first, (7) 25 probes in a row still cap readings at 20 per store. No application code change was needed; the isolated test DB was dropped at the end.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/storage_badge_edge237.py", "/app/backend/tests/storage_badge236.py"],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "storage_health.py line 302: check_lease timeout is 120s (hard-coded in the $set) and the module constant BIG_LEASE=600 for big_lease; both are implicit expiries (only '$not: {$gt: t}' guards the next call). This is correct behaviour (verified by edge tests 3 and 4) but the 120 s value is not a named constant like BIG_LEASE — consider naming it CHECK_LEASE for symmetry and documentation.",
+  "storage_health.py line 161: the merge+update uses a single rev-guarded update_one retried up to 5 times; the race test in storage_badge236 (12 writers vs 60 outside writes) passed, which confirms correctness. No change needed."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100% (62/62 main + 14/14 edges)", "frontend": "not re-run (UI covered by main agent ui_badge236 29/29)"},
+  "seed_data_creation": "none (isolated DB tejas_isolated_* dropped after each run)",
+  "test_credentials": "harness-generated TEST owner/reviewer per run; no real credentials used",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Baseline packet D tests all pass: storage_badge236 (62), storage_badge_real236 (9, real preview Supabase), ui_badge236 (29 desktop+mobile), and new storage_badge_edge237 (14). The edge file covers: concurrent /health one-probe, delete-fail→sweep, check_lease/big_lease expiry, empty+partial summary() shape, caps of 20 on errors and readings. Run order is still sequential (preview MongoDB cannot take parallel test DBs)."
+}

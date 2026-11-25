@@ -338,6 +338,19 @@ async def main():
         r = await own.post(BIG); h = await health(own)
         await put({'big_lease': 0})
         check('E. a big-file test is already running (on any server): a second one is refused, the badge says it is running', r.status_code == 409 and h['big']['running'] is True, (r.status_code, h['big']))
+        real_big, answer = S.probe_big, SH.BIG_ANSWER
+
+        def slow_big():
+            time.sleep(1.5)   # a slow line: the real sleep of this test, not the storage code's
+            return real_big()
+        S.probe_big, SH.BIG_ANSWER = slow_big, .1
+        r = await own.post(BIG); t = J(r); h = await health(own)
+        S.probe_big, SH.BIG_ANSWER = real_big, answer
+        check('E. a big-file test slower than the button waits: the button gets its answer without a result, the badge says the test is running', r.status_code == 200 and 'big_test' in t and t['big_test'] is None
+              and h['big']['running'] is True, (r.status_code, t.get('big_test', 'missing'), h['big']))
+        await asyncio.gather(*list(SH._tasks)); d, h = await rec(), await health(own)
+        check('E. ...the test carries on behind and writes its result into the record; its turn is given back, no test file is left', d['big']['ok'] and d['big']['how'] == 'test' and time.time() - d['big']['at'] < 30
+              and not d.get('big_lease') and h['big']['running'] is False and health_files(sb) == [], (d['big'], d.get('big_lease'), health_files(sb)))
         url = os.environ.pop('SUPABASE_URL')
         r = await own.post(BIG); h = J(await own.get(HEALTH + '?fresh=true'))
         os.environ['SUPABASE_URL'] = url

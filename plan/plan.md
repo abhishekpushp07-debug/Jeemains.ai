@@ -82,7 +82,12 @@ Picture ka safar:
 | Pocket 0: asli wajah ka saboot | Poora |
 | Pocket 1: badi file ka raasta | Bana aur jaancha hua (testing agent sahit). Sirf preview me. |
 | Pocket 2: ek file ki galti us file tak, "Atki hai", 15 minute ki chetavni row ke andar | Bana hua. Builder ki apni jaanch paas: 19 suite me 883 jaanch, browser 32/32, asli Supabase par test file se 8/8. Testing agent ki alag jaanch baaki. Sirf preview me. |
-| Baaki sab (rok, Delete, badge, saboot, fallback) | Shuru nahi |
+| Packet A: Pocket 1 + 2 ki alag jaanch (25 Nov) | Poora: testing agent (iteration_224) aur alag code review paas. Upar ki line ka "Testing agent ki alag jaanch baaki" ab purana hai. Sirf preview me. |
+| Packet B: latke kadam ki rok | Bana aur jaancha hua (testing agent iteration_225 + alag code review). Sirf preview me. |
+| Packet C: Delete button | Bana aur jaancha hua (testing agent iteration_225 + alag code review). Sirf preview me. |
+| Packet D: Pocket 3, sachcha badge | Bana aur jaancha hua (testing agent iteration_226). Alag code review BAAKI. Sirf preview me. |
+| Packet E, F, G (saboot, fallback, Supabase me lana) | Shuru nahi. E ke liye sirf code padha gaya; koi code nahi likha gaya. |
+| Deploy | Ek bhi nahi hua. Poora haal: memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md |
 
 Pocket 2 ki jaanch ki seema:
 - 15 minute sach me ruk kar nahi, ghadi aage badha kar jaanche gaye.

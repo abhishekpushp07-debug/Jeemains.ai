@@ -14,6 +14,7 @@ log = logging.getLogger(__name__)
 FRESH, SLOW_MS, ALERT_AFTER = 60, 5000, 600   # a healthy check (new file written, read back) was measured at 1.7 to 3.1 s; 5 s is slow
 HELD, KEEP, BIG_EVERY, BIG_AGAIN, WATCH = 600, 20, 86400, 900, 30
 BIG_LEASE, BIG_ANSWER = 600, 45   # a big-file test may take minutes on a bad line; the button gets its answer within 45 s either way
+CHECK_LEASE = 120   # one server checks at a time; a check that died gives its turn back after 2 minutes
 ID = 'state'
 CHECK_FILE, BIG_FILE = 'Jaanch file', 'Badi test file (7 MB)'
 NOT_SET = 'Supabase set nahi hai. Nayi files Emergent storage mein save ho rahi hain.'
@@ -299,7 +300,7 @@ async def current():
 async def _check():
     await record()
     t = time.time()
-    held = await col().update_one({'_id': ID, 'check_lease': {'$not': {'$gt': t}}}, {'$set': {'check_lease': t + 120}})
+    held = await col().update_one({'_id': ID, 'check_lease': {'$not': {'$gt': t}}}, {'$set': {'check_lease': t + CHECK_LEASE}})
     if not held.modified_count:
         return 0   # another server is checking this very moment: its answer is in the record
     try:

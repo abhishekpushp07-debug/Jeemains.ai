@@ -1,3 +1,13 @@
+## Status — 2026-11-25 (07:25 UTC): Storage packets A–D built and tested in preview; E, F, G NOT started; NOTHING deployed. Fork handoff: memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md (read it first)
+- Packet D (truthful storage badge, shared record tejas_storage_state) verified: storage_badge236 64/64, storage_badge_edge237 14/14 (testing agent iteration_226), storage_badge_real236 9/9 on the real preview bucket, ui_badge236 29/29 (desktop + 390 px).
+- Full regression after the last app-code change, one suite at a time (07:12–07:19 UTC): 26 suites, 1,111 checks, 0 failed. Logs: test_reports/handoff_2026-11-25/.
+- Still missing before any deploy: a separate code review of the Packet D code. The owner's change list ("Deploy se pehle") is now at the end of memory/NIGHT_REPORT.md.
+- Packet E (picture proof before Live/Scheduled): only code was read. Findings and a suggested order are in section 8 of the handoff; none of them is reproduced by a test yet.
+- Owner is awake again: decisions waiting for him are in section 12 of the handoff (deploy now or after E; stop after each packet or keep building; two old test databases).
+- Environment: raise the mongod open-file limit before any test run (`prlimit --pid $(pgrep -x mongod | head -n1) --nofile=65536:1048576`); ONE suite or ONE bridge at a time. Runner scripts: backend/tests/runners/.
+
+
+
 ## Status — 2026-11-24 (night): OWNER ASLEEP, "keep building, do not stop, do not ask me anything". Approved plan = plan/plan.md (packets A-G).
 - Owner's words (21:55 UTC): going to sleep ~8 h; keep building packet after packet; do NOT stop to ask him to publish; ask NO question; he gives full authority for every decision; "do not break what you have already built"; work in small pockets.
 - Decision taken by the builder: NO deploy while he sleeps (the plan's rule "deploy only when the owner writes deploy" stays). The per-packet stop is replaced by a written report per packet in memory/NIGHT_REPORT.md (Roman Hinglish) that he reads when he wakes.

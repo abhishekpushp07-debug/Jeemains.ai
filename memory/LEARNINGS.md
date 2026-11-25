@@ -10,3 +10,13 @@
   4. To test the cutter on many pages use `tests/cut_scan209.py`: it calls the page reader and the cutter directly on the PDF, needs no database and uses all CPU cores.
 - Mitigation applied to the running process only: `prlimit --pid <mongod> --nofile=65536:1048576` (soft limit raised inside the existing hard limit; no config file changed). It is lost when mongod restarts, so apply it again before any harness run after a pod restart.
 - Cleanup done: the 8 databases created by that run were dropped by exact name after checking each held only probe fixtures. Two older leftovers were NOT touched because this session did not create them: `tejas_isolated_book170_436fa878` (files made 14:58 UTC, no books, no users) and `tejas_isolated_book170_50fcbf47` (files made 15:41 UTC, no books, one harness user). They look like harness databases orphaned by the earlier aborts; they only cost open files.
+
+
+## 2026-11-25: notes from the storage packets (A–D)
+- Even ONE suite at a time is close to the default limit: the 26-suite regression ended with mongod holding 895 open files (limit 1024 by default). Raise the limit before every run: `prlimit --pid $(pgrep -x mongod | head -n1) --nofile=65536:1048576`. It is lost when mongod restarts or the pod is new.
+- `tests/ui_storage_wait_qa224.py` needs `/tmp/uibridge224/qa_variant.pdf`; nothing creates it. Make it after the bridge says READY: `python -c "import sys; sys.path.insert(0,'tests'); from cut_bridge207 import cut_pdf; open('/tmp/uibridge224/qa_variant.pdf','wb').write(cut_pdf('QAVAR', long=True))"`.
+- A new API route without an entry in `tejas/route_contracts.py` (and, with a body, in `request_contracts.MODELS`) stops the server at startup.
+- The Supabase bucket name comes from `FRONTEND_URL`. A fork with a new preview address gets a new, empty bucket.
+- `/root/p2` (scratch logs, runner scripts) is outside the repo. The runner scripts are copied to `backend/tests/runners/`; the logs that matter go to `test_reports/`.
+- Write a code review's result into a file as soon as it arrives; one answer was cut off by the tool and a "medium" point was lost for hours.
+

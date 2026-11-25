@@ -57,3 +57,41 @@ Har packet ke baad rukne ki jagah maine yahan us packet ki chhoti report likhi h
   - Agar kisi PDF ka ek hi kadam 20 minute se zyada chalta rahe aur usi beech Delete dabe, to us upload ke apne folder me kuch pictures bach sakti hain; agli 15-minute jaanch unhe hata deti hai. Kisi doosre upload par asar nahi.
   - Do server hon to har server sirf apne kadam par nazar rakhta hai. Yeh theek hai, par do server par chala kar nahi dekha gaya (preview me ek hi server hai).
 - Deploy 2 ki teeno shartein poori: testing agent paas, alag code review ho gaya, badlavon ki list is file ke ant me "Deploy se pehle" me hai. Deploy tabhi jab aap "deploy" likhen.
+
+
+## Packet D — sach bolne wala storage badge (bana, jaancha) — 25 Nov, 07:25 UTC
+- Kya bana: storage ki haalat ab database ke ek hi record me rehti hai, isliye har server ek hi baat dikhata hai. Badge me teen line: "Supabase · Pictures (chhoti file)", "Supabase · PDF (badi file)", "Emergent (fallback)". Har line ke saath: kab jaanchi gayi, kaise, kitna samay laga.
+- Rang: hara (dono raaste theek, kuch ruka nahi), peela (dheema, koi file atki, 10 minute se ruki, badi file ka raasta fail ya kabhi jaancha nahi, ya Emergent chup), laal (Supabase jawab nahi de raha ya project par rok).
+- Har jaanch naye naam ki test file se: likhi, wapas padhi, hatayi. Isse "Read back different bytes" wali galat chetavni nahi aati.
+- "Badi file ka test" button: lagbhag 7 MB ki test file asli tukdon wale raaste se jati hai, wapas padhi jati hai, hata di jati hai. Yahi test apne aap bhi chalta hai (kabhi jaancha na ho, koi PDF us raaste par ruki ho, aur din me ek baar).
+- Machine panel me aakhri 20 storage galtiyan (kab, kaun si file, kaun sa storage, kaun sa raasta, wajah) aur dono storage ki aakhri 20 reading ki speed.
+- Nayi/badli file: backend/tejas/storage_health.py (dobara likhi), tejas_storage.py, jobs.py, machine.py, ceo.py, server.py; screen: StorageBadge.js, MachinePanel.js, master.css.
+- Jaanch:
+  - tests/storage_badge236.py 64/64 (alag test database, nakli Supabase).
+  - tests/storage_badge_real236.py 9/9 ASLI Supabase par (preview bucket, sirf app ki apni jaanch file; koi file peeche nahi bachi).
+  - Browser, desktop + 390px mobile: tests/ui_badge236.py 29/29, koi fail API call nahi.
+  - Testing agent (iteration_226): koi galti nahi mili; usne 14 nayi jaanch likhi (tests/storage_badge_edge237.py), sab paas.
+  - Purani 26 suite ek-ek karke dobara (07:12 se 07:19 UTC): 1,111 jaanch, 0 fail.
+- Jo jaancha NAHI ja saka:
+  - Live par kuch nahi (deploy nahi hua).
+  - Do server ka ek record baantna ek hi process ke andar jaancha gaya; preview me ek hi server hai.
+  - 10 minute, 15 minute aur 24 ghante ghadi aage badha kar jaanche gaye, sach me ruk kar nahi.
+  - Packet D ke code ka alag code review ABHI NAHI hua. Deploy se pehle yeh zaroori hai.
+- Ek jaanch pehli baar 44/45 aayi thi: us jaanch ko ek test PDF chahiye thi jo us folder me thi hi nahi. PDF bana kar dobara chalayi: 48/48. App ki galti nahi thi.
+
+## Packet E, F, G
+- Shuru nahi hue. E ke liye sirf code padha gaya; koi code nahi likha gaya. Padhne me jo mila woh memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md ke section 8 me hai.
+
+## Deploy se pehle (pichhle deploy, 23 Nov raat, ke baad preview me kya badla)
+Upar likha tha ki yeh list is file me hai, par woh likhi nahi gayi thi. Ab yeh hai.
+- Students ke liye: koi screen nahi badli. Picture bhejne ka raasta wahi hai.
+- Super Admin me naya:
+  1. Badi PDF 0% par nahi atakti (Pocket 1).
+  2. Ek file atke to sirf wahi rukti hai: "Atki hai", wajah, "Dobara chalao", har 15 minute apne aap koshish (Pocket 2).
+  3. PDF ka koi kadam 10 minute chup rahe to machine use chhod kar dobara chalati hai (B).
+  4. "Is PDF ko delete karo": DELETE likh kar, sirf us upload ke liye jisse kabhi koi test nahi bana (C).
+  5. Badge teen line aur sahi rang ke saath; "Badi file ka test"; aakhri 20 galtiyan (D).
+- Kul 31 file badli (21 server, 10 screen). Poori list: HANDOFF file ka section 7.
+- Deploy ki teen shartein: testing agent paas (A se D tak ho gaya); alag code review (A, B, C ka ho gaya; D ka BAAKI); yeh list (ab hai).
+- Deploy tabhi jab aap "deploy" likhen.
+
