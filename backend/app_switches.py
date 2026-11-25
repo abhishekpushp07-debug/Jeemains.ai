@@ -3,6 +3,9 @@
 Changing a switch here and publishing reaches every phone the next time the app is opened: no new app build."""
 from fastapi import APIRouter
 
+import matched
+from database import db
+
 # How much of the website's new picture way the app uses, in the order of the website's note
 # (memory/WEBSITE_PICTURES_REPLY_2.md, section 6; the whole story: memory/PICTURES_APP.md). Each step includes the ones
 # before it, and every step is used only for a paper whose rows carry the website's asset_revision: against a website
@@ -16,9 +19,17 @@ from fastapi import APIRouter
 # To go back, lower the number and publish: the old routes are always kept as the fallback.
 PICTURES_STEP = 5
 
+# Home's "Matched" card (the JEE Main questions that matched ours) in place of the All India series card, and the same
+# offer on the sign-in screen (the whole story: memory/MATCHED_CONTRACT.md):
+#   "auto"  from the day after the All India series' last day; the website's own schedule decides that day (matched.py)
+#   "on"    now, whatever the series' dates are (for example a new series has started and Matched must stay on Home)
+#   "off"   never: Home keeps the All India series card
+# A phone learns the answer when the app is opened (and again when it is brought back after half an hour).
+MATCHED_CARD = "auto"
+
 router = APIRouter()
 
 
 @router.get("/app/switches")
 async def switches():
-    return {"pictures": PICTURES_STEP}
+    return {"pictures": PICTURES_STEP, "matched": await matched.card_on(db, MATCHED_CARD)}

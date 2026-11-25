@@ -21,6 +21,8 @@ import { examIcon, useExams } from "@/src/api/examCatalog";
 import { useListFocus } from "@/src/useListFocus";
 import { HomeDream } from "@/src/dream/HomeDream";
 import { HomeMisfire } from "@/src/misfire/HomeMisfire";
+import { useMatchedOn } from "@/src/matched/gate";
+import { HomeMatchedCard } from "@/src/matched/MatchedCard";
 import { ScreenMotion } from "@/src/motion";
 
 const greeting = () => { const h = new Date().getHours(); return h < 5 ? "good night" : h < 12 ? "good morning" : h < 17 ? "good afternoon" : "good evening"; };
@@ -43,6 +45,7 @@ export default function Home() {
   useSeriesWatch(series.revalidate, days);
   const progress = useCached<any>(user ? `u.${user.id}.progress` : null, (signal) => api("/my/tests?tab=progress&page=1", { signal }));
   const catalog = useExams();
+  const matched = useMatchedOn();
   useListFocus(catalog.revalidate);
   const current = progress.data?.items?.[0];
   const counts = progress.data?.counts;
@@ -100,11 +103,16 @@ export default function Home() {
         </Notice>
       ) : null}
 
-      <View style={{ gap: space.md }}>
+      {/* Once the series is over (our server says when: src/matched/gate.tsx), its card gives its place to Matched. The
+          series and its practice archive stay one tap away on the ALL INDIA tile below. */}
+      {matched ? <View style={{ gap: space.md }}>
+        <SectionLabel title="Matched with JEE Main" onAction={() => router.push("/matched" as any)} actionTestID="home-matched-view-all" />
+        <ScreenMotion><HomeMatchedCard /></ScreenMotion>
+      </View> : <View style={{ gap: space.md }}>
         <SectionLabel title="All India series" onAction={() => router.push("/live")} actionTestID="home-series-view-all" />
         {/* The card's shine rests while another tab or screen is in front. */}
         <ScreenMotion><HomeSeriesCard series={s} streak={streak.data} days={days} error={series.error} /></ScreenMotion>
-      </View>
+      </View>}
 
       {current ? <View style={{ gap: space.md }}>
         <SectionLabel title="Continue" />

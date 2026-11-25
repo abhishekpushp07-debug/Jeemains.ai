@@ -11,6 +11,8 @@ import { AuthShell } from "@/src/components/auth/AuthShell";
 import { colors, radius, space } from "@/src/theme";
 import { ARENA, HOME_ROUTE } from "@/src/arenaMode";
 import { isRoomPath } from "@/src/rapid/social";
+import { useMatchedOn } from "@/src/matched/gate";
+import { MatchedBanner } from "@/src/matched/MatchedCard";
 
 export default function Entry() {
   const { signIn, signUp, user, ready, sessionError, checkSession, expired, signOutWarning, lastPhone, forgetPhone } = useAuth();
@@ -26,6 +28,7 @@ export default function Entry() {
   const [pin, setPin] = useState("");
   const [confirm, setConfirm] = useState("");
   const submit = useAuthSubmit();
+  const matched = useMatchedOn();
   const entryFocused = useRef(false);
   const pinRef = useRef<React.ComponentRef<typeof TextInput>>(null);
   const signup = mode === "signup";
@@ -54,6 +57,7 @@ export default function Entry() {
       <T testID="entry-title" size={30} w="heavy">{signup ? "Start your next chapter." : "Welcome back."}</T>
       <T testID="entry-description" size={14} color={colors.muted}>{signup ? "Create a PIN for your JEELIVE.AI account. It works on the website and the app too." : "Sign in with the same mobile number and PIN you use on our website."}</T>
     </Animated.View>
+    {matched ? <MatchedBanner /> : null}
     {target !== HOME_ROUTE ? <Notice testID="entry-match-note" tone="info">Sign in or create an account to take your seat in the Rapid Fire match.</Notice> : null}
     {expired ? <Notice testID="entry-session-expired" tone="info">{remembered
       ? "Aapka session khatam ho gaya. Number pehle se bhara hai — bas PIN daal kar wapas aao. Aapke results aur saved kaam safe hain."

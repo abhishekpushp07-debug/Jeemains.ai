@@ -11,9 +11,11 @@ import { ErrorBoundary } from "@/src/components/error-boundary";
 import { AuthProvider, useAuth } from "@/src/auth";
 import { InboxPoller, isRoomPath } from "@/src/rapid/social";
 import { SmoothMode } from "@/src/analysis/smooth";
+import { MatchedGate } from "@/src/matched/gate";
 import { colors } from "@/src/theme";
 
-const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account"];
+// "matched" (JEE Main questions that matched ours) is open to people who have not signed in.
+const PUBLIC_ROUTES = ["entry", "forgot-pin", "privacy", "delete-account", "matched"];
 
 LogBox.ignoreAllLogs(true);
 
@@ -41,6 +43,7 @@ export default function RootLayout() {
             <AuthGate />
             <InboxPoller />
             <SmoothMode />
+            <MatchedGate />
             <SessionBoundary><Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.surface }, animation: "slide_from_right" }}>
               <Stack.Screen name="attempt/[id]" options={{ gestureEnabled: false }} />
               <Stack.Screen name="rapid/session" options={{ gestureEnabled: false, animation: "fade_from_bottom" }} />

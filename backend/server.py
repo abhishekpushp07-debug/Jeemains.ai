@@ -6,6 +6,7 @@ Where things live:
   db_setup.py   - indexes and one-time migrations                jobs.py      - Cup Night tick and the 5-minute sweep
   Phase 3: fast_json.py (orjson answers) · later.py (work nobody waits for) · website_shield.py (jeelive.ai down/slow)
            health_stats.py + health_panel.py (App Health page /api/owner/health) · log_redact.py (no PIN in any log)
+  matched.py    - Matched: JEE Main questions that matched ours (public read) + when Home shows its card
   everything else (duels, cups, daily, gangs, rank, ...) keeps its own module with a make_router() factory."""
 from database import client, db  # first: loads backend/.env for every module below
 
@@ -31,6 +32,7 @@ import jl_proxy
 import jobs
 import later
 import log_redact
+import matched
 import owner_panel
 import sprints
 from arena_web import router as arena_web_router
@@ -112,6 +114,7 @@ api.include_router(health_panel.make_router(db))
 api.include_router(health_alerts.make_router(db))
 api.include_router(ceo_api.make_router(db))
 api.include_router(app_switches.router)
+api.include_router(matched.make_router(db))
 app.include_router(api)
 install_access_guard(app, db)
 app.add_middleware(AssetAwareCompression, minimum_size=1024, compresslevel=4)
@@ -145,6 +148,7 @@ async def startup():
     asyncio.create_task(jobs.sweep_loop(db, duel_api["settle"], cups_router))
     app.state.health_beat = asyncio.create_task(health_stats.beat(db, load_snapshot, shield.snapshot, later.pending))
     asyncio.create_task(health_alerts.watch(db))
+    asyncio.create_task(matched.watch_series(db, jl_proxy.client))
     asyncio.create_task(warm_up())
 
 

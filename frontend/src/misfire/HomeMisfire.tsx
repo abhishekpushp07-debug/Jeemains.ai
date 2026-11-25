@@ -2,7 +2,7 @@
 // Blood red with white words and its name in glossy yellow; a soft gloss, a glass glint from corner to corner, and a row
 // of lights (sun yellow, white, aqua) running round its rim.
 import React from "react";
-import { PixelRatio, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useAuth } from "@/src/auth";
@@ -10,26 +10,14 @@ import { useCached } from "@/src/useCached";
 import { useListFocus } from "@/src/useListFocus";
 import { Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
+import { GlossWord } from "@/src/components/GlossWord";
 import { Shine } from "@/src/analysis/Shine";
 import { ScreenMotion } from "@/src/motion";
 import { colors, dotEdges, space } from "@/src/theme";
 import { MisfireSummary, getSummary, misfireKey } from "./api";
 import { slugOf } from "./parts";
 
-const WORD = 19, LINE = 26, WHITE = colors.custom_chipBloodInk;
-
-/** The card's name in glossy yellow: deep yellow letters with a dark shade under them, and their upper half in a paler yellow (the light on them). */
-function GlossWord({ children, testID }: { children: string; testID: string }) {
-  const face = { lineHeight: LINE, letterSpacing: 1.5 };
-  // The paler copy is cut off at half the line's height; text grows with the phone's font size (T stops at 1.6), so the cut does too.
-  const half = LINE * 0.5 * Math.min(PixelRatio.getFontScale(), 1.6);
-  return <View>
-    <T testID={testID} w="heavy" size={WORD} color={colors.custom_glossYellow} numberOfLines={1} style={[face, styles.wordShade]}>{children}</T>
-    <View pointerEvents="none" aria-hidden accessibilityElementsHidden importantForAccessibility="no-hide-descendants" style={[styles.wordLight, { height: half }]}>
-      <T w="heavy" size={WORD} color={colors.custom_glossYellowHi} numberOfLines={1} style={face}>{children}</T>
-    </View>
-  </View>;
-}
+const WHITE = colors.custom_chipBloodInk;
 
 export function HomeMisfire() {
   const router = useRouter();
@@ -73,6 +61,4 @@ const styles = StyleSheet.create({
   badge: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4, backgroundColor: colors.custom_fireShade },
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 6, marginTop: 2 },
   chip: { borderRadius: 999, paddingHorizontal: 10, paddingVertical: 3, backgroundColor: colors.custom_fireGlass, borderWidth: 1, borderColor: colors.custom_fireLine },
-  wordShade: { textShadowColor: colors.custom_glossYellowShade, textShadowOffset: { width: 0, height: 1.5 }, textShadowRadius: 2 },
-  wordLight: { position: "absolute", left: 0, right: 0, top: 0, overflow: "hidden" },
 });

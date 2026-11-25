@@ -1,0 +1,38 @@
+{
+  "summary": "Iteration 143 - Matched (JEE Main questions matched with ours). Backend: 5/5 test_matched.py pass; RF daily misses regression pass; GET /api/matched 200 (today total 0, shifts []); GET /api/matched/1999-01-01-s1 -> 404; GET /api/matched/abc & /api/matched/2027-01-25-s0 -> 422; GET /api/app/switches -> 200 {pictures:5,matched:false}; POST/PUT/DELETE on /api/matched -> 405. Frontend State A (real OFF): /entry has no entry-matched; sign-in works; Home shows ALL INDIA series card and NOT home-matched, home-tile-live present. Frontend State B (fake_matched ON): entry-matched bar shows (title MATCHED, line 'JEE Mains questions matched with ours'); tapping opens /matched without sign-in; direct open of /matched and /matched/2027-01-25-s1 while signed-out stays there; matched-back from directly opened /matched -> /entry; matched-shift-back -> /matched. /matched page: hero 'MATCHED', matched-total 10, matched-total-line 'questions matched in 4 shifts'; month pills 2027-04 (2) and 2027-01 (8); opens on Apr 2027 showing shift 2027-04-03-s1 ('2 of 75 matched'); switching to Jan shows day 25 first (shifts s1 '4 of 75 matched' then s2 '3 of 75 matched'), then day 24 (s1 '1 matched'); matched-refresh present. Shift page: header 'Mon, 25 Jan . Shift 1', eyebrow 'JEE MAIN . 4 OF 75 MATCHED'; subject pills All 4 / Physics 2 / Chemistry 1 / Maths 1; pairs 0-3 in order Q7, Q31, Q58, then unnumbered last; Physics filter leaves pairs 0 and 3; pair 1 has jee-image-0 and ours-0-image-0; pair 2 has TWO ours sources (AITS Day 3 . Q 61 and 'JEE Main PYQ practice . Q 12'); 0 raw $ signs on screen (TeX rendered). Home ON: home-matched replaces series card (home-series-view-all absent); eyebrow 'MATCHED WITH JEE MAIN' with home-matched-view-all; home-matched-title MATCHED, line, total 10, latest '3 Apr . Shift 1', home-matched-shifts '4 SHIFTS' (all caps), fireworks present; CTA 'See matched questions' opens /matched; home-tile-live still present; no horizontal overflow at 390x844 or 340x740. Empty state: home-matched-soon shown, no home-matched-total, CTA label 'Open Matched'; /matched shows matched-empty. Error state (500): matched-error and matched-shift-error with Retry; no crash. OFF with data: no entry-matched on /entry. Regression smoke: Home loads, home-tile-live opens /live, Rank and My Tests tabs open, no red error screen. No deprecated Expo packages detected in the Matched code paths.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/pytest/iter143_matched.xml",
+    "/app/test_reports/pytest/iter143_rf_daily.xml",
+    "/tmp/shots/A_home.jpg",
+    "/tmp/shots/B_matched_apr.jpg",
+    "/tmp/shots/B_matched_jan.jpg",
+    "/tmp/shots/B_shift.jpg",
+    "/tmp/shots/C_home_on.jpg",
+    "/tmp/shots/C_home_340.jpg",
+    "/tmp/shots/D_empty_home.jpg",
+    "/tmp/shots/D_empty_page.jpg",
+    "/tmp/shots/D_err500.jpg",
+    "/tmp/shots/E_regression.jpg"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "matched.py shape_shift keeps caps on sizes (MAX_ITEMS=150, MAX_OURS=4, MAX_OPTIONS=6, MAX_IMAGES=6) and drops non-SUBJECTS to empty subject - defensive.",
+    "api.ts byMonth() uses newest-first sort with ties broken by shift ascending - exactly produces the observed Jan 25 (s1 then s2) then Jan 24 order.",
+    "Gate uses storage cache + 30 min AppState recheck + listener pattern - correct per MATCHED_CONTRACT.",
+    "Public route list in app/_layout.tsx correctly includes 'matched'; AuthGate is a no-op for signed-out users on /matched/* which is why direct open works."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "None. All Matched browser states use the in-browser stand-in /app/tests/matched_fixture.py (no Mongo writes). test_matched.py owns a fixture doc 2001-01-01-s1 left published:false; nothing deleted. RF regression used throw-away TEST- players as per existing helper.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Matched is fully wired end-to-end on the student side: no further UI/API work needed for this iteration. Future matching machine / super-admin page writes one document per shift into matched_shifts (see /app/memory/MATCHED_CONTRACT.md) - the app will pick it up without a rebuild. For any Matched UI check, always register fake_matched(page) BEFORE page.goto('/entry'); the switch is asked once per app launch. Use fresh page per 500/empty variant to avoid route.unroute() 'Route is already handled' errors.",
+  "rca_of_issue": "No issues found."
+}

@@ -331,11 +331,20 @@ export const clearAssetCache = (purgeDisk = false) => { assetOwner = null; resou
 // our own server: the owner's switch, changed without a new app build. Until its answer arrives, and whenever it
 // cannot be read, pictures load exactly as they always have.
 let pictureStep = 0, switchesAsked = false;
-function askSwitches() {
-  if (switchesAsked || !BACKEND) return;
+// The whole answer, for a part of the app that has a switch of its own (src/matched/gate.tsx): null until it arrives.
+let switches: Record<string, unknown> | null = null;
+const switchListeners = new Set<() => void>();
+export const appSwitches = () => switches;
+export const onAppSwitches = (listener: () => void) => { switchListeners.add(listener); return () => { switchListeners.delete(listener); }; };
+/** `again` = ask once more although it was already answered (an app that stayed open for a long time). */
+export function askSwitches(again = false) {
+  if ((switchesAsked && !again) || !BACKEND) return;
   switchesAsked = true;
   fetch(`${BACKEND}/api/app/switches`).then(r => (r.ok ? r.json() : Promise.reject(r.status)))
-    .then(s => { const step = Number(s?.pictures); pictureStep = Number.isInteger(step) && step >= 2 ? step : 0; }, () => { switchesAsked = false; }); // not answered: asked again with the next paper
+    .then(s => {
+      const step = Number(s?.pictures); pictureStep = Number.isInteger(step) && step >= 2 ? step : 0;
+      if (s && typeof s === "object") { switches = s; switchListeners.forEach(listener => { try { listener(); } catch { /* a listener's trouble is its own */ } }); }
+    }, () => { switchesAsked = false; }); // not answered: asked again with the next paper
 }
 export const setAssetAccount = (uid: string) => {
   if (assetOwner !== uid) { resources.clear(); resetImageMemory(); configureImageDisk(uid, CANONICAL_API); }
