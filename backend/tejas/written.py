@@ -89,6 +89,74 @@ def problems(s):
     return []
 
 
+def unchecked(exc, so):
+    """Supabase could not be asked about the photos: nothing is said about any of them and the mock stays as it is."""
+    import tejas_storage as store
+    code, scope = getattr(exc, 'code', None), store.scope_of(exc)
+    why = store.explain(code, scope)[0] if scope in ('away', 'blocked') else 'Supabase ne is mock ki photo ki list nahi di' + (f' ({code})' if code else '')
+    return f'Is mock ki photo abhi jaanchi nahi ja saki ({why}), {so}. Thodi der baad phir koshish kijiye.'
+
+
+async def photo_trouble(s, so, only=None):
+    """Why this written mock cannot be shown to students, or None. Every photo is read back from storage itself (never from this
+    server's memory) and matched by its fingerprint, and all of them are in one store. `so` says what did not happen because of it.
+    With `only`, just those photos are proven (the new ones of a mock that is already Live) and the one-store rule is not applied:
+    a Live mock that still has photos in the old store must stay editable until those can be copied for it.
+    Reads only: nothing is saved, copied or removed here. A verified JEE Main PYQ paper is never checked."""
+    import tejas_storage as store
+    from .picture_proof import prove, picture_ids, GONE, CHANGED
+    kept = lambda q, k: [r for r in q.get(k) or [] if r.get('file_id') in only]  # noqa: E731
+    paper = s if only is None else {**s, 'questions': [{**q, 'q_refs': kept(q, 'q_refs'), 's_refs': kept(q, 's_refs')} for q in s.get('questions', [])]}
+    try:
+        proof = await prove(paper, full=True)
+    except store.StorageError as exc:
+        return unchecked(exc, so)
+    if proof is None:
+        return None
+
+    def named(hit):
+        qs = [f"Q{q['number']}" for q in s.get('questions', []) if any(hit(r.get('file_id')) for k in ('q_refs', 's_refs') for r in q.get(k) or [])]
+        return ', '.join(qs[:10]) + (' aur baaki' if len(qs) > 10 else '')
+    bad = proof['bad']
+    if bad:
+        parts = [f'{who} ki photo {text}' for who, text in ((named(lambda f: bad.get(f) in GONE), 'storage mein nahi mili'),
+                                                             (named(lambda f: bad.get(f) in CHANGED), 'storage mein badli hui mili'),
+                                                             (named(lambda f: bad.get(f) == 'unread'), 'storage se padhi nahi ja saki')) if who]
+        return f"{'; '.join(parts) or 'Is mock ki ek photo storage mein saabit nahi hui'}, {so}. Edit mein woh photo hata kar dobara lagaiye."
+    if only is not None:
+        return None
+    rows = await files.find({'id': {'$in': picture_ids(s)}}, {'_id': 0, 'id': 1, 'path': 1}).to_list(None)
+    in_supabase = {f['id'] for f in rows if str(f.get('path') or '').startswith(store.SB)}
+    in_emergent = {f['id'] for f in rows} - in_supabase
+    if in_supabase and in_emergent:
+        old, there = ('Emergent', in_emergent) if store.configured() else ('Supabase', in_supabase)   # the store new photos do not go to
+        return (f'Is mock ki photo do storage mein bati hain ({len(in_supabase)} Supabase mein, {len(in_emergent)} Emergent mein), {so}. '
+                f'{named(lambda f: f in there)} ki photo purane storage ({old}) mein hai: Edit mein use hata kar dobara lagaiye.')
+    return None
+
+
+LIVE_SO = 'isliye yeh badlav save nahi hua (Live paper jaisa tha waisa hi hai)'
+
+
+async def live_photos(s, questions, ids):
+    """A Live mock is changed only when its photos can be read, and a new photo is first proven in storage itself. Otherwise nothing is
+    saved, so students never get a changed paper that has no version or a question whose photo is not there."""
+    from tejas_storage import StorageError
+    from .content import validate_refs
+    paper = {**s, 'questions': questions, 'file_ids': ids}
+    new = set(ids) - {r['file_id'] for q in s.get('questions', []) for k in ('q_refs', 's_refs') for r in q.get(k) or []}
+    why = await photo_trouble(paper, LIVE_SO, new) if new else None
+    if not why:
+        try:
+            seen = {}
+            for q in questions:
+                await validate_refs(paper, q, seen)
+        except StorageError as exc:
+            why = await photo_trouble(paper, LIVE_SO, set(ids)) or unchecked(exc, LIVE_SO)
+    if why:
+        raise HTTPException(409, why)
+
+
 async def written_doc(id, u=None):
     s = await sets.find_one({'id': id, 'written': True, 'archived': {'$ne': True}}, {'_id': 0})
     # Reviewers reach only drafts that still have marked questions.
@@ -144,6 +212,8 @@ async def save_questions(s, questions, u, note):
     for i, q in enumerate(questions, 1):
         q['number'] = q['solution_number'] = i
     ids = sorted({r['file_id'] for q in questions for k in ('q_refs', 's_refs') for r in q[k]})
+    if s['status'] == 'published':
+        await live_photos(s, questions, ids)
     done = await sets.update_one({'id': s['id'], 'revision': s['revision']},
                                  {'$set': {'questions': questions, 'file_ids': ids, 'updated_at': now()}, '$inc': {'revision': 1}})
     if not done.modified_count:
@@ -224,6 +294,8 @@ async def update_written(id: str, body: WrittenPatch, u=Depends(owner)):
         change.update({f: v for f, v in (('pyq_year', body.year), ('pyq_date', body.exam_date), ('pyq_shift', body.shift)) if v is not None})
     if not change:
         raise HTTPException(422, 'Nothing to change.')
+    if s['status'] == 'published':
+        await live_photos(s, s.get('questions', []), s.get('file_ids', []))
     await sets.update_one({'id': id, 'revision': s['revision']}, {'$set': change, '$inc': {'revision': 1}})
     if s['status'] == 'published':
         from .content import publish_validated

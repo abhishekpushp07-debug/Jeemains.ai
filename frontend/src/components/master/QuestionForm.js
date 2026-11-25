@@ -34,7 +34,7 @@ export function QuestionForm({mock,question,subjects,onSaved,onDelete,disabled})
   const options=mcq?v.options.slice(0,Math.max(2,v.options.findLastIndex(o=>o.text.trim()||o.image)+1)):[];
   const r=await put(`/admin/master/written/${mock.id}/questions`,{...v,id:question?.id||'',answer:v.answer.trim(),options});
   toast.success(r.message);onSaved(r);if(!question)setV(blank(v.subject));
- }catch(e){toast.error(e.message);}finally{setBusy(false);}}
+ }catch(e){toast.error(e.message,{duration:12000});}finally{setBusy(false);}}
  return <form className="admin-panel master-qform" onSubmit={e=>{e.preventDefault();if(ok&&!busy)save();}} data-testid="question-form">
   <div className="admin-panel-head"><h2>{question?`Question ${question.number}`:'New question'}</h2>{question&&onDelete&&<Button type="button" variant="ghost" size="sm" disabled={busy||disabled} onClick={onDelete} data-testid="question-delete"><Trash2 size={15}/>Delete</Button>}</div>
   {question?.flag&&<p className="admin-note warn" data-testid="question-flag">{question.flag} Check every field, then save.</p>}

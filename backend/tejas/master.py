@@ -219,10 +219,16 @@ async def type_mocks(sid: str, u=Depends(owner)):
 
 async def publish_written(s, u, start=None, live_exam=False):
     from .content import publish_validated
-    from .written import problems
+    from .written import problems, photo_trouble, unchecked
+    from tejas_storage import StorageError
     issues = problems(s)
     if issues:
         return issues[0]
+    # Only this mock stays Draft when a photo of it is not proven in storage; the other mocks of the same press carry on.
+    so = f"isliye yeh {'Schedule' if start else 'Live'} nahi hua (Draft hi hai)"
+    why = await photo_trouble(s, so)
+    if why:
+        return why
     change = {}
     if start:
         change['start_at'] = start
@@ -234,9 +240,15 @@ async def publish_written(s, u, start=None, live_exam=False):
         await sets.update_one({'id': s['id']}, {'$set': change, '$inc': {'revision': 1}})
     try:
         await publish_validated(s['id'], {'confirm': True}, u)
+        return None
     except HTTPException as exc:
-        return str(exc.detail)
-    return None
+        why = str(exc.detail)
+    except StorageError as exc:
+        why = unchecked(exc, so)   # storage stopped answering between the proof and the paper being made
+    if change:
+        # Not Live after all: the time it was given is taken back, so a later "Live karo" opens it now and not at that old time.
+        await sets.update_one({'id': s['id'], 'status': 'draft'}, {'$unset': {k: '' for k in change}, '$inc': {'revision': 1}})
+    return why
 
 
 async def set_status(s, body, u, t):

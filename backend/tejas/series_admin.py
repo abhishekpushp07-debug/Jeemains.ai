@@ -353,6 +353,11 @@ async def assign_written(cfg, id, day, w, u):
     issue = (problems(s) or [None])[0] or pattern_problem(cfg, paper_pattern(s), valid_paper(s))
     if issue:
         raise HTTPException(409, issue)
+    from .written import photo_trouble, unchecked
+    so = 'isliye is paper ko din nahi mila (Draft hi hai)'
+    why = await photo_trouble(s, so)
+    if why:
+        raise HTTPException(409, why)
     update = {'series_id': cfg['id'], 'series_date': day, 'series_window': w, 'series_import': True, 'start_at': w['opens_at'],
               'end_at': w['closes_at'], 'live_enabled': True, 'test_kind': 'mock', 'full_length': True}
     if not is_jee(cfg):
@@ -363,11 +368,15 @@ async def assign_written(cfg, id, day, w, u):
         raise HTTPException(409, f'{day} already has a paper.') from None
     if not done.modified_count:
         raise HTTPException(409, 'The paper changed. Reload and try again.')
+    from tejas_storage import StorageError
     try:
         await publish_validated(id, {'confirm': True}, u)
-    except HTTPException:
+    except (HTTPException, StorageError) as exc:
+        # The paper could not be made: its day is given back at once, so the day never looks filled while students would get nothing.
         await sets.update_one({'id': id}, {'$unset': {k: '' for k in update if k not in ('test_kind', 'full_length')}, '$inc': {'revision': 1}})
-        raise
+        if isinstance(exc, HTTPException):
+            raise
+        raise HTTPException(409, unchecked(exc, so)) from None
     await claim_pattern(cfg, paper_pattern(s))
 
 

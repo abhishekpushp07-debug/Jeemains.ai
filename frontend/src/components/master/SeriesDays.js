@@ -49,7 +49,7 @@ function Paper({c,free,busy,onAssign,onRemove}){
 export function SeriesDays({section,reloadKey,onChanged}){
  const [data,setData]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0),[busy,setBusy]=useState(false),[dialog,setDialog]=useState(null);
  useEffect(()=>{api('/admin/master/series/'+section.series_id).then(d=>{setData(d);setError('');}).catch(e=>setError(e.message));},[section.series_id,reload,reloadKey]);
- async function run(fn){setBusy(true);try{const r=await fn();toast.success(r.message||'Save ho gaya.');setReload(n=>n+1);onChanged?.();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
+ async function run(fn){setBusy(true);try{const r=await fn();toast.success(r.message||'Save ho gaya.');setReload(n=>n+1);onChanged?.();}catch(e){toast.error(e.message,{duration:12000});}finally{setBusy(false);}}
  if(error)return <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>;
  if(!data)return <Skeleton className="h-64"/>;
  const free=data.slots.filter(s=>!s.paper&&!s.opened),assigned=data.slots.filter(s=>s.paper).length;

@@ -168,3 +168,36 @@ Upar likha tha ki yeh list is file me hai, par woh likhi nahi gayi thi. Ab yeh h
 - Jaancha NAHI gaya: purani screen ka kitaab-level "missed release" raasta kisi chalti hui suite se (uska code maine nahi chhua); asli do server; live par kuch nahi.
 - Ek baat jo aapko pata honi chahiye: agar aap koi bahut bada mock sirf 1-2 minute aage ke samay par Schedule karte hain aur pictures save hone me usse zyada lag jaye, to woh ab Draft rahega aur yahi line dikhayega (pehle woh thodi der se khul jata tha). Plan me yahi likha hai ("der se apne aap nahi khulta"), isliye maine chhoot nahi rakhi.
 
+
+
+## Packet E — kadam 4 ka pehla hissa: Likha hua (Write) mock (25 Nov raat, 20:10 se 21:05 UTC; SIRF preview me)
+- **Deploy nahi hua.**
+- Pehle kya hota tha (kuch bhi badalne se pehle ek chhote test se dekha; log: test_reports/packet_E_2026-11-25/written_before_fix_probe244.log aur written_live_edit_before_fix_probe244b.log):
+  - Likhe hue mock ki koi photo Supabase me na ho aur "Live karo" dabayein: error page aata tha (503), aur usi press me chune baaki mock bhi ruk jate the.
+  - Schedule aur All India Test Series ka din: wahi error. Series me paper Draft rehta tha par din us par laga reh jata tha.
+  - Photo Supabase se ja chuki ho par server ki memory me abhi ho: mock Live ho jata tha.
+  - Photo do storage (Supabase aur Emergent) me bati ho: mock Live ho jata tha.
+  - Live mock me naya sawaal jiski photo Supabase me nahi: error aata tha, par sawaal save ho chuka hota tha aur naya version nahi banta tha.
+- Ab kya hota hai:
+  - "Live karo", "Schedule karo" aur series ka din dene se pehle likhe hue mock ki har photo storage se wapas padhi jati hai (server ki memory se nahi) aur fingerprint se milayi jati hai; saari photo ek hi storage me honi chahiye.
+  - Saabit na ho to sirf wahi mock Draft rehta hai aur wajah batata hai, jaise: "Q2 ki photo storage mein nahi mili, isliye yeh Live nahi hua (Draft hi hai). Edit mein woh photo hata kar dobara lagaiye." Usi press ke baaki mock (likhe hue aur PDF wale) Live ho jate hain.
+  - Schedule fail ho to chuna hua samay Draft par nahi rehta; baad me "Live karo" dabane par mock abhi khulta hai, us purane samay par nahi.
+  - Series: aise paper ko din milta hi nahi; "Din order se bharo" agle paper par chala jata hai.
+  - Supabase khud jawab na de (ya billing ki rok ho, ya list na de): kisi photo ko "gayab" nahi kaha jata. Mock kehta hai "Is mock ki photo abhi jaanchi nahi ja saki (...)" aur Draft rehta hai. Supabase ko sabke liye aaram par nahi dala jata.
+  - Photo do storage me bati ho: Live nahi hota; batata hai kis sawaal ki photo purane storage me hai. Us photo ko hata kar dobara lagane par Live ho jata hai.
+  - Jo mock pehle se Live hai: nayi photo storage me saabit na ho, ya uski photo padhi na ja sakein, to badlav save hi nahi hota (pehle aadha save ho jata tha). Live paper jaisa tha waisa rehta hai.
+- Kya NAHI badla (jaancha): theek likha hua mock pehle jaisa Live/Scheduled; bina photo wala mock storage se kuch nahi poochta; jiski saari photo purane storage (Emergent) me hain woh pehle jaisa Live hota hai aur Live rehte hue edit hota hai; Draft me sawaal save karna; PDF wale mock; Verified JEE Main PYQ (us par yeh jaanch chalti hi nahi).
+- Plan me likha hai par likhe hue mock ke liye abhi NAHI bana (aapka faisla chahiye):
+  - Wajah row par tiki nahi rehti: abhi woh upar 12 second ke note me aati hai. "Dobara chalao" aur har 15 minute ki apne aap koshish bhi nahi hai.
+  - "Pictures: n / n · Storage: Supabase" wali line likhe hue mock ki row par nahi aati.
+  - Wajah: likhe hue mock ki photo machine ke paas dobara save karne ko hoti hi nahi (photo aap lagate hain), isliye apne aap koshish se gayab photo wapas nahi aati. Chahiye to yeh agla chhota kadam ho sakta hai.
+- Packet E me abhi bhi baaki: Off se Live, Library se wapas, purani Emergent pictures ki copy, "Pictures ki poori jaanch" button.
+- Badli hui files: backend/tejas/written.py, master.py, series_admin.py; frontend MockList.js, SeriesDays.js, QuestionForm.js (sirf note 12 second tak). Koi naya route ya API khaana nahi. LiveSeries.js nahi chhui.
+- Jaanch (ek-ek karke):
+  - Nayi suite tests/written_live244.py: nateeja neeche "Testing agent" wali line ke saath.
+  - Browser (desktop + 390 px): tests/ui_picture239.py 59/59 (pehle 50). Isme ab ek "Written Tests" type hai: theek mock Live, photo-gayab mock par "Live karo" dabane se wajah dikhti hai, 6 second baad bhi dikhti hai, mock Draft rehta hai.
+  - Purani 24 suite: 23 poori paas (1,061 jaanch). 1 fail: master_jee_series_iso181 3/10. Yeh is kaam se pehle wale code ki copy par bhi bilkul waise hi fail hoti hai (woh 1 aur 5 Dec maangti hai, jabki JEE series 9 Dec se shuru hoti hai).
+  - Testing agent ki alag jaanch: yeh line likhte samay baaki thi (nateeje se badli jayegi).
+- Jaancha NAHI gaya: asli Supabase par likhe hue mock ki photo (sirf nakli Supabase par); asli do server; live par kuch nahi. Preview database me abhi ek bhi likha hua mock nahi hai; live par kitne hain aur unki photo kis storage me hain, yeh pata nahi.
+- Safai jo aapko pata honi chahiye: meri do test run beech me ruki thi (ek bridge shuru hote hi gir gaya, ek suite maine rok di), isliye unke do disposable test database (tejas_isolated_book170_78740a29 aur tejas_isolated_book170_a15199ca) reh gaye the. Dono ko naam, banane ka samay aur andar ke test data se pehchan kar hi hataya. App ka database (test_database) aur do purane test database (jo is session ne nahi banaye) nahi chhue. Bridge ab shuru hote hi gire to bhi apna database khud hatata hai, aur runner purani run ka nateeja nahi dikhata.
+

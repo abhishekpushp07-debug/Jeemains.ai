@@ -80,7 +80,7 @@ export function MockList({items,onChanged,onReplace}){
  async function run(to,list,extra={}){setBusy(true);try{
   const r=await post('/admin/master/status',{items:list.map(m=>({kind:m.kind,id:m.id})),to,...extra});invalidateCatalog();
   if(r.done)toast.success(r.message);
-  if(r.skipped.length)toast.message(`${r.skipped.length} mock nahi badle`,{description:r.skipped.slice(0,3).map(s=>`${s.title}: ${s.reason}`).join('\n')});
+  if(r.skipped.length)toast.message(`${r.skipped.length} mock nahi badle`,{duration:12000,description:r.skipped.slice(0,3).map(s=>`${s.title}: ${s.reason}`).join('\n')});
   setPicked(new Map());onChanged();
  }catch(e){toast.error(e.message);}finally{setBusy(false);}}
  const [remove,setRemove]=useState(null);

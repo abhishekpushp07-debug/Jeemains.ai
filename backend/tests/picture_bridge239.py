@@ -46,6 +46,16 @@ async def main():
     slug = J(await own.post('/api/admin/catalog/exams', json={'name': 'PRFX', 'short': 'PF', 'subjects': ['Physics'], 'color': 'rose'})).get('slug')
     sec = J(await own.post(f'/api/admin/catalog/exams/{slug}/sections', json={'name': 'Mock Tests', 'description': '', 'layout': 'list', 'kind': 'mocks'})).get('id')
     await structure.exams.update_one({'_id': slug}, {'$set': {'shown': True}})
+    # Written mocks, in a type of their own so the PDF rows keep their counts: one Live with a photo, one Draft whose photo "Supabase" did not keep.
+    from written_live244 import written, photo, mcq
+    wsec = J(await own.post(f'/api/admin/catalog/exams/{slug}/sections', json={'name': 'Written Tests', 'description': '', 'layout': 'list', 'kind': 'custom'})).get('id')
+    assert wsec, 'the written type was not made'
+    wok = await written(own, wsec, 'TEST_LIKHA_THEEK', photos=1)
+    await own.post('/api/admin/master/status', json={'items': [{'kind': 'set', 'id': wok}], 'to': 'live'})
+    wbad = await written(own, wsec, 'TEST_LIKHA_PHOTO_NAHI')
+    Path(MARKS).write_text(f'/written/{wbad}/\n')
+    await own.put(f'/api/admin/master/written/{wbad}/questions', json=mcq('photo question', image=await photo(own, wbad)))
+    Path(MARKS).write_text('')
 
     async def live(*mids):
         await own.post('/api/admin/master/status', json={'items': [{'kind': 'book_mock', 'id': m} for m in mids], 'to': 'live'}); await pump()
@@ -100,6 +110,7 @@ async def main():
                    'proof': {'book': proof, 'mock': mk['_id'], 'label': mk['label'], 'reason': (rows[proof]['payload'].get('storage_wait') or {}).get('reason', ''), 'pictures': await DB.tejas_files.count_documents({'book_import_id': proof})},
                    'two': {'book': two, 'mocks': [m['_id'] for m in pair], 'first': pair[0]['label']},
                    'late': {'book': late, 'mock': ml['_id'], 'state': ml['state'], 'missed_at': ml.get('missed_at'), 'set': ml.get('set_id')},
+                   'written': {'type': f'/super-admin/exam/{slug}/{wsec}', 'ok': wok, 'bad': wbad},
                    'aits': {'type': f"/super-admin/exam/{slug}/{ser['id']}", 'book': abad, 'mock': sbad['_id'], 'label': sbad['label'], 'pictures': await DB.tejas_files.count_documents({'book_import_id': abad}),
                             'state': [(await BM.find_one({'_id': x['_id']}) or {}).get('state') for x in (sok, sbad)]}}, f)
     os.chmod(path, 0o600)
@@ -109,8 +120,13 @@ async def main():
         await asyncio.wait_for(server.serve(), int(sys.argv[1]) if len(sys.argv) > 1 else 900)
     except asyncio.TimeoutError:
         pass
+
+
+async def run():
+    try:
+        await main()
     finally:
-        # the disposable test database of this run only (its name is checked first); the app's own database is never touched
+        # Also when the seed itself fails: the disposable test database of this run only (its name is checked first); the app's own database is never touched.
         assert H.TEST_DB.startswith('tejas_isolated_') and H.TEST_DB != H.REAL_DB
         await H.tdbmod.client.drop_database(H.TEST_DB)
         for name in ('bridge.json', 'vanish.txt'):
@@ -118,4 +134,4 @@ async def main():
             except OSError: pass
         print('dropped', H.TEST_DB, flush=True)
 
-asyncio.run(main())
+asyncio.run(run())

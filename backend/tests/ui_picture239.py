@@ -119,6 +119,24 @@ async def walk(pw, size, fix):
                     done = True; break
             say(f'{size}: series page: Supabase keeps the pictures + Dobara chalao: day 2 has its paper, the stuck note is gone, no page reload', done and not await at(f"type-upload-wait-{A['book']}").count(), await text('series-day-2'))
             await page.screenshot(path=f'{SS}/{size}_series_fixed.jpg', quality=40, type='jpeg')
+        # Written mocks (a type of their own): a photo that is not in storage keeps the mock a Draft and the owner is told which question.
+        W = INFO['written']
+        await page.goto(BASE + W['type']); await page.wait_for_selector(f"[data-testid=mock-row-{W['bad']}]", timeout=25000)
+        say(f'{size}: written page: the healthy written mock is Live', await text(f"mock-live-word-{W['ok']}") == 'Live', await text(f"mock-live-word-{W['ok']}"))
+        await at(f"mock-live-switch-{W['bad']}").click()
+        note = page.locator('[data-sonner-toast]').filter(has_text='mock nahi badle').first
+        await note.wait_for(timeout=15000)
+        told = (await note.inner_text()).strip()
+        say(f'{size}: written page: Live karo on the mock whose photo is not in storage: the owner is told which question and what to do', 'Q2 ki photo storage mein nahi mili' in told
+            and 'isliye yeh Live nahi hua (Draft hi hai)' in told and 'dobara lagaiye' in told, told)
+        await page.wait_for_timeout(800)   # the note has slid in fully, so the picture shows what the owner reads
+        await page.screenshot(path=f'{SS}/{size}_written.jpg', quality=40, type='jpeg')
+        await page.wait_for_timeout(6000)
+        say(f'{size}: written page: the reason is still on screen 6 seconds later', await note.is_visible())
+        say(f'{size}: written page: that mock is still a Draft with its switch Off; the other one is still Live', 'Draft' in await text(f"mock-status-{W['bad']}") and await text(f"mock-live-word-{W['bad']}") == 'Off'
+            and await text(f"mock-live-word-{W['ok']}") == 'Live', (await text(f"mock-status-{W['bad']}"), await text(f"mock-live-word-{W['bad']}")))
+        if size == 'mob':
+            await overflow(page, size + ' written page')
     finally:
         say(f'{size}: no failed API calls', not [b for b in bad if '/dream' not in b[1]], bad[:4])
         await br.close()
