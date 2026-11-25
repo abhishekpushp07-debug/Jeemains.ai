@@ -17,7 +17,7 @@ def book_row(b, t):
     return {'id': b['_id'], 'title': p.get('title', ''), 'state': b['state'], 'revision': b.get('revision', 0), 'read_pages': p.get('read_pages', 0),
             'pages': p.get('pages', 0), 'minutes': max(0, int((t - b.get('updated_at', t)) // 60)), 'message': (p.get('message') or '')[:200],
             **({'waiting_minutes': max(0, int((t - w['since']) // 60)), 'kind': w.get('kind') or 'away', 'reason': w.get('reason', ''), 'next': w.get('next', ''),
-                'stuck': bool(w.get('stuck')), 'mock': w.get('mock', ''), 'more': max(0, len(w.get('mocks') or {}) - 1)} if w else {})}
+                'stuck': bool(w.get('stuck')), 'mock': w.get('mock', ''), 'more': max(0, len(w.get('mocks') or {}) - 1), 'what': w.get('what', '')} if w else {})}
 
 
 @router.get('/status')

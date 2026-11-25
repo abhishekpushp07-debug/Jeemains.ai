@@ -523,9 +523,9 @@ def _removable(folder, names=()):
         raise ValueError("Refused: only the files of one upload's own folder can be removed from Supabase.")
 
 
-def sb_list(folder):
-    """One level of a folder in Supabase: ([(file name, size)], [sub-folder names])."""
-    bucket, rows, offset = _bucket(), [], 0
+def sb_list(folder, bucket=None):
+    """One level of a folder in Supabase: ([(file name, size)], [sub-folder names]). The app's own bucket unless a file names another."""
+    bucket, rows, offset = bucket or _bucket(), [], 0
     while True:
         r = _call('POST', f"{project_url()}/storage/v1/object/list/{quote(bucket, safe='')}", {'Content-Type': 'application/json'},
                   json={'prefix': folder.rstrip('/'), 'limit': 1000, 'offset': offset, 'sortBy': {'column': 'name', 'order': 'asc'}})

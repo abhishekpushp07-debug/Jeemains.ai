@@ -9,7 +9,7 @@ Dates and times are the pod clock, UTC. Owner-facing reports are written in simp
 
 1. **Nothing is deployed.** jeelive.ai still runs the code of 23 Nov 23:00 (commit `7e9e3ab`; inferred by reading the live site without login, not from a deploy log). Deploy only when the owner writes the exact word **"deploy"**.
 2. **Packets A, B, C, D are built and tested in preview. Packets E, F, G are not started.** For E only code was read; no code was written.
-3. **Before any deploy, one thing is still missing:** a separate code review of the Packet D code (rule I.3 of the plan). Testing-agent checks are done for A–D.
+3. **Update 25 Nov 10:25 UTC: the Packet D code review is done** (no blocker; one medium and three low left open: `/app/test_reports/code_review_packet_D.md`). All three deploy conditions of rule I.3 are met for A–D. No app code changed after the 07:12–07:19 regression. The owner was told it is ready; deploy still happens only on his word "deploy".
 4. The approved plan is `/app/plan/plan.md` (Roman Hinglish, 404 lines). It is the source of truth for what E, F and G must do. Its status table was updated in this session.
 5. Tests: **one isolated suite or one bridge at a time**, and raise the mongod open-file limit first (section 9). Parallel runs crash the preview MongoDB.
 6. Never touch `frontend/src/features/LiveSeries.js`. Never touch verified JEE Main PYQ. No email/SMS/external alerts.
@@ -73,7 +73,7 @@ Wider gaps found on the way: a silent PDF step could block all PDF work on a ser
 | A | Independent check of Pocket 1 + 2 | Done: testing agent `iteration_224`, separate code review (no critical/high; one medium, fixed in C) |
 | B | Guard against a silent PDF step | Built, tested, testing agent `iteration_225`, code review done (one medium fixed) |
 | C | "Is PDF ko delete karo" (permanent delete of an upload that never reached students) | Built, tested, testing agent `iteration_225`, code review done (one low fixed) |
-| D | Storage badge that tells the truth (shared database record) | Built, tested, testing agent `iteration_226`. **Separate code review not done** |
+| D | Storage badge that tells the truth (shared database record) | Built, tested, testing agent `iteration_226`, code review done 25 Nov (no blocker; one medium + three low open) |
 | E | Picture proof before Live/Scheduled | **Not started** (code read only; notes in section 8) |
 | F | Fallback: whole mock to Emergent | Not started |
 | G | Owner button: bring an Emergent mock into Supabase | Not started |
@@ -344,3 +344,44 @@ Long runs: anything over 2 minutes goes in the background with a log file; poll 
 | Master API | `/app/backend/tejas/master.py`, `machine.py`, `series_admin.py`, `structure.py`, `library.py`, `written.py`, `content.py` |
 | Master screens | `/app/frontend/src/components/master/`, `/app/frontend/src/features/admin/master/`, `/app/frontend/src/master.css` |
 | Do not touch | `/app/frontend/src/features/LiveSeries.js` |
+
+
+
+---
+
+## 15. Packet E progress (25 Nov, after the A–D deploy). Preview only, NOT deployed.
+
+Done and tested: steps 1 and 2 of the order in section 8. Steps 3–6 are not started.
+
+### Step 1: the proof function (`backend/tejas/picture_proof.py`, new)
+- `prove(s, full=False, alive=None)`: `None` for a verified PYQ (`structure.locked`). Otherwise `{ok, store, total, proven, stores, bad, reason, full}`. Reads only.
+- Supabase pictures: one `sb_list` per folder (`tejas_storage.sb_list(folder, bucket=None)` now takes a bucket), name present, size equal when the record has an integer `size`. `full=True` also reads each back (`sb_get`, never the in-process cache) and compares size + sha256.
+- Emergent pictures: always read back through `store.request('GET', …)` (two tries), compared with size + sha256.
+- `bad` values: `record` (no file record), `missing`, `size`, `bytes`, `unread`. Mixed stores are never `ok`.
+- Supabase itself failing raises `StorageError`. `checked()` turns that into the waits the workers know: away/blocked → `StorageWaiting` (the proof never strikes Supabase), any other answer → `StorageStuck` with `proof=True`. `unproven(proof)` makes the same `StorageStuck`. `remember(set_id, proof)` writes `tejas_picture_proofs` (`_id` = set id) and never raises.
+
+### Step 2: the gate on the PDF path
+- `book_publish.publish_ready` → `proven(book, mock, raw, guard, questions)` right after `source_questions`, before the set is written. Bad pictures are saved once more (`source_questions(..., again={ids})` → `crop_ref(..., again)` → `put_object`, record `$set` to path/sha256/size), then proven again. Re-save happens only when the paper's store is the store new files go to; a mixed paper is not re-saved.
+- New picture records carry `size`.
+- `book_worker.publish_batch` marks the stuck mock `kind: 'proof'`; `storage_wait` gets `what: 'proof'` and each entry of `mocks` gets `kind`. Message: `Atki hai: "<mock>" ki pictures storage mein saabit nahi hui, isliye Live nahi hua.`
+- API fields added (none changed): `master.type_mocks` items `pictures {proven,total,store,at}` (proven Live/Scheduled tests, never verified PYQ), `stuck.kind = 'proof'`, uploads `storage_wait.what`; `machine/status` rows `what`. `storage_health.facts()` returns `unproven`; the badge says so in its own yellow line and no longer counts those under "file Supabase mein atki hai". `held.stuck` still includes them.
+- Screens: `MockList.js` (`mock-pictures-<id>`, proof wording in `mock-stuck-<id>`), `UploadProgress.js`, `MachinePanel.js`. `LiveSeries.js` untouched.
+
+### Tests (one at a time)
+| Suite | Result |
+| --- | --- |
+| `tests/picture_proof238.py` | 26/26 |
+| `tests/picture_gate239.py` (routes + real worker, `tests/fake_supabase239.py`) | 40/40 |
+| `tests/picture_proof_real239.py` (real Supabase, preview bucket, TEST_ files, removed) | 12/12 |
+| `tests/ui_picture239.py` on `tests/picture_bridge239.py` (:8778), `bash /root/p2/e_ui.sh` | 33/33 |
+| 32 older suites, 13:27–13:35 UTC | 1,210 checks, 1 fail (`media_cdn_iso198` "paper built"; same on the code before E) |
+
+Suites that fail the same way on a copy of the commit before Packet E (`bash /root/p2/e_triage.sh` shows how it was checked): `publish_fail_iso211` 4/5, `media_warm_iso217` 35/36, `get_ready_iso188` 35/36, `get_ready_iso189` 8/9, `media_cdn_iso198` 2/3.
+
+Adapted for the new code: `storage_wait224.py` (its in-memory Supabase got `list`, patched as `sb_list`), `step_guard233.py` (its `slow_crop` takes `again`), `storage_wait_bridge224.py` (same `sb_list` patch; **not re-run**).
+
+### Known gaps to close in the next steps
+- A Draft mock whose pictures are split between the stores stays "Atki hai" with no way out until step 5 (copy of old Emergent pictures). So E should not be deployed before step 5.
+- The AITS failure path was not tested on its own, and the AITS day screen was not checked for the reason line.
+- `tejas_picture_proofs` rows are not removed when a Library test is deleted for good (one small row per test).
+- Old records have no `size`: for them the quick proof is "is in the list" only.

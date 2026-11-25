@@ -76,7 +76,7 @@ Har packet ke baad rukne ki jagah maine yahan us packet ki chhoti report likhi h
   - Live par kuch nahi (deploy nahi hua).
   - Do server ka ek record baantna ek hi process ke andar jaancha gaya; preview me ek hi server hai.
   - 10 minute, 15 minute aur 24 ghante ghadi aage badha kar jaanche gaye, sach me ruk kar nahi.
-  - Packet D ke code ka alag code review ABHI NAHI hua. Deploy se pehle yeh zaroori hai.
+  - Packet D ke code ka alag code review us samay nahi hua tha. Woh 25 Nov 10:15 UTC ko ho gaya (neeche "Deploy ke liye taiyaar" dekhiye).
 - Ek jaanch pehli baar 44/45 aayi thi: us jaanch ko ek test PDF chahiye thi jo us folder me thi hi nahi. PDF bana kar dobara chalayi: 48/48. App ki galti nahi thi.
 
 ## Packet E, F, G
@@ -92,6 +92,50 @@ Upar likha tha ki yeh list is file me hai, par woh likhi nahi gayi thi. Ab yeh h
   4. "Is PDF ko delete karo": DELETE likh kar, sirf us upload ke liye jisse kabhi koi test nahi bana (C).
   5. Badge teen line aur sahi rang ke saath; "Badi file ka test"; aakhri 20 galtiyan (D).
 - Kul 31 file badli (21 server, 10 screen). Poori list: HANDOFF file ka section 7.
-- Deploy ki teen shartein: testing agent paas (A se D tak ho gaya); alag code review (A, B, C ka ho gaya; D ka BAAKI); yeh list (ab hai).
+- Deploy ki teen shartein: testing agent paas (A se D tak ho gaya); alag code review (A, B, C, D sabka ho gaya); yeh list (ab hai).
 - Deploy tabhi jab aap "deploy" likhen.
+
+## Deploy ke liye taiyaar — 25 Nov, 10:25 UTC
+- Packet D ka alag code review ho gaya: koi blocker nahi, koi critical ya high galti nahi. Poora nateeja: test_reports/code_review_packet_D.md.
+- Ek "medium" baat mili, theek NAHI ki gayi (jaan-boojh kar): Emergent ya Supabase latak jaye to badge ya Machine panel kholne par woh screen kuch minute tak ghoomti reh sakti hai. Sirf owner ki screen; upload, kaam aur students par asar nahi. Pichhle deploy ke code me bhi badge isi tarah jaanch ka intezaar karta tha, yaani yeh is deploy se nahi bigadta. Sudhaar agle packet me, jaanch ke saath; deploy se theek pehle bina jaanch ka naya code nahi dala.
+- Teen "low" baatein usi file me hain; theek nahi ki gayi.
+- Regression ke baad koi app code nahi badla: aakhri badlav 06:02 UTC, regression 07:12 se 07:19 UTC. Packet E ka koi code nahi likha gaya.
+- Production build ban gaya (yarn build, 31 second, koi galti nahi).
+- Live ke Secrets me zaroori naam set hain: SUPABASE_URL, SUPABASE_SECRET_KEY, WEBHOOK_CRON_SECRET, FRONTEND_URL. Is deploy ko koi nayi key, nayi library ya naya cron nahi chahiye.
+- Deploy-jaanch tool ne ek baat uthayi: .gitignore me ".env" likha hai. Yeh line 17 Oct se hai aur 23 Nov ke deploy wale code me bhi thi; keys Secrets me rakhi hain. Isliye ise nahi badla (badalne se secret wali file git me chali jati). Agar deployer isi par ruke to uska message builder ko bhejiye.
+- Jaancha NAHI gaya: live par kuch nahi; asli do server; store ke latakne par asli samay.
+- 25 Nov, lagbhag 12:20 UTC: owner ne deploy panel se deploy kar diya (Packet A se D live par).
+- Deploy ke baad live ko ek baar sirf padha gaya (deployer ki read-only report, 25 Nov):
+  - Dono pod theek chal rahe hain, 0 restart, koi crash ya memory ki galti nahi; 24 ghante ke log me koi galti ki line nahi.
+  - Atki PDF "mathematics chapterwise": ab 0% par nahi hai. Poori padhi ja chuki hai: 27 me se 26 mock ready, 1 mock "Attention Needed" me (use Fix me dekhna owner ka kaam hai).
+  - Storage record: Supabase aur Emergent theek, galtiyon ki list khali. Galat laal line ki wajah (har 409 par sabke liye aaram) ab code me nahi hai.
+  - Koi kaam queue me ruka nahi; latke kadam 0; 15 minute wali jaanch har baar 200 de rahi hai.
+  - Jo is report me NAHI tha: badi file (7 MB) ke test ka nateeja alag se nahi likha tha; badge ka rang owner ki screen par hi dikhega.
+- 25 Nov, 10:35 UTC: owner ne "deploy" likha. Builder ne deployer ko bheja; deployer ne deploy NAHI kiya aur kaha ki yeh deploy panel (UI) se hi hoga, jahan "purani app replace" ya "nayi app" chunna hota hai. Owner ko yahi bataya gaya. Jab tak owner "deploy ho gaya" na likhe, app ka koi code nahi badlega (Packet E shuru nahi hoga), taaki aadha kaam deploy me na jaye.
+
+
+## Packet E — picture ka saboot: kadam 1 aur 2 (25 Nov, deploy ke baad; SIRF preview me)
+- **Deploy nahi hua.** Live par Packet A se D hi hain. E abhi adhoora hai (neeche "abhi nahi bana" dekhiye).
+- Kadam 1, saboot ka function (nayi file backend/tejas/picture_proof.py): ek paper ki har picture (sawaal, solution aur option ke tukde) ek hi storage me hai ya nahi.
+  - Supabase: picture Supabase ki apni list me ho, aur size wahi ho jo save karte samay tha. Emergent: har picture wapas padh kar fingerprint se milayi jati hai.
+  - Yeh function sirf padhta hai: kuch save, copy ya delete nahi karta. Verified JEE Main PYQ par chalta hi nahi.
+- Kadam 2, PDF se bana mock jab Live ya Scheduled hota hai (book_publish.py, book_worker.py):
+  - Test banne se pehle saboot liya jata hai. Jo picture na mile ya badli hui mile, sirf wahi ek baar dobara save hoti hai, phir jaanch dobara.
+  - Phir bhi saabit na ho: mock Draft rehta hai, koi test nahi banta. Row: "Atki hai: iski pictures storage mein saabit nahi hui ... Wajah: 28 pictures storage me nahi mili", saath me "Dobara chalao"; har 15 minute apne aap koshish. Baaki mock aur kitaabein chalti rehti hain.
+  - Supabase khud jawab na de (503) to kisi picture ko "gayab" nahi kaha jata: kitaab Supabase ka intezaar karti hai, pehle jaisa.
+  - Pictures do storage me bati hon to mock Live nahi hota aur row batati hai.
+  - Scheduled mock ki jaanch schedule karte samay hoti hai, khulne ke samay nahi.
+  - Nayi save hui picture ke record me ab size bhi likha jata hai (purane record me size nahi hai; unke liye sirf "list me hai" dekha jata hai).
+- Screen par: saabit mock ki row par "Pictures: 28 / 28 · Storage: Supabase". Uploads ki row, Mocks ki row, Machine panel aur badge "saabit nahi hui" kehte hain (pehle wali line "picture Supabase mein nahi ja rahi" nahi).
+- Jaanch (sab ek-ek karke, test database par):
+  - tests/picture_proof238.py 26/26 (function akela).
+  - tests/picture_gate239.py 40/40 (app ke apne route + asli worker, nakli Supabase).
+  - tests/picture_proof_real239.py 12/12 asli Supabase par, sirf preview bucket, sirf TEST_ files (ant me hata di gayi, 0 bachi). 1,011 file wale folder me bhi list poori padhi gayi.
+  - Browser: tests/ui_picture239.py 33/33 (desktop + 390 px).
+  - Purani 32 suite dobara (13:27 se 13:35 UTC): 1,210 jaanch, 1 fail. Woh ek (media_cdn_iso198 "paper built") Packet E se pehle wale code par bhi waise hi fail hoti hai; maine pichhle commit ki copy par chala kar dekha.
+  - Chaar aur purani suite jo E se pehle bhi isi tarah fail hoti hain (copy par dekha): publish_fail_iso211 4/5, media_warm_iso217 35/36, get_ready_iso188 35/36, get_ready_iso189 8/9.
+  - Do purani suite me ek-ek line badalni padi kyunki unka apna nakli Supabase list nahi deta tha / unka wrapper naya argument nahi leta tha: storage_wait224 (27/27), step_guard233 (33/33). tests/storage_wait_bridge224.py me bhi wahi ek line badli; woh bridge dobara chalaya NAHI gaya.
+- Abhi NAHI bana (E ke baaki kadam): (3) chuna hua samay nikal jaye to der se na khule; (4) Likha hua mock, Off se Live, Library se wapas; (5) purani Emergent pictures ki Supabase me copy; (6) "Pictures ki poori jaanch" button.
+- Jaancha NAHI gaya: AITS ke din wale paper par fail hone ka raasta alag se (code wahi hai; theek chalne wala raasta library_aits_iso180 125/125 aur series_dates_iso187 47/47 se paas); AITS ki screen par wajah dikhti hai ya nahi; asli do server; live par kuch nahi.
+- **Deploy ki salaah: E poora hone se pehle deploy na karein.** Wajah: agar kisi purani kitaab ke Draft mock ki kuch pictures Emergent me aur kuch Supabase me hain, to woh mock ab Live nahi hoga aur use theek karne wala kadam (5) abhi bana nahi hai.
 

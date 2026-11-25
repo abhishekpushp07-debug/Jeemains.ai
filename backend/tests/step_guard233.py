@@ -188,9 +188,9 @@ async def main():
         f = (await upload(own, cut_pdf('HGF', long=True), 'TEST_slow_f', section_id=sec))['id']; await finish(own, f)
         mk = await BM.find_one({'book_id': f}); saved = []
 
-        async def slow_crop(book, mock, crop, region, role):
+        async def slow_crop(book, mock, crop, region, role, again=None):
             await asyncio.sleep(.6); saved.append(1)
-            return await real_crop(book, mock, crop, region, role)
+            return await real_crop(book, mock, crop, region, role, again)
         BP.crop_ref = slow_crop
         t0 = time.time(); await live(own, mk['_id']); took = time.time() - t0
         mk = await BM.find_one({'book_id': f})

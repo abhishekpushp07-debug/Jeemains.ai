@@ -25,7 +25,7 @@ async def upload_progress(b):
         w = p['storage_wait']
         out['storage_wait'] = {'since': w['since'], 'error': w.get('error', '')[:200], 'kind': w.get('kind') or 'away', 'code': w.get('code'),
                                'reason': w.get('reason', ''), 'next': w.get('next', ''), 'stuck': bool(w.get('stuck')), 'retrying': bool(w.get('retrying')),
-                               'mock': w.get('mock', ''), 'more': max(0, len(w.get('mocks') or {}) - 1)}
+                               'mock': w.get('mock', ''), 'more': max(0, len(w.get('mocks') or {}) - 1), **({'what': w['what']} if w.get('what') else {})}
     return out
 FLAGGED = {'$elemMatch': {'flag': {'$nin': ['', None]}}}
 
@@ -122,6 +122,12 @@ async def type_mocks(sid: str, u=Depends(owner)):
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
     t = await database_now()
     items = [set_item(test_view(x, t)) for x in await section_tests(s, e['key'])]
+    # A test whose pictures were proven in storage when it went Live says so on its row (never a verified PYQ paper).
+    proofs = {p['_id']: p async for p in db.tejas_picture_proofs.find({'_id': {'$in': [i['id'] for i in items if not i['locked']]}, 'ok': True, 'total': {'$gt': 0}},
+                                                                      {'proven': 1, 'total': 1, 'store': 1, 'at': 1})}
+    for it in items:
+        if it['id'] in proofs:
+            it['pictures'] = {k: proofs[it['id']][k] for k in ('proven', 'total', 'store', 'at')}
     waiting = await waiting_items(sid)
     reread = await rereading_books({'payload.destination.section_id': sid})
     busy = [w['id'] for w in waiting if w['kind'] == 'book_mock' and w['state'] == 'publishing']
@@ -134,7 +140,7 @@ async def type_mocks(sid: str, u=Depends(owner)):
         if sw.get('kind') == 'hang':  # the PDF's own work went silent three times: every mock of it that waits to go Live says so
             hung[b['_id']] = {'reason': sw.get('reason', ''), 'since': sw['since'], 'kind': 'hang'}
         for mid, v in (sw.get('mocks') or {}).items():
-            held_up[mid] = {'reason': v.get('reason', ''), 'since': sw['since']}
+            held_up[mid] = {'reason': v.get('reason', ''), 'since': sw['since'], **({'kind': v['kind']} if v.get('kind') else {})}
     for w in waiting:
         if w['kind'] == 'import':
             items.append({'kind': 'import', 'id': w['id'], 'title': w['title'], 'status': 'draft', 'to_fix': w['issue_count'], 'count': w['count'],

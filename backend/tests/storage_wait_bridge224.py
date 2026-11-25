@@ -32,7 +32,7 @@ async def main():
     os.makedirs(OUT, exist_ok=True)
     sb = SwitchedSupabase()
     for p in (mock.patch.object(S, 'configured', lambda: True), mock.patch.object(S, 'sb_put', sb.put), mock.patch.object(S, 'sb_get', sb.get),
-              mock.patch.object(S, 'bucket_name', lambda: 'test-bucket')):
+              mock.patch.object(S, 'sb_list', sb.list), mock.patch.object(S, 'bucket_name', lambda: 'test-bucket')):
         p.start()
     own, _ = await mkstaff('owner', 'ui224'); rev, _ = await mkstaff('reviewer', 'ui224')
     raw = cut_pdf('UI224', long=True)

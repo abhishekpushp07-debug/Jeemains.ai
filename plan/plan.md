@@ -85,9 +85,10 @@ Picture ka safar:
 | Packet A: Pocket 1 + 2 ki alag jaanch (25 Nov) | Poora: testing agent (iteration_224) aur alag code review paas. Upar ki line ka "Testing agent ki alag jaanch baaki" ab purana hai. Sirf preview me. |
 | Packet B: latke kadam ki rok | Bana aur jaancha hua (testing agent iteration_225 + alag code review). Sirf preview me. |
 | Packet C: Delete button | Bana aur jaancha hua (testing agent iteration_225 + alag code review). Sirf preview me. |
-| Packet D: Pocket 3, sachcha badge | Bana aur jaancha hua (testing agent iteration_226). Alag code review BAAKI. Sirf preview me. |
-| Packet E, F, G (saboot, fallback, Supabase me lana) | Shuru nahi. E ke liye sirf code padha gaya; koi code nahi likha gaya. |
-| Deploy | Ek bhi nahi hua. Poora haal: memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md |
+| Packet D: Pocket 3, sachcha badge | Bana aur jaancha hua (testing agent iteration_226 + alag code review 25 Nov: koi blocker nahi; ek medium aur teen low baaki, test_reports/code_review_packet_D.md). Sirf preview me. |
+| Packet E (picture ka saboot) | Adhoora, sirf preview me, deploy nahi hua. Bana aur jaancha hua (25 Nov): saboot ka function, aur PDF se bane mock ke Live/Scheduled par rok (na mile to ek baar dobara save, phir bhi nahi to Draft + "Atki hai" + wajah + Dobara chalao), row par "Pictures: n / n · Storage". Abhi nahi bana: der se na khulna, Likha hua mock, Off se Live, Library se wapas, purani Emergent pictures ki copy, "Pictures ki poori jaanch" button. Poora haal: memory/NIGHT_REPORT.md |
+| Packet F, G (fallback, Supabase me lana) | Shuru nahi. |
+| Deploy | 25 Nov ko owner ne deploy kiya: Packet A se D ab live par hain. Live ko sirf padh kar dekha gaya: atki PDF aage badh gayi (27 me se 26 mock ready), storage ki galtiyon ki list khali, koi crash nahi. Upar ki lines ka "Sirf preview me" aur "Live par ... purana code" ab purana hai. Poora haal: memory/NIGHT_REPORT.md |
 
 Pocket 2 ki jaanch ki seema:
 - 15 minute sach me ruk kar nahi, ghadi aage badha kar jaanche gaye.

@@ -204,6 +204,8 @@ async def facts():
     held = {'removed': False, 'archived': {'$ne': True}, 'paused': {'$ne': True}, 'payload.storage_wait': {'$exists': True}, 'payload.storage_wait.kind': {'$ne': 'hang'},
             'payload.storage_wait.retrying': {'$ne': True}}
     stuck = await db.tejas_books.count_documents({**held, 'payload.storage_wait.stuck': True})
+    # A mock whose pictures were not proven in storage is "Atki hai" too, but nothing was returned by Supabase: it is said in its own words.
+    unproven = await db.tejas_books.count_documents({**held, 'payload.storage_wait.stuck': True, 'payload.storage_wait.what': 'proof'})
     waiting = await db.tejas_books.count_documents({**held, 'payload.storage_wait.stuck': {'$ne': True}, 'payload.storage_wait.since': {'$lte': late}})
     big_waiting = await db.tejas_books.count_documents({**held, 'payload.transfer': {'$exists': True}})
     # A PDF whose own work went silent again and again is "Atki hai" too, though no store is at fault: it is counted apart and said so.
@@ -214,7 +216,7 @@ async def facts():
     other = {'status': 'queued', 'kind': {'$ne': 'book_step'}, 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}}
     stuck += await db.tejas_jobs.count_documents({**other, 'stuck': True})
     waiting += await db.tejas_jobs.count_documents({**other, 'stuck': {'$ne': True}, 'storage_wait_since': {'$lte': late}})
-    return {'stuck': stuck, 'waiting': waiting, 'big_waiting': big_waiting, 'hung': hung}
+    return {'stuck': stuck, 'waiting': waiting, 'big_waiting': big_waiting, 'hung': hung, 'unproven': unproven}
 
 
 def speed(rows):
@@ -257,8 +259,10 @@ async def summary(doc=None):
             # Supabase answers, only the check file did not go or came back wrong: nothing is rested, real files are still tried one by one.
             mode = 'supabase'
             yellow.append(f'Supabase jawab de raha hai, par jaanch file theek nahi gayi. Wajah: {why(small)}. Asli files abhi bhi bheji ja rahi hain; jo rukegi woh neeche list mein dikhegi.')
-        if f['stuck']:
-            yellow.append(f"{f['stuck']} file Supabase mein atki hai. Wajah aur \"Dobara chalao\" neeche Machine ki list mein hai.")
+        if f['stuck'] - f['unproven']:
+            yellow.append(f"{f['stuck'] - f['unproven']} file Supabase mein atki hai. Wajah aur \"Dobara chalao\" neeche Machine ki list mein hai.")
+        if f['unproven']:
+            yellow.append(f"{f['unproven']} PDF ke mock ki pictures storage mein saabit nahi hui, isliye woh Live nahi hue (Atki hai). Wajah aur \"Dobara chalao\" neeche Machine ki list mein hai.")
         if f['waiting']:
             yellow.append(f"{f['waiting']} file 10 minute se zyada se ruki hai.")
         if f['hung']:

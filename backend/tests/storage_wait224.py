@@ -43,6 +43,14 @@ class FakeSupabase:
             raise S.StorageWaiting('Supabase abhi file nahi de raha (TEST).')
         return self.objects[path]
 
+    def list(self, folder, bucket=None):
+        """Like tejas_storage.sb_list: one level of a folder, ([(file name, size)], [sub-folder names])."""
+        if self.down:
+            raise S.StorageError('Supabase connection failed: ConnectError')
+        prefix = folder.rstrip('/') + '/'
+        inside = [(k[len(prefix):], len(v)) for k, v in self.objects.items() if k.startswith(prefix)]
+        return [(n, size) for n, size in inside if '/' not in n], sorted({n.split('/', 1)[0] for n, _ in inside if '/' in n})
+
 
 def emergent_keys():
     return {k for k in H.STORE if not k.startswith('jeelive/health/')}
@@ -67,7 +75,7 @@ async def main():
     await H.tdbmod.indexes(); await structure.seed()
     sb = FakeSupabase()
     patches = [mock.patch.object(S, 'configured', lambda: True), mock.patch.object(S, 'sb_put', sb.put), mock.patch.object(S, 'sb_get', sb.get),
-               mock.patch.object(S, 'bucket_name', lambda: 'test-bucket')]
+               mock.patch.object(S, 'sb_list', sb.list), mock.patch.object(S, 'bucket_name', lambda: 'test-bucket')]
     for p in patches:
         p.start()
     S.STATE.update(down_until=0.0, strikes=0, failovers=0, last_failover=None, backup_since=None)

@@ -1,3 +1,10 @@
+## 2026-11-25 — Packet E steps 1+2: picture proof before a PDF mock goes Live/Scheduled (preview only, NOT deployed)
+- New tejas/picture_proof.py (read-only proof: Supabase list + size, Emergent read-back + sha256, one store only; verified PYQ skipped). tejas_storage.sb_list takes a bucket.
+- book_publish.publish_ready proves the pictures before the set is written; a bad picture is saved once more, then proven again; still unproven → the mock stays Draft, "Atki hai" (kind proof), 15-minute retry, Dobara chalao. New picture records carry size. Proof noted in tejas_picture_proofs.
+- master.type_mocks adds pictures {proven,total,store,at} and stuck.kind 'proof'; uploads/machine rows add what; badge has its own line for unproven mocks. Screens: MockList.js, UploadProgress.js, MachinePanel.js.
+- Tests: picture_proof238 26/26, picture_gate239 40/40, picture_proof_real239 12/12 (real Supabase, preview bucket, TEST_ files removed), ui_picture239 33/33; 32 older suites 1,210 checks with 1 failure that predates E. Details: memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md section 15.
+
+
 ## 2026-11-23 (night) — Upload PDF dialog: visible "PDF chuniye" button (preview only, needs deploy)
 - Owner on jeelive.ai: picker often did not open. UploadDialog PdfBox now has a real button (data-testid upload-main-pick / upload-key-pick / upload-solutions-pick) that clicks a visually hidden input (.master-pdf-input); label tap also opens it; button says "Badlo" after a pick. Dialog close X is 44x44 in admin dialogs.
 - Tests: tests/ui_upload_repro223.py 12/12 (bridge 181); testing agent iteration_215: all requested flows pass.

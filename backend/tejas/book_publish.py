@@ -12,7 +12,8 @@ from .png_small import shrink_many
 from .step_guard import beat
 from .content import valid_rules, question_issues, publish_validated
 from .chapter_reader import book_subjects, match_subject, syllabus_subject, resolve_subject, bookmark_title
-from tejas_storage import put_object
+from .picture_proof import checked, unproven, remember
+from tejas_storage import put_object, configured
 
 
 HARD=('missing or conflicting supplied key','incomplete options or key','unsupported exact-integer key','response type is unresolved','original key region required')
@@ -250,35 +251,57 @@ async def rebuild(book, token, source=None):
     return cutting
 
 
-async def shrink_new(book, pairs):
+async def shrink_new(book, pairs, again=()):
     """Pictures not saved yet are made smaller without changing a pixel. Each keeps the fingerprint of its original,
-    so a picture that is already saved is neither shrunk nor sent again."""
+    so a picture that is already saved is neither shrunk nor sent again (unless it is one of `again`)."""
     todo=[]
     for crop,role in pairs:
         if crop.get('error') or not crop.get('image_bytes'):continue
         crop['raw_sha']=digest(crop['image_bytes']);todo.append((identity(book.id,crop['raw_sha'],role),crop))
     if not todo:return
-    have=set(await files.distinct('id',{'id':{'$in':[fid for fid,_ in todo]}}))
+    have=set(await files.distinct('id',{'id':{'$in':[fid for fid,_ in todo]}}))-set(again)
     new=[crop for fid,crop in todo if fid not in have]
     for crop,small in zip(new,await run_in_threadpool(shrink_many,[crop['image_bytes'] for crop in new])):crop['image_bytes']=small
 
 
-async def crop_ref(book,mock,crop,region,role):
+async def crop_ref(book,mock,crop,region,role,again=None):
     if crop.get('error'):raise ValueError(f"Page {region['page']}: {crop['error']}")
     png=crop['image_bytes'];fid=identity(book.id,crop.get('raw_sha') or digest(png),role)
-    if not await files.find_one({'id':fid},{'_id':1}):
+    redo=bool(again) and fid in again
+    if redo:again.discard(fid)  # saved once more, once: a picture used twice in the mock is not sent twice
+    known=await files.find_one({'id':fid},{'_id':1})
+    if redo or not known:
         path=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/crops/{fid}.png',png,'image/png')
-        try:
-            await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
-                'path':path,'kind':'rendered_png','sha256':digest(png),'source_sha256':book.payload['sha256'],
-                'original_page':region['page'],'original_rect':region['rect'],'book_import_id':book.id,'created_at':now()}},upsert=True)
-        except DuplicateKeyError:
-            pass  # the same picture saved at the same moment by a sibling crop: one record is enough
+        held={'path':path,'sha256':digest(png),'size':len(png)}  # the size is what the picture proof compares with Supabase's own list
+        if known:
+            await files.update_one({'id':fid},{'$set':held})  # the record says what storage holds now
+        else:
+            try:
+                await files.update_one({'id':fid},{'$setOnInsert':{'id':fid,'set_id':mock.set_id or identity(mock.id,mock.generation),
+                    **held,'kind':'rendered_png','source_sha256':book.payload['sha256'],
+                    'original_page':region['page'],'original_rect':region['rect'],'book_import_id':book.id,'created_at':now()}},upsert=True)
+            except DuplicateKeyError:
+                pass  # the same picture saved at the same moment by a sibling crop: one record is enough
     return {'file_id':fid,'page':region['page'],'rect':region['rect'],'prerendered':True}
 
 
-async def source_questions(book, mock, raw, guard=None, strict=True):
-    """The mock's questions with original page crops, exactly as students receive them. Not strict: incomplete questions are left out and listed."""
+async def proven(book, mock, raw, guard, questions):
+    """Before a mock becomes a test: every picture of it is proven in storage, all in one store. A picture that is not there
+    (or is not what was saved) is saved once more, then all are checked again. Still not proven: only this mock waits, as Draft."""
+    target='supabase' if configured() else 'emergent'
+    def alive():beat(book.id,'picture proof')
+    await guard('renew')
+    proof=await checked({'questions':questions},alive)
+    if proof['bad'] and proof['store'] in (target,''):
+        questions,_=await source_questions(book,mock,raw,guard,again=set(proof['bad']))
+        proof=await checked({'questions':questions},alive)
+    if not proof['ok']:raise unproven(proof)
+    return questions,proof
+
+
+async def source_questions(book, mock, raw, guard=None, strict=True, again=None):
+    """The mock's questions with original page crops, exactly as students receive them. Not strict: incomplete questions are left out and listed.
+    `again`: pictures (file ids) that are saved once more although their records exist."""
     rules=mock.rules;chapter=mock.chapter or {}
     wanted=[(q['id'],role,region) for q in mock.questions for role in ('question','solution') for region in q['source_regions'][role]]
     rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10,lambda:beat(book.id,'picture cut'))
@@ -290,7 +313,7 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
     pieces={}
     for (qid,part),crop in zip(parts,painted):pieces.setdefault(qid,[]).append((part,crop))
     if guard:await guard('renew')
-    await shrink_new(book,[(crop,role) for (_,role,_),crop in zip(wanted,rendered)]+[(crop,'piece') for crop in painted])
+    await shrink_new(book,[(crop,role) for (_,role,_),crop in zip(wanted,rendered)]+[(crop,'piece') for crop in painted],again or ())
     if guard:await guard('renew')
     # Every picture of the mock is saved first, 8 at a time, so publishing waits for the slowest picture, not for all of them one by one.
     gate=asyncio.Semaphore(8)
@@ -301,7 +324,7 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
         await db.tejas_publish_progress.update_one({'_id':mock.id},{'$set':{'done':progress['done'],'total':progress['total'],'at':now()}},upsert=True)
     async def save(key,crop,region,role):
         async with gate:
-            try:out=key,await crop_ref(book,mock,crop,region,role)
+            try:out=key,await crop_ref(book,mock,crop,region,role,again)
             except ValueError as exc:out=key,exc
         progress['done']+=1;beat(book.id,'picture saved')
         if progress['done']==progress['total'] or time.time()-progress['at']>=1.5:await tell()
@@ -400,6 +423,7 @@ async def publish_ready(book,token,raw,only_mid=None):
         async def guard(kind):
             await (renew(book,token) if kind=='renew' else fence(book,token))
         questions,_=await source_questions(book,mock,raw,guard)
+        questions,proof=await proven(book,mock,raw,guard,questions)
         stamp=await database_now();start=stamp if mock.release_override else mock.release_at or book.payload.get('release_at') or stamp
         suffix=f' · v{mock.generation}' if mock.generation>1 else ''
         data={'id':sid,'book_import_id':book.id,**base_set(book,mock,questions,dest,suffix),'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False) or mock.live_exam}
@@ -423,6 +447,7 @@ async def publish_ready(book,token,raw,only_mid=None):
             await sets.update_one({'id':mock.set_id,'book_import_id':book.id},{'$set':{'status':'withdrawn','live_enabled':False}})
             if mock.set_id not in mock.history:mock.history.append(mock.set_id)
         mock.set_id=sid;mock.published_generation=mock.generation;mock.publish_requested=False;mock.state='scheduled' if start>stamp else 'published';await save_mock(mock)
+        await remember(sid,proof)
         if dest and dest.get('replaces') and not book.payload.get('replaced_at'):
             from .structure import apply_replacement
             book.payload['replaced_at']=now()
