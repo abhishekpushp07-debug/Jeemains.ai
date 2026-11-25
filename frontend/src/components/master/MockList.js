@@ -9,7 +9,7 @@ import {Switch} from '../ui/switch';
 import {DropdownMenu,DropdownMenuTrigger,DropdownMenuContent,DropdownMenuItem,DropdownMenuSeparator} from '../ui/dropdown-menu';
 import {TextDialog,ConfirmDialog} from '../admin/AdminShared';
 import {ScheduleDialog} from './ScheduleDialog';
-import {StatusLabel,SOURCE,fixLink,fmtIST,stuckLine} from './MasterShared';
+import {StatusLabel,SOURCE,fixLink,fmtIST,stuckLine,missedLine} from './MasterShared';
 import {TryAsStudent} from './TryAsStudent';
 import {DuplicateNote} from './Duplicates';
 import {toast} from 'sonner';
@@ -67,6 +67,7 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
    {m.pictures&&<small className="master-proof" data-testid={'mock-pictures-'+m.id}>Pictures: {m.pictures.proven} / {m.pictures.total} · Storage: {m.pictures.store==='supabase'?'Supabase':'Emergent'}</small>}
    {m.rereading&&<small className="master-reread" data-testid={'mock-rereading-'+m.id}><Loader2 size={13} className="spin" aria-hidden="true"/>dobara padhi ja rahi hai · {m.rereading.read_pages}/{m.rereading.pages} page</small>}
    {m.stuck&&<small className="admin-reason" data-testid={'mock-stuck-'+m.id}>{stuckLine(m.stuck)}</small>}
+   {m.missed_at&&<small className="admin-reason" data-testid={'mock-missed-'+m.id}>{missedLine(m.missed_at)}</small>}
    {m.replace_pending&&<small className="admin-replacing">“{m.replace_pending}” isko replace karega. Woh Live hote hi yeh Library mein chala jayega.</small>}<DuplicateNote m={m}/></div>
   <div className="master-row-status"><LiveSwitch m={m} busy={busy} onPick={onPick}/><StatusMenu m={m} busy={busy} onPick={onPick}/></div>
   <div className="admin-test-actions">{m.status==='draft'&&m.count>0&&!m.rereading&&<TryAsStudent m={m}/>}<MainAction m={m}/>{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Naam badlo: '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>

@@ -145,7 +145,7 @@ async def main():
             BP.database_now = real
         bk, mk = await row(e), await BM.find_one({'_id': me})
         check('C. its day opened while it waited: no paper is made late; the mock loses its day and waits for a new one', r.status_code == 200 and mk['state'] == 'ready' and not mk['issues'] and mk.get('series_date') is None
-              and not mk.get('publish_requested') and mk.get('release_at') is None and not mk.get('set_id') and not await SETS.count_documents({'book_import_id': e}),
+              and not mk.get('publish_requested') and mk.get('release_at') is None and not mk.get('set_id') and not mk.get('missed_at') and not await SETS.count_documents({'book_import_id': e}),
               (r.status_code, mk['state'], mk['issues'], mk.get('series_date'), mk.get('publish_requested'), mk.get('set_id')))
         check('C. no picture of it was sent again', not posts(n, e), posts(n, e))
         s, d = await slot(own, view, days[3])

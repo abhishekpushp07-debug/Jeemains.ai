@@ -274,7 +274,7 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
             picked=[m for m in await mocks_for(book) if m.state=='ready' and not m.issues and m.published_generation!=m.generation and (not body.mock_id or m.id==body.mock_id)]
             if not picked:raise HTTPException(409,'This mock is not ready. Fix its held problems first.' if body.mock_id else 'No mocks are ready yet. Held mocks stay private until their problems are fixed.')
             for m in picked:
-                m.publish_requested=True;m.release_at=body.release_at;m.revision+=1;await save_mock(m)
+                m.publish_requested=True;m.release_at=body.release_at;m.missed_at=None;m.revision+=1;await save_mock(m)
             book.paused=False;book.state='matching';run=True
         else:
             row=await db.tejas_book_mocks.find_one({'_id':body.mock_id,'book_id':id})
@@ -312,7 +312,7 @@ async def request_publication(bid,wanted,release_at,bg,u):
             picked=[m for m in await mocks_for(book) if m.state=='ready' and not m.issues and m.published_generation!=m.generation
                     and not m.publish_requested and not m.archived and (wanted is None or m.id in wanted)]
             for m in picked:
-                m.publish_requested=True;m.release_at=release_at;m.revision+=1;await save_mock(m)
+                m.publish_requested=True;m.release_at=release_at;m.missed_at=None;m.revision+=1;await save_mock(m)  # the owner chose again: the old "time passed" note goes
             if picked:
                 book.paused=False;book.state='matching';await save_book(book,token)
                 await audit(u['id'],'Book publish_ready',bid,f'{len(picked)} ready mocks'+(' scheduled' if release_at else ''))

@@ -165,7 +165,9 @@ async def type_mocks(sid: str, u=Depends(owner)):
                       'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False, 'cut': w.get('cut'),
                       'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject'),
                       'publish_progress': None if mark else progress.get(w['id']), **({'rereading': {'read_pages': again['read_pages'], 'pages': again['pages']}} if again else {}),
-                      **({'stuck': mark} if mark and status in ('publishing', 'scheduled') else {})})
+                      **({'stuck': mark} if mark and status in ('publishing', 'scheduled') else {}),
+                      # its chosen time passed while it waited: it is Draft again and its row says which time, until the owner chooses again
+                      **({'missed_at': w['missed_at']} if w.get('missed_at') and w['state'] == 'ready' else {})})
     uploads = []
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [
             {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'},

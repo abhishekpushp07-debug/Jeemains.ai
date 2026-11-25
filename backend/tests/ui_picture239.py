@@ -47,6 +47,16 @@ async def walk(pw, size, fix):
         say(f'{size}: an unproven mock has no "Pictures" line', await page.locator('[data-testid^=mock-pictures-]').count() == 1, await page.locator('[data-testid^=mock-pictures-]').count())
         words = [w.strip() for w in await page.locator('[data-testid^=mock-live-word-]').all_inner_texts()]
         say(f'{size}: one mock is Live, three say Atki hai', words.count('Live') == 1 and words.count('Atki hai') == 3, words)
+        # Packet E step 3: the mock whose chosen time went by is Draft again, says which time, and is not called stuck.
+        L = INFO['late']; gone = await text(f"mock-missed-{L['mock']}")
+        say(f'{size}: the mock whose chosen time passed: chip "Draft · samay nikal gaya", switch Off and usable', 'Draft · samay nikal gaya' in await text(f"mock-status-{L['mock']}")
+            and await text(f"mock-live-word-{L['mock']}") == 'Off' and await at(f"mock-live-switch-{L['mock']}").is_enabled(), (await text(f"mock-status-{L['mock']}"), await text(f"mock-live-word-{L['mock']}")))
+        say(f'{size}: ...its row gives the time that passed, says it will not open late by itself, and what to press', 'Chuna hua samay (' in gone and 'IST) nikal gaya' in gone and 'isliye yeh Live nahi hua' in gone
+            and 'der se apne aap nahi khulega' in gone and 'Live karo' in gone and 'naya samay chuniye' in gone, gone)
+        say(f'{size}: ...it is not called stuck and its PDF is not in the waiting uploads', not await at(f"mock-stuck-{L['mock']}").count() and not await at(f"type-upload-{L['book']}").count()
+            and await page.locator('[data-testid^=mock-missed-]').count() == 1, await page.locator('[data-testid^=mock-missed-]').count())
+        await at(f"mock-missed-{L['mock']}").scroll_into_view_if_needed()
+        await page.screenshot(path=f'{SS}/{size}_late.jpg', quality=40, type='jpeg')
         if size == 'mob':
             await overflow(page, size + ' type page')
         await at(f'type-upload-{BOOK}').scroll_into_view_if_needed()
@@ -74,6 +84,15 @@ async def walk(pw, size, fix):
             say(f'{size}: Supabase keeps the pictures + Dobara chalao: the mock is Live, the stuck note is gone, no page reload', done and not await at(f'mock-stuck-{MID}').count(), words)
             say(f'{size}: ...and its row now says "{LINE(PRF["pictures"])}"', sorted(lines) == sorted([LINE(OK['pictures']), LINE(PRF['pictures'])]), lines)
             await page.screenshot(path=f'{SS}/{size}_fixed.jpg', quality=40, type='jpeg')
+            await at(f"mock-live-switch-{L['mock']}").click()
+            done = False
+            for _ in range(60):
+                await page.wait_for_timeout(1000)
+                words = [w.strip() for w in await page.locator('[data-testid^=mock-live-word-]').all_inner_texts()]
+                if words.count('Live') == 3 and not await page.locator('[data-testid^=mock-missed-]').count():
+                    done = True; break
+            say(f'{size}: Live karo on the mock whose time passed: it goes Live now and the note is gone, no page reload', done, words)
+            await page.screenshot(path=f'{SS}/{size}_late_live.jpg', quality=40, type='jpeg')
         # The All India Test Series page of the same exam: day 1 has its paper, day 2's paper waits for its pictures.
         A = INFO['aits']; why = f"{A['pictures']} pictures storage me nahi mili"
         await page.goto(BASE + A['type']); await page.wait_for_selector('[data-testid=series-day-list]', timeout=25000)

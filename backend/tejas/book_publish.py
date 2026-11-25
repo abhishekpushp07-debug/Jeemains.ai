@@ -394,6 +394,17 @@ def base_set(book, mock, questions, dest, suffix=''):
     return data
 
 
+async def missed_time(book,token,mock,series):
+    """A mock the owner scheduled for a time, whose paper is still not made when that time has passed (it waited for storage or for its
+    pictures), never opens late: it stays Draft without a time and says so on its row, until the owner chooses Live or a new time.
+    Not this rule: an All India paper (its day has its own), a book-level release time, a time the owner let go on purpose (release now)."""
+    if series or not mock.publish_requested or not mock.release_at or mock.release_override or await database_now()<mock.release_at:return False
+    await fence(book,token)
+    mock.missed_at=mock.release_at;mock.release_at=None;mock.publish_requested=False;await save_mock(mock)
+    await audit(book.owner_id,'Book mock missed its time',mock.id,'Its chosen time passed before its paper could be made. It stays Draft and does not open late.')
+    return True
+
+
 async def publish_ready(book,token,raw,only_mid=None):
     if book.paused:return
     dest=book.payload.get('destination')
@@ -411,6 +422,7 @@ async def publish_ready(book,token,raw,only_mid=None):
         sid=identity(mock.id,mock.generation);existing=await sets.find_one({'id':sid})
         if existing and existing.get('status')=='published':
             mock.set_id=sid;mock.published_generation=mock.generation;mock.state='published';await save_mock(mock);continue
+        if await missed_time(book,token,mock,series):continue  # checked before any picture is cut: nothing is saved for a paper that will not open
         if series:
             from .live_series import window as day_window
             from .series_admin import series_cfg
@@ -424,6 +436,7 @@ async def publish_ready(book,token,raw,only_mid=None):
             await (renew(book,token) if kind=='renew' else fence(book,token))
         questions,_=await source_questions(book,mock,raw,guard)
         questions,proof=await proven(book,mock,raw,guard,questions)
+        if await missed_time(book,token,mock,series):continue  # saving and proving its pictures took until after its time; the saved pictures are kept
         stamp=await database_now();start=stamp if mock.release_override else mock.release_at or book.payload.get('release_at') or stamp
         suffix=f' · v{mock.generation}' if mock.generation>1 else ''
         data={'id':sid,'book_import_id':book.id,**base_set(book,mock,questions,dest,suffix),'live_enabled':True,'start_at':start,'competition':book.payload.get('competitive',False) or mock.live_exam}

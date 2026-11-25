@@ -208,6 +208,7 @@ class BookMock(BaseDocument):
     publish_hold: str = ''
     publish_requested: bool = False
     release_at: float | None = None
+    missed_at: float | None = None  # the time the owner chose, which passed before its paper could be made: it stays Draft and says so
     series_date: str | None = None
     series_id: str | None = None
     archived: bool = False

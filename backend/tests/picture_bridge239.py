@@ -51,6 +51,24 @@ async def main():
         await own.post('/api/admin/master/status', json={'items': [{'kind': 'book_mock', 'id': m} for m in mids], 'to': 'live'}); await pump()
     ok = (await upload(own, cut_pdf('UIOK', long=True), 'TEST_THEEK_PDF', section_id=sec))['id']; await finish(own, ok)
     mo = await BM.find_one({'book_id': ok}); await live(mo['_id']); mo = await BM.find_one({'_id': mo['_id']})
+    # Packet E step 3: a mock scheduled for a time that went by while its pictures were being saved. It is Draft again and says so.
+    from tejas import book_publish as BP
+    late = (await upload(own, cut_pdf('UILATE', long=True), 'TEST_SAMAY_NIKAL_GAYA', section_id=sec))['id']; await finish(own, late)
+    ml = await BM.find_one({'book_id': late}); real_proven, real_now = BP.proven, BP.database_now
+
+    async def after():
+        return await real_now() + 7200
+
+    async def slow(*args, **kw):
+        out = await real_proven(*args, **kw)
+        BP.database_now = after
+        return out
+    BP.proven = slow
+    try:
+        await own.post('/api/admin/master/status', json={'items': [{'kind': 'book_mock', 'id': ml['_id']}], 'to': 'scheduled', 'at': time.time() + 3600}); await pump()
+    finally:
+        BP.proven, BP.database_now = real_proven, real_now
+    ml = await BM.find_one({'_id': ml['_id']})
     proof = (await upload(own, cut_pdf('UIPRF', long=True), 'TEST_PICTURES_SAABIT_NAHI', section_id=sec))['id']; await finish(own, proof)
     K = [(1, 'B'), (2, 'B'), (3, 'C')]
     two = (await upload(own, build_pdf([{'n': 1, 'qs': q3('UI1'), 'keys': K}, {'n': 2, 'qs': q3('UI2'), 'keys': K}]), 'TEST_DO_MOCK_SAABIT_NAHI', section_id=sec))['id']; await finish(own, two)
@@ -81,6 +99,7 @@ async def main():
         json.dump({'owner': dict(own.cookies), 'type': f'/super-admin/exam/{slug}/{sec}', 'ok': {'book': ok, 'mock': mo['_id'], 'set': mo.get('set_id'), 'pictures': await DB.tejas_files.count_documents({'book_import_id': ok})},
                    'proof': {'book': proof, 'mock': mk['_id'], 'label': mk['label'], 'reason': (rows[proof]['payload'].get('storage_wait') or {}).get('reason', ''), 'pictures': await DB.tejas_files.count_documents({'book_import_id': proof})},
                    'two': {'book': two, 'mocks': [m['_id'] for m in pair], 'first': pair[0]['label']},
+                   'late': {'book': late, 'mock': ml['_id'], 'state': ml['state'], 'missed_at': ml.get('missed_at'), 'set': ml.get('set_id')},
                    'aits': {'type': f"/super-admin/exam/{slug}/{ser['id']}", 'book': abad, 'mock': sbad['_id'], 'label': sbad['label'], 'pictures': await DB.tejas_files.count_documents({'book_import_id': abad}),
                             'state': [(await BM.find_one({'_id': x['_id']}) or {}).get('state') for x in (sok, sbad)]}}, f)
     os.chmod(path, 0o600)

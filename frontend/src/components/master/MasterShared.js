@@ -17,6 +17,7 @@ export const StatusLabel=({m})=>{
  if(m.status==='draft'&&m.rereading)return ['Draft · dobara padh rahe hain','processing'];
  if(m.status==='draft'&&m.to_fix)return ['Draft · '+m.to_fix+' fix karne hain','attention'];
  if(m.status==='draft'&&m.empty)return ['Draft · koi sawaal nahi','hidden'];
+ if(m.status==='draft'&&m.missed_at)return ['Draft · samay nikal gaya','attention'];
  return STATUS[m.status]||['Off','paused'];
 };
 
@@ -42,5 +43,8 @@ export const plain=text=>{const hit=PLAIN.find(([re])=>re.test(text||''));if(hit
 
 // Why a paper that was asked to go Live (or was given a series day) is not there yet: said the same way wherever its row is shown.
 export const stuckLine=(k,what='yeh abhi Live nahi hua')=>`Atki hai: ${k.kind==='hang'?'is PDF ka kaam baar-baar beech mein latak gaya':k.kind==='proof'?'iski pictures storage mein saabit nahi hui':'iski ek picture Supabase mein nahi ja rahi'}, isliye ${what}.${k.reason?` Wajah: ${k.reason}.`:''} ${k.kind==='hang'?'Har ghante':'Har 15 minute mein'} apne aap phir koshish hoti hai; abhi ke liye upar Uploads mein “Dobara chalao” dabaiye.`;
+
+// A Draft whose chosen time passed while it waited for storage or for its pictures: the machine never opens it late.
+export const missedLine=t=>`Chuna hua samay (${fmtIST(t)}) nikal gaya, isliye yeh Live nahi hua. Yeh der se apne aap nahi khulega: “Live karo” dabaiye ya naya samay chuniye.`;
 
 export const Field=({label,id,children})=><div className="master-field"><label htmlFor={id}>{label}</label>{children}</div>;
