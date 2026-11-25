@@ -181,7 +181,7 @@ async def process_import(id):
             if len(json.dumps(qs,ensure_ascii=False).encode())>6*1024*1024: raise ValueError('Test content exceeds 6 MB. Split the source.')
             await imports.update_one(fence,{'$set':{'questions':qs,'issues':issues,'exam':result['exam'],'duration_minutes':result['duration_minutes'],
                 'status':'blocked' if issues else 'ready','sandbox':result['sandbox'],
-                'message':'Resolve the listed source issues and upload again.' if issues else 'All source entries paired. Supplied answer keys retained; no answers were generated.'},'$unset':{'storage_waits':'','stuck':''}})
+                'message':'Resolve the listed source issues and upload again.' if issues else 'All source entries paired. Supplied answer keys retained; no answers were generated.'},'$unset':{'storage_waits':'','stuck':'','storage_wait_since':''}})
         except Exception as exc:
             from tejas_storage import StorageError, StorageWaiting, STUCK_RETRY
             if isinstance(exc,StorageWaiting):
@@ -190,13 +190,13 @@ async def process_import(id):
                 from .jobs import run_later
                 stuck=exc.scope=='stuck'
                 note=f'Atki hai: is paper ki ek picture Supabase mein nahi ja rahi. Wajah: {exc.reason}. Har 15 minute mein apne aap phir koshish hogi; abhi ke liye Retry dabaiye.' if stuck else str(exc)
-                await imports.update_one(fence,{'$set':{'status':'queued','message':note[:350],'storage_wait':now(),'stuck':stuck},'$inc':{'storage_waits':1}})
+                await imports.update_one(fence,{'$set':{'status':'queued','message':note[:350],'storage_wait':now(),'stuck':stuck},'$inc':{'storage_waits':1},'$min':{'storage_wait_since':now()}})
                 # A stuck import keeps ONE 15-minute clock: its timer runs only if no newer try (the scheduled check, Retry) ran meanwhile.
                 if stuck:run_later(stuck_again,id,token,seconds=STUCK_RETRY)
                 else:run_later(process_import,id,seconds=min(300,60*2**min(r.get('storage_waits',0),3)))
                 return
             message=str(exc)[:350] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry with the same saved sources.'
-            await imports.update_one(fence,{'$set':{'status':'failed','message':message},'$unset':{'stuck':''}})
+            await imports.update_one(fence,{'$set':{'status':'failed','message':message},'$unset':{'stuck':'','storage_wait_since':''}})
 
 
 async def stuck_again(id, token):

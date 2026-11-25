@@ -53,10 +53,15 @@ def inspect(source, action='info', page=None, rect=None):
     return result
 
 
-def inspect_many(source, items, size=10):
-    """Items in groups of `size`; the groups run side by side, one PDF worker per CPU, and come back in order."""
+def inspect_many(source, items, size=10, alive=None):
+    """Items in groups of `size`; the groups run side by side, one PDF worker per CPU, and come back in order.
+    alive() is called after every finished group, so a long batch is seen to be working."""
     groups=[items[start:start+size] for start in range(0,len(items),size)]
+    def one(g):
+        done=run(source,g)
+        if alive:alive()
+        return done
     if len(groups)<2:
-        return [r for g in groups for r in run(source,g)]
+        return [r for g in groups for r in one(g)]
     with ThreadPoolExecutor(max_workers=min(LANES,len(groups))) as pool:
-        return [r for done in pool.map(lambda g:run(source,g),groups) for r in done]
+        return [r for done in pool.map(one,groups) for r in done]

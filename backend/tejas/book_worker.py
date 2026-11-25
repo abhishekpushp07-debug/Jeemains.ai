@@ -18,7 +18,7 @@ MOCKS_PER_STEP=5
 async def extract(source, numbers, alive=None):
     items=[{'action':'text','page':n} for n in numbers]
     try:
-        return await run_in_threadpool(inspect_many,source,items,10)
+        return await run_in_threadpool(inspect_many,source,items,10,alive)
     except ValueError:
         results=[]
         for n in numbers:

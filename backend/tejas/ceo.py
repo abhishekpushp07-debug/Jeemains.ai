@@ -338,10 +338,10 @@ async def _health():
         {'$group': {'_id': '$kind', 'count': {'$sum': 1}, 'last_at': {'$first': '$created_at'}, 'last_error': {'$first': '$error'}}}]).to_list(100)
     storage = None
     try:
-        from .storage_health import _last, summary as storage_summary
-        if _last.get('result'):
-            s = storage_summary(_last['result'])
-            storage = {'mode': s['mode'], 'checked_at': iso(s['checked_at']), 'alert': s['backup']['alert']}
+        from .storage_health import current
+        s = await current()
+        if s:
+            storage = {'mode': s['mode'], 'level': s['level'], 'checked_at': iso(s['checked_at']), 'alert': s['backup']['alert']}
     except Exception:
         storage = None
     return {'server_time': iso(t), 'grading_failed': await attempts.count_documents({'grading_status': 'failed'}),

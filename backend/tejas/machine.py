@@ -52,6 +52,6 @@ async def status(response: Response, u=Depends(owner)):
     attention = bool(stuck or stuck_files or hung or failed_books or failed_total or cron['late'] or waiting or store['mode'] in ('down', 'waiting') or store['backup']['alert'] or deletes['late'])
     return {'attention': attention, 'storage_mode': store['mode'], 'cron': cron, 'failed_jobs': failed_jobs, 'failed_total': failed_total,
             'storage_waiting': waiting, 'storage_waiting_jobs': waiting_jobs, 'storage_stuck': stuck_files,
-            'hung_books': hung, 'step_hangs': {'day': day_hangs, 'last': last_hang}, 'delete_pending': deletes,
+            'hung_books': hung, 'step_hangs': {'day': day_hangs, 'last': last_hang}, 'delete_pending': deletes, 'storage_errors': await storage_health.errors(),
             'failed_books': failed_books, 'stuck': stuck, 'disk': {'free': disk.free, 'total': disk.total},
             'files_saved': await files.estimated_document_count(), 'checked_at': t}

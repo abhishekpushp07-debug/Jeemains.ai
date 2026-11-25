@@ -80,6 +80,31 @@ async def walk(pw, size, fix):
         if size == 'mob':
             await overflow(page, size + ' type page')
         await page.screenshot(path=f'{SS}/{size}_type.jpg', quality=40, type='jpeg')
+        # The AITS days screen: the same Delete, as a small dustbin on a paper whose PDF never reached students.
+        A = INFO['aits']; AD, AK = A['draft'], A['kept']
+        await page.goto(BASE + A['path']); await page.wait_for_selector(f'[data-testid=series-paper-{AD}]', timeout=25000)
+        say(f'{size}: AITS: the paper of a PDF that never reached students has the dustbin; the paper of one that did has none',
+            await at(f'series-paper-delete-{AD}').count() == 1 and await at(f'series-paper-{AK}').count() == 1 and await at(f'series-paper-delete-{AK}').count() == 0)
+        if size == 'mob':
+            box = await at(f'series-paper-delete-{AD}').bounding_box()
+            say(f'{size}: AITS: the dustbin is at least 44 px each way', min(box['width'], box['height']) >= 44, box)
+        await at(f'series-paper-delete-{AD}').click(); await page.wait_for_selector('[data-testid=upload-delete-facts]', timeout=10000)
+        say(f'{size}: AITS: the same box opens, names that PDF, and is off until DELETE is typed', (await at('upload-delete-title').inner_text()).strip() == 'TEST_AITS_DRAFT_PDF'
+            and await at('upload-delete-confirm').is_disabled(), await at('upload-delete-title').inner_text())
+        if fix:
+            await at('upload-delete-input').fill('DELETE'); await at('upload-delete-confirm').click()
+            gone = False
+            for _ in range(30):
+                await page.wait_for_timeout(500)
+                if not await at(f'series-paper-{AD}').count() and not await at('upload-delete-dialog').count():
+                    gone = True; break
+            say(f'{size}: AITS: DELETE typed and pressed: that paper leaves the list, the other paper stays', gone and await at(f'series-paper-{AK}').count() == 1)
+        else:
+            await at('upload-delete-cancel').click(); await page.wait_for_timeout(400)
+            say(f'{size}: AITS: Cancel closes the box and the paper stays', not await at('upload-delete-dialog').count() and await at(f'series-paper-{AD}').count() == 1)
+        if size == 'mob':
+            await overflow(page, size + ' AITS page')
+        await page.screenshot(path=f'{SS}/{size}_aits.jpg', quality=40, type='jpeg')
         await page.click('[data-testid=storage-badge]'); await page.wait_for_selector('[data-testid=machine-panel]', timeout=10000); await page.wait_for_timeout(900)
         say(f'{size}: Machine: "Latke kadam (24 ghante)" 1, the hung PDF listed with Dobara chalao, the last silent step named', (await at('machine-step-hangs-value').inner_text()).strip() == '1'
             and await at(f'machine-hung-{HUNG}').count() == 1 and await at(f'machine-retry-{HUNG}').count() == 1 and 'publish_ready' in await at('machine-step-hang-last').inner_text(),

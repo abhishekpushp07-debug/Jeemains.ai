@@ -12,9 +12,9 @@ import asyncio, sys, threading, time, types
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from storage_book229 import H, J, BM, DB, S, JOBS, JOBS_COL, RESULTS, check, mkstaff, upload, cut_pdf, cancel_kicks, pump, finish, row, job, listed  # noqa: E402
-import httpx  # noqa: E402
+import fitz, httpx  # noqa: E402
 from starlette.concurrency import run_in_threadpool  # noqa: E402
-from tejas import structure, book_worker as BW, book_publish as BP, step_guard as G  # noqa: E402
+from tejas import structure, book_worker as BW, book_publish as BP, step_guard as G, book_pdf as PDF  # noqa: E402
 from fake_supabase229 import FakeSupabase  # noqa: E402
 
 M = '/api/admin/master'
@@ -36,6 +36,15 @@ async def item(own, sec, mid):
     return next((x for x in r.get('items', []) if x['id'] == mid), {})
 
 
+def long_pdf(tag, pages=100):
+    """A readable paper followed by plain pages: 100 pages are read as one batch of 10 groups."""
+    doc = fitz.open(stream=cut_pdf(tag, long=True), filetype='pdf')
+    while doc.page_count < pages:
+        doc.new_page().insert_text((40, 60), f'{tag} padhne ka page {doc.page_count}', fontsize=11)
+    raw = doc.tobytes(); doc.close()
+    return raw
+
+
 async def shape(bid):
     bk = await row(bid)
     return (bk['revision'], bk['state'], bk['updated_at'], await DB.tejas_book_pages.count_documents({'book_id': bid}), 'lock_token' in bk)
@@ -52,7 +61,8 @@ async def main():
     keep = (G.SILENCE, G.CHECK, G.LET_GO, G.DB_WAIT, BP.source_questions, BW.extract, BP.crop_ref)
     G.SILENCE, G.CHECK, G.LET_GO, G.DB_WAIT = 1.2, .2, 1.0, 5
     silent, blocked, gate, deaf_gate = set(), [], threading.Event(), threading.Event()
-    real_questions, real_extract, real_crop = BP.source_questions, BW.extract, BP.crop_ref
+    real_questions, real_extract, real_crop, real_run = BP.source_questions, BW.extract, BP.crop_ref, PDF.run
+    mute = {'on': False}   # True: the page reader gets no way to show a sign of life (the code as it was before the fix)
 
     async def silent_source_questions(book, mock, raw, guard=None, strict=True):
         if book.id in silent:
@@ -68,7 +78,7 @@ async def main():
                 await asyncio.sleep(.05)
             except asyncio.CancelledError:
                 pass                                  # a wait that cannot be cancelled
-        return await real_extract(source, numbers, alive)
+        return await real_extract(source, numbers, None if mute['on'] else alive)
     BP.source_questions, BW.extract = silent_source_questions, blocked_extract
     try:
         own, _ = await mkstaff('owner', 'guard233')
@@ -187,7 +197,47 @@ async def main():
         check('D. a slow step that keeps saving pictures is NOT let go (it ran longer than the silence limit)', mk['state'] in ('published', 'scheduled') and took > G.SILENCE and len(saved) > 8
               and not await HANGS.find_one({'book_id': f}) and 'hang' not in (await row(f))['payload'], (mk['state'], took, len(saved)))
         check('D. nothing is watched once the steps are over', not G._watched and not G._left, (G._watched, len(G._left)))
+
+        # ---- E. One long batch of pages (100 pages = 10 groups, each made slow). Found by the code review: the batch gave no sign of life.
+        calls = []; PDF.run = lambda source, g: [{'n': i['n']} for i in g]
+        out = PDF.inspect_many('x', [{'n': i} for i in range(45)], 10, lambda: calls.append(1)); single = PDF.inspect_many('x', [{'n': 1}], 10, lambda: calls.append(1))
+        check('E. the page reader gives one sign of life after every finished group, and the results stay in order', [r['n'] for r in out] == list(range(45)) and len(calls) == 6 and single == [{'n': 1}], (len(calls), out[:3]))
+        slow, busy, lock = {'on': True, 'drop': False}, {'n': 0}, threading.Lock()
+
+        def slow_run(source, items):
+            if not (slow['on'] and items and items[0].get('action') == 'text'):
+                return real_run(source, items)
+            with lock:
+                busy['n'] += 1
+            try:
+                if slow['drop']:
+                    raise ValueError('TEST: dropped')
+                time.sleep(.6)
+                return real_run(source, items)
+            finally:
+                with lock:
+                    busy['n'] -= 1
+        PDF.run = slow_run; G.SILENCE = 2.5
+        e = (await upload(own, long_pdf('HGE'), 'TEST_long_read', section_id=sec))['id']
+        mute['on'] = True; await finish(own, e)
+        h, bk = await HANGS.find_one({'book_id': e}), await row(e)
+        check('E. control: that long batch with NO sign of life is let go (so the next check means something)', h is not None and 'read_batch' in h['where'] and bk['payload'].get('read_pages', 0) == 0,
+              ((h or {}).get('where'), bk['payload'].get('read_pages')))
+        slow['drop'] = True; idle = 0   # the groups left behind by the control end at once, so they do not slow the real try
+        for _ in range(150):
+            idle = idle + 1 if not busy['n'] else 0
+            if idle >= 4:
+                break
+            await asyncio.sleep(.1)
+        slow['drop'] = False; mute['on'] = False
+        t0 = time.time(); await due(e); took = time.time() - t0
+        bk = await row(e)
+        check('E. the same long batch with a sign of life after every group is NOT let go: all 100 pages are read', bk['payload']['read_pages'] == bk['payload']['pages'] == 100 and took > G.SILENCE
+              and await HANGS.count_documents({'book_id': e}) == 1 and 'hang' not in bk['payload'], (bk['payload'].get('read_pages'), bk['payload'].get('pages'), took, await HANGS.count_documents({'book_id': e})))
+        slow['on'] = False; G.SILENCE = 1.2
+        check('E. nothing is watched once the steps are over', not G._watched and not G._left, (G._watched, len(G._left)))
     finally:
+        PDF.run = real_run
         gate.set(); deaf_gate.set(); cancel_kicks()
         for _ in range(50):
             if not G._left:

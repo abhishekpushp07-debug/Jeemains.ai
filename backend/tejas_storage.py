@@ -7,7 +7,7 @@ Without Supabase set up, Emergent storage takes new files. The reference a write
 A read therefore goes straight to the one store that holds the file, never searching both.
 """
 
-import base64, hashlib, logging, os, random, re, threading, time
+import base64, collections, hashlib, logging, os, random, re, threading, time
 from urllib.parse import quote, urlparse
 import httpx
 import requests
@@ -181,8 +181,37 @@ def request(method, path, data=None, content_type=None):
 
 # ---------- Supabase ----------
 STATE = {'down_until': 0.0, 'strikes': 0, 'last_error': '', 'last_ok': 0.0, 'auth': None, 'bucket': None,
-         'writes': {'supabase': 0, 'emergent': 0}, 'failovers': 0, 'last_failover': None, 'backup_since': None, 'backup_writes': 0}
+         'writes': {'supabase': 0, 'emergent': 0}, 'failovers': 0, 'last_failover': None, 'backup_since': None, 'backup_writes': 0, 'struck_at': 0.0}
 _sb_lock = threading.Lock()
+
+# ---------- What happened, noted for the shared storage status. tejas/storage_health.py writes these notes into the database. ----------
+EVENTS = collections.deque(maxlen=200)
+on_event = None   # set by tejas/storage_health: called from any thread when something was noted
+_recent = {}
+
+
+def _note(kind, **info):
+    """Never raises: a note must not change what a save or a read does."""
+    try:
+        EVENTS.append({'kind': kind, 'at': time.time(), **info})
+        if on_event:
+            on_event()
+    except Exception:  # noqa: BLE001
+        pass
+
+
+def _note_error(path, store, route, exc, code=None, scope=''):
+    """One failed save or read of a real file, for the owner's list. The same failure of the same file is noted once a minute."""
+    try:
+        key, t = (path, store, route, code), time.time()
+        if t - _recent.get(key, 0) < 60:
+            return
+        if len(_recent) > 500:
+            _recent.clear()
+        _recent[key] = t
+        _note('error', path=path, store=store, route=route, code=code, scope=scope, reason=getattr(exc, 'reason', '') or '', raw=str(exc)[:200])
+    except Exception:  # noqa: BLE001
+        pass
 
 
 def project_url():
@@ -402,7 +431,11 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
     resume/on_progress let the caller keep the place between tries; without them both tries happen in this one call."""
     if _same_there(bucket, path, data):
         return
-    stalls, tries, last = int((resume or {}).get('stalls') or 0), 0, {}
+    stalls, tries, last, began = int((resume or {}).get('stalls') or 0), 0, {}, time.time()
+
+    def proved(via):
+        # A real PDF that went through is proof that the big-file route works.
+        _note('big', how='pdf', ok=True, via=via, size=len(data), ms=round((time.time() - began) * 1000))
 
     def tell(info):
         # The caller notes the place in its own database; a failure there is not Supabase's: the upload carries on, Supabase is not rested.
@@ -422,12 +455,14 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
         try:
             _tus(bucket, path, data, content_type, None if stalls >= STALL_LIMIT else resume, heard)
             _sized(bucket, path, len(data))  # a wrong size is a failed try like any other: next a fresh upload, then the one-request route
+            proved('tus')
             return
         except SupabaseRefused:
             raise
         except StorageError as exc:
             try:
                 if _same_there(bucket, path, data):  # every piece arrived; only the answer to the last one was lost
+                    proved('tus')
                     return
             except StorageError:
                 raise exc from None  # Supabase itself is away: the file waits, this is not counted against it
@@ -446,6 +481,7 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
                     # A caller that keeps no place between tries has now had both routes return the file in this one call: it is stuck, not waiting.
                     second.stalls = stalls if on_progress or scope_of(second) != 'file' else STALL_LIMIT + 1
                     raise second from None
+                proved('one')
                 return
             if on_progress or tries >= 2:
                 exc.stalls = stalls
@@ -548,7 +584,10 @@ def sb_end_upload(url):
 
 
 def _ok():
+    was = STATE['strikes'] or STATE['down_until'] or not STATE['last_ok']
     STATE.update(strikes=0, down_until=0.0, last_ok=time.time(), backup_since=None, backup_writes=0)
+    if was:
+        _note('small', ok=True)   # only the change is noted, not every saved picture
 
 
 _count_lock = threading.Lock()
@@ -570,9 +609,12 @@ def _strike(exc, handed=True, scope='away'):
         STATE['last_error'] = str(exc)[:240]
         STATE['last_scope'], STATE['last_code'] = scope, getattr(exc, 'code', None)
         STATE['backup_since'] = STATE['backup_since'] or time.time()
+        STATE['struck_at'] = time.time()
         if handed:  # a real file had to wait (a failed health check alone does not count)
             STATE['failovers'] += 1
             STATE['last_failover'] = {'at': time.time(), 'reason': STATE['last_error']}
+    if handed:
+        _note('small', ok=False, error=str(exc)[:240], code=getattr(exc, 'code', None), scope=scope)
 
 
 def supabase_on():
@@ -606,16 +648,26 @@ def put_object(path, data, content_type="application/pdf", resume=None, on_progr
         if configured():
             if not supabase_on():
                 raise _wait(StorageWaiting, f"{WAIT_TEXT} Wajah: {STATE['last_error'] or 'Supabase thodi der aaram par hai.'}", STATE.get('last_code'), STATE.get('last_scope') or 'away', STATE['last_error'])
+            big = len(data) > TUS_CHUNK
             try:
                 ref = sb_put(path, data, content_type, resume, on_progress)
-            except SupabaseRefused:
+            except SupabaseRefused as exc:
+                _note_error(path, 'supabase', 'big' if big else 'small', exc, scope='refused')
                 raise  # Supabase is fine, this one file is not allowed there: no rest, no wait
             except Exception as exc:  # noqa: BLE001  any Supabase trouble: the file waits
-                raise _waiting(exc, len(data) > TUS_CHUNK) from None
+                wait = _waiting(exc, big)
+                _note_error(path, 'supabase', 'big' if big else 'small', wait, wait.code, wait.scope)
+                if big and wait.scope in ('file', 'stuck') and wait.code != 423:  # Supabase answers, the big-file route did not take this PDF
+                    _note('big', how='pdf', ok=False, size=len(data), error=wait.raw, code=wait.code, scope=wait.scope, said=wait.reason)
+                raise wait from None
             _ok()
             _count('supabase')
         else:
-            ref = request('PUT', path, data, content_type).json()['path']
+            try:
+                ref = request('PUT', path, data, content_type).json()['path']
+            except StorageError as exc:
+                _note_error(path, 'emergent', 'save', exc)
+                raise
             _count('emergent')
         _source_cache.remove(ref)
         return ref
@@ -631,28 +683,65 @@ def get_object(ref):
             return cached
         if ref.startswith(SB):
             bucket, path = ref[len(SB):].split('/', 1)
-            raw = sb_get(bucket, path)
+            try:
+                raw = sb_get(bucket, path)
+            except StorageError as exc:
+                _note_error(path, 'supabase', 'read', exc)
+                raise
         else:
-            raw = request('GET', ref).content
+            try:
+                raw = request('GET', ref).content
+            except StorageError as exc:
+                _note_error(ref, 'emergent', 'read', exc)
+                raise
         return _source_cache.put(ref, raw)
 
 
+# ---------- Storage checks. Their own files only: a new name every time, removed after the check. ----------
+_CHECK = re.compile(r'^health/(check|big)-(\d{10})-[0-9a-f]{12}\.bin$')
+BIG_TEST = TUS_CHUNK + 1024 * 1024   # about 7 MB: one full piece and a short last one
+
+
+def _check_name(kind):
+    return f'health/{kind}-{int(time.time())}-{os.urandom(6).hex()}.bin'
+
+
+def _drop_checks(bucket, names):
+    """Removes this app's own storage check files. Any other name is refused here, whoever asks."""
+    if not names or any(not isinstance(n, str) or not _CHECK.match(n) for n in names):
+        raise ValueError("Refused: only this app's own storage check files can be removed here.")
+    r = _call('DELETE', f"{project_url()}/storage/v1/object/{quote(bucket, safe='')}", {'Content-Type': 'application/json'}, tries=1, json={'prefixes': list(names)})
+    for n in names:
+        _source_cache.remove(SB + bucket + '/' + n)
+    return r.status_code == 200
+
+
 def probe():
-    """Each store writes a tiny file, reads it back and compares it. Times in milliseconds."""
-    payload = f'jeelive storage check {time.time():.3f}'.encode()
+    """Each store writes a tiny file, reads it back and compares it. Times in milliseconds. In Supabase the file has a new name
+    every time and is removed after the check; Emergent storage cannot remove a file, so its check file keeps one name."""
+    payload = f'jeelive storage check {time.time():.3f} {os.urandom(4).hex()}'.encode()
     out = {}
     if configured():
-        t = time.time()
+        t, name, bucket = time.time(), _check_name('check'), None
         try:
-            ref = sb_put('health/check.bin', payload, 'application/octet-stream'); w = time.time()
-            got = sb_get(ref[len(SB):].split('/', 1)[0], 'health/check.bin', tries=2)
-            out['supabase'] = {'ok': got == payload, 'write_ms': round((w - t) * 1000), 'read_ms': round((time.time() - w) * 1000), 'error': '' if got == payload else 'Read back different bytes.'}
-            if got == payload:
+            ref = sb_put(name, payload, 'application/octet-stream'); w = time.time()
+            bucket = ref[len(SB):].split('/', 1)[0]
+            same = sb_get(bucket, name, tries=2) == payload
+            out['supabase'] = {'ok': same, 'write_ms': round((w - t) * 1000), 'read_ms': round((time.time() - w) * 1000), 'error': '' if same else 'Read back different bytes.',
+                               **({} if same else {'scope': 'file', 'said': 'Supabase ne jaanch file ke alag bytes lautaye'})}
+            if same:
                 _ok()
         except Exception as exc:  # noqa: BLE001
-            out['supabase'] = {'ok': False, 'error': str(exc)[:240], 'took_ms': round((time.time() - t) * 1000)}
-            if supabase_on():
-                _strike(exc, handed=False)
+            scope = 'file' if isinstance(exc, SupabaseRefused) else scope_of(exc)
+            out['supabase'] = {'ok': False, 'error': str(exc)[:240], 'took_ms': round((time.time() - t) * 1000), 'code': getattr(exc, 'code', None), 'scope': scope}
+            if supabase_on() and scope in ('away', 'blocked'):   # Supabase rests for everyone only when it is away or blocked, as for a real file
+                _strike(exc, handed=False, scope=scope)
+        if bucket:
+            try:
+                _drop_checks(bucket, [name])
+            except Exception:  # noqa: BLE001  a check file left behind is swept later; the check itself stands
+                pass
+        _note('check', store='supabase', **out['supabase'])
     else:
         out['supabase'] = {'ok': False, 'configured': False, 'error': 'Supabase set nahi hai (project URL ya secret key nahi mili).'}
     t = time.time()
@@ -665,4 +754,46 @@ def probe():
         out['emergent'] = {'ok': False, 'error': str(exc)[:240], 'took_ms': round((time.time() - t) * 1000)}
     finally:
         _quick.on = False
+    _note('check', store='emergent', **out['emergent'])
     return out
+
+
+def probe_big():
+    """About 7 MB goes to Supabase by the real piece route under a new name, is read back whole and compared, then removed.
+    It never rests Supabase: a failure here is about the big-file route only."""
+    data, name, t, seen, bucket = os.urandom(BIG_TEST), _check_name('big'), time.time(), {}, None
+    out = {'size': len(data)}
+    try:
+        bucket = _bucket()
+        _tus(bucket, name, data, 'application/octet-stream', None, seen.update)
+        _sized(bucket, name, len(data))
+        if not _same_there(bucket, name, data):
+            raise _error('Supabase gave back other bytes than were sent.', scope='file', said='Supabase ne badi test file ke alag bytes lautaye')
+        out.update(ok=True, ms=round((time.time() - t) * 1000))
+    except Exception as exc:  # noqa: BLE001
+        refused = isinstance(exc, SupabaseRefused)
+        scope = 'file' if refused else scope_of(exc)
+        if scope == 'away' and bucket:
+            try:
+                sb_size(bucket, name)
+                scope = 'file'   # Supabase itself answers: only the big-file route did not work
+            except StorageError as other:
+                scope = scope_of(other)
+        out.update(ok=False, ms=round((time.time() - t) * 1000), error=str(exc)[:240], code=getattr(exc, 'code', None),
+                   scope=scope, said=str(exc)[:240] if refused else getattr(exc, 'said', ''))
+    if bucket:
+        for tidy in (lambda: seen.get('url') and not out['ok'] and sb_end_upload(seen['url']), lambda: _drop_checks(bucket, [name])):
+            try:
+                tidy()
+            except Exception:  # noqa: BLE001  left behind: swept later
+                pass
+    _note('big', how='test', **out)
+    return out
+
+
+def sweep_checks(older=3600):
+    """Check files that a failed removal left behind are removed once they are an hour old. Only this app's own check names."""
+    bucket, t = _bucket(), time.time()
+    files, _ = sb_list('health/')
+    old = [n for n in ('health/' + name for name, _ in files) if (m := _CHECK.match(n)) and t - int(m[2]) > older][:100]
+    return len(old) if old and _drop_checks(bucket, old) else 0

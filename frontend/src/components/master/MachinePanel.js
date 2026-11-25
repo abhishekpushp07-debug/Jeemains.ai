@@ -10,6 +10,20 @@ const KIND={book_step:'PDF padhna',ai_solution:'AI solution',grade:'grading',reg
 export const lowDisk=d=>!!d&&d.disk.total>0&&d.disk.free<d.disk.total*0.05;
 const SAYS=[[/^Processing interrupted/i,'Kaam beech mein ruk gaya. Dobara chalao dabane par save hue page se aage chalega; dobara upload nahi karna.'],[/^Book processing lease expired|^This book changed/i,'Ek aur kaam isi PDF par chal raha tha. Dobara chalao dabaiye; save hua kaam rakha gaya hai.']];
 const said=t=>(SAYS.find(([re])=>re.test(t||''))||[])[1]||t;
+export const ago=t=>{if(!t)return '';const s=Math.max(0,Math.round(Date.now()/1000-t));return s<60?`${s} s pehle`:s<3600?`${Math.round(s/60)} min pehle`:s<172800?`${Math.round(s/3600)} ghante pehle`:`${Math.round(s/86400)} din pehle`;};
+const STORE={supabase:'Supabase',emergent:'Emergent'};
+const ROUTE={small:'chhoti file ka raasta',big:'badi file ka raasta',read:'padhna',save:'save karna',check:'jaanch'};
+
+// The last 20 storage failures: when, which file, which store, which route, why. Open by itself when the newest is under an hour old.
+function StorageErrors({rows}){
+ if(!rows.length)return null;
+ return <details className="machine-errors" open={Date.now()/1000-rows[0].at<3600} data-testid="machine-storage-errors">
+  <summary data-testid="machine-storage-errors-toggle">Storage ki aakhri {rows.length} galtiyan</summary>
+  <ul className="machine-error-list">{rows.map((e,i)=><li key={e.at+'-'+i} data-testid={'machine-storage-error-'+i}>
+   <strong>{e.file}</strong><small>{ago(e.at)} · {STORE[e.store]||e.store} · {ROUTE[e.route]||e.route}{e.n>1?` · ${e.n} baar`:''}</small><span>{e.reason}</span>
+  </li>)}</ul>
+ </details>;
+}
 
 // Asks the server once a minute while the tab is visible, so the top bar can light up when something needs the owner.
 export function useMachineStatus(){
@@ -61,6 +75,7 @@ export function MachinePanel({data,onReload}){
  }
  const c=data.cron,books=[...data.stuck.map(b=>[b,true]),...data.failed_books.map(b=>[b,false])],returned=data.storage_stuck||[];
  const hung=data.hung_books||[],hangs=data.step_hangs||{day:0},lastHang=hangs.last;
+ const errs=data.storage_errors||[],errDay=errs.length>0&&Date.now()/1000-errs[0].at<86400;
  const cron=!c.configured?'set nahi hai':c.minutes_ago==null?'abhi tak nahi chali':`${c.minutes_ago} min pehle chali`;
  const kinds=Object.entries(data.failed_jobs||{}).map(([k,n])=>`${KIND[k]||k} ${n}`).join(' · ');
  const alert=data.attention||lowDisk(data);
@@ -75,6 +90,8 @@ export function MachinePanel({data,onReload}){
   <Line ok={!data.failed_books.length} label="Fail PDF" value={String(data.failed_books.length)} testId="machine-failed"/>
   <Line ok={!data.delete_pending?.count} label="Delete ki safai baaki" value={String(data.delete_pending?.count||0)} testId="machine-delete-pending"/>
   {(data.delete_pending?.items||[]).filter(x=>x.error).slice(0,1).map(x=><p key={x.title} className="storage-meta" data-testid="machine-delete-note">Safai ruki hai: {x.title} · {x.error} Har 15 minute mein apne aap phir koshish hoti hai; row list se hat chuki hai.</p>)}
+  <Line ok={!errDay} label="Storage ki galtiyan (aakhri 20)" value={errs.length?`${errs.length} · aakhri ${ago(errs[0].at)}`:'0'} testId="machine-storage-errors-count"/>
+  <StorageErrors rows={errs}/>
   <Line ok={!lowDisk(data)} label="Disk khali" value={`${gb(data.disk.free)} / ${gb(data.disk.total)}`} testId="machine-disk"/>
   <Waiting data={data} onReload={onReload}/>
   {returned.length>0&&<ul className="machine-books" data-testid="machine-storage-stuck-list">{returned.map(b=><StuckFile key={b.id} b={b} busy={busy===b.id} onRetry={retry}/>)}</ul>}

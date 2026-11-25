@@ -288,9 +288,9 @@ async def g_patho(own):
     raw = big_pdf(range(1, 4), 3); b = await upload(own, raw, 'TEST_QA171 Patho'); bid = b['id']
     BAD = 4  # a question page of Mock 1 (page1 contents, 2 instr, 3..5 questions, 6 key)
     real_many, real_one = BW.inspect_many, BW.inspect
-    def many(source, items, size=10):
+    def many(source, items, size=10, alive=None):
         if any(i.get('page') == BAD for i in items): raise ValueError('PDF processing stopped safely. Original upload is retained.')
-        return real_many(source, items, size)
+        return real_many(source, items, size, alive)
     def one(source, action='info', page=None, rect=None):
         if page == BAD: raise ValueError('QA171 pathological page crashed the parser')
         return real_one(source, action, page, rect)

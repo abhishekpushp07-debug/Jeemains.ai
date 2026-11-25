@@ -227,6 +227,7 @@ SPEC = {
     'media.media_probe': ('public_fixed_bytes_cdn_check', 'batch', 'read_immutable_cdn_cacheable'),
     'storage_health.health': ('staff_storage_status_no_paths_no_keys', 'normal', 'read_cached_60s'),
     'storage_health.retry': ('owner_only_storage_recheck_wakes_waiting_jobs', 'normal', 'recheck_idempotent'),
+    'storage_health.run_big_test': ('owner_only_big_file_route_test_own_test_file_removed', 'control', 'single_flight_lease'),
     'storage_move.status': ('owner_only_old_file_copy_progress_no_paths', 'normal', 'read'),
     'storage_move.start': ('owner_only_old_file_copy_single_run_never_deletes', 'control', 'single_flight_lease_resumes'),
     'storage_move.stop': ('owner_only_old_file_copy_stop', 'control', 'idempotent_stop'),

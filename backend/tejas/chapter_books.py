@@ -211,16 +211,16 @@ async def process_book(identity):
                 await sets.update_one({'id':sid},{'$setOnInsert':s},upsert=True)
             await books.update_one(fence,{'$set':{'status':'ready','subject':result['subject'],'pages':result['pages'],'parsed_sha256':parsed_sha,
                 'exam':result.get('exam','BITSAT'),'minutes':result.get('minutes',60),'solution_kind':result.get('solution_kind','answer_key_only'),
-                'message':f'{len(result["chapters"])} chapter tests organised. Original PDF images preserve notation. '+('Original worked solutions supplied; no AI generation.' if result.get('solution_kind')=='supplied_worked' else 'Worked solutions are not supplied.')},'$inc':{'revision':1},'$unset':{'storage_waits':''}})
+                'message':f'{len(result["chapters"])} chapter tests organised. Original PDF images preserve notation. '+('Original worked solutions supplied; no AI generation.' if result.get('solution_kind')=='supplied_worked' else 'Worked solutions are not supplied.')},'$inc':{'revision':1},'$unset':{'storage_waits':'','storage_wait_since':''}})
         except Exception as exc:
             if isinstance(exc,StorageWaiting) and exc.scope!='stuck':
                 # Supabase is away: the saved PDF waits and this book runs again by itself (1, 2, 4, then every 5 min).
                 from .jobs import run_later
-                await books.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:450],'storage_wait':now()},'$inc':{'storage_waits':1}})
+                await books.update_one(fence,{'$set':{'status':'queued','message':str(exc)[:450],'storage_wait':now()},'$inc':{'storage_waits':1},'$min':{'storage_wait_since':now()}})
                 run_later(process_book,identity,seconds=min(300,60*2**min(r.get('storage_waits',0),3)))
                 return
             message=str(exc)[:450] if isinstance(exc,(ValueError,StorageError)) else 'Processing interrupted. Retry the saved source.'
-            await books.update_one(fence,{'$set':{'status':'failed','message':message}})
+            await books.update_one(fence,{'$set':{'status':'failed','message':message},'$unset':{'storage_wait_since':''}})
 
 
 @router.get('/studio/chapter-books/{id}',response_model=BookView)

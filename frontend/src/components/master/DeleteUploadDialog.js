@@ -11,7 +11,8 @@ const WHERE={supabase:'Original PDF Supabase se hategi.',emergent:'Original PDF 
 // Deletes for good an upload that never reached students. First what leaves, then what stays; nothing happens before DELETE is typed.
 export function DeleteUploadDialog({target,onClose,onDone}){
  const [f,setF]=useState(null),[error,setError]=useState(''),[text,setText]=useState(''),[busy,setBusy]=useState(false);
- useEffect(()=>{setF(null);setError('');setText('');if(target)api(`/admin/master/uploads/book/${target.id}/delete`).then(setF).catch(e=>setError(e.message));},[target]);
+ // An answer that arrives after another upload was picked is dropped: the box only ever counts the upload it names.
+ useEffect(()=>{setF(null);setError('');setText('');if(!target)return;let live=true;api(`/admin/master/uploads/book/${target.id}/delete`).then(d=>{if(live)setF(d);}).catch(e=>{if(live)setError(e.message);});return()=>{live=false;};},[target]);
  async function run(){setBusy(true);try{const r=await post(`/admin/master/uploads/book/${target.id}/delete`,{confirm:'DELETE'});toast.success(r.message);onClose();onDone?.();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  const sure=text.trim()==='DELETE',blocked=error||(f&&!f.allowed?f.reason:'');
  return <Dialog open={!!target} onOpenChange={o=>{if(!o&&!busy)onClose();}}>

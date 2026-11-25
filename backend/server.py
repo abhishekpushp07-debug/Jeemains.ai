@@ -82,6 +82,7 @@ async def lifespan(app):
     await structure.seed()
     import asyncio
     asyncio.create_task(library.run_cleanups())
+    app.state.storage_watch = asyncio.create_task(storage_health.watch())
     from tejas.live_window import apply_to_upcoming
     await apply_to_upcoming()
     from tejas.mock_solutions import solutions
@@ -91,6 +92,7 @@ async def lifespan(app):
     await solutions.create_index([('state', 1), ('order', 1)])
     await solutions.create_index('set_id')
     yield
+    app.state.storage_watch.cancel()
     await app_connect.close()
     client.close()
 

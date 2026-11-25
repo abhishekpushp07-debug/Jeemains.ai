@@ -1,0 +1,28 @@
+{
+  "summary": "Independent verification of Packet C (owner delete-for-good of an upload that never reached students) and Packet B (step-guard / 'Atki hai'). The main agent's existing suites (upload_delete234: 31/31, step_guard233: 29/29, storage_nocallback234: 7/7, storage_delete_real234: 9/9, ui_delete234: 33/33 and 24 older regressions) were not re-run per the handoff. Added ONE new edge suite tests/upload_delete_edge235.py (21/21 PASS) that is NOT a repeat of upload_delete234: it probes the Pydantic DeleteUpload body with 17 malformed inputs (whitespace, newline, full-width unicode, bool/int/null/list, extra forbidden fields, wrong key, missing), non-JSON content, unknown ids, cross-owner isolation (404 not 403 = no existence leak), reviewer refusal, 13 extra path-gate refusals on sb_remove/sb_empty (uppercase UUID, no trailing slash, '//', foreign bucket, cross-upload file, '..', name not prefix-matching, trailing '/' sub-folder in name list, mixed valid+invalid list, backslash, empty folder, root), sb_end_upload with wrong scheme / foreign host / non-upload path / None / empty / garbage, two concurrent POSTs on the same id (one 200, one 404, no crash), two parallel resume() sweeps on a stuck clean-up (exactly one claims the lease — verified by tries delta), pending() populated-then-empty, and GET facts returning every counted field. ruff clean, isolated DB dropped at the end. No application code was changed. No fault found.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/upload_delete_edge235.py",
+    "/app/backend/tests/upload_delete234.py",
+    "/app/backend/tests/step_guard233.py",
+    "/app/backend/tests/storage_nocallback234.py",
+    "/app/backend/tests/ui_delete234.py"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "book_delete.sweep lease: the atomic find_one_and_update with $expr<=lease_until correctly blocks a concurrent second sweep; verified by 4B — tries increments by exactly 1 after two parallel resume() with Supabase down.",
+    "book_delete.target: a cross-owner id returns 404, not 403 — this is correct (no existence leak) and matches the UI contract.",
+    "DeleteUpload pydantic model: Literal['DELETE'] + strict + extra='forbid' is tight — every whitespace/case/unicode variant and every extra field is a 422, including 'DELETE\\n', ' DELETE', 'Delete', full-width 'ＤＥＬＥＴＥ', bool/int/null/list, and {confirm:DELETE, extra:1}.",
+    "tejas_storage._removable: refuses 22 distinct bad shapes (9 from the main suite + 13 new here) including uppercase UUID folder, root '/', '//', missing trailing slash, foreign bucket, cross-upload file, '..', backslash, trailing-slash name — none reach the wire.",
+    "tejas_storage.sb_end_upload: hostname check against {tus_endpoint, project_url} rejects foreign hosts even if path shape matches."
+  ],
+  "updated_files": ["/app/backend/tests/upload_delete_edge235.py"],
+  "success_rate": {"backend": "100%", "frontend": "n/a (not re-tested — main agent already 33/33)"},
+  "test_credentials": "No permanent credentials used or created. The suite runs on a disposable tejas_isolated_* DB which it drops itself. Fake Supabase at the wire (tests/fake_supabase229.FakeSupabase). No preview-DB writes, no real Supabase traffic.",
+  "seed_data_creation": "All records live inside the disposable isolated DB created by iso_harness_book170 and dropped at teardown; no customer data touched.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "tests/upload_delete_edge235.py runs as `cd /app/backend && python tests/upload_delete_edge235.py` in ~30-60 s, drops its DB. It complements (does not duplicate) upload_delete234.py. One isolated suite OR one bridge at a time per the file-handle rule. Ran a single pass; no flakiness observed. The main agent's full browser walk (ui_delete234.py) burns its 'fix' lane budget once per bridge and was not re-run here.",
+  "rca of the issue": "N/A — no defects. The only initial red in my run was a self-inflicted assertion (I had summed sweep() return bools instead of counting lease claims); fixed in-test and re-run green (21/21). No app code changed."
+}

@@ -43,3 +43,17 @@ Har packet ke baad rukne ki jagah maine yahan us packet ki chhoti report likhi h
   - 15-minute wali jaanch ko asli ghadi se nahi; jaanch me use haath se chalaya gaya.
   - Bahut bade upload (hazaaron pictures) ka delete asli Supabase par nahi; asli jaanch 4 file ki thi, nakli par 1,000+ ka panna-dar-panna rasta chala.
 
+
+
+## Packet B + C — alag jaanch aur alag code review ke baad (25 Nov, 01:15 UTC)
+- Testing agent (iteration_225): koi galti nahi mili. Usne 21 nayi jaanch likhi (tests/upload_delete_edge235.py): DELETE ke 17 galat roop (chhote akshar, space, nayi line, doosri lipi, khaali, faltu khaane) sab mana; doosre owner ka upload "mila hi nahi" (404); do Delete ek saath dabe to ek hi chala; storage ke 13 aur galat path mana hue.
+- Alag code review: koi critical ya high galti nahi, aur koi aisa raasta nahi mila jisse kisi doosre upload, bane hue test, student ke score ya PYQ ka kuch hat sake. Do baatein mili, dono theek kar di:
+  1. (Medium) "Latke kadam ki rok" ek sehatmand par lambe kaam ko bhi latka maan sakti thi: 100 page ek saath padhte samay ya ek mock ki saari pictures kaat-te samay beech me koi "main zinda hoon" ka ishaara nahi jata tha. Ab har 10 page / 10 picture ke baad ishaara jata hai. Nayi jaanch: bina ishaare wala lamba kaam chhoota (jaisa pehle hota), ishaare ke saath wahi kaam poora hua (100 page padhe gaye). step_guard233 ab 33/33.
+  2. (Low) Delete ka box: ek upload ka box band karke turant doosre ka kholne par ek pal ke liye pehle wale ki ginti dikh sakti thi. Ab der se aaya jawab phenk diya jata hai. (Galat upload kabhi delete nahi ho sakta tha; server har baar khud jaanchta hai.)
+- AITS wali screen ka dustbin (jo pehle browser me nahi dekha gaya tha) ab dekha gaya, desktop + mobile: jis PDF se kabhi test nahi bana uske paper par dustbin hai, jisse bana uske paper par nahi; DELETE likhne par paper list se hata. Mobile par dustbin 36px ka tha, ab 44px. Browser jaanch ab 41/41.
+- In sudhaaron ke baad dobara, ek-ek karke: step_guard233 33, upload_delete234 31, upload_delete_edge235 21, phase1_iso221 17, storage_book229 22, storage_stuck231 49, storage_stuck_edge232 25, pictures_iso220 66, chapters_iso182 58, master_iso181 124, library_aits_iso180 125, series_dates_iso187 47, structure_imports_iso174 51. Sab 0 fail.
+- Ek purani suite jo is kaam se pehle se nahi chalti: book_scale_iso171 (uske upload me "exam aur mock type" nahi hai, isliye server 422 deta hai; aaj ke badlav se pehle bhi yahi).
+- Review ke do khule sawaal (jaanche nahi ja sake, isliye likh raha hoon):
+  - Agar kisi PDF ka ek hi kadam 20 minute se zyada chalta rahe aur usi beech Delete dabe, to us upload ke apne folder me kuch pictures bach sakti hain; agli 15-minute jaanch unhe hata deti hai. Kisi doosre upload par asar nahi.
+  - Do server hon to har server sirf apne kadam par nazar rakhta hai. Yeh theek hai, par do server par chala kar nahi dekha gaya (preview me ek hi server hai).
+- Deploy 2 ki teeno shartein poori: testing agent paas, alag code review ho gaya, badlavon ki list is file ke ant me "Deploy se pehle" me hai. Deploy tabhi jab aap "deploy" likhen.

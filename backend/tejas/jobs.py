@@ -166,7 +166,7 @@ async def run_job(id, drain=True):
             else:
                 raise ValueError('Unknown job type')
             await require_lease(j)
-            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', 'storage_waits': 0, 'stuck': False, **{k: {'$literal': v} for k, v in output.items()}}}])
+            completed = await jobs.update_one({'id': id, 'lease': lease, 'status': 'running', '$expr': {'$gt': ['$lease_until', EPOCH_NOW]}}, [{'$set': {'status': 'done', 'progress': 100, 'message': {'$literal': message}, 'finished_at': EPOCH_NOW, 'error': '', 'storage_waits': 0, 'storage_wait_since': '$$REMOVE', 'stuck': False, **{k: {'$literal': v} for k, v in output.items()}}}])
             if completed.modified_count:
                 await audit(j['user_id'], kind.title() + ' completed', j['set_id'], message)
         except Exception as exc:
@@ -179,7 +179,7 @@ async def run_job(id, drain=True):
                 await jobs.update_one({'id': id, 'lease': lease, 'status': 'running'}, [{'$set': {
                     'status': 'queued', 'progress': 0, 'stuck': stuck, 'next_run_at': {'$add': [EPOCH_NOW, delay]},
                     'error': 'This file is stuck; it is tried again every 15 minutes.' if stuck else 'Waiting for file storage; it carries on by itself.',
-                    'storage_waits': {'$add': [{'$ifNull': ['$storage_waits', 0]}, 1]},
+                    'storage_waits': {'$add': [{'$ifNull': ['$storage_waits', 0]}, 1]}, 'storage_wait_since': {'$ifNull': ['$storage_wait_since', EPOCH_NOW]},
                     'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}])
                 if stuck and kind == 'book_step':
                     # One stuck file keeps one 15-minute clock: an older waiting job of the same book (left by an earlier Dobara chalao) steps aside.
@@ -302,6 +302,13 @@ async def wake_uploads(stuck=False):
     return n
 
 
+async def wake_local():
+    """Another server found Supabase well and woke the waiting jobs in the database: this server's lanes look at them now too."""
+    for kind in await jobs.distinct('kind', {'status': 'queued', 'storage_waits': {'$gt': 0}, 'stuck': {'$ne': True}}):
+        if kind in _active:
+            kick_later(kind, 0)
+
+
 async def wake_storage():
     """Supabase answers again: every job waiting for it runs now instead of at its next try."""
     waiting = {'status': 'queued', 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}, 'stuck': {'$ne': True}}
@@ -338,7 +345,7 @@ async def retry_job(id: str, bg: BackgroundTasks, u=Depends(current)):
         require_capability(JOB_CAPABILITIES[j['kind']])
     if j['status'] != 'failed':
         raise HTTPException(409, 'This job is already queued or processing.', headers={'Retry-After': '3'})
-    updated = await jobs.find_one_and_update({'id': id, 'status': 'failed'}, {'$set': {'status': 'queued', 'error': '', 'attempts': 0, 'next_run_at': 0}}, return_document=ReturnDocument.AFTER)
+    updated = await jobs.find_one_and_update({'id': id, 'status': 'failed'}, {'$set': {'status': 'queued', 'error': '', 'attempts': 0, 'next_run_at': 0}, '$unset': {'storage_wait_since': ''}}, return_document=ReturnDocument.AFTER)
     if not updated:
         raise HTTPException(409, 'Another retry already queued this job.')
     bg.add_task(run_job, id)
@@ -426,6 +433,8 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
     await recover()
     from .book_delete import resume as finish_deletes
     await finish_deletes()  # an upload the owner deleted for good: an unfinished clean-up carries on from where it stopped
+    from .storage_health import routine
+    run_later(routine, seconds=0)  # beside this run, never holding it up: the storage record stays fresh, the big-file route is tried when due
     import tejas_storage
     if tejas_storage.supabase_on():
         await wake_uploads(stuck=True)

@@ -281,12 +281,12 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
     """The mock's questions with original page crops, exactly as students receive them. Not strict: incomplete questions are left out and listed."""
     rules=mock.rules;chapter=mock.chapter or {}
     wanted=[(q['id'],role,region) for q in mock.questions for role in ('question','solution') for region in q['source_regions'][role]]
-    rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10)
+    rendered=await run_in_threadpool(inspect_many,raw,[{'action':'crop','page':r['page'],'rect':r['rect']} for _,_,r in wanted],10,lambda:beat(book.id,'picture cut'))
     crops={}
     for (qid,role,_),crop in zip(wanted,rendered):crops.setdefault((qid,role),[]).append(crop)
     # New look: the question picture and one picture per option, all at the same zoom.
     parts=[(q['id'],part) for q in mock.questions if (q.get('cut') or {}).get('status') in SHOWN for part in q['cut']['parts']]
-    painted=await run_in_threadpool(inspect_many,raw,[{'action':'piece','page':p['page'],'rect':p['rect'],'scale':2,'erase':p.get('erase',[])} for _,p in parts],20) if parts else []
+    painted=await run_in_threadpool(inspect_many,raw,[{'action':'piece','page':p['page'],'rect':p['rect'],'scale':2,'erase':p.get('erase',[])} for _,p in parts],20,lambda:beat(book.id,'picture cut')) if parts else []
     pieces={}
     for (qid,part),crop in zip(parts,painted):pieces.setdefault(qid,[]).append((part,crop))
     if guard:await guard('renew')

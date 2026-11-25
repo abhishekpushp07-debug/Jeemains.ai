@@ -53,11 +53,20 @@ async def main():
     safai = (await upload(own, cut_pdf('UIS', long=True), 'TEST_SAFAI_BAAKI', section_id=sec))['id']
     await DB.tejas_books.update_one({'_id': safai}, {'$set': {'removed': True, 'paused': True, 'state': 'removed', 'deleting': {
         'at': t - 120, 'by': 'test', 'tries': 2, 'lease_until': t + 86400, 'storage_removed': 0, 'facts': {}, 'error': 'Supabase abhi jawab nahi de raha; safai uske lautne par hogi.'}}})
+    # An AITS section: one PDF that never reached students (its paper has the dustbin) and one marked display-only as having once been a test (no dustbin).
+    aits = J(await own.post(f'/api/admin/catalog/exams/{slug}/sections', json={'name': 'All India Test Series', 'description': '', 'layout': 'list', 'kind': 'aits',
+                            'first_date': '2026-12-20', 'days': 5, 'open_time': '09:00', 'last_start': '11:00', 'minutes': 10, 'correct': 4, 'wrong': -1})).get('id')
+    ad = (await upload(own, cut_pdf('UIA', long=True), 'TEST_AITS_DRAFT_PDF', section_id=aits))['id']; await finish(own, ad)
+    ak = (await upload(own, cut_pdf('UIB', long=True), 'TEST_AITS_PAHUNCHI_PDF', section_id=aits))['id']; await finish(own, ak)
+    ma, mk2 = await BM.find_one({'book_id': ad}), await BM.find_one({'book_id': ak})
+    await BM.update_one({'_id': mk2['_id']}, {'$set': {'published_generation': 1}})
     state = {b['payload']['title']: b['state'] async for b in DB.tejas_books.find({}, {'state': 1, 'payload.title': 1})}
+    state['aits mocks'] = [ma and ma['state'], mk2 and mk2['state']]
     path = OUT + '/bridge.json'
     with open(path, 'w') as f:
         json.dump({'owner': dict(own.cookies), 'reviewer': dict(rev.cookies), 'type': f'/super-admin/exam/{slug}/{sec}', 'keep': {'book': keep, 'live': (await BM.find_one({'_id': pair[0]['_id']}))['set_id'], 'draft': pair[1]['_id']},
-                   'draft': {'book': draft, 'mock': md['_id']}, 'big': big, 'hung': {'book': hung, 'mock': mh['_id']}, 'safai': safai}, f)
+                   'draft': {'book': draft, 'mock': md['_id']}, 'big': big, 'hung': {'book': hung, 'mock': mh['_id']}, 'safai': safai,
+                   'aits': {'path': f'/super-admin/exam/{slug}/{aits}', 'draft': ma['_id'], 'kept': mk2['_id']}}, f)
     os.chmod(path, 0o600)
     print('READY', H.TEST_DB, json.dumps(state), flush=True)
     server = uvicorn.Server(uvicorn.Config(H.app, host='127.0.0.1', port=8776, log_level='warning', lifespan='off'))
