@@ -392,6 +392,8 @@ class EventPayload(Payload):
 
 
 MODELS.update({'activity.record_event': EventPayload, 'contacts.save_contacts': ContactsPayload})
+from .book_delete import DeleteUpload  # noqa: E402
+MODELS['book_delete.delete_upload'] = DeleteUpload
 
 
 def rank_models():

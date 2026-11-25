@@ -48,6 +48,7 @@ const ALERT_MIN=15;
 function waitWords(w,min){
  const why=w.reason?` Wajah: ${w.reason}.`:'',what=w.mock?`"${w.mock}"${w.more?` aur ${w.more} doosre mock ki pictures`:' ki ek picture'}`:'Yeh PDF';
  if(w.retrying)return ['Dobara koshish chal rahi hai…','Nateeja kuch pal mein yahin dikhega.'];
+ if(w.kind==='hang')return [`Atki hai · ${min} min se.`,`Is PDF ka kaam baar-baar beech mein latak gaya, isliye machine ne ise rok diya. File surakshit hai aur baaki kitaabein chal rahi hain.${why} ${w.next||''}`];
  if(w.stuck)return [`Atki hai · ${min} min se.`,`${what} Supabase mein nahi ja rahi. File surakshit hai aur baaki kitaabein chal rahi hain; Emergent mein kuch nahi gaya.${why} ${w.next||'Har 15 minute mein apne aap phir koshish hogi.'}`];
  if(w.kind==='blocked')return [`Supabase project par rok · ${min} min se.`,`Naya kaam ruka hai, file surakshit hai; Emergent mein kuch nahi gaya.${why} ${w.next||''}`];
  if(w.kind==='file')return [`Yeh file abhi Supabase mein nahi gayi · ${min} min se.`,`Machine khud phir koshish kar rahi hai; baaki kitaabein chal rahi hain.${why}`];
@@ -57,8 +58,8 @@ function waitWords(w,min){
 // After 15 minutes the note turns into a loud alert, right in the upload's own progress row.
 function WaitNote({b,onChanged}){
  const w=b.storage_wait,min=since(w.since),late=min>=ALERT_MIN&&!w.retrying,[lead,rest]=waitWords(w,min);
- return <div className={'admin-note upload-wait '+(late||w.stuck?'error':'warn')+(late?' is-late':'')} role={late?'alert':'status'} data-kind={w.retrying?'retrying':w.stuck?'stuck':w.kind} data-testid={'type-upload-wait-'+b.id}>
-  <p>{late&&<strong className="upload-late" data-testid={'type-upload-alert-'+b.id}><AlertTriangle size={15} aria-hidden="true"/>{min} minute se {w.mock?'yeh picture':'yeh PDF'} Supabase mein nahi gayi.</strong>}<b data-testid={'type-upload-lead-'+b.id}>{lead}</b> {rest}</p>
+ return <div className={'admin-note upload-wait '+(late||w.stuck?'error':'warn')+(late?' is-late':'')} role={late?'alert':'status'} data-kind={w.retrying?'retrying':w.kind==='hang'?'hang':w.stuck?'stuck':w.kind} data-testid={'type-upload-wait-'+b.id}>
+  <p>{late&&<strong className="upload-late" data-testid={'type-upload-alert-'+b.id}><AlertTriangle size={15} aria-hidden="true"/>{min} minute se {w.kind==='hang'?'yeh PDF aage nahi badhi.':`${w.mock?'yeh picture':'yeh PDF'} Supabase mein nahi gayi.`}</strong>}<b data-testid={'type-upload-lead-'+b.id}>{lead}</b> {rest}</p>
   {!w.stuck&&!w.retrying&&<RetryStorageButton onDone={onChanged} testId={'type-upload-wait-retry-'+b.id}/>}
  </div>;
 }

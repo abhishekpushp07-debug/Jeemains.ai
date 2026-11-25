@@ -127,10 +127,12 @@ async def type_mocks(sid: str, u=Depends(owner)):
     busy = [w['id'] for w in waiting if w['kind'] == 'book_mock' and w['state'] == 'publishing']
     progress = {p['_id']: {'done': p['done'], 'total': p['total']} for p in await db.tejas_publish_progress.find({'_id': {'$in': busy}}).to_list(len(busy))} if busy else {}
     # A mock whose picture Supabase keeps returning: its book names it ("Atki hai"), so its row does not say "Live ho raha hai" for ever.
-    held_up = {}
+    held_up, hung = {}, {}
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, 'paused': {'$ne': True},
                                         'payload.storage_wait.stuck': True}, {'payload.storage_wait': 1}):
         sw = b['payload']['storage_wait']
+        if sw.get('kind') == 'hang':  # the PDF's own work went silent three times: every mock of it that waits to go Live says so
+            hung[b['_id']] = {'reason': sw.get('reason', ''), 'since': sw['since'], 'kind': 'hang'}
         for mid, v in (sw.get('mocks') or {}).items():
             held_up[mid] = {'reason': v.get('reason', ''), 'since': sw['since']}
     for w in waiting:
@@ -140,7 +142,7 @@ async def type_mocks(sid: str, u=Depends(owner)):
         if w['kind'] != 'book_mock':
             continue
         status = {'ready': 'draft', 'held': 'draft', 'publishing': 'publishing', 'scheduled': 'scheduled'}[w['state']]
-        to_fix, again = 0, reread.get(w['book_id'])
+        to_fix, again, mark = 0, reread.get(w['book_id']), held_up.get(w['id']) or hung.get(w['book_id'])
         if w['state'] == 'held' and not again:
             from .book_imports import question_problems
             from .book_models import BookMock
@@ -150,8 +152,8 @@ async def type_mocks(sid: str, u=Depends(owner)):
         items.append({'kind': 'book_mock', 'id': w['id'], 'title': w['title'], 'status': status, 'to_fix': to_fix, 'key_only': w.get('key_only', 0),
                       'count': w['count'], 'start_at': w['start_at'], 'book_id': w['book_id'], 'source': 'book', 'book': w['book'], 'locked': False, 'cut': w.get('cut'),
                       'subject': w['chapter'].get('subject') or None, 'chapter': w['chapter'] or None, 'subject_missing': bool(w['chapter']) and not w['chapter'].get('subject'),
-                      'publish_progress': None if w['id'] in held_up else progress.get(w['id']), **({'rereading': {'read_pages': again['read_pages'], 'pages': again['pages']}} if again else {}),
-                      **({'stuck': held_up[w['id']]} if w['id'] in held_up and status in ('publishing', 'scheduled') else {})})
+                      'publish_progress': None if mark else progress.get(w['id']), **({'rereading': {'read_pages': again['read_pages'], 'pages': again['pages']}} if again else {}),
+                      **({'stuck': mark} if mark and status in ('publishing', 'scheduled') else {})})
     uploads = []
     async for b in db.tejas_books.find({'payload.destination.section_id': sid, 'removed': False, 'archived': {'$ne': True}, '$or': [
             {'state': {'$in': [*PROCESSING, 'attention_needed', 'chapters_needed']}}, {'payload.chapters': True, 'state': 'ready'},
@@ -182,6 +184,14 @@ async def type_mocks(sid: str, u=Depends(owner)):
                                                {'_id': 0, 'id': 1, 'title': 1, 'status': 1, 'message': 1}):
         uploads.append({'id': c['id'], 'kind': 'chapter_book', 'title': c['title'], 'state': c['status'], 'pages': 0, 'read_pages': 0,
                         'message': c.get('message', ''), 'active': c['status'] != 'failed'})
+    # Delete (for good) is offered only for an upload from which no test was ever made.
+    from .book_delete import reached_students
+    reached = await reached_students({x['id'] for x in uploads if x['kind'] == 'book'} | {i['book_id'] for i in items if i['kind'] == 'book_mock'})
+    for x in uploads:
+        x['can_delete'] = x['kind'] == 'book' and x['id'] not in reached
+    for it in items:
+        if it['kind'] == 'book_mock':
+            it['upload_deletable'] = it['book_id'] not in reached
     from .duplicates import section_duplicates
     try:
         dupes = await section_duplicates(sid)

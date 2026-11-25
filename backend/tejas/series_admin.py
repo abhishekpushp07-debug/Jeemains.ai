@@ -163,6 +163,8 @@ async def candidates(cfg):
         {'questions.subject': 1, 'questions.type': 1, 'rules': 1, 'label': 1, 'order': 1, 'state': 1, 'book_id': 1,
          'issue_count': {'$size': {'$ifNull': ['$issues', []]}}}).to_list(5000)
     mocks.sort(key=lambda m: (rank[m['book_id']], m['order']))
+    from .book_delete import reached_students
+    reached = await reached_students(names)   # Delete (for good) is offered only for an upload from which no test was ever made
     for m in mocks:
         if m['state'] == 'held':
             problem = f"{m['issue_count']} to fix"
@@ -171,7 +173,7 @@ async def candidates(cfg):
         else:
             problem = pattern_problem(cfg, mock_pattern(m))
         out.append({'kind': 'book_mock', 'id': m['_id'], 'book_id': m['book_id'], 'title': m['label'], 'book': names[m['book_id']],
-                    'count': len(m.get('questions', [])), 'held': m['state'] == 'held', 'problem': problem})
+                    'count': len(m.get('questions', [])), 'held': m['state'] == 'held', 'problem': problem, 'upload_deletable': m['book_id'] not in reached})
     return out
 
 

@@ -1,0 +1,24 @@
+{
+  "summary": "Pocket 2 ('Atki hai') independent verification. Re-ran the existing isolated backend suite tests/storage_stuck231.py (49/49 PASS). Wrote and ran the requested edge suite tests/storage_stuck_edge232.py (25/25 PASS on first run, reproducible) subclassing fake_supabase231.Picky without changing its behaviour; it covers: stuck -> Supabase fully away -> returns; stuck book that owner pauses; Dobara chalao pressed twice / stale revision / non-owner refused; stuck book sent to Library (remove); a book where every mock is stuck; stuck picture that later gets 503 becomes 'away' not stuck forever; 402/blocked arriving on a stuck file flips kind to 'blocked'; stuck_round surviving a restart (recover() adds no second job); 'since' preserved across 3 automatic rounds and next_run_at not drifting later; wake_storage does not wake a stuck job; maintenance() called twice within the same minute is a no-op (lock). Independently re-ran the browser smoke tests/ui_storage_stuck231.py desk+mob against the already-running bridge (31/31 PASS; desktop and 390 px mobile; no horizontal overflow, no /api failures, five stuck rows ask machine once together not once each). ruff check --select F,E9 clean on the new file. No new faults found; no app code changed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/storage_stuck_edge232.py",
+    "/app/backend/tests/storage_stuck231.py",
+    "/app/backend/tests/ui_storage_stuck231.py"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "book_worker.step: when storage_wait with mocks is popped into stuck_round, the 'since' is carried through correctly; verified across 3 automatic rounds.",
+    "jobs.wake_uploads(stuck=True) correctly ignores stuck imports until their 900s window plus a 120s safety; verified by storage_stuck231 I-section and edge E8.",
+    "No request storm: with 5 waiting/stuck rows on the type page, /api/admin/machine/status is called <=4 times over the loading window (shared poll works)."
+  ],
+  "updated_files": ["/app/backend/tests/storage_stuck_edge232.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "Pocket 2 QA bridge at 127.0.0.1:8775; cookies in /tmp/uibridge231/bridge.json (0600). No permanent credentials used or changed.",
+  "seed_data_creation": "Only inside disposable isolated DBs created by the suites themselves (tejas_isolated_book170_*); each run drops its own DB. No writes to preview DB or real Supabase.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "A new edge suite tests/storage_stuck_edge232.py is in place (25 checks, no app changes). Run as a plain script: `cd /app/backend && python tests/storage_stuck_edge232.py`. Takes ~3 minutes, drops its own DB at the end. ruff F,E9 clean. The bridge on 127.0.0.1:8775 was left running for the main agent (PID 43420, log /root/p2/bridge231.log). Returned.txt still seeded with the three stuck paths. Dobara chalao 'fix' lane on the browser was NOT exercised this iteration (per instructions, it can be run only once per bridge; saving that budget for the main agent).",
+  "rca of the issue": "N/A — no faults found."
+}

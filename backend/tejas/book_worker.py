@@ -8,13 +8,14 @@ from .book_reader import read_page, READER_VERSION
 from .book_publish import rebuild, publish_ready
 from .chapter_reader import plan_start, bookmark_plan
 from anyio import from_thread
+from .step_guard import beat, holds
 from tejas_storage import put_object, StorageError, StorageWaiting, StorageStuck, SupabaseRefused
 
 PAGES_PER_STEP=100
 MOCKS_PER_STEP=5
 
 
-async def extract(source, numbers):
+async def extract(source, numbers, alive=None):
     items=[{'action':'text','page':n} for n in numbers]
     try:
         return await run_in_threadpool(inspect_many,source,items,10)
@@ -23,6 +24,7 @@ async def extract(source, numbers):
         for n in numbers:
             try:results.append(await run_in_threadpool(inspect,source,'text',n))
             except ValueError as exc:results.append({'error':str(exc)})
+            if alive:alive()  # page by page is slow but alive
         return results
 
 
@@ -31,7 +33,7 @@ async def read_batch(book, token, source):
     numbers=list(range(start+1,min(p['pages'],start+PAGES_PER_STEP)+1))
     done={r['number'] async for r in db.tejas_book_pages.find({'book_id':id,'number':{'$in':numbers}},{'number':1})}
     missing=[n for n in numbers if n not in done]
-    extracted=dict(zip(missing,await extract(source,missing))) if missing else {}
+    extracted=dict(zip(missing,await extract(source,missing,lambda:beat(id,'page read')))) if missing else {}
     await renew(book,token)
     previous=await db.tejas_book_pages.find_one({'book_id':id,'number':start})
     context=(previous or {}).get('context',{})
@@ -135,7 +137,7 @@ async def receive(book, token):
     async def keep(info):
         await db.tejas_books.update_one({'_id':book.id},{'$set':{'payload.transfer':info}})
     def progress(info):  # every 6 MB piece: the owner sees the %, and a later try carries on from Supabase's own offset
-        p['transfer']=info;from_thread.run(keep,info)
+        beat(book.id,'piece sent');p['transfer']=info;from_thread.run(keep,info)
     p['source_path']=await run_in_threadpool(put_object,f'jeelive/books/{book.id}/original.pdf',raw,'application/pdf',p.get('transfer'),progress)
     p.pop('transfer',None)
     p.update(pages=info['pages'],read_pages=0,scanned_pages=0,reader_version=READER_VERSION,message='Original received privately. Reading pages in recoverable batches.')
@@ -149,9 +151,10 @@ async def step(job):
     id=job['payload']['book_id']
     try:book,token=await lock_book(id)
     except HTTPException as exc:
-        if exc.status_code==404:return 'Book access removed.'
+        # an upload whose access was removed, or that the owner deleted for good, has nothing left to do
+        if exc.status_code==404 or not await db.tejas_books.find_one({'_id':id,'removed':False},{'_id':1}):return 'Book access removed.'
         raise
-    more=False;waited=None
+    holds(id,token);more=False;waited=None
     try:
         await fence(book,token)
         if book.paused:return 'Book paused by owner.'
@@ -215,6 +218,7 @@ async def step(job):
                 'ai_proposed_pages':await db.tejas_book_pages.count_documents({'book_id':id,'provenance.kind':'ai_proposal'}),
                 'blocking_issues':sum(len(m.issues) for m in mocks),**{k:v for k,v in p.get('metrics',{}).items() if k=='first_ready_seconds'}}
             more=more or bool(await db.tejas_book_allowances.find_one({'book_id':id,'state':'queued'}))
+        p.pop('hang',None)  # a finished step: the count of silent steps in a row starts again
         await save_book(book,token)
     except Exception as exc:
         if isinstance(exc,HTTPException) and exc.status_code==409:raise  # another batch took this PDF: the job waits its turn, the book is not marked failed
@@ -233,10 +237,11 @@ async def step(job):
                     'Atki hai: yeh file Supabase mein nahi ja rahi. File surakshit hai; baaki kitaabein chal rahi hain.') if stuck else
                     'Supabase ka intezaar. File surakshit hai; Supabase lautte hi yahin se aage chalega.'},
                 # the next round tries every stuck mock again; the re-read that finished before the stuck picture stays finished
-                **({'$unset':{'payload.stuck_round':'',**({} if 'rereading' in book.payload else {'payload.rereading':''})}} if stuck else {})})
+                # this step was not silent: the count of silent steps in a row starts again
+                '$unset':{'payload.hang':'',**({'payload.stuck_round':'',**({} if 'rereading' in book.payload else {'payload.rereading':''})} if stuck else {})}})
             raise
         import logging;logging.getLogger(__name__).exception('Book step failed (book=%s)',id)
-        book.payload.pop('stuck_round',None)
+        book.payload.pop('stuck_round',None);book.payload.pop('hang',None)
         book.state='failed';book.payload['message']=str(exc.detail if isinstance(exc,HTTPException) else exc)[:350] if isinstance(exc,(ValueError,HTTPException,SupabaseRefused)) else 'Processing interrupted. Retry resumes the saved pages without uploading again.'
         try:await save_book(book,token)
         except HTTPException:pass

@@ -13,6 +13,7 @@ from .runtime import LANE_LIMITS, JOB_ATTEMPTS, JOB_LEASE_SECONDS, INLINE_JOBS, 
 from .canonical import EPOCH_NOW, clocked_one
 from tejas_core import build_questions, generate_report
 from tejas_storage import get_object, put_object, StorageWaiting, STUCK_RETRY
+from . import step_guard
 
 router = APIRouter(prefix='/api', tags=['Processing'])
 _active = {kind: set() for kind in LANE_LIMITS}
@@ -95,8 +96,7 @@ async def run_job(id, drain=True):
         try:
             output = {}
             if kind == 'book_step':
-                from .book_worker import step
-                message = await step(j)
+                message = await step_guard.guarded(j)  # book_worker.step, let go if it shows no sign of life for 10 minutes
             elif kind == 'ai_solution':
                 from .ai_solutions import process
                 message = await process(j)
@@ -185,6 +185,19 @@ async def run_job(id, drain=True):
                     # One stuck file keeps one 15-minute clock: an older waiting job of the same book (left by an earlier Dobara chalao) steps aside.
                     await jobs.update_many({'kind': kind, 'payload.book_id': j['payload']['book_id'], 'status': 'queued', 'stuck': True, 'id': {'$ne': id}},
                                            {'$set': {'status': 'done', 'progress': 100, 'stuck': False, 'error': '', 'message': 'A newer try of this stuck file took over.'}})
+                kick_later(kind, delay + 1)
+                return True
+            if isinstance(exc, step_guard.StepHung):
+                # A silent PDF step was let go: the job keeps its tries and runs again from the saved place. From the third silent step
+                # in a row only this PDF stops ("Atki hai"): it is then tried once an hour, or at once on Dobara chalao.
+                delay = step_guard.HUNG_STUCK_RETRY if exc.stuck else step_guard.HUNG_RETRY
+                await step_guard._try(jobs.update_one({'id': id, 'lease': lease, 'status': 'running'}, [{'$set': {
+                    'status': 'queued', 'progress': 0, 'stuck': exc.stuck, 'next_run_at': {'$add': [EPOCH_NOW, delay]},
+                    'error': 'This PDF step went silent and was let go; it runs again from the saved place.',
+                    'attempts': {'$max': [0, {'$subtract': [{'$ifNull': ['$attempts', 1]}, 1]}]}}}]), 'putting the job back')
+                if exc.stuck:
+                    await step_guard._try(jobs.update_many({'kind': kind, 'payload.book_id': j['payload']['book_id'], 'status': 'queued', 'stuck': True, 'id': {'$ne': id}},
+                                                           {'$set': {'status': 'done', 'progress': 100, 'stuck': False, 'error': '', 'message': 'A newer try of this stuck PDF took over.'}}), 'one waiting job only')
                 kick_later(kind, delay + 1)
                 return True
             if kind == 'book_step' and isinstance(exc, HTTPException) and exc.status_code == 409 and j.get('busy_waits', 0) < BUSY_WAITS:
@@ -298,6 +311,8 @@ async def wake_storage():
         kick_later(kind, 0)
     from .storage_move import resume
     await resume()
+    from .book_delete import resume as finish_deletes
+    await finish_deletes()
     return woke + await wake_uploads()
 
 
@@ -409,6 +424,8 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
     await jobs.update_many({'kind': {'$ne': 'ai_solution'}, 'status': 'running', '$expr': {'$lt': ['$lease_until', EPOCH_NOW]}, 'attempts': {'$gte': JOB_ATTEMPTS}}, {'$set': {'status': 'failed', 'error': 'Worker recovery budget exhausted. Saved data is safe; retry after resolving the cause.'}})
     from .book_worker import recover
     await recover()
+    from .book_delete import resume as finish_deletes
+    await finish_deletes()  # an upload the owner deleted for good: an unfinished clean-up carries on from where it stopped
     import tejas_storage
     if tejas_storage.supabase_on():
         await wake_uploads(stuck=True)

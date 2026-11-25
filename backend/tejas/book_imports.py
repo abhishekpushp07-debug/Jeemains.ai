@@ -31,9 +31,16 @@ async def listing(u=Depends(owner)):
 async def create(body:UploadInput,bg:BackgroundTasks,u=Depends(owner)):
     if not body.filename.lower().endswith('.pdf'):raise HTTPException(422,'Choose a PDF book.')
     if body.release_at and body.release_at<=await database_now():raise HTTPException(422,'Choose a future schedule or immediate publication.')
-    id=identity('book',u['id'],body.sha256,body.edition.strip())
+    id=identity('book',u['id'],body.sha256,body.edition.strip());again=False
+    # A copy sent while an earlier one was being deleted for good has its own identity: the same PDF in the same type is still that one upload.
+    twin=await db.tejas_books.find_one({'owner_id':u['id'],'payload.again':True,'removed':False,'archived':{'$ne':True},'payload.sha256':body.sha256,
+        'payload.edition':{'$in':[body.edition,body.edition.strip()]},'payload.destination.section_id':body.section_id},{'_id':1})
+    if twin:id=twin['_id']
     # The same PDF may go to another section, or come back after its first copy moved to the Library.
     while (existing:=await db.tejas_books.find_one({'_id':id})):
+        if existing.get('deleting'):
+            # The owner deleted this upload for good (its clean-up may still run): the same PDF starts afresh, with its own folder in Supabase.
+            id=identity(id,'again',existing['deleting']['at']);again=True;continue
         book=Book.from_mongo(existing)
         if book.removed:raise HTTPException(409,'This PDF was uploaded before and its access was removed, so it cannot be imported again.')
         same=(book.payload.get('destination') or {}).get('section_id')==body.section_id
@@ -65,7 +72,7 @@ async def create(body:UploadInput,bg:BackgroundTasks,u=Depends(owner)):
         extra={'chapters':True,'subject':match_subject(body.subject,allowed)}
         if body.subject and not extra['subject']:raise HTTPException(422,'Choose one of this exam’s subjects, or Read from the PDF.')
     elif body.subject:raise HTTPException(422,'A subject is chosen only for chapter-wise PDFs.')
-    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all','year','subject'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id'],'cut_engine':True}|extra)
+    book=Book(id=id,owner_id=u['id'],created_at=now(),updated_at=now(),payload=body.model_dump(exclude={'replace_ids','replace_all','year','subject'})|{'auto_publish':False,'destination':dest,'rights_attested_at':now(),'rights_attested_by':u['id'],'cut_engine':True}|extra|({'again':True} if again else {}))
     try:await db.tejas_books.insert_one(book.to_mongo())
     except DuplicateKeyError:return await book_view(await load_book(id,u))
     await mark_replacing(dest,body.title)
@@ -257,7 +264,7 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
         elif body.action in ('resume','retry','publish'):
             if book.state=='uploading':raise HTTPException(409,'Finish transferring the PDF first.')
             book.paused=False;book.state='received' if not book.payload.get('source_path') else 'reading' if book.payload.get('read_pages',0)<book.payload.get('pages',0) else 'matching'
-            wait=book.payload.get('storage_wait') or {};book.payload.pop('stuck_round',None)  # the owner's own try starts a fresh round
+            wait=book.payload.get('storage_wait') or {};book.payload.pop('stuck_round',None);book.payload.pop('hang',None)  # the owner's own try starts a fresh round
             if wait.get('stuck'):book.payload['storage_wait']={'since':wait['since'],'at':now(),'retrying':True,**({'mocks':wait['mocks']} if wait.get('mocks') else {})}  # the row says "trying again" until this try ends
             run=True
         elif body.action=='publish_ready':

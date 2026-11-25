@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import {Link} from 'react-router-dom';
-import {CalendarDays,ListOrdered,X,Settings2,PencilLine,Wrench,Eraser} from 'lucide-react';
+import {CalendarDays,ListOrdered,X,Settings2,PencilLine,Wrench,Eraser,Trash2} from 'lucide-react';
+import {DeleteUploadDialog} from './DeleteUploadDialog';
 import {api,post,put} from '../../lib/api';
 import {Button} from '../ui/button';
 import {Input} from '../ui/input';
@@ -35,12 +36,13 @@ function Settings({open,onClose,data,onSaved}){
  </DialogContent></Dialog>;
 }
 
-function Paper({c,free,busy,onAssign}){
+function Paper({c,free,busy,onAssign,onRemove}){
  const link=c.kind==='written'?'/super-admin/write/'+c.id:c.kind==='book_mock'?`/super-admin/fix/${c.book_id}/${c.id}${c.held?'':'?all=1'}`:null;
  return <li className="admin-row" data-testid={'series-paper-'+c.id}>
   <div className="admin-row-main"><strong>{c.title}</strong><small>{[c.book,`${c.count} sawaal`,c.kind==='written'?'Likha hua':c.kind==='set'?'Bana hua, din nahi':'PDF se'].filter(Boolean).join(' · ')}</small>{c.problem&&<p className="admin-reason">{c.problem}</p>}</div>
   {link&&<Button asChild size="sm" variant={c.held||c.problem?'default':'outline'}><Link to={link} data-testid={'series-paper-open-'+c.id}>{c.held?<><Wrench size={15}/>Fix</>:<><PencilLine size={15}/>Edit</>}</Link></Button>}
   {!c.problem&&free.length>0&&<Select value="" onValueChange={d=>onAssign(c,d)} disabled={busy}><SelectTrigger className="admin-move-select" aria-label={c.title+' ko din do'} data-testid={'series-paper-day-'+c.id}><SelectValue placeholder="Din do…"/></SelectTrigger><SelectContent>{free.map(s=><SelectItem key={s.date} value={s.date}>Din {s.day} · {dayIST(s.date)}</SelectItem>)}</SelectContent></Select>}
+  {c.kind==='book_mock'&&c.upload_deletable&&<Button size="icon" variant="ghost" className="master-danger-icon" disabled={busy} aria-label={'Is PDF ko delete karo: '+c.book} onClick={()=>onRemove({id:c.book_id,title:c.book})} data-testid={'series-paper-delete-'+c.id}><Trash2 size={15}/></Button>}
  </li>;
 }
 
@@ -62,7 +64,7 @@ export function SeriesDays({section,reloadKey,onChanged}){
   <section className="admin-panel" data-testid="series-papers">
    <div className="admin-panel-head"><div><h2>Bina din wale paper ({data.candidates.length})</h2><p>Upar Upload PDF ya Write se bane. Koi paper apne din se pehle kabhi nahi dikhta.</p></div>
     <div className="admin-actions"><Button disabled={busy||!free.length||!data.candidates.some(c=>!c.problem)} onClick={()=>run(()=>post(`/admin/master/series/${data.id}/fill`))} data-testid="series-fill"><ListOrdered size={16}/>Din order se bharo</Button></div></div>
-   {data.candidates.length?<ul className="admin-list">{data.candidates.map(c=><Paper key={c.kind+c.id} c={c} free={free} busy={busy} onAssign={(c,date)=>run(()=>post(`/admin/master/series/${data.id}/assign`,{kind:c.kind,id:c.id,date}))}/>)}</ul>:<p className="admin-empty" data-testid="series-no-papers">Har paper ko din mil gaya hai. Aur upload kijiye ya likhiye.</p>}
+   {data.candidates.length?<ul className="admin-list">{data.candidates.map(c=><Paper key={c.kind+c.id} c={c} free={free} busy={busy} onRemove={t=>setDialog({remove:t})} onAssign={(c,date)=>run(()=>post(`/admin/master/series/${data.id}/assign`,{kind:c.kind,id:c.id,date}))}/>)}</ul>:<p className="admin-empty" data-testid="series-no-papers">Har paper ko din mil gaya hai. Aur upload kijiye ya likhiye.</p>}
   </section>
   <section className="admin-panel" data-testid="series-days">
    <div className="admin-panel-head"><div><h2>Din</h2><p>{data.total} mein se {assigned} din mein paper hai.</p></div><Button variant="outline" disabled={busy||!data.slots.some(s=>s.paper&&!s.opened)} onClick={()=>setDialog('clear')} data-testid="series-clear"><Eraser size={16}/>Aage ke saare din khali karo</Button></div>
@@ -74,6 +76,7 @@ export function SeriesDays({section,reloadKey,onChanged}){
     {s.paper&&!s.opened&&<Button size="icon" variant="ghost" disabled={busy} aria-label={'Din '+s.day+' khali karo'} onClick={()=>run(()=>post(`/admin/master/series/${data.id}/unassign`,{kind:s.paper.kind,id:s.paper.id}))} data-testid={'series-day-free-'+s.day}><X size={15}/></Button>}
    </li>;})}</ol>
   </section>
+  <DeleteUploadDialog target={dialog?.remove||null} onClose={()=>setDialog(null)} onDone={()=>{setReload(n=>n+1);onChanged?.();}}/>
   <Settings open={dialog==='settings'} onClose={()=>setDialog(null)} data={data} onSaved={()=>setReload(n=>n+1)}/>
   <ConfirmDialog open={dialog==='clear'} onClose={()=>setDialog(null)} busy={busy} testId="series-clear-confirm" title="Aage ke saare din khali karein?" text="Paper wapas bina din wali list mein chale jayenge. Jo din khul chuke hain woh nahi badlenge." button="Aage ke din khali karo" onConfirm={()=>{setDialog(null);run(()=>post(`/admin/master/series/${data.id}/clear`));}}/>
  </>;

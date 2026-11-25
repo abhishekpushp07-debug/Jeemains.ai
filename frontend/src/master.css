@@ -81,6 +81,10 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .master-status:disabled{cursor:default}
 .master-menu{min-width:190px}
 .master-menu [role=menuitem]{gap:8px}
+.master-menu .master-menu-danger,.master-danger-icon{color:var(--danger)}
+.upload-delete-head{display:block;margin-top:6px;font-size:13px;font-weight:800;color:var(--ink)}
+.upload-delete-type{display:flex;flex-direction:column;gap:6px;margin-top:6px;font-size:13.5px;font-weight:700}
+.upload-delete-type input,.upload-delete-dialog .jeelive-button{min-height:var(--touch-target)}
 .master-lock{display:inline;margin-right:6px;vertical-align:-1px;color:var(--text-muted)}
 .master-bulk{justify-content:space-between;flex-wrap:wrap}
 .master-mock-row .admin-test-actions{min-width:44px;justify-content:flex-end}

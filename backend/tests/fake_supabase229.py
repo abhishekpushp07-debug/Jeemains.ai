@@ -60,15 +60,18 @@ class FakeSupabase:
             key = p[len('/storage/v1/object/authenticated/'):]
             return httpx.Response(200, content=self.objects[key]) if key in self.objects else missing
         if p.startswith('/storage/v1/object/list/'):
-            body = json.loads(req.content); bucket = p.rsplit('/', 1)[1]; prefix = bucket + '/' + body.get('prefix', '')
-            names = sorted(k[len(prefix):] for k in self.objects if k.startswith(prefix) and '/' not in k[len(prefix):])
-            rows = [{'name': n, 'metadata': {'size': len(self.objects[prefix + n])}} for n in names]
+            # As the real one (probe of 24 Nov): a folder is named with or without its last slash; half a name lists nothing;
+            # files have an id, sub-folders are listed once with id None.
+            body = json.loads(req.content); bucket = p.rsplit('/', 1)[1]; prefix = bucket + '/' + body.get('prefix', '').rstrip('/') + '/'
+            inside = sorted(k[len(prefix):] for k in self.objects if k.startswith(prefix))
+            rows = [{'name': n, 'id': 'f-' + n, 'metadata': {'size': len(self.objects[prefix + n])}} for n in inside if '/' not in n]
+            rows += [{'name': n, 'id': None, 'metadata': None} for n in sorted({n.split('/', 1)[0] for n in inside if '/' in n})]
+            rows.sort(key=lambda x: x['name'])
             return httpx.Response(200, json=rows[body.get('offset', 0):body.get('offset', 0) + body.get('limit', 100)])
         if p.startswith('/storage/v1/object/') and req.method == 'DELETE':
             bucket = p.rsplit('/', 1)[1]
-            for name in json.loads(req.content).get('prefixes', []):
-                self.objects.pop(bucket + '/' + name, None)
-            return httpx.Response(200, json=[])
+            gone = [{'name': name} for name in json.loads(req.content).get('prefixes', []) if self.objects.pop(bucket + '/' + name, None) is not None]
+            return httpx.Response(200, json=gone)
         if p.startswith('/storage/v1/object/') and req.method == 'POST':
             key = p[len('/storage/v1/object/'):]
             big = len(req.content) > self.chunk
@@ -97,6 +100,9 @@ class FakeSupabase:
                 return httpx.Response(404, text='Upload not found')
             if req.method == 'HEAD':
                 return httpx.Response(200, headers={'Upload-Offset': str(len(u['data'])), 'Upload-Length': str(u['len'])})
+            if req.method == 'DELETE':   # a half-sent upload is ended: its address is gone (seen on the real one: 204, then 404)
+                del self.uploads[p.rsplit('/', 1)[1]]
+                return httpx.Response(204)
             if self.tus_down:
                 return httpx.Response(500, text='piece route broken')
             if self.patch_code:

@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
-import {ChevronDown,Wrench,PencilLine,Eye,Pencil,RefreshCw,Archive,Radio,CalendarClock,EyeOff,Lock,Loader2} from 'lucide-react';
+import {ChevronDown,Wrench,PencilLine,Eye,Pencil,RefreshCw,Archive,Radio,CalendarClock,EyeOff,Lock,Loader2,Trash2} from 'lucide-react';
+import {DeleteUploadDialog} from './DeleteUploadDialog';
 import {post,patch} from '../../lib/api';
 import {invalidateCatalog} from '../../lib/catalog';
 import {Button} from '../ui/button';
@@ -37,6 +38,7 @@ function StatusMenu({m,busy,onPick}){
    <DropdownMenuItem disabled={m.status==='draft'||m.status==='off'} onSelect={()=>onPick('off',[m])} data-testid={'mock-off-'+m.id}><EyeOff size={15}/>Off karo</DropdownMenuItem>
    <DropdownMenuSeparator/>
    <DropdownMenuItem disabled={m.locked} onSelect={()=>onPick('library',[m])} data-testid={'mock-library-'+m.id}><Archive size={15}/>Library mein bhejo</DropdownMenuItem>
+   {m.kind==='book_mock'&&m.status==='draft'&&m.upload_deletable&&<DropdownMenuItem className="master-menu-danger" onSelect={()=>onPick('delete_upload',[m])} data-testid={'mock-delete-upload-'+m.id}><Trash2 size={15}/>Is PDF ko delete karo…</DropdownMenuItem>}
   </DropdownMenuContent></DropdownMenu>;
 }
 
@@ -63,7 +65,7 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
   <span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
   <div className="admin-row-main"><strong data-testid={'mock-title-'+m.id}>{m.locked&&<Lock size={13} className="master-lock" aria-label="Locked"/>}{m.title}</strong><small>{facts(m)}</small>
    {m.rereading&&<small className="master-reread" data-testid={'mock-rereading-'+m.id}><Loader2 size={13} className="spin" aria-hidden="true"/>dobara padhi ja rahi hai · {m.rereading.read_pages}/{m.rereading.pages} page</small>}
-   {m.stuck&&<small className="admin-reason" data-testid={'mock-stuck-'+m.id}>Atki hai: iski ek picture Supabase mein nahi ja rahi, isliye yeh abhi Live nahi hua.{m.stuck.reason?` Wajah: ${m.stuck.reason}.`:''} Har 15 minute mein apne aap phir koshish hoti hai; abhi ke liye upar Uploads mein “Dobara chalao” dabaiye.</small>}
+   {m.stuck&&<small className="admin-reason" data-testid={'mock-stuck-'+m.id}>{m.stuck.kind==='hang'?'Atki hai: is PDF ka kaam baar-baar beech mein latak gaya, isliye yeh abhi Live nahi hua.':'Atki hai: iski ek picture Supabase mein nahi ja rahi, isliye yeh abhi Live nahi hua.'}{m.stuck.reason?` Wajah: ${m.stuck.reason}.`:''} {m.stuck.kind==='hang'?'Har ghante':'Har 15 minute mein'} apne aap phir koshish hoti hai; abhi ke liye upar Uploads mein “Dobara chalao” dabaiye.</small>}
    {m.replace_pending&&<small className="admin-replacing">“{m.replace_pending}” isko replace karega. Woh Live hote hi yeh Library mein chala jayega.</small>}<DuplicateNote m={m}/></div>
   <div className="master-row-status"><LiveSwitch m={m} busy={busy} onPick={onPick}/><StatusMenu m={m} busy={busy} onPick={onPick}/></div>
   <div className="admin-test-actions">{m.status==='draft'&&m.count>0&&!m.rereading&&<TryAsStudent m={m}/>}<MainAction m={m}/>{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Naam badlo: '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>
@@ -79,7 +81,8 @@ export function MockList({items,onChanged,onReplace}){
   if(r.skipped.length)toast.message(`${r.skipped.length} mock nahi badle`,{description:r.skipped.slice(0,3).map(s=>`${s.title}: ${s.reason}`).join('\n')});
   setPicked(new Map());onChanged();
  }catch(e){toast.error(e.message);}finally{setBusy(false);}}
- function pick(to,list){if(to==='scheduled')setSchedule(list);else if(to==='library')setLibrary(list);else run(to,list);}
+ const [remove,setRemove]=useState(null);
+ function pick(to,list){if(to==='scheduled')setSchedule(list);else if(to==='library')setLibrary(list);else if(to==='delete_upload')setRemove({id:list[0].book_id,title:list[0].book});else run(to,list);}
  const pickable=items.filter(m=>m.kind!=='import'&&!m.rereading);
  const chosen=[...picked.values()];
  const replaceable=chosen.filter(m=>m.kind==='set'&&!m.locked);
@@ -99,6 +102,7 @@ export function MockList({items,onChanged,onReplace}){
   <ol className="admin-list admin-test-list" data-testid="mock-list">{items.map((m,i)=><MockRow key={key(m)} m={m} i={i} checked={picked.has(key(m))} onCheck={check} busy={busy} onPick={pick} onRename={setRename}/>)}</ol>
   <ScheduleDialog open={!!schedule} count={schedule?.length||0} onClose={()=>setSchedule(null)} onSave={(at,live_exam)=>{const list=schedule;setSchedule(null);run('scheduled',list,{at,live_exam});}}/>
   <ConfirmDialog open={!!library} onClose={()=>setLibrary(null)} busy={busy} testId="library-confirm" title={`${library?.length||0} mock Library mein bhejein?`} text="Students ko website aur app par yeh dikhna band ho jayega. Sabke purane score rahenge. Library se kabhi bhi wapas la sakte hain. Verified PYQ papers jahan hain wahin rahenge." button="Library mein bhejo" onConfirm={()=>{const list=library;setLibrary(null);run('library',list);}}/>
+  <DeleteUploadDialog target={remove} onClose={()=>setRemove(null)} onDone={()=>{invalidateCatalog();onChanged();}}/>
   <TextDialog open={!!rename} onClose={()=>setRename(null)} title="Mock ka naam badlo" label="Students ko dikhne wala naam" value={rename?.title} testId="mock-rename-dialog" onSave={title=>patch('/admin/catalog/tests/'+rename.id,{title}).then(()=>{invalidateCatalog();toast.success('Naam save ho gaya.');onChanged();})}/>
  </>;
 }

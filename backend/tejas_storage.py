@@ -443,7 +443,8 @@ def _big(bucket, path, data, content_type, resume=None, on_progress=None):
                 except SupabaseRefused:
                     raise
                 except StorageError as second:
-                    second.stalls = stalls
+                    # A caller that keeps no place between tries has now had both routes return the file in this one call: it is stuck, not waiting.
+                    second.stalls = stalls if on_progress or scope_of(second) != 'file' else STALL_LIMIT + 1
                     raise second from None
                 return
             if on_progress or tries >= 2:
@@ -475,6 +476,75 @@ def sb_get(bucket, path, tries=4):
     if r.status_code != 200:
         raise StorageError(f'Supabase file unavailable ({r.status_code}). Retry later.')
     return r.content
+
+
+# ---------- Removing files from Supabase: only the files of one upload's own folder. Any other path is refused here, whoever asks. ----------
+_OWN_FOLDER = re.compile(r'^jeelive/books/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/$')
+
+
+def _removable(folder, names=()):
+    if not _OWN_FOLDER.match(folder) or any(not n.startswith(folder) or n.endswith('/') or '..' in n or '//' in n for n in names):
+        raise ValueError("Refused: only the files of one upload's own folder can be removed from Supabase.")
+
+
+def sb_list(folder):
+    """One level of a folder in Supabase: ([(file name, size)], [sub-folder names])."""
+    bucket, rows, offset = _bucket(), [], 0
+    while True:
+        r = _call('POST', f"{project_url()}/storage/v1/object/list/{quote(bucket, safe='')}", {'Content-Type': 'application/json'},
+                  json={'prefix': folder.rstrip('/'), 'limit': 1000, 'offset': offset, 'sortBy': {'column': 'name', 'order': 'asc'}})
+        if r.status_code != 200:
+            code, said = _answer(r)
+            raise _error(f'Supabase could not list a folder ({code}): {said[:120]}', code)
+        page = r.json()
+        rows += page
+        if len(page) < 1000:
+            break
+        offset += 1000
+    return [(x['name'], (x.get('metadata') or {}).get('size')) for x in rows if x.get('id')], [x['name'] for x in rows if not x.get('id')]
+
+
+def sb_remove(folder, names):
+    """Removes these files of one upload's own folder (full paths). Returns how many were asked for."""
+    _removable(folder, names)
+    bucket = _bucket()
+    for i in range(0, len(names), 100):
+        r = _call('DELETE', f"{project_url()}/storage/v1/object/{quote(bucket, safe='')}", {'Content-Type': 'application/json'}, json={'prefixes': names[i:i + 100]})
+        if r.status_code != 200:
+            code, said = _answer(r)
+            raise _error(f'Supabase could not remove files ({code}): {said[:120]}', code)
+    for n in names:
+        _source_cache.remove(SB + bucket + '/' + n)
+    return len(names)
+
+
+def sb_empty(folder):
+    """Empties one upload's own folder: lists it, removes exactly those names, then lists it again. It must be empty, or this raises."""
+    _removable(folder)
+    removed = 0
+
+    def clear(prefix, depth):
+        nonlocal removed
+        for _ in range(200):
+            found, inner = sb_list(prefix)
+            for sub in inner if depth < 3 else []:
+                clear(prefix + sub + '/', depth + 1)
+            if not found:
+                return
+            removed += sb_remove(folder, [prefix + name for name, _ in found])
+    clear(folder, 0)
+    left, inner = sb_list(folder)
+    if left or inner:
+        raise _error(f'Supabase still lists {len(left)} files and {len(inner)} folders there after removing.', scope='file')
+    return removed
+
+
+def sb_end_upload(url):
+    """Ends a half-sent big upload, so Supabase drops its pieces. Only an upload address of this project's own big-file route is accepted."""
+    u, own = urlparse(url or ''), {urlparse(_tus_endpoint()).hostname, urlparse(project_url()).hostname}
+    if u.scheme != 'https' or u.hostname not in own or not u.path.startswith('/storage/v1/upload/resumable/'):
+        return False
+    return _call('DELETE', url, {'Tus-Resumable': '1.0.0'}).status_code in (200, 204)
 
 
 def _ok():

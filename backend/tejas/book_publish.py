@@ -9,6 +9,7 @@ from .book_reader import infer_rules
 from .book_pdf import inspect_many
 from .book_cuts import cut_mock, cut_summary, SECONDS, SHOWN
 from .png_small import shrink_many
+from .step_guard import beat
 from .content import valid_rules, question_issues, publish_validated
 from .chapter_reader import book_subjects, match_subject, syllabus_subject, resolve_subject, bookmark_title
 from tejas_storage import put_object
@@ -302,7 +303,7 @@ async def source_questions(book, mock, raw, guard=None, strict=True):
         async with gate:
             try:out=key,await crop_ref(book,mock,crop,region,role)
             except ValueError as exc:out=key,exc
-        progress['done']+=1
+        progress['done']+=1;beat(book.id,'picture saved')
         if progress['done']==progress['total'] or time.time()-progress['at']>=1.5:await tell()
         return out
     jobs=[]

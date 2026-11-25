@@ -1,3 +1,10 @@
+## Status — 2026-11-24 (night): OWNER ASLEEP, "keep building, do not stop, do not ask me anything". Approved plan = plan/plan.md (packets A-G).
+- Owner's words (21:55 UTC): going to sleep ~8 h; keep building packet after packet; do NOT stop to ask him to publish; ask NO question; he gives full authority for every decision; "do not break what you have already built"; work in small pockets.
+- Decision taken by the builder: NO deploy while he sleeps (the plan's rule "deploy only when the owner writes deploy" stays). The per-packet stop is replaced by a written report per packet in memory/NIGHT_REPORT.md (Roman Hinglish) that he reads when he wakes.
+- Packet A done: testing agent iteration_224 (no fault; new suite tests/storage_stuck_edge232.py 25/25), code review (no critical/high; 1 medium, see NIGHT_REPORT), browser walk with Dobara chalao 30/32 where the 2 "fails" were the test's own clock (the bridge was 21 real minutes old, so the 15-minute alert rightly showed on the big-PDF row).
+- Live checked read-only (no login): jeelive.ai frontend has every screen word up to commit 7e9e3ab (23 Nov 23:00) and none of Pocket 2. So a deploy now sends ONLY the storage work done since then (git diff 7e9e3ab HEAD) plus whatever is built tonight.
+
+
 ## Status — 2026-11-24 (evening): Storage Pocket 2 ("Ek file atki") BUILT and self-tested in preview. Testing agent NOT yet run. NOT deployed. Pockets 3 and 4 NOT started.
 - Owner's rules (unchanged): stop and report after every pocket; no deploy until he says "deploy"; NO email/external alert (the 15-minute alert lives only inside the Super Admin upload row); do not touch LiveSeries.js; reply in Roman Hinglish; Pocket 4 choice: the machine copies legacy pictures to Supabase itself, then Live.
 - What Pocket 2 does: a file Supabase keeps returning (ordinary 4xx / 409) is that file's fault only. tejas_storage.StorageStuck (scope 'stuck', STUCK_RETRY = 900 s): a big PDF is tried on both routes (tries 1-2 wait as scope 'file', try 3 is stuck), a small picture is stuck at once; Supabase is never rested for it. Network / 408 / 429 / 5xx stay "Supabase away" (whole book waits, as before).

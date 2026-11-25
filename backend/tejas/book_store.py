@@ -8,6 +8,7 @@ from .canonical import EPOCH_NOW
 from .book_models import Book, BookPage, BookMock, BookAllowance
 from .auth import owner, staff
 from tejas_storage import get_object
+from .step_guard import beat
 
 CHUNK=512*1024
 CACHE=Path(tempfile.gettempdir())/'jeelive-book-originals'
@@ -89,6 +90,7 @@ async def fence(book, token):
     await principal(book)
     if not await db.tejas_books.find_one({'_id':book.id,'lock_token':token,'removed':False,'$expr':{'$gt':['$lock_until',EPOCH_NOW]}}):
         raise HTTPException(409,'Book processing lease expired. Retry from saved progress.')
+    beat(book.id,'lock checked')
 
 
 async def save_book(book, token):
@@ -96,6 +98,7 @@ async def save_book(book, token):
     book.revision+=1;book.updated_at=now()
     result=await db.tejas_books.update_one({'_id':book.id,'lock_token':token,'$expr':{'$gt':['$lock_until',EPOCH_NOW]}},{'$set':book.model_dump(exclude={'id'})})
     if not result.modified_count:raise HTTPException(409,'Book changed while saving.')
+    beat(book.id,'book saved')
 
 
 async def unlock(book, token):
@@ -110,6 +113,7 @@ async def original(book):
 async def renew(book, token):
     result=await db.tejas_books.update_one({'_id':book.id,'lock_token':token,'removed':False,'$expr':{'$gt':['$lock_until',EPOCH_NOW]}},[{'$set':{'lock_until':{'$add':[EPOCH_NOW,900]}}}])
     if not result.matched_count:raise HTTPException(409,'Book processing lease expired. Retry from saved progress.')
+    beat(book.id,'lock renewed')
 
 
 async def pages_for(book):
