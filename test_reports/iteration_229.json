@@ -1,0 +1,34 @@
+{
+  "summary": "Packet E Step 4 (first part) - WRITTEN mocks picture-proof gate. Re-ran the builder's two deliverables one-at-a-time per hard rules: tests/written_live244.py backend suite = 50/50 PASS (sections A-K incl. Live-gate, Schedule-gate, Supabase away/blocked/list-refused, memory-only vs storage, bytes changed, Emergent split, AITS series assign/fill, Live-mock edit protection + PATCH title, verified-PYQ bypass vs master-PYQ enforcement, storage-stops-after-proof regressions). Browser walk via tests/picture_bridge239.py + tests/ui_picture239.py on desktop 1920x800 + mobile 390x844 = 59/59 PASS (incl. all step-4 written-page assertions: owner toggles Live on bad-photo Draft -> Hinglish note with question number + 'Draft hi hai', row stays Draft with switch Off, healthy mock stays Live, no horizontal overflow, reason still visible at 6s mark). mongod nofile was already at 65536. All DBs used were disposable tejas_isolated_* (bridge DB dropped on INT). No app code modified.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/written_live244.py",
+    "/app/backend/tests/picture_bridge239.py",
+    "/app/backend/tests/ui_picture239.py",
+    "/root/p2/ui239.log",
+    "/root/p2/bridge239.log"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "tejas/written.py photo_trouble(): good separation of three bad-photo buckets (GONE/CHANGED/unread) + split-store detection. 'named()' truncates at 10 questions appending 'aur baaki' per owner request. Reads-only guarantee preserved (never saves or copies). unchecked() path routes code+scope via tejas_storage.explain so Supabase 503/402/list-400 never reports a photo as missing - matches the required wording and leaves S.supabase_on() untouched.",
+    "LIVE_SO constant separates the Hinglish tail for the Live-mock edit path ('yeh badlav save nahi hua (Live paper jaisa tha waisa hi hai)') from the publish/schedule tails constructed by master.py. live_photos() proves ONLY the new file_ids on a Live paper so photos that still live in Emergent on an old Live mock never block a text-only edit - verified by section I regressions (text edit, delete, rename all make a new version) and the all-Emergent-old-mock takes-a-new-healthy-photo check.",
+    "master.publish_written(): proof-first then start_at/competition/last_start_at/end_at are unset on failure for both publish and schedule paths; verified by sections C/D (no stale window after a failed Schedule; subsequent Live karo opens it NOW not at the old time).",
+    "series_admin.assign_written(): proof BEFORE day is taken, day given back on failure, fill() skips bad paper and places the next healthy one. Verified section G incl. Supabase-away variant (409 'abhi jaanchi nahi ja saki') with no series_id/series_date/series_window residue.",
+    "Verified-PYQ (test_kind='pyq' and not master_pyq) short-circuits photo_trouble to None with zero storage calls; master_pyq written PYQ IS checked. Matches builder's section J.",
+    "UI (MockList.js duration 12000, SeriesDays.js 12000, QuestionForm.js 12000) - note visible at 6s confirmed by the walk; sonner toast surface not blocked.",
+    "Observation (not a bug, builder's note acknowledged): Off->Live gate for an already-published written mock is intentionally NOT added in this packet; a healthy publish/unpublish toggle therefore still behaves exactly as before. Reviewer/student/anonymous permissions on written routes are unchanged.",
+    "Observation (not tested by me beyond builder's suite coverage): paste/excel editor on Draft and reviewer editing a flagged Draft with photos - section I covers 'a Draft still saves a question whatever its photo', which encodes the policy that Draft is never gated; the reviewer-rejection matrix on owner routes was already verified in iteration_227 edge E6."
+  ],
+  "updated_files": [],
+  "success_rate": {
+    "backend": "100% (50/50 written_live244.py)",
+    "frontend": "100% (59/59 ui_picture239.py @ desktop 1920x800 + mobile 390x844, no horizontal overflow, no failed API calls)"
+  },
+  "test_credentials": "N/A - each suite / bridge creates its own owner/reviewer in a disposable DB.",
+  "seed_data_creation": "None in the app DB. All records live inside tejas_isolated_* DBs that are asserted non-app and dropped in finally / on bridge INT.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Packet E step 4 (written mocks, first part) is green. Re-use helpers from written_live244.py (written, lost, photo, mcq, press, one, doc, plain_draft, said, to_emergent, mend) for any new edges. Deliberately out of scope for this packet (per owner / builder note): Off->Live gate for already-published written mocks, Library restore gate, copy of old Emergent pictures, 'Pictures ki poori jaanch' button, per-row kept reason, 'Dobara chalao'/15-min retry for written mocks, 'Pictures: n / n · Storage' badge on written rows. Known pre-existing non-step-4 failing suites (do NOT 'fix'): master_jee_series_iso181 (3/10, fails identically on /tmp/base_e3 - calendar mismatch Dec 1/5 vs 9), book_publishing_rules_iso170, book_scale_iso171, publish_fail_iso211, media_warm_iso217, get_ready_iso188/189, media_cdn_iso198. Hard rules honoured: one isolated suite at a time, at most one bridge, no change to /app/backend/tejas, /app/backend/server.py, /app/backend/tejas_storage.py, /app/frontend/src; LiveSeries.js untouched.",
+  "rca of the issue": "N/A - no issues found. All Packet-E-step-4-written requirements (Live gate, Schedule gate, Supabase away/blocked/list-refused handling, memory-vs-storage, bytes-changed, split-store, AITS assign + fill, Live-mock edit protection + PATCH title, verified-PYQ bypass, regressions, UI Hinglish toasts + 12s hold) verified end-to-end."
+}

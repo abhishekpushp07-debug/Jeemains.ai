@@ -375,6 +375,29 @@ async def main():
         check('J. a verified JEE Main PYQ paper is never checked: no reason is made and storage is not asked', r is None and len(sb.calls) == n, (r, sb.calls[n:]))
         r = await photo_trouble({**paper, 'master_pyq': True}, NOT_LIVE[:-1])
         check('J. a PYQ paper the owner typed in Master is checked like any written mock', (r or '').startswith(f'Q1 {GONE}, {NOT_LIVE}'), r)
+
+        # ---- L. Which questions are named.
+        wid = J(await own.post(f'{M}/types/{sec}/written', json={'title': 'W solution and option photos'})).get('id')
+        await own.put(f'{M}/written/{wid}/questions', json=mcq('typed first'))
+        sb.vanish = [f'/written/{wid}/']
+        r1 = await own.put(f'{M}/written/{wid}/questions', json=mcq('solution photo lost', solution_image=await photo(own, wid, 30)))
+        r2 = await own.put(f'{M}/written/{wid}/questions', json=mcq('option photo lost', options=[{'text': '', 'image': await photo(own, wid, 60)}, {'text': 'two', 'image': ''}], answer='A'))
+        sb.vanish = []
+        sc, d = await press(own, 'live', [one('set', wid)])
+        check('L. a solution photo and an option photo that are not in storage: both questions are named', r1.status_code == 200 and r2.status_code == 200 and d.get('done') == 0
+              and why_of(d).startswith(f'Q2, Q3 {GONE}, {NOT_LIVE}') and plain_draft(await doc(wid)), (r1.status_code, r2.status_code, d))
+        two = await written(own, sec, 'W one gone one changed', photos=2); ph = await photos(own, two)
+        sb.objects.pop(await key_of(ph[0][2])); sb.objects[await key_of(ph[1][2])] = png(251)
+        sc, d = await press(own, 'live', [one('set', two)])
+        check('L. one photo gone and another changed: each is said in its own words', d.get('done') == 0 and why_of(d).startswith(f'Q2 {GONE}; Q3 {CHANGED}, {NOT_LIVE}') and plain_draft(await doc(two)), d)
+        many = J(await own.post(f'{M}/types/{sec}/written', json={'title': 'W twelve photos lost'})).get('id')
+        sb.vanish = [f'/written/{many}/']
+        for i in range(12):
+            await own.put(f'{M}/written/{many}/questions', json=mcq(f'photo question {i + 1}', image=await photo(own, many, 10 + i)))
+        sb.vanish = []
+        sc, d = await press(own, 'live', [one('set', many)])
+        ten = ', '.join(f'Q{i}' for i in range(1, 11))
+        check('L. twelve photos not in storage: ten questions are named, then "aur baaki"', d.get('done') == 0 and why_of(d).startswith(f'{ten} aur baaki {GONE}, {NOT_LIVE}') and plain_draft(await doc(many)), d)
     finally:
         cancel_kicks()
         assert H.TEST_DB.startswith('tejas_isolated_') and H.TEST_DB != H.REAL_DB
