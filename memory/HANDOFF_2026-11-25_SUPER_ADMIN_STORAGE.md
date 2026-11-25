@@ -351,7 +351,7 @@ Long runs: anything over 2 minutes goes in the background with a log file; poll 
 
 ## 15. Packet E progress (25 Nov, after the A–D deploy). Preview only, NOT deployed.
 
-Done and tested: steps 1 and 2 of the order in section 8. Steps 3–6 are not started.
+Done and tested: steps 1, 2 and 3 of the order in section 8. Steps 4–6 are not started.
 
 ### Step 1: the proof function (`backend/tejas/picture_proof.py`, new)
 - `prove(s, full=False, alive=None)`: `None` for a verified PYQ (`structure.locked`). Otherwise `{ok, store, total, proven, stores, bad, reason, full}`. Reads only.
@@ -367,6 +367,16 @@ Done and tested: steps 1 and 2 of the order in section 8. Steps 3–6 are not st
 - API fields added (none changed): `master.type_mocks` items `pictures {proven,total,store,at}` (proven Live/Scheduled tests, never verified PYQ), `stuck.kind = 'proof'`, uploads `storage_wait.what`; `machine/status` rows `what`. `storage_health.facts()` returns `unproven`; the badge says so in its own yellow line and no longer counts those under "file Supabase mein atki hai". `held.stuck` still includes them.
 - Screens: `MockList.js` (`mock-pictures-<id>`, proof wording in `mock-stuck-<id>`), `UploadProgress.js`, `MachinePanel.js`. `LiveSeries.js` untouched.
 
+### Step 3: a mock scheduled for a time never opens late (25 Nov, 17:30–17:55 UTC)
+- Before: `publish_ready` used `mock.release_at` as `start` even when it was already past (finding 6), so a mock that waited for its pictures or for Supabase opened as soon as the wait ended.
+- `book_publish.missed_time(book, token, mock, series)`: when `publish_requested` and `mock.release_at` is set, not `release_override`, not a series mock, and `database_now() >= release_at` → `missed_at = release_at`, `release_at = None`, `publish_requested = False`, one audit line (`Book mock missed its time`), returns True and `publish_ready` skips the mock. Called twice: before `source_questions` (nothing is cut or sent) and again right after `proven()` (the time passed during saving; saved pictures and their records stay and are reused).
+- `BookMock.missed_at` (new, optional; `to_mongo` drops None). Cleared in `book_imports.request_publication` and the `publish_ready` action of `book_imports.control`.
+- API (added only): `structure.waiting_items` items and `master.type_mocks` items carry `missed_at` for a Draft (`state == 'ready'`) mock. `book_store.book_view` mocks now include the field too (it dumps the whole model).
+- Screens: `MasterShared.StatusLabel` → `Draft · samay nikal gaya`; `MasterShared.missedLine(t)`; `MockList.js` row `mock-missed-<id>`.
+- Not covered by this rule on purpose: series mocks (their day rule clears the day), the book-level `payload.release_at` path of the older screen (`missed_release` → held, unchanged), `release_override`.
+- Stale label, known: until the worker's next run (at most the 15-minute retry) a stuck mock whose time has passed still reads "Atki hai" / "Live ho raha hai"; it never opens.
+- Two older suites fail the same way on a copy of the commit before step 3 (`bash /root/p2/e3_base.sh`): `book_publishing_rules_iso170` 0/4 and `book_scale_iso171` 2/5, both with "Choose the exam and mock type this upload belongs to" (they upload without a destination). Their "missed release" checks therefore do not run anywhere today.
+
 ### Tests (one at a time)
 | Suite | Result |
 | --- | --- |
@@ -376,6 +386,10 @@ Done and tested: steps 1 and 2 of the order in section 8. Steps 3–6 are not st
 | `tests/ui_picture239.py` on `tests/picture_bridge239.py` (:8778), `bash /root/p2/e_ui.sh` | 43/43 (was 33; the All India Test Series page was added) |
 | `tests/picture_gate_edge240.py` (testing agent, `test_reports/iteration_227.json`) | 14/14 |
 | `tests/picture_aits241.py` (a PDF mock given an All India Test Series day) | 26/26 |
+| `tests/picture_late242.py` (step 3: the chosen time passed) | 19/19 |
+| `tests/picture_late_edge243.py` (testing agent, `test_reports/iteration_228.json`: older doors, Library and back, reviewer 403, miss by 1–2 s, one audit line, idempotent retry) | 19/19, no issues |
+| `tests/ui_picture239.py` after step 3 (the bridge also seeds a mock whose time passed) | 50/50 |
+| 20 older suites after step 3, 17:42–17:48 UTC (`bash /root/p2/e3_chain.sh`) | 18 pass in full; 2 fail as they did before step 3 (see Step 3) |
 | 32 older suites, 13:27–13:35 UTC | 1,210 checks, 1 fail (`media_cdn_iso198` "paper built"; same on the code before E) |
 
 Suites that fail the same way on a copy of the commit before Packet E (`bash /root/p2/e_triage.sh` shows how it was checked): `publish_fail_iso211` 4/5, `media_warm_iso217` 35/36, `get_ready_iso188` 35/36, `get_ready_iso189` 8/9, `media_cdn_iso198` 2/3.

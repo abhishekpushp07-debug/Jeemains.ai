@@ -1,3 +1,17 @@
+## Owner's "Phase G": AI reading of the question bank (2026-11-25, talk only; nothing built; needs approval)
+Not the storage plan's Packet G (owner-controlled Emergent → Supabase move). The owner named this work "phase g" and asked to do Packet E first.
+- What was found by reading the code and the preview database (not reproduced on a live student screen):
+  - Chapter-wise PDFs: the chapter name is read (printed heading or PDF bookmarks) and saved on the test (`chapter_title`, `chapter_subject`), but `book_publish` never writes `topic` on the questions. Analysis groups by each question's `topic`, so students see the subject and no chapter.
+  - Levels: `analysis_rules.difficulty_for` uses student results (50 attempts; 65%+ correct Easy, under 35% Tough), then the paper's own tag, else "Not rated". `book_ai.py` saves a fixed `'difficulty': 'Moderate'` for AI-written solutions, which then shows as the paper's own level.
+  - The PDF reader uses no AI (preview: 2,527 pages read, 0 by AI). The duplicate alert (`duplicates.py`) matches exact words only.
+- P1, no AI: copy the chapter name of a chapter-wise test onto its questions (`topic`), new and already-built tests; Analysis then shows the chapter. Full mocks stay without chapters.
+- P1, no AI: remove the fixed "Moderate" (store no level there) so it is not shown as the paper's level.
+- P1, AI, needs approval + cost trial on ONE chapter first: one reading pass over every question (picture + words) saving a card per question: chapter, concepts, type of calculation, level estimate. Levels shown as an estimate until student data replaces them.
+- P1, after the real JEE Main paper is supplied (owner said: session on 25 Jan, paper a few days later): AI reads each real question, shortlists from the cards, compares the top few, the owner approves each match, then students see "we had this question".
+- Owner can also set level and chapter by hand in Master (already listed under Analysis 2.0 Phase 2).
+- Open questions for the owner: a screenshot of the Analysis screen that shows the wrong thing; whether the books print "Level 1 / Level 2" headings; approval of the one-chapter trial.
+
+
 ## PDF Engine 2.0 — next (2026-11-21)
 - P1 Phase 2 (needs owner approval): "chipke hue" options (5 held questions in the unboxed books), app guide + PDF format guide, diagram beside options / option on next page / two-column pages, scanned PDFs without AI, plain-word options as real text, "dobara padho" for old Drafts, solution pictures trimmed the same way, JEE Main PYQ in the new look.
 - P1 Readability on phones: wide question pictures start small at 390 px (zoom button fixes it); consider a bigger starting zoom or a hint.

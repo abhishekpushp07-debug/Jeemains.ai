@@ -1,3 +1,10 @@
+## 2026-11-25 (evening) — Packet E step 3: a scheduled PDF mock never opens late (preview only, NOT deployed)
+- book_publish.missed_time: a mock scheduled from Master whose chosen time has passed before its paper could be made stays Draft, loses its time, remembers it in BookMock.missed_at, and is skipped. Checked before any picture is cut and again after the pictures are proven. Series mocks, the book-level release time and release_override are untouched.
+- missed_at is cleared when the owner asks again (Live karo or a new time). API adds `missed_at` to Draft mock items (waiting_items, type_mocks). Screens: chip "Draft · samay nikal gaya" and row line `mock-missed-<id>` (MockList.js, MasterShared.js).
+- Testing agent, test_reports/iteration_228.json: no issues; its edge suite tests/picture_late_edge243.py 19/19; no app code changed.
+- Tests: tests/picture_late242.py 19/19; ui_picture239 50/50; 20 older suites one at a time: 18 pass, book_publishing_rules_iso170 (0/4) and book_scale_iso171 (2/5) fail exactly as on the code before this step. Logs: test_reports/packet_E_2026-11-25/.
+
+
 ## 2026-11-25 (later) — Packet E step 2 on the All India Test Series path + testing agent (preview only, NOT deployed)
 - Testing agent, test_reports/iteration_227.json: re-ran picture_proof238 26/26 and picture_gate239 40/40, added tests/picture_gate_edge240.py 14/14, no issues, no app code changed.
 - Owner's series page: a day whose PDF paper could not be made says why. series_admin.day_papers adds stuck {reason, since, kind} to the waiting paper; master.stuck_marks(where) is the shared reader (type_mocks uses it, same output). SeriesDays.js shows series-day-stuck-<day>; MockList.js and SeriesDays.js share MasterShared.stuckLine. Student schedule unchanged.

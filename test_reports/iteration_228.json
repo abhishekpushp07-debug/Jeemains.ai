@@ -1,0 +1,31 @@
+{
+  "summary": "Packet E Step 3 verification (PDF mock 'samay nikal gaya'/missed-time rule). Re-ran the builder's picture_late242 suite (19/19 PASS) and the browser walk ui_picture239 via picture_bridge239 on the real preview frontend at desktop 1920x800 and mobile 390x844 (50/50 PASS, incl. all Step-3 UI assertions: chip 'Draft · samay nikal gaya', switch Off + enabled, data-testid='mock-missed-<id>' line, Live karo without reload, no horizontal overflow). Wrote a new EDGE HUNT suite /app/backend/tests/picture_late_edge243.py covering the 7 requested edges end-to-end: older doors (books/{id}/control action publish_ready, and /api/admin/publish-ready); Library move + restore preserves missed_at and Live still works; reviewer rejection (403) on all three owner doors; miss by only 1-2 seconds; paused/library books not touched by missed_time; healthy case emits zero miss audits; repeated Dobara chalao after miss is idempotent (no second audit, no pictures sent). TOTAL new edges: 19 PASS 0 FAIL. No application code was modified. Isolation rules honoured: disposable tejas_isolated_* DB only, mongod nofile raised, Supabase faked via Leaky at HTTP wire, Emergent in memory, one suite at a time, DB name guarded before drop.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/picture_late_edge243.py",
+    "/app/backend/tests/picture_late242.py",
+    "/app/backend/tests/ui_picture239.py",
+    "/root/p2/ui239.log",
+    "/root/p2/bridge239.log"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "book_publish.missed_time() is called twice inside publish_ready (lines 425 + 439), once BEFORE any picture is cut and once AFTER proven(). This neatly covers both 'waiting for pictures' and 'saving took too long'; verified end-to-end (A/C in picture_late242, a1/a2 in picture_late_edge243).",
+    "The miss gate correctly excludes: series papers, mocks without release_at, release_override mocks, and any mock whose release_at is still in the future - matched exactly by the condition `if series or not mock.publish_requested or not mock.release_at or mock.release_override or await database_now()<mock.release_at: return False`. Paused books are pre-filtered at publish_ready top (`if book.paused: return`). Library-archived mocks are pre-filtered by mocks_for(). Edge e verified both.",
+    "missed_at is cleared idempotently and symmetrically in all three owner doors: master.mock_status() → request_publication() sets missed_at=None, book_imports.control() action publish_ready sets missed_at=None, and structure.publish_ready_items() goes through request_publication() too. Verified in a1/a2/b.",
+    "Exactly one audit line 'Book mock missed its time' per miss: save_mock-then-audit is inside missed_time() which returns immediately on second entry (release_at is now None, the guard `not mock.release_at` short-circuits). Verified by edge g (three retries, still one audit).",
+    "Library restore keeps missed_at (RestoreInput handler only toggles archived); the UI correctly still renders the mock-missed-<id> line post-restore (edge b)."
+  ],
+  "updated_files": ["/app/backend/tests/picture_late_edge243.py (new)"],
+  "success_rate": {
+    "backend": "100% (19/19 edge checks; 19/19 picture_late242; 50/50 ui_picture239 includes 12 step-3 UI checks)",
+    "frontend": "100% (desktop 1920x800 and mobile 390x844, no horizontal overflow, no failed API calls)"
+  },
+  "test_credentials": "N/A - each suite creates its own owner/reviewer via mkstaff() in a disposable DB.",
+  "seed_data_creation": "None in the app DB. All data is created inside tejas_isolated_* databases that are asserted non-app and dropped in finally. The bridge also seeded TEST_SAMAY_NIKAL_GAYA / TEST_THEEK_PDF / etc. inside its own disposable DB which the bridge drops on shutdown.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Packet E Step 3 is healthy end-to-end. The EDGE HUNT suite picture_late_edge243.py reuses helpers from picture_late242 (class Later, schedule, missed, waits, stuck_count) and picture_gate239 (book, retry, posts). Edge (e) on 'paused book' is slightly softer than the other asserts because the 'retry' control action unpauses by design (book_imports.py control 'resume/retry/publish' sets paused=False); the stricter invariant verified is that a book moved to the Library is not touched by missed_time at all (no new audit, state unchanged). All other edges are tight. Known pre-existing non-step-3 failures acknowledged by the main agent (book_publishing_rules_iso170, book_scale_iso171, publish_fail_iso211, media_warm_iso217, get_ready_iso188/189, media_cdn_iso198) were not re-run per instructions.",
+  "rca of the issue": "N/A - no issues found."
+}

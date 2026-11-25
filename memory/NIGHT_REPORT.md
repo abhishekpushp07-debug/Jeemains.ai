@@ -137,7 +137,8 @@ Upar likha tha ki yeh list is file me hai, par woh likhi nahi gayi thi. Ab yeh h
   - Purani 32 suite dobara (13:27 se 13:35 UTC): 1,210 jaanch, 1 fail. Woh ek (media_cdn_iso198 "paper built") Packet E se pehle wale code par bhi waise hi fail hoti hai; maine pichhle commit ki copy par chala kar dekha.
   - Chaar aur purani suite jo E se pehle bhi isi tarah fail hoti hain (copy par dekha): publish_fail_iso211 4/5, media_warm_iso217 35/36, get_ready_iso188 35/36, get_ready_iso189 8/9.
   - Do purani suite me ek-ek line badalni padi kyunki unka apna nakli Supabase list nahi deta tha / unka wrapper naya argument nahi leta tha: storage_wait224 (27/27), step_guard233 (33/33). tests/storage_wait_bridge224.py me bhi wahi ek line badli; woh bridge dobara chalaya NAHI gaya.
-- Abhi NAHI bana (E ke baaki kadam): (3) chuna hua samay nikal jaye to der se na khule; (4) Likha hua mock, Off se Live, Library se wapas; (5) purani Emergent pictures ki Supabase me copy; (6) "Pictures ki poori jaanch" button.
+- Kadam 3 (der se na khulna) ab bana aur jaancha hua hai: neeche "Packet E — kadam 3" dekhiye.
+- Abhi NAHI bana (E ke baaki kadam): (4) Likha hua mock, Off se Live, Library se wapas; (5) purani Emergent pictures ki Supabase me copy; (6) "Pictures ki poori jaanch" button.
 - AITS (All India Test Series) ka din wala paper, ab jaancha hua:
   - PDF mock ko din diya aur Supabase ne uski pictures nahi rakhi: us din ka paper NAHI banta, mock ka din bana rehta hai, PDF "Atki hai" kehti hai, doosri PDF ka din ban jata hai.
   - Naya (chhota badlav): Master me us din ki row par ab wajah dikhti hai: "Atki hai: iski pictures storage mein saabit nahi hui, isliye is din ka paper abhi taiyaar nahi hua. Wajah: 28 pictures storage me nahi mili ..." Pehle wahan hamesha "taiyaar ho raha hai" likha rehta tha. Students ko is bare me kuch nahi dikhta (jaancha: student aur bina login, dono).
@@ -146,4 +147,24 @@ Upar likha tha ki yeh list is file me hai, par woh likhi nahi gayi thi. Ab yeh h
   - Badli hui files: backend/tejas/master.py (ek padhne wala function alag kiya, kaam wahi), backend/tejas/series_admin.py, frontend SeriesDays.js, MockList.js, MasterShared.js, master.css. LiveSeries.js nahi chhui.
 - Jaancha NAHI gaya: asli do server; live par kuch nahi; tests/storage_wait_bridge224.py dobara nahi chalaya.
 - **Deploy ki salaah: E poora hone se pehle deploy na karein.** Wajah: agar kisi purani kitaab ke Draft mock ki kuch pictures Emergent me aur kuch Supabase me hain, to woh mock ab Live nahi hoga aur use theek karne wala kadam (5) abhi bana nahi hai.
+
+
+## Packet E — kadam 3: chuna hua samay nikal jaye to mock der se nahi khulta (25 Nov, 17:30 se 17:55 UTC; SIRF preview me)
+- **Deploy nahi hua.**
+- Pehle kya hota tha: Master se kisi PDF mock ko ek samay par Schedule kiya, aur woh mock pictures ya Supabase ke intezaar me atak gaya. Samay nikal jane ke baad jaise hi rukavat hatti, mock turant Live ho jata tha, yani der se khul jata tha.
+- Ab kya hota hai:
+  - Samay nikal chuka ho to paper banta hi nahi. Mock Draft rehta hai, uska samay hat jata hai, aur row par likha aata hai: "Chuna hua samay (26 Nov 2026, 12:11 am IST) nikal gaya, isliye yeh Live nahi hua. Yeh der se apne aap nahi khulega: "Live karo" dabaiye ya naya samay chuniye." Chip: "Draft · samay nikal gaya".
+  - Yeh jaanch do jagah hoti hai: pictures katne se pehle (taaki bekaar me kuch save na ho), aur pictures save aur saabit hone ke baad (agar save karte-karte samay nikal gaya). Doosri haalat me save hui pictures rakhi jati hain; baad me "Live karo" dabane par dobara nahi bheji jati.
+  - "Live karo" dabane par mock abhi Live hota hai; naya samay chunne par us samay ke liye Scheduled. Dono me purani line hat jati hai.
+  - Ek PDF ke do mock: jiska samay nikla woh Draft, doosra apne samay par Scheduled. Kuch "Atki hai" nahi rehta, badge me atki file ki ginti 0.
+- Kya NAHI badla (jaancha): theek mock ka Schedule; bina samay wala "Live karo"; All India Test Series (uska apna din wala niyam); purani screen ka kitaab-level samay aur "release now".
+- Badli hui files: backend/tejas/book_publish.py (naya chhota function missed_time), book_models.py (naya khaana missed_at), book_imports.py, structure.py, master.py; frontend MockList.js, MasterShared.js. API me sirf naya khaana `missed_at` juda. LiveSeries.js nahi chhui.
+- Jaanch (ek-ek karke):
+  - Nayi suite tests/picture_late242.py 19/19.
+  - Testing agent (test_reports/iteration_228.json): meri suite dobara chalayi (19/19), browser walk dobara (50/50), aur apni nayi tests/picture_late_edge243.py likhi, 19/19: purane do darwaze (books control "publish_ready", /admin/publish-ready), Library me bhej kar wapas lana, reviewer ko mana (403), sirf 1-2 second se samay nikalna, Library wali kitaab ko na chhedna, har chook par ek hi audit line, baar-baar "Dobara chalao" par kuch dobara na hona. Koi galti nahi mili. App ka code usne nahi badla.
+  - Browser: tests/ui_picture239.py 50/50 (desktop + 390 px; pehle 43 thi).
+  - Purani 20 suite dobara (17:42 se 17:48 UTC): 18 poori paas (picture_gate239 40/40, picture_gate_edge240 14/14, picture_aits241 26/26, picture_proof238 26/26, storage_stuck231 49/49, storage_stuck_edge232 25/25, master_iso181 124/124, structure_iso173 133/133, structure_imports_iso174 51/51, section_preview_iso175 67/67, phase1_iso221 17/17, storage_wait224 27/27, step_guard233 33/33, library_aits_iso180 125/125, series_dates_iso187 47/47, fresh_start_iso183 38/38, storage_badge236 64/64, storage_book229 22/22).
+  - 2 purani suite fail: book_publishing_rules_iso170 0/4 aur book_scale_iso171 2/5. Dono kadam 3 se pehle wale code ki copy par bhi bilkul waise hi fail hoti hain (wajah: yeh purani suite bina "exam aur mock type" ke upload karti hain, jo ab app leta hi nahi). Yani yeh is kaam se nahi tooti; inki "missed release" wali purani jaanch isliye chal hi nahi paati.
+- Jaancha NAHI gaya: purani screen ka kitaab-level "missed release" raasta kisi chalti hui suite se (uska code maine nahi chhua); asli do server; live par kuch nahi.
+- Ek baat jo aapko pata honi chahiye: agar aap koi bahut bada mock sirf 1-2 minute aage ke samay par Schedule karte hain aur pictures save hone me usse zyada lag jaye, to woh ab Draft rahega aur yahi line dikhayega (pehle woh thodi der se khul jata tha). Plan me yahi likha hai ("der se apne aap nahi khulta"), isliye maine chhoot nahi rakhi.
 
