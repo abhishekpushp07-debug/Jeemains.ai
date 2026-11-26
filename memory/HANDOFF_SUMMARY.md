@@ -1,5 +1,7 @@
 # JEELIVE.AI — Handoff Summary (for next agent)
 
+> ⚠ OUT OF DATE (early Nov 2026). The current hand-off is **`memory/HANDOFF_NEXT_AGENT.md`** (26 Nov 2026).
+
 **Language:** User Hindi/Hinglish mein baat karta hai — reply bhi friendly Hinglish mein do.
 **User ka goal:** "World best" premium app (Unacademy/PhysicsWallah level), fast, 5 lakh concurrent users tak scale ho sake.
 

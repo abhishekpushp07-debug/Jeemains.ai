@@ -1,4 +1,9 @@
-# JEELIVE.AI App: ज़रूरी बदलाव और बचा हुआ काम, पूरी गाइड (27 Nov 2026)
+# JEELIVE.AI App: ज़रूरी बदलाव और बचा हुआ काम, पूरी गाइड (26 Nov 2026)
+
+> **Status (26 Nov 2026, शाम):** बदलाव 1 (रंग) ✅, बदलाव 5 (time का फर्क) ✅, बदलाव 8 (Book v3 + website handover) ✅,
+> browser वाला Rapid Fire copy दोबारा build ✅ (Rapid Fire का code नहीं बदला)। ये सब सिर्फ preview पर हैं।
+> बाकी: बदलाव 3 (Rapid Fire code, पहले बात), 4 (Misfire tabs, website के बाद), 6 (खुले फैसले), 7 (Publish + builds;
+> मालिक नए agent के साथ करेंगे)। अगले agent के लिए पूरा हाल: `memory/HANDOFF_NEXT_AGENT.md`।
 
 > मालिक के कहने पर लिखी गई: "website को देने वाला अभी मत बनाओ। पहले required changes का detailed guide बनाओ, और
 > क्या-क्या काम बाकी है। फिर permission लो, फिर code करो।"
