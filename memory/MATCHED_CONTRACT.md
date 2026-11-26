@@ -18,10 +18,14 @@ a new app build.
 
 ## What a student sees
 
-- **Home**: from the day after the All India series ends, the All India series card gives its place to the **Matched**
-  card ("JEE Mains questions matched with ours": sun yellow into amber into orange, golden cup, fireworks, running edge). The series and its
-  practice archive stay on Home's ALL INDIA tile.
-- **Sign-in screen**: from the same day, a small Matched bar. People without an account can open Matched too.
+- **Home**: the All India series card gives its place to the **Matched**
+  card ("JEE Mains questions matched with ours": sun yellow into amber into orange, golden cup, fireworks, running edge)
+  **as soon as the first shift is published** (the owner, 26 Nov 2026: on the day of JEE Main's first shift itself), and
+  in any case from the day after the series ends. **While the series still has days**, it is a dark bar right under the
+  Matched card, above the four exam boxes (`src/components/series/HomeSeriesBar.tsx`: "ALL INDIA SERIES · DAY 46 / 50 ·
+  Live today · Start today's test"; one tap = what the big card's button did). After the series the bar is gone; the
+  series and its practice archive stay under Explore ("all india series").
+- **Sign-in screen**: from the same moment, a small Matched bar. People without an account can open Matched too.
 - **Matched page** (`/matched`): month pills (Jan 2027, Apr 2027) → days → shifts ("Shift 1 · 18 of 75 matched").
 - **Shift page** (`/matched/<shift id>`): a yellow and orange card with the golden cup and fireworks: the count ("6 of 75 questions
   matched with ours"), the paper's facts (questions, marks, +4 / −1) and the button **"Attempt all matched"**; subject
@@ -116,11 +120,18 @@ Up to 150 items per shift and 200 shifts are read.
 ## When the card is on
 
 `backend/app_switches.py` → `MATCHED_CARD`:
-- `"auto"` (now): from the day after the series' last day. The server reads that day from the website's public schedule
-  every 15 minutes (`backend/matched.py`, kept in `rf_meta` under `matched:aits_last_day`). Today the website says the
-  series runs 9 Dec 2026 to 27 Jan 2027, so the card appears on **28 Jan 2027**.
-- `"on"`: now, whatever the dates are. Needed if a new series starts later and Matched must stay on Home.
-- `"off"`: never.
+- `"auto"` (now). **Changed on 26 Nov 2026 (preview only until the next Publish):** on as soon as a shift is published
+  (`has_shift`: the list `GET /api/matched` answers with is not empty, so about 5 minutes after the super admin
+  publishes the first shift), and in any case from the day after the series' last day (`auto_on` in
+  `backend/matched.py`). The server reads that day from the website's public schedule
+  every 15 minutes (kept in `rf_meta` under `matched:aits_last_day`). Today the website says the
+  series runs 9 Dec 2026 to 27 Jan 2027, so with no shift at all the card appears on **28 Jan 2027**. If the only
+  published shift is taken back while the series runs, the All India card comes back.
+- `"on"`: now, whatever is published and whatever the dates are.
+- `"off"`: never, also when shifts are published.
+
+The All India bar under the Matched card has no switch: the app shows it while the series' own `today` is not past its
+`last_date`. An app build from before 26 Nov 2026 has no bar (Matched card alone; the series is under Explore).
 
 **The same three words in Mongo win over the code**: `rf_meta` `{ "_id": "matched:card", "value": "on" | "off" | "auto" }`
 (read at most once a minute). The super-admin page can write this row to switch the card with no publish at all; with no

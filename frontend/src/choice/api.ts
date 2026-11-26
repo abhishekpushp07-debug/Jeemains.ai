@@ -67,6 +67,10 @@ export const totalOf = (c: Counts) => c.Physics + c.Chemistry + c.Mathematics;
 /** The time a paper gets: every question brings its subject's minutes (Maths 3.2, Physics 2.4, Chemistry 1.6, so
  *  25 + 25 + 25 questions get 180 minutes); the sum is rounded up to a whole minute. */
 export const minutesFor = (c: Counts, per: Record<Subject, number>) => Math.ceil(Math.round(SUBJECTS.reduce((sum, s) => sum + c[s] * per[s], 0) * 1e4) / 1e4);
+/** A whole chapter test's time by the owner's rule: what its questions bring, three hours at most. The website sets the
+ *  real time; this is what the app compares it with (the same rule: chapter_test_minutes in backend/choice.py). */
+export const TEST_MAX_MINUTES = 180;
+export const testMinutes = (subject: Subject, count: number, per: Record<Subject, number>) => Math.min(TEST_MAX_MINUTES, minutesFor({ ...NONE, [subject]: count }, per));
 /** A random mock of `n` questions, split like a JEE Main paper: equally over the subjects the bank has; a question or two
  *  left over go to the first subjects (Physics, then Chemistry). */
 export function splitOf(n: number, subjects: readonly Subject[]): Counts {

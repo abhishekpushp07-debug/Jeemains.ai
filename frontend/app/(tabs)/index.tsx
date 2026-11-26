@@ -9,6 +9,7 @@ import { Notice, Press, T } from "@/src/components/ui";
 import { SectionLabel } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { HomeSeriesCard } from "@/src/components/series/HomeSeriesCard";
+import { HomeSeriesBar } from "@/src/components/series/HomeSeriesBar";
 import { ChipItem, ContinueCard, ExamGrid, ExploreChips, ForYou, GridItem } from "@/src/components/home/HomeParts";
 import { ShareCard } from "@/src/components/home/ShareCard";
 import { useShare } from "@/src/components/SeriesBanner";
@@ -103,11 +104,13 @@ export default function Home() {
         </Notice>
       ) : null}
 
-      {/* Once the series is over (our server says when: src/matched/gate.tsx), its card gives its place to Matched. The
-          series and its practice archive stay one tap away under Explore ("all india series"). */}
+      {/* From JEE Main's first published shift (our server says when: src/matched/gate.tsx) the series' card gives its
+          place to Matched. For its remaining days the series keeps a bar right under that card; once it is over, it and
+          its practice archive stay one tap away under Explore ("all india series"). */}
       {matched ? <View style={{ gap: space.md }}>
         <SectionLabel title="Matched with JEE Main" onAction={() => router.push("/matched" as any)} actionTestID="home-matched-view-all" />
         <ScreenMotion><HomeMatchedCard /></ScreenMotion>
+        {s && s.today <= s.last_date ? <HomeSeriesBar series={s} days={days} /> : null}
       </View> : <View style={{ gap: space.md }}>
         <SectionLabel title="All India series" onAction={() => router.push("/live")} actionTestID="home-series-view-all" />
         {/* The card's shine rests while another tab or screen is in front. */}

@@ -17,11 +17,18 @@ fills up by itself.
 
 1. What a student sees in the app
 ---------------------------------
-- Home: from the day after the All India series ends (the website's own schedule: last_date of series/all-india-jee,
-  today 27 Jan 2027, so from 28 Jan 2027) the big All India card gives its place to the MATCHED card (yellow and orange,
-  fireworks, golden cup): "JEE Mains questions matched with ours", how many matched, the latest shift. Automatic: no app
-  update and no publish on that day. The super admin can also switch the card on or off at any time (part 2, "card").
-- The sign-in screen shows a Matched bar from the same day. Matched is open to people WITHOUT an account.
+- Home: the big All India card gives its place to the MATCHED card (yellow and orange, fireworks, golden cup): "JEE
+  Mains questions matched with ours", how many matched, the latest shift.
+  WHEN (changed on 26 Nov 2026, the owner's decision): AS SOON AS THE FIRST SHIFT IS PUBLISHED, so on the day of JEE
+  Main's first shift itself, about 5 minutes after the super admin publishes it; and in any case from the day after
+  the All India series ends (the website's own schedule: last_date of series/all-india-jee, today 27 Jan 2027, so from
+  28 Jan 2027 also with no shift). Automatic: no app update, no switch to press. The super admin can also switch the
+  card on or off at any time (part 2, "card").
+  FOR THE SERIES' REMAINING DAYS the All India series is a simple dark bar right under the Matched card, above the four
+  exam boxes: "ALL INDIA SERIES · DAY 46 / 50 · Live today · Start today's test" (one tap opens today's test, the
+  running attempt, its result or the series hub). After the series' last day the bar is gone.
+  (This rule and the bar are in the app version on the preview since 26 Nov; students get them with the next Publish.)
+- The sign-in screen shows a Matched bar from the same moment. Matched is open to people WITHOUT an account.
 - Matched page: months -> days -> shifts ("Shift 1 · 18 of 75 matched").
 - A shift's page, open to everyone: the count ("18 of 75 questions matched with ours"), then one card per matched question:
   the JEE Main question, and under it OUR question(s) it matched (where ours was asked: "AITS Day 12 · Q 7"; how close:
@@ -128,7 +135,8 @@ OPEN POINT (the owner decides, not settled yet)
 ----------------------------------------------------
 - Our server copies the shifts into its own database and answers the app from there, so Matched stays up and fast while
   the website is busy (GET /api/matched, /api/matched/<shift>, /api/matched/paper/<paper id> on the app's server).
-- Home's card: "auto" = from the day after the series' last day (read from GET /api/series/all-india-jee every 15
-  minutes and remembered); "card" in the first door wins over it.
+- Home's card: "auto" = on as soon as one shift is published, and in any case from the day after the series' last day
+  (read from GET /api/series/all-india-jee every 15 minutes and remembered); "card" in the first door wins over it
+  ("on" = now, also with no shift; "off" = never, also with shifts published).
 - The app remembers on the phone which papers are Matched papers (from the shifts it has shown), so an ordinary paper
   never asks anything extra.

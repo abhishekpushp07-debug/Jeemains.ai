@@ -2,10 +2,12 @@
 """Takes the pictures for the Student Choice and Matched book from the app's WEB PREVIEW.
 
     cd /app/handoff/feature_book && QA_PHONE=... QA_PIN=... python3 take_shots.py [a] [b] [c]
+    ONLY=m08,m10 ... python3 take_shots.py b      only these pictures of a walk (a picture that needs the screen of the
+                                                  one before it must be asked for together with it)
 
 Three walks, each in its own browser (no letter = all three):
   a  signed out: the sign-in screen's Matched bar, the Matched page, a shift, a question's card, the sign-up sheet
-  b  signed in:  Home (Matched card, Student Choice tile), Student Choice as it works today, a paper's page (Start is
+  b  signed in:  Home (Matched card, the All India bar under it, Student Choice tile), Student Choice as it works today, a paper's page (Start is
      NOT pressed), and the JEE Main question under ours in a finished paper's solutions
   c  signed in, with the BROWSER answering for doors the website does not have yet: Student Choice with question picking
      and the random mock open (made-up questions marked "(Sample)"). Nothing on any server is changed for it.
@@ -38,6 +40,7 @@ STEMS = {
     "Mathematics": ["If the roots of $x^2 - 5x + k = 0$ differ by 1, then $k$ is", "The number of ways of arranging the letters of the word MATHS is",
                     "The sum of the first $n$ odd natural numbers is", "The slope of the tangent to $y = x^3$ at $x = 2$ is"],
 }
+ONLY = set(filter(None, os.environ.get("ONLY", "").split(",")))
 taken, skipped, writes = [], [], []
 
 
@@ -157,7 +160,8 @@ def signed_out(browser):
         el("entry-matched-note").wait_for()
         shot("m07_signup_screen")
     for name, fn in (("m01", bar), ("m02", matched_page), ("m03", shift_top), ("m04", pair), ("m05", solution), ("m06", sheet), ("m07", after_sheet)):
-        step(name, fn)
+        if not ONLY or name in ONLY:
+            step(name, fn)
     page.context.close()
 
 
@@ -170,6 +174,11 @@ def signed_in(browser):
         el("home-matched").wait_for()
         el("home-matched-total").wait_for()
         shot("m08_home_card", 1500)
+
+    def home_bar():
+        # The All India series' bar right under the Matched card, with the four exam boxes below it.
+        top("home-series-bar", 330)
+        shot("m10_home_series_bar")
 
     def home_tile():
         top("home-tile-choice", 420)
@@ -222,8 +231,9 @@ def signed_in(browser):
         el("matched-with").wait_for()
         top("matched-with", 150)
         shot("m09_under_ours_in_solutions", 1500)
-    for name, fn in (("m08", home_card), ("s01", home_tile), ("s02", landing), ("s04", pick), ("s05", search), ("s07", ticked), ("s08", tests), ("s09", paper_page), ("m09", under_ours)):
-        step(name, fn)
+    for name, fn in (("m08", home_card), ("m10", home_bar), ("s01", home_tile), ("s02", landing), ("s04", pick), ("s05", search), ("s07", ticked), ("s08", tests), ("s09", paper_page), ("m09", under_ours)):
+        if not ONLY or name in ONLY:
+            step(name, fn)
     page.context.close()
 
 
@@ -272,7 +282,8 @@ def later(browser):
         el("choice-review-makeup").wait_for()
         shot("s13_later_review", 1200)  # "Haan, paper banao" is never pressed
     for name, fn in (("s10", landing), ("s11", random_sheet), ("s12", questions), ("s13", review)):
-        step(name, fn)
+        if not ONLY or name in ONLY:
+            step(name, fn)
     page.context.close()
 
 

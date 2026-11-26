@@ -1,8 +1,9 @@
 // Whether "Matched" (JEE Main questions that matched ours) is on: Home then shows the Matched card in place of the All
-// India series card, and the sign-in screen offers it too. Our server decides (the `matched` switch of /api/app/switches,
-// backend/matched.py): from the day after the All India series' last day, or when the owner switches it on or off. So the
-// day can change without a new app build. The last answer is kept on the phone: the next launch has the right card from
-// its first frame, also without a network.
+// India series card (the series keeps a bar under it while it still runs), and the sign-in screen offers it too. Our
+// server decides (the `matched` switch of /api/app/switches, backend/matched.py): from the first published shift, in any
+// case from the day after the All India series' last day, or when the owner switches it on or off. So the day can change
+// without a new app build. The last answer is kept on the phone: the next launch has the right card from its first
+// frame, also without a network.
 import { useEffect, useSyncExternalStore } from "react";
 import { AppState } from "react-native";
 import { appSwitches, askSwitches, onAppSwitches } from "@/src/api/client";

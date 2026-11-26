@@ -959,3 +959,9 @@ agent_communication_iter147:
 agent_communication_book:
   - agent: main
     message: "NO app screen and no API behaviour changed. New files under handoff/feature_book (parts/*.md, examples/*.json, build_book.py, book.css, the PDF) and handoff/JEELIVE_Student_Choice_and_Matched_Book.zip. backend/owner_downloads.py got two more fixed owner files (choice-matched-book-pdf, choice-matched-book-zip); tests/test_owner_download_iter31.py still passes (9). The book's build runs backend tests test_choice.py + test_matched.py + test_matched_sync.py (22 pass) and pushes every JSON example through choice.py / matched.py. Testing agent not run: nothing testable in the app changed."
+
+
+## Early Matched card + All India bar on Home; three-hour longest time for chapter tests (26 Nov 2026, later) — preview only
+agent_communication_early_card:
+  - agent: main
+    message: "Backend: matched.py auto_on / has_shift / card_on ('auto' = a published shift OR the series is over); choice.py TEST_MAX_MINUTES + chapter_test_minutes. Frontend: src/components/series/HomeSeriesBar.tsx (new), cardState exported from HomeSeriesCard.tsx, Home shows the bar under the Matched card while matched is on and series.today <= series.last_date; src/choice/api.ts testMinutes + TEST_MAX_MINUTES, /choice sentence '(zyada se zyada 3 hr)'. Self-tested, testing agent NOT run: pytest tests/test_choice.py tests/test_matched.py tests/test_matched_sync.py tests/test_owner_download_iter31.py -> 32 passed; tsc 0; eslint clean; tests/home_series_bar_look.py (5 Home states, reads only, browser answers the schedule / the switch for 4 of them) and tests/choice_cap_sentence_look.py (3 states) print the expected lines. NOT tested: real phone; a real series day; the bar's tap into a paper (never press Start with the QA learner); 'auto' with a real first shift on a server (the preview's rf_meta matched:card is 'on' by hand)."

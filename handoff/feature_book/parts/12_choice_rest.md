@@ -1,33 +1,33 @@
-## 1.8 Whole chapter tests by the 80 / 60 / 40 ratio: a change on the website
+## 1.8 Whole chapter tests by the 80 / 60 / 40 ratio, three hours at most: a change on the website
 
-The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once the website allows changing their time". **The app cannot do it.** An attempt's deadline is the website's, taken from the set's `rules.minutes`. **Not done yet:** on {{TODAY}} every JEE Main chapter-wise test has 60 minutes, whatever its length.
+The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once the website allows changing their time". Shown what the ratio alone gives (some tests longer than four hours), he added on 26 Nov 2026: **a longest time of three hours.** **The app cannot do it.** An attempt's deadline is the website's, taken from the set's `rules.minutes`. **Not done yet:** on {{TODAY}} every JEE Main chapter-wise test has 60 minutes, whatever its length.
 
 **What to change on the website**
 
 - For every published JEE Main chapter-wise set (`test_kind` "chapter"):
-  `rules.minutes` = (the set's `count`) × (the minutes a question of its `chapter_subject` brings), rounded **up** to a whole minute. Physics 2.4, Chemistry 1.6, Mathematics 3.2.
+  `rules.minutes` = (the set's `count`) × (the minutes a question of its `chapter_subject` brings), rounded **up** to a whole minute, **and never more than 180**. Physics 2.4, Chemistry 1.6, Mathematics 3.2.
 - Keep it true: when a chapter's question count changes, its minutes change with it.
 - A new attempt gets the new time. **An attempt that is already running keeps the deadline it has.**
 - A whole number of minutes, please: the app's pages show `rules.minutes` as it is.
 
-**What it gives, chapter by chapter** (counts as on 26 Nov 2026; today's 60 minutes → by the ratio):
+**What it gives, chapter by chapter** (counts as on 26 Nov 2026; today's 60 minutes → by the rule; where the three hours hold a test back, what the ratio alone would give is in brackets):
 
 {{CHAPTER_TABLE}}
 
-**Please look at these before turning it on.** They follow from the rule as the owner gave it. He was told them on 26 Nov 2026 and had not answered when this book was written.
+**What the rule does**
 
 {{RATIO_FACTS}}
 
-- The owner gave the ratio **without a longest time**. If he later wants one (for example "never more than 3 hours"), it is again only `rules.minutes` on the website; the app shows whatever is set.
-- For the longer attempts, on the website's side: the student's session, the autosave and the attempt's picture links (`GET /attempts/<id>/assets/links`) must last the whole attempt, up to the longest time above plus the get-ready minute.
+- **The longest time is for whole chapter tests only.** A paper the student makes (Part 1.6) keeps the plain ratio: 75 Mathematics questions get 240 minutes, and the app shows the student that time before the paper exists. Do not cut a made paper unless the owner says so (Part 3.8); the app would have to change with it.
+- The owner has not asked for a shortest time. If he does, it is again only `rules.minutes` on the website; the app shows whatever is set.
 - It is the same set as in the Chapter-wise section, so that section, on the website and in the app, shows the new time too.
 
 **What the app does with it. Nothing else is needed from the website.**
 
 - Every app version, also older ones: the paper's page shows the set's `rules.minutes` when it is opened; the Chapter-wise list shows the list's minutes; the player runs on the attempt's own deadline.
 - Student Choice's list of chapter tests shows each test's minutes from the catalogue (Part 1.5), a few minutes behind at most.
-- Student Choice's first screen says today "Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)". **On the day every chapter test has its ratio time** (a minute's rounding apart at most) **the sentence changes by itself** to "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time."
-- Checked on 26 Nov 2026 on the web preview, with the catalogue answered in the browser with the ratio times: a 16-question Physics test showed 39 min and the sentence changed. **Not checked** against the real website (nothing is changed there yet). The app side has never run an attempt longer than a full mock (180 minutes).
+- Student Choice's first screen says today "Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)". **On the day every chapter test has its time by the rule** (the ratio, 180 at most; a minute's rounding apart at most) **the sentence changes by itself** to "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time (zyada se zyada 3 hr)." With the ratio alone, without the 180, the sentence does not change: the rule is the two together. (The words about three hours are in the app version on the preview since 26 Nov 2026.)
+- Checked on 26 Nov 2026 on the web preview, with the catalogue answered in the browser: with the rule's times (81 tests, the longest 180 minutes, the shortest 4) the sentence changed; with the ratio alone (the longest 276) it did not. **Not checked** against the real website (nothing is changed there yet).
 
 ## 1.9 The Dream College meter
 
@@ -74,7 +74,7 @@ Who may ask the app's server for the chapter list: a signed-in student only. The
 | The student asks | The answer |
 | --- | --- |
 | "Sawaal khud kyun nahi chun sakta?" | That part is coming ("Jald aa raha hai"). Today the whole test of every chosen chapter can be taken. It will open in the app by itself, without an update |
-| "Chapter test 60 minute ka hi kyun hai?" | The time rule on the first screen is for a paper made in Student Choice. A whole chapter test has the time written on its page: 60 minutes today |
+| "Chapter test 60 minute ka hi kyun hai?" | The time rule on the first screen is for a paper made in Student Choice. A whole chapter test has the time written on its page: 60 minutes today. (Once the website sets the new times: by the same ratio, three hours at most) |
 | "Mere chune hue chapters gayab ho gaye." | The ticks are kept on the phone, for the account. A new phone or a fresh install starts empty; a chapter the website took back leaves the list |
 | "Kya yeh Dream College meter mein ginta hai?" | No. Chapter tests and Student Choice papers never count; only full mocks do |
 | "Student Choice ke sawaal alag hain kya?" | No. They are the JEE Main chapter-wise questions; the attempts are the same ones as in the Chapter-wise section and My Tests |
@@ -132,7 +132,7 @@ Run these on a test setup, signed in as a test student (`-b` = that student's co
 - Anything on a real phone: the lists, the keyboard over the search box and the random sheet, the safe areas. Everything was walked in the app's web preview, at a phone's size.
 - Doors A, B and C: they do not exist. The question list and "Paper banao" were walked against made-up typed questions only, **never with picture questions** (the real chapter-wise questions are pictures).
 - A chapter test started from Student Choice by the app side (the button was never pressed in a test; it opens the same page the Chapter-wise section opens).
-- The ratio times against the real website, and any attempt longer than 180 minutes.
+- The rule's times against the real website, and any attempt longer than 180 minutes (a whole chapter test never is; a made paper can be: 75 Mathematics questions get 240 minutes).
 
 **Known small things, not changed**
 

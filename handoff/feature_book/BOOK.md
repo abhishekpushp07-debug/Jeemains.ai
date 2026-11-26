@@ -1,6 +1,6 @@
 # JEELIVE.AI — Student Choice and Matched: the complete book
 
-For the JE Live website agent and the JE Live super admin. Written by the app side on 26 Nov 2026. Version 1.
+For the JE Live website agent and the JE Live super admin. Written by the app side on 26 Nov 2026. Version 2.
 
 Everything about the app's two new features, for the two people who have to make them work on jeelive.ai: what a student sees, what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen, and what has not been checked yet.
 
@@ -11,9 +11,9 @@ Everything about the app's two new features, for the two people who have to make
 - Is book mein dono naye features ka poora hisaab hai: **Student Choice** aur **Matched**. App mein kya dikhta hai, website ko kya banana hai, super admin ko kya karna hai, aur kaun si cheez abhi check nahi hui.
 - **Student Choice aaj chalta hai**: student chapters tick karta hai (naam likh kar dhoondh bhi sakta hai) aur har chune chapter ka poora test deta hai. Sawaal JEE Main ke chapter-wise sawaal hi hain; alag bank nahi hai.
 - **Sawaal khud chunna aur random mock abhi band hain** ("Jald aa raha hai"). Website teen darwaze banayegi (Part 1.6), tab yeh dono app update ke bina khul jayenge.
-- **Time ka ratio** (25 Maths = 80 min, 25 Physics = 60 min, 25 Chemistry = 40 min) banaye hue paper par lagega. Poore chapter test abhi 60 min ke hi hain; unka time sirf website badal sakti hai (Part 1.8).
+- **Time ka ratio** (25 Maths = 80 min, 25 Physics = 60 min, 25 Chemistry = 40 min) banaye hue paper par lagega. Poore chapter test abhi 60 min ke hi hain; unka time sirf website badal sakti hai. Aapka faisla (26 Nov): unhe bhi yahi ratio, par **zyada se zyada 3 ghante** (Part 1.8).
 - **Dream College meter**: chapter test aur Student Choice paper kabhi nahi ginte, chahe kitne bhi lambe hon.
-- **Matched**: app taiyaar hai, par production mein abhi khaali hai. Super admin har shift ke baad matched sawaal daalega aur unka ek asli paper banayega. Home ka Matched card 28 Jan 2027 se apne aap aayega.
+- **Matched**: app taiyaar hai, par production mein abhi khaali hai. Super admin har shift ke baad matched sawaal daalega aur unka ek asli paper banayega. Aapka faisla (26 Nov): Home ka Matched card **pehla shift publish hote hi, usi din** aa jayega; AITS ke bache dinon mein All India series us card ke theek neeche ek bar ban jaati hai. (Koi shift na ho to bhi 28 Jan 2027 se card aa jayega.) Yeh naya rule abhi preview par hai; students tak agle Publish ke saath pahunchega.
 - Website agent ko yeh PDF (ya saath ki `BOOK.md`) dena hai. Super admin ke kaam ke hisse: Part 1.11, Part 2.8 aur Part 2.9.
 
 ## 0.1 The two features
@@ -23,29 +23,30 @@ Everything about the app's two new features, for the two people who have to make
 - **Today:** tick chapters in Physics, Chemistry and Maths (a search box finds any chapter by name), then take each ticked chapter's whole test, one after another.
 - **Later, when the website can make such papers:** see the ticked chapters' questions **without options**, tick the ones wanted and get **one paper** made of them (75 questions at most); or ask for a **random mock** of N questions.
 
-**Matched.** After every JEE Main shift, the questions of that shift that matched JE Live's own questions are shown side by side: the JEE Main question, and under it the question of ours it matched. Open to everyone, signed in or not. A signed-in student attempts all of ours in one **real paper** ("Attempt all matched"); a person without an account is asked to sign up first. On Home, the All India series card gives its place to the Matched card once the series is over.
+**Matched.** After every JEE Main shift, the questions of that shift that matched JE Live's own questions are shown side by side: the JEE Main question, and under it the question of ours it matched. Open to everyone, signed in or not. A signed-in student attempts all of ours in one **real paper** ("Attempt all matched"); a person without an account is asked to sign up first. On Home, the All India series card gives its place to the Matched card as soon as the first shift is published; for its remaining days the series is a bar right under that card.
 
 ## 0.2 Where things stand on 26 Nov 2026
 
 | What | State | Waits for |
 | --- | --- | --- |
-| Student Choice: Home tile, first screen, chapter list, chapter search, the ticked chapters' whole tests | **Works.** In production since 26 Nov 2026 | nothing |
+| Student Choice: Home tile, first screen, chapter list, chapter search, the ticked chapters' whole tests | **Works.** The app's server in production has it since 26 Nov 2026 (the screens: see the note under this table) | nothing |
 | Student Choice: a chapter's questions without options, one paper of ticked questions | Built in the app, **closed** (shown under "Jald aa raha hai") | the website: doors A, B and C (Part 1.6) |
 | Student Choice: random mock | Built in the app, **closed** | the website: doors A and C |
-| Whole chapter tests timed by the 80 / 60 / 40 ratio | **Not true yet**: every chapter test has 60 minutes | the website: new minutes on 81 sets (Part 1.8) |
+| Whole chapter tests timed by the 80 / 60 / 40 ratio, three hours at most | **Not true yet**: every chapter test has 60 minutes | the website: new minutes on 81 sets (Part 1.8) |
 | Dream College meter never counts a chapter test or a Student Choice paper | **Works** in the app | the website: `test_kind` "choice" on made papers (Part 1.9) |
 | Matched: public pages, sign-up sheet, the way back after sign-in, Home card, sign-in bar, the JEE question under ours | **Built.** In production the list is **empty** and the card is **off** | the website and the super admin: the admin page, the real paper, two public doors (Part 2.4) |
-| Matched card on Home and the bar on the sign-in screen | **Off.** They come on by themselves on **28 Jan 2027** (India time) | nothing; the super admin can switch them earlier (Part 2.6) |
+| Matched card on Home and the bar on the sign-in screen | **Off in production:** no shift is published. They come on by themselves **when the first shift is published**, and on **28 Jan 2027** (India time) at the latest | the first published shift (Part 2.6) |
+| The first-shift rule of the card, and the All India bar under the Matched card | **Built on 26 Nov 2026, on the preview.** Not in production yet: there the card still waits for 28 Jan 2027 or for the switch `on` | the owner's next Publish of the app |
 
-"In production" here means: the app's own server in production answers these addresses (checked on 26 Nov 2026, Part 3.7), and the screens are in the app version deployed that day. A phone that still has an older installed build gets the screens when it updates. Whether a store build with these screens has reached students is not known to the app side: ask the owner.
+"In production" here means: the app's own server in production answers these addresses (checked on 26 Nov 2026, Part 3.7). **The screens reach students with the app version that is published.** The chapter search, the three-hour sentence, the first-shift rule of the Matched card and the All India bar were built on 26 Nov 2026 and are on the preview; whether a Publish has been made after each of them cannot be seen from outside and is not known to the app side: ask the owner. A phone that still has an older installed build gets new screens when it updates.
 
 ## 0.3 Who does what
 
 | Who | Student Choice | Matched |
 | --- | --- | --- |
 | **The website agent** (builds jeelive.ai) | Three doors: A the switch, B a chapter's questions without options, C make the paper (Part 1.6). New minutes on the chapter-wise sets (Part 1.8). `test_kind` on results and on the My Tests list (Part 1.9) | The super admin's "Matched" page (2.4a). One real paper per shift (2.4b). Two public read doors (2.4c) |
-| **The super admin** (runs jeelive.ai) | Nothing new today. Publishing or hiding a chapter-wise test changes Student Choice within a few minutes (Part 1.11). Later: the switch of door A | After every JEE Main shift: enter the matched questions, check them, make the paper, publish (Part 2.8). The switch of Home's card |
-| **The app side** | Built and deployed. Follows the website by itself: no new app build when a door opens | Built and deployed. Copies the website's shifts every 2 minutes: no new app build when shifts arrive |
+| **The super admin** (runs jeelive.ai) | Nothing new today. Publishing or hiding a chapter-wise test changes Student Choice within a few minutes (Part 1.11). Later: the switch of door A | After every JEE Main shift: enter the matched questions, check them, make the paper, publish (Part 2.8). Publishing the first shift is what puts Matched on Home; the card also has a switch |
+| **The app side** | Built; the app's server is deployed (the screens: Part 0.2). Follows the website by itself: no new app build when a door opens | Built; the app's server is deployed (the first-shift rule and the All India bar: with the next Publish, Part 0.2). Copies the website's shifts every 2 minutes: no new app build when shifts arrive |
 | **The owner** | Decides the open points of Part 3.8 | Decides the open points of Part 3.8 |
 
 ## 0.4 Twenty things nobody must get wrong
@@ -54,7 +55,7 @@ Everything about the app's two new features, for the two people who have to make
 2. **A question listed for choosing never carries its options, its answer or its solution** (door B). Options appear only inside the paper.
 3. **A made paper has at most 75 questions. Never 90.**
 4. **Marking: right +4, wrong −1, left 0.**
-5. **Time comes from the subjects:** every Mathematics question brings 3.2 minutes, Physics 2.4, Chemistry 1.6; the sum is rounded **up** to a whole minute (25 Maths = 80 min, 25 Physics = 60, 25 Chemistry = 40; 25 + 25 + 25 = 180).
+5. **Time comes from the subjects:** every Mathematics question brings 3.2 minutes, Physics 2.4, Chemistry 1.6; the sum is rounded **up** to a whole minute (25 Maths = 80 min, 25 Physics = 60, 25 Chemistry = 40; 25 + 25 + 25 = 180). **A whole chapter test** follows the same ratio and is **never longer than 180 minutes** (Part 1.8); a made paper is not cut.
 6. **The same `request_key` must give the same paper** (door C). A retry never makes a second paper.
 7. **`test_kind` is exactly `"choice"`** on a made paper and on its result. The Dream College meter decides by it.
 8. **A random mock is split exactly as Part 1.6 says** (equally; one or two left over go to Physics, then Chemistry). The app shows that split and its time to the student before the paper exists.
@@ -216,6 +217,7 @@ Worked examples (every row was computed by the app server's own function when th
 | 1 Physics + 1 Chemistry + 1 Maths | 2.4 + 1.6 + 3.2 = 7.2, rounded up to 8 | **8 min** | 12 |
 | 3 Physics + 2 Chemistry + 2 Maths | 7.2 + 3.2 + 6.4 = 16.8, rounded up to 17 | **17 min** | 28 |
 | 20 Physics + 15 Chemistry + 10 Maths | 48 + 24 + 32 = 104 | **1 hr 44 min** | 180 |
+| 75 Maths | 240 | **4 hr** | 300 |
 
 How the app writes a time: under an hour "45 min"; from an hour "1 hr", "1 hr 12 min", "3 hr".
 
@@ -491,23 +493,23 @@ The four pictures below were taken with **the browser answering in place of door
 
 **A known small thing in the make-up:** each subject's time is rounded up on its own, so the rows can add up to a minute or two more than the paper's total (picture 13: 8 + 4 + 7 minutes above "17 min"). The total is the right one, and it is what door C must give.
 
-## 1.8 Whole chapter tests by the 80 / 60 / 40 ratio: a change on the website
+## 1.8 Whole chapter tests by the 80 / 60 / 40 ratio, three hours at most: a change on the website
 
-The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once the website allows changing their time". **The app cannot do it.** An attempt's deadline is the website's, taken from the set's `rules.minutes`. **Not done yet:** on 26 Nov 2026 every JEE Main chapter-wise test has 60 minutes, whatever its length.
+The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once the website allows changing their time". Shown what the ratio alone gives (some tests longer than four hours), he added on 26 Nov 2026: **a longest time of three hours.** **The app cannot do it.** An attempt's deadline is the website's, taken from the set's `rules.minutes`. **Not done yet:** on 26 Nov 2026 every JEE Main chapter-wise test has 60 minutes, whatever its length.
 
 **What to change on the website**
 
 - For every published JEE Main chapter-wise set (`test_kind` "chapter"):
-  `rules.minutes` = (the set's `count`) × (the minutes a question of its `chapter_subject` brings), rounded **up** to a whole minute. Physics 2.4, Chemistry 1.6, Mathematics 3.2.
+  `rules.minutes` = (the set's `count`) × (the minutes a question of its `chapter_subject` brings), rounded **up** to a whole minute, **and never more than 180**. Physics 2.4, Chemistry 1.6, Mathematics 3.2.
 - Keep it true: when a chapter's question count changes, its minutes change with it.
 - A new attempt gets the new time. **An attempt that is already running keeps the deadline it has.**
 - A whole number of minutes, please: the app's pages show `rules.minutes` as it is.
 
-**What it gives, chapter by chapter** (counts as on 26 Nov 2026; today's 60 minutes → by the ratio):
+**What it gives, chapter by chapter** (counts as on 26 Nov 2026; today's 60 minutes → by the rule; where the three hours hold a test back, what the ratio alone would give is in brackets):
 
 ### Physics: 2.4 minutes a question (30 tests, 1250 questions)
 
-| No. | Chapter | Questions | Today | By the ratio |
+| No. | Chapter | Questions | Today | By the rule |
 | --- | --- | --- | --- | --- |
 | 1 | Units, Dimensions and Errors | 68 | 60 min | **164 min** |
 | 2 | Kinematics | 66 | 60 min | **159 min** |
@@ -524,7 +526,7 @@ The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once t
 | 13 | Kinetic Theory of Gases | 41 | 60 min | **99 min** |
 | 14 | Oscillations | 27 | 60 min | **65 min** |
 | 15 | Waves and Sound | 30 | 60 min | **72 min** |
-| 16 | Electrostatics | 76 | 60 min | **183 min** |
+| 16 | Electrostatics | 76 | 60 min | **180 min** (183) |
 | 17 | Capacitors | 30 | 60 min | **72 min** |
 | 18 | Current Electricity | 55 | 60 min | **132 min** |
 | 19 | Magnetic Effects of Current | 62 | 60 min | **149 min** |
@@ -542,7 +544,7 @@ The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once t
 
 ### Chemistry: 1.6 minutes a question (24 tests, 1250 questions)
 
-| No. | Chapter | Questions | Today | By the ratio |
+| No. | Chapter | Questions | Today | By the rule |
 | --- | --- | --- | --- | --- |
 | 1 | Mole Concept and Stoichiometry | 68 | 60 min | **109 min** |
 | 2 | Atomic Structure | 52 | 60 min | **84 min** |
@@ -571,7 +573,7 @@ The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once t
 
 ### Mathematics: 3.2 minutes a question (27 tests, 1250 questions)
 
-| No. | Chapter | Questions | Today | By the ratio |
+| No. | Chapter | Questions | Today | By the rule |
 | --- | --- | --- | --- | --- |
 | 1 | Sets and Relations | 38 | 60 min | **122 min** |
 | 2 | Functions | 54 | 60 min | **173 min** |
@@ -581,7 +583,7 @@ The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once t
 | 6 | Quadratic Equations | 49 | 60 min | **157 min** |
 | 7 | Permutations and Combinations | 53 | 60 min | **170 min** |
 | 8 | Binomial Theorem | 50 | 60 min | **160 min** |
-| 9 | Sequences and Series | 75 | 60 min | **240 min** |
+| 9 | Sequences and Series | 75 | 60 min | **180 min** (240) |
 | 10 | Straight Lines | 50 | 60 min | **160 min** |
 | 11 | Circles | 44 | 60 min | **141 min** |
 | 12 | Parabola | 23 | 60 min | **74 min** |
@@ -590,34 +592,35 @@ The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once t
 | 15 | Limits | 29 | 60 min | **93 min** |
 | 16 | Statistics | 29 | 60 min | **93 min** |
 | 17 | Probability | 51 | 60 min | **164 min** |
-| 18 | Matrices and Determinants | 86 | 60 min | **276 min** |
+| 18 | Matrices and Determinants | 86 | 60 min | **180 min** (276) |
 | 19 | Inverse Trigonometric Functions | 24 | 60 min | **77 min** |
 | 20 | Continuity and Differentiability | 41 | 60 min | **132 min** |
 | 21 | Application of Derivatives | 37 | 60 min | **119 min** |
 | 22 | Indefinite Integration | 15 | 60 min | **48 min** |
-| 23 | Definite Integration | 73 | 60 min | **234 min** |
+| 23 | Definite Integration | 73 | 60 min | **180 min** (234) |
 | 24 | Area under Curves | 45 | 60 min | **144 min** |
-| 25 | Differential Equations | 70 | 60 min | **224 min** |
-| 26 | Vector Algebra | 67 | 60 min | **215 min** |
-| 27 | Three-Dimensional Geometry | 82 | 60 min | **263 min** |
+| 25 | Differential Equations | 70 | 60 min | **180 min** (224) |
+| 26 | Vector Algebra | 67 | 60 min | **180 min** (215) |
+| 27 | Three-Dimensional Geometry | 82 | 60 min | **180 min** (263) |
 
-**Please look at these before turning it on.** They follow from the rule as the owner gave it. He was told them on 26 Nov 2026 and had not answered when this book was written.
+**What the rule does**
 
 - Of the 81 tests, **70 get longer**, **11 get shorter**, and none stays at 60 minutes.
-- **The longest test becomes 4 h 36 min** (Matrices and Determinants, 86 questions). **7 tests become longer than 3 hours:** Matrices and Determinants 4 h 36 min; Three-Dimensional Geometry 4 h 23 min; Sequences and Series 4 h 00 min; Definite Integration 3 h 54 min; Differential Equations 3 h 44 min; Vector Algebra 3 h 35 min; Electrostatics 3 h 03 min.
+- **7 tests are held at 3 hours**; the ratio alone would give them more: Matrices and Determinants (4 h 36 min); Three-Dimensional Geometry (4 h 23 min); Sequences and Series (4 h 00 min); Definite Integration (3 h 54 min); Differential Equations (3 h 44 min); Vector Algebra (3 h 35 min); Electrostatics (3 h 03 min).
+- **So no chapter test is longer than a full mock (180 minutes).** The student's session, the autosave and the attempt's picture links (`GET /attempts/<id>/assets/links`) need to last no longer than they already do for a full mock, plus the get-ready minute.
 - **11 tests become shorter than today's 60 minutes:** Miscellaneous (beyond the current syllabus) 4 min; Magnetism and Matter 17 min; Redox Reactions 26 min; Thermal Properties of Matter 39 min; Centre of Mass, Momentum and Collisions 41 min; Basic Algebra (Inequalities, Modulus, Logarithms) 42 min; Ionic Equilibrium 45 min; Indefinite Integration 48 min; Chemical Equilibrium 50 min; Alcohols, Phenols and Ethers 52 min; Surface Tension 53 min.
 - 12 chapter tests have 68 questions or more. (These are the ones an older app version counted for the Dream College meter: Part 1.9.)
 
-- The owner gave the ratio **without a longest time**. If he later wants one (for example "never more than 3 hours"), it is again only `rules.minutes` on the website; the app shows whatever is set.
-- For the longer attempts, on the website's side: the student's session, the autosave and the attempt's picture links (`GET /attempts/<id>/assets/links`) must last the whole attempt, up to the longest time above plus the get-ready minute.
+- **The longest time is for whole chapter tests only.** A paper the student makes (Part 1.6) keeps the plain ratio: 75 Mathematics questions get 240 minutes, and the app shows the student that time before the paper exists. Do not cut a made paper unless the owner says so (Part 3.8); the app would have to change with it.
+- The owner has not asked for a shortest time. If he does, it is again only `rules.minutes` on the website; the app shows whatever is set.
 - It is the same set as in the Chapter-wise section, so that section, on the website and in the app, shows the new time too.
 
 **What the app does with it. Nothing else is needed from the website.**
 
 - Every app version, also older ones: the paper's page shows the set's `rules.minutes` when it is opened; the Chapter-wise list shows the list's minutes; the player runs on the attempt's own deadline.
 - Student Choice's list of chapter tests shows each test's minutes from the catalogue (Part 1.5), a few minutes behind at most.
-- Student Choice's first screen says today "Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)". **On the day every chapter test has its ratio time** (a minute's rounding apart at most) **the sentence changes by itself** to "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time."
-- Checked on 26 Nov 2026 on the web preview, with the catalogue answered in the browser with the ratio times: a 16-question Physics test showed 39 min and the sentence changed. **Not checked** against the real website (nothing is changed there yet). The app side has never run an attempt longer than a full mock (180 minutes).
+- Student Choice's first screen says today "Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)". **On the day every chapter test has its time by the rule** (the ratio, 180 at most; a minute's rounding apart at most) **the sentence changes by itself** to "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time (zyada se zyada 3 hr)." With the ratio alone, without the 180, the sentence does not change: the rule is the two together. (The words about three hours are in the app version on the preview since 26 Nov 2026.)
+- Checked on 26 Nov 2026 on the web preview, with the catalogue answered in the browser: with the rule's times (81 tests, the longest 180 minutes, the shortest 4) the sentence changed; with the ratio alone (the longest 276) it did not. **Not checked** against the real website (nothing is changed there yet).
 
 ## 1.9 The Dream College meter
 
@@ -664,7 +667,7 @@ Who may ask the app's server for the chapter list: a signed-in student only. The
 | The student asks | The answer |
 | --- | --- |
 | "Sawaal khud kyun nahi chun sakta?" | That part is coming ("Jald aa raha hai"). Today the whole test of every chosen chapter can be taken. It will open in the app by itself, without an update |
-| "Chapter test 60 minute ka hi kyun hai?" | The time rule on the first screen is for a paper made in Student Choice. A whole chapter test has the time written on its page: 60 minutes today |
+| "Chapter test 60 minute ka hi kyun hai?" | The time rule on the first screen is for a paper made in Student Choice. A whole chapter test has the time written on its page: 60 minutes today. (Once the website sets the new times: by the same ratio, three hours at most) |
 | "Mere chune hue chapters gayab ho gaye." | The ticks are kept on the phone, for the account. A new phone or a fresh install starts empty; a chapter the website took back leaves the list |
 | "Kya yeh Dream College meter mein ginta hai?" | No. Chapter tests and Student Choice papers never count; only full mocks do |
 | "Student Choice ke sawaal alag hain kya?" | No. They are the JEE Main chapter-wise questions; the attempts are the same ones as in the Chapter-wise section and My Tests |
@@ -722,7 +725,7 @@ Run these on a test setup, signed in as a test student (`-b` = that student's co
 - Anything on a real phone: the lists, the keyboard over the search box and the random sheet, the safe areas. Everything was walked in the app's web preview, at a phone's size.
 - Doors A, B and C: they do not exist. The question list and "Paper banao" were walked against made-up typed questions only, **never with picture questions** (the real chapter-wise questions are pictures).
 - A chapter test started from Student Choice by the app side (the button was never pressed in a test; it opens the same page the Chapter-wise section opens).
-- The ratio times against the real website, and any attempt longer than 180 minutes.
+- The rule's times against the real website, and any attempt longer than 180 minutes (a whole chapter test never is; a made paper can be: 75 Mathematics questions get 240 minutes).
 
 **Known small things, not changed**
 
@@ -739,6 +742,7 @@ After a JEE Main shift, some of its questions turn out to be the same as, or ver
 | Decision of the owner | Date | Where it shows |
 | --- | --- | --- |
 | When the All India series is over, Home's All India card turns **by itself** into the card "Matched: JEE Mains questions matched with ours" | 25 Nov 2026 | Part 2.6 |
+| **Sooner than that:** the card turns to Matched **on the day of JEE Main's first shift itself**, as soon as that shift is published. For the series' remaining days the All India series is **a simple bar right under the Matched card**, above the four exam boxes | 26 Nov 2026 | Part 2.2 (picture 10), Part 2.6 |
 | The list shows the JEE question and ours on one card, **without options**, with the tabs "Question" and "Solution" | 25 Nov 2026 | Part 2.2 |
 | Real counts and what matched. "Attempt all matched" opens a **real paper** of the website; nothing is made up or marked on the phone | 26 Nov 2026 | Part 2.4b |
 | Looking is open to everyone. **Attempting needs an account:** a person without one is asked to sign up (free) and comes back to the same shift | 26 Nov 2026 | Part 2.2 |
@@ -755,7 +759,9 @@ The pictures show **three made-up sample shifts** (22 and 24 Jan 2027) that exis
 - Picture `shots/m02_matched_page.jpg`: 3. The Matched page: month, day, shift
 - Picture `shots/m03_shift_top.jpg`: 4. A shift: its count, its paper, the button
 
-**1. Home's card** (only while the switch of Part 2.6 is on). Under the title "Matched with JEE Main" (with "view all"), in the place of the All India series card: "JEE MAIN", how many shifts ("3 SHIFTS"), the word MATCHED, the line "JEE Mains questions matched with ours", the cup and the fireworks, two facts ("11 questions matched", "24 Jan · Shift 1, latest shift") and the button **"See matched questions"**. Before the first shift is published it says "JEE Main ke har shift ke baad yahan woh questions aayenge jo hamare questions se match hue." and the button reads "Open Matched". While the card is on, the All India series and its archive are reached from "all india series" under Explore on Home.
+**1. Home's card** (only while the switch of Part 2.6 is on). Under the title "Matched with JEE Main" (with "view all"), in the place of the All India series card: "JEE MAIN", how many shifts ("3 SHIFTS"), the word MATCHED, the line "JEE Mains questions matched with ours", the cup and the fireworks, two facts ("11 questions matched", "24 Jan · Shift 1, latest shift") and the button **"See matched questions"**. Before the first shift is published it says "JEE Main ke har shift ke baad yahan woh questions aayenge jo hamare questions se match hue." and the button reads "Open Matched".
+
+**The All India series under the card** (picture 10; in the app version on the preview since 26 Nov 2026). While the series still has days left, a dark bar sits right under the Matched card, above the four exam boxes. Its small line reads "ALL INDIA SERIES · DAY 46 / 50"; its big line says what the day has for the student: "Live today · Start today's test", "In progress · Resume", "Completed · View result", "Completed · Results at 11:59 PM", "Awaiting paper", "Starts closed", "Day ended"; before the series begins "50 DAYS" and "Starts 9 Dec". **One tap does what the big card's button did:** today's test page, the running attempt, its result, or the series hub. From the day after the series' last day the bar is gone, and the series and its practice archive are reached from "all india series" under Explore on Home (that chip is always there). An app version from before the bar shows the Matched card alone.
 
 **2. The sign-in screen** shows a Matched bar while the same switch is on: MATCHED, the line, and "Dekho". A person without an account can open Matched from it.
 
@@ -795,6 +801,7 @@ The pictures show **three made-up sample shifts** (22 and 24 Jan 2027) that exis
 - **Signed in:** the shift's real paper opens: its usual page ("JEE MAIN · MATCHED PAPER" when the paper's kind is `matched`), "Start attempt", the 60-second get-ready, the player, submit, the result, the analysis, the solutions, My Tests. Nothing about this paper is special in the app, except one thing:
 
 - Picture `shots/m09_under_ours_in_solutions.jpg`: 9. In the paper's solutions: the JEE question our question matched, with its own answer and solution
+- Picture `shots/m10_home_series_bar.jpg`: 10. Home while the All India series still has days: its bar under the Matched card, then the four exam boxes. (Taken before the series began, so the bar says when it starts)
 
 **7. The JEE question under ours.** In the player, under each of our questions, a panel "JEE MAIN 2027 MEIN AAYA · 22 Jan · Shift 1 · Q4" shows the JEE Main question it matched, **without options and without its answer**. In the solutions after submitting, the same panel also shows the JEE question's answer and solution (picture 9). An ordinary paper shows nothing of this and asks nothing extra (Part 2.7).
 
@@ -1123,13 +1130,17 @@ Only shifts that came from the website are ever hidden by the copy. A shift writ
 
 ## 2.6 Home's card and the sign-in bar: when they are on
 
-One switch decides both: Home's Matched card (in the All India series card's place) and the Matched bar on the sign-in screen. **They are also the only ways into Matched:** while the switch is off, no student can reach the Matched pages from the app, even when shifts are published.
+One switch decides both: Home's Matched card (in the All India series card's place) and the Matched bar on the sign-in screen. **They are also the only ways into Matched:** with the switch at `off`, no student can reach the Matched pages from the app, even when shifts are published.
 
 | The switch says | Meaning |
 | --- | --- |
-| `auto` | on **from the day after the All India series' last day**, India time. The app's server reads that day from the website's own schedule (`last_date` of `GET /api/series/all-india-jee`) every 15 minutes and remembers it. On 26 Nov 2026 the website says the series runs **9 Dec 2026 to 27 Jan 2027**, so the card comes on at 00:00 on **28 Jan 2027**. If the website moves the series' last day, the card's day moves with it |
-| `on` | on now, whatever the dates are |
-| `off` | never |
+| `auto` | on **as soon as one shift is published** (the owner, 26 Nov 2026: on the day of JEE Main's first shift itself). "Published" means the shift is in the app server's list (`GET /api/matched` of the app's server), so about 5 minutes after the super admin publishes it. **And in any case from the day after the All India series' last day**, India time, also with no shift: the app's server reads that day from the website's own schedule (`last_date` of `GET /api/series/all-india-jee`) every 15 minutes and remembers it. On 26 Nov 2026 the website says the series runs **9 Dec 2026 to 27 Jan 2027**, so with no shift at all the card comes on at 00:00 on **28 Jan 2027**. If the only published shift is taken back while the series still runs, the All India card comes back |
+| `on` | on now, whatever is published and whatever the dates are |
+| `off` | never, also when shifts are published |
+
+**The All India series while Matched has its place.** For the series' remaining days it is a bar right under the Matched card (Part 2.2, picture 10). There is no switch for the bar: the app shows it while the series' own `today` is not past its `last_date` (both from `GET /api/series/all-india-jee`), and drops it the day after. If the website moves the series' last day, the bar and the card's latest day move with it.
+
+**Where this rule is.** The first-shift rule and the bar were built on 26 Nov 2026 and are on the app's preview. **Production gets them with the owner's next Publish of the app.** Until then production's `auto` still means only "from 28 Jan 2027", and the switch `on` would be needed to show Matched earlier. Before the exam session, ask the app side to confirm that production has the rule.
 
 **Who holds the switch,** strongest first:
 
@@ -1137,14 +1148,14 @@ One switch decides both: Home's Matched card (in the All India series card's pla
 2. **The last word written in the app's database** (the row `matched:card`). It stays in force when the website sends no `card`. The app side can write it by hand; a `card` from the website overwrites it within 2 minutes.
 3. **The word in the app server's code:** `auto`. Used when nothing else is set. That is production's state on 26 Nov 2026.
 
-**How fast a phone follows:** the app's server learns the switch within about 3 minutes. A phone asks when the app is opened, and again when it is brought back after half an hour or more; it remembers the last answer, so the right card is there from the first moment of the next launch, also without a network.
+**How fast a phone follows:** the app's server learns the switch within about 3 minutes, and a newly published shift within about 5. A phone asks when the app is opened, and again when it is brought back after half an hour or more; it remembers the last answer, so the right card is there from the first moment of the next launch, also without a network.
 
-**Two things to decide in time** (Part 3.8):
+**Good to know**
 
-- **If JEE Main shifts are held on or before 27 Jan 2027**, `auto` keeps Matched out of reach until 28 Jan 2027. To show Matched earlier the super admin sets `on`; Home then shows the Matched card and the All India series is reached from "all india series" under Explore.
-- **If a new series is later run under the same address**, `auto` would turn the card off again until that series ends. Set `on` to keep Matched on Home.
-
-With the card on and no shift published, the card and the page say that matches will appear after every shift (Part 2.2).
+- **With `auto` nothing has to be switched by hand:** publishing the first shift is what puts Matched on Home. If that shift is published late, the card turns late.
+- **To put Matched on Home before any shift is published** (the card and the page then say that matches will appear after every shift, Part 2.2), set `on`.
+- **If a new series is later run under the same address:** while a shift is published the Matched card stays, and the bar comes back for that series' days. With no shift published, `auto` shows the All India card again until that series ends.
+- **A phone with an app version from before 26 Nov 2026's work** follows the same switch but has no bar: it shows the Matched card alone, and the series is reached from "all india series" under Explore.
 
 ## 2.7 The JEE question under ours, in the player and the solutions
 
@@ -1162,7 +1173,7 @@ The exact buttons are the website's own (Part 2.4a). This is what has to be true
 **Once, before the exam session**
 
 1. The website's Matched page, the paper maker and the two doors have been run on a test setup together with the app side (Part 2.11). The first shift ever published is the first true end-to-end run.
-2. With the owner: decide when Home's card comes on (Part 2.6). `auto` means 28 Jan 2027. If shifts are held before that and Matched should show at once, the switch must be set to `on`.
+2. Home's card (Part 2.6): **leave the switch at `auto`.** The owner decided on 26 Nov 2026 that Matched takes the All India card's place on the day of JEE Main's first shift: with `auto`, publishing the first shift does it, and the All India series stays as a bar under the card until its last day. Nothing is switched by hand. **Before the session, ask the app side to confirm that production has this rule** (it arrives with the owner's next Publish of the app; without it `auto` waits for 28 Jan 2027 and `on` would be needed).
 3. With the owner: fix the wording of `source` and `tag` once, and keep to it (below).
 4. The app side hides the preview's made-up sample shifts before the first real shift.
 
@@ -1178,7 +1189,7 @@ The exact buttons are the website's own (Part 2.4a). This is what has to be true
 | 6 | Press "Make the paper" | the paper has as many questions as there are different questions of ours in the shift; +4 / −1; its minutes follow the subject rule; every one of ours shows its `question_id` |
 | 7 | Open the paper as a test student | the paper's page opens; the questions and their keys are right |
 | 8 | Publish | the shift is in the first door's list |
-| 9 | Look at it in the app within about 5 minutes | the row's count, every card (both tabs), the three facts on the top card, the button, the paper; the JEE question under ours in the solutions |
+| 9 | Look at it in the app within about 5 minutes | the row's count, every card (both tabs), the three facts on the top card, the button, the paper; the JEE question under ours in the solutions. **After the first shift of the session also:** close the app and open it again; Home shows the Matched card, and the All India bar under it |
 
 **The check list for one matched question**
 
@@ -1201,7 +1212,7 @@ The exact buttons are the website's own (Part 2.4a). This is what has to be true
 
 - **A correction:** change the shift and save. `updated_at` must change (the page does this by itself). The app shows the correction within about 5 minutes.
 - **Taking a shift back:** unpublish it. It leaves the app within about 5 minutes. **Never delete it.** Publishing again brings it back.
-- **Home's card:** `auto`, `on` or `off` on the same page. A phone follows the next time the app is opened.
+- **Home's card:** `auto`, `on` or `off` on the same page. With `auto` the first published shift turns the card on by itself. A phone follows the next time the app is opened.
 
 ## 2.9 Mistakes, and what the student would see
 
@@ -1241,9 +1252,12 @@ The exact buttons are the website's own (Part 2.4a). This is what has to be true
 | A person without an account taps "Attempt all matched" | the sign-up sheet; after signing up or in, back on the same shift |
 | A link to a shift that is not published is opened | "Yeh shift ab yahan nahi hai." |
 | The phone has no network | Home shows the card the phone last knew. A list read less than 10 minutes ago is shown; otherwise "Matched abhi load nahi ho paaya. Dobara try karo." |
-| The app stays open over midnight of 27 Jan 2027 | it asks for the switch again when the student comes back to it after half an hour or more |
-| The card is on and no shift is published | the card and the page say that matches will appear after every shift |
-| The switch is off and shifts are published | nobody can reach Matched from the app (Part 2.6) |
+| The first shift is published (or the series ends) while a student has the app open | Home changes when the student comes back to the app after half an hour or more, or opens it afresh: the phone asks for the switch again then |
+| The card is on and no shift is published (`on`, or the series is over) | the card and the page say that matches will appear after every shift |
+| The switch is `off` and shifts are published | nobody can reach Matched from the app (Part 2.6) |
+| The only published shift is taken back while the series still runs (`auto`) | Home goes back to the All India card, at each phone's next app launch |
+| The series' last day has passed | the All India bar under the Matched card is gone; the series and its archive are under Explore |
+| A phone has an app version from before the All India bar | the Matched card alone; the series is under Explore |
 | The paper is opened on a phone that never showed Matched | the paper works; the JEE questions are not shown under ours (Part 2.7) |
 
 ## 2.11 Checks for the website agent
@@ -1268,7 +1282,7 @@ On a test setup. `<website>` is the website's API, `<app server>` the app's serv
 - `curl -s https://<app server>/api/matched/2027-01-25-s1` → **`matched` equals the number of questions entered** (lower = something was left out: Part 2.9); **`paper_questions` equals the number of questions in the paper**; the numbers in `subjects` add up to `matched`; `paper_id` is the paper.
 - `curl -s https://<app server>/api/matched/paper/<paper_id>` → the same shift.
 - Change a question and save → the change is there within 5 minutes. Unpublish → 404 within 5 minutes. Publish again → back.
-- Set `card` to `on` → `curl -s https://<app server>/api/app/switches` → `"matched": true` within about 3 minutes. `off` → `false`. `auto` → by the series' date.
+- Set `card` to `on` → `curl -s https://<app server>/api/app/switches` → `"matched": true` within about 3 minutes. `off` → `false`. `auto` → `true` while a shift is published (unpublish the last one → `false` within about 5 minutes, as long as the series has not ended); with none, by the series' date.
 
 **Then in the app:** the page, the shift, a card's two tabs, the sign-up sheet, the paper, the JEE question under ours in the player and in the solutions.
 
@@ -1290,11 +1304,13 @@ On a test setup. `<website>` is the website's API, `<app server>` the app's serv
 - **The JEE question under ours while a paper is being solved** (that needs a started attempt). It was seen in the solutions of a finished paper.
 - Signing up from the sheet to the end. The sheet, the sign-up form with its note, and the way back to the shift after **signing in** were walked.
 - A shift with pictures: the sample shifts are typed questions.
+- **The All India bar on a real day of the series:** the series begins on 9 Dec 2026. On the preview the bar was seen before the series ("50 DAYS", "Starts 9 Dec", a tap opens the series hub) and, with the browser answering the schedule as a day of the series, as "DAY 46 / 50", "Live today · Start today's test" (at a phone's usual width and at a narrow one). Its tap into a paper was not pressed.
+- **The card turning on with the first shift, against production:** the rule is covered by automated tests of the app's server; on the preview the card is switched `on` by hand, so `auto` was not watched there.
 
 **The samples on the preview** (26 Nov 2026)
 
 - Three made-up shifts are published on the **preview's** database, for the owner's eyes: `2027-01-22-s1` (6 matched questions), `2027-01-22-s2` (3), `2027-01-24-s1` (2). So that the button and the JEE question under ours can be seen, the first one names a real paper of the website as a stand-in (the chapter test "01 Sets and Relations").
-- Home's card is switched `on` by hand on the preview.
+- Home's card is switched `on` by hand on the preview. (With the samples published it would be on under `auto` too, by the first-shift rule.)
 - They are taken back with `python3 backend/tests/matched_sample.py hide` (and shown with `show`). Nothing is deleted.
 - **Production has none of this:** its list is empty and its card follows `auto` (checked, Part 3.7). The day the website publishes a real shift with the id of a sample, the website's shift takes the sample's place.
 
@@ -1325,7 +1341,7 @@ On a test setup. `<website>` is the website's API, `<app server>` the app's serv
 | `GET /api/attempts/<id>` | the player: `set_id`, `questions[].id` |
 | `GET /api/attempts/<id>/results` | the result: `set_id`, the question ids, `test_kind` |
 | `GET /api/my/tests` | My Tests; the Dream College meter's first read on a new phone |
-| `GET /api/series/all-india-jee` | `last_date`: the day after it, Home's card turns to Matched |
+| `GET /api/series/all-india-jee` | `today` and `last_date`: the All India bar shows under the Matched card until `last_date`; the day after it, Home's card turns to Matched also when no shift is published |
 | the sign-in and session doors | unchanged |
 
 **The website: doors to build**
@@ -1350,6 +1366,7 @@ And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part
 | Fewest in a random mock | 3 |
 | Marking | +4, −1, 0 |
 | Minutes a question brings | Mathematics 3.2, Physics 2.4, Chemistry 1.6; the sum rounded up |
+| Longest time of a whole chapter test (the owner's rule; the website sets it) | 180 minutes. A made paper is not cut (75 Mathematics questions: 240) |
 | Other minutes per question the website may send | 0.5 to 10 each |
 | A top per subject the website may send | 1 to 75 |
 | Random mock: number box and quick buttons | starts at 30; buttons 15, 30, 45, 60, 75 |
@@ -1446,7 +1463,7 @@ None of these needs an app update, except taking the tile off Home.
 | Coming soon | Jald aa raha hai. Sawaal khud chunna. Chune chapters ke sawaal dekho (bina options), jo chahiye tick karo, aur un sab ka ek hi paper banao: 75 sawaal tak. Random mock. Bas ginti batao; Physics, Chemistry aur Maths ke sawaal mile-jule aayenge, JEE Main ki tarah. Khulte hi yahin dikhega, app update kiye bina. | while a way is closed |
 | Time | Banaye hue paper ka time (later: Time kaise milta hai). Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = 3 hr. | always |
 | Time, last sentence | Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai (abhi 1 hr). | today |
-| | Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time. | the day every chapter test has its ratio time |
+| | Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time (zyada se zyada 3 hr). | the day every chapter test has its time by the rule of Part 1.8 |
 | No chapters | Chapters abhi nahi mile. Student Choice ke sawaal JEE Main ke chapter-wise sawaal hi hain. Abhi koi chapter khula nahi mila. Thodi der mein dobara dekho, ya chapter-wise tests kholo. (button: Chapter-wise tests) | the website lists no chapter-wise test |
 | Step 1 | Chapters chuno · Student Choice · Step 1 of 2 · Chapter ka naam likho… | |
 | Step 1 | Jitne chahiye utne chapter tick karo, kisi bhi subject se. Agle step mein har chune chapter ka poora test milega. | today |
@@ -1482,6 +1499,7 @@ None of these needs an app update, except taking the tile off Home.
 | Home | Matched with JEE Main · view all · JEE MAIN · 3 SHIFTS · 11 questions matched · 24 Jan · Shift 1, latest shift · See matched questions | shifts are published |
 | Home | JEE Main ke har shift ke baad yahan woh questions aayenge jo hamare questions se match hue. (button: Open Matched) | no shift yet |
 | Home | Dekh rahe hain… / Abhi load nahi hua. Kholo aur dobara try karo. | loading; could not load |
+| Home, the bar under the card | ALL INDIA SERIES · DAY 46 / 50 · Live today · Start today's test (also: In progress · Resume; Completed · View result; Completed · Results at 11:59 PM; Awaiting paper; Starts closed; Day ended; Live series. Before the series: 50 DAYS · Starts 9 Dec. On a narrow phone: ALL INDIA) | Matched is on and the All India series still has days |
 | Sign-in screen | Dekho | the bar |
 | Sign-in screen | Account banao ya sign in karo. Uske baad Matched paper attempt kar sakte ho. | reached from "Attempt all matched" |
 | Matched page | Matched · JEE Main · 11 questions matched in 3 shifts · SHIFT 1 · 6 of 75 matched | |
@@ -1509,8 +1527,8 @@ None of these needs an app update, except taking the tile off Home.
 | Student Choice, app | `frontend/app/choice/index.tsx`, `pick.tsx`, `tests.tsx`, `questions.tsx`; `frontend/src/choice/api.ts`, `search.ts`, `store.ts`, `parts.tsx`; Home's tile in `frontend/app/(tabs)/index.tsx` |
 | Dream College meter | `frontend/src/dream/store.ts` (`isFullMock`), `frontend/app/result/[id].tsx`, `backend/dream.py` |
 | Matched, server | `backend/matched.py` (the pages, the copy of the website's shifts, the card's day), `backend/app_switches.py`, started in `backend/server.py` |
-| Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
-| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (5), `test_matched_sync.py` (5): all 22 pass on 26 Nov 2026. Search: `node tests/choice_search_check.js` |
+| Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; the All India bar under the card `frontend/src/components/series/HomeSeriesBar.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
+| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5): all 23 pass on 26 Nov 2026. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py` |
 | Samples (preview only) | `backend/tests/matched_sample.py show` or `hide`; `backend/tests/choice_sample.py show` or `hide` |
 | Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`. This book was written from the code on 26 Nov 2026 and takes their place for readers outside the app side |
 | This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py` |
@@ -1521,7 +1539,7 @@ Every part of the two features carries a fixed name (`testID`; in the web previe
 
 | Screen | Names |
 | --- | --- |
-| Home | `home-tile-choice` (the tile), `home-tile-choice-badge`; `home-matched` (the card), `home-matched-total`, `home-matched-latest`, `home-matched-cta`, `home-matched-soon`, `home-matched-view-all`; `home-series-view-all` (the All India card is on instead) |
+| Home | `home-tile-choice` (the tile), `home-tile-choice-badge`; `home-matched` (the card), `home-matched-total`, `home-matched-latest`, `home-matched-cta`, `home-matched-soon`, `home-matched-view-all`; `home-series-bar` (the All India bar under the Matched card), `home-series-bar-day`, `home-series-bar-line`; `home-series-view-all` (the All India card is on instead) |
 | Sign-in screen | `entry-matched` (the bar), `entry-matched-note` (the note after "Attempt all matched") |
 | Student Choice, first screen | `choice-screen`, `choice-title`, `choice-facts`, `choice-way-chapters`, `choice-way-tests`, `choice-way-pick`, `choice-way-random`, `choice-soon`, `choice-soon-pick`, `choice-soon-random`, `choice-time`, `choice-time-physics` / `-chemistry` / `-mathematics`, `choice-time-note`, `choice-not-ready`, `choice-error`, `choice-refresh` |
 | Random mock sheet | `choice-random-sheet`, `choice-random-input`, `choice-random-quick-15` … `-75`, `choice-random-makeup`, `choice-random-rule`, `choice-random-range`, `choice-random-error`, `choice-random-make` |
@@ -1538,7 +1556,7 @@ A row of the chapter list is best found as `[role=checkbox][data-testid^=choice-
 
 ## 3.7 The state on 26 Nov 2026, and how to check it again
 
-Read by the build of this book, at 12:50 India time on 26 Nov 2026:
+Read by the build of this book, at 13:44 India time on 26 Nov 2026:
 
 | What was asked | The answer | What it means |
 | --- | --- | --- |
@@ -1548,7 +1566,7 @@ Read by the build of this book, at 12:50 India time on 26 Nov 2026:
 | The website: `GET /api/matched` | 404 | Matched: the list of shifts: not built yet |
 | The website: `GET /api/matched/2027-01-25-s1` | 404 | Matched: one shift: not built yet |
 | The website: `GET /api/choice/bank?exam=jee-main` | 404 | Student Choice: door A (asked signed out here; a signed-in student got 404 on 26 Nov 2026): not built yet |
-| The website: `GET /api/series/all-india-jee` | 200, 2026-12-09 to 2027-01-27 | Home's card turns to Matched on 28 Jan 2027 (India time), unless the switch says otherwise |
+| The website: `GET /api/series/all-india-jee` | 200, 2026-12-09 to 2027-01-27 | with no shift published, Home's card turns to Matched on 28 Jan 2027 (India time); a published shift turns it sooner, the switch at any time |
 
 Also true on 26 Nov 2026, seen through the app's preview: the website lists **81 chapter-wise tests** (Physics 30, Chemistry 24, Mathematics 27) with **3750 questions**, and every one of them has **60 minutes**.
 
@@ -1563,16 +1581,25 @@ curl -s https://jeelive-mobile.emergent.host/api/matched
 curl -s -o /dev/null -w "%{http_code}\n" https://jeelive-mobile.emergent.host/api/choice/bank
 # 404 = the website's Matched door is not built yet
 curl -s -o /dev/null -w "%{http_code}\n" https://jeelive.ai/api/matched
-# "last_date": the card turns the day after
+# "last_date": with no shift published, the card turns the day after
 curl -s https://jeelive.ai/api/series/all-india-jee
 ```
 
-## 3.8 Open points for the owner
+## 3.8 Decided by the owner, and still open
+
+**Decided on 26 Nov 2026** (both were open points in version 1 of this book)
+
+| The question | The owner's answer | Where |
+| --- | --- | --- |
+| Whole chapter tests by the ratio as given, or with a longest time? | **A longest time of three hours.** 7 tests are held at 180 minutes; no chapter test is longer than a full mock | Part 1.8 |
+| When should Matched appear if JEE Main shifts are held before the All India series ends? | **On the day of the first shift itself:** the card turns to Matched as soon as the first shift is published; the series is a bar under it for its remaining days | Part 2.6 |
+
+**Still open**
 
 | # | The question | What happens until it is answered |
 | --- | --- | --- |
-| 1 | **Whole chapter tests by the ratio as given, or with a longest time?** As given, the longest test becomes 4 h 36 min (Matrices and Determinants, 86 questions) and 11 tests become shorter than today's 60 minutes (Part 1.8). Asked on 26 Nov 2026 | nothing changes: every chapter test stays 60 minutes |
-| 2 | **When should Matched appear if JEE Main shifts are held on or before 27 Jan 2027?** `auto` shows it from 28 Jan 2027; before that it cannot be reached from the app. `on` shows it at once, in the All India card's place | `auto` |
+| 1 | **Should the three hours also be the longest time of a paper the student makes?** By the ratio alone 75 Mathematics questions get 240 minutes. (A top of 25 questions per subject, door A's `max_per_subject`, would also keep every made paper within 180.) | made papers are not cut |
+| 2 | **A shortest time for whole chapter tests?** By the rule 11 tests become shorter than today's 60 minutes; the shortest gets 4 minutes for its 2 questions (Part 1.8) | the rule as given: no shortest time |
 | 3 | **Should a Matched paper ever count for the Dream College meter?** Today it would, if it had 68 questions or more and 150 marks or more. Chapter tests and Student Choice papers never count | it would count; a shift's paper is far smaller than that |
 | 4 | **The app side's suggestions for made papers** (Part 1.6): fresh questions first in a random mock; a daily limit; removing papers never started; no leaderboard | the website agent should not build them unasked |
 | 5 | **The wording of `source` and `tag` on Matched** (Part 2.8) | the super admin writes what seems right |

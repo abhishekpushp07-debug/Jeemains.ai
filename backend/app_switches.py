@@ -21,8 +21,10 @@ PICTURES_STEP = 5
 
 # Home's "Matched" card (the JEE Main questions that matched ours) in place of the All India series card, and the same
 # offer on the sign-in screen (the whole story: memory/MATCHED_CONTRACT.md):
-#   "auto"  from the day after the All India series' last day; the website's own schedule decides that day (matched.py)
-#   "on"    now, whatever the series' dates are (for example a new series has started and Matched must stay on Home)
+#   "auto"  from the first published Matched shift (the day of JEE Main's first shift: the All India series then keeps a
+#           bar under the card for its remaining days), and in any case from the day after the series' last day; the
+#           website's own schedule decides that day (matched.py)
+#   "on"    now, whatever is published and whatever the series' dates are
 #   "off"   never: Home keeps the All India series card
 # A phone learns the answer when the app is opened (and again when it is brought back after half an hour).
 MATCHED_CARD = "auto"

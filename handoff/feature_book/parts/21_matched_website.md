@@ -114,13 +114,17 @@ Only shifts that came from the website are ever hidden by the copy. A shift writ
 
 ## 2.6 Home's card and the sign-in bar: when they are on
 
-One switch decides both: Home's Matched card (in the All India series card's place) and the Matched bar on the sign-in screen. **They are also the only ways into Matched:** while the switch is off, no student can reach the Matched pages from the app, even when shifts are published.
+One switch decides both: Home's Matched card (in the All India series card's place) and the Matched bar on the sign-in screen. **They are also the only ways into Matched:** with the switch at `off`, no student can reach the Matched pages from the app, even when shifts are published.
 
 | The switch says | Meaning |
 | --- | --- |
-| `auto` | on **from the day after the All India series' last day**, India time. The app's server reads that day from the website's own schedule (`last_date` of `GET /api/series/all-india-jee`) every 15 minutes and remembers it. On {{TODAY}} the website says the series runs **{{SERIES_FIRST}} to {{SERIES_LAST}}**, so the card comes on at 00:00 on **{{CARD_DAY}}**. If the website moves the series' last day, the card's day moves with it |
-| `on` | on now, whatever the dates are |
-| `off` | never |
+| `auto` | on **as soon as one shift is published** (the owner, 26 Nov 2026: on the day of JEE Main's first shift itself). "Published" means the shift is in the app server's list (`GET /api/matched` of the app's server), so about 5 minutes after the super admin publishes it. **And in any case from the day after the All India series' last day**, India time, also with no shift: the app's server reads that day from the website's own schedule (`last_date` of `GET /api/series/all-india-jee`) every 15 minutes and remembers it. On {{TODAY}} the website says the series runs **{{SERIES_FIRST}} to {{SERIES_LAST}}**, so with no shift at all the card comes on at 00:00 on **{{CARD_DAY}}**. If the only published shift is taken back while the series still runs, the All India card comes back |
+| `on` | on now, whatever is published and whatever the dates are |
+| `off` | never, also when shifts are published |
+
+**The All India series while Matched has its place.** For the series' remaining days it is a bar right under the Matched card (Part 2.2, picture 10). There is no switch for the bar: the app shows it while the series' own `today` is not past its `last_date` (both from `GET /api/series/all-india-jee`), and drops it the day after. If the website moves the series' last day, the bar and the card's latest day move with it.
+
+**Where this rule is.** The first-shift rule and the bar were built on 26 Nov 2026 and are on the app's preview. **Production gets them with the owner's next Publish of the app.** Until then production's `auto` still means only "from {{CARD_DAY}}", and the switch `on` would be needed to show Matched earlier. Before the exam session, ask the app side to confirm that production has the rule.
 
 **Who holds the switch,** strongest first:
 
@@ -128,14 +132,14 @@ One switch decides both: Home's Matched card (in the All India series card's pla
 2. **The last word written in the app's database** (the row `matched:card`). It stays in force when the website sends no `card`. The app side can write it by hand; a `card` from the website overwrites it within 2 minutes.
 3. **The word in the app server's code:** `auto`. Used when nothing else is set. That is production's state on {{TODAY}}.
 
-**How fast a phone follows:** the app's server learns the switch within about 3 minutes. A phone asks when the app is opened, and again when it is brought back after half an hour or more; it remembers the last answer, so the right card is there from the first moment of the next launch, also without a network.
+**How fast a phone follows:** the app's server learns the switch within about 3 minutes, and a newly published shift within about 5. A phone asks when the app is opened, and again when it is brought back after half an hour or more; it remembers the last answer, so the right card is there from the first moment of the next launch, also without a network.
 
-**Two things to decide in time** (Part 3.8):
+**Good to know**
 
-- **If JEE Main shifts are held on or before {{SERIES_LAST}}**, `auto` keeps Matched out of reach until {{CARD_DAY}}. To show Matched earlier the super admin sets `on`; Home then shows the Matched card and the All India series is reached from "all india series" under Explore.
-- **If a new series is later run under the same address**, `auto` would turn the card off again until that series ends. Set `on` to keep Matched on Home.
-
-With the card on and no shift published, the card and the page say that matches will appear after every shift (Part 2.2).
+- **With `auto` nothing has to be switched by hand:** publishing the first shift is what puts Matched on Home. If that shift is published late, the card turns late.
+- **To put Matched on Home before any shift is published** (the card and the page then say that matches will appear after every shift, Part 2.2), set `on`.
+- **If a new series is later run under the same address:** while a shift is published the Matched card stays, and the bar comes back for that series' days. With no shift published, `auto` shows the All India card again until that series ends.
+- **A phone with an app version from before 26 Nov 2026's work** follows the same switch but has no bar: it shows the Matched card alone, and the series is reached from "all india series" under Explore.
 
 ## 2.7 The JEE question under ours, in the player and the solutions
 

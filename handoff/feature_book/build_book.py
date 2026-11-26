@@ -10,7 +10,7 @@ Writes  BOOK.md (the whole text in one file), book.html, JEELIVE_Student_Choice_
 So that the book cannot say something the app does not do:
   - every JSON example is run through the app server's own code (backend/choice.py, backend/matched.py);
   - the time tables are computed by backend/choice.py's own rule; the chapter table is the one in
-    memory/WEBSITE_CHOICE_NOTE.md, checked against that rule row by row;
+    memory/WEBSITE_CHOICE_NOTE.md, checked against that rule (the ratio, three hours at most) row by row;
   - the state of production and of the website is read when the book is built.
 Needs python-markdown, which is not one of the app server's packages:  pip install --target /tmp/mdlib markdown"""
 import asyncio
@@ -42,7 +42,7 @@ import choice  # noqa: E402
 import matched  # noqa: E402
 
 NAME = "JEELIVE_Student_Choice_and_Matched_Book"
-VERSION = "1"
+VERSION = "2"
 PARTS = ["00_start", "10_choice_today", "11_choice_doors", "12_choice_rest", "20_matched_student", "21_matched_website", "22_matched_admin", "30_reference"]
 PDF, MD, ZIP = HERE / f"{NAME}.pdf", HERE / "BOOK.md", ROOT / "handoff" / f"{NAME}.zip"
 IST = timezone(timedelta(hours=5, minutes=30))
@@ -78,7 +78,7 @@ def table(head, rows):
 
 def time_table():
     rows = []
-    for p, c, m in ((25, 25, 25), (10, 10, 10), (0, 0, 25), (25, 0, 0), (0, 25, 0), (5, 0, 0), (0, 1, 0), (1, 1, 1), (3, 2, 2), (20, 15, 10)):
+    for p, c, m in ((25, 25, 25), (10, 10, 10), (0, 0, 25), (25, 0, 0), (0, 25, 0), (5, 0, 0), (0, 1, 0), (1, 1, 1), (3, 2, 2), (20, 15, 10), (0, 0, 75)):
         words = " + ".join(f"{n} {SHORT[s]}" for s, n in (("Physics", p), ("Chemistry", c), ("Mathematics", m)) if n)
         parts = [f"{n * PER[s]:g}" for s, n in (("Physics", p), ("Chemistry", c), ("Mathematics", m)) if n]
         raw = p * PER["Physics"] + c * PER["Chemistry"] + m * PER["Mathematics"]
@@ -86,6 +86,7 @@ def time_table():
         sums = (" + ".join(parts) + f" = {raw:g}" if len(parts) > 1 else f"{raw:g}") + (f", rounded up to {total}" if abs(raw - total) > 1e-9 else "")
         rows.append((words, sums, f"**{label(total)}**", (p + c + m) * 4))
     assert paper_minutes(25, 25, 25) == 180 and paper_minutes(10, 10, 10) == 72 and paper_minutes(3, 2, 2) == 17 and paper_minutes(0, 0, 25) == 80
+    assert paper_minutes(0, 0, 75) == 240  # a made paper is not held at three hours (only a whole chapter test is)
     return table(["The paper", "Minutes its questions bring", "The paper's time", "Full marks"], rows)
 
 
@@ -99,21 +100,25 @@ def split_table():
 
 
 def chapters():
-    """The 81 chapter-wise tests and their minutes by the ratio, from the note to the website; every row is checked
-    against the app server's own rule."""
+    """The 81 chapter-wise tests and their minutes by the owner's rule (the ratio, three hours at most), from the note
+    to the website; every row is checked against the app server's own rule. A row: subject, number, title, questions,
+    minutes by the rule, minutes by the ratio alone."""
     subject, rows = None, []
     for line in (ROOT / "memory" / "WEBSITE_CHOICE_NOTE.md").read_text().splitlines():
         head = re.match(r"\s+(Physics|Chemistry|Mathematics) \([\d.]+ minutes a question\)", line)
         if head:
             subject = head.group(1)
             continue
-        row = re.match(r"\s+(\d+)\s+(.+?)\s+(\d+) questions\s+60 ->\s+(\d+) min\s*$", line)
+        row = re.match(r"\s+(\d+)\s+(.+?)\s+(\d+) questions\s+60 ->\s+(\d+) min(?:\s+\(the ratio alone: (\d+)\))?\s*$", line)
         if row and subject:
-            rows.append((subject, int(row[1]), row[2].strip(), int(row[3]), int(row[4])))
+            count, minutes = int(row[3]), int(row[4])
+            alone = choice.minutes_for({subject: count})
+            assert minutes == choice.chapter_test_minutes(subject, count), (row[2], count, minutes)
+            # A test held at three hours says what the ratio alone would give; no other row does.
+            assert (int(row[5]) == alone > choice.TEST_MAX_MINUTES) if row[5] else alone <= choice.TEST_MAX_MINUTES, (row[2], alone, row[5])
+            rows.append((subject, int(row[1]), row[2].strip(), count, minutes, alone))
     assert len(rows) == 81 and sum(r[3] for r in rows) == 3750, (len(rows), sum(r[3] for r in rows))
     assert [sum(1 for r in rows if r[0] == s) for s in choice.SUBJECTS] == [30, 24, 27]
-    for s, _, title, count, minutes in rows:
-        assert minutes == choice.minutes_for({s: count}), (title, count, minutes)
     return rows
 
 
@@ -122,22 +127,23 @@ def chapter_table(rows):
     for s in choice.SUBJECTS:
         mine = [r for r in rows if r[0] == s]
         out += [f'<div class="subject" markdown="1">', "", f"### {s}: {PER[s]} minutes a question ({len(mine)} tests, {sum(r[3] for r in mine)} questions)", "",
-                table(["No.", "Chapter", "Questions", "Today", "By the ratio"], [(n, title, count, "60 min", f"**{minutes} min**") for _, n, title, count, minutes in mine]), "", "</div>", ""]
+                table(["No.", "Chapter", "Questions", "Today", "By the rule"],
+                      [(n, title, count, "60 min", f"**{minutes} min**" + (f" ({alone})" if alone > minutes else "")) for _, n, title, count, minutes, alone in mine]), "", "</div>", ""]
     return "\n".join(out + ["</div>"])
 
 
 def ratio_facts(rows):
-    by_time = sorted(rows, key=lambda r: -r[4])
-    long = [r for r in by_time if r[4] > 180]
+    held = sorted((r for r in rows if r[5] > r[4]), key=lambda r: -r[5])
     short = sorted((r for r in rows if r[4] < 60), key=lambda r: r[4])
     longer, same = sum(1 for r in rows if r[4] > 60), sum(1 for r in rows if r[4] == 60)
     big = sum(1 for r in rows if r[3] >= 68)
-    top = by_time[0]
-    facts = {"LONGEST": f"{hours(top[4])} ({top[2]}, {top[3]} questions)", "SHORTER_COUNT": str(len(short))}
+    assert max(r[4] for r in rows) == choice.TEST_MAX_MINUTES == 180 and len(held) == 7 and len(short) == 11
+    facts = {"SHORTER_COUNT": str(len(short))}
     text = "\n".join([
         f"- Of the 81 tests, **{longer} get longer**, **{len(short)} get shorter**, and {'none stays' if not same else str(same) + ' stay'} at 60 minutes.",
-        f"- **The longest test becomes {hours(top[4])}** ({top[2]}, {top[3]} questions). **{len(long)} tests become longer than 3 hours:** "
-        + "; ".join(f"{r[2]} {hours(r[4])}" for r in long) + ".",
+        f"- **{len(held)} tests are held at 3 hours**; the ratio alone would give them more: " + "; ".join(f"{r[2]} ({hours(r[5])})" for r in held) + ".",
+        "- **So no chapter test is longer than a full mock (180 minutes).** The student's session, the autosave and the attempt's picture links "
+        "(`GET /attempts/<id>/assets/links`) need to last no longer than they already do for a full mock, plus the get-ready minute.",
         f"- **{len(short)} tests become shorter than today's 60 minutes:** " + "; ".join(f"{r[2]} {r[4]} min" for r in short) + ".",
         f"- {big} chapter tests have 68 questions or more. (These are the ones an older app version counted for the Dream College meter: Part 1.9.)",
     ])
@@ -217,7 +223,7 @@ def state():
     day = lambda d: f"{d.day} {d:%b %Y}"  # noqa: E731
     end = datetime.strptime(last, "%Y-%m-%d")
     facts.update(SERIES_FIRST=day(datetime.strptime(first, "%Y-%m-%d")), SERIES_LAST=day(end), CARD_DAY=day(end + timedelta(days=1)))
-    rows.append(("The website: `GET /api/series/all-india-jee`", f"{status}, {first} to {last}", f"Home's card turns to Matched on {facts['CARD_DAY']} (India time), unless the switch says otherwise"))
+    rows.append(("The website: `GET /api/series/all-india-jee`", f"{status}, {first} to {last}", f"with no shift published, Home's card turns to Matched on {facts['CARD_DAY']} (India time); a published shift turns it sooner, the switch at any time"))
     return table(["What was asked", "The answer", "What it means"], rows), facts
 
 
@@ -286,7 +292,12 @@ FOOT = ('<div style="width:100%;font-family:Figtree,Arial,sans-serif;font-size:8
         '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>')
 README = f"""# Student Choice and Matched: the complete book (v{VERSION}, {TODAY})
 
-For the JE Live website agent and the JE Live super admin. Written by the app side from the app's code as deployed on {TODAY}.
+For the JE Live website agent and the JE Live super admin. Written by the app side from the app's code on {TODAY}.
+
+New in version 2 (two decisions of the owner, 26 Nov 2026; both are on the app's preview and reach students with the next Publish):
+- A whole chapter test follows the 80 / 60 / 40 ratio and is never longer than three hours (Part 1.8).
+- Home's card turns to Matched as soon as the first shift is published; the All India series is a bar under it for its
+  remaining days (Part 2.2 picture 10, Part 2.6).
 
 - `{NAME}.pdf`: the book, with the app's screens. Start here.
 - `BOOK.md`: the same text in one plain file, for pasting into the website project's chat.

@@ -25,7 +25,7 @@
 | `GET /api/attempts/<id>` | the player: `set_id`, `questions[].id` |
 | `GET /api/attempts/<id>/results` | the result: `set_id`, the question ids, `test_kind` |
 | `GET /api/my/tests` | My Tests; the Dream College meter's first read on a new phone |
-| `GET /api/series/all-india-jee` | `last_date`: the day after it, Home's card turns to Matched |
+| `GET /api/series/all-india-jee` | `today` and `last_date`: the All India bar shows under the Matched card until `last_date`; the day after it, Home's card turns to Matched also when no shift is published |
 | the sign-in and session doors | unchanged |
 
 **The website: doors to build**
@@ -50,6 +50,7 @@ And three changes to what exists: `rules.minutes` of the chapter-wise sets (Part
 | Fewest in a random mock | 3 |
 | Marking | +4, −1, 0 |
 | Minutes a question brings | Mathematics 3.2, Physics 2.4, Chemistry 1.6; the sum rounded up |
+| Longest time of a whole chapter test (the owner's rule; the website sets it) | 180 minutes. A made paper is not cut (75 Mathematics questions: 240) |
 | Other minutes per question the website may send | 0.5 to 10 each |
 | A top per subject the website may send | 1 to 75 |
 | Random mock: number box and quick buttons | starts at 30; buttons 15, 30, 45, 60, 75 |
@@ -146,7 +147,7 @@ None of these needs an app update, except taking the tile off Home.
 | Coming soon | Jald aa raha hai. Sawaal khud chunna. Chune chapters ke sawaal dekho (bina options), jo chahiye tick karo, aur un sab ka ek hi paper banao: 75 sawaal tak. Random mock. Bas ginti batao; Physics, Chemistry aur Maths ke sawaal mile-jule aayenge, JEE Main ki tarah. Khulte hi yahin dikhega, app update kiye bina. | while a way is closed |
 | Time | Banaye hue paper ka time (later: Time kaise milta hai). Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = 3 hr. | always |
 | Time, last sentence | Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai (abhi 1 hr). | today |
-| | Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time. | the day every chapter test has its ratio time |
+| | Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time (zyada se zyada 3 hr). | the day every chapter test has its time by the rule of Part 1.8 |
 | No chapters | Chapters abhi nahi mile. Student Choice ke sawaal JEE Main ke chapter-wise sawaal hi hain. Abhi koi chapter khula nahi mila. Thodi der mein dobara dekho, ya chapter-wise tests kholo. (button: Chapter-wise tests) | the website lists no chapter-wise test |
 | Step 1 | Chapters chuno · Student Choice · Step 1 of 2 · Chapter ka naam likho… | |
 | Step 1 | Jitne chahiye utne chapter tick karo, kisi bhi subject se. Agle step mein har chune chapter ka poora test milega. | today |
@@ -182,6 +183,7 @@ None of these needs an app update, except taking the tile off Home.
 | Home | Matched with JEE Main · view all · JEE MAIN · 3 SHIFTS · 11 questions matched · 24 Jan · Shift 1, latest shift · See matched questions | shifts are published |
 | Home | JEE Main ke har shift ke baad yahan woh questions aayenge jo hamare questions se match hue. (button: Open Matched) | no shift yet |
 | Home | Dekh rahe hain… / Abhi load nahi hua. Kholo aur dobara try karo. | loading; could not load |
+| Home, the bar under the card | ALL INDIA SERIES · DAY 46 / 50 · Live today · Start today's test (also: In progress · Resume; Completed · View result; Completed · Results at 11:59 PM; Awaiting paper; Starts closed; Day ended; Live series. Before the series: 50 DAYS · Starts 9 Dec. On a narrow phone: ALL INDIA) | Matched is on and the All India series still has days |
 | Sign-in screen | Dekho | the bar |
 | Sign-in screen | Account banao ya sign in karo. Uske baad Matched paper attempt kar sakte ho. | reached from "Attempt all matched" |
 | Matched page | Matched · JEE Main · 11 questions matched in 3 shifts · SHIFT 1 · 6 of 75 matched | |
@@ -209,8 +211,8 @@ None of these needs an app update, except taking the tile off Home.
 | Student Choice, app | `frontend/app/choice/index.tsx`, `pick.tsx`, `tests.tsx`, `questions.tsx`; `frontend/src/choice/api.ts`, `search.ts`, `store.ts`, `parts.tsx`; Home's tile in `frontend/app/(tabs)/index.tsx` |
 | Dream College meter | `frontend/src/dream/store.ts` (`isFullMock`), `frontend/app/result/[id].tsx`, `backend/dream.py` |
 | Matched, server | `backend/matched.py` (the pages, the copy of the website's shifts, the card's day), `backend/app_switches.py`, started in `backend/server.py` |
-| Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
-| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (5), `test_matched_sync.py` (5): {{TESTS_LINE}}. Search: `node tests/choice_search_check.js` |
+| Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; the All India bar under the card `frontend/src/components/series/HomeSeriesBar.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
+| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5): {{TESTS_LINE}}. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py` |
 | Samples (preview only) | `backend/tests/matched_sample.py show` or `hide`; `backend/tests/choice_sample.py show` or `hide` |
 | Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`. This book was written from the code on {{TODAY}} and takes their place for readers outside the app side |
 | This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py` |
@@ -221,7 +223,7 @@ Every part of the two features carries a fixed name (`testID`; in the web previe
 
 | Screen | Names |
 | --- | --- |
-| Home | `home-tile-choice` (the tile), `home-tile-choice-badge`; `home-matched` (the card), `home-matched-total`, `home-matched-latest`, `home-matched-cta`, `home-matched-soon`, `home-matched-view-all`; `home-series-view-all` (the All India card is on instead) |
+| Home | `home-tile-choice` (the tile), `home-tile-choice-badge`; `home-matched` (the card), `home-matched-total`, `home-matched-latest`, `home-matched-cta`, `home-matched-soon`, `home-matched-view-all`; `home-series-bar` (the All India bar under the Matched card), `home-series-bar-day`, `home-series-bar-line`; `home-series-view-all` (the All India card is on instead) |
 | Sign-in screen | `entry-matched` (the bar), `entry-matched-note` (the note after "Attempt all matched") |
 | Student Choice, first screen | `choice-screen`, `choice-title`, `choice-facts`, `choice-way-chapters`, `choice-way-tests`, `choice-way-pick`, `choice-way-random`, `choice-soon`, `choice-soon-pick`, `choice-soon-random`, `choice-time`, `choice-time-physics` / `-chemistry` / `-mathematics`, `choice-time-note`, `choice-not-ready`, `choice-error`, `choice-refresh` |
 | Random mock sheet | `choice-random-sheet`, `choice-random-input`, `choice-random-quick-15` … `-75`, `choice-random-makeup`, `choice-random-rule`, `choice-random-range`, `choice-random-error`, `choice-random-make` |
@@ -255,16 +257,25 @@ curl -s https://jeelive-mobile.emergent.host/api/matched
 curl -s -o /dev/null -w "%{http_code}\n" https://jeelive-mobile.emergent.host/api/choice/bank
 # 404 = the website's Matched door is not built yet
 curl -s -o /dev/null -w "%{http_code}\n" https://jeelive.ai/api/matched
-# "last_date": the card turns the day after
+# "last_date": with no shift published, the card turns the day after
 curl -s https://jeelive.ai/api/series/all-india-jee
 ```
 
-## 3.8 Open points for the owner
+## 3.8 Decided by the owner, and still open
+
+**Decided on 26 Nov 2026** (both were open points in version 1 of this book)
+
+| The question | The owner's answer | Where |
+| --- | --- | --- |
+| Whole chapter tests by the ratio as given, or with a longest time? | **A longest time of three hours.** 7 tests are held at 180 minutes; no chapter test is longer than a full mock | Part 1.8 |
+| When should Matched appear if JEE Main shifts are held before the All India series ends? | **On the day of the first shift itself:** the card turns to Matched as soon as the first shift is published; the series is a bar under it for its remaining days | Part 2.6 |
+
+**Still open**
 
 | # | The question | What happens until it is answered |
 | --- | --- | --- |
-| 1 | **Whole chapter tests by the ratio as given, or with a longest time?** As given, the longest test becomes {{LONGEST}} and {{SHORTER_COUNT}} tests become shorter than today's 60 minutes (Part 1.8). Asked on 26 Nov 2026 | nothing changes: every chapter test stays 60 minutes |
-| 2 | **When should Matched appear if JEE Main shifts are held on or before {{SERIES_LAST}}?** `auto` shows it from {{CARD_DAY}}; before that it cannot be reached from the app. `on` shows it at once, in the All India card's place | `auto` |
+| 1 | **Should the three hours also be the longest time of a paper the student makes?** By the ratio alone 75 Mathematics questions get 240 minutes. (A top of 25 questions per subject, door A's `max_per_subject`, would also keep every made paper within 180.) | made papers are not cut |
+| 2 | **A shortest time for whole chapter tests?** By the rule {{SHORTER_COUNT}} tests become shorter than today's 60 minutes; the shortest gets 4 minutes for its 2 questions (Part 1.8) | the rule as given: no shortest time |
 | 3 | **Should a Matched paper ever count for the Dream College meter?** Today it would, if it had 68 questions or more and 150 marks or more. Chapter tests and Student Choice papers never count | it would count; a shift's paper is far smaller than that |
 | 4 | **The app side's suggestions for made papers** (Part 1.6): fresh questions first in a random mock; a daily limit; removing papers never started; no leaderboard | the website agent should not build them unasked |
 | 5 | **The wording of `source` and `tag` on Matched** (Part 2.8) | the super admin writes what seems right |

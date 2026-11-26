@@ -78,9 +78,52 @@ def test_the_card_is_on_from_the_day_after_the_series_ends():
     assert not matched.over("2027-01-27", "2027-01-26") and not matched.over("2027-01-27", "2027-01-27")
     assert matched.over("2027-01-27", "2027-01-28") and matched.over("2027-01-27", "2027-04-02")
     assert not matched.over(None, "2027-01-28")  # the series' last day is not known: the All India card stays
+    # "auto": with a published shift the card is on while the series still runs; with none, by the series' last day.
+    assert matched.auto_on(True, "2027-01-27", "2027-01-21") and matched.auto_on(True, None, "2027-01-21")
+    assert not matched.auto_on(False, "2027-01-27", "2027-01-27") and matched.auto_on(False, "2027-01-27", "2027-01-28")
+    assert not matched.auto_on(False, None, "2027-01-28")
     # The switch kept in Mongo wins over the one in the code, but only when it is one of the three words.
     assert matched.card_mode("on", "auto") == "on" and matched.card_mode("off", "on") == "off" and matched.card_mode("auto", "on") == "auto"
     assert matched.card_mode(None, "auto") == "auto" and matched.card_mode("yes", "off") == "off" and matched.card_mode(True, "off") == "off"
+
+
+class _Rows:
+    """A stand-in for a Mongo collection: `find().sort().to_list()` gives the documents, `find_one()` the first."""
+    def __init__(self, docs):
+        self.docs = docs
+
+    def find(self, *_):
+        return self
+
+    def sort(self, *_):
+        return self
+
+    async def to_list(self, _):
+        return self.docs
+
+    async def find_one(self, *_):
+        return self.docs[0] if self.docs else None
+
+
+def test_the_first_published_shift_turns_the_card_on_while_the_series_runs(monkeypatch):
+    monkeypatch.setattr(matched, "ist_day", lambda: "2027-01-21")  # a day of the series (it ends on 27 Jan)
+    monkeypatch.setattr(matched, "_series", {"last": "2027-01-27", "loaded": True})
+    shift = {"_id": "2027-01-21-s1", "published": True, "items": [item(1)]}
+
+    def card(shifts, owner=None, code="auto"):
+        # Nothing remembered from the call before: neither the owner's word nor the list of shifts.
+        monkeypatch.setattr(matched, "_owner", {"value": None, "read": float("-inf")})
+        monkeypatch.setattr(matched, "cache", matched.MetadataCache())
+        db = type("Db", (), {"matched_shifts": _Rows(shifts), "rf_meta": _Rows([{"value": owner}] if owner else [])})()
+        return asyncio.run(matched.card_on(db, code))
+
+    assert not card([])  # no shift yet: the All India card stays
+    assert card([shift])  # the first shift is published: Matched, the same day
+    assert not card([{"_id": "not-a-shift", "published": True, "items": [item(1)]}])  # nothing the list can show
+    assert not card([shift], owner="off") and not card([shift], code="off")  # "off" still wins
+    assert card([], owner="on") and card([], code="on")
+    monkeypatch.setattr(matched, "ist_day", lambda: "2027-01-28")  # the series is over: on, also with no shift
+    assert card([])
 
 
 def test_public_routes_answer_without_sign_in():

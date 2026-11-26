@@ -12,8 +12,9 @@ the app knows, in the shapes and sizes it can show, leave the server. A badly ma
 counted); it can never break the screen. A shift is shown only while its `published` is true.
 
 This file also says when Home shows the Matched card in place of the All India series card (`card_on`, asked for by
-app_switches.py): from the day after the series' last day. That day comes from the website's own public schedule, read
-here every 15 minutes and kept in Mongo, so a restart or a website outage still knows it."""
+app_switches.py): from the moment the first shift is published (the series then keeps a bar under the card for its
+remaining days), and in any case from the day after the series' last day. That day comes from the website's own public
+schedule, read here every 15 minutes and kept in Mongo, so a restart or a website outage still knows it."""
 import asyncio
 import logging
 import os
@@ -196,6 +197,18 @@ def over(last, today: str) -> bool:
     return bool(last) and today > last
 
 
+def auto_on(shift: bool, last, today: str) -> bool:
+    """ "auto" (the owner, 26 Nov 2026): the card is on as soon as the first shift is published, on the day of that
+    shift itself; with no shift at all, from the day after the series' last day."""
+    return shift or over(last, today)
+
+
+async def has_shift(db) -> bool:
+    """Whether a shift is published: the list GET /api/matched answers with (kept for a minute) is not empty."""
+    data, _ = await cache.get_or_load("index", lambda: load_index(db), ttl=60)
+    return bool(data["shifts"])
+
+
 async def _load_copy(db):
     row = await db.rf_meta.find_one({"_id": SERIES_META}, {"value": 1})
     value = row.get("value") if row else None
@@ -218,17 +231,20 @@ async def _owner_mode(db):
 
 
 async def card_on(db, code: str) -> bool:
-    """`code` is the switch in the code (app_switches.MATCHED_CARD): "on", "off", or "auto" = from the day after the series
-    ends. The same three words kept in Mongo win over it, so the card can be switched without a server publish.
+    """`code` is the switch in the code (app_switches.MATCHED_CARD): "on", "off", or "auto" = from the first published
+    shift, and in any case from the day after the series ends (`auto_on`). The same three words kept in Mongo win over
+    it, so the card can be switched without a server publish.
     Never waits for the website and never fails: when nothing is known yet the answer is no."""
-    mode = code
+    mode, shift = code, False
     try:
         mode = card_mode(await _owner_mode(db), code)
-        if mode == "auto" and not _series["loaded"]:
-            await _load_copy(db)
+        if mode == "auto":
+            if not _series["loaded"]:
+                await _load_copy(db)
+            shift = await has_shift(db)
     except Exception as e:  # noqa: BLE001 - the switches answer also carries other switches; it must still go out
         logger.warning("matched: card switch not read: %s", type(e).__name__)
-    return over(_series["last"], ist_day()) if mode == "auto" else mode == "on"
+    return auto_on(shift, _series["last"], ist_day()) if mode == "auto" else mode == "on"
 
 
 async def refresh_series(db, client) -> bool:

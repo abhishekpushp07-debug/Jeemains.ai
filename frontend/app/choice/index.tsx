@@ -18,7 +18,7 @@ import { DCard, DSheet, IconCircle, Pill, ScreenHeader, SectionLabel, StatusLine
 import { Glyph } from "@/src/components/Glyph";
 import { ScreenMotion } from "@/src/motion";
 import { colors, fonts, noOutline, space, subjectColor } from "@/src/theme";
-import { Bank, NONE, SHORT, makePaper, minutesFor, splitOf, timeLabel } from "@/src/choice/api";
+import { Bank, SHORT, TEST_MAX_MINUTES, makePaper, minutesFor, splitOf, testMinutes, timeLabel } from "@/src/choice/api";
 import { Makeup, useBank } from "@/src/choice/parts";
 import { chosenChapters, pickedCount, useChoice } from "@/src/choice/store";
 
@@ -93,9 +93,10 @@ export default function StudentChoice() {
   const ticked = chosenChapters().filter(id => all.some(c => c.id === id)).length;
   const making = !!open && (!!open.pick || !!open.random); // the website can make a paper
   // A whole chapter test has the time the website gives it. The owner's rule for it is the same ratio (what its
-  // questions bring, by its subject): `byRatio` = the website gives every chapter test that time (a minute's rounding
-  // apart at most), and the note below says so by itself from that day on. Until then: the one time they all have.
-  const tests = open ? open.subjects.flatMap(s => s.chapters.flatMap(c => (c.test ? [{ now: c.test.minutes, ratio: minutesFor({ ...NONE, [s.name]: c.count }, open.minutes) }] : []))) : [];
+  // questions bring, by its subject), three hours at most: `byRatio` = the website gives every chapter test that time
+  // (a minute's rounding apart at most), and the note below says so by itself from that day on. Until then: the one
+  // time they all have.
+  const tests = open ? open.subjects.flatMap(s => s.chapters.flatMap(c => (c.test ? [{ now: c.test.minutes, ratio: testMinutes(s.name, c.count, open.minutes) }] : []))) : [];
   const byRatio = tests.length > 0 && tests.every(t => !!t.now && Math.abs(t.now - t.ratio) <= 1);
   const testTimes = [...new Set(tests.map(t => t.now).filter(Boolean))];
   return <ScreenMotion>
@@ -150,7 +151,7 @@ export default function StudentChoice() {
                     <T w="heavy" size={14}>{timeLabel(Math.ceil(25 * open.minutes[s.name]))}</T>
                   </View>)}
                   <T testID="choice-time-note" size={12} color={colors.muted} style={styles.timeNote}>Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = {timeLabel(minutesFor({ Physics: 25, Chemistry: 25, Mathematics: 25 }, open.minutes))}.{byRatio
-                    ? " Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time."
+                    ? ` Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time (zyada se zyada ${timeLabel(TEST_MAX_MINUTES)}).`
                     : making ? "" : ` Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai${testTimes.length === 1 ? ` (abhi ${timeLabel(testTimes[0] as number)})` : ""}.`}</T>
                 </DCard>
               </View>

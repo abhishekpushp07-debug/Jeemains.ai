@@ -190,6 +190,16 @@ def minutes_for(counts: dict, per: dict = MINUTES) -> int:
     return int(-(-round(total, 4) // 1))
 
 
+# The owner's rule for a WHOLE chapter test (26 Nov 2026): the same ratio, and never longer than three hours.
+TEST_MAX_MINUTES = 180
+
+
+def chapter_test_minutes(subject: str, count: int, per: dict = MINUTES) -> int:
+    """The time the owner's rule gives a whole chapter test: what its questions bring, three hours at most. The website
+    sets the real time (the set's rules.minutes); the note to the website and the book are checked against this."""
+    return min(TEST_MAX_MINUTES, minutes_for({subject: count}, per))
+
+
 class NeedsSession(Exception):
     """The website did not accept this student's session (its access cookie has run out): the app renews it and asks again."""
 

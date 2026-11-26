@@ -106,6 +106,12 @@ def test_time_is_given_by_subject_and_rounded_up():
     assert choice.minutes_for({"Physics": 10, "Chemistry": 10, "Mathematics": 10}) == 72
     assert choice.minutes_for({"Mathematics": 1}) == 4 and choice.minutes_for({"Chemistry": 1}) == 2 and choice.minutes_for({"Physics": 5}) == 12
     assert choice.minutes_for({}) == 0
+    # A whole chapter test: the same ratio, three hours at most (86 Maths questions would bring 276 minutes).
+    assert choice.chapter_test_minutes("Mathematics", 86) == 180 and choice.chapter_test_minutes("Physics", 76) == 180
+    assert choice.chapter_test_minutes("Physics", 75) == 180 and choice.chapter_test_minutes("Physics", 74) == 178
+    assert choice.chapter_test_minutes("Chemistry", 103) == 165 and choice.chapter_test_minutes("Chemistry", 2) == 4
+    # A made paper is not cut: 75 Maths questions bring their 240 minutes.
+    assert choice.minutes_for({"Mathematics": 75}) == 240
 
 
 def test_a_question_goes_out_without_options_answer_or_solution():

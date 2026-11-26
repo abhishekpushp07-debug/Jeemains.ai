@@ -2,6 +2,7 @@ JEELIVE.AI — note for the website project: STUDENT CHOICE (the chapter-wise qu
 (copy and paste this into the website project's chat)
 =========================================================================================================
 Written 26 Nov 2026, part 4 rewritten later the same day (the owner decided: whole chapter tests get the ratio time).
+PART 4 CHANGED ONCE MORE ON 26 NOV: the owner added a LONGEST TIME for a whole chapter test: THREE HOURS (180 minutes).
 THIS REPLACES the Student Choice notes written earlier the same day.
 THE WEBSITE IS ASKED FOR TWO THINGS: (1) three doors (part 2) so that students can choose questions; (2) new minutes on
 the chapter-wise sets (part 4). They do not depend on each other.
@@ -29,7 +30,8 @@ STATUS, PLAINLY
 - NOT checked: anything on a real phone; doors A, B, C (they do not exist: the app's question list and "Paper banao"
   were last walked against a made-up sample on 26 Nov, with typed questions only, never with picture questions).
   The first answer of your doors on a test setup is the first true end-to-end run: please tell us before students.
-- THE TIME OF A WHOLE CHAPTER TEST is still 60 minutes for every chapter. The owner wants the ratio there too: part 4.
+- THE TIME OF A WHOLE CHAPTER TEST is still 60 minutes for every chapter. The owner wants the ratio there too, three
+  hours at most: part 4.
 
 1. What our server reads today (so you know the load, and what must not change without telling us)
 --------------------------------------------------------------------------------------------------
@@ -145,21 +147,24 @@ DOOR C — make the paper:   POST /api/choice/papers        (the student's own r
   the first time reads that list to find the student's full mocks; without test_kind it has to open the paper's page
   (GET /api/my/sets/<set_id>) for every long paper in the list, up to 12 extra reads, once.
 
-4. THE OWNER'S DECISION (26 Nov 2026): a WHOLE chapter test gets its time by the same ratio — a change on the website
+4. THE OWNER'S DECISION (26 Nov 2026): a WHOLE chapter test gets its time by the same ratio, THREE HOURS AT MOST — a
+   change on the website
 ---------------------------------------------------------------------------------------------------------------------
-The owner asked for it in the app: "Make whole chapter tests follow the 80/60/40 time ratio". The app cannot do it:
+The owner asked for it in the app: "Make whole chapter tests follow the 80/60/40 time ratio". Told what that gives
+(below), he added the same day: "a longest time of three hours". The app cannot do it:
 an attempt's deadline is the website's, from the set's rules.minutes. So this is asked of the website. NOT DONE YET:
 on 26 Nov every chapter-wise test still has 60 minutes.
 
 WHAT TO CHANGE
 - For every published JEE Main chapter-wise set (test_kind "chapter"):
-      rules.minutes = (the set's count) x (minutes a question of its chapter_subject), rounded UP to a whole minute
+      rules.minutes = (the set's count) x (minutes a question of its chapter_subject), rounded UP to a whole minute,
+                      and NEVER MORE THAN 180 (three hours)
       Physics 2.4    Chemistry 1.6    Mathematics 3.2        (25 Maths = 80 min, 25 Physics = 60, 25 Chemistry = 40)
 - Keep it true: when a chapter's question count changes, its minutes change with it.
 - A new attempt gets the new time. An attempt that is already running keeps the deadline it has.
 - A whole number of minutes, please (the app's pages show rules.minutes as it is).
 
-WHAT IT GIVES, chapter by chapter (counts as on 26 Nov 2026; today -> by the ratio)
+WHAT IT GIVES, chapter by chapter (counts as on 26 Nov 2026; today -> by the rule; 7 tests are held at 180)
   Physics (2.4 minutes a question)
      1  Units, Dimensions and Errors                                68 questions    60 -> 164 min
      2  Kinematics                                                  66 questions    60 -> 159 min
@@ -176,7 +181,7 @@ WHAT IT GIVES, chapter by chapter (counts as on 26 Nov 2026; today -> by the rat
     13  Kinetic Theory of Gases                                     41 questions    60 ->  99 min
     14  Oscillations                                                27 questions    60 ->  65 min
     15  Waves and Sound                                             30 questions    60 ->  72 min
-    16  Electrostatics                                              76 questions    60 -> 183 min
+    16  Electrostatics                                              76 questions    60 -> 180 min   (the ratio alone: 183)
     17  Capacitors                                                  30 questions    60 ->  72 min
     18  Current Electricity                                         55 questions    60 -> 132 min
     19  Magnetic Effects of Current                                 62 questions    60 -> 149 min
@@ -225,7 +230,7 @@ WHAT IT GIVES, chapter by chapter (counts as on 26 Nov 2026; today -> by the rat
      6  Quadratic Equations                                         49 questions    60 -> 157 min
      7  Permutations and Combinations                               53 questions    60 -> 170 min
      8  Binomial Theorem                                            50 questions    60 -> 160 min
-     9  Sequences and Series                                        75 questions    60 -> 240 min
+     9  Sequences and Series                                        75 questions    60 -> 180 min   (the ratio alone: 240)
     10  Straight Lines                                              50 questions    60 -> 160 min
     11  Circles                                                     44 questions    60 -> 141 min
     12  Parabola                                                    23 questions    60 ->  74 min
@@ -234,27 +239,30 @@ WHAT IT GIVES, chapter by chapter (counts as on 26 Nov 2026; today -> by the rat
     15  Limits                                                      29 questions    60 ->  93 min
     16  Statistics                                                  29 questions    60 ->  93 min
     17  Probability                                                 51 questions    60 -> 164 min
-    18  Matrices and Determinants                                   86 questions    60 -> 276 min
+    18  Matrices and Determinants                                   86 questions    60 -> 180 min   (the ratio alone: 276)
     19  Inverse Trigonometric Functions                             24 questions    60 ->  77 min
     20  Continuity and Differentiability                            41 questions    60 -> 132 min
     21  Application of Derivatives                                  37 questions    60 -> 119 min
     22  Indefinite Integration                                      15 questions    60 ->  48 min
-    23  Definite Integration                                        73 questions    60 -> 234 min
+    23  Definite Integration                                        73 questions    60 -> 180 min   (the ratio alone: 234)
     24  Area under Curves                                           45 questions    60 -> 144 min
-    25  Differential Equations                                      70 questions    60 -> 224 min
-    26  Vector Algebra                                              67 questions    60 -> 215 min
-    27  Three-Dimensional Geometry                                  82 questions    60 -> 263 min
+    25  Differential Equations                                      70 questions    60 -> 180 min   (the ratio alone: 224)
+    26  Vector Algebra                                              67 questions    60 -> 180 min   (the ratio alone: 215)
+    27  Three-Dimensional Geometry                                  82 questions    60 -> 180 min   (the ratio alone: 263)
 
-PLEASE LOOK AT THESE BEFORE TURNING IT ON (consequences of the rule as the owner gave it. He was told them by the
-app side on 26 Nov and had not answered when this was written)
-- The longest test becomes 4 h 36 min (Matrices and Determinants, 86 questions). 7 tests become longer than 3 hours:
-  Matrices and Determinants 4 h 36 min; Three-Dimensional Geometry 4 h 23 min; Sequences and Series 4 h 00 min; Definite Integration 3 h 54 min; Differential Equations 3 h 44 min; Vector Algebra 3 h 35 min; Electrostatics 3 h 03 min.
+WHAT THE RULE DOES (the owner was told what the ratio alone gives on 26 Nov, and answered the same day with the
+longest time of three hours)
+- 7 tests are HELD AT 3 HOURS; the ratio alone would give them more:
+  Matrices and Determinants (4 h 36 min by the ratio alone); Three-Dimensional Geometry (4 h 23 min); Sequences and Series (4 h 00 min); Definite Integration (3 h 54 min); Differential Equations (3 h 44 min); Vector Algebra (3 h 35 min); Electrostatics (3 h 03 min).
+- So NO chapter test is longer than a full mock (180 minutes): the student's session, the autosave and the attempt's
+  picture links (GET /attempts/<id>/assets/links) need to last no longer than they already do for a full mock (plus
+  the get-ready minute).
 - 11 tests become SHORTER than today's 60 minutes:
   Miscellaneous (beyond the current syllabus) 4 min; Magnetism and Matter 17 min; Redox Reactions 26 min; Thermal Properties of Matter 39 min; Centre of Mass, Momentum and Collisions 41 min; Basic Algebra (Inequalities, Modulus, Logarithms) 42 min; Ionic Equilibrium 45 min; Indefinite Integration 48 min; Chemical Equilibrium 50 min; Alcohols, Phenols and Ethers 52 min; Surface Tension 53 min.
-- The owner gave the ratio without a longest time. If he later wants one (for example "never more than 3 hours"), it
-  is again only rules.minutes on your side; the app shows whatever you set.
-- For the longer attempts, on your side: the student's session, the autosave and the attempt's picture links
-  (GET /attempts/<id>/assets/links) must last the whole attempt (up to 4 h 36 min plus the get-ready minute).
+  The owner has not asked for a shortest time. If he does, it is again only rules.minutes on your side.
+- THE LONGEST TIME IS FOR WHOLE CHAPTER TESTS ONLY. A paper the student makes (part 2) keeps the plain ratio: 75
+  Mathematics questions get 240 minutes, and the app shows the student that time before the paper exists. Do NOT cut
+  a made paper unless the owner says so (it is an open question to him); the app would have to change with it.
 - It is the same set as in your Chapter-wise section, so that section (website and app) shows the new time too.
 
 WHAT THE APP DOES WITH IT (nothing else is needed from you)
@@ -264,11 +272,13 @@ WHAT THE APP DOES WITH IT (nothing else is needed from you)
 - Student Choice's list of chapter tests shows each test's minutes from your chapter-wise list (part 1), a few minutes
   behind at most. Minutes that are not a whole number are shown rounded DOWN (163.2 -> 163), never more than you give.
 - Student Choice's first screen says "Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)" today.
-  The day every chapter test has its ratio time (a minute's rounding apart at most) the sentence changes by itself to
-  "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time."
-- Checked on 26 Nov on the web preview with your list answered in the browser with the ratio times (16 Physics
-  questions showed 39 min, the sentence changed). NOT checked with the real website (nothing is changed there yet),
-  and the app side has never run an attempt longer than a full mock (180 min).
+  The day every chapter test has its time by the rule above (the ratio, 180 at most; a minute's rounding apart at
+  most) the sentence changes by itself to
+  "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time (zyada se zyada 3 hr)."
+  (With the ratio alone, without the 180, the sentence does NOT change: the rule is the two together.)
+- Checked on 26 Nov on the web preview with your list answered in the browser: with the rule's times (81 tests, the
+  longest 180 min, the shortest 4) the sentence changed; with the ratio alone (the longest 276) it did not. NOT
+  checked with the real website (nothing is changed there yet).
 
 5. What our side does (for your information)
 --------------------------------------------

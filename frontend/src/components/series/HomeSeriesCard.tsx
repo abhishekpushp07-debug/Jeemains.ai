@@ -12,7 +12,8 @@ import { DayInfo, Series, Streak, dayAction, seriesDays, skippedCount } from "@/
 
 type CardState = { tone: SeriesTone; right: string; status: string; title: string; meta: string; action: { label: string; to: string; icon: any } };
 
-function cardState(s: Series | null, days: DayInfo[]): CardState {
+/** What the series has for the student right now: Home's big card and its bar (HomeSeriesBar) say the same thing. */
+export function cardState(s: Series | null, days: DayInfo[]): CardState {
   const meta = "75 Q · 180 min · +4 / −1";
   if (!s) return { tone: "today", right: "", status: "All India JEE", title: "Checking today’s paper…", meta, action: { label: "Open series hub", to: "/live", icon: "arrow-right" } };
   const n = seriesDays(s); // from the website: changes the moment the owner changes the schedule

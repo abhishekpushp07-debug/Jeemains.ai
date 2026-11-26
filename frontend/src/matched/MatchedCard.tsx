@@ -1,6 +1,6 @@
 // "Matched: JEE Mains questions matched with ours", in its four places: Home's card (it takes the All India series card's
-// place once the series is over), the bar on the sign-in screen, the card at the top of the Matched page, and the card at
-// the top of a shift, which leads to the shift's real paper on jeelive.ai ("Attempt all matched").
+// place from the first published shift), the bar on the sign-in screen, the card at the top of the Matched page, and the
+// card at the top of a shift, which leads to the shift's real paper on jeelive.ai ("Attempt all matched").
 import React from "react";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
 import { useRouter } from "expo-router";
