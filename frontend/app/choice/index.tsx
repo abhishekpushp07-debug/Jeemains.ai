@@ -18,7 +18,7 @@ import { DCard, DSheet, IconCircle, Pill, ScreenHeader, SectionLabel, StatusLine
 import { Glyph } from "@/src/components/Glyph";
 import { ScreenMotion } from "@/src/motion";
 import { colors, fonts, noOutline, space, subjectColor } from "@/src/theme";
-import { Bank, SHORT, makePaper, minutesFor, splitOf, timeLabel } from "@/src/choice/api";
+import { Bank, NONE, SHORT, makePaper, minutesFor, splitOf, timeLabel } from "@/src/choice/api";
 import { Makeup, useBank } from "@/src/choice/parts";
 import { chosenChapters, pickedCount, useChoice } from "@/src/choice/store";
 
@@ -92,8 +92,12 @@ export default function StudentChoice() {
   // Only chapters the bank still has count (one may have gone since it was ticked).
   const ticked = chosenChapters().filter(id => all.some(c => c.id === id)).length;
   const making = !!open && (!!open.pick || !!open.random); // the website can make a paper
-  // A whole chapter test keeps the website's own time: said here when every test has the same.
-  const testTimes = [...new Set(all.map(c => c.test?.minutes).filter(Boolean))];
+  // A whole chapter test has the time the website gives it. The owner's rule for it is the same ratio (what its
+  // questions bring, by its subject): `byRatio` = the website gives every chapter test that time (a minute's rounding
+  // apart at most), and the note below says so by itself from that day on. Until then: the one time they all have.
+  const tests = open ? open.subjects.flatMap(s => s.chapters.flatMap(c => (c.test ? [{ now: c.test.minutes, ratio: minutesFor({ ...NONE, [s.name]: c.count }, open.minutes) }] : []))) : [];
+  const byRatio = tests.length > 0 && tests.every(t => !!t.now && Math.abs(t.now - t.ratio) <= 1);
+  const testTimes = [...new Set(tests.map(t => t.now).filter(Boolean))];
   return <ScreenMotion>
     <View testID="choice-screen" style={{ flex: 1, backgroundColor: colors.surface, paddingTop: insets.top + space.sm }}>
       <ScreenHeader testID="choice-header" title="Student Choice" eyebrow={making ? "Apna paper khud banao" : "Apne chapters, apni marzi"} backTestID="choice-back"
@@ -137,7 +141,7 @@ export default function StudentChoice() {
                 <T size={12} color={colors.muted} style={{ lineHeight: 17 }}>Khulte hi yahin dikhega, app update kiye bina.</T>
               </DCard> : null}
               <View style={{ gap: space.md }}>
-                <SectionLabel title={making ? "Time kaise milta hai" : "Banaye hue paper ka time"} />
+                <SectionLabel title={making || byRatio ? "Time kaise milta hai" : "Banaye hue paper ka time"} />
                 <DCard testID="choice-time" style={{ gap: 0, paddingVertical: space.xs }}>
                   {open.subjects.map(s => <View key={s.name} testID={`choice-time-${s.name.toLowerCase()}`} style={styles.time}>
                     <View style={[styles.dot, { backgroundColor: subjectColor(s.name) }]} />
@@ -145,8 +149,9 @@ export default function StudentChoice() {
                     <T size={12.5} color={colors.muted}>25 sawaal = </T>
                     <T w="heavy" size={14}>{timeLabel(Math.ceil(25 * open.minutes[s.name]))}</T>
                   </View>)}
-                  <T testID="choice-time-note" size={12} color={colors.muted} style={styles.timeNote}>Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = {timeLabel(minutesFor({ Physics: 25, Chemistry: 25, Mathematics: 25 }, open.minutes))}.{making ? ""
-                    : ` Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai${testTimes.length === 1 ? ` (abhi ${timeLabel(testTimes[0] as number)})` : ""}.`}</T>
+                  <T testID="choice-time-note" size={12} color={colors.muted} style={styles.timeNote}>Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = {timeLabel(minutesFor({ Physics: 25, Chemistry: 25, Mathematics: 25 }, open.minutes))}.{byRatio
+                    ? " Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time."
+                    : making ? "" : ` Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai${testTimes.length === 1 ? ` (abhi ${timeLabel(testTimes[0] as number)})` : ""}.`}</T>
                 </DCard>
               </View>
             </>}

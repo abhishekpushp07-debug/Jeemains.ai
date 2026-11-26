@@ -62,6 +62,11 @@ def _whole(value, low: int, top: int):
     return int(value) if isinstance(value, (int, float)) and not isinstance(value, bool) and value == int(value) and low <= value <= top else None
 
 
+def _minutes(value):
+    """A test's time in whole minutes, never more than the website gives (163.2 -> 163). None = no time limit."""
+    return int(value) if isinstance(value, (int, float)) and not isinstance(value, bool) and 1 <= value <= 1000 else None
+
+
 def _size(value):
     """A picture's width or height in print points (the website's pieces are sized so): a positive number."""
     return round(float(value), 1) if isinstance(value, (int, float)) and not isinstance(value, bool) and 0 < value <= 20000 else None
@@ -91,7 +96,7 @@ def shape_test(value):
     correct, wrong = _whole(value.get("correct"), 1, 20), _whole(value.get("wrong"), -20, 0)
     if not page or not marks or correct is None or wrong is None:
         return None
-    return {"page": page, "minutes": _whole(value.get("minutes"), 1, 1000), "correct": correct, "wrong": wrong, "marks": marks}
+    return {"page": page, "minutes": _minutes(value.get("minutes")), "correct": correct, "wrong": wrong, "marks": marks}
 
 
 def chapter_tests(subject: str, pages: list) -> list:

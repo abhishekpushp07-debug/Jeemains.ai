@@ -92,6 +92,10 @@ def test_making_a_paper_opens_only_when_the_website_says_so():
     own = {"subjects": [{"name": "Physics", "chapters": [chapter()]}]}
     assert (choice.shape_bank(own)["pick"], choice.shape_bank(own)["random"]) == (True, True)
     assert (choice.shape_bank({**own, "pick": False})["pick"], choice.shape_bank({**own, "random": False})["random"]) == (False, False)
+    # A test's time follows the website whatever it sets (the owner's ratio gives 164 minutes for 68 Physics questions):
+    # whole minutes, never more than the website gives; no time or a senseless one = no time limit.
+    timed = lambda m: choice.shape_test({"page": 1, "maximum": 272, "correct": 4, "wrong": -1, "minutes": m})["minutes"]
+    assert [timed(m) for m in (60, 60.0, 164, 163.2, 276, 4, 0.5, 0, None, "60", True, 1001)] == [60, 60, 164, 163, 276, 4, None, None, None, None, None, None]
     assert choice.shape_test(None) is None and choice.shape_test({"page": 0, "maximum": 272, "correct": 4, "wrong": -1}) is None
     assert choice.shape_test({"page": 1, "maximum": 272, "correct": 4, "wrong": 1}) is None and choice.shape_test({"page": 1, "maximum": 272.5, "correct": 4, "wrong": -1}) is None
 

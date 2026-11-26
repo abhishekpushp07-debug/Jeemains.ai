@@ -1,7 +1,10 @@
 JEELIVE.AI — note for the website project: STUDENT CHOICE (the chapter-wise questions, the student's own way)
 (copy and paste this into the website project's chat)
 =========================================================================================================
-Written 26 Nov 2026. THIS REPLACES the Student Choice note written earlier the same day.
+Written 26 Nov 2026, part 4 rewritten later the same day (the owner decided: whole chapter tests get the ratio time).
+THIS REPLACES the Student Choice notes written earlier the same day.
+THE WEBSITE IS ASKED FOR TWO THINGS: (1) three doors (part 2) so that students can choose questions; (2) new minutes on
+the chapter-wise sets (part 4). They do not depend on each other.
 What changed: the owner corrected the app side. Student Choice has NO question bank of its own: its questions ARE the
 JEE Main chapter-wise questions the website already has. So the first note's "door 1" (a bank of subjects and
 chapters) is NOT needed. A chapter in Student Choice is a chapter-wise test of yours, under that test's own id.
@@ -11,7 +14,7 @@ STATUS, PLAINLY
   your 81 chapter-wise tests (Physics 30, Chemistry 24, Mathematics 27; 3,750 questions on 26 Nov). The student ticks
   chapters (kept on the phone) and takes each ticked chapter's WHOLE test, one after another: the same set, the same
   page, the same 60 minutes, the same result as from your Chapter-wise section. Each row shows the student's own state
-  of that test (Start / Resume / Result).
+  of that test (Start / Resume / Result). A search box finds a chapter by name in all three subjects (on the phone).
 - DOES NOT WORK YET, and cannot without the website:
     (a) seeing a chapter's questions WITHOUT options and ticking the ones wanted;
     (b) one paper made of the ticked questions (from one or many chapters), 75 at most;
@@ -26,6 +29,7 @@ STATUS, PLAINLY
 - NOT checked: anything on a real phone; doors A, B, C (they do not exist: the app's question list and "Paper banao"
   were last walked against a made-up sample on 26 Nov, with typed questions only, never with picture questions).
   The first answer of your doors on a test setup is the first true end-to-end run: please tell us before students.
+- THE TIME OF A WHOLE CHAPTER TEST is still 60 minutes for every chapter. The owner wants the ratio there too: part 4.
 
 1. What our server reads today (so you know the load, and what must not change without telling us)
 --------------------------------------------------------------------------------------------------
@@ -141,14 +145,130 @@ DOOR C — make the paper:   POST /api/choice/papers        (the student's own r
   the first time reads that list to find the student's full mocks; without test_kind it has to open the paper's page
   (GET /api/my/sets/<set_id>) for every long paper in the list, up to 12 extra reads, once.
 
-4. One thing only the owner can decide (nothing is asked of the website unless he says so)
------------------------------------------------------------------------------------------
-A WHOLE chapter test keeps the website's own time: every chapter-wise test has 60 minutes today, whatever its length
-(68 Physics questions in 60 minutes; the owner's ratio above would give 164). The app cannot change a set's time, so
-in Student Choice a whole chapter test runs 60 minutes and the app says so ("poore chapter test ka time uske page par
-likha hota hai"). The owner's ratio applies to MADE papers (door C). If the owner wants it on whole chapter tests
-too, that is a change of rules.minutes on the chapter-wise sets on the website, and it changes the Chapter-wise
-section as well.
+4. THE OWNER'S DECISION (26 Nov 2026): a WHOLE chapter test gets its time by the same ratio — a change on the website
+---------------------------------------------------------------------------------------------------------------------
+The owner asked for it in the app: "Make whole chapter tests follow the 80/60/40 time ratio". The app cannot do it:
+an attempt's deadline is the website's, from the set's rules.minutes. So this is asked of the website. NOT DONE YET:
+on 26 Nov every chapter-wise test still has 60 minutes.
+
+WHAT TO CHANGE
+- For every published JEE Main chapter-wise set (test_kind "chapter"):
+      rules.minutes = (the set's count) x (minutes a question of its chapter_subject), rounded UP to a whole minute
+      Physics 2.4    Chemistry 1.6    Mathematics 3.2        (25 Maths = 80 min, 25 Physics = 60, 25 Chemistry = 40)
+- Keep it true: when a chapter's question count changes, its minutes change with it.
+- A new attempt gets the new time. An attempt that is already running keeps the deadline it has.
+- A whole number of minutes, please (the app's pages show rules.minutes as it is).
+
+WHAT IT GIVES, chapter by chapter (counts as on 26 Nov 2026; today -> by the ratio)
+  Physics (2.4 minutes a question)
+     1  Units, Dimensions and Errors                                68 questions    60 -> 164 min
+     2  Kinematics                                                  66 questions    60 -> 159 min
+     3  Laws of Motion                                              46 questions    60 -> 111 min
+     4  Work, Energy and Power                                      42 questions    60 -> 101 min
+     5  Centre of Mass, Momentum and Collisions                     17 questions    60 ->  41 min
+     6  Rotational Motion                                           60 questions    60 -> 144 min
+     7  Gravitation                                                 40 questions    60 ->  96 min
+     8  Mechanical Properties of Solids                             29 questions    60 ->  70 min
+     9  Fluids                                                      31 questions    60 ->  75 min
+    10  Surface Tension                                             22 questions    60 ->  53 min
+    11  Thermal Properties of Matter                                16 questions    60 ->  39 min
+    12  Thermodynamics                                              52 questions    60 -> 125 min
+    13  Kinetic Theory of Gases                                     41 questions    60 ->  99 min
+    14  Oscillations                                                27 questions    60 ->  65 min
+    15  Waves and Sound                                             30 questions    60 ->  72 min
+    16  Electrostatics                                              76 questions    60 -> 183 min
+    17  Capacitors                                                  30 questions    60 ->  72 min
+    18  Current Electricity                                         55 questions    60 -> 132 min
+    19  Magnetic Effects of Current                                 62 questions    60 -> 149 min
+    20  Magnetism and Matter                                         7 questions    60 ->  17 min
+    21  Electromagnetic Induction                                   34 questions    60 ->  82 min
+    22  Alternating Current                                         35 questions    60 ->  84 min
+    23  Electromagnetic Waves                                       41 questions    60 ->  99 min
+    24  Ray Optics and Optical Instruments                          74 questions    60 -> 178 min
+    25  Wave Optics                                                 49 questions    60 -> 118 min
+    26  Dual Nature of Matter and Radiation                         45 questions    60 -> 108 min
+    27  Atoms                                                       35 questions    60 ->  84 min
+    28  Nuclei                                                      30 questions    60 ->  72 min
+    29  Semiconductors and Logic Gates                              56 questions    60 -> 135 min
+    30  Experimental Skills                                         34 questions    60 ->  82 min
+  Chemistry (1.6 minutes a question)
+     1  Mole Concept and Stoichiometry                              68 questions    60 -> 109 min
+     2  Atomic Structure                                            52 questions    60 ->  84 min
+     3  Classification of Elements and Periodicity                  45 questions    60 ->  72 min
+     4  Chemical Bonding and Molecular Structure                    65 questions    60 -> 104 min
+     5  Thermodynamics and Thermochemistry                          59 questions    60 ->  95 min
+     6  Chemical Equilibrium                                        31 questions    60 ->  50 min
+     7  Ionic Equilibrium                                           28 questions    60 ->  45 min
+     8  Redox Reactions                                             16 questions    60 ->  26 min
+     9  Solutions                                                   47 questions    60 ->  76 min
+    10  Electrochemistry                                            56 questions    60 ->  90 min
+    11  Chemical Kinetics                                           56 questions    60 ->  90 min
+    12  p-Block Elements                                            54 questions    60 ->  87 min
+    13  d- and f-Block Elements                                     72 questions    60 -> 116 min
+    14  Coordination Compounds                                      88 questions    60 -> 141 min
+    15  Purification and Characterisation of Organic Compounds      57 questions    60 ->  92 min
+    16  General Organic Chemistry                                  103 questions    60 -> 165 min
+    17  Hydrocarbons                                                58 questions    60 ->  93 min
+    18  Haloalkanes and Haloarenes                                  46 questions    60 ->  74 min
+    19  Alcohols, Phenols and Ethers                                32 questions    60 ->  52 min
+    20  Aldehydes, Ketones and Carboxylic Acids                     60 questions    60 ->  96 min
+    21  Amines and Diazonium Salts                                  57 questions    60 ->  92 min
+    22  Biomolecules                                                56 questions    60 ->  90 min
+    23  Principles Related to Practical Chemistry                   42 questions    60 ->  68 min
+    24  Miscellaneous (beyond the current syllabus)                  2 questions    60 ->   4 min
+  Mathematics (3.2 minutes a question)
+     1  Sets and Relations                                          38 questions    60 -> 122 min
+     2  Functions                                                   54 questions    60 -> 173 min
+     3  Basic Algebra (Inequalities, Modulus, Logarithms)           13 questions    60 ->  42 min
+     4  Trigonometric Ratios, Identities and Equations              40 questions    60 -> 128 min
+     5  Complex Numbers                                             48 questions    60 -> 154 min
+     6  Quadratic Equations                                         49 questions    60 -> 157 min
+     7  Permutations and Combinations                               53 questions    60 -> 170 min
+     8  Binomial Theorem                                            50 questions    60 -> 160 min
+     9  Sequences and Series                                        75 questions    60 -> 240 min
+    10  Straight Lines                                              50 questions    60 -> 160 min
+    11  Circles                                                     44 questions    60 -> 141 min
+    12  Parabola                                                    23 questions    60 ->  74 min
+    13  Ellipse                                                     36 questions    60 -> 116 min
+    14  Hyperbola                                                   28 questions    60 ->  90 min
+    15  Limits                                                      29 questions    60 ->  93 min
+    16  Statistics                                                  29 questions    60 ->  93 min
+    17  Probability                                                 51 questions    60 -> 164 min
+    18  Matrices and Determinants                                   86 questions    60 -> 276 min
+    19  Inverse Trigonometric Functions                             24 questions    60 ->  77 min
+    20  Continuity and Differentiability                            41 questions    60 -> 132 min
+    21  Application of Derivatives                                  37 questions    60 -> 119 min
+    22  Indefinite Integration                                      15 questions    60 ->  48 min
+    23  Definite Integration                                        73 questions    60 -> 234 min
+    24  Area under Curves                                           45 questions    60 -> 144 min
+    25  Differential Equations                                      70 questions    60 -> 224 min
+    26  Vector Algebra                                              67 questions    60 -> 215 min
+    27  Three-Dimensional Geometry                                  82 questions    60 -> 263 min
+
+PLEASE LOOK AT THESE BEFORE TURNING IT ON (consequences of the rule as the owner gave it. He was told them by the
+app side on 26 Nov and had not answered when this was written)
+- The longest test becomes 4 h 36 min (Matrices and Determinants, 86 questions). 7 tests become longer than 3 hours:
+  Matrices and Determinants 4 h 36 min; Three-Dimensional Geometry 4 h 23 min; Sequences and Series 4 h 00 min; Definite Integration 3 h 54 min; Differential Equations 3 h 44 min; Vector Algebra 3 h 35 min; Electrostatics 3 h 03 min.
+- 11 tests become SHORTER than today's 60 minutes:
+  Miscellaneous (beyond the current syllabus) 4 min; Magnetism and Matter 17 min; Redox Reactions 26 min; Thermal Properties of Matter 39 min; Centre of Mass, Momentum and Collisions 41 min; Basic Algebra (Inequalities, Modulus, Logarithms) 42 min; Ionic Equilibrium 45 min; Indefinite Integration 48 min; Chemical Equilibrium 50 min; Alcohols, Phenols and Ethers 52 min; Surface Tension 53 min.
+- The owner gave the ratio without a longest time. If he later wants one (for example "never more than 3 hours"), it
+  is again only rules.minutes on your side; the app shows whatever you set.
+- For the longer attempts, on your side: the student's session, the autosave and the attempt's picture links
+  (GET /attempts/<id>/assets/links) must last the whole attempt (up to 4 h 36 min plus the get-ready minute).
+- It is the same set as in your Chapter-wise section, so that section (website and app) shows the new time too.
+
+WHAT THE APP DOES WITH IT (nothing else is needed from you)
+- Every app version, also the ones students have today: the paper's page shows rules.minutes of the set when it is
+  opened, the Chapter-wise list shows the list's minutes, and the player runs on the attempt's deadline.
+- The Student Choice lines below are in the app version on the preview (not published yet):
+- Student Choice's list of chapter tests shows each test's minutes from your chapter-wise list (part 1), a few minutes
+  behind at most. Minutes that are not a whole number are shown rounded DOWN (163.2 -> 163), never more than you give.
+- Student Choice's first screen says "Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)" today.
+  The day every chapter test has its ratio time (a minute's rounding apart at most) the sentence changes by itself to
+  "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time."
+- Checked on 26 Nov on the web preview with your list answered in the browser with the ratio times (16 Physics
+  questions showed 39 min, the sentence changed). NOT checked with the real website (nothing is changed there yet),
+  and the app side has never run an attempt longer than a full mock (180 min).
 
 5. What our side does (for your information)
 --------------------------------------------
