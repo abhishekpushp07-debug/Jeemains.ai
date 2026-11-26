@@ -91,7 +91,7 @@ async def run_test(page, output_dir, page_url):
                 opened_pyq = True
                 break
         if not opened_pyq:
-            await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/pyq')
+            await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/pyq')
 
         await page.wait_for_selector('[data-testid="pyq-screen"]', timeout=30000)
         await page.wait_for_timeout(1500)
@@ -196,7 +196,7 @@ async def run_test(page, output_dir, page_url):
                     break
 
         # verify private page blocked after logout by direct navigation
-        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/(tabs)/tests')
+        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/(tabs)/tests')
         await page.wait_for_timeout(1500)
         blocked = await page.locator('[data-testid="entry-screen"]').count() > 0
         print(f'Private route blocked after logout: {blocked}')

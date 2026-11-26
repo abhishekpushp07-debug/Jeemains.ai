@@ -8,7 +8,7 @@ How to prove the website is connected and behaves like the app.
 python CONNECT/connect_check.py                                   # the live app server: 29 checks (Rank 19 + Cut off 8 + Mission 2)
 python CONNECT/connect_check.py --pdf                             # + the PDFs (two more checks: the 7 older files, and the Cut off PDF)
 python CONNECT/connect_check.py https://<website>/api --website   # through the mounted connector
-python CONNECT/connect_check.py https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/api   # the development server
+python CONNECT/connect_check.py https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/api   # the development server
 JEELIVE_ACCESS_COOKIE='<access_token cookie>' python CONNECT/connect_check.py https://<website>/api --website --pdf
 ```
 

@@ -7,7 +7,7 @@ How the website calls the app server. Everything here was run against the live s
 | Server | API root | Use |
 |---|---|---|
 | Live | `https://jeelive-mobile.emergent.host/api` | Always, unless you are testing unreleased app-server work |
-| Development | `https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/api` | Unreleased work only. It sleeps when idle and its address changes when the workspace is recreated |
+| Development | `https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/api` | Unreleased work only. It sleeps when idle and its address changes when the workspace is recreated |
 
 Both hold the same data and return identical numbers. The development server is ahead by the new work of this pack
 (Cut off and the scorecard rank, `WHATS_NEW.md`) until the app project's next publish; `connect_check.py` says `WAIT`

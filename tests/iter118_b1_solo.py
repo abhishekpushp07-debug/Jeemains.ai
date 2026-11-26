@@ -5,7 +5,7 @@ import asyncio, json, os, re, time
 from playwright.async_api import async_playwright
 
 STORAGE = "/tmp/iter116_storage_state.json"
-BASE = "https://scale-engine-50k--0gu36hlx.preview.emergentagent.com"
+BASE = "https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com"
 ART = "/app/test_reports/artifacts_iter118"
 os.makedirs(ART, exist_ok=True)
 

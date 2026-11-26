@@ -52,25 +52,25 @@ async def run_test(page, output_dir, page_url):
 
         # Redirect checks
         print("Checking /catalogue redirect for jee-main mocks")
-        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/catalogue?slug=jee-main&kind=mocks')
+        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/catalogue?slug=jee-main&kind=mocks')
         await page.wait_for_timeout(1200)
         await page.wait_for_selector('[data-testid="pyq-screen"]', timeout=10000)
         print("mocks redirect landed on PYQ")
 
         print("Checking /catalogue redirect for jee-main pyq")
-        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/catalogue?slug=jee-main&kind=pyq')
+        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/catalogue?slug=jee-main&kind=pyq')
         await page.wait_for_timeout(1200)
         await page.wait_for_selector('[data-testid="pyq-screen"]', timeout=10000)
         print("pyq redirect landed on PYQ")
 
         print("Checking chapters route remains catalogue")
-        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/catalogue?slug=jee-main&kind=chapters')
+        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/catalogue?slug=jee-main&kind=chapters')
         await page.wait_for_timeout(1500)
         await page.wait_for_selector('[data-testid="catalogue-jee-main-chapters"]', timeout=10000)
         print("Chapters route unaffected")
 
         # BITSAT retains mocks
-        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/(tabs)')
+        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/(tabs)')
         await page.wait_for_selector('[data-testid="home-screen"]', timeout=10000)
         await page.click('[data-testid="home-tile-bitsat"]', force=True)
         await page.wait_for_selector('[data-testid="exam-hub-bitsat"]', timeout=10000)

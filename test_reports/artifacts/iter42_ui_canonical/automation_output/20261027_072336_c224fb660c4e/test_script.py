@@ -4,7 +4,7 @@ async def run_test(page, output_dir, page_url):
         sid = open('/tmp/iter42_sid.txt', 'r', encoding='utf-8').read().strip()
         await page.set_viewport_size({"width": 390, "height": 844})
         print('Step 1: Opening app shell')
-        await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
+        await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com', wait_until='domcontentloaded', timeout=60000)
         await page.evaluate("""(sid) => { localStorage.setItem('jl_sid', sid); }""", sid)
         await page.reload(wait_until='domcontentloaded')
         print('Step 1 passed: session handle injected and page reloaded')

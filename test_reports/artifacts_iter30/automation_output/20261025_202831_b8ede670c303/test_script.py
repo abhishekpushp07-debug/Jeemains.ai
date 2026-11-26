@@ -6,7 +6,7 @@ async def run_test(page, output_dir, page_url):
         await page.click('[data-testid="entry-continue-button"]', force=True)
         await page.wait_for_timeout(2000)
         if '/rapid' not in page.url:
-            await page.goto('https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/rapid')
+            await page.goto('https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/rapid')
             await page.wait_for_timeout(2000)
         await page.wait_for_selector('[data-testid="rapid-fire-home"]', timeout=25000)
         await page.click('[data-testid="rf-exam-neet"]', force=True)

@@ -1,4 +1,4 @@
-"""Owner-issued, expiring grants for the fixed owner files (ARTIFACTS: ZIPs and one PDF); no public mint endpoint."""
+"""Owner-issued, expiring grants for the fixed owner files (ARTIFACTS: ZIPs, PDFs and the book's .md); no public mint endpoint."""
 from datetime import datetime, timezone
 from hashlib import sha256
 import hmac
@@ -19,7 +19,10 @@ SHINE_CODE_TYPE = "shine-web-code-zip"
 CEO_KIT_TYPE = "ceo-dashboard-handoff-zip"
 BOOK_PDF_TYPE = "choice-matched-book-pdf"
 BOOK_ZIP_TYPE = "choice-matched-book-zip"
+BOOK_MD_TYPE = "choice-matched-book-md"
 BOOK = "JEELIVE_Student_Choice_and_Matched_Book"
+# .md goes out as plain bytes so a browser saves the file instead of opening it as a page.
+MEDIA_TYPES = {".pdf": "application/pdf", ".zip": "application/zip", ".md": "application/octet-stream"}
 # type -> (file, download name, longest grant in hours)
 ARTIFACTS = {
     ARTIFACT_TYPE: (ARTIFACT, "neetlive-content.zip", 24),
@@ -29,6 +32,7 @@ ARTIFACTS = {
     CEO_KIT_TYPE: (ROOT / "handoff" / "JEELIVE_CEO_Dashboard_Handoff.zip", "JEELIVE_CEO_Dashboard_Handoff.zip", 168),
     BOOK_PDF_TYPE: (ROOT / "handoff" / "feature_book" / f"{BOOK}.pdf", f"{BOOK}.pdf", 168),
     BOOK_ZIP_TYPE: (ROOT / "handoff" / f"{BOOK}.zip", f"{BOOK}.zip", 168),
+    BOOK_MD_TYPE: (ROOT / "handoff" / "feature_book" / "BOOK.md", f"{BOOK}.md", 168),
 }
 DOWNLOAD_HEADERS = {"Cache-Control": "private, no-store", "Pragma": "no-cache",
                     "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"}
@@ -69,7 +73,7 @@ def make_router(db):
             raise missing
         if not hmac.compare_digest(sha256(payload).hexdigest(), grant["artifact_sha256"]):
             raise missing
-        return Response(payload, media_type="application/pdf" if name.endswith(".pdf") else "application/zip", headers={
+        return Response(payload, media_type=MEDIA_TYPES[Path(name).suffix], headers={
             **DOWNLOAD_HEADERS, "Content-Disposition": f'attachment; filename="{name}"',
         })
 

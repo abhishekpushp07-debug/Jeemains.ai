@@ -1,131 +1,134 @@
-<analysis>**original_problem_statement:** 
-The user requested to implement the In-app account deletion functionality. Following that, the user provided a massive 8-level backend plan to optimize the backend for 50,000 concurrent users. As part of Phase 1 of this plan, the user requested to fix live PYQ tests which were failing due to Cloudflare 520 errors by implementing resilient offline answer saving and automatic image retries, alongside a UI redesign to make the selected option green (light green border, green tick, and pale green wash) across all test modes.
-PRODUCT REQUIREMENTS: 
-1. Account Deletion: Owner panel for deletion lists, soft-deletion/anonymization of game data. 
-2. PYQ Resilience: Handle upstream 520 errors gracefully without showing raw technical text to users. Save answers locally when offline and auto-sync. Auto-retry failed images. 
-3. UI: Selected option must have a light green border, green number/tick circle, and a faint green wash. 
-4. Execute the 8-Level Backend Plan progressively.
+<analysis>**original_problem_statement**: 
+The user wants to enhance the JEELIVE.AI Expo/React Native app and FastAPI backend. The primary requests are:
+1. Revamp the Student Choice screens with specific colors (dark-red/maroon hero cards like the result page, glossy subject tabs).
+2. Generate a Website Handover Pack (Feature Book Version 3) containing a Misfire checklist, Rapid Fire browser notes, and cross-platform shared account requirements (users must be able to log in to the website if they signed up on the app, and vice versa).
+3. Do NOT make any changes to the actual Rapid Fire application code during this phase. 
+4. Provide a detailed handoff for the next agent and defer the deployment to the next session.
 
-**User's preferred language**: Hindi/Hinglish (INSTRUCT NEXT AGENT: You MUST automatically detect the user's primary language from their messages inside the <trajectory> tag and INSTRUCT next agent to respond in **Hindi/Hinglish** only).
+**User's preferred language**: Hindi/Hinglish
+*(INSTRUCT: Next agent MUST respond in the user's preferred language (Hindi/Hinglish) only.)*
 
 **what currently exists?** 
-Stable React Native Expo app + FastAPI/MongoDB backend. The in-app account deletion logic (owner panel list + soft-delete) is fully implemented. Phase 1 of the 8-level plan is complete: PYQ test resilience (offline queueing for answers, auto-retries for images, user-friendly error messages handling upstream 520s) and the Green Selected Option UI are implemented and thoroughly verified via the testing agent. The app has been successfully deployed to production.
+A full-stack mobile application (Expo/React Native) with a FastAPI backend and MongoDB. It includes features for students like Student Choice, Matched (mock papers), Misfire (incorrect/skipped question tracking), and Rapid Fire. There is also a Python-based documentation generation system that creates a feature book (PDF/ZIP) for the website development team.
 
 **Last working item**: 
-    - Last item agent was working: The user asked a conversational question regarding Emergent's 2 GB storage limits (whether it's per project or per account, and if the Elite plan offers more). The agent consulted the  and responded in Hindi/Hinglish, advising the user to email support@emergent.sh since documentation doesn't specify these limits.
-    - Status: USER VERIFICATION PENDING
-    - Agent Testing Done: N/A
-    - Which testing method agent to use? N/A
-    - User Testing Done: N/A
+- Last item agent was working: Finalizing the handoff documentation (), building Version 3 of the Feature Book (generating PDF/ZIP), and running a deployment readiness check. The user explicitly requested to pause, fork the session, and deploy in the next iteration.
+- Status: FINISHED (Deployment pending in next fork)
+- Agent Testing Done: Y
+- Which testing method agent to use?: Both (Frontend testing agent was used, plus manual Python screenshot scripts and Deployment Agent health check).
+- User Testing Done: N
 
-**All Pending/In progress Issue list**:  
-  - Issue 1: Minor ARIA and testID additions (P3)
-     - Attempted fixes: None.
-     - Next debug checklist: Add  to count pills. Add  for empty duels.
-     - Why fix this issue and what will be achieved with the fix? Improves accessibility and UI testing hooks.
-     - Status: NOT STARTED
-     - Is recurring issue? N
-     - Should Test frontend/backend/both after fix? Frontend
-     - Blocked on other issue: None
+**All Pending/In progress Issue list**: 
+Issue 1: Text truncation on 320px width screens in Student Choice title.
+- Attempted fixes: Agent updated the Student Choice UI and ran the testing agent. The testing agent reported 64/64 checks passed, but noted 1 minor cut-text defect at 320px width that existed previously.
+- Next debug checklist: Check  or related header components for text scaling, flex wrapping, or font sizes on small screens.
+- Why fix this issue and what will be achieved with the fix?: Ensures UI is perfectly readable on smaller devices (like iPhone SE).
+- Status: NOT STARTED
+- Is recurring issue?: N
+- Should Test frontend/backend/both after fix?: Frontend
+- Blocked on other issue: None
 
 **In progress Task List**: 
-  - Task 1: Execute Phase 2 (Levels 1-4) of the 8-level backend plan (P0)
-     - Where to resume: Read the 8-level plan provided by the user in the history. Phase 1 is done. Start Phase 2: Strong foundation. This includes: Level 1 (baseline speed checks and clean All India Daily test), Level 2 (tidy the house/remove dead code), Level 3 (split the monolithic  into modular files), Level 4 (faster database/indexes to ensure Rapid Fire DB tasks are under 20ms).
-     - What will be achieved with this? Highly modular, optimized backend architecture capable of scaling towards the 50,000 concurrent user goal without breaking existing functionality.
-     - Status: NOT STARTED
-     - Should Test frontend/backend/both after fix? Both (Heavy backend testing required)
-     - Blocked on something: Waiting for user to acknowledge the previous storage limit answer and give the go-ahead.
+Task 1: Deploy the application
+- Where to resume: The user explicitly stated: I will deploy later on with a new agent. The app is ready; run the deployment process.
+- What will be achieved with this?: Pushes the Student Choice UI updates and new feature book assets to production.
+- Status: NOT STARTED
+- Should Test frontend/backend/both after fix?: Frontend/Backend (Smoke test after deployment)
+- Blocked on something: None
 
-**Upcoming and Future Tasks**
-    Upcoming Tasks:
-    - P0: Execute Phase 2 (Levels 1-4) of the 8-level backend plan (Strong foundation & modularization).
-    - P1: Execute Phase 3 (Levels 5-8) of the 8-level backend plan (Speed engine, caching, live match engine for 50k users, shields, App Health page, and load testing).
-    
-    Future Tasks:
-    - P2: App Store / Play Store readiness review (using  and  skills).
-    - P3: Generate a Rapid Fire teacher review list for 16,000 AI-checked cards (Optional, as requested by user).
+**Upcoming and Future Tasks**:
+- **Task 1 (P0)**: Shared Account Authentication Validation. Verify and implement the cross-platform unified login/signup mechanism between the app and the canonical website (shared  and session handling) as specified in . *Note: Any auth code changes require calling  first.*
+- **Task 2 (P1)**: Rapid Fire Browser App Update. Add the Misfires tab to the web arena export (deferred from this phase). 
+- **Task 3 (P2)**: Student Choice Mixed-Question Papers. Implementation of the deferred mixed-question contract (max 75 questions, +4/-1 scoring).
 
-**Completed work in this session**
-- In-app account deletion logic: , ,  (DONE)
-- Fixed deployment blockers: removed destructive DB sweep on startup and fixed hardcoded backend URL in  (DONE)
-- Phase 1 (PYQ Resilience): Offline queueing for pending answers, user-friendly error messages replacing technical 520 text, automatic image retries in  and  (DONE)
-- Phase 1 (Green Option UI): Redesigned selected option UI to feature a light green border, green tick circle, and faint green wash across all test modes in  (DONE)
+**Completed work in this session**:
+- Created planning guide () and handoff guide (). (DONE)
+- Student Choice UI revamp: added glossy tabs and maroon hero cards (, , ). (DONE)
+- Feature Book Version 3 generation: created , ,  and compiled PDF/ZIP using . (DONE)
+- Pre-deployment readiness check (No blockers found). (DONE)
 
-**Earlier issues found/mentioned but not fixed**
-   - None. Note: The previously mentioned ScopeSheet Exam Switcher Bug was explicitly clarified as a non-issue. Rapid Fire only uses Subjects now, not exams. The user accepted this clarification. DO NOT mention the exam switcher again as it caused user frustration.
+**Earlier issues found/mentioned but not fixed**:
+Issue 1: 
+- Debug checklist:  320px title clipping (mentioned above).
+- Why to solve this issue and what will be achieved with this?: UI Polish.
+- Should Test frontend/backend/both after fix: Frontend
+- Is recurring issue?: N
 
-**Known issue recurrence from previous fork**
-  - Issue recurrence in previous fork: None
-  - Recurrence count: 0
-  - Status: N/A
+**Known issue recurrence from previous fork**:
+- Issue recurrence in previous fork: None
+- Recurrence count: 0
+- Status: RESOLVED
 
-**Code Architecture**
-  - : React Native Expo app utilizing Expo Router.
-  - : FastAPI backend serving as proxy, API handler, and game engine.
-  - : Pytest suite.
+**Code Architecture**:
+- : Expo Router file-based frontend routes.
+- : Reusable React Native components, UI theme (), and API utilities.
+- : FastAPI application (), proxy routing, session handling.
+- : Markdown files, JSON examples, and Python scripts () to generate PDF/ZIP handover docs.
+- : Planning documents, agent handoffs, and test credentials.
 
-**Key Technical Concepts**
-  React Native, Expo Router, FastAPI, MongoDB, Custom resilient HTTP polling (), Offline queueing, Upstream Cloudflare 5xx Error Handling.
+**Key Technical Concepts**:
+- Frontend: Expo, React Native, Expo Router.
+- Backend: FastAPI, PyMongo (AsyncMongoClient).
+- Database: MongoDB.
+- System Rules: Frontend uses existing upload abstraction and safe areas. Backend runs on 0.0.0.0:8001 with  prefix.
 
-**key DB schema**
-  - : Tracks user deletion requests.
-  - , , : User stats, game state, auth sessions.
+**key DB schema**:
+- : {id, subject, chapter, prompt, options, answer, explanation}
+- : {id, type, status, players, card_ids, current_index, start_at}
+- : {uid, xp, coins, streak, badges, inventory, equipped}
+- : {sid, uid, cookies} (Session coordination)
 
-**changes in tech stack**
-  - None
+**changes in tech stack**:
+- None
 
-**All files of reference** 
-  -  &  (Created for account deletion backend logic).
-  -  (Created/updated for account deletion UI).
-  -  &  (Modified for resilient offline save & retry).
-  -  &  (Modified for green option UI and image retries).
-  - , ,  (New tests).
+**All files of reference**:
+- , , ,  (Updated Student Choice UI)
+-  (New visual layer for Student Choice)
+-  (Theme token usage for maroon/gloss)
+-  (Content for Website Handover Book)
+-  (Generates the Handover Book)
+-  (Detailed agent-to-agent notes written in Hindi/Hinglish)
 
-**Areas that need refactoring**: 
-  -  (Massive monolith, urgently needs splitting per Phase 2 / Level 3 of the 8-level plan).
+**Areas that need refactoring**:
+- None identified in this session.
 
-**key api endpoints**
-  - 
-  - 
+**key api endpoints**:
+-  (Mock papers)
+- ,  (Canonical auth paths)
+-  (App proxy to canonical API)
 
-**Critical Info for New Agent** 
-  - The app is DEPLOYED to production. If the user reports any bugs, ALWAYS clarify if they are seeing the issue on PREVIEW or PRODUCTION.
-  - **CRITICAL**: The user prefers responses in **Hindi/Hinglish**.
-  - **CRITICAL**: Do NOT mention the exam switcher in Rapid Fire. It caused frustration because Rapid Fire only has subjects now, and the exam switcher was removed long ago.
-  - The user provided a massive, highly detailed 8-level backend scalability plan. **Phase 1 is completed.** Your next major technical focus is to initiate **Phase 2 (Levels 1-4)** exactly as the user specified in their prompt.
-  - Do not use hard deletes on the MongoDB database; stick to the soft deletion/anonymization patterns established in this session.
+**Critical Info for New Agent**:
+- **Do NOT modify Rapid Fire application code** (as per explicit user instruction for this phase).
+- **Authentication**: If you need to make changes to cross-platform login/signup logic, you MUST call  BEFORE writing auth code.
+- **Language**: User communicates in Hindi/Hinglish. Read  to get the context in the user's native tone.
+- **Deployment**: The user specifically paused to fork and asked to deploy in the *new* agent's session. Start by addressing deployment or checking if the user wants to deploy immediately.
 
-**documents and test reports created in this job** 
-  - 
-  - 
-  - 
-  - 
-  - 
+**documents and test reports created in this job**:
+- 
+- 
+- 
+- 
+- 
 
-**Last 10 User Messages and any pending HUMAN messages** 
- - *User*: Call Deployment Agent and Run Health Check...
- - *User*: The user reported a bug. After applying the fix you MUST call the testing_agent... (Agent ran deployment agent, linted, fixed package lock warning, and ran testing agent).
- - *System Notif*: App deployed to production.
- - *User*: Asked about Emergent 2 GB storage limits, whether it applies per project or ID, and if Elite version gets more storage.
- - *(Agent checks with support_agent and informs the user in Hindi/Hinglish to email support@emergent.sh since docs don't specify limits).*
- - **PENDING HUMAN MESSAGE**: User's response to the storage limit query. Await their input or prompt them to start Phase 2 of the 8-level backend plan.
+**Last 10 User Messages and any pending HUMAN messages**:
+1. *User*: Asked to run Deployment Agent and check readiness. -> *Done*
+2. *User*: Indicated they want to deploy later with a new agent. Requested a detailed handoff for the fork, emphasizing not to miss what was being worked on. -> *Done (Generated HANDOFF_NEXT_AGENT.md and finished)*
 
-**Project Health Check:**
-  - Broken: None
-  - Mocked: None
+**Project Health Check**:
+- Broken: None (Deployment Agent gave a WARN for some minor config, but flagged No BLOCKERS).
+- Mocked: None
 
-**3rd Party Integrations** 
-  - Emergent LLM Key (Available)
+**3rd Party Integrations**:
+- N/A (None modified. Any Auth changes require Integration Expert).
 
-**Testing status**
-  - Testing agent used after significant changes: YES (Iterations 124 through 128 extensively verified fixes).
-  - Troubleshoot agent used after agent stuck in loop: NO
-  - Test files created: , , 
-  - Known regressions: None detected.
+**Testing status**:
+- Testing agent used after significant changes: YES
+- Troubleshoot agent used after agent stuck in loop: NO
+- Test files created: , 
+- Known regressions: None (Only pre-existing minor 320px text cutoff).
 
-**Credentials to test flow:**
-  - QA Learner Phone: 
-  - PIN: 
+**Credentials to test flow**:
+Check  (Do not expose values in chat).
 
-**What agent forgot to execute**
-  - Nothing forgotten. The agent successfully handled the account deletion implementation, PYQ error resilience, UI redesign, and deployment fixes requested.</analysis>
+**What agent forgot to execute**:
+Nothing was forgotten; the agent explicitly paused the deployment per the user's request to handle it in the next fork.</analysis>

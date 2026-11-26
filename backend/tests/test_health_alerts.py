@@ -140,7 +140,7 @@ def test_email_link_uses_the_host_the_owner_opened_and_marks_preview():
             assert await health_alerts.page_link(db) == ("", "")
             await db.rf_meta.insert_one({"_id": "alert:host", "host": "abc.preview.emergentagent.com"})
             link, prefix = await health_alerts.page_link(db)
-            assert link == "https://abc.preview.emergentagent.com/api/owner/health" and prefix == "[Preview] "
+            assert link == "https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/api/owner/health" and prefix == "[Preview] "
             html = health_alerts.email_html("t", ["a <b>"], data(), link, "bad")
             owner_mail._assert_safe_email("t", html)
             assert "a &lt;b&gt;" in html

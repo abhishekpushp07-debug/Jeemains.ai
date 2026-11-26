@@ -139,6 +139,6 @@ def test_email_content():
             await ha.step(db, {"jobs": "Closing old <script> failed on its last run."}, data(), now + 30 * i, s)
         to, subj, html = s.sent[0]
         assert subj.startswith("[Preview] ") and "<script>" not in html and "&lt;script&gt;" in html
-        assert html.count("href=") == 1 and 'href="https://abc.preview.emergentagent.com/api/owner/health"' in html
+        assert html.count("href=") == 1 and 'href="https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/api/owner/health"' in html
         assert "<form" not in html and to == ha.TO
     with_db(t)

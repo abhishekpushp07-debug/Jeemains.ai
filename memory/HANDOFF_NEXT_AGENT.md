@@ -185,7 +185,8 @@
   `backend/login_guard.py`, `backend/account_deletion.py`, `backend/pin_reset.py`. Any auth change → call
   `integration_expert` FIRST.
 - Looks: `frontend/src/theme.ts`, `src/components/GlossTabs.tsx`, `src/analysis/Shine.tsx`, `src/analysis/smooth.ts`.
-- Owner downloads: `backend/owner_downloads.py`, `backend/tools/owner_download.py`.
+- Owner downloads: `backend/owner_downloads.py`, `backend/tools/owner_download.py` (since 26 Nov night also
+  `choice-matched-book-md` = `BOOK.md` as a forced file download; see the last PRD section).
 - Website hand-offs: `handoff/feature_book/` (v3, current), `handoff/JEELIVE_CEO_Dashboard_Handoff*`,
   `handoff/JEELIVE_Rank_Mission_Website_Handoff*`, `memory/WEBSITE_AGENT_BRIEF.md`, `memory/WEBSITE_NOTE.md`.
 

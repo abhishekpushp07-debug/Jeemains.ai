@@ -6,7 +6,7 @@ from misfire_fixture import fake_aits
 from aits_board_fixture import fake_board
 from rf_daily_fixture import fake_daily_done, count_sounds, sounds
 
-BASE = os.environ.get("EXPO_PUBLIC_BACKEND_URL", "https://scale-engine-50k--0gu36hlx.preview.emergentagent.com").rstrip("/")
+BASE = os.environ.get("EXPO_PUBLIC_BACKEND_URL", "https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com").rstrip("/")
 PHONE, PIN = "7004186276", "5524"
 
 

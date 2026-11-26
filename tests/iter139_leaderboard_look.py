@@ -5,7 +5,7 @@ sys.path.insert(0, "/app/tests")
 from aits_board_fixture import fake_board
 from misfire_fixture import fake_aits
 
-BASE = os.environ.get("PUBLIC_URL") or "https://scale-engine-50k--0gu36hlx.preview.emergentagent.com"
+BASE = os.environ.get("PUBLIC_URL") or "https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com"
 PHONE = "7004186276"
 PIN = "5524"
 

@@ -2,7 +2,7 @@ async def run_test(page, output_dir, page_url):
     try:
         await page.set_viewport_size({"width": 390, "height": 844})
         print("Step 1: Open entry screen")
-        await page.goto("https://scale-engine-50k--0gu36hlx.preview.emergentagent.com/entry", wait_until="domcontentloaded", timeout=30000)
+        await page.goto("https://jeelive-feature-book--3o05z2vs.preview.emergentagent.com/entry", wait_until="domcontentloaded", timeout=30000)
         await page.wait_for_selector('[data-testid="entry-screen"]', timeout=10000)
         print("Step 1 PASS: Entry screen loaded")
 
