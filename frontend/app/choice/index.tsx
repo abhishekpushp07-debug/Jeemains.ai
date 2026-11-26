@@ -13,13 +13,14 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "@/src/auth";
 import { uuid } from "@/src/api/client";
 import { useListFocus } from "@/src/useListFocus";
-import { Empty, ErrorBox, IconName, Notice, Press, Skeleton, T } from "@/src/components/ui";
+import { Empty, ErrorBox, Icon, IconName, Notice, Press, Skeleton, T } from "@/src/components/ui";
 import { DCard, DSheet, IconCircle, Pill, ScreenHeader, SectionLabel, StatusLine } from "@/src/components/design";
 import { Glyph } from "@/src/components/Glyph";
 import { ScreenMotion } from "@/src/motion";
 import { colors, fonts, noOutline, space, subjectColor } from "@/src/theme";
 import { Bank, SHORT, TEST_MAX_MINUTES, makePaper, minutesFor, splitOf, testMinutes, timeLabel } from "@/src/choice/api";
 import { Makeup, useBank } from "@/src/choice/parts";
+import { ChoiceHero, ON_HERO, heroStyles } from "@/src/choice/looks";
 import { chosenChapters, pickedCount, useChoice } from "@/src/choice/store";
 
 const QUICK = [15, 30, 45, 60, 75];
@@ -27,7 +28,7 @@ const QUICK = [15, 30, 45, 60, 75];
 function Way({ icon, title, body, note, onPress, testID }: { icon: IconName; title: string; body: string; note?: string; onPress: () => void; testID: string }) {
   return <Press testID={testID} onPress={onPress} scaleTo={0.985} accessibilityLabel={`${title}. ${body}`}>
     <DCard style={styles.way}>
-      <IconCircle icon={icon} color={colors.onSurface} bg={colors.custom_cardRaised} line={colors.custom_cardLine} size={48} />
+      <IconCircle icon={icon} color={colors.brandText} bg={colors.custom_chipBloodSoft} line={colors.custom_cardLine} size={48} />
       <View style={{ flex: 1, minWidth: 0, gap: 3 }}>
         <T w="heavy" size={16.5}>{title}</T>
         <T size={12.5} color={colors.muted} style={{ lineHeight: 18 }}>{body}</T>
@@ -105,15 +106,19 @@ export default function StudentChoice() {
         onBack={() => (router.canGoBack() ? router.back() : router.replace("/(tabs)"))} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xxl, gap: space.lg }}
         refreshControl={<RefreshControl testID="choice-refresh" refreshing={res.refreshing} onRefresh={res.reload} />}>
-        <View style={{ gap: space.sm }}>
-          <T testID="choice-title" w="heavy" size={24} style={{ letterSpacing: -0.4 }}>{making ? "Apna paper, apni marzi." : "Apne chapters, apni marzi."}</T>
-          <T testID="choice-intro" size={13.5} color={colors.muted} style={{ lineHeight: 20 }}>{open?.pick ? "JEE Main ke chapter-wise sawaalon mein se chapters aur sawaal khud chuno. Result, analysis aur solutions har paper ki tarah milte hain."
+        <ChoiceHero testID="choice-hero">
+          <View style={styles.heroTop}>
+            <T w="heavy" size={10.5} color={ON_HERO.soft} style={[heroStyles.kicker, { flex: 1 }]}>JEE MAIN · CHAPTER-WISE SAWAAL</T>
+            <View style={styles.heroIcon}><Icon name="format-list-checks" size={22} color={ON_HERO.ink} /></View>
+          </View>
+          <T testID="choice-title" w="heavy" size={24} color={ON_HERO.ink} style={{ letterSpacing: -0.4 }}>{making ? "Apna paper, apni marzi." : "Apne chapters, apni marzi."}</T>
+          <T testID="choice-intro" size={13.5} color={ON_HERO.soft} style={{ lineHeight: 20 }}>{open?.pick ? "JEE Main ke chapter-wise sawaalon mein se chapters aur sawaal khud chuno. Result, analysis aur solutions har paper ki tarah milte hain."
             : "JEE Main ke chapter-wise sawaal, aapke chune chapters ke hisaab se. Result, analysis aur solutions har paper ki tarah milte hain."}</T>
           {open ? <View testID="choice-facts" style={styles.facts}>
             {(making ? [`${open.max_questions} sawaal tak`, `+${open.marks.correct} / −${Math.abs(open.marks.wrong)}`, "time subject ke hisaab se"]
-              : [`${all.length} chapters`, `${all.reduce((n, c) => n + c.count, 0)} sawaal`, `+${open.marks.correct} / −${Math.abs(open.marks.wrong)}`]).map(f => <View key={f} style={styles.fact}><T w="bold" size={11.5} color={colors.custom_softText}>{f}</T></View>)}
+              : [`${all.length} chapters`, `${all.reduce((n, c) => n + c.count, 0)} sawaal`, `+${open.marks.correct} / −${Math.abs(open.marks.wrong)}`]).map(f => <View key={f} style={heroStyles.glass}><T w="bold" size={11.5} color={ON_HERO.ink}>{f}</T></View>)}
           </View> : null}
-        </View>
+        </ChoiceHero>
         <ErrorBox testID="choice-error" error={res.error} retry={res.reload} />
         {!bank ? (res.error ? null : <View testID="choice-loading" style={{ gap: space.md }}><Skeleton h={92} /><Skeleton h={92} /></View>)
           : !open ? <DCard testID="choice-not-ready"><Empty icon="database-search-outline" title="Chapters abhi nahi mile"
@@ -167,8 +172,9 @@ export default function StudentChoice() {
 const styles = StyleSheet.create({
   way: { flexDirection: "row", alignItems: "center", gap: space.md, padding: space.lg },
   soon: { gap: space.sm, padding: space.lg },
-  facts: { flexDirection: "row", flexWrap: "wrap", gap: 8, marginTop: 4 },
-  fact: { height: 28, paddingHorizontal: 11, borderRadius: 14, justifyContent: "center", backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLine },
+  facts: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
+  heroTop: { flexDirection: "row", alignItems: "center", gap: space.sm },
+  heroIcon: { width: 40, height: 40, borderRadius: 20, alignItems: "center", justifyContent: "center", backgroundColor: colors.custom_fireGlass, borderWidth: 1, borderColor: colors.custom_fireLine },
   time: { flexDirection: "row", alignItems: "center", gap: space.sm, minHeight: 44 },
   timeNote: { lineHeight: 17, paddingTop: 6, paddingBottom: space.sm },
   dot: { width: 8, height: 8, borderRadius: 4 },

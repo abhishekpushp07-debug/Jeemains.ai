@@ -15,6 +15,7 @@ import { PillRow } from "@/src/misfire/parts";
 import { colors, space } from "@/src/theme";
 import { ChapterQuestions, Question, SHORT, Subject, getChapter, makePaper, minutesFor, timeLabel, totalOf } from "@/src/choice/api";
 import { Makeup, QuestionCard, StepBar, stemWidth, useBank } from "@/src/choice/parts";
+import { SubjectTabs } from "@/src/choice/looks";
 import { choiceLoaded, chosenChapters, clearChoice, counts, hasQuestion, orderedIds, pickedCount, pickedIn, toggleQuestion, useChoice } from "@/src/choice/store";
 
 export default function ChooseQuestions() {
@@ -93,8 +94,8 @@ export default function ChooseQuestions() {
         ListHeaderComponent={<View style={{ gap: space.md, paddingBottom: space.xs }}>
           <ErrorBox testID="choice-questions-bank-error" error={res.error} retry={res.reload} />
           {chapter ? <>
-            {subjects.length > 1 ? <PillRow prefix="choice-q-subject" value={chapter.subject} onChange={k => { setSubject(k as Subject); setChapterId(""); }}
-              items={subjects.map(s => ({ key: s, label: SHORT[s], count: made[s] }))} /> : null}
+            {subjects.length > 1 ? <SubjectTabs prefix="choice-q-subject" value={chapter.subject} onChange={s => { setSubject(s); setChapterId(""); }}
+              items={subjects.map(s => ({ subject: s, count: made[s] }))} /> : null}
             {inSubject.length > 1 ? <PillRow prefix="choice-q-chapter" value={chapter.id} onChange={setChapterId}
               items={inSubject.map(c => ({ key: c.id, label: c.title, count: pickedIn(c.id) }))} /> : null}
             <View style={{ gap: 2 }}>

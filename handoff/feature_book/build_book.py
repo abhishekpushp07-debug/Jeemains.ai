@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Builds the book of Student Choice and Matched for the JE Live website agent and super admin.
+"""Builds the app side's hand-off book (Student Choice, Matched, Misfire, Rapid Fire in a browser, one account) for the
+JE Live website agent and super admin.
 
     cd /app/handoff/feature_book && python3 build_book.py
 
@@ -42,8 +43,9 @@ import choice  # noqa: E402
 import matched  # noqa: E402
 
 NAME = "JEELIVE_Student_Choice_and_Matched_Book"
-VERSION = "2"
-PARTS = ["00_start", "10_choice_today", "11_choice_doors", "12_choice_rest", "20_matched_student", "21_matched_website", "22_matched_admin", "30_reference"]
+VERSION = "3"
+PARTS = ["00_start", "10_choice_today", "11_choice_doors", "12_choice_rest", "20_matched_student", "21_matched_website", "22_matched_admin", "30_reference",
+         "40_misfire", "50_rapid_fire", "60_one_account"]
 PDF, MD, ZIP = HERE / f"{NAME}.pdf", HERE / "BOOK.md", ROOT / "handoff" / f"{NAME}.zip"
 IST = timezone(timedelta(hours=5, minutes=30))
 NOW = datetime.now(IST)
@@ -224,6 +226,22 @@ def state():
     end = datetime.strptime(last, "%Y-%m-%d")
     facts.update(SERIES_FIRST=day(datetime.strptime(first, "%Y-%m-%d")), SERIES_LAST=day(end), CARD_DAY=day(end + timedelta(days=1)))
     rows.append(("The website: `GET /api/series/all-india-jee`", f"{status}, {first} to {last}", f"with no shift published, Home's card turns to Matched on {facts['CARD_DAY']} (India time); a published shift turns it sooner, the switch at any time"))
+    # Rapid Fire in a browser: the copy production serves, against the copy built here (the name of its entry file changes with every build).
+    status, body = ask(PRODUCTION + "/arena")
+    live = re.search(r"entry-[0-9a-f]+\.js", body) if status == 200 else None
+    built = re.search(r"entry-[0-9a-f]+\.js", (BACKEND / "arena_web" / "index.html").read_text())
+    rows.append(("The app's server in production: `GET /api/arena` (Rapid Fire in a browser, Part 5)", status,
+                 "the newest copy is live" if live and built and live[0] == built[0]
+                 else "an older copy is live; the copy built on the preview (with All India Rapid's Misfires tab) comes with the next Publish" if live else "not read"))
+    status, body = ask(WEBSITE + "/auth/session")
+    try:
+        session = json.loads(body) if status == 200 else {}
+    except ValueError:
+        session = {}
+    inner = session.get("data", session) if isinstance(session.get("data", session), dict) else {}
+    signed_out = status == 200 and "user" in inner and inner["user"] is None
+    rows.append(("The website: `GET /api/auth/session`, signed out", f'{status}, `"user": null`' if signed_out else status,
+                 "the website's sign-in doors answer; the app signs up and signs in only through them (Part 6)" if signed_out else "not as expected: tell the app side"))
     return table(["What was asked", "The answer", "What it means"], rows), facts
 
 
@@ -272,27 +290,38 @@ def headings(body):
     return out
 
 
-LEAD = ("Everything about the app's two new features, for the two people who have to make them work on jeelive.ai: what a student sees, "
-        "what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen, "
-        "and what has not been checked yet.")
+LEAD = ("The app side's final hand-off to jeelive.ai. The app's two new features, Student Choice and Matched: what a student sees, "
+        "what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen. "
+        "Then the three things that keep the website and the app one: Misfire, Rapid Fire in a browser, and one account. And what has not been checked yet.")
+TITLE = "Student Choice, Matched, Misfire, Rapid Fire and one account"
 
 
 def cover(body):
     toc = "".join(f'<li class="{"part" if level == 1 else "sec"}"><a href="#{slugify(title, "-")}">{html.escape(title, quote=False)}</a></li>' for level, title in headings(body))
-    strip = "".join(f'<img src="shots/{name}.jpg" alt="">' for name in ("s02_landing", "s05_search", "s08_chapter_tests", "m08_home_card", "m03_shift_top"))
+    strip = "".join(f'<img src="shots/{name}.jpg" alt="">' for name in ("s02_landing", "s08_chapter_tests", "m08_home_card", "x02_misfire_all", "a01_signin"))
     return (f'<section class="cover"><div class="brand">JEELIVE.AI</div><div class="eyebrow">App &rarr; website hand-off</div>'
-            f'<div class="title">Student Choice and Matched:<br>the complete book</div><p class="lead">{LEAD}</p>'
+            f'<div class="title">Student Choice, Matched, Misfire,<br>Rapid Fire and one account</div><p class="lead">{LEAD}</p>'
             f'<div class="meta"><span>FOR <b>the JE Live website agent</b></span><span>FOR <b>the JE Live super admin</b></span>'
             f'<span>WRITTEN <b>{TODAY}</b></span><span>VERSION <b>{VERSION}</b></span></div><div class="strip">{strip}</div>'
             f'<div class="toc-title">Contents</div><ul class="toc">{toc}</ul></section>')
 
 
 FOOT = ('<div style="width:100%;font-family:Figtree,Arial,sans-serif;font-size:8px;color:#8C8C96;padding:0 48px;display:flex;justify-content:space-between">'
-        f'<span>JEELIVE.AI &middot; Student Choice and Matched: the complete book &middot; v{VERSION} &middot; {TODAY}</span>'
+        f'<span>JEELIVE.AI &middot; {TITLE} &middot; v{VERSION} &middot; {TODAY}</span>'
         '<span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>')
-README = f"""# Student Choice and Matched: the complete book (v{VERSION}, {TODAY})
+README = f"""# {TITLE}: the website hand-off (v{VERSION}, {TODAY})
 
 For the JE Live website agent and the JE Live super admin. Written by the app side from the app's code on {TODAY}.
+Give the website agent `BOOK.md` (paste it into its chat) or the PDF. Nothing in it is a password, a key or a private link.
+
+New in version 3 (the owner's later decisions of 26 Nov 2026):
+- Student Choice's colours: a dark-red top card like the result page's, glossy subject tabs (Physics red, Chemistry amber,
+  Maths teal); the cards below stay white. A made paper's subject minutes now add up to its time (Parts 1.2 and 1.7).
+- Part 4, Misfire: the website's own, shown in the app; one calculation; six checks for the website agent.
+- Part 5, Rapid Fire in a browser: the app's; the website only links to it. Its copy was built again with All India
+  Rapid's "Misfires" tab. Rapid Fire's code was not changed.
+- Part 6, one account: sign up on the website or in the app, sign in on both; what the website must keep.
+The colours and the new browser copy are on the app's preview and reach students with the next Publish.
 
 New in version 2 (two decisions of the owner, 26 Nov 2026; both are on the app's preview and reach students with the next Publish):
 - A whole chapter test follows the 80 / 60 / 40 ratio and is never longer than three hours (Part 1.8).
@@ -312,10 +341,10 @@ mock show made-up questions marked "(Sample)": the website's doors for them do n
 async def build():
     from playwright.async_api import async_playwright
     md_text = text(as_html=False)
-    MD.write_text(f"# JEELIVE.AI — Student Choice and Matched: the complete book\n\nFor the JE Live website agent and the JE Live super admin. "
+    MD.write_text(f"# JEELIVE.AI — {TITLE}: the website hand-off\n\nFor the JE Live website agent and the JE Live super admin. "
                   f"Written by the app side on {TODAY}. Version {VERSION}.\n\n{LEAD}\n\n" + md_text)
     body = text(as_html=True)
-    page_html = ('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>JEELIVE.AI: Student Choice and Matched, the complete book</title>'
+    page_html = (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>JEELIVE.AI: {TITLE}, the website hand-off</title>'
                  '<link rel="stylesheet" href="book.css"></head><body>' + cover(body)
                  + markdown.markdown(body, extensions=["tables", "fenced_code", "md_in_html", "sane_lists", "toc"]) + "</body></html>")
     (HERE / "book.html").write_text(page_html)

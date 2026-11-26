@@ -2,17 +2,23 @@
 
 ### Owner ke liye (short)
 
-- Is book mein dono naye features ka poora hisaab hai: **Student Choice** aur **Matched**. App mein kya dikhta hai, website ko kya banana hai, super admin ko kya karna hai, aur kaun si cheez abhi check nahi hui.
+- Yeh **website ko dene wala final hand-off** hai (version 3, {{TODAY}}). Isme paanch cheezein hain: **Student Choice** (Part 1), **Matched** (Part 2), **Misfire** (Part 4: website ka hi, app sirf dikhata hai), **browser wala Rapid Fire** (Part 5: app ka, website sirf link lagati hai), aur **ek hi account** (Part 6: website ya app, kahin bhi sign up karo, dono jagah wahi phone + PIN chalta hai; yeh pehle se aisa hi hai).
 - **Student Choice aaj chalta hai**: student chapters tick karta hai (naam likh kar dhoondh bhi sakta hai) aur har chune chapter ka poora test deta hai. Sawaal JEE Main ke chapter-wise sawaal hi hain; alag bank nahi hai.
+- **Naya rang (26 Nov):** Student Choice ke upar ka card result page jaisa gehra laal, aur Physics / Chemistry / Maths ke chamakte rangeen tabs (laal, amber, teal). Neeche ke cards safed hi hain. Banaye paper ke subject-wise minute ab hamesha total ke barabar judte hain.
 - **Sawaal khud chunna aur random mock abhi band hain** ("Jald aa raha hai"). Website teen darwaze banayegi (Part 1.6), tab yeh dono app update ke bina khul jayenge.
 - **Time ka ratio** (25 Maths = 80 min, 25 Physics = 60 min, 25 Chemistry = 40 min) banaye hue paper par lagega. Poore chapter test abhi 60 min ke hi hain; unka time sirf website badal sakti hai. Aapka faisla (26 Nov): unhe bhi yahi ratio, par **zyada se zyada 3 ghante** (Part 1.8).
 - **Dream College meter**: chapter test aur Student Choice paper kabhi nahi ginte, chahe kitne bhi lambe hon.
-- **Matched**: app taiyaar hai, par production mein abhi khaali hai. Super admin har shift ke baad matched sawaal daalega aur unka ek asli paper banayega. Aapka faisla (26 Nov): Home ka Matched card **pehla shift publish hote hi, usi din** aa jayega; AITS ke bache dinon mein All India series us card ke theek neeche ek bar ban jaati hai. (Koi shift na ho to bhi {{CARD_DAY}} se card aa jayega.) Yeh naya rule abhi preview par hai; students tak agle Publish ke saath pahunchega.
-- Website agent ko yeh PDF (ya saath ki `BOOK.md`) dena hai. Super admin ke kaam ke hisse: Part 1.11, Part 2.8 aur Part 2.9.
+- **Matched**: app taiyaar hai, par production mein abhi khaali hai. Super admin har shift ke baad matched sawaal daalega aur unka ek asli paper banayega. Home ka Matched card **pehla shift publish hote hi, usi din** aa jayega; AITS ke bache dinon mein All India series us card ke theek neeche ek bar ban jaati hai. (Koi shift na ho to bhi {{CARD_DAY}} se card aa jayega.)
+- **Misfire**: website aur app ka Misfire ek hi hai (website ka). Website agent ko Part 4.4 ki 6 baatein check karni hain. All India Rapid ka "Misfires" tab Rapid Fire ka apna hai, alag.
+- **Rapid Fire browser mein**: app ke server par chalta hai; website ko sirf "Rapid Fire" button / link lagana hai, code nahi lena (Part 5).
+- **Students tak kab:** 26 Nov ke Publish ke baad ka kaam (pehli shift wala rule, AITS bar, 3 ghante wala sentence, naya rang, Rapid Fire ka naya browser copy) agle Publish aur naye app build ke saath pahunchega.
+- Website agent ko yeh PDF (ya saath ki `BOOK.md`) dena hai. Super admin ke kaam ke hisse: Part 1.11, Part 2.8, Part 2.9 aur Part 6.5.
 
 </div>
 
-## 0.1 The two features
+## 0.1 What is in this hand-off
+
+Two new features, and three things the website must know so that the website and the app stay one:
 
 **Student Choice** (Home's fourth tile, marked NEW). The student goes through the JEE Main chapter-wise questions his own way.
 
@@ -20,6 +26,12 @@
 - **Later, when the website can make such papers:** see the ticked chapters' questions **without options**, tick the ones wanted and get **one paper** made of them (75 questions at most); or ask for a **random mock** of N questions.
 
 **Matched.** After every JEE Main shift, the questions of that shift that matched JE Live's own questions are shown side by side: the JEE Main question, and under it the question of ours it matched. Open to everyone, signed in or not. A signed-in student attempts all of ours in one **real paper** ("Attempt all matched"); a person without an account is asked to sign up first. On Home, the All India series card gives its place to the Matched card as soon as the first shift is published; for its remaining days the series is a bar right under that card.
+
+**Misfire** (Part 4). Every wrong or left question of a finished paper, to be solved again. **It is the website's own**; the app shows it as it comes. The website agent checks six points so the two stay the same.
+
+**Rapid Fire in a browser** (Part 5). The app's game also runs in any browser from the app's own server. **It is the app's**; the website only links to it.
+
+**One account** (Part 6). Signing up or signing in, in the app or on the website, is the same account: the website's. **It already works so**; the website keeps its sign-in doors and its student ids as they are.
 
 ## 0.2 Where things stand on {{TODAY}}
 
@@ -33,8 +45,12 @@
 | Matched: public pages, sign-up sheet, the way back after sign-in, Home card, sign-in bar, the JEE question under ours | **Built.** In production the list is **empty** and the card is **off** | the website and the super admin: the admin page, the real paper, two public doors (Part 2.4) |
 | Matched card on Home and the bar on the sign-in screen | **Off in production:** no shift is published. They come on by themselves **when the first shift is published**, and on **{{CARD_DAY}}** (India time) at the latest | the first published shift (Part 2.6) |
 | The first-shift rule of the card, and the All India bar under the Matched card | **Built on 26 Nov 2026, on the preview.** Not in production yet: there the card still waits for {{CARD_DAY}} or for the switch `on` | the owner's next Publish of the app |
+| Student Choice's new colours (dark-red top cards, glossy subject tabs) and a made paper's subject minutes that add up to its time | **Built on 26 Nov 2026, on the preview** (Part 1.2) | the owner's next Publish of the app |
+| Misfire | **Works:** the app shows the website's own Misfire, plus paper-wise tabs | the website: the checks of Part 4.4 |
+| Rapid Fire in a browser (`…/api/arena` on the app's server) | **Works** in production, from a copy built on 21 Nov 2026; built again on 26 Nov 2026 on the preview, with All India Rapid's "Misfires" tab | the owner's next Publish; the website: a link (Part 5.3) |
+| One account for the website and the app | **Works:** the app signs up and signs in only through the website's own doors | nothing new; the website keeps those doors (Part 6.3) |
 
-"In production" here means: the app's own server in production answers these addresses (checked on {{TODAY}}, Part 3.7). **The screens reach students with the app version that is published.** The chapter search, the three-hour sentence, the first-shift rule of the Matched card and the All India bar were built on 26 Nov 2026 and are on the preview; whether a Publish has been made after each of them cannot be seen from outside and is not known to the app side: ask the owner. A phone that still has an older installed build gets new screens when it updates.
+"In production" here means: the app's own server in production answers these addresses (checked on {{TODAY}}, Part 3.7). **The screens reach students with the app version that is published and installed.** The owner's last Publish before this book was made on 26 Nov 2026 (05:33 UTC): it holds Student Choice on the real chapters with the chapter search, the Matched pages and the Matched paper button. **It does not hold** the first-shift rule of the Matched card, the All India bar, the three-hour sentence, the new colours or the rebuilt browser Rapid Fire: those reach students with the next Publish and new app builds. A phone keeps the screens of the build installed on it until a newer build is installed.
 
 ## 0.3 Who does what
 
@@ -45,7 +61,14 @@
 | **The app side** | Built; the app's server is deployed (the screens: Part 0.2). Follows the website by itself: no new app build when a door opens | Built; the app's server is deployed (the first-shift rule and the All India bar: with the next Publish, Part 0.2). Copies the website's shifts every 2 minutes: no new app build when shifts arrive |
 | **The owner** | Decides the open points of Part 3.8 | Decides the open points of Part 3.8 |
 
-## 0.4 Twenty things nobody must get wrong
+| Who | Misfire (Part 4) | Rapid Fire in a browser (Part 5) | One account (Part 6) |
+| --- | --- | --- | --- |
+| **The website agent** | The six checks of Part 4.4; tells the app side the `kind` of Student Choice and Matched papers | A "Rapid Fire" button / link. Nothing else: never a copy of its code | Keeps the sign-in doors, their fields and every student's `id` as they are (Part 6.3) |
+| **The super admin** | Nothing | Nothing | Deletes a website account by hand when the app's owner panel lists a request (Part 6.5) |
+| **The app side** | Shows the website's Misfire; builds nothing of its own | Owns it; builds the browser copy again after screen changes | Uses only the website's accounts |
+| **The owner** | — | Publishes the app | — |
+
+## 0.4 Twenty-four things nobody must get wrong
 
 1. **Student Choice has no question bank of its own.** Its questions ARE the JEE Main chapter-wise questions. A chapter in Student Choice is a chapter-wise test of the website, under that test's own id. Do not build a second bank.
 2. **A question listed for choosing never carries its options, its answer or its solution** (door B). Options appear only inside the paper.
@@ -67,11 +90,15 @@
 18. **Samples stay on the preview.** Made-up shifts and made-up chapters are for the owner's eyes there only. Never write them into production.
 19. **The fields of the chapter-wise catalogue listed in Part 1.5 are in use.** Do not rename or drop one without telling the app side.
 20. **The first real run is on a test setup.** The first door answered and the first shift published are the first true end-to-end runs: tell the app side before students see them.
+21. **Misfire is the website's.** Nobody builds a second Misfire. Keep the `/my/misfire…` answers and the item id `<attempt id>:<question id>` as they are (Part 4).
+22. **Rapid Fire is the app's.** The website links to `…/api/arena` and never copies Rapid Fire's code, cards or data (Part 5).
+23. **One account.** An account made in the app IS a website account. Never a second user list; never a second account for one phone number (Part 6).
+24. **A student's `id` never changes**, not on a PIN change, not ever: the app's coins, friends and ranks hang on it (Part 6.3).
 
 ## 0.5 How to read this book
 
-- **Website agent:** Part 1.5 to 1.9 and 1.13 (Student Choice), Part 2.3 to 2.7 and 2.11 (Matched), then Part 3 as a reference. The JSON in the grey boxes is also in the `examples` folder of the download; every example in it was run through the app server's own code when this book was built.
-- **Super admin:** Part 0, Part 1.2 (what students see), Part 1.11, Part 2.2, and above all **Part 2.8 (what to do after every shift)** and **Part 2.9 (mistakes and what the student would see)**.
+- **Website agent:** Part 1.5 to 1.9 and 1.13 (Student Choice), Part 2.3 to 2.7 and 2.11 (Matched), **all of Parts 4, 5 and 6** (Misfire, Rapid Fire in a browser, one account), then Part 3 as a reference. The JSON in the grey boxes is also in the `examples` folder of the download; every example in it was run through the app server's own code when this book was built.
+- **Super admin:** Part 0, Part 1.2 (what students see), Part 1.11, Part 2.2, above all **Part 2.8 (what to do after every shift)** and **Part 2.9 (mistakes and what the student would see)**, and Part 6.5 (deleting an account).
 - **Pictures** are from the app's web preview, at a phone's size, taken on {{TODAY}}. The Matched pictures show three **made-up sample shifts** that exist on the preview only. The pictures of question picking and the random mock (Part 1.7) show **made-up questions marked "(Sample)"**, with the browser answering in place of the website's doors that do not exist yet.
 
 ## 0.6 Words used in this book
@@ -90,4 +117,4 @@
 | the envelope | the website's usual wrapper round an answer: `{ "data": …, "error": null, "meta": { "api_version": "1" } }` |
 | to tick | to choose a chapter or a question by tapping it |
 | the ratio | the owner's time rule: 25 Maths = 80 minutes, 25 Physics = 60, 25 Chemistry = 40 |
-| a new build | a new version of the app that students must install. Everything in this book is made so that the website's future work needs **no** new build |
+| a new build | a new version of the app that students must install. Everything in this book is made so that the website's future work needs **no** new build. The app side's own changes (Part 0.2) do need the owner's Publish, and the screens need new builds |

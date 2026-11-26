@@ -134,8 +134,11 @@ Run these on a test setup, signed in as a test student (`-b` = that student's co
 - A chapter test started from Student Choice by the app side (the button was never pressed in a test; it opens the same page the Chapter-wise section opens).
 - The rule's times against the real website, and any attempt longer than 180 minutes (a whole chapter test never is; a made paper can be: 75 Mathematics questions get 240 minutes).
 
+- The new colours (26 Nov 2026) on a real phone and on a slow Android phone. They were walked in the web preview only, 390 and 320 points wide, with no sideways scrolling.
+
 **Known small things, not changed**
 
-- In the paper's make-up the subjects' rounded times can add up to a minute or two more than the total (Part 1.7).
 - The six short search names are fixed in the app (Part 1.3).
 - The Student Choice tile has no switch: taking it off Home needs a new app build (Part 3.4).
+
+**Changed on 26 Nov 2026:** the subjects' minutes in a paper's make-up now add up to exactly the paper's time (Part 1.7); before, they could add up to a minute or two more.

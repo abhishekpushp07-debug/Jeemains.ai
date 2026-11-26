@@ -161,6 +161,12 @@ const dark = {
   custom_tabSky: "#9BDCFF", custom_tabSkyDeep: "#52BDFF", custom_tabSkySoft: "#C4E8FF", custom_tabSkySoftDeep: "#96D5FF", custom_tabSkyGlow: "#1E90FF",
   // The AITS Leaderboard's "Aas-paas" tab is orange, built the same way (words are 6.5 : 1 or more on every tone).
   custom_tabOrange: "#FFA94D", custom_tabOrangeDeep: "#FF7A1A", custom_tabOrangeSoft: "#FFD8B0", custom_tabOrangeSoftDeep: "#FFC088", custom_tabOrangeGlow: "#FF6A00",
+  // Student Choice's subject tabs, built the same way: Physics red, Chemistry amber, Maths teal (words 6.5 : 1 or more),
+  // and the soft wash a chosen chapter of that subject wears.
+  custom_tabRed: "#FF9AA2", custom_tabRedDeep: "#FF6B76", custom_tabRedSoft: "#FFD1D5", custom_tabRedSoftDeep: "#FFBCC2", custom_tabRedGlow: "#E5343F",
+  custom_tabAmber: "#FFD27A", custom_tabAmberDeep: "#FFB52E", custom_tabAmberSoft: "#FFE7B8", custom_tabAmberSoftDeep: "#FFDA94", custom_tabAmberGlow: "#E08A00",
+  custom_tabTeal: "#7EEBDC", custom_tabTealDeep: "#2FD4BE", custom_tabTealSoft: "#C2F5EE", custom_tabTealSoftDeep: "#A3EEE3", custom_tabTealGlow: "#0D9488",
+  custom_washPhysics: "#FFF1F2", custom_washChemistry: "#FFF7E6", custom_washMaths: "#E9FBF8",
   custom_tabInk: "#0F0F12", custom_tabInkSoft: "#3D3D47", custom_tabChip: "rgba(255,255,255,0.92)",
   custom_tabGloss: "rgba(255,255,255,0.62)", custom_tabGlint: "rgba(255,255,255,0.95)",
   custom_todayFrom: "#FFDDBF", custom_todayTo: "#FFB9CC", custom_todayInk: "#8A3350", custom_todayBody: "#5B4048", custom_todayCta: "#FFE3D6",
@@ -384,6 +390,10 @@ export const tabEdges = {
   sun: ["#FF7A00", "#FF4F3A", "#FFB300", "#FF7A00"],
   sky: ["#0A84FF", "#4F46E5", "#8E7BFF", "#0A84FF"],
   orange: ["#FF5A1F", "#E11D74", "#FFC233", "#FF5A1F"],
+  // Student Choice's subjects: red = ruby, flame, rose; amber = orange, vermilion, sun yellow; teal = teal, azure, lime.
+  red: ["#FF2D4A", "#FF8A3D", "#FF7AA2", "#FF2D4A"],
+  amber: ["#FF9500", "#FF5A1F", "#FFD60A", "#FF9500"],
+  teal: ["#10B5A0", "#1E90FF", "#B5F23D", "#10B5A0"],
 } as const;
 // The three colours that run round Home's onyx-and-ruby All India card: ruby, gold, rose.
 export const seriesEdge = ["#FF2D4A", "#FFC857", "#FF7A93", "#FF2D4A"] as const;

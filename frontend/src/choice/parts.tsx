@@ -10,13 +10,14 @@ import { Pill } from "@/src/components/design";
 import { Press, T } from "@/src/components/ui";
 import { colors, space, subjectColor } from "@/src/theme";
 import { useCached } from "@/src/useCached";
-import { Bank, Counts, Question, SHORT, SUBJECTS, Stem, getBank, minutesFor, timeLabel, totalOf } from "./api";
+import { Bank, Counts, Question, SHORT, SUBJECTS, Stem, getBank, minutesFor, splitMinutes, timeLabel, totalOf } from "./api";
 
 /** The bank, kept on the phone for a few minutes (it is the same for every student). */
 export const useBank = (uid?: string) => useCached<Bank>(uid ? "choice.bank" : null, getBank(uid || ""));
 
-export function Tick({ on, size = 26 }: { on: boolean; size?: number }) {
-  return <View style={[styles.tick, { width: size, height: size, borderRadius: size / 2 }, on && styles.tickOn]}>
+/** `color` = the ticked circle's colour (a chapter's subject); black when not given. */
+export function Tick({ on, size = 26, color }: { on: boolean; size?: number; color?: string }) {
+  return <View style={[styles.tick, { width: size, height: size, borderRadius: size / 2 }, on && styles.tickOn, on && color ? { borderColor: color, backgroundColor: color } : null]}>
     {on ? <Glyph name="check" size={size * 0.62} color={colors.onSurfaceInverse} stroke={2.6} /> : null}
   </View>;
 }
@@ -56,12 +57,13 @@ export const stemWidth = (screen: number) => Math.max(1, Math.min(screen, 720) -
 
 /** The paper so far, subject by subject, with the time each subject brings. */
 export function Makeup({ counts, bank, testID }: { counts: Counts; bank: Bank; testID: string }) {
+  const share = splitMinutes(counts, bank.minutes); // the rows add up to exactly the paper's time
   return <View testID={testID} style={styles.makeup}>
     {SUBJECTS.filter(s => counts[s]).map(s => <View key={s} testID={`${testID}-${s.toLowerCase()}`} style={styles.row}>
       <View style={[styles.dot, { backgroundColor: subjectColor(s) }]} />
       <T w="bold" size={14} style={{ flex: 1 }}>{SHORT[s]}</T>
       <T w="heavy" size={14}>{counts[s]} <T size={12} color={colors.muted}>sawaal</T></T>
-      <T w="semibold" size={12.5} color={colors.custom_softText} style={styles.minutes}>{timeLabel(minutesFor({ Physics: 0, Chemistry: 0, Mathematics: 0, [s]: counts[s] }, bank.minutes))}</T>
+      <T testID={`${testID}-${s.toLowerCase()}-time`} w="semibold" size={12.5} color={colors.custom_softText} style={styles.minutes}>{timeLabel(share[s])}</T>
     </View>)}
     <View style={[styles.row, styles.total]}>
       <T w="heavy" size={14} style={{ flex: 1 }}>Poora paper</T>
@@ -76,10 +78,10 @@ export function StepBar({ big, small, label, onPress, disabled, testID }: { big:
   const insets = useSafeAreaInsets();
   return <View testID={testID} style={[styles.bar, { paddingBottom: insets.bottom + 10 }]}>
     <View style={{ flex: 1, minWidth: 0 }}>
-      <T testID={`${testID}-count`} w="heavy" size={17} numberOfLines={1}>{big}</T>
+      <T testID={`${testID}-count`} w="heavy" size={16} numberOfLines={2}>{big}</T>
       <T testID={`${testID}-note`} size={12} color={colors.muted} numberOfLines={1}>{small}</T>
     </View>
-    <Pill testID={`${testID}-go`} label={label} iconRight="arrow-right" disabled={disabled} onPress={onPress} style={disabled ? styles.off : undefined} />
+    <Pill testID={`${testID}-go`} kind="brand" label={label} iconRight="arrow-right" disabled={disabled} onPress={onPress} style={disabled ? styles.off : undefined} />
   </View>;
 }
 

@@ -136,7 +136,7 @@ None of these needs an app update, except taking the tile off Home.
 | Where | Words | When |
 | --- | --- | --- |
 | Home tile | STUDENT CHOICE · apne chapters chuno · NEW | always |
-| First screen, top | Student Choice · Apne chapters, apni marzi. | today |
+| First screen, top | Student Choice · JEE MAIN · CHAPTER-WISE SAWAAL · Apne chapters, apni marzi. | today |
 | | Apna paper, apni marzi. (small line: Apna paper khud banao) | when a way of making a paper is open |
 | First screen, text | JEE Main ke chapter-wise sawaal, aapke chune chapters ke hisaab se. Result, analysis aur solutions har paper ki tarah milte hain. | today |
 | | JEE Main ke chapter-wise sawaalon mein se chapters aur sawaal khud chuno. Result, analysis aur solutions har paper ki tarah milte hain. | question picking open |
@@ -156,7 +156,7 @@ None of these needs an app update, except taking the tile off Home.
 | Search | Is naam ka chapter nahi mila. Spelling dekh lo, ya subject se chapter chuno. (button: Search hatao) | nothing found |
 | Step 1, bar | Chapter chuno · Kam se kam ek chapter tick karo | nothing ticked |
 | Step 1, bar | 3 chapters chune · 3 tests · 165 sawaal · Tests dekho | chapters ticked |
-| Step 2, tests | Aapke chapter tests · Student Choice · Step 2 of 2 · 3 chapter tests · 2 ho gaye | |
+| Step 2, tests | Aapke chapter tests · Student Choice · Step 2 of 2 · STUDENT CHOICE · AAPKE CHAPTER TESTS · 3 chapter tests · 2 ho gaye · Ho gaye · Chal rahe · Baaki | |
 | Step 2, tests | Har chapter ka poora test hai: jo chaho pehle do, ek-ek karke. Result, analysis aur solutions har paper ki tarah milte hain. | |
 | Step 2, a row | 68 Q · 60 min · +4/-1 · 272 marks · Start (or In progress · Resume, or Completed · Result) · Chapters badlo | |
 | Step 2, questions | Sawaal chuno · Maths · 12 sawaal · yahan sirf sawaal hain, options paper mein milenge | question picking open |
@@ -208,11 +208,15 @@ None of these needs an app update, except taking the tile off Home.
 | Part | Files |
 | --- | --- |
 | Student Choice, server | `backend/choice.py`; door C passes through `backend/jl_proxy.py` |
-| Student Choice, app | `frontend/app/choice/index.tsx`, `pick.tsx`, `tests.tsx`, `questions.tsx`; `frontend/src/choice/api.ts`, `search.ts`, `store.ts`, `parts.tsx`; Home's tile in `frontend/app/(tabs)/index.tsx` |
+| Student Choice, app | `frontend/app/choice/index.tsx`, `pick.tsx`, `tests.tsx`, `questions.tsx`; `frontend/src/choice/api.ts`, `search.ts`, `store.ts`, `parts.tsx`, `looks.tsx` (the dark-red top card and the subject tabs; their colours are in `frontend/src/theme.ts`); Home's tile in `frontend/app/(tabs)/index.tsx` |
 | Dream College meter | `frontend/src/dream/store.ts` (`isFullMock`), `frontend/app/result/[id].tsx`, `backend/dream.py` |
 | Matched, server | `backend/matched.py` (the pages, the copy of the website's shifts, the card's day), `backend/app_switches.py`, started in `backend/server.py` |
 | Matched, app | `frontend/app/matched/index.tsx`, `[id].tsx`; `frontend/src/matched/api.ts`, `gate.tsx`, `MatchedCard.tsx`, `looks.tsx`, `Pair.tsx`, `QuestionBlock.tsx`, `MatchedWith.tsx`, `parts.tsx`, `html.ts`; Home `frontend/app/(tabs)/index.tsx`; the All India bar under the card `frontend/src/components/series/HomeSeriesBar.tsx`; sign-in `frontend/app/entry.tsx`; public routes `frontend/app/_layout.tsx`; player `frontend/app/attempt/[id].tsx`; result `frontend/app/result/[id].tsx`; paper's page `frontend/app/set/[id].tsx` |
-| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5): {{TESTS_LINE}}. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py` |
+| Tests | `backend/tests/test_choice.py` (12), `test_matched.py` (6), `test_matched_sync.py` (5): {{TESTS_LINE}}. Search: `node tests/choice_search_check.js`. Looks on the preview (read only): `python3 tests/home_series_bar_look.py`, `python3 tests/choice_cap_sentence_look.py`, `python3 tests/choice_colour_look.py` (390 and 320 points wide) |
+| Misfire, app | `frontend/app/misfire/index.tsx`, `[id].tsx`, `solve.tsx`; `frontend/src/misfire/api.ts`, `AllTab.tsx`, `PapersTab.tsx`, `ChapterReport.tsx`, `SolveCard.tsx`, `NumPad.tsx`, `HomeMisfire.tsx`, `store.ts`, `usePaged.ts`, `parts.tsx`. It keeps no Misfire data of its own (Part 4) |
+| All India Rapid's "Misfires" | server `backend/daily.py` (`GET /api/rf/daily/misses`); app `frontend/src/rapid/DailyMisses.tsx` |
+| Rapid Fire in a browser | the built copy `backend/arena_web/`, served by `backend/arena_web.py` at `/api/arena`; built by `scripts/build_arena_web.sh` (then the owner's Publish) |
+| One account | `frontend/src/auth.tsx`, `frontend/src/api/client.ts`, `backend/jl_proxy.py` (the website's doors), `backend/rf_access.py` (Rapid Fire's id from `auth/me`), `backend/account_deletion.py`, `backend/pin_reset.py` |
 | Samples (preview only) | `backend/tests/matched_sample.py show` or `hide`; `backend/tests/choice_sample.py show` or `hide` |
 | Earlier notes | `memory/WEBSITE_CHOICE_NOTE.md`, `memory/WEBSITE_MATCHED_NOTE.md`, `memory/MATCHED_CONTRACT.md`. This book was written from the code on {{TODAY}} and takes their place for readers outside the app side |
 | This book | `handoff/feature_book/`: `parts/` (the text), `examples/` (the JSON), `shots/` (the pictures), `build_book.py`, `take_shots.py` |
@@ -225,11 +229,11 @@ Every part of the two features carries a fixed name (`testID`; in the web previe
 | --- | --- |
 | Home | `home-tile-choice` (the tile), `home-tile-choice-badge`; `home-matched` (the card), `home-matched-total`, `home-matched-latest`, `home-matched-cta`, `home-matched-soon`, `home-matched-view-all`; `home-series-bar` (the All India bar under the Matched card), `home-series-bar-day`, `home-series-bar-line`; `home-series-view-all` (the All India card is on instead) |
 | Sign-in screen | `entry-matched` (the bar), `entry-matched-note` (the note after "Attempt all matched") |
-| Student Choice, first screen | `choice-screen`, `choice-title`, `choice-facts`, `choice-way-chapters`, `choice-way-tests`, `choice-way-pick`, `choice-way-random`, `choice-soon`, `choice-soon-pick`, `choice-soon-random`, `choice-time`, `choice-time-physics` / `-chemistry` / `-mathematics`, `choice-time-note`, `choice-not-ready`, `choice-error`, `choice-refresh` |
+| Student Choice, first screen | `choice-screen`, `choice-hero` (the dark-red card), `choice-title`, `choice-facts`, `choice-way-chapters`, `choice-way-tests`, `choice-way-pick`, `choice-way-random`, `choice-soon`, `choice-soon-pick`, `choice-soon-random`, `choice-time`, `choice-time-physics` / `-chemistry` / `-mathematics`, `choice-time-note`, `choice-not-ready`, `choice-error`, `choice-refresh` |
 | Random mock sheet | `choice-random-sheet`, `choice-random-input`, `choice-random-quick-15` … `-75`, `choice-random-makeup`, `choice-random-rule`, `choice-random-range`, `choice-random-error`, `choice-random-make` |
-| Step 1, chapters | `choice-pick-screen`, `choice-search-input`, `choice-search-clear`, `choice-search-count`, `choice-search-none`, `choice-search-reset`, `choice-subject-…` (the pills), `choice-chapter-list`, `choice-chapter-<id>` (a row; it is a checkbox), `choice-chapter-<id>-title`, `-subject`, `-picked`, `choice-pick-hint`, `choice-pick-bar` |
-| Step 2, chapter tests | `choice-tests-screen`, `choice-tests-count`, `choice-tests-subject-physics` / `-chemistry` / `-mathematics`, `choice-test-<id>` (a row), `-title`, `-facts`, `-status`, `-action` (Start, Resume or Result), `choice-tests-error`, `choice-tests-change` |
-| Step 2, questions (later) | `choice-questions-screen`, `choice-q-subject-…`, `choice-q-chapter-…`, `choice-questions-chapter`, `choice-questions-hint`, `choice-question-list`, `choice-full`, `choice-next-chapter`, `choice-questions-bar`, `choice-review-sheet`, `choice-review-makeup`, `choice-review-rule`, `choice-review-error`, `choice-make`, `choice-review-back` |
+| Step 1, chapters | `choice-pick-screen`, `choice-search-input`, `choice-search-clear`, `choice-search-count`, `choice-search-none`, `choice-search-reset`, `choice-subject-physics` / `-chemistry` / `-mathematics` (the glossy tabs; `-count` is the ticked count on a tab), `choice-chapter-list`, `choice-chapter-<id>` (a row; it is a checkbox), `choice-chapter-<id>-title`, `-subject`, `-picked`, `choice-pick-hint`, `choice-pick-bar` |
+| Step 2, chapter tests | `choice-tests-screen`, `choice-tests-hero` (the dark-red card), `choice-tests-count`, `choice-tests-done` / `-running` / `-left` (its three counts), `choice-tests-subject-physics` / `-chemistry` / `-mathematics`, `choice-test-<id>` (a row), `-title`, `-facts`, `-status`, `-action` (Start, Resume or Result), `choice-tests-error`, `choice-tests-change` |
+| Step 2, questions (later) | `choice-questions-screen`, `choice-q-subject-…`, `choice-q-chapter-…`, `choice-questions-chapter`, `choice-questions-hint`, `choice-question-list`, `choice-full`, `choice-next-chapter`, `choice-questions-bar`, `choice-review-sheet`, `choice-review-makeup` (a subject's minutes: `choice-review-makeup-physics-time`, and so on; the same on `choice-random-makeup`), `choice-review-rule`, `choice-review-error`, `choice-make`, `choice-review-back` |
 | Matched page | `matched-screen`, `matched-total`, `matched-month-…` (the pills) or `matched-month-only`, `matched-day-<day>`, `matched-shift-<shift id>` (a row), `-count`, `-number`, `matched-empty`, `matched-error`, `matched-refresh` |
 | A shift | `matched-shift-screen`, `matched-shift-count`, `matched-attempt` (the button), `matched-attempt-facts`, `matched-attempt-questions`, `matched-attempt-note`, `matched-attempt-soon`, `matched-shift-list-title`, `matched-subject-…` (the pills), `matched-shift-list`, `matched-shift-empty`, `matched-shift-error`, `matched-signup-sheet`, `matched-signup-yes`, `matched-signup-login` |
 | The paper's page, player, solutions, result | `set-detail-screen`; `matched-with` (the JEE question under ours), `matched-with-where`, `matched-with-jee`; `result-dream` (the Dream College meter: must be absent on a chapter test and on a Student Choice paper) |
@@ -259,16 +263,24 @@ curl -s -o /dev/null -w "%{http_code}\n" https://jeelive-mobile.emergent.host/ap
 curl -s -o /dev/null -w "%{http_code}\n" https://jeelive.ai/api/matched
 # "last_date": with no shift published, the card turns the day after
 curl -s https://jeelive.ai/api/series/all-india-jee
+# 200 = Rapid Fire in a browser (Part 5)
+curl -s -o /dev/null -w "%{http_code}\n" https://jeelive-mobile.emergent.host/api/arena
+# the website's sign-in doors (Part 6): "user": null for a signed-out visitor
+curl -s https://jeelive.ai/api/auth/session
 ```
 
 ## 3.8 Decided by the owner, and still open
 
-**Decided on 26 Nov 2026** (both were open points in version 1 of this book)
+**Decided on 26 Nov 2026** (the first two were open points in version 1 of this book)
 
 | The question | The owner's answer | Where |
 | --- | --- | --- |
 | Whole chapter tests by the ratio as given, or with a longest time? | **A longest time of three hours.** 7 tests are held at 180 minutes; no chapter test is longer than a full mock | Part 1.8 |
 | When should Matched appear if JEE Main shifts are held before the All India series ends? | **On the day of the first shift itself:** the card turns to Matched as soon as the first shift is published; the series is a bar under it for its remaining days | Part 2.6 |
+| How should Student Choice look? | **Colour at the top only:** a dark-red top card like the result page's, glossy subject tabs; the cards below stay white | Part 1.2 |
+| Misfire on the website and in the app? | **The same: one calculation, the website's** | Part 4 |
+| Accounts? | **One user list:** sign up on either side, sign in on both | Part 6 |
+| Rapid Fire now? | **No change to its code.** Its browser copy is built again from the app's code as it is | Part 5 |
 
 **Still open**
 
@@ -280,3 +292,5 @@ curl -s https://jeelive.ai/api/series/all-india-jee
 | 4 | **The app side's suggestions for made papers** (Part 1.6): fresh questions first in a random mock; a daily limit; removing papers never started; no leaderboard | the website agent should not build them unasked |
 | 5 | **The wording of `source` and `tag` on Matched** (Part 2.8) | the super admin writes what seems right |
 | 6 | **The made-up sample shifts on the preview:** keep them for looking, or hide them now? | they stay published on the preview only |
+| 7 | **The `kind` of Student Choice papers and Matched papers in the paper history** (a question for the website agent, Part 4.4 point 5) | their Misfire questions are in "Sab" |
+| 8 | **Opening Rapid Fire from the website without typing the PIN again** (Part 5.4: written, not built) | the student types the phone and PIN once in the browser Rapid Fire |

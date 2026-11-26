@@ -1,0 +1,30 @@
+{
+  "summary": "Frontend-only check of the Student Choice colours on the web preview at 390x844 and 320x844, signed in as the QA learner. Nothing was written: every non-GET call to /api/jl was answered by the browser (0 were caught), /attempt/* was blocked, and Start, Resume, Solutions and Submit were never tapped. 64 of 64 checks passed (36 at 390, 28 at 320), plus a 320 px check with 12 chapters ticked. Landing: the dark-red choice-hero has the gloss and coloured edge, the title 'Apne chapters, apni marzi.' is white, and choice-facts reads '81 chapters · 3750 sawaal · +4 / −1'. The white cards below are unchanged. Pick: the tabs are glossy and coloured (Physics red, Chemistry amber, Maths teal), with role=tab and aria-selected. Count chips show the ticked count per subject (1/1/1, then 10/2/0). A ticked row wears its subject's border, wash and tick colour, and unticking turns it white again. Search works ('therm' finds 3, 'zzzz' shows none + reset, clear and reset both empty the box). choice-pick-bar-go is faded (opacity 0.5, aria-disabled) with no ticks and solid red with ticks. At 320 px '12 chapters chune' wraps to two lines and is not cut. Tests: choice-tests-hero shows '–' first, then '3 chapter tests · 2 ho gaye' with 2/0/1, which adds up to 3. Badges: Physics Units = Start in red with white text (not tapped); Chemistry Mole Concept = Result and Maths Straight Lines = Result, both baby pink. Number circles are in the subject colours. The Straight Lines Result row opens /result/9d3a7c06… on the Analysis tab. 'Chapters badlo' goes back to /choice/pick with the 3 ticks kept. choice-tests-back, choice-pick-back and choice-back all work. Regressions: Home loads (home-tile-choice, the Matched card, the All India bar); the My Tests tabs render and switch (Completed 10 / In progress 0 / Saved 0); the direct result page renders. No sideways scroll on /choice, /choice/pick or /choice/tests at either width. No page errors; the only console error is the expected 401 from POST jl/auth/refresh before sign-in. The browser contexts were thrown away and every tick was unticked. /choice/questions was not tested, as asked. Deprecated packages detected: none (no expo-av, expo-barcode-scanner or expo-background-fetch).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "/choice/tests row title at 320 px", "issue": "'Mole Concept and Stoichiometry' is cut to 'Mole Concept and ...': numberOfLines={2} and only about 140 px between the 46 px number circle and the 63 px Result badge. This was there before this change (the title line was not edited); only 320 px is affected, 390 shows the full title.", "testID": "choice-test-a8f9d83e-9f0c-5b08-86db-b786dbe2d64f-title", "priority": "low"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/choice/pick", "issues": ["Only the open tab has the white count chip; the resting tabs show a plain number. This is how GlossTabs works (My Tests is the same), but the request text said 'each with a white count chip'. The number is readable either way."]}
+    ],
+    "react_native_issues": []
+  },
+  "test_report_links": ["/app/tests/t1_choice_colour_check.py", "/app/tests/t1_choice_bar_320.py", "/tmp/t1choice/*.jpg"],
+  "action_items": [
+    "Optional, low: on /choice/tests at 320 px let a long chapter title use 3 lines (or a slightly smaller badge) so 'Mole Concept and Stoichiometry' is not cut."
+  ],
+  "critical_code_review_comments": [
+    "The theme.ts diff only adds new tokens; no existing colour changed. GlossTabs.tsx is untouched, so My Tests cannot have changed.",
+    "tests.tsx: the badge colour falls back to baby pink for any label that is not Start or Resume. That is fine today (attemptAction returns only Start, Resume or Result), but a future label would quietly get the Result colour.",
+    "A row stays disabled (no tap) until the attempts are read, so a running test cannot be started a second time. Good."
+  ],
+  "updated_files": ["/app/tests/t1_choice_colour_check.py (new, test only)", "/app/tests/t1_choice_bar_320.py (new, test only)"],
+  "success_rate": {"backend": "not tested (frontend only)", "frontend": "100% (64/64 checks); 1 low cut-text defect at 320 that was there before"},
+  "seed_data_creation": "None. Ticks were made only in throw-away browser contexts and unticked.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Use python3 /app/tests/t1_choice_colour_check.py [390|320] (read-only guard, aborts /attempt). The QA learner's Mole Concept test now says Result; My Tests Completed = 10. The only console error is the 401 from auth/refresh before sign-in, which is expected.",
+  "rca_of_issue": ""
+}

@@ -15,6 +15,7 @@ import { ScreenMotion } from "@/src/motion";
 import { colors, radius, space, subjectColor } from "@/src/theme";
 import { Attempt, Chapter, ChapterTest, SHORT, Subject, TestPage, getAttempts } from "@/src/choice/api";
 import { useBank } from "@/src/choice/parts";
+import { ChoiceHero, ON_HERO, heroStyles, subjectWash } from "@/src/choice/looks";
 import { choiceLoaded, chosenChapters, useChoice } from "@/src/choice/store";
 import { attemptAction } from "@/app/catalogue";
 
@@ -26,20 +27,22 @@ const TestRow = memo(function TestRow({ c, attempt, head, wait }: { c: Mine; att
   const router = useRouter();
   const act = attempt === undefined ? null : attemptAction({ id: c.id, attempt });
   const status = act?.label === "Resume" ? (["In progress", colors.custom_timerAmber] as const) : act?.label === "Result" ? (["Completed", colors.custom_mint] as const) : null;
+  // Start in the app's red, Resume in My Tests' yellow (In progress), Result in its baby pink (Completed); anything else plain.
+  const badge = act?.label === "Start" ? [colors.brandPrimary, colors.onBrandPrimary] : act?.label === "Resume" ? [colors.custom_tabSun, colors.custom_tabInk]
+    : act?.label === "Result" ? [colors.custom_tabPink, colors.custom_tabInk] : [colors.custom_cardRaised, colors.onSurface];
   const id = `choice-test-${c.id}`;
   return <View style={{ gap: space.sm }}>
     {head ? <T testID={`choice-tests-subject-${c.subject.toLowerCase()}`} w="heavy" size={11} color={subjectColor(c.subject)} style={styles.subject}>{SHORT[c.subject].toUpperCase()}</T> : null}
     <Press testID={id} disabled={!act} onPress={() => act && router.push(act.to as any)} scaleTo={0.985} accessibilityLabel={`${c.title}. ${act?.label ?? "Loading"}`}>
       <DCard style={styles.row}>
-        <View style={styles.number}><T w="heavy" size={15}>{c.n ?? "•"}</T></View>
+        <View style={[styles.number, { backgroundColor: subjectWash(c.subject), borderColor: subjectColor(c.subject) }]}><T w="heavy" size={15} color={subjectColor(c.subject)}>{c.n ?? "•"}</T></View>
         <View style={{ flex: 1, minWidth: 0, gap: 3 }}>
-          <T testID={`${id}-title`} w="heavy" size={15} numberOfLines={2}>{c.title}</T>
+          <T testID={`${id}-title`} w="heavy" size={15} numberOfLines={3}>{c.title}</T>
           <T testID={`${id}-facts`} size={11.5} color={colors.muted}>{c.count} Q · {c.test.minutes ? `${c.test.minutes} min` : "Untimed"} · +{c.test.correct}/{c.test.wrong} · {c.test.marks} marks</T>
           {status ? <StatusLine testID={`${id}-status`} label={status[0]} color={status[1]} /> : null}
         </View>
-        {act ? <View testID={`${id}-action`} style={[styles.action, { backgroundColor: act.label === "Start" ? colors.onSurface : act.label === "Resume" ? colors.custom_timerAmber : colors.custom_cardRaised },
-          act.label === "Result" && styles.actionLine]}>
-          <T w="heavy" size={12} color={act.label === "Result" ? colors.onSurface : colors.custom_bar}>{act.label}</T>
+        {act ? <View testID={`${id}-action`} style={[styles.action, { backgroundColor: badge[0] }]}>
+          <T w="heavy" size={12} color={badge[1]}>{act.label}</T>
         </View> : wait ? <Skeleton h={36} style={{ width: 64, borderRadius: radius.pill }} /> : null}
       </DCard>
     </Press>
@@ -67,7 +70,9 @@ export default function ChapterTests() {
   const attempts = useCached<Record<string, Attempt | null>>(user && pages.length ? `u.${user.id}.choice.attempts.${pages.map(([k]) => k).join("")}` : null, getAttempts(pages.map(([, p]) => p)), false);
   useListFocus(attempts.revalidate);
   const mineOf = (c: Mine) => (attempts.data ? attempts.data[c.id] ?? null : undefined);
-  const done = attempts.data ? mine.filter(c => attemptAction({ id: c.id, attempt: attempts.data![c.id] }).label === "Result").length : 0;
+  const labels = attempts.data ? mine.map(c => attemptAction({ id: c.id, attempt: attempts.data![c.id] }).label) : null;
+  const done = labels ? labels.filter(l => l === "Result").length : 0;
+  const running = labels ? labels.filter(l => l === "Resume").length : 0;
 
   // Opened without a ticked chapter (a refreshed page): back to step 1.
   if (res.data && choiceLoaded() && (!bank || !mine.length)) return <Redirect href={bank ? "/choice/pick" : "/choice"} />;
@@ -81,8 +86,18 @@ export default function ChapterTests() {
         contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: insets.bottom + space.xl, gap: space.md }}
         ListHeaderComponent={<View style={{ gap: space.md }}>
           <ErrorBox testID="choice-tests-bank-error" error={res.error} retry={res.reload} />
-          {mine.length ? <View style={{ gap: 2 }}>
-            <T testID="choice-tests-count" w="heavy" size={18}>{mine.length} chapter test{mine.length === 1 ? "" : "s"}{attempts.data ? ` · ${done} ho gaye` : ""}</T>
+          {mine.length ? <View style={{ gap: space.md }}>
+            <ChoiceHero testID="choice-tests-hero">
+              <T w="heavy" size={10.5} color={ON_HERO.soft} style={heroStyles.kicker}>STUDENT CHOICE · AAPKE CHAPTER TESTS</T>
+              <T testID="choice-tests-count" w="heavy" size={19} color={ON_HERO.ink}>{mine.length} chapter test{mine.length === 1 ? "" : "s"}{attempts.data ? ` · ${done} ho gaye` : ""}</T>
+              <View style={heroStyles.counts}>
+                {([["done", "Ho gaye", done], ["running", "Chal rahe", running], ["left", "Baaki", mine.length - done - running]] as const).map(([k, label, value], i) =>
+                  <View key={k} style={[heroStyles.count, i > 0 && heroStyles.countLine]}>
+                    <T testID={`choice-tests-${k}`} w="mono" size={20} color={ON_HERO.ink}>{labels ? value : "–"}</T>
+                    <T w="bold" size={10.5} color={ON_HERO.soft} numberOfLines={1}>{label}</T>
+                  </View>)}
+              </View>
+            </ChoiceHero>
             <T testID="choice-tests-hint" size={12.5} color={colors.muted} style={{ lineHeight: 18 }}>Har chapter ka poora test hai: jo chaho pehle do, ek-ek karke. Result, analysis aur solutions har paper ki tarah milte hain.</T>
           </View> : !res.data && !res.error ? <View testID="choice-tests-loading" style={{ gap: space.md }}><Skeleton h={76} /><Skeleton h={76} /><Skeleton h={76} /></View> : null}
           <ErrorBox testID="choice-tests-error" error={attempts.error} retry={attempts.reload} />
@@ -96,7 +111,6 @@ export default function ChapterTests() {
 const styles = StyleSheet.create({
   subject: { letterSpacing: 1.6, marginTop: space.xs },
   row: { flexDirection: "row", gap: space.md, alignItems: "center", padding: space.md, paddingRight: space.lg },
-  number: { width: 46, height: 46, borderRadius: 23, backgroundColor: colors.custom_cardRaised, borderWidth: 1, borderColor: colors.custom_cardLineStrong, alignItems: "center", justifyContent: "center" },
+  number: { width: 46, height: 46, borderRadius: 23, borderWidth: 1, alignItems: "center", justifyContent: "center" },
   action: { paddingHorizontal: 14, height: 36, borderRadius: radius.pill, alignItems: "center", justifyContent: "center" },
-  actionLine: { borderWidth: 1, borderColor: colors.custom_cardLineStrong },
 });

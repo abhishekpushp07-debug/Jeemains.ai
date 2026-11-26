@@ -172,7 +172,7 @@ The four pictures below were taken with **the browser answering in place of door
 
 **Sawaal chuno** (step 2 of 2, after ticking chapters).
 
-- Pills for the subjects that have a ticked chapter, each with how many questions are chosen in it; under them pills for that subject's ticked chapters.
+- Glossy tabs for the subjects that have a ticked chapter (Physics red, Chemistry amber, Maths teal), each with how many questions are chosen in it; under them pills for that subject's ticked chapters.
 - The chapter's name and "Maths · 12 sawaal · yahan sirf sawaal hain, options paper mein milenge".
 - One card per question: a tick, "Q 1", MCQ or NUMERICAL, and the question's words or its picture. **No options.** A tap ticks it.
 - At the end of a chapter: "Agla chapter: …".
@@ -182,4 +182,4 @@ The four pictures below were taken with **the browser answering in place of door
 - **"Paper banao"** opens the sheet "Aapka paper": the make-up subject by subject, "Poore 28 marks. Sahi jawab +4, galat -1, chhoda hua 0. Paper Physics, Chemistry, Maths ke order mein banega; result, analysis aur solutions har paper ki tarah milenge.", then **"Haan, paper banao"** (sends door C) and "Aur sawaal chuno".
 - The chosen questions are kept while the app is open (going back and forth between the steps loses nothing); they are not kept after the app is closed.
 
-**A known small thing in the make-up:** each subject's time is rounded up on its own, so the rows can add up to a minute or two more than the paper's total (picture 13: 8 + 4 + 7 minutes above "17 min"). The total is the right one, and it is what door C must give.
+**The make-up adds up (since 26 Nov 2026).** The paper's minutes are shared out between its subjects in whole minutes that add up to exactly the paper's time: each subject first gets its whole minutes, then the minute or two left over go to the subjects with the largest remainders (picture 13: 7 + 3 + 7 = "17 min"; before, each row was rounded up on its own and showed 8 + 4 + 7). The total is what door C must give; the rows are only how the app shows it.

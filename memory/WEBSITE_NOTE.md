@@ -15,7 +15,7 @@ What is new on the app side
 
 1) Add a "Rapid Fire" button on the website
 - Home page: a card or button near the top (next to the All India series / practice area):
-      Title: "Rapid Fire"    Line: "15-second formula duels with friends. Same account."
+      Title: "Rapid Fire"    Line: "20-second formula duels with friends. Same account."
       Button: "Play now" → opens https://jeelive-mobile.emergent.host/api/arena in the same tab.
 - Main menu / top navigation: a "Rapid Fire" item with the same link.
 - Optional: on the result page, "Revise in Rapid Fire" with the same link.

@@ -10,18 +10,18 @@ import { useAuth } from "@/src/auth";
 import { Empty, ErrorBox, Icon, Press, Skeleton, T } from "@/src/components/ui";
 import { Pill, ScreenHeader } from "@/src/components/design";
 import { ScreenMotion } from "@/src/motion";
-import { PillRow } from "@/src/misfire/parts";
 import { colors, fonts, noOutline, radius, space, subjectColor } from "@/src/theme";
 import { Chapter, SHORT, Subject } from "@/src/choice/api";
+import { SubjectTabs, subjectWash } from "@/src/choice/looks";
 import { StepBar, Tick, useBank } from "@/src/choice/parts";
 import { Found, findChapters, searchIndex } from "@/src/choice/search";
 import { chosenChapters, hasChapter, pickedCount, pickedIn, toggleChapter, useChoice } from "@/src/choice/store";
 
-/** `subject` = said on the row (a search result can be of any subject). */
-function ChapterRow({ c, on, picked, subject }: { c: Chapter; on: boolean; picked: number; subject?: Subject }) {
+/** `subject` = said on the row (a search result can be of any subject); `tone` = the row's own subject, whose colour a chosen row wears. */
+function ChapterRow({ c, on, picked, subject, tone }: { c: Chapter; on: boolean; picked: number; subject?: Subject; tone: Subject }) {
   return <Press testID={`choice-chapter-${c.id}`} onPress={() => toggleChapter(c.id)} scaleTo={0.99} accessibilityRole="checkbox" accessibilityState={{ checked: on }}
-    accessibilityLabel={`${c.title}${subject ? `, ${SHORT[subject]}` : ""}, ${c.count} sawaal${on ? ", chuna hua" : ""}`} style={[styles.row, on && styles.rowOn]}>
-    <Tick on={on} />
+    accessibilityLabel={`${c.title}${subject ? `, ${SHORT[subject]}` : ""}, ${c.count} sawaal${on ? ", chuna hua" : ""}`} style={[styles.row, on && { borderColor: subjectColor(tone), backgroundColor: subjectWash(tone) }]}>
+    <Tick on={on} color={subjectColor(tone)} />
     <View style={{ flex: 1, minWidth: 0, gap: 2 }}>
       <T testID={`choice-chapter-${c.id}-title`} w="heavy" size={15} numberOfLines={2}>{c.n ? `${c.n}. ` : ""}{c.title}</T>
       <T size={12} color={colors.muted} numberOfLines={1}>{subject ? <T testID={`choice-chapter-${c.id}-subject`} w="heavy" size={12} color={subjectColor(subject)}>{SHORT[subject]} · </T> : null}
@@ -66,7 +66,7 @@ export default function ChooseChapters() {
       </View> : null}
       {/* A tap on a chapter ticks it with the keyboard still open; dragging the list puts the keyboard away. */}
       <FlatList ref={list} testID="choice-chapter-list" data={rows} keyExtractor={r => r.c.id} extraData={[chosen, questions]}
-        renderItem={({ item }) => <ChapterRow c={item.c} on={hasChapter(item.c.id)} picked={pickedIn(item.c.id)} subject={found ? item.subject : undefined} />}
+        renderItem={({ item }) => <ChapterRow c={item.c} on={hasChapter(item.c.id)} picked={pickedIn(item.c.id)} subject={found ? item.subject : undefined} tone={item.subject} />}
         keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: space.lg, paddingBottom: space.xl, gap: space.sm }}
         ListHeaderComponent={<View style={{ gap: space.md, paddingBottom: space.xs }}>
@@ -77,8 +77,8 @@ export default function ChooseChapters() {
             : <Empty testID="choice-search-none" icon="magnify" title="Is naam ka chapter nahi mila" body="Spelling dekh lo, ya subject se chapter chuno."
               action={<Pill testID="choice-search-reset" kind="outline" label="Search hatao" onPress={() => setQ("")} />} />)
             : bank && current ? <>
-              <PillRow prefix="choice-subject" value={current.name} onChange={k => setSubject(k as Subject)}
-                items={bank.subjects.map(s => ({ key: s.name, label: SHORT[s.name], count: s.chapters.filter(c => hasChapter(c.id)).length }))} />
+              <SubjectTabs prefix="choice-subject" value={current.name} onChange={setSubject}
+                items={bank.subjects.map(s => ({ subject: s.name, count: s.chapters.filter(c => hasChapter(c.id)).length }))} />
               <T testID="choice-pick-hint" size={12.5} color={colors.muted}>Jitne chahiye utne chapter tick karo, kisi bhi subject se. {bank.pick ? "Sawaal agle step mein chunoge." : "Agle step mein har chune chapter ka poora test milega."}</T>
             </> : null}
           {res.data && !bank ? <Empty testID="choice-pick-not-ready" icon="database-search-outline" title="Chapters abhi nahi mile" body="Thodi der mein dobara dekho." /> : null}
@@ -96,6 +96,5 @@ const styles = StyleSheet.create({
   searchInput: { flex: 1, alignSelf: "stretch", fontFamily: fonts.medium, fontSize: 14, color: colors.onSurface, paddingHorizontal: space.sm, paddingVertical: 0 },
   clear: { width: 44, height: 44, alignItems: "center", justifyContent: "center", marginRight: -space.md },
   row: { flexDirection: "row", alignItems: "center", gap: space.md, minHeight: 64, paddingVertical: 10, paddingHorizontal: 14, borderRadius: 18, borderWidth: 1, borderColor: colors.custom_cardLineStrong, backgroundColor: colors.custom_card },
-  rowOn: { borderColor: colors.onSurface },
   picked: { height: 24, paddingHorizontal: 9, borderRadius: 12, justifyContent: "center", backgroundColor: colors.onSurface },
 });

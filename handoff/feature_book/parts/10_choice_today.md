@@ -14,6 +14,7 @@ Student Choice is **another way to reach the JEE Main chapter-wise questions the
 | A large Student Choice paper (68 questions or more) counts for the Dream College meter: **"Nahi, kabhi nahi"** (never) | 26 Nov 2026 | Part 1.9 |
 | A search box so that a student finds any chapter by name in seconds | 26 Nov 2026 | Part 1.3 |
 | Whole chapter tests follow the 80 / 60 / 40 ratio too, **once the website allows changing their time** | 26 Nov 2026 | Part 1.8: a change on the website, not done yet |
+| Colour at the top only: the top card of each Student Choice screen **dark red like the result page's score card**, the subjects as **glossy tabs** (Physics red, Chemistry amber, Maths teal); the cards below stay white | 26 Nov 2026 | Part 1.2 |
 
 What Student Choice must never do: make up an attempt, a result or a paper on the phone. Every test a student takes from Student Choice is a real paper of the website, with the website's own player, deadline, result, analysis and solutions.
 
@@ -25,7 +26,8 @@ What Student Choice must never do: make up an attempt, a result or a paper on th
 
 **2. First screen** ("Student Choice", small line "Apne chapters, apni marzi").
 
-- Three facts read from the website: how many chapters, how many questions, the marking. On {{TODAY}}: **81 chapters, 3750 sawaal, +4 / −1**.
+- At the top, a **dark-red card** like the result page's score card (a gloss, a glass shine from corner to corner, a coloured edge): the small line "JEE MAIN · CHAPTER-WISE SAWAAL", the title "Apne chapters, apni marzi.", one sentence, and three facts read from the website, in clear glass chips: how many chapters, how many questions, the marking. On {{TODAY}}: **81 chapters, 3750 sawaal, +4 / −1**.
+- The cards below stay white; their icons are red on soft pink.
 - Card **"Chapters chuno"**: "Physics, Chemistry aur Maths ke chapters tick karo. Har chune chapter ka poora test milega: ek-ek karke do." When chapters are already ticked it adds "3 chapters chune hue hain".
 - Card **"Aapke chapter tests"** (only when at least one chapter is ticked): straight to the ticked chapters' tests.
 - Card **"Jald aa raha hai"** (coming soon): "Sawaal khud chunna" and "Random mock", each with a sentence, and "Khulte hi yahin dikhega, app update kiye bina."
@@ -35,23 +37,23 @@ What Student Choice must never do: make up an attempt, a result or a paper on th
 **3. Step 1 of 2, "Chapters chuno".**
 
 - A search box on top ("Chapter ka naam likho…"), Part 1.3.
-- Three pills: Physics, Chemistry, Maths. Each shows how many chapters are ticked in it.
-- One row per chapter, in the website's order: its number and name ("1. Units, Dimensions and Errors") and "68 sawaal · 64 MCQ · 4 numerical". A tap ticks or unticks it. Chapters can be ticked in one, two or all three subjects, as many as wanted.
-- The bar at the bottom: "3 chapters chune" and "3 tests · 165 sawaal", and the button **"Tests dekho"**. With nothing ticked the button is off and the bar says "Kam se kam ek chapter tick karo".
+- Three **glossy tabs**, built like My Tests' tabs: Physics (red), Chemistry (amber), Maths (teal). Each shows how many chapters are ticked in it.
+- One row per chapter, in the website's order: its number and name ("1. Units, Dimensions and Errors") and "68 sawaal · 64 MCQ · 4 numerical". A tap ticks or unticks it. A ticked row wears its subject's colour: a soft wash, a coloured edge and a coloured tick. Chapters can be ticked in one, two or all three subjects, as many as wanted.
+- The bar at the bottom: "3 chapters chune" and "3 tests · 165 sawaal", and the red button **"Tests dekho"**. With nothing ticked the button is off and the bar says "Kam se kam ek chapter tick karo".
 - The ticks are kept **on the phone, for that account**: they are still there the next day. They are not sent to any server (Part 1.10).
 
 [[shots: s05_search | 5. Search: "therm" finds chapters in two subjects ; s06_search_near_spelling | 6. A wrong spelling still finds the chapter ; s07_chapters_ticked | 7. Three chapters ticked, one in each subject ; s08_chapter_tests | 8. Step 2: the ticked chapters' tests, with the student's own state]]
 
 **4. Step 2 of 2, "Aapke chapter tests".**
 
-- The line on top: "3 chapter tests · 2 ho gaye" (how many of them this student has finished).
-- The tests under their subject, in the website's order. Each row: the chapter's number and name, then "68 Q · 60 min · +4/-1 · 272 marks" (all four read from the website), and the student's own state of that test:
+- On top, the same **dark-red card**: "STUDENT CHOICE · AAPKE CHAPTER TESTS", "3 chapter tests · 2 ho gaye" (how many of them this student has finished), and three counts side by side: **Ho gaye** (finished), **Chal rahe** (in progress), **Baaki** (left). Until the student's states have been read, the counts show "–".
+- The tests under their subject, in the website's order. Each row: the chapter's number in a circle of its subject's colour, its name, then "68 Q · 60 min · +4/-1 · 272 marks" (all four read from the website), and the student's own state of that test:
 
 | The student's state of that test (from the website) | The row shows | A tap opens |
 | --- | --- | --- |
-| never started | **Start** | the paper's usual page (picture 9) |
-| started, not submitted | "In progress" and **Resume** | the attempt, where it was left |
-| submitted | "Completed" and **Result** | its result |
+| never started | **Start** (red) | the paper's usual page (picture 9) |
+| started, not submitted | "In progress" and **Resume** (yellow, as My Tests' "In progress") | the attempt, where it was left |
+| submitted | "Completed" and **Result** (baby pink, as My Tests' "Completed") | its result |
 
 - A test that is in progress is always resumed, never started a second time: until the student's states have been read, a row cannot be tapped.
 - **"Chapters badlo"** at the bottom goes back to step 1.
@@ -59,6 +61,8 @@ What Student Choice must never do: make up an attempt, a result or a paper on th
 [[shots: s09_paper_page | 9. "Start" opens the paper's usual page. From here nothing is special]]
 
 **5. From "Start" on it is an ordinary paper.** The page says "JEE MAIN · CHAPTER PRACTICE", the number of questions, the minutes, the marks, the marking, "Before you start", and "Start attempt". Then the 60-second get-ready, the player, submit, the result, the analysis, the solutions. It is **the same set** as in the website's Chapter-wise section: the same attempt shows in My Tests (in progress, completed) and in the Chapter-wise list, on the website and in the app.
+
+**The colours, in short.** Only the top card of each screen, the subject tabs, a ticked row, a test's number and its button carry colour; every other card stays white. They are the app's own (its theme, the result page's dark red, My Tests' tabs and badges): the website does not need to copy them. On a phone that cannot keep up, the app's Smooth Mode draws the shine plain.
 
 **What Student Choice adds today,** plainly: one place where the chapters of all three subjects can be ticked and searched, a list of only the student's own chapters with where he stands in each, and the time rule told in advance. It adds no new paper and no new question.
 
