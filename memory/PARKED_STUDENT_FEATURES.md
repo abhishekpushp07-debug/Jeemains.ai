@@ -1,6 +1,8 @@
 # Parked: three student features
 
-**Status: not started.** No code was written for these features. They were parked at the owner's request when the Super Admin PDF engine work began.
+**Status re-checked 2026-11-26 (code read only, live not checked):** Galti Notebook was built on 21 Nov as "Misfire" (`/misfire`, `backend/tejas/misfire.py`; it holds wrong and skipped questions) and is missing from the app packet. Subject Rank is not built. Seekh Reminder is half there: the previous mock's seekh show on the next mock's Analysis, not on the get-ready screen. The owner was reminded on 26 Nov; these are "Phase J" in plan/phase_HI_guide.md.
+
+**Status when this file was written: not started.** No code was written for these features. They were parked at the owner's request when the Super Admin PDF engine work began.
 
 **Owner's instruction:** save this work for the future, work on super admin first, and **remind the owner about these three features when the super admin work is done.**
 

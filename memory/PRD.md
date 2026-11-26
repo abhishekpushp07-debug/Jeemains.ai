@@ -1,3 +1,12 @@
+## Status — 2026-11-26: Packet E step 4 (both parts) built and tested in preview, NOT deployed. Owner's Phase H "Matched" + Phase I "Student Choice": GUIDE ONLY, no code.
+- Guide: plan/phase_HI_guide.md (Roman Hinglish). A short copy of the owner's decisions is at the top of memory/ROADMAP.md.
+- Waiting for the owner: screenshots and files of the app's two showcase screens, and his answers to the open questions in Hissa 7 of the guide. Do not code H or I before that and before he approves the re-edited guide.
+- The owner said on 26 Nov that old data is not needed, so the copy of old Emergent pictures is backlog only (see ROADMAP).
+- Parked student features re-checked on 26 Nov by reading the code: Galti Notebook exists as Misfire (21 Nov), Subject Rank is not built, the Seekh Reminder is not on the get-ready screen, Misfire is not in the app packet. The owner was reminded in the guide (Phase J).
+- Not verified: anything on live. JEE Main 2027 Session 1 dates (20–24 and 28 Jan, two shifts for Paper 1) were read in NTA's public notice of 24 Oct 2026; which of those days are Paper 1, the Session 2 dates (a web search said 2–7 April) and the answer-key date are not in that notice.
+
+
+
 ## Status — 2026-11-25 (07:25 UTC): Storage packets A–D built and tested in preview; E, F, G NOT started; NOTHING deployed. Fork handoff: memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md (read it first)
 - Packet D (truthful storage badge, shared record tejas_storage_state) verified: storage_badge236 64/64, storage_badge_edge237 14/14 (testing agent iteration_226), storage_badge_real236 9/9 on the real preview bucket, ui_badge236 29/29 (desktop + 390 px).
 - Full regression after the last app-code change, one suite at a time (07:12–07:19 UTC): 26 suites, 1,111 checks, 0 failed. Logs: test_reports/handoff_2026-11-25/.
