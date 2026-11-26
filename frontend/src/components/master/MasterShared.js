@@ -14,6 +14,10 @@ export const fixLink=m=>m.kind==='book_mock'?`/super-admin/fix/${m.book_id}/${m.
 
 export const StatusLabel=({m})=>{
  if(m.stuck)return ['Atki hai','attention'];
+ // Switched on again (or back from the Library) and waiting for its pictures to be proven in storage: Off until then.
+ if(m.pictures_wait?.state==='checking')return ['Off · pictures ki jaanch','processing'];
+ if(m.pictures_wait?.state==='stuck')return ['Off · pictures saabit nahi hui','attention'];
+ if(m.pictures_wait?.state==='missed')return ['Off · samay nikal gaya','attention'];
  if(m.status==='draft'&&m.rereading)return ['Draft · dobara padh rahe hain','processing'];
  if(m.status==='draft'&&m.to_fix)return ['Draft · '+m.to_fix+' fix karne hain','attention'];
  if(m.status==='draft'&&m.empty)return ['Draft · koi sawaal nahi','hidden'];

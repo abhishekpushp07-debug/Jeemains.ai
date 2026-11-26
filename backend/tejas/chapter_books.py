@@ -260,6 +260,10 @@ async def publish_book(id:str,data:ChapterAction,u=Depends(owner)):
     children=await sets.find({'chapter_book_id':id},{'_id':0}).to_list(60)
     if not children or any(len(s['questions'])!=50 or not s.get('independent_check') or not s['verification'].get('key_checks_agree') for s in children):
         raise HTTPException(409,'Every chapter needs50questions,50source keys and a passing independent per-test recheck before publication.')
+    # The chapters are shown to students only when the book's pictures are proven in storage; otherwise nothing is published.
+    from .picture_hold import refusal
+    why=await refusal({'test_kind':'chapter','questions':[q for s in children if not s.get('start_at') for q in s['questions']]},'isliye yeh chapter book Live nahi hui',named=False)
+    if why:raise HTTPException(409,why)
     # Claim a durable common start. Repeat publication never extends validity or unpauses a test.
     start=r.get('publication_start')
     if not start:
@@ -283,7 +287,12 @@ async def chapter_live(id:str,sid:str,data:ChapterLive,u=Depends(owner)):
     s=await sets.find_one({'id':sid,'chapter_book_id':id},{'_id':0})
     if not s or not s.get('start_at'):raise HTTPException(409,'Publish the verified book first.')
     if data.live and now()>=s['end_at']:raise HTTPException(409,'This test has expired; toggling Live never extends validity.')
-    changed=await sets.update_one({'id':sid,'chapter_book_id':id,'revision':data.revision},{'$set':{'live_enabled':data.live},'$inc':{'revision':1}})
+    if data.live and not s.get('live_enabled'):
+        # Switched on again only when its pictures are proven in storage; otherwise nothing changes.
+        from .picture_hold import refusal
+        why=await refusal(s,'isliye yeh Live nahi hua')
+        if why:raise HTTPException(409,why)
+    changed=await sets.update_one({'id':sid,'chapter_book_id':id,'revision':data.revision},{'$set':{'live_enabled':data.live},'$unset':{'picture_wait':''},'$inc':{'revision':1}})
     if not changed.modified_count:raise HTTPException(409,'Test changed elsewhere. Reload before retrying.')
     await audit(u['id'],'Chapter test live setting',sid,str(data.live))
     return await book_view(await get(books,id))

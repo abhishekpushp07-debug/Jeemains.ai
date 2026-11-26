@@ -409,6 +409,10 @@ async def finalize_paper(record,paper):
     if record['publish_when_ready'] and existing['status']!='published':
         actor=await users.find_one({'id':record['owner_id'],'role':'owner'},{'_id':0})
         if not actor:raise ValueError('Publication requires the initiating owner to retain permission.')
+        # Students get this paper only when its pictures are proven in storage; otherwise it stays private with the reason.
+        from .picture_hold import refusal
+        why=await refusal(existing,'isliye yeh Live nahi hua')
+        if why:raise ValueError(why)
         await publish_validated(identifier,{'confirm':True},actor)
     await db.tejas_smart_papers.update_one({'id':paper['id']},{'$set':{'set_id':identifier,'state':'live' if record['publish_when_ready'] else 'ready_private','published_at':now() if record['publish_when_ready'] else None,'rule_issues':[]}})
     await audit(record['owner_id'],'Automatic source-checked test finalized',identifier,'Astra agreement is not an academic correctness guarantee; original provenance retained.')

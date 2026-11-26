@@ -433,6 +433,11 @@ async def maintain(stop, finalize, ensure_grade, archive_publication):
     await recover()
     from .book_delete import resume as finish_deletes
     await finish_deletes()  # an upload the owner deleted for good: an unfinished clean-up carries on from where it stopped
+    try:
+        from .picture_hold import resume as prove_again
+        await prove_again()  # tests that wait for their pictures to be proven: each is tried again by itself, beside this run
+    except Exception:  # noqa: BLE001  a proof round must never stop the rest of this run
+        logging.getLogger(__name__).warning('The picture proofs could not be started again; the next run tries.', exc_info=True)
     from .storage_health import routine
     run_later(routine, seconds=0)  # beside this run, never holding it up: the storage record stays fresh, the big-file route is tried when due
     import tejas_storage

@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
-import {ChevronDown,Wrench,PencilLine,Eye,Pencil,RefreshCw,Archive,Radio,CalendarClock,EyeOff,Lock,Loader2,Trash2} from 'lucide-react';
+import {ChevronDown,Wrench,PencilLine,Eye,Pencil,RefreshCw,Archive,Radio,CalendarClock,EyeOff,Lock,Loader2,Trash2,RotateCw} from 'lucide-react';
 import {DeleteUploadDialog} from './DeleteUploadDialog';
 import {post,patch} from '../../lib/api';
 import {invalidateCatalog} from '../../lib/catalog';
@@ -35,7 +35,7 @@ function StatusMenu({m,busy,onPick}){
   <DropdownMenuContent align="end" className="master-menu">
    <DropdownMenuItem disabled={blocked||m.status==='live'} onSelect={()=>onPick('live',[m])} data-testid={'mock-make-live-'+m.id}><Radio size={15}/>Live karo</DropdownMenuItem>
    <DropdownMenuItem disabled={blocked||m.locked} onSelect={()=>onPick('scheduled',[m])} data-testid={'mock-schedule-'+m.id}><CalendarClock size={15}/>Schedule karo…</DropdownMenuItem>
-   <DropdownMenuItem disabled={m.status==='draft'||m.status==='off'} onSelect={()=>onPick('off',[m])} data-testid={'mock-off-'+m.id}><EyeOff size={15}/>Off karo</DropdownMenuItem>
+   <DropdownMenuItem disabled={m.status==='draft'||(m.status==='off'&&!m.pictures_wait)} onSelect={()=>onPick('off',[m])} data-testid={'mock-off-'+m.id}><EyeOff size={15}/>Off karo</DropdownMenuItem>
    <DropdownMenuSeparator/>
    <DropdownMenuItem disabled={m.locked} onSelect={()=>onPick('library',[m])} data-testid={'mock-library-'+m.id}><Archive size={15}/>Library mein bhejo</DropdownMenuItem>
    {m.kind==='book_mock'&&m.status==='draft'&&m.upload_deletable&&<DropdownMenuItem className="master-menu-danger" onSelect={()=>onPick('delete_upload',[m])} data-testid={'mock-delete-upload-'+m.id}><Trash2 size={15}/>Is PDF ko delete karo…</DropdownMenuItem>}
@@ -58,7 +58,17 @@ function MainAction({m}){
  return null;
 }
 
-function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
+// A test that was switched on again (or came back from the Library) stays Off until its pictures are proven in storage: its row says so.
+function PicturesWait({m,busy,onRetry}){
+ const w=m.pictures_wait;
+ if(!w)return null;
+ return <div className={'master-wait is-'+w.state} data-testid={'mock-pictures-wait-'+m.id} data-state={w.state}>
+  {w.state==='checking'&&<Loader2 size={13} className="spin" aria-hidden="true"/>}<span>{w.line}</span>
+  {w.state!=='missed'&&<button type="button" className="machine-retry" disabled={busy} onClick={()=>onRetry(m)} data-testid={'mock-pictures-retry-'+m.id}><RotateCw size={14} aria-hidden="true"/>Dobara chalao</button>}
+ </div>;
+}
+
+function MockRow({m,i,checked,onCheck,busy,onPick,onRename,onRetry}){
  if(m.kind==='import')return <li className="admin-test-row master-mock-row" data-testid={'mock-row-'+m.id}><span className="admin-test-index" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><div className="admin-row-main"><strong>{m.title}</strong><small>{m.count} sawaal · Purane paper ka upload</small></div><span className="admin-chip tone-hidden"><i aria-hidden="true"/>Draft</span><div className="admin-test-actions"><Button asChild size="sm" variant="outline"><Link to={'/studio/imports/'+m.id} data-testid={'mock-open-import-'+m.id}>Kholo</Link></Button></div></li>;
  return <li className="admin-test-row master-mock-row" data-testid={'mock-row-'+m.id}>
   <label className="master-check-hit"><input type="checkbox" className="admin-row-check" checked={checked} disabled={!!m.rereading} onChange={e=>onCheck(m,e.target.checked)} aria-label={'Chuno: '+m.title} data-testid={'mock-select-'+m.id}/></label>
@@ -68,6 +78,7 @@ function MockRow({m,i,checked,onCheck,busy,onPick,onRename}){
    {m.rereading&&<small className="master-reread" data-testid={'mock-rereading-'+m.id}><Loader2 size={13} className="spin" aria-hidden="true"/>dobara padhi ja rahi hai · {m.rereading.read_pages}/{m.rereading.pages} page</small>}
    {m.stuck&&<small className="admin-reason" data-testid={'mock-stuck-'+m.id}>{stuckLine(m.stuck)}</small>}
    {m.missed_at&&<small className="admin-reason" data-testid={'mock-missed-'+m.id}>{missedLine(m.missed_at)}</small>}
+   <PicturesWait m={m} busy={busy} onRetry={onRetry}/>
    {m.replace_pending&&<small className="admin-replacing">“{m.replace_pending}” isko replace karega. Woh Live hote hi yeh Library mein chala jayega.</small>}<DuplicateNote m={m}/></div>
   <div className="master-row-status"><LiveSwitch m={m} busy={busy} onPick={onPick}/><StatusMenu m={m} busy={busy} onPick={onPick}/></div>
   <div className="admin-test-actions">{m.status==='draft'&&m.count>0&&!m.rereading&&<TryAsStudent m={m}/>}<MainAction m={m}/>{m.kind==='set'&&!m.locked&&<Button size="icon" variant="ghost" aria-label={'Naam badlo: '+m.title} disabled={busy} onClick={()=>onRename(m)} data-testid={'mock-rename-'+m.id}><Pencil size={15}/></Button>}</div>
@@ -81,9 +92,14 @@ export function MockList({items,onChanged,onReplace}){
   const r=await post('/admin/master/status',{items:list.map(m=>({kind:m.kind,id:m.id})),to,...extra});invalidateCatalog();
   if(r.done)toast.success(r.message);
   if(r.skipped.length)toast.message(`${r.skipped.length} mock nahi badle`,{duration:12000,description:r.skipped.slice(0,3).map(s=>`${s.title}: ${s.reason}`).join('\n')});
+  if(r.note)toast.message(r.note,{duration:12000});
   setPicked(new Map());onChanged();
  }catch(e){toast.error(e.message);}finally{setBusy(false);}}
  const [remove,setRemove]=useState(null);
+ async function retry(m){setBusy(true);try{
+  const r=await post('/admin/master/pictures/'+m.id+'/retry');invalidateCatalog();
+  if(r.state==='done')toast.success(r.message);else toast.message(r.message,{duration:12000});
+ }catch(e){toast.error(e.message);}finally{setBusy(false);onChanged();}}
  function pick(to,list){if(to==='scheduled')setSchedule(list);else if(to==='library')setLibrary(list);else if(to==='delete_upload')setRemove({id:list[0].book_id,title:list[0].book});else run(to,list);}
  const pickable=items.filter(m=>m.kind!=='import'&&!m.rereading);
  const chosen=[...picked.values()];
@@ -101,7 +117,7 @@ export function MockList({items,onChanged,onReplace}){
     <Button size="sm" variant="ghost" onClick={()=>setPicked(new Map())} data-testid="bulk-clear">Hatao</Button>
    </div>}
   </div>
-  <ol className="admin-list admin-test-list" data-testid="mock-list">{items.map((m,i)=><MockRow key={key(m)} m={m} i={i} checked={picked.has(key(m))} onCheck={check} busy={busy} onPick={pick} onRename={setRename}/>)}</ol>
+  <ol className="admin-list admin-test-list" data-testid="mock-list">{items.map((m,i)=><MockRow key={key(m)} m={m} i={i} checked={picked.has(key(m))} onCheck={check} busy={busy} onPick={pick} onRename={setRename} onRetry={retry}/>)}</ol>
   <ScheduleDialog open={!!schedule} count={schedule?.length||0} onClose={()=>setSchedule(null)} onSave={(at,live_exam)=>{const list=schedule;setSchedule(null);run('scheduled',list,{at,live_exam});}}/>
   <ConfirmDialog open={!!library} onClose={()=>setLibrary(null)} busy={busy} testId="library-confirm" title={`${library?.length||0} mock Library mein bhejein?`} text="Students ko website aur app par yeh dikhna band ho jayega. Sabke purane score rahenge. Library se kabhi bhi wapas la sakte hain. Verified PYQ papers jahan hain wahin rahenge." button="Library mein bhejo" onConfirm={()=>{const list=library;setLibrary(null);run('library',list);}}/>
   <DeleteUploadDialog target={remove} onClose={()=>setRemove(null)} onDone={()=>{invalidateCatalog();onChanged();}}/>

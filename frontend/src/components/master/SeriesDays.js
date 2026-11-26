@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import {Link} from 'react-router-dom';
-import {CalendarDays,ListOrdered,X,Settings2,PencilLine,Wrench,Eraser,Trash2} from 'lucide-react';
+import {CalendarDays,ListOrdered,X,Settings2,PencilLine,Wrench,Eraser,Trash2,RotateCw} from 'lucide-react';
 import {DeleteUploadDialog} from './DeleteUploadDialog';
 import {api,post,put} from '../../lib/api';
 import {Button} from '../ui/button';
@@ -49,7 +49,12 @@ function Paper({c,free,busy,onAssign,onRemove}){
 export function SeriesDays({section,reloadKey,onChanged}){
  const [data,setData]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0),[busy,setBusy]=useState(false),[dialog,setDialog]=useState(null);
  useEffect(()=>{api('/admin/master/series/'+section.series_id).then(d=>{setData(d);setError('');}).catch(e=>setError(e.message));},[section.series_id,reload,reloadKey]);
- async function run(fn){setBusy(true);try{const r=await fn();toast.success(r.message||'Save ho gaya.');setReload(n=>n+1);onChanged?.();}catch(e){toast.error(e.message,{duration:12000});}finally{setBusy(false);}}
+ // A day's paper that waits for its pictures to be proven changes by itself: the days are read again meanwhile.
+ const checking=!!data&&data.slots.some(s=>s.paper?.pictures_wait?.state==='checking');
+ useEffect(()=>{if(!checking)return;const t=setInterval(()=>setReload(n=>n+1),6000);return()=>clearInterval(t);},[checking]);
+ async function run(fn){setBusy(true);try{const r=await fn();
+  if(r.pictures==='checking'||['checking','stuck','missed','gone'].includes(r.state))toast.message(r.message,{duration:12000});else toast.success(r.message||'Save ho gaya.');
+  setReload(n=>n+1);onChanged?.();}catch(e){toast.error(e.message,{duration:12000});setReload(n=>n+1);}finally{setBusy(false);}}
  if(error)return <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>;
  if(!data)return <Skeleton className="h-64"/>;
  const free=data.slots.filter(s=>!s.paper&&!s.opened),assigned=data.slots.filter(s=>s.paper).length;
@@ -70,7 +75,9 @@ export function SeriesDays({section,reloadKey,onChanged}){
    <div className="admin-panel-head"><div><h2>Din</h2><p>{data.total} mein se {assigned} din mein paper hai.</p></div><Button variant="outline" disabled={busy||!data.slots.some(s=>s.paper&&!s.opened)} onClick={()=>setDialog('clear')} data-testid="series-clear"><Eraser size={16}/>Aage ke saare din khali karo</Button></div>
    <ol className="master-days" data-testid="series-day-list">{data.slots.map(s=>{const [label,tone]=STATE[s.state]||STATE.upcoming;return <li key={s.date} className={'master-day'+(s.paper?' has-paper':'')+(s.opened?' is-opened':'')} data-testid={'series-day-'+s.day}>
     <span className="master-day-num">Din {s.day}</span><span className="master-day-date">{dayIST(s.date)}</span>
-    <strong className="master-day-title">{s.paper?s.paper.title:'Khali'}{s.paper?.pending&&!s.paper.stuck&&<small> · taiyaar ho raha hai</small>}{s.paper?.stuck&&<small className="admin-reason" data-testid={'series-day-stuck-'+s.day}>{stuckLine(s.paper.stuck,'is din ka paper abhi taiyaar nahi hua')}</small>}</strong>
+    <strong className="master-day-title">{s.paper?s.paper.title:'Khali'}{s.paper?.pending&&!s.paper.stuck&&<small> · taiyaar ho raha hai</small>}{s.paper?.stuck&&<small className="admin-reason" data-testid={'series-day-stuck-'+s.day}>{stuckLine(s.paper.stuck,'is din ka paper abhi taiyaar nahi hua')}</small>}
+     {s.paper?.pictures_wait&&<small className={'admin-reason master-wait is-'+s.paper.pictures_wait.state} data-testid={'series-day-pictures-'+s.day} data-state={s.paper.pictures_wait.state}><span>{s.paper.pictures_wait.line}</span>
+      {s.paper.pictures_wait.state!=='missed'&&<button type="button" className="machine-retry" disabled={busy} onClick={()=>run(()=>post('/admin/master/pictures/'+s.paper.id+'/retry'))} data-testid={'series-day-pictures-retry-'+s.day}><RotateCw size={14} aria-hidden="true"/>Dobara chalao</button>}</small>}</strong>
     {s.paper?.kind==='set'&&<label className={'master-live-switch'+(s.paper.off?'':' is-on')}><Switch checked={!s.paper.off} disabled={busy} onCheckedChange={v=>run(()=>post(`/admin/master/series/${data.id}/live`,{id:s.paper.id,live:v}))} aria-label={(s.paper.off?'Live karo: din ':'Off karo: din ')+s.day} data-testid={'series-day-live-'+s.day}/><span data-testid={'series-day-live-word-'+s.day}>{s.paper.off?'Off':'Live'}</span></label>}
     <StatusChip state={tone==='live'?'live':tone} label={label} testId={'series-day-state-'+s.day}/>
     {s.paper&&!s.opened&&<Button size="icon" variant="ghost" disabled={busy} aria-label={'Din '+s.day+' khali karo'} onClick={()=>run(()=>post(`/admin/master/series/${data.id}/unassign`,{kind:s.paper.kind,id:s.paper.id}))} data-testid={'series-day-free-'+s.day}><X size={15}/></Button>}

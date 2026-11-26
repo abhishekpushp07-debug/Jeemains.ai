@@ -269,6 +269,11 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
         raise HTTPException(409, 'This paper was uploaded for the All India Test Series. Give it a day in Schedule & Live.')
     if existing:
         if existing.get('start_at',0)<=now(): raise HTTPException(409,'A started test cannot be rescheduled. Upload a new test for another competition.')
+        if not (existing.get('live_enabled') and existing.get('status')=='published'):
+            # A new time switches an Unlive test on again: only when its pictures are proven in storage; otherwise nothing changes.
+            from .picture_hold import refusal
+            why=await refusal(existing,'isliye yeh Schedule nahi hua')
+            if why: raise HTTPException(409,why)
         res=await sets.update_one({'id':id,'revision':data.revision,'start_at':{'$gt':now()}},{'$set':{'start_at':start,'end_at':end,'last_start_at':last_start,'live_enabled':True,'status':'published'},'$inc':{'revision':1}})
         if not res.modified_count: raise HTTPException(409,'Schedule changed elsewhere. Reload before retrying.')
     else:
@@ -293,6 +298,10 @@ async def schedule_import(id:str,data:ScheduleInput,u=Depends(owner)):
                 raise HTTPException(409, 'Series requires a reviewed public JEE Main full paper: 20 MCQ + 5 numerical per subject, 180 minutes, +4/−1/0.')
             s.update(series_id=SERIES_ID, series_date=data.series_date, series_import=True, competition=False, test_kind='mock', full_length=True)
             s.pop('last_start_at')
+        # Students get this paper only when its pictures are proven in storage; otherwise no test is made.
+        from .picture_hold import refusal
+        why=await refusal(s,'isliye yeh Schedule nahi hua')
+        if why: raise HTTPException(409,why)
         # One immutable content version in one insert; no archive-before-CAS race.
         try: await sets.insert_one(s)
         except DuplicateKeyError: raise HTTPException(409,'Another schedule was saved. Reload to see it.')
@@ -309,6 +318,11 @@ async def toggle_live(id:str,data:LiveInput,u=Depends(owner)):
     s=await sets.find_one({'id':id},{'_id':0})
     if not s: raise HTTPException(409,'Choose the attempt start date/time first.')
     if data.live and not s.get('series_import') and now()>=s['end_at']: raise HTTPException(409,'This test window has ended. Create a new test for a new competition.')
-    changed=await sets.update_one({'id':id,'revision':data.revision},{'$set':{'live_enabled':data.live,'status':'published' if data.live else 'withdrawn'},'$inc':{'revision':1}})
+    if data.live and not (s.get('live_enabled') and s.get('status')=='published'):
+        # Switched on again only when its pictures are proven in storage; otherwise nothing changes.
+        from .picture_hold import refusal
+        why=await refusal(s,'isliye yeh Live nahi hua')
+        if why: raise HTTPException(409,why)
+    changed=await sets.update_one({'id':id,'revision':data.revision},{'$set':{'live_enabled':data.live,'status':'published' if data.live else 'withdrawn'},'$unset':{'picture_wait':''},'$inc':{'revision':1}})
     if not changed.modified_count: raise HTTPException(409,'Another change was saved. Reload before retrying.')
     return view(r,await sets.find_one({'id':id},{'_id':0}))

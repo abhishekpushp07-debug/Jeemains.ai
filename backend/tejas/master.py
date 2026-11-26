@@ -134,12 +134,19 @@ async def type_mocks(sid: str, u=Depends(owner)):
     s = await section_doc(sid)
     e = await exams.find_one({'_id': s['exam_slug']}, {'_id': 0})
     t = await database_now()
-    items = [set_item(test_view(x, t)) for x in await section_tests(s, e['key'])]
+    rows = await section_tests(s, e['key'])
+    items = [set_item(test_view(x, t)) for x in rows]
+    # A test that was switched on again and waits for its pictures to be proven (or was not proven) says so on its row.
+    from .picture_hold import view as wait_view
+    waits = {x['id']: wait_view(x['picture_wait']) for x in rows if x.get('picture_wait')}
+    for it in items:
+        if it['id'] in waits:
+            it['pictures_wait'] = waits[it['id']]
     # A test whose pictures were proven in storage when it went Live says so on its row (never a verified PYQ paper).
     proofs = {p['_id']: p async for p in db.tejas_picture_proofs.find({'_id': {'$in': [i['id'] for i in items if not i['locked']]}, 'ok': True, 'total': {'$gt': 0}},
                                                                       {'proven': 1, 'total': 1, 'store': 1, 'at': 1})}
     for it in items:
-        if it['id'] in proofs:
+        if it['id'] in proofs and 'pictures_wait' not in it:
             it['pictures'] = {k: proofs[it['id']][k] for k in ('proven', 'total', 'store', 'at')}
     waiting = await waiting_items(sid)
     reread = await rereading_books({'payload.destination.section_id': sid})
@@ -251,42 +258,19 @@ async def publish_written(s, u, start=None, live_exam=False):
     return why
 
 
-async def set_status(s, body, u, t):
-    """Returns why this test could not change, or None."""
-    from .structure import locked, test_state
-    state = test_state(s, t)
-    if locked(s) and body.to in ('scheduled', 'library'):
-        return 'Verified PYQ papers are locked: only Live or Off.'
-    if body.to == 'library':
-        from .library import archive_sets
-        return None if await archive_sets([s['id']], u['id'], 'Moved to the Library from Master.') else 'This test cannot move to the Library.'
-    if body.to == 'off':
-        if state == 'draft':
-            return 'Drafts are already hidden from students.'
-        await sets.update_one({'id': s['id']}, {'$set': {'owner_unlive': True}})
-        return None
-    if state == 'ended':
-        return 'This live exam has ended. Its results stay with the students.'
-    if body.to == 'scheduled' and body.live_exam and await attempts.find_one({'set_id': s['id'], 'mode': {'$ne': 'preview'}}, {'_id': 1}):
-        return 'Students already took this test, so it cannot become a live exam. Use a fresh mock.'
-    start = body.at if body.to == 'scheduled' else None
-    if state == 'draft':
-        if s.get('written'):
-            return await publish_written(s, u, start, body.live_exam)
-        if s.get('chapter_book_id'):
-            return 'chapter'
-        return 'Open its upload to finish it first.'
-    change, unset = {}, {'owner_unlive': ''}
+def on_change(s, start, live_exam, t):
+    """What switching a built test on changes (now, or at `start`): (why it cannot be, the update). Nothing is written here."""
+    change, unset = {}, {'owner_unlive': '', 'picture_wait': ''}
     if s.get('live_enabled') is False:
         change['live_enabled'] = True
     if s.get('import_id') or s.get('chapter_book_id'):
         if start and s.get('end_at', 0) <= start:
-            return 'Its access ends before that time.'
+            return 'Its access ends before that time.', None
         if start or (s.get('start_at') or 0) > t:
             change['start_at'] = start or t
     elif start:
         change['start_at'] = start
-        if body.live_exam:
+        if live_exam:
             from .live_window import window
             change['competition'] = True
             change['last_start_at'], change['end_at'] = window(start, s['rules']['minutes'])
@@ -299,7 +283,43 @@ async def set_status(s, body, u, t):
             from .live_window import window
             change['last_start_at'], change['end_at'] = window(t, s['rules']['minutes'])
     # Only a timing change makes a new paper revision; switching On/Off never disturbs students who are about to start.
-    update = {'$unset': unset, **({'$set': change} if change else {}), **({'$inc': {'revision': 1}} if 'start_at' in change else {})}
+    return None, {'$unset': unset, **({'$set': change} if change else {}), **({'$inc': {'revision': 1}} if 'start_at' in change else {})}
+
+
+async def set_status(s, body, u, t, waits=None):
+    """Returns why this test could not change, or None. 'pictures': it stays Off while its pictures are proven (its proof is in `waits`)."""
+    from .structure import locked, test_state
+    state = test_state(s, t)
+    if locked(s) and body.to in ('scheduled', 'library'):
+        return 'Verified PYQ papers are locked: only Live or Off.'
+    if body.to == 'library':
+        from .library import archive_sets
+        return None if await archive_sets([s['id']], u['id'], 'Moved to the Library from Master.') else 'This test cannot move to the Library.'
+    if body.to == 'off':
+        if state == 'draft':
+            return 'Drafts are already hidden from students.'
+        await sets.update_one({'id': s['id']}, {'$set': {'owner_unlive': True}, '$unset': {'picture_wait': ''}})  # Off also ends a wait for its pictures
+        return None
+    if state == 'ended':
+        return 'This live exam has ended. Its results stay with the students.'
+    if body.to == 'scheduled' and body.live_exam and await attempts.find_one({'set_id': s['id'], 'mode': {'$ne': 'preview'}}, {'_id': 1}):
+        return 'Students already took this test, so it cannot become a live exam. Use a fresh mock.'
+    start = body.at if body.to == 'scheduled' else None
+    if state == 'draft':
+        if s.get('written'):
+            return await publish_written(s, u, start, body.live_exam)
+        if s.get('chapter_book_id'):
+            return 'chapter'
+        return 'Open its upload to finish it first.'
+    why, update = on_change(s, start, body.live_exam, t)
+    if why:
+        return why
+    if state in ('unlive', 'paused') and waits is not None:
+        from . import picture_hold as hold
+        if hold.needed(s):
+            # An Off test is shown again only after its pictures are proven in storage; it stays Off until then.
+            waits.append((s, await hold.ask(s['id'], body.to, u['id'], at=start, live_exam=body.live_exam)))
+            return 'pictures'
     await sets.update_one({'id': s['id']}, update)
     row = await sets.find_one({'id': s['id']}, {'_id': 0, 'questions': 0})
     if test_state(row, t) not in ('live', 'scheduled'):
@@ -334,14 +354,16 @@ async def change_status(body: StatusInput, bg: BackgroundTasks, u=Depends(owner)
     t = await database_now()
     if body.to == 'scheduled' and (not body.at or body.at <= t + 30):
         raise HTTPException(422, 'Choose a future date and time.')
-    done, skipped, chapter = 0, [], {}
+    done, skipped, chapter, waits, checking = 0, [], {}, [], 0
     for item in [i for i in body.items if i.kind == 'set']:
         s = await sets.find_one({'$and': [{'id': item.id}, ADMIN_BASE]}, {'_id': 0})
         if not s:
             skipped.append({'id': item.id, 'title': '', 'reason': 'Not found here any more. Reload.'})
             continue
         kind = (await db.tejas_catalog_sections.find_one({'_id': s.get('catalog_section_id')}, {'kind': 1}) or {}).get('kind')
-        reason = 'All India papers go live on their day. Give it a day instead.' if kind == 'aits' and body.to != 'library' else await set_status(s, body, u, t)
+        reason = 'All India papers go live on their day. Give it a day instead.' if kind == 'aits' and body.to != 'library' else await set_status(s, body, u, t, waits)
+        if reason == 'pictures':
+            continue
         if reason == 'chapter':
             if body.to == 'scheduled':
                 reason = 'Tests from a chapter book go Live straight away. Choose Make Live.'
@@ -361,12 +383,37 @@ async def change_status(body: StatusInput, bg: BackgroundTasks, u=Depends(owner)
         d, s2 = await mock_status(mocks, body, bg, u)
         done += d
         skipped += s2
-    await audit(u['id'], f'Master status → {body.to}', ','.join(i.id for i in body.items[:20]), f'{done} changed, {len(skipped)} unchanged')
+    if waits:
+        # Each waiting test answers for itself: proven ones are switched on, an unproven one stays Off with its reason, the rest carry on.
+        from . import picture_hold as hold
+        for (s, _), (outcome, said) in zip(waits, await hold.settle([w for _, w in waits])):
+            if outcome == 'checking':
+                checking += 1
+            elif outcome == 'done' and not said:
+                done += 1
+            else:
+                skipped.append({'id': s['id'], 'title': s.get('display_title') or s['title'], 'reason': hold.line(outcome, said, body.to) or hold.CHANGED})
+    await audit(u['id'], f'Master status → {body.to}', ','.join(i.id for i in body.items[:20]), f'{done} changed, {len(skipped)} unchanged' + (f', {checking} waiting for their pictures' if checking else ''))
     words = {'live': 'Live', 'off': 'Off', 'scheduled': 'scheduled', 'library': 'moved to the Library'}[body.to]
     msg = f"{done} mock{'s' if done != 1 else ''} {'set ' if body.to in ('live', 'off') else ''}{words}."
     if body.to == 'live' and mocks:
         msg += ' Uploaded mocks appear for students in a moment.'
-    return {'done': done, 'skipped': skipped, 'message': msg}
+    out = {'done': done, 'skipped': skipped, 'message': msg}
+    if checking:
+        then = 'Live' if body.to == 'live' else 'Schedule'
+        out.update(checking=checking, note=f'{checking} mock ki pictures storage mein jaanchi ja rahi hain; saabit hote hi apne aap {then} ho jayenge. Tab tak Off hain.')
+    return out
+
+
+@router.post('/pictures/{id}/retry')
+async def retry_pictures(id: str, u=Depends(owner)):
+    """"Dobara chalao" on a test that waits for its pictures to be proven: the proof runs now."""
+    from . import picture_hold as hold
+    out = await hold.again(id)
+    if out is None:
+        raise HTTPException(404, 'Yeh test pictures ki jaanch ka intezaar nahi kar raha. Reload kijiye.')
+    await audit(u['id'], 'Test pictures checked again', id, out['state'])
+    return out
 
 
 async def mock_status(ids, body, bg, u):

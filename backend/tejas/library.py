@@ -67,6 +67,8 @@ async def archive_sets(ids, actor, reason, guard=GUARD):
     done = await sets.update_many({'id': {'$in': ids}, 'archived': {'$ne': True}, **guard},
         {'$set': {'archived': True, 'archived_at': now(), 'archived_by': actor, 'archived_reason': reason[:300]},
          '$unset': {'replace_pending': ''}})
+    from .picture_hold import forget
+    await forget(ids)
     return done.modified_count
 
 
@@ -139,13 +141,14 @@ async def archived_uploads(rows):
     return out
 
 
-async def restore_sets(ids):
-    """Back where they were; a series paper goes back on its day if that day is still free, otherwise without a day."""
+async def restore_sets(ids, by='system'):
+    """Back where they were; a series paper goes back on its day if that day is still free, otherwise without a day.
+    A test that students would see again comes back Off until its pictures are proven in storage: (tests, without a day, {id: proof token})."""
     if not ids:
-        return 0, 0
+        return 0, 0, {}
     rows = await sets.find({'id': {'$in': ids}, 'archived': True}, {'_id': 0, 'id': 1, 'library_series': 1, **{f: 1 for f, _, _ in SOURCES}}).to_list(2000)
     if not rows:
-        return 0, 0
+        return 0, 0, {}
     dayless = 0
     from .series_admin import dates
     ranges = {c['_id']: set(dates(c)) for c in await db.tejas_series.find({}, {'first_date': 1, 'days': 1}).to_list(200)}
@@ -161,7 +164,9 @@ async def restore_sets(ids):
             free = False
             await sets.update_one({'id': r['id']}, {'$unset': {'library_series': ''}})
         dayless += not free
-    await sets.update_many({'id': {'$in': [r['id'] for r in rows]}}, {'$unset': {'archived': '', 'archived_at': '', 'archived_by': '', 'archived_reason': ''}})
+    from .picture_hold import back_from_library
+    held = await back_from_library([r['id'] for r in rows], by)
+    await sets.update_many({'id': {'$in': [r['id'] for r in rows if r['id'] not in held]}}, {'$unset': {'archived': '', 'archived_at': '', 'archived_by': '', 'archived_reason': ''}})
     for field, name, key in SOURCES:
         owners = list({r[field] for r in rows if r.get(field)})
         if not owners:
@@ -171,7 +176,7 @@ async def restore_sets(ids):
         else:
             change = {'$unset': {'archived': '', 'archived_at': ''}}
         await db[name].update_many({key: {'$in': owners}, 'archived': True}, change)
-    return len(rows), dayless
+    return len(rows), dayless, held
 
 
 async def placed(rows):
@@ -230,13 +235,21 @@ async def archive(body: ArchiveInput, u=Depends(owner)):
 async def restore(body: RestoreInput, u=Depends(owner)):
     if not body.ids and not body.uploads:
         raise HTTPException(422, 'Choose what to restore.')
-    n, dayless = await restore_sets(body.ids)
+    n, dayless, held = await restore_sets(body.ids, u['id'])
     k = await restore_uploads(body.uploads)
-    await audit(u['id'], 'Restored from Library', ','.join(body.ids[:20] + [r.id for r in body.uploads[:20]]), f'{n} tests, {k} uploads')
+    from . import picture_hold as hold
+    found = dict(zip(held, await hold.settle([hold.start(i, token) for i, token in held.items()])))
+    checking = sum(1 for o, _ in found.values() if o == 'checking')
+    unproven = [{'id': i, 'reason': hold.line(o, w, 'restore')} for i, (o, w) in found.items() if o in ('stuck', 'missed')]
+    await audit(u['id'], 'Restored from Library', ','.join(body.ids[:20] + [r.id for r in body.uploads[:20]]), f'{n} tests, {k} uploads' + (f', {checking + len(unproven)} Off until their pictures are proven' if held else ''))
     message = f"{n} test{'s' if n != 1 else ''} back where {'they' if n != 1 else 'it'} came from." if body.ids else f"{k} upload{'s' if k != 1 else ''} back in {'their' if k != 1 else 'its'} mock type."
     if dayless:
         message += f" {dayless} series paper{'s' if dayless != 1 else ''} came back without a day because the day is taken: give {'them' if dayless != 1 else 'it'} a free day in the series."
-    return {'restored': n, 'uploads': k, 'without_day': dayless, 'message': message}
+    if checking:
+        message += f' {checking} test ki pictures storage mein jaanchi ja rahi hain: saabit hote hi woh apni purani haalat mein laut aayenge, tab tak Off hain.'
+    if unproven:
+        message += f' {len(unproven)} test Off hain kyunki unki pictures storage mein saabit nahi hui: wajah unki row mein likhi hai (mock type kholiye), wahin “Dobara chalao” hai.'
+    return {'restored': n, 'uploads': k, 'without_day': dayless, 'message': message, 'checking': checking, 'unproven': unproven}
 
 
 @router.post('/admin/library/delete')
@@ -402,13 +415,16 @@ async def cleanup_once():
 
 async def clear_series(actor, reason, only=None):
     """Every series paper (or just the ones named) goes to the Library with its day noted; every series keeps its dates for new papers."""
-    t, n = now(), 0
+    t, n, gone = now(), 0, []
     named = {} if only is None else {'id': {'$in': only}}
     async for s in sets.find({'series_id': {'$nin': [None, '']}, 'archived': {'$ne': True}, **named}, {'_id': 0, 'id': 1, **{k: 1 for k in SERIES_FIELDS}}):
         day = {k: s[k] for k in SERIES_FIELDS if s.get(k) is not None}
         n += (await sets.update_one({'id': s['id'], 'archived': {'$ne': True}}, {
             '$set': {'archived': True, 'archived_at': t, 'archived_by': actor, 'archived_reason': reason, 'library_series': day},
             '$unset': {k: '' for k in SERIES_FIELDS}, '$inc': {'revision': 1}})).modified_count
+        gone.append(s['id'])
+    from .picture_hold import forget
+    await forget(gone)
     if only is not None:
         return {'papers': n, 'waiting_days_freed': 0}
     waiting = await db.tejas_book_mocks.update_many({'set_id': None, 'series_date': {'$nin': [None, '']}},

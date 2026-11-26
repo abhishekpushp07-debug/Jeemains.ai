@@ -45,10 +45,10 @@ function TypePage({sid}){
  const nav=useNavigate();
  const [data,setData]=useState(null),[error,setError]=useState(''),[reload,setReload]=useState(0),[dialog,setDialog]=useState(null);
  useEffect(()=>{api(`/admin/master/types/${sid}/mocks`).then(d=>{setData(d);setError('');}).catch(e=>setError(e.message));},[sid,reload]);
- const busy=data&&(data.uploads.some(u=>u.active)||data.items.some(m=>(m.status==='publishing'&&!m.stuck)||m.rereading));
+ const busy=data&&(data.uploads.some(u=>u.active)||data.items.some(m=>(m.status==='publishing'&&!m.stuck)||m.rereading||m.pictures_wait?.state==='checking'));
  useEffect(()=>{if(!busy)return;const t=setInterval(()=>setReload(n=>n+1),6000);return()=>clearInterval(t);},[busy]);
  // A stuck upload changes by itself (its 15-minute retry): the list is read again every 30 s meanwhile.
- const slow=!!data&&!busy&&data.uploads.some(u=>u.storage_wait);
+ const slow=!!data&&!busy&&(data.uploads.some(u=>u.storage_wait)||data.items.some(m=>m.pictures_wait?.state==='stuck'));
  useEffect(()=>{if(!slow)return;const t=setInterval(()=>setReload(n=>n+1),30000);return()=>clearInterval(t);},[slow]);
  if(error)return <ErrorBox error={error} retry={()=>setReload(n=>n+1)}/>;
  if(!data)return <Skeleton className="h-64"/>;

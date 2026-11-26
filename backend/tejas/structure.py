@@ -336,7 +336,7 @@ FIELDS = {'_id': 0, 'id': 1, 'title': 1, 'display_title': 1, 'exam': 1, 'status'
           'chapter_book_id': 1, 'chapter_subject': 1, 'chapter_number': 1, 'mock_number': 1, 'catalog_section_id': 1,
           'catalog_order': 1, 'live_enabled': 1, 'owner_unlive': 1, 'start_at': 1, 'end_at': 1, 'expires': 1, 'audience': 1,
           'import_id': 1, 'book_import_id': 1, 'mock_book_id': 1, 'series_import': 1, 'series_date': 1, 'rules.minutes': 1,
-          'pyq_date': 1, 'replace_pending': 1, 'count': {'$size': {'$ifNull': ['$questions', []]}}}
+          'pyq_date': 1, 'replace_pending': 1, 'picture_wait': 1, 'count': {'$size': {'$ifNull': ['$questions', []]}}}
 
 
 def test_view(s, t):
@@ -575,11 +575,17 @@ async def update_test(id: str, body: TestPatch, u=Depends(owner)):
     if body.title is not None:
         change['display_title'] = ' '.join(body.title.split())
         notes.append('title=' + change['display_title'])
+    held = False
     if body.live is not None:
         if body.live:
-            unset['owner_unlive'] = ''
+            # An Off test is shown again only after its pictures are proven in storage (never a verified PYQ paper): it stays Off until then.
+            from . import picture_hold as hold
+            held = bool(s.get('owner_unlive')) and s.get('status') == 'published' and hold.needed(await hold.refs(id))
+            if not held:
+                unset.update(owner_unlive='', picture_wait='')
         else:
             change['owner_unlive'] = True
+            unset['picture_wait'] = ''
         notes.append('live=' + str(body.live))
     if body.section_id is not None:
         target = await section_doc(body.section_id)
@@ -593,12 +599,17 @@ async def update_test(id: str, body: TestPatch, u=Depends(owner)):
         notes.append('section=' + target['id'])
     if not notes:
         raise HTTPException(422, 'Nothing to change.')
-    await sets.update_one({'id': id}, {**({'$set': change} if change else {}), **({'$unset': unset} if unset else {})})
+    if change or unset:
+        await sets.update_one({'id': id}, {**({'$set': change} if change else {}), **({'$unset': unset} if unset else {})})
     await audit(u['id'], 'Test placement updated', id, '; '.join(notes)[:900])
     t = await database_now()
+    said, outcome = '', 'done'
+    if held:
+        outcome, words = (await hold.settle([await hold.ask(id, 'on', u['id'], at=hold.opens(s, t))]))[0]
+        said = hold.CHANGED if outcome == 'gone' else hold.line(outcome, words, 'on')
     row = await sets.find_one({'id': id}, FIELDS)
     view = test_view(row, t)
-    return {**view, 'note': NOT_LIVE_NOTE.get(view['state'], '') if body.live else ''}
+    return {**view, 'note': said or (NOT_LIVE_NOTE.get(view['state'], '') if body.live else ''), **({'pictures': outcome} if outcome != 'done' else {})}
 
 
 @router.get('/admin/overview')

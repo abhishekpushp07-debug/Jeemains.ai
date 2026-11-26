@@ -45,7 +45,7 @@ export default function AdminLibrary(){
  const groups=useMemo(()=>groupsOf(shown),[shown]);
  useEffect(()=>{setKind('all');},[exam]);
  function check(ids,on){setPicked(p=>{const n=new Set(p);ids.forEach(id=>on?n.add(id):n.delete(id));return n;});}
- async function restore(ids,refs=[]){setBusy(true);try{const r=await post('/admin/library/restore',{ids,uploads:refs});invalidateCatalog();toast.success(r.message);setPicked(new Set());setAsking(null);refresh();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
+ async function restore(ids,refs=[]){setBusy(true);try{const r=await post('/admin/library/restore',{ids,uploads:refs});invalidateCatalog();if(r.checking||r.unproven?.length)toast.message(r.message,{duration:14000});else toast.success(r.message);setPicked(new Set());setAsking(null);refresh();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  async function remove(){setBusy(true);try{const r=await post('/admin/library/delete',{ids:removing.tests.map(t=>t.id),uploads:removing.uploads.map(x=>({kind:x.kind,id:x.id})),confirm:'DELETE'});toast.success(r.message);setPicked(new Set());setRemoving(null);refresh();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  async function zipAll(){setZipping(true);try{await downloadFile('/admin/library/export','jeelive-library.zip');}catch(e){toast.error(e.message);}finally{setZipping(false);}}
  const chosen=items.filter(t=>picked.has(t.id));

@@ -288,6 +288,10 @@ async def control(id:str,body:Control,bg:BackgroundTasks,u=Depends(owner)):
                 if mock.state!='paused' or mock.published_generation!=mock.generation or not mock.set_id:raise HTTPException(409,'Only a paused, unchanged published mock can resume.')
                 stamp=await database_now()
                 if book.payload.get('competitive') and stamp>=book.payload['closes_at']:raise HTTPException(409,'The competitive window has closed; publish a new edition instead.')
+                # A paused paper is shown again only when its pictures are proven in storage; otherwise it stays paused.
+                from .picture_hold import refusal
+                why=await refusal(await sets.find_one({'id':mock.set_id,'book_import_id':id},{'_id':0}) or {},'isliye yeh mock dobara Live nahi hua (paused hi hai)')
+                if why:raise HTTPException(409,why)
                 await sets.update_one({'id':mock.set_id,'book_import_id':id},{'$set':{'status':'published','live_enabled':True}})
                 mock.state='scheduled' if (mock.release_at or book.payload.get('release_at') or 0)>stamp else 'published'
             elif body.action=='new_version':

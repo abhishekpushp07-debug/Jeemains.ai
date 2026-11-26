@@ -216,7 +216,9 @@ async def facts():
     other = {'status': 'queued', 'kind': {'$ne': 'book_step'}, 'storage_waits': {'$gt': 0}, 'next_run_at': {'$gt': 0}}
     stuck += await db.tejas_jobs.count_documents({**other, 'stuck': True})
     waiting += await db.tejas_jobs.count_documents({**other, 'stuck': {'$ne': True}, 'storage_wait_since': {'$lte': late}})
-    return {'stuck': stuck, 'waiting': waiting, 'big_waiting': big_waiting, 'hung': hung, 'unproven': unproven}
+    # A built test that was switched on again (or came back from the Library) and whose pictures were not proven: it stays Off and says so here too.
+    pictures = await db.tejas_sets.count_documents({'picture_wait.state': 'stuck', 'archived': {'$ne': True}})
+    return {'stuck': stuck, 'waiting': waiting, 'big_waiting': big_waiting, 'hung': hung, 'unproven': unproven, 'pictures': pictures}
 
 
 def speed(rows):
@@ -263,6 +265,8 @@ async def summary(doc=None):
             yellow.append(f"{f['stuck'] - f['unproven']} file Supabase mein atki hai. Wajah aur \"Dobara chalao\" neeche Machine ki list mein hai.")
         if f['unproven']:
             yellow.append(f"{f['unproven']} PDF ke mock ki pictures storage mein saabit nahi hui, isliye woh Live nahi hue (Atki hai). Wajah aur \"Dobara chalao\" neeche Machine ki list mein hai.")
+        if f['pictures']:
+            yellow.append(f"{f['pictures']} test ki pictures storage mein saabit nahi hui, isliye woh Off hain. Wajah aur \"Dobara chalao\" us test ki row mein hai.")
         if f['waiting']:
             yellow.append(f"{f['waiting']} file 10 minute se zyada se ruki hai.")
         if f['hung']:

@@ -45,6 +45,7 @@ SPEC = {
     'master.type_mocks': ('owner_only_type_mock_metadata','normal','read'),
     'master.change_status': ('owner_only_mock_status','control','per_item_state_audited'),
     'master.dismiss_upload': ('owner_only_upload_to_library','control','idempotent_flag_audited'),
+    'master.retry_pictures': ('owner_only_picture_proof_retry','control','idempotent_recheck_audited'),
     'book_delete.delete_facts': ('owner_only_upload_delete_counts_no_paths','normal','read'),
     'book_delete.delete_upload': ('owner_only_never_published_upload_permanent_delete','control','typed_confirm_idempotent_audited'),
     'chapter_split.read_chapters': ('owner_only_chapter_upload_metadata','normal','read'),

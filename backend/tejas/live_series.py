@@ -258,6 +258,10 @@ async def set_problem(s, day):
         return 'The paper permissions expire before its scheduled date.'
     if not s.get('series_import') and (s.get('import_id') or s.get('chapter_book_id')) and (not s.get('live_enabled') or s.get('start_at', float('inf')) > window(day)['opens_at'] or s.get('end_at', 0) < window(day)['closes_at']):
         return 'Enable publication and extend its availability to cover the full scheduled day first.'
+    if s.get('series_import') and not s.get('series_date'):
+        # A paper without a day is hidden; it is shown again on a day only when its pictures are proven in storage.
+        from .picture_hold import refusal
+        return await refusal(s, 'isliye is paper ko din nahi mila')
     return None
 
 

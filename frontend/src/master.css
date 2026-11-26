@@ -313,6 +313,11 @@ a.master-attention-item:hover{transform:translateY(-1px);border-color:var(--bran
 .master-check-all{justify-content:flex-start;gap:8px}
 .master-check-hit .admin-row-check,.master-check-all .admin-row-check{width:22px;height:22px}
 .master-reread{display:inline-flex;align-items:center;gap:6px;color:var(--brand-text)!important;font-weight:700}
+/* A test that waits for its pictures to be proven in storage: why it is still Off, and "Dobara chalao" */
+.master-wait,.master-day-title .master-wait{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:4px 0 0;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+.master-wait>span{flex:1 1 240px;min-width:0}
+.master-wait.is-checking{color:var(--brand-text)}
+.master-wait.is-stuck,.master-wait.is-missed{color:var(--warning)}
 .master-attention-item.tone-processing{color:var(--brand-text);border-color:var(--brand-line);background:var(--brand-soft);overflow-wrap:anywhere}
 /* Machine status inside the storage panel */
 .storage-badge{position:relative}

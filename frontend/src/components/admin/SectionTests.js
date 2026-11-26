@@ -49,7 +49,7 @@ export function SectionTests({section,exam,path,onChanged}){
  const nav=useNavigate();
  const [items,setItems]=useState(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[rename,setRename]=useState(null),[reload,setReload]=useState(0),[picked,setPicked]=useState(new Set()),[confirm,setConfirm]=useState(false);
  useEffect(()=>{setItems(null);setError('');setPicked(new Set());api(path).then(d=>setItems(d.items)).catch(e=>setError(e.message));},[path,reload]);
- async function run(fn,message){setBusy(true);try{const r=await fn();invalidateCatalog();if(message)toast.success(typeof message==='function'?message(r):message);if(r?.note)toast.message(r.note);setReload(n=>n+1);onChanged?.();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
+ async function run(fn,message){setBusy(true);try{const r=await fn();invalidateCatalog();if(message&&!r?.pictures)toast.success(typeof message==='function'?message(r):message);if(r?.note)toast.message(r.note,r?.pictures?{duration:12000}:undefined);setReload(n=>n+1);onChanged?.();}catch(e){toast.error(e.message);}finally{setBusy(false);}}
  function move(i,d){const ids=items.map(t=>t.id);[ids[i],ids[i+d]]=[ids[i+d],ids[i]];run(()=>post(`/admin/catalog/sections/${section.id}/order`,{ids}),'Order saved. Students see the new order.');}
  function check(id,on){setPicked(p=>{const n=new Set(p);on?n.add(id):n.delete(id);return n;});}
  const targets=exam.sections.filter(s=>s.id!==section?.id&&s.kind!=='pyq');

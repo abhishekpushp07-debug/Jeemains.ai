@@ -116,6 +116,7 @@ async def indexes():
     await db.tejas_book_cuts.create_index('book_id')
     await db.tejas_book_allowances.create_index([('book_id', 1), ('state', 1), ('created_at', 1)])
     await sets.create_index([('book_import_id', 1), ('mock_number', 1)])
+    await sets.create_index('picture_wait.state', sparse=True)  # the few tests that wait for their pictures to be proven
     # One paper per day in each series; several series may share a calendar date.
     if 'series_date_1' in await sets.index_information():
         try:

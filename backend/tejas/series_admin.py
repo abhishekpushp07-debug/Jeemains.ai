@@ -207,7 +207,9 @@ async def slots(cfg, t, studio=False, early=False):
                 'can_start': ready and (state in ('live', 'archive') or soon)}
         if studio:
             m = pending.get(day)
-            slot.update(opened=t >= w['opens_at'], paper={'kind': 'set', 'id': s['id'], 'title': s.get('display_title') or s['title'], 'written': bool(s.get('written')), 'off': bool(s.get('owner_unlive'))} if s
+            from .picture_hold import view as wait_view
+            slot.update(opened=t >= w['opens_at'], paper={'kind': 'set', 'id': s['id'], 'title': s.get('display_title') or s['title'], 'written': bool(s.get('written')), 'off': bool(s.get('owner_unlive')),
+                                                          **({'pictures_wait': wait_view(s['picture_wait'])} if s.get('picture_wait') else {})} if s
                         else {'kind': 'book_mock', 'id': m['_id'], 'title': m['label'], 'pending': True, **({'stuck': m['stuck']} if m.get('stuck') else {})} if m else None)
         out.append(slot)
     return out
@@ -384,6 +386,11 @@ async def assign_built(cfg, id, day, w):
     s = await sets.find_one({'id': id, 'series_import': True, 'series_date': {'$exists': False}, 'status': 'published', 'archived': {'$ne': True}}, {'_id': 0})
     if not s or await attempts.find_one({'set_id': id, 'mode': {'$ne': 'preview'}}, {'_id': 1}):
         raise HTTPException(409, 'Use a fresh paper without student attempts.')
+    # A built paper takes a day (students see it from that day) only when its pictures are proven in storage.
+    from .picture_hold import refusal
+    why = await refusal(s, 'isliye is paper ko din nahi mila')
+    if why:
+        raise HTTPException(409, why)
     update = {'series_id': cfg['id'], 'series_date': day, 'series_window': w, 'start_at': w['opens_at'], 'end_at': w['closes_at'], 'live_enabled': True}
     if not is_jee(cfg):
         update['series_pattern'] = {**(cfg.get('pattern') or {}), 'count': paper_pattern(s)['count']}
@@ -542,7 +549,20 @@ async def unassign(sid: str, body: SeriesUnassign, u=Depends(owner)):
 async def paper_live(sid: str, body: SeriesLive, u=Depends(owner)):
     """Off hides one day's paper from students; Live shows it again. The day still decides when it opens."""
     cfg = await series_cfg(sid)
-    done = await sets.update_one({'id': body.id, 'series_id': cfg['id'], 'series_date': {'$nin': [None, '']}, 'archived': {'$ne': True}}, {'$unset': {'owner_unlive': ''}} if body.live else {'$set': {'owner_unlive': True}})
+    where = {'id': body.id, 'series_id': cfg['id'], 'series_date': {'$nin': [None, '']}, 'archived': {'$ne': True}}
+    if body.live:
+        # An Off paper is shown again only after its pictures are proven in storage; it stays Off until then.
+        from . import picture_hold as hold
+        s = await sets.find_one(where, {**hold.REFS, 'owner_unlive': 1, 'start_at': 1})
+        if s and s.get('owner_unlive') and hold.needed(s):
+            outcome, words = (await hold.settle([await hold.ask(body.id, 'on', u['id'], at=hold.opens(s, await database_now()))]))[0]
+            await audit(u['id'], 'Test series paper Live asked', body.id, outcome)
+            if outcome == 'checking':
+                return {'message': hold.line(outcome, words, 'on'), 'pictures': 'checking'}
+            if outcome != 'done':
+                raise HTTPException(409, hold.line(outcome, words, 'on') or hold.CHANGED)
+            return {'message': 'Live again. Students see it on its day.'}
+    done = await sets.update_one(where, {'$unset': {'owner_unlive': '', 'picture_wait': ''}} if body.live else {'$set': {'owner_unlive': True}, '$unset': {'picture_wait': ''}})
     if not done.matched_count:
         raise HTTPException(404, 'This paper has no day in this series. Reload.')
     await audit(u['id'], 'Test series paper ' + ('Live' if body.live else 'Off'), body.id, '')
