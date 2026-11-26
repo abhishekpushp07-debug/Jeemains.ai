@@ -4,10 +4,11 @@ import Animated, { Easing, ZoomIn, cancelAnimation, interpolate, useAnimatedStyl
 import Svg, { Path } from "react-native-svg";
 import { T, tap } from "@/src/components/ui";
 import { arena, fx } from "@/src/theme";
-import { useStill } from "@/src/motion";
+import { useLowMotion, useStill } from "@/src/motion";
 
 // The playful layer of the arena: squashy presses, twinkles, confetti and counting numbers.
-// Everything here is transform/opacity only and goes still when Reduce Motion is on.
+// Everything here is transform/opacity only and goes still when Reduce Motion is on; confetti, counting and pop-ins
+// also rest on a phone that cannot move anything smoothly (useLowMotion).
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 /** A fixed pseudo-random number in [0, 1) for piece i, property k: the same layout on every render. */
@@ -58,7 +59,7 @@ function Piece({ i, w, h, colors }: { i: number; w: number; h: number; colors: r
 }
 /** One shower of confetti for a win. Never loops. */
 export function Confetti({ count = 30, colors = CONFETTI }: { count?: number; colors?: readonly string[] }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   const { width, height } = useWindowDimensions();
   if (reduced) return null;
   return <View pointerEvents="none" testID="rf-confetti" style={[StyleSheet.absoluteFill, styles.top]}>{Array.from({ length: count }, (_, i) => <Piece key={i} i={i} w={width} h={height} colors={colors} />)}</View>;
@@ -66,7 +67,7 @@ export function Confetti({ count = 30, colors = CONFETTI }: { count?: number; co
 
 /** A number that counts up to its value. */
 export function Count({ to, prefix = "", size = 24, color = arena.text, testID }: { to: number; prefix?: string; size?: number; color?: string; testID?: string }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   const [v, setV] = useState(reduced ? to : 0);
   useEffect(() => {
     if (reduced) { setV(to); return; }
@@ -79,7 +80,7 @@ export function Count({ to, prefix = "", size = 24, color = arena.text, testID }
 
 /** Children pop in once, smoothly (no springy wobble: a wobble read as the cards flickering), one after another when given a delay. */
 export function Pop({ children, delay = 0, style }: { children: React.ReactNode; delay?: number; style?: StyleProp<ViewStyle> }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   return <Animated.View entering={reduced ? undefined : ZoomIn.delay(delay).duration(220).easing(Easing.out(Easing.cubic))} style={style}>{children}</Animated.View>;
 }
 

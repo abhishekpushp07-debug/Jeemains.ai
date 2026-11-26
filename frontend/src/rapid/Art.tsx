@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { ImageStyle, StyleProp, View } from "react-native";
 import { Image } from "expo-image";
-import Animated, { Easing, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSequence, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { Easing, cancelAnimation, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSequence, withSpring, withTiming } from "react-native-reanimated";
 import { arena } from "@/src/theme";
-import { useStill } from "@/src/motion";
+import { useLowMotion, useStill } from "@/src/motion";
 
 // Original arena artwork, bundled with the app (made once with tools/make_arena_art.py). Each picture carries its own glow.
 const ICONS = {
@@ -85,10 +85,14 @@ export function Emblem({ id, size = 48, testID }: { id?: string | null; size?: n
  * so the two sides always match. `breathe` lets the wings beat slowly and the diamond pulse; `burst` throws the wings open once.
  */
 export function PhoenixDiamond({ width = 220, color = "red", breathe, burst, wingsOnly, testID }: { width?: number; color?: GemColor; breathe?: boolean; burst?: boolean; wingsOnly?: boolean; testID?: string }) {
-  const reduced = useReducedMotion(), still = useStill();
+  const reduced = useLowMotion(), still = useStill();
   const beat = useSharedValue(0.5), open = useSharedValue(burst && !reduced ? 0 : 1);
   useEffect(() => {
-    if (still) return;
+    if (still) {
+      // A covered screen plays its burst when it comes back. A phone that rests for good never plays it: open, at rest.
+      if (reduced) { open.value = 1; beat.value = 0.5; }
+      return;
+    }
     if (burst) open.value = withDelay(120, withSpring(1, { damping: 8, stiffness: 110 }));
     if (breathe) {
       const calm = Easing.inOut(Easing.sin);
@@ -96,7 +100,7 @@ export function PhoenixDiamond({ width = 220, color = "red", breathe, burst, win
       beat.value = withRepeat(withSequence(withTiming(1, { duration: 1300, easing: calm }), withTiming(0, { duration: 1300, easing: calm })), -1, false);
     }
     return () => { cancelAnimation(beat); cancelAnimation(open); };
-  }, [still, breathe, burst, beat, open]);
+  }, [still, reduced, breathe, burst, beat, open]);
   const half = width / 2, height = half * WING_RATIO, centre = width * 0.44;
   // Folded wings point straight up behind the diamond; open wings beat a few degrees around their root.
   const leftWing = useAnimatedStyle(() => ({ opacity: Math.min(1, open.value * 1.6), transform: [{ rotate: `${58 * (1 - open.value) + (beat.value - 0.5) * 7}deg` }, { scale: 0.55 + 0.45 * open.value }] }));

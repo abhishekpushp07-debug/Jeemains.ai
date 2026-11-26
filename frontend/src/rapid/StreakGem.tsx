@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, useWindowDimensions } from "react-native";
-import Animated, { Easing, ZoomIn, interpolate, runOnJS, useAnimatedStyle, useReducedMotion, useSharedValue, withTiming } from "react-native-reanimated";
+import Animated, { Easing, ZoomIn, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { useLowMotion } from "@/src/motion";
 import { T, buzz } from "@/src/components/ui";
 import { playSfx } from "@/src/sfx";
 import { arena, gemColors } from "@/src/theme";
@@ -18,7 +19,7 @@ export const trailingStreak = (answers?: { outcome: string }[]) => {
 
 /** Sits beside the score: unlit with a count (2/3) until a milestone, then burning in that diamond's colour. */
 export function StreakGem({ streak }: { streak: number }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   const lit = [...GEM_ORDER].reverse().find((c) => GEM_AT[c] <= streak);
   const next = GEM_ORDER.find((c) => GEM_AT[c] > streak);
   return <View testID="rf-streak-gem" accessibilityLabel={`Phoenix streak ${streak}`} style={[styles.chip, lit && { borderColor: gemColors[lit] }]}>
@@ -36,7 +37,7 @@ export function RivalGem({ streak, size = 18, testID }: { streak: number; size?:
 
 /** The moment a diamond is won, played in the gap between two cards. Bigger and brighter for rarer diamonds. */
 export function GemFlare({ color, onDone }: { color: GemColor; onDone: () => void }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   const tier = GEM_ORDER.indexOf(color);
   const t = useSharedValue(0);
   useEffect(() => {

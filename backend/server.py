@@ -145,7 +145,7 @@ async def startup():
         logging.getLogger("uvicorn.error").setLevel(logging.WARNING)
     logging.getLogger("httpx").setLevel(logging.WARNING)  # httpx logs every request at INFO
     jl_proxy.http = make_client()
-    await db_setup.run_once(db, cups_router)
+    app.state.db_setup = await db_setup.run_before_serving(db, cups_router)  # kept: a task nobody holds can be dropped
     asyncio.create_task(jobs.cup_night_loop(cups_router))
     asyncio.create_task(card_bank.card_sync_loop(db))
     asyncio.create_task(jobs.sweep_loop(db, duel_api["settle"], cups_router))

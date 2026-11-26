@@ -20,8 +20,9 @@
   2. Work in small packets that don't interfere with each other.
   3. Aim for the fastest, most efficient, most capable platform.
   4. Small / slow Android phones: automatically drop gloss → animation → cheerleading so nothing lags
-     (today: `src/analysis/smooth.ts` "Smooth Mode" calms the Shine on slow phones; NOT proven for every animation /
-     cheer component — see §5 backlog).
+     (`src/analysis/smooth.ts` "Smooth Mode" calms the Shine; since 26 Nov late night its lowest level also rests the
+     endless decoration and puts every celebration in its calm form: `useLowMotion` / `useStill` in `src/motion.tsx`.
+     Proven in a browser only, NOT on a real slow phone — see the last PRD section and `tests/slow_phone_*.py`).
   5. Never crash, always fast.
   6. Don't rush; make it perfect.
 - **Never:** touch `metro.config.js`, `.env` URLs/ports, `EXPO_PACKAGER_*`; overwrite existing files (use search_replace);
@@ -123,6 +124,11 @@
    2. Slow first start: `backend/server.py` startup awaits `db_setup.run_once` (indexes, ~14 k card sync, migrations)
       before uvicorn listens → `/health` connection-refused during start. Option: run it in a background task.
       Touches startup → small packet, test carefully, ask first.
+      **DONE 26 Nov late night (owner's yes), as a limit, not a background task:** `db_setup.run_before_serving`
+      waits at most 30 s, then the setup goes on behind a server that answers. Measured: the setup takes 29 ms on
+      the preview and a restart is unreachable for 0.9 s before and after, so nothing got faster; it only cannot hang
+      any more. Not fully in the background on purpose (a fresh database needs the capped `rf_events` and the unique
+      indexes before the first request). The health check may still warn about the wait; that is the reason.
    3. `.gitignore` `.env*`: platform default, nothing to do.
    4. Store review: needs a reviewer demo login (separate account, not the owner's QA learner); not in repo.
 
@@ -155,8 +161,11 @@
    readiness review (skills `expo-appstore-readiness-review`, `expo-playstore-readiness-review`); Rapid Fire card
    teacher-review list; two small labels (`aria-checked` on count pills, `rf-history-empty`); All India Rapid
    "Misfires" number (counts every not-right card, e.g. 36, while never-reached cards are not listed — owner's
-   decision pending); prove golden rule 4 for every animation/cheer (CheerSquad, CheerBanner, ChampionsWall,
-   CupShowcase, DailyScenes, StoreTab) — today they honour reduced-motion / `useStill`, not a device-speed check.
+   decision pending); golden rule 4 for every animation/cheer (CheerSquad, CheerBanner, ChampionsWall,
+   CupShowcase, DailyScenes, StoreTab, the crown celebration, the diamond flare, the reward panel, Dream Unlocked):
+   since 26 Nov late night they follow the device-speed level too (`useLowMotion` / `useStill`), checked in a
+   browser by `tests/slow_phone_{check,surfaces,dream,wins,smoke}.py`. STILL OPEN: the same on a real slow Android
+   phone; and the browser copy `backend/arena_web/` was NOT rebuilt, it has the old celebrations (owner's yes first).
 
 ---
 

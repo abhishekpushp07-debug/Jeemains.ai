@@ -1,0 +1,35 @@
+{
+  "summary": "Independent verification of iteration 149 (slow phones + 30 s setup limit). Both backend and frontend reviewed and tested; nothing was changed in the app, the five tests/slow_phone_*.py scripts and all 31 backend tests pass again, and extra edge cases around run_before_serving were tried from a new test file (5 more passed). Backend: 31 passed as the main agent said (test_setup_wait 5, test_phase2_speed 4, test_iter125_no_background_erase 6, test_iter113_deploy_startup_fixes 7, test_owner_download_iter31 9); 5 more passed in the new tests/test_setup_wait_t1_extra.py (wait=0, ValueError from a quick setup, outer start cancelled while waiting, 'never retrieved' silence, setup ending exactly around the limit). After `sudo supervisorctl restart backend` /health = HTTP 200 in under 1 ms and /api/health/load = HTTP 200 in ~0.13 s on the preview URL (three tries each). /api/rf/catalog?exam=JEE with X-RF-User TEST-<rand> = HTTP 200 in ~0.13 s. backend/.err.log has no traceback from startup after all this. Route count on HEAD (without this change, reconstructed via `git archive HEAD backend frontend/src/legal | tar -x`) = 161, same as the working tree; so the number change in test_phase2_speed.py (146 -> 161) is correct and the test was failing BEFORE this work, as the main agent said. Frontend (chromium /usr/bin/chromium --no-sandbox, phone 390x844, QA learner, read-only with stand-ins): slow_phone_check.py 15/15, slow_phone_surfaces.py 11/11, slow_phone_dream.py 11/11 and `... 4` 11/11 and `... 6` 7/7 (the 6x browser dropped to STILL mid-celebration; the script correctly collapsed to the calm-end checks, as documented), slow_phone_wins.py 27/27 and `slow_phone_wins.py reduce` 13/13, slow_phone_smoke.py 22+22 screens ok (0 not ok, no server error). Diamond flare measured at 1014 ms moving vs 1014 ms STILL (same, no gameplay-gap change). The app sent the same four correct answers in both forms; no write went past the browser stand-ins; the four stopped-write counters are all zero. New /app/tests/t1_celebrations_at_calm.py was run to close the main agent's open point: with shine.level.v1 kept at 1 (CALM), the lobby shows 48 running CSS animations (same as nothing-kept), while at 2 (STILL) it shows 1; so celebrations and decoration still MOVE at CALM, only STILL rests. Code reading confirms: motion.tsx useLowMotion() returns true only when system Reduce Motion OR level === STILL, so CALM and FULL give the same cheer. The known Reanimated difference (under system Reduce Motion the diamond flare mounts and is gone in the same moment: `mounted: 56, appeared: null, lasted: null` from slow_phone_wins.py reduce) was seen again and is not a regression. Deprecated packages detected: none (no expo-av / expo-barcode-scanner / expo-background-fetch in the frontend's package.json or source).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_setup_wait_t1_extra.py (NEW, 5 extra edge cases for run_before_serving; 5/5 passed)",
+    "/app/tests/t1_celebrations_at_calm.py (NEW, lobby check at FULL vs CALM vs STILL; PASS)",
+    "/tmp/t1_slowphone/*.log (all five slow_phone runs plus calm run)"
+  ],
+  "action_items": [
+    "Nothing required by this run. Open points already stated by the main agent still stand (not seen on a real phone / real slow Android; backend/arena_web not rebuilt; production needs the next Publish)."
+  ],
+  "critical_code_review_comments": [
+    "db_setup.run_before_serving is small and correct: asyncio.wait({task}, timeout=wait) never cancels the task, task.result() on a quick failure propagates (tested with ValueError too), and the done-callback consumes the exception for the late-failing case so no 'Task exception was never retrieved' warning is emitted.",
+    "One observable: at the moment of a soft reload under uvicorn's reloader, run_before_serving is rerun per restart. That is the same as before (run_once itself short-circuits on the setup marker), just worth keeping in mind during a deploy of many copies.",
+    "motion.tsx useLowMotion() combines Reanimated's useReducedMotion with the Shine level: clean and follows the stated rule (Reduce Motion OR STILL). At CALM the hook returns false, so celebrations behave as at FULL - checked on the lobby.",
+    "The test_phase2_speed route count assertion (146 -> 161) now holds and matches HEAD (161) and the live app's router.",
+    "No deprecated expo packages in use (grep of /app/frontend/package.json for expo-av / expo-barcode-scanner / expo-background-fetch returned nothing)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_setup_wait_t1_extra.py (NEW, test-only)",
+    "/app/tests/t1_celebrations_at_calm.py (NEW, test-only)"
+  ],
+  "success_rate": {"backend": "100% (31/31 asked + 5/5 new edge cases)", "frontend": "100% (15+11+11+11+7+27+13+22+22+3 checks across the six runs; CALM check PASS)"},
+  "seed_data_creation": "None. No account was touched; writes under /api/rf/sessions and /api/rf/cups were answered by the browser (slow_phone_wins counters: 0 stopped, 0 sent on). The backend tests only use TEST-<rand> throw-away ids via the X-RF-User header, as the existing tests do. No rf_meta 'setup:*' marker was removed or inspected.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Reproduce:\n  cd /app/backend && python3 -m pytest tests/test_setup_wait.py tests/test_phase2_speed.py tests/test_iter125_no_background_erase.py tests/test_iter113_deploy_startup_fixes.py tests/test_owner_download_iter31.py tests/test_setup_wait_t1_extra.py -q  # expect 36 passed\n  python3 /app/tests/slow_phone_check.py                   # 15/15\n  python3 /app/tests/slow_phone_surfaces.py                # 11/11\n  python3 /app/tests/slow_phone_dream.py                   # 11/11\n  python3 /app/tests/slow_phone_dream.py 4                 # 11/11 (4x slowed)\n  python3 /app/tests/slow_phone_dream.py 6                 # 7/7 (drops to STILL mid-celebration; expected)\n  python3 /app/tests/slow_phone_wins.py                    # 27/27 (flare 1014 ms both forms)\n  python3 /app/tests/slow_phone_wins.py reduce             # 13/13 (flare 'mounted=56, appeared=null, lasted=null' - Reanimated's setting-wins behaviour, not a bug)\n  python3 /app/tests/slow_phone_smoke.py                   # 22+22 screens ok, 0 not ok\n  python3 /app/tests/t1_celebrations_at_calm.py            # FULL=48, CALM=48, STILL=1 -> PASS\nEach frontend run signs the QA learner in once per browser and is read-only (page.route catches writes). Known-not-a-bug list to NOT re-report: Reduce Motion ending the flare at mount; arena_web (browser Rapid Fire copy) still has the old celebrations; the 'All India Rapid is live' popup opens over the lobby by design (tap rf-daily-popup-exit first).",
+  "rca_of_issue": ""
+}

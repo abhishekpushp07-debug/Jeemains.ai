@@ -3,10 +3,11 @@ import { Modal, Platform, ScrollView, StyleSheet, View, useWindowDimensions } fr
 import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import Animated, { Easing, SharedValue, cancelAnimation, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withTiming } from "react-native-reanimated";
+import Animated, { Easing, SharedValue, cancelAnimation, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withTiming } from "react-native-reanimated";
 import Svg, { Circle, Defs, Line, LinearGradient as Grad, Path, Stop } from "react-native-svg";
 import { T } from "@/src/components/ui";
 import { Avatar } from "@/src/components/Entry";
+import { useLowMotion } from "@/src/motion";
 import { playSfx } from "@/src/sfx";
 import { arena, fx, gemColors } from "@/src/theme";
 import { RaisedButton } from "./arena";
@@ -62,10 +63,10 @@ export function Dancer({ frames, height, aspect, clock, seq, hops, spins, flip, 
 
 /** A firework bursting in the sky over and over. */
 export function Burst({ x, y, size, color, delay, testID }: { x: number; y: number; size: number; color: string; delay: number; testID?: string }) {
-  const reduced = !!useReducedMotion();
+  const reduced = useLowMotion();
   const p = useSharedValue(0);
   useEffect(() => {
-    if (reduced) return;
+    if (reduced) { p.value = 0; return; } // at rest it is not drawn (also when the phone stops keeping up half-way through one)
     p.value = withDelay(delay, withRepeat(withTiming(1, { duration: 1500, easing: Easing.out(Easing.cubic) }), -1, false));
     return () => cancelAnimation(p);
   }, [reduced, delay]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -102,7 +103,7 @@ export function CheerSquad({ visible, name, avatar, frame, crown, level: lv = 1,
   visible: boolean; name: string; avatar?: string | null; frame?: string | null; crown: { won: number; real: number }; level?: number; title?: string; onClose: () => void;
 }) {
   const { width: W, height: H } = useWindowDimensions();
-  const reduced = !!useReducedMotion();
+  const reduced = useLowMotion();
   const level = (LOOK[lv as Level] ? lv : 1) as Level, look = LOOK[level], geo = SQUAD_GEO[level];
   const clock = useSharedValue(0), glitter = useSharedValue(0), wave = useSharedValue(0), sweep = useSharedValue(0), lights = useSharedValue(0);
   const [round, setRound] = useState(0);

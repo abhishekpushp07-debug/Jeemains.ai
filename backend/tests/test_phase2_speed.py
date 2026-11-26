@@ -132,4 +132,7 @@ def test_server_only_wires_things_together():
     for path in ("/api/jl/{path:path}", "/api/rf/catalog", "/api/rf/sessions", "/api/rf/sessions/{sid}/complete", "/api/rf/history",
                  "/api/rf/sessions/{sid}", "/api/rf/daily", "/api/rf/duels", "/api/rf/leaderboard", "/api/rf/league/gangwar", "/api/health/load", "/health"):
         assert path in paths, path
-    assert len(server.app.routes) == 146  # 144 after the split + the App Health page and its data (Phase 3)
+    # 144 after the split + the App Health page and its data (Phase 3) = 146, + the 15 of what came after (none removed,
+    # compared route by route on 26 Nov 2026): app switches, the CEO page (2), Student Choice (2), Matched (3),
+    # health alerts (2), rank cutoff (3), All India misses, removing a dream mock.
+    assert len(server.app.routes) == 161

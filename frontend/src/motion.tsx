@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 import { useFocusEffect } from "expo-router";
 import { useReducedMotion } from "react-native-reanimated";
+import { STILL, useShineLevel } from "@/src/analysis/smooth";
 
 // Endless decoration (glitter rings, floating art, twinkles, clocks that tick every second) belongs to the screen the
 // student is looking at. A screen covered by another one (the lobby under a match, Home under a test) stays mounted, so
@@ -26,8 +27,16 @@ export function MotionWhile({ on, children }: { on: boolean; children: React.Rea
 /** False while this screen is covered by another screen. */
 export const useScreenInFront = () => useContext(InFront);
 
-/** True when endless motion must rest: Reduce Motion is on, or the screen is covered. */
-export function useStill() {
+/** True when a celebration or a pop-in takes its calm form (the one made for Reduce Motion): Reduce Motion is on, or
+ *  this phone cannot move anything smoothly (Smooth Mode's lowest level, src/analysis/smooth.ts). */
+export function useLowMotion() {
   const reduced = useReducedMotion();
-  return !useContext(InFront) || !!reduced;
+  const level = useShineLevel();
+  return !!reduced || level === STILL;
+}
+
+/** True when endless motion must rest: the screen is covered, Reduce Motion is on, or this phone cannot keep up. */
+export function useStill() {
+  const low = useLowMotion();
+  return !useContext(InFront) || low;
 }

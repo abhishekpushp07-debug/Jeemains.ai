@@ -2,7 +2,8 @@
 // itself on a phone that cannot keep up, so the app always feels fast.
 //   FULL  = everything moves (the look as designed).
 //   CALM  = only the glass glint still crosses; the turning edge, the colour change and the stars rest.
-//   STILL = nothing moves (the same look as under Reduce Motion).
+//   STILL = nothing moves (the same look as under Reduce Motion). At this level the rest of the app follows too
+//           (src/motion.tsx): endless decoration rests and celebrations take the calm form made for Reduce Motion.
 // Frames are counted on the UI thread, where the Shine runs, and only while a Shine is moving at FULL. What the phone
 // needed is kept on the phone, so a slow phone starts calm the next time. After a week it gets one more look at FULL:
 // a phone that was only busy or hot that day gets its whole shine back.

@@ -9,12 +9,13 @@ import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useIsFocused } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Animated, { Easing, Extrapolation, SharedValue, cancelAnimation, interpolate, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { Easing, Extrapolation, SharedValue, cancelAnimation, interpolate, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSpring, withTiming } from "react-native-reanimated";
 import type { AudioPlayer } from "expo-audio";
 import { RF_BASE } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
 import { Press, T } from "@/src/components/ui";
 import { Glyph } from "@/src/components/Glyph";
+import { useLowMotion } from "@/src/motion";
 import { loadTrack, playSfx } from "@/src/sfx";
 import { arena, cheer, fx, gemColors } from "@/src/theme";
 import { GoldTitle, RaisedButton } from "@/src/rapid/arena";
@@ -68,7 +69,7 @@ function Shot({ i, x0, y0, dir, v, g, color }: { i: number; x0: number; y0: numb
 /** Two confetti cannons in the bottom corners firing up across the stage. */
 function Cannons({ count = 34, power = 2.6 }: { count?: number; power?: number }) {
   const { width: W, height: H } = useWindowDimensions();
-  if (useReducedMotion()) return null;
+  if (useLowMotion()) return null;
   return <View pointerEvents="none" testID="dream-cheer-cannons" style={[StyleSheet.absoluteFill, styles.top]}>
     {[1, -1].flatMap(dir => Array.from({ length: count }, (_, k) => {
       const i = k + (dir < 0 ? 500 : 0);
@@ -84,8 +85,11 @@ function Chant({ start, lines, running, onBeat }: { start: number; lines: [numbe
   beat.current = onBeat;
   useEffect(() => {
     if (!running) return;
-    let last = -1;
     setCount(-1);
+    // This round's start time arrives one render after the dance begins. Counting from the last one (or from nothing)
+    // jumps straight to the final count and fires the start, the drop and the finale confetti all at once.
+    if (!start) return;
+    let last = -1;
     const iv = setInterval(() => {
       const n = Math.min(COUNTS - 1, Math.floor((Date.now() - start) / BEAT));
       if (n === last) return;
@@ -122,7 +126,7 @@ type Phase = "loading" | "dance" | "done";
 function DreamCheer({ win, exam, name, onClose }: { win: CheerWin; exam: DreamExam; name: string; onClose: () => void }) {
   const { width: W, height: H } = useWindowDimensions();
   const insets = useSafeAreaInsets();
-  const reduced = !!useReducedMotion();
+  const reduced = useLowMotion();
   const [level, setLevel] = useState<CheerLevel>(KOHINOOR);
   const [phase, setPhase] = useState<Phase>("loading");
   const [round, setRound] = useState(0);
@@ -197,7 +201,7 @@ function DreamCheer({ win, exam, name, onClose }: { win: CheerWin; exam: DreamEx
     if (due.length) { due.forEach(m => milestones.current.add(m)); setFired(f => [...f, ...due]); }
   };
   const close = () => { try { player.current?.pause(); } catch { /* released */ } onClose(); };
-  const again = () => { setRound(n => n + 1); setPhase("dance"); };
+  const again = () => { setStart(0); setFired([]); setRound(n => n + 1); setPhase("dance"); }; // a clean round: no old start time, no old confetti
 
   // The stage, laid out like the Trophy Cabinet's: the banner hangs between the holders' raised fists, the lead dances in front.
   const geo = SQUAD_GEO[level];

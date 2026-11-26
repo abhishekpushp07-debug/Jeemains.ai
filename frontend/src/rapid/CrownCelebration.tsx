@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Modal, Platform, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import * as Haptics from "expo-haptics";
 import { LinearGradient } from "expo-linear-gradient";
-import Animated, { Easing, Extrapolation, cancelAnimation, interpolate, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withRepeat, withSpring, withTiming } from "react-native-reanimated";
+import Animated, { Easing, Extrapolation, cancelAnimation, interpolate, useAnimatedStyle, useSharedValue, withDelay, withRepeat, withSpring, withTiming } from "react-native-reanimated";
 import Svg, { Circle, Defs, Path, RadialGradient, Stop } from "react-native-svg";
 import { T } from "@/src/components/ui";
+import { useLowMotion } from "@/src/motion";
 import { playSfx } from "@/src/sfx";
 import { arena, fx } from "@/src/theme";
 import { GoldTitle, RaisedButton } from "./arena";
@@ -44,18 +45,24 @@ export function CrownCelebration({ visible, gold: realCup, no = 1, crown, share,
   const total: CrownCount = crown?.won ? crown : { won: no, real: realCup ? 1 : 0 };
   const say = words(no, realCup, total);
   const gold = total.real > 0; // the art shines in the colour of your crown, like the chip under it
-  const reduced = !!useReducedMotion();
+  const reduced = useLowMotion();
   const drop = useSharedValue(0), spin = useSharedValue(0), glow = useSharedValue(0);
   useEffect(() => {
     if (!visible) return;
     drop.value = 0;
     drop.value = withDelay(250, withSpring(1, { damping: 7, stiffness: 85, mass: 0.9 }));
-    spin.value = withRepeat(withTiming(360, { duration: 16000, easing: Easing.linear }), -1, false);
-    glow.value = withRepeat(withTiming(1, { duration: 1300, easing: Easing.inOut(Easing.quad) }), -1, true);
     playSfx("levelup");
     const t = setTimeout(() => { playSfx("win", 0.9); if (Platform.OS !== "web") Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {}); }, 750);
-    return () => { clearTimeout(t); cancelAnimation(spin); cancelAnimation(glow); };
+    return () => clearTimeout(t);
   }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The sunburst turns and glows only where that is shown: at rest (Reduce Motion, or a phone that cannot keep up) nothing
+  // runs behind the still picture. Its own effect, so a phone that stops keeping up half-way does not replay the sounds.
+  useEffect(() => {
+    if (!visible || reduced) return;
+    spin.value = withRepeat(withTiming(360, { duration: 16000, easing: Easing.linear }), -1, false);
+    glow.value = withRepeat(withTiming(1, { duration: 1300, easing: Easing.inOut(Easing.quad) }), -1, true);
+    return () => { cancelAnimation(spin); cancelAnimation(glow); };
+  }, [visible, reduced]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const size = Math.min(W * 0.66, 300, H * 0.3), raySize = Math.min(Math.max(W, H) * 0.95, 760), stage = Math.min(300, H * 0.36);
   const drop3d = useAnimatedStyle(() => ({

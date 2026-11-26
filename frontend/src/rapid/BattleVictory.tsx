@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import Animated, { css, useReducedMotion } from "react-native-reanimated";
+import Animated, { css } from "react-native-reanimated";
 import { Image } from "expo-image";
 import Svg, { Circle, Defs, Path, RadialGradient, Stop } from "react-native-svg";
 import { T } from "@/src/components/ui";
+import { useLowMotion } from "@/src/motion";
 import { firstToday, playSfx } from "@/src/sfx";
 import { allIndia, arena } from "@/src/theme";
 import { Alive } from "./Art";
@@ -36,7 +37,7 @@ function Rays() {
 }
 
 export function BattleVictory({ width, rank }: { width: number; rank: number }) {
-  const still = !!useReducedMotion(), inner = width - 5, k = inner / SW;
+  const still = useLowMotion(), inner = width - 5, k = inner / SW;
   useEffect(() => { // the gallop as they charge in, then the war horn and the crowd: heard once a day, not each time the result is opened
     let on = true, t: ReturnType<typeof setTimeout> | undefined;
     void firstToday("charge", () => on).then((first) => {

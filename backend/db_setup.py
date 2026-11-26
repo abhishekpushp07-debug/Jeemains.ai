@@ -20,6 +20,30 @@ from mission_links import ensure_indexes as mission_indexes
 
 logger = logging.getLogger("jeelive")
 SETUP_VERSION = hashlib.sha1(b"".join(p.read_bytes() for p in sorted(ROOT_DIR.glob("*.py")))).hexdigest()[:16]
+SETUP_WAIT = 30  # seconds a start waits for the setup, the same as a copy that waits for another copy's setup
+
+
+async def run_before_serving(db, cups, wait: float = SETUP_WAIT):
+    """The server answers only after the setup, as before (a release that adds nothing big takes well under a second).
+    A setup that needs longer than `wait` (a new index over millions of rows, a slow database) goes on in the background
+    while the server starts answering, so it can never keep the server unreachable. Returns that task, or None."""
+    task = asyncio.create_task(run_once(db, cups))
+    done, _ = await asyncio.wait({task}, timeout=wait)
+    if done:
+        task.result()  # a setup that failed stops the start, as before
+        return None
+    logger.warning("database setup still running after %s s: the server starts answering while it finishes", wait)
+    task.add_done_callback(_late_setup_ended)
+    return task
+
+
+def _late_setup_ended(task):
+    if task.cancelled():
+        return
+    if task.exception():
+        logger.error("database setup failed after the server started answering", exc_info=task.exception())
+    else:
+        logger.warning("database setup finished after the server started answering")
 
 
 async def run_once(db, cups):

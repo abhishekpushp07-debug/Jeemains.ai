@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Modal, Pressable, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { playSfx } from "@/src/sfx";
-import Animated, { Easing, FadeInDown, useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withTiming, ZoomIn } from "react-native-reanimated";
+import Animated, { Easing, FadeInDown, useAnimatedStyle, useSharedValue, withDelay, withTiming, ZoomIn } from "react-native-reanimated";
+import { useLowMotion } from "@/src/motion";
 import { LinearGradient } from "expo-linear-gradient";
 import { rf } from "@/src/api/client";
 import { useAuth } from "@/src/auth";
@@ -48,9 +49,9 @@ function Particle({ i }: { i: number }) {
   return <Animated.View style={[{ position: "absolute", width: 10, height: 10, borderRadius: i % 2 ? 5 : 2, backgroundColor: c }, s]} />;
 }
 
-// One-shot celebration burst (never loops; skipped when Reduce Motion is on).
+// One-shot celebration burst (never loops; skipped when Reduce Motion is on or the phone cannot keep up: useLowMotion).
 export function Burst() {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   if (reduced) return null;
   return (
     <View pointerEvents="none" style={{ position: "absolute", top: 60, left: 0, right: 0, alignItems: "center" }}>
@@ -60,7 +61,7 @@ export function Burst() {
 }
 
 function CountUp({ to, color, size = 26, prefix = "+" }: { to: number; color: string; size?: number; prefix?: string }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   const [v, setV] = useState(0);
   useEffect(() => {
     let k = 0;
@@ -76,7 +77,7 @@ function CountUp({ to, color, size = 26, prefix = "+" }: { to: number; color: st
 }
 
 function XpBar({ r }: { r: Reward }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   const span = Math.max(1, (r.next_level_xp ?? 1) - (r.level_floor ?? 0));
   const to = Math.min(1, ((r.xp_total ?? 0) - (r.level_floor ?? 0)) / span);
   const from = r.level_up ? 0 : Math.max(0, to - r.xp / span);
@@ -100,7 +101,7 @@ function XpBar({ r }: { r: Reward }) {
 
 // Full-screen level-up moment (tap anywhere to continue).
 function LevelUpOverlay({ level, onClose }: { level: number; onClose: () => void }) {
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   useEffect(() => { playSfx("levelup"); const t = setTimeout(onClose, 2600); return () => clearTimeout(t); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Modal transparent animationType="fade" visible onRequestClose={onClose}>
@@ -119,7 +120,7 @@ function LevelUpOverlay({ level, onClose }: { level: number; onClose: () => void
 
 export function RewardPanel({ reward, title, testID = "reward-panel", historical = false }: { reward?: Reward | null; title: string; testID?: string; historical?: boolean }) {
   const router = useRouter();
-  const reduced = useReducedMotion();
+  const reduced = useLowMotion();
   const { user } = useAuth();
   const profile = useGameProfile(user?.id);
   const [closed, setClosed] = useState<number | null>(null);
