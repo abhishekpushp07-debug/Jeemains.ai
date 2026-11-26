@@ -1,0 +1,3883 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>JEELIVE.AI: Student Choice and Matched, the complete book</title><link rel="stylesheet" href="book.css"></head><body><section class="cover"><div class="brand">JEELIVE.AI</div><div class="eyebrow">App &rarr; website hand-off</div><div class="title">Student Choice and Matched:<br>the complete book</div><p class="lead">Everything about the app's two new features, for the two people who have to make them work on jeelive.ai: what a student sees, what the website has to build, what the super admin does after every JEE Main shift, every field, every limit, every sentence on screen, and what has not been checked yet.</p><div class="meta"><span>FOR <b>the JE Live website agent</b></span><span>FOR <b>the JE Live super admin</b></span><span>WRITTEN <b>26 Nov 2026</b></span><span>VERSION <b>1</b></span></div><div class="strip"><img src="shots/s02_landing.jpg" alt=""><img src="shots/s05_search.jpg" alt=""><img src="shots/s08_chapter_tests.jpg" alt=""><img src="shots/m08_home_card.jpg" alt=""><img src="shots/m03_shift_top.jpg" alt=""></div><div class="toc-title">Contents</div><ul class="toc"><li class="part"><a href="#part-0-read-this-first">Part 0 — Read this first</a></li><li class="sec"><a href="#01-the-two-features">0.1 The two features</a></li><li class="sec"><a href="#02-where-things-stand-on-26-nov-2026">0.2 Where things stand on 26 Nov 2026</a></li><li class="sec"><a href="#03-who-does-what">0.3 Who does what</a></li><li class="sec"><a href="#04-twenty-things-nobody-must-get-wrong">0.4 Twenty things nobody must get wrong</a></li><li class="sec"><a href="#05-how-to-read-this-book">0.5 How to read this book</a></li><li class="sec"><a href="#06-words-used-in-this-book">0.6 Words used in this book</a></li><li class="part"><a href="#part-1-student-choice">Part 1 — Student Choice</a></li><li class="sec"><a href="#11-what-it-is-and-what-the-owner-decided">1.1 What it is, and what the owner decided</a></li><li class="sec"><a href="#12-what-a-student-gets-today-screen-by-screen">1.2 What a student gets today, screen by screen</a></li><li class="sec"><a href="#13-the-chapter-search">1.3 The chapter search</a></li><li class="sec"><a href="#14-the-owners-rules-for-a-made-paper">1.4 The owner's rules for a made paper</a></li><li class="sec"><a href="#15-what-the-app-reads-from-the-website-today">1.5 What the app reads from the website today</a></li><li class="sec"><a href="#16-what-stays-closed-until-the-website-builds-it-three-doors">1.6 What stays closed until the website builds it: three doors</a></li><li class="sec"><a href="#17-how-the-closed-ways-open-by-themselves-and-what-the-student-then-sees">1.7 How the closed ways open by themselves, and what the student then sees</a></li><li class="sec"><a href="#18-whole-chapter-tests-by-the-80-60-40-ratio-a-change-on-the-website">1.8 Whole chapter tests by the 80 / 60 / 40 ratio: a change on the website</a></li><li class="sec"><a href="#19-the-dream-college-meter">1.9 The Dream College meter</a></li><li class="sec"><a href="#110-what-is-stored-where">1.10 What is stored where</a></li><li class="sec"><a href="#111-the-super-admins-part-in-student-choice">1.11 The super admin's part in Student Choice</a></li><li class="sec"><a href="#112-what-happens-when">1.12 What happens when…</a></li><li class="sec"><a href="#113-checks-for-the-website-agent">1.13 Checks for the website agent</a></li><li class="sec"><a href="#114-not-checked-and-known-small-things">1.14 Not checked, and known small things</a></li><li class="part"><a href="#part-2-matched">Part 2 — Matched</a></li><li class="sec"><a href="#21-what-it-is-and-what-the-owner-decided">2.1 What it is, and what the owner decided</a></li><li class="sec"><a href="#22-what-a-student-sees-screen-by-screen">2.2 What a student sees, screen by screen</a></li><li class="sec"><a href="#23-one-document-per-shift-every-field">2.3 One document per shift: every field</a></li><li class="sec"><a href="#24-what-the-website-must-have-three-things">2.4 What the website must have: three things</a></li><li class="sec"><a href="#25-how-the-shifts-reach-the-app">2.5 How the shifts reach the app</a></li><li class="sec"><a href="#26-homes-card-and-the-sign-in-bar-when-they-are-on">2.6 Home's card and the sign-in bar: when they are on</a></li><li class="sec"><a href="#27-the-jee-question-under-ours-in-the-player-and-the-solutions">2.7 The JEE question under ours, in the player and the solutions</a></li><li class="sec"><a href="#28-the-super-admins-runbook">2.8 The super admin's runbook</a></li><li class="sec"><a href="#29-mistakes-and-what-the-student-would-see">2.9 Mistakes, and what the student would see</a></li><li class="sec"><a href="#210-what-happens-when">2.10 What happens when…</a></li><li class="sec"><a href="#211-checks-for-the-website-agent">2.11 Checks for the website agent</a></li><li class="sec"><a href="#212-limits-what-was-not-checked-and-the-samples-on-the-preview">2.12 Limits, what was not checked, and the samples on the preview</a></li><li class="part"><a href="#part-3-reference">Part 3 — Reference</a></li><li class="sec"><a href="#31-every-address">3.1 Every address</a></li><li class="sec"><a href="#32-every-number">3.2 Every number</a></li><li class="sec"><a href="#33-where-data-is-kept">3.3 Where data is kept</a></li><li class="sec"><a href="#34-switches-and-ways-back">3.4 Switches and ways back</a></li><li class="sec"><a href="#35-every-sentence-a-student-can-read">3.5 Every sentence a student can read</a></li><li class="sec"><a href="#36-files-and-tests-for-the-app-side">3.6 Files and tests (for the app side)</a></li><li class="sec"><a href="#37-the-state-on-26-nov-2026-and-how-to-check-it-again">3.7 The state on 26 Nov 2026, and how to check it again</a></li><li class="sec"><a href="#38-open-points-for-the-owner">3.8 Open points for the owner</a></li></ul></section><h1 id="part-0-read-this-first">Part 0 — Read this first</h1>
+<div class="box sky">
+<h3 id="owner-ke-liye-short">Owner ke liye (short)</h3>
+<ul>
+<li>Is book mein dono naye features ka poora hisaab hai: <strong>Student Choice</strong> aur <strong>Matched</strong>. App mein kya dikhta hai, website ko kya banana hai, super admin ko kya karna hai, aur kaun si cheez abhi check nahi hui.</li>
+<li><strong>Student Choice aaj chalta hai</strong>: student chapters tick karta hai (naam likh kar dhoondh bhi sakta hai) aur har chune chapter ka poora test deta hai. Sawaal JEE Main ke chapter-wise sawaal hi hain; alag bank nahi hai.</li>
+<li><strong>Sawaal khud chunna aur random mock abhi band hain</strong> ("Jald aa raha hai"). Website teen darwaze banayegi (Part 1.6), tab yeh dono app update ke bina khul jayenge.</li>
+<li><strong>Time ka ratio</strong> (25 Maths = 80 min, 25 Physics = 60 min, 25 Chemistry = 40 min) banaye hue paper par lagega. Poore chapter test abhi 60 min ke hi hain; unka time sirf website badal sakti hai (Part 1.8).</li>
+<li><strong>Dream College meter</strong>: chapter test aur Student Choice paper kabhi nahi ginte, chahe kitne bhi lambe hon.</li>
+<li><strong>Matched</strong>: app taiyaar hai, par production mein abhi khaali hai. Super admin har shift ke baad matched sawaal daalega aur unka ek asli paper banayega. Home ka Matched card 28 Jan 2027 se apne aap aayega.</li>
+<li>Website agent ko yeh PDF (ya saath ki <code>BOOK.md</code>) dena hai. Super admin ke kaam ke hisse: Part 1.11, Part 2.8 aur Part 2.9.</li>
+</ul>
+</div>
+<h2 id="01-the-two-features">0.1 The two features</h2>
+<p><strong>Student Choice</strong> (Home's fourth tile, marked NEW). The student goes through the JEE Main chapter-wise questions his own way.</p>
+<ul>
+<li><strong>Today:</strong> tick chapters in Physics, Chemistry and Maths (a search box finds any chapter by name), then take each ticked chapter's whole test, one after another.</li>
+<li><strong>Later, when the website can make such papers:</strong> see the ticked chapters' questions <strong>without options</strong>, tick the ones wanted and get <strong>one paper</strong> made of them (75 questions at most); or ask for a <strong>random mock</strong> of N questions.</li>
+</ul>
+<p><strong>Matched.</strong> After every JEE Main shift, the questions of that shift that matched JE Live's own questions are shown side by side: the JEE Main question, and under it the question of ours it matched. Open to everyone, signed in or not. A signed-in student attempts all of ours in one <strong>real paper</strong> ("Attempt all matched"); a person without an account is asked to sign up first. On Home, the All India series card gives its place to the Matched card once the series is over.</p>
+<h2 id="02-where-things-stand-on-26-nov-2026">0.2 Where things stand on 26 Nov 2026</h2>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>State</th>
+<th>Waits for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Student Choice: Home tile, first screen, chapter list, chapter search, the ticked chapters' whole tests</td>
+<td><strong>Works.</strong> In production since 26 Nov 2026</td>
+<td>nothing</td>
+</tr>
+<tr>
+<td>Student Choice: a chapter's questions without options, one paper of ticked questions</td>
+<td>Built in the app, <strong>closed</strong> (shown under "Jald aa raha hai")</td>
+<td>the website: doors A, B and C (Part 1.6)</td>
+</tr>
+<tr>
+<td>Student Choice: random mock</td>
+<td>Built in the app, <strong>closed</strong></td>
+<td>the website: doors A and C</td>
+</tr>
+<tr>
+<td>Whole chapter tests timed by the 80 / 60 / 40 ratio</td>
+<td><strong>Not true yet</strong>: every chapter test has 60 minutes</td>
+<td>the website: new minutes on 81 sets (Part 1.8)</td>
+</tr>
+<tr>
+<td>Dream College meter never counts a chapter test or a Student Choice paper</td>
+<td><strong>Works</strong> in the app</td>
+<td>the website: <code>test_kind</code> "choice" on made papers (Part 1.9)</td>
+</tr>
+<tr>
+<td>Matched: public pages, sign-up sheet, the way back after sign-in, Home card, sign-in bar, the JEE question under ours</td>
+<td><strong>Built.</strong> In production the list is <strong>empty</strong> and the card is <strong>off</strong></td>
+<td>the website and the super admin: the admin page, the real paper, two public doors (Part 2.4)</td>
+</tr>
+<tr>
+<td>Matched card on Home and the bar on the sign-in screen</td>
+<td><strong>Off.</strong> They come on by themselves on <strong>28 Jan 2027</strong> (India time)</td>
+<td>nothing; the super admin can switch them earlier (Part 2.6)</td>
+</tr>
+</tbody>
+</table>
+<p>"In production" here means: the app's own server in production answers these addresses (checked on 26 Nov 2026, Part 3.7), and the screens are in the app version deployed that day. A phone that still has an older installed build gets the screens when it updates. Whether a store build with these screens has reached students is not known to the app side: ask the owner.</p>
+<h2 id="03-who-does-what">0.3 Who does what</h2>
+<table>
+<thead>
+<tr>
+<th>Who</th>
+<th>Student Choice</th>
+<th>Matched</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>The website agent</strong> (builds jeelive.ai)</td>
+<td>Three doors: A the switch, B a chapter's questions without options, C make the paper (Part 1.6). New minutes on the chapter-wise sets (Part 1.8). <code>test_kind</code> on results and on the My Tests list (Part 1.9)</td>
+<td>The super admin's "Matched" page (2.4a). One real paper per shift (2.4b). Two public read doors (2.4c)</td>
+</tr>
+<tr>
+<td><strong>The super admin</strong> (runs jeelive.ai)</td>
+<td>Nothing new today. Publishing or hiding a chapter-wise test changes Student Choice within a few minutes (Part 1.11). Later: the switch of door A</td>
+<td>After every JEE Main shift: enter the matched questions, check them, make the paper, publish (Part 2.8). The switch of Home's card</td>
+</tr>
+<tr>
+<td><strong>The app side</strong></td>
+<td>Built and deployed. Follows the website by itself: no new app build when a door opens</td>
+<td>Built and deployed. Copies the website's shifts every 2 minutes: no new app build when shifts arrive</td>
+</tr>
+<tr>
+<td><strong>The owner</strong></td>
+<td>Decides the open points of Part 3.8</td>
+<td>Decides the open points of Part 3.8</td>
+</tr>
+</tbody>
+</table>
+<h2 id="04-twenty-things-nobody-must-get-wrong">0.4 Twenty things nobody must get wrong</h2>
+<ol>
+<li><strong>Student Choice has no question bank of its own.</strong> Its questions ARE the JEE Main chapter-wise questions. A chapter in Student Choice is a chapter-wise test of the website, under that test's own id. Do not build a second bank.</li>
+<li><strong>A question listed for choosing never carries its options, its answer or its solution</strong> (door B). Options appear only inside the paper.</li>
+<li><strong>A made paper has at most 75 questions. Never 90.</strong></li>
+<li><strong>Marking: right +4, wrong −1, left 0.</strong></li>
+<li><strong>Time comes from the subjects:</strong> every Mathematics question brings 3.2 minutes, Physics 2.4, Chemistry 1.6; the sum is rounded <strong>up</strong> to a whole minute (25 Maths = 80 min, 25 Physics = 60, 25 Chemistry = 40; 25 + 25 + 25 = 180).</li>
+<li><strong>The same <code>request_key</code> must give the same paper</strong> (door C). A retry never makes a second paper.</li>
+<li><strong><code>test_kind</code> is exactly <code>"choice"</code></strong> on a made paper and on its result. The Dream College meter decides by it.</li>
+<li><strong>A random mock is split exactly as Part 1.6 says</strong> (equally; one or two left over go to Physics, then Chemistry). The app shows that split and its time to the student before the paper exists.</li>
+<li><strong>Door A answers 200 (open) or 404 (closed). Never 401 or 403 to a signed-in student, never 5xx.</strong> A 5xx there takes the whole of Student Choice down for every student until it stops.</li>
+<li><strong>An answer is either plain JSON or the website's envelope <code>{ "data": …, "error": null, "meta": { "api_version": … } }</code>.</strong> An envelope without <code>meta</code> is not opened, and the answer is then read as empty.</li>
+<li><strong>Matched: never delete a published shift.</strong> Take it back; publish it again to bring it back.</li>
+<li><strong>Matched: <code>updated_at</code> changes on every edit, and the list and the shift's own document carry the same number.</strong> Otherwise a correction never reaches the app, or the app's server reads that shift again and again.</li>
+<li><strong>Pictures.</strong> In a Matched shift: plain https links that open without sign-in and never expire. In door B: https links that open without cookies for at least 24 hours.</li>
+<li><strong>Matched: the button "Attempt all matched" appears only when the shift has <code>paper_id</code> AND at least one of ours has <code>question_id</code></strong> (that question's id inside the paper).</li>
+<li><strong>The Matched paper is marked +4 / −1</strong> (the card on the shift says so and counts its marks as questions × 4), and timed by the rule of point 5.</li>
+<li><strong>Subjects are written exactly <code>Physics</code>, <code>Chemistry</code>, <code>Mathematics</code>.</strong> Anything else is shown without a subject and cannot be filtered.</li>
+<li><strong>Every option of a question must have words, or none of its options is shown.</strong> One missing option would move the letters.</li>
+<li><strong>Samples stay on the preview.</strong> Made-up shifts and made-up chapters are for the owner's eyes there only. Never write them into production.</li>
+<li><strong>The fields of the chapter-wise catalogue listed in Part 1.5 are in use.</strong> Do not rename or drop one without telling the app side.</li>
+<li><strong>The first real run is on a test setup.</strong> The first door answered and the first shift published are the first true end-to-end runs: tell the app side before students see them.</li>
+</ol>
+<h2 id="05-how-to-read-this-book">0.5 How to read this book</h2>
+<ul>
+<li><strong>Website agent:</strong> Part 1.5 to 1.9 and 1.13 (Student Choice), Part 2.3 to 2.7 and 2.11 (Matched), then Part 3 as a reference. The JSON in the grey boxes is also in the <code>examples</code> folder of the download; every example in it was run through the app server's own code when this book was built.</li>
+<li><strong>Super admin:</strong> Part 0, Part 1.2 (what students see), Part 1.11, Part 2.2, and above all <strong>Part 2.8 (what to do after every shift)</strong> and <strong>Part 2.9 (mistakes and what the student would see)</strong>.</li>
+<li><strong>Pictures</strong> are from the app's web preview, at a phone's size, taken on 26 Nov 2026. The Matched pictures show three <strong>made-up sample shifts</strong> that exist on the preview only. The pictures of question picking and the random mock (Part 1.7) show <strong>made-up questions marked "(Sample)"</strong>, with the browser answering in place of the website's doors that do not exist yet.</li>
+</ul>
+<h2 id="06-words-used-in-this-book">0.6 Words used in this book</h2>
+<table>
+<thead>
+<tr>
+<th>Word</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the website</td>
+<td>jeelive.ai and its API (<code>https://jeelive.ai/api/…</code>), where papers, attempts, results and accounts live</td>
+</tr>
+<tr>
+<td>the app</td>
+<td>the JE Live phone app</td>
+</tr>
+<tr>
+<td>the app's server</td>
+<td>the app's own small server (<code>…/api/…</code> of the app). It passes the student's requests on to the website and adds a few read-only pages of its own (the chapters of Student Choice, the Matched pages, the switches)</td>
+</tr>
+<tr>
+<td>a door</td>
+<td>one address (endpoint) of the website's API</td>
+</tr>
+<tr>
+<td>a set, a paper</td>
+<td>one test on the website. A chapter-wise test is a set whose <code>test_kind</code> is <code>chapter</code></td>
+</tr>
+<tr>
+<td>an attempt</td>
+<td>one student's go at a paper: started, saved, submitted, marked</td>
+</tr>
+<tr>
+<td>the catalogue</td>
+<td>the website's list of an exam's tests: <code>GET /api/exam-navigation/jee-main/catalogue</code></td>
+</tr>
+<tr>
+<td>a shift</td>
+<td>one sitting of JEE Main: a day and a shift number. Its id is written <code>2027-01-25-s1</code></td>
+</tr>
+<tr>
+<td>ours</td>
+<td>a question of JE Live's own (from the All India series, the chapter-wise tests and so on) that a JEE Main question matched</td>
+</tr>
+<tr>
+<td>the envelope</td>
+<td>the website's usual wrapper round an answer: <code>{ "data": …, "error": null, "meta": { "api_version": "1" } }</code></td>
+</tr>
+<tr>
+<td>to tick</td>
+<td>to choose a chapter or a question by tapping it</td>
+</tr>
+<tr>
+<td>the ratio</td>
+<td>the owner's time rule: 25 Maths = 80 minutes, 25 Physics = 60, 25 Chemistry = 40</td>
+</tr>
+<tr>
+<td>a new build</td>
+<td>a new version of the app that students must install. Everything in this book is made so that the website's future work needs <strong>no</strong> new build</td>
+</tr>
+</tbody>
+</table>
+<h1 id="part-1-student-choice">Part 1 — Student Choice</h1>
+<h2 id="11-what-it-is-and-what-the-owner-decided">1.1 What it is, and what the owner decided</h2>
+<p>Student Choice is <strong>another way to reach the JEE Main chapter-wise questions the website already has</strong>. In the owner's words: the questions come from the JEE Main chapter-wise bank, not from anywhere else; Student Choice is "only navigation and choices".</p>
+<table>
+<thead>
+<tr>
+<th>Decision of the owner</th>
+<th>Date</th>
+<th>Where it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The questions are the JEE Main chapter-wise questions. No separate bank. A chapter = a chapter-wise test, under that test's own id</td>
+<td>26 Nov 2026</td>
+<td>Part 1.5</td>
+</tr>
+<tr>
+<td>Until the website can make a paper: <strong>"Abhi chapter tests, baad mein sawaal chunna"</strong> (chapter tests now, question picking later)</td>
+<td>26 Nov 2026</td>
+<td>Part 1.2 and 1.7</td>
+</tr>
+<tr>
+<td>A made paper has <strong>at most 75 questions</strong> (not 90)</td>
+<td>26 Nov 2026</td>
+<td>Part 1.4</td>
+</tr>
+<tr>
+<td>Marking <strong>+4 / −1</strong>; the list for choosing shows <strong>only the question, never its options</strong></td>
+<td>26 Nov 2026</td>
+<td>Part 1.4 and 1.6</td>
+</tr>
+<tr>
+<td>Time: <strong>80 minutes for 25 Maths questions, 60 for 25 Physics, 40 for 25 Chemistry</strong>. "Isi ratio me time dena. Bata bhi dena" (give time in this ratio, and tell the student)</td>
+<td>26 Nov 2026</td>
+<td>Part 1.4; the app shows the rule on Student Choice's first screen</td>
+</tr>
+<tr>
+<td>A large Student Choice paper (68 questions or more) counts for the Dream College meter: <strong>"Nahi, kabhi nahi"</strong> (never)</td>
+<td>26 Nov 2026</td>
+<td>Part 1.9</td>
+</tr>
+<tr>
+<td>A search box so that a student finds any chapter by name in seconds</td>
+<td>26 Nov 2026</td>
+<td>Part 1.3</td>
+</tr>
+<tr>
+<td>Whole chapter tests follow the 80 / 60 / 40 ratio too, <strong>once the website allows changing their time</strong></td>
+<td>26 Nov 2026</td>
+<td>Part 1.8: a change on the website, not done yet</td>
+</tr>
+</tbody>
+</table>
+<p>What Student Choice must never do: make up an attempt, a result or a paper on the phone. Every test a student takes from Student Choice is a real paper of the website, with the website's own player, deadline, result, analysis and solutions.</p>
+<h2 id="12-what-a-student-gets-today-screen-by-screen">1.2 What a student gets today, screen by screen</h2>
+<div class="shots"><figure><img src="shots/s01_home_tile.jpg" alt=""><figcaption>1. Home: the STUDENT CHOICE tile, fourth in "Practice"</figcaption></figure><figure><img src="shots/s02_landing.jpg" alt=""><figcaption>2. First screen of Student Choice</figcaption></figure><figure><img src="shots/s03_soon_and_time.jpg" alt=""><figcaption>3. The same screen, lower: what is coming, and the time rule</figcaption></figure><figure><img src="shots/s04_chapters.jpg" alt=""><figcaption>4. Step 1: the chapters of one subject</figcaption></figure></div>
+
+<p><strong>1. Home.</strong> Under "Practice", after the website's exam tiles (JEE MAIN, BITSAT, COMEDK today), the fourth tile is <strong>STUDENT CHOICE</strong>, with the line "apne chapters chuno" and a NEW mark. It opens Student Choice. Only a signed-in student sees Home.</p>
+<p><strong>2. First screen</strong> ("Student Choice", small line "Apne chapters, apni marzi").</p>
+<ul>
+<li>Three facts read from the website: how many chapters, how many questions, the marking. On 26 Nov 2026: <strong>81 chapters, 3750 sawaal, +4 / −1</strong>.</li>
+<li>Card <strong>"Chapters chuno"</strong>: "Physics, Chemistry aur Maths ke chapters tick karo. Har chune chapter ka poora test milega: ek-ek karke do." When chapters are already ticked it adds "3 chapters chune hue hain".</li>
+<li>Card <strong>"Aapke chapter tests"</strong> (only when at least one chapter is ticked): straight to the ticked chapters' tests.</li>
+<li>Card <strong>"Jald aa raha hai"</strong> (coming soon): "Sawaal khud chunna" and "Random mock", each with a sentence, and "Khulte hi yahin dikhega, app update kiye bina."</li>
+<li><strong>"Banaye hue paper ka time"</strong>: Physics 25 sawaal = 1 hr; Chemistry 25 sawaal = 40 min; Maths 25 sawaal = 1 hr 20 min; and the sentence "Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = 3 hr. Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)."</li>
+<li>Pulling the screen down reads everything again.</li>
+</ul>
+<p><strong>3. Step 1 of 2, "Chapters chuno".</strong></p>
+<ul>
+<li>A search box on top ("Chapter ka naam likho…"), Part 1.3.</li>
+<li>Three pills: Physics, Chemistry, Maths. Each shows how many chapters are ticked in it.</li>
+<li>One row per chapter, in the website's order: its number and name ("1. Units, Dimensions and Errors") and "68 sawaal · 64 MCQ · 4 numerical". A tap ticks or unticks it. Chapters can be ticked in one, two or all three subjects, as many as wanted.</li>
+<li>The bar at the bottom: "3 chapters chune" and "3 tests · 165 sawaal", and the button <strong>"Tests dekho"</strong>. With nothing ticked the button is off and the bar says "Kam se kam ek chapter tick karo".</li>
+<li>The ticks are kept <strong>on the phone, for that account</strong>: they are still there the next day. They are not sent to any server (Part 1.10).</li>
+</ul>
+<div class="shots"><figure><img src="shots/s05_search.jpg" alt=""><figcaption>5. Search: "therm" finds chapters in two subjects</figcaption></figure><figure><img src="shots/s06_search_near_spelling.jpg" alt=""><figcaption>6. A wrong spelling still finds the chapter</figcaption></figure><figure><img src="shots/s07_chapters_ticked.jpg" alt=""><figcaption>7. Three chapters ticked, one in each subject</figcaption></figure><figure><img src="shots/s08_chapter_tests.jpg" alt=""><figcaption>8. Step 2: the ticked chapters' tests, with the student's own state</figcaption></figure></div>
+
+<p><strong>4. Step 2 of 2, "Aapke chapter tests".</strong></p>
+<ul>
+<li>The line on top: "3 chapter tests · 2 ho gaye" (how many of them this student has finished).</li>
+<li>The tests under their subject, in the website's order. Each row: the chapter's number and name, then "68 Q · 60 min · +4/-1 · 272 marks" (all four read from the website), and the student's own state of that test:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>The student's state of that test (from the website)</th>
+<th>The row shows</th>
+<th>A tap opens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>never started</td>
+<td><strong>Start</strong></td>
+<td>the paper's usual page (picture 9)</td>
+</tr>
+<tr>
+<td>started, not submitted</td>
+<td>"In progress" and <strong>Resume</strong></td>
+<td>the attempt, where it was left</td>
+</tr>
+<tr>
+<td>submitted</td>
+<td>"Completed" and <strong>Result</strong></td>
+<td>its result</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>A test that is in progress is always resumed, never started a second time: until the student's states have been read, a row cannot be tapped.</li>
+<li><strong>"Chapters badlo"</strong> at the bottom goes back to step 1.</li>
+</ul>
+<div class="shots"><figure><img src="shots/s09_paper_page.jpg" alt=""><figcaption>9. "Start" opens the paper's usual page. From here nothing is special</figcaption></figure></div>
+
+<p><strong>5. From "Start" on it is an ordinary paper.</strong> The page says "JEE MAIN · CHAPTER PRACTICE", the number of questions, the minutes, the marks, the marking, "Before you start", and "Start attempt". Then the 60-second get-ready, the player, submit, the result, the analysis, the solutions. It is <strong>the same set</strong> as in the website's Chapter-wise section: the same attempt shows in My Tests (in progress, completed) and in the Chapter-wise list, on the website and in the app.</p>
+<p><strong>What Student Choice adds today,</strong> plainly: one place where the chapters of all three subjects can be ticked and searched, a list of only the student's own chapters with where he stands in each, and the time rule told in advance. It adds no new paper and no new question.</p>
+<h2 id="13-the-chapter-search">1.3 The chapter search</h2>
+<p>The box on step 1 looks in <strong>all three subjects at once</strong>, with every letter typed, on the phone itself (no request is made). Each result says its subject. A tap on a result ticks it; the typed name and the keyboard stay, so several can be ticked one after another; dragging the list puts the keyboard away.</p>
+<table>
+<thead>
+<tr>
+<th>What is typed</th>
+<th>Finds</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>therm</code></td>
+<td>Thermal Properties of Matter, Thermodynamics, Thermodynamics and Thermochemistry</td>
+<td>a word of the name starts so</td>
+</tr>
+<tr>
+<td><code>p block</code></td>
+<td>p-Block Elements</td>
+<td>every typed word must fit a word of the name</td>
+</tr>
+<tr>
+<td><code>goc</code>, <code>ktg</code>, <code>wep</code>, <code>aod</code></td>
+<td>General Organic Chemistry, Kinetic Theory of Gases, Work Energy and Power, Application of Derivatives</td>
+<td>the first letters of the name's words (small words such as "and", "of" may be left out)</td>
+</tr>
+<tr>
+<td><code>com</code></td>
+<td>Centre of Mass, Momentum and Collisions</td>
+<td>the first letters start so</td>
+</tr>
+<tr>
+<td><code>organic</code>, <code>pblock</code></td>
+<td>General Organic Chemistry, p-Block Elements</td>
+<td>the letters are inside the name (3 letters or more)</td>
+</tr>
+<tr>
+<td><code>3d</code>, <code>shm</code>, <code>emi</code>, <code>emw</code>, <code>nlm</code>, <code>pnc</code></td>
+<td>Three-Dimensional Geometry, Oscillations, Electromagnetic Induction, Electromagnetic Waves, Laws of Motion, Permutations and Combinations</td>
+<td>six short names students use that the titles do not hold. <strong>They are written in the app</strong>: if the website renames those chapters, these six simply stop finding them</td>
+</tr>
+<tr>
+<td><code>kinametics</code>, <code>probablity</code>, <code>matrix</code></td>
+<td>Kinematics, Probability, Matrices and Determinants</td>
+<td>a near spelling, <strong>only when nothing fits as typed</strong>: the same first letter, one slip (two in a long word). The list is then headed "Is naam ka chapter nahi mila. Milte-julte naam:"</td>
+</tr>
+<tr>
+<td><code>zzzz</code></td>
+<td>nothing: "Is naam ka chapter nahi mila", "Spelling dekh lo, ya subject se chapter chuno." and the button "Search hatao"</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Results are ordered best fit first; equal fits stay in the website's order (Physics, Chemistry, Maths). The count line reads "3 chapters mile · teeno subjects mein dhoonda". The search uses only the chapters' <strong>titles</strong> as the website gives them: a new chapter is searchable as soon as it is in the list.</p>
+<p>Checked on 26 Nov 2026: 55 searches against the 81 real chapter names all give the expected chapters (<code>node /app/tests/choice_search_check.js</code>); 2000 searches take about 33 thousandths of a second on the build machine.</p>
+<h2 id="14-the-owners-rules-for-a-made-paper">1.4 The owner's rules for a made paper</h2>
+<p>These rules apply to a paper <strong>made</strong> in Student Choice (chosen questions, or a random mock). The app shows them to the student before the paper exists; <strong>the website must apply them</strong> when it makes the paper (door C).</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Most questions in one paper</td>
+<td><strong>75</strong></td>
+</tr>
+<tr>
+<td>Fewest</td>
+<td>1 chosen question; a random mock: 3 (one a subject)</td>
+</tr>
+<tr>
+<td>Right answer</td>
+<td><strong>+4</strong></td>
+</tr>
+<tr>
+<td>Wrong answer</td>
+<td><strong>−1</strong></td>
+</tr>
+<tr>
+<td>Left</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Full marks</td>
+<td>questions × 4</td>
+</tr>
+<tr>
+<td>Time a Mathematics question brings</td>
+<td><strong>3.2 minutes</strong> (25 questions = 80 minutes)</td>
+</tr>
+<tr>
+<td>Time a Physics question brings</td>
+<td><strong>2.4 minutes</strong> (25 questions = 60 minutes)</td>
+</tr>
+<tr>
+<td>Time a Chemistry question brings</td>
+<td><strong>1.6 minutes</strong> (25 questions = 40 minutes)</td>
+</tr>
+<tr>
+<td>The paper's time</td>
+<td>the sum over all its questions, rounded <strong>up</strong> to a whole minute</td>
+</tr>
+<tr>
+<td>Order of the paper</td>
+<td>Physics, then Chemistry, then Mathematics</td>
+</tr>
+</tbody>
+</table>
+<p>Worked examples (every row was computed by the app server's own function when this book was built):</p>
+<table>
+<thead>
+<tr>
+<th>The paper</th>
+<th>Minutes its questions bring</th>
+<th>The paper's time</th>
+<th>Full marks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25 Physics + 25 Chemistry + 25 Maths</td>
+<td>60 + 40 + 80 = 180</td>
+<td><strong>3 hr</strong></td>
+<td>300</td>
+</tr>
+<tr>
+<td>10 Physics + 10 Chemistry + 10 Maths</td>
+<td>24 + 16 + 32 = 72</td>
+<td><strong>1 hr 12 min</strong></td>
+<td>120</td>
+</tr>
+<tr>
+<td>25 Maths</td>
+<td>80</td>
+<td><strong>1 hr 20 min</strong></td>
+<td>100</td>
+</tr>
+<tr>
+<td>25 Physics</td>
+<td>60</td>
+<td><strong>1 hr</strong></td>
+<td>100</td>
+</tr>
+<tr>
+<td>25 Chemistry</td>
+<td>40</td>
+<td><strong>40 min</strong></td>
+<td>100</td>
+</tr>
+<tr>
+<td>5 Physics</td>
+<td>12</td>
+<td><strong>12 min</strong></td>
+<td>20</td>
+</tr>
+<tr>
+<td>1 Chemistry</td>
+<td>1.6, rounded up to 2</td>
+<td><strong>2 min</strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>1 Physics + 1 Chemistry + 1 Maths</td>
+<td>2.4 + 1.6 + 3.2 = 7.2, rounded up to 8</td>
+<td><strong>8 min</strong></td>
+<td>12</td>
+</tr>
+<tr>
+<td>3 Physics + 2 Chemistry + 2 Maths</td>
+<td>7.2 + 3.2 + 6.4 = 16.8, rounded up to 17</td>
+<td><strong>17 min</strong></td>
+<td>28</td>
+</tr>
+<tr>
+<td>20 Physics + 15 Chemistry + 10 Maths</td>
+<td>48 + 24 + 32 = 104</td>
+<td><strong>1 hr 44 min</strong></td>
+<td>180</td>
+</tr>
+</tbody>
+</table>
+<p>How the app writes a time: under an hour "45 min"; from an hour "1 hr", "1 hr 12 min", "3 hr".</p>
+<p>The website may <strong>lower</strong> the top of 75 (door A, <code>max_questions</code>), may add a top per subject (<code>max_per_subject</code>), and may send other minutes per question (<code>minutes_per_question</code>); the app obeys and shows them. It can never raise the top above 75: a larger number is ignored.</p>
+<h2 id="15-what-the-app-reads-from-the-website-today">1.5 What the app reads from the website today</h2>
+<p>Nothing new is needed for what works today. The app's server reads the website's own chapter-wise catalogue:</p>
+<pre><code>GET https://jeelive.ai/api/exam-navigation/jee-main/catalogue?kind=chapters&amp;subject=Physics&amp;q=&amp;page=1
+        (and subject=Chemistry, subject=Mathematics; every page of each)
+</code></pre>
+<ul>
+<li><strong>Who reads:</strong> the app's server, as the signed-in student who asked (only that student's <code>access_token</code> cookie is sent). The answer is the same for every student, so one student's read serves all the others.</li>
+<li><strong>How often:</strong> every page of the three subjects (8 reads today: a page holds 12 chapters) plus one read of door A, <strong>at most once every two minutes for each process of the app's server</strong>, however many students are browsing. Nothing is read while nobody is in Student Choice. Phones never make these reads for the chapter list.</li>
+<li><strong>What is kept:</strong> the list is held in the server's memory for two minutes (and answers for up to two minutes more while a fresh copy is read behind). Nothing about any student is kept from it. Nothing is written to any database.</li>
+</ul>
+<p><strong>The fields in use.</strong> Of every row of <code>items</code>, and of the page itself:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Used for</th>
+<th>A row is left out, or shown differently, when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>the chapter's id = the set's id; "Start" opens <code>/set/&lt;id&gt;</code></td>
+<td>it is not 6 to 80 letters, digits, <code>-</code> or <code>_</code></td>
+</tr>
+<tr>
+<td><code>test_kind</code></td>
+<td>must be <code>chapter</code></td>
+<td>it is anything else: left out</td>
+</tr>
+<tr>
+<td><code>chapter_subject</code></td>
+<td>must be the subject that was asked for</td>
+<td>it differs: left out</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>must be <code>published</code></td>
+<td>it is anything else: left out</td>
+</tr>
+<tr>
+<td><code>live_enabled</code></td>
+<td>must not be <code>false</code></td>
+<td>it is <code>false</code>: left out</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>the chapter's name. A leading chapter number ("01 ") is taken off</td>
+<td>it is empty: left out</td>
+</tr>
+<tr>
+<td><code>chapter_number</code></td>
+<td>the number shown before the name (1 to 999)</td>
+<td>missing: the name is shown without a number</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>"68 sawaal" (a whole number, 1 to 5000)</td>
+<td>0 or missing: left out</td>
+</tr>
+<tr>
+<td><code>types.mcq</code>, <code>types.integer</code></td>
+<td>"64 MCQ · 4 numerical"</td>
+<td>both missing: that part of the line is not shown</td>
+</tr>
+<tr>
+<td><code>rules.minutes</code></td>
+<td>"60 min" on the test's row. A value that is not whole is shown rounded <strong>down</strong> (163.2 shows 163)</td>
+<td>missing: "Untimed"</td>
+</tr>
+<tr>
+<td><code>rules.correct</code>, <code>rules.wrong</code>, <code>maximum</code></td>
+<td>"+4/-1 · 272 marks" on the test's row</td>
+<td>one is missing: the chapter can be ticked but has <strong>no test row</strong> in step 2</td>
+</tr>
+<tr>
+<td><code>pages</code> (of the page)</td>
+<td>how many pages to read (12 at most for a subject)</td>
+<td>missing: only the first page is read</td>
+</tr>
+<tr>
+<td><code>attempt</code> (of a row)</td>
+<td>read <strong>by the phone</strong>, with the student's own session, from the same list: <code>{ id, status, resumable, result_available }</code> → Start, Resume or Result</td>
+<td>missing or <code>null</code>: "Start"</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The app shows a subject's first 120 chapters at most.</li>
+<li><strong>Half a list is never shown:</strong> if one page of one subject fails, the student sees "Sawaal abhi load nahi ho paaye. Dobara try karo." with a retry, not two subjects out of three.</li>
+<li>If the first page of a subject answers <strong>404</strong> (the owner has hidden the chapter-wise section), that subject has no chapters. With all three empty the first screen says "Chapters abhi nahi mile".</li>
+<li>The student's own state of the tests is read by the phone from <code>GET /api/exam-navigation/jee-main/catalogue?kind=chapters&amp;subject=…&amp;q=&amp;page=…</code>, only for the pages that hold ticked chapters: the same request the app's Chapter-wise screen makes.</li>
+</ul>
+<h2 id="16-what-stays-closed-until-the-website-builds-it-three-doors">1.6 What stays closed until the website builds it: three doors</h2>
+<p><strong>Why the app cannot do it alone.</strong> The website hands out a paper's questions only inside a started attempt (<code>GET /attempts/&lt;id&gt;</code>, <code>/attempts/&lt;id&gt;/assets/…</code>), and it has no way to make a set out of a list of question ids. Checked with a signed-in student on 26 Nov 2026: <code>sets/&lt;id&gt;/questions</code>, <code>sets/&lt;id&gt;/preview</code>, <code>my/sets/&lt;id&gt;/questions</code>, <code>choice/bank</code> and <code>choice/chapters/&lt;id&gt;/questions</code> all answer 404. The questions, their cut pieces, their keys and their solutions all exist on the website; only the doors are missing.</p>
+<p>All three doors are for a <strong>signed-in student</strong>, with the website's usual cookie session. An answer may be plain JSON or the usual envelope; <strong>an envelope must carry <code>meta</code></strong> (point 10 of Part 0.4).</p>
+<table>
+<thead>
+<tr>
+<th>Door</th>
+<th>Address</th>
+<th>Opens in the app</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong> the switch</td>
+<td><code>GET /api/choice/bank?exam=jee-main</code></td>
+<td>says which ways are open: "Sawaal khud chuno" (<code>pick</code>) and "Random mock" (<code>random</code>)</td>
+</tr>
+<tr>
+<td><strong>B</strong> a chapter's questions</td>
+<td><code>GET /api/choice/chapters/&lt;set id&gt;/questions?page=1</code></td>
+<td>the list of questions without options (needed for <code>pick</code>)</td>
+</tr>
+<tr>
+<td><strong>C</strong> make the paper</td>
+<td><code>POST /api/choice/papers</code></td>
+<td>"Paper banao" and "Random mock banao"</td>
+</tr>
+</tbody>
+</table>
+<p>Doors A and C are enough for the random mock. Question picking needs all three.</p>
+<h3 id="door-a-the-switch">Door A — the switch</h3>
+<pre><code>GET /api/choice/bank?exam=jee-main
+</code></pre>
+<pre><code class="language-json">{
+  &quot;pick&quot;: true,
+  &quot;random&quot;: true,
+  &quot;max_questions&quot;: 75,
+  &quot;max_per_subject&quot;: null,
+  &quot;minutes_per_question&quot;: { &quot;Physics&quot;: 2.4, &quot;Chemistry&quot;: 1.6, &quot;Mathematics&quot;: 3.2 }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Meaning</th>
+<th>When it is missing or wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pick</code></td>
+<td>true or false</td>
+<td>doors B and C (mode <code>pick</code>) work: the app opens "Sawaal khud chuno"</td>
+<td>not <code>true</code>: closed</td>
+</tr>
+<tr>
+<td><code>random</code></td>
+<td>true or false</td>
+<td>door C (mode <code>random</code>) works: the app opens "Random mock"</td>
+<td>not <code>true</code>: closed</td>
+</tr>
+<tr>
+<td><code>max_questions</code></td>
+<td>whole number 1 to 75</td>
+<td>lowers the top of a made paper</td>
+<td>missing, 0, more than 75, or not a whole number: 75</td>
+</tr>
+<tr>
+<td><code>max_per_subject</code></td>
+<td>whole number 1 to 75, or <code>null</code></td>
+<td>a top for every subject (for example 25)</td>
+<td>missing or <code>null</code>: no top per subject</td>
+</tr>
+<tr>
+<td><code>minutes_per_question</code></td>
+<td>three numbers, each 0.5 to 10</td>
+<td>minutes a question of each subject brings</td>
+<td>a subject missing or out of range: that subject's default (2.4, 1.6, 3.2)</td>
+</tr>
+</tbody>
+</table>
+<p>Rules of door A:</p>
+<ul>
+<li><strong>404 = both ways closed.</strong> That is today's answer, and it is a correct answer. Each way can be opened on its own; send <code>false</code> to close one again.</li>
+<li><strong>Never 401 or 403 to a student whose session is good, and never 5xx.</strong> On 401 or 403 the app renews the student's session and asks once more; if the door refuses again the student is told to sign in again. On 5xx the whole chapter list fails with "Sawaal abhi load nahi ho paaye. Dobara try karo.", for every student, also for the chapter tests that work today.</li>
+<li><strong>Do not send <code>subjects</code>.</strong> The chapters come from the chapter-wise catalogue (Part 1.5). (If a list <code>subjects</code> is sent, in the shape of the first note of 26 Nov, its chapters are shown <strong>instead of</strong> the catalogue's, their ids go to door B, and both ways count as open unless <code>pick</code> or <code>random</code> is sent as <code>false</code>. That list has no tests, so step 2's chapter tests disappear with it. Not recommended.)</li>
+<li>It is read by the app's server only, at most once every two minutes for each server process (Part 1.5), never by phones.</li>
+<li><strong>How fast a change shows:</strong> the app's server holds the answer for two minutes. A student who opens Student Choice, or pulls the first screen down, usually has the new ways within 2 to 4 minutes of the door changing. No new app build, for every app version that contains Student Choice.</li>
+</ul>
+<h3 id="door-b-a-chapters-questions-without-options">Door B — a chapter's questions, without options</h3>
+<pre><code>GET /api/choice/chapters/&lt;id of the chapter-wise test&gt;/questions?page=1
+</code></pre>
+<p>The id is the set id of the chapter-wise test (the <code>id</code> of its catalogue row). Example: <code>4b4ff9a5-85ba-5325-83cd-60f2994acc57</code> is "01 Units, Dimensions and Errors". The questions are that test's questions, in its order.</p>
+<pre><code class="language-json">{
+  &quot;chapter&quot;: { &quot;id&quot;: &quot;4b4ff9a5-85ba-5325-83cd-60f2994acc57&quot;, &quot;title&quot;: &quot;Units, Dimensions and Errors&quot;, &quot;subject&quot;: &quot;Physics&quot; },
+  &quot;pages&quot;: 2,
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: &quot;q-4b4ff9a5-001&quot;,
+      &quot;number&quot;: 1,
+      &quot;type&quot;: &quot;mcq&quot;,
+      &quot;text&quot;: &quot;The dimensional formula of Planck's constant is&quot;,
+      &quot;stem&quot;: []
+    },
+    {
+      &quot;id&quot;: &quot;q-4b4ff9a5-002&quot;,
+      &quot;number&quot;: 2,
+      &quot;type&quot;: &quot;integer&quot;,
+      &quot;text&quot;: &quot;&quot;,
+      &quot;stem&quot;: [
+        { &quot;url&quot;: &quot;https://files.jeelive.example/pieces/q-4b4ff9a5-002-q1.webp?expires=1800950400&amp;sig=EXAMPLE&quot;, &quot;w&quot;: 506.5, &quot;h&quot;: 47 }
+      ]
+    }
+  ]
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type and limit</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chapter.id</code>, <code>chapter.title</code>, <code>chapter.subject</code></td>
+<td>the same id; text to 120 characters; exactly Physics, Chemistry or Mathematics</td>
+<td>named on the first page; the app shows the catalogue's own title</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td>whole number, 1 to 6</td>
+<td>how many pages there are. <strong>At most 6 pages are read and at most the first 300 questions of a chapter are kept</strong>, so 50 questions a page is a good size (the largest chapter today has 103). Without <code>pages</code> only page 1 is read</td>
+</tr>
+<tr>
+<td><code>items[].id</code></td>
+<td>6 to 80 letters, digits, <code>-</code> or <code>_</code></td>
+<td>the question's id. <strong>Stable.</strong> It is sent back to door C. A question whose id does not fit is left out</td>
+</tr>
+<tr>
+<td><code>items[].number</code></td>
+<td>whole number 1 to 9999</td>
+<td>its number in the chapter test; shown as "Q 1"</td>
+</tr>
+<tr>
+<td><code>items[].type</code></td>
+<td><code>mcq</code> or <code>integer</code></td>
+<td>shown as MCQ or NUMERICAL. Anything else is taken as <code>mcq</code></td>
+</tr>
+<tr>
+<td><code>items[].text</code></td>
+<td>to 3000 characters; maths in <code>$…$</code></td>
+<td>a typed question's words. <code>""</code> for a picture question. Longer text is cut at 3000</td>
+</tr>
+<tr>
+<td><code>items[].stem</code></td>
+<td>list of <code>{ "url", "w", "h" }</code>, at most 4</td>
+<td>a picture question: <strong>only the question's own piece or pieces</strong>, in order</td>
+</tr>
+<tr>
+<td><code>stem[].url</code></td>
+<td>https, no spaces, <strong>at most 900 characters</strong></td>
+<td>a longer link is cut at 900 characters and will not open</td>
+</tr>
+<tr>
+<td><code>stem[].w</code>, <code>stem[].h</code></td>
+<td>positive numbers (print points, as in a paper's pieces: the file holds 2 pixels a point)</td>
+<td>both or neither. Without them the app measures the picture when it arrives (the list then moves a little)</td>
+</tr>
+</tbody>
+</table>
+<p>Rules of door B:</p>
+<ul>
+<li><strong>Never send options, the answer, the solution, or anything else about the question.</strong> The app's server drops everything except the fields above, but it must not leave the website at all.</li>
+<li>A question needs <code>text</code> or at least one stem picture; otherwise it is left out.</li>
+<li>A question that appears twice (the same id on two pages) is listed once.</li>
+<li><strong>Picture links:</strong> https; they must open on a phone <strong>without cookies</strong> (a signed link is right); they must stay good for <strong>at least 24 hours</strong> after the answer is given. WebP if there is one. The app's server keeps a chapter's answer for 5 minutes (and may answer from it for up to 5 more while it reads a fresh copy), and every student is served from that copy; a phone keeps it while the app is open.</li>
+<li>The answer is the same for every student. The app's server reads it as the asking student (only the <code>access_token</code> cookie is sent).</li>
+<li><strong>404</strong> for a chapter that does not exist or has no question to choose: the student sees "Is chapter ke sawaal abhi yahan nahi khul paaye. Doosra chapter chuno, ya thodi der mein dobara dekho."</li>
+<li>401 or 403: the app renews the session and asks once more. 5xx: "Sawaal abhi load nahi ho paaye. Dobara try karo."</li>
+</ul>
+<h3 id="door-c-make-the-paper">Door C — make the paper</h3>
+<pre><code>POST /api/choice/papers
+</code></pre>
+<p>It is the student's own request. It arrives through the app's server exactly like <code>POST /api/sets/&lt;id&gt;/start</code> does today: the student's cookies, <code>Content-Type: application/json</code>, <strong>no CSRF header and no browser Origin</strong>. Whatever lets <code>sets/&lt;id&gt;/start</code> through for the app must let this through.</p>
+<p>Chosen questions:</p>
+<pre><code class="language-json">{ &quot;exam&quot;: &quot;jee-main&quot;, &quot;request_key&quot;: &quot;0b6f6d2e-6c1c-4c0e-9a35-0c5f4f0d9b11&quot;, &quot;mode&quot;: &quot;pick&quot;,
+  &quot;question_ids&quot;: [&quot;&lt;id&gt;&quot;, &quot;&lt;id&gt;&quot;, &quot;&lt;id&gt;&quot;] }
+</code></pre>
+<p>Random mock:</p>
+<pre><code class="language-json">{ &quot;exam&quot;: &quot;jee-main&quot;, &quot;request_key&quot;: &quot;5d2a0a6e-0e0b-4f61-8a76-2f0f3c1f7a55&quot;, &quot;mode&quot;: &quot;random&quot;, &quot;count&quot;: 30 }
+</code></pre>
+<p>Answer, 200 or 201 (plain, or in the envelope with <code>meta</code>):</p>
+<pre><code class="language-json">{ &quot;set_id&quot;: &quot;&lt;the new paper's id&gt;&quot; }
+</code></pre>
+<p><code>set_id</code> must be 6 to 80 letters, digits, <code>-</code> or <code>_</code>; anything else and the student is told "Paper ban nahi paaya. Dobara try karo." The app then opens <code>GET /api/my/sets/&lt;set_id&gt;</code> (the paper's page) and the student starts it with <code>POST /api/sets/&lt;set_id&gt;/start</code>, as for any paper.</p>
+<p><strong>What the app has already made sure of before it asks</strong></p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>The app guarantees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pick</code></td>
+<td>1 to 75 ids (or to <code>max_questions</code>), no id twice, never more than <code>max_per_subject</code> of one subject; every id came from door B; the ids are sorted: Physics, Chemistry, Mathematics; inside a subject by the catalogue's chapter order, then by the question's number</td>
+</tr>
+<tr>
+<td><code>random</code></td>
+<td><code>count</code> is a whole number from 3 to the smaller of <code>max_questions</code> and three times what the smallest subject can give (its question count, or <code>max_per_subject</code>)</td>
+</tr>
+<tr>
+<td>both</td>
+<td><code>request_key</code> is a fresh UUID for each new ask. <strong>Every retry of the same ask</strong> (the same ids, or the same count, while the student stays on that screen) <strong>carries the same key</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The website must check all of it again: the app is not to be trusted.</p>
+<p><strong>What the website does</strong></p>
+<p><strong><code>request_key</code>.</strong> The same key = the same paper. A retry (slow network, double tap) returns the <strong>same</strong> <code>set_id</code> and never makes a second paper.</p>
+<p><strong>Checks.</strong> 1 to 75 questions. Mode <code>pick</code>: every id is a question of a published JEE Main chapter-wise test; no id twice. Mode <code>random</code>: <code>count</code> from 3 to 75. <code>max_per_subject</code> if one is set. <strong>A request that fails a check: 422</strong>, with one plain sentence in <code>error.message</code> (or <code>detail</code>): the app shows that sentence to the student as it is.</p>
+<p><strong>Mode <code>pick</code>.</strong> The paper has exactly these questions. Order: Physics, then Chemistry, then Mathematics; inside a subject as in a JEE Main paper (single-correct first, then numerical). The order the app sends is a fine order to keep otherwise.</p>
+<p><strong>Mode <code>random</code>.</strong> Split <code>count</code> equally over Physics, Chemistry and Mathematics; one or two left over go to Physics, then Chemistry. <strong>The app shows this split and its time to the student before the paper is made, so the website must use exactly this split:</strong></p>
+<div class="num">
+<table>
+<thead>
+<tr>
+<th><code>count</code></th>
+<th>Physics</th>
+<th>Chemistry</th>
+<th>Mathematics</th>
+<th>The paper's time</th>
+<th>Full marks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>8 min</td>
+<td>12</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td>10 min</td>
+<td>16</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>12 min</td>
+<td>20</td>
+</tr>
+<tr>
+<td>10</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>24 min</td>
+<td>40</td>
+</tr>
+<tr>
+<td>11</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>26 min</td>
+<td>44</td>
+</tr>
+<tr>
+<td>15</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>36 min</td>
+<td>60</td>
+</tr>
+<tr>
+<td>30</td>
+<td>10</td>
+<td>10</td>
+<td>10</td>
+<td>1 hr 12 min</td>
+<td>120</td>
+</tr>
+<tr>
+<td>31</td>
+<td>11</td>
+<td>10</td>
+<td>10</td>
+<td>1 hr 15 min</td>
+<td>124</td>
+</tr>
+<tr>
+<td>45</td>
+<td>15</td>
+<td>15</td>
+<td>15</td>
+<td>1 hr 48 min</td>
+<td>180</td>
+</tr>
+<tr>
+<td>50</td>
+<td>17</td>
+<td>17</td>
+<td>16</td>
+<td>2 hr</td>
+<td>200</td>
+</tr>
+<tr>
+<td>60</td>
+<td>20</td>
+<td>20</td>
+<td>20</td>
+<td>2 hr 24 min</td>
+<td>240</td>
+</tr>
+<tr>
+<td>74</td>
+<td>25</td>
+<td>25</td>
+<td>24</td>
+<td>2 hr 57 min</td>
+<td>296</td>
+</tr>
+<tr>
+<td>75</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+<td>3 hr</td>
+<td>300</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Inside a subject pick at random across <strong>all</strong> its chapter-wise chapters, about 4 single-correct to 1 numerical (JEE Main: 20 + 5), as far as the questions allow.</p>
+<p><strong>If a subject has no published chapter-wise test at all,</strong> the app splits the count over the subjects that have one (two subjects: equally, one left over goes to the first; the fewest it then asks for is 2). The website must split the same way, or refuse with 422 and a plain sentence. With all three subjects present, as today, the table above is the whole rule.</p>
+<p><strong>The paper</strong> is an ordinary set, owned by this student, not listed in any catalogue, never shown to another student:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code></td>
+<td>something short, for example "Student Choice · 30 Q · 26 Nov". It is shown in My Tests and on the result</td>
+</tr>
+<tr>
+<td><code>exam</code></td>
+<td>"JEE Main"</td>
+</tr>
+<tr>
+<td><code>test_kind</code></td>
+<td><strong><code>"choice"</code></strong>, exactly. The paper's page then says "Student Choice", and the Dream College meter never counts it (Part 1.9)</td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td><code>{ "correct": 4, "wrong": -1, "skipped": 0, "minutes": &lt;the rule of Part 1.4, rounded up&gt; }</code></td>
+</tr>
+<tr>
+<td><code>count</code>, <code>maximum</code> (count × 4), <code>subjects</code>, <code>types</code></td>
+<td>as for every set</td>
+</tr>
+<tr>
+<td>every question</td>
+<td>keeps its own subject (the player's subject tabs and the analysis use it), its pieces, its answer key and its solution, exactly as in the chapter-wise test it came from</td>
+</tr>
+</tbody>
+</table>
+<p><strong>From here it is a normal paper:</strong> the paper's page, attempt, autosave, deadline, result, analysis, solutions, AI solutions, My Tests (in progress, completed), retry.</p>
+<p><strong>What the student sees for each answer of door C</strong></p>
+<table>
+<thead>
+<tr>
+<th>The website answers</th>
+<th>The student sees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200 or 201 with a good <code>set_id</code></td>
+<td>the new paper's page. After a paper of chosen questions, all ticks are cleared</td>
+</tr>
+<tr>
+<td>404 or 405 (today)</td>
+<td>"Paper banana abhi jeelive.ai se jud raha hai. Thodi der mein yeh khul jayega; aapke chune sawaal yahin rahenge." The ticks stay</td>
+</tr>
+<tr>
+<td>422, 409, 429 or another 4xx with <code>error.message</code></td>
+<td>that sentence, as written by the website. The ticks stay</td>
+</tr>
+<tr>
+<td>401</td>
+<td>the app renews the session and sends the same request again, with the same key</td>
+</tr>
+<tr>
+<td>5xx, or a technical text</td>
+<td>"The website is not answering right now. Your saved work is safe. Please try again in a moment." The ticks stay</td>
+</tr>
+<tr>
+<td>200 without a usable <code>set_id</code></td>
+<td>"Paper ban nahi paaya. Dobara try karo."</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Suggestions from the app side</strong> (these are <strong>not</strong> the owner's rules; settle them with the owner before building):</p>
+<ul>
+<li>In a random mock, prefer questions this student has not had in an earlier Student Choice paper.</li>
+<li>A limit on how many papers a student may make in a day (for example 20): answer 429 with a plain sentence.</li>
+<li>Papers that were made and never started could be removed after a few days; a started one stays like any attempt.</li>
+<li>A paper belongs to one student, so a leaderboard has nobody to compare with; leave it out, as for chapter practice.</li>
+</ul>
+<h2 id="17-how-the-closed-ways-open-by-themselves-and-what-the-student-then-sees">1.7 How the closed ways open by themselves, and what the student then sees</h2>
+<p>The screens are already in the app. The day door A answers <code>"pick": true</code> or <code>"random": true</code>, they appear without a new build:</p>
+<ul>
+<li>the first screen's title becomes "Apna paper, apni marzi." and its small line "Apna paper khud banao";</li>
+<li>the facts become "75 sawaal tak", "+4 / −1", "time subject ke hisaab se";</li>
+<li>with <code>pick</code>: the card "Chapters chuno" becomes <strong>"Sawaal khud chuno"</strong>, step 2 becomes the question list, and the card "Aapke chapter tests" is no longer shown on the first screen (the chapter tests stay in the Chapter-wise section);</li>
+<li>with <code>random</code>: the card <strong>"Random mock"</strong> appears;</li>
+<li>"Jald aa raha hai" keeps only what is still closed, and goes away when both are open.</li>
+</ul>
+<p>The four pictures below were taken with <strong>the browser answering in place of doors A and B</strong> (made-up questions marked "(Sample)"); nothing was changed on any server, and no paper was made.</p>
+<div class="shots"><figure><img src="shots/s10_later_landing.jpg" alt=""><figcaption>10. First screen with both ways open</figcaption></figure><figure><img src="shots/s11_later_random_mock.jpg" alt=""><figcaption>11. Random mock: only the number is asked</figcaption></figure><figure><img src="shots/s12_later_questions.jpg" alt=""><figcaption>12. Step 2: questions without options</figcaption></figure><figure><img src="shots/s13_later_review.jpg" alt=""><figcaption>13. "Paper banao": the paper's make-up before it is made</figcaption></figure></div>
+
+<p><strong>Random mock</strong> (a sheet on the first screen). "Bas ginti batao. Sawaal Physics, Chemistry, Maths se barabar aur mile-jule aayenge, JEE Main ke paper ki tarah." A number box that starts at 30, quick buttons 15, 30, 45, 60, 75, the split subject by subject with each subject's time, the whole paper's questions and time, and one line: "Poore 120 marks · sahi +4, galat -1, chhoda 0 · time 1 hr 12 min". A number outside the range shows "3 se 75 ke beech ginti likho." and the button is off. <strong>"Random mock banao"</strong> sends door C; the new paper's page opens.</p>
+<p><strong>Sawaal chuno</strong> (step 2 of 2, after ticking chapters).</p>
+<ul>
+<li>Pills for the subjects that have a ticked chapter, each with how many questions are chosen in it; under them pills for that subject's ticked chapters.</li>
+<li>The chapter's name and "Maths · 12 sawaal · yahan sirf sawaal hain, options paper mein milenge".</li>
+<li>One card per question: a tick, "Q 1", MCQ or NUMERICAL, and the question's words or its picture. <strong>No options.</strong> A tap ticks it.</li>
+<li>At the end of a chapter: "Agla chapter: …".</li>
+<li>The bar: "7 / 75 sawaal", "17 min · 28 marks", and <strong>"Paper banao"</strong>.</li>
+<li>The 76th tap is refused: "75 sawaal ho gaye: ek paper mein isse zyada nahi. Koi hatao, tab naya chuno." With a top per subject: "Physics ke 25 sawaal ho gaye. Koi hatao, tab naya chuno."</li>
+<li>Unticking a chapter in step 1 takes its chosen questions out too.</li>
+<li><strong>"Paper banao"</strong> opens the sheet "Aapka paper": the make-up subject by subject, "Poore 28 marks. Sahi jawab +4, galat -1, chhoda hua 0. Paper Physics, Chemistry, Maths ke order mein banega; result, analysis aur solutions har paper ki tarah milenge.", then <strong>"Haan, paper banao"</strong> (sends door C) and "Aur sawaal chuno".</li>
+<li>The chosen questions are kept while the app is open (going back and forth between the steps loses nothing); they are not kept after the app is closed.</li>
+</ul>
+<p><strong>A known small thing in the make-up:</strong> each subject's time is rounded up on its own, so the rows can add up to a minute or two more than the paper's total (picture 13: 8 + 4 + 7 minutes above "17 min"). The total is the right one, and it is what door C must give.</p>
+<h2 id="18-whole-chapter-tests-by-the-80-60-40-ratio-a-change-on-the-website">1.8 Whole chapter tests by the 80 / 60 / 40 ratio: a change on the website</h2>
+<p>The owner asked: "Make whole chapter tests follow the 80/60/40 time ratio once the website allows changing their time". <strong>The app cannot do it.</strong> An attempt's deadline is the website's, taken from the set's <code>rules.minutes</code>. <strong>Not done yet:</strong> on 26 Nov 2026 every JEE Main chapter-wise test has 60 minutes, whatever its length.</p>
+<p><strong>What to change on the website</strong></p>
+<ul>
+<li>For every published JEE Main chapter-wise set (<code>test_kind</code> "chapter"):
+  <code>rules.minutes</code> = (the set's <code>count</code>) × (the minutes a question of its <code>chapter_subject</code> brings), rounded <strong>up</strong> to a whole minute. Physics 2.4, Chemistry 1.6, Mathematics 3.2.</li>
+<li>Keep it true: when a chapter's question count changes, its minutes change with it.</li>
+<li>A new attempt gets the new time. <strong>An attempt that is already running keeps the deadline it has.</strong></li>
+<li>A whole number of minutes, please: the app's pages show <code>rules.minutes</code> as it is.</li>
+</ul>
+<p><strong>What it gives, chapter by chapter</strong> (counts as on 26 Nov 2026; today's 60 minutes → by the ratio):</p>
+<div class="small num">
+<div class="subject">
+<h3 id="physics-24-minutes-a-question-30-tests-1250-questions">Physics: 2.4 minutes a question (30 tests, 1250 questions)</h3>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Chapter</th>
+<th>Questions</th>
+<th>Today</th>
+<th>By the ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Units, Dimensions and Errors</td>
+<td>68</td>
+<td>60 min</td>
+<td><strong>164 min</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Kinematics</td>
+<td>66</td>
+<td>60 min</td>
+<td><strong>159 min</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Laws of Motion</td>
+<td>46</td>
+<td>60 min</td>
+<td><strong>111 min</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Work, Energy and Power</td>
+<td>42</td>
+<td>60 min</td>
+<td><strong>101 min</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Centre of Mass, Momentum and Collisions</td>
+<td>17</td>
+<td>60 min</td>
+<td><strong>41 min</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Rotational Motion</td>
+<td>60</td>
+<td>60 min</td>
+<td><strong>144 min</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Gravitation</td>
+<td>40</td>
+<td>60 min</td>
+<td><strong>96 min</strong></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Mechanical Properties of Solids</td>
+<td>29</td>
+<td>60 min</td>
+<td><strong>70 min</strong></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Fluids</td>
+<td>31</td>
+<td>60 min</td>
+<td><strong>75 min</strong></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Surface Tension</td>
+<td>22</td>
+<td>60 min</td>
+<td><strong>53 min</strong></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Thermal Properties of Matter</td>
+<td>16</td>
+<td>60 min</td>
+<td><strong>39 min</strong></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Thermodynamics</td>
+<td>52</td>
+<td>60 min</td>
+<td><strong>125 min</strong></td>
+</tr>
+<tr>
+<td>13</td>
+<td>Kinetic Theory of Gases</td>
+<td>41</td>
+<td>60 min</td>
+<td><strong>99 min</strong></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Oscillations</td>
+<td>27</td>
+<td>60 min</td>
+<td><strong>65 min</strong></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Waves and Sound</td>
+<td>30</td>
+<td>60 min</td>
+<td><strong>72 min</strong></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Electrostatics</td>
+<td>76</td>
+<td>60 min</td>
+<td><strong>183 min</strong></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Capacitors</td>
+<td>30</td>
+<td>60 min</td>
+<td><strong>72 min</strong></td>
+</tr>
+<tr>
+<td>18</td>
+<td>Current Electricity</td>
+<td>55</td>
+<td>60 min</td>
+<td><strong>132 min</strong></td>
+</tr>
+<tr>
+<td>19</td>
+<td>Magnetic Effects of Current</td>
+<td>62</td>
+<td>60 min</td>
+<td><strong>149 min</strong></td>
+</tr>
+<tr>
+<td>20</td>
+<td>Magnetism and Matter</td>
+<td>7</td>
+<td>60 min</td>
+<td><strong>17 min</strong></td>
+</tr>
+<tr>
+<td>21</td>
+<td>Electromagnetic Induction</td>
+<td>34</td>
+<td>60 min</td>
+<td><strong>82 min</strong></td>
+</tr>
+<tr>
+<td>22</td>
+<td>Alternating Current</td>
+<td>35</td>
+<td>60 min</td>
+<td><strong>84 min</strong></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Electromagnetic Waves</td>
+<td>41</td>
+<td>60 min</td>
+<td><strong>99 min</strong></td>
+</tr>
+<tr>
+<td>24</td>
+<td>Ray Optics and Optical Instruments</td>
+<td>74</td>
+<td>60 min</td>
+<td><strong>178 min</strong></td>
+</tr>
+<tr>
+<td>25</td>
+<td>Wave Optics</td>
+<td>49</td>
+<td>60 min</td>
+<td><strong>118 min</strong></td>
+</tr>
+<tr>
+<td>26</td>
+<td>Dual Nature of Matter and Radiation</td>
+<td>45</td>
+<td>60 min</td>
+<td><strong>108 min</strong></td>
+</tr>
+<tr>
+<td>27</td>
+<td>Atoms</td>
+<td>35</td>
+<td>60 min</td>
+<td><strong>84 min</strong></td>
+</tr>
+<tr>
+<td>28</td>
+<td>Nuclei</td>
+<td>30</td>
+<td>60 min</td>
+<td><strong>72 min</strong></td>
+</tr>
+<tr>
+<td>29</td>
+<td>Semiconductors and Logic Gates</td>
+<td>56</td>
+<td>60 min</td>
+<td><strong>135 min</strong></td>
+</tr>
+<tr>
+<td>30</td>
+<td>Experimental Skills</td>
+<td>34</td>
+<td>60 min</td>
+<td><strong>82 min</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subject">
+<h3 id="chemistry-16-minutes-a-question-24-tests-1250-questions">Chemistry: 1.6 minutes a question (24 tests, 1250 questions)</h3>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Chapter</th>
+<th>Questions</th>
+<th>Today</th>
+<th>By the ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Mole Concept and Stoichiometry</td>
+<td>68</td>
+<td>60 min</td>
+<td><strong>109 min</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Atomic Structure</td>
+<td>52</td>
+<td>60 min</td>
+<td><strong>84 min</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Classification of Elements and Periodicity</td>
+<td>45</td>
+<td>60 min</td>
+<td><strong>72 min</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chemical Bonding and Molecular Structure</td>
+<td>65</td>
+<td>60 min</td>
+<td><strong>104 min</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Thermodynamics and Thermochemistry</td>
+<td>59</td>
+<td>60 min</td>
+<td><strong>95 min</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Chemical Equilibrium</td>
+<td>31</td>
+<td>60 min</td>
+<td><strong>50 min</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Ionic Equilibrium</td>
+<td>28</td>
+<td>60 min</td>
+<td><strong>45 min</strong></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Redox Reactions</td>
+<td>16</td>
+<td>60 min</td>
+<td><strong>26 min</strong></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Solutions</td>
+<td>47</td>
+<td>60 min</td>
+<td><strong>76 min</strong></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Electrochemistry</td>
+<td>56</td>
+<td>60 min</td>
+<td><strong>90 min</strong></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Chemical Kinetics</td>
+<td>56</td>
+<td>60 min</td>
+<td><strong>90 min</strong></td>
+</tr>
+<tr>
+<td>12</td>
+<td>p-Block Elements</td>
+<td>54</td>
+<td>60 min</td>
+<td><strong>87 min</strong></td>
+</tr>
+<tr>
+<td>13</td>
+<td>d- and f-Block Elements</td>
+<td>72</td>
+<td>60 min</td>
+<td><strong>116 min</strong></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Coordination Compounds</td>
+<td>88</td>
+<td>60 min</td>
+<td><strong>141 min</strong></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Purification and Characterisation of Organic Compounds</td>
+<td>57</td>
+<td>60 min</td>
+<td><strong>92 min</strong></td>
+</tr>
+<tr>
+<td>16</td>
+<td>General Organic Chemistry</td>
+<td>103</td>
+<td>60 min</td>
+<td><strong>165 min</strong></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Hydrocarbons</td>
+<td>58</td>
+<td>60 min</td>
+<td><strong>93 min</strong></td>
+</tr>
+<tr>
+<td>18</td>
+<td>Haloalkanes and Haloarenes</td>
+<td>46</td>
+<td>60 min</td>
+<td><strong>74 min</strong></td>
+</tr>
+<tr>
+<td>19</td>
+<td>Alcohols, Phenols and Ethers</td>
+<td>32</td>
+<td>60 min</td>
+<td><strong>52 min</strong></td>
+</tr>
+<tr>
+<td>20</td>
+<td>Aldehydes, Ketones and Carboxylic Acids</td>
+<td>60</td>
+<td>60 min</td>
+<td><strong>96 min</strong></td>
+</tr>
+<tr>
+<td>21</td>
+<td>Amines and Diazonium Salts</td>
+<td>57</td>
+<td>60 min</td>
+<td><strong>92 min</strong></td>
+</tr>
+<tr>
+<td>22</td>
+<td>Biomolecules</td>
+<td>56</td>
+<td>60 min</td>
+<td><strong>90 min</strong></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Principles Related to Practical Chemistry</td>
+<td>42</td>
+<td>60 min</td>
+<td><strong>68 min</strong></td>
+</tr>
+<tr>
+<td>24</td>
+<td>Miscellaneous (beyond the current syllabus)</td>
+<td>2</td>
+<td>60 min</td>
+<td><strong>4 min</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subject">
+<h3 id="mathematics-32-minutes-a-question-27-tests-1250-questions">Mathematics: 3.2 minutes a question (27 tests, 1250 questions)</h3>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Chapter</th>
+<th>Questions</th>
+<th>Today</th>
+<th>By the ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Sets and Relations</td>
+<td>38</td>
+<td>60 min</td>
+<td><strong>122 min</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Functions</td>
+<td>54</td>
+<td>60 min</td>
+<td><strong>173 min</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Basic Algebra (Inequalities, Modulus, Logarithms)</td>
+<td>13</td>
+<td>60 min</td>
+<td><strong>42 min</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Trigonometric Ratios, Identities and Equations</td>
+<td>40</td>
+<td>60 min</td>
+<td><strong>128 min</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Complex Numbers</td>
+<td>48</td>
+<td>60 min</td>
+<td><strong>154 min</strong></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Quadratic Equations</td>
+<td>49</td>
+<td>60 min</td>
+<td><strong>157 min</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Permutations and Combinations</td>
+<td>53</td>
+<td>60 min</td>
+<td><strong>170 min</strong></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Binomial Theorem</td>
+<td>50</td>
+<td>60 min</td>
+<td><strong>160 min</strong></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Sequences and Series</td>
+<td>75</td>
+<td>60 min</td>
+<td><strong>240 min</strong></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Straight Lines</td>
+<td>50</td>
+<td>60 min</td>
+<td><strong>160 min</strong></td>
+</tr>
+<tr>
+<td>11</td>
+<td>Circles</td>
+<td>44</td>
+<td>60 min</td>
+<td><strong>141 min</strong></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Parabola</td>
+<td>23</td>
+<td>60 min</td>
+<td><strong>74 min</strong></td>
+</tr>
+<tr>
+<td>13</td>
+<td>Ellipse</td>
+<td>36</td>
+<td>60 min</td>
+<td><strong>116 min</strong></td>
+</tr>
+<tr>
+<td>14</td>
+<td>Hyperbola</td>
+<td>28</td>
+<td>60 min</td>
+<td><strong>90 min</strong></td>
+</tr>
+<tr>
+<td>15</td>
+<td>Limits</td>
+<td>29</td>
+<td>60 min</td>
+<td><strong>93 min</strong></td>
+</tr>
+<tr>
+<td>16</td>
+<td>Statistics</td>
+<td>29</td>
+<td>60 min</td>
+<td><strong>93 min</strong></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Probability</td>
+<td>51</td>
+<td>60 min</td>
+<td><strong>164 min</strong></td>
+</tr>
+<tr>
+<td>18</td>
+<td>Matrices and Determinants</td>
+<td>86</td>
+<td>60 min</td>
+<td><strong>276 min</strong></td>
+</tr>
+<tr>
+<td>19</td>
+<td>Inverse Trigonometric Functions</td>
+<td>24</td>
+<td>60 min</td>
+<td><strong>77 min</strong></td>
+</tr>
+<tr>
+<td>20</td>
+<td>Continuity and Differentiability</td>
+<td>41</td>
+<td>60 min</td>
+<td><strong>132 min</strong></td>
+</tr>
+<tr>
+<td>21</td>
+<td>Application of Derivatives</td>
+<td>37</td>
+<td>60 min</td>
+<td><strong>119 min</strong></td>
+</tr>
+<tr>
+<td>22</td>
+<td>Indefinite Integration</td>
+<td>15</td>
+<td>60 min</td>
+<td><strong>48 min</strong></td>
+</tr>
+<tr>
+<td>23</td>
+<td>Definite Integration</td>
+<td>73</td>
+<td>60 min</td>
+<td><strong>234 min</strong></td>
+</tr>
+<tr>
+<td>24</td>
+<td>Area under Curves</td>
+<td>45</td>
+<td>60 min</td>
+<td><strong>144 min</strong></td>
+</tr>
+<tr>
+<td>25</td>
+<td>Differential Equations</td>
+<td>70</td>
+<td>60 min</td>
+<td><strong>224 min</strong></td>
+</tr>
+<tr>
+<td>26</td>
+<td>Vector Algebra</td>
+<td>67</td>
+<td>60 min</td>
+<td><strong>215 min</strong></td>
+</tr>
+<tr>
+<td>27</td>
+<td>Three-Dimensional Geometry</td>
+<td>82</td>
+<td>60 min</td>
+<td><strong>263 min</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Please look at these before turning it on.</strong> They follow from the rule as the owner gave it. He was told them on 26 Nov 2026 and had not answered when this book was written.</p>
+<ul>
+<li>Of the 81 tests, <strong>70 get longer</strong>, <strong>11 get shorter</strong>, and none stays at 60 minutes.</li>
+<li><strong>The longest test becomes 4 h 36 min</strong> (Matrices and Determinants, 86 questions). <strong>7 tests become longer than 3 hours:</strong> Matrices and Determinants 4 h 36 min; Three-Dimensional Geometry 4 h 23 min; Sequences and Series 4 h 00 min; Definite Integration 3 h 54 min; Differential Equations 3 h 44 min; Vector Algebra 3 h 35 min; Electrostatics 3 h 03 min.</li>
+<li><strong>11 tests become shorter than today's 60 minutes:</strong> Miscellaneous (beyond the current syllabus) 4 min; Magnetism and Matter 17 min; Redox Reactions 26 min; Thermal Properties of Matter 39 min; Centre of Mass, Momentum and Collisions 41 min; Basic Algebra (Inequalities, Modulus, Logarithms) 42 min; Ionic Equilibrium 45 min; Indefinite Integration 48 min; Chemical Equilibrium 50 min; Alcohols, Phenols and Ethers 52 min; Surface Tension 53 min.</li>
+<li>
+<p>12 chapter tests have 68 questions or more. (These are the ones an older app version counted for the Dream College meter: Part 1.9.)</p>
+</li>
+<li>
+<p>The owner gave the ratio <strong>without a longest time</strong>. If he later wants one (for example "never more than 3 hours"), it is again only <code>rules.minutes</code> on the website; the app shows whatever is set.</p>
+</li>
+<li>For the longer attempts, on the website's side: the student's session, the autosave and the attempt's picture links (<code>GET /attempts/&lt;id&gt;/assets/links</code>) must last the whole attempt, up to the longest time above plus the get-ready minute.</li>
+<li>It is the same set as in the Chapter-wise section, so that section, on the website and in the app, shows the new time too.</li>
+</ul>
+<p><strong>What the app does with it. Nothing else is needed from the website.</strong></p>
+<ul>
+<li>Every app version, also older ones: the paper's page shows the set's <code>rules.minutes</code> when it is opened; the Chapter-wise list shows the list's minutes; the player runs on the attempt's own deadline.</li>
+<li>Student Choice's list of chapter tests shows each test's minutes from the catalogue (Part 1.5), a few minutes behind at most.</li>
+<li>Student Choice's first screen says today "Poore chapter test ka time uske page par likha hota hai (abhi 1 hr)". <strong>On the day every chapter test has its ratio time</strong> (a minute's rounding apart at most) <strong>the sentence changes by itself</strong> to "Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time."</li>
+<li>Checked on 26 Nov 2026 on the web preview, with the catalogue answered in the browser with the ratio times: a 16-question Physics test showed 39 min and the sentence changed. <strong>Not checked</strong> against the real website (nothing is changed there yet). The app side has never run an attempt longer than a full mock (180 minutes).</li>
+</ul>
+<h2 id="19-the-dream-college-meter">1.9 The Dream College meter</h2>
+<p><strong>The owner's decision (26 Nov 2026):</strong> a chapter test and a Student Choice paper <strong>never</strong> count as a full mock for the Dream College meter, however long they are.</p>
+<ul>
+<li><strong>The rule in the app:</strong> a JEE Main paper counts as a full mock when it has 68 questions or more and 150 marks or more, <strong>and its <code>test_kind</code> is not <code>chapter</code> and not <code>choice</code></strong>. Before 26 Nov the kind was not looked at, and a long chapter test was counted.</li>
+<li><strong>Where the app reads the kind:</strong> <code>test_kind</code> of <code>GET /api/attempts/&lt;id&gt;/results</code>. "chapter" is there today. <strong>A made Student Choice paper must carry <code>test_kind</code> "choice" on the set AND on its result.</strong></li>
+<li><strong>A chapter test that an older app version had already counted</strong> is taken out when the student opens that result in an app version with this work. The account remembers it (up to 200 such papers), so no phone and no app version can put it back.</li>
+<li><strong>Please also put <code>test_kind</code> on every item of <code>GET /api/my/tests</code></strong> (the items have none today). A phone that signs in for the first time reads that list to find the student's full mocks; without <code>test_kind</code> it opens the paper's page (<code>GET /api/my/sets/&lt;set_id&gt;</code>) for every long paper in the list, up to 12 extra reads, once. A paper whose kind cannot be read is left out until its result is opened.</li>
+<li><strong>Known:</strong> app versions that students had before this work keep counting long chapter tests until they update.</li>
+<li><strong>The Matched paper is not on the never-count list.</strong> It was not asked for, and a shift's Matched paper is far below 68 questions. See the open points, Part 3.8.</li>
+</ul>
+<h2 id="110-what-is-stored-where">1.10 What is stored where</h2>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Where</th>
+<th>For how long</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The ticked chapters</td>
+<td>on the phone, for each account (up to 300 ids)</td>
+<td>until unticked. A new phone, or the app installed again, starts with none. After a paper of chosen questions is made, all ticks are cleared</td>
+</tr>
+<tr>
+<td>The ticked questions</td>
+<td>in the app's memory</td>
+<td>while the app is open</td>
+</tr>
+<tr>
+<td>The chapter list (with door A's answer)</td>
+<td>the app server's memory; the phone's own copy</td>
+<td>server: 2 minutes (answers up to 2 more while it reloads). Phone: shown at once from its copy, read again every time the screen opens</td>
+</tr>
+<tr>
+<td>A chapter's questions (door B)</td>
+<td>the app server's memory; the phone's memory</td>
+<td>server: 5 minutes (answers up to 5 more while it reloads). Phone: while the app is open</td>
+</tr>
+<tr>
+<td>The student's state of the chapter tests</td>
+<td>read by the phone from the website</td>
+<td>read again when the screen comes back to the front, and on pull-down</td>
+</tr>
+<tr>
+<td>Anything about a student's choice on the app's server</td>
+<td><strong>nothing is stored</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>A made paper, its attempt and its result</td>
+<td>the website</td>
+<td>like every paper</td>
+</tr>
+</tbody>
+</table>
+<p>Who may ask the app's server for the chapter list: a signed-in student only. The request carries a short pass (15 minutes) that the app's server gives only for a session the website has verified; anything else gets 401.</p>
+<h2 id="111-the-super-admins-part-in-student-choice">1.11 The super admin's part in Student Choice</h2>
+<p><strong>Today there is nothing new to operate.</strong> Student Choice shows what the website's Chapter-wise section has. These actions on the website change Student Choice by themselves, within about four minutes:</p>
+<table>
+<thead>
+<tr>
+<th>What the super admin does on the website</th>
+<th>What happens in Student Choice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>publishes a new JEE Main chapter-wise test</td>
+<td>it appears as a chapter of its subject, at its place in the website's order, and can be searched by its title</td>
+</tr>
+<tr>
+<td>takes a chapter-wise test back (not published, or live off)</td>
+<td>it leaves the list. A student who had ticked it simply no longer has it in his tests; nothing breaks</td>
+</tr>
+<tr>
+<td>renames a chapter-wise test</td>
+<td>the new name shows and is searched. (Six short search names are written in the app: Part 1.3)</td>
+</tr>
+<tr>
+<td>changes its questions</td>
+<td>the counts ("68 sawaal · 64 MCQ · 4 numerical") follow</td>
+</tr>
+<tr>
+<td>changes its minutes or marking</td>
+<td>the test's row follows ("60 min · +4/-1 · 272 marks")</td>
+</tr>
+<tr>
+<td>hides the whole Chapter-wise section</td>
+<td>the first screen says "Chapters abhi nahi mile" and offers the button "Chapter-wise tests"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>When the doors exist</strong> the super admin (or whoever holds the switch of door A) decides: question picking on or off; random mock on or off; a lower top than 75; a top per subject; other minutes per question. A change shows within 2 to 4 minutes, with no app update.</p>
+<p><strong>What to tell a student who asks</strong></p>
+<table>
+<thead>
+<tr>
+<th>The student asks</th>
+<th>The answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Sawaal khud kyun nahi chun sakta?"</td>
+<td>That part is coming ("Jald aa raha hai"). Today the whole test of every chosen chapter can be taken. It will open in the app by itself, without an update</td>
+</tr>
+<tr>
+<td>"Chapter test 60 minute ka hi kyun hai?"</td>
+<td>The time rule on the first screen is for a paper made in Student Choice. A whole chapter test has the time written on its page: 60 minutes today</td>
+</tr>
+<tr>
+<td>"Mere chune hue chapters gayab ho gaye."</td>
+<td>The ticks are kept on the phone, for the account. A new phone or a fresh install starts empty; a chapter the website took back leaves the list</td>
+</tr>
+<tr>
+<td>"Kya yeh Dream College meter mein ginta hai?"</td>
+<td>No. Chapter tests and Student Choice papers never count; only full mocks do</td>
+</tr>
+<tr>
+<td>"Student Choice ke sawaal alag hain kya?"</td>
+<td>No. They are the JEE Main chapter-wise questions; the attempts are the same ones as in the Chapter-wise section and My Tests</td>
+</tr>
+</tbody>
+</table>
+<h2 id="112-what-happens-when">1.12 What happens when…</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>What the student sees</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The website does not answer, or answers 5xx, while the chapter list is read</td>
+<td>"Sawaal abhi load nahi ho paaye. Dobara try karo." with a retry. If the phone has the list from before, it stays on screen</td>
+<td>the app's server answers 503 and keeps nothing of a failed read</td>
+</tr>
+<tr>
+<td>The student's website session has run out</td>
+<td>nothing: the app renews it and asks again, once</td>
+<td>401 with the code <code>website_session</code></td>
+</tr>
+<tr>
+<td>The student is signed out</td>
+<td>Student Choice cannot be reached: Home is for signed-in students</td>
+<td></td>
+</tr>
+<tr>
+<td>One page of one subject fails</td>
+<td>the whole list fails with a retry</td>
+<td>half a list is never shown</td>
+</tr>
+<tr>
+<td>A ticked chapter is no longer published</td>
+<td>it is not listed and not counted</td>
+<td>only chapters the list still has count</td>
+</tr>
+<tr>
+<td>A ticked chapter's test is in progress</td>
+<td>"In progress" and <strong>Resume</strong></td>
+<td>a test in progress is never started twice</td>
+</tr>
+<tr>
+<td>The student's states cannot be read</td>
+<td>the rows show no button and cannot be tapped; an error with a retry is shown</td>
+<td></td>
+</tr>
+<tr>
+<td>The page of step 2 is opened with nothing ticked</td>
+<td>the app goes back to step 1</td>
+<td></td>
+</tr>
+<tr>
+<td>The 76th question is ticked</td>
+<td>it is refused, with the sentence of Part 1.7</td>
+<td>the owner's top</td>
+</tr>
+<tr>
+<td>Door C is asked twice for the same paper (double tap, slow network)</td>
+<td>one paper</td>
+<td>the same <code>request_key</code></td>
+</tr>
+<tr>
+<td>Door A opens while a student is in step 2's chapter tests</td>
+<td>on the next read, step 2 becomes the question list for him</td>
+<td>the list says which ways are open</td>
+</tr>
+<tr>
+<td>Door A closes again</td>
+<td>the ways go back under "Jald aa raha hai"; the chapter tests are back in step 2</td>
+<td></td>
+</tr>
+<tr>
+<td>A question's picture link has expired</td>
+<td>"Is sawaal ki picture load nahi hui." in place of the picture</td>
+<td>links must live 24 hours</td>
+</tr>
+</tbody>
+</table>
+<h2 id="113-checks-for-the-website-agent">1.13 Checks for the website agent</h2>
+<p>Run these on a test setup, signed in as a test student (<code>-b</code> = that student's cookies).</p>
+<p><strong>Door A</strong></p>
+<ul>
+<li><code>curl -s -b cookies.txt "https://&lt;website&gt;/api/choice/bank?exam=jee-main"</code> → 200 with <code>pick</code> and <code>random</code>; no <code>subjects</code>.</li>
+<li>The same without cookies → 401 is fine (the app's server always sends the student's cookie).</li>
+<li>Closed → 404.</li>
+</ul>
+<p><strong>Door B</strong></p>
+<ul>
+<li>For the set id of a chapter-wise test: 200; <code>items[].id</code> stable between two calls; <strong>no</strong> <code>options</code>, <code>answer</code>, <code>correct</code>, <code>solution</code> or key of any kind anywhere in the answer.</li>
+<li>Every <code>stem[].url</code> opens in a private browser window (no cookies), and still opens the next day.</li>
+<li><code>pages</code> is right; the last page is not empty; page <code>pages + 1</code> answers 404 or an empty list.</li>
+<li>A set id that is not a chapter-wise test → 404.</li>
+</ul>
+<p><strong>Door C</strong></p>
+<ul>
+<li>The same body sent twice → the same <code>set_id</code>, one set made.</li>
+<li><code>question_ids</code> with 76 ids, with a repeated id, with an id that is not a chapter-wise question, <code>count</code> 2, <code>count</code> 76 → 422 with a plain sentence.</li>
+<li>The made set: <code>test_kind</code> "choice"; <code>rules</code> +4 / −1 / 0; <code>minutes</code> as Part 1.4 (check 3 Physics + 2 Chemistry + 2 Mathematics = 17; 10 + 10 + 10 = 72; 25 Mathematics = 80); <code>maximum</code> = count × 4; questions in the order Physics, Chemistry, Mathematics.</li>
+<li>Random: <code>count</code> 10 → 4 + 3 + 3; 11 → 4 + 4 + 3; 75 → 25 + 25 + 25.</li>
+<li><code>GET /api/my/sets/&lt;set_id&gt;</code> and <code>POST /api/sets/&lt;set_id&gt;/start</code> work for the owner of the paper and for nobody else.</li>
+<li>After submitting: <code>GET /api/attempts/&lt;id&gt;/results</code> carries <code>test_kind</code> "choice"; the paper is in My Tests.</li>
+</ul>
+<p><strong>Then, with the app</strong> (tell the app side first): the first screen shows the open ways within 2 to 4 minutes; a paper of chosen questions and a random mock are made, started, submitted; the result shows no Dream College meter.</p>
+<h2 id="114-not-checked-and-known-small-things">1.14 Not checked, and known small things</h2>
+<p><strong>Not checked</strong></p>
+<ul>
+<li>Anything on a real phone: the lists, the keyboard over the search box and the random sheet, the safe areas. Everything was walked in the app's web preview, at a phone's size.</li>
+<li>Doors A, B and C: they do not exist. The question list and "Paper banao" were walked against made-up typed questions only, <strong>never with picture questions</strong> (the real chapter-wise questions are pictures).</li>
+<li>A chapter test started from Student Choice by the app side (the button was never pressed in a test; it opens the same page the Chapter-wise section opens).</li>
+<li>The ratio times against the real website, and any attempt longer than 180 minutes.</li>
+</ul>
+<p><strong>Known small things, not changed</strong></p>
+<ul>
+<li>In the paper's make-up the subjects' rounded times can add up to a minute or two more than the total (Part 1.7).</li>
+<li>The six short search names are fixed in the app (Part 1.3).</li>
+<li>The Student Choice tile has no switch: taking it off Home needs a new app build (Part 3.4).</li>
+</ul>
+<h1 id="part-2-matched">Part 2 — Matched</h1>
+<h2 id="21-what-it-is-and-what-the-owner-decided">2.1 What it is, and what the owner decided</h2>
+<p>After a JEE Main shift, some of its questions turn out to be the same as, or very close to, questions JE Live had already given its students. <strong>Matched shows them</strong>: the JEE Main question, and under it the question of ours it matched, with where ours was asked and how close the match is.</p>
+<table>
+<thead>
+<tr>
+<th>Decision of the owner</th>
+<th>Date</th>
+<th>Where it shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>When the All India series is over, Home's All India card turns <strong>by itself</strong> into the card "Matched: JEE Mains questions matched with ours"</td>
+<td>25 Nov 2026</td>
+<td>Part 2.6</td>
+</tr>
+<tr>
+<td>The list shows the JEE question and ours on one card, <strong>without options</strong>, with the tabs "Question" and "Solution"</td>
+<td>25 Nov 2026</td>
+<td>Part 2.2</td>
+</tr>
+<tr>
+<td>Real counts and what matched. "Attempt all matched" opens a <strong>real paper</strong> of the website; nothing is made up or marked on the phone</td>
+<td>26 Nov 2026</td>
+<td>Part 2.4b</td>
+</tr>
+<tr>
+<td>Looking is open to everyone. <strong>Attempting needs an account:</strong> a person without one is asked to sign up (free) and comes back to the same shift</td>
+<td>26 Nov 2026</td>
+<td>Part 2.2</td>
+</tr>
+<tr>
+<td>The look: sun yellow into orange, a golden cup, fireworks</td>
+<td>26 Nov 2026</td>
+<td>the pictures below</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Not built, and not part of the app:</strong> the machine or the people who compare a JEE Main paper with our questions. The app shows whatever the super admin publishes. What counts as a match is the academic team's judgement; the pages are public, so a claim made there is made to everyone.</p>
+<h2 id="22-what-a-student-sees-screen-by-screen">2.2 What a student sees, screen by screen</h2>
+<p>The pictures show <strong>three made-up sample shifts</strong> (22 and 24 Jan 2027) that exist on the app's preview only.</p>
+<div class="shots"><figure><img src="shots/m08_home_card.jpg" alt=""><figcaption>1. Home with the Matched card in the All India card's place</figcaption></figure><figure><img src="shots/m01_signin_bar.jpg" alt=""><figcaption>2. The sign-in screen with the Matched bar</figcaption></figure><figure><img src="shots/m02_matched_page.jpg" alt=""><figcaption>3. The Matched page: month, day, shift</figcaption></figure><figure><img src="shots/m03_shift_top.jpg" alt=""><figcaption>4. A shift: its count, its paper, the button</figcaption></figure></div>
+
+<p><strong>1. Home's card</strong> (only while the switch of Part 2.6 is on). Under the title "Matched with JEE Main" (with "view all"), in the place of the All India series card: "JEE MAIN", how many shifts ("3 SHIFTS"), the word MATCHED, the line "JEE Mains questions matched with ours", the cup and the fireworks, two facts ("11 questions matched", "24 Jan · Shift 1, latest shift") and the button <strong>"See matched questions"</strong>. Before the first shift is published it says "JEE Main ke har shift ke baad yahan woh questions aayenge jo hamare questions se match hue." and the button reads "Open Matched". While the card is on, the All India series and its archive are reached from "all india series" under Explore on Home.</p>
+<p><strong>2. The sign-in screen</strong> shows a Matched bar while the same switch is on: MATCHED, the line, and "Dekho". A person without an account can open Matched from it.</p>
+<p><strong>3. The Matched page</strong> ("Matched", small line "JEE Main"). Open to everyone.</p>
+<ul>
+<li>The top card: how many questions matched in how many shifts ("11 questions matched in 3 shifts").</li>
+<li>When shifts of more than one month exist: a pill for each month with its count ("Jan 2027", "Apr 2027"). With one month, its name.</li>
+<li>The days, newest first ("SUN, 24 JAN"); under a day its shifts in order (1, then 2).</li>
+<li>A shift's row: "SHIFT 1", "6 of 75 matched" with a bar, and a chip for each subject with its count ("Physics 2", "Chemistry 2", "Maths 2"). Without <code>asked</code> it reads "6 matched", with no bar.</li>
+<li>Before the first shift: "Pehla shift hote hi yahan aayega", "JEE Main ke har shift ke baad yahan woh questions dikhenge jo hamare questions se match hue: unka question, aur uske saamne hamara."</li>
+</ul>
+<p><strong>4. A shift's page</strong> ("Shift 1 · Fri, 22 Jan", small line "JEE MAIN 2027": the day, the shift and the year are read from the shift's id). Open to everyone.</p>
+<ul>
+<li><strong>The top card.</strong> The big count: "6 of 75 questions matched with ours" with a bar. Then the paper's three facts: <strong>"7 questions"</strong>, <strong>"28 marks"</strong>, <strong>"+4 / −1 marking"</strong>. The 7 is how many of <strong>our</strong> questions are in the shift's paper: one JEE question may have matched more than one of ours (here 6 JEE questions matched 7 of ours). The marks are that number × 4.</li>
+<li>The line above the button: signed out "Dekhna sabke liye khula hai. Paper attempt karne ke liye free account banao."; signed in "Hamare woh sawaal jo JEE Main mein match hue, ek paper mein. Timer, result, analysis aur solutions: har paper ki tarah."</li>
+<li>The button <strong>"Attempt all matched"</strong>. A shift that has no paper yet shows no facts and no button, only "Is shift ke matched sawaalon ka paper jald yahan khulega."</li>
+<li>"KAUN SA SAWAAL KISSE MATCH HUA", then pills "All 6", "Physics 2", "Chemistry 2", "Maths 2" (only when the shift has more than one subject), then one card per matched question, in the order of the JEE paper.</li>
+</ul>
+<div class="shots"><figure><img src="shots/m04_question_card.jpg" alt=""><figcaption>5. One matched question: the JEE question, the seal, ours</figcaption></figure><figure><img src="shots/m05_solution_tab.jpg" alt=""><figcaption>6. The Solution tab opens both solutions</figcaption></figure><figure><img src="shots/m06_signup_sheet.jpg" alt=""><figcaption>7. Without an account: the sheet</figcaption></figure><figure><img src="shots/m07_signup_screen.jpg" alt=""><figcaption>8. Sign-up, with the note; afterwards back on the shift</figcaption></figure></div>
+
+<p><strong>5. A matched question's card.</strong></p>
+<ul>
+<li>The top strip: "Q4" (its number in the JEE paper), the subject, the chapter.</li>
+<li>Two tabs: <strong>Question</strong> and <strong>Solution</strong>.</li>
+<li>The panel "JEE MAIN 2027 · Fri, 22 Jan · Shift 1": the JEE Main question, its words and pictures, <strong>without options</strong>.</li>
+<li>The seal between the two: how close the match is, in capitals ("SAME CONCEPT", "SAME QUESTION"). With no tag it reads "MATCHED".</li>
+<li>The panel "HAMARA QUESTION · AITS Day 12 · Q 7": our question, and where it was asked, <strong>without options</strong>. When the JEE question matched more than one of ours, each has its own seal and panel (four at most).</li>
+<li><strong>Solution</strong> opens, for the JEE question and for ours: "SAHI JAWAB" (the right option's words, or the answer as written) and "SOLUTION" (the worked solution and its pictures). A question that came with only its answer says "Iska likha hua solution abhi nahi hai; sahi jawab upar diya hai."; one that came with neither says "Is question ka solution abhi nahi aaya."</li>
+<li>A tap on a picture makes it twice as wide (it then slides sideways); a picture that did not load says "Picture load nahi hui. Dobara try karo".</li>
+</ul>
+<p><strong>6. "Attempt all matched".</strong></p>
+<ul>
+<li><strong>Without an account:</strong> the sheet "Sign up karke attempt karo": "Matched sawaal dekhna sabke liye khula hai. Inhe paper ki tarah attempt karne ke liye (timer, result, analysis aur solutions ke saath) free account banao: sirf mobile number aur PIN." with <strong>"Free account banao"</strong> and "Mera account hai · Sign in". The sign-in screen then carries the note "Account banao ya sign in karo. Uske baad Matched paper attempt kar sakte ho." <strong>After signing up or in, the student is back on the same shift</strong>, and taps the button again.</li>
+<li><strong>Signed in:</strong> the shift's real paper opens: its usual page ("JEE MAIN · MATCHED PAPER" when the paper's kind is <code>matched</code>), "Start attempt", the 60-second get-ready, the player, submit, the result, the analysis, the solutions, My Tests. Nothing about this paper is special in the app, except one thing:</li>
+</ul>
+<div class="shots"><figure><img src="shots/m09_under_ours_in_solutions.jpg" alt=""><figcaption>9. In the paper's solutions: the JEE question our question matched, with its own answer and solution</figcaption></figure></div>
+
+<p><strong>7. The JEE question under ours.</strong> In the player, under each of our questions, a panel "JEE MAIN 2027 MEIN AAYA · 22 Jan · Shift 1 · Q4" shows the JEE Main question it matched, <strong>without options and without its answer</strong>. In the solutions after submitting, the same panel also shows the JEE question's answer and solution (picture 9). An ordinary paper shows nothing of this and asks nothing extra (Part 2.7).</p>
+<h2 id="23-one-document-per-shift-every-field">2.3 One document per shift: every field</h2>
+<p>Everything Matched shows comes from <strong>one document per shift</strong>. The website publishes it (Part 2.4c); the app's server copies it and hands the app only what the app can draw. <strong>Anything that does not fit is left out and not counted; it can never break a screen.</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;2027-01-25-s1&quot;,
+  &quot;asked&quot;: 75,
+  &quot;updated_at&quot;: 1800860400,
+  &quot;paper_id&quot;: &quot;b7c1d2e3-4f50-4a61-9b72-8c93d0e1f2a3&quot;,
+  &quot;items&quot;: [
+    {
+      &quot;n&quot;: 12,
+      &quot;subject&quot;: &quot;Physics&quot;,
+      &quot;chapter&quot;: &quot;Kinematics&quot;,
+      &quot;jee&quot;: {
+        &quot;text&quot;: &quot;A particle is projected with speed $u = 20\\,\\text{m/s}$ at $30^\\circ$ above the horizontal. Taking $g = 10\\,\\text{m/s}^2$, its time of flight is&quot;,
+        &quot;options&quot;: [&quot;1 s&quot;, &quot;2 s&quot;, &quot;3 s&quot;, &quot;4 s&quot;],
+        &quot;correct&quot;: &quot;B&quot;,
+        &quot;solution&quot;: &quot;$T = \\dfrac{2u\\sin\\theta}{g} = \\dfrac{2 \\times 20 \\times \\frac{1}{2}}{10} = 2\\,\\text{s}$.&quot;
+      },
+      &quot;ours&quot;: [
+        {
+          &quot;text&quot;: &quot;A ball is thrown with speed $u = 40\\,\\text{m/s}$ at $30^\\circ$ above the horizontal ($g = 10\\,\\text{m/s}^2$). Its time of flight is&quot;,
+          &quot;options&quot;: [&quot;2 s&quot;, &quot;4 s&quot;, &quot;6 s&quot;, &quot;8 s&quot;],
+          &quot;correct&quot;: 2,
+          &quot;solution&quot;: &quot;$T = \\dfrac{2u\\sin\\theta}{g} = \\dfrac{2 \\times 40 \\times \\frac{1}{2}}{10} = 4\\,\\text{s}$.&quot;,
+          &quot;source&quot;: &quot;AITS Day 12 · Q 7&quot;,
+          &quot;tag&quot;: &quot;Same concept&quot;,
+          &quot;question_id&quot;: &quot;q-aits12-007&quot;
+        }
+      ]
+    },
+    {
+      &quot;n&quot;: 41,
+      &quot;subject&quot;: &quot;Chemistry&quot;,
+      &quot;chapter&quot;: &quot;Mole Concept and Stoichiometry&quot;,
+      &quot;jee&quot;: {
+        &quot;text&quot;: &quot;The number of moles of oxygen atoms in 0.5 mol of $\\text{Al}_2(\\text{SO}_4)_3$ is ____.&quot;,
+        &quot;answer&quot;: &quot;6&quot;,
+        &quot;solution&quot;: &quot;One formula unit has $3 \\times 4 = 12$ oxygen atoms, so $0.5 \\times 12 = 6$ mol.&quot;
+      },
+      &quot;ours&quot;: [
+        {
+          &quot;text&quot;: &quot;The number of moles of oxygen atoms in 0.25 mol of $\\text{Al}_2(\\text{SO}_4)_3$ is ____.&quot;,
+          &quot;answer&quot;: &quot;3&quot;,
+          &quot;solution&quot;: &quot;$0.25 \\times 12 = 3$ mol.&quot;,
+          &quot;source&quot;: &quot;AITS Day 31 · Q 52&quot;,
+          &quot;tag&quot;: &quot;Same concept&quot;,
+          &quot;question_id&quot;: &quot;q-aits31-052&quot;
+        },
+        {
+          &quot;text&quot;: &quot;&quot;,
+          &quot;images&quot;: [ { &quot;url&quot;: &quot;https://files.jeelive.example/matched/2027-01-25-s1/q41-ours-2.png&quot;, &quot;w&quot;: 1200, &quot;h&quot;: 380 } ],
+          &quot;answer&quot;: &quot;(C)&quot;,
+          &quot;solution_images&quot;: [ { &quot;url&quot;: &quot;https://files.jeelive.example/matched/2027-01-25-s1/q41-ours-2-solution.png&quot;, &quot;w&quot;: 1200, &quot;h&quot;: 520 } ],
+          &quot;source&quot;: &quot;Chapter test · Mole Concept · Q 14&quot;,
+          &quot;tag&quot;: &quot;Same question&quot;,
+          &quot;question_id&quot;: &quot;q-chap-mole-014&quot;
+        }
+      ]
+    },
+    {
+      &quot;n&quot;: 68,
+      &quot;subject&quot;: &quot;Mathematics&quot;,
+      &quot;chapter&quot;: &quot;Probability&quot;,
+      &quot;jee&quot;: {
+        &quot;text&quot;: &quot;Two fair dice are thrown. The probability that the sum of the numbers is 7 is&quot;,
+        &quot;options&quot;: [&quot;$\\dfrac{1}{6}$&quot;, &quot;$\\dfrac{1}{12}$&quot;, &quot;$\\dfrac{5}{36}$&quot;, &quot;$\\dfrac{7}{36}$&quot;],
+        &quot;correct&quot;: 1,
+        &quot;solution&quot;: &quot;6 of the 36 equally likely results add up to 7, so the probability is $\\dfrac{6}{36} = \\dfrac{1}{6}$.&quot;
+      },
+      &quot;ours&quot;: [
+        {
+          &quot;text&quot;: &quot;Two fair dice are thrown. The probability that the sum of the numbers is 8 is&quot;,
+          &quot;options&quot;: [&quot;$\\dfrac{1}{6}$&quot;, &quot;$\\dfrac{5}{36}$&quot;, &quot;$\\dfrac{1}{9}$&quot;, &quot;$\\dfrac{7}{36}$&quot;],
+          &quot;correct&quot;: &quot;B&quot;,
+          &quot;solution&quot;: &quot;5 of the 36 results add up to 8, so the probability is $\\dfrac{5}{36}$.&quot;,
+          &quot;source&quot;: &quot;AITS Day 44 · Q 70&quot;,
+          &quot;tag&quot;: &quot;Same concept&quot;,
+          &quot;question_id&quot;: &quot;q-aits44-070&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>(The ids and the picture links in the example are made up.)</p>
+<p><strong>The shift</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type and limit</th>
+<th>Meaning</th>
+<th>When it is missing or wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>YYYY-MM-DD-sN</code>: the exam day in India, <code>-s</code>, the shift number 1 to 9</td>
+<td>the day, the shift number and the year shown everywhere are read from it</td>
+<td>not exactly this shape (<code>2027-1-25-s1</code>, <code>2027-01-25-S1</code>, <code>…-s10</code>), or not a real date: <strong>the whole shift is ignored</strong></td>
+</tr>
+<tr>
+<td><code>asked</code></td>
+<td>whole number 1 to 300</td>
+<td>how many questions the shift's paper had (75)</td>
+<td>missing, or smaller than the number of matched questions: "18 matched" is shown instead of "18 of 75 matched", with no bar</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>unix seconds</td>
+<td>the moment of the last change. <strong>Change it on every edit</strong></td>
+<td>missing: the app's server reads the shift again every 10 minutes instead of only when it changed</td>
+</tr>
+<tr>
+<td><code>paper_id</code></td>
+<td>6 to 80 letters, digits, <code>-</code> or <code>_</code></td>
+<td>the id of the shift's real paper (Part 2.4b)</td>
+<td>missing, or no question of ours carries a <code>question_id</code>: no button, "paper jald yahan khulega"</td>
+</tr>
+<tr>
+<td><code>items</code></td>
+<td>list, the first 150 are read</td>
+<td><strong>only the questions that matched</strong>. The app counts them: that count is the "18" of "18 of 75"</td>
+<td>empty: the shift shows "0 of 75 matched" and "Is shift mein koi match nahi mila"</td>
+</tr>
+</tbody>
+</table>
+<p><strong>One matched question</strong> (an entry of <code>items</code>)</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type and limit</th>
+<th>Meaning</th>
+<th>When it is missing or wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n</code></td>
+<td>whole number 1 to 300</td>
+<td>the question's number in the JEE paper: "Q12" on the card, and the order of the cards</td>
+<td>missing: the card has no number and comes after the numbered ones, in the order written</td>
+</tr>
+<tr>
+<td><code>subject</code></td>
+<td>exactly <code>Physics</code>, <code>Chemistry</code> or <code>Mathematics</code></td>
+<td>the subject on the card, the pills, the chips on the shift's row</td>
+<td>anything else ("Maths", "physics"): the question is shown and counted, but without a subject and outside every subject pill</td>
+</tr>
+<tr>
+<td><code>chapter</code></td>
+<td>text to 80 characters</td>
+<td>shown next to the subject</td>
+<td>missing: nothing is shown there</td>
+</tr>
+<tr>
+<td><code>jee</code></td>
+<td>a question (below)</td>
+<td>the JEE Main question</td>
+<td>missing, or it has neither words nor a picture: <strong>the whole entry is left out and not counted</strong></td>
+</tr>
+<tr>
+<td><code>ours</code></td>
+<td>a list of 1 to 4 questions (below)</td>
+<td>the question or questions of ours it matched</td>
+<td>none that can be shown: <strong>the whole entry is left out and not counted</strong>. More than 4: the first 4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A question</strong> (the JEE one, and each of ours)</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type and limit</th>
+<th>Meaning</th>
+<th>When it is missing or wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>to 6000 characters; maths in <code>$…$</code> (TeX), as in the website's typed questions</td>
+<td>the question's words</td>
+<td>longer text is cut. <code>""</code> is fine when there is a picture</td>
+</tr>
+<tr>
+<td><code>images</code></td>
+<td>list of <code>{ "url", "w", "h" }</code> or of plain links; the first 6 good ones</td>
+<td>the question's pictures. <code>url</code>: <strong>https</strong>, no spaces, <strong>to 600 characters</strong>, opens <strong>without sign-in</strong>, <strong>never expires</strong>. <code>w</code>, <code>h</code>: whole numbers of pixels, both or neither</td>
+<td>http, or a link with a space: that picture is dropped. A longer link is cut and will not open. Without <code>w</code> and <code>h</code> the page moves a little when the picture arrives</td>
+</tr>
+<tr>
+<td><code>options</code></td>
+<td>list of texts, to 6, each to 1500 characters</td>
+<td>the options in order (A, B, C, D). <strong>In the list they are never drawn</strong>; they give the words of the right answer</td>
+<td><strong>one empty option: none is kept</strong>, and <code>correct</code> is lost with them. Then give the answer in <code>answer</code></td>
+</tr>
+<tr>
+<td><code>correct</code></td>
+<td>the right option's place from 1 (<code>2</code>), or its letter (<code>"B"</code>)</td>
+<td>which option is right</td>
+<td>outside the options: ignored</td>
+</tr>
+<tr>
+<td><code>answer</code></td>
+<td>text to 300 characters</td>
+<td>the right answer in words, for a question without option texts: <code>"8"</code>, <code>"(C)"</code></td>
+<td>missing, and no <code>correct</code>: no "SAHI JAWAB"</td>
+</tr>
+<tr>
+<td><code>solution</code></td>
+<td>to 6000 characters; maths in <code>$…$</code></td>
+<td>the worked solution</td>
+<td>missing, and no solution picture: one of the two sentences of Part 2.2, point 5</td>
+</tr>
+<tr>
+<td><code>solution_images</code></td>
+<td>as <code>images</code></td>
+<td>pictures of the solution</td>
+<td>as <code>images</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Only on a question of ours</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type and limit</th>
+<th>Meaning</th>
+<th>When it is missing or wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>text to 80 characters</td>
+<td>where ours was asked: "AITS Day 12 · Q 7"</td>
+<td>missing: only "HAMARA QUESTION"</td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td>text to 40 characters</td>
+<td>how close the match is, shown in capitals on the seal: "Same question", "Same concept"</td>
+<td>missing: the seal says "MATCHED"</td>
+</tr>
+<tr>
+<td><code>question_id</code></td>
+<td>6 to 80 letters, digits, <code>-</code> or <code>_</code></td>
+<td><strong>this question's id inside the shift's real paper</strong> (<code>questions[].id</code> of <code>GET /api/attempts/&lt;id&gt;</code>)</td>
+<td>missing or wrong: the question is in the list, but it is not counted in the paper's "7 questions" and the JEE question does not appear under it in the player and the solutions</td>
+</tr>
+</tbody>
+</table>
+<p>A question needs <code>text</code> or at least one picture. <strong>Both the JEE question and ours should come with their answer (<code>correct</code> or <code>answer</code>) and their solution (<code>solution</code> or <code>solution_images</code>):</strong> every question has a Solution tab.</p>
+<p><strong>What the app's server makes of the example above</strong> (this is exactly what a phone receives from <code>GET /api/matched/2027-01-25-s1</code>; the questions are shortened here):</p>
+<pre><code>{&quot;id&quot;: &quot;2027-01-25-s1&quot;, &quot;day&quot;: &quot;2027-01-25&quot;, &quot;shift&quot;: 1, &quot;asked&quot;: 75, &quot;matched&quot;: 3, &quot;paper_id&quot;: &quot;b7c1d2e3-4f50-4a61-9b72-8c93d0e1f2a3&quot;, &quot;paper_questions&quot;: 4, &quot;subjects&quot;: [{&quot;name&quot;: &quot;Physics&quot;, &quot;n&quot;: 1}, {&quot;name&quot;: &quot;Chemistry&quot;, &quot;n&quot;: 1}, {&quot;name&quot;: &quot;Mathematics&quot;, &quot;n&quot;: 1}], &quot;updated_at&quot;: 1800860400,
+  &quot;items&quot;: [
+    … the first matched question …,
+    {
+      &quot;n&quot;: 41,
+      &quot;subject&quot;: &quot;Chemistry&quot;,
+      &quot;chapter&quot;: &quot;Mole Concept and Stoichiometry&quot;,
+      &quot;jee&quot;: {
+        &quot;text&quot;: &quot;The number of moles of oxygen atoms in 0.5 m…&quot;,
+        &quot;options&quot;: [],
+        &quot;images&quot;: [],
+        &quot;correct&quot;: null,
+        &quot;answer&quot;: &quot;6&quot;,
+        &quot;solution&quot;: &quot;One formula unit has $3 \\times 4 = 12$ oxyge…&quot;,
+        &quot;solution_images&quot;: []
+      },
+      &quot;ours&quot;: [
+        {
+          &quot;text&quot;: &quot;The number of moles of oxygen atoms in 0.25…&quot;,
+          &quot;options&quot;: [],
+          &quot;images&quot;: [],
+          &quot;correct&quot;: null,
+          &quot;answer&quot;: &quot;3&quot;,
+          &quot;solution&quot;: &quot;$0.25 \\times 12 = 3$ mol.&quot;,
+          &quot;solution_images&quot;: [],
+          &quot;source&quot;: &quot;AITS Day 31 · Q 52&quot;,
+          &quot;tag&quot;: &quot;Same concept&quot;,
+          &quot;qid&quot;: &quot;q-aits31-052&quot;
+        },
+        {
+          &quot;text&quot;: &quot;&quot;,
+          &quot;options&quot;: [],
+          &quot;images&quot;: [
+            {
+              &quot;url&quot;: &quot;https://files.jeelive.example/matched/2027-0…&quot;,
+              &quot;w&quot;: 1200,
+              &quot;h&quot;: 380
+            }
+          ],
+          &quot;correct&quot;: null,
+          &quot;answer&quot;: &quot;(C)&quot;,
+          &quot;solution&quot;: &quot;&quot;,
+          &quot;solution_images&quot;: [
+            {
+              &quot;url&quot;: &quot;https://files.jeelive.example/matched/2027-0…&quot;,
+              &quot;w&quot;: 1200,
+              &quot;h&quot;: 520
+            }
+          ],
+          &quot;source&quot;: &quot;Chapter test · Mole Concept · Q 14&quot;,
+          &quot;tag&quot;: &quot;Same question&quot;,
+          &quot;qid&quot;: &quot;q-chap-mole-014&quot;
+        }
+      ]
+    },
+    … the third matched question …
+  ]
+}
+</code></pre>
+<ul>
+<li><code>matched</code> = the entries that could be shown. <code>asked</code> is sent only when it is at least <code>matched</code>.</li>
+<li><code>paper_id</code> is sent only when at least one of ours has a <code>question_id</code>; <code>paper_questions</code> = how many <strong>different</strong> <code>question_id</code> the shift has.</li>
+<li><code>subjects</code> = the count for each of the three subjects, in the order Physics, Chemistry, Mathematics; a subject with none is left out.</li>
+<li><code>correct</code> is sent as the option's place <strong>from 0</strong>; <code>qid</code> is the <code>question_id</code>.</li>
+<li>The list of all shifts (<code>GET /api/matched</code> of the app's server) is the same rows without <code>items</code>, newest first, with <code>total</code> = all matched questions of all published shifts. At most 200 shifts are listed.</li>
+</ul>
+<h2 id="24-what-the-website-must-have-three-things">2.4 What the website must have: three things</h2>
+<h3 id="24a-the-super-admins-page-matched">2.4a The super admin's page "Matched"</h3>
+<p>For every JEE Main shift the super admin enters (or imports) the questions of that shift that matched ours.</p>
+<table>
+<thead>
+<tr>
+<th>On the page</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The shift</td>
+<td>the exam's day in India and the shift number (1 to 9). Its id is made from them: <code>2027-01-25-s1</code></td>
+</tr>
+<tr>
+<td><code>asked</code></td>
+<td>how many questions the shift's paper had (75)</td>
+</tr>
+<tr>
+<td>For each matched question</td>
+<td>its number in the JEE paper; subject (one of the three, chosen from a list, not typed); chapter; the JEE Main question (words or pictures, its options if it has any, its right answer, its solution)</td>
+</tr>
+<tr>
+<td>For each of ours it matched (1 to 4)</td>
+<td>the question picked <strong>from our own bank</strong> (so that its id is known); where it was asked (<code>source</code>); how close the match is (<code>tag</code>); its answer; its solution</td>
+</tr>
+<tr>
+<td><strong>Make the paper</strong></td>
+<td>one button. It makes ONE ordinary paper of all our matched questions of the shift (2.4b), writes its id into the shift (<code>paper_id</code>) and each question's id inside that paper next to the question (<code>question_id</code>)</td>
+</tr>
+<tr>
+<td><strong>Publish / take back</strong></td>
+<td>a published shift is in the first door's list; a shift taken back leaves it. Nothing is deleted</td>
+</tr>
+<tr>
+<td><strong>Home's card</strong></td>
+<td>a switch with three positions: auto, on, off (Part 2.6)</td>
+</tr>
+</tbody>
+</table>
+<p>What the page should refuse or warn about <strong>before</strong> it lets a shift be published (each of these is silently dropped or shown wrongly by the app otherwise: Part 2.9):</p>
+<ul>
+<li>a subject that is not exactly one of the three;</li>
+<li>a JEE question or one of ours with neither words nor a picture;</li>
+<li>an option left empty while others are filled;</li>
+<li>a right answer that is not one of the options;</li>
+<li>a question with no answer at all, or with no solution (a warning);</li>
+<li>a picture that is not https, or does not open without sign-in (the page can try the link without cookies);</li>
+<li>more than 150 matched questions, more than 4 of ours for one question, text over the limits of Part 2.3;</li>
+<li><code>asked</code> smaller than the number of matched questions;</li>
+<li>a paper that is missing, or one of ours without its <code>question_id</code> (a warning: that question is then only in the list).</li>
+</ul>
+<p>And on every save of a published shift: <strong><code>updated_at</code> becomes the current time</strong>, in the shift's document and in the list.</p>
+<h3 id="24b-the-real-paper-of-a-shift">2.4b The real paper of a shift</h3>
+<p>An ordinary paper, like every mock. Nothing new is needed in the player or the result.</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Who can open it</td>
+<td><strong>every signed-in student</strong>: <code>GET /api/my/sets/&lt;paper id&gt;</code> answers for all of them, and <code>POST /api/sets/&lt;paper id&gt;/start</code> starts it, exactly like any other paper</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>for example "Matched · JEE Main 25 Jan 2027 · Shift 1"</td>
+</tr>
+<tr>
+<td><code>exam</code></td>
+<td>"JEE Main"</td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td><strong>correct +4, wrong −1, skipped 0</strong> (the shift's card says "+4 / −1" and counts the marks as questions × 4). <code>minutes</code>: the owner's rule by subject: every Mathematics question 3.2 minutes, Physics 2.4, Chemistry 1.6, the sum rounded up to a whole minute</td>
+</tr>
+<tr>
+<td><code>test_kind</code></td>
+<td><strong><code>"matched"</code></strong> if a new kind is easy: the paper's page then says "Matched paper". Any existing kind also works, but the page then says what that kind says ("Full mock"; with <code>chapter</code>: "Chapter practice")</td>
+</tr>
+<tr>
+<td>Catalogue</td>
+<td>it need not be listed anywhere: the app opens it by its id</td>
+</tr>
+<tr>
+<td>Its questions</td>
+<td>all our matched questions of the shift, each once. Each keeps its subject, its pieces, its key and its solution</td>
+</tr>
+<tr>
+<td>From there</td>
+<td>attempts, autosave, deadline, result, analysis, solutions, My Tests: as for every paper</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The one thing that matters most:</strong> the id every question has <strong>inside this paper</strong> (<code>questions[].id</code> of <code>GET /api/attempts/&lt;id&gt;</code>, and the question ids of <code>GET /api/attempts/&lt;id&gt;/results</code>) must be written next to that question in the shift, as <code>question_id</code>. That is how the app finds the JEE Main question to show under it. It is also what switches the button on, and what the card counts as "7 questions". The attempt and the result must carry the paper's id as <code>set_id</code>, as they do for every paper today.</p>
+<p><strong>Keep the paper and the shift in step.</strong> If a matched question is added to a published shift later, either the paper gets it too (and the question its <code>question_id</code>), or it stays in the list only. Do not take a question out of a paper students have already attempted.</p>
+<h3 id="24c-two-public-read-doors">2.4c Two public read doors</h3>
+<p>No sign-in: the Matched pages are public. <strong>The app's server reads them, not the phones.</strong> Every 2 minutes it asks the first; it asks the second only for a shift that is new or has changed.</p>
+<p><strong>The list</strong></p>
+<pre><code>GET /api/matched
+</code></pre>
+<pre><code class="language-json">{
+  &quot;card&quot;: &quot;auto&quot;,
+  &quot;shifts&quot;: [
+    { &quot;id&quot;: &quot;2027-01-25-s2&quot;, &quot;updated_at&quot;: 1800882000 },
+    { &quot;id&quot;: &quot;2027-01-25-s1&quot;, &quot;updated_at&quot;: 1800860400 }
+  ]
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shifts</code></td>
+<td><strong>only the published shifts.</strong> A list is required: with anything else the app's server changes nothing. Each entry: the shift's <code>id</code> and its <code>updated_at</code> (an entry may also be just the id)</td>
+</tr>
+<tr>
+<td><code>shifts[].updated_at</code></td>
+<td><strong>the same number as <code>updated_at</code> inside that shift's document.</strong> The app's server compares the two: when they differ it reads the shift again</td>
+</tr>
+<tr>
+<td><code>card</code></td>
+<td>optional: <code>"auto"</code>, <code>"on"</code> or <code>"off"</code> = the super admin's switch for Home's card (Part 2.6). Any other value is ignored</td>
+</tr>
+</tbody>
+</table>
+<p><strong>One shift</strong></p>
+<pre><code>GET /api/matched/2027-01-25-s1          404 when it is not published
+</code></pre>
+<p>The document of Part 2.3 (<code>id</code>, <code>asked</code>, <code>updated_at</code>, <code>paper_id</code>, <code>items</code>).</p>
+<p>Rules of the two doors:</p>
+<ul>
+<li>Plain JSON, or the usual envelope <strong>with <code>meta</code></strong>.</li>
+<li><strong>Pictures in a shift:</strong> plain https links that open <strong>without sign-in</strong> and <strong>do not expire</strong>. Not the signed links of a paper: the app's server keeps its copy of a shift until the shift changes. A question of ours that exists only as cut pictures: give its question picture or pictures in <code>images</code>, its answer in <code>answer</code>, and its solution picture or pictures in <code>solution_images</code>.</li>
+<li>Limits read by the app: 200 shifts, 150 matched questions a shift, 4 of ours for one question.</li>
+<li>Until the doors exist they answer 404 and nothing changes in the app. That is the state on 26 Nov 2026.</li>
+</ul>
+<h2 id="25-how-the-shifts-reach-the-app">2.5 How the shifts reach the app</h2>
+<p>The app's server keeps its own copy of every shift, in its own database, so the Matched pages stay up and fast while the website is busy. One pass runs <strong>every 2 minutes</strong>, in every process of the app's server:</p>
+<ol>
+<li>It asks the list (<code>GET /api/matched</code> of the website). If the answer is not a list of shifts (404, an error, something else), <strong>nothing is changed</strong> and what the app has keeps being shown.</li>
+<li>For every shift of the list it decides whether to read the shift's document:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>The app's server reads a shift's document when</th>
+<th>Otherwise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>it does not have the shift yet</td>
+<td>it is not read</td>
+</tr>
+<tr>
+<td>it has it, but hidden (the shift was taken back and is published again)</td>
+<td></td>
+</tr>
+<tr>
+<td>the list's <code>updated_at</code> differs from the one in its copy</td>
+<td></td>
+</tr>
+<tr>
+<td>the list sends no <code>updated_at</code> and its copy is older than 10 minutes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><strong>At most 20 shifts are read in one pass.</strong> A first load of 50 shifts arrives over three passes (about 6 minutes).</li>
+<li>A shift that was read is written into the copy as published. A document that is not a shift (a wrong id) is skipped and tried again on the next pass.</li>
+<li>A shift the app's server has from the website, and the list <strong>no longer names</strong>, is <strong>hidden</strong> (never deleted). Publishing it again brings it back.</li>
+<li>If the list carries <code>card</code>, that word is written as Home's card switch (Part 2.6).</li>
+</ol>
+<p>Why point 12 of Part 0.4 matters: when a shift's own <code>updated_at</code> and the list's are not the same number, that shift looks changed on every pass. It is read again every 2 minutes for ever, and with more than 20 such shifts the ones further down the list are <strong>never</strong> read.</p>
+<p><strong>How long a change takes to reach a student</strong></p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>At most</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the website's change is picked up by the next pass</td>
+<td>2 minutes</td>
+</tr>
+<tr>
+<td>the app's server answers the phone from its own short memory</td>
+<td>1 minute (sometimes 2, when hardly anyone is asking)</td>
+</tr>
+<tr>
+<td>the phone, or a cache on the way, holds the answer</td>
+<td>1 minute</td>
+</tr>
+<tr>
+<td><strong>together</strong></td>
+<td><strong>usually within 3 minutes, about 5 at the outside</strong>. The student sees it on opening the page, on coming back to it, or on pulling it down</td>
+</tr>
+</tbody>
+</table>
+<p>Only shifts that came from the website are ever hidden by the copy. A shift written into the app's database by hand (as the preview's samples are) is shown and left alone, unless the website publishes a shift with the same id: then the website's shift takes its place.</p>
+<h2 id="26-homes-card-and-the-sign-in-bar-when-they-are-on">2.6 Home's card and the sign-in bar: when they are on</h2>
+<p>One switch decides both: Home's Matched card (in the All India series card's place) and the Matched bar on the sign-in screen. <strong>They are also the only ways into Matched:</strong> while the switch is off, no student can reach the Matched pages from the app, even when shifts are published.</p>
+<table>
+<thead>
+<tr>
+<th>The switch says</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auto</code></td>
+<td>on <strong>from the day after the All India series' last day</strong>, India time. The app's server reads that day from the website's own schedule (<code>last_date</code> of <code>GET /api/series/all-india-jee</code>) every 15 minutes and remembers it. On 26 Nov 2026 the website says the series runs <strong>9 Dec 2026 to 27 Jan 2027</strong>, so the card comes on at 00:00 on <strong>28 Jan 2027</strong>. If the website moves the series' last day, the card's day moves with it</td>
+</tr>
+<tr>
+<td><code>on</code></td>
+<td>on now, whatever the dates are</td>
+</tr>
+<tr>
+<td><code>off</code></td>
+<td>never</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Who holds the switch,</strong> strongest first:</p>
+<ol>
+<li><strong>The super admin, through the website:</strong> <code>card</code> in the list door (Part 2.4c). When the website sends it, the app's server takes it over on every pass (every 2 minutes).</li>
+<li><strong>The last word written in the app's database</strong> (the row <code>matched:card</code>). It stays in force when the website sends no <code>card</code>. The app side can write it by hand; a <code>card</code> from the website overwrites it within 2 minutes.</li>
+<li><strong>The word in the app server's code:</strong> <code>auto</code>. Used when nothing else is set. That is production's state on 26 Nov 2026.</li>
+</ol>
+<p><strong>How fast a phone follows:</strong> the app's server learns the switch within about 3 minutes. A phone asks when the app is opened, and again when it is brought back after half an hour or more; it remembers the last answer, so the right card is there from the first moment of the next launch, also without a network.</p>
+<p><strong>Two things to decide in time</strong> (Part 3.8):</p>
+<ul>
+<li><strong>If JEE Main shifts are held on or before 27 Jan 2027</strong>, <code>auto</code> keeps Matched out of reach until 28 Jan 2027. To show Matched earlier the super admin sets <code>on</code>; Home then shows the Matched card and the All India series is reached from "all india series" under Explore.</li>
+<li><strong>If a new series is later run under the same address</strong>, <code>auto</code> would turn the card off again until that series ends. Set <code>on</code> to keep Matched on Home.</li>
+</ul>
+<p>With the card on and no shift published, the card and the page say that matches will appear after every shift (Part 2.2).</p>
+<h2 id="27-the-jee-question-under-ours-in-the-player-and-the-solutions">2.7 The JEE question under ours, in the player and the solutions</h2>
+<ul>
+<li>The phone keeps a small list of <strong>papers it knows to be Matched papers</strong>: the <code>paper_id</code> of every shift it has shown (Home's card, the Matched page, a shift's page), up to 300.</li>
+<li>When a paper is opened in the player or in the solutions and its id (<code>set_id</code> of the attempt or the result) is on that list, the phone asks the app's server once: <code>GET /api/matched/paper/&lt;paper id&gt;</code> → the published shift whose paper this is. For each question on screen it looks for the one of ours whose <code>question_id</code> is that question's id, and shows the JEE question that matched it.</li>
+<li>In the player: the JEE question without options and without its answer. In the solutions: with its answer and its solution.</li>
+<li><strong>An ordinary paper costs nothing:</strong> its id is not on the list, so nothing is asked and nothing is shown.</li>
+<li>When two shifts name the same paper, the newer shift is used. When the shift is taken back, the panel is gone.</li>
+<li><strong>A limit to know:</strong> a phone that has never shown Matched (a new phone that opens the paper straight from My Tests) does not know the paper is a Matched paper, and shows the paper without the panels until Home's card or a Matched page has been on its screen once.</li>
+</ul>
+<h2 id="28-the-super-admins-runbook">2.8 The super admin's runbook</h2>
+<p>The exact buttons are the website's own (Part 2.4a). This is what has to be true, in order.</p>
+<p><strong>Once, before the exam session</strong></p>
+<ol>
+<li>The website's Matched page, the paper maker and the two doors have been run on a test setup together with the app side (Part 2.11). The first shift ever published is the first true end-to-end run.</li>
+<li>With the owner: decide when Home's card comes on (Part 2.6). <code>auto</code> means 28 Jan 2027. If shifts are held before that and Matched should show at once, the switch must be set to <code>on</code>.</li>
+<li>With the owner: fix the wording of <code>source</code> and <code>tag</code> once, and keep to it (below).</li>
+<li>The app side hides the preview's made-up sample shifts before the first real shift.</li>
+</ol>
+<p><strong>After every JEE Main shift</strong></p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What to do</th>
+<th>What must be true afterwards</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Open a new shift: the exam's day (India date) and the shift number</td>
+<td>its id reads <code>2027-01-25-s1</code>: four digits, two, two, <code>-s</code>, one digit</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Enter how many questions the paper had (<code>asked</code>: 75)</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>For each question that matched: its number in the JEE paper, subject (from the list of three), chapter, the JEE question with its right answer and its solution</td>
+<td>words or a picture; an answer; a solution</td>
+</tr>
+<tr>
+<td>4</td>
+<td>For each of ours it matched (1 to 4): pick it from our bank; write where it was asked and how close the match is; its answer and solution</td>
+<td>the question is the right one from the bank; <code>source</code> and <code>tag</code> in the agreed wording</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Go through the check list below for every question</td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Press "Make the paper"</td>
+<td>the paper has as many questions as there are different questions of ours in the shift; +4 / −1; its minutes follow the subject rule; every one of ours shows its <code>question_id</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Open the paper as a test student</td>
+<td>the paper's page opens; the questions and their keys are right</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Publish</td>
+<td>the shift is in the first door's list</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Look at it in the app within about 5 minutes</td>
+<td>the row's count, every card (both tabs), the three facts on the top card, the button, the paper; the JEE question under ours in the solutions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The check list for one matched question</strong></p>
+<ul>
+<li>The JEE question is word for word what was asked in that shift, with the right question number.</li>
+<li>Ours really is the question named in <code>source</code>, and the <code>tag</code> says honestly how close the two are.</li>
+<li>The subject is one of the three, from the list.</li>
+<li>Both questions have their right answer and their solution.</li>
+<li>Every option has words (or none is entered and the answer is written in <code>answer</code>).</li>
+<li>Every picture opens in a private browser window (no sign-in), and is a file that will stay where it is.</li>
+<li>Maths is written in <code>$…$</code> like in the website's typed questions.</li>
+</ul>
+<p><strong>Wording to keep the same on every shift</strong> (the app shows these as they are written)</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Use</th>
+<th>Length</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>where ours was asked, the test and the question number: "AITS Day 12 · Q 7", "Chapter test · Kinematics · Q 14"</td>
+<td>80 characters</td>
+</tr>
+<tr>
+<td><code>tag</code></td>
+<td>how close, in two or three words. Shown in capitals on a yellow seal: "Same question", "Same concept"</td>
+<td>40 characters</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Afterwards</strong></p>
+<ul>
+<li><strong>A correction:</strong> change the shift and save. <code>updated_at</code> must change (the page does this by itself). The app shows the correction within about 5 minutes.</li>
+<li><strong>Taking a shift back:</strong> unpublish it. It leaves the app within about 5 minutes. <strong>Never delete it.</strong> Publishing again brings it back.</li>
+<li><strong>Home's card:</strong> <code>auto</code>, <code>on</code> or <code>off</code> on the same page. A phone follows the next time the app is opened.</li>
+</ul>
+<h2 id="29-mistakes-and-what-the-student-would-see">2.9 Mistakes, and what the student would see</h2>
+<table>
+<thead>
+<tr>
+<th>What went wrong</th>
+<th>What the app shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The subject is written "Maths", "physics", "PHY"</td>
+<td>the question is shown and counted, but with no subject on its card, in no subject pill and in no subject chip</td>
+</tr>
+<tr>
+<td>One option is left empty</td>
+<td>none of that question's options is kept. If the right answer was given as an option's place, <strong>the right answer is lost too</strong>: no "SAHI JAWAB" unless <code>answer</code> is filled</td>
+</tr>
+<tr>
+<td><code>correct</code> names an option that is not there ("E" with four options)</td>
+<td>no "SAHI JAWAB" unless <code>answer</code> is filled</td>
+</tr>
+<tr>
+<td>A picture link is http, or has a space in it</td>
+<td>that picture is not shown at all</td>
+</tr>
+<tr>
+<td>A picture link needs sign-in, or has expired</td>
+<td>"Picture load nahi hui. Dobara try karo" in place of the picture</td>
+</tr>
+<tr>
+<td>A picture link is longer than 600 characters</td>
+<td>it is cut and does not open</td>
+</tr>
+<tr>
+<td>The JEE question has neither words nor a picture, or none of ours can be shown</td>
+<td><strong>the whole question disappears</strong> and the count drops ("6 of 75" becomes "5 of 75")</td>
+</tr>
+<tr>
+<td><code>asked</code> is smaller than the number of matched questions</td>
+<td>"18 matched", without "of 75" and without the bar</td>
+</tr>
+<tr>
+<td>More than 4 of ours for one question</td>
+<td>the first 4</td>
+</tr>
+<tr>
+<td>More than 150 matched questions in a shift</td>
+<td>the first 150 entries</td>
+</tr>
+<tr>
+<td><code>n</code> is missing</td>
+<td>the card has no question number and comes after the numbered ones</td>
+</tr>
+<tr>
+<td>The shift's id has another shape (<code>2027-1-25-s1</code>, <code>…-S1</code>, <code>…-s10</code>)</td>
+<td>the shift is not shown at all</td>
+</tr>
+<tr>
+<td><code>paper_id</code> is there, but no question of ours has a <code>question_id</code></td>
+<td>no button: "Is shift ke matched sawaalon ka paper jald yahan khulega."</td>
+</tr>
+<tr>
+<td>A <code>question_id</code> is not the question's id inside the paper</td>
+<td>the button works, but the card's "7 questions" may be wrong, and the JEE question does not appear under that question in the player and the solutions</td>
+</tr>
+<tr>
+<td>The paper is not marked +4 / −1</td>
+<td>the shift's card says "+4 / −1" and counts the marks as questions × 4; the paper's own page says otherwise</td>
+</tr>
+<tr>
+<td>The paper is not open to every signed-in student</td>
+<td>"Attempt all matched" leads to the paper's page with the website's error</td>
+</tr>
+<tr>
+<td><code>updated_at</code> was not changed after an edit</td>
+<td>the edit does not reach the app</td>
+</tr>
+<tr>
+<td>The list's <code>updated_at</code> and the shift's own are different numbers</td>
+<td>the app's server reads that shift again every 2 minutes, for ever; with more than 20 such shifts, later ones are never read</td>
+</tr>
+<tr>
+<td>A shift is published with no matched question</td>
+<td>a row "0 of 75 matched", and on its page "Is shift mein koi match nahi mila"</td>
+</tr>
+<tr>
+<td>Text longer than the limits of Part 2.3</td>
+<td>it is cut at the limit</td>
+</tr>
+<tr>
+<td>A question has no solution</td>
+<td>the Solution tab says "Is question ka solution abhi nahi aaya." (or, with only the answer, "Iska likha hua solution abhi nahi hai; sahi jawab upar diya hai.")</td>
+</tr>
+<tr>
+<td>Two shifts name the same paper</td>
+<td>the newer shift's questions are shown under that paper's questions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="210-what-happens-when">2.10 What happens when…</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The website is slow or down</td>
+<td>the Matched pages keep working: they are answered from the app server's own copy. New shifts and corrections wait until the website answers again</td>
+</tr>
+<tr>
+<td>The website's list door answers 404, an error, or something that is not a list of shifts</td>
+<td>nothing is changed in the app</td>
+</tr>
+<tr>
+<td>The app's server restarts</td>
+<td>nothing is lost: the shifts, the card's word and the series' last day are in its database</td>
+</tr>
+<tr>
+<td>A shift is taken back while a student is reading it</td>
+<td>on the next read: "Yeh shift ab yahan nahi hai." It is gone from the list</td>
+</tr>
+<tr>
+<td>A person without an account taps "Attempt all matched"</td>
+<td>the sign-up sheet; after signing up or in, back on the same shift</td>
+</tr>
+<tr>
+<td>A link to a shift that is not published is opened</td>
+<td>"Yeh shift ab yahan nahi hai."</td>
+</tr>
+<tr>
+<td>The phone has no network</td>
+<td>Home shows the card the phone last knew. A list read less than 10 minutes ago is shown; otherwise "Matched abhi load nahi ho paaya. Dobara try karo."</td>
+</tr>
+<tr>
+<td>The app stays open over midnight of 27 Jan 2027</td>
+<td>it asks for the switch again when the student comes back to it after half an hour or more</td>
+</tr>
+<tr>
+<td>The card is on and no shift is published</td>
+<td>the card and the page say that matches will appear after every shift</td>
+</tr>
+<tr>
+<td>The switch is off and shifts are published</td>
+<td>nobody can reach Matched from the app (Part 2.6)</td>
+</tr>
+<tr>
+<td>The paper is opened on a phone that never showed Matched</td>
+<td>the paper works; the JEE questions are not shown under ours (Part 2.7)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="211-checks-for-the-website-agent">2.11 Checks for the website agent</h2>
+<p>On a test setup. <code>&lt;website&gt;</code> is the website's API, <code>&lt;app server&gt;</code> the app's server that reads it (tell the app side which one).</p>
+<p><strong>The two doors</strong> (no cookies)</p>
+<ul>
+<li><code>curl -s https://&lt;website&gt;/api/matched</code> → 200; <code>shifts</code> holds only published shifts, each with <code>id</code> and <code>updated_at</code>.</li>
+<li><code>curl -s https://&lt;website&gt;/api/matched/2027-01-25-s1</code> → 200, the document of Part 2.3; its <code>updated_at</code> is the same number as in the list. A shift that is not published → 404.</li>
+<li>Every picture link of the shift opens in a private browser window.</li>
+</ul>
+<p><strong>The paper</strong> (as a signed-in test student)</p>
+<ul>
+<li><code>GET /api/my/sets/&lt;paper_id&gt;</code> → 200 for any student; <code>rules</code> +4 / −1 / 0; <code>minutes</code> by the subject rule; <code>test_kind</code> "matched".</li>
+<li>Start it. <code>GET /api/attempts/&lt;id&gt;</code> → <code>set_id</code> is the <code>paper_id</code>; the <code>questions[].id</code> are exactly the shift's <code>question_id</code>s, no more and no fewer.</li>
+<li>Submit it. <code>GET /api/attempts/&lt;id&gt;/results</code> → the same <code>set_id</code> and question ids.</li>
+</ul>
+<p><strong>Through the app's server</strong> (2 to 5 minutes after publishing)</p>
+<ul>
+<li><code>curl -s https://&lt;app server&gt;/api/matched</code> → the shift is in <code>shifts</code>.</li>
+<li><code>curl -s https://&lt;app server&gt;/api/matched/2027-01-25-s1</code> → <strong><code>matched</code> equals the number of questions entered</strong> (lower = something was left out: Part 2.9); <strong><code>paper_questions</code> equals the number of questions in the paper</strong>; the numbers in <code>subjects</code> add up to <code>matched</code>; <code>paper_id</code> is the paper.</li>
+<li><code>curl -s https://&lt;app server&gt;/api/matched/paper/&lt;paper_id&gt;</code> → the same shift.</li>
+<li>Change a question and save → the change is there within 5 minutes. Unpublish → 404 within 5 minutes. Publish again → back.</li>
+<li>Set <code>card</code> to <code>on</code> → <code>curl -s https://&lt;app server&gt;/api/app/switches</code> → <code>"matched": true</code> within about 3 minutes. <code>off</code> → <code>false</code>. <code>auto</code> → by the series' date.</li>
+</ul>
+<p><strong>Then in the app:</strong> the page, the shift, a card's two tabs, the sign-up sheet, the paper, the JEE question under ours in the player and in the solutions.</p>
+<h2 id="212-limits-what-was-not-checked-and-the-samples-on-the-preview">2.12 Limits, what was not checked, and the samples on the preview</h2>
+<p><strong>What the app cannot show without a new build</strong></p>
+<ul>
+<li>video solutions; a picture that needs sign-in;</li>
+<li>more than 4 of ours for one JEE question;</li>
+<li>a subject other than Physics, Chemistry, Mathematics (it shows, without a name and without a pill);</li>
+<li>one paper across several shifts (the button is per shift);</li>
+<li>marking other than +4 / −1 on the shift's card;</li>
+<li>a way into Matched while the card's switch is off.</li>
+</ul>
+<p><strong>Not checked</strong></p>
+<ul>
+<li>Anything on a real phone. Everything was walked in the app's web preview, at a phone's size.</li>
+<li><strong>One real shift going all the way from the website to a phone:</strong> the two doors and the real paper do not exist yet. The copy of the website's shifts has automated tests against a stand-in for the website.</li>
+<li><strong>The JEE question under ours while a paper is being solved</strong> (that needs a started attempt). It was seen in the solutions of a finished paper.</li>
+<li>Signing up from the sheet to the end. The sheet, the sign-up form with its note, and the way back to the shift after <strong>signing in</strong> were walked.</li>
+<li>A shift with pictures: the sample shifts are typed questions.</li>
+</ul>
+<p><strong>The samples on the preview</strong> (26 Nov 2026)</p>
+<ul>
+<li>Three made-up shifts are published on the <strong>preview's</strong> database, for the owner's eyes: <code>2027-01-22-s1</code> (6 matched questions), <code>2027-01-22-s2</code> (3), <code>2027-01-24-s1</code> (2). So that the button and the JEE question under ours can be seen, the first one names a real paper of the website as a stand-in (the chapter test "01 Sets and Relations").</li>
+<li>Home's card is switched <code>on</code> by hand on the preview.</li>
+<li>They are taken back with <code>python3 backend/tests/matched_sample.py hide</code> (and shown with <code>show</code>). Nothing is deleted.</li>
+<li><strong>Production has none of this:</strong> its list is empty and its card follows <code>auto</code> (checked, Part 3.7). The day the website publishes a real shift with the id of a sample, the website's shift takes the sample's place.</li>
+</ul>
+<h1 id="part-3-reference">Part 3 — Reference</h1>
+<h2 id="31-every-address">3.1 Every address</h2>
+<p><strong>The app's own server</strong> (the app calls these; base address: the app's server, then <code>/api</code>)</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Who may call</th>
+<th>What it gives</th>
+<th>Other answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /api/choice/bank</code></td>
+<td>a signed-in student (a short pass in the <code>Authorization</code> header)</td>
+<td>the chapters of the three subjects with their tests, the owner's rules, and <code>pick</code> / <code>random</code></td>
+<td><code>{ "ready": false }</code> when there is no chapter at all; 401 without a pass; 401 with the code <code>website_session</code> when the website wants a fresh session; 503 when the website does not answer</td>
+</tr>
+<tr>
+<td><code>GET /api/choice/chapters/&lt;id&gt;</code></td>
+<td>a signed-in student</td>
+<td>door B's questions in the shape the app draws; everything else dropped</td>
+<td>404 no questions to choose; 401; 503</td>
+</tr>
+<tr>
+<td><code>POST /api/jl/choice/papers</code></td>
+<td>the student's own session</td>
+<td>passed on to the website's door C as it is</td>
+<td>the website's own answer</td>
+</tr>
+<tr>
+<td><code>GET /api/matched</code></td>
+<td>everyone</td>
+<td>all published shifts, newest first, without their questions; <code>total</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>GET /api/matched/&lt;shift id&gt;</code></td>
+<td>everyone</td>
+<td>one shift with its questions</td>
+<td>404 not published; 422 an id of another shape</td>
+</tr>
+<tr>
+<td><code>GET /api/matched/paper/&lt;paper id&gt;</code></td>
+<td>everyone</td>
+<td>the published shift whose real paper this is</td>
+<td>404</td>
+</tr>
+<tr>
+<td><code>GET /api/app/switches</code></td>
+<td>everyone</td>
+<td><code>{ "pictures": …, "matched": true or false }</code>: whether Home shows the Matched card</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DELETE /api/rf/dream/mocks/&lt;attempt id&gt;</code></td>
+<td>a signed-in student</td>
+<td>takes a paper that is no full mock out of that account's Dream College meter, for good</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>The website: doors in use today</strong> (nothing to build; do not change their fields without telling the app side)</p>
+<table>
+<thead>
+<tr>
+<th>Door</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /api/exam-navigation/jee-main/catalogue?kind=chapters&amp;subject=…&amp;q=&amp;page=…</code></td>
+<td>the chapters of Student Choice (the app's server), and the student's own state of each test (the phone). Fields: Part 1.5</td>
+</tr>
+<tr>
+<td><code>GET /api/my/sets/&lt;id&gt;</code></td>
+<td>the paper's page; also the paper's <code>test_kind</code> for the Dream College meter</td>
+</tr>
+<tr>
+<td><code>POST /api/sets/&lt;id&gt;/start</code></td>
+<td>starting a paper</td>
+</tr>
+<tr>
+<td><code>GET /api/attempts/&lt;id&gt;</code></td>
+<td>the player: <code>set_id</code>, <code>questions[].id</code></td>
+</tr>
+<tr>
+<td><code>GET /api/attempts/&lt;id&gt;/results</code></td>
+<td>the result: <code>set_id</code>, the question ids, <code>test_kind</code></td>
+</tr>
+<tr>
+<td><code>GET /api/my/tests</code></td>
+<td>My Tests; the Dream College meter's first read on a new phone</td>
+</tr>
+<tr>
+<td><code>GET /api/series/all-india-jee</code></td>
+<td><code>last_date</code>: the day after it, Home's card turns to Matched</td>
+</tr>
+<tr>
+<td>the sign-in and session doors</td>
+<td>unchanged</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The website: doors to build</strong></p>
+<table>
+<thead>
+<tr>
+<th>Door</th>
+<th>For</th>
+<th>Part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /api/choice/bank?exam=jee-main</code></td>
+<td>Student Choice: the switch</td>
+<td>1.6, door A</td>
+</tr>
+<tr>
+<td><code>GET /api/choice/chapters/&lt;set id&gt;/questions?page=N</code></td>
+<td>Student Choice: a chapter's questions without options</td>
+<td>1.6, door B</td>
+</tr>
+<tr>
+<td><code>POST /api/choice/papers</code></td>
+<td>Student Choice: make the paper</td>
+<td>1.6, door C</td>
+</tr>
+<tr>
+<td><code>GET /api/matched</code></td>
+<td>Matched: the list of published shifts, and the card's switch</td>
+<td>2.4c</td>
+</tr>
+<tr>
+<td><code>GET /api/matched/&lt;shift id&gt;</code></td>
+<td>Matched: one shift</td>
+<td>2.4c</td>
+</tr>
+</tbody>
+</table>
+<p>And three changes to what exists: <code>rules.minutes</code> of the chapter-wise sets (Part 1.8); <code>test_kind</code> "choice" and "matched" on those papers and their results; <code>test_kind</code> on the items of <code>GET /api/my/tests</code> (Part 1.9).</p>
+<h2 id="32-every-number">3.2 Every number</h2>
+<p><strong>Student Choice</strong></p>
+<table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Most questions in a made paper</td>
+<td>75 (the website may lower it, never raise it)</td>
+</tr>
+<tr>
+<td>Fewest in a random mock</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Marking</td>
+<td>+4, −1, 0</td>
+</tr>
+<tr>
+<td>Minutes a question brings</td>
+<td>Mathematics 3.2, Physics 2.4, Chemistry 1.6; the sum rounded up</td>
+</tr>
+<tr>
+<td>Other minutes per question the website may send</td>
+<td>0.5 to 10 each</td>
+</tr>
+<tr>
+<td>A top per subject the website may send</td>
+<td>1 to 75</td>
+</tr>
+<tr>
+<td>Random mock: number box and quick buttons</td>
+<td>starts at 30; buttons 15, 30, 45, 60, 75</td>
+</tr>
+<tr>
+<td>Chapters shown for one subject</td>
+<td>120</td>
+</tr>
+<tr>
+<td>Pages of the catalogue read for one subject</td>
+<td>12</td>
+</tr>
+<tr>
+<td>A chapter: its question count; its number; its title</td>
+<td>1 to 5000; 1 to 999; 120 characters</td>
+</tr>
+<tr>
+<td>A chapter's test: marks; right; wrong; minutes</td>
+<td>1 to 20000; 1 to 20; −20 to 0; 1 to 1000</td>
+</tr>
+<tr>
+<td>Door B: pages read; questions kept; pictures of a question</td>
+<td>6; 300; 4</td>
+</tr>
+<tr>
+<td>Door B: a question's words; a picture link; an id</td>
+<td>3000 characters; 900 characters; 6 to 80 characters</td>
+</tr>
+<tr>
+<td>The app's server keeps the chapter list</td>
+<td>2 minutes (and answers 2 more while it reads a fresh copy)</td>
+</tr>
+<tr>
+<td>The app's server keeps a chapter's questions</td>
+<td>5 minutes (and answers 5 more while it reads a fresh copy)</td>
+</tr>
+<tr>
+<td>The student's pass for the app's server</td>
+<td>15 minutes, renewed by the app</td>
+</tr>
+<tr>
+<td>Ticked chapters kept on a phone</td>
+<td>300</td>
+</tr>
+<tr>
+<td>Search: letters typed; words used</td>
+<td>60; 8</td>
+</tr>
+<tr>
+<td>Dream College meter: a full mock (JEE Main)</td>
+<td>68 questions or more and 150 marks or more, and not a chapter test or a Student Choice paper</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Matched</strong></p>
+<table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shifts listed</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Matched questions read in a shift</td>
+<td>150</td>
+</tr>
+<tr>
+<td>Of ours for one JEE question</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Options; pictures; solution pictures of a question</td>
+<td>6; 6; 6</td>
+</tr>
+<tr>
+<td>Words: question; an option; answer; solution</td>
+<td>6000; 1500; 300; 6000 characters</td>
+</tr>
+<tr>
+<td>Words: source; tag; chapter</td>
+<td>80; 40; 80 characters</td>
+</tr>
+<tr>
+<td>A picture link</td>
+<td>600 characters, https</td>
+</tr>
+<tr>
+<td>Question number in the JEE paper; <code>asked</code></td>
+<td>1 to 300; 1 to 300</td>
+</tr>
+<tr>
+<td>Shift number</td>
+<td>1 to 9</td>
+</tr>
+<tr>
+<td>An id (paper, question)</td>
+<td>6 to 80 letters, digits, <code>-</code> or <code>_</code></td>
+</tr>
+<tr>
+<td>The copy of the website's shifts</td>
+<td>every 2 minutes; 20 shifts read in one pass; a shift without <code>updated_at</code> read again every 10 minutes</td>
+</tr>
+<tr>
+<td>The series' last day</td>
+<td>read every 15 minutes (2 minutes after a miss)</td>
+</tr>
+<tr>
+<td>The card's switch in the app's database</td>
+<td>read again at most once a minute</td>
+</tr>
+<tr>
+<td>The app's server keeps each Matched answer</td>
+<td>1 minute (and answers 1 more while it reads a fresh copy)</td>
+</tr>
+<tr>
+<td>A phone asks for the switch</td>
+<td>when the app is opened, and when it comes back after 30 minutes or more</td>
+</tr>
+<tr>
+<td>Matched papers a phone remembers</td>
+<td>300</td>
+</tr>
+<tr>
+<td>Marks on the shift's card</td>
+<td>questions × 4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="33-where-data-is-kept">3.3 Where data is kept</h2>
+<p><strong>The app server's database</strong></p>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collection <code>matched_shifts</code></td>
+<td>one document per shift: <code>_id</code> (the shift's id), <code>published</code>, <code>asked</code>, <code>updated_at</code>, <code>paper_id</code>, <code>items</code>; <code>source: "website"</code> and <code>synced_at</code> on a shift copied from the website; <code>sample: true</code> on the preview's made-up shifts</td>
+</tr>
+<tr>
+<td><code>rf_meta</code>, row <code>matched:card</code></td>
+<td>Home's card: <code>on</code>, <code>off</code> or <code>auto</code></td>
+</tr>
+<tr>
+<td><code>rf_meta</code>, row <code>matched:aits_last_day</code></td>
+<td>the All India series' last day, as last read from the website</td>
+</tr>
+<tr>
+<td><code>rf_meta</code>, row <code>choice:sample</code> and collection <code>choice_sample</code></td>
+<td><strong>preview only:</strong> made-up chapters and questions for walking the question-picking screens. Off. Production has no such row</td>
+</tr>
+<tr>
+<td><code>rf_dreams</code>, field <code>dropped</code></td>
+<td>papers taken out of a student's Dream College meter (up to 200 for an account)</td>
+</tr>
+</tbody>
+</table>
+<p>Nothing about Student Choice is written anywhere on the app's server: no chapter, no question, no student's choice.</p>
+<p><strong>The phone</strong></p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>choice.chapters.&lt;account id&gt;</code></td>
+<td>the ticked chapters of that account</td>
+</tr>
+<tr>
+<td><code>matched.on</code></td>
+<td>the last answer of the card's switch</td>
+</tr>
+<tr>
+<td><code>matched.papers</code></td>
+<td>the ids of the Matched papers this phone has seen</td>
+</tr>
+<tr>
+<td>the phone's short copies of the chapter list and of the Matched list</td>
+<td>shown at once when a screen opens, then read again</td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-switches-and-ways-back">3.4 Switches and ways back</h2>
+<table>
+<thead>
+<tr>
+<th>To do this</th>
+<th>Do this</th>
+<th>Who</th>
+<th>How fast</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Close question picking, or the random mock</td>
+<td>door A: <code>"pick": false</code> or <code>"random": false</code> (or 404 for both)</td>
+<td>the website</td>
+<td>2 to 4 minutes</td>
+</tr>
+<tr>
+<td>Lower the top of a made paper, cap a subject</td>
+<td>door A: <code>max_questions</code>, <code>max_per_subject</code></td>
+<td>the website</td>
+<td>2 to 4 minutes</td>
+</tr>
+<tr>
+<td>Take one chapter out of Student Choice</td>
+<td>take that chapter-wise test back on the website</td>
+<td>the super admin</td>
+<td>about 4 minutes</td>
+</tr>
+<tr>
+<td>Empty Student Choice</td>
+<td>hide the Chapter-wise section: the tile stays and says "Chapters abhi nahi mile"</td>
+<td>the super admin</td>
+<td>about 4 minutes</td>
+</tr>
+<tr>
+<td>Take the Student Choice tile off Home</td>
+<td><strong>there is no switch:</strong> a new app build</td>
+<td>the app side</td>
+<td>a new build</td>
+</tr>
+<tr>
+<td>Turn Home's Matched card and the sign-in bar on or off</td>
+<td><code>card</code> in the website's list door; or the row <code>matched:card</code> in the app's database when the website sends no <code>card</code></td>
+<td>the super admin; the app side</td>
+<td>about 3 minutes, then at each phone's next app launch</td>
+</tr>
+<tr>
+<td>Take one shift back</td>
+<td>unpublish it on the website</td>
+<td>the super admin</td>
+<td>about 5 minutes</td>
+</tr>
+<tr>
+<td>Take a shift back when the website cannot</td>
+<td>set <code>published</code> to <code>false</code> on its document in <code>matched_shifts</code> (a shift the website still lists comes back on the next pass)</td>
+<td>the app side</td>
+<td>1 to 2 minutes</td>
+</tr>
+<tr>
+<td>Stop the JEE question showing under ours for a paper</td>
+<td>take the shift back, or take the <code>question_id</code>s out and save</td>
+<td>the super admin</td>
+<td>about 5 minutes</td>
+</tr>
+<tr>
+<td>Hide the preview's samples</td>
+<td><code>python3 backend/tests/matched_sample.py hide</code>; <code>python3 backend/tests/choice_sample.py hide</code></td>
+<td>the app side</td>
+<td>1 to 2 minutes</td>
+</tr>
+</tbody>
+</table>
+<p>None of these needs an app update, except taking the tile off Home.</p>
+<h2 id="35-every-sentence-a-student-can-read">3.5 Every sentence a student can read</h2>
+<p><strong>Student Choice</strong></p>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Words</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home tile</td>
+<td>STUDENT CHOICE · apne chapters chuno · NEW</td>
+<td>always</td>
+</tr>
+<tr>
+<td>First screen, top</td>
+<td>Student Choice · Apne chapters, apni marzi.</td>
+<td>today</td>
+</tr>
+<tr>
+<td></td>
+<td>Apna paper, apni marzi. (small line: Apna paper khud banao)</td>
+<td>when a way of making a paper is open</td>
+</tr>
+<tr>
+<td>First screen, text</td>
+<td>JEE Main ke chapter-wise sawaal, aapke chune chapters ke hisaab se. Result, analysis aur solutions har paper ki tarah milte hain.</td>
+<td>today</td>
+</tr>
+<tr>
+<td></td>
+<td>JEE Main ke chapter-wise sawaalon mein se chapters aur sawaal khud chuno. Result, analysis aur solutions har paper ki tarah milte hain.</td>
+<td>question picking open</td>
+</tr>
+<tr>
+<td>Card</td>
+<td>Chapters chuno: Physics, Chemistry aur Maths ke chapters tick karo. Har chune chapter ka poora test milega: ek-ek karke do.</td>
+<td>today</td>
+</tr>
+<tr>
+<td>Card</td>
+<td>Aapke chapter tests: Chune hue 3 chapters ke test: shuru karo, jaari rakho ya result dekho.</td>
+<td>chapters are ticked</td>
+</tr>
+<tr>
+<td>Card</td>
+<td>Sawaal khud chuno: Subject, phir chapters, phir sawaal. Sirf sawaal dikhte hain, options paper mein milte hain.</td>
+<td>question picking open</td>
+</tr>
+<tr>
+<td>Card</td>
+<td>Random mock: Bas sawaalon ki ginti batao. Physics, Chemistry aur Maths mile-jule aayenge, JEE Main ki tarah.</td>
+<td>random mock open</td>
+</tr>
+<tr>
+<td>Coming soon</td>
+<td>Jald aa raha hai. Sawaal khud chunna. Chune chapters ke sawaal dekho (bina options), jo chahiye tick karo, aur un sab ka ek hi paper banao: 75 sawaal tak. Random mock. Bas ginti batao; Physics, Chemistry aur Maths ke sawaal mile-jule aayenge, JEE Main ki tarah. Khulte hi yahin dikhega, app update kiye bina.</td>
+<td>while a way is closed</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Banaye hue paper ka time (later: Time kaise milta hai). Har sawaal apne subject ka time laata hai, isliye chhota paper chhota time paata hai. 25 + 25 + 25 sawaal = 3 hr.</td>
+<td>always</td>
+</tr>
+<tr>
+<td>Time, last sentence</td>
+<td>Yeh time aapke banaye paper par lagega (sawaal chunna aur random mock). Poore chapter test ka time uske page par likha hota hai (abhi 1 hr).</td>
+<td>today</td>
+</tr>
+<tr>
+<td></td>
+<td>Poore chapter test ko bhi isi hisaab se time milta hai: jitne sawaal, utna time.</td>
+<td>the day every chapter test has its ratio time</td>
+</tr>
+<tr>
+<td>No chapters</td>
+<td>Chapters abhi nahi mile. Student Choice ke sawaal JEE Main ke chapter-wise sawaal hi hain. Abhi koi chapter khula nahi mila. Thodi der mein dobara dekho, ya chapter-wise tests kholo. (button: Chapter-wise tests)</td>
+<td>the website lists no chapter-wise test</td>
+</tr>
+<tr>
+<td>Step 1</td>
+<td>Chapters chuno · Student Choice · Step 1 of 2 · Chapter ka naam likho…</td>
+<td></td>
+</tr>
+<tr>
+<td>Step 1</td>
+<td>Jitne chahiye utne chapter tick karo, kisi bhi subject se. Agle step mein har chune chapter ka poora test milega.</td>
+<td>today</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>3 chapters mile · teeno subjects mein dhoonda</td>
+<td>chapters found</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Is naam ka chapter nahi mila. Milte-julte naam:</td>
+<td>only near spellings found</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Is naam ka chapter nahi mila. Spelling dekh lo, ya subject se chapter chuno. (button: Search hatao)</td>
+<td>nothing found</td>
+</tr>
+<tr>
+<td>Step 1, bar</td>
+<td>Chapter chuno · Kam se kam ek chapter tick karo</td>
+<td>nothing ticked</td>
+</tr>
+<tr>
+<td>Step 1, bar</td>
+<td>3 chapters chune · 3 tests · 165 sawaal · Tests dekho</td>
+<td>chapters ticked</td>
+</tr>
+<tr>
+<td>Step 2, tests</td>
+<td>Aapke chapter tests · Student Choice · Step 2 of 2 · 3 chapter tests · 2 ho gaye</td>
+<td></td>
+</tr>
+<tr>
+<td>Step 2, tests</td>
+<td>Har chapter ka poora test hai: jo chaho pehle do, ek-ek karke. Result, analysis aur solutions har paper ki tarah milte hain.</td>
+<td></td>
+</tr>
+<tr>
+<td>Step 2, a row</td>
+<td>68 Q · 60 min · +4/-1 · 272 marks · Start (or In progress · Resume, or Completed · Result) · Chapters badlo</td>
+<td></td>
+</tr>
+<tr>
+<td>Step 2, questions</td>
+<td>Sawaal chuno · Maths · 12 sawaal · yahan sirf sawaal hain, options paper mein milenge</td>
+<td>question picking open</td>
+</tr>
+<tr>
+<td>Step 2, questions</td>
+<td>75 sawaal ho gaye: ek paper mein isse zyada nahi. Koi hatao, tab naya chuno.</td>
+<td>the 76th tap</td>
+</tr>
+<tr>
+<td>Step 2, questions</td>
+<td>Physics ke 25 sawaal ho gaye. Koi hatao, tab naya chuno.</td>
+<td>a subject's top is reached</td>
+</tr>
+<tr>
+<td>Step 2, questions</td>
+<td>Is chapter mein sawaal nahi mile. Doosra chapter chuno.</td>
+<td>the chapter's list is empty</td>
+</tr>
+<tr>
+<td>Step 2, bar</td>
+<td>7 / 75 sawaal · 17 min · 28 marks · Paper banao (nothing chosen: Sawaal par tap karke chuno)</td>
+<td></td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>Aapka paper. Poore 28 marks. Sahi jawab +4, galat -1, chhoda hua 0. Paper Physics, Chemistry, Maths ke order mein banega; result, analysis aur solutions har paper ki tarah milenge. (buttons: Haan, paper banao · Aur sawaal chuno)</td>
+<td>"Paper banao"</td>
+</tr>
+<tr>
+<td>Random mock</td>
+<td>Bas ginti batao. Sawaal Physics, Chemistry, Maths se barabar aur mile-jule aayenge, JEE Main ke paper ki tarah. Kitne sawaal? (3 se 75)</td>
+<td></td>
+</tr>
+<tr>
+<td>Random mock</td>
+<td>Poore 120 marks · sahi +4, galat -1, chhoda 0 · time 1 hr 12 min (button: Random mock banao)</td>
+<td>a good number</td>
+</tr>
+<tr>
+<td>Random mock</td>
+<td>3 se 75 ke beech ginti likho.</td>
+<td>a number outside the range</td>
+</tr>
+<tr>
+<td>Trouble</td>
+<td>Sawaal abhi load nahi ho paaye. Dobara try karo.</td>
+<td>the list could not be read</td>
+</tr>
+<tr>
+<td>Trouble</td>
+<td>Is chapter ke sawaal abhi yahan nahi khul paaye. Doosra chapter chuno, ya thodi der mein dobara dekho.</td>
+<td>a chapter's questions could not be opened</td>
+</tr>
+<tr>
+<td>Trouble</td>
+<td>Is sawaal ki picture load nahi hui.</td>
+<td>a question's picture did not load</td>
+</tr>
+<tr>
+<td>Trouble</td>
+<td>Paper banana abhi jeelive.ai se jud raha hai. Thodi der mein yeh khul jayega; aapke chune sawaal yahin rahenge.</td>
+<td>door C answers 404 or 405</td>
+</tr>
+<tr>
+<td>Trouble</td>
+<td>Paper ban nahi paaya. Dobara try karo. / Mock ban nahi paaya. Dobara try karo.</td>
+<td>the paper could not be made</td>
+</tr>
+<tr>
+<td>Trouble</td>
+<td>Connection interrupted. Please try again. / Please sign in again.</td>
+<td>no network; the session could not be renewed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Matched</strong></p>
+<table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Words</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Everywhere</td>
+<td>MATCHED · JEE Mains questions matched with ours</td>
+<td></td>
+</tr>
+<tr>
+<td>Home</td>
+<td>Matched with JEE Main · view all · JEE MAIN · 3 SHIFTS · 11 questions matched · 24 Jan · Shift 1, latest shift · See matched questions</td>
+<td>shifts are published</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>JEE Main ke har shift ke baad yahan woh questions aayenge jo hamare questions se match hue. (button: Open Matched)</td>
+<td>no shift yet</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>Dekh rahe hain… / Abhi load nahi hua. Kholo aur dobara try karo.</td>
+<td>loading; could not load</td>
+</tr>
+<tr>
+<td>Sign-in screen</td>
+<td>Dekho</td>
+<td>the bar</td>
+</tr>
+<tr>
+<td>Sign-in screen</td>
+<td>Account banao ya sign in karo. Uske baad Matched paper attempt kar sakte ho.</td>
+<td>reached from "Attempt all matched"</td>
+</tr>
+<tr>
+<td>Matched page</td>
+<td>Matched · JEE Main · 11 questions matched in 3 shifts · SHIFT 1 · 6 of 75 matched</td>
+<td></td>
+</tr>
+<tr>
+<td>Matched page</td>
+<td>Pehla shift hote hi yahan aayega. JEE Main ke har shift ke baad yahan woh questions dikhenge jo hamare questions se match hue: unka question, aur uske saamne hamara.</td>
+<td>no shift yet</td>
+</tr>
+<tr>
+<td>Shift, top card</td>
+<td>JEE MAIN 2027 · 6 of 75 questions matched with ours · 7 questions · 28 marks · +4 / −1 marking · Attempt all matched</td>
+<td>the shift has a paper</td>
+</tr>
+<tr>
+<td>Shift, top card</td>
+<td>Dekhna sabke liye khula hai. Paper attempt karne ke liye free account banao.</td>
+<td>signed out</td>
+</tr>
+<tr>
+<td>Shift, top card</td>
+<td>Hamare woh sawaal jo JEE Main mein match hue, ek paper mein. Timer, result, analysis aur solutions: har paper ki tarah.</td>
+<td>signed in</td>
+</tr>
+<tr>
+<td>Shift, top card</td>
+<td>Is shift ke matched sawaalon ka paper jald yahan khulega.</td>
+<td>no paper yet</td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>KAUN SA SAWAAL KISSE MATCH HUA · All · Physics · Chemistry · Maths</td>
+<td></td>
+</tr>
+<tr>
+<td>Shift</td>
+<td>Is shift mein koi match nahi mila. Doosre shifts dekhne ke liye wapas jao.</td>
+<td>a shift with no question</td>
+</tr>
+<tr>
+<td>A card</td>
+<td>Question · Solution · JEE MAIN 2027 · HAMARA QUESTION · SAHI JAWAB · SOLUTION</td>
+<td></td>
+</tr>
+<tr>
+<td>A card</td>
+<td>Iska likha hua solution abhi nahi hai; sahi jawab upar diya hai.</td>
+<td>only the answer was given</td>
+</tr>
+<tr>
+<td>A card</td>
+<td>Is question ka solution abhi nahi aaya.</td>
+<td>neither answer nor solution</td>
+</tr>
+<tr>
+<td>A card</td>
+<td>Picture load nahi hui. Dobara try karo</td>
+<td>a picture did not load</td>
+</tr>
+<tr>
+<td>Sheet</td>
+<td>Sign up karke attempt karo. Matched sawaal dekhna sabke liye khula hai. Inhe paper ki tarah attempt karne ke liye (timer, result, analysis aur solutions ke saath) free account banao: sirf mobile number aur PIN. (buttons: Free account banao · Mera account hai · Sign in)</td>
+<td>signed out, "Attempt all matched"</td>
+</tr>
+<tr>
+<td>Paper's page</td>
+<td>JEE MAIN · MATCHED PAPER</td>
+<td>the paper's kind is <code>matched</code></td>
+</tr>
+<tr>
+<td>Player, solutions</td>
+<td>JEE MAIN 2027 MEIN AAYA · 22 Jan · Shift 1 · Q4</td>
+<td>a Matched paper</td>
+</tr>
+<tr>
+<td>Trouble</td>
+<td>Matched abhi load nahi ho paaya. Dobara try karo. / Yeh shift ab yahan nahi hai. / Connection interrupted. Please try again.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="36-files-and-tests-for-the-app-side">3.6 Files and tests (for the app side)</h2>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Student Choice, server</td>
+<td><code>backend/choice.py</code>; door C passes through <code>backend/jl_proxy.py</code></td>
+</tr>
+<tr>
+<td>Student Choice, app</td>
+<td><code>frontend/app/choice/index.tsx</code>, <code>pick.tsx</code>, <code>tests.tsx</code>, <code>questions.tsx</code>; <code>frontend/src/choice/api.ts</code>, <code>search.ts</code>, <code>store.ts</code>, <code>parts.tsx</code>; Home's tile in <code>frontend/app/(tabs)/index.tsx</code></td>
+</tr>
+<tr>
+<td>Dream College meter</td>
+<td><code>frontend/src/dream/store.ts</code> (<code>isFullMock</code>), <code>frontend/app/result/[id].tsx</code>, <code>backend/dream.py</code></td>
+</tr>
+<tr>
+<td>Matched, server</td>
+<td><code>backend/matched.py</code> (the pages, the copy of the website's shifts, the card's day), <code>backend/app_switches.py</code>, started in <code>backend/server.py</code></td>
+</tr>
+<tr>
+<td>Matched, app</td>
+<td><code>frontend/app/matched/index.tsx</code>, <code>[id].tsx</code>; <code>frontend/src/matched/api.ts</code>, <code>gate.tsx</code>, <code>MatchedCard.tsx</code>, <code>looks.tsx</code>, <code>Pair.tsx</code>, <code>QuestionBlock.tsx</code>, <code>MatchedWith.tsx</code>, <code>parts.tsx</code>, <code>html.ts</code>; Home <code>frontend/app/(tabs)/index.tsx</code>; sign-in <code>frontend/app/entry.tsx</code>; public routes <code>frontend/app/_layout.tsx</code>; player <code>frontend/app/attempt/[id].tsx</code>; result <code>frontend/app/result/[id].tsx</code>; paper's page <code>frontend/app/set/[id].tsx</code></td>
+</tr>
+<tr>
+<td>Tests</td>
+<td><code>backend/tests/test_choice.py</code> (12), <code>test_matched.py</code> (5), <code>test_matched_sync.py</code> (5): all 22 pass on 26 Nov 2026. Search: <code>node tests/choice_search_check.js</code></td>
+</tr>
+<tr>
+<td>Samples (preview only)</td>
+<td><code>backend/tests/matched_sample.py show</code> or <code>hide</code>; <code>backend/tests/choice_sample.py show</code> or <code>hide</code></td>
+</tr>
+<tr>
+<td>Earlier notes</td>
+<td><code>memory/WEBSITE_CHOICE_NOTE.md</code>, <code>memory/WEBSITE_MATCHED_NOTE.md</code>, <code>memory/MATCHED_CONTRACT.md</code>. This book was written from the code on 26 Nov 2026 and takes their place for readers outside the app side</td>
+</tr>
+<tr>
+<td>This book</td>
+<td><code>handoff/feature_book/</code>: <code>parts/</code> (the text), <code>examples/</code> (the JSON), <code>shots/</code> (the pictures), <code>build_book.py</code>, <code>take_shots.py</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="names-of-the-screens-parts-for-automated-checks">Names of the screens' parts, for automated checks</h3>
+<p>Every part of the two features carries a fixed name (<code>testID</code>; in the web preview it is the <code>data-testid</code>). The ones a check needs most:</p>
+<table>
+<thead>
+<tr>
+<th>Screen</th>
+<th>Names</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home</td>
+<td><code>home-tile-choice</code> (the tile), <code>home-tile-choice-badge</code>; <code>home-matched</code> (the card), <code>home-matched-total</code>, <code>home-matched-latest</code>, <code>home-matched-cta</code>, <code>home-matched-soon</code>, <code>home-matched-view-all</code>; <code>home-series-view-all</code> (the All India card is on instead)</td>
+</tr>
+<tr>
+<td>Sign-in screen</td>
+<td><code>entry-matched</code> (the bar), <code>entry-matched-note</code> (the note after "Attempt all matched")</td>
+</tr>
+<tr>
+<td>Student Choice, first screen</td>
+<td><code>choice-screen</code>, <code>choice-title</code>, <code>choice-facts</code>, <code>choice-way-chapters</code>, <code>choice-way-tests</code>, <code>choice-way-pick</code>, <code>choice-way-random</code>, <code>choice-soon</code>, <code>choice-soon-pick</code>, <code>choice-soon-random</code>, <code>choice-time</code>, <code>choice-time-physics</code> / <code>-chemistry</code> / <code>-mathematics</code>, <code>choice-time-note</code>, <code>choice-not-ready</code>, <code>choice-error</code>, <code>choice-refresh</code></td>
+</tr>
+<tr>
+<td>Random mock sheet</td>
+<td><code>choice-random-sheet</code>, <code>choice-random-input</code>, <code>choice-random-quick-15</code> … <code>-75</code>, <code>choice-random-makeup</code>, <code>choice-random-rule</code>, <code>choice-random-range</code>, <code>choice-random-error</code>, <code>choice-random-make</code></td>
+</tr>
+<tr>
+<td>Step 1, chapters</td>
+<td><code>choice-pick-screen</code>, <code>choice-search-input</code>, <code>choice-search-clear</code>, <code>choice-search-count</code>, <code>choice-search-none</code>, <code>choice-search-reset</code>, <code>choice-subject-…</code> (the pills), <code>choice-chapter-list</code>, <code>choice-chapter-&lt;id&gt;</code> (a row; it is a checkbox), <code>choice-chapter-&lt;id&gt;-title</code>, <code>-subject</code>, <code>-picked</code>, <code>choice-pick-hint</code>, <code>choice-pick-bar</code></td>
+</tr>
+<tr>
+<td>Step 2, chapter tests</td>
+<td><code>choice-tests-screen</code>, <code>choice-tests-count</code>, <code>choice-tests-subject-physics</code> / <code>-chemistry</code> / <code>-mathematics</code>, <code>choice-test-&lt;id&gt;</code> (a row), <code>-title</code>, <code>-facts</code>, <code>-status</code>, <code>-action</code> (Start, Resume or Result), <code>choice-tests-error</code>, <code>choice-tests-change</code></td>
+</tr>
+<tr>
+<td>Step 2, questions (later)</td>
+<td><code>choice-questions-screen</code>, <code>choice-q-subject-…</code>, <code>choice-q-chapter-…</code>, <code>choice-questions-chapter</code>, <code>choice-questions-hint</code>, <code>choice-question-list</code>, <code>choice-full</code>, <code>choice-next-chapter</code>, <code>choice-questions-bar</code>, <code>choice-review-sheet</code>, <code>choice-review-makeup</code>, <code>choice-review-rule</code>, <code>choice-review-error</code>, <code>choice-make</code>, <code>choice-review-back</code></td>
+</tr>
+<tr>
+<td>Matched page</td>
+<td><code>matched-screen</code>, <code>matched-total</code>, <code>matched-month-…</code> (the pills) or <code>matched-month-only</code>, <code>matched-day-&lt;day&gt;</code>, <code>matched-shift-&lt;shift id&gt;</code> (a row), <code>-count</code>, <code>-number</code>, <code>matched-empty</code>, <code>matched-error</code>, <code>matched-refresh</code></td>
+</tr>
+<tr>
+<td>A shift</td>
+<td><code>matched-shift-screen</code>, <code>matched-shift-count</code>, <code>matched-attempt</code> (the button), <code>matched-attempt-facts</code>, <code>matched-attempt-questions</code>, <code>matched-attempt-note</code>, <code>matched-attempt-soon</code>, <code>matched-shift-list-title</code>, <code>matched-subject-…</code> (the pills), <code>matched-shift-list</code>, <code>matched-shift-empty</code>, <code>matched-shift-error</code>, <code>matched-signup-sheet</code>, <code>matched-signup-yes</code>, <code>matched-signup-login</code></td>
+</tr>
+<tr>
+<td>The paper's page, player, solutions, result</td>
+<td><code>set-detail-screen</code>; <code>matched-with</code> (the JEE question under ours), <code>matched-with-where</code>, <code>matched-with-jee</code>; <code>result-dream</code> (the Dream College meter: must be absent on a chapter test and on a Student Choice paper)</td>
+</tr>
+</tbody>
+</table>
+<p>A row of the chapter list is best found as <code>[role=checkbox][data-testid^=choice-chapter-]</code>: the list's own name starts with the same letters.</p>
+<p><strong>A hard rule for anyone testing on the app's preview:</strong> the test learner there is the owner's own account on the real website. Never press Start, Begin, Resume or Submit with it, never open an attempt, never tap a chapter test whose button says Resume. Walks that need a started or finished paper use a test student on the website's test setup, or answers given by the browser in place of the website.</p>
+<h2 id="37-the-state-on-26-nov-2026-and-how-to-check-it-again">3.7 The state on 26 Nov 2026, and how to check it again</h2>
+<p>Read by the build of this book, at 12:50 India time on 26 Nov 2026:</p>
+<table>
+<thead>
+<tr>
+<th>What was asked</th>
+<th>The answer</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The app's server in production: <code>GET /api/app/switches</code></td>
+<td>200, <code>"matched": false</code></td>
+<td>Home shows the All India series card; no Matched bar on the sign-in screen</td>
+</tr>
+<tr>
+<td>The app's server in production: <code>GET /api/matched</code></td>
+<td>200, 0 shifts, 0 questions</td>
+<td>no shift is published in production</td>
+</tr>
+<tr>
+<td>The app's server in production: <code>GET /api/choice/bank</code>, signed out</td>
+<td>401</td>
+<td>the door is there, for signed-in students only</td>
+</tr>
+<tr>
+<td>The website: <code>GET /api/matched</code></td>
+<td>404</td>
+<td>Matched: the list of shifts: not built yet</td>
+</tr>
+<tr>
+<td>The website: <code>GET /api/matched/2027-01-25-s1</code></td>
+<td>404</td>
+<td>Matched: one shift: not built yet</td>
+</tr>
+<tr>
+<td>The website: <code>GET /api/choice/bank?exam=jee-main</code></td>
+<td>404</td>
+<td>Student Choice: door A (asked signed out here; a signed-in student got 404 on 26 Nov 2026): not built yet</td>
+</tr>
+<tr>
+<td>The website: <code>GET /api/series/all-india-jee</code></td>
+<td>200, 2026-12-09 to 2027-01-27</td>
+<td>Home's card turns to Matched on 28 Jan 2027 (India time), unless the switch says otherwise</td>
+</tr>
+</tbody>
+</table>
+<p>Also true on 26 Nov 2026, seen through the app's preview: the website lists <strong>81 chapter-wise tests</strong> (Physics 30, Chemistry 24, Mathematics 27) with <strong>3750 questions</strong>, and every one of them has <strong>60 minutes</strong>.</p>
+<p>To check again, from any machine:</p>
+<pre><code># &quot;matched&quot;: false until the card is on
+curl -s https://jeelive-mobile.emergent.host/api/app/switches
+# the published shifts (&quot;shifts&quot;: [] today)
+curl -s https://jeelive-mobile.emergent.host/api/matched
+# 401 = the door is there, for signed-in students only
+curl -s -o /dev/null -w &quot;%{http_code}\n&quot; https://jeelive-mobile.emergent.host/api/choice/bank
+# 404 = the website's Matched door is not built yet
+curl -s -o /dev/null -w &quot;%{http_code}\n&quot; https://jeelive.ai/api/matched
+# &quot;last_date&quot;: the card turns the day after
+curl -s https://jeelive.ai/api/series/all-india-jee
+</code></pre>
+<h2 id="38-open-points-for-the-owner">3.8 Open points for the owner</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>The question</th>
+<th>What happens until it is answered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Whole chapter tests by the ratio as given, or with a longest time?</strong> As given, the longest test becomes 4 h 36 min (Matrices and Determinants, 86 questions) and 11 tests become shorter than today's 60 minutes (Part 1.8). Asked on 26 Nov 2026</td>
+<td>nothing changes: every chapter test stays 60 minutes</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>When should Matched appear if JEE Main shifts are held on or before 27 Jan 2027?</strong> <code>auto</code> shows it from 28 Jan 2027; before that it cannot be reached from the app. <code>on</code> shows it at once, in the All India card's place</td>
+<td><code>auto</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Should a Matched paper ever count for the Dream College meter?</strong> Today it would, if it had 68 questions or more and 150 marks or more. Chapter tests and Student Choice papers never count</td>
+<td>it would count; a shift's paper is far smaller than that</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>The app side's suggestions for made papers</strong> (Part 1.6): fresh questions first in a random mock; a daily limit; removing papers never started; no leaderboard</td>
+<td>the website agent should not build them unasked</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>The wording of <code>source</code> and <code>tag</code> on Matched</strong> (Part 2.8)</td>
+<td>the super admin writes what seems right</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>The made-up sample shifts on the preview:</strong> keep them for looking, or hide them now?</td>
+<td>they stay published on the preview only</td>
+</tr>
+</tbody>
+</table></body></html>

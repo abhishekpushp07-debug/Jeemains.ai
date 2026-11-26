@@ -17,6 +17,9 @@ HANDOFF_TYPE = "rank-mission-handoff-zip"
 THEME_GUIDE_TYPE = "glossy-theme-guide-pdf"
 SHINE_CODE_TYPE = "shine-web-code-zip"
 CEO_KIT_TYPE = "ceo-dashboard-handoff-zip"
+BOOK_PDF_TYPE = "choice-matched-book-pdf"
+BOOK_ZIP_TYPE = "choice-matched-book-zip"
+BOOK = "JEELIVE_Student_Choice_and_Matched_Book"
 # type -> (file, download name, longest grant in hours)
 ARTIFACTS = {
     ARTIFACT_TYPE: (ARTIFACT, "neetlive-content.zip", 24),
@@ -24,6 +27,8 @@ ARTIFACTS = {
     THEME_GUIDE_TYPE: (ROOT / "handoff" / "theme_guide" / "JEELIVE_App_Glossy_Theme_Guide.pdf", "JEELIVE_App_Glossy_Theme_Guide.pdf", 168),
     SHINE_CODE_TYPE: (ROOT / "handoff" / "theme_guide" / "JEELIVE_Shine_Web_Code.zip", "JEELIVE_Shine_Web_Code.zip", 168),
     CEO_KIT_TYPE: (ROOT / "handoff" / "JEELIVE_CEO_Dashboard_Handoff.zip", "JEELIVE_CEO_Dashboard_Handoff.zip", 168),
+    BOOK_PDF_TYPE: (ROOT / "handoff" / "feature_book" / f"{BOOK}.pdf", f"{BOOK}.pdf", 168),
+    BOOK_ZIP_TYPE: (ROOT / "handoff" / f"{BOOK}.zip", f"{BOOK}.zip", 168),
 }
 DOWNLOAD_HEADERS = {"Cache-Control": "private, no-store", "Pragma": "no-cache",
                     "Referrer-Policy": "no-referrer", "X-Content-Type-Options": "nosniff"}
