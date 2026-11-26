@@ -201,3 +201,32 @@ Upar likha tha ki yeh list is file me hai, par woh likhi nahi gayi thi. Ab yeh h
 - Jaancha NAHI gaya: asli Supabase par likhe hue mock ki photo (sirf nakli Supabase par); asli do server; live par kuch nahi. Preview database me abhi ek bhi likha hua mock nahi hai; live par kitne hain aur unki photo kis storage me hain, yeh pata nahi.
 - Safai jo aapko pata honi chahiye: meri do test run beech me ruki thi (ek bridge shuru hote hi gir gaya, ek suite maine rok di), isliye unke do disposable test database (tejas_isolated_book170_78740a29 aur tejas_isolated_book170_a15199ca) reh gaye the. Dono ko naam, banane ka samay aur andar ke test data se pehchan kar hi hataya. App ka database (test_database) aur do purane test database (jo is session ne nahi banaye) nahi chhue. Bridge ab shuru hote hi gire to bhi apna database khud hatata hai, aur runner purani run ka nateeja nahi dikhata.
 
+
+## Packet E — kadam 4 ka doosra hissa: jo test dobara chalu kiya jata hai (26 Nov, jaanch 02:10 se 03:00 UTC; SIRF preview me)
+- **Deploy nahi hua.**
+- Ab kya hota hai:
+  - Off pada test "Live karo" ya "Schedule karo" karne par, Library se wapas laane par, aur All India Test Series ke din ka paper dobara Live karne par: pehle us test ki har picture storage me saabit hoti hai (saari ek hi storage me). Tab tak test Off rehta hai.
+  - Saabit ho gayi (aam taur par kuch second): test apne aap wahi ban jata hai jo aapne kaha tha (Live, ya chune hue samay ke liye Scheduled, ya Library se pehle jaisa).
+  - Saabit nahi hui: sirf wahi test Off rehta hai. Uski row par wajah likhi rehti hai (jaise "1 picture storage me nahi mili (Q2)"), "Dobara chalao" button hota hai, aur har 15 minute me apne aap phir jaanch hoti hai. Usi press ke baaki test Live ho jate hain.
+  - Jaanch 6 second se lambi chale: jawab turant aata hai ki pictures jaanchi ja rahi hain, row par "Off · pictures ki jaanch" dikhta hai, aur saabit hote hi test apne aap Live ho jata hai; list khud dobara padhi jati hai.
+  - Chuna hua samay jaanch ke dauran nikal jaye: test der se nahi khulta. Row kehti hai "Off · samay nikal gaya"; "Live karo" dabaiye ya naya samay chuniye.
+  - Supabase khud jawab na de (ya billing ki rok ho): kisi picture ko "gayab" nahi kaha jata; test Off rehta hai aur kehta hai ki jaanch nahi ho saki. Supabase ko sabke liye aaram par nahi dala jata.
+  - "Off karo" dabane se intezaar khatam: test seedha Off.
+  - Library: wapas laane wale box me ab likha hai ki Live test students ko tabhi dikhega jab uski pictures saabit ho jayein. Jo test Off ya Draft tha woh waisa hi lautta hai.
+  - Storage badge me ek peeli line: "N test ki pictures storage mein saabit nahi hui, isliye woh Off hain."
+  - Purane darwaze (paper import ka Schedule/Live, chapter book ka publish aur chapter Live, book ka "resume mock", purana All India din, automatic import): picture saabit na ho to turant mana kar dete hain aur wajah batate hain; kuch badalta nahi. Inme row ki line aur "Dobara chalao" nahi hai: wahi button dobara dabana hota hai.
+- Kya NAHI badla (jaancha): theek test pehle jaisa Live; bina picture wala test storage se kuch nahi poochta; Verified JEE Main PYQ par yeh jaanch chalti hi nahi; Draft se Live (PDF wala aur likha hua) pehle jaisa.
+- Aapko pata hona chahiye:
+  - Jis test ki pictures do storage (Supabase aur Emergent) me bati hain, woh ab dobara chalu nahi hota: Off rehta hai aur wajah batata hai. Machine ke paas abhi isse nikalne ka raasta nahi hai, kyunki "purani Emergent pictures ki copy" abhi bani nahi. Likhe hue mock me aap purani photo hata kar dobara laga sakte hain. Aisa tab hota hai jab ek hi test ki kuch pictures purane storage me hon aur kuch Supabase me, jaise purane likhe hue mock me baad me nayi photo jodne par. Live par aise kitne test hain, yeh pata nahi. Isliye meri salah: copy wala kadam banne se pehle Packet E deploy na karein.
+  - Off se Live ke jawab me ab kuch second lag sakte hain, kyunki pictures jaanchi jati hain.
+  - Likhe hue mock ke Draft se Live wale raaste me wajah abhi bhi 12 second ke note me aati hai, row par nahi (pichhle hisse se aapka faisla baaki hai).
+- Abhi bhi NAHI bana: purani Emergent pictures ki Supabase me copy, "Pictures ki poori jaanch" button. Uske baad Packet F aur G.
+- Badli hui files: backend/tejas/picture_hold.py (nayi), master.py, structure.py, library.py, series_admin.py, live_series.py, imports.py, chapter_books.py, book_imports.py, smart_imports.py, jobs.py, storage_health.py, db.py, route_contracts.py; frontend MockList.js, MasterShared.js, MasterType.js, SeriesDays.js, AdminLibrary.js, RestoreDialog.js, SectionTests.js, BookPublishing.js, master.css. Ek naya route: "Dobara chalao" (sirf owner). API me khaane sirf jude hain. Ek jawab badla: series ke din ka paper Live karne par, picture saabit na ho to ab wajah ke saath mana hota hai (pehle hamesha haan hota tha). LiveSeries.js nahi chhui.
+- Jaanch (ek-ek karke):
+  - Nayi suite tests/picture_hold245.py: 90/90.
+  - Browser (desktop + 390 px): tests/ui_picture239.py 82/82 (pehle 59).
+  - Purani 26 suite: 25 poori paas (1,174 jaanch). 1 fail: master_jee_series_iso181 3/10, jo Packet E se pehle wale code par bhi bilkul waise hi fail hoti hai (woh 1 aur 5 Dec maangti hai, JEE series 9 Dec se shuru hoti hai).
+  - Testing agent (test_reports/iteration_230.json): meri suite (90/90), browser walk (82/82) aur 5 purani suite dobara chalayi; apni alag suite tests/picture_hold_edge246.py likhi (28/28: do press ek saath, "Dobara chalao" do baar, mila-jula bulk press, intezaar ke dauran naam badalna, samay nikalne ke baad saabit hona, teen test ek saath wapas, student ko kuch na dikhna, reviewer ko rok). Koi galti nahi mili; app ka code usne nahi badla.
+- Jaancha NAHI gaya: asli Supabase par yeh hissa (sirf nakli Supabase par); asli do server (ek doosre ka kaam na chhedna nakal se jaancha); 15 minute sach me ruk kar nahi, ghadi aage badha kar; live par kuch nahi.
+- Safai: is kaam ka koi test database nahi bacha. App ka database (test_database) aur do purane test database (jo is kaam ne nahi banaye) nahi chhue.
+

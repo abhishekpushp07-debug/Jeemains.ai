@@ -1,3 +1,16 @@
+## Super Admin storage machine: what is left (2026-11-26; plan/plan.md, memory/HANDOFF_2026-11-25_SUPER_ADMIN_STORAGE.md)
+- Live since 25 Nov: Packets A–D. Preview only, NOT deployed: Packet E steps 1–4 (picture proof for a PDF mock, a written mock, and a built test switched on again).
+- P0 before any deploy of E: copy of old Emergent pictures to Supabase before Live (each read back and matched, switch only when all are copied, never opens late). Without it a test whose pictures are split between the two stores stays Off / Draft with the reason and no way out by machine.
+- P1: "Pictures ki poori jaanch" button (full read + fingerprint in the background; reports only, never switches a Live mock Off).
+- P1, owner to decide: for a written Draft going Live, keep the reason on the row with Dobara chalao (today a 12-second note).
+- P1: one run of the proof against real Supabase for a written photo and for a test switched on again (so far only the PDF path was run on real Supabase).
+- P2: the older doors (paper import, chapter book, book "resume mock", automatic import) refuse with the reason but keep no row line and no retry.
+- P2: `tests/master_jee_series_iso181.py` still asks for 1 and 5 Dec (the JEE series starts 9 Dec): 3/10 since the dates changed; the test needs new dates, not the app.
+- Then Packet F (per-mock fallback to Emergent after 5 minutes or on the owner's press, never a split mock) and Packet G (owner-controlled Emergent → Supabase move with byte + hash check).
+- Deploy only when the owner writes exactly `deploy`.
+
+
+
 ## Owner's "Phase G": AI reading of the question bank (2026-11-25, talk only; nothing built; needs approval)
 Not the storage plan's Packet G (owner-controlled Emergent → Supabase move). The owner named this work "phase g" and asked to do Packet E first.
 - What was found by reading the code and the preview database (not reproduced on a live student screen):
